@@ -1,7 +1,8 @@
-package kr.co.soogong.master
+package kr.co.soogong.master.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import kr.co.soogong.master.R
 
 class MainActivity : AppCompatActivity() {
 
