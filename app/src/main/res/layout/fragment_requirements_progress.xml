@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?><?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:background="#eeeeee"
+        android:layout_height="match_parent">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/received_noti"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="24dp"
+            android:backgroundTint="#00c853"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="2dp"
+            app:layout_constraintBottom_toTopOf="@id/space"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginEnd="40dp"
+                android:gravity="center_horizontal"
+                android:letterSpacing="-0.01"
+                android:lineSpacingExtra="6sp"
+                android:text="총 2건의 매칭완료 문의가 있습니다!"
+                android:textColor="@color/colors_9_white"
+                android:textSize="14sp" />
+        </androidx.cardview.widget.CardView>
+
+        <Space
+            android:id="@+id/space"
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            app:layout_constraintBottom_toTopOf="@id/received_list"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/received_noti" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/received_list"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/space"
+            tools:listitem="@layout/viewholder_progress_item" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
