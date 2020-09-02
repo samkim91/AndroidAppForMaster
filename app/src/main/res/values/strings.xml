@@ -7,7 +7,11 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="title_activity_requirements">RequirementsActivity</string>
+
+    <!-- Requirement Progress Fragment -->
+    <string name="noti_progress_fragment"><b>총 %d건</b>의 매칭완료 문의가 있습니다!</string>
+
+    <!-- Requirement Received Fragment  -->
+    <string name="noti_received_fragment"><b>30분 내 견적을 발송</b>하지 않을 경우 자동으로 다른 마스터님께 추가 배정됩니다</string>
 </resources>

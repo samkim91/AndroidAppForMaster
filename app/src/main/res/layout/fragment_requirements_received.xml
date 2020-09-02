@@ -1,7 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?><?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/bind"
     xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="kr.co.soogong.master.ui.requirements.received.ReceivedViewModel" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -25,14 +33,13 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginStart="40dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="40dp"
-                android:gravity="center_horizontal"
-                android:letterSpacing="-0.01"
-                android:lineSpacingExtra="6sp"
-                android:text="30분 내 견적을 발송하지 않을 경우
-자동으로 다른 마스터님께 추가 배정됩니다"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                android:text="@string/noti_received_fragment"
                 android:textColor="@color/colors_9_white"
                 android:textSize="14sp" />
         </androidx.cardview.widget.CardView>
@@ -55,7 +62,14 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/space"
+
             tools:listitem="@layout/viewholder_received_item" />
+
+        <androidx.constraintlayout.widget.Group
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="received_noti,space"
+            bind:visible="@{!vm.emptyList}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

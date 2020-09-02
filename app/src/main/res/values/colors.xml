@@ -1,13 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
     <color name="colors_9_white">#ffffff</color>
 
     <color name="round_corner_color">#00C853</color>
+
+    <color name="colorAccent">#69a9f1</color>
+
+    <!-- Basic -->
+    <color name="app_background_color">#f2f2f2</color>
+    <color name="basic_ripple">#1A000000</color>
+
+    <color name="button_bg">#FF0072DE</color>
+    <color name="button_text">#FFf2f2f2</color>
+
+    <!-- Action bar -->
+    <color name="action_bar_back_button">#252525</color>
+    <color name="action_bar_background_color">#fafafa</color>
+    <color name="action_bar_title_color">#252525</color>
+    <color name="action_bar_subtitle_color">#636363</color>
+    <color name="action_bar_title_color_white">#fafafa</color>
+    <color name="action_bar_navigation_up_tint">#3695dd</color>
+    <color name="action_bar_sub_title_color">#636363</color>
+    <color name="action_bar_more_option_button">#252525</color>
+
+    <color name="add_action_item_bg">#FCFCFC</color>
+    <color name="add_action_category_text_color">#505050</color>
+    <color name="add_action_item_text_color">#252525</color>
+
+    <color name="list_header_text_color">#636363</color>
+    <color name="list_item_text_color">#252525</color>
+    <color name="list_item_description_text_color">#909090</color>
+
+    <color name="condition_icon_tint">#53A4FF</color>
+
+    <color name="delete_red">#FFFF3D00</color>
+    <color name="bottom_bar_icon">#636363</color>
 </resources>
