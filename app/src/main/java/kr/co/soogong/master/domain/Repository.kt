@@ -8,10 +8,11 @@ class Repository private constructor(
     private val requirementDao: RequirementDao,
 //    private val userDao: UserDao
 ) {
+    //region Requirement
     fun getRequirementList() = requirementDao.getAllList()
 
     suspend fun insert(requirement: Requirement) = requirementDao.insert(requirement)
-
+    //endregion Requirement
 
     companion object {
         @Volatile

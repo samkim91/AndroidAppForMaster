@@ -1,13 +1,12 @@
-package kr.co.soogong.master.ui
+package kr.co.soogong.master.ui.requirements.received.detail
 
-import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
 import kr.co.soogong.master.R
 
-class MainActivity : AppCompatActivity() {
-
+class DetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_detail)
     }
 }

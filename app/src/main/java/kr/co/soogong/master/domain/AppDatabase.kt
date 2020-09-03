@@ -41,7 +41,7 @@ abstract class AppDatabase : RoomDatabase() {
                     override fun onCreate(db: SupportSQLiteDatabase) {
                         super.onCreate(db)
                         GlobalScope.launch {
-                            val list = JsonInit.loadActionFlowList(context)
+                            val list = JsonInit.loadData(context)
                             if (!list.isNullOrEmpty()) {
                                 list.forEach {
                                     getInstance(context).requirementDao().insert(it)

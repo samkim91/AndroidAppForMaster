@@ -1,6 +1,7 @@
 package kr.co.soogong.master
 
 import android.app.Application
+import android.util.Log
 import com.facebook.flipper.android.AndroidFlipperClient
 import com.facebook.flipper.android.utils.FlipperUtils
 import com.facebook.flipper.plugins.databases.DatabasesFlipperPlugin
@@ -26,7 +27,7 @@ class App : Application() {
             if (FlipperUtils.shouldEnableFlipper(this)) {
                 val client = AndroidFlipperClient.getInstance(this)
                 client.addPlugin(InspectorFlipperPlugin(this, DescriptorMapping.withDefaults()))
-                client.addPlugin(NavigationFlipperPlugin.getInstance());
+                client.addPlugin(NavigationFlipperPlugin.getInstance())
                 client.addPlugin(NetworkFlipperPlugin())
                 client.addPlugin(DatabasesFlipperPlugin(this))
                 client.start()
@@ -34,6 +35,8 @@ class App : Application() {
         }
 
         ContextHelper.context = applicationContext
+
+        Timber.tag("App").d("onCreate")
     }
 }
 
@@ -41,7 +44,7 @@ class TimberLogTree : Timber.DebugTree() {
     override fun log(priority: Int, tag: String?, message: String, t: Throwable?) {
         super.log(
             priority,
-            "[${ContextHelper.context?.getString(R.string.app_name)}-${BuildConfig.VERSION_NAME}]",
+            "[${ContextHelper.context?.getString(R.string.app_name)}-${BuildConfig.VERSION_NAME}] $tag",
             message,
             t
         )

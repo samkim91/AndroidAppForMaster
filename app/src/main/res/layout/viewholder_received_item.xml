@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/bind"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="vm"
-            type="kr.co.soogong.master.data.requirements.Requirement" />
+            type="kr.co.soogong.master.ui.requirements.received.ReceivedCard" />
+
+        <variable
+            name="detail_btn_listener"
+            type="android.view.View.OnClickListener" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,10 +24,11 @@
 
         <TextView
             android:id="@+id/type"
-            android:background="@drawable/textview_round_corner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
+            android:background="@drawable/textview_round_corner"
+            android:text="@{vm.category}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="욕실장" />
@@ -31,8 +39,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:letterSpacing="-0.01"
+            android:text="@{vm.location}"
             android:textColor="#212121"
             android:textSize="20sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/type"
             tools:text="서울시 관악구" />
@@ -47,6 +57,7 @@
             app:layout_constraintBottom_toBottomOf="@id/location"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/location"
+            bind:received_date="@{vm.date}"
             tools:text="2020년 8월 26일 13시 53분" />
 
         <TextView
@@ -56,23 +67,25 @@
             android:layout_marginTop="9dp"
             android:letterSpacing="-0.01"
             android:lineSpacingExtra="6sp"
+            bind:received_detail="@{vm.userName}"
             android:textColor="#616161"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/location"
-            tools:text="홍길동 님으로부터 문의가 들어왔습니다. 자세한 문의 내용을 확인 후 승인, 견적을 발송해주세요!" />
+            tools:text="@string/received_detail_viewholder" />
 
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="27dp"
             android:layout_marginBottom="20dp"
-            android:text="자세히 보기"
-            android:textStyle="bold"
             android:background="@drawable/textview_round_corner"
+            android:onClick="@{detail_btn_listener}"
+            android:text="@string/received_detail_button_viewholder"
             android:textColor="#00c853"
             android:textSize="14sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

@@ -4,16 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModel
-import kr.co.soogong.master.BR
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-open class BaseFragment<B : ViewDataBinding>(
-    @LayoutRes private val layout: Int
-) : Fragment() {
+open class BaseBottomSheetDialogFragment<B : ViewDataBinding>(
+    private val layout: Int
+) : BottomSheetDialogFragment() {
 
     protected lateinit var binding: B
         private set

@@ -8,11 +8,9 @@ import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModel
 import kr.co.soogong.master.BR
 
-abstract class BaseActivity<VM : ViewModel, B : ViewDataBinding>(
+abstract class BaseActivity<B : ViewDataBinding>(
     @LayoutRes private val layout: Int
 ) : AppCompatActivity() {
-
-    abstract val viewModel: VM
 
     protected lateinit var binding: B
         private set
@@ -21,7 +19,6 @@ abstract class BaseActivity<VM : ViewModel, B : ViewDataBinding>(
         super.onCreate(savedInstanceState)
 
         binding = DataBindingUtil.setContentView(this, layout)
-        binding.setVariable(BR.vm, viewModel)
     }
 
     protected fun bind(action: B.() -> Unit) {

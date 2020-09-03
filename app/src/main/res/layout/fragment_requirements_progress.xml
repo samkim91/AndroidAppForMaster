@@ -7,7 +7,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#eeeeee">
+        android:background="@color/app_background_color">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/noti"
@@ -57,10 +57,11 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 
-        <Space
+        <FrameLayout
             android:id="@+id/space"
             android:layout_width="match_parent"
             android:layout_height="8dp"
+            android:background="@color/received_noti_space_color"
             app:layout_constraintBottom_toTopOf="@id/received_list"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

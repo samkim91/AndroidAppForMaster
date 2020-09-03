@@ -22,8 +22,8 @@ data class Requirement(
     @SerializedName("location")
     val location: String, // 위치
 
-    @SerializedName("time")
-    val time: Date, // 접수일시
+    @SerializedName("date")
+    val date: Date, // 접수일시
 
     @SerializedName("userName")
     val userName: String, // 요청 고객명
