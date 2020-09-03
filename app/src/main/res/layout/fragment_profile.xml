@@ -1,19 +1,252 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="10dp">
+        android:background="@color/app_background_color">
 
-        <TextView
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="Profile"
-            android:textSize="40sp" />
+            android:layout_height="wrap_content"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp">
 
+            <ImageView
+                android:id="@+id/user_profile_img"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_marginTop="40dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/master_type_title"
+                style="@style/profile_title_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:text="마스터유형"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/user_profile_img" />
+
+            <EditText
+                android:id="@+id/master_type"
+                style="@style/profile_edit_style"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/profile_editbox_background"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/master_type_title"
+                tools:text="유료(베이직)" />
+
+            <TextView
+                android:id="@+id/master_store_name_title"
+                style="@style/profile_title_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:text="업체명"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/master_type" />
+
+            <EditText
+                android:id="@+id/master_store_name"
+                style="@style/profile_edit_style"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/profile_editbox_background"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/master_store_name_title"
+                tools:text="신한벽지" />
+
+            <TextView
+                android:id="@+id/master_introduction_title"
+                style="@style/profile_title_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:text="한줄소개"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/master_store_name" />
+
+            <EditText
+                android:id="@+id/master_introduction"
+                style="@style/profile_edit_style"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/profile_editbox_background"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/master_introduction_title"
+                tools:text="잘 부탁 드립니다!" />
+
+            <TextView
+                android:id="@+id/master_license_number_title"
+                style="@style/profile_title_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:text="사업자등록번호"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/master_introduction" />
+
+            <EditText
+                android:id="@+id/master_license_number"
+                style="@style/profile_edit_style"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/profile_editbox_background"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/master_license_number_title"
+                tools:text="123-123-123" />
+
+            <TextView
+                android:id="@+id/master_address_title"
+                style="@style/profile_title_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:text="주소"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/master_license_number" />
+
+            <EditText
+                android:id="@+id/master_address"
+                style="@style/profile_edit_style"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/profile_editbox_background"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/master_address_title"
+                tools:text="서울특별시 강남구 5512" />
+
+            <EditText
+                android:id="@+id/master_address_sub"
+                style="@style/profile_edit_style"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/profile_editbox_background"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/master_address"
+                tools:text="ㅁㄴㅇㄹ 빌라 303호" />
+
+            <TextView
+                android:id="@+id/master_setting_address_title"
+                style="@style/profile_title_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:text="주소"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/master_address_sub" />
+
+            <TextView
+                android:id="@+id/master_setting_address_primary_title"
+                style="@style/profile_title_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="기본지역"
+                app:layout_constraintBottom_toBottomOf="@id/master_setting_address_primary"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/master_setting_address_primary" />
+
+            <EditText
+                android:id="@+id/master_setting_address_primary"
+                style="@style/profile_edit_style"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="11dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/profile_editbox_background"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/master_setting_address_primary_title"
+                app:layout_constraintTop_toBottomOf="@id/master_setting_address_title"
+                tools:text="서울시 강남구" />
+
+            <TextView
+                android:id="@+id/master_setting_address_sub_title"
+                style="@style/profile_title_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="추가지역"
+                app:layout_constraintBottom_toBottomOf="@id/master_setting_address_sub"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/master_setting_address_sub" />
+
+            <EditText
+                android:id="@+id/master_setting_address_sub"
+                style="@style/profile_edit_style"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="11dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/profile_editbox_background"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/master_setting_address_sub_title"
+                app:layout_constraintTop_toBottomOf="@id/master_setting_address_primary"
+                tools:text="서울시 동작구" />
+
+            <EditText
+                android:id="@+id/master_setting_address_sub2"
+                style="@style/profile_edit_style"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="11dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/profile_editbox_background"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/master_setting_address_sub_title"
+                app:layout_constraintTop_toBottomOf="@id/master_setting_address_sub"
+                tools:text="서울시 서초구" />
+
+            <TextView
+                android:id="@+id/master_category_title"
+                style="@style/profile_title_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:text="업종"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/master_setting_address_sub2" />
+
+            <FrameLayout
+                android:id="@+id/master_category_group"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/master_category_title" />
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="24dp"
+                android:background="@drawable/button_round_corner"
+                android:gravity="center"
+                android:text="수정하기"
+                android:textColor="@color/soogong_basic_color"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/master_category_group" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </layout>
