@@ -74,4 +74,19 @@
         <item name="android:textSize">@dimen/list_item_description_text_size</item>
         <item name="android:textColor">@color/list_item_description_text_color</item>
     </style>
+
+    <style name="profile_title_style">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/profile_title_color</item>
+    </style>
+
+    <style name="profile_title_style.sub" parent="profile_title_style">
+        <item name="android:textColor">@color/profile_title_color</item>
+    </style>
+
+    <style name="profile_edit_style">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/profile_edit_color</item>
+        <item name="android:gravity">center</item>
+    </style>
 </resources>
