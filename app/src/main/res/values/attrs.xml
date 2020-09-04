@@ -4,4 +4,10 @@
         <attr name="text" format="reference|string" />
     </declare-styleable>
 
+    <declare-styleable name="TitleTextView">
+        <attr name="title_text" format="reference|string" />
+        <attr name="detail_text" format="reference|string" />
+        <attr name="detail_bg" format="reference|integer" />
+    </declare-styleable>
+
 </resources>
