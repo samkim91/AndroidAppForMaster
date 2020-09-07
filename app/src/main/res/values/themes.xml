@@ -1,13 +1,13 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorAccent">@color/colorAccent</item>
         <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
         <item name="android:windowBackground">@color/app_background_color</item>
     </style>
 
-    <style name="AppBottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
+    <style name="AppBottomSheetDialogTheme" parent="Theme.MaterialComponents.Light.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/AppModalStyle</item>
     </style>
 
@@ -75,20 +75,51 @@
         <item name="android:textColor">@color/list_item_description_text_color</item>
     </style>
 
-    <style name="profile_title_style">
-        <item name="android:textSize">14sp</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/profile_title_color</item>
+    <style name="small_text_style">
+        <item name="android:textSize">@dimen/text_small_size</item>
     </style>
 
-    <style name="profile_title_style.sub" parent="profile_title_style">
-        <item name="android:textColor">@color/profile_title_color</item>
+    <style name="small_text_style.medium" parent="small_text_style">
+        <item name="android:fontFamily">@font/medium</item>
     </style>
 
-    <style name="profile_detail_style">
-        <item name="android:textSize">16sp</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/profile_edit_color</item>
-        <item name="android:gravity">center</item>
+    <style name="small_text_style.regular" parent="small_text_style">
+        <item name="android:fontFamily">@font/regular</item>
+    </style>
+
+    <style name="small_text_style.bold" parent="small_text_style">
+        <item name="android:fontFamily">@font/bold</item>
+    </style>
+
+    <style name="medium_text_style">
+        <item name="android:textSize">@dimen/text_medium_size</item>
+    </style>
+
+    <style name="medium_text_style.medium" parent="medium_text_style">
+        <item name="android:fontFamily">@font/medium</item>
+    </style>
+
+    <style name="medium_text_style.regular" parent="medium_text_style">
+        <item name="android:fontFamily">@font/regular</item>
+    </style>
+
+    <style name="medium_text_style.bold" parent="medium_text_style">
+        <item name="android:fontFamily">@font/bold</item>
+    </style>
+
+    <style name="big_text_style">
+        <item name="android:textSize">@dimen/text_big_size</item>
+    </style>
+
+    <style name="big_text_style.medium" parent="big_text_style">
+        <item name="android:fontFamily">@font/medium</item>
+    </style>
+
+    <style name="big_text_style.regular" parent="big_text_style">
+        <item name="android:fontFamily">@font/regular</item>
+    </style>
+
+    <style name="big_text_style.bold" parent="big_text_style">
+        <item name="android:fontFamily">@font/bold</item>
     </style>
 </resources>

@@ -7,13 +7,12 @@
 
     <TextView
         android:id="@+id/text"
+        style="@style/medium_text_style.medium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:layout_marginBottom="24dp"
-        android:textColor="#212121"
-        android:textSize="16sp"
-        android:textStyle="bold"
+        android:textColor="@color/primary_text_color"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

@@ -19,29 +19,25 @@
 
         <TextView
             android:id="@+id/master_store_name"
-            style="@style/profile_title_style"
+            style="@style/medium_text_style.medium"
             android:layout_width="0dp"
             android:layout_height="20dp"
             android:layout_marginStart="38dp"
             android:text="신한벽지"
-            android:textColor="#212121"
-            android:textSize="16sp"
-            android:textStyle="bold"
+            android:textColor="@color/primary_text_color"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/master_profile_img"
             app:layout_constraintTop_toTopOf="@id/master_profile_img" />
 
         <TextView
             android:id="@+id/master_type"
-            style="@style/profile_title_style"
+            style="@style/medium_text_style.medium"
             android:layout_width="0dp"
             android:layout_height="20dp"
             android:layout_marginStart="38dp"
             android:layout_marginTop="8dp"
             android:text="유료(베이직)"
-            android:textColor="#212121"
-            android:textSize="16sp"
-            android:textStyle="bold"
+            android:textColor="@color/primary_text_color"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/master_profile_img"
             app:layout_constraintTop_toBottomOf="@id/master_store_name" />
@@ -58,11 +54,11 @@
 
             <TextView
                 android:id="@+id/rate_count_title"
+                style="@style/small_text_style.regular"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="평점"
-                android:textColor="#616161"
-                android:textSize="12sp"
+                android:textColor="@color/secondary_text_color"
                 app:layout_constraintBottom_toTopOf="@id/rate_count"
                 app:layout_constraintEnd_toStartOf="@id/rate_line"
                 app:layout_constraintStart_toStartOf="parent"
@@ -71,13 +67,12 @@
 
             <TextView
                 android:id="@+id/rate_count"
+                style="@style/medium_text_style.bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
                 android:text="4.6"
-                android:textColor="@color/soogong_basic_color"
-                android:textSize="16sp"
-                android:textStyle="bold"
+                android:textColor="@color/app_color"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/rate_line"
                 app:layout_constraintStart_toStartOf="parent"
@@ -97,10 +92,11 @@
 
             <TextView
                 android:id="@+id/review_count_title"
+                style="@style/small_text_style.regular"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="리뷰 수"
-                android:textColor="#616161"
+                android:textColor="@color/secondary_text_color"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toTopOf="@id/review_count"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -110,12 +106,12 @@
 
             <TextView
                 android:id="@+id/review_count"
+                style="@style/medium_text_style.bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
                 android:text="50"
-                android:textColor="@color/soogong_basic_color"
-                android:textSize="16sp"
+                android:textColor="@color/app_color"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
