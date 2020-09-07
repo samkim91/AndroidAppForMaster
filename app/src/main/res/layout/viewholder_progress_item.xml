@@ -11,11 +11,12 @@
 
         <TextView
             android:id="@+id/type"
+            style="@style/small_text_style.medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:background="@drawable/textview_round_corner"
-            android:textSize="12sp"
+            android:textColor="@color/app_color"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="욕실장" />
@@ -31,24 +32,24 @@
 
         <TextView
             android:id="@+id/status_text"
+            style="@style/small_text_style.bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:letterSpacing="-0.01"
-            android:textColor="#00c853"
-            android:textSize="12sp"
+            android:textColor="@color/app_color"
+            app:layout_constraintBottom_toBottomOf="@id/status_icon"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/status_icon"
-            app:layout_constraintBottom_toBottomOf="@id/status_icon"
             tools:text="매칭완료" />
 
         <TextView
             android:id="@+id/location"
+            style="@style/big_text_style.bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:letterSpacing="-0.01"
-            android:textColor="#212121"
-            android:textSize="20sp"
+            android:textColor="@color/primary_text_color"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/type"
             tools:text="서울시 관악구" />
@@ -58,7 +59,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:letterSpacing="-0.01"
-            android:textColor="#9e9e9e"
+            android:textColor="@color/tertiary_text_color"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@id/location"
             app:layout_constraintEnd_toEndOf="parent"
@@ -67,13 +68,13 @@
 
         <TextView
             android:id="@+id/detail"
+            style="@style/medium_text_style.medium"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:letterSpacing="-0.01"
             android:lineSpacingExtra="6sp"
-            android:textColor="#616161"
-            android:textSize="14sp"
+            android:textColor="@color/secondary_text_color"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/location"
@@ -81,33 +82,51 @@
 
         <Button
             android:id="@+id/detail_button"
+            style="@style/medium_text_style.bold"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:layout_marginEnd="4dp"
             android:layout_marginBottom="24dp"
+            android:background="@drawable/detail_button_background_2"
             android:text="자세히 보기"
-            android:textColor="#00c853"
-            android:textSize="14sp"
+            android:textColor="@color/app_color"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/status_button"
+            app:layout_constraintEnd_toStartOf="@id/call_button"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/detail"
-            app:layout_goneMarginEnd="0dp" />
+            app:layout_constraintTop_toBottomOf="@id/detail" />
 
         <Button
-            android:id="@+id/status_button"
+            android:id="@+id/call_button"
+            style="@style/medium_text_style.bold"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="24dp"
             android:layout_marginBottom="24dp"
+            android:background="@drawable/status_button_call_background"
             android:text="전화하기"
-            android:textColor="#00c853"
-            android:textSize="14sp"
+            android:visibility="gone"
+            android:textColor="@color/basic_white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/remove_button"
+            app:layout_constraintStart_toEndOf="@id/detail_button"
+            app:layout_constraintTop_toBottomOf="@id/detail" />
+
+        <Button
+            android:id="@+id/remove_button"
+            style="@style/medium_text_style.bold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/status_button_remove_background"
+            android:text="삭제하기"
+            android:textColor="@color/basic_white"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/detail_button"
+            app:layout_constraintStart_toEndOf="@id/call_button"
             app:layout_constraintTop_toBottomOf="@id/detail" />
 
 

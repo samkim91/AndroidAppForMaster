@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colors_9_white">#ffffff</color>
 
-    <color name="soogong_basic_color">#22D47B</color>
+    <color name="basic_white">#ffffff</color>
+    <color name="app_color">#22D47B</color>
+    <color name="primary_text_color">#212121</color>
+    <color name="secondary_text_color">#616161</color>
+    <color name="tertiary_text_color">#9e9e9e</color>
 
     <color name="colorAccent">#69a9f1</color>
 
@@ -44,4 +47,6 @@
     <color name="received_location">#212121</color>
     <color name="received_time">#9e9e9e</color>
     <color name="received_detail">#616161</color>
+
+    <color name="detail_button_color">#bdbdbd</color>
 </resources>

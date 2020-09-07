@@ -45,6 +45,9 @@ class RequirementsFragment : BaseFragment<FragmentRequirementsBinding>(
                 currentItem = 0
             }
         }
+
+        val badge = binding.mainTabs.getTabAt(0)?.orCreateBadge
+        badge?.backgroundColor = R.color.app_color
     }
 
     companion object {
