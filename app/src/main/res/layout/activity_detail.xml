@@ -1,9 +1,164 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.requirements.received.detail.DetailActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <data>
+
+        <variable
+            name="acceptClick"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="deinedClick"
+            type="android.view.View.OnClickListener" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include layout="@layout/action_bar" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="20dp">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/category"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/textview_round_corner"
+                        android:text="욕실장"
+                        android:textColor="@color/app_color"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/location"
+                        android:layout_width="wrap_content"
+                        android:layout_height="29dp"
+                        android:layout_marginTop="6dp"
+                        android:gravity="center"
+                        android:text="서울시 관악구"
+                        android:textColor="@color/title_color"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/category" />
+
+                    <kr.co.soogong.master.ui.widget.TitleTextView2
+                        android:id="@+id/date"
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_marginTop="36dp"
+                        app:detail_text2="2020년 8월 26일 13시 53분"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/location"
+                        app:title_text2="접수일시" />
+
+                    <kr.co.soogong.master.ui.widget.TitleTextView2
+                        android:id="@+id/name"
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_marginTop="24dp"
+                        app:detail_text2="홍길동"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/date"
+                        app:title_text2="고객명" />
+
+                    <kr.co.soogong.master.ui.widget.TitleTextView2
+                        android:id="@+id/type"
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_marginTop="24dp"
+                        app:detail_text2="아파트"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/name"
+                        app:title_text2="장소유형" />
+
+                    <kr.co.soogong.master.ui.widget.TitleTextView2
+                        android:id="@+id/size"
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_marginTop="24dp"
+                        app:detail_text2="10~20평"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/type"
+                        app:title_text2="평수" />
+
+                    <kr.co.soogong.master.ui.widget.TitleTextView2
+                        android:id="@+id/detail"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        app:detail_text2="욕실장이 벽에서 떨어졌어요. 새로 욕실장을 설치했으면 좋겠습니다."
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/size"
+                        app:title_text2="요청사항" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/line"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="32dp"
+                        android:background="#e0e0e0"
+                        app:layout_constraintTop_toBottomOf="@id/detail" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/accept"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="32dp"
+                        android:layout_marginEnd="4dp"
+                        android:layout_marginBottom="48dp"
+                        android:background="@drawable/status_button_call_background"
+                        android:onClick="@{acceptClick}"
+                        android:text="승인하기"
+                        android:textColor="@color/basic_white"
+                        android:textSize="14sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/denied"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/line"
+                        app:layout_goneMarginEnd="0dp" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/denied"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginTop="32dp"
+                        android:layout_marginBottom="48dp"
+                        android:background="@drawable/detail_button_background"
+                        android:onClick="@{deinedClick}"
+                        android:text="거절하기"
+                        android:textColor="@color/tertiary_text_color"
+                        android:textSize="14sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/accept"
+                        app:layout_constraintTop_toBottomOf="@id/line" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+</layout>
