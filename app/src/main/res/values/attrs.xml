@@ -10,6 +10,11 @@
         <attr name="detail_bg" format="reference|integer" />
     </declare-styleable>
 
+    <declare-styleable name="TitleTextView2">
+        <attr name="title_text2" format="reference|string" />
+        <attr name="detail_text2" format="reference|string" />
+    </declare-styleable>
+
     <declare-styleable name="NotoTextView">
         <attr name="fontweight" format="enum">
             <enum name="regular" value="0" />

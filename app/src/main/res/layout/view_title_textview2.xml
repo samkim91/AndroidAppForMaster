@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/title"
+        style="@style/medium_text_style.medium"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:gravity="center"
+        android:text="접수일시"
+        android:textColor="@color/primary_text_color"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/text"
+        style="@style/medium_text_style.regular"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="75dp"
+        android:gravity="center_vertical"
+        android:textColor="@color/secondary_text_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="욕실장이 벽에서 떨어졌어요. 새로 욕실장을 설치했으면 좋겠습니다.욕실장이 벽에서 떨어졌어요. 새로 욕실장을 설치했으면 좋겠습니다.욕실장이 벽에서 떨어졌어요. 새로 욕실장을 설치했으면 좋겠습니다.욕실장이 벽에서 떨어졌어요. 새로 욕실장을 설치했으면 좋겠습니다.욕실장이 벽에서 떨어졌어요. 새로 욕실장을 설치했으면 좋겠습니다." />
+</androidx.constraintlayout.widget.ConstraintLayout>

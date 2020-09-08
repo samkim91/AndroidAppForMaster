@@ -8,13 +8,10 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.launch
-import kr.co.soogong.master.data.requirements.Requirement
 import kr.co.soogong.master.domain.Repository
 import kr.co.soogong.master.ui.base.BaseViewModel
 import kr.co.soogong.master.util.Event
 import kr.co.soogong.master.util.http.HttpClient
-import timber.log.Timber
-import java.util.*
 
 class ReceivedViewModel(private val repository: Repository) : BaseViewModel() {
     private val _emptyList = MutableLiveData(true)
@@ -51,7 +48,7 @@ class ReceivedViewModel(private val repository: Repository) : BaseViewModel() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy {
                 viewModelScope.launch {
-                    repository.insert(it)
+                    repository.insertRequirement(it)
                 }
             }
             .addToDisposable()

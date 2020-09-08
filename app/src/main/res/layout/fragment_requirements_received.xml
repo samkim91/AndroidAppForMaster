@@ -76,6 +76,18 @@
             bind:receivedList="@{vm.requirementList}"
             tools:listitem="@layout/viewholder_received_item" />
 
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/empty_text"
+            style="@style/medium_text_style.regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="받은요청이 없습니다."
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            bind:visible="@{vm.emptyList}" />
+
         <androidx.constraintlayout.widget.Group
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

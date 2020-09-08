@@ -18,5 +18,7 @@ data class ReceivedCard(
             date = requirement.date,
             userName = requirement.userName
         )
+
+        val EMPTY_CARD = ReceivedCard(-1, "", "", Date(0), "")
     }
 }
