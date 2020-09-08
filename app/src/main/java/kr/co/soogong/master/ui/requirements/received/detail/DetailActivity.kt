@@ -1,5 +1,6 @@
 package kr.co.soogong.master.ui.requirements.received.detail
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -8,7 +9,9 @@ import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ActivityDetailBinding
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.ui.getRepository
+import kr.co.soogong.master.ui.requirements.received.estimate.EstimateActivity
 import kr.co.soogong.master.uiinterface.requirments.received.detail.DetailActivityHelper
+import kr.co.soogong.master.uiinterface.requirments.received.estimate.EstimateActivityHelper
 import kr.co.soogong.master.util.EventObserver
 import timber.log.Timber
 
@@ -31,6 +34,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(
     }
 
     private fun initLayout() {
+        Timber.tag(TAG).d("initLayout: ")
         bind {
             setVariable(BR.vm, viewModel)
             lifecycleOwner = this@DetailActivity
@@ -46,7 +50,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(
             }
 
             setDeinedClick {
-                viewModel.onClickedDenied(requirementId)
+                viewModel.onClickedDenied(viewModel.requirement?.value)
             }
         }
 
@@ -54,16 +58,29 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(
     }
 
     private fun registerEventObserve() {
+        Timber.tag(TAG).d("registerEventObserve: ")
         viewModel.event.observe(this, EventObserver { event ->
             when (event) {
                 DetailViewModel.DENIED_EVENT -> {
                     Toast.makeText(this, "거절한 수리 문의 삭제가 완료되었습니다.", Toast.LENGTH_LONG).show()
                     finish()
                 }
+
+                DetailViewModel.ACCEPT_EVENT -> {
+                    this.run {
+                        startActivity(Intent(this, EstimateActivity::class.java).apply {
+                            putExtra(EstimateActivityHelper.EXTRA_KEY_BUNDLE, Bundle().apply {
+                                putLong(
+                                    EstimateActivityHelper.BUNDLE_KEY_RECEIVED_KEY,
+                                    requirementId
+                                )
+                            })
+                        })
+                    }
+                }
             }
         })
     }
-
 
     companion object {
         private const val TAG = "DetailActivity"

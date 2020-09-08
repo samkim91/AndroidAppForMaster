@@ -5,10 +5,8 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
-import kotlinx.android.parcel.IgnoredOnParcel
 import kotlinx.android.parcel.Parcelize
 import kr.co.soogong.master.data.rawtype.RawRequirementItem
-import java.text.DateFormat
 import java.util.*
 
 
@@ -45,19 +43,23 @@ data class Requirement(
     val image: String? = null, // 이미지
 
     @SerializedName("status")
-    val status: String
+    val status: String,
+
+    @SerializedName("keycode")
+    val keycode: String
 ) : Parcelable {
     companion object {
         fun from(rawData: RawRequirementItem): Requirement = Requirement(
             id = rawData.id.toLong(),
             category = rawData.attributes.category,
-            location = rawData.attributes.location,
+            location = "${rawData.attributes.area} ${rawData.attributes.location}",
             date = Date(rawData.attributes.created_at),
             userName = rawData.attributes.name,
             content = rawData.attributes.description,
             houseType = rawData.attributes.location_type,
             size = rawData.attributes.location_width,
-            status = rawData.attributes.status
+            status = rawData.attributes.status,
+            keycode = rawData.attributes.keycode
         )
     }
 }

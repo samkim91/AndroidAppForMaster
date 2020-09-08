@@ -19,6 +19,7 @@ class RequirementsFragment : BaseFragment<FragmentRequirementsBinding>(
     }
 
     private fun initLayout() {
+        Timber.tag(TAG).d("initLayout: ")
         bind {
             with(mainTabs) {
                 addTab(newTab().setText("견적 대기"))
@@ -48,14 +49,6 @@ class RequirementsFragment : BaseFragment<FragmentRequirementsBinding>(
         }
     }
 
-    companion object {
-        private const val TAG = "RequirementsFragment"
-
-        fun newInstance(): RequirementsFragment {
-            return RequirementsFragment()
-        }
-    }
-
     override fun unsetProgressBadge() {
         binding.mainTabs.getTabAt(1)?.removeBadge()
     }
@@ -82,5 +75,13 @@ class RequirementsFragment : BaseFragment<FragmentRequirementsBinding>(
             badge?.backgroundColor = resources.getColor(R.color.app_color)
         }
         badge?.number = badgeCount
+    }
+
+    companion object {
+        private const val TAG = "RequirementsFragment"
+
+        fun newInstance(): RequirementsFragment {
+            return RequirementsFragment()
+        }
     }
 }

@@ -2,11 +2,9 @@ package kr.co.soogong.master.ui.profile
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.Fragment
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentProfileBinding
 import kr.co.soogong.master.ui.base.BaseFragment
-import kr.co.soogong.master.ui.requirements.RequirementsFragment
 import timber.log.Timber
 
 class ProfileFragment : BaseFragment<FragmentProfileBinding>(

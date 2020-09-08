@@ -1,8 +1,6 @@
 package kr.co.soogong.master.ui.main
 
 import android.os.Bundle
-import androidx.core.content.ContextCompat
-import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.tabs.TabLayout
 import com.google.firebase.iid.FirebaseInstanceId
 import kr.co.soogong.master.R
@@ -13,6 +11,7 @@ import timber.log.Timber
 class MainActivity : BaseActivity<ActivityMainBinding>(
     R.layout.activity_main
 ) {
+    /*
     private val unselectedIcon = arrayOf(
         R.drawable.ic_requirement,
         R.drawable.ic_material,
@@ -26,6 +25,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
         R.drawable.ic_profile_choice,
         R.drawable.ic_settings_choice
     )
+    */
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,8 +50,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
         Timber.tag(TAG).d("initLayout: ")
         bind {
             with(mainTabs) {
-                addTab(newTab().setText("받은 요청").setIcon(R.drawable.ic_requirement_choice))
-                addTab(newTab().setText("자재 발주").setIcon(R.drawable.ic_material))
+                addTab(newTab().setText("받은 요청").setIcon(R.drawable.ic_requirement))
+//                addTab(newTab().setText("자재 발주").setIcon(R.drawable.ic_material))
                 addTab(newTab().setText("프로필").setIcon(R.drawable.ic_profile))
                 addTab(newTab().setText("설정").setIcon(R.drawable.ic_settings))
 
@@ -61,13 +61,13 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
                     override fun onTabReselected(tab: TabLayout.Tab) = Unit
 
                     override fun onTabUnselected(tab: TabLayout.Tab) {
-                        val position = tab.position
-                        tab.icon = ContextCompat.getDrawable(context, unselectedIcon[position])
+//                        val position = tab.position
+//                        tab.icon = ContextCompat.getDrawable(context, unselectedIcon[position])
                     }
 
                     override fun onTabSelected(tab: TabLayout.Tab) {
-                        val position = tab.position
-                        tab.icon = ContextCompat.getDrawable(context, selectedIcon[position])
+//                        val position = tab.position
+//                        tab.icon = ContextCompat.getDrawable(context, selectedIcon[position])
                         mainViewPager.currentItem = tab.position
                     }
                 })

@@ -97,7 +97,6 @@
                 android:layout_height="wrap_content"
                 android:text="리뷰 수"
                 android:textColor="@color/secondary_text_color"
-                android:textSize="12sp"
                 app:layout_constraintBottom_toTopOf="@id/review_count"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/rate_line"

@@ -24,14 +24,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="kr.co.soogong.master.ui.requirements.received.detail.DetailActivity" />
+        <activity android:name=".ui.requirements.received.detail.DetailActivity" />
+        <activity android:name=".ui.requirements.received.estimate.EstimateActivity" />
 
         <service
             android:name=".SoogongMasterMessagingService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
 
