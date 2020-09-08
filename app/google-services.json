@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "320051726667",
+    "firebase_url": "https://soogong-master.firebaseio.com",
+    "project_id": "soogong-master",
+    "storage_bucket": "soogong-master.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:320051726667:android:1395b01d7e3f95f6c780ce",
+        "android_client_info": {
+          "package_name": "kr.co.soogong.master"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "320051726667-gh9ub9faklnbfdlnphqpo61b4j09hnuq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "kr.co.soogong.master",
+            "certificate_hash": "6d41142475ec5e343d067df34edaa0180c021d2e"
+          }
+        },
+        {
+          "client_id": "320051726667-vvubmlc85b0na87j4vk71kq0p375hpp1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB1bNeNnNrHnEz2dCkMucSgBkFartpErgc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "320051726667-vvubmlc85b0na87j4vk71kq0p375hpp1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -13,7 +13,7 @@ import kr.co.soogong.master.util.InjectHelper
 import leakcanary.AppWatcher
 import timber.log.Timber
 
-class App : Application() {
+class SoogongApp : Application() {
     private lateinit var networkFlipperPlugin: NetworkFlipperPlugin
 
     override fun onCreate() {

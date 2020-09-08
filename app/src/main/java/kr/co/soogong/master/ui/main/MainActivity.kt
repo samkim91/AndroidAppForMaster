@@ -2,7 +2,9 @@ package kr.co.soogong.master.ui.main
 
 import android.os.Bundle
 import androidx.core.content.ContextCompat
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.tabs.TabLayout
+import com.google.firebase.iid.FirebaseInstanceId
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ActivityMainBinding
 import kr.co.soogong.master.ui.base.BaseActivity
@@ -29,6 +31,19 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
         super.onCreate(savedInstanceState)
         Timber.tag(TAG).d("onCreate: ")
         initLayout()
+        FirebaseInstanceId.getInstance().instanceId.addOnCompleteListener { tasks ->
+            if (!tasks.isSuccessful) {
+                Timber.tag(TAG).e(tasks.exception, "onComplete: getInstanceId failed")
+                return@addOnCompleteListener
+            }
+            val token = tasks.result?.token
+            Timber.tag(TAG).d("OnCompleteListener: $token")
+
+            // If you want to send messages to this application instance or
+            // manage this apps subscriptions on the server side, send the
+            // Instance ID token to your app server.
+//            sendRegistrationToServer(token);
+        }
     }
 
     private fun initLayout() {
