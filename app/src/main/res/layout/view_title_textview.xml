@@ -5,27 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="68dp">
 
-    <kr.co.soogong.master.ui.widget.NotoTextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/title"
+        style="@style/medium_text_style.medium"
         android:layout_width="wrap_content"
         android:layout_height="20dp"
         android:gravity="center"
         android:textColor="@color/primary_text_color"
-        android:textSize="@dimen/text_medium_size"
-        app:fontweight="medium"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="마스터유형" />
 
-    <kr.co.soogong.master.ui.widget.NotoTextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/text"
+        style="@style/medium_text_style.regular"
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginTop="8dp"
         android:gravity="center"
         android:textColor="@color/primary_text_color"
-        android:textSize="@dimen/text_medium_size"
-        app:fontweight="regular"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/title"

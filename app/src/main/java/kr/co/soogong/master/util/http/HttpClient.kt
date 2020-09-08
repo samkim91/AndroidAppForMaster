@@ -1,6 +1,7 @@
 package kr.co.soogong.master.util.http
 
 import com.facebook.flipper.plugins.network.FlipperOkhttpInterceptor
+import io.reactivex.Completable
 import io.reactivex.Single
 import kr.co.soogong.master.BuildConfig
 import kr.co.soogong.master.data.requirements.Requirement
@@ -17,7 +18,7 @@ import java.util.concurrent.TimeUnit
 
 object HttpClient {
     private val TAG = HttpClient::class.java.simpleName
-    private const val URL = "https://api2.soogong.co.kr/api/" // TODO
+    private const val URL = "https://api2.soogong.co.kr/"
 
     private lateinit var instance: HttpClient
     private lateinit var okHttpClient: OkHttpClient
@@ -88,5 +89,27 @@ object HttpClient {
     fun getRequirementList(): Single<List<Requirement>> {
         return httpInterface.getRequirementList("d3899f668347aa1b")
             .map { list -> list.map { Requirement.from(it) } }
+    }
+
+    fun refuseRequirement(keycode: String): Completable {
+        val data = HashMap<String, String>()
+        data["branch_keycode"] = "d3899f668347aa1b"
+        data["keycode"] = keycode
+        return httpInterface.refuseRequirement(data)
+    }
+
+    fun sendMessage(
+        keycode: String,
+        price: String,
+        contents: String,
+        possibleDate: String
+    ): Single<String> {
+        val data = HashMap<String, String>()
+        data["branch_keycode"] = "d3899f668347aa1b"
+        data["keycode"] = keycode
+        data["price"] = price
+        data["contents"] = contents
+        data["possible_date"] = possibleDate
+        return httpInterface.sendMessage(data)
     }
 }

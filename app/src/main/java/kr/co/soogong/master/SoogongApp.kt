@@ -40,7 +40,7 @@ class SoogongApp : Application() {
 
         InjectHelper.context = applicationContext
 
-        Timber.tag("App").d("onCreate")
+        Timber.tag("App").d("onCreate: ${System.currentTimeMillis()}")
     }
 }
 
@@ -48,8 +48,8 @@ class TimberLogTree : Timber.DebugTree() {
     override fun log(priority: Int, tag: String?, message: String, t: Throwable?) {
         super.log(
             priority,
-            "[${InjectHelper.context?.getString(R.string.app_name)}-${BuildConfig.VERSION_NAME}] $tag",
-            message,
+            "[${InjectHelper.context?.getString(R.string.app_name)}-${BuildConfig.VERSION_NAME}]",
+            "$tag.$message",
             t
         )
     }

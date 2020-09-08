@@ -28,6 +28,7 @@ class ReceivedFragment : BaseFragment<FragmentRequirementsReceivedBinding>(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         Timber.tag(TAG).d("onViewCreated: ")
+
         bind {
             receivedList.adapter = ReceivedAdapter().apply {
                 buttonClick = { id ->
@@ -47,11 +48,7 @@ class ReceivedFragment : BaseFragment<FragmentRequirementsReceivedBinding>(
             )
             receivedList.addItemDecoration(dividerItemDecoration)
             setVariable(BR.vm, viewModel)
-            lifecycleOwner = this@ReceivedFragment.viewLifecycleOwner
-        }
-
-        binding.testButton.setOnClickListener {
-            viewModel.requestList()
+            lifecycleOwner = viewLifecycleOwner
         }
 
         requirementsBadge = parentFragment as? RequirementsBadge
@@ -59,7 +56,14 @@ class ReceivedFragment : BaseFragment<FragmentRequirementsReceivedBinding>(
         registerEventObserve()
     }
 
+    override fun onStart() {
+        super.onStart()
+        Timber.tag(TAG).d("onStart: ")
+        viewModel.requestList()
+    }
+
     private fun registerEventObserve() {
+        Timber.tag(TAG).d("registerEventObserve: ")
         viewModel.event.observe(viewLifecycleOwner, EventObserver { (event, value) ->
             when (event) {
                 ReceivedViewModel.BADGE_UPDATE -> {
@@ -67,7 +71,6 @@ class ReceivedFragment : BaseFragment<FragmentRequirementsReceivedBinding>(
                 }
             }
         })
-
     }
 
     companion object {

@@ -4,12 +4,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.launch
 import kr.co.soogong.master.data.requirements.Requirement
 import kr.co.soogong.master.domain.Repository
 import kr.co.soogong.master.ui.base.BaseViewModel
-import kr.co.soogong.master.ui.getRepository
 import kr.co.soogong.master.util.Event
+import kr.co.soogong.master.util.http.HttpClient
 import timber.log.Timber
 import java.util.*
 
@@ -75,11 +77,19 @@ class DetailViewModel(
     val event: LiveData<Event<String>>
         get() = _event
 
-    fun onClickedDenied(requirementId: Long) {
-        viewModelScope.launch {
-            repository.removeRequirement(requirementId)
-            _event.value = Event(DENIED_EVENT)
-        }
+    fun onClickedDenied(requirement: Requirement?) {
+        requirement ?: return
+
+        HttpClient.refuseRequirement(requirement.keycode)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                viewModelScope.launch {
+                    repository.removeRequirement(requirement.id)
+                    _event.value = Event(DENIED_EVENT)
+                }
+            }
+            .addToDisposable()
     }
 
     fun onClickedAccept() {

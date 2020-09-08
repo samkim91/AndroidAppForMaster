@@ -56,11 +56,11 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/time"
+            style="@style/small_text_style.medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:letterSpacing="-0.01"
             android:textColor="@color/tertiary_text_color"
-            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@id/location"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/location"
@@ -105,8 +105,8 @@
             android:layout_marginBottom="24dp"
             android:background="@drawable/status_button_call_background"
             android:text="전화하기"
-            android:visibility="gone"
             android:textColor="@color/basic_white"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/remove_button"
             app:layout_constraintStart_toEndOf="@id/detail_button"
