@@ -1,10 +1,10 @@
 package kr.co.soogong.master.util.http
 
 import com.facebook.flipper.plugins.network.FlipperOkhttpInterceptor
-import com.facebook.flipper.plugins.network.NetworkFlipperPlugin
-import io.reactivex.Flowable
+import io.reactivex.Single
 import kr.co.soogong.master.BuildConfig
-import kr.co.soogong.master.util.ContextHelper
+import kr.co.soogong.master.data.requirements.Requirement
+import kr.co.soogong.master.util.InjectHelper
 import okhttp3.Cache
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit
 
 object HttpClient {
     private val TAG = HttpClient::class.java.simpleName
-    private const val URL = "{Server URI}" // TODO
+    private const val URL = "https://api2.soogong.co.kr/api/" // TODO
 
     private lateinit var instance: HttpClient
     private lateinit var okHttpClient: OkHttpClient
@@ -66,9 +66,9 @@ object HttpClient {
             chain.proceed(newRequest)
         }
 
-        val httpCacheDirectory = File(ContextHelper.context?.cacheDir, "http")
+        val httpCacheDirectory = File(InjectHelper.context?.cacheDir, "http")
         val cacheSize = 32 * 1024 * 1024L
-
+        val networkFlipperPlugin = InjectHelper.networkFlipperPlugin
         val client = OkHttpClient.Builder()
             .cache(Cache(httpCacheDirectory, cacheSize))
             .connectTimeout(10, TimeUnit.SECONDS)
@@ -77,7 +77,7 @@ object HttpClient {
             .retryOnConnectionFailure(true)
             .addInterceptor(logInterceptor)
             .addInterceptor(authInterceptor)
-            .addInterceptor(FlipperOkhttpInterceptor(NetworkFlipperPlugin()))
+            .addInterceptor(FlipperOkhttpInterceptor(networkFlipperPlugin))
             .build()
 
         client.dispatcher.maxRequests = 16
@@ -85,9 +85,7 @@ object HttpClient {
         return client
     }
 
-    fun getPopularMovie(
-        language: String = "ko-KR"
-    ): Flowable<String> {
-        return httpInterface.getPopularMovie(language)
+    fun getRequirementList(): Single<List<Requirement>> {
+        return httpInterface.getRequirementList("d3899f668347aa1b")
     }
 }

@@ -47,12 +47,21 @@
         <FrameLayout
             android:id="@+id/space"
             android:layout_width="match_parent"
-            android:layout_height="8dp"
+            android:layout_height="50dp"
             android:background="@color/received_noti_space_color"
             app:layout_constraintBottom_toTopOf="@id/received_list"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/received_noti" />
+            app:layout_constraintTop_toBottomOf="@id/received_noti">
+
+            <Button
+                android:id="@+id/test_button"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:text="test" />
+
+        </FrameLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/received_list"

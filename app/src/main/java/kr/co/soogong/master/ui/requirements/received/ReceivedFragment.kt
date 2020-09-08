@@ -5,11 +5,16 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import io.reactivex.Scheduler
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.rxkotlin.subscribeBy
+import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.BR
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentRequirementsReceivedBinding
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.util.getRepository
+import kr.co.soogong.master.util.http.HttpClient
 import timber.log.Timber
 
 class ReceivedFragment : BaseFragment<FragmentRequirementsReceivedBinding>(
@@ -30,6 +35,15 @@ class ReceivedFragment : BaseFragment<FragmentRequirementsReceivedBinding>(
             receivedList.addItemDecoration(dividerItemDecoration)
             setVariable(BR.vm, viewModel)
             lifecycleOwner = this@ReceivedFragment.viewLifecycleOwner
+        }
+
+        binding.testButton.setOnClickListener {
+            HttpClient.getRequirementList()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeBy {
+                    Timber.tag(TAG).d("testButton: $it")
+                }
         }
     }
 
