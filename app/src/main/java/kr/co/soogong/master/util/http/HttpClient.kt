@@ -87,5 +87,6 @@ object HttpClient {
 
     fun getRequirementList(): Single<List<Requirement>> {
         return httpInterface.getRequirementList("d3899f668347aa1b")
+            .map { list -> list.map { Requirement.from(it) } }
     }
 }

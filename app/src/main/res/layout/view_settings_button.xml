@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/text"
         style="@style/medium_text_style.medium"
         android:layout_width="wrap_content"
@@ -18,13 +18,13 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="비밀번호 변경" />
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#e0e0e0"
         app:layout_constraintBottom_toBottomOf="parent" />
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/arrow_button"
         android:layout_width="20dp"
         android:layout_height="wrap_content"

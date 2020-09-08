@@ -1,4 +1,4 @@
-package kr.co.soogong.master.ui.util
+package kr.co.soogong.master.ui
 
 import android.content.Context
 import kr.co.soogong.master.domain.AppDatabase

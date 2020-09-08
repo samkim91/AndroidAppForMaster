@@ -4,10 +4,16 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.rxkotlin.subscribeBy
+import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.launch
 import kr.co.soogong.master.data.requirements.Requirement
 import kr.co.soogong.master.domain.Repository
 import kr.co.soogong.master.ui.base.BaseViewModel
+import kr.co.soogong.master.util.Event
+import kr.co.soogong.master.util.http.HttpClient
+import timber.log.Timber
 import java.util.*
 
 class ReceivedViewModel(private val repository: Repository) : BaseViewModel() {
@@ -19,9 +25,11 @@ class ReceivedViewModel(private val repository: Repository) : BaseViewModel() {
         repository.getRequirementList().map { list ->
             if (list.isNullOrEmpty()) {
                 _emptyList.value = true
+                updatedBadge(0)
                 return@map emptyList<ReceivedCard>()
             } else {
                 _emptyList.value = false
+                updatedBadge(list.size)
                 return@map list.map { ReceivedCard.from(it) }
             }
         }
@@ -29,27 +37,28 @@ class ReceivedViewModel(private val repository: Repository) : BaseViewModel() {
     val requirementList: LiveData<List<ReceivedCard>>
         get() = _requirementList
 
+    private val _event = MutableLiveData<Event<Pair<String, Int>>>()
+    val event: LiveData<Event<Pair<String, Int>>>
+        get() = _event
 
-    fun test() {
-        val temp = Requirement(
-            id = "1",
-            category = "욕실장",
-            location = "서울시 관악구",
-            date = Date(15689871),
-            userName = "홍길동",
-            content = "욕실장이 벽에서 떨어졌어요. 새로 욕실장을 설치했으면 좋겠습니다.",
-            houseType = "아파트",
-            size = "10~20평",
-            image = "",
-            status = "정상"
-        )
+    private fun updatedBadge(badgeCount: Int) {
+        _event.value = Event(BADGE_UPDATE to badgeCount)
+    }
 
-        viewModelScope.launch {
-            repository.insert(temp)
-        }
+    fun requestList() {
+        HttpClient.getRequirementList()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeBy {
+                viewModelScope.launch {
+                    repository.insert(it)
+                }
+            }
+            .addToDisposable()
     }
 
     companion object {
+        const val BADGE_UPDATE = "BADGE_UPDATE"
         private const val TAG = "ProgressViewModel"
     }
 }

@@ -7,14 +7,18 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.IgnoredOnParcel
 import kotlinx.android.parcel.Parcelize
+import kr.co.soogong.master.data.rawtype.RawRequirementItem
+import java.text.DateFormat
 import java.util.*
 
 
 @Parcelize
 @Entity(tableName = "Requirement")
 data class Requirement(
+    @Expose
+    @PrimaryKey(autoGenerate = true)
     @SerializedName("id")
-    val id: String = UUID.randomUUID().toString(), // 관리용 키 값
+    val id: Long = 0, // 관리용 키 값
 
     @SerializedName("category")
     val category: String, // 카테고리
@@ -43,8 +47,17 @@ data class Requirement(
     @SerializedName("status")
     val status: String
 ) : Parcelable {
-    @IgnoredOnParcel
-    @Expose
-    @PrimaryKey(autoGenerate = true)
-    var _id: Long = 0
+    companion object {
+        fun from(rawData: RawRequirementItem): Requirement = Requirement(
+            id = rawData.id.toLong(),
+            category = rawData.attributes.category,
+            location = rawData.attributes.location,
+            date = Date(rawData.attributes.created_at),
+            userName = rawData.attributes.name,
+            content = rawData.attributes.description,
+            houseType = rawData.attributes.location_type,
+            size = rawData.attributes.location_width,
+            status = rawData.attributes.status
+        )
+    }
 }

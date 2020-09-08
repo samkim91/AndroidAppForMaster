@@ -14,4 +14,7 @@ interface RequirementDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(requirement: Requirement)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insert(requirements: List<Requirement>)
 }
