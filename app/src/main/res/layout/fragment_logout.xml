@@ -11,7 +11,7 @@
             android:id="@+id/user_profile_img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/leak_canary_icon"
+            android:src="@drawable/ic_profile_default"
             app:layout_constraintBottom_toTopOf="@id/notice_login_title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
