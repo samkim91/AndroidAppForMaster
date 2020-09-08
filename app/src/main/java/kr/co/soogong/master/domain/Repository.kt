@@ -12,6 +12,8 @@ class Repository private constructor(
     fun getRequirementList() = requirementDao.getAllList()
 
     suspend fun insert(requirement: Requirement) = requirementDao.insert(requirement)
+
+    suspend fun insert(requirements: List<Requirement>) = requirementDao.insert(requirements)
     //endregion Requirement
 
     companion object {

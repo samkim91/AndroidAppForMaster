@@ -40,6 +40,7 @@ abstract class AppDatabase : RoomDatabase() {
                 .addCallback(object : Callback() {
                     override fun onCreate(db: SupportSQLiteDatabase) {
                         super.onCreate(db)
+                        /*
                         GlobalScope.launch {
                             val list = JsonInit.loadData(context)
                             if (!list.isNullOrEmpty()) {
@@ -48,6 +49,7 @@ abstract class AppDatabase : RoomDatabase() {
                                 }
                             }
                         }
+                        */
                     }
                 })
                 .build()

@@ -5,16 +5,13 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import io.reactivex.Scheduler
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.rxkotlin.subscribeBy
-import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.BR
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentRequirementsReceivedBinding
 import kr.co.soogong.master.ui.base.BaseFragment
-import kr.co.soogong.master.ui.util.getRepository
-import kr.co.soogong.master.util.http.HttpClient
+import kr.co.soogong.master.ui.getRepository
+import kr.co.soogong.master.ui.requirements.RequirementsBadge
+import kr.co.soogong.master.util.EventObserver
 import timber.log.Timber
 
 class ReceivedFragment : BaseFragment<FragmentRequirementsReceivedBinding>(
@@ -23,6 +20,8 @@ class ReceivedFragment : BaseFragment<FragmentRequirementsReceivedBinding>(
     private val viewModel: ReceivedViewModel by viewModels {
         ReceivedViewModelFactory(getRepository(requireContext()))
     }
+
+    private var requirementsBadge: RequirementsBadge? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         Timber.tag(TAG).d("onViewCreated: ")
@@ -38,13 +37,23 @@ class ReceivedFragment : BaseFragment<FragmentRequirementsReceivedBinding>(
         }
 
         binding.testButton.setOnClickListener {
-            HttpClient.getRequirementList()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeBy {
-                    Timber.tag(TAG).d("testButton: $it")
-                }
+            viewModel.requestList()
         }
+
+        requirementsBadge = parentFragment as? RequirementsBadge
+
+        registerEventObserve()
+    }
+
+    private fun registerEventObserve() {
+        viewModel.event.observe(viewLifecycleOwner, EventObserver { (event, value) ->
+            when (event) {
+                ReceivedViewModel.BADGE_UPDATE -> {
+                    if (value > 0) requirementsBadge?.setReceivedBadge(value) else requirementsBadge?.unsetReceivedBadge()
+                }
+            }
+        })
+
     }
 
     companion object {

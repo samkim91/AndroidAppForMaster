@@ -4,7 +4,7 @@ import kr.co.soogong.master.data.requirements.Requirement
 import java.util.*
 
 data class ReceivedCard(
-    val id: String,
+    val id: Long,
     val category: String,
     val location: String,
     val date: Date,
