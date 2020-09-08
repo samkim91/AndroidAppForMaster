@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
-import kr.co.soogong.master.data.rawtype.RawRequirementItem
+import kr.co.soogong.master.data.rawtype.requirment.RawRequirementItem
 import java.util.*
 
 

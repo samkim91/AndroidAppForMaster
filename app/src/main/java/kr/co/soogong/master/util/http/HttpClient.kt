@@ -4,6 +4,7 @@ import com.facebook.flipper.plugins.network.FlipperOkhttpInterceptor
 import io.reactivex.Single
 import kr.co.soogong.master.BuildConfig
 import kr.co.soogong.master.data.requirements.Requirement
+import kr.co.soogong.master.data.user.User
 import kr.co.soogong.master.util.InjectHelper
 import okhttp3.Cache
 import okhttp3.Interceptor
@@ -12,6 +13,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import timber.log.Timber
 import java.io.File
 import java.util.concurrent.TimeUnit
 
@@ -85,8 +87,8 @@ object HttpClient {
         return client
     }
 
-    fun getRequirementList(): Single<List<Requirement>> {
-        return httpInterface.getRequirementList("d3899f668347aa1b")
+    fun getRequirementList(keycode: String = "d3899f668347aa1b"): Single<List<Requirement>> {
+        return httpInterface.getRequirementList(keycode)
             .map { list -> list.map { Requirement.fromReceived(it) } }
     }
 
@@ -123,5 +125,12 @@ object HttpClient {
         data["key"] = fcmKey
 
         return httpInterface.updateFCMToken(data)
+    }
+
+    fun getUserProfile(keycode: String = "d3899f668347aa1b"): Single<User> {
+        return httpInterface.getUserProfile(keycode).map {
+            Timber.tag(TAG).d("getUserProfile: $it")
+            User.from(it)
+        }
     }
 }

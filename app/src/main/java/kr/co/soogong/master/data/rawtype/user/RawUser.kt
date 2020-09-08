@@ -1,6 +1,6 @@
-package kr.co.soogong.master.data.rawtype
+package kr.co.soogong.master.data.rawtype.user
 
-data class RawRequirementItem(
+data class RawUser(
     val attributes: Attributes,
     val id: String,
     val type: String

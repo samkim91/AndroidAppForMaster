@@ -6,14 +6,14 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import kr.co.soogong.master.data.requirements.Requirement
+import kr.co.soogong.master.data.user.User
 import kr.co.soogong.master.domain.requirements.RequirementConverters
 import kr.co.soogong.master.domain.requirements.RequirementDao
+import kr.co.soogong.master.domain.user.UserDao
 
 @Database(
-    entities = [Requirement::class],
+    entities = [Requirement::class, User::class],
     version = 1,
     exportSchema = false
 )
@@ -23,7 +23,7 @@ abstract class AppDatabase : RoomDatabase() {
 
     abstract fun requirementDao(): RequirementDao
 
-//    abstract fun userDao(): UserDao
+    abstract fun userDao(): UserDao
 
     companion object {
         @Volatile

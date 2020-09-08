@@ -27,8 +27,15 @@ class ReceivedFragment : BaseFragment<FragmentRequirementsReceivedBinding>(
     private var requirementsBadge: RequirementsBadge? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         Timber.tag(TAG).d("onViewCreated: ")
 
+        initLayout()
+
+        registerEventObserve()
+    }
+
+    private fun initLayout() {
         bind {
             receivedList.adapter = ReceivedAdapter().apply {
                 buttonClick = { id ->
@@ -52,8 +59,6 @@ class ReceivedFragment : BaseFragment<FragmentRequirementsReceivedBinding>(
         }
 
         requirementsBadge = parentFragment as? RequirementsBadge
-
-        registerEventObserve()
     }
 
     override fun onStart() {
