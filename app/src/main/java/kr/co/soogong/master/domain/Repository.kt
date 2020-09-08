@@ -11,9 +11,13 @@ class Repository private constructor(
     //region Requirement
     fun getRequirementList() = requirementDao.getAllList()
 
-    suspend fun insert(requirement: Requirement) = requirementDao.insert(requirement)
+    fun getRequirement(id: Long) = requirementDao.getItem(id)
 
-    suspend fun insert(requirements: List<Requirement>) = requirementDao.insert(requirements)
+    suspend fun insertRequirement(requirement: Requirement) = requirementDao.insert(requirement)
+
+    suspend fun insertRequirement(requirements: List<Requirement>) = requirementDao.insert(requirements)
+
+    suspend fun removeRequirement(requirementId: Long) = requirementDao.remove(requirementId)
     //endregion Requirement
 
     companion object {

@@ -4,13 +4,13 @@ import android.content.Context
 import android.content.res.TypedArray
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import android.widget.TextView
+import androidx.appcompat.widget.AppCompatTextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import kr.co.soogong.master.R
 
 class TitleTextView2 : ConstraintLayout {
-    private lateinit var textView: TextView
-    private lateinit var titleTextView: TextView
+    private lateinit var textView: AppCompatTextView
+    private lateinit var titleTextView: AppCompatTextView
 
     constructor(context: Context) : super(context) {
         initView()
@@ -35,10 +35,10 @@ class TitleTextView2 : ConstraintLayout {
     }
 
     private fun initView() {
-        val infService = Context.LAYOUT_INFLATER_SERVICE;
+        val infService = Context.LAYOUT_INFLATER_SERVICE
         val layoutInflater = context.getSystemService(infService) as LayoutInflater
-        val v = layoutInflater.inflate(R.layout.view_title_textview2, this, false);
-        addView(v)
+        val view = layoutInflater.inflate(R.layout.view_title_textview2, this, false)
+        addView(view)
 
         titleTextView = findViewById(R.id.title)
         textView = findViewById(R.id.text)
@@ -50,11 +50,18 @@ class TitleTextView2 : ConstraintLayout {
         setTypeArray(typedArray)
     }
 
-
     private fun setTypeArray(typedArray: TypedArray) {
         titleTextView.text = typedArray.getString(R.styleable.TitleTextView2_title_text2)
         textView.text = typedArray.getString(R.styleable.TitleTextView2_detail_text2)
         typedArray.recycle()
+    }
+
+    fun setTitleText(text: CharSequence) {
+        titleTextView.text = text
+    }
+
+    fun setText(text: CharSequence) {
+        textView.text = text
     }
 
 }
