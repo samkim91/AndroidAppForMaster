@@ -10,7 +10,6 @@ fun TitleTextView2.setDetailText(text: String?) {
     setText(text ?: "")
 }
 
-
 @BindingAdapter("bind:detail_date")
 fun TitleTextView2.setDetailDate(date: Date?) {
     val simpleDateFormat = SimpleDateFormat("yyyy년 MM월 dd일 hh시 mm분")

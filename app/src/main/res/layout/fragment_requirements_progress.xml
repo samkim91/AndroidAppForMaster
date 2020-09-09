@@ -4,6 +4,13 @@
     xmlns:bind="http://schemas.android.com/bind"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="vm"
+            type="kr.co.soogong.master.ui.requirements.progress.ProgressViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -14,9 +21,9 @@
             android:layout_width="0dp"
             android:layout_height="60dp"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="12dp"
             android:layout_marginEnd="20dp"
-            android:layout_marginBottom="24dp"
+            android:layout_marginBottom="12dp"
             android:backgroundTint="#00c853"
             app:cardCornerRadius="8dp"
             app:cardElevation="2dp"
@@ -42,17 +49,19 @@
 
                 <TextView
                     android:id="@+id/noti_text"
+                    style="@style/medium_text_style.bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
-                    android:text="@string/noti_progress_fragment"
                     android:textColor="@color/basic_white"
-                    style="@style/medium_text_style.bold"
+                    app:layout_constrainedWidth="true"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_chainStyle="packed"
                     app:layout_constraintStart_toEndOf="@id/noti_img"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    bind:progress_Title="@{vm.progressList}"
+                    tools:text="&lt;b&gt;총 %d건&lt;\/b&gt;의 매칭완료 문의가 있습니다!&lt;b&gt;총 %d건&lt;\/b&gt;의 매칭완료 문의가 있습니다!" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
@@ -71,11 +80,31 @@
             android:id="@+id/received_list"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/space"
+            bind:progressList="@{vm.progressList}"
             tools:listitem="@layout/viewholder_progress_item" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/empty_text"
+            style="@style/medium_text_style.regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="진행중인 건이 없습니다."
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            bind:visible="@{vm.emptyList}" />
+
+        <androidx.constraintlayout.widget.Group
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="noti,space"
+            bind:visible="@{!vm.emptyList}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

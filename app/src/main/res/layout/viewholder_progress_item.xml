@@ -1,7 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/bind"
     xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="kr.co.soogong.master.ui.requirements.progress.ProgressCard" />
+
+        <variable
+            name="detail_btn_listener"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="call_btn_listener"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="remove_btn_listener"
+            type="android.view.View.OnClickListener" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -16,6 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:background="@drawable/textview_round_corner"
+            android:text="@{vm.category}"
             android:textColor="@color/app_color"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -27,6 +48,7 @@
             android:layout_height="20dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="5dp"
+            android:src="@drawable/ic_check"
             app:layout_constraintEnd_toStartOf="@id/status_text"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -36,11 +58,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:letterSpacing="-0.01"
+            android:text="매칭완료"
             android:textColor="@color/app_color"
             app:layout_constraintBottom_toBottomOf="@id/status_icon"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/status_icon"
-            tools:text="매칭완료" />
+            app:layout_constraintTop_toTopOf="@id/status_icon" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/location"
@@ -49,6 +71,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:letterSpacing="-0.01"
+            android:text="@{vm.location}"
             android:textColor="@color/primary_text_color"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/type"
@@ -64,6 +87,7 @@
             app:layout_constraintBottom_toBottomOf="@id/location"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/location"
+            bind:received_date="@{vm.date}"
             tools:text="2020년 8월 26일 13시 53분" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -78,6 +102,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/location"
+            bind:received_detail="@{vm.userName}"
             tools:text="홍길동 님이 견적을 수락하셨습니다. 전화하기 버튼을 눌러 상담을 진행해주세요." />
 
         <androidx.appcompat.widget.AppCompatButton
@@ -87,9 +112,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:layout_marginBottom="24dp"
-            android:background="@drawable/detail_button_background_2"
+            android:background="@drawable/detail_button_background"
+            android:onClick="@{detail_btn_listener}"
             android:text="자세히 보기"
-            android:textColor="@color/app_color"
+            android:textColor="@color/tertiary_text_color"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/call_button"
             app:layout_constraintStart_toStartOf="parent"
@@ -104,9 +130,10 @@
             android:layout_marginTop="24dp"
             android:layout_marginBottom="24dp"
             android:background="@drawable/status_button_call_background"
+            android:onClick="@{call_btn_listener}"
             android:text="전화하기"
             android:textColor="@color/basic_white"
-            android:visibility="gone"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/remove_button"
             app:layout_constraintStart_toEndOf="@id/detail_button"
@@ -121,6 +148,7 @@
             android:layout_marginTop="24dp"
             android:layout_marginBottom="24dp"
             android:background="@drawable/status_button_remove_background"
+            android:onClick="@{remove_btn_listener}"
             android:text="삭제하기"
             android:textColor="@color/basic_white"
             android:visibility="gone"
@@ -128,7 +156,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/call_button"
             app:layout_constraintTop_toBottomOf="@id/detail" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

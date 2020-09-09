@@ -1,16 +1,15 @@
-package kr.co.soogong.master.ui.requirements.received.estimate
+package kr.co.soogong.master.ui.requirements.progress
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import kr.co.soogong.master.domain.Repository
 
-class EstimateViewModelFactory(
-    private val repository: Repository,
-    private val receivedCardId: Long
+class ProgressViewModelFactory(
+    private val repository: Repository
 ) : ViewModelProvider.Factory {
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return EstimateViewModel(repository, receivedCardId) as T
+        return ProgressViewModel(repository) as T
     }
 }

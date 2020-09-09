@@ -9,8 +9,11 @@ import retrofit2.http.POST
 import retrofit2.http.Query
 
 interface HttpInterface {
-    @GET("api/v1/transmissions/list")
+    @GET("api/v1/transmissions/default_list")
     fun getRequirementList(@Query("branch_keycode") auth: String): Single<List<RawRequirementItem>>
+
+    @GET("api/v1/transmissions/accept_list")
+    fun getProgressList(@Query("branch_keycode") auth: String): Single<List<RawRequirementItem>>
 
     @POST("api/v1/transmissions/refuse")
     fun refuseRequirement(@Body body: HashMap<String, String>): Single<Response>

@@ -24,8 +24,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.requirements.received.detail.DetailActivity" />
+        <activity android:name=".ui.requirements.received.detail.ReceivedDetailActivity" />
         <activity android:name=".ui.requirements.received.estimate.EstimateActivity" />
+        <activity android:name=".ui.requirements.progress.detail.ProgressDetailActivity" />
 
         <service
             android:name=".SoogongMasterMessagingService"
