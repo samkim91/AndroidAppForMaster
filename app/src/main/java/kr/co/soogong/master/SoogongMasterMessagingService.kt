@@ -12,7 +12,6 @@ import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import kr.co.soogong.master.ui.main.MainActivity
 import timber.log.Timber
-import java.util.*
 
 
 class SoogongMasterMessagingService : FirebaseMessagingService() {
@@ -20,15 +19,16 @@ class SoogongMasterMessagingService : FirebaseMessagingService() {
         Timber.tag(TAG).d("onMessageReceived: from - ${remoteMessage.from}")
         if (remoteMessage.data.isNotEmpty()) {
             Timber.tag(TAG).d("onMessageReceived: data - ${remoteMessage.data}")
-            sendNotification(remoteMessage)
+            sendNotification(remoteMessage.data["title"], remoteMessage.data["body"])
         }
 
         remoteMessage.notification?.let {
             Timber.tag(TAG).d("Message Notification Body: ${it.body}")
+            sendNotification(it.body, it.title)
         }
     }
 
-    private fun sendNotification(remoteMessage: RemoteMessage) {
+    private fun sendNotification(messageTitle: String?, messageBody: String?) {
         val intent = Intent(this, MainActivity::class.java).apply {
             addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         }
@@ -37,10 +37,6 @@ class SoogongMasterMessagingService : FirebaseMessagingService() {
 
         val channelId = getString(R.string.default_notification_channel_id)
         val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
-
-        val messageId = remoteMessage.data["id"]
-        val messageTitle = remoteMessage.data["title"]
-        val messageBody = remoteMessage.data["body"]
 
         val builder = NotificationCompat.Builder(this, channelId).apply {
             setSmallIcon(R.drawable.ic_launcher_foreground)
@@ -65,7 +61,7 @@ class SoogongMasterMessagingService : FirebaseMessagingService() {
         }
 
         notificationManager?.notify(
-            messageId?.toInt() ?: System.currentTimeMillis().toInt(),
+            System.currentTimeMillis().toInt(),
             builder.build()
         )
     }
