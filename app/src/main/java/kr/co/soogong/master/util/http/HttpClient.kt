@@ -91,7 +91,7 @@ object HttpClient {
             .map { list -> list.map { Requirement.from(it) } }
     }
 
-    fun refuseRequirement(keycode: String): Completable {
+    fun refuseRequirement(keycode: String): Single<Response> {
         val data = HashMap<String, String>()
         data["branch_keycode"] = "d3899f668347aa1b"
         data["keycode"] = keycode
@@ -111,5 +111,13 @@ object HttpClient {
         data["contents"] = contents
         data["possible_date"] = possibleDate
         return httpInterface.sendMessage(data)
+    }
+
+    fun updateFCMToken(fcmKey: String): Single<Response> {
+        val data = HashMap<String, String>()
+        data["keycode"] = "d3899f668347aa1b"
+        data["key"] = fcmKey
+
+        return httpInterface.updateFCMToken(data)
     }
 }

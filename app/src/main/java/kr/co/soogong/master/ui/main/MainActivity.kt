@@ -3,9 +3,12 @@ package kr.co.soogong.master.ui.main
 import android.os.Bundle
 import com.google.android.material.tabs.TabLayout
 import com.google.firebase.iid.FirebaseInstanceId
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ActivityMainBinding
 import kr.co.soogong.master.ui.base.BaseActivity
+import kr.co.soogong.master.util.http.HttpClient
 import timber.log.Timber
 
 class MainActivity : BaseActivity<ActivityMainBinding>(
@@ -38,11 +41,20 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
             }
             val token = tasks.result?.token
             Timber.tag(TAG).d("OnCompleteListener: $token")
+            sendRegistrationToServer(token)
+        }
+    }
 
-            // If you want to send messages to this application instance or
-            // manage this apps subscriptions on the server side, send the
-            // Instance ID token to your app server.
-//            sendRegistrationToServer(token);
+    private fun sendRegistrationToServer(token: String?) {
+        token?.let {
+            HttpClient.updateFCMToken(it)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    Timber.tag(TAG).d("sendRegistrationToServer: $it")
+                }, {
+                    Timber.tag(TAG).e("sendRegistrationToServer: $it")
+                })
         }
     }
 

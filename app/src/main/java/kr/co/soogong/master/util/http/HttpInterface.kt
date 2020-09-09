@@ -13,8 +13,11 @@ interface HttpInterface {
     fun getRequirementList(@Query("branch_keycode") auth: String): Single<List<RawRequirementItem>>
 
     @POST("api/v1/transmissions/refuse")
-    fun refuseRequirement(@Body body: HashMap<String, String>): Completable
+    fun refuseRequirement(@Body body: HashMap<String, String>): Single<Response>
 
     @POST("api/v1/transmissions/send_message")
     fun sendMessage(@Body body: HashMap<String, String>): Single<String>
+
+    @POST("api/v1/branches/update_reg_id")
+    fun updateFCMToken(@Body body: HashMap<String, String>): Single<Response>
 }
