@@ -46,10 +46,13 @@ data class Requirement(
     val status: String,
 
     @SerializedName("keycode")
-    val keycode: String
+    val keycode: String,
+
+    @SerializedName("tel")
+    val tel: String
 ) : Parcelable {
     companion object {
-        fun from(rawData: RawRequirementItem): Requirement = Requirement(
+        fun fromReceived(rawData: RawRequirementItem): Requirement = Requirement(
             id = rawData.id.toLong(),
             category = rawData.attributes.category,
             location = "${rawData.attributes.area} ${rawData.attributes.location}",
@@ -58,8 +61,24 @@ data class Requirement(
             content = rawData.attributes.description,
             houseType = rawData.attributes.location_type,
             size = rawData.attributes.location_width,
-            status = rawData.attributes.status,
-            keycode = rawData.attributes.keycode
+            status = "received",
+            keycode = rawData.attributes.keycode,
+            tel = rawData.attributes.tel
         )
+
+        fun fromProgress(rawData: RawRequirementItem): Requirement = Requirement(
+            id = rawData.id.toLong(),
+            category = rawData.attributes.category,
+            location = "${rawData.attributes.area} ${rawData.attributes.location}",
+            date = Date(rawData.attributes.created_at),
+            userName = rawData.attributes.name,
+            content = rawData.attributes.description,
+            houseType = rawData.attributes.location_type,
+            size = rawData.attributes.location_width,
+            status = "progress",
+            keycode = rawData.attributes.keycode,
+            tel = rawData.attributes.tel
+        )
+
     }
 }

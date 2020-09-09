@@ -1,4 +1,4 @@
-package kr.co.soogong.master.ui.requirements.received
+package kr.co.soogong.master.ui.requirements.progress
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -13,19 +13,19 @@ import kr.co.soogong.master.ui.base.BaseViewModel
 import kr.co.soogong.master.util.Event
 import kr.co.soogong.master.util.http.HttpClient
 
-class ReceivedViewModel(private val repository: Repository) : BaseViewModel() {
+class ProgressViewModel(private val repository: Repository) : BaseViewModel() {
     private val _emptyList = MutableLiveData(true)
     val emptyList: LiveData<Boolean>
         get() = _emptyList
 
-    private val _requirementList: LiveData<List<ReceivedCard>> =
+    private val _progressList: LiveData<List<ProgressCard>> =
         repository.getRequirementList().map { list ->
-            val ret = list.filter { it.status == "received" }.map { ReceivedCard.from(it) }
-            
+            val ret = list.filter { it.status == "progress" }.map { ProgressCard.from(it) }
+
             if (ret.isNullOrEmpty()) {
                 _emptyList.value = true
                 updatedBadge(0)
-                return@map emptyList<ReceivedCard>()
+                return@map emptyList<ProgressCard>()
             } else {
                 _emptyList.value = false
                 updatedBadge(ret.size)
@@ -33,19 +33,11 @@ class ReceivedViewModel(private val repository: Repository) : BaseViewModel() {
             }
         }
 
-    val requirementList: LiveData<List<ReceivedCard>>
-        get() = _requirementList
-
-    private val _event = MutableLiveData<Event<Pair<String, Int>>>()
-    val event: LiveData<Event<Pair<String, Int>>>
-        get() = _event
-
-    private fun updatedBadge(badgeCount: Int) {
-        _event.value = Event(BADGE_UPDATE to badgeCount)
-    }
+    val progressList: LiveData<List<ProgressCard>>
+        get() = _progressList
 
     fun requestList() {
-        HttpClient.getRequirementList()
+        HttpClient.getProgressList()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy {
@@ -56,8 +48,16 @@ class ReceivedViewModel(private val repository: Repository) : BaseViewModel() {
             .addToDisposable()
     }
 
+    private val _event = MutableLiveData<Event<Pair<String, Int>>>()
+    val event: LiveData<Event<Pair<String, Int>>>
+        get() = _event
+
+    private fun updatedBadge(badgeCount: Int) {
+        _event.value = Event(BADGE_UPDATE to badgeCount)
+    }
+
     companion object {
-        const val BADGE_UPDATE = "BADGE_UPDATE"
         private const val TAG = "ProgressViewModel"
+        const val BADGE_UPDATE = "BADGE_UPDATE"
     }
 }

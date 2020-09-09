@@ -1,7 +1,6 @@
 package kr.co.soogong.master.util.http
 
 import com.facebook.flipper.plugins.network.FlipperOkhttpInterceptor
-import io.reactivex.Completable
 import io.reactivex.Single
 import kr.co.soogong.master.BuildConfig
 import kr.co.soogong.master.data.requirements.Requirement
@@ -88,7 +87,12 @@ object HttpClient {
 
     fun getRequirementList(): Single<List<Requirement>> {
         return httpInterface.getRequirementList("d3899f668347aa1b")
-            .map { list -> list.map { Requirement.from(it) } }
+            .map { list -> list.map { Requirement.fromReceived(it) } }
+    }
+
+    fun getProgressList(): Single<List<Requirement>> {
+        return httpInterface.getProgressList("d3899f668347aa1b")
+            .map { list -> list.map { Requirement.fromProgress(it) } }
     }
 
     fun refuseRequirement(keycode: String): Single<Response> {

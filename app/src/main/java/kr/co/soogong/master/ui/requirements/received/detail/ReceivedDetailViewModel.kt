@@ -15,7 +15,7 @@ import kr.co.soogong.master.util.http.HttpClient
 import timber.log.Timber
 import java.util.*
 
-class DetailViewModel(
+class ReceivedDetailViewModel(
     private val repository: Repository,
     id: Long
 ) : BaseViewModel() {
@@ -83,12 +83,14 @@ class DetailViewModel(
         HttpClient.refuseRequirement(requirement.keycode)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {
+            .subscribe({
                 viewModelScope.launch {
                     repository.removeRequirement(requirement.id)
                     _event.value = Event(DENIED_EVENT)
                 }
-            }
+            }, {
+                Timber.tag(TAG).e("onClickedDenied: $it")
+            })
             .addToDisposable()
     }
 
