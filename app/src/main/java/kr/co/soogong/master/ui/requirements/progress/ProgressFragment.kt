@@ -32,11 +32,14 @@ class ProgressFragment : BaseFragment<FragmentRequirementsProgressBinding>(
 
         bind {
             receivedList.adapter = ProgressAdapter().apply {
-                detailButtonClick = { id ->
+                detailButtonClick = { keycode ->
                     context.run {
                         startActivity(Intent(this, ProgressDetailActivity::class.java).apply {
                             putExtra(ProgressDetailActivityHelper.EXTRA_KEY_BUNDLE, Bundle().apply {
-                                putLong(ProgressDetailActivityHelper.BUNDLE_KEY_RECEIVED_KEY, id)
+                                putString(
+                                    ProgressDetailActivityHelper.BUNDLE_KEY_RECEIVED_KEY,
+                                    keycode
+                                )
                             })
                         })
                     }
@@ -45,6 +48,10 @@ class ProgressFragment : BaseFragment<FragmentRequirementsProgressBinding>(
                 callButtonClick = { number ->
                     val intent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:$number"))
                     startActivity(intent)
+                }
+
+                removeButtonClick = { keycode ->
+                    Timber.tag(TAG).i("onViewCreated: $keycode")
                 }
             }
 

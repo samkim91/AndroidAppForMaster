@@ -27,15 +27,25 @@ class ReceivedFragment : BaseFragment<FragmentRequirementsReceivedBinding>(
     private var requirementsBadge: RequirementsBadge? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         Timber.tag(TAG).d("onViewCreated: ")
 
+        initLayout()
+
+        registerEventObserve()
+    }
+
+    private fun initLayout() {
         bind {
             receivedList.adapter = ReceivedAdapter().apply {
-                buttonClick = { id ->
+                buttonClick = { keycode ->
                     context.run {
                         startActivity(Intent(this, ReceivedDetailActivity::class.java).apply {
                             putExtra(ReceivedDetailActivityHelper.EXTRA_KEY_BUNDLE, Bundle().apply {
-                                putLong(ReceivedDetailActivityHelper.BUNDLE_KEY_RECEIVED_KEY, id)
+                                putString(
+                                    ReceivedDetailActivityHelper.BUNDLE_KEY_RECEIVED_KEY,
+                                    keycode
+                                )
                             })
                         })
                     }
@@ -52,8 +62,6 @@ class ReceivedFragment : BaseFragment<FragmentRequirementsReceivedBinding>(
         }
 
         requirementsBadge = parentFragment as? RequirementsBadge
-
-        registerEventObserve()
     }
 
     override fun onStart() {

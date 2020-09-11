@@ -48,7 +48,6 @@ class SettingsButton : ConstraintLayout {
         setTypeArray(typedArray)
     }
 
-
     private fun setTypeArray(typedArray: TypedArray) {
         val textString = typedArray.getString(R.styleable.SettingsButton_text)
         textView.text = textString

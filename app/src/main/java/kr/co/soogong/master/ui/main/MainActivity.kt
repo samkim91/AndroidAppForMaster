@@ -47,7 +47,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
 
     private fun sendRegistrationToServer(token: String?) {
         token?.let {
-            HttpClient.updateFCMToken(it)
+            HttpClient.updateFCMToken(fcmKey = it)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({

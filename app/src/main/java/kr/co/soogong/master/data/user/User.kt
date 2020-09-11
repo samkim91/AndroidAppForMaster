@@ -5,12 +5,46 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
-import java.util.*
+import kr.co.soogong.master.data.rawtype.user.RawUser
 
 @Parcelize
 @Entity(tableName = "User")
 data class User(
     @PrimaryKey
-    @SerializedName("id")
-    val id: String = UUID.randomUUID().toString()
-) : Parcelable
+    @SerializedName("keycode")
+    val keycode: String,
+
+    @SerializedName("address")
+    val address: String,
+
+    @SerializedName("average_star_count")
+    val reviewCount: Double,
+
+    @SerializedName("reviews_count")
+    val reviewsCount: Int,
+
+    @SerializedName("categories")
+    val categories: List<String>,
+
+    @SerializedName("description")
+    val description: String,
+
+    @SerializedName("introduction")
+    val introduction: String,
+
+    @SerializedName("name")
+    val name: String
+) : Parcelable {
+    companion object {
+        fun from(rawUser: RawUser): User = User(
+            keycode = rawUser.attributes.keycode,
+            address = rawUser.attributes.address,
+            reviewCount = rawUser.attributes.average_star_count,
+            categories = rawUser.attributes.categories,
+            description = rawUser.attributes.description,
+            introduction = rawUser.attributes.introduction,
+            name = rawUser.attributes.name,
+            reviewsCount = rawUser.attributes.reviews_count
+        )
+    }
+}

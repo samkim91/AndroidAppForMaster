@@ -1,12 +1,9 @@
 package kr.co.soogong.master.util.http
 
-import io.reactivex.Completable
 import io.reactivex.Single
-import kr.co.soogong.master.data.rawtype.RawRequirementItem
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Query
+import kr.co.soogong.master.data.rawtype.requirment.RawRequirementItem
+import kr.co.soogong.master.data.rawtype.user.RawUser
+import retrofit2.http.*
 
 interface HttpInterface {
     @GET("api/v1/transmissions/default_list")
@@ -19,8 +16,11 @@ interface HttpInterface {
     fun refuseRequirement(@Body body: HashMap<String, String>): Single<Response>
 
     @POST("api/v1/transmissions/send_message")
-    fun sendMessage(@Body body: HashMap<String, String>): Single<String>
+    fun sendMessage(@Body body: HashMap<String, String?>): Single<String>
 
     @POST("api/v1/branches/update_reg_id")
     fun updateFCMToken(@Body body: HashMap<String, String>): Single<Response>
+
+    @GET("api/v1/branches/search/{keycode}")
+    fun getUserProfile(@Path("keycode") keycode: String): Single<RawUser>
 }

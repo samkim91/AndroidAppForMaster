@@ -4,7 +4,7 @@ import kr.co.soogong.master.data.requirements.Requirement
 import java.util.*
 
 data class ProgressCard(
-    val id: Long,
+    val keycode: String,
     val category: String,
     val location: String,
     val date: Date,
@@ -13,14 +13,12 @@ data class ProgressCard(
 ) {
     companion object {
         fun from(requirement: Requirement) = ProgressCard(
-            id = requirement.id,
+            keycode = requirement.keycode,
             category = requirement.category,
             location = requirement.location,
             date = requirement.date,
             userName = requirement.userName,
             tel = requirement.tel
         )
-
-        val EMPTY_CARD = ProgressCard(-1, "", "", Date(0), "", "")
     }
 }

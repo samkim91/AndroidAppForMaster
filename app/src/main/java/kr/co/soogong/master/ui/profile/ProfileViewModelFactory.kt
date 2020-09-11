@@ -1,16 +1,15 @@
-package kr.co.soogong.master.ui.requirements.received.detail
+package kr.co.soogong.master.ui.profile
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import kr.co.soogong.master.domain.Repository
 
-class ReceivedDetailViewModelFactory(
-    private val repository: Repository,
-    private val keycode: String
+class ProfileViewModelFactory(
+    private val repository: Repository
 ) : ViewModelProvider.Factory {
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return ReceivedDetailViewModel(repository, keycode) as T
+        return ProfileViewModel(repository) as T
     }
 }

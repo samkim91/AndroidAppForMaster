@@ -5,8 +5,6 @@ import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import androidx.lifecycle.ViewModel
-import kr.co.soogong.master.BR
 
 abstract class BaseActivity<B : ViewDataBinding>(
     @LayoutRes private val layout: Int
@@ -28,5 +26,4 @@ abstract class BaseActivity<B : ViewDataBinding>(
     protected fun <T : ViewDataBinding> bind(binding: T, action: T.() -> Unit) {
         binding.run(action)
     }
-
 }

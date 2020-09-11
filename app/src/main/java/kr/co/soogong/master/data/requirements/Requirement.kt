@@ -3,20 +3,17 @@ package kr.co.soogong.master.data.requirements
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
-import kr.co.soogong.master.data.rawtype.RawRequirementItem
+import kr.co.soogong.master.data.rawtype.requirment.RawRequirementItem
 import java.util.*
-
 
 @Parcelize
 @Entity(tableName = "Requirement")
 data class Requirement(
-    @Expose
-    @PrimaryKey(autoGenerate = true)
-    @SerializedName("id")
-    val id: Long = 0, // 관리용 키 값
+    @PrimaryKey
+    @SerializedName("keycode")
+    val keycode: String,
 
     @SerializedName("category")
     val category: String, // 카테고리
@@ -45,9 +42,6 @@ data class Requirement(
     @SerializedName("status")
     val status: String,
 
-    @SerializedName("keycode")
-    val keycode: String,
-
     @SerializedName("tel")
     val tel: String,
 
@@ -56,7 +50,6 @@ data class Requirement(
 ) : Parcelable {
     companion object {
         fun fromReceived(rawData: RawRequirementItem): Requirement = Requirement(
-            id = rawData.id.toLong(),
             category = rawData.attributes.category,
             location = "${rawData.attributes.area} ${rawData.attributes.location}",
             date = Date(rawData.attributes.created_at),
@@ -70,7 +63,6 @@ data class Requirement(
         )
 
         fun fromProgress(rawData: RawRequirementItem): Requirement = Requirement(
-            id = rawData.id.toLong(),
             category = rawData.attributes.category,
             location = "${rawData.attributes.area} ${rawData.attributes.location}",
             date = Date(rawData.attributes.created_at),

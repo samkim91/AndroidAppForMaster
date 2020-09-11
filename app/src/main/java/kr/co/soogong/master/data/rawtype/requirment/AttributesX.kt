@@ -1,4 +1,4 @@
-package kr.co.soogong.master.data.rawtype
+package kr.co.soogong.master.data.rawtype.requirment
 
 data class AttributesX(
     val accept_count: Int,
