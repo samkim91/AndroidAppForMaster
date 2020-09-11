@@ -51,14 +51,8 @@ data class Requirement(
     @SerializedName("tel")
     val tel: String,
 
-    @SerializedName("price")
-    val price: String? = null,
-
-    @SerializedName("possible_date")
-    val possibleDate: String? = null,
-
-    @SerializedName("contents")
-    val contents: String? = null
+    @SerializedName("estimate")
+    val estimate: Estimate? = null
 ) : Parcelable {
     companion object {
         fun fromReceived(rawData: RawRequirementItem): Requirement = Requirement(
@@ -87,9 +81,11 @@ data class Requirement(
             status = "progress",
             keycode = rawData.attributes.keycode,
             tel = rawData.attributes.tel,
-            price = rawData.attributes.transmissions_list[0].data.attributes.transmissions[0].message.price,
-            possibleDate = rawData.attributes.transmissions_list[0].data.attributes.transmissions[0].message.possible_date,
-            contents = rawData.attributes.transmissions_list[0].data.attributes.transmissions[0].message.contents
+            estimate = Estimate(
+                price = rawData.attributes.transmissions_list[0].data.attributes.transmissions[0].message.price,
+                possibleDate = rawData.attributes.transmissions_list[0].data.attributes.transmissions[0].message.possible_date,
+                contents = rawData.attributes.transmissions_list[0].data.attributes.transmissions[0].message.contents
+            )
         )
 
     }
