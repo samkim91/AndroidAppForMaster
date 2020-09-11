@@ -14,7 +14,7 @@ data class Attributes(
     val location: String,
     val location_type: String,
     val location_width: String,
-    val name: String,
+    val name: String?,
     val status: String,
     val tel: String,
     val transmissions_count: Int,

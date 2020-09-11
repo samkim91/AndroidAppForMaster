@@ -66,16 +66,13 @@ data class Requirement(
             category = rawData.attributes.category,
             location = "${rawData.attributes.area} ${rawData.attributes.location}",
             date = Date(rawData.attributes.created_at),
-            userName = rawData.attributes.name,
+            userName = rawData.attributes.name ?: "고객",
             content = rawData.attributes.description,
             houseType = rawData.attributes.location_type,
             size = rawData.attributes.location_width,
             status = "received",
             keycode = rawData.attributes.keycode,
-            tel = rawData.attributes.tel,
-            price = rawData.attributes.transmissions_list[0].data.attributes.transmissions[0].message.price,
-            possibleDate = rawData.attributes.transmissions_list[0].data.attributes.transmissions[0].message.possible_date,
-            contents = rawData.attributes.transmissions_list[0].data.attributes.transmissions[0].message.contents
+            tel = rawData.attributes.tel
         )
 
         fun fromProgress(rawData: RawRequirementItem): Requirement = Requirement(
@@ -83,7 +80,7 @@ data class Requirement(
             category = rawData.attributes.category,
             location = "${rawData.attributes.area} ${rawData.attributes.location}",
             date = Date(rawData.attributes.created_at),
-            userName = rawData.attributes.name,
+            userName = rawData.attributes.name ?: "고객",
             content = rawData.attributes.description,
             houseType = rawData.attributes.location_type,
             size = rawData.attributes.location_width,

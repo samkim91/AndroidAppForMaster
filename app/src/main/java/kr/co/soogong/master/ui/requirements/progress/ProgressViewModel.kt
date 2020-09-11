@@ -29,7 +29,7 @@ class ProgressViewModel(private val repository: Repository) : BaseViewModel() {
             } else {
                 _emptyList.value = false
                 updatedBadge(ret.size)
-                return@map ret
+                return@map ret.sortedByDescending { it.date }
             }
         }
 
