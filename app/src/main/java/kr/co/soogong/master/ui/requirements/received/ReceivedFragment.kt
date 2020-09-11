@@ -38,11 +38,14 @@ class ReceivedFragment : BaseFragment<FragmentRequirementsReceivedBinding>(
     private fun initLayout() {
         bind {
             receivedList.adapter = ReceivedAdapter().apply {
-                buttonClick = { id ->
+                buttonClick = { keycode ->
                     context.run {
                         startActivity(Intent(this, ReceivedDetailActivity::class.java).apply {
                             putExtra(ReceivedDetailActivityHelper.EXTRA_KEY_BUNDLE, Bundle().apply {
-                                putLong(ReceivedDetailActivityHelper.BUNDLE_KEY_RECEIVED_KEY, id)
+                                putString(
+                                    ReceivedDetailActivityHelper.BUNDLE_KEY_RECEIVED_KEY,
+                                    keycode
+                                )
                             })
                         })
                     }

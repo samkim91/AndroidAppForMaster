@@ -7,8 +7,9 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
 import kr.co.soogong.master.data.requirements.Requirement
+import kr.co.soogong.master.data.requirements.RequirementConverters
 import kr.co.soogong.master.data.user.User
-import kr.co.soogong.master.domain.requirements.RequirementConverters
+import kr.co.soogong.master.data.user.UserConverters
 import kr.co.soogong.master.domain.requirements.RequirementDao
 import kr.co.soogong.master.domain.user.UserDao
 
@@ -17,7 +18,7 @@ import kr.co.soogong.master.domain.user.UserDao
     version = 1,
     exportSchema = false
 )
-@TypeConverters(RequirementConverters::class)
+@TypeConverters(RequirementConverters::class, UserConverters::class)
 abstract class AppDatabase : RoomDatabase() {
 //    abstract fun materialDao(): MaterialDao
 

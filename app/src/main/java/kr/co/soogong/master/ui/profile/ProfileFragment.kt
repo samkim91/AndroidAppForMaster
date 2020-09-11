@@ -8,7 +8,6 @@ import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentProfileBinding
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.getRepository
-import kr.co.soogong.master.ui.requirements.received.ReceivedFragment
 import timber.log.Timber
 
 class ProfileFragment : BaseFragment<FragmentProfileBinding>(

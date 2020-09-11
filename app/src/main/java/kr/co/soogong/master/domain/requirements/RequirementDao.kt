@@ -6,15 +6,14 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import kr.co.soogong.master.data.requirements.Requirement
-import retrofit2.http.DELETE
 
 @Dao
 interface RequirementDao {
     @Query("SELECT * FROM Requirement")
     fun getAllList(): LiveData<List<Requirement>>
 
-    @Query("SELECT * FROM Requirement WHERE id = :id")
-    fun getItem(id: Long): LiveData<Requirement?>
+    @Query("SELECT * FROM Requirement WHERE keycode = :keycode")
+    fun getItem(keycode: String): LiveData<Requirement?>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(requirement: Requirement)
@@ -22,6 +21,6 @@ interface RequirementDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(requirements: List<Requirement>)
 
-    @Query("DELETE FROM Requirement WHERE id = :id")
-    suspend fun remove(id: Long)
+    @Query("DELETE FROM Requirement WHERE keycode = :keycode")
+    suspend fun remove(keycode: String)
 }

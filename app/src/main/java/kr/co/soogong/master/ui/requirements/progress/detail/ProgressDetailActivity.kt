@@ -13,13 +13,13 @@ import timber.log.Timber
 class ProgressDetailActivity : BaseActivity<ActivityProgressDetailBinding>(
     R.layout.activity_progress_detail
 ) {
-    private val requirementId by lazy {
+    private val keycode by lazy {
         intent.getBundleExtra(ProgressDetailActivityHelper.EXTRA_KEY_BUNDLE)
-            ?.getLong(ProgressDetailActivityHelper.BUNDLE_KEY_RECEIVED_KEY, -1) ?: -1
+            ?.getString(ProgressDetailActivityHelper.BUNDLE_KEY_RECEIVED_KEY, "") ?: ""
     }
 
     private val viewModel: ProgressDetailViewModel by viewModels {
-        ProgressDetailViewModelFactory(getRepository(this), requirementId)
+        ProgressDetailViewModelFactory(getRepository(this), keycode)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -4,7 +4,7 @@ import kr.co.soogong.master.data.requirements.Requirement
 import java.util.*
 
 data class ReceivedCard(
-    val id: Long,
+    val keycode: String,
     val category: String,
     val location: String,
     val date: Date,
@@ -12,13 +12,11 @@ data class ReceivedCard(
 ) {
     companion object {
         fun from(requirement: Requirement) = ReceivedCard(
-            id = requirement.id,
+            keycode = requirement.keycode,
             category = requirement.category,
             location = requirement.location,
             date = requirement.date,
             userName = requirement.userName
         )
-
-        val EMPTY_CARD = ReceivedCard(-1, "", "", Date(0), "")
     }
 }

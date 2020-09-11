@@ -1,9 +1,8 @@
-package kr.co.soogong.master.domain.requirements
+package kr.co.soogong.master.data.requirements
 
 import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import kr.co.soogong.master.data.requirements.Estimate
 import java.util.*
 
 class RequirementConverters {

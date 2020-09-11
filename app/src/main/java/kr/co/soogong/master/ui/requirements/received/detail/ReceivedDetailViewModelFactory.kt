@@ -6,11 +6,11 @@ import kr.co.soogong.master.domain.Repository
 
 class ReceivedDetailViewModelFactory(
     private val repository: Repository,
-    private val receivedCardId: Long
+    private val keycode: String
 ) : ViewModelProvider.Factory {
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return ReceivedDetailViewModel(repository, receivedCardId) as T
+        return ReceivedDetailViewModel(repository, keycode) as T
     }
 }

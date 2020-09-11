@@ -3,6 +3,7 @@ package kr.co.soogong.master.util.http
 import com.facebook.flipper.plugins.network.FlipperOkhttpInterceptor
 import io.reactivex.Single
 import kr.co.soogong.master.BuildConfig
+import kr.co.soogong.master.data.requirements.Estimate
 import kr.co.soogong.master.data.requirements.Requirement
 import kr.co.soogong.master.data.user.User
 import kr.co.soogong.master.util.InjectHelper
@@ -92,36 +93,38 @@ object HttpClient {
             .map { list -> list.map { Requirement.fromReceived(it) } }
     }
 
-    fun getProgressList(): Single<List<Requirement>> {
-        return httpInterface.getProgressList("d3899f668347aa1b")
+    fun getProgressList(keycode: String = "d3899f668347aa1b"): Single<List<Requirement>> {
+        return httpInterface.getProgressList(keycode)
             .map { list -> list.map { Requirement.fromProgress(it) } }
     }
 
-    fun refuseRequirement(keycode: String): Single<Response> {
+    fun refuseRequirement(
+        branchKeycode: String = "d3899f668347aa1b",
+        keycode: String
+    ): Single<Response> {
         val data = HashMap<String, String>()
-        data["branch_keycode"] = "d3899f668347aa1b"
+        data["branch_keycode"] = branchKeycode
         data["keycode"] = keycode
         return httpInterface.refuseRequirement(data)
     }
 
     fun sendMessage(
+        branchKeycode: String = "d3899f668347aa1b",
         keycode: String,
-        price: String,
-        contents: String,
-        possibleDate: String
+        estimate: Estimate
     ): Single<String> {
-        val data = HashMap<String, String>()
-        data["branch_keycode"] = "d3899f668347aa1b"
+        val data = HashMap<String, String?>()
+        data["branch_keycode"] = branchKeycode
         data["keycode"] = keycode
-        data["price"] = price
-        data["contents"] = contents
-        data["possible_date"] = possibleDate
+        data["price"] = estimate.price
+        data["contents"] = estimate.contents
+        data["possible_date"] = estimate.possibleDate
         return httpInterface.sendMessage(data)
     }
 
-    fun updateFCMToken(fcmKey: String): Single<Response> {
+    fun updateFCMToken(keycode: String = "d3899f668347aa1b", fcmKey: String): Single<Response> {
         val data = HashMap<String, String>()
-        data["keycode"] = "d3899f668347aa1b"
+        data["keycode"] = keycode
         data["key"] = fcmKey
 
         return httpInterface.updateFCMToken(data)

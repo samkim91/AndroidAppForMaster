@@ -4,7 +4,7 @@ import androidx.recyclerview.widget.DiffUtil
 
 class ProgressCardDiffUtil : DiffUtil.ItemCallback<ProgressCard>() {
     override fun areItemsTheSame(oldItem: ProgressCard, newItem: ProgressCard): Boolean {
-        return oldItem.id == newItem.id
+        return oldItem.keycode == newItem.keycode
     }
 
     override fun areContentsTheSame(oldItem: ProgressCard, newItem: ProgressCard): Boolean {

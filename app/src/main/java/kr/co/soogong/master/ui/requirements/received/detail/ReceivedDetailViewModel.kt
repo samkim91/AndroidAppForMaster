@@ -17,13 +17,10 @@ import java.util.*
 
 class ReceivedDetailViewModel(
     private val repository: Repository,
-    id: Long
+    private val keycode: String
 ) : BaseViewModel() {
 
-    private val _requirement = repository.getRequirement(id).map {
-        Timber.tag(TAG).d(": $it")
-        it
-    }
+    private val _requirement = repository.getRequirement(keycode)
 
     val requirement: LiveData<Requirement?>
         get() = _requirement
@@ -77,15 +74,13 @@ class ReceivedDetailViewModel(
     val event: LiveData<Event<String>>
         get() = _event
 
-    fun onClickedDenied(requirement: Requirement?) {
-        requirement ?: return
-
-        HttpClient.refuseRequirement(requirement.keycode)
+    fun onClickedDenied() {
+        HttpClient.refuseRequirement(keycode = keycode)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 viewModelScope.launch {
-                    repository.removeRequirement(requirement.id)
+                    repository.removeRequirement(keycode)
                     _event.value = Event(DENIED_EVENT)
                 }
             }, {

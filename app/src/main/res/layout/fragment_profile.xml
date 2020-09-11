@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/bind"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="vm"
             type="kr.co.soogong.master.ui.profile.ProfileViewModel" />
@@ -44,20 +46,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
-                app:detail_text="신한벽지"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/master_type"
-                app:title_text="업체명" />
+                app:title_text="업체명"
+                bind:profile_detail_text="@{vm.name}"
+                tools:detail_text="신한벽지" />
 
             <kr.co.soogong.master.ui.widget.TitleTextView
                 android:id="@+id/master_introduction"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
-                app:detail_text="잘 부탁 드립니다!"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/master_store_name"
-                app:title_text="한줄소개" />
+                app:title_text="한줄소개"
+                bind:profile_detail_text="@{vm.introduction}"
+                tools:detail_text="잘 부탁 드립니다!" />
 
             <kr.co.soogong.master.ui.widget.TitleTextView
                 android:id="@+id/master_license_number"

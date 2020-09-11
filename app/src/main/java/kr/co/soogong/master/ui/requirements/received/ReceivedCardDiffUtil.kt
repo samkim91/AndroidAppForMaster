@@ -4,7 +4,7 @@ import androidx.recyclerview.widget.DiffUtil
 
 class ReceivedCardDiffUtil : DiffUtil.ItemCallback<ReceivedCard>() {
     override fun areItemsTheSame(oldItem: ReceivedCard, newItem: ReceivedCard): Boolean {
-        return oldItem.id == newItem.id
+        return oldItem.keycode == newItem.keycode
     }
 
     override fun areContentsTheSame(oldItem: ReceivedCard, newItem: ReceivedCard): Boolean {

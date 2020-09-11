@@ -21,7 +21,7 @@ class ReceivedViewModel(private val repository: Repository) : BaseViewModel() {
     private val _requirementList: LiveData<List<ReceivedCard>> =
         repository.getRequirementList().map { list ->
             val ret = list.filter { it.status == "received" }.map { ReceivedCard.from(it) }
-            
+
             if (ret.isNullOrEmpty()) {
                 _emptyList.value = true
                 updatedBadge(0)
@@ -32,7 +32,6 @@ class ReceivedViewModel(private val repository: Repository) : BaseViewModel() {
                 return@map ret
             }
         }
-
     val requirementList: LiveData<List<ReceivedCard>>
         get() = _requirementList
 

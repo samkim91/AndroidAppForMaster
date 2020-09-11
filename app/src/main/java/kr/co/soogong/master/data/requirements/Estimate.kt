@@ -14,4 +14,4 @@ data class Estimate(
 
     @SerializedName("contents")
     val contents: String?
-): Parcelable
+) : Parcelable

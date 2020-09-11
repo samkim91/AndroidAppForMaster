@@ -9,7 +9,7 @@ import kr.co.soogong.master.databinding.ViewholderReceivedItemBinding
 
 class ReceivedAdapter : ListAdapter<ReceivedCard, ReceivedViewHolder>(ReceivedCardDiffUtil()) {
 
-    lateinit var buttonClick: (Long) -> Unit
+    lateinit var buttonClick: (String) -> Unit
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReceivedViewHolder {
         val binding = DataBindingUtil.inflate<ViewholderReceivedItemBinding>(
@@ -27,7 +27,7 @@ class ReceivedAdapter : ListAdapter<ReceivedCard, ReceivedViewHolder>(ReceivedCa
             vm = item
 
             setDetailBtnListener {
-                buttonClick(item.id)
+                buttonClick(item.keycode)
             }
 
             executePendingBindings()

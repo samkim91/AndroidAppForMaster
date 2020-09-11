@@ -34,4 +34,5 @@ class NonSwipeableViewPager : ViewPager {
     override fun setCurrentItem(item: Int) {
         super.setCurrentItem(item, false)
     }
+
 }

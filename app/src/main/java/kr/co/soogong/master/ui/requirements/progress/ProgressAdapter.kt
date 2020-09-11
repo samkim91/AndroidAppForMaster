@@ -10,8 +10,8 @@ import kr.co.soogong.master.databinding.ViewholderProgressItemBinding
 class ProgressAdapter : ListAdapter<ProgressCard, ProgressViewHolder>(ProgressCardDiffUtil()) {
 
     lateinit var callButtonClick: (String) -> Unit
-    lateinit var detailButtonClick: (Long) -> Unit
-    lateinit var removeButtonClick: (Long) -> Unit
+    lateinit var detailButtonClick: (String) -> Unit
+    lateinit var removeButtonClick: (String) -> Unit
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProgressViewHolder {
         val binding = DataBindingUtil.inflate<ViewholderProgressItemBinding>(
@@ -33,11 +33,11 @@ class ProgressAdapter : ListAdapter<ProgressCard, ProgressViewHolder>(ProgressCa
             }
 
             setDetailBtnListener {
-                detailButtonClick(item.id)
+                detailButtonClick(item.keycode)
             }
 
             setRemoveBtnListener {
-                removeButtonClick(item.id)
+                removeButtonClick(item.keycode)
             }
 
             executePendingBindings()

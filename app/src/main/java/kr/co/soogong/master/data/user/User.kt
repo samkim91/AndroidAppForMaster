@@ -10,10 +10,7 @@ import kr.co.soogong.master.data.rawtype.user.RawUser
 @Parcelize
 @Entity(tableName = "User")
 data class User(
-    @PrimaryKey(autoGenerate = true)
-    @SerializedName("id")
-    val id: Long,
-
+    @PrimaryKey
     @SerializedName("keycode")
     val keycode: String,
 
@@ -40,7 +37,6 @@ data class User(
 ) : Parcelable {
     companion object {
         fun from(rawUser: RawUser): User = User(
-            id = rawUser.id.toLong(),
             keycode = rawUser.attributes.keycode,
             address = rawUser.attributes.address,
             reviewCount = rawUser.attributes.average_star_count,

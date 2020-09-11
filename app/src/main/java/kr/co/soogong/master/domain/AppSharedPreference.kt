@@ -45,7 +45,7 @@ class AppSharedPreference private constructor(
         editor.apply()
     }
 
-    fun getString(key: String, defaultValue: String) : String? =
+    fun getString(key: String, defaultValue: String): String? =
         context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE)
             .getString(key, defaultValue)
 

@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import kr.co.soogong.master.BR
 import kr.co.soogong.master.R
+import kr.co.soogong.master.data.requirements.Estimate
 import kr.co.soogong.master.databinding.ActivityEstimateBinding
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.ui.getRepository
@@ -18,13 +19,13 @@ import timber.log.Timber
 class EstimateActivity : BaseActivity<ActivityEstimateBinding>(
     R.layout.activity_estimate
 ) {
-    private val requirementId by lazy {
+    private val keycode by lazy {
         intent.getBundleExtra(EstimateActivityHelper.EXTRA_KEY_BUNDLE)
-            ?.getLong(EstimateActivityHelper.BUNDLE_KEY_RECEIVED_KEY, -1) ?: -1
+            ?.getString(EstimateActivityHelper.BUNDLE_KEY_RECEIVED_KEY, "") ?: ""
     }
 
     private val viewModel: EstimateViewModel by viewModels {
-        EstimateViewModelFactory(getRepository(this), requirementId)
+        EstimateViewModelFactory(getRepository(this), keycode)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,11 +49,12 @@ class EstimateActivity : BaseActivity<ActivityEstimateBinding>(
             amount.addTextChangedListener(NumberTextWatcher(amount))
 
             setSendClick {
-                viewModel.onClickedSend(
-                    amount.text.toString(),
-                    request.text.toString(),
-                    findViewById<RadioButton>(dateChoice.checkedRadioButtonId).text.toString()
+                val estimate = Estimate(
+                    price = amount.text.toString(),
+                    contents = request.text.toString(),
+                    possibleDate = findViewById<RadioButton>(dateChoice.checkedRadioButtonId).text.toString()
                 )
+                viewModel.onClickedSend(estimate)
             }
         }
 

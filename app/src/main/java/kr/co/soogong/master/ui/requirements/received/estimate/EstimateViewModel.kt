@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import kr.co.soogong.master.data.requirements.Estimate
 import kr.co.soogong.master.data.requirements.Requirement
 import kr.co.soogong.master.domain.Repository
 import kr.co.soogong.master.ui.base.BaseViewModel
@@ -14,18 +15,10 @@ import timber.log.Timber
 
 
 class EstimateViewModel(
-    private val repository: Repository,
-    id: Long
+    repository: Repository,
+    private val keycode: String
 ) : BaseViewModel() {
-    private lateinit var keycode: String
-
-    private val _requirement = repository.getRequirement(id).map {
-        Timber.tag(TAG).d(": $it")
-        it?.let {
-            keycode = it.keycode
-        }
-        it
-    }
+    private val _requirement = repository.getRequirement(keycode)
 
     val requirement: LiveData<Requirement?>
         get() = _requirement
@@ -34,8 +27,8 @@ class EstimateViewModel(
     val event: LiveData<Event<String>>
         get() = _event
 
-    fun onClickedSend(price: String, contents: String, possibleDate: String) {
-        HttpClient.sendMessage(keycode, price, contents, possibleDate)
+    fun onClickedSend(estimate: Estimate) {
+        HttpClient.sendMessage(keycode = keycode, estimate = estimate)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(

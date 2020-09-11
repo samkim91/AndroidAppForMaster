@@ -50,14 +50,24 @@ class TitleTextView : ConstraintLayout {
         setTypeArray(typedArray)
     }
 
-
     private fun setTypeArray(typedArray: TypedArray) {
         titleTextView.text = typedArray.getString(R.styleable.TitleTextView_title_text)
         textView.text = typedArray.getString(R.styleable.TitleTextView_detail_text)
         textView.setBackgroundResource(
-            typedArray.getResourceId(R.styleable.TitleTextView_detail_bg, R.drawable.title_textview_background)
+            typedArray.getResourceId(
+                R.styleable.TitleTextView_detail_bg,
+                R.drawable.title_textview_background
+            )
         )
         typedArray.recycle()
+    }
+
+    fun setTitleText(text: CharSequence) {
+        titleTextView.text = text
+    }
+
+    fun setText(text: CharSequence) {
+        textView.text = text
     }
 
 }

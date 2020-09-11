@@ -18,13 +18,13 @@ import timber.log.Timber
 class ReceivedDetailActivity : BaseActivity<ActivityReceivedDetailBinding>(
     R.layout.activity_received_detail
 ) {
-    private val requirementId by lazy {
+    private val keycode by lazy {
         intent.getBundleExtra(ReceivedDetailActivityHelper.EXTRA_KEY_BUNDLE)
-            ?.getLong(ReceivedDetailActivityHelper.BUNDLE_KEY_RECEIVED_KEY, -1) ?: -1
+            ?.getString(ReceivedDetailActivityHelper.BUNDLE_KEY_RECEIVED_KEY, "") ?: ""
     }
 
     private val viewModel: ReceivedDetailViewModel by viewModels {
-        ReceivedDetailViewModelFactory(getRepository(this), requirementId)
+        ReceivedDetailViewModelFactory(getRepository(this), keycode)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,7 +50,7 @@ class ReceivedDetailActivity : BaseActivity<ActivityReceivedDetailBinding>(
             }
 
             setDeinedClick {
-                viewModel.onClickedDenied(viewModel.requirement.value)
+                viewModel.onClickedDenied()
             }
         }
 
@@ -70,10 +70,7 @@ class ReceivedDetailActivity : BaseActivity<ActivityReceivedDetailBinding>(
                     this.run {
                         startActivity(Intent(this, EstimateActivity::class.java).apply {
                             putExtra(EstimateActivityHelper.EXTRA_KEY_BUNDLE, Bundle().apply {
-                                putLong(
-                                    EstimateActivityHelper.BUNDLE_KEY_RECEIVED_KEY,
-                                    requirementId
-                                )
+                                putString(EstimateActivityHelper.BUNDLE_KEY_RECEIVED_KEY, keycode)
                             })
                         })
                     }
