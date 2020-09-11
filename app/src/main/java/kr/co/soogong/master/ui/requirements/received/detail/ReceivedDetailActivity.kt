@@ -50,7 +50,7 @@ class ReceivedDetailActivity : BaseActivity<ActivityReceivedDetailBinding>(
             }
 
             setDeinedClick {
-                viewModel.onClickedDenied(viewModel.requirement?.value)
+                viewModel.onClickedDenied(viewModel.requirement.value)
             }
         }
 
