@@ -28,8 +28,17 @@ class ProgressFragment : BaseFragment<FragmentRequirementsProgressBinding>(
     private var requirementsBadge: RequirementsBadge? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         Timber.tag(TAG).d("onViewCreated: ")
 
+        initLayout()
+
+        requirementsBadge = parentFragment as? RequirementsBadge
+
+        registerEventObserve()
+    }
+
+    override fun initLayout() {
         bind {
             receivedList.adapter = ProgressAdapter().apply {
                 detailButtonClick = { keycode ->
@@ -63,10 +72,6 @@ class ProgressFragment : BaseFragment<FragmentRequirementsProgressBinding>(
             setVariable(BR.vm, viewModel)
             lifecycleOwner = viewLifecycleOwner
         }
-
-        requirementsBadge = parentFragment as? RequirementsBadge
-
-        registerEventObserve()
     }
 
     override fun onStart() {

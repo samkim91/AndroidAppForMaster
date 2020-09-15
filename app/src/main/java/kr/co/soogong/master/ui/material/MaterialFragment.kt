@@ -13,6 +13,11 @@ class MaterialFragment : BaseFragment<FragmentMaterialBinding>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Timber.tag(TAG).d("onViewCreated: ")
+
+        initLayout()
+    }
+
+    override fun initLayout() {
     }
 
     companion object {

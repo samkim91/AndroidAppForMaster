@@ -18,7 +18,7 @@ class RequirementsFragment : BaseFragment<FragmentRequirementsBinding>(
         initLayout()
     }
 
-    private fun initLayout() {
+    override fun initLayout() {
         Timber.tag(TAG).d("initLayout: ")
         bind {
             with(mainTabs) {

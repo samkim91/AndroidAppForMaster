@@ -9,6 +9,7 @@ import com.facebook.flipper.plugins.inspector.InspectorFlipperPlugin
 import com.facebook.flipper.plugins.navigation.NavigationFlipperPlugin
 import com.facebook.flipper.plugins.network.NetworkFlipperPlugin
 import com.facebook.soloader.SoLoader
+import com.kakao.sdk.common.KakaoSdk
 import kr.co.soogong.master.util.InjectHelper
 import leakcanary.AppWatcher
 import timber.log.Timber
@@ -39,7 +40,7 @@ class SoogongApp : Application() {
         }
 
         InjectHelper.context = applicationContext
-
+        KakaoSdk.init(this, "c1d76e747f0e634712e6e2a511d31505")
         Timber.tag("App").d("onCreate: ${System.currentTimeMillis()}")
     }
 }

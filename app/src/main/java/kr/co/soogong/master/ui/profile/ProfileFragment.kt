@@ -24,7 +24,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
         initLayout()
     }
 
-    private fun initLayout() {
+    override fun initLayout() {
         bind {
             setVariable(BR.vm, viewModel)
             lifecycleOwner = viewLifecycleOwner

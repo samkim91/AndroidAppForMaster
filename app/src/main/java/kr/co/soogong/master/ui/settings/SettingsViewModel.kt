@@ -1,4 +1,4 @@
-package kr.co.soogong.master.ui.profile
+package kr.co.soogong.master.ui.settings
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
@@ -11,30 +11,19 @@ import kr.co.soogong.master.ui.base.BaseViewModel
 import kr.co.soogong.master.util.http.HttpClient
 import timber.log.Timber
 
-class ProfileViewModel(private val repository: Repository) : BaseViewModel() {
+class SettingsViewModel(
+    private val repository: Repository
+) : BaseViewModel() {
     private val _userInfo = repository.getUserInfo("d3899f668347aa1b")
 
-    val name: LiveData<String?>
-        get() = _userInfo.map { it?.name }
+    val name: LiveData<String>
+        get() = _userInfo.map { it?.name ?: "고객님" }
 
-    val introduction: LiveData<String?>
-        get() = _userInfo.map { it?.introduction }
+    val starCount: LiveData<Double>
+        get() = _userInfo.map { it?.starCount ?: 0.0 }
 
-    val address: LiveData<String?>
-        get() = _userInfo.map { it?.address }
-
-    val description: LiveData<String?>
-        get() = _userInfo.map { it?.description }
-
-    val categories: LiveData<List<String>?>
-        get() = _userInfo.map { it?.categories }
-
-    val starCount: LiveData<Double?>
-        get() = _userInfo.map { it?.starCount }
-
-    val reviewsCount: LiveData<Int?>
-        get() = _userInfo.map { it?.reviewsCount }
-
+    val reviewsCount: LiveData<Int>
+        get() = _userInfo.map { it?.reviewsCount ?: 0 }
 
     fun requestUserProfile() {
         HttpClient.getUserProfile()
@@ -52,7 +41,6 @@ class ProfileViewModel(private val repository: Repository) : BaseViewModel() {
     }
 
     companion object {
-        private const val TAG = "ProfileViewModel"
+        private const val TAG = "SettingsViewModel"
     }
-
 }

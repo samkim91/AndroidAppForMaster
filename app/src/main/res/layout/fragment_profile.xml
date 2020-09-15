@@ -78,7 +78,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
-                app:detail_text="서울특별시 강남구 5512"
+                tools:detail_text="서울특별시 강남구 5512"
+                bind:profile_detail_text="@{vm.address}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/master_license_number"
                 app:title_text="주소" />

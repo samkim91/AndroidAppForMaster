@@ -18,7 +18,7 @@ data class User(
     val address: String,
 
     @SerializedName("average_star_count")
-    val reviewCount: Double,
+    val starCount: Double,
 
     @SerializedName("reviews_count")
     val reviewsCount: Int,
@@ -33,18 +33,22 @@ data class User(
     val introduction: String,
 
     @SerializedName("name")
-    val name: String
+    val name: String,
+
+    @SerializedName("positions")
+    val positions: List<String>
 ) : Parcelable {
     companion object {
         fun from(rawUser: RawUser): User = User(
             keycode = rawUser.attributes.keycode,
             address = rawUser.attributes.address,
-            reviewCount = rawUser.attributes.average_star_count,
+            starCount = rawUser.attributes.average_star_count,
             categories = rawUser.attributes.categories,
             description = rawUser.attributes.description,
             introduction = rawUser.attributes.introduction,
             name = rawUser.attributes.name,
-            reviewsCount = rawUser.attributes.reviews_count
+            reviewsCount = rawUser.attributes.reviews_count,
+            positions = rawUser.attributes.positions
         )
     }
 }
