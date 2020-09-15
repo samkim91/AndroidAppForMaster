@@ -3,150 +3,332 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <data>
+
+        <variable
+            name="vm"
+            type="kr.co.soogong.master.ui.settings.SettingsViewModel" />
+
+        <variable
+            name="noticeClick"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="passwordClick"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="alarmClick"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="logoutClick"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="kakaoClick"
+            type="android.view.View.OnClickListener" />
+    </data>
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="20dp">
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/master_profile_img"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_marginTop="20dp"
-            android:src="@drawable/ic_profile_default"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/master_store_name"
-            style="@style/medium_text_style.medium"
-            android:layout_width="0dp"
-            android:layout_height="20dp"
-            android:layout_marginStart="38dp"
-            android:text="신한벽지"
-            android:textColor="@color/primary_text_color"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/master_profile_img"
-            app:layout_constraintTop_toTopOf="@id/master_profile_img" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/master_type"
-            style="@style/medium_text_style.medium"
-            android:layout_width="0dp"
-            android:layout_height="20dp"
-            android:layout_marginStart="38dp"
-            android:layout_marginTop="8dp"
-            android:text="유료(베이직)"
-            android:textColor="@color/primary_text_color"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/master_profile_img"
-            app:layout_constraintTop_toBottomOf="@id/master_store_name" />
+        android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="0dp"
-            android:layout_height="56dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/settings_user_rate"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/master_profile_img"
-            app:layout_constraintTop_toBottomOf="@id/master_type">
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/rate_count_title"
-                style="@style/small_text_style.regular"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="평점"
-                android:textColor="@color/secondary_text_color"
-                app:layout_constraintBottom_toTopOf="@id/rate_count"
-                app:layout_constraintEnd_toStartOf="@id/rate_line"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_chainStyle="packed" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/rate_count"
-                style="@style/medium_text_style.bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:text="4.6"
-                android:textColor="@color/app_color"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/rate_line"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/rate_count_title" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp">
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/rate_line"
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="15dp"
-                android:background="#e0e0e0"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:id="@+id/master_profile_img"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/ic_profile_default"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/review_count_title"
-                style="@style/small_text_style.regular"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="리뷰 수"
-                android:textColor="@color/secondary_text_color"
-                app:layout_constraintBottom_toTopOf="@id/review_count"
+                android:id="@+id/master_store_name"
+                style="@style/medium_text_style.medium"
+                android:layout_width="0dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="38dp"
+                android:text="@{vm.name}"
+                android:textColor="@color/primary_text_color"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/rate_line"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_chainStyle="packed" />
+                app:layout_constraintStart_toEndOf="@id/master_profile_img"
+                app:layout_constraintTop_toTopOf="@id/master_profile_img"
+                tools:text="신한벽지" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/review_count"
-                style="@style/medium_text_style.bold"
+                android:id="@+id/master_type"
+                style="@style/medium_text_style.medium"
+                android:layout_width="0dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="38dp"
+                android:layout_marginTop="8dp"
+                android:text="유료(베이직)"
+                android:textColor="@color/primary_text_color"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/master_profile_img"
+                app:layout_constraintTop_toBottomOf="@id/master_store_name" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/settings_user_rate"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/master_profile_img"
+                app:layout_constraintTop_toBottomOf="@id/master_type">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/rate_count_title"
+                    style="@style/small_text_style.regular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="평점"
+                    android:textColor="@color/secondary_text_color"
+                    app:layout_constraintBottom_toTopOf="@id/rate_count"
+                    app:layout_constraintEnd_toStartOf="@id/rate_line"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_chainStyle="packed" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/rate_count"
+                    style="@style/medium_text_style.bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="@{String.valueOf(vm.starCount)}"
+                    android:textColor="@color/app_color"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/rate_line"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rate_count_title"
+                    tools:text="4.6" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/rate_line"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:background="@color/line_color"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/review_count_title"
+                    style="@style/small_text_style.regular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="리뷰 수"
+                    android:textColor="@color/secondary_text_color"
+                    app:layout_constraintBottom_toTopOf="@id/review_count"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/rate_line"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_chainStyle="packed" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/review_count"
+                    style="@style/medium_text_style.bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="@{String.valueOf(vm.reviewsCount)}"
+                    android:textColor="@color/app_color"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/rate_line"
+                    app:layout_constraintTop_toBottomOf="@id/review_count_title"
+                    tools:text="50" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/notice_title"
+                style="@style/medium_text_style.medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:text="50"
-                android:textColor="@color/app_color"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginTop="35dp"
+                android:text="공지사항"
+                android:textColor="@color/primary_text_color"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/master_profile_img" />
+
+            <include
+                android:id="@+id/notice_new"
+                layout="@layout/view_notice_new"
+                app:layout_constraintBottom_toBottomOf="@id/notice_title"
+                app:layout_constraintStart_toEndOf="@id/notice_title"
+                app:layout_constraintTop_toTopOf="@id/notice_title" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="36dp"
+                android:onClick="@{noticeClick}"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/rate_line"
-                app:layout_constraintTop_toBottomOf="@id/review_count_title" />
+                app:layout_constraintTop_toBottomOf="@id/master_profile_img">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/detail_title"
+                    style="@style/small_text_style.medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="전체보기"
+                    android:textColor="@color/secondary_text_color"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/arrow_button"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/arrow_button"
+                    android:layout_width="20dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_arrow_right"
+                    app:layout_constraintBottom_toBottomOf="@id/detail_title"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/detail_title" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/notice_list"
+                android:layout_width="match_parent"
+                android:layout_height="130dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/line_round_corner"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/notice_title"
+                tools:itemCount="3"
+                tools:listitem="@layout/viewholder_notice_list_item" />
+
+            <kr.co.soogong.master.ui.widget.SettingsButton
+                android:id="@+id/button_find_password"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:onClick="@{passwordClick}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/notice_list"
+                app:text="비밀번호 변경" />
+
+            <kr.co.soogong.master.ui.widget.SettingsButton
+                android:id="@+id/button_setting_alarm"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:onClick="@{alarmClick}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/button_find_password"
+                app:text="알림 설정" />
+
+            <kr.co.soogong.master.ui.widget.SettingsButton
+                android:id="@+id/button_logout"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:onClick="@{logoutClick}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/button_setting_alarm"
+                app:text="로그아웃" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/number_title"
+                style="@style/medium_text_style.medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="대표번호"
+                android:textColor="@color/secondary_text_color"
+                app:layout_constraintBottom_toBottomOf="@id/number"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/number" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/number"
+                style="@style/big_text_style.medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:text="1644-4095"
+                android:textColor="@color/secondary_text_color"
+                app:layout_constraintStart_toEndOf="@id/number_title"
+                app:layout_constraintTop_toBottomOf="@id/button_logout" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/time_title"
+                style="@style/medium_text_style.medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="대표번호"
+                android:textColor="@color/secondary_text_color"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/time" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/time"
+                style="@style/medium_text_style.medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:text="AM 10:00 ~ PM 19:00\n(주말, 공휴일 휴무)"
+                android:textColor="@color/secondary_text_color"
+                app:layout_constraintStart_toEndOf="@id/time_title"
+                app:layout_constraintTop_toBottomOf="@id/number" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/kakao_talk_btn_layout"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@id/time">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/kakao_talk_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/kakao_round_corner"
+                    android:onClick="@{kakaoClick}" />
+
+                <ImageView
+                    android:id="@+id/kakao_talk_btn_icon"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:src="@drawable/kakao_btn"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/kakao_talk_btn_text"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/kakao_talk_btn_text"
+                    style="@style/medium_text_style.bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:text="1:1 문의하기"
+                    android:textColor="#381e1e"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/kakao_talk_btn_icon"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <kr.co.soogong.master.ui.widget.SettingsButton
-            android:id="@+id/button_find_password"
-            android:layout_width="match_parent"
-            android:layout_height="64dp"
-            android:layout_marginTop="25dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/master_profile_img"
-            app:text="비밀번호 변경" />
-
-        <kr.co.soogong.master.ui.widget.SettingsButton
-            android:id="@+id/button_setting_alarm"
-            android:layout_width="match_parent"
-            android:layout_height="64dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/button_find_password"
-            app:text="알림 설정" />
-
-        <kr.co.soogong.master.ui.widget.SettingsButton
-            android:id="@+id/button_logout"
-            android:layout_width="match_parent"
-            android:layout_height="64dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/button_setting_alarm"
-            app:text="로그아웃" />
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </layout>

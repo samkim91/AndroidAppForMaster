@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="14dp"
+        android:layout_height="14dp"
+        android:layout_marginStart="4dp"
+        android:background="@drawable/notice_new_background"
+        app:layout_constraintBottom_toBottomOf="@id/notice_title"
+        app:layout_constraintStart_toEndOf="@id/notice_title"
+        app:layout_constraintTop_toTopOf="@id/notice_title">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="N"
+            android:textColor="@color/basic_white"
+            android:textSize="8sp"
+            android:textStyle="bold" />
+    </FrameLayout>
+</layout>

@@ -35,7 +35,7 @@ class ReceivedFragment : BaseFragment<FragmentRequirementsReceivedBinding>(
         registerEventObserve()
     }
 
-    private fun initLayout() {
+    override fun initLayout() {
         bind {
             receivedList.adapter = ReceivedAdapter().apply {
                 buttonClick = { keycode ->

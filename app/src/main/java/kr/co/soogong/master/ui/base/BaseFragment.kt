@@ -9,7 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 
-open class BaseFragment<B : ViewDataBinding>(
+abstract class BaseFragment<B : ViewDataBinding>(
     @LayoutRes private val layout: Int
 ) : Fragment() {
 
@@ -28,6 +28,8 @@ open class BaseFragment<B : ViewDataBinding>(
     protected fun bind(action: B.() -> Unit) {
         binding.run(action)
     }
+
+    protected abstract fun initLayout()
 
     protected fun <T : ViewDataBinding> bind(binding: T, action: T.() -> Unit) {
         binding.run(action)
