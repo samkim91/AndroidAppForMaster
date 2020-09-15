@@ -1,12 +1,10 @@
 package kr.co.soogong.master.ui.requirements.progress.detail
 
 import android.os.Bundle
-import androidx.activity.viewModels
-import kr.co.soogong.master.BR
+import com.google.android.material.tabs.TabLayout
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ActivityProgressDetailBinding
 import kr.co.soogong.master.ui.base.BaseActivity
-import kr.co.soogong.master.ui.getRepository
 import kr.co.soogong.master.uiinterface.requirments.progress.detail.ProgressDetailActivityHelper
 import timber.log.Timber
 
@@ -18,26 +16,47 @@ class ProgressDetailActivity : BaseActivity<ActivityProgressDetailBinding>(
             ?.getString(ProgressDetailActivityHelper.BUNDLE_KEY_RECEIVED_KEY, "") ?: ""
     }
 
-    private val viewModel: ProgressDetailViewModel by viewModels {
-        ProgressDetailViewModelFactory(getRepository(this), keycode)
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
-        Timber.tag(TAG).d("onCreate: ")
         super.onCreate(savedInstanceState)
+        Timber.tag(TAG).d("onCreate: ")
         initLayout()
     }
 
     private fun initLayout() {
         Timber.tag(TAG).d("initLayout: ")
         bind {
-            setVariable(BR.vm, viewModel)
-            lifecycleOwner = this@ProgressDetailActivity
-            actionBar.apply {
-                title.text = "견적서"
+            with(mainTabs) {
+                addTab(newTab().setText("수리요청서"))
+                addTab(newTab().setText("내가 쓴 견적서"))
+
+                tabGravity = TabLayout.GRAVITY_FILL
+
+                addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+                    override fun onTabReselected(tab: TabLayout.Tab) = Unit
+
+                    override fun onTabUnselected(tab: TabLayout.Tab) = Unit
+
+                    override fun onTabSelected(tab: TabLayout.Tab) {
+                        mainViewPager.currentItem = tab.position
+                    }
+                })
+            }
+
+            with(actionBar) {
+                title.text = "자세히 보기"
                 backButton.setOnClickListener {
                     super.onBackPressed()
                 }
+            }
+
+            with(mainViewPager) {
+                adapter = ProgressPagerAdapter(supportFragmentManager, mainTabs.tabCount, keycode)
+
+                addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(mainTabs))
+
+                swipEnabled = false
+
+                currentItem = 0
             }
         }
     }

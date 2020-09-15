@@ -38,7 +38,7 @@ class ReceivedDetailActivity : BaseActivity<ActivityReceivedDetailBinding>(
         bind {
             setVariable(BR.vm, viewModel)
             lifecycleOwner = this@ReceivedDetailActivity
-            actionBar.apply {
+            with(actionBar) {
                 title.text = "수리요청서"
                 backButton.setOnClickListener {
                     super.onBackPressed()

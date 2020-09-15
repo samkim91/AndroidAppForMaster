@@ -39,7 +39,7 @@ class EstimateActivity : BaseActivity<ActivityEstimateBinding>(
         bind {
             setVariable(BR.vm, viewModel)
             lifecycleOwner = this@EstimateActivity
-            actionBar.apply {
+            with(actionBar) {
                 title.text = "견적서"
                 backButton.setOnClickListener {
                     super.onBackPressed()
