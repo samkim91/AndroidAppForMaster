@@ -1,16 +1,17 @@
-package kr.co.soogong.master.ui.requirements.progress.detail
+package kr.co.soogong.master.ui.requirements.progress.detail.request
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import kr.co.soogong.master.domain.Repository
+import kr.co.soogong.master.ui.requirements.progress.detail.estimate.ProgressEstimateViewModel
 
-class ProgressDetailViewModelFactory(
+class ProgressRequestViewModelFactory(
     private val repository: Repository,
     private val keycode: String
 ) : ViewModelProvider.Factory {
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return ProgressDetailViewModel(repository, keycode) as T
+        return ProgressRequestViewModel(repository, keycode) as T
     }
 }

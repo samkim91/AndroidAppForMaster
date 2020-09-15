@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:bind="http://schemas.android.com/bind"
     xmlns:tools="http://schemas.android.com/tools">
-
-    <data>
-
-        <variable
-            name="vm"
-            type="kr.co.soogong.master.ui.requirements.progress.detail.ProgressDetailViewModel" />
-    </data>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,121 +12,37 @@
             android:id="@+id/action_bar"
             layout="@layout/action_bar" />
 
-        <ScrollView
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/line1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="1dp"
+            android:background="@color/line_color" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="20dp">
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/main_tabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@id/main_view_pager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tabIndicatorColor="@color/primary_text_color"
+            app:tabTextAppearance="@style/CustomTabText"
+            tools:background="@color/app_color" />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/title"
-                    style="@style/big_text_style.bold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:lineSpacingExtra="10sp"
-                    android:textColor="@color/primary_text_color"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    bind:progress_estimate_title="@{vm.requirement}"
-                    tools:text="서울시 관악구 욕실장\n수리 요청에 대한 견적서" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/line2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/line_color" />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/detail"
-                    style="@style/small_text_style.regular"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:lineSpacingExtra="4sp"
-                    android:textColor="@color/secondary_text_color"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/title"
-                    bind:progress_estimate_detail="@{vm.requirement}"
-                    tools:text="아파트 / 10~20평 / 욕실장이 벽에서 떨어졌어요. 새로 욕실장을 설치했으면 좋겠습니다." />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/amount_title"
-                    style="@style/medium_text_style.medium"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="견적금액"
-                    android:textColor="@color/primary_text_color"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/amount" />
-
-                <TextView
-                    android:id="@+id/amount"
-                    style="@style/medium_text_style.bold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="100dp"
-                    android:text="@{vm.requirement.estimate.price}"
-                    android:layout_marginTop="32dp"
-                    android:textColor="@color/app_color"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/detail"
-                    tools:text="1,200,000" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/date_choice_title"
-                    style="@style/medium_text_style.medium"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="시공가능일"
-                    android:textColor="@color/primary_text_color"
-                    app:layout_constraintBottom_toBottomOf="@id/date_choice"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/date_choice" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/date_choice"
-                    style="@style/small_text_style.bold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="34dp"
-                    android:layout_marginStart="100dp"
-                    android:layout_marginTop="32dp"
-                    android:background="@drawable/progress_date_checked"
-                    android:text="@{vm.requirement.estimate.possibleDate}"
-                    android:gravity="center"
-                    android:textColor="@color/basic_white"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/amount"
-                    tools:text="지금 바로" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/request_title"
-                    style="@style/medium_text_style.medium"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="제안 내용"
-                    android:textColor="@color/primary_text_color"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/request" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/request"
-                    style="@style/medium_text_style.regular"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="100dp"
-                    android:layout_marginTop="32dp"
-                    android:lineSpacingExtra="6sp"
-                    android:text="@{vm.requirement.estimate.contents}"
-                    android:minHeight="152dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/date_choice"
-                    tools:text="다른 업체보다 빠르고 정확한 시공을 자신합니다. 시공 후 문제가 생긴다면 책임지고 A/S 해드려요. 연락주시면 더 정확한 안내가 가능합니다람쥐 다람쥐 다르ㅏㅁ두ㅏ다른 업체보다 빠르고 정확한 시공을 자신합니다. 시공 후 문제가 생긴다면 책임지고 A/S 해드려요. 연락주시면 더 정확한 안내가 가능합니다람쥐 다람쥐 다르ㅏㅁ두ㅏ" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </ScrollView>
+        <kr.co.soogong.master.ui.widget.NonSwipeableViewPager
+            android:id="@+id/main_view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/main_tabs" />
     </LinearLayout>
 </layout>

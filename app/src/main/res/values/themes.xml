@@ -144,4 +144,10 @@
     <style name="NotoSansCheckboxStyle" parent="@android:style/Widget.DeviceDefault.CompoundButton.CheckBox">
         <item name="android:fontFamily">@font/regular</item>
     </style>
+
+    <style name="CustomTabText" parent="Widget.MaterialComponents.TabLayout">
+        <item name="android:textSize">@dimen/text_title_size</item>
+        <item name="android:fontFamily">@font/medium</item>
+        <item name="android:textColor">@color/primary_text_color</item>
+    </style>
 </resources>

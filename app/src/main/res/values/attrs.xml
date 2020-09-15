@@ -15,12 +15,4 @@
         <attr name="detail_text2" format="reference|string" />
     </declare-styleable>
 
-    <declare-styleable name="NotoTextView">
-        <attr name="fontweight" format="enum">
-            <enum name="regular" value="0" />
-            <enum name="medium" value="1" />
-            <enum name="bold" value="2" />
-        </attr>
-    </declare-styleable>
-
 </resources>

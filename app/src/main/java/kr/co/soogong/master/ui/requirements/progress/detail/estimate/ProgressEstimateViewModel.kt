@@ -1,11 +1,11 @@
-package kr.co.soogong.master.ui.requirements.progress.detail
+package kr.co.soogong.master.ui.requirements.progress.detail.estimate
 
 import androidx.lifecycle.LiveData
 import kr.co.soogong.master.data.requirements.Requirement
 import kr.co.soogong.master.domain.Repository
 import kr.co.soogong.master.ui.base.BaseViewModel
 
-class ProgressDetailViewModel(
+class ProgressEstimateViewModel(
     repository: Repository,
     keycode: String
 ) : BaseViewModel() {
