@@ -60,7 +60,7 @@
                     app:layout_constraintHorizontal_chainStyle="packed"
                     app:layout_constraintStart_toEndOf="@id/noti_img"
                     app:layout_constraintTop_toTopOf="parent"
-                    bind:progress_Title="@{vm.progressList}"
+                    bind:progress_title="@{vm.progressList}"
                     tools:text="&lt;b&gt;총 %d건&lt;\/b&gt;의 매칭완료 문의가 있습니다!&lt;b&gt;총 %d건&lt;\/b&gt;의 매칭완료 문의가 있습니다!" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -85,7 +85,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/space"
-            bind:progressList="@{vm.progressList}"
+            bind:progress_list="@{vm.progressList}"
             tools:listitem="@layout/viewholder_progress_item" />
 
         <androidx.appcompat.widget.AppCompatTextView

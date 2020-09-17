@@ -14,12 +14,12 @@ import kr.co.soogong.master.R
 import java.text.SimpleDateFormat
 import java.util.*
 
-@BindingAdapter("bind:progressList")
+@BindingAdapter("bind:progress_list")
 fun RecyclerView.setList(items: List<ProgressCard>?) {
     (adapter as? ProgressAdapter)?.submitList(items ?: emptyList())
 }
 
-@BindingAdapter("bind:progress_Title")
+@BindingAdapter("bind:progress_title")
 fun TextView.setDetailText(list: List<ProgressCard>?) {
     val value = context.getString(R.string.noti_progress_fragment)
     val total = "총 ${list?.size ?: 0}건"
@@ -30,17 +30,11 @@ fun TextView.setDetailText(list: List<ProgressCard>?) {
 }
 
 @BindingAdapter("bind:progress_detail")
-fun TextView.setDetailText(userName: String) {
+fun TextView.setProgressDetailText(userName: String) {
     val value = context.getString(R.string.progress_detail_viewholder)
 
     text = SpannableString("$userName $value").apply {
         setSpan(StyleSpan(Typeface.BOLD), 0, userName.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         setSpan(RelativeSizeSpan(1.1f), 0, userName.length, 0)
     }
-}
-
-@BindingAdapter("bind:progress_date")
-fun TextView.setDateTime(date: Date) {
-    val simpleDateFormat = SimpleDateFormat("yyyy. MM. dd hh:mm")
-    text = simpleDateFormat.format(date)
 }

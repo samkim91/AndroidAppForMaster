@@ -63,7 +63,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/space"
-            bind:receivedList="@{vm.requirementList}"
+            bind:received_list="@{vm.requirementList}"
             tools:listitem="@layout/viewholder_received_item" />
 
         <androidx.appcompat.widget.AppCompatTextView

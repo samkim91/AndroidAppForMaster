@@ -49,7 +49,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/master_type"
                 app:title_text="업체명"
-                bind:profile_detail_text="@{vm.name}"
+                bind:detail_text="@{vm.name}"
                 tools:detail_text="신한벽지" />
 
             <kr.co.soogong.master.ui.widget.TitleTextView
@@ -60,7 +60,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/master_store_name"
                 app:title_text="한줄소개"
-                bind:profile_detail_text="@{vm.introduction}"
+                bind:detail_text="@{vm.introduction}"
                 tools:detail_text="잘 부탁 드립니다!" />
 
             <kr.co.soogong.master.ui.widget.TitleTextView
@@ -79,7 +79,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
                 tools:detail_text="서울특별시 강남구 5512"
-                bind:profile_detail_text="@{vm.address}"
+                bind:detail_text="@{vm.address}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/master_license_number"
                 app:title_text="주소" />

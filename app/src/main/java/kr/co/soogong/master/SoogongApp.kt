@@ -40,7 +40,7 @@ class SoogongApp : Application() {
         }
 
         InjectHelper.context = applicationContext
-        KakaoSdk.init(this, "c1d76e747f0e634712e6e2a511d31505")
+        KakaoSdk.init(this, BuildConfig.KAKAO_KEY_CODE)
         Timber.tag("App").d("onCreate: ${System.currentTimeMillis()}")
     }
 }

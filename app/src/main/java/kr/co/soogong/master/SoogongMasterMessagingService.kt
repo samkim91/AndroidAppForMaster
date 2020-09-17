@@ -13,7 +13,6 @@ import com.google.firebase.messaging.RemoteMessage
 import kr.co.soogong.master.ui.main.MainActivity
 import timber.log.Timber
 
-
 class SoogongMasterMessagingService : FirebaseMessagingService() {
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         Timber.tag(TAG).d("onMessageReceived: from - ${remoteMessage.from}")
@@ -24,7 +23,7 @@ class SoogongMasterMessagingService : FirebaseMessagingService() {
 
         remoteMessage.notification?.let {
             Timber.tag(TAG).d("Message Notification Body: ${it.body}")
-            sendNotification(it.body, it.title)
+            sendNotification(it.title, it.body)
         }
     }
 

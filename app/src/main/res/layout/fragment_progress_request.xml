@@ -65,7 +65,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/location"
                         app:title_text2="접수일시"
-                        bind:progress_request_detail_date="@{vm.date}"
+                        bind:detail_date_text="@{vm.date}"
                         tools:detail_text2="2020년 8월 26일 13시 53분" />
 
                     <kr.co.soogong.master.ui.widget.TitleTextView2
@@ -77,7 +77,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/date"
                         app:title_text2="고객명"
-                        bind:progress_request_detail_text="@{vm.userName}"
+                        bind:detail_text="@{vm.userName}"
                         tools:detail_text2="홍길동" />
 
                     <kr.co.soogong.master.ui.widget.TitleTextView2
@@ -89,7 +89,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/name"
                         app:title_text2="장소유형"
-                        bind:progress_request_detail_text="@{vm.houseType}"
+                        bind:detail_text="@{vm.houseType}"
                         tools:detail_text2="아파트" />
 
                     <kr.co.soogong.master.ui.widget.TitleTextView2
@@ -101,7 +101,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/type"
                         app:title_text2="평수"
-                        bind:progress_request_detail_text="@{vm.size}"
+                        bind:detail_text="@{vm.size}"
                         tools:detail_text2="10~20평" />
 
                     <kr.co.soogong.master.ui.widget.TitleTextView2
@@ -113,7 +113,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/size"
                         app:title_text2="요청사항"
-                        bind:progress_request_detail_text="@{vm.content}"
+                        bind:detail_text="@{vm.content}"
                         tools:detail_text2="욕실장이 벽에서 떨어졌어요. 새로 욕실장을 설치했으면 좋겠습니다." />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>

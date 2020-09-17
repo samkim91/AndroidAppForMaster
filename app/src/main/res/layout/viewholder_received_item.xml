@@ -58,7 +58,7 @@
             app:layout_constraintBottom_toBottomOf="@id/location"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/location"
-            bind:received_date="@{vm.date}"
+            bind:date_text="@{vm.date}"
             tools:text="2020년 8월 26일 13시 53분" />
 
         <androidx.appcompat.widget.AppCompatTextView

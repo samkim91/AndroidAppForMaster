@@ -87,7 +87,7 @@
             app:layout_constraintBottom_toBottomOf="@id/location"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/location"
-            bind:received_date="@{vm.date}"
+            bind:date_text="@{vm.date}"
             tools:text="2020년 8월 26일 13시 53분" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -102,7 +102,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/location"
-            bind:received_detail="@{vm.userName}"
+            bind:progress_detail="@{vm.userName}"
             tools:text="홍길동 님이 견적을 수락하셨습니다. 전화하기 버튼을 눌러 상담을 진행해주세요." />
 
         <androidx.appcompat.widget.AppCompatButton

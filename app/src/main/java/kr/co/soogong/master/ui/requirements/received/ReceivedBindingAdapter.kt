@@ -11,10 +11,8 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import kr.co.soogong.master.R
-import java.text.SimpleDateFormat
-import java.util.*
 
-@BindingAdapter("bind:receivedList")
+@BindingAdapter("bind:received_list")
 fun RecyclerView.setList(items: List<ReceivedCard>?) {
     (adapter as? ReceivedAdapter)?.submitList(items ?: emptyList())
 }
@@ -27,10 +25,4 @@ fun TextView.setDetailText(userName: String) {
         setSpan(StyleSpan(Typeface.BOLD), 0, userName.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         setSpan(RelativeSizeSpan(1.1f), 0, userName.length, 0)
     }
-}
-
-@BindingAdapter("bind:received_date")
-fun TextView.setDateTime(date: Date) {
-    val simpleDateFormat = SimpleDateFormat("yyyy. MM. dd hh:mm")
-    text = simpleDateFormat.format(date)
 }
