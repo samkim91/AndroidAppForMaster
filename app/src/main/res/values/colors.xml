@@ -51,4 +51,6 @@
     <color name="received_detail">#616161</color>
 
     <color name="detail_button_color">#bdbdbd</color>
+    <color name="sign_main_background_color">#e8eaea</color>
+    <color name="sign_up_button_color">#b3ffffff</color>
 </resources>

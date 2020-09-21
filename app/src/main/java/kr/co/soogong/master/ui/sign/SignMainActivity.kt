@@ -1,0 +1,39 @@
+package kr.co.soogong.master.ui.sign
+
+import android.content.Intent
+import android.os.Bundle
+import kr.co.soogong.master.R
+import kr.co.soogong.master.databinding.ActivitySignMainBinding
+import kr.co.soogong.master.ui.base.BaseActivity
+import kr.co.soogong.master.ui.sign.signin.SignInActivity
+import kr.co.soogong.master.ui.sign.signup.SignUpActivity
+import timber.log.Timber
+
+class SignMainActivity : BaseActivity<ActivitySignMainBinding>(
+    R.layout.activity_sign_main
+) {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        Timber.tag(TAG).d("onCreate: ")
+        initLayout()
+    }
+
+    private fun initLayout() {
+        Timber.tag(TAG).d("initLayout: ")
+        bind {
+            setSignInClick {
+                Timber.tag(TAG).d("initLayout: SignInClick")
+                startActivity(Intent(this@SignMainActivity, SignInActivity::class.java))
+            }
+
+            setSignUpClick {
+                Timber.tag(TAG).d("initLayout: SignUpClick")
+                startActivity(Intent(this@SignMainActivity, SignUpActivity::class.java))
+            }
+        }
+    }
+
+    companion object {
+        private const val TAG = "SignMainActivity"
+    }
+}
