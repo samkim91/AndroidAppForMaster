@@ -11,6 +11,7 @@ localProperties.load(new FileInputStream(rootProject.file("local.properties")))
 
 android {
     compileSdkVersion rootProject.compileSdkVersion
+    ndkVersion "21.3.6528147"
 
     defaultConfig {
         applicationId "kr.co.soogong.master"
