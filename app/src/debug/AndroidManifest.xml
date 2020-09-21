@@ -5,7 +5,8 @@
 
     <application
         android:name=".DebugSoogongApp"
-        tools:replace="android:name">
+        android:label="Debug App"
+        tools:replace="android:name, android:label">
 
         <activity
             android:name="com.facebook.flipper.android.diagnostics.FlipperDiagnosticActivity"
