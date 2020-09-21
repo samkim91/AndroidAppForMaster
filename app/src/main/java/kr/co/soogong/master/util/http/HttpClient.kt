@@ -1,6 +1,5 @@
 package kr.co.soogong.master.util.http
 
-import com.facebook.flipper.plugins.network.FlipperOkhttpInterceptor
 import io.reactivex.Single
 import kr.co.soogong.master.BuildConfig
 import kr.co.soogong.master.data.requirements.Estimate
@@ -38,7 +37,7 @@ object HttpClient {
     }
 
     private fun updateHttpClient() {
-        okHttpClient = getOkHttpClient()
+        okHttpClient = InjectHelper.getOkHttpClient()
         httpInterface = Retrofit.Builder()
             .client(okHttpClient)
             .baseUrl(URL)
@@ -46,46 +45,6 @@ object HttpClient {
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build()
             .create(HttpInterface::class.java)
-    }
-
-    private fun getOkHttpClient(): OkHttpClient {
-        val logInterceptor = HttpLoggingInterceptor()
-        if (BuildConfig.DEBUG) {
-            logInterceptor.level = HttpLoggingInterceptor.Level.BODY
-        } else {
-            logInterceptor.level = HttpLoggingInterceptor.Level.NONE
-        }
-
-        val authInterceptor = Interceptor { chain ->
-            val newUrl = chain.request().url
-                .newBuilder()
-                .build()
-
-            val newRequest = chain.request()
-                .newBuilder()
-                .url(newUrl)
-                .build()
-
-            chain.proceed(newRequest)
-        }
-
-        val httpCacheDirectory = File(InjectHelper.context?.cacheDir, "http")
-        val cacheSize = 32 * 1024 * 1024L
-        val networkFlipperPlugin = InjectHelper.networkFlipperPlugin
-        val client = OkHttpClient.Builder()
-            .cache(Cache(httpCacheDirectory, cacheSize))
-            .connectTimeout(10, TimeUnit.SECONDS)
-            .readTimeout(20, TimeUnit.SECONDS)
-            .writeTimeout(20, TimeUnit.SECONDS)
-            .retryOnConnectionFailure(true)
-            .addInterceptor(logInterceptor)
-            .addInterceptor(authInterceptor)
-            .addInterceptor(FlipperOkhttpInterceptor(networkFlipperPlugin))
-            .build()
-
-        client.dispatcher.maxRequests = 16
-
-        return client
     }
 
     fun getRequirementList(keycode: String = "d3899f668347aa1b"): Single<List<Requirement>> {
