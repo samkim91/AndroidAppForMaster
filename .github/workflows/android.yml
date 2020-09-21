@@ -13,6 +13,21 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - name: Android NDK toolchain Setup
+      # You may pin to the exact commit or the version.
+      # uses: ravinderjangra/android-ndk-toolchain-setup@88bfbd8e61af597832637fb9d2f81a7cc68d1331
+      uses: ravinderjangra/android-ndk-toolchain-setup@0.2
+      with:
+        # Android API
+        api: 21 # default is 21
+        # Platform arch
+        arch: 'x86'
+        # Path to use for NDK toolchain
+        install-location: 'toolchains'
+        # Force install toolchain
+        force: false # optional, default is false
+        # Add toolchain to the path
+        add-to-path: true # optional, default is true
     - name: set up JDK 1.8
       uses: actions/setup-java@v1
       with:
