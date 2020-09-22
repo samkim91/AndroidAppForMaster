@@ -6,12 +6,12 @@ import androidx.lifecycle.viewModelScope
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.launch
+import kr.co.soogong.master.domain.AppSharedPreferenceHelper
 import kr.co.soogong.master.domain.Repository
 import kr.co.soogong.master.ui.base.BaseViewModel
 import kr.co.soogong.master.util.InjectHelper
 import kr.co.soogong.master.util.http.HttpClient
 import timber.log.Timber
-import javax.inject.Inject
 
 class SettingsViewModel(
     private val repository: Repository
@@ -40,6 +40,17 @@ class SettingsViewModel(
                 Timber.tag(TAG).e("requestUserProfile: $it")
             })
             .addToDisposable()
+    }
+
+    fun actionLogout() {
+        viewModelScope.launch {
+            repository.removeAllRequirement()
+            repository.removeAllUserInfo()
+            repository.setString(AppSharedPreferenceHelper.BRANCH_KEYCODE, "")
+
+            complete()
+        }
+
     }
 
     companion object {

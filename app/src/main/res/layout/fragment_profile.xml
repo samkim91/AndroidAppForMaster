@@ -36,10 +36,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
-                app:detail_text="유료(베이직)"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/user_profile_img"
-                app:title_text="마스터유형" />
+                app:title_text="마스터유형"
+                tools:detail_text="유료(베이직)" />
 
             <kr.co.soogong.master.ui.widget.TitleTextView
                 android:id="@+id/master_store_name"
@@ -68,21 +68,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
-                app:detail_text="123-123-123"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/master_introduction"
-                app:title_text="사업자등록번호" />
+                app:title_text="사업자등록번호"
+                tools:detail_text="123-123-123" />
 
             <kr.co.soogong.master.ui.widget.TitleTextView
                 android:id="@+id/master_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
-                tools:detail_text="서울특별시 강남구 5512"
-                bind:detail_text="@{vm.address}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/master_license_number"
-                app:title_text="주소" />
+                app:title_text="주소"
+                bind:detail_text="@{vm.address}"
+                tools:detail_text="서울특별시 강남구 5512" />
 
             <TextView
                 android:id="@+id/master_address_sub"
@@ -142,6 +142,7 @@
                 android:layout_height="wrap_content"
                 android:text="추가지역"
                 android:textColor="@color/secondary_text_color"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="@id/master_setting_address_sub"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@id/master_setting_address_sub" />
@@ -156,6 +157,7 @@
                 android:background="@drawable/title_textview_background"
                 android:gravity="center"
                 android:textColor="@color/primary_text_color"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/master_setting_address_sub_title"
                 app:layout_constraintTop_toBottomOf="@id/master_setting_address_primary"
@@ -171,6 +173,7 @@
                 android:background="@drawable/title_textview_background"
                 android:gravity="center"
                 android:textColor="@color/primary_text_color"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/master_setting_address_sub_title"
                 app:layout_constraintTop_toBottomOf="@id/master_setting_address_sub"
