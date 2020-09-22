@@ -12,6 +12,7 @@ import kr.co.soogong.master.databinding.ActivityEstimateBinding
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.ui.getRepository
 import kr.co.soogong.master.ui.main.MainActivity
+import kr.co.soogong.master.ui.utils.NumberTextWatcher
 import kr.co.soogong.master.uiinterface.requirments.received.estimate.EstimateActivityHelper
 import kr.co.soogong.master.util.EventObserver
 import timber.log.Timber

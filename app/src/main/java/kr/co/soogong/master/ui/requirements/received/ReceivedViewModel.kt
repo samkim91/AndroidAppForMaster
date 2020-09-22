@@ -11,6 +11,7 @@ import kotlinx.coroutines.launch
 import kr.co.soogong.master.domain.Repository
 import kr.co.soogong.master.ui.base.BaseViewModel
 import kr.co.soogong.master.util.Event
+import kr.co.soogong.master.util.InjectHelper
 import kr.co.soogong.master.util.http.HttpClient
 
 class ReceivedViewModel(private val repository: Repository) : BaseViewModel() {
@@ -44,7 +45,7 @@ class ReceivedViewModel(private val repository: Repository) : BaseViewModel() {
     }
 
     fun requestList() {
-        HttpClient.getRequirementList()
+        HttpClient.getRequirementList(InjectHelper.keyCode)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy {

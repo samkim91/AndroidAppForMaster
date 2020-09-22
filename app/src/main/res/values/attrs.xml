@@ -15,4 +15,16 @@
         <attr name="detail_text2" format="reference|string" />
     </declare-styleable>
 
+    <declare-styleable name="TitleEditTextView">
+        <attr name="title_edit_title_text" format="reference|string" />
+        <attr name="title_edit_detail_text" format="reference|string" />
+        <attr name="title_edit_hint_text" format="reference|string" />
+        <attr name="title_edit_hint_visible" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="TitleSwitchCompat">
+        <attr name="title_switch_title_text" format="reference|string" />
+        <attr name="title_switch_state" format="boolean" />
+    </declare-styleable>
+
 </resources>

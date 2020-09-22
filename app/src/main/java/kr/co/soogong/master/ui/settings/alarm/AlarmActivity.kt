@@ -12,6 +12,20 @@ class AlarmActivity : BaseActivity<ActivityAlarmBinding>(
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Timber.tag(TAG).d("onCreate: ")
+        initLayout()
+    }
+
+    private fun initLayout() {
+        Timber.tag(TAG).d("initLayout: ")
+
+        bind {
+            with(actionBar) {
+                title.text = "알림 설정"
+                backButton.setOnClickListener {
+                    super.onBackPressed()
+                }
+            }
+        }
     }
 
     companion object {

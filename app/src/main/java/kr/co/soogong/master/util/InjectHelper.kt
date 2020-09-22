@@ -29,6 +29,8 @@ object InjectHelper {
             weakReferenceInterceptor = WeakReference(context)
         }
 
+    var keyCode: String? = null
+
     fun getOkHttpClient(): OkHttpClient {
         val logInterceptor = HttpLoggingInterceptor()
         if (BuildConfig.DEBUG) {

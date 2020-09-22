@@ -8,6 +8,7 @@ import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ActivityMainBinding
 import kr.co.soogong.master.ui.base.BaseActivity
+import kr.co.soogong.master.util.InjectHelper
 import kr.co.soogong.master.util.http.HttpClient
 import timber.log.Timber
 
@@ -47,7 +48,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
 
     private fun sendRegistrationToServer(token: String?) {
         token?.let {
-            HttpClient.updateFCMToken(fcmKey = it)
+            HttpClient.updateFCMToken(InjectHelper.keyCode, fcmKey = it)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({

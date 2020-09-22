@@ -7,20 +7,20 @@ import retrofit2.http.*
 
 interface HttpInterface {
     @GET("api/v1/transmissions/default_list")
-    fun getRequirementList(@Query("branch_keycode") auth: String): Single<List<RawRequirementItem>>
+    fun getRequirementList(@Query("branch_keycode") auth: String?): Single<List<RawRequirementItem>>
 
     @GET("api/v1/transmissions/accept_list")
-    fun getProgressList(@Query("branch_keycode") auth: String): Single<List<RawRequirementItem>>
+    fun getProgressList(@Query("branch_keycode") auth: String?): Single<List<RawRequirementItem>>
 
     @POST("api/v1/transmissions/refuse")
-    fun refuseRequirement(@Body body: HashMap<String, String>): Single<Response>
+    fun refuseRequirement(@Body body: HashMap<String, String?>): Single<Response>
 
     @POST("api/v1/transmissions/send_message")
     fun sendMessage(@Body body: HashMap<String, String?>): Single<String>
 
     @POST("api/v1/branches/update_reg_id")
-    fun updateFCMToken(@Body body: HashMap<String, String>): Single<Response>
+    fun updateFCMToken(@Body body: HashMap<String, String?>): Single<Response>
 
     @GET("api/v1/branches/search/{keycode}")
-    fun getUserProfile(@Path("keycode") keycode: String): Single<RawUser>
+    fun getUserProfile(@Path("keycode") keycode: String?): Single<RawUser>
 }

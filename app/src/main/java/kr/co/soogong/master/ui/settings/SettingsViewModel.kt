@@ -8,8 +8,10 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.launch
 import kr.co.soogong.master.domain.Repository
 import kr.co.soogong.master.ui.base.BaseViewModel
+import kr.co.soogong.master.util.InjectHelper
 import kr.co.soogong.master.util.http.HttpClient
 import timber.log.Timber
+import javax.inject.Inject
 
 class SettingsViewModel(
     private val repository: Repository
@@ -26,7 +28,7 @@ class SettingsViewModel(
         get() = _userInfo.map { it?.reviewsCount ?: 0 }
 
     fun requestUserProfile() {
-        HttpClient.getUserProfile()
+        HttpClient.getUserProfile(InjectHelper.keyCode)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ userInfo ->

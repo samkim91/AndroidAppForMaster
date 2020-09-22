@@ -11,6 +11,7 @@ import kr.co.soogong.master.data.requirements.Requirement
 import kr.co.soogong.master.domain.Repository
 import kr.co.soogong.master.ui.base.BaseViewModel
 import kr.co.soogong.master.util.Event
+import kr.co.soogong.master.util.InjectHelper
 import kr.co.soogong.master.util.http.HttpClient
 import timber.log.Timber
 import java.util.*
@@ -75,7 +76,7 @@ class ReceivedDetailViewModel(
         get() = _event
 
     fun onClickedDenied() {
-        HttpClient.refuseRequirement(keycode = keycode)
+        HttpClient.refuseRequirement(branchKeycode = InjectHelper.keyCode, keycode = keycode)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
