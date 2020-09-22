@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/action_bar"
+            layout="@layout/action_bar" />
+
+        <kr.co.soogong.master.ui.widget.TitleSwitchCompat
+            android:id="@+id/app_push_alarm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            app:title_switch_title_text="앱 푸시 알림" />
+
+        <kr.co.soogong.master.ui.widget.TitleSwitchCompat
+            android:id="@+id/kakao_alarm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            app:title_switch_title_text="카카오톡 알림" />
+
+        <kr.co.soogong.master.ui.widget.TitleSwitchCompat
+            android:id="@+id/sms_alarm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            app:title_switch_title_text="문자 알림" />
+    </LinearLayout>
+</layout>

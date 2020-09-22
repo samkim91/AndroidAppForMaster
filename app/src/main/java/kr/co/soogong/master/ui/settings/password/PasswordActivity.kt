@@ -1,0 +1,46 @@
+package kr.co.soogong.master.ui.settings.password
+
+import android.os.Bundle
+import kr.co.soogong.master.R
+import kr.co.soogong.master.databinding.ActivityPasswordBinding
+import kr.co.soogong.master.ui.base.BaseActivity
+import timber.log.Timber
+
+class PasswordActivity : BaseActivity<ActivityPasswordBinding>(
+    R.layout.activity_password
+) {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        Timber.tag(TAG).d("onCreate: ")
+        initLayout()
+    }
+
+    private fun initLayout() {
+        Timber.tag(TAG).d("initLayout: ")
+
+        bind {
+            with(actionBar) {
+                title.text = "비밀번호 변경"
+                backButton.setOnClickListener {
+                    super.onBackPressed()
+                }
+            }
+
+            setChangeClick {
+                val password1 = inputPassword.getText()
+                val password2 = inputPasswordCheck.getText()
+
+                if (password1 != password2) {
+                    inputPasswordCheck.setHintVisible(visible = true)
+                } else {
+                    inputPassword.setHintVisible(visible = false)
+                    inputPasswordCheck.setHintVisible(visible = false)
+                }
+            }
+        }
+    }
+
+    companion object {
+        private const val TAG = "PasswordActivity"
+    }
+}

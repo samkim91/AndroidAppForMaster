@@ -53,4 +53,6 @@
     <color name="detail_button_color">#bdbdbd</color>
     <color name="sign_main_background_color">#e8eaea</color>
     <color name="sign_up_button_color">#b3ffffff</color>
+
+    <color name="hint_text_color">#f57c00</color>
 </resources>

@@ -15,7 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.sign.signin.find.FindInfoActivity"></activity>
+        <activity android:name=".ui.sign.signin.find.FindInfoActivity" />
         <activity android:name=".ui.sign.signin.SignInActivity" />
         <activity android:name=".ui.sign.signup.SignUpActivity" />
         <activity
@@ -33,6 +33,9 @@
         <activity android:name=".ui.requirements.received.detail.ReceivedDetailActivity" />
         <activity android:name=".ui.requirements.received.estimate.EstimateActivity" />
         <activity android:name=".ui.requirements.progress.detail.ProgressDetailActivity" />
+        <activity android:name=".ui.settings.alarm.AlarmActivity" />
+        <activity android:name=".ui.settings.password.PasswordActivity" />
+        <activity android:name=".ui.settings.notice.NoticeActivity" />
 
         <service
             android:name=".SoogongMasterMessagingService"

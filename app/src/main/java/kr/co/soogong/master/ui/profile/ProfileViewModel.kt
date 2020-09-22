@@ -8,6 +8,7 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.launch
 import kr.co.soogong.master.domain.Repository
 import kr.co.soogong.master.ui.base.BaseViewModel
+import kr.co.soogong.master.util.InjectHelper
 import kr.co.soogong.master.util.http.HttpClient
 import timber.log.Timber
 
@@ -37,7 +38,7 @@ class ProfileViewModel(private val repository: Repository) : BaseViewModel() {
 
 
     fun requestUserProfile() {
-        HttpClient.getUserProfile()
+        HttpClient.getUserProfile(InjectHelper.keyCode)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ userInfo ->

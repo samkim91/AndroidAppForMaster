@@ -10,6 +10,7 @@ import kr.co.soogong.master.data.requirements.Requirement
 import kr.co.soogong.master.domain.Repository
 import kr.co.soogong.master.ui.base.BaseViewModel
 import kr.co.soogong.master.util.Event
+import kr.co.soogong.master.util.InjectHelper
 import kr.co.soogong.master.util.http.HttpClient
 import timber.log.Timber
 
@@ -28,7 +29,7 @@ class EstimateViewModel(
         get() = _event
 
     fun onClickedSend(estimate: Estimate) {
-        HttpClient.sendMessage(keycode = keycode, estimate = estimate)
+        HttpClient.sendMessage(branchKeycode = InjectHelper.keyCode, keycode = keycode, estimate = estimate)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(

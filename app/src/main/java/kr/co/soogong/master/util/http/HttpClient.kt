@@ -1,21 +1,15 @@
 package kr.co.soogong.master.util.http
 
 import io.reactivex.Single
-import kr.co.soogong.master.BuildConfig
 import kr.co.soogong.master.data.requirements.Estimate
 import kr.co.soogong.master.data.requirements.Requirement
 import kr.co.soogong.master.data.user.User
 import kr.co.soogong.master.util.InjectHelper
-import okhttp3.Cache
-import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import timber.log.Timber
-import java.io.File
-import java.util.concurrent.TimeUnit
 
 object HttpClient {
     private val TAG = HttpClient::class.java.simpleName
@@ -47,31 +41,24 @@ object HttpClient {
             .create(HttpInterface::class.java)
     }
 
-    fun getRequirementList(keycode: String = "d3899f668347aa1b"): Single<List<Requirement>> {
+    fun getRequirementList(keycode: String?): Single<List<Requirement>> {
         return httpInterface.getRequirementList(keycode)
             .map { list -> list.map { Requirement.fromReceived(it) } }
     }
 
-    fun getProgressList(keycode: String = "d3899f668347aa1b"): Single<List<Requirement>> {
+    fun getProgressList(keycode: String?): Single<List<Requirement>> {
         return httpInterface.getProgressList(keycode)
             .map { list -> list.map { Requirement.fromProgress(it) } }
     }
 
-    fun refuseRequirement(
-        branchKeycode: String = "d3899f668347aa1b",
-        keycode: String
-    ): Single<Response> {
-        val data = HashMap<String, String>()
+    fun refuseRequirement(branchKeycode: String?, keycode: String): Single<Response> {
+        val data = HashMap<String, String?>()
         data["branch_keycode"] = branchKeycode
         data["keycode"] = keycode
         return httpInterface.refuseRequirement(data)
     }
 
-    fun sendMessage(
-        branchKeycode: String = "d3899f668347aa1b",
-        keycode: String,
-        estimate: Estimate
-    ): Single<String> {
+    fun sendMessage(branchKeycode: String?, keycode: String, estimate: Estimate): Single<String> {
         val data = HashMap<String, String?>()
         data["branch_keycode"] = branchKeycode
         data["keycode"] = keycode
@@ -81,15 +68,15 @@ object HttpClient {
         return httpInterface.sendMessage(data)
     }
 
-    fun updateFCMToken(keycode: String = "d3899f668347aa1b", fcmKey: String): Single<Response> {
-        val data = HashMap<String, String>()
+    fun updateFCMToken(keycode: String?, fcmKey: String): Single<Response> {
+        val data = HashMap<String, String?>()
         data["keycode"] = keycode
         data["key"] = fcmKey
 
         return httpInterface.updateFCMToken(data)
     }
 
-    fun getUserProfile(keycode: String = "d3899f668347aa1b"): Single<User> {
+    fun getUserProfile(keycode: String?): Single<User> {
         return httpInterface.getUserProfile(keycode).map {
             Timber.tag(TAG).d("getUserProfile: $it")
             User.from(it)

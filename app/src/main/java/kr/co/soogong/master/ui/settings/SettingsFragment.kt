@@ -1,5 +1,6 @@
 package kr.co.soogong.master.ui.settings
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
@@ -10,6 +11,9 @@ import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentSettingsBinding
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.getRepository
+import kr.co.soogong.master.ui.settings.alarm.AlarmActivity
+import kr.co.soogong.master.ui.settings.notice.NoticeActivity
+import kr.co.soogong.master.ui.settings.password.PasswordActivity
 import timber.log.Timber
 
 class SettingsFragment : BaseFragment<FragmentSettingsBinding>(
@@ -33,14 +37,23 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(
 
             setNoticeClick {
                 Timber.tag(TAG).i("initLayout: Notice Button")
+                context?.let {
+                    startActivity(Intent(it, NoticeActivity::class.java))
+                }
             }
 
             setPasswordClick {
                 Timber.tag(TAG).i("initLayout: Password Button")
+                context?.let {
+                    startActivity(Intent(it, PasswordActivity::class.java))
+                }
             }
 
             setAlarmClick {
                 Timber.tag(TAG).i("initLayout: Alarm Button")
+                context?.let {
+                    startActivity(Intent(it, AlarmActivity::class.java))
+                }
             }
 
             setLogoutClick {
