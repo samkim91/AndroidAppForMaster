@@ -4,14 +4,17 @@ import android.content.Context
 import android.content.res.TypedArray
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.widget.CompoundButton
 import android.widget.TextView
 import androidx.appcompat.widget.SwitchCompat
 import androidx.constraintlayout.widget.ConstraintLayout
 import kr.co.soogong.master.R
+import kr.co.soogong.master.databinding.ViewTitleSwitchcompatBinding
 
 class TitleSwitchCompat : ConstraintLayout {
     private lateinit var titleTextView: TextView
     private lateinit var switch: SwitchCompat
+    private lateinit var binding: ViewTitleSwitchcompatBinding
 
     constructor(context: Context) : super(context) {
         initView()
@@ -38,8 +41,8 @@ class TitleSwitchCompat : ConstraintLayout {
     private fun initView() {
         val infService = Context.LAYOUT_INFLATER_SERVICE;
         val layoutInflater = context.getSystemService(infService) as LayoutInflater
-        val v = layoutInflater.inflate(R.layout.view_title_switchcompat, this, false);
-        addView(v)
+        binding = ViewTitleSwitchcompatBinding.inflate(layoutInflater, this, false)
+        addView(binding.root)
 
         titleTextView = findViewById(R.id.title)
         switch = findViewById(R.id.switch_compat)
@@ -71,4 +74,7 @@ class TitleSwitchCompat : ConstraintLayout {
         return switch.isChecked
     }
 
+    fun setSwitchClick(lister: CompoundButton.OnCheckedChangeListener) {
+        switch.setOnCheckedChangeListener(lister)
+    }
 }
