@@ -23,4 +23,7 @@ interface RequirementDao {
 
     @Query("DELETE FROM Requirement WHERE keycode = :keycode")
     suspend fun remove(keycode: String)
+
+    @Query("DELETE FROM Requirement")
+    suspend fun removeAll()
 }

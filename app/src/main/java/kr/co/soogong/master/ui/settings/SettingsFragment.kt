@@ -14,6 +14,8 @@ import kr.co.soogong.master.ui.getRepository
 import kr.co.soogong.master.ui.settings.alarm.AlarmActivity
 import kr.co.soogong.master.ui.settings.notice.NoticeActivity
 import kr.co.soogong.master.ui.settings.password.PasswordActivity
+import kr.co.soogong.master.ui.sign.SignMainActivity
+import kr.co.soogong.master.util.EventObserver
 import timber.log.Timber
 
 class SettingsFragment : BaseFragment<FragmentSettingsBinding>(
@@ -28,6 +30,7 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(
         Timber.tag(TAG).d("onViewCreated: ")
 
         initLayout()
+        registerEventObserve()
     }
 
     override fun initLayout() {
@@ -58,6 +61,7 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(
 
             setLogoutClick {
                 Timber.tag(TAG).i("initLayout: Logout Button")
+                viewModel.actionLogout()
             }
 
             setKakaoClick {
@@ -69,6 +73,15 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(
                 }
             }
         }
+    }
+
+    private fun registerEventObserve() {
+        viewModel.completeEvent.observe(viewLifecycleOwner, EventObserver {
+            context?.let {
+                startActivity(Intent(context, SignMainActivity::class.java))
+            }
+            activity?.finish()
+        })
     }
 
     override fun onStart() {

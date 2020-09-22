@@ -22,6 +22,8 @@ class Repository private constructor(
         requirementDao.insert(requirements)
 
     suspend fun removeRequirement(keycode: String) = requirementDao.remove(keycode)
+
+    suspend fun removeAllRequirement() = requirementDao.removeAll()
     //endregion Requirement
 
     //region user
@@ -30,6 +32,8 @@ class Repository private constructor(
     suspend fun insertUserInfo(user: User) = userDao.insert(user)
 
     suspend fun removeUserInfo(id: String) = userDao.remove(id)
+
+    suspend fun removeAllUserInfo() = userDao.removeAll()
     //endregion user
 
     //region AppSharedPreference
