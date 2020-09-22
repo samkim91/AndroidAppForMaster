@@ -4,15 +4,14 @@ import android.content.Context
 import android.content.res.TypedArray
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import android.widget.Switch
 import android.widget.TextView
+import androidx.appcompat.widget.SwitchCompat
 import androidx.constraintlayout.widget.ConstraintLayout
-import com.google.android.material.switchmaterial.SwitchMaterial
 import kr.co.soogong.master.R
 
 class TitleSwitchCompat : ConstraintLayout {
     private lateinit var titleTextView: TextView
-    private lateinit var switch: SwitchMaterial
+    private lateinit var switch: SwitchCompat
 
     constructor(context: Context) : super(context) {
         initView()
