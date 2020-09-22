@@ -16,7 +16,7 @@ import javax.inject.Inject
 class SettingsViewModel(
     private val repository: Repository
 ) : BaseViewModel() {
-    private val _userInfo = repository.getUserInfo("d3899f668347aa1b")
+    private val _userInfo = repository.getUserInfo(InjectHelper.keyCode ?: "")
 
     val name: LiveData<String>
         get() = _userInfo.map { it?.name ?: "고객님" }

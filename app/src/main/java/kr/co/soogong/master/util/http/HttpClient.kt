@@ -1,6 +1,9 @@
 package kr.co.soogong.master.util.http
 
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import io.reactivex.Single
+import kr.co.soogong.master.data.rawtype.sign.SignInfo
 import kr.co.soogong.master.data.requirements.Estimate
 import kr.co.soogong.master.data.requirements.Requirement
 import kr.co.soogong.master.data.user.User
@@ -40,6 +43,28 @@ object HttpClient {
             .build()
             .create(HttpInterface::class.java)
     }
+
+    //region Auth
+    fun login(email: String, password: String): Single<String> {
+        val data = HashMap<String, String>()
+        data["email"] = email
+        data["password"] = password
+        val send = HashMap<String, HashMap<String, String>>()
+        send["customer"] = data
+
+        return httpInterface.login(send).flatMap { responseBody ->
+            val text = responseBody.string()
+
+            if (text.contains("data")) {
+                val signInfo: SignInfo =
+                    Gson().fromJson(text, object : TypeToken<SignInfo>() {}.type)
+                return@flatMap Single.just(signInfo.data.attributes.token)
+            }
+
+            return@flatMap Single.error(RXException(text))
+        }
+    }
+    //endregion Auth
 
     fun getRequirementList(keycode: String?): Single<List<Requirement>> {
         return httpInterface.getRequirementList(keycode)

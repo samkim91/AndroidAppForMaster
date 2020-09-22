@@ -28,14 +28,30 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.sign.SignMainActivity" />
-        <activity android:name=".ui.main.MainActivity" />
-        <activity android:name=".ui.requirements.received.detail.ReceivedDetailActivity" />
-        <activity android:name=".ui.requirements.received.estimate.EstimateActivity" />
-        <activity android:name=".ui.requirements.progress.detail.ProgressDetailActivity" />
-        <activity android:name=".ui.settings.alarm.AlarmActivity" />
-        <activity android:name=".ui.settings.password.PasswordActivity" />
-        <activity android:name=".ui.settings.notice.NoticeActivity" />
+        <activity
+            android:name=".ui.sign.SignMainActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".ui.main.MainActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".ui.requirements.received.detail.ReceivedDetailActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".ui.requirements.received.estimate.EstimateActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".ui.requirements.progress.detail.ProgressDetailActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".ui.settings.alarm.AlarmActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".ui.settings.password.PasswordActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".ui.settings.notice.NoticeActivity"
+            android:launchMode="singleTask" />
 
         <service
             android:name=".SoogongMasterMessagingService"

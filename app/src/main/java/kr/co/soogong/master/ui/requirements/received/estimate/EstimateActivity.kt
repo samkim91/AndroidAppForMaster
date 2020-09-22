@@ -30,8 +30,8 @@ class EstimateActivity : BaseActivity<ActivityEstimateBinding>(
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        Timber.tag(TAG).d("onCreate: ")
         super.onCreate(savedInstanceState)
+        Timber.tag(TAG).d("onCreate: ")
         initLayout()
     }
 

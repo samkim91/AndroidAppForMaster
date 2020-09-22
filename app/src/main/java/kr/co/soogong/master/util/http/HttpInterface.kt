@@ -3,9 +3,14 @@ package kr.co.soogong.master.util.http
 import io.reactivex.Single
 import kr.co.soogong.master.data.rawtype.requirment.RawRequirementItem
 import kr.co.soogong.master.data.rawtype.user.RawUser
+import okhttp3.RequestBody
+import okhttp3.ResponseBody
 import retrofit2.http.*
 
 interface HttpInterface {
+    @POST("login")
+    fun login(@Body body: HashMap<String, HashMap<String, String>>): Single<ResponseBody>
+
     @GET("api/v1/transmissions/default_list")
     fun getRequirementList(@Query("branch_keycode") auth: String?): Single<List<RawRequirementItem>>
 
