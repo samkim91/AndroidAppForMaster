@@ -1,6 +1,5 @@
 package kr.co.soogong.master.ui.requirements
 
-import android.os.Build
 import android.os.Bundle
 import android.view.View
 import com.google.android.material.tabs.TabLayout
@@ -55,11 +54,7 @@ class RequirementsFragment : BaseFragment<FragmentRequirementsBinding>(
 
     override fun setProgressBadge(badgeCount: Int) {
         val badge = binding.mainTabs.getTabAt(1)?.orCreateBadge
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            badge?.backgroundColor = resources.getColor(R.color.app_color, null)
-        } else {
-            badge?.backgroundColor = resources.getColor(R.color.app_color)
-        }
+        badge?.backgroundColor = resources.getColor(R.color.app_color, null)
         badge?.number = badgeCount
     }
 
@@ -69,11 +64,7 @@ class RequirementsFragment : BaseFragment<FragmentRequirementsBinding>(
 
     override fun setReceivedBadge(badgeCount: Int) {
         val badge = binding.mainTabs.getTabAt(0)?.orCreateBadge
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            badge?.backgroundColor = resources.getColor(R.color.app_color, null)
-        } else {
-            badge?.backgroundColor = resources.getColor(R.color.app_color)
-        }
+        badge?.backgroundColor = resources.getColor(R.color.app_color, null)
         badge?.number = badgeCount
     }
 

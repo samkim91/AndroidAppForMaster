@@ -1,12 +1,10 @@
 package kr.co.soogong.master.ui.widget
 
 import android.content.Context
-import android.content.res.TypedArray
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.CompoundButton
 import androidx.constraintlayout.widget.ConstraintLayout
-import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ViewTitleSwitchcompatBinding
 
 class TitleSwitchCompat @JvmOverloads constructor(
@@ -15,34 +13,23 @@ class TitleSwitchCompat @JvmOverloads constructor(
     defStyle: Int = 0
 ) : ConstraintLayout(context, attributeSet, defStyle) {
     private var binding: ViewTitleSwitchcompatBinding =
-        ViewTitleSwitchcompatBinding.inflate(LayoutInflater.from(context), this, false)
+        ViewTitleSwitchcompatBinding.inflate(LayoutInflater.from(context), this, true)
 
-    init {
-        addView(binding.root)
-        getAttrs(attributeSet, defStyle)
-    }
+    var title: String? = ""
+        set(value) {
+            field = value
+            binding.title.text = value
+        }
 
-    private fun getAttrs(attributeSet: AttributeSet?, defStyle: Int) {
-        val typedArray =
-            context.obtainStyledAttributes(attributeSet, R.styleable.TitleSwitchCompat, defStyle, 0)
-        setTypeArray(typedArray)
-    }
-
-    private fun setTypeArray(typedArray: TypedArray) {
-        binding.title.text =
-            typedArray.getString(R.styleable.TitleSwitchCompat_title_switch_title_text)
-        binding.switchCompat.isChecked =
-            typedArray.getBoolean(R.styleable.TitleSwitchCompat_title_switch_state, false)
-        typedArray.recycle()
-    }
-
-    fun setTitleText(text: CharSequence) {
-        binding.title.text = text
-    }
-
-    fun setSwitchState(state: Boolean) {
-        binding.switchCompat.isChecked = state
-    }
+    var isChecked: Boolean = false
+        set(value) {
+            field = value
+            binding.switchCompat.isChecked = value
+        }
+        get() {
+            field = binding.switchCompat.isChecked
+            return field
+        }
 
     fun setSwitchClick(lister: CompoundButton.OnCheckedChangeListener) {
         binding.switchCompat.setOnCheckedChangeListener(lister)
