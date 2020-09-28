@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:bind="http://schemas.android.com/bind"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -73,60 +72,60 @@
                         android:layout_width="0dp"
                         android:layout_height="20dp"
                         android:layout_marginTop="36dp"
+                        app:detailDate="@{vm.date}"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/location"
-                        app:title_text2="접수일시"
-                        bind:detail_date_text="@{vm.date}"
-                        tools:detail_text2="2020년 8월 26일 13시 53분" />
+                        app:title="@{@string/request_date}"
+                        tools:detail="2020년 8월 26일 13시 53분" />
 
                     <kr.co.soogong.master.ui.widget.TitleTextView2
                         android:id="@+id/name"
                         android:layout_width="0dp"
                         android:layout_height="20dp"
                         android:layout_marginTop="24dp"
+                        app:detail="@{vm.userName}"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/date"
-                        app:title_text2="고객명"
-                        bind:detail_text="@{vm.userName}"
-                        tools:detail_text2="홍길동" />
+                        app:title="@{@string/request_user_name}"
+                        tools:detail="홍길동" />
 
                     <kr.co.soogong.master.ui.widget.TitleTextView2
                         android:id="@+id/type"
                         android:layout_width="0dp"
                         android:layout_height="20dp"
                         android:layout_marginTop="24dp"
+                        app:detail="@{vm.houseType}"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/name"
-                        app:title_text2="장소유형"
-                        bind:detail_text="@{vm.houseType}"
-                        tools:detail_text2="아파트" />
+                        app:title="@{@string/request_type}"
+                        tools:detail="아파트" />
 
                     <kr.co.soogong.master.ui.widget.TitleTextView2
                         android:id="@+id/size"
                         android:layout_width="0dp"
                         android:layout_height="20dp"
                         android:layout_marginTop="24dp"
+                        app:detail="@{vm.size}"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/type"
-                        app:title_text2="평수"
-                        bind:detail_text="@{vm.size}"
-                        tools:detail_text2="10~20평" />
+                        app:title="@{@string/request_size}"
+                        tools:detail="10~20평" />
 
                     <kr.co.soogong.master.ui.widget.TitleTextView2
                         android:id="@+id/detail"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="24dp"
+                        app:detail="@{vm.content}"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/size"
-                        app:title_text2="요청사항"
-                        bind:detail_text="@{vm.content}"
-                        tools:detail_text2="욕실장이 벽에서 떨어졌어요. 새로 욕실장을 설치했으면 좋겠습니다." />
+                        app:title="@{@string/request_detail}"
+                        tools:detail="욕실장이 벽에서 떨어졌어요. 새로 욕실장을 설치했으면 좋겠습니다." />
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/line"

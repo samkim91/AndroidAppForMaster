@@ -1,67 +1,33 @@
 package kr.co.soogong.master.ui.widget
 
 import android.content.Context
-import android.content.res.TypedArray
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import androidx.appcompat.widget.AppCompatTextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import kr.co.soogong.master.R
+import kr.co.soogong.master.databinding.ViewTitleTextview2Binding
+import java.text.SimpleDateFormat
+import java.util.*
 
-class TitleTextView2 : ConstraintLayout {
-    private lateinit var textView: AppCompatTextView
-    private lateinit var titleTextView: AppCompatTextView
+class TitleTextView2 @JvmOverloads constructor(
+    context: Context, attributeSet: AttributeSet? = null, defStyle: Int = 0
+) : ConstraintLayout(context, attributeSet, defStyle) {
+    private var binding: ViewTitleTextview2Binding =
+        ViewTitleTextview2Binding.inflate(LayoutInflater.from(context), this, true)
 
-    constructor(context: Context) : super(context) {
-        initView()
+    var title: String? = ""
+        set(value) {
+            field = value
+            binding.title.text = value
+        }
+
+    var detail: String? = ""
+        set(value) {
+            field = value
+            binding.detail.text = value
+        }
+
+    fun setDetailDate(date: Date?) {
+        val simpleDateFormat = SimpleDateFormat("yyyy년 MM월 dd일 hh시 mm분")
+        binding.detail.text = simpleDateFormat.format(date ?: System.currentTimeMillis())
     }
-
-    constructor(context: Context, attributeSet: AttributeSet) : super(context, attributeSet) {
-        initView()
-        getAttrs(attributeSet)
-    }
-
-    constructor(context: Context, attributeSet: AttributeSet, defStyle: Int) : super(
-        context,
-        attributeSet
-    ) {
-        initView()
-        getAttrs(attributeSet, defStyle)
-    }
-
-    private fun getAttrs(attributeSet: AttributeSet) {
-        val typedArray = context.obtainStyledAttributes(attributeSet, R.styleable.TitleTextView2)
-        setTypeArray(typedArray)
-    }
-
-    private fun initView() {
-        val infService = Context.LAYOUT_INFLATER_SERVICE
-        val layoutInflater = context.getSystemService(infService) as LayoutInflater
-        val view = layoutInflater.inflate(R.layout.view_title_textview2, this, false)
-        addView(view)
-
-        titleTextView = findViewById(R.id.title)
-        textView = findViewById(R.id.text)
-    }
-
-    private fun getAttrs(attributeSet: AttributeSet, defStyle: Int) {
-        val typedArray =
-            context.obtainStyledAttributes(attributeSet, R.styleable.TitleTextView2, defStyle, 0)
-        setTypeArray(typedArray)
-    }
-
-    private fun setTypeArray(typedArray: TypedArray) {
-        titleTextView.text = typedArray.getString(R.styleable.TitleTextView2_title_text2)
-        textView.text = typedArray.getString(R.styleable.TitleTextView2_detail_text2)
-        typedArray.recycle()
-    }
-
-    fun setTitleText(text: CharSequence) {
-        titleTextView.text = text
-    }
-
-    fun setText(text: CharSequence) {
-        textView.text = text
-    }
-
 }

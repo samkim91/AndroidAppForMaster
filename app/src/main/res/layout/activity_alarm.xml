@@ -25,7 +25,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             app:switchClick="@{vm::clickedAppPush}"
-            app:title_switch_title_text="앱 푸시 알림" />
+            app:title="앱 푸시 알림" />
 
         <kr.co.soogong.master.ui.widget.TitleSwitchCompat
             android:id="@+id/kakao_alarm"
@@ -34,7 +34,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             app:switchClick="@{vm::clickedKakao}"
-            app:title_switch_title_text="카카오톡 알림" />
+            app:title="카카오톡 알림" />
 
         <kr.co.soogong.master.ui.widget.TitleSwitchCompat
             android:id="@+id/sms_alarm"
@@ -43,6 +43,6 @@
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             app:switchClick="@{vm::clickedSMS}"
-            app:title_switch_title_text="문자 알림" />
+            app:title="문자 알림" />
     </LinearLayout>
 </layout>

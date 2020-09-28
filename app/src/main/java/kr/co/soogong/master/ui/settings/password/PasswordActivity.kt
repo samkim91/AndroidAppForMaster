@@ -46,14 +46,14 @@ class PasswordActivity : BaseActivity<ActivityPasswordBinding>(
             inputPasswordCheck.addTextChangedListener(watcher)
 
             setChangeClick {
-                val password1 = inputPassword.getText()
-                val password2 = inputPasswordCheck.getText()
+                val password1 = inputPassword.text
+                val password2 = inputPasswordCheck.text
 
                 if (password1 != password2) {
-                    inputPasswordCheck.setHintVisible(visible = true)
+                    inputPasswordCheck.hintVisible = true
                 } else {
-                    inputPassword.setHintVisible(visible = false)
-                    inputPasswordCheck.setHintVisible(visible = false)
+                    inputPassword.hintVisible = false
+                    inputPasswordCheck.hintVisible = false
                 }
             }
 

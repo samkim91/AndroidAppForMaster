@@ -2,6 +2,7 @@ package kr.co.soogong.master.ext
 
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
+import kr.co.soogong.master.ui.widget.TitleTextView2
 import java.text.SimpleDateFormat
 import java.util.*
 
