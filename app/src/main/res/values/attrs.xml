@@ -1,8 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="TitleSwitchCompat">
-        <attr name="title_switch_title_text" format="reference|string" />
-        <attr name="title_switch_state" format="boolean" />
-    </declare-styleable>
 
 </resources>

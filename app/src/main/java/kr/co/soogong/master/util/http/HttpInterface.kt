@@ -3,6 +3,7 @@ package kr.co.soogong.master.util.http
 import io.reactivex.Single
 import kr.co.soogong.master.data.rawtype.requirment.RawRequirementItem
 import kr.co.soogong.master.data.rawtype.user.RawUser
+import kr.co.soogong.master.ui.settings.notice.Notice
 import okhttp3.ResponseBody
 import retrofit2.http.*
 
@@ -27,4 +28,7 @@ interface HttpInterface {
 
     @GET("api/v1/branches/search/{keycode}")
     fun getUserProfile(@Path("keycode") keycode: String?): Single<RawUser>
+
+    @GET()
+    fun getNoticeList(): Single<List<Notice>>
 }

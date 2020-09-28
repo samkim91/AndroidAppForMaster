@@ -7,6 +7,7 @@ import kr.co.soogong.master.data.rawtype.sign.SignInfo
 import kr.co.soogong.master.data.requirements.Estimate
 import kr.co.soogong.master.data.requirements.Requirement
 import kr.co.soogong.master.data.user.User
+import kr.co.soogong.master.ui.settings.notice.Notice
 import kr.co.soogong.master.util.InjectHelper
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -113,5 +114,9 @@ object HttpClient {
             Timber.tag(TAG).d("getUserProfile: $it")
             User.from(it)
         }
+    }
+
+    fun getNoticeList(): Single<List<Notice>> {
+        return httpInterface.getNoticeList()
     }
 }

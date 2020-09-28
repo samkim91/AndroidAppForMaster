@@ -2,9 +2,7 @@ package kr.co.soogong.master.ui.requirements.progress
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.ListAdapter
-import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ViewholderProgressItemBinding
 
 class ProgressAdapter : ListAdapter<ProgressCard, ProgressViewHolder>(ProgressCardDiffUtil()) {
@@ -14,9 +12,8 @@ class ProgressAdapter : ListAdapter<ProgressCard, ProgressViewHolder>(ProgressCa
     lateinit var removeButtonClick: (String) -> Unit
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProgressViewHolder {
-        val binding = DataBindingUtil.inflate<ViewholderProgressItemBinding>(
+        val binding = ViewholderProgressItemBinding.inflate(
             LayoutInflater.from(parent.context),
-            R.layout.viewholder_progress_item,
             parent,
             false
         )
