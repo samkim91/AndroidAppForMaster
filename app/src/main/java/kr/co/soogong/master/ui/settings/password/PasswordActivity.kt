@@ -1,6 +1,8 @@
 package kr.co.soogong.master.ui.settings.password
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ActivityPasswordBinding
 import kr.co.soogong.master.ui.base.BaseActivity
@@ -26,6 +28,23 @@ class PasswordActivity : BaseActivity<ActivityPasswordBinding>(
                 }
             }
 
+            val watcher: TextWatcher = object : TextWatcher {
+                override fun beforeTextChanged(
+                    s: CharSequence,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) = Unit
+
+                override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) =
+                    Unit
+
+                override fun afterTextChanged(s: Editable) = Unit
+            }
+
+            inputPassword.addTextChangedListener(watcher)
+            inputPasswordCheck.addTextChangedListener(watcher)
+
             setChangeClick {
                 val password1 = inputPassword.getText()
                 val password2 = inputPasswordCheck.getText()
@@ -37,6 +56,8 @@ class PasswordActivity : BaseActivity<ActivityPasswordBinding>(
                     inputPasswordCheck.setHintVisible(visible = false)
                 }
             }
+
+
         }
     }
 
