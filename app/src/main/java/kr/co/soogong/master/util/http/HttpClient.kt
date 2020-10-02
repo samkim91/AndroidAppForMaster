@@ -3,11 +3,11 @@ package kr.co.soogong.master.util.http
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import io.reactivex.Single
+import kr.co.soogong.master.data.notice.Notice
 import kr.co.soogong.master.data.rawtype.sign.SignInfo
 import kr.co.soogong.master.data.requirements.Estimate
 import kr.co.soogong.master.data.requirements.Requirement
 import kr.co.soogong.master.data.user.User
-import kr.co.soogong.master.ui.settings.notice.Notice
 import kr.co.soogong.master.util.InjectHelper
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit

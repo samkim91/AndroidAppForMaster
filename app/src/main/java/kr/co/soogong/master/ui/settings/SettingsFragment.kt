@@ -37,7 +37,9 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(
             setVariable(BR.vm, viewModel)
             lifecycleOwner = viewLifecycleOwner
 
-            noticeList.adapter = SettingsNoticeAdapter()
+            noticeList.adapter = NoticeAdapter() {
+                startActivity(NoticeActivityHelper.getIntent(requireContext(), it))
+            }
 
             setNoticeClick {
                 Timber.tag(TAG).i("initLayout: Notice Button")

@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 import kr.co.soogong.master.domain.AppSharedPreferenceHelper
 import kr.co.soogong.master.domain.Repository
 import kr.co.soogong.master.ui.base.BaseViewModel
-import kr.co.soogong.master.ui.settings.notice.Notice
+import kr.co.soogong.master.data.notice.Notice
 import kr.co.soogong.master.util.InjectHelper
 import kr.co.soogong.master.util.http.HttpClient
 import timber.log.Timber
@@ -20,9 +20,9 @@ class SettingsViewModel(
 ) : BaseViewModel() {
     private val _userInfo = repository.getUserInfo(InjectHelper.keyCode ?: "")
 
-    private val _noticeList: MutableLiveData<List<Notice>> = MutableLiveData(emptyList())
-    val noticeList: LiveData<List<Notice>>
-        get() = _noticeList
+    private val _list: MutableLiveData<List<Notice>> = MutableLiveData(emptyList())
+    val list: LiveData<List<Notice>>
+        get() = _list
 
     val name: LiveData<String>
         get() = _userInfo.map { it?.name ?: "고객님" }
@@ -62,7 +62,7 @@ class SettingsViewModel(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                _noticeList.postValue(it)
+                _list.postValue(it)
             }, {
                 Timber.tag(TAG).w("getNoticeList: $it")
             })

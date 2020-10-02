@@ -2,9 +2,9 @@ package kr.co.soogong.master.ui.settings
 
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import kr.co.soogong.master.ui.settings.notice.Notice
+import kr.co.soogong.master.data.notice.Notice
 
-@BindingAdapter("bind:settings_notice_list")
+@BindingAdapter("bind:notice_list")
 fun RecyclerView.setList(items: List<Notice>?) {
-    (adapter as? SettingsNoticeAdapter)?.submitList(items ?: emptyList())
+    (adapter as? NoticeAdapter)?.submitList(items ?: emptyList())
 }

@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <data>
+
+        <variable
+            name="data"
+            type="kr.co.soogong.master.data.notice.Notice" />
+    </data>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -11,7 +19,6 @@
         <include
             android:id="@+id/action_bar"
             layout="@layout/action_bar" />
-
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/notice_title"
@@ -23,6 +30,7 @@
             android:layout_marginEnd="20dp"
             android:ellipsize="end"
             android:lines="1"
+            android:text="@{data.title}"
             android:textColor="@color/secondary_text_color"
             app:layout_constrainedWidth="true"
             app:layout_constraintBottom_toTopOf="@id/notice_date"
@@ -39,6 +47,7 @@
             android:layout_marginTop="4dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="16dp"
+            android:text="@{data.date}"
             android:textColor="@color/detail_button_color"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -64,6 +73,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="20dp"
             android:lineSpacingExtra="5sp"
+            android:text="@{data.content}"
             android:textColor="@color/secondary_text_color"
             tools:text="다른 업체보다 빠르고 정확한 시공을 자신합니다. 시공 후 문제가 생긴다면 책임지고 A/S 해드려요. 연락주시면 더 정확한 안내가 가능합니다. 다른 업체보다 빠르고 정확한 시공을 자신합니다." />
 
