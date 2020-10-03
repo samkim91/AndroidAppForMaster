@@ -13,7 +13,6 @@ import kr.co.soogong.master.databinding.FragmentRequirementsProgressBinding
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.getRepository
 import kr.co.soogong.master.ui.requirements.RequirementsBadge
-import kr.co.soogong.master.ui.requirements.progress.detail.ProgressDetailActivity
 import kr.co.soogong.master.uiinterface.requirments.progress.detail.ProgressDetailActivityHelper
 import kr.co.soogong.master.util.EventObserver
 import timber.log.Timber
@@ -42,16 +41,7 @@ class ProgressFragment : BaseFragment<FragmentRequirementsProgressBinding>(
         bind {
             receivedList.adapter = ProgressAdapter().apply {
                 detailButtonClick = { keycode ->
-                    context.run {
-                        startActivity(Intent(this, ProgressDetailActivity::class.java).apply {
-                            putExtra(ProgressDetailActivityHelper.EXTRA_KEY_BUNDLE, Bundle().apply {
-                                putString(
-                                    ProgressDetailActivityHelper.BUNDLE_KEY_RECEIVED_KEY,
-                                    keycode
-                                )
-                            })
-                        })
-                    }
+                    startActivity(ProgressDetailActivityHelper.getIntent(requireContext(), keycode))
                 }
 
                 callButtonClick = { number ->

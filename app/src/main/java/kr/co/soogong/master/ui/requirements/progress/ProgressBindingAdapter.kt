@@ -11,8 +11,6 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import kr.co.soogong.master.R
-import java.text.SimpleDateFormat
-import java.util.*
 
 @BindingAdapter("bind:progress_list")
 fun RecyclerView.setList(items: List<ProgressCard>?) {

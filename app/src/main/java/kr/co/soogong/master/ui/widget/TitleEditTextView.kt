@@ -1,7 +1,6 @@
 package kr.co.soogong.master.ui.widget
 
 import android.content.Context
-import android.content.res.TypedArray
 import android.text.TextWatcher
 import android.util.AttributeSet
 import android.view.LayoutInflater
@@ -9,7 +8,6 @@ import android.view.View
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.widget.addTextChangedListener
-import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ViewTitleEdittextviewBinding
 
 class TitleEditTextView @JvmOverloads constructor(

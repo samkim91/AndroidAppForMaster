@@ -1,13 +1,12 @@
 package kr.co.soogong.master.ui.sign.signin
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ActivitySignInBinding
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.ui.getRepository
-import kr.co.soogong.master.ui.main.MainActivity
+import kr.co.soogong.master.uiinterface.main.MainActivityHelper
 import kr.co.soogong.master.util.EventObserver
 import timber.log.Timber
 
@@ -52,10 +51,7 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(
 
     private fun registerEventObserve() {
         viewModel.completeEvent.observe(this, EventObserver {
-            val intent = Intent(this, MainActivity::class.java).apply {
-                addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-            }
-            startActivity(intent)
+            startActivity(MainActivityHelper.getIntent(this))
             finish()
         })
     }

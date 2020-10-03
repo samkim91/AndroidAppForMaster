@@ -3,7 +3,6 @@ package kr.co.soogong.master.ui.requirements.progress.detail.request
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import kr.co.soogong.master.domain.Repository
-import kr.co.soogong.master.ui.requirements.progress.detail.estimate.ProgressEstimateViewModel
 
 class ProgressRequestViewModelFactory(
     private val repository: Repository,

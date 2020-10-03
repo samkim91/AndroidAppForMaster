@@ -4,13 +4,12 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
-import android.content.Intent
 import android.media.RingtoneManager
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
-import kr.co.soogong.master.ui.main.MainActivity
+import kr.co.soogong.master.uiinterface.main.MainActivityHelper
 import timber.log.Timber
 
 class SoogongMasterMessagingService : FirebaseMessagingService() {
@@ -28,9 +27,7 @@ class SoogongMasterMessagingService : FirebaseMessagingService() {
     }
 
     private fun sendNotification(messageTitle: String?, messageBody: String?) {
-        val intent = Intent(this, MainActivity::class.java).apply {
-            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        }
+        val intent = MainActivityHelper.getIntent(this)
         val pendingIntent =
             PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT)
 
