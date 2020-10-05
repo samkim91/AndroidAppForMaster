@@ -53,7 +53,7 @@
             android:name=".ui.settings.notice.NoticeActivity"
             android:launchMode="singleTask" />
         <activity
-            android:name=".ui.settings.notice.detail.NoticeDatailActivity"
+            android:name=".ui.settings.notice.detail.NoticeDetailActivity"
             android:launchMode="singleTask" />
 
         <service
