@@ -27,8 +27,10 @@ class FindInfoActivity : BaseActivity<ActivityFindInfoBinding>(
 
     private fun initLayout() {
         Timber.tag(TAG).d("initLayout: ")
+
         bind {
             lifecycleOwner = this@FindInfoActivity
+
             with(actionBar) {
                 title.text = "아이디·비밀번호 찾기"
                 backButton.setOnClickListener {

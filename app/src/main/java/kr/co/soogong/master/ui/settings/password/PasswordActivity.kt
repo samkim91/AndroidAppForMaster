@@ -27,6 +27,8 @@ class PasswordActivity : BaseActivity<ActivityPasswordBinding>(
         Timber.tag(TAG).d("initLayout: ")
 
         bind {
+            lifecycleOwner = this@PasswordActivity
+
             with(actionBar) {
                 title.text = "비밀번호 변경"
                 backButton.setOnClickListener {

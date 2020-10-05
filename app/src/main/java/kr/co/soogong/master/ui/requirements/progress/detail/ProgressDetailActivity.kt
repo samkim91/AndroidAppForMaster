@@ -24,7 +24,10 @@ class ProgressDetailActivity : BaseActivity<ActivityProgressDetailBinding>(
 
     private fun initLayout() {
         Timber.tag(TAG).d("initLayout: ")
+
         bind {
+            lifecycleOwner = this@ProgressDetailActivity
+
             with(mainTabs) {
                 addTab(newTab().setText("수리요청서"))
                 addTab(newTab().setText("내가 쓴 견적서"))

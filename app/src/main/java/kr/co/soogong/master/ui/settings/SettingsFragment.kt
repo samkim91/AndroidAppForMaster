@@ -33,6 +33,8 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(
     }
 
     override fun initLayout() {
+        Timber.tag(TAG).d("initLayout: ")
+
         bind {
             setVariable(BR.vm, viewModel)
             lifecycleOwner = viewLifecycleOwner

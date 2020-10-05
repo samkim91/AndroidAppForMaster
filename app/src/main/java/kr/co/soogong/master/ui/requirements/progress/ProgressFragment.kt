@@ -38,7 +38,12 @@ class ProgressFragment : BaseFragment<FragmentRequirementsProgressBinding>(
     }
 
     override fun initLayout() {
+        Timber.tag(TAG).d("initLayout: ")
+
         bind {
+            setVariable(BR.vm, viewModel)
+            lifecycleOwner = viewLifecycleOwner
+
             receivedList.adapter = ProgressAdapter().apply {
                 detailButtonClick = { keycode ->
                     startActivity(ProgressDetailActivityHelper.getIntent(requireContext(), keycode))
@@ -59,8 +64,6 @@ class ProgressFragment : BaseFragment<FragmentRequirementsProgressBinding>(
                 LinearLayoutManager(context).orientation
             )
             receivedList.addItemDecoration(dividerItemDecoration)
-            setVariable(BR.vm, viewModel)
-            lifecycleOwner = viewLifecycleOwner
         }
     }
 

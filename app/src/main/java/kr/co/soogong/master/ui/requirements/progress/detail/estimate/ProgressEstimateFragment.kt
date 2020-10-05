@@ -31,6 +31,7 @@ class ProgressEstimateFragment : BaseFragment<FragmentProgressEstimateBinding>(
 
     override fun initLayout() {
         Timber.tag(TAG).d("initLayout: ")
+
         bind {
             setVariable(BR.vm, viewModel)
             lifecycleOwner = viewLifecycleOwner

@@ -19,7 +19,10 @@ class SignMainActivity : BaseActivity<ActivitySignMainBinding>(
 
     private fun initLayout() {
         Timber.tag(TAG).d("initLayout: ")
+
         bind {
+            lifecycleOwner = this@SignMainActivity
+
             setSignInClick {
                 Timber.tag(TAG).d("initLayout: SignInClick")
                 startActivity(SignInActivityHelper.getIntent(this@SignMainActivity))

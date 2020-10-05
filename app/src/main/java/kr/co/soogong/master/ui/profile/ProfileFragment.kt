@@ -26,9 +26,12 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
     }
 
     override fun initLayout() {
+        Timber.tag(TAG).d("initLayout: ")
+
         bind {
             setVariable(BR.vm, viewModel)
             lifecycleOwner = viewLifecycleOwner
+
             viewModel.categories.observe(viewLifecycleOwner, { list ->
                 if (!list.isNullOrEmpty()) {
                     masterCategoryGroup.removeAllViews()

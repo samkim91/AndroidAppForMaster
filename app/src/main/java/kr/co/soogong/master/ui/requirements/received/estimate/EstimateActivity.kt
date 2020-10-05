@@ -32,13 +32,16 @@ class EstimateActivity : BaseActivity<ActivityEstimateBinding>(
         super.onCreate(savedInstanceState)
         Timber.tag(TAG).d("onCreate: ")
         initLayout()
+        registerEventObserve()
     }
 
     private fun initLayout() {
         Timber.tag(TAG).d("initLayout: ")
+
         bind {
             setVariable(BR.vm, viewModel)
             lifecycleOwner = this@EstimateActivity
+
             with(actionBar) {
                 title.text = "견적서"
                 backButton.setOnClickListener {
@@ -57,8 +60,6 @@ class EstimateActivity : BaseActivity<ActivityEstimateBinding>(
                 viewModel.onClickedSend(estimate)
             }
         }
-
-        registerEventObserve()
     }
 
     private fun registerEventObserve() {

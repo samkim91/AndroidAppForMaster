@@ -29,8 +29,10 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(
 
     private fun initLayout() {
         Timber.tag(TAG).d("initLayout: ")
+
         bind {
             lifecycleOwner = this@SignInActivity
+
             with(actionBar) {
                 title.text = "로그인"
                 backButton.setOnClickListener {
