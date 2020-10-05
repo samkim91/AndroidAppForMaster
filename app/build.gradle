@@ -165,4 +165,7 @@ dependencies {
 
     // Kakao
     implementation "com.kakao.sdk:v2-talk:$kakaoVersion"
+
+    // Button
+    implementation 'com.nex3z:toggle-button-group:1.2.3'
 }
