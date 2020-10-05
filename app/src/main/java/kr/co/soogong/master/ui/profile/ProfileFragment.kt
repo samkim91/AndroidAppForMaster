@@ -6,6 +6,7 @@ import androidx.fragment.app.viewModels
 import kr.co.soogong.master.BR
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentProfileBinding
+import kr.co.soogong.master.ext.createLabelToggle
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.getRepository
 import timber.log.Timber
@@ -28,6 +29,21 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
         bind {
             setVariable(BR.vm, viewModel)
             lifecycleOwner = viewLifecycleOwner
+            viewModel.categories.observe(viewLifecycleOwner, { list ->
+                if (!list.isNullOrEmpty()) {
+                    masterCategoryGroup.removeAllViews()
+
+                    for (item in list) {
+                        val view = createLabelToggle(
+                            requireContext(),
+                            item,
+                            checked = true,
+                            clickable = false
+                        )
+                        masterCategoryGroup.addView(view)
+                    }
+                }
+            })
         }
     }
 

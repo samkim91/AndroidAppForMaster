@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/bind"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -128,55 +129,23 @@
                 android:layout_marginTop="8dp"
                 android:background="@drawable/title_textview_background"
                 android:gravity="center"
+                android:text="@{vm.position}"
                 android:textColor="@color/primary_text_color"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/master_setting_address_primary_title"
                 app:layout_constraintTop_toBottomOf="@id/master_setting_address_title"
                 tools:text="서울시 강남구" />
 
-            <TextView
+            <kr.co.soogong.master.ui.widget.ListTextView
                 android:id="@+id/master_setting_address_sub_title"
-                style="@style/medium_text_style.medium"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/secondary_address"
-                android:textColor="@color/secondary_text_color"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="@id/master_setting_address_sub"
+                android:layout_marginTop="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/master_setting_address_sub" />
-
-            <TextView
-                android:id="@+id/master_setting_address_sub"
-                style="@style/medium_text_style.regular"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="11dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/title_textview_background"
-                android:gravity="center"
-                android:textColor="@color/primary_text_color"
-                android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/master_setting_address_sub_title"
                 app:layout_constraintTop_toBottomOf="@id/master_setting_address_primary"
-                tools:text="서울시 동작구" />
-
-            <TextView
-                android:id="@+id/master_setting_address_sub2"
-                style="@style/medium_text_style.regular"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="11dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/title_textview_background"
-                android:gravity="center"
-                android:textColor="@color/primary_text_color"
-                android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/master_setting_address_sub_title"
-                app:layout_constraintTop_toBottomOf="@id/master_setting_address_sub"
-                tools:text="서울시 서초구" />
+                app:list="@{vm.positions}"
+                bind:visible="@{vm.positions.size() != 0}" />
 
             <TextView
                 android:id="@+id/master_category_title"
@@ -187,16 +156,19 @@
                 android:text="@string/category"
                 android:textColor="@color/primary_text_color"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/master_setting_address_sub2" />
+                app:layout_constraintTop_toBottomOf="@id/master_setting_address_sub_title" />
 
-            <FrameLayout
+            <com.nex3z.togglebuttongroup.MultiSelectToggleGroup
                 android:id="@+id/master_category_group"
                 android:layout_width="0dp"
-                android:layout_height="40dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/master_category_title" />
+                app:layout_constraintTop_toBottomOf="@id/master_category_title"
+                app:tbgChildSpacing="8dp"
+                app:tbgChildSpacingForLastRow="align"
+                app:tbgRowSpacing="16dp" />
 
             <Button
                 android:layout_width="0dp"

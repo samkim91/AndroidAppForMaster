@@ -36,6 +36,11 @@ class ProfileViewModel(private val repository: Repository) : BaseViewModel() {
     val reviewsCount: LiveData<Int?>
         get() = _userInfo.map { it?.reviewsCount }
 
+    val position: LiveData<String?>
+        get() = _userInfo.map { it?.positions?.get(0) }
+
+    val positions: LiveData<List<String>?>
+        get() = _userInfo.map { it?.positions?.drop(1) }
 
     fun requestUserProfile() {
         HttpClient.getUserProfile(InjectHelper.keyCode)
