@@ -39,7 +39,8 @@ class Repository private constructor(
     //region AppSharedPreference
     fun setBoolean(key: String, value: Boolean) = sharedPreference.setBoolean(key, value)
 
-    fun getBoolean(key: String, defaultValue: Boolean) = sharedPreference.getBoolean(key, defaultValue)
+    fun getBoolean(key: String, defaultValue: Boolean) =
+        sharedPreference.getBoolean(key, defaultValue)
 
     fun setInteger(key: String, value: Int) = sharedPreference.setInteger(key, value)
 

@@ -1,6 +1,5 @@
 package kr.co.soogong.master.ui.requirements.received.detail
 
-import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -9,7 +8,6 @@ import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ActivityReceivedDetailBinding
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.ui.getRepository
-import kr.co.soogong.master.ui.requirements.received.estimate.EstimateActivity
 import kr.co.soogong.master.uiinterface.requirments.received.detail.ReceivedDetailActivityHelper
 import kr.co.soogong.master.uiinterface.requirments.received.estimate.EstimateActivityHelper
 import kr.co.soogong.master.util.EventObserver
@@ -67,13 +65,7 @@ class ReceivedDetailActivity : BaseActivity<ActivityReceivedDetailBinding>(
                 }
 
                 ReceivedDetailViewModel.ACCEPT_EVENT -> {
-                    this.run {
-                        startActivity(Intent(this, EstimateActivity::class.java).apply {
-                            putExtra(EstimateActivityHelper.EXTRA_KEY_BUNDLE, Bundle().apply {
-                                putString(EstimateActivityHelper.BUNDLE_KEY_RECEIVED_KEY, keycode)
-                            })
-                        })
-                    }
+                    startActivity(EstimateActivityHelper.getIntent(this, keycode))
                 }
             }
         })

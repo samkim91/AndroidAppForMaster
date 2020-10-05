@@ -1,6 +1,5 @@
 package kr.co.soogong.master.ui.requirements.received
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
@@ -12,7 +11,6 @@ import kr.co.soogong.master.databinding.FragmentRequirementsReceivedBinding
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.getRepository
 import kr.co.soogong.master.ui.requirements.RequirementsBadge
-import kr.co.soogong.master.ui.requirements.received.detail.ReceivedDetailActivity
 import kr.co.soogong.master.uiinterface.requirments.received.detail.ReceivedDetailActivityHelper
 import kr.co.soogong.master.util.EventObserver
 import timber.log.Timber
@@ -39,16 +37,7 @@ class ReceivedFragment : BaseFragment<FragmentRequirementsReceivedBinding>(
         bind {
             receivedList.adapter = ReceivedAdapter().apply {
                 buttonClick = { keycode ->
-                    context.run {
-                        startActivity(Intent(this, ReceivedDetailActivity::class.java).apply {
-                            putExtra(ReceivedDetailActivityHelper.EXTRA_KEY_BUNDLE, Bundle().apply {
-                                putString(
-                                    ReceivedDetailActivityHelper.BUNDLE_KEY_RECEIVED_KEY,
-                                    keycode
-                                )
-                            })
-                        })
-                    }
+                    startActivity(ReceivedDetailActivityHelper.getIntent(requireContext(), keycode))
                 }
             }
 

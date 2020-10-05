@@ -2,7 +2,6 @@ package kr.co.soogong.master.ui.requirements.received.estimate
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.map
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.requirements.Estimate
@@ -29,7 +28,11 @@ class EstimateViewModel(
         get() = _event
 
     fun onClickedSend(estimate: Estimate) {
-        HttpClient.sendMessage(branchKeycode = InjectHelper.keyCode, keycode = keycode, estimate = estimate)
+        HttpClient.sendMessage(
+            branchKeycode = InjectHelper.keyCode,
+            keycode = keycode,
+            estimate = estimate
+        )
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(

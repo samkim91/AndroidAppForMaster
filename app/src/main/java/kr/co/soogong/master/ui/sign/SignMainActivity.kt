@@ -1,12 +1,11 @@
 package kr.co.soogong.master.ui.sign
 
-import android.content.Intent
 import android.os.Bundle
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ActivitySignMainBinding
 import kr.co.soogong.master.ui.base.BaseActivity
-import kr.co.soogong.master.ui.sign.signin.SignInActivity
-import kr.co.soogong.master.ui.sign.signup.SignUpActivity
+import kr.co.soogong.master.uiinterface.sign.signin.SignInActivityHelper
+import kr.co.soogong.master.uiinterface.sign.signup.SignUpActivityHelper
 import timber.log.Timber
 
 class SignMainActivity : BaseActivity<ActivitySignMainBinding>(
@@ -23,12 +22,12 @@ class SignMainActivity : BaseActivity<ActivitySignMainBinding>(
         bind {
             setSignInClick {
                 Timber.tag(TAG).d("initLayout: SignInClick")
-                startActivity(Intent(this@SignMainActivity, SignInActivity::class.java))
+                startActivity(SignInActivityHelper.getIntent(this@SignMainActivity))
             }
 
             setSignUpClick {
                 Timber.tag(TAG).d("initLayout: SignUpClick")
-                startActivity(Intent(this@SignMainActivity, SignUpActivity::class.java))
+                startActivity(SignUpActivityHelper.getIntent(this@SignMainActivity))
             }
         }
     }

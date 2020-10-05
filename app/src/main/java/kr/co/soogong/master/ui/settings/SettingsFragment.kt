@@ -1,6 +1,5 @@
 package kr.co.soogong.master.ui.settings
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
@@ -11,10 +10,10 @@ import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentSettingsBinding
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.getRepository
-import kr.co.soogong.master.ui.settings.alarm.AlarmActivity
-import kr.co.soogong.master.ui.settings.notice.NoticeActivity
-import kr.co.soogong.master.ui.settings.password.PasswordActivity
-import kr.co.soogong.master.ui.sign.SignMainActivity
+import kr.co.soogong.master.uiinterface.settings.alarm.AlarmActivityHelper
+import kr.co.soogong.master.uiinterface.settings.notice.NoticeActivityHelper
+import kr.co.soogong.master.uiinterface.settings.password.PasswordActivityHelper
+import kr.co.soogong.master.uiinterface.sign.SignMainActivityHelper
 import kr.co.soogong.master.util.EventObserver
 import timber.log.Timber
 
@@ -40,23 +39,17 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(
 
             setNoticeClick {
                 Timber.tag(TAG).i("initLayout: Notice Button")
-                context?.let {
-                    startActivity(Intent(it, NoticeActivity::class.java))
-                }
+                startActivity(NoticeActivityHelper.getIntent(requireContext()))
             }
 
             setPasswordClick {
                 Timber.tag(TAG).i("initLayout: Password Button")
-                context?.let {
-                    startActivity(Intent(it, PasswordActivity::class.java))
-                }
+                startActivity(PasswordActivityHelper.getIntent(requireContext()))
             }
 
             setAlarmClick {
                 Timber.tag(TAG).i("initLayout: Alarm Button")
-                context?.let {
-                    startActivity(Intent(it, AlarmActivity::class.java))
-                }
+                startActivity(AlarmActivityHelper.getIntent(requireContext()))
             }
 
             setLogoutClick {
@@ -68,18 +61,14 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(
                 Timber.tag(TAG).i("initLayout: Kakao Button")
 
                 val url = TalkApiClient.instance.addChannelUrl("_mWbJxb")
-                context?.let {
-                    KakaoCustomTabsClient.openWithDefault(it, url)
-                }
+                KakaoCustomTabsClient.openWithDefault(requireContext(), url)
             }
         }
     }
 
     private fun registerEventObserve() {
         viewModel.completeEvent.observe(viewLifecycleOwner, EventObserver {
-            context?.let {
-                startActivity(Intent(context, SignMainActivity::class.java))
-            }
+            startActivity(SignMainActivityHelper.getIntent(requireContext()))
             activity?.finish()
         })
     }
