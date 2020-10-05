@@ -58,10 +58,17 @@ object HttpClient {
             if (text.contains("data")) {
                 val signInfo: SignInfo =
                     Gson().fromJson(text, object : TypeToken<SignInfo>() {}.type)
-                return@flatMap Single.just(signInfo.data.attributes.token)
-            }
+                if (signInfo.data.attributes.keycode.isNullOrEmpty()) {
+                    return@flatMap Single.error(RxException("기사 분들만 로그인이 가능 합니다"))
+                } else {
+                    return@flatMap Single.just(signInfo.data.attributes.keycode)
+                }
+            } else {
+                val signInfo: Response =
+                    Gson().fromJson(text, object : TypeToken<Response>() {}.type)
 
-            return@flatMap Single.error(RXException(text))
+                return@flatMap Single.error(RxException(signInfo.message))
+            }
         }
     }
     //endregion Auth

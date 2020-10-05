@@ -7,15 +7,24 @@
         android:layout_height="match_parent">
 
         <com.google.android.material.tabs.TabLayout
-            app:tabTextAppearance="@style/CustomTabText"
             android:id="@+id/main_tabs"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:tabIndicatorColor="@color/primary_text_color"
             app:layout_constraintBottom_toTopOf="@id/main_view_pager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:tabIndicatorColor="@color/primary_text_color"
+            app:tabTextAppearance="@style/CustomTabText" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/line_color"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/main_tabs" />
 
         <kr.co.soogong.master.ui.widget.NonSwipeableViewPager
             android:id="@+id/main_view_pager"
@@ -24,7 +33,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/main_tabs" />
+            app:layout_constraintTop_toBottomOf="@id/line" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

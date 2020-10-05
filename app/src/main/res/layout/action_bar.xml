@@ -30,7 +30,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="수리요청서" />
+            tools:text="Action Bar Title" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/line"

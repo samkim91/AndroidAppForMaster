@@ -1,6 +1,6 @@
 package kr.co.soogong.master.util.http
 
-class RXException(
+class RxException(
     override val message: String,
     throwable: Exception? = null
 ) : RuntimeException(throwable) {
