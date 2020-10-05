@@ -11,6 +11,9 @@ interface HttpInterface {
     @POST("login")
     fun login(@Body body: HashMap<String, HashMap<String, String>>): Single<ResponseBody>
 
+    @POST("find")
+    fun findInfo(@Body body: HashMap<String, String?>): Single<Response>
+
     @GET("api/v1/transmissions/default_list")
     fun getRequirementList(@Query("branch_keycode") auth: String?): Single<List<RawRequirementItem>>
 
