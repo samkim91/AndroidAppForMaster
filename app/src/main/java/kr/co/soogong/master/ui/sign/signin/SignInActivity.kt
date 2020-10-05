@@ -1,11 +1,14 @@
 package kr.co.soogong.master.ui.sign.signin
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.viewModels
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ActivitySignInBinding
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.ui.getRepository
+import kr.co.soogong.master.ui.sign.signin.SignInViewModel.Companion.FAIL
+import kr.co.soogong.master.ui.sign.signin.SignInViewModel.Companion.SUCCESS
 import kr.co.soogong.master.uiinterface.main.MainActivityHelper
 import kr.co.soogong.master.util.EventObserver
 import timber.log.Timber
@@ -50,9 +53,16 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(
     }
 
     private fun registerEventObserve() {
-        viewModel.completeEvent.observe(this, EventObserver {
-            startActivity(MainActivityHelper.getIntent(this))
-            finish()
+        viewModel.event.observe(this, EventObserver { (event, message) ->
+            when (event) {
+                SUCCESS -> {
+                    startActivity(MainActivityHelper.getIntent(this))
+                    finish()
+                }
+                FAIL -> {
+                    Toast.makeText(this, message as? String, Toast.LENGTH_LONG).show()
+                }
+            }
         })
     }
 

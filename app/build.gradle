@@ -156,12 +156,12 @@ dependencies {
     // FCM
     implementation 'com.google.firebase:firebase-core:17.5.0'
     implementation 'com.google.firebase:firebase-analytics:17.5.0'
-    implementation 'com.google.firebase:firebase-messaging:20.2.4'
-    implementation 'com.google.firebase:firebase-messaging-directboot:20.2.4'
+    implementation 'com.google.firebase:firebase-messaging:20.3.0'
+    implementation 'com.google.firebase:firebase-messaging-directboot:20.3.0'
 
     // Crashlytics
     implementation 'com.google.firebase:firebase-analytics-ktx:17.5.0'
-    implementation 'com.google.firebase:firebase-crashlytics-ktx:17.2.1'
+    implementation 'com.google.firebase:firebase-crashlytics-ktx:17.2.2'
 
     // Kakao
     implementation "com.kakao.sdk:v2-talk:$kakaoVersion"
