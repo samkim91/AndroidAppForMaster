@@ -72,6 +72,13 @@ object HttpClient {
             }
         }
     }
+
+    fun findInfo(name: String?, contact: String?): Single<Response> {
+        val data = HashMap<String, String?>()
+        data["name"] = name
+        data["contact"] = contact
+        return httpInterface.findInfo(data)
+    }
     //endregion Auth
 
     fun getRequirementList(keycode: String?): Single<List<Requirement>> {
