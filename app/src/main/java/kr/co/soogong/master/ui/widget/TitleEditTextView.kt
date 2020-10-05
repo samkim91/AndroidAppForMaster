@@ -1,13 +1,13 @@
 package kr.co.soogong.master.ui.widget
 
 import android.content.Context
+import android.text.Editable
 import android.text.TextWatcher
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.widget.addTextChangedListener
 import kr.co.soogong.master.databinding.ViewTitleEdittextviewBinding
 
 class TitleEditTextView @JvmOverloads constructor(
@@ -49,9 +49,39 @@ class TitleEditTextView @JvmOverloads constructor(
             return binding.detail.text.toString()
         }
 
-    fun addTextChangedListener(watcher: TextWatcher) {
-        binding.detail.addTextChangedListener {
-            it?.toString()
+    fun addTextChangedListener(
+        beforeTextChanged: (
+            text: CharSequence?,
+            start: Int,
+            count: Int,
+            after: Int
+        ) -> Unit = { _, _, _, _ -> },
+        onTextChanged: (
+            text: CharSequence?,
+            start: Int,
+            count: Int,
+            after: Int
+        ) -> Unit = { _, _, _, _ -> },
+        afterTextChanged: (text: Editable?) -> Unit = {}
+    ) {
+        val textWatcher = object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                afterTextChanged.invoke(s)
+            }
+
+            override fun beforeTextChanged(
+                text: CharSequence?,
+                start: Int,
+                count: Int,
+                after: Int
+            ) {
+                beforeTextChanged.invoke(text, start, count, after)
+            }
+
+            override fun onTextChanged(text: CharSequence?, start: Int, before: Int, count: Int) {
+                onTextChanged.invoke(text, start, before, count)
+            }
         }
+        binding.detail.addTextChangedListener(textWatcher)
     }
 }

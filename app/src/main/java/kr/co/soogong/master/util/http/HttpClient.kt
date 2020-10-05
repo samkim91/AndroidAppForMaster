@@ -116,7 +116,22 @@ object HttpClient {
         }
     }
 
+    //region Setting
     fun getNoticeList(): Single<List<Notice>> {
         return httpInterface.getNoticeList()
     }
+
+    fun resetPassword(
+        keycode: String?,
+        password: String,
+        confirmPassword: String
+    ): Single<Response> {
+        val data = HashMap<String, String?>()
+        data["keycode"] = keycode
+        data["password"] = password
+        data["password_confirmation"] = confirmPassword
+
+        return httpInterface.resetPassword(data)
+    }
+    //endregion
 }

@@ -31,4 +31,7 @@ interface HttpInterface {
 
     @GET("notice")
     fun getNoticeList(): Single<List<Notice>>
+
+    @POST("password")
+    fun resetPassword(@Body body: HashMap<String, String?>): Single<Response>
 }
