@@ -1,20 +1,26 @@
 package kr.co.soogong.master.ui.settings.password
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
+import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ActivityPasswordBinding
 import kr.co.soogong.master.ui.base.BaseActivity
+import kr.co.soogong.master.util.EventObserver
 import timber.log.Timber
 
 class PasswordActivity : BaseActivity<ActivityPasswordBinding>(
     R.layout.activity_password
 ) {
+    private val viewModel: PasswordViewModel by lazy {
+        ViewModelProvider(this).get(PasswordViewModel::class.java)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Timber.tag(TAG).d("onCreate: ")
         initLayout()
+        registerEventObserve()
     }
 
     private fun initLayout() {
@@ -28,37 +34,42 @@ class PasswordActivity : BaseActivity<ActivityPasswordBinding>(
                 }
             }
 
-            val watcher: TextWatcher = object : TextWatcher {
-                override fun beforeTextChanged(
-                    s: CharSequence,
-                    start: Int,
-                    count: Int,
-                    after: Int
-                ) = Unit
+            inputPassword.addTextChangedListener(afterTextChanged = {
+                inputPassword.hintVisible = inputPassword.text.isNullOrEmpty()
+            })
 
-                override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) =
-                    Unit
-
-                override fun afterTextChanged(s: Editable) = Unit
-            }
-
-            inputPassword.addTextChangedListener(watcher)
-            inputPasswordCheck.addTextChangedListener(watcher)
+            inputPasswordConfirm.addTextChangedListener(afterTextChanged = {
+                if (inputPassword.text.isNullOrEmpty()) {
+                    return@addTextChangedListener
+                }
+                if (inputPasswordConfirm.text.isNullOrEmpty()) {
+                    return@addTextChangedListener
+                }
+                inputPasswordConfirm.hintVisible = inputPassword.text != inputPasswordConfirm.text
+            })
 
             setChangeClick {
-                val password1 = inputPassword.text
-                val password2 = inputPasswordCheck.text
+                val password = inputPassword.text
+                val confirmPassword = inputPasswordConfirm.text
 
-                if (password1 != password2) {
-                    inputPasswordCheck.hintVisible = true
-                } else {
-                    inputPassword.hintVisible = false
-                    inputPasswordCheck.hintVisible = false
+                if (password.isNullOrEmpty() || confirmPassword.isNullOrEmpty()) {
+                    return@setChangeClick
                 }
+
+                if (password != confirmPassword) {
+                    inputPasswordConfirm.hintVisible = true
+                    return@setChangeClick
+                }
+
+                viewModel.resetPassword(password, confirmPassword)
             }
-
-
         }
+    }
+
+    private fun registerEventObserve() {
+        viewModel.completeEvent.observe(this, EventObserver {
+            Toast.makeText(this@PasswordActivity, "비밀번호 변경 성공", Toast.LENGTH_LONG).show()
+        })
     }
 
     companion object {

@@ -1,16 +1,27 @@
 package kr.co.soogong.master.ui.settings.password
 
-import android.text.Editable
-import android.text.TextWatcher
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.ui.base.BaseViewModel
-
+import kr.co.soogong.master.util.InjectHelper
+import kr.co.soogong.master.util.http.HttpClient
+import timber.log.Timber
 
 class PasswordViewModel : BaseViewModel() {
-    var watcher: TextWatcher = object : TextWatcher {
-        override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) = Unit
+    fun resetPassword(password: String, confirmPassword: String) {
+        HttpClient.resetPassword(InjectHelper.keyCode, password, confirmPassword)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                Timber.tag(TAG).d("resetPassword: $it")
+                complete()
+            }, {
+                Timber.tag(TAG).w("resetPassword: $it")
+            })
+            .addToDisposable()
+    }
 
-        override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) = Unit
-
-        override fun afterTextChanged(s: Editable) = Unit
+    companion object {
+        private const val TAG = "PasswordViewModel"
     }
 }
