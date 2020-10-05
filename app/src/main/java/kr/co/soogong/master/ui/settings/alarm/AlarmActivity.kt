@@ -12,7 +12,7 @@ class AlarmActivity : BaseActivity<ActivityAlarmBinding>(
     R.layout.activity_alarm
 ) {
 
-    val viewModel: AlarmViewModel by lazy {
+    private val viewModel: AlarmViewModel by lazy {
         ViewModelProvider(this).get(AlarmViewModel::class.java)
     }
 

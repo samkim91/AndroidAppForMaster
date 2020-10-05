@@ -3,6 +3,7 @@ package kr.co.soogong.master.util.http
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import io.reactivex.Single
+import kr.co.soogong.master.data.notice.Notice
 import kr.co.soogong.master.data.rawtype.sign.SignInfo
 import kr.co.soogong.master.data.requirements.Estimate
 import kr.co.soogong.master.data.requirements.Requirement
@@ -113,5 +114,9 @@ object HttpClient {
             Timber.tag(TAG).d("getUserProfile: $it")
             User.from(it)
         }
+    }
+
+    fun getNoticeList(): Single<List<Notice>> {
+        return httpInterface.getNoticeList()
     }
 }

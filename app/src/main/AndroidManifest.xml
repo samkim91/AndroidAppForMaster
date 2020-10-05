@@ -52,6 +52,9 @@
         <activity
             android:name=".ui.settings.notice.NoticeActivity"
             android:launchMode="singleTask" />
+        <activity
+            android:name=".ui.settings.notice.detail.NoticeDatailActivity"
+            android:launchMode="singleTask" />
 
         <service
             android:name=".SoogongMasterMessagingService"

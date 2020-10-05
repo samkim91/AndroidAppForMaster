@@ -21,6 +21,13 @@
     <string name="category">업종</string>
     <string name="modify">수정하기</string>
 
+    <!-- Request Detail -->
+    <string name="request_date">접수일시</string>
+    <string name="request_user_name">고객명</string>
+    <string name="request_type">장소유형</string>
+    <string name="request_size">평수</string>
+    <string name="request_detail">요청사항</string>
+
     <!-- Requirement Progress Fragment -->
     <string name="noti_progress_fragment">의 매칭완료 문의가 있습니다!</string>
 
@@ -33,10 +40,5 @@
     <!--  FCM  -->
     <string name="default_notification_channel_id" translatable="false">soogong_master</string>
     <string name="default_notification_channel_name" translatable="false">soogong_master_requirement</string>
-    <string name="request_detail">요청사항</string>
-    <string name="request_date">접수일시</string>
-    <string name="request_user_name">고객명</string>
-    <string name="request_type">장소유형</string>
-    <string name="request_size">평수</string>
 
 </resources>
