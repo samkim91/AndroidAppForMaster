@@ -19,7 +19,10 @@ class RequirementsFragment : BaseFragment<FragmentRequirementsBinding>(
 
     override fun initLayout() {
         Timber.tag(TAG).d("initLayout: ")
+
         bind {
+            lifecycleOwner = viewLifecycleOwner
+
             with(mainTabs) {
                 addTab(newTab().setText("견적 대기"))
                 addTab(newTab().setText("진행중"))

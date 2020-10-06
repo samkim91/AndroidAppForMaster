@@ -18,7 +18,7 @@
             android:id="@+id/action_bar"
             layout="@layout/action_bar" />
 
-        <kr.co.soogong.master.ui.widget.TitleEditTextView
+        <kr.co.soogong.master.ui.widget.TitleEditText
             android:id="@+id/input_name"
             style="@style/medium_text_style.medium"
             android:layout_width="match_parent"
@@ -30,7 +30,7 @@
             app:hintVisible="@{false}"
             app:title='@{"업체명"}' />
 
-        <kr.co.soogong.master.ui.widget.TitleEditTextView
+        <kr.co.soogong.master.ui.widget.TitleEditText
             android:id="@+id/input_contact"
             style="@style/medium_text_style.medium"
             android:layout_width="match_parent"

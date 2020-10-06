@@ -28,6 +28,7 @@ class AlarmActivity : BaseActivity<ActivityAlarmBinding>(
         bind {
             setVariable(BR.vm, viewModel)
             lifecycleOwner = this@AlarmActivity
+
             with(actionBar) {
                 title.text = "알림 설정"
                 backButton.setOnClickListener {

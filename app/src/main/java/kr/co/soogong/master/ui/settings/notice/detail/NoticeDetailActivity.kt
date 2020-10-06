@@ -30,6 +30,7 @@ class NoticeDetailActivity : BaseActivity<ActivityNoticeDetailBinding>(
         bind {
             setVariable(BR.data, noticeData)
             lifecycleOwner = this@NoticeDetailActivity
+
             with(actionBar) {
                 title.text = "공지 사항"
                 backButton.setOnClickListener {

@@ -29,13 +29,16 @@ class ReceivedDetailActivity : BaseActivity<ActivityReceivedDetailBinding>(
         super.onCreate(savedInstanceState)
         Timber.tag(TAG).d("onCreate: ")
         initLayout()
+        registerEventObserve()
     }
 
     private fun initLayout() {
         Timber.tag(TAG).d("initLayout: ")
+
         bind {
             setVariable(BR.vm, viewModel)
             lifecycleOwner = this@ReceivedDetailActivity
+
             with(actionBar) {
                 title.text = "수리요청서"
                 backButton.setOnClickListener {
@@ -51,8 +54,6 @@ class ReceivedDetailActivity : BaseActivity<ActivityReceivedDetailBinding>(
                 viewModel.onClickedDenied()
             }
         }
-
-        registerEventObserve()
     }
 
     private fun registerEventObserve() {

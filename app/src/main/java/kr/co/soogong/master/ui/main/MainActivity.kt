@@ -35,15 +35,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
         super.onCreate(savedInstanceState)
         Timber.tag(TAG).d("onCreate: ")
         initLayout()
-        FirebaseInstanceId.getInstance().instanceId.addOnCompleteListener { tasks ->
-            if (!tasks.isSuccessful) {
-                Timber.tag(TAG).e(tasks.exception, "onComplete: getInstanceId failed")
-                return@addOnCompleteListener
-            }
-            val token = tasks.result?.token
-            Timber.tag(TAG).d("OnCompleteListener: $token")
-            sendRegistrationToServer(token)
-        }
+        registerFCM()
     }
 
     private fun sendRegistrationToServer(token: String?) {
@@ -59,9 +51,24 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
         }
     }
 
+    private fun registerFCM() {
+        FirebaseInstanceId.getInstance().instanceId.addOnCompleteListener { tasks ->
+            if (!tasks.isSuccessful) {
+                Timber.tag(TAG).e(tasks.exception, "onComplete: getInstanceId failed")
+                return@addOnCompleteListener
+            }
+            val token = tasks.result?.token
+            Timber.tag(TAG).d("OnCompleteListener: $token")
+            sendRegistrationToServer(token)
+        }
+    }
+
     private fun initLayout() {
         Timber.tag(TAG).d("initLayout: ")
+
         bind {
+            lifecycleOwner = this@MainActivity
+
             with(mainTabs) {
                 addTab(newTab().setText("받은 요청").setIcon(R.drawable.ic_requirement))
 //                addTab(newTab().setText("자재 발주").setIcon(R.drawable.ic_material))

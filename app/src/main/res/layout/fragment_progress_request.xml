@@ -55,7 +55,7 @@
                         app:layout_constraintTop_toBottomOf="@id/category"
                         tools:text="서울시 관악구" />
 
-                    <kr.co.soogong.master.ui.widget.TitleTextView2
+                    <kr.co.soogong.master.ui.widget.TitleText2
                         android:id="@+id/date"
                         android:layout_width="0dp"
                         android:layout_height="20dp"
@@ -67,7 +67,7 @@
                         app:title="@{@string/request_date}"
                         tools:detail="2020년 8월 26일 13시 53분" />
 
-                    <kr.co.soogong.master.ui.widget.TitleTextView2
+                    <kr.co.soogong.master.ui.widget.TitleText2
                         android:id="@+id/name"
                         android:layout_width="0dp"
                         android:layout_height="20dp"
@@ -79,7 +79,7 @@
                         app:title="@{@string/request_user_name}"
                         tools:detail="홍길동" />
 
-                    <kr.co.soogong.master.ui.widget.TitleTextView2
+                    <kr.co.soogong.master.ui.widget.TitleText2
                         android:id="@+id/type"
                         android:layout_width="0dp"
                         android:layout_height="20dp"
@@ -91,7 +91,7 @@
                         app:title="@{@string/request_type}"
                         tools:detail="아파트" />
 
-                    <kr.co.soogong.master.ui.widget.TitleTextView2
+                    <kr.co.soogong.master.ui.widget.TitleText2
                         android:id="@+id/size"
                         android:layout_width="0dp"
                         android:layout_height="20dp"
@@ -103,7 +103,7 @@
                         app:title="@{@string/request_size}"
                         tools:detail="10~20평" />
 
-                    <kr.co.soogong.master.ui.widget.TitleTextView2
+                    <kr.co.soogong.master.ui.widget.TitleText2
                         android:id="@+id/detail"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"

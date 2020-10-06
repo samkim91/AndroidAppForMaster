@@ -25,6 +25,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/medium"
             android:text="Action Bar"
+            android:textColor="@color/title_color"
             android:textSize="@dimen/text_title_size"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

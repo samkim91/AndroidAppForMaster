@@ -21,8 +21,7 @@ abstract class BaseViewModel : ViewModel() {
         super.onCleared()
     }
 
-    protected val _completeEvent = MutableLiveData<Event<Unit>>()
-
+    private val _completeEvent = MutableLiveData<Event<Unit>>()
     val completeEvent: LiveData<Event<Unit>>
         get() = _completeEvent
 

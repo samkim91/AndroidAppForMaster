@@ -34,7 +34,12 @@ class ReceivedFragment : BaseFragment<FragmentRequirementsReceivedBinding>(
     }
 
     override fun initLayout() {
+        Timber.tag(TAG).d("initLayout: ")
+
         bind {
+            setVariable(BR.vm, viewModel)
+            lifecycleOwner = viewLifecycleOwner
+
             receivedList.adapter = ReceivedAdapter().apply {
                 buttonClick = { keycode ->
                     startActivity(ReceivedDetailActivityHelper.getIntent(requireContext(), keycode))
@@ -46,8 +51,6 @@ class ReceivedFragment : BaseFragment<FragmentRequirementsReceivedBinding>(
                 LinearLayoutManager(context).orientation
             )
             receivedList.addItemDecoration(dividerItemDecoration)
-            setVariable(BR.vm, viewModel)
-            lifecycleOwner = viewLifecycleOwner
         }
 
         requirementsBadge = parentFragment as? RequirementsBadge

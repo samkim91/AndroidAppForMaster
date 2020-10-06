@@ -12,7 +12,10 @@ class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Timber.tag(TAG).d("onCreate: ")
+        checkSignIng()
+    }
 
+    private fun checkSignIng() {
         val keyCode = getRepository(this).getString(AppSharedPreferenceHelper.BRANCH_KEYCODE, "")
 
         val intent = if (keyCode.isNullOrEmpty()) {

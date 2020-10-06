@@ -6,14 +6,14 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
-import kr.co.soogong.master.databinding.ViewListTextviewBinding
+import kr.co.soogong.master.databinding.ViewTextListBinding
 import kr.co.soogong.master.databinding.ViewholderAddressBinding
 
-class ListTextView @JvmOverloads constructor(
+class TextListView @JvmOverloads constructor(
     context: Context, attributeSet: AttributeSet? = null, defStyle: Int = 0
 ) : ConstraintLayout(context, attributeSet, defStyle) {
-    private var binding: ViewListTextviewBinding =
-        ViewListTextviewBinding.inflate(LayoutInflater.from(context), this, true)
+    private var binding: ViewTextListBinding =
+        ViewTextListBinding.inflate(LayoutInflater.from(context), this, true)
 
     fun setList(list: List<String>?) {
         with(binding.list) {
