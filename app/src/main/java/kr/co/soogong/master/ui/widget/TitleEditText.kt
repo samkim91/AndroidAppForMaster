@@ -2,21 +2,22 @@ package kr.co.soogong.master.ui.widget
 
 import android.content.Context
 import android.text.Editable
+import android.text.InputType
 import android.text.TextWatcher
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import kr.co.soogong.master.databinding.ViewTitleEdittextviewBinding
+import kr.co.soogong.master.databinding.ViewTitleEdittextBinding
 
-class TitleEditTextView @JvmOverloads constructor(
+class TitleEditText @JvmOverloads constructor(
     context: Context,
     attributeSet: AttributeSet? = null,
     defStyle: Int = 0
 ) : ConstraintLayout(context, attributeSet, defStyle) {
     private val binding =
-        ViewTitleEdittextviewBinding.inflate(LayoutInflater.from(context), this, true)
+        ViewTitleEdittextBinding.inflate(LayoutInflater.from(context), this, true)
 
     var title: String? = ""
         set(value) {
@@ -47,6 +48,12 @@ class TitleEditTextView @JvmOverloads constructor(
         }
         get() {
             return binding.detail.text.toString()
+        }
+
+    var inputType: Int = InputType.TYPE_TEXT_VARIATION_WEB_PASSWORD
+        set(value) {
+            field = value
+            binding.detail.inputType = value
         }
 
     fun addTextChangedListener(

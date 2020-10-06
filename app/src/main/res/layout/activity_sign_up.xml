@@ -1,5 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="kr.co.soogong.master.ui.sign.signup.SignUpViewModel" />
+
+        <variable
+            name="findLocationClick"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="signUpClick"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="categorySelectClick"
+            type="android.view.View.OnClickListener" />
+
+        <import type="android.text.InputType" />
+    </data>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,11 +38,163 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp">
+
+                <kr.co.soogong.master.ui.widget.TitleEditText
+                    android:id="@+id/id"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    app:inputType="@{InputType.TYPE_CLASS_TEXT}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:title='@{"아이디"}' />
+
+                <kr.co.soogong.master.ui.widget.TitleEditText
+                    android:id="@+id/password"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/id"
+                    app:title='@{"비밀번호"}' />
+
+                <kr.co.soogong.master.ui.widget.TitleEditText
+                    android:id="@+id/confirm_password"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/password"
+                    app:title='@{"비밀번호 확인"}' />
+
+                <kr.co.soogong.master.ui.widget.TitleEditText
+                    android:id="@+id/name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    app:inputType="@{InputType.TYPE_CLASS_TEXT}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/confirm_password"
+                    app:title='@{"업체명"}' />
+
+                <kr.co.soogong.master.ui.widget.TitleEditText
+                    android:id="@+id/contact"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    app:inputType="@{InputType.TYPE_CLASS_PHONE}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/name"
+                    app:title='@{"연락처"}' />
+
+                <kr.co.soogong.master.ui.widget.TitleEditText
+                    android:id="@+id/number"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    app:inputType="@{InputType.TYPE_CLASS_TEXT}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/contact"
+                    app:title='@{"사업자 등록번호"}' />
+
+                <kr.co.soogong.master.ui.widget.TitleEditTextButton
+                    android:id="@+id/address"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    app:buttonText='@{"검색"}'
+                    app:inputType="@{InputType.TYPE_CLASS_TEXT}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/number"
+                    app:onClick="@{findLocationClick}"
+                    app:title='@{"주소"}' />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/category_title"
+                    style="@style/medium_text_style.medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="24dp"
+                    android:fontFamily="@font/medium"
+                    android:gravity="center"
+                    android:text="업종"
+                    android:textColor="@color/primary_text_color"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/address" />
+
+                <com.nex3z.togglebuttongroup.MultiSelectToggleGroup
+                    android:id="@+id/category"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/category_title"
+                    app:tbgChildSpacing="8dp"
+                    app:tbgChildSpacingForLastRow="align"
+                    app:tbgRowSpacing="16dp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/category_detail_button"
+                    style="@style/medium_text_style.regular"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/button_round_corner"
+                    android:fontFamily="@font/regular"
+                    android:gravity="center"
+                    android:onClick="@{categorySelectClick}"
+                    android:text="업종 선택하기 +"
+                    android:textColor="@color/app_color"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/category" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/profile_title"
+                    style="@style/medium_text_style.medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="24dp"
+                    android:fontFamily="@font/medium"
+                    android:gravity="center"
+                    android:text="프로필 사진"
+                    android:textColor="@color/primary_text_color"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/category_detail_button" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/profile_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="7dp"
+                    android:src="@drawable/ic_profile_photo"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/profile_title" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    style="@style/medium_text_style.bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="24dp"
+                    android:background="@drawable/status_button_call_background"
+                    android:onClick="@{signUpClick}"
+                    android:text="가입하기"
+                    android:textColor="@color/basic_white"
+                    app:layout_constraintTop_toBottomOf="@id/profile_img" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
         </ScrollView>
-
     </LinearLayout>
 </layout>

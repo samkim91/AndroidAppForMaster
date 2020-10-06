@@ -1,5 +1,6 @@
 package kr.co.soogong.master.util.http
 
+import com.google.gson.JsonObject
 import io.reactivex.Single
 import kr.co.soogong.master.data.notice.Notice
 import kr.co.soogong.master.data.rawtype.requirment.RawRequirementItem
@@ -13,6 +14,9 @@ interface HttpInterface {
 
     @POST("find")
     fun findInfo(@Body body: HashMap<String, String?>): Single<Response>
+
+    @GET("api/v1/categories")
+    fun getCategories(): Single<List<JsonObject>>
 
     @GET("api/v1/transmissions/default_list")
     fun getRequirementList(@Query("branch_keycode") auth: String?): Single<List<RawRequirementItem>>
@@ -32,7 +36,7 @@ interface HttpInterface {
     @GET("api/v1/branches/search/{keycode}")
     fun getUserProfile(@Path("keycode") keycode: String?): Single<RawUser>
 
-    @GET("notice")
+    @GET("api/v1/boards")
     fun getNoticeList(): Single<List<Notice>>
 
     @POST("password")

@@ -17,7 +17,7 @@
             android:textColor="@color/primary_text_color"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="변경 비밀번호" />
+            tools:text="Title" />
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/detail"
@@ -43,6 +43,6 @@
             app:layout_constraintBottom_toBottomOf="@id/title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/title"
-            tools:text="변경할 비밀번호를 입력해주세요." />
+            tools:text="Hint" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -31,7 +31,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <kr.co.soogong.master.ui.widget.TitleTextView
+            <kr.co.soogong.master.ui.widget.TitleText
                 android:id="@+id/master_type"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -41,7 +41,7 @@
                 app:title="@{@string/master_type}"
                 tools:detail='@{"유료(베이직)"}' />
 
-            <kr.co.soogong.master.ui.widget.TitleTextView
+            <kr.co.soogong.master.ui.widget.TitleText
                 android:id="@+id/master_store_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -52,7 +52,7 @@
                 app:title="@{@string/store_name}"
                 tools:detail='@{"신한벽지"}' />
 
-            <kr.co.soogong.master.ui.widget.TitleTextView
+            <kr.co.soogong.master.ui.widget.TitleText
                 android:id="@+id/master_introduction"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -63,7 +63,7 @@
                 app:title="@{@string/short_introduce}"
                 tools:detail='@{"잘 부탁 드립니다!"}' />
 
-            <kr.co.soogong.master.ui.widget.TitleTextView
+            <kr.co.soogong.master.ui.widget.TitleText
                 android:id="@+id/master_license_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -73,7 +73,7 @@
                 app:title="@{@string/company_number}"
                 tools:detail='@{"123-123-123"}' />
 
-            <kr.co.soogong.master.ui.widget.TitleTextView
+            <kr.co.soogong.master.ui.widget.TitleText
                 android:id="@+id/master_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -136,7 +136,7 @@
                 app:layout_constraintTop_toBottomOf="@id/master_setting_address_title"
                 tools:text="서울시 강남구" />
 
-            <kr.co.soogong.master.ui.widget.ListTextView
+            <kr.co.soogong.master.ui.widget.TextListView
                 android:id="@+id/master_setting_address_sub_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

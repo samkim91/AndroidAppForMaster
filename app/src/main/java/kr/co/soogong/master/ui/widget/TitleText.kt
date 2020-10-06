@@ -4,15 +4,13 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
-import kr.co.soogong.master.databinding.ViewTitleTextview2Binding
-import java.text.SimpleDateFormat
-import java.util.*
+import kr.co.soogong.master.databinding.ViewTitleTextBinding
 
-class TitleTextView2 @JvmOverloads constructor(
+class TitleText @JvmOverloads constructor(
     context: Context, attributeSet: AttributeSet? = null, defStyle: Int = 0
 ) : ConstraintLayout(context, attributeSet, defStyle) {
-    private var binding: ViewTitleTextview2Binding =
-        ViewTitleTextview2Binding.inflate(LayoutInflater.from(context), this, true)
+    private var binding: ViewTitleTextBinding =
+        ViewTitleTextBinding.inflate(LayoutInflater.from(context), this, true)
 
     var title: String? = ""
         set(value) {
@@ -25,9 +23,4 @@ class TitleTextView2 @JvmOverloads constructor(
             field = value
             binding.detail.text = value
         }
-
-    fun setDetailDate(date: Date?) {
-        val simpleDateFormat = SimpleDateFormat("yyyy년 MM월 dd일 hh시 mm분")
-        binding.detail.text = simpleDateFormat.format(date ?: System.currentTimeMillis())
-    }
 }

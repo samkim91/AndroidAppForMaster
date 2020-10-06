@@ -3,6 +3,7 @@ package kr.co.soogong.master.util.http
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import io.reactivex.Single
+import kr.co.soogong.master.BuildConfig
 import kr.co.soogong.master.data.notice.Notice
 import kr.co.soogong.master.data.rawtype.sign.SignInfo
 import kr.co.soogong.master.data.requirements.Estimate
@@ -14,10 +15,16 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import timber.log.Timber
+import kotlin.collections.set
 
 object HttpClient {
     private val TAG = HttpClient::class.java.simpleName
-    private const val URL = "https://api2.soogong.co.kr/"
+    private val URL = if (BuildConfig.DEBUG) {
+        "https://test.api2.soogong.co.kr/"
+    } else {
+        "https://api2.soogong.co.kr/"
+    }
+
 
     private lateinit var instance: HttpClient
     private lateinit var okHttpClient: OkHttpClient
@@ -80,6 +87,17 @@ object HttpClient {
         return httpInterface.findInfo(data)
     }
     //endregion Auth
+
+    fun getCategories(): Single<List<String>> {
+        return httpInterface.getCategories().map {
+            val items: MutableList<String> = ArrayList()
+            for (item in it) {
+                val temp = item.get("attributes").asJsonObject.get("name").asString
+                items.add(temp)
+            }
+            return@map items
+        }
+    }
 
     fun getRequirementList(keycode: String?): Single<List<Requirement>> {
         return httpInterface.getRequirementList(keycode)
