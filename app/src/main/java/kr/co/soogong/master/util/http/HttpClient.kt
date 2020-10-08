@@ -143,8 +143,14 @@ object HttpClient {
     }
 
     //region Setting
-    fun getNoticeList(): Single<List<Notice>> {
-        return httpInterface.getNoticeList()
+    fun getNoticeList(`for`: String = "free"): Single<List<Notice>> {
+        return httpInterface.getNoticeList(`for`).map { list ->
+            val ret = ArrayList<Notice>()
+            for (item in list) {
+                ret.add(Notice.from(item))
+            }
+            return@map ret
+        }
     }
 
     fun resetPassword(

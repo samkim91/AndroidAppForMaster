@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/bind"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -36,12 +37,12 @@
             android:id="@+id/notice_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{data.date}"
             android:textColor="@color/detail_button_color"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/notice_title"
             app:layout_constraintTop_toTopOf="parent"
+            bind:date_text2="@{data.date}"
             tools:text="2020. 8. 26" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

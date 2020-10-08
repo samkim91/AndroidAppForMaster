@@ -2,7 +2,6 @@ package kr.co.soogong.master.util.http
 
 import com.google.gson.JsonObject
 import io.reactivex.Single
-import kr.co.soogong.master.data.notice.Notice
 import kr.co.soogong.master.data.rawtype.requirment.RawRequirementItem
 import kr.co.soogong.master.data.rawtype.user.RawUser
 import okhttp3.ResponseBody
@@ -36,8 +35,8 @@ interface HttpInterface {
     @GET("api/v1/branches/search/{keycode}")
     fun getUserProfile(@Path("keycode") keycode: String?): Single<RawUser>
 
-    @GET("api/v1/boards")
-    fun getNoticeList(): Single<List<Notice>>
+    @GET("api/v1/boards/notice")
+    fun getNoticeList(@Query("for") `for`: String): Single<List<JsonObject>>
 
     @POST("password")
     fun resetPassword(@Body body: HashMap<String, String?>): Single<Response>
