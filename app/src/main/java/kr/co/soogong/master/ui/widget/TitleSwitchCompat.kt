@@ -21,7 +21,7 @@ class TitleSwitchCompat @JvmOverloads constructor(
             binding.title.text = value
         }
 
-    var isChecked: Boolean = false
+    var checked: Boolean = false
         set(value) {
             field = value
             binding.switchCompat.isChecked = value

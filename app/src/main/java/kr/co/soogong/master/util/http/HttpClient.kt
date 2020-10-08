@@ -1,6 +1,7 @@
 package kr.co.soogong.master.util.http
 
 import com.google.gson.Gson
+import com.google.gson.JsonObject
 import com.google.gson.reflect.TypeToken
 import io.reactivex.Single
 import kr.co.soogong.master.BuildConfig
@@ -157,6 +158,35 @@ object HttpClient {
         data["password_confirmation"] = confirmPassword
 
         return httpInterface.resetPassword(data)
+    }
+
+    fun getAlarmStatus(keycode: String?): Single<HashMap<String, Boolean>> {
+        val data = HashMap<String, String?>()
+        data["keycode"] = keycode
+
+        return httpInterface.getAlarmStatus(data).map { req ->
+            val map = HashMap<String, Boolean>()
+            if (req.get("status").asNumber == 200) {
+                val array = req.get("data").asJsonArray
+                for (item in array) {
+                    map[item.asJsonObject.get("variable_type").asString] =
+                        item.asJsonObject.get("value").asBoolean
+                }
+            }
+            return@map map
+        }
+    }
+
+
+    fun setAlarmStatus(keycode: String?, type: String, value: Boolean): Single<JsonObject> {
+        val data = HashMap<String, Any?>()
+        data["keycode"] = keycode
+        data["type"] = type
+        data["value"] = value
+
+        return httpInterface.setAlarmStatus(data).map {
+            return@map it
+        }
     }
     //endregion
 }
