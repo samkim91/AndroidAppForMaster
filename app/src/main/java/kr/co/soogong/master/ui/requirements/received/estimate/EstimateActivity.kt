@@ -55,7 +55,7 @@ class EstimateActivity : BaseActivity<ActivityEstimateBinding>(
                 val estimate = Estimate(
                     price = amount.text.toString(),
                     contents = request.text.toString(),
-                    possibleDate = findViewById<RadioButton>(dateChoice.checkedRadioButtonId).text.toString()
+                    possibleDate = dateChoice.btnCurrentRadio?.text.toString()
                 )
                 viewModel.onClickedSend(estimate)
             }
