@@ -95,7 +95,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@id/date_choice" />
 
-                <RadioGroup
+                <kr.co.soogong.master.ui.widget.RadioButtonWithTableLayout
                     android:id="@+id/date_choice"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -105,11 +105,13 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/amount">
 
-                    <RadioButton
+                    <androidx.appcompat.widget.AppCompatRadioButton
                         android:id="@+id/one_day"
                         style="@style/small_text_style.bold"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="34dp"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginEnd="4dp"
                         android:layout_marginBottom="8dp"
                         android:background="@drawable/radio_date_choice"
                         android:button="@android:color/transparent"
@@ -122,11 +124,13 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <RadioButton
+                    <androidx.appcompat.widget.AppCompatRadioButton
                         android:id="@+id/two_day"
                         style="@style/small_text_style.bold"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="34dp"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginEnd="4dp"
                         android:layout_marginBottom="8dp"
                         android:background="@drawable/radio_date_choice"
                         android:button="@android:color/transparent"
@@ -138,11 +142,13 @@
                         app:layout_constraintStart_toEndOf="@id/one_day"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <RadioButton
+                    <androidx.appcompat.widget.AppCompatRadioButton
                         android:id="@+id/three_day"
                         style="@style/small_text_style.bold"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="34dp"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginEnd="4dp"
                         android:layout_marginBottom="8dp"
                         android:background="@drawable/radio_date_choice"
                         android:button="@android:color/transparent"
@@ -154,11 +160,13 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/one_day" />
 
-                    <RadioButton
+                    <androidx.appcompat.widget.AppCompatRadioButton
                         android:id="@+id/four_day"
                         style="@style/small_text_style.bold"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="34dp"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginEnd="4dp"
                         android:layout_marginBottom="8dp"
                         android:background="@drawable/radio_date_choice"
                         android:button="@android:color/transparent"
@@ -170,12 +178,13 @@
                         app:layout_constraintStart_toEndOf="@id/three_day"
                         app:layout_constraintTop_toBottomOf="@id/two_day" />
 
-                    <RadioButton
+                    <androidx.appcompat.widget.AppCompatRadioButton
                         android:id="@+id/five_day"
                         style="@style/small_text_style.bold"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="34dp"
-                        android:layout_marginBottom="8dp"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginEnd="4dp"
                         android:background="@drawable/radio_date_choice"
                         android:button="@android:color/transparent"
                         android:gravity="center"
@@ -189,8 +198,10 @@
                     <androidx.appcompat.widget.AppCompatRadioButton
                         android:id="@+id/six_day"
                         style="@style/small_text_style.bold"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="34dp"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginEnd="4dp"
                         android:background="@drawable/radio_date_choice"
                         android:button="@android:color/transparent"
                         android:gravity="center"
@@ -200,7 +211,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/five_day"
                         app:layout_constraintTop_toBottomOf="@id/four_day" />
-                </RadioGroup>
+                </kr.co.soogong.master.ui.widget.RadioButtonWithTableLayout>
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/request_title"
@@ -218,7 +229,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="100dp"
-                    android:layout_marginTop="32dp"
+                    android:layout_marginTop="16dp"
                     android:background="@drawable/title_textview_background"
                     android:gravity="center"
                     android:lineSpacingExtra="6sp"
