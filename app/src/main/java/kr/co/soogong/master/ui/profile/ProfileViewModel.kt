@@ -37,10 +37,26 @@ class ProfileViewModel(private val repository: Repository) : BaseViewModel() {
         get() = _userInfo.map { it?.reviewsCount }
 
     val position: LiveData<String?>
-        get() = _userInfo.map { it?.positions?.get(0) }
+        get() = _userInfo.map {
+            if (it?.positions?.isNotEmpty() == true) {
+                return@map it.positions[0]
+            } else {
+                return@map null
+            }
+        }
 
     val positions: LiveData<List<String>?>
-        get() = _userInfo.map { it?.positions?.drop(1) }
+        get() = _userInfo.map {
+            if (it?.positions?.isNotEmpty() == true) {
+                if (it.positions.size > 1) {
+                    return@map it.positions.drop(1)
+                } else {
+                    return@map emptyList()
+                }
+            } else {
+                return@map emptyList()
+            }
+        }
 
     fun requestUserProfile() {
         HttpClient.getUserProfile(InjectHelper.keyCode)

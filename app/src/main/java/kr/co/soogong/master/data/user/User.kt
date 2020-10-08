@@ -3,9 +3,10 @@ package kr.co.soogong.master.data.user
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.google.gson.JsonObject
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
-import kr.co.soogong.master.data.rawtype.user.RawUser
+import kr.co.soogong.master.ext.getNullable
 
 @Parcelize
 @Entity(tableName = "User")
@@ -30,7 +31,7 @@ data class User(
     val description: String,
 
     @SerializedName("introduction")
-    val introduction: String,
+    val introduction: String?,
 
     @SerializedName("name")
     val name: String,
@@ -39,16 +40,19 @@ data class User(
     val positions: List<String>
 ) : Parcelable {
     companion object {
-        fun from(rawUser: RawUser): User = User(
-            keycode = rawUser.attributes.keycode,
-            address = rawUser.attributes.address,
-            starCount = rawUser.attributes.average_star_count,
-            categories = rawUser.attributes.categories,
-            description = rawUser.attributes.description,
-            introduction = rawUser.attributes.introduction,
-            name = rawUser.attributes.name,
-            reviewsCount = rawUser.attributes.reviews_count,
-            positions = rawUser.attributes.positions
-        )
+        fun from(jsonObject: JsonObject): User {
+            val item = jsonObject.get("attributes").asJsonObject
+            return User(
+                keycode = item.get("keycode").asString,
+                address = item.get("address").asString,
+                starCount = item.get("average_star_count").asDouble,
+                categories = item.get("categories").asJsonArray.map { it.asString },
+                description = item.get("description").asString,
+                introduction = item.getNullable("introduction")?.asString,
+                name = item.get("name").asString,
+                reviewsCount = item.get("reviews_count").asInt,
+                positions = item.get("positions").asJsonArray.map { it.asString }
+            )
+        }
     }
 }

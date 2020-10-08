@@ -3,13 +3,12 @@ package kr.co.soogong.master.util.http
 import com.google.gson.JsonObject
 import io.reactivex.Single
 import kr.co.soogong.master.data.rawtype.requirment.RawRequirementItem
-import kr.co.soogong.master.data.rawtype.user.RawUser
 import okhttp3.ResponseBody
 import retrofit2.http.*
 
 interface HttpInterface {
     @POST("login")
-    fun login(@Body body: HashMap<String, HashMap<String, String>>): Single<ResponseBody>
+    fun login(@Body body: HashMap<String, HashMap<String, String>>): Single<JsonObject>
 
     @POST("find")
     fun findInfo(@Body body: HashMap<String, String?>): Single<Response>
@@ -33,7 +32,7 @@ interface HttpInterface {
     fun updateFCMToken(@Body body: HashMap<String, String?>): Single<Response>
 
     @GET("api/v1/branches/search/{keycode}")
-    fun getUserProfile(@Path("keycode") keycode: String?): Single<RawUser>
+    fun getUserProfile(@Path("keycode") keycode: String?): Single<JsonObject>
 
     @GET("api/v1/boards/notice")
     fun getNoticeList(@Query("for") `for`: String): Single<List<JsonObject>>

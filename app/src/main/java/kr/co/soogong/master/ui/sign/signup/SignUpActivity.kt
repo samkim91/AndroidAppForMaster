@@ -1,5 +1,6 @@
 package kr.co.soogong.master.ui.sign.signup
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import kr.co.soogong.master.R
@@ -7,6 +8,7 @@ import kr.co.soogong.master.databinding.ActivitySignUpBinding
 import kr.co.soogong.master.ext.createLabelToggle
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.ui.category.CategoryFragment
+import kr.co.soogong.master.uiinterface.sign.signup.AddressActivityHelper
 import timber.log.Timber
 
 class SignUpActivity : BaseActivity<ActivitySignUpBinding>(
@@ -61,11 +63,27 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>(
             }
 
             setFindLocationClick {
-
+                startActivityForResult(
+                    AddressActivityHelper.getIntent(this@SignUpActivity),
+                    AddressActivityHelper.SEARCH_ADDRESS_ACTIVITY
+                )
             }
 
             setSignUpClick {
+                viewModel.signUp()
+            }
+        }
+    }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        when (requestCode) {
+            AddressActivityHelper.SEARCH_ADDRESS_ACTIVITY -> {
+                if (resultCode == RESULT_OK) {
+                    val address = data?.extras?.getString(AddressActivityHelper.ADDRESS)
+                    binding.address.text = address
+                }
             }
         }
     }
