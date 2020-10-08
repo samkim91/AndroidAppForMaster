@@ -41,4 +41,10 @@ interface HttpInterface {
 
     @POST("password")
     fun resetPassword(@Body body: HashMap<String, String?>): Single<Response>
+
+    @POST("api/v1/branches/get_alarm")
+    fun getAlarmStatus(@Body body: HashMap<String, String?>): Single<JsonObject>
+
+    @POST("api/v1/branches/set_alarm")
+    fun setAlarmStatus(@Body body: HashMap<String, Any?>): Single<JsonObject>
 }
