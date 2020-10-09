@@ -3,7 +3,6 @@ package kr.co.soogong.master.util.http
 import com.google.gson.JsonObject
 import io.reactivex.Single
 import kr.co.soogong.master.data.rawtype.requirment.RawRequirementItem
-import okhttp3.ResponseBody
 import retrofit2.http.*
 
 interface HttpInterface {
@@ -12,6 +11,15 @@ interface HttpInterface {
 
     @POST("find")
     fun findInfo(@Body body: HashMap<String, String?>): Single<Response>
+
+    @POST("/signup")
+    fun signup(@Body body: HashMap<String, HashMap<String, String>>): Single<JsonObject>
+
+    @POST("api/v1/branches/register")
+    fun registerMaster(
+        @Header("") token: String,
+        @Body body: HashMap<String, String>
+    ): Single<JsonObject>
 
     @GET("api/v1/categories")
     fun getCategories(): Single<List<JsonObject>>

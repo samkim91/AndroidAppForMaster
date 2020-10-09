@@ -30,7 +30,7 @@ data class SignUpInfo(
     // 세부주소
     val detailAddress: String,
     // 업체 소개
-    val description: String,
+    val description: String = "",
     // 개업일(년-월-일)
     val openDate: String,
     // 모바일/웹에서 신청 시 [requested]

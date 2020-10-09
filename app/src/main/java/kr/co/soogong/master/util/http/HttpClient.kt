@@ -77,7 +77,7 @@ object HttpClient {
         }
     }
 
-    fun actionSignUp(signUpInfo: SignUpInfo) {
+    fun actionSignUp(signUpInfo: SignUpInfo): Single<JsonObject> {
         val data = HashMap<String, String>()
         data["email"] = signUpInfo.email
         data["password"] = signUpInfo.password
@@ -87,6 +87,31 @@ object HttpClient {
         data["customer_type"] = signUpInfo.customerType
         val send = HashMap<String, HashMap<String, String>>()
         send["customer"] = data
+        return httpInterface.signup(send).flatMap { jsonObject ->
+            if (jsonObject.has("data")) {
+                Timber.tag(TAG).d("actionSignUp: $jsonObject")
+
+                val token = jsonObject.get("data").asJsonObject
+                    .get("attributes").asJsonObject
+                    .get("token").asString
+
+                val data = HashMap<String, String>()
+                data["area"] = signUpInfo.area
+                data["location"] = signUpInfo.location
+                data["business_number"] = signUpInfo.businessNumber
+                data["name"] = signUpInfo.username
+                data["tel"] = signUpInfo.tel
+                data["address"] = signUpInfo.address
+                data["detail_address"] = signUpInfo.detailAddress
+                data["description"] = signUpInfo.description
+                data["open_date"] = signUpInfo.openDate
+
+                return@flatMap httpInterface.registerMaster(token, data)
+            } else {
+                Timber.tag(TAG).w("actionSignUp: $jsonObject")
+                return@flatMap Single.just(jsonObject)
+            }
+        }
     }
 
     fun findInfo(name: String?, contact: String?): Single<Response> {

@@ -2,14 +2,17 @@ package kr.co.soogong.master.ui.sign.signup
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import kr.co.soogong.master.R
+import kr.co.soogong.master.data.user.SignUpInfo
 import kr.co.soogong.master.databinding.ActivitySignUpBinding
 import kr.co.soogong.master.ext.createLabelToggle
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.ui.category.CategoryFragment
 import kr.co.soogong.master.uiinterface.sign.signup.AddressActivityHelper
 import timber.log.Timber
+import java.text.SimpleDateFormat
 
 class SignUpActivity : BaseActivity<ActivitySignUpBinding>(
     R.layout.activity_sign_up
@@ -17,6 +20,9 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>(
     private val viewModel: SignUpViewModel by lazy {
         ViewModelProvider(this).get(SignUpViewModel::class.java)
     }
+
+    private var area: String? = null
+    private var location: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,7 +76,24 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>(
             }
 
             setSignUpClick {
-                viewModel.signUp()
+                viewModel.signUp(
+                    SignUpInfo(
+                        email = binding.id.text ?: "",
+                        password = binding.password.text ?: "",
+                        passwordConfirmation = binding.confirmPassword.text ?: "",
+                        username = binding.username.text ?: "",
+                        phoneNumber = binding.tel.text ?: "",
+                        area = area ?: "",
+                        location = location ?: "",
+                        businessNumber = binding.number.text ?: "",
+                        tel = binding.tel.text ?: "",
+                        address = binding.address.text ?: "",
+                        detailAddress = binding.addressDetail.text.toString(),
+                        description = "",
+                        openDate = SimpleDateFormat("yyyy-MM-dd").format(System.currentTimeMillis()),
+                        status = "mobile",
+                    )
+                )
             }
         }
     }
@@ -81,8 +104,15 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>(
         when (requestCode) {
             AddressActivityHelper.SEARCH_ADDRESS_ACTIVITY -> {
                 if (resultCode == RESULT_OK) {
+                    area = data?.extras?.getString(AddressActivityHelper.AREA)
+                    location = data?.extras?.getString(AddressActivityHelper.LOCATION)
                     val address = data?.extras?.getString(AddressActivityHelper.ADDRESS)
                     binding.address.text = address
+                    if (address.isNullOrEmpty()) {
+                        binding.addressDetail.visibility = View.GONE
+                    } else {
+                        binding.addressDetail.visibility = View.VISIBLE
+                    }
                 }
             }
         }
