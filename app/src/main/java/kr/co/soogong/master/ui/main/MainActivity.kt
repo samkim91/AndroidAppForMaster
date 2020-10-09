@@ -1,15 +1,11 @@
 package kr.co.soogong.master.ui.main
 
 import android.os.Bundle
+import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.tabs.TabLayout
-import com.google.firebase.iid.FirebaseInstanceId
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ActivityMainBinding
 import kr.co.soogong.master.ui.base.BaseActivity
-import kr.co.soogong.master.util.InjectHelper
-import kr.co.soogong.master.util.http.HttpClient
 import timber.log.Timber
 
 class MainActivity : BaseActivity<ActivityMainBinding>(
@@ -31,6 +27,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
     )
     */
 
+    private val viewModel: MainViewModel by lazy {
+        ViewModelProvider(this).get(MainViewModel::class.java)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Timber.tag(TAG).d("onCreate: ")
@@ -38,29 +38,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
         registerFCM()
     }
 
-    private fun sendRegistrationToServer(token: String?) {
-        token?.let {
-            HttpClient.updateFCMToken(InjectHelper.keyCode, fcmKey = it)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    Timber.tag(TAG).d("sendRegistrationToServer: $it")
-                }, {
-                    Timber.tag(TAG).e("sendRegistrationToServer: $it")
-                })
-        }
-    }
-
     private fun registerFCM() {
-        FirebaseInstanceId.getInstance().instanceId.addOnCompleteListener { tasks ->
-            if (!tasks.isSuccessful) {
-                Timber.tag(TAG).e(tasks.exception, "onComplete: getInstanceId failed")
-                return@addOnCompleteListener
-            }
-            val token = tasks.result?.token
-            Timber.tag(TAG).d("OnCompleteListener: $token")
-            sendRegistrationToServer(token)
-        }
+        viewModel.registerFCM()
     }
 
     private fun initLayout() {
