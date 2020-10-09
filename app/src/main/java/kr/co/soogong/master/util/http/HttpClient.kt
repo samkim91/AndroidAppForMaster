@@ -1,14 +1,13 @@
 package kr.co.soogong.master.util.http
 
-import com.google.gson.Gson
 import com.google.gson.JsonObject
-import com.google.gson.reflect.TypeToken
 import io.reactivex.Single
 import kr.co.soogong.master.BuildConfig
 import kr.co.soogong.master.data.notice.Notice
-import kr.co.soogong.master.data.rawtype.sign.SignInfo
 import kr.co.soogong.master.data.requirements.Estimate
 import kr.co.soogong.master.data.requirements.Requirement
+import kr.co.soogong.master.data.user.SignInInfo
+import kr.co.soogong.master.data.user.SignUpInfo
 import kr.co.soogong.master.data.user.User
 import kr.co.soogong.master.util.InjectHelper
 import okhttp3.OkHttpClient
@@ -25,7 +24,6 @@ object HttpClient {
     } else {
         "https://api2.soogong.co.kr/"
     }
-
 
     private lateinit var instance: HttpClient
     private lateinit var okHttpClient: OkHttpClient
@@ -61,22 +59,57 @@ object HttpClient {
         val send = HashMap<String, HashMap<String, String>>()
         send["customer"] = data
 
-        return httpInterface.login(send).flatMap { responseBody ->
-            val text = responseBody.string()
+        return httpInterface.login(send).flatMap { json ->
 
-            if (text.contains("data")) {
-                val signInfo: SignInfo =
-                    Gson().fromJson(text, object : TypeToken<SignInfo>() {}.type)
-                if (signInfo.data.attributes.keycode.isNullOrEmpty()) {
+            try {
+                val signInInfo = SignInInfo.from(json)
+
+                if (signInInfo.keycode.isEmpty()) {
                     return@flatMap Single.error(RxException("기사 분들만 로그인이 가능 합니다"))
                 } else {
-                    return@flatMap Single.just(signInfo.data.attributes.keycode)
+                    return@flatMap Single.just(signInInfo.keycode)
                 }
-            } else {
-                val signInfo: Response =
-                    Gson().fromJson(text, object : TypeToken<Response>() {}.type)
+            } catch (e: Exception) {
+                val item = json.get("message").asString
 
-                return@flatMap Single.error(RxException(signInfo.message))
+                return@flatMap Single.error(RxException(item))
+            }
+        }
+    }
+
+    fun actionSignUp(signUpInfo: SignUpInfo): Single<JsonObject> {
+        val data = HashMap<String, String>()
+        data["email"] = signUpInfo.email
+        data["password"] = signUpInfo.password
+        data["password_confirmation"] = signUpInfo.passwordConfirmation
+        data["username"] = signUpInfo.username
+        data["phone_number"] = signUpInfo.phoneNumber
+        data["customer_type"] = signUpInfo.customerType
+        val send = HashMap<String, HashMap<String, String>>()
+        send["customer"] = data
+        return httpInterface.signup(send).flatMap { jsonObject ->
+            if (jsonObject.has("data")) {
+                Timber.tag(TAG).d("actionSignUp: $jsonObject")
+
+                val token = jsonObject.get("data").asJsonObject
+                    .get("attributes").asJsonObject
+                    .get("token").asString
+
+                val data = HashMap<String, String>()
+                data["area"] = signUpInfo.area
+                data["location"] = signUpInfo.location
+                data["business_number"] = signUpInfo.businessNumber
+                data["name"] = signUpInfo.username
+                data["tel"] = signUpInfo.tel
+                data["address"] = signUpInfo.address
+                data["detail_address"] = signUpInfo.detailAddress
+                data["description"] = signUpInfo.description
+                data["open_date"] = signUpInfo.openDate
+
+                return@flatMap httpInterface.registerMaster(token, data)
+            } else {
+                Timber.tag(TAG).w("actionSignUp: $jsonObject")
+                return@flatMap Single.just(jsonObject)
             }
         }
     }

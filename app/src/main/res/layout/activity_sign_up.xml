@@ -47,7 +47,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
-                    app:inputType="@{InputType.TYPE_CLASS_TEXT}"
+                    app:inputType="@{InputType.TYPE_TEXT_VARIATION_WEB_EMAIL_ADDRESS}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -74,7 +74,7 @@
                     app:title='@{"비밀번호 확인"}' />
 
                 <kr.co.soogong.master.ui.widget.TitleEditText
-                    android:id="@+id/name"
+                    android:id="@+id/username"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
@@ -85,14 +85,14 @@
                     app:title='@{"업체명"}' />
 
                 <kr.co.soogong.master.ui.widget.TitleEditText
-                    android:id="@+id/contact"
+                    android:id="@+id/tel"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
                     app:inputType="@{InputType.TYPE_CLASS_PHONE}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/name"
+                    app:layout_constraintTop_toBottomOf="@id/username"
                     app:title='@{"연락처"}' />
 
                 <kr.co.soogong.master.ui.widget.TitleEditText
@@ -103,7 +103,7 @@
                     app:inputType="@{InputType.TYPE_CLASS_TEXT}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/contact"
+                    app:layout_constraintTop_toBottomOf="@id/tel"
                     app:title='@{"사업자 등록번호"}' />
 
                 <kr.co.soogong.master.ui.widget.TitleEditTextButton
@@ -119,6 +119,22 @@
                     app:onClick="@{findLocationClick}"
                     app:title='@{"주소"}' />
 
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/address_detail"
+                    style="@style/medium_text_style.regular"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/title_textview_background"
+                    android:fontFamily="@font/regular"
+                    android:gravity="center"
+                    android:inputType="textWebEditText"
+                    android:textColor="@color/primary_text_color"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/address" />
+
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/category_title"
                     style="@style/medium_text_style.medium"
@@ -130,7 +146,7 @@
                     android:text="업종"
                     android:textColor="@color/primary_text_color"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/address" />
+                    app:layout_constraintTop_toBottomOf="@id/address_detail" />
 
                 <com.nex3z.togglebuttongroup.MultiSelectToggleGroup
                     android:id="@+id/category"
