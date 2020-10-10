@@ -17,7 +17,7 @@ interface HttpInterface {
 
     @POST("api/v1/branches/register")
     fun registerMaster(
-        @Header("") token: String,
+        @Header("x-authentication-token") token: String,
         @Body body: HashMap<String, String>
     ): Single<JsonObject>
 
