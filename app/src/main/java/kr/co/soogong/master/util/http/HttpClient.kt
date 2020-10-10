@@ -109,7 +109,7 @@ object HttpClient {
                 return@flatMap httpInterface.registerMaster(token, data)
             } else {
                 Timber.tag(TAG).w("actionSignUp: $jsonObject")
-                return@flatMap Single.just(jsonObject)
+                return@flatMap Single.error(RxException(message = "fail", data = jsonObject))
             }
         }
     }
