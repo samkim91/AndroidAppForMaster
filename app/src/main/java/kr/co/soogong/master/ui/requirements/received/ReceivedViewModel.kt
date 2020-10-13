@@ -13,6 +13,7 @@ import kr.co.soogong.master.ui.base.BaseViewModel
 import kr.co.soogong.master.util.Event
 import kr.co.soogong.master.util.InjectHelper
 import kr.co.soogong.master.util.http.HttpClient
+import timber.log.Timber
 
 class ReceivedViewModel(private val repository: Repository) : BaseViewModel() {
     private val _emptyList = MutableLiveData(true)
@@ -49,6 +50,7 @@ class ReceivedViewModel(private val repository: Repository) : BaseViewModel() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy {
+                Timber.tag(TAG).d("requestList: $it")
                 viewModelScope.launch {
                     repository.insertRequirement(it)
                 }
@@ -57,7 +59,7 @@ class ReceivedViewModel(private val repository: Repository) : BaseViewModel() {
     }
 
     companion object {
+        private const val TAG = "ReceivedViewModel"
         const val BADGE_UPDATE = "BADGE_UPDATE"
-        private const val TAG = "ProgressViewModel"
     }
 }

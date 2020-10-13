@@ -18,11 +18,29 @@ class ProfileViewModel(private val repository: Repository) : BaseViewModel() {
     val name: LiveData<String?>
         get() = _userInfo.map { it?.name }
 
+    val usingPlan: LiveData<String?>
+        get() = _userInfo.map {
+            when {
+                it?.usingPlan.isNullOrEmpty() -> {
+                    ""
+                }
+                it?.usingPlan == "free" -> {
+                    "무료 플랜"
+                }
+                else -> {
+                    "유료 플랜"
+                }
+            }
+        }
+
     val introduction: LiveData<String?>
         get() = _userInfo.map { it?.introduction }
 
     val address: LiveData<String?>
         get() = _userInfo.map { it?.address }
+
+    val detailAddress: LiveData<String?>
+        get() = _userInfo.map { it?.detailAddress }
 
     val description: LiveData<String?>
         get() = _userInfo.map { it?.description }

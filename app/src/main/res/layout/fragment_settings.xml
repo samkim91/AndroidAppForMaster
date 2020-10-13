@@ -69,11 +69,12 @@
                 android:layout_height="20dp"
                 android:layout_marginStart="38dp"
                 android:layout_marginTop="8dp"
-                android:text="유료(베이직)"
+                android:text="@{vm.usingPlan}"
                 android:textColor="@color/primary_text_color"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/master_profile_img"
-                app:layout_constraintTop_toBottomOf="@id/master_store_name" />
+                app:layout_constraintTop_toBottomOf="@id/master_store_name"
+                tools:text="유료(베이직)" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="0dp"

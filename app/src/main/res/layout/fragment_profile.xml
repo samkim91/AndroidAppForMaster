@@ -36,6 +36,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
+                app:detail="@{vm.usingPlan}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/user_profile_img"
                 app:title="@{@string/master_type}" />
@@ -87,6 +88,7 @@
                 android:layout_marginTop="8dp"
                 android:background="@drawable/title_textview_background"
                 android:gravity="center"
+                android:text="@{vm.detailAddress}"
                 android:textColor="@color/primary_text_color"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

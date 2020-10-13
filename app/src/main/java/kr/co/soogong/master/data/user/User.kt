@@ -15,8 +15,14 @@ data class User(
     @SerializedName("keycode")
     val keycode: String,
 
+    @SerializedName("using_plan")
+    val usingPlan: String,
+
     @SerializedName("address")
     val address: String,
+
+    @SerializedName("detail_address")
+    val detailAddress: String,
 
     @SerializedName("average_star_count")
     val starCount: Double,
@@ -44,7 +50,9 @@ data class User(
             val item = jsonObject.get("attributes").asJsonObject
             return User(
                 keycode = item.get("keycode").asString,
+                usingPlan = item.get("using_plan").asString,
                 address = item.get("address").asString,
+                detailAddress = item.get("detail_address").asString,
                 starCount = item.get("average_star_count").asDouble,
                 categories = item.get("categories").asJsonArray.map { it.asString },
                 description = item.get("description").asString,

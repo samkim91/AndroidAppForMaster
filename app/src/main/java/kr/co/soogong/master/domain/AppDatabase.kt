@@ -5,7 +5,6 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import androidx.sqlite.db.SupportSQLiteDatabase
 import kr.co.soogong.master.data.requirements.Requirement
 import kr.co.soogong.master.data.requirements.RequirementConverters
 import kr.co.soogong.master.data.user.User
@@ -15,7 +14,7 @@ import kr.co.soogong.master.domain.user.UserDao
 
 @Database(
     entities = [Requirement::class, User::class],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 @TypeConverters(RequirementConverters::class, UserConverters::class)
@@ -38,21 +37,7 @@ abstract class AppDatabase : RoomDatabase() {
 
         private fun buildDatabase(context: Context): AppDatabase {
             return Room.databaseBuilder(context, AppDatabase::class.java, "soogong-master.db")
-                .addCallback(object : Callback() {
-                    override fun onCreate(db: SupportSQLiteDatabase) {
-                        super.onCreate(db)
-                        /*
-                        GlobalScope.launch {
-                            val list = JsonInit.loadData(context)
-                            if (!list.isNullOrEmpty()) {
-                                list.forEach {
-                                    getInstance(context).requirementDao().insert(it)
-                                }
-                            }
-                        }
-                        */
-                    }
-                })
+                .fallbackToDestructiveMigration()
                 .build()
         }
 
