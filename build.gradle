@@ -6,7 +6,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.0.1'
+        classpath 'com.android.tools.build:gradle:4.0.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath 'com.google.gms:google-services:4.3.4'
         // NOTE: Do not place your application dependencies here; they belong
@@ -65,7 +65,7 @@ ext {
     cardviewVersion = '1.0.0'
     fragmentVersion = '1.2.5'
     activityKtxVersion = '1.1.0'
-    constraintlayoutVersion = '2.0.1'
+    constraintlayoutVersion = '2.0.2'
 
     junitVersion = '4.13'
     mockitoVersion = '3.0.0'
