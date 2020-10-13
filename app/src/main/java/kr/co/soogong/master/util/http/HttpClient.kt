@@ -2,7 +2,6 @@ package kr.co.soogong.master.util.http
 
 import com.google.gson.JsonObject
 import io.reactivex.Single
-import kr.co.soogong.master.BuildConfig
 import kr.co.soogong.master.data.notice.Notice
 import kr.co.soogong.master.data.requirements.Estimate
 import kr.co.soogong.master.data.requirements.Requirement
@@ -19,7 +18,7 @@ import kotlin.collections.set
 
 object HttpClient {
     private val TAG = HttpClient::class.java.simpleName
-    private val URL = if (BuildConfig.DEBUG) {
+    private val URL = if (false) {
         "https://test.api2.soogong.co.kr/"
     } else {
         "https://api2.soogong.co.kr/"
@@ -105,6 +104,7 @@ object HttpClient {
                 data["detail_address"] = signUpInfo.detailAddress
                 data["description"] = signUpInfo.description
                 data["open_date"] = signUpInfo.openDate
+                data["status"] = "requested"
 
                 return@flatMap httpInterface.registerMaster(token, data)
             } else {
@@ -205,7 +205,8 @@ object HttpClient {
 
         return httpInterface.getAlarmStatus(data).map { req ->
             val map = HashMap<String, Boolean>()
-            if (req.get("status").asNumber == 200) {
+            if (req.get("status").asInt == 200) {
+                Timber.tag(TAG).d("getAlarmStatus: ${req.get("status").asInt}")
                 val array = req.get("data").asJsonArray
                 for (item in array) {
                     map[item.asJsonObject.get("variable_type").asString] =

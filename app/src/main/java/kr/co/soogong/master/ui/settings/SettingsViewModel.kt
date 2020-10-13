@@ -27,6 +27,21 @@ class SettingsViewModel(
     val name: LiveData<String>
         get() = _userInfo.map { it?.name ?: "고객님" }
 
+    val usingPlan: LiveData<String?>
+        get() = _userInfo.map {
+            when {
+                it?.usingPlan.isNullOrEmpty() -> {
+                    ""
+                }
+                it?.usingPlan == "free" -> {
+                    "무료 플랜"
+                }
+                else -> {
+                    "유료 플랜"
+                }
+            }
+        }
+
     val starCount: LiveData<Double>
         get() = _userInfo.map { it?.starCount ?: 0.0 }
 
