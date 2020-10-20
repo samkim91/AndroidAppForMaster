@@ -15,7 +15,9 @@ import kr.co.soogong.master.util.InjectHelper
 import kr.co.soogong.master.util.http.HttpClient
 import timber.log.Timber
 
-class ReceivedViewModel(private val repository: Repository) : BaseViewModel() {
+class ReceivedViewModel(
+    private val repository: Repository
+) : BaseViewModel() {
     private val _emptyList = MutableLiveData(true)
     val emptyList: LiveData<Boolean>
         get() = _emptyList

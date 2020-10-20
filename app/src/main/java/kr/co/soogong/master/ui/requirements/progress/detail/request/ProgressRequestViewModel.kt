@@ -11,9 +11,7 @@ class ProgressRequestViewModel(
     repository: Repository,
     keycode: String
 ) : BaseViewModel() {
-
     private val _requirement = repository.getRequirement(keycode)
-
     val requirement: LiveData<Requirement?>
         get() = _requirement
 
@@ -61,4 +59,8 @@ class ProgressRequestViewModel(
         get() = _requirement.map {
             it?.status
         }
+
+    companion object {
+        private const val TAG = "ProgressRequestViewMode"
+    }
 }

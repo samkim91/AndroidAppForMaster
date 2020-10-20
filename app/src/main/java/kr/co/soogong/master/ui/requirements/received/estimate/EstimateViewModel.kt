@@ -19,7 +19,6 @@ class EstimateViewModel(
     private val keycode: String
 ) : BaseViewModel() {
     private val _requirement = repository.getRequirement(keycode)
-
     val requirement: LiveData<Requirement?>
         get() = _requirement
 

@@ -12,13 +12,8 @@ import kr.co.soogong.master.util.http.RxException
 import timber.log.Timber
 
 class SignUpViewModel : BaseViewModel() {
-    private val _list = MutableLiveData<List<String>>()
-    val list: LiveData<List<String>>
-        get() = _list
-
-    fun sendList(list: List<String>) {
-        _list.postValue(list)
-    }
+    var area: String? = null
+    var location: String? = null
 
     private val _event = MutableLiveData<Event<Pair<String, Any?>>>()
     val event: LiveData<Event<Pair<String, Any?>>>
@@ -67,6 +62,5 @@ class SignUpViewModel : BaseViewModel() {
         const val PASSWORD_ERROR = "PASSWORD_ERROR"
         const val PASSWORD_CONFIRMATION_ERROR = "PASSWORD_CONFIRMATION_ERROR"
         const val USER_NAME_ERROR = "USER_NAME_ERROR"
-
     }
 }

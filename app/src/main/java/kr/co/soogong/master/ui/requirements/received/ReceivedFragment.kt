@@ -40,11 +40,9 @@ class ReceivedFragment : BaseFragment<FragmentRequirementsReceivedBinding>(
             setVariable(BR.vm, viewModel)
             lifecycleOwner = viewLifecycleOwner
 
-            receivedList.adapter = ReceivedAdapter().apply {
-                buttonClick = { keycode ->
-                    startActivity(ReceivedDetailActivityHelper.getIntent(requireContext(), keycode))
-                }
-            }
+            receivedList.adapter = ReceivedAdapter(buttonClick = { keycode ->
+                startActivity(ReceivedDetailActivityHelper.getIntent(requireContext(), keycode))
+            })
 
             val dividerItemDecoration = DividerItemDecoration(
                 context,

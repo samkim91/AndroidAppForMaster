@@ -2,6 +2,9 @@ package kr.co.soogong.master.util.http
 
 import com.google.gson.JsonObject
 import io.reactivex.Single
+import kr.co.soogong.master.BuildConfig
+import kr.co.soogong.master.data.category.Category
+import kr.co.soogong.master.data.category.Project
 import kr.co.soogong.master.data.notice.Notice
 import kr.co.soogong.master.data.requirements.Estimate
 import kr.co.soogong.master.data.requirements.Requirement
@@ -14,11 +17,10 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import timber.log.Timber
-import kotlin.collections.set
 
 object HttpClient {
     private val TAG = HttpClient::class.java.simpleName
-    private val URL = if (false) {
+    private val URL = if (BuildConfig.DEBUG) {
         "https://test.api2.soogong.co.kr/"
     } else {
         "https://api2.soogong.co.kr/"
@@ -94,19 +96,19 @@ object HttpClient {
                     .get("attributes").asJsonObject
                     .get("token").asString
 
-                val data = HashMap<String, String>()
-                data["area"] = signUpInfo.area
-                data["location"] = signUpInfo.location
-                data["business_number"] = signUpInfo.businessNumber
-                data["name"] = signUpInfo.username
-                data["tel"] = signUpInfo.tel
-                data["address"] = signUpInfo.address
-                data["detail_address"] = signUpInfo.detailAddress
-                data["description"] = signUpInfo.description
-                data["open_date"] = signUpInfo.openDate
-                data["status"] = "requested"
+                val masterData = HashMap<String, String>()
+                masterData["area"] = signUpInfo.area
+                masterData["location"] = signUpInfo.location
+                masterData["business_number"] = signUpInfo.businessNumber
+                masterData["name"] = signUpInfo.username
+                masterData["tel"] = signUpInfo.tel
+                masterData["address"] = signUpInfo.address
+                masterData["detail_address"] = signUpInfo.detailAddress
+                masterData["description"] = signUpInfo.description
+                masterData["open_date"] = signUpInfo.openDate
+                masterData["status"] = "requested"
 
-                return@flatMap httpInterface.registerMaster(token, data)
+                return@flatMap httpInterface.registerMaster(token, masterData)
             } else {
                 Timber.tag(TAG).w("actionSignUp: $jsonObject")
                 return@flatMap Single.error(RxException(message = "fail", data = jsonObject))
@@ -122,12 +124,21 @@ object HttpClient {
     }
     //endregion Auth
 
-    fun getCategories(): Single<List<String>> {
-        return httpInterface.getCategories().map {
-            val items: MutableList<String> = ArrayList()
+    fun getCategoryList(): Single<List<Category>> {
+        return httpInterface.getCategoryList().map {
+            val items: MutableList<Category> = ArrayList()
             for (item in it) {
-                val temp = item.get("attributes").asJsonObject.get("name").asString
-                items.add(temp)
+                items.add(Category.fromJson(item))
+            }
+            return@map items
+        }
+    }
+
+    fun getProjectList(category: Category): Single<List<Project>> {
+        return httpInterface.getProjectList(category.id).map {
+            val items: MutableList<Project> = ArrayList()
+            for (item in it) {
+                items.add(Project.fromJson(item))
             }
             return@map items
         }
@@ -160,7 +171,7 @@ object HttpClient {
         return httpInterface.sendMessage(data)
     }
 
-    fun updateFCMToken(keycode: String?, fcmKey: String): Single<Response> {
+    fun updateFCMToken(keycode: String?, fcmKey: String?): Single<Response> {
         val data = HashMap<String, String?>()
         data["keycode"] = keycode
         data["key"] = fcmKey

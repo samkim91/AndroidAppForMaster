@@ -12,7 +12,9 @@ import kr.co.soogong.master.util.InjectHelper
 import kr.co.soogong.master.util.http.HttpClient
 import timber.log.Timber
 
-class ProfileViewModel(private val repository: Repository) : BaseViewModel() {
+class ProfileViewModel(
+    private val repository: Repository
+) : BaseViewModel() {
     private val _userInfo = repository.getUserInfo(InjectHelper.keyCode ?: "")
 
     val name: LiveData<String?>
@@ -94,5 +96,4 @@ class ProfileViewModel(private val repository: Repository) : BaseViewModel() {
     companion object {
         private const val TAG = "ProfileViewModel"
     }
-
 }

@@ -37,6 +37,9 @@
             android:name=".ui.main.MainActivity"
             android:launchMode="singleTask" />
         <activity
+            android:name=".ui.select.CategoryActivity"
+            android:launchMode="singleTask" />
+        <activity
             android:name=".ui.requirements.received.detail.ReceivedDetailActivity"
             android:launchMode="singleTask" />
         <activity
