@@ -44,20 +44,18 @@ class ProgressFragment : BaseFragment<FragmentRequirementsProgressBinding>(
             setVariable(BR.vm, viewModel)
             lifecycleOwner = viewLifecycleOwner
 
-            receivedList.adapter = ProgressAdapter().apply {
+            receivedList.adapter = ProgressAdapter(
                 detailButtonClick = { keycode ->
                     startActivity(ProgressDetailActivityHelper.getIntent(requireContext(), keycode))
-                }
-
+                },
                 callButtonClick = { number ->
                     val intent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:$number"))
                     startActivity(intent)
-                }
-
+                },
                 removeButtonClick = { keycode ->
                     Timber.tag(TAG).i("onViewCreated: $keycode")
                 }
-            }
+            )
 
             val dividerItemDecoration = DividerItemDecoration(
                 context,

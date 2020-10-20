@@ -22,17 +22,15 @@ class MainViewModel : BaseViewModel() {
     }
 
     private fun sendRegistrationToServer(token: String?) {
-        token?.let { token ->
-            HttpClient.updateFCMToken(InjectHelper.keyCode, fcmKey = token)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    Timber.tag(TAG).d("sendRegistrationToServer: $it")
-                }, {
-                    Timber.tag(TAG).e("sendRegistrationToServer: $it")
-                })
-                .addToDisposable()
-        }
+        HttpClient.updateFCMToken(InjectHelper.keyCode, fcmKey = token)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                Timber.tag(TAG).d("sendRegistrationToServer: $it")
+            }, {
+                Timber.tag(TAG).e("sendRegistrationToServer: $it")
+            })
+            .addToDisposable()
     }
 
     companion object {

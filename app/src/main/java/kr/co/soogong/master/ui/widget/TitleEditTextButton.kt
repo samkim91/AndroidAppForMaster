@@ -56,7 +56,7 @@ class TitleEditTextButton @JvmOverloads constructor(
             binding.button.text = value
         }
 
-    var inputType: Int = InputType.TYPE_TEXT_VARIATION_WEB_PASSWORD
+    var inputType: Int = InputType.TYPE_CLASS_TEXT
         set(value) {
             field = value
             binding.detail.inputType = value

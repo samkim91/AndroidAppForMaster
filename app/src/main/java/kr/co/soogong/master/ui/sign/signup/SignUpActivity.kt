@@ -5,16 +5,18 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import kr.co.soogong.master.R
+import kr.co.soogong.master.data.category.Category
+import kr.co.soogong.master.data.category.Project
 import kr.co.soogong.master.data.user.SignUpInfo
 import kr.co.soogong.master.databinding.ActivitySignUpBinding
-import kr.co.soogong.master.ext.createLabelToggle
+import kr.co.soogong.master.ext.addTextView
 import kr.co.soogong.master.ui.base.BaseActivity
-import kr.co.soogong.master.ui.category.CategoryFragment
 import kr.co.soogong.master.ui.sign.signup.SignUpViewModel.Companion.EMAIL_ERROR
 import kr.co.soogong.master.ui.sign.signup.SignUpViewModel.Companion.PASSWORD_CONFIRMATION_ERROR
 import kr.co.soogong.master.ui.sign.signup.SignUpViewModel.Companion.PASSWORD_ERROR
 import kr.co.soogong.master.ui.sign.signup.SignUpViewModel.Companion.SIGNUP_SUCCESS
 import kr.co.soogong.master.ui.sign.signup.SignUpViewModel.Companion.USER_NAME_ERROR
+import kr.co.soogong.master.uiinterface.category.CategoryActivityHelper
 import kr.co.soogong.master.uiinterface.sign.signin.SignInActivityHelper
 import kr.co.soogong.master.uiinterface.sign.signup.AddressActivityHelper
 import kr.co.soogong.master.util.EventObserver
@@ -27,9 +29,6 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>(
     private val viewModel: SignUpViewModel by lazy {
         ViewModelProvider(this).get(SignUpViewModel::class.java)
     }
-
-    private var area: String? = null
-    private var location: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -85,28 +84,11 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>(
                 }
             })
 
-            viewModel.list.observe(this@SignUpActivity, { list ->
-                if (!list.isNullOrEmpty()) {
-                    category.removeAllViews()
-
-                    for (item in list) {
-                        val view = createLabelToggle(
-                            this@SignUpActivity,
-                            item,
-                            checked = true,
-                            clickable = false
-                        )
-                        category.addView(view)
-                    }
-                }
-            })
-
             setCategorySelectClick {
-                CategoryFragment.newInstance(
-                    list = viewModel.list.value ?: emptyList(),
-                    listener = {
-                        viewModel.sendList(it)
-                    }).show(supportFragmentManager, CategoryFragment.TAG)
+                startActivityForResult(
+                    CategoryActivityHelper.getIntent(this@SignUpActivity),
+                    CategoryActivityHelper.SEARCH_CATEGORY_ACTIVITY
+                )
             }
 
             setFindLocationClick {
@@ -124,8 +106,8 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>(
                         passwordConfirmation = binding.confirmPassword.text ?: "",
                         username = binding.username.text ?: "",
                         phoneNumber = binding.tel.text ?: "",
-                        area = area ?: "",
-                        location = location ?: "",
+                        area = viewModel.area ?: "",
+                        location = viewModel.location ?: "",
                         businessNumber = binding.number.text ?: "",
                         tel = binding.tel.text ?: "",
                         address = binding.address.text ?: "",
@@ -172,14 +154,35 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>(
         when (requestCode) {
             AddressActivityHelper.SEARCH_ADDRESS_ACTIVITY -> {
                 if (resultCode == RESULT_OK) {
-                    area = data?.extras?.getString(AddressActivityHelper.AREA)
-                    location = data?.extras?.getString(AddressActivityHelper.LOCATION)
+                    viewModel.area = data?.extras?.getString(AddressActivityHelper.AREA)
+                    viewModel.location = data?.extras?.getString(AddressActivityHelper.LOCATION)
                     val address = data?.extras?.getString(AddressActivityHelper.ADDRESS)
                     binding.address.text = address
                     if (address.isNullOrEmpty()) {
                         binding.addressDetail.visibility = View.GONE
                     } else {
                         binding.addressDetail.visibility = View.VISIBLE
+                    }
+                }
+            }
+            CategoryActivityHelper.SEARCH_CATEGORY_ACTIVITY -> {
+                if (resultCode == RESULT_OK) {
+                    val category: Category? =
+                        data?.extras?.getParcelable(CategoryActivityHelper.BUNDLE_CATEGORY)
+                    val projectList =
+                        data?.extras?.getParcelableArray(CategoryActivityHelper.BUNDLE_PROJECT_LIST)
+
+                    binding.category.text = category?.name
+
+                    binding.categoryGroup.removeAllViews()
+
+                    for (item in projectList?.asList() ?: emptyList()) {
+                        val item = item as? Project
+                        addTextView(
+                            binding.categoryGroup,
+                            this@SignUpActivity,
+                            item?.name
+                        )
                     }
                 }
             }

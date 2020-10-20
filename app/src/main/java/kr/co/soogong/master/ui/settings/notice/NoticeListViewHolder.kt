@@ -11,7 +11,10 @@ import kr.co.soogong.master.databinding.ViewholderNoticeListItemBinding
 class NoticeListViewHolder(
     val binding: ViewholderNoticeListItemBinding
 ) : RecyclerView.ViewHolder(binding.root) {
-    fun bind(notice: Notice, clickListener: (Notice) -> Unit) {
+    fun bind(
+        notice: Notice,
+        clickListener: (Notice) -> Unit
+    ) {
         binding.run {
             setVariable(BR.data, notice)
 
@@ -31,8 +34,8 @@ class NoticeListViewHolder(
             root.setOnClickListener {
                 clickListener(notice)
             }
+            executePendingBindings()
         }
-        binding.executePendingBindings()
     }
 
     companion object {

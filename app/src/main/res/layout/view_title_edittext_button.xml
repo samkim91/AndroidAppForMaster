@@ -19,7 +19,7 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Title" />
 
-        <androidx.appcompat.widget.AppCompatEditText
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/detail"
             style="@style/medium_text_style.regular"
             android:layout_width="0dp"
@@ -28,7 +28,6 @@
             android:background="@drawable/title_textview_background"
             android:fontFamily="@font/regular"
             android:gravity="center"
-            android:inputType="textWebPassword"
             android:textColor="@color/primary_text_color"
             app:layout_constraintEnd_toStartOf="@id/button"
             app:layout_constraintStart_toStartOf="parent"
@@ -40,8 +39,8 @@
             android:layout_width="60dp"
             android:layout_height="40dp"
             android:layout_marginStart="8dp"
-            android:background="@drawable/status_button_call_background"
-            android:textColor="@color/basic_white"
+            android:background="@drawable/button_round_corner"
+            android:textColor="@color/app_color"
             app:layout_constraintBottom_toBottomOf="@id/detail"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/detail"

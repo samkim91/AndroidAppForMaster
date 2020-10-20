@@ -12,7 +12,10 @@ import kr.co.soogong.master.databinding.ViewholderNoticeItemBinding
 class NoticeViewHolder(
     val binding: ViewholderNoticeItemBinding
 ) : RecyclerView.ViewHolder(binding.root) {
-    fun bind(notice: Notice, clickListener: (Notice) -> Unit) {
+    fun bind(
+        notice: Notice,
+        clickListener: (Notice) -> Unit
+    ) {
         binding.run {
             setVariable(BR.data, notice)
 

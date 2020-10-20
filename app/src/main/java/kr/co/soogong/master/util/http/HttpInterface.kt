@@ -22,7 +22,10 @@ interface HttpInterface {
     ): Single<JsonObject>
 
     @GET("api/v1/categories")
-    fun getCategories(): Single<List<JsonObject>>
+    fun getCategoryList(): Single<List<JsonObject>>
+
+    @GET("api/v1/categories/{id}/projects")
+    fun getProjectList(@Path("id") id: Int): Single<List<JsonObject>>
 
     @GET("api/v1/transmissions/default_list")
     fun getRequirementList(@Query("branch_keycode") auth: String?): Single<List<RawRequirementItem>>
