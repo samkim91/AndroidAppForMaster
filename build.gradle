@@ -47,7 +47,7 @@ ext {
 
     glideVersion = '4.11.0'
 
-    flipperVersion = '0.57.0'
+    flipperVersion = '0.63.0'
     timberVersion = '4.7.1'
     leakcanary = '2.2'
 
