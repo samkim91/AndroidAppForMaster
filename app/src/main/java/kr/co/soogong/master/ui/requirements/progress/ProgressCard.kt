@@ -8,8 +8,10 @@ data class ProgressCard(
     val category: String,
     val location: String,
     val date: Date,
-    val userName: String,
-    val tel: String
+    val tel: String,
+    val content: String,
+    val wantedDate: String = "",
+    val detail: String = ""
 ) {
     companion object {
         fun from(requirement: Requirement) = ProgressCard(
@@ -17,8 +19,8 @@ data class ProgressCard(
             category = requirement.category,
             location = requirement.location,
             date = requirement.date,
-            userName = requirement.userName,
-            tel = requirement.tel
+            tel = requirement.tel,
+            content = requirement.content
         )
     }
 }

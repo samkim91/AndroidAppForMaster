@@ -14,7 +14,7 @@ import kr.co.soogong.master.domain.user.UserDao
 
 @Database(
     entities = [Requirement::class, User::class],
-    version = 2,
+    version = 3,
     exportSchema = false
 )
 @TypeConverters(RequirementConverters::class, UserConverters::class)

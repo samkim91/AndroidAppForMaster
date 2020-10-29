@@ -52,7 +52,8 @@ class Repository private constructor(
 
     fun setString(key: String, value: String) = sharedPreference.setString(key, value)
 
-    fun getString(key: String, defaultValue: String) = sharedPreference.getString(key, defaultValue)
+    fun getString(key: String, defaultValue: String? = null) =
+        sharedPreference.getString(key, defaultValue)
     //endregion AppSharedPreference
 
     companion object {
@@ -63,13 +64,12 @@ class Repository private constructor(
             requirementDao: RequirementDao,
             userDao: UserDao,
             appSharedPreference: AppSharedPreference
-        ) =
-            instance ?: synchronized(this) {
-                instance ?: Repository(
-                    requirementDao,
-                    userDao,
-                    appSharedPreference
-                ).also { instance = it }
-            }
+        ) = instance ?: synchronized(this) {
+            instance ?: Repository(
+                requirementDao,
+                userDao,
+                appSharedPreference
+            ).also { instance = it }
+        }
     }
 }

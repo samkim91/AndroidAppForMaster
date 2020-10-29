@@ -5,18 +5,22 @@ import java.util.*
 
 data class ReceivedCard(
     val keycode: String,
-    val category: String,
-    val location: String,
+    val project: String,
     val date: Date,
-    val userName: String
+    val location: String,
+    val content: String,
+    val wantedDate: String = "",
+    val detail: String = ""
 ) {
     companion object {
+        private const val TAG = "ReceivedCard"
+
         fun from(requirement: Requirement) = ReceivedCard(
             keycode = requirement.keycode,
-            category = requirement.category,
+            project = requirement.project,
             location = requirement.location,
             date = requirement.date,
-            userName = requirement.userName
+            content = requirement.content
         )
     }
 }

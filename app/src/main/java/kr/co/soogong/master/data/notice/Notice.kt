@@ -14,7 +14,7 @@ data class Notice(
     val isNew: Boolean
 ) : Parcelable {
     companion object {
-        fun from(jsonObject: JsonObject): Notice {
+        fun fromJson(jsonObject: JsonObject): Notice {
             val item = jsonObject.get("attributes").asJsonObject
             return Notice(
                 id = jsonObject.get("id").asString,
