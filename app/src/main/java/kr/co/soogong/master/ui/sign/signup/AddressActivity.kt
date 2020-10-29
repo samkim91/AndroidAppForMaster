@@ -25,7 +25,7 @@ class AddressActivity : BaseActivity<ActivityAddressBinding>(
         initLayout()
     }
 
-    fun initLayout() {
+    override fun initLayout() {
         bind {
             webViewAddress.settings.javaScriptEnabled = true
             webViewAddress.settings.javaScriptCanOpenWindowsAutomatically = true

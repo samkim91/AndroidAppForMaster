@@ -22,7 +22,7 @@ class ProgressDetailActivity : BaseActivity<ActivityProgressDetailBinding>(
         initLayout()
     }
 
-    private fun initLayout() {
+    override fun initLayout() {
         Timber.tag(TAG).d("initLayout: ")
 
         bind {
