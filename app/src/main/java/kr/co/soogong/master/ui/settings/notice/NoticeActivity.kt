@@ -23,7 +23,7 @@ class NoticeActivity : BaseActivity<ActivityNoticeBinding>(
         initLayout()
     }
 
-    private fun initLayout() {
+    override fun initLayout() {
         Timber.tag(TAG).d("initLayout: ")
 
         bind {

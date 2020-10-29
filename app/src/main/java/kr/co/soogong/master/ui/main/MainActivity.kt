@@ -42,7 +42,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
         viewModel.registerFCM()
     }
 
-    private fun initLayout() {
+    override fun initLayout() {
         Timber.tag(TAG).d("initLayout: ")
 
         bind {

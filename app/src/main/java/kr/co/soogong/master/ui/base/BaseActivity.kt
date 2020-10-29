@@ -23,6 +23,8 @@ abstract class BaseActivity<B : ViewDataBinding>(
         binding.run(action)
     }
 
+    protected abstract fun initLayout()
+
     protected fun <T : ViewDataBinding> bind(binding: T, action: T.() -> Unit) {
         binding.run(action)
     }
