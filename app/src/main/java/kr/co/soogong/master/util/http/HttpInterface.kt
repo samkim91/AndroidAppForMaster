@@ -2,7 +2,6 @@ package kr.co.soogong.master.util.http
 
 import com.google.gson.JsonObject
 import io.reactivex.Single
-import kr.co.soogong.master.data.rawtype.requirment.RawRequirementItem
 import retrofit2.http.*
 
 interface HttpInterface {
@@ -28,10 +27,10 @@ interface HttpInterface {
     fun getProjectList(@Path("id") id: Int): Single<List<JsonObject>>
 
     @GET("api/v1/transmissions/default_list")
-    fun getRequirementList(@Query("branch_keycode") auth: String?): Single<List<RawRequirementItem>>
+    fun getRequirementList(@Query("branch_keycode") auth: String?): Single<List<JsonObject>>
 
     @GET("api/v1/transmissions/accept_list")
-    fun getProgressList(@Query("branch_keycode") auth: String?): Single<List<RawRequirementItem>>
+    fun getProgressList(@Query("branch_keycode") auth: String?): Single<List<JsonObject>>
 
     @POST("api/v1/transmissions/refuse")
     fun refuseRequirement(@Body body: HashMap<String, String?>): Single<Response>

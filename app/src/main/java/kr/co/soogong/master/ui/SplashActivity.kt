@@ -16,7 +16,7 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private fun checkSignIng() {
-        val keyCode = getRepository(this).getString(AppSharedPreferenceHelper.BRANCH_KEYCODE, "")
+        val keyCode = getRepository(this).getString(AppSharedPreferenceHelper.BRANCH_KEYCODE)
 
         val intent = if (keyCode.isNullOrEmpty()) {
             SignMainActivityHelper.getIntent(this)

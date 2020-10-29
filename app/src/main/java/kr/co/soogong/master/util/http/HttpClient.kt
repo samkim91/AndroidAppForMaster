@@ -63,7 +63,7 @@ object HttpClient {
         return httpInterface.login(send).flatMap { json ->
 
             try {
-                val signInInfo = SignInInfo.from(json)
+                val signInInfo = SignInInfo.fromJson(json)
 
                 if (signInInfo.keycode.isEmpty()) {
                     return@flatMap Single.error(RxException("기사 분들만 로그인이 가능 합니다"))
@@ -146,12 +146,12 @@ object HttpClient {
 
     fun getRequirementList(keycode: String?): Single<List<Requirement>> {
         return httpInterface.getRequirementList(keycode)
-            .map { list -> list.map { Requirement.fromReceived(it) } }
+            .map { list -> list.map { Requirement.fromJson(it, "received") } }
     }
 
     fun getProgressList(keycode: String?): Single<List<Requirement>> {
         return httpInterface.getProgressList(keycode)
-            .map { list -> list.map { Requirement.fromProgress(it) } }
+            .map { list -> list.map { Requirement.fromJson(it, "progress") } }
     }
 
     fun refuseRequirement(branchKeycode: String?, keycode: String): Single<Response> {
@@ -182,7 +182,7 @@ object HttpClient {
     fun getUserProfile(keycode: String?): Single<User> {
         return httpInterface.getUserProfile(keycode).map {
             Timber.tag(TAG).d("getUserProfile: $it")
-            User.from(it)
+            User.fromJson(it)
         }
     }
 
@@ -191,7 +191,7 @@ object HttpClient {
         return httpInterface.getNoticeList(`for`).map { list ->
             val ret = ArrayList<Notice>()
             for (item in list) {
-                ret.add(Notice.from(item))
+                ret.add(Notice.fromJson(item))
             }
             return@map ret
         }

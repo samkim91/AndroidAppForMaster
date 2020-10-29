@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/bind"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -43,114 +44,121 @@
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/category"
+                        style="@style/big_text_style.bold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:background="@drawable/textview_round_corner"
-                        android:text="@{vm.category}"
-                        android:textColor="@color/app_color"
+                        android:text="@{vm.project}"
+                        android:textColor="@color/primary_text_color"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         tools:text="욕실장" />
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/location"
-                        style="@style/big_text_style.bold"
+                        android:id="@+id/time"
+                        style="@style/small_text_style.medium"
                         android:layout_width="wrap_content"
                         android:layout_height="29dp"
-                        android:layout_marginTop="6dp"
+                        android:layout_marginTop="4dp"
                         android:gravity="center"
-                        android:text="@{vm.location}"
-                        android:textColor="@color/title_color"
-                        android:textStyle="bold"
+                        android:textColor="@color/secondary_text_color"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/category"
-                        tools:text="서울시 관악구" />
+                        bind:date_text="@{vm.date}"
+                        tools:text="2020. 8. 26  13:53" />
 
                     <kr.co.soogong.master.ui.widget.TitleText2
-                        android:id="@+id/date"
+                        android:id="@+id/location"
                         android:layout_width="0dp"
-                        android:layout_height="20dp"
-                        android:layout_marginTop="36dp"
-                        app:detailDate="@{vm.date}"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        app:detail="@{vm.location}"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/location"
-                        app:title="@{@string/request_date}"
-                        tools:detail="2020년 8월 26일 13시 53분" />
-
-                    <kr.co.soogong.master.ui.widget.TitleText2
-                        android:id="@+id/name"
-                        android:layout_width="0dp"
-                        android:layout_height="20dp"
-                        android:layout_marginTop="24dp"
-                        app:detail="@{vm.userName}"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/date"
-                        app:title="@{@string/request_user_name}"
-                        tools:detail="홍길동" />
+                        app:layout_constraintTop_toBottomOf="@id/time"
+                        app:title="@{@string/request_location}" />
 
                     <kr.co.soogong.master.ui.widget.TitleText2
                         android:id="@+id/type"
                         android:layout_width="0dp"
-                        android:layout_height="20dp"
-                        android:layout_marginTop="24dp"
-                        app:detail="@{vm.houseType}"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        app:detail="@{vm.type}"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/name"
-                        app:title="@{@string/request_type}"
-                        tools:detail="아파트" />
+                        app:layout_constraintTop_toBottomOf="@id/location"
+                        app:title="@{@string/request_type}" />
 
                     <kr.co.soogong.master.ui.widget.TitleText2
-                        android:id="@+id/size"
+                        android:id="@+id/wanted_date"
                         android:layout_width="0dp"
-                        android:layout_height="20dp"
-                        android:layout_marginTop="24dp"
-                        app:detail="@{vm.size}"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        app:detail="@{vm.wantedDate}"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/type"
-                        app:title="@{@string/request_size}"
-                        tools:detail="10~20평" />
+                        app:title="@{@string/request_wanted_date}" />
+
+                    <kr.co.soogong.master.ui.widget.TitleText2
+                        android:id="@+id/is_bag"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        app:detail="@{vm.isBag}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/wanted_date"
+                        app:title="@{@string/request_is_bag}" />
+
+                    <kr.co.soogong.master.ui.widget.TitleText2
+                        android:id="@+id/contact"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        app:detail="@{vm.contact}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/is_bag"
+                        app:title="@{@string/request_contact}" />
+
+                    <LinearLayout
+                        android:id="@+id/content_frame"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:orientation="vertical"
+                        app:layout_constraintBottom_toTopOf="@id/detail"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/contact" />
 
                     <kr.co.soogong.master.ui.widget.TitleText2
                         android:id="@+id/detail"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="24dp"
                         app:detail="@{vm.content}"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/size"
+                        app:layout_constraintTop_toBottomOf="@id/content_frame"
                         app:title="@{@string/request_detail}"
                         tools:detail="욕실장이 벽에서 떨어졌어요. 새로 욕실장을 설치했으면 좋겠습니다." />
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/line"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginTop="32dp"
-                        android:background="@color/line_color"
-                        app:layout_constraintTop_toBottomOf="@id/detail" />
 
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/accept"
                         style="@style/medium_text_style.bold"
                         android:layout_width="0dp"
                         android:layout_height="40dp"
-                        android:layout_marginTop="32dp"
+                        android:layout_marginTop="24dp"
                         android:layout_marginEnd="4dp"
                         android:layout_marginBottom="48dp"
                         android:background="@drawable/status_button_call_background"
                         android:onClick="@{acceptClick}"
-                        android:text="승인하기"
+                        android:text="견적서 작성하기"
                         android:textColor="@color/basic_white"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@id/denied"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/line"
+                        app:layout_constraintTop_toBottomOf="@id/detail"
                         app:layout_goneMarginEnd="0dp" />
 
                     <androidx.appcompat.widget.AppCompatButton
@@ -159,16 +167,16 @@
                         android:layout_width="0dp"
                         android:layout_height="40dp"
                         android:layout_marginStart="4dp"
-                        android:layout_marginTop="32dp"
+                        android:layout_marginTop="24dp"
                         android:layout_marginBottom="48dp"
-                        android:background="@drawable/detail_button_background"
+                        android:background="@drawable/button_round_corner"
                         android:onClick="@{deinedClick}"
                         android:text="거절하기"
-                        android:textColor="@color/tertiary_text_color"
+                        android:textColor="@color/app_color"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/accept"
-                        app:layout_constraintTop_toBottomOf="@id/line" />
+                        app:layout_constraintTop_toBottomOf="@id/detail" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>

@@ -46,7 +46,7 @@ data class User(
     val positions: List<String>
 ) : Parcelable {
     companion object {
-        fun from(jsonObject: JsonObject): User {
+        fun fromJson(jsonObject: JsonObject): User {
             val item = jsonObject.get("attributes").asJsonObject
             return User(
                 keycode = item.get("keycode").asString,

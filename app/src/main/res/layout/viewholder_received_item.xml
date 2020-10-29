@@ -24,65 +24,81 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/type"
-            style="@style/small_text_style.medium"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:background="@drawable/textview_round_corner"
-            android:text="@{vm.category}"
-            android:textColor="@color/app_color"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="욕실장" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/location"
             style="@style/big_text_style.bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:letterSpacing="-0.01"
-            android:text="@{vm.location}"
+            android:layout_marginTop="24dp"
+            android:ellipsize="end"
+            android:lines="1"
+            android:text="@{vm.project}"
             android:textColor="@color/primary_text_color"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/type"
-            tools:text="서울시 관악구" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="욕실 위생도기 및 수전 설치/교체 123123123123" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/time"
             style="@style/small_text_style.medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:letterSpacing="-0.01"
+            android:layout_marginTop="4dp"
             android:textColor="@color/tertiary_text_color"
-            app:layout_constraintBottom_toBottomOf="@id/location"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/location"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/type"
             bind:date_text="@{vm.date}"
-            tools:text="2020년 8월 26일 13시 53분" />
+            tools:text="2020. 8. 26  13:53" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/detail"
-            style="@style/medium_text_style.regular"
+        <kr.co.soogong.master.ui.widget.TitleText3
+            android:id="@+id/location"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="9dp"
-            android:bufferType="spannable"
-            android:letterSpacing="-0.01"
-            android:lineSpacingExtra="6sp"
-            android:textColor="@color/secondary_text_color"
+            android:layout_marginTop="12dp"
+            app:detail="@{vm.location}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/time"
+            app:title="@{@string/request_location}" />
+
+        <kr.co.soogong.master.ui.widget.TitleText3
+            android:id="@+id/wanted_date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:detail="@{vm.wantedDate}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/location"
-            bind:received_detail="@{vm.userName}"
-            tools:text="@string/received_detail_viewholder" />
+            app:title="@{@string/request_wanted_date}" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            style="@style/medium_text_style.bold"
+        <kr.co.soogong.master.ui.widget.TitleText3
+            android:id="@+id/content"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="27dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginTop="8dp"
+            app:detail="@{vm.content}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/wanted_date"
+            app:title="@{@string/request_content}" />
+
+        <kr.co.soogong.master.ui.widget.TitleText3
+            android:id="@+id/detail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:detail="@{vm.detail}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/content"
+            app:title="@{@string/request_detail}" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/detail_button"
+            style="@style/medium_text_style.bold"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="13dp"
             android:background="@drawable/button_round_corner"
             android:onClick="@{detail_btn_listener}"
             android:text="@string/received_detail_button_viewholder"
@@ -91,7 +107,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/detail" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -12,7 +12,7 @@ data class SignInInfo(
     val keycode: String,
 ) : Parcelable {
     companion object {
-        fun from(jsonObject: JsonObject): SignInInfo {
+        fun fromJson(jsonObject: JsonObject): SignInInfo {
             val item = jsonObject.get("data").asJsonObject
             val attributes = item.get("attributes").asJsonObject
             return SignInInfo(

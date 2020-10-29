@@ -22,18 +22,12 @@ class ReceivedDetailViewModel(
 ) : BaseViewModel() {
 
     private val _requirement = repository.getRequirement(keycode)
-
     val requirement: LiveData<Requirement?>
         get() = _requirement
 
-    val userName: LiveData<String?>
+    val project: LiveData<String?>
         get() = _requirement.map {
-            it?.userName
-        }
-
-    val category: LiveData<String?>
-        get() = _requirement.map {
-            it?.category
+            it?.project
         }
 
     val location: LiveData<String>
@@ -51,14 +45,9 @@ class ReceivedDetailViewModel(
             it?.content
         }
 
-    val houseType: LiveData<String?>
+    val type: LiveData<String?>
         get() = _requirement.map {
             it?.houseType
-        }
-
-    val size: LiveData<String?>
-        get() = _requirement.map {
-            it?.size
         }
 
     val image: LiveData<String?>
@@ -70,6 +59,17 @@ class ReceivedDetailViewModel(
         get() = _requirement.map {
             it?.status
         }
+
+    val questions: LiveData<String?>
+        get() = _requirement.map {
+            it?.questions
+        }
+
+    val wantedDate: String = ""
+
+    val isBag: String = ""
+
+    val contact: String = ""
 
     private val _event = MutableLiveData<Event<String>>()
     val event: LiveData<Event<String>>
