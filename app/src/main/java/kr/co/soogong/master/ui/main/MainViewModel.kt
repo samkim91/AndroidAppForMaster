@@ -1,6 +1,6 @@
 package kr.co.soogong.master.ui.main
 
-import com.google.firebase.iid.FirebaseInstanceId
+import com.google.firebase.messaging.FirebaseMessaging
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.ui.base.BaseViewModel
@@ -10,12 +10,12 @@ import timber.log.Timber
 
 class MainViewModel : BaseViewModel() {
     fun registerFCM() {
-        FirebaseInstanceId.getInstance().instanceId.addOnCompleteListener { tasks ->
-            if (!tasks.isSuccessful) {
-                Timber.tag(TAG).e(tasks.exception, "onComplete: getInstanceId failed")
+        FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Timber.tag(TAG).e(task.exception, "OnCompleteListener: getInstanceId failed")
                 return@addOnCompleteListener
             }
-            val token = tasks.result?.token
+            val token = task.result
             Timber.tag(TAG).d("OnCompleteListener: $token")
             sendRegistrationToServer(token)
         }

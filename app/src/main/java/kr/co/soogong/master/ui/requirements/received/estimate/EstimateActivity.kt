@@ -1,7 +1,6 @@
 package kr.co.soogong.master.ui.requirements.received.estimate
 
 import android.os.Bundle
-import android.widget.RadioButton
 import android.widget.Toast
 import androidx.activity.viewModels
 import kr.co.soogong.master.BR
@@ -43,7 +42,7 @@ class EstimateActivity : BaseActivity<ActivityEstimateBinding>(
             lifecycleOwner = this@EstimateActivity
 
             with(actionBar) {
-                title.text = "견적서"
+                title.text = "견적서 작성하기"
                 backButton.setOnClickListener {
                     super.onBackPressed()
                 }
@@ -55,7 +54,7 @@ class EstimateActivity : BaseActivity<ActivityEstimateBinding>(
                 val estimate = Estimate(
                     price = amount.text.toString(),
                     contents = request.text.toString(),
-                    possibleDate = dateChoice.btnCurrentRadio?.text.toString()
+                    possibleDate = ""
                 )
                 viewModel.onClickedSend(estimate)
             }
@@ -67,7 +66,7 @@ class EstimateActivity : BaseActivity<ActivityEstimateBinding>(
         viewModel.event.observe(this, EventObserver { event ->
             when (event) {
                 EstimateViewModel.SEND_EVENT -> {
-                    Toast.makeText(this, "견적이 발송되었습니다.\n매칭을 기다려 주세요.", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, "견적서가 발송되었습니다.\n채택을 기다려 주세요.", Toast.LENGTH_LONG).show()
                     startActivity(MainActivityHelper.getIntent(this))
                     finish()
                 }

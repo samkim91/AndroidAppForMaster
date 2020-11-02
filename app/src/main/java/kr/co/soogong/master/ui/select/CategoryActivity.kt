@@ -15,10 +15,10 @@ class CategoryActivity : BaseActivity<ActivityCategoryBinding>(
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Timber.tag(TAG).d("onCreate: ")
-        setCategorySelectFragment()
+        initLayout()
     }
 
-    private fun setCategorySelectFragment() {
+    override fun initLayout() {
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment, CategorySelectFragment.newInstance())
             .commit()
