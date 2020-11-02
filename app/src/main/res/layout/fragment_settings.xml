@@ -277,7 +277,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="16dp"
                 android:text="1644-4095"
                 android:textColor="@color/secondary_text_color"
                 app:layout_constraintStart_toEndOf="@id/number_title"
@@ -299,51 +299,46 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="24dp"
-                android:text="AM 10:00 ~ PM 19:00\n(주말, 공휴일 휴무)"
+                android:layout_marginTop="13dp"
+                android:text="AM 10:00 ~ PM 19:00 (주말, 공휴일 휴무)"
                 android:textColor="@color/secondary_text_color"
                 app:layout_constraintStart_toEndOf="@id/time_title"
                 app:layout_constraintTop_toBottomOf="@id/number" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/kakao_talk_btn_layout"
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/kakao_talk_btn"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_marginTop="16dp"
-                app:layout_constraintTop_toBottomOf="@id/time">
+                android:layout_marginTop="15dp"
+                android:background="@drawable/kakao_round_corner"
+                android:onClick="@{kakaoClick}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/time" />
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/kakao_talk_btn"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/kakao_round_corner"
-                    android:onClick="@{kakaoClick}" />
+            <ImageView
+                android:id="@+id/kakao_talk_btn_icon"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@drawable/kakao_btn"
+                app:layout_constraintBottom_toBottomOf="@id/kakao_talk_btn"
+                app:layout_constraintEnd_toStartOf="@id/kakao_talk_btn_text"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="@id/kakao_talk_btn"
+                app:layout_constraintTop_toTopOf="@id/kakao_talk_btn" />
 
-                <ImageView
-                    android:id="@+id/kakao_talk_btn_icon"
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
-                    android:src="@drawable/kakao_btn"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/kakao_talk_btn_text"
-                    app:layout_constraintHorizontal_chainStyle="packed"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/kakao_talk_btn_text"
-                    style="@style/medium_text_style.bold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:text="1:1 문의하기"
-                    android:textColor="#381e1e"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/kakao_talk_btn_icon"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/kakao_talk_btn_text"
+                style="@style/medium_text_style.bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="1:1 문의하기"
+                android:textColor="#381e1e"
+                app:layout_constraintBottom_toBottomOf="@id/kakao_talk_btn"
+                app:layout_constraintEnd_toEndOf="@id/kakao_talk_btn"
+                app:layout_constraintStart_toEndOf="@id/kakao_talk_btn_icon"
+                app:layout_constraintTop_toTopOf="@id/kakao_talk_btn" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

@@ -24,9 +24,14 @@
     <!-- Request Detail -->
     <string name="request_date">접수일시</string>
     <string name="request_user_name">고객명</string>
-    <string name="request_type">장소유형</string>
+    <string name="request_type">수리장소</string>
     <string name="request_size">평수</string>
     <string name="request_detail">요청사항</string>
+    <string name="request_location">요청지역</string>
+    <string name="request_wanted_date">희망시기</string>
+    <string name="request_content">상세정보</string>
+    <string name="request_is_bag">짐유무</string>
+    <string name="request_contact">연락방법</string>
 
     <!-- Requirement Progress Fragment -->
     <string name="noti_progress_fragment">의 매칭완료 문의가 있습니다!</string>
@@ -34,11 +39,12 @@
     <!-- Requirement Received Fragment  -->
     <string name="received_noti_fragment"><b>30분 내 견적을 발송</b>하지 않을 경우 자동으로 다른 마스터님께 추가 배정됩니다</string>
     <string name="received_detail_viewholder">님으로부터 문의가 들어왔습니다. 자세한 문의 내용을 확인 후 승인, 견적을 발송해주세요!</string>
-    <string name="received_detail_button_viewholder">자세히 보기</string>
+    <string name="received_detail_button_viewholder">수리요청서 보기</string>
     <string name="progress_detail_viewholder">님이 견적을 수락하셨습니다. 전화하기 버튼을 눌러 상담을 진행해주세요.</string>
 
     <!--  FCM  -->
     <string name="default_notification_channel_id" translatable="false">soogong_master</string>
     <string name="default_notification_channel_name" translatable="false">soogong_master_requirement</string>
+    <string name="null_text">입력받은 정보가 없습니다</string>
 
 </resources>

@@ -43,7 +43,20 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     bind:estimate_title="@{vm.requirement}"
-                    tools:text="서울시 관악구 욕실장\n수리 요청에 대한 견적서" />
+                    tools:text="욕실 위생도기 및 수전 설치/교체\n수리 요청에 대한 견적서" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/time"
+                    style="@style/small_text_style.medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="29dp"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center"
+                    android:textColor="@color/secondary_text_color"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/title"
+                    bind:date_text="@{vm.requirement.date}"
+                    tools:text="2020. 8. 26  13:53" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/detail"
@@ -55,7 +68,7 @@
                     android:textColor="@color/secondary_text_color"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/title"
+                    app:layout_constraintTop_toBottomOf="@id/time"
                     bind:estimate_detail="@{vm.requirement}"
                     tools:text="아파트 / 10~20평 / 욕실장이 벽에서 떨어졌어요. 새로 욕실장을 설치했으면 좋겠습니다." />
 
@@ -66,6 +79,7 @@
                     android:layout_height="wrap_content"
                     android:text="견적금액"
                     android:textColor="@color/primary_text_color"
+                    app:layout_constraintBottom_toBottomOf="@id/amount"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@id/amount" />
 
@@ -75,11 +89,11 @@
                     android:layout_width="0dp"
                     android:layout_height="40dp"
                     android:layout_marginStart="100dp"
-                    android:layout_marginTop="32dp"
+                    android:layout_marginTop="16dp"
                     android:background="@drawable/title_textview_background"
                     android:gravity="center"
                     android:inputType="number"
-                    android:textColor="@color/app_color"
+                    android:textColor="@color/primary_text_color"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/detail"
@@ -92,126 +106,24 @@
                     android:layout_height="wrap_content"
                     android:text="시공가능일"
                     android:textColor="@color/primary_text_color"
+                    app:layout_constraintBottom_toBottomOf="@id/date_choice"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@id/date_choice" />
 
-                <kr.co.soogong.master.ui.widget.RadioButtonWithTableLayout
+                <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/date_choice"
+                    style="@style/medium_text_style.bold"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
                     android:layout_marginStart="100dp"
                     android:layout_marginTop="16dp"
+                    android:background="@drawable/title_textview_background"
+                    android:enabled="false"
+                    android:gravity="center"
+                    android:hint="시공가능일 선택"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/amount">
-
-                    <androidx.appcompat.widget.AppCompatRadioButton
-                        android:id="@+id/one_day"
-                        style="@style/small_text_style.bold"
-                        android:layout_width="0dp"
-                        android:layout_height="34dp"
-                        android:layout_marginStart="4dp"
-                        android:layout_marginEnd="4dp"
-                        android:layout_marginBottom="8dp"
-                        android:background="@drawable/radio_date_choice"
-                        android:button="@android:color/transparent"
-                        android:checked="true"
-                        android:gravity="center"
-                        android:text="지금 바로"
-                        android:textColor="@color/date_selector"
-                        app:layout_constraintBottom_toTopOf="@id/three_day"
-                        app:layout_constraintEnd_toStartOf="@id/two_day"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <androidx.appcompat.widget.AppCompatRadioButton
-                        android:id="@+id/two_day"
-                        style="@style/small_text_style.bold"
-                        android:layout_width="0dp"
-                        android:layout_height="34dp"
-                        android:layout_marginStart="4dp"
-                        android:layout_marginEnd="4dp"
-                        android:layout_marginBottom="8dp"
-                        android:background="@drawable/radio_date_choice"
-                        android:button="@android:color/transparent"
-                        android:gravity="center"
-                        android:text="1일 이내"
-                        android:textColor="@color/date_selector"
-                        app:layout_constraintBottom_toTopOf="@id/four_day"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/one_day"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <androidx.appcompat.widget.AppCompatRadioButton
-                        android:id="@+id/three_day"
-                        style="@style/small_text_style.bold"
-                        android:layout_width="0dp"
-                        android:layout_height="34dp"
-                        android:layout_marginStart="4dp"
-                        android:layout_marginEnd="4dp"
-                        android:layout_marginBottom="8dp"
-                        android:background="@drawable/radio_date_choice"
-                        android:button="@android:color/transparent"
-                        android:gravity="center"
-                        android:text="2일 이내"
-                        android:textColor="@color/date_selector"
-                        app:layout_constraintBottom_toTopOf="@id/five_day"
-                        app:layout_constraintEnd_toStartOf="@id/four_day"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/one_day" />
-
-                    <androidx.appcompat.widget.AppCompatRadioButton
-                        android:id="@+id/four_day"
-                        style="@style/small_text_style.bold"
-                        android:layout_width="0dp"
-                        android:layout_height="34dp"
-                        android:layout_marginStart="4dp"
-                        android:layout_marginEnd="4dp"
-                        android:layout_marginBottom="8dp"
-                        android:background="@drawable/radio_date_choice"
-                        android:button="@android:color/transparent"
-                        android:gravity="center"
-                        android:text="3일 이내"
-                        android:textColor="@color/date_selector"
-                        app:layout_constraintBottom_toTopOf="@id/six_day"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/three_day"
-                        app:layout_constraintTop_toBottomOf="@id/two_day" />
-
-                    <androidx.appcompat.widget.AppCompatRadioButton
-                        android:id="@+id/five_day"
-                        style="@style/small_text_style.bold"
-                        android:layout_width="0dp"
-                        android:layout_height="34dp"
-                        android:layout_marginStart="4dp"
-                        android:layout_marginEnd="4dp"
-                        android:background="@drawable/radio_date_choice"
-                        android:button="@android:color/transparent"
-                        android:gravity="center"
-                        android:text="7일 이내"
-                        android:textColor="@color/date_selector"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/six_day"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/three_day" />
-
-                    <androidx.appcompat.widget.AppCompatRadioButton
-                        android:id="@+id/six_day"
-                        style="@style/small_text_style.bold"
-                        android:layout_width="0dp"
-                        android:layout_height="34dp"
-                        android:layout_marginStart="4dp"
-                        android:layout_marginEnd="4dp"
-                        android:background="@drawable/radio_date_choice"
-                        android:button="@android:color/transparent"
-                        android:gravity="center"
-                        android:text="협의 필요"
-                        android:textColor="@color/date_selector"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/five_day"
-                        app:layout_constraintTop_toBottomOf="@id/four_day" />
-                </kr.co.soogong.master.ui.widget.RadioButtonWithTableLayout>
+                    app:layout_constraintTop_toBottomOf="@id/amount" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/request_title"
@@ -220,6 +132,7 @@
                     android:layout_height="wrap_content"
                     android:text="제안 내용"
                     android:textColor="@color/primary_text_color"
+                    app:layout_constraintBottom_toBottomOf="@id/request"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@id/request" />
 
@@ -231,40 +144,32 @@
                     android:layout_marginStart="100dp"
                     android:layout_marginTop="16dp"
                     android:background="@drawable/title_textview_background"
-                    android:gravity="center"
+                    android:gravity="center_horizontal"
                     android:lineSpacingExtra="6sp"
-                    android:minHeight="152dp"
+                    android:minHeight="240dp"
                     android:padding="16dp"
-                    app:layout_constraintBottom_toTopOf="@id/line"
+                    app:layout_constraintBottom_toTopOf="@id/accept"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/date_choice"
-                    tools:text="다른 업체보다 빠르고 정확한 시공을 자신합니다. 시공 후 문제가 생긴다면 책임지고 A/S 해드려요. 연락주시면 더 정확한 안내가 가능합니다람쥐 다람쥐 다르ㅏㅁ두ㅏ다른 업체보다 빠르고 정확한 시공을 자신합니다. 시공 후 문제가 생긴다면 책임지고 A/S 해드려요. 연락주시면 더 정확한 안내가 가능합니다람쥐 다람쥐 다르ㅏㅁ두ㅏ" />
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/line"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="32dp"
-                    android:background="@color/line_color"
-                    app:layout_constraintTop_toBottomOf="@id/request" />
+                    tools:text="다른 업체보다 빠르고 정확한 시공을 자신합니다." />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/accept"
                     style="@style/medium_text_style.bold"
                     android:layout_width="0dp"
                     android:layout_height="40dp"
-                    android:layout_marginTop="32dp"
+                    android:layout_marginTop="24dp"
                     android:layout_marginEnd="4dp"
                     android:layout_marginBottom="48dp"
                     android:background="@drawable/status_button_call_background"
                     android:onClick="@{sendClick}"
-                    android:text="견적 발송하기"
+                    android:text="견적서 발송하기"
                     android:textColor="@color/basic_white"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/line"
+                    app:layout_constraintTop_toBottomOf="@id/request"
                     app:layout_goneMarginEnd="0dp" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

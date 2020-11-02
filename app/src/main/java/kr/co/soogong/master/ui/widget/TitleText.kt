@@ -7,7 +7,9 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import kr.co.soogong.master.databinding.ViewTitleTextBinding
 
 class TitleText @JvmOverloads constructor(
-    context: Context, attributeSet: AttributeSet? = null, defStyle: Int = 0
+    context: Context,
+    attributeSet: AttributeSet? = null,
+    defStyle: Int = 0
 ) : ConstraintLayout(context, attributeSet, defStyle) {
     private var binding: ViewTitleTextBinding =
         ViewTitleTextBinding.inflate(LayoutInflater.from(context), this, true)
