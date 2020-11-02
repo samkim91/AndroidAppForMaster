@@ -7,11 +7,6 @@
         <item name="android:windowBackground">@color/app_background_color</item>
         <item name="colorPrimary">@color/app_color</item>
         <item name="colorPrimaryDark">@color/app_color</item>
-        <item name="android:buttonStyle">@style/NotoSansButtonStyle</item>
-        <item name="android:editTextStyle">@style/NotoSansEditTextStyle</item>
-        <item name="android:radioButtonStyle">@style/NotoSansRadioButtonStyle</item>
-        <item name="android:checkboxStyle">@style/NotoSansCheckboxStyle</item>
-        <item name="android:textViewStyle">@style/NotoSansTextViewStyle</item>
     </style>
 
     <!-- Splash theme. -->
@@ -130,26 +125,6 @@
 
     <style name="big_text_style.bold" parent="big_text_style">
         <item name="android:fontFamily">@font/bold</item>
-    </style>
-
-    <style name="NotoSansTextViewStyle" parent="@android:style/Widget.DeviceDefault.TextView">
-        <item name="android:fontFamily">@font/regular</item>
-    </style>
-
-    <style name="NotoSansButtonStyle" parent="@android:style/Widget.DeviceDefault.Button.Borderless">
-        <item name="android:fontFamily">@font/regular</item>
-    </style>
-
-    <style name="NotoSansEditTextStyle" parent="@android:style/Widget.DeviceDefault.EditText">
-        <item name="android:fontFamily">@font/regular</item>
-    </style>
-
-    <style name="NotoSansRadioButtonStyle" parent="@android:style/Widget.DeviceDefault.CompoundButton.RadioButton">
-        <item name="android:fontFamily">@font/regular</item>
-    </style>
-
-    <style name="NotoSansCheckboxStyle" parent="@android:style/Widget.DeviceDefault.CompoundButton.CheckBox">
-        <item name="android:fontFamily">@font/regular</item>
     </style>
 
     <style name="CustomTabText" parent="Widget.MaterialComponents.TabLayout">

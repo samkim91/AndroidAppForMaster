@@ -14,18 +14,18 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 @BindingAdapter("bind:date_text")
-fun TextView.setDateTime(date: Date) {
+fun TextView.setDateTime(date: Date?) {
     val simpleDateFormat = SimpleDateFormat("yyyy. MM. dd hh:mm")
-    text = simpleDateFormat.format(date)
+    text = simpleDateFormat.format(date ?: System.currentTimeMillis())
 }
 
 @BindingAdapter("bind:date_text2")
-fun TextView.setDateTime2(date: Date) {
+fun TextView.setDateTime2(date: Date?) {
     val simpleDateFormat = SimpleDateFormat("yyyy. MM. dd")
-    text = simpleDateFormat.format(date)
+    text = simpleDateFormat.format(date ?: System.currentTimeMillis())
 }
 
-fun addTextView(
+fun addTextView3(
     viewGroup: ViewGroup,
     context: Context,
     message: String?

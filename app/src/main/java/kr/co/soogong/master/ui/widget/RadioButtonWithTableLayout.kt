@@ -5,13 +5,13 @@ import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
-import android.widget.TableRow
 import androidx.constraintlayout.widget.ConstraintLayout
 
-
-class RadioButtonWithTableLayout(
-    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
-) : ConstraintLayout(context, attrs, defStyleAttr), View.OnClickListener {
+class RadioButtonWithTableLayout @JvmOverloads constructor(
+    context: Context,
+    attributeSet: AttributeSet? = null,
+    defStyle: Int = 0
+) : ConstraintLayout(context, attributeSet, defStyle), View.OnClickListener {
     var btnCurrentRadio: RadioButton? = null
 
     override fun onClick(v: View) {
@@ -24,19 +24,15 @@ class RadioButtonWithTableLayout(
 
     override fun addView(child: View, index: Int, params: ViewGroup.LayoutParams) {
         super.addView(child, index, params)
-        setChildrenOnClickListener(child as TableRow)
+        setChildrenOnClickListener(child)
     }
 
     override fun addView(child: View, params: ViewGroup.LayoutParams) {
         super.addView(child, params)
-        setChildrenOnClickListener(child as TableRow)
+        setChildrenOnClickListener(child)
     }
 
-    private fun setChildrenOnClickListener(tr: TableRow) {
-        val c: Int = tr.childCount
-        for (i in 0 until c) {
-            val v: View = tr.getChildAt(i)
-            (v as? RadioButton)?.setOnClickListener(this)
-        }
+    private fun setChildrenOnClickListener(v: View) {
+        (v as? RadioButton)?.setOnClickListener(this)
     }
 }

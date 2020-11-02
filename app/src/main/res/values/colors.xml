@@ -6,6 +6,7 @@
     <color name="primary_text_color">#212121</color>
     <color name="secondary_text_color">#616161</color>
     <color name="tertiary_text_color">#9e9e9e</color>
+    <color name="alert_color">#ff711d</color>
 
     <color name="line_color">#e0e0e0</color>
 

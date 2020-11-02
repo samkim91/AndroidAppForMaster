@@ -165,7 +165,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="20dp"
                     android:layout_marginTop="24dp"
-                    android:fontFamily="@font/medium"
                     android:gravity="center"
                     android:text="프로필 사진"
                     android:textColor="@color/primary_text_color"

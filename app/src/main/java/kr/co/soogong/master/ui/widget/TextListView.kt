@@ -10,7 +10,9 @@ import kr.co.soogong.master.databinding.ViewTextListBinding
 import kr.co.soogong.master.databinding.ViewholderAddressBinding
 
 class TextListView @JvmOverloads constructor(
-    context: Context, attributeSet: AttributeSet? = null, defStyle: Int = 0
+    context: Context,
+    attributeSet: AttributeSet? = null,
+    defStyle: Int = 0
 ) : ConstraintLayout(context, attributeSet, defStyle) {
     private var binding: ViewTextListBinding =
         ViewTextListBinding.inflate(LayoutInflater.from(context), this, true)
