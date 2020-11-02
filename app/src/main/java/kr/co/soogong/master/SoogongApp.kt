@@ -16,7 +16,9 @@ open class SoogongApp : Application() {
         KakaoSdk.init(this, BuildConfig.KAKAO_KEY_CODE)
         Timber.tag("App").d("onCreate: ")
 
-        RxJavaPlugins.setErrorHandler { Timber.tag("APP#").w(it) }
+        RxJavaPlugins.setErrorHandler {
+            Timber.tag(InjectHelper.context?.getString(R.string.app_name)).w(it)
+        }
     }
 }
 

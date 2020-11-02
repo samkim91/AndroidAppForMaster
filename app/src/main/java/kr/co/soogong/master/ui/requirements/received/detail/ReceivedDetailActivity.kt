@@ -6,6 +6,7 @@ import androidx.activity.viewModels
 import kr.co.soogong.master.BR
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ActivityReceivedDetailBinding
+import kr.co.soogong.master.ext.addTextView2
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.ui.getRepository
 import kr.co.soogong.master.uiinterface.requirments.received.detail.ReceivedDetailActivityHelper
@@ -40,7 +41,7 @@ class ReceivedDetailActivity : BaseActivity<ActivityReceivedDetailBinding>(
             lifecycleOwner = this@ReceivedDetailActivity
 
             with(actionBar) {
-                title.text = "수리요청서"
+                title.text = "수리요청서 보기"
                 backButton.setOnClickListener {
                     super.onBackPressed()
                 }
@@ -53,6 +54,13 @@ class ReceivedDetailActivity : BaseActivity<ActivityReceivedDetailBinding>(
             setDeinedClick {
                 viewModel.onClickedDenied()
             }
+
+            viewModel.questions.observe(this@ReceivedDetailActivity, { text ->
+                contentFrame.removeAllViews()
+                if (!text.isNullOrEmpty()) {
+                    addTextView2(contentFrame, this@ReceivedDetailActivity, "", text)
+                }
+            })
         }
     }
 

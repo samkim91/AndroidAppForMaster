@@ -9,7 +9,7 @@ import kr.co.soogong.master.data.category.Category
 import kr.co.soogong.master.data.category.Project
 import kr.co.soogong.master.data.user.SignUpInfo
 import kr.co.soogong.master.databinding.ActivitySignUpBinding
-import kr.co.soogong.master.ext.addTextView
+import kr.co.soogong.master.ext.addTextView3
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.ui.sign.signup.SignUpViewModel.Companion.EMAIL_ERROR
 import kr.co.soogong.master.ui.sign.signup.SignUpViewModel.Companion.PASSWORD_CONFIRMATION_ERROR
@@ -178,7 +178,7 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>(
 
                     for (item in projectList?.asList() ?: emptyList()) {
                         val item = item as? Project
-                        addTextView(
+                        addTextView3(
                             binding.categoryGroup,
                             this@SignUpActivity,
                             item?.name
