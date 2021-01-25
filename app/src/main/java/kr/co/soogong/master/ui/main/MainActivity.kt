@@ -11,22 +11,6 @@ import timber.log.Timber
 class MainActivity : BaseActivity<ActivityMainBinding>(
     R.layout.activity_main
 ) {
-    /*
-    private val unselectedIcon = arrayOf(
-        R.drawable.ic_requirement,
-        R.drawable.ic_material,
-        R.drawable.ic_profile,
-        R.drawable.ic_settings
-    )
-
-    private val selectedIcon = arrayOf(
-        R.drawable.ic_requirement_choice,
-        R.drawable.ic_material_choice,
-        R.drawable.ic_profile_choice,
-        R.drawable.ic_settings_choice
-    )
-    */
-
     private val viewModel: MainViewModel by lazy {
         ViewModelProvider(this).get(MainViewModel::class.java)
     }
@@ -49,8 +33,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
             lifecycleOwner = this@MainActivity
 
             with(mainTabs) {
-                addTab(newTab().setText("전체 요청").setIcon(R.drawable.ic_total_request))
-                addTab(newTab().setText("받은 요청").setIcon(R.drawable.ic_request_received))
+                addTab(newTab().setText("받은 요청").setIcon(R.drawable.ic_total_request))
+                addTab(newTab().setText("보낸 요청").setIcon(R.drawable.ic_request_received))
                 addTab(newTab().setText("마이페이지").setIcon(R.drawable.ic_mypage))
 
                 tabGravity = TabLayout.GRAVITY_FILL
@@ -58,14 +42,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
                 addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
                     override fun onTabReselected(tab: TabLayout.Tab) = Unit
 
-                    override fun onTabUnselected(tab: TabLayout.Tab) {
-//                        val position = tab.position
-//                        tab.icon = ContextCompat.getDrawable(context, unselectedIcon[position])
-                    }
+                    override fun onTabUnselected(tab: TabLayout.Tab) = Unit
 
                     override fun onTabSelected(tab: TabLayout.Tab) {
-//                        val position = tab.position
-//                        tab.icon = ContextCompat.getDrawable(context, selectedIcon[position])
                         mainViewPager.currentItem = tab.position
                     }
                 })

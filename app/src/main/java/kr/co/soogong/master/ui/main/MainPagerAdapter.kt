@@ -4,7 +4,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import kr.co.soogong.master.ui.all.AllFragment
-import kr.co.soogong.master.ui.profile.ProfileFragment
 import kr.co.soogong.master.ui.requirements.RequirementsFragment
 import kr.co.soogong.master.ui.settings.SettingsFragment
 

@@ -162,7 +162,7 @@
                     android:layout_marginTop="24dp"
                     android:layout_marginEnd="4dp"
                     android:layout_marginBottom="48dp"
-                    android:background="@drawable/status_button_call_background"
+                    android:background="@drawable/button_fill_green"
                     android:onClick="@{sendClick}"
                     android:text="견적서 발송하기"
                     android:textColor="@color/basic_white"
