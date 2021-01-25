@@ -1,7 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Basic -->
+    <color name="app_background_color">#ffffff</color>
 
-    <color name="basic_white">#ffffff</color>
+    <color name="basic_white">#FFFFFF</color>
+    <color name="color_F8F8F8">#F8F8F8</color>
+    <color name="color_F5F5F5">#F5F5F5</color>
+    <color name="color_EEEEEE">#EEEEEE</color>
+    <color name="color_E0E0E0">#E0E0E0</color>
+    <color name="color_BDBDBD">#BDBDBD</color>
+    <color name="color_9E9E9E">#9E9E9E</color>
+    <color name="color_616161">#616161</color>
+    <color name="color_212121">#212121</color>
+    <color name="color_121212">#121212</color>
+    <color name="color_22D47B">#22D47B</color>
+    <color name="color_1FC472">#1FC472</color>
+    <color name="color_8022D47B">#8022D47B</color>
+
+    <!--  SignUp  -->
+    <color name="sign_main_background_color">#E8EAEA</color>
+
     <color name="app_color">#22D47B</color>
     <color name="primary_text_color">#212121</color>
     <color name="secondary_text_color">#616161</color>
@@ -11,13 +29,6 @@
     <color name="line_color">#e0e0e0</color>
 
     <color name="colorAccent">#69a9f1</color>
-
-    <!-- Basic -->
-    <color name="app_background_color">#ffffff</color>
-    <color name="basic_ripple">#1A000000</color>
-
-    <color name="button_bg">#FF0072DE</color>
-    <color name="button_text">#FFf2f2f2</color>
 
     <!-- Action bar -->
     <color name="action_bar_back_button">#252525</color>
@@ -52,8 +63,6 @@
     <color name="received_detail">#616161</color>
 
     <color name="detail_button_color">#bdbdbd</color>
-    <color name="sign_main_background_color">#e8eaea</color>
     <color name="sign_up_button_color">#b3ffffff</color>
 
-    <color name="hint_text_color">#f57c00</color>
 </resources>

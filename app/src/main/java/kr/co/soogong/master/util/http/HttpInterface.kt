@@ -45,7 +45,7 @@ interface HttpInterface {
     fun getUserProfile(@Path("keycode") keycode: String?): Single<JsonObject>
 
     @GET("api/v1/boards/notice")
-    fun getNoticeList(@Query("for") `for`: String): Single<List<JsonObject>>
+    fun getNoticeList(@Query("for") master: String): Single<List<JsonObject>>
 
     @POST("password")
     fun resetPassword(@Body body: HashMap<String, String?>): Single<Response>

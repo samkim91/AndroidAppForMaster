@@ -17,8 +17,7 @@ class MaterialFragment : BaseFragment<FragmentMaterialBinding>(
         initLayout()
     }
 
-    override fun initLayout() {
-    }
+    override fun initLayout() = Unit
 
     companion object {
         private const val TAG = "MaterialFragment"

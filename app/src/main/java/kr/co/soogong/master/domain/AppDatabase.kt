@@ -19,8 +19,6 @@ import kr.co.soogong.master.domain.user.UserDao
 )
 @TypeConverters(RequirementConverters::class, UserConverters::class)
 abstract class AppDatabase : RoomDatabase() {
-//    abstract fun materialDao(): MaterialDao
-
     abstract fun requirementDao(): RequirementDao
 
     abstract fun userDao(): UserDao

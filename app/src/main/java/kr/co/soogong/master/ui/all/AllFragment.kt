@@ -8,9 +8,7 @@ import kr.co.soogong.master.ui.base.BaseFragment
 class AllFragment : BaseFragment<FragmentAllBinding>(
     R.layout.fragment_all
 ) {
-    override fun initLayout() {
-
-    }
+    override fun initLayout() = Unit
 
     companion object {
         fun newInstance(): AllFragment {
