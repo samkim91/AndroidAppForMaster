@@ -6,15 +6,16 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/action_bar"
         android:layout_width="match_parent"
-        android:layout_height="54dp">
+        android:layout_height="@dimen/actionbar_height">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/back_button"
-            android:layout_width="54dp"
-            android:layout_height="54dp"
-            android:layout_marginStart="6dp"
-            android:padding="15dp"
-            android:src="@drawable/outline_arrow_forward"
+            android:layout_width="@dimen/actionbar_title_back_button_width"
+            android:layout_height="@dimen/actionbar_title_back_button_height"
+            android:layout_marginStart="@dimen/actionbar_title_back_button_margin_start"
+            android:layout_marginEnd="@dimen/actionbar_title_back_button_margin_end"
+            android:padding="@dimen/actionbar_title_back_button_padding"
+            android:src="@drawable/ic_outline_arrow_forward"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -24,7 +25,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/medium"
-            android:text="Action Bar"
             android:textColor="@color/title_color"
             android:textSize="@dimen/text_title_size"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -36,7 +36,7 @@
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/line"
             android:layout_width="0dp"
-            android:layout_height="1dp"
+            android:layout_height="@dimen/actionbar_title_under_line_height"
             android:background="@color/line_color"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

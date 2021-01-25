@@ -187,8 +187,8 @@ object HttpClient {
     }
 
     //region Setting
-    fun getNoticeList(`for`: String = "free"): Single<List<Notice>> {
-        return httpInterface.getNoticeList(`for`).map { list ->
+    fun getNoticeList(master: String = "free"): Single<List<Notice>> {
+        return httpInterface.getNoticeList(master).map { list ->
             val ret = ArrayList<Notice>()
             for (item in list) {
                 ret.add(Notice.fromJson(item))

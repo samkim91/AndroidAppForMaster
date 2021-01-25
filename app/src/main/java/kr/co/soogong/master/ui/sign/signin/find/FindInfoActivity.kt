@@ -60,15 +60,9 @@ class FindInfoActivity : BaseActivity<ActivityFindInfoBinding>(
     private fun registerEventObserve() {
         viewModel.event.observe(this, EventObserver { (event, message) ->
             when (event) {
-                FAIL_TO_NAME -> {
-
-                }
-                FAIL_TO_CONTACT -> {
-
-                }
-                SUCCESS_TO_FIND_INFO -> {
-
-                }
+                FAIL_TO_NAME -> Unit
+                FAIL_TO_CONTACT -> Unit
+                SUCCESS_TO_FIND_INFO -> Unit
             }
         })
     }
