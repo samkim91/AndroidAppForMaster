@@ -89,7 +89,7 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxkotlin:$rxKotlinVersion"
 
     // Kotlin
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     implementation "androidx.fragment:fragment-ktx:$fragmentVersion"
     implementation "androidx.room:room-ktx:$roomVersion"
     implementation "androidx.activity:activity-ktx:$activityKtxVersion"
@@ -155,14 +155,14 @@ dependencies {
     androidTestImplementation "androidx.test.espresso:espresso-idling-resource:$espressoVersion"
 
     // FCM
-    implementation 'com.google.firebase:firebase-core:18.0.1'
-    implementation 'com.google.firebase:firebase-analytics:18.0.1'
-    implementation 'com.google.firebase:firebase-analytics-ktx:18.0.1'
+    implementation 'com.google.firebase:firebase-core:18.0.2'
+    implementation 'com.google.firebase:firebase-analytics:18.0.2'
+    implementation 'com.google.firebase:firebase-analytics-ktx:18.0.2'
     implementation 'com.google.firebase:firebase-messaging:21.0.1'
     implementation 'com.google.firebase:firebase-messaging-directboot:21.0.1'
 
     // Crashlytics
-    implementation 'com.google.firebase:firebase-crashlytics-ktx:17.3.0'
+    implementation 'com.google.firebase:firebase-crashlytics-ktx:17.3.1'
 
     // Kakao
     implementation "com.kakao.sdk:v2-talk:$kakaoVersion"
