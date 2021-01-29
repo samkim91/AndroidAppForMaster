@@ -34,7 +34,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:background="@drawable/textview_round_corner"
+                        android:background="@drawable/shape_board_green"
                         android:text="@{vm.category}"
                         android:textColor="@color/app_color"
                         app:layout_constraintStart_toStartOf="parent"

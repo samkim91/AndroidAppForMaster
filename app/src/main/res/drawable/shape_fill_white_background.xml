@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="@color/edit_box_background_color" />
+    <solid android:color="@color/basic_white" />
 
     <corners android:radius="8dp" />
+    <stroke
+        android:color="@color/color_BDBDBD"
+        android:width="@dimen/board_size" />
 </shape>

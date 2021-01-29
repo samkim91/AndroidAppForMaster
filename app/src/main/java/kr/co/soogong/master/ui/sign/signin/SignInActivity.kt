@@ -1,6 +1,7 @@
 package kr.co.soogong.master.ui.sign.signin
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import kr.co.soogong.master.R
@@ -63,6 +64,7 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(
                     finish()
                 }
                 FAIL -> {
+                    binding.signInAlert.visibility = View.VISIBLE
                     Toast.makeText(this, message as? String, Toast.LENGTH_LONG).show()
                 }
             }
