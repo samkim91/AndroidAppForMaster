@@ -18,50 +18,69 @@
             android:id="@+id/action_bar"
             layout="@layout/action_bar" />
 
-        <kr.co.soogong.master.ui.widget.TitleEditText
-            android:id="@+id/input_name"
-            style="@style/medium_text_style.medium"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="20dp"
-            app:hintText='@{"등록되지 않은 업체명입니다."}'
-            app:hintVisible="@{false}"
-            app:title='@{"업체명"}' />
+            android:layout_height="match_parent"
+            android:paddingStart="@dimen/find_info_padding_start"
+            android:paddingEnd="@dimen/find_info_padding_end">
 
-        <kr.co.soogong.master.ui.widget.TitleEditText
-            android:id="@+id/input_contact"
-            style="@style/medium_text_style.medium"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="20dp"
-            app:hintText='@{"등록되지 않은 전화번호입니다."}'
-            app:hintVisible="@{false}"
-            app:title='@{"연락처"}' />
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/input_email"
+                style="@style/medium_text_style.medium"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/find_info_text_edit_height"
+                android:layout_marginTop="@dimen/find_info_input_email_margin_top"
+                android:background="@drawable/shape_fill_white_background"
+                android:hint="@string/find_info_email_hint_text"
+                android:inputType="textEmailAddress"
+                android:paddingStart="@dimen/find_info_text_edit_padding_start"
+                android:paddingTop="@dimen/find_info_text_edit_padding_top"
+                android:paddingEnd="@dimen/find_info_text_edit_padding_end"
+                android:paddingBottom="@dimen/find_info_text_edit_padding_bottom"
+                android:textColor="@color/text_basic_color"
+                android:textColorHint="@color/hint_text_basic_color"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            style="@style/medium_text_style.bold"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="48dp"
-            android:layout_marginEnd="20dp"
-            android:background="@drawable/shape_fill_green"
-            android:onClick="@{findInfoClick}"
-            android:text="아이디·비밀번호 전송"
-            android:textColor="@color/basic_white" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/sign_in_alert"
+                style="@style/small_text_style.medium"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/alert_height"
+                android:layout_marginTop="@dimen/alert_margin_top"
+                android:text="@string/sign_in_error_alert_text"
+                android:textColor="@color/color_F57C00"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/input_email" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            style="@style/medium_text_style.regular"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="16dp"
-            android:text="연락처로 아이디·비밀번호를 전송해드립니다."
-            android:textColor="@color/tertiary_text_color" />
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/find_info_button"
+                style="@style/medium_text_style.bold"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/button_height"
+                android:layout_marginTop="@dimen/find_info_button_margin_top"
+                android:background="@drawable/shape_fill_green"
+                android:onClick="@{findInfoClick}"
+                android:text="@string/find_info_button_text"
+                android:textColor="@color/basic_white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/sign_in_alert"
+                app:layout_goneMarginTop="@dimen/find_info_button_gone_margin_top" />
 
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/small_text_style.regular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/find_info_email_send_text_margin_top"
+                android:text="@string/find_info_email_send_text"
+                android:textColor="@color/text_basic_color"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/find_info_button" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 </layout>

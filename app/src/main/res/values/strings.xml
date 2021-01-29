@@ -7,11 +7,16 @@
     <string name="sign_up_sign_in_button_text">로그인</string>
     <string name="sign_up_sign_up_button_text">가입신청</string>
     <!-- Sign In Activity -->
+    <string name="sign_in_activity_name">로그인</string>
     <string name="sign_in_button_text">로그인</string>
     <string name="sign_in_find_info">비밀번호 찾기</string>
     <string name="sign_in_email_hint_text">아이디 입력</string>
     <string name="sign_in_password_hint_text">비밀번호 입력</string>
     <string name="sign_in_error_alert_text">이메일 혹은 비밀번호가 올바르지 않습니다.</string>
+    <!-- Find Info Activity -->
+    <string name="find_info_activity_name">비밀번호 찾기</string>
+    <string name="find_info_email_hint_text">이메일</string>
+    <string name="find_info_button_text">이메일로 비밀번호 보내기</string>
     <!-- Profile Fragment -->
     <string name="master_type">마스터유형</string>
     <string name="store_name">업체명</string>
@@ -49,7 +54,7 @@
     <string name="default_notification_channel_id" translatable="false">soogong_master</string>
     <string name="default_notification_channel_name" translatable="false">soogong_master_requirement</string>
     <string name="null_text">입력받은 정보가 없습니다</string>
-
+    <string name="find_info_email_send_text">등록된 이메일로 비밀번호 변경 링크 를 전송해드립니다.</string>
 
 
 </resources>

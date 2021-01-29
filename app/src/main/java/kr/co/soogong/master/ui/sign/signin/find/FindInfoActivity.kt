@@ -32,28 +32,16 @@ class FindInfoActivity : BaseActivity<ActivityFindInfoBinding>(
             lifecycleOwner = this@FindInfoActivity
 
             with(actionBar) {
-                title.text = "아이디·비밀번호 찾기"
+                title.text = getString(R.string.find_info_activity_name)
                 backButton.setOnClickListener {
                     super.onBackPressed()
                 }
             }
 
             setFindInfoClick {
-                val name = inputName.text
-                val contact = inputContact.text
-
-                viewModel.findInfo(name, contact)
+                val email = inputEmail.text?.toString()
+                viewModel.findInfo(email)
             }
-
-            inputName.addTextChangedListener(afterTextChanged = {
-                inputName.hintText = "업체명을 입력해 주시기 바랍니다."
-                inputName.hintVisible = inputName.text.isNullOrEmpty()
-            })
-
-            inputContact.addTextChangedListener(afterTextChanged = {
-                inputContact.hintText = "연락처를 입력해 주시기 바랍니다."
-                inputContact.hintVisible = inputContact.text.isNullOrEmpty()
-            })
         }
     }
 
