@@ -10,8 +10,8 @@ import kr.co.soogong.master.util.http.HttpClient
 import timber.log.Timber
 
 class FindInfoViewModel : BaseViewModel() {
-    fun findInfo(name: String?, contact: String?) {
-        HttpClient.findInfo(name, contact)
+    fun findInfo(name: String?) {
+        HttpClient.findInfo(name)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({

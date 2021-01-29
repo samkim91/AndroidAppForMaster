@@ -21,22 +21,36 @@
     <dimen name="sign_in_logo_margin_top">25dp</dimen>
     <dimen name="sign_in_margin_start">20dp</dimen>
     <dimen name="sign_in_margin_end">20dp</dimen>
-    <dimen name="sign_in_email_height">40dp</dimen>
     <dimen name="sign_in_password_margin_top">8dp</dimen>
     <dimen name="sign_in_email_margin_top">24dp</dimen>
+    <dimen name="sign_in_text_edit_height">40dp</dimen>
     <dimen name="sign_in_text_edit_padding_start">16dp</dimen>
     <dimen name="sign_in_text_edit_padding_end">0dp</dimen>
     <dimen name="sign_in_text_edit_padding_top">10dp</dimen>
     <dimen name="sign_in_text_edit_padding_bottom">10dp</dimen>
-    <dimen name="sign_in_alert_height">18dp</dimen>
-    <dimen name="sign_in_alert_margin_top">4dp</dimen>
     <dimen name="sign_in_button_margin_top">18dp</dimen>
     <dimen name="sign_in_find_info_margin_top">16dp</dimen>
 
+    <!--  Find Info  -->
+    <dimen name="find_info_padding_start">20dp</dimen>
+    <dimen name="find_info_padding_end">20dp</dimen>
+    <dimen name="find_info_text_edit_height">40dp</dimen>
+    <dimen name="find_info_text_edit_padding_start">16dp</dimen>
+    <dimen name="find_info_text_edit_padding_end">0dp</dimen>
+    <dimen name="find_info_text_edit_padding_top">10dp</dimen>
+    <dimen name="find_info_text_edit_padding_bottom">10dp</dimen>
+    <dimen name="find_info_input_email_margin_top">24dp</dimen>
+    <dimen name="find_info_button_margin_top">18dp</dimen>
+    <dimen name="find_info_button_gone_margin_top">40dp</dimen>
+    <dimen name="find_info_email_send_text_margin_top">16dp</dimen>
+
     <!--  Drawable  -->
+    <dimen name="edit_text_height">40dp</dimen>
     <dimen name="button_height">40dp</dimen>
     <dimen name="board_size">1dp</dimen>
     <dimen name="radius_size">8dp</dimen>
+    <dimen name="alert_height">18dp</dimen>
+    <dimen name="alert_margin_top">4dp</dimen>
 
 
     <dimen name="actionbar_title_collapsed_text_size">19sp</dimen>
@@ -69,6 +83,7 @@
     <dimen name="text_medium_size">16sp</dimen>
     <dimen name="text_title_size">18sp</dimen>
     <dimen name="text_big_size">24sp</dimen>
+
 
 
 </resources>
