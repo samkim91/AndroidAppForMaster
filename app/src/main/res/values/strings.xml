@@ -2,10 +2,16 @@
 <resources>
     <string name="app_name">수공 master</string>
 
-    <!--  Sign Up Activity   -->
+    <!-- Sign Up Activity -->
     <string name="sign_up_master_description">수공마스터 서비스를 이용하기 위해\n회원가입 및 로그인이 필요합니다</string>
     <string name="sign_up_sign_in_button_text">로그인</string>
     <string name="sign_up_sign_up_button_text">가입신청</string>
+    <!-- Sign In Activity -->
+    <string name="sign_in_button_text">로그인</string>
+    <string name="sign_in_find_info">비밀번호 찾기</string>
+    <string name="sign_in_email_hint_text">아이디 입력</string>
+    <string name="sign_in_password_hint_text">비밀번호 입력</string>
+    <string name="sign_in_error_alert_text">이메일 혹은 비밀번호가 올바르지 않습니다.</string>
     <!-- Profile Fragment -->
     <string name="master_type">마스터유형</string>
     <string name="store_name">업체명</string>
@@ -43,5 +49,7 @@
     <string name="default_notification_channel_id" translatable="false">soogong_master</string>
     <string name="default_notification_channel_name" translatable="false">soogong_master_requirement</string>
     <string name="null_text">입력받은 정보가 없습니다</string>
+
+
 
 </resources>

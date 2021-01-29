@@ -99,7 +99,7 @@
             android:layout_height="40dp"
             android:layout_marginTop="12dp"
             android:layout_marginBottom="13dp"
-            android:background="@drawable/button_round_corner"
+            android:background="@drawable/shape_board_green_2"
             android:onClick="@{detail_btn_listener}"
             android:text="@string/received_detail_button_viewholder"
             android:textColor="@color/app_color"

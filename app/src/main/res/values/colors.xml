@@ -16,6 +16,10 @@
     <color name="color_22D47B">#22D47B</color>
     <color name="color_1FC472">#1FC472</color>
     <color name="color_8022D47B">#8022D47B</color>
+    <color name="color_F57C00">#F57C00</color>
+
+    <color name="text_basic_color">@color/color_121212</color>
+    <color name="hint_text_basic_color">@color/color_9E9E9E</color>
 
     <!--  SignUp  -->
     <color name="sign_main_background_color">#E8EAEA</color>

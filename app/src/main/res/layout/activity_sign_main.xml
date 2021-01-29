@@ -51,36 +51,36 @@
             app:layout_constraintTop_toBottomOf="@id/logo" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/sign_up"
+            android:id="@+id/sign_in"
             style="@style/medium_text_style.bold"
             android:layout_width="0dp"
             android:layout_height="@dimen/button_height"
             android:layout_marginStart="@dimen/sign_in_button_margin_start"
             android:layout_marginEnd="@dimen/sign_in_button_margin_end"
             android:layout_marginBottom="@dimen/sign_up_activity_button_margin_bottom"
-            android:background="@drawable/button_fill_white_board_green"
-            android:onClick="@{signUpClick}"
+            android:background="@drawable/shape_fill_white_board_green"
+            android:onClick="@{signInClick}"
             android:text="@string/sign_up_sign_in_button_text"
             android:textColor="@color/color_1FC472"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/sign_in"
+            app:layout_constraintEnd_toStartOf="@id/sign_up"
             app:layout_constraintStart_toStartOf="parent" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/sign_in"
+            android:id="@+id/sign_up"
             style="@style/medium_text_style.bold"
             android:layout_width="0dp"
             android:layout_height="@dimen/button_height"
             android:layout_marginStart="@dimen/sign_up_button_margin_start"
             android:layout_marginEnd="@dimen/sign_up_button_margin_end"
             android:layout_marginBottom="@dimen/sign_up_activity_button_margin_bottom"
-            android:background="@drawable/button_fill_green"
-            android:onClick="@{signInClick}"
+            android:background="@drawable/shape_fill_green"
+            android:onClick="@{signUpClick}"
             android:text="@string/sign_up_sign_up_button_text"
             android:textColor="@color/basic_white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/sign_up" />
+            app:layout_constraintStart_toEndOf="@id/sign_in" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

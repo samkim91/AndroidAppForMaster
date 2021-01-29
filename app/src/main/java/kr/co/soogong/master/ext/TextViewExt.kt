@@ -42,7 +42,7 @@ fun addTextView3(
     val view = AppCompatTextView(contextWrapper).apply {
         setTextColor(ResourcesCompat.getColor(resources, R.color.primary_text_color, null))
         background =
-            ResourcesCompat.getDrawable(resources, R.drawable.title_textview_background, null)
+            ResourcesCompat.getDrawable(resources, R.drawable.shape_fill_white_background, null)
         gravity = Gravity.CENTER
         text = message
     }
