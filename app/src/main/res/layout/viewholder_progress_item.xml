@@ -127,7 +127,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:layout_marginBottom="24dp"
-            android:background="@drawable/shape_board_green_2"
+            android:background="@drawable/shape_board_green_fill_transparent"
             android:onClick="@{detail_btn_listener}"
             android:text="자세히 보기"
             android:textColor="@color/app_color"

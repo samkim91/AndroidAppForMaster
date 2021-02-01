@@ -169,7 +169,7 @@
                         android:layout_marginStart="4dp"
                         android:layout_marginTop="24dp"
                         android:layout_marginBottom="48dp"
-                        android:background="@drawable/shape_board_green_2"
+                        android:background="@drawable/shape_board_green_fill_transparent"
                         android:onClick="@{deinedClick}"
                         android:text="거절하기"
                         android:textColor="@color/app_color"
