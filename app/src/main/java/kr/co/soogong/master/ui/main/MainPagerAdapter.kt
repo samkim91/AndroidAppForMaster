@@ -5,7 +5,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import kr.co.soogong.master.ui.all.AllFragment
 import kr.co.soogong.master.ui.requirements.RequirementsFragment
-import kr.co.soogong.master.ui.settings.SettingsFragment
+import kr.co.soogong.master.ui.mypage.MyPageFragment
 
 class MainPagerAdapter(
     fragmentManager: FragmentManager,
@@ -16,7 +16,7 @@ class MainPagerAdapter(
         return when (position) {
             0 -> AllFragment.newInstance()
             1 -> RequirementsFragment.newInstance()
-            2 -> SettingsFragment.newInstance()
+            2 -> MyPageFragment.newInstance()
             else -> Fragment()
         }
     }

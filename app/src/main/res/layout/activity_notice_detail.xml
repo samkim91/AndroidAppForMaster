@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".ui.settings.notice.NoticeActivity">
+        tools:context=".ui.mypage.notice.NoticeActivity">
 
         <include
             android:id="@+id/action_bar"

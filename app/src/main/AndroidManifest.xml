@@ -49,16 +49,16 @@
             android:name=".ui.requirements.progress.detail.ProgressDetailActivity"
             android:launchMode="singleTask" />
         <activity
-            android:name=".ui.settings.alarm.AlarmActivity"
+            android:name=".ui.mypage.alarm.AlarmActivity"
             android:launchMode="singleTask" />
         <activity
-            android:name=".ui.settings.password.PasswordActivity"
+            android:name=".ui.mypage.password.PasswordActivity"
             android:launchMode="singleTask" />
         <activity
-            android:name=".ui.settings.notice.NoticeActivity"
+            android:name=".ui.mypage.notice.NoticeActivity"
             android:launchMode="singleTask" />
         <activity
-            android:name=".ui.settings.notice.detail.NoticeDetailActivity"
+            android:name=".ui.mypage.notice.detail.NoticeDetailActivity"
             android:launchMode="singleTask" />
 
         <service

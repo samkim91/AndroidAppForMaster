@@ -20,6 +20,7 @@
 
     <color name="text_basic_color">@color/color_121212</color>
     <color name="hint_text_basic_color">@color/color_9E9E9E</color>
+    <color name="text_primary_color">@color/color_616161</color>
 
     <!--  SignUp  -->
     <color name="sign_main_background_color">#E8EAEA</color>
