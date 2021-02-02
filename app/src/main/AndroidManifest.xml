@@ -49,6 +49,9 @@
             android:name=".ui.requirements.progress.detail.ProgressDetailActivity"
             android:launchMode="singleTask" />
         <activity
+            android:name=".ui.mypage.alarm.Acco"
+            android:launchMode="singleTask" />
+        <activity
             android:name=".ui.mypage.alarm.AlarmActivity"
             android:launchMode="singleTask" />
         <activity
