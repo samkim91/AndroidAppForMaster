@@ -2,9 +2,12 @@ package kr.co.soogong.master.ui.mypage.notice
 
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
+import kr.co.soogong.master.BR
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ActivityNoticeBinding
 import kr.co.soogong.master.ui.base.BaseActivity
+import kr.co.soogong.master.ui.mypage.NoticeAdapter
+import kr.co.soogong.master.uiinterface.mypage.notice.detail.NoticeDetailActivityHelper
 import timber.log.Timber
 
 class NoticeActivity : BaseActivity<ActivityNoticeBinding>(

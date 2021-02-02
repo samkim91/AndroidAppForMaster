@@ -2,22 +2,32 @@
 <resources>
     <string name="app_name">수공 master</string>
 
-    <!-- Sign Up Activity -->
+    <!-- Sign Up -->
     <string name="sign_up_master_description">수공마스터 서비스를 이용하기 위해\n회원가입 및 로그인이 필요합니다</string>
     <string name="sign_up_sign_in_button_text">로그인</string>
     <string name="sign_up_sign_up_button_text">가입신청</string>
-    <!-- Sign In Activity -->
+    <!-- Sign In -->
     <string name="sign_in_activity_name">로그인</string>
     <string name="sign_in_button_text">로그인</string>
     <string name="sign_in_find_info">비밀번호 찾기</string>
     <string name="sign_in_email_hint_text">아이디 입력</string>
     <string name="sign_in_password_hint_text">비밀번호 입력</string>
     <string name="sign_in_error_alert_text">이메일 혹은 비밀번호가 올바르지 않습니다.</string>
-    <!-- Find Info Activity -->
+    <!-- Find Info -->
     <string name="find_info_activity_name">비밀번호 찾기</string>
     <string name="find_info_email_hint_text">이메일</string>
     <string name="find_info_button_text">이메일로 비밀번호 보내기</string>
-    <!-- Profile Fragment -->
+
+    <!-- My Page-->
+    <string name="my_page_account_setting_label">계정설정</string>
+    <string name="my_page_notice">공지사항</string>
+    <string name="my_page_notice_badge">N</string>
+    <string name="my_page_notice_total">전체보기</string>
+    <string name="my_page_call_text">전화 문의하기</string>
+    <string name="my_page_kakao_text">카카오톡 문의하기</string>
+    <string name="my_page_time_notice">연락가능 시간 : 오전 10:00 ~ 오후 7:00 \n (주말, 공휴일 휴무)</string>
+
+    <!-- Profile -->
     <string name="master_type">마스터유형</string>
     <string name="store_name">업체명</string>
     <string name="short_introduce">한줄소개</string>
@@ -41,10 +51,10 @@
     <string name="request_is_bag">짐유무</string>
     <string name="request_contact">연락방법</string>
 
-    <!-- Requirement Progress Fragment -->
+    <!-- Requirement Progress -->
     <string name="noti_progress_fragment">의 매칭완료 문의가 있습니다!</string>
 
-    <!-- Requirement Received Fragment  -->
+    <!-- Requirement Received  -->
     <string name="received_noti_fragment"><b>30분 내 견적을 발송</b>하지 않을 경우 자동으로 다른 마스터님께 추가 배정됩니다</string>
     <string name="received_detail_viewholder">님으로부터 문의가 들어왔습니다. 자세한 문의 내용을 확인 후 승인, 견적을 발송해주세요!</string>
     <string name="received_detail_button_viewholder">수리요청서 보기</string>
