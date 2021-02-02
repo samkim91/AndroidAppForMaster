@@ -27,6 +27,9 @@
     <string name="my_page_kakao_text">카카오톡 문의하기</string>
     <string name="my_page_time_notice">연락가능 시간 : 오전 10:00 ~ 오후 7:00 \n (주말, 공휴일 휴무)</string>
 
+    <!-- Account -->
+    <string name="account_page_name">계정설정</string>
+
     <!-- Profile -->
     <string name="master_type">마스터유형</string>
     <string name="store_name">업체명</string>
