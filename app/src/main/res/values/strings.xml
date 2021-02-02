@@ -30,6 +30,15 @@
     <!-- Account -->
     <string name="account_page_name">계정설정</string>
 
+    <!-- Password -->
+    <string name="password_page_name">비밀번호 변경</string>
+    <string name="password_hint_text">변경할 비밀번호를 입력해주세요.</string>
+    <string name="password_check_hint_text">비밀번호 확인</string>
+    <string name="password_button_text">비밀번호 변경하기</string>
+    <string name="password_empty_alert_text">비밀번호를 입력해주세요.</string>
+    <string name="password_compare_alert_text">비밀번호가 일치하지 않습니다.</string>
+
+
     <!-- Profile -->
     <string name="master_type">마스터유형</string>
     <string name="store_name">업체명</string>

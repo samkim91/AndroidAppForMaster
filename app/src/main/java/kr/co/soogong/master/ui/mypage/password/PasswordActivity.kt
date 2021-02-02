@@ -1,7 +1,9 @@
 package kr.co.soogong.master.ui.mypage.password
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ActivityPasswordBinding
@@ -30,36 +32,43 @@ class PasswordActivity : BaseActivity<ActivityPasswordBinding>(
             lifecycleOwner = this@PasswordActivity
 
             with(actionBar) {
-                title.text = "비밀번호 변경"
+                title.text = getString(R.string.password_page_name)
                 backButton.setOnClickListener {
                     super.onBackPressed()
                 }
             }
 
-            inputPassword.addTextChangedListener(afterTextChanged = {
-                inputPassword.hintVisible = inputPassword.text.isNullOrEmpty()
+            password.addTextChangedListener(afterTextChanged = {
+                if (!password.text.isNullOrEmpty()) {
+                    passwordAlert.visibility = View.GONE
+                } else {
+                    passwordAlert.text = getString(R.string.password_empty_alert_text)
+                    passwordAlert.visibility = View.VISIBLE
+                }
             })
 
-            inputPasswordConfirm.addTextChangedListener(afterTextChanged = {
-                if (inputPassword.text.isNullOrEmpty()) {
-                    return@addTextChangedListener
+            passwordChange.addTextChangedListener(afterTextChanged = {
+                if (!passwordChange.text.isNullOrEmpty()) {
+                    passwordAlert.visibility = View.GONE
+                } else {
+                    passwordAlert.text = getString(R.string.password_empty_alert_text)
+                    passwordAlert.visibility = View.VISIBLE
                 }
-                if (inputPasswordConfirm.text.isNullOrEmpty()) {
-                    return@addTextChangedListener
-                }
-                inputPasswordConfirm.hintVisible = inputPassword.text != inputPasswordConfirm.text
             })
 
             setChangeClick {
-                val password = inputPassword.text
-                val confirmPassword = inputPasswordConfirm.text
+                val password = password.text?.toString()
+                val confirmPassword = passwordCheck.text?.toString()
 
                 if (password.isNullOrEmpty() || confirmPassword.isNullOrEmpty()) {
+                    passwordAlert.text = getString(R.string.password_empty_alert_text)
+                    passwordAlert.visibility = View.VISIBLE
                     return@setChangeClick
                 }
 
                 if (password != confirmPassword) {
-                    inputPasswordConfirm.hintVisible = true
+                    passwordAlert.text = getString(R.string.password_compare_alert_text)
+                    passwordAlert.visibility = View.VISIBLE
                     return@setChangeClick
                 }
 
