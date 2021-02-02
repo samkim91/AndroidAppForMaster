@@ -2,7 +2,7 @@ package kr.co.soogong.master.data.category
 
 import android.os.Parcelable
 import com.google.gson.JsonObject
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Category(

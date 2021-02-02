@@ -27,7 +27,7 @@ class MyPageViewModel(
     val name: LiveData<String>
         get() = _userInfo.map { it?.name ?: "고객님" }
 
-    val usingPlan: LiveData<String?>
+    val email: LiveData<String?>
         get() = _userInfo.map {
             when {
                 it?.usingPlan.isNullOrEmpty() -> {

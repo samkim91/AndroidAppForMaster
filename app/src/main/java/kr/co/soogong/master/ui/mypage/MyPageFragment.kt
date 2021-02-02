@@ -48,9 +48,8 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(
                 startActivity(NoticeActivityHelper.getIntent(requireContext()))
             }
 
-            setPasswordClick {
-                Timber.tag(TAG).i("initLayout: Password Button")
-                startActivity(PasswordActivityHelper.getIntent(requireContext()))
+            setCallClick {
+                Timber.tag(TAG).i("initLayout: Call Button")
             }
 
             setAlarmClick {

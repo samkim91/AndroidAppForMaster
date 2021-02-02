@@ -15,7 +15,6 @@ import kr.co.soogong.master.util.InjectHelper
 import leakcanary.AppWatcher
 import timber.log.Timber
 
-
 class DebugSoogongApp : SoogongApp() {
 
     override fun onCreate() {

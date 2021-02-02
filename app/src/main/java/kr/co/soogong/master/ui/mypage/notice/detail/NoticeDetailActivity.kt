@@ -1,6 +1,7 @@
 package kr.co.soogong.master.ui.mypage.notice.detail
 
 import android.os.Bundle
+import kr.co.soogong.master.BR
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.notice.Notice
 import kr.co.soogong.master.databinding.ActivityNoticeDetailBinding
