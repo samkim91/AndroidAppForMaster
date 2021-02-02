@@ -43,7 +43,7 @@ class AccountActivity : BaseActivity<ActivityAccountBinding>(
 
             setWithdrawalClick {
                 Timber.tag(TAG).i("initLayout: WithDraw Button")
-                vm.withDraw()
+                viewModel.withDraw()
             }
         }
     }

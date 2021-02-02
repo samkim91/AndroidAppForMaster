@@ -31,7 +31,7 @@ class AlarmActivity : BaseActivity<ActivityAlarmBinding>(
             lifecycleOwner = this@AlarmActivity
 
             with(actionBar) {
-                title.text = "알림 설정"
+                title.text = getString(R.string.alarm_page_name)
                 backButton.setOnClickListener {
                     super.onBackPressed()
                 }

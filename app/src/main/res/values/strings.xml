@@ -38,6 +38,8 @@
     <string name="password_empty_alert_text">비밀번호를 입력해주세요.</string>
     <string name="password_compare_alert_text">비밀번호가 일치하지 않습니다.</string>
 
+    <!-- Alarm -->
+    <string name="alarm_page_name">알림 설정</string>
 
     <!-- Profile -->
     <string name="master_type">마스터유형</string>

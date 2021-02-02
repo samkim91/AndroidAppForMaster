@@ -22,8 +22,8 @@
             android:id="@+id/app_push_alarm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginStart="@dimen/alarm_margin_start"
+            android:layout_marginEnd="@dimen/alarm_margin_end"
             app:checked="@{vm.appPushStatus}"
             app:switchClick="@{vm::clickedAppPush}"
             app:title='@{"앱 푸시 알림"}' />
@@ -32,8 +32,8 @@
             android:id="@+id/kakao_alarm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginStart="@dimen/alarm_margin_start"
+            android:layout_marginEnd="@dimen/alarm_margin_end"
             app:checked="@{vm.kakaoStatus}"
             app:switchClick="@{vm::clickedKakao}"
             app:title='@{"카카오톡 알림"}' />
@@ -42,8 +42,8 @@
             android:id="@+id/sms_alarm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginStart="@dimen/alarm_margin_start"
+            android:layout_marginEnd="@dimen/alarm_margin_end"
             app:checked="@{vm.smsStatus}"
             app:switchClick="@{vm::clickedSMS}"
             app:title='@{"문자 알림"}' />
