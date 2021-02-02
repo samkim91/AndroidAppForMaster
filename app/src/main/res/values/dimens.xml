@@ -96,6 +96,10 @@
     <dimen name="password_button_gone_margin_top">40dp</dimen>
     <dimen name="password_alert_margin_top">8dp</dimen>
 
+    <!-- Alarm -->
+    <dimen name="alarm_margin_start">20dp</dimen>
+    <dimen name="alarm_margin_end">20dp</dimen>
+
     <!--  Drawable  -->
     <dimen name="edit_text_height">40dp</dimen>
     <dimen name="button_height">40dp</dimen>
