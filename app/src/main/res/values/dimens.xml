@@ -82,6 +82,20 @@
     <!-- My page -->
     <dimen name="account_page_setting_button_height">64dp</dimen>
 
+    <!-- Password Change -->
+    <dimen name="password_margin_start">20dp</dimen>
+    <dimen name="password_margin_end">20dp</dimen>
+    <dimen name="password_input_margin_top">24dp</dimen>
+    <dimen name="password_password_margin_top">8dp</dimen>
+    <dimen name="password_text_edit_height">40dp</dimen>
+    <dimen name="password_text_edit_padding_start">16dp</dimen>
+    <dimen name="password_text_edit_padding_end">0dp</dimen>
+    <dimen name="password_text_edit_padding_top">10dp</dimen>
+    <dimen name="password_text_edit_padding_bottom">10dp</dimen>
+    <dimen name="password_button_margin_top">14dp</dimen>
+    <dimen name="password_button_gone_margin_top">40dp</dimen>
+    <dimen name="password_alert_margin_top">8dp</dimen>
+
     <!--  Drawable  -->
     <dimen name="edit_text_height">40dp</dimen>
     <dimen name="button_height">40dp</dimen>
