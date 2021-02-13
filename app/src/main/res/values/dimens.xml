@@ -7,6 +7,8 @@
     <dimen name="actionbar_title_back_button_margin_end">0dp</dimen>
     <dimen name="actionbar_title_back_button_padding">18dp</dimen>
     <dimen name="actionbar_title_under_line_height">1dp</dimen>
+    <dimen name="actionbar_title_margin_start">60dp</dimen>
+    <dimen name="actionbar_title_margin_end">60dp</dimen>
 
     <!--  Sign Up  -->
     <dimen name="sign_up_logo_margin_top">144dp</dimen>
@@ -118,6 +120,15 @@
     <dimen name="notice_view_holder_badge_height">16dp</dimen>
     <dimen name="notice_view_holder_badge_text_size">10sp</dimen>
 
+    <!--  Notice Detail  -->
+    <dimen name="notice_detail_margin_start">20dp</dimen>
+    <dimen name="notice_detail_margin_end">20dp</dimen>
+    <dimen name="notice_detail_title_margin_top">16dp</dimen>
+    <dimen name="notice_detail_date_margin_top">4dp</dimen>
+    <dimen name="notice_detail_line_height">1dp</dimen>
+    <dimen name="notice_detail_line_margin_top">16dp</dimen>
+    <dimen name="notice_detail_content_margin_top">16dp</dimen>
+    <dimen name="notice_detail_content_line_spacing">10sp</dimen>
 
     <!--  Drawable  -->
     <dimen name="edit_text_height">40dp</dimen>
