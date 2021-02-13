@@ -16,31 +16,32 @@
         android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/notice_title"
+            android:id="@+id/title"
             style="@style/medium_text_style.medium"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="18dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginTop="@dimen/notice_view_holder_list_item_title_margin_top"
+            android:layout_marginEnd="@dimen/notice_view_holder_list_item_title_margin_end"
+            android:layout_marginBottom="@dimen/notice_view_holder_list_item_title_margin_bottom"
             android:ellipsize="end"
             android:lines="1"
             android:text="@{data.title}"
-            android:textColor="@color/secondary_text_color"
+            android:textColor="@color/text_basic_color"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/notice_date"
+            app:layout_constraintEnd_toStartOf="@id/date"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="수공 마스터 앱 런칭 기념 이벤트를 수공 마스터 앱 런칭 기념 이벤트를수공 마스터 앱 런칭 기념 이벤트를수공 마스터 앱 런칭 기념 이벤트를수공 마스터 앱 런칭 기념 이벤트를수공 마스터 앱 런칭 기념 이벤트를" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/notice_date"
+            android:id="@+id/date"
+            style="@style/small_text_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/detail_button_color"
+            android:textColor="@color/text_primary_color"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/notice_title"
+            app:layout_constraintStart_toEndOf="@id/title"
             app:layout_constraintTop_toTopOf="parent"
             bind:date_text2="@{data.date}"
             tools:text="2020. 8. 26" />

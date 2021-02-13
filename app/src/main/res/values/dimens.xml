@@ -70,7 +70,7 @@
     <dimen name="my_page_notice_badge_height">14dp</dimen>
     <dimen name="my_page_notice_badge_label_size">8sp</dimen>
     <dimen name="my_page_notice_badge_margin_start">4dp</dimen>
-    <dimen name="my_page_notice_list_height">130dp</dimen>
+    <dimen name="my_page_notice_list_height">124dp</dimen>
     <dimen name="my_page_notice_list_margin_top">8dp</dimen>
     <dimen name="my_page_setting_button_height">64dp</dimen>
     <dimen name="my_page_logout_button_height">64dp</dimen>
@@ -119,6 +119,9 @@
     <dimen name="notice_view_holder_badge_width">16dp</dimen>
     <dimen name="notice_view_holder_badge_height">16dp</dimen>
     <dimen name="notice_view_holder_badge_text_size">10sp</dimen>
+    <dimen name="notice_view_holder_list_item_title_margin_top">8dp</dimen>
+    <dimen name="notice_view_holder_list_item_title_margin_bottom">8dp</dimen>
+    <dimen name="notice_view_holder_list_item_title_margin_end">19dp</dimen>
 
     <!--  Notice Detail  -->
     <dimen name="notice_detail_margin_start">20dp</dimen>
