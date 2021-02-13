@@ -29,6 +29,7 @@
     <dimen name="sign_in_text_edit_padding_top">10dp</dimen>
     <dimen name="sign_in_text_edit_padding_bottom">10dp</dimen>
     <dimen name="sign_in_button_margin_top">18dp</dimen>
+    <dimen name="sign_in_button_gone_margin_top">40dp</dimen>
     <dimen name="sign_in_find_info_margin_top">16dp</dimen>
 
     <!--  Find Info  -->
@@ -79,8 +80,8 @@
     <dimen name="my_page_kakao_button_text_margin_start">4dp</dimen>
     <dimen name="my_page_time_notice_margin_top">12dp</dimen>
 
-    <!-- My page -->
-    <dimen name="account_page_setting_button_height">64dp</dimen>
+    <!-- Account Page -->
+    <dimen name="account_page_setting_button_height">56dp</dimen>
 
     <!-- Password Change -->
     <dimen name="password_margin_start">20dp</dimen>
@@ -99,6 +100,24 @@
     <!-- Alarm -->
     <dimen name="alarm_margin_start">20dp</dimen>
     <dimen name="alarm_margin_end">20dp</dimen>
+    <dimen name="alarm_label_margin_top">32dp</dimen>
+    <dimen name="alarm_switch_margin_top">8dp</dimen>
+    <dimen name="alarm_lien_height">10dp</dimen>
+    <dimen name="alarm_lien_margin_top">16dp</dimen>
+
+    <!--  Notice  -->
+    <dimen name="notice_padding_start">20dp</dimen>
+    <dimen name="notice_padding_end">20dp</dimen>
+    <dimen name="notice_view_holder_height">78dp</dimen>
+    <dimen name="notice_view_holder_title_margin_top">16dp</dimen>
+    <dimen name="notice_view_holder_title_margin_end">8dp</dimen>
+    <dimen name="notice_view_holder_date_margin_top">4dp</dimen>
+    <dimen name="notice_view_holder_date_margin_end">8dp</dimen>
+    <dimen name="notice_view_holder_line_height">1dp</dimen>
+    <dimen name="notice_view_holder_badge_width">16dp</dimen>
+    <dimen name="notice_view_holder_badge_height">16dp</dimen>
+    <dimen name="notice_view_holder_badge_text_size">10sp</dimen>
+
 
     <!--  Drawable  -->
     <dimen name="edit_text_height">40dp</dimen>

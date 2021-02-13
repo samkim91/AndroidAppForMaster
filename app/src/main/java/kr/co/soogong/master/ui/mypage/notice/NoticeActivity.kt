@@ -35,7 +35,7 @@ class NoticeActivity : BaseActivity<ActivityNoticeBinding>(
             }
 
             with(actionBar) {
-                title.text = "공지 사항"
+                title.text = getString(R.string.notice_page_name)
                 backButton.setOnClickListener {
                     super.onBackPressed()
                 }

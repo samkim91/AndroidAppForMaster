@@ -33,9 +33,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
             lifecycleOwner = this@MainActivity
 
             with(mainTabs) {
-                addTab(newTab().setText("받은 요청").setIcon(R.drawable.ic_total_request))
-                addTab(newTab().setText("보낸 요청").setIcon(R.drawable.ic_request_received))
-                addTab(newTab().setText("마이페이지").setIcon(R.drawable.ic_mypage))
+                addTab(newTab().setText(R.string.main_page_request_name).setIcon(R.drawable.ic_total_request))
+                addTab(newTab().setText(R.string.main_page_profile_name).setIcon(R.drawable.ic_profile))
+                addTab(newTab().setText(R.string.main_page_my_page_name).setIcon(R.drawable.ic_my_page))
 
                 tabGravity = TabLayout.GRAVITY_FILL
 

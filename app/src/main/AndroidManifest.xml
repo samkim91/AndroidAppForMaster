@@ -16,10 +16,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.sign.signup.AddressActivity" />
-        <activity android:name=".ui.sign.signin.find.FindInfoActivity" />
-        <activity android:name=".ui.sign.signin.SignInActivity" />
-        <activity android:name=".ui.sign.signup.SignUpActivity" />
         <activity
             android:name=".ui.SplashActivity"
             android:label="@string/app_name"
@@ -32,6 +28,18 @@
         </activity>
         <activity
             android:name=".ui.sign.SignMainActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".ui.sign.signup.SignUpActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".ui.sign.signup.AddressActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".ui.sign.signin.SignInActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".ui.sign.find.FindInfoActivity"
             android:launchMode="singleTask" />
         <activity
             android:name=".ui.main.MainActivity"
@@ -49,7 +57,7 @@
             android:name=".ui.requirements.progress.detail.ProgressDetailActivity"
             android:launchMode="singleTask" />
         <activity
-            android:name=".ui.mypage.alarm.Acco"
+            android:name=".ui.mypage.account.AccountActivity"
             android:launchMode="singleTask" />
         <activity
             android:name=".ui.mypage.alarm.AlarmActivity"

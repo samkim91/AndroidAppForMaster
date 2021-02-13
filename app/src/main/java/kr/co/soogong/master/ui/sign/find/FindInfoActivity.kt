@@ -1,13 +1,13 @@
-package kr.co.soogong.master.ui.sign.signin.find
+package kr.co.soogong.master.ui.sign.find
 
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ActivityFindInfoBinding
 import kr.co.soogong.master.ui.base.BaseActivity
-import kr.co.soogong.master.ui.sign.signin.find.FindInfoViewModel.Companion.FAIL_TO_CONTACT
-import kr.co.soogong.master.ui.sign.signin.find.FindInfoViewModel.Companion.FAIL_TO_NAME
-import kr.co.soogong.master.ui.sign.signin.find.FindInfoViewModel.Companion.SUCCESS_TO_FIND_INFO
+import kr.co.soogong.master.ui.sign.find.FindInfoViewModel.Companion.FAIL_TO_CONTACT
+import kr.co.soogong.master.ui.sign.find.FindInfoViewModel.Companion.FAIL_TO_NAME
+import kr.co.soogong.master.ui.sign.find.FindInfoViewModel.Companion.SUCCESS_TO_FIND_INFO
 import kr.co.soogong.master.util.EventObserver
 import timber.log.Timber
 

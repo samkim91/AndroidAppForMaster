@@ -5,18 +5,18 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="74dp">
+        android:layout_height="@dimen/notice_view_holder_height">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/notice_title"
             style="@style/medium_text_style.medium"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginTop="@dimen/notice_view_holder_title_margin_top"
+            android:layout_marginEnd="@dimen/notice_view_holder_title_margin_end"
             android:ellipsize="end"
             android:lines="1"
-            android:textColor="@color/secondary_text_color"
+            android:textColor="@color/text_basic_color"
             app:layout_constrainedWidth="true"
             app:layout_constraintBottom_toTopOf="@id/notice_date"
             app:layout_constraintEnd_toStartOf="@id/notice_new_badge"
@@ -28,10 +28,8 @@
             android:id="@+id/notice_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="16dp"
-            android:textColor="@color/detail_button_color"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="@dimen/notice_view_holder_date_margin_top"
+            android:textColor="@color/text_primary_color"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/notice_title"
             tools:text="2020. 8. 26" />
@@ -39,7 +37,7 @@
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/line"
             android:layout_width="0dp"
-            android:layout_height="1dp"
+            android:layout_height="@dimen/notice_view_holder_line_height"
             android:background="@color/line_color"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -47,21 +45,21 @@
 
         <FrameLayout
             android:id="@+id/notice_new_badge"
-            android:layout_width="14dp"
-            android:layout_height="14dp"
+            android:layout_width="@dimen/notice_view_holder_badge_width"
+            android:layout_height="@dimen/notice_view_holder_badge_height"
             android:background="@drawable/notice_new_background"
-            app:layout_constraintBottom_toBottomOf="@id/notice_title"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/notice_title"
-            app:layout_constraintTop_toTopOf="@id/notice_title">
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="N"
+                android:text="@string/badge_text"
                 android:textColor="@color/basic_white"
-                android:textSize="8sp"
+                android:textSize="@dimen/notice_view_holder_badge_text_size"
                 android:textStyle="bold" />
         </FrameLayout>
 

@@ -25,11 +25,11 @@
             android:id="@+id/list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp"
+            android:paddingStart="@dimen/notice_padding_start"
+            android:paddingEnd="@dimen/notice_padding_end"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             bind:notice_list="@{vm.list}"
-            tools:listitem="@layout/viewholder_notice_item" />
+            tools:listitem="@layout/view_holder_notice_item" />
 
     </LinearLayout>
 </layout>

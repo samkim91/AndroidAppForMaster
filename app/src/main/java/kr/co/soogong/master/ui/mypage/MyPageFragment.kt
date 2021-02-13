@@ -39,6 +39,10 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(
             setVariable(BR.vm, viewModel)
             lifecycleOwner = viewLifecycleOwner
 
+            with(actionBar) {
+                title.text = getString(R.string.my_page_fragment_name)
+            }
+
             noticeList.adapter = NoticeAdapter() {
                 startActivity(NoticeActivityHelper.getIntent(requireContext(), it))
             }

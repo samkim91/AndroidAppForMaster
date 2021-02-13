@@ -1,4 +1,4 @@
-package kr.co.soogong.master.ui.sign.signin.find
+package kr.co.soogong.master.ui.sign.find
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

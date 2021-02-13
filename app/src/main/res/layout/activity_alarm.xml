@@ -18,34 +18,135 @@
             android:id="@+id/action_bar"
             layout="@layout/action_bar" />
 
-        <kr.co.soogong.master.ui.widget.TitleSwitchCompat
-            android:id="@+id/app_push_alarm"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/alarm_margin_start"
-            android:layout_marginEnd="@dimen/alarm_margin_end"
-            app:checked="@{vm.appPushStatus}"
-            app:switchClick="@{vm::clickedAppPush}"
-            app:title='@{"앱 푸시 알림"}' />
+            android:layout_height="match_parent">
 
-        <kr.co.soogong.master.ui.widget.TitleSwitchCompat
-            android:id="@+id/kakao_alarm"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/alarm_margin_start"
-            android:layout_marginEnd="@dimen/alarm_margin_end"
-            app:checked="@{vm.kakaoStatus}"
-            app:switchClick="@{vm::clickedKakao}"
-            app:title='@{"카카오톡 알림"}' />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/info_alarm_push_label"
+                style="@style/medium_text_style.bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/alarm_margin_start"
+                android:layout_marginTop="@dimen/alarm_label_margin_top"
+                android:text="@string/alarm_info_alarm_push_label"
+                android:textColor="@color/text_basic_color"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <kr.co.soogong.master.ui.widget.TitleSwitchCompat
-            android:id="@+id/sms_alarm"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/alarm_margin_start"
-            android:layout_marginEnd="@dimen/alarm_margin_end"
-            app:checked="@{vm.smsStatus}"
-            app:switchClick="@{vm::clickedSMS}"
-            app:title='@{"문자 알림"}' />
+            <kr.co.soogong.master.ui.widget.TitleSwitchCompat
+                android:id="@+id/app_push_alarm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/alarm_margin_start"
+                android:layout_marginTop="@dimen/alarm_switch_margin_top"
+                android:layout_marginEnd="@dimen/alarm_margin_end"
+                app:checked="@{vm.appPushStatus}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/info_alarm_push_label"
+                app:switchClick="@{vm::clickedAppPush}"
+                app:title='@{"앱 푸시 알림"}' />
+
+            <kr.co.soogong.master.ui.widget.TitleSwitchCompat
+                android:id="@+id/kakao_alarm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/alarm_margin_start"
+                android:layout_marginEnd="@dimen/alarm_margin_end"
+                app:checked="@{vm.kakaoStatus}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/app_push_alarm"
+                app:switchClick="@{vm::clickedKakao}"
+                app:title='@{"카카오톡 알림"}' />
+
+            <kr.co.soogong.master.ui.widget.TitleSwitchCompat
+                android:id="@+id/sms_alarm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/alarm_margin_start"
+                android:layout_marginEnd="@dimen/alarm_margin_end"
+                app:checked="@{vm.smsStatus}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/kakao_alarm"
+                app:switchClick="@{vm::clickedSMS}"
+                app:title='@{"문자 알림"}' />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/line"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/alarm_lien_height"
+                android:layout_marginTop="@dimen/alarm_lien_margin_top"
+                android:background="@color/line_color"
+                app:layout_constraintTop_toBottomOf="@id/sms_alarm" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/marketing_alarm_push_label"
+                style="@style/medium_text_style.bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/alarm_margin_start"
+                android:layout_marginTop="@dimen/alarm_label_margin_top"
+                android:text="@string/alarm_marketing_alarm_push_label"
+                android:textColor="@color/text_basic_color"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/line" />
+
+            <kr.co.soogong.master.ui.widget.TitleSwitchCompat
+                android:id="@+id/marketing_app_push_alarm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/alarm_margin_start"
+                android:layout_marginTop="@dimen/alarm_switch_margin_top"
+                android:layout_marginEnd="@dimen/alarm_margin_end"
+                app:checked="@{vm.appPushStatus}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/marketing_alarm_push_label"
+                app:switchClick="@{vm::clickedAppPush}"
+                app:title='@{"앱 푸시 알림"}' />
+
+            <kr.co.soogong.master.ui.widget.TitleSwitchCompat
+                android:id="@+id/marketing_kakao_push_alarm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/alarm_margin_start"
+                android:layout_marginEnd="@dimen/alarm_margin_end"
+                app:checked="@{vm.appPushStatus}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/marketing_app_push_alarm"
+                app:switchClick="@{vm::clickedAppPush}"
+                app:title='@{"카카오톡 알림"}' />
+
+            <kr.co.soogong.master.ui.widget.TitleSwitchCompat
+                android:id="@+id/marketing_sms_alarm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/alarm_margin_start"
+                android:layout_marginEnd="@dimen/alarm_margin_end"
+                app:checked="@{vm.appPushStatus}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/marketing_kakao_push_alarm"
+                app:switchClick="@{vm::clickedAppPush}"
+                app:title='@{"문자 알림"}' />
+
+            <kr.co.soogong.master.ui.widget.TitleSwitchCompat
+                android:id="@+id/marketing_night_alarm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/alarm_margin_start"
+                android:layout_marginEnd="@dimen/alarm_margin_end"
+                app:checked="@{vm.appPushStatus}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/marketing_sms_alarm"
+                app:switchClick="@{vm::clickedAppPush}"
+                app:title='@{"야간 수신 동의"}' />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 </layout>

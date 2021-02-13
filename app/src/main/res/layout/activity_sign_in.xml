@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -21,83 +22,106 @@
             android:id="@+id/action_bar"
             layout="@layout/action_bar" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/sign_in_logo_margin_top"
-            android:src="@drawable/ic_logo_title" />
-
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/email"
-            style="@style/medium_text_style.medium"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/sign_in_text_edit_height"
-            android:layout_marginStart="@dimen/sign_in_margin_start"
-            android:layout_marginTop="@dimen/sign_in_email_margin_top"
-            android:layout_marginEnd="@dimen/sign_in_margin_end"
-            android:background="@drawable/shape_fill_white_background"
-            android:hint="@string/sign_in_email_hint_text"
-            android:inputType="textEmailAddress"
-            android:paddingStart="@dimen/sign_in_text_edit_padding_start"
-            android:paddingTop="@dimen/sign_in_text_edit_padding_top"
-            android:paddingEnd="@dimen/sign_in_text_edit_padding_end"
-            android:paddingBottom="@dimen/sign_in_text_edit_padding_bottom"
-            android:textColor="@color/text_basic_color"
-            android:textColorHint="@color/hint_text_basic_color" />
+            android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/password"
-            style="@style/medium_text_style.medium"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/sign_in_text_edit_height"
-            android:layout_marginStart="@dimen/sign_in_margin_start"
-            android:layout_marginTop="@dimen/sign_in_password_margin_top"
-            android:layout_marginEnd="@dimen/sign_in_margin_end"
-            android:background="@drawable/shape_fill_white_background"
-            android:hint="@string/sign_in_password_hint_text"
-            android:inputType="textWebPassword"
-            android:paddingStart="@dimen/sign_in_text_edit_padding_start"
-            android:paddingTop="@dimen/sign_in_text_edit_padding_top"
-            android:paddingEnd="@dimen/sign_in_text_edit_padding_end"
-            android:paddingBottom="@dimen/sign_in_text_edit_padding_bottom"
-            android:textColor="@color/text_basic_color"
-            android:textColorHint="@color/hint_text_basic_color" />
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/sign_in_logo_margin_top"
+                android:src="@drawable/ic_logo_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/sign_in_alert"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/alert_height"
-            android:layout_marginStart="@dimen/sign_in_margin_start"
-            android:layout_marginTop="@dimen/alert_margin_top"
-            android:layout_marginEnd="@dimen/sign_in_margin_end"
-            android:text="@string/sign_in_error_alert_text"
-            android:textColor="@color/color_F57C00"
-            android:textSize="12sp"
-            android:visibility="invisible" />
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/email"
+                style="@style/medium_text_style.medium"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/sign_in_text_edit_height"
+                android:layout_marginStart="@dimen/sign_in_margin_start"
+                android:layout_marginTop="@dimen/sign_in_email_margin_top"
+                android:layout_marginEnd="@dimen/sign_in_margin_end"
+                android:background="@drawable/shape_fill_white_background"
+                android:hint="@string/sign_in_email_hint_text"
+                android:inputType="textEmailAddress"
+                android:paddingStart="@dimen/sign_in_text_edit_padding_start"
+                android:paddingTop="@dimen/sign_in_text_edit_padding_top"
+                android:paddingEnd="@dimen/sign_in_text_edit_padding_end"
+                android:paddingBottom="@dimen/sign_in_text_edit_padding_bottom"
+                android:textColor="@color/text_basic_color"
+                android:textColorHint="@color/hint_text_basic_color"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/logo" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/sign_in"
-            style="@style/medium_text_style.bold"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/button_height"
-            android:layout_marginStart="@dimen/sign_in_margin_start"
-            android:layout_marginTop="@dimen/sign_in_button_margin_top"
-            android:layout_marginEnd="@dimen/sign_in_margin_end"
-            android:background="@drawable/shape_fill_green"
-            android:onClick="@{signInClick}"
-            android:text="@string/sign_in_button_text"
-            android:textColor="@color/basic_white" />
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/password"
+                style="@style/medium_text_style.medium"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/sign_in_text_edit_height"
+                android:layout_marginStart="@dimen/sign_in_margin_start"
+                android:layout_marginTop="@dimen/sign_in_password_margin_top"
+                android:layout_marginEnd="@dimen/sign_in_margin_end"
+                android:background="@drawable/shape_fill_white_background"
+                android:hint="@string/sign_in_password_hint_text"
+                android:inputType="textWebPassword"
+                android:paddingStart="@dimen/sign_in_text_edit_padding_start"
+                android:paddingTop="@dimen/sign_in_text_edit_padding_top"
+                android:paddingEnd="@dimen/sign_in_text_edit_padding_end"
+                android:paddingBottom="@dimen/sign_in_text_edit_padding_bottom"
+                android:textColor="@color/text_basic_color"
+                android:textColorHint="@color/hint_text_basic_color"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/email" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/find_id_password"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/sign_in_find_info_margin_top"
-            android:onClick="@{findInfoClick}"
-            android:text="@string/sign_in_find_info"
-            android:textColor="@color/text_basic_color" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/sign_in_alert"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/alert_height"
+                android:layout_marginStart="@dimen/sign_in_margin_start"
+                android:layout_marginTop="@dimen/alert_margin_top"
+                android:layout_marginEnd="@dimen/sign_in_margin_end"
+                android:text="@string/sign_in_error_alert_text"
+                android:textColor="@color/color_F57C00"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/password" />
 
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/sign_in"
+                style="@style/medium_text_style.bold"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/button_height"
+                android:layout_marginStart="@dimen/sign_in_margin_start"
+                android:layout_marginTop="@dimen/sign_in_button_margin_top"
+                android:layout_marginEnd="@dimen/sign_in_margin_end"
+                android:background="@drawable/shape_fill_green"
+                android:onClick="@{signInClick}"
+                android:text="@string/sign_in_button_text"
+                android:textColor="@color/basic_white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/sign_in_alert"
+                app:layout_goneMarginTop="@dimen/sign_in_button_gone_margin_top" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/find_id_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/sign_in_find_info_margin_top"
+                android:onClick="@{findInfoClick}"
+                android:text="@string/sign_in_find_info"
+                android:textColor="@color/text_basic_color"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/sign_in" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 </layout>

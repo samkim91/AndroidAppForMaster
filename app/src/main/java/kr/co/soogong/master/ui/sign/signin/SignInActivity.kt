@@ -11,7 +11,7 @@ import kr.co.soogong.master.ui.getRepository
 import kr.co.soogong.master.ui.sign.signin.SignInViewModel.Companion.FAIL
 import kr.co.soogong.master.ui.sign.signin.SignInViewModel.Companion.SUCCESS
 import kr.co.soogong.master.uiinterface.main.MainActivityHelper
-import kr.co.soogong.master.uiinterface.sign.signin.find.FindInfoActivityHelper
+import kr.co.soogong.master.uiinterface.sign.find.FindInfoActivityHelper
 import kr.co.soogong.master.util.EventObserver
 import timber.log.Timber
 
