@@ -30,7 +30,7 @@ class NoticeActivity : BaseActivity<ActivityNoticeBinding>(
             setVariable(BR.vm, viewModel)
             lifecycleOwner = this@NoticeActivity
 
-            list.adapter = NoticeAdapter(NoticeListViewHolder.NoticeListView) {
+            list.adapter = NoticeAdapter(NoticeMyPageListViewHolder.NoticeMypageListView) {
                 startActivity(NoticeDetailActivityHelper.getIntent(this@NoticeActivity, it))
             }
 

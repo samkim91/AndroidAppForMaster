@@ -6,10 +6,10 @@ import androidx.recyclerview.widget.RecyclerView
 import kr.co.soogong.master.BR
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.notice.Notice
-import kr.co.soogong.master.databinding.ViewholderNoticeListItemBinding
+import kr.co.soogong.master.databinding.ViewHolderNoticeMypageItemBinding
 
-class NoticeListViewHolder(
-    val binding: ViewholderNoticeListItemBinding
+class NoticeMyPageListViewHolder(
+    val binding: ViewHolderNoticeMypageItemBinding
 ) : RecyclerView.ViewHolder(binding.root) {
     fun bind(
         notice: Notice,
@@ -29,7 +29,7 @@ class NoticeListViewHolder(
                 null
             )
 
-            noticeTitle.setTextColor(color)
+            title.setTextColor(color)
 
             root.setOnClickListener {
                 clickListener(notice)
@@ -39,15 +39,15 @@ class NoticeListViewHolder(
     }
 
     companion object {
-        fun create(parent: ViewGroup): NoticeListViewHolder {
-            val binding = ViewholderNoticeListItemBinding.inflate(
+        fun create(parent: ViewGroup): NoticeMyPageListViewHolder {
+            val binding = ViewHolderNoticeMypageItemBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
             )
-            return NoticeListViewHolder(binding)
+            return NoticeMyPageListViewHolder(binding)
         }
 
-        const val NoticeListView = 10002
+        const val NoticeMypageListView = 10002
     }
 }
