@@ -46,7 +46,7 @@
     <string name="alarm_marketing_alarm_push_label">마케팅 수신</string>
 
     <!--  Notice  -->
-    <stirng name="notice_page_name">공지사항</stirng>
+    <string name="notice_page_name">공지사항</string>
 
     <!-- Main Page -->
     <string name="main_page_request_name">문의현황</string>

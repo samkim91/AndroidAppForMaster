@@ -7,10 +7,10 @@ import androidx.recyclerview.widget.RecyclerView
 import kr.co.soogong.master.BR
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.notice.Notice
-import kr.co.soogong.master.databinding.ViewholderNoticeItemBinding
+import kr.co.soogong.master.databinding.ViewHolderNoticeItemBinding
 
 class NoticeViewHolder(
-    val binding: ViewholderNoticeItemBinding
+    val binding: ViewHolderNoticeItemBinding
 ) : RecyclerView.ViewHolder(binding.root) {
     fun bind(
         notice: Notice,
@@ -40,7 +40,7 @@ class NoticeViewHolder(
 
     companion object {
         fun create(parent: ViewGroup): NoticeViewHolder {
-            val binding = ViewholderNoticeItemBinding.inflate(
+            val binding = ViewHolderNoticeItemBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
