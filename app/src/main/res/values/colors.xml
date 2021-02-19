@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Basic -->
-    <color name="app_background_color">#ffffff</color>
+    <color name="app_background_color">#FFFFFF</color>
 
     <color name="basic_white">#FFFFFF</color>
     <color name="color_F8F8F8">#F8F8F8</color>
@@ -16,13 +16,16 @@
     <color name="color_22D47B">#22D47B</color>
     <color name="color_1FC472">#1FC472</color>
     <color name="color_8022D47B">#8022D47B</color>
-    <color name="color_F57C00">#F57C00</color>
+    <color name="color_FF711D">#FF711D</color>
+    <color name="color_EB4B2F">#EB4B2F</color>
 
     <color name="text_basic_color">@color/color_121212</color>
-    <color name="hint_text_basic_color">@color/color_9E9E9E</color>
     <color name="text_primary_color">@color/color_616161</color>
+    <color name="text_hint_color">@color/color_9E9E9E</color>
+    <color name="text_alert_color">@color/color_FF711D</color>
+    <color name="text_kakao_color">#381E1E</color>
 
-    <color name="color_kakao_text">#381E1E</color>
+    <color name="line_color">@color/color_E0E0E0</color>
     <color name="color_kakao">#FFE600</color>
 
     <!--  SignUp  -->
@@ -33,8 +36,6 @@
     <color name="secondary_text_color">#616161</color>
     <color name="tertiary_text_color">#9e9e9e</color>
     <color name="alert_color">#ff711d</color>
-
-    <color name="line_color">#e0e0e0</color>
 
     <color name="colorAccent">#69a9f1</color>
 

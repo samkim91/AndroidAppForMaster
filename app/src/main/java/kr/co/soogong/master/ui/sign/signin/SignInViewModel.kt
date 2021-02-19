@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import kr.co.soogong.master.BuildConfig
 import kr.co.soogong.master.domain.AppSharedPreferenceHelper
 import kr.co.soogong.master.domain.Repository
 import kr.co.soogong.master.ui.base.BaseViewModel
@@ -17,6 +18,11 @@ class SignInViewModel(
 ) : BaseViewModel() {
 
     fun getUserInfo(email: String, password: String) {
+        if (BuildConfig.DEBUG) {
+            repository.setString(AppSharedPreferenceHelper.BRANCH_KEYCODE, "e40de2450a27563a")
+            successToSignIn()
+            return
+        }
         HttpClient.login(email, password)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -27,21 +33,21 @@ class SignInViewModel(
                 successToSignIn()
             }, {
                 Timber.tag(TAG).w("getUserInfo: $it")
-                failToSignIn(it.message)
+                failToSignIn()
             })
             .addToDisposable()
     }
 
-    private val _event = MutableLiveData<Event<Pair<String, Any?>>>()
-    val event: LiveData<Event<Pair<String, Any?>>>
+    private val _event = MutableLiveData<Event<String>>()
+    val event: LiveData<Event<String>>
         get() = _event
 
     private fun successToSignIn() {
-        _event.postValue(Event(SUCCESS to null))
+        _event.postValue(Event(SUCCESS))
     }
 
-    private fun failToSignIn(message: String?) {
-        _event.postValue(Event(FAIL to message))
+    private fun failToSignIn() {
+        _event.postValue(Event(FAIL))
     }
 
     companion object {

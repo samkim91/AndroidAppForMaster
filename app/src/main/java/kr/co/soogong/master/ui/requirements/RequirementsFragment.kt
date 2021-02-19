@@ -2,7 +2,7 @@ package kr.co.soogong.master.ui.requirements
 
 import android.os.Bundle
 import android.view.View
-import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentRequirementsBinding
 import kr.co.soogong.master.ui.base.BaseFragment
@@ -23,30 +23,16 @@ class RequirementsFragment : BaseFragment<FragmentRequirementsBinding>(
         bind {
             lifecycleOwner = viewLifecycleOwner
 
-            with(mainTabs) {
-                addTab(newTab().setText("견적 대기"))
-                addTab(newTab().setText("진행중"))
-                tabGravity = TabLayout.GRAVITY_FILL
-
-                addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-                    override fun onTabReselected(tab: TabLayout.Tab) = Unit
-
-                    override fun onTabUnselected(tab: TabLayout.Tab) = Unit
-
-                    override fun onTabSelected(tab: TabLayout.Tab) {
-                        mainViewPager.currentItem = tab.position
-                    }
-                })
+            with(actionBar) {
+                title.text = getString(R.string.main_page_request_name)
             }
 
             with(mainViewPager) {
-                adapter = RequirementsPagerAdapter(childFragmentManager, mainTabs.tabCount)
-
-                addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(mainTabs))
-
-                swipEnabled = false
-
-                currentItem = 0
+                isUserInputEnabled = false
+                adapter = RequirementsPagerAdapter(requireActivity())
+                TabLayoutMediator(mainTabs, this) { tab, position ->
+                    tab.text = getString(TabTextList[position])
+                }.attach()
             }
         }
     }

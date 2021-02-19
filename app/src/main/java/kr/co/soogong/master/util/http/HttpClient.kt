@@ -3,6 +3,7 @@ package kr.co.soogong.master.util.http
 import com.google.gson.JsonObject
 import io.reactivex.Single
 import kr.co.soogong.master.BuildConfig
+import kr.co.soogong.master.data.estimation.Estimation
 import kr.co.soogong.master.data.category.Category
 import kr.co.soogong.master.data.category.Project
 import kr.co.soogong.master.data.notice.Notice
@@ -146,6 +147,17 @@ object HttpClient {
     fun getRequirementList(keycode: String?): Single<List<Requirement>> {
         return httpInterface.getRequirementList(keycode)
             .map { list -> list.map { Requirement.fromJson(it, "received") } }
+    }
+
+    fun getEstimationList(keycode: String?): Single<List<Estimation>> {
+        return httpInterface.getEstimationList(keycode).map { jsonObject ->
+            val list = jsonObject.get("data").asJsonArray
+            val ret = ArrayList<Estimation>()
+//            for (item in list) {
+//                ret.add(Estimation.fromJson(item.asJsonObject))
+//            }
+            return@map ret
+        }
     }
 
     fun getProgressList(keycode: String?): Single<List<Requirement>> {

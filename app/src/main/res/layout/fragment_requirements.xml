@@ -6,6 +6,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <include
+            android:id="@+id/action_bar"
+            layout="@layout/action_bar_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/main_tabs"
             android:layout_width="0dp"
@@ -13,7 +20,7 @@
             app:layout_constraintBottom_toTopOf="@id/main_view_pager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/action_bar"
             app:tabIndicatorColor="@color/primary_text_color"
             app:tabTextAppearance="@style/CustomTabText" />
 
@@ -26,7 +33,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/main_tabs" />
 
-        <kr.co.soogong.master.ui.widget.NonSwipeableViewPager
+        <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/main_view_pager"
             android:layout_width="0dp"
             android:layout_height="0dp"

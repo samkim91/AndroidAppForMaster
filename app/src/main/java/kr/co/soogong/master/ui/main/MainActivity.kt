@@ -1,8 +1,9 @@
 package kr.co.soogong.master.ui.main
 
 import android.os.Bundle
+import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.ViewModelProvider
-import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ActivityMainBinding
 import kr.co.soogong.master.ui.base.BaseActivity
@@ -32,32 +33,14 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
         bind {
             lifecycleOwner = this@MainActivity
 
-            with(mainTabs) {
-                addTab(newTab().setText(R.string.main_page_request_name).setIcon(R.drawable.ic_total_request))
-                addTab(newTab().setText(R.string.main_page_profile_name).setIcon(R.drawable.ic_profile))
-                addTab(newTab().setText(R.string.main_page_my_page_name).setIcon(R.drawable.ic_my_page))
-
-                tabGravity = TabLayout.GRAVITY_FILL
-
-                addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-                    override fun onTabReselected(tab: TabLayout.Tab) = Unit
-
-                    override fun onTabUnselected(tab: TabLayout.Tab) = Unit
-
-                    override fun onTabSelected(tab: TabLayout.Tab) {
-                        mainViewPager.currentItem = tab.position
-                    }
-                })
-            }
-
             with(mainViewPager) {
-                adapter = MainPagerAdapter(supportFragmentManager, mainTabs.tabCount)
-
-                addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(mainTabs))
-
-                swipEnabled = false
-
-                currentItem = 0
+                isUserInputEnabled = false
+                adapter = MainPagerAdapter(this@MainActivity)
+                TabLayoutMediator(mainTabs, this) { tab, position ->
+                    tab.text = getString(TabTextList[position])
+                    tab.icon =
+                        ResourcesCompat.getDrawable(resources, TabIconList[position], null)
+                }.attach()
             }
         }
     }

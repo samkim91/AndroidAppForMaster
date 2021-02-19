@@ -53,6 +53,14 @@
     <string name="main_page_profile_name">프로필</string>
     <string name="main_page_my_page_name">마이페이지</string>
 
+    <!--  Requirements  -->
+    <string name="requirements_received_name">견적</string>
+    <string name="requirements_progress_name">시공</string>
+    <string name="requirements_done_name">완료</string>
+
+    <!-- Requirements : Request -->
+    <string name="requirements_request_none_status">아직 들어온 문의가 없습니다.</string>
+
     <!-- Profile -->
     <string name="master_type">마스터유형</string>
     <string name="store_name">업체명</string>

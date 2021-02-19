@@ -53,13 +53,13 @@ class ProgressDetailActivity : BaseActivity<ActivityProgressDetailBinding>(
             }
 
             with(mainViewPager) {
-                adapter = ProgressPagerAdapter(supportFragmentManager, mainTabs.tabCount, keycode)
-
-                addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(mainTabs))
-
-                swipEnabled = false
-
-                currentItem = 0
+//                adapter = ProgressPagerAdapter(supportFragmentManager, mainTabs.tabCount, keycode)
+//
+//                addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(mainTabs))
+//
+//                swipEnabled = false
+//
+//                currentItem = 0
             }
         }
     }

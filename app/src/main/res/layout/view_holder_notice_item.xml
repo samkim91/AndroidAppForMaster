@@ -47,7 +47,7 @@
             android:id="@+id/notice_new_badge"
             android:layout_width="@dimen/notice_view_holder_badge_width"
             android:layout_height="@dimen/notice_view_holder_badge_height"
-            android:background="@drawable/notice_new_background"
+            android:background="@drawable/badge_background"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/notice_title"

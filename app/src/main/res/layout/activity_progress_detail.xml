@@ -30,7 +30,7 @@
             android:layout_height="1dp"
             android:background="@color/line_color" />
 
-        <kr.co.soogong.master.ui.widget.NonSwipeableViewPager
+        <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/main_view_pager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
