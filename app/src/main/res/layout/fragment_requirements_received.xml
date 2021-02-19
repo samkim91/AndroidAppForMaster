@@ -15,45 +15,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/received_noti"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="12dp"
-            android:backgroundTint="#263238"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="2dp"
-            app:layout_constraintBottom_toTopOf="@id/space"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <TextView
-                style="@style/medium_text_style.medium"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="40dp"
-                android:layout_marginBottom="10dp"
-                android:gravity="center"
-                android:text="@string/received_noti_fragment"
-                android:textColor="@color/basic_white" />
-        </androidx.cardview.widget.CardView>
-
-        <FrameLayout
-            android:id="@+id/space"
-            android:layout_width="match_parent"
-            android:layout_height="8dp"
-            android:background="@color/received_noti_space_color"
-            app:layout_constraintBottom_toTopOf="@id/received_list"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/received_noti" />
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/received_list"
             android:layout_width="0dp"
@@ -62,27 +23,34 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/space"
+            app:layout_constraintTop_toTopOf="parent"
             bind:received_list="@{vm.requirementList}"
             tools:listitem="@layout/viewholder_received_item" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/empty_text"
-            style="@style/medium_text_style.regular"
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/empty_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="받은요청이 없습니다."
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:src="@drawable/ic_no_card"
+            app:layout_constraintBottom_toTopOf="@id/empty_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
             bind:visible="@{vm.emptyList}" />
 
-        <androidx.constraintlayout.widget.Group
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/empty_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:constraint_referenced_ids="received_noti,space"
-            bind:visible="@{!vm.emptyList}" />
+            android:text="@string/requirements_request_none_status"
+            android:textColor="@color/color_BDBDBD"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/empty_icon"
+            bind:visible="@{vm.emptyList}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

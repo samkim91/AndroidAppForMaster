@@ -8,7 +8,7 @@
         android:layout_height="match_parent"
         tools:context=".ui.main.MainActivity">
 
-        <kr.co.soogong.master.ui.widget.NonSwipeableViewPager
+        <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/main_view_pager"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -20,7 +20,7 @@
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/main_tabs"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="72dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

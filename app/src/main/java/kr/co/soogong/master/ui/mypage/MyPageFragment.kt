@@ -10,10 +10,10 @@ import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentMypageBinding
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.getRepository
-import kr.co.soogong.master.ui.mypage.notice.NoticeMyPageListViewHolder
 import kr.co.soogong.master.ui.mypage.notice.NoticeViewHolder
 import kr.co.soogong.master.uiinterface.mypage.alarm.AlarmActivityHelper
 import kr.co.soogong.master.uiinterface.mypage.notice.NoticeActivityHelper
+import kr.co.soogong.master.uiinterface.mypage.notice.detail.NoticeDetailActivityHelper
 import kr.co.soogong.master.uiinterface.sign.SignMainActivityHelper
 import kr.co.soogong.master.util.EventObserver
 import timber.log.Timber
@@ -45,7 +45,7 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(
             }
 
             noticeList.adapter = NoticeAdapter(NoticeViewHolder.NoticeView) {
-                startActivity(NoticeActivityHelper.getIntent(requireContext(), it))
+                startActivity(NoticeDetailActivityHelper.getIntent(requireContext(), it))
             }
 
             setNoticeClick {

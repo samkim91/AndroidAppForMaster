@@ -3,6 +3,7 @@ package kr.co.soogong.master.ui.widget
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.CompoundButton
 import androidx.constraintlayout.widget.ConstraintLayout
 import kr.co.soogong.master.databinding.ViewTitleSwitchcompatBinding
@@ -29,6 +30,16 @@ class TitleSwitchCompat @JvmOverloads constructor(
         get() {
             field = binding.switchCompat.isChecked
             return field
+        }
+
+    var underLine: Boolean = true
+        set(value) {
+            field = value
+            binding.line.visibility = if (value) {
+                View.VISIBLE
+            } else {
+                View.GONE
+            }
         }
 
     fun setSwitchClick(lister: CompoundButton.OnCheckedChangeListener) {

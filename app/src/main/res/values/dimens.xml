@@ -68,7 +68,7 @@
     <dimen name="my_page_notice_total_arrow_width">20dp</dimen>
     <dimen name="my_page_notice_badge_width">14dp</dimen>
     <dimen name="my_page_notice_badge_height">14dp</dimen>
-    <dimen name="my_page_notice_badge_label_size">8sp</dimen>
+    <dimen name="my_page_notice_badge_text_size">8sp</dimen>
     <dimen name="my_page_notice_badge_margin_start">4dp</dimen>
     <dimen name="my_page_notice_list_height">124dp</dimen>
     <dimen name="my_page_notice_list_margin_top">8dp</dimen>
@@ -131,13 +131,14 @@
     <dimen name="notice_detail_line_height">1dp</dimen>
     <dimen name="notice_detail_line_margin_top">16dp</dimen>
     <dimen name="notice_detail_content_margin_top">16dp</dimen>
-    <dimen name="notice_detail_content_line_spacing">10sp</dimen>
+    <dimen name="notice_detail_content_line_spacing">1.4sp</dimen>
 
     <!--  Drawable  -->
     <dimen name="edit_text_height">40dp</dimen>
     <dimen name="button_height">40dp</dimen>
     <dimen name="board_size">1dp</dimen>
-    <dimen name="radius_size">8dp</dimen>
+    <dimen name="radius_size_4">8dp</dimen>
+    <dimen name="radius_size_8">8dp</dimen>
     <dimen name="alert_height">18dp</dimen>
     <dimen name="alert_margin_top">4dp</dimen>
 
@@ -171,7 +172,7 @@
     <dimen name="text_small_size">14sp</dimen>
     <dimen name="text_medium_size">16sp</dimen>
     <dimen name="text_title_size">18sp</dimen>
-    <dimen name="text_big_size">24sp</dimen>
+    <dimen name="text_big_size">18sp</dimen>
 
 
 </resources>

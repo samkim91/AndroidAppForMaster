@@ -6,37 +6,36 @@ import android.widget.EditText
 import java.text.DecimalFormat
 import java.text.ParseException
 
-
-class NumberTextWatcher(private val et: EditText) : TextWatcher {
-    private var df: DecimalFormat = DecimalFormat("#,###.##").apply {
+class NumberTextWatcher(private val editText: EditText) : TextWatcher {
+    private var decimalFormat1: DecimalFormat = DecimalFormat("#,###.##").apply {
         isDecimalSeparatorAlwaysShown = true
     }
-    private var dfnd: DecimalFormat = DecimalFormat("#,###")
+    private var decimalFormat: DecimalFormat = DecimalFormat("#,###")
     private var hasFractionalPart = false
 
     override fun afterTextChanged(s: Editable) {
-        et.removeTextChangedListener(this)
+        editText.removeTextChangedListener(this)
         try {
-            val iniLen: Int = et.text.length
+            val iniLen: Int = editText.text.length
             val v: String = s.toString().replace(
                 java.lang.String.valueOf(
-                    df.decimalFormatSymbols.groupingSeparator
+                    decimalFormat1.decimalFormatSymbols.groupingSeparator
                 ), ""
             )
-            val n: Number? = df.parse(v)
-            val cp = et.selectionStart
+            val n: Number? = decimalFormat1.parse(v)
+            val cp = editText.selectionStart
             if (hasFractionalPart) {
-                et.setText(df.format(n))
+                editText.setText(decimalFormat1.format(n))
             } else {
-                et.setText(dfnd.format(n))
+                editText.setText(decimalFormat.format(n))
             }
-            val endLen: Int = et.text.length
+            val endLen: Int = editText.text.length
             val sel = cp + (endLen - iniLen)
-            if (sel > 0 && sel <= et.text.length) {
-                et.setSelection(sel)
+            if (sel > 0 && sel <= editText.text.length) {
+                editText.setSelection(sel)
             } else {
                 // place cursor at the end?
-                et.setSelection(et.text.length - 1)
+                editText.setSelection(editText.text.length - 1)
             }
         } catch (nfe: NumberFormatException) {
             // do nothing?
@@ -44,14 +43,14 @@ class NumberTextWatcher(private val et: EditText) : TextWatcher {
             // do nothing?
         }
 
-        et.addTextChangedListener(this)
+        editText.addTextChangedListener(this)
     }
 
     override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) = Unit
 
     override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
         hasFractionalPart = s.toString()
-            .contains(java.lang.String.valueOf(df.decimalFormatSymbols.decimalSeparator))
+            .contains(java.lang.String.valueOf(decimalFormat1.decimalFormatSymbols.decimalSeparator))
     }
 
     companion object {

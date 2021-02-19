@@ -156,7 +156,7 @@
                     android:layout_width="@dimen/my_page_notice_badge_width"
                     android:layout_height="@dimen/my_page_notice_badge_height"
                     android:layout_marginStart="@dimen/my_page_notice_badge_margin_start"
-                    android:background="@drawable/notice_new_background"
+                    android:background="@drawable/badge_background"
                     app:layout_constraintBottom_toBottomOf="@id/notice_title"
                     app:layout_constraintStart_toEndOf="@id/notice_title"
                     app:layout_constraintTop_toTopOf="@id/notice_title">
@@ -167,7 +167,7 @@
                         android:gravity="center"
                         android:text="@string/badge_text"
                         android:textColor="@color/basic_white"
-                        android:textSize="@dimen/my_page_notice_badge_label_size"
+                        android:textSize="@dimen/my_page_notice_badge_text_size"
                         android:textStyle="bold" />
                 </FrameLayout>
 
@@ -248,7 +248,7 @@
                     android:layout_marginStart="@dimen/my_page_margin_start"
                     android:layout_marginTop="@dimen/my_page_call_button_margin_top"
                     android:layout_marginEnd="@dimen/my_page_margin_end"
-                    android:background="@drawable/shape_board_green_fill_transparent"
+                    android:background="@drawable/shape_fill_transparent_board_green"
                     android:onClick="@{callClick}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -285,7 +285,7 @@
                     android:layout_marginStart="@dimen/my_page_margin_start"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="@dimen/my_page_margin_end"
-                    android:background="@drawable/shape_kakao_round_corner"
+                    android:background="@drawable/shape_fill_kakao_background"
                     android:onClick="@{kakaoClick}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -309,7 +309,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/my_page_kakao_button_text_margin_start"
                     android:text="@string/my_page_kakao_text"
-                    android:textColor="@color/color_kakao_text"
+                    android:textColor="@color/text_kakao_color"
                     app:layout_constraintBottom_toBottomOf="@id/kakao_talk_btn"
                     app:layout_constraintEnd_toEndOf="@id/kakao_talk_btn"
                     app:layout_constraintStart_toEndOf="@id/kakao_talk_btn_icon"

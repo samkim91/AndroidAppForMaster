@@ -29,6 +29,9 @@ interface HttpInterface {
     @GET("api/v1/transmissions/default_list")
     fun getRequirementList(@Query("branch_keycode") auth: String?): Single<List<JsonObject>>
 
+    @GET("api/v2/estimations/{branch_keycode}")
+    fun getEstimationList(@Path("branch_keycode") branchKeycode: String?) : Single<JsonObject>
+
     @GET("api/v1/transmissions/accept_list")
     fun getProgressList(@Query("branch_keycode") auth: String?): Single<List<JsonObject>>
 

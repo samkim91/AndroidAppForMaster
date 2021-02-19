@@ -66,5 +66,3 @@ class ProgressViewModel(
         const val BADGE_UPDATE = "BADGE_UPDATE"
     }
 }
-
-val a = IntArray(5)

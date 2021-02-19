@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.core.widget.addTextChangedListener
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ActivitySignInBinding
 import kr.co.soogong.master.ui.base.BaseActivity
@@ -45,7 +46,11 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(
             setSignInClick {
                 val email = email.text?.toString()
                 val password = password.text?.toString()
-                if (!email.isNullOrEmpty() && !password.isNullOrEmpty()) {
+                if (email.isNullOrEmpty()) {
+                    signInAlert.visibility = View.VISIBLE
+                } else if (password.isNullOrEmpty()) {
+                    signInAlert.visibility = View.VISIBLE
+                } else if (!email.isNullOrEmpty() && !password.isNullOrEmpty()) {
                     viewModel.getUserInfo(email, password)
                 }
             }
@@ -53,11 +58,27 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(
             setFindInfoClick {
                 startActivity(FindInfoActivityHelper.getIntent(this@SignInActivity))
             }
+
+            email.addTextChangedListener(
+                afterTextChanged = {
+                    if (signInAlert.visibility == View.VISIBLE && !email.text.isNullOrEmpty()) {
+                        signInAlert.visibility = View.GONE
+                    }
+                }
+            )
+
+            password.addTextChangedListener(
+                afterTextChanged = {
+                    if (signInAlert.visibility == View.VISIBLE && !password.text.isNullOrEmpty()) {
+                        signInAlert.visibility = View.GONE
+                    }
+                }
+            )
         }
     }
 
     private fun registerEventObserve() {
-        viewModel.event.observe(this, EventObserver { (event, message) ->
+        viewModel.event.observe(this, EventObserver { event ->
             when (event) {
                 SUCCESS -> {
                     startActivity(MainActivityHelper.getIntent(this))
@@ -65,7 +86,6 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(
                 }
                 FAIL -> {
                     binding.signInAlert.visibility = View.VISIBLE
-                    Toast.makeText(this, message as? String, Toast.LENGTH_LONG).show()
                 }
             }
         })
