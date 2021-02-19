@@ -61,6 +61,12 @@
     <!-- Requirements : Request -->
     <string name="requirements_request_none_status">아직 들어온 문의가 없습니다.</string>
 
+    <!-- Requirements : Progress -->
+    <string name="requirements_progress_none_status">아직 진행중인 문의가 없습니다.</string>
+
+    <!-- Requirements : Done -->
+    <string name="requirements_done_none_status">아직 완료된 문의가 없습니다.</string>
+
     <!-- Profile -->
     <string name="master_type">마스터유형</string>
     <string name="store_name">업체명</string>
