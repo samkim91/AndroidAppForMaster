@@ -1,5 +1,7 @@
 package kr.co.soogong.master.ui.mypage
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
@@ -10,7 +12,7 @@ import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentMypageBinding
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.getRepository
-import kr.co.soogong.master.ui.mypage.notice.NoticeViewHolder
+import kr.co.soogong.master.ui.mypage.notice.NoticeMyPageListViewHolder
 import kr.co.soogong.master.uiinterface.mypage.alarm.AlarmActivityHelper
 import kr.co.soogong.master.uiinterface.mypage.notice.NoticeActivityHelper
 import kr.co.soogong.master.uiinterface.mypage.notice.detail.NoticeDetailActivityHelper
@@ -44,7 +46,7 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(
                 title.text = getString(R.string.my_page_fragment_name)
             }
 
-            noticeList.adapter = NoticeAdapter(NoticeViewHolder.NoticeView) {
+            noticeList.adapter = NoticeAdapter(NoticeMyPageListViewHolder.NoticeMypageListView) {
                 startActivity(NoticeDetailActivityHelper.getIntent(requireContext(), it))
             }
 
@@ -55,6 +57,7 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(
 
             setCallClick {
                 Timber.tag(TAG).i("initLayout: Call Button")
+                startActivity(Intent("android.intent.action.CALL", Uri.parse("tel:16444095")))
             }
 
             setAlarmClick {

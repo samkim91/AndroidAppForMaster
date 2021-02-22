@@ -81,6 +81,7 @@
     <dimen name="my_page_kakao_button_icon_width">18dp</dimen>
     <dimen name="my_page_kakao_button_text_margin_start">4dp</dimen>
     <dimen name="my_page_time_notice_margin_top">12dp</dimen>
+    <dimen name="my_page_time_notice_margin_bottom">33dp</dimen>
 
     <!-- Account Page -->
     <dimen name="account_page_setting_button_height">56dp</dimen>

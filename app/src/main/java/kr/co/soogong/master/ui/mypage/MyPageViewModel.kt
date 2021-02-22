@@ -42,12 +42,6 @@ class MyPageViewModel(
             }
         }
 
-    val starCount: LiveData<Double>
-        get() = _userInfo.map { it?.starCount ?: 0.0 }
-
-    val reviewsCount: LiveData<Int>
-        get() = _userInfo.map { it?.reviewsCount ?: 0 }
-
     fun requestUserProfile() {
         HttpClient.getUserProfile(InjectHelper.keyCode)
             .subscribeOn(Schedulers.io())
@@ -77,7 +71,7 @@ class MyPageViewModel(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                _list.postValue(it)
+                _list.postValue(it.sortedByDescending { it.date }.takeLast(3))
             }, {
                 Timber.tag(TAG).w("getNoticeList: $it")
             })

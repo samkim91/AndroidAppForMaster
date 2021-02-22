@@ -18,19 +18,6 @@ class NoticeMyPageListViewHolder(
         binding.run {
             setVariable(BR.data, notice)
 
-            root.resources.getColor(R.color.app_color, null)
-
-            val color = root.resources.getColor(
-                if (notice.isNew) {
-                    R.color.app_color
-                } else {
-                    R.color.secondary_text_color
-                },
-                null
-            )
-
-            title.setTextColor(color)
-
             root.setOnClickListener {
                 clickListener(notice)
             }
