@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/bind"
     xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="data"
+            type="kr.co.soogong.master.data.notice.Notice" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -16,6 +24,7 @@
             android:layout_marginEnd="@dimen/notice_view_holder_title_margin_end"
             android:ellipsize="end"
             android:lines="1"
+            android:text="@{data.title}"
             android:textColor="@color/text_basic_color"
             app:layout_constrainedWidth="true"
             app:layout_constraintBottom_toTopOf="@id/notice_date"
@@ -32,6 +41,7 @@
             android:textColor="@color/text_primary_color"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/notice_title"
+            bind:date_text2="@{data.date}"
             tools:text="2020. 8. 26" />
 
         <androidx.appcompat.widget.AppCompatImageView

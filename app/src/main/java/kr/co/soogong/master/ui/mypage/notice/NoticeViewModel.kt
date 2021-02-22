@@ -19,7 +19,7 @@ class NoticeViewModel : BaseViewModel() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                _list.postValue(it)
+                _list.postValue(it.sortedByDescending { it.date })
             }, {
                 Timber.tag(TAG).w("getNoticeList: $it")
             })
