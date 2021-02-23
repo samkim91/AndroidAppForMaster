@@ -153,9 +153,9 @@ object HttpClient {
         return httpInterface.getEstimationList(keycode).map { jsonObject ->
             val list = jsonObject.get("data").asJsonArray
             val ret = ArrayList<Estimation>()
-//            for (item in list) {
-//                ret.add(Estimation.fromJson(item.asJsonObject))
-//            }
+            for (item in list) {
+                ret.add(Estimation.fromJson(item.asJsonObject))
+            }
             return@map ret
         }
     }

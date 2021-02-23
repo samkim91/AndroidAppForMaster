@@ -10,6 +10,7 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.launch
 import kr.co.soogong.master.domain.Repository
 import kr.co.soogong.master.ui.base.BaseViewModel
+import kr.co.soogong.master.ui.requirements.card.RequirementCard
 import kr.co.soogong.master.util.Event
 import kr.co.soogong.master.util.InjectHelper
 import kr.co.soogong.master.util.http.HttpClient
@@ -22,21 +23,21 @@ class ReceivedViewModel(
     val emptyList: LiveData<Boolean>
         get() = _emptyList
 
-    private val _requirementList: LiveData<List<ReceivedCard>> =
-        repository.getRequirementList().map { list ->
-            val ret = list.filter { it.status == "received" }.map { ReceivedCard.from(it) }
+    private val _requirementList: LiveData<List<RequirementCard>> =
+        repository.getEstimationList().map { list ->
+            val ret = list.map { RequirementCard.from(it) }
 
             if (ret.isNullOrEmpty()) {
                 _emptyList.value = true
                 updatedBadge(0)
-                return@map emptyList<ReceivedCard>()
+                return@map emptyList<RequirementCard>()
             } else {
                 _emptyList.value = false
                 updatedBadge(ret.size)
                 return@map ret
             }
         }
-    val requirementList: LiveData<List<ReceivedCard>>
+    val requirementList: LiveData<List<RequirementCard>>
         get() = _requirementList
 
     private val _event = MutableLiveData<Event<Pair<String, Int>>>()
@@ -44,17 +45,17 @@ class ReceivedViewModel(
         get() = _event
 
     private fun updatedBadge(badgeCount: Int) {
+        Timber.tag(TAG).d("updatedBadge: $badgeCount")
         _event.value = Event(BADGE_UPDATE to badgeCount)
     }
 
     fun requestList() {
-        HttpClient.getRequirementList(InjectHelper.keyCode)
+        HttpClient.getEstimationList(InjectHelper.keyCode)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy {
-                Timber.tag(TAG).d("requestList: $it")
                 viewModelScope.launch {
-                    repository.insertRequirement(it)
+                    repository.insertEstimation(it)
                 }
             }
             .addToDisposable()

@@ -1,2 +1,49 @@
 package kr.co.soogong.master.ui.requirements.card
 
+import android.icu.text.DecimalFormat
+import android.icu.text.SimpleDateFormat
+import android.widget.TextView
+import androidx.databinding.BindingAdapter
+import kr.co.soogong.master.R
+import kr.co.soogong.master.data.estimation.Transmissions
+import kr.co.soogong.master.ui.widget.AmountView
+import java.util.*
+
+@BindingAdapter("bind:estimation_status")
+fun TextView.setEstimationStatus(estimationStatus: EstimationStatus) {
+    text = estimationStatus.toString()
+}
+
+@BindingAdapter("bind:start_date")
+fun TextView.setStartTime(date: Date) {
+    val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd - hh:mm")
+    val startText = context.getString(R.string.requirements_card_start_time)
+    text = "$startText ${simpleDateFormat.format(date)}"
+}
+
+@BindingAdapter("bind:end_date")
+fun TextView.setEndTime(date: Date) {
+    val c = Calendar.getInstance()
+    c.time = date
+    c.add(Calendar.DATE, 1)
+    val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd - hh:mm")
+    val endText = context.getString(R.string.requirements_card_end_time)
+    text = "$endText ${simpleDateFormat.format(c.time)}"
+}
+
+@BindingAdapter(value = ["bind:estimationStatus", "bind:transmissions"])
+fun AmountView.setAmount(status: EstimationStatus, transmissions: Transmissions) {
+    title = when (status) {
+        EstimationStatus.Waiting -> {
+            context.getString(R.string.requirements_card_amount_title)
+        }
+        EstimationStatus.Final -> {
+            context.getString(R.string.requirements_card_amount_done_title)
+        }
+        else -> {
+            ""
+        }
+    }
+
+    detail = "${DecimalFormat("#,###").format(transmissions.message?.priceInNumber ?: 0)}원"
+}
