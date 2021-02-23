@@ -19,7 +19,7 @@ class SignInViewModel(
 
     fun getUserInfo(email: String, password: String) {
         if (BuildConfig.DEBUG) {
-            repository.setString(AppSharedPreferenceHelper.BRANCH_KEYCODE, "e40de2450a27563a")
+            repository.setString(AppSharedPreferenceHelper.BRANCH_KEYCODE, "919dcdf215133b52")
             successToSignIn()
             return
         }

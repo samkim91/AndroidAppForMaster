@@ -1,16 +1,33 @@
 package kr.co.soogong.master.domain
 
+import kr.co.soogong.master.data.estimation.Estimation
 import kr.co.soogong.master.data.requirements.Requirement
 import kr.co.soogong.master.data.user.User
+import kr.co.soogong.master.domain.estimation.EstimationDao
 import kr.co.soogong.master.domain.requirements.RequirementDao
 import kr.co.soogong.master.domain.user.UserDao
 
 class Repository private constructor(
-//    private val materialDao: MaterialDao,
+    private val estimationDao: EstimationDao,
     private val requirementDao: RequirementDao,
     private val userDao: UserDao,
     private val sharedPreference: AppSharedPreference
 ) {
+    //region Estimation
+    fun getEstimationList() = estimationDao.getAllList()
+
+    fun getEstimation(keycode: String) = estimationDao.getItem(keycode)
+
+    suspend fun insertEstimation(estimation: Estimation) = estimationDao.insert(estimation)
+
+    suspend fun insertEstimation(estimationList: List<Estimation>) =
+        estimationDao.insert(estimationList)
+
+    suspend fun removeEstimation(keycode: String) = estimationDao.remove(keycode)
+
+    suspend fun removeAllEstimation() = estimationDao.removeAll()
+    //endregion
+
     //region Requirement
     fun getRequirementList() = requirementDao.getAllList()
 
@@ -61,11 +78,13 @@ class Repository private constructor(
         private var instance: Repository? = null
 
         fun getInstance(
+            estimationDao: EstimationDao,
             requirementDao: RequirementDao,
             userDao: UserDao,
             appSharedPreference: AppSharedPreference
         ) = instance ?: synchronized(this) {
             instance ?: Repository(
+                estimationDao,
                 requirementDao,
                 userDao,
                 appSharedPreference

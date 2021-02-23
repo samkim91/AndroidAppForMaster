@@ -10,7 +10,7 @@ import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentRequirementsReceivedBinding
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.getRepository
-import kr.co.soogong.master.ui.requirements.RequirementsBadge
+import kr.co.soogong.master.uiinterface.requirments.RequirementsBadge
 import kr.co.soogong.master.uiinterface.requirments.received.detail.ReceivedDetailActivityHelper
 import kr.co.soogong.master.util.EventObserver
 import timber.log.Timber
@@ -48,6 +48,7 @@ class ReceivedFragment : BaseFragment<FragmentRequirementsReceivedBinding>(
                 context,
                 LinearLayoutManager(context).orientation
             )
+            dividerItemDecoration.setDrawable(resources.getDrawable(R.drawable.divider, null))
             receivedList.addItemDecoration(dividerItemDecoration)
         }
 
@@ -65,6 +66,8 @@ class ReceivedFragment : BaseFragment<FragmentRequirementsReceivedBinding>(
         viewModel.event.observe(viewLifecycleOwner, EventObserver { (event, value) ->
             when (event) {
                 ReceivedViewModel.BADGE_UPDATE -> {
+                    Timber.tag(TAG).d("registerEventObserve: $value")
+                    Timber.tag(TAG).d("registerEventObserve: $requirementsBadge")
                     if (value > 0) requirementsBadge?.setReceivedBadge(value) else requirementsBadge?.unsetReceivedBadge()
                 }
             }

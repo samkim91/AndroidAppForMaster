@@ -7,11 +7,12 @@ import com.google.android.material.tabs.TabLayoutMediator
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ActivityMainBinding
 import kr.co.soogong.master.ui.base.BaseActivity
+import kr.co.soogong.master.uiinterface.main.MainBadge
 import timber.log.Timber
 
 class MainActivity : BaseActivity<ActivityMainBinding>(
     R.layout.activity_main
-) {
+), MainBadge {
     private val viewModel: MainViewModel by lazy {
         ViewModelProvider(this).get(MainViewModel::class.java)
     }
@@ -43,6 +44,33 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
                 }.attach()
             }
         }
+    }
+
+    override fun setRequirementsBadge(badgeCount: Int) {
+        val badge = binding.mainTabs.getTabAt(0)?.orCreateBadge
+        badge?.number = badgeCount
+    }
+
+    override fun unsetRequirementsBadge() {
+        binding.mainTabs.getTabAt(0)?.removeBadge()
+    }
+
+    override fun setProfileBadge(badgeCount: Int) {
+        val badge = binding.mainTabs.getTabAt(1)?.orCreateBadge
+        badge?.number = badgeCount
+    }
+
+    override fun unsetProfileBadge() {
+        binding.mainTabs.getTabAt(1)?.removeBadge()
+    }
+
+    override fun setMyPageBadge(badgeCount: Int) {
+        val badge = binding.mainTabs.getTabAt(2)?.orCreateBadge
+        badge?.number = badgeCount
+    }
+
+    override fun unsetMyPageBadge() {
+        binding.mainTabs.getTabAt(2)?.removeBadge()
     }
 
     companion object {

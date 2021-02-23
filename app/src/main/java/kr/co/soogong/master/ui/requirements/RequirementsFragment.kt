@@ -6,6 +6,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentRequirementsBinding
 import kr.co.soogong.master.ui.base.BaseFragment
+import kr.co.soogong.master.uiinterface.requirments.RequirementsBadge
 import timber.log.Timber
 
 class RequirementsFragment : BaseFragment<FragmentRequirementsBinding>(
@@ -29,7 +30,7 @@ class RequirementsFragment : BaseFragment<FragmentRequirementsBinding>(
 
             with(mainViewPager) {
                 isUserInputEnabled = false
-                adapter = RequirementsPagerAdapter(requireActivity())
+                adapter = RequirementsPagerAdapter(this@RequirementsFragment)
                 TabLayoutMediator(mainTabs, this) { tab, position ->
                     tab.text = getString(TabTextList[position])
                 }.attach()
@@ -37,13 +38,8 @@ class RequirementsFragment : BaseFragment<FragmentRequirementsBinding>(
         }
     }
 
-    override fun unsetProgressBadge() {
-        binding.mainTabs.getTabAt(1)?.removeBadge()
-    }
-
-    override fun setProgressBadge(badgeCount: Int) {
-        val badge = binding.mainTabs.getTabAt(1)?.orCreateBadge
-        badge?.backgroundColor = resources.getColor(R.color.app_color, null)
+    override fun setReceivedBadge(badgeCount: Int) {
+        val badge = binding.mainTabs.getTabAt(0)?.orCreateBadge
         badge?.number = badgeCount
     }
 
@@ -51,10 +47,22 @@ class RequirementsFragment : BaseFragment<FragmentRequirementsBinding>(
         binding.mainTabs.getTabAt(0)?.removeBadge()
     }
 
-    override fun setReceivedBadge(badgeCount: Int) {
-        val badge = binding.mainTabs.getTabAt(0)?.orCreateBadge
-        badge?.backgroundColor = resources.getColor(R.color.app_color, null)
+    override fun setProgressBadge(badgeCount: Int) {
+        val badge = binding.mainTabs.getTabAt(1)?.orCreateBadge
         badge?.number = badgeCount
+    }
+
+    override fun unsetProgressBadge() {
+        binding.mainTabs.getTabAt(1)?.removeBadge()
+    }
+
+    override fun setDoneBadge(badgeCount: Int) {
+        val badge = binding.mainTabs.getTabAt(2)?.orCreateBadge
+        badge?.number = badgeCount
+    }
+
+    override fun unsetDoneBadge() {
+        binding.mainTabs.getTabAt(2)?.removeBadge()
     }
 
     companion object {

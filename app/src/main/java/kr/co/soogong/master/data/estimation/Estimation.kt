@@ -1,79 +1,96 @@
 package kr.co.soogong.master.data.estimation
 
+import android.os.Parcelable
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.JsonObject
+import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
+@Entity(tableName = "Estimation")
 data class Estimation(
-    val additionalInfo: List<AdditionalInfo>,
-    val address: String,
-    val area: String,
-    val category: String,
-    val categoryId: Any,
-    val createdAt: Long,
-    val description: String,
-    val detailAddress: String,
-    val expectDate: String,
-    val expectTransmissionsCount: Int,
-    val images: List<ImagePath>,
+    @PrimaryKey
+    @SerializedName("keycode")
     val keycode: String,
+
+    @SerializedName("address")
+    val address: String,
+
+    @SerializedName("area")
+    val area: String,
+
+    @SerializedName("category")
+    val category: String,
+
+    @SerializedName("created_at")
+    val createdAt: Long,
+
+    @SerializedName("description")
+    val description: String,
+
+    @SerializedName("detail_address_for_app")
+    val detailAddress: String,
+
+    @SerializedName("expect_date_for_app")
+    val expectDate: String,
+
+    @SerializedName("location")
     val location: String,
+
+    @SerializedName("project")
     val project: String,
-    val refusedMessagesCount: Int,
+
+    @SerializedName("status")
     val status: String,
+
+    @SerializedName("status_for_app")
     val statusForApp: String,
-    val statusForFront: String,
-    val statusKr: String,
+
+    @SerializedName("user_assigned")
+    val userAssigned: Boolean,
+
+    @SerializedName("images")
+    val images: List<ImagePath>,
+
+    @SerializedName("transmissions")
     val transmissions: Transmissions,
-    val userAssigned: Boolean
-) {
+
+    @SerializedName("additional_info")
+    val additionalInfo: List<AdditionalInfo>
+) : Parcelable {
     companion object {
-        fun fromJson(jsonObject: JsonObject) {
-            /*
-            {
-      "additional_info": [],
-      "address": "",
-      "area": "서울특별시",
-      "category": "욕실",
-      "category_id": null,
-      "created_at": 1607590405000,
-      "description": "",
-      "detail_address": "",
-      "expect_date": "협의",
-      "expect_transmissions_count": 0,
-      "images": [],
-      "keycode": "wJv7RCzhSHQNuqjX",
-      "location": "강동구",
-      "project": "욕실 - 예시2",
-      "refused_messages_count": 0,
-      "status": "closed",
-      "status_for_app": null,
-      "status_for_front": "평가완료",
-      "status_kr": "최종완료",
-      "transmissions": {
-        "branch_keycode": "e40de2450a27563a",
-        "message": {
-          "contents": "인건비: 10000 원 <br/>자재비: 50000 원<br/>출장비: 200000 원<br/>위 비용을 기준으로 산정한 견적입니다.<br/>마스터 코멘트 부분입니다2.",
-          "price_in_number": 260000,
-          "status": "customer_selected",
-          "price_detail": [
-            {
-              "price_in_number": 10000,
-              "price_type": "personnel"
-            },
-            {
-              "price_in_number": 50000,
-              "price_type": "material"
-            },
-            {
-              "price_in_number": 200000,
-              "price_type": "trip"
+        fun fromJson(jsonObject: JsonObject): Estimation {
+            val additionalInfoJson = jsonObject.get("additional_info").asJsonArray
+            val additionalInfo = mutableListOf<AdditionalInfo>()
+            for (item in additionalInfoJson) {
+                additionalInfo.add(AdditionalInfo.fromJson(item.asJsonObject))
             }
-          ]
-        },
-        "status": "accepted"
-      },
-      "user_assigned": false
-    },
-             */
+
+            val imagesJson = jsonObject.get("images").asJsonArray
+            val images = mutableListOf<ImagePath>()
+            for (item in imagesJson) {
+                images.add(ImagePath.fromJson(item.asJsonObject))
+            }
+
+            return Estimation(
+                additionalInfo = additionalInfo,
+                address = jsonObject.get("address_for_app").asString,
+                area = jsonObject.get("area").asString,
+                category = jsonObject.get("category").asString,
+                createdAt = jsonObject.get("created_at").asLong,
+                description = jsonObject.get("description_for_app").asString,
+                detailAddress = jsonObject.get("detail_address_for_app").asString,
+                expectDate = jsonObject.get("expect_date_for_app").asString,
+                images = images,
+                keycode = jsonObject.get("keycode").asString,
+                location = jsonObject.get("location").asString,
+                project = jsonObject.get("project").asString,
+                userAssigned = jsonObject.get("user_assigned").asBoolean,
+                status = jsonObject.get("status").asString,
+                transmissions = Transmissions.fromJson(jsonObject.get("transmissions").asJsonObject),
+                statusForApp = jsonObject.get("status_for_app").asString,
+            )
         }
     }
 }

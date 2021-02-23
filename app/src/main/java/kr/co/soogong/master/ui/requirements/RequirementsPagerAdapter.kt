@@ -8,8 +8,8 @@ import kr.co.soogong.master.ui.requirements.progress.ProgressFragment
 import kr.co.soogong.master.ui.requirements.received.ReceivedFragment
 
 class RequirementsPagerAdapter(
-    fragmentActivity: FragmentActivity
-) : FragmentStateAdapter(fragmentActivity) {
+    fragment: Fragment
+) : FragmentStateAdapter(fragment) {
     override fun getItemCount(): Int = TabCount
 
     override fun createFragment(position: Int): Fragment {

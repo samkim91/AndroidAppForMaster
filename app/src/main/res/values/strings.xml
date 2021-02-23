@@ -70,6 +70,18 @@
     <!-- Requirements : Done -->
     <string name="requirements_done_none_status">아직 완료된 문의가 없습니다.</string>
 
+    <!-- RequirementsCard -->
+    <string name="requirements_card_waiting_label">고객이 2주 내에 응답하지 않을 시\n해당 문의건은 삭제됩니다.</string>
+    <string name="requirements_card_call_button">고객에게 전화하기</string>
+    <string name="requirements_card_call_re_button">다시 전화하기</string>
+    <string name="requirements_card_done_button">시공 완료</string>
+    <string name="requirements_card_review_button">리뷰 요청하기</string>
+    <string name="requirements_card_review_button_done">리뷰 요청을 완료했어요!</string>
+    <string name="requirements_card_start_time">최초 요청일 :</string>
+    <string name="requirements_card_end_time">견적 마감일 :</string>
+    <string name="requirements_card_amount_title">나의 견적가</string>
+    <string name="requirements_card_amount_done_title">최종 시공가</string>
+
     <!-- Profile -->
     <string name="master_type">마스터유형</string>
     <string name="store_name">업체명</string>
