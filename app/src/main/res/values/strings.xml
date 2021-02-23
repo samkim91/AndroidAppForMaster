@@ -60,6 +60,9 @@
 
     <!-- Requirements : Request -->
     <string name="requirements_request_none_status">아직 들어온 문의가 없습니다.</string>
+    <string name="requirements_request_filter_option_1">전체</string>
+    <string name="requirements_request_filter_option_2">견적요청</string>
+    <string name="requirements_request_filter_option_3">매칭대기</string>
 
     <!-- Requirements : Progress -->
     <string name="requirements_progress_none_status">아직 진행중인 문의가 없습니다.</string>

@@ -134,12 +134,23 @@
     <dimen name="notice_detail_content_margin_top">16dp</dimen>
     <dimen name="notice_detail_content_line_spacing">1.4sp</dimen>
 
+    <!--  Requirement Received  -->
+    <dimen name="requirement_received_filter_height">48dp</dimen>
+    <dimen name="requirement_received_filter_margin_start">20dp</dimen>
+    <dimen name="requirement_received_filter_margin_top">12dp</dimen>
+    <dimen name="requirement_received_filter_margin_end">20dp</dimen>
+    <dimen name="requirement_received_filter_option_margin_4">4dp</dimen>
+    <dimen name="requirement_received_filter_option_margin_8">8dp</dimen>
+    <dimen name="requirement_received_list_margin_top">12dp</dimen>
+    <dimen name="requirement_received_empty_text_size">18sp</dimen>
+
     <!--  Drawable  -->
     <dimen name="edit_text_height">40dp</dimen>
     <dimen name="button_height">40dp</dimen>
     <dimen name="board_size">1dp</dimen>
     <dimen name="radius_size_4">8dp</dimen>
     <dimen name="radius_size_8">8dp</dimen>
+    <dimen name="radius_size_50">50dp</dimen>
     <dimen name="alert_height">18dp</dimen>
     <dimen name="alert_margin_top">4dp</dimen>
 
