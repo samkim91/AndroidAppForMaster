@@ -41,16 +41,6 @@ fun TextView.setEndDate2(date: Date?) {
     text = simpleDateFormat.format(c.time)
 }
 
-@BindingAdapter("bind:end_date_2")
-fun TextView.setEndDate2(date: Date?) {
-    val c = Calendar.getInstance()
-    c.time = date ?: Date(System.currentTimeMillis())
-    c.add(Calendar.DATE, 1)
-    val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd - hh:mm")
-    text = simpleDateFormat.format(c.time)
-}
-
-
 @BindingAdapter(value = ["bind:estimationStatus", "bind:transmissions"])
 fun AmountView.setAmount(status: EstimationStatus, transmissions: Transmissions) {
     title = when (status) {
