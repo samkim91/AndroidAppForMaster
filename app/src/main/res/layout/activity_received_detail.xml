@@ -66,51 +66,6 @@
                         bind:date_text="@{vm.date}"
                         tools:text="2020. 8. 26  13:53" />
 
-                    <LinearLayout
-                        android:id="@+id/content_frame"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:orientation="vertical"
-                        app:layout_constraintBottom_toTopOf="@id/detail"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/time" />
-
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/accept"
-                        style="@style/medium_text_style.bold"
-                        android:layout_width="0dp"
-                        android:layout_height="40dp"
-                        android:layout_marginTop="24dp"
-                        android:layout_marginEnd="4dp"
-                        android:layout_marginBottom="48dp"
-                        android:background="@drawable/shape_fill_green_background"
-                        android:onClick="@{acceptClick}"
-                        android:text="견적서 작성하기"
-                        android:textColor="@color/basic_white"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/denied"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/detail"
-                        app:layout_goneMarginEnd="0dp" />
-
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/denied"
-                        style="@style/medium_text_style.bold"
-                        android:layout_width="0dp"
-                        android:layout_height="40dp"
-                        android:layout_marginStart="4dp"
-                        android:layout_marginTop="24dp"
-                        android:layout_marginBottom="48dp"
-                        android:background="@drawable/shape_fill_transparent_board_green"
-                        android:onClick="@{deinedClick}"
-                        android:text="거절하기"
-                        android:textColor="@color/app_color"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/accept"
-                        app:layout_constraintTop_toBottomOf="@id/content_frame" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
