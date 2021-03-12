@@ -10,18 +10,31 @@ abstract class EstimationCardViewHolder(
     open val binding: ViewHolderRequirementItemBinding
 ) : RecyclerView.ViewHolder(binding.root) {
 
-    abstract fun binding(
+    open fun binding(
         requirementCard: RequirementCard,
-        leftButtonClickListener: ((String) -> Unit)?,
-        rightButtonClickListener: ((String) -> Unit)?
-    )
+        cardClickClickListener: ((String) -> Unit),
+        leftButtonClickListener: ((String) -> Unit)? = null,
+        rightButtonClickListener: ((String) -> Unit)? = null
+    ) {
+        with(binding) {
+            vm = requirementCard
+
+            setCardClickListener {
+                cardClickClickListener(requirementCard.keyCode)
+            }
+
+            executePendingBindings()
+        }
+    }
 }
 
 class RequestViewHolder(
     override val binding: ViewHolderRequirementItemBinding
 ) : EstimationCardViewHolder(binding) {
+
     override fun binding(
         requirementCard: RequirementCard,
+        cardClickClickListener: ((String) -> Unit),
         leftButtonClickListener: ((String) -> Unit)?,
         rightButtonClickListener: ((String) -> Unit)?
     ) {
@@ -29,10 +42,10 @@ class RequestViewHolder(
             vm = requirementCard
 
             endTime.visibility = View.VISIBLE
-            endTime.setEndTime(requirementCard.createdAt)
+            endTime.setEndDate(requirementCard.createdAt)
 
             setCardClickListener {
-
+                cardClickClickListener(requirementCard.keyCode)
             }
 
             executePendingBindings()
@@ -45,6 +58,7 @@ class WaitingViewHolder(
 ) : EstimationCardViewHolder(binding) {
     override fun binding(
         requirementCard: RequirementCard,
+        cardClickClickListener: ((String) -> Unit),
         leftButtonClickListener: ((String) -> Unit)?,
         rightButtonClickListener: ((String) -> Unit)?
     ) {
@@ -57,6 +71,7 @@ class WaitingViewHolder(
             waitingLabel.visibility = View.VISIBLE
 
             setCardClickListener {
+                cardClickClickListener(requirementCard.keyCode)
             }
 
             executePendingBindings()
@@ -69,17 +84,21 @@ class ProgressViewHolder(
 ) : EstimationCardViewHolder(binding) {
     override fun binding(
         requirementCard: RequirementCard,
+        cardClickClickListener: ((String) -> Unit),
         leftButtonClickListener: ((String) -> Unit)?,
         rightButtonClickListener: ((String) -> Unit)?
     ) {
         with(binding) {
             vm = requirementCard
 
+            myAmount.visibility = View.VISIBLE
+            myAmount.setAmount(requirementCard.status, requirementCard.transmissions)
+
             callButton.visibility = View.VISIBLE
             doneButton.visibility = View.VISIBLE
 
             setCardClickListener {
-
+                cardClickClickListener(requirementCard.keyCode)
             }
 
             executePendingBindings()
@@ -92,6 +111,7 @@ class CustomDoneViewHolder(
 ) : EstimationCardViewHolder(binding) {
     override fun binding(
         requirementCard: RequirementCard,
+        cardClickClickListener: ((String) -> Unit),
         leftButtonClickListener: ((String) -> Unit)?,
         rightButtonClickListener: ((String) -> Unit)?
     ) {
@@ -101,7 +121,7 @@ class CustomDoneViewHolder(
             doneButton.visibility = View.VISIBLE
 
             setCardClickListener {
-
+                cardClickClickListener(requirementCard.keyCode)
             }
 
             executePendingBindings()
@@ -114,6 +134,7 @@ class DoneViewHolder(
 ) : EstimationCardViewHolder(binding) {
     override fun binding(
         requirementCard: RequirementCard,
+        cardClickClickListener: ((String) -> Unit),
         leftButtonClickListener: ((String) -> Unit)?,
         rightButtonClickListener: ((String) -> Unit)?
     ) {
@@ -123,7 +144,7 @@ class DoneViewHolder(
             reviewButton.visibility = View.VISIBLE
 
             setCardClickListener {
-
+                cardClickClickListener(requirementCard.keyCode)
             }
 
             executePendingBindings()
@@ -136,6 +157,7 @@ class FinalViewHolder(
 ) : EstimationCardViewHolder(binding) {
     override fun binding(
         requirementCard: RequirementCard,
+        cardClickClickListener: ((String) -> Unit),
         leftButtonClickListener: ((String) -> Unit)?,
         rightButtonClickListener: ((String) -> Unit)?
     ) {
@@ -150,11 +172,11 @@ class FinalViewHolder(
                     null
                 )
             )
-
+            myAmount.visibility = View.VISIBLE
             myAmount.setAmount(requirementCard.status, requirementCard.transmissions)
 
             setCardClickListener {
-
+                cardClickClickListener(requirementCard.keyCode)
             }
 
             executePendingBindings()
@@ -167,6 +189,7 @@ class CancelViewHolder(
 ) : EstimationCardViewHolder(binding) {
     override fun binding(
         requirementCard: RequirementCard,
+        cardClickClickListener: ((String) -> Unit),
         leftButtonClickListener: ((String) -> Unit)?,
         rightButtonClickListener: ((String) -> Unit)?
     ) {
@@ -183,7 +206,7 @@ class CancelViewHolder(
             )
 
             setCardClickListener {
-
+                cardClickClickListener(requirementCard.keyCode)
             }
 
             executePendingBindings()

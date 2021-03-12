@@ -9,6 +9,7 @@ import kotlinx.parcelize.Parcelize
 data class PriceDetail(
     @SerializedName("price_in_number")
     val priceInNumber: Int,
+
     @SerializedName("price_type")
     val priceType: String
 ) : Parcelable {

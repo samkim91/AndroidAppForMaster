@@ -14,8 +14,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:context=".ui.mypage.notice.NoticeActivity">
+        android:orientation="vertical">
 
         <include
             android:id="@+id/action_bar"
@@ -62,7 +61,7 @@
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/line"
                     android:layout_width="0dp"
-                    android:layout_height="@dimen/notice_detail_line_height"
+                    android:layout_height="@dimen/line_height"
                     android:layout_marginTop="@dimen/notice_detail_line_margin_top"
                     android:background="@color/line_color"
                     app:layout_constraintEnd_toEndOf="parent"

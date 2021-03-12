@@ -13,9 +13,7 @@ class NoticeDetailActivity : BaseActivity<ActivityNoticeDetailBinding>(
     R.layout.activity_notice_detail
 ) {
     private val noticeData: Notice by lazy {
-        intent.getBundleExtra(NoticeDetailActivityHelper.EXTRA_KEY_BUNDLE)
-            ?.getParcelable(NoticeDetailActivityHelper.BUNDLE_KEY_PARCELABLE_KEY) as? Notice
-            ?: Notice.NULL_OBJECT
+        NoticeDetailActivityHelper.getNoticeData(intent)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

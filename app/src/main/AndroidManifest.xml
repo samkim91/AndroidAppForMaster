@@ -49,6 +49,12 @@
             android:name=".ui.select.CategoryActivity"
             android:launchMode="singleTask" />
         <activity
+            android:name=".ui.image.ImageActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".ui.requirements.action.view.ViewEstimateActivity"
+            android:launchMode="singleTask" />
+        <activity
             android:name=".ui.requirements.received.detail.ReceivedDetailActivity"
             android:launchMode="singleTask" />
         <activity

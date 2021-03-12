@@ -18,6 +18,7 @@
     <color name="color_8022D47B">#8022D47B</color>
     <color name="color_FF711D">#FF711D</color>
     <color name="color_EB4B2F">#EB4B2F</color>
+    <color name="color_E3E3E3">#e3e3e3</color>
 
     <color name="text_basic_color">@color/color_121212</color>
     <color name="text_primary_color">@color/color_616161</color>

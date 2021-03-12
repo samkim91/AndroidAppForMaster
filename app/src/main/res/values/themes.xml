@@ -5,8 +5,8 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
         <item name="android:windowBackground">@color/app_background_color</item>
-        <item name="colorPrimary">@color/app_color</item>
-        <item name="colorPrimaryDark">@color/app_color</item>
+        <item name="colorPrimary">@color/color_1FC472</item>
+        <item name="colorPrimaryDark">@color/color_1FC472</item>
     </style>
 
     <!-- Splash theme. -->

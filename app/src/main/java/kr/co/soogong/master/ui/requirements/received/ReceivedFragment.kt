@@ -2,6 +2,7 @@ package kr.co.soogong.master.ui.requirements.received
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -11,7 +12,7 @@ import kr.co.soogong.master.databinding.FragmentRequirementsReceivedBinding
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.getRepository
 import kr.co.soogong.master.uiinterface.requirments.RequirementsBadge
-import kr.co.soogong.master.uiinterface.requirments.received.detail.ReceivedDetailActivityHelper
+import kr.co.soogong.master.uiinterface.requirments.action.view.ViewEstimateActivityHelper
 import kr.co.soogong.master.util.EventObserver
 import timber.log.Timber
 
@@ -40,15 +41,17 @@ class ReceivedFragment : BaseFragment<FragmentRequirementsReceivedBinding>(
             setVariable(BR.vm, viewModel)
             lifecycleOwner = viewLifecycleOwner
 
-            receivedList.adapter = ReceivedAdapter(buttonClick = { keycode ->
-                startActivity(ReceivedDetailActivityHelper.getIntent(requireContext(), keycode))
+            receivedList.adapter = ReceivedAdapter(cardClickListener = { keycode ->
+                startActivity(ViewEstimateActivityHelper.getIntent(requireContext(), keycode))
             })
 
             val dividerItemDecoration = DividerItemDecoration(
                 context,
                 LinearLayoutManager(context).orientation
             )
-            dividerItemDecoration.setDrawable(resources.getDrawable(R.drawable.divider, null))
+            ResourcesCompat.getDrawable(resources, R.drawable.divider, null)?.let {
+                dividerItemDecoration.setDrawable(it)
+            }
             receivedList.addItemDecoration(dividerItemDecoration)
         }
 

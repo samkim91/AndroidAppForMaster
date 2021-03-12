@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.RecyclerView
 import kr.co.soogong.master.data.category.Category
 
 class CategorySelectAdapter(
-    private val list: MutableList<Category> = mutableListOf(),
+    private val list: ArrayList<Category> = arrayListOf(),
     private val clickListener: (Category) -> Unit
 ) : RecyclerView.Adapter<CategorySelectViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =

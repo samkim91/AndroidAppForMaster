@@ -1,3 +1,5 @@
+@file:JvmName("TextViewExt")
+
 package kr.co.soogong.master.ext
 
 import android.content.Context

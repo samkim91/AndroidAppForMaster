@@ -17,4 +17,10 @@ object NoticeDetailActivityHelper {
             })
         }
     }
+
+    fun getNoticeData(intent: Intent): Notice {
+        return intent.getBundleExtra(EXTRA_KEY_BUNDLE)
+            ?.getParcelable(BUNDLE_KEY_PARCELABLE_KEY) as? Notice
+            ?: Notice.NULL_OBJECT
+    }
 }

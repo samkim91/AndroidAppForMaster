@@ -14,7 +14,9 @@ data class RequirementCard(
     val transmissions: Transmissions
 ) {
     companion object {
-        fun from(estimation: Estimation): RequirementCard {
+        fun from(estimation: Estimation?): RequirementCard {
+            estimation ?: return NULL_CARD
+
             val detailText: String
             val status: EstimationStatus
             when (estimation.status) {
@@ -73,6 +75,17 @@ data class RequirementCard(
                 transmissions = estimation.transmissions
             )
         }
+
+        private val NULL_CARD =
+            RequirementCard(
+                "",
+                "",
+                "",
+                Date(),
+                EstimationStatus.Cancel,
+                "",
+                Transmissions("", null, "")
+            )
     }
 }
 
@@ -133,5 +146,47 @@ sealed class EstimationStatus {
         }
 
         override fun toInt(): Int = 700
+    }
+
+    companion object {
+        fun getStatus(status: String?, transmissions: Transmissions?): EstimationStatus {
+            when (status) {
+                "delivered" -> {
+                    return when (transmissions?.status) {
+                        "refused" -> {
+                            Cancel
+                        }
+                        "accepted" -> {
+                            Waiting
+                        }
+                        else -> {
+                            Request
+                        }
+                    }
+                }
+                "customer_transfered" -> {
+                    return when (transmissions?.status) {
+                        "refused", "expired" -> {
+                            Cancel
+                        }
+                        else -> {
+                            Waiting
+                        }
+                    }
+                }
+                "reserved" -> {
+                    return Progress
+                }
+                "reviewed" -> {
+                    return Done
+                }
+                "closed" -> {
+                    return Final
+                }
+                else -> {
+                    return Cancel
+                }
+            }
+        }
     }
 }

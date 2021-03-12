@@ -4,32 +4,36 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/address"
+        style="@style/medium_text_style.regular"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp">
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/title"
-            style="@style/medium_text_style.regular"
+            android:id="@+id/key"
+            style="@style/medium_text_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textColor="@color/secondary_text_color"
+            android:textColor="@color/text_primary_color"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="접수일시" />
+            tools:text="나의 견적가" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/detail"
-            style="@style/medium_text_style.medium"
+            android:id="@+id/value"
+            style="@style/medium_text_style.bold"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="67dp"
-            android:gravity="center_vertical"
-            android:text="@string/null_text"
-            android:textColor="@color/primary_text_color"
+            android:layout_marginStart="60dp"
+            android:gravity="end"
+            android:textColor="@color/text_basic_color"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toEndOf="@id/key"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="300,000원" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

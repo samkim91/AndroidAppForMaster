@@ -6,7 +6,6 @@
     <dimen name="actionbar_title_back_button_margin_start">5dp</dimen>
     <dimen name="actionbar_title_back_button_margin_end">0dp</dimen>
     <dimen name="actionbar_title_back_button_padding">18dp</dimen>
-    <dimen name="actionbar_title_under_line_height">1dp</dimen>
     <dimen name="actionbar_title_margin_start">60dp</dimen>
     <dimen name="actionbar_title_margin_end">60dp</dimen>
 
@@ -53,7 +52,7 @@
     <dimen name="my_page_line_height">10dp</dimen>
     <dimen name="my_page_line_margin_top">36dp</dimen>
     <dimen name="my_page_master_store_name_margin_start">20dp</dimen>
-    <dimen name="my_page_master_store_name_margin_top">36dp</dimen>
+    <dimen name="my_page_master_store_name_margin_top">48dp</dimen>
     <dimen name="my_page_master_email_margin_start">20dp</dimen>
     <dimen name="my_page_master_email_margin_top">5dp</dimen>
     <dimen name="my_page_master_label_margin_start">4dp</dimen>
@@ -105,8 +104,8 @@
     <dimen name="alarm_margin_end">20dp</dimen>
     <dimen name="alarm_label_margin_top">32dp</dimen>
     <dimen name="alarm_switch_margin_top">8dp</dimen>
-    <dimen name="alarm_lien_height">10dp</dimen>
-    <dimen name="alarm_lien_margin_top">16dp</dimen>
+    <dimen name="alarm_line_height">10dp</dimen>
+    <dimen name="alarm_line_margin_top">16dp</dimen>
 
     <!--  Notice  -->
     <dimen name="notice_padding_start">20dp</dimen>
@@ -116,10 +115,6 @@
     <dimen name="notice_view_holder_title_margin_end">8dp</dimen>
     <dimen name="notice_view_holder_date_margin_top">4dp</dimen>
     <dimen name="notice_view_holder_date_margin_end">8dp</dimen>
-    <dimen name="notice_view_holder_line_height">1dp</dimen>
-    <dimen name="notice_view_holder_badge_width">16dp</dimen>
-    <dimen name="notice_view_holder_badge_height">16dp</dimen>
-    <dimen name="notice_view_holder_badge_text_size">10sp</dimen>
     <dimen name="notice_view_holder_list_item_title_margin_top">8dp</dimen>
     <dimen name="notice_view_holder_list_item_title_margin_bottom">8dp</dimen>
     <dimen name="notice_view_holder_list_item_title_margin_end">19dp</dimen>
@@ -129,7 +124,6 @@
     <dimen name="notice_detail_margin_end">20dp</dimen>
     <dimen name="notice_detail_title_margin_top">16dp</dimen>
     <dimen name="notice_detail_date_margin_top">4dp</dimen>
-    <dimen name="notice_detail_line_height">1dp</dimen>
     <dimen name="notice_detail_line_margin_top">16dp</dimen>
     <dimen name="notice_detail_content_margin_top">16dp</dimen>
     <dimen name="notice_detail_content_line_spacing">1.4sp</dimen>
@@ -144,6 +138,32 @@
     <dimen name="requirement_received_list_margin_top">12dp</dimen>
     <dimen name="requirement_received_empty_text_size">18sp</dimen>
 
+    <!-- Requirement Card View -->
+    <dimen name="requirement_card_padding_start">20dp</dimen>
+    <dimen name="requirement_card_padding_end">20dp</dimen>
+    <dimen name="requirement_card_padding_bottom">16dp</dimen>
+    <dimen name="requirement_card_status_margin_top">16dp</dimen>
+    <dimen name="requirement_card_badge_margin_start">4dp</dimen>
+    <dimen name="requirement_card_status_detail_margin_top">16dp</dimen>
+    <dimen name="requirement_card_line_margin_top">13dp</dimen>
+    <dimen name="requirement_card_request_id_margin_top">12dp</dimen>
+    <dimen name="requirement_card_location_margin_top">12dp</dimen>
+    <dimen name="requirement_card_location_margin_end">20dp</dimen>
+    <dimen name="requirement_card_type_margin_top">4dp</dimen>
+    <dimen name="requirement_card_type_margin_end">20dp</dimen>
+    <dimen name="requirement_card_first_time_margin_top">12dp</dimen>
+    <dimen name="requirement_card_arrow_button_width">24dp</dimen>
+    <dimen name="requirement_card_arrow_button_height">24dp</dimen>
+    <dimen name="requirement_card_end_time_margin_top">4dp</dimen>
+    <dimen name="requirement_card_amount_view_height">40dp</dimen>
+    <dimen name="requirement_card_amount_view_margin_top">12dp</dimen>
+    <dimen name="requirement_card_waiting_view_margin_top">12dp</dimen>
+    <dimen name="requirement_card_call_button_margin_top">12dp</dimen>
+    <dimen name="requirement_card_call_button_margin_end">4dp</dimen>
+    <dimen name="requirement_card_done_button_margin_start">4dp</dimen>
+    <dimen name="requirement_card_done_button_margin_top">12dp</dimen>
+    <dimen name="requirement_card_review_button_margin_top">12dp</dimen>
+
     <!--  Drawable  -->
     <dimen name="edit_text_height">40dp</dimen>
     <dimen name="button_height">40dp</dimen>
@@ -153,6 +173,10 @@
     <dimen name="radius_size_50">50dp</dimen>
     <dimen name="alert_height">18dp</dimen>
     <dimen name="alert_margin_top">4dp</dimen>
+    <dimen name="badge_width">16dp</dimen>
+    <dimen name="badge_height">16dp</dimen>
+    <dimen name="badge_text_size">10sp</dimen>
+    <dimen name="line_height">1dp</dimen>
 
 
     <dimen name="actionbar_title_collapsed_text_size">19sp</dimen>
