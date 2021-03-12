@@ -8,6 +8,7 @@ import kr.co.soogong.master.databinding.ActivityViewEstimateBinding
 import kr.co.soogong.master.ext.addAdditionInfoView
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.ui.getRepository
+import kr.co.soogong.master.uiinterface.image.ImageViewActivityHelper
 import kr.co.soogong.master.uiinterface.requirments.action.view.ViewEstimateActivityHelper
 import timber.log.Timber
 
@@ -44,7 +45,18 @@ class ViewEstimateActivity : BaseActivity<ActivityViewEstimateBinding>(
                 }
             }
 
-            photoList.adapter = ViewEstimateImageAdapter()
+            photoList.adapter = ViewEstimateImageAdapter(
+                cardClickClickListener = { position ->
+                    startActivity(
+                        ImageViewActivityHelper.getIntent(
+                            this@ViewEstimateActivity,
+                            estimationId,
+                            position
+                        )
+                    )
+                }
+            )
+
 
             viewModel.additionInfo.observe(this@ViewEstimateActivity, { additionInfo ->
                 additionInfo ?: return@observe
