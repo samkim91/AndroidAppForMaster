@@ -78,8 +78,8 @@
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/line"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/alarm_lien_height"
-                android:layout_marginTop="@dimen/alarm_lien_margin_top"
+                android:layout_height="@dimen/alarm_line_height"
+                android:layout_marginTop="@dimen/alarm_line_margin_top"
                 android:background="@color/line_color"
                 app:layout_constraintTop_toBottomOf="@id/sms_alarm" />
 

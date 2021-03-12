@@ -66,61 +66,6 @@
                         bind:date_text="@{vm.date}"
                         tools:text="2020. 8. 26  13:53" />
 
-                    <kr.co.soogong.master.ui.widget.TitleText2
-                        android:id="@+id/location"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        app:detail="@{vm.location}"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/time"
-                        app:title="@{@string/request_location}" />
-
-                    <kr.co.soogong.master.ui.widget.TitleText2
-                        android:id="@+id/type"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
-                        app:detail="@{vm.type}"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/location"
-                        app:title="@{@string/request_type}" />
-
-                    <kr.co.soogong.master.ui.widget.TitleText2
-                        android:id="@+id/wanted_date"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
-                        app:detail="@{vm.wantedDate}"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/type"
-                        app:title="@{@string/request_wanted_date}" />
-
-                    <kr.co.soogong.master.ui.widget.TitleText2
-                        android:id="@+id/is_bag"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
-                        app:detail="@{vm.isBag}"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/wanted_date"
-                        app:title="@{@string/request_is_bag}" />
-
-                    <kr.co.soogong.master.ui.widget.TitleText2
-                        android:id="@+id/contact"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
-                        app:detail="@{vm.contact}"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/is_bag"
-                        app:title="@{@string/request_contact}" />
-
                     <LinearLayout
                         android:id="@+id/content_frame"
                         android:layout_width="match_parent"
@@ -130,18 +75,7 @@
                         app:layout_constraintBottom_toTopOf="@id/detail"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/contact" />
-
-                    <kr.co.soogong.master.ui.widget.TitleText2
-                        android:id="@+id/detail"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        app:detail="@{vm.content}"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/content_frame"
-                        app:title="@{@string/request_detail}"
-                        tools:detail="욕실장이 벽에서 떨어졌어요. 새로 욕실장을 설치했으면 좋겠습니다." />
+                        app:layout_constraintTop_toBottomOf="@id/time" />
 
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/accept"
@@ -176,7 +110,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/accept"
-                        app:layout_constraintTop_toBottomOf="@id/detail" />
+                        app:layout_constraintTop_toBottomOf="@id/content_frame" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>

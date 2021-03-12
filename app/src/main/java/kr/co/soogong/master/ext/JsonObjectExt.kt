@@ -1,3 +1,5 @@
+@file:JvmName("JsonObjectExt")
+
 package kr.co.soogong.master.ext
 
 import com.google.gson.JsonElement

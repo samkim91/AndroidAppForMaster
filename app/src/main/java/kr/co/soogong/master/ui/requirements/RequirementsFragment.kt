@@ -24,10 +24,6 @@ class RequirementsFragment : BaseFragment<FragmentRequirementsBinding>(
         bind {
             lifecycleOwner = viewLifecycleOwner
 
-            with(actionBar) {
-                title.text = getString(R.string.main_page_request_name)
-            }
-
             with(mainViewPager) {
                 isUserInputEnabled = false
                 adapter = RequirementsPagerAdapter(this@RequirementsFragment)

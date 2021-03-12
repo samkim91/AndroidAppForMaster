@@ -6,7 +6,7 @@ import androidx.activity.viewModels
 import kr.co.soogong.master.BR
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ActivityReceivedDetailBinding
-import kr.co.soogong.master.ext.addTextView2
+import kr.co.soogong.master.ext.addAdditionInfoView
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.ui.getRepository
 import kr.co.soogong.master.uiinterface.requirments.received.detail.ReceivedDetailActivityHelper
@@ -58,7 +58,7 @@ class ReceivedDetailActivity : BaseActivity<ActivityReceivedDetailBinding>(
             viewModel.questions.observe(this@ReceivedDetailActivity, { text ->
                 contentFrame.removeAllViews()
                 if (!text.isNullOrEmpty()) {
-                    addTextView2(contentFrame, this@ReceivedDetailActivity, "", text)
+
                 }
             })
         }

@@ -5,36 +5,36 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import kr.co.soogong.master.R
-import kr.co.soogong.master.databinding.ViewTitleText2Binding
+import kr.co.soogong.master.databinding.ViewAdditionInfoBinding
 import java.text.SimpleDateFormat
 import java.util.*
 
-class TitleText2 @JvmOverloads constructor(
+class AdditionInfoView @JvmOverloads constructor(
     context: Context,
     attributeSet: AttributeSet? = null,
     defStyle: Int = 0
 ) : ConstraintLayout(context, attributeSet, defStyle) {
-    private var binding: ViewTitleText2Binding =
-        ViewTitleText2Binding.inflate(LayoutInflater.from(context), this, true)
+    private var binding: ViewAdditionInfoBinding =
+        ViewAdditionInfoBinding.inflate(LayoutInflater.from(context), this, true)
 
-    var title: String? = ""
+    var question: String? = ""
         set(value) {
             field = value
-            binding.title.text = value
+            binding.question.text = value
         }
 
-    var detail: String? = ""
+    var answer: String? = ""
         set(value) {
             field = value
             if (value.isNullOrEmpty()) {
-                binding.detail.setText(R.string.null_text)
+                binding.answer.setText(R.string.null_text)
             } else {
-                binding.detail.text = value
+                binding.answer.text = value
             }
         }
 
     fun setDetailDate(date: Date?) {
         val simpleDateFormat = SimpleDateFormat("yyyy년 MM월 dd일 hh시 mm분")
-        binding.detail.text = simpleDateFormat.format(date ?: System.currentTimeMillis())
+        binding.answer.text = simpleDateFormat.format(date ?: System.currentTimeMillis())
     }
 }

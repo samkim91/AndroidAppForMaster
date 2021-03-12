@@ -1,3 +1,5 @@
+@file:JvmName("DisplayUtilExt")
+
 package kr.co.soogong.master.ext
 
 import android.content.res.Resources

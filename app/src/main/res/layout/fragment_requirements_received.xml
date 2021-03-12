@@ -15,6 +15,43 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/received_list"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            bind:received_list="@{vm.requirementList}"
+            tools:listitem="@layout/view_holder_requirement_item" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/empty_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_no_card"
+            app:layout_constraintBottom_toTopOf="@id/empty_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/filter"
+            app:layout_constraintVertical_chainStyle="packed"
+            bind:visible="@{vm.emptyList}" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/empty_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/requirements_request_none_status"
+            android:textColor="@color/color_BDBDBD"
+            android:textSize="@dimen/requirement_received_empty_text_size"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/empty_icon"
+            bind:visible="@{vm.emptyList}" />
+
         <RadioGroup
             android:id="@+id/filter"
             android:layout_width="match_parent"
@@ -76,44 +113,6 @@
                 android:textColor="@color/filter_text_selector" />
 
         </RadioGroup>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/received_list"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="@dimen/requirement_received_list_margin_top"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/filter"
-            bind:received_list="@{vm.requirementList}"
-            tools:listitem="@layout/view_holder_requirement_item" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/empty_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_no_card"
-            app:layout_constraintBottom_toTopOf="@id/empty_text"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/filter"
-            app:layout_constraintVertical_chainStyle="packed"
-            bind:visible="@{vm.emptyList}" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/empty_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/requirements_request_none_status"
-            android:textColor="@color/color_BDBDBD"
-            android:textSize="@dimen/requirement_received_empty_text_size"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/empty_icon"
-            bind:visible="@{vm.emptyList}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
