@@ -2,16 +2,17 @@ package kr.co.soogong.master.ui.requirements.action.view
 
 import android.os.Bundle
 import androidx.activity.viewModels
-import kr.co.soogong.master.BR
+import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ActivityViewEstimateBinding
 import kr.co.soogong.master.ext.addAdditionInfoView
 import kr.co.soogong.master.ui.base.BaseActivity
-import kr.co.soogong.master.ui.getRepository
 import kr.co.soogong.master.uiinterface.image.ImageViewActivityHelper
 import kr.co.soogong.master.uiinterface.requirments.action.view.ViewEstimateActivityHelper
 import timber.log.Timber
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class ViewEstimateActivity : BaseActivity<ActivityViewEstimateBinding>(
     R.layout.activity_view_estimate
 ) {
@@ -20,8 +21,11 @@ class ViewEstimateActivity : BaseActivity<ActivityViewEstimateBinding>(
         ViewEstimateActivityHelper.getEstimationId(intent)
     }
 
+    @Inject
+    lateinit var factory: ViewEstimateViewModel.AssistedFactory
+
     private val viewModel: ViewEstimateViewModel by viewModels {
-        ViewEstimateViewModelFactory(getRepository(this), estimationId)
+        ViewEstimateViewModel.provideFactory(factory, estimationId)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,7 +37,7 @@ class ViewEstimateActivity : BaseActivity<ActivityViewEstimateBinding>(
     override fun initLayout() {
         Timber.tag(TAG).d("initLayout: ")
         bind {
-            setVariable(BR.vm, viewModel)
+            vm = viewModel
             lifecycleOwner = this@ViewEstimateActivity
 
             with(actionBar) {

@@ -1,21 +1,21 @@
 package kr.co.soogong.master.ui.main
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.core.content.res.ResourcesCompat
-import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.tabs.TabLayoutMediator
+import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ActivityMainBinding
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.uiinterface.main.MainBadge
 import timber.log.Timber
 
+@AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>(
     R.layout.activity_main
 ), MainBadge {
-    private val viewModel: MainViewModel by lazy {
-        ViewModelProvider(this).get(MainViewModel::class.java)
-    }
+    private val viewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

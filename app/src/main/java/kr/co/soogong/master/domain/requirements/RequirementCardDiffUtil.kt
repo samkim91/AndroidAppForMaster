@@ -1,4 +1,4 @@
-package kr.co.soogong.master.ui.requirements.card
+package kr.co.soogong.master.domain.requirements
 
 import androidx.recyclerview.widget.DiffUtil
 

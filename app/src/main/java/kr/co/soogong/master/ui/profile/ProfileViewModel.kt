@@ -3,6 +3,7 @@ package kr.co.soogong.master.ui.profile
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.launch
@@ -11,9 +12,12 @@ import kr.co.soogong.master.ui.base.BaseViewModel
 import kr.co.soogong.master.util.InjectHelper
 import kr.co.soogong.master.util.http.HttpClient
 import timber.log.Timber
+import javax.inject.Inject
 
-class ProfileViewModel(
-    private val repository: Repository
+@HiltViewModel
+class ProfileViewModel @Inject constructor(
+    private val repository: Repository,
+    private val httpClient: HttpClient
 ) : BaseViewModel() {
     private val _userInfo = repository.getUserInfo(InjectHelper.keyCode ?: "")
 
@@ -79,7 +83,7 @@ class ProfileViewModel(
         }
 
     fun requestUserProfile() {
-        HttpClient.getUserProfile(InjectHelper.keyCode)
+        httpClient.getUserProfile(InjectHelper.keyCode)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ userInfo ->

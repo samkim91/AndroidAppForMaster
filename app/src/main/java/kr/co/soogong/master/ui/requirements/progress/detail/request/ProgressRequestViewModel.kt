@@ -1,15 +1,20 @@
 package kr.co.soogong.master.ui.requirements.progress.detail.request
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.map
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedInject
 import kr.co.soogong.master.data.requirements.Requirement
 import kr.co.soogong.master.domain.Repository
 import kr.co.soogong.master.ui.base.BaseViewModel
+import kr.co.soogong.master.ui.image.ImageViewModel
 import java.util.*
 
-class ProgressRequestViewModel(
+class ProgressRequestViewModel @AssistedInject constructor(
     repository: Repository,
-    keycode: String
+    @Assisted keycode: String
 ) : BaseViewModel() {
     private val _requirement = repository.getRequirement(keycode)
     val requirement: LiveData<Requirement?>
@@ -60,7 +65,20 @@ class ProgressRequestViewModel(
             it?.status
         }
 
+    @dagger.assisted.AssistedFactory
+    interface AssistedFactory {
+        fun create(keycode: String): ImageViewModel
+    }
+
     companion object {
-        private const val TAG = "ProgressRequestViewMode"
+        fun provideFactory(
+            assistedFactory: AssistedFactory,
+            keycode: String
+        ): ViewModelProvider.Factory = object : ViewModelProvider.Factory {
+            @Suppress("UNCHECKED_CAST")
+            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+                return assistedFactory.create(keycode) as T
+            }
+        }
     }
 }

@@ -7,7 +7,7 @@ import kr.co.soogong.master.ui.requirements.action.view.ViewEstimateActivity
 
 object ViewEstimateActivityHelper {
     const val EXTRA_KEY_BUNDLE = "EXTRA_KEY_BUNDLE_VIEW_ESTIMATE"
-    const val BUNDLE_KEY_ESTIMATION_KEY = "BUNDLE_KEY_ESTIMATION_KEY"
+    private const val BUNDLE_KEY_ESTIMATION_KEY = "BUNDLE_KEY_ESTIMATION_KEY"
 
     fun getIntent(context: Context, keycode: String): Intent {
         return Intent(context, ViewEstimateActivity::class.java).apply {
@@ -18,6 +18,7 @@ object ViewEstimateActivityHelper {
     }
 
     fun getEstimationId(intent: Intent): String {
-        return intent.getBundleExtra(EXTRA_KEY_BUNDLE)?.getString(BUNDLE_KEY_ESTIMATION_KEY, "") ?: ""
+        return intent.getBundleExtra(EXTRA_KEY_BUNDLE)?.getString(BUNDLE_KEY_ESTIMATION_KEY, "")
+            ?: ""
     }
 }

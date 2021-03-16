@@ -6,6 +6,7 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.estimation.Transmissions
+import kr.co.soogong.master.domain.requirements.EstimationStatus
 import kr.co.soogong.master.ui.widget.AmountView
 import java.util.*
 

@@ -11,7 +11,6 @@ import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.uiinterface.sign.signup.AddressActivityHelper
 import timber.log.Timber
 
-
 class AddressActivity : BaseActivity<ActivityAddressBinding>(
     R.layout.activity_address
 ) {

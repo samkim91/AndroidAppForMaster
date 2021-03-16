@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import kr.co.soogong.master.BR
 import kr.co.soogong.master.data.notice.Notice
 import kr.co.soogong.master.databinding.ViewHolderNoticeItemBinding
 
@@ -16,7 +15,7 @@ class NoticeViewHolder(
         clickListener: (Notice) -> Unit
     ) {
         binding.run {
-            setVariable(BR.data, notice)
+            data = notice
 
             if (notice.isNew) {
                 noticeNewBadge.visibility = View.VISIBLE

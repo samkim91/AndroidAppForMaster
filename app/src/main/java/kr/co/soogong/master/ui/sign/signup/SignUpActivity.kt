@@ -3,7 +3,8 @@ package kr.co.soogong.master.ui.sign.signup
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import androidx.lifecycle.ViewModelProvider
+import androidx.activity.viewModels
+import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.category.Category
 import kr.co.soogong.master.data.category.Project
@@ -23,12 +24,11 @@ import kr.co.soogong.master.util.EventObserver
 import timber.log.Timber
 import java.text.SimpleDateFormat
 
+@AndroidEntryPoint
 class SignUpActivity : BaseActivity<ActivitySignUpBinding>(
     R.layout.activity_sign_up
 ) {
-    private val viewModel: SignUpViewModel by lazy {
-        ViewModelProvider(this).get(SignUpViewModel::class.java)
-    }
+    private val viewModel: SignUpViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,6 +67,7 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>(
                     password.hintVisible = false
                 }
             })
+
             confirmPassword.addTextChangedListener(afterTextChanged = {
                 if (confirmPassword.text.isNullOrEmpty()) {
                     confirmPassword.hintVisible = true
@@ -75,6 +76,7 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>(
                     confirmPassword.hintVisible = false
                 }
             })
+
             username.addTextChangedListener(afterTextChanged = {
                 if (username.text.isNullOrEmpty()) {
                     username.hintVisible = true

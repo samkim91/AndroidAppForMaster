@@ -3,20 +3,18 @@ package kr.co.soogong.master.ui.profile
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
-import kr.co.soogong.master.BR
+import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentProfileBinding
 import kr.co.soogong.master.ext.createLabelToggle
 import kr.co.soogong.master.ui.base.BaseFragment
-import kr.co.soogong.master.ui.getRepository
 import timber.log.Timber
 
+@AndroidEntryPoint
 class ProfileFragment : BaseFragment<FragmentProfileBinding>(
     R.layout.fragment_profile
 ) {
-    private val viewModel: ProfileViewModel by viewModels {
-        ProfileViewModelFactory(getRepository(requireContext()))
-    }
+    private val viewModel: ProfileViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -29,7 +27,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
         Timber.tag(TAG).d("initLayout: ")
 
         bind {
-            setVariable(BR.vm, viewModel)
+            vm = viewModel
             lifecycleOwner = viewLifecycleOwner
 
             viewModel.categories.observe(viewLifecycleOwner, { list ->

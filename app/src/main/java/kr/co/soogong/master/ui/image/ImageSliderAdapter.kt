@@ -7,7 +7,6 @@ import kr.co.soogong.master.data.estimation.ImagePath
 import kr.co.soogong.master.databinding.ViewHolderImagePageBinding
 import timber.log.Timber
 
-
 class ImageSliderAdapter : RecyclerView.Adapter<ImageSliderAdapter.ImageViewHolder>() {
 
     private val imageList: ArrayList<ImagePath> = arrayListOf()

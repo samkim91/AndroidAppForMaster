@@ -1,20 +1,19 @@
 package kr.co.soogong.master.ui.mypage.alarm
 
 import android.os.Bundle
-import androidx.lifecycle.ViewModelProvider
-import kr.co.soogong.master.BR
+import androidx.activity.viewModels
+import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ActivityAlarmBinding
 import kr.co.soogong.master.ui.base.BaseActivity
 import timber.log.Timber
 
+@AndroidEntryPoint
 class AlarmActivity : BaseActivity<ActivityAlarmBinding>(
     R.layout.activity_alarm
 ) {
 
-    private val viewModel: AlarmViewModel by lazy {
-        ViewModelProvider(this).get(AlarmViewModel::class.java)
-    }
+    private val viewModel: AlarmViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +26,7 @@ class AlarmActivity : BaseActivity<ActivityAlarmBinding>(
         Timber.tag(TAG).d("initLayout: ")
 
         bind {
-            setVariable(BR.vm, viewModel)
+            vm = viewModel
             lifecycleOwner = this@AlarmActivity
 
             with(actionBar) {

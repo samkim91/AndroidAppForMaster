@@ -2,6 +2,7 @@ package kr.co.soogong.master.ui.sign.signin
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.BuildConfig
@@ -12,9 +13,12 @@ import kr.co.soogong.master.util.Event
 import kr.co.soogong.master.util.InjectHelper
 import kr.co.soogong.master.util.http.HttpClient
 import timber.log.Timber
+import javax.inject.Inject
 
-class SignInViewModel(
-    private val repository: Repository
+@HiltViewModel
+class SignInViewModel @Inject constructor(
+    private val repository: Repository,
+    private val httpClient: HttpClient
 ) : BaseViewModel() {
 
     fun getUserInfo(email: String, password: String) {
@@ -23,7 +27,7 @@ class SignInViewModel(
             successToSignIn()
             return
         }
-        HttpClient.login(email, password)
+        httpClient.login(email, password)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({

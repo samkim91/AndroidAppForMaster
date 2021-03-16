@@ -2,13 +2,12 @@ package kr.co.soogong.master.ui.sign.signin
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.widget.addTextChangedListener
+import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ActivitySignInBinding
 import kr.co.soogong.master.ui.base.BaseActivity
-import kr.co.soogong.master.ui.getRepository
 import kr.co.soogong.master.ui.sign.signin.SignInViewModel.Companion.FAIL
 import kr.co.soogong.master.ui.sign.signin.SignInViewModel.Companion.SUCCESS
 import kr.co.soogong.master.uiinterface.main.MainActivityHelper
@@ -16,12 +15,11 @@ import kr.co.soogong.master.uiinterface.sign.find.FindInfoActivityHelper
 import kr.co.soogong.master.util.EventObserver
 import timber.log.Timber
 
+@AndroidEntryPoint
 class SignInActivity : BaseActivity<ActivitySignInBinding>(
     R.layout.activity_sign_in
 ) {
-    private val viewModel: SignInViewModel by viewModels {
-        SignInViewModelFactory(getRepository(this))
-    }
+    private val viewModel: SignInViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

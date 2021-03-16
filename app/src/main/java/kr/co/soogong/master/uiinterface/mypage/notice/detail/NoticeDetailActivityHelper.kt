@@ -8,7 +8,7 @@ import kr.co.soogong.master.ui.mypage.notice.detail.NoticeDetailActivity
 
 object NoticeDetailActivityHelper {
     const val EXTRA_KEY_BUNDLE = "EXTRA_KEY_BUNDLE_NOTICE_DETAIL"
-    const val BUNDLE_KEY_PARCELABLE_KEY = "BUNDLE_KEY_PARCELABLE_KEY_NOTICE_DETAIL"
+    private const val BUNDLE_KEY_PARCELABLE_KEY = "BUNDLE_KEY_PARCELABLE_KEY_NOTICE_DETAIL"
 
     fun getIntent(context: Context, notice: Notice): Intent {
         return Intent(context, NoticeDetailActivity::class.java).apply {

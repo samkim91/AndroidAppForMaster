@@ -3,18 +3,19 @@ package kr.co.soogong.master.ui.requirements.received.estimate
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
-import kr.co.soogong.master.BR
+import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.requirements.Estimate
 import kr.co.soogong.master.databinding.ActivityEstimateBinding
 import kr.co.soogong.master.ui.base.BaseActivity
-import kr.co.soogong.master.ui.getRepository
 import kr.co.soogong.master.ui.utils.NumberTextWatcher
 import kr.co.soogong.master.uiinterface.main.MainActivityHelper
 import kr.co.soogong.master.uiinterface.requirments.received.estimate.EstimateActivityHelper
 import kr.co.soogong.master.util.EventObserver
 import timber.log.Timber
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class EstimateActivity : BaseActivity<ActivityEstimateBinding>(
     R.layout.activity_estimate
 ) {
@@ -23,8 +24,11 @@ class EstimateActivity : BaseActivity<ActivityEstimateBinding>(
             ?.getString(EstimateActivityHelper.BUNDLE_KEY_RECEIVED_KEY, "") ?: ""
     }
 
+    @Inject
+    lateinit var factory: EstimateViewModel.AssistedFactory
+
     private val viewModel: EstimateViewModel by viewModels {
-        EstimateViewModelFactory(getRepository(this), keycode)
+        EstimateViewModel.provideFactory(factory, keycode)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,7 +42,7 @@ class EstimateActivity : BaseActivity<ActivityEstimateBinding>(
         Timber.tag(TAG).d("initLayout: ")
 
         bind {
-            setVariable(BR.vm, viewModel)
+            vm = viewModel
             lifecycleOwner = this@EstimateActivity
 
             with(actionBar) {

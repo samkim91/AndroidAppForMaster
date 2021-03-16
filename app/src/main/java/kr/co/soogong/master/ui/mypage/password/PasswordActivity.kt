@@ -3,20 +3,20 @@ package kr.co.soogong.master.ui.mypage.password
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.core.widget.addTextChangedListener
-import androidx.lifecycle.ViewModelProvider
+import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ActivityPasswordBinding
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.util.EventObserver
 import timber.log.Timber
 
+@AndroidEntryPoint
 class PasswordActivity : BaseActivity<ActivityPasswordBinding>(
     R.layout.activity_password
 ) {
-    private val viewModel: PasswordViewModel by lazy {
-        ViewModelProvider(this).get(PasswordViewModel::class.java)
-    }
+    private val viewModel: PasswordViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

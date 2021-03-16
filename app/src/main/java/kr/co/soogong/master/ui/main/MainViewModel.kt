@@ -1,14 +1,19 @@
 package kr.co.soogong.master.ui.main
 
 import com.google.firebase.messaging.FirebaseMessaging
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.ui.base.BaseViewModel
 import kr.co.soogong.master.util.InjectHelper
 import kr.co.soogong.master.util.http.HttpClient
 import timber.log.Timber
+import javax.inject.Inject
 
-class MainViewModel : BaseViewModel() {
+@HiltViewModel
+class MainViewModel @Inject constructor(
+    private val httpClient: HttpClient
+) : BaseViewModel() {
     fun registerFCM() {
         FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
             if (!task.isSuccessful) {
@@ -22,7 +27,7 @@ class MainViewModel : BaseViewModel() {
     }
 
     private fun sendRegistrationToServer(token: String?) {
-        HttpClient.updateFCMToken(InjectHelper.keyCode, fcmKey = token)
+        httpClient.updateFCMToken(InjectHelper.keyCode, fcmKey = token)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({

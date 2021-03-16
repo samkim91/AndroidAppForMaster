@@ -2,6 +2,10 @@ package kr.co.soogong.master.ui.select.project
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedInject
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.category.Category
@@ -10,8 +14,9 @@ import kr.co.soogong.master.ui.base.BaseViewModel
 import kr.co.soogong.master.util.http.HttpClient
 import timber.log.Timber
 
-class ProjectSelectViewModel(
-    private val category: Category
+class ProjectSelectViewModel @AssistedInject constructor(
+    private val httpClient: HttpClient,
+    @Assisted private val category: Category
 ) : BaseViewModel() {
     private val _list = MutableLiveData<List<Project>>()
     val list: LiveData<List<Project>>
@@ -30,7 +35,7 @@ class ProjectSelectViewModel(
     }
 
     private fun getProjectList() {
-        HttpClient.getProjectList(category)
+        httpClient.getProjectList(category)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
@@ -42,7 +47,22 @@ class ProjectSelectViewModel(
             .addToDisposable()
     }
 
+    @dagger.assisted.AssistedFactory
+    interface AssistedFactory {
+        fun create(category: Category): ProjectSelectViewModel
+    }
+
     companion object {
         private const val TAG = "ProjectSelectViewModel"
+
+        fun provideFactory(
+            assistedFactory: AssistedFactory,
+            category: Category
+        ): ViewModelProvider.Factory = object : ViewModelProvider.Factory {
+            @Suppress("UNCHECKED_CAST")
+            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+                return assistedFactory.create(category) as T
+            }
+        }
     }
 }
