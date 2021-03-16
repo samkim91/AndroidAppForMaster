@@ -89,6 +89,9 @@
     <string name="view_estimate_accept">견적을 보낼래요</string>
     <string name="view_estimate_refuse">견적을 내기 어려워요</string>
 
+    <!--  Cancel Estimate  -->
+    <string name="cancel_estimate_title">취소 사유</string>
+
     <!-- Profile -->
     <string name="master_type">마스터유형</string>
     <string name="store_name">업체명</string>

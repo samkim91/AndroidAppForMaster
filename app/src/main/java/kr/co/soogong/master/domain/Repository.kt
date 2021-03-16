@@ -7,11 +7,11 @@ import kr.co.soogong.master.domain.estimation.EstimationDao
 import kr.co.soogong.master.domain.requirements.RequirementDao
 import kr.co.soogong.master.domain.user.UserDao
 
-class Repository private constructor(
+class Repository internal constructor(
     private val estimationDao: EstimationDao,
     private val requirementDao: RequirementDao,
     private val userDao: UserDao,
-    private val sharedPreference: AppSharedPreference
+    private val appSharedPreference: AppSharedPreference
 ) {
     //region Estimation
     fun getEstimationList() = estimationDao.getAllList()
@@ -54,41 +54,23 @@ class Repository private constructor(
     //endregion user
 
     //region AppSharedPreference
-    fun setBoolean(key: String, value: Boolean) = sharedPreference.setBoolean(key, value)
+    fun setBoolean(key: String, value: Boolean) = appSharedPreference.setBoolean(key, value)
 
     fun getBoolean(key: String, defaultValue: Boolean) =
-        sharedPreference.getBoolean(key, defaultValue)
+        appSharedPreference.getBoolean(key, defaultValue)
 
-    fun setInteger(key: String, value: Int) = sharedPreference.setInteger(key, value)
+    fun setInteger(key: String, value: Int) = appSharedPreference.setInteger(key, value)
 
-    fun getInteger(key: String, defaultValue: Int) = sharedPreference.getInteger(key, defaultValue)
+    fun getInteger(key: String, defaultValue: Int) =
+        appSharedPreference.getInteger(key, defaultValue)
 
-    fun setFloat(key: String, value: Float) = sharedPreference.setFloat(key, value)
+    fun setFloat(key: String, value: Float) = appSharedPreference.setFloat(key, value)
 
-    fun getFloat(key: String, defaultValue: Float) = sharedPreference.getFloat(key, defaultValue)
+    fun getFloat(key: String, defaultValue: Float) = appSharedPreference.getFloat(key, defaultValue)
 
-    fun setString(key: String, value: String) = sharedPreference.setString(key, value)
+    fun setString(key: String, value: String) = appSharedPreference.setString(key, value)
 
     fun getString(key: String, defaultValue: String? = null) =
-        sharedPreference.getString(key, defaultValue)
+        appSharedPreference.getString(key, defaultValue)
     //endregion AppSharedPreference
-
-    companion object {
-        @Volatile
-        private var instance: Repository? = null
-
-        fun getInstance(
-            estimationDao: EstimationDao,
-            requirementDao: RequirementDao,
-            userDao: UserDao,
-            appSharedPreference: AppSharedPreference
-        ) = instance ?: synchronized(this) {
-            instance ?: Repository(
-                estimationDao,
-                requirementDao,
-                userDao,
-                appSharedPreference
-            ).also { instance = it }
-        }
-    }
 }

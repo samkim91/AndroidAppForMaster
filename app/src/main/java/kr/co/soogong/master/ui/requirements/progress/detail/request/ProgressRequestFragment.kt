@@ -3,14 +3,15 @@ package kr.co.soogong.master.ui.requirements.progress.detail.request
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
-import kr.co.soogong.master.BR
+import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentProgressRequestBinding
 import kr.co.soogong.master.ui.base.BaseFragment
-import kr.co.soogong.master.ui.getRepository
 import kr.co.soogong.master.uiinterface.requirments.progress.detail.request.ProgressRequestFragmentHelper
 import timber.log.Timber
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class ProgressRequestFragment : BaseFragment<FragmentProgressRequestBinding>(
     R.layout.fragment_progress_request
 ) {
@@ -18,8 +19,11 @@ class ProgressRequestFragment : BaseFragment<FragmentProgressRequestBinding>(
         arguments?.getString(ProgressRequestFragmentHelper.BUNDLE_KEY_RECEIVED_KEY) ?: ""
     }
 
+    @Inject
+    lateinit var factory: ProgressRequestViewModel.AssistedFactory
+
     val viewModel: ProgressRequestViewModel by viewModels {
-        ProgressRequestViewModelFactory(getRepository(requireContext()), keycode)
+        ProgressRequestViewModel.provideFactory(factory, keycode)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -33,7 +37,7 @@ class ProgressRequestFragment : BaseFragment<FragmentProgressRequestBinding>(
         Timber.tag(TAG).d("initLayout: ")
 
         bind {
-            setVariable(BR.vm, viewModel)
+            vm = viewModel
             lifecycleOwner = viewLifecycleOwner
         }
     }

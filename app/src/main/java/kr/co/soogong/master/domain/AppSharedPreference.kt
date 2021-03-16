@@ -3,7 +3,7 @@ package kr.co.soogong.master.domain
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
 
-class AppSharedPreference private constructor(
+class AppSharedPreference internal constructor(
     private val context: Context
 ) {
     fun setBoolean(key: String, value: Boolean) {
@@ -13,7 +13,7 @@ class AppSharedPreference private constructor(
         editor.apply()
     }
 
-    fun getBoolean(key: String, defaultValue: Boolean): Boolean =
+    fun getBoolean(key: String, defaultValue: Boolean) =
         context.getSharedPreferences(PREFERENCES_NAME, MODE_PRIVATE)
             .getBoolean(key, defaultValue)
 
@@ -24,7 +24,7 @@ class AppSharedPreference private constructor(
         editor.apply()
     }
 
-    fun getInteger(key: String, defaultValue: Int): Int =
+    fun getInteger(key: String, defaultValue: Int) =
         context.getSharedPreferences(PREFERENCES_NAME, MODE_PRIVATE)
             .getInt(key, defaultValue)
 
@@ -35,7 +35,7 @@ class AppSharedPreference private constructor(
         editor.apply()
     }
 
-    fun getFloat(key: String, defaultValue: Float): Float =
+    fun getFloat(key: String, defaultValue: Float) =
         context.getSharedPreferences(PREFERENCES_NAME, MODE_PRIVATE)
             .getFloat(key, defaultValue)
 
@@ -46,20 +46,11 @@ class AppSharedPreference private constructor(
         editor.apply()
     }
 
-    fun getString(key: String, defaultValue: String?): String? =
+    fun getString(key: String, defaultValue: String?) =
         context.getSharedPreferences(PREFERENCES_NAME, MODE_PRIVATE)
             .getString(key, defaultValue)
 
     companion object {
         private const val PREFERENCES_NAME = "soogong_shared_preferences"
-
-        @Volatile
-        private var instance: AppSharedPreference? = null
-
-        fun getInstance(context: Context): AppSharedPreference {
-            return instance ?: synchronized(this) {
-                instance ?: AppSharedPreference(context.applicationContext).also { instance = it }
-            }
-        }
     }
 }

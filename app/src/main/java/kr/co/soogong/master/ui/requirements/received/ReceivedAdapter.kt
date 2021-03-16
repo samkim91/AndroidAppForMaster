@@ -2,10 +2,10 @@ package kr.co.soogong.master.ui.requirements.received
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
+import kr.co.soogong.master.domain.requirements.RequirementCard
+import kr.co.soogong.master.domain.requirements.RequirementCardDiffUtil
 import kr.co.soogong.master.ext.dp
 import kr.co.soogong.master.ui.requirements.card.EstimationCardViewHolder
-import kr.co.soogong.master.ui.requirements.card.RequirementCard
-import kr.co.soogong.master.ui.requirements.card.RequirementCardDiffUtil
 import kr.co.soogong.master.ui.requirements.card.RequirementCardViewHolderHelper
 
 class ReceivedAdapter(

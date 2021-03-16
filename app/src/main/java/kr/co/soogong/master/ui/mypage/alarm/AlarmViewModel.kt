@@ -3,14 +3,19 @@ package kr.co.soogong.master.ui.mypage.alarm
 import android.widget.CompoundButton
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.ui.base.BaseViewModel
 import kr.co.soogong.master.util.InjectHelper
 import kr.co.soogong.master.util.http.HttpClient
 import timber.log.Timber
+import javax.inject.Inject
 
-class AlarmViewModel : BaseViewModel() {
+@HiltViewModel
+class AlarmViewModel @Inject constructor(
+    private val httpClient: HttpClient
+) : BaseViewModel() {
     private val _appPushStatus = MutableLiveData(false)
     val appPushStatus: LiveData<Boolean>
         get() = _appPushStatus
@@ -42,7 +47,7 @@ class AlarmViewModel : BaseViewModel() {
     }
 
     fun getAlarmStatus() {
-        HttpClient.getAlarmStatus(InjectHelper.keyCode)
+        httpClient.getAlarmStatus(InjectHelper.keyCode)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ map ->
@@ -62,7 +67,7 @@ class AlarmViewModel : BaseViewModel() {
     }
 
     private fun setAlarmStatus(type: String, isChecked: Boolean) {
-        HttpClient.setAlarmStatus(InjectHelper.keyCode, type, isChecked)
+        httpClient.setAlarmStatus(InjectHelper.keyCode, type, isChecked)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({

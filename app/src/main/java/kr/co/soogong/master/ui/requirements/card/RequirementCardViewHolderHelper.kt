@@ -3,6 +3,7 @@ package kr.co.soogong.master.ui.requirements.card
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import kr.co.soogong.master.databinding.ViewHolderRequirementItemBinding
+import kr.co.soogong.master.domain.requirements.EstimationStatus
 
 object RequirementCardViewHolderHelper {
     fun create(parent: ViewGroup, viewType: Int): EstimationCardViewHolder {

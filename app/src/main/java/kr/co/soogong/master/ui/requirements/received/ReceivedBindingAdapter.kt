@@ -4,7 +4,7 @@ package kr.co.soogong.master.ui.requirements.received
 
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import kr.co.soogong.master.ui.requirements.card.RequirementCard
+import kr.co.soogong.master.domain.requirements.RequirementCard
 
 @BindingAdapter("bind:received_list")
 fun RecyclerView.setList(items: List<RequirementCard>?) {

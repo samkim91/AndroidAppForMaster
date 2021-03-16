@@ -1,20 +1,19 @@
 package kr.co.soogong.master.ui.mypage.account
 
 import android.os.Bundle
-import androidx.lifecycle.ViewModelProvider
-import kr.co.soogong.master.BR
+import androidx.activity.viewModels
+import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ActivityAccountBinding
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.uiinterface.mypage.password.PasswordActivityHelper
 import timber.log.Timber
 
+@AndroidEntryPoint
 class AccountActivity : BaseActivity<ActivityAccountBinding>(
     R.layout.activity_account
 ) {
-    private val viewModel: AccountViewModel by lazy {
-        ViewModelProvider(this).get(AccountViewModel::class.java)
-    }
+    private val viewModel: AccountViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,7 +25,7 @@ class AccountActivity : BaseActivity<ActivityAccountBinding>(
         Timber.tag(TAG).d("initLayout: ")
 
         bind {
-            setVariable(BR.vm, viewModel)
+            vm = viewModel
             lifecycleOwner = this@AccountActivity
 
             with(actionBar) {

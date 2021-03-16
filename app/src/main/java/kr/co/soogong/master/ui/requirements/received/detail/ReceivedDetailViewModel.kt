@@ -2,23 +2,29 @@ package kr.co.soogong.master.ui.requirements.received.detail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedInject
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.launch
 import kr.co.soogong.master.data.requirements.Requirement
 import kr.co.soogong.master.domain.Repository
 import kr.co.soogong.master.ui.base.BaseViewModel
+import kr.co.soogong.master.ui.requirements.progress.detail.estimate.ProgressEstimateViewModel
 import kr.co.soogong.master.util.Event
 import kr.co.soogong.master.util.InjectHelper
 import kr.co.soogong.master.util.http.HttpClient
 import timber.log.Timber
 import java.util.*
 
-class ReceivedDetailViewModel(
+class ReceivedDetailViewModel @AssistedInject constructor(
     private val repository: Repository,
-    private val keycode: String
+    private val httpClient: HttpClient,
+    @Assisted private val keycode: String
 ) : BaseViewModel() {
 
     private val _requirement = repository.getRequirement(keycode)
@@ -76,7 +82,7 @@ class ReceivedDetailViewModel(
         get() = _event
 
     fun onClickedDenied() {
-        HttpClient.refuseRequirement(branchKeycode = InjectHelper.keyCode, keycode = keycode)
+        httpClient.refuseRequirement(branchKeycode = InjectHelper.keyCode, keycode = keycode)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
@@ -94,9 +100,24 @@ class ReceivedDetailViewModel(
         _event.value = Event(ACCEPT_EVENT)
     }
 
+    @dagger.assisted.AssistedFactory
+    interface AssistedFactory {
+        fun create(keycode: String): ProgressEstimateViewModel
+    }
+
     companion object {
         private const val TAG = "DetailViewModel"
         const val DENIED_EVENT = "DENIED_EVENT"
         const val ACCEPT_EVENT = "ACCEPT_EVENT"
+
+        fun provideFactory(
+            assistedFactory: AssistedFactory,
+            keycode: String
+        ): ViewModelProvider.Factory = object : ViewModelProvider.Factory {
+            @Suppress("UNCHECKED_CAST")
+            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+                return assistedFactory.create(keycode) as T
+            }
+        }
     }
 }

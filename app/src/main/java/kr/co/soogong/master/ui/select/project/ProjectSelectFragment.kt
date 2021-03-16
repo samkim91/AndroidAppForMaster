@@ -7,7 +7,7 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import kr.co.soogong.master.BR
+import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.category.Category
 import kr.co.soogong.master.databinding.FragmentProjectSelectBinding
@@ -15,7 +15,9 @@ import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.uiinterface.category.CategoryActivityHelper.BUNDLE_CATEGORY
 import kr.co.soogong.master.uiinterface.category.CategoryActivityHelper.BUNDLE_PROJECT_LIST
 import timber.log.Timber
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class ProjectSelectFragment : BaseFragment<FragmentProjectSelectBinding>(
     R.layout.fragment_project_select
 ) {
@@ -23,8 +25,11 @@ class ProjectSelectFragment : BaseFragment<FragmentProjectSelectBinding>(
         arguments?.getParcelable(BUNDLE_CATEGORY) ?: Category(0, "")
     }
 
+    @Inject
+    lateinit var factory: ProjectSelectViewModel.AssistedFactory
+
     private val viewModel: ProjectSelectViewModel by viewModels {
-        ProjectSelectViewModelFactory(category)
+        ProjectSelectViewModel.provideFactory(factory, category)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -35,7 +40,7 @@ class ProjectSelectFragment : BaseFragment<FragmentProjectSelectBinding>(
 
     override fun initLayout() {
         bind {
-            setVariable(BR.vm, viewModel)
+            vm = viewModel
             lifecycleOwner = viewLifecycleOwner
 
             list.adapter = ProjectSelectAdapter(listener = { position, project ->

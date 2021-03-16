@@ -4,20 +4,24 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.launch
 import kr.co.soogong.master.domain.Repository
+import kr.co.soogong.master.domain.requirements.RequirementCard
 import kr.co.soogong.master.ui.base.BaseViewModel
-import kr.co.soogong.master.ui.requirements.card.RequirementCard
 import kr.co.soogong.master.util.Event
 import kr.co.soogong.master.util.InjectHelper
 import kr.co.soogong.master.util.http.HttpClient
 import timber.log.Timber
+import javax.inject.Inject
 
-class ReceivedViewModel(
-    private val repository: Repository
+@HiltViewModel
+class ReceivedViewModel @Inject constructor(
+    private val repository: Repository,
+    private val httpClient: HttpClient
 ) : BaseViewModel() {
     private val _emptyList = MutableLiveData(true)
     val emptyList: LiveData<Boolean>
@@ -50,7 +54,7 @@ class ReceivedViewModel(
     }
 
     fun requestList() {
-        HttpClient.getEstimationList(InjectHelper.keyCode)
+        httpClient.getEstimationList(InjectHelper.keyCode)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy {

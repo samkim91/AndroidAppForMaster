@@ -5,6 +5,7 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ViewHolderRequirementItemBinding
+import kr.co.soogong.master.domain.requirements.RequirementCard
 
 abstract class EstimationCardViewHolder(
     open val binding: ViewHolderRequirementItemBinding

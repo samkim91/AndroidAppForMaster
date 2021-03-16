@@ -3,17 +3,17 @@ package kr.co.soogong.master.ui.requirements.received.detail
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
-import kr.co.soogong.master.BR
+import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ActivityReceivedDetailBinding
-import kr.co.soogong.master.ext.addAdditionInfoView
 import kr.co.soogong.master.ui.base.BaseActivity
-import kr.co.soogong.master.ui.getRepository
 import kr.co.soogong.master.uiinterface.requirments.received.detail.ReceivedDetailActivityHelper
 import kr.co.soogong.master.uiinterface.requirments.received.estimate.EstimateActivityHelper
 import kr.co.soogong.master.util.EventObserver
 import timber.log.Timber
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class ReceivedDetailActivity : BaseActivity<ActivityReceivedDetailBinding>(
     R.layout.activity_received_detail
 ) {
@@ -22,8 +22,11 @@ class ReceivedDetailActivity : BaseActivity<ActivityReceivedDetailBinding>(
             ?.getString(ReceivedDetailActivityHelper.BUNDLE_KEY_RECEIVED_KEY, "") ?: ""
     }
 
+    @Inject
+    lateinit var factory: ReceivedDetailViewModel.AssistedFactory
+
     private val viewModel: ReceivedDetailViewModel by viewModels {
-        ReceivedDetailViewModelFactory(getRepository(this), keycode)
+        ReceivedDetailViewModel.provideFactory(factory, keycode)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,7 +40,7 @@ class ReceivedDetailActivity : BaseActivity<ActivityReceivedDetailBinding>(
         Timber.tag(TAG).d("initLayout: ")
 
         bind {
-            setVariable(BR.vm, viewModel)
+            vm = viewModel
             lifecycleOwner = this@ReceivedDetailActivity
 
             with(actionBar) {
@@ -54,13 +57,6 @@ class ReceivedDetailActivity : BaseActivity<ActivityReceivedDetailBinding>(
             setDeinedClick {
                 viewModel.onClickedDenied()
             }
-
-            viewModel.questions.observe(this@ReceivedDetailActivity, { text ->
-                contentFrame.removeAllViews()
-                if (!text.isNullOrEmpty()) {
-
-                }
-            })
         }
     }
 

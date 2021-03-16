@@ -7,22 +7,20 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import kr.co.soogong.master.BR
+import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentRequirementsProgressBinding
 import kr.co.soogong.master.ui.base.BaseFragment
-import kr.co.soogong.master.ui.getRepository
 import kr.co.soogong.master.uiinterface.requirments.RequirementsBadge
 import kr.co.soogong.master.uiinterface.requirments.progress.detail.ProgressDetailActivityHelper
 import kr.co.soogong.master.util.EventObserver
 import timber.log.Timber
 
+@AndroidEntryPoint
 class ProgressFragment : BaseFragment<FragmentRequirementsProgressBinding>(
     R.layout.fragment_requirements_progress
 ) {
-    private val viewModel: ProgressViewModel by viewModels {
-        ProgressViewModelFactory(getRepository(requireContext()))
-    }
+    private val viewModel: ProgressViewModel by viewModels()
 
     private var requirementsBadge: RequirementsBadge? = null
 
@@ -41,7 +39,7 @@ class ProgressFragment : BaseFragment<FragmentRequirementsProgressBinding>(
         Timber.tag(TAG).d("initLayout: ")
 
         bind {
-            setVariable(BR.vm, viewModel)
+            vm = viewModel
             lifecycleOwner = viewLifecycleOwner
 
             receivedList.adapter = ProgressAdapter(

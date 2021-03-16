@@ -6,22 +6,20 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import kr.co.soogong.master.BR
+import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentRequirementsReceivedBinding
 import kr.co.soogong.master.ui.base.BaseFragment
-import kr.co.soogong.master.ui.getRepository
 import kr.co.soogong.master.uiinterface.requirments.RequirementsBadge
 import kr.co.soogong.master.uiinterface.requirments.action.view.ViewEstimateActivityHelper
 import kr.co.soogong.master.util.EventObserver
 import timber.log.Timber
 
+@AndroidEntryPoint
 class ReceivedFragment : BaseFragment<FragmentRequirementsReceivedBinding>(
     R.layout.fragment_requirements_received
 ) {
-    private val viewModel: ReceivedViewModel by viewModels {
-        ReceivedViewModelFactory(getRepository(requireContext()))
-    }
+    private val viewModel: ReceivedViewModel by viewModels()
 
     private var requirementsBadge: RequirementsBadge? = null
 
@@ -38,7 +36,8 @@ class ReceivedFragment : BaseFragment<FragmentRequirementsReceivedBinding>(
         Timber.tag(TAG).d("initLayout: ")
 
         bind {
-            setVariable(BR.vm, viewModel)
+            vm = viewModel
+
             lifecycleOwner = viewLifecycleOwner
 
             receivedList.adapter = ReceivedAdapter(cardClickListener = { keycode ->

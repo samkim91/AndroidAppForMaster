@@ -3,57 +3,39 @@ package kr.co.soogong.master.util.http
 import com.google.gson.JsonObject
 import io.reactivex.Single
 import kr.co.soogong.master.BuildConfig
-import kr.co.soogong.master.data.estimation.Estimation
 import kr.co.soogong.master.data.category.Category
 import kr.co.soogong.master.data.category.Project
+import kr.co.soogong.master.data.estimation.Estimation
 import kr.co.soogong.master.data.notice.Notice
 import kr.co.soogong.master.data.requirements.Estimate
 import kr.co.soogong.master.data.requirements.Requirement
 import kr.co.soogong.master.data.user.SignInInfo
 import kr.co.soogong.master.data.user.SignUpInfo
 import kr.co.soogong.master.data.user.User
-import kr.co.soogong.master.util.InjectHelper
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import timber.log.Timber
+import javax.inject.Inject
 
-object HttpClient {
-    private val TAG = HttpClient::class.java.simpleName
+class HttpClient @Inject constructor(
+    okHttpClient: OkHttpClient
+) {
     private val URL = if (BuildConfig.DEBUG) {
         "https://test.api2.soogong.co.kr/"
     } else {
         "https://api2.soogong.co.kr/"
     }
 
-    private lateinit var instance: HttpClient
-    private lateinit var okHttpClient: OkHttpClient
-    private lateinit var httpInterface: HttpInterface
+    private val httpInterface: HttpInterface = Retrofit.Builder()
+        .client(okHttpClient)
+        .baseUrl(URL)
+        .addConverterFactory(GsonConverterFactory.create())
+        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+        .build()
+        .create(HttpInterface::class.java)
 
-    init {
-        updateHttpClient()
-    }
-
-    fun newInstance(): HttpClient {
-        if (!::instance.isInitialized) {
-            instance = HttpClient
-        }
-        return instance
-    }
-
-    private fun updateHttpClient() {
-        okHttpClient = InjectHelper.getOkHttpClient()
-        httpInterface = Retrofit.Builder()
-            .client(okHttpClient)
-            .baseUrl(URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .build()
-            .create(HttpInterface::class.java)
-    }
-
-    //region Auth
     fun login(email: String, password: String): Single<String> {
         val data = HashMap<String, String>()
         data["email"] = email
@@ -122,7 +104,6 @@ object HttpClient {
         data["name"] = name
         return httpInterface.findInfo(data)
     }
-    //endregion Auth
 
     fun getCategoryList(): Single<List<Category>> {
         return httpInterface.getCategoryList().map {
@@ -172,7 +153,11 @@ object HttpClient {
         return httpInterface.refuseRequirement(data)
     }
 
-    fun sendMessage(branchKeycode: String?, keycode: String, estimate: Estimate): Single<String> {
+    fun sendMessage(
+        branchKeycode: String?,
+        keycode: String,
+        estimate: Estimate
+    ): Single<String> {
         val data = HashMap<String, String?>()
         data["branch_keycode"] = branchKeycode
         data["keycode"] = keycode
@@ -197,7 +182,6 @@ object HttpClient {
         }
     }
 
-    //region Setting
     fun getNoticeList(master: String = "free"): Single<List<Notice>> {
         return httpInterface.getNoticeList(master).map { list ->
             val ret = ArrayList<Notice>()
@@ -239,7 +223,6 @@ object HttpClient {
         }
     }
 
-
     fun setAlarmStatus(keycode: String?, type: String, value: Boolean): Single<JsonObject> {
         val data = HashMap<String, Any?>()
         data["keycode"] = keycode
@@ -250,5 +233,8 @@ object HttpClient {
             return@map it
         }
     }
-    //endregion
+
+    companion object {
+        private const val TAG = "HttpClient"
+    }
 }

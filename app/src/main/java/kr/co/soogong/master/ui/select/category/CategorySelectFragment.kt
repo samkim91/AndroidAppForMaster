@@ -2,22 +2,21 @@ package kr.co.soogong.master.ui.select.category
 
 import android.os.Bundle
 import android.view.View
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import kr.co.soogong.master.BR
+import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentCategorySelectBinding
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.select.SelectFragment
 import timber.log.Timber
 
+@AndroidEntryPoint
 class CategorySelectFragment : BaseFragment<FragmentCategorySelectBinding>(
     R.layout.fragment_category_select
 ) {
-    private val viewModel: CategorySelectViewModel by lazy {
-        ViewModelProvider(this).get(CategorySelectViewModel::class.java)
-    }
+    private val viewModel: CategorySelectViewModel by viewModels()
 
     private var selectFragment: SelectFragment? = null
 
@@ -29,7 +28,7 @@ class CategorySelectFragment : BaseFragment<FragmentCategorySelectBinding>(
 
     override fun initLayout() {
         bind {
-            setVariable(BR.vm, viewModel)
+            vm = viewModel
             lifecycleOwner = viewLifecycleOwner
 
             list.adapter = CategorySelectAdapter(

@@ -7,11 +7,10 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import com.kakao.sdk.common.util.KakaoCustomTabsClient
 import com.kakao.sdk.talk.TalkApiClient
-import kr.co.soogong.master.BR
+import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentMypageBinding
 import kr.co.soogong.master.ui.base.BaseFragment
-import kr.co.soogong.master.ui.getRepository
 import kr.co.soogong.master.ui.mypage.notice.NoticeMyPageListViewHolder
 import kr.co.soogong.master.uiinterface.mypage.account.AccountActivityHelper
 import kr.co.soogong.master.uiinterface.mypage.alarm.AlarmActivityHelper
@@ -21,12 +20,11 @@ import kr.co.soogong.master.uiinterface.sign.SignMainActivityHelper
 import kr.co.soogong.master.util.EventObserver
 import timber.log.Timber
 
+@AndroidEntryPoint
 class MyPageFragment : BaseFragment<FragmentMypageBinding>(
     R.layout.fragment_mypage
 ) {
-    private val viewModel: MyPageViewModel by viewModels {
-        MyPageViewModelFactory(getRepository(requireContext()))
-    }
+    private val viewModel: MyPageViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -40,7 +38,7 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(
         Timber.tag(TAG).d("initLayout: ")
 
         bind {
-            setVariable(BR.vm, viewModel)
+            vm = viewModel
 
             lifecycleOwner = viewLifecycleOwner
 

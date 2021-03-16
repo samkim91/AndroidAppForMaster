@@ -1,8 +1,8 @@
 package kr.co.soogong.master.ui.mypage.notice
 
 import android.os.Bundle
-import androidx.lifecycle.ViewModelProvider
-import kr.co.soogong.master.BR
+import androidx.activity.viewModels
+import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ActivityNoticeBinding
 import kr.co.soogong.master.ui.base.BaseActivity
@@ -10,12 +10,11 @@ import kr.co.soogong.master.ui.mypage.NoticeAdapter
 import kr.co.soogong.master.uiinterface.mypage.notice.detail.NoticeDetailActivityHelper
 import timber.log.Timber
 
+@AndroidEntryPoint
 class NoticeActivity : BaseActivity<ActivityNoticeBinding>(
     R.layout.activity_notice
 ) {
-    private val viewModel: NoticeViewModel by lazy {
-        ViewModelProvider(this).get(NoticeViewModel::class.java)
-    }
+    private val viewModel: NoticeViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +26,7 @@ class NoticeActivity : BaseActivity<ActivityNoticeBinding>(
         Timber.tag(TAG).d("initLayout: ")
 
         bind {
-            setVariable(BR.vm, viewModel)
+            vm = viewModel
             lifecycleOwner = this@NoticeActivity
 
             list.adapter = NoticeAdapter(NoticeViewHolder.NoticeView) {

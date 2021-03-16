@@ -1,7 +1,8 @@
 package kr.co.soogong.master.ui.sign.find
 
 import android.os.Bundle
-import androidx.lifecycle.ViewModelProvider
+import androidx.activity.viewModels
+import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ActivityFindInfoBinding
 import kr.co.soogong.master.ui.base.BaseActivity
@@ -11,12 +12,11 @@ import kr.co.soogong.master.ui.sign.find.FindInfoViewModel.Companion.SUCCESS_TO_
 import kr.co.soogong.master.util.EventObserver
 import timber.log.Timber
 
+@AndroidEntryPoint
 class FindInfoActivity : BaseActivity<ActivityFindInfoBinding>(
     R.layout.activity_find_info
 ) {
-    private val viewModel: FindInfoViewModel by lazy {
-        ViewModelProvider(this).get(FindInfoViewModel::class.java)
-    }
+    private val viewModel: FindInfoViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

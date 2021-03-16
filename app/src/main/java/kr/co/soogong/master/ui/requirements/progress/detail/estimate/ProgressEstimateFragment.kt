@@ -3,14 +3,15 @@ package kr.co.soogong.master.ui.requirements.progress.detail.estimate
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
-import kr.co.soogong.master.BR
+import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentProgressEstimateBinding
 import kr.co.soogong.master.ui.base.BaseFragment
-import kr.co.soogong.master.ui.getRepository
 import kr.co.soogong.master.uiinterface.requirments.progress.detail.estimate.ProgressEstimateFragmentHelper
 import timber.log.Timber
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class ProgressEstimateFragment : BaseFragment<FragmentProgressEstimateBinding>(
     R.layout.fragment_progress_estimate
 ) {
@@ -18,8 +19,11 @@ class ProgressEstimateFragment : BaseFragment<FragmentProgressEstimateBinding>(
         arguments?.getString(ProgressEstimateFragmentHelper.BUNDLE_KEY_RECEIVED_KEY) ?: ""
     }
 
+    @Inject
+    lateinit var factory: ProgressEstimateViewModel.AssistedFactory
+
     val viewModel: ProgressEstimateViewModel by viewModels {
-        ProgressEstimateViewModelFactory(getRepository(requireContext()), keycode)
+        ProgressEstimateViewModel.provideFactory(factory, keycode)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -33,7 +37,7 @@ class ProgressEstimateFragment : BaseFragment<FragmentProgressEstimateBinding>(
         Timber.tag(TAG).d("initLayout: ")
 
         bind {
-            setVariable(BR.vm, viewModel)
+            vm = viewModel
             lifecycleOwner = viewLifecycleOwner
         }
     }

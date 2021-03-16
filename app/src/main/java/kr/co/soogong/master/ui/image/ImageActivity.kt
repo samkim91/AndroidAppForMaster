@@ -7,15 +7,16 @@ import android.widget.LinearLayout
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
+import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ActivityImageBinding
 import kr.co.soogong.master.ext.dp
 import kr.co.soogong.master.ui.base.BaseActivity
-import kr.co.soogong.master.ui.getRepository
 import kr.co.soogong.master.uiinterface.image.ImageViewActivityHelper
 import timber.log.Timber
+import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class ImageActivity : BaseActivity<ActivityImageBinding>(
     R.layout.activity_image
 ) {
@@ -27,8 +28,11 @@ class ImageActivity : BaseActivity<ActivityImageBinding>(
         ImageViewActivityHelper.getImagePosition(intent)
     }
 
+    @Inject
+    lateinit var factory: ImageViewModel.AssistedFactory
+
     private val viewModel: ImageViewModel by viewModels {
-        ImageViewModelFactory(getRepository(this), estimationId)
+        ImageViewModel.provideFactory(factory, estimationId)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

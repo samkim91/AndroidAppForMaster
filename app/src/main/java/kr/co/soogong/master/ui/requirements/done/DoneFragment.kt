@@ -5,19 +5,17 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import kr.co.soogong.master.BR
+import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentRequirementsDoneBinding
 import kr.co.soogong.master.ui.base.BaseFragment
-import kr.co.soogong.master.ui.getRepository
 import timber.log.Timber
 
+@AndroidEntryPoint
 class DoneFragment : BaseFragment<FragmentRequirementsDoneBinding>(
     R.layout.fragment_requirements_done
 ) {
-    private val viewModel: DoneViewModel by viewModels {
-        DoneViewModelFactory(getRepository(requireContext()))
-    }
+    private val viewModel: DoneViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -30,7 +28,7 @@ class DoneFragment : BaseFragment<FragmentRequirementsDoneBinding>(
         Timber.tag(TAG).d("initLayout: ")
 
         bind {
-            setVariable(BR.vm, viewModel)
+            vm = viewModel
             lifecycleOwner = viewLifecycleOwner
 
             doneList.adapter = DoneAdapter()

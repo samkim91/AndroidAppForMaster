@@ -2,7 +2,12 @@ package kr.co.soogong.master.util.http
 
 import com.google.gson.JsonObject
 import io.reactivex.Single
-import retrofit2.http.*
+import retrofit2.http.Body
+import retrofit2.http.GET
+import retrofit2.http.Header
+import retrofit2.http.POST
+import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface HttpInterface {
     @POST("login")
@@ -30,7 +35,7 @@ interface HttpInterface {
     fun getRequirementList(@Query("branch_keycode") auth: String?): Single<List<JsonObject>>
 
     @GET("api/v2/estimations/{branch_keycode}")
-    fun getEstimationList(@Path("branch_keycode") branchKeycode: String?) : Single<JsonObject>
+    fun getEstimationList(@Path("branch_keycode") branchKeycode: String?): Single<JsonObject>
 
     @GET("api/v1/transmissions/accept_list")
     fun getProgressList(@Query("branch_keycode") auth: String?): Single<List<JsonObject>>

@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
@@ -14,9 +15,12 @@ import kr.co.soogong.master.ui.requirements.progress.ProgressCard
 import kr.co.soogong.master.util.InjectHelper
 import kr.co.soogong.master.util.http.HttpClient
 import timber.log.Timber
+import javax.inject.Inject
 
-class DoneViewModel(
-    private val repository: Repository
+@HiltViewModel
+class DoneViewModel @Inject constructor(
+    private val repository: Repository,
+    private val httpClient: HttpClient
 ) : BaseViewModel() {
     private val _emptyList = MutableLiveData(true)
     val emptyList: LiveData<Boolean>
@@ -36,7 +40,7 @@ class DoneViewModel(
         }
 
     fun requestList() {
-        HttpClient.getProgressList(InjectHelper.keyCode)
+        httpClient.getProgressList(InjectHelper.keyCode)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy {

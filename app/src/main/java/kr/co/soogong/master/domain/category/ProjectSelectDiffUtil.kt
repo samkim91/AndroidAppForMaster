@@ -1,4 +1,4 @@
-package kr.co.soogong.master.ui.select.project
+package kr.co.soogong.master.domain.category
 
 import androidx.recyclerview.widget.DiffUtil
 import kr.co.soogong.master.data.category.Project
