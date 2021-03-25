@@ -13,7 +13,7 @@ class TitleSwitchCompat @JvmOverloads constructor(
     attributeSet: AttributeSet? = null,
     defStyle: Int = 0
 ) : ConstraintLayout(context, attributeSet, defStyle) {
-    private var binding: ViewTitleSwitchcompatBinding =
+    private var binding =
         ViewTitleSwitchcompatBinding.inflate(LayoutInflater.from(context), this, true)
 
     var title: String? = ""

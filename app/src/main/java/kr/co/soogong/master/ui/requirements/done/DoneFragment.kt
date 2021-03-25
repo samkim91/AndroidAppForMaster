@@ -31,7 +31,7 @@ class DoneFragment : BaseFragment<FragmentRequirementsDoneBinding>(
             vm = viewModel
             lifecycleOwner = viewLifecycleOwner
 
-            doneList.adapter = DoneAdapter()
+            doneList.adapter = DoneAdapter(cardClickListener = {})
 
             val dividerItemDecoration = DividerItemDecoration(
                 context,

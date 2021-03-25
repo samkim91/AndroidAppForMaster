@@ -34,36 +34,4 @@ class EstimationConverters {
     fun stringToAdditionalInfoList(imagePathString: String): List<AdditionalInfo> {
         return Gson().fromJson(imagePathString, object : TypeToken<List<AdditionalInfo>>() {}.type)
     }
-
-    /*
-        @TypeConverter
-    fun messageToString(message: Message?): String? {
-        return Gson().toJson(message)
-    }
-
-    @TypeConverter
-    fun stringToMessage(messageString: String?): Message? {
-        return Gson().fromJson(messageString, object : TypeToken<Message>() {}.type)
-    }
-
-    @TypeConverter
-    fun priceDetailToString(priceDetail: PriceDetail): String {
-        return Gson().toJson(priceDetail)
-    }
-
-    @TypeConverter
-    fun stringToPriceDetail(priceDetailString: String): PriceDetail {
-        return Gson().fromJson(priceDetailString, object : TypeToken<PriceDetail>() {}.type)
-    }
-
-    @TypeConverter
-    fun imagePathToString(imagePath: ImagePath): String {
-        return Gson().toJson(imagePath)
-    }
-
-    @TypeConverter
-    fun stringToImagePath(imagePathString: String): ImagePath {
-        return Gson().fromJson(imagePathString, object : TypeToken<ImagePath>() {}.type)
-    }
-     */
 }

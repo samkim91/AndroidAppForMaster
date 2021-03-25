@@ -18,7 +18,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".ui.SplashActivity"
+            android:name=".ui.splash.SplashActivity"
             android:label="@string/app_name"
             android:theme="@style/SplashTheme">
             <intent-filter>
@@ -52,16 +52,16 @@
             android:name=".ui.image.ImageActivity"
             android:launchMode="singleTask" />
         <activity
+            android:name=".ui.requirements.action.cancel.CancelEstimateActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".ui.requirements.action.end.EndEstimateActivity"
+            android:launchMode="singleTask" />
+        <activity
             android:name=".ui.requirements.action.view.ViewEstimateActivity"
             android:launchMode="singleTask" />
         <activity
-            android:name=".ui.requirements.received.detail.ReceivedDetailActivity"
-            android:launchMode="singleTask" />
-        <activity
-            android:name=".ui.requirements.received.estimate.EstimateActivity"
-            android:launchMode="singleTask" />
-        <activity
-            android:name=".ui.requirements.progress.detail.ProgressDetailActivity"
+            android:name=".ui.requirements.action.write.WriteEstimateActivity"
             android:launchMode="singleTask" />
         <activity
             android:name=".ui.mypage.account.AccountActivity"

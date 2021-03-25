@@ -6,14 +6,14 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.category.Category
+import kr.co.soogong.master.network.CategoryService
 import kr.co.soogong.master.ui.base.BaseViewModel
-import kr.co.soogong.master.util.http.HttpClient
 import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class CategorySelectViewModel @Inject constructor(
-    private val httpClient: HttpClient
+    private val categoryService: CategoryService
 ) : BaseViewModel() {
     private val _list = MutableLiveData<List<Category>>(emptyList())
     val list: LiveData<List<Category>>
@@ -24,7 +24,7 @@ class CategorySelectViewModel @Inject constructor(
     }
 
     private fun getCategoryList() {
-        httpClient.getCategoryList()
+        categoryService.getCategoryList()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({

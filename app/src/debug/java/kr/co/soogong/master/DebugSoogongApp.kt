@@ -30,7 +30,7 @@ class DebugSoogongApp : SoogongApp() {
                     this,
                     listOf(
                         SharedPreferencesFlipperPlugin.SharedPreferencesDescriptor(
-                            "soogong_shared_preferences",
+                            "soogong_shared_preferences.pref",
                             MODE_PRIVATE
                         )
                     )

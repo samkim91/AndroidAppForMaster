@@ -14,7 +14,7 @@ class AdditionInfoView @JvmOverloads constructor(
     attributeSet: AttributeSet? = null,
     defStyle: Int = 0
 ) : ConstraintLayout(context, attributeSet, defStyle) {
-    private var binding: ViewAdditionInfoBinding =
+    private var binding =
         ViewAdditionInfoBinding.inflate(LayoutInflater.from(context), this, true)
 
     var question: String? = ""

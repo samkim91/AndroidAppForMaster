@@ -11,7 +11,7 @@ class AmountView @JvmOverloads constructor(
     attributeSet: AttributeSet? = null,
     defStyle: Int = 0
 ) : ConstraintLayout(context, attributeSet, defStyle) {
-    private var binding: ViewAmountBinding =
+    private var binding =
         ViewAmountBinding.inflate(LayoutInflater.from(context), this, true)
 
     var title: String? = ""

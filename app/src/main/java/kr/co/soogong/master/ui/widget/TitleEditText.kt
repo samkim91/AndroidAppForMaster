@@ -25,20 +25,36 @@ class TitleEditText @JvmOverloads constructor(
             binding.title.text = value
         }
 
-    var hintVisible: Boolean = false
+    var subTitle: String? = ""
         set(value) {
             field = value
-            binding.hintText.visibility = if (value) {
+            binding.subTitle.text = value
+        }
+
+    var subTitleVisible: Boolean = false
+        set(value) {
+            field = value
+            binding.subTitle.visibility = if (value) {
                 View.VISIBLE
             } else {
                 View.GONE
             }
         }
 
-    var hintText: String? = ""
+    var alertVisible: Boolean = false
         set(value) {
             field = value
-            binding.hintText.text = value
+            binding.alert.visibility = if (value) {
+                View.VISIBLE
+            } else {
+                View.INVISIBLE
+            }
+        }
+
+    var alertText: String? = ""
+        set(value) {
+            field = value
+            binding.alert.text = value
         }
 
     var text: String? = ""
@@ -50,10 +66,10 @@ class TitleEditText @JvmOverloads constructor(
             return binding.detail.text.toString()
         }
 
-    var inputType: Int = InputType.TYPE_TEXT_VARIATION_WEB_PASSWORD
+    var hintText: String? = ""
         set(value) {
             field = value
-            binding.detail.inputType = value
+            binding.detail.hint = value
         }
 
     fun addTextChangedListener(

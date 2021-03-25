@@ -10,12 +10,12 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.category.Category
 import kr.co.soogong.master.data.category.Project
+import kr.co.soogong.master.network.CategoryService
 import kr.co.soogong.master.ui.base.BaseViewModel
-import kr.co.soogong.master.util.http.HttpClient
 import timber.log.Timber
 
 class ProjectSelectViewModel @AssistedInject constructor(
-    private val httpClient: HttpClient,
+    private val categoryService: CategoryService,
     @Assisted private val category: Category
 ) : BaseViewModel() {
     private val _list = MutableLiveData<List<Project>>()
@@ -35,7 +35,7 @@ class ProjectSelectViewModel @AssistedInject constructor(
     }
 
     private fun getProjectList() {
-        httpClient.getProjectList(category)
+        categoryService.getProjectList(category)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({

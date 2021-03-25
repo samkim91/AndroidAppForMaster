@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 import com.google.gson.JsonObject
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
-import kr.co.soogong.master.ext.getNullable
+import kr.co.soogong.master.util.extension.getNullable
 import java.util.*
 
 @Parcelize

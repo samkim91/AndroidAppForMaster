@@ -23,6 +23,7 @@
     <!-- My Page-->
     <string name="my_page_fragment_name">마이페이지</string>
     <string name="my_page_account_setting_label">계정설정</string>
+    <string name="my_page_master_label">마스터</string>
     <string name="my_page_notice">공지사항</string>
     <string name="my_page_notice_total">전체보기</string>
     <string name="my_page_call_text">전화 문의하기</string>
@@ -66,9 +67,16 @@
 
     <!-- Requirements : Progress -->
     <string name="requirements_progress_none_status">아직 진행중인 문의가 없습니다.</string>
+    <string name="requirements_progress_filter_option_1">전체</string>
+    <string name="requirements_progress_filter_option_2">시공진행중</string>
+    <string name="requirements_progress_filter_option_3">고객완료요청</string>
 
     <!-- Requirements : Done -->
     <string name="requirements_done_none_status">아직 완료된 문의가 없습니다.</string>
+    <string name="requirements_done_filter_option_1">전체</string>
+    <string name="requirements_done_filter_option_2">시공완료</string>
+    <string name="requirements_done_filter_option_3">평가완료</string>
+    <string name="requirements_done_filter_option_4">시공취소</string>
 
     <!-- RequirementsCard -->
     <string name="requirements_card_waiting_label">2주 내 고객의 응답이 없을 시 해당 문의건은 삭제됩니다.</string>
@@ -91,6 +99,18 @@
 
     <!--  Cancel Estimate  -->
     <string name="cancel_estimate_title">취소 사유</string>
+    <string name="cancel_estimate_cancel_option_label">어떤 이유로 취소 되었나요?</string>
+    <string name="cancel_estimate_cancel_option_1">고객의 단순 변심</string>
+    <string name="cancel_estimate_cancel_option_2">고객의 연락 부재</string>
+    <string name="cancel_estimate_cancel_option_3">현장 실측 결과 시공이 불가</string>
+    <string name="cancel_estimate_cancel_option_4">견적가와 현장 실측 결과가 상이하여 고객이 취소</string>
+    <string name="cancel_estimate_cancel_option_detail_label">상세 내용을 입력해주세요. (선택)</string>
+
+    <!-- Write Estimate -->
+    <string name="write_estimate_title">견적서 작성</string>
+
+    <!-- End Estimate -->
+    <string name="end_estimate_title">최종 정보</string>
 
     <!-- Profile -->
     <string name="master_type">마스터유형</string>

@@ -10,7 +10,7 @@ import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ActivityImageBinding
-import kr.co.soogong.master.ext.dp
+import kr.co.soogong.master.util.extension.dp
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.uiinterface.image.ImageViewActivityHelper
 import timber.log.Timber
@@ -64,9 +64,9 @@ class ImageActivity : BaseActivity<ActivityImageBinding>(
             }
         }
 
-        viewModel.imagePath.observe(this, {
-            if (it.isEmpty()) return@observe
-            setupIndicators(it.size)
+        viewModel.estimation.observe(this, {
+            if (it?.images?.isNotEmpty() != true) return@observe
+            setupIndicators(it.images.size)
             binding.sliderViewPager.setCurrentItem(startPosition, false)
         })
     }

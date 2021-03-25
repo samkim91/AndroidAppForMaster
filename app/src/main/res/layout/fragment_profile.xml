@@ -13,173 +13,128 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:overScrollMode="never">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp">
+            android:layout_height="wrap_content">
 
             <ImageView
                 android:id="@+id/user_profile_img"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
-                android:layout_marginTop="40dp"
-                android:src="@drawable/ic_profile_default"
+                android:layout_marginTop="78dp"
+                android:src="@drawable/ic_user_picture"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <kr.co.soogong.master.ui.widget.TitleText
-                android:id="@+id/master_type"
-                android:layout_width="match_parent"
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/user_name"
+                style="@style/medium_text_style.bold"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                app:detail="@{vm.usingPlan}"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="4dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@{vm.userInfo.name}"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintEnd_toStartOf="@id/user_name_end"
+                app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/user_profile_img"
-                app:title="@{@string/master_type}" />
+                tools:text="이레하우징" />
 
-            <kr.co.soogong.master.ui.widget.TitleText
-                android:id="@+id/master_store_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                app:detail="@{vm.name}"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/master_type"
-                app:title="@{@string/store_name}" />
-
-            <kr.co.soogong.master.ui.widget.TitleText
-                android:id="@+id/master_introduction"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                app:detail="@{vm.introduction}"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/master_store_name"
-                app:title="@{@string/short_introduce}" />
-
-            <kr.co.soogong.master.ui.widget.TitleText
-                android:id="@+id/master_license_number"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/master_introduction"
-                app:title="@{@string/company_number}" />
-
-            <kr.co.soogong.master.ui.widget.TitleText
-                android:id="@+id/master_address"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                app:detail="@{vm.address}"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/master_license_number"
-                app:title="@{@string/address}" />
-
-            <TextView
-                android:id="@+id/master_address_sub"
-                style="@style/medium_text_style.regular"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/shape_fill_white_background"
-                android:gravity="center"
-                android:text="@{vm.detailAddress}"
-                android:textColor="@color/primary_text_color"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/master_address"
-                tools:text="ㅁㄴㅇㄹ 빌라 303호" />
-
-            <TextView
-                android:id="@+id/master_setting_address_title"
-                style="@style/medium_text_style.medium"
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/user_name_end"
+                style="@style/small_text_style"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                android:text="@string/setting_address"
-                android:textColor="@color/primary_text_color"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/master_address_sub" />
+                android:layout_marginEnd="20dp"
+                android:text="마스터"
+                app:layout_constraintBottom_toBottomOf="@id/user_name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/user_name"
+                app:layout_constraintTop_toTopOf="@id/user_name" />
 
-            <TextView
-                android:id="@+id/master_setting_address_primary_title"
-                style="@style/medium_text_style.medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/primary_address"
-                android:textColor="@color/secondary_text_color"
-                app:layout_constraintBottom_toBottomOf="@id/master_setting_address_primary"
+            <kr.co.soogong.master.ui.widget.ReviewLayout
+                android:id="@+id/review_box"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/master_setting_address_primary" />
+                app:layout_constraintTop_toBottomOf="@id/user_name"
+                bind:recommendCount="@{vm.userInfo.starCount}"
+                bind:reviewCount="@{vm.userInfo.reviewsCount}" />
 
-            <TextView
-                android:id="@+id/master_setting_address_primary"
-                style="@style/medium_text_style.regular"
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/show_profile"
+                style="@style/medium_text_style.bold"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
-                android:layout_marginStart="11dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/shape_fill_white_background"
-                android:gravity="center"
-                android:text="@{vm.position}"
-                android:textColor="@color/primary_text_color"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/master_setting_address_primary_title"
-                app:layout_constraintTop_toBottomOf="@id/master_setting_address_title"
-                tools:text="서울시 강남구" />
-
-            <kr.co.soogong.master.ui.widget.TextListView
-                android:id="@+id/master_setting_address_sub_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/shape_fill_green_background"
+                android:text="내 페이지 보기"
+                android:textColor="@color/basic_white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/master_setting_address_primary"
-                app:list="@{vm.positions}"
-                bind:visible="@{vm.positions.size() != 0}" />
+                app:layout_constraintTop_toBottomOf="@id/review_box" />
 
-            <TextView
-                android:id="@+id/master_category_title"
-                style="@style/medium_text_style.medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                android:text="@string/category"
-                android:textColor="@color/primary_text_color"
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/banner_image"
+                android:layout_width="0dp"
+                android:layout_height="120dp"
+                android:layout_marginTop="32dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_banner_6"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/master_setting_address_sub_title" />
+                app:layout_constraintTop_toBottomOf="@id/show_profile" />
 
-            <com.nex3z.togglebuttongroup.MultiSelectToggleGroup
-                android:id="@+id/master_category_group"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/profile_card_area"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:background="@color/color_F5F5F5"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/banner_image">
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:id="@+id/line"
+                android:layout_width="0dp"
+                android:layout_height="10dp"
+                android:background="@color/line_color"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/profile_card_area" />
+
+            <kr.co.soogong.master.ui.widget.SettingsButton
+                android:id="@+id/edit_basic_info"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/master_category_title"
-                app:tbgChildSpacing="8dp"
-                app:tbgChildSpacingForLastRow="align"
-                app:tbgRowSpacing="16dp" />
+                app:layout_constraintTop_toBottomOf="@id/line"
+                app:title='@{"기본 정보 등록 / 수정 하기"}' />
 
-            <Button
+            <View
+                android:id="@+id/line2"
                 android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginBottom="24dp"
-                android:background="@drawable/shape_fill_transparent_board_green"
-                android:gravity="center"
-                android:text="@string/modify"
-                android:textColor="@color/app_color"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_height="10dp"
+                android:background="@color/line_color"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/master_category_group" />
+                app:layout_constraintTop_toBottomOf="@id/edit_basic_info" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

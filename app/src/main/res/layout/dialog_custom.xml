@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_fill_white_background"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/txt_dialog_content"
+            style="@style/medium_text_style"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:gravity="center"
+            android:textColor="@color/text_basic_color"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="고객과 전화 연결 하시겠어요?\n고객과 전화 연결 하시겠어요?\n고객과 전화 연결 하시겠어요?\n고객과 전화 연결 하시겠어요?" />
+
+        <TextView
+            android:id="@+id/txt_dialog_alert"
+            style="@style/small_text_style"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14sp"
+            android:gravity="center"
+            android:textColor="@color/text_alert_color"
+            android:textSize="14sp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txt_dialog_content"
+            tools:text="해당 문의가 삭제됩니다.\n해당 문의가 삭제됩니다.\n해당 문의가 삭제됩니다.\n해당 문의가 삭제됩니다.\n해당 문의가 삭제됩니다." />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/btn_barrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="txt_dialog_alert,txt_dialog_content"
+            app:layout_constraintTop_toBottomOf="@id/txt_dialog_alert" />
+
+        <Button
+            android:id="@+id/btn_no"
+            style="@style/medium_text_style.bold"
+            android:layout_width="0dp"
+            android:layout_height="52dp"
+            android:layout_marginTop="24dp"
+            android:background="@android:color/transparent"
+            android:textColor="@color/text_basic_color"
+            app:layout_constraintEnd_toStartOf="@+id/btn_yes"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_barrier"
+            tools:text="아니요" />
+
+        <Button
+            android:id="@+id/btn_yes"
+            style="@style/medium_text_style.bold"
+            android:layout_width="0dp"
+            android:layout_height="52dp"
+            android:layout_marginTop="24dp"
+            android:background="@android:color/transparent"
+            android:textColor="@color/text_basic_color"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btn_no"
+            app:layout_constraintTop_toBottomOf="@id/btn_barrier"
+            tools:text="예" />
+
+        <ImageView
+            android:id="@+id/line"
+            android:layout_width="1dp"
+            android:layout_height="16dp"
+            android:background="#D8D8D8"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btn_no"
+            app:layout_constraintStart_toEndOf="@id/btn_yes"
+            app:layout_constraintTop_toTopOf="@id/btn_no" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

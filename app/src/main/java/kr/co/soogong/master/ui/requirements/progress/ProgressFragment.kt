@@ -12,7 +12,6 @@ import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentRequirementsProgressBinding
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.uiinterface.requirments.RequirementsBadge
-import kr.co.soogong.master.uiinterface.requirments.progress.detail.ProgressDetailActivityHelper
 import kr.co.soogong.master.util.EventObserver
 import timber.log.Timber
 
@@ -43,8 +42,10 @@ class ProgressFragment : BaseFragment<FragmentRequirementsProgressBinding>(
             lifecycleOwner = viewLifecycleOwner
 
             receivedList.adapter = ProgressAdapter(
+                cardClickListener = {
+                },
                 detailButtonClick = { keycode ->
-                    startActivity(ProgressDetailActivityHelper.getIntent(requireContext(), keycode))
+                    Unit
                 },
                 callButtonClick = { number ->
                     val intent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:$number"))
