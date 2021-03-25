@@ -10,7 +10,7 @@ import kr.co.soogong.master.data.category.Category
 import kr.co.soogong.master.data.category.Project
 import kr.co.soogong.master.data.user.SignUpInfo
 import kr.co.soogong.master.databinding.ActivitySignUpBinding
-import kr.co.soogong.master.ext.addTextView3
+import kr.co.soogong.master.util.extension.addTextView3
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.ui.sign.signup.SignUpViewModel.Companion.EMAIL_ERROR
 import kr.co.soogong.master.ui.sign.signup.SignUpViewModel.Companion.PASSWORD_CONFIRMATION_ERROR
@@ -53,36 +53,36 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>(
 
             id.addTextChangedListener(afterTextChanged = {
                 if (id.text.isNullOrEmpty()) {
-                    id.hintVisible = true
-                    id.hintText = "필수 입력 입니다"
+                    id.alertVisible = true
+                    id.alertText = "필수 입력 입니다"
                 } else {
-                    id.hintVisible = false
+                    id.alertVisible = false
                 }
             })
             password.addTextChangedListener(afterTextChanged = {
                 if (password.text.isNullOrEmpty()) {
-                    password.hintVisible = true
-                    password.hintText = "필수 입력 입니다"
+                    password.alertVisible = true
+                    password.alertText = "필수 입력 입니다"
                 } else {
-                    password.hintVisible = false
+                    password.alertVisible = false
                 }
             })
 
             confirmPassword.addTextChangedListener(afterTextChanged = {
                 if (confirmPassword.text.isNullOrEmpty()) {
-                    confirmPassword.hintVisible = true
-                    confirmPassword.hintText = "필수 입력 입니다"
+                    confirmPassword.alertVisible = true
+                    confirmPassword.alertText = "필수 입력 입니다"
                 } else {
-                    confirmPassword.hintVisible = false
+                    confirmPassword.alertVisible = false
                 }
             })
 
             username.addTextChangedListener(afterTextChanged = {
                 if (username.text.isNullOrEmpty()) {
-                    username.hintVisible = true
-                    username.hintText = "필수 입력 입니다"
+                    username.alertVisible = true
+                    username.alertText = "필수 입력 입니다"
                 } else {
-                    username.hintVisible = false
+                    username.alertVisible = false
                 }
             })
 
@@ -131,20 +131,20 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>(
                     finish()
                 }
                 EMAIL_ERROR -> {
-                    binding.id.hintText = data as? String
-                    binding.id.hintVisible = true
+                    binding.id.alertText = data as? String
+                    binding.id.alertVisible = true
                 }
                 PASSWORD_ERROR -> {
-                    binding.password.hintText = data as? String
-                    binding.password.hintVisible = true
+                    binding.password.alertText = data as? String
+                    binding.password.alertVisible = true
                 }
                 PASSWORD_CONFIRMATION_ERROR -> {
-                    binding.confirmPassword.hintText = data as? String
-                    binding.confirmPassword.hintVisible = true
+                    binding.confirmPassword.alertText = data as? String
+                    binding.confirmPassword.alertVisible = true
                 }
                 USER_NAME_ERROR -> {
-                    binding.username.hintText = data as? String
-                    binding.username.hintVisible = true
+                    binding.username.alertText = data as? String
+                    binding.username.alertVisible = true
                 }
             }
         })

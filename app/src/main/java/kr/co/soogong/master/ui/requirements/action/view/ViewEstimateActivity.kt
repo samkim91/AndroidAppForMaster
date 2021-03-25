@@ -5,8 +5,10 @@ import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ActivityViewEstimateBinding
-import kr.co.soogong.master.ext.addAdditionInfoView
+import kr.co.soogong.master.util.extension.addAdditionInfoView
 import kr.co.soogong.master.ui.base.BaseActivity
+import kr.co.soogong.master.ui.dialog.CustomDialog
+import kr.co.soogong.master.ui.dialog.DialogData.Companion.cancelDialogData
 import kr.co.soogong.master.uiinterface.image.ImageViewActivityHelper
 import kr.co.soogong.master.uiinterface.requirments.action.view.ViewEstimateActivityHelper
 import timber.log.Timber
@@ -61,6 +63,17 @@ class ViewEstimateActivity : BaseActivity<ActivityViewEstimateBinding>(
                 }
             )
 
+            refuse.setOnClickListener {
+                val dialog = CustomDialog(cancelDialogData(this@ViewEstimateActivity),
+                    yesClick = {
+
+                    },
+                    noClick = {
+
+                    }
+                )
+                dialog.show(supportFragmentManager, dialog.tag)
+            }
 
             viewModel.additionInfo.observe(this@ViewEstimateActivity, { additionInfo ->
                 additionInfo ?: return@observe

@@ -6,34 +6,31 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.BuildConfig
-import kr.co.soogong.master.domain.AppSharedPreferenceHelper
-import kr.co.soogong.master.domain.Repository
+import kr.co.soogong.master.domain.usecase.SetMasterKeyCodeUseCase
+import kr.co.soogong.master.network.AuthService
 import kr.co.soogong.master.ui.base.BaseViewModel
 import kr.co.soogong.master.util.Event
-import kr.co.soogong.master.util.InjectHelper
-import kr.co.soogong.master.util.http.HttpClient
 import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class SignInViewModel @Inject constructor(
-    private val repository: Repository,
-    private val httpClient: HttpClient
+    private val setMasterKeyCodeUseCase: SetMasterKeyCodeUseCase,
+    private val authService: AuthService
 ) : BaseViewModel() {
 
     fun getUserInfo(email: String, password: String) {
         if (BuildConfig.DEBUG) {
-            repository.setString(AppSharedPreferenceHelper.BRANCH_KEYCODE, "919dcdf215133b52")
+            setMasterKeyCodeUseCase("919dcdf215133b52")
             successToSignIn()
             return
         }
-        httpClient.login(email, password)
+        authService.login(email, password)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 Timber.tag(TAG).d("getUserInfo: $it")
-                InjectHelper.keyCode = it
-                repository.setString(AppSharedPreferenceHelper.BRANCH_KEYCODE, it)
+                setMasterKeyCodeUseCase(it)
                 successToSignIn()
             }, {
                 Timber.tag(TAG).w("getUserInfo: $it")

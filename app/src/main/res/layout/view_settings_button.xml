@@ -15,12 +15,41 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="24dp"
             android:layout_marginBottom="24dp"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:textColor="@color/primary_text_color"
+            app:layout_constrainedWidth="true"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/badge"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:title="비밀번호 변경"
-            tools:text="Title Text" />
+            tools:text="Title" />
+
+        <FrameLayout
+            android:id="@+id/badge"
+            android:layout_width="@dimen/badge_width"
+            android:layout_height="@dimen/badge_height"
+            android:layout_marginStart="4dp"
+            android:background="@drawable/badge_background"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/arrow_button"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toEndOf="@id/title"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/badge_text"
+                android:textColor="@color/basic_white"
+                android:textSize="@dimen/badge_text_size"
+                android:textStyle="bold" />
+        </FrameLayout>
 
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="match_parent"

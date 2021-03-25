@@ -10,17 +10,17 @@ import kr.co.soogong.master.data.estimation.AdditionalInfo
 import kr.co.soogong.master.data.estimation.Estimation
 import kr.co.soogong.master.data.estimation.ImagePath
 import kr.co.soogong.master.data.estimation.Transmissions
-import kr.co.soogong.master.domain.Repository
+import kr.co.soogong.master.domain.estimation.EstimationDao
 import kr.co.soogong.master.domain.requirements.EstimationStatus
 import kr.co.soogong.master.ui.base.BaseViewModel
 import java.util.*
 
 class ViewEstimateViewModel @AssistedInject constructor(
-    repository: Repository,
+    estimationDao: EstimationDao,
     @Assisted estimationId: String
 ) : BaseViewModel() {
 
-    private val _estimation = repository.getEstimation(estimationId)
+    private val _estimation = estimationDao.getItem(estimationId)
 
     val estimation: LiveData<Estimation?>
         get() = _estimation

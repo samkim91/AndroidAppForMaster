@@ -5,43 +5,59 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="68dp">
+        android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/title"
-            style="@style/medium_text_style.medium"
-            android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:gravity="center"
-            android:textColor="@color/primary_text_color"
+            style="@style/medium_text_style"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_basic_color"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Title" />
+            tools:text="견적가" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/sub_title"
+            style="@style/small_text_style"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_basic_color"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title"
+            tools:text="서브로 적는 내용들" />
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/detail"
-            style="@style/medium_text_style.regular"
+            style="@style/small_text_style"
             android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/shape_fill_white_background"
-            android:fontFamily="@font/regular"
-            android:gravity="center"
-            android:inputType="textWebPassword"
-            android:textColor="@color/primary_text_color"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/shape_fill_transparent_board_gray"
+            android:paddingStart="16dp"
+            android:paddingTop="10dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="10dp"
+            android:textColorHint="@color/text_hint_color"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/title" />
+            app:layout_constraintTop_toBottomOf="@id/sub_title"
+            tools:hint="숫자만 입력해주세요. (단위 : 원)" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/hint_text"
-            style="@style/small_text_style.regular"
-            android:layout_width="wrap_content"
+            android:id="@+id/alert"
+            style="@style/small_text_style"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textColor="#f57c00"
-            app:layout_constraintBottom_toBottomOf="@id/title"
+            android:layout_marginTop="4dp"
+            android:textColor="@color/text_alert_color"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/title"
-            tools:text="Hint" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/detail"
+            tools:text="견적은 1만원 이상으로 보내주세요." />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

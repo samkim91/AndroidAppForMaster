@@ -2,12 +2,12 @@ package kr.co.soogong.master.ui.mypage.password
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.widget.addTextChangedListener
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ActivityPasswordBinding
+import kr.co.soogong.master.util.extension.toast
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.util.EventObserver
 import timber.log.Timber
@@ -79,7 +79,7 @@ class PasswordActivity : BaseActivity<ActivityPasswordBinding>(
 
     private fun registerEventObserve() {
         viewModel.completeEvent.observe(this, EventObserver {
-            Toast.makeText(this@PasswordActivity, "비밀번호 변경 성공", Toast.LENGTH_LONG).show()
+            toast("비밀번호 변경 성공")
         })
     }
 

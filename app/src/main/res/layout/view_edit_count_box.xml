@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_fill_transparent_board_gray"
+        android:padding="20dp">
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/text"
+            style="@style/small_text_style"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:gravity="start"
+            android:minHeight="105dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:hint="취소 사유에 대해 더 하고 싶은 말이 있으시면 작성해주세요." />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/color_BDBDBD"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text"
+            tools:text="0/100" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

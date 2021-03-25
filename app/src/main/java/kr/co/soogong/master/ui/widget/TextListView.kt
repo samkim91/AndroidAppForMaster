@@ -14,7 +14,7 @@ class TextListView @JvmOverloads constructor(
     attributeSet: AttributeSet? = null,
     defStyle: Int = 0
 ) : ConstraintLayout(context, attributeSet, defStyle) {
-    private var binding: ViewTextListBinding =
+    private var binding =
         ViewTextListBinding.inflate(LayoutInflater.from(context), this, true)
 
     fun setList(list: List<String>?) {

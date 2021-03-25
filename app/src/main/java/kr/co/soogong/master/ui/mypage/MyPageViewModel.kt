@@ -9,20 +9,26 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.launch
 import kr.co.soogong.master.data.notice.Notice
-import kr.co.soogong.master.domain.AppSharedPreferenceHelper
-import kr.co.soogong.master.domain.Repository
+import kr.co.soogong.master.domain.estimation.EstimationDao
+import kr.co.soogong.master.domain.usecase.DoResetUseCase
+import kr.co.soogong.master.domain.usecase.GetMasterKeyCodeUseCase
+import kr.co.soogong.master.domain.usecase.SetMasterKeyCodeUseCase
+import kr.co.soogong.master.domain.user.UserDao
+import kr.co.soogong.master.network.NoticeService
+import kr.co.soogong.master.network.UserService
 import kr.co.soogong.master.ui.base.BaseViewModel
-import kr.co.soogong.master.util.InjectHelper
-import kr.co.soogong.master.util.http.HttpClient
 import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class MyPageViewModel @Inject constructor(
-    private val repository: Repository,
-    private val httpClient: HttpClient
+    private val userDao: UserDao,
+    private val userService: UserService,
+    private val noticeService: NoticeService,
+    private val getMasterKeyCodeUseCase: GetMasterKeyCodeUseCase,
+    private val doResetUseCase: DoResetUseCase
 ) : BaseViewModel() {
-    private val _userInfo = repository.getUserInfo(InjectHelper.keyCode ?: "")
+    private val _userInfo = userDao.getItem(getMasterKeyCodeUseCase() ?: "")
 
     private val _list: MutableLiveData<List<Notice>> = MutableLiveData(emptyList())
     val list: LiveData<List<Notice>>
@@ -47,12 +53,12 @@ class MyPageViewModel @Inject constructor(
         }
 
     fun requestUserProfile() {
-        httpClient.getUserProfile(InjectHelper.keyCode)
+        userService.getUserProfile(getMasterKeyCodeUseCase())
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ userInfo ->
                 viewModelScope.launch {
-                    repository.insertUserInfo(userInfo)
+                    userDao.insert(userInfo)
                 }
                 Timber.tag(TAG).d("requestUserProfile: $userInfo")
             }, {
@@ -63,15 +69,13 @@ class MyPageViewModel @Inject constructor(
 
     fun actionLogout() {
         viewModelScope.launch {
-            repository.removeAllRequirement()
-            repository.removeAllUserInfo()
-            repository.setString(AppSharedPreferenceHelper.BRANCH_KEYCODE, "")
+            doResetUseCase()
             complete()
         }
     }
 
     fun getNoticeList() {
-        httpClient.getNoticeList()
+        noticeService.getNoticeList()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({

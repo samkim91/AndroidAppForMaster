@@ -24,7 +24,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/action_bar"
-            bind:photo_list="@{vm.imagePath}" />
+            bind:photo_list="@{vm.estimation.images}" />
 
         <View
             android:id="@+id/viewFadingEdge"

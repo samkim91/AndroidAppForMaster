@@ -6,21 +6,21 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.notice.Notice
+import kr.co.soogong.master.network.NoticeService
 import kr.co.soogong.master.ui.base.BaseViewModel
-import kr.co.soogong.master.util.http.HttpClient
 import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class NoticeViewModel @Inject constructor(
-    private val httpClient: HttpClient
+    private val noticeService: NoticeService
 ) : BaseViewModel() {
     private val _list: MutableLiveData<List<Notice>> = MutableLiveData(emptyList())
     val list: LiveData<List<Notice>>
         get() = _list
 
     fun getNoticeList() {
-        httpClient.getNoticeList()
+        noticeService.getNoticeList()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({

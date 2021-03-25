@@ -37,7 +37,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:overScrollMode="never">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -69,13 +70,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/my_page_master_label_margin_start"
                 android:layout_marginEnd="@dimen/my_page_master_label_margin_top"
-                android:text="@{vm.name}"
+                android:text="@string/my_page_master_label"
                 android:textColor="@color/text_primary_color"
                 app:layout_constraintBottom_toBottomOf="@id/master_store_name"
                 app:layout_constraintEnd_toStartOf="@id/account_setting"
                 app:layout_constraintStart_toEndOf="@id/master_store_name"
-                app:layout_constraintTop_toTopOf="@id/master_store_name"
-                tools:text="마스터" />
+                app:layout_constraintTop_toTopOf="@id/master_store_name" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/master_email"
