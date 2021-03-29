@@ -40,47 +40,46 @@ class PasswordActivity : BaseActivity<ActivityPasswordBinding>(
 
             password.addTextChangedListener(afterTextChanged = {
                 if (!password.text.isNullOrEmpty()) {
-                    passwordAlert.visibility = View.GONE
+                    hidePasswordAlert()
                 } else {
-                    passwordAlert.text = getString(R.string.password_empty_alert_text)
-                    passwordAlert.visibility = View.VISIBLE
+                    showPasswordAlert(getString(R.string.password_empty_alert_text))
                 }
             })
 
             passwordChange.addTextChangedListener(afterTextChanged = {
                 if (!passwordChange.text.isNullOrEmpty()) {
-                    passwordAlert.visibility = View.GONE
+                    hidePasswordAlert()
                 } else {
-                    passwordAlert.text = getString(R.string.password_empty_alert_text)
-                    passwordAlert.visibility = View.VISIBLE
+                    showPasswordAlert(getString(R.string.password_empty_alert_text))
                 }
             })
-
-            setChangeClick {
-                val password = password.text?.toString()
-                val confirmPassword = passwordCheck.text?.toString()
-
-                if (password.isNullOrEmpty() || confirmPassword.isNullOrEmpty()) {
-                    passwordAlert.text = getString(R.string.password_empty_alert_text)
-                    passwordAlert.visibility = View.VISIBLE
-                    return@setChangeClick
-                }
-
-                if (password != confirmPassword) {
-                    passwordAlert.text = getString(R.string.password_compare_alert_text)
-                    passwordAlert.visibility = View.VISIBLE
-                    return@setChangeClick
-                }
-
-                viewModel.resetPassword(password, confirmPassword)
-            }
         }
     }
 
     private fun registerEventObserve() {
-        viewModel.completeEvent.observe(this, EventObserver {
-            toast("비밀번호 변경 성공")
+        viewModel.action.observe(this, EventObserver { event ->
+            when (event) {
+                PasswordViewModel.SUCCESS_PASSWORD -> {
+                    toast("비밀번호 변경 성공")
+                }
+                PasswordViewModel.FAIL_PASSWORD -> {
+                    showPasswordAlert(getString(R.string.password_empty_alert_text))
+                }
+                PasswordViewModel.FAIL_PASSWORD_NOT_MATCH -> {
+                    showPasswordAlert(getString(R.string.password_compare_alert_text))
+                }
+            }
+
         })
+    }
+
+    private fun showPasswordAlert(message: String) {
+        binding.passwordAlert.text = message
+        binding.passwordAlert.visibility = View.VISIBLE
+    }
+
+    private fun hidePasswordAlert() {
+        binding.passwordAlert.visibility = View.GONE
     }
 
     companion object {

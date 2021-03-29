@@ -2,16 +2,14 @@ package kr.co.soogong.master.network
 
 import com.google.gson.JsonObject
 import io.reactivex.Single
+import kr.co.soogong.master.contract.HttpContract
 import retrofit2.http.Body
 import retrofit2.http.Header
 import retrofit2.http.POST
 
 interface AuthInterface {
     @POST(HttpContract.LOGIN)
-    fun login(@Body body: HashMap<String, HashMap<String, String>>): Single<JsonObject>
-
-    @POST(HttpContract.FIND)
-    fun findInfo(@Body body: HashMap<String, String?>): Single<Response>
+    fun login(@Body body: HashMap<String, HashMap<String, String?>>): Single<JsonObject>
 
     @POST(HttpContract.SIGN_UP)
     fun signup(@Body body: HashMap<String, HashMap<String, String>>): Single<JsonObject>
@@ -23,8 +21,11 @@ interface AuthInterface {
     ): Single<JsonObject>
 
     @POST(HttpContract.PASSWORD)
-    fun resetPassword(@Body body: HashMap<String, String?>): Single<Response>
+    fun passwordChange(@Body body: HashMap<String, String?>): Single<Response>
 
     @POST(HttpContract.FCM_UPDATE)
     fun updateFCMToken(@Body body: HashMap<String, String?>): Single<Response>
+
+    @POST(HttpContract.FIND)
+    fun findPassword(@Body body: HashMap<String, String?>): Single<Response>
 }

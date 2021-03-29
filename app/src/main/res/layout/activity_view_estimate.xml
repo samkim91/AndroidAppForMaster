@@ -67,7 +67,7 @@
                         android:layout_marginEnd="20dp"
                         android:ellipsize="end"
                         android:lines="1"
-                        android:text="@{vm.address}"
+                        android:text="@{vm.estimation.address}"
                         android:textColor="@color/primary_text_color"
                         app:layout_constrainedWidth="true"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -86,7 +86,7 @@
                         android:layout_marginEnd="20dp"
                         android:ellipsize="end"
                         android:lines="1"
-                        android:text="@{vm.project}"
+                        android:text="@{vm.estimation.project}"
                         android:textColor="@color/primary_text_color"
                         app:layout_constrainedWidth="true"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -105,7 +105,7 @@
                         android:textColor="@color/tertiary_text_color"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/type"
-                        bind:start_date="@{vm.createdAt}"
+                        bind:start_date="@{vm.estimation.createdAt}"
                         tools:text="최초 요청일 : 2021.01.11 - 13:20" />
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -119,7 +119,7 @@
                         android:textColor="@color/text_basic_color"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/first_time"
-                        bind:visible="@{vm.additionInfo}" />
+                        bind:visible="@{vm.estimation.additionalInfo}" />
 
                     <LinearLayout
                         android:id="@+id/custom_frame"
@@ -144,7 +144,7 @@
                         android:textColor="@color/text_primary_color"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/custom_frame"
-                        bind:visible="@{vm.imageList}" />
+                        bind:visible="@{vm.estimation.images}" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/photo_list"
@@ -158,8 +158,8 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/photo_title"
                         app:spanCount="4"
-                        bind:photo_list="@{vm.imageList}"
-                        bind:visible="@{vm.imageList}" />
+                        bind:photo_list="@{vm.estimation.images}"
+                        bind:visible="@{vm.estimation.images}" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </ScrollView>
@@ -207,7 +207,7 @@
                 app:layout_constraintEnd_toEndOf="@id/end_time_background"
                 app:layout_constraintStart_toEndOf="@id/end_time_label"
                 app:layout_constraintTop_toTopOf="@id/end_time_background"
-                bind:end_date_2="@{vm.createdAt}"
+                bind:end_date_2="@{vm.estimation.createdAt}"
                 tools:text="2022.01.11 - 13:20" />
 
             <androidx.appcompat.widget.AppCompatButton

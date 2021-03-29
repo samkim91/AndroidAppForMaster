@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.domain.usecase.GetMasterKeyCodeUseCase
 import kr.co.soogong.master.uiinterface.main.MainActivityHelper
-import kr.co.soogong.master.uiinterface.sign.SignMainActivityHelper
+import kr.co.soogong.master.uiinterface.auth.SignMainActivityHelper
 import timber.log.Timber
 import javax.inject.Inject
 

@@ -1,12 +1,11 @@
 package kr.co.soogong.master.domain.usecase
 
 import android.content.SharedPreferences
-import kr.co.soogong.master.domain.AppSharedPreferenceContract
+import dagger.Reusable
+import kr.co.soogong.master.contract.AppSharedPreferenceContract
 import javax.inject.Inject
-import javax.inject.Singleton
 
-
-@Singleton
+@Reusable
 class SetMasterKeyCodeUseCase @Inject constructor(
     private val sharedPreferences: SharedPreferences
 ) {

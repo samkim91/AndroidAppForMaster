@@ -7,7 +7,7 @@
     <data>
 
         <variable
-            name="vm"
+            name="data"
             type="kr.co.soogong.master.domain.requirements.RequirementCard" />
 
         <variable
@@ -33,7 +33,7 @@
             android:textColor="@color/color_1FC472"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            bind:estimation_status="@{vm.status}"
+            bind:estimation_status="@{data.status}"
             tools:text="견적요청" />
 
         <FrameLayout
@@ -61,7 +61,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/requirement_card_status_detail_margin_top"
-            android:text="@{vm.statusDetailText}"
+            android:text="@{data.statusDetailText}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="견적서를 작성해주세요" />
@@ -84,7 +84,7 @@
             android:layout_marginTop="@dimen/requirement_card_request_id_margin_top"
             android:ellipsize="end"
             android:lines="1"
-            android:text="@{vm.keyCode}"
+            android:text="@{data.keyCode}"
             android:textColor="@color/text_primary_color"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/line"
@@ -99,7 +99,7 @@
             android:layout_marginEnd="@dimen/requirement_card_location_margin_end"
             android:ellipsize="end"
             android:lines="1"
-            android:text="@{vm.address}"
+            android:text="@{data.address}"
             android:textColor="@color/primary_text_color"
             app:layout_constrainedWidth="true"
             app:layout_constraintEnd_toStartOf="@id/arrow_button"
@@ -117,7 +117,7 @@
             android:layout_marginEnd="@dimen/requirement_card_type_margin_end"
             android:ellipsize="end"
             android:lines="1"
-            android:text="@{vm.project}"
+            android:text="@{data.project}"
             android:textColor="@color/primary_text_color"
             app:layout_constrainedWidth="true"
             app:layout_constraintEnd_toStartOf="@id/arrow_button"
@@ -135,7 +135,7 @@
             android:textColor="@color/tertiary_text_color"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/type"
-            bind:start_date="@{vm.createdAt}"
+            bind:start_date="@{data.createdAt}"
             tools:text="최초 요청일 : 2021.01.11 - 13:20" />
 
         <androidx.appcompat.widget.AppCompatImageView

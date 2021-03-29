@@ -1,4 +1,4 @@
-package kr.co.soogong.master.ui.sign.signup
+package kr.co.soogong.master.ui.auth.signup
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -6,16 +6,16 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.user.SignUpInfo
-import kr.co.soogong.master.network.AuthService
+import kr.co.soogong.master.domain.usecase.DoSignUpUseCase
+import kr.co.soogong.master.network.RxException
 import kr.co.soogong.master.ui.base.BaseViewModel
 import kr.co.soogong.master.util.Event
-import kr.co.soogong.master.network.RxException
 import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class SignUpViewModel @Inject constructor(
-    private val authService: AuthService
+    private val doSignUpUseCase: DoSignUpUseCase
 ) : BaseViewModel() {
     var area: String? = null
     var location: String? = null
@@ -29,7 +29,7 @@ class SignUpViewModel @Inject constructor(
     }
 
     fun signUp(signUpInfo: SignUpInfo) {
-        authService.actionSignUp(signUpInfo)
+        doSignUpUseCase(signUpInfo)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({

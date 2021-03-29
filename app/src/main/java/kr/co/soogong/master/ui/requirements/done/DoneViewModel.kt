@@ -2,47 +2,25 @@ package kr.co.soogong.master.ui.requirements.done
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.rxkotlin.subscribeBy
-import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.launch
-import kr.co.soogong.master.domain.estimation.EstimationDao
 import kr.co.soogong.master.domain.requirements.RequirementCard
-import kr.co.soogong.master.domain.usecase.GetMasterKeyCodeUseCase
-import kr.co.soogong.master.network.EstimationsService
+import kr.co.soogong.master.domain.usecase.GetEstimationListUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
-import kr.co.soogong.master.ui.requirements.received.ReceivedViewModel
 import kr.co.soogong.master.util.Event
 import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class DoneViewModel @Inject constructor(
-    private val estimationDao: EstimationDao,
-    private val estimationsService: EstimationsService,
-    private val getMasterKeyCodeUseCase: GetMasterKeyCodeUseCase
+    private val getEstimationListUseCase: GetEstimationListUseCase
 ) : BaseViewModel() {
     private val _emptyList = MutableLiveData(true)
     val emptyList: LiveData<Boolean>
         get() = _emptyList
 
-    private val _doneList: LiveData<List<RequirementCard>> =
-        estimationDao.getAllList().map { list ->
-            val ret = list.map { RequirementCard.from(it) }
-
-            if (ret.isNullOrEmpty()) {
-                _emptyList.value = true
-                updatedBadge(0)
-                return@map emptyList<RequirementCard>()
-            } else {
-                _emptyList.value = false
-                updatedBadge(ret.size)
-                return@map ret
-            }
-        }
+    private val _doneList = MutableLiveData<List<RequirementCard>>(emptyList())
     val doneList: LiveData<List<RequirementCard>>
         get() = _doneList
 
@@ -52,19 +30,23 @@ class DoneViewModel @Inject constructor(
 
     private fun updatedBadge(badgeCount: Int) {
         Timber.tag(TAG).d("updatedBadge: $badgeCount")
-        _event.value = Event(ReceivedViewModel.BADGE_UPDATE to badgeCount)
+        _event.value = Event(BADGE_UPDATE to badgeCount)
     }
 
     fun requestList() {
-        estimationsService.getEstimationList(getMasterKeyCodeUseCase())
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeBy {
-                viewModelScope.launch {
-                    estimationDao.insert(it)
-                }
+        viewModelScope.launch {
+            val list = getEstimationListUseCase()
+
+            if (list.isNullOrEmpty()) {
+                _emptyList.value = true
+                updatedBadge(0)
+            } else {
+                _emptyList.value = false
+                updatedBadge(list.size)
             }
-            .addToDisposable()
+
+            _doneList.value = list
+        }
     }
 
     companion object {

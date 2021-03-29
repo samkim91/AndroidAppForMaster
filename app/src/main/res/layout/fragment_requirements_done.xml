@@ -24,6 +24,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            bind:done_list="@{vm.doneList}"
             tools:listitem="@layout/view_holder_requirement_item" />
 
         <androidx.appcompat.widget.AppCompatImageView

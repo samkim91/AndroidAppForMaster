@@ -28,19 +28,19 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.sign.SignMainActivity"
+            android:name=".ui.auth.SignMainActivity"
             android:launchMode="singleTask" />
         <activity
-            android:name=".ui.sign.signup.SignUpActivity"
+            android:name=".ui.auth.signup.SignUpActivity"
             android:launchMode="singleTask" />
         <activity
-            android:name=".ui.sign.signup.AddressActivity"
+            android:name=".ui.auth.signup.AddressActivity"
             android:launchMode="singleTask" />
         <activity
-            android:name=".ui.sign.signin.SignInActivity"
+            android:name=".ui.auth.signin.SignInActivity"
             android:launchMode="singleTask" />
         <activity
-            android:name=".ui.sign.find.FindInfoActivity"
+            android:name=".ui.auth.find.FindPasswordActivity"
             android:launchMode="singleTask" />
         <activity
             android:name=".ui.main.MainActivity"

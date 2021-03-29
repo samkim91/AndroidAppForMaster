@@ -1,21 +1,19 @@
 package kr.co.soogong.master.di
 
 import android.content.Context
+import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
-import android.security.keystore.KeyGenParameterSpec
-import android.security.keystore.KeyProperties
 import androidx.room.Room
-import androidx.security.crypto.EncryptedSharedPreferences
-import androidx.security.crypto.MasterKey
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import kr.co.soogong.master.BuildConfig
+import kr.co.soogong.master.contract.AppDatabaseContract
+import kr.co.soogong.master.contract.AppSharedPreferenceContract
+import kr.co.soogong.master.contract.HttpContract
 import kr.co.soogong.master.domain.AppDatabase
-import kr.co.soogong.master.domain.AppSharedPreferenceContract
-import kr.co.soogong.master.network.HttpContract
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -79,7 +77,11 @@ class AppModule {
     @Provides
     @Singleton
     fun provideAppDatabase(@ApplicationContext context: Context): AppDatabase {
-        return Room.databaseBuilder(context, AppDatabase::class.java, AppDatabase.DATABASE_NAME)
+        return Room.databaseBuilder(
+            context,
+            AppDatabase::class.java,
+            AppDatabaseContract.DATABASE_NAME
+        )
             .fallbackToDestructiveMigration()
             .allowMainThreadQueries()
             .build()
@@ -88,8 +90,12 @@ class AppModule {
     @Provides
     @Singleton
     fun provideAppSharedPreference(@ApplicationContext context: Context): SharedPreferences {
-        val fileName = AppSharedPreferenceContract.PREFERENCES_NAME
-
+        return context.getSharedPreferences(
+            AppSharedPreferenceContract.PREFERENCES_NAME,
+            MODE_PRIVATE
+        )
+        // TODO : 암호화 방법을 이용시 화면 로딩시 문제가 발생함
+        /*
         val keyGenParameterSpec = KeyGenParameterSpec.Builder(
             MasterKey.DEFAULT_MASTER_KEY_ALIAS,
             KeyProperties.PURPOSE_ENCRYPT or KeyProperties.PURPOSE_DECRYPT
@@ -105,10 +111,11 @@ class AppModule {
 
         return EncryptedSharedPreferences.create(
             context,
-            fileName,
+            AppSharedPreferenceContract.PREFERENCES_NAME,
             masterKey,
             EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
             EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
         )
+         */
     }
 }

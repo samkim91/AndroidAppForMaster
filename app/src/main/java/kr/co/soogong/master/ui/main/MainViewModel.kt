@@ -4,16 +4,14 @@ import com.google.firebase.messaging.FirebaseMessaging
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import kr.co.soogong.master.domain.usecase.GetMasterKeyCodeUseCase
-import kr.co.soogong.master.network.AuthService
+import kr.co.soogong.master.domain.usecase.SetFCMTokenUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val authService: AuthService,
-    private val getMasterKeyCodeUseCase: GetMasterKeyCodeUseCase
+    private val setFCMTokenUseCase: SetFCMTokenUseCase
 ) : BaseViewModel() {
     fun registerFCM() {
         FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
@@ -28,7 +26,7 @@ class MainViewModel @Inject constructor(
     }
 
     private fun sendRegistrationToServer(token: String?) {
-        authService.updateFCMToken(getMasterKeyCodeUseCase(), fcmKey = token)
+        setFCMTokenUseCase(token)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({

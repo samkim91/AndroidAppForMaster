@@ -2,91 +2,97 @@ package kr.co.soogong.master.ui.mypage
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.launch
 import kr.co.soogong.master.data.notice.Notice
-import kr.co.soogong.master.domain.estimation.EstimationDao
+import kr.co.soogong.master.data.user.User
 import kr.co.soogong.master.domain.usecase.DoResetUseCase
-import kr.co.soogong.master.domain.usecase.GetMasterKeyCodeUseCase
-import kr.co.soogong.master.domain.usecase.SetMasterKeyCodeUseCase
-import kr.co.soogong.master.domain.user.UserDao
-import kr.co.soogong.master.network.NoticeService
-import kr.co.soogong.master.network.UserService
+import kr.co.soogong.master.domain.usecase.GetNoticeListUseCase
+import kr.co.soogong.master.domain.usecase.GetUserInfoUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class MyPageViewModel @Inject constructor(
-    private val userDao: UserDao,
-    private val userService: UserService,
-    private val noticeService: NoticeService,
-    private val getMasterKeyCodeUseCase: GetMasterKeyCodeUseCase,
-    private val doResetUseCase: DoResetUseCase
+    private val getUserInfoUseCase: GetUserInfoUseCase,
+    private val getNoticeListUseCase: GetNoticeListUseCase,
+    private val doResetUseCase: DoResetUseCase,
 ) : BaseViewModel() {
-    private val _userInfo = userDao.getItem(getMasterKeyCodeUseCase() ?: "")
+    private val _user = MutableLiveData<User?>(null)
+    val user: LiveData<User?>
+        get() = _user
 
-    private val _list: MutableLiveData<List<Notice>> = MutableLiveData(emptyList())
-    val list: LiveData<List<Notice>>
-        get() = _list
-
-    val name: LiveData<String>
-        get() = _userInfo.map { it?.name ?: "고객님" }
-
-    val email: LiveData<String?>
-        get() = _userInfo.map {
-            when {
-                it?.usingPlan.isNullOrEmpty() -> {
-                    ""
-                }
-                it?.usingPlan == "free" -> {
-                    "무료 플랜"
-                }
-                else -> {
-                    "유료 플랜"
-                }
-            }
-        }
-
-    fun requestUserProfile() {
-        userService.getUserProfile(getMasterKeyCodeUseCase())
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({ userInfo ->
-                viewModelScope.launch {
-                    userDao.insert(userInfo)
-                }
-                Timber.tag(TAG).d("requestUserProfile: $userInfo")
-            }, {
-                Timber.tag(TAG).e("requestUserProfile: $it")
-            })
-            .addToDisposable()
-    }
-
-    fun actionLogout() {
+    private fun getUserProfile() {
         viewModelScope.launch {
-            doResetUseCase()
-            complete()
+            _user.value = getUserInfoUseCase()
         }
     }
 
-    fun getNoticeList() {
-        noticeService.getNoticeList()
+    private val _noticeList: MutableLiveData<List<Notice>> = MutableLiveData(emptyList())
+    val noticeList: LiveData<List<Notice>>
+        get() = _noticeList
+
+    private fun getNoticeList() {
+        getNoticeListUseCase()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                _list.postValue(it.sortedByDescending { it.date }.takeLast(3))
+                _noticeList.postValue(it.sortedByDescending { it.date }.takeLast(3))
             }, {
                 Timber.tag(TAG).w("getNoticeList: $it")
             })
             .addToDisposable()
     }
 
+    fun initialize() {
+        getNoticeList()
+        getUserProfile()
+    }
+
+    fun alarmSettingAction() {
+        Timber.tag(TAG).i("Alarm Setting Button")
+        setAction(ALARM)
+    }
+
+    fun accountSettingAction() {
+        Timber.tag(TAG).i("Account Setting Button")
+        setAction(ACCOUNT)
+    }
+
+    fun noticeViewAction() {
+        Timber.tag(TAG).i("Notice View Button")
+        setAction(NOTICE)
+    }
+
+    fun callAction() {
+        Timber.tag(TAG).i("CALL Button")
+        setAction(CALL)
+    }
+
+    fun kakaoAction() {
+        Timber.tag(TAG).i("KAKAO Button")
+        setAction(KAKAO)
+    }
+
+    fun logout() {
+        Timber.tag(TAG).i("Logout Button")
+        viewModelScope.launch {
+            doResetUseCase()
+            setAction(LOGOUT)
+        }
+    }
+
     companion object {
         private const val TAG = "MyPageViewModel"
+        const val ACCOUNT = "ACCOUNT"
+        const val ALARM = "ALARM"
+        const val NOTICE = "NOTICE"
+        const val CALL = "CALL"
+        const val KAKAO = "KAKAO"
+        const val LOGOUT = "LOGOUT"
     }
 }

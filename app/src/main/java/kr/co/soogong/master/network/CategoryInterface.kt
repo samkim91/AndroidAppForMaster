@@ -2,6 +2,7 @@ package kr.co.soogong.master.network
 
 import com.google.gson.JsonObject
 import io.reactivex.Single
+import kr.co.soogong.master.contract.HttpContract
 import retrofit2.http.GET
 import retrofit2.http.Path
 

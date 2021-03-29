@@ -1,8 +1,8 @@
-package kr.co.soogong.master.uiinterface.sign
+package kr.co.soogong.master.uiinterface.auth
 
 import android.content.Context
 import android.content.Intent
-import kr.co.soogong.master.ui.sign.SignMainActivity
+import kr.co.soogong.master.ui.auth.SignMainActivity
 
 object SignMainActivityHelper {
     fun getIntent(context: Context): Intent {

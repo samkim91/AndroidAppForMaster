@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,6 +13,7 @@ import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentRequirementsProgressBinding
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.uiinterface.requirments.RequirementsBadge
+import kr.co.soogong.master.uiinterface.requirments.action.ActionViewHelper
 import kr.co.soogong.master.util.EventObserver
 import timber.log.Timber
 
@@ -39,10 +41,18 @@ class ProgressFragment : BaseFragment<FragmentRequirementsProgressBinding>(
 
         bind {
             vm = viewModel
+
             lifecycleOwner = viewLifecycleOwner
 
-            receivedList.adapter = ProgressAdapter(
-                cardClickListener = {
+            progressList.adapter = ProgressAdapter(
+                cardClickListener = { keycode, estimationStatus ->
+                    startActivity(
+                        ActionViewHelper.getIntent(
+                            requireContext(),
+                            keycode,
+                            estimationStatus
+                        )
+                    )
                 },
                 detailButtonClick = { keycode ->
                     Unit
@@ -60,7 +70,10 @@ class ProgressFragment : BaseFragment<FragmentRequirementsProgressBinding>(
                 context,
                 LinearLayoutManager(context).orientation
             )
-            receivedList.addItemDecoration(dividerItemDecoration)
+            ResourcesCompat.getDrawable(resources, R.drawable.divider, null)?.let {
+                dividerItemDecoration.setDrawable(it)
+            }
+            progressList.addItemDecoration(dividerItemDecoration)
         }
     }
 

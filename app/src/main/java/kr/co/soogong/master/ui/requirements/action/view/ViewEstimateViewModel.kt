@@ -6,63 +6,23 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.map
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
-import kr.co.soogong.master.data.estimation.AdditionalInfo
 import kr.co.soogong.master.data.estimation.Estimation
-import kr.co.soogong.master.data.estimation.ImagePath
-import kr.co.soogong.master.data.estimation.Transmissions
-import kr.co.soogong.master.domain.estimation.EstimationDao
 import kr.co.soogong.master.domain.requirements.EstimationStatus
+import kr.co.soogong.master.domain.usecase.GetEstimationUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
-import java.util.*
 
 class ViewEstimateViewModel @AssistedInject constructor(
-    estimationDao: EstimationDao,
+    getEstimationUseCase: GetEstimationUseCase,
     @Assisted estimationId: String
 ) : BaseViewModel() {
 
-    private val _estimation = estimationDao.getItem(estimationId)
-
+    private val _estimation = getEstimationUseCase(estimationId)
     val estimation: LiveData<Estimation?>
         get() = _estimation
-
-    val id: LiveData<String?>
-        get() = _estimation.map {
-            it?.keycode
-        }
 
     val status: LiveData<EstimationStatus>
         get() = _estimation.map {
             EstimationStatus.getStatus(it?.status, it?.transmissions)
-        }
-
-    val address: LiveData<String?>
-        get() = _estimation.map {
-            it?.address
-        }
-
-    val project: LiveData<String?>
-        get() = _estimation.map {
-            it?.project
-        }
-
-    val createdAt: LiveData<Date>
-        get() = _estimation.map {
-            Date(it?.createdAt ?: System.currentTimeMillis())
-        }
-
-    val additionInfo: LiveData<List<AdditionalInfo>?>
-        get() = _estimation.map {
-            it?.additionalInfo
-        }
-
-    val imageList: LiveData<List<ImagePath>?>
-        get() = _estimation.map {
-            it?.images
-        }
-
-    val transmissions: LiveData<Transmissions?>
-        get() = _estimation.map {
-            it?.transmissions
         }
 
     @dagger.assisted.AssistedFactory
@@ -74,7 +34,7 @@ class ViewEstimateViewModel @AssistedInject constructor(
         private const val TAG = "ViewEstimateViewModel"
 
         fun provideFactory(
-            assistedFactory: ViewEstimateViewModel.AssistedFactory,
+            assistedFactory: AssistedFactory,
             estimationId: String
         ): ViewModelProvider.Factory = object : ViewModelProvider.Factory {
             @Suppress("UNCHECKED_CAST")
