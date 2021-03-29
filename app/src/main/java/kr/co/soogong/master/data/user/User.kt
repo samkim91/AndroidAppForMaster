@@ -15,8 +15,11 @@ data class User(
     @SerializedName("keycode")
     val keycode: String,
 
-    @SerializedName("using_plan")
-    val usingPlan: String,
+    @SerializedName("master_name")
+    val masterName: String?,
+
+    @SerializedName("name")
+    val name: String,
 
     @SerializedName("address")
     val address: String,
@@ -24,42 +27,39 @@ data class User(
     @SerializedName("detail_address")
     val detailAddress: String,
 
+    @SerializedName("description")
+    val description: String,
+
     @SerializedName("average_star_count")
     val starCount: Double,
 
     @SerializedName("reviews_count")
     val reviewsCount: Int,
 
-    @SerializedName("categories")
+    @SerializedName("categories_to_arr")
     val categories: List<String>,
 
-    @SerializedName("description")
-    val description: String,
+    @SerializedName("projects_to_arr")
+    val projects: List<String>,
 
     @SerializedName("introduction")
-    val introduction: String?,
-
-    @SerializedName("name")
-    val name: String,
-
-    @SerializedName("positions")
-    val positions: List<String>
+    val introduction: String?
 ) : Parcelable {
     companion object {
         fun fromJson(jsonObject: JsonObject): User {
-            val item = jsonObject.get("attributes").asJsonObject
+            val item = jsonObject.get("data").asJsonObject
             return User(
                 keycode = item.get("keycode").asString,
-                usingPlan = item.get("using_plan").asString,
+                masterName = item.getNullable("master_name")?.asString,
+                name = item.get("name").asString,
                 address = item.get("address").asString,
                 detailAddress = item.get("detail_address").asString,
-                starCount = item.get("average_star_count").asDouble,
-                categories = item.get("categories").asJsonArray.map { it.asString },
                 description = item.get("description").asString,
-                introduction = item.getNullable("introduction")?.asString,
-                name = item.get("name").asString,
+                starCount = item.get("average_star_count").asDouble,
                 reviewsCount = item.get("reviews_count").asInt,
-                positions = item.get("positions").asJsonArray.map { it.asString }
+                categories = item.get("categories_to_arr").asJsonArray.map { it.asString },
+                projects = item.get("projects_to_arr").asJsonArray.map { it.asString },
+                introduction = item.getNullable("introduction")?.asString
             )
         }
     }

@@ -20,6 +20,7 @@ object HttpContract {
 
     //region User
     const val GET_USER_PROFILE = "api/v1/branches/search/{keycode}"
+    const val GET_USER_PROFILE_V2 = "api/v2/branches/info/{keycode}"
     //endregion
 
     //region Notice
