@@ -4,20 +4,20 @@ import androidx.lifecycle.MutableLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import kr.co.soogong.master.network.AuthService
+import kr.co.soogong.master.domain.usecase.DoFindPasswordUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class FindPasswordViewModel @Inject constructor(
-    private val authService: AuthService
+    private val doFindPasswordUseCase: DoFindPasswordUseCase
 ) : BaseViewModel() {
     val email = MutableLiveData<String>()
 
     fun findInfo() {
         Timber.tag(TAG).d("findInfo: ")
-        authService.findInfo(email.value)
+        doFindPasswordUseCase(email.value)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
