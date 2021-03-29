@@ -7,6 +7,6 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface UserInterface {
-    @GET(HttpContract.GET_USER_PROFILE)
+    @GET(HttpContract.GET_USER_PROFILE_V2)
     suspend fun getUserProfile(@Path("keycode") keycode: String?): JsonObject
 }
