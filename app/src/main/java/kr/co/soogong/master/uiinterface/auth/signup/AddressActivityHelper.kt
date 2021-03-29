@@ -1,8 +1,8 @@
-package kr.co.soogong.master.uiinterface.sign.signup
+package kr.co.soogong.master.uiinterface.auth.signup
 
 import android.content.Context
 import android.content.Intent
-import kr.co.soogong.master.ui.sign.signup.AddressActivity
+import kr.co.soogong.master.ui.auth.signup.AddressActivity
 
 object AddressActivityHelper {
     fun getIntent(context: Context): Intent {

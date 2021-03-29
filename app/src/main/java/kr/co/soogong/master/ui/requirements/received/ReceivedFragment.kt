@@ -11,7 +11,7 @@ import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentRequirementsReceivedBinding
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.uiinterface.requirments.RequirementsBadge
-import kr.co.soogong.master.uiinterface.requirments.action.view.ViewEstimateActivityHelper
+import kr.co.soogong.master.uiinterface.requirments.action.ActionViewHelper
 import kr.co.soogong.master.util.EventObserver
 import timber.log.Timber
 
@@ -40,9 +40,16 @@ class ReceivedFragment : BaseFragment<FragmentRequirementsReceivedBinding>(
 
             lifecycleOwner = viewLifecycleOwner
 
-            receivedList.adapter = ReceivedAdapter(cardClickListener = { keycode ->
-                startActivity(ViewEstimateActivityHelper.getIntent(requireContext(), keycode))
-            })
+            receivedList.adapter =
+                ReceivedAdapter(cardClickListener = { keycode, estimationStatus ->
+                    startActivity(
+                        ActionViewHelper.getIntent(
+                            requireContext(),
+                            keycode,
+                            estimationStatus
+                        )
+                    )
+                })
 
             val dividerItemDecoration = DividerItemDecoration(
                 context,

@@ -24,6 +24,16 @@ fun TextView.setStartDate(date: Date?) {
     )
 }
 
+@BindingAdapter("bind:start_date")
+fun TextView.setStartDate(createdAt: Long?) {
+    val date = Date(createdAt ?: System.currentTimeMillis())
+    val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd - hh:mm")
+    text = context.getString(
+        R.string.requirements_card_start_time,
+        simpleDateFormat.format(date)
+    )
+}
+
 @BindingAdapter("bind:end_date")
 fun TextView.setEndDate(date: Date?) {
     val c = Calendar.getInstance()
@@ -33,10 +43,30 @@ fun TextView.setEndDate(date: Date?) {
     text = context.getString(R.string.requirements_card_end_time, simpleDateFormat.format(c.time))
 }
 
+@BindingAdapter("bind:end_date")
+fun TextView.setEndDate(createdAt: Long?) {
+    val date = Date(createdAt ?: System.currentTimeMillis())
+    val c = Calendar.getInstance()
+    c.time = date
+    c.add(Calendar.DATE, 1)
+    val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd - hh:mm")
+    text = context.getString(R.string.requirements_card_end_time, simpleDateFormat.format(c.time))
+}
+
 @BindingAdapter("bind:end_date_2")
 fun TextView.setEndDate2(date: Date?) {
     val c = Calendar.getInstance()
     c.time = date ?: Date(System.currentTimeMillis())
+    c.add(Calendar.DATE, 1)
+    val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd - hh:mm")
+    text = simpleDateFormat.format(c.time)
+}
+
+@BindingAdapter("bind:end_date_2")
+fun TextView.setEndDate2(createdAt: Long?) {
+    val date = Date(createdAt ?: System.currentTimeMillis())
+    val c = Calendar.getInstance()
+    c.time = date
     c.add(Calendar.DATE, 1)
     val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd - hh:mm")
     text = simpleDateFormat.format(c.time)

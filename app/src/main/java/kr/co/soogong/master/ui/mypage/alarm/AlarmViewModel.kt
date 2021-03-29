@@ -6,16 +6,16 @@ import androidx.lifecycle.MutableLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import kr.co.soogong.master.domain.usecase.GetMasterKeyCodeUseCase
-import kr.co.soogong.master.network.AlarmService
+import kr.co.soogong.master.domain.usecase.GetAlarmStatusUseCase
+import kr.co.soogong.master.domain.usecase.SetAlarmStatusUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class AlarmViewModel @Inject constructor(
-    private val alarmService: AlarmService,
-    private val getMasterKeyCodeUseCase: GetMasterKeyCodeUseCase
+    private val getAlarmStatusUseCase: GetAlarmStatusUseCase,
+    private val setAlarmStatusUseCase: SetAlarmStatusUseCase
 ) : BaseViewModel() {
     private val _appPushStatus = MutableLiveData(false)
     val appPushStatus: LiveData<Boolean>
@@ -48,7 +48,7 @@ class AlarmViewModel @Inject constructor(
     }
 
     fun getAlarmStatus() {
-        alarmService.getAlarmStatus(getMasterKeyCodeUseCase())
+        getAlarmStatusUseCase()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ map ->
@@ -68,7 +68,7 @@ class AlarmViewModel @Inject constructor(
     }
 
     private fun setAlarmStatus(type: String, isChecked: Boolean) {
-        alarmService.setAlarmStatus(getMasterKeyCodeUseCase(), type, isChecked)
+        setAlarmStatusUseCase(type, isChecked)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({

@@ -1,4 +1,4 @@
-package kr.co.soogong.master.domain
+package kr.co.soogong.master.contract
 
 object AppSharedPreferenceContract {
     const val PREFERENCES_NAME = "soogong_shared_preferences.pref"

@@ -10,7 +10,7 @@ import kr.co.soogong.master.data.estimation.Estimation
 @Dao
 interface EstimationDao {
     @Query("SELECT * FROM Estimation")
-    fun getAllList(): LiveData<List<Estimation>>
+    suspend fun getAllList(): List<Estimation>
 
     @Query("SELECT * FROM Estimation WHERE keycode = :keycode")
     fun getItem(keycode: String): LiveData<Estimation?>

@@ -1,4 +1,4 @@
-package kr.co.soogong.master.ui.sign.signin
+package kr.co.soogong.master.ui.auth.signin
 
 import android.os.Bundle
 import android.view.View
@@ -8,10 +8,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ActivitySignInBinding
 import kr.co.soogong.master.ui.base.BaseActivity
-import kr.co.soogong.master.ui.sign.signin.SignInViewModel.Companion.FAIL
-import kr.co.soogong.master.ui.sign.signin.SignInViewModel.Companion.SUCCESS
+import kr.co.soogong.master.uiinterface.auth.find.FindPasswordActivityHelper
 import kr.co.soogong.master.uiinterface.main.MainActivityHelper
-import kr.co.soogong.master.uiinterface.sign.find.FindInfoActivityHelper
 import kr.co.soogong.master.util.EventObserver
 import timber.log.Timber
 
@@ -32,6 +30,7 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(
         Timber.tag(TAG).d("initLayout: ")
 
         bind {
+            vm = viewModel
             lifecycleOwner = this@SignInActivity
 
             with(actionBar) {
@@ -39,22 +38,6 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(
                 backButton.setOnClickListener {
                     super.onBackPressed()
                 }
-            }
-
-            setSignInClick {
-                val email = email.text?.toString()
-                val password = password.text?.toString()
-                if (email.isNullOrEmpty()) {
-                    signInAlert.visibility = View.VISIBLE
-                } else if (password.isNullOrEmpty()) {
-                    signInAlert.visibility = View.VISIBLE
-                } else if (!email.isNullOrEmpty() && !password.isNullOrEmpty()) {
-                    viewModel.getUserInfo(email, password)
-                }
-            }
-
-            setFindInfoClick {
-                startActivity(FindInfoActivityHelper.getIntent(this@SignInActivity))
             }
 
             email.addTextChangedListener(
@@ -76,13 +59,18 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(
     }
 
     private fun registerEventObserve() {
-        viewModel.event.observe(this, EventObserver { event ->
+        viewModel.action.observe(this, EventObserver { event ->
             when (event) {
-                SUCCESS -> {
-                    startActivity(MainActivityHelper.getIntent(this))
-                    finish()
+                SignInViewModel.FIND -> {
+                    startActivity(FindPasswordActivityHelper.getIntent(this@SignInActivity))
                 }
-                FAIL -> {
+                SignInViewModel.SUCCESS -> {
+                    startActivity(MainActivityHelper.getIntent(this))
+                }
+                SignInViewModel.FAIL -> {
+                    binding.signInAlert.visibility = View.VISIBLE
+                }
+                SignInViewModel.FAIL_NULL -> {
                     binding.signInAlert.visibility = View.VISIBLE
                 }
             }

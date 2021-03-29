@@ -1,12 +1,12 @@
 package kr.co.soogong.master.domain.usecase
 
 import androidx.lifecycle.LiveData
+import dagger.Reusable
 import kr.co.soogong.master.data.estimation.Estimation
 import kr.co.soogong.master.domain.estimation.EstimationDao
 import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
+@Reusable
 class GetEstimationUseCase @Inject constructor(
     private val estimationDao: EstimationDao
 ) {

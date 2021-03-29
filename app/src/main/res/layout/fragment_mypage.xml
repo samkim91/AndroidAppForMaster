@@ -9,30 +9,6 @@
         <variable
             name="vm"
             type="kr.co.soogong.master.ui.mypage.MyPageViewModel" />
-
-        <variable
-            name="accountSettingClick"
-            type="android.view.View.OnClickListener" />
-
-        <variable
-            name="noticeClick"
-            type="android.view.View.OnClickListener" />
-
-        <variable
-            name="alarmClick"
-            type="android.view.View.OnClickListener" />
-
-        <variable
-            name="logoutClick"
-            type="android.view.View.OnClickListener" />
-
-        <variable
-            name="callClick"
-            type="android.view.View.OnClickListener" />
-
-        <variable
-            name="kakaoClick"
-            type="android.view.View.OnClickListener" />
     </data>
 
     <ScrollView
@@ -53,7 +29,7 @@
                 android:layout_marginTop="@dimen/my_page_master_store_name_margin_top"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="@{vm.name}"
+                android:text="@{vm.user.name}"
                 android:textColor="@color/text_basic_color"
                 app:layout_constrainedWidth="true"
                 app:layout_constraintEnd_toStartOf="@id/master_label"
@@ -84,7 +60,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/my_page_master_email_margin_start"
                 android:layout_marginTop="@dimen/my_page_master_email_margin_top"
-                android:text="@{vm.email}"
+                android:text="E-MAIL"
                 android:textColor="@color/text_basic_color"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/master_store_name"
@@ -95,7 +71,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/my_page_account_setting_margin_end"
-                android:onClick="@{accountSettingClick}"
+                android:onClick="@{() -> vm.accountSettingAction()}"
                 app:layout_constraintBottom_toBottomOf="@id/line"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -169,7 +145,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/my_page_notice_total_margin_top"
                 android:layout_marginEnd="@dimen/my_page_margin_end"
-                android:onClick="@{noticeClick}"
+                android:onClick="@{() ->vm.noticeViewAction()}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/line">
 
@@ -211,7 +187,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/notice_title"
-                bind:notice_list="@{vm.list}"
+                bind:notice_list="@{vm.noticeList}"
                 tools:itemCount="3"
                 tools:listitem="@layout/view_holder_notice_mypage_item" />
 
@@ -219,7 +195,7 @@
                 android:id="@+id/button_setting_alarm"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/my_page_setting_button_height"
-                android:onClick="@{alarmClick}"
+                android:onClick="@{() -> vm.alarmSettingAction()}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/notice_list"
@@ -229,7 +205,7 @@
                 android:id="@+id/button_logout"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/my_page_logout_button_height"
-                android:onClick="@{logoutClick}"
+                android:onClick="@{() -> vm.logout()}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/button_setting_alarm"
@@ -243,7 +219,7 @@
                 android:layout_marginTop="@dimen/my_page_call_button_margin_top"
                 android:layout_marginEnd="@dimen/my_page_margin_end"
                 android:background="@drawable/shape_fill_transparent_board_green"
-                android:onClick="@{callClick}"
+                android:onClick="@{() -> vm.callAction()}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/button_logout" />
@@ -280,7 +256,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="@dimen/my_page_margin_end"
                 android:background="@drawable/shape_fill_kakao_background"
-                android:onClick="@{kakaoClick}"
+                android:onClick="@{() -> vm.kakaoAction()}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/call_button" />

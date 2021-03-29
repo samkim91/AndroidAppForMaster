@@ -1,22 +1,19 @@
-package kr.co.soogong.master.ui.sign.find
+package kr.co.soogong.master.ui.auth.find
 
 import android.os.Bundle
 import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
-import kr.co.soogong.master.databinding.ActivityFindInfoBinding
+import kr.co.soogong.master.databinding.ActivityFindPasswordBinding
 import kr.co.soogong.master.ui.base.BaseActivity
-import kr.co.soogong.master.ui.sign.find.FindInfoViewModel.Companion.FAIL_TO_CONTACT
-import kr.co.soogong.master.ui.sign.find.FindInfoViewModel.Companion.FAIL_TO_NAME
-import kr.co.soogong.master.ui.sign.find.FindInfoViewModel.Companion.SUCCESS_TO_FIND_INFO
 import kr.co.soogong.master.util.EventObserver
 import timber.log.Timber
 
 @AndroidEntryPoint
-class FindInfoActivity : BaseActivity<ActivityFindInfoBinding>(
-    R.layout.activity_find_info
+class FindPasswordActivity : BaseActivity<ActivityFindPasswordBinding>(
+    R.layout.activity_find_password
 ) {
-    private val viewModel: FindInfoViewModel by viewModels()
+    private val viewModel: FindPasswordViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +26,7 @@ class FindInfoActivity : BaseActivity<ActivityFindInfoBinding>(
         Timber.tag(TAG).d("initLayout: ")
 
         bind {
-            lifecycleOwner = this@FindInfoActivity
+            lifecycleOwner = this@FindPasswordActivity
 
             with(actionBar) {
                 title.text = getString(R.string.find_info_activity_name)
@@ -37,20 +34,15 @@ class FindInfoActivity : BaseActivity<ActivityFindInfoBinding>(
                     super.onBackPressed()
                 }
             }
-
-            setFindInfoClick {
-                val email = inputEmail.text?.toString()
-                viewModel.findInfo(email)
-            }
         }
     }
 
     private fun registerEventObserve() {
-        viewModel.event.observe(this, EventObserver { (event, message) ->
+        viewModel.action.observe(this, EventObserver { event ->
+            //TODO : 성공 실패에 대한 액션 처리 안 되어 있음...
             when (event) {
-                FAIL_TO_NAME -> Unit
-                FAIL_TO_CONTACT -> Unit
-                SUCCESS_TO_FIND_INFO -> Unit
+                FindPasswordViewModel.FAIL -> Unit
+                FindPasswordViewModel.SUCCESS -> Unit
             }
         })
     }

@@ -12,15 +12,16 @@ class EstimationsService @Inject constructor(
 ) {
     private val estimationsInterface = retrofit.create(EstimationsInterface::class.java)
 
-    fun getEstimationList(keycode: String?): Single<List<Estimation>> {
-        return estimationsInterface.getEstimationList(keycode).map { jsonObject ->
-            val list = jsonObject.get("data").asJsonArray
-            val ret = ArrayList<Estimation>()
-            for (item in list) {
-                ret.add(Estimation.fromJson(item.asJsonObject))
-            }
-            return@map ret
+    suspend fun getEstimationList(keycode: String?): List<Estimation> {
+        val jsonObject = estimationsInterface.getEstimationList(keycode)
+
+        val list = jsonObject.get("data").asJsonArray
+        val ret = ArrayList<Estimation>()
+        for (item in list) {
+            ret.add(Estimation.fromJson(item.asJsonObject))
         }
+
+        return ret
     }
 
     fun getRequirementList(keycode: String?): Single<List<Requirement>> {

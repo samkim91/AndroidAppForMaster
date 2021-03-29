@@ -1,4 +1,4 @@
-package kr.co.soogong.master.ui.sign.signup
+package kr.co.soogong.master.ui.auth.signup
 
 import android.content.Intent
 import android.os.Bundle
@@ -12,14 +12,14 @@ import kr.co.soogong.master.data.user.SignUpInfo
 import kr.co.soogong.master.databinding.ActivitySignUpBinding
 import kr.co.soogong.master.util.extension.addTextView3
 import kr.co.soogong.master.ui.base.BaseActivity
-import kr.co.soogong.master.ui.sign.signup.SignUpViewModel.Companion.EMAIL_ERROR
-import kr.co.soogong.master.ui.sign.signup.SignUpViewModel.Companion.PASSWORD_CONFIRMATION_ERROR
-import kr.co.soogong.master.ui.sign.signup.SignUpViewModel.Companion.PASSWORD_ERROR
-import kr.co.soogong.master.ui.sign.signup.SignUpViewModel.Companion.SIGNUP_SUCCESS
-import kr.co.soogong.master.ui.sign.signup.SignUpViewModel.Companion.USER_NAME_ERROR
+import kr.co.soogong.master.ui.auth.signup.SignUpViewModel.Companion.EMAIL_ERROR
+import kr.co.soogong.master.ui.auth.signup.SignUpViewModel.Companion.PASSWORD_CONFIRMATION_ERROR
+import kr.co.soogong.master.ui.auth.signup.SignUpViewModel.Companion.PASSWORD_ERROR
+import kr.co.soogong.master.ui.auth.signup.SignUpViewModel.Companion.SIGNUP_SUCCESS
+import kr.co.soogong.master.ui.auth.signup.SignUpViewModel.Companion.USER_NAME_ERROR
 import kr.co.soogong.master.uiinterface.category.CategoryActivityHelper
-import kr.co.soogong.master.uiinterface.sign.signin.SignInActivityHelper
-import kr.co.soogong.master.uiinterface.sign.signup.AddressActivityHelper
+import kr.co.soogong.master.uiinterface.auth.signin.SignInActivityHelper
+import kr.co.soogong.master.uiinterface.auth.signup.AddressActivityHelper
 import kr.co.soogong.master.util.EventObserver
 import timber.log.Timber
 import java.text.SimpleDateFormat

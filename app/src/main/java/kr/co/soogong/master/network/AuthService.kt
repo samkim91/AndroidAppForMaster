@@ -12,11 +12,11 @@ class AuthService @Inject constructor(
 ) {
     private val authInterface = retrofit.create(AuthInterface::class.java)
 
-    fun login(email: String, password: String): Single<String> {
-        val data = HashMap<String, String>()
+    fun login(email: String?, password: String?): Single<String> {
+        val data = HashMap<String, String?>()
         data["email"] = email
         data["password"] = password
-        val send = HashMap<String, HashMap<String, String>>()
+        val send = HashMap<String, HashMap<String, String?>>()
         send["customer"] = data
 
         return authInterface.login(send).flatMap { json ->
@@ -37,10 +37,10 @@ class AuthService @Inject constructor(
         }
     }
 
-    fun findInfo(name: String?): Single<Response> {
+    fun findPassword(name: String?): Single<Response> {
         val data = HashMap<String, String?>()
         data["name"] = name
-        return authInterface.findInfo(data)
+        return authInterface.findPassword(data)
     }
 
     fun actionSignUp(signUpInfo: SignUpInfo): Single<JsonObject> {
@@ -78,17 +78,17 @@ class AuthService @Inject constructor(
         }
     }
 
-    fun resetPassword(
+    fun passwordChange(
         keycode: String?,
-        password: String,
-        confirmPassword: String
+        password: String?,
+        confirmPassword: String?
     ): Single<Response> {
         val data = HashMap<String, String?>()
         data["keycode"] = keycode
         data["password"] = password
         data["password_confirmation"] = confirmPassword
 
-        return authInterface.resetPassword(data)
+        return authInterface.passwordChange(data)
     }
 
     fun updateFCMToken(keycode: String?, fcmKey: String?): Single<Response> {

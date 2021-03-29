@@ -16,7 +16,7 @@ import kr.co.soogong.master.uiinterface.mypage.account.AccountActivityHelper
 import kr.co.soogong.master.uiinterface.mypage.alarm.AlarmActivityHelper
 import kr.co.soogong.master.uiinterface.mypage.notice.NoticeActivityHelper
 import kr.co.soogong.master.uiinterface.mypage.notice.detail.NoticeDetailActivityHelper
-import kr.co.soogong.master.uiinterface.sign.SignMainActivityHelper
+import kr.co.soogong.master.uiinterface.auth.SignMainActivityHelper
 import kr.co.soogong.master.util.EventObserver
 import timber.log.Timber
 
@@ -32,6 +32,7 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(
 
         initLayout()
         registerEventObserve()
+        viewModel.initialize()
     }
 
     override fun initLayout() {
@@ -45,53 +46,40 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(
             noticeList.adapter = NoticeAdapter(NoticeMyPageListViewHolder.NoticeMypageListView) {
                 startActivity(NoticeDetailActivityHelper.getIntent(requireContext(), it))
             }
-
-            setAccountSettingClick {
-                Timber.tag(TAG).i("initLayout: Account Setting Button")
-                startActivity(AccountActivityHelper.getIntent(requireContext()))
-            }
-
-            setNoticeClick {
-                Timber.tag(TAG).i("initLayout: Notice Button")
-                startActivity(NoticeActivityHelper.getIntent(requireContext()))
-            }
-
-            setAlarmClick {
-                Timber.tag(TAG).i("initLayout: Alarm Button")
-                startActivity(AlarmActivityHelper.getIntent(requireContext()))
-            }
-
-            setLogoutClick {
-                Timber.tag(TAG).i("initLayout: Logout Button")
-                viewModel.actionLogout()
-            }
-
-            setCallClick {
-                Timber.tag(TAG).i("initLayout: Call Button")
-                startActivity(Intent("android.intent.action.CALL", Uri.parse("tel:16444095")))
-            }
-
-            setKakaoClick {
-                Timber.tag(TAG).i("initLayout: Kakao Button")
-
-                val url = TalkApiClient.instance.addChannelUrl("_mWbJxb")
-                KakaoCustomTabsClient.openWithDefault(requireContext(), url)
-            }
         }
     }
 
     private fun registerEventObserve() {
-        viewModel.completeEvent.observe(viewLifecycleOwner, EventObserver {
-            startActivity(SignMainActivityHelper.getIntent(requireContext()))
-            activity?.finish()
-        })
-    }
-
-    override fun onStart() {
-        super.onStart()
-        Timber.tag(TAG).d("onStart: ")
-        viewModel.requestUserProfile()
-        viewModel.getNoticeList()
+        with(viewModel) {
+            action.observe(viewLifecycleOwner, EventObserver { event ->
+                when (event) {
+                    MyPageViewModel.ACCOUNT -> {
+                        startActivity(AccountActivityHelper.getIntent(requireContext()))
+                    }
+                    MyPageViewModel.ALARM -> {
+                        startActivity(AlarmActivityHelper.getIntent(requireContext()))
+                    }
+                    MyPageViewModel.CALL -> {
+                        startActivity(
+                            Intent(
+                                "android.intent.action.CALL",
+                                Uri.parse("tel:16444095")
+                            )
+                        )
+                    }
+                    MyPageViewModel.KAKAO -> {
+                        val url = TalkApiClient.instance.addChannelUrl("_mWbJxb")
+                        KakaoCustomTabsClient.openWithDefault(requireContext(), url)
+                    }
+                    MyPageViewModel.NOTICE -> {
+                        startActivity(NoticeActivityHelper.getIntent(requireContext()))
+                    }
+                    MyPageViewModel.LOGOUT -> {
+                        startActivity(SignMainActivityHelper.getIntent(requireContext()))
+                    }
+                }
+            })
+        }
     }
 
     companion object {

@@ -7,6 +7,7 @@ import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ActivityAccountBinding
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.uiinterface.mypage.password.PasswordActivityHelper
+import kr.co.soogong.master.util.EventObserver
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -19,6 +20,7 @@ class AccountActivity : BaseActivity<ActivityAccountBinding>(
         super.onCreate(savedInstanceState)
         Timber.tag(TAG).d("onCreate: ")
         initLayout()
+        registerEventObserve()
     }
 
     override fun initLayout() {
@@ -34,17 +36,21 @@ class AccountActivity : BaseActivity<ActivityAccountBinding>(
                     super.onBackPressed()
                 }
             }
-
-            setPasswordChangeClick {
-                Timber.tag(TAG).i("initLayout: Password Change Button")
-                startActivity(PasswordActivityHelper.getIntent(this@AccountActivity))
-            }
-
-            setWithdrawalClick {
-                Timber.tag(TAG).i("initLayout: WithDraw Button")
-                viewModel.withDraw()
-            }
         }
+    }
+
+    private fun registerEventObserve() {
+        viewModel.action.observe(this, EventObserver { event ->
+            when (event) {
+                AccountViewModel.WITHDRAW -> {
+                    // TODO : 서버 작업 필요 요청값과 줄 수 있는 값이 다름
+                    Unit
+                }
+                AccountViewModel.PASSWORD -> {
+                    startActivity(PasswordActivityHelper.getIntent(this@AccountActivity))
+                }
+            }
+        })
     }
 
     companion object {

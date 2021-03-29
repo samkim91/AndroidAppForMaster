@@ -1,4 +1,4 @@
-package kr.co.soogong.master.network
+package kr.co.soogong.master.contract
 
 object HttpContract {
     const val TEST_URL = "https://test.api2.soogong.co.kr/"
@@ -37,5 +37,9 @@ object HttpContract {
     const val GET_ESTIMATION_ACCEPT = "api/v1/transmissions/accept_list"
     const val GET_ESTIMATION_REFUSE = "api/v1/transmissions/refuse"
     const val SEND_ESTIMATION_MESSAGE = "api/v1/transmissions/send_message"
+    //endregion
+
+    //region
+    const val MASTER_MY_PAGE = "https://soogong.co.kr/master/detail/"
     //endregion
 }

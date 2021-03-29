@@ -25,8 +25,4 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun estimationDao(): EstimationDao
 
     abstract fun userDao(): UserDao
-
-    companion object {
-        const val DATABASE_NAME = "soogong-master.db"
-    }
 }
