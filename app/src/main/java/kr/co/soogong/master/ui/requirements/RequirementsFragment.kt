@@ -2,6 +2,7 @@ package kr.co.soogong.master.ui.requirements
 
 import android.os.Bundle
 import android.view.View
+import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentRequirementsBinding
@@ -35,30 +36,38 @@ class RequirementsFragment : BaseFragment<FragmentRequirementsBinding>(
     }
 
     override fun setReceivedBadge(badgeCount: Int) {
-        val badge = binding.mainTabs.getTabAt(0)?.orCreateBadge
-        badge?.number = badgeCount
-    }
-
-    override fun unsetReceivedBadge() {
-        binding.mainTabs.getTabAt(0)?.removeBadge()
+        val tab = binding.mainTabs.getTabAt(0)
+        if (badgeCount > 0) {
+            visibleBadge(tab, badgeCount)
+        } else {
+            invisibleBadge(tab)
+        }
     }
 
     override fun setProgressBadge(badgeCount: Int) {
-        val badge = binding.mainTabs.getTabAt(1)?.orCreateBadge
-        badge?.number = badgeCount
-    }
-
-    override fun unsetProgressBadge() {
-        binding.mainTabs.getTabAt(1)?.removeBadge()
+        val tab = binding.mainTabs.getTabAt(1)
+        if (badgeCount > 0) {
+            visibleBadge(tab, badgeCount)
+        } else {
+            invisibleBadge(tab)
+        }
     }
 
     override fun setDoneBadge(badgeCount: Int) {
-        val badge = binding.mainTabs.getTabAt(2)?.orCreateBadge
-        badge?.number = badgeCount
+        val tab = binding.mainTabs.getTabAt(2)
+        if (badgeCount > 0) {
+            visibleBadge(tab, badgeCount)
+        } else {
+            invisibleBadge(tab)
+        }
     }
 
-    override fun unsetDoneBadge() {
-        binding.mainTabs.getTabAt(2)?.removeBadge()
+    private fun visibleBadge(tab: TabLayout.Tab?, badgeCount: Int) {
+        tab?.orCreateBadge?.number = badgeCount
+    }
+
+    private fun invisibleBadge(tab: TabLayout.Tab?) {
+        tab?.removeBadge()
     }
 
     companion object {

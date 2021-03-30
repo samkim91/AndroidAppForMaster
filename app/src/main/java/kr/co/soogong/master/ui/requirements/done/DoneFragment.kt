@@ -21,8 +21,6 @@ class DoneFragment : BaseFragment<FragmentRequirementsDoneBinding>(
 ) {
     private val viewModel: DoneViewModel by viewModels()
 
-    private var requirementsBadge: RequirementsBadge? = null
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Timber.tag(TAG).d("onViewCreated: ")
@@ -72,9 +70,7 @@ class DoneFragment : BaseFragment<FragmentRequirementsDoneBinding>(
         viewModel.event.observe(viewLifecycleOwner, EventObserver { (event, value) ->
             when (event) {
                 DoneViewModel.BADGE_UPDATE -> {
-                    Timber.tag(TAG).d("registerEventObserve: $value")
-                    Timber.tag(TAG).d("registerEventObserve: $requirementsBadge")
-                    if (value > 0) requirementsBadge?.setDoneBadge(value) else requirementsBadge?.unsetDoneBadge()
+                    (parentFragment as? RequirementsBadge)?.setDoneBadge(value)
                 }
             }
         })

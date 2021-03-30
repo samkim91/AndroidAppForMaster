@@ -5,36 +5,47 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import kr.co.soogong.master.domain.requirements.EstimationStatus
 import kr.co.soogong.master.domain.requirements.RequirementCard
-import kr.co.soogong.master.domain.usecase.GetEstimationListUseCase
+import kr.co.soogong.master.domain.usecase.GetProgressEstimationListUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import kr.co.soogong.master.util.Event
 import javax.inject.Inject
 
 @HiltViewModel
 class ProgressViewModel @Inject constructor(
-    private val getEstimationListUseCase: GetEstimationListUseCase
+    private val getProgressEstimationListUseCase: GetProgressEstimationListUseCase
 ) : BaseViewModel() {
-    private val _emptyList = MutableLiveData(true)
-    val emptyList: LiveData<Boolean>
-        get() = _emptyList
-
     private val _progressList = MutableLiveData<List<RequirementCard>>(emptyList())
     val progressList: LiveData<List<RequirementCard>>
         get() = _progressList
 
     fun requestList() {
         viewModelScope.launch {
-            val list = getEstimationListUseCase()
+            val list = getProgressEstimationListUseCase()
+            updatedBadge(list.size)
+            _progressList.value = list
+        }
+    }
 
-            if (list.isNullOrEmpty()) {
-                _emptyList.value = true
-                updatedBadge(0)
-            } else {
-                _emptyList.value = false
-                updatedBadge(list.size)
+    fun onFilterChange(index: Int) {
+        viewModelScope.launch {
+            val list = when (index) {
+                0 -> {
+                    getProgressEstimationListUseCase()
+                }
+                1 -> {
+                    getProgressEstimationListUseCase().filter { it.status == EstimationStatus.Progress }
+                }
+                2 -> {
+                    getProgressEstimationListUseCase().filter { it.status == EstimationStatus.CustomDone }
+                }
+                else -> {
+                    emptyList()
+                }
             }
             _progressList.value = list
+            setAction(UPDATE_LIST)
         }
     }
 
@@ -49,5 +60,6 @@ class ProgressViewModel @Inject constructor(
     companion object {
         private const val TAG = "ProgressViewModel"
         const val BADGE_UPDATE = "BADGE_UPDATE"
+        const val UPDATE_LIST = "UPDATE_LIST"
     }
 }

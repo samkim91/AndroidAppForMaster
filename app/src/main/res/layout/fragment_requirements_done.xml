@@ -37,7 +37,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed"
-            bind:visible="@{vm.emptyList}" />
+            bind:visible="@{vm.doneList.empty}" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/empty_text"
@@ -50,7 +50,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/empty_icon"
-            bind:visible="@{vm.emptyList}" />
+            bind:visible="@{vm.doneList.empty}" />
 
         <RadioGroup
             android:id="@+id/filter"
@@ -61,13 +61,14 @@
             android:layout_marginEnd="@dimen/requirement_received_filter_margin_end"
             android:background="@drawable/shape_fill_gray_background_50"
             android:gravity="center_vertical"
+            android:onCheckedChanged="@{(group, id) -> vm.onFilterChange(group.indexOfChild(group.findViewById(id)))}"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <RadioButton
-                android:id="@+id/filter_option1"
+                android:id="@+id/filter_total"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/requirement_received_filter_option_margin_8"
@@ -83,7 +84,7 @@
                 android:textColor="@color/filter_text_selector" />
 
             <RadioButton
-                android:id="@+id/filter_option2"
+                android:id="@+id/filter_done"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/requirement_received_filter_option_margin_4"
@@ -98,7 +99,7 @@
                 android:textColor="@color/filter_text_selector" />
 
             <RadioButton
-                android:id="@+id/filter_option3"
+                android:id="@+id/filter_final"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/requirement_received_filter_option_margin_4"
@@ -113,7 +114,7 @@
                 android:textColor="@color/filter_text_selector" />
 
             <RadioButton
-                android:id="@+id/filter_option4"
+                android:id="@+id/filter_cancel"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/requirement_received_filter_option_margin_4"
