@@ -13,7 +13,8 @@ class DoLoginUseCase @Inject constructor(
 ) {
     operator fun invoke(email: String?, password: String?): Single<String> {
         if (BuildConfig.DEBUG) {
-            setMasterKeyCodeUseCase("919dcdf215133b52")
+            setMasterKeyCodeUseCase("1e73778811e69aa5")
+//            setMasterKeyCodeUseCase("919dcdf215133b52")
             return Single.just("DEBUG")
         }
 
