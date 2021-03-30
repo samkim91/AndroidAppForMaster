@@ -10,7 +10,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentRequirementsDoneBinding
 import kr.co.soogong.master.ui.base.BaseFragment
+import kr.co.soogong.master.uiinterface.requirments.RequirementsBadge
 import kr.co.soogong.master.uiinterface.requirments.action.ActionViewHelper
+import kr.co.soogong.master.util.EventObserver
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -19,11 +21,15 @@ class DoneFragment : BaseFragment<FragmentRequirementsDoneBinding>(
 ) {
     private val viewModel: DoneViewModel by viewModels()
 
+    private var requirementsBadge: RequirementsBadge? = null
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Timber.tag(TAG).d("onViewCreated: ")
 
         initLayout()
+
+        registerEventObserve()
     }
 
     override fun initLayout() {
@@ -53,6 +59,25 @@ class DoneFragment : BaseFragment<FragmentRequirementsDoneBinding>(
             }
             doneList.addItemDecoration(dividerItemDecoration)
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Timber.tag(TAG).d("onStart: ")
+        viewModel.requestList()
+    }
+
+    private fun registerEventObserve() {
+        Timber.tag(TAG).d("registerEventObserve: ")
+        viewModel.event.observe(viewLifecycleOwner, EventObserver { (event, value) ->
+            when (event) {
+                DoneViewModel.BADGE_UPDATE -> {
+                    Timber.tag(TAG).d("registerEventObserve: $value")
+                    Timber.tag(TAG).d("registerEventObserve: $requirementsBadge")
+                    if (value > 0) requirementsBadge?.setDoneBadge(value) else requirementsBadge?.unsetDoneBadge()
+                }
+            }
+        })
     }
 
     companion object {
