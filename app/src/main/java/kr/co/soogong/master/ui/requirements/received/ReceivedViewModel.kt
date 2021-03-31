@@ -5,8 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import kr.co.soogong.master.domain.requirements.EstimationStatus
 import kr.co.soogong.master.domain.requirements.RequirementCard
-import kr.co.soogong.master.domain.usecase.GetEstimationListUseCase
+import kr.co.soogong.master.domain.usecase.GetReceivedEstimationListUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import kr.co.soogong.master.util.Event
 import timber.log.Timber
@@ -14,29 +15,38 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ReceivedViewModel @Inject constructor(
-    private val getEstimationListUseCase: GetEstimationListUseCase
+    private val getReceivedEstimationListUseCase: GetReceivedEstimationListUseCase
 ) : BaseViewModel() {
-    private val _emptyList = MutableLiveData(true)
-    val emptyList: LiveData<Boolean>
-        get() = _emptyList
-
     private val _requirementList = MutableLiveData<List<RequirementCard>>(emptyList())
     val requirementList: LiveData<List<RequirementCard>>
         get() = _requirementList
 
     fun requestList() {
         viewModelScope.launch {
-            val list = getEstimationListUseCase()
-
-            if (list.isNullOrEmpty()) {
-                _emptyList.value = true
-                updatedBadge(0)
-            } else {
-                _emptyList.value = false
-                updatedBadge(list.size)
-            }
-
+            val list = getReceivedEstimationListUseCase()
+            updatedBadge(list.size)
             _requirementList.value = list
+        }
+    }
+
+    fun onFilterChange(index: Int) {
+        viewModelScope.launch {
+            val list = when (index) {
+                0 -> {
+                    getReceivedEstimationListUseCase()
+                }
+                1 -> {
+                    getReceivedEstimationListUseCase().filter { it.status == EstimationStatus.Request }
+                }
+                2 -> {
+                    getReceivedEstimationListUseCase().filter { it.status == EstimationStatus.Waiting }
+                }
+                else -> {
+                    emptyList()
+                }
+            }
+            _requirementList.value = list
+            setAction(UPDATE_LIST)
         }
     }
 
@@ -52,5 +62,6 @@ class ReceivedViewModel @Inject constructor(
     companion object {
         private const val TAG = "ReceivedViewModel"
         const val BADGE_UPDATE = "BADGE_UPDATE"
+        const val UPDATE_LIST = "UPDATE_LIST"
     }
 }

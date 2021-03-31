@@ -21,8 +21,6 @@ class ReceivedFragment : BaseFragment<FragmentRequirementsReceivedBinding>(
 ) {
     private val viewModel: ReceivedViewModel by viewModels()
 
-    private var requirementsBadge: RequirementsBadge? = null
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Timber.tag(TAG).d("onViewCreated: ")
@@ -60,8 +58,6 @@ class ReceivedFragment : BaseFragment<FragmentRequirementsReceivedBinding>(
             }
             receivedList.addItemDecoration(dividerItemDecoration)
         }
-
-        requirementsBadge = parentFragment as? RequirementsBadge
     }
 
     override fun onStart() {
@@ -75,9 +71,14 @@ class ReceivedFragment : BaseFragment<FragmentRequirementsReceivedBinding>(
         viewModel.event.observe(viewLifecycleOwner, EventObserver { (event, value) ->
             when (event) {
                 ReceivedViewModel.BADGE_UPDATE -> {
-                    Timber.tag(TAG).d("registerEventObserve: $value")
-                    Timber.tag(TAG).d("registerEventObserve: $requirementsBadge")
-                    if (value > 0) requirementsBadge?.setReceivedBadge(value) else requirementsBadge?.unsetReceivedBadge()
+                    (parentFragment as? RequirementsBadge)?.setReceivedBadge(value)
+                }
+            }
+        })
+        viewModel.action.observe(viewLifecycleOwner, EventObserver { action ->
+            when (action) {
+                ReceivedViewModel.BADGE_UPDATE -> {
+                    binding.receivedList.scrollToPosition(0)
                 }
             }
         })

@@ -5,8 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import kr.co.soogong.master.domain.requirements.EstimationStatus
 import kr.co.soogong.master.domain.requirements.RequirementCard
-import kr.co.soogong.master.domain.usecase.GetEstimationListUseCase
+import kr.co.soogong.master.domain.usecase.GetDoneEstimationListUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import kr.co.soogong.master.util.Event
 import timber.log.Timber
@@ -14,12 +15,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DoneViewModel @Inject constructor(
-    private val getEstimationListUseCase: GetEstimationListUseCase
+    private val getDoneEstimationListUseCase: GetDoneEstimationListUseCase
 ) : BaseViewModel() {
-    private val _emptyList = MutableLiveData(true)
-    val emptyList: LiveData<Boolean>
-        get() = _emptyList
-
     private val _doneList = MutableLiveData<List<RequirementCard>>(emptyList())
     val doneList: LiveData<List<RequirementCard>>
         get() = _doneList
@@ -33,17 +30,35 @@ class DoneViewModel @Inject constructor(
         _event.value = Event(BADGE_UPDATE to badgeCount)
     }
 
+    fun onFilterChange(index: Int) {
+        viewModelScope.launch {
+            val list = when (index) {
+                0 -> {
+                    getDoneEstimationListUseCase()
+                }
+                1 -> {
+                    getDoneEstimationListUseCase().filter { it.status == EstimationStatus.Done }
+                }
+                2 -> {
+                    getDoneEstimationListUseCase().filter { it.status == EstimationStatus.Final }
+                }
+                3 -> {
+                    getDoneEstimationListUseCase().filter { it.status == EstimationStatus.Cancel }
+                }
+                else -> {
+                    emptyList()
+                }
+            }
+            _doneList.value = list
+            setAction(UPDATE_LIST)
+        }
+    }
+
     fun requestList() {
         viewModelScope.launch {
-            val list = getEstimationListUseCase()
+            val list = getDoneEstimationListUseCase()
 
-            if (list.isNullOrEmpty()) {
-                _emptyList.value = true
-                updatedBadge(0)
-            } else {
-                _emptyList.value = false
-                updatedBadge(list.size)
-            }
+            updatedBadge(list.size)
 
             _doneList.value = list
         }
@@ -52,5 +67,6 @@ class DoneViewModel @Inject constructor(
     companion object {
         private const val TAG = "DoneViewModel"
         const val BADGE_UPDATE = "BADGE_UPDATE"
+        const val UPDATE_LIST = "UPDATE_LIST"
     }
 }

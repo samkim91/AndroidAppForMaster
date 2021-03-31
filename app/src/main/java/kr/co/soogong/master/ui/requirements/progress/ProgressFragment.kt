@@ -23,15 +23,11 @@ class ProgressFragment : BaseFragment<FragmentRequirementsProgressBinding>(
 ) {
     private val viewModel: ProgressViewModel by viewModels()
 
-    private var requirementsBadge: RequirementsBadge? = null
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Timber.tag(TAG).d("onViewCreated: ")
 
         initLayout()
-
-        requirementsBadge = parentFragment as? RequirementsBadge
 
         registerEventObserve()
     }
@@ -88,7 +84,7 @@ class ProgressFragment : BaseFragment<FragmentRequirementsProgressBinding>(
         viewModel.event.observe(viewLifecycleOwner, EventObserver { (event, value) ->
             when (event) {
                 ProgressViewModel.BADGE_UPDATE -> {
-                    if (value > 0) requirementsBadge?.setProgressBadge(value) else requirementsBadge?.unsetProgressBadge()
+                    (parentFragment as? RequirementsBadge)?.setProgressBadge(value)
                 }
             }
         })
