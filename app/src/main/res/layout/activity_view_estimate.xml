@@ -108,13 +108,21 @@
                         bind:start_date="@{vm.estimation.createdAt}"
                         tools:text="최초 요청일 : 2021.01.11 - 13:20" />
 
+
+                    <!-- region 고객 리뷰 -->
+                    <!-- region end 고객 리뷰 -->
+
+                    <!-- region 나의 최종 시공 내용 -->
+                    <!-- region end 나의 최종 시공 내용 -->
+
+                    <!-- region 고객 요청 내용 -->
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/custom_title"
                         style="@style/medium_text_style.bold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="24dp"
+                        android:layout_marginStart="@dimen/estimation_card_default_margin_start"
+                        android:layout_marginTop="@dimen/estimation_card_default_margin_top"
                         android:text="@string/view_estimate_custom_title"
                         android:textColor="@color/text_basic_color"
                         app:layout_constraintStart_toStartOf="parent"
@@ -160,56 +168,125 @@
                         app:spanCount="4"
                         bind:photo_list="@{vm.estimation.images}"
                         bind:visible="@{vm.estimation.images}" />
+                    <!-- region end 고객 요청 내용 -->
+
+                    <!-- region 나의 제안 내용 -->
+                    <View
+                        android:id="@+id/transmission_divider"
+                        android:layout_width="match_parent"
+                        android:layout_height="8dp"
+                        android:layout_marginTop="@dimen/estimation_card_default_margin_top"
+                        android:background="@drawable/divider"
+                        app:layout_constraintTop_toBottomOf="@id/photo_list"
+                        app:layout_constraintStart_toStartOf="parent"
+                        />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/transmission_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingStart="@dimen/estimation_card_default_margin_start"
+                        android:paddingEnd="@dimen/estimation_card_default_margin_end"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/transmission_divider">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/transmission_title"
+                            style="@style/medium_text_style.bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/estimation_card_default_margin_top"
+                            android:text="@string/view_estimate_trasmission_title"
+                            android:textColor="@color/text_basic_color"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            bind:visible="@{vm.estimation.additionalInfo}" />
+
+                        <LinearLayout
+                            android:id="@+id/custom_frame_for_transmission_detail"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/transmission_title"
+                            />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                    <androidx.constraintlayout.widget.Group
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/transmission_group"
+                        android:visibility="visible"
+                        app:constraint_referenced_ids="transmission_divider, transmission_layout"
+                        />
+                    <!-- region end 나의 제안 내용 -->
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </ScrollView>
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/end_time_background"
-                android:layout_width="0dp"
+            <!-- region 견적 마감일 -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/due_date_container"
+                android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:background="@drawable/shape_fill_gray_top_round"
-                app:layout_constraintBottom_toTopOf="@id/refuse"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintBottom_toTopOf="@id/refuse"
+                >
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/end_time_icon"
-                android:layout_width="16dp"
-                android:layout_height="16dp"
-                android:layout_marginEnd="4dp"
-                android:src="@drawable/ic_alarm"
-                app:layout_constraintBottom_toBottomOf="@id/end_time_background"
-                app:layout_constraintEnd_toStartOf="@id/end_time_label"
-                app:layout_constraintHorizontal_chainStyle="packed"
-                app:layout_constraintStart_toStartOf="@id/end_time_background"
-                app:layout_constraintTop_toTopOf="@id/end_time_background" />
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/end_time_background"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/shape_fill_gray_top_round"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/end_time_label"
-                style="@style/small_text_style.bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/color_FF711D"
-                app:layout_constraintBottom_toBottomOf="@id/end_time_background"
-                app:layout_constraintEnd_toStartOf="@id/end_time"
-                app:layout_constraintStart_toEndOf="@id/end_time_icon"
-                app:layout_constraintTop_toTopOf="@id/end_time_background"
-                tools:text="견적 마감일 : " />
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/end_time_icon"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_marginEnd="4dp"
+                    android:src="@drawable/ic_alarm"
+                    app:layout_constraintBottom_toBottomOf="@id/end_time_background"
+                    app:layout_constraintEnd_toStartOf="@id/end_time_label"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="@id/end_time_background"
+                    app:layout_constraintTop_toTopOf="@id/end_time_background" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/end_time"
-                style="@style/small_text_style.bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/basic_white"
-                app:layout_constraintBottom_toBottomOf="@id/end_time_background"
-                app:layout_constraintEnd_toEndOf="@id/end_time_background"
-                app:layout_constraintStart_toEndOf="@id/end_time_label"
-                app:layout_constraintTop_toTopOf="@id/end_time_background"
-                bind:end_date_2="@{vm.estimation.createdAt}"
-                tools:text="2022.01.11 - 13:20" />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/end_time_label"
+                    style="@style/small_text_style.bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/color_FF711D"
+                    app:layout_constraintBottom_toBottomOf="@id/end_time_background"
+                    app:layout_constraintEnd_toStartOf="@id/end_time"
+                    app:layout_constraintStart_toEndOf="@id/end_time_icon"
+                    app:layout_constraintTop_toTopOf="@id/end_time_background"
+                    tools:text="견적 마감일 : " />
 
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/end_time"
+                    style="@style/small_text_style.bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/basic_white"
+                    app:layout_constraintBottom_toBottomOf="@id/end_time_background"
+                    app:layout_constraintEnd_toEndOf="@id/end_time_background"
+                    app:layout_constraintStart_toEndOf="@id/end_time_label"
+                    app:layout_constraintTop_toTopOf="@id/end_time_background"
+                    bind:end_date_2="@{vm.estimation.createdAt}"
+                    tools:text="2022.01.11 - 13:20" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <!-- region end 견적 마감일 -->
+
+            <!-- region 승인/취소 버튼 -->
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/refuse"
                 style="@style/medium_text_style.bold"
@@ -233,11 +310,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/refuse" />
-
-            <androidx.constraintlayout.widget.Group
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                app:constraint_referenced_ids="end_time_background,end_time_icon" />
+            <!-- region end 승인/취소 버튼 -->
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>

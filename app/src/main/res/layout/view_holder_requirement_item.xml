@@ -149,7 +149,6 @@
         <!-- endregion -->
 
         <!-- region 견적요청 -->
-
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/end_time"
             style="@style/small_text_style.medium"
@@ -164,7 +163,6 @@
         <!-- endregion -->
 
         <!-- region 매칭대기 -->
-
         <kr.co.soogong.master.ui.widget.AmountView
             android:id="@+id/my_amount"
             android:layout_width="0dp"
@@ -224,10 +222,23 @@
         <!-- endregion -->
 
         <!-- region 고객완료요청 -->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/done_button2"
+            style="@style/medium_text_style.bold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/requirement_card_done_button_margin_start"
+            android:layout_marginTop="@dimen/requirement_card_done_button_margin_top"
+            android:background="@drawable/shape_fill_green_background"
+            android:text="@string/requirements_card_done_button"
+            android:textColor="@color/basic_white"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/my_amount" />
         <!-- endregion -->
 
         <!-- region 시공완료 -->
-
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/review_button"
             style="@style/medium_text_style.bold"
@@ -241,8 +252,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/my_amount" />
-
-        <!-- endregion -->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

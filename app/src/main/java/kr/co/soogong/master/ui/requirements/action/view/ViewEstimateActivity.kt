@@ -1,17 +1,22 @@
 package kr.co.soogong.master.ui.requirements.action.view
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
+import kr.co.soogong.master.data.estimation.Estimation
 import kr.co.soogong.master.databinding.ActivityViewEstimateBinding
+import kr.co.soogong.master.domain.requirements.EstimationStatus
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.ui.dialog.CustomDialog
 import kr.co.soogong.master.ui.dialog.DialogData.Companion.cancelDialogData
 import kr.co.soogong.master.uiinterface.image.ImageViewActivityHelper
 import kr.co.soogong.master.uiinterface.requirments.action.view.ViewEstimateActivityHelper
 import kr.co.soogong.master.util.extension.addAdditionInfoView
+import kr.co.soogong.master.util.extension.visible
 import timber.log.Timber
+import java.util.Observer
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -22,12 +27,7 @@ class ViewEstimateActivity : BaseActivity<ActivityViewEstimateBinding>(
         ViewEstimateActivityHelper.getEstimationId(intent)
     }
 
-    @Inject
-    lateinit var factory: ViewEstimateViewModel.AssistedFactory
-
-    private val viewModel: ViewEstimateViewModel by viewModels {
-        ViewEstimateViewModel.provideFactory(factory, estimationId)
-    }
+    private val viewModel: ViewEstimateViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,6 +79,7 @@ class ViewEstimateActivity : BaseActivity<ActivityViewEstimateBinding>(
             binding.actionBar.title.text =
                 getString(R.string.view_estimate_title, estimation?.keycode)
 
+            // 고객 요청 내용
             val additionInfo = estimation?.additionalInfo
             if (!additionInfo.isNullOrEmpty()) {
                 binding.customFrame.removeAllViews()
@@ -92,10 +93,23 @@ class ViewEstimateActivity : BaseActivity<ActivityViewEstimateBinding>(
                 }
             }
 
+            // 나의 제안 내용
             val message = estimation?.transmissions?.message
             if (message != null) {
 
             }
+
+            // 견적 요청 상태에서의 견적 마감일, 버튼들 보이
+            if (EstimationStatus.getStatus(estimation?.status, estimation?.transmissions) == EstimationStatus.Request){
+                binding.dueDateContainer.visibility = View.VISIBLE
+                binding.refuse.visibility = View.VISIBLE
+                binding.accept.visibility = View.VISIBLE
+            }
+
+            // 나의 최종 시공 내용
+
+            // 고객 리뷰
+
         })
     }
 
