@@ -108,89 +108,363 @@
                         bind:start_date="@{vm.estimation.createdAt}"
                         tools:text="최초 요청일 : 2021.01.11 - 13:20" />
 
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/line"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/line_height"
+                        android:layout_marginTop="@dimen/estimation_card_default_margin_top"
+                        android:layout_marginStart="@dimen/estimation_card_default_margin_start"
+                        android:layout_marginEnd="@dimen/estimation_card_default_margin_end"
+                        android:background="@color/line_color"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/first_time" />
+
 
                     <!-- region 고객 리뷰 -->
-                    <!-- region end 고객 리뷰 -->
-
-                    <!-- region 나의 최종 시공 내용 -->
-                    <!-- region end 나의 최종 시공 내용 -->
-
-                    <!-- region 고객 요청 내용 -->
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/custom_title"
-                        style="@style/medium_text_style.bold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/estimation_card_default_margin_start"
-                        android:layout_marginTop="@dimen/estimation_card_default_margin_top"
-                        android:text="@string/view_estimate_custom_title"
-                        android:textColor="@color/text_basic_color"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/first_time"
-                        bind:visible="@{vm.estimation.additionalInfo}" />
-
-                    <LinearLayout
-                        android:id="@+id/custom_frame"
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/customer_review_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:paddingStart="20dp"
-                        android:paddingEnd="20dp"
-                        app:layout_constraintEnd_toEndOf="parent"
+                        android:paddingStart="@dimen/estimation_card_default_margin_start"
+                        android:paddingEnd="@dimen/estimation_card_default_margin_end"
+                        app:layout_constraintTop_toBottomOf="@id/line"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/custom_title" />
+                        >
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/photo_title"
-                        style="@style/small_text_style"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="12dp"
-                        android:layout_marginEnd="20dp"
-                        android:text="@string/view_estimate_photo_title"
-                        android:textColor="@color/text_primary_color"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/custom_frame"
-                        bind:visible="@{vm.estimation.images}" />
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/customer_review_title"
+                            style="@style/medium_text_style.bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/estimation_card_default_margin_top"
+                            android:text="@string/view_estimate_customer_review_title"
+                            android:textColor="@color/text_basic_color"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/photo_list"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="4dp"
-                        android:layout_marginEnd="20dp"
-                        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/photo_title"
-                        app:spanCount="4"
-                        bind:photo_list="@{vm.estimation.images}"
-                        bind:visible="@{vm.estimation.images}" />
-                    <!-- region end 고객 요청 내용 -->
 
-                    <!-- region 나의 제안 내용 -->
-                    <View
-                        android:id="@+id/transmission_divider"
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/master_rating_text"
+                            style="@style/tiny_text_style.medium"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/estimation_card_master_rating_margin_top"
+                            android:layout_marginEnd="@dimen/estimation_card_default_margin_start"
+                            android:text="@string/view_estimate_master_rating_title"
+                            android:textColor="@color/text_basic_color"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/customer_review_title"/>
+
+                        <RatingBar
+                            android:id="@+id/master_rating_bar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:numStars="5"
+                            android:rating="4"
+                            android:progressTint="@color/color_22D47B"
+                            style="@style/Widget.AppCompat.RatingBar.Small"
+                            android:layout_marginTop="@dimen/estimation_card_master_rating_bar_margin_top"
+                            android:layout_marginStart="@dimen/estimation_card_master_rating_bar_margin_start"
+                            app:layout_constraintTop_toTopOf="@id/master_rating_text"
+                            app:layout_constraintStart_toEndOf="@id/master_rating_text"/>
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/master_rating_kind_text"
+                            style="@style/tiny_text_style.medium"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/estimation_card_master_rating_margin_top_8"
+                            android:layout_marginEnd="@dimen/estimation_card_default_margin_start"
+                            android:text="@string/view_estimate_master_rating_kind"
+                            android:textColor="@color/text_basic_color"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/master_rating_text"/>
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/master_rating_kind_score"
+                            style="@style/tiny_text_style.medium"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            tools:text="4"
+                            android:layout_marginStart="@dimen/estimation_card_master_rating_margin_start_2"
+                            android:textColor="@color/color_1FC472"
+                            app:layout_constraintStart_toEndOf="@id/master_rating_kind_text"
+                            app:layout_constraintTop_toTopOf="@id/master_rating_kind_text"/>
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/master_rating_quality_text"
+                            style="@style/tiny_text_style.medium"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/view_estimate_master_rating_quality"
+                            android:textColor="@color/text_basic_color"
+                            android:layout_marginStart="@dimen/estimation_card_master_rating_margin_start_10"
+                            app:layout_constraintStart_toEndOf="@id/master_rating_kind_score"
+                            app:layout_constraintTop_toTopOf="@id/master_rating_kind_text"/>
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/master_rating_quality_score"
+                            style="@style/tiny_text_style.medium"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            tools:text="4"
+                            android:layout_marginStart="@dimen/estimation_card_master_rating_margin_start_2"
+                            android:textColor="@color/color_1FC472"
+                            app:layout_constraintStart_toEndOf="@id/master_rating_quality_text"
+                            app:layout_constraintTop_toTopOf="@id/master_rating_kind_text"/>
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/master_rating_affordability_text"
+                            style="@style/tiny_text_style.medium"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/view_estimate_master_rating_affordability"
+                            android:textColor="@color/text_basic_color"
+                            android:layout_marginStart="@dimen/estimation_card_master_rating_margin_start_10"
+                            app:layout_constraintStart_toEndOf="@id/master_rating_quality_score"
+                            app:layout_constraintTop_toTopOf="@id/master_rating_kind_text"/>
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/master_rating_affordability_score"
+                            style="@style/tiny_text_style.medium"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            tools:text="4"
+                            android:textColor="@color/color_1FC472"
+                            android:layout_marginStart="@dimen/estimation_card_master_rating_margin_start_2"
+                            app:layout_constraintStart_toEndOf="@id/master_rating_affordability_text"
+                            app:layout_constraintTop_toTopOf="@id/master_rating_kind_text"/>
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/master_rating_punctuality_text"
+                            style="@style/tiny_text_style.medium"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/view_estimate_master_rating_punctuality"
+                            android:textColor="@color/text_basic_color"
+                            android:layout_marginStart="@dimen/estimation_card_master_rating_margin_start_10"
+                            app:layout_constraintStart_toEndOf="@id/master_rating_affordability_score"
+                            app:layout_constraintTop_toTopOf="@id/master_rating_kind_text"/>
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/master_rating_punctuality_score"
+                            style="@style/tiny_text_style.medium"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            tools:text="4"
+                            android:layout_marginStart="@dimen/estimation_card_master_rating_margin_start_2"
+                            android:textColor="@color/color_1FC472"
+                            app:layout_constraintStart_toEndOf="@id/master_rating_punctuality_text"
+                            app:layout_constraintTop_toTopOf="@id/master_rating_kind_text"/>
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/customer_review_type"
+                            style="@style/tiny_text_style.regular"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            tools:text="욕실 위생도기 및 수전 설치/교체 시공"
+                            android:textColor="@color/text_primary_color"
+                            android:layout_marginTop="@dimen/estimation_card_master_rating_margin_top_10"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/master_rating_kind_text"/>
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/customer_review_content"
+                            style="@style/small_text_style"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            tools:text="너무 꼼꼼히 잘 해주셨어요. 다음에 또 부탁드리고 싶네요! 감사합니다."
+                            android:textColor="@color/primary_text_color"
+                            android:layout_marginTop="@dimen/estimation_card_master_rating_margin_top_12"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/customer_review_type"/>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/review_photo_list"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/estimation_card_master_rating_margin_top_12"
+                            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/customer_review_content"
+                            app:spanCount="4"
+                            bind:photo_list="@{vm.estimation.images}" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/customer_review_date"
+                            style="@style/tiny_text_style"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            tools:text="2020.07.01"
+                            android:textColor="@color/text_primary_color"
+                            android:layout_marginTop="@dimen/estimation_card_master_rating_margin_top_12"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/review_photo_list"/>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/customer_review_divider"
                         android:layout_width="match_parent"
-                        android:layout_height="8dp"
+                        android:layout_height="@dimen/divider_height"
                         android:layout_marginTop="@dimen/estimation_card_default_margin_top"
                         android:background="@drawable/divider"
-                        app:layout_constraintTop_toBottomOf="@id/photo_list"
+                        app:layout_constraintTop_toBottomOf="@id/customer_review_layout"
                         app:layout_constraintStart_toStartOf="parent"
                         />
 
+                    <androidx.constraintlayout.widget.Group
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/customer_review_group"
+                        android:visibility="gone"
+                        app:constraint_referenced_ids="customer_review_layout, customer_review_divider"
+                        />
+                    <!-- region end 고객 리뷰 -->
+
+                    <!-- region 나의 최종 시공 내용 -->
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/done_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="@dimen/estimation_card_default_margin_start"
+                        android:paddingEnd="@dimen/estimation_card_default_margin_end"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/customer_review_divider"
+                        >
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/done_title"
+                            style="@style/medium_text_style.bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/estimation_card_default_margin_top"
+                            android:text="@string/view_estimate_done_title"
+                            android:textColor="@color/text_basic_color"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <LinearLayout
+                            android:id="@+id/custom_frame_for_done_detail"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/done_title"
+                            />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/done_divider"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/divider_height"
+                        android:layout_marginTop="@dimen/estimation_card_default_margin_top"
+                        android:background="@drawable/divider"
+                        app:layout_constraintTop_toBottomOf="@id/done_layout"
+                        app:layout_constraintStart_toStartOf="parent"
+                        />
+
+                    <androidx.constraintlayout.widget.Group
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/done_group"
+                        android:visibility="gone"
+                        app:constraint_referenced_ids="done_divider, done_layout"
+                        />
+                    <!-- region end 나의 최종 시공 내용 -->
+
+                    <!-- region 고객 요청 내용 -->
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/customer_request_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="@dimen/estimation_card_default_margin_start"
+                        android:paddingEnd="@dimen/estimation_card_default_margin_end"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/done_divider"
+                        >
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/custom_title"
+                            style="@style/medium_text_style.bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/estimation_card_default_margin_top"
+                            android:text="@string/view_estimate_customer_request_title"
+                            android:textColor="@color/text_basic_color"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/customer_request_layout"
+                            bind:visible="@{vm.estimation.additionalInfo}" />
+
+                        <LinearLayout
+                            android:id="@+id/custom_frame"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/custom_title" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/photo_title"
+                            style="@style/small_text_style"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:layout_marginEnd="20dp"
+                            android:text="@string/view_estimate_photo_title"
+                            android:textColor="@color/text_primary_color"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/custom_frame"
+                            bind:visible="@{vm.estimation.images}" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/photo_list"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="20dp"
+                            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/photo_title"
+                            app:spanCount="4"
+                            bind:photo_list="@{vm.estimation.images}"
+                            bind:visible="@{vm.estimation.images}" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/customer_request_divider"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/divider_height"
+                        android:layout_marginTop="@dimen/estimation_card_default_margin_top"
+                        android:background="@drawable/divider"
+                        app:layout_constraintTop_toBottomOf="@id/customer_request_layout"
+                        app:layout_constraintStart_toStartOf="parent"
+                        />
+
+                    <androidx.constraintlayout.widget.Group
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/customer_request_group"
+                        android:visibility="visible"
+                        app:constraint_referenced_ids="customer_request_divider, customer_request_layout"
+                        />
+                    <!-- region end 고객 요청 내용 -->
+
+                    <!-- region 나의 제안 내용 -->
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/transmission_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
                         android:paddingStart="@dimen/estimation_card_default_margin_start"
                         android:paddingEnd="@dimen/estimation_card_default_margin_end"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/transmission_divider">
+                        app:layout_constraintTop_toBottomOf="@id/customer_request_divider">
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/transmission_title"
@@ -201,8 +475,7 @@
                             android:text="@string/view_estimate_trasmission_title"
                             android:textColor="@color/text_basic_color"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            bind:visible="@{vm.estimation.additionalInfo}" />
+                            app:layout_constraintTop_toTopOf="parent" />
 
                         <LinearLayout
                             android:id="@+id/custom_frame_for_transmission_detail"
@@ -213,13 +486,23 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/transmission_title"
                             />
-
                     </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/transmission_divider"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/divider_height"
+                        android:layout_marginTop="@dimen/estimation_card_default_margin_top"
+                        android:background="@drawable/divider"
+                        app:layout_constraintTop_toBottomOf="@id/transmission_layout"
+                        app:layout_constraintStart_toStartOf="parent"
+                        />
+
                     <androidx.constraintlayout.widget.Group
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/transmission_group"
-                        android:visibility="visible"
+                        android:visibility="gone"
                         app:constraint_referenced_ids="transmission_divider, transmission_layout"
                         />
                     <!-- region end 나의 제안 내용 -->
@@ -286,7 +569,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
             <!-- region end 견적 마감일 -->
 
-            <!-- region 승인/취소 버튼 -->
+            <!-- region 견적을 보낼래요/견적을 내기 어려워요 버튼 -->
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/refuse"
                 style="@style/medium_text_style.bold"
@@ -310,7 +593,78 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/refuse" />
+
+            <androidx.constraintlayout.widget.Group
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/requested_button_group"
+                android:visibility="gone"
+                app:constraint_referenced_ids="due_date_container, accept, refuse"
+                />
             <!-- region end 승인/취소 버튼 -->
+
+            <!-- region 취소 됐음/시공 완료 버튼 -->
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/cancel_button"
+                style="@style/medium_text_style.bold"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:background="@color/color_FF711D"
+                android:text="@string/view_estimate_cancelled"
+                android:textColor="@color/basic_white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/done_button"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/done_button"
+                style="@style/medium_text_style.bold"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:background="@color/color_22D47B"
+                android:text="@string/view_estimate_done_button"
+                android:textColor="@color/basic_white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/cancel_button" />
+
+            <androidx.constraintlayout.widget.Group
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/progress_button_group"
+                android:visibility="gone"
+                app:constraint_referenced_ids="cancel_button, done_button"
+                />
+            <!-- region end 취소 됐음/시공 완료 버튼 -->
+
+            <!-- region 시공 완료 버튼 -->
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/done_button_wide"
+                style="@style/medium_text_style.bold"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:background="@color/color_22D47B"
+                android:text="@string/view_estimate_done_button"
+                android:textColor="@color/basic_white"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <!-- region 리뷰 요청 버튼 -->
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/request_review"
+                style="@style/medium_text_style.bold"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:background="@color/color_22D47B"
+                android:text="@string/view_estimate_request_review"
+                android:textColor="@color/basic_white"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>

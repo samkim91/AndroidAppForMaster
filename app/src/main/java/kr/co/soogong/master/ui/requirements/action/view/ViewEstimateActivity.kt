@@ -6,6 +6,7 @@ import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.estimation.Estimation
+import kr.co.soogong.master.data.estimation.Message
 import kr.co.soogong.master.databinding.ActivityViewEstimateBinding
 import kr.co.soogong.master.domain.requirements.EstimationStatus
 import kr.co.soogong.master.ui.base.BaseActivity
@@ -14,14 +15,12 @@ import kr.co.soogong.master.ui.dialog.DialogData.Companion.cancelDialogData
 import kr.co.soogong.master.uiinterface.image.ImageViewActivityHelper
 import kr.co.soogong.master.uiinterface.requirments.action.view.ViewEstimateActivityHelper
 import kr.co.soogong.master.util.extension.addAdditionInfoView
-import kr.co.soogong.master.util.extension.visible
+import kr.co.soogong.master.util.extension.addTransmissionMessage
 import timber.log.Timber
-import java.util.Observer
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class ViewEstimateActivity : BaseActivity<ActivityViewEstimateBinding>(
-    R.layout.activity_view_estimate
+        R.layout.activity_view_estimate
 ) {
     private val estimationId: String by lazy {
         ViewEstimateActivityHelper.getEstimationId(intent)
@@ -49,25 +48,25 @@ class ViewEstimateActivity : BaseActivity<ActivityViewEstimateBinding>(
             }
 
             photoList.adapter = ViewEstimateImageAdapter(
-                cardClickClickListener = { position ->
-                    startActivity(
-                        ImageViewActivityHelper.getIntent(
-                            this@ViewEstimateActivity,
-                            estimationId,
-                            position
+                    cardClickClickListener = { position ->
+                        startActivity(
+                                ImageViewActivityHelper.getIntent(
+                                        this@ViewEstimateActivity,
+                                        estimationId,
+                                        position
+                                )
                         )
-                    )
-                }
+                    }
             )
 
             refuse.setOnClickListener {
                 val dialog = CustomDialog(cancelDialogData(this@ViewEstimateActivity),
-                    yesClick = {
+                        yesClick = {
 
-                    },
-                    noClick = {
+                        },
+                        noClick = {
 
-                    }
+                        }
                 )
                 dialog.show(supportFragmentManager, dialog.tag)
             }
@@ -77,7 +76,9 @@ class ViewEstimateActivity : BaseActivity<ActivityViewEstimateBinding>(
     private fun registerEventObserve() {
         viewModel.estimation.observe(this@ViewEstimateActivity, { estimation ->
             binding.actionBar.title.text =
-                getString(R.string.view_estimate_title, estimation?.keycode)
+                    getString(R.string.view_estimate_title, estimation?.keycode)
+
+            val status = EstimationStatus.getStatus(estimation?.status, estimation?.transmissions)
 
             // 고객 요청 내용
             val additionInfo = estimation?.additionalInfo
@@ -85,32 +86,98 @@ class ViewEstimateActivity : BaseActivity<ActivityViewEstimateBinding>(
                 binding.customFrame.removeAllViews()
                 additionInfo.forEach { item ->
                     addAdditionInfoView(
-                        binding.customFrame,
-                        this@ViewEstimateActivity,
-                        item.description,
-                        item.value
+                            binding.customFrame,
+                            this@ViewEstimateActivity,
+                            item.description,
+                            item.value
                     )
                 }
             }
 
-            // 나의 제안 내용
-            val message = estimation?.transmissions?.message
-            if (message != null) {
+            when (status) {
+                // 상태 : 견적요청
+                // view : 고객 요청 내용
+                // footer : 견적 마감일, 견적을 보낼래요, 견적을 내기 어려워요
+                EstimationStatus.Request -> {
+                    binding.requestedButtonGroup.visibility = View.VISIBLE
+                }
 
+                // 상태 : 매칭대기
+                // view : 고객 요청 내용, 나의 제안 내용
+                // footer : none
+                EstimationStatus.Waiting -> {
+                    bindTransmissionData(estimation?.transmissions?.message)
+                }
+
+                // 상태 : 시공진행중
+                // view : 고객 요청 내용(+고객에게 전화하기), 나의 제안 내용
+                // footer : 취소 됐음, 시공 완료
+                EstimationStatus.Progress -> {
+                    // todo.. 고객에게 전화하기 버튼 추가
+                    binding.progressButtonGroup.visibility = View.VISIBLE
+
+                    bindTransmissionData(estimation?.transmissions?.message)
+                }
+
+                // 상태 : 고객완료요청
+                // view : 고객 요청 내용, 나의 제안 내용
+                // footer : 시공 완료
+                EstimationStatus.CustomDone -> {
+                    binding.doneButtonWide.visibility = View.VISIBLE
+
+                    bindTransmissionData(estimation?.transmissions?.message)
+                }
+
+                // 상태 : 시공완료
+                // view : 나의 최종 시공 내용, 고객 요청 내용
+                // footer : 리뷰 요청하기
+                EstimationStatus.Done -> {
+                    binding.requestReview.visibility = View.VISIBLE
+                    bindDoneData(estimation?.transmissions?.message)
+                }
+
+                // 상태 : 평가완료
+                // view : 고객 리뷰, 나의 최종 시공 내용, 고객 요청 내용
+                // footer : none
+                EstimationStatus.Final -> {
+                    //Todo.. 고객 리뷰 데이터를 서버에서 return 해줘야함.
+                    binding.customerReviewGroup.visibility = View.VISIBLE
+                    bindDoneData(estimation?.transmissions?.message)
+                }
+
+                // 상태 : 시공취소
+                // view : 고객 시공 취소 사유, 고객 요청 내용, 나의 제안 내용
+                // footer : none
+                EstimationStatus.Cancel -> {
+                    binding.doneGroup.visibility = View.VISIBLE
+                    bindTransmissionData(estimation?.transmissions?.message)
+                }
             }
-
-            // 견적 요청 상태에서의 견적 마감일, 버튼들 보이
-            if (EstimationStatus.getStatus(estimation?.status, estimation?.transmissions) == EstimationStatus.Request){
-                binding.dueDateContainer.visibility = View.VISIBLE
-                binding.refuse.visibility = View.VISIBLE
-                binding.accept.visibility = View.VISIBLE
-            }
-
-            // 나의 최종 시공 내용
-
-            // 고객 리뷰
-
         })
+    }
+
+    private fun bindTransmissionData(message: Message?) {
+        if (message != null) {
+            binding.transmissionGroup.visibility = View.VISIBLE
+            binding.customFrameForTransmissionDetail.removeAllViews()
+            addTransmissionMessage(
+                    binding.customFrameForTransmissionDetail,
+                    this@ViewEstimateActivity,
+                    message
+            )
+        }
+    }
+
+    private fun bindDoneData(message: Message?) {
+        if (message != null) {
+            binding.doneGroup.visibility = View.VISIBLE
+            binding.customFrameForDoneDetail.removeAllViews()
+            addTransmissionMessage(
+                    binding.customFrameForDoneDetail,
+                    this@ViewEstimateActivity,
+                    message
+            )
+        }
     }
 
     companion object {

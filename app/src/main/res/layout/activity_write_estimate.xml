@@ -123,7 +123,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="24dp"
-                    android:text="@string/view_estimate_custom_title"
+                    android:text="@string/view_estimate_customer_request_title"
                     android:textColor="@color/text_basic_color"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/first_time" />

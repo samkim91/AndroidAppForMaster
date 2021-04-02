@@ -92,19 +92,31 @@
 
     <!-- View Estimate -->
     <string name="view_estimate_title">고객번호 %s</string>
-    <string name="view_estimate_custom_title">고객 요청 내용</string>
+    <string name="view_estimate_customer_review_title">고객 리뷰</string>
+    <string name="view_estimate_done_title">나의 최종 시공 내용</string>
+    <string name="view_estimate_customer_request_title">고객 요청 내용</string>
     <string name="view_estimate_photo_title">사진이 있다면 견적에 도움이 됩니다.</string>
     <string name="view_estimate_trasmission_title">나의 제안 내용</string>
     <string name="view_estimate_accept">견적을 보낼래요</string>
     <string name="view_estimate_refuse">견적을 내기 어려워요</string>
+    <string name="view_estimate_cancelled">취소 됐음</string>
+    <string name="view_estimate_done_button">시공 완료</string>
+    <string name="view_estimate_request_review">리뷰 요청하기</string>
 
-    <!-- View Estimate -->
+    <string name="view_estimate_master_rating_title">마스터 추천도</string>
+    <string name="view_estimate_master_rating_kind">친절도</string>
+    <string name="view_estimate_master_rating_quality">퀄리티</string>
+    <string name="view_estimate_master_rating_affordability">가격만족</string>
+    <string name="view_estimate_master_rating_punctuality">기일준수</string>
+
+    <!-- Transmission Card & Done Card in View Estimate -->
     <string name="view_estimate_transmission_detail_total_price">총 견적가</string>
     <string name="view_estimate_transmission_detail_personnel_price">인건비</string>
     <string name="view_estimate_transmission_detail_trip_price">출장비</string>
     <string name="view_estimate_transmission_detail_material_price">자재비</string>
     <string name="view_estimate_transmission_detail_contents">제안내용</string>
     <string name="view_estimate_transmission_detail_work_date">시공시기</string>
+    <string name="view_estimate_done_final_price">최종 시공가</string>
 
     <!--  Cancel Estimate  -->
     <string name="cancel_estimate_title">취소 사유</string>
