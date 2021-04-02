@@ -1,20 +1,24 @@
 package kr.co.soogong.master.ui.requirements.action.view
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.map
+import android.os.Bundle
+import androidx.lifecycle.*
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kr.co.soogong.master.data.estimation.Estimation
 import kr.co.soogong.master.domain.requirements.EstimationStatus
 import kr.co.soogong.master.domain.usecase.GetEstimationUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
+import kr.co.soogong.master.uiinterface.requirments.action.view.ViewEstimateActivityHelper
+import javax.inject.Inject
 
-class ViewEstimateViewModel @AssistedInject constructor(
-    getEstimationUseCase: GetEstimationUseCase,
-    @Assisted estimationId: String
+@HiltViewModel
+class ViewEstimateViewModel @Inject constructor(
+    private val getEstimationUseCase: GetEstimationUseCase,
+    private val savedStateHandle: SavedStateHandle
 ) : BaseViewModel() {
+
+    private val estimationId = savedStateHandle.get<Bundle>(ViewEstimateActivityHelper.EXTRA_KEY_BUNDLE)?.getString(ViewEstimateActivityHelper.BUNDLE_KEY_ESTIMATION_KEY)!!
 
     private val _estimation = getEstimationUseCase(estimationId)
     val estimation: LiveData<Estimation?>
@@ -25,22 +29,8 @@ class ViewEstimateViewModel @AssistedInject constructor(
             EstimationStatus.getStatus(it?.status, it?.transmissions)
         }
 
-    @dagger.assisted.AssistedFactory
-    interface AssistedFactory {
-        fun create(estimationId: String): ViewEstimateViewModel
-    }
-
     companion object {
         private const val TAG = "ViewEstimateViewModel"
 
-        fun provideFactory(
-            assistedFactory: AssistedFactory,
-            estimationId: String
-        ): ViewModelProvider.Factory = object : ViewModelProvider.Factory {
-            @Suppress("UNCHECKED_CAST")
-            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-                return assistedFactory.create(estimationId) as T
-            }
-        }
     }
 }

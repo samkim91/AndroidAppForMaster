@@ -65,6 +65,22 @@
         <item name="android:textColor">@color/list_item_description_text_color</item>
     </style>
 
+    <style name="tiny_text_style">
+        <item name="android:textSize">@dimen/text_tiny_size</item>
+    </style>
+
+    <style name="tiny_text_style.medium" parent="tiny_text_style">
+        <item name="android:fontFamily">@font/medium</item>
+    </style>
+
+    <style name="tiny_text_style.regular" parent="tiny_text_style">
+        <item name="android:fontFamily">@font/regular</item>
+    </style>
+
+    <style name="tiny_text_style.bold" parent="tiny_text_style">
+        <item name="android:fontFamily">@font/bold</item>
+    </style>
+
     <style name="small_text_style">
         <item name="android:textSize">@dimen/text_small_size</item>
     </style>

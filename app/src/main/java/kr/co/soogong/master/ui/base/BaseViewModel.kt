@@ -1,5 +1,6 @@
 package kr.co.soogong.master.ui.base
 
+import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,7 +10,7 @@ import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kr.co.soogong.master.util.Event
 
-abstract class BaseViewModel : ViewModel() {
+abstract class BaseViewModel : ViewModel(), LifecycleObserver {
 
     protected val coroutineExceptionHanlder =
         CoroutineExceptionHandler { coroutineContext, throwable ->

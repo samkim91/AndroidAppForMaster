@@ -163,6 +163,25 @@
     <dimen name="requirement_card_done_button_margin_start">4dp</dimen>
     <dimen name="requirement_card_done_button_margin_top">12dp</dimen>
     <dimen name="requirement_card_review_button_margin_top">12dp</dimen>
+    <dimen name="requirement_card_default_margin_start">20dp</dimen>
+    <dimen name="requirement_card_margin_top">24dp</dimen>
+
+    <!-- Estimate View -->
+    <dimen name="estimation_card_default_margin_top">24dp</dimen>
+    <dimen name="estimation_card_default_margin_start">20dp</dimen>
+    <dimen name="estimation_card_default_margin_end">20dp</dimen>
+    <dimen name="estimation_card_master_rating_margin_top">16dp</dimen>
+    <dimen name="estimation_card_master_rating_margin_top_8">8dp</dimen>
+    <dimen name="estimation_card_master_rating_margin_top_10">10dp</dimen>
+    <dimen name="estimation_card_master_rating_margin_top_12">12dp</dimen>
+    <dimen name="estimation_card_master_rating_margin_start_2">2dp</dimen>
+    <dimen name="estimation_card_master_rating_margin_start_10">10dp</dimen>
+    <dimen name="estimation_card_master_rating_bar_margin_start">6dp</dimen>
+    <dimen name="estimation_card_master_rating_bar_margin_top">2dp</dimen>
+
+    <!--  Widget  -->
+    <dimen name="view_transmission_message_margin_top">12dp</dimen>
+
 
     <!--  Drawable  -->
     <dimen name="edit_text_height">40dp</dimen>
@@ -178,6 +197,7 @@
     <dimen name="badge_height">16dp</dimen>
     <dimen name="badge_text_size">10sp</dimen>
     <dimen name="line_height">1dp</dimen>
+    <dimen name="divider_height">8dp</dimen>
 
 
     <dimen name="actionbar_title_collapsed_text_size">19sp</dimen>
@@ -206,6 +226,7 @@
     <dimen name="list_icon_one_line_margin_bottom">10dp</dimen>
     <dimen name="list_icon_text_margin">12dp</dimen>
 
+    <dimen name="text_tiny_size">12sp</dimen>
     <dimen name="text_small_size">14sp</dimen>
     <dimen name="text_medium_size">16sp</dimen>
     <dimen name="text_title_size">18sp</dimen>
