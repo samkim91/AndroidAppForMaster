@@ -60,7 +60,7 @@ class PasswordActivity : BaseActivity<ActivityPasswordBinding>(
         viewModel.action.observe(this, EventObserver { event ->
             when (event) {
                 PasswordViewModel.SUCCESS_PASSWORD -> {
-                    toast("비밀번호 변경 성공")
+                    toast(getString(R.string.password_changed_successfully))
                 }
                 PasswordViewModel.FAIL_PASSWORD -> {
                     showPasswordAlert(getString(R.string.password_empty_alert_text))

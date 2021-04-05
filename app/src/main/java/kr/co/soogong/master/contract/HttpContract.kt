@@ -35,8 +35,8 @@ object HttpContract {
     //region Estimations
     const val GET_ESTIMATION_V2 = "api/v2/estimations/{branch_keycode}"
     const val GET_ESTIMATION = "api/v1/transmissions/default_list"
-    const val GET_ESTIMATION_ACCEPT = "api/v1/transmissions/accept_list"
-    const val GET_ESTIMATION_REFUSE = "api/v1/transmissions/refuse"
+    const val ACCEPT_ESTIMATION = "api/v1/transmissions/accept_list"
+    const val REFUSE_ESTIMATION = "api/v1/transmissions/refuse"
     const val SEND_ESTIMATION_MESSAGE = "api/v1/transmissions/send_message"
     //endregion
 
