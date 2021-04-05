@@ -517,7 +517,7 @@
                 android:layout_height="40dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/refuse"
+                app:layout_constraintBottom_toTopOf="@id/refuse_button"
                 >
 
                 <androidx.appcompat.widget.AppCompatImageView
@@ -571,7 +571,7 @@
 
             <!-- region 견적을 보낼래요/견적을 내기 어려워요 버튼 -->
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/refuse"
+                android:id="@+id/refuse_button"
                 style="@style/medium_text_style.bold"
                 android:layout_width="0dp"
                 android:layout_height="48dp"
@@ -579,11 +579,11 @@
                 android:text="@string/view_estimate_refuse"
                 android:textColor="@color/basic_white"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/accept"
+                app:layout_constraintEnd_toStartOf="@id/accept_button"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/accept"
+                android:id="@+id/accept_button"
                 style="@style/medium_text_style.bold"
                 android:layout_width="0dp"
                 android:layout_height="48dp"
@@ -592,14 +592,14 @@
                 android:textColor="@color/basic_white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/refuse" />
+                app:layout_constraintStart_toEndOf="@id/refuse_button" />
 
             <androidx.constraintlayout.widget.Group
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/requested_button_group"
                 android:visibility="gone"
-                app:constraint_referenced_ids="due_date_container, accept, refuse"
+                app:constraint_referenced_ids="due_date_container, accept_button, refuse_button"
                 />
             <!-- region end 승인/취소 버튼 -->
 
@@ -612,6 +612,7 @@
                 android:background="@color/color_FF711D"
                 android:text="@string/view_estimate_cancelled"
                 android:textColor="@color/basic_white"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/done_button"
                 app:layout_constraintStart_toStartOf="parent" />
@@ -624,36 +625,15 @@
                 android:background="@color/color_22D47B"
                 android:text="@string/view_estimate_done_button"
                 android:textColor="@color/basic_white"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/cancel_button" />
-
-            <androidx.constraintlayout.widget.Group
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/progress_button_group"
-                android:visibility="gone"
-                app:constraint_referenced_ids="cancel_button, done_button"
-                />
             <!-- region end 취소 됐음/시공 완료 버튼 -->
-
-            <!-- region 시공 완료 버튼 -->
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/done_button_wide"
-                style="@style/medium_text_style.bold"
-                android:layout_width="0dp"
-                android:layout_height="48dp"
-                android:background="@color/color_22D47B"
-                android:text="@string/view_estimate_done_button"
-                android:textColor="@color/basic_white"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
 
             <!-- region 리뷰 요청 버튼 -->
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/request_review"
+                android:id="@+id/request_review_button"
                 style="@style/medium_text_style.bold"
                 android:layout_width="0dp"
                 android:layout_height="48dp"

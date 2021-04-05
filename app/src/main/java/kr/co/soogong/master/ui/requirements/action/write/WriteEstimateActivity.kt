@@ -7,12 +7,17 @@ import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ActivityWriteEstimateBinding
 import kr.co.soogong.master.ui.base.BaseActivity
+import kr.co.soogong.master.uiinterface.requirments.action.view.ViewEstimateActivityHelper
 import timber.log.Timber
 
 @AndroidEntryPoint
 class WriteEstimateActivity : BaseActivity<ActivityWriteEstimateBinding>(
     R.layout.activity_write_estimate
 ) {
+    private val estimationId: String by lazy {
+        ViewEstimateActivityHelper.getEstimationId(intent)
+    }
+
     private val viewModel: WriteEstimateViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,6 +27,7 @@ class WriteEstimateActivity : BaseActivity<ActivityWriteEstimateBinding>(
     }
 
     override fun initLayout() {
+        Timber.tag(TAG).d("initLayout: ")
         bind {
             vm = viewModel
 
@@ -31,7 +37,7 @@ class WriteEstimateActivity : BaseActivity<ActivityWriteEstimateBinding>(
                     super.onBackPressed()
                 }
                 button.setOnClickListener {
-                    viewModel.doOnWrite()
+                    viewModel.sendEstimation()
                 }
             }
 
@@ -48,7 +54,6 @@ class WriteEstimateActivity : BaseActivity<ActivityWriteEstimateBinding>(
                     }
                 }
             }
-
         }
     }
 

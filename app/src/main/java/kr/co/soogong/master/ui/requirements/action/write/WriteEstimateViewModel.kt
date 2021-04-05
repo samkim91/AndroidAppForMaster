@@ -8,7 +8,7 @@ import javax.inject.Inject
 class WriteEstimateViewModel @Inject constructor(
 ) : BaseViewModel() {
 
-    fun doOnWrite() {
+    fun sendEstimation() {
 
     }
 }
