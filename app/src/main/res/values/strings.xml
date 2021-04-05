@@ -40,6 +40,7 @@
     <string name="password_button_text">비밀번호 변경하기</string>
     <string name="password_empty_alert_text">비밀번호를 입력해주세요.</string>
     <string name="password_compare_alert_text">비밀번호가 일치하지 않습니다.</string>
+    <string name="password_changed_successfully">비밀번호 변경 성공</string>
 
     <!-- Alarm -->
     <string name="alarm_page_name">알림 설정</string>
@@ -108,6 +109,10 @@
     <string name="view_estimate_master_rating_quality">퀄리티</string>
     <string name="view_estimate_master_rating_affordability">가격만족</string>
     <string name="view_estimate_master_rating_punctuality">기일준수</string>
+
+    <string name="view_estimate_on_refuse_to_estimate_success">문의가 삭제되었습니다.</string>
+    <string name="error_message_of_request_failed">해당 요청을 처리할 수 없습니다. 다시 요청해주세요.</string>
+
 
     <!-- Transmission Card & Done Card in View Estimate -->
     <string name="view_estimate_transmission_detail_total_price">총 견적가</string>

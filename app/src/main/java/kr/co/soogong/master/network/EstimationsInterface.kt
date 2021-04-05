@@ -16,11 +16,11 @@ interface EstimationsInterface {
     @GET(HttpContract.GET_ESTIMATION)
     fun getRequirementList(@Query("branch_keycode") auth: String?): Single<List<JsonObject>>
 
-    @GET(HttpContract.GET_ESTIMATION_ACCEPT)
+    @GET(HttpContract.ACCEPT_ESTIMATION)
     fun getProgressList(@Query("branch_keycode") auth: String?): Single<List<JsonObject>>
 
-    @POST(HttpContract.GET_ESTIMATION_REFUSE)
-    fun refuseRequirement(@Body body: HashMap<String, String?>): Single<Response>
+    @POST(HttpContract.REFUSE_ESTIMATION)
+    fun refuseToEstimate(@Body body: HashMap<String, String?>): Single<String>
 
     @POST(HttpContract.SEND_ESTIMATION_MESSAGE)
     fun sendMessage(@Body body: HashMap<String, String?>): Single<String>

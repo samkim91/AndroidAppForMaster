@@ -5,7 +5,6 @@ import android.view.View
 import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.estimation.Estimation
 import kr.co.soogong.master.data.estimation.Message
 import kr.co.soogong.master.databinding.ActivityViewEstimateBinding
 import kr.co.soogong.master.domain.requirements.EstimationStatus
@@ -14,13 +13,17 @@ import kr.co.soogong.master.ui.dialog.CustomDialog
 import kr.co.soogong.master.ui.dialog.DialogData.Companion.cancelDialogData
 import kr.co.soogong.master.uiinterface.image.ImageViewActivityHelper
 import kr.co.soogong.master.uiinterface.requirments.action.view.ViewEstimateActivityHelper
+import kr.co.soogong.master.uiinterface.requirments.action.write.WriteEstimateActivityHelper
+import kr.co.soogong.master.util.EventObserver
 import kr.co.soogong.master.util.extension.addAdditionInfoView
 import kr.co.soogong.master.util.extension.addTransmissionMessage
+import kr.co.soogong.master.util.extension.toast
 import timber.log.Timber
+import java.util.*
 
 @AndroidEntryPoint
 class ViewEstimateActivity : BaseActivity<ActivityViewEstimateBinding>(
-        R.layout.activity_view_estimate
+    R.layout.activity_view_estimate
 ) {
     private val estimationId: String by lazy {
         ViewEstimateActivityHelper.getEstimationId(intent)
@@ -48,35 +51,53 @@ class ViewEstimateActivity : BaseActivity<ActivityViewEstimateBinding>(
             }
 
             photoList.adapter = ViewEstimateImageAdapter(
-                    cardClickClickListener = { position ->
-                        startActivity(
-                                ImageViewActivityHelper.getIntent(
-                                        this@ViewEstimateActivity,
-                                        estimationId,
-                                        position
-                                )
+                cardClickClickListener = { position ->
+                    startActivity(
+                        ImageViewActivityHelper.getIntent(
+                            this@ViewEstimateActivity,
+                            estimationId,
+                            position
                         )
-                    }
+                    )
+                }
             )
 
-            refuse.setOnClickListener {
+            // 견적을 보낼래요 버튼
+            acceptButton.setOnClickListener {
+                startActivity(WriteEstimateActivityHelper.getIntent(this@ViewEstimateActivity))
+            }
+
+            // 견적을 내기 어려워요 버튼
+            refuseButton.setOnClickListener {
                 val dialog = CustomDialog(cancelDialogData(this@ViewEstimateActivity),
-                        yesClick = {
-
-                        },
-                        noClick = {
-
-                        }
+                    yesClick = {
+                        vm.refuseToEstimate()
+                    },
+                    noClick = { }
                 )
+
                 dialog.show(supportFragmentManager, dialog.tag)
             }
+
+            // 취소 됐음 버튼
+            cancelButton.setOnClickListener {
+
+            }
+
+            // 시공 완료 버튼
+            doneButton.setOnClickListener {
+
+            }
+
+            // 리뷰 요청하기 버튼
+
         }
     }
 
     private fun registerEventObserve() {
         viewModel.estimation.observe(this@ViewEstimateActivity, { estimation ->
             binding.actionBar.title.text =
-                    getString(R.string.view_estimate_title, estimation?.keycode)
+                getString(R.string.view_estimate_title, estimation?.keycode)
 
             val status = EstimationStatus.getStatus(estimation?.status, estimation?.transmissions)
 
@@ -86,10 +107,10 @@ class ViewEstimateActivity : BaseActivity<ActivityViewEstimateBinding>(
                 binding.customFrame.removeAllViews()
                 additionInfo.forEach { item ->
                     addAdditionInfoView(
-                            binding.customFrame,
-                            this@ViewEstimateActivity,
-                            item.description,
-                            item.value
+                        binding.customFrame,
+                        this@ViewEstimateActivity,
+                        item.description,
+                        item.value
                     )
                 }
             }
@@ -114,7 +135,8 @@ class ViewEstimateActivity : BaseActivity<ActivityViewEstimateBinding>(
                 // footer : 취소 됐음, 시공 완료
                 EstimationStatus.Progress -> {
                     // todo.. 고객에게 전화하기 버튼 추가
-                    binding.progressButtonGroup.visibility = View.VISIBLE
+                    binding.cancelButton.visibility = View.VISIBLE
+                    binding.doneButton.visibility = View.VISIBLE
 
                     bindTransmissionData(estimation?.transmissions?.message)
                 }
@@ -123,7 +145,7 @@ class ViewEstimateActivity : BaseActivity<ActivityViewEstimateBinding>(
                 // view : 고객 요청 내용, 나의 제안 내용
                 // footer : 시공 완료
                 EstimationStatus.CustomDone -> {
-                    binding.doneButtonWide.visibility = View.VISIBLE
+                    binding.doneButton.visibility = View.VISIBLE
 
                     bindTransmissionData(estimation?.transmissions?.message)
                 }
@@ -132,7 +154,7 @@ class ViewEstimateActivity : BaseActivity<ActivityViewEstimateBinding>(
                 // view : 나의 최종 시공 내용, 고객 요청 내용
                 // footer : 리뷰 요청하기
                 EstimationStatus.Done -> {
-                    binding.requestReview.visibility = View.VISIBLE
+                    binding.requestReviewButton.visibility = View.VISIBLE
                     bindDoneData(estimation?.transmissions?.message)
                 }
 
@@ -154,6 +176,19 @@ class ViewEstimateActivity : BaseActivity<ActivityViewEstimateBinding>(
                 }
             }
         })
+
+        viewModel.action.observe(this@ViewEstimateActivity, EventObserver { event ->
+            when(event) {
+                ViewEstimateViewModel.SUCCESS -> {
+                    toast(getString(R.string.view_estimate_on_refuse_to_estimate_success))
+                    onBackPressed()
+                }
+
+                ViewEstimateViewModel.FAIL -> {
+                    toast(getString(R.string.error_message_of_request_failed))
+                }
+            }
+        })
     }
 
     private fun bindTransmissionData(message: Message?) {
@@ -161,9 +196,9 @@ class ViewEstimateActivity : BaseActivity<ActivityViewEstimateBinding>(
             binding.transmissionGroup.visibility = View.VISIBLE
             binding.customFrameForTransmissionDetail.removeAllViews()
             addTransmissionMessage(
-                    binding.customFrameForTransmissionDetail,
-                    this@ViewEstimateActivity,
-                    message
+                binding.customFrameForTransmissionDetail,
+                this@ViewEstimateActivity,
+                message
             )
         }
     }
@@ -173,9 +208,9 @@ class ViewEstimateActivity : BaseActivity<ActivityViewEstimateBinding>(
             binding.doneGroup.visibility = View.VISIBLE
             binding.customFrameForDoneDetail.removeAllViews()
             addTransmissionMessage(
-                    binding.customFrameForDoneDetail,
-                    this@ViewEstimateActivity,
-                    message
+                binding.customFrameForDoneDetail,
+                this@ViewEstimateActivity,
+                message
             )
         }
     }
