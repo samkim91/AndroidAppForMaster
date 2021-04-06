@@ -34,7 +34,7 @@ class EstimationsService @Inject constructor(
             .map { list -> list.map { Requirement.fromJson(it, "progress") } }
     }
 
-    fun refuseToEstimate(branchKeycode: String?, keycode: String): Single<String> {
+    fun refuseToEstimate(branchKeycode: String?, keycode: String): Single<Response> {
         val data = HashMap<String, String?>()
         data["branch_keycode"] = branchKeycode
         data["keycode"] = keycode

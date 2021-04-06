@@ -11,7 +11,7 @@ class RefuseToEstimateUseCase @Inject constructor(
     private val estimationsService: EstimationsService,
     private val getMasterKeyCodeUseCase: GetMasterKeyCodeUseCase
 ){
-    operator fun invoke(keycode : String): Single<String> {
+    operator fun invoke(keycode : String): Single<Response> {
         return estimationsService.refuseToEstimate(getMasterKeyCodeUseCase(), keycode)
     }
 

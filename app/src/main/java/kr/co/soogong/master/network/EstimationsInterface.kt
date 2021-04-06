@@ -20,7 +20,7 @@ interface EstimationsInterface {
     fun getProgressList(@Query("branch_keycode") auth: String?): Single<List<JsonObject>>
 
     @POST(HttpContract.REFUSE_ESTIMATION)
-    fun refuseToEstimate(@Body body: HashMap<String, String?>): Single<String>
+    fun refuseToEstimate(@Body body: HashMap<String, String?>): Single<Response>
 
     @POST(HttpContract.SEND_ESTIMATION_MESSAGE)
     fun sendMessage(@Body body: HashMap<String, String?>): Single<String>

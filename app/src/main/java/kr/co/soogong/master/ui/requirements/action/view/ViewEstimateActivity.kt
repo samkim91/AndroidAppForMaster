@@ -71,7 +71,7 @@ class ViewEstimateActivity : BaseActivity<ActivityViewEstimateBinding>(
             refuseButton.setOnClickListener {
                 val dialog = CustomDialog(cancelDialogData(this@ViewEstimateActivity),
                     yesClick = {
-                        vm.refuseToEstimate()
+                        vm?.refuseToEstimate()
                     },
                     noClick = { }
                 )

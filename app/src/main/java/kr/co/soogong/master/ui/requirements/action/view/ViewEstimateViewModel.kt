@@ -38,8 +38,7 @@ class ViewEstimateViewModel @Inject constructor(
             EstimationStatus.getStatus(it?.status, it?.transmissions)
         }
 
-    fun refuseToEstimate() {
-
+    fun refuseToEstimate(){
         refuseToEstimateUseCase(estimationId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
