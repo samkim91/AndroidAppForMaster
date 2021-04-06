@@ -95,8 +95,7 @@ data class Requirement(
                     tel = data.get("tel").asString,
                     questions = data.get("questions").asString,
                     estimate = Estimate(
-                        price = item.getNullable("price")?.asString,
-                        possibleDate = item.getNullable("possible_date")?.asString,
+                        priceInNumber = item.getNullable("price")?.asString,
                         contents = item.getNullable("contents")?.asString
                     )
                 )

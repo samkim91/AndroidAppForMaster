@@ -54,7 +54,7 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>(
             id.addTextChangedListener(afterTextChanged = {
                 if (id.text.isNullOrEmpty()) {
                     id.alertVisible = true
-                    id.alertText = "필수 입력 입니다"
+                    id.alertText = getString(R.string.alert_required_field)
                 } else {
                     id.alertVisible = false
                 }
@@ -62,7 +62,7 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>(
             password.addTextChangedListener(afterTextChanged = {
                 if (password.text.isNullOrEmpty()) {
                     password.alertVisible = true
-                    password.alertText = "필수 입력 입니다"
+                    password.alertText = getString(R.string.alert_required_field)
                 } else {
                     password.alertVisible = false
                 }
@@ -71,7 +71,7 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>(
             confirmPassword.addTextChangedListener(afterTextChanged = {
                 if (confirmPassword.text.isNullOrEmpty()) {
                     confirmPassword.alertVisible = true
-                    confirmPassword.alertText = "필수 입력 입니다"
+                    confirmPassword.alertText = getString(R.string.alert_required_field)
                 } else {
                     confirmPassword.alertVisible = false
                 }
@@ -80,7 +80,7 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>(
             username.addTextChangedListener(afterTextChanged = {
                 if (username.text.isNullOrEmpty()) {
                     username.alertVisible = true
-                    username.alertText = "필수 입력 입니다"
+                    username.alertText = getString(R.string.alert_required_field)
                 } else {
                     username.alertVisible = false
                 }

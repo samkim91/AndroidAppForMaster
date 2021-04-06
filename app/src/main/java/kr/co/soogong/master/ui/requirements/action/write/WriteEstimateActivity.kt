@@ -1,6 +1,8 @@
 package kr.co.soogong.master.ui.requirements.action.write
 
+import android.icu.text.DecimalFormat
 import android.os.Bundle
+import android.text.InputType
 import android.view.View
 import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
@@ -8,6 +10,7 @@ import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ActivityWriteEstimateBinding
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.uiinterface.requirments.action.view.ViewEstimateActivityHelper
+import kr.co.soogong.master.util.extension.toast
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -51,9 +54,40 @@ class WriteEstimateActivity : BaseActivity<ActivityWriteEstimateBinding>(
                     filterOption2.id -> {
                         amount.visibility = View.GONE
                         requestDetail.visibility = View.VISIBLE
+                        totalAmount.setEditTextBackground(getDrawable(R.drawable.shape_fill_gray_background_gray_border))
                     }
                 }
             }
+
+            amount.addTextChangedListener(afterTextChanged = {
+                amount.alertVisible = amount.text.isNullOrEmpty() || amount.text.toString().toInt() < 10000
+            })
+
+            laborCost.addTextChangedListener(afterTextChanged = {
+                laborCost.alertVisible = laborCost.text.isNullOrEmpty()
+                setTotalAmount()
+            })
+
+            materialCost.addTextChangedListener(afterTextChanged = {
+                materialCost.alertVisible = materialCost.text.isNullOrEmpty()
+                setTotalAmount()
+            })
+
+            travelCost.addTextChangedListener(afterTextChanged = {
+                travelCost.alertVisible = travelCost.text.isNullOrEmpty()
+                setTotalAmount()
+            })
+
+        }
+    }
+
+    private fun setTotalAmount() {
+        bind {
+            val laborCostInt = if (!laborCost.text.isNullOrEmpty()) laborCost.text.toString().toInt() else 0
+            val materialCostInt = if (!materialCost.text.isNullOrEmpty()) materialCost.text.toString().toInt() else 0
+            val travelCostInt = if (!travelCost.text.isNullOrEmpty()) travelCost.text.toString().toInt() else 0
+
+            totalAmount.text = (laborCostInt + materialCostInt + travelCostInt).toString()
         }
     }
 

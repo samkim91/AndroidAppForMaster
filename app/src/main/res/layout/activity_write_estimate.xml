@@ -245,6 +245,7 @@
                     android:layout_marginEnd="20dp"
                     android:textColor="@color/text_basic_color"
                     android:visibility="visible"
+                    app:setInputType="@{2}"
                     app:alertText='@{"견적은 1만원 이상으로 보내주세요."}'
                     app:alertVisible="@{false}"
                     app:hintText='@{"숫자만 입력해주세요. (단위 : 원)"}'
@@ -262,6 +263,7 @@
                     android:layout_marginEnd="20dp"
                     android:textColor="@color/text_basic_color"
                     app:alertText='@{"필수 정보입니다."}'
+                    app:setInputType="@{2}"
                     app:alertVisible="@{false}"
                     app:hintText='@{"숫자만 입력해주세요. (단위 : 원)"}'
                     app:layout_constraintEnd_toEndOf="parent"
@@ -278,6 +280,7 @@
                     android:layout_marginEnd="20dp"
                     android:textColor="@color/text_basic_color"
                     app:alertText='@{"필수 정보입니다."}'
+                    app:setInputType="@{2}"
                     app:alertVisible="@{false}"
                     app:hintText='@{"숫자만 입력해주세요. (단위 : 원)"}'
                     app:layout_constraintEnd_toEndOf="parent"
@@ -294,6 +297,7 @@
                     android:layout_marginEnd="20dp"
                     android:textColor="@color/text_basic_color"
                     app:alertText='@{"필수 정보입니다."}'
+                    app:setInputType="@{2}"
                     app:alertVisible="@{false}"
                     app:hintText='@{"숫자만 입력해주세요. (단위 : 원)"}'
                     app:layout_constraintEnd_toEndOf="parent"
@@ -310,6 +314,7 @@
                     android:layout_marginEnd="20dp"
                     android:textColor="@color/text_basic_color"
                     app:alertVisible="@{false}"
+                    app:setInputType="@{0}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/travel_cost"

@@ -6,11 +6,11 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Estimate(
-    @SerializedName("price")
-    val price: String?,
+    @SerializedName("price_in_number")
+    val priceInNumber: String?,
 
-    @SerializedName("possible_date")
-    val possibleDate: String?,
+//    @SerializedName("personnel")
+//    val personnel: String?,
 
     @SerializedName("contents")
     val contents: String?
