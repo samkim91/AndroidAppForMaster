@@ -1,6 +1,7 @@
 package kr.co.soogong.master.ui.widget
 
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.text.Editable
 import android.text.InputType
 import android.text.TextWatcher
@@ -9,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ViewTitleEdittextBinding
 
 class TitleEditText @JvmOverloads constructor(
@@ -72,6 +74,17 @@ class TitleEditText @JvmOverloads constructor(
             binding.detail.hint = value
         }
 
+    var setInputType: Int = 1  // TYPE_CLASS_TEXT
+        set(value) {
+            field = value
+            binding.detail.inputType = value
+        }
+
+    fun setEditTextBackground (drawable: Drawable?){
+        binding.detail.background = drawable
+    }
+
+
     fun addTextChangedListener(
         beforeTextChanged: (
             text: CharSequence?,
@@ -106,5 +119,15 @@ class TitleEditText @JvmOverloads constructor(
             }
         }
         binding.detail.addTextChangedListener(textWatcher)
+    }
+
+    fun addFocusChangeListener(
+        onFocusChange: (
+            view: View?,
+            hasFocus: Boolean
+                ) -> Unit
+    ) {
+        val focusListener = OnFocusChangeListener { v, hasFocus -> onFocusChange.invoke(v, hasFocus) }
+        binding.detail.onFocusChangeListener = focusListener
     }
 }

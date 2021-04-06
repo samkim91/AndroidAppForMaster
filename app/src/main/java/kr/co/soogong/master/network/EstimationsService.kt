@@ -45,14 +45,15 @@ class EstimationsService @Inject constructor(
     fun sendMessage(
         branchKeycode: String?,
         keycode: String,
+        transmissionType: String,
         estimate: Estimate
     ): Single<String> {
         val data = HashMap<String, String?>()
         data["branch_keycode"] = branchKeycode
         data["keycode"] = keycode
-        data["price"] = estimate.price
+        data["transmission_type"] = transmissionType
+        data["price_in_number"] = estimate.priceInNumber
         data["contents"] = estimate.contents
-        data["possible_date"] = estimate.possibleDate
         return estimationsInterface.sendMessage(data)
     }
 }
