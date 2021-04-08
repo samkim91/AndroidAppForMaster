@@ -17,12 +17,12 @@ class RequirementConverters {
     }
 
     @TypeConverter
-    fun estimateToString(estimate: Estimate?): String? {
-        return Gson().toJson(estimate)
+    fun estimateToString(estimationMessage: EstimationMessage?): String? {
+        return Gson().toJson(estimationMessage)
     }
 
     @TypeConverter
-    fun stringToEstimate(estimateString: String?): Estimate? {
-        return Gson().fromJson(estimateString, object : TypeToken<Estimate>() {}.type)
+    fun stringToEstimate(estimateString: String?): EstimationMessage? {
+        return Gson().fromJson(estimateString, object : TypeToken<EstimationMessage>() {}.type)
     }
 }

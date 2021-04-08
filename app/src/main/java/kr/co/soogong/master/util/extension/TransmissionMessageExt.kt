@@ -45,7 +45,7 @@ fun addTransmissionMessage(
                 "trip" ->
                     view.key = context.getString(R.string.view_estimate_transmission_detail_trip_price)
             }
-            view.value = "${DecimalFormat("#,###").format(item.priceInNumber ?: 0)}원"
+            view.value = "${DecimalFormat("#,###").format(item.priceInNumber)}원"
 
             viewGroup.addView(view, params)
         }

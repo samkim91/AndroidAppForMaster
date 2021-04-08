@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:bind="http://schemas.android.com/bind"
+    >
 
     <data>
-
         <variable
             name="vm"
             type="kr.co.soogong.master.ui.requirements.action.write.WriteEstimateViewModel" />
@@ -68,109 +69,140 @@
                     app:layout_constraintEnd_toEndOf="@id/detail_button"
                     app:layout_constraintTop_toTopOf="@id/detail_button" />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/location"
-                    style="@style/big_text_style.bold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="@dimen/requirement_card_location_margin_top"
-                    android:layout_marginEnd="20dp"
-                    android:ellipsize="end"
-                    android:lines="1"
-                    android:textColor="@color/primary_text_color"
-                    app:layout_constrainedWidth="true"
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/thin_line"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/line_height"
+                    android:background="@color/line_color"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/detail_button"
-                    tools:text="서울시 관악구 봉천동 70 봉천동 70 123-124" />
+                    app:layout_constraintTop_toBottomOf="@id/detail_button" />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/type"
-                    style="@style/big_text_style.bold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="@dimen/requirement_card_type_margin_top"
-                    android:layout_marginEnd="20dp"
-                    android:ellipsize="end"
-                    android:lines="1"
-                    android:textColor="@color/primary_text_color"
-                    app:layout_constrainedWidth="true"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/location"
-                    tools:text="욕실 위생도기 및 수전 설치/교체 123123123123" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/first_time"
-                    style="@style/small_text_style.medium"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="@dimen/requirement_card_first_time_margin_top"
-                    android:textColor="@color/tertiary_text_color"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/type"
-                    tools:text="최초 요청일 : 2021.01.11 - 13:20" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/custom_title"
-                    style="@style/medium_text_style.bold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="24dp"
-                    android:text="@string/view_estimate_customer_request_title"
-                    android:textColor="@color/text_basic_color"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/first_time" />
-
-                <LinearLayout
-                    android:id="@+id/custom_frame"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/detail_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:paddingStart="20dp"
-                    android:paddingEnd="20dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/custom_title" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/photo_title"
-                    style="@style/small_text_style"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginEnd="20dp"
-                    android:text="@string/view_estimate_photo_title"
-                    android:textColor="@color/text_primary_color"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/custom_frame" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/photo_list"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginEnd="20dp"
-                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/photo_title"
-                    app:spanCount="4" />
-
-                <androidx.constraintlayout.widget.Group
-                    android:id="@+id/detail_group"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:visibility="gone"
-                    app:constraint_referenced_ids="location,type,first_time,custom_title,custom_frame,photo_title,photo_list" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/detail_button">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/location"
+                        style="@style/big_text_style.bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="@dimen/requirement_card_location_margin_top_write_activity"
+                        android:layout_marginEnd="20dp"
+                        android:ellipsize="end"
+                        android:lines="1"
+                        android:text="@{vm.estimation.address}"
+                        android:textColor="@color/primary_text_color"
+                        app:layout_constrainedWidth="true"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/detail_container"
+                        tools:text="서울시 관악구 봉천동 70 봉천동 70 123-124" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/type"
+                        style="@style/big_text_style.bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="@dimen/requirement_card_type_margin_top"
+                        android:layout_marginEnd="20dp"
+                        android:ellipsize="end"
+                        android:lines="1"
+                        android:text="@{vm.estimation.project}"
+                        android:textColor="@color/primary_text_color"
+                        app:layout_constrainedWidth="true"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/location"
+                        tools:text="욕실 위생도기 및 수전 설치/교체 123123123123" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/first_time"
+                        style="@style/small_text_style.medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="@dimen/requirement_card_first_time_margin_top"
+                        android:textColor="@color/tertiary_text_color"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/type"
+                        bind:start_date="@{vm.estimation.createdAt}"
+                        tools:text="최초 요청일 : 2021.01.11 - 13:20" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/thin_line2"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/line_height"
+                        android:layout_marginStart="@dimen/estimation_card_default_margin_start"
+                        android:layout_marginTop="@dimen/estimation_card_default_margin_top"
+                        android:layout_marginEnd="@dimen/estimation_card_default_margin_end"
+                        android:background="@color/line_color"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/first_time" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/custom_title"
+                        style="@style/medium_text_style.bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="24dp"
+                        android:text="@string/view_estimate_customer_request_title"
+                        android:textColor="@color/text_basic_color"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/thin_line2"
+                        bind:visible="@{vm.estimation.additionalInfo}" />
+
+                    <LinearLayout
+                        android:id="@+id/custom_frame"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingStart="20dp"
+                        android:paddingEnd="20dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/custom_title" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/photo_title"
+                        style="@style/small_text_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="20dp"
+                        android:text="@string/view_estimate_photo_title"
+                        android:textColor="@color/text_primary_color"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/custom_frame"
+                        bind:visible="@{vm.estimation.images}" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/photo_list"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginEnd="20dp"
+                        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/photo_title"
+                        app:spanCount="4"
+                        bind:photo_list="@{vm.estimation.images}"
+                        bind:visible="@{vm.estimation.images}" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/line"
@@ -178,7 +210,7 @@
                     android:layout_height="10dp"
                     android:layout_marginTop="32dp"
                     android:background="@color/line_color"
-                    app:layout_constraintTop_toBottomOf="@id/photo_list"
+                    app:layout_constraintTop_toBottomOf="@id/detail_container"
                     app:layout_goneMarginTop="0dp" />
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -246,6 +278,7 @@
                     android:textColor="@color/text_basic_color"
                     android:visibility="visible"
                     app:setInputType="@{2}"
+                    app:setMaxLength="@{15}"
                     app:alertText='@{"견적은 1만원 이상으로 보내주세요."}'
                     app:alertVisible="@{false}"
                     app:hintText='@{"숫자만 입력해주세요. (단위 : 원)"}'
@@ -264,6 +297,7 @@
                     android:textColor="@color/text_basic_color"
                     app:alertText='@{"필수 정보입니다."}'
                     app:setInputType="@{2}"
+                    app:setMaxLength="@{15}"
                     app:alertVisible="@{false}"
                     app:hintText='@{"숫자만 입력해주세요. (단위 : 원)"}'
                     app:layout_constraintEnd_toEndOf="parent"
@@ -281,6 +315,7 @@
                     android:textColor="@color/text_basic_color"
                     app:alertText='@{"필수 정보입니다."}'
                     app:setInputType="@{2}"
+                    app:setMaxLength="@{15}"
                     app:alertVisible="@{false}"
                     app:hintText='@{"숫자만 입력해주세요. (단위 : 원)"}'
                     app:layout_constraintEnd_toEndOf="parent"
@@ -298,6 +333,7 @@
                     android:textColor="@color/text_basic_color"
                     app:alertText='@{"필수 정보입니다."}'
                     app:setInputType="@{2}"
+                    app:setMaxLength="@{15}"
                     app:alertVisible="@{false}"
                     app:hintText='@{"숫자만 입력해주세요. (단위 : 원)"}'
                     app:layout_constraintEnd_toEndOf="parent"

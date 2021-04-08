@@ -136,6 +136,8 @@
 
     <!-- Write Estimate -->
     <string name="write_estimate_title">견적서 작성</string>
+    <string name="send_estimation">견적서 보내기</string>
+
 
     <!-- End Estimate -->
     <string name="end_estimate_title">최종 정보</string>
@@ -186,5 +188,10 @@
 
     <!-- widget text -->
     <string name="minimum_cost">견적은 1만원 이상으로 보내주세요.</string>
+
+    <!-- toast text -->
+    <string name="send_message_succeeded">고객에게 견적서가 전달되었습니다! 매칭을 기다려주세요.</string>
+    <string name="send_message_failed">견적서 전달을 실패하였습니다! 다시 시도해보거나, 연락해주세요.</string>
+
 
 </resources>

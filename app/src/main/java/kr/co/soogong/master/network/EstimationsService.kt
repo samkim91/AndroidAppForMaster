@@ -2,7 +2,7 @@ package kr.co.soogong.master.network
 
 import io.reactivex.Single
 import kr.co.soogong.master.data.estimation.Estimation
-import kr.co.soogong.master.data.requirements.Estimate
+import kr.co.soogong.master.data.requirements.EstimationMessage
 import kr.co.soogong.master.data.requirements.Requirement
 import retrofit2.Retrofit
 import javax.inject.Inject
@@ -43,17 +43,22 @@ class EstimationsService @Inject constructor(
     }
 
     fun sendMessage(
+        actionType: String,
         branchKeycode: String?,
         keycode: String,
         transmissionType: String,
-        estimate: Estimate
-    ): Single<String> {
+        estimationMessage: EstimationMessage
+    ): Single<Response> {
         val data = HashMap<String, String?>()
+        data["action_type"] = actionType
         data["branch_keycode"] = branchKeycode
         data["keycode"] = keycode
         data["transmission_type"] = transmissionType
-        data["price_in_number"] = estimate.priceInNumber
-        data["contents"] = estimate.contents
+        data["contents"] = estimationMessage.message
+        data["price_in_number"] = estimationMessage.priceInNumber
+        data["personnel"] = estimationMessage.personnel
+        data["material"] = estimationMessage.material
+        data["trip"] = estimationMessage.trip
         return estimationsInterface.sendMessage(data)
     }
 }

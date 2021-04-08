@@ -15,19 +15,20 @@ import kr.co.soogong.master.domain.usecase.GetEstimationUseCase
 import kr.co.soogong.master.domain.usecase.RefuseToEstimateUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import kr.co.soogong.master.uiinterface.requirments.action.view.ViewEstimateActivityHelper
+import kr.co.soogong.master.uiinterface.requirments.action.view.ViewEstimateActivityHelper.BUNDLE_KEY_ESTIMATION_KEY
+import kr.co.soogong.master.uiinterface.requirments.action.view.ViewEstimateActivityHelper.EXTRA_KEY_BUNDLE
 import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class ViewEstimateViewModel @Inject constructor(
-    private val getEstimationUseCase: GetEstimationUseCase,
+    getEstimationUseCase: GetEstimationUseCase,
     private val refuseToEstimateUseCase: RefuseToEstimateUseCase,
-    private val savedStateHandle: SavedStateHandle
+    savedStateHandle: SavedStateHandle
 ) : BaseViewModel() {
 
     private val estimationId =
-        savedStateHandle.get<Bundle>(ViewEstimateActivityHelper.EXTRA_KEY_BUNDLE)
-            ?.getString(ViewEstimateActivityHelper.BUNDLE_KEY_ESTIMATION_KEY)!!
+        savedStateHandle.get<Bundle>(EXTRA_KEY_BUNDLE)?.getString(BUNDLE_KEY_ESTIMATION_KEY)!!
 
     private val _estimation = getEstimationUseCase(estimationId)
     val estimation: LiveData<Estimation?>
