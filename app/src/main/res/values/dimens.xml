@@ -148,6 +148,7 @@
     <dimen name="requirement_card_line_margin_top">13dp</dimen>
     <dimen name="requirement_card_request_id_margin_top">12dp</dimen>
     <dimen name="requirement_card_location_margin_top">12dp</dimen>
+    <dimen name="requirement_card_location_margin_top_write_activity">32dp</dimen>
     <dimen name="requirement_card_location_margin_end">20dp</dimen>
     <dimen name="requirement_card_type_margin_top">4dp</dimen>
     <dimen name="requirement_card_type_margin_end">20dp</dimen>

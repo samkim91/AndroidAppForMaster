@@ -18,7 +18,6 @@ object ViewEstimateActivityHelper {
     }
 
     fun getEstimationId(intent: Intent): String {
-        return intent.getBundleExtra(EXTRA_KEY_BUNDLE)?.getString(BUNDLE_KEY_ESTIMATION_KEY, "")
-            ?: ""
+        return intent.getBundleExtra(EXTRA_KEY_BUNDLE)?.getString(BUNDLE_KEY_ESTIMATION_KEY, "") ?: ""
     }
 }

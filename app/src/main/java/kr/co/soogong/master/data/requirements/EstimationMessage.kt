@@ -5,13 +5,19 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class Estimate(
+data class EstimationMessage(
     @SerializedName("price_in_number")
     val priceInNumber: String?,
 
-//    @SerializedName("personnel")
-//    val personnel: String?,
+    @SerializedName("personnel")
+    val personnel: String?,
 
-    @SerializedName("contents")
-    val contents: String?
+    @SerializedName("material")
+    val material: String?,
+
+    @SerializedName("trip")
+    val trip: String?,
+
+    @SerializedName("message")
+    val message: String?
 ) : Parcelable

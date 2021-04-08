@@ -23,7 +23,7 @@ data class DialogData(
                 "아니요", context.getColor(R.color.text_basic_color)
             )
 
-        fun cancelWriteDialogData(context: Context) =
+        fun cancelSendingTransmissionDialogData(context: Context) =
             DialogData(
                 "견적서 작성을 취소하시겠어요?", context.getColor(R.color.text_basic_color),
                 "이 화면에서 나가면 작성했던 내용이\n모두 삭제됩니다.", context.getColor(R.color.text_alert_color),

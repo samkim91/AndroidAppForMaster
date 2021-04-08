@@ -11,6 +11,8 @@ import kr.co.soogong.master.domain.requirements.EstimationStatus
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.ui.dialog.CustomDialog
 import kr.co.soogong.master.ui.dialog.DialogData.Companion.cancelDialogData
+import kr.co.soogong.master.ui.requirements.action.view.ViewEstimateViewModel.Companion.FAIL
+import kr.co.soogong.master.ui.requirements.action.view.ViewEstimateViewModel.Companion.SUCCESS
 import kr.co.soogong.master.uiinterface.image.ImageViewActivityHelper
 import kr.co.soogong.master.uiinterface.requirments.action.view.ViewEstimateActivityHelper
 import kr.co.soogong.master.uiinterface.requirments.action.write.WriteEstimateActivityHelper
@@ -64,7 +66,7 @@ class ViewEstimateActivity : BaseActivity<ActivityViewEstimateBinding>(
 
             // 견적을 보낼래요 버튼
             acceptButton.setOnClickListener {
-                startActivity(WriteEstimateActivityHelper.getIntent(this@ViewEstimateActivity))
+                startActivity(WriteEstimateActivityHelper.getIntent(this@ViewEstimateActivity, estimationId))
             }
 
             // 견적을 내기 어려워요 버튼
@@ -179,12 +181,12 @@ class ViewEstimateActivity : BaseActivity<ActivityViewEstimateBinding>(
 
         viewModel.action.observe(this@ViewEstimateActivity, EventObserver { event ->
             when(event) {
-                ViewEstimateViewModel.SUCCESS -> {
+                SUCCESS -> {
                     toast(getString(R.string.view_estimate_on_refuse_to_estimate_success))
                     onBackPressed()
                 }
 
-                ViewEstimateViewModel.FAIL -> {
+                FAIL -> {
                     toast(getString(R.string.error_message_of_request_failed))
                 }
             }

@@ -53,7 +53,7 @@ data class Requirement(
     val tel: String,
 
     @SerializedName("estimate")
-    val estimate: Estimate? = null
+    val estimationMessage: EstimationMessage? = null
 ) : Parcelable {
     companion object {
         fun fromJson(jsonObject: JsonObject, status: String): Requirement {
@@ -94,9 +94,12 @@ data class Requirement(
                     keycode = data.get("keycode").asString,
                     tel = data.get("tel").asString,
                     questions = data.get("questions").asString,
-                    estimate = Estimate(
+                    estimationMessage = EstimationMessage(
                         priceInNumber = item.getNullable("price")?.asString,
-                        contents = item.getNullable("contents")?.asString
+                        personnel = item.getNullable("personnel")?.asString,
+                        material = item.getNullable("material")?.asString,
+                        trip = item.getNullable("trip")?.asString,
+                        message = item.getNullable("contents")?.asString
                     )
                 )
             }

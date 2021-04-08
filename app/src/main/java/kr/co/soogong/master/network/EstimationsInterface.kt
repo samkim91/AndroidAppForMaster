@@ -23,5 +23,5 @@ interface EstimationsInterface {
     fun refuseToEstimate(@Body body: HashMap<String, String?>): Single<Response>
 
     @POST(HttpContract.SEND_ESTIMATION_MESSAGE)
-    fun sendMessage(@Body body: HashMap<String, String?>): Single<String>
+    fun sendMessage(@Body body: HashMap<String, String?>): Single<Response>
 }
