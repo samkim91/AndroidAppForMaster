@@ -2,6 +2,7 @@ package kr.co.soogong.master.ui.widget
 
 import android.content.Context
 import android.text.Editable
+import android.text.InputFilter
 import android.text.TextWatcher
 import android.util.AttributeSet
 import android.view.LayoutInflater
@@ -32,6 +33,13 @@ class EditCountBoxView @JvmOverloads constructor(
 
     var hintText: String = ""
     var limitedCount: Int = 0
+        set(value) {
+            field = value
+            binding.text.filters += InputFilter.LengthFilter(value)
+        }
+
+    var setMaxLength: Int = 0
+
 
     private fun initLayout() {
         binding.text.addTextChangedListener(object : TextWatcher {

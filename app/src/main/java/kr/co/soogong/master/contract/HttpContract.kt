@@ -37,10 +37,15 @@ object HttpContract {
     const val GET_ESTIMATION = "api/v1/transmissions/default_list"
     const val ACCEPT_ESTIMATION = "api/v1/transmissions/accept_list"
     const val REFUSE_ESTIMATION = "api/v1/transmissions/refuse"
-    const val SEND_ESTIMATION_MESSAGE = "api/v1/transmissions/send_message"
+//    const val SEND_ESTIMATION_MESSAGE = "api/v1/transmissions/send_message"
     //endregion
 
-    //region
+    //region Master
     const val MASTER_MY_PAGE = "https://soogong.co.kr/master/detail/"
+
+    // TODO.. 이 두 HTTP request의 경우, 카카오톡 웹뷰에서 바로 request가 나가서, API server를 거치지 않고 있음. 수정이 되면 다시 바꿔줘야함.
+    const val SEND_ESTIMATION_MESSAGE = "https://partner.soogong.co.kr/estimations/sc"
+    const val CANCEL_ESTIMATE = "https://partner.soogong.co.kr/estimations/sc/refuse"
+
     //endregion
 }
