@@ -180,6 +180,19 @@
     <dimen name="estimation_card_master_rating_bar_margin_start">6dp</dimen>
     <dimen name="estimation_card_master_rating_bar_margin_top">2dp</dimen>
 
+    <!-- Cancel Estimate View -->
+    <dimen name="cancel_estimation_default_margin_start_20">20dp</dimen>
+    <dimen name="cancel_estimation_margin_start_15">15dp</dimen>
+    <dimen name="cancel_estimation_default_margin_end_20">20dp</dimen>
+    <dimen name="cancel_estimation_margin_top_4">4dp</dimen>
+    <dimen name="cancel_estimation_margin_top_6">6dp</dimen>
+    <dimen name="cancel_estimation_margin_top_13">13dp</dimen>
+    <dimen name="cancel_estimation_margin_top_32">32dp</dimen>
+    <dimen name="cancel_estimation_margin_top_52">52dp</dimen>
+
+
+
+
     <!--  Widget  -->
     <dimen name="view_transmission_message_margin_top">12dp</dimen>
 

@@ -32,10 +32,7 @@ class WriteEstimateViewModel @Inject constructor(
         get() = _estimation
 
     fun sendEstimation(estimationMessage: EstimationMessage) {
-        Timber.tag(TAG).d(estimationMessage.priceInNumber)
-
         sendEstimationMessageUseCase(
-            actionType = "accept",
             keycode = estimationId,
             transmissionType = transmissionType,
             estimationMessage = estimationMessage
@@ -45,7 +42,7 @@ class WriteEstimateViewModel @Inject constructor(
         }, {
             Timber.tag(TAG).d("Sending Message Failed: $it")
             setAction(SEND_MESSAGE_FAILED)
-        })
+        }).addToDisposable()
     }
 
     companion object {

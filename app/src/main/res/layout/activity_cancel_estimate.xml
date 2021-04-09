@@ -23,9 +23,9 @@
             style="@style/medium_text_style"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginStart="@dimen/cancel_estimation_default_margin_start_20"
+            android:layout_marginTop="@dimen/cancel_estimation_margin_top_32"
+            android:layout_marginEnd="@dimen/cancel_estimation_default_margin_end_20"
             android:text="@string/cancel_estimate_cancel_option_label"
             android:textColor="@color/text_basic_color"
             app:layout_constraintEnd_toEndOf="parent"
@@ -36,9 +36,9 @@
             android:id="@+id/cancel_option"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="6dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginStart="@dimen/cancel_estimation_margin_start_15"
+            android:layout_marginTop="@dimen/cancel_estimation_margin_top_6"
+            android:layout_marginEnd="@dimen/cancel_estimation_default_margin_end_20"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cancel_option_label">
@@ -52,18 +52,21 @@
                 tools:checked="true" />
 
             <RadioButton
+                android:id="@+id/cancel_option_2"
                 android:layout_width="wrap_content"
                 android:layout_height="32dp"
                 android:text="@string/cancel_estimate_cancel_option_2"
                 android:textColor="@color/text_basic_color" />
 
             <RadioButton
+                android:id="@+id/cancel_option_3"
                 android:layout_width="wrap_content"
                 android:layout_height="32dp"
                 android:text="@string/cancel_estimate_cancel_option_3"
                 android:textColor="@color/text_basic_color" />
 
             <RadioButton
+                android:id="@+id/cancel_option_4"
                 android:layout_width="wrap_content"
                 android:layout_height="32dp"
                 android:text="@string/cancel_estimate_cancel_option_4"
@@ -71,13 +74,28 @@
         </RadioGroup>
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/alert"
+            style="@style/small_text_style"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/cancel_estimation_margin_top_4"
+            android:layout_marginStart="@dimen/cancel_estimation_default_margin_start_20"
+            android:layout_marginEnd="@dimen/cancel_estimation_default_margin_end_20"
+            android:textColor="@color/text_alert_color"
+            android:text="@string/alert_required_field"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cancel_option" />
+
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/cancel_option_detail_label"
             style="@style/medium_text_style"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="52dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginStart="@dimen/cancel_estimation_default_margin_start_20"
+            android:layout_marginTop="@dimen/cancel_estimation_margin_top_52"
+            android:layout_marginEnd="@dimen/cancel_estimation_default_margin_end_20"
             android:text="@string/cancel_estimate_cancel_option_detail_label"
             android:textColor="@color/text_basic_color"
             app:layout_constraintEnd_toEndOf="parent"
@@ -88,14 +106,15 @@
             android:id="@+id/cancel_option_detail"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="13dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginStart="@dimen/cancel_estimation_default_margin_start_20"
+            android:layout_marginTop="@dimen/cancel_estimation_margin_top_13"
+            android:layout_marginEnd="@dimen/cancel_estimation_default_margin_end_20"
             app:hintText='@{"취소 사유에 대해 더 하고 싶은 말이 있으시면 작성해주세요."}'
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cancel_option_detail_label"
-            app:limitedCount='@{100}' />
+            app:limitedCount='@{100}'
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

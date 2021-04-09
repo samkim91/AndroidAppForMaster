@@ -24,4 +24,7 @@ interface EstimationsInterface {
 
     @POST(HttpContract.SEND_ESTIMATION_MESSAGE)
     fun sendMessage(@Body body: HashMap<String, String?>): Single<Response>
+
+    @POST(HttpContract.CANCEL_ESTIMATE)
+    fun cancelEstimate(@Body body: HashMap<String, String?>): Single<Response>
 }

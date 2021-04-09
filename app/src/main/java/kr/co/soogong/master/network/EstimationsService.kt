@@ -1,6 +1,7 @@
 package kr.co.soogong.master.network
 
 import io.reactivex.Single
+import kr.co.soogong.master.data.estimation.CancelEstimate
 import kr.co.soogong.master.data.estimation.Estimation
 import kr.co.soogong.master.data.requirements.EstimationMessage
 import kr.co.soogong.master.data.requirements.Requirement
@@ -43,14 +44,13 @@ class EstimationsService @Inject constructor(
     }
 
     fun sendMessage(
-        actionType: String,
         branchKeycode: String?,
         keycode: String,
         transmissionType: String,
         estimationMessage: EstimationMessage
     ): Single<Response> {
         val data = HashMap<String, String?>()
-        data["action_type"] = actionType
+        data["action_type"] = "accept"
         data["branch_keycode"] = branchKeycode
         data["keycode"] = keycode
         data["transmission_type"] = transmissionType
@@ -60,5 +60,19 @@ class EstimationsService @Inject constructor(
         data["material"] = estimationMessage.material
         data["trip"] = estimationMessage.trip
         return estimationsInterface.sendMessage(data)
+    }
+
+    fun cancelEstimate(
+        branchKeycode: String?,
+        keycode: String,
+        cancelEstimate: CancelEstimate
+    ): Single<Response> {
+        val data = HashMap<String, String?>()
+        data["action_type"] = "refuse"
+        data["branch_keycode"] = branchKeycode
+        data["keycode"] = keycode
+        data["message"] = cancelEstimate.message
+        data["sub_message"] = cancelEstimate.subMessage
+        return estimationsInterface.cancelEstimate(data)
     }
 }

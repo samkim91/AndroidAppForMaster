@@ -14,6 +14,8 @@ import kr.co.soogong.master.ui.dialog.DialogData.Companion.cancelDialogData
 import kr.co.soogong.master.ui.requirements.action.view.ViewEstimateViewModel.Companion.FAIL
 import kr.co.soogong.master.ui.requirements.action.view.ViewEstimateViewModel.Companion.SUCCESS
 import kr.co.soogong.master.uiinterface.image.ImageViewActivityHelper
+import kr.co.soogong.master.uiinterface.requirments.action.cancel.CancelEstimateActivityHelper
+import kr.co.soogong.master.uiinterface.requirments.action.end.EndEstimateActivityHelper
 import kr.co.soogong.master.uiinterface.requirments.action.view.ViewEstimateActivityHelper
 import kr.co.soogong.master.uiinterface.requirments.action.write.WriteEstimateActivityHelper
 import kr.co.soogong.master.util.EventObserver
@@ -83,12 +85,12 @@ class ViewEstimateActivity : BaseActivity<ActivityViewEstimateBinding>(
 
             // 취소 됐음 버튼
             cancelButton.setOnClickListener {
-
+                startActivity(CancelEstimateActivityHelper.getIntent(this@ViewEstimateActivity, estimationId))
             }
 
             // 시공 완료 버튼
             doneButton.setOnClickListener {
-
+                startActivity(EndEstimateActivityHelper.getIntent(this@ViewEstimateActivity))
             }
 
             // 리뷰 요청하기 버튼

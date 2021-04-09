@@ -190,8 +190,12 @@
     <string name="minimum_cost">견적은 1만원 이상으로 보내주세요.</string>
 
     <!-- toast text -->
-    <string name="send_message_succeeded">고객에게 견적서가 전달되었습니다! 매칭을 기다려주세요.</string>
-    <string name="send_message_failed">견적서 전달을 실패하였습니다! 다시 시도해보거나, 연락해주세요.</string>
+    <string name="send_message_succeeded">고객에게 견적서가 전달되었습니다!\n매칭을 기다려주세요.</string>
+    <string name="send_message_failed">처리 실패하였습니다.\n다시 시도해보거나, 연락해주세요.</string>
+    <string name="cancel_estimate_succeeded">시공이 취소되었습니다.\n더 좋은 문의를 드리도록 노력할게요.</string>
+
+    <string name="end_estimate_succeeded">시공 완료 처리 되었고,\n고객님께 리뷰 요청이 전송되었어요.</string>
+
 
 
 </resources>
