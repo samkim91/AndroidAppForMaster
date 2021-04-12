@@ -2,6 +2,7 @@ package kr.co.soogong.master.network
 
 import io.reactivex.Single
 import kr.co.soogong.master.data.estimation.CancelEstimate
+import kr.co.soogong.master.data.estimation.EndEstimate
 import kr.co.soogong.master.data.estimation.Estimation
 import kr.co.soogong.master.data.requirements.EstimationMessage
 import kr.co.soogong.master.data.requirements.Requirement
@@ -74,5 +75,18 @@ class EstimationsService @Inject constructor(
         data["message"] = cancelEstimate.message
         data["sub_message"] = cancelEstimate.subMessage
         return estimationsInterface.cancelEstimate(data)
+    }
+
+    fun endEstimate(
+        branchKeycode: String?,
+        keycode: String,
+        endEstimate: EndEstimate
+    ): Single<Response> {
+        val data = HashMap<String, String?>()
+        data["branch_keycode"] = branchKeycode
+        data["keycode"] = keycode
+        data["actual_date"] = endEstimate.actualDate
+        data["actual_price"] = endEstimate.actualPrice
+        return estimationsInterface.endEstimate(data)
     }
 }

@@ -66,10 +66,21 @@ class WriteEstimateActivity : BaseActivity<ActivityWriteEstimateBinding>(
                     lateinit var priceInNumber: String
 
                     if (viewModel.transmissionType == "통합견적") {
-                        if (amount.text.isNullOrEmpty()) return@setOnClickListener
+                        if (amount.text.isNullOrEmpty() || amount.text.toString().replace(",", "").toLong() < 10000) {
+                            amount.alertVisible = amount.text.isNullOrEmpty() || amount.text.toString().replace(",", "").toLong() < 10000
+
+                            return@setOnClickListener
+                        }
                         priceInNumber = amount.text.toString().replace(",", "")
                     } else {
-                        if (laborCost.text.isNullOrEmpty() || materialCost.text.isNullOrEmpty() || travelCost.text.isNullOrEmpty()) return@setOnClickListener
+                        if (laborCost.text.isNullOrEmpty() || materialCost.text.isNullOrEmpty() || travelCost.text.isNullOrEmpty()) {
+                            laborCost.alertVisible = laborCost.text.isNullOrEmpty()
+                            materialCost.alertVisible = materialCost.text.isNullOrEmpty()
+                            travelCost.alertVisible = travelCost.text.isNullOrEmpty()
+
+                            return@setOnClickListener
+                        }
+
                         priceInNumber = totalAmount.text.toString().replace(",", "")
                     }
 
