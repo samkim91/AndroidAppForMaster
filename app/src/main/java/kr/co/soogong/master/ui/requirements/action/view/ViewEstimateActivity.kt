@@ -90,7 +90,7 @@ class ViewEstimateActivity : BaseActivity<ActivityViewEstimateBinding>(
 
             // 시공 완료 버튼
             doneButton.setOnClickListener {
-                startActivity(EndEstimateActivityHelper.getIntent(this@ViewEstimateActivity))
+                startActivity(EndEstimateActivityHelper.getIntent(this@ViewEstimateActivity, estimationId))
             }
 
             // 리뷰 요청하기 버튼

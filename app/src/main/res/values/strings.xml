@@ -141,6 +141,9 @@
 
     <!-- End Estimate -->
     <string name="end_estimate_title">최종 정보</string>
+    <string name="end_estimate_price_title">고객과 거래한 최종시공가를 입력해주세요.</string>
+    <string name="end_estimate_calendar_title">시공 완료일자를 선택해주세요.</string>
+
 
     <!-- Profile -->
     <string name="master_type">마스터유형</string>
