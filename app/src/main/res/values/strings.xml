@@ -104,16 +104,13 @@
     <string name="view_estimate_refuse">견적을 내기 어려워요</string>
     <string name="view_estimate_cancelled">취소 됐음</string>
     <string name="view_estimate_done_button">시공 완료</string>
-    <string name="view_estimate_request_review">리뷰 요청하기</string>
+    <string name="view_estimate_ask_review">리뷰 요청하기</string>
 
     <string name="view_estimate_master_rating_title">마스터 추천도</string>
     <string name="view_estimate_master_rating_kind">친절도</string>
     <string name="view_estimate_master_rating_quality">퀄리티</string>
     <string name="view_estimate_master_rating_affordability">가격만족</string>
     <string name="view_estimate_master_rating_punctuality">기일준수</string>
-
-    <string name="view_estimate_on_refuse_to_estimate_success">문의가 삭제되었습니다.</string>
-    <string name="error_message_of_request_failed">해당 요청을 처리할 수 없습니다. 다시 요청해주세요.</string>
 
 
     <!-- Transmission Card & Done Card in View Estimate -->
@@ -198,6 +195,10 @@
     <string name="cancel_estimate_succeeded">시공이 취소되었습니다.\n더 좋은 문의를 드리도록 노력할게요.</string>
 
     <string name="end_estimate_succeeded">시공 완료 처리 되었고,\n고객님께 리뷰 요청이 전송되었어요.</string>
+    <string name="view_estimate_on_refuse_to_estimate_success">문의가 삭제되었습니다.</string>
+    <string name="error_message_of_request_failed">해당 요청을 처리할 수 없습니다. 다시 요청해주세요.</string>
+    <string name="ask_for_review_successful">리뷰 요청을 완료했어요!</string>
+
 
 
 

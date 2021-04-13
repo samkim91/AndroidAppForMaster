@@ -11,9 +11,14 @@ import kr.co.soogong.master.domain.requirements.EstimationStatus
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.ui.dialog.CustomDialog
 import kr.co.soogong.master.ui.dialog.DialogData.Companion.cancelDialogData
-import kr.co.soogong.master.ui.requirements.action.view.ViewEstimateViewModel.Companion.FAIL
-import kr.co.soogong.master.ui.requirements.action.view.ViewEstimateViewModel.Companion.SUCCESS
+import kr.co.soogong.master.ui.requirements.action.view.ViewEstimateViewModel.Companion.ASK_FOR_REVIEW_FAILED
+import kr.co.soogong.master.ui.requirements.action.view.ViewEstimateViewModel.Companion.ASK_FOR_REVIEW_SUCCEEDED
+import kr.co.soogong.master.ui.requirements.action.view.ViewEstimateViewModel.Companion.CALL_TO_CUSTOMER_FAILED
+import kr.co.soogong.master.ui.requirements.action.view.ViewEstimateViewModel.Companion.CALL_TO_CUSTOMER_SUCCEEDED
+import kr.co.soogong.master.ui.requirements.action.view.ViewEstimateViewModel.Companion.REFUSE_TO_ESTIMATE_FAILED
+import kr.co.soogong.master.ui.requirements.action.view.ViewEstimateViewModel.Companion.REFUSE_TO_ESTIMATE_SUCCEEDED
 import kr.co.soogong.master.uiinterface.image.ImageViewActivityHelper
+import kr.co.soogong.master.uiinterface.requirments.CallToCustomerHelper
 import kr.co.soogong.master.uiinterface.requirments.action.cancel.CancelEstimateActivityHelper
 import kr.co.soogong.master.uiinterface.requirments.action.end.EndEstimateActivityHelper
 import kr.co.soogong.master.uiinterface.requirments.action.view.ViewEstimateActivityHelper
@@ -55,7 +60,7 @@ class ViewEstimateActivity : BaseActivity<ActivityViewEstimateBinding>(
             }
 
             photoList.adapter = ViewEstimateImageAdapter(
-                cardClickClickListener = { position ->
+                cardClickListener = { position ->
                     startActivity(
                         ImageViewActivityHelper.getIntent(
                             this@ViewEstimateActivity,
@@ -68,14 +73,15 @@ class ViewEstimateActivity : BaseActivity<ActivityViewEstimateBinding>(
 
             // 견적을 보낼래요 버튼
             acceptButton.setOnClickListener {
-                startActivity(WriteEstimateActivityHelper.getIntent(this@ViewEstimateActivity, estimationId))
+                startActivity(WriteEstimateActivityHelper.getIntent(this@ViewEstimateActivity,
+                    estimationId))
             }
 
             // 견적을 내기 어려워요 버튼
             refuseButton.setOnClickListener {
                 val dialog = CustomDialog(cancelDialogData(this@ViewEstimateActivity),
                     yesClick = {
-                        vm?.refuseToEstimate()
+                        viewModel.refuseToEstimate()
                     },
                     noClick = { }
                 )
@@ -85,110 +91,131 @@ class ViewEstimateActivity : BaseActivity<ActivityViewEstimateBinding>(
 
             // 취소 됐음 버튼
             cancelButton.setOnClickListener {
-                startActivity(CancelEstimateActivityHelper.getIntent(this@ViewEstimateActivity, estimationId))
+                startActivity(CancelEstimateActivityHelper.getIntent(this@ViewEstimateActivity,
+                    estimationId))
             }
 
             // 시공 완료 버튼
             doneButton.setOnClickListener {
-                startActivity(EndEstimateActivityHelper.getIntent(this@ViewEstimateActivity, estimationId))
+                startActivity(EndEstimateActivityHelper.getIntent(this@ViewEstimateActivity,
+                    estimationId))
             }
 
             // 리뷰 요청하기 버튼
-
+            askReviewButton.setOnClickListener {
+                viewModel.askForReview()
+            }
         }
     }
 
     private fun registerEventObserve() {
         viewModel.estimation.observe(this@ViewEstimateActivity, { estimation ->
-            binding.actionBar.title.text =
-                getString(R.string.view_estimate_title, estimation?.keycode)
 
-            val status = EstimationStatus.getStatus(estimation?.status, estimation?.transmissions)
+            bind {
+                actionBar.title.text =
+                    getString(R.string.view_estimate_title, estimation?.keycode)
 
-            // 고객 요청 내용
-            val additionInfo = estimation?.additionalInfo
-            if (!additionInfo.isNullOrEmpty()) {
-                binding.customFrame.removeAllViews()
-                additionInfo.forEach { item ->
-                    addAdditionInfoView(
-                        binding.customFrame,
-                        this@ViewEstimateActivity,
-                        item.description,
-                        item.value
-                    )
-                }
-            }
+                val status =
+                    EstimationStatus.getStatus(estimation?.status, estimation?.transmissions)
 
-            when (status) {
-                // 상태 : 견적요청
-                // view : 고객 요청 내용
-                // footer : 견적 마감일, 견적을 보낼래요, 견적을 내기 어려워요
-                EstimationStatus.Request -> {
-                    binding.requestedButtonGroup.visibility = View.VISIBLE
+
+                // 고객 요청 내용
+                val additionInfo = estimation?.additionalInfo
+                if (!additionInfo.isNullOrEmpty()) {
+                    customFrame.removeAllViews()
+                    additionInfo.forEach { item ->
+                        addAdditionInfoView(
+                            customFrame,
+                            this@ViewEstimateActivity,
+                            item.description,
+                            item.value
+                        )
+                    }
                 }
 
-                // 상태 : 매칭대기
-                // view : 고객 요청 내용, 나의 제안 내용
-                // footer : none
-                EstimationStatus.Waiting -> {
-                    bindTransmissionData(estimation?.transmissions?.message)
-                }
+                when (status) {
+                    // 상태 : 견적요청
+                    // view : 고객 요청 내용
+                    // footer : 견적 마감일, 견적을 보낼래요, 견적을 내기 어려워요
+                    EstimationStatus.Request -> {
+                        requestedButtonGroup.visibility = View.VISIBLE
+                    }
 
-                // 상태 : 시공진행중
-                // view : 고객 요청 내용(+고객에게 전화하기), 나의 제안 내용
-                // footer : 취소 됐음, 시공 완료
-                EstimationStatus.Progress -> {
-                    // todo.. 고객에게 전화하기 버튼 추가
-                    binding.cancelButton.visibility = View.VISIBLE
-                    binding.doneButton.visibility = View.VISIBLE
+                    // 상태 : 매칭대기
+                    // view : 고객 요청 내용, 나의 제안 내용
+                    // footer : none
+                    EstimationStatus.Waiting -> {
+                        bindTransmissionData(estimation?.transmissions?.message)
+                    }
 
-                    bindTransmissionData(estimation?.transmissions?.message)
-                }
+                    // 상태 : 시공진행중
+                    // view : 고객 요청 내용(+고객에게 전화하기), 나의 제안 내용
+                    // footer : 취소 됐음, 시공 완료
+                    EstimationStatus.Progress -> {
+                        cancelButton.visibility = View.VISIBLE
+                        doneButton.visibility = View.VISIBLE
+                        callToCustomerContainer.visibility = View.VISIBLE
+                        bindTransmissionData(estimation?.transmissions?.message)
+                    }
 
-                // 상태 : 고객완료요청
-                // view : 고객 요청 내용, 나의 제안 내용
-                // footer : 시공 완료
-                EstimationStatus.CustomDone -> {
-                    binding.doneButton.visibility = View.VISIBLE
+                    // 상태 : 고객완료요청
+                    // view : 고객 요청 내용, 나의 제안 내용
+                    // footer : 시공 완료
+                    EstimationStatus.CustomDone -> {
+                        doneButton.visibility = View.VISIBLE
+                        bindTransmissionData(estimation?.transmissions?.message)
+                    }
 
-                    bindTransmissionData(estimation?.transmissions?.message)
-                }
+                    // 상태 : 시공완료
+                    // view : 나의 최종 시공 내용, 고객 요청 내용
+                    // footer : 리뷰 요청하기
+                    EstimationStatus.Done -> {
+                        askReviewButton.visibility = View.VISIBLE
+//                        Todo.. 리뷰상태 확인 및 변경
+//                        if(askedReview){
+//                            changeAskingReviewButton()
+//                        }
+                        bindDoneData(estimation?.transmissions?.message)
+                    }
 
-                // 상태 : 시공완료
-                // view : 나의 최종 시공 내용, 고객 요청 내용
-                // footer : 리뷰 요청하기
-                EstimationStatus.Done -> {
-                    binding.requestReviewButton.visibility = View.VISIBLE
-                    bindDoneData(estimation?.transmissions?.message)
-                }
+                    // 상태 : 평가완료
+                    // view : 고객 리뷰, 나의 최종 시공 내용, 고객 요청 내용
+                    // footer : none
+                    EstimationStatus.Final -> {
+                        //Todo.. 고객 리뷰 데이터를 서버에서 return 해줘야함.
+                        customerReviewGroup.visibility = View.VISIBLE
+                        bindDoneData(estimation?.transmissions?.message)
+                    }
 
-                // 상태 : 평가완료
-                // view : 고객 리뷰, 나의 최종 시공 내용, 고객 요청 내용
-                // footer : none
-                EstimationStatus.Final -> {
-                    //Todo.. 고객 리뷰 데이터를 서버에서 return 해줘야함.
-                    binding.customerReviewGroup.visibility = View.VISIBLE
-                    bindDoneData(estimation?.transmissions?.message)
-                }
-
-                // 상태 : 시공취소
-                // view : 고객 시공 취소 사유, 고객 요청 내용, 나의 제안 내용
-                // footer : none
-                EstimationStatus.Cancel -> {
-                    binding.doneGroup.visibility = View.VISIBLE
-                    bindTransmissionData(estimation?.transmissions?.message)
+                    // 상태 : 시공취소
+                    // view : 고객 시공 취소 사유, 고객 요청 내용, 나의 제안 내용
+                    // footer : none
+                    EstimationStatus.Cancel -> {
+                        doneGroup.visibility = View.VISIBLE
+                        bindTransmissionData(estimation?.transmissions?.message)
+                    }
                 }
             }
         })
 
         viewModel.action.observe(this@ViewEstimateActivity, EventObserver { event ->
-            when(event) {
-                SUCCESS -> {
+            when (event) {
+                REFUSE_TO_ESTIMATE_SUCCEEDED -> {
                     toast(getString(R.string.view_estimate_on_refuse_to_estimate_success))
                     onBackPressed()
                 }
-
-                FAIL -> {
+                REFUSE_TO_ESTIMATE_FAILED -> {
+                    toast(getString(R.string.error_message_of_request_failed))
+                }
+                CALL_TO_CUSTOMER_SUCCEEDED, CALL_TO_CUSTOMER_FAILED -> {
+                    // Todo.. viewModel.estimation.number가 들어가야함
+                    startActivity(CallToCustomerHelper.getIntent("viewModel.estimation.phoneNumber"))
+                }
+                ASK_FOR_REVIEW_SUCCEEDED -> {
+                    changeAskingReviewButton()
+                    toast(getString(R.string.ask_for_review_successful))
+                }
+                ASK_FOR_REVIEW_FAILED -> {
                     toast(getString(R.string.error_message_of_request_failed))
                 }
             }
@@ -217,6 +244,11 @@ class ViewEstimateActivity : BaseActivity<ActivityViewEstimateBinding>(
                 message
             )
         }
+    }
+
+    private fun changeAskingReviewButton(){
+        binding.askReviewButton.text = getString(R.string.ask_for_review_successful)
+        binding.askReviewButton.background = getDrawable(R.color.color_90E9BD)
     }
 
     companion object {

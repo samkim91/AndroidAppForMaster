@@ -166,9 +166,11 @@
     <dimen name="requirement_card_review_button_margin_top">12dp</dimen>
     <dimen name="requirement_card_default_margin_start">20dp</dimen>
     <dimen name="requirement_card_margin_top">24dp</dimen>
+    <dimen name="requirement_card_button_default_height">40dp</dimen>
+
 
     <!-- Estimate View -->
-    <dimen name="estimation_card_default_margin_top">24dp</dimen>
+    <dimen name="estimation_card_default_margin_top">32dp</dimen>
     <dimen name="estimation_card_default_margin_start">20dp</dimen>
     <dimen name="estimation_card_default_margin_end">20dp</dimen>
     <dimen name="estimation_card_master_rating_margin_top">16dp</dimen>
@@ -179,6 +181,12 @@
     <dimen name="estimation_card_master_rating_margin_start_10">10dp</dimen>
     <dimen name="estimation_card_master_rating_bar_margin_start">6dp</dimen>
     <dimen name="estimation_card_master_rating_bar_margin_top">2dp</dimen>
+    <dimen name="estimation_card_call_to_customer_button_width">200dp</dimen>
+    <dimen name="estimation_card_call_to_customer_button_height">40dp</dimen>
+    <dimen name="estimation_card_call_to_customer_button_margin_top">32dp</dimen>
+
+
+
 
     <!-- Cancel Estimate View -->
     <dimen name="cancel_estimation_default_margin_start_20">20dp</dimen>

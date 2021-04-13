@@ -30,4 +30,10 @@ interface EstimationsInterface {
 
     @POST(HttpContract.END_ESTIMATE)
     fun endEstimate(@Body body: HashMap<String, String?>): Single<Response>
+
+    @POST(HttpContract.CALL_TO_CUSTOMER)
+    fun callToCustomer(@Body body: HashMap<String, String?>): Single<Response>
+
+    @POST(HttpContract.ASK_FOR_REVIEW)
+    fun askForReview(@Body body: HashMap<String, String?>): Single<Response>
 }

@@ -11,9 +11,8 @@ import kr.co.soogong.master.util.extension.dp
 
 class ProgressAdapter(
     private val cardClickListener: (String, EstimationStatus) -> Unit,
-    val callButtonClick: (String) -> Unit,
-    val detailButtonClick: (String) -> Unit,
-    val removeButtonClick: (String) -> Unit
+    private val callButtonClick: (String, String) -> Unit,
+    private val doneButtonClick: (String) -> Unit
 ) : ListAdapter<RequirementCard, EstimationCardViewHolder>(RequirementCardDiffUtil()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         RequirementCardViewHolderHelper.create(parent, viewType)
@@ -22,7 +21,7 @@ class ProgressAdapter(
         val params = holder.itemView.layoutParams as ViewGroup.MarginLayoutParams
         params.topMargin = if (position == 0) 72.dp else 0.dp
         holder.itemView.layoutParams = params
-        holder.binding(getItem(position), cardClickListener, null, null)
+        holder.binding(getItem(position), cardClickListener, callButtonClick, doneButtonClick)
     }
 
     override fun getItemViewType(position: Int) = currentList[position].status.toInt()

@@ -107,7 +107,7 @@ class WriteEstimateActivity : BaseActivity<ActivityWriteEstimateBinding>(
             }
 
             photoList.adapter = ViewEstimateImageAdapter(
-                cardClickClickListener = { position ->
+                cardClickListener = { position ->
                     startActivity(
                         ImageViewActivityHelper.getIntent(
                             this@WriteEstimateActivity,

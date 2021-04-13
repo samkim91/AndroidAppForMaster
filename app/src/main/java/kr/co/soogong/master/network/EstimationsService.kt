@@ -89,4 +89,24 @@ class EstimationsService @Inject constructor(
         data["actual_price"] = endEstimate.actualPrice
         return estimationsInterface.endEstimate(data)
     }
+
+    fun callToCustomer(
+        keycode: String,
+        date: String
+    ): Single<Response>{
+        val data = HashMap<String, String?>()
+        data["keycode"] = keycode
+        data["date"] = date
+        return estimationsInterface.callToCustomer(data)
+    }
+
+    fun askForReview(
+        keycode: String,
+        branchKeycode: String?
+    ): Single<Response>{
+        val data = HashMap<String, String?>()
+        data["keycode"] = keycode
+        data["branch_keycode"] = branchKeycode
+        return estimationsInterface.askForReview(data)
+    }
 }
