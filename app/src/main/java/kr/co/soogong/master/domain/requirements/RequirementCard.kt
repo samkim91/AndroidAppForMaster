@@ -52,6 +52,10 @@ data class RequirementCard(
                     detailText = ""
                     status = EstimationStatus.Progress
                 }
+                "custom_done" -> {
+                    detailText = "수리를 완료하고 리뷰를 쌓아보세요"
+                    status = EstimationStatus.Progress
+                }
                 "reviewed" -> {
                     detailText = "고객에게 리뷰요청을 해주세요"
                     status = EstimationStatus.Done

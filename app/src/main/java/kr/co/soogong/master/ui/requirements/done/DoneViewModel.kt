@@ -4,9 +4,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.rxkotlin.subscribeBy
+import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.launch
 import kr.co.soogong.master.domain.requirements.EstimationStatus
 import kr.co.soogong.master.domain.requirements.RequirementCard
+import kr.co.soogong.master.domain.usecase.AskForReviewUseCase
 import kr.co.soogong.master.domain.usecase.GetDoneEstimationListUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import kr.co.soogong.master.util.Event
@@ -15,7 +19,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DoneViewModel @Inject constructor(
-    private val getDoneEstimationListUseCase: GetDoneEstimationListUseCase
+    private val getDoneEstimationListUseCase: GetDoneEstimationListUseCase,
+    private val askForReviewUseCase: AskForReviewUseCase,
 ) : BaseViewModel() {
     private val _doneList = MutableLiveData<List<RequirementCard>>(emptyList())
     val doneList: LiveData<List<RequirementCard>>
@@ -64,9 +69,27 @@ class DoneViewModel @Inject constructor(
         }
     }
 
+    fun askForReview(estimationId: String) {
+        Timber.tag(TAG).d("askForReview: ")
+        askForReviewUseCase(estimationId)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeBy(
+                onSuccess = {
+                    Timber.tag(TAG).d("ASK_FOR_REVIEW_SUCCEEDED: $it")
+                    setAction(ASK_FOR_REVIEW_SUCCEEDED)
+                },
+                onError = {
+                    Timber.tag(TAG).d("ASK_FOR_REVIEW_FAILED: $it")
+                    setAction(ASK_FOR_REVIEW_FAILED)
+                }).addToDisposable()
+    }
+
     companion object {
         private const val TAG = "DoneViewModel"
         const val BADGE_UPDATE = "BADGE_UPDATE"
         const val UPDATE_LIST = "UPDATE_LIST"
+        const val ASK_FOR_REVIEW_SUCCEEDED = "ASK_FOR_REVIEW_SUCCEEDED"
+        const val ASK_FOR_REVIEW_FAILED = "ASK_FOR_REVIEW_FAILED"
     }
 }

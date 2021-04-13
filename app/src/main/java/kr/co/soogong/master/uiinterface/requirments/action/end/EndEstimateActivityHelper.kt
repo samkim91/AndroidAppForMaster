@@ -9,7 +9,7 @@ object EndEstimateActivityHelper {
     const val BUNDLE_KEY = "END_ESTIMATION_BUNDLE_KEY"
     const val EXTRA_STRING_KEY = "END_ESTIMATION_EXTRA_STRING_KEY"
 
-    fun getIntent(context: Context, keycode: String): Intent {
+    fun getIntent(context: Context?, keycode: String): Intent {
         return Intent(context, EndEstimateActivity::class.java).apply {
             putExtra(BUNDLE_KEY, Bundle().apply {
                 putString(EXTRA_STRING_KEY, keycode)

@@ -47,5 +47,7 @@ object HttpContract {
     const val SEND_ESTIMATION_MESSAGE = "https://partner.soogong.co.kr/estimations/sc"
     const val CANCEL_ESTIMATE = "https://partner.soogong.co.kr/estimations/sc/refuse"
     const val END_ESTIMATE = "https://partner.soogong.co.kr/estimations/execute"
+    const val CALL_TO_CUSTOMER = "https://partner.soogong.co.kr/estimations/calltocustomer"
+    const val ASK_FOR_REVIEW = "https://partner.soogong.co.kr/estimations/askforreview"
     //endregion
 }

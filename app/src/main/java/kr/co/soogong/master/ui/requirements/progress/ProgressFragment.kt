@@ -1,7 +1,5 @@
 package kr.co.soogong.master.ui.requirements.progress
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.res.ResourcesCompat
@@ -12,8 +10,12 @@ import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentRequirementsProgressBinding
 import kr.co.soogong.master.ui.base.BaseFragment
+import kr.co.soogong.master.ui.dialog.CustomDialog
+import kr.co.soogong.master.ui.dialog.DialogData.Companion.callDialogData
+import kr.co.soogong.master.uiinterface.requirments.CallToCustomerHelper
 import kr.co.soogong.master.uiinterface.requirments.RequirementsBadge
 import kr.co.soogong.master.uiinterface.requirments.action.ActionViewHelper
+import kr.co.soogong.master.uiinterface.requirments.action.end.EndEstimateActivityHelper
 import kr.co.soogong.master.util.EventObserver
 import timber.log.Timber
 
@@ -50,15 +52,20 @@ class ProgressFragment : BaseFragment<FragmentRequirementsProgressBinding>(
                         )
                     )
                 },
-                detailButtonClick = { keycode ->
-                    Unit
+                callButtonClick = { keycode, number ->
+                    val dialog = CustomDialog(callDialogData(requireContext()),
+                        yesClick = {
+                            // Todo.. 전화한 기록을 더해야함.
+                            viewModel.callToCustomer(estimationId = keycode, phoneNumber = number)
+                            startActivity(CallToCustomerHelper.getIntent(number))
+                        },
+                        noClick = { }
+                    )
+
+                    dialog.show(childFragmentManager, dialog.tag)
                 },
-                callButtonClick = { number ->
-                    val intent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:$number"))
-                    startActivity(intent)
-                },
-                removeButtonClick = { keycode ->
-                    Timber.tag(TAG).i("onViewCreated: $keycode")
+                doneButtonClick = { keycode ->
+                    startActivity(EndEstimateActivityHelper.getIntent(requireContext(), keycode))
                 }
             )
 

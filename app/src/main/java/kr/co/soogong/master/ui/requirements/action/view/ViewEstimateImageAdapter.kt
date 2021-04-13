@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.RecyclerView
 import kr.co.soogong.master.data.estimation.ImagePath
 
 class ViewEstimateImageAdapter(
-    private val cardClickClickListener: ((Int) -> Unit),
+    private val cardClickListener: ((Int) -> Unit),
 ) : RecyclerView.Adapter<ViewEstimateImageViewHolder>() {
     private val imageList: ArrayList<ImagePath> = arrayListOf()
 
@@ -15,7 +15,7 @@ class ViewEstimateImageAdapter(
     override fun onBindViewHolder(holder: ViewEstimateImageViewHolder, position: Int) {
         holder.binding(imageList[position].path)
         holder.binding.setCardClickListener {
-            cardClickClickListener(position)
+            cardClickListener(position)
         }
     }
 

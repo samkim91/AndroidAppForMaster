@@ -10,9 +10,13 @@ import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentRequirementsDoneBinding
 import kr.co.soogong.master.ui.base.BaseFragment
+import kr.co.soogong.master.ui.requirements.done.DoneViewModel.Companion.ASK_FOR_REVIEW_FAILED
+import kr.co.soogong.master.ui.requirements.done.DoneViewModel.Companion.ASK_FOR_REVIEW_SUCCEEDED
+import kr.co.soogong.master.ui.requirements.done.DoneViewModel.Companion.BADGE_UPDATE
 import kr.co.soogong.master.uiinterface.requirments.RequirementsBadge
 import kr.co.soogong.master.uiinterface.requirments.action.ActionViewHelper
 import kr.co.soogong.master.util.EventObserver
+import kr.co.soogong.master.util.extension.toast
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -38,15 +42,20 @@ class DoneFragment : BaseFragment<FragmentRequirementsDoneBinding>(
 
             lifecycleOwner = viewLifecycleOwner
 
-            doneList.adapter = DoneAdapter(cardClickListener = { keycode, estimationStatus ->
-                startActivity(
-                    ActionViewHelper.getIntent(
-                        requireContext(),
-                        keycode,
-                        estimationStatus
+            doneList.adapter = DoneAdapter(
+                cardClickListener = { keycode, estimationStatus ->
+                    startActivity(
+                        ActionViewHelper.getIntent(
+                            requireContext(),
+                            keycode,
+                            estimationStatus
+                        )
                     )
-                )
-            })
+                },
+                reviewButtonClick = { keycode ->
+                    viewModel.askForReview(estimationId = keycode)
+                }
+            )
 
             val dividerItemDecoration = DividerItemDecoration(
                 context,
@@ -69,8 +78,14 @@ class DoneFragment : BaseFragment<FragmentRequirementsDoneBinding>(
         Timber.tag(TAG).d("registerEventObserve: ")
         viewModel.event.observe(viewLifecycleOwner, EventObserver { (event, value) ->
             when (event) {
-                DoneViewModel.BADGE_UPDATE -> {
+                BADGE_UPDATE -> {
                     (parentFragment as? RequirementsBadge)?.setDoneBadge(value)
+                }
+                ASK_FOR_REVIEW_SUCCEEDED -> {
+                    requireContext().toast(getString(R.string.ask_for_review_successful))
+                }
+                ASK_FOR_REVIEW_FAILED -> {
+                    requireContext().toast(getString(R.string.error_message_of_request_failed))
                 }
             }
         })

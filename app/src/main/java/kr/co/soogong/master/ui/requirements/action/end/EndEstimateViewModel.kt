@@ -3,6 +3,7 @@ package kr.co.soogong.master.ui.requirements.action.end
 import androidx.lifecycle.MutableLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.estimation.EndEstimate
 import kr.co.soogong.master.domain.usecase.EndEstimateUseCase
@@ -21,13 +22,16 @@ class EndEstimateViewModel @Inject constructor(
         endEstimateUseCase(keycode = estimationId, endEstimate = endEstimate)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                Timber.tag(TAG).d("END_ESTIMATE_SUCCEEDED: $it")
-                setAction(END_ESTIMATE_SUCCEEDED)
-            }, {
-                Timber.tag(TAG).d("END_ESTIMATE_FAILED: $it")
-                setAction(END_ESTIMATE_FAILED)
-            }).addToDisposable()
+            .subscribeBy(
+                onSuccess =
+                {
+                    Timber.tag(TAG).d("END_ESTIMATE_SUCCEEDED: $it")
+                    setAction(END_ESTIMATE_SUCCEEDED)
+                },
+                onError = {
+                    Timber.tag(TAG).d("END_ESTIMATE_FAILED: $it")
+                    setAction(END_ESTIMATE_FAILED)
+                }).addToDisposable()
     }
 
     companion object {

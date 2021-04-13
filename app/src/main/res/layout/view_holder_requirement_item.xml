@@ -194,7 +194,7 @@
             android:id="@+id/call_button"
             style="@style/medium_text_style.bold"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/requirement_card_button_default_height"
             android:layout_marginTop="@dimen/requirement_card_call_button_margin_top"
             android:layout_marginEnd="@dimen/requirement_card_call_button_margin_end"
             android:background="@drawable/shape_fill_transparent_board_green"
@@ -209,7 +209,7 @@
             android:id="@+id/done_button"
             style="@style/medium_text_style.bold"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/requirement_card_button_default_height"
             android:layout_marginStart="@dimen/requirement_card_done_button_margin_start"
             android:layout_marginTop="@dimen/requirement_card_done_button_margin_top"
             android:background="@drawable/shape_fill_green_background"
@@ -222,20 +222,20 @@
         <!-- endregion -->
 
         <!-- region 고객완료요청 -->
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/done_button2"
-            style="@style/medium_text_style.bold"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/requirement_card_done_button_margin_start"
-            android:layout_marginTop="@dimen/requirement_card_done_button_margin_top"
-            android:background="@drawable/shape_fill_green_background"
-            android:text="@string/requirements_card_done_button"
-            android:textColor="@color/basic_white"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/my_amount" />
+<!--        <androidx.appcompat.widget.AppCompatButton-->
+<!--            android:id="@+id/done_button2"-->
+<!--            style="@style/medium_text_style.bold"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="@dimen/requirement_card_done_button_margin_start"-->
+<!--            android:layout_marginTop="@dimen/requirement_card_done_button_margin_top"-->
+<!--            android:background="@drawable/shape_fill_green_background"-->
+<!--            android:text="@string/requirements_card_done_button"-->
+<!--            android:textColor="@color/basic_white"-->
+<!--            android:visibility="gone"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/my_amount" />-->
         <!-- endregion -->
 
         <!-- region 시공완료 -->
@@ -243,7 +243,7 @@
             android:id="@+id/review_button"
             style="@style/medium_text_style.bold"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/requirement_card_button_default_height"
             android:layout_marginTop="@dimen/requirement_card_review_button_margin_top"
             android:background="@drawable/shape_fill_green_background"
             android:text="@string/requirements_card_review_button"
