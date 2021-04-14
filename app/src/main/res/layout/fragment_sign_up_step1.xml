@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/bind"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="kr.co.soogong.master.ui.auth.signup.step1.Step1ViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/gap_52">
+
+        <kr.co.soogong.master.ui.widget.TitleEditText
+            android:id="@+id/company_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/cancel_estimation_margin_top_52"
+            app:alertText='@{"2자 이상 20자 이내로 입력해주세요."}'
+            app:alertVisible="@{false}"
+            app:hintText='@{"예시) 수공"}'
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:subTitle='@{"고객에게 노출되는 이름입니다."}'
+            app:subTitleVisible="@{true}"
+            app:title='@{"업체이름을 입력해주세요."}' />
+
+        <kr.co.soogong.master.ui.widget.EditCountBoxView
+            android:id="@+id/brief_introduction"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_28"
+            app:alertText='@{"10자 이상으로 입력해주세요."}'
+            app:hintText='@{"예시) 강남 지역 30년 역사의 싱크대 장인! 믿고 맡겨주세요!"}'
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/company_name"
+            app:limitedCount="@{100}"
+            app:subTitle='@{"업체이름과 함께 소개 영역에 들어가는 내용입니다.\n고객에게 남기실 업체만의 특별한 점을 소개해주세요!"}'
+            app:subTitleVisible="@{true}"
+            app:title='@{"간단한 업체 소개를 해주세요."}' />
+
+        <kr.co.soogong.master.ui.widget.TitleChipGroup
+            android:id="@+id/business_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_28"
+            app:alertText='@{"필수 정보입니다."}'
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/brief_introduction"
+            app:setOption1Text='@{"개인사업자"}'
+            app:setOption2Text='@{"법인사업자"}'
+            app:setOption3Text='@{"프리랜서"}'
+            app:setOption3Visibility="@{true}"
+            app:title='@{"사업자 등록여부를 알려주세요."}' />
+
+        <kr.co.soogong.master.ui.widget.TitleEditText
+            android:id="@+id/business_registration_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_28"
+            app:alertText='@{"필수 정보입니다."}'
+            app:alertVisible="@{false}"
+            app:hintText='@{"사업자등록번호 예시) 1053578512"}'
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/business_type"
+            app:title='@{"사업자등록번호를 입력해주세요."}' />
+
+        <kr.co.soogong.master.ui.widget.TitleRecyclerImage
+            android:id="@+id/business_registration_certificate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:alertText='@{"필수 정보입니다."}'
+            app:alertVisible="@{false}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/business_registration_number"
+            app:title='@{"사업자등록증 사진을 올려주세요."}' />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/business_registration_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:constraint_referenced_ids="business_registration_number, business_registration_certificate" />
+
+        <kr.co.soogong.master.ui.widget.TitleEditText
+            android:id="@+id/birthday"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_28"
+            android:visibility="gone"
+            app:alertText='@{"필수 정보입니다."}'
+            app:alertVisible="@{false}"
+            app:hintText='@{"생년월일 예시) 19860217"}'
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/business_registration_certificate"
+            app:title='@{"생년월일을 입력해주세요."}' />
+
+        <kr.co.soogong.master.ui.widget.TitleEditText
+            android:id="@+id/business_representative"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_28"
+            app:alertText='@{"필수 정보입니다."}'
+            app:alertVisible="@{false}"
+            app:hintText='@{"예시) 김수공"}'
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/birthday"
+            app:subTitle='@{"프리랜서일 경우 시공하시는 분의 이름을 입력해주세요."}'
+            app:subTitleVisible="@{true}"
+            app:title='@{"사업자 대표명을 입력해주세요."}' />
+
+        <kr.co.soogong.master.ui.widget.TitleEditText
+            android:id="@+id/phone_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_28"
+            app:alertText='@{"필수 정보입니다."}'
+            app:alertVisible="@{false}"
+            app:hintText='@{"숫자만 입력해주세요."}'
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/business_representative"
+            app:subTitle='@{"연락이 가능한 번호를 입력해주세요."}'
+            app:subTitleVisible="@{true}"
+            app:title='@{"연락처를 입력해주세요."}' />
+
+        <kr.co.soogong.master.ui.widget.TitleDropdown
+            android:id="@+id/work_experience"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_28"
+            app:alertText='@{"필수 정보입니다."}'
+            app:alertVisible="@{false}"
+            app:hintText='@{"경력을 선택해주세요."}'
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/phone_number"
+            app:title='@{"시공해오신 경력을 알려주세요."}' />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/next_button"
+            style="@style/medium_text_style.bold"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/gap_40"
+            android:layout_marginTop="@dimen/gap_28"
+            android:background="@drawable/shape_fill_green_background"
+            android:text="@string/next_button_text"
+            android:textColor="@color/basic_white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/work_experience" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

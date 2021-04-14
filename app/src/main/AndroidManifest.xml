@@ -53,7 +53,8 @@
             android:launchMode="singleTask" />
         <activity
             android:name=".ui.requirements.action.cancel.CancelEstimateActivity"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            />
         <activity
             android:name=".ui.requirements.action.end.EndEstimateActivity"
             android:launchMode="singleTask" />

@@ -16,38 +16,58 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="견적가" />
+            tools:text="사업자 등록여부를 알려주세요." />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/sub_title"
             style="@style/small_text_style"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
             android:textColor="@color/color_616161"
             android:visibility="gone"
-            android:layout_marginTop="@dimen/view_title_edittext_subtitle_margin_top"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/title"
             tools:text="서브로 적는 내용들" />
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/detail"
-            style="@style/small_text_style"
-            android:layout_width="0dp"
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chip_group"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/gap_12"
-            android:background="@drawable/shape_fill_transparent_board_gray"
-            android:paddingStart="@dimen/gap_16"
-            android:paddingTop="@dimen/gap_10"
-            android:paddingEnd="@dimen/gap_16"
-            android:paddingBottom="@dimen/gap_10"
-            android:textColorHint="@color/text_hint_color"
-            android:singleLine="true"
+            android:layout_marginTop="12dp"
+            app:singleSelection="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/sub_title"
-            tools:hint="숫자만 입력해주세요. (단위 : 원)" />
+            app:layout_constraintTop_toBottomOf="@id/sub_title">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/option_1"
+                android:layout_width="@dimen/chips_width_156dp"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                style="@style/ChipStyles"
+                tools:text="개인사업자" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/option_2"
+                android:layout_width="@dimen/chips_width_156dp"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                style="@style/ChipStyles"
+                tools:text="법인사업자"
+                />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/option_3"
+                android:layout_width="@dimen/chips_width_156dp"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:visibility="gone"
+                style="@style/ChipStyles"
+                tools:text="프리랜서"
+                />
+        </com.google.android.material.chip.ChipGroup>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/alert"
@@ -59,7 +79,7 @@
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/detail"
+            app:layout_constraintTop_toBottomOf="@id/chip_group"
             tools:text="견적은 1만원 이상으로 보내주세요." />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

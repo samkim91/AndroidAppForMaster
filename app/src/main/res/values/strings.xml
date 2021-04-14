@@ -7,6 +7,11 @@
     <string name="sign_up_sign_in_button_text">로그인</string>
     <string name="sign_up_sign_up_button_text">가입신청</string>
     <string name="alert_required_field">필수 정보입니다.</string>
+    <string name="step1_tab_text">step.1\n사업자정보</string>
+    <string name="step2_tab_text">step.2\n추가정보</string>
+    <string name="step3_tab_text">step.3\n서비스정보</string>
+    <string name="step4_tab_text">step.4\n가입정보</string>
+    <string name="next_button_text">다음</string>
 
 
     <!-- Sign In -->
@@ -198,8 +203,8 @@
     <string name="view_estimate_on_refuse_to_estimate_success">문의가 삭제되었습니다.</string>
     <string name="error_message_of_request_failed">해당 요청을 처리할 수 없습니다. 다시 요청해주세요.</string>
     <string name="ask_for_review_successful">리뷰 요청을 완료했어요!</string>
-
-
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>
