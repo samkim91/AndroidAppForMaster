@@ -13,6 +13,7 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import kr.co.soogong.master.R
+import kr.co.soogong.master.databinding.ViewTitleChipGroupBinding
 import kr.co.soogong.master.databinding.ViewTitleEdittextBinding
 
 class TitleEditText @JvmOverloads constructor(
@@ -29,6 +30,12 @@ class TitleEditText @JvmOverloads constructor(
             binding.title.text = value
         }
 
+    var titleVisibility: Boolean = true
+        set(value) {
+            field = value
+            binding.title.visibility = if (value) View.VISIBLE else View.GONE
+        }
+
     var subTitle: String? = ""
         set(value) {
             field = value
@@ -38,21 +45,13 @@ class TitleEditText @JvmOverloads constructor(
     var subTitleVisible: Boolean = false
         set(value) {
             field = value
-            binding.subTitle.visibility = if (value) {
-                View.VISIBLE
-            } else {
-                View.GONE
-            }
+            binding.subTitle.visibility = if (value) View.VISIBLE else View.GONE
         }
 
     var alertVisible: Boolean = false
         set(value) {
             field = value
-            binding.alert.visibility = if (value) {
-                View.VISIBLE
-            } else {
-                View.INVISIBLE
-            }
+            binding.alert.visibility = if (value) View.VISIBLE else View.INVISIBLE
         }
 
     var alertText: String? = ""
@@ -60,6 +59,9 @@ class TitleEditText @JvmOverloads constructor(
             field = value
             binding.alert.text = value
         }
+
+    val editText: EditText
+        get() = binding.detail
 
     var text: String? = ""
         set(value) {
@@ -129,10 +131,6 @@ class TitleEditText @JvmOverloads constructor(
         }
         binding.detail.addTextChangedListener(textWatcher)
     }
-
-//    fun removeTextChangedListener(){
-//        binding.detail.removeTextChangedListener(textWatcher)
-//    }
 
     fun addFocusChangeListener(
         onFocusChange: (

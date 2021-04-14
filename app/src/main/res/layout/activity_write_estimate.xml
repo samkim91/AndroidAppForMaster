@@ -370,33 +370,20 @@
                     app:barrierDirection="bottom"
                     app:constraint_referenced_ids="amount,total_amount" />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/write_detail_label"
-                    style="@style/medium_text_style"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="28dp"
-                    android:layout_marginEnd="20dp"
-                    android:text="마스터님의 제안 내용 (선택)"
-                    android:textColor="@color/text_basic_color"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/request_barrier" />
-
                 <kr.co.soogong.master.ui.widget.EditCountBoxView
                     android:id="@+id/write_detail"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    android:layout_marginTop="13dp"
+                    android:layout_marginTop="28dp"
                     android:layout_marginEnd="20dp"
                     android:layout_marginBottom="30dp"
+                    app:title='@{"마스터님의 제안 내용 (선택)"}'
                     app:hintText='@{"특별히 제안할 내용, 현장에서 가격이 변동될 수 있는 사항 등 고객이 선택하는데에 도움이 되는 내용을 작성해 주세요.\n마스터님의 전화번호는 고객에게 자동으로 전달됩니다."}'
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/write_detail_label"
+                    app:layout_constraintTop_toBottomOf="@id/request_barrier"
                     app:limitedCount='@{500}' />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

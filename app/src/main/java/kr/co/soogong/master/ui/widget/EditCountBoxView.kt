@@ -6,6 +6,7 @@ import android.text.InputFilter
 import android.text.TextWatcher
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import kr.co.soogong.master.databinding.ViewEditCountBoxBinding
@@ -22,6 +23,30 @@ class EditCountBoxView @JvmOverloads constructor(
         initLayout()
     }
 
+    var title: String? = ""
+        set(value) {
+            field = value
+            binding.title.text = value
+        }
+
+    var titleVisible: Boolean = false
+        set(value) {
+            field = value
+            binding.title.visibility = if (value) View.VISIBLE else View.INVISIBLE
+        }
+
+    var subTitle: String? = ""
+        set(value) {
+            field = value
+            binding.subTitle.text = value
+        }
+
+    var subTitleVisible: Boolean = false
+        set(value) {
+            field = value
+            binding.subTitle.visibility = if (value) View.VISIBLE else View.INVISIBLE
+        }
+
     var text: String? = ""
         set(value) {
             field = value
@@ -32,14 +57,29 @@ class EditCountBoxView @JvmOverloads constructor(
         }
 
     var hintText: String = ""
+        set(value){
+            field = value
+            binding.text.hint = value
+        }
+
+    var alertText: String? = ""
+        set(value) {
+            field = value
+            binding.alert.text = value
+        }
+
+    var alertVisible: Boolean = false
+        set(value) {
+            field = value
+            binding.alert.visibility = if (value) View.VISIBLE else View.INVISIBLE
+        }
+
     var limitedCount: Int = 0
         set(value) {
             field = value
+            binding.textCount.text = "0 / $value"
             binding.text.filters += InputFilter.LengthFilter(value)
         }
-
-    var setMaxLength: Int = 0
-
 
     private fun initLayout() {
         binding.text.addTextChangedListener(object : TextWatcher {

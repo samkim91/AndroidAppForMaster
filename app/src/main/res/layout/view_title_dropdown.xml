@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:bind="http://schemas.android.com/bind">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -16,51 +17,61 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="견적가" />
+            tools:text="시공해오신 경력을 알려주세요." />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/sub_title"
             style="@style/small_text_style"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_4"
             android:textColor="@color/color_616161"
             android:visibility="gone"
-            android:layout_marginTop="@dimen/view_title_edittext_subtitle_margin_top"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/title"
-            tools:text="서브로 적는 내용들" />
+            tools:text="추가 설명할 내용을 적으면 됩니다." />
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/detail"
             style="@style/small_text_style"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/gap_12"
+            android:layout_marginTop="12dp"
             android:background="@drawable/shape_fill_transparent_board_gray"
             android:paddingStart="@dimen/gap_16"
             android:paddingTop="@dimen/gap_10"
             android:paddingEnd="@dimen/gap_16"
             android:paddingBottom="@dimen/gap_10"
             android:textColorHint="@color/text_hint_color"
-            android:singleLine="true"
+            android:enabled="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/sub_title"
-            tools:hint="숫자만 입력해주세요. (단위 : 원)" />
+            tools:hint="경력을 선택해주세요." />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/detail_icon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="@dimen/gap_10"
+            android:src="@drawable/ic_arrow_down"
+            app:layout_constraintBottom_toBottomOf="@id/detail"
+            app:layout_constraintEnd_toEndOf="@id/detail"
+            app:layout_constraintTop_toTopOf="@id/detail" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/alert"
             style="@style/small_text_style"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="@dimen/gap_4"
             android:textColor="@color/text_alert_color"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/detail"
-            tools:text="견적은 1만원 이상으로 보내주세요." />
+            tools:text="필수 정보입니다." />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
