@@ -370,7 +370,7 @@
                     app:barrierDirection="bottom"
                     app:constraint_referenced_ids="amount,total_amount" />
 
-                <kr.co.soogong.master.ui.widget.EditCountBoxView
+                <kr.co.soogong.master.ui.widget.TitleEditCountBoxView
                     android:id="@+id/write_detail"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"

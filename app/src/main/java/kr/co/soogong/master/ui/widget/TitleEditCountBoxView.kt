@@ -7,11 +7,12 @@ import android.text.TextWatcher
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.EditText
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import kr.co.soogong.master.databinding.ViewEditCountBoxBinding
 
-class EditCountBoxView @JvmOverloads constructor(
+class TitleEditCountBoxView @JvmOverloads constructor(
     context: Context,
     attributeSet: AttributeSet? = null,
     defStyle: Int = 0
@@ -46,6 +47,9 @@ class EditCountBoxView @JvmOverloads constructor(
             field = value
             binding.subTitle.visibility = if (value) View.VISIBLE else View.INVISIBLE
         }
+
+    val editText: EditText
+        get() = binding.text
 
     var text: String? = ""
         set(value) {

@@ -10,8 +10,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentRequirementsProgressBinding
 import kr.co.soogong.master.ui.base.BaseFragment
-import kr.co.soogong.master.ui.dialog.CustomDialog
-import kr.co.soogong.master.ui.dialog.DialogData.Companion.callDialogData
+import kr.co.soogong.master.ui.dialog.popup.CustomDialog
+import kr.co.soogong.master.ui.dialog.popup.DialogData.Companion.callDialogData
 import kr.co.soogong.master.uiinterface.requirments.CallToCustomerHelper
 import kr.co.soogong.master.uiinterface.requirments.RequirementsBadge
 import kr.co.soogong.master.uiinterface.requirments.action.ActionViewHelper

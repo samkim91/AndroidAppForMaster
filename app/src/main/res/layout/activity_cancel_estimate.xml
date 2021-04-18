@@ -98,7 +98,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/cancel_option" />
 
-                <kr.co.soogong.master.ui.widget.EditCountBoxView
+                <kr.co.soogong.master.ui.widget.TitleEditCountBoxView
                     android:id="@+id/cancel_option_detail"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"

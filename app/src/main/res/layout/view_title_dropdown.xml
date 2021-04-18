@@ -32,7 +32,7 @@
             app:layout_constraintTop_toBottomOf="@id/title"
             tools:text="추가 설명할 내용을 적으면 됩니다." />
 
-        <androidx.appcompat.widget.AppCompatEditText
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/detail"
             style="@style/small_text_style"
             android:layout_width="match_parent"
@@ -44,7 +44,6 @@
             android:paddingEnd="@dimen/gap_16"
             android:paddingBottom="@dimen/gap_10"
             android:textColorHint="@color/text_hint_color"
-            android:enabled="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/sub_title"

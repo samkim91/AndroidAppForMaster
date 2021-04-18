@@ -6,6 +6,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.user.SignUpInfo
+import kr.co.soogong.master.data.user.SignUpModel
+import kr.co.soogong.master.data.user.Step1Model
 import kr.co.soogong.master.domain.usecase.DoSignUpUseCase
 import kr.co.soogong.master.network.RxException
 import kr.co.soogong.master.ui.base.BaseViewModel
@@ -17,8 +19,22 @@ import javax.inject.Inject
 class SignUpViewModel @Inject constructor(
     private val doSignUpUseCase: DoSignUpUseCase
 ) : BaseViewModel() {
-    var area: String? = null
-    var location: String? = null
+
+    var companyName = MutableLiveData<String>()
+    var briefIntroduction = MutableLiveData<String>()
+    var businessType = MutableLiveData<String>()
+    var businessRegistrationNumber = MutableLiveData<String>()
+    var businessRegistrationCertificate = MutableLiveData<String>()
+    var birthday = MutableLiveData<String>()
+    var businessRepresentative = MutableLiveData<String>()
+    var phoneNumber = MutableLiveData<String>()
+    var workExperience = MutableLiveData<String>()
+
+
+
+    fun signUp(signUpInfo: SignUpInfo) {
+
+    }
 
     private val _event = MutableLiveData<Event<Pair<String, Any?>>>()
     val event: LiveData<Event<Pair<String, Any?>>>
@@ -28,37 +44,6 @@ class SignUpViewModel @Inject constructor(
         _event.postValue(Event(event to message))
     }
 
-    fun signUp(signUpInfo: SignUpInfo) {
-        doSignUpUseCase(signUpInfo)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                Timber.tag(TAG).d("signUp: $it")
-                sendEvent(SIGNUP_SUCCESS, null)
-            }, {
-                Timber.tag(TAG).w("signUp: $it")
-                if (it is RxException) {
-                    val message = it.data
-
-                    if (message?.has("email") == true) {
-                        sendEvent(EMAIL_ERROR, message = message.get("email").asString)
-                    }
-                    if (message?.has("password") == true) {
-                        sendEvent(PASSWORD_ERROR, message = message.get("password").asString)
-                    }
-                    if (message?.has("password_confirmation") == true) {
-                        sendEvent(
-                            PASSWORD_CONFIRMATION_ERROR,
-                            message = message.get("password_confirmation").asString
-                        )
-                    }
-                    if (message?.has("username") == true) {
-                        sendEvent(USER_NAME_ERROR, message = message.get("username").asString)
-                    }
-                }
-            })
-            .addToDisposable()
-    }
 
     companion object {
         private const val TAG = "SignUpViewModel"

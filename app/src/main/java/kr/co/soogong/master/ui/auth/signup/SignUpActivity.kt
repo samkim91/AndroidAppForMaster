@@ -45,12 +45,7 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>(
         bind {
             lifecycleOwner = this@SignUpActivity
 
-//            with(actionBar) {
-//                title.text = "마스터 가입신청"
-//                backButton.setOnClickListener {
-//                    super.onBackPressed()
-//                }
-//            }
+            toolbar.setNavigationOnClickListener { super.onBackPressed() }
 
             with(signUpViewPager) {
                 isUserInputEnabled = false

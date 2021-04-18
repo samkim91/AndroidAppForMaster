@@ -10,7 +10,7 @@ import kr.co.soogong.master.databinding.ViewTitleRecyclerImageBinding
 class TitleRecyclerImage @JvmOverloads constructor(
     context: Context,
     attributeSet: AttributeSet? = null,
-    defStyle: Int = 0
+    defStyle: Int = 0,
 ) : ConstraintLayout(context, attributeSet, defStyle) {
     private val binding =
         ViewTitleRecyclerImageBinding.inflate(LayoutInflater.from(context), this, true)
@@ -52,16 +52,21 @@ class TitleRecyclerImage @JvmOverloads constructor(
         }
 
     var cameraIconVisible: Boolean = true
-        set(value){
+        set(value) {
             field = value
-            binding.cameraIcon.visibility = if(value) View.VISIBLE else View.GONE
+            binding.cameraIcon.visibility = if (value) View.VISIBLE else View.GONE
         }
 
     var photoListVisible: Boolean = false
-        set(value){
+        set(value) {
             field = value
-            binding.photoList.visibility = if(value) View.VISIBLE else View.GONE
+            binding.photoList.visibility = if (value) View.VISIBLE else View.GONE
         }
 
+    fun addIconClickListener(
+        onClick: () -> Unit
+    ) {
+        binding.cameraIcon.setOnClickListener { onClick() }
+    }
 
 }
