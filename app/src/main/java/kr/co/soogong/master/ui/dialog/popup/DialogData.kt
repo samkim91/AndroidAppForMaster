@@ -1,4 +1,4 @@
-package kr.co.soogong.master.ui.dialog
+package kr.co.soogong.master.ui.dialog.popup
 
 import android.content.Context
 import androidx.annotation.ColorInt

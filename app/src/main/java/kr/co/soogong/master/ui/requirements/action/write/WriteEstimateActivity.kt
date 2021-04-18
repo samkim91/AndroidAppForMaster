@@ -10,13 +10,12 @@ import kr.co.soogong.master.R
 import kr.co.soogong.master.data.requirements.EstimationMessage
 import kr.co.soogong.master.databinding.ActivityWriteEstimateBinding
 import kr.co.soogong.master.ui.base.BaseActivity
-import kr.co.soogong.master.ui.dialog.CustomDialog
-import kr.co.soogong.master.ui.dialog.DialogData.Companion.cancelSendingTransmissionDialogData
+import kr.co.soogong.master.ui.dialog.popup.CustomDialog
+import kr.co.soogong.master.ui.dialog.popup.DialogData.Companion.cancelSendingTransmissionDialogData
 import kr.co.soogong.master.ui.requirements.action.view.ViewEstimateImageAdapter
 import kr.co.soogong.master.ui.requirements.action.write.WriteEstimateViewModel.Companion.SEND_MESSAGE_FAILED
 import kr.co.soogong.master.ui.requirements.action.write.WriteEstimateViewModel.Companion.SEND_MESSAGE_SUCCEEDED
 import kr.co.soogong.master.uiinterface.image.ImageViewActivityHelper
-import kr.co.soogong.master.uiinterface.requirments.action.view.ViewEstimateActivityHelper
 import kr.co.soogong.master.uiinterface.requirments.action.write.WriteEstimateActivityHelper
 import kr.co.soogong.master.util.EventObserver
 import kr.co.soogong.master.util.extension.addAdditionInfoView

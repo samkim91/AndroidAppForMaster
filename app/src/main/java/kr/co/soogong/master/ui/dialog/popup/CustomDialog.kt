@@ -1,4 +1,4 @@
-package kr.co.soogong.master.ui.dialog
+package kr.co.soogong.master.ui.dialog.popup
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable

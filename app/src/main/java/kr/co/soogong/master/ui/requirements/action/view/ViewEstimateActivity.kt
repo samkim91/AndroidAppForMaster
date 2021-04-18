@@ -9,8 +9,8 @@ import kr.co.soogong.master.data.estimation.Message
 import kr.co.soogong.master.databinding.ActivityViewEstimateBinding
 import kr.co.soogong.master.domain.requirements.EstimationStatus
 import kr.co.soogong.master.ui.base.BaseActivity
-import kr.co.soogong.master.ui.dialog.CustomDialog
-import kr.co.soogong.master.ui.dialog.DialogData.Companion.cancelDialogData
+import kr.co.soogong.master.ui.dialog.popup.CustomDialog
+import kr.co.soogong.master.ui.dialog.popup.DialogData.Companion.cancelDialogData
 import kr.co.soogong.master.ui.requirements.action.view.ViewEstimateViewModel.Companion.ASK_FOR_REVIEW_FAILED
 import kr.co.soogong.master.ui.requirements.action.view.ViewEstimateViewModel.Companion.ASK_FOR_REVIEW_SUCCEEDED
 import kr.co.soogong.master.ui.requirements.action.view.ViewEstimateViewModel.Companion.CALL_TO_CUSTOMER_FAILED

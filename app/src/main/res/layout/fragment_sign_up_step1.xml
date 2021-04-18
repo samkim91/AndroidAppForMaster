@@ -5,10 +5,11 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="vm"
-            type="kr.co.soogong.master.ui.auth.signup.step1.Step1ViewModel" />
+            type="kr.co.soogong.master.ui.auth.signup.SignUpViewModel" />
+
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -29,9 +30,10 @@
             app:layout_constraintTop_toTopOf="parent"
             app:subTitle='@{"고객에게 노출되는 이름입니다."}'
             app:subTitleVisible="@{true}"
+            app:content="@={vm.companyName}"
             app:title='@{"업체이름을 입력해주세요."}' />
 
-        <kr.co.soogong.master.ui.widget.EditCountBoxView
+        <kr.co.soogong.master.ui.widget.TitleEditCountBoxView
             android:id="@+id/brief_introduction"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -44,10 +46,11 @@
             app:limitedCount="@{100}"
             app:subTitle='@{"업체이름과 함께 소개 영역에 들어가는 내용입니다.\n고객에게 남기실 업체만의 특별한 점을 소개해주세요!"}'
             app:subTitleVisible="@{true}"
+            app:content="@={vm.briefIntroduction}"
             app:title='@{"간단한 업체 소개를 해주세요."}' />
 
         <kr.co.soogong.master.ui.widget.TitleChipGroup
-            android:id="@+id/business_type"
+            android:id="@+id/business_type_chip_group"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/gap_28"
@@ -71,13 +74,16 @@
             app:hintText='@{"사업자등록번호 예시) 1053578512"}'
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/business_type"
+            app:layout_constraintTop_toBottomOf="@id/business_type_chip_group"
+            app:content="@={vm.businessRegistrationNumber}"
+            app:setInputType="@{2}"
             app:title='@{"사업자등록번호를 입력해주세요."}' />
 
         <kr.co.soogong.master.ui.widget.TitleRecyclerImage
             android:id="@+id/business_registration_certificate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_28"
             app:alertText='@{"필수 정보입니다."}'
             app:alertVisible="@{false}"
             app:layout_constraintEnd_toEndOf="parent"
@@ -104,6 +110,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/business_registration_certificate"
+            app:content="@={vm.birthday}"
+            app:setInputType="@{2}"
             app:title='@{"생년월일을 입력해주세요."}' />
 
         <kr.co.soogong.master.ui.widget.TitleEditText
@@ -119,6 +127,7 @@
             app:layout_constraintTop_toBottomOf="@id/birthday"
             app:subTitle='@{"프리랜서일 경우 시공하시는 분의 이름을 입력해주세요."}'
             app:subTitleVisible="@{true}"
+            app:content="@={vm.businessRepresentative}"
             app:title='@{"사업자 대표명을 입력해주세요."}' />
 
         <kr.co.soogong.master.ui.widget.TitleEditText
@@ -134,6 +143,8 @@
             app:layout_constraintTop_toBottomOf="@id/business_representative"
             app:subTitle='@{"연락이 가능한 번호를 입력해주세요."}'
             app:subTitleVisible="@{true}"
+            app:content="@={vm.phoneNumber}"
+            app:setInputType="@{2}"
             app:title='@{"연락처를 입력해주세요."}' />
 
         <kr.co.soogong.master.ui.widget.TitleDropdown
@@ -147,6 +158,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/phone_number"
+            app:content="@={vm.workExperience}"
             app:title='@{"시공해오신 경력을 알려주세요."}' />
 
         <androidx.appcompat.widget.AppCompatButton

@@ -12,14 +12,16 @@ import android.view.View
 import android.widget.EditText
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import com.google.android.material.chip.ChipGroup
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ViewTitleChipGroupBinding
 import kr.co.soogong.master.databinding.ViewTitleEdittextBinding
+import kr.co.soogong.master.generated.callback.OnCheckedChangeListener
 
 class TitleChipGroup @JvmOverloads constructor(
     context: Context,
     attributeSet: AttributeSet? = null,
-    defStyle: Int = 0
+    defStyle: Int = 0,
 ) : ConstraintLayout(context, attributeSet, defStyle) {
     private val binding =
         ViewTitleChipGroupBinding.inflate(LayoutInflater.from(context), this, true)
@@ -84,4 +86,12 @@ class TitleChipGroup @JvmOverloads constructor(
             binding.option3.visibility = if (value) View.VISIBLE else View.GONE
         }
 
+    fun addCheckedChangeListener(
+        onCheckedChange: (
+            group: ChipGroup,
+            position: Int,
+        ) -> Unit
+    ) {
+        binding.chipGroup.setOnCheckedChangeListener { group, checkedId -> onCheckedChange.invoke(group, checkedId) }
+    }
 }
