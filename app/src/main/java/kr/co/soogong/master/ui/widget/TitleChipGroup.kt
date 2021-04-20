@@ -59,7 +59,7 @@ class TitleChipGroup @JvmOverloads constructor(
     var alertVisible: Boolean = false
         set(value) {
             field = value
-            binding.alert.visibility = if (value) View.VISIBLE else View.INVISIBLE
+            binding.alert.visibility = if (value) View.VISIBLE else View.GONE
         }
 
     var setOption1Text: String? = ""

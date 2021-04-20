@@ -6,7 +6,7 @@
     <data>
         <variable
             name="data"
-            type="kr.co.soogong.master.ui.dialog.bottomsheet.BottomSheetDialogData" />
+            type="kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogData" />
 
         <variable
             name="item_click_lister"

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_fill_white_background_top_radius">
+
+        <TextView
+            android:id="@+id/dialog_title"
+            style="@style/small_text_style.bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_12"
+            android:gravity="center"
+            android:textColor="@color/color_616161"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="이미지 가져오기" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_height"
+            android:layout_marginTop="@dimen/gap_11"
+            android:background="@color/color_BDBDBD"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dialog_title" />
+
+        <!--        <androidx.constraintlayout.widget.Barrier-->
+        <!--            android:id="@+id/btn_barrier"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            app:barrierDirection="bottom"-->
+        <!--            app:constraint_referenced_ids="line"-->
+        <!--            app:layout_constraintTop_toBottomOf="@id/line" />-->
+
+        <Button
+            android:id="@+id/left_button"
+            style="@style/medium_text_style.bold"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/gap_52"
+            android:background="@android:color/transparent"
+            android:textColor="@color/text_basic_color"
+            app:layout_constraintEnd_toStartOf="@+id/right_button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/line"
+            tools:text="카메라" />
+
+        <Button
+            android:id="@+id/right_button"
+            style="@style/medium_text_style.bold"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/gap_52"
+            android:background="@android:color/transparent"
+            android:textColor="@color/text_basic_color"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/left_button"
+            app:layout_constraintTop_toBottomOf="@id/line"
+            tools:text="갤러리" />
+
+        <ImageView
+            android:id="@+id/divider"
+            android:layout_width="1dp"
+            android:layout_height="16dp"
+            android:background="#D8D8D8"
+            app:layout_constraintBottom_toBottomOf="@id/left_button"
+            app:layout_constraintEnd_toStartOf="@id/left_button"
+            app:layout_constraintStart_toEndOf="@id/right_button"
+            app:layout_constraintTop_toTopOf="@id/left_button" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

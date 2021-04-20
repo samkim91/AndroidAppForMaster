@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:bind="http://schemas.android.com/bind">
-
-    <data>
-        <variable
-            name="items"
-            type="kr.co.soogong.master.ui.dialog.bottomsheet.BottomSheetDialogData.Companion" />
-    </data>
+    xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout
         android:layout_width="match_parent"

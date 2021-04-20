@@ -1,4 +1,4 @@
-package kr.co.soogong.master.ui.auth.signup.step1
+package kr.co.soogong.master.ui.auth.signup.step2
 
 import android.os.Bundle
 import android.view.View
@@ -17,7 +17,7 @@ import kr.co.soogong.master.util.extension.toast
 import timber.log.Timber
 
 @AndroidEntryPoint
-class Step1Fragment : BaseFragment<FragmentSignUpStep1Binding>(
+class Step2Fragment : BaseFragment<FragmentSignUpStep1Binding>(
     R.layout.fragment_sign_up_step1
 ) {
     private val viewModel: SignUpViewModel by activityViewModels()
@@ -152,8 +152,8 @@ class Step1Fragment : BaseFragment<FragmentSignUpStep1Binding>(
     companion object {
         private const val TAG = "Step1Fragment"
 
-        fun newInstance(): Step1Fragment {
-            return Step1Fragment()
+        fun newInstance(): Step2Fragment {
+            return Step2Fragment()
         }
     }
 

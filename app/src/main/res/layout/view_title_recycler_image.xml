@@ -34,9 +34,10 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/camera_icon"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="@dimen/gap_100"
+            android:layout_height="@dimen/gap_100"
             android:layout_marginTop="@dimen/gap_12"
+            android:layout_marginEnd="@dimen/gap_10"
             android:background="@drawable/ic_camera"
             app:layout_constraintTop_toBottomOf="@id/sub_title"
             app:layout_constraintStart_toStartOf="parent"
@@ -46,10 +47,10 @@
             android:id="@+id/photo_list"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/gap_10"
             android:layout_marginTop="@dimen/gap_12"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            tools:listitem="@layout/view_holder_image_delete_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/camera_icon"
             app:layout_constraintTop_toBottomOf="@id/sub_title" />
