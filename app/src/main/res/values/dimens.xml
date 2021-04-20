@@ -36,12 +36,14 @@
     <dimen name="gap_16">16dp</dimen>
 
     <dimen name="gap_20">20dp</dimen>
+    <dimen name="gap_24">24dp</dimen>
+
 
     <dimen name="gap_28">28dp</dimen>
     <dimen name="gap_40">40dp</dimen>
     <dimen name="gap_52">52dp</dimen>
 
-
+    <dimen name="gap_100">100dp</dimen>
 
     <!--  Sign In  -->
     <dimen name="sign_in_logo_margin_top">25dp</dimen>

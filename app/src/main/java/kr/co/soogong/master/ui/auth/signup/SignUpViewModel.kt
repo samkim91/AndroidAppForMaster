@@ -1,18 +1,14 @@
 package kr.co.soogong.master.ui.auth.signup
 
+import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.user.SignUpInfo
-import kr.co.soogong.master.data.user.SignUpModel
-import kr.co.soogong.master.data.user.Step1Model
 import kr.co.soogong.master.domain.usecase.DoSignUpUseCase
-import kr.co.soogong.master.network.RxException
 import kr.co.soogong.master.ui.base.BaseViewModel
+import kr.co.soogong.master.ui.utils.ListLiveData
 import kr.co.soogong.master.util.Event
-import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -24,7 +20,7 @@ class SignUpViewModel @Inject constructor(
     var briefIntroduction = MutableLiveData<String>()
     var businessType = MutableLiveData<String>()
     var businessRegistrationNumber = MutableLiveData<String>()
-    var businessRegistrationCertificate = MutableLiveData<String>()
+    var businessRegistrationCertificate = ListLiveData<Uri>()
     var birthday = MutableLiveData<String>()
     var businessRepresentative = MutableLiveData<String>()
     var phoneNumber = MutableLiveData<String>()

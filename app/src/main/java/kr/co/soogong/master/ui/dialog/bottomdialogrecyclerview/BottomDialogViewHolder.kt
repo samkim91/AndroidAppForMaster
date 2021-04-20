@@ -1,14 +1,14 @@
-package kr.co.soogong.master.ui.dialog.bottomsheet
+package kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview
 
 import androidx.recyclerview.widget.RecyclerView
 import kr.co.soogong.master.databinding.ViewHolderBottomSheetDialogItemBinding
 
-class BottomSheetDialogViewHolder(
+class BottomDialogViewHolder(
     private val binding: ViewHolderBottomSheetDialogItemBinding,
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun binding(
-        dialogData: BottomSheetDialogData,
+        dialogData: BottomDialogData,
         itemClickListener: (String) -> Unit,
     ) {
         with(binding) {

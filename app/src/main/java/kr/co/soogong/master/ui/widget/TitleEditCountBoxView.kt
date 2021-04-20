@@ -33,7 +33,7 @@ class TitleEditCountBoxView @JvmOverloads constructor(
     var titleVisible: Boolean = false
         set(value) {
             field = value
-            binding.title.visibility = if (value) View.VISIBLE else View.INVISIBLE
+            binding.title.visibility = if (value) View.VISIBLE else View.GONE
         }
 
     var subTitle: String? = ""
@@ -45,7 +45,7 @@ class TitleEditCountBoxView @JvmOverloads constructor(
     var subTitleVisible: Boolean = false
         set(value) {
             field = value
-            binding.subTitle.visibility = if (value) View.VISIBLE else View.INVISIBLE
+            binding.subTitle.visibility = if (value) View.VISIBLE else View.GONE
         }
 
     val editText: EditText
@@ -75,7 +75,7 @@ class TitleEditCountBoxView @JvmOverloads constructor(
     var alertVisible: Boolean = false
         set(value) {
             field = value
-            binding.alert.visibility = if (value) View.VISIBLE else View.INVISIBLE
+            binding.alert.visibility = if (value) View.VISIBLE else View.GONE
         }
 
     var limitedCount: Int = 0

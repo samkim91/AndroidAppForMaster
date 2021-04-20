@@ -16,7 +16,7 @@
             android:textColor="@color/primary_text_color"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Title" />
+            tools:text="주소를 선택해주세요." />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/sub_title"
@@ -44,7 +44,7 @@
             tools:text="Hint" />
 
         <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/detail"
+            android:id="@+id/first_edit_text"
             style="@style/small_text_style"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -62,7 +62,7 @@
             tools:hint="시공 가능한 업종을 선택해주세요."/>
 
         <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/detail_more"
+            android:id="@+id/second_edit_text"
             style="@style/small_text_style"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -73,11 +73,11 @@
             android:paddingEnd="16dp"
             android:paddingBottom="10dp"
             android:singleLine="true"
-            android:visibility="gone"
+            android:visibility="visible"
             android:textColorHint="@color/text_hint_color"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/detail"
+            app:layout_constraintTop_toBottomOf="@id/first_edit_text"
             tools:hint="상세주소를 입력해주세요."/>
 
         <androidx.appcompat.widget.AppCompatButton
@@ -86,13 +86,13 @@
             android:layout_width="60dp"
             android:layout_height="40dp"
             android:layout_marginStart="8dp"
-            android:background="@drawable/shape_fill_transparent_board_green"
-            android:textColor="@color/app_color"
-            app:layout_constraintBottom_toBottomOf="@id/detail"
+            android:background="@drawable/shape_fill_white_background"
+            android:textColor="@color/color_616161"
+            app:layout_constraintBottom_toBottomOf="@id/first_edit_text"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/detail"
-            app:layout_constraintTop_toTopOf="@id/detail"
-            tools:text="BUTTON" />
+            app:layout_constraintStart_toEndOf="@id/first_edit_text"
+            app:layout_constraintTop_toTopOf="@id/first_edit_text"
+            tools:text="검색" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/alert"
@@ -104,7 +104,7 @@
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/detail_more"
+            app:layout_constraintTop_toBottomOf="@id/second_edit_text"
             tools:text="필수 정보입니다." />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

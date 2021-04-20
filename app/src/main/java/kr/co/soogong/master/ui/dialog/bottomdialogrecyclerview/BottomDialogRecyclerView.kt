@@ -1,22 +1,20 @@
-package kr.co.soogong.master.ui.dialog.bottomsheet
+package kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.ViewDataBinding
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import kr.co.soogong.master.databinding.BottomSheetDialogCustomBinding
-import kr.co.soogong.master.generated.callback.OnClickListener
+import kr.co.soogong.master.databinding.BottomDialogRecyclerViewBinding
 import timber.log.Timber
 
-class CustomBottomSheetDialog(
+class BottomDialogRecyclerView(
     private val title: String,
-    private val dialogData: List<BottomSheetDialogData>,
+    private val dialogData: List<BottomDialogData>,
     private var itemClick: (String) -> Unit
 ) : BottomSheetDialogFragment() {
-    lateinit var binding: BottomSheetDialogCustomBinding
+    lateinit var binding: BottomDialogRecyclerViewBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +28,7 @@ class CustomBottomSheetDialog(
     ): View? {
         Timber.tag(TAG).d("onCreateView: ")
 
-        binding = BottomSheetDialogCustomBinding.inflate(inflater, container, false)
+        binding = BottomDialogRecyclerViewBinding.inflate(inflater, container, false)
 
         (dialog as? BottomSheetDialog)?.let {
             it.behavior.isDraggable = false
@@ -46,13 +44,13 @@ class CustomBottomSheetDialog(
 
         binding.dialogTitle.text = title
 
-        binding.bottomSheetDialogRecyclerview.adapter = BottomSheetDialogAdapter(itemClickListener = {
+        binding.bottomSheetDialogRecyclerview.adapter = BottomDialogAdapter(itemClickListener = {
             Timber.tag(TAG).w(" $it is clicked")
             itemClick(it)
             dismiss()
         })
 
-        (binding.bottomSheetDialogRecyclerview.adapter as? BottomSheetDialogAdapter)?.submitList(dialogData)
+        (binding.bottomSheetDialogRecyclerview.adapter as? BottomDialogAdapter)?.submitList(dialogData)
     }
 
 

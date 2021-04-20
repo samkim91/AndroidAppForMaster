@@ -8,6 +8,7 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.chip.ChipGroup
+import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ViewTitleDropdownBinding
 import kr.co.soogong.master.databinding.ViewTitleRecyclerImageBinding
 
@@ -46,6 +47,12 @@ class TitleDropdown @JvmOverloads constructor(
     val textView: TextView
         get() = binding.detail
 
+    var setText: String = ""
+        set(value) {
+            field = value
+            binding.detail.text = value
+        }
+
     var hintText: String? = ""
         set(value) {
             field = value
@@ -62,6 +69,12 @@ class TitleDropdown @JvmOverloads constructor(
         set(value) {
             field = value
             binding.alert.visibility = if (value) View.VISIBLE else View.GONE
+        }
+
+    var setBackground: Int = 0
+        set(value){
+            field = value
+            binding.detail.setBackgroundColor(resources.getColor(value, null))
         }
 
     fun addDropdownClickListener(

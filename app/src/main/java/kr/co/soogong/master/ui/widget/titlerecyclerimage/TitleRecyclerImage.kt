@@ -1,11 +1,14 @@
-package kr.co.soogong.master.ui.widget
+package kr.co.soogong.master.ui.widget.titlerecyclerimage
 
 import android.content.Context
+import android.net.Uri
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.lifecycle.MutableLiveData
 import kr.co.soogong.master.databinding.ViewTitleRecyclerImageBinding
+import kr.co.soogong.master.ui.utils.ListLiveData
 
 class TitleRecyclerImage @JvmOverloads constructor(
     context: Context,
@@ -62,6 +65,22 @@ class TitleRecyclerImage @JvmOverloads constructor(
             field = value
             binding.photoList.visibility = if (value) View.VISIBLE else View.GONE
         }
+
+    fun setAdapter(
+        closeClick: (Int) -> Unit
+    ){
+        binding.photoList.adapter = TitleRecyclerImageAdapter(closeClickListener = { position ->
+            closeClick(position)
+        })
+    }
+
+    fun replaceItems(
+        items: MutableList<Uri>?
+    ){
+        (binding.photoList.adapter as? TitleRecyclerImageAdapter)?.submitList(items)
+        // Todo.. submitList로 item change event가 call 되지 않고 있음... 원인을 파악해봐야함. 아래 코드는 임시적으로 적용해둠.
+        (binding.photoList.adapter as? TitleRecyclerImageAdapter)?.notifyDataSetChanged()
+    }
 
     fun addIconClickListener(
         onClick: () -> Unit

@@ -7,6 +7,7 @@ import android.text.TextWatcher
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.EditText
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import kr.co.soogong.master.databinding.ViewTitleEdittextButtonBinding
@@ -14,7 +15,7 @@ import kr.co.soogong.master.databinding.ViewTitleEdittextButtonBinding
 class TitleEditTextButton @JvmOverloads constructor(
     context: Context,
     attributeSet: AttributeSet? = null,
-    defStyle: Int = 0
+    defStyle: Int = 0,
 ) : ConstraintLayout(context, attributeSet, defStyle) {
     private val binding =
         ViewTitleEdittextButtonBinding.inflate(LayoutInflater.from(context), this, true)
@@ -28,11 +29,7 @@ class TitleEditTextButton @JvmOverloads constructor(
     var hintVisible: Boolean = false
         set(value) {
             field = value
-            binding.hintText.visibility = if (value) {
-                View.VISIBLE
-            } else {
-                View.GONE
-            }
+            binding.hintText.visibility = if (value) View.VISIBLE else View.GONE
         }
 
     var hintText: String? = ""
@@ -41,13 +38,40 @@ class TitleEditTextButton @JvmOverloads constructor(
             binding.hintText.text = value
         }
 
-    var text: String? = ""
+    val firstEditText: EditText
+        get() = binding.firstEditText
+
+    var setFirstEditTextHint: String? = ""
         set(value) {
             field = value
-            binding.detail.setText(value, TextView.BufferType.EDITABLE)
+            binding.firstEditText.setText(value)
         }
-        get() {
-            return binding.detail.text.toString()
+
+    val secondEditText: EditText
+        get() = binding.secondEditText
+
+    var setSecondEditTextHint: String? = ""
+        set(value) {
+            field = value
+            binding.secondEditText.setText(value)
+        }
+
+    var setSecondEditTextVisible: Boolean = false
+        set(value) {
+            field = value
+            binding.secondEditText.visibility = if (value) View.VISIBLE else View.GONE
+        }
+
+    var inputTypeFirst: Int = InputType.TYPE_CLASS_TEXT
+        set(value) {
+            field = value
+            binding.firstEditText.inputType = value
+        }
+
+    var inputTypeSecond: Int = InputType.TYPE_CLASS_TEXT
+        set(value) {
+            field = value
+            binding.secondEditText.inputType = value
         }
 
     var buttonText: String? = ""
@@ -56,49 +80,7 @@ class TitleEditTextButton @JvmOverloads constructor(
             binding.button.text = value
         }
 
-    var inputType: Int = InputType.TYPE_CLASS_TEXT
-        set(value) {
-            field = value
-            binding.detail.inputType = value
-        }
-
     fun setOnClick(listener: OnClickListener) {
         binding.button.setOnClickListener(listener)
-    }
-
-    fun addTextChangedListener(
-        beforeTextChanged: (
-            text: CharSequence?,
-            start: Int,
-            count: Int,
-            after: Int
-        ) -> Unit = { _, _, _, _ -> },
-        onTextChanged: (
-            text: CharSequence?,
-            start: Int,
-            count: Int,
-            after: Int
-        ) -> Unit = { _, _, _, _ -> },
-        afterTextChanged: (text: Editable?) -> Unit = {}
-    ) {
-        val textWatcher = object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-                afterTextChanged.invoke(s)
-            }
-
-            override fun beforeTextChanged(
-                text: CharSequence?,
-                start: Int,
-                count: Int,
-                after: Int
-            ) {
-                beforeTextChanged.invoke(text, start, count, after)
-            }
-
-            override fun onTextChanged(text: CharSequence?, start: Int, before: Int, count: Int) {
-                onTextChanged.invoke(text, start, before, count)
-            }
-        }
-        binding.detail.addTextChangedListener(textWatcher)
     }
 }

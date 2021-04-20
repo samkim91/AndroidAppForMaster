@@ -181,4 +181,10 @@ dependencies {
     kaptTest "com.google.dagger:dagger-compiler:$daggerVersion"
     implementation "com.google.dagger:hilt-android:$hiltVersion"
     kapt "com.google.dagger:hilt-compiler:$hiltVersion"
+
+    // Ted permission
+    implementation "gun0912.ted:tedpermission:$tedPermissionVersion"
+    implementation "gun0912.ted:tedpermission-rx2:$tedPermissionVersion"
+    implementation "gun0912.ted:tedimagepicker:$tedImagePickerVersion"
+
 }

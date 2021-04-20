@@ -9,7 +9,6 @@
             name="vm"
             type="kr.co.soogong.master.ui.auth.signup.SignUpViewModel" />
 
-
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -23,7 +22,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/cancel_estimation_margin_top_52"
             app:alertText='@{"2자 이상 20자 이내로 입력해주세요."}'
-            app:alertVisible="@{false}"
             app:hintText='@{"예시) 수공"}'
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -70,7 +68,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/gap_28"
             app:alertText='@{"필수 정보입니다."}'
-            app:alertVisible="@{false}"
             app:hintText='@{"사업자등록번호 예시) 1053578512"}'
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -79,13 +76,12 @@
             app:setInputType="@{2}"
             app:title='@{"사업자등록번호를 입력해주세요."}' />
 
-        <kr.co.soogong.master.ui.widget.TitleRecyclerImage
+        <kr.co.soogong.master.ui.widget.titlerecyclerimage.TitleRecyclerImage
             android:id="@+id/business_registration_certificate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/gap_28"
             app:alertText='@{"필수 정보입니다."}'
-            app:alertVisible="@{false}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/business_registration_number"
@@ -105,7 +101,6 @@
             android:layout_marginTop="@dimen/gap_28"
             android:visibility="gone"
             app:alertText='@{"필수 정보입니다."}'
-            app:alertVisible="@{false}"
             app:hintText='@{"생년월일 예시) 19860217"}'
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -120,7 +115,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/gap_28"
             app:alertText='@{"필수 정보입니다."}'
-            app:alertVisible="@{false}"
             app:hintText='@{"예시) 김수공"}'
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -136,7 +130,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/gap_28"
             app:alertText='@{"필수 정보입니다."}'
-            app:alertVisible="@{false}"
             app:hintText='@{"숫자만 입력해주세요."}'
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -153,7 +146,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/gap_28"
             app:alertText='@{"필수 정보입니다."}'
-            app:alertVisible="@{false}"
             app:hintText='@{"경력을 선택해주세요."}'
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
