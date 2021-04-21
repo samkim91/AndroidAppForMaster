@@ -187,4 +187,7 @@ dependencies {
     implementation "gun0912.ted:tedpermission-rx2:$tedPermissionVersion"
     implementation "gun0912.ted:tedimagepicker:$tedImagePickerVersion"
 
+    // Kakao Map
+    implementation files('libs/libDaumMapAndroid.jar')
+
 }

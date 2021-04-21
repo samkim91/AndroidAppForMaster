@@ -44,7 +44,7 @@ class TitleEditTextButton @JvmOverloads constructor(
     var setFirstEditTextHint: String? = ""
         set(value) {
             field = value
-            binding.firstEditText.setText(value)
+            binding.firstEditText.hint = value
         }
 
     val secondEditText: EditText
@@ -53,7 +53,7 @@ class TitleEditTextButton @JvmOverloads constructor(
     var setSecondEditTextHint: String? = ""
         set(value) {
             field = value
-            binding.secondEditText.setText(value)
+            binding.secondEditText.hint = value
         }
 
     var setSecondEditTextVisible: Boolean = false
@@ -83,4 +83,16 @@ class TitleEditTextButton @JvmOverloads constructor(
     fun setOnClick(listener: OnClickListener) {
         binding.button.setOnClickListener(listener)
     }
+
+    var alertVisible: Boolean = false
+        set(value) {
+            field = value
+            binding.alert.visibility = if (value) View.VISIBLE else View.GONE
+        }
+
+    var alertText: String? = ""
+        set(value) {
+            field = value
+            binding.alert.text = value
+        }
 }

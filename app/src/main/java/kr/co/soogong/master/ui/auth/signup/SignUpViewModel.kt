@@ -16,6 +16,7 @@ class SignUpViewModel @Inject constructor(
     private val doSignUpUseCase: DoSignUpUseCase
 ) : BaseViewModel() {
 
+    // Step 1
     var companyName = MutableLiveData<String>()
     var briefIntroduction = MutableLiveData<String>()
     var businessType = MutableLiveData<String>()
@@ -26,6 +27,13 @@ class SignUpViewModel @Inject constructor(
     var phoneNumber = MutableLiveData<String>()
     var workExperience = MutableLiveData<String>()
 
+    // Step 2
+    var companyAddress = MutableLiveData<String>()
+    var companyAddressDetail = MutableLiveData<String>()
+    var serviceArea = MutableLiveData<String>()
+    var profileImages = ListLiveData<Uri>()
+    var companyImages = ListLiveData<Uri>()
+    var otherCertificates = ListLiveData<Uri>()
 
 
     fun signUp(signUpInfo: SignUpInfo) {

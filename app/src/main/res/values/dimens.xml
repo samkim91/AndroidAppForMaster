@@ -25,6 +25,7 @@
     <dimen name="gap_2">2dp</dimen>
     <dimen name="gap_3">3dp</dimen>
     <dimen name="gap_4">4dp</dimen>
+    <dimen name="gap_8">8dp</dimen>
 
     <dimen name="gap_10">10dp</dimen>
 
@@ -44,6 +45,8 @@
     <dimen name="gap_52">52dp</dimen>
 
     <dimen name="gap_100">100dp</dimen>
+
+    <dimen name="gap_180">180dp</dimen>
 
     <!--  Sign In  -->
     <dimen name="sign_in_logo_margin_top">25dp</dimen>
