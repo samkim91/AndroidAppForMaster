@@ -1,24 +1,32 @@
 package kr.co.soogong.master.ui.auth.signup.step2
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
 import androidx.fragment.app.activityViewModels
 import com.gun0912.tedpermission.PermissionListener
 import com.gun0912.tedpermission.TedPermission
 import dagger.hilt.android.AndroidEntryPoint
 import gun0912.tedimagepicker.builder.TedImagePicker
 import kr.co.soogong.master.R
-import kr.co.soogong.master.databinding.FragmentSignUpStep1Binding
+import kr.co.soogong.master.databinding.FragmentSignUpStep2Binding
+import kr.co.soogong.master.ui.auth.signup.AddressActivity
+import kr.co.soogong.master.ui.auth.signup.SignUpActivity
 import kr.co.soogong.master.ui.auth.signup.SignUpViewModel
+import kr.co.soogong.master.ui.auth.signup.step1.Step1Fragment
 import kr.co.soogong.master.ui.base.BaseFragment
-import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogData.Companion.getWorkExperienceList
+import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogData
 import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogRecyclerView
+import kr.co.soogong.master.uiinterface.auth.signup.AddressActivityHelper
 import kr.co.soogong.master.util.extension.toast
+import net.daum.mf.map.api.MapView
 import timber.log.Timber
 
 @AndroidEntryPoint
-class Step2Fragment : BaseFragment<FragmentSignUpStep1Binding>(
-    R.layout.fragment_sign_up_step1
+class Step2Fragment : BaseFragment<FragmentSignUpStep2Binding>(
+    R.layout.fragment_sign_up_step2
 ) {
     private val viewModel: SignUpViewModel by activityViewModels()
 
@@ -27,6 +35,8 @@ class Step2Fragment : BaseFragment<FragmentSignUpStep1Binding>(
         Timber.tag(TAG).d("onViewCreated: ")
         initLayout()
         registerEventObserve()
+
+//        binding.mapView.addView(MapView(activity))
     }
 
     override fun initLayout() {
@@ -37,83 +47,74 @@ class Step2Fragment : BaseFragment<FragmentSignUpStep1Binding>(
 
             lifecycleOwner = viewLifecycleOwner
 
-            businessTypeChipGroup.addCheckedChangeListener(onCheckedChange = { group, checkedId ->
-                when (checkedId) {
-                    group.getChildAt(0).id, group.getChildAt(1).id -> {
-                        viewModel.businessType.value =
-                            if (checkedId == group.getChildAt(0).id) "개인사업자" else "법인사업자"
-                        businessRegistrationGroup.visibility = View.VISIBLE
-                        birthday.visibility = View.GONE
-                    }
-                    group.getChildAt(2).id -> {
-                        viewModel.businessType.value = "프리랜서"
-                        businessRegistrationGroup.visibility = View.GONE
-                        birthday.visibility = View.VISIBLE
-                    }
-                    else -> {
-                        viewModel.businessType.value = ""
-                        businessRegistrationGroup.visibility = View.GONE
-                        birthday.visibility = View.GONE
-                    }
-                }
-            })
+            companyAddress.setOnClick {
+                addressActivityLauncher.launch(Intent(requireContext(),
+                    AddressActivity::class.java))
+            }
 
-            businessRegistrationCertificate.addIconClickListener(onClick = {
-                checkPermission()
-            })
-
-            businessRegistrationCertificate.setAdapter(
-                closeClick = { position ->
-                    viewModel.businessRegistrationCertificate.removeAt(position)
-                    binding.businessRegistrationCertificate.replaceItems(viewModel.businessRegistrationCertificate.value)
-                    binding.businessRegistrationCertificate.cameraIconVisible = viewModel.businessRegistrationCertificate.getItemCount() == 0
-                })
-
-            workExperience.addDropdownClickListener {
+            serviceArea.addDropdownClickListener {
                 Timber.tag(TAG).w("Dropdown Clicked")
-                val bottomDialog = BottomDialogRecyclerView("경력", getWorkExperienceList(),
-                    itemClick = { viewModel.workExperience.value = it }
-                )
+                val bottomDialog =
+                    BottomDialogRecyclerView("범위 선택", BottomDialogData.getServiceAreaList(),
+                        itemClick = { viewModel.serviceArea.value = it }
+                    )
 
                 bottomDialog.show(parentFragmentManager, bottomDialog.tag)
+            }
+
+            profileImages.addIconClickListener { checkPermission(PROFILE_IMAGES) }
+            companyImages.addIconClickListener { checkPermission(COMPANY_IMAGES) }
+            otherCertificates.addIconClickListener { checkPermission(OTHER_CERTIFICATES) }
+
+            profileImages.setAdapter(
+                closeClick = { position ->
+                    viewModel.profileImages.removeAt(position)
+                    binding.profileImages.replaceItems(viewModel.profileImages.value)
+                    binding.profileImages.cameraIconVisible =
+                        viewModel.profileImages.getItemCount() == 0
+                })
+
+            companyImages.setAdapter(
+                closeClick = { position ->
+                    viewModel.companyImages.removeAt(position)
+                    binding.companyImages.replaceItems(viewModel.companyImages.value)
+                })
+
+            otherCertificates.setAdapter(
+                closeClick = { position ->
+                    viewModel.otherCertificates.removeAt(position)
+                    binding.otherCertificates.replaceItems(viewModel.otherCertificates.value)
+                })
+
+            previousButton.setOnClickListener {
+                Timber.tag(TAG).d("previousButton Clicked: ")
+                (activity as? SignUpActivity)?.moveToPrevious()
             }
 
             nextButton.setOnClickListener {
                 Timber.tag(TAG).d("nextButton Clicked: ")
 
                 bind {
-                    viewModel.companyName.observe(viewLifecycleOwner, {
-                        companyName.alertVisible = it.length < 2 || it.length > 20
+                    viewModel.companyAddress.observe(viewLifecycleOwner, {
+                        companyAddress.alertVisible = it.isNullOrEmpty()
                     })
-                    viewModel.briefIntroduction.observe(viewLifecycleOwner, {
-                        briefIntroduction.alertVisible = it.length < 10
-                    })
-                    viewModel.businessType.observe(viewLifecycleOwner, {
-                        businessTypeChipGroup.alertVisible = it.isNullOrEmpty()
-                    })
-                    viewModel.businessRegistrationNumber.observe(viewLifecycleOwner, {
-                        businessRegistrationNumber.alertVisible = it.isNullOrEmpty()
-                    })
-                    viewModel.businessRegistrationCertificate.observe(viewLifecycleOwner, {
-                        businessRegistrationCertificate.alertVisible = it.isNullOrEmpty()
-                        businessRegistrationCertificate.cameraIconVisible = it.isNullOrEmpty()
-                    })
-                    viewModel.birthday.observe(viewLifecycleOwner, {
-                        birthday.alertVisible = it.isNullOrEmpty()
-                    })
-                    viewModel.businessRepresentative.observe(viewLifecycleOwner, {
-                        businessRepresentative.alertVisible = it.isNullOrEmpty()
-                    })
-                    viewModel.phoneNumber.observe(viewLifecycleOwner, {
-                        phoneNumber.alertVisible = it.isNullOrEmpty()
-                    })
-                    viewModel.workExperience.observe(viewLifecycleOwner, {
-                        workExperience.alertVisible = it.isNullOrEmpty()
+                    viewModel.serviceArea.observe(viewLifecycleOwner, {
+                        alertForServiceArea.visibility = if(it.isNullOrEmpty()) View.VISIBLE else View.GONE
                     })
                 }
 
                 // 다음 프래그먼트로 이동..
+                if(!companyAddress.alertVisible && alertForServiceArea.visibility == View.GONE)
+                    (activity as? SignUpActivity)?.moveToNext()
             }
+        }
+    }
+
+    private var addressActivityLauncher = registerForActivityResult(StartActivityForResult()) { result ->
+        Timber.tag(TAG).d("ActivityResult: $result")
+        if (result.resultCode == Activity.RESULT_OK) {
+            viewModel.companyAddress.value =
+                result.data?.extras?.getString(AddressActivityHelper.ADDRESS).toString()
         }
     }
 
@@ -122,17 +123,38 @@ class Step2Fragment : BaseFragment<FragmentSignUpStep1Binding>(
 
     }
 
-    private fun checkPermission() {
+    private fun checkPermission(clickedCamera: Int) {
         val permission = object : PermissionListener {
             override fun onPermissionGranted() {
-                TedImagePicker.with(requireContext())
-                    .buttonBackground(R.drawable.shape_fill_green_background)
-                    .start { uri ->
-                        viewModel.businessRegistrationCertificate.clear()
-                        viewModel.businessRegistrationCertificate.add(uri)
-                        binding.businessRegistrationCertificate.replaceItems(viewModel.businessRegistrationCertificate.value)
-                        binding.businessRegistrationCertificate.cameraIconVisible = viewModel.businessRegistrationCertificate.getItemCount() == 0
-                    }
+                when (clickedCamera) {
+                    PROFILE_IMAGES -> TedImagePicker.with(requireContext())
+                        .buttonBackground(R.drawable.shape_fill_green_background)
+                        .start { uri ->
+                            viewModel.profileImages.clear()
+                            viewModel.profileImages.add(uri)
+                            binding.profileImages.replaceItems(viewModel.profileImages.value)
+                            binding.profileImages.cameraIconVisible =
+                                viewModel.profileImages.getItemCount() == 0
+                        }
+
+                    else -> TedImagePicker.with(requireContext())
+                        .buttonBackground(R.drawable.shape_fill_green_background)
+                        .max(10, "10장 이하로 선택해주세요.")
+                        .startMultiImage { uri ->
+                            when(clickedCamera){
+                                COMPANY_IMAGES -> {
+                                    viewModel.companyImages.clear()
+                                    viewModel.companyImages.addAll(uri)
+                                    binding.companyImages.replaceItems(viewModel.companyImages.value)
+                                }
+                                OTHER_CERTIFICATES -> {
+                                    viewModel.otherCertificates.clear()
+                                    viewModel.otherCertificates.addAll(uri)
+                                    binding.otherCertificates.replaceItems(viewModel.otherCertificates.value)
+                                }
+                            }
+                        }
+                }
             }
 
             override fun onPermissionDenied(deniedPermissions: MutableList<String>?) {
@@ -150,7 +172,11 @@ class Step2Fragment : BaseFragment<FragmentSignUpStep1Binding>(
     }
 
     companion object {
-        private const val TAG = "Step1Fragment"
+        private const val TAG = "Step2Fragment"
+
+        private const val PROFILE_IMAGES = 100
+        private const val COMPANY_IMAGES = 200
+        private const val OTHER_CERTIFICATES = 300
 
         fun newInstance(): Step2Fragment {
             return Step2Fragment()

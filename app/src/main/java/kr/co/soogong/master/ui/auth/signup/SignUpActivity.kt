@@ -3,7 +3,9 @@ package kr.co.soogong.master.ui.auth.signup
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.ScrollView
 import androidx.activity.viewModels
+import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
@@ -57,6 +59,28 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>(
             }
         }
     }
+
+    fun moveToNext(){
+        bind {
+            if(signUpViewPager.currentItem < TabCount - 1){
+                signUpViewPager.currentItem = signUpViewPager.currentItem + 1
+                scrollView.post { scrollView.fullScroll(ScrollView.FOCUS_UP) }
+            }
+        }
+    }
+
+    fun moveToPrevious(){
+        bind {
+            if(signUpViewPager.currentItem > 0){
+                signUpViewPager.currentItem = signUpViewPager.currentItem - 1
+                scrollView.post { scrollView.fullScroll(ScrollView.FOCUS_UP) }
+            }
+        }
+    }
+
+
+
+
 
     private fun registerEventObserve() {
         Timber.tag(TAG).d("registerEventObserve: ")

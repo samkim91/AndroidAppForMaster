@@ -9,6 +9,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import gun0912.tedimagepicker.builder.TedImagePicker
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentSignUpStep1Binding
+import kr.co.soogong.master.ui.auth.signup.SignUpActivity
+import kr.co.soogong.master.ui.auth.signup.SignUpPagerAdapter
 import kr.co.soogong.master.ui.auth.signup.SignUpViewModel
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogData.Companion.getWorkExperienceList
@@ -66,7 +68,8 @@ class Step1Fragment : BaseFragment<FragmentSignUpStep1Binding>(
                 closeClick = { position ->
                     viewModel.businessRegistrationCertificate.removeAt(position)
                     binding.businessRegistrationCertificate.replaceItems(viewModel.businessRegistrationCertificate.value)
-                    binding.businessRegistrationCertificate.cameraIconVisible = viewModel.businessRegistrationCertificate.getItemCount() == 0
+                    binding.businessRegistrationCertificate.cameraIconVisible =
+                        viewModel.businessRegistrationCertificate.getItemCount() == 0
                 })
 
             workExperience.addDropdownClickListener {
@@ -113,48 +116,52 @@ class Step1Fragment : BaseFragment<FragmentSignUpStep1Binding>(
                 }
 
                 // 다음 프래그먼트로 이동..
+//                if (!companyName.alertVisible && !briefIntroduction.alertVisible && !businessTypeChipGroup.alertVisible && !businessRegistrationNumber.alertVisible &&
+//                    !businessRegistrationCertificate.alertVisible && !birthday.alertVisible && !businessRepresentative.alertVisible && !phoneNumber.alertVisible && !workExperience.alertVisible)
+                (activity as? SignUpActivity)?.moveToNext()
             }
         }
     }
 
-    private fun registerEventObserve() {
-        Timber.tag(TAG).d("registerEventObserve: ")
+private fun registerEventObserve() {
+    Timber.tag(TAG).d("registerEventObserve: ")
 
-    }
+}
 
-    private fun checkPermission() {
-        val permission = object : PermissionListener {
-            override fun onPermissionGranted() {
-                TedImagePicker.with(requireContext())
-                    .buttonBackground(R.drawable.shape_fill_green_background)
-                    .start { uri ->
-                        viewModel.businessRegistrationCertificate.clear()
-                        viewModel.businessRegistrationCertificate.add(uri)
-                        binding.businessRegistrationCertificate.replaceItems(viewModel.businessRegistrationCertificate.value)
-                        binding.businessRegistrationCertificate.cameraIconVisible = viewModel.businessRegistrationCertificate.getItemCount() == 0
-                    }
-            }
-
-            override fun onPermissionDenied(deniedPermissions: MutableList<String>?) {
-                requireContext().toast("권한이 거부되었습니다.")
-            }
+private fun checkPermission() {
+    val permission = object : PermissionListener {
+        override fun onPermissionGranted() {
+            TedImagePicker.with(requireContext())
+                .buttonBackground(R.drawable.shape_fill_green_background)
+                .start { uri ->
+                    viewModel.businessRegistrationCertificate.clear()
+                    viewModel.businessRegistrationCertificate.add(uri)
+                    binding.businessRegistrationCertificate.replaceItems(viewModel.businessRegistrationCertificate.value)
+                    binding.businessRegistrationCertificate.cameraIconVisible =
+                        viewModel.businessRegistrationCertificate.getItemCount() == 0
+                }
         }
 
-        TedPermission.with(requireContext())
-            .setPermissionListener(permission)
-            .setRationaleMessage("이미지를 추가하시려면 권한을 허용해주세요.")
-            .setDeniedMessage("권한을 거부하셨습니다. 앱을 사용하시려면 [앱 설정]-[권한] 에서 권한을 허용해주세요.")
-            .setPermissions(android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                android.Manifest.permission.CAMERA)
-            .check()
-    }
-
-    companion object {
-        private const val TAG = "Step1Fragment"
-
-        fun newInstance(): Step1Fragment {
-            return Step1Fragment()
+        override fun onPermissionDenied(deniedPermissions: MutableList<String>?) {
+            requireContext().toast("권한이 거부되었습니다.")
         }
     }
+
+    TedPermission.with(requireContext())
+        .setPermissionListener(permission)
+        .setRationaleMessage("이미지를 추가하시려면 권한을 허용해주세요.")
+        .setDeniedMessage("권한을 거부하셨습니다. 앱을 사용하시려면 [앱 설정]-[권한] 에서 권한을 허용해주세요.")
+        .setPermissions(android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            android.Manifest.permission.CAMERA)
+        .check()
+}
+
+companion object {
+    private const val TAG = "Step1Fragment"
+
+    fun newInstance(): Step1Fragment {
+        return Step1Fragment()
+    }
+}
 
 }
