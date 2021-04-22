@@ -41,32 +41,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/sub_title">
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/option_1"
-                android:layout_width="@dimen/chips_width_156dp"
-                android:layout_height="wrap_content"
-                android:textAlignment="center"
-                style="@style/ChipStyles"
-                tools:text="개인사업자" />
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/option_2"
-                android:layout_width="@dimen/chips_width_156dp"
-                android:layout_height="wrap_content"
-                android:textAlignment="center"
-                style="@style/ChipStyles"
-                tools:text="법인사업자"
-                />
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/option_3"
-                android:layout_width="@dimen/chips_width_156dp"
-                android:layout_height="wrap_content"
-                android:textAlignment="center"
-                android:visibility="gone"
-                style="@style/ChipStyles"
-                tools:text="프리랜서"
-                />
         </com.google.android.material.chip.ChipGroup>
 
         <androidx.appcompat.widget.AppCompatTextView

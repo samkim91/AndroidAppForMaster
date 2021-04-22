@@ -3,6 +3,7 @@ package kr.co.soogong.master.ui.auth.signup.step1
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
+import com.google.android.material.chip.Chip
 import com.gun0912.tedpermission.PermissionListener
 import com.gun0912.tedpermission.TedPermission
 import dagger.hilt.android.AndroidEntryPoint
@@ -39,16 +40,20 @@ class Step1Fragment : BaseFragment<FragmentSignUpStep1Binding>(
 
             lifecycleOwner = viewLifecycleOwner
 
+            initChips(listOf(INDIVIDUAL_PERSON, LEGAL_PERSON, FREE_LANCER))
+
             businessTypeChipGroup.addCheckedChangeListener(onCheckedChange = { group, checkedId ->
+                Timber.tag(TAG).d("checkedId : $checkedId")
+
                 when (checkedId) {
                     group.getChildAt(0).id, group.getChildAt(1).id -> {
                         viewModel.businessType.value =
-                            if (checkedId == group.getChildAt(0).id) "개인사업자" else "법인사업자"
+                            if (checkedId == group.getChildAt(0).id) FREE_LANCER else LEGAL_PERSON
                         businessRegistrationGroup.visibility = View.VISIBLE
                         birthday.visibility = View.GONE
                     }
                     group.getChildAt(2).id -> {
-                        viewModel.businessType.value = "프리랜서"
+                        viewModel.businessType.value = FREE_LANCER
                         businessRegistrationGroup.visibility = View.GONE
                         birthday.visibility = View.VISIBLE
                     }
@@ -123,45 +128,62 @@ class Step1Fragment : BaseFragment<FragmentSignUpStep1Binding>(
         }
     }
 
-private fun registerEventObserve() {
-    Timber.tag(TAG).d("registerEventObserve: ")
+    private fun registerEventObserve() {
+        Timber.tag(TAG).d("registerEventObserve: ")
 
-}
+    }
 
-private fun checkPermission() {
-    val permission = object : PermissionListener {
-        override fun onPermissionGranted() {
-            TedImagePicker.with(requireContext())
-                .buttonBackground(R.drawable.shape_fill_green_background)
-                .start { uri ->
-                    viewModel.businessRegistrationCertificate.clear()
-                    viewModel.businessRegistrationCertificate.add(uri)
-                    binding.businessRegistrationCertificate.replaceItems(viewModel.businessRegistrationCertificate.value)
-                    binding.businessRegistrationCertificate.cameraIconVisible =
-                        viewModel.businessRegistrationCertificate.getItemCount() == 0
-                }
-        }
-
-        override fun onPermissionDenied(deniedPermissions: MutableList<String>?) {
-            requireContext().toast("권한이 거부되었습니다.")
+    private fun initChips(list: List<String>) {
+        list.map {
+            val chip = layoutInflater.inflate(
+                R.layout.single_chip_layout,
+                binding.businessTypeChipGroup,
+                false
+            ) as Chip
+            chip.text = it
+            binding.businessTypeChipGroup.addChip(chip)
         }
     }
 
-    TedPermission.with(requireContext())
-        .setPermissionListener(permission)
-        .setRationaleMessage("이미지를 추가하시려면 권한을 허용해주세요.")
-        .setDeniedMessage("권한을 거부하셨습니다. 앱을 사용하시려면 [앱 설정]-[권한] 에서 권한을 허용해주세요.")
-        .setPermissions(android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            android.Manifest.permission.CAMERA)
-        .check()
-}
+    private fun checkPermission() {
+        val permission = object : PermissionListener {
+            override fun onPermissionGranted() {
+                TedImagePicker.with(requireContext())
+                    .buttonBackground(R.drawable.shape_fill_green_background)
+                    .start { uri ->
+                        viewModel.businessRegistrationCertificate.clear()
+                        viewModel.businessRegistrationCertificate.add(uri)
+                        binding.businessRegistrationCertificate.replaceItems(viewModel.businessRegistrationCertificate.value)
+                        binding.businessRegistrationCertificate.cameraIconVisible =
+                            viewModel.businessRegistrationCertificate.getItemCount() == 0
+                    }
+            }
 
-companion object {
-    private const val TAG = "Step1Fragment"
+            override fun onPermissionDenied(deniedPermissions: MutableList<String>?) {
+                requireContext().toast("권한이 거부되었습니다.")
+            }
+        }
 
-    fun newInstance(): Step1Fragment {
-        return Step1Fragment()
+        TedPermission.with(requireContext())
+            .setPermissionListener(permission)
+            .setRationaleMessage("이미지를 추가하시려면 권한을 허용해주세요.")
+            .setDeniedMessage("권한을 거부하셨습니다. 앱을 사용하시려면 [앱 설정]-[권한] 에서 권한을 허용해주세요.")
+            .setPermissions(
+                android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                android.Manifest.permission.CAMERA
+            )
+            .check()
     }
-}
+
+    companion object {
+        private const val TAG = "Step1Fragment"
+        private const val INDIVIDUAL_PERSON = "개인사업자"
+        private const val LEGAL_PERSON = "법인사업자"
+        private const val FREE_LANCER = "프리랜서"
+
+        fun newInstance(): Step1Fragment {
+            return Step1Fragment()
+        }
+    }
 
 }

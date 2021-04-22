@@ -12,6 +12,7 @@ import android.view.View
 import android.widget.EditText
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ViewTitleChipGroupBinding
@@ -62,29 +63,11 @@ class TitleChipGroup @JvmOverloads constructor(
             binding.alert.visibility = if (value) View.VISIBLE else View.GONE
         }
 
-    var setOption1Text: String? = ""
-        set(value) {
-            field = value
-            binding.option1.text = value
-        }
-
-    var setOption2Text: String? = ""
-        set(value) {
-            field = value
-            binding.option2.text = value
-        }
-
-    var setOption3Text: String? = ""
-        set(value) {
-            field = value
-            binding.option3.text = value
-        }
-
-    var setOption3Visibility: Boolean = false
-        set(value) {
-            field = value
-            binding.option3.visibility = if (value) View.VISIBLE else View.GONE
-        }
+    fun addChip(
+        child: Chip
+    ){
+        binding.chipGroup.addView(child)
+    }
 
     fun addCheckedChangeListener(
         onCheckedChange: (
