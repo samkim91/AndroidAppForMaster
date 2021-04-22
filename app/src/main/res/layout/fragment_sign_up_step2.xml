@@ -19,17 +19,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/cancel_estimation_margin_top_52"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:title='@{"주소를 선택해주세요."}'
-            app:alertText='@{"필수 정보입니다."}'
             app:setFirstEditTextHint='@{"주소를 검색해주세요."}'
             app:setSecondEditTextHint='@{"상세주소를 입력해주세요."}'
             app:buttonText='@{"검색"}'
             app:firstContent="@={vm.companyAddress}"
             app:secondContent="@={vm.companyAddressDetail}"
             app:setSecondEditTextVisible="@{true}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:alertText='@{"필수 정보입니다."}'
             />
 
         <kr.co.soogong.master.ui.widget.TitleDropdown
@@ -40,10 +40,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/company_address"
-            app:content="@={vm.serviceArea}"
             app:title='@{"서비스 가능한 범위를 선택해주세요."}'
-            app:setText='@{"범위를 선택해주세요."}'
             app:hintText='@{"범위를 선택해주세요."}'
+            app:content="@={vm.serviceArea}"
             />
 
         <RelativeLayout
@@ -131,7 +130,6 @@
             android:background="@drawable/shape_fill_green_background"
             android:text="@string/next_button_text"
             android:textColor="@color/basic_white"
-
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/previous_button"
             app:layout_constraintTop_toTopOf="@id/previous_button" />
