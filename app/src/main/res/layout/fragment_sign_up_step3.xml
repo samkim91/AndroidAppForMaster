@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="vm"
+            type="kr.co.soogong.master.ui.auth.signup.SignUpViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/gap_52">
+
+        <kr.co.soogong.master.ui.widget.TitleEditTextButton
+            android:id="@+id/category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/cancel_estimation_margin_top_52"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:title='@{"시공 가능 업종을 선택해주세요."}'
+            app:subTitle='@{"중복선택 가능합니다."}'
+            app:subTitleVisible="@{true}"
+            app:setFirstEditTextHint='@{"시공 가능한 업종을 선택해주세요."}'
+            app:setFirstEditTextEnable="@{false}"
+            app:buttonText='@{"선택"}'
+            app:alertText='@{"필수 정보입니다."}'
+            />
+
+        <kr.co.soogong.master.ui.widget.TitleDropdown
+            android:id="@+id/warranty_period"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_28"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/category"
+            app:title='@{"A/S 기간 정보를 알려요주세요."}'
+            app:hintText='@{"보증 가능한 A/S 기간을 선택해주세요."}'
+
+            app:alertText='@{"필수 정보입니다."}'
+            />
+
+        <kr.co.soogong.master.ui.widget.TitleEditCountBoxView
+            android:id="@+id/warranty_information"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_28"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/warranty_period"
+            app:title='@{"A/S에 관한 상세 정보를 입력해주세요."}'
+            app:hintText='@{"고객이 유의할 만한 예외사항이나 자재별 세부 A/S 방침을 입력해주세요."}'
+
+            app:limitedCount="@{500}"
+            app:alertText='@{"10자 이상으로 입력해주세요."}'
+            />
+
+        <kr.co.soogong.master.ui.widget.TitleChipGroup
+            android:id="@+id/travel_cost_chip_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_28"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/warranty_information"
+            app:title='@{"현장 가격 변동 사항을 선택해주세요."}'
+            app:subTitle='@{"출장비"}'
+            app:subTitleVisible="@{true}"
+            />
+
+        <kr.co.soogong.master.ui.widget.TitleChipGroup
+            android:id="@+id/crane_usage_chip_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_20"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/travel_cost_chip_group"
+            app:titleVisible="@{false}"
+            app:subTitle='@{"크레인 사용"}'
+            app:subTitleVisible="@{true}"
+            />
+
+        <kr.co.soogong.master.ui.widget.TitleChipGroup
+            android:id="@+id/package_cost_chip_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_20"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/crane_usage_chip_group"
+            app:titleVisible="@{false}"
+            app:subTitle='@{"짐 정리 비용"}'
+            app:subTitleVisible="@{true}"
+            />
+
+        <kr.co.soogong.master.ui.widget.TitleEditCountBoxView
+            android:id="@+id/other_cost_information"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_20"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/package_cost_chip_group"
+            app:titleVisible="@{false}"
+            app:subTitle='@{"기타 변동 가능 사항"}'
+            app:subTitleVisible="@{true}"
+            app:hintText='@{"현장에서 견적가격이 변동될 수 있는 사항을 입력해주세요."}'
+
+            app:limitedCount="@{500}"
+            app:alertText='@{"10자 이상으로 입력해주세요."}'
+            />
+
+        <kr.co.soogong.master.ui.widget.TitleSettingTime
+            android:id="@+id/available_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_28"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/other_cost_information"
+            app:title='@{"연락 가능한 시간을 선택해주세요. (선택)"}'
+            app:setStartTimeHint='@{"시간 선택"}'
+            app:setEndTimeHint='@{"시간 선택"}'
+
+
+            />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/previous_button"
+            style="@style/medium_text_style.bold"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/requirement_card_button_default_height"
+            android:layout_marginTop="@dimen/gap_28"
+            android:layout_marginEnd="@dimen/gap_8"
+            android:background="@drawable/shape_fill_transparent_board_gray"
+            android:text="@string/previous_button_text"
+            android:textColor="@color/color_616161"
+            app:layout_constraintEnd_toStartOf="@id/next_button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/available_time" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/next_button"
+            style="@style/medium_text_style.bold"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/gap_40"
+            android:background="@drawable/shape_fill_green_background"
+            android:text="@string/next_button_text"
+            android:textColor="@color/basic_white"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/previous_button"
+            app:layout_constraintTop_toTopOf="@id/previous_button" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

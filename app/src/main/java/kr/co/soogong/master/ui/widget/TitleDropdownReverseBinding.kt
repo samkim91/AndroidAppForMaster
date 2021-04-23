@@ -7,7 +7,7 @@ import androidx.databinding.InverseBindingAdapter
 import androidx.databinding.InverseBindingListener
 
 object TitleDropdownReverseBinding {
-
+    // todo.. viewText에는 2way binding을 할 필요가 없음... 1way로 추후 변경 필요
     @JvmStatic
     @BindingAdapter("content")
     fun setTitleEditCountBoxContent(view: TitleDropdown, content: String?) {
