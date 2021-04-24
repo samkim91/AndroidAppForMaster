@@ -27,6 +27,7 @@
     <color name="text_alert_color">@color/color_FF711D</color>
     <color name="text_kakao_color">#381E1E</color>
 
+    <color name="gray_background_color">#F5F5F5</color>
     <color name="line_color">@color/color_E0E0E0</color>
     <color name="color_kakao">#FFE600</color>
 

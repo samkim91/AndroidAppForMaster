@@ -5,18 +5,17 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
+        android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/recommend_count_label"
-            style="@style/small_text_style"
+            style="@style/small_text_style.medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="60dp"
             android:layout_marginTop="11dp"
-            android:text="추천도"
             android:textColor="@color/text_basic_color"
+            android:text="추천도"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -26,6 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="11dp"
             android:textColor="@color/color_1FC472"
+            android:fontFamily="@font/bold"
             android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/recommend_count_label"
@@ -35,7 +35,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/review_count_label"
-            style="@style/small_text_style"
+            style="@style/small_text_style.medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="11dp"
@@ -51,6 +51,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="11dp"
             android:textColor="@color/color_1FC472"
+            android:fontFamily="@font/bold"
             android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/review_count_label"
@@ -58,7 +59,7 @@
             app:layout_constraintTop_toBottomOf="@id/review_count_label"
             tools:text="50" />
 
-        <androidx.appcompat.widget.AppCompatImageView
+        <View
             android:layout_width="1dp"
             android:layout_height="0dp"
             android:layout_marginTop="28dp"
