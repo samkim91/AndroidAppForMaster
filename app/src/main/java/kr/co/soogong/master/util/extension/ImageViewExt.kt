@@ -10,7 +10,7 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.CenterInside
 
 @BindingAdapter("bind:image_url")
-fun ImageView.setImageUrl(url: String) {
+fun ImageView.setImageUrl(url: String?) {
     Glide.with(this.context)
         .load(url)
         .transform(CenterInside())
@@ -18,7 +18,7 @@ fun ImageView.setImageUrl(url: String) {
 }
 
 @BindingAdapter("bind:image_uri")
-fun ImageView.setImage(uri: Uri) {
+fun ImageView.setImage(uri: Uri?) {
     Glide.with(this.context)
         .load(uri)
         .transform(CenterCrop())

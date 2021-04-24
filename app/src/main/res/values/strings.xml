@@ -164,6 +164,7 @@
     <string name="secondary_address">추가지역</string>
     <string name="category">업종</string>
     <string name="modify">수정하기</string>
+    <string name="profile_card_container_label">핵심 정보 등록 / 수정하기</string>
 
     <!-- Request Detail -->
     <string name="request_date">접수일시</string>

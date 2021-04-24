@@ -20,7 +20,8 @@
         android:layout_gravity="center"
         android:layout_marginEnd="@dimen/gap_10"
         card_view:cardCornerRadius="8dp"
-        android:background="@android:color/transparent">
+        card_view:cardElevation="0dp"
+        >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/card_view_container"

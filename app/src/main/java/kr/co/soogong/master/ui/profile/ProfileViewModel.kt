@@ -8,6 +8,7 @@ import kotlinx.coroutines.launch
 import kr.co.soogong.master.data.user.User
 import kr.co.soogong.master.domain.usecase.GetUserInfoUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -19,6 +20,7 @@ class ProfileViewModel @Inject constructor(
         get() = _userInfo
 
     fun requestUserProfile() {
+        Timber.tag(TAG).d("requestUserProfile: ")
         viewModelScope.launch {
             _userInfo.value = getUserInfoUseCase()
         }

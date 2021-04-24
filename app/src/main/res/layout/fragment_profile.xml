@@ -40,6 +40,7 @@
                 android:layout_marginEnd="4dp"
                 android:ellipsize="end"
                 android:maxLines="1"
+                android:textColor="@color/text_basic_color"
                 android:text="@{vm.userInfo.name}"
                 app:layout_constrainedWidth="true"
                 app:layout_constraintEnd_toStartOf="@id/user_name_end"
@@ -60,17 +61,16 @@
                 app:layout_constraintStart_toEndOf="@id/user_name"
                 app:layout_constraintTop_toTopOf="@id/user_name" />
 
-            <kr.co.soogong.master.ui.widget.ReviewLayout
+            <kr.co.soogong.master.ui.widget.ReviewBox
                 android:id="@+id/review_box"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="80dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/user_name"
-                bind:recommendCount="@{vm.userInfo.starCount}"
-                bind:reviewCount="@{vm.userInfo.reviewsCount}" />
+                app:recommendCount="@{vm.userInfo.starCount}"
+                app:reviewCount="@{vm.userInfo.reviewsCount}"
+                />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/show_profile"
@@ -99,24 +99,84 @@
                 app:layout_constraintTop_toBottomOf="@id/show_profile" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/profile_card_area"
+                android:id="@+id/profile_card_container"
                 android:layout_width="0dp"
-                android:layout_height="100dp"
+                android:layout_height="wrap_content"
                 android:background="@color/color_F5F5F5"
+                android:paddingTop="@dimen/gap_24"
+                android:paddingStart="@dimen/gap_20"
+                android:paddingEnd="@dimen/gap_20"
+                android:paddingBottom="@dimen/gap_24"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/banner_image">
 
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/profile_card_container_label"
+                    style="@style/medium_text_style.medium"
+                    android:text="@string/profile_card_container_label"
+                    android:textColor="@color/color_121212"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+
+                <!-- 포트폴리오 -->
+                <kr.co.soogong.master.ui.widget.ProfileDefaultCard
+                    android:id="@+id/portfolio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/gap_16"
+                    app:defaultButtonText='@{"등록하기"}'
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/profile_card_container_label"
+                    app:subTitle='@{"포트폴리오의 사진과 실제 시공정보가 많을수록, 더 많이 노출되고, 고객이 선택하는데 더 좋은 기준이 됩니다."}'
+                    app:subTitleVisible="@{true}"
+                    app:title='@{"포트폴리오"}' />
+
+                <!-- 업체 소개사진 -->
+                <kr.co.soogong.master.ui.widget.ProfileImageCard
+                    android:id="@+id/company_images"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/gap_24"
+                    app:layout_constraintTop_toBottomOf="@id/portfolio"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:title='@{"업체 소개사진"}'
+                    app:subTitle='@{"업체 페이지에 노출되는 대표 이미지 입니다."}'
+                    app:subTitleVisible="@{true}"
+                    app:defaultButtonText='@{"등록하기"}'
+                    />
+
+                <!-- 시공 종류별 가격 -->
+
+                <!-- 프로필 사진 -->
+
+                <!-- 10초 소개 영상 -->
+
+                <!-- A/S 기간 -->
+
+                <!-- 현장 가격 변동 요인 -->
+
+
+
+
+
+
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <View
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/line"
                 android:layout_width="0dp"
                 android:layout_height="10dp"
                 android:background="@color/line_color"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/profile_card_area" />
+                app:layout_constraintTop_toBottomOf="@id/profile_card_container" />
 
             <kr.co.soogong.master.ui.widget.SettingsButton
                 android:id="@+id/edit_basic_info"
@@ -127,7 +187,7 @@
                 app:layout_constraintTop_toBottomOf="@id/line"
                 app:title='@{"기본 정보 등록 / 수정 하기"}' />
 
-            <View
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/line2"
                 android:layout_width="0dp"
                 android:layout_height="10dp"
