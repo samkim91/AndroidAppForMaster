@@ -1,5 +1,6 @@
 package kr.co.soogong.master.ui.profile
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
@@ -8,7 +9,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentProfileBinding
 import kr.co.soogong.master.ui.base.BaseFragment
+import kr.co.soogong.master.ui.profile.edit.EditProfileForm1Activity.Companion.PORTFOLIO
 import kr.co.soogong.master.ui.widget.TitleEditText
+import kr.co.soogong.master.uiinterface.profile.EditProfileForm1ActivityHelper
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -33,6 +36,9 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
             vm = viewModel
             lifecycleOwner = viewLifecycleOwner
 
+            portfolio.addDefaultButtonClickListener{
+                startActivity(Intent(EditProfileForm1ActivityHelper.getIntent(requireContext(), PORTFOLIO)))
+            }
 
 
         }

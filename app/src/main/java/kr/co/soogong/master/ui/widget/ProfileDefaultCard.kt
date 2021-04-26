@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
+import androidx.appcompat.widget.ViewUtils
 import androidx.constraintlayout.widget.ConstraintLayout
 import kr.co.soogong.master.databinding.ViewProfileDefaultCardBinding
 
@@ -27,7 +28,7 @@ class ProfileDefaultCard @JvmOverloads constructor(
             binding.title.visibility = if (value) View.VISIBLE else View.GONE
         }
 
-    var setNewBadgeVisible: Boolean = false
+    var newBadgeVisible: Boolean = false
         set(value) {
             field = value
             binding.newBadge.visibility = if (value) View.VISIBLE else View.GONE

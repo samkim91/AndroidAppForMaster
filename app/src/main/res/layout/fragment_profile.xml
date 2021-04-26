@@ -40,8 +40,8 @@
                 android:layout_marginEnd="4dp"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:textColor="@color/text_basic_color"
                 android:text="@{vm.userInfo.name}"
+                android:textColor="@color/text_basic_color"
                 app:layout_constrainedWidth="true"
                 app:layout_constraintEnd_toStartOf="@id/user_name_end"
                 app:layout_constraintHorizontal_chainStyle="packed"
@@ -65,12 +65,11 @@
                 android:id="@+id/review_box"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/user_name"
                 app:recommendCount="@{vm.userInfo.starCount}"
-                app:reviewCount="@{vm.userInfo.reviewsCount}"
-                />
+                app:reviewCount="@{vm.userInfo.reviewsCount}" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/show_profile"
@@ -100,13 +99,9 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/profile_card_container"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/color_F5F5F5"
-                android:paddingTop="@dimen/gap_24"
-                android:paddingStart="@dimen/gap_20"
-                android:paddingEnd="@dimen/gap_20"
-                android:paddingBottom="@dimen/gap_24"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/banner_image">
@@ -114,12 +109,15 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/profile_card_container_label"
                     style="@style/medium_text_style.medium"
-                    android:text="@string/profile_card_container_label"
-                    android:textColor="@color/color_121212"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/gap_20"
+                    android:layout_marginTop="@dimen/gap_24"
+                    android:layout_marginEnd="@dimen/gap_20"
+                    android:text="@string/profile_card_container_label"
+                    android:textColor="@color/color_121212"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    app:layout_constraintTop_toTopOf="parent" />
 
 
                 <!-- 포트폴리오 -->
@@ -127,7 +125,11 @@
                     android:id="@+id/portfolio"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/gap_20"
                     android:layout_marginTop="@dimen/gap_16"
+                    android:layout_marginEnd="@dimen/gap_20"
+                    android:background="@drawable/shape_radius8_white_background"
+                    android:elevation="@dimen/gap_4"
                     app:defaultButtonText='@{"등록하기"}'
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -141,31 +143,115 @@
                     android:id="@+id/company_images"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/gap_20"
                     android:layout_marginTop="@dimen/gap_24"
-                    app:layout_constraintTop_toBottomOf="@id/portfolio"
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginEnd="@dimen/gap_20"
+                    android:background="@drawable/shape_radius8_white_background"
+                    android:elevation="@dimen/gap_4"
+                    app:defaultButtonText='@{"등록하기"}'
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:title='@{"업체 소개사진"}'
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/portfolio"
                     app:subTitle='@{"업체 페이지에 노출되는 대표 이미지 입니다."}'
                     app:subTitleVisible="@{true}"
-                    app:defaultButtonText='@{"등록하기"}'
-                    />
+                    app:imageUrl='@{"https://assets.soogong.co.kr/categories/temp/floorBoard.png"}'
+                    app:title='@{"업체 소개사진"}' />
 
                 <!-- 시공 종류별 가격 -->
+                <kr.co.soogong.master.ui.widget.ProfileDefaultCard
+                    android:id="@+id/price_by_project"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/gap_20"
+                    android:layout_marginTop="@dimen/gap_24"
+                    android:layout_marginEnd="@dimen/gap_20"
+                    android:background="@drawable/shape_radius8_white_background"
+                    android:elevation="@dimen/gap_4"
+                    app:defaultButtonText='@{"등록하기"}'
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/company_images"
+                    app:subTitle='@{"다양한 시공의 가격 정보를 입력해 주실수록 선택률이 상승합니다."}'
+                    app:subTitleVisible="@{true}"
+                    app:title='@{"시공 종류별 가격"}' />
 
                 <!-- 프로필 사진 -->
+                <kr.co.soogong.master.ui.widget.ProfileImageCard
+                    android:id="@+id/profile_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/gap_20"
+                    android:layout_marginTop="@dimen/gap_24"
+                    android:layout_marginEnd="@dimen/gap_20"
+                    android:background="@drawable/shape_radius8_white_background"
+                    android:elevation="@dimen/gap_4"
+                    app:defaultButtonText='@{"등록하기"}'
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/price_by_project"
+                    app:subTitle='@{"고객이 마스터님을 알아볼 수 있게 얼굴을 알려주세요."}'
+                    app:subTitleVisible="@{true}"
+                    app:imageUrl='@{"https://assets.soogong.co.kr/categories/temp/floorBoard.png"}'
+                    app:title='@{"프로필 사진"}' />
 
                 <!-- 10초 소개 영상 -->
+                <kr.co.soogong.master.ui.widget.ProfileDefaultCard
+                    android:id="@+id/introduction_video"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/gap_20"
+                    android:layout_marginTop="@dimen/gap_24"
+                    android:layout_marginEnd="@dimen/gap_20"
+                    android:background="@drawable/shape_radius8_white_background"
+                    android:elevation="@dimen/gap_4"
+                    app:defaultButtonText='@{"등록하기"}'
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/profile_image"
+                    app:subTitle='@{"마스터님을 소개하는 짧은 영상은 고객에게 신뢰감을 줍니다."}'
+                    app:subTitleVisible="@{true}"
+                    app:title='@{"10초 소개 영상"}'
+                    />
 
                 <!-- A/S 기간 -->
+                <kr.co.soogong.master.ui.widget.ProfileDefaultCard
+                    android:id="@+id/warranty_information"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/gap_20"
+                    android:layout_marginTop="@dimen/gap_24"
+                    android:layout_marginEnd="@dimen/gap_20"
+                    android:background="@drawable/shape_radius8_white_background"
+                    android:elevation="@dimen/gap_4"
+                    app:defaultButtonText='@{"수정하기"}'
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/introduction_video"
+                    app:firstDetail='@{""}'
+                    app:firstDetailVisible="@{true}"
+                    app:secondDetail='@{""}'
+                    app:secondDetailVisible="@{true}"
+                    app:title='@{"A/S 정보"}'
+                    />
 
                 <!-- 현장 가격 변동 요인 -->
-
-
-
-
-
-
+                <kr.co.soogong.master.ui.widget.ProfileChipGroupCard
+                    android:id="@+id/flexible_cost"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/gap_20"
+                    android:layout_marginTop="@dimen/gap_24"
+                    android:layout_marginEnd="@dimen/gap_20"
+                    android:layout_marginBottom="@dimen/gap_24"
+                    android:background="@drawable/shape_radius8_white_background"
+                    android:elevation="@dimen/gap_4"
+                    app:defaultButtonText='@{"수정하기"}'
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/warranty_information"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:title='@{"현장 가격 변동 요인"}'
+                    />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

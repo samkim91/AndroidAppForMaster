@@ -19,7 +19,6 @@
     <string name="end_time_text">까지</string>
 
 
-
     <!-- Sign In -->
     <string name="sign_in_activity_name">로그인</string>
     <string name="sign_in_button_text">로그인</string>
@@ -165,6 +164,8 @@
     <string name="category">업종</string>
     <string name="modify">수정하기</string>
     <string name="profile_card_container_label">핵심 정보 등록 / 수정하기</string>
+    <string name="add_fortpolio_button_text">포트폴리오 추가하기</string>
+    <string name="add_price_by_project_button_text">시공 종류별 가격 추가하기</string>
 
     <!-- Request Detail -->
     <string name="request_date">접수일시</string>

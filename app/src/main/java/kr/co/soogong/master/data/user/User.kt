@@ -43,7 +43,7 @@ data class User(
     val projects: List<String>,
 
     @SerializedName("introduction")
-    val introduction: String?
+    val introduction: String?,
 ) : Parcelable {
     companion object {
         fun fromJson(jsonObject: JsonObject): User {
@@ -60,6 +60,26 @@ data class User(
                 categories = item.get("categories_to_arr").asJsonArray.map { it.asString },
                 projects = item.get("projects_to_arr").asJsonArray.map { it.asString },
                 introduction = item.getNullable("introduction")?.asString
+            )
+        }
+    }
+}
+
+@Parcelize
+data class BusinessType(
+    val category: String?,
+    val projects: List<String>,
+) : Parcelable {
+    companion object {
+        fun fromJson(jsonObject: JsonObject): BusinessType {
+            val item = jsonObject.get("business_type").asJsonObject
+            val projectsArray = item.get("project").asJsonArray
+
+            return BusinessType(
+                category = item.get("category").asString,
+                projects = List<String>(projectsArray.size()) {
+                    projectsArray.get(it).asString
+                }
             )
         }
     }
