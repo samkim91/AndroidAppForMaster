@@ -4,18 +4,6 @@
     xmlns:bind="http://schemas.android.com/bind"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-        <variable
-            name="imageUrl"
-            type="String" />
-
-        <variable
-            name="imageCount"
-            type="String" />
-
-    </data>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/profile_card"
         android:layout_width="match_parent"
@@ -75,7 +63,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                bind:image_url="@{imageUrl}" />
+
+                />
 
             <FrameLayout
                 android:id="@+id/image_count_container"
@@ -87,11 +76,12 @@
                 app:layout_constraintEnd_toEndOf="parent">
 
                 <TextView
+                    android:id="@+id/image_count"
                     style="@style/small_text_style.bold"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="@{imageCount}"
+
                     android:textColor="@color/basic_white"
                     tools:text="+9" />
             </FrameLayout>
@@ -104,9 +94,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/gap_8"
             android:layout_marginEnd="@dimen/gap_16"
-            android:ellipsize="end"
             android:textColor="@color/color_616161"
-            android:visibility="visible"
+            android:visibility="gone"
             app:layout_constrainedWidth="true"
             app:layout_constraintEnd_toStartOf="@id/image_container"
             app:layout_constraintHorizontal_bias="0"

@@ -8,6 +8,7 @@ import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import kr.co.soogong.master.databinding.ViewProfileDefaultCardBinding
 import kr.co.soogong.master.databinding.ViewProfileImageCardBinding
+import kr.co.soogong.master.util.extension.setImageUrl
 
 class ProfileImageCard @JvmOverloads constructor(
     context: Context,
@@ -30,22 +31,24 @@ class ProfileImageCard @JvmOverloads constructor(
             binding.title.visibility = if (value) VISIBLE else GONE
         }
 
-    var setNewBadgeVisible: Boolean = false
+    var newBadgeVisible: Boolean = false
         set(value) {
             field = value
             binding.newBadge.visibility = if (value) VISIBLE else GONE
         }
 
-    fun setImage(imageUrl: String) {
-        binding.imageUrl = imageUrl
-        binding.imageContainer.visibility = if (!imageUrl.isNullOrEmpty()) VISIBLE else GONE
-    }
+    var imageUrl: String = ""
+        set(value) {
+            field = value
+            binding.image.setImageUrl(value)
+        }
 
-    fun setImageCount(imageCount: Int) {
-        binding.imageCount = "+$imageCount"
-        binding.imageCountContainer.visibility =
-            if (imageCount > 2) VISIBLE else GONE
-    }
+    var imageCount: Int = 0
+        set(value) {
+            field = value
+            binding.imageCount.text = "+$value"
+            binding.imageCountContainer.visibility = if (value > 2) VISIBLE else GONE
+        }
 
     var subTitle: String? = ""
         set(value) {

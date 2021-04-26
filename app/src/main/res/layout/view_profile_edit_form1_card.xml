@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/edit_profile_form1_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/gap_20"
+        android:paddingTop="@dimen/gap_32"
+        android:paddingEnd="@dimen/gap_20"
+        android:paddingBottom="@dimen/gap_32">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/title"
+            style="@style/big_text_style.medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_basic_color"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="마스터님의 포트폴리오를 작성해주세요." />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/sub_title"
+            style="@style/small_text_style.medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_4"
+            android:textColor="@color/color_616161"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title"
+            tools:text="포트폴리오 사진과 실제 시공 정보가 많을 수록, 더많이 노출되고, 고객이 선택하는데 더 좋은 기준이 됩니다." />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/default_button"
+            style="@style/medium_text_style.bold"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/gap_40"
+            android:layout_marginTop="@dimen/gap_12"
+            android:background="@drawable/shape_fill_transparent_board_green"
+            android:textColor="@color/color_1FC472"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sub_title"
+            tools:text="@string/add_fortpolio_button_text" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

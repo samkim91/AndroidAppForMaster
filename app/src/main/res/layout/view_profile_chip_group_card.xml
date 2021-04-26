@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/bind"
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/profile_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/shape_radius8_white_background"
         android:paddingStart="@dimen/gap_16"
         android:paddingTop="@dimen/gap_20"
         android:paddingEnd="@dimen/gap_16"
@@ -51,26 +52,27 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/gap_8"
+            android:layout_marginEnd="@dimen/gap_16"
             android:textColor="@color/color_616161"
             android:visibility="gone"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/title"
-            tools:text="포트폴리오의 사진과 실제 시공 정보가 많을수록, 더 많이 노출되고, 고객이 선택하는데 더 좋은 기준이 됩니다." />
+            tools:text="업체 페이지에 노출되는 대표 이미지 입니다." />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/first_detail"
-            style="@style/medium_text_style.regular"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/chip_group_container"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/gap_16"
-            android:textColor="@color/text_basic_color"
-            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/sub_title"
-            tools:text="2년" />
+            android:orientation="vertical"/>
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/second_detail"
+            android:id="@+id/detail"
             style="@style/medium_text_style.regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -78,15 +80,15 @@
             android:textColor="@color/text_basic_color"
             android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/first_detail"
-            tools:text="2년 동안 이것저것 고쳐줌2년 동안 이것저것 고쳐줌2년 동안 이것저것 고쳐줌2년 동안 이것저것 고쳐줌" />
+            app:layout_constraintTop_toBottomOf="@id/chip_group_container"
+            tools:text="블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라" />
 
         <androidx.constraintlayout.widget.Barrier
             android:id="@+id/button_barrier"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:barrierDirection="bottom"
-            app:constraint_referenced_ids="sub_title, second_detail" />
+            app:constraint_referenced_ids="detail" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/default_button"
@@ -94,49 +96,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/gap_16"
-            android:textColor="@color/color_1FC472"
+            android:textColor="@color/color_616161"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/button_barrier"
-            tools:text="등록하기" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/first_button_in_group"
-            style="@style/medium_text_style.bold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/gap_16"
-            android:textColor="@color/color_616161"
-            app:layout_constraintStart_toEndOf="@id/default_button"
-            app:layout_constraintTop_toBottomOf="@id/button_barrier"
-            tools:text="삭제하기" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/button_divider"
-            android:layout_width="@dimen/gap_1"
-            android:layout_height="@dimen/gap_16"
-            android:layout_marginStart="@dimen/gap_16"
-            android:background="@color/color_E0E0E0"
-            app:layout_constraintBottom_toBottomOf="@id/first_button_in_group"
-            app:layout_constraintStart_toEndOf="@id/first_button_in_group"
-            app:layout_constraintTop_toTopOf="@id/first_button_in_group" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/second_button_in_group"
-            style="@style/medium_text_style.bold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/gap_16"
-            android:textColor="@color/color_616161"
-            app:layout_constraintStart_toEndOf="@id/button_divider"
-            app:layout_constraintTop_toTopOf="@id/first_button_in_group"
             tools:text="수정하기" />
-
-        <androidx.constraintlayout.widget.Group
-            android:id="@+id/button_group"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            app:constraint_referenced_ids="first_button_in_group, second_button_in_group, button_divider" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
