@@ -4,16 +4,16 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
-import kr.co.soogong.master.databinding.ViewProfileEditForm1CardBinding
+import kr.co.soogong.master.databinding.ViewIntroductionEditProfileWithCardBinding
 
-class ProfileEditForm1Card @JvmOverloads constructor(
+class IntroductionEditProfileWithCard @JvmOverloads constructor(
     context: Context,
     attributeSet: AttributeSet? = null,
     defStyle: Int = 0,
 ) : ConstraintLayout(context, attributeSet, defStyle) {
 
     private val binding =
-        ViewProfileEditForm1CardBinding.inflate(LayoutInflater.from(context), this, true)
+        ViewIntroductionEditProfileWithCardBinding.inflate(LayoutInflater.from(context), this, true)
 
     var title: String? = ""
         set(value) {
@@ -47,6 +47,6 @@ class ProfileEditForm1Card @JvmOverloads constructor(
         }
 
     fun addDefaultButtonClickListener(listener: OnClickListener) {
-        binding.defaultButton.setOnClickListener { listener }
+        binding.defaultButton.setOnClickListener(listener)
     }
 }
