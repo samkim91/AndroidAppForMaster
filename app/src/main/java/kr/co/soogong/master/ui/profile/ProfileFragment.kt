@@ -3,15 +3,14 @@ package kr.co.soogong.master.ui.profile
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentProfileBinding
 import kr.co.soogong.master.ui.base.BaseFragment
-import kr.co.soogong.master.ui.profile.edit.EditProfileForm1Activity.Companion.PORTFOLIO
-import kr.co.soogong.master.ui.widget.TitleEditText
-import kr.co.soogong.master.uiinterface.profile.EditProfileForm1ActivityHelper
+import kr.co.soogong.master.ui.profile.edit.EditProfileWithCardActivity.Companion.PORTFOLIO
+import kr.co.soogong.master.ui.profile.edit.EditProfileWithCardActivity.Companion.PRICE_BY_PROJECTS
+import kr.co.soogong.master.uiinterface.profile.EditProfileWithCardActivityHelper
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -37,7 +36,13 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
             lifecycleOwner = viewLifecycleOwner
 
             portfolio.addDefaultButtonClickListener{
-                startActivity(Intent(EditProfileForm1ActivityHelper.getIntent(requireContext(), PORTFOLIO)))
+                startActivity(Intent(EditProfileWithCardActivityHelper.getIntent(requireContext(), PORTFOLIO)))
+            }
+
+
+
+            priceByProject.addDefaultButtonClickListener{
+                startActivity(Intent(EditProfileWithCardActivityHelper.getIntent(requireContext(), PRICE_BY_PROJECTS)))
             }
 
 
