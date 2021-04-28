@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import kr.co.soogong.master.R
 import kr.co.soogong.master.data.category.Project
 import kr.co.soogong.master.databinding.ViewholderProjectBinding
 
@@ -18,11 +19,7 @@ class ProjectSelectViewHolder(
         binding.run {
             text.text = project.name
 
-            check.visibility = if (project.checked) {
-                View.VISIBLE
-            } else {
-                View.GONE
-            }
+            if (project.checked) check.setImageResource(R.drawable.ic_active_check_box) else check.setImageResource(R.drawable.ic_inactive_check_box)
 
             root.setOnClickListener {
                 clickListener(position, project)

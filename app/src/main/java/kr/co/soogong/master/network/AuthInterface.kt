@@ -28,4 +28,7 @@ interface AuthInterface {
 
     @POST(HttpContract.FIND)
     fun findPassword(@Body body: HashMap<String, String?>): Single<Response>
+
+    @POST(HttpContract.CHECK_ID_EXIST)
+    fun checkIdExist(@Body body: HashMap<String, String?>): Single<Response>
 }

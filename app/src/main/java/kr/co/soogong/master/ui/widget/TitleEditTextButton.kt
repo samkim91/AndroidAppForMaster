@@ -26,6 +26,12 @@ class TitleEditTextButton @JvmOverloads constructor(
             binding.title.text = value
         }
 
+    var titleVisible: Boolean = true
+        set(value) {
+            field = value
+            binding.title.visibility = if (value) View.VISIBLE else View.GONE
+        }
+
     var subTitle: String? = ""
         set(value) {
             field = value
@@ -74,10 +80,10 @@ class TitleEditTextButton @JvmOverloads constructor(
             binding.secondEditText.visibility = if (value) View.VISIBLE else View.GONE
         }
 
-    var setFirstEditTextEnable: Boolean = true
+    var setFirstEditTextEnable: Boolean = false
         set(value){
             field = value
-            binding.firstEditText.isEnabled = false
+            binding.firstEditText.isEnabled = value
         }
 
     var setSecondEditTextEnable: Boolean = true
@@ -104,7 +110,7 @@ class TitleEditTextButton @JvmOverloads constructor(
             binding.button.text = value
         }
 
-    fun setOnClick(listener: OnClickListener) {
+    fun setButtonClickListener(listener: OnClickListener) {
         binding.button.setOnClickListener(listener)
     }
 

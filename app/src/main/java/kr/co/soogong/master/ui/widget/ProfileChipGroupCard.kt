@@ -3,20 +3,15 @@ package kr.co.soogong.master.ui.widget
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.appcompat.widget.AppCompatTextView
-import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.widget.TextViewCompat
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
-import kr.co.soogong.master.data.user.BusinessType
+import kr.co.soogong.master.data.category.BusinessType
+import kr.co.soogong.master.data.category.Project
 import kr.co.soogong.master.databinding.ViewProfileChipGroupCardBinding
-import kr.co.soogong.master.databinding.ViewProfileDefaultCardBinding
-import kr.co.soogong.master.databinding.ViewProfileImageCardBinding
-import kr.co.soogong.master.util.extension.setImageUrl
 
 class ProfileChipGroupCard @JvmOverloads constructor(
     context: Context,
@@ -81,13 +76,13 @@ class ProfileChipGroupCard @JvmOverloads constructor(
             binding.defaultButton.setTextColor(value)
         }
 
-    fun addChipGroup(items: List<String>){
+    fun addChipGroup(items: List<Project>){
         val chipGroup = ChipGroup(context)
         val params = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
 
         items.map { item ->
             val chip = Chip(context)
-            chip.text = item
+            chip.text = item.toString()
 
             chipGroup.addView(chip)
         }
@@ -101,7 +96,7 @@ class ProfileChipGroupCard @JvmOverloads constructor(
         val title = AppCompatTextView(context)
         val params = LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
 
-        title.text = items.category
+        title.text = items.category.toString()
         params.setMargins(0, 16, 0, 0)
 
         binding.chipGroupContainer.addView(title, params)

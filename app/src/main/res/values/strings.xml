@@ -7,11 +7,20 @@
     <string name="sign_up_sign_in_button_text">로그인</string>
     <string name="sign_up_sign_up_button_text">가입신청</string>
     <string name="alert_required_field">필수 정보입니다.</string>
+    <string name="retype_phone_number_button_text">휴대폰번호 재입력</string>
+    <string name="check_certification_code_button_text">인증완료</string>
+    <string name="alert_wrong_certification_code">인증번호가 틀립니다.</string>
+    <string name="alert_invalid_certification_code">6자리 숫자로 입력해주세요.</string>
+    <string name="alert_expired_certification_time">인증시간이 초과되었습니다. 인증번호를 재전송해주세요.</string>
+    <string name="confirming_certification_code_received">인증번호를 받지 못하셨나요?</string>
+    <string name="request_certification_code_again_text"><u>인증번호 재요청</u></string>
+
     <string name="sign_up_toolbar">마스터 가입신청</string>
     <string name="step1_tab_text">step.1\n사업자정보</string>
     <string name="step2_tab_text">step.2\n추가정보</string>
     <string name="step3_tab_text">step.3\n서비스정보</string>
     <string name="step4_tab_text">step.4\n가입정보</string>
+    <string name="request_certification_number_button">인증번호 요청</string>
     <string name="next_button_text">다음</string>
     <string name="previous_button_text">이전</string>
     <string name="select_time_text">시간 선택</string>
@@ -22,10 +31,12 @@
     <!-- Sign In -->
     <string name="sign_in_activity_name">로그인</string>
     <string name="sign_in_button_text">로그인</string>
-    <string name="sign_in_find_info">비밀번호 찾기</string>
+    <string name="find_password_text">비밀번호 찾기</string>
+    <string name="asking_forget_password_text">비밀번호를 잊으셨나요?</string>
+    <string name="finding_password_text_underline"><u>비밀번호 찾기</u></string>
     <string name="sign_in_email_hint_text">아이디 입력</string>
     <string name="sign_in_password_hint_text">비밀번호 입력</string>
-    <string name="sign_in_error_alert_text">이메일 혹은 비밀번호가 올바르지 않습니다.</string>
+    <string name="alert_invalid_id_or_password">이메일 혹은 비밀번호가 올바르지 않습니다.</string>
 
     <!-- Find Info -->
     <string name="find_info_activity_name">비밀번호 찾기</string>
@@ -209,6 +220,9 @@
     <string name="minimum_cost">견적은 1만원 이상으로 보내주세요.</string>
 
     <!-- toast text -->
+    <string name="certification_code_requested">인증번호를 요청 했습니다.</string>
+    <string name="certification_code_requested_again">인증번호를 재요청 했습니다.</string>
+
     <string name="send_message_succeeded">고객에게 견적서가 전달되었습니다!\n매칭을 기다려주세요.</string>
     <string name="send_message_failed">처리 실패하였습니다.\n다시 시도해보거나, 연락해주세요.</string>
     <string name="cancel_estimate_succeeded">시공이 취소되었습니다.\n더 좋은 문의를 드리도록 노력할게요.</string>

@@ -37,6 +37,7 @@
             android:launchMode="singleTask" />
         <activity
             android:name=".ui.auth.signup.SignUpActivity"
+            android:windowSoftInputMode="adjustResize"
             android:launchMode="singleTask" />
         <activity
             android:name=".ui.auth.signup.AddressActivity"

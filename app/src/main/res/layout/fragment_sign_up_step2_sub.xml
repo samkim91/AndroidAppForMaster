@@ -20,52 +20,76 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_40"
             android:fillViewport="true">
 
             <kr.co.soogong.master.ui.widget.LargeTitleSubtitle
                 android:id="@+id/title_widget"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/gap_40"
                 android:layout_marginStart="@dimen/gap_20"
                 android:layout_marginEnd="@dimen/gap_20"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:title='@{"비밀번호를 입력해주세요."}' />
+                app:title='@{"이미 수공의 마스터이시네요!\n비밀번호를 입력해 로그인해주세요."}' />
 
             <kr.co.soogong.master.ui.widget.TitleEditText
-                android:id="@+id/sign_up_password"
+                android:id="@+id/password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/gap_20"
                 android:layout_marginTop="@dimen/gap_32"
                 android:layout_marginEnd="@dimen/gap_20"
-                app:alertText='@{"6자 이상으로 입력해주세요."}'
-                app:hintText='@{"비밀번호 입력 (6자 이상)"}'
+                app:alertText='@{"필수 정보입니다."}'
+                app:hintText='@{"비밀번호 입력"}'
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/title_widget"
-                app:content="@={vm.signUpPassword}"
-                app:title='@{"비밀번호 입력"}' />
+                app:content="@={vm.signInPassword}"
+                app:titleVisible="@{false}" />
 
-            <kr.co.soogong.master.ui.widget.TitleEditText
-                android:id="@+id/sign_up_confirm_password"
-                android:layout_width="match_parent"
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/alert_invalid_id_or_password"
+                style="@style/small_text_style.regular"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/gap_20"
-                android:layout_marginTop="@dimen/gap_32"
-                android:layout_marginEnd="@dimen/gap_20"
-                app:alertText='@{"비밀번호가 일치하지 않습니다."}'
-                app:hintText='@{"비밀번호 입력 (6자 이상)"}'
+                android:layout_marginTop="@dimen/gap_4"
+                android:text="@string/alert_invalid_id_or_password"
+                android:textColor="@color/color_FF711D"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/sign_up_password"
-                app:layout_constraintBottom_toTopOf="@id/default_button"
-                app:layout_constraintVertical_chainStyle="spread_inside"
-                app:content="@={vm.signUpConfirmPassword}"
-                app:title='@{"비밀번호 확인"}' />
+                app:layout_constraintTop_toBottomOf="@id/password" />
 
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/asking_forget_password_text"
+                style="@style/small_text_style.medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/gap_32"
+                android:text="@string/asking_forget_password_text"
+                android:textColor="@color/text_primary_color"
+                app:layout_constraintBottom_toTopOf="@id/default_button"
+                app:layout_constraintEnd_toStartOf="@id/finding_password_text_underline"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/finding_password_text_underline"
+                style="@style/small_text_style.medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/gap_4"
+                android:layout_marginBottom="@dimen/gap_32"
+                android:text="@string/finding_password_text_underline"
+                android:textColor="@color/text_primary_color"
+                app:layout_constraintBottom_toTopOf="@id/default_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toEndOf="@id/asking_forget_password_text" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/default_button"
@@ -73,14 +97,11 @@
                 android:layout_width="@dimen/gap_0"
                 android:layout_height="@dimen/gap_48"
                 android:background="@color/color_22D47B"
-                android:text="@string/next_button_text"
+                android:text="@string/sign_up_sign_in_button_text"
                 android:textColor="@color/basic_white"
-                app:layout_constraintTop_toBottomOf="@id/sign_up_confirm_password"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintVertical_chainStyle="spread_inside"
-                />
+                app:layout_constraintStart_toStartOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

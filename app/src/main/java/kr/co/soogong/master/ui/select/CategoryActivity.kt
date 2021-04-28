@@ -1,6 +1,7 @@
 package kr.co.soogong.master.ui.select
 
 import android.os.Bundle
+import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.category.Category
 import kr.co.soogong.master.databinding.ActivityCategoryBinding
@@ -9,6 +10,7 @@ import kr.co.soogong.master.ui.select.category.CategorySelectFragment
 import kr.co.soogong.master.ui.select.project.ProjectSelectFragment
 import timber.log.Timber
 
+@AndroidEntryPoint
 class CategoryActivity : BaseActivity<ActivityCategoryBinding>(
     R.layout.activity_category
 ), SelectFragment {

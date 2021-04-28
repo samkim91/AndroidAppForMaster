@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="vm"
             type="kr.co.soogong.master.ui.auth.signup.SignUpViewModel" />
@@ -18,7 +19,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:fillViewport="true">
 
             <kr.co.soogong.master.ui.widget.LargeTitleSubtitle
@@ -31,25 +32,24 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:subTitle='@{"연락이 가능한 휴대폰번호를 입력해주세요."}'
+                app:title='@{"사업자 대표명을 입력해주세요."}'
+                app:subTitle='@{"프리랜서일 경우 시공하시는 분의 이름을 입력해주세요."}'
                 app:subTitleVisible="@{true}"
-                app:title='@{"휴대폰번호를 입력해주세요."}' />
+                />
 
             <kr.co.soogong.master.ui.widget.TitleEditText
-                android:id="@+id/phone_number"
+                android:id="@+id/business_representative_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/gap_20"
                 android:layout_marginTop="@dimen/gap_32"
                 android:layout_marginEnd="@dimen/gap_20"
                 app:alertText='@{"필수 정보입니다."}'
-                app:hintText='@{"휴대폰번호 - 없이 입력"}'
+                app:hintText='@{"예시) 김수공"}'
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/title_widget"
-                app:setInputType="@{2}"
-                app:setMaxLength="@{13}"
-                app:content="@={vm.phoneNumber}"
+                app:content="@={vm.businessRepresentativeName}"
                 app:titleVisible="@{false}" />
 
             <androidx.appcompat.widget.AppCompatButton
@@ -58,12 +58,11 @@
                 android:layout_width="@dimen/gap_0"
                 android:layout_height="@dimen/gap_48"
                 android:background="@color/color_22D47B"
-                android:text="@string/request_certification_number_button"
+                android:text="@string/next_button_text"
                 android:textColor="@color/basic_white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:text="인증번호 요청" />
+                app:layout_constraintStart_toStartOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
