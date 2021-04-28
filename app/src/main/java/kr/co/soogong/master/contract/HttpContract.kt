@@ -11,6 +11,9 @@ object HttpContract {
     const val MASTER_SIGN_UP = "api/v1/branches/register"
     const val PASSWORD = "password"
     const val FCM_UPDATE = "api/v1/branches/update_reg_id"
+
+    // Todo.. 서버 수정해야함.
+    const val CHECK_ID_EXIST = "find"
     //endregion
 
     //region Category

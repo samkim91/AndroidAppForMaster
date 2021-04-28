@@ -1,85 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    <data>
+        <variable
+            name="vm"
+            type="kr.co.soogong.master.ui.auth.signup.SignUpViewModel" />
+
+        <variable
+            name="progress"
+            type="kr.co.soogong.master.ui.auth.signup.SignUpTabInfoKt" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/app_bar_layout"
+        <include
+            android:id="@+id/action_bar"
+            layout="@layout/action_bar_without_underline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/progress_indicator"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/white"
-            android:fitsSystemWindows="true"
-            android:theme="@style/ThemeOverlay.AppCompat.Light">
-
-            <com.google.android.material.appbar.CollapsingToolbarLayout
-                android:id="@+id/collapsing_toolbar_layout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fitsSystemWindows="true"
-                app:contentScrim="@android:color/white"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed"
-                app:titleEnabled="false">
-
-                <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/toolbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/actionbar_height"
-                    android:layout_marginBottom="@dimen/sign_up_tabs_height"
-                    app:title="@string/sign_up_toolbar"
-                    app:layout_collapseMode="pin"
-                    app:navigationIcon="@drawable/ic_outline_arrow_forward"
-                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/banner_image"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="@dimen/actionbar_height"
-                    android:src="@drawable/ic_banner_1_210415_3"
-                    android:fitsSystemWindows="true"
-                    android:scaleType="center"
-                    app:layout_collapseMode="parallax"
-                    app:layout_collapseParallaxMultiplier="1"
-                    />
-
-                <com.google.android.material.tabs.TabLayout
-                    android:id="@+id/sign_up_tabs"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/sign_up_tabs_height"
-                    android:layout_gravity="bottom"
-                    app:tabBackground="@drawable/tab_color_selector"
-                    app:tabIndicatorColor="@android:color/transparent"
-                    app:tabTextAppearance="@style/SignUpTabText"
-                    />
-
-            </com.google.android.material.appbar.CollapsingToolbarLayout>
-
-        </com.google.android.material.appbar.AppBarLayout>
+            android:layout_marginStart="@dimen/gap_20"
+            android:layout_marginEnd="@dimen/gap_20"
+            android:progress="@{vm.indicator}"
+            android:max="@{progress.TabCount}"
+            app:trackThickness="@dimen/gap_2"
+            app:indicatorColor="@color/color_22D47B"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/action_bar"
+            app:trackColor="@color/color_EEEEEE" />
 
 
-
-        <androidx.core.widget.NestedScrollView
-            android:id="@+id/scrollView"
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/sign_up_view_pager"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clipToPadding="false"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            >
+            android:layout_height="@dimen/gap_0"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/progress_indicator" />
 
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/sign_up_view_pager"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingStart="@dimen/gap_20"
-                android:paddingEnd="@dimen/gap_20"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/sign_up_tabs" />
 
-        </androidx.core.widget.NestedScrollView>
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

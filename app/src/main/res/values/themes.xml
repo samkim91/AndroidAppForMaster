@@ -129,6 +129,22 @@
         <item name="android:fontFamily">@font/bold</item>
     </style>
 
+    <style name="large_text_style">
+        <item name="android:textSize">@dimen/text_large_size</item>
+    </style>
+
+    <style name="large_text_style.medium" parent="large_text_style">
+        <item name="android:fontFamily">@font/medium</item>
+    </style>
+
+    <style name="large_text_style.regular" parent="large_text_style">
+        <item name="android:fontFamily">@font/regular</item>
+    </style>
+
+    <style name="large_text_style.bold" parent="large_text_style">
+        <item name="android:fontFamily">@font/bold</item>
+    </style>
+
     <style name="CustomTabText" parent="Widget.MaterialComponents.TabLayout">
         <item name="android:textSize">@dimen/text_title_size</item>
         <item name="android:fontFamily">@font/medium</item>

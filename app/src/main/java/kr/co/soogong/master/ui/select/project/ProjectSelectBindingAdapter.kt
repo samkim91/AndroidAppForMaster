@@ -3,6 +3,7 @@ package kr.co.soogong.master.ui.select.project
 import android.widget.Button
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
+import kr.co.soogong.master.R
 import kr.co.soogong.master.data.category.Project
 import timber.log.Timber
 
@@ -14,15 +15,14 @@ fun RecyclerView.setList(items: List<Project>?) {
 
 @BindingAdapter("bind:select_text")
 fun Button.setSelectText(list: List<Project>?) {
-    text = when {
-        list.isNullOrEmpty() -> {
-            "프로젝트를 선택해주세요"
-        }
-        list.none { it.checked } -> {
-            "프로젝트를 선택해주세요"
+    when{
+        list.isNullOrEmpty() || list.none { it.checked } -> {
+            text = "전문 분야를 모두 선택해주세요"
+            setBackgroundColor(resources.getColor(R.color.color_90E9BD, null))
         }
         else -> {
-            "${list.filter { it.checked }.size}개 프로젝트 선택하기"
+            text = "${list.filter { it.checked }.size}개 선택 완료"
+            setBackgroundColor(resources.getColor(R.color.color_22D47B, null))
         }
     }
 }

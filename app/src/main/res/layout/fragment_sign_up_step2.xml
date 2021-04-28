@@ -1,139 +1,190 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="vm"
             type="kr.co.soogong.master.ui.auth.signup.SignUpViewModel" />
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="@dimen/gap_52">
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:overScrollMode="never">
 
-        <kr.co.soogong.master.ui.widget.TitleEditTextButton
-            android:id="@+id/company_address"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/cancel_estimation_margin_top_52"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:title='@{"주소를 선택해주세요."}'
-            app:setFirstEditTextHint='@{"주소를 검색해주세요."}'
-            app:setSecondEditTextHint='@{"상세주소를 입력해주세요."}'
-            app:buttonText='@{"검색"}'
-            app:firstContent="@={vm.companyAddress}"
-            app:secondContent="@={vm.companyAddressDetail}"
-            app:setSecondEditTextVisible="@{true}"
-            app:alertText='@{"필수 정보입니다."}'
-            />
+            android:fillViewport="true">
 
-        <kr.co.soogong.master.ui.widget.TitleDropdown
-            android:id="@+id/service_area"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/gap_28"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/company_address"
-            app:title='@{"서비스 가능한 범위를 선택해주세요."}'
-            app:hintText='@{"범위를 선택해주세요."}'
-            app:content="@={vm.serviceArea}"
-            />
-
-        <RelativeLayout
-            android:id="@+id/map_view"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/gap_180"
-            android:layout_marginTop="@dimen/gap_8"
-            android:background="@drawable/shape_radius8_transparent"
-            app:layout_constraintTop_toBottomOf="@id/service_area"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/alert_for_service_area"
-            style="@style/small_text_style"
-            android:text="@string/alert_required_field"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/gap_4"
-            android:textColor="@color/text_alert_color"
-            android:visibility="gone"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/map_view"
-            />
-
-        <kr.co.soogong.master.ui.widget.titlerecyclerimage.TitleRecyclerImage
-            android:id="@+id/profile_images"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/gap_28"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/alert_for_service_area"
-            app:title='@{"프로필 사진을 올려주세요. (선택)"}'
-            app:subTitle='@{"마스터님의 사진을 올려주세요."}'
-            app:subTitleVisible="@{true}"
-            />
-
-        <kr.co.soogong.master.ui.widget.titlerecyclerimage.TitleRecyclerImage
-            android:id="@+id/company_images"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/gap_28"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/profile_images"
-            app:title='@{"업체 소개사진을 올려주세요. (선택)"}'
-            app:subTitle='@{"업체 페이지에 노출되는 대표 이미지입니다. (10장 이하)"}'
-            app:subTitleVisible="@{true}"
-            />
-
-        <kr.co.soogong.master.ui.widget.titlerecyclerimage.TitleRecyclerImage
-            android:id="@+id/other_certificates"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/gap_28"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/company_images"
-            app:title='@{"자격증을 올려주세요. (선택)"}'
-            app:subTitle='@{"정면 사진을 올려주세요. (10장 이하)"}'
-            app:subTitleVisible="@{true}"
-            />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/previous_button"
-            style="@style/medium_text_style.bold"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/requirement_card_button_default_height"
-            android:layout_marginTop="@dimen/gap_28"
-            android:layout_marginEnd="@dimen/gap_8"
-            android:background="@drawable/shape_fill_transparent_board_gray"
-            android:text="@string/previous_button_text"
-            android:textColor="@color/color_616161"
-            app:layout_constraintEnd_toStartOf="@id/next_button"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/other_certificates" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/next_button"
-            style="@style/medium_text_style.bold"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/gap_40"
-            android:background="@drawable/shape_fill_green_background"
-            android:text="@string/next_button_text"
-            android:textColor="@color/basic_white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/previous_button"
-            app:layout_constraintTop_toTopOf="@id/previous_button" />
+            <kr.co.soogong.master.ui.widget.LargeTitleSubtitle
+                android:id="@+id/title_widget"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/gap_20"
+                android:layout_marginEnd="@dimen/gap_20"
+                android:layout_marginTop="@dimen/gap_40"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:title='@{"인증번호를 입력해주세요."}' />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/phone_number"
+                style="@style/small_text_style.regular"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/gap_20"
+                android:layout_marginTop="@dimen/gap_32"
+                android:layout_marginEnd="@dimen/gap_20"
+                android:background="@drawable/shape_fill_gray_background_gray_border"
+                android:paddingStart="@dimen/gap_16"
+                android:paddingTop="@dimen/gap_10"
+                android:paddingEnd="@dimen/gap_16"
+                android:paddingBottom="@dimen/gap_10"
+                android:textColor="@color/text_basic_color"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/title_widget"
+                android:text="@{vm.phoneNumber}"
+                tools:hint="휴대폰 번호" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/certification_code"
+                style="@style/small_text_style.regular"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/gap_20"
+                android:layout_marginTop="@dimen/gap_8"
+                android:layout_marginEnd="@dimen/gap_20"
+                android:background="@drawable/shape_fill_white_background"
+                android:paddingStart="@dimen/gap_16"
+                android:paddingTop="@dimen/gap_10"
+                android:paddingEnd="@dimen/gap_16"
+                android:paddingBottom="@dimen/gap_10"
+                android:singleLine="true"
+                android:maxLength="6"
+                android:textColorHint="@color/text_hint_color"
+                android:text="@={`` + vm.certificationCode}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/phone_number"
+                tools:hint="인증번호 6자리 입력" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/timer_view"
+                style="@style/small_text_style.medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/gap_10"
+                android:textColor="@color/color_FF711D"
+                app:layout_constraintBottom_toBottomOf="@id/certification_code"
+                app:layout_constraintEnd_toEndOf="@id/certification_code"
+                app:layout_constraintTop_toTopOf="@id/certification_code"
+                tools:text="0:00" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/alert_wrong_certification_code"
+                style="@style/small_text_style.regular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/gap_20"
+                android:layout_marginTop="@dimen/gap_4"
+                android:text="@string/alert_wrong_certification_code"
+                android:textColor="@color/color_FF711D"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/certification_code" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/alert_expired_certification_time"
+                style="@style/small_text_style.regular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/gap_20"
+                android:layout_marginTop="@dimen/gap_4"
+                android:text="@string/alert_expired_certification_time"
+                android:textColor="@color/color_FF711D"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/alert_wrong_certification_code" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/alert_invalid_certification_code"
+                style="@style/small_text_style.regular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/gap_20"
+                android:layout_marginTop="@dimen/gap_4"
+                android:text="@string/alert_invalid_certification_code"
+                android:textColor="@color/color_FF711D"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/alert_expired_certification_time" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/confirming_certification_code_received"
+                style="@style/small_text_style.medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/gap_32"
+                android:text="@string/confirming_certification_code_received"
+                android:textColor="@color/text_primary_color"
+                app:layout_constraintBottom_toTopOf="@id/left_button"
+                app:layout_constraintEnd_toStartOf="@id/request_certification_code_again_text"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/request_certification_code_again_text"
+                style="@style/small_text_style.medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/gap_4"
+                android:layout_marginBottom="@dimen/gap_32"
+                android:text="@string/request_certification_code_again_text"
+                android:textColor="@color/text_primary_color"
+                app:layout_constraintBottom_toTopOf="@id/left_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toEndOf="@id/confirming_certification_code_received" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/left_button"
+                style="@style/medium_text_style.bold"
+                android:layout_width="@dimen/gap_0"
+                android:layout_height="@dimen/gap_48"
+                android:background="@drawable/shape_fill_white_background_default"
+                android:text="@string/retype_phone_number_button_text"
+                android:textColor="@color/color_616161"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/right_button"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/right_button"
+                style="@style/medium_text_style.bold"
+                android:layout_width="@dimen/gap_0"
+                android:layout_height="@dimen/gap_48"
+                android:background="@color/color_22D47B"
+                android:text="@string/check_certification_code_button_text"
+                android:textColor="@color/basic_white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/left_button" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </layout>

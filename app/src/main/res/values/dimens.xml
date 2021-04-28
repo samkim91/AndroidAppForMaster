@@ -21,6 +21,8 @@
     <dimen name="sign_up_margin_top_52">52dp</dimen>
 
 
+    <dimen name="gap_0">0dp</dimen>
+
     <dimen name="gap_1">1dp</dimen>
     <dimen name="gap_2">2dp</dimen>
     <dimen name="gap_3">3dp</dimen>
@@ -43,6 +45,7 @@
     <dimen name="gap_28">28dp</dimen>
     <dimen name="gap_32">32dp</dimen>
     <dimen name="gap_40">40dp</dimen>
+    <dimen name="gap_48">48dp</dimen>
     <dimen name="gap_52">52dp</dimen>
 
     <dimen name="gap_100">100dp</dimen>
@@ -62,7 +65,7 @@
     <dimen name="sign_in_text_edit_padding_bottom">10dp</dimen>
     <dimen name="sign_in_button_margin_top">18dp</dimen>
     <dimen name="sign_in_button_gone_margin_top">40dp</dimen>
-    <dimen name="sign_in_find_info_margin_top">16dp</dimen>
+    <dimen name="find_password_text_margin_top">16dp</dimen>
 
     <!--  Find Info  -->
     <dimen name="find_info_padding_start">20dp</dimen>
@@ -298,6 +301,7 @@
     <dimen name="text_medium_size">16sp</dimen>
     <dimen name="text_title_size">18sp</dimen>
     <dimen name="text_big_size">18sp</dimen>
+    <dimen name="text_large_size">20sp</dimen>
 
 
 </resources>

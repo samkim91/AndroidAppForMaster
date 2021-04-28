@@ -98,4 +98,11 @@ class AuthService @Inject constructor(
 
         return authInterface.updateFCMToken(data)
     }
+
+    fun checkIdExist(id: String?): Single<Response>{
+        val data = HashMap<String, String?>()
+        data["phone_number"] = id
+
+        return authInterface.checkIdExist(data)
+    }
 }

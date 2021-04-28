@@ -30,7 +30,7 @@ class TitleEditText @JvmOverloads constructor(
             binding.title.text = value
         }
 
-    var titleVisibility: Boolean = true
+    var titleVisible: Boolean = true
         set(value) {
             field = value
             binding.title.visibility = if (value) View.VISIBLE else View.GONE
