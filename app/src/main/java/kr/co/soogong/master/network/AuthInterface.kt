@@ -12,7 +12,7 @@ interface AuthInterface {
     fun login(@Body body: HashMap<String, HashMap<String, String?>>): Single<JsonObject>
 
     @POST(HttpContract.SIGN_UP)
-    fun signup(@Body body: HashMap<String, HashMap<String, String>>): Single<JsonObject>
+    fun signUp(@Body body: HashMap<String, HashMap<String, Any>>): Single<Response>
 
     @POST(HttpContract.MASTER_SIGN_UP)
     fun registerMaster(

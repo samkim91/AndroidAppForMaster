@@ -43,39 +43,28 @@ class AuthService @Inject constructor(
         return authInterface.findPassword(data)
     }
 
-    fun actionSignUp(signUpInfo: SignUpInfo): Single<JsonObject> {
-        val data = HashMap<String, String>()
-        data["email"] = signUpInfo.email
-        data["password"] = signUpInfo.password
-        data["password_confirmation"] = signUpInfo.passwordConfirmation
-        data["username"] = signUpInfo.username
+    fun signUp(signUpInfo: SignUpInfo): Single<Response> {
+        val data = HashMap<String, Any>()
         data["phone_number"] = signUpInfo.phoneNumber
-        data["customer_type"] = signUpInfo.customerType
-        val send = HashMap<String, HashMap<String, String>>()
-        send["customer"] = data
-        return authInterface.signup(send).flatMap { jsonObject ->
-            if (jsonObject.has("data")) {
-                val token = jsonObject.get("data").asJsonObject
-                    .get("attributes").asJsonObject
-                    .get("token").asString
+        data["password"] = signUpInfo.password
+        data["business_representative_name"] = signUpInfo.businessRepresentativeName
+        data["business_type"] = signUpInfo.businessType
+        data["address"] = signUpInfo.address
+        data["sub_address"] = signUpInfo.subAddress
+        data["latitude"] = signUpInfo.latitude
+        data["longitude"] = signUpInfo.longitude
+        data["service_area"] = signUpInfo.serviceArea
 
-                val masterData = HashMap<String, String>()
-                masterData["area"] = signUpInfo.area
-                masterData["location"] = signUpInfo.location
-                masterData["business_number"] = signUpInfo.businessNumber
-                masterData["name"] = signUpInfo.username
-                masterData["tel"] = signUpInfo.tel
-                masterData["address"] = signUpInfo.address
-                masterData["detail_address"] = signUpInfo.detailAddress
-                masterData["description"] = signUpInfo.description
-                masterData["open_date"] = signUpInfo.openDate
-                masterData["status"] = "requested"
+        data["accept_privacy_policy"] = signUpInfo.acceptPrivacyPolicy
+        data["app_push"] = signUpInfo.appPush
+        data["app_push_at_night"] = signUpInfo.appPushAtNight
+        data["kakao_alarm"] = signUpInfo.kakaoAlarm
+        data["sms_alarm"] = signUpInfo.smsAlarm
 
-                return@flatMap authInterface.registerMaster(token, masterData)
-            } else {
-                return@flatMap Single.error(RxException(message = "fail", data = jsonObject))
-            }
-        }
+        val send = HashMap<String, HashMap<String, Any>>()
+        send["master_sign_up_info"] = data
+
+        return authInterface.signUp(send)
     }
 
     fun passwordChange(

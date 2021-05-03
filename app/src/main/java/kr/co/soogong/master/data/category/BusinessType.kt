@@ -7,7 +7,7 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class BusinessType(
     val category: Category?,
-    val projects: List<Project>,
+    val projects: MutableList<Project>?,
 ) : Parcelable {
     companion object {
         fun fromJson(jsonObject: JsonObject): BusinessType {
@@ -16,7 +16,7 @@ data class BusinessType(
 
             return BusinessType(
                 category = Category.fromJson(item.get("category").asJsonObject),
-                projects = List(projectsArray.size()) {
+                projects = MutableList(projectsArray.size()) {
                     Project.fromJson(projectsArray.get(it).asJsonObject)
                 }
             )

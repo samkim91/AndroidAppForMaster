@@ -28,6 +28,7 @@ allprojects {
         google()
         jcenter()
         maven { url 'https://devrepo.kakao.com/nexus/content/groups/public/' }
+        maven { url 'https://naver.jfrog.io/artifactory/maven/' }
     }
 }
 
@@ -85,4 +86,6 @@ ext {
     kakaoVersion = '2.0.0'
     tedPermissionVersion = '2.2.3'
     tedImagePickerVersion = '1.1.10'
+
+    naverMapVersion = '3.11.0'
 }

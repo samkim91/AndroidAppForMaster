@@ -9,13 +9,13 @@ class BottomDialogViewHolder(
 
     fun binding(
         dialogData: BottomDialogData,
-        itemClickListener: (String) -> Unit,
+        itemClickListener: (String, Int) -> Unit,
     ) {
         with(binding) {
             data = dialogData
 
             setItemClickLister {
-                itemClickListener(dialogData.text)
+                itemClickListener(dialogData.text, dialogData.value)
             }
 
             executePendingBindings()

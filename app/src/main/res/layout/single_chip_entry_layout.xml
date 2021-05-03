@@ -1,0 +1,11 @@
+<com.google.android.material.chip.Chip xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/ChipEntryRoundStyle"
+    android:layout_width="@dimen/chips_width_156dp"
+    android:layout_height="wrap_content"
+    android:checkable="false"
+    android:textAlignment="center"
+    app:closeIcon="@drawable/ic_close_small"
+    app:closeIconEndPadding="@dimen/gap_10"
+    app:closeIconSize="@dimen/gap_10"
+    app:closeIconTint="@color/color_616161" />

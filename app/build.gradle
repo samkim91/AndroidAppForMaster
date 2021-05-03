@@ -25,6 +25,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         buildConfigField("String", "KAKAO_KEY_CODE", localProperties['KAKAO_KEY_CODE'])
+        buildConfigField("String", "NAVER_MAP_CLIENT_ID", localProperties['NAVER_MAP_CLIENT_ID'])
 
         setProperty("archivesBaseName", "Soogong-Master-$versionName")
     }
@@ -187,7 +188,7 @@ dependencies {
     implementation "gun0912.ted:tedpermission-rx2:$tedPermissionVersion"
     implementation "gun0912.ted:tedimagepicker:$tedImagePickerVersion"
 
-    // Kakao Map
-
+    // Naver Map
+    implementation "com.naver.maps:map-sdk:$naverMapVersion"
 
 }

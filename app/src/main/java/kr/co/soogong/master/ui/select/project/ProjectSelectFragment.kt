@@ -9,9 +9,11 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
+import kr.co.soogong.master.data.category.BusinessType
 import kr.co.soogong.master.data.category.Category
 import kr.co.soogong.master.databinding.FragmentProjectSelectBinding
 import kr.co.soogong.master.ui.base.BaseFragment
+import kr.co.soogong.master.uiinterface.category.CategoryActivityHelper.BUNDLE_BUSINESS_TYPE
 import kr.co.soogong.master.uiinterface.category.CategoryActivityHelper.BUNDLE_CATEGORY
 import kr.co.soogong.master.uiinterface.category.CategoryActivityHelper.BUNDLE_PROJECT_LIST
 import timber.log.Timber
@@ -59,9 +61,7 @@ class ProjectSelectFragment : BaseFragment<FragmentProjectSelectBinding>(
                 val extra = Bundle()
                 val intent = Intent()
 
-                extra.putParcelable(BUNDLE_CATEGORY, category)
-                val list = viewModel.list.value?.filter { it.checked }
-                extra.putParcelableArray(BUNDLE_PROJECT_LIST, list?.toTypedArray())
+                extra.putParcelable(BUNDLE_BUSINESS_TYPE, BusinessType(category = category, projects = viewModel.list.value?.filter { it.checked }?.toMutableList()))
                 intent.putExtras(extra)
                 activity?.setResult(RESULT_OK, intent)
                 activity?.finish()

@@ -65,6 +65,7 @@ class CustomDialog(
             btnYes.setTextColor(dialogData.positiveBtnTextColor)
             btnYes.setOnClickListener {
                 yesClick()
+                dismiss()
             }
         }
 
