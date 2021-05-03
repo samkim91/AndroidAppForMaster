@@ -32,41 +32,27 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:subTitle='@{"중복선택 가능합니다."}'
-                app:subTitleVisible="@{true}"
-                app:title='@{"시공 가능 업종을 선택해주세요."}' />
+                app:title='@{"주소를 입력해주세요."}' />
 
             <kr.co.soogong.master.ui.widget.TitleEditTextButton
-                android:id="@+id/business_type"
+                android:id="@+id/address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/gap_20"
                 android:layout_marginTop="@dimen/gap_19"
                 android:layout_marginEnd="@dimen/gap_20"
                 app:alertText='@{"필수 정보입니다."}'
-                app:buttonText='@{"선택"}'
+                app:buttonText='@{"검색"}'
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/title_widget"
-                app:setFirstEditTextHint='@{"시공 가능한 업종을 선택해주세요."}'
+                app:setFirstEditTextHint='@{"주소를 검색해주세요."}'
+                app:firstContent="@={vm.address}"
+                app:secondContent="@={vm.subAddress}"
                 app:titleVisible="@{false}"
-                app:setSecondEditTextVisible="@{false}"
+                app:setSecondEditTextHint='@{"상세주소를 입력해주세요."}'
                 app:setFirstEditTextEnable="@{false}"
                 />
-
-            <LinearLayout
-                android:id="@+id/business_type_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/gap_20"
-                android:layout_marginTop="@dimen/gap_24"
-                android:layout_marginEnd="@dimen/gap_20"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/business_type"
-                app:layout_constraintBottom_toTopOf="@id/default_button"
-                app:layout_constraintVertical_chainStyle="spread_inside"
-                android:orientation="vertical" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/default_button"
@@ -76,12 +62,9 @@
                 android:background="@color/color_22D47B"
                 android:text="@string/next_button_text"
                 android:textColor="@color/basic_white"
-                app:layout_constraintTop_toBottomOf="@id/business_type_container"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintVertical_chainStyle="spread_inside"
-                />
+                app:layout_constraintStart_toStartOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

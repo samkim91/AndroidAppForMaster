@@ -69,7 +69,7 @@ class Step2Fragment : BaseFragment<FragmentSignUpStep2Binding>(
 
             rightButton.setOnClickListener {
                 viewModel.certificationCode.observe(viewLifecycleOwner, {
-                    alertInvalidCertificationCode.visibility = if (it < 1000000) View.VISIBLE else View.GONE
+                    alertInvalidCertificationCode.visibility = if (it.length < 6) View.VISIBLE else View.GONE
                 })
 
                 if(!alertWrongCertificationCode.isVisible && !alertExpiredCertificationTime.isVisible && !alertInvalidCertificationCode.isVisible){

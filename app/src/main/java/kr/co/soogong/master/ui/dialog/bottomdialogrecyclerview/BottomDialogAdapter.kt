@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.ListAdapter
 import kr.co.soogong.master.databinding.ViewHolderBottomSheetDialogItemBinding
 
 class BottomDialogAdapter(
-    private val itemClickListener: (String) -> Unit,
+    private val itemClickListener: (String, Int) -> Unit,
 ) : ListAdapter<BottomDialogData, BottomDialogViewHolder>(BottomDialogItemDiffUtil()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         BottomDialogViewHolder(ViewHolderBottomSheetDialogItemBinding.inflate(

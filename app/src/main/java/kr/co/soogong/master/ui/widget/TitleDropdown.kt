@@ -47,12 +47,6 @@ class TitleDropdown @JvmOverloads constructor(
     val textView: TextView
         get() = binding.detail
 
-    var setText: String = ""
-        set(value) {
-            field = value
-            binding.detail.text = value
-        }
-
     var hintText: String? = ""
         set(value) {
             field = value

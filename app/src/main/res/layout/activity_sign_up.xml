@@ -27,18 +27,31 @@
 
         <com.google.android.material.progressindicator.LinearProgressIndicator
             android:id="@+id/progress_indicator"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/gap_20"
-            android:layout_marginEnd="@dimen/gap_20"
-            android:progress="@{vm.indicator}"
+            android:layout_marginEnd="@dimen/gap_8"
             android:max="@{progress.TabCount}"
-            app:trackThickness="@dimen/gap_2"
+            android:progress="@{vm.indicator}"
             app:indicatorColor="@color/color_22D47B"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/progress_percent_indicator"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/action_bar"
-            app:trackColor="@color/color_EEEEEE" />
+            app:trackColor="@color/color_EEEEEE"
+            app:trackThickness="@dimen/gap_2" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/progress_percent_indicator"
+            style="@style/small_text_style.medium"
+            android:textColor="@color/color_1FC472"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/gap_20"
+            app:layout_constraintBottom_toBottomOf="@id/progress_indicator"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/progress_indicator"
+            app:layout_constraintTop_toTopOf="@id/progress_indicator"
+            tools:text="0%" />
 
 
         <androidx.viewpager2.widget.ViewPager2
@@ -49,6 +62,13 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/progress_indicator" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="20dp" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

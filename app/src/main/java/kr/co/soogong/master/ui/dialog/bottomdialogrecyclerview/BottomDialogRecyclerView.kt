@@ -12,7 +12,7 @@ import timber.log.Timber
 class BottomDialogRecyclerView(
     private val title: String,
     private val dialogData: List<BottomDialogData>,
-    private var itemClick: (String) -> Unit
+    private var itemClick: (String, Int) -> Unit
 ) : BottomSheetDialogFragment() {
     lateinit var binding: BottomDialogRecyclerViewBinding
 
@@ -44,9 +44,9 @@ class BottomDialogRecyclerView(
 
         binding.dialogTitle.text = title
 
-        binding.bottomSheetDialogRecyclerview.adapter = BottomDialogAdapter(itemClickListener = {
-            Timber.tag(TAG).w(" $it is clicked")
-            itemClick(it)
+        binding.bottomSheetDialogRecyclerview.adapter = BottomDialogAdapter(itemClickListener = { text, value ->
+            Timber.tag(TAG).w(" $text is clicked / value is $value")
+            itemClick(text, value)
             dismiss()
         })
 

@@ -76,11 +76,11 @@ class ProfileChipGroupCard @JvmOverloads constructor(
             binding.defaultButton.setTextColor(value)
         }
 
-    fun addChipGroup(items: List<Project>){
+    fun addChipGroup(items: List<Project>?){
         val chipGroup = ChipGroup(context)
         val params = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
 
-        items.map { item ->
+        items?.map { item ->
             val chip = Chip(context)
             chip.text = item.toString()
 
@@ -107,4 +107,5 @@ class ProfileChipGroupCard @JvmOverloads constructor(
     fun addDefaultButtonClickListener(listener: OnClickListener) {
         binding.defaultButton.setOnClickListener { listener }
     }
+
 }

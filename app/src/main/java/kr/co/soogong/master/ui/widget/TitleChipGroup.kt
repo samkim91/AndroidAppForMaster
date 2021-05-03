@@ -14,7 +14,7 @@ class TitleChipGroup @JvmOverloads constructor(
     attributeSet: AttributeSet? = null,
     defStyle: Int = 0,
 ) : ConstraintLayout(context, attributeSet, defStyle) {
-    private val binding =
+    val binding =
         ViewTitleChipGroupBinding.inflate(LayoutInflater.from(context), this, true)
 
     var title: String? = ""
@@ -65,6 +65,6 @@ class TitleChipGroup @JvmOverloads constructor(
             position: Int,
         ) -> Unit
     ) {
-        binding.chipGroup.setOnCheckedChangeListener { group, checkedId -> onCheckedChange.invoke(group, checkedId) }
+        binding.chipGroup.setOnCheckedChangeListener { group, checkedId -> onCheckedChange(group, checkedId) }
     }
 }

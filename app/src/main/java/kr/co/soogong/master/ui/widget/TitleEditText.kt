@@ -9,11 +9,10 @@ import android.text.TextWatcher
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.OnFocusChangeListener
 import android.widget.EditText
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import kr.co.soogong.master.R
-import kr.co.soogong.master.databinding.ViewTitleChipGroupBinding
 import kr.co.soogong.master.databinding.ViewTitleEdittextBinding
 
 class TitleEditText @JvmOverloads constructor(

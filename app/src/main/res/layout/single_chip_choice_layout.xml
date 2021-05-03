@@ -3,5 +3,5 @@
     android:layout_width="@dimen/chips_width_156dp"
     android:layout_height="wrap_content"
     android:textAlignment="center"
-    style="@style/ChipStyles"
+    style="@style/ChipChoiceRectangularStyle"
     />
