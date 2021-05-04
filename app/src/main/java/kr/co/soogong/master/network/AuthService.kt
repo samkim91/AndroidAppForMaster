@@ -1,6 +1,5 @@
 package kr.co.soogong.master.network
 
-import com.google.gson.JsonObject
 import io.reactivex.Single
 import kr.co.soogong.master.data.user.SignInInfo
 import kr.co.soogong.master.data.user.SignUpInfo
@@ -24,7 +23,7 @@ class AuthService @Inject constructor(
             try {
                 val signInInfo = SignInInfo.fromJson(json)
 
-                if (signInInfo.keycode.isEmpty()) {
+                if (signInInfo.keycode.isNullOrEmpty()) {
                     return@flatMap Single.error(RxException("기사 분들만 로그인이 가능 합니다"))
                 } else {
                     return@flatMap Single.just(signInInfo)

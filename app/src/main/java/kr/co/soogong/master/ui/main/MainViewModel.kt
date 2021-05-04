@@ -1,9 +1,12 @@
 package kr.co.soogong.master.ui.main
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.google.firebase.messaging.FirebaseMessaging
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import kr.co.soogong.master.domain.usecase.GetMasterApprovalUseCase
 import kr.co.soogong.master.domain.usecase.SetFCMTokenUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import timber.log.Timber
@@ -11,8 +14,13 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val setFCMTokenUseCase: SetFCMTokenUseCase
+    private val setFCMTokenUseCase: SetFCMTokenUseCase,
+    private val getMasterApprovalUseCase: GetMasterApprovalUseCase,
 ) : BaseViewModel() {
+    private val _isApprovedMaster = MutableLiveData<Boolean>(getMasterApprovalUseCase())
+    val isApprovedMaster: LiveData<Boolean>
+        get() = _isApprovedMaster
+
     fun registerFCM() {
         FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
             if (!task.isSuccessful) {
