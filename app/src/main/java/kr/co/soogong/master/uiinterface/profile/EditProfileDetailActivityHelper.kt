@@ -3,8 +3,7 @@ package kr.co.soogong.master.uiinterface.profile
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import kr.co.soogong.master.ui.profile.edit.EditProfileDetailActivity
-import kr.co.soogong.master.ui.requirements.action.view.ViewEstimateActivity
+import kr.co.soogong.master.ui.profile.edit.detail.EditProfileDetailActivity
 
 object EditProfileDetailActivityHelper {
     private const val EXTRA_BUNDLE_KEY = "EXTRA_BUNDLE_KEY_EDIT_PROFILE_DETAIL"

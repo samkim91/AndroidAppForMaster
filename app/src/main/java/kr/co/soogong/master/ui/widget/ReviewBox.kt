@@ -1,6 +1,7 @@
 package kr.co.soogong.master.ui.widget
 
 import android.content.Context
+import android.icu.text.DecimalFormat
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
@@ -21,7 +22,7 @@ class ReviewBox @JvmOverloads constructor(
     var reviewCount: Int? = 0
         set(value) {
             field = value
-            binding.reviewCount.text = value.toString()
+            binding.reviewCount.text = DecimalFormat("#,###").format(value)
         }
 
     var recommendCount: Double? = 0.0

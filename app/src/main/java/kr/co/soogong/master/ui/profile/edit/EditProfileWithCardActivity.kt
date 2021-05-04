@@ -1,16 +1,14 @@
 package kr.co.soogong.master.ui.profile.edit
 
-import android.content.ContentResolver
 import android.content.Intent
 import android.os.Bundle
-import android.provider.Settings.Global.getString
 import android.view.View
 import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ActivityEditProfileWithCardBinding
 import kr.co.soogong.master.ui.base.BaseActivity
-import kr.co.soogong.master.ui.profile.edit.EditProfileDetailActivity.Companion.EDIT_PORTFOLIO
+import kr.co.soogong.master.ui.profile.edit.detail.EditProfileDetailActivity.Companion.ADD_PORTFOLIO
 import kr.co.soogong.master.uiinterface.profile.EditProfileDetailActivityHelper
 import kr.co.soogong.master.uiinterface.profile.EditProfileWithCardActivityHelper
 import timber.log.Timber
@@ -58,8 +56,8 @@ class EditProfileWithCardActivity : BaseActivity<ActivityEditProfileWithCardBind
             }
 
             introductionCardForPortfolio.addDefaultButtonClickListener {
-                Timber.tag(TAG).w("addDefaultButtonClickListener: ")
-                startActivity(Intent(EditProfileDetailActivityHelper.getIntent(this@EditProfileWithCardActivity, EDIT_PORTFOLIO)))
+                Timber.tag(TAG).w("DefaultButtonClickListener: ")
+                startActivity(Intent(EditProfileDetailActivityHelper.getIntent(this@EditProfileWithCardActivity, ADD_PORTFOLIO)))
             }
 
 
