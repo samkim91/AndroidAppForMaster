@@ -12,18 +12,20 @@ import javax.inject.Inject
 @Reusable
 class DoLoginUseCase @Inject constructor(
     private val setMasterKeyCodeUseCase: SetMasterKeyCodeUseCase,
+    private val setMasterApprovalUseCase: SetMasterApprovalUseCase,
     private val authService: AuthService
 ) {
     operator fun invoke(phoneNumber: String?, password: String?): Single<SignInInfo> {
         if (BuildConfig.DEBUG) {
-            setMasterKeyCodeUseCase("1e73778811e69aa5", false)
+            setMasterKeyCodeUseCase("1e73778811e69aa5")
 //            setMasterKeyCodeUseCase("919dcdf215133b52")
             return Single.just(null)
         }
 
         return authService.login(phoneNumber, password)
             .doOnSuccess { signInInfo ->
-                setMasterKeyCodeUseCase(signInInfo.keycode, signInInfo.isApproved)
+                setMasterKeyCodeUseCase(signInInfo.keycode)
+                setMasterApprovalUseCase(signInInfo.isApproved)
             }
     }
 }

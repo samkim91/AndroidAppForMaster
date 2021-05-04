@@ -78,10 +78,12 @@ class Step8Fragment : BaseFragment<FragmentSignUpStep8Binding>(
         })
         viewModel.action.observe(viewLifecycleOwner, EventObserver { event ->
             if(BuildConfig.DEBUG){
+                requireContext().toast(getString(R.string.sign_up_successfully))
                 startActivity(MainActivityHelper.getIntent(requireContext()))
             } else{
                 when (event) {
                     SIGN_IN_SUCCESSFUL -> {
+                        requireContext().toast(getString(R.string.sign_up_successfully))
                         startActivity(MainActivityHelper.getIntent(requireContext()))
                     }
                     SIGN_UP_FAILED -> {

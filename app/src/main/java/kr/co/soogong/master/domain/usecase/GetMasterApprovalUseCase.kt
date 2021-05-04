@@ -3,15 +3,14 @@ package kr.co.soogong.master.domain.usecase
 import android.content.SharedPreferences
 import dagger.Reusable
 import kr.co.soogong.master.contract.AppSharedPreferenceContract
+import kr.co.soogong.master.data.user.SignInInfo
 import javax.inject.Inject
 
 @Reusable
-class SetMasterKeyCodeUseCase @Inject constructor(
+class GetMasterApprovalUseCase @Inject constructor(
     private val sharedPreferences: SharedPreferences
 ) {
-    operator fun invoke(keyCode: String) {
-        sharedPreferences.edit()
-            .putString(AppSharedPreferenceContract.BRANCH_KEYCODE, keyCode)
-            .apply()
+    operator fun invoke(): Boolean? {
+        return sharedPreferences.getBoolean(AppSharedPreferenceContract.IS_APPROVED, false)
     }
 }

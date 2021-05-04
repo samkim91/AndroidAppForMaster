@@ -62,5 +62,13 @@ data class DialogData(
                 "아니요",
                 context.getColor(R.color.text_hint_color)
             )
+
+        fun askingFillProfileDialogData(context: Context) =
+            DialogData(
+                "문의를 처리하려면\n필수 정보 등록이 필요해요.\n지금 등록하시겠어요?", context.getColor(R.color.text_basic_color),
+                null, context.getColor(R.color.text_alert_color),
+                "네", context.getColor(R.color.text_basic_color),
+                "아니요", context.getColor(R.color.text_basic_color)
+            )
     }
 }

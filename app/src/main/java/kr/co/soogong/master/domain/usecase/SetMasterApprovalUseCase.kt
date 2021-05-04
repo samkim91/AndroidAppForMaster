@@ -6,12 +6,12 @@ import kr.co.soogong.master.contract.AppSharedPreferenceContract
 import javax.inject.Inject
 
 @Reusable
-class SetMasterKeyCodeUseCase @Inject constructor(
+class SetMasterApprovalUseCase @Inject constructor(
     private val sharedPreferences: SharedPreferences
 ) {
-    operator fun invoke(keyCode: String) {
+    operator fun invoke(approval: Boolean) {
         sharedPreferences.edit()
-            .putString(AppSharedPreferenceContract.BRANCH_KEYCODE, keyCode)
+            .putBoolean(AppSharedPreferenceContract.IS_APPROVED, approval)
             .apply()
     }
 }

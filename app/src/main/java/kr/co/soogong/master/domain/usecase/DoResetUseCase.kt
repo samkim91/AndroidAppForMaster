@@ -8,12 +8,15 @@ import javax.inject.Inject
 class DoResetUseCase @Inject constructor(
     private val estimationDao: EstimationDao,
     private val userDao: EstimationDao,
-    private val setMasterKeyCodeUseCase: SetMasterKeyCodeUseCase
+    private val setMasterKeyCodeUseCase: SetMasterKeyCodeUseCase,
+    private val setMasterApprovalUseCase: SetMasterApprovalUseCase
+
 ) {
     suspend operator fun invoke() {
         estimationDao.removeAll()
         userDao.removeAll()
-        setMasterKeyCodeUseCase("", false)
+        setMasterKeyCodeUseCase("")
+        setMasterApprovalUseCase(false)
 
     }
 }
