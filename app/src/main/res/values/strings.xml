@@ -179,7 +179,7 @@
     <string name="category">업종</string>
     <string name="save">저장하기</string>
     <string name="modify">수정하기</string>
-    <string name="profile_card_container_label">핵심 정보 등록 / 수정하기</string>
+    <string name="profile_card_container_label">추가 정보 등록·수정</string>
     <string name="add_fortpolio">포트폴리오 추가하기</string>
     <string name="add_price_by_project">시공 종류별 가격 추가하기</string>
     <string name="edit_fortpolio">포트폴리오 편집하기</string>
@@ -218,6 +218,11 @@
     <!--  Basic  -->
     <string name="badge_text">N</string>
     <string name="format_string">%s %s</string>
+
+    <!-- view reivew box -->
+    <string name="recommend_rate_label">추천도</string>
+    <string name="review_count_label">리뷰 수</string>
+
 
 
     <!-- widget text -->

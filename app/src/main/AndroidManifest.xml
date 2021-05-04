@@ -20,7 +20,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.profile.edit.EditProfileDetailActivity"></activity>
+        <activity android:name=".ui.profile.edit.detail.EditProfileDetailActivity"></activity>
         <activity android:name=".ui.profile.edit.EditProfileWithCardActivity" />
         <activity
             android:name=".ui.splash.SplashActivity"

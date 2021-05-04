@@ -2,18 +2,13 @@ package kr.co.soogong.master.ui.requirements
 
 import android.os.Bundle
 import android.view.View
-import androidx.activity.viewModels
-import androidx.fragment.app.viewModels
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentRequirementsBinding
-import kr.co.soogong.master.domain.usecase.GetMasterApprovalUseCase
 import kr.co.soogong.master.ui.base.BaseFragment
-import kr.co.soogong.master.ui.main.MainViewModel
 import kr.co.soogong.master.uiinterface.requirments.RequirementsBadge
 import timber.log.Timber
-import javax.inject.Inject
 
 class RequirementsFragment : BaseFragment<FragmentRequirementsBinding>(
     R.layout.fragment_requirements
