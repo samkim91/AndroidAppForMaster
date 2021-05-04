@@ -10,6 +10,7 @@ data class SignInInfo(
     val username: String,
     val token: String,
     val keycode: String,
+    val isApproved: Boolean
 ) : Parcelable {
     companion object {
         fun fromJson(jsonObject: JsonObject): SignInInfo {
@@ -19,7 +20,8 @@ data class SignInInfo(
                 email = attributes.get("email").asString,
                 username = attributes.get("username").asString,
                 token = attributes.get("token").asString,
-                keycode = attributes.get("keycode").asString
+                keycode = attributes.get("keycode").asString,
+                isApproved = attributes.get("is_approved").asBoolean
             )
         }
     }

@@ -99,7 +99,7 @@ class SignUpViewModel @Inject constructor(
     fun requestLogin() {
         Timber.tag(TAG).d("requestLogin: ")
 
-        doLoginUseCase(phoneNumber.value, signInPassword.value)
+        doLoginUseCase(phoneNumber.value, signInPassword.value ?: signUpPassword.value)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
@@ -136,7 +136,7 @@ class SignUpViewModel @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(onSuccess = {
                 Timber.tag(TAG).d("Sign Up Successful : $it")
-                setAction(SIGN_UP_SUCCESSFUL)
+                requestLogin()
             },
                 onError = {
                     Timber.tag(TAG).d("Sign Up Failed : $it")
@@ -156,7 +156,6 @@ class SignUpViewModel @Inject constructor(
 
     companion object {
         private const val TAG = "SignUpViewModel"
-        const val SIGN_UP_SUCCESSFUL = "SIGN_UP_SUCCESSFUL"
         const val SIGN_UP_FAILED = "SIGN_UP_FAILED"
         const val SIGN_IN_SUCCESSFUL = "SIGN_IN_SUCCESSFUL"
         const val SIGN_IN_FAILED = "SIGN_IN_FAILED"

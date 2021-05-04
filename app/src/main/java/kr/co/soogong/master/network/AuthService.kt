@@ -12,9 +12,9 @@ class AuthService @Inject constructor(
 ) {
     private val authInterface = retrofit.create(AuthInterface::class.java)
 
-    fun login(email: String?, password: String?): Single<String> {
+    fun login(phoneNumber: String?, password: String?): Single<SignInInfo> {
         val data = HashMap<String, String?>()
-        data["email"] = email
+        data["phone_number"] = phoneNumber
         data["password"] = password
         val send = HashMap<String, HashMap<String, String?>>()
         send["customer"] = data
@@ -27,7 +27,7 @@ class AuthService @Inject constructor(
                 if (signInInfo.keycode.isEmpty()) {
                     return@flatMap Single.error(RxException("기사 분들만 로그인이 가능 합니다"))
                 } else {
-                    return@flatMap Single.just(signInInfo.keycode)
+                    return@flatMap Single.just(signInInfo)
                 }
             } catch (e: Exception) {
                 val item = json.get("message").asString

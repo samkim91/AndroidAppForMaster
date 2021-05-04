@@ -9,9 +9,10 @@ import javax.inject.Inject
 class SetMasterKeyCodeUseCase @Inject constructor(
     private val sharedPreferences: SharedPreferences
 ) {
-    operator fun invoke(value: String) {
+    operator fun invoke(keyCode: String, isApproved: Boolean) {
         sharedPreferences.edit()
-            .putString(AppSharedPreferenceContract.BRANCH_KEYCODE, value)
+            .putString(AppSharedPreferenceContract.BRANCH_KEYCODE, keyCode)
+            .putBoolean(AppSharedPreferenceContract.IS_APPROVED, isApproved)
             .apply()
     }
 }

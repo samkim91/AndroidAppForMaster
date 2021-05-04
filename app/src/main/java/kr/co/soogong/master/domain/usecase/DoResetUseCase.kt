@@ -13,6 +13,7 @@ class DoResetUseCase @Inject constructor(
     suspend operator fun invoke() {
         estimationDao.removeAll()
         userDao.removeAll()
-        setMasterKeyCodeUseCase("")
+        setMasterKeyCodeUseCase("", false)
+
     }
 }

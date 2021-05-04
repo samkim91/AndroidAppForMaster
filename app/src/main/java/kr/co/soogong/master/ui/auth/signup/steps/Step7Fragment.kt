@@ -86,7 +86,6 @@ class Step7Fragment : BaseFragment<FragmentSignUpStep7Binding>(
     override fun onMapReady(naverMap: NaverMap) {
         this.naverMap = naverMap
         setLocation()
-
     }
 
     private fun setLocation() {
@@ -115,6 +114,7 @@ class Step7Fragment : BaseFragment<FragmentSignUpStep7Binding>(
                 naverMap.moveCamera(CameraUpdate.scrollTo(LatLng(lat, lng)))
                 naverMap.moveCamera(CameraUpdate.zoomTo(ZoomHelper(radius))
                     .finishCallback {
+//                        if (!marker.isAdded) setMarker(lat, lng)
                         if (circleOverlay.isAdded) circleOverlay.map = null
                         circleOverlay = CircleOverlay(LatLng(lat, lng), (radius * 1000).toDouble())
                         circleOverlay.outlineColor = resources.getColor(R.color.color_22D47B, null)

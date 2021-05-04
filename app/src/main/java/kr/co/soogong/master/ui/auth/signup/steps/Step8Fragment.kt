@@ -5,11 +5,13 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import dagger.hilt.android.AndroidEntryPoint
+import kr.co.soogong.master.BuildConfig
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentSignUpStep8Binding
 import kr.co.soogong.master.ui.auth.signup.SignUpViewModel
+import kr.co.soogong.master.ui.auth.signup.SignUpViewModel.Companion.SIGN_IN_FAILED
+import kr.co.soogong.master.ui.auth.signup.SignUpViewModel.Companion.SIGN_IN_SUCCESSFUL
 import kr.co.soogong.master.ui.auth.signup.SignUpViewModel.Companion.SIGN_UP_FAILED
-import kr.co.soogong.master.ui.auth.signup.SignUpViewModel.Companion.SIGN_UP_SUCCESSFUL
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.dialog.popup.CustomDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData
@@ -75,12 +77,19 @@ class Step8Fragment : BaseFragment<FragmentSignUpStep8Binding>(
             binding.agreedAll.checkBox.isChecked = it && viewModel.agreedPrivacyPolicy.value!!
         })
         viewModel.action.observe(viewLifecycleOwner, EventObserver { event ->
-            when (event) {
-                SIGN_UP_SUCCESSFUL -> {
-                    startActivity(MainActivityHelper.getIntent(requireContext()))
-                }
-                SIGN_UP_FAILED -> {
-                    requireContext().toast(getString(R.string.error_message_of_request_failed))
+            if(BuildConfig.DEBUG){
+                startActivity(MainActivityHelper.getIntent(requireContext()))
+            } else{
+                when (event) {
+                    SIGN_IN_SUCCESSFUL -> {
+                        startActivity(MainActivityHelper.getIntent(requireContext()))
+                    }
+                    SIGN_UP_FAILED -> {
+                        requireContext().toast(getString(R.string.error_message_of_request_failed))
+                    }
+                    SIGN_IN_FAILED -> {
+
+                    }
                 }
             }
         })
