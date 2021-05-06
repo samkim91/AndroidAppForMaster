@@ -29,7 +29,7 @@ class ProgressViewModel @Inject constructor(
     fun requestList() {
         viewModelScope.launch {
             val list = getProgressEstimationListUseCase()
-            updatedBadge(list.size)
+            sendEvent(BADGE_UPDATE, list.size)
             _progressList.value = list
         }
     }
@@ -67,15 +67,6 @@ class ProgressViewModel @Inject constructor(
                     Timber.tag(TAG).d("CALL_TO_CUSTOMER_FAILED: $it")
                 }
             ).addToDisposable()
-    }
-
-
-    private val _event = MutableLiveData<Event<Pair<String, Int>>>()
-    val event: LiveData<Event<Pair<String, Int>>>
-        get() = _event
-
-    private fun updatedBadge(badgeCount: Int) {
-        _event.value = Event(BADGE_UPDATE to badgeCount)
     }
 
     companion object {

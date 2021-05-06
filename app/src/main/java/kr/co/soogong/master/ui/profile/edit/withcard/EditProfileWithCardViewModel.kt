@@ -1,4 +1,4 @@
-package kr.co.soogong.master.ui.profile.edit
+package kr.co.soogong.master.ui.profile.edit.withcard
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

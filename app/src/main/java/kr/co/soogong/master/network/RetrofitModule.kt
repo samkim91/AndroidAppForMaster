@@ -43,7 +43,7 @@ class RetrofitModule {
 
     @Provides
     @Reusable
-    fun provideUserService(retrofit: Retrofit): UserService {
-        return UserService(retrofit)
+    fun provideUserService(retrofit: Retrofit): ProfileService {
+        return ProfileService(retrofit)
     }
 }

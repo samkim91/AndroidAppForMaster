@@ -42,7 +42,7 @@ class TitleSwitchCompat @JvmOverloads constructor(
             }
         }
 
-    fun setSwitchClick(lister: CompoundButton.OnCheckedChangeListener) {
-        binding.switchCompat.setOnCheckedChangeListener(lister)
+    fun setSwitchClick(listener: CompoundButton.OnCheckedChangeListener) {
+        binding.switchCompat.setOnCheckedChangeListener(listener)
     }
 }

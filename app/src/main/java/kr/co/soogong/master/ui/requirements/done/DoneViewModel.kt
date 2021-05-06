@@ -26,15 +26,6 @@ class DoneViewModel @Inject constructor(
     val doneList: LiveData<List<RequirementCard>>
         get() = _doneList
 
-    private val _event = MutableLiveData<Event<Pair<String, Int>>>()
-    val event: LiveData<Event<Pair<String, Int>>>
-        get() = _event
-
-    private fun updatedBadge(badgeCount: Int) {
-        Timber.tag(TAG).d("updatedBadge: $badgeCount")
-        _event.value = Event(BADGE_UPDATE to badgeCount)
-    }
-
     fun onFilterChange(index: Int) {
         viewModelScope.launch {
             val list = when (index) {
@@ -63,7 +54,7 @@ class DoneViewModel @Inject constructor(
         viewModelScope.launch {
             val list = getDoneEstimationListUseCase()
 
-            updatedBadge(list.size)
+            sendEvent(BADGE_UPDATE, list.size)
 
             _doneList.value = list
         }

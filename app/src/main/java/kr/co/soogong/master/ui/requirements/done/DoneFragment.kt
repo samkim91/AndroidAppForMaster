@@ -79,7 +79,7 @@ class DoneFragment : BaseFragment<FragmentRequirementsDoneBinding>(
         viewModel.event.observe(viewLifecycleOwner, EventObserver { (event, value) ->
             when (event) {
                 BADGE_UPDATE -> {
-                    (parentFragment as? RequirementsBadge)?.setDoneBadge(value)
+                    (parentFragment as? RequirementsBadge)?.setDoneBadge(value as Int)
                 }
                 ASK_FOR_REVIEW_SUCCEEDED -> {
                     requireContext().toast(getString(R.string.ask_for_review_successful))

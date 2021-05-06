@@ -179,14 +179,11 @@
     <string name="category">업종</string>
     <string name="save">저장하기</string>
     <string name="modify">수정하기</string>
+    <string name="writing_done">작성 완료</string>
+    <string name="modifying_done">수정 완료</string>
     <string name="profile_card_container_label">추가 정보 등록·수정</string>
-    <string name="add_fortpolio">포트폴리오 추가하기</string>
-    <string name="add_price_by_project">시공 종류별 가격 추가하기</string>
-    <string name="edit_fortpolio">포트폴리오 편집하기</string>
-    <string name="edit_price_by_project">시공 종류별 가격 편집하기</string>
-    <string name="modify_fortpolio">포트폴리오 수정하기</string>
-    <string name="modify_price_by_project">시공 종류별 가격 수정하기</string>
-
+    <string name="image_before_job_label">시공 전 사진</string>
+    <string name="image_after_job_label">시공 후 사진</string>
 
     <!-- Request Detail -->
     <string name="request_date">접수일시</string>
@@ -224,7 +221,6 @@
     <string name="review_count_label">리뷰 수</string>
 
 
-
     <!-- widget text -->
     <string name="minimum_cost">견적은 1만원 이상으로 보내주세요.</string>
 
@@ -241,6 +237,11 @@
     <string name="error_message_of_request_failed">해당 요청을 처리할 수 없습니다. 다시 요청해주세요.</string>
     <string name="ask_for_review_successful">리뷰 요청을 완료했어요!</string>
     <string name="sign_up_successfully">회원 가입이 완료되었습니다!\n필수 정보를 모두 입력하고\n문의를 처리해보세요!</string>
+
+    <string name="request_permission_for_image">이미지를 추가하시려면 권한을 허용해주세요.</string>
+    <string name="permission_denied_message">권한이 거부되었습니다.</string>
+    <string name="permission_denied_status_message">권한을 거부하셨습니다. 앱을 사용하시려면 [앱 설정]-[권한] 에서 권한을 허용해주세요.</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
