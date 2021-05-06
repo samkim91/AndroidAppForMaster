@@ -18,9 +18,8 @@
         android:layout_width="@dimen/gap_100"
         android:layout_height="@dimen/gap_100"
         android:layout_gravity="center"
-        android:layout_marginEnd="@dimen/gap_10"
-        card_view:cardCornerRadius="8dp"
-        card_view:cardElevation="0dp"
+        card_view:cardCornerRadius="@dimen/gap_8"
+        android:elevation="@dimen/gap_0"
         >
 
         <androidx.constraintlayout.widget.ConstraintLayout

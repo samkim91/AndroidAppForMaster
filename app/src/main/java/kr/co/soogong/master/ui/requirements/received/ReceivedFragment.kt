@@ -85,7 +85,7 @@ private fun registerEventObserve() {
     viewModel.event.observe(viewLifecycleOwner, EventObserver { (event, value) ->
         when (event) {
             ReceivedViewModel.BADGE_UPDATE -> {
-                (parentFragment as? RequirementsBadge)?.setReceivedBadge(value)
+                (parentFragment as? RequirementsBadge)?.setReceivedBadge(value as Int)
             }
         }
     })

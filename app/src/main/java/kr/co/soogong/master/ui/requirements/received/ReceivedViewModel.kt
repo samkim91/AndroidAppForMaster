@@ -30,7 +30,7 @@ class ReceivedViewModel @Inject constructor(
     fun requestList() {
         viewModelScope.launch {
             val list = getReceivedEstimationListUseCase()
-            updatedBadge(list.size)
+            sendEvent(BADGE_UPDATE, list.size)
             _requirementList.value = list
         }
     }
@@ -54,15 +54,6 @@ class ReceivedViewModel @Inject constructor(
             _requirementList.value = list
             setAction(UPDATE_LIST)
         }
-    }
-
-    private val _event = MutableLiveData<Event<Pair<String, Int>>>()
-    val event: LiveData<Event<Pair<String, Int>>>
-        get() = _event
-
-    private fun updatedBadge(badgeCount: Int) {
-        Timber.tag(TAG).d("updatedBadge: $badgeCount")
-        _event.value = Event(BADGE_UPDATE to badgeCount)
     }
 
     companion object {

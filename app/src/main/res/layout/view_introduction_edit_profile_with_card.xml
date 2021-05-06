@@ -48,7 +48,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/sub_title"
-            tools:text="@string/add_fortpolio" />
+            tools:text="포트폴리오 추가하기" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

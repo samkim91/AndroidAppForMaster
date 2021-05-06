@@ -7,7 +7,6 @@ import androidx.databinding.InverseBindingAdapter
 import androidx.databinding.InverseBindingListener
 
 object TitleEditCountBoxReverseBinding {
-
     @JvmStatic
     @BindingAdapter("content")
     fun setTitleEditCountBoxContent(view: TitleEditCountBoxView, content: String?) {

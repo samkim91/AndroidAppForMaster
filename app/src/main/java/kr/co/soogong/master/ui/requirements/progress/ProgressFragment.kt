@@ -91,7 +91,7 @@ class ProgressFragment : BaseFragment<FragmentRequirementsProgressBinding>(
         viewModel.event.observe(viewLifecycleOwner, EventObserver { (event, value) ->
             when (event) {
                 ProgressViewModel.BADGE_UPDATE -> {
-                    (parentFragment as? RequirementsBadge)?.setProgressBadge(value)
+                    (parentFragment as? RequirementsBadge)?.setProgressBadge(value as Int)
                 }
             }
         })

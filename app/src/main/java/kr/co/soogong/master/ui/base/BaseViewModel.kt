@@ -37,7 +37,15 @@ abstract class BaseViewModel : ViewModel(), LifecycleObserver {
     val action: LiveData<Event<String>>
         get() = _action
 
+    private val _event = MutableLiveData<Event<Pair<String, Any?>>>()
+    val event: LiveData<Event<Pair<String, Any?>>>
+        get() = _event
+
     fun setAction(event: String) {
         _action.postValue(Event(event))
+    }
+
+    fun sendEvent(event: String, message: Any){
+        _event.value = Event(event to message)
     }
 }

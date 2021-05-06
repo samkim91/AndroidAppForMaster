@@ -8,9 +8,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentProfileBinding
 import kr.co.soogong.master.ui.base.BaseFragment
-import kr.co.soogong.master.ui.profile.edit.EditProfileWithCardActivity.Companion.PORTFOLIO
-import kr.co.soogong.master.ui.profile.edit.EditProfileWithCardActivity.Companion.PRICE_BY_PROJECTS
 import kr.co.soogong.master.uiinterface.profile.EditProfileWithCardActivityHelper
+import kr.co.soogong.master.uiinterface.profile.EditProfileWithCardActivityHelper.PORTFOLIO
+import kr.co.soogong.master.uiinterface.profile.EditProfileWithCardActivityHelper.PRICE_BY_PROJECTS
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -39,12 +39,9 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
                 startActivity(Intent(EditProfileWithCardActivityHelper.getIntent(requireContext(), PORTFOLIO)))
             }
 
-
-
             priceByProject.addDefaultButtonClickListener{
                 startActivity(Intent(EditProfileWithCardActivityHelper.getIntent(requireContext(), PRICE_BY_PROJECTS)))
             }
-
 
         }
     }

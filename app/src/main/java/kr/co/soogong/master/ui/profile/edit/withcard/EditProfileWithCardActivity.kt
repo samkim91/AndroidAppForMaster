@@ -1,4 +1,4 @@
-package kr.co.soogong.master.ui.profile.edit
+package kr.co.soogong.master.ui.profile.edit.withcard
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,9 +8,12 @@ import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ActivityEditProfileWithCardBinding
 import kr.co.soogong.master.ui.base.BaseActivity
-import kr.co.soogong.master.ui.profile.edit.detail.EditProfileDetailActivity.Companion.ADD_PORTFOLIO
-import kr.co.soogong.master.uiinterface.profile.EditProfileDetailActivityHelper
+import kr.co.soogong.master.uiinterface.profile.EditProfileContainerActivityHelper
+import kr.co.soogong.master.uiinterface.profile.EditProfileContainerActivityHelper.ADD_PORTFOLIO
+import kr.co.soogong.master.uiinterface.profile.EditProfileContainerActivityHelper.ADD_PRICE_BY_PROJECTS
 import kr.co.soogong.master.uiinterface.profile.EditProfileWithCardActivityHelper
+import kr.co.soogong.master.uiinterface.profile.EditProfileWithCardActivityHelper.PORTFOLIO
+import kr.co.soogong.master.uiinterface.profile.EditProfileWithCardActivityHelper.PRICE_BY_PROJECTS
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -57,8 +60,14 @@ class EditProfileWithCardActivity : BaseActivity<ActivityEditProfileWithCardBind
 
             introductionCardForPortfolio.addDefaultButtonClickListener {
                 Timber.tag(TAG).w("DefaultButtonClickListener: ")
-                startActivity(Intent(EditProfileDetailActivityHelper.getIntent(this@EditProfileWithCardActivity, ADD_PORTFOLIO)))
+                startActivity(Intent(EditProfileContainerActivityHelper.getIntent(this@EditProfileWithCardActivity, ADD_PORTFOLIO)))
             }
+
+            introductionCardForPriceByProjects.addDefaultButtonClickListener {
+                Timber.tag(TAG).w("DefaultButtonClickListener: ")
+                startActivity(Intent(EditProfileContainerActivityHelper.getIntent(this@EditProfileWithCardActivity, ADD_PRICE_BY_PROJECTS)))
+            }
+
 
 
         }
@@ -73,8 +82,7 @@ class EditProfileWithCardActivity : BaseActivity<ActivityEditProfileWithCardBind
 
     companion object {
         private const val TAG = "EditProfileWithCardActivity"
-        const val PORTFOLIO = "포트폴리오 편집하기"
-        const val PRICE_BY_PROJECTS = "시공 종류별 가격 편집하기"
+
     }
 
 

@@ -145,14 +145,6 @@ class SignUpViewModel @Inject constructor(
             ).addToDisposable()
     }
 
-    private val _event = MutableLiveData<Event<Pair<String, Any?>>>()
-    val event: LiveData<Event<Pair<String, Any?>>>
-        get() = _event
-
-    private fun sendEvent(event: String, message: Any?) {
-        _event.postValue(Event(event to message))
-    }
-
 
     companion object {
         private const val TAG = "SignUpViewModel"
