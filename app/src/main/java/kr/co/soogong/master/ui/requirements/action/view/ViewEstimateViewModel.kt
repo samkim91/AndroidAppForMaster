@@ -12,16 +12,14 @@ import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.estimation.Estimation
 import kr.co.soogong.master.domain.requirements.EstimationStatus
-import kr.co.soogong.master.domain.usecase.AskForReviewUseCase
-import kr.co.soogong.master.domain.usecase.CallToCustomerUseCase
-import kr.co.soogong.master.domain.usecase.GetEstimationUseCase
-import kr.co.soogong.master.domain.usecase.RefuseToEstimateUseCase
+import kr.co.soogong.master.domain.usecase.requirement.AskForReviewUseCase
+import kr.co.soogong.master.domain.usecase.requirement.CallToCustomerUseCase
+import kr.co.soogong.master.domain.usecase.requirement.GetEstimationUseCase
+import kr.co.soogong.master.domain.usecase.requirement.RefuseToEstimateUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
-import kr.co.soogong.master.ui.requirements.progress.ProgressViewModel
 import kr.co.soogong.master.uiinterface.requirments.action.view.ViewEstimateActivityHelper.BUNDLE_KEY_ESTIMATION_KEY
 import kr.co.soogong.master.uiinterface.requirments.action.view.ViewEstimateActivityHelper.EXTRA_KEY_BUNDLE
 import timber.log.Timber
-import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel

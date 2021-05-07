@@ -1,29 +1,66 @@
 package kr.co.soogong.master.ui.profile.edit.withcard
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.rxkotlin.subscribeBy
+import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.launch
-import kr.co.soogong.master.data.user.User
-import kr.co.soogong.master.domain.usecase.GetUserInfoUseCase
+import kr.co.soogong.master.data.profile.IEditProfileWithCard
+import kr.co.soogong.master.domain.usecase.profile.*
 import kr.co.soogong.master.ui.base.BaseViewModel
-import timber.log.Timber
+import kr.co.soogong.master.ui.utils.ListLiveData
 import javax.inject.Inject
 
 @HiltViewModel
 class EditProfileWithCardViewModel @Inject constructor(
-    private val getUserInfoUseCase: GetUserInfoUseCase
-) : BaseViewModel() {
-    private val _userInfo = MutableLiveData<User?>(null)
-    val userInfo: LiveData<User?>
-        get() = _userInfo
+    private val getUserInfoUseCase: GetUserInfoUseCase,
+    private val getPortfolioListUseCase: GetPortfolioListUseCase,
+    private val getPriceByProjectListUseCase: GetPriceByProjectListUseCase,
+    private val deletePortfolioUseCase: DeletePortfolioUseCase,
+    private val deletePriceByProjectUseCase: DeletePriceByProjectUseCase,
 
-    fun requestUserProfile() {
-        Timber.tag(TAG).d("requestUserProfile: ")
+    ) : BaseViewModel() {
+    val itemList = ListLiveData<IEditProfileWithCard>()
+
+    fun getPortfolioList(){
         viewModelScope.launch {
-            _userInfo.value = getUserInfoUseCase()
+            itemList.addAll(getPortfolioListUseCase())
         }
+    }
+
+    fun getPriceByProjectList() {
+        viewModelScope.launch {
+            itemList.addAll(getPriceByProjectListUseCase())
+        }
+    }
+
+    fun deletePortfolio(itemId: Int){
+        deletePortfolioUseCase(itemId)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeBy(
+                onSuccess = {
+
+                },
+                onError = {
+
+                }
+            ).addToDisposable()
+    }
+
+    fun deletePriceByProject(itemId: Int){
+        deletePriceByProjectUseCase(itemId)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeBy(
+                onSuccess = {
+
+                },
+                onError = {
+
+                }
+            ).addToDisposable()
     }
 
     companion object {

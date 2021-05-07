@@ -8,8 +8,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.estimation.Estimation
 import kr.co.soogong.master.data.requirements.EstimationMessage
-import kr.co.soogong.master.domain.usecase.GetEstimationUseCase
-import kr.co.soogong.master.domain.usecase.SendEstimationMessageUseCase
+import kr.co.soogong.master.domain.usecase.requirement.GetEstimationUseCase
+import kr.co.soogong.master.domain.usecase.requirement.SendEstimationMessageUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import kr.co.soogong.master.uiinterface.requirments.action.write.WriteEstimateActivityHelper.BUNDLE_KEY
 import kr.co.soogong.master.uiinterface.requirments.action.write.WriteEstimateActivityHelper.EXTRA_STRING_KEY

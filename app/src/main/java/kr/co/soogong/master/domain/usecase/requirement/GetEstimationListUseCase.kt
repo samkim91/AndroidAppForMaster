@@ -1,8 +1,9 @@
-package kr.co.soogong.master.domain.usecase
+package kr.co.soogong.master.domain.usecase.requirement
 
 import dagger.Reusable
 import kr.co.soogong.master.domain.estimation.EstimationDao
 import kr.co.soogong.master.domain.requirements.RequirementCard
+import kr.co.soogong.master.domain.usecase.GetMasterKeyCodeUseCase
 import kr.co.soogong.master.network.EstimationsService
 import javax.inject.Inject
 

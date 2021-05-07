@@ -1,28 +1,24 @@
 package kr.co.soogong.master.ui.auth.signup
 
-import android.widget.CompoundButton
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import kr.co.soogong.master.R
 import kr.co.soogong.master.data.category.BusinessType
 import kr.co.soogong.master.data.user.SignUpInfo
-import kr.co.soogong.master.domain.usecase.CheckIdExistUseCase
-import kr.co.soogong.master.domain.usecase.DoLoginUseCase
-import kr.co.soogong.master.domain.usecase.DoSignUpUseCase
+import kr.co.soogong.master.domain.usecase.auth.CheckIdExistUseCase
+import kr.co.soogong.master.domain.usecase.auth.SignInUseCase
+import kr.co.soogong.master.domain.usecase.auth.SignUpUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import kr.co.soogong.master.ui.utils.ListLiveData
-import kr.co.soogong.master.util.Event
 import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class SignUpViewModel @Inject constructor(
-    private val doSignUpUseCase: DoSignUpUseCase,
-    private val doLoginUseCase: DoLoginUseCase,
+    private val signUpUseCase: SignUpUseCase,
+    private val signInUseCase: SignInUseCase,
     private val checkIdExistUseCase: CheckIdExistUseCase,
 ) : BaseViewModel() {
 
@@ -99,7 +95,7 @@ class SignUpViewModel @Inject constructor(
     fun requestLogin() {
         Timber.tag(TAG).d("requestLogin: ")
 
-        doLoginUseCase(phoneNumber.value, signInPassword.value ?: signUpPassword.value)
+        signInUseCase(phoneNumber.value, signInPassword.value ?: signUpPassword.value)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
@@ -116,7 +112,7 @@ class SignUpViewModel @Inject constructor(
 
     fun signUp() {
         Timber.tag(TAG).d("signUp : ")
-        doSignUpUseCase(
+        signUpUseCase(
             SignUpInfo(
                 phoneNumber = phoneNumber.value!!,
                 password = signUpPassword.value!!,

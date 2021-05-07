@@ -6,7 +6,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.notice.Notice
-import kr.co.soogong.master.domain.usecase.GetNoticeListUseCase
+import kr.co.soogong.master.domain.usecase.mypage.GetNoticeListUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import timber.log.Timber
 import javax.inject.Inject

@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import kr.co.soogong.master.data.user.User
-import kr.co.soogong.master.domain.usecase.GetUserInfoUseCase
+import kr.co.soogong.master.domain.usecase.profile.GetUserInfoUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import timber.log.Timber
 import javax.inject.Inject

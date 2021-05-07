@@ -5,14 +5,14 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import kr.co.soogong.master.domain.usecase.DoLoginUseCase
+import kr.co.soogong.master.domain.usecase.auth.SignInUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class SignInViewModel @Inject constructor(
-    private val doLoginUseCase: DoLoginUseCase
+    private val signInUseCase: SignInUseCase
 ) : BaseViewModel() {
     val email = MutableLiveData<String>()
     val password = MutableLiveData<String>()
@@ -30,7 +30,7 @@ class SignInViewModel @Inject constructor(
             return
         }
 
-        doLoginUseCase(email.value, password.value)
+        signInUseCase(email.value, password.value)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(

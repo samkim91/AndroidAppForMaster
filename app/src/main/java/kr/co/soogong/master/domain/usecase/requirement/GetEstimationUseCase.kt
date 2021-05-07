@@ -1,4 +1,4 @@
-package kr.co.soogong.master.domain.usecase
+package kr.co.soogong.master.domain.usecase.requirement
 
 import androidx.lifecycle.LiveData
 import dagger.Reusable

@@ -80,7 +80,7 @@
                     bind:visible="@{vm.imageBeforeJob != Uri.EMPTY}">
 
                     <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/image"
+                        android:id="@+id/image_before_job_view"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         bind:image_uri="@{vm.imageBeforeJob}" />
