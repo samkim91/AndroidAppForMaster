@@ -14,5 +14,11 @@ interface ProfileInterface {
     fun getPortfolio(@Body body: HashMap<String, String>): JsonObject
 
     @POST(HttpContract.GET_USER_PROFILE_V2)
-    fun setPortfolio(@Body body: HashMap<String, String>): Single<Response>
+    fun savePortfolio(@Body body: HashMap<String, String>): Single<Response>
+
+    @GET(HttpContract.GET_USER_PROFILE_V2)
+    fun getPriceByProject(@Body body: HashMap<String, String>): JsonObject
+
+    @POST(HttpContract.GET_USER_PROFILE_V2)
+    fun savePriceByProject(@Body body: HashMap<String, String>): Single<Response>
 }

@@ -70,5 +70,21 @@ data class DialogData(
                 "네", context.getColor(R.color.text_basic_color),
                 "아니요", context.getColor(R.color.text_basic_color)
             )
+
+        fun askingDeletePortfolioDialogData(context: Context) =
+            DialogData(
+                "포트폴리오를 삭제하시겠어요?", context.getColor(R.color.text_basic_color),
+                null, context.getColor(R.color.text_alert_color),
+                "네", context.getColor(R.color.text_basic_color),
+                "아니요", context.getColor(R.color.text_basic_color)
+            )
+
+        fun askingDeletePriceByProjectDialogData(context: Context) =
+            DialogData(
+                "시공 종류별 가격을 삭제하시겠어요?", context.getColor(R.color.text_basic_color),
+                null, context.getColor(R.color.text_alert_color),
+                "네", context.getColor(R.color.text_basic_color),
+                "아니요", context.getColor(R.color.text_basic_color)
+            )
     }
 }

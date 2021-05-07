@@ -49,7 +49,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/title_widget"
-                app:setInputType="@{inputType.TYPE_CLASS_NUMBER}"                app:setMaxLength="@{13}"
+                app:setInputType="@{inputType.TYPE_CLASS_NUMBER}"
+                app:setMaxLength="@{13}"
                 app:content="@={vm.phoneNumber}"
                 app:titleVisible="@{false}" />
 

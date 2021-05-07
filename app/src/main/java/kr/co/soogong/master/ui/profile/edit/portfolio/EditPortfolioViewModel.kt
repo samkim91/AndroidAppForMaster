@@ -11,39 +11,39 @@ import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.profile.Portfolio
 import kr.co.soogong.master.domain.usecase.*
 import kr.co.soogong.master.domain.usecase.profile.GetPortfolioUseCase
-import kr.co.soogong.master.domain.usecase.profile.SetPortfolioUseCase
+import kr.co.soogong.master.domain.usecase.profile.SavePortfolioUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class EditPortfolioViewModel @Inject constructor(
     private val getMasterKeyCodeUseCase: GetMasterKeyCodeUseCase,
-    private val setPortfolioUseCase: SetPortfolioUseCase,
+    private val savePortfolioUseCase: SavePortfolioUseCase,
     private val getPortfolioUseCase: GetPortfolioUseCase
 ) : BaseViewModel() {
-    val jobTitle = MutableLiveData("")
+    val title = MutableLiveData("")
     val imageBeforeJob = MutableLiveData(Uri.EMPTY)
     val imageAfterJob = MutableLiveData(Uri.EMPTY)
-    val jobDescription = MutableLiveData("")
+    val description = MutableLiveData("")
 
     fun getPortfolio(portfolioId: Int) {
         // Todo.. 수정할 포트폴리오 가져오기
         val portfolio = getPortfolioUseCase(portfolioId)
-        jobTitle.postValue(portfolio.title)
+        title.postValue(portfolio.title)
         imageBeforeJob.postValue(portfolio.imageBeforeJob.toUri())
         imageAfterJob.postValue(portfolio.imageAfterJob.toUri())
-        jobDescription.postValue(portfolio.description)
+        description.postValue(portfolio.description)
     }
 
     fun savePortfolio(portfolioId: Int) {
-        setPortfolioUseCase(
+        savePortfolioUseCase(
             portfolio = Portfolio(
                 masterId = getMasterKeyCodeUseCase()!!,
                 itemId = portfolioId,
-                title = jobTitle.value!!,
+                title = title.value!!,
                 imageBeforeJob = imageBeforeJob.value.toString(),
                 imageAfterJob = imageAfterJob.value.toString(),
-                description = jobDescription.value!!
+                description = description.value!!
             )
         ).subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

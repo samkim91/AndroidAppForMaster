@@ -2,17 +2,18 @@ package kr.co.soogong.master.ui.profile.edit.withcard
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ActivityEditProfileWithCardBinding
 import kr.co.soogong.master.ui.base.BaseActivity
+import kr.co.soogong.master.ui.dialog.popup.CustomDialog
+import kr.co.soogong.master.ui.dialog.popup.DialogData
+import kr.co.soogong.master.ui.utils.EditProfileContainerFragmentHelper.ADD_PORTFOLIO
+import kr.co.soogong.master.ui.utils.EditProfileContainerFragmentHelper.ADD_PRICE_BY_PROJECTS
+import kr.co.soogong.master.ui.utils.EditProfileContainerFragmentHelper.EDIT_PORTFOLIO
+import kr.co.soogong.master.ui.utils.EditProfileContainerFragmentHelper.EDIT_PRICE_BY_PROJECTS
 import kr.co.soogong.master.uiinterface.profile.EditProfileContainerActivityHelper
-import kr.co.soogong.master.uiinterface.profile.EditProfileContainerActivityHelper.ADD_PORTFOLIO
-import kr.co.soogong.master.uiinterface.profile.EditProfileContainerActivityHelper.ADD_PRICE_BY_PROJECTS
-import kr.co.soogong.master.uiinterface.profile.EditProfileContainerActivityHelper.EDIT_PORTFOLIO
-import kr.co.soogong.master.uiinterface.profile.EditProfileContainerActivityHelper.EDIT_PRICE_BY_PROJECTS
 import kr.co.soogong.master.uiinterface.profile.EditProfileWithCardActivityHelper
 import kr.co.soogong.master.uiinterface.profile.EditProfileWithCardActivityHelper.PORTFOLIO
 import kr.co.soogong.master.uiinterface.profile.EditProfileWithCardActivityHelper.PRICE_BY_PROJECTS
@@ -38,7 +39,7 @@ class EditProfileWithCardActivity : BaseActivity<ActivityEditProfileWithCardBind
     override fun onStart() {
         super.onStart()
         Timber.tag(TAG).d("onStart: ")
-        if(pageName == PORTFOLIO) viewModel.getPortfolioList() else viewModel.getPriceByProjectList()
+        if (pageName == PORTFOLIO) viewModel.getPortfolioList() else viewModel.getPriceByProjectList()
     }
 
     override fun initLayout() {
@@ -46,7 +47,7 @@ class EditProfileWithCardActivity : BaseActivity<ActivityEditProfileWithCardBind
         bind {
             vm = viewModel
             lifecycleOwner = this@EditProfileWithCardActivity
-            
+
             with(actionBar) {
                 backButton.setOnClickListener {
                     super.onBackPressed()
@@ -65,17 +66,23 @@ class EditProfileWithCardActivity : BaseActivity<ActivityEditProfileWithCardBind
                 PORTFOLIO -> {
                     actionBar.title.text = PORTFOLIO
                     with(introductionCard) {
-                        title = getString(kr.co.soogong.master.R.string.introduction_card_title_for_portfolio)
-                        subTitle = getString(kr.co.soogong.master.R.string.introduction_card_subtitle_for_portfolio)
-                        defaultButtonText = getString(kr.co.soogong.master.R.string.introduction_card_button_text_for_portfolio)
+                        title =
+                            getString(kr.co.soogong.master.R.string.introduction_card_title_for_portfolio)
+                        subTitle =
+                            getString(kr.co.soogong.master.R.string.introduction_card_subtitle_for_portfolio)
+                        defaultButtonText =
+                            getString(kr.co.soogong.master.R.string.introduction_card_button_text_for_portfolio)
                     }
                 }
                 PRICE_BY_PROJECTS -> {
                     actionBar.title.text = PRICE_BY_PROJECTS
                     with(introductionCard) {
-                        title = getString(kr.co.soogong.master.R.string.introduction_card_title_for_price_by_projects)
-                        subTitle = getString(kr.co.soogong.master.R.string.introduction_card_subtitle_for_price_by_projects)
-                        defaultButtonText = getString(kr.co.soogong.master.R.string.introduction_card_button_text_for_price_by_projects)
+                        title =
+                            getString(kr.co.soogong.master.R.string.introduction_card_title_for_price_by_projects)
+                        subTitle =
+                            getString(kr.co.soogong.master.R.string.introduction_card_subtitle_for_price_by_projects)
+                        defaultButtonText =
+                            getString(kr.co.soogong.master.R.string.introduction_card_button_text_for_price_by_projects)
                     }
                 }
             }
@@ -100,10 +107,23 @@ class EditProfileWithCardActivity : BaseActivity<ActivityEditProfileWithCardBind
         binding.recyclerview.adapter =
             EditProfileWithCardAdapter(
                 leftButtonClickListener = { id ->
-                    if(pageName == PORTFOLIO) viewModel.deletePortfolio(id) else viewModel.deletePriceByProject(id)
+                    if (pageName == PORTFOLIO) {
+                        CustomDialog(
+                            DialogData.askingDeletePortfolioDialogData(this@EditProfileWithCardActivity),
+                            yesClick = {
+                                viewModel.deletePortfolio(id)
+                            },
+                            noClick = { })
+                    } else {
+                        CustomDialog(
+                            DialogData.askingDeletePriceByProjectDialogData(this@EditProfileWithCardActivity),
+                            yesClick = {
+                                viewModel.deletePriceByProject(id)
+                            },
+                            noClick = { })
+                    }
                 },
                 rightButtonClickListener = { id ->
-                    // Todo.. 수정으로 넘어가기.
                     startActivity(
                         Intent(
                             EditProfileContainerActivityHelper.getIntent(

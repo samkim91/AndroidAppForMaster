@@ -193,6 +193,20 @@
     <string name="introduction_card_subtitle_for_price_by_projects">다양한 시공을 입력해 주실수록 선택률이 상승합니다.</string>
     <string name="introduction_card_button_text_for_price_by_projects">시공 종류별 가격 추가하기</string>
 
+    <string name="example_for_edit_price_by_project">예시)\n\n
+- 시공 종류 : 싱크대 상판 연마작업\n
+- 가격 : 100,000\n
+- 시공 설명 : 제거가 어려운 오염이 가득한 주방 대리석 상판을 연마 하는 작업입니다.\n\n
+- 시공 종류 : 깨진 타일 보수\n
+- 가격 : 200,000\n
+- 시공 설명 : 출장 시공비 포함\n\n
+- 시공 종류 : 대림 바스 소변기 설치 (1개)\n
+- 가격 : 100,000\n
+- 시공 설명 : 감지기 미포함 입니다.\n\n
+- 시공 종류 : 칼라 줄눈 코팅 (평당)\n
+- 가격 : 40,000\n
+- 시공 설명 : 600*600 타일 기준 9장이 1평 입니다.</string>
+
 
 
     <!-- Request Detail -->

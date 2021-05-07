@@ -9,10 +9,10 @@ import kr.co.soogong.master.network.Response
 import javax.inject.Inject
 
 @Reusable
-class SetPortfolioUseCase @Inject constructor(
+class SavePortfolioUseCase @Inject constructor(
     private val profileService: ProfileService,
 ) {
     operator fun invoke(portfolio: Portfolio): Single<Response> {
-        return profileService.setPortfolio(portfolio)
+        return profileService.savePortfolio(portfolio)
     }
 }
