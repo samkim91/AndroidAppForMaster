@@ -185,6 +185,16 @@
     <string name="image_before_job_label">시공 전 사진</string>
     <string name="image_after_job_label">시공 후 사진</string>
 
+    <string name="introduction_card_title_for_portfolio">마스터님의 포트폴리오를 작성해주세요.</string>
+    <string name="introduction_card_subtitle_for_portfolio">포트폴리오 사진과 실제 시공 정보가 많을수록, 더많이 노출되고, 고객이 선택하는데 더 좋은 기준이 됩니다.</string>
+    <string name="introduction_card_button_text_for_portfolio">포트폴리오 추가하기</string>
+
+    <string name="introduction_card_title_for_price_by_projects">시공 종류별 가격을 입력해주세요.</string>
+    <string name="introduction_card_subtitle_for_price_by_projects">다양한 시공을 입력해 주실수록 선택률이 상승합니다.</string>
+    <string name="introduction_card_button_text_for_price_by_projects">시공 종류별 가격 추가하기</string>
+
+
+
     <!-- Request Detail -->
     <string name="request_date">접수일시</string>
     <string name="request_user_name">고객명</string>

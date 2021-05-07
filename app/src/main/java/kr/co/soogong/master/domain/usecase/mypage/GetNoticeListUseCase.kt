@@ -1,4 +1,4 @@
-package kr.co.soogong.master.domain.usecase
+package kr.co.soogong.master.domain.usecase.mypage
 
 import dagger.Reusable
 import io.reactivex.Single

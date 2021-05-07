@@ -1,7 +1,8 @@
-package kr.co.soogong.master.domain.usecase
+package kr.co.soogong.master.domain.usecase.mypage
 
 import dagger.Reusable
 import io.reactivex.Single
+import kr.co.soogong.master.domain.usecase.GetMasterKeyCodeUseCase
 import kr.co.soogong.master.network.AlarmService
 import javax.inject.Inject
 

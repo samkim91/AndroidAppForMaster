@@ -11,6 +11,8 @@ import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.uiinterface.profile.EditProfileContainerActivityHelper
 import kr.co.soogong.master.uiinterface.profile.EditProfileContainerActivityHelper.ADD_PORTFOLIO
 import kr.co.soogong.master.uiinterface.profile.EditProfileContainerActivityHelper.ADD_PRICE_BY_PROJECTS
+import kr.co.soogong.master.uiinterface.profile.EditProfileContainerActivityHelper.EDIT_PORTFOLIO
+import kr.co.soogong.master.uiinterface.profile.EditProfileContainerActivityHelper.EDIT_PRICE_BY_PROJECTS
 import kr.co.soogong.master.uiinterface.profile.EditProfileWithCardActivityHelper
 import kr.co.soogong.master.uiinterface.profile.EditProfileWithCardActivityHelper.PORTFOLIO
 import kr.co.soogong.master.uiinterface.profile.EditProfileWithCardActivityHelper.PRICE_BY_PROJECTS
@@ -33,46 +35,85 @@ class EditProfileWithCardActivity : BaseActivity<ActivityEditProfileWithCardBind
         registerEventObserve()
     }
 
+    override fun onStart() {
+        super.onStart()
+        Timber.tag(TAG).d("onStart: ")
+        if(pageName == PORTFOLIO) viewModel.getPortfolioList() else viewModel.getPriceByProjectList()
+    }
+
     override fun initLayout() {
         Timber.tag(TAG).d("initLayout: ")
         bind {
             vm = viewModel
             lifecycleOwner = this@EditProfileWithCardActivity
-
+            
             with(actionBar) {
                 backButton.setOnClickListener {
                     super.onBackPressed()
                 }
             }
 
+            setLayout()
+            setDefaultButton()
+            setRecyclerview()
+        }
+    }
+
+    private fun setLayout() {
+        bind {
             when (pageName) {
                 PORTFOLIO -> {
                     actionBar.title.text = PORTFOLIO
-                    introductionCardForPortfolio.visibility = View.VISIBLE
-                    introductionCardForPriceByProjects.visibility = View.GONE
+                    with(introductionCard) {
+                        title = getString(kr.co.soogong.master.R.string.introduction_card_title_for_portfolio)
+                        subTitle = getString(kr.co.soogong.master.R.string.introduction_card_subtitle_for_portfolio)
+                        defaultButtonText = getString(kr.co.soogong.master.R.string.introduction_card_button_text_for_portfolio)
+                    }
                 }
                 PRICE_BY_PROJECTS -> {
                     actionBar.title.text = PRICE_BY_PROJECTS
-                    introductionCardForPriceByProjects.visibility = View.VISIBLE
-                    introductionCardForPortfolio.visibility = View.GONE
+                    with(introductionCard) {
+                        title = getString(kr.co.soogong.master.R.string.introduction_card_title_for_price_by_projects)
+                        subTitle = getString(kr.co.soogong.master.R.string.introduction_card_subtitle_for_price_by_projects)
+                        defaultButtonText = getString(kr.co.soogong.master.R.string.introduction_card_button_text_for_price_by_projects)
+                    }
                 }
             }
-
-            introductionCardForPortfolio.addDefaultButtonClickListener {
-                Timber.tag(TAG).w("DefaultButtonClickListener: ")
-                startActivity(Intent(EditProfileContainerActivityHelper.getIntent(this@EditProfileWithCardActivity, ADD_PORTFOLIO)))
-            }
-
-            introductionCardForPriceByProjects.addDefaultButtonClickListener {
-                Timber.tag(TAG).w("DefaultButtonClickListener: ")
-                startActivity(Intent(EditProfileContainerActivityHelper.getIntent(this@EditProfileWithCardActivity, ADD_PRICE_BY_PROJECTS)))
-            }
-
-
-
         }
+    }
 
+    private fun setDefaultButton() {
+        binding.introductionCard.addDefaultButtonClickListener {
+            Timber.tag(TAG).w("DefaultButtonClickListener: ")
+            startActivity(
+                Intent(
+                    EditProfileContainerActivityHelper.getIntent(
+                        this@EditProfileWithCardActivity,
+                        if (pageName == PORTFOLIO) ADD_PORTFOLIO else ADD_PRICE_BY_PROJECTS
+                    )
+                )
+            )
+        }
+    }
 
+    private fun setRecyclerview() {
+        binding.recyclerview.adapter =
+            EditProfileWithCardAdapter(
+                leftButtonClickListener = { id ->
+                    if(pageName == PORTFOLIO) viewModel.deletePortfolio(id) else viewModel.deletePriceByProject(id)
+                },
+                rightButtonClickListener = { id ->
+                    // Todo.. 수정으로 넘어가기.
+                    startActivity(
+                        Intent(
+                            EditProfileContainerActivityHelper.getIntent(
+                                this@EditProfileWithCardActivity,
+                                if (pageName == PORTFOLIO) EDIT_PORTFOLIO else EDIT_PRICE_BY_PROJECTS,
+                                id
+                            )
+                        )
+                    )
+                })
     }
 
     private fun registerEventObserve() {

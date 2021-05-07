@@ -57,7 +57,6 @@ class EditPortfolioFragment : BaseFragment<FragmentEditPortfolioBinding>(
                     with(defaultButton) {
                         text = getString(R.string.modifying_done)
                         setOnClickListener {
-                            // 포트폴리오 수정완료 로직
                             viewModel.savePortfolio(portfolioId)
                         }
                     }

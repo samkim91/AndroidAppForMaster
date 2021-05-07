@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/bind"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="data"
+            type="kr.co.soogong.master.data.profile.Portfolio" />
+
+        <variable
+            name="delete_button_click_listener"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="edit_button_click_listener"
+            type="android.view.View.OnClickListener" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/gap_10"
+            android:background="@color/line_color" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/gap_20"
+            android:paddingTop="@dimen/gap_32"
+            android:paddingEnd="@dimen/gap_20"
+            android:paddingBottom="@dimen/gap_12">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/job_title"
+                style="@style/medium_text_style.regular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{data.title}"
+                android:textColor="@color/text_basic_color"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="루버 방충망 설치" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/before_job_label"
+                style="@style/small_text_style.regular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/gap_12"
+                android:text="@string/image_before_job_label"
+                android:textColor="@color/text_basic_color"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/job_title" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/image_before_job"
+                android:layout_width="@dimen/gap_100"
+                android:layout_height="@dimen/gap_100"
+                android:layout_marginTop="@dimen/gap_12"
+                app:cardCornerRadius="@dimen/gap_8"
+                app:layout_constraintStart_toStartOf="@id/before_job_label"
+                app:layout_constraintTop_toBottomOf="@id/before_job_label">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/image_before_job_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    bind:image_url="@{data.imageBeforeJob}" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/after_job_label"
+                style="@style/small_text_style.regular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/gap_38"
+                android:text="@string/image_after_job_label"
+                android:textColor="@color/text_basic_color"
+                app:layout_constraintStart_toEndOf="@id/before_job_label"
+                app:layout_constraintTop_toTopOf="@id/before_job_label" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/image_after_job"
+                android:layout_width="@dimen/gap_100"
+                android:layout_height="@dimen/gap_100"
+                android:layout_marginTop="@dimen/gap_12"
+                app:cardCornerRadius="@dimen/gap_8"
+                app:layout_constraintStart_toStartOf="@id/after_job_label"
+                app:layout_constraintTop_toBottomOf="@id/after_job_label">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/image_after_job_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    bind:image_url="@{data.imageAfterJob}" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/job_description"
+                style="@style/medium_text_style.regular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/gap_12"
+                android:text="@{data.description}"
+                android:textColor="@color/text_basic_color"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/image_before_job"
+                tools:text="현관문교체를 했습네다현관문교체를 했습네다현관문교체를 했습네다현관문교체를 했습네다현관문교체를 했습네다현관문교체를 했습네다" />
+
+            <Button
+                android:id="@+id/delete_button"
+                style="@style/medium_text_style.bold"
+                android:layout_width="@dimen/gap_0"
+                android:layout_height="52dp"
+                android:layout_marginTop="@dimen/gap_12"
+                android:background="@android:color/transparent"
+                android:onClick="@{delete_button_click_listener}"
+                android:textColor="@color/color_FF711D"
+                app:layout_constraintEnd_toStartOf="@+id/edit_button"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/job_description"
+                tools:text="삭제하기" />
+
+            <Button
+                android:id="@+id/edit_button"
+                style="@style/medium_text_style.bold"
+                android:layout_width="0dp"
+                android:layout_height="52dp"
+                android:background="@android:color/transparent"
+                android:onClick="@{edit_button_click_listener}"
+                android:textColor="@color/color_616161"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/delete_button"
+                app:layout_constraintTop_toTopOf="@id/delete_button"
+                tools:text="수정하기" />
+
+            <ImageView
+                android:id="@+id/divider"
+                android:layout_width="1dp"
+                android:layout_height="16dp"
+                android:background="#D8D8D8"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/delete_button"
+                app:layout_constraintStart_toEndOf="@id/edit_button"
+                app:layout_constraintTop_toTopOf="@id/delete_button" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+</layout>

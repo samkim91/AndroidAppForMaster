@@ -1,11 +1,13 @@
-package kr.co.soogong.master.domain.usecase
+package kr.co.soogong.master.domain.usecase.mypage
 
 import dagger.Reusable
 import kr.co.soogong.master.domain.estimation.EstimationDao
+import kr.co.soogong.master.domain.usecase.SetMasterApprovalUseCase
+import kr.co.soogong.master.domain.usecase.SetMasterKeyCodeUseCase
 import javax.inject.Inject
 
 @Reusable
-class DoResetUseCase @Inject constructor(
+class SignOutUseCase @Inject constructor(
     private val estimationDao: EstimationDao,
     private val userDao: EstimationDao,
     private val setMasterKeyCodeUseCase: SetMasterKeyCodeUseCase,

@@ -1,15 +1,13 @@
-package kr.co.soogong.master.domain.usecase
+package kr.co.soogong.master.domain.usecase.requirement
 
-import dagger.Reusable
 import kr.co.soogong.master.domain.requirements.EstimationStatus
 import kr.co.soogong.master.domain.requirements.RequirementCard
 import javax.inject.Inject
 
-@Reusable
-class GetReceivedEstimationListUseCase @Inject constructor(
+class GetProgressEstimationListUseCase @Inject constructor(
     private val getEstimationListUseCase: GetEstimationListUseCase
 ) {
     suspend operator fun invoke(): List<RequirementCard> {
-        return getEstimationListUseCase().filter { it.status == EstimationStatus.Request || it.status == EstimationStatus.Waiting }
+        return getEstimationListUseCase().filter { it.status == EstimationStatus.Progress || it.status == EstimationStatus.CustomDone }
     }
 }

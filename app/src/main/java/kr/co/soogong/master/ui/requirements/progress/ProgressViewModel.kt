@@ -10,10 +10,9 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.launch
 import kr.co.soogong.master.domain.requirements.EstimationStatus
 import kr.co.soogong.master.domain.requirements.RequirementCard
-import kr.co.soogong.master.domain.usecase.CallToCustomerUseCase
-import kr.co.soogong.master.domain.usecase.GetProgressEstimationListUseCase
+import kr.co.soogong.master.domain.usecase.requirement.CallToCustomerUseCase
+import kr.co.soogong.master.domain.usecase.requirement.GetProgressEstimationListUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
-import kr.co.soogong.master.util.Event
 import timber.log.Timber
 import javax.inject.Inject
 

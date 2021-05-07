@@ -46,6 +46,7 @@
     <dimen name="gap_28">28dp</dimen>
     <dimen name="gap_32">32dp</dimen>
     <dimen name="gap_35">35dp</dimen>
+    <dimen name="gap_38">38dp</dimen>
     <dimen name="gap_40">40dp</dimen>
     <dimen name="gap_48">48dp</dimen>
     <dimen name="gap_52">52dp</dimen>

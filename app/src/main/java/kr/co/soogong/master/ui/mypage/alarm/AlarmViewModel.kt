@@ -6,8 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import kr.co.soogong.master.domain.usecase.GetAlarmStatusUseCase
-import kr.co.soogong.master.domain.usecase.SetAlarmStatusUseCase
+import kr.co.soogong.master.domain.usecase.mypage.GetAlarmStatusUseCase
+import kr.co.soogong.master.domain.usecase.mypage.SetAlarmStatusUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import timber.log.Timber
 import javax.inject.Inject

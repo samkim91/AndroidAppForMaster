@@ -8,10 +8,8 @@ import kotlinx.coroutines.launch
 import kr.co.soogong.master.domain.requirements.EstimationStatus
 import kr.co.soogong.master.domain.requirements.RequirementCard
 import kr.co.soogong.master.domain.usecase.GetMasterApprovalUseCase
-import kr.co.soogong.master.domain.usecase.GetReceivedEstimationListUseCase
+import kr.co.soogong.master.domain.usecase.requirement.GetReceivedEstimationListUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
-import kr.co.soogong.master.util.Event
-import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel

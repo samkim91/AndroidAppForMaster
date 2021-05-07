@@ -21,8 +21,8 @@ class SignUpPagerAdapter(
             3 -> Step4Fragment.newInstance()
             4 -> Step5Fragment.newInstance()
             5 -> Step6Fragment.newInstance()
-            6 -> Step7Fragment.newInstance()
-            7 -> Step8Fragment.newInstance()
+//            6 -> Step7Fragment.newInstance()
+            6 -> Step8Fragment.newInstance()
             else -> Fragment()
         }
     }

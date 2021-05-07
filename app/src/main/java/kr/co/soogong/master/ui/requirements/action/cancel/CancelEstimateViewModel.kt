@@ -1,14 +1,11 @@
 package kr.co.soogong.master.ui.requirements.action.cancel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.estimation.CancelEstimate
-import kr.co.soogong.master.domain.usecase.CancelEstimateUseCase
-import kr.co.soogong.master.domain.usecase.GetMasterKeyCodeUseCase
+import kr.co.soogong.master.domain.usecase.requirement.CancelEstimateUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import timber.log.Timber
 import javax.inject.Inject

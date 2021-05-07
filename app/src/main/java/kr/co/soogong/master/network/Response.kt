@@ -7,4 +7,8 @@ data class Response(
     val code: String,
     val status: Int,
     val body: JsonObject
-)
+    ){
+    companion object {
+        val NULL_RESPONSE = Response("", "", 0, JsonObject())
+    }
+}

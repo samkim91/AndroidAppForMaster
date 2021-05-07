@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
-import kr.co.soogong.master.domain.usecase.GetEstimationUseCase
+import kr.co.soogong.master.domain.usecase.requirement.GetEstimationUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 
 class ImageViewModel @AssistedInject constructor(

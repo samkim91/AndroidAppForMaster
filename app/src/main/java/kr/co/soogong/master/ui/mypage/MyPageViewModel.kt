@@ -9,9 +9,9 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.launch
 import kr.co.soogong.master.data.notice.Notice
 import kr.co.soogong.master.data.user.User
-import kr.co.soogong.master.domain.usecase.DoResetUseCase
-import kr.co.soogong.master.domain.usecase.GetNoticeListUseCase
-import kr.co.soogong.master.domain.usecase.GetUserInfoUseCase
+import kr.co.soogong.master.domain.usecase.mypage.SignOutUseCase
+import kr.co.soogong.master.domain.usecase.mypage.GetNoticeListUseCase
+import kr.co.soogong.master.domain.usecase.profile.GetUserInfoUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import timber.log.Timber
 import javax.inject.Inject
@@ -20,7 +20,7 @@ import javax.inject.Inject
 class MyPageViewModel @Inject constructor(
     private val getUserInfoUseCase: GetUserInfoUseCase,
     private val getNoticeListUseCase: GetNoticeListUseCase,
-    private val doResetUseCase: DoResetUseCase,
+    private val signOutUseCase: SignOutUseCase,
 ) : BaseViewModel() {
     private val _user = MutableLiveData<User?>(null)
     val user: LiveData<User?>
@@ -81,7 +81,7 @@ class MyPageViewModel @Inject constructor(
     fun logout() {
         Timber.tag(TAG).i("Logout Button")
         viewModelScope.launch {
-            doResetUseCase()
+            signOutUseCase()
             setAction(LOGOUT)
         }
     }

@@ -58,51 +58,51 @@ class ReceivedFragment : BaseFragment<FragmentRequirementsReceivedBinding>(
                                         //Todo.. 필수정보 등록 activity로 이동
                                     },
                                     noClick = { })
-                        dialog.show(parentFragmentManager, dialog.tag)
+                            dialog.show(parentFragmentManager, dialog.tag)
+                        }
                     }
+                })
+
+            val dividerItemDecoration = DividerItemDecoration(
+                context,
+                LinearLayoutManager(context).orientation
+            )
+            ResourcesCompat.getDrawable(resources, R.drawable.divider, null)?.let {
+                dividerItemDecoration.setDrawable(it)
+            }
+            receivedList.addItemDecoration(dividerItemDecoration)
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Timber.tag(TAG).d("onStart: ")
+        viewModel.requestList()
+    }
+
+    private fun registerEventObserve() {
+        Timber.tag(TAG).d("registerEventObserve: ")
+        viewModel.event.observe(viewLifecycleOwner, EventObserver { (event, value) ->
+            when (event) {
+                ReceivedViewModel.BADGE_UPDATE -> {
+                    (parentFragment as? RequirementsBadge)?.setReceivedBadge(value as Int)
                 }
+            }
         })
-
-        val dividerItemDecoration = DividerItemDecoration(
-            context,
-            LinearLayoutManager(context).orientation
-        )
-        ResourcesCompat.getDrawable(resources, R.drawable.divider, null)?.let {
-            dividerItemDecoration.setDrawable(it)
-        }
-        receivedList.addItemDecoration(dividerItemDecoration)
-    }
-}
-
-override fun onStart() {
-    super.onStart()
-    Timber.tag(TAG).d("onStart: ")
-    viewModel.requestList()
-}
-
-private fun registerEventObserve() {
-    Timber.tag(TAG).d("registerEventObserve: ")
-    viewModel.event.observe(viewLifecycleOwner, EventObserver { (event, value) ->
-        when (event) {
-            ReceivedViewModel.BADGE_UPDATE -> {
-                (parentFragment as? RequirementsBadge)?.setReceivedBadge(value as Int)
+        viewModel.action.observe(viewLifecycleOwner, EventObserver { action ->
+            when (action) {
+                ReceivedViewModel.BADGE_UPDATE -> {
+                    binding.receivedList.scrollToPosition(0)
+                }
             }
-        }
-    })
-    viewModel.action.observe(viewLifecycleOwner, EventObserver { action ->
-        when (action) {
-            ReceivedViewModel.BADGE_UPDATE -> {
-                binding.receivedList.scrollToPosition(0)
-            }
-        }
-    })
-}
-
-companion object {
-    private const val TAG = "ReceivedFragment"
-
-    fun newInstance(): ReceivedFragment {
-        return ReceivedFragment()
+        })
     }
-}
+
+    companion object {
+        private const val TAG = "ReceivedFragment"
+
+        fun newInstance(): ReceivedFragment {
+            return ReceivedFragment()
+        }
+    }
 }
