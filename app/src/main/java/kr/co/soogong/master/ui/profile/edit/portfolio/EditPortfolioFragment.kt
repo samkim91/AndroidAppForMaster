@@ -5,14 +5,12 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import gun0912.tedimagepicker.builder.TedImagePicker
-import kr.co.soogong.master.BuildConfig
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentEditPortfolioBinding
-import kr.co.soogong.master.ui.auth.signup.SignUpActivity
 import kr.co.soogong.master.ui.base.BaseFragment
+import kr.co.soogong.master.ui.utils.EditProfileContainerFragmentHelper.ADD_PORTFOLIO
+import kr.co.soogong.master.ui.utils.EditProfileContainerFragmentHelper.EDIT_PORTFOLIO
 import kr.co.soogong.master.ui.utils.PermissionHelper
-import kr.co.soogong.master.uiinterface.profile.EditProfileContainerActivityHelper.ADD_PORTFOLIO
-import kr.co.soogong.master.uiinterface.profile.EditProfileContainerActivityHelper.EDIT_PORTFOLIO
 import kr.co.soogong.master.util.extension.toast
 import timber.log.Timber
 
