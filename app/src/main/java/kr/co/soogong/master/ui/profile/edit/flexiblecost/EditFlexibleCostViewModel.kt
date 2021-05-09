@@ -1,4 +1,4 @@
-package kr.co.soogong.master.ui.profile.edit.withcard.pricebyproject
+package kr.co.soogong.master.ui.profile.edit.flexiblecost
 
 import androidx.lifecycle.MutableLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -10,37 +10,26 @@ import kr.co.soogong.master.domain.usecase.*
 import kr.co.soogong.master.domain.usecase.profile.GetPriceByProjectUseCase
 import kr.co.soogong.master.domain.usecase.profile.SavePriceByProjectUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
-import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
-class EditPriceByProjectViewModel @Inject constructor(
+class EditFlexibleCostViewModel @Inject constructor(
     private val getMasterKeyCodeUseCase: GetMasterKeyCodeUseCase,
     private val savePriceByProjectUseCase: SavePriceByProjectUseCase,
     private val getPriceByProjectUseCase: GetPriceByProjectUseCase
 ) : BaseViewModel() {
-    val title = MutableLiveData("")
-    val price = MutableLiveData("")
-    val description = MutableLiveData("")
+    val travelCost = MutableLiveData(0)
+    val craneUsage = MutableLiveData(0)
+    val packageCost = MutableLiveData(0)
+    val otherCostInformation = MutableLiveData("")
 
-    fun getPriceByProject(priceByProjectId: Int) {
-        Timber.tag(TAG).d("getPriceByProject $priceByProjectId")
-        val priceByProject = getPriceByProjectUseCase(priceByProjectId)
-        title.postValue(priceByProject.title)
-        price.postValue(priceByProject.projectPrice)
-        description.postValue(priceByProject.description)
+    fun getFlexibleCosts() {
+
     }
 
-    fun savePriceByProject(priceByProjectId: Int) {
-        Timber.tag(TAG).d("getPriceByProject $priceByProjectId")
+    fun saveFlexibleCosts() {
         savePriceByProjectUseCase(
-            PriceByProject(
-                masterId = getMasterKeyCodeUseCase()!!,
-                itemId = priceByProjectId,
-                title = title.value!!,
-                projectPrice = price.value!!,
-                description = description.value!!
-            )
+            PriceByProject.NULL_PRICE_BY_PROJECT
         ).subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
@@ -51,7 +40,6 @@ class EditPriceByProjectViewModel @Inject constructor(
 
     companion object {
         private const val TAG = "EditPortfolioViewModel"
-
 
     }
 }

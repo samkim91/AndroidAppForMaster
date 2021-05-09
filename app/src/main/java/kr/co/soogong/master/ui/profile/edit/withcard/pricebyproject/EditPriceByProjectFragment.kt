@@ -7,9 +7,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentEditPriceByProjectBinding
 import kr.co.soogong.master.ui.base.BaseFragment
-import kr.co.soogong.master.ui.utils.EditProfileContainerFragmentHelper.ADD_PORTFOLIO
-import kr.co.soogong.master.ui.utils.EditProfileContainerFragmentHelper.ADD_PRICE_BY_PROJECTS
-import kr.co.soogong.master.ui.utils.EditProfileContainerFragmentHelper.EDIT_PRICE_BY_PROJECTS
+import kr.co.soogong.master.uiinterface.profile.EditProfileContainerFragmentHelper.ADD_PORTFOLIO
+import kr.co.soogong.master.uiinterface.profile.EditProfileContainerFragmentHelper.ADD_PRICE_BY_PROJECTS
+import kr.co.soogong.master.uiinterface.profile.EditProfileContainerFragmentHelper.EDIT_PRICE_BY_PROJECTS
 import timber.log.Timber
 
 @AndroidEntryPoint

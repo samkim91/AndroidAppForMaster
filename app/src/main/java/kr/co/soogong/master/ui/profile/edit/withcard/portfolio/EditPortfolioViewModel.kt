@@ -9,10 +9,11 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.profile.Portfolio
-import kr.co.soogong.master.domain.usecase.*
+import kr.co.soogong.master.domain.usecase.GetMasterKeyCodeUseCase
 import kr.co.soogong.master.domain.usecase.profile.GetPortfolioUseCase
 import kr.co.soogong.master.domain.usecase.profile.SavePortfolioUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -27,6 +28,7 @@ class EditPortfolioViewModel @Inject constructor(
     val description = MutableLiveData("")
 
     fun getPortfolio(portfolioId: Int) {
+        Timber.tag(TAG).d("getPortfolio: $portfolioId")
         // Todo.. 수정할 포트폴리오 가져오기
         val portfolio = getPortfolioUseCase(portfolioId)
         title.postValue(portfolio.title)
@@ -36,6 +38,7 @@ class EditPortfolioViewModel @Inject constructor(
     }
 
     fun savePortfolio(portfolioId: Int) {
+        Timber.tag(TAG).d("getPortfolio: $portfolioId")
         savePortfolioUseCase(
             portfolio = Portfolio(
                 masterId = getMasterKeyCodeUseCase()!!,

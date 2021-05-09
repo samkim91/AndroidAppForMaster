@@ -9,10 +9,10 @@ import kr.co.soogong.master.databinding.ActivityEditProfileWithCardBinding
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.ui.dialog.popup.CustomDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData
-import kr.co.soogong.master.ui.utils.EditProfileContainerFragmentHelper.ADD_PORTFOLIO
-import kr.co.soogong.master.ui.utils.EditProfileContainerFragmentHelper.ADD_PRICE_BY_PROJECTS
-import kr.co.soogong.master.ui.utils.EditProfileContainerFragmentHelper.EDIT_PORTFOLIO
-import kr.co.soogong.master.ui.utils.EditProfileContainerFragmentHelper.EDIT_PRICE_BY_PROJECTS
+import kr.co.soogong.master.uiinterface.profile.EditProfileContainerFragmentHelper.ADD_PORTFOLIO
+import kr.co.soogong.master.uiinterface.profile.EditProfileContainerFragmentHelper.ADD_PRICE_BY_PROJECTS
+import kr.co.soogong.master.uiinterface.profile.EditProfileContainerFragmentHelper.EDIT_PORTFOLIO
+import kr.co.soogong.master.uiinterface.profile.EditProfileContainerFragmentHelper.EDIT_PRICE_BY_PROJECTS
 import kr.co.soogong.master.uiinterface.profile.EditProfileContainerActivityHelper
 import kr.co.soogong.master.uiinterface.profile.EditProfileWithCardActivityHelper
 import kr.co.soogong.master.uiinterface.profile.EditProfileWithCardActivityHelper.PORTFOLIO

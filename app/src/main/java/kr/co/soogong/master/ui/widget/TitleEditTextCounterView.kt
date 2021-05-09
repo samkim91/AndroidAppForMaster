@@ -10,15 +10,16 @@ import android.view.View
 import android.widget.EditText
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import kr.co.soogong.master.databinding.ViewEditCountBoxBinding
+import kr.co.soogong.master.R
+import kr.co.soogong.master.databinding.ViewTitleEdittextCounterBinding
 
-class TitleEditCountBoxView @JvmOverloads constructor(
+class TitleEditTextCounterView @JvmOverloads constructor(
     context: Context,
     attributeSet: AttributeSet? = null,
     defStyle: Int = 0
 ) : ConstraintLayout(context, attributeSet, defStyle) {
     private var binding =
-        ViewEditCountBoxBinding.inflate(LayoutInflater.from(context), this, true)
+        ViewTitleEdittextCounterBinding.inflate(LayoutInflater.from(context), this, true)
 
     init {
         initLayout()
@@ -46,6 +47,14 @@ class TitleEditCountBoxView @JvmOverloads constructor(
         set(value) {
             field = value
             binding.subTitle.visibility = if (value) View.VISIBLE else View.GONE
+        }
+
+    var blackSubTitle: Boolean = false
+        set(value) {
+            // 기본적으로 회색이나, 필요에 따라서 검정색으로 변경
+            field = value
+            if(value) binding.subTitle.setTextColor(resources.getColor(R.color.text_basic_color, null))
+            else binding.subTitle.setTextColor(resources.getColor(R.color.text_primary_color, null))
         }
 
     val editText: EditText

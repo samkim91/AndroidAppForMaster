@@ -111,11 +111,11 @@ class ProfileDefaultCard @JvmOverloads constructor(
     }
 
     fun addFirstButtonClickListener(listener: OnClickListener){
-        binding.firstButtonInGroup.setOnClickListener { listener }
+        binding.firstButtonInGroup.setOnClickListener(listener)
     }
 
     fun addSecondButtonClickListener(listener: OnClickListener){
-        binding.secondButtonInGroup.setOnClickListener { listener }
+        binding.secondButtonInGroup.setOnClickListener(listener)
     }
 
 }

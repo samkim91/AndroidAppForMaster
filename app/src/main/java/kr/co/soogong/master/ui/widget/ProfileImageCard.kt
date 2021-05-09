@@ -40,6 +40,7 @@ class ProfileImageCard @JvmOverloads constructor(
     var imageUrl: String = ""
         set(value) {
             field = value
+            binding.imageContainer.visibility = if(value.isNullOrEmpty()) View.GONE else View.VISIBLE
             binding.image.setImageUrl(value)
         }
 
@@ -123,15 +124,15 @@ class ProfileImageCard @JvmOverloads constructor(
         }
 
     fun addDefaultButtonClickListener(listener: OnClickListener) {
-        binding.defaultButton.setOnClickListener { listener }
+        binding.defaultButton.setOnClickListener(listener)
     }
 
     fun addFirstButtonClickListener(listener: OnClickListener) {
-        binding.firstButtonInGroup.setOnClickListener { listener }
+        binding.firstButtonInGroup.setOnClickListener(listener)
     }
 
     fun addSecondButtonClickListener(listener: OnClickListener) {
-        binding.secondButtonInGroup.setOnClickListener { listener }
+        binding.secondButtonInGroup.setOnClickListener(listener)
     }
 
 }

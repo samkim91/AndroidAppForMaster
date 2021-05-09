@@ -105,7 +105,7 @@ class ProfileChipGroupCard @JvmOverloads constructor(
     }
 
     fun addDefaultButtonClickListener(listener: OnClickListener) {
-        binding.defaultButton.setOnClickListener { listener }
+        binding.defaultButton.setOnClickListener(listener)
     }
 
 }

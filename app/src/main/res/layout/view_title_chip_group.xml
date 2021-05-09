@@ -9,23 +9,23 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/title"
-            style="@style/medium_text_style.bold"
+            style="@style/medium_text_style.medium"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textColor="@color/text_basic_color"
             android:layout_marginTop="@dimen/gap_24"
+            android:textColor="@color/text_basic_color"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="사업자 등록여부를 알려주세요." />
+            tools:text="사업경자 등록여부를 알려주세요." />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/sub_title"
-            style="@style/small_text_style"
+            style="@style/small_text_style.medium"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:textColor="@color/color_616161"
+            android:textColor="@color/text_primary_color"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -37,18 +37,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-
-            app:singleSelection="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/sub_title">
+            app:layout_constraintTop_toBottomOf="@id/sub_title"
+            app:singleSelection="true">
 
         </com.google.android.material.chip.ChipGroup>
 
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/alert"
-            style="@style/small_text_style"
+            style="@style/small_text_style.regular"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"

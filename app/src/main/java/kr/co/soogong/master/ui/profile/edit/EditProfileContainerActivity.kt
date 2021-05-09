@@ -5,7 +5,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ActivityEditProfileContainerBinding
 import kr.co.soogong.master.ui.base.BaseActivity
-import kr.co.soogong.master.ui.utils.EditProfileContainerFragmentHelper
+import kr.co.soogong.master.uiinterface.profile.EditProfileContainerFragmentHelper
 import kr.co.soogong.master.uiinterface.profile.EditProfileContainerActivityHelper
 import timber.log.Timber
 
