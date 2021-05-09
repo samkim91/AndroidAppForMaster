@@ -68,6 +68,6 @@ class EditProfileWithCardViewModel @Inject constructor(
     }
 
     companion object {
-        private const val TAG = "ProfileViewModel"
+        private const val TAG = "ProfileViewModel "
     }
 }
