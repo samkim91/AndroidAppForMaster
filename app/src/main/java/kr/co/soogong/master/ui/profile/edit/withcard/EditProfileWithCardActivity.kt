@@ -108,19 +108,23 @@ class EditProfileWithCardActivity : BaseActivity<ActivityEditProfileWithCardBind
             EditProfileWithCardAdapter(
                 leftButtonClickListener = { id ->
                     if (pageName == PORTFOLIO) {
-                        CustomDialog(
+                        val dialog = CustomDialog(
                             DialogData.askingDeletePortfolioDialogData(this@EditProfileWithCardActivity),
                             yesClick = {
                                 viewModel.deletePortfolio(id)
                             },
                             noClick = { })
+
+                        dialog.show(supportFragmentManager, dialog.tag)
                     } else {
-                        CustomDialog(
+                        val dialog = CustomDialog(
                             DialogData.askingDeletePriceByProjectDialogData(this@EditProfileWithCardActivity),
                             yesClick = {
                                 viewModel.deletePriceByProject(id)
                             },
                             noClick = { })
+
+                        dialog.show(supportFragmentManager, dialog.tag)
                     }
                 },
                 rightButtonClickListener = { id ->

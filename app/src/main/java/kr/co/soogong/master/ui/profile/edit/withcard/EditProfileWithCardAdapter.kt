@@ -5,8 +5,8 @@ import androidx.recyclerview.widget.ListAdapter
 import kr.co.soogong.master.data.profile.IEditProfileWithCard
 import kr.co.soogong.master.data.profile.Portfolio
 import kr.co.soogong.master.data.profile.PriceByProject
-import kr.co.soogong.master.ui.profile.edit.portfolio.EditProfileWithCardViewHolder
-import kr.co.soogong.master.ui.profile.edit.portfolio.PortfolioViewHolder
+import kr.co.soogong.master.ui.profile.edit.withcard.portfolio.EditProfileWithCardViewHolder
+import kr.co.soogong.master.ui.profile.edit.withcard.portfolio.PortfolioViewHolder
 import kr.co.soogong.master.ui.profile.edit.withcard.EditProfileWithCardViewHolderHelper.PORTFOLIO_VIEW_TYPE
 import kr.co.soogong.master.ui.profile.edit.withcard.EditProfileWithCardViewHolderHelper.PRICE_BY_PROJECTS_VIEW_TYPE
 

@@ -1,4 +1,4 @@
-package kr.co.soogong.master.ui.profile.edit.pricebyproject
+package kr.co.soogong.master.ui.profile.edit.withcard.pricebyproject
 
 import androidx.lifecycle.MutableLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -7,9 +7,7 @@ import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.profile.PriceByProject
 import kr.co.soogong.master.domain.usecase.*
-import kr.co.soogong.master.domain.usecase.profile.GetPortfolioUseCase
 import kr.co.soogong.master.domain.usecase.profile.GetPriceByProjectUseCase
-import kr.co.soogong.master.domain.usecase.profile.SavePortfolioUseCase
 import kr.co.soogong.master.domain.usecase.profile.SavePriceByProjectUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import javax.inject.Inject

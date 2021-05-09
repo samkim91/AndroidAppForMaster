@@ -179,6 +179,7 @@
     <string name="category">업종</string>
     <string name="save">저장하기</string>
     <string name="modify">수정하기</string>
+    <string name="delete">삭제하기</string>
     <string name="writing_done">작성 완료</string>
     <string name="modifying_done">수정 완료</string>
     <string name="profile_card_container_label">추가 정보 등록·수정</string>
