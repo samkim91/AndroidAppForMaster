@@ -1,6 +1,7 @@
-package kr.co.soogong.master.ui.utils
+package kr.co.soogong.master.uiinterface.profile
 
 import androidx.fragment.app.Fragment
+import kr.co.soogong.master.ui.profile.edit.flexiblecost.EditFlexibleCostFragment
 import kr.co.soogong.master.ui.profile.edit.withcard.portfolio.EditPortfolioFragment
 import kr.co.soogong.master.ui.profile.edit.withcard.pricebyproject.EditPriceByProjectFragment
 
@@ -29,6 +30,7 @@ object EditProfileContainerFragmentHelper {
             EDIT_PORTFOLIO -> EditPortfolioFragment.newInstance(EDIT_PORTFOLIO, itemId)
             ADD_PRICE_BY_PROJECTS -> EditPriceByProjectFragment.newInstance(ADD_PRICE_BY_PROJECTS, null)
             EDIT_PRICE_BY_PROJECTS -> EditPriceByProjectFragment.newInstance(EDIT_PRICE_BY_PROJECTS, itemId)
+            EDIT_FLEXIBLE_COST -> EditFlexibleCostFragment.newInstance(EDIT_FLEXIBLE_COST)
             else -> Fragment()
         }
 }

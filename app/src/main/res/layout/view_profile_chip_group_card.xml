@@ -99,7 +99,7 @@
             android:textColor="@color/color_1FC472"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/button_barrier"
-            tools:text="등록하기" />
+            android:text="@string/register" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

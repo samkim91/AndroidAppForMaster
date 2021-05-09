@@ -6,10 +6,10 @@ import androidx.databinding.BindingAdapter
 import androidx.databinding.InverseBindingAdapter
 import androidx.databinding.InverseBindingListener
 
-object TitleEditCountBoxReverseBinding {
+object TitleEditTextCounterReverseBinding {
     @JvmStatic
     @BindingAdapter("content")
-    fun setTitleEditCountBoxContent(view: TitleEditCountBoxView, content: String?) {
+    fun setTitleEditTextCounterContent(view: TitleEditTextCounterView, content: String?) {
         val oldContent = view.editText.text.toString()
         if(oldContent != content){
             view.editText.setText(content)
@@ -18,7 +18,7 @@ object TitleEditCountBoxReverseBinding {
 
     @JvmStatic
     @BindingAdapter("contentAttrChanged")
-    fun setTitleEditCountBoxInverseBindingListener(view: TitleEditCountBoxView, listener: InverseBindingListener?){
+    fun setTitleEditTextCounterInverseBindingListener(view: TitleEditTextCounterView, listener: InverseBindingListener?){
         val watcher = object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
@@ -36,7 +36,7 @@ object TitleEditCountBoxReverseBinding {
 
     @JvmStatic
     @InverseBindingAdapter(attribute = "content", event = "contentAttrChanged")
-    fun getContent(view: TitleEditCountBoxView): String {
+    fun getContent(view: TitleEditTextCounterView): String {
         return view.editText.text.toString()
     }
 }

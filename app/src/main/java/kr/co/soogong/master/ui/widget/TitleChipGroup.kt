@@ -7,6 +7,7 @@ import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
+import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ViewTitleChipGroupBinding
 
 class TitleChipGroup @JvmOverloads constructor(
@@ -41,6 +42,19 @@ class TitleChipGroup @JvmOverloads constructor(
             binding.subTitle.visibility = if (value) View.VISIBLE else View.GONE
         }
 
+    var blackSubTitle: Boolean = false
+        set(value) {
+            // 기본적으로 회색이나, 필요에 따라서 검정색으로 변경
+            field = value
+            if (value) binding.subTitle.setTextColor(
+                resources.getColor(
+                    R.color.text_basic_color,
+                    null
+                )
+            )
+            else binding.subTitle.setTextColor(resources.getColor(R.color.text_primary_color, null))
+        }
+
     var alertText: String? = ""
         set(value) {
             field = value
@@ -53,9 +67,12 @@ class TitleChipGroup @JvmOverloads constructor(
             binding.alert.visibility = if (value) View.VISIBLE else View.GONE
         }
 
+    val chipGroup: ChipGroup
+        get() = binding.chipGroup
+
     fun addChip(
         child: Chip
-    ){
+    ) {
         binding.chipGroup.addView(child)
     }
 
@@ -65,6 +82,11 @@ class TitleChipGroup @JvmOverloads constructor(
             position: Int,
         ) -> Unit
     ) {
-        binding.chipGroup.setOnCheckedChangeListener { group, checkedId -> onCheckedChange(group, checkedId) }
+        binding.chipGroup.setOnCheckedChangeListener { group, checkedId ->
+            onCheckedChange(
+                group,
+                checkedId
+            )
+        }
     }
 }

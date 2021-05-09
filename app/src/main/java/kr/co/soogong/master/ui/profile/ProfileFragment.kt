@@ -5,12 +5,17 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
+import gun0912.tedimagepicker.builder.TedImagePicker
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentProfileBinding
 import kr.co.soogong.master.ui.base.BaseFragment
+import kr.co.soogong.master.ui.utils.PermissionHelper
+import kr.co.soogong.master.uiinterface.profile.EditProfileContainerActivityHelper
+import kr.co.soogong.master.uiinterface.profile.EditProfileContainerFragmentHelper.EDIT_FLEXIBLE_COST
 import kr.co.soogong.master.uiinterface.profile.EditProfileWithCardActivityHelper
 import kr.co.soogong.master.uiinterface.profile.EditProfileWithCardActivityHelper.PORTFOLIO
 import kr.co.soogong.master.uiinterface.profile.EditProfileWithCardActivityHelper.PRICE_BY_PROJECTS
+import kr.co.soogong.master.util.extension.toast
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -30,17 +35,57 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
         Timber.tag(TAG).d("initLayout: ")
 
 
-
         bind {
             vm = viewModel
             lifecycleOwner = viewLifecycleOwner
 
-            portfolio.addDefaultButtonClickListener{
-                startActivity(Intent(EditProfileWithCardActivityHelper.getIntent(requireContext(), PORTFOLIO)))
+            portfolio.addDefaultButtonClickListener {
+                startActivity(
+                    Intent(
+                        EditProfileWithCardActivityHelper.getIntent(
+                            requireContext(),
+                            PORTFOLIO
+                        )
+                    )
+                )
             }
 
-            priceByProject.addDefaultButtonClickListener{
-                startActivity(Intent(EditProfileWithCardActivityHelper.getIntent(requireContext(), PRICE_BY_PROJECTS)))
+            priceByProject.addDefaultButtonClickListener {
+                startActivity(
+                    Intent(
+                        EditProfileWithCardActivityHelper.getIntent(
+                            requireContext(),
+                            PRICE_BY_PROJECTS
+                        )
+                    )
+                )
+            }
+
+            profileImage.addDefaultButtonClickListener {
+                PermissionHelper.checkImagePermission(context = requireContext(),
+                    onGranted = {
+                                TedImagePicker.with(requireContext())
+                                    .buttonBackground(R.drawable.shape_fill_green_background)
+                                    .start {
+                                    // todo.. 업로드 하고 내려온 이미지를 보여주는 것으로 바꿔야함.
+                                            uri -> viewModel.profileImage.value = uri
+                                    }
+                    },
+                    onDenied = {
+                        requireContext().toast(getString(R.string.permission_denied_message))
+                    }
+                )
+            }
+
+            flexibleCost.addDefaultButtonClickListener {
+                startActivity(
+                    Intent(
+                        EditProfileContainerActivityHelper.getIntent(
+                            requireContext(),
+                            EDIT_FLEXIBLE_COST
+                        )
+                    )
+                )
             }
 
         }

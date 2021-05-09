@@ -9,25 +9,26 @@ import kr.co.soogong.master.data.category.BusinessType
 import kr.co.soogong.master.ui.widget.TitleChipGroup
 
 object BusinessTypeChipGroupHelper {
-    const val CHOICE_CHIP_RECTANGULAR = R.layout.single_chip_choice_layout
-    const val ENTRY_CHIP_ROUND = R.layout.single_chip_entry_layout
 
-    fun makeChipGroupWithTitle(
+    fun makeEntryChipGroupWithSubTitle(
         layoutInflater: LayoutInflater,
         item: BusinessType,
-        chipStyle: Int,
-        closeClickListener: (titleChipGroup: TitleChipGroup, chip: View, projectId: Int) -> Unit
+        closeClickListener: (titleChipGroup: TitleChipGroup, chip: View, itemId: Int) -> Unit
     ): ViewGroup {
         val titleChipGroup = TitleChipGroup(layoutInflater.context)
 
-        titleChipGroup.title = item.category?.name
+        titleChipGroup.titleVisible = false
+        titleChipGroup.subTitleVisible = true
+        titleChipGroup.subTitle = item.category?.name
+        titleChipGroup.blackSubTitle = true
 
         item.projects?.map { project ->
-            val chip = layoutInflater.inflate(chipStyle, null) as Chip
+            val chip = layoutInflater.inflate(R.layout.single_chip_entry_layout, null) as Chip
             chip.setOnCloseIconClickListener {
                 closeClickListener(titleChipGroup, it, project.id)
             }
             chip.text = project.name
+            chip.setTextAppearanceResource(R.style.small_text_style_medium)
 
             titleChipGroup.addChip(chip)
         }

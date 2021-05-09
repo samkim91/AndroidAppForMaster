@@ -63,7 +63,7 @@
                     app:layout_constraintTop_toBottomOf="@id/project_title"
                     app:title='@{"가격"}' />
 
-                <kr.co.soogong.master.ui.widget.TitleEditCountBoxView
+                <kr.co.soogong.master.ui.widget.TitleEditTextCounterView
                     android:id="@+id/job_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

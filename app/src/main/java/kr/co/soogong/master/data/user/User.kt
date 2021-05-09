@@ -64,23 +64,3 @@ data class User(
         }
     }
 }
-
-//@Parcelize
-//data class BusinessType(
-//    val category: String?,
-//    val projects: List<String>,
-//) : Parcelable {
-//    companion object {
-//        fun fromJson(jsonObject: JsonObject): BusinessType {
-//            val item = jsonObject.get("business_type").asJsonObject
-//            val projectsArray = item.get("project").asJsonArray
-//
-//            return BusinessType(
-//                category = item.get("category").asString,
-//                projects = List<String>(projectsArray.size()) {
-//                    projectsArray.get(it).asString
-//                }
-//            )
-//        }
-//    }
-//}

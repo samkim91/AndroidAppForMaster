@@ -15,7 +15,6 @@ import kr.co.soogong.master.ui.auth.signup.SignUpActivity
 import kr.co.soogong.master.ui.auth.signup.SignUpViewModel
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.utils.BusinessTypeChipGroupHelper
-import kr.co.soogong.master.ui.utils.BusinessTypeChipGroupHelper.ENTRY_CHIP_ROUND
 import kr.co.soogong.master.uiinterface.category.CategoryActivityHelper
 import kr.co.soogong.master.uiinterface.category.CategoryActivityHelper.BUNDLE_BUSINESS_TYPE
 import timber.log.Timber
@@ -89,10 +88,9 @@ class Step5Fragment : BaseFragment<FragmentSignUpStep5Binding>(
         // BusinessType List만큼 View를 그려준다.
         businessTypes?.map { businessType ->
             binding.businessTypeContainer.run {
-                addView(BusinessTypeChipGroupHelper.makeChipGroupWithTitle(
+                addView(BusinessTypeChipGroupHelper.makeEntryChipGroupWithSubTitle(
                     layoutInflater = layoutInflater,
                     item = businessType,
-                    chipStyle = ENTRY_CHIP_ROUND,
                     closeClickListener = { titleChipGroup, chip, projectId ->
                         val chipGroup = titleChipGroup.binding.chipGroup
                         chipGroup.removeView(chip)

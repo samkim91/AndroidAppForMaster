@@ -1,5 +1,6 @@
 package kr.co.soogong.master.ui.profile
 
+import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -18,6 +19,8 @@ class ProfileViewModel @Inject constructor(
     private val _userInfo = MutableLiveData<User?>(null)
     val userInfo: LiveData<User?>
         get() = _userInfo
+
+    val profileImage = MutableLiveData(Uri.EMPTY)
 
     fun requestUserProfile() {
         Timber.tag(TAG).d("requestUserProfile: ")

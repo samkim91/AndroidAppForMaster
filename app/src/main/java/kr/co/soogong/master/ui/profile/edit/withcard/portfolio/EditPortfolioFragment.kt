@@ -8,8 +8,8 @@ import gun0912.tedimagepicker.builder.TedImagePicker
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentEditPortfolioBinding
 import kr.co.soogong.master.ui.base.BaseFragment
-import kr.co.soogong.master.ui.utils.EditProfileContainerFragmentHelper.ADD_PORTFOLIO
-import kr.co.soogong.master.ui.utils.EditProfileContainerFragmentHelper.EDIT_PORTFOLIO
+import kr.co.soogong.master.uiinterface.profile.EditProfileContainerFragmentHelper.ADD_PORTFOLIO
+import kr.co.soogong.master.uiinterface.profile.EditProfileContainerFragmentHelper.EDIT_PORTFOLIO
 import kr.co.soogong.master.ui.utils.PermissionHelper
 import kr.co.soogong.master.util.extension.toast
 import timber.log.Timber
