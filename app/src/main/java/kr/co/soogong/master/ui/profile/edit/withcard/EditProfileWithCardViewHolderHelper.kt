@@ -4,9 +4,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import kr.co.soogong.master.databinding.ViewHolderPortfolioBinding
 import kr.co.soogong.master.databinding.ViewHolderPriceByProjectsBinding
-import kr.co.soogong.master.ui.profile.edit.portfolio.EditProfileWithCardViewHolder
-import kr.co.soogong.master.ui.profile.edit.portfolio.PortfolioViewHolder
-import kr.co.soogong.master.ui.profile.edit.portfolio.PriceByProjectsViewHolder
+import kr.co.soogong.master.ui.profile.edit.withcard.portfolio.EditProfileWithCardViewHolder
+import kr.co.soogong.master.ui.profile.edit.withcard.portfolio.PortfolioViewHolder
+import kr.co.soogong.master.ui.profile.edit.withcard.portfolio.PriceByProjectsViewHolder
 
 object EditProfileWithCardViewHolderHelper {
     const val PORTFOLIO_VIEW_TYPE = 0

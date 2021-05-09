@@ -21,7 +21,9 @@ class ProfileService @Inject constructor(
         query["master_id"] = masterId
         query["portfolio_id"] = portfolioId.toString()
 
-        return Portfolio.fromJson(profileInterface.getPortfolio(query))
+        return Portfolio.NULL_PORTFOLIO
+        // Todo.. 이후 작업해야함
+        // return Portfolio.fromJson(profileInterface.getPortfolio(query))
     }
 
     fun savePortfolio(portfolio: Portfolio): Single<Response> {
@@ -32,7 +34,9 @@ class ProfileService @Inject constructor(
         query["image_after_job"] = portfolio.imageAfterJob
         query["job_description"] = portfolio.description
 
-        return profileInterface.savePortfolio(query)
+        return Single.just(Response.NULL_RESPONSE)
+        // Todo.. server 이후로 작업해야함
+        // return profileInterface.savePortfolio(query)
     }
 
     fun getPriceByProject(masterId: String, priceByProjectId: Int): PriceByProject {
@@ -40,7 +44,9 @@ class ProfileService @Inject constructor(
         query["master_id"] = masterId
         query["price_by_project_id"] = priceByProjectId.toString()
 
-        return PriceByProject.fromJson(profileInterface.getPriceByProject(query))
+        return PriceByProject.NULL_PRICE_BY_PROJECT
+        // Todo.. server 이후로 작업해야함
+        // return PriceByProject.fromJson(profileInterface.getPriceByProject(query))
     }
 
     fun savePriceByProject(priceByProject: PriceByProject): Single<Response> {
@@ -50,7 +56,9 @@ class ProfileService @Inject constructor(
         query["price"] = priceByProject.projectPrice
         query["job_description"] = priceByProject.description
 
-        return profileInterface.savePriceByProject(query)
+        return Single.just(Response.NULL_RESPONSE)
+        // Todo.. server 이후로 작업해야함
+        // return profileInterface.savePriceByProject(query)
     }
 
 
@@ -79,7 +87,7 @@ class ProfileService @Inject constructor(
 
         query["master_id"] = masterId
 
-        return listOf(Portfolio.NULL_PORTFOLIO)
+        return listOf(Portfolio.NULL_PORTFOLIO, Portfolio.NULL_PORTFOLIO, Portfolio.NULL_PORTFOLIO)
         // Todo.. server 이후로 작업해야함
 //        return profileInterface.getPortfolioList(query)
     }
@@ -89,7 +97,7 @@ class ProfileService @Inject constructor(
 
         query["master_id"] = masterId
 
-        return listOf(PriceByProject.NULL_PRICE_BY_PROJECT)
+        return listOf(PriceByProject.NULL_PRICE_BY_PROJECT, PriceByProject.NULL_PRICE_BY_PROJECT, PriceByProject.NULL_PRICE_BY_PROJECT)
         // Todo.. server 이후로 작업해야함
 //        return profileInterface.getPortfolioList(query)
     }

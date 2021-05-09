@@ -1,4 +1,4 @@
-package kr.co.soogong.master.ui.profile.edit.pricebyproject
+package kr.co.soogong.master.ui.profile.edit.withcard.pricebyproject
 
 import android.os.Bundle
 import android.view.View

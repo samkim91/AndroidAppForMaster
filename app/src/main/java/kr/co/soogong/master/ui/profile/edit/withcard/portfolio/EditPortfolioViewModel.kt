@@ -1,4 +1,4 @@
-package kr.co.soogong.master.ui.profile.edit.portfolio
+package kr.co.soogong.master.ui.profile.edit.withcard.portfolio
 
 import android.net.Uri
 import android.view.View

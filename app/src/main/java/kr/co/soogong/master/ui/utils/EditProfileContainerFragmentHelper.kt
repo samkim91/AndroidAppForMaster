@@ -1,9 +1,8 @@
 package kr.co.soogong.master.ui.utils
 
 import androidx.fragment.app.Fragment
-import kr.co.soogong.master.ui.profile.edit.portfolio.EditPortfolioFragment
-import kr.co.soogong.master.ui.profile.edit.pricebyproject.EditPriceByProjectFragment
-import timber.log.Timber
+import kr.co.soogong.master.ui.profile.edit.withcard.portfolio.EditPortfolioFragment
+import kr.co.soogong.master.ui.profile.edit.withcard.pricebyproject.EditPriceByProjectFragment
 
 object EditProfileContainerFragmentHelper {
     const val TAG = "EditProfileContainerFragmentHelper"

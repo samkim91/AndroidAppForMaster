@@ -25,6 +25,6 @@ data class PriceByProject(
             )
         }
 
-        val NULL_PRICE_BY_PROJECT = PriceByProject("", 0, "", "", "")
+        val NULL_PRICE_BY_PROJECT = PriceByProject("test", 1, "test data", "this is a test data", "1")
     }
 }
