@@ -47,7 +47,6 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/gap_72"
             android:background="@drawable/shape_fill_green_transparent_background_top_radius"
-            bind:visible="@{vm.isApprovedMaster}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
