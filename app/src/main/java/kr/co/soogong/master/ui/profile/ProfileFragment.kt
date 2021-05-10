@@ -12,6 +12,7 @@ import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.utils.PermissionHelper
 import kr.co.soogong.master.uiinterface.profile.EditProfileContainerActivityHelper
 import kr.co.soogong.master.uiinterface.profile.EditProfileContainerFragmentHelper.EDIT_FLEXIBLE_COST
+import kr.co.soogong.master.uiinterface.profile.EditProfileContainerFragmentHelper.EDIT_OTHER_FLEXIBLE_OPTIONS
 import kr.co.soogong.master.uiinterface.profile.EditProfileWithCardActivityHelper
 import kr.co.soogong.master.uiinterface.profile.EditProfileWithCardActivityHelper.PORTFOLIO
 import kr.co.soogong.master.uiinterface.profile.EditProfileWithCardActivityHelper.PRICE_BY_PROJECTS
@@ -83,6 +84,17 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
                         EditProfileContainerActivityHelper.getIntent(
                             requireContext(),
                             EDIT_FLEXIBLE_COST
+                        )
+                    )
+                )
+            }
+
+            otherFlexibleOptions.addDefaultButtonClickListener {
+                startActivity(
+                    Intent(
+                        EditProfileContainerActivityHelper.getIntent(
+                            requireContext(),
+                            EDIT_OTHER_FLEXIBLE_OPTIONS
                         )
                     )
                 )
