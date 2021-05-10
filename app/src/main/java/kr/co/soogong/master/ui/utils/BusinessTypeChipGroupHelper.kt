@@ -3,10 +3,12 @@ package kr.co.soogong.master.ui.utils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.marginTop
 import com.google.android.material.chip.Chip
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.category.BusinessType
 import kr.co.soogong.master.ui.widget.TitleChipGroup
+import kr.co.soogong.master.util.extension.dp
 
 object BusinessTypeChipGroupHelper {
 

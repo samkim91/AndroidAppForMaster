@@ -2,6 +2,7 @@ package kr.co.soogong.master.network
 
 import io.reactivex.Single
 import kr.co.soogong.master.data.profile.FlexibleCost
+import kr.co.soogong.master.data.profile.OtherFlexibleOptions
 import kr.co.soogong.master.data.profile.Portfolio
 import kr.co.soogong.master.data.profile.PriceByProject
 import kr.co.soogong.master.data.user.User
@@ -124,4 +125,22 @@ class ProfileService @Inject constructor(
         // return profileInterface.savePriceByProject(query)
     }
 
+    suspend fun getOtherFlexibleOptions(masterId: String): OtherFlexibleOptions {
+        val query = HashMap<String, String>()
+        query["master_id"] = masterId
+
+        return OtherFlexibleOptions.NULL_OTHER_FLEXIBLE_OPTIONS
+        // Todo.. server 이후로 작업해야함
+//         return profileInterface.getOtherFlexibleOptions(query)
+    }
+
+    fun saveOtherFlexibleOptions(masterId: String, otherFlexibleOptions: OtherFlexibleOptions): Single<Response> {
+        val query = HashMap<String, Any>()
+        query["master_id"] = masterId
+        query["other_flexible_options"] = otherFlexibleOptions.options
+
+        return Single.just(Response.NULL_RESPONSE)
+        // Todo.. server 이후로 작업해야함
+        // return profileInterface.savePriceByProject(query)
+    }
 }

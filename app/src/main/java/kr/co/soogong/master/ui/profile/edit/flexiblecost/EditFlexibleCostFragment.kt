@@ -38,7 +38,6 @@ class EditFlexibleCostFragment : BaseFragment<FragmentEditFlexibleCostBinding>(
             defaultButton.setOnClickListener {
                 viewModel.saveFlexibleCosts()
             }
-            viewModel.getFlexibleCosts()
         }
     }
 
@@ -53,6 +52,7 @@ class EditFlexibleCostFragment : BaseFragment<FragmentEditFlexibleCostBinding>(
             FlexibleCostChipGroupHelper(layoutInflater, craneUsageChipGroup, CRANE_USAGE)
             FlexibleCostChipGroupHelper(layoutInflater, packageCostChipGroup, PACKAGE_COST)
         }
+        viewModel.getFlexibleCosts()
     }
 
     companion object {

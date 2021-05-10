@@ -6,6 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="vm"
             type="kr.co.soogong.master.ui.profile.edit.flexiblecost.EditFlexibleCostViewModel" />
@@ -27,71 +28,79 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingStart="@dimen/gap_20"
-                android:paddingTop="@dimen/gap_8"
+                android:paddingTop="@dimen/gap_32"
                 android:paddingEnd="@dimen/gap_20"
                 android:paddingBottom="@dimen/gap_52">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/title"
+                    style="@style/medium_text_style.medium"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/edit_flexible_cost_screen_title"
+                    android:textColor="@color/text_basic_color"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
 
                 <kr.co.soogong.master.ui.widget.TitleChipGroup
                     android:id="@+id/travel_cost_chip_group"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:blackSubTitle="@{true}"
+                    android:layout_marginTop="@dimen/gap_12"
+                    app:checkedChip="@={vm.travelCost}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:title='@{"현장 가격 변동 사항을 선택해주세요."}'
+                    app:layout_constraintTop_toBottomOf="@id/title"
                     app:subTitle='@{"출장비"}'
                     app:subTitleVisible="@{true}"
-                    app:blackSubTitle="@{true}"
-                    app:checkedChip="@={vm.travelCost}"
-                    />
+                    app:titleVisible="@{false}" />
 
                 <kr.co.soogong.master.ui.widget.TitleChipGroup
                     android:id="@+id/crane_usage_chip_group"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/gap_20"
+                    app:blackSubTitle="@{true}"
+                    app:checkedChip="@={vm.craneUsage}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/travel_cost_chip_group"
-                    app:titleVisible="@{false}"
                     app:subTitle='@{"크레인 사용"}'
                     app:subTitleVisible="@{true}"
-                    app:blackSubTitle="@{true}"
-                    app:checkedChip="@={vm.craneUsage}"
-                    />
+                    app:titleVisible="@{false}" />
 
                 <kr.co.soogong.master.ui.widget.TitleChipGroup
                     android:id="@+id/package_cost_chip_group"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/gap_20"
+                    app:blackSubTitle="@{true}"
+                    app:checkedChip="@={vm.packageCost}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/crane_usage_chip_group"
-                    app:titleVisible="@{false}"
                     app:subTitle='@{"짐 정리 비용"}'
                     app:subTitleVisible="@{true}"
-                    app:blackSubTitle="@{true}"
-                    app:checkedChip="@={vm.packageCost}"
-                    />
+                    app:titleVisible="@{false}" />
 
                 <kr.co.soogong.master.ui.widget.TitleEditTextCounterView
                     android:id="@+id/other_cost_information"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/gap_20"
+                    app:blackSubTitle="@{true}"
+                    app:content="@{vm.otherCostInformation}"
+                    app:hintText='@{"현장에서 견적가격이 변동될 수 있는 사항을 입력해주세요."}'
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/package_cost_chip_group"
-                    app:titleVisible="@{false}"
+                    app:limitedCount="@{500}"
                     app:subTitle='@{"기타 변동 가능 사항"}'
                     app:subTitleVisible="@{true}"
-                    app:hintText='@{"현장에서 견적가격이 변동될 수 있는 사항을 입력해주세요."}'
-                    app:limitedCount="@{500}"
-                    app:alertText='@{"필수 정보입니다. 10자 이상으로 입력해주세요."}'
-                    app:blackSubTitle="@{true}"
-                    app:content="@{vm.otherCostInformation}"
-                    />
+                    app:titleVisible="@{false}" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
