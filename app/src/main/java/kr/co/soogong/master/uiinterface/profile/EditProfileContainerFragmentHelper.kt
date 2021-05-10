@@ -30,7 +30,7 @@ object EditProfileContainerFragmentHelper {
             EDIT_PORTFOLIO -> EditPortfolioFragment.newInstance(EDIT_PORTFOLIO, itemId)
             ADD_PRICE_BY_PROJECTS -> EditPriceByProjectFragment.newInstance(ADD_PRICE_BY_PROJECTS, null)
             EDIT_PRICE_BY_PROJECTS -> EditPriceByProjectFragment.newInstance(EDIT_PRICE_BY_PROJECTS, itemId)
-            EDIT_FLEXIBLE_COST -> EditFlexibleCostFragment.newInstance(EDIT_FLEXIBLE_COST)
+            EDIT_FLEXIBLE_COST -> EditFlexibleCostFragment.newInstance()
             else -> Fragment()
         }
 }

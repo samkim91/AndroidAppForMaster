@@ -18,7 +18,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class EditPortfolioViewModel @Inject constructor(
-    private val getMasterKeyCodeUseCase: GetMasterKeyCodeUseCase,
     private val savePortfolioUseCase: SavePortfolioUseCase,
     private val getPortfolioUseCase: GetPortfolioUseCase
 ) : BaseViewModel() {
@@ -41,7 +40,6 @@ class EditPortfolioViewModel @Inject constructor(
         Timber.tag(TAG).d("getPortfolio: $portfolioId")
         savePortfolioUseCase(
             portfolio = Portfolio(
-                masterId = getMasterKeyCodeUseCase()!!,
                 itemId = portfolioId,
                 title = title.value!!,
                 imageBeforeJob = imageBeforeJob.value.toString(),

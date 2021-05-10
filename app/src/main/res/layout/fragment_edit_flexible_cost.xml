@@ -42,6 +42,7 @@
                     app:subTitle='@{"출장비"}'
                     app:subTitleVisible="@{true}"
                     app:blackSubTitle="@{true}"
+                    app:checkedChip="@={vm.travelCost}"
                     />
 
                 <kr.co.soogong.master.ui.widget.TitleChipGroup
@@ -56,6 +57,7 @@
                     app:subTitle='@{"크레인 사용"}'
                     app:subTitleVisible="@{true}"
                     app:blackSubTitle="@{true}"
+                    app:checkedChip="@={vm.craneUsage}"
                     />
 
                 <kr.co.soogong.master.ui.widget.TitleChipGroup
@@ -70,6 +72,7 @@
                     app:subTitle='@{"짐 정리 비용"}'
                     app:subTitleVisible="@{true}"
                     app:blackSubTitle="@{true}"
+                    app:checkedChip="@={vm.packageCost}"
                     />
 
                 <kr.co.soogong.master.ui.widget.TitleEditTextCounterView
@@ -87,6 +90,7 @@
                     app:limitedCount="@{500}"
                     app:alertText='@{"필수 정보입니다. 10자 이상으로 입력해주세요."}'
                     app:blackSubTitle="@{true}"
+                    app:content="@{vm.otherCostInformation}"
                     />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
