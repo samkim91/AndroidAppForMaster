@@ -1,6 +1,7 @@
 package kr.co.soogong.master.network
 
 import io.reactivex.Single
+import kr.co.soogong.master.data.profile.FlexibleCost
 import kr.co.soogong.master.data.profile.Portfolio
 import kr.co.soogong.master.data.profile.PriceByProject
 import kr.co.soogong.master.data.user.User
@@ -26,9 +27,9 @@ class ProfileService @Inject constructor(
         // return Portfolio.fromJson(profileInterface.getPortfolio(query))
     }
 
-    fun savePortfolio(portfolio: Portfolio): Single<Response> {
+    fun savePortfolio(masterId: String, portfolio: Portfolio): Single<Response> {
         val query = HashMap<String, String>()
-        query["master_id"] = portfolio.masterId
+        query["master_id"] = masterId
         query["job_title"] = portfolio.title
         query["image_before_job"] = portfolio.imageBeforeJob
         query["image_after_job"] = portfolio.imageAfterJob
@@ -49,9 +50,9 @@ class ProfileService @Inject constructor(
         // return PriceByProject.fromJson(profileInterface.getPriceByProject(query))
     }
 
-    fun savePriceByProject(priceByProject: PriceByProject): Single<Response> {
+    fun savePriceByProject(masterId: String, priceByProject: PriceByProject): Single<Response> {
         val query = HashMap<String, String>()
-        query["master_id"] = priceByProject.masterId
+        query["master_id"] = masterId
         query["job_title"] = priceByProject.title
         query["price"] = priceByProject.projectPrice
         query["job_description"] = priceByProject.description
@@ -60,7 +61,6 @@ class ProfileService @Inject constructor(
         // Todo.. server 이후로 작업해야함
         // return profileInterface.savePriceByProject(query)
     }
-
 
     fun deletePortfolio(masterId: String, itemId: Int): Single<Response> {
         val query = HashMap<String, Any>()
@@ -100,6 +100,28 @@ class ProfileService @Inject constructor(
         return listOf(PriceByProject.NULL_PRICE_BY_PROJECT, PriceByProject.NULL_PRICE_BY_PROJECT, PriceByProject.NULL_PRICE_BY_PROJECT)
         // Todo.. server 이후로 작업해야함
 //        return profileInterface.getPortfolioList(query)
+    }
+
+    fun getFlexibleCost(masterId: String): FlexibleCost {
+        val query = HashMap<String, String>()
+        query["master_id"] = masterId
+
+        return FlexibleCost.NULL_FLEXIBLE_COST
+        // Todo.. server 이후로 작업해야함
+        // return PriceByProject.fromJson(profileInterface.getPriceByProject(query))
+    }
+
+    fun saveFlexibleCost(masterId: String, flexibleCost: FlexibleCost): Single<Response> {
+        val query = HashMap<String, String>()
+        query["master_id"] = masterId
+        query["travel_cost"] = flexibleCost.travelCost
+        query["crane_usage"] = flexibleCost.craneUsage
+        query["package_cost"] = flexibleCost.packageCost
+        query["other_cost_information"] = flexibleCost.otherCostInformation
+
+        return Single.just(Response.NULL_RESPONSE)
+        // Todo.. server 이후로 작업해야함
+        // return profileInterface.savePriceByProject(query)
     }
 
 }

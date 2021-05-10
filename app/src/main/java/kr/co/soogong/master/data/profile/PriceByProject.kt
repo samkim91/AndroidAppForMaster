@@ -6,7 +6,6 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class PriceByProject(
-    override var masterId: String,
     override var itemId: Int?,
     override var title: String,
     override var description: String,
@@ -17,7 +16,6 @@ data class PriceByProject(
             val item = jsonObject.get("data").asJsonObject
             val attributes = item.get("attributes").asJsonObject
             return PriceByProject(
-                masterId = attributes.get("master_id").asString,
                 itemId = attributes.get("project_id").asInt,
                 title = attributes.get("project_title").asString,
                 projectPrice = attributes.get("project_price").asString,
@@ -25,6 +23,6 @@ data class PriceByProject(
             )
         }
 
-        val NULL_PRICE_BY_PROJECT = PriceByProject("test", 1, "test data", "this is a test data", "1")
+        val NULL_PRICE_BY_PROJECT = PriceByProject(1, "test data", "this is a test data", "1")
     }
 }

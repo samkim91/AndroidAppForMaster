@@ -6,7 +6,6 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Portfolio(
-    override var masterId: String,
     override var itemId: Int?,
     override var title: String,
     override var description: String,
@@ -18,7 +17,6 @@ data class Portfolio(
             val item = jsonObject.get("data").asJsonObject
             val attributes = item.get("attributes").asJsonObject
             return Portfolio(
-                masterId = attributes.get("master_id").asString,
                 itemId = attributes.get("portfolio_id").asInt,
                 title = attributes.get("job_title").asString,
                 imageBeforeJob = attributes.get("image_before_job").asString,
@@ -27,6 +25,6 @@ data class Portfolio(
             )
         }
 
-        val NULL_PORTFOLIO = Portfolio("test", 1, "test data", "this is a test data", "", "")
+        val NULL_PORTFOLIO = Portfolio(1, "test data", "this is a test data", "", "")
     }
 }

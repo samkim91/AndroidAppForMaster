@@ -5,31 +5,45 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
+import kr.co.soogong.master.data.profile.FlexibleCost
 import kr.co.soogong.master.data.profile.PriceByProject
 import kr.co.soogong.master.domain.usecase.*
+import kr.co.soogong.master.domain.usecase.profile.GetFlexibleCostUseCase
 import kr.co.soogong.master.domain.usecase.profile.GetPriceByProjectUseCase
+import kr.co.soogong.master.domain.usecase.profile.SaveFlexibleCostUseCase
 import kr.co.soogong.master.domain.usecase.profile.SavePriceByProjectUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class EditFlexibleCostViewModel @Inject constructor(
-    private val getMasterKeyCodeUseCase: GetMasterKeyCodeUseCase,
-    private val savePriceByProjectUseCase: SavePriceByProjectUseCase,
-    private val getPriceByProjectUseCase: GetPriceByProjectUseCase
+    private val saveFlexibleCostUseCase: SaveFlexibleCostUseCase,
+    private val getFlexibleCostUseCase: GetFlexibleCostUseCase
 ) : BaseViewModel() {
-    val travelCost = MutableLiveData(0)
-    val craneUsage = MutableLiveData(0)
-    val packageCost = MutableLiveData(0)
+    val travelCost = MutableLiveData("")
+    val craneUsage = MutableLiveData("")
+    val packageCost = MutableLiveData("")
     val otherCostInformation = MutableLiveData("")
 
     fun getFlexibleCosts() {
-
+        Timber.tag(TAG).d("getFlexibleCosts: ")
+        val flexibleCost = getFlexibleCostUseCase()
+        travelCost.postValue(flexibleCost.travelCost)
+        craneUsage.postValue(flexibleCost.craneUsage)
+        packageCost.postValue(flexibleCost.packageCost)
+        otherCostInformation.postValue(flexibleCost.otherCostInformation)
     }
 
     fun saveFlexibleCosts() {
-        savePriceByProjectUseCase(
-            PriceByProject.NULL_PRICE_BY_PROJECT
+        Timber.tag(TAG).d("saveFlexibleCosts: ")
+        saveFlexibleCostUseCase(
+            FlexibleCost(
+                travelCost = travelCost.value!!,
+                craneUsage = craneUsage.value!!,
+                packageCost = packageCost.value!!,
+                otherCostInformation = otherCostInformation.value!!
+            )
         ).subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
@@ -39,7 +53,7 @@ class EditFlexibleCostViewModel @Inject constructor(
     }
 
     companion object {
-        private const val TAG = "EditPortfolioViewModel"
+        private const val TAG = "EditFlexibleCostViewModel"
 
     }
 }

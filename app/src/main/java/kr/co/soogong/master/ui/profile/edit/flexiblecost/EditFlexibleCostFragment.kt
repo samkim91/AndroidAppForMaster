@@ -11,16 +11,13 @@ import kr.co.soogong.master.ui.profile.edit.flexiblecost.FlexibleCostChipGroupHe
 import kr.co.soogong.master.ui.profile.edit.flexiblecost.FlexibleCostChipGroupHelper.PACKAGE_COST
 import kr.co.soogong.master.ui.profile.edit.flexiblecost.FlexibleCostChipGroupHelper.TRAVEL_COST
 import kr.co.soogong.master.uiinterface.profile.EditProfileContainerFragmentHelper.EDIT_FLEXIBLE_COST
+import kr.co.soogong.master.util.extension.onClickListener
 import timber.log.Timber
 
 @AndroidEntryPoint
 class EditFlexibleCostFragment : BaseFragment<FragmentEditFlexibleCostBinding>(
     R.layout.fragment_edit_flexible_cost
 ) {
-    private val pageName: String by lazy {
-        arguments?.getString(PAGE_NAME) ?: EDIT_FLEXIBLE_COST
-    }
-
     private val viewModel: EditFlexibleCostViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -38,7 +35,10 @@ class EditFlexibleCostFragment : BaseFragment<FragmentEditFlexibleCostBinding>(
             lifecycleOwner = viewLifecycleOwner
 
             initChips()
-
+            defaultButton.setOnClickListener {
+                viewModel.saveFlexibleCosts()
+            }
+            viewModel.getFlexibleCosts()
         }
     }
 
@@ -59,12 +59,6 @@ class EditFlexibleCostFragment : BaseFragment<FragmentEditFlexibleCostBinding>(
         private const val TAG = "EditFlexibleCostFragment"
         private const val PAGE_NAME = "PAGE_NAME"
 
-        fun newInstance(pageName: String): EditFlexibleCostFragment {
-            val fragment = EditFlexibleCostFragment()
-            val args = Bundle()
-            args.putString(PAGE_NAME, pageName)
-            fragment.arguments = args
-            return fragment
-        }
+        fun newInstance() = EditFlexibleCostFragment()
     }
 }

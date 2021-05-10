@@ -23,7 +23,7 @@ object TextCheckBoxReverseBinding {
         view: TextCheckBox,
         listener: InverseBindingListener?,
     ) {
-        view.checkBox.setOnCheckedChangeListener { buttonView, isChecked ->
+        view.checkBox.setOnCheckedChangeListener { _, _ ->
             listener?.onChange()
         }
     }

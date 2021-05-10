@@ -15,7 +15,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class EditPriceByProjectViewModel @Inject constructor(
-    private val getMasterKeyCodeUseCase: GetMasterKeyCodeUseCase,
     private val savePriceByProjectUseCase: SavePriceByProjectUseCase,
     private val getPriceByProjectUseCase: GetPriceByProjectUseCase
 ) : BaseViewModel() {
@@ -35,7 +34,6 @@ class EditPriceByProjectViewModel @Inject constructor(
         Timber.tag(TAG).d("getPriceByProject $priceByProjectId")
         savePriceByProjectUseCase(
             PriceByProject(
-                masterId = getMasterKeyCodeUseCase()!!,
                 itemId = priceByProjectId,
                 title = title.value!!,
                 projectPrice = price.value!!,

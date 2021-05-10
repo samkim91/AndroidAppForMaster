@@ -6,9 +6,9 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class FlexibleCost(
-    val travelCost: Int,    // 0: false, 1: true, 2: third option
-    val craneUsage: Int,
-    val packageCost: Int,
+    val travelCost: String,
+    val craneUsage: String,
+    val packageCost: String,
     val otherCostInformation: String,
 ) : Parcelable {
     companion object {
@@ -16,13 +16,13 @@ data class FlexibleCost(
             val item = jsonObject.get("data").asJsonObject
             val attributes = item.get("attributes").asJsonObject
             return FlexibleCost(
-                travelCost = attributes.get("travel_cost").asInt,
-                craneUsage = attributes.get("crane_usage").asInt,
-                packageCost = attributes.get("package_cost").asInt,
+                travelCost = attributes.get("travel_cost").asString,
+                craneUsage = attributes.get("crane_usage").asString,
+                packageCost = attributes.get("package_cost").asString,
                 otherCostInformation = attributes.get("other_cost_information").asString,
             )
         }
 
-        val NULL_FLEXIBLE_COST = FlexibleCost(0, 0, 0, "test")
+        val NULL_FLEXIBLE_COST = FlexibleCost("없어요", "엘리베이터 이용 불가시", "있어요", "test")
     }
 }
