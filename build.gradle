@@ -88,4 +88,6 @@ ext {
     tedImagePickerVersion = '1.1.10'
 
     naverMapVersion = '3.11.0'
+
+    readMoreTextViewVersion = '1.0.0'
 }

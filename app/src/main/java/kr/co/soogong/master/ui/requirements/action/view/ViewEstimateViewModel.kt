@@ -31,6 +31,7 @@ class ViewEstimateViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle
 ) : BaseViewModel() {
 
+    // Note : activity에서 viewModel로 데이터 넘기는 법. savedStateHandle에서 가져온다.
     private val estimationId =
         savedStateHandle.get<Bundle>(EXTRA_KEY_BUNDLE)?.getString(BUNDLE_KEY_ESTIMATION_KEY)!!
 

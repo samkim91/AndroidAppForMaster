@@ -16,6 +16,7 @@ import kr.co.soogong.master.uiinterface.profile.EditProfileContainerFragmentHelp
 import kr.co.soogong.master.uiinterface.profile.EditProfileWithCardActivityHelper
 import kr.co.soogong.master.uiinterface.profile.EditProfileWithCardActivityHelper.PORTFOLIO
 import kr.co.soogong.master.uiinterface.profile.EditProfileWithCardActivityHelper.PRICE_BY_PROJECTS
+import kr.co.soogong.master.uiinterface.profile.MyReviewsActivityHelper
 import kr.co.soogong.master.util.extension.toast
 import timber.log.Timber
 
@@ -39,6 +40,16 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
         bind {
             vm = viewModel
             lifecycleOwner = viewLifecycleOwner
+
+            reviewBox.setOnClickListener {
+                startActivity(
+                    Intent(
+                        MyReviewsActivityHelper.getIntent(
+                            requireContext()
+                        )
+                    )
+                )
+            }
 
             portfolio.addDefaultButtonClickListener {
                 startActivity(

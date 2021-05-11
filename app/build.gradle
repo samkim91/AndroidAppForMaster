@@ -191,4 +191,6 @@ dependencies {
     // Naver Map
     implementation "com.naver.maps:map-sdk:$naverMapVersion"
 
+    // Read More Textview
+    implementation "kr.co.prnd:readmore-textview:$readMoreTextViewVersion"
 }

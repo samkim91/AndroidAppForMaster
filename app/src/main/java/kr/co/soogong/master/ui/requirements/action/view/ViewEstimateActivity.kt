@@ -11,6 +11,7 @@ import kr.co.soogong.master.domain.requirements.EstimationStatus
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.ui.dialog.popup.CustomDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData.Companion.cancelDialogData
+import kr.co.soogong.master.ui.image.RectangleImageAdapter
 import kr.co.soogong.master.ui.requirements.action.view.ViewEstimateViewModel.Companion.ASK_FOR_REVIEW_FAILED
 import kr.co.soogong.master.ui.requirements.action.view.ViewEstimateViewModel.Companion.ASK_FOR_REVIEW_SUCCEEDED
 import kr.co.soogong.master.ui.requirements.action.view.ViewEstimateViewModel.Companion.CALL_TO_CUSTOMER_FAILED
@@ -59,12 +60,13 @@ class ViewEstimateActivity : BaseActivity<ActivityViewEstimateBinding>(
                 }
             }
 
-            photoList.adapter = ViewEstimateImageAdapter(
+            photoList.adapter = RectangleImageAdapter(
                 cardClickListener = { position ->
                     startActivity(
                         ImageViewActivityHelper.getIntent(
                             this@ViewEstimateActivity,
                             estimationId,
+                            viewModel.estimation.value?.images,
                             position
                         )
                     )
