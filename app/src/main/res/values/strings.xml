@@ -211,7 +211,6 @@
 - 시공 설명 : 600*600 타일 기준 9장이 1평 입니다.</string>
 
 
-
     <!-- Request Detail -->
     <string name="request_date">접수일시</string>
     <string name="request_user_name">고객명</string>
@@ -246,6 +245,10 @@
     <!-- view reivew box -->
     <string name="recommend_rate_label">추천도</string>
     <string name="review_count_label">리뷰 수</string>
+
+    <!-- My reivews -->
+    <string name="my_reviews_action_bar_label">나의 리뷰 보기</string>
+    <string name="empty_reviews_text">리아직 남겨진 리뷰가 없습니다.</string>
 
 
     <!-- widget text -->

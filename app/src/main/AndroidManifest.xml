@@ -20,7 +20,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.profile.edit.EditProfileContainerActivity"></activity>
+        <activity android:name=".ui.profile.review.MyReviewsActivity"></activity>
+        <activity android:name=".ui.profile.edit.EditProfileContainerActivity" />
         <activity android:name=".ui.profile.edit.withcard.EditProfileWithCardActivity" />
         <activity
             android:name=".ui.splash.SplashActivity"
@@ -37,8 +38,8 @@
             android:launchMode="singleTask" />
         <activity
             android:name=".ui.auth.signup.SignUpActivity"
-            android:windowSoftInputMode="adjustResize"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".ui.auth.signup.AddressActivity"
             android:launchMode="singleTask" />

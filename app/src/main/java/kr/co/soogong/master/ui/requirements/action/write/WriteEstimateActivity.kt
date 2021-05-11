@@ -12,7 +12,7 @@ import kr.co.soogong.master.databinding.ActivityWriteEstimateBinding
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.ui.dialog.popup.CustomDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData.Companion.cancelSendingTransmissionDialogData
-import kr.co.soogong.master.ui.requirements.action.view.ViewEstimateImageAdapter
+import kr.co.soogong.master.ui.image.RectangleImageAdapter
 import kr.co.soogong.master.ui.requirements.action.write.WriteEstimateViewModel.Companion.SEND_MESSAGE_FAILED
 import kr.co.soogong.master.ui.requirements.action.write.WriteEstimateViewModel.Companion.SEND_MESSAGE_SUCCEEDED
 import kr.co.soogong.master.uiinterface.image.ImageViewActivityHelper
@@ -105,12 +105,13 @@ class WriteEstimateActivity : BaseActivity<ActivityWriteEstimateBinding>(
                 }
             }
 
-            photoList.adapter = ViewEstimateImageAdapter(
+            photoList.adapter = RectangleImageAdapter(
                 cardClickListener = { position ->
                     startActivity(
                         ImageViewActivityHelper.getIntent(
                             this@WriteEstimateActivity,
                             estimationId,
+                            viewModel.estimation.value?.images,
                             position
                         )
                     )

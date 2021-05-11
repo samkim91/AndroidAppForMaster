@@ -4,35 +4,27 @@ import android.os.Bundle
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
-import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
+import kr.co.soogong.master.data.estimation.ImagePath
 import kr.co.soogong.master.databinding.ActivityImageBinding
-import kr.co.soogong.master.util.extension.dp
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.uiinterface.image.ImageViewActivityHelper
+import kr.co.soogong.master.util.extension.dp
 import timber.log.Timber
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class ImageActivity : BaseActivity<ActivityImageBinding>(
     R.layout.activity_image
 ) {
-    private val estimationId: String by lazy {
-        ImageViewActivityHelper.getEstimationId(intent)
-    }
-
     private val startPosition: Int by lazy {
         ImageViewActivityHelper.getImagePosition(intent)
     }
 
-    @Inject
-    lateinit var factory: ImageViewModel.AssistedFactory
-
-    private val viewModel: ImageViewModel by viewModels {
-        ImageViewModel.provideFactory(factory, estimationId)
+    private val images: ArrayList<ImagePath> by lazy {
+        ImageViewActivityHelper.getImages(intent)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,7 +36,6 @@ class ImageActivity : BaseActivity<ActivityImageBinding>(
     override fun initLayout() {
         Timber.tag(TAG).d("initLayout: ")
         bind {
-            vm = viewModel
             lifecycleOwner = this@ImageActivity
 
             closeButton.setOnClickListener {
@@ -61,14 +52,13 @@ class ImageActivity : BaseActivity<ActivityImageBinding>(
                         setCurrentIndicator(position)
                     }
                 })
+                if(!images.isNullOrEmpty()) {
+                    setList(images)
+                    setupIndicators(images.size)
+                    binding.sliderViewPager.setCurrentItem(startPosition, false)
+                }
             }
         }
-
-        viewModel.estimation.observe(this, {
-            if (it?.images?.isNotEmpty() != true) return@observe
-            setupIndicators(it.images.size)
-            binding.sliderViewPager.setCurrentItem(startPosition, false)
-        })
     }
 
     private fun setupIndicators(count: Int) {

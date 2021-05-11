@@ -1,11 +1,11 @@
-package kr.co.soogong.master.ui.requirements.action.view
+package kr.co.soogong.master.ui.image
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kr.co.soogong.master.databinding.ViewHolderImageBinding
 
-class ViewEstimateImageViewHolder(
+class RectangleImageViewHolder(
     val binding: ViewHolderImageBinding
 ) : RecyclerView.ViewHolder(binding.root) {
     fun binding(url: String) {
@@ -17,13 +17,13 @@ class ViewEstimateImageViewHolder(
     }
 
     companion object {
-        fun create(parent: ViewGroup): ViewEstimateImageViewHolder {
+        fun create(parent: ViewGroup): RectangleImageViewHolder {
             val binding = ViewHolderImageBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
             )
-            return ViewEstimateImageViewHolder(binding)
+            return RectangleImageViewHolder(binding)
         }
     }
 }

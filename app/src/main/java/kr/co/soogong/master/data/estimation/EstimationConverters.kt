@@ -16,13 +16,13 @@ class EstimationConverters {
     }
 
     @TypeConverter
-    fun imagePathListToString(list: List<ImagePath>): String {
+    fun imagePathListToString(list: ArrayList<ImagePath>): String {
         return Gson().toJson(list)
     }
 
     @TypeConverter
-    fun stringToImagePathList(imagePathString: String): List<ImagePath> {
-        return Gson().fromJson(imagePathString, object : TypeToken<List<ImagePath>>() {}.type)
+    fun stringToImagePathList(imagePathString: String): ArrayList<ImagePath> {
+        return Gson().fromJson(imagePathString, object : TypeToken<ArrayList<ImagePath>>() {}.type)
     }
 
     @TypeConverter

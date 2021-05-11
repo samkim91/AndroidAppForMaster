@@ -51,7 +51,7 @@ data class Estimation(
     val userAssigned: Boolean,
 
     @SerializedName("images")
-    val images: List<ImagePath>,
+    val images: ArrayList<ImagePath>,
 
     @SerializedName("transmissions")
     val transmissions: Transmissions,
@@ -68,7 +68,7 @@ data class Estimation(
             }
 
             val imagesJson = jsonObject.get("images").asJsonArray
-            val images = mutableListOf<ImagePath>()
+            val images = arrayListOf<ImagePath>()
             for (item in imagesJson) {
                 images.add(ImagePath.fromJson(item.asJsonObject))
             }
