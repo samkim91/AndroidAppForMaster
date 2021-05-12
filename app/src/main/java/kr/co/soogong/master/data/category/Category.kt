@@ -15,5 +15,7 @@ data class Category(
             val name = jsonObject.get("attributes").asJsonObject.get("name").asString
             return Category(id, name)
         }
+
+        val NULL_CATEGORY = Category(1, "새시")
     }
 }

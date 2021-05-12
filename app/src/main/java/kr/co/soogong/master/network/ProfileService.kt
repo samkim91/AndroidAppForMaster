@@ -149,4 +149,13 @@ class ProfileService @Inject constructor(
         // Todo.. server 이후로 작업해야함
 //         return profileInterface.getOtherFlexibleOptions(query)
     }
+
+    suspend fun getRequiredInformation(masterId: String): RequiredInformation {
+        val query = HashMap<String, String>()
+        query["master_id"] = masterId
+
+        return RequiredInformation.NULL_REQUIRED_INFORMATION
+        // Todo.. server 이후로 작업해야함
+//         return profileInterface.getOtherFlexibleOptions(query)
+    }
 }

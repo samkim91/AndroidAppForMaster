@@ -20,7 +20,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.profile.review.MyReviewsActivity"></activity>
+        <activity android:name=".ui.profile.edit.requiredinformation.EditRequiredInformationActivity"></activity>
+        <activity android:name=".ui.profile.review.MyReviewsActivity" />
         <activity android:name=".ui.profile.edit.EditProfileContainerActivity" />
         <activity android:name=".ui.profile.edit.withcard.EditProfileWithCardActivity" />
         <activity

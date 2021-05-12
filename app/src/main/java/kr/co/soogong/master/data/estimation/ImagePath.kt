@@ -16,5 +16,7 @@ data class ImagePath(
                 path = jsonObject.get("image_path").asString
             )
         }
+
+        val NULL_IMAGE_PATH = ImagePath("")
     }
 }

@@ -79,8 +79,8 @@
     <string name="main_page_request_name">문의현황</string>
     <string name="main_page_profile_name">프로필</string>
     <string name="main_page_my_page_name">마이페이지</string>
-    <string name="bottom_view_for_filling_profile_info_text"><b>필수 정보를 모두 등록</b>하고, 승인이 완료\n되면 <b>문의 처리가 가능</b>합니다!</string>
     <string name="bottom_view_for_filling_profile_info_button_text">등록하기</string>
+    <string name="alert_text_to_fill_up_required_information"><b>필수 정보를 모두 등록</b>하고, 승인이 완료되면\n<b>문의 처리가 가능</b>합니다!</string>
 
     <!--  Requirements  -->
     <string name="requirements_received_name">견적</string>
@@ -183,7 +183,11 @@
     <string name="register">등록하기</string>
     <string name="writing_done">작성 완료</string>
     <string name="modifying_done">수정 완료</string>
+    <string name="request_confirmation">승인 요청하기</string>
+    <string name="waiting_for_confirmation">승인 대기중</string>
+    <string name="confirmed_text">승인완료</string>
     <string name="profile_card_container_label">추가 정보 등록·수정</string>
+    <string name="required_profile_card_container_label">필수 정보 등록·수정</string>
     <string name="image_before_job_label">시공 전 사진</string>
     <string name="image_after_job_label">시공 후 사진</string>
     <string name="edit_flexible_cost_screen_title">현장 가격 변동 사항을 선택해주세요.</string>
@@ -195,6 +199,9 @@
     <string name="introduction_card_title_for_price_by_projects">시공 종류별 가격을 입력해주세요.</string>
     <string name="introduction_card_subtitle_for_price_by_projects">다양한 시공을 입력해 주실수록 선택률이 상승합니다.</string>
     <string name="introduction_card_button_text_for_price_by_projects">시공 종류별 가격 추가하기</string>
+
+    <string name="title_edit_required_information_activity">필수 정보 등록·수정하기</string>
+
 
     <string name="example_for_edit_price_by_project">예시)\n\n
 - 시공 종류 : 싱크대 상판 연마작업\n
@@ -209,7 +216,6 @@
 - 시공 종류 : 칼라 줄눈 코팅 (평당)\n
 - 가격 : 40,000\n
 - 시공 설명 : 600*600 타일 기준 9장이 1평 입니다.</string>
-
 
     <!-- Request Detail -->
     <string name="request_date">접수일시</string>
