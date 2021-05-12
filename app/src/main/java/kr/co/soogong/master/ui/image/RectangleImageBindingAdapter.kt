@@ -8,3 +8,8 @@ import kr.co.soogong.master.data.estimation.ImagePath
 fun RecyclerView.setList(items: List<ImagePath>?) {
     (adapter as? RectangleImageAdapter)?.setList(items ?: emptyList())
 }
+
+@BindingAdapter("bind:photo_list")
+fun RecyclerView.setList(items: ArrayList<ImagePath>?) {
+    (adapter as? RectangleImageAdapter)?.setList(items ?: emptyList())
+}

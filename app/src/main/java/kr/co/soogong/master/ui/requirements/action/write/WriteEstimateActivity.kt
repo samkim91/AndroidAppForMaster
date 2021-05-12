@@ -110,7 +110,6 @@ class WriteEstimateActivity : BaseActivity<ActivityWriteEstimateBinding>(
                     startActivity(
                         ImageViewActivityHelper.getIntent(
                             this@WriteEstimateActivity,
-                            estimationId,
                             viewModel.estimation.value?.images,
                             position
                         )

@@ -1,10 +1,7 @@
 package kr.co.soogong.master.network
 
 import io.reactivex.Single
-import kr.co.soogong.master.data.profile.FlexibleCost
-import kr.co.soogong.master.data.profile.OtherFlexibleOptions
-import kr.co.soogong.master.data.profile.Portfolio
-import kr.co.soogong.master.data.profile.PriceByProject
+import kr.co.soogong.master.data.profile.*
 import kr.co.soogong.master.data.user.User
 import retrofit2.Retrofit
 import javax.inject.Inject
@@ -142,5 +139,14 @@ class ProfileService @Inject constructor(
         return Single.just(Response.NULL_RESPONSE)
         // Todo.. server 이후로 작업해야함
         // return profileInterface.savePriceByProject(query)
+    }
+
+    suspend fun getMyReviews(masterId: String): MyReview {
+        val query = HashMap<String, String>()
+        query["master_id"] = masterId
+
+        return MyReview.NULL_PRICE_BY_PROJECT
+        // Todo.. server 이후로 작업해야함
+//         return profileInterface.getOtherFlexibleOptions(query)
     }
 }

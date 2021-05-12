@@ -150,18 +150,17 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/estimation_card_master_rating_margin_top"
                             android:layout_marginEnd="@dimen/estimation_card_default_margin_start"
-                            android:text="@string/view_estimate_master_rating_title"
+                            android:text="@string/master_recommendation_label"
                             android:textColor="@color/text_basic_color"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/customer_review_title" />
 
-                        <RatingBar
+                        <androidx.appcompat.widget.AppCompatRatingBar
                             android:id="@+id/master_recommendation_rating_bar"
                             style="@style/Widget.AppCompat.RatingBar.Small"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/estimation_card_master_rating_bar_margin_start"
-                            android:layout_marginTop="@dimen/estimation_card_master_rating_bar_margin_top"
                             android:numStars="5"
                             android:progressTint="@color/color_22D47B"
                             android:rating="4"
@@ -175,7 +174,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/estimation_card_master_rating_margin_top_8"
                             android:layout_marginEnd="@dimen/estimation_card_default_margin_start"
-                            android:text="@string/view_estimate_master_rating_kind"
+                            android:text="@string/master_kindness_label"
                             android:textColor="@color/text_basic_color"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/master_recommendation_rating_text" />
@@ -197,7 +196,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/estimation_card_master_rating_margin_start_10"
-                            android:text="@string/view_estimate_master_rating_quality"
+                            android:text="@string/master_quality_label"
                             android:textColor="@color/text_basic_color"
                             app:layout_constraintStart_toEndOf="@id/master_rating_kindness_score"
                             app:layout_constraintTop_toTopOf="@id/master_rating_kindness_text" />
@@ -219,7 +218,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/estimation_card_master_rating_margin_start_10"
-                            android:text="@string/view_estimate_master_rating_affordability"
+                            android:text="@string/price_affordability_label"
                             android:textColor="@color/text_basic_color"
                             app:layout_constraintStart_toEndOf="@id/master_rating_quality_score"
                             app:layout_constraintTop_toTopOf="@id/master_rating_kindness_text" />
@@ -241,7 +240,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/estimation_card_master_rating_margin_start_10"
-                            android:text="@string/view_estimate_master_rating_punctuality"
+                            android:text="@string/punctuality_label"
                             android:textColor="@color/text_basic_color"
                             app:layout_constraintStart_toEndOf="@id/master_rating_affordability_score"
                             app:layout_constraintTop_toTopOf="@id/master_rating_kindness_text" />
@@ -277,11 +276,10 @@
                             android:textColor="@color/primary_text_color"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/customer_review_type"
-                            tools:text="너무 꼼꼼히 잘 해주셨어요. 다음에 또 부탁드리고 싶네요! 감사합니다."
+                            app:readMoreColor="@color/color_1FC472"
                             app:readMoreMaxLine="5"
                             app:readMoreText="...더보기"
-                            app:readMoreColor="@color/color_1FC472"
-                            />
+                            tools:text="너무 꼼꼼히 잘 해주셨어요. 다음에 또 부탁드리고 싶네요! 감사합니다." />
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/review_photo_list"
@@ -377,11 +375,12 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/customer_request_layout"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="0dp"
                         android:paddingStart="@dimen/estimation_card_default_margin_start"
                         android:paddingEnd="@dimen/estimation_card_default_margin_end"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/done_divider">
+                        app:layout_constraintTop_toBottomOf="@id/done_divider"
+                        app:layout_constraintEnd_toEndOf="parent">
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/custom_title"
@@ -391,8 +390,10 @@
                             android:layout_marginTop="@dimen/estimation_card_default_margin_top"
                             android:text="@string/view_estimate_customer_request_title"
                             android:textColor="@color/text_basic_color"
+                            app:layout_constraintHorizontal_bias="0"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="@id/customer_request_layout"
+                            app:layout_constraintEnd_toEndOf="parent"
                             bind:visible="@{vm.estimation.additionalInfo}" />
 
                         <LinearLayout
@@ -410,26 +411,27 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="12dp"
-                            android:layout_marginEnd="20dp"
                             android:text="@string/view_estimate_photo_title"
                             android:textColor="@color/text_primary_color"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/custom_frame"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0"
                             bind:visible="@{vm.estimation.images}" />
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/photo_list"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:layout_marginEnd="20dp"
+                            android:layout_marginTop="@dimen/gap_4"
                             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/photo_title"
                             app:spanCount="4"
                             bind:photo_list="@{vm.estimation.images}"
-                            bind:visible="@{vm.estimation.images}" />
+                            bind:visible="@{vm.estimation.images}"
+                            tools:listitem="@layout/view_holder_image" />
 
                         <ImageView
                             android:id="@+id/call_button"

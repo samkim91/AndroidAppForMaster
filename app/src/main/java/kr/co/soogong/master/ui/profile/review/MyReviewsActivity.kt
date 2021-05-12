@@ -23,15 +23,23 @@ class MyReviewsActivity : BaseActivity<ActivityMyReviewsBinding>(
         Timber.tag(TAG).d("initLayout: ")
 
         bind {
-            with(actionBar){
+            vm = viewModel
+            lifecycleOwner = this@MyReviewsActivity
+
+            with(actionBar) {
                 title.text = getString(R.string.my_reviews_action_bar_label)
                 backButton.setOnClickListener {
                     super.onBackPressed()
                 }
             }
 
-
+            reviewList.adapter = ReviewAdapter(this@MyReviewsActivity)
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        viewModel.getMyReviews()
     }
 
     companion object {

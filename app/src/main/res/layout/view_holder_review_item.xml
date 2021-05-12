@@ -8,11 +8,7 @@
 
         <variable
             name="data"
-            type="kr.co.soogong.master.domain.requirements.RequirementCard" />
-
-        <variable
-            name="card_click_listener"
-            type="android.view.View.OnClickListener" />
+            type="kr.co.soogong.master.data.profile.Review" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -20,8 +16,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingStart="@dimen/gap_20"
-        android:paddingEnd="@dimen/gap_20"
         android:paddingTop="@dimen/gap_20"
+        android:paddingEnd="@dimen/gap_20"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/line">
 
@@ -30,23 +26,23 @@
             style="@style/tiny_text_style.medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/view_estimate_master_rating_title"
+            android:text="@string/master_recommendation_label"
             android:textColor="@color/text_basic_color"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <RatingBar
+        <androidx.appcompat.widget.AppCompatRatingBar
             android:id="@+id/master_recommendation_rating_bar"
             style="@style/Widget.AppCompat.RatingBar.Small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/gap_6"
-            android:layout_marginTop="@dimen/gap_2"
             android:numStars="5"
             android:progressTint="@color/color_22D47B"
-            android:rating="4"
             app:layout_constraintStart_toEndOf="@id/master_recommendation_rating_text"
-            app:layout_constraintTop_toTopOf="@id/master_recommendation_rating_text" />
+            app:layout_constraintTop_toTopOf="@id/master_recommendation_rating_text"
+            bind:rating="@{data.recommendation}"
+            tools:rating="4" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/master_rating_kindness_text"
@@ -55,7 +51,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/gap_8"
             android:layout_marginEnd="@dimen/gap_20"
-            android:text="@string/view_estimate_master_rating_kind"
+            android:text="@string/master_kindness_label"
             android:textColor="@color/text_basic_color"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/master_recommendation_rating_text" />
@@ -69,6 +65,7 @@
             android:textColor="@color/color_1FC472"
             app:layout_constraintStart_toEndOf="@id/master_rating_kindness_text"
             app:layout_constraintTop_toTopOf="@id/master_rating_kindness_text"
+            bind:intText="@{data.kindness}"
             tools:text="4" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -77,7 +74,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/gap_10"
-            android:text="@string/view_estimate_master_rating_quality"
+            android:text="@string/master_quality_label"
             android:textColor="@color/text_basic_color"
             app:layout_constraintStart_toEndOf="@id/master_rating_kindness_score"
             app:layout_constraintTop_toTopOf="@id/master_rating_kindness_text" />
@@ -91,6 +88,7 @@
             android:textColor="@color/color_1FC472"
             app:layout_constraintStart_toEndOf="@id/master_rating_quality_text"
             app:layout_constraintTop_toTopOf="@id/master_rating_kindness_text"
+            bind:intText="@{data.quality}"
             tools:text="4" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -99,7 +97,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/gap_10"
-            android:text="@string/view_estimate_master_rating_affordability"
+            android:text="@string/price_affordability_label"
             android:textColor="@color/text_basic_color"
             app:layout_constraintStart_toEndOf="@id/master_rating_quality_score"
             app:layout_constraintTop_toTopOf="@id/master_rating_kindness_text" />
@@ -113,6 +111,7 @@
             android:textColor="@color/color_1FC472"
             app:layout_constraintStart_toEndOf="@id/master_rating_affordability_text"
             app:layout_constraintTop_toTopOf="@id/master_rating_kindness_text"
+            bind:intText="@{data.affordability}"
             tools:text="4" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -121,7 +120,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/gap_10"
-            android:text="@string/view_estimate_master_rating_punctuality"
+            android:text="@string/punctuality_label"
             android:textColor="@color/text_basic_color"
             app:layout_constraintStart_toEndOf="@id/master_rating_affordability_score"
             app:layout_constraintTop_toTopOf="@id/master_rating_kindness_text" />
@@ -135,6 +134,7 @@
             android:textColor="@color/color_1FC472"
             app:layout_constraintStart_toEndOf="@id/master_rating_punctuality_text"
             app:layout_constraintTop_toTopOf="@id/master_rating_kindness_text"
+            bind:intText="@{data.punctuality}"
             tools:text="4" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -143,6 +143,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/gap_10"
+            android:text="@{data.projectType}"
             android:textColor="@color/text_primary_color"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/master_rating_kindness_text"
@@ -154,14 +155,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/gap_12"
+            android:text="@{data.reviewContent}"
             android:textColor="@color/primary_text_color"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/customer_review_type"
-            tools:text="너무 꼼꼼히 잘 해주셨어요. 다음에 또 부탁드리고 싶네요! 감사합니다."
+            app:readMoreColor="@color/color_1FC472"
             app:readMoreMaxLine="5"
             app:readMoreText="...더보기"
-            app:readMoreColor="@color/color_1FC472"
-            />
+            tools:text="너무 꼼꼼히 잘 해주셨어요. 다음에 또 부탁드리고 싶네요! 감사합니다." />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/review_photo_list"
@@ -172,14 +173,18 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/customer_review_content"
-            app:spanCount="4" />
+            app:spanCount="4"
+            bind:photo_list="@{data.imageList}"
+            bind:visible="@{data.imageList}"
+            tools:listitem="@layout/view_holder_image" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/customer_review_date"
-            style="@style/tiny_text_style"
+            style="@style/tiny_text_style.regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/gap_12"
+            android:text="@{data.createdAt}"
             android:textColor="@color/text_primary_color"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/review_photo_list"
@@ -189,8 +194,8 @@
             android:id="@+id/line"
             android:layout_width="0dp"
             android:layout_height="@dimen/line_height"
-            android:background="@color/line_color"
             android:layout_marginTop="@dimen/gap_20"
+            android:background="@color/line_color"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/customer_review_date" />
