@@ -65,7 +65,6 @@ class ViewEstimateActivity : BaseActivity<ActivityViewEstimateBinding>(
                     startActivity(
                         ImageViewActivityHelper.getIntent(
                             this@ViewEstimateActivity,
-                            estimationId,
                             viewModel.estimation.value?.images,
                             position
                         )

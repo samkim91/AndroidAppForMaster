@@ -15,6 +15,11 @@ fun View.visible(list: List<Any>?) {
     this.visibility = if (list.isNullOrEmpty()) View.GONE else View.VISIBLE
 }
 
+@BindingAdapter("bind:show")
+fun View.invisible(list: List<Any>?) {
+    this.visibility = if (list.isNullOrEmpty()) View.VISIBLE else View.GONE
+}
+
 @BindingAdapter("bind:onClick")
 fun View.onClickListener(listener: View.OnClickListener){
     this.setOnClickListener(listener)
