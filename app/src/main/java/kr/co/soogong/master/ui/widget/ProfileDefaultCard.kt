@@ -14,7 +14,8 @@ class ProfileDefaultCard @JvmOverloads constructor(
     defStyle: Int = 0,
 ) : ConstraintLayout(context, attributeSet, defStyle) {
 
-    private val binding = ViewProfileDefaultCardBinding.inflate(LayoutInflater.from(context), this, true)
+    private val binding =
+        ViewProfileDefaultCardBinding.inflate(LayoutInflater.from(context), this, true)
 
     var title: String? = ""
         set(value) {
@@ -37,37 +38,28 @@ class ProfileDefaultCard @JvmOverloads constructor(
     var subTitle: String? = ""
         set(value) {
             field = value
-            binding.subTitle.text = value
-        }
-
-    var subTitleVisible: Boolean = false
-        set(value) {
-            field = value
-            binding.subTitle.visibility = if (value) View.VISIBLE else View.GONE
+            with(binding.subTitle) {
+                visibility = if (value.isNullOrEmpty()) View.GONE else View.VISIBLE
+                text = value
+            }
         }
 
     var firstDetail: String? = ""
         set(value) {
             field = value
-            binding.firstDetail.text = value
-        }
-
-    var firstDetailVisible: Boolean = false
-        set(value) {
-            field = value
-            binding.firstDetail.visibility = if (value) View.VISIBLE else View.GONE
+            with(binding.firstDetail) {
+                visibility = if (value.isNullOrEmpty()) View.GONE else View.VISIBLE
+                text = value
+            }
         }
 
     var secondDetail: String? = ""
         set(value) {
             field = value
-            binding.secondDetail.text = value
-        }
-
-    var secondDetailVisible: Boolean = false
-        set(value) {
-            field = value
-            binding.secondDetail.visibility = if (value) View.VISIBLE else View.GONE
+            with(binding.secondDetail){
+                visibility = if (value.isNullOrEmpty()) View.GONE else View.VISIBLE
+                text = value
+            }
         }
 
     var defaultButtonText: String? = ""
@@ -106,15 +98,15 @@ class ProfileDefaultCard @JvmOverloads constructor(
             binding.buttonGroup.visibility = if (value) View.VISIBLE else View.GONE
         }
 
-    fun addDefaultButtonClickListener(listener: OnClickListener){
+    fun addDefaultButtonClickListener(listener: OnClickListener) {
         binding.defaultButton.setOnClickListener(listener)
     }
 
-    fun addFirstButtonClickListener(listener: OnClickListener){
+    fun addFirstButtonClickListener(listener: OnClickListener) {
         binding.firstButtonInGroup.setOnClickListener(listener)
     }
 
-    fun addSecondButtonClickListener(listener: OnClickListener){
+    fun addSecondButtonClickListener(listener: OnClickListener) {
         binding.secondButtonInGroup.setOnClickListener(listener)
     }
 

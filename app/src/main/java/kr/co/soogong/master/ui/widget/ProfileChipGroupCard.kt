@@ -3,6 +3,7 @@ package kr.co.soogong.master.ui.widget
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.appcompat.widget.AppCompatTextView
@@ -43,25 +44,19 @@ class ProfileChipGroupCard @JvmOverloads constructor(
     var subTitle: String? = ""
         set(value) {
             field = value
-            binding.subTitle.text = value
-        }
-
-    var subTitleVisible: Boolean = false
-        set(value) {
-            field = value
-            binding.subTitle.visibility = if (value) VISIBLE else GONE
+            with(binding.subTitle) {
+                visibility = if (value.isNullOrEmpty()) View.GONE else View.VISIBLE
+                text = value
+            }
         }
 
     var detail: String? = ""
         set(value) {
             field = value
-            binding.detail.text = value
-        }
-
-    var detailVisible: Boolean = false
-        set(value) {
-            field = value
-            binding.detail.visibility = if (value) VISIBLE else GONE
+            with(binding.detail){
+                visibility = if (value.isNullOrEmpty()) View.GONE else View.VISIBLE
+                text = value
+            }
         }
 
     var defaultButtonText: String? = ""
@@ -76,7 +71,7 @@ class ProfileChipGroupCard @JvmOverloads constructor(
             binding.defaultButton.setTextColor(value)
         }
 
-    fun addChipGroup(items: List<Project>?){
+    fun addChipGroup(items: List<Any>?){
         val chipGroup = ChipGroup(context)
         val params = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
 

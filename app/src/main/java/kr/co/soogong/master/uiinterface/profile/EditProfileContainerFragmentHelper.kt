@@ -26,6 +26,7 @@ object EditProfileContainerFragmentHelper {
     const val EDIT_ADDRESS = "업체 주소 수정하기"
     const val EDIT_MAJOR = "시공 업종 수정하기"
 
+
 //    const val EDIT_NUMBER_OF_FELLOW = "팀원 수 수정하기"
 //    const val EDIT_AVAILABLE_TIME_FOR_CONTACT = "연락 가능 시간 수정하기"
 

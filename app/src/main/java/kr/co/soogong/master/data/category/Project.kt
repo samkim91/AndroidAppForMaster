@@ -16,5 +16,9 @@ data class Project(
             val name = jsonObject.get("attributes").asJsonObject.get("name").asString
             return Project(id, name)
         }
+
+        val NULL_PROJECT = Project(
+            1, "아파트 새시 제작설치/교체", false
+        )
     }
 }

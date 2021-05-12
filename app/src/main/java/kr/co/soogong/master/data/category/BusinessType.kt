@@ -21,5 +21,10 @@ data class BusinessType(
                 }
             )
         }
+
+        val NULL_BUSINESS_TYPE = BusinessType(
+            Category.NULL_CATEGORY,
+            mutableListOf(Project.NULL_PROJECT, Project.NULL_PROJECT, Project.NULL_PROJECT)
+        )
     }
 }

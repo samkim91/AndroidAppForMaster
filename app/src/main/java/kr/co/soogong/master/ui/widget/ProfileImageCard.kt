@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
+import kr.co.soogong.master.data.estimation.ImagePath
 import kr.co.soogong.master.databinding.ViewProfileDefaultCardBinding
 import kr.co.soogong.master.databinding.ViewProfileImageCardBinding
 import kr.co.soogong.master.util.extension.setImageUrl
@@ -37,11 +38,11 @@ class ProfileImageCard @JvmOverloads constructor(
             binding.newBadge.visibility = if (value) VISIBLE else GONE
         }
 
-    var imageUrl: String = ""
+    var imageUrl: ImagePath = ImagePath("")
         set(value) {
             field = value
-            binding.imageContainer.visibility = if(value.isNullOrEmpty()) View.GONE else View.VISIBLE
-            binding.image.setImageUrl(value)
+            binding.imageContainer.visibility = if(value.path.isEmpty()) View.GONE else View.VISIBLE
+            binding.image.setImageUrl(value.path)
         }
 
     var imageCount: Int = 0
@@ -54,37 +55,28 @@ class ProfileImageCard @JvmOverloads constructor(
     var subTitle: String? = ""
         set(value) {
             field = value
-            binding.subTitle.text = value
-        }
-
-    var subTitleVisible: Boolean = false
-        set(value) {
-            field = value
-            binding.subTitle.visibility = if (value) VISIBLE else GONE
+            with(binding.subTitle) {
+                visibility = if (value.isNullOrEmpty()) View.GONE else View.VISIBLE
+                text = value
+            }
         }
 
     var firstDetail: String? = ""
         set(value) {
             field = value
-            binding.firstDetail.text = value
-        }
-
-    var firstDetailVisible: Boolean = false
-        set(value) {
-            field = value
-            binding.firstDetail.visibility = if (value) VISIBLE else GONE
+            with(binding.firstDetail) {
+                visibility = if (value.isNullOrEmpty()) View.GONE else View.VISIBLE
+                text = value
+            }
         }
 
     var secondDetail: String? = ""
         set(value) {
             field = value
-            binding.secondDetail.text = value
-        }
-
-    var secondDetailVisible: Boolean = false
-        set(value) {
-            field = value
-            binding.secondDetail.visibility = if (value) VISIBLE else GONE
+            with(binding.secondDetail){
+                visibility = if (value.isNullOrEmpty()) View.GONE else View.VISIBLE
+                text = value
+            }
         }
 
     var defaultButtonText: String? = ""

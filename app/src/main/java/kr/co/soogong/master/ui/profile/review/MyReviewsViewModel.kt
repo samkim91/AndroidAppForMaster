@@ -21,7 +21,7 @@ class MyReviewsViewModel @Inject constructor(
         get() = _myReview
 
     fun getMyReviews() {
-        Timber.tag(TAG).d("requestList: ")
+        Timber.tag(TAG).d("getMyReviews: ")
         viewModelScope.launch {
             _myReview.value = getMyReviewsUseCase()
         }
