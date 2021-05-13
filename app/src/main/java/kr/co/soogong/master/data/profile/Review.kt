@@ -53,8 +53,8 @@ data class Review(
             "욕실 위생도기 및 수전 설치/교체 시공",
             "너무 꼼꼼히 잘 해주셨어요. 다음에 또 부탁드리고 싶네요! 감사합니다.",
             arrayListOf(
-                ImagePath("https://s3.ap-northeast-2.amazonaws.com/assets.soogong.co.kr/kcqvz39srrfjx0wcrrcq7jf5baw4?response-content-disposition=inline%3B%20filename%3D%22flower.jpeg%22%3B%20filename%2A%3DUTF-8%27%27flower.jpeg&response-content-type=image%2Fjpeg&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIATLOO24V4DXZC2C7K%2F20210512%2Fap-northeast-2%2Fs3%2Faws4_request&X-Amz-Date=20210512T012720Z&X-Amz-Expires=300&X-Amz-SignedHeaders=host&X-Amz-Signature=cbf5c743fbd28b538b64dadee5a57816479f12a9f00af18c16d6a5d5b345866f"),
-                ImagePath("https://s3.ap-northeast-2.amazonaws.com/assets.soogong.co.kr/93f41s5vk7wevusjb9b7vdlik4w4?response-content-disposition=inline%3B%20filename%3D%22cat.jpeg%22%3B%20filename%2A%3DUTF-8%27%27cat.jpeg&response-content-type=image%2Fjpeg&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIATLOO24V4DXZC2C7K%2F20210512%2Fap-northeast-2%2Fs3%2Faws4_request&X-Amz-Date=20210512T012720Z&X-Amz-Expires=300&X-Amz-SignedHeaders=host&X-Amz-Signature=154d39700db98ced27468da047c6440d3ed4f48b3fa9a2f6a1e39447e6a5a990"),
+                ImagePath.NULL_IMAGE_PATH,
+                ImagePath.NULL_IMAGE_PATH,
                 ),
             "2020.07.01"
         )

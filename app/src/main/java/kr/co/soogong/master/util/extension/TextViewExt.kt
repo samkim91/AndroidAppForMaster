@@ -27,21 +27,6 @@ fun TextView.setDateTime2(date: Date?) {
     text = simpleDateFormat.format(date ?: System.currentTimeMillis())
 }
 
-@BindingAdapter("bind:countText")
-fun TextView.setCountText(count: Int?) {
-    text = "${count}개"
-}
-
-@BindingAdapter("bind:intText")
-fun TextView.setIntText(int: Int?) {
-    text = "$int"
-}
-
-@BindingAdapter("bind:doubleText")
-fun TextView.setDoubleText(double: Double?) {
-    text = "$double"
-}
-
 fun addTextView3(
     viewGroup: ViewGroup,
     context: Context,

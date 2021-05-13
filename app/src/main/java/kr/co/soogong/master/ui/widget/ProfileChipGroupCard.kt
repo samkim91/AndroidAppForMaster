@@ -10,9 +10,11 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
+import kr.co.soogong.master.R
 import kr.co.soogong.master.data.category.BusinessType
 import kr.co.soogong.master.data.category.Project
 import kr.co.soogong.master.databinding.ViewProfileChipGroupCardBinding
+import kr.co.soogong.master.ui.utils.ButtonHelper
 
 class ProfileChipGroupCard @JvmOverloads constructor(
     context: Context,
@@ -35,7 +37,7 @@ class ProfileChipGroupCard @JvmOverloads constructor(
             binding.title.visibility = if (value) VISIBLE else GONE
         }
 
-    var newBadgeVisible: Boolean = false
+    var newBadgeVisible: Boolean = true
         set(value) {
             field = value
             binding.newBadge.visibility = if (value) VISIBLE else GONE
@@ -45,39 +47,92 @@ class ProfileChipGroupCard @JvmOverloads constructor(
         set(value) {
             field = value
             with(binding.subTitle) {
-                visibility = if (value.isNullOrEmpty()) View.GONE else View.VISIBLE
-                text = value
+                if (!value.isNullOrEmpty() && (chipGroupWithTitle.isNullOrEmpty())) {
+                    visibility = View.VISIBLE
+                    text = value
+                } else {
+                    visibility = View.GONE
+                }
             }
+        }
+
+    var subTitleVisible: List<Any>? = emptyList()
+        set(value) {
+            field = value
+            if (!value.isNullOrEmpty()) binding.subTitle.visibility =
+                View.GONE else binding.subTitle.visibility = View.VISIBLE
         }
 
     var detail: String? = ""
         set(value) {
             field = value
-            with(binding.detail){
+            with(binding.detail) {
                 visibility = if (value.isNullOrEmpty()) View.GONE else View.VISIBLE
                 text = value
             }
         }
 
-    var defaultButtonText: String? = ""
+    // 등록하기 <-> 수정하기 버튼 셋
+    var defaultButtonByList: List<Any>? = emptyList()
         set(value) {
             field = value
-            binding.defaultButton.text = value
+            if (value.isNullOrEmpty()) {
+                ButtonHelper.setRegisteringButton(binding.defaultButton)
+            } else {
+                ButtonHelper.setModifyingButton(binding.defaultButton)
+            }
         }
 
-    var defaultButtonColor: Int = 0
+    var chipGroupWithTitle: List<BusinessType>? = emptyList()
         set(value) {
             field = value
-            binding.defaultButton.setTextColor(value)
+            if (!value.isNullOrEmpty()) {
+                newBadgeVisible = false
+
+                value.map { item ->
+                    val titleTextView = AppCompatTextView(context)
+                    val params = LinearLayout.LayoutParams(
+                        ViewGroup.LayoutParams.WRAP_CONTENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT
+                    )
+                    params.setMargins(0, 16, 0, 0)
+
+                    titleTextView.text = item.category?.name
+                    titleTextView.setTextColor(resources.getColor(R.color.text_basic_color, null))
+                    titleTextView.setTextAppearance(R.style.medium_text_style_regular)
+
+                    binding.chipGroupContainer.addView(titleTextView, params)
+                    addChipGroup(item.projects)
+                }
+            }
         }
 
-    fun addChipGroup(items: List<Any>?){
+    var chipGroupWithoutTitle: List<String>? = emptyList()
+        set(value) {
+            field = value
+            if (!value.isNullOrEmpty()) {
+                newBadgeVisible = false
+
+                addChipGroup(value)
+            }
+        }
+
+    private fun addChipGroup(items: List<Any>?) {
         val chipGroup = ChipGroup(context)
-        val params = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        val params = LinearLayout.LayoutParams(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
 
         items?.map { item ->
             val chip = Chip(context)
-            chip.text = item.toString()
+            chip.text = when (item) {
+                is Project -> item.name
+                is String -> item
+                else -> item.toString()
+            }
+            chip.setTextColor(resources.getColor(R.color.text_basic_color, null))
+            chip.setTextAppearance(R.style.medium_text_style_regular)
 
             chipGroup.addView(chip)
         }
@@ -87,20 +142,7 @@ class ProfileChipGroupCard @JvmOverloads constructor(
         binding.chipGroupContainer.addView(chipGroup, params)
     }
 
-    fun addChipGroupWithTitle(items : BusinessType){
-        val title = AppCompatTextView(context)
-        val params = LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-
-        title.text = items.category.toString()
-        params.setMargins(0, 16, 0, 0)
-
-        binding.chipGroupContainer.addView(title, params)
-
-        addChipGroup(items.projects)
-    }
-
     fun addDefaultButtonClickListener(listener: OnClickListener) {
         binding.defaultButton.setOnClickListener(listener)
     }
-
 }

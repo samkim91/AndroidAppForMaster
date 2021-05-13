@@ -83,7 +83,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/my_review_label"
                 app:layout_constraintTop_toTopOf="@id/my_review_label"
-                bind:countText="@{vm.myReview.reviews.size}"
+                android:text="@{String.valueOf(vm.myReview.reviews.size) + '개'}"
                 tools:text="20개" />
             <!-- end review layout header -->
 
@@ -122,7 +122,7 @@
                     app:layout_constraintEnd_toEndOf="@id/master_recommendation_label"
                     app:layout_constraintStart_toStartOf="@id/master_recommendation_label"
                     app:layout_constraintTop_toBottomOf="@id/master_recommendation_label"
-                    bind:doubleText="@{vm.myReview.averageRecommendation}"
+                    android:text="@{String.valueOf(vm.myReview.averageRecommendation)}"
                     tools:text="4.8" />
 
                 <androidx.appcompat.widget.AppCompatRatingBar
@@ -135,7 +135,7 @@
                     app:layout_constraintEnd_toEndOf="@id/master_recommendation_point"
                     app:layout_constraintStart_toStartOf="@id/master_recommendation_point"
                     app:layout_constraintTop_toBottomOf="@id/master_recommendation_point"
-                    bind:rating="@{vm.myReview.averageRecommendation}"
+                    android:rating="@{Float.valueOf(String.valueOf(vm.myReview.averageRecommendation))}"
                     tools:rating="4" />
 
                 <androidx.appcompat.widget.AppCompatImageView
@@ -174,7 +174,7 @@
                     app:layout_constraintHorizontal_chainStyle="packed"
                     app:layout_constraintStart_toEndOf="@id/master_kindness_label"
                     app:layout_constraintTop_toTopOf="@id/master_kindness_label"
-                    bind:rating="@{vm.myReview.averageKindness}"
+                    android:rating="@{Float.valueOf(String.valueOf(vm.myReview.averageKindness))}"
                     tools:rating="4" />
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -188,7 +188,7 @@
                     app:layout_constraintHorizontal_chainStyle="packed"
                     app:layout_constraintStart_toEndOf="@id/master_kindness_rating_bar"
                     app:layout_constraintTop_toTopOf="@id/master_kindness_label"
-                    bind:doubleText="@{vm.myReview.averageKindness}"
+                    android:text="@{String.valueOf(vm.myReview.averageKindness)}"
                     tools:text="4.9" />
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -214,7 +214,7 @@
                     app:layout_constraintHorizontal_chainStyle="packed"
                     app:layout_constraintStart_toStartOf="@id/master_kindness_rating_bar"
                     app:layout_constraintTop_toTopOf="@id/master_quality_label"
-                    bind:rating="@{vm.myReview.averageQuality}"
+                    android:rating="@{Float.valueOf(String.valueOf(vm.myReview.averageQuality))}"
                     tools:rating="4" />
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -226,7 +226,7 @@
                     app:layout_constraintHorizontal_chainStyle="packed"
                     app:layout_constraintStart_toStartOf="@id/master_kindness_point"
                     app:layout_constraintTop_toTopOf="@id/master_quality_rating_bar"
-                    bind:doubleText="@{vm.myReview.averageQuality}"
+                    android:text="@{String.valueOf(vm.myReview.averageQuality)}"
                     tools:text="4.8" />
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -252,7 +252,7 @@
                     app:layout_constraintHorizontal_chainStyle="packed"
                     app:layout_constraintStart_toStartOf="@id/master_quality_rating_bar"
                     app:layout_constraintTop_toTopOf="@id/price_affordability_label"
-                    bind:rating="@{vm.myReview.averageAffordability}"
+                    android:rating="@{Float.valueOf(String.valueOf(vm.myReview.averageAffordability))}"
                     tools:rating="4" />
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -264,7 +264,7 @@
                     app:layout_constraintHorizontal_chainStyle="packed"
                     app:layout_constraintStart_toStartOf="@id/master_quality_point"
                     app:layout_constraintTop_toTopOf="@id/price_affordability_rating_bar"
-                    bind:doubleText="@{vm.myReview.averageAffordability}"
+                    android:text="@{String.valueOf(vm.myReview.averageAffordability)}"
                     tools:text="4.7" />
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -287,11 +287,10 @@
                     android:layout_height="wrap_content"
                     android:numStars="5"
                     android:progressTint="@color/color_22D47B"
-                    android:rating="4"
+                    android:rating="@{Float.valueOf(String.valueOf(vm.myReview.averagePunctuality))}"
                     app:layout_constraintHorizontal_chainStyle="packed"
                     app:layout_constraintStart_toStartOf="@id/price_affordability_rating_bar"
                     app:layout_constraintTop_toTopOf="@id/punctuality_label"
-                    bind:rating="@{vm.myReview.averagePunctuality}"
                     tools:rating="4" />
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -303,7 +302,7 @@
                     app:layout_constraintHorizontal_chainStyle="packed"
                     app:layout_constraintStart_toStartOf="@id/price_affordability_point"
                     app:layout_constraintTop_toTopOf="@id/punctuality_rating_bar"
-                    bind:doubleText="@{vm.myReview.averagePunctuality}"
+                    android:text="@{String.valueOf(vm.myReview.averagePunctuality)}"
                     tools:text="4.6" />
             </androidx.constraintlayout.widget.ConstraintLayout>
             <!-- end 리뷰 평균 점수 레이아웃 -->

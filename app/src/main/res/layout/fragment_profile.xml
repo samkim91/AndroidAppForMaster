@@ -192,8 +192,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/price_by_project"
                     app:subTitle='@{"고객이 마스터님을 알아볼 수 있게 얼굴을 알려주세요."}'
-                    app:subTitleVisible="@{true}"
-
                     app:title='@{"프로필 사진"}' />
 
                 <!-- 현장 가격 변동 요인 -->
@@ -211,7 +209,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/profile_image"
                     app:subTitle='@{"고객이 당황하지 않도록 현장의 가격 변동요인을 알려주세요."}'
-                    app:subTitleVisible="@{true}"
                     app:title='@{"현장 가격 변동 요인"}'
                     />
 

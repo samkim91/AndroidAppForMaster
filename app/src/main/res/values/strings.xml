@@ -179,6 +179,7 @@
     <string name="category">업종</string>
     <string name="save">저장하기</string>
     <string name="modify">수정하기</string>
+    <string name="edit">편집하기</string>
     <string name="delete">삭제하기</string>
     <string name="register">등록하기</string>
     <string name="writing_done">작성 완료</string>
@@ -191,6 +192,7 @@
     <string name="image_before_job_label">시공 전 사진</string>
     <string name="image_after_job_label">시공 후 사진</string>
     <string name="edit_flexible_cost_screen_title">현장 가격 변동 사항을 선택해주세요.</string>
+    <string name="simple_text_for_registered_image">사진 등록이 완료됐어요!</string>
 
     <string name="introduction_card_title_for_portfolio">마스터님의 포트폴리오를 작성해주세요.</string>
     <string name="introduction_card_subtitle_for_portfolio">포트폴리오 사진과 실제 시공 정보가 많을수록, 더많이 노출되고, 고객이 선택하는데 더 좋은 기준이 됩니다.</string>

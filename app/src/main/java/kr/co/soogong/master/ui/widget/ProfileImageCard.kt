@@ -6,9 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
+import kr.co.soogong.master.R
 import kr.co.soogong.master.data.estimation.ImagePath
 import kr.co.soogong.master.databinding.ViewProfileDefaultCardBinding
 import kr.co.soogong.master.databinding.ViewProfileImageCardBinding
+import kr.co.soogong.master.ui.utils.ButtonHelper
 import kr.co.soogong.master.util.extension.setImageUrl
 
 class ProfileImageCard @JvmOverloads constructor(
@@ -32,17 +34,22 @@ class ProfileImageCard @JvmOverloads constructor(
             binding.title.visibility = if (value) VISIBLE else GONE
         }
 
-    var newBadgeVisible: Boolean = false
+    var newBadgeVisible: Boolean = true
         set(value) {
             field = value
             binding.newBadge.visibility = if (value) VISIBLE else GONE
         }
 
-    var imageUrl: ImagePath = ImagePath("")
+    var imageUrl: ImagePath? = ImagePath("")
         set(value) {
             field = value
-            binding.imageContainer.visibility = if(value.path.isEmpty()) View.GONE else View.VISIBLE
-            binding.image.setImageUrl(value.path)
+            if (value != null) {
+                newBadgeVisible = false
+
+                binding.imageContainer.visibility =
+                    if (value.path.isEmpty()) View.GONE else View.VISIBLE
+                binding.image.setImageUrl(value.path)
+            }
         }
 
     var imageCount: Int = 0
@@ -56,8 +63,12 @@ class ProfileImageCard @JvmOverloads constructor(
         set(value) {
             field = value
             with(binding.subTitle) {
-                visibility = if (value.isNullOrEmpty()) View.GONE else View.VISIBLE
-                text = value
+                if (!value.isNullOrEmpty() && imageUrl?.path.isNullOrEmpty()) {
+                    visibility = View.VISIBLE
+                    text = value
+                } else {
+                    visibility = View.GONE
+                }
             }
         }
 
@@ -70,49 +81,58 @@ class ProfileImageCard @JvmOverloads constructor(
             }
         }
 
+    var firstDetailWithSimpleText: ImagePath? = ImagePath("")
+        set(value) {
+            field = value
+            if(!value?.path.isNullOrEmpty()){
+                binding.firstDetail.visibility = View.VISIBLE
+                binding.firstDetail.text = resources.getString(R.string.simple_text_for_registered_image)
+            }
+        }
+
     var secondDetail: String? = ""
         set(value) {
             field = value
-            with(binding.secondDetail){
-                visibility = if (value.isNullOrEmpty()) View.GONE else View.VISIBLE
+            with(binding.secondDetail) {
+                visibility = if (value.isNullOrEmpty() || value == "0") View.GONE else View.VISIBLE
                 text = value
             }
         }
 
-    var defaultButtonText: String? = ""
+    // 등록하기 <-> 수정하기 버튼 셋
+    var defaultButtonByImage: ImagePath? = ImagePath("")
         set(value) {
             field = value
-            binding.defaultButton.text = value
+            if (value?.path.isNullOrEmpty()) {
+                ButtonHelper.setRegisteringButton(binding.defaultButton)
+            } else {
+                ButtonHelper.setModifyingButton(binding.defaultButton)
+            }
         }
 
-    var defaultButtonColor: Int = 0
+    // 등록하기 <-> 편집하기 버튼 셋
+    var defaultButtonByImageV2: ImagePath? = ImagePath("")
         set(value) {
             field = value
-            binding.defaultButton.setTextColor(value)
+            if (value?.path.isNullOrEmpty()) {
+                ButtonHelper.setRegisteringButton(binding.defaultButton)
+            } else {
+                ButtonHelper.setEditingButton(binding.defaultButton)
+            }
         }
 
-    var defaultButtonVisible: Boolean = true
+    // 등록하기 <-> 삭제하기, 수정하기 버튼 셋
+    var defaultButtonByImageV3: ImagePath? = ImagePath("")
         set(value) {
             field = value
-            binding.defaultButton.visibility = if (value) VISIBLE else GONE
-        }
-
-    var firstButtonText: String? = ""
-        set(value) {
-            field = value
-            binding.firstButtonInGroup.text = value
-        }
-
-    var secondButtonText: String? = ""
-        set(value) {
-            field = value
-            binding.secondButtonInGroup.text = value
-        }
-
-    var buttonGroupVisible: Boolean = false
-        set(value) {
-            field = value
-            binding.buttonGroup.visibility = if (value) VISIBLE else GONE
+            if (value?.path.isNullOrEmpty()) {
+                ButtonHelper.setRegisteringButton(binding.defaultButton)
+            } else {
+                binding.defaultButton.visibility = View.GONE
+                binding.buttonGroup.visibility = View.VISIBLE
+                ButtonHelper.setDeletingButton(binding.firstButtonInGroup)
+                ButtonHelper.setModifyingButton(binding.secondButtonInGroup)
+            }
         }
 
     fun addDefaultButtonClickListener(listener: OnClickListener) {
