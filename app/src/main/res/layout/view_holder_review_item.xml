@@ -41,7 +41,7 @@
             android:progressTint="@color/color_22D47B"
             app:layout_constraintStart_toEndOf="@id/master_recommendation_rating_text"
             app:layout_constraintTop_toTopOf="@id/master_recommendation_rating_text"
-            bind:rating="@{data.recommendation}"
+            android:rating="@{Float.valueOf(String.valueOf(data.recommendation))}"
             tools:rating="4" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -65,7 +65,7 @@
             android:textColor="@color/color_1FC472"
             app:layout_constraintStart_toEndOf="@id/master_rating_kindness_text"
             app:layout_constraintTop_toTopOf="@id/master_rating_kindness_text"
-            bind:intText="@{data.kindness}"
+            android:text="@{String.valueOf(data.kindness)}"
             tools:text="4" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -88,7 +88,7 @@
             android:textColor="@color/color_1FC472"
             app:layout_constraintStart_toEndOf="@id/master_rating_quality_text"
             app:layout_constraintTop_toTopOf="@id/master_rating_kindness_text"
-            bind:intText="@{data.quality}"
+            android:text="@{String.valueOf(data.quality)}"
             tools:text="4" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -111,7 +111,7 @@
             android:textColor="@color/color_1FC472"
             app:layout_constraintStart_toEndOf="@id/master_rating_affordability_text"
             app:layout_constraintTop_toTopOf="@id/master_rating_kindness_text"
-            bind:intText="@{data.affordability}"
+            android:text="@{String.valueOf(data.affordability)}"
             tools:text="4" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -134,7 +134,7 @@
             android:textColor="@color/color_1FC472"
             app:layout_constraintStart_toEndOf="@id/master_rating_punctuality_text"
             app:layout_constraintTop_toTopOf="@id/master_rating_kindness_text"
-            bind:intText="@{data.punctuality}"
+            android:text="@{String.valueOf(data.punctuality)}"
             tools:text="4" />
 
         <androidx.appcompat.widget.AppCompatTextView

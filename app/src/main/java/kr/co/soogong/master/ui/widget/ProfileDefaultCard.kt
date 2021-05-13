@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.appcompat.widget.ViewUtils
 import androidx.constraintlayout.widget.ConstraintLayout
+import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ViewProfileDefaultCardBinding
+import kr.co.soogong.master.ui.utils.ButtonHelper
 
 class ProfileDefaultCard @JvmOverloads constructor(
     context: Context,
@@ -29,7 +31,7 @@ class ProfileDefaultCard @JvmOverloads constructor(
             binding.title.visibility = if (value) View.VISIBLE else View.GONE
         }
 
-    var newBadgeVisible: Boolean = false
+    var newBadgeVisible: Boolean = true
         set(value) {
             field = value
             binding.newBadge.visibility = if (value) View.VISIBLE else View.GONE
@@ -39,8 +41,12 @@ class ProfileDefaultCard @JvmOverloads constructor(
         set(value) {
             field = value
             with(binding.subTitle) {
-                visibility = if (value.isNullOrEmpty()) View.GONE else View.VISIBLE
-                text = value
+                if (!value.isNullOrEmpty() && firstDetail.isNullOrEmpty()) {
+                    visibility = View.VISIBLE
+                    text = value
+                } else {
+                    visibility = View.GONE
+                }
             }
         }
 
@@ -48,54 +54,45 @@ class ProfileDefaultCard @JvmOverloads constructor(
         set(value) {
             field = value
             with(binding.firstDetail) {
-                visibility = if (value.isNullOrEmpty()) View.GONE else View.VISIBLE
-                text = value
+                if(value.isNullOrEmpty()){
+                    visibility = View.GONE
+                } else {
+                    visibility = View.VISIBLE
+                    newBadgeVisible = false
+                    text = value
+                }
             }
         }
 
     var secondDetail: String? = ""
         set(value) {
             field = value
-            with(binding.secondDetail){
+            with(binding.secondDetail) {
                 visibility = if (value.isNullOrEmpty()) View.GONE else View.VISIBLE
                 text = value
             }
         }
 
-    var defaultButtonText: String? = ""
+    // 등록하기 <-> 수정하기 버튼 셋
+    var defaultButtonByString: String? = ""
         set(value) {
             field = value
-            binding.defaultButton.text = value
+            if (value.isNullOrEmpty()) {
+                ButtonHelper.setRegisteringButton(binding.defaultButton)
+            } else {
+                ButtonHelper.setModifyingButton(binding.defaultButton)
+            }
         }
 
-    var defaultButtonColor: Int = 0
+    // 등록하기 <-> 편집하기 버튼 셋
+    var defaultButtonByStringV2: String? = ""
         set(value) {
             field = value
-            binding.defaultButton.setTextColor(value)
-        }
-
-    var defaultButtonVisible: Boolean = true
-        set(value) {
-            field = value
-            binding.defaultButton.visibility = if (value) View.VISIBLE else View.GONE
-        }
-
-    var firstButtonText: String? = ""
-        set(value) {
-            field = value
-            binding.firstButtonInGroup.text = value
-        }
-
-    var secondButtonText: String? = ""
-        set(value) {
-            field = value
-            binding.secondButtonInGroup.text = value
-        }
-
-    var buttonGroupVisible: Boolean = false
-        set(value) {
-            field = value
-            binding.buttonGroup.visibility = if (value) View.VISIBLE else View.GONE
+            if (value.isNullOrEmpty()) {
+                ButtonHelper.setRegisteringButton(binding.defaultButton)
+            } else {
+                ButtonHelper.setEditingButton(binding.defaultButton)
+            }
         }
 
     fun addDefaultButtonClickListener(listener: OnClickListener) {
