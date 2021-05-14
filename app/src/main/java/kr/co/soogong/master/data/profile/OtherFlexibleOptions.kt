@@ -11,19 +11,13 @@ data class OtherFlexibleOptions(
     companion object {
         fun fromJson(jsonObject: JsonObject): OtherFlexibleOptions {
             val item = jsonObject.get("data").asJsonObject
-            val attributes = item.get("attributes").asJsonArray
-
-            val temp = mutableListOf<String>()
-
-            attributes.map {
-                temp.add(it.asString)
-            }
 
             return OtherFlexibleOptions(
-                options = temp
+                options = item.get("otherFlexibleOptions").asJsonArray.map { it.asString }
             )
         }
 
-        val NULL_OTHER_FLEXIBLE_OPTIONS = OtherFlexibleOptions(listOf("마스크 착용", "엘리베이터 보양작업", "약속시간 준수"))
+        val TEST_OTHER_FLEXIBLE_OPTIONS = OtherFlexibleOptions(listOf("마스크 착용", "엘리베이터 보양작업", "약속시간 준수"))
+        val NULL_OTHER_FLEXIBLE_OPTIONS = OtherFlexibleOptions(emptyList())
     }
 }

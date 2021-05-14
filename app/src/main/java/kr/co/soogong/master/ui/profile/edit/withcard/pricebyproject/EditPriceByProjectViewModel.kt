@@ -1,10 +1,12 @@
 package kr.co.soogong.master.ui.profile.edit.withcard.pricebyproject
 
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.launch
 import kr.co.soogong.master.data.profile.PriceByProject
 import kr.co.soogong.master.domain.usecase.*
 import kr.co.soogong.master.domain.usecase.profile.GetPriceByProjectUseCase
@@ -24,10 +26,13 @@ class EditPriceByProjectViewModel @Inject constructor(
 
     fun getPriceByProject(priceByProjectId: Int) {
         Timber.tag(TAG).d("getPriceByProject $priceByProjectId")
-        val priceByProject = getPriceByProjectUseCase(priceByProjectId)
-        title.postValue(priceByProject.title)
-        price.postValue(priceByProject.projectPrice)
-        description.postValue(priceByProject.description)
+        viewModelScope.launch {
+            getPriceByProjectUseCase(priceByProjectId).let { priceByProject ->
+                title.postValue(priceByProject.title)
+                price.postValue(priceByProject.projectPrice)
+                description.postValue(priceByProject.description)
+            }
+        }
     }
 
     fun savePriceByProject(priceByProjectId: Int) {

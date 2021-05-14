@@ -12,10 +12,14 @@ import javax.inject.Inject
 
 @Reusable
 class GetOtherFlexibleOptionsUseCase @Inject constructor(
+    private val getProfileFromLocalUseCase: GetProfileFromLocalUseCase,
+
     private val getMasterKeyCodeUseCase: GetMasterKeyCodeUseCase,
     private val profileService: ProfileService,
 ) {
     suspend operator fun invoke(): OtherFlexibleOptions {
-        return profileService.getOtherFlexibleOptions(getMasterKeyCodeUseCase()!!)
+        getProfileFromLocalUseCase().let { profile ->
+            return profile.basicInformation?.otherFlexibleOptions ?: OtherFlexibleOptions.NULL_OTHER_FLEXIBLE_OPTIONS
+        }
     }
 }

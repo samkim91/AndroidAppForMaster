@@ -16,6 +16,6 @@ data class Category(
             return Category(id, name)
         }
 
-        val NULL_CATEGORY = Category(1, "새시")
+        val TEST_CATEGORY = Category(1, "새시")
     }
 }

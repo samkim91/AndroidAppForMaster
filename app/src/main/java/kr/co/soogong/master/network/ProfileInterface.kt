@@ -12,6 +12,9 @@ interface ProfileInterface {
     suspend fun getUserProfile(@Path("keycode") keycode: String?): JsonObject
 
     @GET(HttpContract.GET_USER_PROFILE_V2)
+    suspend fun getProfile(@Path("masterId") masterId: String?): JsonObject
+
+    @GET(HttpContract.GET_USER_PROFILE_V2)
     fun getPortfolio(@Body body: HashMap<String, String>): JsonObject
 
     @POST(HttpContract.GET_USER_PROFILE_V2)

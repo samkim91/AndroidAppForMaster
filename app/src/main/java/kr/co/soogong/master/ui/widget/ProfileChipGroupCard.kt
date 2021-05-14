@@ -87,7 +87,9 @@ class ProfileChipGroupCard @JvmOverloads constructor(
         set(value) {
             field = value
             if (!value.isNullOrEmpty()) {
+                binding.chipGroupContainer.removeAllViews()
                 newBadgeVisible = false
+                binding.subTitle.visibility = View.GONE
 
                 value.map { item ->
                     val titleTextView = AppCompatTextView(context)
@@ -112,6 +114,7 @@ class ProfileChipGroupCard @JvmOverloads constructor(
             field = value
             if (!value.isNullOrEmpty()) {
                 newBadgeVisible = false
+                binding.subTitle.visibility = View.GONE
 
                 addChipGroup(value)
             }

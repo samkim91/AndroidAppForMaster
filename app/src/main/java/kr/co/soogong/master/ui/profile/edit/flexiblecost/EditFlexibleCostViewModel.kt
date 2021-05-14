@@ -1,10 +1,12 @@
 package kr.co.soogong.master.ui.profile.edit.flexiblecost
 
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.launch
 import kr.co.soogong.master.data.profile.FlexibleCost
 import kr.co.soogong.master.data.profile.PriceByProject
 import kr.co.soogong.master.domain.usecase.*
@@ -28,11 +30,14 @@ class EditFlexibleCostViewModel @Inject constructor(
 
     fun getFlexibleCosts() {
         Timber.tag(TAG).d("getFlexibleCosts: ")
-        val flexibleCost = getFlexibleCostUseCase()
-        travelCost.postValue(flexibleCost.travelCost)
-        craneUsage.postValue(flexibleCost.craneUsage)
-        packageCost.postValue(flexibleCost.packageCost)
-        otherCostInformation.postValue(flexibleCost.otherCostInformation)
+        viewModelScope.launch {
+            getFlexibleCostUseCase().let { flexibleCost ->
+                travelCost.postValue(flexibleCost.travelCost)
+                craneUsage.postValue(flexibleCost.craneUsage)
+                packageCost.postValue(flexibleCost.packageCost)
+                otherCostInformation.postValue(flexibleCost.otherCostInformation)
+            }
+        }
     }
 
     fun saveFlexibleCosts() {

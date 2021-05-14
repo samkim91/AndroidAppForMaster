@@ -2,11 +2,15 @@ package kr.co.soogong.master.data.category
 
 import android.os.Parcelable
 import com.google.gson.JsonObject
+import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class BusinessType(
+    @SerializedName("category")
     val category: Category?,
+
+    @SerializedName("projects")
     val projects: MutableList<Project>?,
 ) : Parcelable {
     companion object {
@@ -22,9 +26,9 @@ data class BusinessType(
             )
         }
 
-        val NULL_BUSINESS_TYPE = BusinessType(
-            Category.NULL_CATEGORY,
-            mutableListOf(Project.NULL_PROJECT, Project.NULL_PROJECT, Project.NULL_PROJECT)
+        val TEST_BUSINESS_TYPE = BusinessType(
+            Category.TEST_CATEGORY,
+            mutableListOf(Project.TEST_PROJECT, Project.TEST_PROJECT, Project.TEST_PROJECT)
         )
     }
 }

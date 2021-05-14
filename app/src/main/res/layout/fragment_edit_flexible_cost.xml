@@ -99,7 +99,6 @@
                     app:layout_constraintTop_toBottomOf="@id/package_cost_chip_group"
                     app:limitedCount="@{500}"
                     app:subTitle='@{"기타 변동 가능 사항"}'
-                    app:subTitleVisible="@{true}"
                     app:titleVisible="@{false}" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

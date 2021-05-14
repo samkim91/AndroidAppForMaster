@@ -25,6 +25,7 @@ data class Portfolio(
             )
         }
 
-        val NULL_PORTFOLIO = Portfolio(1, "test data", "this is a test data", "", "")
+        val TEST_PORTFOLIO = Portfolio(1, "test data", "this is a test data", "", "")
+        val NULL_PORTFOLIO = Portfolio(0, "", "", "", "")
     }
 }

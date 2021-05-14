@@ -6,6 +6,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import kr.co.soogong.master.domain.AppDatabase
 import kr.co.soogong.master.domain.estimation.EstimationDao
+import kr.co.soogong.master.domain.profile.ProfileDao
 import kr.co.soogong.master.domain.requirements.RequirementDao
 import kr.co.soogong.master.domain.user.UserDao
 import javax.inject.Singleton
@@ -29,5 +30,11 @@ class RoomModule {
     @Singleton
     fun provideUserDao(appDatabase: AppDatabase): UserDao {
         return appDatabase.userDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideProfileDao(appDatabase: AppDatabase): ProfileDao {
+        return appDatabase.profileDao()
     }
 }

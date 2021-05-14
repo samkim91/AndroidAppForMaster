@@ -40,13 +40,11 @@ class TitleEditTextCounterView @JvmOverloads constructor(
     var subTitle: String? = ""
         set(value) {
             field = value
-            binding.subTitle.text = value
-        }
+            if(!value.isNullOrEmpty()){
+                binding.subTitle.visibility = View.VISIBLE
+                binding.subTitle.text = value
+            }
 
-    var subTitleVisible: Boolean = false
-        set(value) {
-            field = value
-            binding.subTitle.visibility = if (value) View.VISIBLE else View.GONE
         }
 
     var blackSubTitle: Boolean = false
