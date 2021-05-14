@@ -45,6 +45,7 @@ class ProfileImageCard @JvmOverloads constructor(
             field = value
             if (value != null) {
                 newBadgeVisible = false
+                binding.subTitle.visibility = View.GONE
 
                 binding.imageContainer.visibility =
                     if (value.path.isEmpty()) View.GONE else View.VISIBLE

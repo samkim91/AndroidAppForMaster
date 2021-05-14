@@ -58,6 +58,7 @@ class ProfileDefaultCard @JvmOverloads constructor(
                     visibility = View.GONE
                 } else {
                     visibility = View.VISIBLE
+                    binding.subTitle.visibility = View.GONE
                     newBadgeVisible = false
                     text = value
                 }

@@ -1,6 +1,7 @@
 package kr.co.soogong.master.data.user
 
 import android.os.Parcelable
+import com.google.gson.JsonObject
 import kotlinx.parcelize.Parcelize
 import kr.co.soogong.master.data.category.BusinessType
 
@@ -20,4 +21,6 @@ data class SignUpInfo(
     val appPushAtNight: Boolean,
     val kakaoAlarm: Boolean,
     val smsAlarm: Boolean,
-) : Parcelable
+) : Parcelable {
+
+}

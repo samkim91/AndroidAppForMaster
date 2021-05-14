@@ -43,7 +43,7 @@ data class Review(
             )
         }
 
-        val NULL_REVIEW = Review(
+        val TEST_REVIEW = Review(
             1,
             4,
             4,
@@ -53,8 +53,8 @@ data class Review(
             "욕실 위생도기 및 수전 설치/교체 시공",
             "너무 꼼꼼히 잘 해주셨어요. 다음에 또 부탁드리고 싶네요! 감사합니다.",
             arrayListOf(
-                ImagePath.NULL_IMAGE_PATH,
-                ImagePath.NULL_IMAGE_PATH,
+                ImagePath.TEST_IMAGE_PATH,
+                ImagePath.TEST_IMAGE_PATH,
                 ),
             "2020.07.01"
         )

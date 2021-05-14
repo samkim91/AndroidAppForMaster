@@ -1,17 +1,23 @@
 package kr.co.soogong.master.domain.usecase.profile
 
 import dagger.Reusable
+import kr.co.soogong.master.BuildConfig
 import kr.co.soogong.master.data.profile.Portfolio
-import kr.co.soogong.master.domain.usecase.GetMasterKeyCodeUseCase
-import kr.co.soogong.master.network.ProfileService
 import javax.inject.Inject
 
 @Reusable
 class GetPortfolioUseCase @Inject constructor(
-    private val getMasterKeyCodeUseCase: GetMasterKeyCodeUseCase,
-    private val profileService: ProfileService,
-) {
-    operator fun invoke(portfolioId: Int): Portfolio {
-        return profileService.getPortfolio(getMasterKeyCodeUseCase()!!, portfolioId)
+    private val getProfileFromLocalUseCase: GetProfileFromLocalUseCase,
+    ) {
+    suspend operator fun invoke(portfolioId: Int): Portfolio {
+        if (BuildConfig.DEBUG) {
+            return Portfolio.TEST_PORTFOLIO
+        }
+
+        getProfileFromLocalUseCase().let { profile ->
+            return profile.basicInformation?.portfolios?.find { portfolio ->
+                portfolio.itemId == portfolioId
+            } ?: Portfolio.NULL_PORTFOLIO
+        }
     }
 }

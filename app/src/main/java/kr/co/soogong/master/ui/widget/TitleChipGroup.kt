@@ -73,6 +73,7 @@ class TitleChipGroup @JvmOverloads constructor(
     fun addChip(
         child: Chip
     ) {
+        binding.chipGroup.removeAllViews()
         binding.chipGroup.addView(child)
     }
 

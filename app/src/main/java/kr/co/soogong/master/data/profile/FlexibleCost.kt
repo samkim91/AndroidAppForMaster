@@ -23,6 +23,7 @@ data class FlexibleCost(
             )
         }
 
-        val NULL_FLEXIBLE_COST = FlexibleCost("없어요", "엘리베이터 이용 불가시", "있어요", "test")
+        val TEST_FLEXIBLE_COST = FlexibleCost("없어요", "엘리베이터 이용 불가시", "있어요", "test")
+        val NULL_FLEXIBLE_COST = FlexibleCost("", "", "", "")
     }
 }

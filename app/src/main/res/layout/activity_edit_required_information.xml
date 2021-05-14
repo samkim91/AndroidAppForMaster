@@ -144,9 +144,9 @@
                     app:subTitle='@{"업체만의 특별한 점을 소개해주세요."}'
                     app:title='@{"업체 소개"}' />
 
-                <!-- 대표 이미지 COMPANY_IMAGE -->
+                <!-- 대표 이미지 REPRESENTATIVE_IMAGE -->
                 <kr.co.soogong.master.ui.widget.ProfileImageCard
-                    android:id="@+id/company_images"
+                    android:id="@+id/representative_images"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/gap_20"
@@ -154,9 +154,9 @@
                     android:layout_marginEnd="@dimen/gap_20"
                     android:background="@drawable/shape_radius8_white_background"
                     android:elevation="@dimen/gap_4"
-                    app:defaultButtonByImageV2="@{vm.requiredInformation.companyImages.get(0)}"
-                    app:imageUrl="@{vm.requiredInformation.companyImages.get(0)}"
-                    app:firstDetailWithSimpleText="@{vm.requiredInformation.companyImages.get(0)}"
+                    app:defaultButtonByImageV2="@{vm.requiredInformation.representativeImages.get(0)}"
+                    app:imageUrl="@{vm.requiredInformation.representativeImages.get(0)}"
+                    app:firstDetailWithSimpleText="@{vm.requiredInformation.representativeImages.get(0)}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/brief_introduction"
@@ -178,7 +178,7 @@
                     app:imageUrl="@{vm.requiredInformation.businessUnitInformation.imageForShow}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/company_images"
+                    app:layout_constraintTop_toBottomOf="@id/representative_images"
                     app:secondDetail="@{String.valueOf(vm.requiredInformation.businessUnitInformation.identicalNumber)}"
                     app:title='@{"사업자 정보"}' />
 
@@ -282,13 +282,13 @@
                     android:layout_marginBottom="@dimen/gap_24"
                     android:background="@drawable/shape_radius8_white_background"
                     android:elevation="@dimen/gap_4"
-                    app:defaultButtonByString="@{vm.requiredInformation.address}"
-                    app:firstDetail="@{vm.requiredInformation.address}"
+                    app:defaultButtonByString="@{String.valueOf(1)}"
+                    app:firstDetail="@{String.valueOf(1)}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/major"
-                    app:secondDetail="@{vm.requiredInformation.subAddress}"
+                    app:secondDetail="@{String.valueOf(1)}"
                     app:title='@{"업체 주소"}' />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>

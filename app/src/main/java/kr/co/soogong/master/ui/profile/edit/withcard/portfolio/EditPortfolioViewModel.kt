@@ -4,10 +4,12 @@ import android.net.Uri
 import android.view.View
 import androidx.core.net.toUri
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.launch
 import kr.co.soogong.master.data.profile.Portfolio
 import kr.co.soogong.master.domain.usecase.GetMasterKeyCodeUseCase
 import kr.co.soogong.master.domain.usecase.profile.GetPortfolioUseCase
@@ -28,12 +30,15 @@ class EditPortfolioViewModel @Inject constructor(
 
     fun getPortfolio(portfolioId: Int) {
         Timber.tag(TAG).d("getPortfolio: $portfolioId")
-        // Todo.. 수정할 포트폴리오 가져오기
-        val portfolio = getPortfolioUseCase(portfolioId)
-        title.postValue(portfolio.title)
-        imageBeforeJob.postValue(portfolio.imageBeforeJob.toUri())
-        imageAfterJob.postValue(portfolio.imageAfterJob.toUri())
-        description.postValue(portfolio.description)
+
+        viewModelScope.launch {
+            getPortfolioUseCase(portfolioId).let { portfolio ->
+                title.postValue(portfolio.title)
+                imageBeforeJob.postValue(portfolio.imageBeforeJob.toUri())
+                imageAfterJob.postValue(portfolio.imageAfterJob.toUri())
+                description.postValue(portfolio.description)
+            }
+        }
     }
 
     fun savePortfolio(portfolioId: Int) {

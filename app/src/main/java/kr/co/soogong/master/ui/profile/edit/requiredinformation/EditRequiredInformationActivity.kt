@@ -1,5 +1,6 @@
 package kr.co.soogong.master.ui.profile.edit.requiredinformation
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
@@ -7,6 +8,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ActivityEditRequiredInformationBinding
 import kr.co.soogong.master.ui.base.BaseActivity
+import kr.co.soogong.master.uiinterface.profile.EditProfileContainerActivityHelper
+import kr.co.soogong.master.uiinterface.profile.EditProfileContainerFragmentHelper.EDIT_BRIEF_INTRODUCTION
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -36,6 +39,45 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
             }
 
             briefIntroduction.addDefaultButtonClickListener{
+                startActivity(
+                    Intent(
+                        EditProfileContainerActivityHelper.getIntent(
+                            this@EditRequiredInformationActivity,
+                            EDIT_BRIEF_INTRODUCTION
+                        )
+                    )
+                )
+            }
+
+            representativeImages.addDefaultButtonClickListener{
+
+            }
+
+            businessUnitInformation.addDefaultButtonClickListener{
+
+            }
+
+            warrantyInformation.addDefaultButtonClickListener{
+
+            }
+
+            career.addDefaultButtonClickListener{
+
+            }
+
+            businessRepresentativeName.addDefaultButtonClickListener{
+
+            }
+
+            phoneNumber.addDefaultButtonClickListener{
+
+            }
+
+            major.addDefaultButtonClickListener{
+
+            }
+
+            address.addDefaultButtonClickListener{
 
             }
         }
@@ -67,14 +109,14 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
 
         with(viewModel.requiredInformation){
             if(!value?.briefIntroduction.isNullOrEmpty()) insertedCount++
-            if(value?.companyImages?.get(0)?.path.isNullOrEmpty()) insertedCount++
+            if(value?.representativeImages?.get(0)?.path.isNullOrEmpty()) insertedCount++
             if(!value?.businessUnitInformation?.businessUnit.isNullOrEmpty()) insertedCount++
             if(!value?.warrantyPeriod.isNullOrEmpty()) insertedCount++
             if(!value?.career.isNullOrEmpty()) insertedCount++
             if(!value?.businessRepresentativeName.isNullOrEmpty()) insertedCount++
             if(!value?.phoneNumber.isNullOrEmpty()) insertedCount++
             if(!value?.businessType.isNullOrEmpty()) insertedCount++
-            if(!value?.address.isNullOrEmpty()) insertedCount++
+//            if(!value?.address.isNullOrEmpty()) insertedCount++
         }
 
         val percentage = insertedCount / totalCount * 100

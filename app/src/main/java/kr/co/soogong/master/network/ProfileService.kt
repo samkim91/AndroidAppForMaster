@@ -15,12 +15,16 @@ class ProfileService @Inject constructor(
         return User.fromJson(profileInterface.getUserProfile(keycode))
     }
 
+    suspend fun getProfile(masterId: String?): Profile {
+        return Profile.fromJson(profileInterface.getProfile(masterId))
+    }
+
     fun getPortfolio(masterId: String, portfolioId: Int): Portfolio {
         val query = HashMap<String, String>()
         query["master_id"] = masterId
         query["portfolio_id"] = portfolioId.toString()
 
-        return Portfolio.NULL_PORTFOLIO
+        return Portfolio.TEST_PORTFOLIO
         // Todo.. 이후 작업해야함
         // return Portfolio.fromJson(profileInterface.getPortfolio(query))
     }
@@ -43,7 +47,7 @@ class ProfileService @Inject constructor(
         query["master_id"] = masterId
         query["price_by_project_id"] = priceByProjectId.toString()
 
-        return PriceByProject.NULL_PRICE_BY_PROJECT
+        return PriceByProject.TEST_PRICE_BY_PROJECT
         // Todo.. server 이후로 작업해야함
         // return PriceByProject.fromJson(profileInterface.getPriceByProject(query))
     }
@@ -85,7 +89,7 @@ class ProfileService @Inject constructor(
 
         query["master_id"] = masterId
 
-        return listOf(Portfolio.NULL_PORTFOLIO, Portfolio.NULL_PORTFOLIO, Portfolio.NULL_PORTFOLIO)
+        return listOf(Portfolio.TEST_PORTFOLIO, Portfolio.TEST_PORTFOLIO, Portfolio.TEST_PORTFOLIO)
         // Todo.. server 이후로 작업해야함
 //        return profileInterface.getPortfolioList(query)
     }
@@ -95,18 +99,9 @@ class ProfileService @Inject constructor(
 
         query["master_id"] = masterId
 
-        return listOf(PriceByProject.NULL_PRICE_BY_PROJECT, PriceByProject.NULL_PRICE_BY_PROJECT, PriceByProject.NULL_PRICE_BY_PROJECT)
+        return listOf(PriceByProject.TEST_PRICE_BY_PROJECT, PriceByProject.TEST_PRICE_BY_PROJECT, PriceByProject.TEST_PRICE_BY_PROJECT)
         // Todo.. server 이후로 작업해야함
 //        return profileInterface.getPortfolioList(query)
-    }
-
-    fun getFlexibleCost(masterId: String): FlexibleCost {
-        val query = HashMap<String, String>()
-        query["master_id"] = masterId
-
-        return FlexibleCost.NULL_FLEXIBLE_COST
-        // Todo.. server 이후로 작업해야함
-        // return PriceByProject.fromJson(profileInterface.getPriceByProject(query))
     }
 
     fun saveFlexibleCost(masterId: String, flexibleCost: FlexibleCost): Single<Response> {
@@ -126,7 +121,7 @@ class ProfileService @Inject constructor(
         val query = HashMap<String, String>()
         query["master_id"] = masterId
 
-        return OtherFlexibleOptions.NULL_OTHER_FLEXIBLE_OPTIONS
+        return OtherFlexibleOptions.TEST_OTHER_FLEXIBLE_OPTIONS
         // Todo.. server 이후로 작업해야함
 //         return profileInterface.getOtherFlexibleOptions(query)
     }
@@ -145,7 +140,7 @@ class ProfileService @Inject constructor(
         val query = HashMap<String, String>()
         query["master_id"] = masterId
 
-        return MyReview.NULL_PRICE_BY_PROJECT
+        return MyReview.TEST_MY_REVIEW
         // Todo.. server 이후로 작업해야함
 //         return profileInterface.getOtherFlexibleOptions(query)
     }
@@ -154,8 +149,9 @@ class ProfileService @Inject constructor(
         val query = HashMap<String, String>()
         query["master_id"] = masterId
 
-        return RequiredInformation.NULL_REQUIRED_INFORMATION
+        return RequiredInformation.TEST_REQUIRED_INFORMATION
         // Todo.. server 이후로 작업해야함
 //         return profileInterface.getOtherFlexibleOptions(query)
     }
+
 }
