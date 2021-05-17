@@ -52,7 +52,7 @@ data class RequiredInformation(
             briefIntroduction = "강남지역 30년 역사의 싱크대 장인! 믿고 맡게 주세요! 강남지역 30년 역사의 싱크대 장인! 믿고 맡게 주세요! 강남지역 30년 역사의 싱크대 장인! 믿고 맡게 주세요!",
             representativeImages = listOf(ImagePath.TEST_IMAGE_PATH, ImagePath.TEST_IMAGE_PATH, ImagePath.TEST_IMAGE_PATH),
             businessRepresentativeName = "성현식",
-            businessUnitInformation = BusinessUnitInformation.TEST_BUSINESS_UNIT_INFORMATION,
+            businessUnitInformation = BusinessUnitInformation.TEST_BUSINESS_UNIT_INFORMATION_2,
             warrantyPeriod = "2년",
             warrantyDescription = "2년 동안 이것저것 고쳐줌. 2년 동안 이것저것 고쳐줌. 2년 동안 이것저것 고쳐줌. 2년 동안 이것저것 고쳐줌.",
             career = "2년",

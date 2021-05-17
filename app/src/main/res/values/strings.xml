@@ -220,7 +220,7 @@
 - 시공 설명 : 600*600 타일 기준 9장이 1평 입니다.</string>
 
     <string name="get_images_button_text">사진 가져오기</string>
-
+    <string name="business_identical_image_holder_label">사업자등록증 사진을 올려주세요.</string>
 
     <!-- Request Detail -->
     <string name="request_date">접수일시</string>
@@ -276,7 +276,7 @@
 
     <string name="end_estimate_succeeded">시공 완료 처리 되었고,\n고객님께 리뷰 요청이 전송되었어요.</string>
     <string name="view_estimate_on_refuse_to_estimate_success">문의가 삭제되었습니다.</string>
-    <string name="error_message_of_request_failed">해당 요청을 처리할 수 없습니다. 다시 요청해주세요.</string>
+    <string name="error_message_of_request_failed">해당 요청을 처리할 수 없습니다. 다시 요청하거나 수공에 연락해주세요.</string>
     <string name="ask_for_review_successful">리뷰 요청을 완료했어요!</string>
     <string name="sign_up_successfully">회원 가입이 완료되었습니다!\n필수 정보를 모두 입력하고\n문의를 처리해보세요!</string>
 

@@ -101,7 +101,7 @@ class ProfileImageCard @JvmOverloads constructor(
         }
 
     // 등록하기 <-> 수정하기 버튼 셋
-    var defaultButtonByImage: ImagePath? = ImagePath("")
+    var defaultButtonByImage: ImagePath? = ImagePath.NULL_IMAGE_PATH
         set(value) {
             field = value
             if (value?.path.isNullOrEmpty()) {
@@ -112,7 +112,7 @@ class ProfileImageCard @JvmOverloads constructor(
         }
 
     // 등록하기 <-> 편집하기 버튼 셋
-    var defaultButtonByImageV2: ImagePath? = ImagePath("")
+    var defaultButtonByImageV2: ImagePath? = ImagePath.NULL_IMAGE_PATH
         set(value) {
             field = value
             if (value?.path.isNullOrEmpty()) {
@@ -123,7 +123,7 @@ class ProfileImageCard @JvmOverloads constructor(
         }
 
     // 등록하기 <-> 삭제하기, 수정하기 버튼 셋
-    var defaultButtonByImageV3: ImagePath? = ImagePath("")
+    var defaultButtonByImageV3: ImagePath? = ImagePath.NULL_IMAGE_PATH
         set(value) {
             field = value
             if (value?.path.isNullOrEmpty()) {

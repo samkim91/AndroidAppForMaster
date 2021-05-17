@@ -19,11 +19,10 @@ class EditProfileWithCardViewModel @Inject constructor(
     private val getPriceByProjectListUseCase: GetPriceByProjectListUseCase,
     private val deletePortfolioUseCase: DeletePortfolioUseCase,
     private val deletePriceByProjectUseCase: DeletePriceByProjectUseCase,
-
-    ) : BaseViewModel() {
+) : BaseViewModel() {
     val itemList = ListLiveData<IEditProfileWithCard>()
 
-    fun getPortfolioList(){
+    fun getPortfolioList() {
         Timber.tag(TAG).d("getPortfolioList: ")
         viewModelScope.launch {
             itemList.addAll(getPortfolioListUseCase())
@@ -37,7 +36,7 @@ class EditProfileWithCardViewModel @Inject constructor(
         }
     }
 
-    fun deletePortfolio(itemId: Int){
+    fun deletePortfolio(itemId: Int) {
         Timber.tag(TAG).d("deletePortfolio: $itemId")
         deletePortfolioUseCase(itemId)
             .subscribeOn(Schedulers.io())
@@ -52,7 +51,7 @@ class EditProfileWithCardViewModel @Inject constructor(
             ).addToDisposable()
     }
 
-    fun deletePriceByProject(itemId: Int){
+    fun deletePriceByProject(itemId: Int) {
         Timber.tag(TAG).d("deletePriceByProject: $itemId")
         deletePriceByProjectUseCase(itemId)
             .subscribeOn(Schedulers.io())

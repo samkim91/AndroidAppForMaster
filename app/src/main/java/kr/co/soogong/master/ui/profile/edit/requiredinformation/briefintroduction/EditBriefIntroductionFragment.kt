@@ -14,6 +14,10 @@ import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.profile.edit.flexiblecost.FlexibleCostChipGroupHelper.CRANE_USAGE
 import kr.co.soogong.master.ui.profile.edit.flexiblecost.FlexibleCostChipGroupHelper.PACKAGE_COST
 import kr.co.soogong.master.ui.profile.edit.flexiblecost.FlexibleCostChipGroupHelper.TRAVEL_COST
+import kr.co.soogong.master.ui.profile.edit.requiredinformation.briefintroduction.EditBriefIntroductionViewModel.Companion.SAVE_BRIEF_INTRODUCTION_FAILED
+import kr.co.soogong.master.ui.profile.edit.requiredinformation.briefintroduction.EditBriefIntroductionViewModel.Companion.SAVE_BRIEF_INTRODUCTION_SUCCESSFULLY
+import kr.co.soogong.master.util.EventObserver
+import kr.co.soogong.master.util.extension.toast
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -27,6 +31,7 @@ class EditBriefIntroductionFragment : BaseFragment<FragmentEditBriefIntroduction
         Timber.tag(TAG).d("onViewCreated: ")
         initLayout()
         registerEventObserve()
+        viewModel.getBriefIntro()
     }
 
     override fun initLayout() {
@@ -44,12 +49,16 @@ class EditBriefIntroductionFragment : BaseFragment<FragmentEditBriefIntroduction
 
     private fun registerEventObserve() {
         Timber.tag(TAG).d("registerEventObserve: ")
-
-    }
-
-    override fun onStart() {
-        super.onStart()
-        viewModel.getBriefIntro()
+        viewModel.action.observe(viewLifecycleOwner, EventObserver { event ->
+            when(event) {
+                SAVE_BRIEF_INTRODUCTION_SUCCESSFULLY -> {
+                    activity?.onBackPressed()
+                }
+                SAVE_BRIEF_INTRODUCTION_FAILED -> {
+                    requireContext().toast(getString(R.string.error_message_of_request_failed))
+                }
+            }
+        })
     }
 
     companion object {

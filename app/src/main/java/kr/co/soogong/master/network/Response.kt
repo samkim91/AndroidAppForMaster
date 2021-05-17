@@ -10,5 +10,6 @@ data class Response(
     ){
     companion object {
         val NULL_RESPONSE = Response("", "", 0, JsonObject())
+        val TEST_RESPONSE = Response("Requested Successfully", "200", 200, JsonObject())
     }
 }

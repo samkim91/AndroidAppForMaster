@@ -16,7 +16,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="사업경자 등록여부를 알려주세요." />
+            tools:text="사업자 등록여부를 알려주세요." />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/sub_title"

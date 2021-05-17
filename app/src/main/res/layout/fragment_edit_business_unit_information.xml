@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/bind">
+
+    <data>
+
+        <import type="android.net.Uri" />
+
+        <import type="android.text.InputType" />
+
+        <variable
+            name="vm"
+            type="kr.co.soogong.master.ui.profile.edit.requiredinformation.businessunitinformation.EditBusinessUnitInformationViewModel" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:fillViewport="true"
+            android:overScrollMode="never">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/gap_20"
+                android:paddingTop="@dimen/gap_32"
+                android:paddingEnd="@dimen/gap_20"
+                android:paddingBottom="@dimen/gap_52">
+
+                <kr.co.soogong.master.ui.widget.TitleChipGroup
+                    android:id="@+id/business_unit_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:title='@{"사업자 등록여부를 알려주세요."}'
+                    app:blackSubTitle="@{false}"
+                    app:alertText='@{"필수 정보입니다."}'
+                    />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/business_unit_group"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/gap_28"
+                    app:layout_constraintTop_toBottomOf="@id/business_unit_type"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:visibility="gone"
+                    >
+
+                <kr.co.soogong.master.ui.widget.TitleEditText
+                    android:id="@+id/business_unit_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:alertText='@{"2자 이상 20자 이내로 입력해주세요."}'
+                    app:hintText='@{"예시) 수공"}'
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/business_unit_type"
+                    app:content="@={vm.businessUnitName}"
+                    app:title='@{"업체 이름을 입력해주세요."}' />
+
+                <kr.co.soogong.master.ui.widget.TitleEditText
+                    android:id="@+id/identical_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/gap_28"
+                    app:alertText='@{"필수 정보입니다."}'
+                    app:hintText='@{"사업자등록번호 예시) 1053578512"}'
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/business_unit_name"
+                    app:content="@={vm.identicalNumber}"
+                    app:setInputType="@{InputType.TYPE_CLASS_NUMBER}"
+                    app:title='@{"사업자등록번호를 입력해주세요."}' />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/identical_image_holder_label"
+                    style="@style/medium_text_style.medium"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/business_identical_image_holder_label"
+                    android:layout_marginTop="@dimen/gap_28"
+                    android:textColor="@color/text_basic_color"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/identical_number"/>
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/camera_icon_for_identical_image"
+                    android:layout_width="@dimen/gap_100"
+                    android:layout_height="@dimen/gap_100"
+                    android:layout_marginTop="@dimen/gap_12"
+                    android:background="@drawable/ic_camera"
+                    app:layout_constraintStart_toStartOf="@id/identical_image_holder_label"
+                    app:layout_constraintTop_toBottomOf="@id/identical_image_holder_label"
+                    bind:visible="@{vm.identicalImage == Uri.EMPTY}" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/identical_image_holder"
+                    android:layout_width="@dimen/gap_100"
+                    android:layout_height="@dimen/gap_100"
+                    android:layout_marginTop="@dimen/gap_12"
+                    app:cardCornerRadius="@dimen/gap_8"
+                    app:layout_constraintStart_toStartOf="@id/identical_image_holder_label"
+                    app:layout_constraintTop_toBottomOf="@id/identical_image_holder_label"
+                    bind:visible="@{vm.identicalImage != Uri.EMPTY}">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/image_before_job_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        bind:image_uri="@{vm.identicalImage}" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/image_before_job_close_icon"
+                        android:layout_width="@dimen/gap_24"
+                        android:layout_height="@dimen/gap_24"
+                        android:layout_gravity="right"
+                        bind:onClick="@{vm::clearImage}"
+                        android:background="@drawable/ic_close_in_image" />
+                </androidx.cardview.widget.CardView>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/alert"
+                    style="@style/small_text_style"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:textColor="@color/text_alert_color"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/camera_icon_for_identical_image"
+                    android:text="@string/alert_required_field" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <kr.co.soogong.master.ui.widget.TitleEditText
+                    android:id="@+id/birthday"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/gap_28"
+                    android:visibility="gone"
+                    app:alertText='@{"필수 정보입니다."}'
+                    app:hintText='@{"생년월일 예시) 19860217"}'
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/business_unit_group"
+                    app:content="@={vm.birthday}"
+                    app:setInputType="@{InputType.TYPE_CLASS_NUMBER}"
+                    app:title='@{"생년월일을 입력해주세요."}' />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/default_button"
+            style="@style/medium_text_style.bold"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@color/color_22D47B"
+            android:text="@string/save"
+            android:textColor="@color/basic_white" />
+    </LinearLayout>
+
+</layout>

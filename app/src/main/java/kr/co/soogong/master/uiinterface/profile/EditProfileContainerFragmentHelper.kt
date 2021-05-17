@@ -4,6 +4,7 @@ import androidx.fragment.app.Fragment
 import kr.co.soogong.master.ui.profile.edit.flexiblecost.EditFlexibleCostFragment
 import kr.co.soogong.master.ui.profile.edit.otherflexibleoptions.EditOtherFlexibleOptionsFragment
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.briefintroduction.EditBriefIntroductionFragment
+import kr.co.soogong.master.ui.profile.edit.requiredinformation.businessunitinformation.EditBusinessUnitInformationFragment
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.representativeimages.EditRepresentativeImagesFragment
 import kr.co.soogong.master.ui.profile.edit.withcard.portfolio.EditPortfolioFragment
 import kr.co.soogong.master.ui.profile.edit.withcard.pricebyproject.EditPriceByProjectFragment
@@ -20,9 +21,9 @@ object EditProfileContainerFragmentHelper {
 
     const val EDIT_BRIEF_INTRODUCTION = "업체 소개 등록·수정하기"
     const val EDIT_COMPANY_IMAGE = "대표 이미지 편집하기"
-    const val EDIT_BUSINESS_REPRESENTATIVE = "사업자 대표명 등록·수정하기"
     const val EDIT_BUSINESS_UNIT_INFORMATION = "사업자 정보 등록·수정하기"
     const val EDIT_WARRANTY_INFORMATION = "A/S 정보 등록·수정하기"
+    const val EDIT_BUSINESS_REPRESENTATIVE_NAME = "대표자명 등록·수정하기"
     const val EDIT_COMPANY_NAME = "업체 이름 수정하기"
     const val EDIT_PHONE_NUMBER = "휴대폰번호 수정하기"
     const val EDIT_ADDRESS = "업체 주소 수정하기"
@@ -44,6 +45,7 @@ object EditProfileContainerFragmentHelper {
             EDIT_OTHER_FLEXIBLE_OPTIONS -> EditOtherFlexibleOptionsFragment.newInstance()
             EDIT_BRIEF_INTRODUCTION -> EditBriefIntroductionFragment.newInstance()
             EDIT_COMPANY_IMAGE -> EditRepresentativeImagesFragment.newInstance()
+            EDIT_BUSINESS_UNIT_INFORMATION -> EditBusinessUnitInformationFragment.newInstance()
             else -> Fragment()
         }
 }
