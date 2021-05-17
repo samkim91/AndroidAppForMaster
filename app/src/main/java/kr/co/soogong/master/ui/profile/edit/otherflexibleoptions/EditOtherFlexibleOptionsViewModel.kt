@@ -21,23 +21,28 @@ class EditOtherFlexibleOptionsViewModel @Inject constructor(
 ) : BaseViewModel() {
     val otherFlexibleOptions = ListLiveData<String>()
 
-    fun getFlexibleCosts() {
+    fun getOtherFlexibleOpt() {
         Timber.tag(TAG).d("getFlexibleCosts: ")
         viewModelScope.launch {
             otherFlexibleOptions.addAll(getOtherFlexibleOptionsUseCase().options)
         }
     }
 
-    fun saveFlexibleCosts() {
+    fun saveOtherFlexibleOpt() {
         Timber.tag(TAG).d("saveFlexibleCosts: ")
-        saveOtherFlexibleOptionsUseCase(
-            OtherFlexibleOptions.TEST_OTHER_FLEXIBLE_OPTIONS
-        ).subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeBy(
-                onSuccess = {},
-                onError = {}
-            ).addToDisposable()
+
+        otherFlexibleOptions.value?.let {
+            saveOtherFlexibleOptionsUseCase(
+                OtherFlexibleOptions(
+                    it
+                )
+            ).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeBy(
+                    onSuccess = {},
+                    onError = {}
+                ).addToDisposable()
+        }
     }
 
     companion object {

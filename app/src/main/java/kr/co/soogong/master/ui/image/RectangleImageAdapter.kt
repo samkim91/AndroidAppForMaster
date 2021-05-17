@@ -12,7 +12,7 @@ class RectangleImageAdapter(
     private val imageList: ArrayList<ImagePath> = arrayListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RectangleImageViewHolder =
-        RectangleImageViewHolder.create(parent)
+        RectangleImageViewHolder.create(parent, viewType)
 
     override fun onBindViewHolder(holder: RectangleImageViewHolder, position: Int) {
         val params = holder.itemView.layoutParams as ViewGroup.MarginLayoutParams

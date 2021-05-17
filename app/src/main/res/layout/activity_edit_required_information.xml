@@ -159,6 +159,7 @@
                     app:firstDetailWithSimpleText="@{vm.requiredInformation.representativeImages.get(0)}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
+                    app:imageCount="@{vm.requiredInformation.representativeImages.size}"
                     app:layout_constraintTop_toBottomOf="@id/brief_introduction"
                     app:subTitle='@{"업체 페이지에 노출되는 대표 이미지 입니다."}'
                     app:title='@{"대표 이미지"}' />

@@ -7,12 +7,8 @@ import androidx.fragment.app.viewModels
 import com.google.android.material.chip.Chip
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
-import kr.co.soogong.master.databinding.FragmentEditFlexibleCostBinding
 import kr.co.soogong.master.databinding.FragmentEditOtherFlexibleOptionsBinding
 import kr.co.soogong.master.ui.base.BaseFragment
-import kr.co.soogong.master.ui.profile.edit.flexiblecost.FlexibleCostChipGroupHelper.CRANE_USAGE
-import kr.co.soogong.master.ui.profile.edit.flexiblecost.FlexibleCostChipGroupHelper.PACKAGE_COST
-import kr.co.soogong.master.ui.profile.edit.flexiblecost.FlexibleCostChipGroupHelper.TRAVEL_COST
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -49,7 +45,7 @@ class EditOtherFlexibleOptionsFragment : BaseFragment<FragmentEditOtherFlexibleO
 
     private fun initChips() {
         OtherFlexibleOptionsChipGroupHelper(layoutInflater, binding.otherOptionsChipGroup)
-        viewModel.getFlexibleCosts()
+        viewModel.getOtherFlexibleOpt()
         // 가져온 text들을 chip group에서 찾아서 selected 표시를 해준다.
         if (viewModel.otherFlexibleOptions.getItemCount() > 0) {
             viewModel.otherFlexibleOptions.value?.map { item ->
@@ -62,6 +58,7 @@ class EditOtherFlexibleOptionsFragment : BaseFragment<FragmentEditOtherFlexibleO
     }
 
     private fun saveCheckedChips() {
+        // 저장하기 위에, ListLiveData에 남아있는 선택값들을 클리어하고 UI에서 선택된 값들을 새로 set 해준다.
         viewModel.otherFlexibleOptions.clear()
         val checkChipIds: List<Int> = binding.otherOptionsChipGroup.chipGroup.checkedChipIds
         checkChipIds.forEach { chipId ->
@@ -70,7 +67,7 @@ class EditOtherFlexibleOptionsFragment : BaseFragment<FragmentEditOtherFlexibleO
                 viewModel.otherFlexibleOptions.add(it.toString())
             }
         }
-        viewModel.saveFlexibleCosts()
+        viewModel.saveOtherFlexibleOpt()
     }
 
     companion object {
