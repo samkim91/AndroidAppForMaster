@@ -1,10 +1,10 @@
-package kr.co.soogong.master.ui.widget.titlerecyclerimage
+package kr.co.soogong.master.ui.image
 
 import android.net.Uri
 import androidx.recyclerview.widget.RecyclerView
 import kr.co.soogong.master.databinding.ViewHolderImageDeleteButtonBinding
 
-class TitleRecyclerViewHolder(
+class RectangleImageWithCloseHolder(
     private val binding: ViewHolderImageDeleteButtonBinding,
 ) : RecyclerView.ViewHolder(binding.root) {
 
@@ -22,4 +22,6 @@ class TitleRecyclerViewHolder(
             executePendingBindings()
         }
     }
+
+
 }

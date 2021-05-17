@@ -47,6 +47,11 @@ class EditBriefIntroductionFragment : BaseFragment<FragmentEditBriefIntroduction
 
     }
 
+    override fun onStart() {
+        super.onStart()
+        viewModel.getBriefIntro()
+    }
+
     companion object {
         private const val TAG = "EditBriefIntroductionFragment"
 

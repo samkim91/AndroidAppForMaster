@@ -1,9 +1,9 @@
-package kr.co.soogong.master.ui.widget.titlerecyclerimage
+package kr.co.soogong.master.ui.image
 
 import android.net.Uri
 import androidx.recyclerview.widget.DiffUtil
 
-class TitleRecyclerImageItemDiffUtil : DiffUtil.ItemCallback<Uri>() {
+class RectangleImageWithCloseDiffUtil : DiffUtil.ItemCallback<Uri>() {
     override fun areItemsTheSame(oldItem: Uri, newItem: Uri): Boolean {
         return oldItem == newItem
     }

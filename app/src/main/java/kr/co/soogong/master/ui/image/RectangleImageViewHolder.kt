@@ -17,7 +17,7 @@ class RectangleImageViewHolder(
     }
 
     companion object {
-        fun create(parent: ViewGroup): RectangleImageViewHolder {
+        fun create(parent: ViewGroup, viewType: Int): RectangleImageViewHolder {
             val binding = ViewHolderImageBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,

@@ -219,6 +219,9 @@
 - 가격 : 40,000\n
 - 시공 설명 : 600*600 타일 기준 9장이 1평 입니다.</string>
 
+    <string name="get_images_button_text">사진 가져오기</string>
+
+
     <!-- Request Detail -->
     <string name="request_date">접수일시</string>
     <string name="request_user_name">고객명</string>
@@ -281,8 +284,7 @@
     <string name="permission_denied_message">권한이 거부되었습니다.</string>
     <string name="permission_denied_status_message">권한을 거부하셨습니다. 앱을 사용하시려면 [앱 설정]-[권한] 에서 권한을 허용해주세요.</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="maximum_images_count">사진은 최대 10장까지 업로드 가능합니다.</string>
 
 
 </resources>

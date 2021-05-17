@@ -50,7 +50,7 @@ data class RequiredInformation(
 
         val TEST_REQUIRED_INFORMATION = RequiredInformation(
             briefIntroduction = "강남지역 30년 역사의 싱크대 장인! 믿고 맡게 주세요! 강남지역 30년 역사의 싱크대 장인! 믿고 맡게 주세요! 강남지역 30년 역사의 싱크대 장인! 믿고 맡게 주세요!",
-            representativeImages = listOf(ImagePath.TEST_IMAGE_PATH, ImagePath.TEST_IMAGE_PATH),
+            representativeImages = listOf(ImagePath.TEST_IMAGE_PATH, ImagePath.TEST_IMAGE_PATH, ImagePath.TEST_IMAGE_PATH),
             businessRepresentativeName = "성현식",
             businessUnitInformation = BusinessUnitInformation.TEST_BUSINESS_UNIT_INFORMATION,
             warrantyPeriod = "2년",
