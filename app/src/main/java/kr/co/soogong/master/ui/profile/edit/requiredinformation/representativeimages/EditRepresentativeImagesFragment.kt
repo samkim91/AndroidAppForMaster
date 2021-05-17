@@ -9,7 +9,11 @@ import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentEditRepresentativeImagesBinding
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.image.RectangleImageWithCloseAdapter
+import kr.co.soogong.master.ui.profile.edit.requiredinformation.briefintroduction.EditBriefIntroductionViewModel
+import kr.co.soogong.master.ui.profile.edit.requiredinformation.representativeimages.EditRepresentativeImagesViewModel.Companion.SAVE_REPRESENTATIVE_IMAGES_FAILED
+import kr.co.soogong.master.ui.profile.edit.requiredinformation.representativeimages.EditRepresentativeImagesViewModel.Companion.SAVE_REPRESENTATIVE_IMAGES_SUCCESSFULLY
 import kr.co.soogong.master.ui.utils.PermissionHelper
+import kr.co.soogong.master.util.EventObserver
 import kr.co.soogong.master.util.extension.toast
 import timber.log.Timber
 
@@ -24,6 +28,7 @@ class EditRepresentativeImagesFragment : BaseFragment<FragmentEditRepresentative
         Timber.tag(TAG).d("onViewCreated: ")
         initLayout()
         registerEventObserve()
+        viewModel.getRepresentativeImg()
     }
 
     override fun initLayout() {
@@ -62,17 +67,24 @@ class EditRepresentativeImagesFragment : BaseFragment<FragmentEditRepresentative
                 }
             )
 
-            viewModel.getRepresentativeImg()
-
             defaultButton.setOnClickListener {
-//                viewModel.saveBriefIntro()
+                viewModel.saveRepresentativeImg()
             }
         }
     }
 
     private fun registerEventObserve() {
         Timber.tag(TAG).d("registerEventObserve: ")
-
+        viewModel.action.observe(viewLifecycleOwner, EventObserver { event ->
+            when(event) {
+                SAVE_REPRESENTATIVE_IMAGES_SUCCESSFULLY -> {
+                    activity?.onBackPressed()
+                }
+                SAVE_REPRESENTATIVE_IMAGES_FAILED -> {
+                    requireContext().toast(getString(R.string.error_message_of_request_failed))
+                }
+            }
+        })
     }
 
     companion object {

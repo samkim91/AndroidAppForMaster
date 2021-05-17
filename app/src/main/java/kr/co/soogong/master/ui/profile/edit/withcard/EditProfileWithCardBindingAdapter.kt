@@ -1,5 +1,3 @@
-@file:JvmName("ReceivedBindingAdapter")
-
 package kr.co.soogong.master.ui.profile.edit.withcard
 
 import androidx.databinding.BindingAdapter

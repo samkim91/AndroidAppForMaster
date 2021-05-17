@@ -10,6 +10,7 @@ import kotlinx.coroutines.launch
 import kr.co.soogong.master.data.profile.OtherFlexibleOptions
 import kr.co.soogong.master.domain.usecase.profile.GetBriefIntroductionUseCase
 import kr.co.soogong.master.domain.usecase.profile.GetOtherFlexibleOptionsUseCase
+import kr.co.soogong.master.domain.usecase.profile.SaveBriefIntroductionUseCase
 import kr.co.soogong.master.domain.usecase.profile.SaveOtherFlexibleOptionsUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import timber.log.Timber
@@ -17,11 +18,11 @@ import javax.inject.Inject
 
 @HiltViewModel
 class EditBriefIntroductionViewModel @Inject constructor(
-//    private val saveOtherFlexibleOptionsUseCase: SaveOtherFlexibleOptionsUseCase,
     private val getBriefIntroductionUseCase: GetBriefIntroductionUseCase,
+    private val saveBriefIntroductionUseCase: SaveBriefIntroductionUseCase,
 ) : BaseViewModel() {
     val briefIntroduction = MutableLiveData("")
-    
+
     fun getBriefIntro() {
         Timber.tag(TAG).d("getBriefIntro: ")
         viewModelScope.launch {
@@ -31,18 +32,22 @@ class EditBriefIntroductionViewModel @Inject constructor(
 
     fun saveBriefIntro() {
         Timber.tag(TAG).d("saveBriefIntro: ")
-//        saveOtherFlexibleOptionsUseCase(
-//            OtherFlexibleOptions.TEST_OTHER_FLEXIBLE_OPTIONS
-//        ).subscribeOn(Schedulers.io())
-//            .observeOn(AndroidSchedulers.mainThread())
-//            .subscribeBy(
-//                onSuccess = {},
-//                onError = {}
-//            ).addToDisposable()
+        briefIntroduction.value?.let {
+            saveBriefIntroductionUseCase(
+                briefIntroduction = it
+            ).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeBy(
+                    onSuccess = { setAction(SAVE_BRIEF_INTRODUCTION_SUCCESSFULLY) },
+                    onError = { setAction(SAVE_BRIEF_INTRODUCTION_FAILED) }
+                ).addToDisposable()
+        }
     }
 
     companion object {
         private const val TAG = "EditBriefIntroductionViewModel"
+        const val SAVE_BRIEF_INTRODUCTION_SUCCESSFULLY = "SAVE_BRIEF_INTRODUCTION_SUCCESSFULLY"
+        const val SAVE_BRIEF_INTRODUCTION_FAILED = "SAVE_BRIEF_INTRODUCTION_FAILED"
 
     }
 }

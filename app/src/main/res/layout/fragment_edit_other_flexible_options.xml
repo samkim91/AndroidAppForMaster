@@ -40,7 +40,6 @@
                     app:subTitle='@{"중복선택 가능합니다."}'
                     app:subTitleVisible="@{true}"
                     app:blackSubTitle="@{false}"
-
                     />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
