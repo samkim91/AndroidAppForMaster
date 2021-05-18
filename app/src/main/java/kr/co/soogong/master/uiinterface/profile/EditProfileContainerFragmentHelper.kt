@@ -4,6 +4,7 @@ import androidx.fragment.app.Fragment
 import kr.co.soogong.master.ui.profile.edit.flexiblecost.EditFlexibleCostFragment
 import kr.co.soogong.master.ui.profile.edit.otherflexibleoptions.EditOtherFlexibleOptionsFragment
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.briefintroduction.EditBriefIntroductionFragment
+import kr.co.soogong.master.ui.profile.edit.requiredinformation.businessrepresentativename.EditBusinessRepresentativeNameFragment
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.businessunitinformation.EditBusinessUnitInformationFragment
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.representativeimages.EditRepresentativeImagesFragment
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.warrantyinformation.EditWarrantyInformationFragment
@@ -35,19 +36,25 @@ object EditProfileContainerFragmentHelper {
 //    const val EDIT_AVAILABLE_TIME_FOR_CONTACT = "연락 가능 시간 수정하기"
 
 
-
-    fun getFragment(pageName: String, itemId: Int = -1) : Fragment =
-        when(pageName) {
+    fun getFragment(pageName: String, itemId: Int = -1): Fragment =
+        when (pageName) {
             ADD_PORTFOLIO -> EditPortfolioFragment.newInstance(ADD_PORTFOLIO, null)
             EDIT_PORTFOLIO -> EditPortfolioFragment.newInstance(EDIT_PORTFOLIO, itemId)
-            ADD_PRICE_BY_PROJECTS -> EditPriceByProjectFragment.newInstance(ADD_PRICE_BY_PROJECTS, null)
-            EDIT_PRICE_BY_PROJECTS -> EditPriceByProjectFragment.newInstance(EDIT_PRICE_BY_PROJECTS, itemId)
+            ADD_PRICE_BY_PROJECTS -> EditPriceByProjectFragment.newInstance(
+                ADD_PRICE_BY_PROJECTS,
+                null
+            )
+            EDIT_PRICE_BY_PROJECTS -> EditPriceByProjectFragment.newInstance(
+                EDIT_PRICE_BY_PROJECTS,
+                itemId
+            )
             EDIT_FLEXIBLE_COST -> EditFlexibleCostFragment.newInstance()
             EDIT_OTHER_FLEXIBLE_OPTIONS -> EditOtherFlexibleOptionsFragment.newInstance()
             EDIT_BRIEF_INTRODUCTION -> EditBriefIntroductionFragment.newInstance()
             EDIT_COMPANY_IMAGE -> EditRepresentativeImagesFragment.newInstance()
             EDIT_BUSINESS_UNIT_INFORMATION -> EditBusinessUnitInformationFragment.newInstance()
             EDIT_WARRANTY_INFORMATION -> EditWarrantyInformationFragment.newInstance()
+            EDIT_BUSINESS_REPRESENTATIVE_NAME -> EditBusinessRepresentativeNameFragment.newInstance()
             else -> Fragment()
         }
 }
