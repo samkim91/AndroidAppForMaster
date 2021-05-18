@@ -193,12 +193,12 @@
                     android:layout_marginEnd="@dimen/gap_20"
                     android:background="@drawable/shape_radius8_white_background"
                     android:elevation="@dimen/gap_4"
-                    app:defaultButtonByString="@{vm.requiredInformation.warrantyPeriod}"
-                    app:firstDetail="@{vm.requiredInformation.warrantyPeriod}"
+                    app:defaultButtonByString="@{vm.requiredInformation.warrantyInformation.warrantyPeriod}"
+                    app:firstDetail="@{vm.requiredInformation.warrantyInformation.warrantyPeriod}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/business_unit_information"
-                    app:secondDetail="@{vm.requiredInformation.warrantyDescription}"
+                    app:secondDetail="@{vm.requiredInformation.warrantyInformation.warrantyDescription}"
                     app:subTitle='@{"고객이 안심하고 시공할 수 있도록 A/S 정보를 알려주세요."}'
                     app:title='@{"A/S 정보"}' />
 

@@ -6,6 +6,7 @@ import kr.co.soogong.master.ui.profile.edit.otherflexibleoptions.EditOtherFlexib
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.briefintroduction.EditBriefIntroductionFragment
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.businessunitinformation.EditBusinessUnitInformationFragment
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.representativeimages.EditRepresentativeImagesFragment
+import kr.co.soogong.master.ui.profile.edit.requiredinformation.warrantyinformation.EditWarrantyInformationFragment
 import kr.co.soogong.master.ui.profile.edit.withcard.portfolio.EditPortfolioFragment
 import kr.co.soogong.master.ui.profile.edit.withcard.pricebyproject.EditPriceByProjectFragment
 
@@ -46,6 +47,7 @@ object EditProfileContainerFragmentHelper {
             EDIT_BRIEF_INTRODUCTION -> EditBriefIntroductionFragment.newInstance()
             EDIT_COMPANY_IMAGE -> EditRepresentativeImagesFragment.newInstance()
             EDIT_BUSINESS_UNIT_INFORMATION -> EditBusinessUnitInformationFragment.newInstance()
+            EDIT_WARRANTY_INFORMATION -> EditWarrantyInformationFragment.newInstance()
             else -> Fragment()
         }
 }

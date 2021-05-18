@@ -16,11 +16,6 @@ class BottomDialogRecyclerView(
 ) : BottomSheetDialogFragment() {
     lateinit var binding: BottomDialogRecyclerViewBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        Timber.tag(TAG).d("onCreate: ")
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

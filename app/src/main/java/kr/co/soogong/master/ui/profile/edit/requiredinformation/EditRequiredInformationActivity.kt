@@ -12,6 +12,7 @@ import kr.co.soogong.master.uiinterface.profile.EditProfileContainerActivityHelp
 import kr.co.soogong.master.uiinterface.profile.EditProfileContainerFragmentHelper.EDIT_BRIEF_INTRODUCTION
 import kr.co.soogong.master.uiinterface.profile.EditProfileContainerFragmentHelper.EDIT_BUSINESS_UNIT_INFORMATION
 import kr.co.soogong.master.uiinterface.profile.EditProfileContainerFragmentHelper.EDIT_COMPANY_IMAGE
+import kr.co.soogong.master.uiinterface.profile.EditProfileContainerFragmentHelper.EDIT_WARRANTY_INFORMATION
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -74,7 +75,14 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
             }
 
             warrantyInformation.addDefaultButtonClickListener{
-
+                startActivity(
+                    Intent(
+                        EditProfileContainerActivityHelper.getIntent(
+                            this@EditRequiredInformationActivity,
+                            EDIT_WARRANTY_INFORMATION
+                        )
+                    )
+                )
             }
 
             career.addDefaultButtonClickListener{
@@ -127,7 +135,7 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
             if(!value?.briefIntroduction.isNullOrEmpty()) insertedCount++
             if(value?.representativeImages?.get(0)?.path.isNullOrEmpty()) insertedCount++
             if(!value?.businessUnitInformation?.businessUnitType.isNullOrEmpty()) insertedCount++
-            if(!value?.warrantyPeriod.isNullOrEmpty()) insertedCount++
+            if(!value?.warrantyInformation?.warrantyPeriod.isNullOrEmpty()) insertedCount++
             if(!value?.career.isNullOrEmpty()) insertedCount++
             if(!value?.businessRepresentativeName.isNullOrEmpty()) insertedCount++
             if(!value?.phoneNumber.isNullOrEmpty()) insertedCount++
