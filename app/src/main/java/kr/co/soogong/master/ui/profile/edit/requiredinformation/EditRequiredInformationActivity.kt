@@ -15,6 +15,7 @@ import kr.co.soogong.master.ui.profile.edit.requiredinformation.EditRequiredInfo
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.warrantyinformation.EditWarrantyInformationFragment
 import kr.co.soogong.master.uiinterface.profile.EditProfileContainerActivityHelper
 import kr.co.soogong.master.uiinterface.profile.EditProfileContainerFragmentHelper.EDIT_BRIEF_INTRODUCTION
+import kr.co.soogong.master.uiinterface.profile.EditProfileContainerFragmentHelper.EDIT_BUSINESS_REPRESENTATIVE_NAME
 import kr.co.soogong.master.uiinterface.profile.EditProfileContainerFragmentHelper.EDIT_BUSINESS_UNIT_INFORMATION
 import kr.co.soogong.master.uiinterface.profile.EditProfileContainerFragmentHelper.EDIT_COMPANY_IMAGE
 import kr.co.soogong.master.uiinterface.profile.EditProfileContainerFragmentHelper.EDIT_WARRANTY_INFORMATION
@@ -105,7 +106,14 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
             }
 
             businessRepresentativeName.addDefaultButtonClickListener {
-
+                startActivity(
+                    Intent(
+                        EditProfileContainerActivityHelper.getIntent(
+                            this@EditRequiredInformationActivity,
+                            EDIT_BUSINESS_REPRESENTATIVE_NAME
+                        )
+                    )
+                )
             }
 
             phoneNumber.addDefaultButtonClickListener {
