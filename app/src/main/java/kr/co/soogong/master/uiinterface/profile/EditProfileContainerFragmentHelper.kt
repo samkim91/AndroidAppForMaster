@@ -6,6 +6,7 @@ import kr.co.soogong.master.ui.profile.edit.otherflexibleoptions.EditOtherFlexib
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.briefintroduction.EditBriefIntroductionFragment
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.businessrepresentativename.EditBusinessRepresentativeNameFragment
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.businessunitinformation.EditBusinessUnitInformationFragment
+import kr.co.soogong.master.ui.profile.edit.requiredinformation.phonenumber.EditPhoneNumberFragment
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.representativeimages.EditRepresentativeImagesFragment
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.warrantyinformation.EditWarrantyInformationFragment
 import kr.co.soogong.master.ui.profile.edit.withcard.portfolio.EditPortfolioFragment
@@ -26,7 +27,6 @@ object EditProfileContainerFragmentHelper {
     const val EDIT_BUSINESS_UNIT_INFORMATION = "사업자 정보 등록·수정하기"
     const val EDIT_WARRANTY_INFORMATION = "A/S 정보 등록·수정하기"
     const val EDIT_BUSINESS_REPRESENTATIVE_NAME = "대표자명 등록·수정하기"
-    const val EDIT_COMPANY_NAME = "업체 이름 수정하기"
     const val EDIT_PHONE_NUMBER = "휴대폰번호 수정하기"
     const val EDIT_ADDRESS = "업체 주소 수정하기"
     const val EDIT_MAJOR = "시공 업종 수정하기"
@@ -40,14 +40,8 @@ object EditProfileContainerFragmentHelper {
         when (pageName) {
             ADD_PORTFOLIO -> EditPortfolioFragment.newInstance(ADD_PORTFOLIO, null)
             EDIT_PORTFOLIO -> EditPortfolioFragment.newInstance(EDIT_PORTFOLIO, itemId)
-            ADD_PRICE_BY_PROJECTS -> EditPriceByProjectFragment.newInstance(
-                ADD_PRICE_BY_PROJECTS,
-                null
-            )
-            EDIT_PRICE_BY_PROJECTS -> EditPriceByProjectFragment.newInstance(
-                EDIT_PRICE_BY_PROJECTS,
-                itemId
-            )
+            ADD_PRICE_BY_PROJECTS -> EditPriceByProjectFragment.newInstance(ADD_PRICE_BY_PROJECTS, null)
+            EDIT_PRICE_BY_PROJECTS -> EditPriceByProjectFragment.newInstance(EDIT_PRICE_BY_PROJECTS, itemId)
             EDIT_FLEXIBLE_COST -> EditFlexibleCostFragment.newInstance()
             EDIT_OTHER_FLEXIBLE_OPTIONS -> EditOtherFlexibleOptionsFragment.newInstance()
             EDIT_BRIEF_INTRODUCTION -> EditBriefIntroductionFragment.newInstance()
@@ -55,6 +49,9 @@ object EditProfileContainerFragmentHelper {
             EDIT_BUSINESS_UNIT_INFORMATION -> EditBusinessUnitInformationFragment.newInstance()
             EDIT_WARRANTY_INFORMATION -> EditWarrantyInformationFragment.newInstance()
             EDIT_BUSINESS_REPRESENTATIVE_NAME -> EditBusinessRepresentativeNameFragment.newInstance()
+            EDIT_PHONE_NUMBER -> EditPhoneNumberFragment.newInstance()
+//            EDIT_ADDRESS ->
+//            EDIT_MAJOR ->
             else -> Fragment()
         }
 }

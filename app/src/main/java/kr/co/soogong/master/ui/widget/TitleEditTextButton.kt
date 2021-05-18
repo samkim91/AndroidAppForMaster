@@ -1,7 +1,9 @@
 package kr.co.soogong.master.ui.widget
 
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.text.Editable
+import android.text.InputFilter
 import android.text.InputType
 import android.text.TextWatcher
 import android.util.AttributeSet
@@ -10,6 +12,7 @@ import android.view.View
 import android.widget.EditText
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ViewTitleEdittextButtonBinding
 
 class TitleEditTextButton @JvmOverloads constructor(
@@ -104,10 +107,42 @@ class TitleEditTextButton @JvmOverloads constructor(
             binding.secondEditText.inputType = value
         }
 
+    var setMaxLengthFirst: Int = 0
+        set(value) {
+            field = value
+            binding.firstEditText.filters += InputFilter.LengthFilter(value)
+        }
+
+    var setMaxLengthSecond: Int = 0
+        set(value) {
+            field = value
+            binding.secondEditText.filters += InputFilter.LengthFilter(value)
+        }
+
     var buttonText: String? = ""
         set(value) {
             field = value
             binding.button.text = value
+        }
+
+    var buttonColor: Boolean = false
+        set(value) {
+            field = value
+            if(value) {
+                binding.button.setTextColor(resources.getColor(R.color.color_616161, null))
+            }else {
+                binding.button.setTextColor(resources.getColor(R.color.color_1FC472, null))
+            }
+        }
+
+    var buttonBackground: Boolean = false
+        set(value) {
+            field = value
+            if(value){
+                binding.button.background = resources.getDrawable(R.drawable.shape_fill_white_background, null)
+            }else {
+                binding.button.background = resources.getDrawable(R.drawable.shape_fill_white_board_green, null)
+            }
         }
 
     fun setButtonClickListener(listener: OnClickListener) {

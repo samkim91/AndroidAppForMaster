@@ -11,7 +11,8 @@
     <string name="check_certification_code_button_text">인증완료</string>
     <string name="alert_wrong_certification_code">인증번호가 틀립니다.</string>
     <string name="alert_invalid_certification_code">6자리 숫자로 입력해주세요.</string>
-    <string name="alert_expired_certification_time">인증시간이 초과되었습니다. 인증번호를 재전송해주세요.</string>
+    <string name="alert_expired_certification_time">인증시간이 초과되었습니다. 인증번호를 재청요해주세요.</string>
+    <string name="alert_empty_certification_code">인증번호를 입력해주세요.</string>
     <string name="confirming_certification_code_received">인증번호를 받지 못하셨나요?</string>
     <string name="request_certification_code_again_text"><u>인증번호 재요청</u></string>
     <string name="alert_privacy_policy_agreement_required">이용약관 및 개인정보 처리방침에 동의해주세요. </string>
@@ -221,6 +222,9 @@
 
     <string name="get_images_button_text">사진 가져오기</string>
     <string name="business_identical_image_holder_label">사업자등록증 사진을 올려주세요.</string>
+    <string name="certification_code">인증번호</string>
+    <string name="certification_text">인증</string>
+    <string name="retype_text">재입력</string>
 
     <!-- Request Detail -->
     <string name="request_date">접수일시</string>
