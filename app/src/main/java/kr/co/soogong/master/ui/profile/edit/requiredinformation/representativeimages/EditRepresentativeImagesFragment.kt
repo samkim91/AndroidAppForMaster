@@ -9,7 +9,6 @@ import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentEditRepresentativeImagesBinding
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.image.RectangleImageWithCloseAdapter
-import kr.co.soogong.master.ui.profile.edit.requiredinformation.briefintroduction.EditBriefIntroductionViewModel
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.representativeimages.EditRepresentativeImagesViewModel.Companion.SAVE_REPRESENTATIVE_IMAGES_FAILED
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.representativeimages.EditRepresentativeImagesViewModel.Companion.SAVE_REPRESENTATIVE_IMAGES_SUCCESSFULLY
 import kr.co.soogong.master.ui.utils.PermissionHelper

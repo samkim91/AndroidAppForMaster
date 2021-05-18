@@ -6,7 +6,7 @@ data class BottomDialogData(
 ) {
     companion object {
         fun getWorkExperienceList() =
-            List(60) { i -> BottomDialogData(text = (i + 1).toString() + "년", value = i + 1) }
+            List(60) { i -> BottomDialogData(text = "${i + 1}년", value = i + 1) }
 
         fun getServiceAreaList() =
             listOf(
