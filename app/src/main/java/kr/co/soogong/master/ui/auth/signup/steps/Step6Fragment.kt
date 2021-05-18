@@ -23,7 +23,7 @@ class Step6Fragment : BaseFragment<FragmentSignUpStep6Binding>(
 ) {
     private val viewModel: SignUpViewModel by activityViewModels()
 
-    private var getAddressLauncher =
+    private val getAddressLauncher =
         registerForActivityResult(StartActivityForResult()) { result ->
             Timber.tag(TAG).d("StartActivityForResult: $result")
             if (result.resultCode == Activity.RESULT_OK) {
@@ -52,9 +52,6 @@ class Step6Fragment : BaseFragment<FragmentSignUpStep6Binding>(
 
             defaultButton.setOnClickListener {
                 viewModel.address.observe(viewLifecycleOwner, {
-                    address.alertVisible = it.isNullOrEmpty()
-                })
-                viewModel.subAddress.observe(viewLifecycleOwner, {
                     address.alertVisible = it.isNullOrEmpty()
                 })
 

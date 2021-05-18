@@ -22,41 +22,41 @@ class SignUpViewModel @Inject constructor(
     private val requestConfirmCertificationCodeUseCase: RequestConfirmCertificationCodeUseCase,
 ) : BaseViewModel() {
 
-    var indicator = MutableLiveData(0)
+    val indicator = MutableLiveData(0)
 
     // Step 1
-    var phoneNumber = MutableLiveData("")
+    val phoneNumber = MutableLiveData("")
 
     // Step 2
-    var certificationCode = MutableLiveData("")
+    val certificationCode = MutableLiveData("")
 
     // Step 2 sub
-    var signInPassword = MutableLiveData("")
+    val signInPassword = MutableLiveData("")
 
     // Step 3
-    var signUpPassword = MutableLiveData("")
-    var signUpConfirmPassword = MutableLiveData("")
+    val signUpPassword = MutableLiveData("")
+    val signUpConfirmPassword = MutableLiveData("")
 
     // Step 4
-    var businessRepresentativeName = MutableLiveData("")
+    val businessRepresentativeName = MutableLiveData("")
 
     // Step 5
-    var businessType = ListLiveData<BusinessType>()
+    val businessType = ListLiveData<BusinessType>()
 
     // Step 6
-    var address = MutableLiveData("")
-    var subAddress = MutableLiveData("")
-    var latitude = MutableLiveData(0.0)
-    var longitude = MutableLiveData(0.0)
+    val address = MutableLiveData("")
+    val subAddress = MutableLiveData("")
+    val latitude = MutableLiveData(0.0)
+    val longitude = MutableLiveData(0.0)
 
     // Step 7
-    var serviceArea = MutableLiveData("")
-    var serviceAreaToInt = MutableLiveData(0)
+    val serviceArea = MutableLiveData("")
+    val serviceAreaToInt = MutableLiveData(0)
 
     // Step 8
-    var agreedPrivacyPolicy = MutableLiveData(false)
-    var agreedMarketing = MutableLiveData(false)
-    var appPush = MutableLiveData(false)
+    val agreedPrivacyPolicy = MutableLiveData(false)
+    val agreedMarketing = MutableLiveData(false)
+    val appPush = MutableLiveData(false)
 
 
     fun checkPhoneNumberDuplicate() {

@@ -16,8 +16,7 @@ data class RequiredInformation(
     val businessRepresentativeName: String,
     val phoneNumber: String,
     val businessType: List<BusinessType>,
-    val address: String,
-    val subAddress: String,
+    val companyAddress: CompanyAddress,
 ) : Parcelable {
     companion object {
         fun fromJson(jsonObject: JsonObject): RequiredInformation {
@@ -41,22 +40,24 @@ data class RequiredInformation(
                         it.asJsonObject
                     )
                 },
-                address = attributes.get("address").asString,
-                subAddress = attributes.get("subAddress").asString,
+                companyAddress = CompanyAddress.fromJson(attributes.get("address").asJsonObject),
             )
         }
 
         val TEST_REQUIRED_INFORMATION = RequiredInformation(
             briefIntroduction = "강남지역 30년 역사의 싱크대 장인! 믿고 맡게 주세요! 강남지역 30년 역사의 싱크대 장인! 믿고 맡게 주세요! 강남지역 30년 역사의 싱크대 장인! 믿고 맡게 주세요!",
-            representativeImages = listOf(ImagePath.TEST_IMAGE_PATH, ImagePath.TEST_IMAGE_PATH, ImagePath.TEST_IMAGE_PATH),
+            representativeImages = listOf(
+                ImagePath.TEST_IMAGE_PATH,
+                ImagePath.TEST_IMAGE_PATH,
+                ImagePath.TEST_IMAGE_PATH
+            ),
             businessRepresentativeName = "성현식",
             businessUnitInformation = BusinessUnitInformation.TEST_BUSINESS_UNIT_INFORMATION_2,
             warrantyInformation = WarrantyInformation.TEST_WARRANTY_INFORMATION,
             career = "2년",
             phoneNumber = "010 - 3290 -1234",
             businessType = listOf(BusinessType.TEST_BUSINESS_TYPE, BusinessType.TEST_BUSINESS_TYPE),
-            address = "서울특별시 동작구",
-            subAddress = "머시기 상가 303호",
+            companyAddress = CompanyAddress.TEST_COMPANY_ADDRESS,
         )
 
         val NULL_REQUIRED_INFORMATION = RequiredInformation(
@@ -68,8 +69,7 @@ data class RequiredInformation(
             career = "",
             phoneNumber = "",
             businessType = emptyList(),
-            address = "",
-            subAddress = "",
+            companyAddress = CompanyAddress.NULL_COMPANY_ADDRESS,
         )
     }
 }
