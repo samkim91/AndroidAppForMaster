@@ -12,9 +12,8 @@ import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogData
 import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogRecyclerView
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.EditRequiredInformationViewModel.Companion.SAVE_CAREER_PERIOD_FAILED
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.EditRequiredInformationViewModel.Companion.SAVE_CAREER_PERIOD_SUCCESSFULLY
-import kr.co.soogong.master.ui.profile.edit.requiredinformation.warrantyinformation.EditWarrantyInformationFragment
 import kr.co.soogong.master.uiinterface.profile.EditProfileContainerActivityHelper
-import kr.co.soogong.master.uiinterface.profile.EditProfileContainerFragmentHelper
+import kr.co.soogong.master.uiinterface.profile.EditProfileContainerFragmentHelper.EDIT_ADDRESS
 import kr.co.soogong.master.uiinterface.profile.EditProfileContainerFragmentHelper.EDIT_BRIEF_INTRODUCTION
 import kr.co.soogong.master.uiinterface.profile.EditProfileContainerFragmentHelper.EDIT_BUSINESS_REPRESENTATIVE_NAME
 import kr.co.soogong.master.uiinterface.profile.EditProfileContainerFragmentHelper.EDIT_BUSINESS_UNIT_INFORMATION
@@ -134,7 +133,14 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
             }
 
             address.addDefaultButtonClickListener {
-
+                startActivity(
+                    Intent(
+                        EditProfileContainerActivityHelper.getIntent(
+                            this@EditRequiredInformationActivity,
+                            EDIT_ADDRESS
+                        )
+                    )
+                )
             }
         }
     }

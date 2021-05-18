@@ -2,17 +2,12 @@ package kr.co.soogong.master.ui.profile.edit.requiredinformation.phonenumber
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import kotlinx.coroutines.launch
 import kr.co.soogong.master.domain.usecase.auth.RequestCertificationCodeUseCase
 import kr.co.soogong.master.domain.usecase.auth.RequestConfirmCertificationCodeUseCase
-import kr.co.soogong.master.domain.usecase.profile.GetBusinessRepresentativeNameUseCase
-import kr.co.soogong.master.domain.usecase.profile.SaveBusinessRepresentativeNameUseCase
-import kr.co.soogong.master.ui.auth.signup.SignUpViewModel
 import kr.co.soogong.master.ui.base.BaseViewModel
 import timber.log.Timber
 import javax.inject.Inject

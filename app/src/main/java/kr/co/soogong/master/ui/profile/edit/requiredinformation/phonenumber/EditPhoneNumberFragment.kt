@@ -6,7 +6,6 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
-import kr.co.soogong.master.BuildConfig
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentEditPhoneNumberBinding
 import kr.co.soogong.master.ui.base.BaseFragment

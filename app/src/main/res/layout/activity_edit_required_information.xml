@@ -283,13 +283,13 @@
                     android:layout_marginBottom="@dimen/gap_24"
                     android:background="@drawable/shape_radius8_white_background"
                     android:elevation="@dimen/gap_4"
-                    app:defaultButtonByString="@{vm.requiredInformation.address}"
-                    app:firstDetail="@{vm.requiredInformation.address}"
+                    app:defaultButtonByString="@{vm.requiredInformation.companyAddress.mainAddress}"
+                    app:firstDetail="@{vm.requiredInformation.companyAddress.mainAddress}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/major"
-                    app:secondDetail="@{vm.requiredInformation.subAddress}"
+                    app:secondDetail="@{vm.requiredInformation.companyAddress.subAddress}"
                     app:title='@{"업체 주소"}' />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>

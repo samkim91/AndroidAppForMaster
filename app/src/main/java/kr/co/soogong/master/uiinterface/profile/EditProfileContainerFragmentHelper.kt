@@ -3,6 +3,7 @@ package kr.co.soogong.master.uiinterface.profile
 import androidx.fragment.app.Fragment
 import kr.co.soogong.master.ui.profile.edit.flexiblecost.EditFlexibleCostFragment
 import kr.co.soogong.master.ui.profile.edit.otherflexibleoptions.EditOtherFlexibleOptionsFragment
+import kr.co.soogong.master.ui.profile.edit.requiredinformation.address.EditAddressFragment
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.briefintroduction.EditBriefIntroductionFragment
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.businessrepresentativename.EditBusinessRepresentativeNameFragment
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.businessunitinformation.EditBusinessUnitInformationFragment
@@ -50,8 +51,8 @@ object EditProfileContainerFragmentHelper {
             EDIT_WARRANTY_INFORMATION -> EditWarrantyInformationFragment.newInstance()
             EDIT_BUSINESS_REPRESENTATIVE_NAME -> EditBusinessRepresentativeNameFragment.newInstance()
             EDIT_PHONE_NUMBER -> EditPhoneNumberFragment.newInstance()
-//            EDIT_ADDRESS ->
 //            EDIT_MAJOR ->
+            EDIT_ADDRESS -> EditAddressFragment.newInstance()
             else -> Fragment()
         }
 }
