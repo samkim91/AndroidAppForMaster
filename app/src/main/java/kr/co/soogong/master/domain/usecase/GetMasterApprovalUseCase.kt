@@ -3,7 +3,6 @@ package kr.co.soogong.master.domain.usecase
 import android.content.SharedPreferences
 import dagger.Reusable
 import kr.co.soogong.master.contract.AppSharedPreferenceContract
-import kr.co.soogong.master.data.user.SignInInfo
 import javax.inject.Inject
 
 @Reusable
