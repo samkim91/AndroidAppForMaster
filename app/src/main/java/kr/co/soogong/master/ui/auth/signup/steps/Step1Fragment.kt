@@ -43,7 +43,6 @@ class Step1Fragment : BaseFragment<FragmentSignUpStep1Binding>(
                         // Todo.. SMS 인증코드 전송 개발 필요.. AWS Cognito 이용
                     }
 
-
                     requireContext().toast(getString(R.string.certification_code_requested))
                     (activity as? SignUpActivity)?.moveToNext()
                 }

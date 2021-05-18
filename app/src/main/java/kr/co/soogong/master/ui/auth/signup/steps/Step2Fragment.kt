@@ -52,8 +52,7 @@ class Step2Fragment : BaseFragment<FragmentSignUpStep2Binding>(
             lifecycleOwner = viewLifecycleOwner
 
             requestCertificationCodeAgainText.setOnClickListener {
-                timer.start()
-                binding.alertExpiredCertificationTime.visibility = View.GONE
+                startTimer()
 
                 if (!BuildConfig.DEBUG) {
                     // Todo.. SMS 인증코드 전송 개발 필요.. AWS Cognito 이용
@@ -85,6 +84,7 @@ class Step2Fragment : BaseFragment<FragmentSignUpStep2Binding>(
 
     private fun startTimer() {
         // Todo.. 인증번호 요청/재요청에 대한 event callback으로 실행되도록 변경해야함.
+        binding.alertExpiredCertificationTime.visibility = View.GONE
         timer.start()
     }
 

@@ -14,10 +14,12 @@ import kr.co.soogong.master.ui.profile.edit.requiredinformation.EditRequiredInfo
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.EditRequiredInformationViewModel.Companion.SAVE_CAREER_PERIOD_SUCCESSFULLY
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.warrantyinformation.EditWarrantyInformationFragment
 import kr.co.soogong.master.uiinterface.profile.EditProfileContainerActivityHelper
+import kr.co.soogong.master.uiinterface.profile.EditProfileContainerFragmentHelper
 import kr.co.soogong.master.uiinterface.profile.EditProfileContainerFragmentHelper.EDIT_BRIEF_INTRODUCTION
 import kr.co.soogong.master.uiinterface.profile.EditProfileContainerFragmentHelper.EDIT_BUSINESS_REPRESENTATIVE_NAME
 import kr.co.soogong.master.uiinterface.profile.EditProfileContainerFragmentHelper.EDIT_BUSINESS_UNIT_INFORMATION
 import kr.co.soogong.master.uiinterface.profile.EditProfileContainerFragmentHelper.EDIT_COMPANY_IMAGE
+import kr.co.soogong.master.uiinterface.profile.EditProfileContainerFragmentHelper.EDIT_PHONE_NUMBER
 import kr.co.soogong.master.uiinterface.profile.EditProfileContainerFragmentHelper.EDIT_WARRANTY_INFORMATION
 import kr.co.soogong.master.util.EventObserver
 import kr.co.soogong.master.util.extension.toast
@@ -117,7 +119,14 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
             }
 
             phoneNumber.addDefaultButtonClickListener {
-
+                startActivity(
+                    Intent(
+                        EditProfileContainerActivityHelper.getIntent(
+                            this@EditRequiredInformationActivity,
+                            EDIT_PHONE_NUMBER
+                        )
+                    )
+                )
             }
 
             major.addDefaultButtonClickListener {

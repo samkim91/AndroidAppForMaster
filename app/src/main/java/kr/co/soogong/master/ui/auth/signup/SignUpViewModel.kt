@@ -7,9 +7,7 @@ import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.category.BusinessType
 import kr.co.soogong.master.data.user.SignUpInfo
-import kr.co.soogong.master.domain.usecase.auth.CheckIdExistUseCase
-import kr.co.soogong.master.domain.usecase.auth.SignInUseCase
-import kr.co.soogong.master.domain.usecase.auth.SignUpUseCase
+import kr.co.soogong.master.domain.usecase.auth.*
 import kr.co.soogong.master.ui.base.BaseViewModel
 import kr.co.soogong.master.ui.utils.ListLiveData
 import timber.log.Timber
@@ -19,7 +17,9 @@ import javax.inject.Inject
 class SignUpViewModel @Inject constructor(
     private val signUpUseCase: SignUpUseCase,
     private val signInUseCase: SignInUseCase,
-    private val checkIdExistUseCase: CheckIdExistUseCase,
+    private val checkPhoneNumberDuplicateUseCase: CheckPhoneNumberDuplicateUseCase,
+    private val requestCertificationCodeUseCase: RequestCertificationCodeUseCase,
+    private val requestConfirmCertificationCodeUseCase: RequestConfirmCertificationCodeUseCase,
 ) : BaseViewModel() {
 
     var indicator = MutableLiveData(0)
@@ -59,37 +59,54 @@ class SignUpViewModel @Inject constructor(
     var appPush = MutableLiveData(false)
 
 
-    fun checkIdExist() {
+    fun checkPhoneNumberDuplicate() {
         Timber.tag(TAG).d("checkIsIdExistent: ")
-        checkIdExistUseCase(phoneNumber.value)
+        // Todo.. 이미 있는 계정인지 확인
+        // 있으면, 로그인으로 안내
+        // 없으면, 인증코드 메시지 보내고 입력 액티비티로 안내
+        checkPhoneNumberDuplicateUseCase(phoneNumber.value)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
                 onSuccess = {
                     Timber.tag(TAG).d("onSuccess: $it")
-                    setAction(ID_IS_EXISTENT)
+                    setAction(PHONE_NUMBER_IS_EXISTENT)
                 },
                 onError = {
                     Timber.tag(TAG).d("onError: $it")
-                    setAction(ID_NOT_EXISTENT)
+                    setAction(PHONE_NUMBER_NOT_EXISTENT)
                 }
             ).addToDisposable()
-
     }
 
     fun requestCertificationCode() {
         Timber.tag(TAG).d("requestCertificationCode: ")
-
-        // Todo.. 이미 있는 계정인지 확인
-        // 있으면, 로그인으로 안내
-        // 없으면, 인증코드 메시지 보내고 입력 액티비티로 안내
-
+        phoneNumber.value?.let {
+            requestCertificationCodeUseCase(phoneNumber = it)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeBy(
+                    onSuccess = { setAction(CERTIFICATION_CODE_REQUESTED_SUCCESSFULLY) },
+                    onError = { setAction(CERTIFICATION_CODE_REQUESTED_FAILED) }
+                ).addToDisposable()
+        }
     }
 
     fun requestConfirmCertificationCode() {
+        Timber.tag(TAG).d("requestConfirmCertificationCode: ")
+
         // 입력한 인증번호를 확인
         // 인증되면, 다음화면으로
         // 안 되면, alert 표시
+        certificationCode.value?.let {
+            requestConfirmCertificationCodeUseCase(certificationCode = it)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeBy(
+                    onSuccess = { setAction(CERTIFICATION_CODE_CONFIRMED_SUCCESSFULLY) },
+                    onError = { setAction(CERTIFICATION_CODE_CONFIRMED_FAILED) }
+                ).addToDisposable()
+        }
     }
 
     fun requestLogin() {
@@ -127,7 +144,9 @@ class SignUpViewModel @Inject constructor(
                 appPush = appPush.value!!,
                 appPushAtNight = appPush.value!!,
                 kakaoAlarm = agreedMarketing.value!!,
-                smsAlarm = agreedMarketing.value!!))
+                smsAlarm = agreedMarketing.value!!
+            )
+        )
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(onSuccess = {
@@ -148,8 +167,16 @@ class SignUpViewModel @Inject constructor(
         const val SIGN_IN_SUCCESSFUL = "SIGN_IN_SUCCESSFUL"
         const val SIGN_IN_FAILED = "SIGN_IN_FAILED"
 
-        const val ID_IS_EXISTENT = "ID_IS_EXISTENT"
-        const val ID_NOT_EXISTENT = "ID_NOT_EXISTENT"
+        const val PHONE_NUMBER_IS_EXISTENT = "PHONE_NUMBER_IS_EXISTENT"
+        const val PHONE_NUMBER_NOT_EXISTENT = "PHONE_NUMBER_NOT_EXISTENT"
+
+        const val CERTIFICATION_CODE_REQUESTED_SUCCESSFULLY = "CERTIFICATION_CODE_REQUESTED_SUCCESSFULLY"
+        const val CERTIFICATION_CODE_REQUESTED_FAILED = "CERTIFICATION_CODE_REQUESTED_FAILED"
+
+        const val CERTIFICATION_CODE_CONFIRMED_SUCCESSFULLY = "CERTIFICATION_CODE_CONFIRMED_SUCCESSFULLY"
+        const val CERTIFICATION_CODE_CONFIRMED_FAILED = "CERTIFICATION_CODE_CONFIRMED_FAILED"
+
+
 
     }
 }
