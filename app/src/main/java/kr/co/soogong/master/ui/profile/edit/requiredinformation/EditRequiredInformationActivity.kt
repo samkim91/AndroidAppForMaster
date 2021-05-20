@@ -16,6 +16,7 @@ import kr.co.soogong.master.uiinterface.profile.EditProfileContainerActivityHelp
 import kr.co.soogong.master.uiinterface.profile.EditProfileContainerFragmentHelper.EDIT_ADDRESS
 import kr.co.soogong.master.uiinterface.profile.EditProfileContainerFragmentHelper.EDIT_BRIEF_INTRODUCTION
 import kr.co.soogong.master.uiinterface.profile.EditProfileContainerFragmentHelper.EDIT_BUSINESS_REPRESENTATIVE_NAME
+import kr.co.soogong.master.uiinterface.profile.EditProfileContainerFragmentHelper.EDIT_BUSINESS_TYPES
 import kr.co.soogong.master.uiinterface.profile.EditProfileContainerFragmentHelper.EDIT_BUSINESS_UNIT_INFORMATION
 import kr.co.soogong.master.uiinterface.profile.EditProfileContainerFragmentHelper.EDIT_COMPANY_IMAGE
 import kr.co.soogong.master.uiinterface.profile.EditProfileContainerFragmentHelper.EDIT_PHONE_NUMBER
@@ -51,47 +52,19 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
             }
 
             briefIntroduction.addDefaultButtonClickListener {
-                startActivity(
-                    Intent(
-                        EditProfileContainerActivityHelper.getIntent(
-                            this@EditRequiredInformationActivity,
-                            EDIT_BRIEF_INTRODUCTION
-                        )
-                    )
-                )
+                startActivityCommonCode(EDIT_BRIEF_INTRODUCTION)
             }
 
             representativeImages.addDefaultButtonClickListener {
-                startActivity(
-                    Intent(
-                        EditProfileContainerActivityHelper.getIntent(
-                            this@EditRequiredInformationActivity,
-                            EDIT_COMPANY_IMAGE
-                        )
-                    )
-                )
+                startActivityCommonCode(EDIT_COMPANY_IMAGE)
             }
 
             businessUnitInformation.addDefaultButtonClickListener {
-                startActivity(
-                    Intent(
-                        EditProfileContainerActivityHelper.getIntent(
-                            this@EditRequiredInformationActivity,
-                            EDIT_BUSINESS_UNIT_INFORMATION
-                        )
-                    )
-                )
+                startActivityCommonCode(EDIT_BUSINESS_UNIT_INFORMATION)
             }
 
             warrantyInformation.addDefaultButtonClickListener {
-                startActivity(
-                    Intent(
-                        EditProfileContainerActivityHelper.getIntent(
-                            this@EditRequiredInformationActivity,
-                            EDIT_WARRANTY_INFORMATION
-                        )
-                    )
-                )
+                startActivityCommonCode(EDIT_WARRANTY_INFORMATION)
             }
 
             career.addDefaultButtonClickListener {
@@ -107,40 +80,19 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
             }
 
             businessRepresentativeName.addDefaultButtonClickListener {
-                startActivity(
-                    Intent(
-                        EditProfileContainerActivityHelper.getIntent(
-                            this@EditRequiredInformationActivity,
-                            EDIT_BUSINESS_REPRESENTATIVE_NAME
-                        )
-                    )
-                )
+                startActivityCommonCode(EDIT_BUSINESS_REPRESENTATIVE_NAME)
             }
 
             phoneNumber.addDefaultButtonClickListener {
-                startActivity(
-                    Intent(
-                        EditProfileContainerActivityHelper.getIntent(
-                            this@EditRequiredInformationActivity,
-                            EDIT_PHONE_NUMBER
-                        )
-                    )
-                )
+                startActivityCommonCode(EDIT_PHONE_NUMBER)
             }
 
-            major.addDefaultButtonClickListener {
-
+            businessTypes.addDefaultButtonClickListener {
+                startActivityCommonCode(EDIT_BUSINESS_TYPES)
             }
 
             address.addDefaultButtonClickListener {
-                startActivity(
-                    Intent(
-                        EditProfileContainerActivityHelper.getIntent(
-                            this@EditRequiredInformationActivity,
-                            EDIT_ADDRESS
-                        )
-                    )
-                )
+                startActivityCommonCode(EDIT_ADDRESS)
             }
         }
     }
@@ -186,7 +138,7 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
             if (!value?.career.isNullOrEmpty()) insertedCount++
             if (!value?.businessRepresentativeName.isNullOrEmpty()) insertedCount++
             if (!value?.phoneNumber.isNullOrEmpty()) insertedCount++
-            if (!value?.businessType.isNullOrEmpty()) insertedCount++
+            if (!value?.businessTypes.isNullOrEmpty()) insertedCount++
 //            if(!value?.address.isNullOrEmpty()) insertedCount++
         }
 
@@ -210,6 +162,17 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
             binding.defaultButton.isEnabled = false
         }
         binding.requiredProfileCardPercentage.text = "${percentage}% 등록"
+    }
+
+    private fun startActivityCommonCode(pageName: String) {
+        startActivity(
+            Intent(
+                EditProfileContainerActivityHelper.getIntent(
+                    this@EditRequiredInformationActivity,
+                    pageName
+                )
+            )
+        )
     }
 
     companion object {

@@ -174,7 +174,7 @@
                     android:layout_marginEnd="@dimen/gap_20"
                     android:background="@drawable/shape_radius8_white_background"
                     android:elevation="@dimen/gap_4"
-                    app:defaultButtonByImage="@{vm.requiredInformation.businessUnitInformation.identicalImage}"
+                    app:defaultButtonByString="@{vm.requiredInformation.businessUnitInformation.businessUnitType}"
                     app:firstDetail="@{vm.requiredInformation.businessUnitInformation.businessUnitType}"
                     app:imageUrl="@{vm.requiredInformation.businessUnitInformation.identicalImage}"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -255,9 +255,9 @@
                     app:layout_constraintTop_toBottomOf="@id/business_representative_name"
                     app:title='@{"연락처"}' />
 
-                <!-- 시공 업종 MAJOR -->
+                <!-- 시공 업종 BUSINESS_TYPES -->
                 <kr.co.soogong.master.ui.widget.ProfileChipGroupCard
-                    android:id="@+id/major"
+                    android:id="@+id/business_types"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/gap_20"
@@ -265,8 +265,8 @@
                     android:layout_marginEnd="@dimen/gap_20"
                     android:background="@drawable/shape_radius8_white_background"
                     android:elevation="@dimen/gap_4"
-                    app:chipGroupWithTitle="@{vm.requiredInformation.businessType}"
-                    app:defaultButtonByList="@{vm.requiredInformation.businessType}"
+                    app:chipGroupWithTitle="@{vm.requiredInformation.businessTypes}"
+                    app:defaultButtonByList="@{vm.requiredInformation.businessTypes}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/phone_number"
@@ -288,7 +288,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/major"
+                    app:layout_constraintTop_toBottomOf="@id/business_types"
                     app:secondDetail="@{vm.requiredInformation.companyAddress.subAddress}"
                     app:title='@{"업체 주소"}' />
             </androidx.constraintlayout.widget.ConstraintLayout>
