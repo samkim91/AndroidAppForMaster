@@ -50,6 +50,7 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>(
     }
 
     fun moveToNext() {
+        Timber.tag(TAG).d("moveToNext: ")
         bind {
             if (signUpViewPager.currentItem < TabCount - 1) {
                 signUpViewPager.currentItem++
@@ -60,6 +61,7 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>(
     }
 
     fun moveToPrevious() {
+        Timber.tag(TAG).d("moveToPrevious: ")
         bind {
             if (signUpViewPager.currentItem > 0) {
                 signUpViewPager.currentItem--
@@ -70,6 +72,7 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>(
     }
 
     override fun onBackPressed() {
+        Timber.tag(TAG).d("onBackPressed: ")
         val dialog = CustomDialog(DialogData.cancelSignUpDialogData(this@SignUpActivity),
             yesClick = { },
             noClick = { super.onBackPressed() })
@@ -79,7 +82,6 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>(
 
     private fun registerEventObserve() {
         Timber.tag(TAG).d("registerEventObserve: ")
-
 
     }
 
