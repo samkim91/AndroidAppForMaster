@@ -6,6 +6,7 @@ import kr.co.soogong.master.ui.profile.edit.otherflexibleoptions.EditOtherFlexib
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.address.EditAddressFragment
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.briefintroduction.EditBriefIntroductionFragment
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.businessrepresentativename.EditBusinessRepresentativeNameFragment
+import kr.co.soogong.master.ui.profile.edit.requiredinformation.businesstypes.EditBusinessTypesFragment
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.businessunitinformation.EditBusinessUnitInformationFragment
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.phonenumber.EditPhoneNumberFragment
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.representativeimages.EditRepresentativeImagesFragment
@@ -30,7 +31,7 @@ object EditProfileContainerFragmentHelper {
     const val EDIT_BUSINESS_REPRESENTATIVE_NAME = "대표자명 등록·수정하기"
     const val EDIT_PHONE_NUMBER = "휴대폰번호 수정하기"
     const val EDIT_ADDRESS = "업체 주소 수정하기"
-    const val EDIT_MAJOR = "시공 업종 수정하기"
+    const val EDIT_BUSINESS_TYPES = "시공 업종 수정하기"
 
 
 //    const val EDIT_NUMBER_OF_FELLOW = "팀원 수 수정하기"
@@ -51,7 +52,7 @@ object EditProfileContainerFragmentHelper {
             EDIT_WARRANTY_INFORMATION -> EditWarrantyInformationFragment.newInstance()
             EDIT_BUSINESS_REPRESENTATIVE_NAME -> EditBusinessRepresentativeNameFragment.newInstance()
             EDIT_PHONE_NUMBER -> EditPhoneNumberFragment.newInstance()
-//            EDIT_MAJOR ->
+            EDIT_BUSINESS_TYPES -> EditBusinessTypesFragment.newInstance()
             EDIT_ADDRESS -> EditAddressFragment.newInstance()
             else -> Fragment()
         }

@@ -15,7 +15,7 @@ data class RequiredInformation(
     val career: String,
     val businessRepresentativeName: String,
     val phoneNumber: String,
-    val businessType: List<BusinessType>,
+    val businessTypes: List<BusinessType>,
     val companyAddress: CompanyAddress,
 ) : Parcelable {
     companion object {
@@ -35,7 +35,7 @@ data class RequiredInformation(
                 warrantyInformation = WarrantyInformation.fromJson(attributes.get("warranty_period").asJsonObject),
                 career = attributes.get("career").asString,
                 phoneNumber = attributes.get("phone_number").asString,
-                businessType = attributes.get("business_type").asJsonArray.map {
+                businessTypes = attributes.get("business_type").asJsonArray.map {
                     BusinessType.fromJson(
                         it.asJsonObject
                     )
@@ -56,7 +56,7 @@ data class RequiredInformation(
             warrantyInformation = WarrantyInformation.TEST_WARRANTY_INFORMATION,
             career = "2년",
             phoneNumber = "010 - 3290 -1234",
-            businessType = listOf(BusinessType.TEST_BUSINESS_TYPE, BusinessType.TEST_BUSINESS_TYPE),
+            businessTypes = listOf(BusinessType.TEST_BUSINESS_TYPE, BusinessType.TEST_BUSINESS_TYPE),
             companyAddress = CompanyAddress.TEST_COMPANY_ADDRESS,
         )
 
@@ -68,7 +68,7 @@ data class RequiredInformation(
             warrantyInformation = WarrantyInformation.NULL_WARRANTY_INFORMATION,
             career = "",
             phoneNumber = "",
-            businessType = emptyList(),
+            businessTypes = emptyList(),
             companyAddress = CompanyAddress.NULL_COMPANY_ADDRESS,
         )
     }

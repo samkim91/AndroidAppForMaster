@@ -4,11 +4,9 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
-import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.estimation.ImagePath
-import kr.co.soogong.master.databinding.ViewProfileDefaultCardBinding
 import kr.co.soogong.master.databinding.ViewProfileImageCardBinding
 import kr.co.soogong.master.ui.utils.ButtonHelper
 import kr.co.soogong.master.util.extension.setImageUrl
@@ -105,6 +103,17 @@ class ProfileImageCard @JvmOverloads constructor(
         set(value) {
             field = value
             if (value?.path.isNullOrEmpty()) {
+                ButtonHelper.setRegisteringButton(binding.defaultButton)
+            } else {
+                ButtonHelper.setModifyingButton(binding.defaultButton)
+            }
+        }
+
+    // 등록하기 <-> 수정하기 버튼 셋
+    var defaultButtonByString: String? = ""
+        set(value) {
+            field = value
+            if (value.isNullOrEmpty()) {
                 ButtonHelper.setRegisteringButton(binding.defaultButton)
             } else {
                 ButtonHelper.setModifyingButton(binding.defaultButton)
