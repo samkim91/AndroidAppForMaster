@@ -4,10 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.view.isEmpty
 import androidx.fragment.app.activityViewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
@@ -17,9 +14,9 @@ import kr.co.soogong.master.ui.auth.signup.SignUpActivity
 import kr.co.soogong.master.ui.auth.signup.SignUpViewModel
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.utils.BusinessTypeChipGroupHelper
+import kr.co.soogong.master.ui.utils.ListLiveData
 import kr.co.soogong.master.uiinterface.category.CategoryActivityHelper
 import kr.co.soogong.master.uiinterface.category.CategoryActivityHelper.BUNDLE_BUSINESS_TYPE
-import kr.co.soogong.master.util.extension.dp
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -55,12 +52,17 @@ class Step5Fragment : BaseFragment<FragmentSignUpStep5Binding>(
             lifecycleOwner = viewLifecycleOwner
 
             businessType.setButtonClickListener {
-                getBusinessTypeLauncher.launch(Intent(CategoryActivityHelper.getIntent(
-                    requireContext())))
+                getBusinessTypeLauncher.launch(
+                    Intent(
+                        CategoryActivityHelper.getIntent(
+                            requireContext()
+                        )
+                    )
+                )
             }
 
             defaultButton.setOnClickListener {
-                viewModel.businessType.observe(viewLifecycleOwner, {
+                viewModel.businessTypes.observe(viewLifecycleOwner, {
                     businessType.alertVisible = it.isNullOrEmpty()
                 })
 
@@ -73,58 +75,23 @@ class Step5Fragment : BaseFragment<FragmentSignUpStep5Binding>(
     }
 
     private fun addBusinessType(businessType: BusinessType) {
-        // 화면과 코드 동기화
-        val tempList = viewModel.businessType.value
+        // 새로 선택된 업종을 viewModel에 갱신해준다.
+        val tempList = viewModel.businessTypes.value
         tempList?.removeIf { it.category?.id == businessType.category?.id }
         tempList?.add(businessType)
-        viewModel.businessType.value = tempList
+        viewModel.businessTypes.value = tempList
 
-        // 새로운 BusinessType List로 View를 그려준다.
-        addChipGroupWithTitle(viewModel.businessType.value)
+        // 위에서 갱신된 BusinessType List로 View를 그려준다.
+        addChipGroupWithTitle(viewModel.businessTypes)
     }
 
-    // Todo.. 굉장히 코드가 더러운데.. 2 way binding을 사용하는 방법을 찾아봐야함.
-    private fun addChipGroupWithTitle(businessTypes: MutableList<BusinessType>?) {
-        // 기존 View들을 삭제한다.
-        binding.businessTypeContainer.removeAllViews()
-
-        var params = ConstraintLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-        params.setMargins(0.dp, 20.dp, 0.dp, 0.dp)
-
-        // BusinessType List만큼 View를 그려준다.
-        businessTypes?.map { businessType ->
-            binding.businessTypeContainer.run {
-                addView(BusinessTypeChipGroupHelper.makeEntryChipGroupWithSubTitle(
-                    layoutInflater = layoutInflater,
-                    item = businessType,
-                    closeClickListener = { titleChipGroup, chip, projectId ->
-                        val chipGroup = titleChipGroup.binding.chipGroup
-                        chipGroup.removeView(chip)
-
-                        // 화면과 코드 동기화
-                        val tempList = viewModel.businessType.value
-                        tempList?.find { temp ->
-                            temp.category == businessType.category
-                        }.let {
-                            it?.projects?.removeIf { project ->
-                                project.id == projectId
-                            }
-                        }
-                        viewModel.businessType.value = tempList
-
-                        // ChipGroup에 Chip이 하나도 없다면, 해당 ChipGroup의 Container도 삭제하는 기능
-                        if (chipGroup.isEmpty()) binding.businessTypeContainer.run {
-                            removeView(titleChipGroup)
-
-                            // 화면과 코드 동기화
-                            val tempList = viewModel.businessType.value
-                            tempList?.remove(businessType)
-                            viewModel.businessType.value = tempList
-                        }
-                    }
-                ), params)
-            }
-        }
+    private fun addChipGroupWithTitle(businessTypes: ListLiveData<BusinessType>) {
+        BusinessTypeChipGroupHelper.makeEntryChipGroupWithSubtitleForBusinessTypes(
+            layoutInflater = layoutInflater,
+            container = binding.businessTypeContainer,
+            newBusinessTypes = businessTypes,
+            viewModelBusinessTypes = viewModel.businessTypes
+        )
     }
 
     companion object {

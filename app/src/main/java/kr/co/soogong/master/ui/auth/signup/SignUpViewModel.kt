@@ -41,7 +41,7 @@ class SignUpViewModel @Inject constructor(
     val businessRepresentativeName = MutableLiveData("")
 
     // Step 5
-    val businessType = ListLiveData<BusinessType>()
+    val businessTypes = ListLiveData<BusinessType>()
 
     // Step 6
     val address = MutableLiveData("")
@@ -134,7 +134,7 @@ class SignUpViewModel @Inject constructor(
                 phoneNumber = phoneNumber.value!!,
                 password = signUpPassword.value!!,
                 businessRepresentativeName = businessRepresentativeName.value!!,
-                businessType = businessType.value!!,
+                businessType = businessTypes.value!!,
                 address = address.value!!,
                 subAddress = subAddress.value!!,
                 latitude = latitude.value!!,
@@ -170,12 +170,13 @@ class SignUpViewModel @Inject constructor(
         const val PHONE_NUMBER_IS_EXISTENT = "PHONE_NUMBER_IS_EXISTENT"
         const val PHONE_NUMBER_NOT_EXISTENT = "PHONE_NUMBER_NOT_EXISTENT"
 
-        const val CERTIFICATION_CODE_REQUESTED_SUCCESSFULLY = "CERTIFICATION_CODE_REQUESTED_SUCCESSFULLY"
+        const val CERTIFICATION_CODE_REQUESTED_SUCCESSFULLY =
+            "CERTIFICATION_CODE_REQUESTED_SUCCESSFULLY"
         const val CERTIFICATION_CODE_REQUESTED_FAILED = "CERTIFICATION_CODE_REQUESTED_FAILED"
 
-        const val CERTIFICATION_CODE_CONFIRMED_SUCCESSFULLY = "CERTIFICATION_CODE_CONFIRMED_SUCCESSFULLY"
+        const val CERTIFICATION_CODE_CONFIRMED_SUCCESSFULLY =
+            "CERTIFICATION_CODE_CONFIRMED_SUCCESSFULLY"
         const val CERTIFICATION_CODE_CONFIRMED_FAILED = "CERTIFICATION_CODE_CONFIRMED_FAILED"
-
 
 
     }
