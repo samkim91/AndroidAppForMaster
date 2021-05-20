@@ -32,8 +32,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:title='@{"업체 이름을 입력해주세요."}'
-                app:subTitle='@{"고객에게 노출되는 이름입니다.\n프리랜서일 경우 시공하시는 분의 이름을 입력해주세요."}'
+                app:title='@{"대표자명을 입력해주세요."}'
+                app:subTitle='@{"프리랜서일 경우 시공하시는 분의 이름을 입력해주세요."}'
                 app:subTitleVisible="@{true}"
                 />
 
