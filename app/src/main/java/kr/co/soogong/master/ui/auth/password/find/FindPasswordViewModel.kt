@@ -1,4 +1,4 @@
-package kr.co.soogong.master.ui.auth.find
+package kr.co.soogong.master.ui.auth.password.find
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -6,7 +6,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import kr.co.soogong.master.domain.usecase.auth.FindPasswordUseCase
 import kr.co.soogong.master.domain.usecase.auth.RequestCertificationCodeUseCase
 import kr.co.soogong.master.domain.usecase.auth.RequestConfirmCertificationCodeUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
@@ -17,8 +16,6 @@ import javax.inject.Inject
 class FindPasswordViewModel @Inject constructor(
     private val requestCertificationCodeUseCase: RequestCertificationCodeUseCase,
     private val requestConfirmCertificationCodeUseCase: RequestConfirmCertificationCodeUseCase,
-
-    private val findPasswordUseCase: FindPasswordUseCase
 ) : BaseViewModel() {
     val phoneNumber = MutableLiveData("")
     val certificationCode = MutableLiveData("")
@@ -62,7 +59,7 @@ class FindPasswordViewModel @Inject constructor(
     }
 
     companion object {
-        private const val TAG = "FindInfoViewModel"
+        private const val TAG = "FindPasswordViewModel"
 
         const val CERTIFICATION_CODE_REQUESTED_FAILED = "CERTIFICATION_CODE_REQUESTED_FAILED"
 

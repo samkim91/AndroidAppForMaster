@@ -13,6 +13,6 @@ class ChangePasswordUseCase @Inject constructor(
     private val getMasterKeyCodeUseCase: GetMasterKeyCodeUseCase
 ) {
     operator fun invoke(password: String?, confirmPassword: String?): Single<Response> {
-        return authService.passwordChange(getMasterKeyCodeUseCase(), password, confirmPassword)
+        return Single.just(Response.TEST_RESPONSE)
     }
 }

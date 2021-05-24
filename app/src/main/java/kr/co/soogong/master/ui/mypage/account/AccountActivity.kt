@@ -6,7 +6,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ActivityAccountBinding
 import kr.co.soogong.master.ui.base.BaseActivity
-import kr.co.soogong.master.uiinterface.mypage.password.PasswordActivityHelper
+import kr.co.soogong.master.uiinterface.auth.password.ChangePasswordActivityHelper
+import kr.co.soogong.master.uiinterface.auth.password.ChangePasswordActivityHelper.FROM_MY_PAGE
 import kr.co.soogong.master.util.EventObserver
 import timber.log.Timber
 
@@ -47,7 +48,13 @@ class AccountActivity : BaseActivity<ActivityAccountBinding>(
                     Unit
                 }
                 AccountViewModel.PASSWORD -> {
-                    startActivity(PasswordActivityHelper.getIntent(this@AccountActivity))
+                    startActivity(
+                        ChangePasswordActivityHelper.getIntent(
+                            this@AccountActivity,
+                            FROM_MY_PAGE,
+                            ""
+                        )
+                    )
                 }
             }
         })

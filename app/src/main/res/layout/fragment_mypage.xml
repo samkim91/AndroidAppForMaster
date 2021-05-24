@@ -53,18 +53,19 @@
                 app:layout_constraintStart_toEndOf="@id/master_store_name"
                 app:layout_constraintTop_toTopOf="@id/master_store_name" />
 
+<!--            todo.. need to bind viewModel -->
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/master_email"
+                android:id="@+id/master_id"
                 style="@style/small_text_style.medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/my_page_master_email_margin_start"
-                android:layout_marginTop="@dimen/my_page_master_email_margin_top"
-                android:text="E-MAIL"
+                android:layout_marginStart="@dimen/gap_20"
+                android:layout_marginTop="@dimen/gap_20"
+
                 android:textColor="@color/text_basic_color"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/master_store_name"
-                tools:text="hs0eeu@naver.com" />
+                tools:text="010-3278-7026" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/account_setting"
@@ -106,7 +107,7 @@
                 android:layout_height="@dimen/my_page_line_height"
                 android:layout_marginTop="@dimen/my_page_line_margin_top"
                 android:background="@color/line_color"
-                app:layout_constraintTop_toBottomOf="@id/master_email" />
+                app:layout_constraintTop_toBottomOf="@id/master_id" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/notice_title"

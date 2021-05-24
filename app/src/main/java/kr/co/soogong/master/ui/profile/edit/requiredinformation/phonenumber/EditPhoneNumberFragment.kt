@@ -98,9 +98,8 @@ class EditPhoneNumberFragment :
                 phoneNumber.buttonBackground = isEnabled
                 phoneNumber.buttonText =
                     if (!isEnabled) getString(R.string.certification_text) else getString(R.string.retype_text)
-                certificationCodeContainer.visibility = if (isEnabled) View.VISIBLE else View.GONE
-                requestCertificationCodeAgainGroup.visibility =
-                    if (isEnabled) View.VISIBLE else View.GONE
+                certificationCodeContainer.isVisible = isEnabled
+                requestCertificationCodeAgainGroup.isVisible = isEnabled
                 defaultButton.isEnabled = isEnabled
             })
         }
