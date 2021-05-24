@@ -8,6 +8,7 @@ import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.domain.usecase.auth.RequestCertificationCodeUseCase
 import kr.co.soogong.master.domain.usecase.auth.RequestConfirmCertificationCodeUseCase
+import kr.co.soogong.master.domain.usecase.profile.SavePhoneNumberUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import timber.log.Timber
 import javax.inject.Inject
@@ -16,6 +17,7 @@ import javax.inject.Inject
 class EditPhoneNumberViewModel @Inject constructor(
     private val requestCertificationCodeUseCase: RequestCertificationCodeUseCase,
     private val requestConfirmCertificationCodeUseCase: RequestConfirmCertificationCodeUseCase,
+    private val savePhoneNumberUseCase: SavePhoneNumberUseCase,
 ) : BaseViewModel() {
     val phoneNumber = MutableLiveData("")
     val certificationCode = MutableLiveData("")
@@ -35,7 +37,7 @@ class EditPhoneNumberViewModel @Inject constructor(
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
-                    onSuccess = { setAction(CERTIFICATION_CODE_REQUESTED_SUCCESSFULLY) },
+                    onSuccess = { },
                     onError = { setAction(CERTIFICATION_CODE_REQUESTED_FAILED) }
                 ).addToDisposable()
         }
@@ -52,6 +54,20 @@ class EditPhoneNumberViewModel @Inject constructor(
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
+                    onSuccess = { savePhoneNumber() },
+                    onError = { setAction(CERTIFICATION_CODE_CONFIRMED_FAILED) }
+                ).addToDisposable()
+        }
+    }
+
+    private fun savePhoneNumber() {
+        Timber.tag(TAG).d("savePhoneNumber: ")
+
+        phoneNumber.value?.let {
+            savePhoneNumberUseCase(it)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeBy(
                     onSuccess = { setAction(SAVE_PHONE_NUMBER_SUCCESSFULLY) },
                     onError = { setAction(SAVE_PHONE_NUMBER_FAILED) }
                 ).addToDisposable()
@@ -60,17 +76,13 @@ class EditPhoneNumberViewModel @Inject constructor(
 
     companion object {
         private const val TAG = "EditPhoneNumberViewModel"
+
+        const val CERTIFICATION_CODE_REQUESTED_FAILED = "CERTIFICATION_CODE_REQUESTED_FAILED"
+        const val CERTIFICATION_CODE_CONFIRMED_FAILED = "CERTIFICATION_CODE_CONFIRMED_FAILED"
+
         const val SAVE_PHONE_NUMBER_SUCCESSFULLY =
             "SAVE_BUSINESS_REPRESENTATIVE_NAME_SUCCESSFULLY"
         const val SAVE_PHONE_NUMBER_FAILED =
             "SAVE_BUSINESS_REPRESENTATIVE_NAME_FAILED"
-
-        const val CERTIFICATION_CODE_REQUESTED_SUCCESSFULLY =
-            "CERTIFICATION_CODE_REQUESTED_SUCCESSFULLY"
-        const val CERTIFICATION_CODE_REQUESTED_FAILED = "CERTIFICATION_CODE_REQUESTED_FAILED"
-
-        const val CERTIFICATION_CODE_CONFIRMED_SUCCESSFULLY =
-            "CERTIFICATION_CODE_CONFIRMED_SUCCESSFULLY"
-        const val CERTIFICATION_CODE_CONFIRMED_FAILED = "CERTIFICATION_CODE_CONFIRMED_FAILED"
     }
 }

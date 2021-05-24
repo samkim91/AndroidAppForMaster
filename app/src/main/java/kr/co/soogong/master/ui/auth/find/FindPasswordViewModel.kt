@@ -1,46 +1,73 @@
 package kr.co.soogong.master.ui.auth.find
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.domain.usecase.auth.FindPasswordUseCase
+import kr.co.soogong.master.domain.usecase.auth.RequestCertificationCodeUseCase
+import kr.co.soogong.master.domain.usecase.auth.RequestConfirmCertificationCodeUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class FindPasswordViewModel @Inject constructor(
+    private val requestCertificationCodeUseCase: RequestCertificationCodeUseCase,
+    private val requestConfirmCertificationCodeUseCase: RequestConfirmCertificationCodeUseCase,
+
     private val findPasswordUseCase: FindPasswordUseCase
 ) : BaseViewModel() {
-    val email = MutableLiveData<String>()
+    val phoneNumber = MutableLiveData("")
+    val certificationCode = MutableLiveData("")
 
-    fun findInfo() {
-        Timber.tag(TAG).d("findInfo: ")
-        findPasswordUseCase(email.value)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                Timber.tag(TAG).d("findInfo: $it")
-                success()
-            }, {
-                Timber.tag(TAG).w("findInfo: $it")
-                fail()
-            })
-            .addToDisposable()
+    private var _isEnabled = MutableLiveData(false)
+    val isEnabled: LiveData<Boolean>
+        get() = _isEnabled
+
+    fun changeEnabled() {
+        _isEnabled.value = !_isEnabled.value!!
     }
 
-    private fun fail() {
-        setAction(FAIL)
+    fun requestCertificationCode() {
+        Timber.tag(TAG).d("requestCertificationCode: ")
+        phoneNumber.value?.let {
+            requestCertificationCodeUseCase(phoneNumber = it)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeBy(
+                    onSuccess = { },
+                    onError = { setAction(CERTIFICATION_CODE_REQUESTED_FAILED) }
+                ).addToDisposable()
+        }
     }
 
-    private fun success() {
-        setAction(SUCCESS)
+    fun requestConfirmCertificationCode() {
+        Timber.tag(TAG).d("requestConfirmCertificationCode: ")
+
+        // 입력한 인증번호를 확인
+        // 인증되면, 다음화면으로
+        // 안 되면, alert 표시
+        certificationCode.value?.let {
+            requestConfirmCertificationCodeUseCase(certificationCode = it)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeBy(
+                    onSuccess = { setAction(CERTIFICATION_CODE_CONFIRMED_SUCCESSFULLY) },
+                    onError = { setAction(CERTIFICATION_CODE_CONFIRMED_FAILED) }
+                ).addToDisposable()
+        }
     }
 
     companion object {
         private const val TAG = "FindInfoViewModel"
-        const val FAIL = "FAIL"
-        const val SUCCESS = "SUCCESS"
+
+        const val CERTIFICATION_CODE_REQUESTED_FAILED = "CERTIFICATION_CODE_REQUESTED_FAILED"
+
+        const val CERTIFICATION_CODE_CONFIRMED_SUCCESSFULLY =
+            "CERTIFICATION_CODE_CONFIRMED_SUCCESSFULLY"
+        const val CERTIFICATION_CODE_CONFIRMED_FAILED = "CERTIFICATION_CODE_CONFIRMED_FAILED"
     }
 }

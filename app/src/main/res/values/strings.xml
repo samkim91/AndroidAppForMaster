@@ -10,6 +10,7 @@
     <string name="retype_phone_number_button_text">휴대폰번호 재입력</string>
     <string name="check_certification_code_button_text">인증완료</string>
     <string name="alert_wrong_certification_code">인증번호가 틀립니다.</string>
+    <string name="alert_unknown_user">가입되지 않은 번호입니다.</string>
     <string name="alert_invalid_certification_code">6자리 숫자로 입력해주세요.</string>
     <string name="alert_expired_certification_time">인증시간이 초과되었습니다. 인증번호를 재청요해주세요.</string>
     <string name="alert_empty_certification_code">인증번호를 입력해주세요.</string>
@@ -37,14 +38,17 @@
     <string name="find_password_text">비밀번호 찾기</string>
     <string name="asking_forget_password_text">비밀번호를 잊으셨나요?</string>
     <string name="finding_password_text_underline"><u>비밀번호 찾기</u></string>
-    <string name="sign_in_email_hint_text">아이디 입력</string>
+    <string name="sign_in_id_hint_text">휴대폰번호 - 없이 입력</string>
     <string name="sign_in_password_hint_text">비밀번호 입력</string>
-    <string name="alert_invalid_id_or_password">이메일 혹은 비밀번호가 올바르지 않습니다.</string>
+    <string name="alert_invalid_id_or_password">휴대폰번호 혹은 비밀번호가 올바르지 않습니다.</string>
+    <string name="insert_certification_code_edittext_hint">인증번호 6자리 입력</string>
+
 
     <!-- Find Info -->
     <string name="find_info_activity_name">비밀번호 찾기</string>
     <string name="find_info_email_hint_text">이메일</string>
     <string name="find_info_button_text">이메일로 비밀번호 보내기</string>
+    <string name="confirmation_button_text">확인</string>
 
     <!-- My Page-->
     <string name="my_page_fragment_name">마이페이지</string>

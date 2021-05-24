@@ -40,9 +40,9 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(
                 }
             }
 
-            email.addTextChangedListener(
+            id.addTextChangedListener(
                 afterTextChanged = {
-                    if (signInAlert.visibility == View.VISIBLE && !email.text.isNullOrEmpty()) {
+                    if (signInAlert.visibility == View.VISIBLE && !id.text.isNullOrEmpty()) {
                         signInAlert.visibility = View.GONE
                     }
                 }

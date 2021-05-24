@@ -9,6 +9,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentEditPhoneNumberBinding
 import kr.co.soogong.master.ui.base.BaseFragment
+import kr.co.soogong.master.ui.profile.edit.requiredinformation.phonenumber.EditPhoneNumberViewModel.Companion.CERTIFICATION_CODE_CONFIRMED_FAILED
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.phonenumber.EditPhoneNumberViewModel.Companion.SAVE_PHONE_NUMBER_FAILED
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.phonenumber.EditPhoneNumberViewModel.Companion.SAVE_PHONE_NUMBER_SUCCESSFULLY
 import kr.co.soogong.master.util.EventObserver
@@ -54,7 +55,7 @@ class EditPhoneNumberFragment :
 
             phoneNumber.setButtonClickListener {
                 requestCertificationCode { requireContext().toast(getString(R.string.certification_code_requested)) }.let {
-                    if(!binding.phoneNumber.alertVisible) viewModel.changeEnabled()
+                    if (!binding.phoneNumber.alertVisible) viewModel.changeEnabled()
                 }
             }
 
@@ -68,7 +69,8 @@ class EditPhoneNumberFragment :
                 })
 
                 if (!alertWrongCertificationCode.isVisible && !alertExpiredCertificationTime.isVisible
-                    && !alertInvalidCertificationCode.isVisible && !alertEmptyCertificationCode.isVisible) viewModel.requestConfirmCertificationCode()
+                    && !alertInvalidCertificationCode.isVisible && !alertEmptyCertificationCode.isVisible
+                ) viewModel.requestConfirmCertificationCode()
             }
         }
     }
@@ -97,6 +99,8 @@ class EditPhoneNumberFragment :
                 phoneNumber.buttonText =
                     if (!isEnabled) getString(R.string.certification_text) else getString(R.string.retype_text)
                 certificationCodeContainer.visibility = if (isEnabled) View.VISIBLE else View.GONE
+                requestCertificationCodeAgainGroup.visibility =
+                    if (isEnabled) View.VISIBLE else View.GONE
                 defaultButton.isEnabled = isEnabled
             })
         }
@@ -106,7 +110,7 @@ class EditPhoneNumberFragment :
                 SAVE_PHONE_NUMBER_SUCCESSFULLY -> {
                     activity?.onBackPressed()
                 }
-                SAVE_PHONE_NUMBER_FAILED -> {
+                CERTIFICATION_CODE_CONFIRMED_FAILED, SAVE_PHONE_NUMBER_FAILED -> {
                     requireContext().toast(getString(R.string.error_message_of_request_failed))
                 }
             }

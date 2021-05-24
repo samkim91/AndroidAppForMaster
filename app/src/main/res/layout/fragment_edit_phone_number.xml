@@ -38,11 +38,11 @@
                     android:layout_height="wrap_content"
                     app:alertText='@{"휴대폰번호 형식이 올바르지 않습니다."}'
                     app:buttonText='@{"인증"}'
+                    app:firstContent="@={vm.phoneNumber}"
                     app:inputTypeFirst="@{InputType.TYPE_CLASS_NUMBER}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:firstContent="@={vm.phoneNumber}"
                     app:setFirstEditTextEnable="@{true}"
                     app:setFirstEditTextHint='@{"숫자만 입력해주세요."}'
                     app:setMaxLengthFirst="@{12}"
@@ -59,8 +59,7 @@
                     android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/phone_number"
-                    >
+                    app:layout_constraintTop_toBottomOf="@id/phone_number">
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/certification_code_label"
@@ -80,6 +79,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/gap_12"
                         android:background="@drawable/shape_fill_white_background"
+                        android:hint="@string/insert_certification_code_edittext_hint"
                         android:inputType="numberSigned"
                         android:maxLength="6"
                         android:paddingStart="@dimen/gap_16"
@@ -91,8 +91,7 @@
                         android:textColorHint="@color/text_hint_color"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/certification_code_label"
-                        tools:hint="인증번호 6자리 입력" />
+                        app:layout_constraintTop_toBottomOf="@id/certification_code_label" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/timer_view"
@@ -171,12 +170,12 @@
                     android:layout_marginBottom="@dimen/gap_32"
                     android:text="@string/confirming_certification_code_received"
                     android:textColor="@color/text_primary_color"
-                    app:layout_constraintVertical_bias="1"
-                    app:layout_constraintTop_toBottomOf="@id/certification_code_container"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/request_certification_code_again_text"
                     app:layout_constraintHorizontal_chainStyle="packed"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/certification_code_container"
+                    app:layout_constraintVertical_bias="1" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/request_certification_code_again_text"
@@ -187,10 +186,17 @@
                     android:layout_marginBottom="@dimen/gap_32"
                     android:text="@string/request_certification_code_again_text"
                     android:textColor="@color/text_primary_color"
-                    app:layout_constraintTop_toTopOf="@id/confirming_certification_code_received"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_chainStyle="packed"
-                    app:layout_constraintStart_toEndOf="@id/confirming_certification_code_received" />
+                    app:layout_constraintStart_toEndOf="@id/confirming_certification_code_received"
+                    app:layout_constraintTop_toTopOf="@id/confirming_certification_code_received" />
+
+                <androidx.constraintlayout.widget.Group
+                    android:id="@+id/request_certification_code_again_group"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    app:constraint_referenced_ids="request_certification_code_again_text,confirming_certification_code_received" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
 

@@ -14,13 +14,13 @@ import javax.inject.Inject
 class SignInViewModel @Inject constructor(
     private val signInUseCase: SignInUseCase
 ) : BaseViewModel() {
-    val email = MutableLiveData<String>()
+    val id = MutableLiveData<String>()
     val password = MutableLiveData<String>()
 
     fun loginAction() {
         Timber.tag(TAG).d("loginAction: ")
 
-        if (email.value.isNullOrEmpty()) {
+        if (id.value.isNullOrEmpty()) {
             setAction(FAIL_NULL)
             return
         }
@@ -30,7 +30,7 @@ class SignInViewModel @Inject constructor(
             return
         }
 
-        signInUseCase(email.value, password.value)
+        signInUseCase(id.value, password.value)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(

@@ -91,6 +91,6 @@ ext {
 
     readMoreTextViewVersion = '1.0.0'
 
-    amplifyVersion = '1.17.4'
+    amplifyVersion = '1.17.5'
     desugarJdkLibsVersion = '1.1.5'
 }
