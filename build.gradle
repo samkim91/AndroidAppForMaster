@@ -90,4 +90,7 @@ ext {
     naverMapVersion = '3.11.0'
 
     readMoreTextViewVersion = '1.0.0'
+
+    amplifyVersion = '1.17.4'
+    desugarJdkLibsVersion = '1.1.5'
 }
