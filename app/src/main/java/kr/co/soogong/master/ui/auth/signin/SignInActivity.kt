@@ -8,7 +8,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ActivitySignInBinding
 import kr.co.soogong.master.ui.base.BaseActivity
-import kr.co.soogong.master.uiinterface.auth.find.FindPasswordActivityHelper
+import kr.co.soogong.master.uiinterface.auth.password.FindPasswordActivityHelper
 import kr.co.soogong.master.uiinterface.main.MainActivityHelper
 import kr.co.soogong.master.util.EventObserver
 import timber.log.Timber

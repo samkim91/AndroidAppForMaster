@@ -1,5 +1,6 @@
-package kr.co.soogong.master.ui.auth.find
+package kr.co.soogong.master.ui.auth.password.find
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.View
@@ -8,10 +9,12 @@ import androidx.core.view.isVisible
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ActivityFindPasswordBinding
-import kr.co.soogong.master.ui.auth.find.FindPasswordViewModel.Companion.CERTIFICATION_CODE_CONFIRMED_FAILED
-import kr.co.soogong.master.ui.auth.find.FindPasswordViewModel.Companion.CERTIFICATION_CODE_CONFIRMED_SUCCESSFULLY
-import kr.co.soogong.master.ui.auth.find.FindPasswordViewModel.Companion.CERTIFICATION_CODE_REQUESTED_FAILED
+import kr.co.soogong.master.ui.auth.password.find.FindPasswordViewModel.Companion.CERTIFICATION_CODE_CONFIRMED_FAILED
+import kr.co.soogong.master.ui.auth.password.find.FindPasswordViewModel.Companion.CERTIFICATION_CODE_CONFIRMED_SUCCESSFULLY
+import kr.co.soogong.master.ui.auth.password.find.FindPasswordViewModel.Companion.CERTIFICATION_CODE_REQUESTED_FAILED
 import kr.co.soogong.master.ui.base.BaseActivity
+import kr.co.soogong.master.uiinterface.auth.password.ChangePasswordActivityHelper
+import kr.co.soogong.master.uiinterface.auth.password.ChangePasswordActivityHelper.FROM_SIGN_IN
 import kr.co.soogong.master.util.EventObserver
 import kr.co.soogong.master.util.extension.toast
 import timber.log.Timber
@@ -53,7 +56,7 @@ class FindPasswordActivity : BaseActivity<ActivityFindPasswordBinding>(
             lifecycleOwner = this@FindPasswordActivity
 
             with(actionBar) {
-                title.text = getString(R.string.find_info_activity_name)
+                title.text = getString(R.string.find_password_activity_name)
                 backButton.setOnClickListener {
                     super.onBackPressed()
                 }
@@ -89,9 +92,8 @@ class FindPasswordActivity : BaseActivity<ActivityFindPasswordBinding>(
                 phoneNumber.buttonBackground = isEnabled
                 phoneNumber.buttonText =
                     if (!isEnabled) getString(R.string.certification_text) else getString(R.string.retype_text)
-                certificationCodeContainer.visibility = if (isEnabled) View.VISIBLE else View.GONE
-                requestCertificationCodeAgainGroup.visibility =
-                    if (isEnabled) View.VISIBLE else View.GONE
+                certificationCodeContainer.isVisible = isEnabled
+                requestCertificationCodeAgainGroup.isVisible = isEnabled
                 defaultButton.isEnabled = isEnabled
             })
         }
@@ -99,7 +101,15 @@ class FindPasswordActivity : BaseActivity<ActivityFindPasswordBinding>(
         viewModel.action.observe(this@FindPasswordActivity, EventObserver { event ->
             when (event) {
                 CERTIFICATION_CODE_CONFIRMED_SUCCESSFULLY -> {
-                    // Todo.. changePassword activity로 이동
+                    startActivity(
+                        Intent(
+                            ChangePasswordActivityHelper.getIntent(
+                                this,
+                                FROM_SIGN_IN,
+                                viewModel.phoneNumber.value
+                            )
+                        )
+                    )
                 }
 
                 // todo.. 가입되지 않은 번호에 대한 처리 필요
@@ -135,6 +145,6 @@ class FindPasswordActivity : BaseActivity<ActivityFindPasswordBinding>(
     }
 
     companion object {
-        private const val TAG = "FindInfoActivity"
+        private const val TAG = "FindPasswordActivity"
     }
 }
