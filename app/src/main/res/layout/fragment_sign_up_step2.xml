@@ -64,6 +64,7 @@
                 android:layout_marginTop="@dimen/gap_8"
                 android:layout_marginEnd="@dimen/gap_20"
                 android:background="@drawable/shape_fill_white_background"
+                android:hint="@string/insert_certification_code_edittext_hint"
                 android:inputType="numberSigned"
                 android:maxLength="6"
                 android:paddingStart="@dimen/gap_16"
@@ -75,8 +76,7 @@
                 android:textColorHint="@color/text_hint_color"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/phone_number"
-                tools:hint="인증번호 6자리 입력" />
+                app:layout_constraintTop_toBottomOf="@id/phone_number" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/timer_view"
