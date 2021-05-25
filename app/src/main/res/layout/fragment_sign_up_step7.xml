@@ -63,12 +63,10 @@
                 app:cardElevation="@dimen/gap_0"
                 >
 
-                <fragment
+                <FrameLayout
                     android:id="@+id/map_view"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:name="com.naver.maps.map.MapFragment"
-                    app:navermap_zoom="12"
                     />
             </androidx.cardview.widget.CardView>
 

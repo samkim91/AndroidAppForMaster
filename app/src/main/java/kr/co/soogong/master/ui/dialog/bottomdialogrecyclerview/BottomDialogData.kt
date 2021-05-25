@@ -16,7 +16,7 @@ data class BottomDialogData(
                 BottomDialogData("25km", 25),
                 BottomDialogData("50km", 50),
                 BottomDialogData("100km", 100),
-                BottomDialogData("전국구 가능", 500)
+                BottomDialogData("전국구 가능", 1000)
             )
 
         fun getWarrantyPeriodList() =

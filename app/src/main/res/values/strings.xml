@@ -228,6 +228,7 @@
     <string name="certification_code">인증번호</string>
     <string name="certification_text">인증</string>
     <string name="retype_text">재입력</string>
+    <string name="kilo_meters">km</string>
 
     <!-- Request Detail -->
     <string name="request_date">접수일시</string>

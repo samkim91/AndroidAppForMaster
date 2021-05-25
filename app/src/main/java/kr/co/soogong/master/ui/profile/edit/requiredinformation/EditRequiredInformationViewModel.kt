@@ -26,14 +26,12 @@ class EditRequiredInformationViewModel @Inject constructor(
     val isApprovedMaster: LiveData<Boolean>
         get() = _isApprovedMaster
 
-    private val _requiredInformation = MutableLiveData<RequiredInformation?>()
-    val requiredInformation: LiveData<RequiredInformation?>
-        get() = _requiredInformation
+    val requiredInformation = MutableLiveData<RequiredInformation?>()
 
     fun getRequiredInfo() {
         Timber.tag(TAG).d("getRequiredInformation: ")
         viewModelScope.launch {
-            _requiredInformation.value = getRequiredInformationUseCase()
+            requiredInformation.value = getRequiredInformationUseCase()
         }
     }
 
@@ -46,6 +44,11 @@ class EditRequiredInformationViewModel @Inject constructor(
                 onSuccess = { setAction(SAVE_CAREER_PERIOD_SUCCESSFULLY) },
                 onError = { setAction(SAVE_CAREER_PERIOD_FAILED) }
             ).addToDisposable()
+    }
+
+    fun saveServiceArea(radius: Int) {
+        Timber.tag(TAG).d("saveServiceArea: ")
+        // Todo.. serviceArea 저장하는 로직 추가 필요
     }
 
     companion object {

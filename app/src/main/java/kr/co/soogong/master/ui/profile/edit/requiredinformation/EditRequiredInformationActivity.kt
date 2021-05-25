@@ -12,6 +12,7 @@ import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogData
 import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogRecyclerView
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.EditRequiredInformationViewModel.Companion.SAVE_CAREER_PERIOD_FAILED
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.EditRequiredInformationViewModel.Companion.SAVE_CAREER_PERIOD_SUCCESSFULLY
+import kr.co.soogong.master.ui.utils.NaverMapHelper
 import kr.co.soogong.master.uiinterface.profile.EditProfileContainerActivityHelper
 import kr.co.soogong.master.uiinterface.profile.EditProfileContainerFragmentHelper.EDIT_ADDRESS
 import kr.co.soogong.master.uiinterface.profile.EditProfileContainerFragmentHelper.EDIT_BRIEF_INTRODUCTION
@@ -22,6 +23,7 @@ import kr.co.soogong.master.uiinterface.profile.EditProfileContainerFragmentHelp
 import kr.co.soogong.master.uiinterface.profile.EditProfileContainerFragmentHelper.EDIT_PHONE_NUMBER
 import kr.co.soogong.master.uiinterface.profile.EditProfileContainerFragmentHelper.EDIT_WARRANTY_INFORMATION
 import kr.co.soogong.master.util.EventObserver
+import kr.co.soogong.master.util.extension.mutation
 import kr.co.soogong.master.util.extension.toast
 import timber.log.Timber
 
@@ -30,6 +32,16 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
     R.layout.activity_edit_required_information
 ) {
     private val viewModel: EditRequiredInformationViewModel by viewModels()
+
+    private val naverMap: NaverMapHelper by lazy {
+        NaverMapHelper(
+            context = this@EditRequiredInformationActivity,
+            fragmentManager = supportFragmentManager,
+            frameLayout = binding.serviceArea.mapFragment,
+            coordinate = viewModel.requiredInformation.value?.coordinate,
+            diameter = viewModel.requiredInformation.value?.serviceArea
+        )
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,7 +80,6 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
             }
 
             career.addDefaultButtonClickListener {
-                Timber.tag(TAG).w("Career Clicked")
                 val bottomDialog =
                     BottomDialogRecyclerView("경력", BottomDialogData.getWarrantyPeriodList(),
                         itemClick = { text, value ->
@@ -94,6 +105,21 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
             address.addDefaultButtonClickListener {
                 startActivityCommonCode(EDIT_ADDRESS)
             }
+
+            serviceArea.addDefaultButtonClickListener {
+                val bottomDialog =
+                    BottomDialogRecyclerView("범위 선택", BottomDialogData.getServiceAreaList(),
+                        itemClick = { _, diameter ->
+                            naverMap.changeServiceArea(diameter)
+                            viewModel.requiredInformation.mutation {
+                                  value?.serviceArea = diameter
+                            }
+                            viewModel.saveServiceArea(diameter)
+                        }
+                    )
+
+                bottomDialog.show(supportFragmentManager, bottomDialog.tag)
+            }
         }
     }
 
@@ -115,6 +141,7 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
         Timber.tag(TAG).d("onStart: ")
         super.onStart()
         viewModel.getRequiredInfo()
+        naverMap
 
         if (viewModel.isApprovedMaster.value == true) setLayoutForApprovedMaster() else setPercentageText()
     }
