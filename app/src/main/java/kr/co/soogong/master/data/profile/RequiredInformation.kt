@@ -5,6 +5,7 @@ import com.google.gson.JsonObject
 import kotlinx.parcelize.Parcelize
 import kr.co.soogong.master.data.category.BusinessType
 import kr.co.soogong.master.data.estimation.ImagePath
+import kr.co.soogong.master.data.user.Coordinate
 
 @Parcelize
 data class RequiredInformation(
@@ -13,10 +14,12 @@ data class RequiredInformation(
     val businessUnitInformation: BusinessUnitInformation,
     val warrantyInformation: WarrantyInformation,
     val career: String,
-    val businessRepresentativeName: String,
     val phoneNumber: String,
+    val businessRepresentativeName: String,
     val businessTypes: List<BusinessType>,
     val companyAddress: CompanyAddress,
+    val coordinate: Coordinate,
+    var serviceArea: Int,
 ) : Parcelable {
     companion object {
         fun fromJson(jsonObject: JsonObject): RequiredInformation {
@@ -24,23 +27,25 @@ data class RequiredInformation(
             val attributes = item.get("attributes").asJsonObject
 
             return RequiredInformation(
-                briefIntroduction = attributes.get("brief_introduction").asString,
-                representativeImages = attributes.get("representative_images").asJsonArray.map {
+                briefIntroduction = attributes.get("briefIntroduction").asString,
+                representativeImages = attributes.get("representativeImages").asJsonArray.map {
                     ImagePath.fromJson(
                         it.asJsonObject
                     )
                 },
-                businessRepresentativeName = attributes.get("business_representative_name").asString,
-                businessUnitInformation = BusinessUnitInformation.fromJson(attributes.get("business_unit_information").asJsonObject),
-                warrantyInformation = WarrantyInformation.fromJson(attributes.get("warranty_period").asJsonObject),
+                businessUnitInformation = BusinessUnitInformation.fromJson(attributes.get("businessUnitInformation").asJsonObject),
+                warrantyInformation = WarrantyInformation.fromJson(attributes.get("warrantyInformation").asJsonObject),
                 career = attributes.get("career").asString,
-                phoneNumber = attributes.get("phone_number").asString,
-                businessTypes = attributes.get("business_type").asJsonArray.map {
+                phoneNumber = attributes.get("phoneNumber").asString,
+                businessRepresentativeName = attributes.get("businessRepresentativeName").asString,
+                businessTypes = attributes.get("businessTypes").asJsonArray.map {
                     BusinessType.fromJson(
                         it.asJsonObject
                     )
                 },
-                companyAddress = CompanyAddress.fromJson(attributes.get("address").asJsonObject),
+                companyAddress = CompanyAddress.fromJson(attributes.get("companyAddress").asJsonObject),
+                coordinate = Coordinate.fromJson(attributes.get("coordinate").asJsonObject),
+                serviceArea = attributes.get("serviceArea").asInt,
             )
         }
 
@@ -51,13 +56,15 @@ data class RequiredInformation(
                 ImagePath.TEST_IMAGE_PATH,
                 ImagePath.TEST_IMAGE_PATH
             ),
-            businessRepresentativeName = "성현식",
             businessUnitInformation = BusinessUnitInformation.TEST_BUSINESS_UNIT_INFORMATION_2,
             warrantyInformation = WarrantyInformation.TEST_WARRANTY_INFORMATION,
             career = "2년",
             phoneNumber = "010 - 3290 -1234",
+            businessRepresentativeName = "성현식",
             businessTypes = listOf(BusinessType.TEST_BUSINESS_TYPE, BusinessType.TEST_BUSINESS_TYPE),
             companyAddress = CompanyAddress.TEST_COMPANY_ADDRESS,
+            coordinate = Coordinate.TEST_COORDINATE,
+            serviceArea = 10
         )
 
         val NULL_REQUIRED_INFORMATION = RequiredInformation(
@@ -70,6 +77,8 @@ data class RequiredInformation(
             phoneNumber = "",
             businessTypes = emptyList(),
             companyAddress = CompanyAddress.NULL_COMPANY_ADDRESS,
+            coordinate = Coordinate.NULL_COORDINATE,
+            serviceArea = 0
         )
     }
 }

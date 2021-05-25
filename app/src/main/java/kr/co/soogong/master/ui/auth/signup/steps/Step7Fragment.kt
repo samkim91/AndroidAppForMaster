@@ -13,29 +13,37 @@ import com.naver.maps.map.overlay.CircleOverlay
 import com.naver.maps.map.overlay.Marker
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
+import kr.co.soogong.master.data.user.Coordinate
 import kr.co.soogong.master.databinding.FragmentSignUpStep7Binding
 import kr.co.soogong.master.ui.auth.signup.SignUpActivity
 import kr.co.soogong.master.ui.auth.signup.SignUpViewModel
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogData
 import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogRecyclerView
+import kr.co.soogong.master.ui.utils.NaverMapHelper
 import kr.co.soogong.master.ui.utils.ZoomHelper
 import timber.log.Timber
 
 @AndroidEntryPoint
 class Step7Fragment : BaseFragment<FragmentSignUpStep7Binding>(
     R.layout.fragment_sign_up_step7
-), OnMapReadyCallback {
+) {
     private val viewModel: SignUpViewModel by activityViewModels()
-    lateinit var naverMap: NaverMap
-    lateinit var marker: Marker
-    var circleOverlay = CircleOverlay()
+
+    private val naverMap: NaverMapHelper by lazy {
+        NaverMapHelper(
+            context = requireContext(),
+            fragmentManager = childFragmentManager,
+            frameLayout = binding.mapView,
+            coordinate = Coordinate(viewModel.latitude.value ?: 0.0, viewModel.longitude.value ?: 0.0),
+            diameter = 2
+        )
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Timber.tag(TAG).d("onViewCreated: ")
         initLayout()
-        getMapFragment()
     }
 
     override fun initLayout() {
@@ -46,13 +54,12 @@ class Step7Fragment : BaseFragment<FragmentSignUpStep7Binding>(
             lifecycleOwner = viewLifecycleOwner
 
             serviceArea.addDropdownClickListener {
-                Timber.tag(TAG).w("Dropdown Clicked")
                 val bottomDialog =
                     BottomDialogRecyclerView("범위 선택", BottomDialogData.getServiceAreaList(),
-                        itemClick = { text, value ->
+                        itemClick = { text, diameter ->
                             viewModel.serviceArea.value = text
-                            viewModel.serviceAreaToInt.value = value
-                            setCircle(value)
+                            viewModel.serviceAreaToInt.value = diameter
+                            naverMap.changeServiceArea(diameter)
                         }
                     )
 
@@ -74,57 +81,9 @@ class Step7Fragment : BaseFragment<FragmentSignUpStep7Binding>(
         }
     }
 
-    private fun getMapFragment() {
-        val mapFragment = childFragmentManager.findFragmentById(R.id.map_view) as MapFragment?
-            ?: MapFragment.newInstance().also {
-                childFragmentManager.beginTransaction().add(R.id.map_view, it).commit()
-            }
-
-        mapFragment.getMapAsync(this)
-    }
-
-    override fun onMapReady(naverMap: NaverMap) {
-        this.naverMap = naverMap
-        setLocation()
-    }
-
-    private fun setLocation() {
-        viewModel.latitude.value?.let { lat ->
-            viewModel.longitude.value?.let { lng ->
-                naverMap.moveCamera(CameraUpdate.scrollTo(LatLng(lat, lng))
-                    .finishCallback {
-                        setMarker(lat, lng)
-                    }
-                )
-            }
-        }
-    }
-
-    private fun setMarker(lat: Double, lng: Double) {
-        marker = Marker()
-        marker.position = LatLng(lat, lng)
-        marker.width = Marker.SIZE_AUTO
-        marker.height = Marker.SIZE_AUTO
-        marker.map = naverMap
-    }
-
-    private fun setCircle(radius: Int) {
-        viewModel.latitude.value?.let { lat ->
-            viewModel.longitude.value?.let { lng ->
-                naverMap.moveCamera(CameraUpdate.scrollTo(LatLng(lat, lng)))
-                naverMap.moveCamera(CameraUpdate.zoomTo(ZoomHelper(radius))
-                    .finishCallback {
-                        if (!marker.isAdded) setMarker(lat, lng)
-                        if (circleOverlay.isAdded) circleOverlay.map = null
-                        circleOverlay = CircleOverlay(LatLng(lat, lng), (radius * 1000).toDouble())
-                        circleOverlay.outlineColor = resources.getColor(R.color.color_22D47B, null)
-                        circleOverlay.color = resources.getColor(R.color.color_8022D47B, null)
-                        circleOverlay.map = naverMap
-                    }
-                )
-            }
-        }
-
+    override fun onResume() {
+        super.onResume()
+        naverMap
     }
 
 
