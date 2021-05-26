@@ -186,6 +186,7 @@
     <string name="edit">편집하기</string>
     <string name="delete">삭제하기</string>
     <string name="register">등록하기</string>
+    <string name="certify">인증하기</string>
     <string name="writing_done">작성 완료</string>
     <string name="modifying_done">수정 완료</string>
     <string name="request_confirmation">승인 요청하기</string>
