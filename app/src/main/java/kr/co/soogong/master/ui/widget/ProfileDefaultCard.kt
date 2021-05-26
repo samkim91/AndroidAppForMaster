@@ -4,9 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
-import androidx.appcompat.widget.ViewUtils
 import androidx.constraintlayout.widget.ConstraintLayout
-import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ViewProfileDefaultCardBinding
 import kr.co.soogong.master.ui.utils.ButtonHelper
 
@@ -54,7 +52,7 @@ class ProfileDefaultCard @JvmOverloads constructor(
         set(value) {
             field = value
             with(binding.firstDetail) {
-                if(value.isNullOrEmpty()){
+                if (value.isNullOrEmpty()) {
                     visibility = View.GONE
                 } else {
                     visibility = View.VISIBLE
@@ -93,6 +91,19 @@ class ProfileDefaultCard @JvmOverloads constructor(
                 ButtonHelper.setRegisteringButton(binding.defaultButton)
             } else {
                 ButtonHelper.setEditingButton(binding.defaultButton)
+            }
+        }
+
+    // 인증하기 <-> 수정하기 버튼 셋
+    var defaultButtonByStringV3: String? = ""
+        set(value) {
+            field = value
+            if (value.isNullOrEmpty()) {
+                ButtonHelper.setRegisteringButton(binding.defaultButton)
+            } else if (value == "미인증") {
+                ButtonHelper.setCertifyingButton(binding.defaultButton)
+            } else {
+                ButtonHelper.setModifyingButton(binding.defaultButton)
             }
         }
 

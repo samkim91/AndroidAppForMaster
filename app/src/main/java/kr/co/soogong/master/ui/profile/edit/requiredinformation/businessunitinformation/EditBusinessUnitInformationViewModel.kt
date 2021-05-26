@@ -23,7 +23,8 @@ class EditBusinessUnitInformationViewModel @Inject constructor(
     private val saveBusinessUnitInformationUseCase: SaveBusinessUnitInformationUseCase,
 ) : BaseViewModel() {
     val businessUnitType = MutableLiveData<String>()
-    val businessUnitName = MutableLiveData("")
+    val businessName = MutableLiveData("")
+    val companyName = MutableLiveData("")
     val identicalNumber = MutableLiveData("")
     val identicalImage = MutableLiveData(Uri.EMPTY)
     val birthday = MutableLiveData("")
@@ -36,7 +37,8 @@ class EditBusinessUnitInformationViewModel @Inject constructor(
                 if (it.businessUnitType == "프리랜서") {
                     birthday.postValue(it.identicalNumber.toString())
                 } else {
-                    businessUnitName.postValue(it.businessUnitName)
+                    businessName.postValue(it.businessName)
+                    companyName.postValue(it.companyName)
                     identicalImage.postValue(Uri.parse(it.identicalImage?.path))
                     identicalNumber.postValue(it.identicalNumber.toString())
                 }
@@ -49,7 +51,8 @@ class EditBusinessUnitInformationViewModel @Inject constructor(
         saveBusinessUnitInformationUseCase(
             BusinessUnitInformation(
                 businessUnitType = businessUnitType.value!!,
-                businessUnitName = businessUnitName.value!!,
+                businessName = businessName.value!!,
+                companyName = companyName.value!!,
                 identicalNumber = if (businessUnitType.value == "프리랜서") birthday.value!!.toInt() else identicalNumber.value!!.toInt(),
                 identicalImage = ImagePath(identicalImage.value.toString())
             )
@@ -66,7 +69,8 @@ class EditBusinessUnitInformationViewModel @Inject constructor(
 
     companion object {
         private const val TAG = "EditBusinessUnitInformationViewModel"
-        const val SAVE_BUSINESS_UNIT_INFORMATION_SUCCESSFULLY = "SAVE_BUSINESS_UNIT_INFORMATION_SUCCESSFULLY"
+        const val SAVE_BUSINESS_UNIT_INFORMATION_SUCCESSFULLY =
+            "SAVE_BUSINESS_UNIT_INFORMATION_SUCCESSFULLY"
         const val SAVE_BUSINESS_UNIT_INFORMATION_FAILED = "SAVE_BUSINESS_UNIT_INFORMATION_FAILED"
     }
 }

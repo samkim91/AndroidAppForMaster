@@ -75,6 +75,7 @@
                     android:layout_height="@dimen/gap_100"
                     android:layout_marginTop="@dimen/gap_12"
                     app:cardCornerRadius="@dimen/gap_8"
+                    app:cardElevation="@dimen/gap_0"
                     app:layout_constraintStart_toStartOf="@id/before_job_label"
                     app:layout_constraintTop_toBottomOf="@id/before_job_label"
                     bind:visible="@{vm.imageBeforeJob != Uri.EMPTY}">
@@ -121,6 +122,7 @@
                     android:layout_height="@dimen/gap_100"
                     android:layout_marginTop="@dimen/gap_12"
                     app:cardCornerRadius="@dimen/gap_8"
+                    app:cardElevation="@dimen/gap_0"
                     app:layout_constraintStart_toStartOf="@id/after_job_label"
                     app:layout_constraintTop_toBottomOf="@id/after_job_label"
                     bind:visible="@{vm.imageAfterJob != Uri.EMPTY}">

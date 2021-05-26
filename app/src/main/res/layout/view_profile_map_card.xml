@@ -89,7 +89,7 @@
             android:layout_marginEnd="@dimen/gap_16"
             android:layout_marginStart="@dimen/gap_16"
             android:textColor="@color/text_basic_color"
-            android:visibility="visible"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"

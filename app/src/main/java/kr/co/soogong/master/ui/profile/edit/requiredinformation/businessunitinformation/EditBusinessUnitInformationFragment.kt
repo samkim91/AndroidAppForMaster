@@ -58,8 +58,12 @@ class EditBusinessUnitInformationFragment :
             }
 
             defaultButton.setOnClickListener {
-                viewModel.businessUnitName.observe(viewLifecycleOwner, {
-                    businessUnitName.alertVisible = it.isNullOrEmpty()
+                viewModel.businessName.observe(viewLifecycleOwner, {
+                    businessName.alertVisible = it.isNullOrEmpty()
+                })
+
+                viewModel.companyName.observe(viewLifecycleOwner, {
+                    companyName.alertVisible = it.isNullOrEmpty()
                 })
 
                 viewModel.identicalNumber.observe(viewLifecycleOwner, {
@@ -67,17 +71,17 @@ class EditBusinessUnitInformationFragment :
                 })
 
                 viewModel.identicalImage.observe(viewLifecycleOwner, {
-                    alert.visibility = if(it == Uri.EMPTY) View.VISIBLE else View.GONE
+                    alert.visibility = if (it == Uri.EMPTY) View.VISIBLE else View.GONE
                 })
 
                 viewModel.birthday.observe(viewLifecycleOwner, {
                     birthday.alertVisible = it.isNullOrEmpty()
                 })
 
-                if(viewModel.businessUnitType.value == "프리랜서"){
-                    if(!birthday.alertVisible) viewModel.saveBusinessUnitInfo()
+                if (viewModel.businessUnitType.value == "프리랜서") {
+                    if (!birthday.alertVisible) viewModel.saveBusinessUnitInfo()
                 } else {
-                    if(!businessUnitName.alertVisible && !identicalNumber.alertVisible && !alert.isVisible) viewModel.saveBusinessUnitInfo()
+                    if (!businessName.alertVisible && !companyName.alertVisible && !identicalNumber.alertVisible && !alert.isVisible) viewModel.saveBusinessUnitInfo()
                 }
             }
         }
@@ -119,7 +123,7 @@ class EditBusinessUnitInformationFragment :
             }
         })
         viewModel.action.observe(viewLifecycleOwner, EventObserver { event ->
-            when(event) {
+            when (event) {
                 SAVE_BUSINESS_UNIT_INFORMATION_SUCCESSFULLY -> {
                     activity?.onBackPressed()
                 }

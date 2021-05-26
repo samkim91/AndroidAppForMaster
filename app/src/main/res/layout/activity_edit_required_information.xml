@@ -2,7 +2,6 @@
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:bind="http://schemas.android.com/bind"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -155,11 +154,11 @@
                     android:background="@drawable/shape_radius8_white_background"
                     android:elevation="@dimen/gap_4"
                     app:defaultButtonByImageV2="@{vm.requiredInformation.representativeImages.get(0)}"
-                    app:imageUrl="@{vm.requiredInformation.representativeImages.get(0)}"
                     app:firstDetailWithSimpleText="@{vm.requiredInformation.representativeImages.get(0)}"
+                    app:imageCount="@{vm.requiredInformation.representativeImages.size}"
+                    app:imageUrl="@{vm.requiredInformation.representativeImages.get(0)}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:imageCount="@{vm.requiredInformation.representativeImages.size}"
                     app:layout_constraintTop_toBottomOf="@id/brief_introduction"
                     app:subTitle='@{"업체 페이지에 노출되는 대표 이미지 입니다."}'
                     app:title='@{"대표 이미지"}' />
@@ -248,7 +247,7 @@
                     android:layout_marginEnd="@dimen/gap_20"
                     android:background="@drawable/shape_radius8_white_background"
                     android:elevation="@dimen/gap_4"
-                    app:defaultButtonByString="@{vm.requiredInformation.phoneNumber}"
+                    app:defaultButtonByStringV3="@{vm.requiredInformation.phoneNumber}"
                     app:firstDetail="@{vm.requiredInformation.phoneNumber}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

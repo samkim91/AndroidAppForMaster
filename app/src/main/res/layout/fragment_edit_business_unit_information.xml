@@ -52,21 +52,34 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/gap_28"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/business_unit_type">
 
                     <kr.co.soogong.master.ui.widget.TitleEditText
-                        android:id="@+id/business_unit_name"
+                        android:id="@+id/business_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:alertText='@{"2자 이상 20자 이내로 입력해주세요."}'
-                        app:content="@={vm.businessUnitName}"
+                        app:alertText='@{"필수 정보입니다."}'
+                        app:content="@={vm.businessName}"
                         app:hintText='@{"예시) 수공"}'
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
+                        app:title='@{"사업자 등록상호를 입력해주세요."}' />
+
+                    <kr.co.soogong.master.ui.widget.TitleEditText
+                        android:id="@+id/company_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/gap_28"
+                        app:alertText='@{"2자 이상 20자 이내로 입력해주세요."}'
+                        app:content="@={vm.companyName}"
+                        app:hintText='@{"예시) 수공"}'
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/business_name"
                         app:title='@{"업체 이름을 입력해주세요."}' />
 
                     <kr.co.soogong.master.ui.widget.TitleEditText
@@ -79,7 +92,7 @@
                         app:hintText='@{"사업자등록번호 예시) 1053578512"}'
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/business_unit_name"
+                        app:layout_constraintTop_toBottomOf="@id/company_name"
                         app:setInputType="@{InputType.TYPE_CLASS_NUMBER}"
                         app:title='@{"사업자등록번호를 입력해주세요."}' />
 
@@ -111,6 +124,7 @@
                         android:layout_height="@dimen/gap_100"
                         android:layout_marginTop="@dimen/gap_12"
                         app:cardCornerRadius="@dimen/gap_8"
+                        app:cardElevation="@dimen/gap_0"
                         app:layout_constraintStart_toStartOf="@id/identical_image_holder_label"
                         app:layout_constraintTop_toBottomOf="@id/identical_image_holder_label"
                         bind:visible="@{vm.identicalImage != Uri.EMPTY}">
