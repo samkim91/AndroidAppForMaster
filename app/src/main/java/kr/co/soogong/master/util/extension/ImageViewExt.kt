@@ -15,6 +15,12 @@ fun ImageView.setImageUrl(url: String?) {
         .load(url)
         .transform(CenterInside())
         .into(this)
+
+//    Glide.with(this.context)
+//        .load(url)
+//        .error(R.drawable.ic_camera) // 에러 있을 때 기본으로 변경할 수 있도록..
+//        .transform(CenterInside())
+//        .into(this)
 }
 
 @BindingAdapter("bind:image_uri")
