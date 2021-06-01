@@ -6,7 +6,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import kr.co.soogong.master.data.profile.Profile
 import kr.co.soogong.master.data.user.User
+import kr.co.soogong.master.domain.usecase.profile.GetProfileUseCase
 import kr.co.soogong.master.domain.usecase.profile.GetUserInfoUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import timber.log.Timber
@@ -14,18 +16,19 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
-    private val getUserInfoUseCase: GetUserInfoUseCase
+    private val getUserInfoUseCase: GetUserInfoUseCase,
+    private val getProfileUseCase: GetProfileUseCase,
 ) : BaseViewModel() {
-    private val _userInfo = MutableLiveData<User?>(null)
-    val userInfo: LiveData<User?>
-        get() = _userInfo
+    private val _profile = MutableLiveData<Profile?>()
+    val profile: LiveData<Profile?>
+        get() = _profile
 
     val profileImage = MutableLiveData(Uri.EMPTY)
 
-    fun requestUserProfile() {
-        Timber.tag(TAG).d("requestUserProfile: ")
+    fun requestProfile(){
+        Timber.tag(TAG).d("requestProfile: ")
         viewModelScope.launch {
-            _userInfo.value = getUserInfoUseCase()
+            _profile.value = getProfileUseCase()
         }
     }
 

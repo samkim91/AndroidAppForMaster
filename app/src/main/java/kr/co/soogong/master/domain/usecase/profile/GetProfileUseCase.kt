@@ -14,8 +14,12 @@ class GetProfileUseCase @Inject constructor(
     private val getMasterKeyCodeUseCase: GetMasterKeyCodeUseCase,
 ) {
     suspend operator fun invoke(): Profile {
-        val profileData = profileService.getProfile(getMasterKeyCodeUseCase())
-        profileDao.insert(profileData)
-        return profileData
+        // Todo.. 서버 리뉴얼 후 수정해야함..
+
+        return Profile.TEST_PROFILE
+//        val profileData = profileService.getProfile(getMasterKeyCodeUseCase())
+//        profileDao.insert(profileData)
+//        return profileData
+
     }
 }

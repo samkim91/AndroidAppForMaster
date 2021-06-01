@@ -13,6 +13,7 @@ class GetUserInfoUseCase @Inject constructor(
     private val profileService: ProfileService,
     private val getMasterKeyCodeUseCase: GetMasterKeyCodeUseCase,
 ) {
+    // Todo.. 서버 리뉴얼 후 삭제될 클래스, 유스케이스, http req
     suspend operator fun invoke(): User {
         val user = userDao.getItem(getMasterKeyCodeUseCase() ?: "")
         if (user == null) {

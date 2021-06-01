@@ -128,7 +128,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
     override fun onStart() {
         super.onStart()
         Timber.tag(TAG).d("onStart: ")
-        viewModel.requestUserProfile()
+        viewModel.requestProfile()
     }
 
     companion object {

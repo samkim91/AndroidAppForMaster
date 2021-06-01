@@ -15,6 +15,7 @@ data class BasicInformation(
     val priceByProjects: List<PriceByProject>?,
     val flexibleCost: FlexibleCost?,
     val otherFlexibleOptions: OtherFlexibleOptions?,
+    val email: String?,
 ) : Parcelable {
     companion object {
         fun fromJson(jsonObject: JsonObject): BasicInformation{
@@ -29,7 +30,32 @@ data class BasicInformation(
                 priceByProjects = item.get("priceByProject").asJsonArray.map { PriceByProject.fromJson(it.asJsonObject) },
                 flexibleCost = FlexibleCost.fromJson(item.get("flexibleCost").asJsonObject),
                 otherFlexibleOptions = OtherFlexibleOptions.fromJson(item.get("otherFlexibleOptions").asJsonObject),
+                email = item.get("email").asString,
             )
         }
+
+        val TEST_BASIC_INFORMATION = BasicInformation(
+            subscriptionPlan = "게런티 마스터",
+            profileImage = ImagePath.TEST_IMAGE_PATH,
+            myReviews = MyReview.TEST_MY_REVIEW,
+            myPageUrl = "test url",
+            portfolios =  listOf(Portfolio.TEST_PORTFOLIO, Portfolio.TEST_PORTFOLIO, Portfolio.TEST_PORTFOLIO),
+            priceByProjects = listOf(PriceByProject.TEST_PRICE_BY_PROJECT, PriceByProject.TEST_PRICE_BY_PROJECT, PriceByProject.TEST_PRICE_BY_PROJECT),
+            flexibleCost = FlexibleCost.TEST_FLEXIBLE_COST,
+            otherFlexibleOptions = OtherFlexibleOptions.TEST_OTHER_FLEXIBLE_OPTIONS,
+            email = "test@soogong.co.kr",
+        )
+
+        val NULL_BASIC_INFORMATION = BasicInformation(
+            subscriptionPlan = "",
+            profileImage = ImagePath.NULL_IMAGE_PATH,
+            myReviews = MyReview.NULL_MY_REVIEW,
+            myPageUrl = "",
+            portfolios =  emptyList(),
+            priceByProjects = emptyList(),
+            flexibleCost = FlexibleCost.NULL_FLEXIBLE_COST,
+            otherFlexibleOptions = OtherFlexibleOptions.NULL_OTHER_FLEXIBLE_OPTIONS,
+            email = "",
+        )
     }
 }

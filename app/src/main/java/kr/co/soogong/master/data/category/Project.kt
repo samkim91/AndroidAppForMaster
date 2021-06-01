@@ -20,5 +20,9 @@ data class Project(
         val TEST_PROJECT = Project(
             1, "아파트 새시 제작설치/교체", false
         )
+
+        val NULL_PROJECT = Project(
+            0, "", false
+        )
     }
 }
