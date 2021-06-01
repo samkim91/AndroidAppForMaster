@@ -21,21 +21,6 @@ data class Profile(
     @SerializedName("businessType")
     val businessType: List<BusinessType>?,
 
-    @SerializedName("address")
-    val address: String?,
-
-    @SerializedName("subAddress")
-    val subAddress: String?,
-
-    @SerializedName("latitude")
-    val latitude: Double?,
-
-    @SerializedName("longitude")
-    val longitude: Double?,
-
-    @SerializedName("serviceArea")
-    val serviceArea: Int?,
-
     @SerializedName("appPush")
     val appPush: Boolean?,
 
@@ -64,11 +49,6 @@ data class Profile(
                 phoneNumber = item.get("phoneNumber").asString,
                 businessRepresentativeName = item.get("businessRepresentativeName").asString ?: "",
                 businessType = item.get("businessType").asJsonArray.map { BusinessType.fromJson(it.asJsonObject) },
-                address = item.get("address").asString,
-                subAddress = item.get("subAddress").asString,
-                latitude = item.get("latitude").asDouble,
-                longitude = item.get("longitude").asDouble,
-                serviceArea = item.get("serviceArea").asInt,
                 appPush = item.get("appPush").asBoolean,
                 appPushAtNight = item.get("appPushAtNight").asBoolean,
                 kakaoAlarm = item.get("kakaoAlarm").asBoolean,
@@ -78,5 +58,31 @@ data class Profile(
                 requiredInformation = RequiredInformation.fromJson(item.get("requiredInfo").asJsonObject),
             )
         }
+
+        val TEST_PROFILE = Profile(
+            phoneNumber = "010-7128-7964",
+            businessRepresentativeName = "준뱀이수공",
+            businessType = listOf(BusinessType.TEST_BUSINESS_TYPE, BusinessType.TEST_BUSINESS_TYPE, BusinessType.TEST_BUSINESS_TYPE),
+            appPush = false,
+            appPushAtNight = false,
+            kakaoAlarm = false,
+            smsAlarm = false,
+            isApproved = true,
+            basicInformation = BasicInformation.TEST_BASIC_INFORMATION,
+            requiredInformation = RequiredInformation.TEST_REQUIRED_INFORMATION,
+        )
+
+        val NULL_PROFILE = Profile(
+            phoneNumber = "",
+            businessRepresentativeName = "",
+            businessType = emptyList(),
+            appPush = false,
+            appPushAtNight = false,
+            kakaoAlarm = false,
+            smsAlarm = false,
+            isApproved = true,
+            basicInformation = BasicInformation.NULL_BASIC_INFORMATION,
+            requiredInformation = RequiredInformation.NULL_REQUIRED_INFORMATION,
+        )
     }
 }

@@ -17,5 +17,7 @@ data class Category(
         }
 
         val TEST_CATEGORY = Category(1, "새시")
+
+        val NULL_CATEGORY = Category(0, "")
     }
 }
