@@ -220,23 +220,6 @@
                     app:subTitle='@{"시공해오신 경력을 알려주세요."}'
                     app:title='@{"경력"}' />
 
-                <!-- 대표명 BUSINESS_REPRESENTATIVE_NAME -->
-                <kr.co.soogong.master.ui.widget.ProfileDefaultCard
-                    android:id="@+id/business_representative_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/gap_20"
-                    android:layout_marginTop="@dimen/gap_16"
-                    android:layout_marginEnd="@dimen/gap_20"
-                    android:background="@drawable/shape_radius8_white_background"
-                    android:elevation="@dimen/gap_4"
-                    app:defaultButtonByString="@{vm.requiredInformation.businessRepresentativeName}"
-                    app:firstDetail="@{vm.requiredInformation.businessRepresentativeName}"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/phone_number"
-                    app:title='@{"대표자명"}' />
-
                 <!-- 연락처 PHONE_NUMBER -->
                 <kr.co.soogong.master.ui.widget.ProfileDefaultCard
                     android:id="@+id/phone_number"
@@ -253,6 +236,23 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/career"
                     app:title='@{"연락처"}' />
+
+                <!-- 대표명 BUSINESS_REPRESENTATIVE_NAME -->
+                <kr.co.soogong.master.ui.widget.ProfileDefaultCard
+                    android:id="@+id/business_representative_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/gap_20"
+                    android:layout_marginTop="@dimen/gap_16"
+                    android:layout_marginEnd="@dimen/gap_20"
+                    android:background="@drawable/shape_radius8_white_background"
+                    android:elevation="@dimen/gap_4"
+                    app:defaultButtonByString="@{vm.requiredInformation.businessRepresentativeName}"
+                    app:firstDetail="@{vm.requiredInformation.businessRepresentativeName}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/phone_number"
+                    app:title='@{"대표자명"}' />
 
                 <!-- 시공 업종 BUSINESS_TYPES -->
                 <kr.co.soogong.master.ui.widget.ProfileChipGroupCard

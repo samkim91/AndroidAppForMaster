@@ -43,7 +43,7 @@ class EditProfileWithCardViewModel @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
                 onSuccess = {
-
+                    itemList.removeAt(itemId)
                 },
                 onError = {
 
@@ -58,7 +58,7 @@ class EditProfileWithCardViewModel @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
                 onSuccess = {
-
+                    itemList.removeAt(itemId)
                 },
                 onError = {
 

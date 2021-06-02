@@ -23,6 +23,11 @@ data class FlexibleCost(
             )
         }
 
+        // @JvmStatic을 붙여준 이유는 fragment_profile.xml 에서 사용하기 위함. xml은 아직 java로 실행되는듯?
+        @JvmStatic fun toList(flexibleCost: FlexibleCost): List<String> {
+            return listOf(flexibleCost.travelCost, flexibleCost.craneUsage, flexibleCost.packageCost)
+        }
+
         val TEST_FLEXIBLE_COST = FlexibleCost("없어요", "엘리베이터 이용 불가시", "있어요", "test")
         val NULL_FLEXIBLE_COST = FlexibleCost("", "", "", "")
     }
