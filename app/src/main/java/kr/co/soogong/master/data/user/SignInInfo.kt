@@ -6,8 +6,8 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class SignInInfo(
-    val email: String,
-    val username: String,
+    val phoneNumber: String,
+    val userName: String,
     val token: String,
     val keycode: String,
     val isApproved: Boolean
@@ -17,8 +17,8 @@ data class SignInInfo(
             val item = jsonObject.get("data").asJsonObject
             val attributes = item.get("attributes").asJsonObject
             return SignInInfo(
-                email = attributes.get("email").asString,
-                username = attributes.get("username").asString,
+                phoneNumber = attributes.get("phoneNumber").asString,
+                userName = attributes.get("userName").asString,
                 token = attributes.get("token").asString,
                 keycode = attributes.get("keycode").asString,
                 isApproved = attributes.get("is_approved").asBoolean

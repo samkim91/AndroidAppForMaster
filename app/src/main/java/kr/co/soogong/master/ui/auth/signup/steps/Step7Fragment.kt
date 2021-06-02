@@ -67,10 +67,7 @@ class Step7Fragment : BaseFragment<FragmentSignUpStep7Binding>(
             }
 
             defaultButton.setOnClickListener {
-                viewModel.address.observe(viewLifecycleOwner, {
-                    alertServiceAreaRequired.isVisible = it.isNullOrEmpty()
-                })
-                viewModel.subAddress.observe(viewLifecycleOwner, {
+                viewModel.serviceArea.observe(viewLifecycleOwner, {
                     alertServiceAreaRequired.isVisible = it.isNullOrEmpty()
                 })
 

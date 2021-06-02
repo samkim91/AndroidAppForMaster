@@ -23,7 +23,7 @@ class NaverMapHelper(
 ) : OnMapReadyCallback {
     private lateinit var naverMap: NaverMap
     private lateinit var marker: Marker
-    var circleOverlay = CircleOverlay()
+    private lateinit var circleOverlay: CircleOverlay
 
     init {
         val mapFragment = fragmentManager.findFragmentById(frameLayout.id) as MapFragment?
@@ -79,7 +79,7 @@ class NaverMapHelper(
         Timber.tag(TAG).d("setCircleOverlay: ")
 
         coordinate?.let { coordinate ->
-            circleOverlay.map = null
+            if(circleOverlay.isAdded) circleOverlay.map = null
             circleOverlay = CircleOverlay(
                 LatLng(coordinate.latitude, coordinate.longitude),
                 (radius * 1000)

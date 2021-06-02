@@ -11,6 +11,7 @@ import kr.co.soogong.master.databinding.FragmentProfileBinding
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.utils.PermissionHelper
 import kr.co.soogong.master.uiinterface.profile.EditProfileContainerActivityHelper
+import kr.co.soogong.master.uiinterface.profile.EditProfileContainerFragmentHelper.EDIT_EMAIL
 import kr.co.soogong.master.uiinterface.profile.EditProfileContainerFragmentHelper.EDIT_FLEXIBLE_COST
 import kr.co.soogong.master.uiinterface.profile.EditProfileContainerFragmentHelper.EDIT_OTHER_FLEXIBLE_OPTIONS
 import kr.co.soogong.master.uiinterface.profile.EditProfileWithCardActivityHelper
@@ -92,6 +93,15 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
                     EditProfileContainerActivityHelper.getIntent(
                         requireContext(),
                         EDIT_OTHER_FLEXIBLE_OPTIONS
+                    )
+                )
+            }
+
+            email.addDefaultButtonClickListener {
+                startActivity(
+                    EditProfileContainerActivityHelper.getIntent(
+                        requireContext(),
+                        EDIT_EMAIL
                     )
                 )
             }
