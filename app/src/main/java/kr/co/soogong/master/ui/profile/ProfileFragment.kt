@@ -44,80 +44,55 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
 
             reviewBox.setOnClickListener {
                 startActivity(
-                    Intent(
-                        MyReviewsActivityHelper.getIntent(
-                            requireContext()
-                        )
-                    )
+                    MyReviewsActivityHelper.getIntent(requireContext())
                 )
             }
 
             editRequiredInfo.setOnClickListener {
                 startActivity(
-                    Intent(
-                        EditRequiredInformationActivityHelper.getIntent(
-                            requireContext()
-                        )
-                    )
+                    EditRequiredInformationActivityHelper.getIntent(requireContext())
                 )
             }
 
             portfolio.addDefaultButtonClickListener {
                 startActivity(
-                    Intent(
-                        EditProfileWithCardActivityHelper.getIntent(
-                            requireContext(),
-                            PORTFOLIO
-                        )
-                    )
+                    EditProfileWithCardActivityHelper.getIntent(requireContext(), PORTFOLIO)
                 )
             }
 
             priceByProject.addDefaultButtonClickListener {
                 startActivity(
-                    Intent(
-                        EditProfileWithCardActivityHelper.getIntent(
-                            requireContext(),
-                            PRICE_BY_PROJECTS
-                        )
-                    )
+                    EditProfileWithCardActivityHelper.getIntent(requireContext(), PRICE_BY_PROJECTS)
                 )
             }
 
             profileImage.addDefaultButtonClickListener {
-                PermissionHelper.checkImagePermission(context = requireContext(),
-                    onGranted = {
-                                TedImagePicker.with(requireContext())
-                                    .buttonBackground(R.drawable.shape_fill_green_background)
-                                    .start {
-                                    // todo.. 업로드 하고 내려온 이미지를 보여주는 것으로 바꿔야함.
-                                            uri -> viewModel.profileImage.value = uri
-                                    }
-                    },
-                    onDenied = {
-                        requireContext().toast(getString(R.string.permission_denied_message))
-                    }
-                )
+                getSingleImage()
+            }
+
+            profileImage.addFirstButtonClickListener {
+                // todo.. 삭제 기능
+            }
+
+            profileImage.addSecondButtonClickListener {
+                // todo.. 수정기능.. upload할 때 기존 이미지가 있으면 삭제->등록으로 하는게 좋을 듯
+                getSingleImage()
             }
 
             flexibleCost.addDefaultButtonClickListener {
                 startActivity(
-                    Intent(
-                        EditProfileContainerActivityHelper.getIntent(
-                            requireContext(),
-                            EDIT_FLEXIBLE_COST
-                        )
+                    EditProfileContainerActivityHelper.getIntent(
+                        requireContext(),
+                        EDIT_FLEXIBLE_COST
                     )
                 )
             }
 
             otherFlexibleOptions.addDefaultButtonClickListener {
                 startActivity(
-                    Intent(
-                        EditProfileContainerActivityHelper.getIntent(
-                            requireContext(),
-                            EDIT_OTHER_FLEXIBLE_OPTIONS
-                        )
+                    EditProfileContainerActivityHelper.getIntent(
+                        requireContext(),
+                        EDIT_OTHER_FLEXIBLE_OPTIONS
                     )
                 )
             }
@@ -129,6 +104,23 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
         super.onStart()
         Timber.tag(TAG).d("onStart: ")
         viewModel.requestProfile()
+    }
+
+    private fun getSingleImage() {
+        PermissionHelper.checkImagePermission(context = requireContext(),
+            onGranted = {
+                TedImagePicker.with(requireContext())
+                    .buttonBackground(R.drawable.shape_fill_green_background)
+                    .start {
+                        // todo.. 업로드 하고 내려온 이미지를 보여주는 것으로 바꿔야함.
+                            uri ->
+                        viewModel.profileImage.value = uri
+                    }
+            },
+            onDenied = {
+                requireContext().toast(getString(R.string.permission_denied_message))
+            }
+        )
     }
 
     companion object {

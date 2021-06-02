@@ -121,6 +121,8 @@ class ProfileChipGroupCard @JvmOverloads constructor(
         }
 
     private fun addChipGroup(items: List<Any>?) {
+        binding.chipGroupContainer.removeAllViews()
+
         val chipGroup = ChipGroup(context)
         val params = LinearLayout.LayoutParams(
             ViewGroup.LayoutParams.MATCH_PARENT,
