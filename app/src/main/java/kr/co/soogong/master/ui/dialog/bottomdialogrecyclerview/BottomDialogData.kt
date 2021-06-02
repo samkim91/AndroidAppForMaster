@@ -32,6 +32,19 @@ data class BottomDialogData(
                 BottomDialogData("9년", 9),
                 BottomDialogData("10년", 10),
             )
+
+        fun getEmailDomains() =
+            listOf(
+                BottomDialogData("naver.com", 0),
+                BottomDialogData("gmail.com", 0),
+                BottomDialogData("kakao.com", 0),
+                BottomDialogData("daum.com", 0),
+                BottomDialogData("hanmail.com", 0),
+                BottomDialogData("hotmail.com", 0),
+                BottomDialogData("yahoo.com", 0),
+                BottomDialogData("nate.com", 0),
+                BottomDialogData("이메일 직접입력", 0),
+            )
     }
 }
 

@@ -1,6 +1,7 @@
 package kr.co.soogong.master.uiinterface.profile
 
 import androidx.fragment.app.Fragment
+import kr.co.soogong.master.ui.profile.edit.email.EditEmailFragment
 import kr.co.soogong.master.ui.profile.edit.flexiblecost.EditFlexibleCostFragment
 import kr.co.soogong.master.ui.profile.edit.otherflexibleoptions.EditOtherFlexibleOptionsFragment
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.address.EditAddressFragment
@@ -23,6 +24,7 @@ object EditProfileContainerFragmentHelper {
     const val ADD_PRICE_BY_PROJECTS = "시공 종류별 가격 추가하기"
     const val EDIT_FLEXIBLE_COST = "현장 가격 변동 요인 등록·수정하기"
     const val EDIT_OTHER_FLEXIBLE_OPTIONS = "기타 변동 가능사항 등록·수정하기"
+    const val EDIT_EMAIL = "이메일 등록·수정하기"
 
     const val EDIT_BRIEF_INTRODUCTION = "업체 소개 등록·수정하기"
     const val EDIT_COMPANY_IMAGE = "대표 이미지 편집하기"
@@ -46,6 +48,8 @@ object EditProfileContainerFragmentHelper {
             EDIT_PRICE_BY_PROJECTS -> EditPriceByProjectFragment.newInstance(EDIT_PRICE_BY_PROJECTS, itemId)
             EDIT_FLEXIBLE_COST -> EditFlexibleCostFragment.newInstance()
             EDIT_OTHER_FLEXIBLE_OPTIONS -> EditOtherFlexibleOptionsFragment.newInstance()
+            EDIT_EMAIL -> EditEmailFragment.newInstance()
+
             EDIT_BRIEF_INTRODUCTION -> EditBriefIntroductionFragment.newInstance()
             EDIT_COMPANY_IMAGE -> EditRepresentativeImagesFragment.newInstance()
             EDIT_BUSINESS_UNIT_INFORMATION -> EditBusinessUnitInformationFragment.newInstance()

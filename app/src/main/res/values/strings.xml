@@ -210,7 +210,8 @@
     <string name="introduction_card_button_text_for_price_by_projects">시공 종류별 가격 추가하기</string>
 
     <string name="title_edit_required_information_activity">필수 정보 등록·수정하기</string>
-
+    <string name="email_domain_default_hint_text">선택하세요.</string>
+    <string name="email_domain_type_hint_text">직접 입력</string>
 
     <string name="example_for_edit_price_by_project">예시)\n\n
 - 시공 종류 : 싱크대 상판 연마작업\n
@@ -263,6 +264,7 @@
     <!--  Basic  -->
     <string name="badge_text">N</string>
     <string name="format_string">%s %s</string>
+    <string name="at_text">\@</string>
 
     <!-- view reivew box -->
     <string name="recommend_rate_label">추천도</string>
