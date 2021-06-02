@@ -102,12 +102,10 @@ class FindPasswordActivity : BaseActivity<ActivityFindPasswordBinding>(
             when (event) {
                 CERTIFICATION_CODE_CONFIRMED_SUCCESSFULLY -> {
                     startActivity(
-                        Intent(
-                            ChangePasswordActivityHelper.getIntent(
-                                this,
-                                FROM_SIGN_IN,
-                                viewModel.phoneNumber.value
-                            )
+                        ChangePasswordActivityHelper.getIntent(
+                            this,
+                            FROM_SIGN_IN,
+                            viewModel.phoneNumber.value
                         )
                     )
                 }

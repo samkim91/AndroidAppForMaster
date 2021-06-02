@@ -93,11 +93,9 @@ class EditProfileWithCardActivity : BaseActivity<ActivityEditProfileWithCardBind
         binding.introductionCard.addDefaultButtonClickListener {
             Timber.tag(TAG).w("DefaultButtonClickListener: ")
             startActivity(
-                Intent(
-                    EditProfileContainerActivityHelper.getIntent(
-                        this@EditProfileWithCardActivity,
-                        if (pageName == PORTFOLIO) ADD_PORTFOLIO else ADD_PRICE_BY_PROJECTS
-                    )
+                EditProfileContainerActivityHelper.getIntent(
+                    this@EditProfileWithCardActivity,
+                    if (pageName == PORTFOLIO) ADD_PORTFOLIO else ADD_PRICE_BY_PROJECTS
                 )
             )
         }
@@ -129,12 +127,10 @@ class EditProfileWithCardActivity : BaseActivity<ActivityEditProfileWithCardBind
                 },
                 rightButtonClickListener = { id ->
                     startActivity(
-                        Intent(
-                            EditProfileContainerActivityHelper.getIntent(
-                                this@EditProfileWithCardActivity,
-                                if (pageName == PORTFOLIO) EDIT_PORTFOLIO else EDIT_PRICE_BY_PROJECTS,
-                                id
-                            )
+                        EditProfileContainerActivityHelper.getIntent(
+                            this@EditProfileWithCardActivity,
+                            if (pageName == PORTFOLIO) EDIT_PORTFOLIO else EDIT_PRICE_BY_PROJECTS,
+                            id
                         )
                     )
                 })

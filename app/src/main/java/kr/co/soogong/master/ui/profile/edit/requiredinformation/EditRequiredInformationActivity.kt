@@ -112,7 +112,7 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
                         itemClick = { _, diameter ->
                             naverMap.changeServiceArea(diameter)
                             viewModel.requiredInformation.mutation {
-                                  value?.serviceArea = diameter
+                                value?.serviceArea = diameter
                             }
                             viewModel.saveServiceArea(diameter)
                         }
@@ -193,11 +193,9 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
 
     private fun startActivityCommonCode(pageName: String) {
         startActivity(
-            Intent(
-                EditProfileContainerActivityHelper.getIntent(
-                    this@EditRequiredInformationActivity,
-                    pageName
-                )
+            EditProfileContainerActivityHelper.getIntent(
+                this@EditRequiredInformationActivity,
+                pageName
             )
         )
     }
