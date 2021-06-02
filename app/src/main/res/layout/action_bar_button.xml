@@ -22,15 +22,14 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/title"
+            style="@style/big_text_style.medium"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="@dimen/actionbar_title_margin_start"
             android:ellipsize="end"
-            android:fontFamily="@font/medium"
             android:gravity="center_vertical"
             android:lines="1"
             android:textColor="@color/title_color"
-            android:textSize="@dimen/text_title_size"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/button"
             app:layout_constraintStart_toStartOf="parent"
@@ -39,13 +38,14 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button"
+            style="@style/medium_text_style.bold"
             android:layout_width="94dp"
             android:layout_height="0dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="8dp"
             android:background="@drawable/shape_fill_app_color"
-            android:text="작성 완료"
+            android:text="@string/writing_done"
             android:textColor="@color/basic_white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

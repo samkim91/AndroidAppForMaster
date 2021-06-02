@@ -163,6 +163,7 @@
     <!-- Write Estimate -->
     <string name="write_estimate_title">견적서 작성</string>
     <string name="send_estimation">견적서 보내기</string>
+    <string name="show_requirement_content">요청 내용 보기</string>
 
 
     <!-- End Estimate -->

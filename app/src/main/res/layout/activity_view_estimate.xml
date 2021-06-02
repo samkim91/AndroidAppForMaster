@@ -295,7 +295,7 @@
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/customer_review_date"
-                            style="@style/tiny_text_style"
+                            style="@style/tiny_text_style.regular"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/estimation_card_master_rating_margin_top_12"
@@ -407,7 +407,7 @@
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/photo_title"
-                            style="@style/small_text_style"
+                            style="@style/small_text_style.regular"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="12dp"
