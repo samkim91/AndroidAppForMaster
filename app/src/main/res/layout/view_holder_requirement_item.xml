@@ -58,6 +58,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/status_detail"
+            style="@style/small_text_style.medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/requirement_card_status_detail_margin_top"
@@ -78,7 +79,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/request_id"
-            style="@style/medium_text_style"
+            style="@style/medium_text_style.medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/requirement_card_request_id_margin_top"

@@ -50,6 +50,7 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/notice_date"
+                    style="@style/tiny_text_style.medium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/notice_detail_date_margin_top"

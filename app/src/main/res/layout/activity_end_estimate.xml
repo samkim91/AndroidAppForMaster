@@ -54,7 +54,7 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/calender_title"
-                    style="@style/medium_text_style"
+                    style="@style/medium_text_style.medium"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
@@ -74,20 +74,19 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/calender_title" />
 
-<!--                <androidx.appcompat.widget.AppCompatTextView-->
-<!--                    android:id="@+id/calender_alert"-->
-<!--                    style="@style/small_text_style"-->
-<!--                    android:layout_width="0dp"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginStart="20dp"-->
-<!--                    android:layout_marginTop="1dp"-->
-<!--                    android:layout_marginEnd="20dp"-->
-<!--                    android:text="필수 정보입니다."-->
-<!--                    android:textColor="@color/text_alert_color"-->
-<!--                    android:visibility="gone"-->
-<!--                    app:layout_constraintEnd_toEndOf="parent"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    app:layout_constraintTop_toBottomOf="@id/calender" />-->
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/calender_alert"
+                    style="@style/small_text_style.regular"
+                    android:layout_width="@dimen/gap_0"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/gap_20"
+                    android:layout_marginEnd="20dp"
+                    android:text="@string/alert_required_field"
+                    android:textColor="@color/text_alert_color"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/calender" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>

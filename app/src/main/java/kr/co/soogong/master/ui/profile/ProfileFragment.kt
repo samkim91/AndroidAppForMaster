@@ -37,7 +37,6 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
     override fun initLayout() {
         Timber.tag(TAG).d("initLayout: ")
 
-
         bind {
             vm = viewModel
             lifecycleOwner = viewLifecycleOwner
@@ -96,7 +95,6 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
                     )
                 )
             }
-
         }
     }
 

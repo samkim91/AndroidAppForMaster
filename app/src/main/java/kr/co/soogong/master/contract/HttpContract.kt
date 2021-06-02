@@ -4,6 +4,9 @@ object HttpContract {
     const val TEST_URL = "https://test.api2.soogong.co.kr/"
     const val PROD_URL = "https://api2.soogong.co.kr/"
 
+    const val TEST_URL_RENEW = "https://test.api2.soogong.co.kr/api/"
+    const val PROD_URL_RENEW = "https://api2.soogong.co.kr/api/"
+
     //region Auth
     const val LOGIN = "login"
     const val FIND = "find"
@@ -24,6 +27,7 @@ object HttpContract {
     //region User
     const val GET_USER_PROFILE = "api/v1/branches/search/{keycode}"
     const val GET_USER_PROFILE_V2 = "api/v2/branches/info/{keycode}"
+    const val GET_MASTER_PROFILE = "master/profile/{id}"
     //endregion
 
     //region Notice

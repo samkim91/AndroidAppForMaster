@@ -41,10 +41,10 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/detail"
-                    style="@style/small_text_style"
+                    style="@style/small_text_style.medium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="요청 내용 보기"
+                    android:text="@string/show_requirement_content"
                     android:textColor="@color/text_basic_color"
                     app:layout_constraintBottom_toBottomOf="@id/detail_button"
                     app:layout_constraintEnd_toEndOf="@id/detail_button"
@@ -175,7 +175,7 @@
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/photo_title"
-                        style="@style/small_text_style"
+                        style="@style/small_text_style.regular"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
@@ -215,7 +215,7 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/request_type"
-                    style="@style/medium_text_style"
+                    style="@style/medium_text_style.medium"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"

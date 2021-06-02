@@ -22,16 +22,15 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/title"
+            style="@style/big_text_style.medium"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="@dimen/actionbar_title_margin_start"
             android:layout_marginEnd="@dimen/actionbar_title_margin_end"
             android:ellipsize="end"
-            android:fontFamily="@font/medium"
             android:gravity="center"
             android:lines="1"
             android:textColor="@color/title_color"
-            android:textSize="@dimen/text_title_size"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

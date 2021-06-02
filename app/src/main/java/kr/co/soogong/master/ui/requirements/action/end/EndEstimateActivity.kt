@@ -55,7 +55,7 @@ class EndEstimateActivity : BaseActivity<ActivityEndEstimateBinding>(
                         return@setOnClickListener
                     }
 
-                    viewModel.doOnFinish(
+                    viewModel.endRepair(
                         estimationId = estimationId,
                         endEstimate = EndEstimate(
                             actualPrice = amount.text,
