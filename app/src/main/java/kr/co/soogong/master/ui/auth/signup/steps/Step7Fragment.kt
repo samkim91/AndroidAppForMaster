@@ -4,13 +4,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
-import com.naver.maps.geometry.LatLng
-import com.naver.maps.map.CameraUpdate
-import com.naver.maps.map.MapFragment
-import com.naver.maps.map.NaverMap
-import com.naver.maps.map.OnMapReadyCallback
-import com.naver.maps.map.overlay.CircleOverlay
-import com.naver.maps.map.overlay.Marker
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.user.Coordinate
@@ -21,7 +14,6 @@ import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogData
 import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogRecyclerView
 import kr.co.soogong.master.ui.utils.NaverMapHelper
-import kr.co.soogong.master.ui.utils.ZoomHelper
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -36,7 +28,7 @@ class Step7Fragment : BaseFragment<FragmentSignUpStep7Binding>(
             fragmentManager = childFragmentManager,
             frameLayout = binding.mapView,
             coordinate = Coordinate(viewModel.latitude.value ?: 0.0, viewModel.longitude.value ?: 0.0),
-            diameter = 2
+            radius = 0
         )
     }
 

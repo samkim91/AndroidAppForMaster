@@ -1,5 +1,6 @@
 package kr.co.soogong.master.network
 
+import com.google.gson.Gson
 import io.reactivex.Single
 import kr.co.soogong.master.data.user.SignInInfo
 import kr.co.soogong.master.data.user.SignUpInfo

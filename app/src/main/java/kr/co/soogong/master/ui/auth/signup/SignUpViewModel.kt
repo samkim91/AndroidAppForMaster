@@ -17,7 +17,7 @@ import javax.inject.Inject
 class SignUpViewModel @Inject constructor(
     private val signUpUseCase: SignUpUseCase,
     private val signInUseCase: SignInUseCase,
-    private val checkPhoneNumberDuplicateUseCase: CheckPhoneNumberDuplicateUseCase,
+    private val checkPhoneNumberExistenceUseCase: CheckPhoneNumberExistenceUseCase,
     private val requestCertificationCodeUseCase: RequestCertificationCodeUseCase,
     private val requestConfirmCertificationCodeUseCase: RequestConfirmCertificationCodeUseCase,
 ) : BaseViewModel() {
@@ -64,7 +64,7 @@ class SignUpViewModel @Inject constructor(
         // Todo.. 이미 있는 계정인지 확인
         // 있으면, 로그인으로 안내
         // 없으면, 인증코드 메시지 보내고 입력 액티비티로 안내
-        checkPhoneNumberDuplicateUseCase(phoneNumber.value)
+        checkPhoneNumberExistenceUseCase(phoneNumber.value)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(

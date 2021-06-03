@@ -6,8 +6,8 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class EstimationMessage(
-    @SerializedName("price_in_number")
-    val priceInNumber: String?,
+    @SerializedName("price")
+    val totalPrice: String?,
 
     @SerializedName("personnel")
     val personnel: String?,
@@ -18,6 +18,6 @@ data class EstimationMessage(
     @SerializedName("trip")
     val trip: String?,
 
-    @SerializedName("message")
-    val message: String?
+    @SerializedName("description")
+    val description: String?
 ) : Parcelable

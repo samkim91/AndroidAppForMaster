@@ -1,6 +1,7 @@
 package kr.co.soogong.master.domain.profile
 
 import androidx.room.*
+import kr.co.soogong.master.data.profile.BasicInformation
 import kr.co.soogong.master.data.profile.Profile
 
 @Dao
