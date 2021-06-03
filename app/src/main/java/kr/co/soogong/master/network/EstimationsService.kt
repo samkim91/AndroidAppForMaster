@@ -55,8 +55,8 @@ class EstimationsService @Inject constructor(
         data["branch_keycode"] = branchKeycode
         data["keycode"] = keycode
         data["transmission_type"] = transmissionType
-        data["contents"] = estimationMessage.message
-        data["price_in_number"] = estimationMessage.priceInNumber
+        data["contents"] = estimationMessage.description
+        data["price_in_number"] = estimationMessage.totalPrice
         data["personnel"] = estimationMessage.personnel
         data["material"] = estimationMessage.material
         data["trip"] = estimationMessage.trip

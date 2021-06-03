@@ -4,6 +4,7 @@ import android.icu.text.DecimalFormat
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
@@ -85,11 +86,11 @@ class WriteEstimateActivity : BaseActivity<ActivityWriteEstimateBinding>(
 
                     viewModel.sendEstimation(
                         estimationMessage = EstimationMessage(
-                            priceInNumber = priceInNumber,
+                            totalPrice = priceInNumber,
                             personnel = laborCost.text ?: "",
                             material = materialCost.text ?: "",
                             trip = travelCost.text ?: "",
-                            message = writeDetail.text ?: ""
+                            description = writeDetail.text ?: ""
                         )
                     )
                 }
@@ -129,7 +130,7 @@ class WriteEstimateActivity : BaseActivity<ActivityWriteEstimateBinding>(
                         amount.visibility = View.GONE
                         requestDetail.visibility = View.VISIBLE
                         viewModel.transmissionType = "항목별견적"
-                        totalAmount.setEditTextBackground(getDrawable(R.drawable.shape_fill_gray_background_gray_border))
+                        totalAmount.setEditTextBackground(ResourcesCompat.getDrawable(resources, R.drawable.shape_fill_gray_background_gray_border, null))
                     }
                 }
             }

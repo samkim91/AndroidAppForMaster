@@ -95,11 +95,11 @@ data class Requirement(
                     tel = data.get("tel").asString,
                     questions = data.get("questions").asString,
                     estimationMessage = EstimationMessage(
-                        priceInNumber = item.getNullable("price")?.asString,
+                        totalPrice = item.getNullable("price")?.asString,
                         personnel = item.getNullable("personnel")?.asString,
                         material = item.getNullable("material")?.asString,
                         trip = item.getNullable("trip")?.asString,
-                        message = item.getNullable("contents")?.asString
+                        description = item.getNullable("contents")?.asString
                     )
                 )
             }

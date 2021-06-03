@@ -1,6 +1,5 @@
 package kr.co.soogong.master.ui.profile.edit.requiredinformation
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
@@ -39,7 +38,7 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
             fragmentManager = supportFragmentManager,
             frameLayout = binding.serviceArea.mapFragment,
             coordinate = viewModel.requiredInformation.value?.coordinate,
-            diameter = viewModel.requiredInformation.value?.serviceArea
+            radius = viewModel.requiredInformation.value?.serviceArea
         )
     }
 

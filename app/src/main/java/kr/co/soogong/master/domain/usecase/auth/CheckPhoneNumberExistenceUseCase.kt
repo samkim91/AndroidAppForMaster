@@ -8,10 +8,10 @@ import kr.co.soogong.master.network.Response
 import javax.inject.Inject
 
 @Reusable
-class CheckPhoneNumberDuplicateUseCase @Inject constructor(
+class CheckPhoneNumberExistenceUseCase @Inject constructor(
     private val authService: AuthService
 ) {
     operator fun invoke(id: String?): Single<Response> {
         return authService.checkIdExist(id)
     }
-}
+} 
