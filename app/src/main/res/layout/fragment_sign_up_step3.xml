@@ -8,9 +8,7 @@
             name="vm"
             type="kr.co.soogong.master.ui.auth.signup.SignUpViewModel" />
 
-        <variable
-            name="inputType"
-            type="android.text.InputType" />
+        <import type="android.text.InputType"/>
 
     </data>
 
@@ -50,7 +48,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/title_widget"
-                app:setInputType="@{inputType.TYPE_CLASS_TEXT | inputType.TYPE_TEXT_VARIATION_PASSWORD}"
+                app:setInputType="@{InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD}"
                 app:title='@{"비밀번호 입력"}' />
 
             <kr.co.soogong.master.ui.widget.TitleEditText
@@ -68,9 +66,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/sign_up_password"
                 app:layout_constraintVertical_chainStyle="spread_inside"
-                app:setInputType="@{inputType.TYPE_CLASS_TEXT | inputType.TYPE_TEXT_VARIATION_PASSWORD}"
+                app:setInputType="@{InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD}"
                 app:title='@{"비밀번호 확인"}' />
-
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/default_button"

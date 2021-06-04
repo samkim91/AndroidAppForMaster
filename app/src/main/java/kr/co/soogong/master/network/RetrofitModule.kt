@@ -37,13 +37,13 @@ class RetrofitModule {
 
     @Provides
     @Reusable
-    fun provideNoticeService(retrofit: Retrofit): NoticeService {
-        return NoticeService(retrofit)
+    fun provideMyPageService(retrofit: Retrofit): MyPageService {
+        return MyPageService(retrofit)
     }
 
     @Provides
     @Reusable
-    fun provideUserService(retrofit: Retrofit): ProfileService {
+    fun provideProfileService(retrofit: Retrofit): ProfileService {
         return ProfileService(retrofit)
     }
 }

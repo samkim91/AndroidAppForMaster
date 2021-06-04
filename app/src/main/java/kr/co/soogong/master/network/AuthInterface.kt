@@ -11,6 +11,9 @@ interface AuthInterface {
     @POST(HttpContract.LOGIN)
     fun login(@Body body: HashMap<String, HashMap<String, String?>>): Single<JsonObject>
 
+    @POST(HttpContract.RESIGN_IN)
+    fun resignIn(@Body body: HashMap<String, String?>): Single<Response>
+
     @POST(HttpContract.SIGN_UP)
     fun signUp(@Body body: HashMap<String, HashMap<String, Any>>): Single<Response>
 
