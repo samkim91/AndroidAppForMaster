@@ -5,7 +5,7 @@ import kr.co.soogong.master.data.notice.Notice
 import retrofit2.Retrofit
 import javax.inject.Inject
 
-class NoticeService @Inject constructor(
+class MyPageService @Inject constructor(
     retrofit: Retrofit
 ) {
     private val noticeInterface = retrofit.create(NoticeInterface::class.java)

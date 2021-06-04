@@ -37,6 +37,13 @@ class AuthService @Inject constructor(
         }
     }
 
+    fun resignIn(refreshToken: String): Single<Response> {
+        val params = HashMap<String, String?>()
+        params["refreshToken"] = refreshToken
+
+        return authInterface.resignIn(params)
+    }
+
     fun findPassword(name: String?): Single<Response> {
         val data = HashMap<String, String?>()
         data["name"] = name

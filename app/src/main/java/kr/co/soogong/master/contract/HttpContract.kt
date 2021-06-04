@@ -9,6 +9,9 @@ object HttpContract {
 
     //region Auth
     const val LOGIN = "login"
+    const val SIGN_IN = "sign-in"
+    const val RESIGN_IN = "resign-in"
+
     const val FIND = "find"
     const val SIGN_UP = "signup"
     const val MASTER_SIGN_UP = "api/v1/branches/register"

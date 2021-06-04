@@ -14,6 +14,8 @@ import kr.co.soogong.master.contract.AppDatabaseContract
 import kr.co.soogong.master.contract.AppSharedPreferenceContract
 import kr.co.soogong.master.contract.HttpContract
 import kr.co.soogong.master.domain.AppDatabase
+import kr.co.soogong.master.network.TokenAuthenticator
+import kr.co.soogong.master.network.TokenInterceptor
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -29,7 +31,11 @@ import javax.inject.Singleton
 class AppModule {
     @Provides
     @Singleton
-    fun provideOkHttpClient(@ApplicationContext context: Context): OkHttpClient {
+    fun provideOkHttpClient(
+        @ApplicationContext context: Context,
+        tokenInterceptor: TokenInterceptor,
+        tokenAuthenticator: TokenAuthenticator
+    ): OkHttpClient {
         val httpCacheDirectory = File(context.cacheDir, "http")
         val cacheSize = 32 * 1024 * 1024L
         val client = OkHttpClient.Builder()
@@ -49,6 +55,8 @@ class AppModule {
                     }
                 }
             )
+            .addInterceptor(tokenInterceptor)
+            .authenticator(tokenAuthenticator)
 
         val okHttpClient = client.build()
 
@@ -63,11 +71,7 @@ class AppModule {
         return Retrofit.Builder()
             .client(okHttpClient)
             .baseUrl(
-                if (BuildConfig.DEBUG) {
-                    HttpContract.TEST_URL
-                } else {
-                    HttpContract.PROD_URL
-                }
+                if (BuildConfig.DEBUG) HttpContract.TEST_URL else HttpContract.PROD_URL
             )
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())

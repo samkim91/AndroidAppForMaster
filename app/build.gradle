@@ -43,7 +43,6 @@ android {
     }
 
     compileOptions {
-        coreLibraryDesugaringEnabled true
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
@@ -194,10 +193,4 @@ dependencies {
 
     // Read More Textview
     implementation "kr.co.prnd:readmore-textview:$readMoreTextViewVersion"
-
-    implementation "com.amplifyframework:core:$amplifyVersion"
-    implementation "com.amplifyframework:aws-api:$amplifyVersion"
-    implementation "com.amplifyframework:aws-auth-cognito:$amplifyVersion"
-    implementation "com.amplifyframework:aws-storage-s3:$amplifyVersion"
-    coreLibraryDesugaring "com.android.tools:desugar_jdk_libs:$desugarJdkLibsVersion"
 }
