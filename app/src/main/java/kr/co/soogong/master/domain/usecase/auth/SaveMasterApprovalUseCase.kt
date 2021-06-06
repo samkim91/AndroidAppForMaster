@@ -1,4 +1,4 @@
-package kr.co.soogong.master.domain.usecase
+package kr.co.soogong.master.domain.usecase.auth
 
 import android.content.SharedPreferences
 import dagger.Reusable
@@ -6,12 +6,12 @@ import kr.co.soogong.master.contract.AppSharedPreferenceContract
 import javax.inject.Inject
 
 @Reusable
-class SetRefreshTokenUseCase @Inject constructor(
+class SaveMasterApprovalUseCase @Inject constructor(
     private val sharedPreferences: SharedPreferences
 ) {
-    operator fun invoke(token: String?) {
+    operator fun invoke(approval: Boolean) {
         sharedPreferences.edit()
-            .putString(AppSharedPreferenceContract.REFRESH_TOKEN, token)
+            .putBoolean(AppSharedPreferenceContract.IS_APPROVED, approval)
             .apply()
     }
 }

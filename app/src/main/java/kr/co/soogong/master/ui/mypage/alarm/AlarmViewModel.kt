@@ -7,7 +7,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.domain.usecase.mypage.GetAlarmStatusUseCase
-import kr.co.soogong.master.domain.usecase.mypage.SetAlarmStatusUseCase
+import kr.co.soogong.master.domain.usecase.mypage.SaveAlarmStatusUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import timber.log.Timber
 import javax.inject.Inject
@@ -15,7 +15,7 @@ import javax.inject.Inject
 @HiltViewModel
 class AlarmViewModel @Inject constructor(
     private val getAlarmStatusUseCase: GetAlarmStatusUseCase,
-    private val setAlarmStatusUseCase: SetAlarmStatusUseCase
+    private val saveAlarmStatusUseCase: SaveAlarmStatusUseCase
 ) : BaseViewModel() {
     private val _appPushStatus = MutableLiveData(false)
     val appPushStatus: LiveData<Boolean>
@@ -68,7 +68,7 @@ class AlarmViewModel @Inject constructor(
     }
 
     private fun setAlarmStatus(type: String, isChecked: Boolean) {
-        setAlarmStatusUseCase(type, isChecked)
+        saveAlarmStatusUseCase(type, isChecked)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
