@@ -4,8 +4,6 @@ import dagger.Reusable
 import io.reactivex.Single
 import kr.co.soogong.master.BuildConfig
 import kr.co.soogong.master.data.user.SignInInfo
-import kr.co.soogong.master.domain.usecase.SetMasterApprovalUseCase
-import kr.co.soogong.master.domain.usecase.SetMasterKeyCodeUseCase
 import kr.co.soogong.master.network.AuthService
 import javax.inject.Inject
 
@@ -13,6 +11,8 @@ import javax.inject.Inject
 class SignInUseCase @Inject constructor(
     private val setMasterKeyCodeUseCase: SetMasterKeyCodeUseCase,
     private val setMasterApprovalUseCase: SetMasterApprovalUseCase,
+    private val saveAccessTokenUseCase: SaveAccessTokenUseCase,
+    private val saveRefreshTokenUseCase: SaveRefreshTokenUseCase,
     private val authService: AuthService
 ) {
     operator fun invoke(phoneNumber: String?, password: String?): Single<SignInInfo> {
@@ -26,6 +26,9 @@ class SignInUseCase @Inject constructor(
             .doOnSuccess { signInInfo ->
                 setMasterKeyCodeUseCase(signInInfo.keycode)
                 setMasterApprovalUseCase(signInInfo.isApproved)
+                // Todo.. 토큰 저장
+                saveAccessTokenUseCase("accessToken")
+                saveRefreshTokenUseCase("refreshToken")
             }
     }
 }

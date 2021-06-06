@@ -2,7 +2,7 @@ package kr.co.soogong.master.domain.usecase.profile
 
 import dagger.Reusable
 import kr.co.soogong.master.data.user.User
-import kr.co.soogong.master.domain.usecase.GetMasterKeyCodeUseCase
+import kr.co.soogong.master.domain.usecase.auth.GetMasterKeyCodeUseCase
 import kr.co.soogong.master.domain.user.UserDao
 import kr.co.soogong.master.network.ProfileService
 import javax.inject.Inject

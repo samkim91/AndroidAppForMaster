@@ -3,7 +3,7 @@ package kr.co.soogong.master.domain.usecase.requirement
 import dagger.Reusable
 import io.reactivex.Single
 import kr.co.soogong.master.data.requirements.EstimationMessage
-import kr.co.soogong.master.domain.usecase.GetMasterKeyCodeUseCase
+import kr.co.soogong.master.domain.usecase.auth.GetMasterKeyCodeUseCase
 import kr.co.soogong.master.network.EstimationsService
 import kr.co.soogong.master.network.Response
 import javax.inject.Inject
