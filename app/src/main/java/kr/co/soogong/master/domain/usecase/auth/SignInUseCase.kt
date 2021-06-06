@@ -8,6 +8,7 @@ import kr.co.soogong.master.domain.usecase.SetAccessTokenUseCase
 import kr.co.soogong.master.domain.usecase.SetMasterApprovalUseCase
 import kr.co.soogong.master.domain.usecase.SetMasterKeyCodeUseCase
 import kr.co.soogong.master.domain.usecase.SetRefreshTokenUseCase
+
 import kr.co.soogong.master.network.AuthService
 import javax.inject.Inject
 
@@ -34,5 +35,6 @@ class SignInUseCase @Inject constructor(
                 setAccessTokenUseCase("todo")
                 setRefreshTokenUseCase("todo")
            }
+
     }
 }

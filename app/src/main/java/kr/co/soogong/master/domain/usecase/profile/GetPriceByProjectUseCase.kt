@@ -2,10 +2,7 @@ package kr.co.soogong.master.domain.usecase.profile
 
 import dagger.Reusable
 import kr.co.soogong.master.BuildConfig
-import kr.co.soogong.master.data.profile.Portfolio
 import kr.co.soogong.master.data.profile.PriceByProject
-import kr.co.soogong.master.domain.usecase.GetMasterKeyCodeUseCase
-import kr.co.soogong.master.network.ProfileService
 import javax.inject.Inject
 
 @Reusable

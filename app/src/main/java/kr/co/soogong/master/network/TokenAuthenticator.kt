@@ -24,6 +24,7 @@ class TokenAuthenticator @Inject constructor(
     private val getRefreshTokenUseCase: GetRefreshTokenUseCase,
     private val setAccessTokenUseCase: SetAccessTokenUseCase,
     private val setRefreshTokenUseCase: SetRefreshTokenUseCase,
+
 ) : Authenticator {
     private val newToken = MutableLiveData("")
 
@@ -45,7 +46,6 @@ class TokenAuthenticator @Inject constructor(
                     setRefreshTokenUseCase(newToken.value) // Todo.. responsed에서 token 가져와서 set 추가 작업
                 }
         }
-
 
         return response
             .request

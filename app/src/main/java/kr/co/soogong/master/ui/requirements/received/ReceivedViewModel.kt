@@ -7,7 +7,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import kr.co.soogong.master.domain.requirements.EstimationStatus
 import kr.co.soogong.master.domain.requirements.RequirementCard
-import kr.co.soogong.master.domain.usecase.GetMasterApprovalUseCase
+import kr.co.soogong.master.domain.usecase.auth.GetMasterApprovalUseCase
 import kr.co.soogong.master.domain.usecase.requirement.GetReceivedEstimationListUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import javax.inject.Inject

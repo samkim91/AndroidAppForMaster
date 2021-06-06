@@ -6,6 +6,7 @@ import kr.co.soogong.master.domain.usecase.SetAccessTokenUseCase
 import kr.co.soogong.master.domain.usecase.SetMasterApprovalUseCase
 import kr.co.soogong.master.domain.usecase.SetMasterKeyCodeUseCase
 import kr.co.soogong.master.domain.usecase.SetRefreshTokenUseCase
+
 import javax.inject.Inject
 
 @Reusable
