@@ -1,8 +1,13 @@
 package kr.co.soogong.master.network
 
+import android.animation.PropertyValuesHolder
 import android.content.SharedPreferences
 import androidx.lifecycle.MutableLiveData
+import dagger.Lazy
 import kr.co.soogong.master.contract.AppSharedPreferenceContract
+import kr.co.soogong.master.domain.usecase.GetRefreshTokenUseCase
+import kr.co.soogong.master.domain.usecase.SetAccessTokenUseCase
+import kr.co.soogong.master.domain.usecase.SetRefreshTokenUseCase
 import okhttp3.Authenticator
 import okhttp3.Request
 import okhttp3.Response
@@ -15,7 +20,10 @@ import javax.inject.Singleton
 @Singleton
 class TokenAuthenticator @Inject constructor(
     private val sharedPreferences: SharedPreferences,
-    private val authService: AuthService,
+    private val authService: Lazy<AuthService>,
+    private val getRefreshTokenUseCase: GetRefreshTokenUseCase,
+    private val setAccessTokenUseCase: SetAccessTokenUseCase,
+    private val setRefreshTokenUseCase: SetRefreshTokenUseCase,
 ) : Authenticator {
     private val newToken = MutableLiveData("")
 
@@ -23,21 +31,21 @@ class TokenAuthenticator @Inject constructor(
         // Todo.. 무한루프에 빠지지 않게 하려면 어떤 조건을 걸어야하는지 검토 필요
         if (response.request.header("Authorization") != null ||
             response.request.header("Authorization") != "Bearer " +
-            "${sharedPreferences.getString(AppSharedPreferenceContract.JWT_ACCESS, "")}"
+            "${sharedPreferences.getString(AppSharedPreferenceContract.ACCESS_TOKEN, "")}"
         ) {
             // refresh failed 일 때, 무한 루프에서 벗어나기 위함
             return null
         }
 
-        val refreshToken = sharedPreferences.getString(AppSharedPreferenceContract.JWT_REFRESH, "")
-        refreshToken?.let { refreshToken ->
-            authService.resignIn(refreshToken)
+        getRefreshTokenUseCase()?.let { refreshToken ->
+            authService.get().resignIn(refreshToken)
                 .doOnSuccess { responseJson ->
                     newToken.value = responseJson.body.getAsJsonObject("newToken").asString
-                    sharedPreferences.edit()
-                        .putString(AppSharedPreferenceContract.JWT_ACCESS, newToken.value).apply()
+                    setAccessTokenUseCase(newToken.value)
+                    setRefreshTokenUseCase(newToken.value) // Todo.. responsed에서 token 가져와서 set 추가 작업
                 }
         }
+
 
         return response
             .request

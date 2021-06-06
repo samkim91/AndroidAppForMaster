@@ -12,7 +12,7 @@ class TokenInterceptor @Inject constructor(
     private val sharedPreferences: SharedPreferences,
 ) : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
-        val accessToken = sharedPreferences.getString(AppSharedPreferenceContract.JWT_ACCESS, "")
+        val accessToken = sharedPreferences.getString(AppSharedPreferenceContract.ACCESS_TOKEN, "")
         val originRequest = chain.request()
 
         // Todo.. 토큰이 발급되지 않은 상태에서 요청을 하는 경우를 찾아서 다시 넣어줘야함.
