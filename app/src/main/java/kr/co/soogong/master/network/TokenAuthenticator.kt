@@ -1,13 +1,12 @@
 package kr.co.soogong.master.network
 
-import android.animation.PropertyValuesHolder
 import android.content.SharedPreferences
 import androidx.lifecycle.MutableLiveData
 import dagger.Lazy
 import kr.co.soogong.master.contract.AppSharedPreferenceContract
-import kr.co.soogong.master.domain.usecase.GetRefreshTokenUseCase
-import kr.co.soogong.master.domain.usecase.SetAccessTokenUseCase
-import kr.co.soogong.master.domain.usecase.SetRefreshTokenUseCase
+import kr.co.soogong.master.domain.usecase.auth.GetRefreshTokenUseCase
+import kr.co.soogong.master.domain.usecase.auth.SaveAccessTokenUseCase
+import kr.co.soogong.master.domain.usecase.auth.SaveRefreshTokenUseCase
 import okhttp3.Authenticator
 import okhttp3.Request
 import okhttp3.Response
@@ -22,10 +21,9 @@ class TokenAuthenticator @Inject constructor(
     private val sharedPreferences: SharedPreferences,
     private val authService: Lazy<AuthService>,
     private val getRefreshTokenUseCase: GetRefreshTokenUseCase,
-    private val setAccessTokenUseCase: SetAccessTokenUseCase,
-    private val setRefreshTokenUseCase: SetRefreshTokenUseCase,
-
-) : Authenticator {
+    private val saveAccessTokenUseCase: SaveAccessTokenUseCase,
+    private val saveRefreshTokenUseCase: SaveRefreshTokenUseCase,
+    ) : Authenticator {
     private val newToken = MutableLiveData("")
 
     override fun authenticate(route: Route?, response: Response): Request? {
@@ -42,8 +40,8 @@ class TokenAuthenticator @Inject constructor(
             authService.get().resignIn(refreshToken)
                 .doOnSuccess { responseJson ->
                     newToken.value = responseJson.body.getAsJsonObject("newToken").asString
-                    setAccessTokenUseCase(newToken.value)
-                    setRefreshTokenUseCase(newToken.value) // Todo.. responsed에서 token 가져와서 set 추가 작업
+                    saveAccessTokenUseCase(newToken.value)
+                    saveRefreshTokenUseCase(newToken.value) // Todo.. responsed에서 token 가져와서 set 추가 작업
                 }
         }
 

@@ -9,7 +9,7 @@ import javax.inject.Inject
 class SaveRefreshTokenUseCase @Inject constructor(
     private val sharedPreferences: SharedPreferences
 ) {
-    operator fun invoke(refreshToken: String) {
+    operator fun invoke(refreshToken: String?) {
         sharedPreferences.edit()
             .putString(AppSharedPreferenceContract.REFRESH_TOKEN, refreshToken)
             .apply()

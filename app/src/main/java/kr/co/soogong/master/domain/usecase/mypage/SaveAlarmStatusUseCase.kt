@@ -8,7 +8,7 @@ import kr.co.soogong.master.network.AlarmService
 import javax.inject.Inject
 
 @Reusable
-class SetAlarmStatusUseCase @Inject constructor(
+class SaveAlarmStatusUseCase @Inject constructor(
     private val alarmService: AlarmService,
     private val getMasterKeyCodeUseCase: GetMasterKeyCodeUseCase,
 ) {
