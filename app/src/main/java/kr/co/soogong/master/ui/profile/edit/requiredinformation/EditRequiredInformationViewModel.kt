@@ -9,7 +9,7 @@ import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.launch
 import kr.co.soogong.master.data.profile.RequiredInformation
-import kr.co.soogong.master.domain.usecase.GetMasterApprovalUseCase
+import kr.co.soogong.master.domain.usecase.auth.GetMasterApprovalUseCase
 import kr.co.soogong.master.domain.usecase.profile.GetRequiredInformationUseCase
 import kr.co.soogong.master.domain.usecase.profile.SaveCareerPeriodUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel

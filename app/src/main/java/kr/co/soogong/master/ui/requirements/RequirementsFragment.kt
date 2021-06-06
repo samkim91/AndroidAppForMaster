@@ -7,9 +7,8 @@ import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentRequirementsBinding
-import kr.co.soogong.master.domain.usecase.GetMasterApprovalUseCase
+import kr.co.soogong.master.domain.usecase.auth.GetMasterApprovalUseCase
 import kr.co.soogong.master.ui.base.BaseFragment
-import kr.co.soogong.master.ui.main.MainActivity
 import kr.co.soogong.master.uiinterface.requirments.RequirementsBadge
 import kr.co.soogong.master.util.extension.visible
 import timber.log.Timber

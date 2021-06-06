@@ -6,7 +6,7 @@ import com.google.firebase.messaging.FirebaseMessaging
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import kr.co.soogong.master.domain.usecase.GetMasterApprovalUseCase
+import kr.co.soogong.master.domain.usecase.auth.GetMasterApprovalUseCase
 import kr.co.soogong.master.domain.usecase.auth.SetFCMTokenUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import timber.log.Timber

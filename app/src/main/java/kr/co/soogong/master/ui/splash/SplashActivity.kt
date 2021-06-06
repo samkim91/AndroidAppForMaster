@@ -3,7 +3,7 @@ package kr.co.soogong.master.ui.splash
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
-import kr.co.soogong.master.domain.usecase.GetMasterKeyCodeUseCase
+import kr.co.soogong.master.domain.usecase.auth.GetMasterKeyCodeUseCase
 import kr.co.soogong.master.uiinterface.main.MainActivityHelper
 import kr.co.soogong.master.uiinterface.auth.SignMainActivityHelper
 import timber.log.Timber
