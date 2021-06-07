@@ -13,7 +13,7 @@ data class Project(
     companion object {
         fun fromJson(jsonObject: JsonObject): Project {
             val id = jsonObject.get("id").asInt
-            val name = jsonObject.get("attributes").asJsonObject.get("name").asString
+            val name = jsonObject.get("name").asString
             return Project(id, name)
         }
 

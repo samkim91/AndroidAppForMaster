@@ -26,7 +26,7 @@ class ProjectSelectViewModel @AssistedInject constructor(
         getProjectList()
     }
 
-    fun getCheckedList() = list.value?.filter { it.checked }
+//    fun getCheckedList() = list.value?.filter { it.checked }
 
     fun changeList(position: Int, project: Project) {
         val items = list.value?.toMutableList()
@@ -35,6 +35,7 @@ class ProjectSelectViewModel @AssistedInject constructor(
     }
 
     private fun getProjectList() {
+        Timber.tag(TAG).d("getProjectList: ")
         getProjectListUseCase(category)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -43,6 +44,7 @@ class ProjectSelectViewModel @AssistedInject constructor(
                 _list.postValue(it)
             }, {
                 Timber.tag(TAG).w("getProjectList: $it")
+                setAction(GET_PROJECT_FAILED)
             })
             .addToDisposable()
     }
@@ -54,6 +56,7 @@ class ProjectSelectViewModel @AssistedInject constructor(
 
     companion object {
         private const val TAG = "ProjectSelectViewModel"
+        const val GET_PROJECT_FAILED = "GET_PROJECT_FAILED"
 
         fun provideFactory(
             assistedFactory: AssistedFactory,

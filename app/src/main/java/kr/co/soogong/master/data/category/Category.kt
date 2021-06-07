@@ -12,7 +12,7 @@ data class Category(
     companion object {
         fun fromJson(jsonObject: JsonObject): Category {
             val id = jsonObject.get("id").asInt
-            val name = jsonObject.get("attributes").asJsonObject.get("name").asString
+            val name = jsonObject.get("name").asString
             return Category(id, name)
         }
 

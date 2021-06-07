@@ -31,7 +31,21 @@ android {
     }
 
     buildTypes {
+//        alpha {
+//            applicationIdSuffix '.alpha'
+//            debuggable true
+//            minifyEnabled false
+//        }
+//
+//        beta {
+//            applicationIdSuffix '.beta'
+//            debuggable false
+//            minifyEnabled false
+//            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+//        }
+
         release {
+            debuggable false
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }

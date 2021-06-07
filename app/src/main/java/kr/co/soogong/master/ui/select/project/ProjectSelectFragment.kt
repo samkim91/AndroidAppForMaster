@@ -13,9 +13,12 @@ import kr.co.soogong.master.data.category.BusinessType
 import kr.co.soogong.master.data.category.Category
 import kr.co.soogong.master.databinding.FragmentProjectSelectBinding
 import kr.co.soogong.master.ui.base.BaseFragment
+import kr.co.soogong.master.ui.select.project.ProjectSelectViewModel.Companion.GET_PROJECT_FAILED
 import kr.co.soogong.master.uiinterface.category.CategoryActivityHelper.BUNDLE_BUSINESS_TYPE
 import kr.co.soogong.master.uiinterface.category.CategoryActivityHelper.BUNDLE_CATEGORY
 import kr.co.soogong.master.uiinterface.category.CategoryActivityHelper.BUNDLE_PROJECT_LIST
+import kr.co.soogong.master.util.EventObserver
+import kr.co.soogong.master.util.extension.toast
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -38,6 +41,7 @@ class ProjectSelectFragment : BaseFragment<FragmentProjectSelectBinding>(
         super.onViewCreated(view, savedInstanceState)
         Timber.tag(TAG).d("onViewCreated: ")
         initLayout()
+        registerEventObserve()
     }
 
     override fun initLayout() {
@@ -57,6 +61,7 @@ class ProjectSelectFragment : BaseFragment<FragmentProjectSelectBinding>(
             )
             list.addItemDecoration(dividerItemDecoration)
 
+            // Todo.. 차후 리팩토링 해야함. 클릭될 때마다 리스트 뷰가 업데이트 되는데, 개선 필요..
             setSelectClick {
                 val extra = Bundle()
                 val intent = Intent()
@@ -67,6 +72,16 @@ class ProjectSelectFragment : BaseFragment<FragmentProjectSelectBinding>(
                 activity?.finish()
             }
         }
+    }
+
+    private fun registerEventObserve() {
+        viewModel.action.observe(viewLifecycleOwner, EventObserver { action ->
+            when(action) {
+                GET_PROJECT_FAILED -> {
+                    requireContext().toast(getString(R.string.error_message_of_request_failed))
+                }
+            }
+        })
     }
 
     companion object {
