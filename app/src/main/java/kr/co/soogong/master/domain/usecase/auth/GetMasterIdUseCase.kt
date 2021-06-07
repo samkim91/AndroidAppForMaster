@@ -6,12 +6,10 @@ import kr.co.soogong.master.contract.AppSharedPreferenceContract
 import javax.inject.Inject
 
 @Reusable
-class SaveMasterKeyCodeUseCase @Inject constructor(
+class GetMasterIdUseCase @Inject constructor(
     private val sharedPreferences: SharedPreferences
 ) {
-    operator fun invoke(keyCode: String) {
-        sharedPreferences.edit()
-            .putString(AppSharedPreferenceContract.BRANCH_KEYCODE, keyCode)
-            .apply()
+    operator fun invoke(): String? {
+        return sharedPreferences.getString(AppSharedPreferenceContract.MASTER_ID, "")
     }
 }

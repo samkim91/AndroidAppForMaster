@@ -9,7 +9,7 @@ import javax.inject.Inject
 
 @Reusable
 class SignInUseCase @Inject constructor(
-    private val saveMasterKeyCodeUseCase: SaveMasterKeyCodeUseCase,
+    private val saveMasterIdUseCase: SaveMasterIdUseCase,
     private val saveMasterApprovalUseCase: SaveMasterApprovalUseCase,
     private val authService: AuthService,
     private val setAccessTokenUseCase: SaveAccessTokenUseCase,
@@ -17,19 +17,18 @@ class SignInUseCase @Inject constructor(
 ) {
     operator fun invoke(phoneNumber: String?, password: String?): Single<SignInInfo> {
         if (BuildConfig.DEBUG) {
-            saveMasterKeyCodeUseCase("1e73778811e69aa5")
+            saveMasterIdUseCase("1e73778811e69aa5")
 //            setMasterKeyCodeUseCase("919dcdf215133b52")
             return Single.just(SignInInfo("", "", "", "", false))
         }
 
         return authService.login(phoneNumber, password)
             .doOnSuccess { signInInfo ->
-                saveMasterKeyCodeUseCase(signInInfo.keycode)
+                saveMasterIdUseCase(signInInfo.keycode)
                 saveMasterApprovalUseCase(signInInfo.isApproved)
                 //Todo.. token을 set하는 부분 추가
                 setAccessTokenUseCase("todo")
                 setRefreshTokenUseCase("todo")
            }
-
     }
 }

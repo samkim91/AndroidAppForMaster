@@ -70,7 +70,7 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(
                 SignInViewModel.FAIL -> {
                     binding.signInAlert.visibility = View.VISIBLE
                 }
-                SignInViewModel.FAIL_NULL -> {
+                SignInViewModel.INVALID_INPUT -> {
                     binding.signInAlert.visibility = View.VISIBLE
                 }
             }

@@ -3,7 +3,7 @@ package kr.co.soogong.master.domain.usecase.requirement
 import dagger.Reusable
 import kr.co.soogong.master.domain.estimation.EstimationDao
 import kr.co.soogong.master.domain.requirements.RequirementCard
-import kr.co.soogong.master.domain.usecase.auth.GetMasterKeyCodeUseCase
+import kr.co.soogong.master.domain.usecase.auth.GetMasterIdUseCase
 import kr.co.soogong.master.network.EstimationsService
 import javax.inject.Inject
 
@@ -11,10 +11,10 @@ import javax.inject.Inject
 class GetEstimationListUseCase @Inject constructor(
     private val estimationDao: EstimationDao,
     private val estimationsService: EstimationsService,
-    private val getMasterKeyCodeUseCase: GetMasterKeyCodeUseCase
+    private val getMasterIdUseCase: GetMasterIdUseCase
 ) {
     suspend operator fun invoke(): List<RequirementCard> {
-        val list = estimationsService.getEstimationList(getMasterKeyCodeUseCase())
+        val list = estimationsService.getEstimationList(getMasterIdUseCase())
 
         estimationDao.insert(list)
 

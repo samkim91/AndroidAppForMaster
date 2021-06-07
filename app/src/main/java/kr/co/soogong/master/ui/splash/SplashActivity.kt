@@ -3,7 +3,7 @@ package kr.co.soogong.master.ui.splash
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
-import kr.co.soogong.master.domain.usecase.auth.GetMasterKeyCodeUseCase
+import kr.co.soogong.master.domain.usecase.auth.GetMasterIdUseCase
 import kr.co.soogong.master.uiinterface.main.MainActivityHelper
 import kr.co.soogong.master.uiinterface.auth.SignMainActivityHelper
 import timber.log.Timber
@@ -13,7 +13,7 @@ import javax.inject.Inject
 class SplashActivity : AppCompatActivity() {
 
     @Inject
-    lateinit var getMasterKeyCodeUseCase: GetMasterKeyCodeUseCase
+    lateinit var getMasterIdUseCase: GetMasterIdUseCase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +27,7 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private fun checkSignIng() {
-        val keyCode = getMasterKeyCodeUseCase()
+        val keyCode = getMasterIdUseCase()
         val intent = if (keyCode.isNullOrEmpty()) {
             SignMainActivityHelper.getIntent(this)
         } else {
