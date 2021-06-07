@@ -24,11 +24,11 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ViewEstimateViewModel @Inject constructor(
-    getEstimationUseCase: GetEstimationUseCase,
+    val getEstimationUseCase: GetEstimationUseCase,
     private val refuseToEstimateUseCase: RefuseToEstimateUseCase,
     private val callToCustomerUseCase: CallToCustomerUseCase,
     private val askForReviewUseCase: AskForReviewUseCase,
-    savedStateHandle: SavedStateHandle
+    val savedStateHandle: SavedStateHandle
 ) : BaseViewModel() {
 
     // Note : activity에서 viewModel로 데이터 넘기는 법. savedStateHandle에서 가져온다.

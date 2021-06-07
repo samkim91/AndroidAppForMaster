@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.category.Category
 import kr.co.soogong.master.domain.usecase.GetCategoryListUseCase
@@ -24,19 +25,24 @@ class CategorySelectViewModel @Inject constructor(
     }
 
     private fun getCategoryList() {
+        Timber.tag(TAG).d("getCategoryList: ")
         getCategoryListUseCase()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                Timber.tag(TAG).d("getCategoryList: $it")
-                _list.postValue(it)
-            }, {
-                Timber.tag(TAG).w("getCategoryList: $it")
-            })
-            .addToDisposable()
+            .subscribeBy(
+                onSuccess = {
+                    Timber.tag(TAG).d("getCategoryList: $it")
+                    _list.postValue(it)
+                },
+                onError = {
+                    Timber.tag(TAG).w("getCategoryList: $it")
+                    setAction(GET_CATEGORY_FAILED)
+                }
+            ).addToDisposable()
     }
 
     companion object {
         private const val TAG = "CategoryViewModel"
+        const val GET_CATEGORY_FAILED = "GET_CATEGORY_FAILED"
     }
 }

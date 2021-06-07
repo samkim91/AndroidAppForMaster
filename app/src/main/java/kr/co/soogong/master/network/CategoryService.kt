@@ -1,5 +1,6 @@
 package kr.co.soogong.master.network
 
+import com.kakao.sdk.talk.BuildConfig
 import io.reactivex.Single
 import kr.co.soogong.master.data.category.Category
 import kr.co.soogong.master.data.category.Project
@@ -12,20 +13,20 @@ class CategoryService @Inject constructor(
     private val categoryInterface = retrofit.create(CategoryInterface::class.java)
 
     fun getCategoryList(): Single<List<Category>> {
-        return categoryInterface.getCategoryList().map {
+        return categoryInterface.getCategoryList("http://192.168.0.50:8080/category/list").map {
             val items: MutableList<Category> = ArrayList()
             for (item in it) {
-                items.add(Category.fromJson(item))
+                items.add(Category.fromJson(item.asJsonObject))
             }
             return@map items
         }
     }
 
     fun getProjectList(category: Category): Single<List<Project>> {
-        return categoryInterface.getProjectList(category.id).map {
+        return categoryInterface.getProjectList("http://192.168.0.50:8080/project/find-all-by-categoryId/?categoryId=${category.id}").map {
             val items: MutableList<Project> = ArrayList()
             for (item in it) {
-                items.add(Project.fromJson(item))
+                items.add(Project.fromJson(item.asJsonObject))
             }
             return@map items
         }

@@ -1,11 +1,9 @@
 package kr.co.soogong.master.contract
 
 object HttpContract {
+    const val LOCAL_URL = "http://192.168.0.50:8080/"
     const val TEST_URL = "https://test.api2.soogong.co.kr/"
     const val PROD_URL = "https://api2.soogong.co.kr/"
-
-    const val TEST_URL_RENEW = "https://test.api2.soogong.co.kr/api/"
-    const val PROD_URL_RENEW = "https://api2.soogong.co.kr/api/"
 
     //region Auth
     const val LOGIN = "login"
@@ -23,8 +21,11 @@ object HttpContract {
     //endregion
 
     //region Category
-    const val CATEGORY = "api/v1/categories"
-    const val PROJECT = "api/v1/categories/{id}/projects"
+//    const val CATEGORY = "api/v1/categories"
+//    const val PROJECT = "api/v1/categories/{id}/projects"
+
+    const val CATEGORY_LIST = "category/list"
+    const val PROJECT_LIST = "project/find-all-by-categoryId/{categoryId}"
     //endregion
 
     //region User

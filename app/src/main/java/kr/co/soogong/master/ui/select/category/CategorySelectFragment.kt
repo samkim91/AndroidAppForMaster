@@ -10,6 +10,9 @@ import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentCategorySelectBinding
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.select.SelectFragment
+import kr.co.soogong.master.ui.select.category.CategorySelectViewModel.Companion.GET_CATEGORY_FAILED
+import kr.co.soogong.master.util.EventObserver
+import kr.co.soogong.master.util.extension.toast
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -24,6 +27,7 @@ class CategorySelectFragment : BaseFragment<FragmentCategorySelectBinding>(
         super.onViewCreated(view, savedInstanceState)
         Timber.tag(TAG).d("onViewCreated: ")
         initLayout()
+        registerEventObserve()
     }
 
     override fun initLayout() {
@@ -47,6 +51,15 @@ class CategorySelectFragment : BaseFragment<FragmentCategorySelectBinding>(
         selectFragment = activity as? SelectFragment
     }
 
+    private fun registerEventObserve() {
+        viewModel.action.observe(viewLifecycleOwner, EventObserver { action ->
+            when (action) {
+                GET_CATEGORY_FAILED -> {
+                    requireContext().toast(getString(R.string.error_message_of_request_failed))
+                }
+            }
+        })
+    }
 
     companion object {
         private const val TAG = "CategorySelectFragment"
