@@ -7,6 +7,7 @@ import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.domain.usecase.auth.SignInUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
+import kr.co.soogong.master.ui.utils.validation.ValidationHelper
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -20,13 +21,13 @@ class SignInViewModel @Inject constructor(
     fun loginAction() {
         Timber.tag(TAG).d("loginAction: ")
 
-        if (id.value.isNullOrEmpty()) {
-            setAction(FAIL_NULL)
+        if (id.value.isNullOrEmpty() || !ValidationHelper.isNumberOnly(id.value ?: "")) {
+            setAction(INVALID_INPUT)
             return
         }
 
         if (password.value.isNullOrEmpty()) {
-            setAction(FAIL_NULL)
+            setAction(INVALID_INPUT)
             return
         }
 
@@ -35,21 +36,21 @@ class SignInViewModel @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
                 onSuccess = {
-                    Timber.tag(TAG).d("loginAction: $it")
                     successToSignIn()
                 },
                 onError = {
-                    Timber.tag(TAG).w("loginAction: $it")
                     failToSignIn()
                 })
             .addToDisposable()
     }
 
     private fun successToSignIn() {
+        Timber.tag(TAG).d("successToSignIn: ")
         setAction(SUCCESS)
     }
 
     private fun failToSignIn() {
+        Timber.tag(TAG).d("failToSignIn: ")
         setAction(FAIL)
     }
 
@@ -62,7 +63,7 @@ class SignInViewModel @Inject constructor(
         private const val TAG = "SignInViewModel"
         const val SUCCESS = "SUCCESS"
         const val FAIL = "FAIL"
-        const val FAIL_NULL = "FAIL_NULL"
+        const val INVALID_INPUT = "INVALID_INPUT"
         const val FIND = "FIND"
     }
 }
