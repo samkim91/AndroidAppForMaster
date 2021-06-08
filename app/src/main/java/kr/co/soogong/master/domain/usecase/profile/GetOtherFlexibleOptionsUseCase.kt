@@ -2,7 +2,7 @@ package kr.co.soogong.master.domain.usecase.profile
 
 import dagger.Reusable
 import kr.co.soogong.master.data.profile.OtherFlexibleOptions
-import kr.co.soogong.master.domain.usecase.auth.GetMasterIdUseCase
+import kr.co.soogong.master.domain.usecase.auth.GetMasterIdFromSharedUseCase
 import kr.co.soogong.master.network.ProfileService
 import javax.inject.Inject
 
@@ -10,7 +10,7 @@ import javax.inject.Inject
 class GetOtherFlexibleOptionsUseCase @Inject constructor(
     private val getProfileFromLocalUseCase: GetProfileFromLocalUseCase,
 
-    private val getMasterIdUseCase: GetMasterIdUseCase,
+    private val getMasterIdFromSharedUseCase: GetMasterIdFromSharedUseCase,
     private val profileService: ProfileService,
 ) {
     suspend operator fun invoke(): OtherFlexibleOptions {

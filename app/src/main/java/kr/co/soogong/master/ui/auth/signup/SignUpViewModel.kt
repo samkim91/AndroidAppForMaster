@@ -1,6 +1,9 @@
 package kr.co.soogong.master.ui.auth.signup
 
 import androidx.lifecycle.MutableLiveData
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.PhoneAuthCredential
+import com.google.firebase.auth.PhoneAuthProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
@@ -29,6 +32,11 @@ class SignUpViewModel @Inject constructor(
 
     // Step 2
     val certificationCode = MutableLiveData("")
+    // Firebase Auth
+    lateinit var auth: FirebaseAuth
+    val phoneAuthCredential = MutableLiveData<PhoneAuthCredential>()
+    val storedVerificationId = MutableLiveData("")
+    val resendToken = MutableLiveData<PhoneAuthProvider.ForceResendingToken>()
 
     // Step 2 sub
     val signInPassword = MutableLiveData("")
@@ -57,6 +65,8 @@ class SignUpViewModel @Inject constructor(
     val agreedPrivacyPolicy = MutableLiveData(false)
     val marketingPush = MutableLiveData(false)
     val appPush = MutableLiveData(false)
+
+
 
 
     fun checkPhoneNumberDuplicate() {

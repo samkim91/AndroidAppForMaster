@@ -11,8 +11,8 @@ class ProfileService @Inject constructor(
 ) {
     private val profileInterface = retrofit.create(ProfileInterface::class.java)
 
-    suspend fun getUserProfile(keycode: String?): User {
-        return User.fromJson(profileInterface.getUserProfile(keycode))
+    suspend fun getUserProfile(masterId: String?): User {
+        return User.fromJson(profileInterface.getUserProfile(masterId))
     }
 
     suspend fun getProfile(masterId: String?): Profile {

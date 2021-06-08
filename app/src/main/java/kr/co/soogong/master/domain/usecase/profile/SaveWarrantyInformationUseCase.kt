@@ -4,14 +4,14 @@ import dagger.Reusable
 import io.reactivex.Single
 import kr.co.soogong.master.BuildConfig
 import kr.co.soogong.master.data.profile.WarrantyInformation
-import kr.co.soogong.master.domain.usecase.auth.GetMasterIdUseCase
+import kr.co.soogong.master.domain.usecase.auth.GetMasterIdFromSharedUseCase
 import kr.co.soogong.master.network.ProfileService
 import kr.co.soogong.master.network.Response
 import javax.inject.Inject
 
 @Reusable
 class SaveWarrantyInformationUseCase @Inject constructor(
-    private val getMasterIdUseCase: GetMasterIdUseCase,
+    private val getMasterIdFromSharedUseCase: GetMasterIdFromSharedUseCase,
     private val profileService: ProfileService,
 ) {
     operator fun invoke(warrantyInformation: WarrantyInformation): Single<Response> {

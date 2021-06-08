@@ -9,7 +9,7 @@ import javax.inject.Inject
 @Reusable
 class ChangePasswordUseCase @Inject constructor(
     private val authService: AuthService,
-    private val getMasterIdUseCase: GetMasterIdUseCase
+    private val getMasterIdFromSharedUseCase: GetMasterIdFromSharedUseCase
 ) {
     operator fun invoke(password: String?, confirmPassword: String?): Single<Response> {
         return Single.just(Response.TEST_RESPONSE)

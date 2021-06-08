@@ -4,13 +4,11 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import dagger.hilt.android.AndroidEntryPoint
-import kr.co.soogong.master.BuildConfig
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentSignUpStep1Binding
 import kr.co.soogong.master.ui.auth.signup.SignUpActivity
 import kr.co.soogong.master.ui.auth.signup.SignUpViewModel
 import kr.co.soogong.master.ui.base.BaseFragment
-import kr.co.soogong.master.util.extension.toast
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -39,11 +37,6 @@ class Step1Fragment : BaseFragment<FragmentSignUpStep1Binding>(
                 })
 
                 if (!phoneNumber.alertVisible) {
-                    if (!BuildConfig.DEBUG) {
-                        // Todo.. SMS 인증코드 전송 개발 필요.. AWS Cognito 이용
-                    }
-
-                    requireContext().toast(getString(R.string.certification_code_requested))
                     (activity as? SignUpActivity)?.moveToNext()
                 }
             }
@@ -52,7 +45,6 @@ class Step1Fragment : BaseFragment<FragmentSignUpStep1Binding>(
 
     private fun registerEventObserve() {
         Timber.tag(TAG).d("registerEventObserve: ")
-
 
     }
 
