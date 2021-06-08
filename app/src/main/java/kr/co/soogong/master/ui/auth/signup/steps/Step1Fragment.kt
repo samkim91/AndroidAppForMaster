@@ -21,7 +21,6 @@ class Step1Fragment : BaseFragment<FragmentSignUpStep1Binding>(
         super.onViewCreated(view, savedInstanceState)
         Timber.tag(TAG).d("onViewCreated: ")
         initLayout()
-        registerEventObserve()
     }
 
     override fun initLayout() {
@@ -33,7 +32,7 @@ class Step1Fragment : BaseFragment<FragmentSignUpStep1Binding>(
 
             defaultButton.setOnClickListener {
                 viewModel.phoneNumber.observe(viewLifecycleOwner, {
-                    phoneNumber.alertVisible = it.isNullOrEmpty()
+                    phoneNumber.alertVisible = it.isNullOrEmpty() || it.length < 10
                 })
 
                 if (!phoneNumber.alertVisible) {
@@ -41,11 +40,6 @@ class Step1Fragment : BaseFragment<FragmentSignUpStep1Binding>(
                 }
             }
         }
-    }
-
-    private fun registerEventObserve() {
-        Timber.tag(TAG).d("registerEventObserve: ")
-
     }
 
     companion object {

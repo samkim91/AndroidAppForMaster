@@ -46,6 +46,7 @@
                 android:layout_marginEnd="@dimen/gap_20"
                 app:alertText='@{"필수 정보입니다."}'
                 app:hintText='@{"예시) 김수공"}'
+                app:setMaxLength="@{100}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/title_widget"

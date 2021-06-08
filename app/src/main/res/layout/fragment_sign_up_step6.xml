@@ -49,6 +49,7 @@
                 app:setFirstEditTextHint='@{"주소를 검색해주세요."}'
                 app:firstContent="@={vm.address}"
                 app:secondContent="@={vm.subAddress}"
+                app:setMaxLengthSecond="@{100}"
                 app:titleVisible="@{false}"
                 app:setSecondEditTextHint='@{"상세주소를 입력해주세요."}'
                 app:setFirstEditTextEnable="@{false}"
