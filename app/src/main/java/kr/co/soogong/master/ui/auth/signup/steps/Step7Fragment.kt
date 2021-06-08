@@ -6,7 +6,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.user.Coordinate
+import kr.co.soogong.master.data.profile.Coordinate
 import kr.co.soogong.master.databinding.FragmentSignUpStep7Binding
 import kr.co.soogong.master.ui.auth.signup.SignUpActivity
 import kr.co.soogong.master.ui.auth.signup.SignUpViewModel

@@ -43,7 +43,7 @@ class Step8Fragment : BaseFragment<FragmentSignUpStep8Binding>(
             binding.agreedAll.setCheckClick {
                 val status = agreedAll.checkBox.isChecked
                 viewModel.agreedPrivacyPolicy.value = status
-                viewModel.agreedMarketing.value = status
+                viewModel.marketingPush.value = status
             }
 
             defaultButton.setOnClickListener {
@@ -71,9 +71,9 @@ class Step8Fragment : BaseFragment<FragmentSignUpStep8Binding>(
 
     private fun registerEventObserve() {
         viewModel.agreedPrivacyPolicy.observe(viewLifecycleOwner, {
-            binding.agreedAll.checkBox.isChecked = it && viewModel.agreedMarketing.value!!
+            binding.agreedAll.checkBox.isChecked = it && viewModel.marketingPush.value!!
         })
-        viewModel.agreedMarketing.observe(viewLifecycleOwner, {
+        viewModel.marketingPush.observe(viewLifecycleOwner, {
             binding.agreedAll.checkBox.isChecked = it && viewModel.agreedPrivacyPolicy.value!!
         })
         viewModel.action.observe(viewLifecycleOwner, EventObserver { event ->

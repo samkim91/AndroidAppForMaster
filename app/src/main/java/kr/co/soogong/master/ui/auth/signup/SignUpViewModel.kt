@@ -6,7 +6,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.category.BusinessType
-import kr.co.soogong.master.data.user.SignUpInfo
+import kr.co.soogong.master.data.auth.SignUpDto
 import kr.co.soogong.master.domain.usecase.auth.*
 import kr.co.soogong.master.ui.base.BaseViewModel
 import kr.co.soogong.master.ui.utils.ListLiveData
@@ -55,7 +55,7 @@ class SignUpViewModel @Inject constructor(
 
     // Step 8
     val agreedPrivacyPolicy = MutableLiveData(false)
-    val agreedMarketing = MutableLiveData(false)
+    val marketingPush = MutableLiveData(false)
     val appPush = MutableLiveData(false)
 
 
@@ -94,7 +94,6 @@ class SignUpViewModel @Inject constructor(
 
     fun requestConfirmCertificationCode() {
         Timber.tag(TAG).d("requestConfirmCertificationCode: ")
-
         // 입력한 인증번호를 확인
         // 인증되면, 다음화면으로
         // 안 되면, alert 표시
@@ -111,7 +110,6 @@ class SignUpViewModel @Inject constructor(
 
     fun requestLogin() {
         Timber.tag(TAG).d("requestLogin: ")
-
         signInUseCase(phoneNumber.value, signInPassword.value ?: signUpPassword.value)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -130,7 +128,7 @@ class SignUpViewModel @Inject constructor(
     fun signUp() {
         Timber.tag(TAG).d("signUp : ")
         signUpUseCase(
-            SignUpInfo(
+            SignUpDto(
                 phoneNumber = phoneNumber.value!!,
                 password = signUpPassword.value!!,
                 businessRepresentativeName = businessRepresentativeName.value!!,
@@ -140,11 +138,9 @@ class SignUpViewModel @Inject constructor(
                 latitude = latitude.value!!,
                 longitude = longitude.value!!,
                 serviceArea = serviceAreaToInt.value!!,
-                acceptPrivacyPolicy = agreedPrivacyPolicy.value!!,
+                privacyPolicy = agreedPrivacyPolicy.value!!,
                 appPush = appPush.value!!,
-                appPushAtNight = appPush.value!!,
-                kakaoAlarm = agreedMarketing.value!!,
-                smsAlarm = agreedMarketing.value!!
+                marketingPush = marketingPush.value!!
             )
         )
             .subscribeOn(Schedulers.io())

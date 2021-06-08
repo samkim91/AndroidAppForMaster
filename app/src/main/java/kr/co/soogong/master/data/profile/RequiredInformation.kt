@@ -5,7 +5,6 @@ import com.google.gson.JsonObject
 import kotlinx.parcelize.Parcelize
 import kr.co.soogong.master.data.category.BusinessType
 import kr.co.soogong.master.data.estimation.ImagePath
-import kr.co.soogong.master.data.user.Coordinate
 
 @Parcelize
 data class RequiredInformation(

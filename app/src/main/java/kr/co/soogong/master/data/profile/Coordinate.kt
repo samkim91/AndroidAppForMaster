@@ -1,4 +1,4 @@
-package kr.co.soogong.master.data.user
+package kr.co.soogong.master.data.profile
 
 import android.os.Parcelable
 import com.google.gson.JsonObject

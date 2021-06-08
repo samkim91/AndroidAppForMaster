@@ -1,8 +1,9 @@
 package kr.co.soogong.master.network
 
+import com.google.gson.Gson
 import io.reactivex.Single
-import kr.co.soogong.master.data.user.SignInInfo
-import kr.co.soogong.master.data.user.SignUpInfo
+import kr.co.soogong.master.data.auth.ResponseSignInDto
+import kr.co.soogong.master.data.auth.SignUpDto
 import retrofit2.Retrofit
 import javax.inject.Inject
 
@@ -11,7 +12,7 @@ class AuthService @Inject constructor(
 ) {
     private val authInterface = retrofit.create(AuthInterface::class.java)
 
-    fun login(phoneNumber: String?, password: String?): Single<SignInInfo> {
+    fun login(phoneNumber: String?, password: String?): Single<ResponseSignInDto> {
         val data = HashMap<String, String?>()
         data["phone_number"] = phoneNumber
         data["password"] = password
@@ -21,7 +22,7 @@ class AuthService @Inject constructor(
         return authInterface.login(send).flatMap { json ->
 
             try {
-                val signInInfo = SignInInfo.fromJson(json)
+                val signInInfo = ResponseSignInDto.fromJson(json)
 
                 if (signInInfo.keycode.isNullOrEmpty()) {
                     return@flatMap Single.error(RxException("기사 분들만 로그인이 가능 합니다"))
@@ -49,28 +50,24 @@ class AuthService @Inject constructor(
         return authInterface.findPassword(data)
     }
 
-    fun signUp(signUpInfo: SignUpInfo): Single<Response> {
-        val data = HashMap<String, Any>()
-        data["phone_number"] = signUpInfo.phoneNumber
-        data["password"] = signUpInfo.password
-        data["business_representative_name"] = signUpInfo.businessRepresentativeName
-        data["business_type"] = signUpInfo.businessType
-        data["address"] = signUpInfo.address
-        data["sub_address"] = signUpInfo.subAddress
-        data["latitude"] = signUpInfo.latitude
-        data["longitude"] = signUpInfo.longitude
-        data["service_area"] = signUpInfo.serviceArea
+    fun signUp(signUpDto: SignUpDto): Single<Response> {
+//        val data = HashMap<String, Any>()
+//        val values = Gson().toJson(signUpInfo)
 
-        data["accept_privacy_policy"] = signUpInfo.acceptPrivacyPolicy
-        data["app_push"] = signUpInfo.appPush
-        data["app_push_at_night"] = signUpInfo.appPushAtNight
-        data["kakao_alarm"] = signUpInfo.kakaoAlarm
-        data["sms_alarm"] = signUpInfo.smsAlarm
+//        data["phoneNumber"] = signUpInfo.phoneNumber
+//        data["password"] = signUpInfo.password
+//        data["ownerName"] = signUpInfo.businessRepresentativeName
+//        data["businessType"] = Gson().toJson(signUpInfo.businessType)
+//        data["address"] = signUpInfo.address
+//        data["subAddress"] = signUpInfo.subAddress
+//        data["latitude"] = signUpInfo.latitude
+//        data["longitude"] = signUpInfo.longitude
+//        data["serviceArea"] = signUpInfo.serviceArea
+//        data["privacyPolicy"] = signUpInfo.privacyPolicy
+//        data["appPush"] = signUpInfo.appPush
+//        data["marketingPush"] = signUpInfo.marketingPush
 
-        val send = HashMap<String, HashMap<String, Any>>()
-        send["master_sign_up_info"] = data
-
-        return authInterface.signUp(send)
+        return authInterface.signUp(Gson().toJson(signUpDto))
     }
 
     fun passwordChange(

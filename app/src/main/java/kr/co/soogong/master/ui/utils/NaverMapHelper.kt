@@ -11,7 +11,7 @@ import com.naver.maps.map.OnMapReadyCallback
 import com.naver.maps.map.overlay.CircleOverlay
 import com.naver.maps.map.overlay.Marker
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.user.Coordinate
+import kr.co.soogong.master.data.profile.Coordinate
 import timber.log.Timber
 
 class NaverMapHelper(
