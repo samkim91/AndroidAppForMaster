@@ -45,7 +45,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/title_widget"
                 app:text='@{"모두 동의합니다. (선택 정보 포함)"}'
-                app:check="@{vm.agreedPrivacyPolicy &amp;&amp; vm.agreedMarketing}"
+                app:check="@{vm.agreedPrivacyPolicy &amp;&amp; vm.marketingPush}"
 
                 />
 
@@ -87,7 +87,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/agreed_privacy_policy"
                 app:text='@{"마케팅 수신에 동의합니다. (선택)"}'
-                app:check="@={vm.agreedMarketing}"
+                app:check="@={vm.marketingPush}"
 
                 />
 

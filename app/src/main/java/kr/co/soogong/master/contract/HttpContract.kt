@@ -12,7 +12,8 @@ object HttpContract {
 
     const val FIND = "find"
     const val SIGN_UP = "signup"
-    const val MASTER_SIGN_UP = "api/v1/branches/register"
+    const val MASTER_SIGN_UP = "/master/signup"
+//    const val MASTER_SIGN_UP = "api/v1/branches/register"
     const val PASSWORD = "password"
     const val FCM_UPDATE = "api/v1/branches/update_reg_id"
 

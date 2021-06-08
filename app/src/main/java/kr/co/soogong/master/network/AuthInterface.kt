@@ -14,14 +14,17 @@ interface AuthInterface {
     @POST(HttpContract.RESIGN_IN)
     fun resignIn(@Body body: HashMap<String, String?>): Single<Response>
 
-    @POST(HttpContract.SIGN_UP)
-    fun signUp(@Body body: HashMap<String, HashMap<String, Any>>): Single<Response>
+//    @POST(HttpContract.SIGN_UP)
+//    fun signUp(@Body body: HashMap<String, HashMap<String, Any>>): Single<Response>
 
     @POST(HttpContract.MASTER_SIGN_UP)
-    fun registerMaster(
-        @Header("x-authentication-token") token: String,
-        @Body body: HashMap<String, String>
-    ): Single<JsonObject>
+    fun signUp(@Body body: String): Single<Response>
+
+//    @POST(HttpContract.MASTER_SIGN_UP)
+//    fun registerMaster(
+//        @Header("x-authentication-token") token: String,
+//        @Body body: HashMap<String, String>
+//    ): Single<JsonObject>
 
     @POST(HttpContract.PASSWORD)
     fun passwordChange(@Body body: HashMap<String, String?>): Single<Response>

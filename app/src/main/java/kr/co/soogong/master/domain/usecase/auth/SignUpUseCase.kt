@@ -2,7 +2,7 @@ package kr.co.soogong.master.domain.usecase.auth
 
 import dagger.Reusable
 import io.reactivex.Single
-import kr.co.soogong.master.data.user.SignUpInfo
+import kr.co.soogong.master.data.auth.SignUpDto
 import kr.co.soogong.master.network.AuthService
 import kr.co.soogong.master.network.Response
 import javax.inject.Inject
@@ -11,7 +11,7 @@ import javax.inject.Inject
 class SignUpUseCase @Inject constructor(
     private val authService: AuthService
 ) {
-    operator fun invoke(signUpInfo: SignUpInfo): Single<Response> {
-        return authService.signUp(signUpInfo)
+    operator fun invoke(signUpDto: SignUpDto): Single<Response> {
+        return authService.signUp(signUpDto)
     }
 }

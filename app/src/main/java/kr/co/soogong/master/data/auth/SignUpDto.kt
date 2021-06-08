@@ -1,4 +1,4 @@
-package kr.co.soogong.master.data.user
+package kr.co.soogong.master.data.auth
 
 import android.os.Parcelable
 import com.google.gson.JsonObject
@@ -7,7 +7,7 @@ import kotlinx.parcelize.Parcelize
 import kr.co.soogong.master.data.category.BusinessType
 
 @Parcelize
-data class SignUpInfo(
+data class SignUpDto(
     @SerializedName("phoneNumber")
     val phoneNumber: String,
 
@@ -35,18 +35,12 @@ data class SignUpInfo(
     @SerializedName("serviceArea")
     val serviceArea: Int,
 
-    @SerializedName("acceptPrivacyPolicy")
-    val acceptPrivacyPolicy: Boolean,
+    @SerializedName("privacyPolicy")
+    val privacyPolicy: Boolean,
 
     @SerializedName("appPush")
     val appPush: Boolean,
 
-    @SerializedName("appPushAtNight")
-    val appPushAtNight: Boolean,
-
-    @SerializedName("kakaoAlarm")
-    val kakaoAlarm: Boolean,
-
-    @SerializedName("smsAlarm")
-    val smsAlarm: Boolean,
+    @SerializedName("marketingPush")
+    val marketingPush: Boolean,
 ) : Parcelable { }
