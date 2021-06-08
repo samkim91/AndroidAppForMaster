@@ -73,7 +73,6 @@
                 app:layout_constraintTop_toBottomOf="@id/line"
                 app:text='@{"수공의 이용약관 및 개인정보 처리방침에\n동의합니다."}'
                 app:check="@={vm.agreedPrivacyPolicy}"
-
                 />
 
             <kr.co.soogong.master.ui.widget.TextCheckBox
@@ -88,7 +87,6 @@
                 app:layout_constraintTop_toBottomOf="@id/agreed_privacy_policy"
                 app:text='@{"마케팅 수신에 동의합니다. (선택)"}'
                 app:check="@={vm.marketingPush}"
-
                 />
 
             <androidx.appcompat.widget.AppCompatTextView
