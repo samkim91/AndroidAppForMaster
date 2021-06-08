@@ -2,7 +2,7 @@ package kr.co.soogong.master.domain.usecase.profile
 
 import dagger.Reusable
 import kr.co.soogong.master.data.user.User
-import kr.co.soogong.master.domain.usecase.auth.GetMasterIdUseCase
+import kr.co.soogong.master.domain.usecase.auth.GetMasterIdFromSharedUseCase
 import kr.co.soogong.master.domain.user.UserDao
 import kr.co.soogong.master.network.ProfileService
 import javax.inject.Inject
@@ -11,13 +11,13 @@ import javax.inject.Inject
 class GetUserInfoUseCase @Inject constructor(
     private val userDao: UserDao,
     private val profileService: ProfileService,
-    private val getMasterIdUseCase: GetMasterIdUseCase,
+    private val getMasterIdFromSharedUseCase: GetMasterIdFromSharedUseCase,
 ) {
     // Todo.. 서버 리뉴얼 후 삭제될 클래스, 유스케이스, http req
     suspend operator fun invoke(): User {
-        val user = userDao.getItem(getMasterIdUseCase() ?: "")
+        val user = userDao.getItem(getMasterIdFromSharedUseCase() ?: "")
         if (user == null) {
-            val userData = profileService.getUserProfile(getMasterIdUseCase())
+            val userData = profileService.getUserProfile(getMasterIdFromSharedUseCase())
             userDao.insert(userData)
             return userData
         }

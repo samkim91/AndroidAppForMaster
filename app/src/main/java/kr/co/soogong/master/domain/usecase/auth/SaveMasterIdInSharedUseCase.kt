@@ -6,12 +6,12 @@ import kr.co.soogong.master.contract.AppSharedPreferenceContract
 import javax.inject.Inject
 
 @Reusable
-class SaveMasterIdUseCase @Inject constructor(
+class SaveMasterIdInSharedUseCase @Inject constructor(
     private val sharedPreferences: SharedPreferences
 ) {
-    operator fun invoke(keyCode: String) {
+    operator fun invoke(masterId: String) {
         sharedPreferences.edit()
-            .putString(AppSharedPreferenceContract.MASTER_ID, keyCode)
+            .putString(AppSharedPreferenceContract.MASTER_ID, masterId)
             .apply()
     }
 }

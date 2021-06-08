@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.google.firebase.messaging.FirebaseMessaging
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.domain.usecase.auth.GetMasterApprovalUseCase
 import kr.co.soogong.master.domain.usecase.auth.SetFCMTokenUseCase
@@ -15,7 +16,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val setFCMTokenUseCase: SetFCMTokenUseCase,
-    private val getMasterApprovalUseCase: GetMasterApprovalUseCase,
+    val getMasterApprovalUseCase: GetMasterApprovalUseCase,
 ) : BaseViewModel() {
     private val _isApprovedMaster = MutableLiveData<Boolean>(getMasterApprovalUseCase())
     val isApprovedMaster: LiveData<Boolean>
@@ -37,11 +38,13 @@ class MainViewModel @Inject constructor(
         setFCMTokenUseCase(token)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                Timber.tag(TAG).d("sendRegistrationToServer: $it")
-            }, {
-                Timber.tag(TAG).e("sendRegistrationToServer: $it")
-            })
+            .subscribeBy(
+                onSuccess = {
+                    Timber.tag(TAG).d("sendRegistrationToServer successfully: $it")
+                },
+                onError = {
+                    Timber.tag(TAG).e("sendRegistrationToServer failed: $it")
+                })
             .addToDisposable()
     }
 

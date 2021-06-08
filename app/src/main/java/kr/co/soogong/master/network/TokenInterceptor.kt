@@ -30,4 +30,13 @@ class TokenInterceptor @Inject constructor(
     }
 }
 
+//when(response.code) {
+//    500 -> {
+//        context.toast("내부 서버 에러가 발생하였습니다. 수공에 연락해주세요.")
+//    }
+//    404 -> {
+//        context.toast("해당 URL을 찾을 수 없습니다.")
+//    }
+//}
+
 
