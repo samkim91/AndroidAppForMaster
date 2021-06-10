@@ -7,7 +7,7 @@
 
         <variable
             name="vm"
-            type="kr.co.soogong.master.ui.profile.edit.requiredinformation.businessrepresentativename.EditBusinessRepresentativeNameViewModel" />
+            type="kr.co.soogong.master.ui.profile.edit.requiredinformation.businessrepresentativename.EditOwnerNameViewModel" />
     </data>
 
     <LinearLayout
@@ -31,11 +31,11 @@
                 android:paddingBottom="@dimen/gap_52">
 
                 <kr.co.soogong.master.ui.widget.TitleEditText
-                    android:id="@+id/business_representative_name"
+                    android:id="@+id/owner_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:alertText='@{"필수 정보입니다."}'
-                    app:content="@={vm.businessRepresentativeName}"
+                    app:content="@={vm.ownerName}"
                     app:hintText='@{"예시) 김수공"}'
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

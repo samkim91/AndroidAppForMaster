@@ -8,7 +8,6 @@ import kr.co.soogong.master.domain.AppDatabase
 import kr.co.soogong.master.domain.estimation.EstimationDao
 import kr.co.soogong.master.domain.profile.ProfileDao
 import kr.co.soogong.master.domain.requirements.RequirementDao
-import kr.co.soogong.master.domain.user.UserDao
 import javax.inject.Singleton
 
 @Module
@@ -24,12 +23,6 @@ class RoomModule {
     @Singleton
     fun provideEstimationDao(appDatabase: AppDatabase): EstimationDao {
         return appDatabase.estimationDao()
-    }
-
-    @Provides
-    @Singleton
-    fun provideUserDao(appDatabase: AppDatabase): UserDao {
-        return appDatabase.userDao()
     }
 
     @Provides

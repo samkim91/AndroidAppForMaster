@@ -6,7 +6,7 @@ import kr.co.soogong.master.ui.profile.edit.flexiblecost.EditFlexibleCostFragmen
 import kr.co.soogong.master.ui.profile.edit.otherflexibleoptions.EditOtherFlexibleOptionsFragment
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.address.EditAddressFragment
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.briefintroduction.EditBriefIntroductionFragment
-import kr.co.soogong.master.ui.profile.edit.requiredinformation.businessrepresentativename.EditBusinessRepresentativeNameFragment
+import kr.co.soogong.master.ui.profile.edit.requiredinformation.businessrepresentativename.EditOwnerNameFragment
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.businesstypes.EditBusinessTypesFragment
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.businessunitinformation.EditBusinessUnitInformationFragment
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.phonenumber.EditPhoneNumberFragment
@@ -54,7 +54,7 @@ object EditProfileContainerFragmentHelper {
             EDIT_COMPANY_IMAGE -> EditRepresentativeImagesFragment.newInstance()
             EDIT_BUSINESS_UNIT_INFORMATION -> EditBusinessUnitInformationFragment.newInstance()
             EDIT_WARRANTY_INFORMATION -> EditWarrantyInformationFragment.newInstance()
-            EDIT_BUSINESS_REPRESENTATIVE_NAME -> EditBusinessRepresentativeNameFragment.newInstance()
+            EDIT_BUSINESS_REPRESENTATIVE_NAME -> EditOwnerNameFragment.newInstance()
             EDIT_PHONE_NUMBER -> EditPhoneNumberFragment.newInstance()
             EDIT_BUSINESS_TYPES -> EditBusinessTypesFragment.newInstance()
             EDIT_ADDRESS -> EditAddressFragment.newInstance()

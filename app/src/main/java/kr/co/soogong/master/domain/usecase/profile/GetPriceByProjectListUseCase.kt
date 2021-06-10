@@ -1,7 +1,7 @@
 package kr.co.soogong.master.domain.usecase.profile
 
 import dagger.Reusable
-import kr.co.soogong.master.BuildConfig
+import io.reactivex.Single
 import kr.co.soogong.master.data.profile.PriceByProject
 import javax.inject.Inject
 
@@ -9,13 +9,13 @@ import javax.inject.Inject
 class GetPriceByProjectListUseCase @Inject constructor(
     private val getProfileFromLocalUseCase: GetProfileFromLocalUseCase,
 ) {
-    suspend operator fun invoke(): List<PriceByProject> {
-        if(BuildConfig.DEBUG){
-            return listOf(PriceByProject.TEST_PRICE_BY_PROJECT, PriceByProject.TEST_PRICE_BY_PROJECT)
-        }
+    operator fun invoke(): Single<List<PriceByProject>> {
+//        if(BuildConfig.DEBUG){
+//            return listOf(PriceByProject.TEST_PRICE_BY_PROJECT, PriceByProject.TEST_PRICE_BY_PROJECT)
+//        }
 
-        getProfileFromLocalUseCase().let { profile ->
-            return profile.basicInformation?.priceByProjects ?: emptyList()
+        return getProfileFromLocalUseCase().map { profile ->
+            profile.basicInformation?.priceByProjects
         }
     }
 }

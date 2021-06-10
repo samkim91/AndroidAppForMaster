@@ -3,12 +3,10 @@ package kr.co.soogong.master.ui.profile.edit.requiredinformation.businessunitinf
 import android.net.Uri
 import android.view.View
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import kotlinx.coroutines.launch
 import kr.co.soogong.master.data.estimation.ImagePath
 import kr.co.soogong.master.data.profile.BusinessUnitInformation
 import kr.co.soogong.master.domain.usecase.profile.GetBusinessUnitInformationUseCase
@@ -29,21 +27,26 @@ class EditBusinessUnitInformationViewModel @Inject constructor(
     val identicalImage = MutableLiveData(Uri.EMPTY)
     val birthday = MutableLiveData("")
 
-    fun getBusinessUnitInfo() {
-        Timber.tag(TAG).d("getBusinessUnitInfo: ")
-        viewModelScope.launch {
-            getBusinessUnitInformationUseCase().let {
-                businessUnitType.postValue(it.businessUnitType)
-                if (it.businessUnitType == "프리랜서") {
-                    birthday.postValue(it.identicalNumber.toString())
-                } else {
-                    businessName.postValue(it.businessName)
-                    companyName.postValue(it.companyName)
-                    identicalImage.postValue(Uri.parse(it.identicalImage?.path))
-                    identicalNumber.postValue(it.identicalNumber.toString())
-                }
-            }
-        }
+    fun requestBusinessUnitInformation() {
+        Timber.tag(TAG).d("requestBusinessUnitInformation: ")
+
+        getBusinessUnitInformationUseCase()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeBy(
+                onSuccess = {
+                    businessUnitType.postValue(it.businessUnitType)
+                    if (it.businessUnitType == "프리랜서") {
+                        birthday.postValue(it.identicalNumber.toString())
+                    } else {
+                        businessName.postValue(it.businessName)
+                        companyName.postValue(it.companyName)
+                        identicalImage.postValue(Uri.parse(it.identicalImage?.path))
+                        identicalNumber.postValue(it.identicalNumber.toString())
+                    }
+                },
+                onError = { setAction(GET_BUSINESS_UNIT_INFORMATION_FAILED) }
+            ).addToDisposable()
     }
 
     fun saveBusinessUnitInfo() {
@@ -66,11 +69,11 @@ class EditBusinessUnitInformationViewModel @Inject constructor(
 
     fun clearImage(v: View) = identicalImage.postValue(Uri.EMPTY)
 
-
     companion object {
         private const val TAG = "EditBusinessUnitInformationViewModel"
         const val SAVE_BUSINESS_UNIT_INFORMATION_SUCCESSFULLY =
             "SAVE_BUSINESS_UNIT_INFORMATION_SUCCESSFULLY"
         const val SAVE_BUSINESS_UNIT_INFORMATION_FAILED = "SAVE_BUSINESS_UNIT_INFORMATION_FAILED"
+        const val GET_BUSINESS_UNIT_INFORMATION_FAILED = "GET_BUSINESS_UNIT_INFORMATION_FAILED"
     }
 }

@@ -9,12 +9,10 @@ import kr.co.soogong.master.databinding.FragmentEditEmailBinding
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogData
 import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogRecyclerView
-import kr.co.soogong.master.ui.dialog.popup.CustomDialog
-import kr.co.soogong.master.ui.dialog.popup.DialogData
+import kr.co.soogong.master.ui.profile.edit.email.EditEmailViewModel.Companion.GET_EMAIL_FAILED
 import kr.co.soogong.master.ui.profile.edit.email.EditEmailViewModel.Companion.SAVE_EMAIL_FAILED
 import kr.co.soogong.master.ui.profile.edit.email.EditEmailViewModel.Companion.SAVE_EMAIL_SUCCESSFULLY
 import kr.co.soogong.master.util.EventObserver
-import kr.co.soogong.master.util.extension.mutation
 import kr.co.soogong.master.util.extension.toast
 import timber.log.Timber
 
@@ -30,7 +28,7 @@ class EditEmailFragment :
         Timber.tag(TAG).d("onViewCreated: ")
         initLayout()
         registerEventObserve()
-        viewModel.getEmailInfo()
+        viewModel.requestEmail()
     }
 
     override fun initLayout() {
@@ -80,7 +78,7 @@ class EditEmailFragment :
                 SAVE_EMAIL_SUCCESSFULLY -> {
                     activity?.onBackPressed()
                 }
-                SAVE_EMAIL_FAILED -> {
+                SAVE_EMAIL_FAILED, GET_EMAIL_FAILED -> {
                     requireContext().toast(getString(R.string.error_message_of_request_failed))
                 }
             }

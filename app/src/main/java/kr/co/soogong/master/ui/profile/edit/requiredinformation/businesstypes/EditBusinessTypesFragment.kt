@@ -11,6 +11,7 @@ import kr.co.soogong.master.R
 import kr.co.soogong.master.data.category.BusinessType
 import kr.co.soogong.master.databinding.FragmentEditBusinessTypesBinding
 import kr.co.soogong.master.ui.base.BaseFragment
+import kr.co.soogong.master.ui.profile.edit.requiredinformation.businesstypes.EditBusinessTypesViewModel.Companion.GET_BUSINESS_TYPES_FAILED
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.businesstypes.EditBusinessTypesViewModel.Companion.SAVE_BUSINESS_TYPES_FAILED
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.businesstypes.EditBusinessTypesViewModel.Companion.SAVE_BUSINESS_TYPES_SUCCESSFULLY
 import kr.co.soogong.master.ui.utils.BusinessTypeChipGroupHelper
@@ -48,7 +49,7 @@ class EditBusinessTypesFragment : BaseFragment<FragmentEditBusinessTypesBinding>
         Timber.tag(TAG).d("onViewCreated: ")
         initLayout()
         registerEventObserve()
-        viewModel.loadBusinessTypes()
+        viewModel.requestBusinessTypes()
         BusinessTypeChipGroupHelper.addBusinessTypesToContainer(
             layoutInflater = layoutInflater,
             container = binding.businessTypeContainer,
@@ -90,7 +91,7 @@ class EditBusinessTypesFragment : BaseFragment<FragmentEditBusinessTypesBinding>
                 SAVE_BUSINESS_TYPES_SUCCESSFULLY -> {
                     activity?.onBackPressed()
                 }
-                SAVE_BUSINESS_TYPES_FAILED -> {
+                SAVE_BUSINESS_TYPES_FAILED, GET_BUSINESS_TYPES_FAILED -> {
                     requireContext().toast(getString(R.string.error_message_of_request_failed))
                 }
             }

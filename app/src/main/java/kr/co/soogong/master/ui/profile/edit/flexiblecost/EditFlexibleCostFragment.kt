@@ -7,9 +7,14 @@ import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentEditFlexibleCostBinding
 import kr.co.soogong.master.ui.base.BaseFragment
+import kr.co.soogong.master.ui.profile.edit.flexiblecost.EditFlexibleCostViewModel.Companion.GET_FLEXIBLE_COST_FAILED
+import kr.co.soogong.master.ui.profile.edit.flexiblecost.EditFlexibleCostViewModel.Companion.SAVE_FLEXIBLE_COST_FAILED
+import kr.co.soogong.master.ui.profile.edit.flexiblecost.EditFlexibleCostViewModel.Companion.SAVE_FLEXIBLE_COST_SUCCESSFULLY
 import kr.co.soogong.master.ui.profile.edit.flexiblecost.FlexibleCostChipGroupHelper.CRANE_USAGE
 import kr.co.soogong.master.ui.profile.edit.flexiblecost.FlexibleCostChipGroupHelper.PACKAGE_COST
 import kr.co.soogong.master.ui.profile.edit.flexiblecost.FlexibleCostChipGroupHelper.TRAVEL_COST
+import kr.co.soogong.master.util.EventObserver
+import kr.co.soogong.master.util.extension.toast
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -41,7 +46,16 @@ class EditFlexibleCostFragment : BaseFragment<FragmentEditFlexibleCostBinding>(
 
     private fun registerEventObserve() {
         Timber.tag(TAG).d("registerEventObserve: ")
-
+        viewModel.action.observe(viewLifecycleOwner, EventObserver { event ->
+            when(event) {
+                SAVE_FLEXIBLE_COST_SUCCESSFULLY -> {
+                    activity?.onBackPressed()
+                }
+                SAVE_FLEXIBLE_COST_FAILED, GET_FLEXIBLE_COST_FAILED -> {
+                    requireContext().toast(getString(R.string.error_message_of_request_failed))
+                }
+            }
+        })
     }
 
     private fun initChips() {
@@ -50,12 +64,11 @@ class EditFlexibleCostFragment : BaseFragment<FragmentEditFlexibleCostBinding>(
             FlexibleCostChipGroupHelper(layoutInflater, craneUsageChipGroup, CRANE_USAGE)
             FlexibleCostChipGroupHelper(layoutInflater, packageCostChipGroup, PACKAGE_COST)
         }
-        viewModel.getFlexibleCosts()
+        viewModel.requestFlexibleCosts()
     }
 
     companion object {
         private const val TAG = "EditFlexibleCostFragment"
-        private const val PAGE_NAME = "PAGE_NAME"
 
         fun newInstance() = EditFlexibleCostFragment()
     }

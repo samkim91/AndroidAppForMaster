@@ -7,9 +7,14 @@ import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentEditPriceByProjectBinding
 import kr.co.soogong.master.ui.base.BaseFragment
+import kr.co.soogong.master.ui.profile.edit.withcard.pricebyproject.EditPriceByProjectViewModel.Companion.GET_PRICE_BY_PROJECT_FAILED
+import kr.co.soogong.master.ui.profile.edit.withcard.pricebyproject.EditPriceByProjectViewModel.Companion.SAVE_PRICE_BY_PROJECT_FAILED
+import kr.co.soogong.master.ui.profile.edit.withcard.pricebyproject.EditPriceByProjectViewModel.Companion.SAVE_PRICE_BY_PROJECT_SUCCESSFULLY
 import kr.co.soogong.master.uiinterface.profile.EditProfileContainerFragmentHelper.ADD_PORTFOLIO
 import kr.co.soogong.master.uiinterface.profile.EditProfileContainerFragmentHelper.ADD_PRICE_BY_PROJECTS
 import kr.co.soogong.master.uiinterface.profile.EditProfileContainerFragmentHelper.EDIT_PRICE_BY_PROJECTS
+import kr.co.soogong.master.util.EventObserver
+import kr.co.soogong.master.util.extension.toast
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -36,7 +41,7 @@ class EditPriceByProjectFragment : BaseFragment<FragmentEditPriceByProjectBindin
         Timber.tag(TAG).d("initLayout: ")
 
         bind {
-            vm =  viewModel
+            vm = viewModel
             lifecycleOwner = viewLifecycleOwner
 
             when (pageName) {
@@ -63,7 +68,12 @@ class EditPriceByProjectFragment : BaseFragment<FragmentEditPriceByProjectBindin
 
     private fun registerEventObserve() {
         Timber.tag(TAG).d("registerEventObserve: ")
-
+        viewModel.action.observe(viewLifecycleOwner, EventObserver { event ->
+            when (event) {
+                SAVE_PRICE_BY_PROJECT_SUCCESSFULLY -> activity?.onBackPressed()
+                SAVE_PRICE_BY_PROJECT_FAILED, GET_PRICE_BY_PROJECT_FAILED -> requireContext().toast(getString(R.string.error_message_of_request_failed))
+            }
+        })
     }
 
     companion object {

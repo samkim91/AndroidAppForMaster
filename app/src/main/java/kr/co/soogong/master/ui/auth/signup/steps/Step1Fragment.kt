@@ -31,7 +31,7 @@ class Step1Fragment : BaseFragment<FragmentSignUpStep1Binding>(
             lifecycleOwner = viewLifecycleOwner
 
             defaultButton.setOnClickListener {
-                viewModel.phoneNumber.observe(viewLifecycleOwner, {
+                viewModel.tel.observe(viewLifecycleOwner, {
                     phoneNumber.alertVisible = it.isNullOrEmpty() || it.length < 10
                 })
 

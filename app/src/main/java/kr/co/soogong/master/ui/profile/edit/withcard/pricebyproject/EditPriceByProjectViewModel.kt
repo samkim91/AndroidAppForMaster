@@ -1,14 +1,11 @@
 package kr.co.soogong.master.ui.profile.edit.withcard.pricebyproject
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import kotlinx.coroutines.launch
 import kr.co.soogong.master.data.profile.PriceByProject
-import kr.co.soogong.master.domain.usecase.*
 import kr.co.soogong.master.domain.usecase.profile.GetPriceByProjectUseCase
 import kr.co.soogong.master.domain.usecase.profile.SavePriceByProjectUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
@@ -26,13 +23,17 @@ class EditPriceByProjectViewModel @Inject constructor(
 
     fun getPriceByProject(priceByProjectId: Int) {
         Timber.tag(TAG).d("getPriceByProject $priceByProjectId")
-        viewModelScope.launch {
-            getPriceByProjectUseCase(priceByProjectId).let { priceByProject ->
-                title.postValue(priceByProject.title)
-                price.postValue(priceByProject.projectPrice)
-                description.postValue(priceByProject.description)
-            }
-        }
+        getPriceByProjectUseCase(priceByProjectId)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeBy(
+                onSuccess = { priceByProject ->
+                    title.postValue(priceByProject.title)
+                    price.postValue(priceByProject.projectPrice)
+                    description.postValue(priceByProject.description)
+                },
+                onError = { setAction(GET_PRICE_BY_PROJECT_FAILED) }
+            ).addToDisposable()
     }
 
     fun savePriceByProject(priceByProjectId: Int) {
@@ -47,14 +48,17 @@ class EditPriceByProjectViewModel @Inject constructor(
         ).subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
-                onSuccess = {},
-                onError = {}
+                onSuccess = { setAction(SAVE_PRICE_BY_PROJECT_SUCCESSFULLY) },
+                onError = { setAction(SAVE_PRICE_BY_PROJECT_FAILED) }
             ).addToDisposable()
     }
 
     companion object {
         private const val TAG = "EditPortfolioViewModel"
 
+        const val SAVE_PRICE_BY_PROJECT_SUCCESSFULLY = "SAVE_PRICE_BY_PROJECT_SUCCESSFULLY"
+        const val SAVE_PRICE_BY_PROJECT_FAILED = "SAVE_PRICE_BY_PROJECT_FAILED"
+        const val GET_PRICE_BY_PROJECT_FAILED = "GET_PRICE_BY_PROJECT_FAILED"
 
     }
 }

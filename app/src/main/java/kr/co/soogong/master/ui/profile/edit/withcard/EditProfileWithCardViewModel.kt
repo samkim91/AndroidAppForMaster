@@ -1,13 +1,14 @@
 package kr.co.soogong.master.ui.profile.edit.withcard
 
-import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import kotlinx.coroutines.launch
 import kr.co.soogong.master.data.profile.IEditProfileWithCard
-import kr.co.soogong.master.domain.usecase.profile.*
+import kr.co.soogong.master.domain.usecase.profile.DeletePortfolioUseCase
+import kr.co.soogong.master.domain.usecase.profile.DeletePriceByProjectUseCase
+import kr.co.soogong.master.domain.usecase.profile.GetPortfolioListUseCase
+import kr.co.soogong.master.domain.usecase.profile.GetPriceByProjectListUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import kr.co.soogong.master.ui.utils.ListLiveData
 import timber.log.Timber
@@ -22,18 +23,26 @@ class EditProfileWithCardViewModel @Inject constructor(
 ) : BaseViewModel() {
     val itemList = ListLiveData<IEditProfileWithCard>()
 
-    fun getPortfolioList() {
-        Timber.tag(TAG).d("getPortfolioList: ")
-        viewModelScope.launch {
-            itemList.addAll(getPortfolioListUseCase())
-        }
+    fun requestPortfolioList() {
+        Timber.tag(TAG).d("requestPortfolioList: ")
+        getPortfolioListUseCase()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeBy(
+                onSuccess = { itemList.addAll(it) },
+                onError = { setAction(GET_ITEMS_FAILED) }
+            ).addToDisposable()
     }
 
-    fun getPriceByProjectList() {
-        Timber.tag(TAG).d("getPriceByProjectList: ")
-        viewModelScope.launch {
-            itemList.addAll(getPriceByProjectListUseCase())
-        }
+    fun requestPriceByProjectList() {
+        Timber.tag(TAG).d("requestPriceByProjectList: ")
+        getPriceByProjectListUseCase()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeBy(
+                onSuccess = { itemList.addAll(it) },
+                onError = { setAction(GET_ITEMS_FAILED) }
+            ).addToDisposable()
     }
 
     fun deletePortfolio(itemId: Int) {
@@ -42,12 +51,8 @@ class EditProfileWithCardViewModel @Inject constructor(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
-                onSuccess = {
-                    itemList.removeAt(itemId)
-                },
-                onError = {
-
-                }
+                onSuccess = { itemList.removeAt(itemId) },
+                onError = { setAction(DELETE_ITEM_FAILED) }
             ).addToDisposable()
     }
 
@@ -57,16 +62,15 @@ class EditProfileWithCardViewModel @Inject constructor(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
-                onSuccess = {
-                    itemList.removeAt(itemId)
-                },
-                onError = {
-
-                }
+                onSuccess = { itemList.removeAt(itemId) },
+                onError = { setAction(DELETE_ITEM_FAILED) }
             ).addToDisposable()
     }
 
     companion object {
         private const val TAG = "ProfileViewModel"
+
+        const val GET_ITEMS_FAILED = "GET_ITEMS_FAILED"
+        const val DELETE_ITEM_FAILED = "DELETE_ITEM_FAILED"
     }
 }

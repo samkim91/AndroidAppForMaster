@@ -9,6 +9,11 @@ import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentEditOtherFlexibleOptionsBinding
 import kr.co.soogong.master.ui.base.BaseFragment
+import kr.co.soogong.master.ui.profile.edit.otherflexibleoptions.EditOtherFlexibleOptionsViewModel.Companion.GET_OTHER_FLEXIBLE_OPTIONS_FAILED
+import kr.co.soogong.master.ui.profile.edit.otherflexibleoptions.EditOtherFlexibleOptionsViewModel.Companion.SAVE_OTHER_FLEXIBLE_OPTIONS_FAILED
+import kr.co.soogong.master.ui.profile.edit.otherflexibleoptions.EditOtherFlexibleOptionsViewModel.Companion.SAVE_OTHER_FLEXIBLE_OPTIONS_SUCCESSFULLY
+import kr.co.soogong.master.util.EventObserver
+import kr.co.soogong.master.util.extension.toast
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -41,11 +46,22 @@ class EditOtherFlexibleOptionsFragment : BaseFragment<FragmentEditOtherFlexibleO
     private fun registerEventObserve() {
         Timber.tag(TAG).d("registerEventObserve: ")
 
+        viewModel.action.observe(viewLifecycleOwner, EventObserver { event ->
+            when (event) {
+                SAVE_OTHER_FLEXIBLE_OPTIONS_SUCCESSFULLY -> {
+                    activity?.onBackPressed()
+                }
+                SAVE_OTHER_FLEXIBLE_OPTIONS_FAILED, GET_OTHER_FLEXIBLE_OPTIONS_FAILED -> {
+                    requireContext().toast(getString(R.string.error_message_of_request_failed))
+                }
+            }
+        })
+
     }
 
     private fun initChips() {
         OtherFlexibleOptionsChipGroupHelper(layoutInflater, binding.otherOptionsChipGroup)
-        viewModel.getOtherFlexibleOpt()
+        viewModel.requestOtherFlexibleOptions()
         // 가져온 text들을 chip group에서 찾아서 selected 표시를 해준다.
         if (viewModel.otherFlexibleOptions.getItemCount() > 0) {
             viewModel.otherFlexibleOptions.value?.map { item ->
@@ -67,7 +83,7 @@ class EditOtherFlexibleOptionsFragment : BaseFragment<FragmentEditOtherFlexibleO
                 viewModel.otherFlexibleOptions.add(it.toString())
             }
         }
-        viewModel.saveOtherFlexibleOpt()
+        viewModel.saveOtherFlexibleOptions()
     }
 
     companion object {

@@ -1,17 +1,12 @@
 package kr.co.soogong.master.ui.profile.edit.requiredinformation.briefintroduction
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import kotlinx.coroutines.launch
-import kr.co.soogong.master.data.profile.OtherFlexibleOptions
 import kr.co.soogong.master.domain.usecase.profile.GetBriefIntroductionUseCase
-import kr.co.soogong.master.domain.usecase.profile.GetOtherFlexibleOptionsUseCase
 import kr.co.soogong.master.domain.usecase.profile.SaveBriefIntroductionUseCase
-import kr.co.soogong.master.domain.usecase.profile.SaveOtherFlexibleOptionsUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import timber.log.Timber
 import javax.inject.Inject
@@ -25,9 +20,18 @@ class EditBriefIntroductionViewModel @Inject constructor(
 
     fun getBriefIntro() {
         Timber.tag(TAG).d("getBriefIntro: ")
-        viewModelScope.launch {
-            briefIntroduction.value = getBriefIntroductionUseCase()
-        }
+
+        getBriefIntroductionUseCase()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeBy(
+                onSuccess = { response ->
+                    briefIntroduction.value = response
+                },
+                onError = {
+                    setAction(GET_BRIEF_INTRODUCTION_FAILED)
+                }
+            ).addToDisposable()
     }
 
     fun saveBriefIntro() {
@@ -48,6 +52,7 @@ class EditBriefIntroductionViewModel @Inject constructor(
         private const val TAG = "EditBriefIntroductionViewModel"
         const val SAVE_BRIEF_INTRODUCTION_SUCCESSFULLY = "SAVE_BRIEF_INTRODUCTION_SUCCESSFULLY"
         const val SAVE_BRIEF_INTRODUCTION_FAILED = "SAVE_BRIEF_INTRODUCTION_FAILED"
+        const val GET_BRIEF_INTRODUCTION_FAILED = "GET_BRIEF_INTRODUCTION_FAILED"
 
     }
 }
