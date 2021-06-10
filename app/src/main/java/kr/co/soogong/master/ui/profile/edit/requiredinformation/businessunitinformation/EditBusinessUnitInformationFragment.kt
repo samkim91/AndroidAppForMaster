@@ -15,9 +15,9 @@ import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.businessunitinformation.EditBusinessUnitInformationViewModel.Companion.GET_BUSINESS_UNIT_INFORMATION_FAILED
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.businessunitinformation.EditBusinessUnitInformationViewModel.Companion.SAVE_BUSINESS_UNIT_INFORMATION_FAILED
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.businessunitinformation.EditBusinessUnitInformationViewModel.Companion.SAVE_BUSINESS_UNIT_INFORMATION_SUCCESSFULLY
-import kr.co.soogong.master.ui.utils.PermissionHelper
-import kr.co.soogong.master.util.EventObserver
-import kr.co.soogong.master.util.extension.toast
+import kr.co.soogong.master.utility.PermissionHelper
+import kr.co.soogong.master.utility.EventObserver
+import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
 
 @AndroidEntryPoint

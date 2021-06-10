@@ -22,8 +22,8 @@ import kr.co.soogong.master.ui.auth.signup.SignUpViewModel.Companion.SIGN_IN_PHO
 import kr.co.soogong.master.ui.auth.signup.SignUpViewModel.Companion.SIGN_IN_PHONE_AUTH_CREDENTIAL_SUCCESSFULLY
 import kr.co.soogong.master.ui.auth.signup.TimerTerm
 import kr.co.soogong.master.ui.base.BaseFragment
-import kr.co.soogong.master.util.EventObserver
-import kr.co.soogong.master.util.extension.toast
+import kr.co.soogong.master.utility.EventObserver
+import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
 
 @AndroidEntryPoint

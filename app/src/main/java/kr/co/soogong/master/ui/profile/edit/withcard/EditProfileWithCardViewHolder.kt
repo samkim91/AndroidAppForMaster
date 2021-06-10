@@ -2,8 +2,8 @@ package kr.co.soogong.master.ui.profile.edit.withcard.portfolio
 
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
-import kr.co.soogong.master.data.profile.Portfolio
-import kr.co.soogong.master.data.profile.PriceByProject
+import kr.co.soogong.master.data.model.profile.Portfolio
+import kr.co.soogong.master.data.model.profile.PriceByProject
 import kr.co.soogong.master.databinding.ViewHolderPortfolioBinding
 import kr.co.soogong.master.databinding.ViewHolderPriceByProjectsBinding
 

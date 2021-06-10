@@ -8,7 +8,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import kr.co.soogong.master.data.profile.Portfolio
+import kr.co.soogong.master.data.model.profile.Portfolio
 import kr.co.soogong.master.domain.usecase.profile.GetPortfolioUseCase
 import kr.co.soogong.master.domain.usecase.profile.SavePortfolioUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel

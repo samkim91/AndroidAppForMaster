@@ -12,8 +12,8 @@ import kr.co.soogong.master.databinding.FragmentSignUpStep6Binding
 import kr.co.soogong.master.ui.auth.signup.SignUpActivity
 import kr.co.soogong.master.ui.auth.signup.SignUpViewModel
 import kr.co.soogong.master.ui.base.BaseFragment
-import kr.co.soogong.master.ui.utils.LocationHelper
-import kr.co.soogong.master.uiinterface.auth.signup.AddressActivityHelper
+import kr.co.soogong.master.utility.LocationHelper
+import kr.co.soogong.master.uihelper.auth.signup.AddressActivityHelper
 import timber.log.Timber
 
 @AndroidEntryPoint

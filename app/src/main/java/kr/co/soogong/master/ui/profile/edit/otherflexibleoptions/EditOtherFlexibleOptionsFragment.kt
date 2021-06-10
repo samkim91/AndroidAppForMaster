@@ -12,8 +12,8 @@ import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.profile.edit.otherflexibleoptions.EditOtherFlexibleOptionsViewModel.Companion.GET_OTHER_FLEXIBLE_OPTIONS_FAILED
 import kr.co.soogong.master.ui.profile.edit.otherflexibleoptions.EditOtherFlexibleOptionsViewModel.Companion.SAVE_OTHER_FLEXIBLE_OPTIONS_FAILED
 import kr.co.soogong.master.ui.profile.edit.otherflexibleoptions.EditOtherFlexibleOptionsViewModel.Companion.SAVE_OTHER_FLEXIBLE_OPTIONS_SUCCESSFULLY
-import kr.co.soogong.master.util.EventObserver
-import kr.co.soogong.master.util.extension.toast
+import kr.co.soogong.master.utility.EventObserver
+import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
 
 @AndroidEntryPoint

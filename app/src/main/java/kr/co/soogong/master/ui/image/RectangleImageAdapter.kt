@@ -3,8 +3,8 @@ package kr.co.soogong.master.ui.image
 import android.view.ViewGroup
 import androidx.core.view.setMargins
 import androidx.recyclerview.widget.RecyclerView
-import kr.co.soogong.master.data.estimation.ImagePath
-import kr.co.soogong.master.util.extension.dp
+import kr.co.soogong.master.data.model.requirement.ImagePath
+import kr.co.soogong.master.utility.extension.dp
 
 class RectangleImageAdapter(
     private val cardClickListener: ((Int) -> Unit),

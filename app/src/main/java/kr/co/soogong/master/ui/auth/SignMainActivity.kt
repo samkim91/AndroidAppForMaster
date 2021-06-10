@@ -6,9 +6,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ActivitySignMainBinding
 import kr.co.soogong.master.ui.base.BaseActivity
-import kr.co.soogong.master.uiinterface.auth.signin.SignInActivityHelper
-import kr.co.soogong.master.uiinterface.auth.signup.SignUpActivityHelper
-import kr.co.soogong.master.util.EventObserver
+import kr.co.soogong.master.uihelper.auth.signin.SignInActivityHelper
+import kr.co.soogong.master.uihelper.auth.signup.SignUpActivityHelper
+import kr.co.soogong.master.utility.EventObserver
 import timber.log.Timber
 
 @AndroidEntryPoint

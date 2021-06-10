@@ -13,10 +13,10 @@ import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.address.EditAddressViewModel.Companion.GET_COMPANY_ADDRESS_FAILED
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.address.EditAddressViewModel.Companion.SAVE_COMPANY_ADDRESS_FAILED
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.address.EditAddressViewModel.Companion.SAVE_COMPANY_ADDRESS_SUCCESSFULLY
-import kr.co.soogong.master.ui.utils.LocationHelper
-import kr.co.soogong.master.uiinterface.auth.signup.AddressActivityHelper
-import kr.co.soogong.master.util.EventObserver
-import kr.co.soogong.master.util.extension.toast
+import kr.co.soogong.master.utility.LocationHelper
+import kr.co.soogong.master.uihelper.auth.signup.AddressActivityHelper
+import kr.co.soogong.master.utility.EventObserver
+import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
 
 @AndroidEntryPoint

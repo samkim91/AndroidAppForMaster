@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="kr.co.soogong.master.data.profile.FlexibleCost" />
+        <import type="kr.co.soogong.master.data.model.profile.FlexibleCost" />
 
         <variable
             name="vm"
@@ -40,7 +40,7 @@
                 android:layout_marginEnd="4dp"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="@{vm.profile.ownerName}"
+                android:text='@{vm.profile.ownerName.length() != 0 ? vm.profile.ownerName : "프로필에서 대표이름을 입력해주세요."}'
                 android:textColor="@color/text_basic_color"
                 app:layout_constrainedWidth="true"
                 app:layout_constraintEnd_toStartOf="@id/user_name_end"
@@ -55,7 +55,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="20dp"
-                android:text="@{vm.profile.basicInformation.subscriptionPlan}"
+                android:text='@{vm.profile.basicInformation.subscriptionPlan.length() != 0 ? vm.profile.basicInformation.subscriptionPlan : "마스터"}'
                 app:layout_constraintBottom_toBottomOf="@id/user_name"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/user_name"

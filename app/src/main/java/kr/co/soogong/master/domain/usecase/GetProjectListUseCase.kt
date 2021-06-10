@@ -2,9 +2,9 @@ package kr.co.soogong.master.domain.usecase
 
 import dagger.Reusable
 import io.reactivex.Single
-import kr.co.soogong.master.data.category.Category
-import kr.co.soogong.master.data.category.Project
-import kr.co.soogong.master.network.CategoryService
+import kr.co.soogong.master.data.model.major.Category
+import kr.co.soogong.master.data.model.major.Project
+import kr.co.soogong.master.network.major.CategoryService
 import javax.inject.Inject
 
 @Reusable

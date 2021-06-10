@@ -2,8 +2,6 @@ package kr.co.soogong.master.ui.auth.signup
 
 import android.os.Bundle
 import androidx.activity.viewModels
-import com.google.firebase.FirebaseException
-import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.*
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -13,11 +11,9 @@ import kr.co.soogong.master.databinding.ActivitySignUpBinding
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.ui.dialog.popup.CustomDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData
-import kr.co.soogong.master.ui.utils.SignUpProgressHelper
-import kr.co.soogong.master.util.extension.toast
+import kr.co.soogong.master.utility.SignUpProgressHelper
 import timber.log.Timber
 import java.util.*
-import java.util.concurrent.TimeUnit
 
 @AndroidEntryPoint
 class SignUpActivity : BaseActivity<ActivitySignUpBinding>(

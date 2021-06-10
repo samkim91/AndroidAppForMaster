@@ -2,10 +2,10 @@ package kr.co.soogong.master.ui.profile.review
 
 import android.content.Context
 import androidx.recyclerview.widget.RecyclerView
-import kr.co.soogong.master.data.profile.Review
+import kr.co.soogong.master.data.model.profile.Review
 import kr.co.soogong.master.databinding.ViewHolderReviewItemBinding
 import kr.co.soogong.master.ui.image.RectangleImageAdapter
-import kr.co.soogong.master.uiinterface.image.ImageViewActivityHelper
+import kr.co.soogong.master.uihelper.image.ImageViewActivityHelper
 
 class ReviewViewHolder(
     val binding: ViewHolderReviewItemBinding,

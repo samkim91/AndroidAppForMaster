@@ -2,9 +2,9 @@ package kr.co.soogong.master.ui.profile.edit.withcard
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
-import kr.co.soogong.master.data.profile.IEditProfileWithCard
-import kr.co.soogong.master.data.profile.Portfolio
-import kr.co.soogong.master.data.profile.PriceByProject
+import kr.co.soogong.master.data.model.profile.IEditProfileWithCard
+import kr.co.soogong.master.data.model.profile.Portfolio
+import kr.co.soogong.master.data.model.profile.PriceByProject
 import kr.co.soogong.master.ui.profile.edit.withcard.portfolio.EditProfileWithCardViewHolder
 import kr.co.soogong.master.ui.profile.edit.withcard.portfolio.PortfolioViewHolder
 import kr.co.soogong.master.ui.profile.edit.withcard.EditProfileWithCardViewHolderHelper.PORTFOLIO_VIEW_TYPE

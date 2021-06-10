@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.BuildConfig
 import kr.co.soogong.master.R
@@ -16,9 +15,9 @@ import kr.co.soogong.master.ui.auth.signup.SignUpViewModel.Companion.SIGN_UP_FAI
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.dialog.popup.CustomDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData
-import kr.co.soogong.master.uiinterface.main.MainActivityHelper
-import kr.co.soogong.master.util.EventObserver
-import kr.co.soogong.master.util.extension.toast
+import kr.co.soogong.master.uihelper.main.MainActivityHelper
+import kr.co.soogong.master.utility.EventObserver
+import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
 
 @AndroidEntryPoint

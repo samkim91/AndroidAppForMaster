@@ -8,9 +8,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ActivitySignInBinding
 import kr.co.soogong.master.ui.base.BaseActivity
-import kr.co.soogong.master.uiinterface.auth.password.FindPasswordActivityHelper
-import kr.co.soogong.master.uiinterface.main.MainActivityHelper
-import kr.co.soogong.master.util.EventObserver
+import kr.co.soogong.master.uihelper.auth.password.FindPasswordActivityHelper
+import kr.co.soogong.master.uihelper.main.MainActivityHelper
+import kr.co.soogong.master.utility.EventObserver
 import timber.log.Timber
 
 @AndroidEntryPoint

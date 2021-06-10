@@ -1,10 +1,10 @@
 package kr.co.soogong.master.domain.usecase.requirement
 
 import dagger.Reusable
-import kr.co.soogong.master.domain.estimation.EstimationDao
-import kr.co.soogong.master.domain.requirements.RequirementCard
+import kr.co.soogong.master.data.dao.estimation.EstimationDao
+import kr.co.soogong.master.data.model.requirement.RequirementCard
 import kr.co.soogong.master.domain.usecase.auth.GetMasterIdFromSharedUseCase
-import kr.co.soogong.master.network.EstimationsService
+import kr.co.soogong.master.network.requirement.EstimationsService
 import javax.inject.Inject
 
 @Reusable

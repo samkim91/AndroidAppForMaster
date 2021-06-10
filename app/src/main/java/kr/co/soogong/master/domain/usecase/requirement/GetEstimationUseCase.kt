@@ -2,8 +2,8 @@ package kr.co.soogong.master.domain.usecase.requirement
 
 import androidx.lifecycle.LiveData
 import dagger.Reusable
-import kr.co.soogong.master.data.estimation.Estimation
-import kr.co.soogong.master.domain.estimation.EstimationDao
+import kr.co.soogong.master.data.model.requirement.Estimation
+import kr.co.soogong.master.data.dao.estimation.EstimationDao
 import javax.inject.Inject
 
 @Reusable

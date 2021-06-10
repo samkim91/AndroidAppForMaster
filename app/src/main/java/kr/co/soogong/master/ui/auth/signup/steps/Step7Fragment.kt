@@ -6,14 +6,14 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.profile.Coordinate
+import kr.co.soogong.master.data.model.profile.Coordinate
 import kr.co.soogong.master.databinding.FragmentSignUpStep7Binding
 import kr.co.soogong.master.ui.auth.signup.SignUpActivity
 import kr.co.soogong.master.ui.auth.signup.SignUpViewModel
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogData
 import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogRecyclerView
-import kr.co.soogong.master.ui.utils.NaverMapHelper
+import kr.co.soogong.master.utility.NaverMapHelper
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -27,7 +27,10 @@ class Step7Fragment : BaseFragment<FragmentSignUpStep7Binding>(
             context = requireContext(),
             fragmentManager = childFragmentManager,
             frameLayout = binding.mapView,
-            coordinate = Coordinate(viewModel.latitude.value ?: 0.0, viewModel.longitude.value ?: 0.0),
+            coordinate = Coordinate(
+                viewModel.latitude.value ?: 0.0,
+                viewModel.longitude.value ?: 0.0
+            ),
             radius = 0
         )
     }

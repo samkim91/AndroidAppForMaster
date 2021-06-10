@@ -8,16 +8,16 @@ import androidx.activity.result.contract.ActivityResultContracts.StartActivityFo
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.category.BusinessType
+import kr.co.soogong.master.data.model.major.BusinessType
 import kr.co.soogong.master.databinding.FragmentEditBusinessTypesBinding
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.businesstypes.EditBusinessTypesViewModel.Companion.GET_BUSINESS_TYPES_FAILED
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.businesstypes.EditBusinessTypesViewModel.Companion.SAVE_BUSINESS_TYPES_FAILED
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.businesstypes.EditBusinessTypesViewModel.Companion.SAVE_BUSINESS_TYPES_SUCCESSFULLY
-import kr.co.soogong.master.ui.utils.BusinessTypeChipGroupHelper
-import kr.co.soogong.master.uiinterface.category.CategoryActivityHelper
-import kr.co.soogong.master.util.EventObserver
-import kr.co.soogong.master.util.extension.toast
+import kr.co.soogong.master.utility.BusinessTypeChipGroupHelper
+import kr.co.soogong.master.uihelper.major.MajorActivityHelper
+import kr.co.soogong.master.utility.EventObserver
+import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -32,7 +32,7 @@ class EditBusinessTypesFragment : BaseFragment<FragmentEditBusinessTypesBinding>
             if (result.resultCode == Activity.RESULT_OK) {
                 val data: Intent? = result.data
                 val selectedBusinessType: BusinessType by lazy {
-                    data?.getParcelableExtra(CategoryActivityHelper.BUNDLE_BUSINESS_TYPE)
+                    data?.getParcelableExtra(MajorActivityHelper.BUNDLE_BUSINESS_TYPE)
                         ?: BusinessType(null, null)
                 }
                 BusinessTypeChipGroupHelper.makeEntryChipGroupWithSubtitleForBusinessTypes(
@@ -67,7 +67,7 @@ class EditBusinessTypesFragment : BaseFragment<FragmentEditBusinessTypesBinding>
             businessType.setButtonClickListener {
                 getBusinessTypeLauncher.launch(
                     Intent(
-                        CategoryActivityHelper.getIntent(
+                        MajorActivityHelper.getIntent(
                             requireContext()
                         )
                     )

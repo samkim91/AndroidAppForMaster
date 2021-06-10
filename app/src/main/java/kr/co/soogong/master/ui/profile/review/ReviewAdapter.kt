@@ -4,9 +4,8 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
-import kr.co.soogong.master.data.profile.Review
+import kr.co.soogong.master.data.model.profile.Review
 import kr.co.soogong.master.databinding.ViewHolderReviewItemBinding
-import javax.inject.Inject
 
 class ReviewAdapter (
     private val context: Context,

@@ -8,7 +8,7 @@
 
         <variable
             name="vm"
-            type="kr.co.soogong.master.ui.requirements.progress.ProgressViewModel" />
+            type="kr.co.soogong.master.ui.requirement.progress.ProgressViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -5,8 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.domain.usecase.auth.GetMasterIdFromFirebaseUseCase
 import kr.co.soogong.master.domain.usecase.auth.SaveMasterIdInSharedUseCase
-import kr.co.soogong.master.uiinterface.auth.SignMainActivityHelper
-import kr.co.soogong.master.uiinterface.main.MainActivityHelper
+import kr.co.soogong.master.uihelper.auth.SignMainActivityHelper
+import kr.co.soogong.master.uihelper.main.MainActivityHelper
 import timber.log.Timber
 import javax.inject.Inject
 

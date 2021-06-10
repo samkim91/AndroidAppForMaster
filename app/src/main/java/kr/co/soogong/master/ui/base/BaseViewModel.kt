@@ -8,7 +8,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
-import kr.co.soogong.master.util.Event
+import kr.co.soogong.master.utility.Event
 
 abstract class BaseViewModel : ViewModel(), LifecycleObserver {
 

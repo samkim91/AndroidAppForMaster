@@ -1,6 +1,5 @@
 package kr.co.soogong.master.ui.auth.password.find
 
-import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.View
@@ -13,10 +12,10 @@ import kr.co.soogong.master.ui.auth.password.find.FindPasswordViewModel.Companio
 import kr.co.soogong.master.ui.auth.password.find.FindPasswordViewModel.Companion.CERTIFICATION_CODE_CONFIRMED_SUCCESSFULLY
 import kr.co.soogong.master.ui.auth.password.find.FindPasswordViewModel.Companion.CERTIFICATION_CODE_REQUESTED_FAILED
 import kr.co.soogong.master.ui.base.BaseActivity
-import kr.co.soogong.master.uiinterface.auth.password.ChangePasswordActivityHelper
-import kr.co.soogong.master.uiinterface.auth.password.ChangePasswordActivityHelper.FROM_SIGN_IN
-import kr.co.soogong.master.util.EventObserver
-import kr.co.soogong.master.util.extension.toast
+import kr.co.soogong.master.uihelper.auth.password.ChangePasswordActivityHelper
+import kr.co.soogong.master.uihelper.auth.password.ChangePasswordActivityHelper.FROM_SIGN_IN
+import kr.co.soogong.master.utility.EventObserver
+import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
 
 @AndroidEntryPoint

@@ -8,11 +8,11 @@ import androidx.core.content.ContextCompat
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.estimation.ImagePath
+import kr.co.soogong.master.data.model.requirement.ImagePath
 import kr.co.soogong.master.databinding.ActivityImageBinding
 import kr.co.soogong.master.ui.base.BaseActivity
-import kr.co.soogong.master.uiinterface.image.ImageViewActivityHelper
-import kr.co.soogong.master.util.extension.dp
+import kr.co.soogong.master.uihelper.image.ImageViewActivityHelper
+import kr.co.soogong.master.utility.extension.dp
 import timber.log.Timber
 
 @AndroidEntryPoint

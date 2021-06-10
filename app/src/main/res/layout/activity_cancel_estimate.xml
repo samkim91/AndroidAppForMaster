@@ -7,7 +7,7 @@
 
         <variable
             name="vm"
-            type="kr.co.soogong.master.ui.requirements.action.cancel.CancelEstimateViewModel" />
+            type="kr.co.soogong.master.ui.requirement.action.cancel.CancelEstimateViewModel" />
     </data>
 
     <LinearLayout

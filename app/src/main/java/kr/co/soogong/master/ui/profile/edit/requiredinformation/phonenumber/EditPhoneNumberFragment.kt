@@ -12,8 +12,8 @@ import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.phonenumber.EditPhoneNumberViewModel.Companion.CERTIFICATION_CODE_CONFIRMED_FAILED
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.phonenumber.EditPhoneNumberViewModel.Companion.SAVE_PHONE_NUMBER_FAILED
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.phonenumber.EditPhoneNumberViewModel.Companion.SAVE_PHONE_NUMBER_SUCCESSFULLY
-import kr.co.soogong.master.util.EventObserver
-import kr.co.soogong.master.util.extension.toast
+import kr.co.soogong.master.utility.EventObserver
+import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
 
 @AndroidEntryPoint

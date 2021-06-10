@@ -12,9 +12,9 @@ import kr.co.soogong.master.ui.image.RectangleImageWithCloseAdapter
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.representativeimages.EditRepresentativeImagesViewModel.Companion.GET_REPRESENTATIVE_IMAGES_FAILED
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.representativeimages.EditRepresentativeImagesViewModel.Companion.SAVE_REPRESENTATIVE_IMAGES_FAILED
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.representativeimages.EditRepresentativeImagesViewModel.Companion.SAVE_REPRESENTATIVE_IMAGES_SUCCESSFULLY
-import kr.co.soogong.master.ui.utils.PermissionHelper
-import kr.co.soogong.master.util.EventObserver
-import kr.co.soogong.master.util.extension.toast
+import kr.co.soogong.master.utility.PermissionHelper
+import kr.co.soogong.master.utility.EventObserver
+import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
 
 @AndroidEntryPoint

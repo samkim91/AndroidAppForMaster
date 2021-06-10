@@ -6,25 +6,12 @@ object HttpContract {
     const val PROD_URL = "https://api2.soogong.co.kr/"
 
     //region Auth
-    const val LOGIN = "login"
-    const val SIGN_IN = "sign-in"
-    const val RESIGN_IN = "resign-in"
-
-    const val FIND = "find"
-    const val SIGN_UP = "signup"
-    const val MASTER_SIGN_UP = "/master/signup"
-//    const val MASTER_SIGN_UP = "api/v1/branches/register"
-    const val PASSWORD = "password"
-    const val FCM_UPDATE = "api/v1/branches/update_reg_id"
-
-    // Todo.. 서버 수정해야함.
-    const val CHECK_ID_EXIST = "find"
+    const val MASTER_SIGN_IN = "auth/master-sign-in"
+    const val GET_ID = "auth/id"
+    const val FCM_UPDATE = "api/v1/branches/update_reg_id"  // TODO: 2021/06/10 무슨 용도인지 알아보고 추가해야함.
     //endregion
 
     //region Category
-//    const val CATEGORY = "api/v1/categories"
-//    const val PROJECT = "api/v1/categories/{id}/projects"
-
     const val CATEGORY_LIST = "category/list"
     const val PROJECT_LIST = "project/find-all-by-categoryId/{categoryId}"
     //endregion
