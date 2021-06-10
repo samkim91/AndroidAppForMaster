@@ -12,6 +12,7 @@ import kr.co.soogong.master.databinding.FragmentRequirementReceivedBinding
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.dialog.popup.CustomDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData
+import kr.co.soogong.master.uihelper.profile.EditRequiredInformationActivityHelper
 import kr.co.soogong.master.uihelper.requirment.RequirementsBadge
 import kr.co.soogong.master.uihelper.requirment.action.ActionViewHelper
 import kr.co.soogong.master.utility.EventObserver
@@ -56,7 +57,11 @@ class ReceivedFragment : BaseFragment<FragmentRequirementReceivedBinding>(
                                 CustomDialog(
                                     DialogData.askingFillProfileDialogData(requireContext()),
                                     yesClick = {
-                                        //Todo.. 필수정보 등록 activity로 이동
+                                        startActivity(
+                                            EditRequiredInformationActivityHelper.getIntent(
+                                                requireContext()
+                                            )
+                                        )
                                     },
                                     noClick = { })
                             dialog.show(parentFragmentManager, dialog.tag)

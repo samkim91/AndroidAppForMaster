@@ -4,17 +4,17 @@ import dagger.Reusable
 import kr.co.soogong.master.data.dao.estimation.EstimationDao
 import kr.co.soogong.master.data.model.requirement.RequirementCard
 import kr.co.soogong.master.domain.usecase.auth.GetMasterIdFromSharedUseCase
-import kr.co.soogong.master.network.requirement.EstimationsService
+import kr.co.soogong.master.network.requirement.RequirementService
 import javax.inject.Inject
 
 @Reusable
 class GetEstimationListUseCase @Inject constructor(
     private val estimationDao: EstimationDao,
-    private val estimationsService: EstimationsService,
+    private val requirementService: RequirementService,
     private val getMasterIdFromSharedUseCase: GetMasterIdFromSharedUseCase
 ) {
     suspend operator fun invoke(): List<RequirementCard> {
-        val list = estimationsService.getEstimationList(getMasterIdFromSharedUseCase())
+        val list = requirementService.getEstimationList(getMasterIdFromSharedUseCase())
 
         estimationDao.insert(list)
 
