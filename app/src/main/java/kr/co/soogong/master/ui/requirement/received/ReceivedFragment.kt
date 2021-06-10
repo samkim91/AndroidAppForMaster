@@ -8,18 +8,19 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
-import kr.co.soogong.master.databinding.FragmentRequirementsReceivedBinding
+import kr.co.soogong.master.databinding.FragmentRequirementReceivedBinding
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.dialog.popup.CustomDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData
+import kr.co.soogong.master.uihelper.profile.EditRequiredInformationActivityHelper
 import kr.co.soogong.master.uihelper.requirment.RequirementsBadge
 import kr.co.soogong.master.uihelper.requirment.action.ActionViewHelper
 import kr.co.soogong.master.utility.EventObserver
 import timber.log.Timber
 
 @AndroidEntryPoint
-class ReceivedFragment : BaseFragment<FragmentRequirementsReceivedBinding>(
-    R.layout.fragment_requirements_received
+class ReceivedFragment : BaseFragment<FragmentRequirementReceivedBinding>(
+    R.layout.fragment_requirement_received
 ) {
     private val viewModel: ReceivedViewModel by viewModels()
 
@@ -56,7 +57,11 @@ class ReceivedFragment : BaseFragment<FragmentRequirementsReceivedBinding>(
                                 CustomDialog(
                                     DialogData.askingFillProfileDialogData(requireContext()),
                                     yesClick = {
-                                        //Todo.. 필수정보 등록 activity로 이동
+                                        startActivity(
+                                            EditRequiredInformationActivityHelper.getIntent(
+                                                requireContext()
+                                            )
+                                        )
                                     },
                                     noClick = { })
                             dialog.show(parentFragmentManager, dialog.tag)

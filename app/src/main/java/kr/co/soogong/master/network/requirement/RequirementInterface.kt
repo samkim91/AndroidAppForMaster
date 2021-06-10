@@ -10,7 +10,7 @@ import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-interface EstimationsInterface {
+interface RequirementInterface {
     @GET(HttpContract.GET_ESTIMATION_V2)
     suspend fun getEstimationList(@Path("branch_keycode") branchKeycode: String?): JsonObject
 

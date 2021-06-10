@@ -27,6 +27,16 @@ allprojects {
     repositories {
         google()
         jcenter()
+//        jcenter() {
+//            content {
+//                includeModule("gun0912.ted", "tedimagepicker")
+//                includeModule("gun0912.ted", "tedpermission")
+//                includeModule("gun0912.ted", "tedimagepicker-rx2")
+//                includeModule("com.getkeepsafe.relinker", "relinker")
+//                includeModule("kr.co.prnd", "readmore-textview")
+//                includeModule("com.linkedin.dexmaker", "dexmaker-mockito")
+//            }
+//        }
         maven { url 'https://devrepo.kakao.com/nexus/content/groups/public/' }
         maven { url 'https://naver.jfrog.io/artifactory/maven/' }
     }

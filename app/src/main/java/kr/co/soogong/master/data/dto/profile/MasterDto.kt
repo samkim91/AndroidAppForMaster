@@ -1,4 +1,4 @@
-package kr.co.soogong.master.data.dto.auth
+package kr.co.soogong.master.data.dto.profile
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName

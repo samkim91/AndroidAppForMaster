@@ -10,10 +10,10 @@ import kr.co.soogong.master.data.dto.Response
 import retrofit2.Retrofit
 import javax.inject.Inject
 
-class EstimationsService @Inject constructor(
+class RequirementService @Inject constructor(
     retrofit: Retrofit
 ) {
-    private val estimationsInterface = retrofit.create(EstimationsInterface::class.java)
+    private val estimationsInterface = retrofit.create(RequirementInterface::class.java)
 
     suspend fun getEstimationList(keycode: String?): List<Estimation> {
         val jsonObject = estimationsInterface.getEstimationList(keycode)
