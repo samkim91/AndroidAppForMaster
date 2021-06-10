@@ -1,6 +1,5 @@
 package kr.co.soogong.master.ui.profile
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
@@ -9,6 +8,7 @@ import gun0912.tedimagepicker.builder.TedImagePicker
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentProfileBinding
 import kr.co.soogong.master.ui.base.BaseFragment
+import kr.co.soogong.master.ui.profile.ProfileViewModel.Companion.GET_PROFILE_FAILED
 import kr.co.soogong.master.ui.utils.PermissionHelper
 import kr.co.soogong.master.uiinterface.profile.EditProfileContainerActivityHelper
 import kr.co.soogong.master.uiinterface.profile.EditProfileContainerFragmentHelper.EDIT_EMAIL
@@ -19,6 +19,7 @@ import kr.co.soogong.master.uiinterface.profile.EditProfileWithCardActivityHelpe
 import kr.co.soogong.master.uiinterface.profile.EditProfileWithCardActivityHelper.PRICE_BY_PROJECTS
 import kr.co.soogong.master.uiinterface.profile.EditRequiredInformationActivityHelper
 import kr.co.soogong.master.uiinterface.profile.MyReviewsActivityHelper
+import kr.co.soogong.master.util.EventObserver
 import kr.co.soogong.master.util.extension.toast
 import timber.log.Timber
 
@@ -33,6 +34,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
         Timber.tag(TAG).d("onViewCreated: ")
 
         initLayout()
+        registerEventObserve()
     }
 
     override fun initLayout() {
@@ -106,6 +108,14 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
                 )
             }
         }
+    }
+
+    private fun registerEventObserve() {
+        viewModel.action.observe(viewLifecycleOwner, EventObserver { event ->
+            when(event){
+                GET_PROFILE_FAILED -> requireContext().toast(getString(R.string.error_message_of_request_failed))
+            }
+        })
     }
 
     override fun onStart() {

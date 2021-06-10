@@ -36,7 +36,8 @@ class SplashActivity : AppCompatActivity() {
         getMasterIdFromFirebaseUseCase()?.let { masterId ->
             Timber.tag(TAG).d("masterId: $masterId")
 
-            saveMasterIdInSharedUseCase(masterId)
+            // TODO: 2021/06/09 개발 끝나고 활성화
+//            saveMasterIdInSharedUseCase(masterId)
             startActivity(MainActivityHelper.getIntent(this))
             return
         }

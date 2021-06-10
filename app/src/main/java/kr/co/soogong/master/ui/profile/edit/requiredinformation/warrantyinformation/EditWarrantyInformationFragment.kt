@@ -9,6 +9,7 @@ import kr.co.soogong.master.databinding.FragmentEditWarrantyInformationBinding
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogData
 import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogRecyclerView
+import kr.co.soogong.master.ui.profile.edit.requiredinformation.warrantyinformation.EditWarrantyInformationViewModel.Companion.GET_WARRANTY_INFORMATION_FAILED
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.warrantyinformation.EditWarrantyInformationViewModel.Companion.SAVE_WARRANTY_INFORMATION_FAILED
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.warrantyinformation.EditWarrantyInformationViewModel.Companion.SAVE_WARRANTY_INFORMATION_SUCCESSFULLY
 import kr.co.soogong.master.util.EventObserver
@@ -26,7 +27,7 @@ class EditWarrantyInformationFragment : BaseFragment<FragmentEditWarrantyInforma
         Timber.tag(TAG).d("onViewCreated: ")
         initLayout()
         registerEventObserve()
-        viewModel.getWarrantyInfo()
+        viewModel.requestWarrantyInformation()
     }
 
     override fun initLayout() {
@@ -67,12 +68,8 @@ class EditWarrantyInformationFragment : BaseFragment<FragmentEditWarrantyInforma
         Timber.tag(TAG).d("registerEventObserve: ")
         viewModel.action.observe(viewLifecycleOwner, EventObserver { event ->
             when (event) {
-                SAVE_WARRANTY_INFORMATION_SUCCESSFULLY -> {
-                    activity?.onBackPressed()
-                }
-                SAVE_WARRANTY_INFORMATION_FAILED -> {
-                    requireContext().toast(getString(R.string.error_message_of_request_failed))
-                }
+                SAVE_WARRANTY_INFORMATION_SUCCESSFULLY -> activity?.onBackPressed()
+                SAVE_WARRANTY_INFORMATION_FAILED, GET_WARRANTY_INFORMATION_FAILED -> requireContext().toast(getString(R.string.error_message_of_request_failed))
             }
         })
     }

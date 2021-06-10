@@ -29,7 +29,7 @@
                 android:layout_marginTop="@dimen/my_page_master_store_name_margin_top"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="@{vm.user.name}"
+                android:text="@{vm.profile.ownerName}"
                 android:textColor="@color/text_basic_color"
                 app:layout_constrainedWidth="true"
                 app:layout_constraintEnd_toStartOf="@id/master_label"

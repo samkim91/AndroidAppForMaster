@@ -7,20 +7,8 @@ import android.view.View
 import android.widget.FrameLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
-import androidx.fragment.app.FragmentManager
-import com.naver.maps.geometry.LatLng
-import com.naver.maps.map.CameraUpdate
-import com.naver.maps.map.MapFragment
-import com.naver.maps.map.NaverMap
-import com.naver.maps.map.OnMapReadyCallback
-import com.naver.maps.map.overlay.CircleOverlay
-import com.naver.maps.map.overlay.Marker
-import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ViewProfileMapCardBinding
 import kr.co.soogong.master.ui.utils.ButtonHelper
-import kr.co.soogong.master.ui.utils.LocationHelper
-import kr.co.soogong.master.ui.utils.ZoomHelper
-import timber.log.Timber
 
 class ProfileMapCard @JvmOverloads constructor(
     context: Context,
@@ -31,7 +19,7 @@ class ProfileMapCard @JvmOverloads constructor(
     private val binding =
         ViewProfileMapCardBinding.inflate(LayoutInflater.from(context), this, true)
 
-    val mapFragment : FrameLayout
+    val mapFragment: FrameLayout
         get() = binding.mapView
 
     var title: String? = ""

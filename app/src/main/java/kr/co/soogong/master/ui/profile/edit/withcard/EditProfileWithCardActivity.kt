@@ -1,6 +1,5 @@
 package kr.co.soogong.master.ui.profile.edit.withcard
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
@@ -39,7 +38,7 @@ class EditProfileWithCardActivity : BaseActivity<ActivityEditProfileWithCardBind
     override fun onStart() {
         super.onStart()
         Timber.tag(TAG).d("onStart: ")
-        if (pageName == PORTFOLIO) viewModel.getPortfolioList() else viewModel.getPriceByProjectList()
+        if (pageName == PORTFOLIO) viewModel.requestPortfolioList() else viewModel.requestPriceByProjectList()
     }
 
     override fun initLayout() {

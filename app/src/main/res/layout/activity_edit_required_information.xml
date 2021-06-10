@@ -239,7 +239,7 @@
 
                 <!-- 대표명 BUSINESS_REPRESENTATIVE_NAME -->
                 <kr.co.soogong.master.ui.widget.ProfileDefaultCard
-                    android:id="@+id/business_representative_name"
+                    android:id="@+id/owner_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/gap_20"
@@ -268,7 +268,7 @@
                     app:defaultButtonByList="@{vm.requiredInformation.businessTypes}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/business_representative_name"
+                    app:layout_constraintTop_toBottomOf="@id/owner_name"
                     app:title='@{"시공 업종"}' />
 
                 <!-- 업체 주소 ADDRESS -->
@@ -282,12 +282,12 @@
                     android:layout_marginBottom="@dimen/gap_24"
                     android:background="@drawable/shape_radius8_white_background"
                     android:elevation="@dimen/gap_4"
-                    app:defaultButtonByString="@{vm.requiredInformation.companyAddress.mainAddress}"
-                    app:firstDetail="@{vm.requiredInformation.companyAddress.mainAddress}"
+                    app:defaultButtonByString="@{vm.requiredInformation.companyAddress.roadAddress}"
+                    app:firstDetail="@{vm.requiredInformation.companyAddress.roadAddress}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/business_types"
-                    app:secondDetail="@{vm.requiredInformation.companyAddress.subAddress}"
+                    app:secondDetail="@{vm.requiredInformation.companyAddress.detailAddress}"
                     app:title='@{"업체 주소"}' />
 
                 <!-- 서비스 가능 범위 SERVICE_AREA -->

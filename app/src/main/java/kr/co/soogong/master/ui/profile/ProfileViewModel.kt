@@ -3,20 +3,18 @@ package kr.co.soogong.master.ui.profile
 import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.rxkotlin.subscribeBy
+import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.profile.Profile
-import kr.co.soogong.master.data.user.User
 import kr.co.soogong.master.domain.usecase.profile.GetProfileUseCase
-import kr.co.soogong.master.domain.usecase.profile.GetUserInfoUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
-    private val getUserInfoUseCase: GetUserInfoUseCase,
     private val getProfileUseCase: GetProfileUseCase,
 ) : BaseViewModel() {
     private val _profile = MutableLiveData<Profile?>()
@@ -25,14 +23,19 @@ class ProfileViewModel @Inject constructor(
 
     val profileImage = MutableLiveData(Uri.EMPTY)
 
-    fun requestProfile(){
+    fun requestProfile() {
         Timber.tag(TAG).d("requestProfile: ")
-        viewModelScope.launch {
-            _profile.value = getProfileUseCase()
-        }
+        getProfileUseCase()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeBy(
+                onSuccess = { _profile.value = it },
+                onError = { setAction(GET_PROFILE_FAILED) }
+            ).addToDisposable()
     }
 
     companion object {
         private const val TAG = "ProfileViewModel"
+        const val GET_PROFILE_FAILED = "GET_PROFILE_FAILED"
     }
 }

@@ -1,19 +1,13 @@
 package kr.co.soogong.master.ui.profile.edit.flexiblecost
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import kotlinx.coroutines.launch
 import kr.co.soogong.master.data.profile.FlexibleCost
-import kr.co.soogong.master.data.profile.PriceByProject
-import kr.co.soogong.master.domain.usecase.*
 import kr.co.soogong.master.domain.usecase.profile.GetFlexibleCostUseCase
-import kr.co.soogong.master.domain.usecase.profile.GetPriceByProjectUseCase
 import kr.co.soogong.master.domain.usecase.profile.SaveFlexibleCostUseCase
-import kr.co.soogong.master.domain.usecase.profile.SavePriceByProjectUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import timber.log.Timber
 import javax.inject.Inject
@@ -28,16 +22,21 @@ class EditFlexibleCostViewModel @Inject constructor(
     val packageCost = MutableLiveData("")
     val otherCostInformation = MutableLiveData("")
 
-    fun getFlexibleCosts() {
-        Timber.tag(TAG).d("getFlexibleCosts: ")
-        viewModelScope.launch {
-            getFlexibleCostUseCase().let { flexibleCost ->
-                travelCost.postValue(flexibleCost.travelCost)
-                craneUsage.postValue(flexibleCost.craneUsage)
-                packageCost.postValue(flexibleCost.packageCost)
-                otherCostInformation.postValue(flexibleCost.otherCostInformation)
-            }
-        }
+    fun requestFlexibleCosts() {
+        Timber.tag(TAG).d("requestFlexibleCosts: ")
+
+        getFlexibleCostUseCase()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeBy(
+                onSuccess = { flexibleCost ->
+                    travelCost.postValue(flexibleCost.travelCost)
+                    craneUsage.postValue(flexibleCost.craneUsage)
+                    packageCost.postValue(flexibleCost.packageCost)
+                    otherCostInformation.postValue(flexibleCost.otherCostInformation)
+                },
+                onError = { setAction(GET_FLEXIBLE_COST_FAILED) }
+            ).addToDisposable()
     }
 
     fun saveFlexibleCosts() {
@@ -52,13 +51,15 @@ class EditFlexibleCostViewModel @Inject constructor(
         ).subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
-                onSuccess = {},
-                onError = {}
+                onSuccess = { setAction(SAVE_FLEXIBLE_COST_SUCCESSFULLY) },
+                onError = { setAction(SAVE_FLEXIBLE_COST_FAILED) }
             ).addToDisposable()
     }
 
     companion object {
         private const val TAG = "EditFlexibleCostViewModel"
-
+        const val SAVE_FLEXIBLE_COST_SUCCESSFULLY = "SAVE_FLEXIBLE_COST_SUCCESSFULLY"
+        const val SAVE_FLEXIBLE_COST_FAILED = "SAVE_FLEXIBLE_COST_FAILED"
+        const val GET_FLEXIBLE_COST_FAILED = "GET_FLEXIBLE_COST_FAILED"
     }
 }

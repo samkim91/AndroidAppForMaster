@@ -7,7 +7,6 @@ import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
 import androidx.fragment.app.activityViewModels
 import dagger.hilt.android.AndroidEntryPoint
-import kr.co.soogong.master.BuildConfig
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentSignUpStep6Binding
 import kr.co.soogong.master.ui.auth.signup.SignUpActivity
@@ -27,7 +26,7 @@ class Step6Fragment : BaseFragment<FragmentSignUpStep6Binding>(
         registerForActivityResult(StartActivityForResult()) { result ->
             Timber.tag(TAG).d("StartActivityForResult: $result")
             if (result.resultCode == Activity.RESULT_OK) {
-                viewModel.address.value =
+                viewModel.roadAddress.value =
                     result.data?.extras?.getString(AddressActivityHelper.ADDRESS).toString()
             }
         }
@@ -51,13 +50,13 @@ class Step6Fragment : BaseFragment<FragmentSignUpStep6Binding>(
             }
 
             defaultButton.setOnClickListener {
-                viewModel.address.observe(viewLifecycleOwner, {
+                viewModel.roadAddress.observe(viewLifecycleOwner, {
                     address.alertVisible = it.isNullOrEmpty()
                 })
 
                 if (!address.alertVisible) {
                     val latlng = LocationHelper.changeAddressToLatLng(requireContext(),
-                        "${viewModel.address.value} ${viewModel.subAddress.value}")
+                        "${viewModel.roadAddress.value} ${viewModel.detailAddress.value}")
                     viewModel.latitude.value = latlng["latitude"]
                     viewModel.longitude.value = latlng["longitude"]
 

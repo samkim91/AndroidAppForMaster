@@ -5,38 +5,43 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.launch
 import kr.co.soogong.master.data.notice.Notice
-import kr.co.soogong.master.data.user.User
-import kr.co.soogong.master.domain.usecase.mypage.SignOutUseCase
+import kr.co.soogong.master.data.profile.Profile
 import kr.co.soogong.master.domain.usecase.mypage.GetNoticeListUseCase
-import kr.co.soogong.master.domain.usecase.profile.GetUserInfoUseCase
+import kr.co.soogong.master.domain.usecase.mypage.SignOutUseCase
+import kr.co.soogong.master.domain.usecase.profile.GetProfileUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class MyPageViewModel @Inject constructor(
-    private val getUserInfoUseCase: GetUserInfoUseCase,
+    private val getProfileUseCase: GetProfileUseCase,
     private val getNoticeListUseCase: GetNoticeListUseCase,
     private val signOutUseCase: SignOutUseCase,
 ) : BaseViewModel() {
-    private val _user = MutableLiveData<User?>(null)
-    val user: LiveData<User?>
-        get() = _user
-
-    private fun getUserProfile() {
-        viewModelScope.launch {
-            _user.value = getUserInfoUseCase()
-        }
-    }
+    private val _profile = MutableLiveData<Profile?>(null)
+    val profile: LiveData<Profile?>
+        get() = _profile
 
     private val _noticeList: MutableLiveData<List<Notice>> = MutableLiveData(emptyList())
     val noticeList: LiveData<List<Notice>>
         get() = _noticeList
 
-    private fun getNoticeList() {
+    private fun requestUserProfile() {
+        getProfileUseCase()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeBy(
+                onSuccess = { _profile.value = it },
+                onError = { }
+            ).addToDisposable()
+    }
+
+    private fun requestNoticeList() {
         getNoticeListUseCase()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -49,8 +54,8 @@ class MyPageViewModel @Inject constructor(
     }
 
     fun initialize() {
-        getNoticeList()
-        getUserProfile()
+        requestNoticeList()
+        requestUserProfile()
     }
 
     fun alarmSettingAction() {

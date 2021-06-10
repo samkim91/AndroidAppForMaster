@@ -38,7 +38,7 @@
                 />
 
             <kr.co.soogong.master.ui.widget.TitleEditText
-                android:id="@+id/business_representative_name"
+                android:id="@+id/owner_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/gap_20"
@@ -50,7 +50,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/title_widget"
-                app:content="@={vm.businessRepresentativeName}"
+                app:content="@={vm.ownerName}"
                 app:titleVisible="@{false}" />
 
             <androidx.appcompat.widget.AppCompatButton

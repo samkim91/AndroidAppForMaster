@@ -1,15 +1,18 @@
 package kr.co.soogong.master.ui.auth.signup
 
+import android.app.Activity
 import androidx.lifecycle.MutableLiveData
-import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthProvider
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import kr.co.soogong.master.data.category.BusinessType
 import kr.co.soogong.master.data.auth.SignUpDto
+import kr.co.soogong.master.data.category.BusinessType
 import kr.co.soogong.master.domain.usecase.auth.*
 import kr.co.soogong.master.ui.base.BaseViewModel
 import kr.co.soogong.master.ui.utils.ListLiveData
@@ -21,22 +24,25 @@ class SignUpViewModel @Inject constructor(
     private val signUpUseCase: SignUpUseCase,
     private val signInUseCase: SignInUseCase,
     private val checkPhoneNumberExistenceUseCase: CheckPhoneNumberExistenceUseCase,
-    private val requestCertificationCodeUseCase: RequestCertificationCodeUseCase,
-    private val requestConfirmCertificationCodeUseCase: RequestConfirmCertificationCodeUseCase,
+    private val requestVerificationCodeUseCase: RequestVerificationCodeUseCase,
+    private val getPhoneAuthCredentialUseCase: GetPhoneAuthCredentialUseCase,
+    private val resendVerificationCodeUseCase: ResendVerificationCodeUseCase,
 ) : BaseViewModel() {
 
     val indicator = MutableLiveData(0)
 
     // Step 1
-    val phoneNumber = MutableLiveData("")
+    val tel = MutableLiveData("")
 
     // Step 2
     val certificationCode = MutableLiveData("")
+
     // Firebase Auth
-    lateinit var auth: FirebaseAuth
+    val auth = MutableLiveData(Firebase.auth)
     val phoneAuthCredential = MutableLiveData<PhoneAuthCredential>()
     val storedVerificationId = MutableLiveData("")
     val resendToken = MutableLiveData<PhoneAuthProvider.ForceResendingToken>()
+    val uid = MutableLiveData("")
 
     // Step 2 sub
     val signInPassword = MutableLiveData("")
@@ -46,14 +52,14 @@ class SignUpViewModel @Inject constructor(
     val signUpConfirmPassword = MutableLiveData("")
 
     // Step 4
-    val businessRepresentativeName = MutableLiveData("")
+    val ownerName = MutableLiveData("")
 
     // Step 5
     val businessTypes = ListLiveData<BusinessType>()
 
     // Step 6
-    val address = MutableLiveData("")
-    val subAddress = MutableLiveData("")
+    val roadAddress = MutableLiveData("")
+    val detailAddress = MutableLiveData("")
     val latitude = MutableLiveData(0.0)
     val longitude = MutableLiveData(0.0)
 
@@ -67,14 +73,9 @@ class SignUpViewModel @Inject constructor(
     val appPush = MutableLiveData(false)
 
 
-
-
     fun checkPhoneNumberDuplicate() {
         Timber.tag(TAG).d("checkIsIdExistent: ")
-        // Todo.. 이미 있는 계정인지 확인
-        // 있으면, 로그인으로 안내
-        // 없으면, 인증코드 메시지 보내고 입력 액티비티로 안내
-        checkPhoneNumberExistenceUseCase(phoneNumber.value)
+        checkPhoneNumberExistenceUseCase(tel.value)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
@@ -89,38 +90,76 @@ class SignUpViewModel @Inject constructor(
             ).addToDisposable()
     }
 
-    fun requestCertificationCode() {
-        Timber.tag(TAG).d("requestCertificationCode: ")
-        phoneNumber.value?.let {
-            requestCertificationCodeUseCase(phoneNumber = it)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeBy(
-                    onSuccess = { setAction(CERTIFICATION_CODE_REQUESTED_SUCCESSFULLY) },
-                    onError = { setAction(CERTIFICATION_CODE_REQUESTED_FAILED) }
-                ).addToDisposable()
+    fun requestVerificationCode(
+        callbackActivity: Activity,
+        callbacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks,
+    ) {
+        Timber.tag(TAG).d("requestVerificationCode: ")
+        tel.value?.let {
+            requestVerificationCodeUseCase(
+                callbackActivity = callbackActivity,
+                callbacks = callbacks,
+                firebaseAuth = auth.value!!,
+                phoneNumber = tel.value!!,
+            )
         }
     }
 
-    fun requestConfirmCertificationCode() {
-        Timber.tag(TAG).d("requestConfirmCertificationCode: ")
-        // 입력한 인증번호를 확인
-        // 인증되면, 다음화면으로
-        // 안 되면, alert 표시
-        certificationCode.value?.let {
-            requestConfirmCertificationCodeUseCase(certificationCode = it)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeBy(
-                    onSuccess = { setAction(CERTIFICATION_CODE_CONFIRMED_SUCCESSFULLY) },
-                    onError = { setAction(CERTIFICATION_CODE_CONFIRMED_FAILED) }
-                ).addToDisposable()
+    fun getPhoneAuthCredential() {
+        Timber.tag(TAG).d("getPhoneAuthCredential: ")
+        storedVerificationId.value?.let { verificationId ->
+            certificationCode.value?.let { code ->
+                phoneAuthCredential.value =
+                    getPhoneAuthCredentialUseCase(verificationId = verificationId, code = code)
+                setAction(GET_PHONE_AUTH_CREDENTIAL_SUCCESSFULLY)
+            }
+        }
+    }
+
+    fun signInWithPhoneAuthCredential() {
+        Timber.tag(TAG).d("signInWithPhoneAuthCredential: ")
+
+        phoneAuthCredential.value?.let { credential ->
+            auth.value?.signInWithCredential(credential)?.addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    // Sign in success, update UI with the signed-in user's information
+                    Timber.tag(TAG).d("signInWithPhoneAuthCredential successfully: ")
+                    uid.value = task.result?.user?.uid
+                    setAction(SIGN_IN_PHONE_AUTH_CREDENTIAL_SUCCESSFULLY)
+                } else {
+                    // Sign in failed, display a message and update the UI
+                    Timber.tag(TAG).d("signInWithPhoneAuthCredential failed: ")
+
+                    if (task.exception is FirebaseAuthInvalidCredentialsException) {
+                        // The verification code entered was invalid
+                        setAction(SIGN_IN_PHONE_AUTH_CREDENTIAL_INVALID)
+                    } else {
+                        setAction(SIGN_IN_PHONE_AUTH_CREDENTIAL_FAILED)
+                    }
+                }
+            }
+        }
+    }
+
+    fun resendVerificationCode(
+        callbackActivity: Activity,
+        callbacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks,
+    ) {
+        Timber.tag(TAG).d("resendVerificationCode: ")
+        tel.value?.let {
+            resendVerificationCodeUseCase(
+                callbackActivity = callbackActivity,
+                callbacks = callbacks,
+                firebaseAuth = auth.value!!,
+                phoneNumber = tel.value!!,
+                resendToken = resendToken.value,
+            )
         }
     }
 
     fun requestLogin() {
         Timber.tag(TAG).d("requestLogin: ")
-        signInUseCase(phoneNumber.value, signInPassword.value ?: signUpPassword.value)
+        signInUseCase(tel.value, signInPassword.value ?: signUpPassword.value)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
@@ -139,18 +178,21 @@ class SignUpViewModel @Inject constructor(
         Timber.tag(TAG).d("signUp : ")
         signUpUseCase(
             SignUpDto(
-                phoneNumber = phoneNumber.value!!,
-                password = signUpPassword.value!!,
-                businessRepresentativeName = businessRepresentativeName.value!!,
+                uid = uid.value!!,
+                ownerName = ownerName.value!!,
+                tel = tel.value!!,
                 businessType = businessTypes.value!!,
-                address = address.value!!,
-                subAddress = subAddress.value!!,
+                roadAddress = roadAddress.value!!,
+                detailAddress = detailAddress.value!!,
                 latitude = latitude.value!!,
                 longitude = longitude.value!!,
                 serviceArea = serviceAreaToInt.value!!,
                 privacyPolicy = agreedPrivacyPolicy.value!!,
+                marketingPush = marketingPush.value!!,
+                marketingPushAtNight = marketingPush.value!!,
                 appPush = appPush.value!!,
-                marketingPush = marketingPush.value!!
+                kakaoPush = appPush.value!!,
+                smsPush = appPush.value!!,
             )
         )
             .subscribeOn(Schedulers.io())
@@ -176,14 +218,11 @@ class SignUpViewModel @Inject constructor(
         const val PHONE_NUMBER_IS_EXISTENT = "PHONE_NUMBER_IS_EXISTENT"
         const val PHONE_NUMBER_NOT_EXISTENT = "PHONE_NUMBER_NOT_EXISTENT"
 
-        const val CERTIFICATION_CODE_REQUESTED_SUCCESSFULLY =
-            "CERTIFICATION_CODE_REQUESTED_SUCCESSFULLY"
-        const val CERTIFICATION_CODE_REQUESTED_FAILED = "CERTIFICATION_CODE_REQUESTED_FAILED"
-
-        const val CERTIFICATION_CODE_CONFIRMED_SUCCESSFULLY =
-            "CERTIFICATION_CODE_CONFIRMED_SUCCESSFULLY"
-        const val CERTIFICATION_CODE_CONFIRMED_FAILED = "CERTIFICATION_CODE_CONFIRMED_FAILED"
-
+        const val GET_PHONE_AUTH_CREDENTIAL_SUCCESSFULLY = "GET_PHONE_AUTH_CREDENTIAL_SUCCESSFULLY"
+        const val SIGN_IN_PHONE_AUTH_CREDENTIAL_SUCCESSFULLY =
+            "SIGN_IN_PHONE_AUTH_CREDENTIAL_SUCCESSFULLY"
+        const val SIGN_IN_PHONE_AUTH_CREDENTIAL_INVALID = "SIGN_IN_PHONE_AUTH_CREDENTIAL_INVALID"
+        const val SIGN_IN_PHONE_AUTH_CREDENTIAL_FAILED = "SIGN_IN_PHONE_AUTH_CREDENTIAL_FAILED"
 
     }
 }

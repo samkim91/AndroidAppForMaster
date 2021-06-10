@@ -9,6 +9,7 @@ import kr.co.soogong.master.databinding.ActivityEditRequiredInformationBinding
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogData
 import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogRecyclerView
+import kr.co.soogong.master.ui.profile.edit.requiredinformation.EditRequiredInformationViewModel.Companion.GET_CAREER_PERIOD_FAILED
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.EditRequiredInformationViewModel.Companion.SAVE_CAREER_PERIOD_FAILED
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.EditRequiredInformationViewModel.Companion.SAVE_CAREER_PERIOD_SUCCESSFULLY
 import kr.co.soogong.master.ui.utils.NaverMapHelper
@@ -89,7 +90,7 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
                 bottomDialog.show(supportFragmentManager, bottomDialog.tag)
             }
 
-            businessRepresentativeName.addDefaultButtonClickListener {
+            ownerName.addDefaultButtonClickListener {
                 startActivityCommonCode(EDIT_BUSINESS_REPRESENTATIVE_NAME)
             }
 
@@ -126,12 +127,8 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
         Timber.tag(TAG).d("registerEventObserve: ")
         viewModel.action.observe(this, EventObserver { event ->
             when (event) {
-                SAVE_CAREER_PERIOD_SUCCESSFULLY -> {
-                    viewModel.getRequiredInfo()
-                }
-                SAVE_CAREER_PERIOD_FAILED -> {
-                    toast(getString(R.string.error_message_of_request_failed))
-                }
+                SAVE_CAREER_PERIOD_SUCCESSFULLY -> viewModel.requestRequiredInformation()
+                SAVE_CAREER_PERIOD_FAILED, GET_CAREER_PERIOD_FAILED -> toast(getString(R.string.error_message_of_request_failed))
             }
         })
     }
@@ -139,7 +136,7 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
     override fun onStart() {
         Timber.tag(TAG).d("onStart: ")
         super.onStart()
-        viewModel.getRequiredInfo()
+        viewModel.requestRequiredInformation()
         naverMap
 
         if (viewModel.isApprovedMaster.value == true) setLayoutForApprovedMaster() else setPercentageText()

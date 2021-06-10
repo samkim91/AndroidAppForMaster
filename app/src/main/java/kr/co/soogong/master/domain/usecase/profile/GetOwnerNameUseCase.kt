@@ -2,20 +2,19 @@ package kr.co.soogong.master.domain.usecase.profile
 
 import dagger.Reusable
 import io.reactivex.Single
-import kr.co.soogong.master.data.profile.FlexibleCost
 import javax.inject.Inject
 
 @Reusable
-class GetFlexibleCostUseCase @Inject constructor(
+class GetOwnerNameUseCase @Inject constructor(
     private val getProfileFromLocalUseCase: GetProfileFromLocalUseCase,
 ) {
-    operator fun invoke(): Single<FlexibleCost> {
-//        if(BuildConfig.DEBUG) {
-//            return FlexibleCost.TEST_FLEXIBLE_COST
+    operator fun invoke(): Single<String> {
+//        if (BuildConfig.DEBUG) {
+//            return RequiredInformation.TEST_REQUIRED_INFORMATION.businessRepresentativeName
 //        }
 
         return getProfileFromLocalUseCase().map { profile ->
-            profile.basicInformation?.flexibleCost
+             profile.requiredInformation?.businessRepresentativeName
         }
     }
 }

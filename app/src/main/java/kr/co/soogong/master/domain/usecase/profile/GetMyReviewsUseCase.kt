@@ -1,7 +1,7 @@
 package kr.co.soogong.master.domain.usecase.profile
 
 import dagger.Reusable
-import kr.co.soogong.master.BuildConfig
+import io.reactivex.Single
 import kr.co.soogong.master.data.profile.MyReview
 import javax.inject.Inject
 
@@ -9,13 +9,13 @@ import javax.inject.Inject
 class GetMyReviewsUseCase @Inject constructor(
     private val getProfileFromLocalUseCase: GetProfileFromLocalUseCase,
 ) {
-    suspend operator fun invoke(): MyReview {
-        if(BuildConfig.DEBUG) {
-            return MyReview.TEST_MY_REVIEW
-        }
+    operator fun invoke(): Single<MyReview> {
+//        if(BuildConfig.DEBUG) {
+//            return MyReview.TEST_MY_REVIEW
+//        }
 
-        getProfileFromLocalUseCase().let { profile ->
-            return profile.basicInformation?.myReviews ?: MyReview.NULL_MY_REVIEW
+        return getProfileFromLocalUseCase().map { profile ->
+            profile.basicInformation?.myReviews
         }
     }
 }

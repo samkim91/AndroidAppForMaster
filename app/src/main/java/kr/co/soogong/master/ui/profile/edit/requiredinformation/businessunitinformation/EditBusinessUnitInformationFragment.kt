@@ -12,6 +12,7 @@ import gun0912.tedimagepicker.builder.TedImagePicker
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentEditBusinessUnitInformationBinding
 import kr.co.soogong.master.ui.base.BaseFragment
+import kr.co.soogong.master.ui.profile.edit.requiredinformation.businessunitinformation.EditBusinessUnitInformationViewModel.Companion.GET_BUSINESS_UNIT_INFORMATION_FAILED
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.businessunitinformation.EditBusinessUnitInformationViewModel.Companion.SAVE_BUSINESS_UNIT_INFORMATION_FAILED
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.businessunitinformation.EditBusinessUnitInformationViewModel.Companion.SAVE_BUSINESS_UNIT_INFORMATION_SUCCESSFULLY
 import kr.co.soogong.master.ui.utils.PermissionHelper
@@ -31,7 +32,7 @@ class EditBusinessUnitInformationFragment :
         Timber.tag(TAG).d("onViewCreated: ")
         initLayout()
         registerEventObserve()
-        viewModel.getBusinessUnitInfo()
+        viewModel.requestBusinessUnitInformation()
     }
 
     override fun initLayout() {
@@ -127,7 +128,7 @@ class EditBusinessUnitInformationFragment :
                 SAVE_BUSINESS_UNIT_INFORMATION_SUCCESSFULLY -> {
                     activity?.onBackPressed()
                 }
-                SAVE_BUSINESS_UNIT_INFORMATION_FAILED -> {
+                SAVE_BUSINESS_UNIT_INFORMATION_FAILED, GET_BUSINESS_UNIT_INFORMATION_FAILED -> {
                     requireContext().toast(getString(R.string.error_message_of_request_failed))
                 }
             }

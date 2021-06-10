@@ -84,13 +84,13 @@ class ProfileDefaultCard @JvmOverloads constructor(
         }
 
     // 등록하기 <-> 편집하기 버튼 셋
-    var defaultButtonByStringV2: String? = ""
+    var defaultButtonByItems: Boolean? = true
         set(value) {
             field = value
-            if (value.isNullOrEmpty()) {
-                ButtonHelper.setRegisteringButton(binding.defaultButton)
-            } else {
+            if (value!!) {
                 ButtonHelper.setEditingButton(binding.defaultButton)
+            } else {
+                ButtonHelper.setRegisteringButton(binding.defaultButton)
             }
         }
 

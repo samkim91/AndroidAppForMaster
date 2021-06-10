@@ -1,12 +1,10 @@
 package kr.co.soogong.master.ui.profile.edit.requiredinformation.address
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import kotlinx.coroutines.launch
 import kr.co.soogong.master.data.profile.CompanyAddress
 import kr.co.soogong.master.domain.usecase.profile.*
 import kr.co.soogong.master.ui.base.BaseViewModel
@@ -18,29 +16,35 @@ class EditAddressViewModel @Inject constructor(
     private val getCompanyAddressUseCase: GetCompanyAddressUseCase,
     private val saveCompanyAddressUseCase: SaveCompanyAddressUseCase,
 ) : BaseViewModel() {
-    val mainAddress = MutableLiveData("")
-    val subAddress = MutableLiveData("")
+    val roadAddress = MutableLiveData("")
+    val detailAddress = MutableLiveData("")
     var latitude = MutableLiveData(0.0)
     var longitude = MutableLiveData(0.0)
 
 
-    fun getCompanyAddress() {
-        Timber.tag(TAG).d("getBriefIntro: ")
-        viewModelScope.launch {
-            getCompanyAddressUseCase().let {
-                mainAddress.postValue(it.mainAddress)
-                subAddress.postValue(it.subAddress)
-            }
-        }
+    fun requestCompanyAddress() {
+        Timber.tag(TAG).d("requestCompanyAddress: ")
+
+        getCompanyAddressUseCase()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeBy(
+                onSuccess = {
+                    roadAddress.postValue(it.roadAddress)
+                    detailAddress.postValue(it.detailAddress)
+                },
+                onError = { setAction(GET_COMPANY_ADDRESS_FAILED) }
+            ).addToDisposable()
     }
 
     fun saveCompanyAddress() {
-        Timber.tag(TAG).d("saveBriefIntro: ")
-        mainAddress.value?.let {
+        Timber.tag(TAG).d("saveCompanyAddress: ")
+
+        roadAddress.value?.let {
             saveCompanyAddressUseCase(
                 companyAddress = CompanyAddress(
-                    mainAddress = mainAddress.value!!,
-                    subAddress = subAddress.value ?: ""
+                    roadAddress = roadAddress.value!!,
+                    detailAddress = detailAddress.value ?: ""
                 ),
                 latitude = latitude.value!!,
                 longitude = longitude.value!!
@@ -57,5 +61,6 @@ class EditAddressViewModel @Inject constructor(
         private const val TAG = "EditAddressViewModel"
         const val SAVE_COMPANY_ADDRESS_SUCCESSFULLY = "SAVE_COMPANY_ADDRESS_SUCCESSFULLY"
         const val SAVE_COMPANY_ADDRESS_FAILED = "SAVE_COMPANY_ADDRESS_FAILED"
+        const val GET_COMPANY_ADDRESS_FAILED = "GET_COMPANY_ADDRESS_FAILED"
     }
 }
