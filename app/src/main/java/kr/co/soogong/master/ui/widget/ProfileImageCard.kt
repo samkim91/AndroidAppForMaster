@@ -6,10 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.estimation.ImagePath
+import kr.co.soogong.master.data.model.requirement.ImagePath
 import kr.co.soogong.master.databinding.ViewProfileImageCardBinding
-import kr.co.soogong.master.ui.utils.ButtonHelper
-import kr.co.soogong.master.util.extension.setImageUrl
+import kr.co.soogong.master.utility.ButtonHelper
+import kr.co.soogong.master.utility.extension.setImageUrl
 
 class ProfileImageCard @JvmOverloads constructor(
     context: Context,

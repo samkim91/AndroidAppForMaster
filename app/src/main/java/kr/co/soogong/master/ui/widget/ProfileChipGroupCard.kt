@@ -11,10 +11,10 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.category.BusinessType
-import kr.co.soogong.master.data.category.Project
+import kr.co.soogong.master.data.model.major.BusinessType
+import kr.co.soogong.master.data.model.major.Project
 import kr.co.soogong.master.databinding.ViewProfileChipGroupCardBinding
-import kr.co.soogong.master.ui.utils.ButtonHelper
+import kr.co.soogong.master.utility.ButtonHelper
 
 class ProfileChipGroupCard @JvmOverloads constructor(
     context: Context,

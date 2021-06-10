@@ -5,7 +5,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import kr.co.soogong.master.ui.mypage.MyPageFragment
 import kr.co.soogong.master.ui.profile.ProfileFragment
-import kr.co.soogong.master.ui.requirements.RequirementsFragment
+import kr.co.soogong.master.ui.requirement.RequirementsFragment
 import timber.log.Timber
 
 class MainPagerAdapter(

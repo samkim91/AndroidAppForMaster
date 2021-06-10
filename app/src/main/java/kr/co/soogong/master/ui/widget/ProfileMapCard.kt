@@ -8,7 +8,7 @@ import android.widget.FrameLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import kr.co.soogong.master.databinding.ViewProfileMapCardBinding
-import kr.co.soogong.master.ui.utils.ButtonHelper
+import kr.co.soogong.master.utility.ButtonHelper
 
 class ProfileMapCard @JvmOverloads constructor(
     context: Context,

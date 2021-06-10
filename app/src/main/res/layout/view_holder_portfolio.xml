@@ -8,7 +8,7 @@
 
         <variable
             name="data"
-            type="kr.co.soogong.master.data.profile.Portfolio" />
+            type="kr.co.soogong.master.data.model.profile.Portfolio" />
 
         <variable
             name="delete_button_click_listener"

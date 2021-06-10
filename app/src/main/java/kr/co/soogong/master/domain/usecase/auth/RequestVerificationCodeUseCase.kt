@@ -6,7 +6,7 @@ import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
 import dagger.Reusable
 import kr.co.soogong.master.ui.auth.signup.LimitTime
-import kr.co.soogong.master.ui.utils.PhoneNumberHelper
+import kr.co.soogong.master.utility.PhoneNumberHelper
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 

@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import kr.co.soogong.master.databinding.ViewHolderImageDeleteButtonBinding
-import kr.co.soogong.master.util.extension.dp
+import kr.co.soogong.master.utility.extension.dp
 
 class RectangleImageWithCloseAdapter(
     private val closeClickListener: (Int) -> Unit,

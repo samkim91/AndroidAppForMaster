@@ -4,7 +4,7 @@ import com.google.gson.JsonObject
 import dagger.Reusable
 import io.reactivex.Single
 import kr.co.soogong.master.domain.usecase.auth.GetMasterIdFromSharedUseCase
-import kr.co.soogong.master.network.AlarmService
+import kr.co.soogong.master.network.mypage.AlarmService
 import javax.inject.Inject
 
 @Reusable

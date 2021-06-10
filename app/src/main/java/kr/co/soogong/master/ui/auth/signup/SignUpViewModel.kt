@@ -11,18 +11,18 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import kr.co.soogong.master.data.auth.SignUpDto
-import kr.co.soogong.master.data.category.BusinessType
+import kr.co.soogong.master.data.dto.auth.SignInDto
+import kr.co.soogong.master.data.model.major.BusinessType
 import kr.co.soogong.master.domain.usecase.auth.*
 import kr.co.soogong.master.ui.base.BaseViewModel
-import kr.co.soogong.master.ui.utils.ListLiveData
+import kr.co.soogong.master.utility.ListLiveData
 import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class SignUpViewModel @Inject constructor(
-    private val signUpUseCase: SignUpUseCase,
     private val signInUseCase: SignInUseCase,
+    private val signInTestUseCase: SignInTestUseCase,
     private val checkPhoneNumberExistenceUseCase: CheckPhoneNumberExistenceUseCase,
     private val requestVerificationCodeUseCase: RequestVerificationCodeUseCase,
     private val getPhoneAuthCredentialUseCase: GetPhoneAuthCredentialUseCase,
@@ -74,20 +74,23 @@ class SignUpViewModel @Inject constructor(
 
 
     fun checkPhoneNumberDuplicate() {
-        Timber.tag(TAG).d("checkIsIdExistent: ")
-        checkPhoneNumberExistenceUseCase(tel.value)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeBy(
-                onSuccess = {
-                    Timber.tag(TAG).d("onSuccess: $it")
-                    setAction(PHONE_NUMBER_IS_EXISTENT)
-                },
-                onError = {
-                    Timber.tag(TAG).d("onError: $it")
-                    setAction(PHONE_NUMBER_NOT_EXISTENT)
-                }
-            ).addToDisposable()
+        Timber.tag(TAG).d("checkPhoneNumberDuplicate: ")
+
+        tel.value?.let { tel ->
+            checkPhoneNumberExistenceUseCase(tel)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeBy(
+                    onSuccess = {
+                        Timber.tag(TAG).d("onSuccess: $it")
+                        setAction(PHONE_NUMBER_IS_EXISTENT)
+                    },
+                    onError = {
+                        Timber.tag(TAG).d("onError: $it")
+                        setAction(PHONE_NUMBER_NOT_EXISTENT)
+                    }
+                ).addToDisposable()
+        }
     }
 
     fun requestVerificationCode(
@@ -159,7 +162,7 @@ class SignUpViewModel @Inject constructor(
 
     fun requestLogin() {
         Timber.tag(TAG).d("requestLogin: ")
-        signInUseCase(tel.value, signInPassword.value ?: signUpPassword.value)
+        signInTestUseCase(tel.value, signInPassword.value ?: signUpPassword.value)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
@@ -176,8 +179,8 @@ class SignUpViewModel @Inject constructor(
 
     fun signUp() {
         Timber.tag(TAG).d("signUp : ")
-        signUpUseCase(
-            SignUpDto(
+        signInUseCase(
+            SignInDto(
                 uid = uid.value!!,
                 ownerName = ownerName.value!!,
                 tel = tel.value!!,

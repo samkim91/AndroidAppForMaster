@@ -6,7 +6,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.domain.usecase.auth.ChangePasswordUseCase
-import kr.co.soogong.master.domain.usecase.auth.SignInUseCase
+import kr.co.soogong.master.domain.usecase.auth.SignInTestUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import timber.log.Timber
 import javax.inject.Inject
@@ -14,7 +14,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ChangePasswordViewModel @Inject constructor(
     private val changePasswordUseCase: ChangePasswordUseCase,
-    private val signInUseCase: SignInUseCase,
+    private val signInTestUseCase: SignInTestUseCase,
 ) : BaseViewModel() {
     val password = MutableLiveData("")
     val confirmPassword = MutableLiveData("")
@@ -35,7 +35,7 @@ class ChangePasswordViewModel @Inject constructor(
     }
 
     fun signIn(id: String) {
-        signInUseCase(id, password.value)
+        signInTestUseCase(id, password.value)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(

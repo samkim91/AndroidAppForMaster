@@ -8,7 +8,7 @@ import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.domain.usecase.profile.GetRepresentativeImagesUseCase
 import kr.co.soogong.master.domain.usecase.profile.SaveRepresentativeImagesUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
-import kr.co.soogong.master.ui.utils.ListLiveData
+import kr.co.soogong.master.utility.ListLiveData
 import timber.log.Timber
 import javax.inject.Inject
 

@@ -8,7 +8,7 @@
     <data>
         <variable
             name="vm"
-            type="kr.co.soogong.master.ui.requirements.action.write.WriteEstimateViewModel" />
+            type="kr.co.soogong.master.ui.requirement.action.write.WriteEstimateViewModel" />
     </data>
 
     <LinearLayout

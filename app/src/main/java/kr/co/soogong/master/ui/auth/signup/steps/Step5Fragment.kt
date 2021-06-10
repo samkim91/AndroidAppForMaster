@@ -8,14 +8,14 @@ import androidx.activity.result.contract.ActivityResultContracts.StartActivityFo
 import androidx.fragment.app.activityViewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.category.BusinessType
+import kr.co.soogong.master.data.model.major.BusinessType
 import kr.co.soogong.master.databinding.FragmentSignUpStep5Binding
 import kr.co.soogong.master.ui.auth.signup.SignUpActivity
 import kr.co.soogong.master.ui.auth.signup.SignUpViewModel
 import kr.co.soogong.master.ui.base.BaseFragment
-import kr.co.soogong.master.ui.utils.BusinessTypeChipGroupHelper
-import kr.co.soogong.master.uiinterface.category.CategoryActivityHelper
-import kr.co.soogong.master.uiinterface.category.CategoryActivityHelper.BUNDLE_BUSINESS_TYPE
+import kr.co.soogong.master.utility.BusinessTypeChipGroupHelper
+import kr.co.soogong.master.uihelper.major.MajorActivityHelper
+import kr.co.soogong.master.uihelper.major.MajorActivityHelper.BUNDLE_BUSINESS_TYPE
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -58,7 +58,7 @@ class Step5Fragment : BaseFragment<FragmentSignUpStep5Binding>(
             businessType.setButtonClickListener {
                 getBusinessTypeLauncher.launch(
                     Intent(
-                        CategoryActivityHelper.getIntent(
+                        MajorActivityHelper.getIntent(
                             requireContext()
                         )
                     )

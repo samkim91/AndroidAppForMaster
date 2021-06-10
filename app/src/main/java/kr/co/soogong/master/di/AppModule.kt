@@ -14,8 +14,6 @@ import kr.co.soogong.master.contract.AppDatabaseContract
 import kr.co.soogong.master.contract.AppSharedPreferenceContract
 import kr.co.soogong.master.contract.HttpContract
 import kr.co.soogong.master.domain.AppDatabase
-import kr.co.soogong.master.network.TokenAuthenticator
-import kr.co.soogong.master.network.TokenInterceptor
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -55,8 +53,9 @@ class AppModule {
                     }
                 }
             )
-            .addInterceptor(tokenInterceptor)
-            .authenticator(tokenAuthenticator)
+        // Firebase Auth를 사용하면서 아래 값들이 필요 없어진 것 같음.. 확인 필요..
+//            .addInterceptor(tokenInterceptor)
+//            .authenticator(tokenAuthenticator)
 
         val okHttpClient = client.build()
 

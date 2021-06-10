@@ -6,7 +6,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import kr.co.soogong.master.data.profile.RequiredInformation
+import kr.co.soogong.master.data.model.profile.RequiredInformation
 import kr.co.soogong.master.domain.usecase.auth.GetMasterApprovalUseCase
 import kr.co.soogong.master.domain.usecase.profile.GetRequiredInformationUseCase
 import kr.co.soogong.master.domain.usecase.profile.SaveCareerPeriodUseCase

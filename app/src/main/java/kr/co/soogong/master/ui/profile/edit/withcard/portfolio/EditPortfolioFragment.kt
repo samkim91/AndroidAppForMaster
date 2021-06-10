@@ -11,11 +11,11 @@ import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.profile.edit.withcard.portfolio.EditPortfolioViewModel.Companion.GET_PORTFOLIO_FAILED
 import kr.co.soogong.master.ui.profile.edit.withcard.portfolio.EditPortfolioViewModel.Companion.SAVE_PORTFOLIO_FAILED
 import kr.co.soogong.master.ui.profile.edit.withcard.portfolio.EditPortfolioViewModel.Companion.SAVE_PORTFOLIO_SUCCESSFULLY
-import kr.co.soogong.master.uiinterface.profile.EditProfileContainerFragmentHelper.ADD_PORTFOLIO
-import kr.co.soogong.master.uiinterface.profile.EditProfileContainerFragmentHelper.EDIT_PORTFOLIO
-import kr.co.soogong.master.ui.utils.PermissionHelper
-import kr.co.soogong.master.util.EventObserver
-import kr.co.soogong.master.util.extension.toast
+import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.ADD_PORTFOLIO
+import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_PORTFOLIO
+import kr.co.soogong.master.utility.PermissionHelper
+import kr.co.soogong.master.utility.EventObserver
+import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
 
 @AndroidEntryPoint

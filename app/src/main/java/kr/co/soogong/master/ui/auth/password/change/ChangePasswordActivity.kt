@@ -10,12 +10,12 @@ import kr.co.soogong.master.ui.auth.password.change.ChangePasswordViewModel.Comp
 import kr.co.soogong.master.ui.auth.password.change.ChangePasswordViewModel.Companion.SIGN_IN_FAILED
 import kr.co.soogong.master.ui.auth.password.change.ChangePasswordViewModel.Companion.SIGN_IN_SUCCESSFULLY
 import kr.co.soogong.master.ui.base.BaseActivity
-import kr.co.soogong.master.uiinterface.auth.password.ChangePasswordActivityHelper
-import kr.co.soogong.master.uiinterface.auth.password.ChangePasswordActivityHelper.FROM_MY_PAGE
-import kr.co.soogong.master.uiinterface.auth.password.ChangePasswordActivityHelper.FROM_SIGN_IN
-import kr.co.soogong.master.uiinterface.main.MainActivityHelper
-import kr.co.soogong.master.util.EventObserver
-import kr.co.soogong.master.util.extension.toast
+import kr.co.soogong.master.uihelper.auth.password.ChangePasswordActivityHelper
+import kr.co.soogong.master.uihelper.auth.password.ChangePasswordActivityHelper.FROM_MY_PAGE
+import kr.co.soogong.master.uihelper.auth.password.ChangePasswordActivityHelper.FROM_SIGN_IN
+import kr.co.soogong.master.uihelper.main.MainActivityHelper
+import kr.co.soogong.master.utility.EventObserver
+import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
 
 @AndroidEntryPoint

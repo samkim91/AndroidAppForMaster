@@ -12,8 +12,8 @@ import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogRecyc
 import kr.co.soogong.master.ui.profile.edit.email.EditEmailViewModel.Companion.GET_EMAIL_FAILED
 import kr.co.soogong.master.ui.profile.edit.email.EditEmailViewModel.Companion.SAVE_EMAIL_FAILED
 import kr.co.soogong.master.ui.profile.edit.email.EditEmailViewModel.Companion.SAVE_EMAIL_SUCCESSFULLY
-import kr.co.soogong.master.util.EventObserver
-import kr.co.soogong.master.util.extension.toast
+import kr.co.soogong.master.utility.EventObserver
+import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
 
 @AndroidEntryPoint

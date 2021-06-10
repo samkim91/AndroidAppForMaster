@@ -55,22 +55,22 @@
             android:name=".ui.main.MainActivity"
             android:launchMode="singleTask" />
         <activity
-            android:name=".ui.select.CategoryActivity"
+            android:name=".ui.major.MajorActivity"
             android:launchMode="singleTask" />
         <activity
             android:name=".ui.image.ImageActivity"
             android:launchMode="singleTask" />
         <activity
-            android:name=".ui.requirements.action.cancel.CancelEstimateActivity"
+            android:name=".ui.requirement.action.cancel.CancelEstimateActivity"
             android:launchMode="singleTask" />
         <activity
-            android:name=".ui.requirements.action.end.EndEstimateActivity"
+            android:name=".ui.requirement.action.end.EndEstimateActivity"
             android:launchMode="singleTask" />
         <activity
-            android:name=".ui.requirements.action.view.ViewEstimateActivity"
+            android:name=".ui.requirement.action.view.ViewEstimateActivity"
             android:launchMode="singleTask" />
         <activity
-            android:name=".ui.requirements.action.write.WriteEstimateActivity"
+            android:name=".ui.requirement.action.write.WriteEstimateActivity"
             android:launchMode="singleTask" />
         <activity
             android:name=".ui.mypage.account.AccountActivity"

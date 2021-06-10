@@ -2,7 +2,7 @@ package kr.co.soogong.master.domain.usecase.profile
 
 import dagger.Reusable
 import io.reactivex.Single
-import kr.co.soogong.master.data.category.BusinessType
+import kr.co.soogong.master.data.model.major.BusinessType
 import javax.inject.Inject
 
 @Reusable

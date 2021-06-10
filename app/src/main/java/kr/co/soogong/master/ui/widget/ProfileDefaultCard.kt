@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import kr.co.soogong.master.databinding.ViewProfileDefaultCardBinding
-import kr.co.soogong.master.ui.utils.ButtonHelper
+import kr.co.soogong.master.utility.ButtonHelper
 
 class ProfileDefaultCard @JvmOverloads constructor(
     context: Context,

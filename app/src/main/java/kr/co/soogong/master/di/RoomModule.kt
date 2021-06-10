@@ -5,9 +5,9 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import kr.co.soogong.master.domain.AppDatabase
-import kr.co.soogong.master.domain.estimation.EstimationDao
-import kr.co.soogong.master.domain.profile.ProfileDao
-import kr.co.soogong.master.domain.requirements.RequirementDao
+import kr.co.soogong.master.data.dao.estimation.EstimationDao
+import kr.co.soogong.master.data.dao.profile.ProfileDao
+import kr.co.soogong.master.data.dao.requirement.RequirementDao
 import javax.inject.Singleton
 
 @Module

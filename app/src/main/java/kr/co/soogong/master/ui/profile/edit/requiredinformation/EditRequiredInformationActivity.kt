@@ -12,19 +12,19 @@ import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogRecyc
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.EditRequiredInformationViewModel.Companion.GET_CAREER_PERIOD_FAILED
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.EditRequiredInformationViewModel.Companion.SAVE_CAREER_PERIOD_FAILED
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.EditRequiredInformationViewModel.Companion.SAVE_CAREER_PERIOD_SUCCESSFULLY
-import kr.co.soogong.master.ui.utils.NaverMapHelper
-import kr.co.soogong.master.uiinterface.profile.EditProfileContainerActivityHelper
-import kr.co.soogong.master.uiinterface.profile.EditProfileContainerFragmentHelper.EDIT_ADDRESS
-import kr.co.soogong.master.uiinterface.profile.EditProfileContainerFragmentHelper.EDIT_BRIEF_INTRODUCTION
-import kr.co.soogong.master.uiinterface.profile.EditProfileContainerFragmentHelper.EDIT_BUSINESS_REPRESENTATIVE_NAME
-import kr.co.soogong.master.uiinterface.profile.EditProfileContainerFragmentHelper.EDIT_BUSINESS_TYPES
-import kr.co.soogong.master.uiinterface.profile.EditProfileContainerFragmentHelper.EDIT_BUSINESS_UNIT_INFORMATION
-import kr.co.soogong.master.uiinterface.profile.EditProfileContainerFragmentHelper.EDIT_COMPANY_IMAGE
-import kr.co.soogong.master.uiinterface.profile.EditProfileContainerFragmentHelper.EDIT_PHONE_NUMBER
-import kr.co.soogong.master.uiinterface.profile.EditProfileContainerFragmentHelper.EDIT_WARRANTY_INFORMATION
-import kr.co.soogong.master.util.EventObserver
-import kr.co.soogong.master.util.extension.mutation
-import kr.co.soogong.master.util.extension.toast
+import kr.co.soogong.master.utility.NaverMapHelper
+import kr.co.soogong.master.uihelper.profile.EditProfileContainerActivityHelper
+import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_ADDRESS
+import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_BRIEF_INTRODUCTION
+import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_BUSINESS_REPRESENTATIVE_NAME
+import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_BUSINESS_TYPES
+import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_BUSINESS_UNIT_INFORMATION
+import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_COMPANY_IMAGE
+import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_PHONE_NUMBER
+import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_WARRANTY_INFORMATION
+import kr.co.soogong.master.utility.EventObserver
+import kr.co.soogong.master.utility.extension.mutation
+import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
 
 @AndroidEntryPoint

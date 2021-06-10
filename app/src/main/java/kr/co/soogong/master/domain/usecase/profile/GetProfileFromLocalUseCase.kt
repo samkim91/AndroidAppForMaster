@@ -2,8 +2,8 @@ package kr.co.soogong.master.domain.usecase.profile
 
 import dagger.Reusable
 import io.reactivex.Single
-import kr.co.soogong.master.data.profile.Profile
-import kr.co.soogong.master.domain.profile.ProfileDao
+import kr.co.soogong.master.data.model.profile.Profile
+import kr.co.soogong.master.data.dao.profile.ProfileDao
 import kr.co.soogong.master.domain.usecase.auth.GetMasterIdFromSharedUseCase
 import javax.inject.Inject
 

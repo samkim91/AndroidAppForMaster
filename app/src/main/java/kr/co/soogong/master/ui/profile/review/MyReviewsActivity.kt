@@ -7,8 +7,8 @@ import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ActivityMyReviewsBinding
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.ui.profile.review.MyReviewsViewModel.Companion.GET_MY_REVIEWS_FAILED
-import kr.co.soogong.master.util.EventObserver
-import kr.co.soogong.master.util.extension.toast
+import kr.co.soogong.master.utility.EventObserver
+import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
 
 @AndroidEntryPoint

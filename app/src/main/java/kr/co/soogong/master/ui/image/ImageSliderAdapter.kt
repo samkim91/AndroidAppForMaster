@@ -3,7 +3,7 @@ package kr.co.soogong.master.ui.image
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import kr.co.soogong.master.data.estimation.ImagePath
+import kr.co.soogong.master.data.model.requirement.ImagePath
 import kr.co.soogong.master.databinding.ViewHolderImagePageBinding
 import timber.log.Timber
 
