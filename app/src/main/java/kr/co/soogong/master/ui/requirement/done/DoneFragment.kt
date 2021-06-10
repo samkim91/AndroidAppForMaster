@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
-import kr.co.soogong.master.databinding.FragmentRequirementsDoneBinding
+import kr.co.soogong.master.databinding.FragmentRequirementDoneBinding
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.requirement.done.DoneViewModel.Companion.ASK_FOR_REVIEW_FAILED
 import kr.co.soogong.master.ui.requirement.done.DoneViewModel.Companion.ASK_FOR_REVIEW_SUCCEEDED
@@ -20,8 +20,8 @@ import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
 
 @AndroidEntryPoint
-class DoneFragment : BaseFragment<FragmentRequirementsDoneBinding>(
-    R.layout.fragment_requirements_done
+class DoneFragment : BaseFragment<FragmentRequirementDoneBinding>(
+    R.layout.fragment_requirement_done
 ) {
     private val viewModel: DoneViewModel by viewModels()
 

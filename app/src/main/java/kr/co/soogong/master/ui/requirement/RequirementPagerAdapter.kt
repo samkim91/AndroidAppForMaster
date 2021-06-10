@@ -6,7 +6,7 @@ import kr.co.soogong.master.ui.requirement.done.DoneFragment
 import kr.co.soogong.master.ui.requirement.progress.ProgressFragment
 import kr.co.soogong.master.ui.requirement.received.ReceivedFragment
 
-class RequirementsPagerAdapter(
+class RequirementPagerAdapter(
     fragment: Fragment
 ) : FragmentStateAdapter(fragment) {
     override fun getItemCount(): Int = TabCount

@@ -5,7 +5,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import kr.co.soogong.master.ui.mypage.MyPageFragment
 import kr.co.soogong.master.ui.profile.ProfileFragment
-import kr.co.soogong.master.ui.requirement.RequirementsFragment
+import kr.co.soogong.master.ui.requirement.RequirementFragment
 import timber.log.Timber
 
 class MainPagerAdapter(
@@ -17,7 +17,7 @@ class MainPagerAdapter(
     override fun createFragment(position: Int): Fragment {
         Timber.tag(TAG).d("createFragment: $position")
         return when (position) {
-            0 -> RequirementsFragment.newInstance()
+            0 -> RequirementFragment.newInstance()
             1 -> ProfileFragment.newInstance()
             2 -> MyPageFragment.newInstance()
             else -> Fragment()

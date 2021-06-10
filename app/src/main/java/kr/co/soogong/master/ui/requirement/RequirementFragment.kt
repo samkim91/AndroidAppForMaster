@@ -7,18 +7,17 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
-import kr.co.soogong.master.databinding.FragmentRequirementsBinding
+import kr.co.soogong.master.databinding.FragmentRequirementBinding
 import kr.co.soogong.master.domain.usecase.auth.GetMasterApprovalUseCase
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.uihelper.profile.EditRequiredInformationActivityHelper
 import kr.co.soogong.master.uihelper.requirment.RequirementsBadge
-import kr.co.soogong.master.utility.extension.visible
 import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class RequirementsFragment : BaseFragment<FragmentRequirementsBinding>(
-    R.layout.fragment_requirements
+class RequirementFragment : BaseFragment<FragmentRequirementBinding>(
+    R.layout.fragment_requirement
 ), RequirementsBadge {
 
     @Inject
@@ -38,7 +37,7 @@ class RequirementsFragment : BaseFragment<FragmentRequirementsBinding>(
 
             with(mainViewPager) {
                 isUserInputEnabled = false
-                adapter = RequirementsPagerAdapter(this@RequirementsFragment)
+                adapter = RequirementPagerAdapter(this@RequirementFragment)
                 TabLayoutMediator(mainTabs, this) { tab, position ->
                     tab.text = getString(TabTextList[position])
                 }.attach()
@@ -90,8 +89,8 @@ class RequirementsFragment : BaseFragment<FragmentRequirementsBinding>(
     companion object {
         private const val TAG = "RequirementsFragment"
 
-        fun newInstance(): RequirementsFragment {
-            return RequirementsFragment()
+        fun newInstance(): RequirementFragment {
+            return RequirementFragment()
         }
     }
 }

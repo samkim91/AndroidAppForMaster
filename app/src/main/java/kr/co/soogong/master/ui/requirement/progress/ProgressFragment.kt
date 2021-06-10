@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
-import kr.co.soogong.master.databinding.FragmentRequirementsProgressBinding
+import kr.co.soogong.master.databinding.FragmentRequirementProgressBinding
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.dialog.popup.CustomDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData.Companion.callDialogData
@@ -20,8 +20,8 @@ import kr.co.soogong.master.utility.EventObserver
 import timber.log.Timber
 
 @AndroidEntryPoint
-class ProgressFragment : BaseFragment<FragmentRequirementsProgressBinding>(
-    R.layout.fragment_requirements_progress
+class ProgressFragment : BaseFragment<FragmentRequirementProgressBinding>(
+    R.layout.fragment_requirement_progress
 ) {
     private val viewModel: ProgressViewModel by viewModels()
 
