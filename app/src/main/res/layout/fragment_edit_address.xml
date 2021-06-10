@@ -36,11 +36,11 @@
                     android:layout_height="wrap_content"
                     app:alertText='@{"필수 정보입니다."}'
                     app:buttonText='@{"검색"}'
-                    app:firstContent="@={vm.mainAddress}"
+                    app:firstContent="@={vm.roadAddress}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:secondContent="@={vm.subAddress}"
+                    app:secondContent="@={vm.detailAddress}"
                     app:setFirstEditTextEnable="@{false}"
                     app:setFirstEditTextHint='@{"주소를 검색해주세요."}'
                     app:setSecondEditTextHint='@{"상세주소를 입력해주세요."}'

@@ -48,7 +48,7 @@
                 android:paddingTop="@dimen/gap_10"
                 android:paddingEnd="@dimen/gap_16"
                 android:paddingBottom="@dimen/gap_10"
-                android:text="@{vm.phoneNumber}"
+                android:text="@{vm.tel}"
                 android:textColor="@color/text_basic_color"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

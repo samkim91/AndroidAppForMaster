@@ -47,8 +47,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/title_widget"
                 app:setFirstEditTextHint='@{"주소를 검색해주세요."}'
-                app:firstContent="@={vm.address}"
-                app:secondContent="@={vm.subAddress}"
+                app:firstContent="@={vm.roadAddress}"
+                app:secondContent="@={vm.detailAddress}"
                 app:setMaxLengthSecond="@{100}"
                 app:titleVisible="@{false}"
                 app:setSecondEditTextHint='@{"상세주소를 입력해주세요."}'

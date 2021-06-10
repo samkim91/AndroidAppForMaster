@@ -6,8 +6,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import kr.co.soogong.master.domain.usecase.auth.RequestCertificationCodeUseCase
-import kr.co.soogong.master.domain.usecase.auth.RequestConfirmCertificationCodeUseCase
+import kr.co.soogong.master.domain.usecase.auth.RequestVerificationCodeUseCase
+import kr.co.soogong.master.domain.usecase.auth.GetPhoneAuthCredentialUseCase
 import kr.co.soogong.master.domain.usecase.profile.SavePhoneNumberUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import timber.log.Timber
@@ -15,8 +15,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class EditPhoneNumberViewModel @Inject constructor(
-    private val requestCertificationCodeUseCase: RequestCertificationCodeUseCase,
-    private val requestConfirmCertificationCodeUseCase: RequestConfirmCertificationCodeUseCase,
+    private val requestVerificationCodeUseCase: RequestVerificationCodeUseCase,
+    private val getPhoneAuthCredentialUseCase: GetPhoneAuthCredentialUseCase,
     private val savePhoneNumberUseCase: SavePhoneNumberUseCase,
 ) : BaseViewModel() {
     val phoneNumber = MutableLiveData("")
@@ -30,17 +30,19 @@ class EditPhoneNumberViewModel @Inject constructor(
         _isEnabled.value = !_isEnabled.value!!
     }
 
+    // TODO: 2021/06/10 firebase로 휴대폰 번호 바꾸는 거 확인..
+
     fun requestCertificationCode() {
         Timber.tag(TAG).d("requestCertificationCode: ")
-        phoneNumber.value?.let {
-            requestCertificationCodeUseCase(phoneNumber = it)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeBy(
-                    onSuccess = { },
-                    onError = { setAction(CERTIFICATION_CODE_REQUESTED_FAILED) }
-                ).addToDisposable()
-        }
+//        phoneNumber.value?.let {
+//            requestVerificationCodeUseCase(phoneNumber = it)
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribeBy(
+//                    onSuccess = { },
+//                    onError = { setAction(CERTIFICATION_CODE_REQUESTED_FAILED) }
+//                ).addToDisposable()
+//        }
     }
 
     fun requestConfirmCertificationCode() {
@@ -49,15 +51,15 @@ class EditPhoneNumberViewModel @Inject constructor(
         // 입력한 인증번호를 확인
         // 인증되면, 다음화면으로
         // 안 되면, alert 표시
-        certificationCode.value?.let {
-            requestConfirmCertificationCodeUseCase(certificationCode = it)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeBy(
-                    onSuccess = { savePhoneNumber() },
-                    onError = { setAction(CERTIFICATION_CODE_CONFIRMED_FAILED) }
-                ).addToDisposable()
-        }
+//        certificationCode.value?.let {
+//            getPhoneAuthCredentialUseCase(certificationCode = it)
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribeBy(
+//                    onSuccess = { savePhoneNumber() },
+//                    onError = { setAction(CERTIFICATION_CODE_CONFIRMED_FAILED) }
+//                ).addToDisposable()
+//        }
     }
 
     private fun savePhoneNumber() {

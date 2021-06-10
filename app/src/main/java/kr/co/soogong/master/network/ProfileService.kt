@@ -2,7 +2,6 @@ package kr.co.soogong.master.network
 
 import io.reactivex.Single
 import kr.co.soogong.master.data.profile.*
-import kr.co.soogong.master.data.user.User
 import retrofit2.Retrofit
 import javax.inject.Inject
 
@@ -11,12 +10,10 @@ class ProfileService @Inject constructor(
 ) {
     private val profileInterface = retrofit.create(ProfileInterface::class.java)
 
-    suspend fun getUserProfile(masterId: String?): User {
-        return User.fromJson(profileInterface.getUserProfile(masterId))
-    }
-
-    suspend fun getProfile(masterId: String?): Profile {
-        return Profile.fromJson(profileInterface.getProfile(masterId))
+    fun getProfile(masterId: String?): Single<Profile> {
+        return profileInterface.getProfile(masterId).map { jsonObject ->
+            Profile.fromJson(jsonObject)
+        }
     }
 
     fun getPortfolio(masterId: String, portfolioId: Int): Portfolio {
@@ -84,7 +81,7 @@ class ProfileService @Inject constructor(
 //        return profileInterface.deletePortfolio(query)
     }
 
-    suspend fun getPortfolioList(masterId: String): List<Portfolio> {
+    fun getPortfolioList(masterId: String): List<Portfolio> {
         val query = HashMap<String, Any>()
 
         query["master_id"] = masterId
@@ -94,7 +91,7 @@ class ProfileService @Inject constructor(
 //        return profileInterface.getPortfolioList(query)
     }
 
-    suspend fun getPriceByProjectList(masterId: String): List<PriceByProject> {
+    fun getPriceByProjectList(masterId: String): List<PriceByProject> {
         val query = HashMap<String, Any>()
 
         query["master_id"] = masterId
@@ -117,7 +114,7 @@ class ProfileService @Inject constructor(
         // return profileInterface.savePriceByProject(query)
     }
 
-    suspend fun getOtherFlexibleOptions(masterId: String): OtherFlexibleOptions {
+    fun getOtherFlexibleOptions(masterId: String): OtherFlexibleOptions {
         val query = HashMap<String, String>()
         query["master_id"] = masterId
 
@@ -136,7 +133,7 @@ class ProfileService @Inject constructor(
         // return profileInterface.savePriceByProject(query)
     }
 
-    suspend fun getMyReviews(masterId: String): MyReview {
+    fun getMyReviews(masterId: String): MyReview {
         val query = HashMap<String, String>()
         query["master_id"] = masterId
 
@@ -145,7 +142,7 @@ class ProfileService @Inject constructor(
 //         return profileInterface.getOtherFlexibleOptions(query)
     }
 
-    suspend fun getRequiredInformation(masterId: String): RequiredInformation {
+    fun getRequiredInformation(masterId: String): RequiredInformation {
         val query = HashMap<String, String>()
         query["master_id"] = masterId
 

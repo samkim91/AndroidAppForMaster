@@ -1,12 +1,10 @@
 package kr.co.soogong.master.ui.profile.edit.requiredinformation.warrantyinformation
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import kotlinx.coroutines.launch
 import kr.co.soogong.master.data.profile.WarrantyInformation
 import kr.co.soogong.master.domain.usecase.profile.GetWarrantyInformationUseCase
 import kr.co.soogong.master.domain.usecase.profile.SaveWarrantyInformationUseCase
@@ -20,17 +18,21 @@ class EditWarrantyInformationViewModel @Inject constructor(
     private val saveWarrantyInformationUseCase: SaveWarrantyInformationUseCase,
 ) : BaseViewModel() {
     val warrantyPeriod = MutableLiveData("")
-    val warrantyPeriodInt =  MutableLiveData(0)
+    val warrantyPeriodInt = MutableLiveData(0)
     val warrantyDescription = MutableLiveData("")
 
-    fun getWarrantyInfo() {
-        Timber.tag(TAG).d("getWarrantyInfo: ")
-        viewModelScope.launch {
-            getWarrantyInformationUseCase().let { warrantyInformation ->
-                warrantyPeriod.postValue(warrantyInformation.warrantyPeriod)
-                warrantyDescription.postValue(warrantyInformation.warrantyDescription)
-            }
-        }
+    fun requestWarrantyInformation() {
+        Timber.tag(TAG).d("requestWarrantyInformation: ")
+        getWarrantyInformationUseCase()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeBy(
+                onSuccess = { warrantyInformation ->
+                    warrantyPeriod.postValue(warrantyInformation.warrantyPeriod)
+                    warrantyDescription.postValue(warrantyInformation.warrantyDescription)
+                },
+                onError = { setAction(GET_WARRANTY_INFORMATION_FAILED) }
+            ).addToDisposable()
     }
 
     fun saveWarrantyInfo() {
@@ -54,5 +56,6 @@ class EditWarrantyInformationViewModel @Inject constructor(
         private const val TAG = "EditWarrantyInformationViewModel"
         const val SAVE_WARRANTY_INFORMATION_SUCCESSFULLY = "SAVE_WARRANTY_INFORMATION_SUCCESSFULLY"
         const val SAVE_WARRANTY_INFORMATION_FAILED = "SAVE_WARRANTY_INFORMATION_FAILED"
+        const val GET_WARRANTY_INFORMATION_FAILED = "GET_WARRANTY_INFORMATION_FAILED"
     }
 }

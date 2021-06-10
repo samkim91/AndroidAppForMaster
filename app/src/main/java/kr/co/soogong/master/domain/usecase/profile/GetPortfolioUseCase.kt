@@ -1,7 +1,7 @@
 package kr.co.soogong.master.domain.usecase.profile
 
 import dagger.Reusable
-import kr.co.soogong.master.BuildConfig
+import io.reactivex.Single
 import kr.co.soogong.master.data.profile.Portfolio
 import javax.inject.Inject
 
@@ -9,15 +9,15 @@ import javax.inject.Inject
 class GetPortfolioUseCase @Inject constructor(
     private val getProfileFromLocalUseCase: GetProfileFromLocalUseCase,
     ) {
-    suspend operator fun invoke(portfolioId: Int): Portfolio {
-        if (BuildConfig.DEBUG) {
-            return Portfolio.TEST_PORTFOLIO
-        }
+    operator fun invoke(portfolioId: Int): Single<Portfolio> {
+//        if (BuildConfig.DEBUG) {
+//            return Portfolio.TEST_PORTFOLIO
+//        }
 
-        getProfileFromLocalUseCase().let { profile ->
-            return profile.basicInformation?.portfolios?.find { portfolio ->
+        return getProfileFromLocalUseCase().map { profile ->
+            profile.basicInformation?.portfolios?.find { portfolio ->
                 portfolio.itemId == portfolioId
-            } ?: Portfolio.NULL_PORTFOLIO
+            }
         }
     }
 }

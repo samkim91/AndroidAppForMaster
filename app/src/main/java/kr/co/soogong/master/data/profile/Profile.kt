@@ -15,8 +15,8 @@ data class Profile(
     @SerializedName("phoneNumber")
     val phoneNumber: String,    // ID
 
-    @SerializedName("businessRepresentativeName")
-    val businessRepresentativeName: String?,
+    @SerializedName("ownerName")
+    val ownerName: String?,
 
     @SerializedName("businessType")
     val businessType: List<BusinessType>?,
@@ -47,7 +47,7 @@ data class Profile(
             val item = jsonObject.get("data").asJsonObject
             return Profile(
                 phoneNumber = item.get("phoneNumber").asString,
-                businessRepresentativeName = item.get("businessRepresentativeName").asString ?: "",
+                ownerName = item.get("businessRepresentativeName").asString ?: "",
                 businessType = item.get("businessType").asJsonArray.map { BusinessType.fromJson(it.asJsonObject) },
                 appPush = item.get("appPush").asBoolean,
                 appPushAtNight = item.get("appPushAtNight").asBoolean,
@@ -61,7 +61,7 @@ data class Profile(
 
         val TEST_PROFILE = Profile(
             phoneNumber = "010-7128-7964",
-            businessRepresentativeName = "준뱀이수공",
+            ownerName = "준뱀이수공",
             businessType = listOf(BusinessType.TEST_BUSINESS_TYPE, BusinessType.TEST_BUSINESS_TYPE, BusinessType.TEST_BUSINESS_TYPE),
             appPush = false,
             appPushAtNight = false,
@@ -74,7 +74,7 @@ data class Profile(
 
         val NULL_PROFILE = Profile(
             phoneNumber = "",
-            businessRepresentativeName = "",
+            ownerName = "",
             businessType = emptyList(),
             appPush = false,
             appPushAtNight = false,

@@ -2,12 +2,10 @@ package kr.co.soogong.master.ui.profile.edit.requiredinformation
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import kotlinx.coroutines.launch
 import kr.co.soogong.master.data.profile.RequiredInformation
 import kr.co.soogong.master.domain.usecase.auth.GetMasterApprovalUseCase
 import kr.co.soogong.master.domain.usecase.profile.GetRequiredInformationUseCase
@@ -26,13 +24,17 @@ class EditRequiredInformationViewModel @Inject constructor(
     val isApprovedMaster: LiveData<Boolean>
         get() = _isApprovedMaster
 
-    val requiredInformation = MutableLiveData<RequiredInformation?>()
+    val requiredInformation = MutableLiveData<RequiredInformation>()
 
-    fun getRequiredInfo() {
-        Timber.tag(TAG).d("getRequiredInformation: ")
-        viewModelScope.launch {
-            requiredInformation.value = getRequiredInformationUseCase()
-        }
+    fun requestRequiredInformation() {
+        Timber.tag(TAG).d("requestRequiredInformation: ")
+        getRequiredInformationUseCase()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeBy(
+                onSuccess = { requiredInformation.value = it },
+                onError = { }
+            ).addToDisposable()
     }
 
     fun saveCareerPeriod(period: String, periodInt: Int) {
@@ -55,5 +57,6 @@ class EditRequiredInformationViewModel @Inject constructor(
         private const val TAG = "EditRequiredInformationViewModel"
         const val SAVE_CAREER_PERIOD_SUCCESSFULLY = "SAVE_CAREER_PERIOD_SUCCESSFULLY"
         const val SAVE_CAREER_PERIOD_FAILED = "SAVE_CAREER_PERIOD_FAILED"
+        const val GET_CAREER_PERIOD_FAILED = "GET_CAREER_PERIOD_FAILED"
     }
 }

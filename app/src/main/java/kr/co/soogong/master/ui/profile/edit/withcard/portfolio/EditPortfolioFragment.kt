@@ -8,9 +8,13 @@ import gun0912.tedimagepicker.builder.TedImagePicker
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentEditPortfolioBinding
 import kr.co.soogong.master.ui.base.BaseFragment
+import kr.co.soogong.master.ui.profile.edit.withcard.portfolio.EditPortfolioViewModel.Companion.GET_PORTFOLIO_FAILED
+import kr.co.soogong.master.ui.profile.edit.withcard.portfolio.EditPortfolioViewModel.Companion.SAVE_PORTFOLIO_FAILED
+import kr.co.soogong.master.ui.profile.edit.withcard.portfolio.EditPortfolioViewModel.Companion.SAVE_PORTFOLIO_SUCCESSFULLY
 import kr.co.soogong.master.uiinterface.profile.EditProfileContainerFragmentHelper.ADD_PORTFOLIO
 import kr.co.soogong.master.uiinterface.profile.EditProfileContainerFragmentHelper.EDIT_PORTFOLIO
 import kr.co.soogong.master.ui.utils.PermissionHelper
+import kr.co.soogong.master.util.EventObserver
 import kr.co.soogong.master.util.extension.toast
 import timber.log.Timber
 
@@ -51,7 +55,7 @@ class EditPortfolioFragment : BaseFragment<FragmentEditPortfolioBinding>(
                     }
                 }
                 EDIT_PORTFOLIO -> {
-                    viewModel.getPortfolio(portfolioId)
+                    viewModel.requestPortfolio(portfolioId)
                     with(defaultButton) {
                         text = getString(R.string.modifying_done)
                         setOnClickListener {
@@ -72,7 +76,7 @@ class EditPortfolioFragment : BaseFragment<FragmentEditPortfolioBinding>(
                         requireContext().toast(getString(R.string.permission_denied_message))
                     })
             }
-            
+
             cameraIconAfterJob.setOnClickListener {
                 PermissionHelper.checkImagePermission(context = requireContext(),
                     onGranted = {
@@ -89,7 +93,12 @@ class EditPortfolioFragment : BaseFragment<FragmentEditPortfolioBinding>(
 
     private fun registerEventObserve() {
         Timber.tag(TAG).d("registerEventObserve: ")
-
+        viewModel.action.observe(viewLifecycleOwner, EventObserver { event ->
+            when (event) {
+                SAVE_PORTFOLIO_SUCCESSFULLY -> activity?.onBackPressed()
+                SAVE_PORTFOLIO_FAILED, GET_PORTFOLIO_FAILED -> requireContext().toast(getString(R.string.error_message_of_request_failed))
+            }
+        })
     }
 
     companion object {

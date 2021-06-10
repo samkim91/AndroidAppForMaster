@@ -9,7 +9,7 @@ import kr.co.soogong.master.network.Response
 import javax.inject.Inject
 
 @Reusable
-class SaveBusinessRepresentativeNameUseCase @Inject constructor(
+class SaveOwnerNameUseCase @Inject constructor(
     private val getMasterIdFromSharedUseCase: GetMasterIdFromSharedUseCase,
     private val profileService: ProfileService,
 ) {

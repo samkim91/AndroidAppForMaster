@@ -31,12 +31,12 @@ class Step4Fragment : BaseFragment<FragmentSignUpStep4Binding>(
             lifecycleOwner = viewLifecycleOwner
 
             defaultButton.setOnClickListener {
-                viewModel.businessRepresentativeName.observe(viewLifecycleOwner, {
-                    businessRepresentativeName.alertVisible = it.isNullOrEmpty()
+                viewModel.ownerName.observe(viewLifecycleOwner, {
+                    ownerName.alertVisible = it.isNullOrEmpty()
                 })
 
 
-                if (!businessRepresentativeName.alertVisible) {
+                if (!ownerName.alertVisible) {
                     (activity as? SignUpActivity)?.moveToNext()
                 }
             }

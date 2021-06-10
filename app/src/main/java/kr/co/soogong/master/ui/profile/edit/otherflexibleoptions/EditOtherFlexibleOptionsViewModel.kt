@@ -1,11 +1,9 @@
 package kr.co.soogong.master.ui.profile.edit.otherflexibleoptions
 
-import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import kotlinx.coroutines.launch
 import kr.co.soogong.master.data.profile.OtherFlexibleOptions
 import kr.co.soogong.master.domain.usecase.profile.GetOtherFlexibleOptionsUseCase
 import kr.co.soogong.master.domain.usecase.profile.SaveOtherFlexibleOptionsUseCase
@@ -21,15 +19,21 @@ class EditOtherFlexibleOptionsViewModel @Inject constructor(
 ) : BaseViewModel() {
     val otherFlexibleOptions = ListLiveData<String>()
 
-    fun getOtherFlexibleOpt() {
-        Timber.tag(TAG).d("getFlexibleCosts: ")
-        viewModelScope.launch {
-            otherFlexibleOptions.addAll(getOtherFlexibleOptionsUseCase().options)
-        }
+    fun requestOtherFlexibleOptions() {
+        Timber.tag(TAG).d("requestOtherFlexibleOptions: ")
+        getOtherFlexibleOptionsUseCase()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeBy(
+                onSuccess = {
+                    otherFlexibleOptions.addAll(it.options)
+                },
+                onError = { setAction(GET_OTHER_FLEXIBLE_OPTIONS_FAILED) }
+            ).addToDisposable()
     }
 
-    fun saveOtherFlexibleOpt() {
-        Timber.tag(TAG).d("saveFlexibleCosts: ")
+    fun saveOtherFlexibleOptions() {
+        Timber.tag(TAG).d("saveOtherFlexibleOptions: ")
 
         otherFlexibleOptions.value?.let {
             saveOtherFlexibleOptionsUseCase(
@@ -39,8 +43,8 @@ class EditOtherFlexibleOptionsViewModel @Inject constructor(
             ).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
-                    onSuccess = {},
-                    onError = {}
+                    onSuccess = { setAction(SAVE_OTHER_FLEXIBLE_OPTIONS_SUCCESSFULLY) },
+                    onError = { setAction(SAVE_OTHER_FLEXIBLE_OPTIONS_FAILED) }
                 ).addToDisposable()
         }
     }
@@ -48,5 +52,9 @@ class EditOtherFlexibleOptionsViewModel @Inject constructor(
     companion object {
         private const val TAG = "EditOtherFlexibleOptionsViewModel"
 
+        const val SAVE_OTHER_FLEXIBLE_OPTIONS_SUCCESSFULLY =
+            "SAVE_OTHER_FLEXIBLE_OPTIONS_SUCCESSFULLY"
+        const val SAVE_OTHER_FLEXIBLE_OPTIONS_FAILED = "SAVE_OTHER_FLEXIBLE_OPTIONS"
+        const val GET_OTHER_FLEXIBLE_OPTIONS_FAILED = "GET_OTHER_FLEXIBLE_OPTIONS_FAILED"
     }
 }

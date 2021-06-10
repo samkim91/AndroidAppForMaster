@@ -10,6 +10,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentEditAddressBinding
 import kr.co.soogong.master.ui.base.BaseFragment
+import kr.co.soogong.master.ui.profile.edit.requiredinformation.address.EditAddressViewModel.Companion.GET_COMPANY_ADDRESS_FAILED
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.address.EditAddressViewModel.Companion.SAVE_COMPANY_ADDRESS_FAILED
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.address.EditAddressViewModel.Companion.SAVE_COMPANY_ADDRESS_SUCCESSFULLY
 import kr.co.soogong.master.ui.utils.LocationHelper
@@ -28,9 +29,9 @@ class EditAddressFragment : BaseFragment<FragmentEditAddressBinding>(
         registerForActivityResult(StartActivityForResult()) { result ->
             Timber.tag(TAG).d("StartActivityForResult: $result")
             if (result.resultCode == Activity.RESULT_OK) {
-                viewModel.mainAddress.value =
+                viewModel.roadAddress.value =
                     result.data?.extras?.getString(AddressActivityHelper.ADDRESS).toString()
-                viewModel.subAddress.value = ""
+                viewModel.detailAddress.value = ""
             }
         }
 
@@ -39,7 +40,7 @@ class EditAddressFragment : BaseFragment<FragmentEditAddressBinding>(
         Timber.tag(TAG).d("onViewCreated: ")
         initLayout()
         registerEventObserve()
-        viewModel.getCompanyAddress()
+        viewModel.requestCompanyAddress()
     }
 
     override fun initLayout() {
@@ -57,13 +58,13 @@ class EditAddressFragment : BaseFragment<FragmentEditAddressBinding>(
             }
 
             defaultButton.setOnClickListener {
-                viewModel.mainAddress.observe(viewLifecycleOwner, {
+                viewModel.roadAddress.observe(viewLifecycleOwner, {
                     address.alertVisible = it.isNullOrEmpty()
                 })
 
                 if (!address.alertVisible) {
                     val latlng = LocationHelper.changeAddressToLatLng(requireContext(),
-                        "${viewModel.mainAddress.value} ${viewModel.subAddress.value}")
+                        "${viewModel.roadAddress.value} ${viewModel.detailAddress.value}")
                     viewModel.latitude.value = latlng["latitude"]
                     viewModel.longitude.value = latlng["longitude"]
 
@@ -80,7 +81,7 @@ class EditAddressFragment : BaseFragment<FragmentEditAddressBinding>(
                 SAVE_COMPANY_ADDRESS_SUCCESSFULLY -> {
                     activity?.onBackPressed()
                 }
-                SAVE_COMPANY_ADDRESS_FAILED -> {
+                SAVE_COMPANY_ADDRESS_FAILED, GET_COMPANY_ADDRESS_FAILED -> {
                     requireContext().toast(getString(R.string.error_message_of_request_failed))
                 }
             }
