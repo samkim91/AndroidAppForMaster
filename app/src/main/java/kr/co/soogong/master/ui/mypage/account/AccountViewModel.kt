@@ -9,19 +9,19 @@ import javax.inject.Inject
 class AccountViewModel @Inject constructor(
 ) : BaseViewModel() {
 
-    fun withDraw() {
-        Timber.tag(TAG).i("WithDraw Button")
-        setAction(WITHDRAW)
+    fun withdrawal() {
+        Timber.tag(TAG).i("withdrawal Button")
+        setAction(WITHDRAWAL)
     }
 
-    fun passwordAction() {
-        Timber.tag(TAG).i("Password Change Button")
-        setAction(PASSWORD)
-    }
+//    fun passwordAction() {
+//        Timber.tag(TAG).i("Password Change Button")
+//        setAction(PASSWORD)
+//    }
 
     companion object {
         private const val TAG = "AccountViewModel"
-        const val WITHDRAW = "WITHDRAW"
+        const val WITHDRAWAL = "WITHDRAWAL"
         const val PASSWORD = "PASSWORD"
     }
 }

@@ -5,15 +5,15 @@ import android.view.View
 import androidx.fragment.app.activityViewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
-import kr.co.soogong.master.databinding.FragmentSignUpStep4Binding
+import kr.co.soogong.master.databinding.FragmentSignUpOwnerNameBinding
 import kr.co.soogong.master.ui.auth.signup.SignUpActivity
 import kr.co.soogong.master.ui.auth.signup.SignUpViewModel
 import kr.co.soogong.master.ui.base.BaseFragment
 import timber.log.Timber
 
 @AndroidEntryPoint
-class Step4Fragment : BaseFragment<FragmentSignUpStep4Binding>(
-    R.layout.fragment_sign_up_step4
+class OwnerNameFragment : BaseFragment<FragmentSignUpOwnerNameBinding>(
+    R.layout.fragment_sign_up_owner_name
 ) {
     private val viewModel: SignUpViewModel by activityViewModels()
 
@@ -46,8 +46,8 @@ class Step4Fragment : BaseFragment<FragmentSignUpStep4Binding>(
     companion object {
         private const val TAG = "Step4Fragment"
 
-        fun newInstance(): Step4Fragment {
-            return Step4Fragment()
+        fun newInstance(): OwnerNameFragment {
+            return OwnerNameFragment()
         }
     }
 }

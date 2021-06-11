@@ -16,6 +16,7 @@ import kr.co.soogong.master.data.model.major.BusinessType
 import kr.co.soogong.master.domain.usecase.auth.*
 import kr.co.soogong.master.ui.base.BaseViewModel
 import kr.co.soogong.master.utility.ListLiveData
+import kr.co.soogong.master.utility.PhoneNumberHelper
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -23,7 +24,7 @@ import javax.inject.Inject
 class SignUpViewModel @Inject constructor(
     private val signInUseCase: SignInUseCase,
     private val signInTestUseCase: SignInTestUseCase,
-    private val checkPhoneNumberExistenceUseCase: CheckPhoneNumberExistenceUseCase,
+    private val checkUserExistentUseCase: CheckUserExistentUseCase,
     private val requestVerificationCodeUseCase: RequestVerificationCodeUseCase,
     private val getPhoneAuthCredentialUseCase: GetPhoneAuthCredentialUseCase,
     private val resendVerificationCodeUseCase: ResendVerificationCodeUseCase,
@@ -73,21 +74,21 @@ class SignUpViewModel @Inject constructor(
     val appPush = MutableLiveData(false)
 
 
-    fun checkPhoneNumberDuplicate() {
-        Timber.tag(TAG).d("checkPhoneNumberDuplicate: ")
+    fun checkUserExist() {
+        Timber.tag(TAG).d("checkUserExist: ")
 
         tel.value?.let { tel ->
-            checkPhoneNumberExistenceUseCase(tel)
+            checkUserExistentUseCase(PhoneNumberHelper.toGlobalNumber(tel))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
                     onSuccess = {
                         Timber.tag(TAG).d("onSuccess: $it")
-                        setAction(PHONE_NUMBER_IS_EXISTENT)
+                        if (it) setAction(PHONE_NUMBER_EXIST) else setAction(PHONE_NUMBER_NOT_EXIST)
                     },
                     onError = {
                         Timber.tag(TAG).d("onError: $it")
-                        setAction(PHONE_NUMBER_NOT_EXISTENT)
+                        setAction(CHECK_PHONE_NUMBER_FAILED)
                     }
                 ).addToDisposable()
         }
@@ -109,18 +110,21 @@ class SignUpViewModel @Inject constructor(
     }
 
     fun getPhoneAuthCredential() {
-        Timber.tag(TAG).d("getPhoneAuthCredential: ")
+        Timber.tag(TAG)
+            .d("getPhoneAuthCredential: ${storedVerificationId.value}, ${certificationCode.value}")
         storedVerificationId.value?.let { verificationId ->
             certificationCode.value?.let { code ->
                 phoneAuthCredential.value =
                     getPhoneAuthCredentialUseCase(verificationId = verificationId, code = code)
-                setAction(GET_PHONE_AUTH_CREDENTIAL_SUCCESSFULLY)
+                Timber.tag(TAG).d("getPhoneAuthCredential: ${phoneAuthCredential.value}")
+                signInWithPhoneAuthCredential()
             }
         }
     }
 
-    fun signInWithPhoneAuthCredential() {
-        Timber.tag(TAG).d("signInWithPhoneAuthCredential: ")
+    private fun signInWithPhoneAuthCredential() {
+        Timber.tag(TAG)
+            .d("signInWithPhoneAuthCredential: ${phoneAuthCredential.value} / ${auth.value}")
 
         phoneAuthCredential.value?.let { credential ->
             auth.value?.signInWithCredential(credential)?.addOnCompleteListener { task ->
@@ -132,7 +136,7 @@ class SignUpViewModel @Inject constructor(
                 } else {
                     // Sign in failed, display a message and update the UI
                     Timber.tag(TAG).d("signInWithPhoneAuthCredential failed: ")
-
+// TODO: 2021/06/11 livedata인 actiion을 observe 못 하고 있음.. activity를 파싱해서 발생하는 문제로 생각됨.. 롧백해봐야함.. 
                     if (task.exception is FirebaseAuthInvalidCredentialsException) {
                         // The verification code entered was invalid
                         setAction(SIGN_IN_PHONE_AUTH_CREDENTIAL_INVALID)
@@ -218,10 +222,10 @@ class SignUpViewModel @Inject constructor(
         const val SIGN_IN_SUCCESSFUL = "SIGN_IN_SUCCESSFUL"
         const val SIGN_IN_FAILED = "SIGN_IN_FAILED"
 
-        const val PHONE_NUMBER_IS_EXISTENT = "PHONE_NUMBER_IS_EXISTENT"
-        const val PHONE_NUMBER_NOT_EXISTENT = "PHONE_NUMBER_NOT_EXISTENT"
+        const val PHONE_NUMBER_EXIST = "PHONE_NUMBER_EXIST"
+        const val PHONE_NUMBER_NOT_EXIST = "PHONE_NUMBER_NOT_EXIST"
+        const val CHECK_PHONE_NUMBER_FAILED = "CHECK_PHONE_NUMBER_FAILED"
 
-        const val GET_PHONE_AUTH_CREDENTIAL_SUCCESSFULLY = "GET_PHONE_AUTH_CREDENTIAL_SUCCESSFULLY"
         const val SIGN_IN_PHONE_AUTH_CREDENTIAL_SUCCESSFULLY =
             "SIGN_IN_PHONE_AUTH_CREDENTIAL_SUCCESSFULLY"
         const val SIGN_IN_PHONE_AUTH_CREDENTIAL_INVALID = "SIGN_IN_PHONE_AUTH_CREDENTIAL_INVALID"

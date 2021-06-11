@@ -10,7 +10,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.model.major.Category
 import kr.co.soogong.master.data.model.major.Project
-import kr.co.soogong.master.domain.usecase.GetProjectListUseCase
+import kr.co.soogong.master.domain.usecase.major.GetProjectListUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import timber.log.Timber
 

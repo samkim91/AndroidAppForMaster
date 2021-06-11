@@ -7,7 +7,7 @@ import androidx.fragment.app.activityViewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.BuildConfig
 import kr.co.soogong.master.R
-import kr.co.soogong.master.databinding.FragmentSignUpStep8Binding
+import kr.co.soogong.master.databinding.FragmentSignUpPrivatePolicyBinding
 import kr.co.soogong.master.ui.auth.signup.SignUpViewModel
 import kr.co.soogong.master.ui.auth.signup.SignUpViewModel.Companion.SIGN_IN_FAILED
 import kr.co.soogong.master.ui.auth.signup.SignUpViewModel.Companion.SIGN_IN_SUCCESSFUL
@@ -21,8 +21,8 @@ import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
 
 @AndroidEntryPoint
-class Step8Fragment : BaseFragment<FragmentSignUpStep8Binding>(
-    R.layout.fragment_sign_up_step8
+class PrivatePolicyFragment : BaseFragment<FragmentSignUpPrivatePolicyBinding>(
+    R.layout.fragment_sign_up_private_policy
 ) {
     private val viewModel: SignUpViewModel by activityViewModels()
 
@@ -52,7 +52,8 @@ class Step8Fragment : BaseFragment<FragmentSignUpStep8Binding>(
                 })
 
                 if (!alertPrivacyPolicyAgreementRequired.isVisible) {
-                    val dialog = CustomDialog(DialogData.notificationDialogData(requireContext()),
+                    val dialog = CustomDialog(
+                        DialogData.getAcceptNotificationDialogData(requireContext()),
                         yesClick = {
                             viewModel.appPush.value = true
                             viewModel.signUp()
@@ -77,20 +78,17 @@ class Step8Fragment : BaseFragment<FragmentSignUpStep8Binding>(
             binding.agreedAll.checkBox.isChecked = it && viewModel.agreedPrivacyPolicy.value!!
         })
         viewModel.action.observe(viewLifecycleOwner, EventObserver { event ->
-            if(BuildConfig.DEBUG){
+            if (BuildConfig.DEBUG) {
                 requireContext().toast(getString(R.string.sign_up_successfully))
                 startActivity(MainActivityHelper.getIntent(requireContext()))
-            } else{
+            } else {
                 when (event) {
                     SIGN_IN_SUCCESSFUL -> {
                         requireContext().toast(getString(R.string.sign_up_successfully))
                         startActivity(MainActivityHelper.getIntent(requireContext()))
                     }
-                    SIGN_UP_FAILED -> {
+                    SIGN_UP_FAILED, SIGN_IN_FAILED -> {
                         requireContext().toast(getString(R.string.error_message_of_request_failed))
-                    }
-                    SIGN_IN_FAILED -> {
-
                     }
                 }
             }
@@ -100,8 +98,8 @@ class Step8Fragment : BaseFragment<FragmentSignUpStep8Binding>(
     companion object {
         private const val TAG = "Step8Fragment"
 
-        fun newInstance(): Step8Fragment {
-            return Step8Fragment()
+        fun newInstance(): PrivatePolicyFragment {
+            return PrivatePolicyFragment()
         }
     }
 }

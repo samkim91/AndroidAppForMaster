@@ -5,6 +5,7 @@ import android.os.CountDownTimer
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
@@ -12,11 +13,10 @@ import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthProvider
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
-import kr.co.soogong.master.databinding.FragmentSignUpStep2Binding
+import kr.co.soogong.master.databinding.FragmentSignUpAuthBinding
 import kr.co.soogong.master.ui.auth.signup.LimitTime
 import kr.co.soogong.master.ui.auth.signup.SignUpActivity
 import kr.co.soogong.master.ui.auth.signup.SignUpViewModel
-import kr.co.soogong.master.ui.auth.signup.SignUpViewModel.Companion.GET_PHONE_AUTH_CREDENTIAL_SUCCESSFULLY
 import kr.co.soogong.master.ui.auth.signup.SignUpViewModel.Companion.SIGN_IN_PHONE_AUTH_CREDENTIAL_FAILED
 import kr.co.soogong.master.ui.auth.signup.SignUpViewModel.Companion.SIGN_IN_PHONE_AUTH_CREDENTIAL_INVALID
 import kr.co.soogong.master.ui.auth.signup.SignUpViewModel.Companion.SIGN_IN_PHONE_AUTH_CREDENTIAL_SUCCESSFULLY
@@ -27,8 +27,8 @@ import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
 
 @AndroidEntryPoint
-class Step2Fragment : BaseFragment<FragmentSignUpStep2Binding>(
-    R.layout.fragment_sign_up_step2
+class AuthFragment : BaseFragment<FragmentSignUpAuthBinding>(
+    R.layout.fragment_sign_up_auth
 ) {
     private val viewModel: SignUpViewModel by activityViewModels()
 
@@ -41,8 +41,8 @@ class Step2Fragment : BaseFragment<FragmentSignUpStep2Binding>(
         }
 
         override fun onFinish() {
-            binding.rightButton.isEnabled = true
-            binding.alertExpiredCertificationTime.visibility = View.VISIBLE
+            binding.rightButton.isEnabled = false
+            binding.alertExpiredCertificationTime.isVisible = true
         }
     }
 
@@ -129,7 +129,6 @@ class Step2Fragment : BaseFragment<FragmentSignUpStep2Binding>(
                 token: PhoneAuthProvider.ForceResendingToken
             ) {
                 Timber.tag(TAG).d("onCodeSent: $verificationId, $token")
-                requireContext().toast(getString(R.string.certification_code_requested))
                 binding.rightButton.isEnabled = true
 
                 viewModel.storedVerificationId.value = verificationId
@@ -141,6 +140,7 @@ class Step2Fragment : BaseFragment<FragmentSignUpStep2Binding>(
     private fun startPhoneNumberVerification() {
         Timber.tag(TAG).d("startPhoneNumberVerification: ${viewModel.tel.value}")
         startTimer()
+        requireContext().toast(getString(R.string.certification_code_requested))
         viewModel.requestVerificationCode(
             callbackActivity = requireActivity(),
             callbacks = callbacks
@@ -158,6 +158,7 @@ class Step2Fragment : BaseFragment<FragmentSignUpStep2Binding>(
             .d("resendVerificationCode: ${viewModel.tel.value}, ${viewModel.resendToken.value}")
 
         startTimer()
+        requireContext().toast(getString(R.string.certification_code_requested))
         viewModel.resendVerificationCode(
             callbackActivity = requireActivity(),
             callbacks = callbacks
@@ -169,9 +170,6 @@ class Step2Fragment : BaseFragment<FragmentSignUpStep2Binding>(
 
         viewModel.action.observe(viewLifecycleOwner, EventObserver { event ->
             when (event) {
-                GET_PHONE_AUTH_CREDENTIAL_SUCCESSFULLY -> {
-                    viewModel.signInWithPhoneAuthCredential()
-                }
                 SIGN_IN_PHONE_AUTH_CREDENTIAL_SUCCESSFULLY -> {
                     (activity as? SignUpActivity)?.moveToNext()
                 }
@@ -188,8 +186,8 @@ class Step2Fragment : BaseFragment<FragmentSignUpStep2Binding>(
     companion object {
         private const val TAG = "Step2Fragment"
 
-        fun newInstance(): Step2Fragment {
-            return Step2Fragment()
+        fun newInstance(): AuthFragment {
+            return AuthFragment()
         }
     }
 }

@@ -5,7 +5,7 @@ import android.view.View
 import androidx.fragment.app.activityViewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
-import kr.co.soogong.master.databinding.FragmentSignUpStep2SubBinding
+import kr.co.soogong.master.databinding.FragmentSignUpSignInBinding
 import kr.co.soogong.master.ui.auth.signup.SignUpViewModel
 import kr.co.soogong.master.ui.auth.signup.SignUpViewModel.Companion.SIGN_IN_FAILED
 import kr.co.soogong.master.ui.auth.signup.SignUpViewModel.Companion.SIGN_IN_SUCCESSFUL
@@ -15,8 +15,8 @@ import kr.co.soogong.master.utility.EventObserver
 import timber.log.Timber
 
 @AndroidEntryPoint
-class Step2SubFragment : BaseFragment<FragmentSignUpStep2SubBinding>(
-    R.layout.fragment_sign_up_step2_sub
+class SignInFragment : BaseFragment<FragmentSignUpSignInBinding>(
+    R.layout.fragment_sign_up_sign_in
 ) {
     private val viewModel: SignUpViewModel by activityViewModels()
 
@@ -70,8 +70,8 @@ class Step2SubFragment : BaseFragment<FragmentSignUpStep2SubBinding>(
     companion object {
         private const val TAG = "Step2SubFragment"
 
-        fun newInstance(): Step2SubFragment {
-            return Step2SubFragment()
+        fun newInstance(): SignInFragment {
+            return SignInFragment()
         }
     }
 }

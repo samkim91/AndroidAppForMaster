@@ -16,7 +16,7 @@ import kr.co.soogong.master.data.model.requirement.Message
 import kr.co.soogong.master.databinding.ActivityViewEstimateBinding
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.ui.dialog.popup.CustomDialog
-import kr.co.soogong.master.ui.dialog.popup.DialogData.Companion.cancelDialogData
+import kr.co.soogong.master.ui.dialog.popup.DialogData.Companion.getRefuseEstimateDialogData
 import kr.co.soogong.master.ui.image.RectangleImageAdapter
 import kr.co.soogong.master.ui.requirement.action.view.ViewEstimateViewModel.Companion.ASK_FOR_REVIEW_FAILED
 import kr.co.soogong.master.ui.requirement.action.view.ViewEstimateViewModel.Companion.ASK_FOR_REVIEW_SUCCEEDED
@@ -84,7 +84,7 @@ class ViewEstimateActivity : BaseActivity<ActivityViewEstimateBinding>(
 
             // 견적을 내기 어려워요 버튼
             refuseButton.setOnClickListener {
-                val dialog = CustomDialog(cancelDialogData(this@ViewEstimateActivity),
+                val dialog = CustomDialog(getRefuseEstimateDialogData(this@ViewEstimateActivity),
                     yesClick = {
                         viewModel.refuseToEstimate()
                     },

@@ -2,7 +2,6 @@ package kr.co.soogong.master.network.auth
 
 import com.google.gson.Gson
 import com.google.gson.JsonObject
-import io.reactivex.Completable
 import io.reactivex.Single
 import kr.co.soogong.master.data.dto.auth.SignInDto
 import kr.co.soogong.master.data.dto.Response
@@ -35,8 +34,8 @@ class AuthService @Inject constructor(
         return authInterface.signIn(Gson().toJson(signInDto))
     }
 
-    fun getId(id: String): Single<Response> {
-        return authInterface.getId(id)
+    fun checkUserExistent(id: String): Single<Boolean> {
+        return authInterface.checkUserExistent(id)
     }
 
     fun updateFCMToken(keycode: String?, fcmKey: String?): Single<Response> {

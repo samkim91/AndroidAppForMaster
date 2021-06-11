@@ -14,7 +14,7 @@ import kr.co.soogong.master.data.model.requirement.EstimationMessage
 import kr.co.soogong.master.databinding.ActivityWriteEstimateBinding
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.ui.dialog.popup.CustomDialog
-import kr.co.soogong.master.ui.dialog.popup.DialogData.Companion.cancelSendingTransmissionDialogData
+import kr.co.soogong.master.ui.dialog.popup.DialogData.Companion.getCancelSendingEstimationDialogData
 import kr.co.soogong.master.ui.image.RectangleImageAdapter
 import kr.co.soogong.master.ui.requirement.action.write.WriteEstimateViewModel.Companion.SEND_MESSAGE_FAILED
 import kr.co.soogong.master.ui.requirement.action.write.WriteEstimateViewModel.Companion.SEND_MESSAGE_SUCCEEDED
@@ -52,7 +52,7 @@ class WriteEstimateActivity : BaseActivity<ActivityWriteEstimateBinding>(
                 title.text = getString(R.string.write_estimate_title)
                 backButton.setOnClickListener {
                     val dialog = CustomDialog(
-                        cancelSendingTransmissionDialogData(this@WriteEstimateActivity),
+                        getCancelSendingEstimationDialogData(this@WriteEstimateActivity),
                         yesClick = {
                             super.onBackPressed()
                         },
