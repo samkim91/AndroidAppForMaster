@@ -7,7 +7,7 @@ import androidx.fragment.app.activityViewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.model.profile.Coordinate
-import kr.co.soogong.master.databinding.FragmentSignUpStep7Binding
+import kr.co.soogong.master.databinding.FragmentSignUpServiceAreaBinding
 import kr.co.soogong.master.ui.auth.signup.SignUpActivity
 import kr.co.soogong.master.ui.auth.signup.SignUpViewModel
 import kr.co.soogong.master.ui.base.BaseFragment
@@ -17,8 +17,8 @@ import kr.co.soogong.master.utility.NaverMapHelper
 import timber.log.Timber
 
 @AndroidEntryPoint
-class Step7Fragment : BaseFragment<FragmentSignUpStep7Binding>(
-    R.layout.fragment_sign_up_step7
+class ServiceAreaFragment : BaseFragment<FragmentSignUpServiceAreaBinding>(
+    R.layout.fragment_sign_up_service_area
 ) {
     private val viewModel: SignUpViewModel by activityViewModels()
 
@@ -82,8 +82,8 @@ class Step7Fragment : BaseFragment<FragmentSignUpStep7Binding>(
     companion object {
         private const val TAG = "Step7Fragment"
 
-        fun newInstance(): Step7Fragment {
-            return Step7Fragment()
+        fun newInstance(): ServiceAreaFragment {
+            return ServiceAreaFragment()
         }
     }
 }

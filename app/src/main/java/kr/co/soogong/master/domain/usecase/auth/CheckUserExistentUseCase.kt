@@ -7,11 +7,10 @@ import kr.co.soogong.master.network.auth.AuthService
 import javax.inject.Inject
 
 @Reusable
-class CheckPhoneNumberExistenceUseCase @Inject constructor(
+class CheckUserExistentUseCase @Inject constructor(
     private val authService: AuthService
 ) {
-    operator fun invoke(id: String): Single<Response> {
-        // TODO: 2021/06/10 Firebase로 찾아오는 과정 필요
-        return authService.getId(id)
+    operator fun invoke(id: String): Single<Boolean> {
+        return authService.checkUserExistent(id)
     }
 } 

@@ -11,7 +11,7 @@ import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentRequirementProgressBinding
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.dialog.popup.CustomDialog
-import kr.co.soogong.master.ui.dialog.popup.DialogData.Companion.callDialogData
+import kr.co.soogong.master.ui.dialog.popup.DialogData.Companion.getCallToCustomerDialogData
 import kr.co.soogong.master.uihelper.requirment.CallToCustomerHelper
 import kr.co.soogong.master.uihelper.requirment.RequirementsBadge
 import kr.co.soogong.master.uihelper.requirment.action.ActionViewHelper
@@ -53,7 +53,7 @@ class ProgressFragment : BaseFragment<FragmentRequirementProgressBinding>(
                     )
                 },
                 callButtonClick = { keycode, number ->
-                    val dialog = CustomDialog(callDialogData(requireContext()),
+                    val dialog = CustomDialog(getCallToCustomerDialogData(requireContext()),
                         yesClick = {
                             // Todo.. 전화한 기록을 더해야함.
                             viewModel.callToCustomer(estimationId = keycode, phoneNumber = number)

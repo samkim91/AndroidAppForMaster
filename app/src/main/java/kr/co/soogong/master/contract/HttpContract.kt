@@ -7,7 +7,7 @@ object HttpContract {
 
     //region Auth
     const val MASTER_SIGN_IN = "auth/master-sign-in"
-    const val GET_ID = "auth/id"
+    const val IS_USER_EXIST = "auth/user-exist"
     const val FCM_UPDATE = "api/v1/branches/update_reg_id"  // TODO: 2021/06/10 무슨 용도인지 알아보고 추가해야함.
     //endregion
 

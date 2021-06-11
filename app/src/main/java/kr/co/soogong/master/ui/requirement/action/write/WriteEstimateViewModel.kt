@@ -19,7 +19,7 @@ import javax.inject.Inject
 @HiltViewModel
 class WriteEstimateViewModel @Inject constructor(
     private val sendEstimationMessageUseCase: SendEstimationMessageUseCase,
-    private val getEstimationUseCase: GetEstimationUseCase,
+    val getEstimationUseCase: GetEstimationUseCase,
     savedStateHandle: SavedStateHandle
 ) : BaseViewModel() {
 

@@ -55,7 +55,7 @@ class ReceivedFragment : BaseFragment<FragmentRequirementReceivedBinding>(
                         } else {
                             val dialog =
                                 CustomDialog(
-                                    DialogData.askingFillProfileDialogData(requireContext()),
+                                    DialogData.getAskingFillProfileDialogData(requireContext()),
                                     yesClick = {
                                         startActivity(
                                             EditRequiredInformationActivityHelper.getIntent(

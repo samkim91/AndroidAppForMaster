@@ -8,39 +8,28 @@ import androidx.activity.result.contract.ActivityResultContracts.StartActivityFo
 import androidx.fragment.app.activityViewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.model.major.BusinessType
-import kr.co.soogong.master.databinding.FragmentSignUpStep5Binding
+import kr.co.soogong.master.databinding.FragmentSignUpAddressBinding
 import kr.co.soogong.master.ui.auth.signup.SignUpActivity
 import kr.co.soogong.master.ui.auth.signup.SignUpViewModel
 import kr.co.soogong.master.ui.base.BaseFragment
-import kr.co.soogong.master.utility.BusinessTypeChipGroupHelper
-import kr.co.soogong.master.uihelper.major.MajorActivityHelper
-import kr.co.soogong.master.uihelper.major.MajorActivityHelper.BUNDLE_BUSINESS_TYPE
+import kr.co.soogong.master.uihelper.auth.signup.AddressActivityHelper
+import kr.co.soogong.master.utility.LocationHelper
 import timber.log.Timber
 
 @AndroidEntryPoint
-class Step5Fragment : BaseFragment<FragmentSignUpStep5Binding>(
-    R.layout.fragment_sign_up_step5
+class AddressFragment : BaseFragment<FragmentSignUpAddressBinding>(
+    R.layout.fragment_sign_up_address
 ) {
     private val viewModel: SignUpViewModel by activityViewModels()
 
-    private var getBusinessTypeLauncher =
+    private val getAddressLauncher =
         registerForActivityResult(StartActivityForResult()) { result ->
             Timber.tag(TAG).d("StartActivityForResult: $result")
             if (result.resultCode == Activity.RESULT_OK) {
-                val data: Intent? = result.data
-                val selectedBusinessType: BusinessType by lazy {
-                    data?.getParcelableExtra(BUNDLE_BUSINESS_TYPE) ?: BusinessType(null, null)
-                }
-                BusinessTypeChipGroupHelper.makeEntryChipGroupWithSubtitleForBusinessTypes(
-                    layoutInflater = layoutInflater,
-                    container = binding.businessTypeContainer,
-                    newBusinessType = selectedBusinessType,
-                    viewModelBusinessTypes = viewModel.businessTypes
-                )
+                viewModel.roadAddress.value =
+                    result.data?.extras?.getString(AddressActivityHelper.ADDRESS).toString()
             }
         }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -55,10 +44,10 @@ class Step5Fragment : BaseFragment<FragmentSignUpStep5Binding>(
             vm = viewModel
             lifecycleOwner = viewLifecycleOwner
 
-            businessType.setButtonClickListener {
-                getBusinessTypeLauncher.launch(
+            address.setButtonClickListener {
+                getAddressLauncher.launch(
                     Intent(
-                        MajorActivityHelper.getIntent(
+                        AddressActivityHelper.getIntent(
                             requireContext()
                         )
                     )
@@ -66,12 +55,18 @@ class Step5Fragment : BaseFragment<FragmentSignUpStep5Binding>(
             }
 
             defaultButton.setOnClickListener {
-                viewModel.businessTypes.observe(viewLifecycleOwner, {
-                    businessType.alertVisible = it.isNullOrEmpty()
+                viewModel.roadAddress.observe(viewLifecycleOwner, {
+                    address.alertVisible = it.isNullOrEmpty()
                 })
 
+                if (!address.alertVisible) {
+                    val latlng = LocationHelper.changeAddressToLatLng(
+                        requireContext(),
+                        "${viewModel.roadAddress.value} ${viewModel.detailAddress.value}"
+                    )
+                    viewModel.latitude.value = latlng["latitude"]
+                    viewModel.longitude.value = latlng["longitude"]
 
-                if (!businessType.alertVisible) {
                     (activity as? SignUpActivity)?.moveToNext()
                 }
             }
@@ -79,10 +74,10 @@ class Step5Fragment : BaseFragment<FragmentSignUpStep5Binding>(
     }
 
     companion object {
-        private const val TAG = "Step5Fragment"
+        private const val TAG = "Step6Fragment"
 
-        fun newInstance(): Step5Fragment {
-            return Step5Fragment()
+        fun newInstance(): AddressFragment {
+            return AddressFragment()
         }
     }
 }
