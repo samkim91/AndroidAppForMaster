@@ -6,8 +6,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import kr.co.soogong.master.domain.usecase.auth.RequestVerificationCodeUseCase
-import kr.co.soogong.master.domain.usecase.auth.GetPhoneAuthCredentialUseCase
 import kr.co.soogong.master.domain.usecase.profile.SavePhoneNumberUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import timber.log.Timber
@@ -15,8 +13,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class EditPhoneNumberViewModel @Inject constructor(
-    private val requestVerificationCodeUseCase: RequestVerificationCodeUseCase,
-    private val getPhoneAuthCredentialUseCase: GetPhoneAuthCredentialUseCase,
     private val savePhoneNumberUseCase: SavePhoneNumberUseCase,
 ) : BaseViewModel() {
     val phoneNumber = MutableLiveData("")
