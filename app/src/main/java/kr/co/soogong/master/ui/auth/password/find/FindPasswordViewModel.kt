@@ -3,16 +3,13 @@ package kr.co.soogong.master.ui.auth.password.find
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kr.co.soogong.master.domain.usecase.auth.GetPhoneAuthCredentialUseCase
-import kr.co.soogong.master.domain.usecase.auth.RequestVerificationCodeUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class FindPasswordViewModel @Inject constructor(
-    private val requestVerificationCodeUseCase: RequestVerificationCodeUseCase,
-    private val getPhoneAuthCredentialUseCase: GetPhoneAuthCredentialUseCase,
+
 ) : BaseViewModel() {
     val phoneNumber = MutableLiveData("")
     val certificationCode = MutableLiveData("")

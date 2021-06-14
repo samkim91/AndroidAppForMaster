@@ -5,11 +5,11 @@ import android.os.CountDownTimer
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.PhoneAuthCredential
+import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
@@ -17,14 +17,12 @@ import kr.co.soogong.master.databinding.FragmentSignUpAuthBinding
 import kr.co.soogong.master.ui.auth.signup.LimitTime
 import kr.co.soogong.master.ui.auth.signup.SignUpActivity
 import kr.co.soogong.master.ui.auth.signup.SignUpViewModel
-import kr.co.soogong.master.ui.auth.signup.SignUpViewModel.Companion.SIGN_IN_PHONE_AUTH_CREDENTIAL_FAILED
-import kr.co.soogong.master.ui.auth.signup.SignUpViewModel.Companion.SIGN_IN_PHONE_AUTH_CREDENTIAL_INVALID
-import kr.co.soogong.master.ui.auth.signup.SignUpViewModel.Companion.SIGN_IN_PHONE_AUTH_CREDENTIAL_SUCCESSFULLY
 import kr.co.soogong.master.ui.auth.signup.TimerTerm
 import kr.co.soogong.master.ui.base.BaseFragment
-import kr.co.soogong.master.utility.EventObserver
+import kr.co.soogong.master.utility.PhoneNumberHelper
 import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
+import java.util.concurrent.TimeUnit
 
 @AndroidEntryPoint
 class AuthFragment : BaseFragment<FragmentSignUpAuthBinding>(
@@ -50,7 +48,6 @@ class AuthFragment : BaseFragment<FragmentSignUpAuthBinding>(
         super.onViewCreated(view, savedInstanceState)
         Timber.tag(TAG).d("onViewCreated: ")
         initLayout()
-        registerEventObserve()
 
         initFirebaseAuthCallbacks()
         startPhoneNumberVerification()
@@ -140,17 +137,66 @@ class AuthFragment : BaseFragment<FragmentSignUpAuthBinding>(
     private fun startPhoneNumberVerification() {
         Timber.tag(TAG).d("startPhoneNumberVerification: ${viewModel.tel.value}")
         startTimer()
-        requireContext().toast(getString(R.string.certification_code_requested))
-        viewModel.requestVerificationCode(
-            callbackActivity = requireActivity(),
-            callbacks = callbacks
-        )
+
+        viewModel.auth.value?.let { auth ->
+            viewModel.tel.value?.let { phoneNumber ->
+                requireContext().toast(getString(R.string.certification_code_requested))
+
+                val options = PhoneAuthOptions.newBuilder(auth)
+                    .setPhoneNumber(PhoneNumberHelper.toGlobalNumber(phoneNumber))      // Phone number to verify
+                    .setTimeout(
+                        LimitTime,
+                        TimeUnit.SECONDS
+                    )                            // Timeout and unit
+                    .setActivity(requireActivity())                                      // Activity (for callback binding)
+                    .setCallbacks(callbacks)                                            // OnVerificationStateChangedCallbacks
+                    .build()
+                PhoneAuthProvider.verifyPhoneNumber(options)
+            }
+        }
+//        viewModel.requestVerificationCode(
+//            callbackActivity = requireActivity(),
+//            callbacks = callbacks
+//        )
     }
 
     private fun verifyPhoneNumberWithCode() {
         Timber.tag(TAG)
             .d("verifyPhoneNumberWithCode: ${viewModel.storedVerificationId.value}, ${viewModel.certificationCode.value}")
-        viewModel.getPhoneAuthCredential()
+        viewModel.storedVerificationId.value?.let { verificationId ->
+            viewModel.certificationCode.value?.let { code ->
+                viewModel.phoneAuthCredential.value =
+                    PhoneAuthProvider.getCredential(verificationId, code)
+                Timber.tag(TAG).d("getPhoneAuthCredential: ${viewModel.phoneAuthCredential.value}")
+                signInWithPhoneAuthCredential()
+            }
+        }
+    }
+
+    private fun signInWithPhoneAuthCredential() {
+        Timber.tag(TAG)
+            .d("signInWithPhoneAuthCredential: ${viewModel.phoneAuthCredential.value} / ${viewModel.auth.value}")
+
+        viewModel.phoneAuthCredential.value?.let { credential ->
+            viewModel.auth.value?.signInWithCredential(credential)?.addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    // Sign in success, update UI with the signed-in user's information
+                    Timber.tag(TAG).d("signInWithPhoneAuthCredential successfully: ")
+                    viewModel.uid.value = task.result?.user?.uid
+                    (activity as? SignUpActivity)?.moveToNext()
+                } else {
+                    // Sign in failed, display a message and update the UI
+                    Timber.tag(TAG).d("signInWithPhoneAuthCredential failed: ${task.exception}")
+
+                    if (task.exception is FirebaseAuthInvalidCredentialsException) {
+                        // The verification code entered was invalid
+                        binding.alertWrongCertificationCode.isVisible = true
+                    } else {
+                        requireContext().toast(getString(R.string.error_message_of_request_failed))
+                    }
+                }
+            }
+        }
     }
 
     private fun resendVerificationCode() {
@@ -159,28 +205,20 @@ class AuthFragment : BaseFragment<FragmentSignUpAuthBinding>(
 
         startTimer()
         requireContext().toast(getString(R.string.certification_code_requested))
-        viewModel.resendVerificationCode(
-            callbackActivity = requireActivity(),
-            callbacks = callbacks
-        )
-    }
 
-    private fun registerEventObserve() {
-        Timber.tag(TAG).d("registerEventObserve: ")
-
-        viewModel.action.observe(viewLifecycleOwner, EventObserver { event ->
-            when (event) {
-                SIGN_IN_PHONE_AUTH_CREDENTIAL_SUCCESSFULLY -> {
-                    (activity as? SignUpActivity)?.moveToNext()
+        viewModel.auth.value?.let { auth ->
+            viewModel.tel.value?.let { phoneNumber ->
+                val optionsBuilder = PhoneAuthOptions.newBuilder(auth)
+                    .setPhoneNumber(PhoneNumberHelper.toGlobalNumber(phoneNumber))
+                    .setTimeout(LimitTime, TimeUnit.SECONDS)
+                    .setActivity(requireActivity())
+                    .setCallbacks(callbacks)
+                viewModel.resendToken.value?.let { resendToken ->
+                    optionsBuilder.setForceResendingToken(resendToken)          // callback's ForceResendingToken
                 }
-                SIGN_IN_PHONE_AUTH_CREDENTIAL_INVALID -> {
-                    binding.alertWrongCertificationCode.isVisible = true
-                }
-                SIGN_IN_PHONE_AUTH_CREDENTIAL_FAILED -> {
-                    requireContext().toast(getString(R.string.error_message_of_request_failed))
-                }
+                PhoneAuthProvider.verifyPhoneNumber(optionsBuilder.build())
             }
-        })
+        }
     }
 
     companion object {
