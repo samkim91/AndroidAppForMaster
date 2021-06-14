@@ -65,7 +65,6 @@
     <dimen name="sign_in_logo_margin_top">25dp</dimen>
     <dimen name="sign_in_margin_start">20dp</dimen>
     <dimen name="sign_in_margin_end">20dp</dimen>
-    <dimen name="sign_in_password_margin_top">8dp</dimen>
     <dimen name="sign_in_email_margin_top">24dp</dimen>
     <dimen name="sign_in_text_edit_height">40dp</dimen>
     <dimen name="sign_in_text_edit_padding_start">16dp</dimen>
@@ -74,7 +73,6 @@
     <dimen name="sign_in_text_edit_padding_bottom">10dp</dimen>
     <dimen name="sign_in_button_margin_top">18dp</dimen>
     <dimen name="sign_in_button_gone_margin_top">40dp</dimen>
-    <dimen name="find_password_text_margin_top">16dp</dimen>
 
     <!--  Find Info  -->
     <dimen name="find_info_padding_start">20dp</dimen>
@@ -127,20 +125,6 @@
 
     <!-- Account Page -->
     <dimen name="account_page_setting_button_height">56dp</dimen>
-
-    <!-- Password Change -->
-    <dimen name="password_margin_start">20dp</dimen>
-    <dimen name="password_margin_end">20dp</dimen>
-    <dimen name="password_input_margin_top">24dp</dimen>
-    <dimen name="password_password_margin_top">8dp</dimen>
-    <dimen name="password_text_edit_height">40dp</dimen>
-    <dimen name="password_text_edit_padding_start">16dp</dimen>
-    <dimen name="password_text_edit_padding_end">0dp</dimen>
-    <dimen name="password_text_edit_padding_top">10dp</dimen>
-    <dimen name="password_text_edit_padding_bottom">10dp</dimen>
-    <dimen name="password_button_margin_top">14dp</dimen>
-    <dimen name="password_button_gone_margin_top">40dp</dimen>
-    <dimen name="password_alert_margin_top">8dp</dimen>
 
     <!-- Alarm -->
     <dimen name="alarm_margin_start">20dp</dimen>

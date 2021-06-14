@@ -8,13 +8,11 @@ import kr.co.soogong.master.network.auth.AuthService
 import javax.inject.Inject
 
 @Reusable
-class SignInUseCase @Inject constructor(
+class SignUpUseCase @Inject constructor(
     private val authService: AuthService
 ) {
-    operator fun invoke(uid: String): Single<JsonObject> {
+    operator fun invoke(signUpDto: SignUpDto): Single<JsonObject> {
         // TODO: 2021/06/10 return type 수정
-
-
-        return authService.signIn(uid)
+        return authService.signUp(signUpDto)
     }
 }

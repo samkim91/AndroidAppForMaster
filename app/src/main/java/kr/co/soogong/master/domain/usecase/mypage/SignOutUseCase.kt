@@ -1,5 +1,7 @@
 package kr.co.soogong.master.domain.usecase.mypage
 
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import dagger.Reusable
 import kr.co.soogong.master.data.dao.estimation.EstimationDao
 import kr.co.soogong.master.domain.usecase.auth.SaveAccessTokenUseCase
@@ -18,8 +20,11 @@ class SignOutUseCase @Inject constructor(
     private val saveRefreshTokenUseCase: SaveRefreshTokenUseCase,
 ) {
     suspend operator fun invoke() {
+        Firebase.auth.signOut()
+
         estimationDao.removeAll()
         userDao.removeAll()
+
         saveMasterIdInSharedUseCase("")
         saveMasterApprovalUseCase(false)
         saveAccessTokenUseCase("")

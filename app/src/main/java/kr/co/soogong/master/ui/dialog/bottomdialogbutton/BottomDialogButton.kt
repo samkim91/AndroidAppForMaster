@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kr.co.soogong.master.databinding.BottomDialogButtonBinding
-import kr.co.soogong.master.databinding.BottomDialogRecyclerViewBinding
 import timber.log.Timber
 
 class BottomDialogButton(

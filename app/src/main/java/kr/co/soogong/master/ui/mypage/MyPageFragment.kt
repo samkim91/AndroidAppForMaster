@@ -12,11 +12,11 @@ import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentMypageBinding
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.mypage.notice.NoticeMyPageListViewHolder
+import kr.co.soogong.master.uihelper.auth.SignMainActivityHelper
 import kr.co.soogong.master.uihelper.mypage.account.AccountActivityHelper
 import kr.co.soogong.master.uihelper.mypage.alarm.AlarmActivityHelper
 import kr.co.soogong.master.uihelper.mypage.notice.NoticeActivityHelper
 import kr.co.soogong.master.uihelper.mypage.notice.detail.NoticeDetailActivityHelper
-import kr.co.soogong.master.uihelper.auth.SignMainActivityHelper
 import kr.co.soogong.master.utility.EventObserver
 import timber.log.Timber
 

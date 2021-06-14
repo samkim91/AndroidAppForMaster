@@ -2,12 +2,19 @@ package kr.co.soogong.master.ui.profile.edit.requiredinformation.phonenumber
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.google.firebase.auth.PhoneAuthCredential
+import com.google.firebase.auth.PhoneAuthProvider
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
+import kr.co.soogong.master.domain.usecase.auth.CheckUserExistentUseCase
 import kr.co.soogong.master.domain.usecase.profile.SavePhoneNumberUseCase
+import kr.co.soogong.master.ui.auth.signin.SignInViewModel
 import kr.co.soogong.master.ui.base.BaseViewModel
+import kr.co.soogong.master.utility.PhoneNumberHelper
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -15,8 +22,13 @@ import javax.inject.Inject
 class EditPhoneNumberViewModel @Inject constructor(
     private val savePhoneNumberUseCase: SavePhoneNumberUseCase,
 ) : BaseViewModel() {
-    val phoneNumber = MutableLiveData("")
+    val tel = MutableLiveData("")
     val certificationCode = MutableLiveData("")
+    val auth = MutableLiveData(Firebase.auth)
+    val phoneAuthCredential = MutableLiveData<PhoneAuthCredential>()
+    val storedVerificationId = MutableLiveData("")
+    val resendToken = MutableLiveData<PhoneAuthProvider.ForceResendingToken>()
+    val uid = MutableLiveData("")
 
     private var _isEnabled = MutableLiveData(false)
     val isEnabled: LiveData<Boolean>
@@ -26,42 +38,11 @@ class EditPhoneNumberViewModel @Inject constructor(
         _isEnabled.value = !_isEnabled.value!!
     }
 
-    // TODO: 2021/06/10 firebase로 휴대폰 번호 바꾸는 거 확인..
-
-    fun requestCertificationCode() {
-        Timber.tag(TAG).d("requestCertificationCode: ")
-//        phoneNumber.value?.let {
-//            requestVerificationCodeUseCase(phoneNumber = it)
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribeBy(
-//                    onSuccess = { },
-//                    onError = { setAction(CERTIFICATION_CODE_REQUESTED_FAILED) }
-//                ).addToDisposable()
-//        }
-    }
-
-    fun requestConfirmCertificationCode() {
-        Timber.tag(TAG).d("requestConfirmCertificationCode: ")
-
-        // 입력한 인증번호를 확인
-        // 인증되면, 다음화면으로
-        // 안 되면, alert 표시
-//        certificationCode.value?.let {
-//            getPhoneAuthCredentialUseCase(certificationCode = it)
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribeBy(
-//                    onSuccess = { savePhoneNumber() },
-//                    onError = { setAction(CERTIFICATION_CODE_CONFIRMED_FAILED) }
-//                ).addToDisposable()
-//        }
-    }
-
-    private fun savePhoneNumber() {
+    fun savePhoneNumber() {
+        // TODO: 2021/06/14 Firebase admin SDK를 이용해서, 현재 유저의 전화번호를 새 번호로 업데이트하고, DB에도 넣어줘야함.
         Timber.tag(TAG).d("savePhoneNumber: ")
 
-        phoneNumber.value?.let {
+        tel.value?.let {
             savePhoneNumberUseCase(it)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -74,10 +55,6 @@ class EditPhoneNumberViewModel @Inject constructor(
 
     companion object {
         private const val TAG = "EditPhoneNumberViewModel"
-
-        const val CERTIFICATION_CODE_REQUESTED_FAILED = "CERTIFICATION_CODE_REQUESTED_FAILED"
-        const val CERTIFICATION_CODE_CONFIRMED_FAILED = "CERTIFICATION_CODE_CONFIRMED_FAILED"
-
         const val SAVE_PHONE_NUMBER_SUCCESSFULLY =
             "SAVE_BUSINESS_REPRESENTATIVE_NAME_SUCCESSFULLY"
         const val SAVE_PHONE_NUMBER_FAILED =

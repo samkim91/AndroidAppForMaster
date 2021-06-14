@@ -6,7 +6,7 @@ import kotlinx.parcelize.Parcelize
 import kr.co.soogong.master.data.model.major.BusinessType
 
 @Parcelize
-data class SignInDto(
+data class SignUpDto(
     @SerializedName("uid")
     val uid: String,
 

@@ -3,8 +3,6 @@ package kr.co.soogong.master.ui.auth.signup.steps
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentSignUpPhoneNumberBinding

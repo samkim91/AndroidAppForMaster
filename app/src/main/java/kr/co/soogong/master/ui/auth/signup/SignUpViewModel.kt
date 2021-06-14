@@ -9,11 +9,12 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import kr.co.soogong.master.data.dto.auth.SignInDto
+import kr.co.soogong.master.data.dto.auth.SignUpDto
 import kr.co.soogong.master.data.model.major.BusinessType
 import kr.co.soogong.master.domain.usecase.auth.CheckUserExistentUseCase
 import kr.co.soogong.master.domain.usecase.auth.SignInTestUseCase
 import kr.co.soogong.master.domain.usecase.auth.SignInUseCase
+import kr.co.soogong.master.domain.usecase.auth.SignUpUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import kr.co.soogong.master.utility.ListLiveData
 import kr.co.soogong.master.utility.PhoneNumberHelper
@@ -22,19 +23,18 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SignUpViewModel @Inject constructor(
+    private val signUpUseCase: SignUpUseCase,
     private val signInUseCase: SignInUseCase,
-    private val signInTestUseCase: SignInTestUseCase,
     private val checkUserExistentUseCase: CheckUserExistentUseCase,
 ) : BaseViewModel() {
 
     val indicator = MutableLiveData(0)
 
-    // Step 1
+    // PhoneNumberFragment
     val tel = MutableLiveData("")
 
-    // Step 2
+    // AuthFragment
     val certificationCode = MutableLiveData("")
-
     // Firebase Auth
     val auth = MutableLiveData(Firebase.auth)
     val phoneAuthCredential = MutableLiveData<PhoneAuthCredential>()
@@ -42,30 +42,23 @@ class SignUpViewModel @Inject constructor(
     val resendToken = MutableLiveData<PhoneAuthProvider.ForceResendingToken>()
     val uid = MutableLiveData("")
 
-    // Step 2 sub
-    val signInPassword = MutableLiveData("")
-
-    // Step 3
-    val signUpPassword = MutableLiveData("")
-    val signUpConfirmPassword = MutableLiveData("")
-
-    // Step 4
+    // OwnerNameFragment
     val ownerName = MutableLiveData("")
 
-    // Step 5
+    // MajorFragment
     val businessTypes = ListLiveData<BusinessType>()
 
-    // Step 6
+    // AddressFragment
     val roadAddress = MutableLiveData("")
     val detailAddress = MutableLiveData("")
     val latitude = MutableLiveData(0.0)
     val longitude = MutableLiveData(0.0)
 
-    // Step 7
+    // ServiceAreaFragment
     val serviceArea = MutableLiveData("")
     val serviceAreaToInt = MutableLiveData(0)
 
-    // Step 8
+    // PrivatePolicyFragment
     val agreedPrivacyPolicy = MutableLiveData(false)
     val marketingPush = MutableLiveData(false)
     val appPush = MutableLiveData(false)
@@ -91,27 +84,10 @@ class SignUpViewModel @Inject constructor(
         }
     }
 
-    fun requestLogin() {
-        Timber.tag(TAG).d("requestLogin: ")
-        signInTestUseCase(tel.value, signInPassword.value ?: signUpPassword.value)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeBy(
-                onSuccess = {
-                    Timber.tag(TAG).d("onSuccess: $it")
-                    setAction(SIGN_IN_SUCCESSFUL)
-                },
-                onError = {
-                    Timber.tag(TAG).d("onError: $it")
-                    setAction(SIGN_IN_FAILED)
-                }
-            ).addToDisposable()
-    }
-
     fun signUp() {
         Timber.tag(TAG).d("signUp : ")
-        signInUseCase(
-            SignInDto(
+        signUpUseCase(
+            SignUpDto(
                 uid = uid.value!!,
                 ownerName = ownerName.value!!,
                 tel = tel.value!!,
@@ -140,6 +116,25 @@ class SignUpViewModel @Inject constructor(
                     setAction(SIGN_UP_FAILED)
                 }
             ).addToDisposable()
+    }
+
+    private fun requestLogin() {
+        Timber.tag(TAG).d("requestLogin: ")
+        uid.value?.let { uid ->
+            signInUseCase(uid)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeBy(
+                    onSuccess = {
+                        Timber.tag(TAG).d("onSuccess: $it")
+                        setAction(SIGN_IN_SUCCESSFUL)
+                    },
+                    onError = {
+                        Timber.tag(TAG).d("onError: $it")
+                        setAction(SIGN_IN_FAILED)
+                    }
+                ).addToDisposable()
+        }
     }
 
 
