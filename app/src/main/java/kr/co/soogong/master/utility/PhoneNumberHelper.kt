@@ -21,20 +21,16 @@ object PhoneNumberHelper {
     // +82 10-1111-2222 -> 010-1111-2222
     fun toLocalNumber(phoneNumber: String): String {
         if(phoneNumber.contains("+82 10")) {
-            phoneNumber.replace("+82 10", "010")
+            return phoneNumber.replace("+82 10", "010")
         }
         return phoneNumber
     }
 
-    // 01011112222 -> +82 10-1111-2222
+    // 01011112222 -> +821011112222
     fun toGlobalNumber(phoneNumber: String): String {
-        var newPhoneNumber = addDashToLocalNumber(phoneNumber)
-
-        if(newPhoneNumber.startsWith("010")) {
-            newPhoneNumber = newPhoneNumber.replace("010", "+82 10")
+        if(phoneNumber.startsWith("010")) {
+            return phoneNumber.replace("010", "+8210")
         }
-        Timber.tag(TAG).d("toGlobalNumber: $phoneNumber to $newPhoneNumber")
-
-        return newPhoneNumber
+        return phoneNumber
     }
 }

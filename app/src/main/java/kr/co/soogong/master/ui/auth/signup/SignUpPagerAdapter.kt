@@ -17,7 +17,6 @@ class SignUpPagerAdapter(
         return when (position) {
             0 -> PhoneNumberFragment.newInstance()
             1 -> AuthFragment.newInstance()
-//            2 -> PasswordFragment.newInstance()
             2 -> OwnerNameFragment.newInstance()
             3 -> MajorFragment.newInstance()
             4 -> AddressFragment.newInstance()

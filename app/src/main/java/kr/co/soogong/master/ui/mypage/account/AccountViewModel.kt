@@ -14,11 +14,6 @@ class AccountViewModel @Inject constructor(
         setAction(WITHDRAWAL)
     }
 
-//    fun passwordAction() {
-//        Timber.tag(TAG).i("Password Change Button")
-//        setAction(PASSWORD)
-//    }
-
     companion object {
         private const val TAG = "AccountViewModel"
         const val WITHDRAWAL = "WITHDRAWAL"

@@ -27,22 +27,21 @@ class SplashActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         Timber.tag(TAG).d("onStart: ")
-        checkSignIng()
+        checkSignIn()
     }
 
-    private fun checkSignIng() {
-        Timber.tag(TAG).d("checkSignIng: ")
+    private fun checkSignIn() {
+        Timber.tag(TAG).d("checkSignIn: ")
 
-        getMasterIdFromFirebaseUseCase()?.let { masterId ->
-            Timber.tag(TAG).d("masterId: $masterId")
+        getMasterIdFromFirebaseUseCase()?.let { masterUid ->
+            Timber.tag(TAG).d("masterId: $masterUid")
 
-            // TODO: 2021/06/09 개발 끝나고 활성화
-//            saveMasterIdInSharedUseCase(masterId)
+            saveMasterIdInSharedUseCase(masterUid)
             startActivity(MainActivityHelper.getIntent(this))
             return
         }
 
-        Timber.tag(TAG).d("masterId is null")
+        Timber.tag(TAG).d("masterUid is null")
         startActivity(SignMainActivityHelper.getIntent(this))
     }
 

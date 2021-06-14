@@ -20,7 +20,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.auth.password.change.ChangePasswordActivity"></activity>
         <activity android:name=".ui.profile.edit.requiredinformation.EditRequiredInformationActivity" />
         <activity android:name=".ui.profile.review.MyReviewsActivity" />
         <activity android:name=".ui.profile.edit.EditProfileContainerActivity" />
@@ -49,16 +48,13 @@
             android:name=".ui.auth.signin.SignInActivity"
             android:launchMode="singleTask" />
         <activity
-            android:name=".ui.auth.password.find.FindPasswordActivity"
-            android:launchMode="singleTask" />
-        <activity
             android:name=".ui.main.MainActivity"
             android:launchMode="singleTask" />
         <activity
             android:name=".ui.major.MajorActivity"
             android:launchMode="singleTask" />
         <activity
-            android:name=".ui.image.ImageActivity"
+            android:name="kr.co.soogong.master.ui.image.ImageActivity"
             android:launchMode="singleTask" />
         <activity
             android:name=".ui.requirement.action.cancel.CancelEstimateActivity"

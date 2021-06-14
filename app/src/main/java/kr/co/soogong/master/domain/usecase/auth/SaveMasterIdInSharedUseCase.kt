@@ -9,9 +9,9 @@ import javax.inject.Inject
 class SaveMasterIdInSharedUseCase @Inject constructor(
     private val sharedPreferences: SharedPreferences
 ) {
-    operator fun invoke(masterId: String) {
+    operator fun invoke(masterUid: String) {
         sharedPreferences.edit()
-            .putString(AppSharedPreferenceContract.MASTER_ID, masterId)
+            .putString(AppSharedPreferenceContract.MASTER_UID, masterUid)
             .apply()
     }
 }

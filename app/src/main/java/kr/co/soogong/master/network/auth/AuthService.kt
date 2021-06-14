@@ -3,7 +3,7 @@ package kr.co.soogong.master.network.auth
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import io.reactivex.Single
-import kr.co.soogong.master.data.dto.auth.SignInDto
+import kr.co.soogong.master.data.dto.auth.SignUpDto
 import kr.co.soogong.master.data.dto.Response
 import retrofit2.Retrofit
 import javax.inject.Inject
@@ -13,8 +13,11 @@ class AuthService @Inject constructor(
 ) {
     private val authInterface = retrofit.create(AuthInterface::class.java)
 
+    fun signIn(uid: String): Single<JsonObject> {
+        return authInterface.signIn(uid)
+    }
 
-    fun signIn(signInDto: SignInDto): Single<JsonObject> {
+    fun signUp(signUpDto: SignUpDto): Single<JsonObject> {
 //        val data = HashMap<String, Any>()
 //        val values = Gson().toJson(signUpInfo)
 
@@ -31,7 +34,7 @@ class AuthService @Inject constructor(
 //        data["appPush"] = signUpInfo.appPush
 //        data["marketingPush"] = signUpInfo.marketingPush
 
-        return authInterface.signIn(Gson().toJson(signInDto))
+        return authInterface.signUp(Gson().toJson(signUpDto))
     }
 
     fun checkUserExistent(id: String): Single<Boolean> {
