@@ -179,7 +179,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/representative_images"
-                    app:secondDetail="@{String.valueOf(vm.requiredInformation.businessUnitInformation.businessNumber)}"
+                    app:secondDetail="@{vm.requiredInformation.businessUnitInformation.businessNumber}"
                     app:title='@{"사업자 정보"}' />
 
                 <!-- A/S 정보 WARRANTY_INFORMATION -->

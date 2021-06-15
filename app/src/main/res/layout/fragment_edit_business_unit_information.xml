@@ -70,7 +70,7 @@
                         app:title='@{"사업자 등록상호를 입력해주세요."}' />
 
                     <kr.co.soogong.master.ui.widget.TitleEditText
-                        android:id="@+id/company_name"
+                        android:id="@+id/shop_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/gap_28"
@@ -83,7 +83,7 @@
                         app:title='@{"업체 이름을 입력해주세요."}' />
 
                     <kr.co.soogong.master.ui.widget.TitleEditText
-                        android:id="@+id/identical_number"
+                        android:id="@+id/business_number"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/gap_28"
@@ -92,12 +92,12 @@
                         app:hintText='@{"사업자등록번호 예시) 1053578512"}'
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/company_name"
+                        app:layout_constraintTop_toBottomOf="@id/shop_name"
                         app:setInputType="@{InputType.TYPE_CLASS_NUMBER}"
                         app:title='@{"사업자등록번호를 입력해주세요."}' />
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/identical_image_holder_label"
+                        android:id="@+id/business_regist_image_holder_label"
                         style="@style/medium_text_style.medium"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -106,37 +106,37 @@
                         android:textColor="@color/text_basic_color"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/identical_number" />
+                        app:layout_constraintTop_toBottomOf="@id/business_number" />
 
                     <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/camera_icon_for_identical_image"
+                        android:id="@+id/camera_icon_for_business_regist_image"
                         android:layout_width="@dimen/gap_100"
                         android:layout_height="@dimen/gap_100"
                         android:layout_marginTop="@dimen/gap_12"
                         android:background="@drawable/ic_camera"
-                        app:layout_constraintStart_toStartOf="@id/identical_image_holder_label"
-                        app:layout_constraintTop_toBottomOf="@id/identical_image_holder_label"
+                        app:layout_constraintStart_toStartOf="@id/business_regist_image_holder_label"
+                        app:layout_constraintTop_toBottomOf="@id/business_regist_image_holder_label"
                         bind:visible="@{vm.businessRegistImage == Uri.EMPTY}" />
 
                     <androidx.cardview.widget.CardView
-                        android:id="@+id/identical_image_holder"
+                        android:id="@+id/business_regist_image_holder"
                         android:layout_width="@dimen/gap_100"
                         android:layout_height="@dimen/gap_100"
                         android:layout_marginTop="@dimen/gap_12"
                         app:cardCornerRadius="@dimen/gap_8"
                         app:cardElevation="@dimen/gap_0"
-                        app:layout_constraintStart_toStartOf="@id/identical_image_holder_label"
-                        app:layout_constraintTop_toBottomOf="@id/identical_image_holder_label"
+                        app:layout_constraintStart_toStartOf="@id/business_regist_image_holder_label"
+                        app:layout_constraintTop_toBottomOf="@id/business_regist_image_holder_label"
                         bind:visible="@{vm.businessRegistImage != Uri.EMPTY}">
 
                         <androidx.appcompat.widget.AppCompatImageView
-                            android:id="@+id/image_before_job_view"
+                            android:id="@+id/image_view"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             bind:image_uri="@{vm.businessRegistImage}" />
 
                         <androidx.appcompat.widget.AppCompatImageView
-                            android:id="@+id/image_before_job_close_icon"
+                            android:id="@+id/image_view_close_icon"
                             android:layout_width="@dimen/gap_24"
                             android:layout_height="@dimen/gap_24"
                             android:layout_gravity="right"
@@ -155,7 +155,7 @@
                         android:visibility="gone"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/camera_icon_for_identical_image" />
+                        app:layout_constraintTop_toBottomOf="@id/camera_icon_for_business_regist_image" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <kr.co.soogong.master.ui.widget.TitleEditText

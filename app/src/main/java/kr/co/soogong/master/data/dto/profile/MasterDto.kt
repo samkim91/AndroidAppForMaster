@@ -16,8 +16,8 @@ data class MasterDto(
     val id: Int,    // ID
 
     @PrimaryKey
-    @SerializedName("uId")
-    val uId: String,
+    @SerializedName("uid")
+    val uid: String,
 
     @SerializedName("ownerName")
     val ownerName: String?,

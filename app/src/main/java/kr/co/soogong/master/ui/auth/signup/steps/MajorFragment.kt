@@ -15,7 +15,7 @@ import kr.co.soogong.master.ui.auth.signup.SignUpViewModel
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.uihelper.major.MajorActivityHelper
 import kr.co.soogong.master.uihelper.major.MajorActivityHelper.BUNDLE_MAJOR
-import kr.co.soogong.master.utility.BusinessTypeChipGroupHelper
+import kr.co.soogong.master.utility.MajorChipGroupHelper
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -24,7 +24,7 @@ class MajorFragment : BaseFragment<FragmentSignUpMajorBinding>(
 ) {
     private val viewModel: SignUpViewModel by activityViewModels()
 
-    private var getBusinessTypeLauncher =
+    private var getMajorLauncher =
         registerForActivityResult(StartActivityForResult()) { result ->
             Timber.tag(TAG).d("StartActivityForResult: $result")
             if (result.resultCode == Activity.RESULT_OK) {
@@ -32,9 +32,9 @@ class MajorFragment : BaseFragment<FragmentSignUpMajorBinding>(
                 val selectedMajor: Major by lazy {
                     data?.getParcelableExtra(BUNDLE_MAJOR) ?: Major(null, null)
                 }
-                BusinessTypeChipGroupHelper.makeEntryChipGroupWithSubtitleForBusinessTypes(
+                MajorChipGroupHelper.makeEntryChipGroupWithSubtitleForMajor(
                     layoutInflater = layoutInflater,
-                    container = binding.businessTypeContainer,
+                    container = binding.majorContainer,
                     newMajor = selectedMajor,
                     viewModelBusinessTypes = viewModel.businessTypes
                 )
@@ -55,8 +55,8 @@ class MajorFragment : BaseFragment<FragmentSignUpMajorBinding>(
             vm = viewModel
             lifecycleOwner = viewLifecycleOwner
 
-            businessType.setButtonClickListener {
-                getBusinessTypeLauncher.launch(
+            major.setButtonClickListener {
+                getMajorLauncher.launch(
                     Intent(
                         MajorActivityHelper.getIntent(
                             requireContext()
@@ -67,11 +67,11 @@ class MajorFragment : BaseFragment<FragmentSignUpMajorBinding>(
 
             defaultButton.setOnClickListener {
                 viewModel.businessTypes.observe(viewLifecycleOwner, {
-                    businessType.alertVisible = it.isNullOrEmpty()
+                    major.alertVisible = it.isNullOrEmpty()
                 })
 
 
-                if (!businessType.alertVisible) {
+                if (!major.alertVisible) {
                     (activity as? SignUpActivity)?.moveToNext()
                 }
             }

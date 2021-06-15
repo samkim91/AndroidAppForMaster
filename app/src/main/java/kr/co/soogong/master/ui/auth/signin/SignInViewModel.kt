@@ -30,7 +30,7 @@ class SignInViewModel @Inject constructor(
     val phoneAuthCredential = MutableLiveData<PhoneAuthCredential>()
     val storedVerificationId = MutableLiveData("")
     val resendToken = MutableLiveData<PhoneAuthProvider.ForceResendingToken>()
-    val uId = MutableLiveData("")
+    val uid = MutableLiveData("")
 
     private var _isEnabled = MutableLiveData(false)
     val isEnabled: LiveData<Boolean>
@@ -63,8 +63,8 @@ class SignInViewModel @Inject constructor(
     }
 
     fun saveMasterUidInShared(){
-        Timber.tag(TAG).d("saveMasterUidInShared: ${uId.value} ")
-        uId.value?.let {
+        Timber.tag(TAG).d("saveMasterUidInShared: ${uid.value} ")
+        uid.value?.let {
             saveMasterUidInSharedUseCase(it)
         }
     }
@@ -72,8 +72,8 @@ class SignInViewModel @Inject constructor(
     fun requestSignIn() {
         Timber.tag(TAG).d("requestSignIn: ")
 
-        uId.value?.let { uId ->
-            signInUseCase(uId)
+        uid.value?.let { uid ->
+            signInUseCase(uid)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(

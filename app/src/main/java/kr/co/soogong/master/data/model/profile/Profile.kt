@@ -15,8 +15,8 @@ data class Profile(
     val id: Int,
 
     @PrimaryKey
-    @SerializedName("uId")
-    val uId: String,
+    @SerializedName("uid")
+    val uid: String,
 
     @SerializedName("tel")
     val tel: String,
@@ -43,12 +43,12 @@ data class Profile(
         fun fromMasterDto(masterDto: MasterDto): Profile {
             return Profile(
                 id = masterDto.id,
-                uId = masterDto.uId,
+                uid = masterDto.uid,
                 tel = masterDto.tel,
                 representativeName = if (!masterDto.shopName.isNullOrEmpty()) masterDto.shopName else masterDto.ownerName,
                 subscriptionPlan = masterDto.subscriptionPlan,
                 myReview = MyReview.TEST_MY_REVIEW, // TODO: 2021/06/15 추가 필요 masterDto.myReview,
-                myPageUrl = HttpContract.MY_PAGE_URL + masterDto.uId,
+                myPageUrl = HttpContract.MY_PAGE_URL + masterDto.uid,
                 isPublic = masterDto.isPublic,
                 basicInformation = BasicInformation.fromMasterDto(masterDto),
             )
@@ -85,7 +85,7 @@ data class Profile(
 //
         val NULL_PROFILE = Profile(
             id = 0,
-            uId = "",
+            uid = "",
             tel = "",
             representativeName = "",
             subscriptionPlan = "",

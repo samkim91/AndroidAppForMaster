@@ -1,4 +1,4 @@
-package kr.co.soogong.master.ui.profile.edit.requiredinformation.businessrepresentativename
+package kr.co.soogong.master.ui.profile.edit.requiredinformation.ownername
 
 import android.os.Bundle
 import android.view.View
@@ -7,9 +7,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentEditOwnerNameBinding
 import kr.co.soogong.master.ui.base.BaseFragment
-import kr.co.soogong.master.ui.profile.edit.requiredinformation.businessrepresentativename.EditOwnerNameViewModel.Companion.GET_OWNER_NAME_FAILED
-import kr.co.soogong.master.ui.profile.edit.requiredinformation.businessrepresentativename.EditOwnerNameViewModel.Companion.SAVE_OWNER_NAME_FAILED
-import kr.co.soogong.master.ui.profile.edit.requiredinformation.businessrepresentativename.EditOwnerNameViewModel.Companion.SAVE_OWNER_NAME_SUCCESSFULLY
+import kr.co.soogong.master.ui.profile.edit.requiredinformation.ownername.EditOwnerNameViewModel.Companion.GET_OWNER_NAME_FAILED
+import kr.co.soogong.master.ui.profile.edit.requiredinformation.ownername.EditOwnerNameViewModel.Companion.SAVE_OWNER_NAME_FAILED
+import kr.co.soogong.master.ui.profile.edit.requiredinformation.ownername.EditOwnerNameViewModel.Companion.SAVE_OWNER_NAME_SUCCESSFULLY
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber

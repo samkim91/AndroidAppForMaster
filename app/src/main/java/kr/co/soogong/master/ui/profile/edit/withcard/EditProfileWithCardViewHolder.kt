@@ -12,7 +12,7 @@ abstract class EditProfileWithCardViewHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
 
     open fun binding(
-        item: Portfolio,
+        portfolio: Portfolio,
         leftButtonClickListener: (id: Int) -> Unit,
         rightButtonClickListener: (id: Int) -> Unit,
     ) { }
@@ -37,11 +37,11 @@ class PortfolioViewHolder(
             data = portfolio
 
             setDeleteButtonClickListener {
-                leftButtonClickListener(portfolio.id!!)
+                leftButtonClickListener(portfolio.id)
             }
 
             setEditButtonClickListener {
-                rightButtonClickListener(portfolio.id!!)
+                rightButtonClickListener(portfolio.id)
             }
 
             executePendingBindings()
@@ -62,11 +62,11 @@ class PriceByProjectsViewHolder(
             data = priceByProject
 
             setDeleteButtonClickListener {
-                leftButtonClickListener(priceByProject.id!!)
+                leftButtonClickListener(priceByProject.id)
             }
 
             setEditButtonClickListener {
-                rightButtonClickListener(priceByProject.id!!)
+                rightButtonClickListener(priceByProject.id)
             }
 
             executePendingBindings()

@@ -6,7 +6,7 @@ import dagger.Reusable
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import kr.co.soogong.master.network.auth.AuthService
-import kr.co.soogong.master.network.major.CategoryService
+import kr.co.soogong.master.network.major.MajorService
 import kr.co.soogong.master.network.mypage.MyPageService
 import kr.co.soogong.master.network.profile.ProfileService
 import kr.co.soogong.master.network.requirement.RequirementService
@@ -24,8 +24,8 @@ class RetrofitModule {
 
     @Provides
     @Reusable
-    fun provideCategoryService(retrofit: Retrofit): CategoryService {
-        return CategoryService(retrofit)
+    fun provideCategoryService(retrofit: Retrofit): MajorService {
+        return MajorService(retrofit)
     }
 
     @Provides

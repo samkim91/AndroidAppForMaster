@@ -18,7 +18,7 @@ import kr.co.soogong.master.data.model.requirement.RequirementConverters
 
 @Database(
     entities = [Requirement::class, Estimation::class, MasterDto::class, Profile::class],
-    version = 11,
+    version = 2,
     exportSchema = false
 )
 @TypeConverters(
