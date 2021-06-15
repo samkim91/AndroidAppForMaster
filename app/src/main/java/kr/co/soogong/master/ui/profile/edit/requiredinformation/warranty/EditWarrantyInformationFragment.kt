@@ -1,4 +1,4 @@
-package kr.co.soogong.master.ui.profile.edit.requiredinformation.warrantyinformation
+package kr.co.soogong.master.ui.profile.edit.requiredinformation.warranty
 
 import android.os.Bundle
 import android.view.View
@@ -9,9 +9,9 @@ import kr.co.soogong.master.databinding.FragmentEditWarrantyInformationBinding
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogData
 import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogRecyclerView
-import kr.co.soogong.master.ui.profile.edit.requiredinformation.warrantyinformation.EditWarrantyInformationViewModel.Companion.GET_WARRANTY_INFORMATION_FAILED
-import kr.co.soogong.master.ui.profile.edit.requiredinformation.warrantyinformation.EditWarrantyInformationViewModel.Companion.SAVE_WARRANTY_INFORMATION_FAILED
-import kr.co.soogong.master.ui.profile.edit.requiredinformation.warrantyinformation.EditWarrantyInformationViewModel.Companion.SAVE_WARRANTY_INFORMATION_SUCCESSFULLY
+import kr.co.soogong.master.ui.profile.edit.requiredinformation.warranty.EditWarrantyInformationViewModel.Companion.GET_WARRANTY_INFORMATION_FAILED
+import kr.co.soogong.master.ui.profile.edit.requiredinformation.warranty.EditWarrantyInformationViewModel.Companion.SAVE_WARRANTY_INFORMATION_FAILED
+import kr.co.soogong.master.ui.profile.edit.requiredinformation.warranty.EditWarrantyInformationViewModel.Companion.SAVE_WARRANTY_INFORMATION_SUCCESSFULLY
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber

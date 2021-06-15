@@ -13,7 +13,7 @@ import retrofit2.http.Query
 interface AuthInterface {
 
     @GET(HttpContract.MASTER_SIGN_IN)
-    fun signIn(@Query("uId") uId: String): Single<JsonObject>
+    fun signIn(@Query("uid") uid: String): Single<JsonObject>
 
     @POST(HttpContract.MASTER_SIGN_UP)
     fun signUp(@Body body: String): Single<JsonObject>

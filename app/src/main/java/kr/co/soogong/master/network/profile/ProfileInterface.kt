@@ -8,6 +8,6 @@ import retrofit2.http.Query
 
 interface ProfileInterface {
     @GET(HttpContract.GET_MASTER_BY_UID)
-    fun getMasterByUid(@Query("uId") uId: String?): Single<MasterDto>
+    fun getMasterByUid(@Query("uid") uid: String?): Single<MasterDto>
 
 }

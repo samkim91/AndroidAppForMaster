@@ -1,4 +1,4 @@
-package kr.co.soogong.master.ui.profile.edit.requiredinformation.businessrepresentativename
+package kr.co.soogong.master.ui.profile.edit.requiredinformation.ownername
 
 import androidx.lifecycle.MutableLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel

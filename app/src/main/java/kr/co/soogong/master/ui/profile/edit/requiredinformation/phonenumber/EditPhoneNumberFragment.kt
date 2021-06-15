@@ -206,7 +206,7 @@ class EditPhoneNumberFragment :
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     Timber.tag(TAG).d("signInWithPhoneAuthCredential successfully: ")
-                    viewModel.uId.value = task.result?.user?.uid
+                    viewModel.uid.value = task.result?.user?.uid
                     viewModel.savePhoneNumber()
                 } else {
                     // Sign in failed, display a message and update the UI
@@ -227,7 +227,7 @@ class EditPhoneNumberFragment :
             .d("resendVerificationCode: ${viewModel.tel.value}, ${viewModel.resendToken.value}")
 
         startTimer()
-        requireContext().toast(getString(R.string.certification_code_requested))
+        requireContext().toast(getString(R.string.certification_code_requested_again))
 
         viewModel.auth.value?.let { auth ->
             viewModel.tel.value?.let { phoneNumber ->

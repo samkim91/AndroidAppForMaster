@@ -57,7 +57,4 @@ fun addTransmissionMessage(
 
         viewGroup.addView(view, params)
     }
-
-    //TODO.. 시공시기도 포함되도록 서버 return 수정 필요
-
 }

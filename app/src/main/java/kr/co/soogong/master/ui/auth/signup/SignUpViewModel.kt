@@ -39,7 +39,7 @@ class SignUpViewModel @Inject constructor(
     val phoneAuthCredential = MutableLiveData<PhoneAuthCredential>()
     val storedVerificationId = MutableLiveData("")
     val resendToken = MutableLiveData<PhoneAuthProvider.ForceResendingToken>()
-    val uId = MutableLiveData("")
+    val uid = MutableLiveData("")
 
     // OwnerNameFragment
     val ownerName = MutableLiveData("")
@@ -87,7 +87,7 @@ class SignUpViewModel @Inject constructor(
         Timber.tag(TAG).d("signUp : ")
         signUpUseCase(
             SignUpDto(
-                uId = uId.value!!,
+                uid = uid.value!!,
                 ownerName = ownerName.value!!,
                 tel = tel.value!!,
                 major = businessTypes.value!!,
@@ -119,8 +119,8 @@ class SignUpViewModel @Inject constructor(
 
     private fun requestLogin() {
         Timber.tag(TAG).d("requestLogin: ")
-        uId.value?.let { uId ->
-            signInUseCase(uId)
+        uid.value?.let { uid ->
+            signInUseCase(uid)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(

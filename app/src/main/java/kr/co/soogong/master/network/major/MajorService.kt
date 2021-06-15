@@ -6,10 +6,10 @@ import kr.co.soogong.master.data.model.major.Project
 import retrofit2.Retrofit
 import javax.inject.Inject
 
-class CategoryService @Inject constructor(
+class MajorService @Inject constructor(
     retrofit: Retrofit
 ) {
-    private val categoryInterface = retrofit.create(CategoryInterface::class.java)
+    private val categoryInterface = retrofit.create(MajorInterface::class.java)
 
     fun getCategoryList(): Single<List<Category>> {
         return categoryInterface.getCategoryList("http://192.168.0.50:8080/category/list").map {

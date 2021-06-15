@@ -175,7 +175,7 @@ class DoneViewHolder(
             if(requirementCard.status.equals("askedReview")){
                 reviewButton.setText(R.string.ask_for_review_successful)
                 reviewButton.setBackgroundResource(R.color.color_90E9BD)
-                reviewButton.setOnClickListener { null }
+                reviewButton.isEnabled = false
             }
 
             executePendingBindings()

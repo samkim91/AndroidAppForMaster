@@ -1,4 +1,4 @@
-package kr.co.soogong.master.ui.profile.edit.requiredinformation.warrantyinformation
+package kr.co.soogong.master.ui.profile.edit.requiredinformation.warranty
 
 import androidx.lifecycle.MutableLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel

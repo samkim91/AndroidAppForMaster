@@ -1,5 +1,6 @@
 package kr.co.soogong.master.domain.usecase.profile
 
+import android.net.Uri
 import dagger.Reusable
 import io.reactivex.Single
 import kr.co.soogong.master.BuildConfig
@@ -9,11 +10,11 @@ import kr.co.soogong.master.data.dto.Response
 import javax.inject.Inject
 
 @Reusable
-class SaveBriefIntroductionUseCase @Inject constructor(
+class SaveThumbnailsUseCase @Inject constructor(
     private val getMasterUidFromSharedUseCase: GetMasterUidFromSharedUseCase,
     private val profileService: ProfileService,
 ) {
-    operator fun invoke(briefIntroduction: String): Single<Response> {
+    operator fun invoke(uriList: List<Uri>): Single<Response> {
         if(BuildConfig.DEBUG){
 
         }

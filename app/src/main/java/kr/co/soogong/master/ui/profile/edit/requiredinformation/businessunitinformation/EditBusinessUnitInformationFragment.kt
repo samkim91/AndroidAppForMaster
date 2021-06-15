@@ -44,7 +44,7 @@ class EditBusinessUnitInformationFragment :
 
             initChips()
 
-            cameraIconForIdenticalImage.setOnClickListener {
+            cameraIconForBusinessRegistImage.setOnClickListener {
                 PermissionHelper.checkImagePermission(context = requireContext(),
                     onGranted = {
                         TedImagePicker.with(requireContext())
@@ -64,11 +64,11 @@ class EditBusinessUnitInformationFragment :
                 })
 
                 viewModel.shopName.observe(viewLifecycleOwner, {
-                    companyName.alertVisible = it.isNullOrEmpty()
+                    shopName.alertVisible = it.isNullOrEmpty()
                 })
 
                 viewModel.businessNumber.observe(viewLifecycleOwner, {
-                    identicalNumber.alertVisible = it.isNullOrEmpty()
+                    businessNumber.alertVisible = it.isNullOrEmpty()
                 })
 
                 viewModel.businessRegistImage.observe(viewLifecycleOwner, {
@@ -80,9 +80,9 @@ class EditBusinessUnitInformationFragment :
                 })
 
                 if (viewModel.businessType.value == "프리랜서") {
-                    if (!birthday.alertVisible) viewModel.saveBusinessUnitInfo()
+                    if (!birthday.alertVisible) viewModel.saveBusinessUnitInformation()
                 } else {
-                    if (!businessName.alertVisible && !companyName.alertVisible && !identicalNumber.alertVisible && !alert.isVisible) viewModel.saveBusinessUnitInfo()
+                    if (!businessName.alertVisible && !shopName.alertVisible && !businessNumber.alertVisible && !alert.isVisible) viewModel.saveBusinessUnitInformation()
                 }
             }
         }
