@@ -53,7 +53,6 @@
                 app:layout_constraintStart_toEndOf="@id/master_store_name"
                 app:layout_constraintTop_toTopOf="@id/master_store_name" />
 
-<!--            todo.. need to bind viewModel -->
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/master_id"
                 style="@style/small_text_style.medium"

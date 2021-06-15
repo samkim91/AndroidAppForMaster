@@ -56,8 +56,8 @@ class EditPhoneNumberViewModel @Inject constructor(
     companion object {
         private const val TAG = "EditPhoneNumberViewModel"
         const val SAVE_PHONE_NUMBER_SUCCESSFULLY =
-            "SAVE_BUSINESS_REPRESENTATIVE_NAME_SUCCESSFULLY"
+            "SAVE_PHONE_NUMBER_SUCCESSFULLY"
         const val SAVE_PHONE_NUMBER_FAILED =
-            "SAVE_BUSINESS_REPRESENTATIVE_NAME_FAILED"
+            "SAVE_PHONE_NUMBER_FAILED"
     }
 }

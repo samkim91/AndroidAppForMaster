@@ -26,14 +26,14 @@ object EditProfileContainerFragmentHelper {
     const val EDIT_OTHER_FLEXIBLE_OPTIONS = "기타 변동 가능사항 등록·수정하기"
     const val EDIT_EMAIL = "이메일 등록·수정하기"
 
-    const val EDIT_BRIEF_INTRODUCTION = "업체 소개 등록·수정하기"
-    const val EDIT_COMPANY_IMAGE = "대표 이미지 편집하기"
+    const val EDIT_INTRODUCTION = "업체 소개 등록·수정하기"
+    const val EDIT_THUMBNAILS = "대표 이미지 편집하기"
     const val EDIT_BUSINESS_UNIT_INFORMATION = "사업자 정보 등록·수정하기"
     const val EDIT_WARRANTY_INFORMATION = "A/S 정보 등록·수정하기"
-    const val EDIT_BUSINESS_REPRESENTATIVE_NAME = "대표자명 등록·수정하기"
+    const val EDIT_OWNER_NAME = "대표자명 등록·수정하기"
     const val EDIT_PHONE_NUMBER = "휴대폰번호 수정하기"
     const val EDIT_ADDRESS = "업체 주소 수정하기"
-    const val EDIT_BUSINESS_TYPES = "시공 업종 수정하기"
+    const val EDIT_MAJOR = "시공 업종 수정하기"
 
 
 //    const val EDIT_NUMBER_OF_FELLOW = "팀원 수 수정하기"
@@ -50,13 +50,13 @@ object EditProfileContainerFragmentHelper {
             EDIT_OTHER_FLEXIBLE_OPTIONS -> EditOtherFlexibleOptionsFragment.newInstance()
             EDIT_EMAIL -> EditEmailFragment.newInstance()
 
-            EDIT_BRIEF_INTRODUCTION -> EditIntroductionFragment.newInstance()
-            EDIT_COMPANY_IMAGE -> EditThumbnailsFragment.newInstance()
+            EDIT_INTRODUCTION -> EditIntroductionFragment.newInstance()
+            EDIT_THUMBNAILS -> EditThumbnailsFragment.newInstance()
             EDIT_BUSINESS_UNIT_INFORMATION -> EditBusinessUnitInformationFragment.newInstance()
             EDIT_WARRANTY_INFORMATION -> EditWarrantyInformationFragment.newInstance()
-            EDIT_BUSINESS_REPRESENTATIVE_NAME -> EditOwnerNameFragment.newInstance()
+            EDIT_OWNER_NAME -> EditOwnerNameFragment.newInstance()
             EDIT_PHONE_NUMBER -> EditPhoneNumberFragment.newInstance()
-            EDIT_BUSINESS_TYPES -> EditMajorFragment.newInstance()
+            EDIT_MAJOR -> EditMajorFragment.newInstance()
             EDIT_ADDRESS -> EditAddressFragment.newInstance()
             else -> Fragment()
         }

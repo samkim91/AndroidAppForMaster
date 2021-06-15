@@ -125,9 +125,9 @@
                     android:visibility="gone"
                     app:constraint_referenced_ids="icon_saw_check_for_confirmed_master, text_saw_check_for_confirmed_master" />
 
-                <!-- 업체 소개 BRIEF_INTRODUCTION -->
+                <!-- 업체 소개 INTRODUCTION -->
                 <kr.co.soogong.master.ui.widget.ProfileDefaultCard
-                    android:id="@+id/brief_introduction"
+                    android:id="@+id/introduction"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/gap_20"
@@ -143,9 +143,9 @@
                     app:subTitle='@{"업체만의 특별한 점을 소개해주세요."}'
                     app:title='@{"업체 소개"}' />
 
-                <!-- 대표 이미지 REPRESENTATIVE_IMAGE -->
+                <!-- 대표 이미지 THUMBNAILS -->
                 <kr.co.soogong.master.ui.widget.ProfileImageCard
-                    android:id="@+id/representative_images"
+                    android:id="@+id/thumbnails"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/gap_20"
@@ -159,7 +159,7 @@
                     app:imageUrl="@{vm.requiredInformation.representativeImages.get(0)}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/brief_introduction"
+                    app:layout_constraintTop_toBottomOf="@id/introduction"
                     app:subTitle='@{"업체 페이지에 노출되는 대표 이미지 입니다."}'
                     app:title='@{"대표 이미지"}' />
 
@@ -178,7 +178,7 @@
                     app:imageUrl="@{vm.requiredInformation.businessUnitInformation.businessRegistImage}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/representative_images"
+                    app:layout_constraintTop_toBottomOf="@id/thumbnails"
                     app:secondDetail="@{vm.requiredInformation.businessUnitInformation.businessNumber}"
                     app:title='@{"사업자 정보"}' />
 
@@ -237,7 +237,7 @@
                     app:layout_constraintTop_toBottomOf="@id/career"
                     app:title='@{"휴대폰번호"}' />
 
-                <!-- 대표명 BUSINESS_REPRESENTATIVE_NAME -->
+                <!-- 대표명 OWNER_NAME -->
                 <kr.co.soogong.master.ui.widget.ProfileDefaultCard
                     android:id="@+id/owner_name"
                     android:layout_width="match_parent"
@@ -254,9 +254,9 @@
                     app:layout_constraintTop_toBottomOf="@id/phone_number"
                     app:title='@{"대표자명"}' />
 
-                <!-- 시공 업종 BUSINESS_TYPES -->
+                <!-- 시공 업종 MAJOR -->
                 <kr.co.soogong.master.ui.widget.ProfileChipGroupCard
-                    android:id="@+id/business_types"
+                    android:id="@+id/major"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/gap_20"
@@ -286,7 +286,7 @@
                     app:firstDetail="@{vm.requiredInformation.companyAddress.roadAddress}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/business_types"
+                    app:layout_constraintTop_toBottomOf="@id/major"
                     app:secondDetail="@{vm.requiredInformation.companyAddress.detailAddress}"
                     app:title='@{"업체 주소"}' />
 

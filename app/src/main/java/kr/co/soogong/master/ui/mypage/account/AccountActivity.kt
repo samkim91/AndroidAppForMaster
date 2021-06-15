@@ -42,7 +42,7 @@ class AccountActivity : BaseActivity<ActivityAccountBinding>(
         viewModel.action.observe(this, EventObserver { event ->
             when (event) {
                 AccountViewModel.WITHDRAWAL -> {
-                    // TODO : 서버 작업 필요 요청값과 줄 수 있는 값이 다름
+                    // TODO: 2021/06/15 disabled master...
 
                 }
 //                AccountViewModel.PASSWORD -> {
