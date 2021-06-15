@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class BusinessType(
+data class Major(
     @SerializedName("category")
     val category: Category?,
 
@@ -14,11 +14,11 @@ data class BusinessType(
     val projects: MutableList<Project>?,
 ) : Parcelable {
     companion object {
-        fun fromJson(jsonObject: JsonObject): BusinessType {
+        fun fromJson(jsonObject: JsonObject): Major {
             val item = jsonObject.get("business_type").asJsonObject
             val projectsArray = item.get("project").asJsonArray
 
-            return BusinessType(
+            return Major(
                 category = Category.fromJson(item.get("category").asJsonObject),
                 projects = MutableList(projectsArray.size()) {
                     Project.fromJson(projectsArray.get(it).asJsonObject)
@@ -26,12 +26,12 @@ data class BusinessType(
             )
         }
 
-        val TEST_BUSINESS_TYPE = BusinessType(
+        val TEST_BUSINESS_TYPE = Major(
             Category.TEST_CATEGORY,
             mutableListOf(Project.TEST_PROJECT, Project.TEST_PROJECT, Project.TEST_PROJECT)
         )
 
-        val NULL_BUSINESS_TYPE = BusinessType(
+        val NULL_BUSINESS_TYPE = Major(
             Category.NULL_CATEGORY,
             mutableListOf()
         )

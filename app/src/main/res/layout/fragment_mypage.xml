@@ -29,7 +29,7 @@
                 android:layout_marginTop="@dimen/my_page_master_store_name_margin_top"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text='@{vm.profile.ownerName.length() != 0 ? vm.profile.ownerName : "프로필에서 대표이름을 입력해주세요."}'
+                android:text='@{vm.profile.representativeName.length() != 0 ? vm.profile.representativeName : "프로필에서 대표이름을 입력해주세요."}'
                 android:textColor="@color/text_basic_color"
                 app:layout_constrainedWidth="true"
                 app:layout_constraintEnd_toStartOf="@id/master_label"
@@ -46,7 +46,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/my_page_master_label_margin_start"
                 android:layout_marginEnd="@dimen/my_page_master_label_margin_top"
-                android:text='@{vm.profile.basicInformation.subscriptionPlan.length() != 0 ? vm.profile.basicInformation.subscriptionPlan : "마스터"}'
+                android:text='@{vm.profile.subscriptionPlan.length() != 0 ? vm.profile.subscriptionPlan : "마스터"}'
                 android:textColor="@color/text_primary_color"
                 app:layout_constraintBottom_toBottomOf="@id/master_store_name"
                 app:layout_constraintEnd_toStartOf="@id/account_setting"
@@ -61,7 +61,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/gap_20"
                 android:layout_marginTop="@dimen/gap_20"
-                android:text='@{vm.profile.phoneNumber.length() != 0 ? vm.profile.phoneNumber : "프로필에서 휴대폰 번호를 입력해주세요."}'
+                android:text='@{vm.profile.tel.length() != 0 ? vm.profile.tel : "프로필에서 휴대폰 번호를 입력해주세요."}'
                 android:textColor="@color/text_basic_color"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/master_store_name"

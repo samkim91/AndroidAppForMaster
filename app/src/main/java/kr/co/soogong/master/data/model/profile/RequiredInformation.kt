@@ -3,7 +3,7 @@ package kr.co.soogong.master.data.model.profile
 import android.os.Parcelable
 import com.google.gson.JsonObject
 import kotlinx.parcelize.Parcelize
-import kr.co.soogong.master.data.model.major.BusinessType
+import kr.co.soogong.master.data.model.major.Major
 import kr.co.soogong.master.data.model.requirement.ImagePath
 
 @Parcelize
@@ -15,7 +15,7 @@ data class RequiredInformation(
     val career: String,
     val phoneNumber: String,
     val businessRepresentativeName: String,
-    val businessTypes: List<BusinessType>,
+    val majors: List<Major>,
     val companyAddress: CompanyAddress,
     val coordinate: Coordinate,
     var serviceArea: Int,
@@ -37,8 +37,8 @@ data class RequiredInformation(
                 career = attributes.get("career").asString,
                 phoneNumber = attributes.get("phoneNumber").asString,
                 businessRepresentativeName = attributes.get("businessRepresentativeName").asString,
-                businessTypes = attributes.get("businessTypes").asJsonArray.map {
-                    BusinessType.fromJson(
+                majors = attributes.get("businessTypes").asJsonArray.map {
+                    Major.fromJson(
                         it.asJsonObject
                     )
                 },
@@ -60,7 +60,7 @@ data class RequiredInformation(
             career = "2년",
             phoneNumber = "010 - 3290 -1234",
             businessRepresentativeName = "성현식",
-            businessTypes = listOf(BusinessType.TEST_BUSINESS_TYPE, BusinessType.TEST_BUSINESS_TYPE),
+            majors = listOf(Major.TEST_BUSINESS_TYPE, Major.TEST_BUSINESS_TYPE),
             companyAddress = CompanyAddress.TEST_COMPANY_ADDRESS,
             coordinate = Coordinate.TEST_COORDINATE,
             serviceArea = 10
@@ -74,7 +74,7 @@ data class RequiredInformation(
             warrantyInformation = WarrantyInformation.NULL_WARRANTY_INFORMATION,
             career = "",
             phoneNumber = "",
-            businessTypes = emptyList(),
+            majors = emptyList(),
             companyAddress = CompanyAddress.NULL_COMPANY_ADDRESS,
             coordinate = Coordinate.NULL_COORDINATE,
             serviceArea = 0

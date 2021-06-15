@@ -5,7 +5,7 @@ import kr.co.soogong.master.data.model.profile.IEditProfileWithCard
 
 class EditProfileWithCardDiffUtil : DiffUtil.ItemCallback<IEditProfileWithCard>() {
     override fun areItemsTheSame(oldItem: IEditProfileWithCard, newItem: IEditProfileWithCard): Boolean {
-        return oldItem.itemId == newItem.itemId
+        return oldItem.id == newItem.id
     }
 
     override fun areContentsTheSame(oldItem: IEditProfileWithCard, newItem: IEditProfileWithCard): Boolean {

@@ -3,7 +3,7 @@ package kr.co.soogong.master.data.dto.auth
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
-import kr.co.soogong.master.data.model.major.BusinessType
+import kr.co.soogong.master.data.model.major.Major
 
 @Parcelize
 data class SignUpDto(
@@ -23,7 +23,7 @@ data class SignUpDto(
     val detailAddress: String,
 
     @SerializedName("businessType")
-    val businessType: List<BusinessType>,
+    val major: List<Major>,
 
     @SerializedName("latitude")
     val latitude: Double,
@@ -52,4 +52,4 @@ data class SignUpDto(
     @SerializedName("smsPush")
     val smsPush: Boolean,
 
-) : Parcelable { }
+    ) : Parcelable { }

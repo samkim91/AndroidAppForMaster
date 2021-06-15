@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.domain.usecase.auth.GetMasterIdFromFirebaseUseCase
-import kr.co.soogong.master.domain.usecase.auth.SaveMasterIdInSharedUseCase
+import kr.co.soogong.master.domain.usecase.auth.SaveMasterUidInSharedUseCase
 import kr.co.soogong.master.uihelper.auth.SignMainActivityHelper
 import kr.co.soogong.master.uihelper.main.MainActivityHelper
 import timber.log.Timber
@@ -17,7 +17,7 @@ class SplashActivity : AppCompatActivity() {
     lateinit var getMasterIdFromFirebaseUseCase: GetMasterIdFromFirebaseUseCase
 
     @Inject
-    lateinit var saveMasterIdInSharedUseCase: SaveMasterIdInSharedUseCase
+    lateinit var saveMasterUidInSharedUseCase: SaveMasterUidInSharedUseCase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +36,7 @@ class SplashActivity : AppCompatActivity() {
         getMasterIdFromFirebaseUseCase()?.let { masterUid ->
             Timber.tag(TAG).d("masterId: $masterUid")
 
-            saveMasterIdInSharedUseCase(masterUid)
+            saveMasterUidInSharedUseCase(masterUid)
             startActivity(MainActivityHelper.getIntent(this))
             return
         }

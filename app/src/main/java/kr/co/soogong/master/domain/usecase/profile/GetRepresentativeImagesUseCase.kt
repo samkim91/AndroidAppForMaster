@@ -16,10 +16,13 @@ class GetRepresentativeImagesUseCase @Inject constructor(
 //            }
 //        }
 
-        return getProfileFromLocalUseCase().map { profile ->
-            profile.requiredInformation?.representativeImages?.map { imagePath ->
-                Uri.parse(imagePath.path)
-            }
-        }
+        // TODO: 2021/06/15 수정작업
+        return Single.just(emptyList())
+
+//        return getProfileFromLocalUseCase().map { profile ->
+//            profile.requiredInformation?.representativeImages?.map { imagePath ->
+//                Uri.parse(imagePath.path)
+//            }
+//        }
     }
 }

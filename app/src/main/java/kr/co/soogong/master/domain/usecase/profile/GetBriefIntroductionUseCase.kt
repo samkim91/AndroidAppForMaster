@@ -12,9 +12,11 @@ class GetBriefIntroductionUseCase @Inject constructor(
 //        if (BuildConfig.DEBUG) {
 //            return RequiredInformation.TEST_REQUIRED_INFORMATION.briefIntroduction
 //        }
-
-        return getProfileFromLocalUseCase().map { profile ->
-            profile.requiredInformation?.briefIntroduction
-        }
+// TODO: 2021/06/15 수정작업
+        return Single.just("")
+//        return getProfileFromLocalUseCase().map { profile ->
+//
+//            profile.requiredInformation?.briefIntroduction
+//        }
     }
 }

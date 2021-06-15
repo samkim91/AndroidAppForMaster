@@ -1,7 +1,13 @@
 package kr.co.soogong.master.data.model.profile
 
+import java.util.*
+
 interface IEditProfileWithCard {
-    var itemId: Int?
-    var title: String
-    var description: String
+    val id: Int
+    val title: String
+    val description: String
+    val project: String?
+    val type: String
+    val createdAt: Date?
+    val updatedAt: Date?
 }

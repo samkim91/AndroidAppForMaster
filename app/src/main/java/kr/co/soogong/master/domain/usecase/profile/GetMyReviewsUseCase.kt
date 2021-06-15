@@ -14,8 +14,11 @@ class GetMyReviewsUseCase @Inject constructor(
 //            return MyReview.TEST_MY_REVIEW
 //        }
 
-        return getProfileFromLocalUseCase().map { profile ->
-            profile.basicInformation?.myReviews
-        }
+        // TODO: 2021/06/15 수정작업
+        return Single.just(MyReview.NULL_MY_REVIEW)
+
+//        return getProfileFromLocalUseCase().map { profile ->
+//            profile.basicInformation?.myReviews
+//        }
     }
 }

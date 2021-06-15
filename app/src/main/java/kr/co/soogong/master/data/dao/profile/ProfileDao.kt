@@ -5,7 +5,7 @@ import kr.co.soogong.master.data.model.profile.Profile
 
 @Dao
 interface ProfileDao {
-    @Query("SELECT * FROM Profile WHERE phoneNumber = :id")
+    @Query("SELECT * FROM Profile WHERE tel = :id")
     fun getItem(id: String?): Profile?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

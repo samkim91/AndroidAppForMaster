@@ -10,9 +10,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.dto.auth.SignUpDto
-import kr.co.soogong.master.data.model.major.BusinessType
+import kr.co.soogong.master.data.model.major.Major
 import kr.co.soogong.master.domain.usecase.auth.CheckUserExistentUseCase
-import kr.co.soogong.master.domain.usecase.auth.SignInTestUseCase
 import kr.co.soogong.master.domain.usecase.auth.SignInUseCase
 import kr.co.soogong.master.domain.usecase.auth.SignUpUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
@@ -46,7 +45,7 @@ class SignUpViewModel @Inject constructor(
     val ownerName = MutableLiveData("")
 
     // MajorFragment
-    val businessTypes = ListLiveData<BusinessType>()
+    val businessTypes = ListLiveData<Major>()
 
     // AddressFragment
     val roadAddress = MutableLiveData("")
@@ -91,7 +90,7 @@ class SignUpViewModel @Inject constructor(
                 uid = uid.value!!,
                 ownerName = ownerName.value!!,
                 tel = tel.value!!,
-                businessType = businessTypes.value!!,
+                major = businessTypes.value!!,
                 roadAddress = roadAddress.value!!,
                 detailAddress = detailAddress.value!!,
                 latitude = latitude.value!!,

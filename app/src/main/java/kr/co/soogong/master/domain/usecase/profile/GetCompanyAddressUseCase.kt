@@ -14,8 +14,10 @@ class GetCompanyAddressUseCase @Inject constructor(
 //            return RequiredInformation.TEST_REQUIRED_INFORMATION.companyAddress
 //        }
 
-        return getProfileFromLocalUseCase().map { profile ->
-            profile.requiredInformation?.companyAddress
-        }
+        // TODO: 2021/06/15 수정작업
+        return Single.just(CompanyAddress.NULL_COMPANY_ADDRESS)
+//        return getProfileFromLocalUseCase().map { profile ->
+//            profile.requiredInformation?.companyAddress
+//        }
     }
 }

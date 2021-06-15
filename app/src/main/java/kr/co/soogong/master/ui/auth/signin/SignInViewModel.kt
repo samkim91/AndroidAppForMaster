@@ -11,6 +11,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.domain.usecase.auth.CheckUserExistentUseCase
+import kr.co.soogong.master.domain.usecase.auth.SaveMasterUidInSharedUseCase
 import kr.co.soogong.master.domain.usecase.auth.SignInTestUseCase
 import kr.co.soogong.master.domain.usecase.auth.SignInUseCase
 import kr.co.soogong.master.ui.auth.signup.SignUpViewModel
@@ -22,6 +23,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SignInViewModel @Inject constructor(
     private val checkUserExistentUseCase: CheckUserExistentUseCase,
+    private val saveMasterUidInSharedUseCase: SaveMasterUidInSharedUseCase,
     private val signInUseCase: SignInUseCase,
 ) : BaseViewModel() {
     val tel = MutableLiveData("")
@@ -59,6 +61,13 @@ class SignInViewModel @Inject constructor(
                         setAction(CHECK_PHONE_NUMBER_FAILED)
                     }
                 ).addToDisposable()
+        }
+    }
+
+    fun saveMasterUidInShared(){
+        Timber.tag(TAG).d("saveMasterUidInShared: ${uid.value} ")
+        uid.value?.let {
+            saveMasterUidInSharedUseCase(it)
         }
     }
 

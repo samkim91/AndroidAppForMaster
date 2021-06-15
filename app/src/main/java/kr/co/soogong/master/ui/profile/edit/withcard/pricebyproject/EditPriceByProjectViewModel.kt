@@ -10,6 +10,7 @@ import kr.co.soogong.master.domain.usecase.profile.GetPriceByProjectUseCase
 import kr.co.soogong.master.domain.usecase.profile.SavePriceByProjectUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import timber.log.Timber
+import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
@@ -29,7 +30,7 @@ class EditPriceByProjectViewModel @Inject constructor(
             .subscribeBy(
                 onSuccess = { priceByProject ->
                     title.postValue(priceByProject.title)
-                    price.postValue(priceByProject.projectPrice)
+                    price.postValue(priceByProject.price)
                     description.postValue(priceByProject.description)
                 },
                 onError = { setAction(GET_PRICE_BY_PROJECT_FAILED) }
@@ -40,10 +41,14 @@ class EditPriceByProjectViewModel @Inject constructor(
         Timber.tag(TAG).d("getPriceByProject $priceByProjectId")
         savePriceByProjectUseCase(
             PriceByProject(
-                itemId = priceByProjectId,
+                id = priceByProjectId,
                 title = title.value!!,
-                projectPrice = price.value!!,
-                description = description.value!!
+                description = description.value!!,
+                project = "",
+                type = "price",
+                price = price.value!!,
+                createdAt = Date(),
+                updatedAt = Date(),
             )
         ).subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

@@ -14,8 +14,11 @@ class GetRequiredInformationUseCase @Inject constructor(
 //            return RequiredInformation.TEST_REQUIRED_INFORMATION
 //        }
 
-        return getProfileFromLocalUseCase().map { profile ->
-            profile.requiredInformation
-        }
+        // TODO: 2021/06/15 수정작업
+        return Single.just(RequiredInformation.NULL_REQUIRED_INFORMATION)
+
+//        return getProfileFromLocalUseCase().map { profile ->
+//            profile.requiredInformation
+//        }
     }
 }

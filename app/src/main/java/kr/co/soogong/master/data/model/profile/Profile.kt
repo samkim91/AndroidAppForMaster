@@ -3,86 +3,81 @@ package kr.co.soogong.master.data.model.profile
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.google.gson.JsonObject
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
-import kr.co.soogong.master.data.model.major.BusinessType
 
 @Parcelize
 @Entity(tableName = "Profile")
 data class Profile(
+    @SerializedName("id")
+    val id: Int,
+
     @PrimaryKey
-    @SerializedName("phoneNumber")
-    val phoneNumber: String,    // ID
+    @SerializedName("uid")
+    val uid: String,
 
-    @SerializedName("ownerName")
-    val ownerName: String?,
+    @SerializedName("tel")
+    val tel: String,
 
-    @SerializedName("businessType")
-    val businessType: List<BusinessType>?,
+    @SerializedName("representativeName")
+    val representativeName: String?,
 
-    @SerializedName("appPush")
-    val appPush: Boolean?,
+    @SerializedName("subscriptionPlan")
+    val subscriptionPlan: String?,
 
-    @SerializedName("appPushAtNight")
-    val appPushAtNight: Boolean?,
+    @SerializedName("myReview")
+    val myReview: MyReview?,
 
-    @SerializedName("kakaoAlarm")
-    val kakaoAlarm: Boolean?,
+    @SerializedName("myPageUrl")
+    val myPageUrl: String?,
 
-    @SerializedName("smsAlarm")
-    val smsAlarm: Boolean?,
+    @SerializedName("isPublic")
+    val isPublic: Boolean?,
 
-    @SerializedName("isApproved")
-    val isApproved: Boolean?,
-
-    @SerializedName("basicInfo")
+    @SerializedName("basicInformation")
     val basicInformation: BasicInformation?,
-
-    @SerializedName("requiredInfo")
-    val requiredInformation: RequiredInformation?,
 ) : Parcelable {
     companion object {
-        fun fromJson(jsonObject: JsonObject): Profile {
-            val item = jsonObject.get("data").asJsonObject
-            return Profile(
-                phoneNumber = item.get("phoneNumber").asString,
-                ownerName = item.get("businessRepresentativeName").asString ?: "",
-                businessType = item.get("businessType").asJsonArray.map { BusinessType.fromJson(it.asJsonObject) },
-                appPush = item.get("appPush").asBoolean,
-                appPushAtNight = item.get("appPushAtNight").asBoolean,
-                kakaoAlarm = item.get("kakaoAlarm").asBoolean,
-                smsAlarm = item.get("smsAlarm").asBoolean,
-                isApproved = item.get("isApproved").asBoolean,
-                basicInformation = BasicInformation.fromJson(item.get("basicInfo").asJsonObject),
-                requiredInformation = RequiredInformation.fromJson(item.get("requiredInfo").asJsonObject),
-            )
-        }
 
-        val TEST_PROFILE = Profile(
-            phoneNumber = "010-7128-7964",
-            ownerName = "준뱀이수공",
-            businessType = listOf(BusinessType.TEST_BUSINESS_TYPE, BusinessType.TEST_BUSINESS_TYPE, BusinessType.TEST_BUSINESS_TYPE),
-            appPush = false,
-            appPushAtNight = false,
-            kakaoAlarm = false,
-            smsAlarm = false,
-            isApproved = true,
-            basicInformation = BasicInformation.TEST_BASIC_INFORMATION,
-            requiredInformation = RequiredInformation.TEST_REQUIRED_INFORMATION,
-        )
-
+        //        fun fromJson(jsonObject: JsonObject): Profile {
+//            val item = jsonObject.get("data").asJsonObject
+//            return Profile(
+//                phoneNumber = item.get("phoneNumber").asString,
+//                ownerName = item.get("businessRepresentativeName").asString ?: "",
+//                businessType = item.get("businessType").asJsonArray.map { BusinessType.fromJson(it.asJsonObject) },
+//                appPush = item.get("appPush").asBoolean,
+//                appPushAtNight = item.get("appPushAtNight").asBoolean,
+//                kakaoAlarm = item.get("kakaoAlarm").asBoolean,
+//                smsAlarm = item.get("smsAlarm").asBoolean,
+//                isApproved = item.get("isApproved").asBoolean,
+//                basicInformation = BasicInformation.fromJson(item.get("basicInfo").asJsonObject),
+//                requiredInformation = RequiredInformation.fromJson(item.get("requiredInfo").asJsonObject),
+//            )
+//        }
+//
+//        val TEST_PROFILE = Profile(
+//            phoneNumber = "010-7128-7964",
+//            ownerName = "준뱀이수공",
+//            businessType = listOf(BusinessType.TEST_BUSINESS_TYPE, BusinessType.TEST_BUSINESS_TYPE, BusinessType.TEST_BUSINESS_TYPE),
+//            appPush = false,
+//            appPushAtNight = false,
+//            kakaoAlarm = false,
+//            smsAlarm = false,
+//            isApproved = true,
+//            basicInformation = BasicInformation.TEST_BASIC_INFORMATION,
+//            requiredInformation = RequiredInformation.TEST_REQUIRED_INFORMATION,
+//        )
+//
         val NULL_PROFILE = Profile(
-            phoneNumber = "",
-            ownerName = "",
-            businessType = emptyList(),
-            appPush = false,
-            appPushAtNight = false,
-            kakaoAlarm = false,
-            smsAlarm = false,
-            isApproved = true,
+            id = 0,
+            uid = "",
+            tel = "",
+            representativeName = "",
+            subscriptionPlan = "",
+            myReview = MyReview.NULL_MY_REVIEW,
+            myPageUrl = "",
+            isPublic = false,
             basicInformation = BasicInformation.NULL_BASIC_INFORMATION,
-            requiredInformation = RequiredInformation.NULL_REQUIRED_INFORMATION,
         )
     }
 }

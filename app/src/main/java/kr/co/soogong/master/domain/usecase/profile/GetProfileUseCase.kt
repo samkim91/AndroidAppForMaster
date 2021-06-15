@@ -4,7 +4,7 @@ import dagger.Reusable
 import io.reactivex.Single
 import kr.co.soogong.master.data.model.profile.Profile
 import kr.co.soogong.master.data.dao.profile.ProfileDao
-import kr.co.soogong.master.domain.usecase.auth.GetMasterIdFromSharedUseCase
+import kr.co.soogong.master.domain.usecase.auth.GetMasterUidFromSharedUseCase
 import kr.co.soogong.master.network.profile.ProfileService
 import javax.inject.Inject
 
@@ -12,17 +12,15 @@ import javax.inject.Inject
 class GetProfileUseCase @Inject constructor(
     private val profileDao: ProfileDao,
     private val profileService: ProfileService,
-    private val getMasterIdFromSharedUseCase: GetMasterIdFromSharedUseCase,
+    private val getMasterUidFromSharedUseCase: GetMasterUidFromSharedUseCase,
 ) {
     operator fun invoke(): Single<Profile> {
-        // Todo.. 서버 리뉴얼 후 수정해야함..
-//        if (BuildConfig.DEBUG) {
-//            return Single.just(Profile.TEST_PROFILE)
-//        }
-
-        return profileService.getProfile(getMasterIdFromSharedUseCase())
-            .doOnSuccess { profileData ->
-                profileDao.insert(profileData)
-            }
+        return Single.just(Profile.NULL_PROFILE)
+//        return profileService.getMaster(getMasterUidFromSharedUseCase())
+//            .doOnSuccess { master ->
+//                // TODO: 2021/06/14 get profile from master
+//
+////                profileDao.insert(master)
+//            }
     }
 }
