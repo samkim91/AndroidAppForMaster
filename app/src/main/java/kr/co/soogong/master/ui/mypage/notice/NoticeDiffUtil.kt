@@ -1,7 +1,7 @@
 package kr.co.soogong.master.ui.mypage.notice
 
 import androidx.recyclerview.widget.DiffUtil
-import kr.co.soogong.master.data.notice.Notice
+import kr.co.soogong.master.data.model.mypage.Notice
 
 class NoticeDiffUtil : DiffUtil.ItemCallback<Notice>() {
     override fun areItemsTheSame(oldItem: Notice, newItem: Notice): Boolean {

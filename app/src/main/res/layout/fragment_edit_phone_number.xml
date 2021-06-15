@@ -33,12 +33,12 @@
                 android:paddingEnd="@dimen/gap_20">
 
                 <kr.co.soogong.master.ui.widget.TitleEditTextButton
-                    android:id="@+id/phone_number"
+                    android:id="@+id/id"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:alertText='@{"휴대폰번호 형식이 올바르지 않습니다."}'
                     app:buttonText='@{"인증"}'
-                    app:firstContent="@={vm.phoneNumber}"
+                    app:firstContent="@={vm.tel}"
                     app:inputTypeFirst="@{InputType.TYPE_CLASS_NUMBER}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -59,7 +59,7 @@
                     android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/phone_number">
+                    app:layout_constraintTop_toBottomOf="@id/id">
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/certification_code_label"

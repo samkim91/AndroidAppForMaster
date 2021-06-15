@@ -7,7 +7,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import kr.co.soogong.master.data.profile.Profile
+import kr.co.soogong.master.data.model.profile.Profile
+import kr.co.soogong.master.domain.usecase.profile.GetMasterUseCase
 import kr.co.soogong.master.domain.usecase.profile.GetProfileUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import timber.log.Timber
@@ -16,6 +17,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
     private val getProfileUseCase: GetProfileUseCase,
+    private val getMasterUseCase: GetMasterUseCase,
 ) : BaseViewModel() {
     private val _profile = MutableLiveData<Profile?>()
     val profile: LiveData<Profile?>
@@ -25,6 +27,18 @@ class ProfileViewModel @Inject constructor(
 
     fun requestProfile() {
         Timber.tag(TAG).d("requestProfile: ")
+        getMasterUseCase()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeBy(
+                onSuccess = {
+                    Timber.tag(TAG).d("getMasterSuccessfully: $it")
+                },
+                onError = {
+                    Timber.tag(TAG).d("getMasterFailed: $it")
+                }
+            ).addToDisposable()
+
         getProfileUseCase()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

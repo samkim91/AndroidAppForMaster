@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 import androidx.room.Room
+import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,8 +15,6 @@ import kr.co.soogong.master.contract.AppDatabaseContract
 import kr.co.soogong.master.contract.AppSharedPreferenceContract
 import kr.co.soogong.master.contract.HttpContract
 import kr.co.soogong.master.domain.AppDatabase
-import kr.co.soogong.master.network.TokenAuthenticator
-import kr.co.soogong.master.network.TokenInterceptor
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -55,8 +54,9 @@ class AppModule {
                     }
                 }
             )
-            .addInterceptor(tokenInterceptor)
-            .authenticator(tokenAuthenticator)
+        // Firebase Auth를 사용하면서 아래 값들이 필요 없어진 것 같음.. 확인 필요..
+//            .addInterceptor(tokenInterceptor)
+//            .authenticator(tokenAuthenticator)
 
         val okHttpClient = client.build()
 
@@ -68,12 +68,14 @@ class AppModule {
     @Provides
     @Singleton
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
+        val gson = GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create()
+
         return Retrofit.Builder()
             .client(okHttpClient)
             .baseUrl(
-                if (BuildConfig.DEBUG) HttpContract.TEST_URL else HttpContract.PROD_URL
+                if (BuildConfig.DEBUG) HttpContract.LOCAL_URL else HttpContract.PROD_URL
             )
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build()
     }

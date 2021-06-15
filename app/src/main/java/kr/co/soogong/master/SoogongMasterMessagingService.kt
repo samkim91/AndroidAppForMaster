@@ -9,7 +9,7 @@ import android.os.Build
 import androidx.core.app.NotificationCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
-import kr.co.soogong.master.uiinterface.main.MainActivityHelper
+import kr.co.soogong.master.uihelper.main.MainActivityHelper
 import timber.log.Timber
 
 class SoogongMasterMessagingService : FirebaseMessagingService() {

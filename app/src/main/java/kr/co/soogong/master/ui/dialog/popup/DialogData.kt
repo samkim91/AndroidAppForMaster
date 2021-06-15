@@ -15,7 +15,7 @@ data class DialogData(
     @ColorInt var negativeBtnTextColor: Int
 ) {
     companion object {
-        fun cancelDialogData(context: Context) =
+        fun getRefuseEstimateDialogData(context: Context) =
             DialogData(
                 "견적을 내기 어려우신가요?", context.getColor(R.color.text_basic_color),
                 "해당 문의가 삭제됩니다.", context.getColor(R.color.text_alert_color),
@@ -23,7 +23,7 @@ data class DialogData(
                 "아니요", context.getColor(R.color.text_basic_color)
             )
 
-        fun cancelSendingTransmissionDialogData(context: Context) =
+        fun getCancelSendingEstimationDialogData(context: Context) =
             DialogData(
                 "견적서 작성을 취소하시겠어요?", context.getColor(R.color.text_basic_color),
                 "이 화면에서 나가면 작성했던 내용이\n모두 삭제됩니다.", context.getColor(R.color.text_alert_color),
@@ -31,7 +31,7 @@ data class DialogData(
                 "아니요", context.getColor(R.color.text_basic_color)
             )
 
-        fun callDialogData(context: Context) =
+        fun getCallToCustomerDialogData(context: Context) =
             DialogData(
                 "고객과 전화 연결 하시겠어요?", context.getColor(R.color.text_basic_color),
                 null, context.getColor(R.color.text_alert_color),
@@ -39,7 +39,7 @@ data class DialogData(
                 "아니요", context.getColor(R.color.text_basic_color)
             )
 
-        fun cancelSignUpDialogData(context: Context) =
+        fun getQuitSignUpDialogData(context: Context) =
             DialogData(
                 "가입신청을 그만두지 마세요\n지금 가입하면\n문의 수신, 견적 발송 무료!",
                 context.getColor(R.color.text_basic_color),
@@ -51,7 +51,19 @@ data class DialogData(
                 context.getColor(R.color.text_hint_color)
             )
 
-        fun notificationDialogData(context: Context) =
+        fun getExistentUserDialogData(context: Context) =
+            DialogData(
+                "이미 수공의 마스터이시네요!\n 본인 인증을 통해 로그인해주세요.",
+                context.getColor(R.color.text_basic_color),
+                null,
+                context.getColor(R.color.text_alert_color),
+                "확인",
+                context.getColor(R.color.text_basic_color),
+                "취소",
+                context.getColor(R.color.text_hint_color)
+            )
+
+        fun getAcceptNotificationDialogData(context: Context) =
             DialogData(
                 "수공 마스터 앱 혜택 알림 받기",
                 context.getColor(R.color.text_basic_color),
@@ -63,7 +75,7 @@ data class DialogData(
                 context.getColor(R.color.text_hint_color)
             )
 
-        fun askingFillProfileDialogData(context: Context) =
+        fun getAskingFillProfileDialogData(context: Context) =
             DialogData(
                 "문의를 처리하려면\n필수 정보 등록이 필요해요.\n지금 등록하시겠어요?", context.getColor(R.color.text_basic_color),
                 null, context.getColor(R.color.text_alert_color),
@@ -71,7 +83,7 @@ data class DialogData(
                 "아니요", context.getColor(R.color.text_basic_color)
             )
 
-        fun askingDeletePortfolioDialogData(context: Context) =
+        fun getAskingDeletePortfolioDialogData(context: Context) =
             DialogData(
                 "포트폴리오를 삭제하시겠어요?", context.getColor(R.color.text_basic_color),
                 null, context.getColor(R.color.text_alert_color),
@@ -79,7 +91,7 @@ data class DialogData(
                 "아니요", context.getColor(R.color.text_basic_color)
             )
 
-        fun askingDeletePriceByProjectDialogData(context: Context) =
+        fun getAskingDeletePriceByProjectDialogData(context: Context) =
             DialogData(
                 "시공 종류별 가격을 삭제하시겠어요?", context.getColor(R.color.text_basic_color),
                 null, context.getColor(R.color.text_alert_color),

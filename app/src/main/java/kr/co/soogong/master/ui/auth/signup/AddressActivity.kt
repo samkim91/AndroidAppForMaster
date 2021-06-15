@@ -8,7 +8,7 @@ import android.webkit.WebChromeClient
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ActivityAddressBinding
 import kr.co.soogong.master.ui.base.BaseActivity
-import kr.co.soogong.master.uiinterface.auth.signup.AddressActivityHelper
+import kr.co.soogong.master.uihelper.auth.signup.AddressActivityHelper
 import timber.log.Timber
 
 class AddressActivity : BaseActivity<ActivityAddressBinding>(

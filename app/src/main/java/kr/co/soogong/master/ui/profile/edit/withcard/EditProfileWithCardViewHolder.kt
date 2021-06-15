@@ -2,8 +2,8 @@ package kr.co.soogong.master.ui.profile.edit.withcard.portfolio
 
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
-import kr.co.soogong.master.data.profile.Portfolio
-import kr.co.soogong.master.data.profile.PriceByProject
+import kr.co.soogong.master.data.model.profile.Portfolio
+import kr.co.soogong.master.data.model.profile.PriceByProject
 import kr.co.soogong.master.databinding.ViewHolderPortfolioBinding
 import kr.co.soogong.master.databinding.ViewHolderPriceByProjectsBinding
 
@@ -37,11 +37,11 @@ class PortfolioViewHolder(
             data = portfolio
 
             setDeleteButtonClickListener {
-                leftButtonClickListener(portfolio.itemId!!)
+                leftButtonClickListener(portfolio.id!!)
             }
 
             setEditButtonClickListener {
-                rightButtonClickListener(portfolio.itemId!!)
+                rightButtonClickListener(portfolio.id!!)
             }
 
             executePendingBindings()
@@ -62,11 +62,11 @@ class PriceByProjectsViewHolder(
             data = priceByProject
 
             setDeleteButtonClickListener {
-                leftButtonClickListener(priceByProject.itemId!!)
+                leftButtonClickListener(priceByProject.id!!)
             }
 
             setEditButtonClickListener {
-                rightButtonClickListener(priceByProject.itemId!!)
+                rightButtonClickListener(priceByProject.id!!)
             }
 
             executePendingBindings()

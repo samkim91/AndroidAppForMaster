@@ -7,17 +7,11 @@ import javax.inject.Inject
 
 @Reusable
 class GetRepresentativeImagesUseCase @Inject constructor(
-    private val getProfileFromLocalUseCase: GetProfileFromLocalUseCase,
+    private val getRequiredInformationUseCase: GetRequiredInformationUseCase,
 ) {
     operator fun invoke(): Single<List<Uri>> {
-//        if (BuildConfig.DEBUG) {
-//            return RequiredInformation.TEST_REQUIRED_INFORMATION.representativeImages.map { imagePath ->
-//                Uri.parse(imagePath.path)
-//            }
-//        }
-
-        return getProfileFromLocalUseCase().map { profile ->
-            profile.requiredInformation?.representativeImages?.map { imagePath ->
+        return getRequiredInformationUseCase().map {
+            it.representativeImages?.map { imagePath ->
                 Uri.parse(imagePath.path)
             }
         }

@@ -7,7 +7,7 @@ import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ActivityNoticeBinding
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.ui.mypage.NoticeAdapter
-import kr.co.soogong.master.uiinterface.mypage.notice.detail.NoticeDetailActivityHelper
+import kr.co.soogong.master.uihelper.mypage.notice.detail.NoticeDetailActivityHelper
 import timber.log.Timber
 
 @AndroidEntryPoint

@@ -3,7 +3,7 @@ package kr.co.soogong.master.ui.mypage
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import kr.co.soogong.master.data.notice.Notice
+import kr.co.soogong.master.data.model.mypage.Notice
 import kr.co.soogong.master.ui.mypage.notice.NoticeDiffUtil
 import kr.co.soogong.master.ui.mypage.notice.NoticeMyPageListViewHolder
 import kr.co.soogong.master.ui.mypage.notice.NoticeMyPageListViewHolder.Companion.NoticeMypageListView

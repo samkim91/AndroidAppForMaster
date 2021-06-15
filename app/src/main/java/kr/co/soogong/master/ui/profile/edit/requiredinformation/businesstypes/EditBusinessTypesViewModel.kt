@@ -4,25 +4,25 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import kr.co.soogong.master.data.category.BusinessType
-import kr.co.soogong.master.domain.usecase.profile.GetBusinessTypesUseCase
+import kr.co.soogong.master.data.model.major.Major
+import kr.co.soogong.master.domain.usecase.profile.GetMajorsUseCase
 import kr.co.soogong.master.domain.usecase.profile.SaveBusinessTypesUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
-import kr.co.soogong.master.ui.utils.ListLiveData
+import kr.co.soogong.master.utility.ListLiveData
 import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class EditBusinessTypesViewModel @Inject constructor(
-    private val getBusinessTypesUseCase: GetBusinessTypesUseCase,
+    private val getMajorsUseCase: GetMajorsUseCase,
     private val saveBusinessTypesUseCase: SaveBusinessTypesUseCase,
 ) : BaseViewModel() {
-    val businessTypes = ListLiveData<BusinessType>()
+    val businessTypes = ListLiveData<Major>()
 
     fun requestBusinessTypes() {
         Timber.tag(TAG).d("requestBusinessTypes: ")
 
-        getBusinessTypesUseCase()
+        getMajorsUseCase()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
@@ -35,7 +35,7 @@ class EditBusinessTypesViewModel @Inject constructor(
         Timber.tag(TAG).d("saveBusinessTypes: ")
         businessTypes.value?.let {
             saveBusinessTypesUseCase(
-                businessTypes = it
+                major = it
             ).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(

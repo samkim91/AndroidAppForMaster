@@ -4,13 +4,13 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import kr.co.soogong.master.data.profile.IEditProfileWithCard
+import kr.co.soogong.master.data.model.profile.IEditProfileWithCard
 import kr.co.soogong.master.domain.usecase.profile.DeletePortfolioUseCase
 import kr.co.soogong.master.domain.usecase.profile.DeletePriceByProjectUseCase
 import kr.co.soogong.master.domain.usecase.profile.GetPortfolioListUseCase
 import kr.co.soogong.master.domain.usecase.profile.GetPriceByProjectListUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
-import kr.co.soogong.master.ui.utils.ListLiveData
+import kr.co.soogong.master.utility.ListLiveData
 import timber.log.Timber
 import javax.inject.Inject
 

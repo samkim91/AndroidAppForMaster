@@ -1,7 +1,7 @@
 package kr.co.soogong.master.domain.usecase.requirement
 
-import kr.co.soogong.master.domain.requirements.EstimationStatus
-import kr.co.soogong.master.domain.requirements.RequirementCard
+import kr.co.soogong.master.data.model.requirement.EstimationStatus
+import kr.co.soogong.master.data.model.requirement.RequirementCard
 import javax.inject.Inject
 
 class GetProgressEstimationListUseCase @Inject constructor(

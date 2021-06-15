@@ -1,11 +1,11 @@
 package kr.co.soogong.master.ui.profile.edit.withcard
 
 import androidx.recyclerview.widget.DiffUtil
-import kr.co.soogong.master.data.profile.IEditProfileWithCard
+import kr.co.soogong.master.data.model.profile.IEditProfileWithCard
 
 class EditProfileWithCardDiffUtil : DiffUtil.ItemCallback<IEditProfileWithCard>() {
     override fun areItemsTheSame(oldItem: IEditProfileWithCard, newItem: IEditProfileWithCard): Boolean {
-        return oldItem.itemId == newItem.itemId
+        return oldItem.id == newItem.id
     }
 
     override fun areContentsTheSame(oldItem: IEditProfileWithCard, newItem: IEditProfileWithCard): Boolean {

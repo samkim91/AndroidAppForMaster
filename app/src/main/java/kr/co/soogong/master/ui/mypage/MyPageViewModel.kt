@@ -8,8 +8,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.launch
-import kr.co.soogong.master.data.notice.Notice
-import kr.co.soogong.master.data.profile.Profile
+import kr.co.soogong.master.data.model.mypage.Notice
+import kr.co.soogong.master.data.model.profile.Profile
 import kr.co.soogong.master.domain.usecase.mypage.GetNoticeListUseCase
 import kr.co.soogong.master.domain.usecase.mypage.SignOutUseCase
 import kr.co.soogong.master.domain.usecase.profile.GetProfileUseCase

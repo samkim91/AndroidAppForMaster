@@ -8,7 +8,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ActivityMainBinding
 import kr.co.soogong.master.ui.base.BaseActivity
-import kr.co.soogong.master.uiinterface.main.MainBadge
+import kr.co.soogong.master.uihelper.main.MainBadge
 import timber.log.Timber
 
 @AndroidEntryPoint

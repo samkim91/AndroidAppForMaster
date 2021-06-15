@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import com.google.android.material.chip.Chip
 import kr.co.soogong.master.R
 import kr.co.soogong.master.ui.widget.TitleChipGroup
-import kr.co.soogong.master.util.extension.dp
+import kr.co.soogong.master.utility.extension.dp
 
 object OtherFlexibleOptionsChipGroupHelper {
     private val otherFlexibleOptions =

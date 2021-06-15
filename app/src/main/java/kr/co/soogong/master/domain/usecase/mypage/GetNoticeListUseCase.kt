@@ -2,8 +2,8 @@ package kr.co.soogong.master.domain.usecase.mypage
 
 import dagger.Reusable
 import io.reactivex.Single
-import kr.co.soogong.master.data.notice.Notice
-import kr.co.soogong.master.network.MyPageService
+import kr.co.soogong.master.data.model.mypage.Notice
+import kr.co.soogong.master.network.mypage.MyPageService
 import javax.inject.Inject
 
 @Reusable

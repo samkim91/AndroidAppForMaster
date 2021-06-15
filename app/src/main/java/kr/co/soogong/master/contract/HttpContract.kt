@@ -1,38 +1,26 @@
 package kr.co.soogong.master.contract
 
 object HttpContract {
+    const val MY_PAGE_URL = "https://soogong.co.kr/master/"
+
     const val LOCAL_URL = "http://192.168.0.50:8080/"
     const val TEST_URL = "https://test.api2.soogong.co.kr/"
     const val PROD_URL = "https://api2.soogong.co.kr/"
 
     //region Auth
-    const val LOGIN = "login"
-    const val SIGN_IN = "sign-in"
-    const val RESIGN_IN = "resign-in"
-
-    const val FIND = "find"
-    const val SIGN_UP = "signup"
-    const val MASTER_SIGN_UP = "/master/signup"
-//    const val MASTER_SIGN_UP = "api/v1/branches/register"
-    const val PASSWORD = "password"
-    const val FCM_UPDATE = "api/v1/branches/update_reg_id"
-
-    // Todo.. 서버 수정해야함.
-    const val CHECK_ID_EXIST = "find"
+    const val MASTER_SIGN_UP = "auth/master-sign-up"
+    const val MASTER_SIGN_IN = "auth/master-find-by-uid"
+    const val IS_USER_EXIST = "auth/user-exist"
+    const val FCM_UPDATE = "api/v1/branches/update_reg_id"  // TODO: 2021/06/10 무슨 용도인지 알아보고 추가해야함.
     //endregion
 
     //region Category
-//    const val CATEGORY = "api/v1/categories"
-//    const val PROJECT = "api/v1/categories/{id}/projects"
-
     const val CATEGORY_LIST = "category/list"
     const val PROJECT_LIST = "project/find-all-by-categoryId/{categoryId}"
     //endregion
 
     //region User
-    const val GET_USER_PROFILE = "api/v1/branches/search/{keycode}"
-    const val GET_USER_PROFILE_V2 = "api/v2/branches/info/{keycode}"
-    const val GET_MASTER_PROFILE = "master/profile/{id}"
+    const val GET_MASTER_BY_UID = "master/find-by-uid"
     //endregion
 
     //region Notice

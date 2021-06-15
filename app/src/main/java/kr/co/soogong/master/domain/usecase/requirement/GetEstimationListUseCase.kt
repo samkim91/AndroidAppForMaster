@@ -1,20 +1,23 @@
 package kr.co.soogong.master.domain.usecase.requirement
 
 import dagger.Reusable
-import kr.co.soogong.master.domain.estimation.EstimationDao
-import kr.co.soogong.master.domain.requirements.RequirementCard
-import kr.co.soogong.master.domain.usecase.auth.GetMasterIdFromSharedUseCase
-import kr.co.soogong.master.network.EstimationsService
+import kr.co.soogong.master.BuildConfig
+import kr.co.soogong.master.data.dao.estimation.EstimationDao
+import kr.co.soogong.master.data.model.requirement.RequirementCard
+import kr.co.soogong.master.domain.usecase.auth.GetMasterUidFromSharedUseCase
+import kr.co.soogong.master.network.requirement.RequirementService
 import javax.inject.Inject
 
 @Reusable
 class GetEstimationListUseCase @Inject constructor(
     private val estimationDao: EstimationDao,
-    private val estimationsService: EstimationsService,
-    private val getMasterIdFromSharedUseCase: GetMasterIdFromSharedUseCase
+    private val requirementService: RequirementService,
+    private val getMasterUidFromSharedUseCase: GetMasterUidFromSharedUseCase
 ) {
     suspend operator fun invoke(): List<RequirementCard> {
-        val list = estimationsService.getEstimationList(getMasterIdFromSharedUseCase())
+        if(BuildConfig.DEBUG) return emptyList()
+
+        val list = requirementService.getEstimationList(getMasterUidFromSharedUseCase())
 
         estimationDao.insert(list)
 

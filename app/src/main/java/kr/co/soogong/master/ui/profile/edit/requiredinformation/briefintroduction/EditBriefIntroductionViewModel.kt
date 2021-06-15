@@ -5,7 +5,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import kr.co.soogong.master.domain.usecase.profile.GetBriefIntroductionUseCase
+import kr.co.soogong.master.domain.usecase.profile.GetIntroductionUseCase
 import kr.co.soogong.master.domain.usecase.profile.SaveBriefIntroductionUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import timber.log.Timber
@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class EditBriefIntroductionViewModel @Inject constructor(
-    private val getBriefIntroductionUseCase: GetBriefIntroductionUseCase,
+    private val getIntroductionUseCase: GetIntroductionUseCase,
     private val saveBriefIntroductionUseCase: SaveBriefIntroductionUseCase,
 ) : BaseViewModel() {
     val briefIntroduction = MutableLiveData("")
@@ -21,7 +21,7 @@ class EditBriefIntroductionViewModel @Inject constructor(
     fun getBriefIntro() {
         Timber.tag(TAG).d("getBriefIntro: ")
 
-        getBriefIntroductionUseCase()
+        getIntroductionUseCase()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(

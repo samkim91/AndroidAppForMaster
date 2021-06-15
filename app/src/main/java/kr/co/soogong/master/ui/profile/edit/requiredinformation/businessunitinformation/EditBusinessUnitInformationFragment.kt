@@ -15,9 +15,9 @@ import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.businessunitinformation.EditBusinessUnitInformationViewModel.Companion.GET_BUSINESS_UNIT_INFORMATION_FAILED
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.businessunitinformation.EditBusinessUnitInformationViewModel.Companion.SAVE_BUSINESS_UNIT_INFORMATION_FAILED
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.businessunitinformation.EditBusinessUnitInformationViewModel.Companion.SAVE_BUSINESS_UNIT_INFORMATION_SUCCESSFULLY
-import kr.co.soogong.master.ui.utils.PermissionHelper
-import kr.co.soogong.master.util.EventObserver
-import kr.co.soogong.master.util.extension.toast
+import kr.co.soogong.master.utility.EventObserver
+import kr.co.soogong.master.utility.PermissionHelper
+import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -50,7 +50,7 @@ class EditBusinessUnitInformationFragment :
                         TedImagePicker.with(requireContext())
                             .buttonBackground(R.drawable.shape_fill_green_background)
                             .start { uri ->
-                                viewModel.identicalImage.value = uri
+                                viewModel.businessRegistImage.value = uri
                             }
                     },
                     onDenied = {
@@ -63,15 +63,15 @@ class EditBusinessUnitInformationFragment :
                     businessName.alertVisible = it.isNullOrEmpty()
                 })
 
-                viewModel.companyName.observe(viewLifecycleOwner, {
+                viewModel.shopName.observe(viewLifecycleOwner, {
                     companyName.alertVisible = it.isNullOrEmpty()
                 })
 
-                viewModel.identicalNumber.observe(viewLifecycleOwner, {
+                viewModel.businessNumber.observe(viewLifecycleOwner, {
                     identicalNumber.alertVisible = it.isNullOrEmpty()
                 })
 
-                viewModel.identicalImage.observe(viewLifecycleOwner, {
+                viewModel.businessRegistImage.observe(viewLifecycleOwner, {
                     alert.visibility = if (it == Uri.EMPTY) View.VISIBLE else View.GONE
                 })
 
@@ -79,7 +79,7 @@ class EditBusinessUnitInformationFragment :
                     birthday.alertVisible = it.isNullOrEmpty()
                 })
 
-                if (viewModel.businessUnitType.value == "프리랜서") {
+                if (viewModel.businessType.value == "프리랜서") {
                     if (!birthday.alertVisible) viewModel.saveBusinessUnitInfo()
                 } else {
                     if (!businessName.alertVisible && !companyName.alertVisible && !identicalNumber.alertVisible && !alert.isVisible) viewModel.saveBusinessUnitInfo()
@@ -95,18 +95,18 @@ class EditBusinessUnitInformationFragment :
             businessUnitType.addCheckedChangeListener { group, position ->
                 when (position) {
                     group.getChildAt(0).id, group.getChildAt(1).id -> {
-                        viewModel.businessUnitType.value =
+                        viewModel.businessType.value =
                             if (position == group.getChildAt(0).id) "개인사업자" else "법인사업자"
                         businessUnitGroup.visibility = View.VISIBLE
                         birthday.visibility = View.GONE
                     }
                     group.getChildAt(2).id -> {
-                        viewModel.businessUnitType.value = "프리랜서"
+                        viewModel.businessType.value = "프리랜서"
                         businessUnitGroup.visibility = View.GONE
                         birthday.visibility = View.VISIBLE
                     }
                     else -> {
-                        viewModel.businessUnitType.value = ""
+                        viewModel.businessType.value = ""
                         businessUnitGroup.visibility = View.GONE
                         birthday.visibility = View.GONE
                     }
@@ -117,7 +117,7 @@ class EditBusinessUnitInformationFragment :
 
     private fun registerEventObserve() {
         Timber.tag(TAG).d("registerEventObserve: ")
-        viewModel.businessUnitType.observe(viewLifecycleOwner, { businessType ->
+        viewModel.businessType.observe(viewLifecycleOwner, { businessType ->
             binding.businessUnitType.chipGroup.children.forEach {
                 val chip = it as? Chip
                 if (chip?.text.toString() == businessType) chip?.isChecked = true

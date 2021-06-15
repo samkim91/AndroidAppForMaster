@@ -8,11 +8,12 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import kr.co.soogong.master.data.profile.Portfolio
+import kr.co.soogong.master.data.model.profile.Portfolio
 import kr.co.soogong.master.domain.usecase.profile.GetPortfolioUseCase
 import kr.co.soogong.master.domain.usecase.profile.SavePortfolioUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import timber.log.Timber
+import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
@@ -45,11 +46,15 @@ class EditPortfolioViewModel @Inject constructor(
         Timber.tag(TAG).d("getPortfolio: $portfolioId")
         savePortfolioUseCase(
             portfolio = Portfolio(
-                itemId = portfolioId,
+                id = portfolioId,
                 title = title.value!!,
+                description = description.value!!,
+                project = "",
+                type = "portfolio",
+                createdAt = Date(),
+                updatedAt = Date(),
                 imageBeforeJob = imageBeforeJob.value.toString(),
                 imageAfterJob = imageAfterJob.value.toString(),
-                description = description.value!!
             )
         ).subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

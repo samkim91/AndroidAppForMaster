@@ -6,15 +6,11 @@ import javax.inject.Inject
 
 @Reusable
 class GetOwnerNameUseCase @Inject constructor(
-    private val getProfileFromLocalUseCase: GetProfileFromLocalUseCase,
+    private val getRequiredInformationUseCase: GetRequiredInformationUseCase,
 ) {
     operator fun invoke(): Single<String> {
-//        if (BuildConfig.DEBUG) {
-//            return RequiredInformation.TEST_REQUIRED_INFORMATION.businessRepresentativeName
-//        }
-
-        return getProfileFromLocalUseCase().map { profile ->
-             profile.requiredInformation?.businessRepresentativeName
+        return getRequiredInformationUseCase().map {
+            it.ownerName
         }
     }
 }

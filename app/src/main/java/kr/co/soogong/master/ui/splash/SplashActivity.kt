@@ -4,9 +4,9 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.domain.usecase.auth.GetMasterIdFromFirebaseUseCase
-import kr.co.soogong.master.domain.usecase.auth.SaveMasterIdInSharedUseCase
-import kr.co.soogong.master.uiinterface.auth.SignMainActivityHelper
-import kr.co.soogong.master.uiinterface.main.MainActivityHelper
+import kr.co.soogong.master.domain.usecase.auth.SaveMasterUidInSharedUseCase
+import kr.co.soogong.master.uihelper.auth.SignMainActivityHelper
+import kr.co.soogong.master.uihelper.main.MainActivityHelper
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -17,7 +17,7 @@ class SplashActivity : AppCompatActivity() {
     lateinit var getMasterIdFromFirebaseUseCase: GetMasterIdFromFirebaseUseCase
 
     @Inject
-    lateinit var saveMasterIdInSharedUseCase: SaveMasterIdInSharedUseCase
+    lateinit var saveMasterUidInSharedUseCase: SaveMasterUidInSharedUseCase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,22 +27,21 @@ class SplashActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         Timber.tag(TAG).d("onStart: ")
-        checkSignIng()
+        checkSignIn()
     }
 
-    private fun checkSignIng() {
-        Timber.tag(TAG).d("checkSignIng: ")
+    private fun checkSignIn() {
+        Timber.tag(TAG).d("checkSignIn: ")
 
-        getMasterIdFromFirebaseUseCase()?.let { masterId ->
-            Timber.tag(TAG).d("masterId: $masterId")
+        getMasterIdFromFirebaseUseCase()?.let { masterUid ->
+            Timber.tag(TAG).d("masterId: $masterUid")
 
-            // TODO: 2021/06/09 개발 끝나고 활성화
-//            saveMasterIdInSharedUseCase(masterId)
+            saveMasterUidInSharedUseCase(masterUid)
             startActivity(MainActivityHelper.getIntent(this))
             return
         }
 
-        Timber.tag(TAG).d("masterId is null")
+        Timber.tag(TAG).d("masterUid is null")
         startActivity(SignMainActivityHelper.getIntent(this))
     }
 

@@ -15,14 +15,13 @@ class SignUpPagerAdapter(
     override fun createFragment(position: Int): Fragment {
         Timber.tag(TAG).d("createFragment: $position")
         return when (position) {
-            0 -> Step1Fragment.newInstance()
-            1 -> Step2Fragment.newInstance()
-            2 -> Step3Fragment.newInstance()
-            3 -> Step4Fragment.newInstance()
-            4 -> Step5Fragment.newInstance()
-            5 -> Step6Fragment.newInstance()
-            6 -> Step7Fragment.newInstance()
-            7 -> Step8Fragment.newInstance()
+            0 -> PhoneNumberFragment.newInstance()
+            1 -> AuthFragment.newInstance()
+            2 -> OwnerNameFragment.newInstance()
+            3 -> MajorFragment.newInstance()
+            4 -> AddressFragment.newInstance()
+            5 -> ServiceAreaFragment.newInstance()
+            6 -> PrivatePolicyFragment.newInstance()
             else -> Fragment()
         }
     }

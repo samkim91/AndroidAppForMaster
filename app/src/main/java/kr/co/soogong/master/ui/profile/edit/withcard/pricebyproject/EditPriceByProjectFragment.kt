@@ -10,11 +10,11 @@ import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.profile.edit.withcard.pricebyproject.EditPriceByProjectViewModel.Companion.GET_PRICE_BY_PROJECT_FAILED
 import kr.co.soogong.master.ui.profile.edit.withcard.pricebyproject.EditPriceByProjectViewModel.Companion.SAVE_PRICE_BY_PROJECT_FAILED
 import kr.co.soogong.master.ui.profile.edit.withcard.pricebyproject.EditPriceByProjectViewModel.Companion.SAVE_PRICE_BY_PROJECT_SUCCESSFULLY
-import kr.co.soogong.master.uiinterface.profile.EditProfileContainerFragmentHelper.ADD_PORTFOLIO
-import kr.co.soogong.master.uiinterface.profile.EditProfileContainerFragmentHelper.ADD_PRICE_BY_PROJECTS
-import kr.co.soogong.master.uiinterface.profile.EditProfileContainerFragmentHelper.EDIT_PRICE_BY_PROJECTS
-import kr.co.soogong.master.util.EventObserver
-import kr.co.soogong.master.util.extension.toast
+import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.ADD_PORTFOLIO
+import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.ADD_PRICE_BY_PROJECTS
+import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_PRICE_BY_PROJECTS
+import kr.co.soogong.master.utility.EventObserver
+import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
 
 @AndroidEntryPoint
