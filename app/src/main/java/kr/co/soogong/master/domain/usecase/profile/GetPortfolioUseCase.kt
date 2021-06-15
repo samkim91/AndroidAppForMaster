@@ -7,14 +7,11 @@ import javax.inject.Inject
 
 @Reusable
 class GetPortfolioUseCase @Inject constructor(
-    private val getProfileFromLocalUseCase: GetProfileFromLocalUseCase,
-    ) {
+    private val getPortfolioListUseCase: GetPortfolioListUseCase,
+) {
     operator fun invoke(portfolioId: Int): Single<Portfolio> {
-
-        return getProfileFromLocalUseCase().map { profile ->
-            profile.basicInformation?.portfolios?.find { portfolio ->
-                portfolio.id == portfolioId
-            }
+        return getPortfolioListUseCase().map {
+            it.find { portfolio -> portfolio.id == portfolioId }
         }
     }
 }

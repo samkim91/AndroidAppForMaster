@@ -2,6 +2,7 @@ package kr.co.soogong.master.data.model.profile
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
+import kr.co.soogong.master.data.dto.profile.PortfolioDto
 import java.util.*
 
 @Parcelize
@@ -17,6 +18,27 @@ data class Portfolio(
     val imageAfterJob: String,
 ) : Parcelable, IEditProfileWithCard {
     companion object {
+        fun fromPortfolioDto(list: List<PortfolioDto>?): List<Portfolio> {
+            val ret = mutableListOf<Portfolio>()
+            list?.map { portfolioDto ->
+                ret.add(
+                    Portfolio(
+                        id = portfolioDto.id,
+                        title = portfolioDto.title,
+                        description = portfolioDto.description,
+                        project = portfolioDto.project,
+                        type = portfolioDto.type,
+                        createdAt = portfolioDto.createdAt,
+                        updatedAt = portfolioDto.updatedAt,
+                        imageBeforeJob = portfolioDto.beforeRepairImageId,
+                        imageAfterJob = portfolioDto.afterRepairImageId,
+                    )
+                )
+            }
+
+            return ret
+        }
+
 //        fun fromJson(jsonObject: JsonObject): Portfolio {
 //            val item = jsonObject.get("data").asJsonObject
 //            val attributes = item.get("attributes").asJsonObject

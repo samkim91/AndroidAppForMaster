@@ -5,6 +5,8 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
+import kr.co.soogong.master.contract.HttpContract
+import kr.co.soogong.master.data.dto.profile.MasterDto
 
 @Parcelize
 @Entity(tableName = "Profile")
@@ -38,6 +40,19 @@ data class Profile(
     val basicInformation: BasicInformation?,
 ) : Parcelable {
     companion object {
+        fun fromMasterDto(masterDto: MasterDto): Profile {
+            return Profile(
+                id = masterDto.id,
+                uid = masterDto.uid,
+                tel = masterDto.tel,
+                representativeName = if (!masterDto.shopName.isNullOrEmpty()) masterDto.shopName else masterDto.ownerName,
+                subscriptionPlan = masterDto.subscriptionPlan,
+                myReview = MyReview.TEST_MY_REVIEW, // TODO: 2021/06/15 추가 필요 masterDto.myReview,
+                myPageUrl = HttpContract.MY_PAGE_URL + masterDto.uid,
+                isPublic = masterDto.isPublic,
+                basicInformation = BasicInformation.fromMasterDto(masterDto),
+            )
+        }
 
         //        fun fromJson(jsonObject: JsonObject): Profile {
 //            val item = jsonObject.get("data").asJsonObject

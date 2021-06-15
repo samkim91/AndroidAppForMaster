@@ -43,50 +43,6 @@ class ProfileService @Inject constructor(
         // return profileInterface.savePriceByProject(query)
     }
 
-    fun deletePortfolio(masterId: String, itemId: Int): Single<Response> {
-        val query = HashMap<String, Any>()
-        query["master_id"] = masterId
-        query["item_id"] = itemId
 
-        return Single.just(Response.NULL_RESPONSE)
-        // Todo.. server 이후로 작업해야함
-//        return profileInterface.deletePortfolio(query)
-    }
-
-    fun deletePriceByProject(masterId: String, itemId: Int): Single<Response> {
-        val query = HashMap<String, Any>()
-        query["master_id"] = masterId
-        query["item_id"] = itemId
-
-        return Single.just(Response.NULL_RESPONSE)
-        // Todo.. server 이후로 작업해야함
-//        return profileInterface.deletePortfolio(query)
-    }
-
-    fun saveFlexibleCost(masterId: String, flexibleCost: FlexibleCost): Single<Response> {
-        val query = HashMap<String, String>()
-        query["master_id"] = masterId
-        query["travel_cost"] = flexibleCost.travelCost
-        query["crane_usage"] = flexibleCost.craneUsage
-        query["package_cost"] = flexibleCost.packageCost
-        query["other_cost_information"] = flexibleCost.otherCostInformation
-
-        return Single.just(Response.NULL_RESPONSE)
-        // Todo.. server 이후로 작업해야함
-        // return profileInterface.savePriceByProject(query)
-    }
-
-    fun saveOtherFlexibleOptions(
-        masterId: String,
-        otherFlexibleOptions: OtherFlexibleOptions
-    ): Single<Response> {
-        val query = HashMap<String, Any>()
-        query["master_id"] = masterId
-        query["other_flexible_options"] = otherFlexibleOptions.options
-
-        return Single.just(Response.NULL_RESPONSE)
-        // Todo.. server 이후로 작업해야함
-        // return profileInterface.savePriceByProject(query)
-    }
 
 }

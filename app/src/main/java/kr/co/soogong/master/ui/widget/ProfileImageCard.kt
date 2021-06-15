@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.isVisible
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.model.requirement.ImagePath
 import kr.co.soogong.master.databinding.ViewProfileImageCardBinding
@@ -45,8 +46,7 @@ class ProfileImageCard @JvmOverloads constructor(
                 newBadgeVisible = false
                 binding.subTitle.visibility = View.GONE
 
-                binding.imageContainer.visibility =
-                    if (value.path.isEmpty()) View.GONE else View.VISIBLE
+                binding.imageContainer.isVisible = !value.path.isNullOrEmpty()
                 binding.image.setImageUrl(value.path)
             }
         }

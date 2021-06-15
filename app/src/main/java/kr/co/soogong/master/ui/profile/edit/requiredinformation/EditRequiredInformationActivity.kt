@@ -154,13 +154,13 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
         var insertedCount = 0
 
         with(viewModel.requiredInformation) {
-            if (!value?.briefIntroduction.isNullOrEmpty()) insertedCount++
+            if (!value?.introduction.isNullOrEmpty()) insertedCount++
             if (value?.representativeImages?.get(0)?.path.isNullOrEmpty()) insertedCount++
-            if (!value?.businessUnitInformation?.businessUnitType.isNullOrEmpty()) insertedCount++
+            if (!value?.businessUnitInformation?.businessType.isNullOrEmpty()) insertedCount++
             if (!value?.warrantyInformation?.warrantyPeriod.isNullOrEmpty()) insertedCount++
             if (!value?.career.isNullOrEmpty()) insertedCount++
-            if (!value?.businessRepresentativeName.isNullOrEmpty()) insertedCount++
-            if (!value?.phoneNumber.isNullOrEmpty()) insertedCount++
+            if (!value?.ownerName.isNullOrEmpty()) insertedCount++
+            if (!value?.tel.isNullOrEmpty()) insertedCount++
             if (!value?.majors.isNullOrEmpty()) insertedCount++
 //            if(!value?.address.isNullOrEmpty()) insertedCount++
         }

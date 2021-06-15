@@ -7,18 +7,11 @@ import javax.inject.Inject
 
 @Reusable
 class GetBusinessUnitInformationUseCase @Inject constructor(
-    private val getProfileFromLocalUseCase: GetProfileFromLocalUseCase,
+    private val getRequiredInformationUseCase: GetRequiredInformationUseCase,
 ) {
     operator fun invoke(): Single<BusinessUnitInformation> {
-//        if(BuildConfig.DEBUG){
-//            return RequiredInformation.TEST_REQUIRED_INFORMATION.businessUnitInformation
-//        }
-
-        // TODO: 2021/06/15 수정작업
-        return Single.just(BusinessUnitInformation.NULL_BUSINESS_UNIT_INFORMATION)
-
-//        return getProfileFromLocalUseCase().map { profile ->
-//            profile.requiredInformation?.businessUnitInformation
-//        }
+        return getRequiredInformationUseCase().map {
+            it.businessUnitInformation
+        }
     }
 }

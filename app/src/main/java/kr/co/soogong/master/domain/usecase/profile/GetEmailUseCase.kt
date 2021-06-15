@@ -6,15 +6,11 @@ import javax.inject.Inject
 
 @Reusable
 class GetEmailUseCase @Inject constructor(
-    private val getProfileFromLocalUseCase: GetProfileFromLocalUseCase,
+    private val getProfileUseCase: GetProfileUseCase,
 ) {
     operator fun invoke(): Single<String> {
-//        if (BuildConfig.DEBUG) {
-//            return Profile.TEST_PROFILE.basicInformation?.email
-//        }
-
-        return getProfileFromLocalUseCase().map { profile ->
-            profile.basicInformation?.email
+        return getProfileUseCase().map {
+            it.basicInformation?.email
         }
     }
 }

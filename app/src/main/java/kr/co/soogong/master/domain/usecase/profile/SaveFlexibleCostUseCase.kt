@@ -14,6 +14,8 @@ class SaveFlexibleCostUseCase @Inject constructor(
     private val profileService: ProfileService,
 ) {
     operator fun invoke(flexibleCost: FlexibleCost): Single<Response> {
-        return profileService.saveFlexibleCost(getMasterUidFromSharedUseCase()!!, flexibleCost)
+        return Single.just(Response.NULL_RESPONSE)
+        // TODO: 2021/06/15
+//        return profileService.saveFlexibleCost(getMasterUidFromSharedUseCase()!!, flexibleCost)
     }
 }

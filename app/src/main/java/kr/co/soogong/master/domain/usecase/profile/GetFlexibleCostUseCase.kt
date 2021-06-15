@@ -7,15 +7,11 @@ import javax.inject.Inject
 
 @Reusable
 class GetFlexibleCostUseCase @Inject constructor(
-    private val getProfileFromLocalUseCase: GetProfileFromLocalUseCase,
+    private val getProfileUseCase: GetProfileUseCase,
 ) {
     operator fun invoke(): Single<FlexibleCost> {
-//        if(BuildConfig.DEBUG) {
-//            return FlexibleCost.TEST_FLEXIBLE_COST
-//        }
-
-        return getProfileFromLocalUseCase().map { profile ->
-            profile.basicInformation?.flexibleCost
+        return getProfileUseCase().map {
+            it.basicInformation?.flexibleCost
         }
     }
 }

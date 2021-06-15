@@ -14,6 +14,9 @@ data class Major(
     val projects: MutableList<Project>?,
 ) : Parcelable {
     companion object {
+
+
+
         fun fromJson(jsonObject: JsonObject): Major {
             val item = jsonObject.get("business_type").asJsonObject
             val projectsArray = item.get("project").asJsonArray

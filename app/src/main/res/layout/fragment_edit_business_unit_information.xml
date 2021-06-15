@@ -75,7 +75,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/gap_28"
                         app:alertText='@{"2자 이상 20자 이내로 입력해주세요."}'
-                        app:content="@={vm.companyName}"
+                        app:content="@={vm.shopName}"
                         app:hintText='@{"예시) 수공"}'
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -88,7 +88,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/gap_28"
                         app:alertText='@{"필수 정보입니다."}'
-                        app:content="@={vm.identicalNumber}"
+                        app:content="@={vm.businessNumber}"
                         app:hintText='@{"사업자등록번호 예시) 1053578512"}'
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -116,7 +116,7 @@
                         android:background="@drawable/ic_camera"
                         app:layout_constraintStart_toStartOf="@id/identical_image_holder_label"
                         app:layout_constraintTop_toBottomOf="@id/identical_image_holder_label"
-                        bind:visible="@{vm.identicalImage == Uri.EMPTY}" />
+                        bind:visible="@{vm.businessRegistImage == Uri.EMPTY}" />
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/identical_image_holder"
@@ -127,13 +127,13 @@
                         app:cardElevation="@dimen/gap_0"
                         app:layout_constraintStart_toStartOf="@id/identical_image_holder_label"
                         app:layout_constraintTop_toBottomOf="@id/identical_image_holder_label"
-                        bind:visible="@{vm.identicalImage != Uri.EMPTY}">
+                        bind:visible="@{vm.businessRegistImage != Uri.EMPTY}">
 
                         <androidx.appcompat.widget.AppCompatImageView
                             android:id="@+id/image_before_job_view"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            bind:image_uri="@{vm.identicalImage}" />
+                            bind:image_uri="@{vm.businessRegistImage}" />
 
                         <androidx.appcompat.widget.AppCompatImageView
                             android:id="@+id/image_before_job_close_icon"

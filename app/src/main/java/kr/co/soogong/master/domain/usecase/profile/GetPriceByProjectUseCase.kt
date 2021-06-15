@@ -7,15 +7,11 @@ import javax.inject.Inject
 
 @Reusable
 class GetPriceByProjectUseCase @Inject constructor(
-    private val getProfileFromLocalUseCase: GetProfileFromLocalUseCase,
+    private val getPriceByProjectListUseCase: GetPriceByProjectListUseCase,
 ) {
     operator fun invoke(priceByProjectId: Int): Single<PriceByProject> {
-//        if(BuildConfig.DEBUG){
-//            return PriceByProject.TEST_PRICE_BY_PROJECT
-//        }
-
-        return getProfileFromLocalUseCase().map { profile ->
-             profile.basicInformation?.priceByProjects?.find { priceByProject ->
+        return getPriceByProjectListUseCase().map {
+            it.find { priceByProject ->
                 priceByProject.id == priceByProjectId
             }
         }

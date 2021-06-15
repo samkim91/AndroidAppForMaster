@@ -6,8 +6,8 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class WarrantyInformation(
-    val warrantyPeriod: String,
-    val warrantyDescription: String,
+    val warrantyPeriod: String?,
+    val warrantyDescription: String?,
 ) : Parcelable{
     companion object {
         fun fromJson(jsonObject: JsonObject): WarrantyInformation {

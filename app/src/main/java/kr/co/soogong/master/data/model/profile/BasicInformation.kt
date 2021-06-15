@@ -1,8 +1,8 @@
 package kr.co.soogong.master.data.model.profile
 
 import android.os.Parcelable
-import com.google.gson.JsonObject
 import kotlinx.parcelize.Parcelize
+import kr.co.soogong.master.data.dto.profile.MasterDto
 import kr.co.soogong.master.data.model.requirement.ImagePath
 
 @Parcelize
@@ -15,6 +15,18 @@ data class BasicInformation(
     val email: String?,
 ) : Parcelable {
     companion object {
+        fun fromMasterDto(masterDto: MasterDto): BasicInformation {
+            return BasicInformation(
+                portfolios = Portfolio.fromPortfolioDto(masterDto.masterPortfolios?.filter { portfolioDto -> portfolioDto.type == "portfolio" }),
+                priceByProjects = PriceByProject.fromPortfolioDto(masterDto.masterPortfolios?.filter { portfolioDto -> portfolioDto.type == "price" }),
+                profileImage = ImagePath(masterDto.profileImageId),
+                flexibleCost = FlexibleCost.fromMasterConfigList(masterDto.masterConfigs?.filter { masterConfigDto -> masterConfigDto.groupCode == "flexibleCost" }),
+                otherFlexibleOptions = OtherFlexibleOptions.fromMasterConfigList(masterDto.masterConfigs?.filter { masterConfigDto -> masterConfigDto.groupCode == "otherFlexibleOption" }),
+                email = masterDto.email,
+            )
+        }
+
+
 //        fun fromJson(jsonObject: JsonObject): BasicInformation {
 //            val item = jsonObject.get("data").asJsonObject
 //
