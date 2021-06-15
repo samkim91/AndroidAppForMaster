@@ -9,12 +9,12 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.model.major.BusinessType
 import kr.co.soogong.master.data.model.major.Category
+import kr.co.soogong.master.data.model.major.Major
 import kr.co.soogong.master.databinding.FragmentProjectBinding
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.major.project.ProjectViewModel.Companion.GET_PROJECT_FAILED
-import kr.co.soogong.master.uihelper.major.MajorActivityHelper.BUNDLE_BUSINESS_TYPE
+import kr.co.soogong.master.uihelper.major.MajorActivityHelper.BUNDLE_MAJOR
 import kr.co.soogong.master.uihelper.major.MajorActivityHelper.BUNDLE_CATEGORY
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.extension.toast
@@ -66,8 +66,8 @@ class ProjectFragment : BaseFragment<FragmentProjectBinding>(
                 val intent = Intent()
 
                 extra.putParcelable(
-                    BUNDLE_BUSINESS_TYPE,
-                    BusinessType(
+                    BUNDLE_MAJOR,
+                    Major(
                         category = category,
                         projects = viewModel.list.value?.filter { it.checked }?.toMutableList()
                     )

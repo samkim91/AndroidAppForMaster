@@ -14,8 +14,11 @@ class GetBusinessUnitInformationUseCase @Inject constructor(
 //            return RequiredInformation.TEST_REQUIRED_INFORMATION.businessUnitInformation
 //        }
 
-        return getProfileFromLocalUseCase().map { profile ->
-            profile.requiredInformation?.businessUnitInformation
-        }
+        // TODO: 2021/06/15 수정작업
+        return Single.just(BusinessUnitInformation.NULL_BUSINESS_UNIT_INFORMATION)
+
+//        return getProfileFromLocalUseCase().map { profile ->
+//            profile.requiredInformation?.businessUnitInformation
+//        }
     }
 }

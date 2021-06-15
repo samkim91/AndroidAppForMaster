@@ -226,6 +226,7 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(
                     // Sign in success, update UI with the signed-in user's information
                     Timber.tag(TAG).d("signInWithPhoneAuthCredential successfully: ")
                     viewModel.uid.value = task.result?.user?.uid
+                    viewModel.saveMasterUidInShared()
                     if(BuildConfig.DEBUG) startActivity(MainActivityHelper.getIntent(this@SignInActivity))
                     viewModel.requestSignIn()
                 } else {

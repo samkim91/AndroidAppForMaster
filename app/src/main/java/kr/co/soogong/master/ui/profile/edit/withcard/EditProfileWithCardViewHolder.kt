@@ -37,11 +37,11 @@ class PortfolioViewHolder(
             data = portfolio
 
             setDeleteButtonClickListener {
-                leftButtonClickListener(portfolio.itemId!!)
+                leftButtonClickListener(portfolio.id!!)
             }
 
             setEditButtonClickListener {
-                rightButtonClickListener(portfolio.itemId!!)
+                rightButtonClickListener(portfolio.id!!)
             }
 
             executePendingBindings()
@@ -62,11 +62,11 @@ class PriceByProjectsViewHolder(
             data = priceByProject
 
             setDeleteButtonClickListener {
-                leftButtonClickListener(priceByProject.itemId!!)
+                leftButtonClickListener(priceByProject.id!!)
             }
 
             setEditButtonClickListener {
-                rightButtonClickListener(priceByProject.itemId!!)
+                rightButtonClickListener(priceByProject.id!!)
             }
 
             executePendingBindings()

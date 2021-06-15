@@ -40,7 +40,7 @@
                 android:layout_marginEnd="4dp"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text='@{vm.profile.ownerName.length() != 0 ? vm.profile.ownerName : "프로필에서 대표이름을 입력해주세요."}'
+                android:text='@{vm.profile.representativeName.length() != 0 ? vm.profile.representativeName : "프로필에서 대표이름을 입력해주세요."}'
                 android:textColor="@color/text_basic_color"
                 app:layout_constrainedWidth="true"
                 app:layout_constraintEnd_toStartOf="@id/user_name_end"
@@ -55,7 +55,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="20dp"
-                android:text='@{vm.profile.basicInformation.subscriptionPlan.length() != 0 ? vm.profile.basicInformation.subscriptionPlan : "마스터"}'
+                android:text='@{vm.profile.subscriptionPlan.length() != 0 ? vm.profile.subscriptionPlan : "마스터"}'
                 app:layout_constraintBottom_toBottomOf="@id/user_name"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/user_name"
@@ -68,8 +68,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/user_name"
-                app:recommendCount="@{vm.profile.basicInformation.myReviews.averageRecommendation}"
-                app:reviewCount="@{vm.profile.basicInformation.myReviews.reviews.size}" />
+                app:recommendCount="@{vm.profile.myReview.averageRecommendation}"
+                app:reviewCount="@{vm.profile.myReview.reviews.size}" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/show_profile"

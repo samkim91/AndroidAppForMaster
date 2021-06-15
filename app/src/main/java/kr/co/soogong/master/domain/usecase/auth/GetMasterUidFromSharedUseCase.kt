@@ -6,7 +6,7 @@ import kr.co.soogong.master.contract.AppSharedPreferenceContract
 import javax.inject.Inject
 
 @Reusable
-class GetMasterIdFromSharedUseCase @Inject constructor(
+class GetMasterUidFromSharedUseCase @Inject constructor(
     private val sharedPreferences: SharedPreferences
 ) {
     operator fun invoke(): String? {

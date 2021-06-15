@@ -8,7 +8,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isEmpty
 import com.google.android.material.chip.Chip
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.model.major.BusinessType
+import kr.co.soogong.master.data.model.major.Major
 import kr.co.soogong.master.ui.widget.TitleChipGroup
 import kr.co.soogong.master.utility.extension.dp
 
@@ -18,29 +18,29 @@ object BusinessTypeChipGroupHelper {
     fun makeEntryChipGroupWithSubtitleForBusinessTypes(
         layoutInflater: LayoutInflater,
         container: LinearLayout,
-        newBusinessType: BusinessType,
-        viewModelBusinessTypes: ListLiveData<BusinessType>,
+        newMajor: Major,
+        viewModelBusinessTypes: ListLiveData<Major>,
     ) {
-        addNewBusinessType(newBusinessType, viewModelBusinessTypes)
+        addNewBusinessType(newMajor, viewModelBusinessTypes)
 
         addBusinessTypesToContainer(layoutInflater, container, viewModelBusinessTypes)
     }
 
     private fun addNewBusinessType(
-        newBusinessType: BusinessType,
-        viewModelBusinessTypes: ListLiveData<BusinessType>
+        newMajor: Major,
+        viewModelBusinessTypes: ListLiveData<Major>
     ) {
         // 새로 선택된 업종을 viewModel에 갱신해준다.
         val tempList = viewModelBusinessTypes.value
-        tempList?.removeIf { it.category?.id == newBusinessType.category?.id }
-        tempList?.add(newBusinessType)
+        tempList?.removeIf { it.category?.id == newMajor.category?.id }
+        tempList?.add(newMajor)
         viewModelBusinessTypes.value = tempList
     }
 
     fun addBusinessTypesToContainer(
         layoutInflater: LayoutInflater,
         container: LinearLayout,
-        viewModelBusinessTypes: ListLiveData<BusinessType>
+        viewModelBusinessTypes: ListLiveData<Major>
     ) {
         // 기존 View들을 삭제한다.
         container.removeAllViews()
@@ -88,7 +88,7 @@ object BusinessTypeChipGroupHelper {
 
     private fun makeEntryChipGroupWithSubTitle(
         layoutInflater: LayoutInflater,
-        item: BusinessType,
+        item: Major,
         closeClickListener: (titleChipGroup: TitleChipGroup, chip: View, itemId: Int) -> Unit
     ): ViewGroup {
         val titleChipGroup = TitleChipGroup(layoutInflater.context)

@@ -9,9 +9,9 @@ import javax.inject.Inject
 @Reusable
 class SetFCMTokenUseCase @Inject constructor(
     private val authService: AuthService,
-    private val getMasterIdFromSharedUseCase: GetMasterIdFromSharedUseCase,
+    private val getMasterUidFromSharedUseCase: GetMasterUidFromSharedUseCase,
 ) {
     operator fun invoke(token: String?): Single<Response> {
-        return authService.updateFCMToken(getMasterIdFromSharedUseCase(), fcmKey = token)
+        return authService.updateFCMToken(getMasterUidFromSharedUseCase(), fcmKey = token)
     }
 }

@@ -8,7 +8,7 @@ import androidx.activity.result.contract.ActivityResultContracts.StartActivityFo
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.model.major.BusinessType
+import kr.co.soogong.master.data.model.major.Major
 import kr.co.soogong.master.databinding.FragmentEditBusinessTypesBinding
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.businesstypes.EditBusinessTypesViewModel.Companion.GET_BUSINESS_TYPES_FAILED
@@ -31,14 +31,14 @@ class EditBusinessTypesFragment : BaseFragment<FragmentEditBusinessTypesBinding>
             Timber.tag(TAG).d("StartActivityForResult: $result")
             if (result.resultCode == Activity.RESULT_OK) {
                 val data: Intent? = result.data
-                val selectedBusinessType: BusinessType by lazy {
-                    data?.getParcelableExtra(MajorActivityHelper.BUNDLE_BUSINESS_TYPE)
-                        ?: BusinessType(null, null)
+                val selectedMajor: Major by lazy {
+                    data?.getParcelableExtra(MajorActivityHelper.BUNDLE_MAJOR)
+                        ?: Major(null, null)
                 }
                 BusinessTypeChipGroupHelper.makeEntryChipGroupWithSubtitleForBusinessTypes(
                     layoutInflater = layoutInflater,
                     container = binding.businessTypeContainer,
-                    newBusinessType = selectedBusinessType,
+                    newMajor = selectedMajor,
                     viewModelBusinessTypes = viewModel.businessTypes
                 )
             }

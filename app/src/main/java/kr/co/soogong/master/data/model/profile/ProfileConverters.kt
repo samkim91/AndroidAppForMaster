@@ -3,18 +3,18 @@ package kr.co.soogong.master.data.model.profile
 import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import kr.co.soogong.master.data.model.major.BusinessType
+import kr.co.soogong.master.data.model.major.Major
 
 class ProfileConverters {
-    @TypeConverter
-    fun businessTypeListToString(businessTypeList: List<BusinessType>?): String? {
-        return Gson().toJson(businessTypeList)
-    }
-
-    @TypeConverter
-    fun stringToBusinessTypeList(businessTypeListString: String?): List<BusinessType>? {
-        return Gson().fromJson(businessTypeListString, object : TypeToken<List<BusinessType>>() {}.type)
-    }
+//    @TypeConverter
+//    fun businessTypeListToString(majorList: List<Major>?): String? {
+//        return Gson().toJson(majorList)
+//    }
+//
+//    @TypeConverter
+//    fun stringToBusinessTypeList(businessTypeListString: String?): List<Major>? {
+//        return Gson().fromJson(businessTypeListString, object : TypeToken<List<Major>>() {}.type)
+//    }
 
     @TypeConverter
     fun basicInformationToString(basicInformation: BasicInformation): String {
@@ -27,12 +27,22 @@ class ProfileConverters {
     }
 
     @TypeConverter
-    fun requiredInformationToString(requiredInformation: RequiredInformation): String {
-        return Gson().toJson(requiredInformation)
+    fun myReviewToString(myReview: MyReview): String {
+        return Gson().toJson(myReview)
     }
 
     @TypeConverter
-    fun stringToRequiredInformation(requiredInformationString: String): RequiredInformation {
-        return Gson().fromJson(requiredInformationString, object : TypeToken<RequiredInformation>() {}.type)
+    fun stringToMyReview(myReviewString: String): MyReview {
+        return Gson().fromJson(myReviewString, object : TypeToken<MyReview>() {}.type)
     }
+
+//    @TypeConverter
+//    fun requiredInformationToString(requiredInformation: RequiredInformation): String {
+//        return Gson().toJson(requiredInformation)
+//    }
+//
+//    @TypeConverter
+//    fun stringToRequiredInformation(requiredInformationString: String): RequiredInformation {
+//        return Gson().fromJson(requiredInformationString, object : TypeToken<RequiredInformation>() {}.type)
+//    }
 }

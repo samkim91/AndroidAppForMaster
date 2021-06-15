@@ -16,7 +16,7 @@ class GetPriceByProjectUseCase @Inject constructor(
 
         return getProfileFromLocalUseCase().map { profile ->
              profile.basicInformation?.priceByProjects?.find { priceByProject ->
-                priceByProject.itemId == priceByProjectId
+                priceByProject.id == priceByProjectId
             }
         }
     }

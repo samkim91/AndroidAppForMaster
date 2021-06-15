@@ -2,23 +2,22 @@ package kr.co.soogong.master.domain.usecase.profile
 
 import dagger.Reusable
 import io.reactivex.Single
-import kr.co.soogong.master.data.model.profile.Profile
 import kr.co.soogong.master.data.dao.profile.ProfileDao
+import kr.co.soogong.master.data.dto.profile.MasterDto
 import kr.co.soogong.master.domain.usecase.auth.GetMasterUidFromSharedUseCase
+import kr.co.soogong.master.network.profile.ProfileService
 import javax.inject.Inject
 
 @Reusable
-class GetProfileFromLocalUseCase @Inject constructor(
+class GetMasterUseCase @Inject constructor(
     private val profileDao: ProfileDao,
-    private val getProfileUseCase: GetProfileUseCase,
+    private val profileService: ProfileService,
     private val getMasterUidFromSharedUseCase: GetMasterUidFromSharedUseCase,
 ) {
-    operator fun invoke(): Single<Profile> {
-        profileDao.getItem(getMasterUidFromSharedUseCase()).let { profile ->
-            if (profile == null) {
-                return getProfileUseCase()
+    operator fun invoke(): Single<MasterDto> {
+        return profileService.getMaster(getMasterUidFromSharedUseCase())
+            .doOnSuccess { master ->
+
             }
-            return Single.just(profile)
-        }
     }
 }

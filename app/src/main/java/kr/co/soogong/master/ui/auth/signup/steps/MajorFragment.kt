@@ -8,13 +8,13 @@ import androidx.activity.result.contract.ActivityResultContracts.StartActivityFo
 import androidx.fragment.app.activityViewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.model.major.BusinessType
+import kr.co.soogong.master.data.model.major.Major
 import kr.co.soogong.master.databinding.FragmentSignUpMajorBinding
 import kr.co.soogong.master.ui.auth.signup.SignUpActivity
 import kr.co.soogong.master.ui.auth.signup.SignUpViewModel
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.uihelper.major.MajorActivityHelper
-import kr.co.soogong.master.uihelper.major.MajorActivityHelper.BUNDLE_BUSINESS_TYPE
+import kr.co.soogong.master.uihelper.major.MajorActivityHelper.BUNDLE_MAJOR
 import kr.co.soogong.master.utility.BusinessTypeChipGroupHelper
 import timber.log.Timber
 
@@ -29,13 +29,13 @@ class MajorFragment : BaseFragment<FragmentSignUpMajorBinding>(
             Timber.tag(TAG).d("StartActivityForResult: $result")
             if (result.resultCode == Activity.RESULT_OK) {
                 val data: Intent? = result.data
-                val selectedBusinessType: BusinessType by lazy {
-                    data?.getParcelableExtra(BUNDLE_BUSINESS_TYPE) ?: BusinessType(null, null)
+                val selectedMajor: Major by lazy {
+                    data?.getParcelableExtra(BUNDLE_MAJOR) ?: Major(null, null)
                 }
                 BusinessTypeChipGroupHelper.makeEntryChipGroupWithSubtitleForBusinessTypes(
                     layoutInflater = layoutInflater,
                     container = binding.businessTypeContainer,
-                    newBusinessType = selectedBusinessType,
+                    newMajor = selectedMajor,
                     viewModelBusinessTypes = viewModel.businessTypes
                 )
             }

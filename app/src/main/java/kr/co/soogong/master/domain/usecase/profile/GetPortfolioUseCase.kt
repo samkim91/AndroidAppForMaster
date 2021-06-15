@@ -10,13 +10,10 @@ class GetPortfolioUseCase @Inject constructor(
     private val getProfileFromLocalUseCase: GetProfileFromLocalUseCase,
     ) {
     operator fun invoke(portfolioId: Int): Single<Portfolio> {
-//        if (BuildConfig.DEBUG) {
-//            return Portfolio.TEST_PORTFOLIO
-//        }
 
         return getProfileFromLocalUseCase().map { profile ->
             profile.basicInformation?.portfolios?.find { portfolio ->
-                portfolio.itemId == portfolioId
+                portfolio.id == portfolioId
             }
         }
     }

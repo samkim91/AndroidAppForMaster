@@ -161,7 +161,7 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
             if (!value?.career.isNullOrEmpty()) insertedCount++
             if (!value?.businessRepresentativeName.isNullOrEmpty()) insertedCount++
             if (!value?.phoneNumber.isNullOrEmpty()) insertedCount++
-            if (!value?.businessTypes.isNullOrEmpty()) insertedCount++
+            if (!value?.majors.isNullOrEmpty()) insertedCount++
 //            if(!value?.address.isNullOrEmpty()) insertedCount++
         }
 
