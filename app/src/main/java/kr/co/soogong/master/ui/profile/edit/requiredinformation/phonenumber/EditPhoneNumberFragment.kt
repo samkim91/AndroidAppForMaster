@@ -14,7 +14,6 @@ import com.google.firebase.auth.PhoneAuthProvider
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentEditPhoneNumberBinding
-import kr.co.soogong.master.ui.auth.signin.SignInActivity
 import kr.co.soogong.master.ui.auth.signup.LimitTime
 import kr.co.soogong.master.ui.auth.signup.TimerTerm
 import kr.co.soogong.master.ui.base.BaseFragment
@@ -207,7 +206,7 @@ class EditPhoneNumberFragment :
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     Timber.tag(TAG).d("signInWithPhoneAuthCredential successfully: ")
-                    viewModel.uid.value = task.result?.user?.uid
+                    viewModel.uId.value = task.result?.user?.uid
                     viewModel.savePhoneNumber()
                 } else {
                     // Sign in failed, display a message and update the UI

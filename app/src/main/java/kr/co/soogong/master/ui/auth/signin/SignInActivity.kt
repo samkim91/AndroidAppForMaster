@@ -22,7 +22,6 @@ import kr.co.soogong.master.ui.auth.signin.SignInViewModel.Companion.SIGN_IN_FAI
 import kr.co.soogong.master.ui.auth.signin.SignInViewModel.Companion.SIGN_IN_SUCCESSFULLY
 import kr.co.soogong.master.ui.auth.signup.LimitTime
 import kr.co.soogong.master.ui.auth.signup.TimerTerm
-import kr.co.soogong.master.ui.auth.signup.steps.AuthFragment
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.uihelper.main.MainActivityHelper
 import kr.co.soogong.master.utility.EventObserver
@@ -225,7 +224,7 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     Timber.tag(TAG).d("signInWithPhoneAuthCredential successfully: ")
-                    viewModel.uid.value = task.result?.user?.uid
+                    viewModel.uId.value = task.result?.user?.uid
                     viewModel.saveMasterUidInShared()
                     if(BuildConfig.DEBUG) startActivity(MainActivityHelper.getIntent(this@SignInActivity))
                     viewModel.requestSignIn()

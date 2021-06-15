@@ -13,8 +13,8 @@ class AuthService @Inject constructor(
 ) {
     private val authInterface = retrofit.create(AuthInterface::class.java)
 
-    fun signIn(uid: String): Single<JsonObject> {
-        return authInterface.signIn(uid)
+    fun signIn(uId: String): Single<JsonObject> {
+        return authInterface.signIn(uId)
     }
 
     fun signUp(signUpDto: SignUpDto): Single<JsonObject> {

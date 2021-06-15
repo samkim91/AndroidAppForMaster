@@ -12,9 +12,7 @@ import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.domain.usecase.auth.CheckUserExistentUseCase
 import kr.co.soogong.master.domain.usecase.auth.SaveMasterUidInSharedUseCase
-import kr.co.soogong.master.domain.usecase.auth.SignInTestUseCase
 import kr.co.soogong.master.domain.usecase.auth.SignInUseCase
-import kr.co.soogong.master.ui.auth.signup.SignUpViewModel
 import kr.co.soogong.master.ui.base.BaseViewModel
 import kr.co.soogong.master.utility.PhoneNumberHelper
 import timber.log.Timber
@@ -32,7 +30,7 @@ class SignInViewModel @Inject constructor(
     val phoneAuthCredential = MutableLiveData<PhoneAuthCredential>()
     val storedVerificationId = MutableLiveData("")
     val resendToken = MutableLiveData<PhoneAuthProvider.ForceResendingToken>()
-    val uid = MutableLiveData("")
+    val uId = MutableLiveData("")
 
     private var _isEnabled = MutableLiveData(false)
     val isEnabled: LiveData<Boolean>
@@ -65,8 +63,8 @@ class SignInViewModel @Inject constructor(
     }
 
     fun saveMasterUidInShared(){
-        Timber.tag(TAG).d("saveMasterUidInShared: ${uid.value} ")
-        uid.value?.let {
+        Timber.tag(TAG).d("saveMasterUidInShared: ${uId.value} ")
+        uId.value?.let {
             saveMasterUidInSharedUseCase(it)
         }
     }
@@ -74,8 +72,8 @@ class SignInViewModel @Inject constructor(
     fun requestSignIn() {
         Timber.tag(TAG).d("requestSignIn: ")
 
-        uid.value?.let { uid ->
-            signInUseCase(uid)
+        uId.value?.let { uId ->
+            signInUseCase(uId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(

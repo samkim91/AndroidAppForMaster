@@ -7,8 +7,8 @@ import kr.co.soogong.master.data.model.major.Major
 
 @Parcelize
 data class SignUpDto(
-    @SerializedName("uid")
-    val uid: String,
+    @SerializedName("uId")
+    val uId: String,
 
     @SerializedName("ownerName")
     val ownerName: String,
