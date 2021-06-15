@@ -3,13 +3,15 @@ package kr.co.soogong.master.data.model.profile
 import android.os.Parcelable
 import com.google.gson.JsonObject
 import kotlinx.parcelize.Parcelize
+import kr.co.soogong.master.data.dto.profile.MasterConfigDto
+import kr.co.soogong.master.data.dto.profile.MasterDto
 
 @Parcelize
 data class FlexibleCost(
-    val travelCost: String,
-    val craneUsage: String,
-    val packageCost: String,
-    val otherCostInformation: String,
+    val travelCost: String?,
+    val craneUsage: String?,
+    val packageCost: String?,
+    val otherCostInformation: String?,
 ) : Parcelable {
     companion object {
         fun fromJson(jsonObject: JsonObject): FlexibleCost {
@@ -20,6 +22,15 @@ data class FlexibleCost(
                 craneUsage = attributes.get("crane_usage").asString,
                 packageCost = attributes.get("package_cost").asString,
                 otherCostInformation = attributes.get("other_cost_information").asString,
+            )
+        }
+
+        fun fromMasterConfigList(list: List<MasterConfigDto>?): FlexibleCost {
+            return FlexibleCost(
+                travelCost = list?.find { masterConfigDto -> masterConfigDto.code == "TravelCost" }?.value ?: "",
+                craneUsage = list?.find { masterConfigDto -> masterConfigDto.code == "CraneUsage" }?.value ?: "",
+                packageCost = list?.find { masterConfigDto -> masterConfigDto.code == "PackageCost" }?.value ?: "",
+                otherCostInformation = list?.find { masterConfigDto -> masterConfigDto.code == "OtherInfo" }?.value ?: "",
             )
         }
 

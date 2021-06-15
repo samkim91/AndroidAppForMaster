@@ -1,6 +1,8 @@
 package kr.co.soogong.master.contract
 
 object HttpContract {
+    const val MY_PAGE_URL = "https://soogong.co.kr/master/"
+
     const val LOCAL_URL = "http://192.168.0.50:8080/"
     const val TEST_URL = "https://test.api2.soogong.co.kr/"
     const val PROD_URL = "https://api2.soogong.co.kr/"

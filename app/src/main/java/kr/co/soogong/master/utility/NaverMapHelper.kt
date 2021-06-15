@@ -49,8 +49,8 @@ class NaverMapHelper(
                 naverMap.moveCamera(
                     CameraUpdate.scrollTo(
                         LatLng(
-                            coordinate.latitude,
-                            coordinate.longitude
+                            coordinate.latitude!!,
+                            coordinate.longitude!!
                         )
                     )
                 )
@@ -71,7 +71,7 @@ class NaverMapHelper(
 
         coordinate?.let { coordinate ->
             marker = Marker()
-            marker.position = LatLng(coordinate.latitude, coordinate.longitude)
+            marker.position = LatLng(coordinate.latitude!!, coordinate.longitude!!)
             marker.width = Marker.SIZE_AUTO
             marker.height = Marker.SIZE_AUTO
             marker.map = naverMap
@@ -87,7 +87,7 @@ class NaverMapHelper(
         coordinate?.let { coordinate ->
             if(circleOverlay.isAdded) circleOverlay.map = null
             circleOverlay = CircleOverlay(
-                LatLng(coordinate.latitude, coordinate.longitude),
+                LatLng(coordinate.latitude!!, coordinate.longitude!!),
                 (radius * 1000.0)
             )
             circleOverlay.outlineColor = context.resources.getColor(R.color.color_22D47B, null)
@@ -101,8 +101,8 @@ class NaverMapHelper(
             naverMap.moveCamera(
                 CameraUpdate.scrollTo(
                     LatLng(
-                        coordinate.latitude,
-                        coordinate.longitude
+                        coordinate.latitude!!,
+                        coordinate.longitude!!
                     )
                 )
             )

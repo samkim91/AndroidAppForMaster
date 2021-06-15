@@ -8,7 +8,7 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class ImagePath(
     @SerializedName("image_path")
-    val path: String
+    val path: String?
 ) : Parcelable {
     companion object {
         fun fromJson(jsonObject: JsonObject): ImagePath {

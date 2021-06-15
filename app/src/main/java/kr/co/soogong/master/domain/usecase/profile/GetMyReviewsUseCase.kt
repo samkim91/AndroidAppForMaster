@@ -7,18 +7,11 @@ import javax.inject.Inject
 
 @Reusable
 class GetMyReviewsUseCase @Inject constructor(
-    private val getProfileFromLocalUseCase: GetProfileFromLocalUseCase,
+    private val getProfileUseCase: GetProfileUseCase,
 ) {
     operator fun invoke(): Single<MyReview> {
-//        if(BuildConfig.DEBUG) {
-//            return MyReview.TEST_MY_REVIEW
-//        }
-
-        // TODO: 2021/06/15 수정작업
-        return Single.just(MyReview.NULL_MY_REVIEW)
-
-//        return getProfileFromLocalUseCase().map { profile ->
-//            profile.basicInformation?.myReviews
-//        }
+        return getProfileUseCase().map {
+            it.myReview
+        }
     }
 }

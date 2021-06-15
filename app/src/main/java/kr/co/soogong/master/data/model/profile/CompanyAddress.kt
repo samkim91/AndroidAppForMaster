@@ -6,8 +6,8 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class CompanyAddress(
-    val roadAddress: String,
-    val detailAddress: String,
+    val roadAddress: String?,
+    val detailAddress: String?,
 ) : Parcelable{
     companion object {
         fun fromJson(jsonObject: JsonObject): CompanyAddress {

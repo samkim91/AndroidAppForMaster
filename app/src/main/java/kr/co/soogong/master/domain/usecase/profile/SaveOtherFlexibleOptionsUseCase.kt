@@ -14,9 +14,12 @@ class SaveOtherFlexibleOptionsUseCase @Inject constructor(
     private val profileService: ProfileService,
 ) {
     operator fun invoke(otherFlexibleOptions: OtherFlexibleOptions): Single<Response> {
-        return profileService.saveOtherFlexibleOptions(
-            getMasterUidFromSharedUseCase()!!,
-            otherFlexibleOptions
-        )
+        return Single.just(Response.NULL_RESPONSE)
+        // TODO: 2021/06/15
+
+//        return profileService.saveOtherFlexibleOptions(
+//            getMasterUidFromSharedUseCase()!!,
+//            otherFlexibleOptions
+//        )
     }
 }

@@ -13,6 +13,8 @@ class DeletePortfolioUseCase @Inject constructor(
     private val profileService: ProfileService,
 ) {
     operator fun invoke(itemId: Int): Single<Response> {
-        return profileService.deletePortfolio(masterUidFromSharedUseCase()!!, itemId)
+        return Single.just(Response.NULL_RESPONSE)
+        // TODO: 2021/06/15  
+//        return profileService.deletePortfolio(masterUidFromSharedUseCase()!!, itemId)
     }
 }

@@ -19,10 +19,13 @@ class RectangleImageAdapter(
         params.setMargins(2.dp)
         holder.itemView.layoutParams = params
 
-        holder.binding(imageList[position].path)
-        holder.binding.setCardClickListener {
-            cardClickListener(position)
+        imageList[position].path?.let {
+            holder.binding(it)
+            holder.binding.setCardClickListener {
+                cardClickListener(position)
+            }
         }
+
     }
 
     override fun getItemCount(): Int = imageList.size

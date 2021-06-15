@@ -7,7 +7,9 @@ import java.util.*
 @Parcelize
 data class MasterConfigDto(
     val id: Int,
+    val groupCode: String,
     val groupName: String,
+    val code: String,
     val name: String,
     val value: String?,
     val createdAt: Date?,

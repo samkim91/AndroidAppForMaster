@@ -20,11 +20,11 @@ class EditBusinessUnitInformationViewModel @Inject constructor(
     private val getBusinessUnitInformationUseCase: GetBusinessUnitInformationUseCase,
     private val saveBusinessUnitInformationUseCase: SaveBusinessUnitInformationUseCase,
 ) : BaseViewModel() {
-    val businessUnitType = MutableLiveData<String>()
+    val businessType = MutableLiveData<String>()
     val businessName = MutableLiveData("")
-    val companyName = MutableLiveData("")
-    val identicalNumber = MutableLiveData("")
-    val identicalImage = MutableLiveData(Uri.EMPTY)
+    val shopName = MutableLiveData("")
+    val businessNumber = MutableLiveData("")
+    val businessRegistImage = MutableLiveData(Uri.EMPTY)
     val birthday = MutableLiveData("")
 
     fun requestBusinessUnitInformation() {
@@ -35,14 +35,14 @@ class EditBusinessUnitInformationViewModel @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
                 onSuccess = {
-                    businessUnitType.postValue(it.businessUnitType)
-                    if (it.businessUnitType == "프리랜서") {
-                        birthday.postValue(it.identicalNumber.toString())
+                    businessType.postValue(it.businessType)
+                    if (it.businessType == "프리랜서") {
+                        birthday.postValue(it.businessNumber.toString())
                     } else {
                         businessName.postValue(it.businessName)
-                        companyName.postValue(it.companyName)
-                        identicalImage.postValue(Uri.parse(it.identicalImage?.path))
-                        identicalNumber.postValue(it.identicalNumber.toString())
+                        shopName.postValue(it.shopName)
+                        businessRegistImage.postValue(Uri.parse(it.businessRegistImage?.path))
+                        businessNumber.postValue(it.businessNumber.toString())
                     }
                 },
                 onError = { setAction(GET_BUSINESS_UNIT_INFORMATION_FAILED) }
@@ -53,11 +53,11 @@ class EditBusinessUnitInformationViewModel @Inject constructor(
         Timber.tag(TAG).d("saveBriefIntro: ")
         saveBusinessUnitInformationUseCase(
             BusinessUnitInformation(
-                businessUnitType = businessUnitType.value!!,
+                businessType = businessType.value!!,
                 businessName = businessName.value!!,
-                companyName = companyName.value!!,
-                identicalNumber = if (businessUnitType.value == "프리랜서") birthday.value!!.toInt() else identicalNumber.value!!.toInt(),
-                identicalImage = ImagePath(identicalImage.value.toString())
+                shopName = shopName.value!!,
+                businessNumber = if (businessType.value == "프리랜서") birthday.value!! else businessNumber.value!!,
+                businessRegistImage = ImagePath(businessRegistImage.value.toString())
             )
         ).subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -67,7 +67,7 @@ class EditBusinessUnitInformationViewModel @Inject constructor(
             ).addToDisposable()
     }
 
-    fun clearImage(v: View) = identicalImage.postValue(Uri.EMPTY)
+    fun clearImage(v: View) = businessRegistImage.postValue(Uri.EMPTY)
 
     companion object {
         private const val TAG = "EditBusinessUnitInformationViewModel"

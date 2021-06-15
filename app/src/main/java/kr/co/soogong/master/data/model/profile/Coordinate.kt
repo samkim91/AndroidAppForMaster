@@ -6,8 +6,8 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Coordinate(
-    val latitude: Double,
-    val longitude: Double,
+    val latitude: Double?,
+    val longitude: Double?,
 ) : Parcelable {
     companion object {
         fun fromJson(jsonObject: JsonObject): Coordinate {

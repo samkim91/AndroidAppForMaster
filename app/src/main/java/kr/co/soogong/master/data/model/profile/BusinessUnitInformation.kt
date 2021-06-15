@@ -7,43 +7,43 @@ import kr.co.soogong.master.data.model.requirement.ImagePath
 
 @Parcelize
 data class BusinessUnitInformation(
-    val businessUnitType: String,       // individual, legal, freelancer
-    val businessName: String,       // 상호명
-    val companyName: String,        // 업체명
-    val identicalNumber: Int,
-    val identicalImage: ImagePath?,
+    val businessType: String?,       // individual, legal, freelancer
+    val businessName: String?,       // 상호명
+    val shopName: String?,        // 업체명
+    val businessNumber: String?,
+    val businessRegistImage: ImagePath?,
 ) : Parcelable {
     companion object {
         fun fromJson(jsonObject: JsonObject): BusinessUnitInformation {
             val item = jsonObject.get("data").asJsonObject
 
             return BusinessUnitInformation(
-                businessUnitType = item.get("businessUnitType").asString,
+                businessType = item.get("businessUnitType").asString,
                 businessName = item.get("businessName").asString,
-                companyName = item.get("companyName").asString,
-                identicalNumber = item.get("identicalNumber").asInt,
-                identicalImage = ImagePath(item.get("identicalImage").asString),
+                shopName = item.get("companyName").asString,
+                businessNumber = item.get("identicalNumber").asString,
+                businessRegistImage = ImagePath(item.get("identicalImage").asString),
             )
         }
 
         val TEST_BUSINESS_UNIT_INFORMATION = BusinessUnitInformation(
-            businessUnitType = "법인사업자",
+            businessType = "법인사업자",
             businessName = "주식회사 수공",
-            companyName = "수공",
-            identicalNumber = 1234567890,
-            identicalImage = ImagePath.TEST_IMAGE_PATH,
+            shopName = "수공",
+            businessNumber = "1234567890",
+            businessRegistImage = ImagePath.TEST_IMAGE_PATH,
         )
 
         val TEST_BUSINESS_UNIT_INFORMATION_2 = BusinessUnitInformation(
-            businessUnitType = "프리랜서",
+            businessType = "프리랜서",
             businessName = "",
-            companyName = "",
-            identicalNumber = 20020616,
-            identicalImage = ImagePath.NULL_IMAGE_PATH,
+            shopName = "",
+            businessNumber = "20020616",
+            businessRegistImage = ImagePath.NULL_IMAGE_PATH,
         )
 
         val NULL_BUSINESS_UNIT_INFORMATION = BusinessUnitInformation(
-            "", "", "", 0, ImagePath.NULL_IMAGE_PATH
+            "", "", "", "", ImagePath.NULL_IMAGE_PATH
         )
     }
 }
