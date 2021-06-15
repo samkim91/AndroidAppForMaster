@@ -15,11 +15,11 @@ import kr.co.soogong.master.ui.profile.edit.requiredinformation.EditRequiredInfo
 import kr.co.soogong.master.utility.NaverMapHelper
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerActivityHelper
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_ADDRESS
-import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_BRIEF_INTRODUCTION
-import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_BUSINESS_REPRESENTATIVE_NAME
-import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_BUSINESS_TYPES
+import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_INTRODUCTION
+import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_OWNER_NAME
+import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_MAJOR
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_BUSINESS_UNIT_INFORMATION
-import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_COMPANY_IMAGE
+import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_THUMBNAILS
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_PHONE_NUMBER
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_WARRANTY_INFORMATION
 import kr.co.soogong.master.utility.EventObserver
@@ -63,12 +63,12 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
                 }
             }
 
-            briefIntroduction.addDefaultButtonClickListener {
-                startActivityCommonCode(EDIT_BRIEF_INTRODUCTION)
+            introduction.addDefaultButtonClickListener {
+                startActivityCommonCode(EDIT_INTRODUCTION)
             }
 
-            representativeImages.addDefaultButtonClickListener {
-                startActivityCommonCode(EDIT_COMPANY_IMAGE)
+            thumbnails.addDefaultButtonClickListener {
+                startActivityCommonCode(EDIT_THUMBNAILS)
             }
 
             businessUnitInformation.addDefaultButtonClickListener {
@@ -91,15 +91,15 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
             }
 
             ownerName.addDefaultButtonClickListener {
-                startActivityCommonCode(EDIT_BUSINESS_REPRESENTATIVE_NAME)
+                startActivityCommonCode(EDIT_OWNER_NAME)
             }
 
             phoneNumber.addDefaultButtonClickListener {
                 startActivityCommonCode(EDIT_PHONE_NUMBER)
             }
 
-            businessTypes.addDefaultButtonClickListener {
-                startActivityCommonCode(EDIT_BUSINESS_TYPES)
+            major.addDefaultButtonClickListener {
+                startActivityCommonCode(EDIT_MAJOR)
             }
 
             address.addDefaultButtonClickListener {

@@ -83,15 +83,3 @@ class PhoneNumberFragment : BaseFragment<FragmentSignUpPhoneNumberBinding>(
         }
     }
 }
-
-/*
-* todo.. 마스터 로그인/회원가입 관련
-* 로그인 화면에서 휴대폰 번호로 기존 가입자인지 확인한다.
-* 가입자면 인증번호 요청
-* 가입자가 아니면 회원가입 안내
-*
-* 회원가입 화면에서 휴대폰 번호로 기존 가입자인지 확인한다.
-* 가입자면 로그인으로 이동
-* 가입자가 아니면 회원가입 진행
-*
-* */
