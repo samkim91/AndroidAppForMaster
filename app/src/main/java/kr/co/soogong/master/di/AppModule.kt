@@ -32,8 +32,8 @@ class AppModule {
     @Singleton
     fun provideOkHttpClient(
         @ApplicationContext context: Context,
-        tokenInterceptor: TokenInterceptor,
-        tokenAuthenticator: TokenAuthenticator
+//        tokenInterceptor: TokenInterceptor,
+//        tokenAuthenticator: TokenAuthenticator
     ): OkHttpClient {
         val httpCacheDirectory = File(context.cacheDir, "http")
         val cacheSize = 32 * 1024 * 1024L

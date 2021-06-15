@@ -6,7 +6,7 @@ import io.reactivex.Single
 import javax.inject.Inject
 
 @Reusable
-class GetRepresentativeImagesUseCase @Inject constructor(
+class GetThumbnailsUseCase @Inject constructor(
     private val getRequiredInformationUseCase: GetRequiredInformationUseCase,
 ) {
     operator fun invoke(): Single<List<Uri>> {

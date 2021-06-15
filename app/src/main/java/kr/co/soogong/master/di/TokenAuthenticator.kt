@@ -36,7 +36,8 @@ class TokenAuthenticator @Inject constructor(
             return null
         }
 
-        getRefreshTokenUseCase()?.let { refreshToken ->
+        getRefreshTokenUseCase()?.let {
+        // refreshToken ->
 //            authService.get().resignIn(refreshToken)
 //                .doOnSuccess { responseJson ->
 //                    newToken.value = responseJson.body.getAsJsonObject("newToken").asString

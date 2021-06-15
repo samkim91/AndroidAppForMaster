@@ -28,7 +28,7 @@ class EditPhoneNumberViewModel @Inject constructor(
     val phoneAuthCredential = MutableLiveData<PhoneAuthCredential>()
     val storedVerificationId = MutableLiveData("")
     val resendToken = MutableLiveData<PhoneAuthProvider.ForceResendingToken>()
-    val uId = MutableLiveData("")
+    val uid = MutableLiveData("")
 
     private var _isEnabled = MutableLiveData(false)
     val isEnabled: LiveData<Boolean>

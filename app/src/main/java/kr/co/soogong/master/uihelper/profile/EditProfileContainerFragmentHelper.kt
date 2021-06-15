@@ -5,13 +5,13 @@ import kr.co.soogong.master.ui.profile.edit.email.EditEmailFragment
 import kr.co.soogong.master.ui.profile.edit.flexiblecost.EditFlexibleCostFragment
 import kr.co.soogong.master.ui.profile.edit.otherflexibleoptions.EditOtherFlexibleOptionsFragment
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.address.EditAddressFragment
-import kr.co.soogong.master.ui.profile.edit.requiredinformation.briefintroduction.EditBriefIntroductionFragment
-import kr.co.soogong.master.ui.profile.edit.requiredinformation.businessrepresentativename.EditOwnerNameFragment
-import kr.co.soogong.master.ui.profile.edit.requiredinformation.businesstypes.EditBusinessTypesFragment
+import kr.co.soogong.master.ui.profile.edit.requiredinformation.introduction.EditIntroductionFragment
+import kr.co.soogong.master.ui.profile.edit.requiredinformation.ownername.EditOwnerNameFragment
+import kr.co.soogong.master.ui.profile.edit.requiredinformation.major.EditMajorFragment
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.businessunitinformation.EditBusinessUnitInformationFragment
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.phonenumber.EditPhoneNumberFragment
-import kr.co.soogong.master.ui.profile.edit.requiredinformation.representativeimages.EditRepresentativeImagesFragment
-import kr.co.soogong.master.ui.profile.edit.requiredinformation.warrantyinformation.EditWarrantyInformationFragment
+import kr.co.soogong.master.ui.profile.edit.requiredinformation.thumbnails.EditThumbnailsFragment
+import kr.co.soogong.master.ui.profile.edit.requiredinformation.warranty.EditWarrantyInformationFragment
 import kr.co.soogong.master.ui.profile.edit.withcard.portfolio.EditPortfolioFragment
 import kr.co.soogong.master.ui.profile.edit.withcard.pricebyproject.EditPriceByProjectFragment
 
@@ -50,13 +50,13 @@ object EditProfileContainerFragmentHelper {
             EDIT_OTHER_FLEXIBLE_OPTIONS -> EditOtherFlexibleOptionsFragment.newInstance()
             EDIT_EMAIL -> EditEmailFragment.newInstance()
 
-            EDIT_BRIEF_INTRODUCTION -> EditBriefIntroductionFragment.newInstance()
-            EDIT_COMPANY_IMAGE -> EditRepresentativeImagesFragment.newInstance()
+            EDIT_BRIEF_INTRODUCTION -> EditIntroductionFragment.newInstance()
+            EDIT_COMPANY_IMAGE -> EditThumbnailsFragment.newInstance()
             EDIT_BUSINESS_UNIT_INFORMATION -> EditBusinessUnitInformationFragment.newInstance()
             EDIT_WARRANTY_INFORMATION -> EditWarrantyInformationFragment.newInstance()
             EDIT_BUSINESS_REPRESENTATIVE_NAME -> EditOwnerNameFragment.newInstance()
             EDIT_PHONE_NUMBER -> EditPhoneNumberFragment.newInstance()
-            EDIT_BUSINESS_TYPES -> EditBusinessTypesFragment.newInstance()
+            EDIT_BUSINESS_TYPES -> EditMajorFragment.newInstance()
             EDIT_ADDRESS -> EditAddressFragment.newInstance()
             else -> Fragment()
         }

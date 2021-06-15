@@ -9,7 +9,7 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Url
 
-interface CategoryInterface {
+interface MajorInterface {
 //    @GET(HttpContract.CATEGORY_LIST)
 //    fun getCategoryList(): Single<List<JsonObject>>
 //

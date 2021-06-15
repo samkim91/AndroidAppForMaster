@@ -49,8 +49,8 @@ class EditBusinessUnitInformationViewModel @Inject constructor(
             ).addToDisposable()
     }
 
-    fun saveBusinessUnitInfo() {
-        Timber.tag(TAG).d("saveBriefIntro: ")
+    fun saveBusinessUnitInformation() {
+        Timber.tag(TAG).d("saveBusinessUnitInformation: ")
         saveBusinessUnitInformationUseCase(
             BusinessUnitInformation(
                 businessType = businessType.value!!,

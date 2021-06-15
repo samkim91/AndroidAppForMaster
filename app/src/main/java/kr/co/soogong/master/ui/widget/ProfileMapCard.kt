@@ -57,7 +57,7 @@ class ProfileMapCard @JvmOverloads constructor(
         set(value) {
             field = value
             with(binding.detail) {
-                if (value == 0) {
+                if (value == 0 || value == null) {
                     isVisible = false
                 } else {
                     text = "${value}km"

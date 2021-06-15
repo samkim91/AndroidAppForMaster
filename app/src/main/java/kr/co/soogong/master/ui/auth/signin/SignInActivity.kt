@@ -224,7 +224,7 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     Timber.tag(TAG).d("signInWithPhoneAuthCredential successfully: ")
-                    viewModel.uId.value = task.result?.user?.uid
+                    viewModel.uid.value = task.result?.user?.uid
                     viewModel.saveMasterUidInShared()
                     if(BuildConfig.DEBUG) startActivity(MainActivityHelper.getIntent(this@SignInActivity))
                     viewModel.requestSignIn()
@@ -247,7 +247,7 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(
             .d("resendVerificationCode: ${viewModel.tel.value}, ${viewModel.resendToken.value}")
 
         startTimer()
-        toast(getString(R.string.certification_code_requested))
+        toast(getString(R.string.certification_code_requested_again))
 
         viewModel.auth.value?.let { auth ->
             viewModel.tel.value?.let { phoneNumber ->

@@ -13,34 +13,34 @@ import kr.co.soogong.master.ui.widget.TitleChipGroup
 import kr.co.soogong.master.utility.extension.dp
 
 // Todo.. 굉장히 코드가 더러운데.. 2 way binding을 사용하는 방법을 찾아봐야함.
-object BusinessTypeChipGroupHelper {
+object MajorChipGroupHelper {
 
-    fun makeEntryChipGroupWithSubtitleForBusinessTypes(
+    fun makeEntryChipGroupWithSubtitleForMajor(
         layoutInflater: LayoutInflater,
         container: LinearLayout,
         newMajor: Major,
         viewModelBusinessTypes: ListLiveData<Major>,
     ) {
-        addNewBusinessType(newMajor, viewModelBusinessTypes)
+        addNewMajor(newMajor, viewModelBusinessTypes)
 
-        addBusinessTypesToContainer(layoutInflater, container, viewModelBusinessTypes)
+        addMajorToContainer(layoutInflater, container, viewModelBusinessTypes)
     }
 
-    private fun addNewBusinessType(
+    private fun addNewMajor(
         newMajor: Major,
-        viewModelBusinessTypes: ListLiveData<Major>
+        majorList: ListLiveData<Major>
     ) {
         // 새로 선택된 업종을 viewModel에 갱신해준다.
-        val tempList = viewModelBusinessTypes.value
+        val tempList = majorList.value
         tempList?.removeIf { it.category?.id == newMajor.category?.id }
         tempList?.add(newMajor)
-        viewModelBusinessTypes.value = tempList
+        majorList.value = tempList
     }
 
-    fun addBusinessTypesToContainer(
+    fun addMajorToContainer(
         layoutInflater: LayoutInflater,
         container: LinearLayout,
-        viewModelBusinessTypes: ListLiveData<Major>
+        majorList: ListLiveData<Major>
     ) {
         // 기존 View들을 삭제한다.
         container.removeAllViews()
@@ -52,7 +52,7 @@ object BusinessTypeChipGroupHelper {
         )
         params.setMargins(0.dp, 20.dp, 0.dp, 0.dp)
 
-        viewModelBusinessTypes.value?.map { businessType ->
+        majorList.value?.map { businessType ->
             container.addView(
                 makeEntryChipGroupWithSubTitle(
                     layoutInflater = layoutInflater,
@@ -62,7 +62,7 @@ object BusinessTypeChipGroupHelper {
                         chipGroup.removeView(chip)
 
                         // view에서 삭제된 아이템을 code에서 찾아서 동기화
-                        val tempList = viewModelBusinessTypes.value
+                        val tempList = majorList.value
                         tempList?.find { temp ->
                             temp.category == businessType.category
                         }.let {
@@ -70,16 +70,16 @@ object BusinessTypeChipGroupHelper {
                                 project.id == projectId
                             }
                         }
-                        viewModelBusinessTypes.value = tempList
+                        majorList.value = tempList
 
                         // ChipGroup에 Chip이 하나도 없다면, 해당 ChipGroup의 Container에서도 삭제
                         if (chipGroup.isEmpty()) container.run {
                             removeView(titleChipGroup)
 
                             // 화면과 코드 동기화
-                            val tempList1 = viewModelBusinessTypes.value
+                            val tempList1 = majorList.value
                             tempList1?.remove(businessType)
-                            viewModelBusinessTypes.value = tempList1
+                            majorList.value = tempList1
                         }
                     }
                 ), params)

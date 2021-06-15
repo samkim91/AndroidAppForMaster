@@ -12,13 +12,13 @@ import kr.co.soogong.master.utility.Event
 
 abstract class BaseViewModel : ViewModel(), LifecycleObserver {
 
-    protected val coroutineExceptionHanlder =
-        CoroutineExceptionHandler { coroutineContext, throwable ->
+    private val coroutineExceptionHandler =
+        CoroutineExceptionHandler { _, throwable ->
             throwable.printStackTrace()
         }
 
-    protected val ioDispatchers = Dispatchers.IO + coroutineExceptionHanlder
-    protected val uiDispatchers = Dispatchers.Main + coroutineExceptionHanlder
+    protected val ioDispatchers = Dispatchers.IO + coroutineExceptionHandler
+    protected val uiDispatchers = Dispatchers.Main + coroutineExceptionHandler
 
     private val compositeDisposable = CompositeDisposable()
 

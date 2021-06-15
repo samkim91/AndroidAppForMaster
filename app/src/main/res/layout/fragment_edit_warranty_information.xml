@@ -7,7 +7,7 @@
 
         <variable
             name="vm"
-            type="kr.co.soogong.master.ui.profile.edit.requiredinformation.warrantyinformation.EditWarrantyInformationViewModel" />
+            type="kr.co.soogong.master.ui.profile.edit.requiredinformation.warranty.EditWarrantyInformationViewModel" />
     </data>
 
     <LinearLayout

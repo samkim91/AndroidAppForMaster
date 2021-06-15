@@ -7,7 +7,7 @@
 
         <variable
             name="vm"
-            type="kr.co.soogong.master.ui.profile.edit.requiredinformation.briefintroduction.EditBriefIntroductionViewModel" />
+            type="kr.co.soogong.master.ui.profile.edit.requiredinformation.introduction.EditIntroductionViewModel" />
     </data>
 
     <LinearLayout
@@ -31,7 +31,7 @@
                 android:paddingBottom="@dimen/gap_52">
 
                 <kr.co.soogong.master.ui.widget.TitleEditTextCounterView
-                    android:id="@+id/brief_introduction"
+                    android:id="@+id/introduction"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     app:alertText='@{"10자 이상으로 입력해주세요."}'
@@ -41,7 +41,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:limitedCount='@{100}'
-                    app:content="@={vm.briefIntroduction}"
+                    app:content="@={vm.introduction}"
                     app:subTitle='@{"업체이름과 함께 소개 영역에 들어가는 내용입니다. 고객에게 남기실 업체만의 특별한 점을 소개해주세요!"}'
                     app:title='@{"간단한 업체 소개를 해주세요."}' />
             </androidx.constraintlayout.widget.ConstraintLayout>

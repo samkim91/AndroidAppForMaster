@@ -1,4 +1,4 @@
-package kr.co.soogong.master.ui.profile.edit.requiredinformation.businesstypes
+package kr.co.soogong.master.ui.profile.edit.requiredinformation.major
 
 import android.app.Activity
 import android.content.Intent
@@ -9,24 +9,24 @@ import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.model.major.Major
-import kr.co.soogong.master.databinding.FragmentEditBusinessTypesBinding
+import kr.co.soogong.master.databinding.FragmentEditMajorBinding
 import kr.co.soogong.master.ui.base.BaseFragment
-import kr.co.soogong.master.ui.profile.edit.requiredinformation.businesstypes.EditBusinessTypesViewModel.Companion.GET_BUSINESS_TYPES_FAILED
-import kr.co.soogong.master.ui.profile.edit.requiredinformation.businesstypes.EditBusinessTypesViewModel.Companion.SAVE_BUSINESS_TYPES_FAILED
-import kr.co.soogong.master.ui.profile.edit.requiredinformation.businesstypes.EditBusinessTypesViewModel.Companion.SAVE_BUSINESS_TYPES_SUCCESSFULLY
-import kr.co.soogong.master.utility.BusinessTypeChipGroupHelper
+import kr.co.soogong.master.ui.profile.edit.requiredinformation.major.EditMajorViewModel.Companion.GET_MAJOR_FAILED
+import kr.co.soogong.master.ui.profile.edit.requiredinformation.major.EditMajorViewModel.Companion.SAVE_MAJOR_FAILED
+import kr.co.soogong.master.ui.profile.edit.requiredinformation.major.EditMajorViewModel.Companion.SAVE_MAJOR_SUCCESSFULLY
 import kr.co.soogong.master.uihelper.major.MajorActivityHelper
 import kr.co.soogong.master.utility.EventObserver
+import kr.co.soogong.master.utility.MajorChipGroupHelper
 import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
 
 @AndroidEntryPoint
-class EditBusinessTypesFragment : BaseFragment<FragmentEditBusinessTypesBinding>(
-    R.layout.fragment_edit_business_types
+class EditMajorFragment : BaseFragment<FragmentEditMajorBinding>(
+    R.layout.fragment_edit_major
 ) {
-    private val viewModel: EditBusinessTypesViewModel by viewModels()
+    private val viewModel: EditMajorViewModel by viewModels()
 
-    private var getBusinessTypeLauncher =
+    private var getMajorLauncher =
         registerForActivityResult(StartActivityForResult()) { result ->
             Timber.tag(TAG).d("StartActivityForResult: $result")
             if (result.resultCode == Activity.RESULT_OK) {
@@ -35,11 +35,11 @@ class EditBusinessTypesFragment : BaseFragment<FragmentEditBusinessTypesBinding>
                     data?.getParcelableExtra(MajorActivityHelper.BUNDLE_MAJOR)
                         ?: Major(null, null)
                 }
-                BusinessTypeChipGroupHelper.makeEntryChipGroupWithSubtitleForBusinessTypes(
+                MajorChipGroupHelper.makeEntryChipGroupWithSubtitleForMajor(
                     layoutInflater = layoutInflater,
-                    container = binding.businessTypeContainer,
+                    container = binding.majorContainer,
                     newMajor = selectedMajor,
-                    viewModelBusinessTypes = viewModel.businessTypes
+                    viewModelBusinessTypes = viewModel.major
                 )
             }
         }
@@ -49,11 +49,11 @@ class EditBusinessTypesFragment : BaseFragment<FragmentEditBusinessTypesBinding>
         Timber.tag(TAG).d("onViewCreated: ")
         initLayout()
         registerEventObserve()
-        viewModel.requestBusinessTypes()
-        BusinessTypeChipGroupHelper.addBusinessTypesToContainer(
+        viewModel.requestMajor()
+        MajorChipGroupHelper.addMajorToContainer(
             layoutInflater = layoutInflater,
-            container = binding.businessTypeContainer,
-            viewModelBusinessTypes = viewModel.businessTypes
+            container = binding.majorContainer,
+            majorList = viewModel.major
         )
     }
 
@@ -64,8 +64,8 @@ class EditBusinessTypesFragment : BaseFragment<FragmentEditBusinessTypesBinding>
             vm = viewModel
             lifecycleOwner = viewLifecycleOwner
 
-            businessType.setButtonClickListener {
-                getBusinessTypeLauncher.launch(
+            major.setButtonClickListener {
+                getMajorLauncher.launch(
                     Intent(
                         MajorActivityHelper.getIntent(
                             requireContext()
@@ -75,11 +75,11 @@ class EditBusinessTypesFragment : BaseFragment<FragmentEditBusinessTypesBinding>
             }
 
             defaultButton.setOnClickListener {
-                viewModel.businessTypes.observe(viewLifecycleOwner, {
-                    businessType.alertVisible = it.isNullOrEmpty()
+                viewModel.major.observe(viewLifecycleOwner, {
+                    major.alertVisible = it.isNullOrEmpty()
                 })
 
-                if (!businessType.alertVisible) viewModel.saveBusinessTypes()
+                if (!major.alertVisible) viewModel.saveMajor()
             }
         }
     }
@@ -88,10 +88,10 @@ class EditBusinessTypesFragment : BaseFragment<FragmentEditBusinessTypesBinding>
         Timber.tag(TAG).d("registerEventObserve: ")
         viewModel.action.observe(viewLifecycleOwner, EventObserver { event ->
             when (event) {
-                SAVE_BUSINESS_TYPES_SUCCESSFULLY -> {
+                SAVE_MAJOR_SUCCESSFULLY -> {
                     activity?.onBackPressed()
                 }
-                SAVE_BUSINESS_TYPES_FAILED, GET_BUSINESS_TYPES_FAILED -> {
+                SAVE_MAJOR_FAILED, GET_MAJOR_FAILED -> {
                     requireContext().toast(getString(R.string.error_message_of_request_failed))
                 }
             }
@@ -99,8 +99,8 @@ class EditBusinessTypesFragment : BaseFragment<FragmentEditBusinessTypesBinding>
     }
 
     companion object {
-        private const val TAG = "EditBusinessTypesFragment"
+        private const val TAG = "EditMajorFragment"
 
-        fun newInstance() = EditBusinessTypesFragment()
+        fun newInstance() = EditMajorFragment()
     }
 }

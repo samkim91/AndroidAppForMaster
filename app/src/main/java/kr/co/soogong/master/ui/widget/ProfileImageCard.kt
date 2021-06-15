@@ -93,7 +93,7 @@ class ProfileImageCard @JvmOverloads constructor(
         set(value) {
             field = value
             with(binding.secondDetail) {
-                visibility = if (value.isNullOrEmpty() || value == "0") View.GONE else View.VISIBLE
+                visibility = if (value.isNullOrEmpty()) View.GONE else View.VISIBLE
                 text = value
             }
         }
