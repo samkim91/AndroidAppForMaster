@@ -1,29 +1,32 @@
 package kr.co.soogong.master.data.dao.requirement
 
-import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
+import io.reactivex.Completable
+import io.reactivex.Flowable
+import io.reactivex.Single
+import kr.co.soogong.master.data.dto.requirement.RequirementDto
 import kr.co.soogong.master.data.model.requirement.Requirement
 
 @Dao
 interface RequirementDao {
     @Query("SELECT * FROM Requirement")
-    fun getAllList(): LiveData<List<Requirement>>
+    fun getAllList(): Single<List<RequirementDto>>
 
-    @Query("SELECT * FROM Requirement WHERE keycode = :keycode")
-    fun getItem(keycode: String): LiveData<Requirement?>
+    @Query("SELECT * FROM Requirement WHERE status In (:status)")
+    fun getListByStatus(status: List<String>): Single<List<RequirementDto>>
+
+    @Query("SELECT * FROM Requirement WHERE id = :id")
+    fun getItem(id: Int): Single<RequirementDto>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(requirement: Requirement)
+    fun insert(requirement: RequirementDto): Completable
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(requirements: List<Requirement>)
+    fun insertAll(requirements: List<RequirementDto>): Completable
 
-    @Query("DELETE FROM Requirement WHERE keycode = :keycode")
-    suspend fun remove(keycode: String)
+    @Delete
+    fun remove(requirement: RequirementDto): Completable
 
     @Query("DELETE FROM Requirement")
-    suspend fun removeAll()
+    fun removeAll(): Completable
 }

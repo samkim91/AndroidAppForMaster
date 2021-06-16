@@ -20,11 +20,14 @@ data class OtherFlexibleOptions(
 
         fun fromMasterConfigList(list: List<MasterConfigDto>?): OtherFlexibleOptions {
             val ret = mutableListOf<String>()
-            list?.map { masterConfigDto ->
-                masterConfigDto.value?.let {
+            list?.filter { masterConfigDto ->
+                masterConfigDto.value == "1"
+            }?.map { masterConfigDto ->
+                masterConfigDto.value.let {
                     ret.add(it)
                 }
             }
+
             return OtherFlexibleOptions(
                 options = ret
             )

@@ -10,7 +10,7 @@ import javax.inject.Inject
 class CallToCustomerUseCase @Inject constructor(
     private val requirementService: RequirementService
 ){
-    operator fun invoke(keycode : String, date: String): Single<Response> {
-        return requirementService.callToCustomer(keycode, date)
+    operator fun invoke(id : Int): Single<Response> {
+        return requirementService.callToCustomer(id)
     }
 }

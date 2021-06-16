@@ -103,7 +103,7 @@
     <string name="requirements_card_amount_done_title">최종 시공가</string>
 
     <!-- View Estimate -->
-    <string name="view_estimate_title">고객번호 %s</string>
+    <string name="view_requirement_action_bar_text">고객번호 %s</string>
     <string name="view_estimate_customer_review_title">고객 리뷰</string>
     <string name="view_estimate_done_title">나의 최종 시공 내용</string>
     <string name="view_estimate_customer_request_title">고객 요청 내용</string>

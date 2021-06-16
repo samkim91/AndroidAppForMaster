@@ -19,7 +19,7 @@ import timber.log.Timber
 class CancelEstimateActivity : BaseActivity<ActivityCancelEstimateBinding>(
     R.layout.activity_cancel_estimate
 ) {
-    val estimationId: String by lazy {
+    val estimationId: Int by lazy {
         CancelEstimateActivityHelper.getEstimationId(intent)
     }
 

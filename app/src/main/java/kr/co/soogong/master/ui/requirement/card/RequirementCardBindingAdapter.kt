@@ -5,15 +5,11 @@ import android.icu.text.SimpleDateFormat
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import kr.co.soogong.master.R
+import kr.co.soogong.master.data.dto.requirement.estimation.EstimationDto
+import kr.co.soogong.master.data.model.requirement.Estimation
 import kr.co.soogong.master.data.model.requirement.Transmissions
-import kr.co.soogong.master.data.model.requirement.EstimationStatus
 import kr.co.soogong.master.ui.widget.AmountView
 import java.util.*
-
-@BindingAdapter("bind:estimation_status")
-fun TextView.setEstimationStatus(estimationStatus: EstimationStatus?) {
-    text = estimationStatus?.toString() ?: ""
-}
 
 @BindingAdapter("bind:start_date")
 fun TextView.setStartDate(date: Date?) {
@@ -72,13 +68,13 @@ fun TextView.setEndDate2(createdAt: Long?) {
     text = simpleDateFormat.format(c.time)
 }
 
-@BindingAdapter(value = ["bind:estimationStatus", "bind:transmissions"])
-fun AmountView.setAmount(status: EstimationStatus, transmissions: Transmissions) {
+@BindingAdapter("bind:requirementStatus")
+fun AmountView.setAmount(status: String, price: String) {
     title = when (status) {
-        EstimationStatus.Waiting, EstimationStatus.Progress -> {
+        "Estimated", "Repairing" -> {
             context.getString(R.string.requirements_card_amount_title)
         }
-        EstimationStatus.Final -> {
+        "Done", "Closed" -> {
             context.getString(R.string.requirements_card_amount_done_title)
         }
         else -> {
@@ -86,5 +82,5 @@ fun AmountView.setAmount(status: EstimationStatus, transmissions: Transmissions)
         }
     }
 
-    detail = "${DecimalFormat("#,###").format(transmissions.message?.priceInNumber ?: 0)}원"
+    detail = "${DecimalFormat("#,###").format(price)}원"
 }

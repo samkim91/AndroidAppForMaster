@@ -1,48 +1,59 @@
 package kr.co.soogong.master.network.requirement
 
 import io.reactivex.Single
-import kr.co.soogong.master.data.model.requirement.CancelEstimate
-import kr.co.soogong.master.data.model.requirement.EndEstimate
-import kr.co.soogong.master.data.model.requirement.Estimation
-import kr.co.soogong.master.data.model.requirement.EstimationMessage
-import kr.co.soogong.master.data.model.requirement.Requirement
 import kr.co.soogong.master.data.dto.Response
+import kr.co.soogong.master.data.dto.requirement.RequirementDto
+import kr.co.soogong.master.data.model.requirement.*
 import retrofit2.Retrofit
 import javax.inject.Inject
 
 class RequirementService @Inject constructor(
     retrofit: Retrofit
 ) {
-    private val estimationsInterface = retrofit.create(RequirementInterface::class.java)
+    private val requirementInterface = retrofit.create(RequirementInterface::class.java)
 
-    suspend fun getEstimationList(keycode: String?): List<Estimation> {
-        val jsonObject = estimationsInterface.getEstimationList(keycode)
+    fun getRequirementList(masterId: Int): Single<List<RequirementDto>> {
+        val query = HashMap<String, Any>()
+        query["masterId"] = masterId
+        query["statusArray"] =
+            listOf(RequirementStatus.Requested.toString(), RequirementStatus.Estimated.toString())
 
-        val list = jsonObject.get("data").asJsonArray
-        val ret = ArrayList<Estimation>()
-        for (item in list) {
-            ret.add(Estimation.fromJson(item.asJsonObject))
-        }
-
-        return ret
+        return requirementInterface.getRequirementList(query)
     }
 
-    fun getRequirementList(keycode: String?): Single<List<Requirement>> {
-        return estimationsInterface.getRequirementList(keycode)
-            .map { list -> list.map { Requirement.fromJson(it, "received") } }
+    fun getProgressList(masterId: Int): Single<List<RequirementDto>> {
+        val query = HashMap<String, Any>()
+        query["masterId"] = masterId
+        query["statusArray"] = listOf(
+            RequirementStatus.Repairing.toString(),
+            RequirementStatus.RequestFinish.toString()
+        )
+
+        return requirementInterface.getRequirementList(query)
     }
 
-    fun getProgressList(keycode: String?): Single<List<Requirement>> {
-        return estimationsInterface.getProgressList(keycode)
-            .map { list -> list.map { Requirement.fromJson(it, "progress") } }
+    fun getDoneList(masterId: Int): Single<List<RequirementDto>> {
+        val query = HashMap<String, Any>()
+        query["masterId"] = masterId
+        query["statusArray"] = listOf(
+            RequirementStatus.Done.toString(),
+            RequirementStatus.Closed.toString(),
+            RequirementStatus.CanceledByClient.toString(),
+            RequirementStatus.CanceledByMaster.toString(),
+            RequirementStatus.Canceled.toString(),
+            RequirementStatus.Impossible.toString(),
+            RequirementStatus.Failed.toString(),
+        )
+
+        return requirementInterface.getRequirementList(query)
     }
 
-    fun refuseToEstimate(branchKeycode: String?, keycode: String): Single<Response> {
-        val data = HashMap<String, String?>()
+    fun refuseToEstimate(branchKeycode: String?, id: Int): Single<Response> {
+        val data = HashMap<String, Any?>()
         data["branch_keycode"] = branchKeycode
-        data["keycode"] = keycode
+        data["keycode"] = id
 
-        return estimationsInterface.refuseToEstimate(data)
+        return requirementInterface.refuseToEstimate(data)
     }
 
     fun sendMessage(
@@ -61,53 +72,51 @@ class RequirementService @Inject constructor(
         data["personnel"] = estimationMessage.personnel
         data["material"] = estimationMessage.material
         data["trip"] = estimationMessage.trip
-        return estimationsInterface.sendMessage(data)
+        return requirementInterface.sendMessage(data)
     }
 
     fun cancelEstimate(
         branchKeycode: String?,
-        keycode: String,
+        estimationId: Int,
         cancelEstimate: CancelEstimate
     ): Single<Response> {
-        val data = HashMap<String, String?>()
+        val data = HashMap<String, Any?>()
         data["action_type"] = "refuse"
         data["branch_keycode"] = branchKeycode
-        data["keycode"] = keycode
+        data["keycode"] = estimationId
         data["message"] = cancelEstimate.message
         data["sub_message"] = cancelEstimate.subMessage
-        return estimationsInterface.cancelEstimate(data)
+        return requirementInterface.cancelEstimate(data)
     }
 
     fun endEstimate(
         branchKeycode: String?,
-        keycode: String,
+        estimationId: Int,
         endEstimate: EndEstimate
     ): Single<Response> {
-        val data = HashMap<String, String?>()
+        val data = HashMap<String, Any?>()
         data["branch_keycode"] = branchKeycode
-        data["keycode"] = keycode
+        data["keycode"] = estimationId
         data["actual_date"] = endEstimate.actualDate
         data["actual_price"] = endEstimate.actualPrice
-        return estimationsInterface.endEstimate(data)
+        return requirementInterface.endEstimate(data)
     }
 
     fun callToCustomer(
-        keycode: String,
-        date: String
-    ): Single<Response>{
-        val data = HashMap<String, String?>()
-        data["keycode"] = keycode
-        data["date"] = date
-        return estimationsInterface.callToCustomer(data)
+        id: Int,
+    ): Single<Response> {
+        val data = HashMap<String, Any>()
+        data["keycode"] = id
+        return requirementInterface.callToCustomer(data)
     }
 
     fun askForReview(
-        keycode: String,
+        id: Int,
         branchKeycode: String?
-    ): Single<Response>{
-        val data = HashMap<String, String?>()
-        data["keycode"] = keycode
+    ): Single<Response> {
+        val data = HashMap<String, Any?>()
+        data["keycode"] = id
         data["branch_keycode"] = branchKeycode
-        return estimationsInterface.askForReview(data)
+        return requirementInterface.askForReview(data)
     }
 }

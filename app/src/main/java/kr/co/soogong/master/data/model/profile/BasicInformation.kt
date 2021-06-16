@@ -20,8 +20,8 @@ data class BasicInformation(
                 portfolios = Portfolio.fromPortfolioDto(masterDto.masterPortfolios?.filter { portfolioDto -> portfolioDto.type == "portfolio" }),
                 priceByProjects = PriceByProject.fromPortfolioDto(masterDto.masterPortfolios?.filter { portfolioDto -> portfolioDto.type == "price" }),
                 profileImage = ImagePath(masterDto.profileImageId),
-                flexibleCost = FlexibleCost.fromMasterConfigList(masterDto.masterConfigs?.filter { masterConfigDto -> masterConfigDto.groupCode == "flexibleCost" }),
-                otherFlexibleOptions = OtherFlexibleOptions.fromMasterConfigList(masterDto.masterConfigs?.filter { masterConfigDto -> masterConfigDto.groupCode == "otherFlexibleOption" }),
+                flexibleCost = FlexibleCost.fromMasterConfigList(masterDto.masterConfigs?.filter { masterConfigDto -> masterConfigDto.configGroupCode == "flexibleCost" }),
+                otherFlexibleOptions = OtherFlexibleOptions.fromMasterConfigList(masterDto.masterConfigs?.filter { masterConfigDto -> masterConfigDto.configGroupCode == "otherFlexibleOption" }),
                 email = masterDto.email,
             )
         }

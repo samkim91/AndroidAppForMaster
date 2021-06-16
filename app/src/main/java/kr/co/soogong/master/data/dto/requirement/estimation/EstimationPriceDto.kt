@@ -1,4 +1,4 @@
-package kr.co.soogong.master.data.dto.profile
+package kr.co.soogong.master.data.dto.requirement.estimation
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
@@ -6,18 +6,18 @@ import kotlinx.parcelize.Parcelize
 import java.util.*
 
 @Parcelize
-data class MasterConfigDto(
+data class EstimationPriceDto(
     @SerializedName("id")
     val id: Int,
 
-    @SerializedName("configGroupCode")
-    val configGroupCode: String,
+    @SerializedName("estimationId")
+    val estimationId: String,
 
-    @SerializedName("code")
-    val code: ConfigCodeDto,
+    @SerializedName("partialPrice")
+    val partialPrice: Int,
 
-    @SerializedName("value")
-    val value: String,
+    @SerializedName("priceType")
+    val priceType: String,
 
     @SerializedName("createdAt")
     val createdAt: Date,

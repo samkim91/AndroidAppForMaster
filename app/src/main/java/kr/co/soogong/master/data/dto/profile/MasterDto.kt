@@ -6,13 +6,12 @@ import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 import kotlinx.parcelize.RawValue
-import kr.co.soogong.master.data.model.major.Major
 import java.util.*
 
 @Parcelize
 @Entity(tableName = "Master")
 data class MasterDto(
-    @SerializedName("id")
+    @SerializedName("masterId")
     val id: Int,    // ID
 
     @PrimaryKey
@@ -49,7 +48,7 @@ data class MasterDto(
     @SerializedName("subscriptionPlan")
     val subscriptionPlan: String?,
 
-    @SerializedName("isPublic")
+    @SerializedName("public")
     val isPublic: Boolean,
 
     @SerializedName("profileImageId")
@@ -107,7 +106,7 @@ data class MasterDto(
     val masterPortfolios: List<PortfolioDto>?,
 
     @SerializedName("projects")
-    val projects: List<Major>?,
+    val projects: List<ProjectDto>?,
 
     @SerializedName("createdAt")
     val createdAt: Date,

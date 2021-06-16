@@ -6,18 +6,24 @@ import kotlinx.parcelize.Parcelize
 import java.util.*
 
 @Parcelize
-data class MasterConfigDto(
+data class ConfigCodeDto(
     @SerializedName("id")
     val id: Int,
 
-    @SerializedName("configGroupCode")
-    val configGroupCode: String,
+    @SerializedName("groupCode")
+    val groupCode: String,
+
+    @SerializedName("groupName")
+    val groupName: String,
 
     @SerializedName("code")
-    val code: ConfigCodeDto,
+    val code: String,
 
-    @SerializedName("value")
-    val value: String,
+    @SerializedName("name")
+    val name: String,
+
+    @SerializedName("description")
+    val description: String,
 
     @SerializedName("createdAt")
     val createdAt: Date,

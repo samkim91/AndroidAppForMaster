@@ -22,7 +22,7 @@ import timber.log.Timber
 class EndEstimateActivity : BaseActivity<ActivityEndEstimateBinding>(
     R.layout.activity_end_estimate
 ) {
-    val estimationId: String by lazy {
+    val estimationId: Int by lazy {
         EndEstimateActivityHelper.getEstimationId(intent)
     }
     private val viewModel: EndEstimateViewModel by viewModels()

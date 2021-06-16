@@ -12,10 +12,12 @@ import kr.co.soogong.master.databinding.FragmentRequirementReceivedBinding
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.dialog.popup.CustomDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData
+import kr.co.soogong.master.ui.requirement.received.ReceivedViewModel.Companion.REQUEST_LIST_FAILED
 import kr.co.soogong.master.uihelper.profile.EditRequiredInformationActivityHelper
 import kr.co.soogong.master.uihelper.requirment.RequirementsBadge
-import kr.co.soogong.master.uihelper.requirment.action.ActionViewHelper
+import kr.co.soogong.master.uihelper.requirment.action.view.ViewEstimateActivityHelper
 import kr.co.soogong.master.utility.EventObserver
+import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -42,14 +44,13 @@ class ReceivedFragment : BaseFragment<FragmentRequirementReceivedBinding>(
             lifecycleOwner = viewLifecycleOwner
 
             receivedList.adapter =
-                ReceivedAdapter(cardClickListener = { keycode, estimationStatus ->
+                ReceivedAdapter(cardClickListener = { requirementId ->
                     viewModel.isApprovedMaster.value?.let {
                         if (it) {
                             startActivity(
-                                ActionViewHelper.getIntent(
+                                ViewEstimateActivityHelper.getIntent(
                                     requireContext(),
-                                    keycode,
-                                    estimationStatus
+                                    requirementId,
                                 )
                             )
                         } else {
@@ -95,10 +96,14 @@ class ReceivedFragment : BaseFragment<FragmentRequirementReceivedBinding>(
                 }
             }
         })
+
         viewModel.action.observe(viewLifecycleOwner, EventObserver { action ->
             when (action) {
                 ReceivedViewModel.BADGE_UPDATE -> {
                     binding.receivedList.scrollToPosition(0)
+                }
+                REQUEST_LIST_FAILED -> {
+                    requireContext().toast(getString(R.string.error_message_of_request_failed))
                 }
             }
         })

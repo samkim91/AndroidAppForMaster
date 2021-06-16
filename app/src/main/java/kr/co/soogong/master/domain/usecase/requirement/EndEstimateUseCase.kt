@@ -13,7 +13,7 @@ class EndEstimateUseCase @Inject constructor(
     private val requirementService: RequirementService,
     private val getMasterUidFromSharedUseCase: GetMasterUidFromSharedUseCase
 ){
-    operator fun invoke(keycode : String, endEstimate: EndEstimate): Single<Response> {
-        return requirementService.endEstimate(getMasterUidFromSharedUseCase(), keycode, endEstimate)
+    operator fun invoke(estimationId : Int, endEstimate: EndEstimate): Single<Response> {
+        return requirementService.endEstimate(getMasterUidFromSharedUseCase(), estimationId, endEstimate)
     }
 }

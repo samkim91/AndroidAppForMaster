@@ -2,61 +2,78 @@ package kr.co.soogong.master.ui.requirement.received
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
-import kr.co.soogong.master.data.model.requirement.EstimationStatus
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.rxkotlin.subscribeBy
+import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.model.requirement.RequirementCard
+import kr.co.soogong.master.data.model.requirement.RequirementStatus
 import kr.co.soogong.master.domain.usecase.auth.GetMasterApprovalUseCase
-import kr.co.soogong.master.domain.usecase.requirement.GetReceivedEstimationListUseCase
+import kr.co.soogong.master.domain.usecase.requirement.GetReceivedRequirementListUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
+import kr.co.soogong.master.utility.ListLiveData
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class ReceivedViewModel @Inject constructor(
-    private val getMasterApprovalUseCase: GetMasterApprovalUseCase,
-    private val getReceivedEstimationListUseCase: GetReceivedEstimationListUseCase
+    val getMasterApprovalUseCase: GetMasterApprovalUseCase,
+    private val getReceivedRequirementListUseCase: GetReceivedRequirementListUseCase
 ) : BaseViewModel() {
     private val _isApprovedMaster = MutableLiveData<Boolean>(getMasterApprovalUseCase())
     val isApprovedMaster: LiveData<Boolean>
         get() = _isApprovedMaster
 
-    private val _requirementList = MutableLiveData<List<RequirementCard>>(emptyList())
-    val requirementList: LiveData<List<RequirementCard>>
-        get() = _requirementList
+    val requirementList = ListLiveData<RequirementCard>()
 
     fun requestList() {
-        viewModelScope.launch {
-            val list = getReceivedEstimationListUseCase()
-            sendEvent(BADGE_UPDATE, list.size)
-            _requirementList.value = list
-        }
+        Timber.tag(TAG).d("requestList: ")
+        getReceivedRequirementListUseCase()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeBy(
+                onSuccess = {
+                    requirementList.addAll(it)
+                    sendEvent(BADGE_UPDATE, requirementList.getItemCount())
+                },
+                onError = {
+                    setAction(REQUEST_LIST_FAILED)
+                    requirementList.clear()
+                }
+            ).addToDisposable()
     }
 
     fun onFilterChange(index: Int) {
-        viewModelScope.launch {
-            val list = when (index) {
-                0 -> {
-                    getReceivedEstimationListUseCase()
+        Timber.tag(TAG).d("onFilterChange: $index")
+
+        getReceivedRequirementListUseCase()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeBy(
+                onSuccess = { list ->
+                    requirementList.clear()
+                    when (index) {
+                        1 -> {
+                            requirementList.addAll(list.filter { it.status == RequirementStatus.Requested.toString() })
+                        }
+                        2 -> {
+                            requirementList.addAll(list.filter { it.status == RequirementStatus.Estimated.toString() })
+                        }
+                        else -> {
+                            requirementList.addAll(list)
+                        }
+                    }
+                },
+                onError = {
+                    setAction(REQUEST_LIST_FAILED)
+                    requirementList.clear()
                 }
-                1 -> {
-                    getReceivedEstimationListUseCase().filter { it.status == EstimationStatus.Request }
-                }
-                2 -> {
-                    getReceivedEstimationListUseCase().filter { it.status == EstimationStatus.Waiting }
-                }
-                else -> {
-                    emptyList()
-                }
-            }
-            _requirementList.value = list
-            setAction(UPDATE_LIST)
-        }
+            ).addToDisposable()
     }
 
     companion object {
         private const val TAG = "ReceivedViewModel"
         const val BADGE_UPDATE = "BADGE_UPDATE"
-        const val UPDATE_LIST = "UPDATE_LIST"
+        const val REQUEST_LIST_FAILED = "REQUEST_LIST_FAILED"
     }
 }

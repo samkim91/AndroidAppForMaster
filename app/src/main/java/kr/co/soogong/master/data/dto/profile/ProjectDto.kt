@@ -6,24 +6,27 @@ import kotlinx.parcelize.Parcelize
 import java.util.*
 
 @Parcelize
-data class MasterConfigDto(
+data class ProjectDto(
     @SerializedName("id")
     val id: Int,
 
-    @SerializedName("configGroupCode")
-    val configGroupCode: String,
+    @SerializedName("name")
+    val name: String,
 
-    @SerializedName("code")
-    val code: ConfigCodeDto,
+    @SerializedName("soogongmanYn")
+    val soogongmanYn: Boolean,
 
-    @SerializedName("value")
-    val value: String,
+    @SerializedName("useYn")
+    val useYn: Boolean,
+
+    @SerializedName("category")
+    val category: CategoryDto,
 
     @SerializedName("createdAt")
-    val createdAt: Date,
+    val createdAt: Date?,
 
     @SerializedName("updatedAt")
-    val updatedAt: Date,
+    val updatedAt: Date?,
 ) : Parcelable {
     companion object {
 

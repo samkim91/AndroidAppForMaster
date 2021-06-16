@@ -78,6 +78,7 @@ class SignInViewModel @Inject constructor(
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
                     onSuccess = {
+                        // TODO: 2021/06/16 add saveIdInShared
                         successToSignIn() },
                     onError = { failToSignIn() }
                 ).addToDisposable()

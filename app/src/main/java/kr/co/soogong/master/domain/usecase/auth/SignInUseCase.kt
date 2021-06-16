@@ -13,7 +13,6 @@ class SignInUseCase @Inject constructor(
     operator fun invoke(uid: String): Single<JsonObject> {
         // TODO: 2021/06/10 return type 수정
 
-
         return authService.signIn(uid)
     }
 }

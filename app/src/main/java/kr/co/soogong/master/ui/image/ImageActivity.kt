@@ -23,7 +23,7 @@ class ImageActivity : BaseActivity<ActivityImageBinding>(
         ImageViewActivityHelper.getImagePosition(intent)
     }
 
-    private val images: ArrayList<ImagePath> by lazy {
+    private val images: List<ImagePath> by lazy {
         ImageViewActivityHelper.getImages(intent)
     }
 

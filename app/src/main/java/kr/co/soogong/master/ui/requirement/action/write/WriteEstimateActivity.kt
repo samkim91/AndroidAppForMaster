@@ -17,7 +17,7 @@ import kr.co.soogong.master.ui.dialog.popup.CustomDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData.Companion.getCancelSendingEstimationDialogData
 import kr.co.soogong.master.ui.image.RectangleImageAdapter
 import kr.co.soogong.master.ui.requirement.action.write.WriteEstimateViewModel.Companion.SEND_MESSAGE_FAILED
-import kr.co.soogong.master.ui.requirement.action.write.WriteEstimateViewModel.Companion.SEND_MESSAGE_SUCCEEDED
+import kr.co.soogong.master.ui.requirement.action.write.WriteEstimateViewModel.Companion.SEND_MESSAGE_SUCCESSFULLY
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.extension.addAdditionInfoView
 import kr.co.soogong.master.utility.extension.toast
@@ -27,7 +27,7 @@ import timber.log.Timber
 class WriteEstimateActivity : BaseActivity<ActivityWriteEstimateBinding>(
     R.layout.activity_write_estimate
 ) {
-    private val estimationId: String by lazy {
+    private val requirementId: Int by lazy {
         WriteEstimateActivityHelper.getEstimationId(intent)
     }
 
@@ -115,7 +115,7 @@ class WriteEstimateActivity : BaseActivity<ActivityWriteEstimateBinding>(
                     startActivity(
                         ImageViewActivityHelper.getIntent(
                             this@WriteEstimateActivity,
-                            viewModel.estimation.value?.images,
+                            viewModel.requirement.value?.images,
                             position
                         )
                     )
@@ -180,7 +180,7 @@ class WriteEstimateActivity : BaseActivity<ActivityWriteEstimateBinding>(
         Timber.tag(TAG).d("registerEventObserve: ")
         viewModel.action.observe(this, EventObserver { event ->
             when (event) {
-                SEND_MESSAGE_SUCCEEDED -> {
+                SEND_MESSAGE_SUCCESSFULLY -> {
                     toast(getString(R.string.send_message_succeeded))
                     super.onBackPressed()
                 }
@@ -189,22 +189,27 @@ class WriteEstimateActivity : BaseActivity<ActivityWriteEstimateBinding>(
                 }
             }
         })
-        viewModel.estimation.observe(this, { estimation ->
-            val additionInfo = estimation?.additionalInfo
-            if (!additionInfo.isNullOrEmpty()) {
-                binding.customFrame.removeAllViews()
-                additionInfo.forEach { item ->
-                    addAdditionInfoView(
-                        binding.customFrame,
-                        this,
-                        item.description,
-                        item.value
-                    )
-                }
-            }
+        viewModel.requirement.observe(this, { requirement ->
+            // TODO: 2021/06/16 고객 요청내용 추가되면 바꿔줘야함
+//            val additionInfo = requirement?.additionalInfo
+//            if (!additionInfo.isNullOrEmpty()) {
+//                binding.customFrame.removeAllViews()
+//                additionInfo.forEach { item ->
+//                    addAdditionInfoView(
+//                        binding.customFrame,
+//                        this,
+//                        item.description,
+//                        item.value
+//                    )
+//                }
+//            }
         })
     }
 
+    override fun onStart() {
+        super.onStart()
+        viewModel.requestRequirement()
+    }
 
     private fun setTotalAmount() {
         bind {

@@ -13,7 +13,7 @@ class CancelEstimateUseCase @Inject constructor(
     private val requirementService: RequirementService,
     private val getMasterUidFromSharedUseCase: GetMasterUidFromSharedUseCase
 ){
-    operator fun invoke(keycode : String, cancelEstimate: CancelEstimate): Single<Response> {
-        return requirementService.cancelEstimate(getMasterUidFromSharedUseCase(), keycode, cancelEstimate)
+    operator fun invoke(estimationId : Int, cancelEstimate: CancelEstimate): Single<Response> {
+        return requirementService.cancelEstimate(getMasterUidFromSharedUseCase(), estimationId, cancelEstimate)
     }
 }
