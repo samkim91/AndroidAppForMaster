@@ -33,7 +33,7 @@
             android:textColor="@color/color_1FC472"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            bind:estimation_status="@{data.status}"
+            android:text="@{data.status}"
             tools:text="견적요청" />
 
         <FrameLayout
@@ -62,7 +62,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/requirement_card_status_detail_margin_top"
-            android:text="@{data.statusDetailText}"
+            android:text="@{data.introductionText}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="견적서를 작성해주세요" />
@@ -85,7 +85,7 @@
             android:layout_marginTop="@dimen/requirement_card_request_id_margin_top"
             android:ellipsize="end"
             android:lines="1"
-            android:text="@{data.keyCode}"
+            android:text="@{data.token}"
             android:textColor="@color/text_primary_color"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/line"

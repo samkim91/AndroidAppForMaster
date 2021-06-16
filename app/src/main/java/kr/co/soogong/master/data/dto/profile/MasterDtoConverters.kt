@@ -36,12 +36,12 @@ class MasterDtoConverters {
     }
 
     @TypeConverter
-    fun projectsToString(list: List<Major>): String {
+    fun projectsToString(list: List<ProjectDto>): String {
         return Gson().toJson(list)
     }
 
     @TypeConverter
-    fun stringToProjects(projectsString: String): List<Major> {
-        return Gson().fromJson(projectsString, object : TypeToken<List<Major>>() {}.type)
+    fun stringToProjects(projectsString: String): List<ProjectDto> {
+        return Gson().fromJson(projectsString, object : TypeToken<List<ProjectDto>>() {}.type)
     }
 }

@@ -2,8 +2,8 @@ package kr.co.soogong.master.ui.requirement.card
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import kr.co.soogong.master.data.model.requirement.RequirementStatus
 import kr.co.soogong.master.databinding.ViewHolderRequirementItemBinding
-import kr.co.soogong.master.data.model.requirement.EstimationStatus
 
 object RequirementCardViewHolderHelper {
     fun create(parent: ViewGroup, viewType: Int): EstimationCardViewHolder {
@@ -14,26 +14,26 @@ object RequirementCardViewHolderHelper {
         )
 
         return when (viewType) {
-            EstimationStatus.Request.toInt() -> {
-                RequestViewHolder(binding)
+            RequirementStatus.Requested.toInt() -> {
+                RequestedViewHolder(binding)
             }
-            EstimationStatus.Waiting.toInt() -> {
-                WaitingViewHolder(binding)
+            RequirementStatus.Estimated.toInt() -> {
+                EstimatedViewHolder(binding)
             }
-            EstimationStatus.Progress.toInt() -> {
-                ProgressViewHolder(binding)
+            RequirementStatus.Repairing.toInt() -> {
+                RepairingViewHolder(binding)
             }
-            EstimationStatus.CustomDone.toInt() -> {
-                CustomDoneViewHolder(binding)
+            RequirementStatus.RequestFinish.toInt() -> {
+                RequestFinishViewHolder(binding)
             }
-            EstimationStatus.Done.toInt() -> {
+            RequirementStatus.Done.toInt() -> {
                 DoneViewHolder(binding)
             }
-            EstimationStatus.Final.toInt() -> {
-                FinalViewHolder(binding)
+            RequirementStatus.Closed.toInt() -> {
+                ClosedViewHolder(binding)
             }
             else -> {
-                CancelViewHolder(binding)
+                CanceledViewHolder(binding)
             }
         }
     }

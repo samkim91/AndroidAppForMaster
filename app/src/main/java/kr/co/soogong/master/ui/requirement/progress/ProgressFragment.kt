@@ -14,8 +14,8 @@ import kr.co.soogong.master.ui.dialog.popup.CustomDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData.Companion.getCallToCustomerDialogData
 import kr.co.soogong.master.uihelper.requirment.CallToCustomerHelper
 import kr.co.soogong.master.uihelper.requirment.RequirementsBadge
-import kr.co.soogong.master.uihelper.requirment.action.ActionViewHelper
 import kr.co.soogong.master.uihelper.requirment.action.end.EndEstimateActivityHelper
+import kr.co.soogong.master.uihelper.requirment.action.view.ViewEstimateActivityHelper
 import kr.co.soogong.master.utility.EventObserver
 import timber.log.Timber
 
@@ -43,12 +43,11 @@ class ProgressFragment : BaseFragment<FragmentRequirementProgressBinding>(
             lifecycleOwner = viewLifecycleOwner
 
             progressList.adapter = ProgressAdapter(
-                cardClickListener = { keycode, estimationStatus ->
+                cardClickListener = { requirementId ->
                     startActivity(
-                        ActionViewHelper.getIntent(
+                        ViewEstimateActivityHelper.getIntent(
                             requireContext(),
-                            keycode,
-                            estimationStatus
+                            requirementId,
                         )
                     )
                 },
@@ -56,16 +55,16 @@ class ProgressFragment : BaseFragment<FragmentRequirementProgressBinding>(
                     val dialog = CustomDialog(getCallToCustomerDialogData(requireContext()),
                         yesClick = {
                             // Todo.. 전화한 기록을 더해야함.
-                            viewModel.callToCustomer(estimationId = keycode, phoneNumber = number)
-                            startActivity(CallToCustomerHelper.getIntent(number))
+                            viewModel.callToCustomer(estimationId = keycode, phoneNumber = number.toString())
+                            startActivity(CallToCustomerHelper.getIntent(number.toString()))
                         },
                         noClick = { }
                     )
 
                     dialog.show(childFragmentManager, dialog.tag)
                 },
-                doneButtonClick = { keycode ->
-                    startActivity(EndEstimateActivityHelper.getIntent(requireContext(), keycode))
+                doneButtonClick = { requirementId ->
+                    startActivity(EndEstimateActivityHelper.getIntent(requireContext(), requirementId))
                 }
             )
 

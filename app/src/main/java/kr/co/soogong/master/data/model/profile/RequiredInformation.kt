@@ -40,7 +40,7 @@ data class RequiredInformation(
                 career = masterDto.introduction,
                 tel = masterDto.tel,
                 ownerName = masterDto.ownerName,
-                majors = masterDto.projects,
+                majors = emptyList(),  // TODO: 2021/06/16 projectDto가 변화되는 것을 보고 바꿔줘야함.
                 companyAddress = CompanyAddress(
                     masterDto.roadAddress,
                     masterDto.detailAddress,

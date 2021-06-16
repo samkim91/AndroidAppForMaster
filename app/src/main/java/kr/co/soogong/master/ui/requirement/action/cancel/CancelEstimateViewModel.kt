@@ -15,7 +15,7 @@ class CancelEstimateViewModel @Inject constructor(
     private val cancelEstimateUseCase: CancelEstimateUseCase,
 ) : BaseViewModel() {
 
-    fun doCancel(estimationId: String, cancelEstimate: CancelEstimate) {
+    fun doCancel(estimationId: Int, cancelEstimate: CancelEstimate) {
         cancelEstimateUseCase(estimationId, cancelEstimate)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

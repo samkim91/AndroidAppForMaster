@@ -12,8 +12,8 @@ class RefuseToEstimateUseCase @Inject constructor(
     private val requirementService: RequirementService,
     private val getMasterUidFromSharedUseCase: GetMasterUidFromSharedUseCase
 ){
-    operator fun invoke(keycode : String): Single<Response> {
-        return requirementService.refuseToEstimate(getMasterUidFromSharedUseCase(), keycode)
+    operator fun invoke(id : Int): Single<Response> {
+        return requirementService.refuseToEstimate(getMasterUidFromSharedUseCase(), id)
     }
 
 }

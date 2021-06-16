@@ -14,11 +14,11 @@ import javax.inject.Inject
 class EndEstimateViewModel @Inject constructor(
     private val endEstimateUseCase: EndEstimateUseCase,
 ) : BaseViewModel() {
-    fun endRepair(estimationId: String, endEstimate: EndEstimate) {
+    fun endRepair(estimationId: Int, endEstimate: EndEstimate) {
         Timber.tag(TAG).d("doOnFinish: ")
 
         // 키코드, 브랜치키코드, 시공일자, 최종시공액 .. 기존 API에서는 주소도 받는데 유지필요하려나?
-        endEstimateUseCase(keycode = estimationId, endEstimate = endEstimate)
+        endEstimateUseCase(estimationId = estimationId, endEstimate = endEstimate)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(

@@ -1,10 +1,8 @@
 package kr.co.soogong.master.contract
 
 object HttpContract {
-    const val MY_PAGE_URL = "https://soogong.co.kr/master/"
-
-    const val LOCAL_URL = "http://192.168.0.50:8080/"
-    const val TEST_URL = "https://test.api2.soogong.co.kr/"
+    const val LOCAL_URL = "http://192.168.0.93:8080/"
+    const val DEV_URL = "http://web-backend-springboot-LB-dev-112855016.ap-northeast-2.elb.amazonaws.com/"
     const val PROD_URL = "https://api2.soogong.co.kr/"
 
     //region Auth
@@ -19,17 +17,8 @@ object HttpContract {
     const val PROJECT_LIST = "project/find-all-by-categoryId/{categoryId}"
     //endregion
 
-    //region User
-    const val GET_MASTER_BY_UID = "master/find-by-uid"
-    //endregion
-
-    //region Notice
-    const val GET_NOTICE = "api/v1/boards/notice"
-    //endregion
-
-    //region Alarm
-    const val GET_ALARMS = "api/v1/branches/get_alarm"
-    const val SET_ALARMS = "api/v1/branches/set_alarm"
+    //region Requirement
+    const val GET_REQUIREMENT_LIST = "master/find-requirement-by-id"
     //endregion
 
     //region Estimations
@@ -37,11 +26,18 @@ object HttpContract {
     const val GET_ESTIMATION = "api/v1/transmissions/default_list"
     const val ACCEPT_ESTIMATION = "api/v1/transmissions/accept_list"
     const val REFUSE_ESTIMATION = "api/v1/transmissions/refuse"
-//    const val SEND_ESTIMATION_MESSAGE = "api/v1/transmissions/send_message"
     //endregion
 
-    //region Master
-    const val MASTER_MY_PAGE = "https://soogong.co.kr/master/detail/"
+    //region Profile
+    const val MY_PAGE_URL = "https://soogong.co.kr/master/"
+    const val GET_MASTER_BY_UID = "master/find-by-uid"
+    //endregion
+
+    //region MyPage
+    const val GET_NOTICE = "api/v1/boards/notice"
+    const val GET_ALARMS = "api/v1/branches/get_alarm"
+    const val SET_ALARMS = "api/v1/branches/set_alarm"
+    //endregion
 
     // TODO.. 아래 HTTP request의 경우, 카카오톡 웹뷰에서 바로 request가 나가서, API server를 거치지 않고 있음. 수정이 되면 다시 바꿔줘야함.
     const val SEND_ESTIMATION_MESSAGE = "https://partner.soogong.co.kr/estimations/sc"

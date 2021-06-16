@@ -12,7 +12,7 @@ class AskForReviewUseCase @Inject constructor(
     private val requirementService: RequirementService,
     private val getMasterUidFromSharedUseCase: GetMasterUidFromSharedUseCase
 ) {
-    operator fun invoke(keycode: String): Single<Response> {
-        return requirementService.askForReview(keycode, getMasterUidFromSharedUseCase())
+    operator fun invoke(id: Int): Single<Response> {
+        return requirementService.askForReview(id, getMasterUidFromSharedUseCase())
     }
 }

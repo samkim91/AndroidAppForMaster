@@ -4,7 +4,6 @@ import android.os.Parcelable
 import com.google.gson.JsonObject
 import kotlinx.parcelize.Parcelize
 import kr.co.soogong.master.data.dto.profile.MasterConfigDto
-import kr.co.soogong.master.data.dto.profile.MasterDto
 
 @Parcelize
 data class FlexibleCost(
@@ -27,10 +26,10 @@ data class FlexibleCost(
 
         fun fromMasterConfigList(list: List<MasterConfigDto>?): FlexibleCost {
             return FlexibleCost(
-                travelCost = list?.find { masterConfigDto -> masterConfigDto.code == "TravelCost" }?.value ?: "",
-                craneUsage = list?.find { masterConfigDto -> masterConfigDto.code == "CraneUsage" }?.value ?: "",
-                packageCost = list?.find { masterConfigDto -> masterConfigDto.code == "PackageCost" }?.value ?: "",
-                otherCostInformation = list?.find { masterConfigDto -> masterConfigDto.code == "OtherInfo" }?.value ?: "",
+                travelCost = list?.find { masterConfigDto -> masterConfigDto.code.code == "TravelCost" }?.value ?: "",
+                craneUsage = list?.find { masterConfigDto -> masterConfigDto.code.code == "CraneUsage" }?.value ?: "",
+                packageCost = list?.find { masterConfigDto -> masterConfigDto.code.code == "PackageCost" }?.value ?: "",
+                otherCostInformation = list?.find { masterConfigDto -> masterConfigDto.code.code == "OtherInfo" }?.value ?: "",
             )
         }
 

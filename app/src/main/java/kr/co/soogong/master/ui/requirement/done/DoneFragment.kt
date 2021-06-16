@@ -14,7 +14,7 @@ import kr.co.soogong.master.ui.requirement.done.DoneViewModel.Companion.ASK_FOR_
 import kr.co.soogong.master.ui.requirement.done.DoneViewModel.Companion.ASK_FOR_REVIEW_SUCCEEDED
 import kr.co.soogong.master.ui.requirement.done.DoneViewModel.Companion.BADGE_UPDATE
 import kr.co.soogong.master.uihelper.requirment.RequirementsBadge
-import kr.co.soogong.master.uihelper.requirment.action.ActionViewHelper
+import kr.co.soogong.master.uihelper.requirment.action.view.ViewEstimateActivityHelper
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
@@ -43,17 +43,16 @@ class DoneFragment : BaseFragment<FragmentRequirementDoneBinding>(
             lifecycleOwner = viewLifecycleOwner
 
             doneList.adapter = DoneAdapter(
-                cardClickListener = { keycode, estimationStatus ->
+                cardClickListener = { requirementId ->
                     startActivity(
-                        ActionViewHelper.getIntent(
+                        ViewEstimateActivityHelper.getIntent(
                             requireContext(),
-                            keycode,
-                            estimationStatus
+                            requirementId,
                         )
                     )
                 },
-                reviewButtonClick = { keycode ->
-                    viewModel.askForReview(estimationId = keycode)
+                reviewButtonClick = { requirementId ->
+                    viewModel.askForReview(requirementId = requirementId)
                 }
             )
 

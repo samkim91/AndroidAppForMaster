@@ -96,7 +96,7 @@
                         android:layout_marginEnd="20dp"
                         android:ellipsize="end"
                         android:lines="1"
-                        android:text="@{vm.estimation.address}"
+                        android:text="@{vm.requirement.address}"
                         android:textColor="@color/primary_text_color"
                         app:layout_constrainedWidth="true"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -115,7 +115,7 @@
                         android:layout_marginEnd="20dp"
                         android:ellipsize="end"
                         android:lines="1"
-                        android:text="@{vm.estimation.project}"
+                        android:text="@{vm.requirement.projectName}"
                         android:textColor="@color/primary_text_color"
                         app:layout_constrainedWidth="true"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -134,7 +134,7 @@
                         android:textColor="@color/tertiary_text_color"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/type"
-                        bind:start_date="@{vm.estimation.createdAt}"
+                        bind:start_date="@{vm.requirement.createdAt}"
                         tools:text="최초 요청일 : 2021.01.11 - 13:20" />
 
                     <androidx.appcompat.widget.AppCompatImageView
@@ -160,7 +160,8 @@
                         android:textColor="@color/text_basic_color"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/thin_line2"
-                        bind:visible="@{vm.estimation.additionalInfo}" />
+                         />
+<!--                    todo bind:visible="@{vm.requirement.additionalInfo}"-->
 
                     <LinearLayout
                         android:id="@+id/custom_frame"
@@ -185,7 +186,7 @@
                         android:textColor="@color/text_primary_color"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/custom_frame"
-                        bind:visible="@{vm.estimation.images}" />
+                        bind:visible="@{vm.requirement.images}" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/photo_list"
@@ -199,8 +200,8 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/photo_title"
                         app:spanCount="4"
-                        bind:photo_list="@{vm.estimation.images}"
-                        bind:visible="@{vm.estimation.images}" />
+                        bind:photo_list="@{vm.requirement.images}"
+                        bind:visible="@{vm.requirement.images}" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

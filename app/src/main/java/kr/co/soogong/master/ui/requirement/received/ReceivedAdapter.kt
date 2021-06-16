@@ -2,7 +2,6 @@ package kr.co.soogong.master.ui.requirement.received
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
-import kr.co.soogong.master.data.model.requirement.EstimationStatus
 import kr.co.soogong.master.data.model.requirement.RequirementCard
 import kr.co.soogong.master.ui.requirement.card.RequirementCardDiffUtil
 import kr.co.soogong.master.ui.requirement.card.EstimationCardViewHolder
@@ -10,7 +9,7 @@ import kr.co.soogong.master.ui.requirement.card.RequirementCardViewHolderHelper
 import kr.co.soogong.master.utility.extension.dp
 
 class ReceivedAdapter(
-    private val cardClickListener: (String, EstimationStatus) -> Unit
+    private val cardClickListener: (Int) -> Unit
 ) : ListAdapter<RequirementCard, EstimationCardViewHolder>(RequirementCardDiffUtil()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         RequirementCardViewHolderHelper.create(parent, viewType)

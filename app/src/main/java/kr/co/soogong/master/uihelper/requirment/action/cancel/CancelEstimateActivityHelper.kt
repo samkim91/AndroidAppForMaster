@@ -7,21 +7,21 @@ import kr.co.soogong.master.ui.requirement.action.cancel.CancelEstimateActivity
 
 object CancelEstimateActivityHelper {
     private const val EXTRA_BUNDLE_KEY = "CANCEL_ESTIMATE_BUNDLE_KEY"
-    private const val EXTRA_STRING_KEY = "CANCEL_ESTIMATE_EXTRA_STRING_KEY"
+    private const val EXTRA_INT_KEY = "CANCEL_ESTIMATE_EXTRA_INT_KEY"
 
 
-    fun getIntent(context: Context, keycode: String): Intent {
+    fun getIntent(context: Context, requirementId: Int): Intent {
         return Intent(context, CancelEstimateActivity::class.java).apply {
             putExtra(EXTRA_BUNDLE_KEY, Bundle().apply {
-                putString(EXTRA_STRING_KEY, keycode)
+                putInt(EXTRA_INT_KEY, requirementId)
             })
         }
     }
 
-    fun getEstimationId(intent: Intent): String {
-        return intent.getBundleExtra(EXTRA_BUNDLE_KEY)?.getString(
-            EXTRA_STRING_KEY, ""
-        ) ?: ""
+    fun getEstimationId(intent: Intent): Int {
+        return intent.getBundleExtra(EXTRA_BUNDLE_KEY)?.getInt(
+            EXTRA_INT_KEY, 0
+        ) ?: 0
     }
 
 

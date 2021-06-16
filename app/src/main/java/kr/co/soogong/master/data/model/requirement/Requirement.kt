@@ -10,9 +10,7 @@ import kr.co.soogong.master.utility.extension.getNullable
 import java.util.*
 
 @Parcelize
-@Entity(tableName = "Requirement")
 data class Requirement(
-    @PrimaryKey
     @SerializedName("keycode")
     val keycode: String,
 

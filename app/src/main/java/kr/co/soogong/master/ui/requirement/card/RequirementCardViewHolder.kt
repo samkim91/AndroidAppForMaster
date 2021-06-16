@@ -5,24 +5,23 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ViewHolderRequirementItemBinding
-import kr.co.soogong.master.data.model.requirement.EstimationStatus
 import kr.co.soogong.master.data.model.requirement.RequirementCard
 
+// Requirement Card viewHolder 들의 추상클래스
 abstract class EstimationCardViewHolder(
     open val binding: ViewHolderRequirementItemBinding,
 ) : RecyclerView.ViewHolder(binding.root) {
-
     open fun binding(
         requirementCard: RequirementCard,
-        cardClickListener: ((keycode: String, status: EstimationStatus) -> Unit),
-        leftButtonClickListener: ((keycode: String, phoneNumber: String) -> Unit)? = null,
-        rightButtonClickListener: ((String) -> Unit)? = null,
+        cardClickListener: ((requirementId: Int) -> Unit),
+        leftButtonClickListener: ((requirementId: Int, extraInfo: Any) -> Unit)? = null,
+        rightButtonClickListener: ((requirementId: Int) -> Unit)? = null,
     ) {
         with(binding) {
             data = requirementCard
 
             setCardClickListener {
-                cardClickListener(requirementCard.keyCode, requirementCard.status)
+                cardClickListener(requirementCard.id)
             }
 
             executePendingBindings()
@@ -31,15 +30,14 @@ abstract class EstimationCardViewHolder(
 }
 
 // 견적요청 상태
-class RequestViewHolder(
+class RequestedViewHolder(
     override val binding: ViewHolderRequirementItemBinding,
 ) : EstimationCardViewHolder(binding) {
-
     override fun binding(
         requirementCard: RequirementCard,
-        cardClickListener: ((String, EstimationStatus) -> Unit),
-        leftButtonClickListener: ((String, String) -> Unit)?,
-        rightButtonClickListener: ((String) -> Unit)?,
+        cardClickListener: ((requirementId: Int) -> Unit),
+        leftButtonClickListener: ((requirementId: Int, extraInfo: Any) -> Unit)?,
+        rightButtonClickListener: ((requirementId: Int) -> Unit)?,
     ) {
         with(binding) {
             data = requirementCard
@@ -48,7 +46,7 @@ class RequestViewHolder(
             endTime.setEndDate(requirementCard.createdAt)
 
             setCardClickListener {
-                cardClickListener(requirementCard.keyCode, requirementCard.status)
+                cardClickListener(requirementCard.id)
             }
 
             executePendingBindings()
@@ -57,25 +55,25 @@ class RequestViewHolder(
 }
 
 // 매칭대기 상태
-class WaitingViewHolder(
+class EstimatedViewHolder(
     override val binding: ViewHolderRequirementItemBinding,
 ) : EstimationCardViewHolder(binding) {
     override fun binding(
         requirementCard: RequirementCard,
-        cardClickListener: ((String, EstimationStatus) -> Unit),
-        leftButtonClickListener: ((String, String) -> Unit)?,
-        rightButtonClickListener: ((String) -> Unit)?,
+        cardClickListener: ((requirementId: Int) -> Unit),
+        leftButtonClickListener: ((requirementId: Int, extraInfo: Any) -> Unit)?,
+        rightButtonClickListener: ((requirementId: Int) -> Unit)?,
     ) {
         with(binding) {
             data = requirementCard
 
             myAmount.visibility = View.VISIBLE
-            myAmount.setAmount(requirementCard.status, requirementCard.transmissions)
+            myAmount.setAmount(requirementCard.status, requirementCard.estimation.price.toString())
 
             waitingLabel.visibility = View.VISIBLE
 
             setCardClickListener {
-                cardClickListener(requirementCard.keyCode, requirementCard.status)
+                cardClickListener(requirementCard.id)
             }
 
             executePendingBindings()
@@ -84,36 +82,36 @@ class WaitingViewHolder(
 }
 
 // 시공진행중 상태
-class ProgressViewHolder(
+class RepairingViewHolder(
     override val binding: ViewHolderRequirementItemBinding,
 ) : EstimationCardViewHolder(binding) {
     override fun binding(
         requirementCard: RequirementCard,
-        cardClickListener: ((String, EstimationStatus) -> Unit),
-        leftButtonClickListener: ((String, String) -> Unit)?,
-        rightButtonClickListener: ((String) -> Unit)?,
+        cardClickListener: ((requirementId: Int) -> Unit),
+        leftButtonClickListener: ((requirementId: Int, extraInfo: Any) -> Unit)?,
+        rightButtonClickListener: ((requirementId: Int) -> Unit)?,
     ) {
         with(binding) {
             data = requirementCard
 
             myAmount.visibility = View.VISIBLE
-            myAmount.setAmount(requirementCard.status, requirementCard.transmissions)
+            myAmount.setAmount(requirementCard.status, requirementCard.estimation.price.toString())
 
             callButton.visibility = View.VISIBLE
             doneButton.visibility = View.VISIBLE
 
             setCardClickListener {
-                cardClickListener(requirementCard.keyCode, requirementCard.status)
+                cardClickListener(requirementCard.id)
             }
 
             // TODO.. 첫 전화인지, 아닌지에 따라 버튼의 UI를 변경해줘야햠. Figma 참고
             callButton.setOnClickListener {
                 // Todo.. Requirement card가 phoneNum을 포함해야함.
-                leftButtonClickListener?.invoke(requirementCard.keyCode, "requirementCard.phoneNum")
+                leftButtonClickListener?.invoke(requirementCard.id, requirementCard.tel)
             }
 
             doneButton.setOnClickListener {
-                rightButtonClickListener?.invoke(requirementCard.keyCode)
+                rightButtonClickListener?.invoke(requirementCard.id)
             }
 
             executePendingBindings()
@@ -122,14 +120,14 @@ class ProgressViewHolder(
 }
 
 // 고객완료요청 상태
-class CustomDoneViewHolder(
+class RequestFinishViewHolder(
     override val binding: ViewHolderRequirementItemBinding,
 ) : EstimationCardViewHolder(binding) {
     override fun binding(
         requirementCard: RequirementCard,
-        cardClickListener: ((String, EstimationStatus) -> Unit),
-        leftButtonClickListener: ((String, String) -> Unit)?,
-        rightButtonClickListener: ((String) -> Unit)?,
+        cardClickListener: ((requirementId: Int) -> Unit),
+        leftButtonClickListener: ((requirementId: Int, extraInfo: Any) -> Unit)?,
+        rightButtonClickListener: ((requirementId: Int) -> Unit)?,
     ) {
         with(binding) {
             data = requirementCard
@@ -137,11 +135,11 @@ class CustomDoneViewHolder(
             doneButton.visibility = View.VISIBLE
 
             setCardClickListener {
-                cardClickListener(requirementCard.keyCode, requirementCard.status)
+                cardClickListener(requirementCard.id)
             }
 
             doneButton.setOnClickListener {
-                rightButtonClickListener?.invoke(requirementCard.keyCode)
+                rightButtonClickListener?.invoke(requirementCard.id)
             }
 
             executePendingBindings()
@@ -155,21 +153,21 @@ class DoneViewHolder(
 ) : EstimationCardViewHolder(binding) {
     override fun binding(
         requirementCard: RequirementCard,
-        cardClickListener: ((String, EstimationStatus) -> Unit),
-        leftButtonClickListener: ((String, String) -> Unit)?,
-        rightButtonClickListener: ((String) -> Unit)?,
+        cardClickListener: ((requirementId: Int) -> Unit),
+        leftButtonClickListener: ((requirementId: Int, extraInfo: Any) -> Unit)?,
+        rightButtonClickListener: ((requirementId: Int) -> Unit)?,
     ) {
         with(binding) {
             data = requirementCard
 
             setCardClickListener {
-                cardClickListener(requirementCard.keyCode, requirementCard.status)
+                cardClickListener(requirementCard.id)
             }
 
             reviewButton.visibility = View.VISIBLE
 
             reviewButton.setOnClickListener {
-                rightButtonClickListener?.invoke(requirementCard.keyCode)
+                rightButtonClickListener?.invoke(requirementCard.id)
             }
             // Todo.. review 요청이 이미 완료된 상태라면, Disabled button으로 변경하고, "리뷰 요청을 완료했어요!"로 문구룰 바꿔야함.
             if(requirementCard.status.equals("askedReview")){
@@ -184,14 +182,14 @@ class DoneViewHolder(
 }
 
 // 평가완료 상태
-class FinalViewHolder(
+class ClosedViewHolder(
     override val binding: ViewHolderRequirementItemBinding,
 ) : EstimationCardViewHolder(binding) {
     override fun binding(
         requirementCard: RequirementCard,
-        cardClickListener: ((String, EstimationStatus) -> Unit),
-        leftButtonClickListener: ((String, String) -> Unit)?,
-        rightButtonClickListener: ((String) -> Unit)?,
+        cardClickListener: ((requirementId: Int) -> Unit),
+        leftButtonClickListener: ((requirementId: Int, extraInfo: Any) -> Unit)?,
+        rightButtonClickListener: ((requirementId: Int) -> Unit)?,
     ) {
         with(binding) {
             data = requirementCard
@@ -205,10 +203,10 @@ class FinalViewHolder(
                 )
             )
             myAmount.visibility = View.VISIBLE
-            myAmount.setAmount(requirementCard.status, requirementCard.transmissions)
+            myAmount.setAmount(requirementCard.status, requirementCard.estimation.price.toString())
 
             setCardClickListener {
-                cardClickListener(requirementCard.keyCode, requirementCard.status)
+                cardClickListener(requirementCard.id)
             }
 
             executePendingBindings()
@@ -217,14 +215,14 @@ class FinalViewHolder(
 }
 
 // 시공취소 상태
-class CancelViewHolder(
+class CanceledViewHolder(
     override val binding: ViewHolderRequirementItemBinding,
 ) : EstimationCardViewHolder(binding) {
     override fun binding(
         requirementCard: RequirementCard,
-        cardClickListener: ((String, EstimationStatus) -> Unit),
-        leftButtonClickListener: ((String, String) -> Unit)?,
-        rightButtonClickListener: ((String) -> Unit)?,
+        cardClickListener: ((requirementId: Int) -> Unit),
+        leftButtonClickListener: ((requirementId: Int, extraInfo: Any) -> Unit)?,
+        rightButtonClickListener: ((requirementId: Int) -> Unit)?,
     ) {
         with(binding) {
             data = requirementCard
@@ -239,7 +237,7 @@ class CancelViewHolder(
             )
 
             setCardClickListener {
-                cardClickListener(requirementCard.keyCode, requirementCard.status)
+                cardClickListener(requirementCard.id)
             }
 
             executePendingBindings()

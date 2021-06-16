@@ -9,15 +9,15 @@ object WriteEstimateActivityHelper {
     const val BUNDLE_KEY = "WRITE_ESTIMATION_BUNDLE_KEY"
     const val EXTRA_STRING_KEY = "WRITE_ESTIMATION_EXTRA_STRING_KEY"
 
-    fun getIntent(context: Context, keycode: String): Intent {
+    fun getIntent(context: Context, id: Int): Intent {
         return Intent(context, WriteEstimateActivity::class.java).apply {
             putExtra(BUNDLE_KEY, Bundle().apply {
-                putString(EXTRA_STRING_KEY, keycode)
+                putInt(EXTRA_STRING_KEY, id)
             })
         }
     }
 
-    fun getEstimationId(intent: Intent): String {
-        return intent.getBundleExtra(BUNDLE_KEY)?.getString(EXTRA_STRING_KEY, "") ?: ""
+    fun getEstimationId(intent: Intent): Int {
+        return intent.getBundleExtra(BUNDLE_KEY)?.getInt(EXTRA_STRING_KEY, 0) ?: 0
     }
 }
