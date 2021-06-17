@@ -3,14 +3,14 @@ package kr.co.soogong.master.uihelper.requirment.action.write
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import kr.co.soogong.master.ui.requirement.action.write.WriteEstimateActivity
+import kr.co.soogong.master.ui.requirement.action.write.WriteEstimationActivity
 
 object WriteEstimateActivityHelper {
     const val BUNDLE_KEY = "WRITE_ESTIMATION_BUNDLE_KEY"
     const val EXTRA_STRING_KEY = "WRITE_ESTIMATION_EXTRA_STRING_KEY"
 
     fun getIntent(context: Context, id: Int): Intent {
-        return Intent(context, WriteEstimateActivity::class.java).apply {
+        return Intent(context, WriteEstimationActivity::class.java).apply {
             putExtra(BUNDLE_KEY, Bundle().apply {
                 putInt(EXTRA_STRING_KEY, id)
             })

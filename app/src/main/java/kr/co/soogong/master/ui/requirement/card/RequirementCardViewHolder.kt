@@ -14,7 +14,7 @@ abstract class EstimationCardViewHolder(
     open fun binding(
         requirementCard: RequirementCard,
         cardClickListener: ((requirementId: Int) -> Unit),
-        leftButtonClickListener: ((requirementId: Int, extraInfo: Any) -> Unit)? = null,
+        leftButtonClickListener: ((requirementId: Int, extraInfo: Any?) -> Unit)? = null,
         rightButtonClickListener: ((requirementId: Int) -> Unit)? = null,
     ) {
         with(binding) {
@@ -36,7 +36,7 @@ class RequestedViewHolder(
     override fun binding(
         requirementCard: RequirementCard,
         cardClickListener: ((requirementId: Int) -> Unit),
-        leftButtonClickListener: ((requirementId: Int, extraInfo: Any) -> Unit)?,
+        leftButtonClickListener: ((requirementId: Int, extraInfo: Any?) -> Unit)?,
         rightButtonClickListener: ((requirementId: Int) -> Unit)?,
     ) {
         with(binding) {
@@ -61,14 +61,14 @@ class EstimatedViewHolder(
     override fun binding(
         requirementCard: RequirementCard,
         cardClickListener: ((requirementId: Int) -> Unit),
-        leftButtonClickListener: ((requirementId: Int, extraInfo: Any) -> Unit)?,
+        leftButtonClickListener: ((requirementId: Int, extraInfo: Any?) -> Unit)?,
         rightButtonClickListener: ((requirementId: Int) -> Unit)?,
     ) {
         with(binding) {
             data = requirementCard
 
             myAmount.visibility = View.VISIBLE
-            myAmount.setAmount(requirementCard.status, requirementCard.estimation.price.toString())
+            myAmount.setAmount(requirementCard.status, requirementCard.estimation?.price.toString())
 
             waitingLabel.visibility = View.VISIBLE
 
@@ -88,14 +88,14 @@ class RepairingViewHolder(
     override fun binding(
         requirementCard: RequirementCard,
         cardClickListener: ((requirementId: Int) -> Unit),
-        leftButtonClickListener: ((requirementId: Int, extraInfo: Any) -> Unit)?,
+        leftButtonClickListener: ((requirementId: Int, extraInfo: Any?) -> Unit)?,
         rightButtonClickListener: ((requirementId: Int) -> Unit)?,
     ) {
         with(binding) {
             data = requirementCard
 
             myAmount.visibility = View.VISIBLE
-            myAmount.setAmount(requirementCard.status, requirementCard.estimation.price.toString())
+            myAmount.setAmount(requirementCard.status, requirementCard.estimation?.price.toString())
 
             callButton.visibility = View.VISIBLE
             doneButton.visibility = View.VISIBLE
@@ -126,7 +126,7 @@ class RequestFinishViewHolder(
     override fun binding(
         requirementCard: RequirementCard,
         cardClickListener: ((requirementId: Int) -> Unit),
-        leftButtonClickListener: ((requirementId: Int, extraInfo: Any) -> Unit)?,
+        leftButtonClickListener: ((requirementId: Int, extraInfo: Any?) -> Unit)?,
         rightButtonClickListener: ((requirementId: Int) -> Unit)?,
     ) {
         with(binding) {
@@ -154,7 +154,7 @@ class DoneViewHolder(
     override fun binding(
         requirementCard: RequirementCard,
         cardClickListener: ((requirementId: Int) -> Unit),
-        leftButtonClickListener: ((requirementId: Int, extraInfo: Any) -> Unit)?,
+        leftButtonClickListener: ((requirementId: Int, extraInfo: Any?) -> Unit)?,
         rightButtonClickListener: ((requirementId: Int) -> Unit)?,
     ) {
         with(binding) {
@@ -188,7 +188,7 @@ class ClosedViewHolder(
     override fun binding(
         requirementCard: RequirementCard,
         cardClickListener: ((requirementId: Int) -> Unit),
-        leftButtonClickListener: ((requirementId: Int, extraInfo: Any) -> Unit)?,
+        leftButtonClickListener: ((requirementId: Int, extraInfo: Any?) -> Unit)?,
         rightButtonClickListener: ((requirementId: Int) -> Unit)?,
     ) {
         with(binding) {
@@ -203,7 +203,7 @@ class ClosedViewHolder(
                 )
             )
             myAmount.visibility = View.VISIBLE
-            myAmount.setAmount(requirementCard.status, requirementCard.estimation.price.toString())
+            myAmount.setAmount(requirementCard.status, requirementCard.estimation?.price.toString())
 
             setCardClickListener {
                 cardClickListener(requirementCard.id)
@@ -221,7 +221,7 @@ class CanceledViewHolder(
     override fun binding(
         requirementCard: RequirementCard,
         cardClickListener: ((requirementId: Int) -> Unit),
-        leftButtonClickListener: ((requirementId: Int, extraInfo: Any) -> Unit)?,
+        leftButtonClickListener: ((requirementId: Int, extraInfo: Any?) -> Unit)?,
         rightButtonClickListener: ((requirementId: Int) -> Unit)?,
     ) {
         with(binding) {

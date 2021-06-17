@@ -3,6 +3,7 @@ package kr.co.soogong.master.ui.requirement.done
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import kr.co.soogong.master.data.model.requirement.RequirementCard
+import kr.co.soogong.master.data.model.requirement.RequirementStatus
 import kr.co.soogong.master.ui.requirement.card.RequirementCardDiffUtil
 import kr.co.soogong.master.ui.requirement.card.EstimationCardViewHolder
 import kr.co.soogong.master.ui.requirement.card.RequirementCardViewHolderHelper
@@ -22,5 +23,6 @@ class DoneAdapter(
         holder.binding(getItem(position), cardClickListener, null, reviewButtonClick)
     }
 
-    override fun getItemViewType(position: Int) = currentList[position].status.toInt()
+    override fun getItemViewType(position: Int): Int =
+        RequirementStatus.getStatus(currentList[position].status).toInt()
 }

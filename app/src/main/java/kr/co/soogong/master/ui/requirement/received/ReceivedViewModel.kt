@@ -11,7 +11,6 @@ import kr.co.soogong.master.data.model.requirement.RequirementStatus
 import kr.co.soogong.master.domain.usecase.auth.GetMasterApprovalUseCase
 import kr.co.soogong.master.domain.usecase.requirement.GetReceivedRequirementListUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
-import kr.co.soogong.master.utility.ListLiveData
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -24,7 +23,9 @@ class ReceivedViewModel @Inject constructor(
     val isApprovedMaster: LiveData<Boolean>
         get() = _isApprovedMaster
 
-    val requirementList = ListLiveData<RequirementCard>()
+    private val _receivedList = MutableLiveData<List<RequirementCard>>()
+    val receivedList: LiveData<List<RequirementCard>>
+        get() = _receivedList
 
     fun requestList() {
         Timber.tag(TAG).d("requestList: ")
@@ -33,12 +34,14 @@ class ReceivedViewModel @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
                 onSuccess = {
-                    requirementList.addAll(it)
-                    sendEvent(BADGE_UPDATE, requirementList.getItemCount())
+                    Timber.tag(TAG).d("requestList successfully: $it")
+                    _receivedList.postValue(it)
+                    sendEvent(BADGE_UPDATE, it.count())
                 },
                 onError = {
+                    Timber.tag(TAG).d("requestList failed: $it")
                     setAction(REQUEST_LIST_FAILED)
-                    requirementList.clear()
+                    _receivedList.postValue(emptyList())
                 }
             ).addToDisposable()
     }
@@ -51,22 +54,21 @@ class ReceivedViewModel @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
                 onSuccess = { list ->
-                    requirementList.clear()
                     when (index) {
                         1 -> {
-                            requirementList.addAll(list.filter { it.status == RequirementStatus.Requested.toString() })
+                            _receivedList.postValue(list.filter { it.status == RequirementStatus.Requested.toString() })
                         }
                         2 -> {
-                            requirementList.addAll(list.filter { it.status == RequirementStatus.Estimated.toString() })
+                            _receivedList.postValue(list.filter { it.status == RequirementStatus.Estimated.toString() })
                         }
                         else -> {
-                            requirementList.addAll(list)
+                            _receivedList.postValue(list)
                         }
                     }
                 },
                 onError = {
                     setAction(REQUEST_LIST_FAILED)
-                    requirementList.clear()
+                    _receivedList.postValue(emptyList())
                 }
             ).addToDisposable()
     }

@@ -1,6 +1,7 @@
 package kr.co.soogong.master.data.dto.requirement.estimation
 
 import android.os.Parcelable
+import com.google.gson.JsonObject
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 import java.util.*

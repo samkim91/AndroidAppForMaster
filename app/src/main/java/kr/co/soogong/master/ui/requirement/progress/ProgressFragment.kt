@@ -14,8 +14,8 @@ import kr.co.soogong.master.ui.dialog.popup.CustomDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData.Companion.getCallToCustomerDialogData
 import kr.co.soogong.master.uihelper.requirment.CallToCustomerHelper
 import kr.co.soogong.master.uihelper.requirment.RequirementsBadge
-import kr.co.soogong.master.uihelper.requirment.action.end.EndEstimateActivityHelper
-import kr.co.soogong.master.uihelper.requirment.action.view.ViewEstimateActivityHelper
+import kr.co.soogong.master.uihelper.requirment.action.end.EndRepairActivityHelper
+import kr.co.soogong.master.uihelper.requirment.action.view.ViewRequirementActivityHelper
 import kr.co.soogong.master.utility.EventObserver
 import timber.log.Timber
 
@@ -45,7 +45,7 @@ class ProgressFragment : BaseFragment<FragmentRequirementProgressBinding>(
             progressList.adapter = ProgressAdapter(
                 cardClickListener = { requirementId ->
                     startActivity(
-                        ViewEstimateActivityHelper.getIntent(
+                        ViewRequirementActivityHelper.getIntent(
                             requireContext(),
                             requirementId,
                         )
@@ -64,7 +64,7 @@ class ProgressFragment : BaseFragment<FragmentRequirementProgressBinding>(
                     dialog.show(childFragmentManager, dialog.tag)
                 },
                 doneButtonClick = { requirementId ->
-                    startActivity(EndEstimateActivityHelper.getIntent(requireContext(), requirementId))
+                    startActivity(EndRepairActivityHelper.getIntent(requireContext(), requirementId))
                 }
             )
 

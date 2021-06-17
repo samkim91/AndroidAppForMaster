@@ -2,7 +2,7 @@ package kr.co.soogong.master.ui.profile.edit.withcard
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
-import kr.co.soogong.master.data.model.profile.IEditProfileWithCard
+import kr.co.soogong.master.data.model.profile.IPortfolio
 import kr.co.soogong.master.data.model.profile.Portfolio
 import kr.co.soogong.master.data.model.profile.PriceByProject
 import kr.co.soogong.master.ui.profile.edit.withcard.portfolio.EditProfileWithCardViewHolder
@@ -13,7 +13,7 @@ import kr.co.soogong.master.ui.profile.edit.withcard.EditProfileWithCardViewHold
 class EditProfileWithCardAdapter(
     private val leftButtonClickListener: (id: Int) -> Unit,
     private val rightButtonClickListener: (id: Int) -> Unit
-) : ListAdapter<IEditProfileWithCard, EditProfileWithCardViewHolder>(EditProfileWithCardDiffUtil()) {
+) : ListAdapter<IPortfolio, EditProfileWithCardViewHolder>(EditProfileWithCardDiffUtil()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         EditProfileWithCardViewHolderHelper.create(parent, viewType)
 

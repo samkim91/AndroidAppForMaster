@@ -5,7 +5,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import kr.co.soogong.master.domain.AppDatabase
-import kr.co.soogong.master.data.dao.estimation.EstimationDao
+import kr.co.soogong.master.data.dao.requirement.estimation.EstimationDao
 import kr.co.soogong.master.data.dao.profile.MasterDao
 import kr.co.soogong.master.data.dao.profile.ProfileDao
 import kr.co.soogong.master.data.dao.requirement.RequirementDao

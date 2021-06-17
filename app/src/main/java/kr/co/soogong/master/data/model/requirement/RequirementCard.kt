@@ -6,21 +6,21 @@ import java.util.*
 
 data class RequirementCard(
     val id: Int,
-    val token: String,
-    val project: String,
-    val address: String,
-    val status: String,
-    val tel: String,
-    val closedAt: Date,
-    val createdAt: Date,
-    val updatedAt: Date,
-    val introductionText: String,
-    val estimation: EstimationDto
+    val token: String?,
+    val project: String?,
+    val address: String?,
+    val status: String?,
+    val tel: String?,
+    val closedAt: String?,
+    val createdAt: String?,
+    val updatedAt: String?,
+    val introductionText: String?,
+    val estimation: EstimationDto?
 ) {
     companion object {
         fun fromRequirementDto(requirementDto: RequirementDto): RequirementCard {
             return RequirementCard(
-                id = requirementDto.id,
+                id = requirementDto.requirementId,
                 token = requirementDto.token,
                 project = requirementDto.projectName,
                 address = requirementDto.address,

@@ -2,7 +2,7 @@ package kr.co.soogong.master.data.model.profile
 
 import java.util.*
 
-interface IEditProfileWithCard {
+interface IPortfolio {
     val id: Int
     val title: String
     val description: String

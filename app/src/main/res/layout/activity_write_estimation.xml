@@ -8,7 +8,7 @@
     <data>
         <variable
             name="vm"
-            type="kr.co.soogong.master.ui.requirement.action.write.WriteEstimateViewModel" />
+            type="kr.co.soogong.master.ui.requirement.action.write.WriteEstimationViewModel" />
     </data>
 
     <LinearLayout
@@ -134,7 +134,7 @@
                         android:textColor="@color/tertiary_text_color"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/type"
-                        bind:start_date="@{vm.requirement.createdAt}"
+                        android:text='@{"최초 요청일 : "+vm.requirement.createdAt}'
                         tools:text="최초 요청일 : 2021.01.11 - 13:20" />
 
                     <androidx.appcompat.widget.AppCompatImageView

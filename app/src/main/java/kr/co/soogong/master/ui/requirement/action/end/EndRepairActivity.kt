@@ -1,7 +1,5 @@
 package kr.co.soogong.master.ui.requirement.action.end
 
-import android.icu.text.DecimalFormat
-import android.icu.text.SimpleDateFormat
 import android.icu.util.Calendar
 import android.os.Bundle
 import android.widget.CalendarView
@@ -9,23 +7,25 @@ import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.model.requirement.EndEstimate
-import kr.co.soogong.master.databinding.ActivityEndEstimateBinding
+import kr.co.soogong.master.databinding.ActivityEndRepairBinding
 import kr.co.soogong.master.ui.base.BaseActivity
-import kr.co.soogong.master.ui.requirement.action.end.EndEstimateViewModel.Companion.END_ESTIMATE_FAILED
-import kr.co.soogong.master.ui.requirement.action.end.EndEstimateViewModel.Companion.END_ESTIMATE_SUCCEEDED
-import kr.co.soogong.master.uihelper.requirment.action.end.EndEstimateActivityHelper
+import kr.co.soogong.master.ui.requirement.action.end.EndRepairViewModel.Companion.END_REPAIR_FAILED
+import kr.co.soogong.master.ui.requirement.action.end.EndRepairViewModel.Companion.END_REPAIR_SUCCESSFULLY
+import kr.co.soogong.master.uihelper.requirment.action.end.EndRepairActivityHelper
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
+import java.text.DecimalFormat
+import java.text.SimpleDateFormat
 
 @AndroidEntryPoint
-class EndEstimateActivity : BaseActivity<ActivityEndEstimateBinding>(
-    R.layout.activity_end_estimate
+class EndRepairActivity : BaseActivity<ActivityEndRepairBinding>(
+    R.layout.activity_end_repair
 ) {
-    val estimationId: Int by lazy {
-        EndEstimateActivityHelper.getEstimationId(intent)
+    val requirementId: Int by lazy {
+        EndRepairActivityHelper.getRequirementId(intent)
     }
-    private val viewModel: EndEstimateViewModel by viewModels()
+    private val viewModel: EndRepairViewModel by viewModels()
 
     private var actualDate = Calendar.getInstance()
 
@@ -41,7 +41,7 @@ class EndEstimateActivity : BaseActivity<ActivityEndEstimateBinding>(
 
         bind {
             vm = viewModel
-            lifecycleOwner = this@EndEstimateActivity
+            lifecycleOwner = this@EndRepairActivity
 
             with(actionBar) {
                 title.text = getString(R.string.end_estimate_title)
@@ -56,7 +56,7 @@ class EndEstimateActivity : BaseActivity<ActivityEndEstimateBinding>(
                     }
 
                     viewModel.endRepair(
-                        estimationId = estimationId,
+                        estimationId = requirementId,
                         endEstimate = EndEstimate(
                             actualPrice = amount.text,
                             actualDate = SimpleDateFormat("yyyy-MM-dd").format(actualDate.time)
@@ -87,13 +87,13 @@ class EndEstimateActivity : BaseActivity<ActivityEndEstimateBinding>(
     private fun registerEventObserve() {
         Timber.tag(TAG).d("registerEventObserve: ")
 
-        viewModel.action.observe(this@EndEstimateActivity, EventObserver { event ->
+        viewModel.action.observe(this@EndRepairActivity, EventObserver { event ->
             when (event) {
-                END_ESTIMATE_SUCCEEDED -> {
+                END_REPAIR_SUCCESSFULLY -> {
                     toast(getString(R.string.end_estimate_succeeded))
                     super.onBackPressed()
                 }
-                END_ESTIMATE_FAILED -> {
+                END_REPAIR_FAILED -> {
                     toast(getString(R.string.send_message_failed))
                 }
             }
@@ -101,6 +101,6 @@ class EndEstimateActivity : BaseActivity<ActivityEndEstimateBinding>(
     }
 
     companion object {
-        private const val TAG = "EndEstimateActivity"
+        private const val TAG = "EndRepairActivity"
     }
 }

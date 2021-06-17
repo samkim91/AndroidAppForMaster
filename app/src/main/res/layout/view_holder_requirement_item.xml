@@ -136,7 +136,7 @@
             android:textColor="@color/tertiary_text_color"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/type"
-            bind:start_date="@{data.createdAt}"
+            android:text='@{"최초 요청일 : "+data.createdAt}'
             tools:text="최초 요청일 : 2021.01.11 - 13:20" />
 
         <androidx.appcompat.widget.AppCompatImageView

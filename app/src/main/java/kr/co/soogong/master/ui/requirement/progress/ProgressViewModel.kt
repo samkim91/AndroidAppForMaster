@@ -1,5 +1,7 @@
 package kr.co.soogong.master.ui.requirement.progress
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
@@ -18,7 +20,9 @@ class ProgressViewModel @Inject constructor(
     private val getProgressEstimationListUseCase: GetProgressEstimationListUseCase,
     private val callToCustomerUseCase: CallToCustomerUseCase,
 ) : BaseViewModel() {
-    val progressList = ListLiveData<RequirementCard>()
+    private val _progressList = MutableLiveData<List<RequirementCard>>()
+    val progressList: LiveData<List<RequirementCard>>
+        get() = _progressList
 
     fun requestList() {
         Timber.tag(TAG).d("requestList: ")
@@ -27,12 +31,14 @@ class ProgressViewModel @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
                 onSuccess = {
-                    progressList.addAll(it)
-                    sendEvent(BADGE_UPDATE, progressList.getItemCount())
+                    Timber.tag(TAG).d("requestList successfully: $it")
+                    _progressList.postValue(it)
+                    sendEvent(BADGE_UPDATE, it.count())
                 },
                 onError = {
+                    Timber.tag(TAG).d("requestList failed: $it")
                     setAction(REQUEST_LIST_FAILED)
-                    progressList.clear()
+                    _progressList.postValue(emptyList())
                 }
             ).addToDisposable()
     }
@@ -45,22 +51,21 @@ class ProgressViewModel @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
                 onSuccess = { list ->
-                    progressList.clear()
                     when (index) {
                         1 -> {
-                            progressList.addAll(list.filter { it.status == RequirementStatus.Repairing.toString() })
+                            _progressList.postValue(list.filter { it.status == RequirementStatus.Repairing.toString() })
                         }
                         2 -> {
-                            progressList.addAll(list.filter { it.status == RequirementStatus.RequestFinish.toString() })
+                            _progressList.postValue(list.filter { it.status == RequirementStatus.RequestFinish.toString() })
                         }
                         else -> {
-                            progressList.addAll(list)
+                            _progressList.postValue(list)
                         }
                     }
                 },
                 onError = {
                     setAction(REQUEST_LIST_FAILED)
-                    progressList.clear()
+                    _progressList.postValue(emptyList())
                 }
             ).addToDisposable()
     }

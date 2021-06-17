@@ -8,24 +8,23 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
-import kr.co.soogong.master.uihelper.image.ImageViewActivityHelper
-import kr.co.soogong.master.uihelper.requirment.action.write.WriteEstimateActivityHelper
 import kr.co.soogong.master.data.model.requirement.EstimationMessage
-import kr.co.soogong.master.databinding.ActivityWriteEstimateBinding
+import kr.co.soogong.master.databinding.ActivityWriteEstimationBinding
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.ui.dialog.popup.CustomDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData.Companion.getCancelSendingEstimationDialogData
 import kr.co.soogong.master.ui.image.RectangleImageAdapter
-import kr.co.soogong.master.ui.requirement.action.write.WriteEstimateViewModel.Companion.SEND_MESSAGE_FAILED
-import kr.co.soogong.master.ui.requirement.action.write.WriteEstimateViewModel.Companion.SEND_MESSAGE_SUCCESSFULLY
+import kr.co.soogong.master.ui.requirement.action.write.WriteEstimationViewModel.Companion.SEND_MESSAGE_FAILED
+import kr.co.soogong.master.ui.requirement.action.write.WriteEstimationViewModel.Companion.SEND_MESSAGE_SUCCESSFULLY
+import kr.co.soogong.master.uihelper.image.ImageViewActivityHelper
+import kr.co.soogong.master.uihelper.requirment.action.write.WriteEstimateActivityHelper
 import kr.co.soogong.master.utility.EventObserver
-import kr.co.soogong.master.utility.extension.addAdditionInfoView
 import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
 
 @AndroidEntryPoint
-class WriteEstimateActivity : BaseActivity<ActivityWriteEstimateBinding>(
-    R.layout.activity_write_estimate
+class WriteEstimationActivity : BaseActivity<ActivityWriteEstimationBinding>(
+    R.layout.activity_write_estimation
 ) {
     private val requirementId: Int by lazy {
         WriteEstimateActivityHelper.getEstimationId(intent)
@@ -33,7 +32,7 @@ class WriteEstimateActivity : BaseActivity<ActivityWriteEstimateBinding>(
 
     // TODO.. custom widget의 2way binding을 적용해야함.
 
-    private val viewModel: WriteEstimateViewModel by viewModels()
+    private val viewModel: WriteEstimationViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,13 +45,13 @@ class WriteEstimateActivity : BaseActivity<ActivityWriteEstimateBinding>(
         Timber.tag(TAG).d("initLayout: ")
         bind {
             vm = viewModel
-            lifecycleOwner = this@WriteEstimateActivity
+            lifecycleOwner = this@WriteEstimationActivity
 
             with(actionBar) {
                 title.text = getString(R.string.write_estimate_title)
                 backButton.setOnClickListener {
                     val dialog = CustomDialog(
-                        getCancelSendingEstimationDialogData(this@WriteEstimateActivity),
+                        getCancelSendingEstimationDialogData(this@WriteEstimationActivity),
                         yesClick = {
                             super.onBackPressed()
                         },
@@ -65,7 +64,7 @@ class WriteEstimateActivity : BaseActivity<ActivityWriteEstimateBinding>(
                 button.setOnClickListener {
                     lateinit var priceInNumber: String
 
-                    if (viewModel.transmissionType == "통합견적") {
+                    if (viewModel.estimationType == "통합견적") {
                         if (amount.text.isNullOrEmpty() || amount.text.toString().replace(",", "")
                                 .toLong() < 10000
                         ) {
@@ -114,7 +113,7 @@ class WriteEstimateActivity : BaseActivity<ActivityWriteEstimateBinding>(
                 cardClickListener = { position ->
                     startActivity(
                         ImageViewActivityHelper.getIntent(
-                            this@WriteEstimateActivity,
+                            this@WriteEstimationActivity,
                             viewModel.requirement.value?.images,
                             position
                         )
@@ -127,13 +126,13 @@ class WriteEstimateActivity : BaseActivity<ActivityWriteEstimateBinding>(
                     filterOption1.id -> {
                         amount.visibility = View.VISIBLE
                         requestDetail.visibility = View.GONE
-                        viewModel.transmissionType = "통합견적"
+                        viewModel.estimationType = "통합견적"
                     }
 
                     filterOption2.id -> {
                         amount.visibility = View.GONE
                         requestDetail.visibility = View.VISIBLE
-                        viewModel.transmissionType = "항목별견적"
+                        viewModel.estimationType = "항목별견적"
                         totalAmount.setEditTextBackground(
                             ResourcesCompat.getDrawable(
                                 resources,
@@ -226,6 +225,6 @@ class WriteEstimateActivity : BaseActivity<ActivityWriteEstimateBinding>(
     }
 
     companion object {
-        private const val TAG = "WriteEstimateActivity"
+        private const val TAG = "WriteEstimationActivity"
     }
 }
