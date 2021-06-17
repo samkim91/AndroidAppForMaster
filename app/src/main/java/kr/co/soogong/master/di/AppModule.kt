@@ -22,6 +22,7 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
+import java.util.ArrayList
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
@@ -68,7 +69,13 @@ class AppModule {
     @Provides
     @Singleton
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
-        val gson = GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create()
+        val gson = GsonBuilder()
+//            .registerTypeAdapter(ArrayList::class.java, NonNullListDeserializer<Any>())
+//            .registerTypeAdapter(String::class.java, StringTypeAdapter())
+//            .registerTypeAdapter(Double::class.java, DoubleTypeAdapter())
+//            .registerTypeAdapter(Int::class.java, IntTypeAdapter())
+//            .registerTypeAdapter(Boolean::class.java, BooleanTypeAdapter())
+            .setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create()
 
         return Retrofit.Builder()
             .client(okHttpClient)

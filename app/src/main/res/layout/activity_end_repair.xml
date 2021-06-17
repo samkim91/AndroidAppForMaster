@@ -6,7 +6,7 @@
 
         <variable
             name="vm"
-            type="kr.co.soogong.master.ui.requirement.action.end.EndEstimateViewModel" />
+            type="kr.co.soogong.master.ui.requirement.action.end.EndRepairViewModel" />
     </data>
 
     <LinearLayout

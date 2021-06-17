@@ -1,25 +1,24 @@
 package kr.co.soogong.master.network.requirement
 
+import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import io.reactivex.Single
 import kr.co.soogong.master.contract.HttpContract
 import kr.co.soogong.master.data.dto.Response
 import kr.co.soogong.master.data.dto.requirement.RequirementDto
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface RequirementInterface {
-    @GET(HttpContract.GET_ESTIMATION_V2)
-    suspend fun getEstimationList(@Path("branch_keycode") branchKeycode: String?): JsonObject
-
     @GET(HttpContract.GET_REQUIREMENT_LIST)
-    fun getRequirementList(@Query("map") map: HashMap<String, Any>): Single<List<RequirementDto>>
+    fun getRequirementList(@Query("masterId") masterId : Int, @Query("statusArray") statusArray: List<String>): Single<List<RequirementDto>>
 
-    @GET(HttpContract.ACCEPT_ESTIMATION)
-    fun getProgressList(@Query("branch_keycode") auth: String?): Single<List<JsonObject>>
+    @GET(HttpContract.GET_REQUIREMENT)
+    fun getRequirement(@Query("id") id : Int): Single<RequirementDto>
+
+
+
+
+
 
     @POST(HttpContract.REFUSE_ESTIMATION)
     fun refuseToEstimate(@Body body: HashMap<String, Any?>): Single<Response>

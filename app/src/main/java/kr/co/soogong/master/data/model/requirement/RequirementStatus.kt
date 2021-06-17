@@ -71,7 +71,7 @@ sealed class RequirementStatus {
     }
 
     companion object {
-        fun getStatus(status: String): RequirementStatus =
+        fun getStatus(status: String?): RequirementStatus =
             when (status) {
                 // 견적탭
                 "Requested" -> Requested

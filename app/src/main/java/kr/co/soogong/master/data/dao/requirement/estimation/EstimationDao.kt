@@ -1,4 +1,4 @@
-package kr.co.soogong.master.data.dao.estimation
+package kr.co.soogong.master.data.dao.requirement.estimation
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao

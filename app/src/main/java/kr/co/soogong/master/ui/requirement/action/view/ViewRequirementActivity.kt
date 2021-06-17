@@ -7,20 +7,20 @@ import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.model.requirement.Message
 import kr.co.soogong.master.data.model.requirement.RequirementStatus
-import kr.co.soogong.master.databinding.ActivityViewEstimateBinding
+import kr.co.soogong.master.databinding.ActivityViewRequirementBinding
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.ui.dialog.popup.CustomDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData.Companion.getRefuseEstimateDialogData
 import kr.co.soogong.master.ui.image.RectangleImageAdapter
-import kr.co.soogong.master.ui.requirement.action.view.ViewEstimateViewModel.Companion.ASK_FOR_REVIEW_SUCCESSFULLY
-import kr.co.soogong.master.ui.requirement.action.view.ViewEstimateViewModel.Companion.CALL_TO_CUSTOMER_SUCCESSFULLY
-import kr.co.soogong.master.ui.requirement.action.view.ViewEstimateViewModel.Companion.REFUSE_TO_ESTIMATE_SUCCESSFULLY
-import kr.co.soogong.master.ui.requirement.action.view.ViewEstimateViewModel.Companion.REQUEST_FAILED
+import kr.co.soogong.master.ui.requirement.action.view.ViewRequirementViewModel.Companion.ASK_FOR_REVIEW_SUCCESSFULLY
+import kr.co.soogong.master.ui.requirement.action.view.ViewRequirementViewModel.Companion.CALL_TO_CUSTOMER_SUCCESSFULLY
+import kr.co.soogong.master.ui.requirement.action.view.ViewRequirementViewModel.Companion.REFUSE_TO_ESTIMATE_SUCCESSFULLY
+import kr.co.soogong.master.ui.requirement.action.view.ViewRequirementViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.uihelper.image.ImageViewActivityHelper
 import kr.co.soogong.master.uihelper.requirment.CallToCustomerHelper
 import kr.co.soogong.master.uihelper.requirment.action.cancel.CancelEstimateActivityHelper
-import kr.co.soogong.master.uihelper.requirment.action.end.EndEstimateActivityHelper
-import kr.co.soogong.master.uihelper.requirment.action.view.ViewEstimateActivityHelper
+import kr.co.soogong.master.uihelper.requirment.action.end.EndRepairActivityHelper
+import kr.co.soogong.master.uihelper.requirment.action.view.ViewRequirementActivityHelper
 import kr.co.soogong.master.uihelper.requirment.action.write.WriteEstimateActivityHelper
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.extension.addTransmissionMessage
@@ -29,14 +29,14 @@ import timber.log.Timber
 import java.util.*
 
 @AndroidEntryPoint
-class ViewEstimateActivity : BaseActivity<ActivityViewEstimateBinding>(
-    R.layout.activity_view_estimate
+class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
+    R.layout.activity_view_requirement
 ) {
     private val requirementId: Int by lazy {
-        ViewEstimateActivityHelper.getEstimationId(intent)
+        ViewRequirementActivityHelper.getRequirementId(intent)
     }
 
-    private val viewModel: ViewEstimateViewModel by viewModels()
+    private val viewModel: ViewRequirementViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +49,7 @@ class ViewEstimateActivity : BaseActivity<ActivityViewEstimateBinding>(
         Timber.tag(TAG).d("initLayout: ")
         bind {
             vm = viewModel
-            lifecycleOwner = this@ViewEstimateActivity
+            lifecycleOwner = this@ViewRequirementActivity
 
             with(actionBar) {
                 backButton.setOnClickListener {
@@ -61,7 +61,7 @@ class ViewEstimateActivity : BaseActivity<ActivityViewEstimateBinding>(
                 cardClickListener = { position ->
                     startActivity(
                         ImageViewActivityHelper.getIntent(
-                            this@ViewEstimateActivity,
+                            this@ViewRequirementActivity,
                             viewModel.requirement.value?.images,
                             position
                         )
@@ -73,7 +73,7 @@ class ViewEstimateActivity : BaseActivity<ActivityViewEstimateBinding>(
             acceptButton.setOnClickListener {
                 startActivity(
                     WriteEstimateActivityHelper.getIntent(
-                        this@ViewEstimateActivity,
+                        this@ViewRequirementActivity,
                         requirementId
                     )
                 )
@@ -81,7 +81,7 @@ class ViewEstimateActivity : BaseActivity<ActivityViewEstimateBinding>(
 
             // 견적을 내기 어려워요 버튼
             refuseButton.setOnClickListener {
-                val dialog = CustomDialog(getRefuseEstimateDialogData(this@ViewEstimateActivity),
+                val dialog = CustomDialog(getRefuseEstimateDialogData(this@ViewRequirementActivity),
                     yesClick = {
                         viewModel.refuseToEstimate()
                     },
@@ -95,7 +95,7 @@ class ViewEstimateActivity : BaseActivity<ActivityViewEstimateBinding>(
             cancelButton.setOnClickListener {
                 startActivity(
                     CancelEstimateActivityHelper.getIntent(
-                        this@ViewEstimateActivity,
+                        this@ViewRequirementActivity,
                         requirementId
                     )
                 )
@@ -104,8 +104,8 @@ class ViewEstimateActivity : BaseActivity<ActivityViewEstimateBinding>(
             // 시공 완료 버튼
             doneButton.setOnClickListener {
                 startActivity(
-                    EndEstimateActivityHelper.getIntent(
-                        this@ViewEstimateActivity,
+                    EndRepairActivityHelper.getIntent(
+                        this@ViewRequirementActivity,
                         requirementId
                     )
                 )
@@ -119,7 +119,7 @@ class ViewEstimateActivity : BaseActivity<ActivityViewEstimateBinding>(
     }
 
     private fun registerEventObserve() {
-        viewModel.requirement.observe(this@ViewEstimateActivity, { requirement ->
+        viewModel.requirement.observe(this@ViewRequirementActivity, { requirement ->
 
             bind {
                 actionBar.title.text =
@@ -222,7 +222,7 @@ class ViewEstimateActivity : BaseActivity<ActivityViewEstimateBinding>(
 
 
 
-        viewModel.action.observe(this@ViewEstimateActivity, EventObserver { event ->
+        viewModel.action.observe(this@ViewRequirementActivity, EventObserver { event ->
             when (event) {
                 REFUSE_TO_ESTIMATE_SUCCESSFULLY -> {
                     toast(getString(R.string.view_estimate_on_refuse_to_estimate_success))
@@ -258,7 +258,7 @@ class ViewEstimateActivity : BaseActivity<ActivityViewEstimateBinding>(
             binding.customFrameForEstimationDetail.removeAllViews()
             addTransmissionMessage(
                 binding.customFrameForEstimationDetail,
-                this@ViewEstimateActivity,
+                this@ViewRequirementActivity,
                 message
             )
         }
@@ -271,7 +271,7 @@ class ViewEstimateActivity : BaseActivity<ActivityViewEstimateBinding>(
             binding.customFrameForDoneDetail.removeAllViews()
             addTransmissionMessage(
                 binding.customFrameForDoneDetail,
-                this@ViewEstimateActivity,
+                this@ViewRequirementActivity,
                 message
             )
         }

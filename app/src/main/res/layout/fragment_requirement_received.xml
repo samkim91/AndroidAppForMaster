@@ -24,7 +24,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            bind:received_list="@{vm.requirementList}"
+            bind:received_list="@{vm.receivedList}"
             tools:listitem="@layout/view_holder_requirement_item" />
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -37,7 +37,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/filter"
             app:layout_constraintVertical_chainStyle="packed"
-            bind:visible="@{vm.requirementList.empty}" />
+            bind:visible="@{vm.receivedList.empty}" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/empty_text"
@@ -51,7 +51,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/empty_icon"
-            bind:visible="@{vm.requirementList.empty}" />
+            bind:visible="@{vm.receivedList.empty}" />
 
         <RadioGroup
             android:id="@+id/filter"

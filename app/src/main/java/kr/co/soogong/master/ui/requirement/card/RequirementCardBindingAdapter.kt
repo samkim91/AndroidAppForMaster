@@ -12,64 +12,70 @@ import kr.co.soogong.master.ui.widget.AmountView
 import java.util.*
 
 @BindingAdapter("bind:start_date")
-fun TextView.setStartDate(date: Date?) {
+fun TextView.setStartDate(date: String?) {
     val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd - hh:mm")
-    text = context.getString(
-        R.string.requirements_card_start_time,
-        simpleDateFormat.format(date ?: System.currentTimeMillis())
-    )
+    date?.let {
+        text = context.getString(
+            R.string.requirements_card_start_time,
+            simpleDateFormat.format(it)
+        )
+    }
 }
 
-@BindingAdapter("bind:start_date")
-fun TextView.setStartDate(createdAt: Long?) {
-    val date = Date(createdAt ?: System.currentTimeMillis())
-    val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd - hh:mm")
-    text = context.getString(
-        R.string.requirements_card_start_time,
-        simpleDateFormat.format(date)
-    )
-}
-
-@BindingAdapter("bind:end_date")
-fun TextView.setEndDate(date: Date?) {
-    val c = Calendar.getInstance()
-    c.time = date ?: Date(System.currentTimeMillis())
-    c.add(Calendar.DATE, 1)
-    val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd - hh:mm")
-    text = context.getString(R.string.requirements_card_end_time, simpleDateFormat.format(c.time))
-}
+//@BindingAdapter("bind:start_date")
+//fun TextView.setStartDate(createdAt: Long?) {
+//    val date = Date(createdAt)
+//    val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd - hh:mm")
+//    text = context.getString(
+//        R.string.requirements_card_start_time,
+//        simpleDateFormat.format(date)
+//    )
+//}
 
 @BindingAdapter("bind:end_date")
-fun TextView.setEndDate(createdAt: Long?) {
-    val date = Date(createdAt ?: System.currentTimeMillis())
-    val c = Calendar.getInstance()
-    c.time = date
-    c.add(Calendar.DATE, 1)
+fun TextView.setEndDate(date: String?) {
     val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd - hh:mm")
-    text = context.getString(R.string.requirements_card_end_time, simpleDateFormat.format(c.time))
+    val c = Calendar.getInstance()
+    date?.let {
+        c.time = simpleDateFormat.parse(it)
+        c.add(Calendar.DATE, 1)
+        text = context.getString(R.string.requirements_card_end_time, simpleDateFormat.format(c.time))
+    }
 }
 
-@BindingAdapter("bind:end_date_2")
-fun TextView.setEndDate2(date: Date?) {
-    val c = Calendar.getInstance()
-    c.time = date ?: Date(System.currentTimeMillis())
-    c.add(Calendar.DATE, 1)
-    val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd - hh:mm")
-    text = simpleDateFormat.format(c.time)
-}
+//@BindingAdapter("bind:end_date")
+//fun TextView.setEndDate(createdAt: Long?) {
+//    val date = Date(createdAt ?: System.currentTimeMillis())
+//    val c = Calendar.getInstance()
+//    c.time = date
+//    c.add(Calendar.DATE, 1)
+//    val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd - hh:mm")
+//    text = context.getString(R.string.requirements_card_end_time, simpleDateFormat.format(c.time))
+//}
 
 @BindingAdapter("bind:end_date_2")
-fun TextView.setEndDate2(createdAt: Long?) {
-    val date = Date(createdAt ?: System.currentTimeMillis())
-    val c = Calendar.getInstance()
-    c.time = date
-    c.add(Calendar.DATE, 1)
+fun TextView.setEndDate2(date: String?) {
     val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd - hh:mm")
-    text = simpleDateFormat.format(c.time)
+    val c = Calendar.getInstance()
+    date?.let {
+        c.time = simpleDateFormat.parse(it)
+        c.add(Calendar.DATE, 1)
+        text = simpleDateFormat.format(c.time)
+    }
 }
+//
+//@BindingAdapter("bind:end_date_2")
+//fun TextView.setEndDate2(createdAt: Long?) {
+//    val date = Date(createdAt ?: System.currentTimeMillis())
+//    val c = Calendar.getInstance()
+//    c.time = date
+//    c.add(Calendar.DATE, 1)
+//    val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd - hh:mm")
+//    text = simpleDateFormat.format(c.time)
+//}
 
 @BindingAdapter("bind:requirementStatus")
-fun AmountView.setAmount(status: String, price: String) {
+fun AmountView.setAmount(status: String?, price: String?) {
     title = when (status) {
         "Estimated", "Repairing" -> {
             context.getString(R.string.requirements_card_amount_title)

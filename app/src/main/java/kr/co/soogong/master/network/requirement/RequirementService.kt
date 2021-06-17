@@ -3,7 +3,9 @@ package kr.co.soogong.master.network.requirement
 import io.reactivex.Single
 import kr.co.soogong.master.data.dto.Response
 import kr.co.soogong.master.data.dto.requirement.RequirementDto
-import kr.co.soogong.master.data.model.requirement.*
+import kr.co.soogong.master.data.model.requirement.CancelEstimate
+import kr.co.soogong.master.data.model.requirement.EndEstimate
+import kr.co.soogong.master.data.model.requirement.EstimationMessage
 import retrofit2.Retrofit
 import javax.inject.Inject
 
@@ -12,41 +14,14 @@ class RequirementService @Inject constructor(
 ) {
     private val requirementInterface = retrofit.create(RequirementInterface::class.java)
 
-    fun getRequirementList(masterId: Int): Single<List<RequirementDto>> {
-        val query = HashMap<String, Any>()
-        query["masterId"] = masterId
-        query["statusArray"] =
-            listOf(RequirementStatus.Requested.toString(), RequirementStatus.Estimated.toString())
-
-        return requirementInterface.getRequirementList(query)
+    fun getRequirementList(masterId: Int, statusArray: List<String>): Single<List<RequirementDto>> {
+        return requirementInterface.getRequirementList(masterId, statusArray)
     }
 
-    fun getProgressList(masterId: Int): Single<List<RequirementDto>> {
-        val query = HashMap<String, Any>()
-        query["masterId"] = masterId
-        query["statusArray"] = listOf(
-            RequirementStatus.Repairing.toString(),
-            RequirementStatus.RequestFinish.toString()
-        )
-
-        return requirementInterface.getRequirementList(query)
+    fun getRequirement(id: Int): Single<RequirementDto> {
+        return requirementInterface.getRequirement(id)
     }
 
-    fun getDoneList(masterId: Int): Single<List<RequirementDto>> {
-        val query = HashMap<String, Any>()
-        query["masterId"] = masterId
-        query["statusArray"] = listOf(
-            RequirementStatus.Done.toString(),
-            RequirementStatus.Closed.toString(),
-            RequirementStatus.CanceledByClient.toString(),
-            RequirementStatus.CanceledByMaster.toString(),
-            RequirementStatus.Canceled.toString(),
-            RequirementStatus.Impossible.toString(),
-            RequirementStatus.Failed.toString(),
-        )
-
-        return requirementInterface.getRequirementList(query)
-    }
 
     fun refuseToEstimate(branchKeycode: String?, id: Int): Single<Response> {
         val data = HashMap<String, Any?>()

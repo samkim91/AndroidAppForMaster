@@ -15,7 +15,7 @@ data class PriceByProject(
     override val createdAt: Date?,
     override val updatedAt: Date?,
     val price: String,
-) : Parcelable, IEditProfileWithCard {
+) : Parcelable, IPortfolio {
     companion object {
         fun fromPortfolioDto(list: List<PortfolioDto>?): List<PriceByProject> {
             val ret = mutableListOf<PriceByProject>()

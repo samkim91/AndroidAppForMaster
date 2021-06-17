@@ -1,8 +1,6 @@
 package kr.co.soogong.master.ui.requirement.action.view
 
-import android.icu.text.SimpleDateFormat
-import android.icu.util.Calendar
-import android.os.Bundle
+import   android.os.Bundle
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
@@ -16,13 +14,13 @@ import kr.co.soogong.master.domain.usecase.requirement.CallToCustomerUseCase
 import kr.co.soogong.master.domain.usecase.requirement.GetRequirementUseCase
 import kr.co.soogong.master.domain.usecase.requirement.RefuseToEstimateUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
-import kr.co.soogong.master.uihelper.requirment.action.view.ViewEstimateActivityHelper.BUNDLE_KEY_ESTIMATION_KEY
-import kr.co.soogong.master.uihelper.requirment.action.view.ViewEstimateActivityHelper.EXTRA_KEY_BUNDLE
+import kr.co.soogong.master.uihelper.requirment.action.view.ViewRequirementActivityHelper.BUNDLE_KEY_REQUIREMENT_KEY
+import kr.co.soogong.master.uihelper.requirment.action.view.ViewRequirementActivityHelper.EXTRA_KEY_BUNDLE
 import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
-class ViewEstimateViewModel @Inject constructor(
+class ViewRequirementViewModel @Inject constructor(
     val getRequirementUseCase: GetRequirementUseCase,
     private val refuseToEstimateUseCase: RefuseToEstimateUseCase,
     private val callToCustomerUseCase: CallToCustomerUseCase,
@@ -32,7 +30,7 @@ class ViewEstimateViewModel @Inject constructor(
 
     // Note : activity에서 viewModel로 데이터 넘기는 법. savedStateHandle에서 가져온다.
     private val requirementId =
-        savedStateHandle.get<Bundle>(EXTRA_KEY_BUNDLE)?.getInt(BUNDLE_KEY_ESTIMATION_KEY)!!
+        savedStateHandle.get<Bundle>(EXTRA_KEY_BUNDLE)?.getInt(BUNDLE_KEY_REQUIREMENT_KEY)!!
 
     private val _requirement = MutableLiveData<RequirementDto>()
     val requirement: LiveData<RequirementDto>
@@ -44,9 +42,13 @@ class ViewEstimateViewModel @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
                 onSuccess = {
+                    Timber.tag(TAG).d("init successfully: $it")
                     _requirement.value = it
                 },
-                onError = { setAction(REQUEST_FAILED) }
+                onError = {
+                    Timber.tag(TAG).d("init failed: $it")
+                    setAction(REQUEST_FAILED)
+                }
             ).addToDisposable()
     }
 
@@ -56,11 +58,11 @@ class ViewEstimateViewModel @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
                 onSuccess = {
-                    Timber.tag(TAG).d("refuseToEstimate is successful: " + it)
+                    Timber.tag(TAG).d("refuseToEstimate is successful: $it")
                     setAction(REFUSE_TO_ESTIMATE_SUCCESSFULLY)
                 },
                 onError = {
-                    Timber.tag(TAG).w("refuseToEstimate is failed: " + it)
+                    Timber.tag(TAG).w("refuseToEstimate is failed: $it")
                     setAction(REQUEST_FAILED)
                 }).addToDisposable()
     }
@@ -104,7 +106,7 @@ class ViewEstimateViewModel @Inject constructor(
     }
 
     companion object {
-        private const val TAG = "ViewEstimateViewModel"
+        private const val TAG = "ViewRequirementViewModel"
         const val REFUSE_TO_ESTIMATE_SUCCESSFULLY = "REFUSE_TO_ESTIMATE_SUCCESSFULLY"
         const val CALL_TO_CUSTOMER_SUCCESSFULLY = "CALL_TO_CUSTOMER_SUCCESSFULLY"
         const val ASK_FOR_REVIEW_SUCCESSFULLY = "ASK_FOR_REVIEW_SUCCESSFULLY"

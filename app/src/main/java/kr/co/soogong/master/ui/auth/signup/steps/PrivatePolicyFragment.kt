@@ -46,6 +46,8 @@ class PrivatePolicyFragment : BaseFragment<FragmentSignUpPrivatePolicyBinding>(
                 viewModel.marketingPush.value = status
             }
 
+            // TODO: 2021/06/17 이용약관 및 개인정보처리방침 버튼 및 화면 띄우기
+
             defaultButton.setOnClickListener {
                 viewModel.agreedPrivacyPolicy.observe(viewLifecycleOwner, {
                     alertPrivacyPolicyAgreementRequired.isVisible = !it

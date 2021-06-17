@@ -1,5 +1,7 @@
 package kr.co.soogong.master.ui.requirement.done
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
@@ -18,7 +20,9 @@ class DoneViewModel @Inject constructor(
     private val getDoneEstimationListUseCase: GetDoneEstimationListUseCase,
     private val askForReviewUseCase: AskForReviewUseCase,
 ) : BaseViewModel() {
-    val doneList = ListLiveData<RequirementCard>()
+    private val _doneList = MutableLiveData<List<RequirementCard>>()
+    val doneList: LiveData<List<RequirementCard>>
+        get() = _doneList
 
     fun requestList() {
         Timber.tag(TAG).d("requestList: ")
@@ -27,12 +31,14 @@ class DoneViewModel @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
                 onSuccess = {
-                    doneList.addAll(it)
-                    sendEvent(BADGE_UPDATE, doneList.getItemCount())
+                    Timber.tag(TAG).d("requestList successfully: $it")
+                    _doneList.postValue(it)
+                    sendEvent(BADGE_UPDATE, it.count())
                 },
                 onError = {
+                    Timber.tag(TAG).d("requestList failed: $it")
                     setAction(REQUEST_LIST_FAILED)
-                    doneList.clear()
+                    _doneList.postValue(emptyList())
                 }
             ).addToDisposable()
     }
@@ -45,25 +51,24 @@ class DoneViewModel @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
                 onSuccess = { list ->
-                    doneList.clear()
                     when (index) {
                         1 -> {
-                            doneList.addAll(list.filter { it.status == RequirementStatus.Done.toString() })
+                            _doneList.postValue(list.filter { it.status == RequirementStatus.Done.toString() })
                         }
                         2 -> {
-                            doneList.addAll(list.filter { it.status == RequirementStatus.Closed.toString() })
+                            _doneList.postValue(list.filter { it.status == RequirementStatus.Closed.toString() })
                         }
                         3 -> {
-                            doneList.addAll(list.filter { it.status == RequirementStatus.Canceled.toString() || it.status == RequirementStatus.CanceledByClient.toString() || it.status == RequirementStatus.CanceledByMaster.toString() })
+                            _doneList.postValue(list.filter { it.status == RequirementStatus.Canceled.toString() || it.status == RequirementStatus.CanceledByClient.toString() || it.status == RequirementStatus.CanceledByMaster.toString() })
                         }
                         else -> {
-                            doneList.addAll(list)
+                            _doneList.postValue(list)
                         }
                     }
                 },
                 onError = {
                     setAction(REQUEST_LIST_FAILED)
-                    doneList.clear()
+                    _doneList.postValue(emptyList())
                 }
             ).addToDisposable()
     }

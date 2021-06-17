@@ -5,10 +5,11 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="kr.co.soogong.master.data.model.requirement.RequirementStatus"/>
 
         <variable
             name="vm"
-            type="kr.co.soogong.master.ui.requirement.action.view.ViewEstimateViewModel" />
+            type="kr.co.soogong.master.ui.requirement.action.view.ViewRequirementViewModel" />
     </data>
 
     <LinearLayout
@@ -54,8 +55,9 @@
                         android:textColor="@color/color_1FC472"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/banner_image"
-                        android:text="@{vm.requirement.status}"
+
                         tools:text="견적요청" />
+<!--                    todo 상태 추가하기 android:text="@{RequirementStatus.Companion.getStatus(vm.requirement.status).toString()}"-->
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/location"
@@ -105,7 +107,7 @@
                         android:textColor="@color/tertiary_text_color"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/project"
-                        bind:start_date="@{vm.requirement.createdAt}"
+                        android:text='@{"최초 요청일 : "+vm.requirement.createdAt}'
                         tools:text="최초 요청일 : 2021.01.11 - 13:20" />
 
                     <androidx.appcompat.widget.AppCompatImageView
@@ -597,7 +599,7 @@
                     app:layout_constraintEnd_toEndOf="@id/end_time_background"
                     app:layout_constraintStart_toEndOf="@id/end_time_label"
                     app:layout_constraintTop_toTopOf="@id/end_time_background"
-                    bind:end_date_2="@{vm.requirement.createdAt}"
+                    android:text="@{vm.requirement.createdAt}"
                     tools:text="2022.01.11 - 13:20" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -677,7 +679,6 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>

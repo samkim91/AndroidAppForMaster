@@ -16,7 +16,7 @@ data class Portfolio(
     override val updatedAt: Date?,
     val imageBeforeJob: String,
     val imageAfterJob: String,
-) : Parcelable, IEditProfileWithCard {
+) : Parcelable, IPortfolio {
     companion object {
         fun fromPortfolioDto(list: List<PortfolioDto>?): List<Portfolio> {
             val ret = mutableListOf<Portfolio>()

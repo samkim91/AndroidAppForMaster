@@ -4,7 +4,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import kr.co.soogong.master.data.model.profile.IEditProfileWithCard
+import kr.co.soogong.master.data.model.profile.IPortfolio
 import kr.co.soogong.master.domain.usecase.profile.DeletePortfolioUseCase
 import kr.co.soogong.master.domain.usecase.profile.DeletePriceByProjectUseCase
 import kr.co.soogong.master.domain.usecase.profile.GetPortfolioListUseCase
@@ -21,7 +21,7 @@ class EditProfileWithCardViewModel @Inject constructor(
     private val deletePortfolioUseCase: DeletePortfolioUseCase,
     private val deletePriceByProjectUseCase: DeletePriceByProjectUseCase,
 ) : BaseViewModel() {
-    val itemList = ListLiveData<IEditProfileWithCard>()
+    val itemList = ListLiveData<IPortfolio>()
 
     fun requestPortfolioList() {
         Timber.tag(TAG).d("requestPortfolioList: ")

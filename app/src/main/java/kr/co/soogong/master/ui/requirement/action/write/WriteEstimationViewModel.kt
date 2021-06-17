@@ -19,7 +19,7 @@ import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
-class WriteEstimateViewModel @Inject constructor(
+class WriteEstimationViewModel @Inject constructor(
     private val sendEstimationMessageUseCase: SendEstimationMessageUseCase,
     private val getRequirementUseCase: GetRequirementUseCase,
     savedStateHandle: SavedStateHandle
@@ -27,11 +27,15 @@ class WriteEstimateViewModel @Inject constructor(
 
     private val estimationId = savedStateHandle.get<Bundle>(BUNDLE_KEY)?.getInt(EXTRA_STRING_KEY)!!
 
-    var transmissionType: String = "통합견적"
+    var estimationType: String = "통합견적"
 
     private val _requirement = MutableLiveData<RequirementDto>()
     val requirement: LiveData<RequirementDto>
         get() = _requirement
+
+    init {
+
+    }
 
     fun requestRequirement() {
         getRequirementUseCase(estimationId)
@@ -62,7 +66,7 @@ class WriteEstimateViewModel @Inject constructor(
     }
 
     companion object {
-        private const val TAG = "WriteEstimateViewModel"
+        private const val TAG = "WriteEstimationViewModel"
 
         const val SEND_MESSAGE_SUCCESSFULLY = "SEND_MESSAGE_SUCCESSFULLY"
         const val REQUEST_FAILED = "REQUEST_FAILED"
