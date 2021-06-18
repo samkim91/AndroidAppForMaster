@@ -7,6 +7,7 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 import kr.co.soogong.master.data.dto.requirement.estimation.EstimationDto
 import kr.co.soogong.master.data.model.requirement.ImagePath
+import java.util.*
 
 @Parcelize
 @Entity(tableName = "Requirement")
@@ -52,13 +53,13 @@ data class RequirementDto(
     // TODO: 2021/06/18 repair Dto도 추가해야함
 
     @SerializedName("closedAt")
-    val closedAt: String?,
+    val closedAt: Date?,
 
     @SerializedName("createdAt")
-    val createdAt: String?,
+    val createdAt: Date?,
 
     @SerializedName("updatedAt")
-    val updatedAt: String?,
+    val updatedAt: Date?,
 ) : Parcelable {
     companion object {
 

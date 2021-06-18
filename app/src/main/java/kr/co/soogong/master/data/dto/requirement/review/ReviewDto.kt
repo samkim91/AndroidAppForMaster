@@ -4,6 +4,7 @@ import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 import kr.co.soogong.master.data.dto.AttachmentDto
+import java.util.*
 
 @Parcelize
 data class ReviewDto(
@@ -23,10 +24,10 @@ data class ReviewDto(
     val reviewScores: List<ReviewScoreDto>?,
 
     @SerializedName("createdAt")
-    val createdAt: String?,
+    val createdAt: Date?,
 
     @SerializedName("updatedAt")
-    val updatedAt: String?,
+    val updatedAt: Date?,
 ) : Parcelable {
     companion object {
 

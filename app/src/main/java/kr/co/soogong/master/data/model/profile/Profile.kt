@@ -11,15 +11,15 @@ import kr.co.soogong.master.data.dto.profile.MasterDto
 @Parcelize
 @Entity(tableName = "Profile")
 data class Profile(
+    @PrimaryKey
     @SerializedName("id")
     val id: Int,
 
-    @PrimaryKey
     @SerializedName("uid")
-    val uid: String,
+    val uid: String?,
 
     @SerializedName("tel")
-    val tel: String,
+    val tel: String?,
 
     @SerializedName("representativeName")
     val representativeName: String?,
@@ -42,7 +42,7 @@ data class Profile(
     companion object {
         fun fromMasterDto(masterDto: MasterDto): Profile {
             return Profile(
-                id = masterDto.id,
+                id = masterDto.masterId!!,
                 uid = masterDto.uid,
                 tel = masterDto.tel,
                 representativeName = if (!masterDto.shopName.isNullOrEmpty()) masterDto.shopName else masterDto.ownerName,

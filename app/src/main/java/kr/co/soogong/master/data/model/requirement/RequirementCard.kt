@@ -11,9 +11,9 @@ data class RequirementCard(
     val address: String?,
     val status: String?,
     val tel: String?,
-    val closedAt: String?,
-    val createdAt: String?,
-    val updatedAt: String?,
+    val closedAt: Date?,
+    val createdAt: Date?,
+    val updatedAt: Date?,
     val introductionText: String?,
     val estimation: EstimationDto?
 ) {

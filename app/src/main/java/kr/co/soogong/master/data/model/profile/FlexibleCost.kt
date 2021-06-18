@@ -26,10 +26,10 @@ data class FlexibleCost(
 
         fun fromMasterConfigList(list: List<MasterConfigDto>?): FlexibleCost {
             return FlexibleCost(
-                travelCost = list?.find { masterConfigDto -> masterConfigDto.code.code == "TravelCost" }?.value ?: "",
-                craneUsage = list?.find { masterConfigDto -> masterConfigDto.code.code == "CraneUsage" }?.value ?: "",
-                packageCost = list?.find { masterConfigDto -> masterConfigDto.code.code == "PackageCost" }?.value ?: "",
-                otherCostInformation = list?.find { masterConfigDto -> masterConfigDto.code.code == "OtherInfo" }?.value ?: "",
+                travelCost = list?.find { masterConfigDto -> masterConfigDto.code == "TravelCost" }?.value ?: "",
+                craneUsage = list?.find { masterConfigDto -> masterConfigDto.code == "CraneUsage" }?.value ?: "",
+                packageCost = list?.find { masterConfigDto -> masterConfigDto.code == "PackageCost" }?.value ?: "",
+                otherCostInformation = list?.find { masterConfigDto -> masterConfigDto.code == "OtherInfo" }?.value ?: "",
             )
         }
 

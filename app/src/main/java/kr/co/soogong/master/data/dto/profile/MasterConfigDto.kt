@@ -11,19 +11,19 @@ data class MasterConfigDto(
     val id: Int,
 
     @SerializedName("configGroupCode")
-    val configGroupCode: String,
+    val configGroupCode: String?,
+
+    @SerializedName("configGroupName")
+    val configGroupName: String?,
 
     @SerializedName("code")
-    val code: ConfigCodeDto,
+    val code: String?,
+
+    @SerializedName("name")
+    val name: String?,
 
     @SerializedName("value")
-    val value: String,
-
-    @SerializedName("createdAt")
-    val createdAt: Date,
-
-    @SerializedName("updatedAt")
-    val updatedAt: Date,
+    val value: String?,
 ) : Parcelable {
     companion object {
 

@@ -76,7 +76,7 @@ class PhoneNumberFragment : BaseFragment<FragmentSignUpPhoneNumberBinding>(
     }
 
     companion object {
-        private const val TAG = "Step1Fragment"
+        private const val TAG = "PhoneNumberFragment"
 
         fun newInstance(): PhoneNumberFragment {
             return PhoneNumberFragment()

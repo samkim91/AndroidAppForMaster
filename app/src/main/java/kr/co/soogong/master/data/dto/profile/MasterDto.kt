@@ -3,116 +3,114 @@ package kr.co.soogong.master.data.dto.profile
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.google.gson.JsonObject
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 import kotlinx.parcelize.RawValue
+import java.time.LocalDate
 import java.util.*
 
 @Parcelize
 @Entity(tableName = "Master")
 data class MasterDto(
-    @SerializedName("masterId")
-    val id: Int,    // ID
-
     @PrimaryKey
+    @SerializedName("masterId")
+    val masterId: Int?,    // ID
+
     @SerializedName("uid")
-    val uid: String,
+    val uid: String? = null,
 
     @SerializedName("ownerName")
-    val ownerName: String?,
+    val ownerName: String? = null,
 
     @SerializedName("tel")
-    val tel: String,
+    val tel: String? = null,
 
     @SerializedName("safetyNumber")
-    val safetyNumber: String?,
+    val safetyNumber: String? = null,
 
     @SerializedName("email")
-    val email: String?,
+    val email: String? = null,
 
     @SerializedName("roadAddress")
-    val roadAddress: String?,
+    val roadAddress: String? = null,
 
     @SerializedName("detailAddress")
-    val detailAddress: String?,
+    val detailAddress: String? = null,
 
     @SerializedName("latitude")
-    val latitude: Float?,
+    val latitude: Float? = null,
 
     @SerializedName("longitude")
-    val longitude: Float?,
+    val longitude: Float? = null,
 
     @SerializedName("serviceArea")
-    val serviceArea: Int?,
+    val serviceArea: Int? = null,
 
     @SerializedName("subscriptionPlan")
-    val subscriptionPlan: String?,
+    val subscriptionPlan: String? = null,
 
     @SerializedName("public")
-    val isPublic: Boolean,
+    val isPublic: Boolean? = null,
 
+    // TODO: 2021/06/18 이미지 URL이 넘어오도록 해야함
     @SerializedName("profileImageId")
-    val profileImageId: String?,
+    val profileImageId: Int? = null,
+
+    @SerializedName("profileImage")
+    val profileImage: String? = null,
 
     @SerializedName("introduction")
-    val introduction: String?,
+    val introduction: String? = null,
 
     @SerializedName("warrantyPeriod")
-    val warrantyPeriod: Int?,
+    val warrantyPeriod: Int? = null,
 
     @SerializedName("warrantyDescription")
-    val warrantyDescription: String?,
+    val warrantyDescription: String? = null,
 
     @SerializedName("openDate")
-    val openDate: Date?,
+    val openDate: Date? = null,
 
     @SerializedName("businessType")
-    val businessType: String?,
+    val businessType: String? = null,
 
     @SerializedName("businessName")
-    val businessName: String?,
+    val businessName: String? = null,
 
-    @SerializedName("businessRegistImageId")
-    val businessRegistImageId: Int?,
+    // TODO: 2021/06/18 URL이 오는게 맞음.. 변경 필요
+//    @SerializedName("businessRegistImages")
+//    val businessRegistImages: Int?,
 
     @SerializedName("shopName")
-    val shopName: String?,
+    val shopName: String? = null,
 
     @SerializedName("businessNumber")
-    val businessNumber: String?,
+    val businessNumber: String? = null,
 
     @SerializedName("privatePolicy")
-    val privatePolicy: Boolean?,
+    val privatePolicy: Boolean? = null,
 
     @SerializedName("marketingPush")
-    val marketingPush: Boolean?,
+    val marketingPush: Boolean? = null,
 
     @SerializedName("marketingPushAtNight")
-    val marketingPushAtNight: Boolean?,
-
-    @SerializedName("appPush")
-    val appPush: Boolean?,
-
-    @SerializedName("kakaoPush")
-    val kakaoPush: Boolean?,
-
-    @SerializedName("smsPush")
-    val smsPush: Boolean?,
+    val marketingPushAtNight: Boolean? = null,
 
     @SerializedName("masterConfigs")
-    val masterConfigs: @RawValue List<MasterConfigDto>?,
+    val masterConfigs: @RawValue List<MasterConfigDto>? = null,
 
     @SerializedName("masterPortfolios")
-    val masterPortfolios: List<PortfolioDto>?,
+    val masterPortfolios: List<PortfolioDto>? = null,
 
     @SerializedName("projects")
-    val majors: List<MajorDto>?,
+    val majors: List<MajorDto>? = null,
 
     @SerializedName("createdAt")
-    val createdAt: Date,
+    val createdAt: Date? = null,
 
     @SerializedName("updatedAt")
-    val updatedAt: Date,
+    val updatedAt: Date? = null,
 
     ) : Parcelable {
     companion object {

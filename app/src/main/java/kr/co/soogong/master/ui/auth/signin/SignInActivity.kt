@@ -12,7 +12,6 @@ import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
 import dagger.hilt.android.AndroidEntryPoint
-import kr.co.soogong.master.BuildConfig
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ActivitySignInBinding
 import kr.co.soogong.master.ui.auth.signin.SignInViewModel.Companion.CHECK_PHONE_NUMBER_FAILED
@@ -81,6 +80,7 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(
 
             id.setButtonClickListener {
                 if (viewModel.isEnabled.value!!) {
+                    viewModel.certificationCode.postValue("")
                     viewModel.changeEnabled()
                     return@setButtonClickListener
                 }
@@ -94,6 +94,7 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(
             }
 
             requestCertificationCodeAgainText.setOnClickListener {
+                viewModel.certificationCode.postValue("")
                 resendVerificationCode()
             }
 
@@ -207,9 +208,12 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(
         Timber.tag(TAG)
             .d("verifyPhoneNumberWithCode: ${viewModel.storedVerificationId.value}, ${viewModel.certificationCode.value}")
 
-        if(!viewModel.storedVerificationId.value.isNullOrEmpty() && !viewModel.certificationCode.value.isNullOrEmpty()){
+        if (!viewModel.storedVerificationId.value.isNullOrEmpty() && !viewModel.certificationCode.value.isNullOrEmpty()) {
             viewModel.phoneAuthCredential.value =
-                PhoneAuthProvider.getCredential(viewModel.storedVerificationId.value!!, viewModel.certificationCode.value!!)
+                PhoneAuthProvider.getCredential(
+                    viewModel.storedVerificationId.value!!,
+                    viewModel.certificationCode.value!!
+                )
             Timber.tag(TAG).d("getPhoneAuthCredential: ${viewModel.phoneAuthCredential.value}")
             signInWithPhoneAuthCredential()
         }
@@ -225,8 +229,6 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(
                     // Sign in success, update UI with the signed-in user's information
                     Timber.tag(TAG).d("signInWithPhoneAuthCredential successfully: ")
                     viewModel.uid.value = task.result?.user?.uid
-                    viewModel.saveMasterUidInShared()
-                    if(BuildConfig.DEBUG) startActivity(MainActivityHelper.getIntent(this@SignInActivity))
                     viewModel.requestSignIn()
                 } else {
                     // Sign in failed, display a message and update the UI

@@ -3,7 +3,6 @@ package kr.co.soogong.master.data.model.profile
 import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import kr.co.soogong.master.data.model.major.Major
 
 class ProfileConverters {
     @TypeConverter

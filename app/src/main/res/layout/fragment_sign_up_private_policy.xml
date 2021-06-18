@@ -45,7 +45,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/title_widget"
                 app:text='@{"모두 동의합니다. (선택 정보 포함)"}'
-                app:check="@{vm.agreedPrivacyPolicy &amp;&amp; vm.marketingPush}"
+                app:check="@{vm.privacyPolicy &amp;&amp; vm.marketingPush}"
 
                 />
 
@@ -72,7 +72,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/line"
                 app:text='@{"수공의 이용약관 및 개인정보 처리방침에\n동의합니다."}'
-                app:check="@={vm.agreedPrivacyPolicy}"
+                app:check="@={vm.privacyPolicy}"
                 />
 
             <kr.co.soogong.master.ui.widget.TextCheckBox

@@ -1,14 +1,14 @@
 package kr.co.soogong.master.contract
 
 object HttpContract {
-    const val LOCAL_URL = "http://192.168.0.93:8080/"
+    const val LOCAL_URL = "http://192.168.0.50:8080/"
+//    const val LOCAL_URL = "http://192.168.0.93:8080/"
     const val DEV_URL =
         "http://web-backend-springboot-LB-dev-112855016.ap-northeast-2.elb.amazonaws.com/"
     const val PROD_URL = "https://api2.soogong.co.kr/"
 
     //region Auth
     const val MASTER_SIGN_UP = "auth/master-sign-up"
-    const val MASTER_SIGN_IN = "auth/master-find-by-uid"
     const val IS_USER_EXIST = "auth/user-exist"
     const val FCM_UPDATE = "api/v1/branches/update_reg_id"  // TODO: 2021/06/10 무슨 용도인지 알아보고 추가해야함.
     //endregion
@@ -19,8 +19,8 @@ object HttpContract {
     //endregion
 
     //region Requirement
-//    const val GET_REQUIREMENT_LIST = "master/find-all-requirement-by-id"
-    const val GET_REQUIREMENT_LIST = "master/find-requirement-by-id"
+    const val GET_REQUIREMENT_LIST = "master/find-all-requirement-by-id"
+//    const val GET_REQUIREMENT_LIST = "master/find-requirement-by-id"
     const val GET_REQUIREMENT = "master/find-requirement-by-id"
     //endregion
 
