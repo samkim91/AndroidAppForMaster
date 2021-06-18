@@ -13,7 +13,7 @@ interface RequirementInterface {
     fun getRequirementList(@Query("masterId") masterId : Int, @Query("statusArray") statusArray: List<String>): Single<List<RequirementDto>>
 
     @GET(HttpContract.GET_REQUIREMENT)
-    fun getRequirement(@Query("id") id : Int): Single<RequirementDto>
+    fun getRequirement(@Query("requirementId") requirementId : Int, @Query("masterId") masterId: Int): Single<RequirementDto>
 
 
 

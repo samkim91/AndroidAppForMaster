@@ -19,7 +19,8 @@ object HttpContract {
     //endregion
 
     //region Requirement
-    const val GET_REQUIREMENT_LIST = "master/find-all_requirement-by-id"
+//    const val GET_REQUIREMENT_LIST = "master/find-all-requirement-by-id"
+    const val GET_REQUIREMENT_LIST = "master/find-requirement-by-id"
     const val GET_REQUIREMENT = "master/find-requirement-by-id"
     //endregion
 
