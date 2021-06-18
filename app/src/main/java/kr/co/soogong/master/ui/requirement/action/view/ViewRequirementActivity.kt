@@ -18,10 +18,10 @@ import kr.co.soogong.master.ui.requirement.action.view.ViewRequirementViewModel.
 import kr.co.soogong.master.ui.requirement.action.view.ViewRequirementViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.uihelper.image.ImageViewActivityHelper
 import kr.co.soogong.master.uihelper.requirment.CallToCustomerHelper
-import kr.co.soogong.master.uihelper.requirment.action.cancel.CancelEstimateActivityHelper
-import kr.co.soogong.master.uihelper.requirment.action.end.EndRepairActivityHelper
-import kr.co.soogong.master.uihelper.requirment.action.view.ViewRequirementActivityHelper
-import kr.co.soogong.master.uihelper.requirment.action.write.WriteEstimateActivityHelper
+import kr.co.soogong.master.uihelper.requirment.action.CancelEstimationActivityHelper
+import kr.co.soogong.master.uihelper.requirment.action.EndRepairActivityHelper
+import kr.co.soogong.master.uihelper.requirment.action.ViewRequirementActivityHelper
+import kr.co.soogong.master.uihelper.requirment.action.WriteEstimationActivityHelper
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.extension.addTransmissionMessage
 import kr.co.soogong.master.utility.extension.toast
@@ -72,7 +72,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
             // 견적을 보낼래요 버튼
             acceptButton.setOnClickListener {
                 startActivity(
-                    WriteEstimateActivityHelper.getIntent(
+                    WriteEstimationActivityHelper.getIntent(
                         this@ViewRequirementActivity,
                         requirementId
                     )
@@ -94,7 +94,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
             // 취소 됐음 버튼
             cancelButton.setOnClickListener {
                 startActivity(
-                    CancelEstimateActivityHelper.getIntent(
+                    CancelEstimationActivityHelper.getIntent(
                         this@ViewRequirementActivity,
                         requirementId
                     )
@@ -229,11 +229,9 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                     onBackPressed()
                 }
                 CALL_TO_CUSTOMER_SUCCESSFULLY -> {
-                    // Todo.. viewModel.estimation.number가 들어가야함
                     viewModel.requirement.value?.let {
                         startActivity(CallToCustomerHelper.getIntent(it.tel))
                     }
-
                 }
                 ASK_FOR_REVIEW_SUCCESSFULLY -> {
                     changeAskingReviewButton()

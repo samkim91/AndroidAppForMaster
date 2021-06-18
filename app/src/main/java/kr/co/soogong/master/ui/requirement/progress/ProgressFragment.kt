@@ -14,8 +14,8 @@ import kr.co.soogong.master.ui.dialog.popup.CustomDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData.Companion.getCallToCustomerDialogData
 import kr.co.soogong.master.uihelper.requirment.CallToCustomerHelper
 import kr.co.soogong.master.uihelper.requirment.RequirementsBadge
-import kr.co.soogong.master.uihelper.requirment.action.end.EndRepairActivityHelper
-import kr.co.soogong.master.uihelper.requirment.action.view.ViewRequirementActivityHelper
+import kr.co.soogong.master.uihelper.requirment.action.EndRepairActivityHelper
+import kr.co.soogong.master.uihelper.requirment.action.ViewRequirementActivityHelper
 import kr.co.soogong.master.utility.EventObserver
 import timber.log.Timber
 
@@ -55,7 +55,10 @@ class ProgressFragment : BaseFragment<FragmentRequirementProgressBinding>(
                     val dialog = CustomDialog(getCallToCustomerDialogData(requireContext()),
                         yesClick = {
                             // Todo.. 전화한 기록을 더해야함.
-                            viewModel.callToCustomer(estimationId = keycode, phoneNumber = number.toString())
+                            viewModel.callToCustomer(
+                                estimationId = keycode,
+                                phoneNumber = number.toString()
+                            )
                             startActivity(CallToCustomerHelper.getIntent(number.toString()))
                         },
                         noClick = { }
@@ -64,7 +67,12 @@ class ProgressFragment : BaseFragment<FragmentRequirementProgressBinding>(
                     dialog.show(childFragmentManager, dialog.tag)
                 },
                 doneButtonClick = { requirementId ->
-                    startActivity(EndRepairActivityHelper.getIntent(requireContext(), requirementId))
+                    startActivity(
+                        EndRepairActivityHelper.getIntent(
+                            requireContext(),
+                            requirementId
+                        )
+                    )
                 }
             )
 

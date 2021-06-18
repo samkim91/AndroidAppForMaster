@@ -13,9 +13,8 @@ import kr.co.soogong.master.data.model.requirement.EstimationMessage
 import kr.co.soogong.master.domain.usecase.requirement.GetRequirementUseCase
 import kr.co.soogong.master.domain.usecase.requirement.SendEstimationMessageUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
-import kr.co.soogong.master.uihelper.requirment.action.write.WriteEstimateActivityHelper.BUNDLE_KEY
-import kr.co.soogong.master.uihelper.requirment.action.write.WriteEstimateActivityHelper.EXTRA_STRING_KEY
-import timber.log.Timber
+import kr.co.soogong.master.uihelper.requirment.action.WriteEstimationActivityHelper.BUNDLE_KEY
+import kr.co.soogong.master.uihelper.requirment.action.WriteEstimationActivityHelper.EXTRA_STRING_KEY
 import javax.inject.Inject
 
 @HiltViewModel

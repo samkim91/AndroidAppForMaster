@@ -1,10 +1,9 @@
 package kr.co.soogong.master.data.dto.requirement.estimation
 
 import android.os.Parcelable
-import com.google.gson.JsonObject
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
-import java.util.*
+import kr.co.soogong.master.data.dto.requirement.review.ReviewDto
 
 @Parcelize
 data class EstimationDto(
@@ -38,11 +37,14 @@ data class EstimationDto(
     @SerializedName("estimationPrice")
     val estimationPrice: EstimationPriceDto?,
 
+    @SerializedName("review")
+    val review: ReviewDto?,
+
     @SerializedName("createdAt")
-    val createdAt: Date,
+    val createdAt: String,
 
     @SerializedName("updatedAt")
-    val updatedAt: Date,
+    val updatedAt: String,
 ) : Parcelable {
     companion object {
 

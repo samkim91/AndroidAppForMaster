@@ -1,11 +1,11 @@
-package kr.co.soogong.master.uihelper.requirment.action.write
+package kr.co.soogong.master.uihelper.requirment.action
 
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import kr.co.soogong.master.ui.requirement.action.write.WriteEstimationActivity
 
-object WriteEstimateActivityHelper {
+object WriteEstimationActivityHelper {
     const val BUNDLE_KEY = "WRITE_ESTIMATION_BUNDLE_KEY"
     const val EXTRA_STRING_KEY = "WRITE_ESTIMATION_EXTRA_STRING_KEY"
 

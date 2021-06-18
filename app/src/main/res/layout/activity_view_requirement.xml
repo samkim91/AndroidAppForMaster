@@ -165,7 +165,7 @@
                             android:layout_marginStart="@dimen/estimation_card_master_rating_bar_margin_start"
                             android:numStars="5"
                             android:progressTint="@color/color_22D47B"
-                            android:rating="4"
+                            android:rating="@{4}"
                             app:layout_constraintStart_toEndOf="@id/master_recommendation_rating_text"
                             app:layout_constraintTop_toTopOf="@id/master_recommendation_rating_text" />
 
@@ -321,7 +321,7 @@
                         android:id="@+id/customer_review_group"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:visibility="gone"
+                        android:visibility="visible"
                         app:constraint_referenced_ids="customer_review_layout, customer_review_divider" />
                     <!-- region end 고객 리뷰 -->
 

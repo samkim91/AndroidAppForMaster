@@ -3,13 +3,10 @@ package kr.co.soogong.master.data.dto.requirement
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.google.gson.JsonObject
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 import kr.co.soogong.master.data.dto.requirement.estimation.EstimationDto
 import kr.co.soogong.master.data.model.requirement.ImagePath
-import kr.co.soogong.master.utility.extension.getNullable
-import java.util.*
 
 @Parcelize
 @Entity(tableName = "Requirement")
@@ -51,6 +48,8 @@ data class RequirementDto(
 
     @SerializedName("estimationDto")
     val estimationDto: EstimationDto?,
+
+    // TODO: 2021/06/18 repair Dto도 추가해야함
 
     @SerializedName("closedAt")
     val closedAt: String?,

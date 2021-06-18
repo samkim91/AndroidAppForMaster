@@ -17,7 +17,7 @@ import kr.co.soogong.master.ui.image.RectangleImageAdapter
 import kr.co.soogong.master.ui.requirement.action.write.WriteEstimationViewModel.Companion.SEND_MESSAGE_FAILED
 import kr.co.soogong.master.ui.requirement.action.write.WriteEstimationViewModel.Companion.SEND_MESSAGE_SUCCESSFULLY
 import kr.co.soogong.master.uihelper.image.ImageViewActivityHelper
-import kr.co.soogong.master.uihelper.requirment.action.write.WriteEstimateActivityHelper
+import kr.co.soogong.master.uihelper.requirment.action.WriteEstimationActivityHelper
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
@@ -27,11 +27,10 @@ class WriteEstimationActivity : BaseActivity<ActivityWriteEstimationBinding>(
     R.layout.activity_write_estimation
 ) {
     private val requirementId: Int by lazy {
-        WriteEstimateActivityHelper.getEstimationId(intent)
+        WriteEstimationActivityHelper.getEstimationId(intent)
     }
 
     // TODO.. custom widget의 2way binding을 적용해야함.
-
     private val viewModel: WriteEstimationViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {

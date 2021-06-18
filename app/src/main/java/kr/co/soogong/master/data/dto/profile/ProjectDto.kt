@@ -3,7 +3,6 @@ package kr.co.soogong.master.data.dto.profile
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
-import java.util.*
 
 @Parcelize
 data class ProjectDto(
@@ -19,14 +18,22 @@ data class ProjectDto(
     @SerializedName("useYn")
     val useYn: Boolean,
 
-    @SerializedName("category")
-    val category: CategoryDto,
-
     @SerializedName("createdAt")
-    val createdAt: Date?,
+    val createdAt: String?,
 
     @SerializedName("updatedAt")
-    val updatedAt: Date?,
+    val updatedAt: String?,
+
+    @SerializedName("categoryId")
+    val categoryId: Int?,
+
+    @SerializedName("categoryName")
+    val categoryName: String?,
+
+    @SerializedName("categoryNameEn")
+    val categoryNameEn: String?,
+
+    // TODO: 2021/06/18 변경된 프로퍼티로 뷰 바인드 하는거 작업해줘야함..
 ) : Parcelable {
     companion object {
 

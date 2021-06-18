@@ -14,7 +14,7 @@ import kr.co.soogong.master.ui.requirement.done.DoneViewModel.Companion.ASK_FOR_
 import kr.co.soogong.master.ui.requirement.done.DoneViewModel.Companion.ASK_FOR_REVIEW_SUCCEEDED
 import kr.co.soogong.master.ui.requirement.done.DoneViewModel.Companion.BADGE_UPDATE
 import kr.co.soogong.master.uihelper.requirment.RequirementsBadge
-import kr.co.soogong.master.uihelper.requirment.action.view.ViewRequirementActivityHelper
+import kr.co.soogong.master.uihelper.requirment.action.ViewRequirementActivityHelper
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber

@@ -2,8 +2,8 @@ package kr.co.soogong.master.contract
 
 object HttpContract {
     const val LOCAL_URL = "http://192.168.0.93:8080/"
-//    const val LOCAL_URL = "http://192.168.0.93:8080/"
-    const val DEV_URL = "http://web-backend-springboot-LB-dev-112855016.ap-northeast-2.elb.amazonaws.com/"
+    const val DEV_URL =
+        "http://web-backend-springboot-LB-dev-112855016.ap-northeast-2.elb.amazonaws.com/"
     const val PROD_URL = "https://api2.soogong.co.kr/"
 
     //region Auth
@@ -19,9 +19,10 @@ object HttpContract {
     //endregion
 
     //region Requirement
-    const val GET_REQUIREMENT_LIST = "master/find-requirement-by-id"
-    const val GET_REQUIREMENT = "requirement/find-by-id"
+    const val GET_REQUIREMENT_LIST = "master/find-all_requirement-by-id"
+    const val GET_REQUIREMENT = "master/find-requirement-by-id"
     //endregion
+
 
     //region Estimations
     const val GET_ESTIMATION_V2 = "api/v2/estimations/{branch_keycode}"

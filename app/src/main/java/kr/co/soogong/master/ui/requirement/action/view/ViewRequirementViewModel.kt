@@ -14,8 +14,8 @@ import kr.co.soogong.master.domain.usecase.requirement.CallToCustomerUseCase
 import kr.co.soogong.master.domain.usecase.requirement.GetRequirementUseCase
 import kr.co.soogong.master.domain.usecase.requirement.RefuseToEstimateUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
-import kr.co.soogong.master.uihelper.requirment.action.view.ViewRequirementActivityHelper.BUNDLE_KEY_REQUIREMENT_KEY
-import kr.co.soogong.master.uihelper.requirment.action.view.ViewRequirementActivityHelper.EXTRA_KEY_BUNDLE
+import kr.co.soogong.master.uihelper.requirment.action.ViewRequirementActivityHelper.BUNDLE_KEY_REQUIREMENT_KEY
+import kr.co.soogong.master.uihelper.requirment.action.ViewRequirementActivityHelper.EXTRA_KEY_BUNDLE
 import timber.log.Timber
 import javax.inject.Inject
 

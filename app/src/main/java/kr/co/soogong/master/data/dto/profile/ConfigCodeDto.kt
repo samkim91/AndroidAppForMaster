@@ -3,20 +3,19 @@ package kr.co.soogong.master.data.dto.profile
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
-import java.util.*
 
 @Parcelize
 data class ConfigCodeDto(
     @SerializedName("id")
     val id: Int,
 
-    @SerializedName("groupCode")
-    val groupCode: String,
+    @SerializedName("configGroupCode")
+    val configGroupCode: String,
 
     @SerializedName("groupName")
     val groupName: String,
 
-    @SerializedName("code")
+    @SerializedName("code") // TODO: 2021/06/18 한글명 나와줘야함..
     val code: String,
 
     @SerializedName("name")
@@ -26,10 +25,10 @@ data class ConfigCodeDto(
     val description: String,
 
     @SerializedName("createdAt")
-    val createdAt: Date,
+    val createdAt: String,
 
     @SerializedName("updatedAt")
-    val updatedAt: Date,
+    val updatedAt: String,
 ) : Parcelable {
     companion object {
 
