@@ -12,7 +12,7 @@ class MajorService @Inject constructor(
     private val categoryInterface = retrofit.create(MajorInterface::class.java)
 
     fun getCategoryList(): Single<List<Category>> {
-        return categoryInterface.getCategoryList("http://192.168.0.50:8080/category/list").map {
+        return categoryInterface.getCategoryList().map {
             val items: MutableList<Category> = ArrayList()
             for (item in it) {
                 items.add(Category.fromJson(item.asJsonObject))
@@ -21,8 +21,8 @@ class MajorService @Inject constructor(
         }
     }
 
-    fun getProjectList(category: Category): Single<List<Project>> {
-        return categoryInterface.getProjectList("http://192.168.0.50:8080/project/find-all-by-categoryId/?categoryId=${category.id}").map {
+    fun getProjectList(categoryId: Int): Single<List<Project>> {
+        return categoryInterface.getProjectList(categoryId).map {
             val items: MutableList<Project> = ArrayList()
             for (item in it) {
                 items.add(Project.fromJson(item.asJsonObject))

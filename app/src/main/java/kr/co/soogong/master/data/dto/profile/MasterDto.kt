@@ -106,7 +106,7 @@ data class MasterDto(
     val masterPortfolios: List<PortfolioDto>?,
 
     @SerializedName("projects")
-    val projects: List<ProjectDto>?,
+    val majors: List<MajorDto>?,
 
     @SerializedName("createdAt")
     val createdAt: Date,

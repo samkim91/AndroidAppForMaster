@@ -15,10 +15,10 @@ data class ConfigCodeDto(
     @SerializedName("groupName")
     val groupName: String,
 
-    @SerializedName("code") // TODO: 2021/06/18 한글명 나와줘야함..
+    @SerializedName("code")
     val code: String,
 
-    @SerializedName("name")
+    @SerializedName("name")  // TODO: 2021/06/18 한글명 나와줘야함..
     val name: String,
 
     @SerializedName("description")
