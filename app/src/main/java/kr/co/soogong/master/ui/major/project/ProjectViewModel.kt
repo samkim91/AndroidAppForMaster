@@ -16,7 +16,7 @@ import timber.log.Timber
 
 class ProjectViewModel @AssistedInject constructor(
     private val getProjectListUseCase: GetProjectListUseCase,
-    @Assisted private val category: Category
+    @Assisted private val category: Category,
 ) : BaseViewModel() {
     private val _list = MutableLiveData<List<Project>>()
     val list: LiveData<List<Project>>
@@ -36,7 +36,7 @@ class ProjectViewModel @AssistedInject constructor(
 
     private fun getProjectList() {
         Timber.tag(TAG).d("getProjectList: ")
-        getProjectListUseCase(category)
+        getProjectListUseCase(category.id)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({

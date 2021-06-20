@@ -70,6 +70,7 @@ class AppModule {
     @Singleton
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
         val gson = GsonBuilder()
+            .setPrettyPrinting()
 //            .registerTypeAdapter(ArrayList::class.java, NonNullListDeserializer<Any>())
 //            .registerTypeAdapter(String::class.java, StringTypeAdapter())
 //            .registerTypeAdapter(Double::class.java, DoubleTypeAdapter())
@@ -80,7 +81,7 @@ class AppModule {
         return Retrofit.Builder()
             .client(okHttpClient)
             .baseUrl(
-                if (BuildConfig.DEBUG) HttpContract.DEV_URL else HttpContract.PROD_URL
+                if (BuildConfig.DEBUG) HttpContract.LOCAL_URL else HttpContract.PROD_URL
             )
             .addConverterFactory(GsonConverterFactory.create(gson))
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())

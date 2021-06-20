@@ -63,18 +63,6 @@ data class DialogData(
                 context.getColor(R.color.text_hint_color)
             )
 
-        fun getAcceptNotificationDialogData(context: Context) =
-            DialogData(
-                "수공 마스터 앱 혜택 알림 받기",
-                context.getColor(R.color.text_basic_color),
-                "\'수공 마스터 앱\'에서 제공하는\n유용한 혜택 정보에 대한 알림을\n받으시겠어요?",
-                context.getColor(R.color.text_alert_color),
-                "네 받을래요!",
-                context.getColor(R.color.text_basic_color),
-                "아니요",
-                context.getColor(R.color.text_hint_color)
-            )
-
         fun getAskingFillProfileDialogData(context: Context) =
             DialogData(
                 "문의를 처리하려면\n필수 정보 등록이 필요해요.\n지금 등록하시겠어요?", context.getColor(R.color.text_basic_color),

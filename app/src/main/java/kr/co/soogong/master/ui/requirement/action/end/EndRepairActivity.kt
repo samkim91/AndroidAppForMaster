@@ -11,7 +11,7 @@ import kr.co.soogong.master.databinding.ActivityEndRepairBinding
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.ui.requirement.action.end.EndRepairViewModel.Companion.END_REPAIR_FAILED
 import kr.co.soogong.master.ui.requirement.action.end.EndRepairViewModel.Companion.END_REPAIR_SUCCESSFULLY
-import kr.co.soogong.master.uihelper.requirment.action.end.EndRepairActivityHelper
+import kr.co.soogong.master.uihelper.requirment.action.EndRepairActivityHelper
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
@@ -49,8 +49,12 @@ class EndRepairActivity : BaseActivity<ActivityEndRepairBinding>(
                     super.onBackPressed()
                 }
                 button.setOnClickListener {
-                    if (amount.text.isNullOrEmpty() || amount.text.toString().replace(",", "").toLong() < 10000) {
-                        amount.alertVisible = amount.text.isNullOrEmpty() || amount.text.toString().replace(",", "").toLong() < 10000
+                    if (amount.text.isNullOrEmpty() || amount.text.toString().replace(",", "")
+                            .toLong() < 10000
+                    ) {
+                        amount.alertVisible =
+                            amount.text.isNullOrEmpty() || amount.text.toString().replace(",", "")
+                                .toLong() < 10000
 
                         return@setOnClickListener
                     }

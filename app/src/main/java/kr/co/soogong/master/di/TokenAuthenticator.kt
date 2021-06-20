@@ -2,10 +2,6 @@ package kr.co.soogong.master.di
 
 import androidx.lifecycle.MutableLiveData
 import dagger.Lazy
-import kr.co.soogong.master.domain.usecase.auth.GetAccessTokenUseCase
-import kr.co.soogong.master.domain.usecase.auth.GetRefreshTokenUseCase
-import kr.co.soogong.master.domain.usecase.auth.SaveAccessTokenUseCase
-import kr.co.soogong.master.domain.usecase.auth.SaveRefreshTokenUseCase
 import kr.co.soogong.master.network.auth.AuthService
 import okhttp3.Authenticator
 import okhttp3.Request
@@ -19,24 +15,21 @@ import javax.inject.Singleton
 @Singleton
 class TokenAuthenticator @Inject constructor(
     private val authService: Lazy<AuthService>,     // dagger cycle dependency error를 막기 위해 dagger.lazy로 선언
-    private val getAccessTokenUseCase: GetAccessTokenUseCase,
-    private val getRefreshTokenUseCase: GetRefreshTokenUseCase,
-    private val saveAccessTokenUseCase: SaveAccessTokenUseCase,
-    private val saveRefreshTokenUseCase: SaveRefreshTokenUseCase,
+
 ) : Authenticator {
     private val newToken = MutableLiveData("")
 
     override fun authenticate(route: Route?, response: Response): Request? {
         // Todo.. 무한루프에 빠지지 않게 하려면 어떤 조건을 걸어야하는지 검토 필요
         if (response.request.header("Authorization") != null ||
-            response.request.header("Authorization") != "Bearer " +
-            "${getAccessTokenUseCase()}"
+            response.request.header("Authorization") != "Bearer "
+//            "${getAccessTokenUseCase()}"
         ) {
             // refresh failed 일 때, 무한 루프에서 벗어나기 위함
             return null
         }
 
-        getRefreshTokenUseCase()?.let {
+//        getRefreshTokenUseCase()?.let {
         // refreshToken ->
 //            authService.get().resignIn(refreshToken)
 //                .doOnSuccess { responseJson ->
@@ -44,7 +37,7 @@ class TokenAuthenticator @Inject constructor(
 //                    saveAccessTokenUseCase(newToken.value)
 //                    saveRefreshTokenUseCase(newToken.value) // Todo.. responsed에서 token 가져와서 set 추가 작업
 //                }
-        }
+//        }
 
         return response
             .request

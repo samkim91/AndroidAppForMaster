@@ -44,7 +44,7 @@ class OwnerNameFragment : BaseFragment<FragmentSignUpOwnerNameBinding>(
     }
 
     companion object {
-        private const val TAG = "Step4Fragment"
+        private const val TAG = "OwnerNameFragment"
 
         fun newInstance(): OwnerNameFragment {
             return OwnerNameFragment()

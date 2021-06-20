@@ -14,7 +14,7 @@ data class RequiredInformation(
     val businessUnitInformation: BusinessUnitInformation?,
     val warrantyInformation: WarrantyInformation?,
     val career: String?,
-    val tel: String,
+    val tel: String?,
     val ownerName: String?,
     val majors: List<Major>?,
     val companyAddress: CompanyAddress?,
@@ -47,7 +47,7 @@ data class RequiredInformation(
                 ),
                 coordinate = Coordinate(
                     masterDto.latitude?.toDouble(),
-                    masterDto.longitude?.toDouble()
+                    masterDto.longitude?.toDouble(),
                 ),
                 serviceArea = masterDto.serviceArea,
             )

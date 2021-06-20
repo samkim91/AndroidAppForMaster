@@ -32,7 +32,12 @@ class NonNullListDeserializer<T> : JsonDeserializer<ArrayList<T>> {
 }
 
 class StringTypeAdapter : TypeAdapter<String>() {
-    override fun write(out: JsonWriter, value: String?) {
+    override fun write(`out`: JsonWriter, value: String?) {
+        if(value.isNullOrEmpty()) {
+            `out`.nullValue()
+            return
+        }
+        `out`.value(value)
     }
 
     override fun read(`in`: JsonReader): String {
@@ -45,7 +50,12 @@ class StringTypeAdapter : TypeAdapter<String>() {
 }
 
 class BooleanTypeAdapter : TypeAdapter<Boolean>() {
-    override fun write(out: JsonWriter, value: Boolean?) {
+    override fun write(`out`: JsonWriter, value: Boolean?) {
+        if(value == null) {
+            `out`.nullValue()
+            return
+        }
+        `out`.value(value)
     }
 
     override fun read(`in`: JsonReader): Boolean {
@@ -58,7 +68,12 @@ class BooleanTypeAdapter : TypeAdapter<Boolean>() {
 }
 
 class IntTypeAdapter : TypeAdapter<Int>() {
-    override fun write(out: JsonWriter, value: Int?) {
+    override fun write(`out`: JsonWriter, value: Int?) {
+        if(value == null) {
+            `out`.nullValue()
+            return
+        }
+        `out`.value(value)
     }
 
     override fun read(`in`: JsonReader): Int {
@@ -71,7 +86,12 @@ class IntTypeAdapter : TypeAdapter<Int>() {
 }
 
 class DoubleTypeAdapter : TypeAdapter<Double>() {
-    override fun write(out: JsonWriter, value: Double?) {
+    override fun write(`out`: JsonWriter, value: Double?) {
+        if(value == null) {
+            `out`.nullValue()
+            return
+        }
+        `out`.value(value)
     }
 
     override fun read(`in`: JsonReader): Double {

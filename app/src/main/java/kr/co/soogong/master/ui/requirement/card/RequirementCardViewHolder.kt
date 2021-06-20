@@ -43,7 +43,7 @@ class RequestedViewHolder(
             data = requirementCard
 
             endTime.visibility = View.VISIBLE
-            endTime.setEndDate(requirementCard.createdAt)
+            endTime.setEndDatetime(requirementCard.createdAt)
 
             setCardClickListener {
                 cardClickListener(requirementCard.id)

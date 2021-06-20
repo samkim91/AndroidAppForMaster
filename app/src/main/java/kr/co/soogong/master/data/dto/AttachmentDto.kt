@@ -1,4 +1,4 @@
-package kr.co.soogong.master.data.dto.profile
+package kr.co.soogong.master.data.dto
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
@@ -6,18 +6,12 @@ import kotlinx.parcelize.Parcelize
 import java.util.*
 
 @Parcelize
-data class CategoryDto(
+data class AttachmentDto(
     @SerializedName("id")
     val id: Int,
 
-    @SerializedName("name")
-    val name: String,
-
-    @SerializedName("nameEn")
-    val nameEn: String,
-
-    @SerializedName("useYn")
-    val useYn: Boolean,
+    @SerializedName("url")
+    val url: String?,
 
     @SerializedName("createdAt")
     val createdAt: Date?,

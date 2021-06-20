@@ -36,7 +36,7 @@ class MajorFragment : BaseFragment<FragmentSignUpMajorBinding>(
                     layoutInflater = layoutInflater,
                     container = binding.majorContainer,
                     newMajor = selectedMajor,
-                    viewModelBusinessTypes = viewModel.businessTypes
+                    viewModelBusinessTypes = viewModel.majors
                 )
             }
         }
@@ -66,7 +66,7 @@ class MajorFragment : BaseFragment<FragmentSignUpMajorBinding>(
             }
 
             defaultButton.setOnClickListener {
-                viewModel.businessTypes.observe(viewLifecycleOwner, {
+                viewModel.majors.observe(viewLifecycleOwner, {
                     major.alertVisible = it.isNullOrEmpty()
                 })
 
@@ -79,7 +79,7 @@ class MajorFragment : BaseFragment<FragmentSignUpMajorBinding>(
     }
 
     companion object {
-        private const val TAG = "Step5Fragment"
+        private const val TAG = "MajorFragment"
 
         fun newInstance(): MajorFragment {
             return MajorFragment()

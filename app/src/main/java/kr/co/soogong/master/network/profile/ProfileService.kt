@@ -20,11 +20,7 @@ class ProfileService @Inject constructor(
 
     fun savePortfolio(masterId: String, portfolio: Portfolio): Single<Response> {
         val query = HashMap<String, String>()
-        query["master_id"] = masterId
-        query["job_title"] = portfolio.title
-        query["image_before_job"] = portfolio.imageBeforeJob
-        query["image_after_job"] = portfolio.imageAfterJob
-        query["job_description"] = portfolio.description
+
 
         return Single.just(Response.NULL_RESPONSE)
         // Todo.. server 이후로 작업해야함
@@ -33,10 +29,7 @@ class ProfileService @Inject constructor(
 
     fun savePriceByProject(masterId: String, priceByProject: PriceByProject): Single<Response> {
         val query = HashMap<String, String>()
-        query["master_id"] = masterId
-        query["job_title"] = priceByProject.title
-        query["price"] = priceByProject.price
-        query["job_description"] = priceByProject.description
+
 
         return Single.just(Response.NULL_RESPONSE)
         // Todo.. server 이후로 작업해야함

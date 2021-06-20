@@ -23,7 +23,7 @@ data class OtherFlexibleOptions(
             list?.filter { masterConfigDto ->
                 masterConfigDto.value == "1"
             }?.map { masterConfigDto ->
-                masterConfigDto.value.let {
+                masterConfigDto.name?.let {
                     ret.add(it)
                 }
             }

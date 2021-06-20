@@ -1,4 +1,4 @@
-package kr.co.soogong.master.uihelper.requirment.action.view
+package kr.co.soogong.master.uihelper.requirment.action
 
 import android.content.Context
 import android.content.Intent

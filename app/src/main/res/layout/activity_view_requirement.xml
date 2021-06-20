@@ -107,7 +107,7 @@
                         android:textColor="@color/tertiary_text_color"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/project"
-                        android:text='@{"최초 요청일 : "+vm.requirement.createdAt}'
+                        bind:created_datetime_to_string="@{vm.requirement.createdAt}"
                         tools:text="최초 요청일 : 2021.01.11 - 13:20" />
 
                     <androidx.appcompat.widget.AppCompatImageView
@@ -165,7 +165,7 @@
                             android:layout_marginStart="@dimen/estimation_card_master_rating_bar_margin_start"
                             android:numStars="5"
                             android:progressTint="@color/color_22D47B"
-                            android:rating="4"
+                            android:rating="@{4}"
                             app:layout_constraintStart_toEndOf="@id/master_recommendation_rating_text"
                             app:layout_constraintTop_toTopOf="@id/master_recommendation_rating_text" />
 
@@ -599,7 +599,7 @@
                     app:layout_constraintEnd_toEndOf="@id/end_time_background"
                     app:layout_constraintStart_toEndOf="@id/end_time_label"
                     app:layout_constraintTop_toTopOf="@id/end_time_background"
-                    android:text="@{vm.requirement.createdAt}"
+                    bind:closed_datetime_only_to_string="@{vm.requirement.closedAt}"
                     tools:text="2022.01.11 - 13:20" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

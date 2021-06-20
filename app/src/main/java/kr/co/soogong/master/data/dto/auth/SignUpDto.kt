@@ -26,7 +26,7 @@ data class SignUpDto(
     val major: List<Major>,
 
     @SerializedName("latitude")
-    val latitude: Double,
+    val latitude: Float,
 
     @SerializedName("longitude")
     val longitude: Double,
@@ -42,14 +42,4 @@ data class SignUpDto(
 
     @SerializedName("marketingPushAtNight")
     val marketingPushAtNight: Boolean,
-
-    @SerializedName("appPush")
-    val appPush: Boolean,
-
-    @SerializedName("kakaoPush")
-    val kakaoPush: Boolean,
-
-    @SerializedName("smsPush")
-    val smsPush: Boolean,
-
     ) : Parcelable { }

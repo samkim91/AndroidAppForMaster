@@ -4,7 +4,7 @@ import android.os.Parcelable
 import com.google.gson.JsonObject
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
-import kr.co.soogong.master.data.dto.profile.ProjectDto
+import kr.co.soogong.master.data.dto.profile.MajorDto
 
 @Parcelize
 data class Major(
@@ -15,36 +15,6 @@ data class Major(
     val projects: MutableList<Project>?,
 ) : Parcelable {
     companion object {
-
-
-
-//        fun fromProjectDto(list: List<ProjectDto>): List<Major> {
-//            val ret = mutableListOf<Major>()
-//
-//            list.map { projectDto ->
-//                if (ret.count { major -> major.category?.name == projectDto.category.name } > 0) {
-//                    ret.find { major -> major.category?.name == projectDto.category.name }?.projects?.add(
-//                        Project(
-//                            id = projectDto.id,
-//                            name = projectDto.name,
-//                            checked = true
-//                        )
-//                    )
-//                } else {
-//                    ret.add(
-//                        Major(
-//                            category = Category(
-//                                id = projectDto.category.id,
-//                                name = projectDto.category.name,
-//                            ),
-//                            projects = mutableListOf(Project())
-//                        )
-//                    )
-//                }
-//
-//            }
-//        }
-
 
         fun fromJson(jsonObject: JsonObject): Major {
             val item = jsonObject.get("business_type").asJsonObject
@@ -57,6 +27,11 @@ data class Major(
                 }
             )
         }
+
+        // TODO: 2021/06/18 converter need...
+//        fun fromMajorDto(majorDto: MajorDto): Major {
+//
+//        }
 
         val TEST_BUSINESS_TYPE = Major(
             Category.TEST_CATEGORY,

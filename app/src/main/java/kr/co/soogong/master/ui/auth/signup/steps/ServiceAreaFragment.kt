@@ -80,7 +80,7 @@ class ServiceAreaFragment : BaseFragment<FragmentSignUpServiceAreaBinding>(
 
 
     companion object {
-        private const val TAG = "Step7Fragment"
+        private const val TAG = "ServiceAreaFragment"
 
         fun newInstance(): ServiceAreaFragment {
             return ServiceAreaFragment()

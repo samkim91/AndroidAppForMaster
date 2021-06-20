@@ -10,7 +10,7 @@ import kr.co.soogong.master.databinding.ActivityCancelEstimateBinding
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.ui.requirement.action.cancel.CancelEstimateViewModel.Companion.CANCEL_ESTIMATE_FAILED
 import kr.co.soogong.master.ui.requirement.action.cancel.CancelEstimateViewModel.Companion.CANCEL_ESTIMATE_SUCCEEDED
-import kr.co.soogong.master.uihelper.requirment.action.cancel.CancelEstimateActivityHelper
+import kr.co.soogong.master.uihelper.requirment.action.CancelEstimationActivityHelper
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
@@ -20,7 +20,7 @@ class CancelEstimateActivity : BaseActivity<ActivityCancelEstimateBinding>(
     R.layout.activity_cancel_estimate
 ) {
     val estimationId: Int by lazy {
-        CancelEstimateActivityHelper.getEstimationId(intent)
+        CancelEstimationActivityHelper.getRequirementId(intent)
     }
 
     private val viewModel: CancelEstimateViewModel by viewModels()
@@ -71,7 +71,7 @@ class CancelEstimateActivity : BaseActivity<ActivityCancelEstimateBinding>(
         Timber.tag(TAG).d("registerEventObserve: ")
 
         viewModel.action.observe(this@CancelEstimateActivity, EventObserver { event ->
-            when(event) {
+            when (event) {
                 CANCEL_ESTIMATE_SUCCEEDED -> {
                     toast(getString(R.string.cancel_estimate_succeeded))
                     super.onBackPressed()

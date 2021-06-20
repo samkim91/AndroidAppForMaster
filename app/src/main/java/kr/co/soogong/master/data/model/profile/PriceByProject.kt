@@ -9,12 +9,10 @@ import java.util.*
 data class PriceByProject(
     override val id: Int,
     override val title: String,
-    override val description: String,
+    override val description: String?,
     override val project: String?,
     override val type: String,
-    override val createdAt: Date?,
-    override val updatedAt: Date?,
-    val price: String,
+    val price: String?,
 ) : Parcelable, IPortfolio {
     companion object {
         fun fromPortfolioDto(list: List<PortfolioDto>?): List<PriceByProject> {
@@ -27,8 +25,6 @@ data class PriceByProject(
                         description = portfolioDto.description,
                         project = portfolioDto.project,
                         type = portfolioDto.type,
-                        createdAt = portfolioDto.createdAt,
-                        updatedAt = portfolioDto.updatedAt,
                         price = portfolioDto.price,
                     )
                 )

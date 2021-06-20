@@ -11,7 +11,7 @@ import javax.inject.Inject
 class GetProjectListUseCase @Inject constructor(
     private val majorService: MajorService
 ) {
-    operator fun invoke(category: Category): Single<List<Project>> {
-        return majorService.getProjectList(category)
+    operator fun invoke(categoryId: Int): Single<List<Project>> {
+        return majorService.getProjectList(categoryId)
     }
 }

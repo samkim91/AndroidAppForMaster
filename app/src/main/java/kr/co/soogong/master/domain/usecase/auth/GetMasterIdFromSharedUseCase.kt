@@ -12,7 +12,6 @@ class GetMasterIdFromSharedUseCase @Inject constructor(
 ) {
     operator fun invoke(): Int {
         // TODO: 2021/06/16 개발 끝나면 삭제
-        if(BuildConfig.DEBUG) return 8
         return sharedPreferences.getInt(AppSharedPreferenceContract.MASTER_ID, 0)
     }
 }

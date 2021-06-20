@@ -216,7 +216,7 @@ class AuthFragment : BaseFragment<FragmentSignUpAuthBinding>(
     }
 
     companion object {
-        private const val TAG = "Step2Fragment"
+        private const val TAG = "AuthFragment"
 
         fun newInstance(): AuthFragment {
             return AuthFragment()

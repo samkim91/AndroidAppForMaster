@@ -39,9 +39,9 @@
             android:layout_marginStart="@dimen/gap_6"
             android:numStars="5"
             android:progressTint="@color/color_22D47B"
+            android:rating="@{(float) data.recommendation}"
             app:layout_constraintStart_toEndOf="@id/master_recommendation_rating_text"
             app:layout_constraintTop_toTopOf="@id/master_recommendation_rating_text"
-            android:rating="@{Float.valueOf(String.valueOf(data.recommendation))}"
             tools:rating="4" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -62,10 +62,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/gap_2"
+            android:text="@{String.valueOf(data.kindness)}"
             android:textColor="@color/color_1FC472"
             app:layout_constraintStart_toEndOf="@id/master_rating_kindness_text"
             app:layout_constraintTop_toTopOf="@id/master_rating_kindness_text"
-            android:text="@{String.valueOf(data.kindness)}"
             tools:text="4" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -85,10 +85,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/gap_2"
+            android:text="@{String.valueOf(data.quality)}"
             android:textColor="@color/color_1FC472"
             app:layout_constraintStart_toEndOf="@id/master_rating_quality_text"
             app:layout_constraintTop_toTopOf="@id/master_rating_kindness_text"
-            android:text="@{String.valueOf(data.quality)}"
             tools:text="4" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -108,10 +108,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/gap_2"
+            android:text="@{String.valueOf(data.affordability)}"
             android:textColor="@color/color_1FC472"
             app:layout_constraintStart_toEndOf="@id/master_rating_affordability_text"
             app:layout_constraintTop_toTopOf="@id/master_rating_kindness_text"
-            android:text="@{String.valueOf(data.affordability)}"
             tools:text="4" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -131,10 +131,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/gap_2"
+            android:text="@{String.valueOf(data.punctuality)}"
             android:textColor="@color/color_1FC472"
             app:layout_constraintStart_toEndOf="@id/master_rating_punctuality_text"
             app:layout_constraintTop_toTopOf="@id/master_rating_kindness_text"
-            android:text="@{String.valueOf(data.punctuality)}"
             tools:text="4" />
 
         <androidx.appcompat.widget.AppCompatTextView

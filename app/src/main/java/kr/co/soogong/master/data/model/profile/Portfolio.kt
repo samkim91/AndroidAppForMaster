@@ -9,13 +9,11 @@ import java.util.*
 data class Portfolio(
     override val id: Int,
     override val title: String,
-    override val description: String,
+    override val description: String?,
     override val project: String?,
     override val type: String,
-    override val createdAt: Date?,
-    override val updatedAt: Date?,
-    val imageBeforeJob: String,
-    val imageAfterJob: String,
+    val imageBeforeJob: String?,
+    val imageAfterJob: String?,
 ) : Parcelable, IPortfolio {
     companion object {
         fun fromPortfolioDto(list: List<PortfolioDto>?): List<Portfolio> {
@@ -28,8 +26,6 @@ data class Portfolio(
                         description = portfolioDto.description,
                         project = portfolioDto.project,
                         type = portfolioDto.type,
-                        createdAt = portfolioDto.createdAt,
-                        updatedAt = portfolioDto.updatedAt,
                         imageBeforeJob = portfolioDto.beforeRepairImageId,
                         imageAfterJob = portfolioDto.afterRepairImageId,
                     )

@@ -21,8 +21,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SignInViewModel @Inject constructor(
     private val checkUserExistentUseCase: CheckUserExistentUseCase,
-    private val saveMasterUidInSharedUseCase: SaveMasterUidInSharedUseCase,
-    private val signInUseCase: SignInUseCase,
+    private val signInUseCase: SignInUseCase
 ) : BaseViewModel() {
     val tel = MutableLiveData("")
     val certificationCode = MutableLiveData("")
@@ -62,13 +61,6 @@ class SignInViewModel @Inject constructor(
         }
     }
 
-    fun saveMasterUidInShared(){
-        Timber.tag(TAG).d("saveMasterUidInShared: ${uid.value} ")
-        uid.value?.let {
-            saveMasterUidInSharedUseCase(it)
-        }
-    }
-
     fun requestSignIn() {
         Timber.tag(TAG).d("requestSignIn: ")
 
@@ -79,20 +71,15 @@ class SignInViewModel @Inject constructor(
                 .subscribeBy(
                     onSuccess = {
                         // TODO: 2021/06/16 add saveIdInShared
-                        successToSignIn() },
-                    onError = { failToSignIn() }
+                        Timber.tag(TAG).d("successToSignIn: $it")
+                        setAction(SIGN_IN_SUCCESSFULLY)
+                    },
+                    onError = {
+                        Timber.tag(TAG).d("failToSignIn: $it ")
+                        setAction(SIGN_IN_FAILED)
+                    }
                 ).addToDisposable()
         }
-    }
-
-    private fun successToSignIn() {
-        Timber.tag(TAG).d("successToSignIn: ")
-        setAction(SIGN_IN_SUCCESSFULLY)
-    }
-
-    private fun failToSignIn() {
-        Timber.tag(TAG).d("failToSignIn: ")
-        setAction(SIGN_IN_FAILED)
     }
 
     companion object {

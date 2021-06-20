@@ -74,7 +74,7 @@ class AddressFragment : BaseFragment<FragmentSignUpAddressBinding>(
     }
 
     companion object {
-        private const val TAG = "Step6Fragment"
+        private const val TAG = "AddressFragment"
 
         fun newInstance(): AddressFragment {
             return AddressFragment()

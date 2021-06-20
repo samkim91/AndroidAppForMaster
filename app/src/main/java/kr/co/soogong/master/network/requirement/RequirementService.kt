@@ -18,8 +18,8 @@ class RequirementService @Inject constructor(
         return requirementInterface.getRequirementList(masterId, statusArray)
     }
 
-    fun getRequirement(id: Int): Single<RequirementDto> {
-        return requirementInterface.getRequirement(id)
+    fun getRequirement(requirementId: Int, masterId: Int): Single<RequirementDto> {
+        return requirementInterface.getRequirement(requirementId, masterId)
     }
 
 
