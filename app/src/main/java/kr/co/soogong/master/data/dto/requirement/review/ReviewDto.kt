@@ -24,10 +24,10 @@ data class ReviewDto(
     val reviewScores: List<ReviewScoreDto>?,
 
     @SerializedName("createdAt")
-    val createdAt: Date?,
+    val createdAt: String?,
 
     @SerializedName("updatedAt")
-    val updatedAt: Date?,
+    val updatedAt: String?,
 ) : Parcelable {
     companion object {
 

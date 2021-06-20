@@ -70,11 +70,12 @@ class AppModule {
     @Singleton
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
         val gson = GsonBuilder()
-            .registerTypeAdapter(ArrayList::class.java, NonNullListDeserializer<Any>())
-            .registerTypeAdapter(String::class.java, StringTypeAdapter())
-            .registerTypeAdapter(Double::class.java, DoubleTypeAdapter())
-            .registerTypeAdapter(Int::class.java, IntTypeAdapter())
-            .registerTypeAdapter(Boolean::class.java, BooleanTypeAdapter())
+            .setPrettyPrinting()
+//            .registerTypeAdapter(ArrayList::class.java, NonNullListDeserializer<Any>())
+//            .registerTypeAdapter(String::class.java, StringTypeAdapter())
+//            .registerTypeAdapter(Double::class.java, DoubleTypeAdapter())
+//            .registerTypeAdapter(Int::class.java, IntTypeAdapter())
+//            .registerTypeAdapter(Boolean::class.java, BooleanTypeAdapter())
             .setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create()
 
         return Retrofit.Builder()

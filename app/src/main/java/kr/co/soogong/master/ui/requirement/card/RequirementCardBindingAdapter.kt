@@ -9,10 +9,12 @@ import kr.co.soogong.master.data.dto.requirement.estimation.EstimationDto
 import kr.co.soogong.master.data.model.requirement.Estimation
 import kr.co.soogong.master.data.model.requirement.Transmissions
 import kr.co.soogong.master.ui.widget.AmountView
+import java.text.DateFormat
+import java.time.LocalDate
 import java.util.*
 
 @BindingAdapter("bind:created_datetime_to_string")
-fun TextView.setStartDatetime(date: Date?) {
+fun TextView.setStartDatetime(date: String?) {
     val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd - hh:mm")
     date?.let {
         text = context.getString(
@@ -33,11 +35,11 @@ fun TextView.setStartDatetime(date: Date?) {
 //}
 
 @BindingAdapter("bind:closed_datetime_to_string")
-fun TextView.setEndDatetime(date: Date?) {
+fun TextView.setEndDatetime(date: String?) {
     val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd - hh:mm")
     val c = Calendar.getInstance()
     date?.let {
-        c.time = date
+        c.time = simpleDateFormat.parse(date)
         c.add(Calendar.DATE, 1)
         text = context.getString(R.string.requirements_card_end_time, simpleDateFormat.format(c.time))
     }
@@ -54,11 +56,11 @@ fun TextView.setEndDatetime(date: Date?) {
 //}
 
 @BindingAdapter("bind:closed_datetime_only_to_string")
-fun TextView.setEndDatetimeOnly(date: Date?) {
+fun TextView.setEndDatetimeOnly(date: String?) {
     val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd - hh:mm")
     val c = Calendar.getInstance()
     date?.let {
-        c.time = date
+        c.time = simpleDateFormat.parse(date)
         c.add(Calendar.DATE, 1)
         text = simpleDateFormat.format(c.time)
     }

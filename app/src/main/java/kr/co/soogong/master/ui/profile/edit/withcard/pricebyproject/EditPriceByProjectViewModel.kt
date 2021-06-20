@@ -47,8 +47,6 @@ class EditPriceByProjectViewModel @Inject constructor(
                 project = "",
                 type = "price",
                 price = price.value!!,
-                createdAt = Date(),
-                updatedAt = Date(),
             )
         ).subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

@@ -9,32 +9,36 @@ import java.util.*
 
 class RequirementDtoConverters {
     @TypeConverter
-    fun timestampToDate(date: Date): Long {
-        return date.let { date.time }
+    fun timestampToDate(date: Date?): Long? {
+        return date?.let { it.time }
     }
 
     @TypeConverter
-    fun dateToTimestamp(long: Long): Date {
-        return Date(long)
+    fun dateToTimestamp(long: Long?): Date? {
+        return long?.let { Date(it) }
     }
 
     @TypeConverter
-    fun estimationToString(estimationDto: EstimationDto): String {
-        return Gson().toJson(estimationDto)
+    fun estimationToString(estimationDto: EstimationDto?): String? {
+        return estimationDto?.let { Gson().toJson(it) }
     }
 
     @TypeConverter
-    fun stringToEstimation(estimationString: String): EstimationDto {
-        return Gson().fromJson(estimationString, object : TypeToken<EstimationDto>() {}.type)
+    fun stringToEstimation(estimationString: String?): EstimationDto? {
+        return estimationString?.let {
+            Gson().fromJson(it, object : TypeToken<EstimationDto>() {}.type)
+        }
     }
 
     @TypeConverter
-    fun imagePathListToString(list: List<ImagePath>): String {
-        return Gson().toJson(list)
+    fun imagePathListToString(list: List<ImagePath>?): String? {
+        return list?.let { Gson().toJson(it) }
     }
 
     @TypeConverter
-    fun stringToImagePathList(imagePathString: String): List<ImagePath> {
-        return Gson().fromJson(imagePathString, object : TypeToken<List<ImagePath>>() {}.type)
+    fun stringToImagePathList(imagePathString: String?): List<ImagePath>? {
+        return imagePathString?.let {
+            Gson().fromJson(it, object : TypeToken<List<ImagePath>>() {}.type)
+        }
     }
 }

@@ -34,8 +34,8 @@ class EditPortfolioViewModel @Inject constructor(
             .subscribeBy(
                 onSuccess = { portfolio ->
                     title.postValue(portfolio.title)
-                    imageBeforeJob.postValue(portfolio.imageBeforeJob.toUri())
-                    imageAfterJob.postValue(portfolio.imageAfterJob.toUri())
+                    imageBeforeJob.postValue(portfolio.imageBeforeJob?.toUri())
+                    imageAfterJob.postValue(portfolio.imageAfterJob?.toUri())
                     description.postValue(portfolio.description)
                 },
                 onError = { setAction(GET_PORTFOLIO_FAILED) }
@@ -51,8 +51,6 @@ class EditPortfolioViewModel @Inject constructor(
                 description = description.value!!,
                 project = "",
                 type = "portfolio",
-                createdAt = Date(),
-                updatedAt = Date(),
                 imageBeforeJob = imageBeforeJob.value.toString(),
                 imageAfterJob = imageAfterJob.value.toString(),
             )

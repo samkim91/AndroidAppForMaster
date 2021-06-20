@@ -321,7 +321,7 @@
                         android:id="@+id/customer_review_group"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:visibility="visible"
+                        android:visibility="gone"
                         app:constraint_referenced_ids="customer_review_layout, customer_review_divider" />
                     <!-- region end 고객 리뷰 -->
 

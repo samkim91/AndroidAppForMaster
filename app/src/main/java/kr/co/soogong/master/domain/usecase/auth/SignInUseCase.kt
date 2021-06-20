@@ -1,5 +1,7 @@
 package kr.co.soogong.master.domain.usecase.auth
 
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import dagger.Reusable
 import io.reactivex.Single
 import kr.co.soogong.master.data.dao.profile.MasterDao
@@ -54,7 +56,9 @@ class SignInUseCase @Inject constructor(
             if (it.subscriptionPlan != "NotApproved") saveMasterApprovalUseCase(true)
 
             // TODO: 2021/06/18 null 값으로 인한 에러가 발생하는 것 같음... 추후 확인 ...
-//            masterDao.insert(it)
+            masterDao.insert(it)
+        }.doOnError {
+            Firebase.auth.signOut()
         }
     }
 }

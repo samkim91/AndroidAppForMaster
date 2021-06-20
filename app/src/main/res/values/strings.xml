@@ -70,6 +70,9 @@
     <string name="requirements_received_name">견적</string>
     <string name="requirements_progress_name">시공</string>
     <string name="requirements_done_name">완료</string>
+    <string name="requirements_received_code">Received</string>
+    <string name="requirements_progress_code">Progress</string>
+    <string name="requirements_done_code">Done</string>
 
     <!-- Requirements : Request -->
     <string name="requirements_request_none_status">아직 들어온 문의가 없습니다.</string>

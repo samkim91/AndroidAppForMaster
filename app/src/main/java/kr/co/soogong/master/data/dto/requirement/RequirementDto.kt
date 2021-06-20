@@ -53,13 +53,13 @@ data class RequirementDto(
     // TODO: 2021/06/18 repair Dto도 추가해야함
 
     @SerializedName("closedAt")
-    val closedAt: Date?,
+    val closedAt: String?,
 
     @SerializedName("createdAt")
-    val createdAt: Date?,
+    val createdAt: String?,
 
     @SerializedName("updatedAt")
-    val updatedAt: Date?,
+    val updatedAt: String?,
 ) : Parcelable {
     companion object {
 

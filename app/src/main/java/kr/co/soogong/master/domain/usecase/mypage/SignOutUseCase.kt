@@ -1,5 +1,6 @@
 package kr.co.soogong.master.domain.usecase.mypage
 
+import android.content.SharedPreferences
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import dagger.Reusable
@@ -13,9 +14,7 @@ import javax.inject.Inject
 class SignOutUseCase @Inject constructor(
     private val estimationDao: EstimationDao,
     private val userDao: EstimationDao,
-    private val saveMasterUidInSharedUseCase: SaveMasterUidInSharedUseCase,
-    private val saveMasterIdInSharedUseCase: SaveMasterIdInSharedUseCase,
-    private val saveMasterApprovalUseCase: SaveMasterApprovalUseCase,
+    private val sharedPreferences: SharedPreferences,
 ) {
     suspend operator fun invoke() {
         Firebase.auth.signOut()
@@ -23,8 +22,6 @@ class SignOutUseCase @Inject constructor(
         estimationDao.removeAll()
         userDao.removeAll()
 
-        saveMasterUidInSharedUseCase("")
-        saveMasterIdInSharedUseCase(0)
-        saveMasterApprovalUseCase(false)
+        sharedPreferences.edit().clear().apply()
     }
 }

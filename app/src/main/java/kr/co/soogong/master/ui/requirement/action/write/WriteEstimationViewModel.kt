@@ -24,7 +24,7 @@ class WriteEstimationViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle
 ) : BaseViewModel() {
 
-    private val estimationId = savedStateHandle.get<Bundle>(BUNDLE_KEY)?.getInt(EXTRA_STRING_KEY)!!
+    private val requirementId = savedStateHandle.get<Bundle>(BUNDLE_KEY)?.getInt(EXTRA_STRING_KEY)!!
 
     var estimationType: String = "통합견적"
 
@@ -37,7 +37,7 @@ class WriteEstimationViewModel @Inject constructor(
     }
 
     fun requestRequirement() {
-        getRequirementUseCase(estimationId)
+        getRequirementUseCase(requirementId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(

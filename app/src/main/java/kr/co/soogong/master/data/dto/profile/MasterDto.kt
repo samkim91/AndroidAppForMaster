@@ -3,12 +3,9 @@ package kr.co.soogong.master.data.dto.profile
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.google.gson.JsonObject
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 import kotlinx.parcelize.RawValue
-import java.time.LocalDate
-import java.util.*
 
 @Parcelize
 @Entity(tableName = "Master")
@@ -70,7 +67,7 @@ data class MasterDto(
     val warrantyDescription: String? = null,
 
     @SerializedName("openDate")
-    val openDate: Date? = null,
+    val openDate: String? = null,
 
     @SerializedName("businessType")
     val businessType: String? = null,
@@ -107,10 +104,10 @@ data class MasterDto(
     val majors: List<MajorDto>? = null,
 
     @SerializedName("createdAt")
-    val createdAt: Date? = null,
+    val createdAt: String? = null,
 
     @SerializedName("updatedAt")
-    val updatedAt: Date? = null,
+    val updatedAt: String? = null,
 
     ) : Parcelable {
     companion object {

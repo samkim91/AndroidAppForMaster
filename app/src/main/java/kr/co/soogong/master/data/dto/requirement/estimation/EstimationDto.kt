@@ -15,25 +15,25 @@ data class EstimationDto(
     val requirementId: Int,
 
     @SerializedName("masterId")
-    val masterId: Int,
+    val masterId: Int?,
 
     @SerializedName("token")
-    val token: String,
+    val token: String?,
 
     @SerializedName("projectName")
-    val type: String,
+    val type: String?,
 
     @SerializedName("masterResponseCode")
-    val masterResponseCode: String,
+    val masterResponseCode: String?,
 
     @SerializedName("price")
-    val price: Int,
+    val price: Int?,
 
     @SerializedName("description")
-    val description: String,
+    val description: String?,
 
     @SerializedName("choosenYn")
-    val choosenYn: Boolean,
+    val choosenYn: Boolean?,
 
     @SerializedName("estimationPrice")
     val estimationPrice: EstimationPriceDto?,
@@ -42,10 +42,10 @@ data class EstimationDto(
     val review: ReviewDto?,
 
     @SerializedName("createdAt")
-    val createdAt: Date?,
+    val createdAt: String?,
 
     @SerializedName("updatedAt")
-    val updatedAt: Date?,
+    val updatedAt: String?,
 ) : Parcelable {
     companion object {
 
