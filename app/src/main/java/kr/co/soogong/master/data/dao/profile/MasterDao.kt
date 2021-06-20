@@ -16,4 +16,7 @@ interface MasterDao {
 
     @Delete
     suspend fun delete(masterDto: MasterDto)
+
+    @Query("DELETE FROM Master")
+    fun removeAll()
 }

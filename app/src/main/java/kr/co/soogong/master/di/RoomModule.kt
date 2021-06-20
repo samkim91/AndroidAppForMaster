@@ -5,7 +5,6 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import kr.co.soogong.master.domain.AppDatabase
-import kr.co.soogong.master.data.dao.requirement.estimation.EstimationDao
 import kr.co.soogong.master.data.dao.profile.MasterDao
 import kr.co.soogong.master.data.dao.profile.ProfileDao
 import kr.co.soogong.master.data.dao.requirement.RequirementDao
@@ -18,12 +17,6 @@ class RoomModule {
     @Singleton
     fun provideRequirementDao(appDatabase: AppDatabase): RequirementDao {
         return appDatabase.requirementDao()
-    }
-
-    @Provides
-    @Singleton
-    fun provideEstimationDao(appDatabase: AppDatabase): EstimationDao {
-        return appDatabase.estimationDao()
     }
 
     @Provides

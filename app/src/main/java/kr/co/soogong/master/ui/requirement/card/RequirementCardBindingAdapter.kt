@@ -5,12 +5,7 @@ import android.icu.text.SimpleDateFormat
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.dto.requirement.estimation.EstimationDto
-import kr.co.soogong.master.data.model.requirement.Estimation
-import kr.co.soogong.master.data.model.requirement.Transmissions
 import kr.co.soogong.master.ui.widget.AmountView
-import java.text.DateFormat
-import java.time.LocalDate
 import java.util.*
 
 @BindingAdapter("bind:created_datetime_to_string")
@@ -24,16 +19,6 @@ fun TextView.setStartDatetime(date: String?) {
     }
 }
 
-//@BindingAdapter("bind:start_date")
-//fun TextView.setStartDate(createdAt: Long?) {
-//    val date = Date(createdAt)
-//    val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd - hh:mm")
-//    text = context.getString(
-//        R.string.requirements_card_start_time,
-//        simpleDateFormat.format(date)
-//    )
-//}
-
 @BindingAdapter("bind:closed_datetime_to_string")
 fun TextView.setEndDatetime(date: String?) {
     val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd - hh:mm")
@@ -45,16 +30,6 @@ fun TextView.setEndDatetime(date: String?) {
     }
 }
 
-//@BindingAdapter("bind:end_date")
-//fun TextView.setEndDate(createdAt: Long?) {
-//    val date = Date(createdAt ?: System.currentTimeMillis())
-//    val c = Calendar.getInstance()
-//    c.time = date
-//    c.add(Calendar.DATE, 1)
-//    val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd - hh:mm")
-//    text = context.getString(R.string.requirements_card_end_time, simpleDateFormat.format(c.time))
-//}
-
 @BindingAdapter("bind:closed_datetime_only_to_string")
 fun TextView.setEndDatetimeOnly(date: String?) {
     val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd - hh:mm")
@@ -65,16 +40,6 @@ fun TextView.setEndDatetimeOnly(date: String?) {
         text = simpleDateFormat.format(c.time)
     }
 }
-//
-//@BindingAdapter("bind:end_date_2")
-//fun TextView.setEndDate2(createdAt: Long?) {
-//    val date = Date(createdAt ?: System.currentTimeMillis())
-//    val c = Calendar.getInstance()
-//    c.time = date
-//    c.add(Calendar.DATE, 1)
-//    val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd - hh:mm")
-//    text = simpleDateFormat.format(c.time)
-//}
 
 @BindingAdapter("bind:requirementStatus")
 fun AmountView.setAmount(status: String?, price: String?) {
