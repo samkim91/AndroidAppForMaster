@@ -32,10 +32,6 @@ class WriteEstimationViewModel @Inject constructor(
     val requirement: LiveData<RequirementDto>
         get() = _requirement
 
-    init {
-
-    }
-
     fun requestRequirement() {
         getRequirementUseCase(requirementId)
             .subscribeOn(Schedulers.io())

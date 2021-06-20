@@ -4,23 +4,21 @@ import android.content.SharedPreferences
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import dagger.Reusable
-import kr.co.soogong.master.data.dao.requirement.estimation.EstimationDao
-import kr.co.soogong.master.domain.usecase.auth.SaveMasterApprovalUseCase
-import kr.co.soogong.master.domain.usecase.auth.SaveMasterIdInSharedUseCase
-import kr.co.soogong.master.domain.usecase.auth.SaveMasterUidInSharedUseCase
+import kr.co.soogong.master.data.dao.profile.MasterDao
+import kr.co.soogong.master.data.dao.requirement.RequirementDao
 import javax.inject.Inject
 
 @Reusable
 class SignOutUseCase @Inject constructor(
-    private val estimationDao: EstimationDao,
-    private val userDao: EstimationDao,
+    private val masterDao: MasterDao,
+    private val requirementDao: RequirementDao,
     private val sharedPreferences: SharedPreferences,
 ) {
     suspend operator fun invoke() {
         Firebase.auth.signOut()
 
-        estimationDao.removeAll()
-        userDao.removeAll()
+        requirementDao.removeAll()
+        masterDao.removeAll()
 
         sharedPreferences.edit().clear().apply()
     }
