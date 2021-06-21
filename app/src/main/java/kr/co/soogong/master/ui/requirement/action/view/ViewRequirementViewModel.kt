@@ -1,6 +1,5 @@
 package kr.co.soogong.master.ui.requirement.action.view
 
-import   android.os.Bundle
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
@@ -11,24 +10,25 @@ import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.dto.requirement.RequirementDto
 import kr.co.soogong.master.data.dto.requirement.estimation.EstimationDto
 import kr.co.soogong.master.data.model.requirement.estimation.EstimationResponseCode
-import kr.co.soogong.master.domain.usecase.requirement.*
+import kr.co.soogong.master.domain.usecase.requirement.AskForReviewUseCase
+import kr.co.soogong.master.domain.usecase.requirement.CallToCustomerUseCase
+import kr.co.soogong.master.domain.usecase.requirement.GetRequirementUseCase
+import kr.co.soogong.master.domain.usecase.requirement.SaveEstimationUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
-import kr.co.soogong.master.uihelper.requirment.action.ViewRequirementActivityHelper.BUNDLE_KEY_REQUIREMENT_KEY
-import kr.co.soogong.master.uihelper.requirment.action.ViewRequirementActivityHelper.EXTRA_KEY_BUNDLE
+import kr.co.soogong.master.uihelper.requirment.action.ViewRequirementActivityHelper
 import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class ViewRequirementViewModel @Inject constructor(
-    val getRequirementUseCase: GetRequirementUseCase,
-    private val sendEstimationUseCase: SendEstimationUseCase,
+    private val getRequirementUseCase: GetRequirementUseCase,
+    private val saveEstimationUseCase: SaveEstimationUseCase,
     private val callToCustomerUseCase: CallToCustomerUseCase,
     private val askForReviewUseCase: AskForReviewUseCase,
     val savedStateHandle: SavedStateHandle
 ) : BaseViewModel() {
-    // Note : activity에서 viewModel로 데이터 넘기는 법. savedStateHandle에서 가져온다.
-    private val requirementId =
-        savedStateHandle.get<Bundle>(EXTRA_KEY_BUNDLE)?.getInt(BUNDLE_KEY_REQUIREMENT_KEY)!!
+    // Note : activity 에서 viewModel 로 데이터 넘기는 법. savedStateHandle 에서 가져온다.
+    private val requirementId = ViewRequirementActivityHelper.getRequirementIdBySaveState(savedStateHandle)
 
     private val _requirement = MutableLiveData<RequirementDto>()
     val requirement: LiveData<RequirementDto>
@@ -53,7 +53,7 @@ class ViewRequirementViewModel @Inject constructor(
 
     fun refuseToEstimate() {
         Timber.tag(TAG).d("requestRequirement: ")
-        sendEstimationUseCase(
+        saveEstimationUseCase(
             estimationDto = EstimationDto(
                 id = requirement.value?.estimationDto?.id,
                 token = requirement.value?.estimationDto?.token,

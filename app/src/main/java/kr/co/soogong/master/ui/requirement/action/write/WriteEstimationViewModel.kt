@@ -1,6 +1,5 @@
 package kr.co.soogong.master.ui.requirement.action.write
 
-import android.os.Bundle
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
@@ -15,21 +14,20 @@ import kr.co.soogong.master.data.model.requirement.estimation.EstimationPriceTyp
 import kr.co.soogong.master.data.model.requirement.estimation.EstimationResponseCode
 import kr.co.soogong.master.data.model.requirement.estimation.EstimationTypeCode
 import kr.co.soogong.master.domain.usecase.requirement.GetRequirementUseCase
-import kr.co.soogong.master.domain.usecase.requirement.SendEstimationUseCase
+import kr.co.soogong.master.domain.usecase.requirement.SaveEstimationUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
-import kr.co.soogong.master.uihelper.requirment.action.WriteEstimationActivityHelper.BUNDLE_KEY
-import kr.co.soogong.master.uihelper.requirment.action.WriteEstimationActivityHelper.EXTRA_STRING_KEY
+import kr.co.soogong.master.uihelper.requirment.action.WriteEstimationActivityHelper
 import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class WriteEstimationViewModel @Inject constructor(
-    private val sendEstimationUseCase: SendEstimationUseCase,
+    private val saveEstimationUseCase: SaveEstimationUseCase,
     private val getRequirementUseCase: GetRequirementUseCase,
-    savedStateHandle: SavedStateHandle
+    val savedStateHandle: SavedStateHandle
 ) : BaseViewModel() {
 
-    private val requirementId = savedStateHandle.get<Bundle>(BUNDLE_KEY)?.getInt(EXTRA_STRING_KEY)!!
+    private val requirementId = WriteEstimationActivityHelper.getRequirementIdBySaveState(savedStateHandle)
 
     private val _requirement = MutableLiveData<RequirementDto>()
     val requirement: LiveData<RequirementDto>
@@ -62,7 +60,7 @@ class WriteEstimationViewModel @Inject constructor(
 
     fun sendEstimation() {
         Timber.tag(TAG).d("sendEstimation: ")
-        sendEstimationUseCase(
+        saveEstimationUseCase(
             estimationDto = EstimationDto(
                 id = requirement.value?.estimationDto?.id,
                 token = requirement.value?.estimationDto?.token,

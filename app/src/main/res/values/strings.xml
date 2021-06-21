@@ -151,7 +151,7 @@
     <string name="estimation_by_item">항목별 견적</string>
 
     <!-- End Estimate -->
-    <string name="end_estimate_title">최종 정보</string>
+    <string name="end_repair_title">최종 정보</string>
     <string name="end_estimate_price_title">고객과 거래한 최종시공가를 입력해주세요.</string>
     <string name="end_estimate_calendar_title">시공 완료일자를 선택해주세요.</string>
 

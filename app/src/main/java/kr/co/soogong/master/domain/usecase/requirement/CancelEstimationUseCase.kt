@@ -9,7 +9,7 @@ import kr.co.soogong.master.data.dto.Response
 import javax.inject.Inject
 
 @Reusable
-class CancelEstimateUseCase @Inject constructor(
+class CancelEstimationUseCase @Inject constructor(
     private val requirementService: RequirementService,
     private val getMasterUidFromSharedUseCase: GetMasterUidFromSharedUseCase
 ){
