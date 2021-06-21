@@ -8,18 +8,25 @@ import java.util.*
 @Parcelize
 data class EstimationPriceDto(
     @SerializedName("id")
-    val id: Int,
+    val id: Int?,
 
     @SerializedName("estimationId")
-    val estimationId: String?,
-
-    @SerializedName("partialPrice")
-    val partialPrice: Int?,
+    val estimationId: Int?,
 
     @SerializedName("priceType")
     val priceType: String?,
+
+    @SerializedName("partialPrice")
+    val partialPrice: Int?,
 ) : Parcelable {
     companion object {
-
+        fun inputToEstimationPriceDto(estimationDto: EstimationDto?, priceType: String?, partialPrice: Int?): EstimationPriceDto {
+            return EstimationPriceDto(
+                id = null,
+                estimationId = estimationDto?.id,
+                priceType = priceType,
+                partialPrice = partialPrice,
+            )
+        }
     }
 }

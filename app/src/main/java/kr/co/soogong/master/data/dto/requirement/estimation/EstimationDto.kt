@@ -3,28 +3,29 @@ package kr.co.soogong.master.data.dto.requirement.estimation
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
+import kr.co.soogong.master.data.dto.requirement.repair.RepairDto
 import kr.co.soogong.master.data.dto.requirement.review.ReviewDto
 import java.util.*
 
 @Parcelize
 data class EstimationDto(
     @SerializedName("id")
-    val id: Int,
-
-    @SerializedName("requirementId")
-    val requirementId: Int,
-
-    @SerializedName("masterId")
-    val masterId: Int?,
+    val id: Int?,
 
     @SerializedName("token")
     val token: String?,
 
-    @SerializedName("projectName")
-    val type: String?,
+    @SerializedName("requirementId")
+    val requirementId: Int?,
+
+    @SerializedName("masterId")
+    val masterId: Int?,
 
     @SerializedName("masterResponseCode")
     val masterResponseCode: String?,
+
+    @SerializedName("type")
+    val type: String?,
 
     @SerializedName("price")
     val price: Int?,
@@ -36,10 +37,10 @@ data class EstimationDto(
     val choosenYn: Boolean?,
 
     @SerializedName("estimationPrice")
-    val estimationPrice: EstimationPriceDto?,
+    val estimationPrice: List<EstimationPriceDto>?,
 
-    @SerializedName("review")
-    val review: ReviewDto?,
+    @SerializedName("repair")
+    val repair: RepairDto?,
 
     @SerializedName("createdAt")
     val createdAt: String?,

@@ -327,7 +327,7 @@
 
                     <!-- region 나의 최종 시공 내용 -->
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/done_layout"
+                        android:id="@+id/repair_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingStart="@dimen/estimation_card_default_margin_start"
@@ -336,41 +336,41 @@
                         app:layout_constraintTop_toBottomOf="@id/customer_review_divider">
 
                         <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/done_title"
+                            android:id="@+id/repair_title"
                             style="@style/medium_text_style.bold"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/estimation_card_default_margin_top"
-                            android:text="@string/view_estimate_done_title"
+                            android:text="@string/view_repair_title"
                             android:textColor="@color/text_basic_color"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <LinearLayout
-                            android:id="@+id/custom_frame_for_done_detail"
+                            android:id="@+id/custom_frame_for_repair_detail"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/done_title" />
+                            app:layout_constraintTop_toBottomOf="@id/repair_title" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/done_divider"
+                        android:id="@+id/repair_divider"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/divider_height"
                         android:layout_marginTop="@dimen/estimation_card_default_margin_top"
                         android:background="@drawable/divider"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/done_layout" />
+                        app:layout_constraintTop_toBottomOf="@id/repair_layout" />
 
                     <androidx.constraintlayout.widget.Group
-                        android:id="@+id/done_group"
+                        android:id="@+id/repair_group"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:visibility="gone"
-                        app:constraint_referenced_ids="done_divider, done_layout" />
+                        app:constraint_referenced_ids="repair_divider, repair_layout" />
                     <!-- region end 나의 최종 시공 내용 -->
 
                     <!-- region 고객 요청 내용 -->
@@ -381,7 +381,7 @@
                         android:paddingStart="@dimen/estimation_card_default_margin_start"
                         android:paddingEnd="@dimen/estimation_card_default_margin_end"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/done_divider"
+                        app:layout_constraintTop_toBottomOf="@id/repair_divider"
                         app:layout_constraintEnd_toEndOf="parent">
 
                         <androidx.appcompat.widget.AppCompatTextView
@@ -396,8 +396,9 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="@id/customer_request_layout"
                             app:layout_constraintEnd_toEndOf="parent"
-                             />
-<!--                        todo bind:visible="@{vm.requirement.additionalInfo}"-->
+                            bind:visible="@{vm.requirement.requirementQnas}"
+                            />
+
 
                         <LinearLayout
                             android:id="@+id/custom_frame"
@@ -537,7 +538,7 @@
                         app:layout_constraintTop_toBottomOf="@id/estimation_layout" />
 
                     <androidx.constraintlayout.widget.Group
-                        android:id="@+id/transmission_group"
+                        android:id="@+id/estimation_group"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:visibility="gone"

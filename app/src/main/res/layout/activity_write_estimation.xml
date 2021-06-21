@@ -6,6 +6,9 @@
     >
 
     <data>
+
+        <import type="android.text.InputType" />
+
         <variable
             name="vm"
             type="kr.co.soogong.master.ui.requirement.action.write.WriteEstimationViewModel" />
@@ -251,7 +254,7 @@
                         android:button="@android:color/transparent"
                         android:checked="true"
                         android:gravity="center"
-                        android:text="통합 견적"
+                        android:text="@string/integration_estimation"
                         android:textColor="@color/filter_text_selector_2" />
 
                     <RadioButton
@@ -264,13 +267,13 @@
                         android:button="@android:color/transparent"
                         android:checked="false"
                         android:gravity="center"
-                        android:text="항목별 견적"
+                        android:text="@string/estimation_by_item"
                         android:textColor="@color/filter_text_selector_2" />
 
                 </RadioGroup>
 
                 <kr.co.soogong.master.ui.widget.TitleEditText
-                    android:id="@+id/amount"
+                    android:id="@+id/simpleCost"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
@@ -278,11 +281,12 @@
                     android:layout_marginEnd="20dp"
                     android:textColor="@color/text_basic_color"
                     android:visibility="visible"
-                    app:setInputType="@{2}"
-                    app:setMaxLength="@{15}"
+                    app:setInputType="@{InputType.TYPE_CLASS_NUMBER}"
+                    app:setMaxLength="@{13}"
                     app:alertText='@{"견적은 1만원 이상으로 보내주세요."}'
                     app:alertVisible="@{false}"
                     app:hintText='@{"숫자만 입력해주세요. (단위 : 원)"}'
+                    app:content="@={vm.simpleCost}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/request_type_group"
@@ -297,10 +301,11 @@
                     android:layout_marginEnd="20dp"
                     android:textColor="@color/text_basic_color"
                     app:alertText='@{"필수 정보입니다."}'
-                    app:setInputType="@{2}"
-                    app:setMaxLength="@{15}"
+                    app:setInputType="@{InputType.TYPE_CLASS_NUMBER}"
+                    app:setMaxLength="@{13}"
                     app:alertVisible="@{false}"
                     app:hintText='@{"숫자만 입력해주세요. (단위 : 원)"}'
+                    app:content="@={vm.laborCost}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/request_type_group"
@@ -315,9 +320,10 @@
                     android:layout_marginEnd="20dp"
                     android:textColor="@color/text_basic_color"
                     app:alertText='@{"필수 정보입니다."}'
-                    app:setInputType="@{2}"
-                    app:setMaxLength="@{15}"
+                    app:setInputType="@{InputType.TYPE_CLASS_NUMBER}"
+                    app:setMaxLength="@{13}"
                     app:alertVisible="@{false}"
+                    app:content="@={vm.materialCost}"
                     app:hintText='@{"숫자만 입력해주세요. (단위 : 원)"}'
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -333,9 +339,10 @@
                     android:layout_marginEnd="20dp"
                     android:textColor="@color/text_basic_color"
                     app:alertText='@{"필수 정보입니다."}'
-                    app:setInputType="@{2}"
-                    app:setMaxLength="@{15}"
+                    app:setInputType="@{InputType.TYPE_CLASS_NUMBER}"
+                    app:setMaxLength="@{13}"
                     app:alertVisible="@{false}"
+                    app:content="@={vm.travelCost}"
                     app:hintText='@{"숫자만 입력해주세요. (단위 : 원)"}'
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -343,7 +350,7 @@
                     app:title='@{"출장비"}' />
 
                 <kr.co.soogong.master.ui.widget.TitleEditText
-                    android:id="@+id/total_amount"
+                    android:id="@+id/total_cost"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
@@ -351,25 +358,26 @@
                     android:layout_marginEnd="20dp"
                     android:textColor="@color/text_basic_color"
                     app:alertVisible="@{false}"
-                    app:setInputType="@{0}"
+                    app:setInputType="@{InputType.TYPE_CLASS_TEXT}"
+                    app:content="@={vm.totalCost}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/travel_cost"
                     app:title='@{"총 견적가"}' />
 
                 <androidx.constraintlayout.widget.Group
-                    android:id="@+id/request_detail"
+                    android:id="@+id/estimation_by_item_group"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:visibility="gone"
-                    app:constraint_referenced_ids="labor_cost,material_cost,travel_cost,total_amount" />
+                    app:constraint_referenced_ids="labor_cost,material_cost,travel_cost,total_cost" />
 
                 <androidx.constraintlayout.widget.Barrier
                     android:id="@+id/request_barrier"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:barrierDirection="bottom"
-                    app:constraint_referenced_ids="amount,total_amount" />
+                    app:constraint_referenced_ids="simpleCost,total_cost" />
 
                 <kr.co.soogong.master.ui.widget.TitleEditTextCounterView
                     android:id="@+id/write_detail"
@@ -385,10 +393,9 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/request_barrier"
+                    app:content="@{vm.description}"
                     app:limitedCount='@{500}' />
-
             </androidx.constraintlayout.widget.ConstraintLayout>
-
         </ScrollView>
     </LinearLayout>
 </layout>

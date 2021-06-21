@@ -3,9 +3,9 @@ package kr.co.soogong.master.network.requirement
 import io.reactivex.Single
 import kr.co.soogong.master.data.dto.Response
 import kr.co.soogong.master.data.dto.requirement.RequirementDto
+import kr.co.soogong.master.data.dto.requirement.estimation.EstimationDto
 import kr.co.soogong.master.data.model.requirement.CancelEstimate
 import kr.co.soogong.master.data.model.requirement.EndEstimate
-import kr.co.soogong.master.data.model.requirement.EstimationMessage
 import retrofit2.Retrofit
 import javax.inject.Inject
 
@@ -22,33 +22,10 @@ class RequirementService @Inject constructor(
         return requirementInterface.getRequirement(requirementId, masterId)
     }
 
-
-    fun refuseToEstimate(branchKeycode: String?, id: Int): Single<Response> {
-        val data = HashMap<String, Any?>()
-        data["branch_keycode"] = branchKeycode
-        data["keycode"] = id
-
-        return requirementInterface.refuseToEstimate(data)
+    fun sendEstimation(estimationDto: EstimationDto): Single<EstimationDto> {
+        return requirementInterface.sendEstimation(estimationDto)
     }
 
-    fun sendMessage(
-        branchKeycode: String?,
-        keycode: String,
-        transmissionType: String,
-        estimationMessage: EstimationMessage
-    ): Single<Response> {
-        val data = HashMap<String, String?>()
-        data["action_type"] = "accept"
-        data["branch_keycode"] = branchKeycode
-        data["keycode"] = keycode
-        data["transmission_type"] = transmissionType
-        data["contents"] = estimationMessage.description
-        data["price_in_number"] = estimationMessage.totalPrice
-        data["personnel"] = estimationMessage.personnel
-        data["material"] = estimationMessage.material
-        data["trip"] = estimationMessage.trip
-        return requirementInterface.sendMessage(data)
-    }
 
     fun cancelEstimate(
         branchKeycode: String?,

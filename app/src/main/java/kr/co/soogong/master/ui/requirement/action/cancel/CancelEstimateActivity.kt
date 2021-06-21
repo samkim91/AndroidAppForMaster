@@ -77,7 +77,7 @@ class CancelEstimateActivity : BaseActivity<ActivityCancelEstimateBinding>(
                     super.onBackPressed()
                 }
                 CANCEL_ESTIMATE_FAILED -> {
-                    toast(getString(R.string.send_message_failed))
+                    toast(getString(R.string.error_message_of_request_failed))
                 }
             }
         })
