@@ -1,12 +1,14 @@
 package kr.co.soogong.master.network.requirement
 
-import com.google.gson.JsonArray
-import com.google.gson.JsonObject
 import io.reactivex.Single
 import kr.co.soogong.master.contract.HttpContract
 import kr.co.soogong.master.data.dto.Response
 import kr.co.soogong.master.data.dto.requirement.RequirementDto
-import retrofit2.http.*
+import kr.co.soogong.master.data.dto.requirement.estimation.EstimationDto
+import retrofit2.http.Body
+import retrofit2.http.GET
+import retrofit2.http.POST
+import retrofit2.http.Query
 
 interface RequirementInterface {
     @GET(HttpContract.GET_REQUIREMENT_LIST)
@@ -15,16 +17,9 @@ interface RequirementInterface {
     @GET(HttpContract.GET_REQUIREMENT)
     fun getRequirement(@Query("requirementId") requirementId : Int, @Query("masterId") masterId: Int): Single<RequirementDto>
 
+    @POST(HttpContract.SEND_ESTIMATION)
+    fun sendEstimation(@Body body: EstimationDto): Single<EstimationDto>
 
-
-
-
-
-    @POST(HttpContract.REFUSE_ESTIMATION)
-    fun refuseToEstimate(@Body body: HashMap<String, Any?>): Single<Response>
-
-    @POST(HttpContract.SEND_ESTIMATION_MESSAGE)
-    fun sendMessage(@Body body: HashMap<String, String?>): Single<Response>
 
     @POST(HttpContract.CANCEL_ESTIMATE)
     fun cancelEstimate(@Body body: HashMap<String, Any?>): Single<Response>

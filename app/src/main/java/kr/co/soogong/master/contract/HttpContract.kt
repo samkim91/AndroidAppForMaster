@@ -20,16 +20,12 @@ object HttpContract {
 
     //region Requirement
     const val GET_REQUIREMENT_LIST = "master/find-all-requirement-by-id"
-//    const val GET_REQUIREMENT_LIST = "master/find-requirement-by-id"
     const val GET_REQUIREMENT = "master/find-requirement-by-id"
     //endregion
 
 
     //region Estimations
-    const val GET_ESTIMATION_V2 = "api/v2/estimations/{branch_keycode}"
-    const val GET_ESTIMATION = "api/v1/transmissions/default_list"
-    const val ACCEPT_ESTIMATION = "api/v1/transmissions/accept_list"
-    const val REFUSE_ESTIMATION = "api/v1/transmissions/refuse"
+    const val SEND_ESTIMATION = "estimation/save"
     //endregion
 
     //region Profile

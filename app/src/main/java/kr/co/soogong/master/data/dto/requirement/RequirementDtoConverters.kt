@@ -4,6 +4,7 @@ import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kr.co.soogong.master.data.dto.requirement.estimation.EstimationDto
+import kr.co.soogong.master.data.dto.requirement.qna.RequirementQnaDto
 import kr.co.soogong.master.data.model.requirement.ImagePath
 import java.util.*
 
@@ -39,6 +40,18 @@ class RequirementDtoConverters {
     fun stringToImagePathList(imagePathString: String?): List<ImagePath>? {
         return imagePathString?.let {
             Gson().fromJson(it, object : TypeToken<List<ImagePath>>() {}.type)
+        }
+    }
+
+    @TypeConverter
+    fun requirementQnasToString(list: List<RequirementQnaDto>?): String? {
+        return list?.let { Gson().toJson(it) }
+    }
+
+    @TypeConverter
+    fun stringToRequirementQnas(requirementQnasString: String?): List<RequirementQnaDto>? {
+        return requirementQnasString?.let {
+            Gson().fromJson(it, object : TypeToken<List<RequirementQnaDto>>() {}.type)
         }
     }
 }

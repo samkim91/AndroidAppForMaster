@@ -6,8 +6,8 @@ import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 import kr.co.soogong.master.data.dto.requirement.estimation.EstimationDto
+import kr.co.soogong.master.data.dto.requirement.qna.RequirementQnaDto
 import kr.co.soogong.master.data.model.requirement.ImagePath
-import java.util.*
 
 @Parcelize
 @Entity(tableName = "Requirement")
@@ -43,14 +43,11 @@ data class RequirementDto(
     @SerializedName("images")
     val images: MutableList<ImagePath>?,
 
-    // TODO: 2021/06/16 질문응답 추가 필요
-//    @SerializedName("requirementQnas")
-//    val requirementQnas: List<String>,
+    @SerializedName("requirementQnas")
+    val requirementQnas: List<RequirementQnaDto>?,
 
     @SerializedName("estimationDto")
     val estimationDto: EstimationDto?,
-
-    // TODO: 2021/06/18 repair Dto도 추가해야함
 
     @SerializedName("closedAt")
     val closedAt: String?,

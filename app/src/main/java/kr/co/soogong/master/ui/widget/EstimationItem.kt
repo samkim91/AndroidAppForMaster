@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import kr.co.soogong.master.databinding.ViewTransmissionMessageBinding
 
-class TransmissionMessage @JvmOverloads constructor(
+class EstimationItem @JvmOverloads constructor(
     context: Context,
     attributeSet: AttributeSet? = null,
     defStyle: Int = 0
