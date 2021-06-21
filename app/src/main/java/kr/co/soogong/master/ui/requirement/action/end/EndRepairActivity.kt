@@ -1,22 +1,21 @@
 package kr.co.soogong.master.ui.requirement.action.end
 
-import android.icu.util.Calendar
 import android.os.Bundle
 import android.widget.CalendarView
 import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.model.requirement.EndEstimate
 import kr.co.soogong.master.databinding.ActivityEndRepairBinding
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.ui.requirement.action.end.EndRepairViewModel.Companion.END_REPAIR_FAILED
 import kr.co.soogong.master.ui.requirement.action.end.EndRepairViewModel.Companion.END_REPAIR_SUCCESSFULLY
+import kr.co.soogong.master.ui.requirement.action.end.EndRepairViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.uihelper.requirment.action.EndRepairActivityHelper
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
 import java.text.DecimalFormat
-import java.text.SimpleDateFormat
+import java.util.*
 
 @AndroidEntryPoint
 class EndRepairActivity : BaseActivity<ActivityEndRepairBinding>(
@@ -25,9 +24,8 @@ class EndRepairActivity : BaseActivity<ActivityEndRepairBinding>(
     val requirementId: Int by lazy {
         EndRepairActivityHelper.getRequirementId(intent)
     }
-    private val viewModel: EndRepairViewModel by viewModels()
 
-    private var actualDate = Calendar.getInstance()
+    private val viewModel: EndRepairViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,46 +42,37 @@ class EndRepairActivity : BaseActivity<ActivityEndRepairBinding>(
             lifecycleOwner = this@EndRepairActivity
 
             with(actionBar) {
-                title.text = getString(R.string.end_estimate_title)
+                title.text = getString(R.string.end_repair_title)
                 backButton.setOnClickListener {
                     super.onBackPressed()
                 }
                 button.setOnClickListener {
-                    if (amount.text.isNullOrEmpty() || amount.text.toString().replace(",", "")
-                            .toLong() < 10000
-                    ) {
-                        amount.alertVisible =
-                            amount.text.isNullOrEmpty() || amount.text.toString().replace(",", "")
-                                .toLong() < 10000
+                    viewModel.actualPrice.observe(this@EndRepairActivity, {
+                        actualPrice.alertVisible =
+                            it.isNullOrEmpty() || it.replace(",", "").toLong() < 10000
+                    })
 
-                        return@setOnClickListener
+                    if (!actualPrice.alertVisible) {
+                        viewModel.saveRepair()
                     }
-
-                    viewModel.endRepair(
-                        estimationId = requirementId,
-                        endEstimate = EndEstimate(
-                            actualPrice = amount.text,
-                            actualDate = SimpleDateFormat("yyyy-MM-dd").format(actualDate.time)
-                        )
-                    )
                 }
             }
 
             calender.setOnDateChangeListener { _: CalendarView, year: Int, month: Int, day: Int ->
-                actualDate.set(year, month, day)
+                Timber.tag(TAG).d("setOnDateChangeListener: ${year-month-day}")
+                viewModel.actualDate.value = "${year-month-day}"
             }
 
-            amount.addTextChangedListener(afterTextChanged = {
-                amount.alertVisible =
-                    amount.text.isNullOrEmpty() || amount.text.toString().replace(",", "")
-                        .toLong() < 10000
-            })
-
-            amount.addFocusChangeListener(onFocusChange = { _, hasFocus ->
-                val amountData = amount.text.toString().replace(",", "")
-                if (hasFocus) amount.text = amountData
-                else if (!amountData.isNullOrEmpty()) amount.text =
-                    "${DecimalFormat("#,###").format(amountData.toLong())}"
+            actualPrice.addFocusChangeListener(onFocusChange = { _, hasFocus ->
+                if(!viewModel.actualPrice.value.isNullOrEmpty()) {
+                    viewModel.actualPrice.value?.replace(",", "").let {
+                        if(hasFocus) {
+                            viewModel.actualPrice.value = it
+                        } else {
+                            viewModel.actualPrice.value = DecimalFormat("#,###").format(it?.toLong())
+                        }
+                    }
+                }
             })
         }
     }
@@ -97,11 +86,16 @@ class EndRepairActivity : BaseActivity<ActivityEndRepairBinding>(
                     toast(getString(R.string.end_estimate_succeeded))
                     super.onBackPressed()
                 }
-                END_REPAIR_FAILED -> {
+                REQUEST_FAILED, END_REPAIR_FAILED -> {
                     toast(getString(R.string.error_message_of_request_failed))
                 }
             }
         })
+    }
+
+    override fun onStart() {
+        super.onStart()
+        viewModel.requestRequirement()
     }
 
     companion object {

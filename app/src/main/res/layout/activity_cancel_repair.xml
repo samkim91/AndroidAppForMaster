@@ -7,7 +7,7 @@
 
         <variable
             name="vm"
-            type="kr.co.soogong.master.ui.requirement.action.cancel.CancelEstimateViewModel" />
+            type="kr.co.soogong.master.ui.requirement.action.cancel.CancelRepairViewModel" />
     </data>
 
     <LinearLayout
@@ -114,6 +114,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/cancel_option"
                     app:limitedCount='@{100}'
+                    app:content="@={vm.description}"
                     app:title='@{"상세 내용을 입력해주세요. (선택)"}' />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>

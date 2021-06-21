@@ -49,15 +49,16 @@
             android:launchMode="singleTask" />
         <activity
             android:name=".ui.main.MainActivity"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            />
         <activity
             android:name=".ui.major.MajorActivity"
             android:launchMode="singleTask" />
         <activity
-            android:name="kr.co.soogong.master.ui.image.ImageActivity"
+            android:name=".ui.image.ImageActivity"
             android:launchMode="singleTask" />
         <activity
-            android:name=".ui.requirement.action.cancel.CancelEstimateActivity"
+            android:name=".ui.requirement.action.cancel.CancelRepairActivity"
             android:launchMode="singleTask" />
         <activity
             android:name=".ui.requirement.action.end.EndRepairActivity"

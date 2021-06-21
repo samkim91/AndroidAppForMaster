@@ -19,7 +19,7 @@ import kr.co.soogong.master.ui.requirement.action.view.ViewRequirementViewModel.
 import kr.co.soogong.master.ui.requirement.action.view.ViewRequirementViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.uihelper.image.ImageViewActivityHelper
 import kr.co.soogong.master.uihelper.requirment.CallToCustomerHelper
-import kr.co.soogong.master.uihelper.requirment.action.CancelEstimationActivityHelper
+import kr.co.soogong.master.uihelper.requirment.action.CancelRepairActivityHelper
 import kr.co.soogong.master.uihelper.requirment.action.EndRepairActivityHelper
 import kr.co.soogong.master.uihelper.requirment.action.ViewRequirementActivityHelper
 import kr.co.soogong.master.uihelper.requirment.action.WriteEstimationActivityHelper
@@ -96,7 +96,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
             // 취소 됐음 버튼
             cancelButton.setOnClickListener {
                 startActivity(
-                    CancelEstimationActivityHelper.getIntent(
+                    CancelRepairActivityHelper.getIntent(
                         this@ViewRequirementActivity,
                         requirementId
                     )

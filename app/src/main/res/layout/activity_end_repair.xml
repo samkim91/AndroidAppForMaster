@@ -4,6 +4,8 @@
 
     <data>
 
+        <import type="android.text.InputType" />
+
         <variable
             name="vm"
             type="kr.co.soogong.master.ui.requirement.action.end.EndRepairViewModel" />
@@ -37,7 +39,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <kr.co.soogong.master.ui.widget.TitleEditText
-                    android:id="@+id/amount"
+                    android:id="@+id/actual_price"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
@@ -46,10 +48,13 @@
                     android:textColor="@color/text_basic_color"
                     app:alertText='@{"견적은 1만원 이상으로 보내주세요."}'
                     app:alertVisible="@{false}"
+                    app:content="@={vm.actualPrice}"
                     app:hintText='@{"숫자만 입력해주세요. (단위 : 원)"}'
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/banner_image"
+                    app:setInputType="@{InputType.TYPE_CLASS_NUMBER}"
+                    app:setMaxLength="@{13}"
                     app:title='@{"고객과 거래한 최종시공가를 입력해주세요."}' />
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -64,7 +69,7 @@
                     android:textColor="@color/text_basic_color"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/amount" />
+                    app:layout_constraintTop_toBottomOf="@id/actual_price" />
 
                 <CalendarView
                     android:id="@+id/calender"

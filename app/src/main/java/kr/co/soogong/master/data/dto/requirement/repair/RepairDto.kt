@@ -10,7 +10,7 @@ import java.util.*
 @Parcelize
 data class RepairDto(
     @SerializedName("id")
-    val id: Int,
+    val id: Int?,
 
     @SerializedName("estimationId")
     val estimationId: Int?,
@@ -29,6 +29,15 @@ data class RepairDto(
 
     @SerializedName("requestReviewYn")
     val requestReviewYn: Boolean?,
+
+    @SerializedName("canceledYn")
+    val canceledYn: Boolean?,
+
+    @SerializedName("canceledReason")
+    val canceledReason: String?,
+
+    @SerializedName("description")
+    val description: String?,
 
     @SerializedName("review")
     val review: ReviewDto?,
