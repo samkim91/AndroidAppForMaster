@@ -5,6 +5,7 @@ import android.icu.text.SimpleDateFormat
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import kr.co.soogong.master.R
+import kr.co.soogong.master.data.model.requirement.RequirementStatus
 import kr.co.soogong.master.ui.widget.AmountView
 import java.util.*
 
@@ -43,13 +44,13 @@ fun TextView.setEndDatetimeOnly(date: Date?) {
     }
 }
 
-@BindingAdapter("bind:requirementStatus")
+@BindingAdapter("bind:status")
 fun AmountView.setAmount(status: String?, price: String?) {
     title = when (status) {
-        "Estimated", "Repairing" -> {
+        RequirementStatus.Estimated.toString(), RequirementStatus.Repairing.toString() -> {
             context.getString(R.string.requirements_card_amount_title)
         }
-        "Done", "Closed" -> {
+        RequirementStatus.Done.toString(), RequirementStatus.Closed.toString() -> {
             context.getString(R.string.requirements_card_amount_done_title)
         }
         else -> {

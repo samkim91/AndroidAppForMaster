@@ -56,10 +56,10 @@ class ReceivedViewModel @Inject constructor(
                 onSuccess = { list ->
                     when (index) {
                         1 -> {
-                            _receivedList.postValue(list.filter { it.status == RequirementStatus.Requested.toString() })
+                            _receivedList.postValue(list.filter { it.status == RequirementStatus.Requested })
                         }
                         2 -> {
-                            _receivedList.postValue(list.filter { it.status == RequirementStatus.Estimated.toString() })
+                            _receivedList.postValue(list.filter { it.status == RequirementStatus.Estimated })
                         }
                         else -> {
                             _receivedList.postValue(list)

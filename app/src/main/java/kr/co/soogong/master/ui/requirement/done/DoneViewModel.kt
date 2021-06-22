@@ -53,13 +53,13 @@ class DoneViewModel @Inject constructor(
                 onSuccess = { list ->
                     when (index) {
                         1 -> {
-                            _doneList.postValue(list.filter { it.status == RequirementStatus.Done.toString() })
+                            _doneList.postValue(list.filter { it.status == RequirementStatus.Done })
                         }
                         2 -> {
-                            _doneList.postValue(list.filter { it.status == RequirementStatus.Closed.toString() })
+                            _doneList.postValue(list.filter { it.status == RequirementStatus.Closed })
                         }
                         3 -> {
-                            _doneList.postValue(list.filter { it.status == RequirementStatus.Canceled.toString() || it.status == RequirementStatus.CanceledByClient.toString() || it.status == RequirementStatus.CanceledByMaster.toString() })
+                            _doneList.postValue(list.filter { it.status == RequirementStatus.Canceled || it.status == RequirementStatus.CanceledByClient || it.status == RequirementStatus.CanceledByMaster })
                         }
                         else -> {
                             _doneList.postValue(list)

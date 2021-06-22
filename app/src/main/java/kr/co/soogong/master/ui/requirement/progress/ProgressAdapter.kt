@@ -3,9 +3,8 @@ package kr.co.soogong.master.ui.requirement.progress
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import kr.co.soogong.master.data.model.requirement.RequirementCard
-import kr.co.soogong.master.data.model.requirement.RequirementStatus
-import kr.co.soogong.master.ui.requirement.card.RequirementCardDiffUtil
 import kr.co.soogong.master.ui.requirement.card.EstimationCardViewHolder
+import kr.co.soogong.master.ui.requirement.card.RequirementCardDiffUtil
 import kr.co.soogong.master.ui.requirement.card.RequirementCardViewHolderHelper
 import kr.co.soogong.master.utility.extension.dp
 
@@ -25,5 +24,5 @@ class ProgressAdapter(
     }
 
     override fun getItemViewType(position: Int): Int =
-        RequirementStatus.getStatus(currentList[position].status).toInt()
+        currentList[position].status?.toInt()!!
 }

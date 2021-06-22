@@ -30,10 +30,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/requirement_card_status_margin_top"
+            android:text="@{data.status.toString()}"
             android:textColor="@color/color_1FC472"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:text="@{data.status}"
             tools:text="견적요청" />
 
         <FrameLayout
@@ -224,20 +224,20 @@
         <!-- endregion -->
 
         <!-- region 고객완료요청 -->
-<!--        <androidx.appcompat.widget.AppCompatButton-->
-<!--            android:id="@+id/done_button2"-->
-<!--            style="@style/medium_text_style.bold"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginStart="@dimen/requirement_card_done_button_margin_start"-->
-<!--            android:layout_marginTop="@dimen/requirement_card_done_button_margin_top"-->
-<!--            android:background="@drawable/shape_fill_green_background"-->
-<!--            android:text="@string/requirements_card_done_button"-->
-<!--            android:textColor="@color/basic_white"-->
-<!--            android:visibility="gone"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@id/my_amount" />-->
+        <!--        <androidx.appcompat.widget.AppCompatButton-->
+        <!--            android:id="@+id/done_button2"-->
+        <!--            style="@style/medium_text_style.bold"-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginStart="@dimen/requirement_card_done_button_margin_start"-->
+        <!--            android:layout_marginTop="@dimen/requirement_card_done_button_margin_top"-->
+        <!--            android:background="@drawable/shape_fill_green_background"-->
+        <!--            android:text="@string/requirements_card_done_button"-->
+        <!--            android:textColor="@color/basic_white"-->
+        <!--            android:visibility="gone"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toBottomOf="@id/my_amount" />-->
         <!-- endregion -->
 
         <!-- region 시공완료 -->
