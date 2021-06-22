@@ -13,6 +13,7 @@ import kr.co.soogong.master.ui.requirement.action.end.EndRepairViewModel.Compani
 import kr.co.soogong.master.uihelper.requirment.action.EndRepairActivityHelper
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.extension.toast
+import kr.co.soogong.master.utility.validation.ValidationHelper
 import timber.log.Timber
 import java.text.DecimalFormat
 import java.util.*
@@ -52,7 +53,7 @@ class EndRepairActivity : BaseActivity<ActivityEndRepairBinding>(
                             it.isNullOrEmpty() || it.replace(",", "").toLong() < 10000
                     })
 
-                    if (!actualPrice.alertVisible) {
+                    if (!actualPrice.alertVisible && ValidationHelper.isIntRange(viewModel.actualPrice.value!!)) {
                         viewModel.saveRepair()
                     }
                 }
@@ -60,7 +61,7 @@ class EndRepairActivity : BaseActivity<ActivityEndRepairBinding>(
 
             calender.setOnDateChangeListener { _: CalendarView, year: Int, month: Int, day: Int ->
                 Timber.tag(TAG).d("setOnDateChangeListener: ${year-month-day}")
-                viewModel.actualDate.value = "${year-month-day}"
+                viewModel.actualDate.value?.set(year, month, day)
             }
 
             actualPrice.addFocusChangeListener(onFocusChange = { _, hasFocus ->

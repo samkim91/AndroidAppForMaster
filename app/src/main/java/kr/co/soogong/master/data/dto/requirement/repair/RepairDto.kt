@@ -16,16 +16,16 @@ data class RepairDto(
     val estimationId: Int?,
 
     @SerializedName("scheduledDate")
-    val scheduledDate: String?,
+    val scheduledDate: Date?,
 
     @SerializedName("actualDate")
-    val actualDate: String?,
+    val actualDate: Date?,
 
     @SerializedName("actualPrice")
     val actualPrice: Int?,
 
     @SerializedName("warrantyDueDate")
-    val warrantyDueDate: String?,
+    val warrantyDueDate: Date?,
 
     @SerializedName("requestReviewYn")
     val requestReviewYn: Boolean?,
@@ -41,6 +41,12 @@ data class RepairDto(
 
     @SerializedName("review")
     val review: ReviewDto?,
+
+    @SerializedName("createdAt")
+    val createdAt: Date? = null,
+
+    @SerializedName("updatedAt")
+    val updatedAt: Date? = null,
 
 ) : Parcelable {
     companion object {

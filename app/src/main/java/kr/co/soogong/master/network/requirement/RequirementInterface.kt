@@ -27,10 +27,6 @@ interface RequirementInterface {
 
 
 
-    @POST(HttpContract.CANCEL_ESTIMATE)
-    fun cancelEstimate(@Body body: HashMap<String, Any?>): Single<Response>
-
-
 
     @POST(HttpContract.CALL_TO_CUSTOMER)
     fun callToCustomer(@Body body: HashMap<String, Any>): Single<Response>

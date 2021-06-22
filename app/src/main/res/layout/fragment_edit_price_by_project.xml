@@ -7,7 +7,7 @@
 
         <variable
             name="vm"
-            type="kr.co.soogong.master.ui.profile.edit.withcard.pricebyproject.EditPriceByProjectViewModel" />
+            type="kr.co.soogong.master.ui.profile.edit.portfoliolist.pricebyproject.PriceByProjectViewModel" />
 
         <variable
             name="inputType"

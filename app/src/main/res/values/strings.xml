@@ -101,6 +101,9 @@
     <string name="requirements_card_review_button">리뷰 요청하기</string>
     <string name="requirements_card_review_button_done">리뷰 요청을 완료했어요!</string>
     <string name="requirements_card_start_time">최초 요청일 : %s</string>
+    <string name="requirements_card_matched_time">고객매칭 완료일 : %s</string>
+    <string name="requirements_card_request_finish_time">완료 요청일 : %s</string>
+    <string name="requirements_card_repair_done_time">시공 완료일 : %s</string>
     <string name="requirements_card_end_time">견적 마감일 : %s</string>
     <string name="requirements_card_amount_title">나의 견적가</string>
     <string name="requirements_card_amount_done_title">최종 시공가</string>

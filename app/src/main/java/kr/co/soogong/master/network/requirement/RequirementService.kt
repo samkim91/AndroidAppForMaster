@@ -5,7 +5,6 @@ import kr.co.soogong.master.data.dto.Response
 import kr.co.soogong.master.data.dto.requirement.RequirementDto
 import kr.co.soogong.master.data.dto.requirement.estimation.EstimationDto
 import kr.co.soogong.master.data.dto.requirement.repair.RepairDto
-import kr.co.soogong.master.data.model.requirement.CancelEstimate
 import retrofit2.Retrofit
 import javax.inject.Inject
 
@@ -29,23 +28,6 @@ class RequirementService @Inject constructor(
     fun saveRepair(repairDto: RepairDto): Single<RequirementDto> {
         return requirementInterface.saveRepair(repairDto)
     }
-
-
-    fun cancelEstimate(
-        branchKeycode: String?,
-        estimationId: Int,
-        cancelEstimate: CancelEstimate
-    ): Single<Response> {
-        val data = HashMap<String, Any?>()
-        data["action_type"] = "refuse"
-        data["branch_keycode"] = branchKeycode
-        data["keycode"] = estimationId
-        data["message"] = cancelEstimate.message
-        data["sub_message"] = cancelEstimate.subMessage
-        return requirementInterface.cancelEstimate(data)
-    }
-
-
 
     fun callToCustomer(
         id: Int,

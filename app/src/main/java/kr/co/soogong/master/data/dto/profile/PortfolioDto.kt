@@ -3,8 +3,6 @@ package kr.co.soogong.master.data.dto.profile
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
-import kr.co.soogong.master.data.model.profile.Portfolio
-import java.util.*
 
 @Parcelize
 data class PortfolioDto(
@@ -15,28 +13,22 @@ data class PortfolioDto(
     val title: String,
 
     @SerializedName("description")
-    val description: String,
+    val description: String? = null,
 
     @SerializedName("project")
-    val project: String?,
+    val project: String? = null,
 
     @SerializedName("type")
     val type: String,
 
     @SerializedName("beforeRepairImageId")
-    val beforeRepairImageId: String,
+    val beforeRepairImageId: String? = null,
 
     @SerializedName("afterRepairImageId")
-    val afterRepairImageId: String,
+    val afterRepairImageId: String? = null,
 
     @SerializedName("price")
-    val price: String,
-
-//    @SerializedName("createdAt")
-//    val createdAt: Date?,
-//
-//    @SerializedName("updatedAt")
-//    val updatedAt: Date?,
+    val price: Int? = null,
 ) : Parcelable {
     companion object {
 

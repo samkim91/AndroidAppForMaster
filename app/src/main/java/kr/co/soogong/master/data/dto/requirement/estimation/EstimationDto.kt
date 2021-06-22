@@ -4,7 +4,6 @@ import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 import kr.co.soogong.master.data.dto.requirement.repair.RepairDto
-import kr.co.soogong.master.data.dto.requirement.review.ReviewDto
 import java.util.*
 
 @Parcelize
@@ -36,17 +35,17 @@ data class EstimationDto(
     @SerializedName("choosenYn")
     val choosenYn: Boolean?,
 
-    @SerializedName("estimationPrice")
-    val estimationPrice: List<EstimationPriceDto>?,
+    @SerializedName("estimationPrices")
+    val estimationPrices: List<EstimationPriceDto>?,
 
     @SerializedName("repair")
     val repair: RepairDto?,
 
     @SerializedName("createdAt")
-    val createdAt: String?,
+    val createdAt: Date?,
 
     @SerializedName("updatedAt")
-    val updatedAt: String?,
+    val updatedAt: Date?,
 ) : Parcelable {
     companion object {
 

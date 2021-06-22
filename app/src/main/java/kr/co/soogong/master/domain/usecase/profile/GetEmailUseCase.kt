@@ -6,10 +6,10 @@ import javax.inject.Inject
 
 @Reusable
 class GetEmailUseCase @Inject constructor(
-    private val getProfileUseCase: GetProfileUseCase,
+    private val getMasterFromLocalUseCase: GetMasterFromLocalUseCase,
 ) {
     operator fun invoke(): Single<String> {
-        return getProfileUseCase().map {
+        return getMasterFromLocalUseCase().map {
             it.basicInformation?.email
         }
     }

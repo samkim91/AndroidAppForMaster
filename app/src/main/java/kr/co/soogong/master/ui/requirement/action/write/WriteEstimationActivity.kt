@@ -21,17 +21,13 @@ import kr.co.soogong.master.uihelper.requirment.action.WriteEstimationActivityHe
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.extension.addAdditionInfoView
 import kr.co.soogong.master.utility.extension.toast
+import kr.co.soogong.master.utility.validation.ValidationHelper
 import timber.log.Timber
 
 @AndroidEntryPoint
 class WriteEstimationActivity : BaseActivity<ActivityWriteEstimationBinding>(
     R.layout.activity_write_estimation
 ) {
-    private val requirementId: Int by lazy {
-        WriteEstimationActivityHelper.getEstimationId(intent)
-    }
-
-    // TODO.. custom widget 의 2way binding 을 적용해야함.
     private val viewModel: WriteEstimationViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,10 +61,11 @@ class WriteEstimationActivity : BaseActivity<ActivityWriteEstimationBinding>(
                 button.text = getString(R.string.send_estimation)
                 button.setOnClickListener {
                     registerCostsObserve()
-                    if (viewModel.estimationType.value == EstimationTypeCode.INTEGRATION && simpleCost.alertVisible) return@setOnClickListener
-                    if (viewModel.estimationType.value == EstimationTypeCode.BY_ITEM && (laborCost.alertVisible || materialCost.alertVisible || travelCost.alertVisible)) return@setOnClickListener
-
-                    viewModel.sendEstimation()
+                    if (viewModel.estimationType.value == EstimationTypeCode.INTEGRATION){
+                        if (!simpleCost.alertVisible && ValidationHelper.isIntRange(viewModel.simpleCost.value!!)) viewModel.sendEstimation()
+                    } else {
+                        if((!laborCost.alertVisible && !materialCost.alertVisible && !travelCost.alertVisible) && ValidationHelper.isIntRange(viewModel.totalCost.value!!)) viewModel.sendEstimation()
+                    }
                 }
             }
 

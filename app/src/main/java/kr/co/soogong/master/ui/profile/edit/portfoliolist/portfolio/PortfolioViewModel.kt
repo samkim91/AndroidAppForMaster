@@ -1,4 +1,4 @@
-package kr.co.soogong.master.ui.profile.edit.withcard.portfolio
+package kr.co.soogong.master.ui.profile.edit.portfoliolist.portfolio
 
 import android.net.Uri
 import android.view.View
@@ -8,16 +8,15 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import kr.co.soogong.master.data.model.profile.Portfolio
+import kr.co.soogong.master.data.dto.profile.PortfolioDto
 import kr.co.soogong.master.domain.usecase.profile.GetPortfolioUseCase
 import kr.co.soogong.master.domain.usecase.profile.SavePortfolioUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import timber.log.Timber
-import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
-class EditPortfolioViewModel @Inject constructor(
+class PortfolioViewModel @Inject constructor(
     private val savePortfolioUseCase: SavePortfolioUseCase,
     private val getPortfolioUseCase: GetPortfolioUseCase
 ) : BaseViewModel() {
@@ -28,14 +27,14 @@ class EditPortfolioViewModel @Inject constructor(
 
     fun requestPortfolio(portfolioId: Int) {
         Timber.tag(TAG).d("requestPortfolio: $portfolioId")
-        getPortfolioUseCase(portfolioId)
+        getPortfolioUseCase(portfolioId, "portfolio")
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
                 onSuccess = { portfolio ->
                     title.postValue(portfolio.title)
-                    imageBeforeJob.postValue(portfolio.imageBeforeJob?.toUri())
-                    imageAfterJob.postValue(portfolio.imageAfterJob?.toUri())
+                    imageBeforeJob.postValue(portfolio.beforeRepairImageId?.toUri())
+                    imageAfterJob.postValue(portfolio.afterRepairImageId?.toUri())
                     description.postValue(portfolio.description)
                 },
                 onError = { setAction(GET_PORTFOLIO_FAILED) }
@@ -43,16 +42,15 @@ class EditPortfolioViewModel @Inject constructor(
     }
 
     fun savePortfolio(portfolioId: Int) {
-        Timber.tag(TAG).d("getPortfolio: $portfolioId")
+        Timber.tag(TAG).d("savePortfolio: $portfolioId")
         savePortfolioUseCase(
-            portfolio = Portfolio(
+            portfolio = PortfolioDto(
                 id = portfolioId,
                 title = title.value!!,
-                description = description.value!!,
-                project = "",
+                description = description.value,
                 type = "portfolio",
-                imageBeforeJob = imageBeforeJob.value.toString(),
-                imageAfterJob = imageAfterJob.value.toString(),
+                beforeRepairImageId = imageBeforeJob.value.toString(),  // TODO: 2021/06/22 이미지 업로드로 변경해야함 ...
+                afterRepairImageId = imageAfterJob.value.toString(),
             )
         ).subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

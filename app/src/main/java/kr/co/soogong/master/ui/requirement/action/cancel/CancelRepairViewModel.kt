@@ -1,6 +1,5 @@
 package kr.co.soogong.master.ui.requirement.action.cancel
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -9,14 +8,10 @@ import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.dto.requirement.RequirementDto
 import kr.co.soogong.master.data.dto.requirement.repair.RepairDto
-import kr.co.soogong.master.data.model.requirement.CancelEstimate
-import kr.co.soogong.master.domain.usecase.requirement.CancelEstimationUseCase
 import kr.co.soogong.master.domain.usecase.requirement.GetRequirementUseCase
 import kr.co.soogong.master.domain.usecase.requirement.SaveRepairUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
-import kr.co.soogong.master.ui.requirement.action.view.ViewRequirementViewModel
 import kr.co.soogong.master.uihelper.requirment.action.CancelRepairActivityHelper
-import kr.co.soogong.master.uihelper.requirment.action.ViewRequirementActivityHelper
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -34,7 +29,7 @@ class CancelRepairViewModel @Inject constructor(
     val description = MutableLiveData("")
 
     fun requestRequirement() {
-        Timber.tag(TAG).d("requestRequirement: ")
+        Timber.tag(TAG).d("requestRequirement: $requirementId")
         getRequirementUseCase(requirementId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

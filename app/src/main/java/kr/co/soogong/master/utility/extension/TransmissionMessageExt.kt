@@ -43,8 +43,8 @@ fun addEstimationMessage(
         viewGroup.addView(view, params)
     }
 
-    if (!estimationDto.estimationPrice.isNullOrEmpty()) {
-        estimationDto.estimationPrice.map {
+    if (!estimationDto.estimationPrices.isNullOrEmpty()) {
+        estimationDto.estimationPrices.map {
             val view = EstimationItem(context)
 
             view.key = when (it.priceType) {

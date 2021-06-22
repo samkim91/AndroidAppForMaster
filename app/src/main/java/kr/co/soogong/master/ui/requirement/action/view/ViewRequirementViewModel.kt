@@ -9,11 +9,9 @@ import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.dto.requirement.RequirementDto
 import kr.co.soogong.master.data.dto.requirement.estimation.EstimationDto
+import kr.co.soogong.master.data.dto.requirement.repair.RepairDto
 import kr.co.soogong.master.data.model.requirement.estimation.EstimationResponseCode
-import kr.co.soogong.master.domain.usecase.requirement.AskForReviewUseCase
-import kr.co.soogong.master.domain.usecase.requirement.CallToCustomerUseCase
-import kr.co.soogong.master.domain.usecase.requirement.GetRequirementUseCase
-import kr.co.soogong.master.domain.usecase.requirement.SaveEstimationUseCase
+import kr.co.soogong.master.domain.usecase.requirement.*
 import kr.co.soogong.master.ui.base.BaseViewModel
 import kr.co.soogong.master.uihelper.requirment.action.ViewRequirementActivityHelper
 import timber.log.Timber
@@ -24,18 +22,19 @@ class ViewRequirementViewModel @Inject constructor(
     private val getRequirementUseCase: GetRequirementUseCase,
     private val saveEstimationUseCase: SaveEstimationUseCase,
     private val callToCustomerUseCase: CallToCustomerUseCase,
-    private val askForReviewUseCase: AskForReviewUseCase,
+    private val saveRepairUseCase: SaveRepairUseCase,
     val savedStateHandle: SavedStateHandle
 ) : BaseViewModel() {
     // Note : activity 에서 viewModel 로 데이터 넘기는 법. savedStateHandle 에서 가져온다.
-    private val requirementId = ViewRequirementActivityHelper.getRequirementIdBySaveState(savedStateHandle)
+    private val requirementId =
+        ViewRequirementActivityHelper.getRequirementIdBySaveState(savedStateHandle)
 
     private val _requirement = MutableLiveData<RequirementDto>()
     val requirement: LiveData<RequirementDto>
         get() = _requirement
 
     fun requestRequirement() {
-        Timber.tag(TAG).d("requestRequirement: ")
+        Timber.tag(TAG).d("requestRequirement: $requirementId")
         getRequirementUseCase(requirementId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -64,7 +63,7 @@ class ViewRequirementViewModel @Inject constructor(
                 price = null,
                 description = null,
                 choosenYn = null,
-                estimationPrice = null,
+                estimationPrices = null,
                 repair = null,
                 createdAt = null,
                 updatedAt = null,
@@ -103,10 +102,23 @@ class ViewRequirementViewModel @Inject constructor(
             ).addToDisposable()
     }
 
-    // TODO: 2021/06/21 api 나오면 개발해야함
     fun askForReview() {
         Timber.tag(TAG).d("requestToReview: ")
-        askForReviewUseCase(requirementId)
+        saveRepairUseCase(
+            RepairDto(
+                id = requirement.value?.estimationDto?.repair?.id,
+                estimationId = requirement.value?.estimationDto?.id,
+                scheduledDate = null,
+                actualDate = null,
+                actualPrice = null,
+                warrantyDueDate = null,
+                requestReviewYn = true,
+                canceledYn = null,
+                canceledReason = null,
+                description = null,
+                review = null,
+            )
+        )
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(

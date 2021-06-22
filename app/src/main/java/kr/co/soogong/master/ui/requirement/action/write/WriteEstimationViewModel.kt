@@ -44,7 +44,7 @@ class WriteEstimationViewModel @Inject constructor(
     val description = MutableLiveData("")
 
     fun requestRequirement() {
-        Timber.tag(TAG).d("requestRequirement: ")
+        Timber.tag(TAG).d("requestRequirement: $requirementId")
         getRequirementUseCase(requirementId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -78,7 +78,7 @@ class WriteEstimationViewModel @Inject constructor(
                 },
                 description = description.value,
                 choosenYn = null,
-                estimationPrice = when (estimationType.value) {
+                estimationPrices = when (estimationType.value) {
                     EstimationTypeCode.BY_ITEM -> {
                         listOf(
                             EstimationPriceDto.inputToEstimationPriceDto(

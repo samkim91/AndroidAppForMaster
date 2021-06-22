@@ -13,6 +13,8 @@ import kr.co.soogong.master.domain.usecase.requirement.GetRequirementUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import kr.co.soogong.master.uihelper.requirment.action.EndRepairActivityHelper
 import timber.log.Timber
+import java.text.SimpleDateFormat
+import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
@@ -28,10 +30,10 @@ class EndRepairViewModel @Inject constructor(
     private val _requirement = MutableLiveData<RequirementDto>()
 
     val actualPrice = MutableLiveData("")
-    val actualDate = MutableLiveData("")
+    val actualDate = MutableLiveData(Calendar.getInstance())
 
     fun requestRequirement() {
-        Timber.tag(TAG).d("requestRequirement: ")
+        Timber.tag(TAG).d("requestRequirement: $requirementId")
         getRequirementUseCase(requirementId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -57,7 +59,7 @@ class EndRepairViewModel @Inject constructor(
                 id = null,
                 estimationId = _requirement.value?.estimationDto?.id,
                 scheduledDate = null,
-                actualDate = actualDate.value,
+                actualDate = actualDate.value?.time,
                 actualPrice = actualPrice.value?.replace(",", "")?.toInt(),
                 warrantyDueDate = null,
                 requestReviewYn = null,

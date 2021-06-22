@@ -1,8 +1,8 @@
 package kr.co.soogong.master.contract
 
 object HttpContract {
-    const val LOCAL_URL = "http://192.168.0.50:8080/"
-//    const val LOCAL_URL = "http://192.168.0.93:8080/"
+//    const val LOCAL_URL = "http://192.168.0.50:8080/"       // Myeonghwan's local
+    const val LOCAL_URL = "http://192.168.0.93:8080/"     // Jihun's local
     const val DEV_URL =
         "http://web-backend-springboot-LB-dev-112855016.ap-northeast-2.elb.amazonaws.com/"
     const val PROD_URL = "https://api2.soogong.co.kr/"
@@ -43,7 +43,6 @@ object HttpContract {
 
     // TODO.. 아래 HTTP request의 경우, 카카오톡 웹뷰에서 바로 request가 나가서, API server를 거치지 않고 있음. 수정이 되면 다시 바꿔줘야함.
     const val SEND_ESTIMATION_MESSAGE = "https://partner.soogong.co.kr/estimations/sc"
-    const val CANCEL_ESTIMATE = "https://partner.soogong.co.kr/estimations/sc/refuse"
     const val END_ESTIMATE = "https://partner.soogong.co.kr/estimations/execute"
     const val CALL_TO_CUSTOMER = "https://partner.soogong.co.kr/estimations/calltocustomer"
     const val ASK_FOR_REVIEW = "https://partner.soogong.co.kr/estimations/askforreview"
