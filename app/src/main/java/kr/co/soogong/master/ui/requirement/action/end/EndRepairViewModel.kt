@@ -31,7 +31,7 @@ class EndRepairViewModel @Inject constructor(
     val actualDate = MutableLiveData("")
 
     fun requestRequirement() {
-        Timber.tag(TAG).d("requestRequirement: ")
+        Timber.tag(TAG).d("requestRequirement: $requirementId")
         getRequirementUseCase(requirementId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

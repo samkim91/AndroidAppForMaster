@@ -11,7 +11,7 @@ interface RequirementDao {
     @Query("SELECT * FROM Requirement WHERE status In (:status)")
     fun getListByStatus(status: List<String>): Maybe<List<RequirementDto>?>
 
-    @Query("SELECT * FROM Requirement WHERE requirementId = :id")
+    @Query("SELECT * FROM Requirement WHERE id = :id")
     fun getItem(id: Int): Maybe<RequirementDto>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -20,7 +20,7 @@ interface RequirementDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(vararg requirements: RequirementDto)
 
-    @Query("UPDATE Requirement SET estimationDto = :estimationDto WHERE requirementId = :requirementId")
+    @Query("UPDATE Requirement SET estimationDto = :estimationDto WHERE id = :requirementId")
     fun updateEstimation(requirementId: Int?, estimationDto: EstimationDto)
 
     @Delete

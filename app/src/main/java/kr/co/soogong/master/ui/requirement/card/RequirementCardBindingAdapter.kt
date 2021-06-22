@@ -9,33 +9,35 @@ import kr.co.soogong.master.ui.widget.AmountView
 import java.util.*
 
 @BindingAdapter("bind:created_datetime_to_string")
-fun TextView.setStartDatetime(date: String?) {
+fun TextView.setStartDatetime(date: Date?) {
+    // 최초 요청일 : 2021.01.11 - 13:20
     val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd - HH:mm", Locale.KOREA)
     date?.let {
         text = context.getString(
             R.string.requirements_card_start_time,
-            simpleDateFormat.parse(it)
+            simpleDateFormat.format(it)
         )
     }
 }
 
 @BindingAdapter("bind:closed_datetime_to_string")
-fun TextView.setEndDatetime(date: String?) {
+fun TextView.setEndDatetime(date: Date?) {
+    // 견적 마감일 : 2021.01.11 - 13:20
     val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd - HH:mm", Locale.KOREA)
     val c = Calendar.getInstance()
     date?.let {
-        c.time = simpleDateFormat.parse(date)
+        c.time = date
         c.add(Calendar.DATE, 1)
         text = context.getString(R.string.requirements_card_end_time, simpleDateFormat.format(c.time))
     }
 }
 
 @BindingAdapter("bind:closed_datetime_only_to_string")
-fun TextView.setEndDatetimeOnly(date: String?) {
+fun TextView.setEndDatetimeOnly(date: Date?) {
     val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd - HH:mm", Locale.KOREA)
     val c = Calendar.getInstance()
     date?.let {
-        c.time = simpleDateFormat.parse(date)
+        c.time = date
         c.add(Calendar.DATE, 1)
         text = simpleDateFormat.format(c.time)
     }

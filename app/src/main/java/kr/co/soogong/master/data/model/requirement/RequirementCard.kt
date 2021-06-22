@@ -2,6 +2,7 @@ package kr.co.soogong.master.data.model.requirement
 
 import kr.co.soogong.master.data.dto.requirement.RequirementDto
 import kr.co.soogong.master.data.dto.requirement.estimation.EstimationDto
+import java.util.*
 
 data class RequirementCard(
     val id: Int,
@@ -10,16 +11,16 @@ data class RequirementCard(
     val address: String?,
     val status: String?,
     val tel: String?,
-    val closedAt: String?,
-    val createdAt: String?,
-    val updatedAt: String?,
+    val closedAt: Date?,
+    val createdAt: Date?,
+    val updatedAt: Date?,
     val introductionText: String?,
     val estimationDto: EstimationDto?
 ) {
     companion object {
         fun fromRequirementDto(requirementDto: RequirementDto): RequirementCard {
             return RequirementCard(
-                id = requirementDto.requirementId,
+                id = requirementDto.id,
                 token = requirementDto.token,
                 project = requirementDto.projectName,
                 address = requirementDto.address,

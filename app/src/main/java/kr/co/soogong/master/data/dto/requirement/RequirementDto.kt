@@ -8,13 +8,14 @@ import kotlinx.parcelize.Parcelize
 import kr.co.soogong.master.data.dto.requirement.estimation.EstimationDto
 import kr.co.soogong.master.data.dto.requirement.qna.RequirementQnaDto
 import kr.co.soogong.master.data.model.requirement.ImagePath
+import java.util.*
 
 @Parcelize
 @Entity(tableName = "Requirement")
 data class RequirementDto(
     @PrimaryKey
-    @SerializedName("requirementId")
-    val requirementId: Int,
+    @SerializedName("id")
+    val id: Int,
 
     @SerializedName("token")
     val token: String?,
@@ -46,17 +47,17 @@ data class RequirementDto(
     @SerializedName("requirementQnas")
     val requirementQnas: List<RequirementQnaDto>?,
 
-    @SerializedName("estimationDto")
+    @SerializedName("estimation")
     val estimationDto: EstimationDto?,
 
     @SerializedName("closedAt")
-    val closedAt: String?,
+    val closedAt: Date?,
 
     @SerializedName("createdAt")
-    val createdAt: String?,
+    val createdAt: Date?,
 
     @SerializedName("updatedAt")
-    val updatedAt: String?,
+    val updatedAt: Date?,
 ) : Parcelable {
     companion object {
 

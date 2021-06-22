@@ -136,7 +136,7 @@
             android:textColor="@color/tertiary_text_color"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/type"
-            android:text='@{"최초 요청일 : "+data.createdAt}'
+            bind:created_datetime_to_string="@{data.createdAt}"
             tools:text="최초 요청일 : 2021.01.11 - 13:20" />
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -160,6 +160,7 @@
             android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/first_time"
+            bind:closed_datetime_to_string="@{data.closedAt}"
             tools:text="견적 마감일 : 2021.01.12 - 01:20" />
         <!-- endregion -->
 

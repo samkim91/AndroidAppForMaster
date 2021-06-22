@@ -6,6 +6,7 @@ import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 import kotlinx.parcelize.RawValue
+import java.util.*
 
 @Parcelize
 @Entity(tableName = "Master")
@@ -67,7 +68,7 @@ data class MasterDto(
     val warrantyDescription: String? = null,
 
     @SerializedName("openDate")
-    val openDate: String? = null,
+    val openDate: Date? = null,
 
     @SerializedName("businessType")
     val businessType: String? = null,
@@ -104,10 +105,10 @@ data class MasterDto(
     val majors: List<MajorDto>? = null,
 
     @SerializedName("createdAt")
-    val createdAt: String? = null,
+    val createdAt: Date? = null,
 
     @SerializedName("updatedAt")
-    val updatedAt: String? = null,
+    val updatedAt: Date? = null,
 
     ) : Parcelable {
     companion object {
