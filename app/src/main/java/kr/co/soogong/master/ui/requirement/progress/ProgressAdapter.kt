@@ -12,7 +12,7 @@ import kr.co.soogong.master.utility.extension.dp
 class ProgressAdapter(
     private val cardClickListener: (Int) -> Unit,
     private val callButtonClick: (Int, Any?) -> Unit,
-    private val doneButtonClick: (Int) -> Unit
+    private val doneButtonClick: (Int, Any?) -> Unit
 ) : ListAdapter<RequirementCard, EstimationCardViewHolder>(RequirementCardDiffUtil()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         RequirementCardViewHolderHelper.create(parent, viewType)

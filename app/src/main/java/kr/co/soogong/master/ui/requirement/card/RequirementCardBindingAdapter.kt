@@ -10,18 +10,18 @@ import java.util.*
 
 @BindingAdapter("bind:created_datetime_to_string")
 fun TextView.setStartDatetime(date: String?) {
-    val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd - hh:mm")
+    val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd - HH:mm", Locale.KOREA)
     date?.let {
         text = context.getString(
             R.string.requirements_card_start_time,
-            simpleDateFormat.format(it)
+            simpleDateFormat.parse(it)
         )
     }
 }
 
 @BindingAdapter("bind:closed_datetime_to_string")
 fun TextView.setEndDatetime(date: String?) {
-    val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd - hh:mm")
+    val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd - HH:mm", Locale.KOREA)
     val c = Calendar.getInstance()
     date?.let {
         c.time = simpleDateFormat.parse(date)
@@ -32,7 +32,7 @@ fun TextView.setEndDatetime(date: String?) {
 
 @BindingAdapter("bind:closed_datetime_only_to_string")
 fun TextView.setEndDatetimeOnly(date: String?) {
-    val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd - hh:mm")
+    val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd - HH:mm", Locale.KOREA)
     val c = Calendar.getInstance()
     date?.let {
         c.time = simpleDateFormat.parse(date)

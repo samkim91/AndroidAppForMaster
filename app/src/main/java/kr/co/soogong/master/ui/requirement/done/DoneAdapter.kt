@@ -11,7 +11,7 @@ import kr.co.soogong.master.utility.extension.dp
 
 class DoneAdapter(
     private val cardClickListener: (requirementId: Int) -> Unit,
-    private val reviewButtonClick: (requirementId: Int) -> Unit
+    private val reviewButtonClick: (requirementId: Int, Any?) -> Unit
 ) : ListAdapter<RequirementCard, EstimationCardViewHolder>(RequirementCardDiffUtil()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         RequirementCardViewHolderHelper.create(parent, viewType)

@@ -8,10 +8,11 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
+import kr.co.soogong.master.data.model.requirement.RequirementCard
 import kr.co.soogong.master.databinding.FragmentRequirementDoneBinding
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.requirement.done.DoneViewModel.Companion.ASK_FOR_REVIEW_FAILED
-import kr.co.soogong.master.ui.requirement.done.DoneViewModel.Companion.ASK_FOR_REVIEW_SUCCEEDED
+import kr.co.soogong.master.ui.requirement.done.DoneViewModel.Companion.ASK_FOR_REVIEW_SUCCESSFULLY
 import kr.co.soogong.master.ui.requirement.done.DoneViewModel.Companion.BADGE_UPDATE
 import kr.co.soogong.master.uihelper.requirment.RequirementsBadge
 import kr.co.soogong.master.uihelper.requirment.action.ViewRequirementActivityHelper
@@ -51,8 +52,8 @@ class DoneFragment : BaseFragment<FragmentRequirementDoneBinding>(
                         )
                     )
                 },
-                reviewButtonClick = { requirementId ->
-                    viewModel.askForReview(requirementId = requirementId)
+                reviewButtonClick = { _, requirementCard ->
+                    viewModel.askForReview(requirementCard = (requirementCard as? RequirementCard))
                 }
             )
 
@@ -80,7 +81,7 @@ class DoneFragment : BaseFragment<FragmentRequirementDoneBinding>(
                 BADGE_UPDATE -> {
                     (parentFragment as? RequirementsBadge)?.setDoneBadge(value as Int)
                 }
-                ASK_FOR_REVIEW_SUCCEEDED -> {
+                ASK_FOR_REVIEW_SUCCESSFULLY -> {
                     requireContext().toast(getString(R.string.ask_for_review_successful))
                 }
                 ASK_FOR_REVIEW_FAILED -> {

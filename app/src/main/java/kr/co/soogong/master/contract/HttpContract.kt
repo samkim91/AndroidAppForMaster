@@ -1,8 +1,8 @@
 package kr.co.soogong.master.contract
 
 object HttpContract {
-    const val LOCAL_URL = "http://192.168.0.50:8080/"       // Myeonghwan's local
-//    const val LOCAL_URL = "http://192.168.0.93:8080/"     // Jihun's local
+//    const val LOCAL_URL = "http://192.168.0.50:8080/"       // Myeonghwan's local
+    const val LOCAL_URL = "http://192.168.0.93:8080/"     // Jihun's local
     const val DEV_URL =
         "http://web-backend-springboot-LB-dev-112855016.ap-northeast-2.elb.amazonaws.com/"
     const val PROD_URL = "https://api2.soogong.co.kr/"
