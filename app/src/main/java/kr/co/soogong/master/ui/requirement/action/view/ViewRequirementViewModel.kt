@@ -63,7 +63,7 @@ class ViewRequirementViewModel @Inject constructor(
                 price = null,
                 description = null,
                 choosenYn = null,
-                estimationPrice = null,
+                estimationPrices = null,
                 repair = null,
                 createdAt = null,
                 updatedAt = null,

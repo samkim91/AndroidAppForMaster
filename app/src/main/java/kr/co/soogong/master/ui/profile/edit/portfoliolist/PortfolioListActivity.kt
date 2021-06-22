@@ -1,4 +1,4 @@
-package kr.co.soogong.master.ui.profile.edit.withcard
+package kr.co.soogong.master.ui.profile.edit.portfoliolist
 
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -8,25 +8,25 @@ import kr.co.soogong.master.databinding.ActivityEditProfileWithCardBinding
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.ui.dialog.popup.CustomDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData
+import kr.co.soogong.master.uihelper.profile.EditProfileContainerActivityHelper
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.ADD_PORTFOLIO
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.ADD_PRICE_BY_PROJECTS
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_PORTFOLIO
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_PRICE_BY_PROJECTS
-import kr.co.soogong.master.uihelper.profile.EditProfileContainerActivityHelper
-import kr.co.soogong.master.uihelper.profile.EditProfileWithCardActivityHelper
-import kr.co.soogong.master.uihelper.profile.EditProfileWithCardActivityHelper.PORTFOLIO
-import kr.co.soogong.master.uihelper.profile.EditProfileWithCardActivityHelper.PRICE_BY_PROJECTS
+import kr.co.soogong.master.uihelper.profile.PortfolioListActivityHelper
+import kr.co.soogong.master.uihelper.profile.PortfolioListActivityHelper.PORTFOLIO
+import kr.co.soogong.master.uihelper.profile.PortfolioListActivityHelper.PRICE_BY_PROJECTS
 import timber.log.Timber
 
 @AndroidEntryPoint
-class EditProfileWithCardActivity : BaseActivity<ActivityEditProfileWithCardBinding>(
+class PortfolioListActivity : BaseActivity<ActivityEditProfileWithCardBinding>(
     R.layout.activity_edit_profile_with_card
 ) {
     private val pageName: String by lazy {
-        EditProfileWithCardActivityHelper.getPageName(intent)
+        PortfolioListActivityHelper.getPageName(intent)
     }
 
-    private val viewModel: EditProfileWithCardViewModel by viewModels()
+    private val viewModel: PortfolioListViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,14 +38,19 @@ class EditProfileWithCardActivity : BaseActivity<ActivityEditProfileWithCardBind
     override fun onStart() {
         super.onStart()
         Timber.tag(TAG).d("onStart: ")
-        if (pageName == PORTFOLIO) viewModel.requestPortfolioList() else viewModel.requestPriceByProjectList()
+        viewModel.requestPortfolioList(
+            when (pageName) {
+                PORTFOLIO -> "portfolio"
+                else -> "price"
+            }
+        )
     }
 
     override fun initLayout() {
         Timber.tag(TAG).d("initLayout: ")
         bind {
             vm = viewModel
-            lifecycleOwner = this@EditProfileWithCardActivity
+            lifecycleOwner = this@PortfolioListActivity
 
             with(actionBar) {
                 backButton.setOnClickListener {
@@ -93,7 +98,7 @@ class EditProfileWithCardActivity : BaseActivity<ActivityEditProfileWithCardBind
             Timber.tag(TAG).w("DefaultButtonClickListener: ")
             startActivity(
                 EditProfileContainerActivityHelper.getIntent(
-                    this@EditProfileWithCardActivity,
+                    this@PortfolioListActivity,
                     if (pageName == PORTFOLIO) ADD_PORTFOLIO else ADD_PRICE_BY_PROJECTS
                 )
             )
@@ -102,11 +107,11 @@ class EditProfileWithCardActivity : BaseActivity<ActivityEditProfileWithCardBind
 
     private fun setRecyclerview() {
         binding.recyclerview.adapter =
-            EditProfileWithCardAdapter(
+            PortfolioListAdapter(
                 leftButtonClickListener = { id ->
                     if (pageName == PORTFOLIO) {
                         val dialog = CustomDialog(
-                            DialogData.getAskingDeletePortfolioDialogData(this@EditProfileWithCardActivity),
+                            DialogData.getAskingDeletePortfolioDialogData(this@PortfolioListActivity),
                             yesClick = {
                                 viewModel.deletePortfolio(id)
                             },
@@ -115,7 +120,7 @@ class EditProfileWithCardActivity : BaseActivity<ActivityEditProfileWithCardBind
                         dialog.show(supportFragmentManager, dialog.tag)
                     } else {
                         val dialog = CustomDialog(
-                            DialogData.getAskingDeletePriceByProjectDialogData(this@EditProfileWithCardActivity),
+                            DialogData.getAskingDeletePriceByProjectDialogData(this@PortfolioListActivity),
                             yesClick = {
                                 viewModel.deletePriceByProject(id)
                             },
@@ -127,7 +132,7 @@ class EditProfileWithCardActivity : BaseActivity<ActivityEditProfileWithCardBind
                 rightButtonClickListener = { id ->
                     startActivity(
                         EditProfileContainerActivityHelper.getIntent(
-                            this@EditProfileWithCardActivity,
+                            this@PortfolioListActivity,
                             if (pageName == PORTFOLIO) EDIT_PORTFOLIO else EDIT_PRICE_BY_PROJECTS,
                             id
                         )

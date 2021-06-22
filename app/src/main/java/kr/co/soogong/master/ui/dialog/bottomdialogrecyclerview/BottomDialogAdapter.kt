@@ -9,10 +9,13 @@ class BottomDialogAdapter(
     private val itemClickListener: (String, Int) -> Unit,
 ) : ListAdapter<BottomDialogData, BottomDialogViewHolder>(BottomDialogItemDiffUtil()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        BottomDialogViewHolder(ViewHolderBottomSheetDialogItemBinding.inflate(
-            LayoutInflater.from(parent.context),
-            parent,
-            false))
+        BottomDialogViewHolder(
+            ViewHolderBottomSheetDialogItemBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
 
     override fun onBindViewHolder(holder: BottomDialogViewHolder, position: Int) =
         holder.binding(currentList[position], itemClickListener)

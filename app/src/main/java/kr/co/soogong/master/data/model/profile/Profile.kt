@@ -9,9 +9,7 @@ import kr.co.soogong.master.contract.HttpContract
 import kr.co.soogong.master.data.dto.profile.MasterDto
 
 @Parcelize
-@Entity(tableName = "Profile")
 data class Profile(
-    @PrimaryKey
     @SerializedName("id")
     val id: Int,
 

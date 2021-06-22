@@ -78,7 +78,7 @@ class WriteEstimationViewModel @Inject constructor(
                 },
                 description = description.value,
                 choosenYn = null,
-                estimationPrice = when (estimationType.value) {
+                estimationPrices = when (estimationType.value) {
                     EstimationTypeCode.BY_ITEM -> {
                         listOf(
                             EstimationPriceDto.inputToEstimationPriceDto(

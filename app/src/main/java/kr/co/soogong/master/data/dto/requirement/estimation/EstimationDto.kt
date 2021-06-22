@@ -35,8 +35,8 @@ data class EstimationDto(
     @SerializedName("choosenYn")
     val choosenYn: Boolean?,
 
-    @SerializedName("estimationPrice")
-    val estimationPrice: List<EstimationPriceDto>?,
+    @SerializedName("estimationPrices")
+    val estimationPrices: List<EstimationPriceDto>?,
 
     @SerializedName("repair")
     val repair: RepairDto?,

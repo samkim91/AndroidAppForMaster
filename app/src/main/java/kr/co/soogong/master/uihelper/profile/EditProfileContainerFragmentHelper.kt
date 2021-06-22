@@ -12,8 +12,8 @@ import kr.co.soogong.master.ui.profile.edit.requiredinformation.businessunitinfo
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.phonenumber.EditPhoneNumberFragment
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.thumbnails.EditThumbnailsFragment
 import kr.co.soogong.master.ui.profile.edit.requiredinformation.warranty.EditWarrantyInformationFragment
-import kr.co.soogong.master.ui.profile.edit.withcard.portfolio.EditPortfolioFragment
-import kr.co.soogong.master.ui.profile.edit.withcard.pricebyproject.EditPriceByProjectFragment
+import kr.co.soogong.master.ui.profile.edit.portfoliolist.portfolio.PortfolioFragment
+import kr.co.soogong.master.ui.profile.edit.portfoliolist.pricebyproject.PriceByProjectFragment
 
 object EditProfileContainerFragmentHelper {
     const val TAG = "EditProfileContainerFragmentHelper"
@@ -42,10 +42,10 @@ object EditProfileContainerFragmentHelper {
 
     fun getFragment(pageName: String, itemId: Int = -1): Fragment =
         when (pageName) {
-            ADD_PORTFOLIO -> EditPortfolioFragment.newInstance(ADD_PORTFOLIO, null)
-            EDIT_PORTFOLIO -> EditPortfolioFragment.newInstance(EDIT_PORTFOLIO, itemId)
-            ADD_PRICE_BY_PROJECTS -> EditPriceByProjectFragment.newInstance(ADD_PRICE_BY_PROJECTS, null)
-            EDIT_PRICE_BY_PROJECTS -> EditPriceByProjectFragment.newInstance(EDIT_PRICE_BY_PROJECTS, itemId)
+            ADD_PORTFOLIO -> PortfolioFragment.newInstance(ADD_PORTFOLIO, null)
+            EDIT_PORTFOLIO -> PortfolioFragment.newInstance(EDIT_PORTFOLIO, itemId)
+            ADD_PRICE_BY_PROJECTS -> PriceByProjectFragment.newInstance(ADD_PRICE_BY_PROJECTS, null)
+            EDIT_PRICE_BY_PROJECTS -> PriceByProjectFragment.newInstance(EDIT_PRICE_BY_PROJECTS, itemId)
             EDIT_FLEXIBLE_COST -> EditFlexibleCostFragment.newInstance()
             EDIT_OTHER_FLEXIBLE_OPTIONS -> EditOtherFlexibleOptionsFragment.newInstance()
             EDIT_EMAIL -> EditEmailFragment.newInstance()

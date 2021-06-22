@@ -1,4 +1,4 @@
-package kr.co.soogong.master.ui.profile.edit.withcard.portfolio
+package kr.co.soogong.master.ui.profile.edit.portfoliolist.portfolio
 
 import android.os.Bundle
 import android.view.View
@@ -8,18 +8,18 @@ import gun0912.tedimagepicker.builder.TedImagePicker
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentEditPortfolioBinding
 import kr.co.soogong.master.ui.base.BaseFragment
-import kr.co.soogong.master.ui.profile.edit.withcard.portfolio.EditPortfolioViewModel.Companion.GET_PORTFOLIO_FAILED
-import kr.co.soogong.master.ui.profile.edit.withcard.portfolio.EditPortfolioViewModel.Companion.SAVE_PORTFOLIO_FAILED
-import kr.co.soogong.master.ui.profile.edit.withcard.portfolio.EditPortfolioViewModel.Companion.SAVE_PORTFOLIO_SUCCESSFULLY
+import kr.co.soogong.master.ui.profile.edit.portfoliolist.portfolio.PortfolioViewModel.Companion.GET_PORTFOLIO_FAILED
+import kr.co.soogong.master.ui.profile.edit.portfoliolist.portfolio.PortfolioViewModel.Companion.SAVE_PORTFOLIO_FAILED
+import kr.co.soogong.master.ui.profile.edit.portfoliolist.portfolio.PortfolioViewModel.Companion.SAVE_PORTFOLIO_SUCCESSFULLY
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.ADD_PORTFOLIO
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_PORTFOLIO
-import kr.co.soogong.master.utility.PermissionHelper
 import kr.co.soogong.master.utility.EventObserver
+import kr.co.soogong.master.utility.PermissionHelper
 import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
 
 @AndroidEntryPoint
-class EditPortfolioFragment : BaseFragment<FragmentEditPortfolioBinding>(
+class PortfolioFragment : BaseFragment<FragmentEditPortfolioBinding>(
     R.layout.fragment_edit_portfolio
 ) {
     private val pageName: String by lazy {
@@ -29,7 +29,7 @@ class EditPortfolioFragment : BaseFragment<FragmentEditPortfolioBinding>(
         arguments?.getInt(PORTFOLIO_ID) ?: -1
     }
 
-    private val viewModel: EditPortfolioViewModel by viewModels()
+    private val viewModel: PortfolioViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -106,8 +106,8 @@ class EditPortfolioFragment : BaseFragment<FragmentEditPortfolioBinding>(
         private const val PAGE_NAME = "PAGE_NAME"
         private const val PORTFOLIO_ID = "PORTFOLIO_ID"
 
-        fun newInstance(pageName: String, portfolioId: Int?): EditPortfolioFragment {
-            val fragment = EditPortfolioFragment()
+        fun newInstance(pageName: String, portfolioId: Int?): PortfolioFragment {
+            val fragment = PortfolioFragment()
             val args = Bundle()
             args.putString(PAGE_NAME, pageName)
             args.putInt(PORTFOLIO_ID, portfolioId ?: -1)

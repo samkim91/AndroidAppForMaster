@@ -14,21 +14,36 @@ fun TextView.setFirstDate(status: String?, date: Date?) {
     // 최초 요청일 : 2021.01.11 - 13:20
     val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd - HH:mm", Locale.KOREA)
     date?.let {
-        text = when(status) {
+        text = when (status) {
             RequirementStatus.Requested.toString(), RequirementStatus.Estimated.toString() -> {
-                context.getString(R.string.requirements_card_start_time, simpleDateFormat.format(it))
+                context.getString(
+                    R.string.requirements_card_start_time,
+                    simpleDateFormat.format(it)
+                )
             }
             RequirementStatus.Repairing.toString() -> {
-                context.getString(R.string.requirements_card_matched_time, simpleDateFormat.format(it))
+                context.getString(
+                    R.string.requirements_card_matched_time,
+                    simpleDateFormat.format(it)
+                )
             }
             RequirementStatus.RequestFinish.toString() -> {
-                context.getString(R.string.requirements_card_request_finish_time, simpleDateFormat.format(it))
+                context.getString(
+                    R.string.requirements_card_request_finish_time,
+                    simpleDateFormat.format(it)
+                )
             }
             RequirementStatus.Done.toString() -> {
-                context.getString(R.string.requirements_card_repair_done_time, simpleDateFormat.format(it))
+                context.getString(
+                    R.string.requirements_card_repair_done_time,
+                    simpleDateFormat.format(it)
+                )
             }
             else -> {
-                context.getString(R.string.requirements_card_start_time, simpleDateFormat.format(it))
+                context.getString(
+                    R.string.requirements_card_start_time,
+                    simpleDateFormat.format(it)
+                )
             }
         }
     }
@@ -38,26 +53,12 @@ fun TextView.setFirstDate(status: String?, date: Date?) {
 fun TextView.setSecondDate(date: Date?) {
     // 견적 마감일 : 2021.01.11 - 13:20
     val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd - HH:mm", Locale.KOREA)
-    val c = Calendar.getInstance()
     date?.let {
-        c.time = date
-        c.add(Calendar.DATE, 1)
-        text = context.getString(R.string.requirements_card_end_time, simpleDateFormat.format(c.time))
+        text = context.getString(R.string.requirements_card_end_time, simpleDateFormat.format(it))
     }
 }
 
-@BindingAdapter("bind:closed_datetime_only_to_string")
-fun TextView.setEndDatetimeOnly(date: Date?) {
-    val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd - HH:mm", Locale.KOREA)
-    val c = Calendar.getInstance()
-    date?.let {
-        c.time = date
-        c.add(Calendar.DATE, 1)
-        text = simpleDateFormat.format(c.time)
-    }
-}
-
-@BindingAdapter("bind:status")
+@BindingAdapter("bind:amount")
 fun AmountView.setAmount(status: String?, price: String?) {
     title = when (status) {
         RequirementStatus.Estimated.toString(), RequirementStatus.Repairing.toString() -> {
@@ -70,5 +71,5 @@ fun AmountView.setAmount(status: String?, price: String?) {
             ""
         }
     }
-    price?.let { detail = "${DecimalFormat("#,###").format(it)}원" }
+    price?.let { detail = "${DecimalFormat("#,###").parse(it)}원" }
 }

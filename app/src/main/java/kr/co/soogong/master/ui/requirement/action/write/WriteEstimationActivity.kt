@@ -61,10 +61,11 @@ class WriteEstimationActivity : BaseActivity<ActivityWriteEstimationBinding>(
                 button.text = getString(R.string.send_estimation)
                 button.setOnClickListener {
                     registerCostsObserve()
-                    if (viewModel.estimationType.value == EstimationTypeCode.INTEGRATION && simpleCost.alertVisible || !ValidationHelper.isIntRange(viewModel.simpleCost.value!!)) return@setOnClickListener
-                    if (viewModel.estimationType.value == EstimationTypeCode.BY_ITEM && (laborCost.alertVisible || materialCost.alertVisible || travelCost.alertVisible) || !ValidationHelper.isIntRange(viewModel.totalCost.value!!)) return@setOnClickListener
-
-                    viewModel.sendEstimation()
+                    if (viewModel.estimationType.value == EstimationTypeCode.INTEGRATION){
+                        if (!simpleCost.alertVisible && ValidationHelper.isIntRange(viewModel.simpleCost.value!!)) viewModel.sendEstimation()
+                    } else {
+                        if((!laborCost.alertVisible && !materialCost.alertVisible && !travelCost.alertVisible) && ValidationHelper.isIntRange(viewModel.totalCost.value!!)) viewModel.sendEstimation()
+                    }
                 }
             }
 
