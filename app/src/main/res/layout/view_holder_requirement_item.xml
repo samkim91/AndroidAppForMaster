@@ -127,18 +127,6 @@
             app:layout_constraintTop_toBottomOf="@id/location"
             tools:text="욕실 위생도기 및 수전 설치/교체 123123123123" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/first_time"
-            style="@style/small_text_style.medium"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/requirement_card_first_time_margin_top"
-            android:textColor="@color/tertiary_text_color"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/type"
-            bind:created_datetime_to_string="@{data.createdAt}"
-            tools:text="최초 요청일 : 2021.01.11 - 13:20" />
-
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/arrow_button"
             android:layout_width="@dimen/requirement_card_arrow_button_width"
@@ -147,11 +135,20 @@
             app:layout_constraintBottom_toBottomOf="@id/type"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/location" />
-        <!-- endregion -->
 
-        <!-- region 견적요청 -->
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/end_time"
+            android:id="@+id/first_date"
+            style="@style/small_text_style.medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/requirement_card_first_time_margin_top"
+            android:textColor="@color/tertiary_text_color"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/type"
+            tools:text="최초 요청일 : 2021.01.11 - 13:20" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/second_date"
             style="@style/small_text_style.medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -159,8 +156,8 @@
             android:textColor="@color/alert_color"
             android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/first_time"
-            bind:closed_datetime_to_string="@{data.closedAt}"
+            app:layout_constraintTop_toBottomOf="@id/first_date"
+            bind:second_datetime_to_string="@{data.closedAt}"
             tools:text="견적 마감일 : 2021.01.12 - 01:20" />
         <!-- endregion -->
 
@@ -174,7 +171,7 @@
             app:layout_constraintBottom_toTopOf="@id/waiting_label"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/first_time" />
+            app:layout_constraintTop_toBottomOf="@id/first_date" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/waiting_label"

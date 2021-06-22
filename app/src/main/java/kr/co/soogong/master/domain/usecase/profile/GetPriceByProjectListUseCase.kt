@@ -7,10 +7,10 @@ import javax.inject.Inject
 
 @Reusable
 class GetPriceByProjectListUseCase @Inject constructor(
-    private val getProfileUseCase: GetProfileUseCase,
+    private val getMasterFromLocalUseCase: GetMasterFromLocalUseCase,
 ) {
     operator fun invoke(): Single<List<PriceByProject>> {
-        return getProfileUseCase().map {
+        return getMasterFromLocalUseCase().map {
             it.basicInformation?.priceByProjects
         }
     }

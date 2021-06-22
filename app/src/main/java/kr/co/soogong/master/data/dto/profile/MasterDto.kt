@@ -12,8 +12,8 @@ import java.util.*
 @Entity(tableName = "Master")
 data class MasterDto(
     @PrimaryKey
-    @SerializedName("masterId")
-    val masterId: Int?,    // ID
+    @SerializedName("id")
+    val id: Int?,    // ID
 
     @SerializedName("uid")
     val uid: String? = null,

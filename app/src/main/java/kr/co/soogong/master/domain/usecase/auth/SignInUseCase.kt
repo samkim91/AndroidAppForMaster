@@ -7,10 +7,6 @@ import io.reactivex.Single
 import kr.co.soogong.master.data.dao.profile.MasterDao
 import kr.co.soogong.master.data.dto.profile.MasterDto
 import kr.co.soogong.master.network.auth.AuthService
-import kr.co.soogong.master.utility.extension.getNullable
-import java.time.LocalDate
-import java.time.LocalDateTime
-import java.util.*
 import javax.inject.Inject
 
 @Reusable
@@ -23,7 +19,7 @@ class SignInUseCase @Inject constructor(
 ) {
     operator fun invoke(uid: String): Single<MasterDto> {
         return authService.signIn(uid).doOnSuccess {
-            saveMasterIdInSharedUseCase(it.masterId!!)
+            saveMasterIdInSharedUseCase(it.id!!)
             saveMasterUidInSharedUseCase(it.uid!!)
             if (it.subscriptionPlan != "NotApproved") saveMasterApprovalUseCase(true)
 

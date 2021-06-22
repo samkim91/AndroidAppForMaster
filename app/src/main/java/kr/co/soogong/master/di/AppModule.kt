@@ -76,7 +76,7 @@ class AppModule {
 //            .registerTypeAdapter(Double::class.java, DoubleTypeAdapter())
 //            .registerTypeAdapter(Int::class.java, IntTypeAdapter())
 //            .registerTypeAdapter(Boolean::class.java, BooleanTypeAdapter())
-            .setDateFormat("yyyy-MM-dd HH:mm").create()
+            .setDateFormat("yyyy-MM-dd HH:mm:ss").create()
 
         return Retrofit.Builder()
             .client(okHttpClient)
