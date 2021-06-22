@@ -4,8 +4,8 @@ import android.view.View
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import kr.co.soogong.master.R
-import kr.co.soogong.master.databinding.ViewHolderRequirementItemBinding
 import kr.co.soogong.master.data.model.requirement.RequirementCard
+import kr.co.soogong.master.databinding.ViewHolderRequirementItemBinding
 
 // Requirement Card viewHolder 들의 추상클래스
 abstract class EstimationCardViewHolder(
@@ -15,7 +15,7 @@ abstract class EstimationCardViewHolder(
         requirementCard: RequirementCard,
         cardClickListener: ((requirementId: Int) -> Unit),
         leftButtonClickListener: ((requirementId: Int, extraInfo: Any?) -> Unit)? = null,
-        rightButtonClickListener: ((requirementId: Int) -> Unit)? = null,
+        rightButtonClickListener: ((requirementId: Int, extraInfo: Any?) -> Unit)? = null,
     ) {
         with(binding) {
             data = requirementCard
@@ -37,13 +37,14 @@ class RequestedViewHolder(
         requirementCard: RequirementCard,
         cardClickListener: ((requirementId: Int) -> Unit),
         leftButtonClickListener: ((requirementId: Int, extraInfo: Any?) -> Unit)?,
-        rightButtonClickListener: ((requirementId: Int) -> Unit)?,
+        rightButtonClickListener: ((requirementId: Int, extraInfo: Any?) -> Unit)?,
     ) {
         with(binding) {
             data = requirementCard
 
-            endTime.visibility = View.VISIBLE
-            endTime.setEndDatetime(requirementCard.createdAt)
+            firstDate.setFirstDate(requirementCard.status?.toString(), requirementCard.createdAt)
+            secondDate.visibility = View.VISIBLE
+            secondDate.setSecondDate(requirementCard.createdAt)
 
             setCardClickListener {
                 cardClickListener(requirementCard.id)
@@ -62,13 +63,14 @@ class EstimatedViewHolder(
         requirementCard: RequirementCard,
         cardClickListener: ((requirementId: Int) -> Unit),
         leftButtonClickListener: ((requirementId: Int, extraInfo: Any?) -> Unit)?,
-        rightButtonClickListener: ((requirementId: Int) -> Unit)?,
+        rightButtonClickListener: ((requirementId: Int, extraInfo: Any?) -> Unit)?,
     ) {
         with(binding) {
             data = requirementCard
 
+            firstDate.setFirstDate(requirementCard.status?.toString(), requirementCard.createdAt)
             myAmount.visibility = View.VISIBLE
-            myAmount.setAmount(requirementCard.status, requirementCard.estimation?.price.toString())
+            myAmount.setAmount(requirementCard.status?.toString(), requirementCard.estimationDto?.price?.toString())
 
             waitingLabel.visibility = View.VISIBLE
 
@@ -89,13 +91,14 @@ class RepairingViewHolder(
         requirementCard: RequirementCard,
         cardClickListener: ((requirementId: Int) -> Unit),
         leftButtonClickListener: ((requirementId: Int, extraInfo: Any?) -> Unit)?,
-        rightButtonClickListener: ((requirementId: Int) -> Unit)?,
+        rightButtonClickListener: ((requirementId: Int, extraInfo: Any?) -> Unit)?,
     ) {
         with(binding) {
             data = requirementCard
 
+            firstDate.setFirstDate(requirementCard.status?.toString(), requirementCard.estimationDto?.updatedAt)
             myAmount.visibility = View.VISIBLE
-            myAmount.setAmount(requirementCard.status, requirementCard.estimation?.price.toString())
+            myAmount.setAmount(requirementCard.status?.toString(), requirementCard.estimationDto?.price?.toString())
 
             callButton.visibility = View.VISIBLE
             doneButton.visibility = View.VISIBLE
@@ -106,12 +109,11 @@ class RepairingViewHolder(
 
             // TODO.. 첫 전화인지, 아닌지에 따라 버튼의 UI를 변경해줘야햠. Figma 참고
             callButton.setOnClickListener {
-                // Todo.. Requirement card가 phoneNum을 포함해야함.
                 leftButtonClickListener?.invoke(requirementCard.id, requirementCard.tel)
             }
 
             doneButton.setOnClickListener {
-                rightButtonClickListener?.invoke(requirementCard.id)
+                rightButtonClickListener?.invoke(requirementCard.id, requirementCard)
             }
 
             executePendingBindings()
@@ -127,11 +129,12 @@ class RequestFinishViewHolder(
         requirementCard: RequirementCard,
         cardClickListener: ((requirementId: Int) -> Unit),
         leftButtonClickListener: ((requirementId: Int, extraInfo: Any?) -> Unit)?,
-        rightButtonClickListener: ((requirementId: Int) -> Unit)?,
+        rightButtonClickListener: ((requirementId: Int, extraInfo: Any?) -> Unit)?,
     ) {
         with(binding) {
             data = requirementCard
 
+            firstDate.setFirstDate(requirementCard.status?.toString(), requirementCard.estimationDto?.updatedAt)
             doneButton.visibility = View.VISIBLE
 
             setCardClickListener {
@@ -139,7 +142,7 @@ class RequestFinishViewHolder(
             }
 
             doneButton.setOnClickListener {
-                rightButtonClickListener?.invoke(requirementCard.id)
+                rightButtonClickListener?.invoke(requirementCard.id, requirementCard)
             }
 
             executePendingBindings()
@@ -155,10 +158,12 @@ class DoneViewHolder(
         requirementCard: RequirementCard,
         cardClickListener: ((requirementId: Int) -> Unit),
         leftButtonClickListener: ((requirementId: Int, extraInfo: Any?) -> Unit)?,
-        rightButtonClickListener: ((requirementId: Int) -> Unit)?,
+        rightButtonClickListener: ((requirementId: Int, extraInfo: Any?) -> Unit)?,
     ) {
         with(binding) {
             data = requirementCard
+
+            firstDate.setFirstDate(requirementCard.status?.toString(), requirementCard.estimationDto?.repair?.createdAt)
 
             setCardClickListener {
                 cardClickListener(requirementCard.id)
@@ -167,13 +172,15 @@ class DoneViewHolder(
             reviewButton.visibility = View.VISIBLE
 
             reviewButton.setOnClickListener {
-                rightButtonClickListener?.invoke(requirementCard.id)
+                rightButtonClickListener?.invoke(requirementCard.id, requirementCard)
             }
-            // Todo.. review 요청이 이미 완료된 상태라면, Disabled button으로 변경하고, "리뷰 요청을 완료했어요!"로 문구룰 바꿔야함.
-            if(requirementCard.status.equals("askedReview")){
-                reviewButton.setText(R.string.ask_for_review_successful)
-                reviewButton.setBackgroundResource(R.color.color_90E9BD)
-                reviewButton.isEnabled = false
+
+            requirementCard.estimationDto?.repair?.requestReviewYn?.let { boolean ->
+                if (boolean) {
+                    reviewButton.setText(R.string.ask_for_review_successful)
+                    reviewButton.setBackgroundResource(R.color.color_90E9BD)
+                    reviewButton.isEnabled = false
+                }
             }
 
             executePendingBindings()
@@ -189,7 +196,7 @@ class ClosedViewHolder(
         requirementCard: RequirementCard,
         cardClickListener: ((requirementId: Int) -> Unit),
         leftButtonClickListener: ((requirementId: Int, extraInfo: Any?) -> Unit)?,
-        rightButtonClickListener: ((requirementId: Int) -> Unit)?,
+        rightButtonClickListener: ((requirementId: Int, extraInfo: Any?) -> Unit)?,
     ) {
         with(binding) {
             data = requirementCard
@@ -202,8 +209,10 @@ class ClosedViewHolder(
                     null
                 )
             )
+            firstDate.setFirstDate(requirementCard.status?.toString(), requirementCard.estimationDto?.repair?.actualDate)
+
             myAmount.visibility = View.VISIBLE
-            myAmount.setAmount(requirementCard.status, requirementCard.estimation?.price.toString())
+            myAmount.setAmount(requirementCard.status?.toString(), requirementCard.estimationDto?.price?.toString())
 
             setCardClickListener {
                 cardClickListener(requirementCard.id)
@@ -222,7 +231,7 @@ class CanceledViewHolder(
         requirementCard: RequirementCard,
         cardClickListener: ((requirementId: Int) -> Unit),
         leftButtonClickListener: ((requirementId: Int, extraInfo: Any?) -> Unit)?,
-        rightButtonClickListener: ((requirementId: Int) -> Unit)?,
+        rightButtonClickListener: ((requirementId: Int, extraInfo: Any?) -> Unit)?,
     ) {
         with(binding) {
             data = requirementCard
@@ -235,6 +244,8 @@ class CanceledViewHolder(
                     null
                 )
             )
+
+            firstDate.setFirstDate(requirementCard.status?.toString(), requirementCard.createdAt)
 
             setCardClickListener {
                 cardClickListener(requirementCard.id)

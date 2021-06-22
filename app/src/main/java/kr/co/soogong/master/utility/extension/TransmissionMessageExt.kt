@@ -4,56 +4,68 @@ package kr.co.soogong.master.utility.extension
 
 import android.content.Context
 import android.icu.text.DecimalFormat
+import android.text.SpannableStringBuilder
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import androidx.core.text.bold
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.model.requirement.Message
-import kr.co.soogong.master.ui.widget.TransmissionMessage
+import kr.co.soogong.master.data.dto.requirement.estimation.EstimationDto
+import kr.co.soogong.master.data.model.requirement.estimation.EstimationPriceTypeCode
+import kr.co.soogong.master.ui.widget.EstimationItem
 
-fun addTransmissionMessage(
-        viewGroup: ViewGroup,
-        context: Context,
-        message: Message
+fun addEstimationMessage(
+    viewGroup: ViewGroup,
+    context: Context,
+    estimationDto: EstimationDto
 ) {
+    viewGroup.removeAllViews()
+
     val params = LinearLayout.LayoutParams(
-            ViewGroup.LayoutParams.MATCH_PARENT,
-            ViewGroup.LayoutParams.WRAP_CONTENT
+        ViewGroup.LayoutParams.MATCH_PARENT,
+        ViewGroup.LayoutParams.WRAP_CONTENT
     )
 
     params.setMargins(0, 12.dp, 0, 12.dp)
 
-    // todo.. 최종 시공가격도 포함되도록 서버 return 수정 필요
-
-    if (message.priceInNumber != null) {
-        val view = TransmissionMessage(context)
-        view.key = context.getString(R.string.view_estimate_transmission_detail_total_price)
-        view.value = message.priceInNumber.toString()
+    if (estimationDto.repair != null) {
+        val view = EstimationItem(context)
+        view.key = SpannableStringBuilder().bold { append(context.getString(R.string.repair_actual_price)) }.toString()
+        view.value = SpannableStringBuilder().bold { estimationDto.repair.actualPrice }.toString()
 
         viewGroup.addView(view, params)
     }
 
-    if (!message.priceDetail.isNullOrEmpty()) {
-        message.priceDetail.forEach { item ->
-            val view = TransmissionMessage(context)
+    if (estimationDto.price != null) {
+        val view = EstimationItem(context)
+        view.key = context.getString(R.string.estimation_total_cost)
+        view.value = estimationDto.price.toString()
 
-            when (item.priceType) {
-                "personnel" ->
-                    view.key = context.getString(R.string.view_estimate_transmission_detail_personnel_price)
-                "material" ->
-                    view.key = context.getString(R.string.view_estimate_transmission_detail_material_price)
-                "trip" ->
-                    view.key = context.getString(R.string.view_estimate_transmission_detail_trip_price)
+        viewGroup.addView(view, params)
+    }
+
+    if (!estimationDto.estimationPrices.isNullOrEmpty()) {
+        estimationDto.estimationPrices.map {
+            val view = EstimationItem(context)
+
+            view.key = when (it.priceType) {
+                EstimationPriceTypeCode.LABOR ->
+                    context.getString(R.string.estimation_labor_cost)
+                EstimationPriceTypeCode.MATERIAL ->
+                    context.getString(R.string.estimation_material_cost)
+                EstimationPriceTypeCode.TRAVEL ->
+                    context.getString(R.string.estimation_travel_cost)
+                else -> ""
             }
-            view.value = "${DecimalFormat("#,###").format(item.priceInNumber)}원"
+            view.value = "${DecimalFormat("#,###").format(it.partialPrice)}원"
 
             viewGroup.addView(view, params)
         }
     }
 
-    if (message.contents != null) {
-        val view = TransmissionMessage(context)
-        view.key = context.getString(R.string.view_estimate_transmission_detail_contents)
-        view.value = message.contents
+    if (estimationDto.description != null) {
+        val view = EstimationItem(context)
+        view.key = context.getString(R.string.estimation_description_label)
+        view.value = estimationDto.description
 
         viewGroup.addView(view, params)
     }

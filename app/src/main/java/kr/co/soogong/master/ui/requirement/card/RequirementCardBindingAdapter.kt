@@ -5,90 +5,71 @@ import android.icu.text.SimpleDateFormat
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.dto.requirement.estimation.EstimationDto
-import kr.co.soogong.master.data.model.requirement.Estimation
-import kr.co.soogong.master.data.model.requirement.Transmissions
+import kr.co.soogong.master.data.model.requirement.RequirementStatus
 import kr.co.soogong.master.ui.widget.AmountView
-import java.text.DateFormat
-import java.time.LocalDate
 import java.util.*
 
-@BindingAdapter("bind:created_datetime_to_string")
-fun TextView.setStartDatetime(date: String?) {
-    val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd - hh:mm")
+@BindingAdapter("bind:requirement_status", "bind:first_datetime_to_string")
+fun TextView.setFirstDate(status: String?, date: Date?) {
+    // 최초 요청일 : 2021.01.11 - 13:20
+    val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd - HH:mm", Locale.KOREA)
     date?.let {
-        text = context.getString(
-            R.string.requirements_card_start_time,
-            simpleDateFormat.format(it)
-        )
+        text = when (status) {
+            RequirementStatus.Requested.toString(), RequirementStatus.Estimated.toString() -> {
+                context.getString(
+                    R.string.requirements_card_start_time,
+                    simpleDateFormat.format(it)
+                )
+            }
+            RequirementStatus.Repairing.toString() -> {
+                context.getString(
+                    R.string.requirements_card_matched_time,
+                    simpleDateFormat.format(it)
+                )
+            }
+            RequirementStatus.RequestFinish.toString() -> {
+                context.getString(
+                    R.string.requirements_card_request_finish_time,
+                    simpleDateFormat.format(it)
+                )
+            }
+            RequirementStatus.Done.toString() -> {
+                context.getString(
+                    R.string.requirements_card_repair_done_time,
+                    simpleDateFormat.format(it)
+                )
+            }
+            else -> {
+                context.getString(
+                    R.string.requirements_card_start_time,
+                    simpleDateFormat.format(it)
+                )
+            }
+        }
     }
 }
 
-//@BindingAdapter("bind:start_date")
-//fun TextView.setStartDate(createdAt: Long?) {
-//    val date = Date(createdAt)
-//    val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd - hh:mm")
-//    text = context.getString(
-//        R.string.requirements_card_start_time,
-//        simpleDateFormat.format(date)
-//    )
-//}
-
-@BindingAdapter("bind:closed_datetime_to_string")
-fun TextView.setEndDatetime(date: String?) {
-    val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd - hh:mm")
-    val c = Calendar.getInstance()
+@BindingAdapter("bind:second_datetime_to_string")
+fun TextView.setSecondDate(date: Date?) {
+    // 견적 마감일 : 2021.01.11 - 13:20
+    val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd - HH:mm", Locale.KOREA)
     date?.let {
-        c.time = simpleDateFormat.parse(date)
-        c.add(Calendar.DATE, 1)
-        text = context.getString(R.string.requirements_card_end_time, simpleDateFormat.format(c.time))
+        text = context.getString(R.string.requirements_card_end_time, simpleDateFormat.format(it))
     }
 }
 
-//@BindingAdapter("bind:end_date")
-//fun TextView.setEndDate(createdAt: Long?) {
-//    val date = Date(createdAt ?: System.currentTimeMillis())
-//    val c = Calendar.getInstance()
-//    c.time = date
-//    c.add(Calendar.DATE, 1)
-//    val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd - hh:mm")
-//    text = context.getString(R.string.requirements_card_end_time, simpleDateFormat.format(c.time))
-//}
-
-@BindingAdapter("bind:closed_datetime_only_to_string")
-fun TextView.setEndDatetimeOnly(date: String?) {
-    val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd - hh:mm")
-    val c = Calendar.getInstance()
-    date?.let {
-        c.time = simpleDateFormat.parse(date)
-        c.add(Calendar.DATE, 1)
-        text = simpleDateFormat.format(c.time)
-    }
-}
-//
-//@BindingAdapter("bind:end_date_2")
-//fun TextView.setEndDate2(createdAt: Long?) {
-//    val date = Date(createdAt ?: System.currentTimeMillis())
-//    val c = Calendar.getInstance()
-//    c.time = date
-//    c.add(Calendar.DATE, 1)
-//    val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd - hh:mm")
-//    text = simpleDateFormat.format(c.time)
-//}
-
-@BindingAdapter("bind:requirementStatus")
+@BindingAdapter("bind:amount")
 fun AmountView.setAmount(status: String?, price: String?) {
     title = when (status) {
-        "Estimated", "Repairing" -> {
+        RequirementStatus.Estimated.toString(), RequirementStatus.Repairing.toString() -> {
             context.getString(R.string.requirements_card_amount_title)
         }
-        "Done", "Closed" -> {
+        RequirementStatus.Done.toString(), RequirementStatus.Closed.toString() -> {
             context.getString(R.string.requirements_card_amount_done_title)
         }
         else -> {
             ""
         }
     }
-
-    detail = "${DecimalFormat("#,###").format(price)}원"
+    price?.let { detail = "${DecimalFormat("#,###").parse(it)}원" }
 }

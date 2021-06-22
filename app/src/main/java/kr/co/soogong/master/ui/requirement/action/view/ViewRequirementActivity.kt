@@ -5,7 +5,8 @@ import android.view.View
 import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.model.requirement.Message
+import kr.co.soogong.master.data.dto.requirement.estimation.EstimationDto
+import kr.co.soogong.master.data.dto.requirement.qna.RequirementQnaDto
 import kr.co.soogong.master.data.model.requirement.RequirementStatus
 import kr.co.soogong.master.databinding.ActivityViewRequirementBinding
 import kr.co.soogong.master.ui.base.BaseActivity
@@ -18,12 +19,13 @@ import kr.co.soogong.master.ui.requirement.action.view.ViewRequirementViewModel.
 import kr.co.soogong.master.ui.requirement.action.view.ViewRequirementViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.uihelper.image.ImageViewActivityHelper
 import kr.co.soogong.master.uihelper.requirment.CallToCustomerHelper
-import kr.co.soogong.master.uihelper.requirment.action.CancelEstimationActivityHelper
+import kr.co.soogong.master.uihelper.requirment.action.CancelRepairActivityHelper
 import kr.co.soogong.master.uihelper.requirment.action.EndRepairActivityHelper
 import kr.co.soogong.master.uihelper.requirment.action.ViewRequirementActivityHelper
 import kr.co.soogong.master.uihelper.requirment.action.WriteEstimationActivityHelper
 import kr.co.soogong.master.utility.EventObserver
-import kr.co.soogong.master.utility.extension.addTransmissionMessage
+import kr.co.soogong.master.utility.extension.addAdditionInfoView
+import kr.co.soogong.master.utility.extension.addEstimationMessage
 import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
 import java.util.*
@@ -94,7 +96,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
             // 취소 됐음 버튼
             cancelButton.setOnClickListener {
                 startActivity(
-                    CancelEstimationActivityHelper.getIntent(
+                    CancelRepairActivityHelper.getIntent(
                         this@ViewRequirementActivity,
                         requirementId
                     )
@@ -126,101 +128,84 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                     getString(R.string.view_requirement_action_bar_text, requirement?.token)
 
                 // 고객 요청 내용
-                // TODO: 2021/06/16 고객 요청내용 받아오고, view 에 추가하는 작업 해야함
-//                val additionInfo = requirement?.additionalInfo
-//                if (!additionInfo.isNullOrEmpty()) {
-//                    customFrame.removeAllViews()
-//                    additionInfo.forEach { item ->
-//                        addAdditionInfoView(
-//                            customFrame,
-//                            this@ViewEstimateActivity,
-//                            item.description,
-//                            item.value
-//                        )
-//                    }
-//                }
+                bindRequirementQnasData(requirement?.requirementQnas)
 
                 when (RequirementStatus.getStatus(requirement.status)) {
                     // 상태 : 견적요청
-                    // view : 고객 요청 내용
+                    // view :
                     // footer button : 견적 마감일, 견적을 보낼래요, 견적을 내기 어려워요
                     RequirementStatus.Requested -> {
                         requestedButtonGroup.visibility = View.VISIBLE
                     }
 
                     // 상태 : 매칭대기
-                    // view : 고객 요청 내용, 나의 제안 내용
+                    // view : 나의 제안 내용
                     // footer button : none
                     RequirementStatus.Estimated -> {
-//                        bindEstimationData(requirement?.transmissions?.message)
+                        bindEstimationData(requirement?.estimationDto)
                     }
 
                     // 상태 : 시공진행중
-                    // view : 고객 요청 내용(+고객에게 전화하기), 나의 제안 내용
+                    // view : 고객에게 전화하기, 나의 제안 내용
                     // footer button : 취소 됐음, 시공 완료
                     RequirementStatus.Repairing -> {
                         cancelButton.visibility = View.VISIBLE
                         doneButton.visibility = View.VISIBLE
                         callToCustomerContainer.visibility = View.VISIBLE
-//                        bindEstimationData(requirement?.transmissions?.message)
+                        bindEstimationData(requirement?.estimationDto)
                     }
 
                     // 상태 : 고객완료요청
-                    // view : 고객 요청 내용, 나의 제안 내용
+                    // view : 나의 제안 내용
                     // footer button : 시공 완료
                     RequirementStatus.RequestFinish -> {
                         doneButton.visibility = View.VISIBLE
-//                        bindEstimationData(requirement?.transmissions?.message)
+                        bindEstimationData(requirement?.estimationDto)
                     }
 
                     // 상태 : 시공완료
-                    // view : 나의 최종 시공 내용, 고객 요청 내용
+                    // view : 나의 최종 시공 내용
                     // footer button : 리뷰 요청하기
                     RequirementStatus.Done -> {
                         askReviewButton.visibility = View.VISIBLE
-//                        Todo.. 리뷰상태 확인 및 변경
-//                        if(askedReview){
-//                            changeAskingReviewButton()
-//                        }
-//                        bindDoneData(requirement?.transmissions?.message)
+                        if(requirement?.estimationDto?.repair?.requestReviewYn!!) setAskingReviewButton()
+                        bindDoneData(requirement?.estimationDto)
                     }
 
                     // 상태 : 평가완료
-                    // view : 고객 리뷰, 나의 최종 시공 내용, 고객 요청 내용
+                    // view : 고객 리뷰, 나의 최종 시공 내용
                     // footer button : none
                     RequirementStatus.Closed -> {
                         //Todo.. 고객 리뷰 데이터를 서버에서 return 해줘야함.
                         customerReviewGroup.visibility = View.VISIBLE
-//                        bindDoneData(requirement?.transmissions?.message)
+                        bindDoneData(requirement?.estimationDto)
                     }
 
                     // 상태 : 시공취소
-                    // view : 취소 사유, 고객 요청 내용, 나의 제안 내용
+                    // view : 취소 사유, 나의 제안 내용
                     // footer button : none
                     RequirementStatus.CanceledByClient, RequirementStatus.CanceledByMaster, RequirementStatus.Canceled -> {
-                        doneGroup.visibility = View.VISIBLE
-//                        bindEstimationData(requirement?.transmissions?.message)
+                        repairGroup.visibility = View.VISIBLE
+                        bindEstimationData(requirement?.estimationDto)
                         // TODO: 2021/06/16 취소 사유 바인딩 필요
                     }
 
                     // 상태 : 매칭실패
-                    // view : 취소 사유, 고객 요청 내용, 나의 제안 내용
+                    // view : 취소 사유, 나의 제안 내용
                     // footer button : none
                     RequirementStatus.Failed -> {
-//                        bindEstimationData(requirement?.estimationDto?.)
+                        bindEstimationData(requirement?.estimationDto)
                     }
 
                     // 상태 : 기타
-                    // view : 취소 사유, 고객 요청 내용, 나의 제안 내용
+                    // view : 취소 사유, 나의 제안 내용
                     // footer button : none
                     else -> {
-                        //                        bindEstimationData(requirement?.estimationDto?.)
+                        bindEstimationData(requirement?.estimationDto)
                     }
                 }
             }
         })
-
-
 
         viewModel.action.observe(this@ViewRequirementActivity, EventObserver { event ->
             when (event) {
@@ -234,7 +219,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                     }
                 }
                 ASK_FOR_REVIEW_SUCCESSFULLY -> {
-                    changeAskingReviewButton()
+                    setAskingReviewButton()
                     toast(getString(R.string.ask_for_review_successful))
                 }
                 REQUEST_FAILED -> {
@@ -249,33 +234,38 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
         viewModel.requestRequirement()
     }
 
-    // TODO: 2021/06/16 추가 작업
-    private fun bindEstimationData(message: Message?) {
-        if (message != null) {
-            binding.transmissionGroup.visibility = View.VISIBLE
-            binding.customFrameForEstimationDetail.removeAllViews()
-            addTransmissionMessage(
+    private fun bindRequirementQnasData(requirementQnaDtos: List<RequirementQnaDto>?) {
+        if (!requirementQnaDtos.isNullOrEmpty()) addAdditionInfoView(
+            binding.customFrame,
+            this@ViewRequirementActivity,
+            requirementQnaDtos
+        )
+    }
+
+    private fun bindEstimationData(estimationDto: EstimationDto?) {
+        if (estimationDto != null) {
+            binding.estimationGroup.visibility = View.VISIBLE
+            addEstimationMessage(
                 binding.customFrameForEstimationDetail,
                 this@ViewRequirementActivity,
-                message
+                estimationDto
             )
         }
     }
 
-    // TODO: 2021/06/16 추가 작업
-    private fun bindDoneData(message: Message?) {
-        if (message != null) {
-            binding.doneGroup.visibility = View.VISIBLE
-            binding.customFrameForDoneDetail.removeAllViews()
-            addTransmissionMessage(
-                binding.customFrameForDoneDetail,
+    private fun bindDoneData(estimationDto: EstimationDto?) {
+        if (estimationDto != null) {
+            binding.repairGroup.visibility = View.VISIBLE
+            addEstimationMessage(
+                binding.customFrameForRepairDetail,
                 this@ViewRequirementActivity,
-                message
+                estimationDto
             )
         }
     }
 
-    private fun changeAskingReviewButton() {
+    private fun setAskingReviewButton() {
+        binding.askReviewButton.isEnabled = false
         binding.askReviewButton.text = getString(R.string.ask_for_review_successful)
         binding.askReviewButton.background = getDrawable(R.color.color_90E9BD)
     }

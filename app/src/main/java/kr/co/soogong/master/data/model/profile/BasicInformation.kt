@@ -3,12 +3,13 @@ package kr.co.soogong.master.data.model.profile
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 import kr.co.soogong.master.data.dto.profile.MasterDto
+import kr.co.soogong.master.data.dto.profile.PortfolioDto
 import kr.co.soogong.master.data.model.requirement.ImagePath
 
 @Parcelize
 data class BasicInformation(
-    val portfolios: List<Portfolio>?,
-    val priceByProjects: List<PriceByProject>?,
+    val portfolios: List<PortfolioDto>?,
+    val priceByProjects: List<PortfolioDto>?,
     val profileImage: ImagePath?,
     val flexibleCost: FlexibleCost?,
     val otherFlexibleOptions: OtherFlexibleOptions?,
@@ -17,8 +18,8 @@ data class BasicInformation(
     companion object {
         fun fromMasterDto(masterDto: MasterDto): BasicInformation {
             return BasicInformation(
-                portfolios = Portfolio.fromPortfolioDto(masterDto.masterPortfolios?.filter { portfolioDto -> portfolioDto.type == "portfolio" }),
-                priceByProjects = PriceByProject.fromPortfolioDto(masterDto.masterPortfolios?.filter { portfolioDto -> portfolioDto.type == "price" }),
+                portfolios = masterDto.masterPortfolios?.filter { portfolioDto -> portfolioDto.type == "portfolio" },
+                priceByProjects = masterDto.masterPortfolios?.filter { portfolioDto -> portfolioDto.type == "price" },
                 profileImage = ImagePath(masterDto.profileImage),
                 flexibleCost = FlexibleCost.fromMasterConfigList(masterDto.masterConfigs?.filter { masterConfigDto -> masterConfigDto.configGroupCode == "flexibleCost" }),
                 otherFlexibleOptions = OtherFlexibleOptions.fromMasterConfigList(masterDto.masterConfigs?.filter { masterConfigDto -> masterConfigDto.configGroupCode == "otherFlexibleOption" }),

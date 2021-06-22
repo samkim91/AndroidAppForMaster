@@ -6,6 +6,7 @@ import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 import kr.co.soogong.master.data.dto.requirement.estimation.EstimationDto
+import kr.co.soogong.master.data.dto.requirement.qna.RequirementQnaDto
 import kr.co.soogong.master.data.model.requirement.ImagePath
 import java.util.*
 
@@ -13,8 +14,8 @@ import java.util.*
 @Entity(tableName = "Requirement")
 data class RequirementDto(
     @PrimaryKey
-    @SerializedName("requirementId")
-    val requirementId: Int,
+    @SerializedName("id")
+    val id: Int,
 
     @SerializedName("token")
     val token: String?,
@@ -43,23 +44,20 @@ data class RequirementDto(
     @SerializedName("images")
     val images: MutableList<ImagePath>?,
 
-    // TODO: 2021/06/16 질문응답 추가 필요
-//    @SerializedName("requirementQnas")
-//    val requirementQnas: List<String>,
+    @SerializedName("requirementQnas")
+    val requirementQnas: List<RequirementQnaDto>?,
 
-    @SerializedName("estimationDto")
+    @SerializedName("estimation")
     val estimationDto: EstimationDto?,
 
-    // TODO: 2021/06/18 repair Dto도 추가해야함
-
     @SerializedName("closedAt")
-    val closedAt: String?,
+    val closedAt: Date?,
 
     @SerializedName("createdAt")
-    val createdAt: String?,
+    val createdAt: Date?,
 
     @SerializedName("updatedAt")
-    val updatedAt: String?,
+    val updatedAt: Date?,
 ) : Parcelable {
     companion object {
 

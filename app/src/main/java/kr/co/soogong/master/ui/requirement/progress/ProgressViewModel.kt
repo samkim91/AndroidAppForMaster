@@ -11,7 +11,6 @@ import kr.co.soogong.master.data.model.requirement.RequirementStatus
 import kr.co.soogong.master.domain.usecase.requirement.CallToCustomerUseCase
 import kr.co.soogong.master.domain.usecase.requirement.GetProgressEstimationListUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
-import kr.co.soogong.master.utility.ListLiveData
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -53,10 +52,10 @@ class ProgressViewModel @Inject constructor(
                 onSuccess = { list ->
                     when (index) {
                         1 -> {
-                            _progressList.postValue(list.filter { it.status == RequirementStatus.Repairing.toString() })
+                            _progressList.postValue(list.filter { it.status == RequirementStatus.Repairing })
                         }
                         2 -> {
-                            _progressList.postValue(list.filter { it.status == RequirementStatus.RequestFinish.toString() })
+                            _progressList.postValue(list.filter { it.status == RequirementStatus.RequestFinish })
                         }
                         else -> {
                             _progressList.postValue(list)

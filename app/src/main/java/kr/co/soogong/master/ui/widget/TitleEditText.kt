@@ -89,6 +89,7 @@ class TitleEditText @JvmOverloads constructor(
             binding.detail.filters += InputFilter.LengthFilter(value)
         }
 
+
     fun setEditTextBackground(drawable: Drawable?) {
         binding.detail.background = drawable
     }

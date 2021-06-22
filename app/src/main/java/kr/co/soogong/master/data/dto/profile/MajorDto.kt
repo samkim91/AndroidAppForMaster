@@ -13,17 +13,8 @@ data class MajorDto(
     @SerializedName("name")
     val name: String? = null,
 
-    @SerializedName("soogongmanYn")
-    val soogongmanYn: Boolean? = null,
-
     @SerializedName("useYn")
     val useYn: Boolean? = null,
-
-    @SerializedName("createdAt")
-    val createdAt: String? = null,
-
-    @SerializedName("updatedAt")
-    val updatedAt: String? = null,
 
     @SerializedName("categoryId")
     val categoryId: Int? = null,

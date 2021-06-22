@@ -1,29 +1,78 @@
 package kr.co.soogong.master.ui.requirement.action.end
 
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import kr.co.soogong.master.data.model.requirement.EndEstimate
-import kr.co.soogong.master.domain.usecase.requirement.EndRepairUseCase
+import kr.co.soogong.master.data.dto.requirement.RequirementDto
+import kr.co.soogong.master.data.dto.requirement.repair.RepairDto
+import kr.co.soogong.master.domain.usecase.requirement.SaveRepairUseCase
+import kr.co.soogong.master.domain.usecase.requirement.GetRequirementUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
+import kr.co.soogong.master.uihelper.requirment.action.EndRepairActivityHelper
 import timber.log.Timber
+import java.text.SimpleDateFormat
+import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
 class EndRepairViewModel @Inject constructor(
-    private val endRepairUseCase: EndRepairUseCase,
+    private val getRequirementUseCase: GetRequirementUseCase,
+    private val saveRepairUseCase: SaveRepairUseCase,
+    val savedStateHandle: SavedStateHandle
 ) : BaseViewModel() {
-    fun endRepair(estimationId: Int, endEstimate: EndEstimate) {
-        Timber.tag(TAG).d("doOnFinish: ")
+    //    private val requirementId = savedStateHandle.get<Bundle>(BUNDLE_KEY)?.getInt(END_REPAIR_REQUIREMENT_INT_KEY)
+    private val requirementId =
+        EndRepairActivityHelper.getRequirementIdBySaveState(savedStateHandle)
 
-        // 키코드, 브랜치키코드, 시공일자, 최종시공액 .. 기존 API에서는 주소도 받는데 유지필요하려나?
-        endRepairUseCase(estimationId = estimationId, endEstimate = endEstimate)
+    private val _requirement = MutableLiveData<RequirementDto>()
+
+    val actualPrice = MutableLiveData("")
+    val actualDate = MutableLiveData(Calendar.getInstance())
+
+    fun requestRequirement() {
+        Timber.tag(TAG).d("requestRequirement: $requirementId")
+        getRequirementUseCase(requirementId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
-                onSuccess =
-                {
+                onSuccess = {
+                    Timber.tag(TAG)
+                        .d("requestRequirement successfully: $it")
+                    _requirement.value = it
+                },
+                onError = {
+                    Timber.tag(TAG).d("requestRequirement failed: $it")
+                    setAction(REQUEST_FAILED)
+                }
+            ).addToDisposable()
+    }
+
+
+    fun saveRepair() {
+        Timber.tag(TAG).d("endRepair: ${actualDate.value}/${actualPrice.value}")
+
+        saveRepairUseCase(
+            RepairDto(
+                id = null,
+                estimationId = _requirement.value?.estimationDto?.id,
+                scheduledDate = null,
+                actualDate = actualDate.value?.time,
+                actualPrice = actualPrice.value?.replace(",", "")?.toInt(),
+                warrantyDueDate = null,
+                requestReviewYn = null,
+                canceledYn = null,
+                canceledReason = null,
+                description = null,
+                review = null,
+            )
+        )
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeBy(
+                onSuccess = {
                     Timber.tag(TAG).d("END_REPAIR_SUCCESSFULLY: $it")
                     setAction(END_REPAIR_SUCCESSFULLY)
                 },
@@ -34,7 +83,8 @@ class EndRepairViewModel @Inject constructor(
     }
 
     companion object {
-        private const val TAG = "EndEstimateViewModel"
+        private const val TAG = "EndRepairViewModel"
+        const val REQUEST_FAILED = "REQUEST_FAILED"
         const val END_REPAIR_SUCCESSFULLY = "END_REPAIR_SUCCESSFULLY"
         const val END_REPAIR_FAILED = "END_REPAIR_FAILED"
     }

@@ -3,7 +3,7 @@ package kr.co.soogong.master.network.profile
 import io.reactivex.Single
 import kr.co.soogong.master.data.dto.Response
 import kr.co.soogong.master.data.dto.profile.MasterDto
-import kr.co.soogong.master.data.model.profile.*
+import kr.co.soogong.master.data.dto.profile.PortfolioDto
 import retrofit2.Retrofit
 import javax.inject.Inject
 
@@ -18,7 +18,7 @@ class ProfileService @Inject constructor(
 
 
 
-    fun savePortfolio(masterId: String, portfolio: Portfolio): Single<Response> {
+    fun savePortfolio(masterId: String, portfolio: PortfolioDto): Single<Response> {
         val query = HashMap<String, String>()
 
 
@@ -27,7 +27,7 @@ class ProfileService @Inject constructor(
         // return profileInterface.savePortfolio(query)
     }
 
-    fun savePriceByProject(masterId: String, priceByProject: PriceByProject): Single<Response> {
+    fun savePriceByProject(masterId: String, priceByProject: PortfolioDto): Single<Response> {
         val query = HashMap<String, String>()
 
 

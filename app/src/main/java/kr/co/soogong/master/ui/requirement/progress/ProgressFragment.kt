@@ -66,7 +66,7 @@ class ProgressFragment : BaseFragment<FragmentRequirementProgressBinding>(
 
                     dialog.show(childFragmentManager, dialog.tag)
                 },
-                doneButtonClick = { requirementId ->
+                doneButtonClick = { requirementId, _ ->
                     startActivity(
                         EndRepairActivityHelper.getIntent(
                             requireContext(),

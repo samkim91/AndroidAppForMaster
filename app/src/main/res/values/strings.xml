@@ -101,6 +101,9 @@
     <string name="requirements_card_review_button">리뷰 요청하기</string>
     <string name="requirements_card_review_button_done">리뷰 요청을 완료했어요!</string>
     <string name="requirements_card_start_time">최초 요청일 : %s</string>
+    <string name="requirements_card_matched_time">고객매칭 완료일 : %s</string>
+    <string name="requirements_card_request_finish_time">완료 요청일 : %s</string>
+    <string name="requirements_card_repair_done_time">시공 완료일 : %s</string>
     <string name="requirements_card_end_time">견적 마감일 : %s</string>
     <string name="requirements_card_amount_title">나의 견적가</string>
     <string name="requirements_card_amount_done_title">최종 시공가</string>
@@ -108,7 +111,7 @@
     <!-- View Estimate -->
     <string name="view_requirement_action_bar_text">고객번호 %s</string>
     <string name="view_estimate_customer_review_title">고객 리뷰</string>
-    <string name="view_estimate_done_title">나의 최종 시공 내용</string>
+    <string name="view_repair_title">나의 최종 시공 내용</string>
     <string name="view_estimate_customer_request_title">고객 요청 내용</string>
     <string name="view_estimate_photo_title">사진이 있다면 견적에 도움이 됩니다.</string>
     <string name="view_estimate_trasmission_title">나의 제안 내용</string>
@@ -126,13 +129,13 @@
 
 
     <!-- Transmission Card & Done Card in View Estimate -->
-    <string name="view_estimate_transmission_detail_total_price">총 견적가</string>
-    <string name="view_estimate_transmission_detail_personnel_price">인건비</string>
-    <string name="view_estimate_transmission_detail_trip_price">출장비</string>
-    <string name="view_estimate_transmission_detail_material_price">자재비</string>
-    <string name="view_estimate_transmission_detail_contents">제안내용</string>
+    <string name="estimation_total_cost">총 견적가</string>
+    <string name="estimation_labor_cost">인건비</string>
+    <string name="estimation_travel_cost">출장비</string>
+    <string name="estimation_material_cost">자재비</string>
+    <string name="estimation_description_label">제안내용</string>
     <string name="view_estimate_transmission_detail_work_date">시공시기</string>
-    <string name="view_estimate_done_final_price">최종 시공가</string>
+    <string name="repair_actual_price">최종 시공가</string>
 
     <!--  Cancel Estimate  -->
     <string name="cancel_estimate_title">취소 사유</string>
@@ -147,10 +150,11 @@
     <string name="write_estimate_title">견적서 작성</string>
     <string name="send_estimation">견적서 보내기</string>
     <string name="show_requirement_content">요청 내용 보기</string>
-
+    <string name="integration_estimation">통합 견적</string>
+    <string name="estimation_by_item">항목별 견적</string>
 
     <!-- End Estimate -->
-    <string name="end_estimate_title">최종 정보</string>
+    <string name="end_repair_title">최종 정보</string>
     <string name="end_estimate_price_title">고객과 거래한 최종시공가를 입력해주세요.</string>
     <string name="end_estimate_calendar_title">시공 완료일자를 선택해주세요.</string>
 
@@ -267,7 +271,6 @@
     <string name="certification_code_requested_again">인증번호를 재요청 했습니다.</string>
 
     <string name="send_message_succeeded">고객에게 견적서가 전달되었습니다!\n매칭을 기다려주세요.</string>
-    <string name="send_message_failed">처리 실패하였습니다.\n다시 시도해보거나, 연락해주세요.</string>
     <string name="cancel_estimate_succeeded">시공이 취소되었습니다.\n더 좋은 문의를 드리도록 노력할게요.</string>
 
     <string name="end_estimate_succeeded">시공 완료 처리 되었고,\n고객님께 리뷰 요청이 전송되었어요.</string>
