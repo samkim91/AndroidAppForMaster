@@ -13,7 +13,7 @@ import kr.co.soogong.master.data.dto.requirement.estimation.EstimationDto
 import kr.co.soogong.master.data.model.requirement.estimation.EstimationPriceTypeCode
 import kr.co.soogong.master.ui.widget.EstimationItem
 
-fun addEstimationMessage(
+fun addEstimationDetail(
     viewGroup: ViewGroup,
     context: Context,
     estimationDto: EstimationDto
@@ -29,8 +29,9 @@ fun addEstimationMessage(
 
     if (estimationDto.repair != null) {
         val view = EstimationItem(context)
-        view.key = SpannableStringBuilder().bold { append(context.getString(R.string.repair_actual_price)) }.toString()
-        view.value = SpannableStringBuilder().bold { estimationDto.repair.actualPrice }.toString()
+        view.key = context.getString(R.string.repair_actual_price)
+        view.value = "${DecimalFormat("#,###").format(estimationDto.repair.actualPrice)}원"
+        view.bold = true
 
         viewGroup.addView(view, params)
     }
@@ -38,7 +39,7 @@ fun addEstimationMessage(
     if (estimationDto.price != null) {
         val view = EstimationItem(context)
         view.key = context.getString(R.string.estimation_total_cost)
-        view.value = estimationDto.price.toString()
+        view.value = "${DecimalFormat("#,###").format(estimationDto.price)}원"
 
         viewGroup.addView(view, params)
     }

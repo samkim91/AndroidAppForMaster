@@ -12,6 +12,9 @@ data class RepairDto(
     @SerializedName("id")
     val id: Int?,
 
+    @SerializedName("requirementToken")
+    val requirementToken: String?,
+
     @SerializedName("estimationId")
     val estimationId: Int?,
 

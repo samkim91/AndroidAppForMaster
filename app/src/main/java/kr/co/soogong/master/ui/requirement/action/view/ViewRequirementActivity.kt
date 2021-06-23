@@ -25,7 +25,7 @@ import kr.co.soogong.master.uihelper.requirment.action.ViewRequirementActivityHe
 import kr.co.soogong.master.uihelper.requirment.action.WriteEstimationActivityHelper
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.extension.addAdditionInfoView
-import kr.co.soogong.master.utility.extension.addEstimationMessage
+import kr.co.soogong.master.utility.extension.addEstimationDetail
 import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
 import java.util.*
@@ -168,7 +168,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                     // footer button : 리뷰 요청하기
                     RequirementStatus.Done -> {
                         askReviewButton.visibility = View.VISIBLE
-                        if(requirement?.estimationDto?.repair?.requestReviewYn!!) setAskingReviewButton()
+                        requirement?.estimationDto?.repair?.requestReviewYn?.let { if(it) setAskingReviewButton() }
                         bindDoneData(requirement?.estimationDto)
                     }
 
@@ -245,7 +245,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
     private fun bindEstimationData(estimationDto: EstimationDto?) {
         if (estimationDto != null) {
             binding.estimationGroup.visibility = View.VISIBLE
-            addEstimationMessage(
+            addEstimationDetail(
                 binding.customFrameForEstimationDetail,
                 this@ViewRequirementActivity,
                 estimationDto
@@ -256,7 +256,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
     private fun bindDoneData(estimationDto: EstimationDto?) {
         if (estimationDto != null) {
             binding.repairGroup.visibility = View.VISIBLE
-            addEstimationMessage(
+            addEstimationDetail(
                 binding.customFrameForRepairDetail,
                 this@ViewRequirementActivity,
                 estimationDto

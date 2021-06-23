@@ -395,9 +395,7 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="@id/customer_request_layout"
                             app:layout_constraintEnd_toEndOf="parent"
-                            bind:visible="@{vm.requirement.requirementQnas}"
                             />
-
 
                         <LinearLayout
                             android:id="@+id/custom_frame"

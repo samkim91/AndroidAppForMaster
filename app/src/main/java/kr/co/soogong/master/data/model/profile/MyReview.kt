@@ -3,9 +3,10 @@ package kr.co.soogong.master.data.model.profile
 import android.os.Parcelable
 import com.google.gson.JsonObject
 import kotlinx.parcelize.Parcelize
+import kr.co.soogong.master.data.dto.profile.MasterDto
 
 @Parcelize
-data class MyReview(
+data class  MyReview(
     val averageRecommendation: Double,
     val averageKindness: Double,
     val averageQuality: Double,
@@ -14,6 +15,10 @@ data class MyReview(
     val reviews: List<Review> = emptyList(),
 ) : Parcelable {
     companion object {
+//        fun fromMasterDto(masterDto: MasterDto): MyReview {
+//
+//        }
+
         fun fromJson(jsonObject: JsonObject): MyReview {
             val item = jsonObject.get("data").asJsonObject
             val attributes = item.get("attributes").asJsonObject

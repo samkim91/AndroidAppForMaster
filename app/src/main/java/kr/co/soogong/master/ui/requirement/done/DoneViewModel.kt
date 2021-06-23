@@ -78,6 +78,7 @@ class DoneViewModel @Inject constructor(
         saveRepairUseCase(
             RepairDto(
                 id = requirementCard?.estimationDto?.repair?.id,
+                requirementToken = requirementCard?.token,
                 estimationId = requirementCard?.estimationDto?.id,
                 scheduledDate = null,
                 actualDate = null,

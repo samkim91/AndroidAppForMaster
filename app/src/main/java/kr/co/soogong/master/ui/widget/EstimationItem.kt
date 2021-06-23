@@ -1,6 +1,7 @@
 package kr.co.soogong.master.ui.widget
 
 import android.content.Context
+import android.graphics.Typeface
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -24,5 +25,12 @@ class EstimationItem @JvmOverloads constructor(
         set(value) {
             field = value
             binding.value.text = value
+        }
+
+    var bold: Boolean? = false
+        set(value) {
+            field = value
+            binding.key.setTypeface(binding.key.typeface, Typeface.BOLD)
+            binding.value.setTypeface(binding.value.typeface, Typeface.BOLD)
         }
 }

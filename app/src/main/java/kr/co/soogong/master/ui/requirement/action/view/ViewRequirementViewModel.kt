@@ -106,8 +106,9 @@ class ViewRequirementViewModel @Inject constructor(
         Timber.tag(TAG).d("requestToReview: ")
         saveRepairUseCase(
             RepairDto(
-                id = requirement.value?.estimationDto?.repair?.id,
-                estimationId = requirement.value?.estimationDto?.id,
+                id = _requirement.value?.estimationDto?.repair?.id,
+                requirementToken = _requirement.value?.token,
+                estimationId = _requirement.value?.estimationDto?.id,
                 scheduledDate = null,
                 actualDate = null,
                 actualPrice = null,

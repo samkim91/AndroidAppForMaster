@@ -49,6 +49,7 @@ class CancelRepairViewModel @Inject constructor(
         saveRepairUseCase(
             repairDto = RepairDto(
                 id = null,
+                requirementToken = _requirement.value?.token,
                 estimationId = _requirement.value?.estimationDto?.id,
                 scheduledDate = null,
                 actualDate = null,
