@@ -9,7 +9,7 @@
 
         <variable
             name="vm"
-            type="kr.co.soogong.master.ui.profile.edit.requiredinformation.EditRequiredInformationViewModel" />
+            type="kr.co.soogong.master.ui.profile.detail.requiredinformation.EditRequiredInformationViewModel" />
 
     </data>
 
