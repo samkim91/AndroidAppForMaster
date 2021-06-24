@@ -3,7 +3,7 @@ package kr.co.soogong.master.uihelper.profile
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import kr.co.soogong.master.ui.profile.edit.portfoliolist.PortfolioListActivity
+import kr.co.soogong.master.ui.profile.detail.portfoliolist.PortfolioListActivity
 
 object PortfolioListActivityHelper {
     const val PORTFOLIO = "포트폴리오 편집하기"

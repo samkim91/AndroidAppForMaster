@@ -9,13 +9,13 @@ import java.util.*
 @Parcelize
 data class ReviewDto(
     @SerializedName("id")
-    val id: Int,
+    val id: Int? = null,
 
     @SerializedName("content")
     val content: String?,
 
     @SerializedName("projectType")
-    val projectType: String?,
+    val projectType: String? = null,
 
     @SerializedName("attachments")
     val attachments: MutableList<AttachmentDto>?,
@@ -24,10 +24,10 @@ data class ReviewDto(
     val reviewScores: List<ReviewScoreDto>?,
 
     @SerializedName("createdAt")
-    val createdAt: Date?,
+    val createdAt: Date? = null,
 
     @SerializedName("updatedAt")
-    val updatedAt: Date?,
+    val updatedAt: Date? = null,
 ) : Parcelable {
     companion object {
 

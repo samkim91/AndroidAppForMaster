@@ -10,37 +10,40 @@ import java.util.*
 @Parcelize
 data class RepairDto(
     @SerializedName("id")
-    val id: Int?,
+    val id: Int? = null,
+
+    @SerializedName("requirementToken")
+    val requirementToken: String? = null,
 
     @SerializedName("estimationId")
-    val estimationId: Int?,
+    val estimationId: Int? = null,
 
     @SerializedName("scheduledDate")
-    val scheduledDate: Date?,
+    val scheduledDate: Date? = null,
 
     @SerializedName("actualDate")
-    val actualDate: Date?,
+    val actualDate: Date? = null,
 
     @SerializedName("actualPrice")
-    val actualPrice: Int?,
+    val actualPrice: Int? = null,
 
     @SerializedName("warrantyDueDate")
-    val warrantyDueDate: Date?,
+    val warrantyDueDate: Date? = null,
 
     @SerializedName("requestReviewYn")
-    val requestReviewYn: Boolean?,
+    val requestReviewYn: Boolean? = null,
 
     @SerializedName("canceledYn")
-    val canceledYn: Boolean?,
+    val canceledYn: Boolean? = null,
 
     @SerializedName("canceledReason")
-    val canceledReason: String?,
+    val canceledReason: String? = null,
 
     @SerializedName("description")
-    val description: String?,
+    val description: String? = null,
 
     @SerializedName("review")
-    val review: ReviewDto?,
+    val review: ReviewDto? = null,
 
     @SerializedName("createdAt")
     val createdAt: Date? = null,

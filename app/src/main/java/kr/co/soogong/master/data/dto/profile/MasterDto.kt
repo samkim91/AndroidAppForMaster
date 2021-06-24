@@ -6,6 +6,7 @@ import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 import kotlinx.parcelize.RawValue
+import kr.co.soogong.master.data.dto.AttachmentDto
 import java.util.*
 
 @Parcelize
@@ -56,7 +57,7 @@ data class MasterDto(
     val profileImageId: Int? = null,
 
     @SerializedName("profileImage")
-    val profileImage: String? = null,
+    val profileImage: AttachmentDto? = null,
 
     @SerializedName("introduction")
     val introduction: String? = null,
@@ -77,8 +78,8 @@ data class MasterDto(
     val businessName: String? = null,
 
     // TODO: 2021/06/18 URL이 오는게 맞음.. 변경 필요
-//    @SerializedName("businessRegistImages")
-//    val businessRegistImages: Int?,
+    @SerializedName("businessRegistImage")
+    val businessRegistImage: AttachmentDto? = null,
 
     @SerializedName("shopName")
     val shopName: String? = null,

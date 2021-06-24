@@ -1,6 +1,5 @@
 package kr.co.soogong.master.network.auth
 
-import com.google.gson.JsonObject
 import io.reactivex.Single
 import kr.co.soogong.master.data.dto.Response
 import kr.co.soogong.master.data.dto.profile.MasterDto
@@ -16,8 +15,9 @@ class AuthService @Inject constructor(
         return authInterface.signIn(uid)
     }
 
-    fun signUp(masterDtoString: String): Single<MasterDto> {
-        return authInterface.signUp(masterDtoString)
+    // TODO: 2021/06/23 master save 와 같은 API이기 때문에, 통합해도 됨..
+    fun signUp(masterDto: MasterDto): Single<MasterDto> {
+        return authInterface.signUp(masterDto)
     }
 
     fun checkUserExistent(id: String): Single<Boolean> {

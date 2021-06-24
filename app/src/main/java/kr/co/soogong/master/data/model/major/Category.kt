@@ -14,14 +14,7 @@ data class Category(
     val name: String
 ) : Parcelable {
     companion object {
-        fun fromJson(jsonObject: JsonObject): Category {
-            val id = jsonObject.get("id").asInt
-            val name = jsonObject.get("name").asString
-            return Category(id, name)
-        }
-
         val TEST_CATEGORY = Category(1, "새시")
-
         val NULL_CATEGORY = Category(0, "")
     }
 }

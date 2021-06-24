@@ -18,12 +18,6 @@ data class Project(
     var checked: Boolean = false
 ) : Parcelable {
     companion object {
-        fun fromJson(jsonObject: JsonObject): Project {
-            val id = jsonObject.get("id").asInt
-            val name = jsonObject.get("name").asString
-            return Project(id, name)
-        }
-
         val TEST_PROJECT = Project(
             1, "아파트 새시 제작설치/교체", false
         )

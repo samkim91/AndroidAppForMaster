@@ -3,7 +3,7 @@ package kr.co.soogong.master.uihelper.profile
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import kr.co.soogong.master.ui.profile.edit.EditProfileContainerActivity
+import kr.co.soogong.master.ui.profile.detail.EditProfileContainerActivity
 
 object EditProfileContainerActivityHelper {
     private const val EXTRA_BUNDLE_KEY = "EXTRA_BUNDLE_KEY_EDIT_PROFILE_DETAIL"

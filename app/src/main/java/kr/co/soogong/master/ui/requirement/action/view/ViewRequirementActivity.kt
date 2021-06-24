@@ -25,7 +25,8 @@ import kr.co.soogong.master.uihelper.requirment.action.ViewRequirementActivityHe
 import kr.co.soogong.master.uihelper.requirment.action.WriteEstimationActivityHelper
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.extension.addAdditionInfoView
-import kr.co.soogong.master.utility.extension.addEstimationMessage
+import kr.co.soogong.master.utility.extension.addEstimationDetail
+import kr.co.soogong.master.utility.extension.addCanceledDetail
 import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
 import java.util.*
@@ -168,8 +169,8 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                     // footer button : 리뷰 요청하기
                     RequirementStatus.Done -> {
                         askReviewButton.visibility = View.VISIBLE
-                        if(requirement?.estimationDto?.repair?.requestReviewYn!!) setAskingReviewButton()
-                        bindDoneData(requirement?.estimationDto)
+                        requirement?.estimationDto?.repair?.requestReviewYn?.let { if (it) setAskingReviewButton() }
+                        bindRepairData(requirement?.estimationDto)
                     }
 
                     // 상태 : 평가완료
@@ -178,7 +179,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                     RequirementStatus.Closed -> {
                         //Todo.. 고객 리뷰 데이터를 서버에서 return 해줘야함.
                         customerReviewGroup.visibility = View.VISIBLE
-                        bindDoneData(requirement?.estimationDto)
+                        bindRepairData(requirement?.estimationDto)
                     }
 
                     // 상태 : 시공취소
@@ -186,6 +187,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                     // footer button : none
                     RequirementStatus.CanceledByClient, RequirementStatus.CanceledByMaster, RequirementStatus.Canceled -> {
                         repairGroup.visibility = View.VISIBLE
+                        bindRepairData(requirement?.estimationDto)
                         bindEstimationData(requirement?.estimationDto)
                         // TODO: 2021/06/16 취소 사유 바인딩 필요
                     }
@@ -245,7 +247,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
     private fun bindEstimationData(estimationDto: EstimationDto?) {
         if (estimationDto != null) {
             binding.estimationGroup.visibility = View.VISIBLE
-            addEstimationMessage(
+            addEstimationDetail(
                 binding.customFrameForEstimationDetail,
                 this@ViewRequirementActivity,
                 estimationDto
@@ -253,14 +255,24 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
         }
     }
 
-    private fun bindDoneData(estimationDto: EstimationDto?) {
+    private fun bindRepairData(estimationDto: EstimationDto?) {
         if (estimationDto != null) {
             binding.repairGroup.visibility = View.VISIBLE
-            addEstimationMessage(
-                binding.customFrameForRepairDetail,
-                this@ViewRequirementActivity,
-                estimationDto
-            )
+
+            if(estimationDto.repair?.canceledYn == true) {
+                binding.repairTitle.text = getString(R.string.view_repair_canceled_title)
+                addCanceledDetail(
+                    binding.customFrameForRepairDetail,
+                    this@ViewRequirementActivity,
+                    estimationDto
+                )
+            } else {
+                addEstimationDetail(
+                    binding.customFrameForRepairDetail,
+                    this@ViewRequirementActivity,
+                    estimationDto
+                )
+            }
         }
     }
 

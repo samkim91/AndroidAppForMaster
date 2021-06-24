@@ -3,21 +3,29 @@ package kr.co.soogong.master.data.dto
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
-import java.util.*
 
 @Parcelize
 data class AttachmentDto(
     @SerializedName("id")
     val id: Int,
 
+    @SerializedName("partOf")
+    val partOf: String?,
+
+    @SerializedName("referenceId")
+    val referenceId: Int,
+
+    @SerializedName("description")
+    val description: String?,
+
+    @SerializedName("s3Name")
+    val s3Name: String?,
+
+    @SerializedName("fileName")
+    val fileName: String?,
+
     @SerializedName("url")
     val url: String?,
-
-    @SerializedName("createdAt")
-    val createdAt: Date?,
-
-    @SerializedName("updatedAt")
-    val updatedAt: Date?,
 ) : Parcelable {
     companion object {
 

@@ -1,6 +1,5 @@
 package kr.co.soogong.master.network.auth
 
-import com.google.gson.JsonObject
 import io.reactivex.Single
 import kr.co.soogong.master.contract.HttpContract
 import kr.co.soogong.master.data.dto.Response
@@ -15,8 +14,8 @@ interface AuthInterface {
     @GET(HttpContract.GET_MASTER_BY_UID)
     fun signIn(@Query("uid") uid: String): Single<MasterDto>
 
-    @POST(HttpContract.MASTER_SIGN_UP)
-    fun signUp(@Body masterDtoString: String): Single<MasterDto>
+    @POST(HttpContract.SAVE_MASTER)
+    fun signUp(@Body masterDto: MasterDto): Single<MasterDto>
 
     @GET(HttpContract.IS_USER_EXIST)
     fun checkUserExistent(@Query("id") id: String): Single<Boolean>

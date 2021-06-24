@@ -10,14 +10,6 @@ data class OtherFlexibleOptions(
     val options: List<String>,
 ) : Parcelable {
     companion object {
-        fun fromJson(jsonObject: JsonObject): OtherFlexibleOptions {
-            val item = jsonObject.get("data").asJsonObject
-
-            return OtherFlexibleOptions(
-                options = item.get("otherFlexibleOptions").asJsonArray.map { it.asString }
-            )
-        }
-
         fun fromMasterConfigList(list: List<MasterConfigDto>?): OtherFlexibleOptions {
             val ret = mutableListOf<String>()
             list?.filter { masterConfigDto ->
