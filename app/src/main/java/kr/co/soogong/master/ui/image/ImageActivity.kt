@@ -8,7 +8,7 @@ import androidx.core.content.ContextCompat
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.model.requirement.ImagePath
+import kr.co.soogong.master.data.dto.AttachmentDto
 import kr.co.soogong.master.databinding.ActivityImageBinding
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.uihelper.image.ImageViewActivityHelper
@@ -23,7 +23,7 @@ class ImageActivity : BaseActivity<ActivityImageBinding>(
         ImageViewActivityHelper.getImagePosition(intent)
     }
 
-    private val images: List<ImagePath> by lazy {
+    private val images: List<AttachmentDto> by lazy {
         ImageViewActivityHelper.getImages(intent)
     }
 

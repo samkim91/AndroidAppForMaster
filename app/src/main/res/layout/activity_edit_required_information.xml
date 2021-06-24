@@ -6,10 +6,9 @@
 
     <data>
 
-
         <variable
             name="vm"
-            type="kr.co.soogong.master.ui.profile.edit.requiredinformation.EditRequiredInformationViewModel" />
+            type="kr.co.soogong.master.ui.profile.detail.requiredinformation.EditRequiredInformationViewModel" />
 
     </data>
 
@@ -153,10 +152,10 @@
                     android:layout_marginEnd="@dimen/gap_20"
                     android:background="@drawable/shape_radius8_white_background"
                     android:elevation="@dimen/gap_4"
-                    app:defaultButtonByImageV2="@{vm.requiredInformation.representativeImages.get(0)}"
-                    app:firstDetailWithSimpleText="@{vm.requiredInformation.representativeImages.get(0)}"
+                    app:defaultButtonByImageV2='@{vm.requiredInformation.representativeImages.size() > 0 ? vm.requiredInformation.representativeImages.get(0).url : ""}'
+                    app:firstDetailWithSimpleText='@{vm.requiredInformation.representativeImages.size() > 0 ? vm.requiredInformation.representativeImages.get(0).url : ""}'
                     app:imageCount="@{vm.requiredInformation.representativeImages.size}"
-                    app:imageUrl="@{vm.requiredInformation.representativeImages.get(0)}"
+                    app:imageUrl='@{vm.requiredInformation.representativeImages.size() > 0 ? vm.requiredInformation.representativeImages.get(0).url : ""}'
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/introduction"
@@ -175,7 +174,7 @@
                     android:elevation="@dimen/gap_4"
                     app:defaultButtonByString="@{vm.requiredInformation.businessUnitInformation.businessType}"
                     app:firstDetail="@{vm.requiredInformation.businessUnitInformation.businessType}"
-                    app:imageUrl="@{vm.requiredInformation.businessUnitInformation.businessRegistImage}"
+                    app:imageUrl="@{vm.requiredInformation.businessUnitInformation.businessRegistImage.url}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/thumbnails"

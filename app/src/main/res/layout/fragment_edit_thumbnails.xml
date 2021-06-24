@@ -9,7 +9,7 @@
 
         <variable
             name="vm"
-            type="kr.co.soogong.master.ui.profile.edit.requiredinformation.thumbnails.EditThumbnailsViewModel" />
+            type="kr.co.soogong.master.ui.profile.detail.requiredinformation.thumbnails.EditThumbnailsViewModel" />
     </data>
 
     <LinearLayout

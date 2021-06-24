@@ -7,7 +7,7 @@
 
         <variable
             name="vm"
-            type="kr.co.soogong.master.ui.profile.edit.email.EditEmailViewModel" />
+            type="kr.co.soogong.master.ui.profile.detail.email.EditEmailViewModel" />
     </data>
 
     <LinearLayout

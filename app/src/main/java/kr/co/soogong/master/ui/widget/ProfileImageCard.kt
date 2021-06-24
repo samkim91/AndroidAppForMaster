@@ -7,7 +7,7 @@ import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.model.requirement.ImagePath
+import kr.co.soogong.master.data.dto.AttachmentDto
 import kr.co.soogong.master.databinding.ViewProfileImageCardBinding
 import kr.co.soogong.master.utility.ButtonHelper
 import kr.co.soogong.master.utility.extension.setImageUrl
@@ -39,15 +39,15 @@ class ProfileImageCard @JvmOverloads constructor(
             binding.newBadge.visibility = if (value) VISIBLE else GONE
         }
 
-    var imageUrl: ImagePath? = ImagePath("")
+    var imageUrl: String? = null
         set(value) {
             field = value
             if (value != null) {
                 newBadgeVisible = false
                 binding.subTitle.visibility = View.GONE
 
-                binding.imageContainer.isVisible = !value.path.isNullOrEmpty()
-                binding.image.setImageUrl(value.path)
+                binding.imageContainer.isVisible = !value.isNullOrEmpty()
+                binding.image.setImageUrl(value)
             }
         }
 
@@ -62,7 +62,7 @@ class ProfileImageCard @JvmOverloads constructor(
         set(value) {
             field = value
             with(binding.subTitle) {
-                if (!value.isNullOrEmpty() && imageUrl?.path.isNullOrEmpty()) {
+                if (!value.isNullOrEmpty() && !imageUrl.isNullOrEmpty()) {
                     visibility = View.VISIBLE
                     text = value
                 } else {
@@ -80,12 +80,13 @@ class ProfileImageCard @JvmOverloads constructor(
             }
         }
 
-    var firstDetailWithSimpleText: ImagePath? = ImagePath("")
+    var firstDetailWithSimpleText: String? = ""
         set(value) {
             field = value
-            if(!value?.path.isNullOrEmpty()){
+            if (!value.isNullOrEmpty()) {
                 binding.firstDetail.visibility = View.VISIBLE
-                binding.firstDetail.text = resources.getString(R.string.simple_text_for_registered_image)
+                binding.firstDetail.text =
+                    resources.getString(R.string.simple_text_for_registered_image)
             }
         }
 
@@ -99,10 +100,10 @@ class ProfileImageCard @JvmOverloads constructor(
         }
 
     // 등록하기 <-> 수정하기 버튼 셋
-    var defaultButtonByImage: ImagePath? = ImagePath.NULL_IMAGE_PATH
+    var defaultButtonByImage: String? =""
         set(value) {
             field = value
-            if (value?.path.isNullOrEmpty()) {
+            if (value.isNullOrEmpty()) {
                 ButtonHelper.setRegisteringButton(binding.defaultButton)
             } else {
                 ButtonHelper.setModifyingButton(binding.defaultButton)
@@ -121,10 +122,10 @@ class ProfileImageCard @JvmOverloads constructor(
         }
 
     // 등록하기 <-> 편집하기 버튼 셋
-    var defaultButtonByImageV2: ImagePath? = ImagePath.NULL_IMAGE_PATH
+    var defaultButtonByImageV2: String? = ""
         set(value) {
             field = value
-            if (value?.path.isNullOrEmpty()) {
+            if (value.isNullOrEmpty()) {
                 ButtonHelper.setRegisteringButton(binding.defaultButton)
             } else {
                 ButtonHelper.setEditingButton(binding.defaultButton)
@@ -132,10 +133,10 @@ class ProfileImageCard @JvmOverloads constructor(
         }
 
     // 등록하기 <-> 삭제하기, 수정하기 버튼 셋
-    var defaultButtonByImageV3: ImagePath? = ImagePath.NULL_IMAGE_PATH
+    var defaultButtonByImageV3: String? = ""
         set(value) {
             field = value
-            if (value?.path.isNullOrEmpty()) {
+            if (value.isNullOrEmpty()) {
                 ButtonHelper.setRegisteringButton(binding.defaultButton)
             } else {
                 binding.defaultButton.visibility = View.GONE

@@ -13,7 +13,7 @@ data class ReviewScoreDto(
     val scoreCode: String?,
 
     @SerializedName("scoreName")
-    val scoreName: String?,
+    val scoreName: String? = null,
 
     @SerializedName("score")
     val score: Float?,

@@ -1,19 +1,19 @@
 package kr.co.soogong.master.uihelper.profile
 
 import androidx.fragment.app.Fragment
-import kr.co.soogong.master.ui.profile.edit.email.EditEmailFragment
-import kr.co.soogong.master.ui.profile.edit.flexiblecost.EditFlexibleCostFragment
-import kr.co.soogong.master.ui.profile.edit.otherflexibleoptions.EditOtherFlexibleOptionsFragment
-import kr.co.soogong.master.ui.profile.edit.requiredinformation.address.EditAddressFragment
-import kr.co.soogong.master.ui.profile.edit.requiredinformation.introduction.EditIntroductionFragment
-import kr.co.soogong.master.ui.profile.edit.requiredinformation.ownername.EditOwnerNameFragment
-import kr.co.soogong.master.ui.profile.edit.requiredinformation.major.EditMajorFragment
-import kr.co.soogong.master.ui.profile.edit.requiredinformation.businessunitinformation.EditBusinessUnitInformationFragment
-import kr.co.soogong.master.ui.profile.edit.requiredinformation.phonenumber.EditPhoneNumberFragment
-import kr.co.soogong.master.ui.profile.edit.requiredinformation.thumbnails.EditThumbnailsFragment
-import kr.co.soogong.master.ui.profile.edit.requiredinformation.warranty.EditWarrantyInformationFragment
-import kr.co.soogong.master.ui.profile.edit.portfoliolist.portfolio.PortfolioFragment
-import kr.co.soogong.master.ui.profile.edit.portfoliolist.pricebyproject.PriceByProjectFragment
+import kr.co.soogong.master.ui.profile.detail.email.EditEmailFragment
+import kr.co.soogong.master.ui.profile.detail.flexiblecost.EditFlexibleCostFragment
+import kr.co.soogong.master.ui.profile.detail.otherflexibleoptions.EditOtherFlexibleOptionsFragment
+import kr.co.soogong.master.ui.profile.detail.requiredinformation.address.EditAddressFragment
+import kr.co.soogong.master.ui.profile.detail.requiredinformation.introduction.EditIntroductionFragment
+import kr.co.soogong.master.ui.profile.detail.requiredinformation.ownername.EditOwnerNameFragment
+import kr.co.soogong.master.ui.profile.detail.requiredinformation.major.EditMajorFragment
+import kr.co.soogong.master.ui.profile.detail.requiredinformation.businessunitinformation.EditBusinessUnitInformationFragment
+import kr.co.soogong.master.ui.profile.detail.requiredinformation.phonenumber.EditPhoneNumberFragment
+import kr.co.soogong.master.ui.profile.detail.requiredinformation.thumbnails.EditThumbnailsFragment
+import kr.co.soogong.master.ui.profile.detail.requiredinformation.warranty.EditWarrantyInformationFragment
+import kr.co.soogong.master.ui.profile.detail.portfoliolist.portfolio.PortfolioFragment
+import kr.co.soogong.master.ui.profile.detail.portfoliolist.pricebyproject.PriceByProjectFragment
 
 object EditProfileContainerFragmentHelper {
     const val TAG = "EditProfileContainerFragmentHelper"

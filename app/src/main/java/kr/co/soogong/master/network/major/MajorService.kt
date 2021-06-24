@@ -13,23 +13,9 @@ class MajorService @Inject constructor(
 
     fun getCategoryList(): Single<List<Category>> {
         return categoryInterface.getCategoryList()
-//            .map {
-//            val items: MutableList<Category> = ArrayList()
-//            for (item in it) {
-//                items.add(Category.fromJson(item.asJsonObject))
-//            }
-//            return@map items
-//        }
     }
 
     fun getProjectList(categoryId: Int): Single<List<Project>> {
         return categoryInterface.getProjectList(categoryId)
-//            .map {
-//            val items: MutableList<Project> = ArrayList()
-//            for (item in it) {
-//                items.add(Project.fromJson(item.asJsonObject))
-//            }
-//            return@map items
-//        }
     }
 }

@@ -1,13 +1,11 @@
 package kr.co.soogong.master.ui.requirement.action.cancel
 
 import android.os.Bundle
-import android.view.View
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.model.requirement.CancelEstimate
-import kr.co.soogong.master.data.model.requirement.repair.RepairCanceledReasonCode
+import kr.co.soogong.master.data.model.requirement.repair.*
 import kr.co.soogong.master.databinding.ActivityCancelRepairBinding
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.ui.requirement.action.cancel.CancelRepairViewModel.Companion.CANCEL_ESTIMATION_FAILED
@@ -53,15 +51,15 @@ class CancelRepairActivity : BaseActivity<ActivityCancelRepairBinding>(
                         alert.isVisible = it.isNullOrEmpty()
                     })
 
-                    if(!alert.isVisible) viewModel.saveRepair()
+                    if (!alert.isVisible) viewModel.saveRepair()
                 }
 
                 cancelOption.setOnCheckedChangeListener { _, checkedId ->
-                    viewModel.canceledReason.value = when(checkedId) {
-                        cancelOption1.id -> RepairCanceledReasonCode.CHANGE_OF_MIND
-                        cancelOption2.id -> RepairCanceledReasonCode.NO_RESPONSE
-                        cancelOption3.id -> RepairCanceledReasonCode.REPAIR_IMPOSSIBLE
-                        cancelOption4.id -> RepairCanceledReasonCode.DIFFERENT_COST
+                    viewModel.canceledReason.value = when (checkedId) {
+                        cancelOption1.id -> ChangeOfMind.code
+                        cancelOption2.id -> NoResponse.code
+                        cancelOption3.id -> RepairImpossible.code
+                        cancelOption4.id -> DifferentCost.code
                         else -> ""
                     }
                 }
