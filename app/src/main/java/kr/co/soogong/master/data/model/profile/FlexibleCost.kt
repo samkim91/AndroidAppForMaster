@@ -13,17 +13,6 @@ data class FlexibleCost(
     val otherCostInformation: String?,
 ) : Parcelable {
     companion object {
-        fun fromJson(jsonObject: JsonObject): FlexibleCost {
-            val item = jsonObject.get("data").asJsonObject
-            val attributes = item.get("attributes").asJsonObject
-            return FlexibleCost(
-                travelCost = attributes.get("travel_cost").asString,
-                craneUsage = attributes.get("crane_usage").asString,
-                packageCost = attributes.get("package_cost").asString,
-                otherCostInformation = attributes.get("other_cost_information").asString,
-            )
-        }
-
         fun fromMasterConfigList(list: List<MasterConfigDto>?): FlexibleCost {
             return FlexibleCost(
                 travelCost = list?.find { masterConfigDto -> masterConfigDto.code == "TravelCost" }?.value ?: "",

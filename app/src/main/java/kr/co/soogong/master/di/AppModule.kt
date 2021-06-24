@@ -80,7 +80,10 @@ class AppModule {
         return Retrofit.Builder()
             .client(okHttpClient)
             .baseUrl(
-                if (BuildConfig.DEBUG) HttpContract.LOCAL_URL else HttpContract.PROD_URL
+                if (BuildConfig.DEBUG)
+                    HttpContract.DEV_URL
+                else
+                    HttpContract.PROD_URL
             )
             .addConverterFactory(GsonConverterFactory.create(gson))
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())

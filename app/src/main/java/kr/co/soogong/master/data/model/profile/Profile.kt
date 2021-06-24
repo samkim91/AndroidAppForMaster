@@ -45,23 +45,23 @@ data class Profile(
                 tel = masterDto.tel,
                 representativeName = if (!masterDto.shopName.isNullOrEmpty()) masterDto.shopName else masterDto.ownerName,
                 subscriptionPlan = masterDto.subscriptionPlan,
-                myReview = MyReview.TEST_MY_REVIEW, // TODO: 2021/06/15 추가 필요 masterDto.myReview,
+                myReview = null, // TODO: 2021/06/15 추가 필요 masterDto.myReview,
                 myPageUrl = HttpContract.MY_PAGE_URL + masterDto.uid,
                 isPublic = masterDto.isPublic,
                 basicInformation = BasicInformation.fromMasterDto(masterDto),
             )
         }
 
-        val NULL_PROFILE = Profile(
-            id = 0,
-            uid = "",
-            tel = "",
-            representativeName = "",
-            subscriptionPlan = "",
-            myReview = MyReview.NULL_MY_REVIEW,
-            myPageUrl = "",
-            isPublic = false,
-            basicInformation = BasicInformation.NULL_BASIC_INFORMATION,
-        )
+//        val NULL_PROFILE = Profile(
+//            id = 0,
+//            uid = "",
+//            tel = "",
+//            representativeName = "",
+//            subscriptionPlan = "",
+//            myReview = MyReview.NULL_MY_REVIEW,
+//            myPageUrl = "",
+//            isPublic = false,
+//            basicInformation = BasicInformation.NULL_BASIC_INFORMATION,
+//        )
     }
 }

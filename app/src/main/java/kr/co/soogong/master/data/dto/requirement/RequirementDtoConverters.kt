@@ -3,9 +3,9 @@ package kr.co.soogong.master.data.dto.requirement
 import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import kr.co.soogong.master.data.dto.AttachmentDto
 import kr.co.soogong.master.data.dto.requirement.estimation.EstimationDto
 import kr.co.soogong.master.data.dto.requirement.qna.RequirementQnaDto
-import kr.co.soogong.master.data.model.requirement.ImagePath
 import java.util.*
 
 class RequirementDtoConverters {
@@ -32,14 +32,26 @@ class RequirementDtoConverters {
     }
 
     @TypeConverter
-    fun imagePathListToString(list: List<ImagePath>?): String? {
+    fun attachmentListToString(list: List<AttachmentDto>?): String? {
         return list?.let { Gson().toJson(it) }
     }
 
     @TypeConverter
-    fun stringToImagePathList(imagePathString: String?): List<ImagePath>? {
-        return imagePathString?.let {
-            Gson().fromJson(it, object : TypeToken<List<ImagePath>>() {}.type)
+    fun stringToAttachmentList(attachmentListString: String?): List<AttachmentDto>? {
+        return attachmentListString?.let {
+            Gson().fromJson(it, object : TypeToken<List<AttachmentDto>>() {}.type)
+        }
+    }
+
+    @TypeConverter
+    fun attachmentToString(attachment: AttachmentDto?): String? {
+        return attachment?.let { Gson().toJson(it) }
+    }
+
+    @TypeConverter
+    fun stringToAttachment(attachmentString: String?): AttachmentDto? {
+        return attachmentString?.let {
+            Gson().fromJson(it, object : TypeToken<AttachmentDto>() {}.type)
         }
     }
 

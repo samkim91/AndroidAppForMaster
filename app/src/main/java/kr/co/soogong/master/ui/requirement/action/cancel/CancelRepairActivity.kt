@@ -1,12 +1,10 @@
 package kr.co.soogong.master.ui.requirement.action.cancel
 
 import android.os.Bundle
-import android.view.View
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.model.requirement.CancelEstimate
 import kr.co.soogong.master.data.model.requirement.repair.RepairCanceledReasonCode
 import kr.co.soogong.master.databinding.ActivityCancelRepairBinding
 import kr.co.soogong.master.ui.base.BaseActivity

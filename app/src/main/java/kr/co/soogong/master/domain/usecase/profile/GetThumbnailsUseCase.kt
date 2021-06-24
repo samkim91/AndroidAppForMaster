@@ -1,6 +1,7 @@
 package kr.co.soogong.master.domain.usecase.profile
 
 import android.net.Uri
+import androidx.core.net.toUri
 import dagger.Reusable
 import io.reactivex.Single
 import javax.inject.Inject
@@ -11,8 +12,8 @@ class GetThumbnailsUseCase @Inject constructor(
 ) {
     operator fun invoke(): Single<List<Uri>> {
         return getRequiredInformationUseCase().map {
-            it.representativeImages?.map { imagePath ->
-                Uri.parse(imagePath.path)
+            it.representativeImages?.map { attachment ->
+                attachment.url?.toUri()!!
             }
         }
     }

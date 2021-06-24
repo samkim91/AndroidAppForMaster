@@ -24,7 +24,7 @@ fun ImageView.setImageUrl(url: String?) {
 }
 
 @BindingAdapter("bind:image_uri")
-fun ImageView.setImage(uri: Uri?) {
+fun ImageView.setImageUri(uri: Uri?) {
     Glide.with(this.context)
         .load(uri)
         .transform(CenterCrop())

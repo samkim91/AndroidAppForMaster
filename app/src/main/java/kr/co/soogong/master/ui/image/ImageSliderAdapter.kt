@@ -2,21 +2,22 @@ package kr.co.soogong.master.ui.image
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
-import kr.co.soogong.master.data.model.requirement.ImagePath
+import kr.co.soogong.master.data.dto.AttachmentDto
 import kr.co.soogong.master.databinding.ViewHolderImagePageBinding
 import timber.log.Timber
 
 class ImageSliderAdapter : RecyclerView.Adapter<ImageSliderAdapter.ImageViewHolder>() {
 
-    private val imageList: ArrayList<ImagePath> = arrayListOf()
+    private val imageList: ArrayList<AttachmentDto> = arrayListOf()
 
     class ImageViewHolder(
         val binding: ViewHolderImagePageBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(imagePath: ImagePath) {
+        fun bind(image: AttachmentDto) {
             with(binding) {
-                imageUrl = imagePath.path
+                imageUrl = image.url
                 executePendingBindings()
             }
         }
@@ -42,10 +43,10 @@ class ImageSliderAdapter : RecyclerView.Adapter<ImageSliderAdapter.ImageViewHold
 
     override fun getItemCount(): Int = imageList.size
 
-    fun setList(imageList: List<ImagePath>) {
-        Timber.tag(TAG).d("setList: ${imageList.size}")
+    fun setList(images: List<AttachmentDto>) {
+        Timber.tag(TAG).d("setList: ${images.size}")
         this.imageList.clear()
-        this.imageList.addAll(imageList)
+        this.imageList.addAll(images)
         notifyDataSetChanged()
     }
 

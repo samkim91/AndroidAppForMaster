@@ -25,8 +25,13 @@ class EditThumbnailsViewModel @Inject constructor(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
-                onSuccess = { thumbnails.addAll(it) },
-                onError = { setAction(GET_THUMBNAILS_FAILED) }
+                onSuccess =
+                {
+                    thumbnails.addAll(it)
+                },
+                onError = {
+                    setAction(GET_THUMBNAILS_FAILED)
+                }
             ).addToDisposable()
     }
 

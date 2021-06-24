@@ -2,12 +2,12 @@ package kr.co.soogong.master.ui.profile.detail.requiredinformation.businessuniti
 
 import android.net.Uri
 import android.view.View
+import androidx.core.net.toUri
 import androidx.lifecycle.MutableLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import kr.co.soogong.master.data.model.requirement.ImagePath
 import kr.co.soogong.master.data.model.profile.BusinessUnitInformation
 import kr.co.soogong.master.domain.usecase.profile.GetBusinessUnitInformationUseCase
 import kr.co.soogong.master.domain.usecase.profile.SaveBusinessUnitInformationUseCase
@@ -20,7 +20,7 @@ class EditBusinessUnitInformationViewModel @Inject constructor(
     private val getBusinessUnitInformationUseCase: GetBusinessUnitInformationUseCase,
     private val saveBusinessUnitInformationUseCase: SaveBusinessUnitInformationUseCase,
 ) : BaseViewModel() {
-    val businessType = MutableLiveData<String>()
+    val businessType = MutableLiveData("")
     val businessName = MutableLiveData("")
     val shopName = MutableLiveData("")
     val businessNumber = MutableLiveData("")
@@ -34,15 +34,15 @@ class EditBusinessUnitInformationViewModel @Inject constructor(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
-                onSuccess = {
-                    businessType.postValue(it.businessType)
-                    if (it.businessType == "프리랜서") {
-                        birthday.postValue(it.businessNumber.toString())
+                onSuccess = { businessInformation ->
+                    businessType.postValue(businessInformation.businessType ?: "")
+                    if (businessInformation.businessType == "프리랜서") {
+                        birthday.postValue(businessInformation.businessNumber ?: "")
                     } else {
-                        businessName.postValue(it.businessName)
-                        shopName.postValue(it.shopName)
-                        businessRegistImage.postValue(Uri.parse(it.businessRegistImage?.path))
-                        businessNumber.postValue(it.businessNumber.toString())
+                        businessName.postValue(businessInformation.businessName ?: "")
+                        shopName.postValue(businessInformation.shopName ?: "")
+                        businessRegistImage.postValue(businessInformation.businessRegistImage?.url?.toUri() ?: Uri.EMPTY)
+                        businessNumber.postValue(businessInformation.businessNumber ?: "")
                     }
                 },
                 onError = { setAction(GET_BUSINESS_UNIT_INFORMATION_FAILED) }
@@ -57,7 +57,7 @@ class EditBusinessUnitInformationViewModel @Inject constructor(
                 businessName = businessName.value!!,
                 shopName = shopName.value!!,
                 businessNumber = if (businessType.value == "프리랜서") birthday.value!! else businessNumber.value!!,
-                businessRegistImage = ImagePath(businessRegistImage.value.toString())
+                businessRegistImage = null // TODO: 2021/06/23 이미지 업로드로 수정해야함 
             )
         ).subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

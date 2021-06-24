@@ -15,6 +15,7 @@ import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_PRICE_BY_PROJECTS
 import kr.co.soogong.master.uihelper.profile.PortfolioListActivityHelper
 import kr.co.soogong.master.uihelper.profile.PortfolioListActivityHelper.PORTFOLIO
+import kr.co.soogong.master.uihelper.profile.PortfolioListActivityHelper.PRICE_BY_PROJECTS
 import timber.log.Timber
 
 @AndroidEntryPoint
