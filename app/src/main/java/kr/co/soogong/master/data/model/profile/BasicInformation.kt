@@ -5,6 +5,7 @@ import kotlinx.parcelize.Parcelize
 import kr.co.soogong.master.data.dto.AttachmentDto
 import kr.co.soogong.master.data.dto.profile.MasterDto
 import kr.co.soogong.master.data.dto.profile.PortfolioDto
+import kr.co.soogong.master.ui.profile.*
 
 @Parcelize
 data class BasicInformation(
@@ -18,11 +19,11 @@ data class BasicInformation(
     companion object {
         fun fromMasterDto(masterDto: MasterDto): BasicInformation {
             return BasicInformation(
-                portfolios = masterDto.masterPortfolios?.filter { portfolioDto -> portfolioDto.type == "portfolio" },
-                priceByProjects = masterDto.masterPortfolios?.filter { portfolioDto -> portfolioDto.type == "price" },
+                portfolios = masterDto.masterPortfolios?.filter { portfolioDto -> portfolioDto.type == PortfolioCodeTable.code },
+                priceByProjects = masterDto.masterPortfolios?.filter { portfolioDto -> portfolioDto.type == PriceByProjectCodeTable.code },
                 profileImage = masterDto.profileImage,
-                flexibleCost = FlexibleCost.fromMasterConfigList(masterDto.masterConfigs?.filter { masterConfigDto -> masterConfigDto.configGroupCode == "flexibleCost" }),
-                otherFlexibleOptions = OtherFlexibleOptions.fromMasterConfigList(masterDto.masterConfigs?.filter { masterConfigDto -> masterConfigDto.configGroupCode == "otherFlexibleOption" }),
+                flexibleCost = FlexibleCost.fromMasterConfigList(masterDto.masterConfigs?.filter { masterConfigDto -> masterConfigDto.configGroupCode == FlexibleCostCodeTable.code }),
+                otherFlexibleOptions = OtherFlexibleOptions.fromMasterConfigList(masterDto.masterConfigs?.filter { masterConfigDto -> masterConfigDto.configGroupCode == OtherFlexibleOptionsCodeTable.code }),
                 email = masterDto.email,
             )
         }

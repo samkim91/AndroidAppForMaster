@@ -120,7 +120,7 @@ class ProfileChipGroupCard @JvmOverloads constructor(
             }
         }
 
-    private fun addChipGroup(items: List<Any>?) {
+    private fun addChipGroup(items: List<Any?>?) {
         binding.chipGroupContainer.removeAllViews()
 
         val chipGroup = ChipGroup(context)
@@ -130,16 +130,18 @@ class ProfileChipGroupCard @JvmOverloads constructor(
         )
 
         items?.map { item ->
-            val chip = Chip(context)
-            chip.text = when (item) {
-                is Project -> item.name
-                is String -> item
-                else -> item.toString()
-            }
-            chip.setTextColor(resources.getColor(R.color.text_basic_color, null))
-            chip.setTextAppearance(R.style.medium_text_style_regular)
+            item?.let {
+                val chip = Chip(context)
+                chip.text = when (it) {
+                    is Project -> it.name
+                    is String -> it
+                    else -> it.toString()
+                }
+                chip.setTextColor(resources.getColor(R.color.text_basic_color, null))
+                chip.setTextAppearance(R.style.medium_text_style_regular)
 
-            chipGroup.addView(chip)
+                chipGroup.addView(chip)
+            }
         }
 
         params.setMargins(0, 12, 0, 0)

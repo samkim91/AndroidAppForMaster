@@ -30,12 +30,16 @@ class EditFlexibleCostViewModel @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
                 onSuccess = { flexibleCost ->
+                    Timber.tag(TAG).d("requestFlexibleCosts Successfully: $flexibleCost")
                     travelCost.postValue(flexibleCost.travelCost)
                     craneUsage.postValue(flexibleCost.craneUsage)
                     packageCost.postValue(flexibleCost.packageCost)
                     otherCostInformation.postValue(flexibleCost.otherCostInformation)
                 },
-                onError = { setAction(GET_FLEXIBLE_COST_FAILED) }
+                onError = {
+                    Timber.tag(TAG).d("requestFlexibleCosts Failed: $it")
+                    setAction(GET_FLEXIBLE_COST_FAILED)
+                }
             ).addToDisposable()
     }
 
@@ -43,10 +47,10 @@ class EditFlexibleCostViewModel @Inject constructor(
         Timber.tag(TAG).d("saveFlexibleCosts: ")
         saveFlexibleCostUseCase(
             FlexibleCost(
-                travelCost = travelCost.value!!,
-                craneUsage = craneUsage.value!!,
-                packageCost = packageCost.value!!,
-                otherCostInformation = otherCostInformation.value!!
+                travelCost = travelCost.value,
+                craneUsage = craneUsage.value,
+                packageCost = packageCost.value,
+                otherCostInformation = otherCostInformation.value
             )
         ).subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

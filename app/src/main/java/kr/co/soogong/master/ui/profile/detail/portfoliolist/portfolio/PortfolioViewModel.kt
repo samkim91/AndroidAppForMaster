@@ -12,6 +12,7 @@ import kr.co.soogong.master.data.dto.profile.PortfolioDto
 import kr.co.soogong.master.domain.usecase.profile.GetPortfolioUseCase
 import kr.co.soogong.master.domain.usecase.profile.SavePortfolioUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
+import kr.co.soogong.master.ui.profile.PortfolioCodeTable
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -27,7 +28,7 @@ class PortfolioViewModel @Inject constructor(
 
     fun requestPortfolio(portfolioId: Int) {
         Timber.tag(TAG).d("requestPortfolio: $portfolioId")
-        getPortfolioUseCase(portfolioId, "portfolio")
+        getPortfolioUseCase(portfolioId, PortfolioCodeTable.code)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
@@ -48,7 +49,7 @@ class PortfolioViewModel @Inject constructor(
                 id = portfolioId,
                 title = title.value!!,
                 description = description.value,
-                type = "portfolio",
+                type = PortfolioCodeTable.code,
                 beforeRepairImageId = imageBeforeJob.value.toString(),  // TODO: 2021/06/22 이미지 업로드로 변경해야함 ...
                 afterRepairImageId = imageAfterJob.value.toString(),
             )

@@ -10,7 +10,7 @@ class GetEmailUseCase @Inject constructor(
 ) {
     operator fun invoke(): Single<String> {
         return getMasterFromLocalUseCase().map {
-            it.basicInformation?.email
+            it.basicInformation?.email ?: ""
         }
     }
 }

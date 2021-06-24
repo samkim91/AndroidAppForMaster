@@ -15,17 +15,21 @@ import javax.inject.Inject
 class EditEmailViewModel @Inject constructor(
     private val getEmailUseCase: GetEmailUseCase,
     private val saveEmailUseCase: SaveEmailUseCase,
+
 ) : BaseViewModel() {
     val localPart = MutableLiveData("")
     val domain = MutableLiveData("")
 
     fun requestEmail() {
         Timber.tag(TAG).d("requestEmail: ")
+
         getEmailUseCase()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
                 onSuccess = {
+                    Timber.tag(TAG).d("requestEmail successfully: $it")
+
                     if (it.contains("@")) {
                         localPart.postValue(it.split("@")[0])
                         domain.postValue(it.split("@")[1])
@@ -33,12 +37,16 @@ class EditEmailViewModel @Inject constructor(
                         localPart.postValue(it)
                     }
                 },
-                onError = { setAction(GET_EMAIL_FAILED) }
+                onError = {
+                    Timber.tag(TAG).d("requestEmail failed: $it")
+                    setAction(GET_EMAIL_FAILED)
+                }
             ).addToDisposable()
     }
 
     fun saveEmailInfo() {
         Timber.tag(TAG).d("saveEmailInfo: ")
+
         localPart.value?.let { localPart ->
             domain.value?.let { domain ->
                 saveEmailUseCase(

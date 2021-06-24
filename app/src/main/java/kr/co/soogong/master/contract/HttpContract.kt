@@ -8,7 +8,6 @@ object HttpContract {
     const val PROD_URL = "https://api2.soogong.co.kr/"
 
     //region Auth
-
     const val IS_USER_EXIST = "auth/user-exist"
     const val FCM_UPDATE = "api/v1/branches/update_reg_id"  // TODO: 2021/06/10 무슨 용도인지 알아보고 추가해야함.
     //endregion
@@ -23,11 +22,9 @@ object HttpContract {
     const val GET_REQUIREMENT = "master/find-requirement-by-id"
     //endregion
 
-
     //region Estimations
     const val SAVE_ESTIMATION = "estimation/save"
     const val SAVE_REPAIR = "repair/save"
-
     //endregion
 
     //region Profile
