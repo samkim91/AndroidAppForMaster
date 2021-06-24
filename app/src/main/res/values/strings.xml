@@ -112,6 +112,7 @@
     <string name="view_requirement_action_bar_text">고객번호 %s</string>
     <string name="view_estimate_customer_review_title">고객 리뷰</string>
     <string name="view_repair_title">나의 최종 시공 내용</string>
+    <string name="view_repair_canceled_title">시공 취소 사유</string>
     <string name="view_estimate_customer_request_title">고객 요청 내용</string>
     <string name="view_estimate_photo_title">사진이 있다면 견적에 도움이 됩니다.</string>
     <string name="view_estimate_transmission_title">나의 제안 내용</string>
@@ -133,9 +134,11 @@
     <string name="estimation_labor_cost">인건비</string>
     <string name="estimation_travel_cost">출장비</string>
     <string name="estimation_material_cost">자재비</string>
+    <string name="description_label">세부내용</string>
     <string name="estimation_description_label">제안내용</string>
     <string name="view_estimate_transmission_detail_work_date">시공시기</string>
     <string name="repair_actual_price">최종 시공가</string>
+    <string name="cancel_repair_title">취소 사유</string>
 
     <!--  Cancel Estimate  -->
     <string name="cancel_estimate_title">취소 사유</string>

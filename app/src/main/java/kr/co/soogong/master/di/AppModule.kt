@@ -81,7 +81,7 @@ class AppModule {
             .client(okHttpClient)
             .baseUrl(
                 if (BuildConfig.DEBUG)
-                    HttpContract.DEV_URL
+                    HttpContract.LOCAL_URL
                 else
                     HttpContract.PROD_URL
             )

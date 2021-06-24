@@ -80,15 +80,7 @@ class DoneViewModel @Inject constructor(
                 id = requirementCard?.estimationDto?.repair?.id,
                 requirementToken = requirementCard?.token,
                 estimationId = requirementCard?.estimationDto?.id,
-                scheduledDate = null,
-                actualDate = null,
-                actualPrice = null,
-                warrantyDueDate = null,
                 requestReviewYn = true,
-                canceledYn = null,
-                canceledReason = null,
-                description = null,
-                review = null,
             )
         )
             .subscribeOn(Schedulers.io())

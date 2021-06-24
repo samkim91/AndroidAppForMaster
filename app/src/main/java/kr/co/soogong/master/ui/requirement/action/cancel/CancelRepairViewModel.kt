@@ -48,18 +48,11 @@ class CancelRepairViewModel @Inject constructor(
     fun saveRepair() {
         saveRepairUseCase(
             repairDto = RepairDto(
-                id = null,
                 requirementToken = _requirement.value?.token,
                 estimationId = _requirement.value?.estimationDto?.id,
-                scheduledDate = null,
-                actualDate = null,
-                actualPrice = null,
-                warrantyDueDate = null,
-                requestReviewYn = null,
                 canceledYn = true,
                 canceledReason = canceledReason.value,
                 description = description.value,
-                review = null,
             )
         )
             .subscribeOn(Schedulers.io())

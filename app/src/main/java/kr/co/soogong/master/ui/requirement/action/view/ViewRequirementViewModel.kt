@@ -103,21 +103,13 @@ class ViewRequirementViewModel @Inject constructor(
     }
 
     fun askForReview() {
-        Timber.tag(TAG).d("requestToReview: ")
+        Timber.tag(TAG).d("askForReview: ")
         saveRepairUseCase(
             RepairDto(
                 id = _requirement.value?.estimationDto?.repair?.id,
                 requirementToken = _requirement.value?.token,
                 estimationId = _requirement.value?.estimationDto?.id,
-                scheduledDate = null,
-                actualDate = null,
-                actualPrice = null,
-                warrantyDueDate = null,
                 requestReviewYn = true,
-                canceledYn = null,
-                canceledReason = null,
-                description = null,
-                review = null,
             )
         )
             .subscribeOn(Schedulers.io())

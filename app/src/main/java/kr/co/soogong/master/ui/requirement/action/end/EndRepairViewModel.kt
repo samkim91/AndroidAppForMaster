@@ -56,10 +56,8 @@ class EndRepairViewModel @Inject constructor(
 
         saveRepairUseCase(
             RepairDto(
-                id = null,
                 requirementToken = _requirement.value?.token,
                 estimationId = _requirement.value?.estimationDto?.id,
-                scheduledDate = null,
                 actualDate = actualDate.value?.time,
                 actualPrice = actualPrice.value?.replace(",", "")?.toInt(),
                 warrantyDueDate = actualDate.value?.let { // TODO: 2021/06/23 추후 백엔드에서 하는 것으로 수정 필요...
@@ -67,11 +65,6 @@ class EndRepairViewModel @Inject constructor(
                     warrantyDate.add(Calendar.YEAR, 1)
                     warrantyDate.time
                 },
-                requestReviewYn = null,
-                canceledYn = null,
-                canceledReason = null,
-                description = null,
-                review = null,
             )
         )
             .subscribeOn(Schedulers.io())
