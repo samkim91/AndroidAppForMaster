@@ -6,40 +6,56 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
+import kr.co.soogong.master.data.dto.profile.MasterDto
+import kr.co.soogong.master.data.model.profile.Profile
 import kr.co.soogong.master.data.model.profile.RequiredInformation
 import kr.co.soogong.master.domain.usecase.auth.GetMasterApprovalUseCase
-import kr.co.soogong.master.domain.usecase.profile.GetRequiredInformationUseCase
+import kr.co.soogong.master.domain.usecase.profile.GetProfileFromLocalUseCase
 import kr.co.soogong.master.domain.usecase.profile.SaveCareerPeriodUseCase
+import kr.co.soogong.master.domain.usecase.profile.SaveMasterUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class EditRequiredInformationViewModel @Inject constructor(
-    getMasterApprovalUseCase: GetMasterApprovalUseCase,
-    private val getRequiredInformationUseCase: GetRequiredInformationUseCase,
-    private val saveCareerPeriodUseCase: SaveCareerPeriodUseCase,
+    val getMasterApprovalUseCase: GetMasterApprovalUseCase,
+    private val getProfileFromLocalUseCase: GetProfileFromLocalUseCase,
+    private val saveMasterUseCase: SaveMasterUseCase,
 ) : BaseViewModel() {
     private val _isApprovedMaster = MutableLiveData<Boolean>(getMasterApprovalUseCase())
     val isApprovedMaster: LiveData<Boolean>
         get() = _isApprovedMaster
 
-    val requiredInformation = MutableLiveData<RequiredInformation>()
+    private val _profile = MutableLiveData<Profile>()
+    val requiredInformation = MutableLiveData<RequiredInformation?>()
 
     fun requestRequiredInformation() {
         Timber.tag(TAG).d("requestRequiredInformation: ")
-        getRequiredInformationUseCase()
+        getProfileFromLocalUseCase()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
-                onSuccess = { requiredInformation.value = it },
-                onError = { }
+                onSuccess = { profile ->
+                    _profile.value = profile
+                    requiredInformation.postValue(profile.requiredInformation)
+                },
+                onError = {
+                    setAction(GET_PROFILE_FAILED)
+                }
             ).addToDisposable()
     }
 
-    fun saveCareerPeriod(period: String, periodInt: Int) {
+    fun saveCareerPeriod(careerPeriod: Int) {
         Timber.tag(TAG).d("saveCareerPeriod: ")
-        saveCareerPeriodUseCase(period)
+
+        saveMasterUseCase(
+            MasterDto(
+                id = _profile.value?.id,
+                uid = _profile.value?.uid,
+                openDate = CareerConverter.toOpenDate(careerPeriod)
+            )
+        )
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
@@ -57,6 +73,7 @@ class EditRequiredInformationViewModel @Inject constructor(
         private const val TAG = "EditRequiredInformationViewModel"
         const val SAVE_CAREER_PERIOD_SUCCESSFULLY = "SAVE_CAREER_PERIOD_SUCCESSFULLY"
         const val SAVE_CAREER_PERIOD_FAILED = "SAVE_CAREER_PERIOD_FAILED"
+        const val GET_PROFILE_FAILED = "GET_PROFILE_FAILED"
         const val GET_CAREER_PERIOD_FAILED = "GET_CAREER_PERIOD_FAILED"
     }
 }

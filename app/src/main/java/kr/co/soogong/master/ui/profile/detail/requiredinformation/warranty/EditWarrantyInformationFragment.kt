@@ -40,7 +40,8 @@ class EditWarrantyInformationFragment : BaseFragment<FragmentEditWarrantyInforma
             warrantyPeriod.addDropdownClickListener {
                 Timber.tag(TAG).w("Dropdown Clicked")
                 val bottomDialog =
-                    BottomDialogRecyclerView(BottomDialogData.insertingWarrantyPeriodTitle, BottomDialogData.getWarrantyPeriodList(),
+                    BottomDialogRecyclerView(BottomDialogData.insertingWarrantyPeriodTitle,
+                        BottomDialogData.getWarrantyPeriodList(),
                         itemClick = { _, value ->
                             viewModel.warrantyPeriod.value = value
                         }
@@ -68,7 +69,9 @@ class EditWarrantyInformationFragment : BaseFragment<FragmentEditWarrantyInforma
         viewModel.action.observe(viewLifecycleOwner, EventObserver { event ->
             when (event) {
                 SAVE_WARRANTY_INFORMATION_SUCCESSFULLY -> activity?.onBackPressed()
-                SAVE_WARRANTY_INFORMATION_FAILED, GET_WARRANTY_INFORMATION_FAILED -> requireContext().toast(getString(R.string.error_message_of_request_failed))
+                SAVE_WARRANTY_INFORMATION_FAILED, GET_WARRANTY_INFORMATION_FAILED -> requireContext().toast(
+                    getString(R.string.error_message_of_request_failed)
+                )
             }
         })
     }
