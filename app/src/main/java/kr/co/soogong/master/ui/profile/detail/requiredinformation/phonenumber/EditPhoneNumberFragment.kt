@@ -17,6 +17,7 @@ import kr.co.soogong.master.databinding.FragmentEditPhoneNumberBinding
 import kr.co.soogong.master.ui.auth.signup.LimitTime
 import kr.co.soogong.master.ui.auth.signup.TimerTerm
 import kr.co.soogong.master.ui.base.BaseFragment
+import kr.co.soogong.master.ui.profile.detail.requiredinformation.phonenumber.EditPhoneNumberViewModel.Companion.GET_PROFILE_FAILED
 import kr.co.soogong.master.ui.profile.detail.requiredinformation.phonenumber.EditPhoneNumberViewModel.Companion.SAVE_PHONE_NUMBER_FAILED
 import kr.co.soogong.master.ui.profile.detail.requiredinformation.phonenumber.EditPhoneNumberViewModel.Companion.SAVE_PHONE_NUMBER_SUCCESSFULLY
 import kr.co.soogong.master.utility.EventObserver
@@ -56,6 +57,11 @@ class EditPhoneNumberFragment :
         initFirebaseAuthCallbacks()
     }
 
+    override fun onStart() {
+        super.onStart()
+        viewModel.requestProfile()
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         stopTimer()
@@ -88,7 +94,8 @@ class EditPhoneNumberFragment :
             defaultButton.setOnClickListener {
                 viewModel.certificationCode.observe(viewLifecycleOwner, {
                     alertInvalidCertificationCode.isVisible = it.length < 6
-                    if (alertWrongCertificationCode.isVisible) alertWrongCertificationCode.isVisible = false
+                    if (alertWrongCertificationCode.isVisible) alertWrongCertificationCode.isVisible =
+                        false
                 })
 
                 if (!alertWrongCertificationCode.isVisible && !alertExpiredCertificationTime.isVisible && !alertInvalidCertificationCode.isVisible) {
@@ -117,7 +124,7 @@ class EditPhoneNumberFragment :
                 SAVE_PHONE_NUMBER_SUCCESSFULLY -> {
                     activity?.onBackPressed()
                 }
-                SAVE_PHONE_NUMBER_FAILED -> {
+                GET_PROFILE_FAILED, SAVE_PHONE_NUMBER_FAILED -> {
                     requireContext().toast(getString(R.string.error_message_of_request_failed))
                 }
             }
@@ -189,9 +196,12 @@ class EditPhoneNumberFragment :
         Timber.tag(TAG)
             .d("verifyPhoneNumberWithCode: ${viewModel.storedVerificationId.value}, ${viewModel.certificationCode.value}")
 
-        if(!viewModel.storedVerificationId.value.isNullOrEmpty() && !viewModel.certificationCode.value.isNullOrEmpty()){
+        if (!viewModel.storedVerificationId.value.isNullOrEmpty() && !viewModel.certificationCode.value.isNullOrEmpty()) {
             viewModel.phoneAuthCredential.value =
-                PhoneAuthProvider.getCredential(viewModel.storedVerificationId.value!!, viewModel.certificationCode.value!!)
+                PhoneAuthProvider.getCredential(
+                    viewModel.storedVerificationId.value!!,
+                    viewModel.certificationCode.value!!
+                )
             Timber.tag(TAG).d("getPhoneAuthCredential: ${viewModel.phoneAuthCredential.value}")
             signInWithPhoneAuthCredential()
         }

@@ -11,7 +11,6 @@ import kr.co.soogong.master.data.model.profile.Profile
 import kr.co.soogong.master.data.model.profile.RequiredInformation
 import kr.co.soogong.master.domain.usecase.auth.GetMasterApprovalUseCase
 import kr.co.soogong.master.domain.usecase.profile.GetProfileFromLocalUseCase
-import kr.co.soogong.master.domain.usecase.profile.SaveCareerPeriodUseCase
 import kr.co.soogong.master.domain.usecase.profile.SaveMasterUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import timber.log.Timber
@@ -32,6 +31,7 @@ class EditRequiredInformationViewModel @Inject constructor(
 
     fun requestRequiredInformation() {
         Timber.tag(TAG).d("requestRequiredInformation: ")
+
         getProfileFromLocalUseCase()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
