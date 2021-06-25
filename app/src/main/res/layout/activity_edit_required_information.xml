@@ -191,8 +191,8 @@
                     android:layout_marginEnd="@dimen/gap_20"
                     android:background="@drawable/shape_radius8_white_background"
                     android:elevation="@dimen/gap_4"
-                    app:defaultButtonByString="@{vm.requiredInformation.warrantyInformation.warrantyPeriod}"
-                    app:firstDetail="@{vm.requiredInformation.warrantyInformation.warrantyPeriod}"
+                    app:defaultButtonByString="@{vm.requiredInformation.warrantyInformation.warrantyDescription}"
+                    app:firstDetail='@{vm.requiredInformation.warrantyInformation.warrantyPeriod != 0 ? vm.requiredInformation.warrantyInformation.warrantyPeriod+"년" : null}'
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/business_unit_information"

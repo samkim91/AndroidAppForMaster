@@ -50,7 +50,7 @@ class ServiceAreaFragment : BaseFragment<FragmentSignUpServiceAreaBinding>(
 
             serviceArea.addDropdownClickListener {
                 val bottomDialog =
-                    BottomDialogRecyclerView("범위 선택", BottomDialogData.getServiceAreaList(),
+                    BottomDialogRecyclerView(BottomDialogData.choosingServiceAreaTitle, BottomDialogData.getServiceAreaList(),
                         itemClick = { text, diameter ->
                             viewModel.serviceArea.value = text
                             viewModel.serviceAreaToInt.value = diameter

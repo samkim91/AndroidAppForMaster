@@ -81,7 +81,7 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
 
             career.addDefaultButtonClickListener {
                 val bottomDialog =
-                    BottomDialogRecyclerView("경력", BottomDialogData.getWarrantyPeriodList(),
+                    BottomDialogRecyclerView(BottomDialogData.insertingCareerTitle, BottomDialogData.getWarrantyPeriodList(),
                         itemClick = { text, value ->
                             viewModel.saveCareerPeriod(text, value)
                         }
@@ -108,7 +108,7 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
 
             serviceArea.addDefaultButtonClickListener {
                 val bottomDialog =
-                    BottomDialogRecyclerView("범위 선택", BottomDialogData.getServiceAreaList(),
+                    BottomDialogRecyclerView(BottomDialogData.choosingServiceAreaTitle, BottomDialogData.getServiceAreaList(),
                         itemClick = { _, diameter ->
                             naverMap.changeServiceArea(diameter)
                             viewModel.requiredInformation.mutation {
@@ -157,7 +157,7 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
             if (!value?.introduction.isNullOrEmpty()) insertedCount++
             if (value?.representativeImages?.size!! > 0) insertedCount++
             if (!value?.businessUnitInformation?.businessType.isNullOrEmpty()) insertedCount++
-            if (!value?.warrantyInformation?.warrantyPeriod.isNullOrEmpty()) insertedCount++
+            if (value?.warrantyInformation?.warrantyPeriod != 0) insertedCount++
             if (!value?.career.isNullOrEmpty()) insertedCount++
             if (!value?.tel.isNullOrEmpty()) insertedCount++
             if (!value?.ownerName.isNullOrEmpty()) insertedCount++

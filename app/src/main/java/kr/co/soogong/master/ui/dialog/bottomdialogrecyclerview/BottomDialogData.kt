@@ -8,6 +8,7 @@ data class BottomDialogData(
         fun getWorkExperienceList() =
             List(60) { i -> BottomDialogData(text = "${i + 1}년", value = i + 1) }
 
+        const val choosingServiceAreaTitle: String = "범위 선택"
         fun getServiceAreaList() =
             listOf(
                 BottomDialogData("2km", 2),
@@ -19,6 +20,8 @@ data class BottomDialogData(
                 BottomDialogData("전국구 가능", 1000)
             )
 
+        const val insertingCareerTitle: String = "경력"
+        const val insertingWarrantyPeriodTitle: String = "A/S 보증기간"
         fun getWarrantyPeriodList() =
             listOf(
                 BottomDialogData("1년", 1),
@@ -33,6 +36,7 @@ data class BottomDialogData(
                 BottomDialogData("10년", 10),
             )
 
+        const val insertingEmailTitle: String ="이메일 주소"
         fun getEmailDomains() =
             listOf(
                 BottomDialogData("naver.com", 0),

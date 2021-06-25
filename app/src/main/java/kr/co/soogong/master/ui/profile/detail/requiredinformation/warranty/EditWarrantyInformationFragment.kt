@@ -40,10 +40,9 @@ class EditWarrantyInformationFragment : BaseFragment<FragmentEditWarrantyInforma
             warrantyPeriod.addDropdownClickListener {
                 Timber.tag(TAG).w("Dropdown Clicked")
                 val bottomDialog =
-                    BottomDialogRecyclerView("A/S 보증기간", BottomDialogData.getWarrantyPeriodList(),
-                        itemClick = { text, value ->
-                            viewModel.warrantyPeriod.value = text
-                            viewModel.warrantyPeriodInt.value = value
+                    BottomDialogRecyclerView(BottomDialogData.insertingWarrantyPeriodTitle, BottomDialogData.getWarrantyPeriodList(),
+                        itemClick = { _, value ->
+                            viewModel.warrantyPeriod.value = value
                         }
                     )
 
@@ -52,7 +51,7 @@ class EditWarrantyInformationFragment : BaseFragment<FragmentEditWarrantyInforma
 
             defaultButton.setOnClickListener {
                 viewModel.warrantyPeriod.observe(viewLifecycleOwner, {
-                    warrantyPeriod.alertVisible = it.isNullOrEmpty()
+                    warrantyPeriod.alertVisible = it == 0
                 })
 
                 viewModel.warrantyDescription.observe(viewLifecycleOwner, {

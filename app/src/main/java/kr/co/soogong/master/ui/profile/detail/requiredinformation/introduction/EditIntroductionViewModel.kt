@@ -31,7 +31,7 @@ class EditIntroductionViewModel @Inject constructor(
             .subscribeBy(
                 onSuccess = { profile ->
                     _profile.value = profile
-                    introduction.value = profile.requiredInformation?.introduction
+                    introduction.postValue(profile.requiredInformation?.introduction)
                 },
                 onError = {
                     setAction(GET_INTRODUCTION_FAILED)
