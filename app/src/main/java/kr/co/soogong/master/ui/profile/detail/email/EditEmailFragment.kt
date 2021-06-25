@@ -14,6 +14,7 @@ import kr.co.soogong.master.ui.profile.detail.email.EditEmailViewModel.Companion
 import kr.co.soogong.master.ui.profile.detail.email.EditEmailViewModel.Companion.SAVE_EMAIL_SUCCESSFULLY
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.extension.toast
+import kr.co.soogong.master.utility.validation.ValidationHelper
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -40,21 +41,22 @@ class EditEmailFragment :
 
             defaultButton.setOnClickListener {
                 viewModel.localPart.observe(viewLifecycleOwner, {
-                    email.alertVisible = it.isNullOrEmpty()
+                    email.alertVisible = !ValidationHelper.isValidLocalPart(it)
                 })
 
-                viewModel.domain.observe(viewLifecycleOwner, {
-                    email.alertVisible = it.isNullOrEmpty()
-                })
+                // 하나의 alert text 에 두개 모두를 만족해야 패스할 수 있는 방법을 찾아봐야함 ..
+                viewModel.domain.value?.let {
+                    if(!ValidationHelper.isValidDomain(it)) email.alertVisible = true
+                }
 
                 if (!email.alertVisible) viewModel.saveEmailInfo()
             }
 
             email.addDropdownClickListener {
                 val bottomDialog =
-                    BottomDialogRecyclerView("이메일 주소", BottomDialogData.getEmailDomains(),
+                    BottomDialogRecyclerView(BottomDialogData.insertingEmailTitle, BottomDialogData.getEmailDomains(),
                         itemClick = { domain, _ ->
-                            if(domain != "이메일 직접입력") {
+                            if(domain != BottomDialogData.getEmailDomains().last().text) {
                                 viewModel.domain.value = domain
                                 email.secondDetailView.hint = getString(R.string.email_domain_default_hint_text)
                                 email.secondDetailView.isEnabled = false

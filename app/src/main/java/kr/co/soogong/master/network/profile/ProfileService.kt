@@ -12,9 +12,15 @@ class ProfileService @Inject constructor(
 ) {
     private val profileInterface = retrofit.create(ProfileInterface::class.java)
 
-    fun getMaster(uid: String?): Single<MasterDto> {
+    fun getMasterByUid(uid: String?): Single<MasterDto> {
         return profileInterface.getMasterByUid(uid)
     }
+
+    fun saveMaster(masterDto: MasterDto): Single<MasterDto> {
+        return profileInterface.saveMaster(masterDto)
+    }
+
+
 
 
 
@@ -35,7 +41,6 @@ class ProfileService @Inject constructor(
         // Todo.. server 이후로 작업해야함
         // return profileInterface.savePriceByProject(query)
     }
-
 
 
 }

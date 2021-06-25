@@ -14,7 +14,7 @@ class SignOutUseCase @Inject constructor(
     private val requirementDao: RequirementDao,
     private val sharedPreferences: SharedPreferences,
 ) {
-    suspend operator fun invoke() {
+    operator fun invoke() {
         Firebase.auth.signOut()
 
         requirementDao.removeAll()

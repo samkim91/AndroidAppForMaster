@@ -8,7 +8,7 @@ import kr.co.soogong.master.domain.usecase.auth.GetMasterUidFromSharedUseCase
 import javax.inject.Inject
 
 @Reusable
-class GetMasterFromLocalUseCase @Inject constructor(
+class GetProfileFromLocalUseCase @Inject constructor(
     private val masterDao: MasterDao,
     private val getMasterUseCase: GetMasterUseCase,
     private val getMasterUidFromSharedUseCase: GetMasterUidFromSharedUseCase,

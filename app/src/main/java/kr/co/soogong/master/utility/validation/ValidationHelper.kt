@@ -24,4 +24,13 @@ object ValidationHelper {
         Timber.tag(TAG).d("isPhoneNumberFormat: $input")
         return input.matches("01([0|1|6|7|8|9])?([0-9]{8})".toRegex())
     }
+
+    fun isValidLocalPart(input: String): Boolean {
+        return input.matches("([\\w._\\-])*[a-zA-Z0-9]+([\\w._\\-])*([a-zA-Z0-9])+([\\w._\\-])".toRegex())
+    }
+
+    fun isValidDomain(input: String): Boolean {
+        return input.matches("([a-zA-Z0-9]+\\.)+[a-zA-Z0-9]{2,8}".toRegex())
+    }
+
 }

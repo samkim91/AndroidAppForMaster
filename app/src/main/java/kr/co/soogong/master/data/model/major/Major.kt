@@ -19,15 +19,5 @@ data class Major(
 //        fun fromMajorDto(majorDto: MajorDto): Major {
 //
 //        }
-
-        val TEST_BUSINESS_TYPE = Major(
-            Category.TEST_CATEGORY,
-            mutableListOf(Project.TEST_PROJECT, Project.TEST_PROJECT, Project.TEST_PROJECT)
-        )
-
-        val NULL_BUSINESS_TYPE = Major(
-            Category.NULL_CATEGORY,
-            mutableListOf()
-        )
     }
 }

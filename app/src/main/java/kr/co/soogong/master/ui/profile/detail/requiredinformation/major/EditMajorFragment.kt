@@ -39,7 +39,7 @@ class EditMajorFragment : BaseFragment<FragmentEditMajorBinding>(
                     layoutInflater = layoutInflater,
                     container = binding.majorContainer,
                     newMajor = selectedMajor,
-                    viewModelBusinessTypes = viewModel.major
+                    viewModelBusinessTypes = viewModel.majors
                 )
             }
         }
@@ -50,11 +50,7 @@ class EditMajorFragment : BaseFragment<FragmentEditMajorBinding>(
         initLayout()
         registerEventObserve()
         viewModel.requestMajor()
-        MajorChipGroupHelper.addMajorToContainer(
-            layoutInflater = layoutInflater,
-            container = binding.majorContainer,
-            majorList = viewModel.major
-        )
+
     }
 
     override fun initLayout() {
@@ -75,7 +71,7 @@ class EditMajorFragment : BaseFragment<FragmentEditMajorBinding>(
             }
 
             defaultButton.setOnClickListener {
-                viewModel.major.observe(viewLifecycleOwner, {
+                viewModel.majors.observe(viewLifecycleOwner, {
                     major.alertVisible = it.isNullOrEmpty()
                 })
 
@@ -86,6 +82,14 @@ class EditMajorFragment : BaseFragment<FragmentEditMajorBinding>(
 
     private fun registerEventObserve() {
         Timber.tag(TAG).d("registerEventObserve: ")
+        viewModel.majors.observe(viewLifecycleOwner, {
+            MajorChipGroupHelper.addMajorToContainer(
+                layoutInflater = layoutInflater,
+                container = binding.majorContainer,
+                majorList = viewModel.majors
+            )
+        })
+
         viewModel.action.observe(viewLifecycleOwner, EventObserver { event ->
             when (event) {
                 SAVE_MAJOR_SUCCESSFULLY -> {
