@@ -31,7 +31,7 @@ class SignInViewModel @Inject constructor(
     val resendToken = MutableLiveData<PhoneAuthProvider.ForceResendingToken>()
     val uid = MutableLiveData("")
 
-    private var _isEnabled = MutableLiveData(false)
+    private val _isEnabled = MutableLiveData(false)
     val isEnabled: LiveData<Boolean>
         get() = _isEnabled
 

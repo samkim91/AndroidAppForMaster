@@ -21,7 +21,7 @@ class SignUpUseCase @Inject constructor(
         return authService.signUp(masterDto).doOnSuccess {
             saveMasterIdInSharedUseCase(it.id!!)
             saveMasterUidInSharedUseCase(it.uid!!)
-            if (it.subscriptionPlan != "NotApproved") saveMasterApprovalUseCase(true)
+            if (it.subscriptionPlan != "NotApproved" || it.subscriptionPlan != "RequestApprove") saveMasterApprovalUseCase(true)
 
             masterDao.insert(it)
         }.doOnError {

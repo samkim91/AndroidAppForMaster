@@ -8,6 +8,7 @@ import kr.co.soogong.master.databinding.ActivityEditProfileWithCardBinding
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.ui.dialog.popup.CustomDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData
+import kr.co.soogong.master.ui.profile.PortfolioCodeTable
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerActivityHelper
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.ADD_PORTFOLIO
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.ADD_PRICE_BY_PROJECTS
@@ -40,7 +41,7 @@ class PortfolioListActivity : BaseActivity<ActivityEditProfileWithCardBinding>(
         Timber.tag(TAG).d("onStart: ")
         viewModel.requestPortfolioList(
             when (pageName) {
-                PORTFOLIO -> "portfolio"
+                PORTFOLIO -> PortfolioCodeTable.code
                 else -> "price"
             }
         )

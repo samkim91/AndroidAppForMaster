@@ -7,10 +7,10 @@ import javax.inject.Inject
 
 @Reusable
 class GetMyReviewsUseCase @Inject constructor(
-    private val getMasterFromLocalUseCase: GetMasterFromLocalUseCase,
+    private val getProfileFromLocalUseCase: GetProfileFromLocalUseCase,
 ) {
     operator fun invoke(): Single<MyReview> {
-        return getMasterFromLocalUseCase().map {
+        return getProfileFromLocalUseCase().map {
             it.myReview
         }
     }

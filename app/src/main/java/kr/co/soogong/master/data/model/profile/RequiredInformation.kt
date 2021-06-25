@@ -5,6 +5,7 @@ import kotlinx.parcelize.Parcelize
 import kr.co.soogong.master.data.dto.AttachmentDto
 import kr.co.soogong.master.data.dto.profile.MasterDto
 import kr.co.soogong.master.data.model.major.Major
+import kr.co.soogong.master.ui.profile.detail.requiredinformation.CareerConverter
 
 @Parcelize
 data class RequiredInformation(
@@ -33,10 +34,10 @@ data class RequiredInformation(
                     businessRegistImage = null, // TODO: 2021/06/15 get data from server
                 ),
                 warrantyInformation = WarrantyInformation(
-                    warrantyPeriod = "${masterDto.warrantyPeriod}년",
+                    warrantyPeriod = masterDto.warrantyPeriod,
                     warrantyDescription = masterDto.warrantyDescription,
                 ),
-                career = masterDto.introduction,
+                career = masterDto.openDate?.let { CareerConverter.toCareer(it) },
                 tel = masterDto.tel,
                 ownerName = masterDto.ownerName,
                 majors = emptyList(),  // TODO: 2021/06/16 projectDto가 변화되는 것을 보고 바꿔줘야함.

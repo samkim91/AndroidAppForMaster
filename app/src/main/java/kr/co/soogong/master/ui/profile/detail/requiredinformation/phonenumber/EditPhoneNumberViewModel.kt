@@ -10,15 +10,21 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import kr.co.soogong.master.domain.usecase.profile.SavePhoneNumberUseCase
+import kr.co.soogong.master.data.dto.profile.MasterDto
+import kr.co.soogong.master.data.model.profile.Profile
+import kr.co.soogong.master.domain.usecase.profile.GetProfileFromLocalUseCase
+import kr.co.soogong.master.domain.usecase.profile.SaveMasterUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class EditPhoneNumberViewModel @Inject constructor(
-    private val savePhoneNumberUseCase: SavePhoneNumberUseCase,
+    private val getProfileFromLocalUseCase: GetProfileFromLocalUseCase,
+    private val saveMasterUseCase: SaveMasterUseCase,
 ) : BaseViewModel() {
+    private val _profile = MutableLiveData<Profile>()
+
     val tel = MutableLiveData("")
     val certificationCode = MutableLiveData("")
     val auth = MutableLiveData(Firebase.auth)
@@ -27,7 +33,7 @@ class EditPhoneNumberViewModel @Inject constructor(
     val resendToken = MutableLiveData<PhoneAuthProvider.ForceResendingToken>()
     val uid = MutableLiveData("")
 
-    private var _isEnabled = MutableLiveData(false)
+    private val _isEnabled = MutableLiveData(false)
     val isEnabled: LiveData<Boolean>
         get() = _isEnabled
 
@@ -35,12 +41,34 @@ class EditPhoneNumberViewModel @Inject constructor(
         _isEnabled.value = !_isEnabled.value!!
     }
 
+    fun requestProfile() {
+        Timber.tag(TAG).d("requestProfile: ")
+
+        getProfileFromLocalUseCase()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeBy(
+                onSuccess = { profile ->
+                    _profile.value = profile
+                },
+                onError = {
+                    setAction(GET_PROFILE_FAILED)
+                }
+            ).addToDisposable()
+
+    }
+
     fun savePhoneNumber() {
-        // TODO: 2021/06/14 Firebase admin SDK를 이용해서, 현재 유저의 전화번호를 새 번호로 업데이트하고, DB에도 넣어줘야함.
         Timber.tag(TAG).d("savePhoneNumber: ")
 
         tel.value?.let {
-            savePhoneNumberUseCase(it)
+            saveMasterUseCase(
+                MasterDto(
+                    id = _profile.value?.id,
+                    uid = _profile.value?.uid,
+                    tel = tel.value,
+                )
+            )
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
@@ -50,8 +78,10 @@ class EditPhoneNumberViewModel @Inject constructor(
         }
     }
 
+
     companion object {
         private const val TAG = "EditPhoneNumberViewModel"
+        const val GET_PROFILE_FAILED = "GET_PROFILE_FAILED"
         const val SAVE_PHONE_NUMBER_SUCCESSFULLY =
             "SAVE_PHONE_NUMBER_SUCCESSFULLY"
         const val SAVE_PHONE_NUMBER_FAILED =

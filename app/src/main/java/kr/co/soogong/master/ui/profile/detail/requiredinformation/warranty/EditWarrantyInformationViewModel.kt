@@ -5,31 +5,35 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import kr.co.soogong.master.data.model.profile.WarrantyInformation
-import kr.co.soogong.master.domain.usecase.profile.GetWarrantyInformationUseCase
-import kr.co.soogong.master.domain.usecase.profile.SaveWarrantyInformationUseCase
+import kr.co.soogong.master.data.dto.profile.MasterDto
+import kr.co.soogong.master.data.model.profile.Profile
+import kr.co.soogong.master.domain.usecase.profile.GetProfileFromLocalUseCase
+import kr.co.soogong.master.domain.usecase.profile.SaveMasterUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class EditWarrantyInformationViewModel @Inject constructor(
-    private val getWarrantyInformationUseCase: GetWarrantyInformationUseCase,
-    private val saveWarrantyInformationUseCase: SaveWarrantyInformationUseCase,
+    private val getProfileFromLocalUseCase: GetProfileFromLocalUseCase,
+    private val saveMasterUseCase: SaveMasterUseCase,
 ) : BaseViewModel() {
-    val warrantyPeriod = MutableLiveData("")
-    val warrantyPeriodInt = MutableLiveData(0)
+    private val _profile = MutableLiveData<Profile>()
+
+    val warrantyPeriod = MutableLiveData(0)
     val warrantyDescription = MutableLiveData("")
 
     fun requestWarrantyInformation() {
         Timber.tag(TAG).d("requestWarrantyInformation: ")
-        getWarrantyInformationUseCase()
+
+        getProfileFromLocalUseCase()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
-                onSuccess = { warrantyInformation ->
-                    warrantyPeriod.postValue(warrantyInformation.warrantyPeriod)
-                    warrantyDescription.postValue(warrantyInformation.warrantyDescription)
+                onSuccess = { profile ->
+                    _profile.value = profile
+                    warrantyPeriod.postValue(profile.requiredInformation?.warrantyInformation?.warrantyPeriod)
+                    warrantyDescription.postValue(profile.requiredInformation?.warrantyInformation?.warrantyDescription)
                 },
                 onError = { setAction(GET_WARRANTY_INFORMATION_FAILED) }
             ).addToDisposable()
@@ -37,19 +41,20 @@ class EditWarrantyInformationViewModel @Inject constructor(
 
     fun saveWarrantyInfo() {
         Timber.tag(TAG).d("saveWarrantyInfo: ")
-        (!warrantyPeriod.value.isNullOrEmpty() && !warrantyDescription.value.isNullOrEmpty()).let {
-            saveWarrantyInformationUseCase(
-                WarrantyInformation(
-                    warrantyPeriod = warrantyPeriod.value!!,
-                    warrantyDescription = warrantyDescription.value!!
-                )
-            ).subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeBy(
-                    onSuccess = { setAction(SAVE_WARRANTY_INFORMATION_SUCCESSFULLY) },
-                    onError = { setAction(SAVE_WARRANTY_INFORMATION_FAILED) }
-                ).addToDisposable()
-        }
+
+        saveMasterUseCase(
+            MasterDto(
+                id = _profile.value?.id,
+                uid = _profile.value?.uid,
+                warrantyPeriod = warrantyPeriod.value,
+                warrantyDescription = warrantyDescription.value,
+            )
+        ).subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeBy(
+                onSuccess = { setAction(SAVE_WARRANTY_INFORMATION_SUCCESSFULLY) },
+                onError = { setAction(SAVE_WARRANTY_INFORMATION_FAILED) }
+            ).addToDisposable()
     }
 
     companion object {

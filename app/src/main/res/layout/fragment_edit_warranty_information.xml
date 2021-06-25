@@ -34,7 +34,8 @@
                     android:id="@+id/warranty_period"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:content="@={vm.warrantyPeriod}"
+                    app:alertText='@{"필수 정보입니다."}'
+                    app:content='@{vm.warrantyPeriod == 0 ? null : vm.warrantyPeriod+"년"}'
                     app:hintText='@{"보증 가능한 A/S 기간을 선택해주세요."}'
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

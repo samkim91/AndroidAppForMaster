@@ -9,7 +9,6 @@ import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.model.profile.Profile
 import kr.co.soogong.master.domain.usecase.profile.GetMasterUseCase
-import kr.co.soogong.master.domain.usecase.profile.GetMasterFromLocalUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import timber.log.Timber
 import javax.inject.Inject
