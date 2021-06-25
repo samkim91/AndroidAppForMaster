@@ -24,8 +24,6 @@ data class MajorDto(
 
     @SerializedName("categoryNameEn")
     val categoryNameEn: String? = null,
-
-    // TODO: 2021/06/18 변경된 프로퍼티로 뷰 바인드 하는거 작업해줘야함..
 ) : Parcelable {
     companion object {
         fun fromMajorList(majors: List<Major>?): List<MajorDto> {

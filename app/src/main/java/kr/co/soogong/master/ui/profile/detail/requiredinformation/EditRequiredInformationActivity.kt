@@ -9,11 +9,10 @@ import kr.co.soogong.master.databinding.ActivityEditRequiredInformationBinding
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogData
 import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogRecyclerView
-import kr.co.soogong.master.ui.profile.detail.requiredinformation.EditRequiredInformationViewModel.Companion.GET_CAREER_PERIOD_FAILED
 import kr.co.soogong.master.ui.profile.detail.requiredinformation.EditRequiredInformationViewModel.Companion.GET_PROFILE_FAILED
-import kr.co.soogong.master.ui.profile.detail.requiredinformation.EditRequiredInformationViewModel.Companion.SAVE_CAREER_PERIOD_FAILED
-import kr.co.soogong.master.ui.profile.detail.requiredinformation.EditRequiredInformationViewModel.Companion.SAVE_CAREER_PERIOD_SUCCESSFULLY
-import kr.co.soogong.master.utility.NaverMapHelper
+import kr.co.soogong.master.ui.profile.detail.requiredinformation.EditRequiredInformationViewModel.Companion.GET_PROFILE_SUCCESSFULLY
+import kr.co.soogong.master.ui.profile.detail.requiredinformation.EditRequiredInformationViewModel.Companion.SAVE_MASTER_INFORMATION_FAILED
+import kr.co.soogong.master.ui.profile.detail.requiredinformation.EditRequiredInformationViewModel.Companion.SAVE_MASTER_INFORMATION_SUCCESSFULLY
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerActivityHelper
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_ADDRESS
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_BUSINESS_UNIT_INFORMATION
@@ -24,6 +23,7 @@ import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_THUMBNAILS
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_WARRANTY_INFORMATION
 import kr.co.soogong.master.utility.EventObserver
+import kr.co.soogong.master.utility.NaverMapHelper
 import kr.co.soogong.master.utility.extension.mutation
 import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
@@ -110,16 +110,20 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
             serviceArea.addDefaultButtonClickListener {
                 val bottomDialog =
                     BottomDialogRecyclerView(BottomDialogData.choosingServiceAreaTitle, BottomDialogData.getServiceAreaList(),
-                        itemClick = { _, diameter ->
-                            naverMap.changeServiceArea(diameter)
+                        itemClick = { _, radius ->
+                            naverMap.changeServiceArea(radius)
                             viewModel.requiredInformation.mutation {
-                                value?.serviceArea = diameter
+                                value?.serviceArea = radius
                             }
-                            viewModel.saveServiceArea(diameter)
+                            viewModel.saveServiceArea(radius)
                         }
                     )
 
                 bottomDialog.show(supportFragmentManager, bottomDialog.tag)
+            }
+
+            defaultButton.setOnClickListener {
+                viewModel.requestApprove()
             }
         }
     }
@@ -128,8 +132,9 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
         Timber.tag(TAG).d("registerEventObserve: ")
         viewModel.action.observe(this, EventObserver { event ->
             when (event) {
-                SAVE_CAREER_PERIOD_SUCCESSFULLY -> viewModel.requestRequiredInformation()
-                SAVE_CAREER_PERIOD_FAILED, GET_PROFILE_FAILED, GET_CAREER_PERIOD_FAILED -> toast(getString(R.string.error_message_of_request_failed))
+                GET_PROFILE_SUCCESSFULLY -> setMasterApprovalLayout()
+                SAVE_MASTER_INFORMATION_SUCCESSFULLY -> viewModel.requestRequiredInformation()
+                SAVE_MASTER_INFORMATION_FAILED, GET_PROFILE_FAILED -> toast(getString(R.string.error_message_of_request_failed))
             }
         })
     }
@@ -139,7 +144,9 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
         super.onStart()
         viewModel.requestRequiredInformation()
         naverMap
+    }
 
+    private fun setMasterApprovalLayout() {
         if (viewModel.isApprovedMaster.value == true) setLayoutForApprovedMaster() else setPercentageText()
     }
 
@@ -151,28 +158,30 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
     }
 
     private fun setPercentageText() {
-        val totalCount = 9
-        var insertedCount = 0
+        val totalCount = 10
+        var filledCount = 0
 
         with(viewModel.requiredInformation) {
-            if (!value?.introduction.isNullOrEmpty()) insertedCount++
-            if (value?.representativeImages?.size!! > 0) insertedCount++
-            if (!value?.businessUnitInformation?.businessType.isNullOrEmpty()) insertedCount++
-            if (value?.warrantyInformation?.warrantyPeriod != 0) insertedCount++
-            if (!value?.career.isNullOrEmpty()) insertedCount++
-            if (!value?.tel.isNullOrEmpty()) insertedCount++
-            if (!value?.ownerName.isNullOrEmpty()) insertedCount++
-            if (!value?.majors.isNullOrEmpty()) insertedCount++
-            if (!value?.companyAddress?.roadAddress.isNullOrEmpty()) insertedCount++
-            if (value?.serviceArea != null) insertedCount++
+            if (!value?.introduction.isNullOrEmpty()) filledCount++
+            if (!value?.representativeImages.isNullOrEmpty()) filledCount++
+            if (!value?.businessUnitInformation?.businessType.isNullOrEmpty()) filledCount++
+            if (value?.warrantyInformation?.warrantyPeriod != 0) filledCount++
+            if (!value?.career.isNullOrEmpty()) filledCount++
+            if (!value?.tel.isNullOrEmpty()) filledCount++
+            if (!value?.ownerName.isNullOrEmpty()) filledCount++
+            if (!value?.majors.isNullOrEmpty()) filledCount++
+            if (!value?.companyAddress?.roadAddress.isNullOrEmpty()) filledCount++
+            if (value?.serviceArea != null) filledCount++
         }
 
-        val percentage = insertedCount / totalCount * 100
+        val percentage: Float = filledCount.toFloat() / totalCount.toFloat() * 100f
 
-        if (percentage == 100) {
+        binding.requiredProfileCardPercentage.text = getString(R.string.percentage_of_required_information, percentage.toInt())
+
+        if (percentage == 100.0f) {
             binding.requiredProfileCardPercentage.setTextColor(
                 resources.getColor(
-                    R.color.color_FF711D,
+                    R.color.color_1FC472,
                     null
                 )
             )
@@ -180,13 +189,12 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
         } else {
             binding.requiredProfileCardPercentage.setTextColor(
                 resources.getColor(
-                    R.color.color_1FC472,
+                    R.color.color_FF711D,
                     null
                 )
             )
             binding.defaultButton.isEnabled = false
         }
-        binding.requiredProfileCardPercentage.text = "${percentage}% 등록"
     }
 
     private fun startActivityCommonCode(pageName: String) {

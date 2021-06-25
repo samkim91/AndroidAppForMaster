@@ -51,10 +51,10 @@ class ServiceAreaFragment : BaseFragment<FragmentSignUpServiceAreaBinding>(
             serviceArea.addDropdownClickListener {
                 val bottomDialog =
                     BottomDialogRecyclerView(BottomDialogData.choosingServiceAreaTitle, BottomDialogData.getServiceAreaList(),
-                        itemClick = { text, diameter ->
+                        itemClick = { text, radius ->
                             viewModel.serviceArea.value = text
-                            viewModel.serviceAreaToInt.value = diameter
-                            naverMap.changeServiceArea(diameter)
+                            viewModel.serviceAreaToInt.value = radius
+                            naverMap.changeServiceArea(radius)
                         }
                     )
 
