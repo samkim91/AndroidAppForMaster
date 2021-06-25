@@ -33,7 +33,7 @@ data class RequiredInformation(
                     businessRegistImage = null, // TODO: 2021/06/15 get data from server
                 ),
                 warrantyInformation = WarrantyInformation(
-                    warrantyPeriod = "${masterDto.warrantyPeriod}년",
+                    warrantyPeriod = if (masterDto.warrantyPeriod != 0) "${masterDto.warrantyPeriod}년" else null,
                     warrantyDescription = masterDto.warrantyDescription,
                 ),
                 career = masterDto.introduction,

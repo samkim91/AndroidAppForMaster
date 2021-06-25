@@ -51,7 +51,7 @@ object TitleEmailReverseBinding {
     }
 
     @JvmStatic
-    @BindingAdapter("endTimeAttrChanged")
+    @BindingAdapter("secondDetailAttrChanged")
     fun setTitleEmailSecondDetailInverseBindingListener(view: TitleEmail, listener: InverseBindingListener?){
         val watcher = object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -69,7 +69,7 @@ object TitleEmailReverseBinding {
     }
 
     @JvmStatic
-    @InverseBindingAdapter(attribute = "secondDetail", event = "firstDetailAttrChanged")
+    @InverseBindingAdapter(attribute = "secondDetail", event = "secondDetailAttrChanged")
     fun getTitleEmailSecondDetail(view: TitleEmail): String {
         return view.secondDetailView.text.toString()
     }

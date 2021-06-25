@@ -35,8 +35,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:alertText='@{"올바른 형식의 이메일을 입력해주세요."}'
-                    app:firstDetail="@{vm.localPart}"
-                    app:secondDetail="@{vm.domain}"
+                    app:firstDetail="@={vm.localPart}"
+                    app:secondDetail="@={vm.domain}"
                     app:firstDetailHint='@{"이메일"}'
                     app:secondDetailHint='@{"선택하세요."}'
                     app:layout_constraintEnd_toEndOf="parent"
@@ -45,7 +45,6 @@
                     app:subTitle='@{"프리랜서일 경우 시공하시는 분의 이름을 입력해주세요."}'
                     app:subTitleVisible="@{true}"
                     app:title='@{"대표자명을 입력해주세요."}'
-
                     />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>

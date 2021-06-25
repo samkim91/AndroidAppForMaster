@@ -42,11 +42,11 @@ class ProfileImageCard @JvmOverloads constructor(
     var imageUrl: String? = null
         set(value) {
             field = value
-            if (value != null) {
+            if (!value.isNullOrEmpty()) {
                 newBadgeVisible = false
                 binding.subTitle.visibility = View.GONE
 
-                binding.imageContainer.isVisible = !value.isNullOrEmpty()
+                binding.imageContainer.isVisible = true
                 binding.image.setImageUrl(value)
             }
         }

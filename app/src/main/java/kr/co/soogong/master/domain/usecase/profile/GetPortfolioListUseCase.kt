@@ -8,10 +8,10 @@ import javax.inject.Inject
 
 @Reusable
 class GetPortfolioListUseCase @Inject constructor(
-    private val getMasterFromLocalUseCase: GetMasterFromLocalUseCase,
+    private val getProfileFromLocalUseCase: GetProfileFromLocalUseCase,
 ) {
     operator fun invoke(type: String): Single<List<PortfolioDto>> {
-        return getMasterFromLocalUseCase().map { profile ->
+        return getProfileFromLocalUseCase().map { profile ->
             when(type) {
                 PortfolioCodeTable.code -> profile.basicInformation?.portfolios
                 else -> profile.basicInformation?.priceByProjects

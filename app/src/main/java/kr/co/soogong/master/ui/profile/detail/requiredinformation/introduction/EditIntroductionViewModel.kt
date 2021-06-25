@@ -5,28 +5,33 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import kr.co.soogong.master.domain.usecase.profile.GetIntroductionUseCase
-import kr.co.soogong.master.domain.usecase.profile.SaveIntroductionUseCase
+import kr.co.soogong.master.data.dto.profile.MasterDto
+import kr.co.soogong.master.data.model.profile.Profile
+import kr.co.soogong.master.domain.usecase.profile.GetProfileFromLocalUseCase
+import kr.co.soogong.master.domain.usecase.profile.SaveMasterUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class EditIntroductionViewModel @Inject constructor(
-    private val getIntroductionUseCase: GetIntroductionUseCase,
-    private val saveIntroductionUseCase: SaveIntroductionUseCase,
+    private val getProfileFromLocalUseCase: GetProfileFromLocalUseCase,
+    private val saveMasterUseCase: SaveMasterUseCase,
 ) : BaseViewModel() {
+    private val _profile = MutableLiveData<Profile>()
+
     val introduction = MutableLiveData("")
 
     fun requestIntroduction() {
         Timber.tag(TAG).d("requestIntroduction: ")
 
-        getIntroductionUseCase()
+        getProfileFromLocalUseCase()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
-                onSuccess = { response ->
-                    introduction.value = response
+                onSuccess = { profile ->
+                    _profile.value = profile
+                    introduction.value = profile.requiredInformation?.introduction
                 },
                 onError = {
                     setAction(GET_INTRODUCTION_FAILED)
@@ -37,8 +42,12 @@ class EditIntroductionViewModel @Inject constructor(
     fun saveIntroduction() {
         Timber.tag(TAG).d("saveIntroduction: ")
         introduction.value?.let {
-            saveIntroductionUseCase(
-                briefIntroduction = it
+            saveMasterUseCase(
+                MasterDto(
+                    id = _profile.value?.id,
+                    uid = _profile.value?.uid,
+                    introduction = introduction.value
+                )
             ).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(

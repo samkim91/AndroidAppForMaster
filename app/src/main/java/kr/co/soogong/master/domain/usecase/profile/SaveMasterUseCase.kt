@@ -4,18 +4,16 @@ import dagger.Reusable
 import io.reactivex.Single
 import kr.co.soogong.master.data.dao.profile.MasterDao
 import kr.co.soogong.master.data.dto.profile.MasterDto
-import kr.co.soogong.master.domain.usecase.auth.GetMasterUidFromSharedUseCase
 import kr.co.soogong.master.network.profile.ProfileService
 import javax.inject.Inject
 
 @Reusable
-class GetMasterUseCase @Inject constructor(
-    private val masterDao: MasterDao,
+class SaveMasterUseCase @Inject constructor(
     private val profileService: ProfileService,
-    private val getMasterUidFromSharedUseCase: GetMasterUidFromSharedUseCase,
+    private val masterDao: MasterDao,
 ) {
-    operator fun invoke(): Single<MasterDto> {
-        return profileService.getMasterByUid(getMasterUidFromSharedUseCase())
+    operator fun invoke(masterDto: MasterDto): Single<MasterDto> {
+        return profileService.saveMaster(masterDto)
             .doOnSuccess {
                 masterDao.insert(it)
             }

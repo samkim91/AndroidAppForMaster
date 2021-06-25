@@ -36,6 +36,9 @@ data class Profile(
 
     @SerializedName("basicInformation")
     val basicInformation: BasicInformation?,
+
+    @SerializedName("requiredInformation")
+    val requiredInformation: RequiredInformation?,
 ) : Parcelable {
     companion object {
         fun fromMasterDto(masterDto: MasterDto): Profile {
@@ -49,19 +52,8 @@ data class Profile(
                 myPageUrl = HttpContract.MY_PAGE_URL + masterDto.uid,
                 isPublic = masterDto.isPublic,
                 basicInformation = BasicInformation.fromMasterDto(masterDto),
+                requiredInformation = RequiredInformation.fromMasterDto(masterDto)
             )
         }
-
-//        val NULL_PROFILE = Profile(
-//            id = 0,
-//            uid = "",
-//            tel = "",
-//            representativeName = "",
-//            subscriptionPlan = "",
-//            myReview = MyReview.NULL_MY_REVIEW,
-//            myPageUrl = "",
-//            isPublic = false,
-//            basicInformation = BasicInformation.NULL_BASIC_INFORMATION,
-//        )
     }
 }

@@ -159,10 +159,11 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
             if (!value?.businessUnitInformation?.businessType.isNullOrEmpty()) insertedCount++
             if (!value?.warrantyInformation?.warrantyPeriod.isNullOrEmpty()) insertedCount++
             if (!value?.career.isNullOrEmpty()) insertedCount++
-            if (!value?.ownerName.isNullOrEmpty()) insertedCount++
             if (!value?.tel.isNullOrEmpty()) insertedCount++
+            if (!value?.ownerName.isNullOrEmpty()) insertedCount++
             if (!value?.majors.isNullOrEmpty()) insertedCount++
-//            if(!value?.address.isNullOrEmpty()) insertedCount++
+            if (!value?.companyAddress?.roadAddress.isNullOrEmpty()) insertedCount++
+            if (value?.serviceArea != null) insertedCount++
         }
 
         val percentage = insertedCount / totalCount * 100

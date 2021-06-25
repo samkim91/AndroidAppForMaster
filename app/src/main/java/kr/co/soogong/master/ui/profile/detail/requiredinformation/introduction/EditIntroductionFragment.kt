@@ -36,7 +36,11 @@ class EditIntroductionFragment : BaseFragment<FragmentEditIntroductionBinding>(
             lifecycleOwner = viewLifecycleOwner
 
             defaultButton.setOnClickListener {
-                viewModel.saveIntroduction()
+                viewModel.introduction.observe(viewLifecycleOwner, {
+                    introduction.alertVisible = it.length < 10
+                })
+
+                if (!introduction.alertVisible) viewModel.saveIntroduction()
             }
         }
     }
