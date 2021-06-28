@@ -7,15 +7,13 @@ import javax.inject.Inject
 
 class GetDoneEstimationListUseCase @Inject constructor(
     private val getRequirementListUseCase: GetRequirementListUseCase,
+    private val getRequirementListFromLocalUseCase: GetRequirementListFromLocalUseCase,
 ) {
-    operator fun invoke(): Single<List<RequirementCard>> {
-        return getRequirementListUseCase(listOf(
-            RequirementStatus.Done.toCode(),
-            RequirementStatus.Closed.toCode(),
-            RequirementStatus.CanceledByClient.toCode(),
-            RequirementStatus.CanceledByMaster.toCode(),
-            RequirementStatus.Canceled.toCode(),
-            RequirementStatus.Impossible.toCode()
-        ))
+    operator fun invoke(statusArray: List<String>): Single<List<RequirementCard>> {
+        return if(statusArray.size < 4) {         // 필터를 사용하는 경우에는 로컬에서 가져옴.
+            getRequirementListFromLocalUseCase(statusArray)
+        } else {
+            getRequirementListUseCase(statusArray)
+        }
     }
 }

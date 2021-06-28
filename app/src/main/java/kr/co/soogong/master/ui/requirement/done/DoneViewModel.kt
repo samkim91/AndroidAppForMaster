@@ -24,49 +24,38 @@ class DoneViewModel @Inject constructor(
     val doneList: LiveData<List<RequirementCard>>
         get() = _doneList
 
-    fun requestList() {
-        Timber.tag(TAG).d("requestList: ")
-        getDoneEstimationListUseCase()
+    fun requestList(index: Int = 0) {
+        Timber.tag(TAG).d("onFilterChange: $index")
+
+        getDoneEstimationListUseCase(
+            when (index) {
+                1 -> listOf(RequirementStatus.Done.toCode())
+                2 -> listOf(RequirementStatus.Closed.toCode())
+                3 -> listOf(
+                    RequirementStatus.Canceled.toCode(),
+                    RequirementStatus.CanceledByClient.toCode(),
+                    RequirementStatus.CanceledByMaster.toCode()
+                )
+                else -> listOf(
+                    RequirementStatus.Done.toCode(),
+                    RequirementStatus.Closed.toCode(),
+                    RequirementStatus.Canceled.toCode(),
+                    RequirementStatus.CanceledByClient.toCode(),
+                    RequirementStatus.CanceledByMaster.toCode(),
+                    RequirementStatus.Impossible.toCode()
+                )
+            }
+        )
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
                 onSuccess = {
                     Timber.tag(TAG).d("requestList successfully: $it")
                     _doneList.postValue(it)
-                    sendEvent(BADGE_UPDATE, it.count())
+                    if (index == 0) sendEvent(BADGE_UPDATE, it.count())
                 },
                 onError = {
                     Timber.tag(TAG).d("requestList failed: $it")
-                    setAction(REQUEST_LIST_FAILED)
-                    _doneList.postValue(emptyList())
-                }
-            ).addToDisposable()
-    }
-
-    fun onFilterChange(index: Int) {
-        Timber.tag(TAG).d("onFilterChange: $index")
-
-        getDoneEstimationListUseCase()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeBy(
-                onSuccess = { list ->
-                    when (index) {
-                        1 -> {
-                            _doneList.postValue(list.filter { it.status == RequirementStatus.Done })
-                        }
-                        2 -> {
-                            _doneList.postValue(list.filter { it.status == RequirementStatus.Closed })
-                        }
-                        3 -> {
-                            _doneList.postValue(list.filter { it.status == RequirementStatus.Canceled || it.status == RequirementStatus.CanceledByClient || it.status == RequirementStatus.CanceledByMaster })
-                        }
-                        else -> {
-                            _doneList.postValue(list)
-                        }
-                    }
-                },
-                onError = {
                     setAction(REQUEST_LIST_FAILED)
                     _doneList.postValue(emptyList())
                 }
