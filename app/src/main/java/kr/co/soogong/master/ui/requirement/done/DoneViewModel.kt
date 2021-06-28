@@ -88,6 +88,7 @@ class DoneViewModel @Inject constructor(
             .subscribeBy(
                 onSuccess = {
                     Timber.tag(TAG).d("ASK_FOR_REVIEW_SUCCEEDED: $it")
+                    requestList()
                     setAction(ASK_FOR_REVIEW_SUCCESSFULLY)
                 },
                 onError = {
