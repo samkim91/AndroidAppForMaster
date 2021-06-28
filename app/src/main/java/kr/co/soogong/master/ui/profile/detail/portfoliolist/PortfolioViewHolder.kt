@@ -17,11 +17,15 @@ class PortfolioViewHolder(
             data = portfolioDto
 
             setDeleteButtonClickListener {
-                leftButtonClickListener(portfolioDto.id)
+                portfolioDto.id?.let {
+                    leftButtonClickListener(it)
+                }
             }
 
             setEditButtonClickListener {
-                rightButtonClickListener(portfolioDto.id)
+                portfolioDto.id?.let {
+                    rightButtonClickListener(it)
+                }
             }
 
             executePendingBindings()

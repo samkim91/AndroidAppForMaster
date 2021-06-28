@@ -39,9 +39,9 @@ class AppModule {
         val cacheSize = 32 * 1024 * 1024L
         val client = OkHttpClient.Builder()
             .cache(Cache(httpCacheDirectory, cacheSize))
-            .connectTimeout(10, TimeUnit.SECONDS)
-            .readTimeout(20, TimeUnit.SECONDS)
-            .writeTimeout(20, TimeUnit.SECONDS)
+            .connectTimeout(20, TimeUnit.SECONDS)
+            .readTimeout(30, TimeUnit.SECONDS)
+            .writeTimeout(30, TimeUnit.SECONDS)
             .retryOnConnectionFailure(true)
             .addInterceptor(
                 if (BuildConfig.DEBUG) {
@@ -81,7 +81,7 @@ class AppModule {
             .client(okHttpClient)
             .baseUrl(
                 if (BuildConfig.DEBUG)
-                    HttpContract.DEV_URL
+                    HttpContract.LOCAL_URL
                 else
                     HttpContract.PROD_URL
             )

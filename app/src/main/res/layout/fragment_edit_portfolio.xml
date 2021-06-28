@@ -43,6 +43,7 @@
                     app:alertText='@{"필수 정보입니다."}'
                     app:content="@={vm.title}"
                     app:hintText='@{"해당 시공의 제목을 작성해주세요."}'
+                    app:setMaxLength="@{300}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"

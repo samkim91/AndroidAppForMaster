@@ -31,6 +31,8 @@ object HttpContract {
     const val MY_PAGE_URL = "https://soogong.co.kr/master/"
     const val GET_MASTER_BY_UID = "master/find-by-uid"
     const val SAVE_MASTER = "master/save"
+    const val SAVE_PORTFOLIO = "master/portfolio/save"
+
     //endregion
 
     //region MyPage
