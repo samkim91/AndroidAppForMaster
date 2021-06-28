@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.CompoundButton
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.isVisible
 import kr.co.soogong.master.databinding.ViewTitleSwitchcompatBinding
 
 class TitleSwitchCompat @JvmOverloads constructor(
@@ -30,6 +31,15 @@ class TitleSwitchCompat @JvmOverloads constructor(
         get() {
             field = binding.switchCompat.isChecked
             return field
+        }
+
+    var subtitle: String? = ""
+        set(value) {
+            field = value
+            if(!value.isNullOrEmpty()) {
+                binding.subtitle.isVisible = true
+                binding.subtitle.text = value
+            }
         }
 
     var underLine: Boolean = true

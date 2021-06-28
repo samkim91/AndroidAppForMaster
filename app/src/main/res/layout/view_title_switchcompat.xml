@@ -5,15 +5,15 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="56dp">
+        android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/title"
             style="@style/medium_text_style.medium"
             android:layout_width="wrap_content"
-            android:layout_height="20dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_17"
             android:textColor="@color/primary_text_color"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="앱 푸시 알림" />
@@ -24,19 +24,33 @@
             android:layout_height="wrap_content"
             android:checked="true"
             android:thumb="@drawable/thumb"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@id/title"
+            app:layout_constraintBottom_toBottomOf="@id/subtitle"
             app:track="@drawable/track" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/subtitle"
+            style="@style/tiny_small_text_style.medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_616161"
+            android:layout_marginTop="@dimen/gap_4"
+            android:visibility="gone"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title"
+            tools:text="기타 설명" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/line"
             android:layout_width="0dp"
             android:layout_height="@dimen/line_height"
+            android:layout_marginTop="@dimen/gap_17"
             android:background="@color/line_color"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/subtitle" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
