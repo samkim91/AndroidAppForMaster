@@ -32,16 +32,11 @@ class DoneViewModel @Inject constructor(
                 1 -> listOf(RequirementStatus.Done.toCode())
                 2 -> listOf(RequirementStatus.Closed.toCode())
                 3 -> listOf(
-                    RequirementStatus.Canceled.toCode(),
-                    RequirementStatus.CanceledByClient.toCode(),
-                    RequirementStatus.CanceledByMaster.toCode()
+                    // TODO: 2021/06/28 추가해야함 ... request 보낼때 canceledYn을 같이 보내도록..
                 )
                 else -> listOf(
                     RequirementStatus.Done.toCode(),
                     RequirementStatus.Closed.toCode(),
-                    RequirementStatus.Canceled.toCode(),
-                    RequirementStatus.CanceledByClient.toCode(),
-                    RequirementStatus.CanceledByMaster.toCode(),
                     RequirementStatus.Impossible.toCode()
                 )
             }
