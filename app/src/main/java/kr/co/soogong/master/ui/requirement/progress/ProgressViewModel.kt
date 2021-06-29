@@ -23,16 +23,26 @@ class ProgressViewModel @Inject constructor(
     val progressList: LiveData<List<RequirementCard>>
         get() = _progressList
 
-    fun requestList() {
-        Timber.tag(TAG).d("requestList: ")
-        getProgressEstimationListUseCase()
+    fun requestList(index: Int = 0) {
+        Timber.tag(TAG).d("requestList: $index")
+
+        getProgressEstimationListUseCase(
+            when (index) {
+                1 -> listOf(RequirementStatus.Repairing.toCode())
+                2 -> listOf(RequirementStatus.RequestFinish.toCode())
+                else -> listOf(
+                    RequirementStatus.Repairing.toCode(),
+                    RequirementStatus.RequestFinish.toCode()
+                )
+            }
+        )
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
                 onSuccess = {
                     Timber.tag(TAG).d("requestList successfully: $it")
+                    if (index == 0) sendEvent(BADGE_UPDATE, it.count())
                     _progressList.postValue(it)
-                    sendEvent(BADGE_UPDATE, it.count())
                 },
                 onError = {
                     Timber.tag(TAG).d("requestList failed: $it")
@@ -41,34 +51,6 @@ class ProgressViewModel @Inject constructor(
                 }
             ).addToDisposable()
     }
-
-    fun onFilterChange(index: Int) {
-        Timber.tag(TAG).d("onFilterChange: $index")
-
-        getProgressEstimationListUseCase()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeBy(
-                onSuccess = { list ->
-                    when (index) {
-                        1 -> {
-                            _progressList.postValue(list.filter { it.status == RequirementStatus.Repairing })
-                        }
-                        2 -> {
-                            _progressList.postValue(list.filter { it.status == RequirementStatus.RequestFinish })
-                        }
-                        else -> {
-                            _progressList.postValue(list)
-                        }
-                    }
-                },
-                onError = {
-                    setAction(REQUEST_LIST_FAILED)
-                    _progressList.postValue(emptyList())
-                }
-            ).addToDisposable()
-    }
-
 
     fun callToCustomer(estimationId: Int, phoneNumber: String) {
         Timber.tag(TAG).d("callToCustomer: $estimationId / $phoneNumber")

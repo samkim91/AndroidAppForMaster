@@ -16,7 +16,7 @@ data class MasterConfigDto(
     @SerializedName("configGroupName")
     val configGroupName: String?,
 
-    @SerializedName("code")
+    @SerializedName("configCode")
     val code: String?,
 
     @SerializedName("name")

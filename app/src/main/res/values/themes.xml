@@ -81,6 +81,23 @@
         <item name="android:fontFamily">@font/bold</item>
     </style>
 
+    <style name="tiny_small_text_style">
+        <item name="android:textSize">@dimen/text_tiny_small_size</item>
+    </style>
+
+    <style name="tiny_small_text_style.medium" parent="tiny_small_text_style">
+        <item name="android:fontFamily">@font/medium</item>
+    </style>
+
+    <style name="tiny_small_text_style.regular" parent="tiny_small_text_style">
+        <item name="android:fontFamily">@font/regular</item>
+    </style>
+
+    <style name="tiny_small_text_style.bold" parent="tiny_small_text_style">
+        <item name="android:fontFamily">@font/bold</item>
+    </style>
+
+
     <style name="small_text_style">
         <item name="android:textSize">@dimen/text_small_size</item>
     </style>

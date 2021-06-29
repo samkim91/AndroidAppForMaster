@@ -47,38 +47,24 @@ sealed class RequirementStatus {
         override fun getIntroductionText(): String = "고객이 리뷰를 남겼어요"
     }
 
-    object CanceledByClient : RequirementStatus() {
-        override fun toString(): String = "시공취소"
-        override fun toCode(): String = "CanceledByClient"
-        override fun toInt(): Int = 302
-        override fun getIntroductionText(): String = ""
-    }
-
-    object CanceledByMaster : RequirementStatus() {
-        override fun toString(): String = "시공취소"
-        override fun toCode(): String = "CanceledByMaster"
-        override fun toInt(): Int = 303
-        override fun getIntroductionText(): String = ""
-    }
-
     object Canceled : RequirementStatus() {
         override fun toString(): String = "시공취소"
         override fun toCode(): String = "Canceled"
-        override fun toInt(): Int = 304
+        override fun toInt(): Int = 302
         override fun getIntroductionText(): String = ""
     }
 
     object Impossible : RequirementStatus() {
         override fun toString(): String = "견적불가"
         override fun toCode(): String = "Impossible"
-        override fun toInt(): Int = 305
+        override fun toInt(): Int = 303
         override fun getIntroductionText(): String = ""
     }
 
     object Failed : RequirementStatus() {
         override fun toString(): String = "매칭실패"
         override fun toCode(): String = "Failed"
-        override fun toInt(): Int = 306
+        override fun toInt(): Int = 304
         override fun getIntroductionText(): String = ""
     }
 
@@ -94,8 +80,6 @@ sealed class RequirementStatus {
                 // 완료탭
                 Done.toCode() -> Done
                 Closed.toCode() -> Closed
-                CanceledByClient.toCode() -> CanceledByClient
-                CanceledByMaster.toCode() -> CanceledByMaster
                 Canceled.toCode() -> Canceled
                 Impossible.toCode() -> Impossible
                 else -> Failed

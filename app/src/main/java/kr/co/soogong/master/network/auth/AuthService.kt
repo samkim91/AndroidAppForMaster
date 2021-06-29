@@ -1,7 +1,7 @@
 package kr.co.soogong.master.network.auth
 
 import io.reactivex.Single
-import kr.co.soogong.master.data.dto.Response
+import kr.co.soogong.master.data.dto.auth.FirebaseTokenDto
 import kr.co.soogong.master.data.dto.profile.MasterDto
 import retrofit2.Retrofit
 import javax.inject.Inject
@@ -24,11 +24,7 @@ class AuthService @Inject constructor(
         return authInterface.checkUserExistent(id)
     }
 
-    fun updateFCMToken(keycode: String?, fcmKey: String?): Single<Response> {
-        val data = HashMap<String, String?>()
-        data["keycode"] = keycode
-        data["key"] = fcmKey
-
-        return authInterface.updateFCMToken(data)
+    fun saveFCMToken(firebaseTokenDto: FirebaseTokenDto): Single<FirebaseTokenDto> {
+        return authInterface.saveFCMToken(firebaseTokenDto)
     }
 }

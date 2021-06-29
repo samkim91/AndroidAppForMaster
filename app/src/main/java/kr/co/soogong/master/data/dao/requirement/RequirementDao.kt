@@ -9,7 +9,7 @@ import kr.co.soogong.master.data.dto.requirement.estimation.EstimationDto
 @Dao
 interface RequirementDao {
     @Query("SELECT * FROM Requirement WHERE status In (:status)")
-    fun getListByStatus(status: List<String>): Maybe<List<RequirementDto>?>
+    fun getListByStatus(status: List<String>): Single<List<RequirementDto>?>
 
     @Query("SELECT * FROM Requirement WHERE id = :id")
     fun getItem(id: Int): Maybe<RequirementDto>
@@ -25,6 +25,9 @@ interface RequirementDao {
 
     @Delete
     fun remove(requirement: RequirementDto)
+
+    @Query("DELETE FROM Requirement WHERE status In (:status)")
+    fun removeByStatus(status: List<String>)
 
     @Query("DELETE FROM Requirement")
     fun removeAll()

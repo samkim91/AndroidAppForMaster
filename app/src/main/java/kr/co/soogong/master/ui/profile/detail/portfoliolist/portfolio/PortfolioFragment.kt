@@ -50,7 +50,7 @@ class PortfolioFragment : BaseFragment<FragmentEditPortfolioBinding>(
                     with(defaultButton) {
                         text = getString(R.string.writing_done)
                         setOnClickListener {
-                            viewModel.savePortfolio(-1)
+                            viewModel.savePortfolio()
                         }
                     }
                 }
@@ -59,7 +59,7 @@ class PortfolioFragment : BaseFragment<FragmentEditPortfolioBinding>(
                     with(defaultButton) {
                         text = getString(R.string.modifying_done)
                         setOnClickListener {
-                            viewModel.savePortfolio(portfolioId)
+                            viewModel.savePortfolio()
                         }
                     }
                 }
