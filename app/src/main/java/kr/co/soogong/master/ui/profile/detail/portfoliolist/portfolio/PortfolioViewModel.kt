@@ -3,6 +3,7 @@ package kr.co.soogong.master.ui.profile.detail.portfoliolist.portfolio
 import android.net.Uri
 import android.view.View
 import androidx.core.net.toUri
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -21,6 +22,7 @@ class PortfolioViewModel @Inject constructor(
     private val savePortfolioUseCase: SavePortfolioUseCase,
     private val getPortfolioUseCase: GetPortfolioUseCase
 ) : BaseViewModel() {
+    val id = MutableLiveData(-1)
     val title = MutableLiveData("")
     val imageBeforeJob = MutableLiveData(Uri.EMPTY)
     val imageAfterJob = MutableLiveData(Uri.EMPTY)
@@ -33,6 +35,7 @@ class PortfolioViewModel @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
                 onSuccess = { portfolio ->
+                    id.postValue(portfolio.id)
                     title.postValue(portfolio.title)
                     imageBeforeJob.postValue(portfolio.beforeRepairImageId?.toUri())
                     imageAfterJob.postValue(portfolio.afterRepairImageId?.toUri())
@@ -42,15 +45,15 @@ class PortfolioViewModel @Inject constructor(
             ).addToDisposable()
     }
 
-    fun savePortfolio(portfolioId: Int) {
-        Timber.tag(TAG).d("savePortfolio: $portfolioId")
+    fun savePortfolio() {
+        Timber.tag(TAG).d("savePortfolio: ${id.value}")
         savePortfolioUseCase(
             portfolio = PortfolioDto(
-                id = portfolioId,
-                title = title.value!!,
+                id = if (id.value == -1) null else id.value,
+                title = title.value,
                 description = description.value,
                 type = PortfolioCodeTable.code,
-                beforeRepairImageId = imageBeforeJob.value.toString(),  // TODO: 2021/06/22 이미지 업로드로 변경해야함 ...
+                beforeRepairImageId = imageBeforeJob.value.toString(),
                 afterRepairImageId = imageAfterJob.value.toString(),
             )
         ).subscribeOn(Schedulers.io())
@@ -75,6 +78,5 @@ class PortfolioViewModel @Inject constructor(
         const val SAVE_PORTFOLIO_SUCCESSFULLY = "SAVE_PORTFOLIO_SUCCESSFULLY"
         const val SAVE_PORTFOLIO_FAILED = "SAVE_PORTFOLIO_FAILED"
         const val GET_PORTFOLIO_FAILED = "GET_PORTFOLIO_FAILED"
-
     }
 }

@@ -55,6 +55,7 @@
     <string name="alarm_page_name">알림 설정</string>
     <string name="alarm_info_alarm_push_label">정보 수신</string>
     <string name="alarm_marketing_alarm_push_label">마케팅 수신</string>
+    <string name="introduction_alarm_text">견적문의 등 의무적으로 안내되어야 하는 정보성 내용 및 일부 혜택성 정보는 수신동의 여부와 무관하게 제공합니다.</string>
 
     <!--  Notice  -->
     <string name="notice_page_name">공지사항</string>

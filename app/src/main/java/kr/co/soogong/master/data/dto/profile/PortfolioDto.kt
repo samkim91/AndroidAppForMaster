@@ -7,10 +7,10 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class PortfolioDto(
     @SerializedName("id")
-    val id: Int,
+    val id: Int?,
 
     @SerializedName("title")
-    val title: String,
+    val title: String?,
 
     @SerializedName("description")
     val description: String? = null,

@@ -6,80 +6,77 @@ import androidx.lifecycle.MutableLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import kr.co.soogong.master.domain.usecase.mypage.GetAlarmStatusUseCase
-import kr.co.soogong.master.domain.usecase.mypage.SaveAlarmStatusUseCase
+import kr.co.soogong.master.data.dto.profile.MasterDto
+import kr.co.soogong.master.domain.usecase.profile.GetMasterUseCase
+import kr.co.soogong.master.domain.usecase.profile.SaveMasterUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class AlarmViewModel @Inject constructor(
-    private val getAlarmStatusUseCase: GetAlarmStatusUseCase,
-    private val saveAlarmStatusUseCase: SaveAlarmStatusUseCase
+    private val getMasterUseCase: GetMasterUseCase,
+    private val saveMasterUseCase: SaveMasterUseCase,
 ) : BaseViewModel() {
-    private val _appPushStatus = MutableLiveData(false)
-    val appPushStatus: LiveData<Boolean>
-        get() = _appPushStatus
+    private val _masterDto = MutableLiveData<MasterDto>()
 
-    fun clickedAppPush(v: CompoundButton, isChecked: Boolean) {
-        Timber.tag(TAG).d("clickedAppPush: $isChecked")
-        _appPushStatus.postValue(isChecked)
-        setAlarmStatus("push", isChecked)
+    private val _marketingPush = MutableLiveData(false)
+    val marketingPush: LiveData<Boolean>
+        get() = _marketingPush
+
+    private val _marketingPushAtNight = MutableLiveData(false)
+    val marketingPushAtNight: LiveData<Boolean>
+        get() = _marketingPushAtNight
+
+    fun changeMarketingPush(v: CompoundButton, isChecked: Boolean) {
+        Timber.tag(TAG).d("changeMarketingPush: $isChecked")
+        _marketingPush.postValue(isChecked)
+        saveAlarmStatus(MARKETING, isChecked)
     }
 
-    private val _kakaoStatus = MutableLiveData(false)
-    val kakaoStatus: LiveData<Boolean>
-        get() = _kakaoStatus
-
-    fun clickedKakao(v: CompoundButton, isChecked: Boolean) {
-        Timber.tag(TAG).d("clickedKakao: $isChecked")
-        _kakaoStatus.postValue(isChecked)
-        setAlarmStatus("kakao", isChecked)
+    fun changeMarketingPushAtNight(v: CompoundButton, isChecked: Boolean) {
+        Timber.tag(TAG).d("changeMarketingPushAtNight: $isChecked")
+        _marketingPushAtNight.postValue(isChecked)
+        saveAlarmStatus(MARKETING_AT_NIGHT, isChecked)
     }
 
-    private val _smsStatus = MutableLiveData(false)
-    val smsStatus: LiveData<Boolean>
-        get() = _smsStatus
-
-    fun clickedSMS(v: CompoundButton, isChecked: Boolean) {
-        Timber.tag(TAG).d("clickedSMS: $isChecked")
-        _smsStatus.postValue(isChecked)
-        setAlarmStatus("sms", isChecked)
-    }
-
-    fun getAlarmStatus() {
-        getAlarmStatusUseCase()
+    fun requestAlarmStatus() {
+        getMasterUseCase()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({ map ->
-                if (map.containsKey("kakao")) {
-                    _kakaoStatus.postValue(map["kakao"])
-                }
-                if (map.containsKey("push")) {
-                    _appPushStatus.postValue(map["push"])
-                }
-                if (map.containsKey("sms")) {
-                    _smsStatus.postValue(map["sms"])
-                }
+            .subscribe({ masterDto ->
+                Timber.tag(TAG).w("requestAlarmStatus successfully: $masterDto")
+                _masterDto.value = masterDto
+                _marketingPush.postValue(masterDto.marketingPush)
+                _marketingPushAtNight.postValue(masterDto.marketingPushAtNight)
             }, {
-                Timber.tag(TAG).w("getAlarm: $it")
+                Timber.tag(TAG).w("requestAlarmStatus failed: $it")
             })
             .addToDisposable()
     }
 
-    private fun setAlarmStatus(type: String, isChecked: Boolean) {
-        saveAlarmStatusUseCase(type, isChecked)
+    private fun saveAlarmStatus(type: String, isChecked: Boolean) {
+        saveMasterUseCase(
+            MasterDto(
+                id = _masterDto.value?.id,
+                uid = _masterDto.value?.uid,
+                marketingPush = if (type == MARKETING) isChecked else null,
+                marketingPushAtNight = if (type == MARKETING_AT_NIGHT) isChecked else null,
+            )
+        )
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-
+                Timber.tag(TAG).w("saveAlarmStatus successfully: $it")
             }, {
-                Timber.tag(TAG).w("setAlarmStatus: $it")
+                Timber.tag(TAG).w("saveAlarmStatus failed: $it")
             })
             .addToDisposable()
     }
 
     companion object {
         private const val TAG = "AlarmViewModel"
+        private const val MARKETING = "MARKETING"
+        private const val MARKETING_AT_NIGHT = "MARKETING_AT_NIGHT"
     }
 }

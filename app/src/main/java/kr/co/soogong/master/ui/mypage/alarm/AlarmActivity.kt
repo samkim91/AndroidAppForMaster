@@ -19,7 +19,7 @@ class AlarmActivity : BaseActivity<ActivityAlarmBinding>(
         super.onCreate(savedInstanceState)
         Timber.tag(TAG).d("onCreate: ")
         initLayout()
-        viewModel.getAlarmStatus()
+        viewModel.requestAlarmStatus()
     }
 
     override fun initLayout() {

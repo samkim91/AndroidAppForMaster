@@ -2,7 +2,7 @@ package kr.co.soogong.master.network.auth
 
 import io.reactivex.Single
 import kr.co.soogong.master.contract.HttpContract
-import kr.co.soogong.master.data.dto.Response
+import kr.co.soogong.master.data.dto.auth.FirebaseTokenDto
 import kr.co.soogong.master.data.dto.profile.MasterDto
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -20,7 +20,6 @@ interface AuthInterface {
     @GET(HttpContract.IS_USER_EXIST)
     fun checkUserExistent(@Query("id") id: String): Single<Boolean>
 
-    @POST(HttpContract.FCM_UPDATE)
-    fun updateFCMToken(@Body body: HashMap<String, String?>): Single<Response>
-
+    @POST(HttpContract.SAVE_FCM_TOKEN)
+    fun saveFCMToken(@Body firebaseTokenDto: FirebaseTokenDto): Single<FirebaseTokenDto>
 }

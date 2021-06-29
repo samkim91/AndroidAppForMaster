@@ -1,15 +1,15 @@
 package kr.co.soogong.master.contract
 
 object HttpContract {
-//    const val LOCAL_URL = "http://192.168.0.50:8080/"       // Myeonghwan's local
-    const val LOCAL_URL = "http://192.168.0.93:8080/"     // Jihun's local
+    const val LOCAL_URL = "http://192.168.0.50:8080/"       // Myeonghwan's local
+//    const val LOCAL_URL = "http://192.168.0.93:8080/"     // Jihun's local
     const val DEV_URL =
         "http://web-backend-springboot-LB-dev-112855016.ap-northeast-2.elb.amazonaws.com/"
     const val PROD_URL = "https://api2.soogong.co.kr/"
 
     //region Auth
     const val IS_USER_EXIST = "auth/user-exist"
-    const val FCM_UPDATE = "api/v1/branches/update_reg_id"  // TODO: 2021/06/10 무슨 용도인지 알아보고 추가해야함.
+    const val SAVE_FCM_TOKEN = "firebase/save-token"
     //endregion
 
     //region Category
@@ -31,6 +31,8 @@ object HttpContract {
     const val MY_PAGE_URL = "https://soogong.co.kr/master/"
     const val GET_MASTER_BY_UID = "master/find-by-uid"
     const val SAVE_MASTER = "master/save"
+    const val SAVE_PORTFOLIO = "master/portfolio/save"
+
     //endregion
 
     //region MyPage

@@ -185,7 +185,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                     // 상태 : 시공취소
                     // view : 취소 사유, 나의 제안 내용
                     // footer button : none
-                    RequirementStatus.CanceledByClient, RequirementStatus.CanceledByMaster, RequirementStatus.Canceled -> {
+                    RequirementStatus.Canceled -> {
                         repairGroup.visibility = View.VISIBLE
                         bindRepairData(requirement?.estimationDto)
                         bindEstimationData(requirement?.estimationDto)

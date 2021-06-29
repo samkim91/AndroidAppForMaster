@@ -27,46 +27,45 @@ class ReceivedViewModel @Inject constructor(
     val receivedList: LiveData<List<RequirementCard>>
         get() = _receivedList
 
-    fun requestList() {
-        Timber.tag(TAG).d("requestList: ")
-        getReceivedRequirementListUseCase()
+//    fun requestList() {
+//        Timber.tag(TAG).d("requestList: ")
+//        getReceivedRequirementListUseCase()
+//            .subscribeOn(Schedulers.io())
+//            .observeOn(AndroidSchedulers.mainThread())
+//            .subscribeBy(
+//                onSuccess = {
+//                    Timber.tag(TAG).d("requestList successfully: $it")
+//                    _receivedList.postValue(it)
+//                    sendEvent(BADGE_UPDATE, it.count())
+//                },
+//                onError = {
+//                    Timber.tag(TAG).d("requestList failed: $it")
+//                    setAction(REQUEST_LIST_FAILED)
+//                    _receivedList.postValue(emptyList())
+//                }
+//            ).addToDisposable()
+//    }
+
+    fun requestList(index: Int = 0) {
+        Timber.tag(TAG).d("requestList: $index")
+
+        getReceivedRequirementListUseCase(
+            when(index){
+                1 -> listOf(RequirementStatus.Requested.toCode())
+                2 -> listOf(RequirementStatus.Estimated.toCode())
+                else -> listOf(RequirementStatus.Requested.toCode(), RequirementStatus.Estimated.toCode())
+            }
+        )
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
                 onSuccess = {
                     Timber.tag(TAG).d("requestList successfully: $it")
+                    if(index == 0) sendEvent(BADGE_UPDATE, it.count())
                     _receivedList.postValue(it)
-                    sendEvent(BADGE_UPDATE, it.count())
                 },
                 onError = {
                     Timber.tag(TAG).d("requestList failed: $it")
-                    setAction(REQUEST_LIST_FAILED)
-                    _receivedList.postValue(emptyList())
-                }
-            ).addToDisposable()
-    }
-
-    fun onFilterChange(index: Int) {
-        Timber.tag(TAG).d("onFilterChange: $index")
-
-        getReceivedRequirementListUseCase()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeBy(
-                onSuccess = { list ->
-                    when (index) {
-                        1 -> {
-                            _receivedList.postValue(list.filter { it.status == RequirementStatus.Requested })
-                        }
-                        2 -> {
-                            _receivedList.postValue(list.filter { it.status == RequirementStatus.Estimated })
-                        }
-                        else -> {
-                            _receivedList.postValue(list)
-                        }
-                    }
-                },
-                onError = {
                     setAction(REQUEST_LIST_FAILED)
                     _receivedList.postValue(emptyList())
                 }
