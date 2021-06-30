@@ -126,6 +126,8 @@
                 android:layout_height="@dimen/my_page_notice_badge_height"
                 android:layout_marginStart="@dimen/my_page_notice_badge_margin_start"
                 android:background="@drawable/badge_background"
+                android:visibility="gone"
+                bind:notice_list_new_visible="@{vm.noticeList}"
                 app:layout_constraintBottom_toBottomOf="@id/notice_title"
                 app:layout_constraintStart_toEndOf="@id/notice_title"
                 app:layout_constraintTop_toTopOf="@id/notice_title">
@@ -189,7 +191,7 @@
                 app:layout_constraintTop_toBottomOf="@id/notice_title"
                 bind:notice_list="@{vm.noticeList}"
                 tools:itemCount="3"
-                tools:listitem="@layout/view_holder_notice_mypage_item" />
+                tools:listitem="@layout/view_holder_notice_in_mypage_item" />
 
             <kr.co.soogong.master.ui.widget.SettingsButton
                 android:id="@+id/button_setting_alarm"

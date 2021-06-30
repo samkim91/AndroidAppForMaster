@@ -12,7 +12,7 @@ class NoticeViewHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
     fun bind(
         notice: Notice,
-        clickListener: (Notice) -> Unit
+        clickListener: (Int) -> Unit
     ) {
         binding.run {
             data = notice
@@ -24,7 +24,7 @@ class NoticeViewHolder(
             }
 
             root.setOnClickListener {
-                clickListener(notice)
+                clickListener(notice.id)
             }
         }
         binding.executePendingBindings()

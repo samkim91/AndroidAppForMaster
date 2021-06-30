@@ -36,14 +36,13 @@ object HttpContract {
     //endregion
 
     //region MyPage
-    const val GET_NOTICE = "api/v1/boards/notice"
+    const val GET_NOTICE_LIST = "board/find-all-by-type"
+    const val GET_NOTICE = "board/find-by-id"
     const val GET_ALARMS = "api/v1/branches/get_alarm"
     const val SET_ALARMS = "api/v1/branches/set_alarm"
     //endregion
 
     // TODO.. 아래 HTTP request의 경우, 카카오톡 웹뷰에서 바로 request가 나가서, API server를 거치지 않고 있음. 수정이 되면 다시 바꿔줘야함.
-    const val SEND_ESTIMATION_MESSAGE = "https://partner.soogong.co.kr/estimations/sc"
-    const val END_ESTIMATE = "https://partner.soogong.co.kr/estimations/execute"
     const val CALL_TO_CUSTOMER = "https://partner.soogong.co.kr/estimations/calltocustomer"
     const val ASK_FOR_REVIEW = "https://partner.soogong.co.kr/estimations/askforreview"
     //endregion
