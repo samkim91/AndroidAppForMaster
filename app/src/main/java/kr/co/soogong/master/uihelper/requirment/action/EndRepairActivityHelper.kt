@@ -22,7 +22,7 @@ object EndRepairActivityHelper {
         return intent.getBundleExtra(BUNDLE_KEY)?.getInt(REQUIREMENT_ID, 0) ?: 0
     }
 
-    fun getRequirementIdBySaveState(savedStateHandle: SavedStateHandle): Int {
+    fun getRequirementIdFromSavedState(savedStateHandle: SavedStateHandle): Int {
         return savedStateHandle.get<Bundle>(BUNDLE_KEY)?.getInt(REQUIREMENT_ID) ?: 0
     }
 }

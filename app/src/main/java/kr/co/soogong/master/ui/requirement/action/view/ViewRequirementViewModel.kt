@@ -27,7 +27,7 @@ class ViewRequirementViewModel @Inject constructor(
 ) : BaseViewModel() {
     // Note : activity 에서 viewModel 로 데이터 넘기는 법. savedStateHandle 에서 가져온다.
     private val requirementId =
-        ViewRequirementActivityHelper.getRequirementIdBySaveState(savedStateHandle)
+        ViewRequirementActivityHelper.getRequirementIdFromSavedState(savedStateHandle)
 
     private val _requirement = MutableLiveData<RequirementDto>()
     val requirement: LiveData<RequirementDto>

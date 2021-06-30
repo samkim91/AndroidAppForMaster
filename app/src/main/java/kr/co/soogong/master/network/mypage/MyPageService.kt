@@ -2,6 +2,7 @@ package kr.co.soogong.master.network.mypage
 
 import com.google.gson.JsonObject
 import io.reactivex.Single
+import kr.co.soogong.master.data.dto.mypage.NoticeDto
 import kr.co.soogong.master.data.model.mypage.Notice
 import retrofit2.Retrofit
 import javax.inject.Inject
@@ -11,14 +12,12 @@ class MyPageService @Inject constructor(
 ) {
     private val myPageInterface = retrofit.create(MyPageInterface::class.java)
 
-    fun getNoticeList(master: String = "free"): Single<List<Notice>> {
-        return myPageInterface.getNoticeList(master).map { list ->
-            val ret = ArrayList<Notice>()
-            for (item in list) {
-                ret.add(Notice.fromJson(item))
-            }
-            return@map ret
-        }
+    fun getNoticeList(typeCode: String): Single<List<NoticeDto>> {
+        return myPageInterface.getNoticeList(typeCode)
+    }
+
+    fun getNotice(id: Int): Single<NoticeDto> {
+        return myPageInterface.getNotice(id)
     }
 
     fun getAlarmStatus(keycode: String?): Single<HashMap<String, Boolean>> {

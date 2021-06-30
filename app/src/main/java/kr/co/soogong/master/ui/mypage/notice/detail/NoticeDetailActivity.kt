@@ -1,19 +1,19 @@
 package kr.co.soogong.master.ui.mypage.notice.detail
 
 import android.os.Bundle
+import androidx.activity.viewModels
+import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.model.mypage.Notice
 import kr.co.soogong.master.databinding.ActivityNoticeDetailBinding
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.uihelper.mypage.notice.detail.NoticeDetailActivityHelper
 import timber.log.Timber
 
+@AndroidEntryPoint
 class NoticeDetailActivity : BaseActivity<ActivityNoticeDetailBinding>(
     R.layout.activity_notice_detail
 ) {
-    private val noticeData: Notice by lazy {
-        NoticeDetailActivityHelper.getNoticeData(intent)
-    }
+    private val viewModel: NoticeDetailViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,7 +25,7 @@ class NoticeDetailActivity : BaseActivity<ActivityNoticeDetailBinding>(
         Timber.tag(TAG).d("initLayout: ")
 
         bind {
-            data = noticeData
+            vm = viewModel
             lifecycleOwner = this@NoticeDetailActivity
 
             with(actionBar) {
@@ -35,6 +35,11 @@ class NoticeDetailActivity : BaseActivity<ActivityNoticeDetailBinding>(
                 }
             }
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        viewModel.requestNotice()
     }
 
     companion object {

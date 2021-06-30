@@ -27,25 +27,6 @@ class ReceivedViewModel @Inject constructor(
     val receivedList: LiveData<List<RequirementCard>>
         get() = _receivedList
 
-//    fun requestList() {
-//        Timber.tag(TAG).d("requestList: ")
-//        getReceivedRequirementListUseCase()
-//            .subscribeOn(Schedulers.io())
-//            .observeOn(AndroidSchedulers.mainThread())
-//            .subscribeBy(
-//                onSuccess = {
-//                    Timber.tag(TAG).d("requestList successfully: $it")
-//                    _receivedList.postValue(it)
-//                    sendEvent(BADGE_UPDATE, it.count())
-//                },
-//                onError = {
-//                    Timber.tag(TAG).d("requestList failed: $it")
-//                    setAction(REQUEST_LIST_FAILED)
-//                    _receivedList.postValue(emptyList())
-//                }
-//            ).addToDisposable()
-//    }
-
     fun requestList(index: Int = 0) {
         Timber.tag(TAG).d("requestList: $index")
 

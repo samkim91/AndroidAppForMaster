@@ -1,4 +1,4 @@
-package kr.co.soogong.master.data.dto.requirement
+package kr.co.soogong.master.data.dao.requirement
 
 import androidx.room.TypeConverter
 import com.google.gson.Gson

@@ -45,11 +45,16 @@ class MyPageViewModel @Inject constructor(
         getNoticeListUseCase()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                _noticeList.postValue(it.sortedByDescending { it.date }.takeLast(3))
-            }, {
-                Timber.tag(TAG).w("getNoticeList: $it")
-            })
+            .subscribeBy(
+                onError =
+                {
+                    Timber.tag(TAG).w("getNoticeList: $it")
+                },
+                onNext = { list ->
+                    _noticeList.postValue(list.take(3))
+                },
+                onComplete = {}
+            )
             .addToDisposable()
     }
 

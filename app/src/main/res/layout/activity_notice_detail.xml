@@ -7,8 +7,8 @@
     <data>
 
         <variable
-            name="data"
-            type="kr.co.soogong.master.data.model.mypage.Notice" />
+            name="vm"
+            type="kr.co.soogong.master.ui.mypage.notice.detail.NoticeDetailViewModel" />
     </data>
 
     <LinearLayout
@@ -39,7 +39,7 @@
                     android:layout_marginTop="@dimen/notice_detail_title_margin_top"
                     android:ellipsize="end"
                     android:lines="2"
-                    android:text="@{data.title}"
+                    android:text="@{vm.notice.title}"
                     android:textColor="@color/text_basic_color"
                     app:layout_constrainedWidth="true"
                     app:layout_constraintBottom_toTopOf="@id/notice_date"
@@ -57,7 +57,7 @@
                     android:textColor="@color/text_primary_color"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/notice_title"
-                    bind:to_date_string="@{data.date}"
+                    bind:to_date_string="@{vm.notice.date}"
                     tools:text="2020. 8. 26" />
 
                 <androidx.appcompat.widget.AppCompatImageView
@@ -77,7 +77,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/notice_detail_content_margin_top"
                     android:lineSpacingExtra="@dimen/notice_detail_content_line_spacing"
-                    android:text="@{data.content}"
+                    android:text="@{vm.notice.content}"
                     android:textColor="@color/text_basic_color"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

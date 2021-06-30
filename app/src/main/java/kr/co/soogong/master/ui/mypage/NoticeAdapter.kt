@@ -5,14 +5,14 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import kr.co.soogong.master.data.model.mypage.Notice
 import kr.co.soogong.master.ui.mypage.notice.NoticeDiffUtil
-import kr.co.soogong.master.ui.mypage.notice.NoticeMyPageListViewHolder
-import kr.co.soogong.master.ui.mypage.notice.NoticeMyPageListViewHolder.Companion.NoticeMypageListView
+import kr.co.soogong.master.ui.mypage.notice.NoticeInMyPageViewHolder
+import kr.co.soogong.master.ui.mypage.notice.NoticeInMyPageViewHolder.Companion.NoticeMypageListView
 import kr.co.soogong.master.ui.mypage.notice.NoticeViewHolder
 import kr.co.soogong.master.ui.mypage.notice.NoticeViewHolder.Companion.NoticeView
 
 class NoticeAdapter(
     private val useView: Int,
-    private val clickListener: (Notice) -> Unit
+    private val clickListener: (Int) -> Unit
 ) : ListAdapter<Notice, RecyclerView.ViewHolder>(NoticeDiffUtil()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (useView) {
@@ -20,10 +20,10 @@ class NoticeAdapter(
                 NoticeViewHolder.create(parent)
             }
             NoticeMypageListView -> {
-                NoticeMyPageListViewHolder.create(parent)
+                NoticeInMyPageViewHolder.create(parent)
             }
             else -> {
-                NoticeMyPageListViewHolder.create(parent)
+                NoticeInMyPageViewHolder.create(parent)
             }
         }
     }
@@ -35,7 +35,7 @@ class NoticeAdapter(
             is NoticeViewHolder -> {
                 holder.bind(data, clickListener)
             }
-            is NoticeMyPageListViewHolder -> {
+            is NoticeInMyPageViewHolder -> {
                 holder.bind(data, clickListener)
             }
         }
