@@ -11,15 +11,15 @@ data class MasterConfigDto(
     val id: Int,
 
     @SerializedName("configGroupCode")
-    val configGroupCode: String?,
+    val groupCode: String?,
 
     @SerializedName("configGroupName")
-    val configGroupName: String?,
+    val groupName: String?,
 
     @SerializedName("configCode")
     val code: String?,
 
-    @SerializedName("name")
+    @SerializedName("configName")
     val name: String?,
 
     @SerializedName("value")

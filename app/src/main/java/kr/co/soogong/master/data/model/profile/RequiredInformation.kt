@@ -25,7 +25,7 @@ data class RequiredInformation(
         fun fromMasterDto(masterDto: MasterDto): RequiredInformation {
             return RequiredInformation(
                 introduction = masterDto.introduction,
-                representativeImages = emptyList(),  // TODO: 2021/06/15 get data from server
+                representativeImages = masterDto.shopImages,
                 businessUnitInformation = BusinessUnitInformation(
                     businessType = masterDto.businessType,
                     businessName = masterDto.businessName,

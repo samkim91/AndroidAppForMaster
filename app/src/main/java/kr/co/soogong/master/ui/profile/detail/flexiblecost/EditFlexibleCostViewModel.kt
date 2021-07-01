@@ -6,7 +6,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.model.profile.FlexibleCost
-import kr.co.soogong.master.domain.usecase.profile.GetFlexibleCostUseCase
+import kr.co.soogong.master.domain.usecase.profile.GetProfileUseCase
 import kr.co.soogong.master.domain.usecase.profile.SaveFlexibleCostUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import timber.log.Timber
@@ -14,8 +14,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class EditFlexibleCostViewModel @Inject constructor(
+    private val getProfileUseCase: GetProfileUseCase,
     private val saveFlexibleCostUseCase: SaveFlexibleCostUseCase,
-    private val getFlexibleCostUseCase: GetFlexibleCostUseCase
 ) : BaseViewModel() {
     val travelCost = MutableLiveData("")
     val craneUsage = MutableLiveData("")
@@ -25,16 +25,16 @@ class EditFlexibleCostViewModel @Inject constructor(
     fun requestFlexibleCosts() {
         Timber.tag(TAG).d("requestFlexibleCosts: ")
 
-        getFlexibleCostUseCase()
+        getProfileUseCase()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
-                onSuccess = { flexibleCost ->
-                    Timber.tag(TAG).d("requestFlexibleCosts Successfully: $flexibleCost")
-                    travelCost.postValue(flexibleCost.travelCost)
-                    craneUsage.postValue(flexibleCost.craneUsage)
-                    packageCost.postValue(flexibleCost.packageCost)
-                    otherCostInformation.postValue(flexibleCost.otherCostInformation)
+                onSuccess = { profile ->
+                    Timber.tag(TAG).d("requestFlexibleCosts Successfully: $profile")
+                    travelCost.postValue(profile.basicInformation?.flexibleCost?.travelCostValue)
+                    craneUsage.postValue(profile.basicInformation?.flexibleCost?.craneUsageValue)
+                    packageCost.postValue(profile.basicInformation?.flexibleCost?.packageCostValue)
+                    otherCostInformation.postValue(profile.basicInformation?.flexibleCost?.otherCostInformation)
                 },
                 onError = {
                     Timber.tag(TAG).d("requestFlexibleCosts Failed: $it")

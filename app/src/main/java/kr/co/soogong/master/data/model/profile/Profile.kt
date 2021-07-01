@@ -1,8 +1,6 @@
 package kr.co.soogong.master.data.model.profile
 
 import android.os.Parcelable
-import androidx.room.Entity
-import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 import kr.co.soogong.master.contract.HttpContract
@@ -48,7 +46,7 @@ data class Profile(
                 tel = masterDto.tel,
                 representativeName = if (!masterDto.shopName.isNullOrEmpty()) masterDto.shopName else masterDto.ownerName,
                 subscriptionPlan = masterDto.subscriptionPlan,
-                myReview = null, // TODO: 2021/06/15 추가 필요 masterDto.myReview,
+                myReview = MyReview.fromMasterDto(masterDto),
                 myPageUrl = HttpContract.MY_PAGE_URL + masterDto.uid,
                 isPublic = masterDto.isPublic,
                 basicInformation = BasicInformation.fromMasterDto(masterDto),

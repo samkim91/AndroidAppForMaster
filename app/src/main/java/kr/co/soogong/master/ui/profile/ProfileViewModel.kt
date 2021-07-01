@@ -37,7 +37,8 @@ class ProfileViewModel @Inject constructor(
                     Timber.tag(TAG).d("getMasterFailed: $it")
                     setAction(GET_PROFILE_FAILED)
                 }
-            ).addToDisposable()
+            )
+            .addToDisposable()
     }
 
     companion object {

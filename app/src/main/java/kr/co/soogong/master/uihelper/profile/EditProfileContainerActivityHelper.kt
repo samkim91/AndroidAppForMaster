@@ -35,6 +35,6 @@ object EditProfileContainerActivityHelper {
     }
 
     fun getItemId(intent: Intent): Int {
-        return intent.getBundleExtra(EXTRA_BUNDLE_KEY)?.getInt(EXTRA_INT_KEY, -1) ?: -1
+        return intent.getBundleExtra(EXTRA_BUNDLE_KEY)?.getInt(EXTRA_INT_KEY) ?: -1
     }
 }

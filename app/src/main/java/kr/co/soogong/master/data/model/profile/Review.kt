@@ -3,37 +3,36 @@ package kr.co.soogong.master.data.model.profile
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 import kr.co.soogong.master.data.dto.AttachmentDto
+import kr.co.soogong.master.data.dto.requirement.review.ReviewDto
+import java.util.*
 
 @Parcelize
 data class Review(
     val id: Int?,
     val recommendation: Int?,
-    val kindness: Int,
-    val quality: Int,
-    val affordability: Int,
-    val punctuality: Int,
-    val projectType: String,
-    val reviewContent: String,
-    val imageList: MutableList<AttachmentDto>,
-    val createdAt: String,
+    val kindness: Int?,
+    val quality: Int?,
+    val affordability: Int?,
+    val punctuality: Int?,
+    val projectType: String?,
+    val reviewContent: String?,
+    val imageList: MutableList<AttachmentDto>?,
+    val createdAt: Date?,
 ) : Parcelable {
     companion object {
-
-
-//        val TEST_REVIEW = Review(
-//            1,
-//            4,
-//            4,
-//            3,
-//            4,
-//            3,
-//            "욕실 위생도기 및 수전 설치/교체 시공",
-//            "너무 꼼꼼히 잘 해주셨어요. 다음에 또 부탁드리고 싶네요! 감사합니다.",
-//            arrayListOf(
-//                ImagePath.TEST_IMAGE_PATH,
-//                ImagePath.TEST_IMAGE_PATH,
-//                ),
-//            "2020.07.01"
-//        )
+        fun fromReviewDto(reviewDto: ReviewDto): Review {
+            return Review(
+                id = reviewDto.id,
+                recommendation = reviewDto.reviewScores?.find { reviewScore -> reviewScore.scoreCode == "Recommendation" }?.score?.toInt(),
+                kindness = reviewDto.reviewScores?.find { reviewScore -> reviewScore.scoreCode == "Kindness" }?.score?.toInt(),
+                quality = reviewDto.reviewScores?.find { reviewScore -> reviewScore.scoreCode == "Quality" }?.score?.toInt(),
+                affordability = reviewDto.reviewScores?.find { reviewScore -> reviewScore.scoreCode == "Affordability" }?.score?.toInt(),
+                punctuality = reviewDto.reviewScores?.find { reviewScore -> reviewScore.scoreCode == "Punctuality" }?.score?.toInt(),
+                projectType = reviewDto.projectType,
+                reviewContent = reviewDto.content,
+                imageList = reviewDto.attachments,
+                createdAt = reviewDto.createdAt,
+            )
+        }
     }
 }

@@ -17,5 +17,12 @@ interface ProfileInterface {
 
     @Multipart
     @POST(HttpContract.SAVE_PORTFOLIO)
-    fun savePortfolio(@Part("portfolioDto") portfolioDto: RequestBody, @Part attachments: List<MultipartBody.Part>): Single<PortfolioDto>
+    fun savePortfolio(
+        @Part("portfolioDto") portfolioDto: RequestBody,
+        @Part beforeImageFile: MultipartBody.Part?,
+        @Part afterImageFile: MultipartBody.Part?,
+    ): Single<PortfolioDto>
+
+    @GET(HttpContract.GET_PORTFOLIOS)
+    fun getPortfoliosByUid(@Query("uid") uid: String?): Single<List<PortfolioDto>>
 }

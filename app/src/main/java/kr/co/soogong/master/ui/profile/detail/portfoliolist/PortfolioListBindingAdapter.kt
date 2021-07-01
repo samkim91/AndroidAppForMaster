@@ -6,5 +6,5 @@ import kr.co.soogong.master.data.dto.profile.PortfolioDto
 
 @BindingAdapter("bind:item_list")
 fun RecyclerView.setList(items: List<PortfolioDto>?) {
-    (adapter as? PortfolioListAdapter)?.submitList(items ?: emptyList())
+    (adapter as? PortfolioListAdapter)?.submitList(items)
 }

@@ -7,7 +7,7 @@ import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.dto.profile.MasterDto
 import kr.co.soogong.master.data.model.profile.Profile
-import kr.co.soogong.master.domain.usecase.profile.GetProfileFromLocalUseCase
+import kr.co.soogong.master.domain.usecase.profile.GetProfileUseCase
 import kr.co.soogong.master.domain.usecase.profile.SaveMasterUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import timber.log.Timber
@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class EditOwnerNameViewModel @Inject constructor(
-    private val getProfileFromLocalUseCase: GetProfileFromLocalUseCase,
+    private val getProfileUseCase: GetProfileUseCase,
     private val saveMasterUseCase: SaveMasterUseCase,
 ) : BaseViewModel() {
     private val _profile = MutableLiveData<Profile>()
@@ -25,7 +25,7 @@ class EditOwnerNameViewModel @Inject constructor(
     fun requestOwnerName() {
         Timber.tag(TAG).d("requestOwnerName: ")
 
-        getProfileFromLocalUseCase()
+        getProfileUseCase()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(

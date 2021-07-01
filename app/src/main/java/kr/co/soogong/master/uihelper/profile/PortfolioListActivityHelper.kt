@@ -3,7 +3,9 @@ package kr.co.soogong.master.uihelper.profile
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import androidx.lifecycle.SavedStateHandle
 import kr.co.soogong.master.ui.profile.detail.portfoliolist.PortfolioListActivity
+import kr.co.soogong.master.uihelper.requirment.action.WriteEstimationActivityHelper
 
 object PortfolioListActivityHelper {
     const val PORTFOLIO = "포트폴리오 편집하기"
@@ -22,5 +24,9 @@ object PortfolioListActivityHelper {
 
     fun getPageName(intent: Intent): String {
         return intent.getBundleExtra(EXTRA_BUNDLE_KEY)?.getString(EXTRA_STRING_KEY, "") ?: ""
+    }
+
+    fun getPageNameFromSavedState(savedStateHandle: SavedStateHandle): String {
+        return savedStateHandle.get<Bundle>(EXTRA_BUNDLE_KEY)?.getString(EXTRA_STRING_KEY) ?: ""
     }
 }

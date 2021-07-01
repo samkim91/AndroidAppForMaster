@@ -184,7 +184,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/gap_12"
-            android:text="@{data.createdAt}"
+            bind:to_date_string="@{data.createdAt}"
             android:textColor="@color/text_primary_color"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/review_photo_list"

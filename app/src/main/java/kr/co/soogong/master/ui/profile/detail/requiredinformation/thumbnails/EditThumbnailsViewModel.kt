@@ -1,11 +1,12 @@
 package kr.co.soogong.master.ui.profile.detail.requiredinformation.thumbnails
 
 import android.net.Uri
+import androidx.core.net.toUri
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import kr.co.soogong.master.domain.usecase.profile.GetThumbnailsUseCase
+import kr.co.soogong.master.domain.usecase.profile.GetProfileUseCase
 import kr.co.soogong.master.domain.usecase.profile.SaveThumbnailsUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import kr.co.soogong.master.utility.ListLiveData
@@ -14,20 +15,24 @@ import javax.inject.Inject
 
 @HiltViewModel
 class EditThumbnailsViewModel @Inject constructor(
-    private val getThumbnailsUseCase: GetThumbnailsUseCase,
+    private val getProfileUseCase: GetProfileUseCase,
     private val saveThumbnailsUseCase: SaveThumbnailsUseCase
 ) : BaseViewModel() {
     val thumbnails = ListLiveData<Uri>()
 
     fun requestThumbnails() {
         Timber.tag(TAG).d("requestThumbnails: ")
-        getThumbnailsUseCase()
+        getProfileUseCase()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
-                onSuccess =
-                {
-                    thumbnails.addAll(it)
+                onSuccess = { profile ->
+                    Timber.tag(TAG).d("requestThumbnails successfully: $profile")
+                    profile.requiredInformation?.representativeImages?.map { attachmentDto ->
+                        attachmentDto.url?.toUri()!!
+                    }?.let {
+                        thumbnails.addAll(it)
+                    }
                 },
                 onError = {
                     setAction(GET_THUMBNAILS_FAILED)

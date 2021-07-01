@@ -50,7 +50,7 @@ class PriceByProjectFragment : BaseFragment<FragmentEditPriceByProjectBinding>(
                     with(defaultButton) {
                         text = getString(R.string.writing_done)
                         setOnClickListener {
-                            viewModel.savePriceByProject(-1)
+                            viewModel.savePriceByProject()
                         }
                     }
                 }
@@ -71,7 +71,7 @@ class PriceByProjectFragment : BaseFragment<FragmentEditPriceByProjectBinding>(
                                 !projectPrice.alertVisible ||
                                 ValidationHelper.isIntRange(viewModel.price.value!!)
                             ) {
-                                viewModel.savePriceByProject(priceByProjectId)
+                                viewModel.savePriceByProject()
                             }
                         }
                     }

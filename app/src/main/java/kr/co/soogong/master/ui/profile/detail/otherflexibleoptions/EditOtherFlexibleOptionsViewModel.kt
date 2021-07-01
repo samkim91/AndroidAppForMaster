@@ -5,7 +5,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.model.profile.OtherFlexibleOptions
-import kr.co.soogong.master.domain.usecase.profile.GetOtherFlexibleOptionsUseCase
+import kr.co.soogong.master.domain.usecase.profile.GetProfileUseCase
 import kr.co.soogong.master.domain.usecase.profile.SaveOtherFlexibleOptionsUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import kr.co.soogong.master.utility.ListLiveData
@@ -15,21 +15,25 @@ import javax.inject.Inject
 @HiltViewModel
 class EditOtherFlexibleOptionsViewModel @Inject constructor(
     private val saveOtherFlexibleOptionsUseCase: SaveOtherFlexibleOptionsUseCase,
-    private val getOtherFlexibleOptionsUseCase: GetOtherFlexibleOptionsUseCase
+    private val getProfileUseCase: GetProfileUseCase,
 ) : BaseViewModel() {
     val otherFlexibleOptions = ListLiveData<String>()
 
     fun requestOtherFlexibleOptions() {
         Timber.tag(TAG).d("requestOtherFlexibleOptions: ")
-        getOtherFlexibleOptionsUseCase()
+        getProfileUseCase()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
-                onSuccess = {
-                    otherFlexibleOptions.addAll(it.options)
+                onSuccess = { profile ->
+                    Timber.tag(TAG).d("requestOtherFlexibleOptions successfully: $profile")
+
+                    otherFlexibleOptions.addAll(profile.basicInformation?.otherFlexibleOptions?.options!!)
                 },
                 onError = { setAction(GET_OTHER_FLEXIBLE_OPTIONS_FAILED) }
             ).addToDisposable()
+
+
     }
 
     fun saveOtherFlexibleOptions() {
@@ -37,14 +41,20 @@ class EditOtherFlexibleOptionsViewModel @Inject constructor(
 
         otherFlexibleOptions.value?.let {
             saveOtherFlexibleOptionsUseCase(
-                OtherFlexibleOptions(
-                    it
-                )
+                OtherFlexibleOptions(it)
             ).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
-                    onSuccess = { setAction(SAVE_OTHER_FLEXIBLE_OPTIONS_SUCCESSFULLY) },
-                    onError = { setAction(SAVE_OTHER_FLEXIBLE_OPTIONS_FAILED) }
+                    onSuccess = {
+                        Timber.tag(TAG).d("saveOtherFlexibleOptions successfully: $it")
+
+                        setAction(SAVE_OTHER_FLEXIBLE_OPTIONS_SUCCESSFULLY)
+                    },
+                    onError = {
+                        Timber.tag(TAG).d("saveOtherFlexibleOptions successfully: $it")
+
+                        setAction(SAVE_OTHER_FLEXIBLE_OPTIONS_FAILED)
+                    }
                 ).addToDisposable()
         }
     }
