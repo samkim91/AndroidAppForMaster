@@ -8,8 +8,6 @@ import kr.co.soogong.master.databinding.ActivityEditProfileWithCardBinding
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.ui.dialog.popup.CustomDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData
-import kr.co.soogong.master.ui.profile.PortfolioCodeTable
-import kr.co.soogong.master.ui.profile.PriceByProjectCodeTable
 import kr.co.soogong.master.ui.profile.detail.portfoliolist.PortfolioListViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerActivityHelper
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.ADD_PORTFOLIO

@@ -3,17 +3,17 @@ package kr.co.soogong.master.data.model.profile
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 import kr.co.soogong.master.data.dto.profile.MasterConfigDto
-import kr.co.soogong.master.ui.profile.CraneUsageCodeTable
-import kr.co.soogong.master.ui.profile.OtherInfoCodeTable
-import kr.co.soogong.master.ui.profile.PackageCostCodeTable
-import kr.co.soogong.master.ui.profile.TravelCostCodeTable
 
 @Parcelize
 data class FlexibleCost(
-    val travelCost: String?,
-    val craneUsage: String?,
-    val packageCost: String?,
-    val otherCostInformation: String?,
+    val travelCostId: Int? = null,
+    val craneUsageId: Int? = null,
+    val packageCostId: Int? = null,
+    val otherCostInformationId: Int? = null,
+    val travelCost: String? = null,
+    val craneUsage: String? = null,
+    val packageCost: String? = null,
+    val otherCostInformation: String? = null,
     val travelCostValue: String? = null,
     val craneUsageValue: String? = null,
     val packageCostValue: String? = null,
@@ -23,12 +23,17 @@ data class FlexibleCost(
             val travelCostInDto = list?.find { masterConfigDto -> masterConfigDto.code == TravelCostCodeTable.code }
             val craneUsageInDto = list?.find { masterConfigDto -> masterConfigDto.code == CraneUsageCodeTable.code }
             val packageCostInDto = list?.find { masterConfigDto -> masterConfigDto.code == PackageCostCodeTable.code }
+            val otherCostInformationInDto = list?.find { masterConfigDto -> masterConfigDto.code == OtherInfoCodeTable.code }
 
             return FlexibleCost(
+                travelCostId = travelCostInDto?.id,
+                craneUsageId = craneUsageInDto?.id,
+                packageCostId = packageCostInDto?.id,
+                otherCostInformationId = otherCostInformationInDto?.id,
                 travelCost = travelCostInDto?.let { "${it.name} ${it.value}" },
                 craneUsage = craneUsageInDto?.let { "${it.name} ${it.value}" },
                 packageCost = packageCostInDto?.let { "${it.name} ${it.value}" },
-                otherCostInformation = list?.find { masterConfigDto -> masterConfigDto.code == OtherInfoCodeTable.code }?.value,
+                otherCostInformation = otherCostInformationInDto?.value,
                 travelCostValue = travelCostInDto?.value,
                 craneUsageValue = craneUsageInDto?.value,
                 packageCostValue = packageCostInDto?.value,

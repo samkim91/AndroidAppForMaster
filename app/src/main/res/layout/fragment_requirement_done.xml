@@ -62,7 +62,7 @@
             android:layout_marginEnd="@dimen/requirement_received_filter_margin_end"
             android:background="@drawable/shape_fill_gray_background_50"
             android:gravity="center_vertical"
-            android:onCheckedChanged="@{(group, id) -> vm.requestList(group.indexOfChild(group.findViewById(id)))}"
+            android:onCheckedChanged="@{(group, id) -> vm.onFilterChange(group.indexOfChild(group.findViewById(id)))}"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

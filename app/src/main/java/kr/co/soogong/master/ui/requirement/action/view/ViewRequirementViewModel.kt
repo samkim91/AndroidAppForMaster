@@ -10,6 +10,7 @@ import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.dto.requirement.RequirementDto
 import kr.co.soogong.master.data.dto.requirement.estimation.EstimationDto
 import kr.co.soogong.master.data.dto.requirement.repair.RepairDto
+import kr.co.soogong.master.data.model.profile.Review
 import kr.co.soogong.master.data.model.requirement.estimation.EstimationResponseCode
 import kr.co.soogong.master.domain.usecase.requirement.*
 import kr.co.soogong.master.ui.base.BaseViewModel
@@ -33,6 +34,10 @@ class ViewRequirementViewModel @Inject constructor(
     val requirement: LiveData<RequirementDto>
         get() = _requirement
 
+    private val _review = MutableLiveData<Review>()
+    val review: LiveData<Review>
+        get() = _review
+
     fun requestRequirement() {
         Timber.tag(TAG).d("requestRequirement: $requirementId")
         getRequirementUseCase(requirementId)
@@ -42,6 +47,9 @@ class ViewRequirementViewModel @Inject constructor(
                 onSuccess = {
                     Timber.tag(TAG).d("requestRequirement successfully: $it")
                     _requirement.value = it
+                    it.estimationDto?.repair?.review?.let { reviewDto ->
+                        _review.postValue(Review.fromReviewDto(reviewDto))
+                    }
                 },
                 onError = {
                     Timber.tag(TAG).d("requestRequirement failed: $it")

@@ -24,11 +24,19 @@ class DoneViewModel @Inject constructor(
     val doneList: LiveData<List<RequirementCard>>
         get() = _doneList
 
-    fun requestList(index: Int = 0) {
+    private val _index = MutableLiveData<Int>()
+
+    fun onFilterChange(index: Int) {
         Timber.tag(TAG).d("onFilterChange: $index")
+        _index.value = index
+        requestList()
+    }
+
+    fun requestList() {
+        Timber.tag(TAG).d("onFilterChange: ${_index.value}")
 
         getDoneEstimationListUseCase(
-            when (index) {
+            when (_index.value) {
                 1 -> listOf(RequirementStatus.Done.toCode())
                 2 -> listOf(RequirementStatus.Closed.toCode())
                 3 -> listOf(
@@ -47,7 +55,7 @@ class DoneViewModel @Inject constructor(
                 onSuccess = {
                     Timber.tag(TAG).d("requestList successfully: $it")
                     _doneList.postValue(it)
-                    if (index == 0) sendEvent(BADGE_UPDATE, it.count())
+                    if (_index.value == 0 || _index.value == null) sendEvent(BADGE_UPDATE, it.count())
                 },
                 onError = {
                     Timber.tag(TAG).d("requestList failed: $it")

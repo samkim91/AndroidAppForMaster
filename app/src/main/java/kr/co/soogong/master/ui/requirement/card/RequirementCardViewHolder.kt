@@ -170,15 +170,16 @@ class DoneViewHolder(
             }
 
             reviewButton.visibility = View.VISIBLE
+            reviewButton.setText(R.string.requirements_card_review_button)
+            reviewButton.isEnabled = true
 
             reviewButton.setOnClickListener {
                 rightButtonClickListener?.invoke(requirementCard.id, requirementCard)
             }
 
-            requirementCard.estimationDto?.repair?.requestReviewYn?.let { boolean ->
-                if (boolean) {
+            requirementCard.estimationDto?.repair?.requestReviewYn?.let { requestReviewYn ->
+                if (requestReviewYn) {
                     reviewButton.setText(R.string.ask_for_review_successful)
-                    reviewButton.setBackgroundResource(R.color.color_90E9BD)
                     reviewButton.isEnabled = false
                 }
             }

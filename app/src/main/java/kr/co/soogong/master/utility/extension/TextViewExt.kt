@@ -35,28 +35,5 @@ fun TextView.setPrice(price: Int?) {
     }
 }
 
-
-fun addTextView3(
-    viewGroup: ViewGroup,
-    context: Context,
-    message: String?
-) {
-    val contextWrapper =
-        ContextThemeWrapper(context, R.style.medium_text_style_regular)
-
-    val params = LinearLayout.LayoutParams(
-        ViewGroup.LayoutParams.MATCH_PARENT,
-        40.dp
-    )
-    params.setMargins(0, 8.dp, 0, 0)
-
-    val view = AppCompatTextView(contextWrapper).apply {
-        setTextColor(ResourcesCompat.getColor(resources, R.color.primary_text_color, null))
-        background =
-            ResourcesCompat.getDrawable(resources, R.drawable.shape_fill_white_background, null)
-        gravity = Gravity.CENTER
-        text = message
-    }
-
-    viewGroup.addView(view, params)
-}
+//@BindingAdapter("bind:set_review_score")
+//fun TextView.setReviewScore()
