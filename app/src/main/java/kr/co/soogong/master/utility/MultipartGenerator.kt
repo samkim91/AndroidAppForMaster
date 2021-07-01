@@ -20,18 +20,18 @@ object MultipartGenerator {
         return jsonDto.toRequestBody("application/json".toMediaTypeOrNull())
     }
 
-    fun createFile(uri: Uri): MultipartBody.Part {
+    fun createFile(key: String, uri: Uri): MultipartBody.Part {
         Timber.tag(TAG).d("createFile: $uri")
 
         val file = File(uri.path)
         val requestBody = file.asRequestBody("image/*".toMediaTypeOrNull())
 
-        return MultipartBody.Part.createFormData("attachments", file.name, requestBody)
+        return MultipartBody.Part.createFormData(key, file.name, requestBody)
     }
 
-    fun createFiles(uriList: List<Uri>): List<MultipartBody.Part> {
+    fun createFiles(key: String, uriList: List<Uri>): List<MultipartBody.Part> {
         return uriList.map { uri ->
-            createFile(uri)
+            createFile(key, uri)
         }
     }
 }

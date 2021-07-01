@@ -26,8 +26,6 @@ class ProjectViewModel @AssistedInject constructor(
         getProjectList()
     }
 
-//    fun getCheckedList() = list.value?.filter { it.checked }
-
     fun changeList(position: Int, project: Project) {
         val items = list.value?.toMutableList()
         items?.set(position, project)
@@ -36,7 +34,7 @@ class ProjectViewModel @AssistedInject constructor(
 
     private fun getProjectList() {
         Timber.tag(TAG).d("getProjectList: ")
-        getProjectListUseCase(category.id)
+        getProjectListUseCase(category.id!!)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({

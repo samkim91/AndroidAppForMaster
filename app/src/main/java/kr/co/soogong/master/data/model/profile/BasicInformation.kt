@@ -5,7 +5,6 @@ import kotlinx.parcelize.Parcelize
 import kr.co.soogong.master.data.dto.AttachmentDto
 import kr.co.soogong.master.data.dto.profile.MasterDto
 import kr.co.soogong.master.data.dto.profile.PortfolioDto
-import kr.co.soogong.master.ui.profile.*
 
 @Parcelize
 data class BasicInformation(

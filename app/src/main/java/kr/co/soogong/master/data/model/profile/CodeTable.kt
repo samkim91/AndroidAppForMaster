@@ -1,10 +1,8 @@
-package kr.co.soogong.master.ui.profile
+package kr.co.soogong.master.data.model.profile
 
 sealed class CodeTable {
     abstract val code: String
     abstract val inKorean: String
-    open val inEnglish: String = ""
-
 }
 
 object PortfolioCodeTable : CodeTable() {

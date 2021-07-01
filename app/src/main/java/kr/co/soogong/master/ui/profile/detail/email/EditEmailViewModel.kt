@@ -53,22 +53,18 @@ class EditEmailViewModel @Inject constructor(
     fun saveEmailInfo() {
         Timber.tag(TAG).d("saveEmailInfo: ")
 
-        localPart.value?.let { localPart ->
-            domain.value?.let { domain ->
-                saveMasterUseCase(
-                    MasterDto(
-                        id = _profile.value?.id,
-                        uid = _profile.value?.uid,
-                        email = "$localPart@$domain",
-                    )
-                ).subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribeBy(
-                        onSuccess = { setAction(SAVE_EMAIL_SUCCESSFULLY) },
-                        onError = { setAction(SAVE_EMAIL_FAILED) }
-                    ).addToDisposable()
-            }
-        }
+        saveMasterUseCase(
+            MasterDto(
+                id = _profile.value?.id,
+                uid = _profile.value?.uid,
+                email = "$localPart@$domain",
+            )
+        ).subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeBy(
+                onSuccess = { setAction(SAVE_EMAIL_SUCCESSFULLY) },
+                onError = { setAction(SAVE_EMAIL_FAILED) }
+            ).addToDisposable()
     }
 
     companion object {

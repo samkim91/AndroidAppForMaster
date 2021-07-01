@@ -244,13 +244,13 @@
             android:layout_width="0dp"
             android:layout_height="@dimen/requirement_card_button_default_height"
             android:layout_marginTop="@dimen/requirement_card_review_button_margin_top"
-            android:background="@drawable/shape_fill_green_background"
-            android:text="@string/requirements_card_review_button"
+            android:background="@drawable/default_rounded_button_selector"
             android:textColor="@color/basic_white"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/my_amount" />
+        <!-- endregion -->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

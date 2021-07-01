@@ -11,6 +11,7 @@ import kr.co.soogong.master.data.model.requirement.RequirementStatus
 import kr.co.soogong.master.domain.usecase.requirement.CallToCustomerUseCase
 import kr.co.soogong.master.domain.usecase.requirement.GetProgressEstimationListUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
+import kr.co.soogong.master.ui.requirement.done.DoneViewModel
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -23,11 +24,19 @@ class ProgressViewModel @Inject constructor(
     val progressList: LiveData<List<RequirementCard>>
         get() = _progressList
 
-    fun requestList(index: Int = 0) {
-        Timber.tag(TAG).d("requestList: $index")
+    private val _index = MutableLiveData<Int>()
+
+    fun onFilterChange(index: Int) {
+        Timber.tag(TAG).d("onFilterChange: $index")
+        _index.value = index
+        requestList()
+    }
+
+    fun requestList() {
+        Timber.tag(TAG).d("requestList: ${_index.value}")
 
         getProgressEstimationListUseCase(
-            when (index) {
+            when (_index.value) {
                 1 -> listOf(RequirementStatus.Repairing.toCode())
                 2 -> listOf(RequirementStatus.RequestFinish.toCode())
                 else -> listOf(
@@ -41,7 +50,7 @@ class ProgressViewModel @Inject constructor(
             .subscribeBy(
                 onSuccess = {
                     Timber.tag(TAG).d("requestList successfully: $it")
-                    if (index == 0) sendEvent(BADGE_UPDATE, it.count())
+                    if (_index.value == 0 || _index.value == null) sendEvent(BADGE_UPDATE, it.count())
                     _progressList.postValue(it)
                 },
                 onError = {

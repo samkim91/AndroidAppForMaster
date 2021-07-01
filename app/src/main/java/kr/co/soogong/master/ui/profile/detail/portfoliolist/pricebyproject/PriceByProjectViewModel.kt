@@ -10,7 +10,7 @@ import kr.co.soogong.master.domain.usecase.auth.GetMasterIdFromSharedUseCase
 import kr.co.soogong.master.domain.usecase.profile.GetPortfolioUseCase
 import kr.co.soogong.master.domain.usecase.profile.SavePortfolioUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
-import kr.co.soogong.master.ui.profile.PriceByProjectCodeTable
+import kr.co.soogong.master.data.model.profile.PriceByProjectCodeTable
 import timber.log.Timber
 import javax.inject.Inject
 

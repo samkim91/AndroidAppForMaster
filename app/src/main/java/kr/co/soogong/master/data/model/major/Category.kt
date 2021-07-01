@@ -4,17 +4,22 @@ import android.os.Parcelable
 import com.google.gson.JsonObject
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
+import kr.co.soogong.master.data.dto.profile.MajorDto
 
 @Parcelize
 data class Category(
     @SerializedName("id")
-    val id: Int,
+    val id: Int?,
 
     @SerializedName("name")
-    val name: String
+    val name: String?,
 ) : Parcelable {
     companion object {
-        val TEST_CATEGORY = Category(1, "새시")
-        val NULL_CATEGORY = Category(0, "")
+        fun fromMajorDto(majorDto: MajorDto?): Category {
+            return Category(
+                id = majorDto?.categoryId,
+                name = majorDto?.categoryNameEn,
+            )
+        }
     }
 }

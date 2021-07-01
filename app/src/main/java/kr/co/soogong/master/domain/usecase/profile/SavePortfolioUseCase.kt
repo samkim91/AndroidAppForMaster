@@ -16,10 +16,10 @@ class SavePortfolioUseCase @Inject constructor(
     operator fun invoke(portfolio: PortfolioDto): Single<PortfolioDto> {
         val portfolioDto = MultipartGenerator.createJson(portfolio)
         val beforeImageFile = portfolio.beforeImageUri?.let {
-            MultipartGenerator.createFile(it)
+            MultipartGenerator.createFile("beforeImageFile", it)
         }
         val afterImageFile = portfolio.afterImageUri?.let {
-            MultipartGenerator.createFile(it)
+            MultipartGenerator.createFile("afterImageFile", it)
         }
 
         return profileService.savePortfolio(portfolioDto, beforeImageFile, afterImageFile)
