@@ -22,18 +22,12 @@ class ProfileService @Inject constructor(
         return profileInterface.saveMaster(masterDto)
     }
 
-    fun savePortfolio(portfolioDto: RequestBody, attachments: List<MultipartBody.Part>): Single<PortfolioDto> {
-        return profileInterface.savePortfolio(portfolioDto, attachments)
+    fun savePortfolio(portfolioDto: RequestBody, beforeImageFile: MultipartBody.Part?, afterImageFile: MultipartBody.Part?): Single<PortfolioDto> {
+        return profileInterface.savePortfolio(portfolioDto, beforeImageFile, afterImageFile)
     }
 
-    fun savePriceByProject(masterId: String, priceByProject: PortfolioDto): Single<Response> {
-        val query = HashMap<String, String>()
-
-
-        return Single.just(Response.NULL_RESPONSE)
-        // Todo.. server 이후로 작업해야함
-        // return profileInterface.savePriceByProject(query)
+    fun getPortfoliosByUid(uid: String?): Single<List<PortfolioDto>> {
+        return profileInterface.getPortfoliosByUid(uid)
     }
-
 
 }

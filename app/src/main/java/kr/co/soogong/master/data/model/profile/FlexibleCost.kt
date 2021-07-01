@@ -14,14 +14,24 @@ data class FlexibleCost(
     val craneUsage: String?,
     val packageCost: String?,
     val otherCostInformation: String?,
+    val travelCostValue: String? = null,
+    val craneUsageValue: String? = null,
+    val packageCostValue: String? = null,
 ) : Parcelable {
     companion object {
         fun fromMasterConfigList(list: List<MasterConfigDto>?): FlexibleCost {
+            val travelCostInDto = list?.find { masterConfigDto -> masterConfigDto.code == TravelCostCodeTable.code }
+            val craneUsageInDto = list?.find { masterConfigDto -> masterConfigDto.code == CraneUsageCodeTable.code }
+            val packageCostInDto = list?.find { masterConfigDto -> masterConfigDto.code == PackageCostCodeTable.code }
+
             return FlexibleCost(
-                travelCost = list?.find { masterConfigDto -> masterConfigDto.code == TravelCostCodeTable.code }?.value,
-                craneUsage = list?.find { masterConfigDto -> masterConfigDto.code == CraneUsageCodeTable.code }?.value,
-                packageCost = list?.find { masterConfigDto -> masterConfigDto.code == PackageCostCodeTable.code }?.value,
+                travelCost = travelCostInDto?.let { "${it.name} ${it.value}" },
+                craneUsage = craneUsageInDto?.let { "${it.name} ${it.value}" },
+                packageCost = packageCostInDto?.let { "${it.name} ${it.value}" },
                 otherCostInformation = list?.find { masterConfigDto -> masterConfigDto.code == OtherInfoCodeTable.code }?.value,
+                travelCostValue = travelCostInDto?.value,
+                craneUsageValue = craneUsageInDto?.value,
+                packageCostValue = packageCostInDto?.value,
             )
         }
 
@@ -39,7 +49,5 @@ data class FlexibleCost(
             return ret
         }
 
-        val TEST_FLEXIBLE_COST = FlexibleCost("없어요", "엘리베이터 이용 불가시", "있어요", "test")
-        val NULL_FLEXIBLE_COST = FlexibleCost("", "", "", "")
     }
 }

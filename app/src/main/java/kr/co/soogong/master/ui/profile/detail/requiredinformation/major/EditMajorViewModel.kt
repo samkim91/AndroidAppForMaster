@@ -9,7 +9,7 @@ import kr.co.soogong.master.data.dto.profile.MajorDto
 import kr.co.soogong.master.data.dto.profile.MasterDto
 import kr.co.soogong.master.data.model.major.Major
 import kr.co.soogong.master.data.model.profile.Profile
-import kr.co.soogong.master.domain.usecase.profile.GetProfileFromLocalUseCase
+import kr.co.soogong.master.domain.usecase.profile.GetProfileUseCase
 import kr.co.soogong.master.domain.usecase.profile.SaveMasterUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import kr.co.soogong.master.utility.ListLiveData
@@ -18,7 +18,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class EditMajorViewModel @Inject constructor(
-    private val getProfileFromLocalUseCase: GetProfileFromLocalUseCase,
+    private val getProfileUseCase: GetProfileUseCase,
     private val saveMasterUseCase: SaveMasterUseCase,
 ) : BaseViewModel() {
     private val _profile = MutableLiveData<Profile>()
@@ -28,7 +28,7 @@ class EditMajorViewModel @Inject constructor(
     fun requestMajor() {
         Timber.tag(TAG).d("requestMajor: ")
 
-        getProfileFromLocalUseCase()
+        getProfileUseCase()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(

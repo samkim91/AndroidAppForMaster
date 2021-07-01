@@ -22,19 +22,10 @@ data class BasicInformation(
                 portfolios = masterDto.masterPortfolios?.filter { portfolioDto -> portfolioDto.type == PortfolioCodeTable.code },
                 priceByProjects = masterDto.masterPortfolios?.filter { portfolioDto -> portfolioDto.type == PriceByProjectCodeTable.code },
                 profileImage = masterDto.profileImage,
-                flexibleCost = FlexibleCost.fromMasterConfigList(masterDto.masterConfigs?.filter { masterConfigDto -> masterConfigDto.configGroupCode == FlexibleCostCodeTable.code }),
-                otherFlexibleOptions = OtherFlexibleOptions.fromMasterConfigList(masterDto.masterConfigs?.filter { masterConfigDto -> masterConfigDto.configGroupCode == OtherFlexibleOptionsCodeTable.code }),
+                flexibleCost = FlexibleCost.fromMasterConfigList(masterDto.masterConfigs?.filter { masterConfigDto -> masterConfigDto.groupCode == FlexibleCostCodeTable.code }),
+                otherFlexibleOptions = OtherFlexibleOptions.fromMasterConfigList(masterDto.masterConfigs?.filter { masterConfigDto -> masterConfigDto.groupCode == OtherFlexibleOptionsCodeTable.code }),
                 email = masterDto.email,
             )
         }
-
-        val NULL_BASIC_INFORMATION = BasicInformation(
-            profileImage = null,
-            portfolios = emptyList(),
-            priceByProjects = emptyList(),
-            flexibleCost = FlexibleCost.NULL_FLEXIBLE_COST,
-            otherFlexibleOptions = OtherFlexibleOptions.NULL_OTHER_FLEXIBLE_OPTIONS,
-            email = "",
-        )
     }
 }

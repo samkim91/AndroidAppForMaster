@@ -9,7 +9,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.model.profile.BusinessUnitInformation
-import kr.co.soogong.master.domain.usecase.profile.GetBusinessUnitInformationUseCase
+import kr.co.soogong.master.domain.usecase.profile.GetProfileUseCase
 import kr.co.soogong.master.domain.usecase.profile.SaveBusinessUnitInformationUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import timber.log.Timber
@@ -17,7 +17,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class EditBusinessUnitInformationViewModel @Inject constructor(
-    private val getBusinessUnitInformationUseCase: GetBusinessUnitInformationUseCase,
+    private val getProfileUseCase: GetProfileUseCase,
     private val saveBusinessUnitInformationUseCase: SaveBusinessUnitInformationUseCase,
 ) : BaseViewModel() {
     val businessType = MutableLiveData("")
@@ -29,20 +29,21 @@ class EditBusinessUnitInformationViewModel @Inject constructor(
 
     fun requestBusinessUnitInformation() {
         Timber.tag(TAG).d("requestBusinessUnitInformation: ")
-
-        getBusinessUnitInformationUseCase()
+        getProfileUseCase()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
-                onSuccess = { businessInformation ->
-                    businessType.postValue(businessInformation.businessType ?: "")
-                    if (businessInformation.businessType == "프리랜서") {
-                        birthday.postValue(businessInformation.businessNumber ?: "")
+                onSuccess = { profile ->
+                    Timber.tag(TAG).d("requestBusinessUnitInformation successfully: $profile")
+
+                    businessType.postValue(profile.requiredInformation?.businessUnitInformation?.businessType ?: "")
+                    if (profile.requiredInformation?.businessUnitInformation?.businessType == "프리랜서") {
+                        birthday.postValue(profile.requiredInformation?.businessUnitInformation?.businessNumber ?: "")
                     } else {
-                        businessName.postValue(businessInformation.businessName ?: "")
-                        shopName.postValue(businessInformation.shopName ?: "")
-                        businessRegistImage.postValue(businessInformation.businessRegistImage?.url?.toUri() ?: Uri.EMPTY)
-                        businessNumber.postValue(businessInformation.businessNumber ?: "")
+                        businessName.postValue(profile.requiredInformation?.businessUnitInformation?.businessName ?: "")
+                        shopName.postValue(profile.requiredInformation?.businessUnitInformation?.shopName ?: "")
+                        businessRegistImage.postValue(profile.requiredInformation?.businessUnitInformation?.businessRegistImage?.url?.toUri() ?: Uri.EMPTY)
+                        businessNumber.postValue(profile.requiredInformation?.businessUnitInformation?.businessNumber ?: "")
                     }
                 },
                 onError = { setAction(GET_BUSINESS_UNIT_INFORMATION_FAILED) }

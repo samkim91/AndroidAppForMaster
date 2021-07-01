@@ -2,20 +2,22 @@ package kr.co.soogong.master.domain.usecase.profile
 
 import dagger.Reusable
 import io.reactivex.Single
+import kr.co.soogong.master.data.dao.profile.MasterDao
 import kr.co.soogong.master.data.dto.profile.PortfolioDto
-import kr.co.soogong.master.ui.profile.PortfolioCodeTable
+import kr.co.soogong.master.domain.usecase.auth.GetMasterUidFromSharedUseCase
+import kr.co.soogong.master.network.profile.ProfileService
 import javax.inject.Inject
 
 @Reusable
 class GetPortfolioListUseCase @Inject constructor(
-    private val getProfileFromLocalUseCase: GetProfileFromLocalUseCase,
+    private val profileService: ProfileService,
+    private val getMasterUidFromSharedUseCase: GetMasterUidFromSharedUseCase,
+    private val masterDao: MasterDao,
 ) {
-    operator fun invoke(type: String): Single<List<PortfolioDto>> {
-        return getProfileFromLocalUseCase().map { profile ->
-            when(type) {
-                PortfolioCodeTable.code -> profile.basicInformation?.portfolios
-                else -> profile.basicInformation?.priceByProjects
+    operator fun invoke(): Single<List<PortfolioDto>> {
+        return profileService.getPortfoliosByUid(getMasterUidFromSharedUseCase())
+            .doOnSuccess {
+                masterDao.updatePortfolios(getMasterUidFromSharedUseCase(), it)
             }
-        }
     }
 }

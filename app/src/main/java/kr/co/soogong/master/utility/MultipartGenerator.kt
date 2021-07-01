@@ -1,5 +1,6 @@
 package kr.co.soogong.master.utility
 
+import android.net.Uri
 import com.google.gson.Gson
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -19,18 +20,18 @@ object MultipartGenerator {
         return jsonDto.toRequestBody("application/json".toMediaTypeOrNull())
     }
 
-    fun createFile(path: String): MultipartBody.Part {
-        Timber.tag(TAG).d("createFile: $path")
+    fun createFile(uri: Uri): MultipartBody.Part {
+        Timber.tag(TAG).d("createFile: $uri")
 
-        val file = File(path)
+        val file = File(uri.path)
         val requestBody = file.asRequestBody("image/*".toMediaTypeOrNull())
 
         return MultipartBody.Part.createFormData("attachments", file.name, requestBody)
     }
 
-    fun createFiles(pathList: List<String>): List<MultipartBody.Part> {
-        return pathList.map { path ->
-            createFile(path)
+    fun createFiles(uriList: List<Uri>): List<MultipartBody.Part> {
+        return uriList.map { uri ->
+            createFile(uri)
         }
     }
 }

@@ -3,6 +3,7 @@
 package kr.co.soogong.master.utility.extension
 
 import android.content.Context
+import android.icu.text.DecimalFormat
 import android.view.Gravity
 import android.view.ViewGroup
 import android.widget.LinearLayout
@@ -26,6 +27,14 @@ fun TextView.setDate(date: Date?) {
     val simpleDateFormat = SimpleDateFormat("yyyy. MM. dd")
     text = simpleDateFormat.format(date ?: System.currentTimeMillis())
 }
+
+@BindingAdapter("bind:set_price")
+fun TextView.setPrice(price: Int?) {
+    price?.let {
+        text = "${DecimalFormat("#,###").format(it)}원"
+    }
+}
+
 
 fun addTextView3(
     viewGroup: ViewGroup,
