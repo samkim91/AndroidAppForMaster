@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:bind="http://schemas.android.com/bind">
+    xmlns:bind="http://schemas.android.com/bind"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="kr.co.soogong.master.data.model.profile.FlexibleCost" />
 
         <variable
             name="vm"
@@ -27,10 +26,10 @@
                 android:layout_height="120dp"
                 android:layout_marginTop="78dp"
                 android:src="@drawable/ic_user_picture"
-                bind:image_url="@{vm.profile.basicInformation.profileImage.url}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                bind:image_url="@{vm.profile.basicInformation.profileImage.url}" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/user_name"
@@ -214,9 +213,9 @@
                     android:layout_marginBottom="@dimen/gap_24"
                     android:background="@drawable/shape_radius8_white_background"
                     android:elevation="@dimen/gap_4"
-                    app:chipGroupWithoutTitle="@{FlexibleCost.toList(vm.profile.basicInformation.flexibleCost)}"
-                    app:defaultButtonByList="@{FlexibleCost.toList(vm.profile.basicInformation.flexibleCost)}"
-                    app:detail="@{vm.profile.basicInformation.flexibleCost.otherCostInformation}"
+                    app:chipGroupWithoutTitle="@{vm.profile.basicInformation.flexibleCost}"
+                    app:defaultButtonByList="@{vm.profile.basicInformation.flexibleCost}"
+                    app:detail="@{vm.profile.basicInformation.flexibleCost}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/profile_image"
@@ -233,9 +232,9 @@
                     android:layout_marginEnd="@dimen/gap_20"
                     android:layout_marginBottom="@dimen/gap_24"
                     android:background="@drawable/shape_radius8_white_background"
-                    app:chipGroupWithoutTitle="@{vm.profile.basicInformation.otherFlexibleOptions.options}"
-                    app:defaultButtonByList="@{vm.profile.basicInformation.otherFlexibleOptions.options}"
                     android:elevation="@dimen/gap_4"
+                    app:chipGroupWithoutTitle="@{vm.profile.basicInformation.otherFlexibleOptions}"
+                    app:defaultButtonByList="@{vm.profile.basicInformation.otherFlexibleOptions}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/flexible_cost"

@@ -7,6 +7,9 @@ import androidx.fragment.app.viewModels
 import com.google.android.material.chip.Chip
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
+import kr.co.soogong.master.data.dto.profile.MasterConfigDto
+import kr.co.soogong.master.data.model.profile.CodeTable
+import kr.co.soogong.master.data.model.profile.OtherFlexibleOptionsCodeTable
 import kr.co.soogong.master.databinding.FragmentEditOtherFlexibleOptionsBinding
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.profile.detail.otherflexibleoptions.EditOtherFlexibleOptionsViewModel.Companion.GET_OTHER_FLEXIBLE_OPTIONS_FAILED
@@ -32,11 +35,12 @@ class EditOtherFlexibleOptionsFragment : BaseFragment<FragmentEditOtherFlexibleO
     override fun initLayout() {
         Timber.tag(TAG).d("initLayout: ")
 
+        initChips()
+
         bind {
             vm = viewModel
             lifecycleOwner = viewLifecycleOwner
 
-            initChips()
             defaultButton.setOnClickListener {
                 saveCheckedChips()
             }
@@ -63,11 +67,11 @@ class EditOtherFlexibleOptionsFragment : BaseFragment<FragmentEditOtherFlexibleO
         OtherFlexibleOptionsChipGroupHelper(layoutInflater, binding.otherOptionsChipGroup)
         viewModel.requestOtherFlexibleOptions()
         // 가져온 text들을 chip group에서 찾아서 selected 표시를 해준다.
-        if (viewModel.otherFlexibleOptions.getItemCount() > 0) {
-            viewModel.otherFlexibleOptions.value?.map { item ->
+        viewModel.otherFlexibleOptions.value?.let { masterConfigList ->
+            masterConfigList.map { masterConfig ->
                 binding.otherOptionsChipGroup.chipGroup.children.forEach {
                     val chip = it as? Chip
-                    if (chip?.text.toString() == item) chip?.isChecked = true
+                    if (chip?.text.toString() == masterConfig.name) chip?.isChecked = true
                 }
             }
         }
@@ -75,13 +79,20 @@ class EditOtherFlexibleOptionsFragment : BaseFragment<FragmentEditOtherFlexibleO
 
     private fun saveCheckedChips() {
         // 저장하기 위에, ListLiveData에 남아있는 선택값들을 클리어하고 UI에서 선택된 값들을 새로 set 해준다.
-        viewModel.otherFlexibleOptions.clear()
+        viewModel.otherFlexibleOptions.value = null
         val checkChipIds: List<Int> = binding.otherOptionsChipGroup.chipGroup.checkedChipIds
-        checkChipIds.forEach { chipId ->
+
+        viewModel.otherFlexibleOptions.value = checkChipIds.map { chipId ->
             val chipText = binding.otherOptionsChipGroup.chipGroup.findViewById<Chip>(chipId)?.text
-            chipText?.let {
-                viewModel.otherFlexibleOptions.add(it.toString())
-            }
+            chipText?.let { name ->
+                MasterConfigDto(
+                    id = viewModel.otherFlexibleOptions.value?.find { masterConfigDto -> masterConfigDto.name == name.toString() }?.id,
+                    groupCode = OtherFlexibleOptionsCodeTable.code,
+                    code = CodeTable.findCodeTableByKorean(name.toString()).code,
+                    name = name.toString(),
+                    value = "1"
+                )
+            }!!
         }
         viewModel.saveOtherFlexibleOptions()
     }
