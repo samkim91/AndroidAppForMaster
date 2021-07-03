@@ -129,10 +129,9 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
             onGranted = {
                 TedImagePicker.with(requireContext())
                     .buttonBackground(R.drawable.shape_fill_green_background)
-                    .start {
-                        // todo.. 업로드 하고 내려온 이미지를 보여주는 것으로 바꿔야함.
-                            uri ->
+                    .start { uri ->
                         viewModel.profileImage.value = uri
+                        viewModel.saveMasterProfileImage()
                     }
             },
             onDenied = {

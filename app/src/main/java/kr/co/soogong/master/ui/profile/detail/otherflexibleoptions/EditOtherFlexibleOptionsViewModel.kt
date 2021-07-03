@@ -6,6 +6,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.dto.profile.MasterConfigDto
+import kr.co.soogong.master.data.dto.profile.MasterDto
 import kr.co.soogong.master.data.model.profile.Profile
 import kr.co.soogong.master.domain.usecase.profile.GetProfileUseCase
 import kr.co.soogong.master.domain.usecase.profile.SaveMasterUseCase
@@ -42,23 +43,25 @@ class EditOtherFlexibleOptionsViewModel @Inject constructor(
     fun saveOtherFlexibleOptions() {
         Timber.tag(TAG).d("saveOtherFlexibleOptions: ${otherFlexibleOptions.value}")
 
-//        saveMasterUseCase(
-//            MasterDto(
-//                id = _profile.value?.id,
-//                uid = _profile.value?.uid,
-//
-//                ).subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribeBy(
-//                    onSuccess = {
-//                        Timber.tag(TAG).d("saveOtherFlexibleOptions successfully: $it")
-//                        setAction(SAVE_OTHER_FLEXIBLE_OPTIONS_SUCCESSFULLY)
-//                    },
-//                    onError = {
-//                        Timber.tag(TAG).d("saveOtherFlexibleOptions successfully: $it")
-//                        setAction(SAVE_OTHER_FLEXIBLE_OPTIONS_FAILED)
-//                    }
-//                ).addToDisposable()
+        saveMasterUseCase(
+            MasterDto(
+                id = _profile.value?.id,
+                uid = _profile.value?.uid,
+                masterConfigs = otherFlexibleOptions.value,
+            )
+        )
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeBy(
+                onSuccess = {
+                    Timber.tag(TAG).d("saveOtherFlexibleOptions successfully: $it")
+                    setAction(SAVE_OTHER_FLEXIBLE_OPTIONS_SUCCESSFULLY)
+                },
+                onError = {
+                    Timber.tag(TAG).d("saveOtherFlexibleOptions successfully: $it")
+                    setAction(SAVE_OTHER_FLEXIBLE_OPTIONS_FAILED)
+                }
+            ).addToDisposable()
     }
 
     companion object {

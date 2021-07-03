@@ -18,11 +18,20 @@ class ProfileService @Inject constructor(
         return profileInterface.getMasterByUid(uid)
     }
 
-    fun saveMaster(masterDto: MasterDto): Single<MasterDto> {
+    fun saveMaster(
+        masterDto: MasterDto,
+        profileImage: MultipartBody.Part?,
+        businessRegistImage: MultipartBody.Part?,
+        thumbnails: List<MultipartBody.Part>?
+    ): Single<MasterDto> {
         return profileInterface.saveMaster(masterDto)
     }
 
-    fun savePortfolio(portfolioDto: RequestBody, beforeImageFile: MultipartBody.Part?, afterImageFile: MultipartBody.Part?): Single<PortfolioDto> {
+    fun savePortfolio(
+        portfolioDto: RequestBody,
+        beforeImageFile: MultipartBody.Part?,
+        afterImageFile: MultipartBody.Part?
+    ): Single<PortfolioDto> {
         return profileInterface.savePortfolio(portfolioDto, beforeImageFile, afterImageFile)
     }
 
