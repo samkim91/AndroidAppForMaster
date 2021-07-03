@@ -7,8 +7,7 @@ import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.dto.profile.MasterConfigDto
 import kr.co.soogong.master.data.dto.profile.MasterDto
-import kr.co.soogong.master.data.model.profile.FlexibleCost
-import kr.co.soogong.master.data.model.profile.Profile
+import kr.co.soogong.master.data.model.profile.*
 import kr.co.soogong.master.domain.usecase.profile.GetProfileUseCase
 import kr.co.soogong.master.domain.usecase.profile.SaveMasterUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
@@ -21,6 +20,8 @@ class EditFlexibleCostViewModel @Inject constructor(
     private val saveMasterUseCase: SaveMasterUseCase,
 ) : BaseViewModel() {
     private val _profile = MutableLiveData<Profile>()
+
+    val flexibleCost = MutableLiveData<List<MasterConfigDto>>()
 
     val travelCostValue = MutableLiveData<String>()
     val craneUsageValue = MutableLiveData<String>()
@@ -37,25 +38,21 @@ class EditFlexibleCostViewModel @Inject constructor(
                 onSuccess = { profile ->
                     Timber.tag(TAG).d("requestFlexibleCosts Successfully: $profile")
                     _profile.postValue(profile)
-                    profile.basicInformation?.flexibleCost?.travelCostValue?.let {
-                        travelCostValue.postValue(
-                            it
-                        )
-                    }
-                    profile.basicInformation?.flexibleCost?.craneUsageValue?.let {
-                        craneUsageValue.postValue(
-                            it
-                        )
-                    }
-                    profile.basicInformation?.flexibleCost?.packageCostValue?.let {
-                        packageCostValue.postValue(
-                            it
-                        )
-                    }
-                    profile.basicInformation?.flexibleCost?.otherCostInformation?.let {
-                        otherCostInformation.postValue(
-                            it
-                        )
+                    profile.basicInformation?.flexibleCost?.let { masterConfigList ->
+                        flexibleCost.postValue(masterConfigList)
+
+                        masterConfigList.find { masterConfigDto -> masterConfigDto.code == TravelCostCodeTable.code }?.value?.let {
+                            travelCostValue.postValue(it)
+                        }
+                        masterConfigList.find { masterConfigDto -> masterConfigDto.code == CraneUsageCodeTable.code }?.value?.let {
+                            craneUsageValue.postValue(it)
+                        }
+                        masterConfigList.find { masterConfigDto -> masterConfigDto.code == PackageCostCodeTable.code }?.value?.let {
+                            packageCostValue.postValue(it)
+                        }
+                        masterConfigList.find { masterConfigDto -> masterConfigDto.code == OtherInfoCodeTable.code }?.value?.let {
+                            otherCostInformation.postValue(it)
+                        }
                     }
                 },
                 onError = {
@@ -67,22 +64,25 @@ class EditFlexibleCostViewModel @Inject constructor(
 
     fun saveFlexibleCosts() {
         Timber.tag(TAG).d("saveFlexibleCosts: ")
+
         saveMasterUseCase(
             MasterDto(
                 id = _profile.value?.id,
                 uid = _profile.value?.uid,
-                masterConfigs = MasterConfigDto.fromFlexibleCost(
-                    FlexibleCost(
-                        travelCostId = _profile.value?.basicInformation?.flexibleCost?.travelCostId,
-                        craneUsageId = _profile.value?.basicInformation?.flexibleCost?.craneUsageId,
-                        packageCostId = _profile.value?.basicInformation?.flexibleCost?.packageCostId,
-                        otherCostInformationId = _profile.value?.basicInformation?.flexibleCost?.otherCostInformationId,
-                        travelCostValue = travelCostValue.value,
-                        craneUsageValue = craneUsageValue.value,
-                        packageCostValue = packageCostValue.value,
-                        otherCostInformation = otherCostInformation.value,
+                masterConfigs = flexibleCost.value?.map { masterConfig ->
+                    MasterConfigDto(
+                        id = masterConfig.id,
+                        groupCode = FlexibleCostCodeTable.code,
+                        code = masterConfig.code,
+                        name = masterConfig.name,
+                        value = when (masterConfig.code) {
+                            TravelCostCodeTable.code -> travelCostValue.value
+                            CraneUsageCodeTable.code -> craneUsageValue.value
+                            PackageCostCodeTable.code -> packageCostValue.value
+                            else -> otherCostInformation.value
+                        }
                     )
-                )
+                }
             )
         )
             .subscribeOn(Schedulers.io())

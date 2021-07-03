@@ -1,7 +1,6 @@
 package kr.co.soogong.master.data.model.major
 
 import android.os.Parcelable
-import com.google.gson.JsonObject
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 import kr.co.soogong.master.data.dto.profile.MajorDto
@@ -18,7 +17,7 @@ data class Category(
         fun fromMajorDto(majorDto: MajorDto?): Category {
             return Category(
                 id = majorDto?.categoryId,
-                name = majorDto?.categoryNameEn,
+                name = majorDto?.categoryName,
             )
         }
     }

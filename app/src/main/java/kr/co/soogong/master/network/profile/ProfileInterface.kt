@@ -5,6 +5,7 @@ import kr.co.soogong.master.contract.HttpContract
 import kr.co.soogong.master.data.dto.profile.MasterDto
 import kr.co.soogong.master.data.dto.profile.PortfolioDto
 import okhttp3.MultipartBody
+import okhttp3.Request
 import okhttp3.RequestBody
 import retrofit2.http.*
 
@@ -13,7 +14,12 @@ interface ProfileInterface {
     fun getMasterByUid(@Query("uid") uid: String?): Single<MasterDto>
 
     @POST(HttpContract.SAVE_MASTER)
-    fun saveMaster(@Body masterDto: MasterDto): Single<MasterDto>
+    fun saveMaster(
+        @Body masterDto: MasterDto,
+//        @Part profileImage: MultipartBody.Part?,
+//        @Part businessRegistImage: MultipartBody.Part?,
+//        @Part thumbnails: List<MultipartBody.Part>?,
+    ): Single<MasterDto>
 
     @Multipart
     @POST(HttpContract.SAVE_PORTFOLIO)

@@ -59,7 +59,7 @@
                     app:layout_constraintTop_toBottomOf="@id/logo"
                     app:setFirstEditTextEnable="@{true}"
                     app:setFirstEditTextHint='@{"휴대폰번호 - 없이 입력"}'
-                    app:setMaxLengthFirst="@{12}"
+                    app:setMaxLengthFirst="@{11}"
                     app:setSecondEditTextVisible="@{false}"
                     app:titleVisible="@{false}" />
 

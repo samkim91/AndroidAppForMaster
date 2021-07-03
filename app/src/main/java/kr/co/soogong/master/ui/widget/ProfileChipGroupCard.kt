@@ -8,11 +8,15 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.isVisible
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import kr.co.soogong.master.R
+import kr.co.soogong.master.data.dto.profile.MasterConfigDto
 import kr.co.soogong.master.data.model.major.Major
 import kr.co.soogong.master.data.model.major.Project
+import kr.co.soogong.master.data.model.profile.FlexibleCostCodeTable
+import kr.co.soogong.master.data.model.profile.OtherInfoCodeTable
 import kr.co.soogong.master.databinding.ViewProfileChipGroupCardBinding
 import kr.co.soogong.master.utility.ButtonHelper
 
@@ -63,12 +67,14 @@ class ProfileChipGroupCard @JvmOverloads constructor(
                 View.GONE else binding.subTitle.visibility = View.VISIBLE
         }
 
-    var detail: String? = ""
+    var detail: List<MasterConfigDto>? = emptyList()
         set(value) {
             field = value
-            with(binding.detail) {
-                visibility = if (value.isNullOrEmpty()) View.GONE else View.VISIBLE
-                text = value
+            value?.find { masterConfigDto ->
+                masterConfigDto.code == OtherInfoCodeTable.code
+            }?.let {
+                binding.detail.isVisible = true
+                binding.detail.text = it.value
             }
         }
 
@@ -109,20 +115,19 @@ class ProfileChipGroupCard @JvmOverloads constructor(
             }
         }
 
-    var chipGroupWithoutTitle: List<String>? = emptyList()
+    var chipGroupWithoutTitle: List<MasterConfigDto>? = emptyList()
         set(value) {
             field = value
             if (!value.isNullOrEmpty()) {
                 newBadgeVisible = false
                 binding.subTitle.visibility = View.GONE
 
+                binding.chipGroupContainer.removeAllViews()
                 addChipGroup(value)
             }
         }
 
     private fun addChipGroup(items: List<Any?>?) {
-        binding.chipGroupContainer.removeAllViews()
-
         val chipGroup = ChipGroup(context)
         val params = LinearLayout.LayoutParams(
             ViewGroup.LayoutParams.MATCH_PARENT,
@@ -134,7 +139,7 @@ class ProfileChipGroupCard @JvmOverloads constructor(
                 val chip = Chip(context)
                 chip.text = when (it) {
                     is Project -> it.name
-                    is String -> it
+                    is MasterConfigDto -> if (it.groupCode == FlexibleCostCodeTable.code) "${it.name} ${it.value}" else "${it.name}"
                     else -> it.toString()
                 }
                 chip.setTextColor(resources.getColor(R.color.text_basic_color, null))

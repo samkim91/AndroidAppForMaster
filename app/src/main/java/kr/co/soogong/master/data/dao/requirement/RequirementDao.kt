@@ -12,7 +12,7 @@ interface RequirementDao {
     fun getListByStatus(status: List<String>): Single<List<RequirementDto>?>
 
     @Query("SELECT * FROM Requirement WHERE id = :id")
-    fun getItem(id: Int): Maybe<RequirementDto>
+    fun getItem(id: Int): Single<RequirementDto>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(requirement: RequirementDto)

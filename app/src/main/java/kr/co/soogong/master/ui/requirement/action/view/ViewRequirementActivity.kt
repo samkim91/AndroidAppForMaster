@@ -178,7 +178,9 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                     // view : 고객 리뷰, 나의 최종 시공 내용
                     // footer button : none
                     RequirementStatus.Closed -> {
-                        customerReviewGroup.isVisible = viewModel.review.value?.id != null
+                        viewModel.review.observe(this@ViewRequirementActivity, {
+                            customerReviewGroup.isVisible = it != null
+                        })
                         bindRepairData(requirement?.estimationDto)
                     }
 
