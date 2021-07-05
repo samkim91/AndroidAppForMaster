@@ -40,7 +40,7 @@ data class RequiredInformation(
                 career = masterDto.openDate?.let { CareerConverter.toCareer(it) },
                 tel = masterDto.tel,
                 ownerName = masterDto.ownerName,
-                majors = Major.fromMasterDto(masterDto),  // TODO: 2021/06/16 projectDto가 변화되는 것을 보고 바꿔줘야함.
+                majors = Major.fromMasterDto(masterDto),
                 companyAddress = CompanyAddress(
                     masterDto.roadAddress,
                     masterDto.detailAddress,

@@ -11,7 +11,6 @@ class GetMasterIdFromSharedUseCase @Inject constructor(
     private val sharedPreferences: SharedPreferences
 ) {
     operator fun invoke(): Int {
-        // TODO: 2021/06/16 개발 끝나면 삭제
         return sharedPreferences.getInt(AppSharedPreferenceContract.MASTER_ID, 0)
     }
 }

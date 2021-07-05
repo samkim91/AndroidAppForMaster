@@ -20,7 +20,6 @@ class TokenAuthenticator @Inject constructor(
     private val newToken = MutableLiveData("")
 
     override fun authenticate(route: Route?, response: Response): Request? {
-        // Todo.. 무한루프에 빠지지 않게 하려면 어떤 조건을 걸어야하는지 검토 필요
         if (response.request.header("Authorization") != null ||
             response.request.header("Authorization") != "Bearer "
 //            "${getAccessTokenUseCase()}"
@@ -35,7 +34,7 @@ class TokenAuthenticator @Inject constructor(
 //                .doOnSuccess { responseJson ->
 //                    newToken.value = responseJson.body.getAsJsonObject("newToken").asString
 //                    saveAccessTokenUseCase(newToken.value)
-//                    saveRefreshTokenUseCase(newToken.value) // Todo.. responsed에서 token 가져와서 set 추가 작업
+//                    saveRefreshTokenUseCase(newToken.value)
 //                }
 //        }
 

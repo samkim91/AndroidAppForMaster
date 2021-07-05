@@ -24,6 +24,10 @@ class AuthService @Inject constructor(
         return authInterface.checkUserExistent(id)
     }
 
+    fun isMasterExistent(tel: String): Single<Boolean> {
+        return authInterface.isMasterExistent(tel)
+    }
+
     fun saveFCMToken(firebaseTokenDto: FirebaseTokenDto): Single<FirebaseTokenDto> {
         return authInterface.saveFCMToken(firebaseTokenDto)
     }

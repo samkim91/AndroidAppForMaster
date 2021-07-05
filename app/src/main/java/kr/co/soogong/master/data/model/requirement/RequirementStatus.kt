@@ -68,6 +68,7 @@ sealed class RequirementStatus {
         override fun getIntroductionText(): String = ""
     }
 
+    // TODO: 2021/07/05 requirement 객체를 받아오도록 변경하고, closed 상태를 따로 체킹해줘야함.
     companion object {
         fun getStatus(status: String?): RequirementStatus =
             when (status) {
