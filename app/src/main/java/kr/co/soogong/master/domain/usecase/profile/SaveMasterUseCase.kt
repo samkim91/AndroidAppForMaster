@@ -18,7 +18,7 @@ class SaveMasterUseCase @Inject constructor(
         masterDto: MasterDto,
         profileImageUri: Uri? = null,
         businessRegistImageUri: Uri? = null,
-        thumbnailsUris: List<Uri>? = null
+        shopImagesUris: List<Uri>? = null
     ): Single<MasterDto> {
         val master = MultipartGenerator.createJson(masterDto)
 
@@ -30,11 +30,11 @@ class SaveMasterUseCase @Inject constructor(
             MultipartGenerator.createFile("businessRegistImage", it)
         }
 
-        val thumbnails = thumbnailsUris?.let {
+        val shopImages = shopImagesUris?.let {
             MultipartGenerator.createFiles("shopImages", it)
         }
 
-        return profileService.saveMaster(master, profileImage, businessRegistImage, thumbnails)
+        return profileService.saveMaster(master, profileImage, businessRegistImage, shopImages)
             .doOnSuccess {
                 masterDao.insert(it)
             }

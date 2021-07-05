@@ -10,7 +10,7 @@ import kr.co.soogong.master.ui.profile.detail.requiredinformation.ownername.Edit
 import kr.co.soogong.master.ui.profile.detail.requiredinformation.major.EditMajorFragment
 import kr.co.soogong.master.ui.profile.detail.requiredinformation.businessunitinformation.EditBusinessUnitInformationFragment
 import kr.co.soogong.master.ui.profile.detail.requiredinformation.phonenumber.EditPhoneNumberFragment
-import kr.co.soogong.master.ui.profile.detail.requiredinformation.thumbnails.EditThumbnailsFragment
+import kr.co.soogong.master.ui.profile.detail.requiredinformation.shopimages.EditShopImagesFragment
 import kr.co.soogong.master.ui.profile.detail.requiredinformation.warranty.EditWarrantyInformationFragment
 import kr.co.soogong.master.ui.profile.detail.portfoliolist.portfolio.PortfolioFragment
 import kr.co.soogong.master.ui.profile.detail.portfoliolist.pricebyproject.PriceByProjectFragment
@@ -27,7 +27,7 @@ object EditProfileContainerFragmentHelper {
     const val EDIT_EMAIL = "이메일 등록·수정하기"
 
     const val EDIT_INTRODUCTION = "업체 소개 등록·수정하기"
-    const val EDIT_THUMBNAILS = "대표 이미지 편집하기"
+    const val EDIT_SHOP_IMAGES = "대표 이미지 편집하기"
     const val EDIT_BUSINESS_UNIT_INFORMATION = "사업자 정보 등록·수정하기"
     const val EDIT_WARRANTY_INFORMATION = "A/S 정보 등록·수정하기"
     const val EDIT_OWNER_NAME = "대표자명 등록·수정하기"
@@ -51,7 +51,7 @@ object EditProfileContainerFragmentHelper {
             EDIT_EMAIL -> EditEmailFragment.newInstance()
 
             EDIT_INTRODUCTION -> EditIntroductionFragment.newInstance()
-            EDIT_THUMBNAILS -> EditThumbnailsFragment.newInstance()
+            EDIT_SHOP_IMAGES -> EditShopImagesFragment.newInstance()
             EDIT_BUSINESS_UNIT_INFORMATION -> EditBusinessUnitInformationFragment.newInstance()
             EDIT_WARRANTY_INFORMATION -> EditWarrantyInformationFragment.newInstance()
             EDIT_OWNER_NAME -> EditOwnerNameFragment.newInstance()

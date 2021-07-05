@@ -1,7 +1,6 @@
 package kr.co.soogong.master.network.profile
 
 import io.reactivex.Single
-import kr.co.soogong.master.data.dto.Response
 import kr.co.soogong.master.data.dto.profile.MasterDto
 import kr.co.soogong.master.data.dto.profile.PortfolioDto
 import okhttp3.MultipartBody
@@ -22,9 +21,9 @@ class ProfileService @Inject constructor(
         masterDto: RequestBody,
         profileImage: MultipartBody.Part?,
         businessRegistImage: MultipartBody.Part?,
-        thumbnails: List<MultipartBody.Part>?
+        shopImages: List<MultipartBody.Part>?
     ): Single<MasterDto> {
-        return profileInterface.saveMaster(masterDto, profileImage, businessRegistImage, thumbnails)
+        return profileInterface.saveMaster(masterDto, profileImage, businessRegistImage, shopImages)
     }
 
     fun savePortfolio(

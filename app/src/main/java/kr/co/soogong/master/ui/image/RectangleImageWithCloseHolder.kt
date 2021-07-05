@@ -1,7 +1,8 @@
 package kr.co.soogong.master.ui.image
 
-import android.net.Uri
+import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
+import kr.co.soogong.master.data.dto.AttachmentDto
 import kr.co.soogong.master.databinding.ViewHolderImageDeleteButtonBinding
 
 class RectangleImageWithCloseHolder(
@@ -9,11 +10,11 @@ class RectangleImageWithCloseHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun binding(
-        imageInfo: Uri,
+        imageInfo: AttachmentDto,
         closeClickListener: (Int) -> Unit,
     ) {
         with(binding) {
-            imageUri = imageInfo
+            imageUri = imageInfo.url?.toUri() ?: imageInfo.uri
 
             setCloseClickListener {
                 closeClickListener(adapterPosition)
