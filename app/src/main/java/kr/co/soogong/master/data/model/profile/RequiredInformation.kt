@@ -31,7 +31,7 @@ data class RequiredInformation(
                     businessName = masterDto.businessName,
                     shopName = masterDto.shopName,
                     businessNumber = masterDto.businessNumber,
-                    businessRegistImage = null, // TODO: 2021/06/15 get data from server
+                    businessRegistImage = masterDto.businessRegistImage,
                 ),
                 warrantyInformation = WarrantyInformation(
                     warrantyPeriod = masterDto.warrantyPeriod,

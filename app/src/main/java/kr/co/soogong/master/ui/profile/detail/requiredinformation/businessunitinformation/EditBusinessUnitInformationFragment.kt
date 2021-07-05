@@ -12,9 +12,8 @@ import gun0912.tedimagepicker.builder.TedImagePicker
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentEditBusinessUnitInformationBinding
 import kr.co.soogong.master.ui.base.BaseFragment
-import kr.co.soogong.master.ui.profile.detail.requiredinformation.businessunitinformation.EditBusinessUnitInformationViewModel.Companion.GET_BUSINESS_UNIT_INFORMATION_FAILED
-import kr.co.soogong.master.ui.profile.detail.requiredinformation.businessunitinformation.EditBusinessUnitInformationViewModel.Companion.SAVE_BUSINESS_UNIT_INFORMATION_FAILED
-import kr.co.soogong.master.ui.profile.detail.requiredinformation.businessunitinformation.EditBusinessUnitInformationViewModel.Companion.SAVE_BUSINESS_UNIT_INFORMATION_SUCCESSFULLY
+import kr.co.soogong.master.ui.profile.detail.requiredinformation.businessunitinformation.EditBusinessUnitInformationViewModel.Companion.REQUEST_FAILED
+import kr.co.soogong.master.ui.profile.detail.requiredinformation.businessunitinformation.EditBusinessUnitInformationViewModel.Companion.SAVE_BUSINESS_INFORMATION_SUCCESSFULLY
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.PermissionHelper
 import kr.co.soogong.master.utility.extension.toast
@@ -125,10 +124,10 @@ class EditBusinessUnitInformationFragment :
         })
         viewModel.action.observe(viewLifecycleOwner, EventObserver { event ->
             when (event) {
-                SAVE_BUSINESS_UNIT_INFORMATION_SUCCESSFULLY -> {
+                SAVE_BUSINESS_INFORMATION_SUCCESSFULLY -> {
                     activity?.onBackPressed()
                 }
-                SAVE_BUSINESS_UNIT_INFORMATION_FAILED, GET_BUSINESS_UNIT_INFORMATION_FAILED -> {
+                REQUEST_FAILED -> {
                     requireContext().toast(getString(R.string.error_message_of_request_failed))
                 }
             }
