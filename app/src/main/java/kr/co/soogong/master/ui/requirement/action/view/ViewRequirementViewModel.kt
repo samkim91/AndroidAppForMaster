@@ -22,6 +22,7 @@ import javax.inject.Inject
 class ViewRequirementViewModel @Inject constructor(
     private val getRequirementUseCase: GetRequirementUseCase,
     private val saveEstimationUseCase: SaveEstimationUseCase,
+    private val callToClientUseCase: CallToClientUseCase,
     private val saveRepairUseCase: SaveRepairUseCase,
     val savedStateHandle: SavedStateHandle
 ) : BaseViewModel() {
@@ -89,10 +90,25 @@ class ViewRequirementViewModel @Inject constructor(
                 }).addToDisposable()
     }
 
-    // TODO: 2021/06/21 api 나오면 개발해야함
-    fun callToCustomer() {
-        Timber.tag(TAG).d("callToCustomer: ")
-
+    fun callToClient() {
+        Timber.tag(TAG).d("callToClient: ")
+        _requirement.value?.estimationDto?.id?.let { estimationId ->
+            callToClientUseCase(
+                estimationId = estimationId
+            )
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeBy(
+                    onSuccess = {
+                        Timber.tag(TAG).d("callToClient successfully: $it")
+                        setAction(CALL_TO_CUSTOMER_SUCCESSFULLY)
+                    },
+                    onError = {
+                        Timber.tag(TAG).d("callToClient failed: $it")
+                        setAction(REQUEST_FAILED)
+                    }
+                ).addToDisposable()
+        }
     }
 
     fun askForReview() {

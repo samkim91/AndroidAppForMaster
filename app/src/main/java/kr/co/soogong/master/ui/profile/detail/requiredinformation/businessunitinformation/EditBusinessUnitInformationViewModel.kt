@@ -8,9 +8,10 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import kr.co.soogong.master.data.model.profile.BusinessUnitInformation
+import kr.co.soogong.master.data.dto.profile.MasterDto
+import kr.co.soogong.master.data.model.profile.Profile
 import kr.co.soogong.master.domain.usecase.profile.GetProfileUseCase
-import kr.co.soogong.master.domain.usecase.profile.SaveBusinessUnitInformationUseCase
+import kr.co.soogong.master.domain.usecase.profile.SaveMasterUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import timber.log.Timber
 import javax.inject.Inject
@@ -18,8 +19,9 @@ import javax.inject.Inject
 @HiltViewModel
 class EditBusinessUnitInformationViewModel @Inject constructor(
     private val getProfileUseCase: GetProfileUseCase,
-    private val saveBusinessUnitInformationUseCase: SaveBusinessUnitInformationUseCase,
+    private val saveMasterUseCase: SaveMasterUseCase,
 ) : BaseViewModel() {
+    private val _profile = MutableLiveData<Profile>()
     val businessType = MutableLiveData("")
     val businessName = MutableLiveData("")
     val shopName = MutableLiveData("")
@@ -36,35 +38,59 @@ class EditBusinessUnitInformationViewModel @Inject constructor(
                 onSuccess = { profile ->
                     Timber.tag(TAG).d("requestBusinessUnitInformation successfully: $profile")
 
-                    businessType.postValue(profile.requiredInformation?.businessUnitInformation?.businessType ?: "")
-                    if (profile.requiredInformation?.businessUnitInformation?.businessType == "프리랜서") {
-                        birthday.postValue(profile.requiredInformation?.businessUnitInformation?.businessNumber ?: "")
-                    } else {
-                        businessName.postValue(profile.requiredInformation?.businessUnitInformation?.businessName ?: "")
-                        shopName.postValue(profile.requiredInformation?.businessUnitInformation?.shopName ?: "")
-                        businessRegistImage.postValue(profile.requiredInformation?.businessUnitInformation?.businessRegistImage?.url?.toUri() ?: Uri.EMPTY)
-                        businessNumber.postValue(profile.requiredInformation?.businessUnitInformation?.businessNumber ?: "")
+                    _profile.value = profile
+                    profile.requiredInformation?.businessUnitInformation?.businessType?.let { businessType ->
+                        this.businessType.postValue(businessType)
+                        if (businessType == "프리랜서") {
+                            profile.requiredInformation.businessUnitInformation.businessNumber?.let {
+                                birthday.postValue(it)
+                            }
+                        } else {
+                            profile.requiredInformation.businessUnitInformation.businessName?.let {
+                                businessName.postValue(it)
+                            }
+                            profile.requiredInformation.businessUnitInformation.shopName?.let {
+                                shopName.postValue(it)
+                            }
+                            profile.requiredInformation.businessUnitInformation.businessRegistImage?.url?.let {
+                                businessRegistImage.postValue(it.toUri())
+                            }
+                            profile.requiredInformation.businessUnitInformation.businessNumber?.let {
+                                businessNumber.postValue(it)
+                            }
+                        }
                     }
                 },
-                onError = { setAction(GET_BUSINESS_UNIT_INFORMATION_FAILED) }
+                onError = {
+                    Timber.tag(TAG).d("requestBusinessUnitInformation failed: $it")
+                    setAction(REQUEST_FAILED)
+                }
             ).addToDisposable()
     }
 
     fun saveBusinessUnitInformation() {
         Timber.tag(TAG).d("saveBusinessUnitInformation: ")
-        saveBusinessUnitInformationUseCase(
-            BusinessUnitInformation(
-                businessType = businessType.value!!,
-                businessName = businessName.value!!,
-                shopName = shopName.value!!,
-                businessNumber = if (businessType.value == "프리랜서") birthday.value!! else businessNumber.value!!,
-                businessRegistImage = null // TODO: 2021/06/23 이미지 업로드로 수정해야함 
-            )
+        saveMasterUseCase(
+            MasterDto(
+                id = _profile.value?.id,
+                uid = _profile.value?.uid,
+                businessType = businessType.value,
+                businessName = businessName.value,
+                shopName = shopName.value,
+                businessNumber = if (businessType.value == "프리랜서") birthday.value else businessNumber.value,
+            ),
+            businessRegistImageUri = businessRegistImage.value,
         ).subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
-                onSuccess = { setAction(SAVE_BUSINESS_UNIT_INFORMATION_SUCCESSFULLY) },
-                onError = { setAction(SAVE_BUSINESS_UNIT_INFORMATION_FAILED) }
+                onSuccess = {
+                    Timber.tag(TAG).d("saveBusinessUnitInformation successfully: $it")
+                    setAction(SAVE_BUSINESS_INFORMATION_SUCCESSFULLY)
+                },
+                onError = {
+                    Timber.tag(TAG).d("saveBusinessUnitInformation failed: $it")
+                    setAction(REQUEST_FAILED)
+                }
             ).addToDisposable()
     }
 
@@ -72,9 +98,7 @@ class EditBusinessUnitInformationViewModel @Inject constructor(
 
     companion object {
         private const val TAG = "EditBusinessUnitInformationViewModel"
-        const val SAVE_BUSINESS_UNIT_INFORMATION_SUCCESSFULLY =
-            "SAVE_BUSINESS_UNIT_INFORMATION_SUCCESSFULLY"
-        const val SAVE_BUSINESS_UNIT_INFORMATION_FAILED = "SAVE_BUSINESS_UNIT_INFORMATION_FAILED"
-        const val GET_BUSINESS_UNIT_INFORMATION_FAILED = "GET_BUSINESS_UNIT_INFORMATION_FAILED"
+        const val SAVE_BUSINESS_INFORMATION_SUCCESSFULLY = "SAVE_BUSINESS_INFORMATION_SUCCESSFULLY"
+        const val REQUEST_FAILED = "REQUEST_FAILED"
     }
 }

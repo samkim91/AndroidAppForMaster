@@ -8,6 +8,7 @@ import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.model.requirement.RequirementCard
 import kr.co.soogong.master.data.model.requirement.RequirementStatus
+import kr.co.soogong.master.domain.usecase.requirement.CallToClientUseCase
 import kr.co.soogong.master.domain.usecase.requirement.GetProgressEstimationListUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import timber.log.Timber
@@ -16,6 +17,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ProgressViewModel @Inject constructor(
     private val getProgressEstimationListUseCase: GetProgressEstimationListUseCase,
+    private val callToClientUseCase: CallToClientUseCase,
 ) : BaseViewModel() {
     private val _progressList = MutableLiveData<List<RequirementCard>>()
     val progressList: LiveData<List<RequirementCard>>
@@ -47,7 +49,10 @@ class ProgressViewModel @Inject constructor(
             .subscribeBy(
                 onSuccess = {
                     Timber.tag(TAG).d("requestList successfully: $it")
-                    if (_index.value == 0 || _index.value == null) sendEvent(BADGE_UPDATE, it.count())
+                    if (_index.value == 0 || _index.value == null) sendEvent(
+                        BADGE_UPDATE,
+                        it.count()
+                    )
                     _progressList.postValue(it)
                 },
                 onError = {
@@ -58,9 +63,26 @@ class ProgressViewModel @Inject constructor(
             ).addToDisposable()
     }
 
-    fun callToCustomer(estimationId: Int, phoneNumber: String) {
-        Timber.tag(TAG).d("callToCustomer: $estimationId / $phoneNumber")
+    fun callToClient(requirementId: Int) {
+        Timber.tag(TAG).d("callToCustomer: $requirementId")
+        val requirementCard = progressList.value?.find {
+            it.id == requirementId
+        }
 
+        requirementCard?.estimationDto?.id?.let { estimationId ->
+            callToClientUseCase(estimationId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeBy(
+                    onSuccess = {
+                        Timber.tag(TAG).d("callToClient successfully: $it")
+                    },
+                    onError = {
+                        Timber.tag(TAG).d("callToClient successfully: $it")
+                        setAction(REQUEST_FAILED)
+                    }
+                ).addToDisposable()
+        }
     }
 
     companion object {
@@ -68,6 +90,7 @@ class ProgressViewModel @Inject constructor(
         const val BADGE_UPDATE = "BADGE_UPDATE"
         const val UPDATE_LIST = "UPDATE_LIST"
         const val REQUEST_LIST_FAILED = "REQUEST_LIST_FAILED"
-
+        const val CALL_TO_CLIENT_SUCCESSFULLY = "CALL_TO_CLIENT_SUCCESSFULLY"
+        const val REQUEST_FAILED = "REQUEST_FAILED"
     }
 }

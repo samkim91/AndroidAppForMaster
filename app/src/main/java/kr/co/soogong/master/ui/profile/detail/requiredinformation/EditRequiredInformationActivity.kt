@@ -20,7 +20,7 @@ import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_MAJOR
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_OWNER_NAME
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_PHONE_NUMBER
-import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_THUMBNAILS
+import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_SHOP_IMAGES
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_WARRANTY_INFORMATION
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.NaverMapHelper
@@ -68,8 +68,8 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
                 startActivityCommonCode(EDIT_INTRODUCTION)
             }
 
-            thumbnails.addDefaultButtonClickListener {
-                startActivityCommonCode(EDIT_THUMBNAILS)
+            shopImages.addDefaultButtonClickListener {
+                startActivityCommonCode(EDIT_SHOP_IMAGES)
             }
 
             businessUnitInformation.addDefaultButtonClickListener {
@@ -82,7 +82,8 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
 
             career.addDefaultButtonClickListener {
                 val bottomDialog =
-                    BottomDialogRecyclerView(BottomDialogData.insertingCareerTitle, BottomDialogData.getWarrantyPeriodList(),
+                    BottomDialogRecyclerView(
+                        BottomDialogData.insertingCareerTitle, BottomDialogData.getWarrantyPeriodList(),
                         itemClick = { _, value ->
                             viewModel.saveCareerPeriod(value)
                         }
@@ -163,7 +164,7 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
 
         with(viewModel.requiredInformation) {
             if (!value?.introduction.isNullOrEmpty()) filledCount++
-            if (!value?.representativeImages.isNullOrEmpty()) filledCount++
+            if (!value?.shopImages.isNullOrEmpty()) filledCount++
             if (!value?.businessUnitInformation?.businessType.isNullOrEmpty()) filledCount++
             if (value?.warrantyInformation?.warrantyPeriod != 0) filledCount++
             if (!value?.career.isNullOrEmpty()) filledCount++

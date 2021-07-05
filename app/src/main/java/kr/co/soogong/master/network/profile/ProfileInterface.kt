@@ -13,12 +13,13 @@ interface ProfileInterface {
     @GET(HttpContract.GET_MASTER_BY_UID)
     fun getMasterByUid(@Query("uid") uid: String?): Single<MasterDto>
 
+    @Multipart
     @POST(HttpContract.SAVE_MASTER)
     fun saveMaster(
-        @Body masterDto: MasterDto,
-//        @Part profileImage: MultipartBody.Part?,
-//        @Part businessRegistImage: MultipartBody.Part?,
-//        @Part thumbnails: List<MultipartBody.Part>?,
+        @Part("masterDto") masterDto: RequestBody,
+        @Part profileImage: MultipartBody.Part?,
+        @Part businessRegistImage: MultipartBody.Part?,
+        @Part shopImages: List<MultipartBody.Part>?,
     ): Single<MasterDto>
 
     @Multipart

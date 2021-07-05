@@ -10,7 +10,7 @@ import kr.co.soogong.master.ui.profile.detail.requiredinformation.CareerConverte
 @Parcelize
 data class RequiredInformation(
     val introduction: String?,
-    val representativeImages: List<AttachmentDto>?,
+    val shopImages: List<AttachmentDto>?,
     val businessUnitInformation: BusinessUnitInformation?,
     val warrantyInformation: WarrantyInformation?,
     val career: String?,
@@ -25,13 +25,13 @@ data class RequiredInformation(
         fun fromMasterDto(masterDto: MasterDto): RequiredInformation {
             return RequiredInformation(
                 introduction = masterDto.introduction,
-                representativeImages = masterDto.shopImages,
+                shopImages = masterDto.shopImages,
                 businessUnitInformation = BusinessUnitInformation(
                     businessType = masterDto.businessType,
                     businessName = masterDto.businessName,
                     shopName = masterDto.shopName,
                     businessNumber = masterDto.businessNumber,
-                    businessRegistImage = null, // TODO: 2021/06/15 get data from server
+                    businessRegistImage = masterDto.businessRegistImage,
                 ),
                 warrantyInformation = WarrantyInformation(
                     warrantyPeriod = masterDto.warrantyPeriod,

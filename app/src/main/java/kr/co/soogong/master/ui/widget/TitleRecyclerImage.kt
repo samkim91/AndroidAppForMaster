@@ -6,6 +6,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
+import kr.co.soogong.master.data.dto.AttachmentDto
 import kr.co.soogong.master.databinding.ViewTitleRecyclerImageBinding
 import kr.co.soogong.master.ui.image.RectangleImageWithCloseAdapter
 
@@ -76,22 +77,9 @@ class TitleRecyclerImage @JvmOverloads constructor(
         })
     }
 
-    fun replaceItems(
-        items: MutableList<Uri>?
-    ) {
-        (binding.photoList.adapter as? RectangleImageWithCloseAdapter)?.submitList(items)
-        notifyDataSetChanged()
-    }
-
-    fun notifyDataSetChanged(){
-        // Todo.. submitList로 item change event가 call 되지 않고 있음... 원인을 파악해봐야함. 아래 코드는 임시적으로 적용해둠.
-        (binding.photoList.adapter as? RectangleImageWithCloseAdapter)?.notifyDataSetChanged()
-    }
-
     fun addIconClickListener(
         onClick: () -> Unit
     ) {
         binding.cameraIcon.setOnClickListener { onClick() }
     }
-
 }
