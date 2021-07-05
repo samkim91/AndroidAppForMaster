@@ -65,7 +65,7 @@ class SignUpViewModel @Inject constructor(
         Timber.tag(TAG).d("checkUserExist: ")
 
         tel.value?.let { tel ->
-            checkUserExistentUseCase(PhoneNumberHelper.toGlobalNumber(tel))
+            checkUserExistentUseCase(tel)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(

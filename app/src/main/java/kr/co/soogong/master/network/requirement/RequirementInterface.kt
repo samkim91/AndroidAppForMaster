@@ -6,10 +6,7 @@ import kr.co.soogong.master.data.dto.Response
 import kr.co.soogong.master.data.dto.requirement.RequirementDto
 import kr.co.soogong.master.data.dto.requirement.estimation.EstimationDto
 import kr.co.soogong.master.data.dto.requirement.repair.RepairDto
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface RequirementInterface {
     // TODO: 2021/06/23 Uid로 조회하도록 변경해야함 ...
@@ -25,7 +22,8 @@ interface RequirementInterface {
     @POST(HttpContract.SAVE_REPAIR)
     fun saveRepair(@Body repairDto: RepairDto): Single<RequirementDto>
 
-
+    @POST(HttpContract.CALL_TO_CLIENT)
+    fun callToClient(@Body estimationId: Int, @Body from: String): Single<Boolean>
 
 
 

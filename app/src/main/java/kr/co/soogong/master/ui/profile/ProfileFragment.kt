@@ -9,6 +9,7 @@ import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentProfileBinding
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.profile.ProfileViewModel.Companion.GET_PROFILE_FAILED
+import kr.co.soogong.master.ui.profile.ProfileViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.utility.PermissionHelper
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerActivityHelper
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_EMAIL
@@ -113,7 +114,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
     private fun registerEventObserve() {
         viewModel.action.observe(viewLifecycleOwner, EventObserver { event ->
             when(event){
-                GET_PROFILE_FAILED -> requireContext().toast(getString(R.string.error_message_of_request_failed))
+                GET_PROFILE_FAILED, REQUEST_FAILED -> requireContext().toast(getString(R.string.error_message_of_request_failed))
             }
         })
     }

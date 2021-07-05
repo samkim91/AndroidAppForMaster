@@ -28,4 +28,8 @@ class RequirementService @Inject constructor(
     fun saveRepair(repairDto: RepairDto): Single<RequirementDto> {
         return requirementInterface.saveRepair(repairDto)
     }
+    fun callToClient(estimationId: Int, from: String): Single<Boolean> {
+        return requirementInterface.callToClient(estimationId, from)
+    }
+
 }

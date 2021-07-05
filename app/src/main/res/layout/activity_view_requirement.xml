@@ -447,7 +447,7 @@
                             android:layout_width="@dimen/estimation_card_call_to_customer_button_width"
                             android:layout_height="@dimen/estimation_card_call_to_customer_button_height"
                             android:layout_marginTop="@dimen/estimation_card_call_to_customer_button_margin_top"
-                            android:onClick="@{() -> vm.callToCustomer()}"
+                            android:onClick="@{() -> vm.callToClient()}"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/photo_list" />

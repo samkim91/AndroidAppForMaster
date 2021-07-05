@@ -19,12 +19,12 @@ class ProfileService @Inject constructor(
     }
 
     fun saveMaster(
-        masterDto: MasterDto,
+        masterDto: RequestBody,
         profileImage: MultipartBody.Part?,
         businessRegistImage: MultipartBody.Part?,
         thumbnails: List<MultipartBody.Part>?
     ): Single<MasterDto> {
-        return profileInterface.saveMaster(masterDto)
+        return profileInterface.saveMaster(masterDto, profileImage, businessRegistImage, thumbnails)
     }
 
     fun savePortfolio(

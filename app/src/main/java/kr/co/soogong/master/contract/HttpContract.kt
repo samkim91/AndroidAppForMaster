@@ -25,6 +25,7 @@ object HttpContract {
     //region Estimations
     const val SAVE_ESTIMATION = "estimation/save"
     const val SAVE_REPAIR = "repair/save"
+    const val CALL_TO_CLIENT = "estimation/count-call"
     //endregion
 
     //region Profile

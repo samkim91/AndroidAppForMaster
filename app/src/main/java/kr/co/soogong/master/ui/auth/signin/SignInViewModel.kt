@@ -43,15 +43,13 @@ class SignInViewModel @Inject constructor(
         Timber.tag(TAG).d("checkUserExist: ")
 
         tel.value?.let { tel ->
-            checkUserExistentUseCase(PhoneNumberHelper.toGlobalNumber(tel))
+            checkUserExistentUseCase(tel)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
                     onSuccess = {
                         Timber.tag(TAG).d("onSuccess: $it")
-                        if (it) setAction(PHONE_NUMBER_EXIST) else setAction(
-                            PHONE_NUMBER_NOT_EXIST
-                        )
+                        if (it) setAction(PHONE_NUMBER_EXIST) else setAction(PHONE_NUMBER_NOT_EXIST)
                     },
                     onError = {
                         Timber.tag(TAG).d("onError: $it")

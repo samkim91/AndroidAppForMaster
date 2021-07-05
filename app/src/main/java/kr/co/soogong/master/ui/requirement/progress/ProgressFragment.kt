@@ -12,11 +12,14 @@ import kr.co.soogong.master.databinding.FragmentRequirementProgressBinding
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.dialog.popup.CustomDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData.Companion.getCallToCustomerDialogData
+import kr.co.soogong.master.ui.requirement.progress.ProgressViewModel.Companion.CALL_TO_CLIENT_SUCCESSFULLY
+import kr.co.soogong.master.ui.requirement.progress.ProgressViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.uihelper.requirment.CallToCustomerHelper
 import kr.co.soogong.master.uihelper.requirment.RequirementsBadge
 import kr.co.soogong.master.uihelper.requirment.action.EndRepairActivityHelper
 import kr.co.soogong.master.uihelper.requirment.action.ViewRequirementActivityHelper
 import kr.co.soogong.master.utility.EventObserver
+import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -54,10 +57,8 @@ class ProgressFragment : BaseFragment<FragmentRequirementProgressBinding>(
                 callButtonClick = { keycode, number ->
                     val dialog = CustomDialog(getCallToCustomerDialogData(requireContext()),
                         yesClick = {
-                            // Todo.. 전화한 기록을 더해야함.
-                            viewModel.callToCustomer(
-                                estimationId = keycode,
-                                phoneNumber = number.toString()
+                            viewModel.callToClient(
+                                requirementId = keycode
                             )
                             startActivity(CallToCustomerHelper.getIntent(number.toString()))
                         },
@@ -99,6 +100,14 @@ class ProgressFragment : BaseFragment<FragmentRequirementProgressBinding>(
             when (event) {
                 ProgressViewModel.BADGE_UPDATE -> {
                     (parentFragment as? RequirementsBadge)?.setProgressBadge(value as Int)
+                }
+            }
+        })
+
+        viewModel.action.observe(viewLifecycleOwner, EventObserver { event ->
+            when(event) {
+                REQUEST_FAILED -> {
+                    requireContext().toast(getString(R.string.error_message_of_request_failed))
                 }
             }
         })

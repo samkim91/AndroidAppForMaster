@@ -53,10 +53,23 @@ class ProfileViewModel @Inject constructor(
             ),
             profileImageUri = profileImage.value,
         )
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribeBy(
+            onSuccess = {
+                Timber.tag(TAG).d("saveMasterProfile successfully: $it")
+                _profile.value = Profile.fromMasterDto(it)
+            },
+            onError = {
+                Timber.tag(TAG).d("saveMasterProfile failed: $it")
+                setAction(REQUEST_FAILED)
+            }
+        ).addToDisposable()
     }
 
     companion object {
         private const val TAG = "ProfileViewModel"
         const val GET_PROFILE_FAILED = "GET_PROFILE_FAILED"
+        const val REQUEST_FAILED = "REQUEST_FAILED"
     }
 }
