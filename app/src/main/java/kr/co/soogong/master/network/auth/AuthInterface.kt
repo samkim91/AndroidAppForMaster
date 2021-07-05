@@ -18,7 +18,10 @@ interface AuthInterface {
     fun signUp(@Body masterDto: MasterDto): Single<MasterDto>
 
     @GET(HttpContract.IS_USER_EXIST)
-    fun checkUserExistent(@Query("id") id: String): Single<Boolean>
+    fun checkUserExistent(@Query("tel") id: String): Single<Boolean>
+
+    @GET(HttpContract.IS_MASTER_EXISTENT)
+    fun isMasterExistent(@Query("tel") tel: String): Single<Boolean>
 
     @POST(HttpContract.SAVE_FCM_TOKEN)
     fun saveFCMToken(@Body firebaseTokenDto: FirebaseTokenDto): Single<FirebaseTokenDto>

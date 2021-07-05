@@ -28,22 +28,4 @@ class RequirementService @Inject constructor(
     fun saveRepair(repairDto: RepairDto): Single<RequirementDto> {
         return requirementInterface.saveRepair(repairDto)
     }
-
-    fun callToCustomer(
-        id: Int,
-    ): Single<Response> {
-        val data = HashMap<String, Any>()
-        data["keycode"] = id
-        return requirementInterface.callToCustomer(data)
-    }
-
-    fun askForReview(
-        id: Int,
-        branchKeycode: String?
-    ): Single<Response> {
-        val data = HashMap<String, Any?>()
-        data["keycode"] = id
-        data["branch_keycode"] = branchKeycode
-        return requirementInterface.askForReview(data)
-    }
 }

@@ -30,10 +30,4 @@ interface RequirementInterface {
 
 
 
-
-    @POST(HttpContract.CALL_TO_CUSTOMER)
-    fun callToCustomer(@Body body: HashMap<String, Any>): Single<Response>
-
-    @POST(HttpContract.ASK_FOR_REVIEW)
-    fun askForReview(@Body body: HashMap<String, Any?>): Single<Response>
 }

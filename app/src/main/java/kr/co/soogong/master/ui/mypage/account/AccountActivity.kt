@@ -6,6 +6,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ActivityAccountBinding
 import kr.co.soogong.master.ui.base.BaseActivity
+import kr.co.soogong.master.ui.mypage.account.AccountViewModel.Companion.WITHDRAWAL
 import kr.co.soogong.master.utility.EventObserver
 import timber.log.Timber
 
@@ -41,7 +42,7 @@ class AccountActivity : BaseActivity<ActivityAccountBinding>(
     private fun registerEventObserve() {
         viewModel.action.observe(this, EventObserver { event ->
             when (event) {
-                AccountViewModel.WITHDRAWAL -> {
+                WITHDRAWAL -> {
                     // TODO: 2021/06/15 disabled master...
 
                 }
