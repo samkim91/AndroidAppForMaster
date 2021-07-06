@@ -54,7 +54,9 @@ class EditEmailFragment :
 
             email.addDropdownClickListener {
                 val bottomDialog =
-                    BottomDialogRecyclerView(BottomDialogData.insertingEmailTitle, BottomDialogData.getEmailDomains(),
+                    BottomDialogRecyclerView.newInstance(
+                        title = BottomDialogData.insertingEmailTitle,
+                        dialogData = BottomDialogData.getEmailDomains(),
                         itemClick = { domain, _ ->
                             if(domain != BottomDialogData.getEmailDomains().last().text) {
                                 viewModel.domain.value = domain

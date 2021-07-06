@@ -82,8 +82,9 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
 
             career.addDefaultButtonClickListener {
                 val bottomDialog =
-                    BottomDialogRecyclerView(
-                        BottomDialogData.insertingCareerTitle, BottomDialogData.getWarrantyPeriodList(),
+                    BottomDialogRecyclerView.newInstance(
+                        title = BottomDialogData.insertingCareerTitle,
+                        dialogData = BottomDialogData.getWarrantyPeriodList(),
                         itemClick = { _, value ->
                             viewModel.saveCareerPeriod(value)
                         }
@@ -110,7 +111,9 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
 
             serviceArea.addDefaultButtonClickListener {
                 val bottomDialog =
-                    BottomDialogRecyclerView(BottomDialogData.choosingServiceAreaTitle, BottomDialogData.getServiceAreaList(),
+                    BottomDialogRecyclerView.newInstance(
+                        title = BottomDialogData.choosingServiceAreaTitle,
+                        dialogData = BottomDialogData.getServiceAreaList(),
                         itemClick = { _, radius ->
                             naverMap.changeServiceArea(radius)
                             viewModel.requiredInformation.mutation {
