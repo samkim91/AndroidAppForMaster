@@ -90,7 +90,6 @@ class ProgressViewModel @Inject constructor(
         const val BADGE_UPDATE = "BADGE_UPDATE"
         const val UPDATE_LIST = "UPDATE_LIST"
         const val REQUEST_LIST_FAILED = "REQUEST_LIST_FAILED"
-        const val CALL_TO_CLIENT_SUCCESSFULLY = "CALL_TO_CLIENT_SUCCESSFULLY"
         const val REQUEST_FAILED = "REQUEST_FAILED"
     }
 }

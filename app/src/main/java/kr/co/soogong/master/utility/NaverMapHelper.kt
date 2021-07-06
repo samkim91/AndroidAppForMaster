@@ -97,12 +97,12 @@ class NaverMapHelper(
     }
 
     fun changeServiceArea(radius: Int) {
-        coordinate?.let { coordinate ->
+        coordinate?.let {
             naverMap.moveCamera(
                 CameraUpdate.scrollTo(
                     LatLng(
-                        coordinate.latitude!!,
-                        coordinate.longitude!!
+                        it.latitude!!,
+                        it.longitude!!
                     )
                 )
             )

@@ -12,7 +12,6 @@ import kr.co.soogong.master.databinding.FragmentRequirementProgressBinding
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.dialog.popup.CustomDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData.Companion.getCallToCustomerDialogData
-import kr.co.soogong.master.ui.requirement.progress.ProgressViewModel.Companion.CALL_TO_CLIENT_SUCCESSFULLY
 import kr.co.soogong.master.ui.requirement.progress.ProgressViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.uihelper.requirment.CallToCustomerHelper
 import kr.co.soogong.master.uihelper.requirment.RequirementsBadge
@@ -105,7 +104,7 @@ class ProgressFragment : BaseFragment<FragmentRequirementProgressBinding>(
         })
 
         viewModel.action.observe(viewLifecycleOwner, EventObserver { event ->
-            when(event) {
+            when (event) {
                 REQUEST_FAILED -> {
                     requireContext().toast(getString(R.string.error_message_of_request_failed))
                 }

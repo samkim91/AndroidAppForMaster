@@ -5,8 +5,8 @@ import kr.co.soogong.master.contract.HttpContract
 import kr.co.soogong.master.data.dto.profile.MasterDto
 import kr.co.soogong.master.data.dto.profile.PortfolioDto
 import okhttp3.MultipartBody
-import okhttp3.Request
 import okhttp3.RequestBody
+import okhttp3.ResponseBody
 import retrofit2.http.*
 
 interface ProfileInterface {
@@ -32,4 +32,7 @@ interface ProfileInterface {
 
     @GET(HttpContract.GET_PORTFOLIOS)
     fun getPortfoliosByUid(@Query("uid") uid: String?): Single<List<PortfolioDto>>
+
+    @PUT(HttpContract.DELETE_PORTFOLIO)
+    fun deletePortfolio(@Path("id") portfolioId: Int): Single<ResponseBody>
 }

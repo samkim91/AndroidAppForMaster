@@ -53,6 +53,7 @@ class EditShopImagesViewModel @Inject constructor(
                     id = _profile.value?.id,
                     uid = _profile.value?.uid,
                     shopImages = shopImages.value,
+                    updateShopImagesYn = true,
                 ),
                 shopImagesUris = list.map {
                     it.uri!!

@@ -13,6 +13,6 @@ class CallToClientUseCase @Inject constructor(
     private val requirementService: RequirementService,
 ){
     operator fun invoke(estimationId: Int): Single<Boolean> {
-        return requirementService.callToClient(estimationId, "Master")
+        return requirementService.callToClient(estimationId)
     }
 }
