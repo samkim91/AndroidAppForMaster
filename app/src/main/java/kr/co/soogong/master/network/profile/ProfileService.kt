@@ -5,6 +5,7 @@ import kr.co.soogong.master.data.dto.profile.MasterDto
 import kr.co.soogong.master.data.dto.profile.PortfolioDto
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import okhttp3.ResponseBody
 import retrofit2.Retrofit
 import javax.inject.Inject
 
@@ -36,6 +37,12 @@ class ProfileService @Inject constructor(
 
     fun getPortfoliosByUid(uid: String?): Single<List<PortfolioDto>> {
         return profileInterface.getPortfoliosByUid(uid)
+    }
+
+    fun deletePortfolio(
+        portfolioId: Int
+    ): Single<ResponseBody> {
+        return profileInterface.deletePortfolio(portfolioId)
     }
 
 }

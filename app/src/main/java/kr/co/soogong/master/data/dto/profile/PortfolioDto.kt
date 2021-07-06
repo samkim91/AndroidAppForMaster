@@ -27,10 +27,10 @@ data class PortfolioDto(
     @SerializedName("type")
     val type: String?,
 
-    @SerializedName("beforeImage")
+    @SerializedName("beforeRepairImage")
     val beforeImage: AttachmentDto? = null,
 
-    @SerializedName("afterImage")
+    @SerializedName("afterRepairImage")
     val afterImage: AttachmentDto? = null,
 
     @SerializedName("beforeImageUri")

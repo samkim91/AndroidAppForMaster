@@ -8,12 +8,11 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.dto.profile.PortfolioDto
-import kr.co.soogong.master.domain.usecase.auth.GetMasterIdFromSharedUseCase
-import kr.co.soogong.master.domain.usecase.profile.GetPortfolioListUseCase
-import kr.co.soogong.master.domain.usecase.profile.SavePortfolioUseCase
-import kr.co.soogong.master.ui.base.BaseViewModel
 import kr.co.soogong.master.data.model.profile.PortfolioCodeTable
 import kr.co.soogong.master.data.model.profile.PriceByProjectCodeTable
+import kr.co.soogong.master.domain.usecase.profile.DeletePortfolioUseCase
+import kr.co.soogong.master.domain.usecase.profile.GetPortfolioListUseCase
+import kr.co.soogong.master.ui.base.BaseViewModel
 import kr.co.soogong.master.uihelper.profile.PortfolioListActivityHelper
 import kr.co.soogong.master.uihelper.profile.PortfolioListActivityHelper.PORTFOLIO
 import timber.log.Timber
@@ -22,8 +21,7 @@ import javax.inject.Inject
 @HiltViewModel
 class PortfolioListViewModel @Inject constructor(
     private val getPortfolioListUseCase: GetPortfolioListUseCase,
-    private val savePortfolioUseCase: SavePortfolioUseCase,
-    private val getMasterIdFromSharedUseCase: GetMasterIdFromSharedUseCase,
+    private val deletePortfolioUseCase: DeletePortfolioUseCase,
     val savedStateHandle: SavedStateHandle
 ) : BaseViewModel() {
     private val pageName = PortfolioListActivityHelper.getPageNameFromSavedState(savedStateHandle)
@@ -56,14 +54,8 @@ class PortfolioListViewModel @Inject constructor(
 
     fun deletePortfolio(itemId: Int) {
         Timber.tag(TAG).d("deletePortfolio: $itemId")
-        savePortfolioUseCase(
-            PortfolioDto(
-                id = itemId,
-                masterId = getMasterIdFromSharedUseCase(),
-                title = null,
-                type = null,
-                useYn = false
-            )
+        deletePortfolioUseCase(
+            itemId
         )
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

@@ -66,7 +66,7 @@ class EditOtherFlexibleOptionsFragment : BaseFragment<FragmentEditOtherFlexibleO
     private fun initChips() {
         OtherFlexibleOptionsChipGroupHelper(layoutInflater, binding.otherOptionsChipGroup)
         viewModel.requestOtherFlexibleOptions()
-        // 가져온 text들을 chip group에서 찾아서 selected 표시를 해준다.
+        // 가져온 text 들을 chip group 에서 찾아서 selected 표시를 해준다.
         viewModel.otherFlexibleOptions.value?.let { masterConfigList ->
             masterConfigList.map { masterConfig ->
                 binding.otherOptionsChipGroup.chipGroup.children.forEach {
@@ -78,7 +78,7 @@ class EditOtherFlexibleOptionsFragment : BaseFragment<FragmentEditOtherFlexibleO
     }
 
     private fun saveCheckedChips() {
-        // 저장하기 위에, ListLiveData에 남아있는 선택값들을 클리어하고 UI에서 선택된 값들을 새로 set 해준다.
+        // 저장하기 위에, ListLiveData 에 남아있는 선택값들을 클리어하고 UI 에서 선택된 값들을 새로 set 해준다.
         viewModel.otherFlexibleOptions.value = null
         val checkChipIds: List<Int> = binding.otherOptionsChipGroup.chipGroup.checkedChipIds
 

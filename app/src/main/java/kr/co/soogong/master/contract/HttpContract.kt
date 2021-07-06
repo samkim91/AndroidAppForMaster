@@ -24,17 +24,23 @@ object HttpContract {
 
     //region Estimations
     const val SAVE_ESTIMATION = "estimation/save"
-    const val SAVE_REPAIR = "repair/save"
     const val CALL_TO_CLIENT = "estimation/count-call"
+    //endregion
+
+    //region Repair
+    const val SAVE_REPAIR = "repair/save"
+    const val REQUEST_REVIEW = "repair/request-review"
     //endregion
 
     //region Profile
     const val MY_PAGE_URL = "https://soogong.co.kr/master/"
     const val GET_MASTER_BY_UID = "master/find-by-uid"
     const val SAVE_MASTER = "master/save"
+
+    //region Portfolio
     const val SAVE_PORTFOLIO = "masterPortfolio/save"
     const val GET_PORTFOLIOS = "masterPortfolio/find-all-by-masterUid"
-
+    const val DELETE_PORTFOLIO = "masterPortfolio/delete/{id}"
     //endregion
 
     //region MyPage

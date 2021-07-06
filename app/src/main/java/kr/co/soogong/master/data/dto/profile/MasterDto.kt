@@ -62,6 +62,9 @@ data class MasterDto(
     @SerializedName("shopImages")
     val shopImages: List<AttachmentDto>? = null,
 
+    @SerializedName("updateShopImagesYn")
+    val updateShopImagesYn: Boolean? = null,
+
     @SerializedName("warrantyPeriod")
     val warrantyPeriod: Int? = null,
 
@@ -69,7 +72,7 @@ data class MasterDto(
     val warrantyDescription: String? = null,
 
     @SerializedName("openDate")
-    val openDate: Date? = null,
+    val openDate: String? = null,
 
     @SerializedName("businessType")
     val businessType: String? = null,

@@ -57,7 +57,7 @@ class EditEmailViewModel @Inject constructor(
             MasterDto(
                 id = _profile.value?.id,
                 uid = _profile.value?.uid,
-                email = "$localPart@$domain",
+                email = "${localPart.value}@${domain.value}",
             )
         ).subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

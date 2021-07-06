@@ -9,10 +9,10 @@ import kr.co.soogong.master.data.dto.requirement.repair.RepairDto
 import javax.inject.Inject
 
 @Reusable
-class CallToClientUseCase @Inject constructor(
+class RequestReviewUseCase @Inject constructor(
     private val requirementService: RequirementService,
 ){
-    operator fun invoke(estimationId: Int): Single<Boolean> {
-        return requirementService.callToClient(estimationId)
+    operator fun invoke(repairDto: RepairDto): Single<Boolean> {
+        return requirementService.requestReview(repairDto)
     }
 }

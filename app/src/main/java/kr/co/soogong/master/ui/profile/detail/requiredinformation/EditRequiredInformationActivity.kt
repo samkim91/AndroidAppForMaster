@@ -82,8 +82,9 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
 
             career.addDefaultButtonClickListener {
                 val bottomDialog =
-                    BottomDialogRecyclerView(
-                        BottomDialogData.insertingCareerTitle, BottomDialogData.getWarrantyPeriodList(),
+                    BottomDialogRecyclerView.newInstance(
+                        title = BottomDialogData.insertingCareerTitle,
+                        dialogData = BottomDialogData.getWarrantyPeriodList(),
                         itemClick = { _, value ->
                             viewModel.saveCareerPeriod(value)
                         }
@@ -110,7 +111,9 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
 
             serviceArea.addDefaultButtonClickListener {
                 val bottomDialog =
-                    BottomDialogRecyclerView(BottomDialogData.choosingServiceAreaTitle, BottomDialogData.getServiceAreaList(),
+                    BottomDialogRecyclerView.newInstance(
+                        title = BottomDialogData.choosingServiceAreaTitle,
+                        dialogData = BottomDialogData.getServiceAreaList(),
                         itemClick = { _, radius ->
                             naverMap.changeServiceArea(radius)
                             viewModel.requiredInformation.mutation {
@@ -133,7 +136,10 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
         Timber.tag(TAG).d("registerEventObserve: ")
         viewModel.action.observe(this, EventObserver { event ->
             when (event) {
-                GET_PROFILE_SUCCESSFULLY -> setMasterApprovalLayout()
+                GET_PROFILE_SUCCESSFULLY -> {
+                    naverMap
+                    setMasterApprovalLayout()
+                }
                 SAVE_MASTER_INFORMATION_SUCCESSFULLY -> viewModel.requestRequiredInformation()
                 SAVE_MASTER_INFORMATION_FAILED, GET_PROFILE_FAILED -> toast(getString(R.string.error_message_of_request_failed))
             }
@@ -144,7 +150,6 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
         Timber.tag(TAG).d("onStart: ")
         super.onStart()
         viewModel.requestRequiredInformation()
-        naverMap
     }
 
     private fun setMasterApprovalLayout() {

@@ -1,7 +1,6 @@
 package kr.co.soogong.master.network.requirement
 
 import io.reactivex.Single
-import kr.co.soogong.master.data.dto.Response
 import kr.co.soogong.master.data.dto.requirement.RequirementDto
 import kr.co.soogong.master.data.dto.requirement.estimation.EstimationDto
 import kr.co.soogong.master.data.dto.requirement.repair.RepairDto
@@ -28,8 +27,15 @@ class RequirementService @Inject constructor(
     fun saveRepair(repairDto: RepairDto): Single<RequirementDto> {
         return requirementInterface.saveRepair(repairDto)
     }
-    fun callToClient(estimationId: Int, from: String): Single<Boolean> {
-        return requirementInterface.callToClient(estimationId, from)
+    fun callToClient(estimationId: Int): Single<Boolean> {
+        val data = HashMap<String, Any>()
+        data["estimationId"] = estimationId
+        data["from"] = "Master"
+
+        return requirementInterface.callToClient(data)
     }
 
+    fun requestReview(repairDto: RepairDto): Single<Boolean> {
+        return requirementInterface.requestReview(repairDto)
+    }
 }

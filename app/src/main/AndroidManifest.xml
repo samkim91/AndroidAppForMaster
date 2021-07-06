@@ -50,8 +50,7 @@
             android:launchMode="singleTask" /> <!-- todo: 가로화면도 지원하도록 버그를 잡아야함 -->
         <activity
             android:name=".ui.main.MainActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
+            android:launchMode="singleTask" />
         <activity
             android:name=".ui.major.MajorActivity"
             android:launchMode="singleTask" />

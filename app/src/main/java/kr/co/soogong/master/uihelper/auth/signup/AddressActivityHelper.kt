@@ -6,7 +6,9 @@ import kr.co.soogong.master.ui.auth.signup.AddressActivity
 
 object AddressActivityHelper {
     fun getIntent(context: Context): Intent {
-        return Intent(context, AddressActivity::class.java)
+        return Intent(context, AddressActivity::class.java).apply {
+            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        }
     }
 
     const val SEARCH_ADDRESS_ACTIVITY = 10000
