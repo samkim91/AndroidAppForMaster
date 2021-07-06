@@ -7,6 +7,7 @@ import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
 import androidx.fragment.app.activityViewModels
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Job
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentSignUpAddressBinding
 import kr.co.soogong.master.ui.auth.signup.SignUpActivity

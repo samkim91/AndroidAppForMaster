@@ -12,7 +12,10 @@ import kr.co.soogong.master.data.dto.requirement.estimation.EstimationDto
 import kr.co.soogong.master.data.dto.requirement.repair.RepairDto
 import kr.co.soogong.master.data.model.profile.Review
 import kr.co.soogong.master.data.model.requirement.estimation.EstimationResponseCode
-import kr.co.soogong.master.domain.usecase.requirement.*
+import kr.co.soogong.master.domain.usecase.requirement.CallToClientUseCase
+import kr.co.soogong.master.domain.usecase.requirement.GetRequirementUseCase
+import kr.co.soogong.master.domain.usecase.requirement.RequestReviewUseCase
+import kr.co.soogong.master.domain.usecase.requirement.SaveEstimationUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import kr.co.soogong.master.uihelper.requirment.action.ViewRequirementActivityHelper
 import timber.log.Timber
@@ -23,7 +26,7 @@ class ViewRequirementViewModel @Inject constructor(
     private val getRequirementUseCase: GetRequirementUseCase,
     private val saveEstimationUseCase: SaveEstimationUseCase,
     private val callToClientUseCase: CallToClientUseCase,
-    private val saveRepairUseCase: SaveRepairUseCase,
+    private val requestReviewUseCase: RequestReviewUseCase,
     val savedStateHandle: SavedStateHandle
 ) : BaseViewModel() {
     // Note : activity 에서 viewModel 로 데이터 넘기는 법. savedStateHandle 에서 가져온다.
@@ -113,12 +116,11 @@ class ViewRequirementViewModel @Inject constructor(
 
     fun askForReview() {
         Timber.tag(TAG).d("askForReview: ")
-        saveRepairUseCase(
+        requestReviewUseCase(
             RepairDto(
                 id = _requirement.value?.estimationDto?.repair?.id,
                 requirementToken = _requirement.value?.token,
                 estimationId = _requirement.value?.estimationDto?.id,
-                requestReviewYn = true,
             )
         )
             .subscribeOn(Schedulers.io())

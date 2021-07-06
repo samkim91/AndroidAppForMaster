@@ -34,4 +34,8 @@ class RequirementService @Inject constructor(
 
         return requirementInterface.callToClient(data)
     }
+
+    fun requestReview(repairDto: RepairDto): Single<Boolean> {
+        return requirementInterface.requestReview(repairDto)
+    }
 }

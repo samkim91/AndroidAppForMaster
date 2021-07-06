@@ -65,24 +65,46 @@ class EditFlexibleCostViewModel @Inject constructor(
     fun saveFlexibleCosts() {
         Timber.tag(TAG).d("saveFlexibleCosts: ")
 
+        val configList: List<MasterConfigDto> = listOf(
+            travelCostValue.value?.let {
+                MasterConfigDto(
+                    groupCode = FlexibleCostCodeTable.code,
+                    code = TravelCostCodeTable.code,
+                    name = TravelCostCodeTable.inKorean,
+                    value = it
+                )
+            } ?: MasterConfigDto(),
+            craneUsageValue.value?.let {
+                MasterConfigDto(
+                    groupCode = FlexibleCostCodeTable.code,
+                    code = CraneUsageCodeTable.code,
+                    name = CraneUsageCodeTable.inKorean,
+                    value = it
+                )
+            } ?: MasterConfigDto(),
+            packageCostValue.value?.let {
+                MasterConfigDto(
+                    groupCode = FlexibleCostCodeTable.code,
+                    code = PackageCostCodeTable.code,
+                    name = PackageCostCodeTable.inKorean,
+                    value = it
+                )
+            } ?: MasterConfigDto(),
+            otherCostInformation.value?.let {
+                MasterConfigDto(
+                    groupCode = FlexibleCostCodeTable.code,
+                    code = OtherInfoCodeTable.code,
+                    name = OtherInfoCodeTable.inKorean,
+                    value = it
+                )
+            } ?: MasterConfigDto(),
+        )
+
         saveMasterUseCase(
             MasterDto(
                 id = _profile.value?.id,
                 uid = _profile.value?.uid,
-                masterConfigs = flexibleCost.value?.map { masterConfig ->
-                    MasterConfigDto(
-                        id = masterConfig.id,
-                        groupCode = FlexibleCostCodeTable.code,
-                        code = masterConfig.code,
-                        name = masterConfig.name,
-                        value = when (masterConfig.code) {
-                            TravelCostCodeTable.code -> travelCostValue.value
-                            CraneUsageCodeTable.code -> craneUsageValue.value
-                            PackageCostCodeTable.code -> packageCostValue.value
-                            else -> otherCostInformation.value
-                        }
-                    )
-                }
+                masterConfigs = configList
             )
         )
             .subscribeOn(Schedulers.io())

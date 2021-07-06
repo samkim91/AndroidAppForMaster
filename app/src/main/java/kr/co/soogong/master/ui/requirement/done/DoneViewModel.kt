@@ -10,7 +10,7 @@ import kr.co.soogong.master.data.dto.requirement.repair.RepairDto
 import kr.co.soogong.master.data.model.requirement.RequirementCard
 import kr.co.soogong.master.data.model.requirement.RequirementStatus
 import kr.co.soogong.master.domain.usecase.requirement.GetDoneEstimationListUseCase
-import kr.co.soogong.master.domain.usecase.requirement.SaveRepairUseCase
+import kr.co.soogong.master.domain.usecase.requirement.RequestReviewUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import timber.log.Timber
 import javax.inject.Inject
@@ -18,7 +18,7 @@ import javax.inject.Inject
 @HiltViewModel
 class DoneViewModel @Inject constructor(
     private val getDoneEstimationListUseCase: GetDoneEstimationListUseCase,
-    private val saveRepairUseCase: SaveRepairUseCase,
+    private val requestReviewUseCase: RequestReviewUseCase,
 ) : BaseViewModel() {
     private val _doneList = MutableLiveData<List<RequirementCard>>()
     val doneList: LiveData<List<RequirementCard>>
@@ -55,7 +55,10 @@ class DoneViewModel @Inject constructor(
                 onSuccess = {
                     Timber.tag(TAG).d("requestList successfully: $it")
                     _doneList.postValue(it)
-                    if (_index.value == 0 || _index.value == null) sendEvent(BADGE_UPDATE, it.count())
+                    if (_index.value == 0 || _index.value == null) sendEvent(
+                        BADGE_UPDATE,
+                        it.count()
+                    )
                 },
                 onError = {
                     Timber.tag(TAG).d("requestList failed: $it")
@@ -67,12 +70,11 @@ class DoneViewModel @Inject constructor(
 
     fun askForReview(requirementCard: RequirementCard?) {
         Timber.tag(TAG).d("askForReview: ")
-        saveRepairUseCase(
+        requestReviewUseCase(
             RepairDto(
                 id = requirementCard?.estimationDto?.repair?.id,
                 requirementToken = requirementCard?.token,
                 estimationId = requirementCard?.estimationDto?.id,
-                requestReviewYn = true,
             )
         )
             .subscribeOn(Schedulers.io())
