@@ -50,6 +50,15 @@ data class RequirementDto(
     @SerializedName("images")
     val images: MutableList<AttachmentDto>?,
 
+    @SerializedName("canceledYn")
+    val canceledYn: Boolean? = null,
+
+    @SerializedName("canceledReason")
+    val canceledReason: String? = null,
+
+    @SerializedName("canceledDescription")
+    val canceledDescription: String? = null,
+
     @SerializedName("closedAt")
     val closedAt: Date?,
 

@@ -4,6 +4,7 @@ import android.icu.text.SimpleDateFormat
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import kr.co.soogong.master.R
+import kr.co.soogong.master.data.dto.requirement.RequirementDto
 import kr.co.soogong.master.data.model.requirement.RequirementStatus
 import java.util.*
 
@@ -26,9 +27,9 @@ fun TextView.setClosedDate(date: Date?) {
 }
 
 @BindingAdapter("bind:status")
-fun TextView.setStatus(status: String?) {
+fun TextView.setStatus(requirementDto: RequirementDto?) {
     // Code -> Status in Korean
-    status?.let {
+    requirementDto?.let {
         text = RequirementStatus.getStatus(it).toString()
     }
 }

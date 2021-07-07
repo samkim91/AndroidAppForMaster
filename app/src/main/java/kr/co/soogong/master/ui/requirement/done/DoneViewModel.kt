@@ -62,7 +62,6 @@ class DoneViewModel @Inject constructor(
                 },
                 onError = {
                     Timber.tag(TAG).d("requestList failed: $it")
-                    setAction(REQUEST_LIST_FAILED)
                     _doneList.postValue(emptyList())
                 }
             ).addToDisposable()

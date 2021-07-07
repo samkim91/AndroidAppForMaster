@@ -56,7 +56,6 @@ class ReceivedViewModel @Inject constructor(
                 },
                 onError = {
                     Timber.tag(TAG).d("requestList failed: $it")
-                    setAction(REQUEST_LIST_FAILED)
                     _receivedList.postValue(emptyList())
                 }
             ).addToDisposable()

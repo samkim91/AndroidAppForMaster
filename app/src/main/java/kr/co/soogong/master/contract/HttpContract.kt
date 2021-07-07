@@ -7,7 +7,6 @@ object HttpContract {
     const val PROD_URL = "https://backendmain.soogong.co.kr/"
 
     //region Auth
-    const val IS_USER_EXIST = "auth/user-exist"
     const val IS_MASTER_EXISTENT = "master/is-existent"
     const val SAVE_FCM_TOKEN = "firebase/save-token"
     //endregion

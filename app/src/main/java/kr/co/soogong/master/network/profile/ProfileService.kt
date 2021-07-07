@@ -20,9 +20,9 @@ class ProfileService @Inject constructor(
 
     fun saveMaster(
         masterDto: RequestBody,
-        profileImage: MultipartBody.Part?,
-        businessRegistImage: MultipartBody.Part?,
-        shopImages: List<MultipartBody.Part>?
+        profileImage: MultipartBody.Part? = null,
+        businessRegistImage: MultipartBody.Part? = null,
+        shopImages: List<MultipartBody.Part>? = null,
     ): Single<MasterDto> {
         return profileInterface.saveMaster(masterDto, profileImage, businessRegistImage, shopImages)
     }

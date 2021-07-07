@@ -12,16 +12,12 @@ import javax.inject.Inject
 @Reusable
 class SignInUseCase @Inject constructor(
     private val authService: AuthService,
-    private val saveMasterIdInSharedUseCase: SaveMasterIdInSharedUseCase,
-    private val saveMasterUidInSharedUseCase: SaveMasterUidInSharedUseCase,
-    private val saveMasterApprovalUseCase: SaveMasterApprovalUseCase,
+    private val saveMasterBasicDataInSharedUseCase: SaveMasterBasicDataInSharedUseCase,
     private val masterDao: MasterDao,
 ) {
     operator fun invoke(uid: String): Single<MasterDto> {
         return authService.signIn(uid).doOnSuccess {
-            saveMasterIdInSharedUseCase(it.id!!)
-            saveMasterUidInSharedUseCase(it.uid!!)
-            if (it.subscriptionPlan != "NotApproved" || it.subscriptionPlan != "RequestApprove") saveMasterApprovalUseCase(true)
+            saveMasterBasicDataInSharedUseCase(it)
 
             masterDao.insert(it)
         }.doOnError {

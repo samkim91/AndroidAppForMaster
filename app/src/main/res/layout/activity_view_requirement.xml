@@ -55,7 +55,7 @@
                         android:textColor="@color/color_1FC472"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/banner_image"
-                        bind:status="@{vm.requirement.status}"
+                        bind:status="@{vm.requirement}"
                         tools:text="견적요청" />
 
                     <androidx.appcompat.widget.AppCompatTextView

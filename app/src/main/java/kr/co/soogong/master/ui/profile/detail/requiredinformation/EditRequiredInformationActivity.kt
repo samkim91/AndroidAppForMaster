@@ -140,7 +140,10 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
                     naverMap
                     setMasterApprovalLayout()
                 }
-                SAVE_MASTER_INFORMATION_SUCCESSFULLY -> viewModel.requestRequiredInformation()
+                SAVE_MASTER_INFORMATION_SUCCESSFULLY -> {
+                    viewModel.requestRequiredInformation()
+                    setLayoutForApprovedMaster()
+                }
                 SAVE_MASTER_INFORMATION_FAILED, GET_PROFILE_FAILED -> toast(getString(R.string.error_message_of_request_failed))
             }
         })

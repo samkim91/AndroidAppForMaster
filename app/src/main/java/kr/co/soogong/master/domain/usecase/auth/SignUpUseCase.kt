@@ -6,22 +6,21 @@ import dagger.Reusable
 import io.reactivex.Single
 import kr.co.soogong.master.data.dao.profile.MasterDao
 import kr.co.soogong.master.data.dto.profile.MasterDto
-import kr.co.soogong.master.network.auth.AuthService
+import kr.co.soogong.master.network.profile.ProfileService
+import kr.co.soogong.master.utility.MultipartGenerator
 import javax.inject.Inject
 
 @Reusable
 class SignUpUseCase @Inject constructor(
-    private val authService: AuthService,
-    private val saveMasterIdInSharedUseCase: SaveMasterIdInSharedUseCase,
-    private val saveMasterUidInSharedUseCase: SaveMasterUidInSharedUseCase,
-    private val saveMasterApprovalUseCase: SaveMasterApprovalUseCase,
+    private val profileService: ProfileService,
+    private val saveMasterBasicDataInSharedUseCase: SaveMasterBasicDataInSharedUseCase,
     private val masterDao: MasterDao,
 ) {
     operator fun invoke(masterDto: MasterDto): Single<MasterDto> {
-        return authService.signUp(masterDto).doOnSuccess {
-            saveMasterIdInSharedUseCase(it.id!!)
-            saveMasterUidInSharedUseCase(it.uid!!)
-            if (it.subscriptionPlan != "NotApproved" || it.subscriptionPlan != "RequestApprove") saveMasterApprovalUseCase(true)
+        val master = MultipartGenerator.createJson(masterDto)
+
+        return profileService.saveMaster(master).doOnSuccess {
+            saveMasterBasicDataInSharedUseCase(it)
 
             masterDao.insert(it)
         }.doOnError {
