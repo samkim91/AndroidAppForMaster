@@ -36,15 +36,25 @@ class EditFlexibleCostFragment : BaseFragment<FragmentEditFlexibleCostBinding>(
             vm = viewModel
             lifecycleOwner = viewLifecycleOwner
 
-            initChips()
+            initChipsGroup()
             defaultButton.setOnClickListener {
                 viewModel.saveFlexibleCosts()
             }
         }
     }
 
+    private fun initChipsGroup() {
+        bind {
+            FlexibleCostChipGroupHelper(layoutInflater, travelCostChipGroup, TRAVEL_COST)
+            FlexibleCostChipGroupHelper(layoutInflater, craneUsageChipGroup, CRANE_USAGE)
+            FlexibleCostChipGroupHelper(layoutInflater, packageCostChipGroup, PACKAGE_COST)
+        }
+        viewModel.requestFlexibleCosts()
+    }
+
     private fun registerEventObserve() {
         Timber.tag(TAG).d("registerEventObserve: ")
+
         viewModel.action.observe(viewLifecycleOwner, EventObserver { event ->
             when(event) {
                 SAVE_FLEXIBLE_COST_SUCCESSFULLY -> {
@@ -55,15 +65,6 @@ class EditFlexibleCostFragment : BaseFragment<FragmentEditFlexibleCostBinding>(
                 }
             }
         })
-    }
-
-    private fun initChips() {
-        bind {
-            FlexibleCostChipGroupHelper(layoutInflater, travelCostChipGroup, TRAVEL_COST)
-            FlexibleCostChipGroupHelper(layoutInflater, craneUsageChipGroup, CRANE_USAGE)
-            FlexibleCostChipGroupHelper(layoutInflater, packageCostChipGroup, PACKAGE_COST)
-        }
-        viewModel.requestFlexibleCosts()
     }
 
     companion object {

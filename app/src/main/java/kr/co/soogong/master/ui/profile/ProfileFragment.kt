@@ -14,7 +14,7 @@ import kr.co.soogong.master.utility.PermissionHelper
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerActivityHelper
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_EMAIL
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_FLEXIBLE_COST
-import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_OTHER_FLEXIBLE_OPTIONS
+import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_OTHER_FLEXIBLE_OPTION
 import kr.co.soogong.master.uihelper.profile.PortfolioListActivityHelper
 import kr.co.soogong.master.uihelper.profile.PortfolioListActivityHelper.PORTFOLIO
 import kr.co.soogong.master.uihelper.profile.PortfolioListActivityHelper.PRICE_BY_PROJECTS
@@ -91,11 +91,11 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
                 )
             }
 
-            otherFlexibleOptions.addDefaultButtonClickListener {
+            otherFlexibleOption.addDefaultButtonClickListener {
                 startActivity(
                     EditProfileContainerActivityHelper.getIntent(
                         requireContext(),
-                        EDIT_OTHER_FLEXIBLE_OPTIONS
+                        EDIT_OTHER_FLEXIBLE_OPTION
                     )
                 )
             }
