@@ -3,7 +3,7 @@ package kr.co.soogong.master.uihelper.profile
 import androidx.fragment.app.Fragment
 import kr.co.soogong.master.ui.profile.detail.email.EditEmailFragment
 import kr.co.soogong.master.ui.profile.detail.flexiblecost.EditFlexibleCostFragment
-import kr.co.soogong.master.ui.profile.detail.otherflexibleoptions.EditOtherFlexibleOptionsFragment
+import kr.co.soogong.master.ui.profile.detail.otherflexibleoption.EditOtherFlexibleOptionFragment
 import kr.co.soogong.master.ui.profile.detail.requiredinformation.address.EditAddressFragment
 import kr.co.soogong.master.ui.profile.detail.requiredinformation.introduction.EditIntroductionFragment
 import kr.co.soogong.master.ui.profile.detail.requiredinformation.ownername.EditOwnerNameFragment
@@ -23,7 +23,7 @@ object EditProfileContainerFragmentHelper {
     const val EDIT_PRICE_BY_PROJECTS = "시공 종류별 가격 수정하기"
     const val ADD_PRICE_BY_PROJECTS = "시공 종류별 가격 추가하기"
     const val EDIT_FLEXIBLE_COST = "현장 가격 변동 요인 등록·수정하기"
-    const val EDIT_OTHER_FLEXIBLE_OPTIONS = "기타 변동 가능사항 등록·수정하기"
+    const val EDIT_OTHER_FLEXIBLE_OPTION = "기타 변동 가능사항 등록·수정하기"
     const val EDIT_EMAIL = "이메일 등록·수정하기"
 
     const val EDIT_INTRODUCTION = "업체 소개 등록·수정하기"
@@ -35,11 +35,6 @@ object EditProfileContainerFragmentHelper {
     const val EDIT_ADDRESS = "업체 주소 수정하기"
     const val EDIT_MAJOR = "시공 업종 수정하기"
 
-
-//    const val EDIT_NUMBER_OF_FELLOW = "팀원 수 수정하기"
-//    const val EDIT_AVAILABLE_TIME_FOR_CONTACT = "연락 가능 시간 수정하기"
-
-
     fun getFragment(pageName: String, itemId: Int = -1): Fragment =
         when (pageName) {
             ADD_PORTFOLIO -> PortfolioFragment.newInstance(ADD_PORTFOLIO, null)
@@ -47,7 +42,7 @@ object EditProfileContainerFragmentHelper {
             ADD_PRICE_BY_PROJECTS -> PriceByProjectFragment.newInstance(ADD_PRICE_BY_PROJECTS, null)
             EDIT_PRICE_BY_PROJECTS -> PriceByProjectFragment.newInstance(EDIT_PRICE_BY_PROJECTS, itemId)
             EDIT_FLEXIBLE_COST -> EditFlexibleCostFragment.newInstance()
-            EDIT_OTHER_FLEXIBLE_OPTIONS -> EditOtherFlexibleOptionsFragment.newInstance()
+            EDIT_OTHER_FLEXIBLE_OPTION -> EditOtherFlexibleOptionFragment.newInstance()
             EDIT_EMAIL -> EditEmailFragment.newInstance()
 
             EDIT_INTRODUCTION -> EditIntroductionFragment.newInstance()

@@ -14,7 +14,7 @@ sealed class CodeTable {
                 CraneUsageCodeTable.inKorean -> CraneUsageCodeTable
                 PackageCostCodeTable.inKorean -> PackageCostCodeTable
                 OtherInfoCodeTable.inKorean -> OtherInfoCodeTable
-                OtherFlexibleOptionsCodeTable.inKorean -> OtherFlexibleOptionsCodeTable
+                OtherFlexibleOptionCodeTable.inKorean -> OtherFlexibleOptionCodeTable
                 MaskCodeTable.inKorean -> MaskCodeTable
                 OvershoesCodeTable.inKorean -> OvershoesCodeTable
                 DisposalCodeTable.inKorean -> DisposalCodeTable
@@ -61,8 +61,8 @@ object OtherInfoCodeTable : CodeTable() {
     override val inKorean: String = "기타 변동 가능 사항"
 }
 
-object OtherFlexibleOptionsCodeTable : CodeTable() {
-    override val code: String = "OtherFlexibleOptions"
+object OtherFlexibleOptionCodeTable : CodeTable() {
+    override val code: String = "OtherFlexibleOption"
     override val inKorean: String = "기타 변동 가능사항"
 }
 

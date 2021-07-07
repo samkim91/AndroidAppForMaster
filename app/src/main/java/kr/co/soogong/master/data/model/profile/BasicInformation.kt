@@ -13,7 +13,7 @@ data class BasicInformation(
     val priceByProjects: List<PortfolioDto>?,
     val profileImage: AttachmentDto?,
     val flexibleCost: List<MasterConfigDto>?,
-    val otherFlexibleOptions: List<MasterConfigDto>?,
+    val otherFlexibleOption: List<MasterConfigDto>?,
     val email: String?,
 ) : Parcelable {
     companion object {
@@ -23,7 +23,7 @@ data class BasicInformation(
                 priceByProjects = masterDto.masterPortfolios?.filter { portfolioDto -> portfolioDto.type == PriceByProjectCodeTable.code },
                 profileImage = masterDto.profileImage,
                 flexibleCost = masterDto.masterConfigs?.filter { masterConfigDto -> masterConfigDto.groupCode == FlexibleCostCodeTable.code },
-                otherFlexibleOptions = masterDto.masterConfigs?.filter { masterConfigDto -> masterConfigDto.groupCode == OtherFlexibleOptionsCodeTable.code },
+                otherFlexibleOption = masterDto.masterConfigs?.filter { masterConfigDto -> masterConfigDto.groupCode == OtherFlexibleOptionCodeTable.code },
                 email = masterDto.email,
             )
         }

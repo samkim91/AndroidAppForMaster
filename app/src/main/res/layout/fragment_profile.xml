@@ -224,7 +224,7 @@
 
                 <!-- 기타 변동 가능사항 -->
                 <kr.co.soogong.master.ui.widget.ProfileChipGroupCard
-                    android:id="@+id/other_flexible_options"
+                    android:id="@+id/other_flexible_option"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/gap_20"
@@ -233,8 +233,8 @@
                     android:layout_marginBottom="@dimen/gap_24"
                     android:background="@drawable/shape_radius8_white_background"
                     android:elevation="@dimen/gap_4"
-                    app:chipGroupWithoutTitle="@{vm.profile.basicInformation.otherFlexibleOptions}"
-                    app:defaultButtonByList="@{vm.profile.basicInformation.otherFlexibleOptions}"
+                    app:chipGroupWithoutTitle="@{vm.profile.basicInformation.otherFlexibleOption}"
+                    app:defaultButtonByList="@{vm.profile.basicInformation.otherFlexibleOption}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/flexible_cost"
@@ -256,7 +256,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/other_flexible_options"
+                    app:layout_constraintTop_toBottomOf="@id/other_flexible_option"
                     app:title='@{"이메일"}' />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

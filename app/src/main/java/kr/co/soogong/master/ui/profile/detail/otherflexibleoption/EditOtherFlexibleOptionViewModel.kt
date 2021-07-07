@@ -1,4 +1,4 @@
-package kr.co.soogong.master.ui.profile.detail.otherflexibleoptions
+package kr.co.soogong.master.ui.profile.detail.otherflexibleoption
 
 import androidx.lifecycle.MutableLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,61 +15,61 @@ import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
-class EditOtherFlexibleOptionsViewModel @Inject constructor(
+class EditOtherFlexibleOptionViewModel @Inject constructor(
     private val saveMasterUseCase: SaveMasterUseCase,
     private val getProfileUseCase: GetProfileUseCase,
 ) : BaseViewModel() {
     private val _profile = MutableLiveData<Profile>()
-    val otherFlexibleOptions = MutableLiveData<List<MasterConfigDto>>()
+    val otherFlexibleOption = MutableLiveData<List<MasterConfigDto>>()
 
-    fun requestOtherFlexibleOptions() {
-        Timber.tag(TAG).d("requestOtherFlexibleOptions: ")
+    fun requestOtherFlexibleOption() {
+        Timber.tag(TAG).d("requestOtherFlexibleOption: ")
 
         getProfileUseCase()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
                 onSuccess = { profile ->
-                    Timber.tag(TAG).d("requestOtherFlexibleOptions successfully: $profile")
+                    Timber.tag(TAG).d("requestOtherFlexibleOption successfully: $profile")
                     _profile.value = profile
-                    profile.basicInformation?.otherFlexibleOptions?.let {
-                        otherFlexibleOptions.postValue(it)
+                    profile.basicInformation?.otherFlexibleOption?.let {
+                        otherFlexibleOption.postValue(it)
                     }
                 },
-                onError = { setAction(GET_OTHER_FLEXIBLE_OPTIONS_FAILED) }
+                onError = { setAction(GET_OTHER_FLEXIBLE_OPTION_FAILED) }
             ).addToDisposable()
     }
 
-    fun saveOtherFlexibleOptions() {
-        Timber.tag(TAG).d("saveOtherFlexibleOptions: ${otherFlexibleOptions.value}")
+    fun saveOtherFlexibleOption() {
+        Timber.tag(TAG).d("saveOtherFlexibleOption: ${otherFlexibleOption.value}")
 
         saveMasterUseCase(
             MasterDto(
                 id = _profile.value?.id,
                 uid = _profile.value?.uid,
-                masterConfigs = otherFlexibleOptions.value,
+                masterConfigs = otherFlexibleOption.value,
             )
         )
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
                 onSuccess = {
-                    Timber.tag(TAG).d("saveOtherFlexibleOptions successfully: $it")
-                    setAction(SAVE_OTHER_FLEXIBLE_OPTIONS_SUCCESSFULLY)
+                    Timber.tag(TAG).d("saveOtherFlexibleOption successfully: $it")
+                    setAction(SAVE_OTHER_FLEXIBLE_OPTION_SUCCESSFULLY)
                 },
                 onError = {
-                    Timber.tag(TAG).d("saveOtherFlexibleOptions successfully: $it")
-                    setAction(SAVE_OTHER_FLEXIBLE_OPTIONS_FAILED)
+                    Timber.tag(TAG).d("saveOtherFlexibleOption successfully: $it")
+                    setAction(SAVE_OTHER_FLEXIBLE_OPTION_FAILED)
                 }
             ).addToDisposable()
     }
 
     companion object {
-        private const val TAG = "EditOtherFlexibleOptionsViewModel"
+        private const val TAG = "EditOtherFlexibleOptionViewModel"
 
-        const val SAVE_OTHER_FLEXIBLE_OPTIONS_SUCCESSFULLY =
-            "SAVE_OTHER_FLEXIBLE_OPTIONS_SUCCESSFULLY"
-        const val SAVE_OTHER_FLEXIBLE_OPTIONS_FAILED = "SAVE_OTHER_FLEXIBLE_OPTIONS"
-        const val GET_OTHER_FLEXIBLE_OPTIONS_FAILED = "GET_OTHER_FLEXIBLE_OPTIONS_FAILED"
+        const val SAVE_OTHER_FLEXIBLE_OPTION_SUCCESSFULLY =
+            "SAVE_OTHER_FLEXIBLE_OPTION_SUCCESSFULLY"
+        const val SAVE_OTHER_FLEXIBLE_OPTION_FAILED = "SAVE_OTHER_FLEXIBLE_OPTION_FAILED"
+        const val GET_OTHER_FLEXIBLE_OPTION_FAILED = "GET_OTHER_FLEXIBLE_OPTION_FAILED"
     }
 }
