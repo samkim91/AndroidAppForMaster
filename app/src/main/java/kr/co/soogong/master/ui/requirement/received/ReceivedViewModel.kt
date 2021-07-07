@@ -8,21 +8,20 @@ import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.model.requirement.RequirementCard
 import kr.co.soogong.master.data.model.requirement.RequirementStatus
-import kr.co.soogong.master.domain.usecase.auth.GetMasterApprovalUseCase
+import kr.co.soogong.master.domain.usecase.auth.GetMasterSubscriptionPlanUseCase
 import kr.co.soogong.master.domain.usecase.requirement.GetReceivedRequirementListUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
-import kr.co.soogong.master.ui.requirement.progress.ProgressViewModel
 import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class ReceivedViewModel @Inject constructor(
-    val getMasterApprovalUseCase: GetMasterApprovalUseCase,
+    val getMasterSubscriptionPlanUseCase: GetMasterSubscriptionPlanUseCase,
     private val getReceivedRequirementListUseCase: GetReceivedRequirementListUseCase
 ) : BaseViewModel() {
-    private val _isApprovedMaster = MutableLiveData<Boolean>(getMasterApprovalUseCase())
-    val isApprovedMaster: LiveData<Boolean>
-        get() = _isApprovedMaster
+    private val _masterSubscriptionPlan = MutableLiveData<String>(getMasterSubscriptionPlanUseCase())
+    val masterSubscriptionPlan: LiveData<String>
+        get() = _masterSubscriptionPlan
 
     private val _receivedList = MutableLiveData<List<RequirementCard>>()
     val receivedList: LiveData<List<RequirementCard>>

@@ -100,3 +100,25 @@ object NoiseCodeTable : CodeTable() {
     override val code: String = "Noise"
     override val inKorean: String = "시끄러울 수 있음"
 }
+
+object FreeCodeTable: CodeTable() {
+    override val code: String = "Free"
+    override val inKorean: String = "기본 마스터"
+}
+
+object GuaranteeCodeTable: CodeTable() {
+    override val code: String = "Guarantee"
+    override val inKorean: String = "개런티 마스터"
+}
+
+object NotApprovedCodeTable: CodeTable() {
+    override val code: String = "NotApproved"
+    override val inKorean: String = "미승인 마스터"
+}
+
+object RequestApproveCodeTable: CodeTable() {
+    override val code: String = "RequestApprove"
+    override val inKorean: String = "미승인 마스터"
+}
+
+

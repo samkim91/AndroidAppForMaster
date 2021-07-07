@@ -5,12 +5,15 @@ import android.view.View
 import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
+import kr.co.soogong.master.data.model.profile.NotApprovedCodeTable
+import kr.co.soogong.master.data.model.profile.RequestApproveCodeTable
 import kr.co.soogong.master.databinding.ActivityEditRequiredInformationBinding
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogData
 import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogRecyclerView
 import kr.co.soogong.master.ui.profile.detail.requiredinformation.EditRequiredInformationViewModel.Companion.GET_PROFILE_FAILED
 import kr.co.soogong.master.ui.profile.detail.requiredinformation.EditRequiredInformationViewModel.Companion.GET_PROFILE_SUCCESSFULLY
+import kr.co.soogong.master.ui.profile.detail.requiredinformation.EditRequiredInformationViewModel.Companion.MASTER_SUBSCRIPTION_PLAN
 import kr.co.soogong.master.ui.profile.detail.requiredinformation.EditRequiredInformationViewModel.Companion.SAVE_MASTER_INFORMATION_FAILED
 import kr.co.soogong.master.ui.profile.detail.requiredinformation.EditRequiredInformationViewModel.Companion.SAVE_MASTER_INFORMATION_SUCCESSFULLY
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerActivityHelper
@@ -138,13 +141,24 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
             when (event) {
                 GET_PROFILE_SUCCESSFULLY -> {
                     naverMap
-                    setMasterApprovalLayout()
                 }
                 SAVE_MASTER_INFORMATION_SUCCESSFULLY -> {
                     viewModel.requestRequiredInformation()
                     setLayoutForApprovedMaster()
                 }
                 SAVE_MASTER_INFORMATION_FAILED, GET_PROFILE_FAILED -> toast(getString(R.string.error_message_of_request_failed))
+            }
+        })
+
+        viewModel.event.observe(this, EventObserver { (event, value) ->
+            when(event) {
+                MASTER_SUBSCRIPTION_PLAN -> {
+                    when(value) {
+                        NotApprovedCodeTable.code -> setPercentageText()
+                        RequestApproveCodeTable.code -> setLayoutForRequestApproveMaster()
+                        else -> setLayoutForApprovedMaster()
+                    }
+                }
             }
         })
     }
@@ -155,15 +169,24 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
         viewModel.requestRequiredInformation()
     }
 
-    private fun setMasterApprovalLayout() {
-        if (viewModel.isApprovedMaster.value == true) setLayoutForApprovedMaster() else setPercentageText()
+    private fun setLayoutForRequestApproveMaster() {
+        bind {
+            requiredProfileCardPercentage.visibility = View.GONE
+            groupSawCheckForConfirmedMaster.visibility = View.VISIBLE
+            defaultButton.visibility = View.GONE
+            alertContainerToFillUpRequiredInformation.visibility = View.GONE
+            textSawCheckForConfirmedMaster.text = getString(R.string.waiting_for_confirmation)
+            textSawCheckForConfirmedMaster.setTextColor(getColor(R.color.color_FF711D))
+        }
     }
 
     private fun setLayoutForApprovedMaster() {
-        binding.requiredProfileCardPercentage.visibility = View.GONE
-        binding.groupSawCheckForConfirmedMaster.visibility = View.VISIBLE
-        binding.defaultButton.visibility = View.GONE
-        binding.alertContainerToFillUpRequiredInformation.visibility = View.GONE
+        bind {
+            requiredProfileCardPercentage.visibility = View.GONE
+            groupSawCheckForConfirmedMaster.visibility = View.VISIBLE
+            defaultButton.visibility = View.GONE
+            alertContainerToFillUpRequiredInformation.visibility = View.GONE
+        }
     }
 
     private fun setPercentageText() {

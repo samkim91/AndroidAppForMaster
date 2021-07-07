@@ -20,11 +20,11 @@ class SaveMasterBasicDataInSharedUseCase @Inject constructor(
             .putString(AppSharedPreferenceContract.MASTER_UID, masterDto.uid!!)
             .apply()
 
-        // save master approval
+        // save master subscription plan
         sharedPreferences.edit()
-            .putBoolean(
-                AppSharedPreferenceContract.IS_APPROVED,
-                !(masterDto.subscriptionPlan == "NotApproved" || masterDto.subscriptionPlan == "RequestedApprove")
+            .putString(
+                AppSharedPreferenceContract.MASTER_SUBSCRIPTION_PLAN,
+                masterDto.subscriptionPlan
             )
             .apply()
     }
