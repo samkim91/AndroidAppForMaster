@@ -57,7 +57,6 @@ class ProgressViewModel @Inject constructor(
                 },
                 onError = {
                     Timber.tag(TAG).d("requestList failed: $it")
-                    setAction(REQUEST_LIST_FAILED)
                     _progressList.postValue(emptyList())
                 }
             ).addToDisposable()

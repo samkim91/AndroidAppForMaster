@@ -171,14 +171,12 @@ dependencies {
     androidTestImplementation "org.robolectric:annotations:$robolectricVersion"
     androidTestImplementation "androidx.test.espresso:espresso-idling-resource:$espressoVersion"
 
-    // FCM
+    // Firebase
     implementation platform('com.google.firebase:firebase-bom:28.1.0')
     implementation 'com.google.firebase:firebase-auth-ktx'
     implementation 'com.google.firebase:firebase-messaging-ktx'
     implementation 'com.google.firebase:firebase-analytics-ktx'
-
-    // Crashlytics
-    implementation 'com.google.firebase:firebase-crashlytics-ktx:17.4.0'
+    implementation 'com.google.firebase:firebase-crashlytics-ktx'
 
     // Kakao
     implementation "com.kakao.sdk:v2-talk:$kakaoVersion"

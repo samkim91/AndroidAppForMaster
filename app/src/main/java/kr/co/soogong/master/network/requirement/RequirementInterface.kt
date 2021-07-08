@@ -11,9 +11,8 @@ import retrofit2.http.POST
 import retrofit2.http.Query
 
 interface RequirementInterface {
-    // TODO: 2021/06/23 Uid로 조회하도록 변경해야함 ...
-    @GET(HttpContract.GET_REQUIREMENT_LIST)
-    fun getRequirementList(@Query("masterId") masterId : Int, @Query("statusArray") statusArray: List<String>): Single<List<RequirementDto>>
+    @GET(HttpContract.GET_REQUIREMENT_LIST_BY_UID)
+    fun getRequirementList(@Query("masterUid") masterUid : String, @Query("statusArray") statusArray: List<String>): Single<List<RequirementDto>>
 
     @GET(HttpContract.GET_REQUIREMENT)
     fun getRequirement(@Query("requirementId") requirementId : Int, @Query("masterId") masterId: Int): Single<RequirementDto>

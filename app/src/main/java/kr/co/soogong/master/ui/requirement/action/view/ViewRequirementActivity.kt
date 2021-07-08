@@ -124,6 +124,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
 
     private fun registerEventObserve() {
         viewModel.requirement.observe(this@ViewRequirementActivity, { requirement ->
+            setDefaultView()
 
             bind {
                 actionBar.title.text =
@@ -132,7 +133,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                 // 고객 요청 내용
                 bindRequirementQnasData(requirement?.requirementQnas)
 
-                when (RequirementStatus.getStatus(requirement.status)) {
+                when (RequirementStatus.getStatus(requirement)) {
                     // 상태 : 견적요청
                     // view :
                     // footer button : 견적 마감일, 견적을 보낼래요, 견적을 내기 어려워요
@@ -178,9 +179,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                     // view : 고객 리뷰, 나의 최종 시공 내용
                     // footer button : none
                     RequirementStatus.Closed -> {
-                        viewModel.review.observe(this@ViewRequirementActivity, {
-                            customerReviewGroup.isVisible = it != null
-                        })
+                        customerReviewGroup.isVisible = viewModel.review.value != null
                         bindRepairData(requirement?.estimationDto)
                     }
 
@@ -236,6 +235,19 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
     override fun onStart() {
         super.onStart()
         viewModel.requestRequirement()
+    }
+
+    private fun setDefaultView(){
+        bind {
+            requestedButtonGroup.visibility = View.GONE
+            cancelButton.visibility = View.GONE
+            doneButton.visibility = View.GONE
+            callToCustomerContainer.visibility = View.GONE
+            doneButton.visibility = View.GONE
+            askReviewButton.visibility = View.GONE
+            customerReviewGroup.visibility = View.GONE
+            repairGroup.visibility = View.GONE
+        }
     }
 
     private fun bindRequirementQnasData(requirementQnaDtos: List<RequirementQnaDto>?) {

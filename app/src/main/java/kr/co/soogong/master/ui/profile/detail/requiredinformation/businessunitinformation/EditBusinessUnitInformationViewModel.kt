@@ -9,6 +9,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.dto.profile.MasterDto
+import kr.co.soogong.master.data.model.profile.CodeTable
 import kr.co.soogong.master.data.model.profile.Profile
 import kr.co.soogong.master.domain.usecase.profile.GetProfileUseCase
 import kr.co.soogong.master.domain.usecase.profile.SaveMasterUseCase
@@ -74,7 +75,7 @@ class EditBusinessUnitInformationViewModel @Inject constructor(
             MasterDto(
                 id = _profile.value?.id,
                 uid = _profile.value?.uid,
-                businessType = businessType.value,
+                businessType = businessType.value?.let { CodeTable.findBusinessTypeByKorean(it).code },
                 businessName = businessName.value,
                 shopName = shopName.value,
                 businessNumber = if (businessType.value == "프리랜서") birthday.value else businessNumber.value,

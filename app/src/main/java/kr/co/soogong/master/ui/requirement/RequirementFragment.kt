@@ -7,8 +7,10 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
+import kr.co.soogong.master.data.model.profile.NotApprovedCodeTable
+import kr.co.soogong.master.data.model.profile.RequestApproveCodeTable
 import kr.co.soogong.master.databinding.FragmentRequirementBinding
-import kr.co.soogong.master.domain.usecase.auth.GetMasterApprovalUseCase
+import kr.co.soogong.master.domain.usecase.auth.GetMasterSubscriptionPlanUseCase
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.uihelper.profile.EditRequiredInformationActivityHelper
 import kr.co.soogong.master.uihelper.requirment.RequirementsBadge
@@ -21,7 +23,7 @@ class RequirementFragment : BaseFragment<FragmentRequirementBinding>(
 ), RequirementsBadge {
 
     @Inject
-    lateinit var getMasterApprovalUseCase: GetMasterApprovalUseCase
+    lateinit var getMasterSubscriptionPlanUseCase: GetMasterSubscriptionPlanUseCase
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -44,7 +46,8 @@ class RequirementFragment : BaseFragment<FragmentRequirementBinding>(
             }
 
             // 필수 정보를 입력하라는 안내
-            bottomViewForFillingProfileInfoContainer.isVisible = !getMasterApprovalUseCase()!!
+            bottomViewForFillingProfileInfoContainer.isVisible =
+                getMasterSubscriptionPlanUseCase().let { it == NotApprovedCodeTable.code || it == RequestApproveCodeTable.code }
             bottomViewForFillingProfileInfoContainer.setOnClickListener {
                 startActivity(EditRequiredInformationActivityHelper.getIntent(requireContext()))
             }

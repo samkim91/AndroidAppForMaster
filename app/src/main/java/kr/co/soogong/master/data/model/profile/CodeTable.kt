@@ -21,7 +21,24 @@ sealed class CodeTable {
                 ElevatorProtectionCodeTable.inKorean -> ElevatorProtectionCodeTable
                 IntimeCodeTable.inKorean -> IntimeCodeTable
                 AsCodeTable.inKorean -> AsCodeTable
+                SoleCodeTable.inKorean -> SoleCodeTable
+                CorporateCodeTable.inKorean -> CorporateCodeTable
+                FreelancerCodeTable.inKorean -> FreelancerCodeTable
                 else -> NoiseCodeTable
+            }
+
+        fun findBusinessTypeByKorean(string: String): CodeTable =
+            when(string) {
+                SoleCodeTable.inKorean -> SoleCodeTable
+                CorporateCodeTable.inKorean -> CorporateCodeTable
+                else -> FreelancerCodeTable
+            }
+
+        fun findBusinessTypeByCode(code: String): CodeTable =
+            when(code) {
+                SoleCodeTable.code -> SoleCodeTable
+                CorporateCodeTable.code -> CorporateCodeTable
+                else -> FreelancerCodeTable
             }
     }
 }
@@ -100,3 +117,40 @@ object NoiseCodeTable : CodeTable() {
     override val code: String = "Noise"
     override val inKorean: String = "시끄러울 수 있음"
 }
+
+object FreeCodeTable: CodeTable() {
+    override val code: String = "Free"
+    override val inKorean: String = "기본 마스터"
+}
+
+object GuaranteeCodeTable: CodeTable() {
+    override val code: String = "Guarantee"
+    override val inKorean: String = "개런티 마스터"
+}
+
+object NotApprovedCodeTable: CodeTable() {
+    override val code: String = "NotApproved"
+    override val inKorean: String = "미승인 마스터"
+}
+
+object RequestApproveCodeTable: CodeTable() {
+    override val code: String = "RequestApprove"
+    override val inKorean: String = "미승인 마스터"
+}
+
+object SoleCodeTable: CodeTable() {
+    override val code: String = "Sole"
+    override val inKorean: String = "개인사업자"
+}
+
+object CorporateCodeTable: CodeTable() {
+    override val code: String = "Corporate"
+    override val inKorean: String = "법인사업자"
+}
+
+object FreelancerCodeTable: CodeTable() {
+    override val code: String = "Freelancer"
+    override val inKorean: String = "프리랜서"
+}
+
+

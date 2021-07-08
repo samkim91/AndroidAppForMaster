@@ -40,7 +40,7 @@ class DoneViewModel @Inject constructor(
                 1 -> listOf(RequirementStatus.Done.toCode())
                 2 -> listOf(RequirementStatus.Closed.toCode())
                 3 -> listOf(
-                    // TODO: 2021/06/28 추가해야함 ... request 보낼때 canceledYn을 같이 보내도록..
+
                 )
                 else -> listOf(
                     RequirementStatus.Done.toCode(),
@@ -62,7 +62,6 @@ class DoneViewModel @Inject constructor(
                 },
                 onError = {
                     Timber.tag(TAG).d("requestList failed: $it")
-                    setAction(REQUEST_LIST_FAILED)
                     _doneList.postValue(emptyList())
                 }
             ).addToDisposable()

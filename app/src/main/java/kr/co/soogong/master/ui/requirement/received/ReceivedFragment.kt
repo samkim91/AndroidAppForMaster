@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
+import kr.co.soogong.master.data.model.profile.NotApprovedCodeTable
+import kr.co.soogong.master.data.model.profile.RequestApproveCodeTable
 import kr.co.soogong.master.databinding.FragmentRequirementReceivedBinding
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.dialog.popup.CustomDialog
@@ -45,15 +47,8 @@ class ReceivedFragment : BaseFragment<FragmentRequirementReceivedBinding>(
 
             receivedList.adapter =
                 ReceivedAdapter(cardClickListener = { requirementId ->
-                    viewModel.isApprovedMaster.value?.let {
-                        if (it) {
-                            startActivity(
-                                ViewRequirementActivityHelper.getIntent(
-                                    requireContext(),
-                                    requirementId,
-                                )
-                            )
-                        } else {
+                    viewModel.masterSubscriptionPlan.value?.let {
+                        if (it == NotApprovedCodeTable.code || it == RequestApproveCodeTable.code) {
                             val dialog =
                                 CustomDialog(
                                     DialogData.getAskingFillProfileDialogData(requireContext()),
@@ -66,6 +61,13 @@ class ReceivedFragment : BaseFragment<FragmentRequirementReceivedBinding>(
                                     },
                                     noClick = { })
                             dialog.show(parentFragmentManager, dialog.tag)
+                        } else {
+                            startActivity(
+                                ViewRequirementActivityHelper.getIntent(
+                                    requireContext(),
+                                    requirementId,
+                                )
+                            )
                         }
                     }
                 })
