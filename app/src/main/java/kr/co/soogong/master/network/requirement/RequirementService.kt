@@ -12,8 +12,8 @@ class RequirementService @Inject constructor(
 ) {
     private val requirementInterface = retrofit.create(RequirementInterface::class.java)
 
-    fun getRequirementList(masterId: Int, statusArray: List<String>): Single<List<RequirementDto>> {
-        return requirementInterface.getRequirementList(masterId, statusArray)
+    fun getRequirementList(masterUid: String, statusArray: List<String>): Single<List<RequirementDto>> {
+        return requirementInterface.getRequirementList(masterUid, statusArray)
     }
 
     fun getRequirement(requirementId: Int, masterId: Int): Single<RequirementDto> {

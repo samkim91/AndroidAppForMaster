@@ -23,13 +23,30 @@ object MultipartGenerator {
     fun createFile(key: String, uri: Uri): MultipartBody.Part {
         Timber.tag(TAG).d("createFile: $uri")
 
-        val file = File(uri.path)
+        val file = File(uri.path!!)
+
+        // TODO: 2021/07/08 need to resize image
+//        val outputStream = file.outputStream()
+//        val bitmap = if (Build.VERSION.SDK_INT >= 29) {
+//            val source = ImageDecoder.createSource(contentResolver, uri)
+//            ImageDecoder.decodeBitmap(source)
+//        } else {
+//            MediaStore.Images.Media.getBitmap(contentResolver, uri)
+//        }
+//
+//        bitmap.compress(Bitmap.CompressFormat.JPEG, 85, outputStream)
+//        outputStream.flush()
+//        outputStream.close()
+
         val requestBody = file.asRequestBody("image/*".toMediaTypeOrNull())
 
         return MultipartBody.Part.createFormData(key, file.name, requestBody)
     }
 
-    fun createFiles(key: String, uriList: List<Uri>): List<MultipartBody.Part> {
+    fun createFiles(
+        key: String,
+        uriList: List<Uri>
+    ): List<MultipartBody.Part> {
         return uriList.map { uri ->
             createFile(key, uri)
         }
