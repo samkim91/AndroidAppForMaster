@@ -21,7 +21,24 @@ sealed class CodeTable {
                 ElevatorProtectionCodeTable.inKorean -> ElevatorProtectionCodeTable
                 IntimeCodeTable.inKorean -> IntimeCodeTable
                 AsCodeTable.inKorean -> AsCodeTable
+                SoleCodeTable.inKorean -> SoleCodeTable
+                CorporateCodeTable.inKorean -> CorporateCodeTable
+                FreelancerCodeTable.inKorean -> FreelancerCodeTable
                 else -> NoiseCodeTable
+            }
+
+        fun findBusinessTypeByKorean(string: String): CodeTable =
+            when(string) {
+                SoleCodeTable.inKorean -> SoleCodeTable
+                CorporateCodeTable.inKorean -> CorporateCodeTable
+                else -> FreelancerCodeTable
+            }
+
+        fun findBusinessTypeByCode(code: String): CodeTable =
+            when(code) {
+                SoleCodeTable.code -> SoleCodeTable
+                CorporateCodeTable.code -> CorporateCodeTable
+                else -> FreelancerCodeTable
             }
     }
 }
@@ -119,6 +136,21 @@ object NotApprovedCodeTable: CodeTable() {
 object RequestApproveCodeTable: CodeTable() {
     override val code: String = "RequestApprove"
     override val inKorean: String = "미승인 마스터"
+}
+
+object SoleCodeTable: CodeTable() {
+    override val code: String = "Sole"
+    override val inKorean: String = "개인사업자"
+}
+
+object CorporateCodeTable: CodeTable() {
+    override val code: String = "Corporate"
+    override val inKorean: String = "법인사업자"
+}
+
+object FreelancerCodeTable: CodeTable() {
+    override val code: String = "Freelancer"
+    override val inKorean: String = "프리랜서"
 }
 
 

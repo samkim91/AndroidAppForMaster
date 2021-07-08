@@ -4,7 +4,7 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import kr.co.soogong.master.data.dto.AttachmentDto
 
-@BindingAdapter("bind:photo_list")
+@BindingAdapter("bind:photo_list_with_close")
 fun RecyclerView.setList(items: List<AttachmentDto>?) {
     (adapter as? RectangleImageWithCloseAdapter)?.submitList(items ?: emptyList())
 }

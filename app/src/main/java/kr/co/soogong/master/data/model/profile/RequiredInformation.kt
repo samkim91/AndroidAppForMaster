@@ -27,7 +27,7 @@ data class RequiredInformation(
                 introduction = masterDto.introduction,
                 shopImages = masterDto.shopImages,
                 businessUnitInformation = BusinessUnitInformation(
-                    businessType = masterDto.businessType,
+                    businessType = masterDto.businessType?.let {CodeTable.findBusinessTypeByCode(it).inKorean},
                     businessName = masterDto.businessName,
                     shopName = masterDto.shopName,
                     businessNumber = masterDto.businessNumber,
