@@ -197,7 +197,7 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
             if (!value?.introduction.isNullOrEmpty()) filledCount++
             if (!value?.shopImages.isNullOrEmpty()) filledCount++
             if (!value?.businessUnitInformation?.businessType.isNullOrEmpty()) filledCount++
-            if (value?.warrantyInformation?.warrantyPeriod != 0) filledCount++
+            if (value?.warrantyInformation?.warrantyPeriod != null) filledCount++
             if (!value?.career.isNullOrEmpty()) filledCount++
             if (!value?.tel.isNullOrEmpty()) filledCount++
             if (!value?.ownerName.isNullOrEmpty()) filledCount++

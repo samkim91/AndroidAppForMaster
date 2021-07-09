@@ -70,7 +70,7 @@ class EstimatedViewHolder(
 
             firstDate.setFirstDate(requirementCard.status?.toString(), requirementCard.createdAt)
             myAmount.visibility = View.VISIBLE
-            myAmount.setAmount(requirementCard.status?.toString(), requirementCard.estimationDto?.price?.toString())
+            myAmount.setAmount(requirementCard.status?.toString(), requirementCard.estimationDto?.price)
 
             waitingLabel.visibility = View.VISIBLE
 
@@ -98,7 +98,7 @@ class RepairingViewHolder(
 
             firstDate.setFirstDate(requirementCard.status?.toString(), requirementCard.estimationDto?.updatedAt)
             myAmount.visibility = View.VISIBLE
-            myAmount.setAmount(requirementCard.status?.toString(), requirementCard.estimationDto?.price?.toString())
+            myAmount.setAmount(requirementCard.status?.toString(), requirementCard.estimationDto?.price)
 
             callButton.visibility = View.VISIBLE
             doneButton.visibility = View.VISIBLE
@@ -213,7 +213,7 @@ class ClosedViewHolder(
             firstDate.setFirstDate(requirementCard.status?.toString(), requirementCard.estimationDto?.repair?.actualDate)
 
             myAmount.visibility = View.VISIBLE
-            myAmount.setAmount(requirementCard.status?.toString(), requirementCard.estimationDto?.price?.toString())
+            myAmount.setAmount(requirementCard.status?.toString(), requirementCard.estimationDto?.price)
 
             setCardClickListener {
                 cardClickListener(requirementCard.id)

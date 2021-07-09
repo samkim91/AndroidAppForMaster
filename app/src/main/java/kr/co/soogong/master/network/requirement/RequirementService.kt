@@ -16,8 +16,8 @@ class RequirementService @Inject constructor(
         return requirementInterface.getRequirementList(masterUid, statusArray)
     }
 
-    fun getRequirement(requirementId: Int, masterId: Int): Single<RequirementDto> {
-        return requirementInterface.getRequirement(requirementId, masterId)
+    fun getRequirement(requirementId: Int, masterUid: String): Single<RequirementDto> {
+        return requirementInterface.getRequirement(requirementId, masterUid)
     }
 
     fun saveEstimation(estimationDto: EstimationDto): Single<EstimationDto> {
