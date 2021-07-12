@@ -10,7 +10,7 @@ import kr.co.soogong.master.data.dto.requirement.repair.RepairDto
 import kr.co.soogong.master.data.model.requirement.RequirementCard
 import kr.co.soogong.master.data.model.requirement.RequirementStatus
 import kr.co.soogong.master.domain.usecase.requirement.GetDoneEstimationListUseCase
-import kr.co.soogong.master.domain.usecase.requirement.SaveRepairUseCase
+import kr.co.soogong.master.domain.usecase.requirement.RequestReviewUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import timber.log.Timber
 import javax.inject.Inject
@@ -18,21 +18,29 @@ import javax.inject.Inject
 @HiltViewModel
 class DoneViewModel @Inject constructor(
     private val getDoneEstimationListUseCase: GetDoneEstimationListUseCase,
-    private val saveRepairUseCase: SaveRepairUseCase,
+    private val requestReviewUseCase: RequestReviewUseCase,
 ) : BaseViewModel() {
     private val _doneList = MutableLiveData<List<RequirementCard>>()
     val doneList: LiveData<List<RequirementCard>>
         get() = _doneList
 
-    fun requestList(index: Int = 0) {
+    private val _index = MutableLiveData<Int>()
+
+    fun onFilterChange(index: Int) {
         Timber.tag(TAG).d("onFilterChange: $index")
+        _index.value = index
+        requestList()
+    }
+
+    fun requestList() {
+        Timber.tag(TAG).d("onFilterChange: ${_index.value}")
 
         getDoneEstimationListUseCase(
-            when (index) {
+            when (_index.value) {
                 1 -> listOf(RequirementStatus.Done.toCode())
                 2 -> listOf(RequirementStatus.Closed.toCode())
                 3 -> listOf(
-                    // TODO: 2021/06/28 추가해야함 ... request 보낼때 canceledYn을 같이 보내도록..
+
                 )
                 else -> listOf(
                     RequirementStatus.Done.toCode(),
@@ -47,11 +55,13 @@ class DoneViewModel @Inject constructor(
                 onSuccess = {
                     Timber.tag(TAG).d("requestList successfully: $it")
                     _doneList.postValue(it)
-                    if (index == 0) sendEvent(BADGE_UPDATE, it.count())
+                    if (_index.value == 0 || _index.value == null) sendEvent(
+                        BADGE_UPDATE,
+                        it.count()
+                    )
                 },
                 onError = {
                     Timber.tag(TAG).d("requestList failed: $it")
-                    setAction(REQUEST_LIST_FAILED)
                     _doneList.postValue(emptyList())
                 }
             ).addToDisposable()
@@ -59,12 +69,11 @@ class DoneViewModel @Inject constructor(
 
     fun askForReview(requirementCard: RequirementCard?) {
         Timber.tag(TAG).d("askForReview: ")
-        saveRepairUseCase(
+        requestReviewUseCase(
             RepairDto(
                 id = requirementCard?.estimationDto?.repair?.id,
                 requirementToken = requirementCard?.token,
                 estimationId = requirementCard?.estimationDto?.id,
-                requestReviewYn = true,
             )
         )
             .subscribeOn(Schedulers.io())

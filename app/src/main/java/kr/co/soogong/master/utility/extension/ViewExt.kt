@@ -3,7 +3,10 @@
 package kr.co.soogong.master.utility.extension
 
 import android.view.View
+import androidx.constraintlayout.widget.Group
+import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
+import kr.co.soogong.master.data.model.profile.Review
 
 @BindingAdapter("bind:visible")
 fun View.visible(visibility: Boolean) {
@@ -21,6 +24,6 @@ fun View.invisible(list: List<Any>?) {
 }
 
 @BindingAdapter("bind:onClick")
-fun View.onClickListener(listener: View.OnClickListener){
+fun View.onClickListener(listener: View.OnClickListener) {
     this.setOnClickListener(listener)
 }

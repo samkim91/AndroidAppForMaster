@@ -74,5 +74,20 @@ class CustomDialog(
 
     companion object{
         private const val TAG = "CustomDialog"
+//        private const val DIALOG_DATA = "DIALOG_DATA"
+//        private const val YES_CLICK = "YES_CLICK"
+//        private const val NO_CLICK = "NO_CLICK"
+//
+//        fun newInstance(dialogData: DialogData, yesClick: () -> Unit, noClick: () -> Unit): CustomDialog {
+//            val args = Bundle()
+//
+//
+//            args.putSerializable(YES_CLICK, yesClick as Serializable)
+//            args.putSerializable(NO_CLICK, noClick as Serializable)
+//
+//            val fragment = CustomDialog()
+//            fragment.arguments = args
+//            return fragment
+//        }
     }
 }

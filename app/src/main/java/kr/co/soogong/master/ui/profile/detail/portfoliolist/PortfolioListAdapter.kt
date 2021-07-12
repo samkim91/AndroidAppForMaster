@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import kr.co.soogong.master.data.dto.profile.PortfolioDto
 import kr.co.soogong.master.databinding.ViewHolderPortfolioBinding
-import kr.co.soogong.master.ui.profile.detail.portfoliolist.portfolio.PortfolioViewHolder
 
 class PortfolioListAdapter(
     private val leftButtonClickListener: (id: Int) -> Unit,

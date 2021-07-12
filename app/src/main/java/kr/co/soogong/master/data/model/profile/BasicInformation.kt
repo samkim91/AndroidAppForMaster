@@ -3,17 +3,17 @@ package kr.co.soogong.master.data.model.profile
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 import kr.co.soogong.master.data.dto.AttachmentDto
+import kr.co.soogong.master.data.dto.profile.MasterConfigDto
 import kr.co.soogong.master.data.dto.profile.MasterDto
 import kr.co.soogong.master.data.dto.profile.PortfolioDto
-import kr.co.soogong.master.ui.profile.*
 
 @Parcelize
 data class BasicInformation(
     val portfolios: List<PortfolioDto>?,
     val priceByProjects: List<PortfolioDto>?,
     val profileImage: AttachmentDto?,
-    val flexibleCost: FlexibleCost?,
-    val otherFlexibleOptions: OtherFlexibleOptions?,
+    val flexibleCost: List<MasterConfigDto>?,
+    val otherFlexibleOption: List<MasterConfigDto>?,
     val email: String?,
 ) : Parcelable {
     companion object {
@@ -22,19 +22,10 @@ data class BasicInformation(
                 portfolios = masterDto.masterPortfolios?.filter { portfolioDto -> portfolioDto.type == PortfolioCodeTable.code },
                 priceByProjects = masterDto.masterPortfolios?.filter { portfolioDto -> portfolioDto.type == PriceByProjectCodeTable.code },
                 profileImage = masterDto.profileImage,
-                flexibleCost = FlexibleCost.fromMasterConfigList(masterDto.masterConfigs?.filter { masterConfigDto -> masterConfigDto.configGroupCode == FlexibleCostCodeTable.code }),
-                otherFlexibleOptions = OtherFlexibleOptions.fromMasterConfigList(masterDto.masterConfigs?.filter { masterConfigDto -> masterConfigDto.configGroupCode == OtherFlexibleOptionsCodeTable.code }),
+                flexibleCost = masterDto.masterConfigs?.filter { masterConfigDto -> masterConfigDto.groupCode == FlexibleCostCodeTable.code },
+                otherFlexibleOption = masterDto.masterConfigs?.filter { masterConfigDto -> masterConfigDto.groupCode == OtherFlexibleOptionCodeTable.code },
                 email = masterDto.email,
             )
         }
-
-        val NULL_BASIC_INFORMATION = BasicInformation(
-            profileImage = null,
-            portfolios = emptyList(),
-            priceByProjects = emptyList(),
-            flexibleCost = FlexibleCost.NULL_FLEXIBLE_COST,
-            otherFlexibleOptions = OtherFlexibleOptions.NULL_OTHER_FLEXIBLE_OPTIONS,
-            email = "",
-        )
     }
 }

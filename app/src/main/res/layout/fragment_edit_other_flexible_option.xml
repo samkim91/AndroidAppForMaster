@@ -6,7 +6,7 @@
     <data>
         <variable
             name="vm"
-            type="kr.co.soogong.master.ui.profile.detail.otherflexibleoptions.EditOtherFlexibleOptionsViewModel" />
+            type="kr.co.soogong.master.ui.profile.detail.otherflexibleoption.EditOtherFlexibleOptionViewModel" />
     </data>
 
     <LinearLayout

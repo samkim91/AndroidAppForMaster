@@ -3,27 +3,26 @@ package kr.co.soogong.master.data.dto.profile
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
-import java.util.*
 
 @Parcelize
 data class MasterConfigDto(
     @SerializedName("id")
-    val id: Int,
+    val id: Int? = null,
 
     @SerializedName("configGroupCode")
-    val configGroupCode: String?,
+    val groupCode: String? = null,
 
     @SerializedName("configGroupName")
-    val configGroupName: String?,
+    val groupName: String? = null,
 
     @SerializedName("configCode")
-    val code: String?,
+    val code: String? = null,
 
-    @SerializedName("name")
-    val name: String?,
+    @SerializedName("configName")
+    val name: String? = null,
 
     @SerializedName("value")
-    val value: String?,
+    val value: String? = null,
 ) : Parcelable {
     companion object {
 

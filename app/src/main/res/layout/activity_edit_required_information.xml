@@ -26,6 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/color_00664E"
+            android:visibility="gone"
             android:paddingStart="@dimen/gap_20"
             android:paddingTop="@dimen/gap_16"
             android:paddingEnd="@dimen/gap_20"
@@ -142,9 +143,9 @@
                     app:subTitle='@{"업체만의 특별한 점을 소개해주세요."}'
                     app:title='@{"업체 소개"}' />
 
-                <!-- 대표 이미지 THUMBNAILS -->
+                <!-- 대표 이미지 SHOP_IMAGES -->
                 <kr.co.soogong.master.ui.widget.ProfileImageCard
-                    android:id="@+id/thumbnails"
+                    android:id="@+id/shop_images"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/gap_20"
@@ -152,10 +153,10 @@
                     android:layout_marginEnd="@dimen/gap_20"
                     android:background="@drawable/shape_radius8_white_background"
                     android:elevation="@dimen/gap_4"
-                    app:defaultButtonByImageV2='@{vm.requiredInformation.representativeImages.size() > 0 ? vm.requiredInformation.representativeImages.get(0).url : ""}'
-                    app:firstDetailWithSimpleText='@{vm.requiredInformation.representativeImages.size() > 0 ? vm.requiredInformation.representativeImages.get(0).url : ""}'
-                    app:imageCount="@{vm.requiredInformation.representativeImages.size}"
-                    app:imageUrl='@{vm.requiredInformation.representativeImages.size() > 0 ? vm.requiredInformation.representativeImages.get(0).url : ""}'
+                    app:defaultButtonByImageV2='@{vm.requiredInformation.shopImages.size() > 0 ? vm.requiredInformation.shopImages.get(0).url : ""}'
+                    app:firstDetailWithSimpleText='@{vm.requiredInformation.shopImages.size() > 0 ? vm.requiredInformation.shopImages.get(0).url : ""}'
+                    app:imageCount="@{vm.requiredInformation.shopImages.size}"
+                    app:imageUrl='@{vm.requiredInformation.shopImages.size() > 0 ? vm.requiredInformation.shopImages.get(0).url : ""}'
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/introduction"
@@ -177,7 +178,7 @@
                     app:imageUrl="@{vm.requiredInformation.businessUnitInformation.businessRegistImage.url}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/thumbnails"
+                    app:layout_constraintTop_toBottomOf="@id/shop_images"
                     app:secondDetail="@{vm.requiredInformation.businessUnitInformation.businessNumber}"
                     app:title='@{"사업자 정보"}' />
 
@@ -201,23 +202,6 @@
                     app:title='@{"A/S 정보"}' />
 
                 <!-- 경력 CAREER -->
-                <kr.co.soogong.master.ui.widget.ProfileDefaultCard
-                    android:id="@+id/career"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/gap_20"
-                    android:layout_marginTop="@dimen/gap_16"
-                    android:layout_marginEnd="@dimen/gap_20"
-                    android:layout_marginBottom="@dimen/gap_20"
-                    android:background="@drawable/shape_radius8_white_background"
-                    android:elevation="@dimen/gap_4"
-                    app:defaultButtonByString="@{vm.requiredInformation.career}"
-                    app:firstDetail="@{vm.requiredInformation.career}"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/warranty_information"
-                    app:subTitle='@{"시공해오신 경력을 알려주세요."}'
-                    app:title='@{"경력"}' />
 
                 <!-- 연락처 PHONE_NUMBER -->
                 <kr.co.soogong.master.ui.widget.ProfileDefaultCard
@@ -310,10 +294,25 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
 
+        <kr.co.soogong.master.ui.widget.ProfileDefaultCard
+            android:id="@+id/career"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/gap_20"
+            android:layout_marginTop="@dimen/gap_16"
+            android:layout_marginEnd="@dimen/gap_20"
+            android:background="@drawable/shape_radius8_white_background"
+            android:elevation="@dimen/gap_4"
+            app:defaultButtonByString="@{vm.requiredInformation.career}"
+            app:firstDetail="@{vm.requiredInformation.career}"
+            app:subTitle='@{"시공해오신 경력을 알려주세요."}'
+            app:title='@{"경력"}' />
+
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/default_button"
             style="@style/medium_text_style.bold"
             android:layout_width="match_parent"
+            android:visibility="gone"
             android:layout_height="@dimen/gap_48"
             android:background="@drawable/default_button_selector"
             android:text="@string/request_confirmation"

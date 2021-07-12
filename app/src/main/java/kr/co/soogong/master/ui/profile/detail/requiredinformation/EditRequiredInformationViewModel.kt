@@ -1,6 +1,5 @@
 package kr.co.soogong.master.ui.profile.detail.requiredinformation
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -9,8 +8,8 @@ import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.dto.profile.MasterDto
 import kr.co.soogong.master.data.model.profile.Profile
 import kr.co.soogong.master.data.model.profile.RequiredInformation
-import kr.co.soogong.master.domain.usecase.auth.GetMasterApprovalUseCase
-import kr.co.soogong.master.domain.usecase.profile.GetProfileFromLocalUseCase
+import kr.co.soogong.master.domain.usecase.auth.GetMasterSubscriptionPlanUseCase
+import kr.co.soogong.master.domain.usecase.profile.GetMasterUseCase
 import kr.co.soogong.master.domain.usecase.profile.SaveMasterUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import timber.log.Timber
@@ -18,28 +17,26 @@ import javax.inject.Inject
 
 @HiltViewModel
 class EditRequiredInformationViewModel @Inject constructor(
-    val getMasterApprovalUseCase: GetMasterApprovalUseCase,
-    private val getProfileFromLocalUseCase: GetProfileFromLocalUseCase,
+    val getMasterSubscriptionPlanUseCase: GetMasterSubscriptionPlanUseCase,
+    private val getMasterUseCase: GetMasterUseCase,
     private val saveMasterUseCase: SaveMasterUseCase,
 ) : BaseViewModel() {
-    private val _isApprovedMaster = MutableLiveData<Boolean>(getMasterApprovalUseCase())
-    val isApprovedMaster: LiveData<Boolean>
-        get() = _isApprovedMaster
-
     private val _profile = MutableLiveData<Profile>()
     val requiredInformation = MutableLiveData<RequiredInformation?>()
 
     fun requestRequiredInformation() {
         Timber.tag(TAG).d("requestRequiredInformation: ")
 
-        getProfileFromLocalUseCase()
+        getMasterUseCase()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
-                onSuccess = { profile ->
+                onSuccess = { master ->
+                    val profile = Profile.fromMasterDto(master)
                     _profile.value = profile
-                    requiredInformation.postValue(profile.requiredInformation)
+                    requiredInformation.value = profile.requiredInformation
                     setAction(GET_PROFILE_SUCCESSFULLY)
+                    sendEvent(MASTER_SUBSCRIPTION_PLAN, master.subscriptionPlan!!)
                 },
                 onError = {
                     setAction(GET_PROFILE_FAILED)
@@ -60,7 +57,7 @@ class EditRequiredInformationViewModel @Inject constructor(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
-                onSuccess = { setAction(SAVE_MASTER_INFORMATION_SUCCESSFULLY) },
+                onSuccess = { requestRequiredInformation() },
                 onError = { setAction(SAVE_MASTER_INFORMATION_FAILED) }
             ).addToDisposable()
     }
@@ -78,7 +75,7 @@ class EditRequiredInformationViewModel @Inject constructor(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
-                onSuccess = { setAction(SAVE_MASTER_INFORMATION_SUCCESSFULLY) },
+                onSuccess = { requestRequiredInformation() },
                 onError = { setAction(SAVE_MASTER_INFORMATION_FAILED) }
             ).addToDisposable()
     }
@@ -96,16 +93,16 @@ class EditRequiredInformationViewModel @Inject constructor(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
-                onSuccess = { setAction(SAVE_MASTER_INFORMATION_SUCCESSFULLY) },
+                onSuccess = { requestRequiredInformation() },
                 onError = { setAction(SAVE_MASTER_INFORMATION_FAILED) }
             ).addToDisposable()
     }
 
     companion object {
         private const val TAG = "EditRequiredInformationViewModel"
+        const val MASTER_SUBSCRIPTION_PLAN = "MASTER_SUBSCRIPTION_PLAN"
         const val GET_PROFILE_SUCCESSFULLY = "GET_PROFILE_SUCCESSFULLY"
         const val GET_PROFILE_FAILED = "GET_PROFILE_FAILED"
-        const val SAVE_MASTER_INFORMATION_SUCCESSFULLY = "SAVE_MASTER_INFORMATION_SUCCESSFULLY"
         const val SAVE_MASTER_INFORMATION_FAILED = "SAVE_MASTER_INFORMATION_FAILED"
     }
 }

@@ -8,7 +8,7 @@ import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.model.requirement.RequirementCard
 import kr.co.soogong.master.data.model.requirement.RequirementStatus
-import kr.co.soogong.master.domain.usecase.auth.GetMasterApprovalUseCase
+import kr.co.soogong.master.domain.usecase.auth.GetMasterSubscriptionPlanUseCase
 import kr.co.soogong.master.domain.usecase.requirement.GetReceivedRequirementListUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import timber.log.Timber
@@ -16,41 +16,30 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ReceivedViewModel @Inject constructor(
-    val getMasterApprovalUseCase: GetMasterApprovalUseCase,
+    val getMasterSubscriptionPlanUseCase: GetMasterSubscriptionPlanUseCase,
     private val getReceivedRequirementListUseCase: GetReceivedRequirementListUseCase
 ) : BaseViewModel() {
-    private val _isApprovedMaster = MutableLiveData<Boolean>(getMasterApprovalUseCase())
-    val isApprovedMaster: LiveData<Boolean>
-        get() = _isApprovedMaster
+    private val _masterSubscriptionPlan = MutableLiveData<String>(getMasterSubscriptionPlanUseCase())
+    val masterSubscriptionPlan: LiveData<String>
+        get() = _masterSubscriptionPlan
 
     private val _receivedList = MutableLiveData<List<RequirementCard>>()
     val receivedList: LiveData<List<RequirementCard>>
         get() = _receivedList
 
-//    fun requestList() {
-//        Timber.tag(TAG).d("requestList: ")
-//        getReceivedRequirementListUseCase()
-//            .subscribeOn(Schedulers.io())
-//            .observeOn(AndroidSchedulers.mainThread())
-//            .subscribeBy(
-//                onSuccess = {
-//                    Timber.tag(TAG).d("requestList successfully: $it")
-//                    _receivedList.postValue(it)
-//                    sendEvent(BADGE_UPDATE, it.count())
-//                },
-//                onError = {
-//                    Timber.tag(TAG).d("requestList failed: $it")
-//                    setAction(REQUEST_LIST_FAILED)
-//                    _receivedList.postValue(emptyList())
-//                }
-//            ).addToDisposable()
-//    }
+    private val _index = MutableLiveData<Int>()
+
+    fun onFilterChange(index: Int) {
+        Timber.tag(TAG).d("onFilterChange: $index")
+        _index.value = index
+        requestList()
+    }
 
     fun requestList(index: Int = 0) {
-        Timber.tag(TAG).d("requestList: $index")
+        Timber.tag(TAG).d("requestList: ${_index.value}")
 
         getReceivedRequirementListUseCase(
-            when(index){
+            when(_index.value){
                 1 -> listOf(RequirementStatus.Requested.toCode())
                 2 -> listOf(RequirementStatus.Estimated.toCode())
                 else -> listOf(RequirementStatus.Requested.toCode(), RequirementStatus.Estimated.toCode())
@@ -61,12 +50,11 @@ class ReceivedViewModel @Inject constructor(
             .subscribeBy(
                 onSuccess = {
                     Timber.tag(TAG).d("requestList successfully: $it")
-                    if(index == 0) sendEvent(BADGE_UPDATE, it.count())
+                    if(_index.value == 0 || _index.value == null) sendEvent(BADGE_UPDATE, it.count())
                     _receivedList.postValue(it)
                 },
                 onError = {
                     Timber.tag(TAG).d("requestList failed: $it")
-                    setAction(REQUEST_LIST_FAILED)
                     _receivedList.postValue(emptyList())
                 }
             ).addToDisposable()

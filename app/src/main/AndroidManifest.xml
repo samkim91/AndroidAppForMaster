@@ -18,8 +18,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true">
+        android:theme="@style/AppTheme">
+        <activity android:name=".ui.auth.signup.steps.ViewPolicyActivity"></activity>
         <activity android:name=".ui.profile.detail.requiredinformation.EditRequiredInformationActivity" />
         <activity android:name=".ui.profile.review.MyReviewsActivity" />
         <activity android:name=".ui.profile.detail.EditProfileContainerActivity" />
@@ -46,13 +46,10 @@
             android:launchMode="singleTask" />
         <activity
             android:name=".ui.auth.signin.SignInActivity"
-            android:launchMode="singleTask" />
-        <!-- todo: 가로화면도 지원하도록 버그를 잡아야함 -->
+            android:launchMode="singleTask" /> <!-- todo: 가로화면도 지원하도록 버그를 잡아야함 -->
         <activity
             android:name=".ui.main.MainActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            />
+            android:launchMode="singleTask" />
         <activity
             android:name=".ui.major.MajorActivity"
             android:launchMode="singleTask" />

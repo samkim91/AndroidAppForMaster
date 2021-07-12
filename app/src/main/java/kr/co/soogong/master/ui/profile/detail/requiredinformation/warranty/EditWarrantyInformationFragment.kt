@@ -40,8 +40,9 @@ class EditWarrantyInformationFragment : BaseFragment<FragmentEditWarrantyInforma
             warrantyPeriod.addDropdownClickListener {
                 Timber.tag(TAG).w("Dropdown Clicked")
                 val bottomDialog =
-                    BottomDialogRecyclerView(BottomDialogData.insertingWarrantyPeriodTitle,
-                        BottomDialogData.getWarrantyPeriodList(),
+                    BottomDialogRecyclerView.newInstance(
+                        title = BottomDialogData.insertingWarrantyPeriodTitle,
+                        dialogData = BottomDialogData.getWarrantyPeriodList(),
                         itemClick = { _, value ->
                             viewModel.warrantyPeriod.value = value
                         }

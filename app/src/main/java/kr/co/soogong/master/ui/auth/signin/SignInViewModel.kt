@@ -11,10 +11,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.domain.usecase.auth.CheckUserExistentUseCase
-import kr.co.soogong.master.domain.usecase.auth.SaveMasterUidInSharedUseCase
 import kr.co.soogong.master.domain.usecase.auth.SignInUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
-import kr.co.soogong.master.utility.PhoneNumberHelper
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -43,15 +41,13 @@ class SignInViewModel @Inject constructor(
         Timber.tag(TAG).d("checkUserExist: ")
 
         tel.value?.let { tel ->
-            checkUserExistentUseCase(PhoneNumberHelper.toGlobalNumber(tel))
+            checkUserExistentUseCase(tel)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
                     onSuccess = {
                         Timber.tag(TAG).d("onSuccess: $it")
-                        if (it) setAction(PHONE_NUMBER_EXIST) else setAction(
-                            PHONE_NUMBER_NOT_EXIST
-                        )
+                        if (it) setAction(PHONE_NUMBER_EXIST) else setAction(PHONE_NUMBER_NOT_EXIST)
                     },
                     onError = {
                         Timber.tag(TAG).d("onError: $it")
@@ -70,7 +66,6 @@ class SignInViewModel @Inject constructor(
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
                     onSuccess = {
-                        // TODO: 2021/06/16 add saveIdInShared
                         Timber.tag(TAG).d("successToSignIn: $it")
                         setAction(SIGN_IN_SUCCESSFULLY)
                     },

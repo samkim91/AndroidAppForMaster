@@ -9,11 +9,12 @@ import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentProfileBinding
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.profile.ProfileViewModel.Companion.GET_PROFILE_FAILED
+import kr.co.soogong.master.ui.profile.ProfileViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.utility.PermissionHelper
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerActivityHelper
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_EMAIL
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_FLEXIBLE_COST
-import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_OTHER_FLEXIBLE_OPTIONS
+import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_OTHER_FLEXIBLE_OPTION
 import kr.co.soogong.master.uihelper.profile.PortfolioListActivityHelper
 import kr.co.soogong.master.uihelper.profile.PortfolioListActivityHelper.PORTFOLIO
 import kr.co.soogong.master.uihelper.profile.PortfolioListActivityHelper.PRICE_BY_PROJECTS
@@ -90,11 +91,11 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
                 )
             }
 
-            otherFlexibleOptions.addDefaultButtonClickListener {
+            otherFlexibleOption.addDefaultButtonClickListener {
                 startActivity(
                     EditProfileContainerActivityHelper.getIntent(
                         requireContext(),
-                        EDIT_OTHER_FLEXIBLE_OPTIONS
+                        EDIT_OTHER_FLEXIBLE_OPTION
                     )
                 )
             }
@@ -113,7 +114,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
     private fun registerEventObserve() {
         viewModel.action.observe(viewLifecycleOwner, EventObserver { event ->
             when(event){
-                GET_PROFILE_FAILED -> requireContext().toast(getString(R.string.error_message_of_request_failed))
+                GET_PROFILE_FAILED, REQUEST_FAILED -> requireContext().toast(getString(R.string.error_message_of_request_failed))
             }
         })
     }
@@ -129,10 +130,9 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
             onGranted = {
                 TedImagePicker.with(requireContext())
                     .buttonBackground(R.drawable.shape_fill_green_background)
-                    .start {
-                        // todo.. 업로드 하고 내려온 이미지를 보여주는 것으로 바꿔야함.
-                            uri ->
+                    .start { uri ->
                         viewModel.profileImage.value = uri
+                        viewModel.saveMasterProfileImage()
                     }
             },
             onDenied = {

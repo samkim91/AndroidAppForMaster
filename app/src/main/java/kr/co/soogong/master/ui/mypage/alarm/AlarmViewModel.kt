@@ -31,6 +31,7 @@ class AlarmViewModel @Inject constructor(
     fun changeMarketingPush(v: CompoundButton, isChecked: Boolean) {
         Timber.tag(TAG).d("changeMarketingPush: $isChecked")
         _marketingPush.postValue(isChecked)
+        // TODO: 2021/07/07 수정 필요 ... 초기로딩에서도 실행되고 있음
         saveAlarmStatus(MARKETING, isChecked)
     }
 

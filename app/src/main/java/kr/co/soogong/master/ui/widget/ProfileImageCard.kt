@@ -55,7 +55,7 @@ class ProfileImageCard @JvmOverloads constructor(
         set(value) {
             field = value
             binding.imageCount.text = "+$value"
-            binding.imageCountContainer.visibility = if (value > 2) VISIBLE else GONE
+            binding.imageCountContainer.visibility = if (value > 1) VISIBLE else GONE
         }
 
     var subTitle: String? = ""
@@ -75,7 +75,12 @@ class ProfileImageCard @JvmOverloads constructor(
         set(value) {
             field = value
             with(binding.firstDetail) {
-                visibility = if (value.isNullOrEmpty()) View.GONE else View.VISIBLE
+                visibility = if (value.isNullOrEmpty()) {
+                    View.GONE
+                } else {
+                    newBadgeVisible = false
+                    View.VISIBLE
+                }
                 text = value
             }
         }

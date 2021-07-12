@@ -58,8 +58,8 @@ fun TextView.setSecondDate(date: Date?) {
     }
 }
 
-@BindingAdapter("bind:amount")
-fun AmountView.setAmount(status: String?, price: String?) {
+@BindingAdapter(value = ["setRequirementStatus", "priceAmount"])
+fun AmountView.setAmount(status: String?, priceAmount: Int?) {
     title = when (status) {
         RequirementStatus.Estimated.toString(), RequirementStatus.Repairing.toString() -> {
             context.getString(R.string.requirements_card_amount_title)
@@ -71,5 +71,5 @@ fun AmountView.setAmount(status: String?, price: String?) {
             ""
         }
     }
-    price?.let { detail = "${DecimalFormat("#,###").parse(it)}원" }
+    priceAmount?.let { detail = "${DecimalFormat("#,###").format(it)}원" }
 }

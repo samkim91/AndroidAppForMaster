@@ -45,7 +45,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:setFirstEditTextEnable="@{true}"
                     app:setFirstEditTextHint='@{"숫자만 입력해주세요."}'
-                    app:setMaxLengthFirst="@{12}"
+                    app:setMaxLengthFirst="@{11}"
                     app:setSecondEditTextVisible="@{false}"
                     app:subTitle='@{"연락이 가능한 휴대폰번호를 입력해주세요."}'
                     app:subTitleVisible="@{true}"

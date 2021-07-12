@@ -6,51 +6,63 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.dto.profile.PortfolioDto
+import kr.co.soogong.master.domain.usecase.auth.GetMasterIdFromSharedUseCase
 import kr.co.soogong.master.domain.usecase.profile.GetPortfolioUseCase
 import kr.co.soogong.master.domain.usecase.profile.SavePortfolioUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
+import kr.co.soogong.master.data.model.profile.PriceByProjectCodeTable
 import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class PriceByProjectViewModel @Inject constructor(
+    private val getMasterIdFromSharedUseCase: GetMasterIdFromSharedUseCase,
     private val savePortfolioUseCase: SavePortfolioUseCase,
     private val getPortfolioUseCase: GetPortfolioUseCase,
 ) : BaseViewModel() {
-    val title = MutableLiveData("")
-    val price = MutableLiveData("")
-    val description = MutableLiveData("")
+    val id = MutableLiveData<Int>()
+    val title = MutableLiveData<String>()
+    val price = MutableLiveData<String>()
+    val description = MutableLiveData<String>()
 
     fun getPriceByProject(priceByProjectId: Int) {
-        Timber.tag(TAG).d("getPriceByProject $priceByProjectId")
+        Timber.tag(TAG).d("getPriceByProject: $priceByProjectId")
         getPortfolioUseCase(priceByProjectId, "price")
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
                 onSuccess = { priceByProject ->
-                    title.postValue(priceByProject.title)
-                    price.postValue(priceByProject.price?.toString())
-                    description.postValue(priceByProject.description)
+                    priceByProject.id?.let { id.postValue(it) }
+                    priceByProject.title?.let { title.postValue(it) }
+                    priceByProject.price?.let { price.postValue(it.toString()) }
+                    priceByProject.description?.let { description.postValue(it) }
                 },
                 onError = { setAction(GET_PRICE_BY_PROJECT_FAILED) }
             ).addToDisposable()
     }
 
-    fun savePriceByProject(priceByProjectId: Int) {
-        Timber.tag(TAG).d("getPriceByProject $priceByProjectId")
+    fun savePriceByProject() {
+        Timber.tag(TAG).d("savePriceByProject: ${id.value}")
         savePortfolioUseCase(
             PortfolioDto(
-                id = priceByProjectId,
+                id = if (id.value == -1) null else id.value,
+                masterId = getMasterIdFromSharedUseCase(),
                 title = title.value!!,
                 description = description.value,
-                type = "price",
+                type = PriceByProjectCodeTable.code,
                 price = price.value?.replace(",", "")?.toInt(),
             )
         ).subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
-                onSuccess = { setAction(SAVE_PRICE_BY_PROJECT_SUCCESSFULLY) },
-                onError = { setAction(SAVE_PRICE_BY_PROJECT_FAILED) }
+                onSuccess = {
+                    Timber.tag(TAG).d("savePriceByProject successfully: $it")
+                    setAction(SAVE_PRICE_BY_PROJECT_SUCCESSFULLY)
+                },
+                onError = {
+                    Timber.tag(TAG).d("savePriceByProject failed: $it")
+                    setAction(SAVE_PRICE_BY_PROJECT_FAILED)
+                }
             ).addToDisposable()
     }
 
@@ -60,6 +72,5 @@ class PriceByProjectViewModel @Inject constructor(
         const val SAVE_PRICE_BY_PROJECT_SUCCESSFULLY = "SAVE_PRICE_BY_PROJECT_SUCCESSFULLY"
         const val SAVE_PRICE_BY_PROJECT_FAILED = "SAVE_PRICE_BY_PROJECT_FAILED"
         const val GET_PRICE_BY_PROJECT_FAILED = "GET_PRICE_BY_PROJECT_FAILED"
-
     }
 }

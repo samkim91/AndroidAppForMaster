@@ -101,7 +101,7 @@ object MajorChipGroupHelper {
         item.projects?.map { project ->
             val chip = layoutInflater.inflate(R.layout.single_chip_entry_layout, null) as Chip
             chip.setOnCloseIconClickListener {
-                closeClickListener(titleChipGroup, it, project.id)
+                closeClickListener(titleChipGroup, it, project.id!!)
             }
             chip.text = project.name
             chip.setTextAppearanceResource(R.style.small_text_style_medium)

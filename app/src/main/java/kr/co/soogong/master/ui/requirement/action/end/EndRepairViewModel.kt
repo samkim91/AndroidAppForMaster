@@ -13,7 +13,6 @@ import kr.co.soogong.master.domain.usecase.requirement.GetRequirementUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import kr.co.soogong.master.uihelper.requirment.action.EndRepairActivityHelper
 import timber.log.Timber
-import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
 
@@ -23,9 +22,8 @@ class EndRepairViewModel @Inject constructor(
     private val saveRepairUseCase: SaveRepairUseCase,
     val savedStateHandle: SavedStateHandle
 ) : BaseViewModel() {
-    //    private val requirementId = savedStateHandle.get<Bundle>(BUNDLE_KEY)?.getInt(END_REPAIR_REQUIREMENT_INT_KEY)
     private val requirementId =
-        EndRepairActivityHelper.getRequirementIdBySaveState(savedStateHandle)
+        EndRepairActivityHelper.getRequirementIdFromSavedState(savedStateHandle)
 
     private val _requirement = MutableLiveData<RequirementDto>()
 
@@ -38,7 +36,7 @@ class EndRepairViewModel @Inject constructor(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
-                onSuccess = {
+                onNext = {
                     Timber.tag(TAG)
                         .d("requestRequirement successfully: $it")
                     _requirement.value = it

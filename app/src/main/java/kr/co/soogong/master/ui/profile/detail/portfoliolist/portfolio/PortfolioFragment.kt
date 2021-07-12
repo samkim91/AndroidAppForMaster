@@ -1,7 +1,9 @@
 package kr.co.soogong.master.ui.profile.detail.portfoliolist.portfolio
 
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import gun0912.tedimagepicker.builder.TedImagePicker
@@ -50,7 +52,15 @@ class PortfolioFragment : BaseFragment<FragmentEditPortfolioBinding>(
                     with(defaultButton) {
                         text = getString(R.string.writing_done)
                         setOnClickListener {
-                            viewModel.savePortfolio()
+                            viewModel.title.observe(viewLifecycleOwner, {
+                                jobTitle.isVisible = it.isNullOrEmpty()
+                            })
+
+                            alert.isVisible = viewModel.imageBeforeJob.value?.equals(Uri.EMPTY)!! || viewModel.imageAfterJob.value?.equals(Uri.EMPTY)!!
+
+                            if(!jobTitle.isVisible && !alert.isVisible) {
+                                viewModel.savePortfolio()
+                            }
                         }
                     }
                 }

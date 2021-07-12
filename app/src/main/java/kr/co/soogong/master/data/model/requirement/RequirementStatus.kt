@@ -1,5 +1,7 @@
 package kr.co.soogong.master.data.model.requirement
 
+import kr.co.soogong.master.data.dto.requirement.RequirementDto
+
 sealed class RequirementStatus {
     abstract fun toInt(): Int
     abstract fun toCode(): String
@@ -69,20 +71,24 @@ sealed class RequirementStatus {
     }
 
     companion object {
-        fun getStatus(status: String?): RequirementStatus =
-            when (status) {
+        fun getStatus(requirement: RequirementDto?): RequirementStatus {
+            if (requirement?.canceledYn == true) return Canceled
+
+            return when (requirement?.status) {
                 // 견적탭
                 Requested.toCode() -> Requested
-                Estimated.toCode() -> Estimated
+                Estimated.toCode() -> {
+                    if (requirement.estimationDto?.masterResponseCode == "Default") Requested else Estimated
+                }
                 // 시공탭
                 Repairing.toCode() -> Repairing
                 RequestFinish.toCode() -> RequestFinish
                 // 완료탭
                 Done.toCode() -> Done
                 Closed.toCode() -> Closed
-                Canceled.toCode() -> Canceled
                 Impossible.toCode() -> Impossible
                 else -> Failed
             }
+        }
     }
 }

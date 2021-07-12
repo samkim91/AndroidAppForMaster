@@ -80,7 +80,7 @@ fun addEstimationDetail(
         estimationDto.estimationPrices.map {
             val view = EstimationItem(context)
 
-            view.key = when (it.priceType) {
+            view.key = when (it.priceTypeCode) {
                 EstimationPriceTypeCode.LABOR ->
                     context.getString(R.string.estimation_labor_cost)
                 EstimationPriceTypeCode.MATERIAL ->

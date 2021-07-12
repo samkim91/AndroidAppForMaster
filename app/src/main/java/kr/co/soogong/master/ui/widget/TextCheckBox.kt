@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.CheckBox
 import android.widget.CompoundButton
+import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ViewTextCheckboxBinding
@@ -27,6 +28,9 @@ class TextCheckBox @JvmOverloads constructor(
 
     val checkBox: CheckBox
         get() = binding.checkbox
+
+    val textView: TextView
+        get() = binding.text
 
     var lineVisible: Boolean = false
         set(value) {

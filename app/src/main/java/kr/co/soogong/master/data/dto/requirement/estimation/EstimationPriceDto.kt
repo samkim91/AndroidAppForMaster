@@ -3,7 +3,6 @@ package kr.co.soogong.master.data.dto.requirement.estimation
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
-import java.util.*
 
 @Parcelize
 data class EstimationPriceDto(
@@ -13,8 +12,8 @@ data class EstimationPriceDto(
     @SerializedName("estimationId")
     val estimationId: Int?,
 
-    @SerializedName("priceType")
-    val priceType: String?,
+    @SerializedName("priceTypeCode")
+    val priceTypeCode: String?,
 
     @SerializedName("partialPrice")
     val partialPrice: Int?,
@@ -24,7 +23,7 @@ data class EstimationPriceDto(
             return EstimationPriceDto(
                 id = null,
                 estimationId = estimationDto?.id,
-                priceType = priceType,
+                priceTypeCode = priceType,
                 partialPrice = partialPrice,
             )
         }

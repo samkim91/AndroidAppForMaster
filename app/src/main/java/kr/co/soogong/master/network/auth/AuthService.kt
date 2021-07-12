@@ -15,13 +15,8 @@ class AuthService @Inject constructor(
         return authInterface.signIn(uid)
     }
 
-    // TODO: 2021/06/23 master save 와 같은 API이기 때문에, 통합해도 됨..
-    fun signUp(masterDto: MasterDto): Single<MasterDto> {
-        return authInterface.signUp(masterDto)
-    }
-
-    fun checkUserExistent(id: String): Single<Boolean> {
-        return authInterface.checkUserExistent(id)
+    fun isMasterExistent(tel: String): Single<Boolean> {
+        return authInterface.isMasterExistent(tel)
     }
 
     fun saveFCMToken(firebaseTokenDto: FirebaseTokenDto): Single<FirebaseTokenDto> {

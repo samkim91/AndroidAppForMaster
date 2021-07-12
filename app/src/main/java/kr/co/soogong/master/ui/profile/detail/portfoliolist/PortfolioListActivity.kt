@@ -8,7 +8,7 @@ import kr.co.soogong.master.databinding.ActivityEditProfileWithCardBinding
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.ui.dialog.popup.CustomDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData
-import kr.co.soogong.master.ui.profile.PortfolioCodeTable
+import kr.co.soogong.master.ui.profile.detail.portfoliolist.PortfolioListViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerActivityHelper
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.ADD_PORTFOLIO
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.ADD_PRICE_BY_PROJECTS
@@ -17,6 +17,8 @@ import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.
 import kr.co.soogong.master.uihelper.profile.PortfolioListActivityHelper
 import kr.co.soogong.master.uihelper.profile.PortfolioListActivityHelper.PORTFOLIO
 import kr.co.soogong.master.uihelper.profile.PortfolioListActivityHelper.PRICE_BY_PROJECTS
+import kr.co.soogong.master.utility.EventObserver
+import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -39,12 +41,7 @@ class PortfolioListActivity : BaseActivity<ActivityEditProfileWithCardBinding>(
     override fun onStart() {
         super.onStart()
         Timber.tag(TAG).d("onStart: ")
-        viewModel.requestPortfolioList(
-            when (pageName) {
-                PORTFOLIO -> PortfolioCodeTable.code
-                else -> "price"
-            }
-        )
+        viewModel.requestPortfolioList()
     }
 
     override fun initLayout() {
@@ -110,25 +107,17 @@ class PortfolioListActivity : BaseActivity<ActivityEditProfileWithCardBinding>(
         binding.recyclerview.adapter =
             PortfolioListAdapter(
                 leftButtonClickListener = { id ->
-                    if (pageName == PORTFOLIO) {
-                        val dialog = CustomDialog(
-                            DialogData.getAskingDeletePortfolioDialogData(this@PortfolioListActivity),
-                            yesClick = {
-                                viewModel.deletePortfolio(id)
-                            },
-                            noClick = { })
+                    val dialog = CustomDialog(
+                        dialogData = when(pageName) {
+                            PORTFOLIO -> DialogData.getAskingDeletePortfolioDialogData(this@PortfolioListActivity)
+                            else -> DialogData.getAskingDeletePriceByProjectDialogData(this@PortfolioListActivity)
+                        },
+                        yesClick = {
+                            viewModel.deletePortfolio(id)
+                        },
+                        noClick = { })
 
-                        dialog.show(supportFragmentManager, dialog.tag)
-                    } else {
-                        val dialog = CustomDialog(
-                            DialogData.getAskingDeletePriceByProjectDialogData(this@PortfolioListActivity),
-                            yesClick = {
-                                viewModel.deletePriceByProject(id)
-                            },
-                            noClick = { })
-
-                        dialog.show(supportFragmentManager, dialog.tag)
-                    }
+                    dialog.show(supportFragmentManager, dialog.tag)
                 },
                 rightButtonClickListener = { id ->
                     startActivity(
@@ -142,14 +131,15 @@ class PortfolioListActivity : BaseActivity<ActivityEditProfileWithCardBinding>(
     }
 
     private fun registerEventObserve() {
-
+        viewModel.action.observe(this, EventObserver { event ->
+            when(event) {
+                REQUEST_FAILED -> toast(getString(R.string.error_message_of_request_failed))
+            }
+        })
     }
-
 
     companion object {
         private const val TAG = "EditProfileWithCardActivity"
 
     }
-
-
 }

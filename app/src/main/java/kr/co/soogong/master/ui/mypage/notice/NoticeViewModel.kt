@@ -23,8 +23,8 @@ class NoticeViewModel @Inject constructor(
         getNoticeListUseCase()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                _list.postValue(it.sortedByDescending { it.date })
+            .subscribe({ list ->
+                _list.postValue(list.sortedByDescending { it.id })
             }, {
                 Timber.tag(TAG).w("getNoticeList: $it")
             })

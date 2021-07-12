@@ -7,6 +7,7 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 import kotlinx.parcelize.RawValue
 import kr.co.soogong.master.data.dto.AttachmentDto
+import kr.co.soogong.master.data.dto.requirement.review.ReviewDto
 import java.util.*
 
 @Parcelize
@@ -52,15 +53,17 @@ data class MasterDto(
     @SerializedName("public")
     val isPublic: Boolean? = null,
 
-    // TODO: 2021/06/18 이미지 URL이 넘어오도록 해야함
-    @SerializedName("profileImageId")
-    val profileImageId: Int? = null,
-
     @SerializedName("profileImage")
     val profileImage: AttachmentDto? = null,
 
     @SerializedName("introduction")
     val introduction: String? = null,
+
+    @SerializedName("shopImages")
+    val shopImages: List<AttachmentDto>? = null,
+
+    @SerializedName("updateShopImagesYn")
+    val updateShopImagesYn: Boolean? = null,
 
     @SerializedName("warrantyPeriod")
     val warrantyPeriod: Int? = null,
@@ -69,7 +72,7 @@ data class MasterDto(
     val warrantyDescription: String? = null,
 
     @SerializedName("openDate")
-    val openDate: Date? = null,
+    val openDate: String? = null,
 
     @SerializedName("businessType")
     val businessType: String? = null,
@@ -77,7 +80,6 @@ data class MasterDto(
     @SerializedName("businessName")
     val businessName: String? = null,
 
-    // TODO: 2021/06/18 URL이 오는게 맞음.. 변경 필요
     @SerializedName("businessRegistImage")
     val businessRegistImage: AttachmentDto? = null,
 
@@ -97,13 +99,16 @@ data class MasterDto(
     val marketingPushAtNight: Boolean? = null,
 
     @SerializedName("masterConfigs")
-    val masterConfigs: @RawValue List<MasterConfigDto>? = null,
+    val masterConfigs: List<MasterConfigDto>? = null,
 
     @SerializedName("masterPortfolios")
     val masterPortfolios: List<PortfolioDto>? = null,
 
     @SerializedName("projects")
     val majors: List<MajorDto>? = null,
+
+    @SerializedName("reviews")
+    val reviews: List<ReviewDto>? = null,
 
     @SerializedName("createdAt")
     val createdAt: Date? = null,

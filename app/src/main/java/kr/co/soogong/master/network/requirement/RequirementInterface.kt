@@ -2,7 +2,6 @@ package kr.co.soogong.master.network.requirement
 
 import io.reactivex.Single
 import kr.co.soogong.master.contract.HttpContract
-import kr.co.soogong.master.data.dto.Response
 import kr.co.soogong.master.data.dto.requirement.RequirementDto
 import kr.co.soogong.master.data.dto.requirement.estimation.EstimationDto
 import kr.co.soogong.master.data.dto.requirement.repair.RepairDto
@@ -12,12 +11,11 @@ import retrofit2.http.POST
 import retrofit2.http.Query
 
 interface RequirementInterface {
-    // TODO: 2021/06/23 Uid로 조회하도록 변경해야함 ...
-    @GET(HttpContract.GET_REQUIREMENT_LIST)
-    fun getRequirementList(@Query("masterId") masterId : Int, @Query("statusArray") statusArray: List<String>): Single<List<RequirementDto>>
+    @GET(HttpContract.GET_REQUIREMENT_LIST_BY_UID)
+    fun getRequirementList(@Query("masterUid") masterUid : String, @Query("statusArray") statusArray: List<String>): Single<List<RequirementDto>>
 
     @GET(HttpContract.GET_REQUIREMENT)
-    fun getRequirement(@Query("requirementId") requirementId : Int, @Query("masterId") masterId: Int): Single<RequirementDto>
+    fun getRequirement(@Query("requirementId") requirementId : Int, @Query("masterUid") masterUid: String): Single<RequirementDto>
 
     @POST(HttpContract.SAVE_ESTIMATION)
     fun saveEstimation(@Body body: EstimationDto): Single<EstimationDto>
@@ -25,15 +23,10 @@ interface RequirementInterface {
     @POST(HttpContract.SAVE_REPAIR)
     fun saveRepair(@Body repairDto: RepairDto): Single<RequirementDto>
 
+    @POST(HttpContract.CALL_TO_CLIENT)
+    fun callToClient(@Body data: HashMap<String, Any>): Single<Boolean>
 
+    @POST(HttpContract.REQUEST_REVIEW)
+    fun requestReview(@Body repairDto: RepairDto): Single<Boolean>
 
-
-
-
-
-    @POST(HttpContract.CALL_TO_CUSTOMER)
-    fun callToCustomer(@Body body: HashMap<String, Any>): Single<Response>
-
-    @POST(HttpContract.ASK_FOR_REVIEW)
-    fun askForReview(@Body body: HashMap<String, Any?>): Single<Response>
 }

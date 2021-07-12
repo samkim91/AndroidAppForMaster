@@ -7,7 +7,7 @@ import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.dto.profile.MasterDto
 import kr.co.soogong.master.data.model.profile.Profile
-import kr.co.soogong.master.domain.usecase.profile.GetProfileFromLocalUseCase
+import kr.co.soogong.master.domain.usecase.profile.GetProfileUseCase
 import kr.co.soogong.master.domain.usecase.profile.SaveMasterUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import timber.log.Timber
@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class EditEmailViewModel @Inject constructor(
-    private val getProfileFromLocalUseCase: GetProfileFromLocalUseCase,
+    private val getProfileUseCase: GetProfileUseCase,
     private val saveMasterUseCase: SaveMasterUseCase,
 ) : BaseViewModel() {
     private val _profile = MutableLiveData<Profile>()
@@ -26,7 +26,7 @@ class EditEmailViewModel @Inject constructor(
     fun requestEmail() {
         Timber.tag(TAG).d("requestEmail: ")
 
-        getProfileFromLocalUseCase()
+        getProfileUseCase()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
@@ -53,22 +53,18 @@ class EditEmailViewModel @Inject constructor(
     fun saveEmailInfo() {
         Timber.tag(TAG).d("saveEmailInfo: ")
 
-        localPart.value?.let { localPart ->
-            domain.value?.let { domain ->
-                saveMasterUseCase(
-                    MasterDto(
-                        id = _profile.value?.id,
-                        uid = _profile.value?.uid,
-                        email = "$localPart@$domain",
-                    )
-                ).subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribeBy(
-                        onSuccess = { setAction(SAVE_EMAIL_SUCCESSFULLY) },
-                        onError = { setAction(SAVE_EMAIL_FAILED) }
-                    ).addToDisposable()
-            }
-        }
+        saveMasterUseCase(
+            MasterDto(
+                id = _profile.value?.id,
+                uid = _profile.value?.uid,
+                email = "${localPart.value}@${domain.value}",
+            )
+        ).subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeBy(
+                onSuccess = { setAction(SAVE_EMAIL_SUCCESSFULLY) },
+                onError = { setAction(SAVE_EMAIL_FAILED) }
+            ).addToDisposable()
     }
 
     companion object {

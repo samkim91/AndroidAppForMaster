@@ -2,16 +2,13 @@
 
 package kr.co.soogong.master.utility.extension
 
-import android.content.Context
-import android.view.Gravity
-import android.view.ViewGroup
-import android.widget.LinearLayout
+import android.icu.text.DecimalFormat
+import android.text.*
+import android.text.method.LinkMovementMethod
+import android.text.style.ClickableSpan
+import android.view.View
 import android.widget.TextView
-import androidx.appcompat.view.ContextThemeWrapper
-import androidx.appcompat.widget.AppCompatTextView
-import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.BindingAdapter
-import kr.co.soogong.master.R
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -27,27 +24,36 @@ fun TextView.setDate(date: Date?) {
     text = simpleDateFormat.format(date ?: System.currentTimeMillis())
 }
 
-fun addTextView3(
-    viewGroup: ViewGroup,
-    context: Context,
-    message: String?
-) {
-    val contextWrapper =
-        ContextThemeWrapper(context, R.style.medium_text_style_regular)
-
-    val params = LinearLayout.LayoutParams(
-        ViewGroup.LayoutParams.MATCH_PARENT,
-        40.dp
-    )
-    params.setMargins(0, 8.dp, 0, 0)
-
-    val view = AppCompatTextView(contextWrapper).apply {
-        setTextColor(ResourcesCompat.getColor(resources, R.color.primary_text_color, null))
-        background =
-            ResourcesCompat.getDrawable(resources, R.drawable.shape_fill_white_background, null)
-        gravity = Gravity.CENTER
-        text = message
+@BindingAdapter("bind:set_price")
+fun TextView.setPrice(price: Int?) {
+    price?.let {
+        text = "${DecimalFormat("#,###").format(it)}원"
     }
+}
 
-    viewGroup.addView(view, params)
+fun TextView.makeLinks(vararg links: Pair<String, View.OnClickListener>) {
+    val spannableString = SpannableString(this.text)
+    var startIndexOfLink = -1
+
+    for (link in links) {
+        val clickableSpan = object : ClickableSpan() {
+            override fun updateDrawState(textPaint: TextPaint) {
+                textPaint.isUnderlineText = true
+            }
+
+            override fun onClick(view: View) {
+                Selection.setSelection((view as TextView).text as Spannable, 0)
+                view.invalidate()
+                link.second.onClick(view)
+            }
+        }
+        startIndexOfLink = this.text.toString().indexOf(link.first, startIndexOfLink + 1)
+        if(startIndexOfLink == -1) return
+        spannableString.setSpan(
+            clickableSpan, startIndexOfLink, (startIndexOfLink + link.first.length),
+            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+        this.movementMethod = LinkMovementMethod.getInstance()
+        this.setText(spannableString, TextView.BufferType.SPANNABLE)
+    }
 }

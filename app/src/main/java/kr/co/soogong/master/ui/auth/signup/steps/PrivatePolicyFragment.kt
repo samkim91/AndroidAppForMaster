@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentSignUpPrivatePolicyBinding
@@ -11,10 +12,15 @@ import kr.co.soogong.master.ui.auth.signup.SignUpViewModel
 import kr.co.soogong.master.ui.auth.signup.SignUpViewModel.Companion.SIGN_UP_FAILED
 import kr.co.soogong.master.ui.auth.signup.SignUpViewModel.Companion.SIGN_UP_SUCCESSFULLY
 import kr.co.soogong.master.ui.base.BaseFragment
+import kr.co.soogong.master.uihelper.auth.signup.ViewPolicyActivityHelper
+import kr.co.soogong.master.uihelper.auth.signup.ViewPolicyActivityHelper.PRIVATE_POLICY
+import kr.co.soogong.master.uihelper.auth.signup.ViewPolicyActivityHelper.TERMS_OF_SERVICE
 import kr.co.soogong.master.uihelper.main.MainActivityHelper
 import kr.co.soogong.master.utility.EventObserver
+import kr.co.soogong.master.utility.extension.makeLinks
 import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
+import java.io.InputStreamReader
 
 @AndroidEntryPoint
 class PrivatePolicyFragment : BaseFragment<FragmentSignUpPrivatePolicyBinding>(
@@ -42,7 +48,19 @@ class PrivatePolicyFragment : BaseFragment<FragmentSignUpPrivatePolicyBinding>(
                 viewModel.marketingPush.value = status
             }
 
-            // TODO: 2021/06/17 이용약관 및 개인정보처리방침 버튼 및 화면 띄우기
+            agreedPrivacyPolicy.text = "수공의 이용약관 및 개인정보 처리방침에\n동의합니다."
+            agreedPrivacyPolicy.textView.makeLinks(
+                Pair("이용약관", View.OnClickListener {
+                    startActivity(
+                        ViewPolicyActivityHelper.getIntent(requireContext(), TERMS_OF_SERVICE)
+                    )
+                }),
+                Pair("개인정보 처리방침", View.OnClickListener {
+                    startActivity(
+                        ViewPolicyActivityHelper.getIntent(requireContext(), PRIVATE_POLICY)
+                    )
+                })
+            )
 
             defaultButton.setOnClickListener {
                 viewModel.privacyPolicy.observe(viewLifecycleOwner, {

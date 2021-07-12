@@ -22,7 +22,7 @@ class CancelRepairViewModel @Inject constructor(
     val savedStateHandle: SavedStateHandle
 ) : BaseViewModel() {
 
-    private val requirementId = CancelRepairActivityHelper.getRequirementIdBySaveState(savedStateHandle)
+    private val requirementId = CancelRepairActivityHelper.getRequirementIdFromSavedState(savedStateHandle)
     private val _requirement = MutableLiveData<RequirementDto>()
 
     val canceledReason = MutableLiveData("")
@@ -34,7 +34,7 @@ class CancelRepairViewModel @Inject constructor(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
-                onSuccess = {
+                onNext = {
                     Timber.tag(TAG).d("requestRequirement successfully: $it")
                     _requirement.value = it
                 },

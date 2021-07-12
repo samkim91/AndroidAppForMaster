@@ -3,6 +3,7 @@ package kr.co.soogong.master.ui.requirement.action.view
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
+import androidx.core.view.isVisible
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.dto.requirement.estimation.EstimationDto
@@ -123,6 +124,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
 
     private fun registerEventObserve() {
         viewModel.requirement.observe(this@ViewRequirementActivity, { requirement ->
+            setDefaultView()
 
             bind {
                 actionBar.title.text =
@@ -131,7 +133,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                 // 고객 요청 내용
                 bindRequirementQnasData(requirement?.requirementQnas)
 
-                when (RequirementStatus.getStatus(requirement.status)) {
+                when (RequirementStatus.getStatus(requirement)) {
                     // 상태 : 견적요청
                     // view :
                     // footer button : 견적 마감일, 견적을 보낼래요, 견적을 내기 어려워요
@@ -169,7 +171,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                     // footer button : 리뷰 요청하기
                     RequirementStatus.Done -> {
                         askReviewButton.visibility = View.VISIBLE
-                        requirement?.estimationDto?.repair?.requestReviewYn?.let { if (it) setAskingReviewButton() }
+                        requirement?.estimationDto?.repair?.requestReviewYn?.let { if (it) setReviewAsked() }
                         bindRepairData(requirement?.estimationDto)
                     }
 
@@ -177,8 +179,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                     // view : 고객 리뷰, 나의 최종 시공 내용
                     // footer button : none
                     RequirementStatus.Closed -> {
-                        //Todo.. 고객 리뷰 데이터를 서버에서 return 해줘야함.
-                        customerReviewGroup.visibility = View.VISIBLE
+                        customerReviewGroup.isVisible = viewModel.review.value != null
                         bindRepairData(requirement?.estimationDto)
                     }
 
@@ -221,7 +222,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                     }
                 }
                 ASK_FOR_REVIEW_SUCCESSFULLY -> {
-                    setAskingReviewButton()
+                    setReviewAsked()
                     toast(getString(R.string.ask_for_review_successful))
                 }
                 REQUEST_FAILED -> {
@@ -234,6 +235,19 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
     override fun onStart() {
         super.onStart()
         viewModel.requestRequirement()
+    }
+
+    private fun setDefaultView(){
+        bind {
+            requestedButtonGroup.visibility = View.GONE
+            cancelButton.visibility = View.GONE
+            doneButton.visibility = View.GONE
+            callToCustomerContainer.visibility = View.GONE
+            doneButton.visibility = View.GONE
+            askReviewButton.visibility = View.GONE
+            customerReviewGroup.visibility = View.GONE
+            repairGroup.visibility = View.GONE
+        }
     }
 
     private fun bindRequirementQnasData(requirementQnaDtos: List<RequirementQnaDto>?) {
@@ -276,10 +290,9 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
         }
     }
 
-    private fun setAskingReviewButton() {
+    private fun setReviewAsked() {
         binding.askReviewButton.isEnabled = false
         binding.askReviewButton.text = getString(R.string.ask_for_review_successful)
-        binding.askReviewButton.background = getDrawable(R.color.color_90E9BD)
     }
 
     companion object {

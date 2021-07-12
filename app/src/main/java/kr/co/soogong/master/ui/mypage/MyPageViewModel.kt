@@ -12,14 +12,14 @@ import kr.co.soogong.master.data.model.mypage.Notice
 import kr.co.soogong.master.data.model.profile.Profile
 import kr.co.soogong.master.domain.usecase.mypage.GetNoticeListUseCase
 import kr.co.soogong.master.domain.usecase.mypage.SignOutUseCase
-import kr.co.soogong.master.domain.usecase.profile.GetProfileFromLocalUseCase
+import kr.co.soogong.master.domain.usecase.profile.GetProfileUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class MyPageViewModel @Inject constructor(
-    private val getProfileFromLocalUseCase: GetProfileFromLocalUseCase,
+    private val getProfileUseCase: GetProfileUseCase,
     private val getNoticeListUseCase: GetNoticeListUseCase,
     private val signOutUseCase: SignOutUseCase,
 ) : BaseViewModel() {
@@ -32,7 +32,7 @@ class MyPageViewModel @Inject constructor(
         get() = _noticeList
 
     private fun requestUserProfile() {
-        getProfileFromLocalUseCase()
+        getProfileUseCase()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
@@ -45,11 +45,16 @@ class MyPageViewModel @Inject constructor(
         getNoticeListUseCase()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                _noticeList.postValue(it.sortedByDescending { it.date }.takeLast(3))
-            }, {
-                Timber.tag(TAG).w("getNoticeList: $it")
-            })
+            .subscribeBy(
+                onError =
+                {
+                    Timber.tag(TAG).w("getNoticeList: $it")
+                },
+                onNext = { list ->
+                    _noticeList.postValue(list.take(3))
+                },
+                onComplete = {}
+            )
             .addToDisposable()
     }
 

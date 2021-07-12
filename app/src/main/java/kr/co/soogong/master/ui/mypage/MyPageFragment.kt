@@ -11,7 +11,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentMypageBinding
 import kr.co.soogong.master.ui.base.BaseFragment
-import kr.co.soogong.master.ui.mypage.notice.NoticeMyPageListViewHolder
+import kr.co.soogong.master.ui.mypage.notice.NoticeInMyPageViewHolder
 import kr.co.soogong.master.uihelper.auth.SignMainActivityHelper
 import kr.co.soogong.master.uihelper.mypage.account.AccountActivityHelper
 import kr.co.soogong.master.uihelper.mypage.alarm.AlarmActivityHelper
@@ -32,7 +32,6 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(
 
         initLayout()
         registerEventObserve()
-        viewModel.initialize()
     }
 
     override fun initLayout() {
@@ -43,7 +42,7 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(
 
             lifecycleOwner = viewLifecycleOwner
 
-            noticeList.adapter = NoticeAdapter(NoticeMyPageListViewHolder.NoticeMypageListView) {
+            noticeList.adapter = NoticeAdapter(NoticeInMyPageViewHolder.NoticeMypageListView) {
                 startActivity(NoticeDetailActivityHelper.getIntent(requireContext(), it))
             }
         }
@@ -68,7 +67,7 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(
                         )
                     }
                     MyPageViewModel.KAKAO -> {
-                        val url = TalkApiClient.instance.addChannelUrl("_mWbJxb")
+                        val url = TalkApiClient.instance.addChannelUrl("_xgxkbJxb")
                         KakaoCustomTabsClient.openWithDefault(requireContext(), url)
                     }
                     MyPageViewModel.NOTICE -> {
@@ -80,6 +79,11 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(
                 }
             })
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        viewModel.initialize()
     }
 
     companion object {

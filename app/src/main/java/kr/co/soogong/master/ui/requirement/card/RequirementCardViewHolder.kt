@@ -70,7 +70,7 @@ class EstimatedViewHolder(
 
             firstDate.setFirstDate(requirementCard.status?.toString(), requirementCard.createdAt)
             myAmount.visibility = View.VISIBLE
-            myAmount.setAmount(requirementCard.status?.toString(), requirementCard.estimationDto?.price?.toString())
+            myAmount.setAmount(requirementCard.status?.toString(), requirementCard.estimationDto?.price)
 
             waitingLabel.visibility = View.VISIBLE
 
@@ -98,7 +98,7 @@ class RepairingViewHolder(
 
             firstDate.setFirstDate(requirementCard.status?.toString(), requirementCard.estimationDto?.updatedAt)
             myAmount.visibility = View.VISIBLE
-            myAmount.setAmount(requirementCard.status?.toString(), requirementCard.estimationDto?.price?.toString())
+            myAmount.setAmount(requirementCard.status?.toString(), requirementCard.estimationDto?.price)
 
             callButton.visibility = View.VISIBLE
             doneButton.visibility = View.VISIBLE
@@ -170,15 +170,16 @@ class DoneViewHolder(
             }
 
             reviewButton.visibility = View.VISIBLE
+            reviewButton.setText(R.string.requirements_card_review_button)
+            reviewButton.isEnabled = true
 
             reviewButton.setOnClickListener {
                 rightButtonClickListener?.invoke(requirementCard.id, requirementCard)
             }
 
-            requirementCard.estimationDto?.repair?.requestReviewYn?.let { boolean ->
-                if (boolean) {
+            requirementCard.estimationDto?.repair?.requestReviewYn?.let { requestReviewYn ->
+                if (requestReviewYn) {
                     reviewButton.setText(R.string.ask_for_review_successful)
-                    reviewButton.setBackgroundResource(R.color.color_90E9BD)
                     reviewButton.isEnabled = false
                 }
             }
@@ -212,7 +213,7 @@ class ClosedViewHolder(
             firstDate.setFirstDate(requirementCard.status?.toString(), requirementCard.estimationDto?.repair?.actualDate)
 
             myAmount.visibility = View.VISIBLE
-            myAmount.setAmount(requirementCard.status?.toString(), requirementCard.estimationDto?.price?.toString())
+            myAmount.setAmount(requirementCard.status?.toString(), requirementCard.estimationDto?.price)
 
             setCardClickListener {
                 cardClickListener(requirementCard.id)

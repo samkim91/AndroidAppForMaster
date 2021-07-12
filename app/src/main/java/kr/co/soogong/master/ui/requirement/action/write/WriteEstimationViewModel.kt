@@ -27,7 +27,7 @@ class WriteEstimationViewModel @Inject constructor(
     val savedStateHandle: SavedStateHandle
 ) : BaseViewModel() {
 
-    private val requirementId = WriteEstimationActivityHelper.getRequirementIdBySaveState(savedStateHandle)
+    private val requirementId = WriteEstimationActivityHelper.getRequirementIdFromSavedState(savedStateHandle)
 
     private val _requirement = MutableLiveData<RequirementDto>()
     val requirement: LiveData<RequirementDto>
@@ -49,7 +49,7 @@ class WriteEstimationViewModel @Inject constructor(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
-                onSuccess = {
+                onNext = {
                     _requirement.value = it
                 },
                 onError = {

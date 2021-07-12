@@ -9,9 +9,6 @@ data class RequirementQnaDto(
     @SerializedName("id")
     val id: Int,
 
-    @SerializedName("questionId")
-    val questionId: Int?,
-
     @SerializedName("question")
     val question: String?,
 

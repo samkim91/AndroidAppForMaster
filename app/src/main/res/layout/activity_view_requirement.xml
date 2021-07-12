@@ -55,7 +55,7 @@
                         android:textColor="@color/color_1FC472"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/banner_image"
-                        bind:status="@{vm.requirement.status}"
+                        bind:status="@{vm.requirement}"
                         tools:text="견적요청" />
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -164,7 +164,7 @@
                             android:layout_marginStart="@dimen/estimation_card_master_rating_bar_margin_start"
                             android:numStars="5"
                             android:progressTint="@color/color_22D47B"
-                            android:rating="@{4}"
+                            android:rating="@{Float.valueOf(String.valueOf(vm.review.recommendation))}"
                             app:layout_constraintStart_toEndOf="@id/master_recommendation_rating_text"
                             app:layout_constraintTop_toTopOf="@id/master_recommendation_rating_text" />
 
@@ -187,6 +187,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/estimation_card_master_rating_margin_start_2"
                             android:textColor="@color/color_1FC472"
+                            android:text="@{String.valueOf(vm.review.kindness)}"
                             app:layout_constraintStart_toEndOf="@id/master_rating_kindness_text"
                             app:layout_constraintTop_toTopOf="@id/master_rating_kindness_text"
                             tools:text="4" />
@@ -208,6 +209,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/estimation_card_master_rating_margin_start_2"
+                            android:text="@{String.valueOf(vm.review.quality)}"
                             android:textColor="@color/color_1FC472"
                             app:layout_constraintStart_toEndOf="@id/master_rating_quality_text"
                             app:layout_constraintTop_toTopOf="@id/master_rating_kindness_text"
@@ -230,6 +232,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/estimation_card_master_rating_margin_start_2"
+                            android:text="@{String.valueOf(vm.review.affordability)}"
                             android:textColor="@color/color_1FC472"
                             app:layout_constraintStart_toEndOf="@id/master_rating_affordability_text"
                             app:layout_constraintTop_toTopOf="@id/master_rating_kindness_text"
@@ -252,6 +255,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/estimation_card_master_rating_margin_start_2"
+                            android:text="@{String.valueOf(vm.review.punctuality)}"
                             android:textColor="@color/color_1FC472"
                             app:layout_constraintStart_toEndOf="@id/master_rating_punctuality_text"
                             app:layout_constraintTop_toTopOf="@id/master_rating_kindness_text"
@@ -262,6 +266,7 @@
                             style="@style/tiny_text_style.regular"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:text="@{vm.review.projectType}"
                             android:layout_marginTop="@dimen/estimation_card_master_rating_margin_top_10"
                             android:textColor="@color/text_primary_color"
                             app:layout_constraintStart_toStartOf="parent"
@@ -275,6 +280,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/estimation_card_master_rating_margin_top_12"
                             android:textColor="@color/primary_text_color"
+                            android:text="@{vm.review.reviewContent}"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/customer_review_type"
                             app:readMoreColor="@color/color_1FC472"
@@ -292,7 +298,8 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/customer_review_content"
                             app:spanCount="4"
-                            bind:photo_list="@{vm.requirement.images}" />
+                            bind:visible="@{vm.review.imageList}"
+                            bind:photo_list="@{vm.review.imageList}" />
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/customer_review_date"
@@ -300,6 +307,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/estimation_card_master_rating_margin_top_12"
+                            bind:to_date_string="@{vm.review.createdAt}"
                             android:textColor="@color/text_primary_color"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/review_photo_list"
@@ -439,7 +447,7 @@
                             android:layout_width="@dimen/estimation_card_call_to_customer_button_width"
                             android:layout_height="@dimen/estimation_card_call_to_customer_button_height"
                             android:layout_marginTop="@dimen/estimation_card_call_to_customer_button_margin_top"
-                            android:onClick="@{() -> vm.callToCustomer()}"
+                            android:onClick="@{() -> vm.callToClient()}"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/photo_list" />
@@ -670,7 +678,7 @@
                 style="@style/medium_text_style.bold"
                 android:layout_width="0dp"
                 android:layout_height="48dp"
-                android:background="@color/color_22D47B"
+                android:background="@drawable/default_button_selector"
                 android:text="@string/view_estimate_ask_review"
                 android:textColor="@color/basic_white"
                 android:visibility="gone"

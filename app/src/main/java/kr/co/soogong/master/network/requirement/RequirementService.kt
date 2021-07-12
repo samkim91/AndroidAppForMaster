@@ -1,7 +1,6 @@
 package kr.co.soogong.master.network.requirement
 
 import io.reactivex.Single
-import kr.co.soogong.master.data.dto.Response
 import kr.co.soogong.master.data.dto.requirement.RequirementDto
 import kr.co.soogong.master.data.dto.requirement.estimation.EstimationDto
 import kr.co.soogong.master.data.dto.requirement.repair.RepairDto
@@ -13,12 +12,12 @@ class RequirementService @Inject constructor(
 ) {
     private val requirementInterface = retrofit.create(RequirementInterface::class.java)
 
-    fun getRequirementList(masterId: Int, statusArray: List<String>): Single<List<RequirementDto>> {
-        return requirementInterface.getRequirementList(masterId, statusArray)
+    fun getRequirementList(masterUid: String, statusArray: List<String>): Single<List<RequirementDto>> {
+        return requirementInterface.getRequirementList(masterUid, statusArray)
     }
 
-    fun getRequirement(requirementId: Int, masterId: Int): Single<RequirementDto> {
-        return requirementInterface.getRequirement(requirementId, masterId)
+    fun getRequirement(requirementId: Int, masterUid: String): Single<RequirementDto> {
+        return requirementInterface.getRequirement(requirementId, masterUid)
     }
 
     fun saveEstimation(estimationDto: EstimationDto): Single<EstimationDto> {
@@ -28,22 +27,15 @@ class RequirementService @Inject constructor(
     fun saveRepair(repairDto: RepairDto): Single<RequirementDto> {
         return requirementInterface.saveRepair(repairDto)
     }
-
-    fun callToCustomer(
-        id: Int,
-    ): Single<Response> {
+    fun callToClient(estimationId: Int): Single<Boolean> {
         val data = HashMap<String, Any>()
-        data["keycode"] = id
-        return requirementInterface.callToCustomer(data)
+        data["estimationId"] = estimationId
+        data["from"] = "Master"
+
+        return requirementInterface.callToClient(data)
     }
 
-    fun askForReview(
-        id: Int,
-        branchKeycode: String?
-    ): Single<Response> {
-        val data = HashMap<String, Any?>()
-        data["keycode"] = id
-        data["branch_keycode"] = branchKeycode
-        return requirementInterface.askForReview(data)
+    fun requestReview(repairDto: RepairDto): Single<Boolean> {
+        return requirementInterface.requestReview(repairDto)
     }
 }

@@ -1,15 +1,15 @@
 package kr.co.soogong.master.ui.image
 
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
+import kr.co.soogong.master.data.dto.AttachmentDto
 import kr.co.soogong.master.databinding.ViewHolderImageDeleteButtonBinding
 import kr.co.soogong.master.utility.extension.dp
 
 class RectangleImageWithCloseAdapter(
     private val closeClickListener: (Int) -> Unit,
-) : ListAdapter<Uri, RectangleImageWithCloseHolder>(RectangleImageWithCloseDiffUtil()) {
+) : ListAdapter<AttachmentDto, RectangleImageWithCloseHolder>(RectangleImageWithCloseDiffUtil()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         RectangleImageWithCloseHolder(ViewHolderImageDeleteButtonBinding.inflate(
             LayoutInflater.from(parent.context),

@@ -27,7 +27,9 @@ class ReviewBox @JvmOverloads constructor(
 
     var recommendCount: Double? = 0.0
         set(value) {
-            field = value
-            binding.recommendCount.text = value.toString()
+            value?.let {
+                field = it
+                binding.recommendCount.text = it.toString()
+            }
         }
 }

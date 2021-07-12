@@ -12,7 +12,6 @@ class TokenInterceptor @Inject constructor(
     override fun intercept(chain: Interceptor.Chain): Response {
         val originRequest = chain.request()
 
-        // Todo.. 토큰이 발급되지 않은 상태에서 요청을 하는 경우를 찾아서 다시 넣어줘야함.
         // 토큰이 아직 발급되지 않았을 요청에 대해 예외처리
 
 //        if (originRequest.url.encodedPath.contains("/signin") && originRequest.method == "post"

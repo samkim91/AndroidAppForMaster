@@ -5,5 +5,5 @@ object AppSharedPreferenceContract {
 
     const val MASTER_ID = "MASTER_ID"
     const val MASTER_UID = "MASTER_UID"
-    const val IS_APPROVED = "IS_MASTER_APPROVED"
+    const val MASTER_SUBSCRIPTION_PLAN = "MASTER_SUBSCRIPTION_PLAN"
 }
