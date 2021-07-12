@@ -33,6 +33,7 @@ class AddressActivity : BaseActivity<ActivityAddressBinding>(
                 setSupportMultipleWindows(true)
             }
             webViewAddress.apply {
+                removeJavascriptInterface("masterApp")
                 addJavascriptInterface(WebViewData(), "masterApp")
                 webChromeClient = WebChromeClient()
                 loadUrl("https://s3.ap-northeast-2.amazonaws.com/daum.address/daum_address.html")

@@ -12,7 +12,7 @@ import javax.inject.Inject
 class RequestReviewUseCase @Inject constructor(
     private val requirementService: RequirementService,
 ){
-    operator fun invoke(repairDto: RepairDto): Single<Boolean> {
+    operator fun invoke(repairDto: RepairDto): Single<String> {
         return requirementService.requestReview(repairDto)
     }
 }

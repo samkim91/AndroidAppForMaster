@@ -61,6 +61,18 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                 }
             }
 
+            reviewPhotoList.adapter = RectangleImageAdapter(
+                cardClickListener = { position ->
+                    startActivity(
+                        ImageViewActivityHelper.getIntent(
+                            this@ViewRequirementActivity,
+                            viewModel.review.value?.imageList,
+                            position
+                        )
+                    )
+                }
+            )
+
             photoList.adapter = RectangleImageAdapter(
                 cardClickListener = { position ->
                     startActivity(
@@ -131,7 +143,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                     getString(R.string.view_requirement_action_bar_text, requirement?.token)
 
                 // 고객 요청 내용
-                bindRequirementQnasData(requirement?.requirementQnas)
+                bindRequirementQnasData(requirement?.requirementQnas, requirement.description)
 
                 when (RequirementStatus.getStatus(requirement)) {
                     // 상태 : 견적요청
@@ -250,11 +262,12 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
         }
     }
 
-    private fun bindRequirementQnasData(requirementQnaDtos: List<RequirementQnaDto>?) {
-        if (!requirementQnaDtos.isNullOrEmpty()) addAdditionInfoView(
+    private fun bindRequirementQnasData(requirementQnaDtos: List<RequirementQnaDto>?, description: String?) {
+        addAdditionInfoView(
             binding.customFrame,
             this@ViewRequirementActivity,
-            requirementQnaDtos
+            requirementQnaDtos,
+            description,
         )
     }
 
