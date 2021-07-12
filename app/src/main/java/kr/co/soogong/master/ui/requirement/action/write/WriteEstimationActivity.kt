@@ -156,8 +156,7 @@ class WriteEstimationActivity : BaseActivity<ActivityWriteEstimationBinding>(
         })
 
         viewModel.requirement.observe(this, { requirement ->
-            val requirementQnas = requirement?.requirementQnas
-            if (!requirementQnas.isNullOrEmpty()) addAdditionInfoView(binding.customFrame, this, requirementQnas)
+            addAdditionInfoView(binding.customFrame, this, requirement.requirementQnas, requirement.description)
         })
     }
 

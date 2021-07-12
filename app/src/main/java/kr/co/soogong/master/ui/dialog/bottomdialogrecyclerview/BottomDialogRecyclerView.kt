@@ -17,10 +17,12 @@ class BottomDialogRecyclerView() : BottomSheetDialogFragment() {
         arguments?.getString(TITLE)
     }
 
+    @Suppress("UNCHECKED_CAST")
     private val dialogDataTest: List<BottomDialogData>? by lazy {
         arguments?.getSerializable(DIALOG_DATA) as List<BottomDialogData>
     }
 
+    @Suppress("UNCHECKED_CAST")
     private val itemClickTest: (String, Int) -> Unit by lazy {
         arguments?.getSerializable(ITEM_CLICK) as (String, Int) -> Unit
     }

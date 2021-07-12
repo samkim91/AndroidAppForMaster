@@ -30,9 +30,11 @@ class RectangleImageAdapter(
 
     override fun getItemCount(): Int = imageList.size
 
-    fun setList(imageList: List<AttachmentDto>) {
-        this.imageList.clear()
-        this.imageList.addAll(imageList)
-        notifyDataSetChanged()
+    fun setList(imageList: MutableList<AttachmentDto>?) {
+        imageList?.let {
+            this.imageList.clear()
+            this.imageList.addAll(it)
+            notifyDataSetChanged()
+        }
     }
 }
