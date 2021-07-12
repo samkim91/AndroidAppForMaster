@@ -202,6 +202,23 @@
                     app:title='@{"A/S 정보"}' />
 
                 <!-- 경력 CAREER -->
+                <kr.co.soogong.master.ui.widget.ProfileDefaultCard
+                    android:id="@+id/career"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/gap_20"
+                    android:layout_marginTop="@dimen/gap_16"
+                    android:layout_marginEnd="@dimen/gap_20"
+                    android:layout_marginBottom="@dimen/gap_20"
+                    android:background="@drawable/shape_radius8_white_background"
+                    android:elevation="@dimen/gap_4"
+                    app:defaultButtonByString="@{vm.requiredInformation.career}"
+                    app:firstDetail="@{vm.requiredInformation.career}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/warranty_information"
+                    app:subTitle='@{"시공해오신 경력을 알려주세요."}'
+                    app:title='@{"경력"}' />
 
                 <!-- 연락처 PHONE_NUMBER -->
                 <kr.co.soogong.master.ui.widget.ProfileDefaultCard
@@ -293,20 +310,6 @@
                     app:title='@{"서비스 가능 범위"}' />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
-
-        <kr.co.soogong.master.ui.widget.ProfileDefaultCard
-            android:id="@+id/career"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/gap_20"
-            android:layout_marginTop="@dimen/gap_16"
-            android:layout_marginEnd="@dimen/gap_20"
-            android:background="@drawable/shape_radius8_white_background"
-            android:elevation="@dimen/gap_4"
-            app:defaultButtonByString="@{vm.requiredInformation.career}"
-            app:firstDetail="@{vm.requiredInformation.career}"
-            app:subTitle='@{"시공해오신 경력을 알려주세요."}'
-            app:title='@{"경력"}' />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/default_button"
