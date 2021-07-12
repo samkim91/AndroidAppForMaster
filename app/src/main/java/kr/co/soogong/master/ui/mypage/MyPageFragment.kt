@@ -67,7 +67,7 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(
                         )
                     }
                     MyPageViewModel.KAKAO -> {
-                        val url = TalkApiClient.instance.addChannelUrl("_mWbJxb")
+                        val url = TalkApiClient.instance.addChannelUrl("_xgxkbJxb")
                         KakaoCustomTabsClient.openWithDefault(requireContext(), url)
                     }
                     MyPageViewModel.NOTICE -> {

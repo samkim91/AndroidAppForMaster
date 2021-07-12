@@ -3,6 +3,7 @@ package kr.co.soogong.master.ui.profile.detail.requiredinformation
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
+import androidx.core.view.isVisible
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.model.profile.NotApprovedCodeTable
@@ -15,7 +16,6 @@ import kr.co.soogong.master.ui.profile.detail.requiredinformation.EditRequiredIn
 import kr.co.soogong.master.ui.profile.detail.requiredinformation.EditRequiredInformationViewModel.Companion.GET_PROFILE_SUCCESSFULLY
 import kr.co.soogong.master.ui.profile.detail.requiredinformation.EditRequiredInformationViewModel.Companion.MASTER_SUBSCRIPTION_PLAN
 import kr.co.soogong.master.ui.profile.detail.requiredinformation.EditRequiredInformationViewModel.Companion.SAVE_MASTER_INFORMATION_FAILED
-import kr.co.soogong.master.ui.profile.detail.requiredinformation.EditRequiredInformationViewModel.Companion.SAVE_MASTER_INFORMATION_SUCCESSFULLY
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerActivityHelper
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_ADDRESS
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_BUSINESS_UNIT_INFORMATION
@@ -142,10 +142,6 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
                 GET_PROFILE_SUCCESSFULLY -> {
                     naverMap
                 }
-                SAVE_MASTER_INFORMATION_SUCCESSFULLY -> {
-                    viewModel.requestRequiredInformation()
-                    setLayoutForApprovedMaster()
-                }
                 SAVE_MASTER_INFORMATION_FAILED, GET_PROFILE_FAILED -> toast(getString(R.string.error_message_of_request_failed))
             }
         })
@@ -154,7 +150,7 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
             when(event) {
                 MASTER_SUBSCRIPTION_PLAN -> {
                     when(value) {
-                        NotApprovedCodeTable.code -> setPercentageText()
+                        NotApprovedCodeTable.code -> setLayoutForNotApprovedMaster()
                         RequestApproveCodeTable.code -> setLayoutForRequestApproveMaster()
                         else -> setLayoutForApprovedMaster()
                     }
@@ -189,43 +185,48 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
         }
     }
 
-    private fun setPercentageText() {
-        val totalCount = 10
-        var filledCount = 0
+    private fun setLayoutForNotApprovedMaster() {
+        bind {
+            alertContainerToFillUpRequiredInformation.isVisible = true
+            defaultButton.isVisible = true
 
-        with(viewModel.requiredInformation) {
-            if (!value?.introduction.isNullOrEmpty()) filledCount++
-            if (!value?.shopImages.isNullOrEmpty()) filledCount++
-            if (!value?.businessUnitInformation?.businessType.isNullOrEmpty()) filledCount++
-            if (value?.warrantyInformation?.warrantyPeriod != 0) filledCount++
-            if (!value?.career.isNullOrEmpty()) filledCount++
-            if (!value?.tel.isNullOrEmpty()) filledCount++
-            if (!value?.ownerName.isNullOrEmpty()) filledCount++
-            if (!value?.majors.isNullOrEmpty()) filledCount++
-            if (!value?.companyAddress?.roadAddress.isNullOrEmpty()) filledCount++
-            if (value?.serviceArea != null) filledCount++
-        }
+            val totalCount = 10
+            var filledCount = 0
 
-        val percentage: Float = filledCount.toFloat() / totalCount.toFloat() * 100f
+            with(viewModel.requiredInformation) {
+                if (!value?.introduction.isNullOrEmpty()) filledCount++
+                if (!value?.shopImages.isNullOrEmpty()) filledCount++
+                if (!value?.businessUnitInformation?.businessType.isNullOrEmpty()) filledCount++
+                if (value?.warrantyInformation?.warrantyPeriod != null) filledCount++
+                if (!value?.career.isNullOrEmpty()) filledCount++
+                if (!value?.tel.isNullOrEmpty()) filledCount++
+                if (!value?.ownerName.isNullOrEmpty()) filledCount++
+                if (!value?.majors.isNullOrEmpty()) filledCount++
+                if (!value?.companyAddress?.roadAddress.isNullOrEmpty()) filledCount++
+                if (value?.serviceArea != null) filledCount++
+            }
 
-        binding.requiredProfileCardPercentage.text = getString(R.string.percentage_of_required_information, percentage.toInt())
+            val percentage: Float = filledCount.toFloat() / totalCount.toFloat() * 100f
 
-        if (percentage == 100.0f) {
-            binding.requiredProfileCardPercentage.setTextColor(
-                resources.getColor(
-                    R.color.color_1FC472,
-                    null
+            requiredProfileCardPercentage.text = getString(R.string.percentage_of_required_information, percentage.toInt())
+
+            if (percentage == 100.0f) {
+                requiredProfileCardPercentage.setTextColor(
+                    resources.getColor(
+                        R.color.color_1FC472,
+                        null
+                    )
                 )
-            )
-            binding.defaultButton.isEnabled = true
-        } else {
-            binding.requiredProfileCardPercentage.setTextColor(
-                resources.getColor(
-                    R.color.color_FF711D,
-                    null
+                defaultButton.isEnabled = true
+            } else {
+                requiredProfileCardPercentage.setTextColor(
+                    resources.getColor(
+                        R.color.color_FF711D,
+                        null
+                    )
                 )
-            )
-            binding.defaultButton.isEnabled = false
+                defaultButton.isEnabled = false
+            }
         }
     }
 

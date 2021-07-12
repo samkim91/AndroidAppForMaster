@@ -1,6 +1,5 @@
 package kr.co.soogong.master.ui.image
 
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter

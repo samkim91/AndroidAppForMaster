@@ -46,7 +46,7 @@ class EditShopImagesViewModel @Inject constructor(
     fun saveShopImages() {
         Timber.tag(TAG).d("saveShopImages: ")
         shopImages.value?.filter { attachmentDto ->
-            attachmentDto.id == null
+            attachmentDto.id == null        // 이전에 저장되지 않았던 이미지들만 업로드 해야하기 때문에, attachmentId가 null 인것들만 필터
         }?.let { list ->
             saveMasterUseCase(
                 MasterDto(

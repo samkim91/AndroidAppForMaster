@@ -15,7 +15,7 @@ interface RequirementInterface {
     fun getRequirementList(@Query("masterUid") masterUid : String, @Query("statusArray") statusArray: List<String>): Single<List<RequirementDto>>
 
     @GET(HttpContract.GET_REQUIREMENT)
-    fun getRequirement(@Query("requirementId") requirementId : Int, @Query("masterId") masterId: Int): Single<RequirementDto>
+    fun getRequirement(@Query("requirementId") requirementId : Int, @Query("masterUid") masterUid: String): Single<RequirementDto>
 
     @POST(HttpContract.SAVE_ESTIMATION)
     fun saveEstimation(@Body body: EstimationDto): Single<EstimationDto>

@@ -25,10 +25,17 @@
 
                 <TextView
                     android:id="@+id/policy"
+                    style="@style/medium_text_style.medium"
+                    android:textColor="@color/color_616161"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/gap_32"
+                    android:layout_marginStart="@dimen/gap_20"
+                    android:layout_marginEnd="@dimen/gap_20"
+                    android:layout_marginBottom="@dimen/gap_32"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
