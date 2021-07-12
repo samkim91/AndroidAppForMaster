@@ -39,13 +39,12 @@ class DoneViewModel @Inject constructor(
             when (_index.value) {
                 1 -> listOf(RequirementStatus.Done.toCode())
                 2 -> listOf(RequirementStatus.Closed.toCode())
-                3 -> listOf(
-
-                )
+                3 -> listOf(RequirementStatus.Canceled.toCode())
                 else -> listOf(
                     RequirementStatus.Done.toCode(),
                     RequirementStatus.Closed.toCode(),
-                    RequirementStatus.Impossible.toCode()
+                    RequirementStatus.Canceled.toCode(),
+                    RequirementStatus.Impossible.toCode(),
                 )
             }
         )

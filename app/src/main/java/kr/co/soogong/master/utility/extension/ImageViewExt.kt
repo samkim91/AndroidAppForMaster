@@ -14,7 +14,18 @@ fun ImageView.setImageUrl(url: String?) {
     url?.let {
         Glide.with(this.context)
             .load(it)
-            .transform(CenterInside())
+            .centerCrop()
+//            .transform(CenterInside())
+            .into(this)
+    }
+}
+
+@BindingAdapter("bind:image_url_for_slide")
+fun ImageView.setImageUrlForSlide(url: String?) {
+    url?.let {
+        Glide.with(this.context)
+            .load(it)
+            .centerInside()
             .into(this)
     }
 }
@@ -24,7 +35,8 @@ fun ImageView.setImageUri(uri: Uri?) {
     uri?.let {
         Glide.with(this.context)
             .load(it)
-            .transform(CenterCrop())
+            .centerCrop()
+//            .transform(CenterCrop())
             .into(this)
     }
 }

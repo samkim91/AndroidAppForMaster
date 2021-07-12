@@ -14,6 +14,7 @@ class SaveMasterBasicDataInSharedUseCase @Inject constructor(
         // save master id
         sharedPreferences.edit()
             .putInt(AppSharedPreferenceContract.MASTER_ID, masterDto.id!!)
+            .apply()
 
         // save master uid
         sharedPreferences.edit()
