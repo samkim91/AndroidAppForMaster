@@ -5,7 +5,7 @@ import kr.co.soogong.master.data.dto.AttachmentDto
 
 class RectangleImageWithCloseDiffUtil : DiffUtil.ItemCallback<AttachmentDto>() {
     override fun areItemsTheSame(oldItem: AttachmentDto, newItem: AttachmentDto): Boolean {
-        return oldItem.id == newItem.id
+        return oldItem.uri == newItem.uri
     }
 
     override fun areContentsTheSame(oldItem: AttachmentDto, newItem: AttachmentDto): Boolean {

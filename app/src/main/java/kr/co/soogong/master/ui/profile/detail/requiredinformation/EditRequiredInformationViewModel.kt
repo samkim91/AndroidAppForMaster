@@ -57,7 +57,7 @@ class EditRequiredInformationViewModel @Inject constructor(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
-                onSuccess = { setAction(SAVE_MASTER_INFORMATION_SUCCESSFULLY) },
+                onSuccess = { requestRequiredInformation() },
                 onError = { setAction(SAVE_MASTER_INFORMATION_FAILED) }
             ).addToDisposable()
     }
@@ -75,7 +75,7 @@ class EditRequiredInformationViewModel @Inject constructor(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
-                onSuccess = { setAction(SAVE_MASTER_INFORMATION_SUCCESSFULLY) },
+                onSuccess = { requestRequiredInformation() },
                 onError = { setAction(SAVE_MASTER_INFORMATION_FAILED) }
             ).addToDisposable()
     }
@@ -93,7 +93,7 @@ class EditRequiredInformationViewModel @Inject constructor(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
-                onSuccess = { setAction(SAVE_MASTER_INFORMATION_SUCCESSFULLY) },
+                onSuccess = { requestRequiredInformation() },
                 onError = { setAction(SAVE_MASTER_INFORMATION_FAILED) }
             ).addToDisposable()
     }
@@ -103,7 +103,6 @@ class EditRequiredInformationViewModel @Inject constructor(
         const val MASTER_SUBSCRIPTION_PLAN = "MASTER_SUBSCRIPTION_PLAN"
         const val GET_PROFILE_SUCCESSFULLY = "GET_PROFILE_SUCCESSFULLY"
         const val GET_PROFILE_FAILED = "GET_PROFILE_FAILED"
-        const val SAVE_MASTER_INFORMATION_SUCCESSFULLY = "SAVE_MASTER_INFORMATION_SUCCESSFULLY"
         const val SAVE_MASTER_INFORMATION_FAILED = "SAVE_MASTER_INFORMATION_FAILED"
     }
 }

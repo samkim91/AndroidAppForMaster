@@ -97,7 +97,6 @@ class EditShopImagesFragment : BaseFragment<FragmentEditShopImagesBinding>(
         })
         viewModel.shopImages.observe(viewLifecycleOwner, {
             Timber.tag(TAG).d("onChanged: $it")
-            binding.imageList.adapter?.notifyDataSetChanged()
         })
     }
 

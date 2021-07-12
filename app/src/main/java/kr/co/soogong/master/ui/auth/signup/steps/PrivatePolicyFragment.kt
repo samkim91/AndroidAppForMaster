@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentSignUpPrivatePolicyBinding
@@ -19,6 +20,7 @@ import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.extension.makeLinks
 import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
+import java.io.InputStreamReader
 
 @AndroidEntryPoint
 class PrivatePolicyFragment : BaseFragment<FragmentSignUpPrivatePolicyBinding>(

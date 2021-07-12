@@ -75,7 +75,12 @@ class ProfileImageCard @JvmOverloads constructor(
         set(value) {
             field = value
             with(binding.firstDetail) {
-                visibility = if (value.isNullOrEmpty()) View.GONE else View.VISIBLE
+                visibility = if (value.isNullOrEmpty()) {
+                    View.GONE
+                } else {
+                    newBadgeVisible = false
+                    View.VISIBLE
+                }
                 text = value
             }
         }
