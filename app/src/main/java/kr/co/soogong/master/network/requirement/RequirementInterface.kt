@@ -27,6 +27,6 @@ interface RequirementInterface {
     fun callToClient(@Body data: HashMap<String, Any>): Single<Boolean>
 
     @POST(HttpContract.REQUEST_REVIEW)
-    fun requestReview(@Body repairDto: RepairDto): Single<Boolean>
+    fun requestReview(@Body repairDto: RepairDto): Single<String>
 
 }
