@@ -51,7 +51,7 @@ class ViewRequirementViewModel @Inject constructor(
                     Timber.tag(TAG).d("requestRequirement successfully: $it")
                     _requirement.value = it
                     it.estimationDto?.repair?.review?.let { reviewDto ->
-                        _review.postValue(Review.fromReviewDto(reviewDto))
+                        _review.value = Review.fromReviewDto(reviewDto)
                     }
                 },
                 onError = {
