@@ -4,10 +4,8 @@ package kr.co.soogong.master.utility.extension
 
 import android.content.Context
 import android.icu.text.DecimalFormat
-import android.text.SpannableStringBuilder
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import androidx.core.text.bold
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.dto.requirement.estimation.EstimationDto
 import kr.co.soogong.master.data.model.requirement.estimation.EstimationPriceTypeCode
@@ -33,7 +31,7 @@ fun addCanceledDetail(
             if (isCanceled) {
                 val view = EstimationItem(context)
                 view.key = context.getString(R.string.cancel_repair_title)
-                view.value = RepairCanceledReason.getCanceledReason(repair.canceledReason).inKorean
+                view.value = RepairCanceledReason.getCanceledReason(repair.canceledCode).inKorean
                 view.bold = true
 
                 viewGroup.addView(view, params)

@@ -47,7 +47,7 @@ class CancelRepairActivity : BaseActivity<ActivityCancelRepairBinding>(
                 }
 
                 button.setOnClickListener {
-                    viewModel.canceledReason.observe(this@CancelRepairActivity, {
+                    viewModel.canceledCode.observe(this@CancelRepairActivity, {
                         alert.isVisible = it.isNullOrEmpty()
                     })
 
@@ -55,7 +55,7 @@ class CancelRepairActivity : BaseActivity<ActivityCancelRepairBinding>(
                 }
 
                 cancelOption.setOnCheckedChangeListener { _, checkedId ->
-                    viewModel.canceledReason.value = when (checkedId) {
+                    viewModel.canceledCode.value = when (checkedId) {
                         cancelOption1.id -> ChangeOfMind.code
                         cancelOption2.id -> NoResponse.code
                         cancelOption3.id -> RepairImpossible.code
