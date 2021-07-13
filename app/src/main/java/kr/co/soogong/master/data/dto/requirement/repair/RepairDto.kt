@@ -36,8 +36,8 @@ data class RepairDto(
     @SerializedName("canceledYn")
     val canceledYn: Boolean? = null,
 
-    @SerializedName("canceledReason")
-    val canceledReason: String? = null,
+    @SerializedName("canceledCode")
+    val canceledCode: String? = null,
 
     @SerializedName("description")
     val description: String? = null,
@@ -51,7 +51,7 @@ data class RepairDto(
     @SerializedName("updatedAt")
     val updatedAt: Date? = null,
 
-) : Parcelable {
+    ) : Parcelable {
     companion object {
 
     }
