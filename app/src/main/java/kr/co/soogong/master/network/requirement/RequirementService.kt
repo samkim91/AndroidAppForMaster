@@ -1,5 +1,6 @@
 package kr.co.soogong.master.network.requirement
 
+import com.google.gson.JsonObject
 import io.reactivex.Single
 import kr.co.soogong.master.data.dto.requirement.RequirementDto
 import kr.co.soogong.master.data.dto.requirement.estimation.EstimationDto
@@ -35,7 +36,7 @@ class RequirementService @Inject constructor(
         return requirementInterface.callToClient(data)
     }
 
-    fun requestReview(repairDto: RepairDto): Single<String> {
+    fun requestReview(repairDto: RepairDto): Single<JsonObject> {
         return requirementInterface.requestReview(repairDto)
     }
 }
