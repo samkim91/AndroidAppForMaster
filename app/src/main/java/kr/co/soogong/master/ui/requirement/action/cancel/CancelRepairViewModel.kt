@@ -25,7 +25,7 @@ class CancelRepairViewModel @Inject constructor(
     private val requirementId = CancelRepairActivityHelper.getRequirementIdFromSavedState(savedStateHandle)
     private val _requirement = MutableLiveData<RequirementDto>()
 
-    val canceledReason = MutableLiveData("")
+    val canceledCode = MutableLiveData("")
     val description = MutableLiveData("")
 
     fun requestRequirement() {
@@ -51,7 +51,7 @@ class CancelRepairViewModel @Inject constructor(
                 requirementToken = _requirement.value?.token,
                 estimationId = _requirement.value?.estimationDto?.id,
                 canceledYn = true,
-                canceledReason = canceledReason.value,
+                canceledCode = canceledCode.value,
                 description = description.value,
             )
         )
