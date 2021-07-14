@@ -40,6 +40,14 @@ sealed class CodeTable {
                 CorporateCodeTable.code -> CorporateCodeTable
                 else -> FreelancerCodeTable
             }
+
+        fun findSubscriptionPlanByCode(code: String): CodeTable =
+            when(code) {
+                FreeCodeTable.code -> FreeCodeTable
+                GuaranteeCodeTable.code -> GuaranteeCodeTable
+                RequestApproveCodeTable.code -> RequestApproveCodeTable
+                else -> NotApprovedCodeTable
+            }
     }
 }
 

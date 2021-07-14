@@ -8,7 +8,7 @@ import kr.co.soogong.master.data.dto.requirement.estimation.EstimationDto
 
 @Dao
 interface RequirementDao {
-    @Query("SELECT * FROM Requirement WHERE status In (:status)")
+    @Query("SELECT * FROM Requirement WHERE status In (:status) ORDER BY id DESC")
     fun getListByStatus(status: List<String>): Single<List<RequirementDto>?>
 
     @Query("SELECT * FROM Requirement WHERE id = :id")

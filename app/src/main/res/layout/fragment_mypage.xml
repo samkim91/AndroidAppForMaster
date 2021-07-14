@@ -46,7 +46,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/my_page_master_label_margin_start"
                 android:layout_marginEnd="@dimen/my_page_master_label_margin_top"
-                android:text='@{vm.profile.subscriptionPlan.length() != 0 ? vm.profile.subscriptionPlan : "마스터"}'
+                app:subscriptionPlan="@{vm.profile.subscriptionPlan}"
                 android:textColor="@color/text_primary_color"
                 app:layout_constraintBottom_toBottomOf="@id/master_store_name"
                 app:layout_constraintEnd_toStartOf="@id/account_setting"

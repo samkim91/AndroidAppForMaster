@@ -9,6 +9,7 @@ import android.text.style.ClickableSpan
 import android.view.View
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
+import kr.co.soogong.master.data.model.profile.CodeTable
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -28,6 +29,13 @@ fun TextView.setDate(date: Date?) {
 fun TextView.setPrice(price: Int?) {
     price?.let {
         text = "${DecimalFormat("#,###").format(it)}원"
+    }
+}
+
+@BindingAdapter("subscriptionPlan")
+fun TextView.setSubscriptionPlan(subscriptionPlan: String?) {
+    if(!subscriptionPlan.isNullOrEmpty()) {
+        text = CodeTable.findSubscriptionPlanByCode(subscriptionPlan).inKorean
     }
 }
 
