@@ -56,7 +56,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="20dp"
-                android:text='@{vm.profile.subscriptionPlan.length() != 0 ? vm.profile.subscriptionPlan : "마스터"}'
+                app:subscriptionPlan="@{vm.profile.subscriptionPlan}"
                 app:layout_constraintBottom_toBottomOf="@id/user_name"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/user_name"

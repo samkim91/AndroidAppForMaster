@@ -4,7 +4,7 @@ object HttpContract {
 //    const val LOCAL_URL = "http://192.168.0.50:8080/"       // Myeonghwan's local
     const val LOCAL_URL = "http://192.168.0.93:8080/"     // Jihun's local
     const val DEV_URL = "https://backenddev.soogong.co.kr"
-    const val PROD_URL = "https://backendmain.soogong.co.kr/"
+    const val PROD_URL = "https://backend.soogong.co.kr/"
 
     //region Auth
     const val IS_MASTER_EXISTENT = "master/is-existent"
