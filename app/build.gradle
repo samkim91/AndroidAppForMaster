@@ -12,6 +12,14 @@ def localProperties = new Properties()
 localProperties.load(new FileInputStream(rootProject.file("local.properties")))
 
 android {
+    signingConfigs {
+        release {
+            storeFile file('/Users/kimh0616/Soogong/androidKeys/soogong_key2')
+            storePassword '1q2w3e4r!'
+            keyAlias 'key2'
+            keyPassword '1q2w3e4r!'
+        }
+    }
     compileSdkVersion rootProject.compileSdkVersion
     ndkVersion "22.0.7026061"
 
@@ -19,8 +27,8 @@ android {
         applicationId "kr.co.soogong.master"
         minSdkVersion rootProject.minSdkVersion
         targetSdkVersion rootProject.targetSdkVersion
-        versionCode 6
-        versionName "1.0.6"
+        versionCode 7
+        versionName "1.0.7"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -48,6 +56,7 @@ android {
             debuggable false
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
 
