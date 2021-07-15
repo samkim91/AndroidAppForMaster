@@ -61,7 +61,7 @@ class SignInViewModel @Inject constructor(
         Timber.tag(TAG).d("requestSignIn: ")
 
         uid.value?.let { uid ->
-            signInUseCase(uid)
+            signInUseCase(tel.value!!, uid)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(

@@ -39,6 +39,10 @@ class ProfileService @Inject constructor(
         return profileInterface.getPortfoliosByUid(uid)
     }
 
+    fun updateUidByTel(tel: String, uid: String): Single<MasterDto> {
+        return profileInterface.updateUidByTel(tel, uid)
+    }
+
     fun deletePortfolio(
         portfolioId: Int
     ): Single<ResponseBody> {
