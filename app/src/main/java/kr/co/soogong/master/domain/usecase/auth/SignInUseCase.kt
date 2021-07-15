@@ -4,24 +4,27 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import dagger.Reusable
 import io.reactivex.Single
-import kr.co.soogong.master.data.dao.profile.MasterDao
 import kr.co.soogong.master.data.dto.profile.MasterDto
-import kr.co.soogong.master.network.auth.AuthService
+import kr.co.soogong.master.network.profile.ProfileService
 import javax.inject.Inject
 
 @Reusable
 class SignInUseCase @Inject constructor(
-    private val authService: AuthService,
+    private val profileService: ProfileService,
     private val saveMasterBasicDataInSharedUseCase: SaveMasterBasicDataInSharedUseCase,
-    private val masterDao: MasterDao,
 ) {
-    operator fun invoke(uid: String): Single<MasterDto> {
-        return authService.signIn(uid).doOnSuccess {
+    operator fun invoke(tel: String, uid: String): Single<MasterDto> {
+        return profileService.updateUidByTel(tel, uid).doOnSuccess {
             saveMasterBasicDataInSharedUseCase(it)
-
-            masterDao.insert(it)
         }.doOnError {
             Firebase.auth.signOut()
         }
+//        return authService.signIn(uid).doOnSuccess {
+//            saveMasterBasicDataInSharedUseCase(it)
+//
+//            masterDao.insert(it)
+//        }.doOnError {
+//            Firebase.auth.signOut()
+//        }
     }
 }
