@@ -33,6 +33,7 @@ interface ProfileInterface {
     @GET(HttpContract.GET_PORTFOLIOS)
     fun getPortfoliosByUid(@Query("uid") uid: String?): Single<List<PortfolioDto>>
 
+    @FormUrlEncoded
     @PATCH(HttpContract.UPDATE_UID_BY_TEL)
     fun updateUidByTel(@Path("tel") tel: String, @Field("uid") uid: String): Single<MasterDto>
 
