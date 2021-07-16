@@ -35,7 +35,7 @@ class ReceivedViewModel @Inject constructor(
         requestList()
     }
 
-    fun requestList(index: Int = 0) {
+    fun requestList() {
         Timber.tag(TAG).d("requestList: ${_index.value}")
 
         getReceivedRequirementListUseCase(
@@ -51,7 +51,11 @@ class ReceivedViewModel @Inject constructor(
                 onSuccess = {
                     Timber.tag(TAG).d("requestList successfully: $it")
                     if(_index.value == 0 || _index.value == null) sendEvent(BADGE_UPDATE, it.count())
-                    _receivedList.postValue(it)
+                    if(_index.value == 2) {
+                        _receivedList.postValue(it.filter { list -> list.status == RequirementStatus.Estimated })
+                    } else {
+                        _receivedList.postValue(it)
+                    }
                 },
                 onError = {
                     Timber.tag(TAG).d("requestList failed: $it")

@@ -48,7 +48,6 @@ class EndRepairViewModel @Inject constructor(
             ).addToDisposable()
     }
 
-
     fun saveRepair() {
         Timber.tag(TAG).d("endRepair: ${actualDate.value}/${actualPrice.value}")
 

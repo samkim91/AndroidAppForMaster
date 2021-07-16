@@ -58,7 +58,7 @@ class SignInViewModel @Inject constructor(
     }
 
     fun requestSignIn() {
-        Timber.tag(TAG).d("requestSignIn: ")
+        Timber.tag(TAG).d("requestSignIn: ${uid.value}, ${tel.value}")
 
         uid.value?.let { uid ->
             signInUseCase(tel.value!!, uid)
