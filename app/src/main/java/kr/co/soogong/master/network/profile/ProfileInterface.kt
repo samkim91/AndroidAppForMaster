@@ -19,7 +19,7 @@ interface ProfileInterface {
         @Part("masterDto") masterDto: RequestBody,
         @Part profileImage: MultipartBody.Part?,
         @Part businessRegistImage: MultipartBody.Part?,
-        @Part shopImages: List<MultipartBody.Part>?,
+        @Part shopImages: List<MultipartBody.Part?>?,
     ): Single<MasterDto>
 
     @Multipart

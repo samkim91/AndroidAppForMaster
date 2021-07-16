@@ -58,7 +58,7 @@ class ProfileViewModel @Inject constructor(
         .subscribeBy(
             onSuccess = {
                 Timber.tag(TAG).d("saveMasterProfile successfully: $it")
-                _profile.value = Profile.fromMasterDto(it)
+//                _profile.value = Profile.fromMasterDto(it)
             },
             onError = {
                 Timber.tag(TAG).d("saveMasterProfile failed: $it")
