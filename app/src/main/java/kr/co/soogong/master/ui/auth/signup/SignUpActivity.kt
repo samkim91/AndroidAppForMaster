@@ -80,23 +80,22 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>(
         val dialog = CustomDialog(DialogData.getQuitSignUpDialogData(this@SignUpActivity),
             yesClick = { },
             noClick = {
-                Firebase.auth.currentUser!!.delete()
-                    .addOnCompleteListener { task ->
+                Firebase.auth.currentUser?.delete()
+                    ?.addOnCompleteListener { task ->
                         Timber.tag(TAG).d("addOnCompleteListener successfully: ${task.isSuccessful}")
-                        super.onBackPressed()
+                        finish()
                     }
             })
 
         dialog.show(supportFragmentManager, dialog.tag)
     }
 
-    fun onBackPressedWithoutDialog() {
-        super.onBackPressed()
+    fun finishActivityWithoutDialog() {
+        finish()
     }
 
     private fun registerEventObserve() {
         Timber.tag(TAG).d("registerEventObserve: ")
-
     }
 
     companion object {
