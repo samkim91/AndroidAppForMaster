@@ -168,7 +168,7 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
     private fun setLayoutForRequestApproveMaster() {
         bind {
             requiredProfileCardPercentage.visibility = View.GONE
-            groupSawCheckForConfirmedMaster.visibility = View.VISIBLE
+            groupSawCheckForConfirmedMaster.visibility = View.GONE
             defaultButton.visibility = View.GONE
             alertContainerToFillUpRequiredInformation.visibility = View.GONE
             textSawCheckForConfirmedMaster.text = getString(R.string.waiting_for_confirmation)
