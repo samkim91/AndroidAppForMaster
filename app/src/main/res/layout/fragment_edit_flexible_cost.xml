@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:bind="http://schemas.android.com/bind"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -92,12 +90,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/gap_20"
                     app:blackSubTitle="@{true}"
-                    app:content="@{vm.otherCostInformation}"
                     app:hintText='@{"현장에서 견적가격이 변동될 수 있는 사항을 입력해주세요."}'
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/package_cost_chip_group"
                     app:limitedCount="@{500}"
+                    app:content="@{vm.otherCostInformation}"
                     app:subTitle='@{"기타 변동 가능 사항"}'
                     app:titleVisible="@{false}" />
 

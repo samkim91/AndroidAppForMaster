@@ -118,11 +118,12 @@ class ProfileChipGroupCard @JvmOverloads constructor(
     var chipGroupWithoutTitle: List<MasterConfigDto>? = emptyList()
         set(value) {
             field = value
+            binding.chipGroupContainer.removeAllViews()
+
             if (!value.isNullOrEmpty()) {
                 newBadgeVisible = false
                 binding.subTitle.visibility = View.GONE
 
-                binding.chipGroupContainer.removeAllViews()
                 addChipGroup(value)
             }
         }

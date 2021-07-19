@@ -18,6 +18,7 @@ import kr.co.soogong.master.uihelper.mypage.alarm.AlarmActivityHelper
 import kr.co.soogong.master.uihelper.mypage.notice.NoticeActivityHelper
 import kr.co.soogong.master.uihelper.mypage.notice.detail.NoticeDetailActivityHelper
 import kr.co.soogong.master.utility.EventObserver
+import kr.co.soogong.master.utility.PermissionHelper
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -59,15 +60,22 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(
                         startActivity(AlarmActivityHelper.getIntent(requireContext()))
                     }
                     MyPageViewModel.CALL -> {
-                        startActivity(
-                            Intent(
-                                "android.intent.action.CALL",
-                                Uri.parse("tel:16444095")
-                            )
+                        PermissionHelper.checkCallPermission(
+                            context = requireContext(),
+                            onGranted = {
+                                startActivity(
+                                    Intent(
+                                        "android.intent.action.CALL",
+                                        Uri.parse("tel:16444095")
+                                    )
+                                )
+                            },
+                            onDenied = { }
                         )
                     }
                     MyPageViewModel.KAKAO -> {
                         val url = TalkApiClient.instance.addChannelUrl("_xgxkbJxb")
+                        Timber.tag(TAG).d("MyPageViewModel.KAKAO clicked: $url")
                         KakaoCustomTabsClient.openWithDefault(requireContext(), url)
                     }
                     MyPageViewModel.NOTICE -> {

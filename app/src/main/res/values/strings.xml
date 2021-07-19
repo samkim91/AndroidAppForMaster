@@ -286,6 +286,7 @@
     <string name="sign_up_successfully">회원 가입이 완료되었습니다!\n필수 정보를 모두 입력하고\n문의를 처리해보세요!</string>
 
     <string name="request_permission_for_image">이미지를 추가하시려면 권한을 허용해주세요.</string>
+    <string name="request_permission_for_call">전화하시려면 권한을 허용해주세요.</string>
     <string name="permission_denied_message">권한이 거부되었습니다.</string>
     <string name="permission_denied_status_message">권한을 거부하셨습니다. 앱을 사용하시려면 [앱 설정]-[권한] 에서 권한을 허용해주세요.</string>
 

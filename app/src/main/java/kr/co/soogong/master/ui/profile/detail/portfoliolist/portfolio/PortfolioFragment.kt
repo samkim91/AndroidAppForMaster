@@ -76,9 +76,7 @@ class PortfolioFragment : BaseFragment<FragmentEditPortfolioBinding>(
                             .buttonBackground(R.drawable.shape_fill_green_background)
                             .start { uri -> viewModel.imageBeforeJob.value = uri }
                     },
-                    onDenied = {
-                        requireContext().toast(getString(R.string.permission_denied_message))
-                    })
+                    onDenied = { })
             }
 
             cameraIconAfterJob.setOnClickListener {
@@ -88,9 +86,7 @@ class PortfolioFragment : BaseFragment<FragmentEditPortfolioBinding>(
                             .buttonBackground(R.drawable.shape_fill_green_background)
                             .start { uri -> viewModel.imageAfterJob.value = uri }
                     },
-                    onDenied = {
-                        requireContext().toast(getString(R.string.permission_denied_message))
-                    })
+                    onDenied = { })
             }
         }
     }

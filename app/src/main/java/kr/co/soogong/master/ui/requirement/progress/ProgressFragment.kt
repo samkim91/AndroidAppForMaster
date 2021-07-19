@@ -18,6 +18,7 @@ import kr.co.soogong.master.uihelper.requirment.RequirementsBadge
 import kr.co.soogong.master.uihelper.requirment.action.EndRepairActivityHelper
 import kr.co.soogong.master.uihelper.requirment.action.ViewRequirementActivityHelper
 import kr.co.soogong.master.utility.EventObserver
+import kr.co.soogong.master.utility.PermissionHelper
 import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
 
@@ -54,17 +55,23 @@ class ProgressFragment : BaseFragment<FragmentRequirementProgressBinding>(
                     )
                 },
                 callButtonClick = { keycode, number ->
-                    val dialog = CustomDialog(getCallToCustomerDialogData(requireContext()),
-                        yesClick = {
-                            viewModel.callToClient(
-                                requirementId = keycode
+                    PermissionHelper.checkCallPermission(
+                        context = requireContext(),
+                        onGranted = {
+                            val dialog = CustomDialog(getCallToCustomerDialogData(requireContext()),
+                                yesClick = {
+                                    viewModel.callToClient(
+                                        requirementId = keycode
+                                    )
+                                    startActivity(CallToCustomerHelper.getIntent(number.toString()))
+                                },
+                                noClick = { }
                             )
-                            startActivity(CallToCustomerHelper.getIntent(number.toString()))
-                        },
-                        noClick = { }
-                    )
 
-                    dialog.show(childFragmentManager, dialog.tag)
+                            dialog.show(childFragmentManager, dialog.tag)
+                        },
+                        onDenied = { }
+                    )
                 },
                 doneButtonClick = { requirementId, _ ->
                     startActivity(
