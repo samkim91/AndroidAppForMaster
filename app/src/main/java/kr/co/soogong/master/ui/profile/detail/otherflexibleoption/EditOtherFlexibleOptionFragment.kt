@@ -60,7 +60,9 @@ class EditOtherFlexibleOptionFragment : BaseFragment<FragmentEditOtherFlexibleOp
             masterConfigList.map { masterConfig ->
                 binding.otherOptionsChipGroup.chipGroup.children.forEach {
                     val chip = it as? Chip
-                    if (chip?.text.toString() == masterConfig.name) chip?.isChecked = true
+                    if (chip?.text.toString() == masterConfig.name && masterConfig.value == "1") {
+                        chip?.isChecked = true
+                    }
                 }
             }
         })

@@ -88,7 +88,7 @@ class EditFlexibleCostViewModel @Inject constructor(
                 groupCode = FlexibleCostCodeTable.code,
                 code = OtherInfoCodeTable.code,
                 name = OtherInfoCodeTable.inKorean,
-                value = otherCostInformation.value
+                value = if (!otherCostInformation.value.isNullOrEmpty()) otherCostInformation.value else null
             ),
         )
 

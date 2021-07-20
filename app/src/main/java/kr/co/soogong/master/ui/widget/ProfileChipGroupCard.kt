@@ -70,6 +70,7 @@ class ProfileChipGroupCard @JvmOverloads constructor(
     var detail: List<MasterConfigDto>? = emptyList()
         set(value) {
             field = value
+            binding.detail.isVisible = false
             value?.find { masterConfigDto ->
                 masterConfigDto.code == OtherInfoCodeTable.code
             }?.let {
@@ -140,7 +141,12 @@ class ProfileChipGroupCard @JvmOverloads constructor(
                 val chip = Chip(context)
                 chip.text = when (it) {
                     is Project -> it.name
-                    is MasterConfigDto -> if (it.groupCode == FlexibleCostCodeTable.code) "${it.name} ${it.value}" else "${it.name}"
+                    is MasterConfigDto -> if (it.groupCode == FlexibleCostCodeTable.code) {
+                        if (it.code == OtherInfoCodeTable.code) return@let
+                        "${it.name} ${it.value}"
+                    } else {
+                        "${it.name}"
+                    }
                     else -> it.toString()
                 }
                 chip.setTextColor(resources.getColor(R.color.text_basic_color, null))

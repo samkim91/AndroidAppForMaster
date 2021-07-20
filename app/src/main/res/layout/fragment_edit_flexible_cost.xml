@@ -85,20 +85,19 @@
                     app:titleVisible="@{false}" />
 
                 <kr.co.soogong.master.ui.widget.TitleEditTextCounterView
-                    android:id="@+id/other_cost_information"
+                    android:id="@+id/other_cost_info"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/gap_20"
                     app:blackSubTitle="@{true}"
+                    app:content="@={vm.otherCostInformation}"
                     app:hintText='@{"현장에서 견적가격이 변동될 수 있는 사항을 입력해주세요."}'
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/package_cost_chip_group"
-                    app:limitedCount="@{500}"
-                    app:content="@{vm.otherCostInformation}"
+                    app:limitedCount='@{500}'
                     app:subTitle='@{"기타 변동 가능 사항"}'
                     app:titleVisible="@{false}" />
-
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
 
