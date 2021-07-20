@@ -2,6 +2,7 @@ package kr.co.soogong.master.utility
 
 import android.content.Context
 import android.widget.FrameLayout
+import android.widget.Toast
 import androidx.fragment.app.FragmentManager
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.CameraUpdate
@@ -26,12 +27,18 @@ class NaverMapHelper(
     private var circleOverlay = CircleOverlay()
 
     init {
-        val mapFragment = fragmentManager.findFragmentById(frameLayout.id) as MapFragment?
-            ?: MapFragment.newInstance().also {
-                fragmentManager.beginTransaction().add(frameLayout.id, it).commit()
-            }
+        PermissionHelper.checkLocationPermission(
+            context = context,
+            onGranted = {
+                val mapFragment = fragmentManager.findFragmentById(frameLayout.id) as MapFragment?
+                    ?: MapFragment.newInstance().also {
+                        fragmentManager.beginTransaction().add(frameLayout.id, it).commit()
+                    }
 
-        mapFragment.getMapAsync(this)
+                mapFragment.getMapAsync(this)
+            },
+            onDenied = { }
+        )
     }
 
     override fun onMapReady(naverMap: NaverMap) {
@@ -96,6 +103,7 @@ class NaverMapHelper(
         }
     }
 
+    // TODO: 2021/07/20 setLocation 과 통합해도 됨..
     fun changeServiceArea(radius: Int) {
         coordinate?.let {
             naverMap.moveCamera(
