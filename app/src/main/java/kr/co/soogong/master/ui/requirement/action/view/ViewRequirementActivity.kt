@@ -87,13 +87,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
             )
 
             callButton.setOnClickListener {
-                PermissionHelper.checkCallPermission(
-                    context = this@ViewRequirementActivity,
-                    onGranted = {
-                        viewModel.callToClient()
-                    },
-                    onDenied = { }
-                )
+                viewModel.callToClient()
             }
 
             // 견적을 보낼래요 버튼

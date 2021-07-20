@@ -60,17 +60,11 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(
                         startActivity(AlarmActivityHelper.getIntent(requireContext()))
                     }
                     MyPageViewModel.CALL -> {
-                        PermissionHelper.checkCallPermission(
-                            context = requireContext(),
-                            onGranted = {
-                                startActivity(
-                                    Intent(
-                                        "android.intent.action.CALL",
-                                        Uri.parse("tel:16444095")
-                                    )
-                                )
-                            },
-                            onDenied = { }
+                        startActivity(
+                            Intent(
+                                Intent.ACTION_DIAL,
+                                Uri.parse("tel:16444095")
+                            )
                         )
                     }
                     MyPageViewModel.KAKAO -> {

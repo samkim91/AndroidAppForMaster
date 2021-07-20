@@ -55,23 +55,17 @@ class ProgressFragment : BaseFragment<FragmentRequirementProgressBinding>(
                     )
                 },
                 callButtonClick = { keycode, number ->
-                    PermissionHelper.checkCallPermission(
-                        context = requireContext(),
-                        onGranted = {
-                            val dialog = CustomDialog(getCallToCustomerDialogData(requireContext()),
-                                yesClick = {
-                                    viewModel.callToClient(
-                                        requirementId = keycode
-                                    )
-                                    startActivity(CallToCustomerHelper.getIntent(number.toString()))
-                                },
-                                noClick = { }
+                    val dialog = CustomDialog(getCallToCustomerDialogData(requireContext()),
+                        yesClick = {
+                            viewModel.callToClient(
+                                requirementId = keycode
                             )
-
-                            dialog.show(childFragmentManager, dialog.tag)
+                            startActivity(CallToCustomerHelper.getIntent(number.toString()))
                         },
-                        onDenied = { }
+                        noClick = { }
                     )
+
+                    dialog.show(childFragmentManager, dialog.tag)
                 },
                 doneButtonClick = { requirementId, _ ->
                     startActivity(
