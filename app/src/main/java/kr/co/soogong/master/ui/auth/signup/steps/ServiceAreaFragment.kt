@@ -11,7 +11,7 @@ import kr.co.soogong.master.databinding.FragmentSignUpServiceAreaBinding
 import kr.co.soogong.master.ui.auth.signup.SignUpActivity
 import kr.co.soogong.master.ui.auth.signup.SignUpViewModel
 import kr.co.soogong.master.ui.base.BaseFragment
-import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogData
+import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogBundle
 import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogRecyclerView
 import kr.co.soogong.master.utility.NaverMapHelper
 import kr.co.soogong.master.utility.PermissionHelper
@@ -55,8 +55,7 @@ class ServiceAreaFragment : BaseFragment<FragmentSignUpServiceAreaBinding>(
                     onGranted = {
                         val bottomDialog =
                             BottomDialogRecyclerView.newInstance(
-                                title = BottomDialogData.choosingServiceAreaTitle,
-                                dialogData = BottomDialogData.getServiceAreaList(),
+                                dialogBundle = BottomDialogBundle.getServiceAreaBundle(),
                                 itemClick = { text, radius ->
                                     viewModel.serviceArea.value = text
                                     viewModel.serviceAreaToInt.value = radius

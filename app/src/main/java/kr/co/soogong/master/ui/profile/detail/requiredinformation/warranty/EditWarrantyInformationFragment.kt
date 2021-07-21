@@ -7,7 +7,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentEditWarrantyInformationBinding
 import kr.co.soogong.master.ui.base.BaseFragment
-import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogData
+import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogBundle
 import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogRecyclerView
 import kr.co.soogong.master.ui.profile.detail.requiredinformation.warranty.EditWarrantyInformationViewModel.Companion.GET_WARRANTY_INFORMATION_FAILED
 import kr.co.soogong.master.ui.profile.detail.requiredinformation.warranty.EditWarrantyInformationViewModel.Companion.SAVE_WARRANTY_INFORMATION_FAILED
@@ -41,8 +41,7 @@ class EditWarrantyInformationFragment : BaseFragment<FragmentEditWarrantyInforma
                 Timber.tag(TAG).w("Dropdown Clicked")
                 val bottomDialog =
                     BottomDialogRecyclerView.newInstance(
-                        title = BottomDialogData.insertingWarrantyPeriodTitle,
-                        dialogData = BottomDialogData.getWarrantyPeriodList(),
+                        dialogBundle = BottomDialogBundle.getIncreasingYearBundle("warranty"),
                         itemClick = { _, value ->
                             viewModel.warrantyPeriod.value = value
                         }

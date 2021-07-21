@@ -8,6 +8,8 @@ import gun0912.tedimagepicker.builder.TedImagePicker
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentProfileBinding
 import kr.co.soogong.master.ui.base.BaseFragment
+import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogBundle
+import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogRecyclerView
 import kr.co.soogong.master.ui.profile.ProfileViewModel.Companion.GET_PROFILE_FAILED
 import kr.co.soogong.master.ui.profile.ProfileViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.utility.PermissionHelper
@@ -51,6 +53,22 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
                 )
             }
 
+            showProfileButton.setOnClickListener {
+                // TODO: 2021/07/21 마스터 페이지 나오면 연동 필요!!! 아마 특정 URL 에 마스터 uid 를 합칠 듯
+            }
+
+            requestReviewButton.setOnClickListener {
+                val bottomDialog =
+                BottomDialogRecyclerView.newInstance(
+                    dialogBundle = BottomDialogBundle.getRequestingReviewBundle(),
+                    itemClick = { key, _ ->
+                        Timber.tag(TAG).d("requestReviewButton: $key is clicked")
+                    }
+                )
+
+                bottomDialog.show(parentFragmentManager, bottomDialog.tag)
+            }
+
             editRequiredInfo.setOnClickListener {
                 startActivity(
                     EditRequiredInformationActivityHelper.getIntent(requireContext())
@@ -74,7 +92,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
             }
 
             profileImage.addFirstButtonClickListener {
-                // todo.. 삭제 기능
+                // todo.. 삭제 기능 추가 필요
             }
 
             profileImage.addSecondButtonClickListener {

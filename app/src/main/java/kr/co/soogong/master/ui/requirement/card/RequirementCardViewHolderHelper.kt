@@ -6,7 +6,7 @@ import kr.co.soogong.master.data.model.requirement.RequirementStatus
 import kr.co.soogong.master.databinding.ViewHolderRequirementItemBinding
 
 object RequirementCardViewHolderHelper {
-    fun create(parent: ViewGroup, viewType: Int): EstimationCardViewHolder {
+    fun create(parent: ViewGroup, viewType: Int): RequirementCardViewHolder {
         val binding = ViewHolderRequirementItemBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,

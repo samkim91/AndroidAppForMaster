@@ -10,7 +10,7 @@ import kr.co.soogong.master.data.model.profile.NotApprovedCodeTable
 import kr.co.soogong.master.data.model.profile.RequestApproveCodeTable
 import kr.co.soogong.master.databinding.ActivityEditRequiredInformationBinding
 import kr.co.soogong.master.ui.base.BaseActivity
-import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogData
+import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogBundle
 import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogRecyclerView
 import kr.co.soogong.master.ui.profile.detail.requiredinformation.EditRequiredInformationViewModel.Companion.GET_PROFILE_FAILED
 import kr.co.soogong.master.ui.profile.detail.requiredinformation.EditRequiredInformationViewModel.Companion.GET_PROFILE_SUCCESSFULLY
@@ -87,8 +87,7 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
             career.addDefaultButtonClickListener {
                 val bottomDialog =
                     BottomDialogRecyclerView.newInstance(
-                        title = BottomDialogData.insertingCareerTitle,
-                        dialogData = BottomDialogData.getWarrantyPeriodList(),
+                        dialogBundle = BottomDialogBundle.getIncreasingYearBundle("career"),
                         itemClick = { _, value ->
                             viewModel.saveCareerPeriod(value)
                         }
@@ -119,8 +118,7 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
                     onGranted = {
                         val bottomDialog =
                             BottomDialogRecyclerView.newInstance(
-                                title = BottomDialogData.choosingServiceAreaTitle,
-                                dialogData = BottomDialogData.getServiceAreaList(),
+                                dialogBundle = BottomDialogBundle.getServiceAreaBundle(),
                                 itemClick = { _, radius ->
                                     naverMap.changeServiceArea(radius)
                                     viewModel.requiredInformation.mutation {
