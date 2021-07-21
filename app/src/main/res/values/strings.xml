@@ -165,6 +165,7 @@
 
 
     <!-- Profile -->
+    <string name="special_symbol_stroke">-</string>
     <string name="open_my_page">내 페이지 보기</string>
     <string name="master_type">마스터유형</string>
     <string name="store_name">업체명</string>

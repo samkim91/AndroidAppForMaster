@@ -27,8 +27,9 @@ object PermissionHelper {
             .setRationaleMessage(context.getString(R.string.request_permission_for_image))
             .setDeniedMessage(context.getString(R.string.permission_denied_status_message))
             .setPermissions(
-                android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                android.Manifest.permission.CAMERA
+//                android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                android.Manifest.permission.READ_EXTERNAL_STORAGE,
+                android.Manifest.permission.CAMERA,
             )
             .check()
     }
