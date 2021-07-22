@@ -4,13 +4,9 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.EditText
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import com.google.android.material.chip.ChipGroup
-import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ViewTitleDropdownBinding
-import kr.co.soogong.master.databinding.ViewTitleRecyclerImageBinding
 
 class TitleDropdown @JvmOverloads constructor(
     context: Context,
