@@ -3,12 +3,21 @@ package kr.co.soogong.master.ui.profile.detail.otherflexibleoption
 import android.view.LayoutInflater
 import com.google.android.material.chip.Chip
 import kr.co.soogong.master.R
+import kr.co.soogong.master.data.model.profile.*
 import kr.co.soogong.master.ui.widget.TitleChipGroup
 import kr.co.soogong.master.utility.extension.dp
 
 object OtherFlexibleOptionChipGroupHelper {
     private val otherFlexibleOption =
-        listOf("마스크 착용", "덧신 착용", "시공 쓰레기 처리", "엘리베이터 보양작업", "약속시간 준수", "마감 불량 시 재시공", "시끄러울 수 있음")
+        listOf(
+            MaskCodeTable.inKorean,
+            OvershoesCodeTable.inKorean,
+            DisposalCodeTable.inKorean,
+            ElevatorProtectionCodeTable.inKorean,
+            IntimeCodeTable.inKorean,
+            AsCodeTable.inKorean,
+            NoiseCodeTable.inKorean,
+        )
 
     operator fun invoke(
         layoutInflater: LayoutInflater,

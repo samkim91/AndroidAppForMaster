@@ -60,7 +60,9 @@ class EditOtherFlexibleOptionFragment : BaseFragment<FragmentEditOtherFlexibleOp
             masterConfigList.map { masterConfig ->
                 binding.otherOptionsChipGroup.chipGroup.children.forEach {
                     val chip = it as? Chip
-                    if (chip?.text.toString() == masterConfig.name) chip?.isChecked = true
+                    if (chip?.text.toString() == masterConfig.name && masterConfig.value == "1") {
+                        chip?.isChecked = true
+                    }
                 }
             }
         })
@@ -78,21 +80,21 @@ class EditOtherFlexibleOptionFragment : BaseFragment<FragmentEditOtherFlexibleOp
     }
 
     private fun saveCheckedChips() {
-        val checkChipIds: List<Int> = binding.otherOptionsChipGroup.chipGroup.checkedChipIds
+        bind {
+            viewModel.otherFlexibleOption.value = otherOptionsChipGroup.chipGroup.children.map {
+                val chip = otherOptionsChipGroup.chipGroup.findViewById<Chip>(it.id)
 
-        viewModel.otherFlexibleOption.value = checkChipIds.map { chipId ->
-            val chipText = binding.otherOptionsChipGroup.chipGroup.findViewById<Chip>(chipId)?.text
-            chipText?.let { name ->
                 MasterConfigDto(
-                    id = viewModel.otherFlexibleOption.value?.find { masterConfigDto -> masterConfigDto.name == name.toString() }?.id,
+                    id = viewModel.otherFlexibleOption.value?.find { masterConfigDto -> masterConfigDto.name == chip.text.toString() }?.id,
                     groupCode = OtherFlexibleOptionCodeTable.code,
-                    code = CodeTable.findCodeTableByKorean(name.toString()).code,
-                    name = name.toString(),
-                    value = "1"
+                    code = CodeTable.findCodeTableByKorean(chip.text.toString()).code,
+                    name = chip.text.toString(),
+                    value = if(chip.isChecked) "1" else "0"
                 )
-            }!!
+            }.toList()
+
+            viewModel.saveOtherFlexibleOption()
         }
-        viewModel.saveOtherFlexibleOption()
     }
 
     companion object {

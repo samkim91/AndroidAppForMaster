@@ -26,8 +26,58 @@ object PermissionHelper {
             .setPermissionListener(permission)
             .setRationaleMessage(context.getString(R.string.request_permission_for_image))
             .setDeniedMessage(context.getString(R.string.permission_denied_status_message))
-            .setPermissions(android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                android.Manifest.permission.CAMERA)
+            .setPermissions(
+//                android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                android.Manifest.permission.READ_EXTERNAL_STORAGE,
+                android.Manifest.permission.CAMERA,
+            )
+            .check()
+    }
+
+    fun checkCallPermission(context: Context, onGranted: () -> Unit, onDenied: () -> Unit) {
+        val permission = object : PermissionListener {
+            override fun onPermissionGranted() {
+                Timber.tag(TAG).d("onPermissionGranted: ")
+                onGranted()
+            }
+
+            override fun onPermissionDenied(deniedPermissions: MutableList<String>?) {
+                Timber.tag(TAG).d("onPermissionDenied: ")
+                onDenied()
+            }
+        }
+
+        TedPermission.with(context)
+            .setPermissionListener(permission)
+            .setRationaleMessage(context.getString(R.string.request_permission_for_call))
+            .setDeniedMessage(context.getString(R.string.permission_denied_status_message))
+            .setPermissions(
+                 android.Manifest.permission.CALL_PHONE
+            )
+            .check()
+    }
+
+    fun checkLocationPermission(context: Context, onGranted: () -> Unit, onDenied: () -> Unit) {
+        val permission = object : PermissionListener {
+            override fun onPermissionGranted() {
+                Timber.tag(TAG).d("onPermissionGranted: ")
+                onGranted()
+            }
+
+            override fun onPermissionDenied(deniedPermissions: MutableList<String>?) {
+                Timber.tag(TAG).d("onPermissionDenied: ")
+                onDenied()
+            }
+        }
+
+        TedPermission.with(context)
+            .setPermissionListener(permission)
+            .setRationaleMessage(context.getString(R.string.request_permission_for_location))
+            .setDeniedMessage(context.getString(R.string.permission_denied_status_message))
+            .setPermissions(
+                android.Manifest.permission.ACCESS_COARSE_LOCATION,
+                android.Manifest.permission.ACCESS_FINE_LOCATION,
+            )
             .check()
     }
 }

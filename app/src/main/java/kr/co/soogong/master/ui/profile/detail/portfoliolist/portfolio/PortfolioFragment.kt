@@ -49,29 +49,27 @@ class PortfolioFragment : BaseFragment<FragmentEditPortfolioBinding>(
 
             when (pageName) {
                 ADD_PORTFOLIO -> {
-                    with(defaultButton) {
-                        text = getString(R.string.writing_done)
-                        setOnClickListener {
-                            viewModel.title.observe(viewLifecycleOwner, {
-                                jobTitle.isVisible = it.isNullOrEmpty()
-                            })
-
-                            alert.isVisible = viewModel.imageBeforeJob.value?.equals(Uri.EMPTY)!! || viewModel.imageAfterJob.value?.equals(Uri.EMPTY)!!
-
-                            if(!jobTitle.isVisible && !alert.isVisible) {
-                                viewModel.savePortfolio()
-                            }
-                        }
-                    }
+                    defaultButton.text = getString(R.string.writing_done)
                 }
                 EDIT_PORTFOLIO -> {
+                    defaultButton.text = getString(R.string.modifying_done)
                     viewModel.requestPortfolio(portfolioId)
-                    with(defaultButton) {
-                        text = getString(R.string.modifying_done)
-                        setOnClickListener {
-                            viewModel.savePortfolio()
-                        }
-                    }
+                }
+            }
+
+            defaultButton.setOnClickListener {
+                viewModel.title.observe(viewLifecycleOwner, {
+                    jobTitle.alertVisible = it.isNullOrEmpty()
+                })
+
+                alert.isVisible = viewModel.imageBeforeJob.value?.equals(Uri.EMPTY)!! || viewModel.imageAfterJob.value?.equals(Uri.EMPTY)!!
+
+                viewModel.description.observe(viewLifecycleOwner, {
+                    jobDescription.alertVisible = it.length < 10
+                })
+
+                if(!jobTitle.isVisible && !alert.isVisible && !jobDescription.isVisible) {
+                    viewModel.savePortfolio()
                 }
             }
 
@@ -82,9 +80,7 @@ class PortfolioFragment : BaseFragment<FragmentEditPortfolioBinding>(
                             .buttonBackground(R.drawable.shape_fill_green_background)
                             .start { uri -> viewModel.imageBeforeJob.value = uri }
                     },
-                    onDenied = {
-                        requireContext().toast(getString(R.string.permission_denied_message))
-                    })
+                    onDenied = { })
             }
 
             cameraIconAfterJob.setOnClickListener {
@@ -94,9 +90,7 @@ class PortfolioFragment : BaseFragment<FragmentEditPortfolioBinding>(
                             .buttonBackground(R.drawable.shape_fill_green_background)
                             .start { uri -> viewModel.imageAfterJob.value = uri }
                     },
-                    onDenied = {
-                        requireContext().toast(getString(R.string.permission_denied_message))
-                    })
+                    onDenied = { })
             }
         }
     }

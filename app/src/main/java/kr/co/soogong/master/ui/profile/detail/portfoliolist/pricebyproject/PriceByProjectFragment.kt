@@ -23,7 +23,7 @@ class PriceByProjectFragment : BaseFragment<FragmentEditPriceByProjectBinding>(
     R.layout.fragment_edit_price_by_project
 ) {
     private val pageName: String by lazy {
-        arguments?.getString(PAGE_NAME) ?: ADD_PORTFOLIO
+        arguments?.getString(PAGE_NAME) ?: ADD_PRICE_BY_PROJECTS
     }
     private val priceByProjectId: Int by lazy {
         arguments?.getInt(PRICE_BY_PROJECT_ID) ?: -1
@@ -47,34 +47,25 @@ class PriceByProjectFragment : BaseFragment<FragmentEditPriceByProjectBinding>(
 
             when (pageName) {
                 ADD_PRICE_BY_PROJECTS -> {
-                    with(defaultButton) {
-                        text = getString(R.string.writing_done)
-                        setOnClickListener {
-                            viewModel.savePriceByProject()
-                        }
-                    }
+                    defaultButton.text = getString(R.string.writing_done)
                 }
                 EDIT_PRICE_BY_PROJECTS -> {
-                    viewModel.getPriceByProject(priceByProjectId)
-                    with(defaultButton) {
-                        text = getString(R.string.modifying_done)
-                        setOnClickListener {
-                            viewModel.title.observe(viewLifecycleOwner, {
-                                projectTitle.alertVisible = it.isNullOrEmpty()
-                            })
+                    defaultButton.text = getString(R.string.modifying_done)
+                    viewModel.requestPriceByProject(priceByProjectId)
+                }
+            }
 
-                            viewModel.price.observe(viewLifecycleOwner, {
-                                projectPrice.alertVisible = it.isNullOrEmpty()
-                            })
+            defaultButton.setOnClickListener {
+                viewModel.title.observe(viewLifecycleOwner, {
+                    projectTitle.alertVisible = it.isNullOrEmpty()
+                })
 
-                            if (!projectTitle.alertVisible ||
-                                !projectPrice.alertVisible ||
-                                ValidationHelper.isIntRange(viewModel.price.value!!)
-                            ) {
-                                viewModel.savePriceByProject()
-                            }
-                        }
-                    }
+                viewModel.price.observe(viewLifecycleOwner, {
+                    projectPrice.alertVisible = it.isNullOrEmpty()
+                })
+
+                if (!projectTitle.alertVisible && !projectPrice.alertVisible && ValidationHelper.isIntRange(viewModel.price.value!!)) {
+                    viewModel.savePriceByProject()
                 }
             }
         }
