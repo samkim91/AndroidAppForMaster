@@ -4,13 +4,9 @@ import android.content.Context
 import android.icu.text.DecimalFormat
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
-import com.google.android.material.chip.Chip
-import com.google.android.material.chip.ChipGroup
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ViewReviewBoxBinding
-import kr.co.soogong.master.databinding.ViewTitleChipGroupBinding
 
 class ReviewBox @JvmOverloads constructor(
     context: Context,
@@ -29,7 +25,7 @@ class ReviewBox @JvmOverloads constructor(
                     setTextColor(resources.getColor(R.color.color_C4C4C4, null))
                     return
                 }
-                text = DecimalFormat("#,###").format(value)
+                text = value.toString()
                 setTextColor(resources.getColor(R.color.color_1FC472, null))
             }
         }
@@ -43,7 +39,8 @@ class ReviewBox @JvmOverloads constructor(
                     setTextColor(resources.getColor(R.color.color_C4C4C4, null))
                     return
                 }
-                text = value.toString()
+                text = DecimalFormat("#.#").format(value)
+//                text = value.let { round(it*10) / 10 }.toString()
                 setTextColor(resources.getColor(R.color.color_1FC472, null))
             }
         }
