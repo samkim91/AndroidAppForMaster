@@ -102,6 +102,7 @@
                         android:paddingBottom="@dimen/gap_10"
                         android:singleLine="true"
                         android:text="@={vm.certificationCode}"
+                        android:textColor="@color/color_2E2E2E"
                         android:textColorHint="@color/text_hint_color"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -110,14 +111,14 @@
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/timer_view"
                         style="@style/small_text_style.medium"
-                        tools:text="0:00"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/gap_10"
                         android:textColor="@color/color_FF711D"
                         app:layout_constraintBottom_toBottomOf="@id/certification_code"
                         app:layout_constraintEnd_toEndOf="@id/certification_code"
-                        app:layout_constraintTop_toTopOf="@id/certification_code" />
+                        app:layout_constraintTop_toTopOf="@id/certification_code"
+                        tools:text="0:00" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/alert_wrong_certification_code"

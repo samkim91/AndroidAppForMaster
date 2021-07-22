@@ -23,9 +23,9 @@
             style="@style/small_text_style.medium"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/view_title_edittext_button_subtitle_margin_top"
             android:textColor="@color/color_616161"
             android:visibility="gone"
-            android:layout_marginTop="@dimen/view_title_edittext_button_subtitle_margin_top"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/title"
@@ -56,12 +56,12 @@
             android:paddingEnd="16dp"
             android:paddingBottom="10dp"
             android:singleLine="true"
+            android:textColor="@color/color_2E2E2E"
             android:textColorHint="@color/text_hint_color"
-            android:textColor="@color/text_basic_color"
             app:layout_constraintEnd_toStartOf="@id/button"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/sub_title"
-            tools:hint="시공 가능한 업종을 선택해주세요."/>
+            tools:hint="시공 가능한 업종을 선택해주세요." />
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/second_edit_text"
@@ -75,12 +75,13 @@
             android:paddingEnd="16dp"
             android:paddingBottom="10dp"
             android:singleLine="true"
-            android:visibility="visible"
+            android:textColor="@color/color_2E2E2E"
             android:textColorHint="@color/text_hint_color"
+            android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/first_edit_text"
-            tools:hint="상세주소를 입력해주세요."/>
+            tools:hint="상세주소를 입력해주세요." />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button"

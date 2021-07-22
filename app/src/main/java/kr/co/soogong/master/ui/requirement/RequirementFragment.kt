@@ -45,12 +45,18 @@ class RequirementFragment : BaseFragment<FragmentRequirementBinding>(
                 }.attach()
             }
 
-            // 필수 정보를 입력하라는 안내
-            bottomViewForFillingProfileInfoContainer.isVisible =
-                getMasterSubscriptionPlanUseCase().let { it == NotApprovedCodeTable.code || it == RequestApproveCodeTable.code }
             bottomViewForFillingProfileInfoContainer.setOnClickListener {
                 startActivity(EditRequiredInformationActivityHelper.getIntent(requireContext()))
             }
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        bind {
+            // 필수 정보를 입력하라는 안내를 보여줄지 검사
+            bottomViewForFillingProfileInfoContainer.isVisible =
+                getMasterSubscriptionPlanUseCase().let { it == NotApprovedCodeTable.code || it == RequestApproveCodeTable.code }
         }
     }
 
