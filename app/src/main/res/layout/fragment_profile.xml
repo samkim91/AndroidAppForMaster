@@ -73,7 +73,7 @@
                 app:reviewCount="@{vm.profile.myReview.reviews.size}" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/show_profile"
+                android:id="@+id/show_profile_button"
                 style="@style/medium_text_style.bold"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
@@ -96,7 +96,7 @@
                 android:src="@drawable/ic_banner_6"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/show_profile" />
+                app:layout_constraintTop_toBottomOf="@id/show_profile_button" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/line"
