@@ -25,8 +25,8 @@ class PriceByProjectViewModel @Inject constructor(
     val price = MutableLiveData<String>()
     val description = MutableLiveData<String>()
 
-    fun getPriceByProject(priceByProjectId: Int) {
-        Timber.tag(TAG).d("getPriceByProject: $priceByProjectId")
+    fun requestPriceByProject(priceByProjectId: Int) {
+        Timber.tag(TAG).d("requestPriceByProject: $priceByProjectId")
         getPortfolioUseCase(priceByProjectId, "price")
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

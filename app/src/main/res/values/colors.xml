@@ -24,6 +24,7 @@
     <color name="color_90E9BD">#90E9BD</color>
     <color name="color_FFFFFF">#FFFFFF</color>
     <color name="color_00664E">#00664E</color>
+    <color name="color_C4C4C4">#C4C4C4</color>
 
     <color name="text_basic_color">@color/color_121212</color>
     <color name="text_primary_color">@color/color_616161</color>

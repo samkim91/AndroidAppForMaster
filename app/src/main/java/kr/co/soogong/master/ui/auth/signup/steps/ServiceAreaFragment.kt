@@ -14,6 +14,7 @@ import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogData
 import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogRecyclerView
 import kr.co.soogong.master.utility.NaverMapHelper
+import kr.co.soogong.master.utility.PermissionHelper
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -49,18 +50,24 @@ class ServiceAreaFragment : BaseFragment<FragmentSignUpServiceAreaBinding>(
             lifecycleOwner = viewLifecycleOwner
 
             serviceArea.addDropdownClickListener {
-                val bottomDialog =
-                    BottomDialogRecyclerView.newInstance(
-                        title = BottomDialogData.choosingServiceAreaTitle,
-                        dialogData = BottomDialogData.getServiceAreaList(),
-                        itemClick = { text, radius ->
-                            viewModel.serviceArea.value = text
-                            viewModel.serviceAreaToInt.value = radius
-                            naverMap.changeServiceArea(radius)
-                        }
-                    )
+                PermissionHelper.checkLocationPermission(
+                    context = requireContext(),
+                    onGranted = {
+                        val bottomDialog =
+                            BottomDialogRecyclerView.newInstance(
+                                title = BottomDialogData.choosingServiceAreaTitle,
+                                dialogData = BottomDialogData.getServiceAreaList(),
+                                itemClick = { text, radius ->
+                                    viewModel.serviceArea.value = text
+                                    viewModel.serviceAreaToInt.value = radius
+                                    naverMap.changeServiceArea(radius)
+                                }
+                            )
 
-                bottomDialog.show(parentFragmentManager, bottomDialog.tag)
+                        bottomDialog.show(parentFragmentManager, bottomDialog.tag)
+                    },
+                    onDenied = { }
+                )
             }
 
             defaultButton.setOnClickListener {

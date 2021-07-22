@@ -25,6 +25,7 @@ import kr.co.soogong.master.uihelper.requirment.action.EndRepairActivityHelper
 import kr.co.soogong.master.uihelper.requirment.action.ViewRequirementActivityHelper
 import kr.co.soogong.master.uihelper.requirment.action.WriteEstimationActivityHelper
 import kr.co.soogong.master.utility.EventObserver
+import kr.co.soogong.master.utility.PermissionHelper
 import kr.co.soogong.master.utility.extension.addAdditionInfoView
 import kr.co.soogong.master.utility.extension.addEstimationDetail
 import kr.co.soogong.master.utility.extension.addCanceledDetail
@@ -84,6 +85,10 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                     )
                 }
             )
+
+            callButton.setOnClickListener {
+                viewModel.callToClient()
+            }
 
             // 견적을 보낼래요 버튼
             acceptButton.setOnClickListener {

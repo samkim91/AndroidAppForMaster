@@ -65,39 +65,31 @@ class EditFlexibleCostViewModel @Inject constructor(
     fun saveFlexibleCosts() {
         Timber.tag(TAG).d("saveFlexibleCosts: ")
 
-        val configList: List<MasterConfigDto> = listOf(
-            travelCostValue.value?.let {
-                MasterConfigDto(
-                    groupCode = FlexibleCostCodeTable.code,
-                    code = TravelCostCodeTable.code,
-                    name = TravelCostCodeTable.inKorean,
-                    value = it
-                )
-            } ?: MasterConfigDto(),
-            craneUsageValue.value?.let {
-                MasterConfigDto(
-                    groupCode = FlexibleCostCodeTable.code,
-                    code = CraneUsageCodeTable.code,
-                    name = CraneUsageCodeTable.inKorean,
-                    value = it
-                )
-            } ?: MasterConfigDto(),
-            packageCostValue.value?.let {
-                MasterConfigDto(
-                    groupCode = FlexibleCostCodeTable.code,
-                    code = PackageCostCodeTable.code,
-                    name = PackageCostCodeTable.inKorean,
-                    value = it
-                )
-            } ?: MasterConfigDto(),
-            otherCostInformation.value?.let {
-                MasterConfigDto(
-                    groupCode = FlexibleCostCodeTable.code,
-                    code = OtherInfoCodeTable.code,
-                    name = OtherInfoCodeTable.inKorean,
-                    value = it
-                )
-            } ?: MasterConfigDto(),
+        val configList = listOf(
+            MasterConfigDto(
+                groupCode = FlexibleCostCodeTable.code,
+                code = TravelCostCodeTable.code,
+                name = TravelCostCodeTable.inKorean,
+                value = travelCostValue.value
+            ),
+            MasterConfigDto(
+                groupCode = FlexibleCostCodeTable.code,
+                code = CraneUsageCodeTable.code,
+                name = CraneUsageCodeTable.inKorean,
+                value = craneUsageValue.value
+            ),
+            MasterConfigDto(
+                groupCode = FlexibleCostCodeTable.code,
+                code = PackageCostCodeTable.code,
+                name = PackageCostCodeTable.inKorean,
+                value = packageCostValue.value
+            ),
+            MasterConfigDto(
+                groupCode = FlexibleCostCodeTable.code,
+                code = OtherInfoCodeTable.code,
+                name = OtherInfoCodeTable.inKorean,
+                value = if (!otherCostInformation.value.isNullOrEmpty()) otherCostInformation.value else null
+            ),
         )
 
         saveMasterUseCase(

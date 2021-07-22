@@ -8,6 +8,7 @@ import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
+import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ViewReviewBoxBinding
 import kr.co.soogong.master.databinding.ViewTitleChipGroupBinding
 
@@ -22,14 +23,28 @@ class ReviewBox @JvmOverloads constructor(
     var reviewCount: Int? = 0
         set(value) {
             field = value
-            binding.reviewCount.text = DecimalFormat("#,###").format(value)
+            with(binding.reviewCount) {
+                if (value == null || value == 0) {
+                    text = resources.getString(R.string.special_symbol_stroke)
+                    setTextColor(resources.getColor(R.color.color_C4C4C4, null))
+                    return
+                }
+                text = DecimalFormat("#,###").format(value)
+                setTextColor(resources.getColor(R.color.color_1FC472, null))
+            }
         }
 
     var recommendCount: Double? = 0.0
         set(value) {
-            value?.let {
-                field = it
-                binding.recommendCount.text = it.toString()
+            field = value
+            with(binding.recommendCount) {
+                if (value == null || value == 0.0) {
+                    text = resources.getString(R.string.special_symbol_stroke)
+                    setTextColor(resources.getColor(R.color.color_C4C4C4, null))
+                    return
+                }
+                text = value.toString()
+                setTextColor(resources.getColor(R.color.color_1FC472, null))
             }
         }
 }

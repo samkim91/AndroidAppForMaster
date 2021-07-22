@@ -49,7 +49,6 @@ class EditFlexibleCostFragment : BaseFragment<FragmentEditFlexibleCostBinding>(
             FlexibleCostChipGroupHelper(layoutInflater, craneUsageChipGroup, CRANE_USAGE)
             FlexibleCostChipGroupHelper(layoutInflater, packageCostChipGroup, PACKAGE_COST)
         }
-        viewModel.requestFlexibleCosts()
     }
 
     private fun registerEventObserve() {
@@ -65,6 +64,12 @@ class EditFlexibleCostFragment : BaseFragment<FragmentEditFlexibleCostBinding>(
                 }
             }
         })
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Timber.tag(TAG).d("onStart: ")
+        viewModel.requestFlexibleCosts()
     }
 
     companion object {

@@ -66,9 +66,7 @@ class EditShopImagesFragment : BaseFragment<FragmentEditShopImagesBinding>(
                                 })
                             }
                     },
-                    onDenied = {
-                        requireContext().toast(getString(R.string.permission_denied_message))
-                    })
+                    onDenied = { })
             }
 
             imageList.adapter = RectangleImageWithCloseAdapter(
