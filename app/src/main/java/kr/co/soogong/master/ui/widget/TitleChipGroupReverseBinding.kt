@@ -34,8 +34,8 @@ object TitleChipGroupReverseBinding {
 
     @JvmStatic
     @InverseBindingAdapter(attribute = "checkedChip", event = "checkedChipAttrChanged")
-    fun getTitleChipGroupCheckedChip(view: TitleChipGroup): String {
+    fun getTitleChipGroupCheckedChip(view: TitleChipGroup): String? {
         val chip = view.chipGroup.findViewById<Chip>(view.chipGroup.checkedChipId)
-        return chip?.text.toString()
+        return chip?.text?.toString()
     }
 }

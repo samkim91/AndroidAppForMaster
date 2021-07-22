@@ -93,7 +93,7 @@ ext {
 
     daggerVersion = '2.33'
 
-    kakaoVersion = '2.0.0'
+    kakaoVersion = '2.5.3'
     tedPermissionVersion = '2.2.3'
     tedImagePickerVersion = '1.1.10'
 

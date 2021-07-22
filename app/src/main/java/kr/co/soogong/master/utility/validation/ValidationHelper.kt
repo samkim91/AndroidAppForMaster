@@ -14,6 +14,8 @@ object ValidationHelper {
     fun isIntRange(input: Any): Boolean {
         Timber.tag(TAG).d("isIntRange: $input")
         if (input is String) {
+            if (input.isNullOrEmpty()) return false
+            
             val inputInt = input.replace(",", "").toLong()
             return inputInt < Integer.MAX_VALUE
         }

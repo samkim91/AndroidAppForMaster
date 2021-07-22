@@ -27,6 +27,7 @@ import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_WARRANTY_INFORMATION
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.NaverMapHelper
+import kr.co.soogong.master.utility.PermissionHelper
 import kr.co.soogong.master.utility.extension.mutation
 import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
@@ -113,20 +114,26 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
             }
 
             serviceArea.addDefaultButtonClickListener {
-                val bottomDialog =
-                    BottomDialogRecyclerView.newInstance(
-                        title = BottomDialogData.choosingServiceAreaTitle,
-                        dialogData = BottomDialogData.getServiceAreaList(),
-                        itemClick = { _, radius ->
-                            naverMap.changeServiceArea(radius)
-                            viewModel.requiredInformation.mutation {
-                                value?.serviceArea = radius
-                            }
-                            viewModel.saveServiceArea(radius)
-                        }
-                    )
+                PermissionHelper.checkLocationPermission(
+                    context = this@EditRequiredInformationActivity,
+                    onGranted = {
+                        val bottomDialog =
+                            BottomDialogRecyclerView.newInstance(
+                                title = BottomDialogData.choosingServiceAreaTitle,
+                                dialogData = BottomDialogData.getServiceAreaList(),
+                                itemClick = { _, radius ->
+                                    naverMap.changeServiceArea(radius)
+                                    viewModel.requiredInformation.mutation {
+                                        value?.serviceArea = radius
+                                    }
+                                    viewModel.saveServiceArea(radius)
+                                }
+                            )
 
-                bottomDialog.show(supportFragmentManager, bottomDialog.tag)
+                        bottomDialog.show(supportFragmentManager, bottomDialog.tag)
+                    },
+                    onDenied = { }
+                )
             }
 
             defaultButton.setOnClickListener {
@@ -168,7 +175,7 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
     private fun setLayoutForRequestApproveMaster() {
         bind {
             requiredProfileCardPercentage.visibility = View.GONE
-            groupSawCheckForConfirmedMaster.visibility = View.VISIBLE
+            groupSawCheckForConfirmedMaster.visibility = View.GONE
             defaultButton.visibility = View.GONE
             alertContainerToFillUpRequiredInformation.visibility = View.GONE
             textSawCheckForConfirmedMaster.text = getString(R.string.waiting_for_confirmation)

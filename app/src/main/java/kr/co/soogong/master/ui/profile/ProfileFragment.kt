@@ -78,7 +78,6 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
             }
 
             profileImage.addSecondButtonClickListener {
-                // todo.. 수정기능.. upload할 때 기존 이미지가 있으면 삭제->등록으로 하는게 좋을 듯
                 getSingleImage()
             }
 
@@ -135,9 +134,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
                         viewModel.saveMasterProfileImage()
                     }
             },
-            onDenied = {
-                requireContext().toast(getString(R.string.permission_denied_message))
-            }
+            onDenied = { }
         )
     }
 

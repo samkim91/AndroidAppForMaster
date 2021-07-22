@@ -52,9 +52,7 @@ class EditBusinessUnitInformationFragment :
                                 viewModel.businessRegistImage.value = uri
                             }
                     },
-                    onDenied = {
-                        requireContext().toast(getString(R.string.permission_denied_message))
-                    })
+                    onDenied = { })
             }
 
             defaultButton.setOnClickListener {
