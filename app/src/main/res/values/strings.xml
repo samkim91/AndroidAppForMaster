@@ -43,6 +43,7 @@
     <string name="my_page_account_setting_label">계정설정</string>
     <string name="my_page_master_label">마스터</string>
     <string name="my_page_notice">공지사항</string>
+    <string name="empty_notice_list_message">등록된 공지사항이 없습니다.</string>
     <string name="my_page_notice_total">전체보기</string>
     <string name="my_page_call_text">전화 문의하기</string>
     <string name="my_page_kakao_text">카카오톡 문의하기</string>
