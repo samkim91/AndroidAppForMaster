@@ -1,9 +1,9 @@
 package kr.co.soogong.master.data.model.profile
 
 import android.os.Parcelable
-import com.google.gson.JsonObject
 import kotlinx.parcelize.Parcelize
 import kr.co.soogong.master.data.dto.profile.MasterDto
+import kotlin.math.round
 
 @Parcelize
 data class MyReview(
@@ -21,27 +21,27 @@ data class MyReview(
                     reviewDto.reviewScores?.find { reviewScore ->
                         reviewScore.scoreCode == "Recommendation"
                     }?.score!!
-                }?.average(),
+                }?.average()?.let { round(it * 10) / 10 },
                 averageKindness = masterDto.reviews?.map { reviewDto ->
                     reviewDto.reviewScores?.find { reviewScore ->
                         reviewScore.scoreCode == "Kindness"
                     }?.score!!
-                }?.average(),
+                }?.average()?.let { round(it * 10) / 10 },
                 averageQuality = masterDto.reviews?.map { reviewDto ->
                     reviewDto.reviewScores?.find { reviewScore ->
                         reviewScore.scoreCode == "Quality"
                     }?.score!!
-                }?.average(),
+                }?.average()?.let { round(it * 10) / 10 },
                 averageAffordability = masterDto.reviews?.map { reviewDto ->
                     reviewDto.reviewScores?.find { reviewScore ->
                         reviewScore.scoreCode == "Affordability"
                     }?.score!!
-                }?.average(),
+                }?.average()?.let { round(it * 10) / 10 },
                 averagePunctuality = masterDto.reviews?.map { reviewDto ->
                     reviewDto.reviewScores?.find { reviewScore ->
                         reviewScore.scoreCode == "Punctuality"
                     }?.score!!
-                }?.average(),
+                }?.average()?.let { round(it * 10) / 10 },
                 reviews = masterDto.reviews?.map { reviewDto ->
                     Review.fromReviewDto(reviewDto)
                 }
