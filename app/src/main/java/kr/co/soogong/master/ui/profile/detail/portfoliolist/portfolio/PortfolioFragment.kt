@@ -59,12 +59,16 @@ class PortfolioFragment : BaseFragment<FragmentEditPortfolioBinding>(
 
             defaultButton.setOnClickListener {
                 viewModel.title.observe(viewLifecycleOwner, {
-                    jobTitle.isVisible = it.isNullOrEmpty()
+                    jobTitle.alertVisible = it.isNullOrEmpty()
                 })
 
                 alert.isVisible = viewModel.imageBeforeJob.value?.equals(Uri.EMPTY)!! || viewModel.imageAfterJob.value?.equals(Uri.EMPTY)!!
 
-                if(!jobTitle.isVisible && !alert.isVisible) {
+                viewModel.description.observe(viewLifecycleOwner, {
+                    jobDescription.alertVisible = it.length < 10
+                })
+
+                if(!jobTitle.isVisible && !alert.isVisible && !jobDescription.isVisible) {
                     viewModel.savePortfolio()
                 }
             }
