@@ -33,7 +33,7 @@ object HttpContract {
     //endregion
 
     //region Profile
-    const val MY_PAGE_URL = "https://soogong.co.kr/master/"
+    const val MY_PAGE_URL = "https://soogong.co.kr/master/detail/"
     const val GET_MASTER_BY_UID = "master/find-by-uid"
     const val SAVE_MASTER = "master/save"
 

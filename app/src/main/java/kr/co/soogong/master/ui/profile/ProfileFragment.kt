@@ -12,16 +12,13 @@ import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogBundl
 import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogRecyclerView
 import kr.co.soogong.master.ui.profile.ProfileViewModel.Companion.GET_PROFILE_FAILED
 import kr.co.soogong.master.ui.profile.ProfileViewModel.Companion.REQUEST_FAILED
+import kr.co.soogong.master.uihelper.profile.*
 import kr.co.soogong.master.utility.PermissionHelper
-import kr.co.soogong.master.uihelper.profile.EditProfileContainerActivityHelper
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_EMAIL
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_FLEXIBLE_COST
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_OTHER_FLEXIBLE_OPTION
-import kr.co.soogong.master.uihelper.profile.PortfolioListActivityHelper
 import kr.co.soogong.master.uihelper.profile.PortfolioListActivityHelper.PORTFOLIO
 import kr.co.soogong.master.uihelper.profile.PortfolioListActivityHelper.PRICE_BY_PROJECTS
-import kr.co.soogong.master.uihelper.profile.EditRequiredInformationActivityHelper
-import kr.co.soogong.master.uihelper.profile.MyReviewsActivityHelper
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
@@ -54,7 +51,9 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
             }
 
             showProfileButton.setOnClickListener {
-                // TODO: 2021/07/21 마스터 페이지 나오면 연동 필요!!! 아마 특정 URL 에 마스터 uid 를 합칠 듯
+                startActivity(
+                    ShowMyProfileInWebHelper.getIntent(viewModel.profile.value?.uid)
+                )
             }
 
             requestReviewButton.setOnClickListener {
