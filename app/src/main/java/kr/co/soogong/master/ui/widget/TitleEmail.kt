@@ -5,10 +5,8 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.EditText
-import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import kr.co.soogong.master.databinding.ViewTitleEmailBinding
-import kr.co.soogong.master.databinding.ViewTitleSettingTimeBinding
 
 class TitleEmail @JvmOverloads constructor(
     context: Context,
