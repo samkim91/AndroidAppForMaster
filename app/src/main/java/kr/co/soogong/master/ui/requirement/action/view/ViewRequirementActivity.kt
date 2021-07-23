@@ -144,8 +144,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
             setDefaultView()
 
             bind {
-                actionBar.title.text =
-                    getString(R.string.view_requirement_action_bar_text, requirement?.token)
+                actionBar.title.text = requirement.address
 
                 // 고객 요청 내용
                 bindRequirementQnasData(requirement?.requirementQnas, requirement.description)
