@@ -53,8 +53,11 @@ data class RequirementDto(
     @SerializedName("canceledYn")
     val canceledYn: Boolean? = null,
 
-    @SerializedName("canceledReason")
-    val canceledReason: String? = null,
+    @SerializedName("canceledCode")
+    val canceledCode: String? = null,
+
+    @SerializedName("cancelName")
+    val cancelName: String? = null,
 
     @SerializedName("canceledDescription")
     val canceledDescription: String? = null,

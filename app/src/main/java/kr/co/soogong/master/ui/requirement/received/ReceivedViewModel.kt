@@ -42,7 +42,7 @@ class ReceivedViewModel @Inject constructor(
             when(_index.value){
                 1 -> listOf(RequirementStatus.Requested.toCode())
                 2 -> listOf(RequirementStatus.Estimated.toCode())
-                else -> listOf(RequirementStatus.Requested.toCode(), RequirementStatus.Estimated.toCode())
+                else -> RequirementStatus.getReceivedCodes()
             }
         )
             .subscribeOn(Schedulers.io())
