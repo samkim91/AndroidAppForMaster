@@ -38,10 +38,7 @@ class ProgressViewModel @Inject constructor(
             when (_index.value) {
                 1 -> listOf(RequirementStatus.Repairing.toCode())
                 2 -> listOf(RequirementStatus.RequestFinish.toCode())
-                else -> listOf(
-                    RequirementStatus.Repairing.toCode(),
-                    RequirementStatus.RequestFinish.toCode()
-                )
+                else -> RequirementStatus.getProgressCodes()
             }
         )
             .subscribeOn(Schedulers.io())

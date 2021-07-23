@@ -46,15 +46,7 @@ class WriteEstimationActivity : BaseActivity<ActivityWriteEstimationBinding>(
             with(actionBar) {
                 title.text = getString(R.string.write_estimate_title)
                 backButton.setOnClickListener {
-                    val dialog = CustomDialog(
-                        getCancelSendingEstimationDialogData(this@WriteEstimationActivity),
-                        yesClick = {
-                            super.onBackPressed()
-                        },
-                        noClick = { }
-                    )
-
-                    dialog.show(supportFragmentManager, dialog.tag)
+                    customBackPressed()
                 }
 
 
@@ -200,6 +192,22 @@ class WriteEstimationActivity : BaseActivity<ActivityWriteEstimationBinding>(
             totalCost.value =
                 DecimalFormat("#,###").format(laborCostInt + materialCostInt + travelCostInt)
         }
+    }
+
+    override fun onBackPressed() {
+        customBackPressed()
+    }
+
+    private fun customBackPressed(){
+        val dialog = CustomDialog(
+            getCancelSendingEstimationDialogData(this@WriteEstimationActivity),
+            yesClick = {
+                finish()
+            },
+            noClick = { }
+        )
+
+        dialog.show(supportFragmentManager, dialog.tag)
     }
 
     companion object {

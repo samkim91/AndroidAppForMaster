@@ -176,6 +176,7 @@ class AuthFragment : BaseFragment<FragmentSignUpAuthBinding>(
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     Timber.tag(TAG).d("signInWithPhoneAuthCredential successfully: ")
+                    requireContext().toast(getString(R.string.check_certification_code_button_text))
                     viewModel.uid.value = task.result?.user?.uid
                     (activity as? SignUpActivity)?.moveToNext()
                 } else {

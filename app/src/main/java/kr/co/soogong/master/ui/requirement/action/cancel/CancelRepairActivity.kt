@@ -45,7 +45,7 @@ class CancelRepairActivity : BaseActivity<ActivityCancelRepairBinding>(
                 backButton.setOnClickListener {
                     super.onBackPressed()
                 }
-
+                button.text = getString(R.string.writing_done)
                 button.setOnClickListener {
                     viewModel.canceledCode.observe(this@CancelRepairActivity, {
                         alert.isVisible = it.isNullOrEmpty()

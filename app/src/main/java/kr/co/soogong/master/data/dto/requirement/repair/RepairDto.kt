@@ -39,8 +39,8 @@ data class RepairDto(
     @SerializedName("canceledCode")
     val canceledCode: String? = null,
 
-    @SerializedName("description")
-    val description: String? = null,
+    @SerializedName("canceledDescription")
+    val canceledDescription: String? = null,
 
     @SerializedName("review")
     val review: ReviewDto? = null,

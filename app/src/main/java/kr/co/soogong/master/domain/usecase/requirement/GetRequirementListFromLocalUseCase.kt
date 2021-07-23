@@ -10,8 +10,8 @@ import javax.inject.Inject
 class GetRequirementListFromLocalUseCase @Inject constructor(
     private val requirementDao: RequirementDao,
 ) {
-    operator fun invoke(statusArray: List<String>): Single<List<RequirementCard>> {
-        return requirementDao.getListByStatus(statusArray)
+    operator fun invoke(statusArray: List<String>, canceledYn: Boolean = false): Single<List<RequirementCard>> {
+        return requirementDao.getListByStatus(statusArray, canceledYn)
             .map { list ->
                 list.map {
                     RequirementCard.fromRequirementDto(it)

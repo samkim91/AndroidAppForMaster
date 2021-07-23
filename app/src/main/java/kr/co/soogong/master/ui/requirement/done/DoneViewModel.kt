@@ -39,14 +39,10 @@ class DoneViewModel @Inject constructor(
             when (_index.value) {
                 1 -> listOf(RequirementStatus.Done.toCode())
                 2 -> listOf(RequirementStatus.Closed.toCode())
-                3 -> listOf(RequirementStatus.Canceled.toCode())
-                else -> listOf(
-                    RequirementStatus.Done.toCode(),
-                    RequirementStatus.Closed.toCode(),
-                    RequirementStatus.Canceled.toCode(),
-                    RequirementStatus.Impossible.toCode(),
-                )
-            }
+                3 -> RequirementStatus.getAllStatusCodes()
+                else -> RequirementStatus.getDoneCodes()
+            },
+            _index.value == 3
         )
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

@@ -26,7 +26,7 @@ class CancelRepairViewModel @Inject constructor(
     private val _requirement = MutableLiveData<RequirementDto>()
 
     val canceledCode = MutableLiveData("")
-    val description = MutableLiveData("")
+    val canceledDescription = MutableLiveData("")
 
     fun requestRequirement() {
         Timber.tag(TAG).d("requestRequirement: $requirementId")
@@ -52,7 +52,7 @@ class CancelRepairViewModel @Inject constructor(
                 estimationId = _requirement.value?.estimationDto?.id,
                 canceledYn = true,
                 canceledCode = canceledCode.value,
-                description = description.value,
+                canceledDescription = canceledDescription.value,
             )
         )
             .subscribeOn(Schedulers.io())
