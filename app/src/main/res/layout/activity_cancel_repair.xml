@@ -114,7 +114,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/cancel_option"
                     app:limitedCount='@{100}'
-                    app:content="@={vm.description}"
+                    app:content="@={vm.canceledDescription}"
                     app:title='@{"상세 내용을 입력해주세요. (선택)"}' />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>

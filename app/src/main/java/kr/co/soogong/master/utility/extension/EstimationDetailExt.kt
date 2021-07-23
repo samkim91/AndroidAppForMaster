@@ -7,38 +7,40 @@ import android.icu.text.DecimalFormat
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import kr.co.soogong.master.R
+import kr.co.soogong.master.data.dto.requirement.RequirementDto
 import kr.co.soogong.master.data.dto.requirement.estimation.EstimationDto
 import kr.co.soogong.master.data.model.requirement.estimation.EstimationPriceTypeCode
 import kr.co.soogong.master.data.model.requirement.repair.RepairCanceledReason
 import kr.co.soogong.master.ui.widget.EstimationItem
 
-val params = LinearLayout.LayoutParams(
+private val params = LinearLayout.LayoutParams(
     ViewGroup.LayoutParams.MATCH_PARENT,
     ViewGroup.LayoutParams.WRAP_CONTENT
 ).apply {
-    setMargins(0, 12.dp, 0, 12.dp)
+    setMargins(0, 16.dp, 0, 0)
 }
 
 fun addCanceledDetail(
     viewGroup: ViewGroup,
     context: Context,
-    estimationDto: EstimationDto
+    requirementDto: RequirementDto
 ) {
     viewGroup.removeAllViews()
 
-    estimationDto.repair?.let { repair ->
-        repair.canceledYn?.let { isCanceled ->
+    requirementDto.let { requirement ->
+        requirement.canceledYn?.let { isCanceled ->
             if (isCanceled) {
                 val view = EstimationItem(context)
                 view.key = context.getString(R.string.cancel_repair_title)
-                view.value = RepairCanceledReason.getCanceledReason(repair.canceledCode).inKorean
+                view.value =
+                    RepairCanceledReason.getCanceledReason(requirement.canceledCode).inKorean
                 view.bold = true
 
                 viewGroup.addView(view, params)
 
                 val viewSecond = EstimationItem(context)
                 viewSecond.key = context.getString(R.string.description_label)
-                viewSecond.value = repair.description
+                viewSecond.value = requirement.canceledDescription
 
                 viewGroup.addView(viewSecond, params)
             }
