@@ -47,7 +47,7 @@
                 android:layout_marginStart="@dimen/my_page_master_label_margin_start"
                 android:layout_marginEnd="@dimen/my_page_master_label_margin_top"
                 app:subscriptionPlan="@{vm.profile.subscriptionPlan}"
-                android:textColor="@color/text_primary_color"
+                android:textColor="@color/color_555555"
                 app:layout_constraintBottom_toBottomOf="@id/master_store_name"
                 app:layout_constraintEnd_toStartOf="@id/account_setting"
                 app:layout_constraintStart_toEndOf="@id/master_store_name"

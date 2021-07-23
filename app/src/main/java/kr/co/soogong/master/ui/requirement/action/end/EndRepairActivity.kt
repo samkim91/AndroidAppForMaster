@@ -47,6 +47,7 @@ class EndRepairActivity : BaseActivity<ActivityEndRepairBinding>(
                 backButton.setOnClickListener {
                     super.onBackPressed()
                 }
+                button.text = getString(R.string.writing_done)
                 button.setOnClickListener {
                     viewModel.actualPrice.observe(this@EndRepairActivity, {
                         actualPrice.alertVisible =

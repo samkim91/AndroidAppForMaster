@@ -90,5 +90,41 @@ sealed class RequirementStatus {
                 else -> Failed
             }
         }
+
+        fun getAllStatusCodes(): List<String>{
+            return listOf(
+                Requested.toCode(),
+                Estimated.toCode(),
+                Repairing.toCode(),
+                RequestFinish.toCode(),
+                Done.toCode(),
+                Closed.toCode(),
+                Canceled.toCode(),
+                Impossible.toCode(),
+            )
+        }
+
+        fun getReceivedCodes(): List<String>{
+            return listOf(
+                Requested.toCode(),
+                Estimated.toCode(),
+            )
+        }
+
+        fun getProgressCodes(): List<String>{
+            return listOf(
+                Repairing.toCode(),
+                RequestFinish.toCode(),
+            )
+        }
+
+        fun getDoneCodes(): List<String>{
+            return listOf(
+                Done.toCode(),
+                Closed.toCode(),
+                Canceled.toCode(),
+                Impossible.toCode(),
+            )
+        }
     }
 }

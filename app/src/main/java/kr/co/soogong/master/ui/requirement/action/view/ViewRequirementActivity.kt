@@ -6,6 +6,7 @@ import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
+import kr.co.soogong.master.data.dto.requirement.RequirementDto
 import kr.co.soogong.master.data.dto.requirement.estimation.EstimationDto
 import kr.co.soogong.master.data.dto.requirement.qna.RequirementQnaDto
 import kr.co.soogong.master.data.model.requirement.RequirementStatus
@@ -25,10 +26,9 @@ import kr.co.soogong.master.uihelper.requirment.action.EndRepairActivityHelper
 import kr.co.soogong.master.uihelper.requirment.action.ViewRequirementActivityHelper
 import kr.co.soogong.master.uihelper.requirment.action.WriteEstimationActivityHelper
 import kr.co.soogong.master.utility.EventObserver
-import kr.co.soogong.master.utility.PermissionHelper
 import kr.co.soogong.master.utility.extension.addAdditionInfoView
-import kr.co.soogong.master.utility.extension.addEstimationDetail
 import kr.co.soogong.master.utility.extension.addCanceledDetail
+import kr.co.soogong.master.utility.extension.addEstimationDetail
 import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
 import java.util.*
@@ -205,9 +205,8 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                     // footer button : none
                     RequirementStatus.Canceled -> {
                         repairGroup.visibility = View.VISIBLE
-                        bindRepairData(requirement?.estimationDto)
+                        bindCanceledData(requirement)
                         bindEstimationData(requirement?.estimationDto)
-                        // TODO: 2021/06/16 취소 사유 바인딩 필요
                     }
 
                     // 상태 : 매칭실패
@@ -254,7 +253,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
         viewModel.requestRequirement()
     }
 
-    private fun setDefaultView(){
+    private fun setDefaultView() {
         bind {
             requestedButtonGroup.visibility = View.GONE
             cancelButton.visibility = View.GONE
@@ -267,7 +266,10 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
         }
     }
 
-    private fun bindRequirementQnasData(requirementQnaDtos: List<RequirementQnaDto>?, description: String?) {
+    private fun bindRequirementQnasData(
+        requirementQnaDtos: List<RequirementQnaDto>?,
+        description: String?
+    ) {
         addAdditionInfoView(
             binding.customFrame,
             this@ViewRequirementActivity,
@@ -291,20 +293,22 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
         if (estimationDto != null) {
             binding.repairGroup.visibility = View.VISIBLE
 
-            if(estimationDto.repair?.canceledYn == true) {
-                binding.repairTitle.text = getString(R.string.view_repair_canceled_title)
-                addCanceledDetail(
-                    binding.customFrameForRepairDetail,
-                    this@ViewRequirementActivity,
-                    estimationDto
-                )
-            } else {
-                addEstimationDetail(
-                    binding.customFrameForRepairDetail,
-                    this@ViewRequirementActivity,
-                    estimationDto
-                )
-            }
+            addEstimationDetail(
+                binding.customFrameForRepairDetail,
+                this@ViewRequirementActivity,
+                estimationDto
+            )
+        }
+    }
+
+    private fun bindCanceledData(requirementDto: RequirementDto?) {
+        if (requirementDto != null && requirementDto.canceledYn == true) {
+            binding.repairTitle.text = getString(R.string.view_repair_canceled_title)
+            addCanceledDetail(
+                binding.customFrameForRepairDetail,
+                this@ViewRequirementActivity,
+                requirementDto
+            )
         }
     }
 
