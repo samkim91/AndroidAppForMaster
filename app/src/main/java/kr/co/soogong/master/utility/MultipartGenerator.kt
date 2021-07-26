@@ -22,8 +22,8 @@ object MultipartGenerator {
 
     fun createFile(context: Context, key: String, uri: Uri): MultipartBody.Part? {
         Timber.tag(TAG).d("createFile: $uri to $key")
-
-        return uri.asMultiPart(key, context.contentResolver)
+        return if (uri.toString().contains("https://")) null
+        else uri.asMultiPart(key, context.contentResolver)
     }
 
     fun createFiles(
