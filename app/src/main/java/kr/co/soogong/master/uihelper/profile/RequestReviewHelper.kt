@@ -21,7 +21,7 @@ object RequestReviewHelper {
             context.toast(context.getString(R.string.link_copied_successfully))
         } else {
             try {
-                context.startActivity(getIntent(context, masterName, wayOfRequesting))
+                context.startActivity(getIntent(context, masterUid, masterName, wayOfRequesting))
             } catch (e: ActivityNotFoundException) {
                 when(wayOfRequesting) {
                     "카카오톡으로 공유하기" -> context.startActivity(
