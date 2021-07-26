@@ -229,6 +229,16 @@
     <string name="retype_text">재입력</string>
     <string name="kilo_meters">km</string>
 
+    <string name="request_review_template">[수공 리뷰 작성 요청]\n
+            \n
+            고객님, %s님의 시공에 대해 리뷰 요청이 도착했습니다.\n
+            \n
+            고객님의 소중한 리뷰는 마스터님과 다른 고객님께 도움이됩니다.\n
+            \n</string>
+    <string name="link_copied_successfully">링크가 복사되었습니다.</string>
+    <string name="request_review_by_sharing_failed">해당 기능을 찾지 못 하였습니다. 다른 방법으로 공유하기를 통해 다른 앱을 선택해주세요.</string>
+
+
     <!-- Request Detail -->
     <string name="request_date">접수일시</string>
     <string name="request_user_name">고객명</string>

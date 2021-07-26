@@ -1,11 +1,16 @@
 package kr.co.soogong.master.ui.profile
 
+import android.content.ActivityNotFoundException
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context.CLIPBOARD_SERVICE
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import gun0912.tedimagepicker.builder.TedImagePicker
 import kr.co.soogong.master.R
+import kr.co.soogong.master.contract.HttpContract
 import kr.co.soogong.master.databinding.FragmentProfileBinding
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogBundle
@@ -13,13 +18,13 @@ import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogRecyc
 import kr.co.soogong.master.ui.profile.ProfileViewModel.Companion.GET_PROFILE_FAILED
 import kr.co.soogong.master.ui.profile.ProfileViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.uihelper.profile.*
-import kr.co.soogong.master.utility.PermissionHelper
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_EMAIL
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_FLEXIBLE_COST
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_OTHER_FLEXIBLE_OPTION
 import kr.co.soogong.master.uihelper.profile.PortfolioListActivityHelper.PORTFOLIO
 import kr.co.soogong.master.uihelper.profile.PortfolioListActivityHelper.PRICE_BY_PROJECTS
 import kr.co.soogong.master.utility.EventObserver
+import kr.co.soogong.master.utility.PermissionHelper
 import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
 
@@ -56,14 +61,20 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
                 )
             }
 
-            requestReviewButton.setOnClickListener {
+            requestReviewBySharingButton.setOnClickListener {
                 val bottomDialog =
-                BottomDialogRecyclerView.newInstance(
-                    dialogBundle = BottomDialogBundle.getRequestingReviewBundle(),
-                    itemClick = { key, _ ->
-                        Timber.tag(TAG).d("requestReviewButton: $key is clicked")
-                    }
-                )
+                    BottomDialogRecyclerView.newInstance(
+                        dialogBundle = BottomDialogBundle.getRequestingReviewBundle(),
+                        itemClick = { wayOfRequesting, _ ->
+                            Timber.tag(TAG).d("requestReviewButton: $wayOfRequesting is clicked")
+                            RequestReviewHelper.requestReviewBySharing(
+                                requireContext(),
+                                viewModel.profile.value?.uid,
+                                viewModel.profile.value?.representativeName,
+                                wayOfRequesting
+                            )
+                        }
+                    )
 
                 bottomDialog.show(parentFragmentManager, bottomDialog.tag)
             }
@@ -129,7 +140,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
 
     private fun registerEventObserve() {
         viewModel.action.observe(viewLifecycleOwner, EventObserver { event ->
-            when(event){
+            when (event) {
                 GET_PROFILE_FAILED, REQUEST_FAILED -> requireContext().toast(getString(R.string.error_message_of_request_failed))
             }
         })
