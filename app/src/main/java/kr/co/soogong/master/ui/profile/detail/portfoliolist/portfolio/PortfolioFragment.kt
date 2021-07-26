@@ -68,7 +68,7 @@ class PortfolioFragment : BaseFragment<FragmentEditPortfolioBinding>(
                     jobDescription.alertVisible = it.length < 10
                 })
 
-                if(!jobTitle.isVisible && !alert.isVisible && !jobDescription.isVisible) {
+                if(!jobTitle.alertVisible && !alert.isVisible && !jobDescription.alertVisible) {
                     viewModel.savePortfolio()
                 }
             }
