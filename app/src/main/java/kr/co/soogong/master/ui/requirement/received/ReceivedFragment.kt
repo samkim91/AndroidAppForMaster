@@ -33,7 +33,6 @@ class ReceivedFragment : BaseFragment<FragmentRequirementReceivedBinding>(
         Timber.tag(TAG).d("onViewCreated: ")
 
         initLayout()
-
         registerEventObserve()
     }
 
@@ -44,6 +43,12 @@ class ReceivedFragment : BaseFragment<FragmentRequirementReceivedBinding>(
             vm = viewModel
 
             lifecycleOwner = viewLifecycleOwner
+
+            swipeRefreshLayout.setColorSchemeResources(R.color.app_color)
+            swipeRefreshLayout.setOnRefreshListener {
+                viewModel.requestList()
+                swipeRefreshLayout.isRefreshing = false
+            }
 
             receivedList.adapter =
                 ReceivedAdapter(cardClickListener = { requirementId ->

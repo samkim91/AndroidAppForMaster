@@ -8,15 +8,15 @@ import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.model.requirement.RequirementCard
 import kr.co.soogong.master.data.model.requirement.RequirementStatus
-import kr.co.soogong.master.domain.usecase.requirement.CallToClientUseCase
-import kr.co.soogong.master.domain.usecase.requirement.GetProgressEstimationListUseCase
+import kr.co.soogong.master.domain.usecase.requirement.*
 import kr.co.soogong.master.ui.base.BaseViewModel
 import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class ProgressViewModel @Inject constructor(
-    private val getProgressEstimationListUseCase: GetProgressEstimationListUseCase,
+    private val getRequirementCardsUseCase: GetRequirementCardsUseCase,
+    private val getRequirementCardsFromLocalUseCase: GetRequirementCardsFromLocalUseCase,
     private val callToClientUseCase: CallToClientUseCase,
 ) : BaseViewModel() {
     private val _progressList = MutableLiveData<List<RequirementCard>>()
@@ -25,17 +25,38 @@ class ProgressViewModel @Inject constructor(
 
     private val _index = MutableLiveData<Int>()
 
-    fun onFilterChange(index: Int) {
-        Timber.tag(TAG).d("onFilterChange: $index")
-        _index.value = index
-        requestList()
-    }
-
     fun requestList() {
         Timber.tag(TAG).d("requestList: ${_index.value}")
 
-        getProgressEstimationListUseCase(
-            when (_index.value) {
+        getRequirementCardsUseCase(RequirementStatus.getProgressCodes())
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeBy(
+                onNext = {
+                    Timber.tag(TAG).d("requestList successfully: $it")
+                    sendEvent(BADGE_UPDATE, it.count())
+
+                    _progressList.postValue(it.filter { card ->
+                        when (_index.value) {
+                            1 -> card.status == RequirementStatus.Repairing
+                            2 -> card.status == RequirementStatus.RequestFinish
+                            else -> card.status != null
+                        }
+                    })
+                },
+                onComplete = { },
+                onError = {
+                    Timber.tag(TAG).d("requestList failed: $it")
+                    _progressList.postValue(emptyList())
+                }
+            ).addToDisposable()
+    }
+
+    fun onFilterChange(index: Int) {
+        Timber.tag(TAG).d("onFilterChange: $index")
+        _index.value = index
+        getRequirementCardsFromLocalUseCase(
+            when (index) {
                 1 -> listOf(RequirementStatus.Repairing.toCode())
                 2 -> listOf(RequirementStatus.RequestFinish.toCode())
                 else -> RequirementStatus.getProgressCodes()
@@ -45,15 +66,11 @@ class ProgressViewModel @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
                 onSuccess = {
-                    Timber.tag(TAG).d("requestList successfully: $it")
-                    if (_index.value == 0 || _index.value == null) sendEvent(
-                        BADGE_UPDATE,
-                        it.count()
-                    )
+                    Timber.tag(TAG).d("onFilterChange successfully: $it")
                     _progressList.postValue(it)
                 },
                 onError = {
-                    Timber.tag(TAG).d("requestList failed: $it")
+                    Timber.tag(TAG).d("onFilterChange failed: $it")
                     _progressList.postValue(emptyList())
                 }
             ).addToDisposable()
@@ -84,8 +101,6 @@ class ProgressViewModel @Inject constructor(
     companion object {
         private const val TAG = "ProgressViewModel"
         const val BADGE_UPDATE = "BADGE_UPDATE"
-        const val UPDATE_LIST = "UPDATE_LIST"
-        const val REQUEST_LIST_FAILED = "REQUEST_LIST_FAILED"
         const val REQUEST_FAILED = "REQUEST_FAILED"
     }
 }

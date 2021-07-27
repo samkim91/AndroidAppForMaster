@@ -84,7 +84,7 @@
 <!--            android:layout_height="wrap_content"-->
 <!--            android:layout_marginTop="@dimen/requirement_card_request_id_margin_top"-->
 <!--            android:ellipsize="end"-->
-<!--            android:lines="1"-->
+<!--            android:maxLines="1"-->
 <!--            android:text="@{data.token}"-->
 <!--            android:textColor="@color/text_primary_color"-->
 <!--            app:layout_constraintStart_toStartOf="parent"-->
@@ -99,7 +99,7 @@
             android:layout_marginTop="@dimen/requirement_card_location_margin_top"
             android:layout_marginEnd="@dimen/requirement_card_location_margin_end"
             android:ellipsize="end"
-            android:lines="1"
+            android:maxLines="1"
             android:text="@{data.address}"
             android:textColor="@color/primary_text_color"
             app:layout_constrainedWidth="true"
@@ -117,7 +117,7 @@
             android:layout_marginTop="@dimen/requirement_card_type_margin_top"
             android:layout_marginEnd="@dimen/requirement_card_type_margin_end"
             android:ellipsize="end"
-            android:lines="1"
+            android:maxLines="1"
             android:text="@{data.project}"
             android:textColor="@color/primary_text_color"
             app:layout_constrainedWidth="true"

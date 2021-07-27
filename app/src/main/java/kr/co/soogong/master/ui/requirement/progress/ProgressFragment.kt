@@ -33,7 +33,6 @@ class ProgressFragment : BaseFragment<FragmentRequirementProgressBinding>(
         Timber.tag(TAG).d("onViewCreated: ")
 
         initLayout()
-
         registerEventObserve()
     }
 
@@ -44,6 +43,12 @@ class ProgressFragment : BaseFragment<FragmentRequirementProgressBinding>(
             vm = viewModel
 
             lifecycleOwner = viewLifecycleOwner
+
+            swipeRefreshLayout.setColorSchemeResources(R.color.app_color)
+            swipeRefreshLayout.setOnRefreshListener {
+                viewModel.requestList()
+                swipeRefreshLayout.isRefreshing = false
+            }
 
             progressList.adapter = ProgressAdapter(
                 cardClickListener = { requirementId ->
