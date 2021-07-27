@@ -45,6 +45,11 @@ class ReceivedFragment : BaseFragment<FragmentRequirementReceivedBinding>(
 
             lifecycleOwner = viewLifecycleOwner
 
+            swipeRefreshLayout.setOnRefreshListener {
+                viewModel.requestList()
+                swipeRefreshLayout.isRefreshing = false
+            }
+
             receivedList.adapter =
                 ReceivedAdapter(cardClickListener = { requirementId ->
                     viewModel.masterSubscriptionPlan.value?.let {

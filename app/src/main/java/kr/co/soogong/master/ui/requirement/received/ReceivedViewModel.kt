@@ -8,6 +8,7 @@ import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.model.requirement.RequirementCard
 import kr.co.soogong.master.data.model.requirement.RequirementStatus
+import kr.co.soogong.master.data.repository.RequirementRepository
 import kr.co.soogong.master.domain.usecase.auth.GetMasterSubscriptionPlanUseCase
 import kr.co.soogong.master.domain.usecase.requirement.GetReceivedRequirementListUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
@@ -17,9 +18,12 @@ import javax.inject.Inject
 @HiltViewModel
 class ReceivedViewModel @Inject constructor(
     val getMasterSubscriptionPlanUseCase: GetMasterSubscriptionPlanUseCase,
-    private val getReceivedRequirementListUseCase: GetReceivedRequirementListUseCase
+    private val getReceivedRequirementListUseCase: GetReceivedRequirementListUseCase,
+    private val requirementRepository: RequirementRepository
+
 ) : BaseViewModel() {
-    private val _masterSubscriptionPlan = MutableLiveData<String>(getMasterSubscriptionPlanUseCase())
+    private val _masterSubscriptionPlan =
+        MutableLiveData<String>(getMasterSubscriptionPlanUseCase())
     val masterSubscriptionPlan: LiveData<String>
         get() = _masterSubscriptionPlan
 
@@ -29,17 +33,39 @@ class ReceivedViewModel @Inject constructor(
 
     private val _index = MutableLiveData<Int>()
 
-    fun onFilterChange(index: Int) {
-        Timber.tag(TAG).d("onFilterChange: $index")
-        _index.value = index
-        requestList()
-    }
-
     fun requestList() {
         Timber.tag(TAG).d("requestList: ${_index.value}")
 
-        getReceivedRequirementListUseCase(
-            when(_index.value){
+        requirementRepository.getRequirements(RequirementStatus.getReceivedCodes())
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeBy(
+                onNext = {
+                    Timber.tag(TAG).d("requestList onNext: $it")
+                    sendEvent(BADGE_UPDATE, it.count())
+
+                    _receivedList.postValue(it.filter { card ->
+                        when(_index.value) {
+                            1 -> card.status == RequirementStatus.Requested
+                            2 -> card.status == RequirementStatus.Estimated
+                            else -> card.status != null
+                        }
+                    })
+                },
+                onComplete = { },
+                onError = {
+                    Timber.tag(TAG).d("requestList failed: $it")
+                    _receivedList.postValue(emptyList())
+                },
+            ).addToDisposable()
+    }
+
+    fun onFilterChange(index: Int) {
+        Timber.tag(TAG).d("onFilterChange: $index")
+
+        _index.value = index
+        requirementRepository.getRequirementsFromLocalAsCards(
+            when (index) {
                 1 -> listOf(RequirementStatus.Requested.toCode())
                 2 -> listOf(RequirementStatus.Estimated.toCode())
                 else -> RequirementStatus.getReceivedCodes()
@@ -49,18 +75,10 @@ class ReceivedViewModel @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
                 onSuccess = {
-                    Timber.tag(TAG).d("requestList successfully: $it")
-                    if(_index.value == 0 || _index.value == null) sendEvent(BADGE_UPDATE, it.count())
-                    if(_index.value == 2) {
-                        _receivedList.postValue(it.filter { list -> list.status == RequirementStatus.Estimated })
-                    } else {
-                        _receivedList.postValue(it)
-                    }
+                    Timber.tag(TAG).d("requestList onNext: $it")
+                    _receivedList.postValue(it)
                 },
-                onError = {
-                    Timber.tag(TAG).d("requestList failed: $it")
-                    _receivedList.postValue(emptyList())
-                }
+                onError = { },
             ).addToDisposable()
     }
 
