@@ -11,8 +11,8 @@ interface RequirementDao {
     @Query("SELECT * FROM Requirement WHERE status In (:status) AND canceledYn = :canceledYn ORDER BY id DESC")
     fun getListByStatus(status: List<String>, canceledYn: Boolean): Single<List<RequirementDto>>
 
-    @Query("SELECT * FROM Requirement WHERE status In (:status) AND canceledYn = :canceledYn ORDER BY id DESC")
-    fun getListByStatusTest(status: List<String>, canceledYn: Boolean): Single<List<RequirementDto>>
+    @Query("SELECT * FROM Requirement WHERE status In (:status) OR canceledYn = :canceledYn ORDER BY id DESC")
+    fun getListByStatusIncludingCanceled(status: List<String>, canceledYn: Boolean): Single<List<RequirementDto>>
 
     @Query("SELECT * FROM Requirement WHERE id = :id")
     fun getItem(id: Int): Single<RequirementDto>

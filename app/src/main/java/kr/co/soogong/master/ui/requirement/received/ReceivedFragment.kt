@@ -33,7 +33,6 @@ class ReceivedFragment : BaseFragment<FragmentRequirementReceivedBinding>(
         Timber.tag(TAG).d("onViewCreated: ")
 
         initLayout()
-
         registerEventObserve()
     }
 
@@ -45,6 +44,7 @@ class ReceivedFragment : BaseFragment<FragmentRequirementReceivedBinding>(
 
             lifecycleOwner = viewLifecycleOwner
 
+            swipeRefreshLayout.setColorSchemeResources(R.color.app_color)
             swipeRefreshLayout.setOnRefreshListener {
                 viewModel.requestList()
                 swipeRefreshLayout.isRefreshing = false

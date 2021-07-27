@@ -8,9 +8,9 @@ import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.model.requirement.RequirementCard
 import kr.co.soogong.master.data.model.requirement.RequirementStatus
-import kr.co.soogong.master.data.repository.RequirementRepository
 import kr.co.soogong.master.domain.usecase.auth.GetMasterSubscriptionPlanUseCase
-import kr.co.soogong.master.domain.usecase.requirement.GetReceivedRequirementListUseCase
+import kr.co.soogong.master.domain.usecase.requirement.GetRequirementCardsFromLocalUseCase
+import kr.co.soogong.master.domain.usecase.requirement.GetRequirementCardsUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import timber.log.Timber
 import javax.inject.Inject
@@ -18,9 +18,8 @@ import javax.inject.Inject
 @HiltViewModel
 class ReceivedViewModel @Inject constructor(
     val getMasterSubscriptionPlanUseCase: GetMasterSubscriptionPlanUseCase,
-    private val getReceivedRequirementListUseCase: GetReceivedRequirementListUseCase,
-    private val requirementRepository: RequirementRepository
-
+    private val getRequirementCardsUseCase: GetRequirementCardsUseCase,
+    private val getRequirementCardsFromLocalUseCase: GetRequirementCardsFromLocalUseCase,
 ) : BaseViewModel() {
     private val _masterSubscriptionPlan =
         MutableLiveData<String>(getMasterSubscriptionPlanUseCase())
@@ -36,7 +35,7 @@ class ReceivedViewModel @Inject constructor(
     fun requestList() {
         Timber.tag(TAG).d("requestList: ${_index.value}")
 
-        requirementRepository.getRequirements(RequirementStatus.getReceivedCodes())
+        getRequirementCardsUseCase(RequirementStatus.getReceivedCodes())
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
@@ -45,7 +44,7 @@ class ReceivedViewModel @Inject constructor(
                     sendEvent(BADGE_UPDATE, it.count())
 
                     _receivedList.postValue(it.filter { card ->
-                        when(_index.value) {
+                        when (_index.value) {
                             1 -> card.status == RequirementStatus.Requested
                             2 -> card.status == RequirementStatus.Estimated
                             else -> card.status != null
@@ -64,7 +63,7 @@ class ReceivedViewModel @Inject constructor(
         Timber.tag(TAG).d("onFilterChange: $index")
 
         _index.value = index
-        requirementRepository.getRequirementsFromLocalAsCards(
+        getRequirementCardsFromLocalUseCase(
             when (index) {
                 1 -> listOf(RequirementStatus.Requested.toCode())
                 2 -> listOf(RequirementStatus.Estimated.toCode())
@@ -75,10 +74,13 @@ class ReceivedViewModel @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
                 onSuccess = {
-                    Timber.tag(TAG).d("requestList onNext: $it")
+                    Timber.tag(TAG).d("onFilterChange successfully: $it")
                     _receivedList.postValue(it)
                 },
-                onError = { },
+                onError = {
+                    Timber.tag(TAG).d("onFilterChange failed: $it")
+                    _receivedList.postValue(emptyList())
+                },
             ).addToDisposable()
     }
 

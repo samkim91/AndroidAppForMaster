@@ -31,7 +31,6 @@ class DoneFragment : BaseFragment<FragmentRequirementDoneBinding>(
         Timber.tag(TAG).d("onViewCreated: ")
 
         initLayout()
-
         registerEventObserve()
     }
 
@@ -42,6 +41,12 @@ class DoneFragment : BaseFragment<FragmentRequirementDoneBinding>(
             vm = viewModel
 
             lifecycleOwner = viewLifecycleOwner
+
+            swipeRefreshLayout.setColorSchemeResources(R.color.app_color)
+            swipeRefreshLayout.setOnRefreshListener {
+                viewModel.requestList()
+                swipeRefreshLayout.isRefreshing = false
+            }
 
             doneList.adapter = DoneAdapter(
                 cardClickListener = { requirementId ->
