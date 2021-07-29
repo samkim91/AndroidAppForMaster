@@ -44,8 +44,8 @@ class ProfileViewModel @Inject constructor(
             .addToDisposable()
     }
 
-    fun saveMasterProfileImage() {
-        Timber.tag(TAG).d("saveMasterProfile: ")
+    fun saveProfileImage() {
+        Timber.tag(TAG).d("saveProfileImage: ")
         saveMasterUseCase(
             masterDto = MasterDto(
                 id = _profile.value?.id,
@@ -53,18 +53,19 @@ class ProfileViewModel @Inject constructor(
             ),
             profileImageUri = profileImage.value,
         )
-        .subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribeBy(
-            onSuccess = {
-                Timber.tag(TAG).d("saveMasterProfile successfully: $it")
-//                _profile.value = Profile.fromMasterDto(it)
-            },
-            onError = {
-                Timber.tag(TAG).d("saveMasterProfile failed: $it")
-                setAction(REQUEST_FAILED)
-            }
-        ).addToDisposable()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doAfterTerminate { setAction(DISMISS_LOADING) }
+            .subscribeBy(
+                onSuccess = {
+                    Timber.tag(TAG).d("saveProfileImage successfully: $it")
+                    requestProfile()
+                },
+                onError = {
+                    Timber.tag(TAG).d("saveProfileImage failed: $it")
+                    setAction(REQUEST_FAILED)
+                }
+            ).addToDisposable()
     }
 
     companion object {

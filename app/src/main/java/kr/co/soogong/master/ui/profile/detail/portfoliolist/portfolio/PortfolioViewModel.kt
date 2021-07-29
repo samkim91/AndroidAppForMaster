@@ -39,7 +39,7 @@ class PortfolioViewModel @Inject constructor(
                     portfolio.id?.let { id.postValue(it) }
                     portfolio.title?.let { title.postValue(it) }
                     portfolio.beforeImage?.url?.let { imageBeforeJob.postValue(it.toUri()) }
-                    portfolio.afterImage?.url?.let { imageAfterJob.postValue(it.toUri())}
+                    portfolio.afterImage?.url?.let { imageAfterJob.postValue(it.toUri()) }
                     portfolio.description?.let { description.postValue(it) }
                 },
                 onError = { setAction(GET_PORTFOLIO_FAILED) }
@@ -58,7 +58,8 @@ class PortfolioViewModel @Inject constructor(
                 beforeImageUri = imageBeforeJob.value,
                 afterImageUri = imageAfterJob.value,
             )
-        ).subscribeOn(Schedulers.io())
+        )
+            .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
                 onSuccess = {
@@ -82,7 +83,6 @@ class PortfolioViewModel @Inject constructor(
 
     companion object {
         private const val TAG = "EditPortfolioViewModel"
-
         const val SAVE_PORTFOLIO_SUCCESSFULLY = "SAVE_PORTFOLIO_SUCCESSFULLY"
         const val SAVE_PORTFOLIO_FAILED = "SAVE_PORTFOLIO_FAILED"
         const val GET_PORTFOLIO_FAILED = "GET_PORTFOLIO_FAILED"

@@ -1,18 +1,14 @@
 package kr.co.soogong.master.ui.profile
 
-import android.content.ActivityNotFoundException
-import android.content.ClipData
-import android.content.ClipboardManager
-import android.content.Context.CLIPBOARD_SERVICE
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import gun0912.tedimagepicker.builder.TedImagePicker
 import kr.co.soogong.master.R
-import kr.co.soogong.master.contract.HttpContract
 import kr.co.soogong.master.databinding.FragmentProfileBinding
 import kr.co.soogong.master.ui.base.BaseFragment
+import kr.co.soogong.master.ui.base.BaseViewModel.Companion.DISMISS_LOADING
 import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogBundle
 import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogRecyclerView
 import kr.co.soogong.master.ui.profile.ProfileViewModel.Companion.GET_PROFILE_FAILED
@@ -142,6 +138,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
         viewModel.action.observe(viewLifecycleOwner, EventObserver { event ->
             when (event) {
                 GET_PROFILE_FAILED, REQUEST_FAILED -> requireContext().toast(getString(R.string.error_message_of_request_failed))
+                DISMISS_LOADING -> dismissLoading()
             }
         })
     }
@@ -159,7 +156,8 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
                     .buttonBackground(R.drawable.shape_fill_green_background)
                     .start { uri ->
                         viewModel.profileImage.value = uri
-                        viewModel.saveMasterProfileImage()
+                        showLoading(parentFragmentManager)
+                        viewModel.saveProfileImage()
                     }
             },
             onDenied = { }
