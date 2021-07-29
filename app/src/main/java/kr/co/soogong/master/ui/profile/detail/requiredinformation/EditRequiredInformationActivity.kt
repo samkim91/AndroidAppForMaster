@@ -38,15 +38,7 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
 ) {
     private val viewModel: EditRequiredInformationViewModel by viewModels()
 
-    private val naverMap: NaverMapHelper by lazy {
-        NaverMapHelper(
-            context = this@EditRequiredInformationActivity,
-            fragmentManager = supportFragmentManager,
-            frameLayout = binding.serviceArea.mapFragment,
-            coordinate = viewModel.requiredInformation.value?.coordinate,
-            radius = viewModel.requiredInformation.value?.serviceArea
-        )
-    }
+    private lateinit var naverMapHelper: NaverMapHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -120,7 +112,10 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
                             BottomDialogRecyclerView.newInstance(
                                 dialogBundle = BottomDialogBundle.getServiceAreaBundle(),
                                 itemClick = { _, radius ->
-                                    naverMap.changeServiceArea(radius)
+                                    naverMapHelper.setLocation(
+                                        viewModel.requiredInformation.value?.coordinate!!,
+                                        radius
+                                    )
                                     viewModel.requiredInformation.mutation {
                                         value?.serviceArea = radius
                                     }
@@ -136,6 +131,7 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
 
             defaultButton.setOnClickListener {
                 viewModel.requestApprove()
+
             }
         }
     }
@@ -145,16 +141,26 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
         viewModel.action.observe(this, EventObserver { event ->
             when (event) {
                 GET_PROFILE_SUCCESSFULLY -> {
-                    naverMap
+                    if(::naverMapHelper.isInitialized) {        // 이미 맵이 초기화 되어있다면, 위치만 바꿔준다.
+                        naverMapHelper.setLocation(viewModel.requiredInformation.value?.coordinate, viewModel.requiredInformation.value?.serviceArea)
+                    } else {        // 맵이 초기화 되어 있지 않다면, 초기회한다.
+                        naverMapHelper = NaverMapHelper(
+                            context = this@EditRequiredInformationActivity,
+                            fragmentManager = supportFragmentManager,
+                            frameLayout = binding.serviceArea.mapFragment,
+                            coordinate = viewModel.requiredInformation.value?.coordinate,
+                            radius = viewModel.requiredInformation.value?.serviceArea,
+                        )
+                    }
                 }
                 SAVE_MASTER_INFORMATION_FAILED, GET_PROFILE_FAILED -> toast(getString(R.string.error_message_of_request_failed))
             }
         })
 
         viewModel.event.observe(this, EventObserver { (event, value) ->
-            when(event) {
+            when (event) {
                 MASTER_SUBSCRIPTION_PLAN -> {
-                    when(value) {
+                    when (value) {
                         NotApprovedCodeTable.code -> setLayoutForNotApprovedMaster()
                         RequestApproveCodeTable.code -> setLayoutForRequestApproveMaster()
                         else -> setLayoutForApprovedMaster()
@@ -213,7 +219,8 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
 
             val percentage: Float = filledCount.toFloat() / totalCount.toFloat() * 100f
 
-            requiredProfileCardPercentage.text = getString(R.string.percentage_of_required_information, percentage.toInt())
+            requiredProfileCardPercentage.text =
+                getString(R.string.percentage_of_required_information, percentage.toInt())
 
             if (percentage == 100.0f) {
                 requiredProfileCardPercentage.setTextColor(

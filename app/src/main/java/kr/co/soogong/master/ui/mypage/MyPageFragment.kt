@@ -18,7 +18,6 @@ import kr.co.soogong.master.uihelper.mypage.alarm.AlarmActivityHelper
 import kr.co.soogong.master.uihelper.mypage.notice.NoticeActivityHelper
 import kr.co.soogong.master.uihelper.mypage.notice.detail.NoticeDetailActivityHelper
 import kr.co.soogong.master.utility.EventObserver
-import kr.co.soogong.master.utility.PermissionHelper
 import timber.log.Timber
 
 @AndroidEntryPoint

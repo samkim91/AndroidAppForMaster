@@ -2,7 +2,6 @@ package kr.co.soogong.master.utility
 
 import android.content.Context
 import android.widget.FrameLayout
-import android.widget.Toast
 import androidx.fragment.app.FragmentManager
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.CameraUpdate
@@ -22,11 +21,12 @@ class NaverMapHelper(
     val coordinate: Coordinate?,
     val radius: Int?,
 ) : OnMapReadyCallback {
-    private lateinit var naverMap: NaverMap
-    private lateinit var marker: Marker
+    lateinit var naverMap: NaverMap
+    private var marker = Marker()
     private var circleOverlay = CircleOverlay()
 
     init {
+        Timber.tag(TAG).d("init: $coordinate, $radius")
         PermissionHelper.checkLocationPermission(
             context = context,
             onGranted = {
@@ -42,30 +42,29 @@ class NaverMapHelper(
     }
 
     override fun onMapReady(naverMap: NaverMap) {
+        Timber.tag(TAG).d("onMapReady: $coordinate, $radius")
         this.naverMap = naverMap
-        setLocation()
+        setLocation(coordinate, radius)
     }
 
-    // 맵에 초기 위치를 잡아주는 메소드
-    private fun setLocation() {
-        Timber.tag(TAG).d("setLocation: ")
-
-        coordinate?.let { coordinate ->
-            radius?.let { radius ->
-                // 경위도 위치로 포커스 이동
-                naverMap.moveCamera(
-                    CameraUpdate.scrollTo(
-                        LatLng(
-                            coordinate.latitude!!,
-                            coordinate.longitude!!
-                        )
+    // 카메라 위치를 잡아주는 메소드
+    fun setLocation(coordinate: Coordinate?, radius: Int?) {
+        Timber.tag(TAG).d("setLocation: $coordinate, $radius")
+        coordinate?.let { c ->
+            naverMap.moveCamera(
+                CameraUpdate.scrollTo(
+                    LatLng(
+                        c.latitude!!,
+                        c.longitude!!
                     )
                 )
-                // 줌, 마커와, 서클 등을 조절
-                naverMap.moveCamera(CameraUpdate.zoomTo(ZoomHelper(radius))
+            )
+            setMarker(c)
+
+            radius?.let { r ->
+                naverMap.moveCamera(CameraUpdate.zoomTo(ZoomHelper(r))
                     .finishCallback {
-                        setMarker()
-                        setCircleOverlay(radius)
+                        setCircleOverlay(c, r)
                     }
                 )
             }
@@ -73,12 +72,11 @@ class NaverMapHelper(
     }
 
     // 마커를 그려주는 메소드
-    private fun setMarker() {
-        Timber.tag(TAG).d("setMarker: ")
-
-        coordinate?.let { coordinate ->
-            marker = Marker()
-            marker.position = LatLng(coordinate.latitude!!, coordinate.longitude!!)
+    private fun setMarker(coordinate: Coordinate) {
+        Timber.tag(TAG).d("setMarker: $coordinate")
+        coordinate.let { c ->
+            if (marker.isAdded) marker.map = null
+            marker = Marker(LatLng(c.latitude!!, c.longitude!!))
             marker.width = Marker.SIZE_AUTO
             marker.height = Marker.SIZE_AUTO
             marker.map = naverMap
@@ -86,40 +84,16 @@ class NaverMapHelper(
     }
 
     // 서클을 그려주는 메소드
-    private fun setCircleOverlay(radius: Int) {
-        Timber.tag(TAG).d("setCircleOverlay: ")
-
+    private fun setCircleOverlay(coordinate: Coordinate, radius: Int) {
+        Timber.tag(TAG).d("setCircleOverlay: $coordinate, $radius")
         if (radius == 0) return
 
-        coordinate?.let { coordinate ->
-            if(circleOverlay.isAdded) circleOverlay.map = null
-            circleOverlay = CircleOverlay(
-                LatLng(coordinate.latitude!!, coordinate.longitude!!),
-                (radius * 1000.0)
-            )
+        coordinate.let { c ->
+            if (circleOverlay.isAdded) circleOverlay.map = null
+            circleOverlay = CircleOverlay(LatLng(c.latitude!!, c.longitude!!), (radius * 1000.0))
             circleOverlay.outlineColor = context.resources.getColor(R.color.color_22D47B, null)
             circleOverlay.color = context.resources.getColor(R.color.color_8022D47B, null)
             circleOverlay.map = naverMap
-        }
-    }
-
-    // TODO: 2021/07/20 setLocation 과 통합해도 됨..
-    fun changeServiceArea(radius: Int) {
-        coordinate?.let {
-            naverMap.moveCamera(
-                CameraUpdate.scrollTo(
-                    LatLng(
-                        it.latitude!!,
-                        it.longitude!!
-                    )
-                )
-            )
-            naverMap.moveCamera(CameraUpdate.zoomTo(ZoomHelper(radius))
-                .finishCallback {
-                    if (!marker.isAdded) setMarker()
-                    setCircleOverlay(radius)
-                }
-            )
         }
     }
 
