@@ -10,7 +10,6 @@ import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.profile.detail.portfoliolist.pricebyproject.PriceByProjectViewModel.Companion.GET_PRICE_BY_PROJECT_FAILED
 import kr.co.soogong.master.ui.profile.detail.portfoliolist.pricebyproject.PriceByProjectViewModel.Companion.SAVE_PRICE_BY_PROJECT_FAILED
 import kr.co.soogong.master.ui.profile.detail.portfoliolist.pricebyproject.PriceByProjectViewModel.Companion.SAVE_PRICE_BY_PROJECT_SUCCESSFULLY
-import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.ADD_PORTFOLIO
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.ADD_PRICE_BY_PROJECTS
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_PRICE_BY_PROJECTS
 import kr.co.soogong.master.utility.EventObserver
