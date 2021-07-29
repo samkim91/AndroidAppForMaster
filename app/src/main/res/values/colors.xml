@@ -2,6 +2,7 @@
 <resources>
     <!-- Basic -->
     <color name="app_background_color">#FFFFFF</color>
+    <color name="transparent">#00FFFFFF</color>
 
     <color name="basic_white">#FFFFFF</color>
     <color name="color_F8F8F8">#F8F8F8</color>

@@ -58,12 +58,12 @@ class EditShopImagesViewModel @Inject constructor(
                 shopImagesUris = list.map {
                     it.uri!!
                 }
-            ).subscribeOn(Schedulers.io())
+            )
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
                     onSuccess = {
                         Timber.tag(TAG).d("saveShopImages successfully: $it")
-                        _profile.value = Profile.fromMasterDto(it)
                         setAction(SAVE_SHOP_IMAGES_SUCCESSFULLY)
                     },
                     onError = {
