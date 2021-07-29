@@ -23,16 +23,13 @@ class ServiceAreaFragment : BaseFragment<FragmentSignUpServiceAreaBinding>(
 ) {
     private val viewModel: SignUpViewModel by activityViewModels()
 
-    private val naverMap: NaverMapHelper by lazy {
+    private val naverMapHelper: NaverMapHelper by lazy {
         NaverMapHelper(
             context = requireContext(),
             fragmentManager = childFragmentManager,
             frameLayout = binding.mapView,
-            coordinate = Coordinate(
-                viewModel.latitude.value ?: 0.0,
-                viewModel.longitude.value ?: 0.0
-            ),
-            radius = 0
+            coordinate = Coordinate(viewModel.latitude.value, viewModel.longitude.value),
+            radius = 0,
         )
     }
 
@@ -60,7 +57,12 @@ class ServiceAreaFragment : BaseFragment<FragmentSignUpServiceAreaBinding>(
                                 itemClick = { text, radius ->
                                     viewModel.serviceArea.value = text
                                     viewModel.serviceAreaToInt.value = radius
-                                    naverMap.changeServiceArea(radius)
+                                    naverMapHelper.setLocation(
+                                        Coordinate(
+                                            viewModel.latitude.value,
+                                            viewModel.longitude.value
+                                        ), radius
+                                    )
                                 }
                             )
 
@@ -84,9 +86,8 @@ class ServiceAreaFragment : BaseFragment<FragmentSignUpServiceAreaBinding>(
 
     override fun onResume() {
         super.onResume()
-        naverMap
+        naverMapHelper
     }
-
 
     companion object {
         private const val TAG = "ServiceAreaFragment"
