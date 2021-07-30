@@ -1,5 +1,6 @@
 package kr.co.soogong.master.ui.profile.detail.requiredinformation.shopimages
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -8,6 +9,7 @@ import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.dto.AttachmentDto
 import kr.co.soogong.master.data.dto.profile.MasterDto
 import kr.co.soogong.master.data.model.profile.Profile
+import kr.co.soogong.master.data.model.profile.RequestApproveCodeTable
 import kr.co.soogong.master.domain.usecase.profile.GetProfileUseCase
 import kr.co.soogong.master.domain.usecase.profile.SaveMasterUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
@@ -21,6 +23,9 @@ class EditShopImagesViewModel @Inject constructor(
     private val saveMasterUseCase: SaveMasterUseCase,
 ) : BaseViewModel() {
     private val _profile = MutableLiveData<Profile>()
+    val profile: LiveData<Profile>
+        get() = _profile
+
     val shopImages = ListLiveData<AttachmentDto>()
 
     fun requestShopImages() {
@@ -29,10 +34,10 @@ class EditShopImagesViewModel @Inject constructor(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
-                onSuccess = { profile ->
-                    Timber.tag(TAG).d("requestThumbnails successfully: $profile")
-                    _profile.value = profile
-                    profile.requiredInformation?.shopImages?.let {
+                onSuccess = { masterProfile ->
+                    Timber.tag(TAG).d("requestThumbnails successfully: $masterProfile")
+                    _profile.value = masterProfile
+                    masterProfile.requiredInformation?.shopImages?.let {
                         shopImages.addAll(it)
                     }
                 },
@@ -54,6 +59,7 @@ class EditShopImagesViewModel @Inject constructor(
                     uid = _profile.value?.uid,
                     shopImages = shopImages.value,
                     updateShopImagesYn = true,
+                    approvedStatus = RequestApproveCodeTable.code,
                 ),
                 shopImagesUris = list.map {
                     it.uri!!

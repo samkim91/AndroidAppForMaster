@@ -7,9 +7,11 @@ import dagger.hilt.android.AndroidEntryPoint
 import gun0912.tedimagepicker.builder.TedImagePicker
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.dto.AttachmentDto
+import kr.co.soogong.master.data.model.profile.ApprovedCodeTable
 import kr.co.soogong.master.databinding.FragmentEditShopImagesBinding
 import kr.co.soogong.master.ui.base.BaseFragment
-import kr.co.soogong.master.ui.base.BaseViewModel.Companion.DISMISS_LOADING
+import kr.co.soogong.master.ui.dialog.popup.CustomDialog
+import kr.co.soogong.master.ui.dialog.popup.DialogData
 import kr.co.soogong.master.ui.image.RectangleImageWithCloseAdapter
 import kr.co.soogong.master.ui.profile.detail.requiredinformation.shopimages.EditShopImagesViewModel.Companion.GET_SHOP_IMAGES_FAILED
 import kr.co.soogong.master.ui.profile.detail.requiredinformation.shopimages.EditShopImagesViewModel.Companion.SAVE_SHOP_IMAGES_FAILED
@@ -77,8 +79,20 @@ class EditShopImagesFragment : BaseFragment<FragmentEditShopImagesBinding>(
             )
 
             defaultButton.setOnClickListener {
-                loading.show(parentFragmentManager, loading.tag)
-                viewModel.saveShopImages()
+                if (viewModel.profile.value?.approvedStatus == ApprovedCodeTable.code) {
+                    val dialog = CustomDialog(
+                        dialogData = DialogData.getConfirmingForRequiredDialogData(requireContext()),
+                        yesClick = {
+                            loading.show(parentFragmentManager, loading.tag)
+                            viewModel.saveShopImages()
+                                   },
+                        noClick = { })
+
+                    dialog.show(parentFragmentManager, dialog.tag)
+                } else {
+                    loading.show(parentFragmentManager, loading.tag)
+                    viewModel.saveShopImages()
+                }
             }
         }
     }
@@ -86,7 +100,6 @@ class EditShopImagesFragment : BaseFragment<FragmentEditShopImagesBinding>(
     private fun registerEventObserve() {
         Timber.tag(TAG).d("registerEventObserve: ")
         viewModel.action.observe(viewLifecycleOwner, EventObserver { event ->
-            dismissLoading()
             when (event) {
                 SAVE_SHOP_IMAGES_SUCCESSFULLY -> activity?.onBackPressed()
                 SAVE_SHOP_IMAGES_FAILED, GET_SHOP_IMAGES_FAILED -> requireContext().toast(

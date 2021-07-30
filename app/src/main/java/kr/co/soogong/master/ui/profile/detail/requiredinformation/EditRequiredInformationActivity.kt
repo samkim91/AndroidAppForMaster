@@ -6,15 +6,18 @@ import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
+import kr.co.soogong.master.data.model.profile.ApprovedCodeTable
 import kr.co.soogong.master.data.model.profile.NotApprovedCodeTable
 import kr.co.soogong.master.data.model.profile.RequestApproveCodeTable
 import kr.co.soogong.master.databinding.ActivityEditRequiredInformationBinding
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogBundle
 import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogRecyclerView
+import kr.co.soogong.master.ui.dialog.popup.CustomDialog
+import kr.co.soogong.master.ui.dialog.popup.DialogData
 import kr.co.soogong.master.ui.profile.detail.requiredinformation.EditRequiredInformationViewModel.Companion.GET_PROFILE_FAILED
 import kr.co.soogong.master.ui.profile.detail.requiredinformation.EditRequiredInformationViewModel.Companion.GET_PROFILE_SUCCESSFULLY
-import kr.co.soogong.master.ui.profile.detail.requiredinformation.EditRequiredInformationViewModel.Companion.MASTER_SUBSCRIPTION_PLAN
+import kr.co.soogong.master.ui.profile.detail.requiredinformation.EditRequiredInformationViewModel.Companion.MASTER_APPROVED_STATUS
 import kr.co.soogong.master.ui.profile.detail.requiredinformation.EditRequiredInformationViewModel.Companion.SAVE_MASTER_INFORMATION_FAILED
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerActivityHelper
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_ADDRESS
@@ -81,7 +84,16 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
                     BottomDialogRecyclerView.newInstance(
                         dialogBundle = BottomDialogBundle.getIncreasingYearBundle("career"),
                         itemClick = { _, value ->
-                            viewModel.saveCareerPeriod(value)
+                            if (viewModel.profile.value?.approvedStatus == ApprovedCodeTable.code) {
+                                val dialog = CustomDialog(
+                                    dialogData = DialogData.getConfirmingForRequiredDialogData(this@EditRequiredInformationActivity),
+                                    yesClick = { viewModel.saveCareerPeriod(value) },
+                                    noClick = { })
+
+                                dialog.show(supportFragmentManager, dialog.tag)
+                            } else {
+                                viewModel.saveCareerPeriod(value)
+                            }
                         }
                     )
 
@@ -159,7 +171,7 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
 
         viewModel.event.observe(this, EventObserver { (event, value) ->
             when (event) {
-                MASTER_SUBSCRIPTION_PLAN -> {
+                MASTER_APPROVED_STATUS -> {
                     when (value) {
                         NotApprovedCodeTable.code -> setLayoutForNotApprovedMaster()
                         RequestApproveCodeTable.code -> setLayoutForRequestApproveMaster()
@@ -178,21 +190,20 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
 
     private fun setLayoutForRequestApproveMaster() {
         bind {
-            requiredProfileCardPercentage.visibility = View.GONE
-            groupSawCheckForConfirmedMaster.visibility = View.GONE
-            defaultButton.visibility = View.GONE
-            alertContainerToFillUpRequiredInformation.visibility = View.GONE
-            textSawCheckForConfirmedMaster.text = getString(R.string.waiting_for_confirmation)
-            textSawCheckForConfirmedMaster.setTextColor(getColor(R.color.color_FF711D))
+            alertContainerToFillUpRequiredInformation.isVisible = true
+            requiredProfileCardPercentage.isVisible = true
+            requiredProfileCardPercentage.text = getString(R.string.waiting_for_confirmation)
+            groupSawCheckForConfirmedMaster.isVisible = false
+            defaultButton.isVisible = false
         }
     }
 
     private fun setLayoutForApprovedMaster() {
         bind {
-            requiredProfileCardPercentage.visibility = View.GONE
-            groupSawCheckForConfirmedMaster.visibility = View.VISIBLE
-            defaultButton.visibility = View.GONE
-            alertContainerToFillUpRequiredInformation.visibility = View.GONE
+            alertContainerToFillUpRequiredInformation.isVisible = false
+            requiredProfileCardPercentage.isVisible = false
+            groupSawCheckForConfirmedMaster.isVisible = true
+            defaultButton.isVisible = false
         }
     }
 

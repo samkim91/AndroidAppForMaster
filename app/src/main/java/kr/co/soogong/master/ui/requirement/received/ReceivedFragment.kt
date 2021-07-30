@@ -52,7 +52,7 @@ class ReceivedFragment : BaseFragment<FragmentRequirementReceivedBinding>(
 
             receivedList.adapter =
                 ReceivedAdapter(cardClickListener = { requirementId ->
-                    viewModel.masterSubscriptionPlan.value?.let {
+                    viewModel.masterApprovedStatus.value?.let {
                         if (it == NotApprovedCodeTable.code || it == RequestApproveCodeTable.code) {
                             val dialog =
                                 CustomDialog(
