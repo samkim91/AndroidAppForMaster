@@ -53,7 +53,7 @@ class EditWarrantyInformationFragment : BaseFragment<FragmentEditWarrantyInforma
 
             defaultButton.setOnClickListener {
                 viewModel.warrantyPeriod.observe(viewLifecycleOwner, {
-                    warrantyPeriod.alertVisible = it == 0
+                    warrantyPeriod.alertVisible = it == null || it == 0
                 })
 
                 viewModel.warrantyDescription.observe(viewLifecycleOwner, {
