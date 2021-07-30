@@ -9,8 +9,12 @@ import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.model.major.Major
+import kr.co.soogong.master.data.model.profile.ApprovedCodeTable
+import kr.co.soogong.master.data.model.profile.RequestApproveCodeTable
 import kr.co.soogong.master.databinding.FragmentEditMajorBinding
 import kr.co.soogong.master.ui.base.BaseFragment
+import kr.co.soogong.master.ui.dialog.popup.CustomDialog
+import kr.co.soogong.master.ui.dialog.popup.DialogData
 import kr.co.soogong.master.ui.profile.detail.requiredinformation.major.EditMajorViewModel.Companion.GET_MAJOR_FAILED
 import kr.co.soogong.master.ui.profile.detail.requiredinformation.major.EditMajorViewModel.Companion.SAVE_MAJOR_FAILED
 import kr.co.soogong.master.ui.profile.detail.requiredinformation.major.EditMajorViewModel.Companion.SAVE_MAJOR_SUCCESSFULLY
@@ -75,7 +79,18 @@ class EditMajorFragment : BaseFragment<FragmentEditMajorBinding>(
                     major.alertVisible = it.isNullOrEmpty()
                 })
 
-                if (!major.alertVisible) viewModel.saveMajor()
+                if (major.alertVisible) return@setOnClickListener
+
+                if (viewModel.profile.value?.approvedStatus == ApprovedCodeTable.code) {
+                    val dialog = CustomDialog(
+                        dialogData = DialogData.getConfirmingForRequiredDialogData(requireContext()),
+                        yesClick = { viewModel.saveMajor() },
+                        noClick = { })
+
+                    dialog.show(parentFragmentManager, dialog.tag)
+                } else {
+                    viewModel.saveMajor()
+                }
             }
         }
     }

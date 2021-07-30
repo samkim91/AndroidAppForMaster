@@ -1,5 +1,6 @@
 package kr.co.soogong.master.ui.profile.detail.requiredinformation.major
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -9,6 +10,7 @@ import kr.co.soogong.master.data.dto.profile.MajorDto
 import kr.co.soogong.master.data.dto.profile.MasterDto
 import kr.co.soogong.master.data.model.major.Major
 import kr.co.soogong.master.data.model.profile.Profile
+import kr.co.soogong.master.data.model.profile.RequestApproveCodeTable
 import kr.co.soogong.master.domain.usecase.profile.GetProfileUseCase
 import kr.co.soogong.master.domain.usecase.profile.SaveMasterUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
@@ -22,6 +24,8 @@ class EditMajorViewModel @Inject constructor(
     private val saveMasterUseCase: SaveMasterUseCase,
 ) : BaseViewModel() {
     private val _profile = MutableLiveData<Profile>()
+    val profile: LiveData<Profile>
+        get() = _profile
 
     val majors = ListLiveData<Major>()
 
@@ -32,10 +36,10 @@ class EditMajorViewModel @Inject constructor(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
-                onSuccess = { profile ->
-                    Timber.tag(TAG).d("requestMajor successfully: $profile")
-                    _profile.value = profile
-                    profile.requiredInformation?.majors?.let {
+                onSuccess = { masterProfile ->
+                    Timber.tag(TAG).d("requestMajor successfully: $masterProfile")
+                    _profile.value = masterProfile
+                    masterProfile.requiredInformation?.majors?.let {
                         majors.addAll(it)
                     }
                 },
@@ -54,6 +58,7 @@ class EditMajorViewModel @Inject constructor(
                     id = _profile.value?.id,
                     uid = _profile.value?.uid,
                     majors = MajorDto.fromMajorList(majors.value),
+                    approvedStatus = RequestApproveCodeTable.code,
                 )
             ).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

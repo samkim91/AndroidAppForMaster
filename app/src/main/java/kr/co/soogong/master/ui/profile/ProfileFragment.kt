@@ -6,8 +6,11 @@ import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import gun0912.tedimagepicker.builder.TedImagePicker
 import kr.co.soogong.master.R
+import kr.co.soogong.master.data.model.profile.ApprovedCodeTable
 import kr.co.soogong.master.databinding.FragmentProfileBinding
 import kr.co.soogong.master.ui.base.BaseFragment
+import kr.co.soogong.master.ui.dialog.popup.CustomDialog
+import kr.co.soogong.master.ui.dialog.popup.DialogData
 import kr.co.soogong.master.ui.profile.ProfileViewModel.Companion.GET_PROFILE_FAILED
 import kr.co.soogong.master.ui.profile.ProfileViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.uihelper.profile.*
@@ -134,7 +137,17 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
                     .buttonBackground(R.drawable.shape_fill_green_background)
                     .start { uri ->
                         viewModel.profileImage.value = uri
-                        viewModel.saveMasterProfileImage()
+
+                        if (viewModel.profile.value?.approvedStatus == ApprovedCodeTable.code) {
+                            val dialog = CustomDialog(
+                                dialogData = DialogData.getConfirmingForRequiredDialogData(requireContext()),
+                                yesClick = { viewModel.saveMasterProfileImage() },
+                                noClick = { })
+
+                            dialog.show(parentFragmentManager, dialog.tag)
+                        } else {
+                            viewModel.saveMasterProfileImage()
+                        }
                     }
             },
             onDenied = { }

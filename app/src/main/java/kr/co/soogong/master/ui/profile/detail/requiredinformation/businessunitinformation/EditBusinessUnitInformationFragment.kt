@@ -10,8 +10,11 @@ import com.google.android.material.chip.Chip
 import dagger.hilt.android.AndroidEntryPoint
 import gun0912.tedimagepicker.builder.TedImagePicker
 import kr.co.soogong.master.R
+import kr.co.soogong.master.data.model.profile.ApprovedCodeTable
 import kr.co.soogong.master.databinding.FragmentEditBusinessUnitInformationBinding
 import kr.co.soogong.master.ui.base.BaseFragment
+import kr.co.soogong.master.ui.dialog.popup.CustomDialog
+import kr.co.soogong.master.ui.dialog.popup.DialogData
 import kr.co.soogong.master.ui.profile.detail.requiredinformation.businessunitinformation.EditBusinessUnitInformationViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.ui.profile.detail.requiredinformation.businessunitinformation.EditBusinessUnitInformationViewModel.Companion.SAVE_BUSINESS_INFORMATION_SUCCESSFULLY
 import kr.co.soogong.master.utility.EventObserver
@@ -77,9 +80,20 @@ class EditBusinessUnitInformationFragment :
                 })
 
                 if (viewModel.businessType.value == "프리랜서") {
-                    if (!birthday.alertVisible) viewModel.saveBusinessUnitInformation()
+                    if (birthday.alertVisible) return@setOnClickListener
                 } else {
-                    if (!businessName.alertVisible && !shopName.alertVisible && !businessNumber.alertVisible && !alert.isVisible) viewModel.saveBusinessUnitInformation()
+                    if (businessName.alertVisible || shopName.alertVisible || businessNumber.alertVisible || alert.isVisible) return@setOnClickListener
+                }
+
+                if (viewModel.profile.value?.approvedStatus == ApprovedCodeTable.code) {
+                    val dialog = CustomDialog(
+                        dialogData = DialogData.getConfirmingForRequiredDialogData(requireContext()),
+                        yesClick = { viewModel.saveBusinessUnitInformation() },
+                        noClick = { })
+
+                    dialog.show(parentFragmentManager, dialog.tag)
+                } else {
+                    viewModel.saveBusinessUnitInformation()
                 }
             }
         }

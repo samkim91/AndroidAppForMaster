@@ -3,6 +3,7 @@ package kr.co.soogong.master.ui.profile.detail.requiredinformation.businessuniti
 import android.net.Uri
 import android.view.View
 import androidx.core.net.toUri
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -11,6 +12,7 @@ import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.dto.profile.MasterDto
 import kr.co.soogong.master.data.model.profile.CodeTable
 import kr.co.soogong.master.data.model.profile.Profile
+import kr.co.soogong.master.data.model.profile.RequestApproveCodeTable
 import kr.co.soogong.master.domain.usecase.profile.GetProfileUseCase
 import kr.co.soogong.master.domain.usecase.profile.SaveMasterUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
@@ -23,6 +25,9 @@ class EditBusinessUnitInformationViewModel @Inject constructor(
     private val saveMasterUseCase: SaveMasterUseCase,
 ) : BaseViewModel() {
     private val _profile = MutableLiveData<Profile>()
+    val profile: LiveData<Profile>
+        get() = _profile
+
     val businessType = MutableLiveData("")
     val businessName = MutableLiveData("")
     val shopName = MutableLiveData("")
@@ -36,27 +41,27 @@ class EditBusinessUnitInformationViewModel @Inject constructor(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
-                onSuccess = { profile ->
-                    Timber.tag(TAG).d("requestBusinessUnitInformation successfully: $profile")
+                onSuccess = { masterProfile ->
+                    Timber.tag(TAG).d("requestBusinessUnitInformation successfully: $masterProfile")
 
-                    _profile.value = profile
-                    profile.requiredInformation?.businessUnitInformation?.businessType?.let { businessType ->
+                    this._profile.value = masterProfile
+                    masterProfile.requiredInformation?.businessUnitInformation?.businessType?.let { businessType ->
                         this.businessType.postValue(businessType)
                         if (businessType == "프리랜서") {
-                            profile.requiredInformation.businessUnitInformation.businessNumber?.let {
+                            masterProfile.requiredInformation.businessUnitInformation.businessNumber?.let {
                                 birthday.postValue(it)
                             }
                         } else {
-                            profile.requiredInformation.businessUnitInformation.businessName?.let {
+                            masterProfile.requiredInformation.businessUnitInformation.businessName?.let {
                                 businessName.postValue(it)
                             }
-                            profile.requiredInformation.businessUnitInformation.shopName?.let {
+                            masterProfile.requiredInformation.businessUnitInformation.shopName?.let {
                                 shopName.postValue(it)
                             }
-                            profile.requiredInformation.businessUnitInformation.businessRegistImage?.url?.let {
+                            masterProfile.requiredInformation.businessUnitInformation.businessRegistImage?.url?.let {
                                 businessRegistImage.postValue(it.toUri())
                             }
-                            profile.requiredInformation.businessUnitInformation.businessNumber?.let {
+                            masterProfile.requiredInformation.businessUnitInformation.businessNumber?.let {
                                 businessNumber.postValue(it)
                             }
                         }
@@ -79,6 +84,7 @@ class EditBusinessUnitInformationViewModel @Inject constructor(
                 businessName = businessName.value,
                 shopName = shopName.value,
                 businessNumber = if (businessType.value == "프리랜서") birthday.value else businessNumber.value,
+                approvedStatus = RequestApproveCodeTable.code,
             ),
             businessRegistImageUri = businessRegistImage.value,
         ).subscribeOn(Schedulers.io())
