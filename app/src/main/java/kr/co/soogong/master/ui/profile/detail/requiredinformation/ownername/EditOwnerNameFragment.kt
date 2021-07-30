@@ -5,8 +5,11 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
+import kr.co.soogong.master.data.model.profile.ApprovedCodeTable
 import kr.co.soogong.master.databinding.FragmentEditOwnerNameBinding
 import kr.co.soogong.master.ui.base.BaseFragment
+import kr.co.soogong.master.ui.dialog.popup.CustomDialog
+import kr.co.soogong.master.ui.dialog.popup.DialogData
 import kr.co.soogong.master.ui.profile.detail.requiredinformation.ownername.EditOwnerNameViewModel.Companion.GET_OWNER_NAME_FAILED
 import kr.co.soogong.master.ui.profile.detail.requiredinformation.ownername.EditOwnerNameViewModel.Companion.SAVE_OWNER_NAME_FAILED
 import kr.co.soogong.master.ui.profile.detail.requiredinformation.ownername.EditOwnerNameViewModel.Companion.SAVE_OWNER_NAME_SUCCESSFULLY
@@ -41,7 +44,18 @@ class EditOwnerNameFragment :
                     ownerName.alertVisible = it.isNullOrEmpty()
                 })
 
-                if (!ownerName.alertVisible) viewModel.saveOwnerName()
+                if (ownerName.alertVisible) return@setOnClickListener
+
+                if (viewModel.profile.value?.approvedStatus == ApprovedCodeTable.code) {
+                    val dialog = CustomDialog(
+                        dialogData = DialogData.getConfirmingForRequiredDialogData(requireContext()),
+                        yesClick = { viewModel.saveOwnerName() },
+                        noClick = { })
+
+                    dialog.show(parentFragmentManager, dialog.tag)
+                } else {
+                    viewModel.saveOwnerName()
+                }
             }
         }
     }

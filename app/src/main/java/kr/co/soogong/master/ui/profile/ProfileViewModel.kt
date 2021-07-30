@@ -9,6 +9,7 @@ import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.dto.profile.MasterDto
 import kr.co.soogong.master.data.model.profile.Profile
+import kr.co.soogong.master.data.model.profile.RequestApproveCodeTable
 import kr.co.soogong.master.domain.usecase.profile.GetMasterUseCase
 import kr.co.soogong.master.domain.usecase.profile.SaveMasterUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
@@ -50,6 +51,7 @@ class ProfileViewModel @Inject constructor(
             masterDto = MasterDto(
                 id = _profile.value?.id,
                 uid = _profile.value?.uid,
+                approvedStatus = RequestApproveCodeTable.code,
             ),
             profileImageUri = profileImage.value,
         )

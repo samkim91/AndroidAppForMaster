@@ -1,5 +1,6 @@
 package kr.co.soogong.master.ui.profile.detail.requiredinformation
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -7,8 +8,8 @@ import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.dto.profile.MasterDto
 import kr.co.soogong.master.data.model.profile.Profile
+import kr.co.soogong.master.data.model.profile.RequestApproveCodeTable
 import kr.co.soogong.master.data.model.profile.RequiredInformation
-import kr.co.soogong.master.domain.usecase.auth.GetMasterSubscriptionPlanUseCase
 import kr.co.soogong.master.domain.usecase.profile.GetMasterUseCase
 import kr.co.soogong.master.domain.usecase.profile.SaveMasterUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
@@ -17,11 +18,13 @@ import javax.inject.Inject
 
 @HiltViewModel
 class EditRequiredInformationViewModel @Inject constructor(
-    val getMasterSubscriptionPlanUseCase: GetMasterSubscriptionPlanUseCase,
     private val getMasterUseCase: GetMasterUseCase,
     private val saveMasterUseCase: SaveMasterUseCase,
 ) : BaseViewModel() {
     private val _profile = MutableLiveData<Profile>()
+    val profile: LiveData<Profile>
+        get() = _profile
+
     val requiredInformation = MutableLiveData<RequiredInformation?>()
 
     fun requestRequiredInformation() {
@@ -31,12 +34,12 @@ class EditRequiredInformationViewModel @Inject constructor(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
-                onSuccess = { master ->
-                    val profile = Profile.fromMasterDto(master)
-                    _profile.value = profile
-                    requiredInformation.value = profile.requiredInformation
+                onSuccess = { masterProfile ->
+                    val profileFromMasterDto = Profile.fromMasterDto(masterProfile)
+                    this._profile.value = profileFromMasterDto
+                    requiredInformation.value = profileFromMasterDto.requiredInformation
                     setAction(GET_PROFILE_SUCCESSFULLY)
-                    sendEvent(MASTER_SUBSCRIPTION_PLAN, master.subscriptionPlan!!)
+                    sendEvent(MASTER_APPROVED_STATUS, masterProfile.approvedStatus!!)
                 },
                 onError = {
                     setAction(GET_PROFILE_FAILED)
@@ -51,7 +54,8 @@ class EditRequiredInformationViewModel @Inject constructor(
             MasterDto(
                 id = _profile.value?.id,
                 uid = _profile.value?.uid,
-                openDate = CareerConverter.toOpenDate(careerPeriod)
+                openDate = CareerConverter.toOpenDate(careerPeriod),
+                approvedStatus = RequestApproveCodeTable.code,
             )
         )
             .subscribeOn(Schedulers.io())
@@ -87,7 +91,7 @@ class EditRequiredInformationViewModel @Inject constructor(
             MasterDto(
                 id = _profile.value?.id,
                 uid = _profile.value?.uid,
-                subscriptionPlan = "RequestApprove"
+                approvedStatus = RequestApproveCodeTable.code,
             )
         )
             .subscribeOn(Schedulers.io())
@@ -100,7 +104,7 @@ class EditRequiredInformationViewModel @Inject constructor(
 
     companion object {
         private const val TAG = "EditRequiredInformationViewModel"
-        const val MASTER_SUBSCRIPTION_PLAN = "MASTER_SUBSCRIPTION_PLAN"
+        const val MASTER_APPROVED_STATUS = "MASTER_APPROVED_STATUS"
         const val GET_PROFILE_SUCCESSFULLY = "GET_PROFILE_SUCCESSFULLY"
         const val GET_PROFILE_FAILED = "GET_PROFILE_FAILED"
         const val SAVE_MASTER_INFORMATION_FAILED = "SAVE_MASTER_INFORMATION_FAILED"

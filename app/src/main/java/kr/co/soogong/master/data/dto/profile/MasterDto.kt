@@ -50,6 +50,9 @@ data class MasterDto(
     @SerializedName("subscriptionPlan")
     val subscriptionPlan: String? = null,
 
+    @SerializedName("approvedStatus")
+    val approvedStatus: String? = null,
+
     @SerializedName("public")
     val isPublic: Boolean? = null,
 

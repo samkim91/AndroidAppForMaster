@@ -6,10 +6,10 @@ import kr.co.soogong.master.contract.AppSharedPreferenceContract
 import javax.inject.Inject
 
 @Reusable
-class GetMasterSubscriptionPlanUseCase @Inject constructor(
+class GetMasterApprovedStatusUseCase @Inject constructor(
     private val sharedPreferences: SharedPreferences
 ) {
     operator fun invoke(): String? {
-        return sharedPreferences.getString(AppSharedPreferenceContract.MASTER_SUBSCRIPTION_PLAN, "")
+        return sharedPreferences.getString(AppSharedPreferenceContract.MASTER_APPROVED_STATUS, "")
     }
 }

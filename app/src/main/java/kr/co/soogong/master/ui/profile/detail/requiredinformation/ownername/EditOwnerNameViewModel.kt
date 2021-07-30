@@ -1,5 +1,6 @@
 package kr.co.soogong.master.ui.profile.detail.requiredinformation.ownername
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -7,6 +8,7 @@ import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.dto.profile.MasterDto
 import kr.co.soogong.master.data.model.profile.Profile
+import kr.co.soogong.master.data.model.profile.RequestApproveCodeTable
 import kr.co.soogong.master.domain.usecase.profile.GetProfileUseCase
 import kr.co.soogong.master.domain.usecase.profile.SaveMasterUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
@@ -19,6 +21,8 @@ class EditOwnerNameViewModel @Inject constructor(
     private val saveMasterUseCase: SaveMasterUseCase,
 ) : BaseViewModel() {
     private val _profile = MutableLiveData<Profile>()
+    val profile: LiveData<Profile>
+        get() = _profile
 
     val ownerName = MutableLiveData("")
 
@@ -29,10 +33,10 @@ class EditOwnerNameViewModel @Inject constructor(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
-                onSuccess = { profile ->
-                    Timber.tag(TAG).d("requestOwnerName successfully: $profile")
-                    _profile.value = profile
-                    ownerName.postValue(profile.requiredInformation?.ownerName)
+                onSuccess = { masterProfile ->
+                    Timber.tag(TAG).d("requestOwnerName successfully: $masterProfile")
+                    _profile.value = masterProfile
+                    ownerName.postValue(masterProfile.requiredInformation?.ownerName)
                 },
                 onError = {
                     Timber.tag(TAG).d("requestOwnerName failed: $it")
@@ -48,6 +52,7 @@ class EditOwnerNameViewModel @Inject constructor(
                 id = _profile.value?.id,
                 uid = _profile.value?.uid,
                 ownerName = ownerName.value,
+                approvedStatus = RequestApproveCodeTable.code,
             )
         ).subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

@@ -23,6 +23,9 @@ data class Profile(
     @SerializedName("subscriptionPlan")
     val subscriptionPlan: String?,
 
+    @SerializedName("approvedStatus")
+    val approvedStatus: String?,
+
     @SerializedName("myReview")
     val myReview: MyReview?,
 
@@ -46,6 +49,7 @@ data class Profile(
                 tel = masterDto.tel,
                 representativeName = if (!masterDto.shopName.isNullOrEmpty()) masterDto.shopName else masterDto.ownerName,
                 subscriptionPlan = masterDto.subscriptionPlan,
+                approvedStatus = masterDto.approvedStatus,
                 myReview = MyReview.fromMasterDto(masterDto),
                 myPageUrl = HttpContract.MY_PAGE_URL + masterDto.uid,
                 isPublic = masterDto.isPublic,

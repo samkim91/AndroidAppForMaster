@@ -43,10 +43,8 @@ sealed class CodeTable {
 
         fun findSubscriptionPlanByCode(code: String): CodeTable =
             when(code) {
-                FreeCodeTable.code -> FreeCodeTable
                 GuaranteeCodeTable.code -> GuaranteeCodeTable
-                RequestApproveCodeTable.code -> RequestApproveCodeTable
-                else -> NotApprovedCodeTable
+                else -> FreeCodeTable
             }
     }
 }
@@ -128,7 +126,7 @@ object NoiseCodeTable : CodeTable() {
 
 object FreeCodeTable: CodeTable() {
     override val code: String = "Free"
-    override val inKorean: String = "기본 마스터"
+    override val inKorean: String = "마스터"
 }
 
 object GuaranteeCodeTable: CodeTable() {
@@ -138,12 +136,17 @@ object GuaranteeCodeTable: CodeTable() {
 
 object NotApprovedCodeTable: CodeTable() {
     override val code: String = "NotApproved"
-    override val inKorean: String = "미승인 마스터"
+    override val inKorean: String = "미승인"
 }
 
 object RequestApproveCodeTable: CodeTable() {
     override val code: String = "RequestApprove"
-    override val inKorean: String = "미승인 마스터"
+    override val inKorean: String = "승인 대기"
+}
+
+object ApprovedCodeTable: CodeTable() {
+    override val code: String = "Approved"
+    override val inKorean: String = "승인"
 }
 
 object SoleCodeTable: CodeTable() {
