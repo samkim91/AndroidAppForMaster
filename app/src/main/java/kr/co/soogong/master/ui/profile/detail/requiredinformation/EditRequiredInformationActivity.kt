@@ -126,10 +126,20 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
                                 title = BottomDialogData.choosingServiceAreaTitle,
                                 dialogData = BottomDialogData.getServiceAreaList(),
                                 itemClick = { _, radius ->
-                                    naverMapHelper.setLocation(
-                                        viewModel.requiredInformation.value?.coordinate!!,
-                                        radius
-                                    )
+                                    if (::naverMapHelper.isInitialized) {        // 이미 맵이 초기화 되어있다면, 위치만 바꿔준다.
+                                        naverMapHelper.setLocation(
+                                            viewModel.requiredInformation.value?.coordinate,
+                                            radius
+                                        )
+                                    } else {        // 맵이 초기화 되어 있지 않다면, 초기화한다.
+                                        naverMapHelper = NaverMapHelper(
+                                            context = this@EditRequiredInformationActivity,
+                                            fragmentManager = supportFragmentManager,
+                                            frameLayout = binding.serviceArea.mapFragment,
+                                            coordinate = viewModel.requiredInformation.value?.coordinate,
+                                            radius = radius,
+                                        )
+                                    }
                                     viewModel.requiredInformation.mutation {
                                         value?.serviceArea = radius
                                     }
@@ -155,9 +165,12 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
         viewModel.action.observe(this, EventObserver { event ->
             when (event) {
                 GET_PROFILE_SUCCESSFULLY -> {
-                    if(::naverMapHelper.isInitialized) {        // 이미 맵이 초기화 되어있다면, 위치만 바꿔준다.
-                        naverMapHelper.setLocation(viewModel.requiredInformation.value?.coordinate, viewModel.requiredInformation.value?.serviceArea)
-                    } else {        // 맵이 초기화 되어 있지 않다면, 초기회한다.
+                    if (::naverMapHelper.isInitialized) {        // 이미 맵이 초기화 되어있다면, 위치만 바꿔준다.
+                        naverMapHelper.setLocation(
+                            viewModel.requiredInformation.value?.coordinate,
+                            viewModel.requiredInformation.value?.serviceArea
+                        )
+                    } else {        // 맵이 초기화 되어 있지 않다면, 초기화한다.
                         naverMapHelper = NaverMapHelper(
                             context = this@EditRequiredInformationActivity,
                             fragmentManager = supportFragmentManager,
