@@ -6,11 +6,14 @@ import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import gun0912.tedimagepicker.builder.TedImagePicker
 import kr.co.soogong.master.R
+import kr.co.soogong.master.data.model.profile.ApprovedCodeTable
 import kr.co.soogong.master.databinding.FragmentProfileBinding
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.base.BaseViewModel.Companion.DISMISS_LOADING
 import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogBundle
 import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogRecyclerView
+import kr.co.soogong.master.ui.dialog.popup.CustomDialog
+import kr.co.soogong.master.ui.dialog.popup.DialogData
 import kr.co.soogong.master.ui.profile.ProfileViewModel.Companion.GET_PROFILE_FAILED
 import kr.co.soogong.master.ui.profile.ProfileViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.uihelper.profile.*
@@ -143,9 +146,9 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
         })
     }
 
-    override fun onStart() {
-        super.onStart()
-        Timber.tag(TAG).d("onStart: ")
+    override fun onResume() {
+        super.onResume()
+        Timber.tag(TAG).d("onResume: ")
         viewModel.requestProfile()
     }
 
@@ -156,8 +159,23 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
                     .buttonBackground(R.drawable.shape_fill_green_background)
                     .start { uri ->
                         viewModel.profileImage.value = uri
-                        showLoading(parentFragmentManager)
-                        viewModel.saveProfileImage()
+
+                        if (viewModel.profile.value?.approvedStatus == ApprovedCodeTable.code) {
+                            val dialog = CustomDialog(
+                                dialogData = DialogData.getConfirmingForRequiredDialogData(
+                                    requireContext()
+                                ),
+                                yesClick = {
+                                    showLoading(parentFragmentManager)
+                                    viewModel.saveProfileImage()
+                                },
+                                noClick = { })
+
+                            dialog.show(parentFragmentManager, dialog.tag)
+                        } else {
+                            showLoading(parentFragmentManager)
+                            viewModel.saveProfileImage()
+                        }
                     }
             },
             onDenied = { }

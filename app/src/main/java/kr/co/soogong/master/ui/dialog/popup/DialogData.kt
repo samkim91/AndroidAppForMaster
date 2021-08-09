@@ -71,6 +71,14 @@ data class DialogData(
                 "아니요", context.getColor(R.color.text_basic_color)
             )
 
+        fun getWaitingUntilApprovalDialogData(context: Context) =
+            DialogData(
+                "승인이 완료되어야\n문의 처리가 가능해요.", context.getColor(R.color.text_basic_color),
+                "승인이 완료되면 알림톡으로\n바로 알려드릴게요!", context.getColor(R.color.color_1FC472),
+                "확인", context.getColor(R.color.text_basic_color),
+                "취소", context.getColor(R.color.text_basic_color)
+            )
+
         fun getAskingDeletePortfolioDialogData(context: Context) =
             DialogData(
                 "포트폴리오를 삭제하시겠어요?", context.getColor(R.color.text_basic_color),
@@ -85,6 +93,14 @@ data class DialogData(
                 null, context.getColor(R.color.text_alert_color),
                 "네", context.getColor(R.color.text_basic_color),
                 "아니요", context.getColor(R.color.text_basic_color)
+            )
+
+        fun getConfirmingForRequiredDialogData(context: Context) =
+            DialogData(
+                "해당 정보를 수정하시면,\n수공에서 승인하기 전까지 서비스 이용이 제한됩니다.", context.getColor(R.color.text_basic_color),
+                null, context.getColor(R.color.text_alert_color),
+                "확인", context.getColor(R.color.text_basic_color),
+                "취소", context.getColor(R.color.text_basic_color)
             )
     }
 }

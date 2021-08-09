@@ -48,6 +48,8 @@ class ProfileImageCard @JvmOverloads constructor(
 
                 binding.imageContainer.isVisible = true
                 binding.image.setImageUrl(value)
+            } else {
+                binding.imageContainer.isVisible = false
             }
         }
 
@@ -88,6 +90,8 @@ class ProfileImageCard @JvmOverloads constructor(
     var firstDetailWithSimpleText: String? = ""
         set(value) {
             field = value
+            binding.firstDetail.visibility = View.GONE
+            binding.firstDetail.text = ""
             if (!value.isNullOrEmpty()) {
                 binding.firstDetail.visibility = View.VISIBLE
                 binding.firstDetail.text =

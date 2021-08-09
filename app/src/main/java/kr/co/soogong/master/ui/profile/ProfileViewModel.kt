@@ -9,6 +9,7 @@ import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.dto.profile.MasterDto
 import kr.co.soogong.master.data.model.profile.Profile
+import kr.co.soogong.master.data.model.profile.RequestApproveCodeTable
 import kr.co.soogong.master.domain.usecase.profile.GetMasterUseCase
 import kr.co.soogong.master.domain.usecase.profile.SaveMasterUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
@@ -44,12 +45,13 @@ class ProfileViewModel @Inject constructor(
             .addToDisposable()
     }
 
-    fun saveProfileImage() {
-        Timber.tag(TAG).d("saveProfileImage: ")
+    fun saveMasterProfileImage() {
+        Timber.tag(TAG).d("saveMasterProfileImage: ")
         saveMasterUseCase(
             masterDto = MasterDto(
                 id = _profile.value?.id,
                 uid = _profile.value?.uid,
+                approvedStatus = RequestApproveCodeTable.code,
             ),
             profileImageUri = profileImage.value,
         )
@@ -58,11 +60,10 @@ class ProfileViewModel @Inject constructor(
             .doAfterTerminate { setAction(DISMISS_LOADING) }
             .subscribeBy(
                 onSuccess = {
-                    Timber.tag(TAG).d("saveProfileImage successfully: $it")
-                    requestProfile()
+                    Timber.tag(TAG).d("saveMasterProfile successfully: $it")
                 },
                 onError = {
-                    Timber.tag(TAG).d("saveProfileImage failed: $it")
+                    Timber.tag(TAG).d("saveMasterProfile failed: $it")
                     setAction(REQUEST_FAILED)
                 }
             ).addToDisposable()

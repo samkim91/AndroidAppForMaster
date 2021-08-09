@@ -18,7 +18,6 @@ import kr.co.soogong.master.uihelper.mypage.alarm.AlarmActivityHelper
 import kr.co.soogong.master.uihelper.mypage.notice.NoticeActivityHelper
 import kr.co.soogong.master.uihelper.mypage.notice.detail.NoticeDetailActivityHelper
 import kr.co.soogong.master.utility.EventObserver
-import kr.co.soogong.master.utility.PermissionHelper
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -50,6 +49,8 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(
     }
 
     private fun registerEventObserve() {
+        Timber.tag(TAG).d("registerEventObserve: ")
+
         with(viewModel) {
             action.observe(viewLifecycleOwner, EventObserver { event ->
                 when (event) {
@@ -83,8 +84,9 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(
         }
     }
 
-    override fun onStart() {
-        super.onStart()
+    override fun onResume() {
+        super.onResume()
+        Timber.tag(TAG).d("onResume: ")
         viewModel.initialize()
     }
 

@@ -6,15 +6,18 @@ import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
+import kr.co.soogong.master.data.model.profile.ApprovedCodeTable
 import kr.co.soogong.master.data.model.profile.NotApprovedCodeTable
 import kr.co.soogong.master.data.model.profile.RequestApproveCodeTable
 import kr.co.soogong.master.databinding.ActivityEditRequiredInformationBinding
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogBundle
 import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogRecyclerView
+import kr.co.soogong.master.ui.dialog.popup.CustomDialog
+import kr.co.soogong.master.ui.dialog.popup.DialogData
 import kr.co.soogong.master.ui.profile.detail.requiredinformation.EditRequiredInformationViewModel.Companion.GET_PROFILE_FAILED
 import kr.co.soogong.master.ui.profile.detail.requiredinformation.EditRequiredInformationViewModel.Companion.GET_PROFILE_SUCCESSFULLY
-import kr.co.soogong.master.ui.profile.detail.requiredinformation.EditRequiredInformationViewModel.Companion.MASTER_SUBSCRIPTION_PLAN
+import kr.co.soogong.master.ui.profile.detail.requiredinformation.EditRequiredInformationViewModel.Companion.MASTER_APPROVED_STATUS
 import kr.co.soogong.master.ui.profile.detail.requiredinformation.EditRequiredInformationViewModel.Companion.SAVE_MASTER_INFORMATION_FAILED
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerActivityHelper
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_ADDRESS
@@ -38,15 +41,7 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
 ) {
     private val viewModel: EditRequiredInformationViewModel by viewModels()
 
-    private val naverMap: NaverMapHelper by lazy {
-        NaverMapHelper(
-            context = this@EditRequiredInformationActivity,
-            fragmentManager = supportFragmentManager,
-            frameLayout = binding.serviceArea.mapFragment,
-            coordinate = viewModel.requiredInformation.value?.coordinate,
-            radius = viewModel.requiredInformation.value?.serviceArea
-        )
-    }
+    private lateinit var naverMapHelper: NaverMapHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -89,7 +84,16 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
                     BottomDialogRecyclerView.newInstance(
                         dialogBundle = BottomDialogBundle.getIncreasingYearBundle("career"),
                         itemClick = { _, value ->
-                            viewModel.saveCareerPeriod(value)
+                            if (viewModel.profile.value?.approvedStatus == ApprovedCodeTable.code) {
+                                val dialog = CustomDialog(
+                                    dialogData = DialogData.getConfirmingForRequiredDialogData(this@EditRequiredInformationActivity),
+                                    yesClick = { viewModel.saveCareerPeriod(value) },
+                                    noClick = { })
+
+                                dialog.show(supportFragmentManager, dialog.tag)
+                            } else {
+                                viewModel.saveCareerPeriod(value)
+                            }
                         }
                     )
 
@@ -120,7 +124,20 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
                             BottomDialogRecyclerView.newInstance(
                                 dialogBundle = BottomDialogBundle.getServiceAreaBundle(),
                                 itemClick = { _, radius ->
-                                    naverMap.changeServiceArea(radius)
+                                    if (::naverMapHelper.isInitialized) {        // 이미 맵이 초기화 되어있다면, 위치만 바꿔준다.
+                                        naverMapHelper.setLocation(
+                                            viewModel.requiredInformation.value?.coordinate,
+                                            radius
+                                        )
+                                    } else {        // 맵이 초기화 되어 있지 않다면, 초기화한다.
+                                        naverMapHelper = NaverMapHelper(
+                                            context = this@EditRequiredInformationActivity,
+                                            fragmentManager = supportFragmentManager,
+                                            frameLayout = binding.serviceArea.mapFragment,
+                                            coordinate = viewModel.requiredInformation.value?.coordinate,
+                                            radius = radius,
+                                        )
+                                    }
                                     viewModel.requiredInformation.mutation {
                                         value?.serviceArea = radius
                                     }
@@ -136,6 +153,7 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
 
             defaultButton.setOnClickListener {
                 viewModel.requestApprove()
+
             }
         }
     }
@@ -145,16 +163,29 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
         viewModel.action.observe(this, EventObserver { event ->
             when (event) {
                 GET_PROFILE_SUCCESSFULLY -> {
-                    naverMap
+                    if (::naverMapHelper.isInitialized) {        // 이미 맵이 초기화 되어있다면, 위치만 바꿔준다.
+                        naverMapHelper.setLocation(
+                            viewModel.requiredInformation.value?.coordinate,
+                            viewModel.requiredInformation.value?.serviceArea
+                        )
+                    } else {        // 맵이 초기화 되어 있지 않다면, 초기화한다.
+                        naverMapHelper = NaverMapHelper(
+                            context = this@EditRequiredInformationActivity,
+                            fragmentManager = supportFragmentManager,
+                            frameLayout = binding.serviceArea.mapFragment,
+                            coordinate = viewModel.requiredInformation.value?.coordinate,
+                            radius = viewModel.requiredInformation.value?.serviceArea,
+                        )
+                    }
                 }
                 SAVE_MASTER_INFORMATION_FAILED, GET_PROFILE_FAILED -> toast(getString(R.string.error_message_of_request_failed))
             }
         })
 
         viewModel.event.observe(this, EventObserver { (event, value) ->
-            when(event) {
-                MASTER_SUBSCRIPTION_PLAN -> {
-                    when(value) {
+            when (event) {
+                MASTER_APPROVED_STATUS -> {
+                    when (value) {
                         NotApprovedCodeTable.code -> setLayoutForNotApprovedMaster()
                         RequestApproveCodeTable.code -> setLayoutForRequestApproveMaster()
                         else -> setLayoutForApprovedMaster()
@@ -172,29 +203,38 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
 
     private fun setLayoutForRequestApproveMaster() {
         bind {
-            requiredProfileCardPercentage.visibility = View.GONE
-            groupSawCheckForConfirmedMaster.visibility = View.GONE
-            defaultButton.visibility = View.GONE
-            alertContainerToFillUpRequiredInformation.visibility = View.GONE
-            textSawCheckForConfirmedMaster.text = getString(R.string.waiting_for_confirmation)
-            textSawCheckForConfirmedMaster.setTextColor(getColor(R.color.color_FF711D))
+            alertContainerToFillUpRequiredInformation.isVisible = true
+            requiredProfileCardPercentage.isVisible = true
+            groupSawCheckForConfirmedMaster.isVisible = false
+            defaultButton.isVisible = true
+            defaultButton.isEnabled = false
+            defaultButton.text = getString(R.string.waiting_for_confirmation)
         }
+        setRequirementInformationPercentage()
     }
 
     private fun setLayoutForApprovedMaster() {
         bind {
-            requiredProfileCardPercentage.visibility = View.GONE
-            groupSawCheckForConfirmedMaster.visibility = View.VISIBLE
-            defaultButton.visibility = View.GONE
-            alertContainerToFillUpRequiredInformation.visibility = View.GONE
+            alertContainerToFillUpRequiredInformation.isVisible = false
+            requiredProfileCardPercentage.isVisible = false
+            groupSawCheckForConfirmedMaster.isVisible = true
+            defaultButton.isVisible = false
         }
     }
 
     private fun setLayoutForNotApprovedMaster() {
         bind {
             alertContainerToFillUpRequiredInformation.isVisible = true
+            requiredProfileCardPercentage.isVisible = true
             defaultButton.isVisible = true
+            defaultButton.isEnabled = true
+            defaultButton.text = getString(R.string.request_confirmation)
+        }
+        setRequirementInformationPercentage()
+    }
 
+    private fun setRequirementInformationPercentage() {
+        bind {
             val totalCount = 10
             var filledCount = 0
 
@@ -213,7 +253,8 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
 
             val percentage: Float = filledCount.toFloat() / totalCount.toFloat() * 100f
 
-            requiredProfileCardPercentage.text = getString(R.string.percentage_of_required_information, percentage.toInt())
+            requiredProfileCardPercentage.text =
+                getString(R.string.percentage_of_required_information, percentage.toInt())
 
             if (percentage == 100.0f) {
                 requiredProfileCardPercentage.setTextColor(
@@ -222,7 +263,6 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
                         null
                     )
                 )
-                defaultButton.isEnabled = true
             } else {
                 requiredProfileCardPercentage.setTextColor(
                     resources.getColor(
@@ -230,7 +270,6 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
                         null
                     )
                 )
-                defaultButton.isEnabled = false
             }
         }
     }

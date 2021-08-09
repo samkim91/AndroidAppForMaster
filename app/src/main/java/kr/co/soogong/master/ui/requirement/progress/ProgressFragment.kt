@@ -18,7 +18,6 @@ import kr.co.soogong.master.uihelper.requirment.RequirementsBadge
 import kr.co.soogong.master.uihelper.requirment.action.EndRepairActivityHelper
 import kr.co.soogong.master.uihelper.requirment.action.ViewRequirementActivityHelper
 import kr.co.soogong.master.utility.EventObserver
-import kr.co.soogong.master.utility.PermissionHelper
 import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
 
@@ -93,9 +92,9 @@ class ProgressFragment : BaseFragment<FragmentRequirementProgressBinding>(
         }
     }
 
-    override fun onStart() {
-        super.onStart()
-        Timber.tag(TAG).d("onStart: ")
+    override fun onResume() {
+        super.onResume()
+        Timber.tag(TAG).d("onResume: ")
         viewModel.requestList()
     }
 

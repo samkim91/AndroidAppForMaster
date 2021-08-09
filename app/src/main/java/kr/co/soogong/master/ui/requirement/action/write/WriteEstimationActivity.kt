@@ -17,7 +17,6 @@ import kr.co.soogong.master.ui.image.RectangleImageAdapter
 import kr.co.soogong.master.ui.requirement.action.write.WriteEstimationViewModel.Companion.SEND_MESSAGE_FAILED
 import kr.co.soogong.master.ui.requirement.action.write.WriteEstimationViewModel.Companion.SEND_ESTIMATION_SUCCESSFULLY
 import kr.co.soogong.master.uihelper.image.ImageViewActivityHelper
-import kr.co.soogong.master.uihelper.requirment.action.WriteEstimationActivityHelper
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.extension.addAdditionInfoView
 import kr.co.soogong.master.utility.extension.toast

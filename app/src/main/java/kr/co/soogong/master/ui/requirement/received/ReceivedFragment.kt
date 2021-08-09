@@ -52,27 +52,38 @@ class ReceivedFragment : BaseFragment<FragmentRequirementReceivedBinding>(
 
             receivedList.adapter =
                 ReceivedAdapter(cardClickListener = { requirementId ->
-                    viewModel.masterSubscriptionPlan.value?.let {
-                        if (it == NotApprovedCodeTable.code || it == RequestApproveCodeTable.code) {
-                            val dialog =
-                                CustomDialog(
-                                    DialogData.getAskingFillProfileDialogData(requireContext()),
-                                    yesClick = {
-                                        startActivity(
-                                            EditRequiredInformationActivityHelper.getIntent(
-                                                requireContext()
+                    viewModel.masterApprovedStatus.value?.let {
+                        when (it) {
+                            NotApprovedCodeTable.code -> {
+                                val dialog =
+                                    CustomDialog(
+                                        DialogData.getAskingFillProfileDialogData(requireContext()),
+                                        yesClick = {
+                                            startActivity(
+                                                EditRequiredInformationActivityHelper.getIntent(
+                                                    requireContext()
+                                                )
                                             )
-                                        )
-                                    },
-                                    noClick = { })
-                            dialog.show(parentFragmentManager, dialog.tag)
-                        } else {
-                            startActivity(
-                                ViewRequirementActivityHelper.getIntent(
-                                    requireContext(),
-                                    requirementId,
+                                        },
+                                        noClick = { })
+                                dialog.show(parentFragmentManager, dialog.tag)
+                            }
+                            RequestApproveCodeTable.code -> {
+                                val dialog =
+                                    CustomDialog(
+                                        DialogData.getWaitingUntilApprovalDialogData(requireContext()),
+                                        yesClick = { },
+                                        noClick = { })
+                                dialog.show(parentFragmentManager, dialog.tag)
+                            }
+                            else -> {
+                                startActivity(
+                                    ViewRequirementActivityHelper.getIntent(
+                                        requireContext(),
+                                        requirementId,
+                                    )
                                 )
-                            )
+                            }
                         }
                     }
                 })
@@ -88,9 +99,10 @@ class ReceivedFragment : BaseFragment<FragmentRequirementReceivedBinding>(
         }
     }
 
-    override fun onStart() {
-        super.onStart()
-        Timber.tag(TAG).d("onStart: ")
+    override fun onResume() {
+        super.onResume()
+        Timber.tag(TAG).d("onResume: ")
+        viewModel.requestMasterApprovedStatus()
         viewModel.requestList()
     }
 

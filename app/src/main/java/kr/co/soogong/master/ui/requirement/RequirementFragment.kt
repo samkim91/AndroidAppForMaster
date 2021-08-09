@@ -10,7 +10,7 @@ import kr.co.soogong.master.R
 import kr.co.soogong.master.data.model.profile.NotApprovedCodeTable
 import kr.co.soogong.master.data.model.profile.RequestApproveCodeTable
 import kr.co.soogong.master.databinding.FragmentRequirementBinding
-import kr.co.soogong.master.domain.usecase.auth.GetMasterSubscriptionPlanUseCase
+import kr.co.soogong.master.domain.usecase.auth.GetMasterApprovedStatusUseCase
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.uihelper.profile.EditRequiredInformationActivityHelper
 import kr.co.soogong.master.uihelper.requirment.RequirementsBadge
@@ -23,7 +23,7 @@ class RequirementFragment : BaseFragment<FragmentRequirementBinding>(
 ), RequirementsBadge {
 
     @Inject
-    lateinit var getMasterSubscriptionPlanUseCase: GetMasterSubscriptionPlanUseCase
+    lateinit var getMasterApprovedStatusUseCase: GetMasterApprovedStatusUseCase
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -51,12 +51,13 @@ class RequirementFragment : BaseFragment<FragmentRequirementBinding>(
         }
     }
 
-    override fun onStart() {
-        super.onStart()
+    override fun onResume() {
+        super.onResume()
+        Timber.tag(TAG).d("onResume: ")
         bind {
             // 필수 정보를 입력하라는 안내를 보여줄지 검사
             bottomViewForFillingProfileInfoContainer.isVisible =
-                getMasterSubscriptionPlanUseCase().let { it == NotApprovedCodeTable.code || it == RequestApproveCodeTable.code }
+                getMasterApprovedStatusUseCase().let { it == NotApprovedCodeTable.code || it == RequestApproveCodeTable.code }
         }
     }
 
