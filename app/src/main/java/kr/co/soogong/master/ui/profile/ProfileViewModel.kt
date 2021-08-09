@@ -45,8 +45,8 @@ class ProfileViewModel @Inject constructor(
             .addToDisposable()
     }
 
-    fun saveProfileImage() {
-        Timber.tag(TAG).d("saveProfileImage: ")
+    fun saveMasterProfileImage() {
+        Timber.tag(TAG).d("saveMasterProfileImage: ")
         saveMasterUseCase(
             masterDto = MasterDto(
                 id = _profile.value?.id,
@@ -60,11 +60,10 @@ class ProfileViewModel @Inject constructor(
             .doAfterTerminate { setAction(DISMISS_LOADING) }
             .subscribeBy(
                 onSuccess = {
-                    Timber.tag(TAG).d("saveProfileImage successfully: $it")
-                    requestProfile()
+                    Timber.tag(TAG).d("saveMasterProfile successfully: $it")
                 },
                 onError = {
-                    Timber.tag(TAG).d("saveProfileImage failed: $it")
+                    Timber.tag(TAG).d("saveMasterProfile failed: $it")
                     setAction(REQUEST_FAILED)
                 }
             ).addToDisposable()

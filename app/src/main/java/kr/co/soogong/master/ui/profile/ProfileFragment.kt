@@ -146,9 +146,9 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
         })
     }
 
-    override fun onStart() {
-        super.onStart()
-        Timber.tag(TAG).d("onStart: ")
+    override fun onResume() {
+        super.onResume()
+        Timber.tag(TAG).d("onResume: ")
         viewModel.requestProfile()
     }
 

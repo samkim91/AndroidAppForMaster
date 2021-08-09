@@ -51,8 +51,9 @@ class RequirementFragment : BaseFragment<FragmentRequirementBinding>(
         }
     }
 
-    override fun onStart() {
-        super.onStart()
+    override fun onResume() {
+        super.onResume()
+        Timber.tag(TAG).d("onResume: ")
         bind {
             // 필수 정보를 입력하라는 안내를 보여줄지 검사
             bottomViewForFillingProfileInfoContainer.isVisible =

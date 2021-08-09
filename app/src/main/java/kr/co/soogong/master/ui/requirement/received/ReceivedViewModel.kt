@@ -21,7 +21,7 @@ class ReceivedViewModel @Inject constructor(
     private val getRequirementCardsUseCase: GetRequirementCardsUseCase,
     private val getRequirementCardsFromLocalUseCase: GetRequirementCardsFromLocalUseCase,
 ) : BaseViewModel() {
-    private val _masterApprovedStatus = MutableLiveData<String>(getMasterApprovedStatusUseCase())
+    private val _masterApprovedStatus = MutableLiveData<String>()
     val masterApprovedStatus: LiveData<String>
         get() = _masterApprovedStatus
 
@@ -81,6 +81,11 @@ class ReceivedViewModel @Inject constructor(
                     _receivedList.postValue(emptyList())
                 },
             ).addToDisposable()
+    }
+
+    fun requestMasterApprovedStatus() {
+        Timber.tag(TAG).d("requestMasterApprovedStatus: ")
+        _masterApprovedStatus.value = getMasterApprovedStatusUseCase()
     }
 
     companion object {
