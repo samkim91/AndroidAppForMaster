@@ -9,7 +9,7 @@ import javax.inject.Inject
 class GetMasterApprovedStatusUseCase @Inject constructor(
     private val sharedPreferences: SharedPreferences
 ) {
-    operator fun invoke(): String? {
-        return sharedPreferences.getString(AppSharedPreferenceContract.MASTER_APPROVED_STATUS, "")
+    operator fun invoke(): String {
+        return sharedPreferences.getString(AppSharedPreferenceContract.MASTER_APPROVED_STATUS, "") ?: ""
     }
 }
