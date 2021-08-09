@@ -31,7 +31,6 @@ class DoneFragment : BaseFragment<FragmentRequirementDoneBinding>(
         Timber.tag(TAG).d("onViewCreated: ")
 
         initLayout()
-
         registerEventObserve()
     }
 
@@ -68,9 +67,9 @@ class DoneFragment : BaseFragment<FragmentRequirementDoneBinding>(
         }
     }
 
-    override fun onStart() {
-        super.onStart()
-        Timber.tag(TAG).d("onStart: ")
+    override fun onResume() {
+        super.onResume()
+        Timber.tag(TAG).d("onResume: ")
         viewModel.requestList()
     }
 

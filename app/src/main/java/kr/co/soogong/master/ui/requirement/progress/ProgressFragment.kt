@@ -32,7 +32,6 @@ class ProgressFragment : BaseFragment<FragmentRequirementProgressBinding>(
         Timber.tag(TAG).d("onViewCreated: ")
 
         initLayout()
-
         registerEventObserve()
     }
 
@@ -87,9 +86,9 @@ class ProgressFragment : BaseFragment<FragmentRequirementProgressBinding>(
         }
     }
 
-    override fun onStart() {
-        super.onStart()
-        Timber.tag(TAG).d("onStart: ")
+    override fun onResume() {
+        super.onResume()
+        Timber.tag(TAG).d("onResume: ")
         viewModel.requestList()
     }
 

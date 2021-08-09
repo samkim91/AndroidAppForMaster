@@ -49,6 +49,8 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(
     }
 
     private fun registerEventObserve() {
+        Timber.tag(TAG).d("registerEventObserve: ")
+
         with(viewModel) {
             action.observe(viewLifecycleOwner, EventObserver { event ->
                 when (event) {
@@ -82,8 +84,9 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(
         }
     }
 
-    override fun onStart() {
-        super.onStart()
+    override fun onResume() {
+        super.onResume()
+        Timber.tag(TAG).d("onResume: ")
         viewModel.initialize()
     }
 

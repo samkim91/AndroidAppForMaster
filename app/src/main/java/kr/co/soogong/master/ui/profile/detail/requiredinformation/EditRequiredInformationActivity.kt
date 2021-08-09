@@ -207,10 +207,12 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
         bind {
             alertContainerToFillUpRequiredInformation.isVisible = true
             requiredProfileCardPercentage.isVisible = true
-            requiredProfileCardPercentage.text = getString(R.string.waiting_for_confirmation)
             groupSawCheckForConfirmedMaster.isVisible = false
-            defaultButton.isVisible = false
+            defaultButton.isVisible = true
+            defaultButton.isEnabled = false
+            defaultButton.text = getString(R.string.waiting_for_confirmation)
         }
+        setRequirementInformationPercentage()
     }
 
     private fun setLayoutForApprovedMaster() {
@@ -225,8 +227,16 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
     private fun setLayoutForNotApprovedMaster() {
         bind {
             alertContainerToFillUpRequiredInformation.isVisible = true
+            requiredProfileCardPercentage.isVisible = true
             defaultButton.isVisible = true
+            defaultButton.isEnabled = true
+            defaultButton.text = getString(R.string.request_confirmation)
+        }
+        setRequirementInformationPercentage()
+    }
 
+    private fun setRequirementInformationPercentage() {
+        bind {
             val totalCount = 10
             var filledCount = 0
 
@@ -255,7 +265,6 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
                         null
                     )
                 )
-                defaultButton.isEnabled = true
             } else {
                 requiredProfileCardPercentage.setTextColor(
                     resources.getColor(
@@ -263,7 +272,6 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
                         null
                     )
                 )
-                defaultButton.isEnabled = false
             }
         }
     }
