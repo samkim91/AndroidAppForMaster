@@ -167,14 +167,14 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
                                 ),
                                 yesClick = {
                                     showLoading(parentFragmentManager)
-                                    viewModel.saveProfileImage()
+                                    viewModel.saveMasterProfileImage()
                                 },
                                 noClick = { })
 
                             dialog.show(parentFragmentManager, dialog.tag)
                         } else {
                             showLoading(parentFragmentManager)
-                            viewModel.saveProfileImage()
+                            viewModel.saveMasterProfileImage()
                         }
                     }
             },
