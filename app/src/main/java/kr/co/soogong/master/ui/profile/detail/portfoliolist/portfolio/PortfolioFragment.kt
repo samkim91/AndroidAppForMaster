@@ -10,6 +10,7 @@ import gun0912.tedimagepicker.builder.TedImagePicker
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentEditPortfolioBinding
 import kr.co.soogong.master.ui.base.BaseFragment
+import kr.co.soogong.master.ui.base.BaseViewModel.Companion.DISMISS_LOADING
 import kr.co.soogong.master.ui.profile.detail.portfoliolist.portfolio.PortfolioViewModel.Companion.GET_PORTFOLIO_FAILED
 import kr.co.soogong.master.ui.profile.detail.portfoliolist.portfolio.PortfolioViewModel.Companion.SAVE_PORTFOLIO_FAILED
 import kr.co.soogong.master.ui.profile.detail.portfoliolist.portfolio.PortfolioViewModel.Companion.SAVE_PORTFOLIO_SUCCESSFULLY
@@ -62,13 +63,17 @@ class PortfolioFragment : BaseFragment<FragmentEditPortfolioBinding>(
                     jobTitle.alertVisible = it.isNullOrEmpty()
                 })
 
-                alert.isVisible = viewModel.imageBeforeJob.value?.equals(Uri.EMPTY)!! || viewModel.imageAfterJob.value?.equals(Uri.EMPTY)!!
+                alert.isVisible =
+                    viewModel.imageBeforeJob.value?.equals(Uri.EMPTY)!! || viewModel.imageAfterJob.value?.equals(
+                        Uri.EMPTY
+                    )!!
 
                 viewModel.description.observe(viewLifecycleOwner, {
                     jobDescription.alertVisible = it.length < 10
                 })
 
-                if(!jobTitle.alertVisible && !alert.isVisible && !jobDescription.alertVisible) {
+                if (!jobTitle.alertVisible && !alert.isVisible && !jobDescription.alertVisible) {
+                    showLoading(parentFragmentManager)
                     viewModel.savePortfolio()
                 }
             }
@@ -98,6 +103,7 @@ class PortfolioFragment : BaseFragment<FragmentEditPortfolioBinding>(
     private fun registerEventObserve() {
         Timber.tag(TAG).d("registerEventObserve: ")
         viewModel.action.observe(viewLifecycleOwner, EventObserver { event ->
+            dismissLoading()
             when (event) {
                 SAVE_PORTFOLIO_SUCCESSFULLY -> activity?.onBackPressed()
                 SAVE_PORTFOLIO_FAILED, GET_PORTFOLIO_FAILED -> requireContext().toast(getString(R.string.error_message_of_request_failed))

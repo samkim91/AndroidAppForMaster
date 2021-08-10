@@ -1,11 +1,14 @@
 package kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview
 
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.BottomDialogRecyclerViewBinding
 import timber.log.Timber
 import java.io.Serializable
@@ -13,17 +16,12 @@ import java.io.Serializable
 class BottomDialogRecyclerView() : BottomSheetDialogFragment() {
     lateinit var binding: BottomDialogRecyclerViewBinding
 
-    private val titleTest: String? by lazy {
-        arguments?.getString(TITLE)
+    private val dialogBundle: BottomDialogBundle? by lazy {
+        arguments?.getParcelable(DIALOG_DATA)
     }
 
     @Suppress("UNCHECKED_CAST")
-    private val dialogDataTest: List<BottomDialogData>? by lazy {
-        arguments?.getSerializable(DIALOG_DATA) as List<BottomDialogData>
-    }
-
-    @Suppress("UNCHECKED_CAST")
-    private val itemClickTest: (String, Int) -> Unit by lazy {
+    private val itemClick: (String, Int) -> Unit by lazy {
         arguments?.getSerializable(ITEM_CLICK) as (String, Int) -> Unit
     }
 
@@ -48,28 +46,37 @@ class BottomDialogRecyclerView() : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
         Timber.tag(TAG).d("onViewCreated: ")
 
-        binding.dialogTitle.text = titleTest
+        with(binding) {
+            dialogBundle?.let {
+                if(it.title.isNotEmpty()) {
+                    dialogTitle.text = it.title
+                    dialogTitle.isVisible = true
+                    dialogSubtitle.gravity = Gravity.START
+                    dialogSubtitle.setTextAppearance(R.style.small_text_style_regular)
+                }
 
-        binding.bottomSheetDialogRecyclerview.adapter = BottomDialogAdapter(itemClickListener = { text, value ->
-            Timber.tag(TAG).w(" $text is clicked / value is $value")
-            itemClickTest(text, value)
-            dismiss()
-        })
+                dialogSubtitle.text = it.subtitle
 
-        (binding.bottomSheetDialogRecyclerview.adapter as? BottomDialogAdapter)?.submitList(dialogDataTest)
+                bottomSheetDialogRecyclerview.adapter = BottomDialogAdapter(itemClickListener = { text, value ->
+                    Timber.tag(TAG).w(" $text is clicked / value is $value")
+                    itemClick(text, value)
+                    dismiss()
+                })
+
+                (bottomSheetDialogRecyclerview.adapter as? BottomDialogAdapter)?.submitList(it.list)
+
+            }
+        }
     }
 
-
     companion object{
-        private const val TAG = "CustomBottomSheetDialog"
-        private const val TITLE = "TITLE"
+        private const val TAG = "BottomSheetDialog"
         private const val DIALOG_DATA = "DIALOG_DATA"
         private const val ITEM_CLICK = "ITEM_CLICK"
 
-        fun newInstance(title: String, dialogData: List<BottomDialogData>, itemClick: (String, Int) -> Unit): BottomDialogRecyclerView {
+        fun newInstance(dialogBundle: BottomDialogBundle, itemClick: (String, Int) -> Unit): BottomDialogRecyclerView {
             val args = Bundle()
-            args.putString(TITLE, title)
-            args.putSerializable(DIALOG_DATA, dialogData as Serializable)
+            args.putParcelable(DIALOG_DATA, dialogBundle)
             args.putSerializable(ITEM_CLICK, itemClick as Serializable)
 
             return BottomDialogRecyclerView().apply { arguments = args }

@@ -9,7 +9,8 @@ import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.model.requirement.RequirementCard
 import kr.co.soogong.master.data.model.requirement.RequirementStatus
 import kr.co.soogong.master.domain.usecase.auth.GetMasterApprovedStatusUseCase
-import kr.co.soogong.master.domain.usecase.requirement.GetReceivedRequirementListUseCase
+import kr.co.soogong.master.domain.usecase.requirement.GetRequirementCardsFromLocalUseCase
+import kr.co.soogong.master.domain.usecase.requirement.GetRequirementCardsUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import timber.log.Timber
 import javax.inject.Inject
@@ -17,7 +18,8 @@ import javax.inject.Inject
 @HiltViewModel
 class ReceivedViewModel @Inject constructor(
     val getMasterApprovedStatusUseCase: GetMasterApprovedStatusUseCase,
-    private val getReceivedRequirementListUseCase: GetReceivedRequirementListUseCase
+    private val getRequirementCardsUseCase: GetRequirementCardsUseCase,
+    private val getRequirementCardsFromLocalUseCase: GetRequirementCardsFromLocalUseCase,
 ) : BaseViewModel() {
     private val _masterApprovedStatus = MutableLiveData<String>()
     val masterApprovedStatus: LiveData<String>
@@ -29,17 +31,39 @@ class ReceivedViewModel @Inject constructor(
 
     private val _index = MutableLiveData<Int>()
 
-    fun onFilterChange(index: Int) {
-        Timber.tag(TAG).d("onFilterChange: $index")
-        _index.value = index
-        requestList()
-    }
-
     fun requestList() {
         Timber.tag(TAG).d("requestList: ${_index.value}")
 
-        getReceivedRequirementListUseCase(
-            when(_index.value){
+        getRequirementCardsUseCase(RequirementStatus.getReceivedCodes())
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeBy(
+                onNext = {
+                    Timber.tag(TAG).d("requestList onNext: $it")
+                    sendEvent(BADGE_UPDATE, it.count())
+
+                    _receivedList.postValue(it.filter { card ->
+                        when (_index.value) {
+                            1 -> card.status == RequirementStatus.Requested
+                            2 -> card.status == RequirementStatus.Estimated
+                            else -> card.status != null
+                        }
+                    })
+                },
+                onComplete = { },
+                onError = {
+                    Timber.tag(TAG).d("requestList failed: $it")
+                    _receivedList.postValue(emptyList())
+                },
+            ).addToDisposable()
+    }
+
+    fun onFilterChange(index: Int) {
+        Timber.tag(TAG).d("onFilterChange: $index")
+
+        _index.value = index
+        getRequirementCardsFromLocalUseCase(
+            when (index) {
                 1 -> listOf(RequirementStatus.Requested.toCode())
                 2 -> listOf(RequirementStatus.Estimated.toCode())
                 else -> RequirementStatus.getReceivedCodes()
@@ -49,18 +73,13 @@ class ReceivedViewModel @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
                 onSuccess = {
-                    Timber.tag(TAG).d("requestList successfully: $it")
-                    if(_index.value == 0 || _index.value == null) sendEvent(BADGE_UPDATE, it.count())
-                    if(_index.value == 2) {
-                        _receivedList.postValue(it.filter { list -> list.status == RequirementStatus.Estimated })
-                    } else {
-                        _receivedList.postValue(it)
-                    }
+                    Timber.tag(TAG).d("onFilterChange successfully: $it")
+                    _receivedList.postValue(it)
                 },
                 onError = {
-                    Timber.tag(TAG).d("requestList failed: $it")
+                    Timber.tag(TAG).d("onFilterChange failed: $it")
                     _receivedList.postValue(emptyList())
-                }
+                },
             ).addToDisposable()
     }
 

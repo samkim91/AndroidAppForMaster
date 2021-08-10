@@ -57,11 +57,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="20dp"
-                app:subscriptionPlan="@{vm.profile.subscriptionPlan}"
                 app:layout_constraintBottom_toBottomOf="@id/user_name"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/user_name"
-                app:layout_constraintTop_toTopOf="@id/user_name" />
+                app:layout_constraintTop_toTopOf="@id/user_name"
+                app:subscriptionPlan="@{vm.profile.subscriptionPlan}"
+                tools:text="개런티 마스터" />
 
             <kr.co.soogong.master.ui.widget.ReviewBox
                 android:id="@+id/review_box"
@@ -76,11 +77,10 @@
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/show_profile_button"
                 style="@style/medium_text_style.bold"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="20dp"
+                android:layout_width="@dimen/gap_0"
+                android:layout_height="@dimen/gap_40"
+                android:layout_marginStart="@dimen/gap_20"
+                android:layout_marginEnd="@dimen/gap_20"
                 android:background="@drawable/shape_fill_green_background"
                 android:text="@string/open_my_page"
                 android:textColor="@color/basic_white"
@@ -88,16 +88,31 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/review_box" />
 
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/request_review_by_sharing_button"
+                style="@style/medium_text_style.bold"
+                android:layout_width="@dimen/gap_0"
+                android:layout_height="@dimen/gap_40"
+                android:layout_marginStart="@dimen/gap_20"
+                android:layout_marginTop="@dimen/gap_10"
+                android:layout_marginEnd="@dimen/gap_20"
+                android:background="@drawable/shape_fill_white_board_green"
+                android:text="@string/request_review_button_text"
+                android:textColor="@color/color_1FC472"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/show_profile_button" />
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/banner_image"
-                android:layout_width="0dp"
-                android:layout_height="120dp"
-                android:layout_marginTop="32dp"
+                android:layout_width="@dimen/gap_0"
+                android:layout_height="@dimen/gap_120"
+                android:layout_marginTop="@dimen/gap_24"
                 android:scaleType="centerCrop"
                 android:src="@drawable/ic_banner_6"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/show_profile_button" />
+                app:layout_constraintTop_toBottomOf="@id/request_review_by_sharing_button" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/line"

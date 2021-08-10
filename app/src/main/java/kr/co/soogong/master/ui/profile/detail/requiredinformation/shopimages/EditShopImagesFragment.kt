@@ -82,11 +82,15 @@ class EditShopImagesFragment : BaseFragment<FragmentEditShopImagesBinding>(
                 if (viewModel.profile.value?.approvedStatus == ApprovedCodeTable.code) {
                     val dialog = CustomDialog(
                         dialogData = DialogData.getConfirmingForRequiredDialogData(requireContext()),
-                        yesClick = { viewModel.saveShopImages() },
+                        yesClick = {
+                            loading.show(parentFragmentManager, loading.tag)
+                            viewModel.saveShopImages()
+                                   },
                         noClick = { })
 
                     dialog.show(parentFragmentManager, dialog.tag)
                 } else {
+                    loading.show(parentFragmentManager, loading.tag)
                     viewModel.saveShopImages()
                 }
             }

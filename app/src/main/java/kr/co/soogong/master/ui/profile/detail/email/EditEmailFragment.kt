@@ -7,7 +7,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentEditEmailBinding
 import kr.co.soogong.master.ui.base.BaseFragment
-import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogData
+import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogBundle
 import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogRecyclerView
 import kr.co.soogong.master.ui.profile.detail.email.EditEmailViewModel.Companion.GET_EMAIL_FAILED
 import kr.co.soogong.master.ui.profile.detail.email.EditEmailViewModel.Companion.SAVE_EMAIL_FAILED
@@ -46,7 +46,7 @@ class EditEmailFragment :
 
                 // 하나의 alert text 에 두개 모두를 만족해야 패스할 수 있는 방법을 찾아봐야함 ..
                 viewModel.domain.value?.let {
-                    if(!ValidationHelper.isValidDomain(it)) email.alertVisible = true
+                    if (!ValidationHelper.isValidDomain(it)) email.alertVisible = true
                 }
 
                 if (!email.alertVisible) viewModel.saveEmailInfo()
@@ -55,17 +55,18 @@ class EditEmailFragment :
             email.addDropdownClickListener {
                 val bottomDialog =
                     BottomDialogRecyclerView.newInstance(
-                        title = BottomDialogData.insertingEmailTitle,
-                        dialogData = BottomDialogData.getEmailDomains(),
+                        dialogBundle = BottomDialogBundle.getEmailDomainsBundle(),
                         itemClick = { domain, _ ->
-                            if(domain != BottomDialogData.getEmailDomains().last().text) {
-                                viewModel.domain.value = domain
-                                email.secondDetailView.hint = getString(R.string.email_domain_default_hint_text)
-                                email.secondDetailView.isEnabled = false
-                            } else {
+                            if (domain == BottomDialogBundle.getEmailDomainsBundle().list.last().key) {
                                 viewModel.domain.value = ""
-                                email.secondDetailView.hint = getString(R.string.email_domain_type_hint_text)
+                                email.secondDetailView.hint =
+                                    getString(R.string.email_domain_type_hint_text)
                                 email.secondDetailView.isEnabled = true
+                            } else {
+                                viewModel.domain.value = domain
+                                email.secondDetailView.hint =
+                                    getString(R.string.email_domain_default_hint_text)
+                                email.secondDetailView.isEnabled = false
                             }
                         }
                     )
