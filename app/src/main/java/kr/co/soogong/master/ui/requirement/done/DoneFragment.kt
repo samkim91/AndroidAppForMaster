@@ -42,6 +42,12 @@ class DoneFragment : BaseFragment<FragmentRequirementDoneBinding>(
 
             lifecycleOwner = viewLifecycleOwner
 
+            swipeRefreshLayout.setColorSchemeResources(R.color.app_color)
+            swipeRefreshLayout.setOnRefreshListener {
+                viewModel.requestList()
+                swipeRefreshLayout.isRefreshing = false
+            }
+
             doneList.adapter = DoneAdapter(
                 cardClickListener = { requirementId ->
                     startActivity(

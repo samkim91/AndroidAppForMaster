@@ -43,6 +43,12 @@ class ProgressFragment : BaseFragment<FragmentRequirementProgressBinding>(
 
             lifecycleOwner = viewLifecycleOwner
 
+            swipeRefreshLayout.setColorSchemeResources(R.color.app_color)
+            swipeRefreshLayout.setOnRefreshListener {
+                viewModel.requestList()
+                swipeRefreshLayout.isRefreshing = false
+            }
+
             progressList.adapter = ProgressAdapter(
                 cardClickListener = { requirementId ->
                     startActivity(

@@ -8,7 +8,7 @@ import kr.co.soogong.master.data.model.requirement.RequirementCard
 import kr.co.soogong.master.databinding.ViewHolderRequirementItemBinding
 
 // Requirement Card viewHolder 들의 추상클래스
-abstract class EstimationCardViewHolder(
+abstract class RequirementCardViewHolder(
     open val binding: ViewHolderRequirementItemBinding,
 ) : RecyclerView.ViewHolder(binding.root) {
     open fun binding(
@@ -32,7 +32,7 @@ abstract class EstimationCardViewHolder(
 // 견적요청 상태
 class RequestedViewHolder(
     override val binding: ViewHolderRequirementItemBinding,
-) : EstimationCardViewHolder(binding) {
+) : RequirementCardViewHolder(binding) {
     override fun binding(
         requirementCard: RequirementCard,
         cardClickListener: ((requirementId: Int) -> Unit),
@@ -58,7 +58,7 @@ class RequestedViewHolder(
 // 매칭대기 상태
 class EstimatedViewHolder(
     override val binding: ViewHolderRequirementItemBinding,
-) : EstimationCardViewHolder(binding) {
+) : RequirementCardViewHolder(binding) {
     override fun binding(
         requirementCard: RequirementCard,
         cardClickListener: ((requirementId: Int) -> Unit),
@@ -86,7 +86,7 @@ class EstimatedViewHolder(
 // 시공진행중 상태
 class RepairingViewHolder(
     override val binding: ViewHolderRequirementItemBinding,
-) : EstimationCardViewHolder(binding) {
+) : RequirementCardViewHolder(binding) {
     override fun binding(
         requirementCard: RequirementCard,
         cardClickListener: ((requirementId: Int) -> Unit),
@@ -124,7 +124,7 @@ class RepairingViewHolder(
 // 고객완료요청 상태
 class RequestFinishViewHolder(
     override val binding: ViewHolderRequirementItemBinding,
-) : EstimationCardViewHolder(binding) {
+) : RequirementCardViewHolder(binding) {
     override fun binding(
         requirementCard: RequirementCard,
         cardClickListener: ((requirementId: Int) -> Unit),
@@ -153,7 +153,7 @@ class RequestFinishViewHolder(
 // 시공완료 상태
 class DoneViewHolder(
     override val binding: ViewHolderRequirementItemBinding,
-) : EstimationCardViewHolder(binding) {
+) : RequirementCardViewHolder(binding) {
     override fun binding(
         requirementCard: RequirementCard,
         cardClickListener: ((requirementId: Int) -> Unit),
@@ -192,7 +192,7 @@ class DoneViewHolder(
 // 평가완료 상태
 class ClosedViewHolder(
     override val binding: ViewHolderRequirementItemBinding,
-) : EstimationCardViewHolder(binding) {
+) : RequirementCardViewHolder(binding) {
     override fun binding(
         requirementCard: RequirementCard,
         cardClickListener: ((requirementId: Int) -> Unit),
@@ -227,7 +227,7 @@ class ClosedViewHolder(
 // 시공취소 상태
 class CanceledViewHolder(
     override val binding: ViewHolderRequirementItemBinding,
-) : EstimationCardViewHolder(binding) {
+) : RequirementCardViewHolder(binding) {
     override fun binding(
         requirementCard: RequirementCard,
         cardClickListener: ((requirementId: Int) -> Unit),

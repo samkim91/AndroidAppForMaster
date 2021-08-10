@@ -214,4 +214,6 @@ dependencies {
 
     // Read More Textview
     implementation "kr.co.prnd:readmore-textview:$readMoreTextViewVersion"
+
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:$swipeRefreshLayout"
 }

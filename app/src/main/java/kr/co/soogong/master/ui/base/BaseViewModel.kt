@@ -48,4 +48,8 @@ abstract class BaseViewModel : ViewModel(), LifecycleObserver {
     fun sendEvent(event: String, message: Any){
         _event.value = Event(event to message)
     }
+
+    companion object {
+        const val DISMISS_LOADING = "DISMISS_LOADING"
+    }
 }

@@ -2,6 +2,7 @@
 <resources>
     <!-- Basic -->
     <color name="app_background_color">#FFFFFF</color>
+    <color name="transparent">#00FFFFFF</color>
 
     <color name="basic_white">#FFFFFF</color>
     <color name="color_F8F8F8">#F8F8F8</color>
@@ -15,6 +16,7 @@
     <color name="color_E500664E">#E500664E</color>
     <color name="color_212121">#212121</color>
     <color name="color_121212">#121212</color>
+    <color name="color_2E2E2E">#2E2E2E</color>
     <color name="color_22D47B">#22D47B</color>
     <color name="color_1FC472">#1FC472</color>
     <color name="color_8022D47B">#8022D47B</color>
@@ -25,7 +27,6 @@
     <color name="color_FFFFFF">#FFFFFF</color>
     <color name="color_00664E">#00664E</color>
     <color name="color_C4C4C4">#C4C4C4</color>
-    <color name="color_2E2E2E">#2E2E2E</color>
 
     <color name="text_basic_color">@color/color_121212</color>
     <color name="text_primary_color">@color/color_616161</color>

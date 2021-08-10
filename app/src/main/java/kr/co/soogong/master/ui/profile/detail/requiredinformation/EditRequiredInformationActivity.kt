@@ -11,7 +11,7 @@ import kr.co.soogong.master.data.model.profile.NotApprovedCodeTable
 import kr.co.soogong.master.data.model.profile.RequestApproveCodeTable
 import kr.co.soogong.master.databinding.ActivityEditRequiredInformationBinding
 import kr.co.soogong.master.ui.base.BaseActivity
-import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogData
+import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogBundle
 import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogRecyclerView
 import kr.co.soogong.master.ui.dialog.popup.CustomDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData
@@ -82,8 +82,7 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
             career.addDefaultButtonClickListener {
                 val bottomDialog =
                     BottomDialogRecyclerView.newInstance(
-                        title = BottomDialogData.insertingCareerTitle,
-                        dialogData = BottomDialogData.getWarrantyPeriodList(),
+                        dialogBundle = BottomDialogBundle.getIncreasingYearBundle("career"),
                         itemClick = { _, value ->
                             if (viewModel.profile.value?.approvedStatus == ApprovedCodeTable.code) {
                                 val dialog = CustomDialog(
@@ -123,8 +122,7 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
                     onGranted = {
                         val bottomDialog =
                             BottomDialogRecyclerView.newInstance(
-                                title = BottomDialogData.choosingServiceAreaTitle,
-                                dialogData = BottomDialogData.getServiceAreaList(),
+                                dialogBundle = BottomDialogBundle.getServiceAreaBundle(),
                                 itemClick = { _, radius ->
                                     if (::naverMapHelper.isInitialized) {        // 이미 맵이 초기화 되어있다면, 위치만 바꿔준다.
                                         naverMapHelper.setLocation(

@@ -4,39 +4,74 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="data"
-            type="kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogData" />
+            type="kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogItem" />
 
         <variable
             name="item_click_lister"
             type="android.view.View.OnClickListener" />
     </data>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:onClick="@{item_click_lister}">
+        
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/gap_20"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/icon_barrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="end"
+            app:constraint_referenced_ids="icon"
+            />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/icon_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="icon, icon_barrier"
+            android:visibility="gone"/>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/content"
             style="@style/medium_text_style.bold"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:paddingTop="@dimen/gap_16"
-            android:paddingBottom="@dimen/gap_16"
+            android:layout_marginTop="@dimen/gap_20"
+            android:layout_marginBottom="@dimen/gap_20"
             android:textColor="@color/color_121212"
-            android:text="@{data.text}"
+            android:text="@{data.key}"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="@id/icon_barrier"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/line"
             tools:text="내용" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/line"
             android:layout_width="match_parent"
             android:layout_height="@dimen/line_height"
-            android:layout_marginStart="@dimen/gap_13"
-            android:layout_marginEnd="@dimen/gap_13"
-            android:background="@color/color_EEEEEE" />
-    </LinearLayout>
+            android:layout_marginStart="@dimen/gap_20"
+            android:layout_marginEnd="@dimen/gap_20"
+            android:background="@color/color_EEEEEE"
+            app:layout_constraintTop_toBottomOf="@+id/content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -2,12 +2,12 @@ package kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview
 
 import androidx.recyclerview.widget.DiffUtil
 
-class BottomDialogItemDiffUtil : DiffUtil.ItemCallback<BottomDialogData>() {
-    override fun areItemsTheSame(oldItem: BottomDialogData, newItem: BottomDialogData): Boolean {
-        return oldItem.text == newItem.text
+class BottomDialogItemDiffUtil : DiffUtil.ItemCallback<BottomDialogItem>() {
+    override fun areItemsTheSame(oldItem: BottomDialogItem, newItem: BottomDialogItem): Boolean {
+        return oldItem.key == newItem.key
     }
 
-    override fun areContentsTheSame(oldItem: BottomDialogData, newItem: BottomDialogData): Boolean {
+    override fun areContentsTheSame(oldItem: BottomDialogItem, newItem: BottomDialogItem): Boolean {
         return oldItem == newItem
     }
 }
