@@ -1,10 +1,12 @@
 package kr.co.soogong.master.ui.image
 
 import android.os.Bundle
+import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
@@ -45,23 +47,31 @@ class ImageActivity : BaseActivity<ActivityImageBinding>(
             with(sliderViewPager) {
                 offscreenPageLimit = 1
                 adapter = ImageSliderAdapter()
-                currentItem = startPosition
                 registerOnPageChangeCallback(object : OnPageChangeCallback() {
                     override fun onPageSelected(position: Int) {
                         super.onPageSelected(position)
+                        Timber.tag(TAG).i("onPageSelected: $position")
                         setCurrentIndicator(position)
                     }
                 })
-                if(!images.isNullOrEmpty()) {
+                if (!images.isNullOrEmpty()) {
                     setList(images)
-                    setupIndicators(images.size)
-                    binding.sliderViewPager.setCurrentItem(startPosition, false)
+                    initIndicators(images.size)
+                    // 아래 postDelayed 를 사용한 이유는, TouchImageview library 사용하다보니, ViewPager2에 모든 recyclerview Items 를 만들고,
+                    // 초기값으로 0번째 item 을 셋하는 문제가 있어서, 약 0.5초 후에 선택된 사진을 보여주기 위함.
+                    postDelayed({
+                        Timber.tag(TAG).i("setCurrentItem: $startPosition")
+                        setCurrentItem(startPosition, false)
+                        visibility = View.VISIBLE
+                    }, 500)
                 }
             }
         }
     }
 
-    private fun setupIndicators(count: Int) {
+    // 인디케이터 init
+    private fun initIndicators(count: Int) {
+        Timber.tag(TAG).d("initIndicators: $count")
         val indicators = arrayOfNulls<ImageView>(count)
         val params = LinearLayout.LayoutParams(
             ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT
@@ -82,7 +92,9 @@ class ImageActivity : BaseActivity<ActivityImageBinding>(
         }
     }
 
+    // 인디케이터에 변화주는 코드. 선택된 것을 활성화, 선택되지 않은 것들을 비활성화한다.
     fun setCurrentIndicator(position: Int) {
+        Timber.tag(TAG).d("setCurrentIndicator: $position")
         val childCount: Int = binding.layoutIndicators.childCount
         for (i in 0 until childCount) {
             val imageView = binding.layoutIndicators.getChildAt(i) as ImageView
