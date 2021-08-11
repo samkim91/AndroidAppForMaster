@@ -37,6 +37,7 @@ allprojects {
 //                includeModule("com.linkedin.dexmaker", "dexmaker-mockito")
 //            }
 //        }
+        maven { url 'https://jitpack.io' }
         maven { url 'https://devrepo.kakao.com/nexus/content/groups/public/' }
         maven { url 'https://naver.jfrog.io/artifactory/maven/' }
     }
@@ -102,4 +103,5 @@ ext {
     readMoreTextViewVersion = '1.0.0'
 
     swipeRefreshLayout = '1.1.0'
+    touchImageView = '3.1.0'
 }
