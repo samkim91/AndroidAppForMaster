@@ -70,7 +70,11 @@ fun addEstimationDetail(
     if (estimationDto.price != null) {
         val view = EstimationItem(context)
         view.key = context.getString(R.string.estimation_total_cost)
-        view.value = "${DecimalFormat("#,###").format(estimationDto.price)}원"
+        view.value = if (estimationDto.price != 0) {
+            "${DecimalFormat("#,###").format(estimationDto.price)}원"
+        } else {
+            context.getString(R.string.not_estimated_text)
+        }
 
         viewGroup.addView(view, params)
     }

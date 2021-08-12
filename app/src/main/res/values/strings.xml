@@ -109,6 +109,7 @@
     <string name="requirements_card_end_time">견적 마감일 : %s</string>
     <string name="requirements_card_amount_title">나의 견적가</string>
     <string name="requirements_card_amount_done_title">최종 시공가</string>
+    <string name="not_estimated_text">견적 미발송</string>
 
     <!-- View Requirement -->
     <string name="view_estimate_customer_review_title">고객 리뷰</string>
