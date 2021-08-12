@@ -17,6 +17,7 @@ import kr.co.soogong.master.ui.profile.detail.portfoliolist.portfolio.PortfolioV
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.ADD_PORTFOLIO
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_PORTFOLIO
 import kr.co.soogong.master.utility.EventObserver
+import kr.co.soogong.master.utility.FileHelper
 import kr.co.soogong.master.utility.PermissionHelper
 import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
@@ -83,7 +84,14 @@ class PortfolioFragment : BaseFragment<FragmentEditPortfolioBinding>(
                     onGranted = {
                         TedImagePicker.with(requireContext())
                             .buttonBackground(R.drawable.shape_fill_green_background)
-                            .start { uri -> viewModel.imageBeforeJob.value = uri }
+                            .start { uri ->
+                                if (FileHelper.isImageExtension(uri, requireContext()) == false) {
+                                    requireContext().toast(getString(R.string.invalid_image_extension))
+                                    return@start
+                                }
+
+                                viewModel.imageBeforeJob.value = uri
+                            }
                     },
                     onDenied = { })
             }
@@ -93,7 +101,14 @@ class PortfolioFragment : BaseFragment<FragmentEditPortfolioBinding>(
                     onGranted = {
                         TedImagePicker.with(requireContext())
                             .buttonBackground(R.drawable.shape_fill_green_background)
-                            .start { uri -> viewModel.imageAfterJob.value = uri }
+                            .start { uri ->
+                                if (FileHelper.isImageExtension(uri, requireContext()) == false) {
+                                    requireContext().toast(getString(R.string.invalid_image_extension))
+                                    return@start
+                                }
+
+                                viewModel.imageAfterJob.value = uri
+                            }
                     },
                     onDenied = { })
             }
