@@ -109,6 +109,7 @@
     <string name="requirements_card_end_time">견적 마감일 : %s</string>
     <string name="requirements_card_amount_title">나의 견적가</string>
     <string name="requirements_card_amount_done_title">최종 시공가</string>
+    <string name="not_estimated_text">견적 미발송</string>
 
     <!-- View Requirement -->
     <string name="view_estimate_customer_review_title">고객 리뷰</string>
@@ -305,6 +306,7 @@
     <string name="permission_denied_status_message">권한을 거부하셨습니다. 앱을 사용하시려면 [앱 설정]-[권한] 에서 권한을 허용해주세요.</string>
 
     <string name="maximum_images_count">사진은 최대 10장까지 업로드 가능합니다.</string>
+    <string name="invalid_image_extension">지원하지 않는 이미지 형식입니다.\njpg, jpeg, png 만 업로드 가능합니다.</string>
     <string name="firebase_auth_too_many_requests">너무 많은 요청이 있습니다. 잠시 후 다시 시도해주세요.</string>
     <string name="firebase_auth_invalid_credentials">휴대전화 번호 또는 인증번호가 올바르지 않습니다.</string>
 

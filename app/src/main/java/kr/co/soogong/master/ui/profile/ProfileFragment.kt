@@ -23,6 +23,7 @@ import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.
 import kr.co.soogong.master.uihelper.profile.PortfolioListActivityHelper.PORTFOLIO
 import kr.co.soogong.master.uihelper.profile.PortfolioListActivityHelper.PRICE_BY_PROJECTS
 import kr.co.soogong.master.utility.EventObserver
+import kr.co.soogong.master.utility.FileHelper
 import kr.co.soogong.master.utility.PermissionHelper
 import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
@@ -158,6 +159,11 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
                 TedImagePicker.with(requireContext())
                     .buttonBackground(R.drawable.shape_fill_green_background)
                     .start { uri ->
+                        if (FileHelper.isImageExtension(uri, requireContext()) == false) {
+                            requireContext().toast(getString(R.string.invalid_image_extension))
+                            return@start
+                        }
+
                         viewModel.profileImage.value = uri
 
                         if (viewModel.profile.value?.approvedStatus == ApprovedCodeTable.code) {

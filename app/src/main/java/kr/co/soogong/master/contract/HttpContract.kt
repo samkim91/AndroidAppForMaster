@@ -36,7 +36,7 @@ object HttpContract {
     const val MY_PAGE_URL = "https://soogong.co.kr/master/detail/"
     const val GET_MASTER_BY_UID = "master/find-by-uid"
     const val SAVE_MASTER = "master/save"
-    const val REQUEST_REVIEW_BY_SHARING = "https://www.soogong.co.kr/my-soogong/easy-review/"
+    const val REQUEST_REVIEW_BY_SHARING = "https://soogong.co.kr/my-soogong/easy-review/"
     //endregion
 
     //region Portfolio

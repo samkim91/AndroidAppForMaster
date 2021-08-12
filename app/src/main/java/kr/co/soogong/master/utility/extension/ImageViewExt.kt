@@ -18,16 +18,6 @@ fun ImageView.setImageUrl(url: String?) {
     }
 }
 
-@BindingAdapter("bind:image_url_for_slide")
-fun ImageView.setImageUrlForSlide(url: String?) {
-    url?.let {
-        Glide.with(this.context)
-            .load(it)
-            .centerInside()
-            .into(this)
-    }
-}
-
 @BindingAdapter("bind:image_uri")
 fun ImageView.setImageUri(uri: Uri?) {
     uri?.let {
