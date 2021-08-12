@@ -17,6 +17,7 @@ import kr.co.soogong.master.ui.profile.detail.requiredinformation.shopimages.Edi
 import kr.co.soogong.master.ui.profile.detail.requiredinformation.shopimages.EditShopImagesViewModel.Companion.SAVE_SHOP_IMAGES_FAILED
 import kr.co.soogong.master.ui.profile.detail.requiredinformation.shopimages.EditShopImagesViewModel.Companion.SAVE_SHOP_IMAGES_SUCCESSFULLY
 import kr.co.soogong.master.utility.EventObserver
+import kr.co.soogong.master.utility.FileHelper
 import kr.co.soogong.master.utility.PermissionHelper
 import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
@@ -55,6 +56,12 @@ class EditShopImagesFragment : BaseFragment<FragmentEditShopImagesBinding>(
                                 resources.getString(R.string.maximum_images_count)
                             )
                             .startMultiImage { uriList ->
+                                if (FileHelper.isImageExtension(uriList, requireContext()) == false)
+                                {
+                                    requireContext().toast(getString(R.string.invalid_image_extension))
+                                    return@startMultiImage
+                                }
+
                                 viewModel.shopImages.addAll(uriList.map {
                                     AttachmentDto(
                                         id = null,
@@ -85,7 +92,7 @@ class EditShopImagesFragment : BaseFragment<FragmentEditShopImagesBinding>(
                         yesClick = {
                             loading.show(parentFragmentManager, loading.tag)
                             viewModel.saveShopImages()
-                                   },
+                        },
                         noClick = { })
 
                     dialog.show(parentFragmentManager, dialog.tag)

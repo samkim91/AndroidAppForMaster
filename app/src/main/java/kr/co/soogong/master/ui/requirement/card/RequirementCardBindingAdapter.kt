@@ -71,5 +71,9 @@ fun AmountView.setAmount(status: String?, priceAmount: Int?) {
             ""
         }
     }
-    priceAmount?.let { detail = "${DecimalFormat("#,###").format(it)}원" }
+    priceAmount?.let {
+        detail =
+            if (it != 0) "${DecimalFormat("#,###").format(it)}원"
+            else context.getString(R.string.not_estimated_text)
+    }
 }

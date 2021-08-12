@@ -27,8 +27,8 @@ android {
         applicationId "kr.co.soogong.master"
         minSdkVersion rootProject.minSdkVersion
         targetSdkVersion rootProject.targetSdkVersion
-        versionCode 24
-        versionName "1.1.0"
+        versionCode 25
+        versionName "1.1.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -215,5 +215,9 @@ dependencies {
     // Read More Textview
     implementation "kr.co.prnd:readmore-textview:$readMoreTextViewVersion"
 
+    // Swipe Refresh Layout
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:$swipeRefreshLayout"
+
+    // Touch Imageview
+    implementation "com.github.MikeOrtiz:TouchImageView:$touchImageView"
 }

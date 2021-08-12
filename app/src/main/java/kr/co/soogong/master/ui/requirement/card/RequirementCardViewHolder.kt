@@ -213,7 +213,7 @@ class ClosedViewHolder(
             firstDate.setFirstDate(requirementCard.status?.toString(), requirementCard.estimationDto?.repair?.actualDate)
 
             myAmount.visibility = View.VISIBLE
-            myAmount.setAmount(requirementCard.status?.toString(), requirementCard.estimationDto?.price)
+            myAmount.setAmount(requirementCard.status?.toString(), requirementCard.estimationDto?.repair?.actualPrice)
 
             setCardClickListener {
                 cardClickListener(requirementCard.id)

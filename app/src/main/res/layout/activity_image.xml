@@ -7,11 +7,11 @@
         android:layout_height="match_parent"
         android:background="@color/color_212121">
 
-
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/sliderViewPager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

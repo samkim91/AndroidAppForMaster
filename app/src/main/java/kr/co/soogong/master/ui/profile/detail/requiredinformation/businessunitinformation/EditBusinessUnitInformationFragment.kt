@@ -18,6 +18,7 @@ import kr.co.soogong.master.ui.dialog.popup.DialogData
 import kr.co.soogong.master.ui.profile.detail.requiredinformation.businessunitinformation.EditBusinessUnitInformationViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.ui.profile.detail.requiredinformation.businessunitinformation.EditBusinessUnitInformationViewModel.Companion.SAVE_BUSINESS_INFORMATION_SUCCESSFULLY
 import kr.co.soogong.master.utility.EventObserver
+import kr.co.soogong.master.utility.FileHelper
 import kr.co.soogong.master.utility.PermissionHelper
 import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
@@ -52,6 +53,11 @@ class EditBusinessUnitInformationFragment :
                         TedImagePicker.with(requireContext())
                             .buttonBackground(R.drawable.shape_fill_green_background)
                             .start { uri ->
+                                if (FileHelper.isImageExtension(uri, requireContext()) == false) {
+                                    requireContext().toast(getString(R.string.invalid_image_extension))
+                                    return@start
+                                }
+
                                 viewModel.businessRegistImage.value = uri
                             }
                     },
