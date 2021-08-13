@@ -7,6 +7,7 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class WarrantyInformation(
     val warrantyPeriod: Int?,
+    val warrantyPeriodForLayout: String?,
     val warrantyDescription: String?,
 ) : Parcelable{
     companion object {

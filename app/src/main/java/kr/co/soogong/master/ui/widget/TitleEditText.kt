@@ -94,44 +94,6 @@ class TitleEditText @JvmOverloads constructor(
         binding.detail.background = drawable
     }
 
-    private lateinit var textWatcher: TextWatcher
-
-    fun addTextChangedListener(
-        beforeTextChanged: (
-            text: CharSequence?,
-            start: Int,
-            count: Int,
-            after: Int
-        ) -> Unit = { _, _, _, _ -> },
-        onTextChanged: (
-            text: CharSequence?,
-            start: Int,
-            count: Int,
-            after: Int
-        ) -> Unit = { _, _, _, _ -> },
-        afterTextChanged: (text: Editable?) -> Unit = {}
-    ) {
-        textWatcher = object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-                afterTextChanged.invoke(s)
-            }
-
-            override fun beforeTextChanged(
-                text: CharSequence?,
-                start: Int,
-                count: Int,
-                after: Int
-            ) {
-                beforeTextChanged.invoke(text, start, count, after)
-            }
-
-            override fun onTextChanged(text: CharSequence?, start: Int, before: Int, count: Int) {
-                onTextChanged.invoke(text, start, before, count)
-            }
-        }
-        binding.detail.addTextChangedListener(textWatcher)
-    }
-
     fun addFocusChangeListener(
         onFocusChange: (
             view: View?,

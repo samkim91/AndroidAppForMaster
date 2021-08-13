@@ -6,14 +6,16 @@ import android.net.Uri
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.CenterInside
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 
 @BindingAdapter("bind:image_url")
 fun ImageView.setImageUrl(url: String?) {
     url?.let {
         Glide.with(this.context)
             .load(it)
-            .centerCrop()
-//            .transform(CenterInside())
+            .transform(CenterCrop(), RoundedCorners(16))
             .into(this)
     }
 }
@@ -23,8 +25,7 @@ fun ImageView.setImageUri(uri: Uri?) {
     uri?.let {
         Glide.with(this.context)
             .load(it)
-            .centerCrop()
-//            .transform(CenterCrop())
+            .transform(CenterCrop(), RoundedCorners(16))
             .into(this)
     }
 }

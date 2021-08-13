@@ -17,15 +17,18 @@ data class BottomDialogBundle(
                 list = BottomDialogItem.getServiceAreaList(),
             )
 
-        fun getIncreasingYearBundle(type: String): BottomDialogBundle =
+        fun getWarrantyPeriodBundle(): BottomDialogBundle =
             BottomDialogBundle(
                 title = "",
-                subtitle = when (type) {
-                    "career" -> "경력"
-                    "warranty" -> "A/S 보증기간"
-                    else -> ""
-                },
-                list = BottomDialogItem.getIncreasingYearList(),
+                subtitle = "A/S 보증기간",
+                list = BottomDialogItem.getWarrantyPeriodList(),
+            )
+
+        fun getCareerYearBundle(): BottomDialogBundle =
+            BottomDialogBundle(
+                title = "",
+                subtitle = "경력",
+                list = BottomDialogItem.getCareerYearList(),
             )
 
         fun getEmailDomainsBundle() =

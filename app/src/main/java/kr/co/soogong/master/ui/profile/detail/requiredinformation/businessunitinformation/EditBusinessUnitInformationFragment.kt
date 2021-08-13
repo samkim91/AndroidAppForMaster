@@ -11,6 +11,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import gun0912.tedimagepicker.builder.TedImagePicker
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.model.profile.ApprovedCodeTable
+import kr.co.soogong.master.data.model.profile.CorporateCodeTable
+import kr.co.soogong.master.data.model.profile.FreelancerCodeTable
+import kr.co.soogong.master.data.model.profile.SoleCodeTable
 import kr.co.soogong.master.databinding.FragmentEditBusinessUnitInformationBinding
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.dialog.popup.CustomDialog
@@ -70,7 +73,7 @@ class EditBusinessUnitInformationFragment :
                 })
 
                 viewModel.shopName.observe(viewLifecycleOwner, {
-                    shopName.alertVisible = it.isNullOrEmpty()
+                    shopName.alertVisible = it.length < 2 || it.length > 20
                 })
 
                 viewModel.businessNumber.observe(viewLifecycleOwner, {
@@ -81,12 +84,8 @@ class EditBusinessUnitInformationFragment :
                     alert.visibility = if (it == Uri.EMPTY) View.VISIBLE else View.GONE
                 })
 
-                viewModel.birthday.observe(viewLifecycleOwner, {
-                    birthday.alertVisible = it.isNullOrEmpty()
-                })
-
-                if (viewModel.businessType.value == "프리랜서") {
-                    if (birthday.alertVisible) return@setOnClickListener
+                if (viewModel.businessType.value == FreelancerCodeTable.code) {
+                    if (shopName.alertVisible || businessNumber.alertVisible || alert.isVisible) return@setOnClickListener
                 } else {
                     if (businessName.alertVisible || shopName.alertVisible || businessNumber.alertVisible || alert.isVisible) return@setOnClickListener
                 }
@@ -111,21 +110,20 @@ class EditBusinessUnitInformationFragment :
 
             businessUnitType.addCheckedChangeListener { group, position ->
                 when (position) {
-                    group.getChildAt(0).id, group.getChildAt(1).id -> {
+                    group.getChildAt(2).id -> {     // 프리랜서일 경우 레이아웃
+                        viewModel.businessType.value = FreelancerCodeTable.code
+                        businessName.isVisible = false
+                        shopName.subTitleVisible = true
+                        businessNumber.title = getString(R.string.requesting_birthday_label)
+                        businessRegistImageHolderLabel.text = getString(R.string.identical_image_holder_label)
+                    }
+                    else -> {       // 사업자일 경우 레이아웃
                         viewModel.businessType.value =
-                            if (position == group.getChildAt(0).id) "개인사업자" else "법인사업자"
-                        businessUnitGroup.visibility = View.VISIBLE
-                        birthday.visibility = View.GONE
-                    }
-                    group.getChildAt(2).id -> {
-                        viewModel.businessType.value = "프리랜서"
-                        businessUnitGroup.visibility = View.GONE
-                        birthday.visibility = View.VISIBLE
-                    }
-                    else -> {
-                        viewModel.businessType.value = ""
-                        businessUnitGroup.visibility = View.GONE
-                        birthday.visibility = View.GONE
+                            if (position == group.getChildAt(0).id) SoleCodeTable.code else CorporateCodeTable.code
+                        businessName.isVisible = true
+                        shopName.subTitleVisible = false
+                        businessNumber.title = getString(R.string.requesting_business_number_label)
+                        businessRegistImageHolderLabel.text = getString(R.string.business_identical_image_holder_label)
                     }
                 }
             }

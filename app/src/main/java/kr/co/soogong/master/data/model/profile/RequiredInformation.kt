@@ -5,6 +5,7 @@ import kotlinx.parcelize.Parcelize
 import kr.co.soogong.master.data.dto.AttachmentDto
 import kr.co.soogong.master.data.dto.profile.MasterDto
 import kr.co.soogong.master.data.model.major.Major
+import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogItem
 import kr.co.soogong.master.ui.profile.detail.requiredinformation.CareerConverter
 
 @Parcelize
@@ -35,6 +36,9 @@ data class RequiredInformation(
                 ),
                 warrantyInformation = WarrantyInformation(
                     warrantyPeriod = masterDto.warrantyPeriod,
+                    warrantyPeriodForLayout = BottomDialogItem.getWarrantyPeriodList().find { item ->
+                        item.value == masterDto.warrantyPeriod
+                    }?.key,
                     warrantyDescription = masterDto.warrantyDescription,
                 ),
                 career = masterDto.openDate?.let { CareerConverter.toCareer(it) },
