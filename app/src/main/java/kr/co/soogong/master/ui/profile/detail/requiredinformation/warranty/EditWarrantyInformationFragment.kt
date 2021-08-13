@@ -2,6 +2,7 @@ package kr.co.soogong.master.ui.profile.detail.requiredinformation.warranty
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
@@ -41,8 +42,12 @@ class EditWarrantyInformationFragment : BaseFragment<FragmentEditWarrantyInforma
                 Timber.tag(TAG).w("Dropdown Clicked")
                 val bottomDialog =
                     BottomDialogRecyclerView.newInstance(
-                        dialogBundle = BottomDialogBundle.getIncreasingYearBundle("warranty"),
-                        itemClick = { _, value ->
+                        dialogBundle = BottomDialogBundle.getWarrantyPeriodBundle(),
+                        itemClick = { key, value ->
+                            if(value == -1) {
+                                viewModel.warrantyDescription.value = ""
+                            }
+                            viewModel.warrantyPeriodForLayout.value = key
                             viewModel.warrantyPeriod.value = value
                         }
                     )
@@ -52,14 +57,18 @@ class EditWarrantyInformationFragment : BaseFragment<FragmentEditWarrantyInforma
 
             defaultButton.setOnClickListener {
                 viewModel.warrantyPeriod.observe(viewLifecycleOwner, {
-                    warrantyPeriod.alertVisible = it == null || it == 0
+                    warrantyPeriod.alertVisible = it == null
                 })
 
                 viewModel.warrantyDescription.observe(viewLifecycleOwner, {
-                    warrantyDescription.alertVisible = it.isNullOrEmpty()
+                    warrantyDescription.alertVisible = it.length < 10
                 })
 
-                if (!warrantyPeriod.alertVisible && !warrantyDescription.alertVisible) viewModel.saveWarrantyInfo()
+                if (viewModel.warrantyPeriod.value != -1) {
+                    if (!warrantyPeriod.alertVisible && !warrantyDescription.alertVisible) viewModel.saveWarrantyInfo()
+                } else {
+                    if (!warrantyPeriod.alertVisible) viewModel.saveWarrantyInfo()
+                }
             }
         }
     }

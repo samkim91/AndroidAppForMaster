@@ -224,11 +224,17 @@
 - 시공 설명 : 600*600 타일 기준 9장이 1평 입니다.</string>
 
     <string name="get_images_button_text">사진 가져오기</string>
+    <string name="requesting_shop_name_subtitle">업체 이름이 없을 경우 시공하시는 분의 이름을 입력해주세요.</string>
+    <string name="requesting_business_number_label">사업자등록번호를 입력해주세요.</string>
+    <string name="requesting_birthday_label">생년월일을 입력해주세요.</string>
     <string name="business_identical_image_holder_label">사업자등록증 사진을 올려주세요.</string>
+    <string name="identical_image_holder_label">신분증 정면 사진을 올려주세요.</string>
     <string name="certification_code">인증번호</string>
     <string name="certification_text">인증</string>
     <string name="retype_text">재입력</string>
     <string name="kilo_meters">km</string>
+    <string name="years">%d년</string>
+
 
     <string name="request_review_template">[수공 리뷰 작성 요청]\n
             \n
@@ -272,11 +278,11 @@
     <string name="format_string">%s %s</string>
     <string name="at_text">\@</string>
 
-    <!-- view reivew box -->
+    <!-- view review box -->
     <string name="recommend_rate_label">추천도</string>
     <string name="review_count_label">리뷰 수</string>
 
-    <!-- My reivews -->
+    <!-- My reviews -->
     <string name="my_reviews_action_bar_label">나의 리뷰 보기</string>
     <string name="empty_reviews_text">아직 남겨진 리뷰가 없습니다.</string>
     <string name="my_review_label">💬 리뷰</string>

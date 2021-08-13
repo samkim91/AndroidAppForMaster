@@ -7,6 +7,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.dto.profile.MasterDto
+import kr.co.soogong.master.data.model.profile.ApprovedCodeTable
 import kr.co.soogong.master.data.model.profile.Profile
 import kr.co.soogong.master.data.model.profile.RequestApproveCodeTable
 import kr.co.soogong.master.data.model.profile.RequiredInformation
@@ -26,6 +27,8 @@ class EditRequiredInformationViewModel @Inject constructor(
         get() = _profile
 
     val requiredInformation = MutableLiveData<RequiredInformation?>()
+
+    val percentage = MutableLiveData<Float>()
 
     fun requestRequiredInformation() {
         Timber.tag(TAG).d("requestRequiredInformation: ")
@@ -55,7 +58,7 @@ class EditRequiredInformationViewModel @Inject constructor(
                 id = _profile.value?.id,
                 uid = _profile.value?.uid,
                 openDate = CareerConverter.toOpenDate(careerPeriod),
-                approvedStatus = RequestApproveCodeTable.code,
+                approvedStatus = if (_profile.value?.approvedStatus == ApprovedCodeTable.code) RequestApproveCodeTable.code else null,
             )
         )
             .subscribeOn(Schedulers.io())

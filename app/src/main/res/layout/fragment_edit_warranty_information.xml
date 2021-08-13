@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
 
     <data>
 
@@ -35,7 +36,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:alertText='@{"필수 정보입니다."}'
-                    app:content='@{vm.warrantyPeriod == 0 ? null : vm.warrantyPeriod+"년"}'
+                    app:content="@{vm.warrantyPeriodForLayout}"
                     app:hintText='@{"보증 가능한 A/S 기간을 선택해주세요."}'
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -50,6 +51,7 @@
                     app:alertText='@{"필수 정보입니다. 10자 이상으로 입력해주세요."}'
                     app:blackSubTitle="@{false}"
                     app:content="@={vm.warrantyDescription}"
+                    bind:visible="@{vm.warrantyPeriod != -1}"
                     app:hintText='@{"고객이 유의할 만한 예외사항이나 자재별 세부 A/S 방침을 입력해주세요."}'
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
