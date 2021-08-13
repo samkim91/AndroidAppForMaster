@@ -8,6 +8,7 @@ import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.dto.AttachmentDto
 import kr.co.soogong.master.data.dto.profile.MasterDto
+import kr.co.soogong.master.data.model.profile.ApprovedCodeTable
 import kr.co.soogong.master.data.model.profile.Profile
 import kr.co.soogong.master.data.model.profile.RequestApproveCodeTable
 import kr.co.soogong.master.domain.usecase.profile.GetProfileUseCase
@@ -59,7 +60,7 @@ class EditShopImagesViewModel @Inject constructor(
                     uid = _profile.value?.uid,
                     shopImages = shopImages.value,
                     updateShopImagesYn = true,
-                    approvedStatus = RequestApproveCodeTable.code,
+                    approvedStatus = if (_profile.value?.approvedStatus == ApprovedCodeTable.code) RequestApproveCodeTable.code else null,
                 ),
                 shopImagesUris = list.map {
                     it.uri!!

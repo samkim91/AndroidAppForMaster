@@ -10,6 +10,7 @@ import kr.co.soogong.master.data.model.profile.Profile
 import kr.co.soogong.master.domain.usecase.profile.GetProfileUseCase
 import kr.co.soogong.master.domain.usecase.profile.SaveMasterUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
+import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogItem
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -20,7 +21,8 @@ class EditWarrantyInformationViewModel @Inject constructor(
 ) : BaseViewModel() {
     private val _profile = MutableLiveData<Profile>()
 
-    val warrantyPeriod = MutableLiveData(0)
+    val warrantyPeriod = MutableLiveData<Int>()
+    val warrantyPeriodForLayout = MutableLiveData<String>()
     val warrantyDescription = MutableLiveData("")
 
     fun requestWarrantyInformation() {
@@ -32,8 +34,16 @@ class EditWarrantyInformationViewModel @Inject constructor(
             .subscribeBy(
                 onSuccess = { profile ->
                     _profile.value = profile
-                    warrantyPeriod.postValue(profile.requiredInformation?.warrantyInformation?.warrantyPeriod)
-                    warrantyDescription.postValue(profile.requiredInformation?.warrantyInformation?.warrantyDescription)
+                    profile.requiredInformation?.warrantyInformation?.warrantyPeriod?.let {
+                        warrantyPeriod.postValue(it)
+                        warrantyPeriodForLayout.postValue(
+                            BottomDialogItem.getWarrantyPeriodList().find { item ->
+                                item.value == it
+                            }?.key)
+                    }
+                    profile.requiredInformation?.warrantyInformation?.warrantyDescription?.let {
+                        warrantyDescription.postValue(it)
+                    }
                 },
                 onError = { setAction(GET_WARRANTY_INFORMATION_FAILED) }
             ).addToDisposable()

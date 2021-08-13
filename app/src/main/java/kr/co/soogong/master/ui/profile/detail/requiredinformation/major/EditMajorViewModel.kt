@@ -9,6 +9,7 @@ import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.dto.profile.MajorDto
 import kr.co.soogong.master.data.dto.profile.MasterDto
 import kr.co.soogong.master.data.model.major.Major
+import kr.co.soogong.master.data.model.profile.ApprovedCodeTable
 import kr.co.soogong.master.data.model.profile.Profile
 import kr.co.soogong.master.data.model.profile.RequestApproveCodeTable
 import kr.co.soogong.master.domain.usecase.profile.GetProfileUseCase
@@ -58,7 +59,7 @@ class EditMajorViewModel @Inject constructor(
                     id = _profile.value?.id,
                     uid = _profile.value?.uid,
                     majors = MajorDto.fromMajorList(majors.value),
-                    approvedStatus = RequestApproveCodeTable.code,
+                    approvedStatus = if (_profile.value?.approvedStatus == ApprovedCodeTable.code) RequestApproveCodeTable.code else null,
                 )
             ).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

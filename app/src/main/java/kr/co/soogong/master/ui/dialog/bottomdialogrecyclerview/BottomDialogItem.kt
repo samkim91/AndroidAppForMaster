@@ -24,8 +24,24 @@ data class BottomDialogItem(
                 BottomDialogItem("전국구 가능", 1000),
             )
 
-        fun getIncreasingYearList(): List<BottomDialogItem> =
+        fun getCareerYearList(): List<BottomDialogItem> =
             listOf(
+                BottomDialogItem("1년", 1),
+                BottomDialogItem("2년", 2),
+                BottomDialogItem("3년", 3),
+                BottomDialogItem("4년", 4),
+                BottomDialogItem("5년", 5),
+                BottomDialogItem("6년", 6),
+                BottomDialogItem("7년", 7),
+                BottomDialogItem("8년", 8),
+                BottomDialogItem("9년", 9),
+                BottomDialogItem("10년", 10),
+            )
+
+        fun getWarrantyPeriodList(): List<BottomDialogItem> =
+            listOf(
+                BottomDialogItem("보증기간 없음", -1),
+                BottomDialogItem("직접 입력", 0),
                 BottomDialogItem("1년", 1),
                 BottomDialogItem("2년", 2),
                 BottomDialogItem("3년", 3),
