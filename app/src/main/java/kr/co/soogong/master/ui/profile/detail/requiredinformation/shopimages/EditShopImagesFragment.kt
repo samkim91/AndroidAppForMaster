@@ -87,7 +87,7 @@ class EditShopImagesFragment : BaseFragment<FragmentEditShopImagesBinding>(
 
             defaultButton.setOnClickListener {
                 if (viewModel.profile.value?.approvedStatus == ApprovedCodeTable.code) {
-                    val dialog = CustomDialog(
+                    val dialog = CustomDialog.newInstance(
                         dialogData = DialogData.getConfirmingForRequiredDialogData(requireContext()),
                         yesClick = {
                             loading.show(parentFragmentManager, loading.tag)

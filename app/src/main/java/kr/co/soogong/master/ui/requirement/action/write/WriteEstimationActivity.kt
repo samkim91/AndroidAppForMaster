@@ -198,7 +198,7 @@ class WriteEstimationActivity : BaseActivity<ActivityWriteEstimationBinding>(
     }
 
     private fun customBackPressed(){
-        val dialog = CustomDialog(
+        val dialog = CustomDialog.newInstance(
             getCancelSendingEstimationDialogData(this@WriteEstimationActivity),
             yesClick = {
                 finish()

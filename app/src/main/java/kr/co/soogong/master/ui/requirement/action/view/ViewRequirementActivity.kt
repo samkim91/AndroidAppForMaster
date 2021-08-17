@@ -102,7 +102,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
 
             // 견적을 내기 어려워요 버튼
             refuseButton.setOnClickListener {
-                val dialog = CustomDialog(getRefuseEstimateDialogData(this@ViewRequirementActivity),
+                val dialog = CustomDialog.newInstance(getRefuseEstimateDialogData(this@ViewRequirementActivity),
                     yesClick = {
                         viewModel.refuseToEstimate()
                     },

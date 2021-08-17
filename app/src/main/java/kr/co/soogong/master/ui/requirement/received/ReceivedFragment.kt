@@ -56,7 +56,7 @@ class ReceivedFragment : BaseFragment<FragmentRequirementReceivedBinding>(
                         when (it) {
                             NotApprovedCodeTable.code -> {
                                 val dialog =
-                                    CustomDialog(
+                                    CustomDialog.newInstance(
                                         DialogData.getAskingFillProfileDialogData(requireContext()),
                                         yesClick = {
                                             startActivity(
@@ -70,7 +70,7 @@ class ReceivedFragment : BaseFragment<FragmentRequirementReceivedBinding>(
                             }
                             RequestApproveCodeTable.code -> {
                                 val dialog =
-                                    CustomDialog(
+                                    CustomDialog.newInstance(
                                         DialogData.getWaitingUntilApprovalDialogData(requireContext()),
                                         yesClick = { },
                                         noClick = { })

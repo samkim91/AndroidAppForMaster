@@ -59,7 +59,7 @@ class ProgressFragment : BaseFragment<FragmentRequirementProgressBinding>(
                     )
                 },
                 callButtonClick = { keycode, number ->
-                    val dialog = CustomDialog(getCallToCustomerDialogData(requireContext()),
+                    val dialog = CustomDialog.newInstance(getCallToCustomerDialogData(requireContext()),
                         yesClick = {
                             viewModel.callToClient(
                                 requirementId = keycode

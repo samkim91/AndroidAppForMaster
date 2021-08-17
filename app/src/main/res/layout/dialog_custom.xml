@@ -18,7 +18,7 @@
                 style="@style/medium_text_style.medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="@dimen/gap_40"
                 android:gravity="center"
                 android:textColor="@color/text_basic_color"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -31,10 +31,10 @@
                 style="@style/small_text_style.regular"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="14sp"
+                android:layout_marginTop="@dimen/gap_14"
                 android:gravity="center"
                 android:textColor="@color/text_alert_color"
-                android:textSize="14sp"
+                android:textSize="@dimen/text_small_size"
                 android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -46,44 +46,45 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:barrierDirection="bottom"
+                app:barrierMargin="@dimen/gap_24"
                 app:constraint_referenced_ids="txt_dialog_alert,txt_dialog_content"
                 app:layout_constraintTop_toBottomOf="@id/txt_dialog_alert" />
 
             <Button
                 android:id="@+id/btn_no"
                 style="@style/medium_text_style.bold"
-                android:layout_width="0dp"
-                android:layout_height="52dp"
-                android:layout_marginTop="24dp"
+                android:layout_width="@dimen/gap_0"
+                android:layout_height="@dimen/gap_52"
                 android:background="@android:color/transparent"
                 android:textColor="@color/text_basic_color"
                 app:layout_constraintEnd_toStartOf="@+id/btn_yes"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/txt_dialog_alert"
+                app:layout_constraintTop_toTopOf="@id/btn_barrier"
+                app:layout_constraintBottom_toBottomOf="parent"
                 tools:text="아니요" />
 
             <Button
                 android:id="@+id/btn_yes"
                 style="@style/medium_text_style.bold"
-                android:layout_width="0dp"
-                android:layout_height="52dp"
-                android:layout_marginTop="24dp"
+                android:layout_width="@dimen/gap_0"
+                android:layout_height="@dimen/gap_52"
                 android:background="@android:color/transparent"
                 android:textColor="@color/text_basic_color"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/btn_no"
-                app:layout_constraintTop_toBottomOf="@id/txt_dialog_alert"
+                app:layout_constraintTop_toTopOf="@id/btn_barrier"
+                app:layout_constraintBottom_toBottomOf="parent"
                 tools:text="예" />
 
             <ImageView
                 android:id="@+id/line"
-                android:layout_width="1dp"
-                android:layout_height="16dp"
+                android:layout_width="@dimen/gap_1"
+                android:layout_height="@dimen/gap_16"
                 android:background="#D8D8D8"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/btn_no"
-                app:layout_constraintStart_toEndOf="@id/btn_yes"
-                app:layout_constraintTop_toTopOf="@id/btn_no" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/btn_barrier" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

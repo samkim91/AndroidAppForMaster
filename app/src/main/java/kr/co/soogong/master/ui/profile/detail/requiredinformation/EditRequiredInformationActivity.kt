@@ -85,7 +85,7 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
                         dialogBundle = BottomDialogBundle.getCareerYearBundle(),
                         itemClick = { _, value ->
                             if (viewModel.profile.value?.approvedStatus == ApprovedCodeTable.code) {
-                                val dialog = CustomDialog(
+                                val dialog = CustomDialog.newInstance(
                                     dialogData = DialogData.getConfirmingForRequiredDialogData(this@EditRequiredInformationActivity),
                                     yesClick = { viewModel.saveCareerPeriod(value) },
                                     noClick = { })

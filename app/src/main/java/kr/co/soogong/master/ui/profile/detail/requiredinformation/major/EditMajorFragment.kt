@@ -82,7 +82,7 @@ class EditMajorFragment : BaseFragment<FragmentEditMajorBinding>(
                 if (major.alertVisible) return@setOnClickListener
 
                 if (viewModel.profile.value?.approvedStatus == ApprovedCodeTable.code) {
-                    val dialog = CustomDialog(
+                    val dialog = CustomDialog.newInstance(
                         dialogData = DialogData.getConfirmingForRequiredDialogData(requireContext()),
                         yesClick = { viewModel.saveMajor() },
                         noClick = { })

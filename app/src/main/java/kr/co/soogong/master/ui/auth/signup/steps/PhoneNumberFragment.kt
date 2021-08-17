@@ -67,7 +67,7 @@ class PhoneNumberFragment : BaseFragment<FragmentSignUpPhoneNumberBinding>(
     }
 
     private fun showDialog() {
-        val dialog = CustomDialog(
+        val dialog = CustomDialog.newInstance(
             DialogData.getExistentUserDialogData(requireContext()),
             yesClick = { (activity as? SignUpActivity)?.finishActivityWithoutDialog() },
             noClick = { })
