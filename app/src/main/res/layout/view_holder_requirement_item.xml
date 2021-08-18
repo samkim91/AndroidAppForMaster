@@ -30,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/requirement_card_status_margin_top"
-            android:text="@{data.status.toString()}"
+            android:text="@{data.status.inKorean}"
             android:textColor="@color/color_1FC472"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -91,12 +91,24 @@
 <!--            app:layout_constraintTop_toBottomOf="@id/line"-->
 <!--            tools:text="5156161" />-->
 
+        <include
+            android:id="@+id/measurement_badge"
+            layout="@layout/measurement_badge"
+            android:layout_width="@dimen/gap_85"
+            android:layout_height="@dimen/gap_26"
+            app:layout_constraintTop_toBottomOf="@id/line"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            android:layout_marginTop="@dimen/gap_12"
+            />
+
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/location"
             style="@style/big_text_style.bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/requirement_card_location_margin_top"
+            android:layout_marginTop="@dimen/gap_8"
             android:layout_marginEnd="@dimen/requirement_card_location_margin_end"
             android:ellipsize="end"
             android:maxLines="1"
@@ -106,15 +118,14 @@
             app:layout_constraintEnd_toStartOf="@id/arrow_button"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/line"
+            app:layout_constraintTop_toBottomOf="@id/measurement_badge"
             tools:text="서울시 관악구 봉천동 70 봉천동 70 123-124" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/type"
-            style="@style/big_text_style.bold"
+            style="@style/medium_text_style.medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/requirement_card_type_margin_top"
             android:layout_marginEnd="@dimen/requirement_card_type_margin_end"
             android:ellipsize="end"
             android:maxLines="1"
@@ -141,11 +152,11 @@
             style="@style/small_text_style.medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/requirement_card_first_time_margin_top"
+            android:layout_marginTop="@dimen/gap_4"
             android:textColor="@color/tertiary_text_color"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/type"
-            tools:text="최초 요청일 : 2021.01.11 - 13:20" />
+            tools:text="2021.01.11 - 13:20" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/second_date"

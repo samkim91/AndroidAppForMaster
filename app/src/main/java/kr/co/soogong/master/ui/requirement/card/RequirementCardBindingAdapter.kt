@@ -5,35 +5,35 @@ import android.icu.text.SimpleDateFormat
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.model.requirement.RequirementStatus
+import kr.co.soogong.master.data.model.requirement.*
 import kr.co.soogong.master.ui.widget.AmountView
 import java.util.*
 
 @BindingAdapter("bind:requirement_status", "bind:first_datetime_to_string")
-fun TextView.setFirstDate(status: String?, date: Date?) {
+fun TextView.setFirstDate(status: RequirementStatus?, date: Date?) {
     // 최초 요청일 : 2021.01.11 - 13:20
     val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd - HH:mm", Locale.KOREA)
     date?.let {
         text = when (status) {
-            RequirementStatus.Requested.toString(), RequirementStatus.Estimated.toString() -> {
+            Requested, Estimated -> {
                 context.getString(
                     R.string.requirements_card_start_time,
                     simpleDateFormat.format(it)
                 )
             }
-            RequirementStatus.Repairing.toString() -> {
+            Repairing -> {
                 context.getString(
                     R.string.requirements_card_matched_time,
                     simpleDateFormat.format(it)
                 )
             }
-            RequirementStatus.RequestFinish.toString() -> {
+            RequestFinish -> {
                 context.getString(
                     R.string.requirements_card_request_finish_time,
                     simpleDateFormat.format(it)
                 )
             }
-            RequirementStatus.Done.toString() -> {
+            Done -> {
                 context.getString(
                     R.string.requirements_card_repair_done_time,
                     simpleDateFormat.format(it)
@@ -59,12 +59,12 @@ fun TextView.setSecondDate(date: Date?) {
 }
 
 @BindingAdapter(value = ["setRequirementStatus", "priceAmount"])
-fun AmountView.setAmount(status: String?, priceAmount: Int?) {
+fun AmountView.setAmount(status: RequirementStatus?, priceAmount: Int?) {
     title = when (status) {
-        RequirementStatus.Estimated.toString(), RequirementStatus.Repairing.toString() -> {
+        Estimated, Repairing -> {
             context.getString(R.string.requirements_card_amount_title)
         }
-        RequirementStatus.Done.toString(), RequirementStatus.Closed.toString() -> {
+        Done, Closed -> {
             context.getString(R.string.requirements_card_amount_done_title)
         }
         else -> {

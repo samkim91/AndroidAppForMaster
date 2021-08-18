@@ -34,7 +34,6 @@
                 android:layout_marginTop="@dimen/gap_14"
                 android:gravity="center"
                 android:textColor="@color/text_alert_color"
-                android:textSize="@dimen/text_small_size"
                 android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

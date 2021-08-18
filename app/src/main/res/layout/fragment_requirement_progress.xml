@@ -6,6 +6,8 @@
 
     <data>
 
+        <import type="kr.co.soogong.master.R" />
+
         <variable
             name="vm"
             type="kr.co.soogong.master.ui.requirement.progress.ProgressViewModel" />
@@ -15,19 +17,48 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/swipe_refresh_layout"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+        <HorizontalScrollView
+            android:id="@+id/filter_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_fill_gray_top_bottom_line_background"
+            android:scrollbars="none"
+            android:foregroundGravity="center_horizontal"
+            android:requiresFadingEdge="horizontal"
+            android:fadingEdgeLength="@dimen/gap_20"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/filter_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/gap_20"
+                android:paddingTop="@dimen/gap_4"
+                android:paddingBottom="@dimen/gap_4"
+                android:paddingEnd="@dimen/gap_20"
+                app:singleSelection="true"
+                app:singleLine="true"
+                />
+        </HorizontalScrollView>
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_refresh_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/gap_0"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/filter_container"
+            app:onRefresh="@{vm::requestList}"
+            app:setLoadingColor="@{R.color.app_color}">
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/progress_list"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_width="@dimen/gap_0"
+                android:layout_height="@dimen/gap_0"
+                app:dividerDrawable="@{@drawable/divider}"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 bind:progress_list="@{vm.progressList}"
                 tools:listitem="@layout/view_holder_requirement_item" />
@@ -41,7 +72,7 @@
             app:layout_constraintBottom_toTopOf="@id/empty_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@id/swipe_refresh_layout"
             app:layout_constraintVertical_chainStyle="packed"
             bind:visible="@{vm.progressList.empty}" />
 
@@ -52,78 +83,11 @@
             android:layout_height="wrap_content"
             android:text="@string/requirements_progress_none_status"
             android:textColor="@color/color_BDBDBD"
-            android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/empty_icon"
             bind:visible="@{vm.progressList.empty}" />
-
-        <RadioGroup
-            android:id="@+id/filter"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/requirement_received_filter_height"
-            android:layout_marginStart="@dimen/requirement_received_filter_margin_start"
-            android:layout_marginTop="@dimen/requirement_received_filter_margin_top"
-            android:layout_marginEnd="@dimen/requirement_received_filter_margin_end"
-            android:background="@drawable/shape_fill_gray_background_50"
-            android:gravity="center_vertical"
-            android:onCheckedChanged="@{(group, id) -> vm.onFilterChange(group.indexOfChild(group.findViewById(id)))}"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <RadioButton
-                android:id="@+id/filter_total"
-                style="@style/medium_text_style.medium"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginStart="@dimen/requirement_received_filter_option_margin_8"
-                android:layout_marginTop="@dimen/requirement_received_filter_option_margin_8"
-                android:layout_marginEnd="@dimen/requirement_received_filter_option_margin_4"
-                android:layout_marginBottom="@dimen/requirement_received_filter_option_margin_8"
-                android:layout_weight="1"
-                android:background="@drawable/filter_background_selector"
-                android:button="@android:color/transparent"
-                android:checked="true"
-                android:gravity="center"
-                android:text="@string/requirements_progress_filter_option_1"
-                android:textColor="@color/filter_text_selector" />
-
-            <RadioButton
-                android:id="@+id/filter_progress"
-                style="@style/medium_text_style.medium"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginStart="@dimen/requirement_received_filter_option_margin_4"
-                android:layout_marginTop="@dimen/requirement_received_filter_option_margin_8"
-                android:layout_marginEnd="@dimen/requirement_received_filter_option_margin_4"
-                android:layout_marginBottom="@dimen/requirement_received_filter_option_margin_8"
-                android:layout_weight="1"
-                android:background="@drawable/filter_background_selector"
-                android:button="@android:color/transparent"
-                android:gravity="center"
-                android:text="@string/requirements_progress_filter_option_2"
-                android:textColor="@color/filter_text_selector" />
-
-            <RadioButton
-                android:id="@+id/filter_custom_done"
-                style="@style/medium_text_style.medium"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginStart="@dimen/requirement_received_filter_option_margin_4"
-                android:layout_marginTop="@dimen/requirement_received_filter_option_margin_8"
-                android:layout_marginEnd="@dimen/requirement_received_filter_option_margin_8"
-                android:layout_marginBottom="@dimen/requirement_received_filter_option_margin_8"
-                android:layout_weight="1"
-                android:background="@drawable/filter_background_selector"
-                android:button="@android:color/transparent"
-                android:gravity="center"
-                android:text="@string/requirements_progress_filter_option_3"
-                android:textColor="@color/filter_text_selector" />
-
-        </RadioGroup>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

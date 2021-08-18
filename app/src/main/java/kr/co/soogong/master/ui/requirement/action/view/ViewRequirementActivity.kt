@@ -9,7 +9,7 @@ import kr.co.soogong.master.R
 import kr.co.soogong.master.data.dto.requirement.RequirementDto
 import kr.co.soogong.master.data.dto.requirement.estimation.EstimationDto
 import kr.co.soogong.master.data.dto.requirement.qna.RequirementQnaDto
-import kr.co.soogong.master.data.model.requirement.RequirementStatus
+import kr.co.soogong.master.data.model.requirement.*
 import kr.co.soogong.master.databinding.ActivityViewRequirementBinding
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.ui.dialog.popup.CustomDialog
@@ -149,25 +149,25 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                 // 고객 요청 내용
                 bindRequirementQnasData(requirement?.requirementQnas, requirement.description)
 
-                when (RequirementStatus.getStatus(requirement)) {
+                when (RequirementStatus.getStatusFromRequirement(requirement)) {
                     // 상태 : 견적요청
                     // view :
                     // footer button : 견적 마감일, 견적을 보낼래요, 견적을 내기 어려워요
-                    RequirementStatus.Requested -> {
+                    Requested -> {
                         requestedButtonGroup.visibility = View.VISIBLE
                     }
 
                     // 상태 : 매칭대기
                     // view : 나의 제안 내용
                     // footer button : none
-                    RequirementStatus.Estimated -> {
+                    Estimated -> {
                         bindEstimationData(requirement?.estimationDto)
                     }
 
                     // 상태 : 시공진행중
                     // view : 고객에게 전화하기, 나의 제안 내용
                     // footer button : 취소 됐음, 시공 완료
-                    RequirementStatus.Repairing -> {
+                    Repairing -> {
                         cancelButton.visibility = View.VISIBLE
                         doneButton.visibility = View.VISIBLE
                         callToCustomerContainer.visibility = View.VISIBLE
@@ -177,7 +177,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                     // 상태 : 고객완료요청
                     // view : 나의 제안 내용
                     // footer button : 시공 완료
-                    RequirementStatus.RequestFinish -> {
+                    RequestFinish -> {
                         doneButton.visibility = View.VISIBLE
                         bindEstimationData(requirement?.estimationDto)
                     }
@@ -185,7 +185,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                     // 상태 : 시공완료
                     // view : 나의 최종 시공 내용
                     // footer button : 리뷰 요청하기
-                    RequirementStatus.Done -> {
+                    Done -> {
                         askReviewButton.visibility = View.VISIBLE
                         requirement?.estimationDto?.repair?.requestReviewYn?.let { if (it) setReviewAsked() }
                         bindRepairData(requirement?.estimationDto)
@@ -194,7 +194,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                     // 상태 : 평가완료
                     // view : 고객 리뷰, 나의 최종 시공 내용
                     // footer button : none
-                    RequirementStatus.Closed -> {
+                    Closed -> {
                         customerReviewGroup.isVisible = viewModel.review.value != null
                         bindRepairData(requirement?.estimationDto)
                     }
@@ -202,7 +202,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                     // 상태 : 시공취소
                     // view : 취소 사유, 나의 제안 내용
                     // footer button : none
-                    RequirementStatus.Canceled -> {
+                    Canceled -> {
                         repairGroup.visibility = View.VISIBLE
                         bindCanceledData(requirement)
                         bindEstimationData(requirement?.estimationDto)
@@ -211,7 +211,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                     // 상태 : 매칭실패
                     // view : 취소 사유, 나의 제안 내용
                     // footer button : none
-                    RequirementStatus.Failed -> {
+                    Failed -> {
                         bindEstimationData(requirement?.estimationDto)
                     }
 

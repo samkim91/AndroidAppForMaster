@@ -24,12 +24,12 @@ data class RequirementCard(
                 token = requirementDto.token,
                 project = requirementDto.projectName,
                 address = requirementDto.address,
-                status = RequirementStatus.getStatus(requirementDto),
+                status = RequirementStatus.getStatusFromRequirement(requirementDto),
                 tel = requirementDto.tel,
                 closedAt = requirementDto.closedAt,
                 createdAt = requirementDto.createdAt,
                 updatedAt = requirementDto.updatedAt,
-                introductionText = RequirementStatus.getStatus(requirementDto).getIntroductionText(),
+                introductionText = RequirementStatus.getStatusFromRequirement(requirementDto).introductionText,
                 estimationDto = requirementDto.estimationDto
             )
         }

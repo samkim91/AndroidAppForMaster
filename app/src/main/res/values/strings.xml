@@ -69,9 +69,9 @@
     <string name="alert_text_to_fill_up_required_information"><b>필수 정보를 모두 등록</b>하고, 승인이 완료되면\n<b>문의 처리가 가능</b>합니다!</string>
 
     <!--  Requirements  -->
-    <string name="requirements_received_name">견적</string>
-    <string name="requirements_progress_name">시공</string>
-    <string name="requirements_done_name">완료</string>
+    <string name="requirements_received_tab_name">문의</string>
+    <string name="requirements_progress_tab_name">진행중</string>
+    <string name="requirements_done_tab_name">완료·취소</string>
     <string name="requirements_received_code">Received</string>
     <string name="requirements_progress_code">Progress</string>
     <string name="requirements_done_code">Done</string>
@@ -110,6 +110,7 @@
     <string name="requirements_card_amount_title">나의 견적가</string>
     <string name="requirements_card_amount_done_title">최종 시공가</string>
     <string name="not_estimated_text">견적 미발송</string>
+    <string name="measurement_text">현장실측</string>
 
     <!-- View Requirement -->
     <string name="view_estimate_customer_review_title">고객 리뷰</string>

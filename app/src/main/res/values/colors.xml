@@ -27,6 +27,8 @@
     <color name="color_FFFFFF">#FFFFFF</color>
     <color name="color_00664E">#00664E</color>
     <color name="color_C4C4C4">#C4C4C4</color>
+    <color name="color_404040">#404040</color>
+    <color name="color_2196F3">#2196F3</color>
 
     <color name="text_basic_color">@color/color_121212</color>
     <color name="text_primary_color">@color/color_616161</color>

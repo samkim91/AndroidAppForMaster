@@ -114,6 +114,22 @@
         <item name="android:fontFamily">@font/bold</item>
     </style>
 
+    <style name="text_style_15sp">
+        <item name="android:textSize">@dimen/text_size_15sp</item>
+    </style>
+
+    <style name="text_style_15sp.medium" parent="text_style_15sp">
+        <item name="android:fontFamily">@font/medium</item>
+    </style>
+
+    <style name="text_style_15sp.regular" parent="text_style_15sp">
+        <item name="android:fontFamily">@font/regular</item>
+    </style>
+
+    <style name="text_style_15sp.bold" parent="text_style_15sp">
+        <item name="android:fontFamily">@font/bold</item>
+    </style>
+
     <style name="medium_text_style">
         <item name="android:textSize">@dimen/text_medium_size</item>
     </style>
@@ -181,6 +197,15 @@
         <item name="chipStrokeWidth">@dimen/chips_stroke_width_1dp</item>
         <item name="chipCornerRadius">@dimen/chips_radius_8dp</item>
         <item name="chipMinHeight">@dimen/chips_height_40dp</item>
+    </style>
+
+    <style name="ChipChoiceRoundStyle" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="chipBackgroundColor">@color/chip_selector_for_requirement_status</item>
+        <item name="android:textColor">@color/text_selector_for_requirement_status</item>
+        <item name="chipStrokeColor">@color/stroke_selector_for_requirement_status</item>
+        <item name="chipStrokeWidth">@dimen/chips_stroke_width_1dp</item>
+        <item name="chipCornerRadius">@dimen/chips_radius_20dp</item>
+        <item name="chipMinHeight">@dimen/chips_height_38dp</item>
     </style>
 
     <style name="ChipEntryRoundStyle" parent="Widget.MaterialComponents.Chip.Entry">

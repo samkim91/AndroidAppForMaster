@@ -30,7 +30,7 @@ fun TextView.setClosedDate(date: Date?) {
 fun TextView.setStatus(requirementDto: RequirementDto?) {
     // Code -> Status in Korean
     requirementDto?.let {
-        text = RequirementStatus.getStatus(it).toString()
+        text = RequirementStatus.getStatusFromRequirement(it).inKorean
     }
 }
 
