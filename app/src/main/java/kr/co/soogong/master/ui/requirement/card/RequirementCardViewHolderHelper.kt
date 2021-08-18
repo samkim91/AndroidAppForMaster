@@ -15,25 +15,25 @@ object RequirementCardViewHolderHelper {
 
         return when (viewType) {
             Requested.asInt -> {
-                RequestedViewHolder(binding)
+                RequestedViewHolder(parent.context, binding)
             }
             Estimated.asInt -> {
-                EstimatedViewHolder(binding)
+                EstimatedViewHolder(parent.context,binding)
             }
             Repairing.asInt -> {
-                RepairingViewHolder(binding)
+                RepairingViewHolder(parent.context,binding)
             }
             RequestFinish.asInt -> {
-                RequestFinishViewHolder(binding)
+                RequestFinishViewHolder(parent.context,binding)
             }
             Done.asInt -> {
-                DoneViewHolder(binding)
+                DoneViewHolder(parent.context,binding)
             }
             Closed.asInt -> {
-                ClosedViewHolder(binding)
+                ClosedViewHolder(parent.context,binding)
             }
             else -> {
-                CanceledViewHolder(binding)
+                CanceledViewHolder(parent.context,binding)
             }
         }
     }

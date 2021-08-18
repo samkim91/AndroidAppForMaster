@@ -1,17 +1,34 @@
 package kr.co.soogong.master.ui.requirement.card
 
+import android.content.Context
+import android.icu.text.DecimalFormat
+import android.icu.text.SimpleDateFormat
 import android.view.View
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.view.isNotEmpty
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.model.requirement.RequirementCard
 import kr.co.soogong.master.databinding.ViewHolderRequirementItemBinding
+import kr.co.soogong.master.ui.widget.RequirementCardAdditionalInfo
+import kr.co.soogong.master.ui.widget.RequirementCardAdditionalInfo.Companion.CALENDAR_TYPE
+import kr.co.soogong.master.ui.widget.RequirementCardAdditionalInfo.Companion.GRAY_THEME
+import kr.co.soogong.master.ui.widget.RequirementCardAdditionalInfo.Companion.GREEN_THEME
+import kr.co.soogong.master.ui.widget.RequirementCardAdditionalInfo.Companion.MONEY_TYPE
+import kr.co.soogong.master.ui.widget.RequirementCardAdditionalInfo.Companion.ORANGE_THEME
+import kr.co.soogong.master.ui.widget.RequirementCardAdditionalInfo.Companion.setContainerTheme
+import java.util.*
 
 // Requirement Card viewHolder 들의 추상클래스
 abstract class RequirementCardViewHolder(
+    open val context: Context,
     open val binding: ViewHolderRequirementItemBinding,
 ) : RecyclerView.ViewHolder(binding.root) {
-    open fun binding(
+    val dateFormat = SimpleDateFormat("yyyy.MM.dd(E) - HH:mm", Locale.KOREA)
+    val moneyFormat = DecimalFormat("#,###")
+
+    open fun bind(
         requirementCard: RequirementCard,
         cardClickListener: ((requirementId: Int) -> Unit),
         leftButtonClickListener: ((requirementId: Int, extraInfo: Any?) -> Unit)? = null,
@@ -24,184 +41,228 @@ abstract class RequirementCardViewHolder(
                 cardClickListener(requirementCard.id)
             }
 
-            executePendingBindings()
+            if (additionalInfoContainer.isNotEmpty()) additionalInfoContainer.removeAllViews()
         }
     }
 }
 
 // 견적요청 상태
 class RequestedViewHolder(
+    override val context: Context,
     override val binding: ViewHolderRequirementItemBinding,
-) : RequirementCardViewHolder(binding) {
-    override fun binding(
+) : RequirementCardViewHolder(context, binding) {
+    override fun bind(
         requirementCard: RequirementCard,
-        cardClickListener: ((requirementId: Int) -> Unit),
+        cardClickListener: (requirementId: Int) -> Unit,
         leftButtonClickListener: ((requirementId: Int, extraInfo: Any?) -> Unit)?,
-        rightButtonClickListener: ((requirementId: Int, extraInfo: Any?) -> Unit)?,
+        rightButtonClickListener: ((requirementId: Int, extraInfo: Any?) -> Unit)?
     ) {
+        super.bind(
+            requirementCard,
+            cardClickListener,
+            leftButtonClickListener,
+            rightButtonClickListener
+        )
+
         with(binding) {
-            data = requirementCard
-
-            firstDate.setFirstDate(requirementCard.status, requirementCard.createdAt)
-            secondDate.visibility = View.VISIBLE
-            secondDate.setSecondDate(requirementCard.createdAt)
-
-            setCardClickListener {
-                cardClickListener(requirementCard.id)
-            }
-
-            executePendingBindings()
+            setContainerTheme(context, additionalInfoContainer, ORANGE_THEME)
+            additionalInfoContainer.addView(RequirementCardAdditionalInfo(context).apply {
+                setLayout(
+                    theme = ORANGE_THEME,
+                    type = CALENDAR_TYPE,
+                    titleData = context.getString(R.string.requirements_card_due_date),
+                    contentData = dateFormat.format(requirementCard.closedAt),
+                    alertData = context.getString(R.string.requirements_card_due_date_alert)
+                )
+            })
         }
     }
 }
 
 // 매칭대기 상태
 class EstimatedViewHolder(
+    override val context: Context,
     override val binding: ViewHolderRequirementItemBinding,
-) : RequirementCardViewHolder(binding) {
-    override fun binding(
+) : RequirementCardViewHolder(context, binding) {
+    override fun bind(
         requirementCard: RequirementCard,
-        cardClickListener: ((requirementId: Int) -> Unit),
+        cardClickListener: (requirementId: Int) -> Unit,
         leftButtonClickListener: ((requirementId: Int, extraInfo: Any?) -> Unit)?,
-        rightButtonClickListener: ((requirementId: Int, extraInfo: Any?) -> Unit)?,
+        rightButtonClickListener: ((requirementId: Int, extraInfo: Any?) -> Unit)?
     ) {
+        super.bind(
+            requirementCard,
+            cardClickListener,
+            leftButtonClickListener,
+            rightButtonClickListener
+        )
+
         with(binding) {
-            data = requirementCard
-
-            firstDate.setFirstDate(requirementCard.status, requirementCard.createdAt)
-            myAmount.visibility = View.VISIBLE
-            myAmount.setAmount(requirementCard.status, requirementCard.estimationDto?.price)
-
-            waitingLabel.visibility = View.VISIBLE
-
-            setCardClickListener {
-                cardClickListener(requirementCard.id)
-            }
-
-            executePendingBindings()
+            setContainerTheme(context, additionalInfoContainer, GRAY_THEME)
+            additionalInfoContainer.addView(RequirementCardAdditionalInfo(context).apply {
+                setLayout(
+                    theme = GRAY_THEME,
+                    type = MONEY_TYPE,
+                    titleData = context.getString(R.string.requirements_card_amount_title),
+                    contentData = "${moneyFormat.format(requirementCard.estimationDto?.price)}원",
+                    alertData = context.getString(R.string.requirements_card_waiting_label),
+                )
+            })
         }
     }
 }
 
 // 시공진행중 상태
 class RepairingViewHolder(
+    override val context: Context,
     override val binding: ViewHolderRequirementItemBinding,
-) : RequirementCardViewHolder(binding) {
-    override fun binding(
+) : RequirementCardViewHolder(context, binding) {
+    override fun bind(
         requirementCard: RequirementCard,
-        cardClickListener: ((requirementId: Int) -> Unit),
+        cardClickListener: (requirementId: Int) -> Unit,
         leftButtonClickListener: ((requirementId: Int, extraInfo: Any?) -> Unit)?,
-        rightButtonClickListener: ((requirementId: Int, extraInfo: Any?) -> Unit)?,
+        rightButtonClickListener: ((requirementId: Int, extraInfo: Any?) -> Unit)?
     ) {
+        super.bind(
+            requirementCard,
+            cardClickListener,
+            leftButtonClickListener,
+            rightButtonClickListener
+        )
+
         with(binding) {
-            data = requirementCard
+            setContainerTheme(context, additionalInfoContainer, GREEN_THEME)
+            additionalInfoContainer.addView(RequirementCardAdditionalInfo(context).apply {
+                setLayout(
+                    theme = GREEN_THEME,
+                    type = MONEY_TYPE,
+                    titleData = context.getString(R.string.requirements_card_amount_title),
+                    contentData = "${moneyFormat.format(requirementCard.estimationDto?.price)}원",
+                    alertData = ""
+                )
+            })
 
-            firstDate.setFirstDate(requirementCard.status, requirementCard.estimationDto?.updatedAt)
-            myAmount.visibility = View.VISIBLE
-            myAmount.setAmount(requirementCard.status, requirementCard.estimationDto?.price)
-
-            callButton.visibility = View.VISIBLE
-            doneButton.visibility = View.VISIBLE
-
-            setCardClickListener {
-                cardClickListener(requirementCard.id)
-            }
+            leftButton.isVisible = true
+            rightButton.isVisible = true
+            leftButton.setText(R.string.requirements_card_call_button)
+            rightButton.setText(R.string.requirements_card_done_button)
 
             // TODO.. 첫 전화인지, 아닌지에 따라 버튼의 UI를 변경해줘야햠. Figma 참고
-            callButton.setOnClickListener {
+            leftButton.setOnClickListener {
                 leftButtonClickListener?.invoke(requirementCard.id, requirementCard.tel)
             }
 
-            doneButton.setOnClickListener {
+            rightButton.setOnClickListener {
                 rightButtonClickListener?.invoke(requirementCard.id, requirementCard)
             }
-
-            executePendingBindings()
         }
     }
 }
 
 // 고객완료요청 상태
 class RequestFinishViewHolder(
+    override val context: Context,
     override val binding: ViewHolderRequirementItemBinding,
-) : RequirementCardViewHolder(binding) {
-    override fun binding(
+) : RequirementCardViewHolder(context, binding) {
+    override fun bind(
         requirementCard: RequirementCard,
-        cardClickListener: ((requirementId: Int) -> Unit),
+        cardClickListener: (requirementId: Int) -> Unit,
         leftButtonClickListener: ((requirementId: Int, extraInfo: Any?) -> Unit)?,
-        rightButtonClickListener: ((requirementId: Int, extraInfo: Any?) -> Unit)?,
+        rightButtonClickListener: ((requirementId: Int, extraInfo: Any?) -> Unit)?
     ) {
+        super.bind(
+            requirementCard,
+            cardClickListener,
+            leftButtonClickListener,
+            rightButtonClickListener
+        )
+
         with(binding) {
-            data = requirementCard
+            rightButton.isVisible = true
+            rightButton.setText(R.string.requirements_card_done_button)
 
-            firstDate.setFirstDate(requirementCard.status, requirementCard.estimationDto?.updatedAt)
-            doneButton.visibility = View.VISIBLE
-
-            setCardClickListener {
-                cardClickListener(requirementCard.id)
-            }
-
-            doneButton.setOnClickListener {
+            rightButton.setOnClickListener {
                 rightButtonClickListener?.invoke(requirementCard.id, requirementCard)
             }
-
-            executePendingBindings()
         }
     }
 }
 
 // 시공완료 상태
 class DoneViewHolder(
+    override val context: Context,
     override val binding: ViewHolderRequirementItemBinding,
-) : RequirementCardViewHolder(binding) {
-    override fun binding(
+) : RequirementCardViewHolder(context, binding) {
+    override fun bind(
         requirementCard: RequirementCard,
-        cardClickListener: ((requirementId: Int) -> Unit),
+        cardClickListener: (requirementId: Int) -> Unit,
         leftButtonClickListener: ((requirementId: Int, extraInfo: Any?) -> Unit)?,
-        rightButtonClickListener: ((requirementId: Int, extraInfo: Any?) -> Unit)?,
+        rightButtonClickListener: ((requirementId: Int, extraInfo: Any?) -> Unit)?
     ) {
+        super.bind(
+            requirementCard,
+            cardClickListener,
+            leftButtonClickListener,
+            rightButtonClickListener
+        )
+
         with(binding) {
-            data = requirementCard
+            setContainerTheme(context, additionalInfoContainer, GREEN_THEME)
+            additionalInfoContainer.addView(RequirementCardAdditionalInfo(context).apply {
+                setLayout(
+                    theme = GREEN_THEME,
+                    type = MONEY_TYPE,
+                    titleData = context.getString(R.string.requirements_card_amount_done_title),
+                    contentData = "${moneyFormat.format(requirementCard.estimationDto?.price)}원",
+                    alertData = ""
+                )
+            })
+            additionalInfoContainer.addView(RequirementCardAdditionalInfo(context).apply {
+                setLayout(
+                    theme = GREEN_THEME,
+                    type = CALENDAR_TYPE,
+                    titleData = context.getString(R.string.requirements_card_done_date),
+                    contentData = dateFormat.format(requirementCard.estimationDto?.repair?.actualDate),
+                    alertData = ""
+                )
+            })
 
-            firstDate.setFirstDate(requirementCard.status, requirementCard.estimationDto?.repair?.createdAt)
+            rightButton.isVisible = true
+            rightButton.setText(R.string.requirements_card_review_button)
 
-            setCardClickListener {
-                cardClickListener(requirementCard.id)
-            }
-
-            reviewButton.visibility = View.VISIBLE
-            reviewButton.setText(R.string.requirements_card_review_button)
-            reviewButton.isEnabled = true
-
-            reviewButton.setOnClickListener {
+            rightButton.setOnClickListener {
                 rightButtonClickListener?.invoke(requirementCard.id, requirementCard)
             }
 
             requirementCard.estimationDto?.repair?.requestReviewYn?.let { requestReviewYn ->
                 if (requestReviewYn) {
-                    reviewButton.setText(R.string.ask_for_review_successful)
-                    reviewButton.isEnabled = false
+                    rightButton.setText(R.string.ask_for_review_successful)
+                    rightButton.isEnabled = false
                 }
             }
-
-            executePendingBindings()
         }
     }
 }
 
 // 평가완료 상태
 class ClosedViewHolder(
+    override val context: Context,
     override val binding: ViewHolderRequirementItemBinding,
-) : RequirementCardViewHolder(binding) {
-    override fun binding(
+) : RequirementCardViewHolder(context, binding) {
+    override fun bind(
         requirementCard: RequirementCard,
-        cardClickListener: ((requirementId: Int) -> Unit),
+        cardClickListener: (requirementId: Int) -> Unit,
         leftButtonClickListener: ((requirementId: Int, extraInfo: Any?) -> Unit)?,
-        rightButtonClickListener: ((requirementId: Int, extraInfo: Any?) -> Unit)?,
+        rightButtonClickListener: ((requirementId: Int, extraInfo: Any?) -> Unit)?
     ) {
-        with(binding) {
-            data = requirementCard
+        super.bind(
+            requirementCard,
+            cardClickListener,
+            leftButtonClickListener,
+            rightButtonClickListener
+        )
 
+        with(binding) {
             newBadge.visibility = View.GONE
             statusText.setTextColor(
                 ResourcesCompat.getColor(
@@ -210,33 +271,49 @@ class ClosedViewHolder(
                     null
                 )
             )
-            firstDate.setFirstDate(requirementCard.status, requirementCard.estimationDto?.repair?.actualDate)
 
-            myAmount.visibility = View.VISIBLE
-            myAmount.setAmount(requirementCard.status, requirementCard.estimationDto?.repair?.actualPrice)
-
-            setCardClickListener {
-                cardClickListener(requirementCard.id)
-            }
-
-            executePendingBindings()
+            setContainerTheme(context, additionalInfoContainer, GRAY_THEME)
+            additionalInfoContainer.addView(RequirementCardAdditionalInfo(context).apply {
+                setLayout(
+                    theme = GRAY_THEME,
+                    type = MONEY_TYPE,
+                    titleData = context.getString(R.string.requirements_card_amount_done_title),
+                    contentData = "${moneyFormat.format(requirementCard.estimationDto?.price)}원",
+                    alertData = ""
+                )
+            })
+            additionalInfoContainer.addView(RequirementCardAdditionalInfo(context).apply {
+                setLayout(
+                    theme = GRAY_THEME,
+                    type = CALENDAR_TYPE,
+                    titleData = context.getString(R.string.requirements_card_done_date),
+                    contentData = dateFormat.format(requirementCard.estimationDto?.repair?.actualDate),
+                    alertData = ""
+                )
+            })
         }
     }
 }
 
 // 시공취소 상태
 class CanceledViewHolder(
+    override val context: Context,
     override val binding: ViewHolderRequirementItemBinding,
-) : RequirementCardViewHolder(binding) {
-    override fun binding(
+) : RequirementCardViewHolder(context, binding) {
+    override fun bind(
         requirementCard: RequirementCard,
-        cardClickListener: ((requirementId: Int) -> Unit),
+        cardClickListener: (requirementId: Int) -> Unit,
         leftButtonClickListener: ((requirementId: Int, extraInfo: Any?) -> Unit)?,
-        rightButtonClickListener: ((requirementId: Int, extraInfo: Any?) -> Unit)?,
+        rightButtonClickListener: ((requirementId: Int, extraInfo: Any?) -> Unit)?
     ) {
-        with(binding) {
-            data = requirementCard
+        super.bind(
+            requirementCard,
+            cardClickListener,
+            leftButtonClickListener,
+            rightButtonClickListener
+        )
 
+        with(binding) {
             newBadge.visibility = View.GONE
             statusText.setTextColor(
                 ResourcesCompat.getColor(
@@ -245,14 +322,6 @@ class CanceledViewHolder(
                     null
                 )
             )
-
-            firstDate.setFirstDate(requirementCard.status, requirementCard.createdAt)
-
-            setCardClickListener {
-                cardClickListener(requirementCard.id)
-            }
-
-            executePendingBindings()
         }
     }
 }

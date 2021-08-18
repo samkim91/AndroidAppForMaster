@@ -15,7 +15,7 @@ class DoneAdapter(
         RequirementCardViewHolderHelper.create(parent, viewType)
 
     override fun onBindViewHolder(holder: RequirementCardViewHolder, position: Int) {
-        holder.binding(getItem(position), cardClickListener, null, reviewButtonClick)
+        holder.bind(getItem(position), cardClickListener, null, reviewButtonClick)
     }
 
     override fun getItemViewType(position: Int): Int =

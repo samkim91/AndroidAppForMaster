@@ -14,7 +14,7 @@ class ReceivedAdapter(
         RequirementCardViewHolderHelper.create(parent, viewType)
 
     override fun onBindViewHolder(holder: RequirementCardViewHolder, position: Int) {
-        holder.binding(currentList[position], cardClickListener, null, null)
+        holder.bind(currentList[position], cardClickListener, null, null)
     }
 
     override fun getItemViewType(position: Int): Int =

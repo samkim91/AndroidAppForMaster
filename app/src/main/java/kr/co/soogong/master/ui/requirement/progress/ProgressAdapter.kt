@@ -16,7 +16,7 @@ class ProgressAdapter(
         RequirementCardViewHolderHelper.create(parent, viewType)
 
     override fun onBindViewHolder(holder: RequirementCardViewHolder, position: Int) {
-        holder.binding(getItem(position), cardClickListener, callButtonClick, doneButtonClick)
+        holder.bind(getItem(position), cardClickListener, callButtonClick, doneButtonClick)
     }
 
     override fun getItemViewType(position: Int): Int =
