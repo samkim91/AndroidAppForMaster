@@ -66,8 +66,10 @@
 
     <dimen name="gap_100">100dp</dimen>
     <dimen name="gap_120">120dp</dimen>
+    <dimen name="gap_130">130dp</dimen>
     <dimen name="gap_150">150dp</dimen>
     <dimen name="gap_180">180dp</dimen>
+    <dimen name="gap_230">230dp</dimen>
 
     <!--  Sign In  -->
     <dimen name="sign_in_logo_margin_top">25dp</dimen>
@@ -300,14 +302,15 @@
     <dimen name="list_icon_one_line_margin_bottom">10dp</dimen>
     <dimen name="list_icon_text_margin">12dp</dimen>
 
-    <dimen name="text_tiny_size">12sp</dimen>
-    <dimen name="text_tiny_small_size">13sp</dimen>
-    <dimen name="text_small_size">14sp</dimen>
+    <dimen name="text_size_12sp">12sp</dimen>
+    <dimen name="text_size_13sp">13sp</dimen>
+    <dimen name="text_size_14sp">14sp</dimen>
     <dimen name="text_size_15sp">15sp</dimen>
-    <dimen name="text_medium_size">16sp</dimen>
+    <dimen name="text_size_16sp">16sp</dimen>
     <dimen name="text_title_size">18sp</dimen>
-    <dimen name="text_big_size">18sp</dimen>
-    <dimen name="text_large_size">20sp</dimen>
+    <dimen name="text_size_18sp">18sp</dimen>
+    <dimen name="text_size_20sp">20sp</dimen>
+    <dimen name="text_size_22sp">22sp</dimen>
 
 
 </resources>

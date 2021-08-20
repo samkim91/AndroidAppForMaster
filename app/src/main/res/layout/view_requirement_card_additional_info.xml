@@ -39,7 +39,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/key_textview"
-            style="@style/small_text_style.medium"
+            style="@style/text_style_14sp.medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{key}"
@@ -52,7 +52,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/value_textview"
-            style="@style/small_text_style.bold"
+            style="@style/text_style_14sp.bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{value}"
@@ -65,7 +65,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/alert_textview"
-            style="@style/tiny_text_style.medium"
+            style="@style/text_style_12sp.medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{alert}"

@@ -40,7 +40,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/title"
-                style="@style/medium_text_style.regular"
+                style="@style/text_style_16sp.regular"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{data.title}"
@@ -51,7 +51,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/before_repair_image_label"
-                style="@style/small_text_style.regular"
+                style="@style/text_style_14sp.regular"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/gap_12"
@@ -79,7 +79,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/after_repair_image_label"
-                style="@style/small_text_style.regular"
+                style="@style/text_style_14sp.regular"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/gap_38"
@@ -117,7 +117,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/price"
-                style="@style/medium_text_style.regular"
+                style="@style/text_style_16sp.regular"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/gap_12"
@@ -132,7 +132,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/description"
-                style="@style/medium_text_style.regular"
+                style="@style/text_style_16sp.regular"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/gap_12"
@@ -146,7 +146,7 @@
 
             <Button
                 android:id="@+id/delete_button"
-                style="@style/medium_text_style.bold"
+                style="@style/text_style_16sp.bold"
                 android:layout_width="@dimen/gap_0"
                 android:layout_height="52dp"
                 android:layout_marginTop="@dimen/gap_12"
@@ -160,7 +160,7 @@
 
             <Button
                 android:id="@+id/edit_button"
-                style="@style/medium_text_style.bold"
+                style="@style/text_style_16sp.bold"
                 android:layout_width="0dp"
                 android:layout_height="52dp"
                 android:background="@android:color/transparent"

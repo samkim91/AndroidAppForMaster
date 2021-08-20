@@ -9,7 +9,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/title"
-            style="@style/medium_text_style.medium"
+            style="@style/text_style_16sp.medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -20,7 +20,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/sub_title"
-            style="@style/small_text_style.medium"
+            style="@style/text_style_14sp.medium"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/view_title_edittext_button_subtitle_margin_top"
@@ -33,7 +33,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/hint_text"
-            style="@style/small_text_style.regular"
+            style="@style/text_style_14sp.regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#f57c00"
@@ -45,7 +45,7 @@
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/first_edit_text"
-            style="@style/small_text_style.medium"
+            style="@style/text_style_14sp.medium"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/view_title_edittext_button_detail_margin_top"
@@ -65,7 +65,7 @@
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/second_edit_text"
-            style="@style/small_text_style.medium"
+            style="@style/text_style_14sp.medium"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -85,7 +85,7 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button"
-            style="@style/medium_text_style.medium"
+            style="@style/text_style_16sp.medium"
             android:layout_width="60dp"
             android:layout_height="40dp"
             android:layout_marginStart="8dp"
@@ -99,7 +99,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/alert"
-            style="@style/small_text_style.regular"
+            style="@style/text_style_14sp.regular"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"

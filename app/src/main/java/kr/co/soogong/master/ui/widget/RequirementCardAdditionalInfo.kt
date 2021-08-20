@@ -2,9 +2,6 @@ package kr.co.soogong.master.ui.widget
 
 import android.content.Context
 import android.content.res.ColorStateList
-import android.graphics.Color
-import android.graphics.ColorFilter
-import android.graphics.PorterDuff
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.appcompat.widget.LinearLayoutCompat
@@ -12,6 +9,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ViewRequirementCardAdditionalInfoBinding
+import kr.co.soogong.master.ui.*
 
 class RequirementCardAdditionalInfo @JvmOverloads constructor(
     context: Context,
@@ -79,12 +77,6 @@ class RequirementCardAdditionalInfo @JvmOverloads constructor(
     }
 
     companion object {
-        const val ORANGE_THEME = 100
-        const val GREEN_THEME = 200
-        const val GRAY_THEME = 300
-        const val MONEY_TYPE = 1000
-        const val CALENDAR_TYPE = 2000
-
         fun setContainerTheme(context: Context, container: LinearLayoutCompat, theme: Int) {
             container.isVisible = true
             when(theme) {

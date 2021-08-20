@@ -44,7 +44,7 @@ class IconBottomDialogViewHolder(
             data = dialogData
 
             iconGroup.isVisible = true
-            content.setTextAppearance(R.style.medium_text_style_medium)
+            content.setTextAppearance(R.style.text_style_16sp_medium)
             content.layoutParams.run {
                 this as ConstraintLayout.LayoutParams
                 this.updateMargins(top = 26.dp, bottom = 26.dp)

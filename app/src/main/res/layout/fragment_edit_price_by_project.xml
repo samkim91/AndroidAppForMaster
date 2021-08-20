@@ -77,7 +77,7 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/example"
-                    style="@style/small_text_style.medium"
+                    style="@style/text_style_14sp.medium"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/gap_52"
@@ -96,7 +96,7 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/default_button"
-            style="@style/medium_text_style.bold"
+            style="@style/text_style_16sp.bold"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:background="@color/color_22D47B"

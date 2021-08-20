@@ -16,7 +16,7 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/measurement_text"
-        style="@style/small_text_style.bold"
+        style="@style/text_style_14sp.bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/measurement_text"

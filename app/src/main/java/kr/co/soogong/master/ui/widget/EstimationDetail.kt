@@ -5,15 +5,15 @@ import android.graphics.Typeface
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
-import kr.co.soogong.master.databinding.ViewTransmissionMessageBinding
+import kr.co.soogong.master.databinding.ViewEstimationDetailBinding
 
-class EstimationItem @JvmOverloads constructor(
+class EstimationDetail @JvmOverloads constructor(
     context: Context,
     attributeSet: AttributeSet? = null,
     defStyle: Int = 0
 ) : ConstraintLayout(context, attributeSet, defStyle) {
     private var binding =
-            ViewTransmissionMessageBinding.inflate(LayoutInflater.from(context), this, true)
+            ViewEstimationDetailBinding.inflate(LayoutInflater.from(context), this, true)
 
     var key: String? = ""
         set(value) {

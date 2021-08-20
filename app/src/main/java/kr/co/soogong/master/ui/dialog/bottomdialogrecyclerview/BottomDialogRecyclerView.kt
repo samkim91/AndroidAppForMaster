@@ -52,7 +52,7 @@ class BottomDialogRecyclerView() : BottomSheetDialogFragment() {
                     dialogTitle.text = it.title
                     dialogTitle.isVisible = true
                     dialogSubtitle.gravity = Gravity.START
-                    dialogSubtitle.setTextAppearance(R.style.small_text_style_regular)
+                    dialogSubtitle.setTextAppearance(R.style.text_style_14sp_regular)
                 }
 
                 dialogSubtitle.text = it.subtitle

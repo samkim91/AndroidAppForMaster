@@ -30,7 +30,7 @@ object OtherFlexibleOptionChipGroupHelper {
             chip.text = item
             chip.minWidth = 156.dp
             chip.minHeight = 40.dp
-            chip.setTextAppearanceResource(R.style.small_text_style_medium)
+            chip.setTextAppearanceResource(R.style.text_style_14sp_medium)
 
             chipGroup.addChip(chip)
         }

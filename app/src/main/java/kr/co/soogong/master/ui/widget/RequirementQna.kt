@@ -5,17 +5,15 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import kr.co.soogong.master.R
-import kr.co.soogong.master.databinding.ViewAdditionInfoBinding
-import java.text.SimpleDateFormat
-import java.util.*
+import kr.co.soogong.master.databinding.ViewRequirementQnaBinding
 
-class AdditionInfoView @JvmOverloads constructor(
+class RequirementQna @JvmOverloads constructor(
     context: Context,
     attributeSet: AttributeSet? = null,
     defStyle: Int = 0
 ) : ConstraintLayout(context, attributeSet, defStyle) {
     private var binding =
-        ViewAdditionInfoBinding.inflate(LayoutInflater.from(context), this, true)
+        ViewRequirementQnaBinding.inflate(LayoutInflater.from(context), this, true)
 
     var question: String? = ""
         set(value) {
@@ -32,9 +30,4 @@ class AdditionInfoView @JvmOverloads constructor(
                 binding.answer.text = value
             }
         }
-
-    fun setDetailDate(date: Date?) {
-        val simpleDateFormat = SimpleDateFormat("yyyy년 MM월 dd일 hh시 mm분")
-        binding.answer.text = simpleDateFormat.format(date ?: System.currentTimeMillis())
-    }
 }

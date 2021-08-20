@@ -104,7 +104,7 @@ object MajorChipGroupHelper {
                 closeClickListener(titleChipGroup, it, project.id!!)
             }
             chip.text = project.name
-            chip.setTextAppearanceResource(R.style.small_text_style_medium)
+            chip.setTextAppearanceResource(R.style.text_style_14sp_medium)
 
             titleChipGroup.addChip(chip)
         }

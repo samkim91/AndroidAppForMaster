@@ -18,7 +18,8 @@ import kr.co.soogong.master.ui.requirement.action.write.WriteEstimationViewModel
 import kr.co.soogong.master.ui.requirement.action.write.WriteEstimationViewModel.Companion.SEND_ESTIMATION_SUCCESSFULLY
 import kr.co.soogong.master.uihelper.image.ImageViewActivityHelper
 import kr.co.soogong.master.utility.EventObserver
-import kr.co.soogong.master.utility.extension.addAdditionInfoView
+import kr.co.soogong.master.utility.extension.addRequirementQna
+import kr.co.soogong.master.utility.extension.startHalfRotateAnimation
 import kr.co.soogong.master.utility.extension.toast
 import kr.co.soogong.master.utility.validation.ValidationHelper
 import timber.log.Timber
@@ -61,13 +62,8 @@ class WriteEstimationActivity : BaseActivity<ActivityWriteEstimationBinding>(
             }
 
             detailButton.setOnClickListener() {
-                if (detailContainer.isVisible) {
-                    detailContainer.visibility = View.GONE
-                    detailIcon.setImageResource(R.drawable.ic_arrow_down)
-                } else {
-                    detailContainer.visibility = View.VISIBLE
-                    detailIcon.setImageResource(R.drawable.ic_arrow_up)
-                }
+                detailIcon.startHalfRotateAnimation(!detailContainer.isVisible)
+                detailContainer.isVisible = !detailContainer.isVisible
             }
 
             photoList.adapter = RectangleImageAdapter(
@@ -147,7 +143,7 @@ class WriteEstimationActivity : BaseActivity<ActivityWriteEstimationBinding>(
         })
 
         viewModel.requirement.observe(this, { requirement ->
-            addAdditionInfoView(binding.customFrame, this, requirement.requirementQnas, requirement.description)
+            addRequirementQna(binding.customFrame, this, requirement)
         })
     }
 

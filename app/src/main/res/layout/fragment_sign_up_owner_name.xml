@@ -55,7 +55,7 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/default_button"
-                style="@style/medium_text_style.bold"
+                style="@style/text_style_16sp.bold"
                 android:layout_width="@dimen/gap_0"
                 android:layout_height="@dimen/gap_48"
                 android:background="@color/color_22D47B"

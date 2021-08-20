@@ -9,7 +9,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/question"
-            style="@style/small_text_style.regular"
+            style="@style/text_style_14sp.regular"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
@@ -22,7 +22,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/answer"
-            style="@style/medium_text_style.medium"
+            style="@style/text_style_16sp.medium"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
@@ -36,7 +36,7 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/line"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/gap_0"
             android:layout_height="@dimen/line_height"
             android:layout_marginTop="24dp"
             android:background="@color/line_color"

@@ -9,7 +9,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/recommend_count_label"
-            style="@style/small_text_style.medium"
+            style="@style/text_style_14sp.medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/gap_8"
@@ -34,7 +34,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/review_count_label"
-            style="@style/small_text_style.medium"
+            style="@style/text_style_14sp.medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/gap_32"

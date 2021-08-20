@@ -33,7 +33,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/user_name"
-                style="@style/medium_text_style.bold"
+                style="@style/text_style_16sp.bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -52,7 +52,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/user_name_end"
-                style="@style/small_text_style.regular"
+                style="@style/text_style_14sp.regular"
                 android:textColor="@color/color_555555"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -76,7 +76,7 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/show_profile_button"
-                style="@style/medium_text_style.bold"
+                style="@style/text_style_16sp.bold"
                 android:layout_width="@dimen/gap_0"
                 android:layout_height="@dimen/gap_40"
                 android:layout_marginStart="@dimen/gap_20"
@@ -90,7 +90,7 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/request_review_by_sharing_button"
-                style="@style/medium_text_style.bold"
+                style="@style/text_style_16sp.bold"
                 android:layout_width="@dimen/gap_0"
                 android:layout_height="@dimen/gap_40"
                 android:layout_marginStart="@dimen/gap_20"
@@ -152,7 +152,7 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/profile_card_container_label"
-                    style="@style/medium_text_style.medium"
+                    style="@style/text_style_16sp.medium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/gap_20"

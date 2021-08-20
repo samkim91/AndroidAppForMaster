@@ -26,7 +26,7 @@ import kr.co.soogong.master.uihelper.requirment.action.EndRepairActivityHelper
 import kr.co.soogong.master.uihelper.requirment.action.ViewRequirementActivityHelper
 import kr.co.soogong.master.uihelper.requirment.action.WriteEstimationActivityHelper
 import kr.co.soogong.master.utility.EventObserver
-import kr.co.soogong.master.utility.extension.addAdditionInfoView
+import kr.co.soogong.master.utility.extension.addRequirementQna
 import kr.co.soogong.master.utility.extension.addCanceledDetail
 import kr.co.soogong.master.utility.extension.addEstimationDetail
 import kr.co.soogong.master.utility.extension.toast
@@ -68,18 +68,6 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                         ImageViewActivityHelper.getIntent(
                             this@ViewRequirementActivity,
                             viewModel.review.value?.imageList,
-                            position
-                        )
-                    )
-                }
-            )
-
-            photoList.adapter = RectangleImageAdapter(
-                cardClickListener = { position ->
-                    startActivity(
-                        ImageViewActivityHelper.getIntent(
-                            this@ViewRequirementActivity,
-                            viewModel.requirement.value?.images,
                             position
                         )
                     )
@@ -147,7 +135,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                 actionBar.title.text = requirement.address
 
                 // 고객 요청 내용
-                bindRequirementQnasData(requirement?.requirementQnas, requirement.description)
+                requirement?.let { addRequirementQna(binding.customFrame, this@ViewRequirementActivity, it) }
 
                 when (RequirementStatus.getStatusFromRequirement(requirement)) {
                     // 상태 : 견적요청
@@ -263,18 +251,6 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
             customerReviewGroup.visibility = View.GONE
             repairGroup.visibility = View.GONE
         }
-    }
-
-    private fun bindRequirementQnasData(
-        requirementQnaDtos: List<RequirementQnaDto>?,
-        description: String?
-    ) {
-        addAdditionInfoView(
-            binding.customFrame,
-            this@ViewRequirementActivity,
-            requirementQnaDtos,
-            description,
-        )
     }
 
     private fun bindEstimationData(estimationDto: EstimationDto?) {

@@ -11,12 +11,8 @@ import androidx.recyclerview.widget.RecyclerView
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.model.requirement.RequirementCard
 import kr.co.soogong.master.databinding.ViewHolderRequirementItemBinding
+import kr.co.soogong.master.ui.*
 import kr.co.soogong.master.ui.widget.RequirementCardAdditionalInfo
-import kr.co.soogong.master.ui.widget.RequirementCardAdditionalInfo.Companion.CALENDAR_TYPE
-import kr.co.soogong.master.ui.widget.RequirementCardAdditionalInfo.Companion.GRAY_THEME
-import kr.co.soogong.master.ui.widget.RequirementCardAdditionalInfo.Companion.GREEN_THEME
-import kr.co.soogong.master.ui.widget.RequirementCardAdditionalInfo.Companion.MONEY_TYPE
-import kr.co.soogong.master.ui.widget.RequirementCardAdditionalInfo.Companion.ORANGE_THEME
 import kr.co.soogong.master.ui.widget.RequirementCardAdditionalInfo.Companion.setContainerTheme
 import java.util.*
 
@@ -104,7 +100,7 @@ class EstimatedViewHolder(
                     theme = GRAY_THEME,
                     type = MONEY_TYPE,
                     titleData = context.getString(R.string.requirements_card_amount_title),
-                    contentData = "${moneyFormat.format(requirementCard.estimationDto?.price)}원",
+                    contentData = if (requirementCard.estimationDto?.price!! > 0) "${moneyFormat.format(requirementCard.estimationDto.price)}원" else context.getString(R.string.not_estimated_text),
                     alertData = context.getString(R.string.requirements_card_waiting_label),
                 )
             })
@@ -137,7 +133,7 @@ class RepairingViewHolder(
                     theme = GREEN_THEME,
                     type = MONEY_TYPE,
                     titleData = context.getString(R.string.requirements_card_amount_title),
-                    contentData = "${moneyFormat.format(requirementCard.estimationDto?.price)}원",
+                    contentData = if (requirementCard.estimationDto?.price!! > 0) "${moneyFormat.format(requirementCard.estimationDto.price)}원" else context.getString(R.string.not_estimated_text),
                     alertData = ""
                 )
             })
