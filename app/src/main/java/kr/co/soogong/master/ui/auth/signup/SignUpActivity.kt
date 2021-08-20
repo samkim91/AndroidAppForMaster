@@ -77,7 +77,7 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>(
 
     override fun onBackPressed() {
         Timber.tag(TAG).d("onBackPressed: ")
-        val dialog = CustomDialog(DialogData.getQuitSignUpDialogData(this@SignUpActivity),
+        val dialog = CustomDialog.newInstance(DialogData.getQuitSignUpDialogData(this@SignUpActivity),
             yesClick = { },
             noClick = {
                 Firebase.auth.currentUser?.delete()

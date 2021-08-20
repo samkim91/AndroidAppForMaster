@@ -33,34 +33,24 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="120dp">
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/banner_image"
-                        android:layout_width="0dp"
-                        android:layout_height="120dp"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/ic_banner_2"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                    android:paddingBottom="@dimen/gap_120">
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/status_text"
-                        style="@style/medium_text_style.bold"
+                        style="@style/text_style_16sp.bold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="32dp"
                         android:textColor="@color/color_1FC472"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/banner_image"
+                        app:layout_constraintTop_toTopOf="parent"
                         bind:status="@{vm.requirement}"
                         tools:text="견적요청" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/location"
-                        style="@style/big_text_style.bold"
+                        style="@style/text_style_18sp.bold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
@@ -79,7 +69,7 @@
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/project"
-                        style="@style/big_text_style.bold"
+                        style="@style/text_style_18sp.bold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
@@ -98,7 +88,7 @@
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/first_time"
-                        style="@style/small_text_style.medium"
+                        style="@style/text_style_14sp.medium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
@@ -134,7 +124,7 @@
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/customer_review_title"
-                            style="@style/medium_text_style.bold"
+                            style="@style/text_style_16sp.bold"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/estimation_card_default_margin_top"
@@ -146,7 +136,7 @@
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/master_recommendation_rating_text"
-                            style="@style/tiny_text_style.medium"
+                            style="@style/text_style_12sp.medium"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/estimation_card_master_rating_margin_top"
@@ -170,7 +160,7 @@
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/master_rating_kindness_text"
-                            style="@style/tiny_text_style.medium"
+                            style="@style/text_style_12sp.medium"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/estimation_card_master_rating_margin_top_8"
@@ -182,7 +172,7 @@
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/master_rating_kindness_score"
-                            style="@style/tiny_text_style.medium"
+                            style="@style/text_style_12sp.medium"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/estimation_card_master_rating_margin_start_2"
@@ -194,7 +184,7 @@
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/master_rating_quality_text"
-                            style="@style/tiny_text_style.medium"
+                            style="@style/text_style_12sp.medium"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/estimation_card_master_rating_margin_start_10"
@@ -205,7 +195,7 @@
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/master_rating_quality_score"
-                            style="@style/tiny_text_style.medium"
+                            style="@style/text_style_12sp.medium"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/estimation_card_master_rating_margin_start_2"
@@ -217,7 +207,7 @@
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/master_rating_affordability_text"
-                            style="@style/tiny_text_style.medium"
+                            style="@style/text_style_12sp.medium"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/estimation_card_master_rating_margin_start_10"
@@ -228,7 +218,7 @@
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/master_rating_affordability_score"
-                            style="@style/tiny_text_style.medium"
+                            style="@style/text_style_12sp.medium"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/estimation_card_master_rating_margin_start_2"
@@ -240,7 +230,7 @@
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/master_rating_punctuality_text"
-                            style="@style/tiny_text_style.medium"
+                            style="@style/text_style_12sp.medium"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/estimation_card_master_rating_margin_start_10"
@@ -251,7 +241,7 @@
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/master_rating_punctuality_score"
-                            style="@style/tiny_text_style.medium"
+                            style="@style/text_style_12sp.medium"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/estimation_card_master_rating_margin_start_2"
@@ -263,7 +253,7 @@
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/customer_review_type"
-                            style="@style/tiny_text_style.regular"
+                            style="@style/text_style_12sp.regular"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@{vm.review.projectType}"
@@ -275,7 +265,7 @@
 
                         <kr.co.prnd.readmore.ReadMoreTextView
                             android:id="@+id/customer_review_content"
-                            style="@style/small_text_style.regular"
+                            style="@style/text_style_14sp.regular"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/estimation_card_master_rating_margin_top_12"
@@ -303,7 +293,7 @@
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/customer_review_date"
-                            style="@style/tiny_text_style.regular"
+                            style="@style/text_style_12sp.regular"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/estimation_card_master_rating_margin_top_12"
@@ -344,7 +334,7 @@
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/repair_title"
-                            style="@style/medium_text_style.bold"
+                            style="@style/text_style_16sp.bold"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/estimation_card_default_margin_top"
@@ -393,7 +383,7 @@
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/customer_request_title"
-                            style="@style/medium_text_style.bold"
+                            style="@style/text_style_16sp.bold"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/estimation_card_default_margin_top"
@@ -414,34 +404,6 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/customer_request_title" />
 
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/photo_title"
-                            style="@style/small_text_style.regular"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="12dp"
-                            android:text="@string/view_estimate_photo_title"
-                            android:textColor="@color/text_primary_color"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/custom_frame"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0"
-                            bind:visible="@{vm.requirement.images}" />
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/photo_list"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/gap_4"
-                            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/photo_title"
-                            app:spanCount="4"
-                            bind:photo_list="@{vm.requirement.images}"
-                            bind:visible="@{vm.requirement.images}"
-                            tools:listitem="@layout/view_holder_image" />
-
                         <ImageView
                             android:id="@+id/call_button"
                             android:layout_width="@dimen/estimation_card_call_to_customer_button_width"
@@ -449,8 +411,7 @@
                             android:layout_marginTop="@dimen/estimation_card_call_to_customer_button_margin_top"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/photo_list" />
-<!--                        android:onClick="@{() -> vm.callToClient()}"-->
+                            app:layout_constraintTop_toBottomOf="@id/custom_frame" />
 
                         <ImageView
                             android:id="@+id/call_button_icon"
@@ -465,7 +426,7 @@
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/call_button_text"
-                            style="@style/medium_text_style.bold"
+                            style="@style/text_style_16sp.bold"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/my_page_call_button_text_margin_start"
@@ -514,7 +475,7 @@
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/estimation_title"
-                            style="@style/medium_text_style.bold"
+                            style="@style/text_style_16sp.bold"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/estimation_card_default_margin_top"
@@ -554,6 +515,7 @@
             </ScrollView>
 
             <!-- region 견적 마감일 -->
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/due_date_container"
                 android:layout_width="match_parent"
@@ -585,7 +547,7 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/end_time_label"
-                    style="@style/small_text_style.bold"
+                    style="@style/text_style_14sp.bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/color_FF711D"
@@ -597,7 +559,7 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/end_time"
-                    style="@style/small_text_style.bold"
+                    style="@style/text_style_14sp.bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/basic_white"
@@ -614,7 +576,7 @@
             <!-- region 견적을 보낼래요/견적을 내기 어려워요 버튼 -->
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/refuse_button"
-                style="@style/medium_text_style.bold"
+                style="@style/text_style_16sp.bold"
                 android:layout_width="0dp"
                 android:layout_height="48dp"
                 android:background="@color/color_FF711D"
@@ -626,7 +588,7 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/accept_button"
-                style="@style/medium_text_style.bold"
+                style="@style/text_style_16sp.bold"
                 android:layout_width="0dp"
                 android:layout_height="48dp"
                 android:background="@color/color_22D47B"
@@ -647,7 +609,7 @@
             <!-- region 취소 됐음/시공 완료 버튼 -->
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/cancel_button"
-                style="@style/medium_text_style.bold"
+                style="@style/text_style_16sp.bold"
                 android:layout_width="0dp"
                 android:layout_height="48dp"
                 android:background="@color/color_FF711D"
@@ -660,7 +622,7 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/done_button"
-                style="@style/medium_text_style.bold"
+                style="@style/text_style_16sp.bold"
                 android:layout_width="0dp"
                 android:layout_height="48dp"
                 android:background="@color/color_22D47B"
@@ -675,7 +637,7 @@
             <!-- region 리뷰 요청 버튼 -->
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/ask_review_button"
-                style="@style/medium_text_style.bold"
+                style="@style/text_style_16sp.bold"
                 android:layout_width="0dp"
                 android:layout_height="48dp"
                 android:background="@drawable/default_button_selector"

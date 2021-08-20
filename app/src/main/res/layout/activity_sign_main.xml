@@ -34,7 +34,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            style="@style/small_text_style.regular"
+            style="@style/text_style_14sp.regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/sign_up_master_description_margin_top"
@@ -47,7 +47,7 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/sign_in"
-            style="@style/medium_text_style.bold"
+            style="@style/text_style_16sp.bold"
             android:layout_width="0dp"
             android:layout_height="@dimen/button_height"
             android:layout_marginStart="@dimen/sign_in_button_margin_start"
@@ -63,7 +63,7 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/sign_up"
-            style="@style/medium_text_style.bold"
+            style="@style/text_style_16sp.bold"
             android:layout_width="0dp"
             android:layout_height="@dimen/button_height"
             android:layout_marginStart="@dimen/sign_up_button_margin_start"

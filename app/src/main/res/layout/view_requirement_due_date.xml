@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/gap_40"
+        android:background="@drawable/shape_fill_gray_top_round">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/clock_icon"
+            android:layout_width="@dimen/gap_16"
+            android:layout_height="@dimen/gap_16"
+            android:layout_marginEnd="@dimen/gap_4"
+            android:src="@drawable/ic_alarm"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/due_date_label"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/due_date_label"
+            style="@style/text_style_14sp.bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_FF711D"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/due_date"
+            app:layout_constraintStart_toEndOf="@id/clock_icon"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="견적 마감일 : " />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/due_date"
+            style="@style/text_style_14sp.bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/basic_white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/due_date_label"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="2022.01.11 - 13:20" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

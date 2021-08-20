@@ -6,10 +6,12 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
+import kr.co.soogong.master.data.model.requirement.Repairing
+import kr.co.soogong.master.data.model.requirement.RequestFinish
 import kr.co.soogong.master.data.model.requirement.RequirementCard
-import kr.co.soogong.master.data.model.requirement.RequirementStatus
 import kr.co.soogong.master.domain.usecase.requirement.*
 import kr.co.soogong.master.ui.base.BaseViewModel
+import kr.co.soogong.master.ui.requirement.progressCodes
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -28,7 +30,7 @@ class ProgressViewModel @Inject constructor(
     fun requestList() {
         Timber.tag(TAG).d("requestList: ${_index.value}")
 
-        getRequirementCardsUseCase(RequirementStatus.getProgressCodes())
+        getRequirementCardsUseCase(progressCodes)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
@@ -38,8 +40,8 @@ class ProgressViewModel @Inject constructor(
 
                     _progressList.postValue(it.filter { card ->
                         when (_index.value) {
-                            1 -> card.status == RequirementStatus.Repairing
-                            2 -> card.status == RequirementStatus.RequestFinish
+                            1 -> card.status == Repairing
+                            2 -> card.status == RequestFinish
                             else -> card.status != null
                         }
                     })
@@ -57,9 +59,9 @@ class ProgressViewModel @Inject constructor(
         _index.value = index
         getRequirementCardsFromLocalUseCase(
             when (index) {
-                1 -> listOf(RequirementStatus.Repairing.toCode())
-                2 -> listOf(RequirementStatus.RequestFinish.toCode())
-                else -> RequirementStatus.getProgressCodes()
+                1 -> listOf(Repairing.code)
+                2 -> listOf(RequestFinish.code)
+                else -> progressCodes
             }
         )
             .subscribeOn(Schedulers.io())

@@ -108,7 +108,7 @@ class ProfileChipGroupCard @JvmOverloads constructor(
 
                     titleTextView.text = item.category?.name
                     titleTextView.setTextColor(resources.getColor(R.color.text_basic_color, null))
-                    titleTextView.setTextAppearance(R.style.medium_text_style_regular)
+                    titleTextView.setTextAppearance(R.style.text_style_16sp_regular)
 
                     binding.chipGroupContainer.addView(titleTextView, params)
                     addChipGroup(item.projects)
@@ -150,7 +150,7 @@ class ProfileChipGroupCard @JvmOverloads constructor(
                     else -> it.toString()
                 }
                 chip.setTextColor(resources.getColor(R.color.text_basic_color, null))
-                chip.setTextAppearance(R.style.medium_text_style_regular)
+                chip.setTextAppearance(R.style.text_style_16sp_regular)
 
                 chipGroup.addView(chip)
             }

@@ -9,7 +9,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/title"
-            style="@style/medium_text_style.medium"
+            style="@style/text_style_16sp.medium"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textColor="@color/text_basic_color"
@@ -20,7 +20,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/sub_title"
-            style="@style/small_text_style.medium"
+            style="@style/text_style_14sp.medium"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/gap_4"
@@ -33,7 +33,7 @@
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/first_detail"
-            style="@style/small_text_style.medium"
+            style="@style/text_style_14sp.medium"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/gap_12"
@@ -52,7 +52,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/at_text"
-            style="@style/medium_text_style.medium"
+            style="@style/text_style_16sp.medium"
             android:text="@string/at_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -66,7 +66,7 @@
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/second_detail"
-            style="@style/small_text_style.medium"
+            style="@style/text_style_14sp.medium"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/gap_12"
@@ -96,7 +96,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/alert"
-            style="@style/small_text_style.regular"
+            style="@style/text_style_14sp.regular"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/gap_4"

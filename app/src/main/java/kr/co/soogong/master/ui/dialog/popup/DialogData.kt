@@ -1,9 +1,12 @@
 package kr.co.soogong.master.ui.dialog.popup
 
 import android.content.Context
+import android.os.Parcelable
 import androidx.annotation.ColorInt
+import kotlinx.parcelize.Parcelize
 import kr.co.soogong.master.R
 
+@Parcelize
 data class DialogData(
     var title: String?,
     @ColorInt var titleTxtColor: Int,
@@ -13,7 +16,7 @@ data class DialogData(
     @ColorInt var positiveBtnTextColor: Int,
     var negativeBtnText: String?,
     @ColorInt var negativeBtnTextColor: Int
-) {
+) : Parcelable {
     companion object {
         fun getRefuseEstimateDialogData(context: Context) =
             DialogData(
@@ -76,7 +79,7 @@ data class DialogData(
                 "승인이 완료되어야\n문의 처리가 가능해요.", context.getColor(R.color.text_basic_color),
                 "승인이 완료되면 알림톡으로\n바로 알려드릴게요!", context.getColor(R.color.color_1FC472),
                 "확인", context.getColor(R.color.text_basic_color),
-                "취소", context.getColor(R.color.text_basic_color)
+                null, context.getColor(R.color.text_basic_color)
             )
 
         fun getAskingDeletePortfolioDialogData(context: Context) =

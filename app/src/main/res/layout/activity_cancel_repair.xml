@@ -30,7 +30,7 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/cancel_option_label"
-                    style="@style/medium_text_style.medium"
+                    style="@style/text_style_16sp.medium"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/cancel_estimation_default_margin_start_20"
@@ -55,7 +55,7 @@
 
                     <RadioButton
                         android:id="@+id/cancel_option_1"
-                        style="@style/small_text_style.medium"
+                        style="@style/text_style_14sp.medium"
                         android:layout_width="wrap_content"
                         android:layout_height="32dp"
                         android:text="@string/cancel_estimate_cancel_option_1"
@@ -64,7 +64,7 @@
 
                     <RadioButton
                         android:id="@+id/cancel_option_2"
-                        style="@style/small_text_style.medium"
+                        style="@style/text_style_14sp.medium"
                         android:layout_width="wrap_content"
                         android:layout_height="32dp"
                         android:text="@string/cancel_estimate_cancel_option_2"
@@ -72,7 +72,7 @@
 
                     <RadioButton
                         android:id="@+id/cancel_option_3"
-                        style="@style/small_text_style.medium"
+                        style="@style/text_style_14sp.medium"
                         android:layout_width="wrap_content"
                         android:layout_height="32dp"
                         android:text="@string/cancel_estimate_cancel_option_3"
@@ -80,7 +80,7 @@
 
                     <RadioButton
                         android:id="@+id/cancel_option_4"
-                        style="@style/small_text_style.medium"
+                        style="@style/text_style_14sp.medium"
                         android:layout_width="wrap_content"
                         android:layout_height="32dp"
                         android:text="@string/cancel_estimate_cancel_option_4"
@@ -89,7 +89,7 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/alert"
-                    style="@style/small_text_style.regular"
+                    style="@style/text_style_14sp.regular"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/cancel_estimation_default_margin_start_20"

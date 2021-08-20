@@ -34,7 +34,7 @@
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/get_images_button"
-                    style="@style/medium_text_style.bold"
+                    style="@style/text_style_16sp.bold"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/gap_40"
                     android:text="@string/get_images_button_text"
@@ -63,7 +63,7 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/default_button"
-            style="@style/medium_text_style.bold"
+            style="@style/text_style_16sp.bold"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:background="@color/color_22D47B"

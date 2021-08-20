@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/bind"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="key"
+            type="String" />
+
+        <variable
+            name="value"
+            type="String" />
+
+        <variable
+            name="alert"
+            type="String" />
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/transparent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:background="@drawable/ic_won"
+            app:layout_constraintVertical_bias="0"
+            />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/key_textview"
+            style="@style/text_style_14sp.medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{key}"
+            android:textColor="@color/color_555555"
+            android:layout_marginStart="@dimen/gap_4"
+            app:layout_constraintBottom_toBottomOf="@id/icon"
+            app:layout_constraintStart_toEndOf="@id/icon"
+            app:layout_constraintTop_toTopOf="@id/icon"
+            tools:text="나의 견적가 :" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/value_textview"
+            style="@style/text_style_14sp.bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{value}"
+            android:textColor="@color/color_555555"
+            android:layout_marginStart="@dimen/gap_4"
+            app:layout_constraintBottom_toBottomOf="@id/icon"
+            app:layout_constraintStart_toEndOf="@id/key_textview"
+            app:layout_constraintTop_toTopOf="@id/icon"
+            tools:text="300,000원" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/alert_textview"
+            style="@style/text_style_12sp.medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{alert}"
+            android:textColor="@color/color_909090"
+            app:layout_constraintTop_toBottomOf="@id/key_textview"
+            app:layout_constraintStart_toStartOf="@id/key_textview"
+            tools:text="2주 내 고객 미응답 시 해당 문의가 삭제됩니다." />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

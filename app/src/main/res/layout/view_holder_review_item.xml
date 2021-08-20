@@ -23,7 +23,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/master_recommendation_rating_text"
-            style="@style/tiny_text_style.medium"
+            style="@style/text_style_12sp.medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/master_recommendation_label"
@@ -46,7 +46,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/master_rating_kindness_text"
-            style="@style/tiny_text_style.medium"
+            style="@style/text_style_12sp.medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/gap_8"
@@ -58,7 +58,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/master_rating_kindness_score"
-            style="@style/tiny_text_style.medium"
+            style="@style/text_style_12sp.medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/gap_2"
@@ -70,7 +70,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/master_rating_quality_text"
-            style="@style/tiny_text_style.medium"
+            style="@style/text_style_12sp.medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/gap_10"
@@ -81,7 +81,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/master_rating_quality_score"
-            style="@style/tiny_text_style.medium"
+            style="@style/text_style_12sp.medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/gap_2"
@@ -93,7 +93,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/master_rating_affordability_text"
-            style="@style/tiny_text_style.medium"
+            style="@style/text_style_12sp.medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/gap_10"
@@ -104,7 +104,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/master_rating_affordability_score"
-            style="@style/tiny_text_style.medium"
+            style="@style/text_style_12sp.medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/gap_2"
@@ -116,7 +116,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/master_rating_punctuality_text"
-            style="@style/tiny_text_style.medium"
+            style="@style/text_style_12sp.medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/gap_10"
@@ -127,7 +127,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/master_rating_punctuality_score"
-            style="@style/tiny_text_style.medium"
+            style="@style/text_style_12sp.medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/gap_2"
@@ -139,7 +139,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/customer_review_type"
-            style="@style/tiny_text_style.regular"
+            style="@style/text_style_12sp.regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/gap_10"
@@ -151,7 +151,7 @@
 
         <kr.co.prnd.readmore.ReadMoreTextView
             android:id="@+id/customer_review_content"
-            style="@style/small_text_style.regular"
+            style="@style/text_style_14sp.regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/gap_12"
@@ -180,7 +180,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/customer_review_date"
-            style="@style/tiny_text_style.regular"
+            style="@style/text_style_12sp.regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/gap_12"

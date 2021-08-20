@@ -2,22 +2,23 @@ package kr.co.soogong.master.ui.requirement.progress
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentRequirementProgressBinding
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.dialog.popup.CustomDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData.Companion.getCallToCustomerDialogData
+import kr.co.soogong.master.ui.requirement.RequirementChipGroupHelper
 import kr.co.soogong.master.ui.requirement.progress.ProgressViewModel.Companion.REQUEST_FAILED
+import kr.co.soogong.master.ui.requirement.progressStatus
+import kr.co.soogong.master.ui.requirement.receivedStatus
 import kr.co.soogong.master.uihelper.requirment.CallToCustomerHelper
 import kr.co.soogong.master.uihelper.requirment.RequirementsBadge
 import kr.co.soogong.master.uihelper.requirment.action.EndRepairActivityHelper
 import kr.co.soogong.master.uihelper.requirment.action.ViewRequirementActivityHelper
 import kr.co.soogong.master.utility.EventObserver
+import kr.co.soogong.master.utility.extension.onCheckedChanged
 import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
 
@@ -40,14 +41,10 @@ class ProgressFragment : BaseFragment<FragmentRequirementProgressBinding>(
 
         bind {
             vm = viewModel
-
             lifecycleOwner = viewLifecycleOwner
 
-            swipeRefreshLayout.setColorSchemeResources(R.color.app_color)
-            swipeRefreshLayout.setOnRefreshListener {
-                viewModel.requestList()
-                swipeRefreshLayout.isRefreshing = false
-            }
+            RequirementChipGroupHelper(layoutInflater, filterGroup, progressStatus)
+            filterGroup.onCheckedChanged { index -> viewModel.onFilterChange(index) }
 
             progressList.adapter = ProgressAdapter(
                 cardClickListener = { requirementId ->
@@ -59,7 +56,7 @@ class ProgressFragment : BaseFragment<FragmentRequirementProgressBinding>(
                     )
                 },
                 callButtonClick = { keycode, number ->
-                    val dialog = CustomDialog(getCallToCustomerDialogData(requireContext()),
+                    val dialog = CustomDialog.newInstance(getCallToCustomerDialogData(requireContext()),
                         yesClick = {
                             viewModel.callToClient(
                                 requirementId = keycode
@@ -80,15 +77,6 @@ class ProgressFragment : BaseFragment<FragmentRequirementProgressBinding>(
                     )
                 }
             )
-
-            val dividerItemDecoration = DividerItemDecoration(
-                context,
-                LinearLayoutManager(context).orientation
-            )
-            ResourcesCompat.getDrawable(resources, R.drawable.divider, null)?.let {
-                dividerItemDecoration.setDrawable(it)
-            }
-            progressList.addItemDecoration(dividerItemDecoration)
         }
     }
 

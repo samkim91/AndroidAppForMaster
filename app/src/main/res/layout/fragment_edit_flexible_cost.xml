@@ -32,7 +32,7 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/title"
-                    style="@style/medium_text_style.medium"
+                    style="@style/text_style_16sp.medium"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/edit_flexible_cost_screen_title"
@@ -103,7 +103,7 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/default_button"
-            style="@style/medium_text_style.bold"
+            style="@style/text_style_16sp.bold"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:background="@color/color_22D47B"

@@ -53,7 +53,7 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/tiny_small_text_style.medium"
+                style="@style/text_style_13sp.medium"
                 android:textColor="@color/color_9E9E9E"
                 android:layout_marginStart="@dimen/gap_20"
                 android:layout_marginTop="@dimen/gap_15"

@@ -6,12 +6,15 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
+import kr.co.soogong.master.data.model.requirement.Estimated
+import kr.co.soogong.master.data.model.requirement.Requested
 import kr.co.soogong.master.data.model.requirement.RequirementCard
 import kr.co.soogong.master.data.model.requirement.RequirementStatus
 import kr.co.soogong.master.domain.usecase.auth.GetMasterApprovedStatusUseCase
 import kr.co.soogong.master.domain.usecase.requirement.GetRequirementCardsFromLocalUseCase
 import kr.co.soogong.master.domain.usecase.requirement.GetRequirementCardsUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
+import kr.co.soogong.master.ui.requirement.receivedCodes
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -34,7 +37,7 @@ class ReceivedViewModel @Inject constructor(
     fun requestList() {
         Timber.tag(TAG).d("requestList: ${_index.value}")
 
-        getRequirementCardsUseCase(RequirementStatus.getReceivedCodes())
+        getRequirementCardsUseCase(receivedCodes)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
@@ -44,8 +47,8 @@ class ReceivedViewModel @Inject constructor(
 
                     _receivedList.postValue(it.filter { card ->
                         when (_index.value) {
-                            1 -> card.status == RequirementStatus.Requested
-                            2 -> card.status == RequirementStatus.Estimated
+                            1 -> card.status == Requested
+                            2 -> card.status == Estimated
                             else -> card.status != null
                         }
                     })
@@ -64,9 +67,9 @@ class ReceivedViewModel @Inject constructor(
         _index.value = index
         getRequirementCardsFromLocalUseCase(
             when (index) {
-                1 -> listOf(RequirementStatus.Requested.toCode())
-                2 -> listOf(RequirementStatus.Estimated.toCode())
-                else -> RequirementStatus.getReceivedCodes()
+                1 -> listOf(Requested.code)
+                2 -> listOf(Estimated.code)
+                else -> receivedCodes
             }
         )
             .subscribeOn(Schedulers.io())

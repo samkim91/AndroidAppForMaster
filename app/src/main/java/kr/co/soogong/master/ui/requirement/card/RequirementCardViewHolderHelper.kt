@@ -2,7 +2,7 @@ package kr.co.soogong.master.ui.requirement.card
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import kr.co.soogong.master.data.model.requirement.RequirementStatus
+import kr.co.soogong.master.data.model.requirement.*
 import kr.co.soogong.master.databinding.ViewHolderRequirementItemBinding
 
 object RequirementCardViewHolderHelper {
@@ -14,26 +14,26 @@ object RequirementCardViewHolderHelper {
         )
 
         return when (viewType) {
-            RequirementStatus.Requested.toInt() -> {
-                RequestedViewHolder(binding)
+            Requested.asInt -> {
+                RequestedViewHolder(parent.context, binding)
             }
-            RequirementStatus.Estimated.toInt() -> {
-                EstimatedViewHolder(binding)
+            Estimated.asInt -> {
+                EstimatedViewHolder(parent.context,binding)
             }
-            RequirementStatus.Repairing.toInt() -> {
-                RepairingViewHolder(binding)
+            Repairing.asInt -> {
+                RepairingViewHolder(parent.context,binding)
             }
-            RequirementStatus.RequestFinish.toInt() -> {
-                RequestFinishViewHolder(binding)
+            RequestFinish.asInt -> {
+                RequestFinishViewHolder(parent.context,binding)
             }
-            RequirementStatus.Done.toInt() -> {
-                DoneViewHolder(binding)
+            Done.asInt -> {
+                DoneViewHolder(parent.context,binding)
             }
-            RequirementStatus.Closed.toInt() -> {
-                ClosedViewHolder(binding)
+            Closed.asInt -> {
+                ClosedViewHolder(parent.context,binding)
             }
             else -> {
-                CanceledViewHolder(binding)
+                CanceledViewHolder(parent.context,binding)
             }
         }
     }

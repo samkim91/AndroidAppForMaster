@@ -69,9 +69,9 @@
     <string name="alert_text_to_fill_up_required_information"><b>필수 정보를 모두 등록</b>하고, 승인이 완료되면\n<b>문의 처리가 가능</b>합니다!</string>
 
     <!--  Requirements  -->
-    <string name="requirements_received_name">견적</string>
-    <string name="requirements_progress_name">시공</string>
-    <string name="requirements_done_name">완료</string>
+    <string name="requirements_received_tab_name">문의</string>
+    <string name="requirements_progress_tab_name">진행중</string>
+    <string name="requirements_done_tab_name">완료·취소</string>
     <string name="requirements_received_code">Received</string>
     <string name="requirements_progress_code">Progress</string>
     <string name="requirements_done_code">Done</string>
@@ -103,20 +103,20 @@
     <string name="requirements_card_review_button">리뷰 요청하기</string>
     <string name="requirements_card_review_button_done">리뷰 요청을 완료했어요!</string>
     <string name="requirements_card_start_time">최초 요청일 : %s</string>
-    <string name="requirements_card_matched_time">고객매칭 완료일 : %s</string>
-    <string name="requirements_card_request_finish_time">완료 요청일 : %s</string>
-    <string name="requirements_card_repair_done_time">시공 완료일 : %s</string>
-    <string name="requirements_card_end_time">견적 마감일 : %s</string>
-    <string name="requirements_card_amount_title">나의 견적가</string>
-    <string name="requirements_card_amount_done_title">최종 시공가</string>
+    <string name="requirements_card_due_date">견적 마감일 : </string>
+    <string name="requirements_card_done_date">시공 완료일 : </string>
+    <string name="requirements_card_amount_title">나의 견적가 :</string>
+    <string name="requirements_card_amount_done_title">최종 시공가 :</string>
+    <string name="requirements_card_due_date_alert">마감일이 지나면 해당 문의가 삭제됩니다.</string>
     <string name="not_estimated_text">견적 미발송</string>
+    <string name="measurement_text">현장실측</string>
 
     <!-- View Requirement -->
     <string name="view_estimate_customer_review_title">고객 리뷰</string>
     <string name="view_repair_title">나의 최종 시공 내용</string>
     <string name="view_repair_canceled_title">시공 취소 사유</string>
     <string name="view_estimate_customer_request_title">고객 요청 내용</string>
-    <string name="view_estimate_photo_title">사진이 있다면 견적에 도움이 됩니다.</string>
+    <string name="view_requirement_images_label">사진이 있다면 견적에 도움이 됩니다.</string>
     <string name="view_requirement_description">정확한 견적을 위해 마스터에게 더 설명드릴 사항이 있나요?</string>
     <string name="view_estimate_transmission_title">나의 제안 내용</string>
     <string name="view_estimate_accept">견적을 보낼래요</string>

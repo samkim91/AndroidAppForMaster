@@ -33,7 +33,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:tabIndicatorColor="@android:color/transparent"
-            app:tabTextAppearance="@style/tiny_text_style.bold" />
+            app:tabTextAppearance="@style/text_style_12sp.bold" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

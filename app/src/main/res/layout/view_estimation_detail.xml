@@ -9,31 +9,25 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/key"
-            style="@style/small_text_style.regular"
+            style="@style/text_style_14sp.regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/text_primary_color"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="총 견적가" />
+            tools:text="제안내용" />
 
-        <LinearLayout
-            android:id="@+id/transmission_detail_value_container"
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/value"
+            style="@style/text_style_14sp.medium"
             android:layout_width="wrap_content"
+            android:gravity="right"
             android:layout_height="wrap_content"
-            android:paddingStart="130dp"
+            android:maxWidth="@dimen/gap_230"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            >
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/value"
-                style="@style/small_text_style.medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/text_basic_color"
-                tools:text="100,000원" />
-        </LinearLayout>
+            android:textColor="@color/text_basic_color"
+            tools:text="다른 업체보다 빠르고 정확한 시공을 자신합니다. 시공 후 문제가 생긴다면 책임지고 A/S 해드려요. 연락주시면 더 정확한 안내가 가능합" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
