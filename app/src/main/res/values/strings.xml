@@ -78,32 +78,20 @@
 
     <!-- Requirements : Request -->
     <string name="requirements_request_none_status">아직 들어온 문의가 없습니다.</string>
-    <string name="requirements_request_filter_option_1">전체</string>
-    <string name="requirements_request_filter_option_2">견적요청</string>
-    <string name="requirements_request_filter_option_3">매칭대기</string>
 
     <!-- Requirements : Progress -->
     <string name="requirements_progress_none_status">아직 진행중인 문의가 없습니다.</string>
-    <string name="requirements_progress_filter_option_1">전체</string>
-    <string name="requirements_progress_filter_option_2">시공진행중</string>
-    <string name="requirements_progress_filter_option_3">고객완료요청</string>
 
     <!-- Requirements : Done -->
     <string name="requirements_done_none_status">아직 완료된 문의가 없습니다.</string>
-    <string name="requirements_done_filter_option_1">전체</string>
-    <string name="requirements_done_filter_option_2">시공완료</string>
-    <string name="requirements_done_filter_option_3">평가완료</string>
-    <string name="requirements_done_filter_option_4">시공취소</string>
 
     <!-- RequirementsCard -->
     <string name="requirements_card_waiting_label">2주 내 고객의 응답이 없을 시 해당 문의건은 삭제됩니다.</string>
-    <string name="requirements_card_call_button">고객에게 전화하기</string>
-    <string name="requirements_card_call_re_button">다시 전화하기</string>
-    <string name="requirements_card_done_button">시공 완료</string>
     <string name="requirements_card_review_button">리뷰 요청하기</string>
     <string name="requirements_card_review_button_done">리뷰 요청을 완료했어요!</string>
     <string name="requirements_card_start_time">최초 요청일 : %s</string>
     <string name="requirements_card_due_date">견적 마감일 : </string>
+    <string name="requirements_card_response_measure_due_date">실측 선택 마감 : </string>
     <string name="requirements_card_done_date">시공 완료일 : </string>
     <string name="requirements_card_amount_title">나의 견적가 :</string>
     <string name="requirements_card_amount_done_title">최종 시공가 :</string>
@@ -112,24 +100,57 @@
     <string name="measurement_text">현장실측</string>
 
     <!-- View Requirement -->
-    <string name="view_estimate_customer_review_title">고객 리뷰</string>
-    <string name="view_repair_title">나의 최종 시공 내용</string>
-    <string name="view_repair_canceled_title">시공 취소 사유</string>
-    <string name="view_estimate_customer_request_title">고객 요청 내용</string>
+    <string name="requirement_drawer_title_of_customer_review">고객 리뷰</string>
+    <string name="requirement_drawer_title_of_repair">나의 최종 시공 내용</string>
+    <string name="requirement_drawer_title_of_canceled_reason">시공 취소 사유</string>
+    <string name="requirement_drawer_title_of_customer_request">고객 요청 내용</string>
+    <string name="requirement_drawer_title_of_my_estimation">나의 제안 내용</string>
+
     <string name="view_requirement_images_label">사진이 있다면 견적에 도움이 됩니다.</string>
     <string name="view_requirement_description">정확한 견적을 위해 마스터에게 더 설명드릴 사항이 있나요?</string>
-    <string name="view_estimate_transmission_title">나의 제안 내용</string>
-    <string name="view_estimate_accept">견적을 보낼래요</string>
-    <string name="view_estimate_refuse">견적을 내기 어려워요</string>
-    <string name="view_estimate_cancelled">취소 됐음</string>
-    <string name="view_estimate_done_button">시공 완료</string>
-    <string name="view_estimate_ask_review">리뷰 요청하기</string>
+
+    <string name="accept_estimate_text">견적을 보낼래요</string>
+    <string name="refuse_estimate_text">견적을 내기 어려워요</string>
+    <string name="accept_measure_text">실측 할래요</string>
+    <string name="refuse_measure_text">실측 안할래요</string>
+    <string name="cancel_requirement_text"><u>취소하기</u></string>
+    <string name="repair_done_text">시공 완료</string>
+    <string name="request_review_text">리뷰 요청하기</string>
+    <string name="call_to_customer_text">고객에게 전화하기</string>
+    <string name="recall_to_customer_text">다시 전화하기</string>
 
     <string name="master_recommendation_label">마스터 추천도</string>
     <string name="master_kindness_label">친절도</string>
     <string name="master_quality_label">퀄리티</string>
     <string name="price_affordability_label">가격만족</string>
     <string name="punctuality_label">기일준수</string>
+    <string name="requirement_token_label">문의 번호 : %s</string>
+
+    <string name="requirement_intro_title_of_requested">견적요청이 왔습니다.</string>
+    <string name="requirement_intro_subtitle_of_requested">견적에 대한 의사표현을 해주세요.\n<font color="#2E2E2E">미응답 시 추후 요청에 제한</font>이 있을 수 있습니다.</string>
+
+    <string name="requirement_intro_title_of_estimated">견적서를 전달했습니다.\n고객의 선택을 기다려주세요.</string>
+    <string name="requirement_intro_subtitle_of_estimated">2주 내 고객 미응답 시 해당 문의가 삭제됩니다.</string>
+
+    <string name="requirement_intro_title_of_request_measure">%s\n현장 실측 요청이 왔습니다.</string>
+
+    <string name="requirement_intro_title_of_repairing_from_funnel">고객의 선택을 받았습니다!\n시공일정을 잡아주세요.</string>
+    <string name="requirement_intro_title_of_repairing_from_secretary">%s\n시공 예정입니다.</string>
+    <string name="requirement_intro_subtitle_of_repairing">시공 완료 시 시공 완료버튼을 눌러\n최종 정보를 입력해주세요.\n<b><font color="#2E2E2E">미입력 시 배정에 불이익</font></b>이 있을 수 있습니다.</string>
+
+    <string name="requirement_intro_title_of_request_finish">시공 완료 요청이 왔습니다.\n완료 처리를 해주세요.</string>
+    <string name="requirement_intro_subtitle_of_request_finish">시공 완료버튼을 눌러 최종 정보를 입력해주세요.\n<b><font color="#2E2E2E">미입력 시 배정에 불이익</font></b>이 있을 수 있습니다.</string>
+
+    <string name="requirement_intro_title_of_measuring">%s\n실측 예정입니다.</string>
+    <string name="requirement_intro_subtitle_of_measuring">실측 완료 시 견적서 보내기를 눌러\n실측 정보를 입력해주세요.\n<b><font color="#2E2E2E">미입력 시 배정에 불이익</font></b>이 있을 수 있습니다.</string>
+
+    <string name="requirement_intro_title_of_measured">실측이 완료됐습니다.\n고객의 선택을 기다려주세요.</string>
+
+    <string name="requirement_intro_title_of_done">시공을 완료 했습니다!</string>
+    <string name="requirement_intro_subtitle_of_done">고객에게 리뷰요청을 해주세요.\n<b><font color="#2E2E2E">배정에 유리</font></b>할 수 있습니다.</string>
+
+    <string name="requirement_intro_title_of_close">%s\n고객이 리뷰를 남겼습니다.</string>
+    <string name="requirement_intro_title_of_canceled">취소되었습니다.</string>
 
 
     <!-- Transmission Card & Done Card in View Estimate -->
@@ -139,6 +160,7 @@
     <string name="estimation_material_cost">자재비</string>
     <string name="description_label">세부내용</string>
     <string name="estimation_description_label">제안내용</string>
+    <string name="measure_attachment_label">실측정보</string>
     <string name="view_estimate_transmission_detail_work_date">시공시기</string>
     <string name="repair_actual_price">최종 시공가</string>
     <string name="cancel_repair_title">취소 사유</string>

@@ -5,7 +5,10 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/gap_12"
+        android:paddingBottom="@dimen/gap_12"
+        >
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/question"

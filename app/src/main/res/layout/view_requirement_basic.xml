@@ -3,14 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-        <import type="android.view.View"/>
-        <variable
-            name="measurementBadgeVisibility"
-            type="Boolean" />
-    </data>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -20,7 +12,6 @@
             layout="@layout/measurement_badge"
             android:layout_width="@dimen/gap_85"
             android:layout_height="@dimen/gap_26"
-            android:visibility="@{measurementBadgeVisibility ? View.VISIBLE : View.GONE}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"

@@ -8,10 +8,11 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-@BindingAdapter("dividerDrawable")
+@BindingAdapter("setDivider")
 fun RecyclerView.setDivider(drawable: Drawable) {
     val dividerItemDecoration = DividerItemDecoration(context, LinearLayoutManager(context).orientation)
     dividerItemDecoration.setDrawable(drawable)
 
     this.addItemDecoration(dividerItemDecoration)
 }
+

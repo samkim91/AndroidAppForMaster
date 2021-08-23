@@ -1,14 +1,14 @@
 package kr.co.soogong.master.ui.widget
 
 import android.content.Context
+import android.icu.text.SimpleDateFormat
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.view.forEachIndexed
 import androidx.core.view.isVisible
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ViewRequirementBasicBinding
-import kr.co.soogong.master.databinding.ViewRequirementIntroBinding
+import java.util.*
 
 class RequirementBasic @JvmOverloads constructor(
     context: Context,
@@ -30,21 +30,30 @@ class RequirementBasic @JvmOverloads constructor(
             binding.project.text = value
         }
 
-    var createdAt: String? = ""
+    var createdAt: Date? = Date()
         set(value) {
             field = value
-            binding.createdAt.text = value
+            value?.let {
+                binding.createdAt.text = context.getString(
+                    R.string.requirements_card_start_time,
+                    SimpleDateFormat("yyyy.MM.dd - HH:mm", Locale.KOREA).format(it)
+                )
+            }
         }
 
     var requirementToken: String? = ""
         set(value) {
             field = value
-            binding.requirementToken.text = value
+            binding.requirementToken.text =
+                context.getString(R.string.requirement_token_label, value)
         }
 
+    // TODO: 2021/08/23 수공비서건인지 데이터 확인 필요
     var measurementBadgeVisibility: Boolean? = false
         set(value) {
             field = value
-            binding.measurementBadgeVisibility = value
+            value?.let {
+                binding.measurementBadge.root.isVisible = it
+            }
         }
 }

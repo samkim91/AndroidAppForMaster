@@ -3,9 +3,13 @@ package kr.co.soogong.master.ui.widget
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.constraintlayout.widget.ConstraintLayout
 import kr.co.soogong.master.R
+import kr.co.soogong.master.data.dto.requirement.RequirementDto
 import kr.co.soogong.master.databinding.ViewRequirementQnaBinding
+import kr.co.soogong.master.utility.extension.dp
 
 class RequirementQna @JvmOverloads constructor(
     context: Context,
@@ -30,4 +34,52 @@ class RequirementQna @JvmOverloads constructor(
                 binding.answer.text = value
             }
         }
+
+    companion object {
+        fun addRequirementQna(
+            context: Context,
+            container: ViewGroup,
+            requirementDto: RequirementDto,
+            includingCancel: Boolean,
+        ) {
+            // Qna 추가
+            requirementDto.requirementQnas?.let { list ->
+                list.map {
+                    RequirementQna(context).apply {
+                        question = it.question
+                        answer = it.answer
+                    }.run {
+                        container.addView(this)
+                    }
+                }
+            }
+
+            // description 추가
+            requirementDto.description?.let {
+                RequirementQna(context)
+                    .apply {
+                        question = context.getString(R.string.view_requirement_description)
+                        answer = it
+                    }.run {
+                        container.addView(this)
+                    }
+            }
+
+            // images 추가
+            requirementDto.images?.let {
+                RequirementImages(context).apply {
+                    images = it
+                }.run {
+                    container.addView(this)
+                }
+            }
+
+            // 취소하기
+            if (includingCancel) RequirementDrawerContainer.addCancelButton(
+                context,
+                container,
+                requirementDto
+            )
+        }
+    }
 }

@@ -14,11 +14,11 @@ import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.ui.dialog.popup.CustomDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData.Companion.getCancelSendingEstimationDialogData
 import kr.co.soogong.master.ui.image.RectangleImageAdapter
-import kr.co.soogong.master.ui.requirement.action.write.WriteEstimationViewModel.Companion.SEND_MESSAGE_FAILED
 import kr.co.soogong.master.ui.requirement.action.write.WriteEstimationViewModel.Companion.SEND_ESTIMATION_SUCCESSFULLY
+import kr.co.soogong.master.ui.requirement.action.write.WriteEstimationViewModel.Companion.SEND_MESSAGE_FAILED
+import kr.co.soogong.master.ui.widget.RequirementQna
 import kr.co.soogong.master.uihelper.image.ImageViewActivityHelper
 import kr.co.soogong.master.utility.EventObserver
-import kr.co.soogong.master.utility.extension.addRequirementQna
 import kr.co.soogong.master.utility.extension.startHalfRotateAnimation
 import kr.co.soogong.master.utility.extension.toast
 import kr.co.soogong.master.utility.validation.ValidationHelper
@@ -53,15 +53,18 @@ class WriteEstimationActivity : BaseActivity<ActivityWriteEstimationBinding>(
                 button.text = getString(R.string.send_estimation)
                 button.setOnClickListener {
                     registerCostsObserve()
-                    if (viewModel.estimationType.value == EstimationTypeCode.INTEGRATION){
+                    if (viewModel.estimationType.value == EstimationTypeCode.INTEGRATION) {
                         if (!simpleCost.alertVisible && ValidationHelper.isIntRange(viewModel.simpleCost.value!!)) viewModel.sendEstimation()
                     } else {
-                        if((!laborCost.alertVisible && !materialCost.alertVisible && !travelCost.alertVisible) && ValidationHelper.isIntRange(viewModel.totalCost.value!!)) viewModel.sendEstimation()
+                        if ((!laborCost.alertVisible && !materialCost.alertVisible && !travelCost.alertVisible) && ValidationHelper.isIntRange(
+                                viewModel.totalCost.value!!
+                            )
+                        ) viewModel.sendEstimation()
                     }
                 }
             }
 
-            detailButton.setOnClickListener() {
+            detailButton.setOnClickListener {
                 detailIcon.startHalfRotateAnimation(!detailContainer.isVisible)
                 detailContainer.isVisible = !detailContainer.isVisible
             }
@@ -143,7 +146,7 @@ class WriteEstimationActivity : BaseActivity<ActivityWriteEstimationBinding>(
         })
 
         viewModel.requirement.observe(this, { requirement ->
-            addRequirementQna(binding.customFrame, this, requirement)
+            RequirementQna.addRequirementQna(this, binding.customFrame, requirement, false)
         })
     }
 
@@ -193,7 +196,7 @@ class WriteEstimationActivity : BaseActivity<ActivityWriteEstimationBinding>(
         customBackPressed()
     }
 
-    private fun customBackPressed(){
+    private fun customBackPressed() {
         val dialog = CustomDialog.newInstance(
             getCancelSendingEstimationDialogData(this@WriteEstimationActivity),
             yesClick = {

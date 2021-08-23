@@ -12,7 +12,6 @@ import kr.co.soogong.master.ui.dialog.popup.DialogData.Companion.getCallToCustom
 import kr.co.soogong.master.ui.requirement.RequirementChipGroupHelper
 import kr.co.soogong.master.ui.requirement.progress.ProgressViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.ui.requirement.progressStatus
-import kr.co.soogong.master.ui.requirement.receivedStatus
 import kr.co.soogong.master.uihelper.requirment.CallToCustomerHelper
 import kr.co.soogong.master.uihelper.requirment.RequirementsBadge
 import kr.co.soogong.master.uihelper.requirment.action.EndRepairActivityHelper

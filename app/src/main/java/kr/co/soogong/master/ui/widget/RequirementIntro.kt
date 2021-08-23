@@ -30,7 +30,7 @@ class RequirementIntro @JvmOverloads constructor(
             binding.subtitle.text = value
         }
 
-    var theme: Int? = 0
+    var theme: Int? = 101
         set(value) {
             field = value
             when (value) {

@@ -58,7 +58,7 @@
                 android:id="@+id/received_list"
                 android:layout_width="@dimen/gap_0"
                 android:layout_height="@dimen/gap_0"
-                app:dividerDrawable="@{@drawable/divider}"
+                app:setDivider="@{@drawable/thick_divider}"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 bind:received_list="@{vm.receivedList}"
                 tools:listitem="@layout/view_holder_requirement_item" />

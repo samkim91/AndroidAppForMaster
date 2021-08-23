@@ -26,6 +26,22 @@ data class DialogData(
                 "아니요", context.getColor(R.color.text_basic_color)
             )
 
+        fun getAcceptMeasureDialogData(context: Context) =
+            DialogData(
+                "현장 실측 요청을 수락하시겠어요?", context.getColor(R.color.text_basic_color),
+                "수락 후 고객과 통화해\n정확한 시공 내용을 파악해주세요.", context.getColor(R.color.color_1FC472),
+                "네", context.getColor(R.color.text_basic_color),
+                "아니요", context.getColor(R.color.text_basic_color)
+            )
+
+        fun getRefuseMeasureDialogData(context: Context) =
+            DialogData(
+                "실측을 포기하시겠어요?", context.getColor(R.color.text_basic_color),
+                null, context.getColor(R.color.color_1FC472),
+                "네", context.getColor(R.color.text_basic_color),
+                "아니요", context.getColor(R.color.text_basic_color)
+            )
+
         fun getCancelSendingEstimationDialogData(context: Context) =
             DialogData(
                 "견적서 작성을 취소하시겠어요?", context.getColor(R.color.text_basic_color),
