@@ -315,6 +315,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                app:setDivider="@{@drawable/thin_divider}"
                 app:layout_constraintTop_toBottomOf="@id/review_rating_container"
                 bind:review_list="@{vm.myReview.reviews}"
                 tools:listitem="@layout/view_holder_review_item" />

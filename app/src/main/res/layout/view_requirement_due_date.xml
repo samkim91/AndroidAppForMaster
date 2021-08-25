@@ -37,6 +37,7 @@
             style="@style/text_style_14sp.bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/gap_2"
             android:textColor="@color/basic_white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

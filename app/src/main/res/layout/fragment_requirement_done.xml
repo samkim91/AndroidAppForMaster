@@ -58,7 +58,7 @@
                 android:id="@+id/done_list"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                app:dividerDrawable="@{@drawable/divider}"
+                app:setDivider="@{@drawable/thick_divider}"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 bind:done_list="@{vm.doneList}"
                 tools:listitem="@layout/view_holder_requirement_item" />

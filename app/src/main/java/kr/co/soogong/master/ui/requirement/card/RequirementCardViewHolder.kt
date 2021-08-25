@@ -100,7 +100,11 @@ class EstimatedViewHolder(
                     theme = GRAY_THEME,
                     type = MONEY_TYPE,
                     titleData = context.getString(R.string.requirements_card_amount_title),
-                    contentData = if (requirementCard.estimationDto?.price!! > 0) "${moneyFormat.format(requirementCard.estimationDto.price)}원" else context.getString(R.string.not_estimated_text),
+                    contentData = if (requirementCard.estimationDto?.price!! > 0) "${
+                        moneyFormat.format(
+                            requirementCard.estimationDto.price
+                        )
+                    }원" else context.getString(R.string.not_estimated_text),
                     alertData = context.getString(R.string.requirements_card_waiting_label),
                 )
             })
@@ -108,7 +112,7 @@ class EstimatedViewHolder(
     }
 }
 
-// 시공진행중 상태
+// 시공예정 상태
 class RepairingViewHolder(
     override val context: Context,
     override val binding: ViewHolderRequirementItemBinding,
@@ -133,15 +137,19 @@ class RepairingViewHolder(
                     theme = GREEN_THEME,
                     type = MONEY_TYPE,
                     titleData = context.getString(R.string.requirements_card_amount_title),
-                    contentData = if (requirementCard.estimationDto?.price!! > 0) "${moneyFormat.format(requirementCard.estimationDto.price)}원" else context.getString(R.string.not_estimated_text),
+                    contentData = if (requirementCard.estimationDto?.price!! > 0) "${
+                        moneyFormat.format(
+                            requirementCard.estimationDto.price
+                        )
+                    }원" else context.getString(R.string.not_estimated_text),
                     alertData = ""
                 )
             })
 
             leftButton.isVisible = true
             rightButton.isVisible = true
-            leftButton.setText(R.string.requirements_card_call_button)
-            rightButton.setText(R.string.requirements_card_done_button)
+            leftButton.setText(R.string.call_to_customer_text)
+            rightButton.setText(R.string.repair_done_text)
 
             // TODO.. 첫 전화인지, 아닌지에 따라 버튼의 UI를 변경해줘야햠. Figma 참고
             leftButton.setOnClickListener {
@@ -175,7 +183,7 @@ class RequestFinishViewHolder(
 
         with(binding) {
             rightButton.isVisible = true
-            rightButton.setText(R.string.requirements_card_done_button)
+            rightButton.setText(R.string.repair_done_text)
 
             rightButton.setOnClickListener {
                 rightButtonClickListener?.invoke(requirementCard.id, requirementCard)

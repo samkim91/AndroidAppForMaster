@@ -15,9 +15,6 @@
         android:id="@+id/customer_review_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingStart="@dimen/gap_20"
-        android:paddingTop="@dimen/gap_20"
-        android:paddingEnd="@dimen/gap_20"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/line">
 
@@ -189,15 +186,5 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/review_photo_list"
             tools:text="2020.07.01" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/line"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/line_height"
-            android:layout_marginTop="@dimen/gap_20"
-            android:background="@color/line_color"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/customer_review_date" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

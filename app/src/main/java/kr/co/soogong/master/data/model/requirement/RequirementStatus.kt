@@ -48,31 +48,38 @@ object Estimated : RequirementStatus() {
 // end region : Received Tab
 
 // region : Progress Tab
+object RequestMeasure : RequirementStatus() {
+    override val inKorean = "실측요청"
+    override val code = "RequestMeasure"
+    override val asInt = 200
+    override val introductionText = ""
+}
+
 object Measuring : RequirementStatus() {
     override val inKorean = "실측예정"
     override val code = "Measuring"
-    override val asInt = 200
+    override val asInt = 201
     override val introductionText = "필요시 고객과 전화로 상담해주세요"
 }
 
 object Measured : RequirementStatus() {
     override val inKorean = "실측완료"
     override val code = "Measured"
-    override val asInt = 201
+    override val asInt = 202
     override val introductionText = "고객의 선택을 기다려주세요"
 }
 
 object Repairing : RequirementStatus() {
-    override val inKorean = "시공진행중"
+    override val inKorean = "시공예정"
     override val code = "Repairing"
-    override val asInt = 202
+    override val asInt = 203
     override val introductionText = ""
 }
 
 object RequestFinish : RequirementStatus() {
     override val inKorean = "고객완료 요청"
     override val code = "RequestFinish"
-    override val asInt = 203
+    override val asInt = 204
     override val introductionText = "수리를 완료하고 리뷰를 쌓아보세요"
 }
 // end region : Progress Tab
