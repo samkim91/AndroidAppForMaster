@@ -1,11 +1,13 @@
 package kr.co.soogong.master
 
+import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.media.RingtoneManager
+import android.net.Uri
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
@@ -16,6 +18,11 @@ import kr.co.soogong.master.uihelper.requirment.action.ViewRequirementActivityHe
 import timber.log.Timber
 
 class SoogongMasterMessagingService : FirebaseMessagingService() {
+    override fun onNewToken(token: String) {
+        super.onNewToken(token)
+        Timber.tag(TAG).d("onNewToken: $token")
+    }
+
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         Timber.tag(TAG).d("onMessageReceived: from - ${remoteMessage.from}")
         if (remoteMessage.data.isNotEmpty()) {
@@ -31,72 +38,67 @@ class SoogongMasterMessagingService : FirebaseMessagingService() {
     }
 
     private fun sendNotification(remoteMessage: RemoteMessage) {
-        val pendingIntent =
-            PendingIntent.getActivity(
-                this,
-                0,
-                findDestination(
-                    remoteMessage.data["Destination"],
-                    remoteMessage.data["RequirementId"]
-                ),
-                PendingIntent.FLAG_ONE_SHOT
-            )
-
-        val channelId = getString(R.string.default_notification_channel_id)
-        val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
-
-        val builder = NotificationCompat.Builder(this, channelId).apply {
-            setSmallIcon(R.drawable.ic_notification_icon)
-            color = ContextCompat.getColor(this@SoogongMasterMessagingService, R.color.color_22D47B)
-            setContentTitle(remoteMessage.data["Title"])
-            setContentText(remoteMessage.data["Body"])
-            setAutoCancel(true)
-            setSound(defaultSoundUri)
-            setContentIntent(pendingIntent)
-        }
+        val builder =
+            NotificationCompat.Builder(this, getString(R.string.default_notification_channel_id))
+                .apply {
+                    setSmallIcon(R.drawable.ic_notification_icon)
+                    color = ContextCompat.getColor(
+                        this@SoogongMasterMessagingService,
+                        R.color.color_22D47B
+                    )
+                    priority = NotificationCompat.PRIORITY_HIGH
+                    setContentTitle(remoteMessage.data["Title"])
+                    setContentText(remoteMessage.data["Body"])
+                    setAutoCancel(true)
+                    setSound(getAlertSound(remoteMessage))
+                    setDefaults(Notification.DEFAULT_VIBRATE)
+                    setContentIntent(getPendingIntent(remoteMessage))
+                }
 
         val notificationManager =
             getSystemService(Context.NOTIFICATION_SERVICE) as? NotificationManager
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channelName = getString(R.string.default_notification_channel_name)
-            val channel = NotificationChannel(
-                channelId,
-                channelName,
+            NotificationChannel(
+                getString(R.string.default_notification_channel_id),
+                getString(R.string.default_notification_channel_name),
                 NotificationManager.IMPORTANCE_HIGH
-            )
-            notificationManager?.createNotificationChannel(channel)
-        }
-
-        notificationManager?.notify(
-            System.currentTimeMillis().toInt(),
-            builder.build()
-        )
-    }
-
-    override fun onNewToken(token: String) {
-        super.onNewToken(token)
-        Timber.tag(TAG).d("onNewToken: $token")
-        sendRegistrationToServer(token)
-    }
-
-    private fun sendRegistrationToServer(token: String?) {
-        // Implement this method to send token to your app server.
-        Timber.tag(TAG).d("sendRegistrationTokenToServer($token)")
-    }
-
-    private fun findDestination(destination: String?, requirementId: String?): Intent {
-        return when (destination) {
-            "ViewRequirement" -> {
-                if (requirementId?.isNotEmpty()!!) {
-                    ViewRequirementActivityHelper.getIntent(this, requirementId.toInt())
-                } else {
-                    MainActivityHelper.getIntent(this)
-                }
+            ).run {
+                notificationManager?.createNotificationChannel(this)
             }
-            else -> MainActivityHelper.getIntent(this)
         }
+
+        notificationManager?.notify(System.currentTimeMillis().toInt(), builder.build())
     }
+
+    private fun getAlertSound(remoteMessage: RemoteMessage) =
+        when (remoteMessage.data["SoundType"]) {
+            "CUSTOM" -> {
+                Uri.parse("android.resource://${packageName}/" + R.raw.soogong_alert_sound)
+            }
+            else -> {
+                RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+            }
+        }
+
+
+    private fun getPendingIntent(remoteMessage: RemoteMessage) =
+        PendingIntent.getActivity(
+            this,
+            0,
+            when (remoteMessage.data["Destination"]) {
+                "ViewRequirement" -> {
+                    val requirementId = remoteMessage.data["RequirementId"]
+                    if (requirementId?.isNotEmpty()!!) {
+                        ViewRequirementActivityHelper.getIntent(this, requirementId.toInt())
+                    } else {
+                        MainActivityHelper.getIntent(this)
+                    }
+                }
+                else -> MainActivityHelper.getIntent(this)
+            },
+            PendingIntent.FLAG_ONE_SHOT
+        )
 
     companion object {
         private const val TAG = "FCM"
