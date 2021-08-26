@@ -15,12 +15,15 @@
         android:id="@+id/customer_review_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingStart="@dimen/gap_20"
+        android:paddingTop="@dimen/gap_20"
+        android:paddingEnd="@dimen/gap_20"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/line">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/master_recommendation_rating_text"
-            style="@style/text_style_12sp.medium"
+            style="@style/tiny_text_style.medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/master_recommendation_label"
@@ -43,7 +46,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/master_rating_kindness_text"
-            style="@style/text_style_12sp.medium"
+            style="@style/tiny_text_style.medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/gap_8"
@@ -55,7 +58,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/master_rating_kindness_score"
-            style="@style/text_style_12sp.medium"
+            style="@style/tiny_text_style.medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/gap_2"
@@ -67,7 +70,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/master_rating_quality_text"
-            style="@style/text_style_12sp.medium"
+            style="@style/tiny_text_style.medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/gap_10"
@@ -78,7 +81,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/master_rating_quality_score"
-            style="@style/text_style_12sp.medium"
+            style="@style/tiny_text_style.medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/gap_2"
@@ -90,7 +93,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/master_rating_affordability_text"
-            style="@style/text_style_12sp.medium"
+            style="@style/tiny_text_style.medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/gap_10"
@@ -101,7 +104,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/master_rating_affordability_score"
-            style="@style/text_style_12sp.medium"
+            style="@style/tiny_text_style.medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/gap_2"
@@ -113,7 +116,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/master_rating_punctuality_text"
-            style="@style/text_style_12sp.medium"
+            style="@style/tiny_text_style.medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/gap_10"
@@ -124,7 +127,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/master_rating_punctuality_score"
-            style="@style/text_style_12sp.medium"
+            style="@style/tiny_text_style.medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/gap_2"
@@ -136,7 +139,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/customer_review_type"
-            style="@style/text_style_12sp.regular"
+            style="@style/tiny_text_style.regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/gap_10"
@@ -148,7 +151,7 @@
 
         <kr.co.prnd.readmore.ReadMoreTextView
             android:id="@+id/customer_review_content"
-            style="@style/text_style_14sp.regular"
+            style="@style/small_text_style.regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/gap_12"
@@ -175,16 +178,16 @@
             bind:visible="@{data.imageList}"
             tools:listitem="@layout/view_holder_image" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/customer_review_date"
-            style="@style/text_style_12sp.regular"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/gap_12"
-            bind:to_date_string="@{data.createdAt}"
-            android:textColor="@color/text_primary_color"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/review_photo_list"
-            tools:text="2020.07.01" />
+<!--        <androidx.appcompat.widget.AppCompatTextView-->
+<!--            android:id="@+id/customer_review_date"-->
+<!--            style="@style/text_style_12sp.regular"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="@dimen/gap_12"-->
+<!--            bind:to_date_string="@{data.createdAt}"-->
+<!--            android:textColor="@color/text_primary_color"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/review_photo_list"-->
+<!--            tools:text="2020.07.01" />-->
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
