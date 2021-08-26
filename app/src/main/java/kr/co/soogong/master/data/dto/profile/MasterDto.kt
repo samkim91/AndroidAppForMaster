@@ -113,6 +113,24 @@ data class MasterDto(
     @SerializedName("reviews")
     val reviews: List<ReviewDto>? = null,
 
+    @SerializedName("reviewCount")
+    val reviewCount: Int? = null,
+
+    @SerializedName("reviewKindnessAvg")
+    val reviewKindnessAvg: Double? = null,
+
+    @SerializedName("reviewRecommendationAvg")
+    val reviewRecommendationAvg: Double? = null,
+
+    @SerializedName("reviewQualityAvg")
+    val reviewQualityAvg: Double? = null,
+
+    @SerializedName("reviewAffordabilityAvg")
+    val reviewAffordabilityAvg: Double? = null,
+
+    @SerializedName("reviewPunctualityAvg")
+    val reviewPunctualityAvg: Double? = null,
+
     @SerializedName("createdAt")
     val createdAt: Date? = null,
 

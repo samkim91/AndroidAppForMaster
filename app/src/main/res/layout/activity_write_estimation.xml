@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:bind="http://schemas.android.com/bind"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -13,387 +12,249 @@
             type="kr.co.soogong.master.ui.requirement.action.write.WriteEstimationViewModel" />
     </data>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
         <include
             android:id="@+id/action_bar"
-            layout="@layout/action_bar_button" />
+            layout="@layout/action_bar_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ScrollView
+            android:id="@+id/scroll_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:overScrollMode="never">
+            android:layout_height="@dimen/gap_0"
+            android:overScrollMode="never"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/action_bar">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/banner_image"
-                    android:layout_width="0dp"
-                    android:layout_height="120dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/gap_120"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/ic_banner_3"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:src="@drawable/ic_banner_3" />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/detail_label"
-                    style="@style/text_style_14sp.medium"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/show_requirement_content"
-                    android:textColor="@color/text_basic_color"
-                    app:layout_constraintBottom_toBottomOf="@id/detail_button"
-                    app:layout_constraintEnd_toEndOf="@id/detail_button"
-                    app:layout_constraintStart_toStartOf="@id/detail_button"
-                    app:layout_constraintTop_toTopOf="@id/detail_button" />
-
-                <ImageView
-                    android:id="@+id/detail_button"
-                    android:layout_width="0dp"
-                    android:layout_height="48dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/banner_image" />
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/detail_icon"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_marginEnd="20dp"
-                    android:src="@drawable/ic_arrow_down"
-                    app:layout_constraintBottom_toBottomOf="@id/detail_button"
-                    app:layout_constraintEnd_toEndOf="@id/detail_button"
-                    app:layout_constraintTop_toTopOf="@id/detail_button" />
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/thin_line"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/line_height"
-                    android:background="@color/line_color"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/detail_button" />
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/detail_container"
+                <kr.co.soogong.master.ui.widget.RequirementBasic
+                    android:id="@+id/requirement_basic"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/detail_button">
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/location"
-                        style="@style/text_style_18sp.bold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="@dimen/requirement_card_location_margin_top_write_activity"
-                        android:layout_marginEnd="20dp"
-                        android:ellipsize="end"
-                        android:lines="1"
-                        android:text="@{vm.requirement.address}"
-                        android:textColor="@color/primary_text_color"
-                        app:layout_constrainedWidth="true"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@id/detail_container"
-                        tools:text="서울시 관악구 봉천동 70 봉천동 70 123-124" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/type"
-                        style="@style/text_style_18sp.bold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="@dimen/requirement_card_type_margin_top"
-                        android:layout_marginEnd="20dp"
-                        android:ellipsize="end"
-                        android:lines="1"
-                        android:text="@{vm.requirement.projectName}"
-                        android:textColor="@color/primary_text_color"
-                        app:layout_constrainedWidth="true"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/location"
-                        tools:text="욕실 위생도기 및 수전 설치/교체 123123123123" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/first_time"
-                        style="@style/text_style_14sp.medium"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="@dimen/requirement_card_first_time_margin_top"
-                        android:textColor="@color/tertiary_text_color"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/type"
-                        bind:requested_date="@{vm.requirement.createdAt}"
-                        tools:text="최초 요청일 : 2021.01.11 - 13:20" />
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/thin_line2"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/line_height"
-                        android:layout_marginStart="@dimen/estimation_card_default_margin_start"
-                        android:layout_marginTop="@dimen/estimation_card_default_margin_top"
-                        android:layout_marginEnd="@dimen/estimation_card_default_margin_end"
-                        android:background="@color/line_color"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/first_time" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/custom_title"
-                        style="@style/text_style_16sp.bold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="24dp"
-                        android:text="@string/requirement_drawer_title_of_customer_request"
-                        android:textColor="@color/text_basic_color"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/thin_line2"
-                        bind:visible="@{vm.requirement.requirementQnas}" />
-
-
-                    <LinearLayout
-                        android:id="@+id/custom_frame"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:paddingStart="20dp"
-                        android:paddingEnd="20dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/custom_title" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/photo_title"
-                        style="@style/text_style_14sp.regular"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="12dp"
-                        android:layout_marginEnd="20dp"
-                        android:text="@string/view_requirement_images_label"
-                        android:textColor="@color/text_primary_color"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/custom_frame"
-                        bind:visible="@{vm.requirement.images}" />
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/photo_list"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="4dp"
-                        android:layout_marginEnd="20dp"
-                        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/photo_title"
-                        app:spanCount="4"
-                        bind:photo_list="@{vm.requirement.images}"
-                        bind:visible="@{vm.requirement.images}" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                    android:layout_marginStart="@dimen/gap_20"
+                    android:layout_marginTop="@dimen/gap_20"
+                    android:layout_marginEnd="@dimen/gap_20"
+                    app:measurementBadgeVisibility="@{false}"
+                    app:address="@{vm.requirement.address}"
+                    app:createdAt="@{vm.requirement.createdAt}"
+                    app:project="@{vm.requirement.projectName}"
+                    app:requirementToken="@{vm.requirement.token}" />
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/line"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/gap_10"
-                    android:layout_marginTop="@dimen/gap_32"
-                    android:background="@color/line_color"
-                    app:layout_constraintTop_toBottomOf="@id/detail_container"
-                    app:layout_goneMarginTop="0dp" />
+                    android:layout_marginTop="@dimen/gap_20"
+                    android:background="@drawable/thick_shading_line" />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/request_type"
-                    style="@style/text_style_16sp.medium"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="32dp"
-                    android:layout_marginEnd="20dp"
-                    android:text="견적 유형 선택"
-                    android:textColor="@color/text_basic_color"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/line" />
-
-                <RadioGroup
-                    android:id="@+id/request_type_group"
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/flexible_container"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginEnd="20dp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/request_type">
-
-                    <RadioButton
-                        android:id="@+id/filter_option1"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginEnd="4dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/filter_background_selector_2"
-                        android:button="@android:color/transparent"
-                        android:checked="true"
-                        android:gravity="center"
-                        android:text="@string/integration_estimation"
-                        android:textColor="@color/filter_text_selector_2" />
-
-                    <RadioButton
-                        android:id="@+id/filter_option2"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginEnd="4dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/filter_background_selector_2"
-                        android:button="@android:color/transparent"
-                        android:checked="false"
-                        android:gravity="center"
-                        android:text="@string/estimation_by_item"
-                        android:textColor="@color/filter_text_selector_2" />
-                </RadioGroup>
-
-                <kr.co.soogong.master.ui.widget.TitleEditText
-                    android:id="@+id/simpleCost"
-                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="52dp"
-                    android:layout_marginEnd="20dp"
-                    android:textColor="@color/text_basic_color"
-                    android:visibility="visible"
-                    app:alertText='@{"견적은 1만원 이상으로 보내주세요."}'
-                    app:alertVisible="@{false}"
-                    app:content="@={vm.simpleCost}"
-                    app:hintText='@{"숫자만 입력해주세요. (단위 : 원)"}'
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/request_type_group"
-                    app:setInputType="@{InputType.TYPE_CLASS_NUMBER}"
-                    app:setMaxLength="@{13}"
-                    app:title='@{"견적가"}' />
+                    android:orientation="vertical" />
 
-                <kr.co.soogong.master.ui.widget.TitleEditText
-                    android:id="@+id/labor_cost"
-                    android:layout_width="0dp"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="52dp"
-                    android:layout_marginEnd="20dp"
-                    android:textColor="@color/text_basic_color"
-                    app:alertText='@{"필수 정보입니다."}'
-                    app:alertVisible="@{false}"
-                    app:content="@={vm.laborCost}"
-                    app:hintText='@{"숫자만 입력해주세요. (단위 : 원)"}'
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/request_type_group"
-                    app:setInputType="@{InputType.TYPE_CLASS_NUMBER}"
-                    app:setMaxLength="@{13}"
-                    app:title='@{"인건비"}' />
+                    android:paddingBottom="@dimen/gap_50"
+                    >
 
-                <kr.co.soogong.master.ui.widget.TitleEditText
-                    android:id="@+id/material_cost"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="28dp"
-                    android:layout_marginEnd="20dp"
-                    android:textColor="@color/text_basic_color"
-                    app:alertText='@{"필수 정보입니다."}'
-                    app:alertVisible="@{false}"
-                    app:content="@={vm.materialCost}"
-                    app:hintText='@{"숫자만 입력해주세요. (단위 : 원)"}'
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/labor_cost"
-                    app:setInputType="@{InputType.TYPE_CLASS_NUMBER}"
-                    app:setMaxLength="@{13}"
-                    app:title='@{"자재비"}' />
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/request_type"
+                        style="@style/text_style_16sp.medium"
+                        android:layout_width="@dimen/gap_0"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/gap_20"
+                        android:layout_marginTop="@dimen/gap_32"
+                        android:layout_marginEnd="@dimen/gap_20"
+                        android:text="@string/choose_estimation_type_text"
+                        android:textColor="@color/text_basic_color"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                <kr.co.soogong.master.ui.widget.TitleEditText
-                    android:id="@+id/travel_cost"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="28dp"
-                    android:layout_marginEnd="20dp"
-                    android:textColor="@color/text_basic_color"
-                    app:alertText='@{"필수 정보입니다."}'
-                    app:alertVisible="@{false}"
-                    app:content="@={vm.travelCost}"
-                    app:hintText='@{"숫자만 입력해주세요. (단위 : 원)"}'
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/material_cost"
-                    app:setInputType="@{InputType.TYPE_CLASS_NUMBER}"
-                    app:setMaxLength="@{13}"
-                    app:title='@{"출장비"}' />
+                    <RadioGroup
+                        android:id="@+id/request_type_group"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/gap_40"
+                        android:layout_marginStart="@dimen/gap_20"
+                        android:layout_marginTop="@dimen/gap_12"
+                        android:layout_marginEnd="@dimen/gap_20"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/request_type">
 
-                <kr.co.soogong.master.ui.widget.TitleEditText
-                    android:id="@+id/total_cost"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="28dp"
-                    android:layout_marginEnd="20dp"
-                    android:textColor="@color/text_basic_color"
-                    app:alertVisible="@{false}"
-                    app:content="@={vm.totalCost}"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/travel_cost"
-                    app:setInputType="@{InputType.TYPE_CLASS_TEXT}"
-                    app:title='@{"총 견적가"}' />
+                        <RadioButton
+                            android:id="@+id/filter_option1"
+                            android:layout_width="@dimen/gap_0"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="@dimen/gap_4"
+                            android:layout_weight="1"
+                            android:background="@drawable/filter_background_selector_2"
+                            android:button="@android:color/transparent"
+                            android:checked="true"
+                            android:gravity="center"
+                            android:text="@string/integration_estimation"
+                            android:textColor="@color/filter_text_selector_2" />
 
-                <androidx.constraintlayout.widget.Group
-                    android:id="@+id/estimation_by_item_group"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    app:constraint_referenced_ids="labor_cost,material_cost,travel_cost,total_cost" />
+                        <RadioButton
+                            android:id="@+id/filter_option2"
+                            android:layout_width="@dimen/gap_0"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="@dimen/gap_4"
+                            android:layout_weight="1"
+                            android:background="@drawable/filter_background_selector_2"
+                            android:button="@android:color/transparent"
+                            android:checked="false"
+                            android:gravity="center"
+                            android:text="@string/estimation_by_item"
+                            android:textColor="@color/filter_text_selector_2" />
+                    </RadioGroup>
 
-                <androidx.constraintlayout.widget.Barrier
-                    android:id="@+id/request_barrier"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:barrierDirection="bottom"
-                    app:constraint_referenced_ids="simpleCost,total_cost" />
+                    <kr.co.soogong.master.ui.widget.TitleEditText
+                        android:id="@+id/simpleCost"
+                        android:layout_width="@dimen/gap_0"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/gap_20"
+                        android:layout_marginTop="@dimen/gap_52"
+                        android:layout_marginEnd="@dimen/gap_20"
+                        android:textColor="@color/text_basic_color"
+                        android:visibility="visible"
+                        app:alertText="@{@string/minimum_cost}"
+                        app:alertVisible="@{false}"
+                        app:content="@={vm.simpleCost}"
+                        app:hintText="@{@string/insert_number_only_with_unit_text}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/request_type_group"
+                        app:setInputType="@{InputType.TYPE_CLASS_NUMBER}"
+                        app:setMaxLength="@{13}"
+                        app:title="@{@string/estimation_price_text}" />
 
-                <kr.co.soogong.master.ui.widget.TitleEditTextCounterView
-                    android:id="@+id/write_detail"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="28dp"
-                    android:layout_marginEnd="20dp"
-                    android:layout_marginBottom="30dp"
-                    app:content="@={vm.description}"
-                    app:hintText='@{"특별히 제안할 내용, 현장에서 가격이 변동될 수 있는 사항 등 고객이 선택하는데에 도움이 되는 내용을 작성해 주세요.\n마스터님의 전화번호는 고객에게 자동으로 전달됩니다."}'
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/request_barrier"
-                    app:limitedCount='@{500}'
-                    app:title='@{"마스터님의 제안 내용 (선택)"}' />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    <kr.co.soogong.master.ui.widget.TitleEditText
+                        android:id="@+id/labor_cost"
+                        android:layout_width="@dimen/gap_0"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/gap_20"
+                        android:layout_marginTop="@dimen/gap_52"
+                        android:layout_marginEnd="@dimen/gap_20"
+                        android:textColor="@color/text_basic_color"
+                        app:alertText="@{@string/alert_required_field}"
+                        app:alertVisible="@{false}"
+                        app:content="@={vm.laborCost}"
+                        app:hintText="@{@string/minimum_cost}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/request_type_group"
+                        app:setInputType="@{InputType.TYPE_CLASS_NUMBER}"
+                        app:setMaxLength="@{13}"
+                        app:title="@{@string/estimation_labor_cost}" />
+
+                    <kr.co.soogong.master.ui.widget.TitleEditText
+                        android:id="@+id/material_cost"
+                        android:layout_width="@dimen/gap_0"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/gap_20"
+                        android:layout_marginTop="@dimen/gap_28"
+                        android:layout_marginEnd="@dimen/gap_20"
+                        android:textColor="@color/text_basic_color"
+                        app:alertText="@{@string/alert_required_field}"
+                        app:alertVisible="@{false}"
+                        app:content="@={vm.materialCost}"
+                        app:hintText="@{@string/minimum_cost}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/labor_cost"
+                        app:setInputType="@{InputType.TYPE_CLASS_NUMBER}"
+                        app:setMaxLength="@{13}"
+                        app:title="@{@string/estimation_material_cost}" />
+
+                    <kr.co.soogong.master.ui.widget.TitleEditText
+                        android:id="@+id/travel_cost"
+                        android:layout_width="@dimen/gap_0"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/gap_20"
+                        android:layout_marginTop="@dimen/gap_28"
+                        android:layout_marginEnd="@dimen/gap_20"
+                        android:textColor="@color/text_basic_color"
+                        app:alertText="@{@string/alert_required_field}"
+                        app:alertVisible="@{false}"
+                        app:content="@={vm.travelCost}"
+                        app:hintText="@{@string/minimum_cost}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/material_cost"
+                        app:setInputType="@{InputType.TYPE_CLASS_NUMBER}"
+                        app:setMaxLength="@{13}"
+                        app:title="@{@string/estimation_travel_cost}" />
+
+                    <kr.co.soogong.master.ui.widget.TitleEditText
+                        android:id="@+id/total_cost"
+                        android:layout_width="@dimen/gap_0"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/gap_20"
+                        android:layout_marginTop="@dimen/gap_28"
+                        android:layout_marginEnd="@dimen/gap_20"
+                        android:textColor="@color/text_basic_color"
+                        app:alertVisible="@{false}"
+                        app:content="@={vm.totalCost}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/travel_cost"
+                        app:setInputType="@{InputType.TYPE_CLASS_TEXT}"
+                        app:title="@{@string/estimation_total_cost}" />
+
+                    <androidx.constraintlayout.widget.Group
+                        android:id="@+id/estimation_by_item_group"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        tools:visibility="visible"
+                        app:constraint_referenced_ids="labor_cost,material_cost,travel_cost,total_cost" />
+
+                    <androidx.constraintlayout.widget.Barrier
+                        android:id="@+id/request_barrier"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:barrierDirection="bottom"
+                        app:constraint_referenced_ids="simpleCost,total_cost" />
+
+                    <kr.co.soogong.master.ui.widget.TitleEditTextCounterView
+                        android:id="@+id/write_detail"
+                        android:layout_width="@dimen/gap_0"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/gap_20"
+                        android:layout_marginTop="@dimen/gap_28"
+                        android:layout_marginEnd="@dimen/gap_20"
+                        android:layout_marginBottom="@dimen/gap_30"
+                        app:content="@={vm.description}"
+                        app:hintText="@{@string/masters_estimation_description_hint_text}"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/request_barrier"
+                        app:limitedCount='@{500}'
+                        app:title="@{@string/masters_estimation_description_label}" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.appcompat.widget.LinearLayoutCompat>
         </ScrollView>
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

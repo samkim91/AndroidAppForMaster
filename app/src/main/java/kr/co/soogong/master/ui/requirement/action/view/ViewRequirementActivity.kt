@@ -6,7 +6,6 @@ import androidx.core.view.isVisible
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.dto.requirement.RequirementDto
-import kr.co.soogong.master.data.dto.requirement.estimation.EstimationDto
 import kr.co.soogong.master.data.model.requirement.*
 import kr.co.soogong.master.databinding.ActivityViewRequirementBinding
 import kr.co.soogong.master.ui.base.BaseActivity
@@ -14,8 +13,6 @@ import kr.co.soogong.master.ui.dialog.popup.CustomDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData.Companion.getAcceptMeasureDialogData
 import kr.co.soogong.master.ui.dialog.popup.DialogData.Companion.getRefuseEstimateDialogData
 import kr.co.soogong.master.ui.dialog.popup.DialogData.Companion.getRefuseMeasureDialogData
-import kr.co.soogong.master.ui.profile.review.ReviewViewHolder
-import kr.co.soogong.master.ui.profile.review.ReviewViewHolderHelper
 import kr.co.soogong.master.ui.requirement.action.view.ViewRequirementViewModel.Companion.ASK_FOR_REVIEW_SUCCESSFULLY
 import kr.co.soogong.master.ui.requirement.action.view.ViewRequirementViewModel.Companion.CALL_TO_CUSTOMER_SUCCESSFULLY
 import kr.co.soogong.master.ui.requirement.action.view.ViewRequirementViewModel.Companion.REFUSE_TO_ESTIMATE_SUCCESSFULLY
@@ -28,6 +25,7 @@ import kr.co.soogong.master.ui.widget.RequirementDrawerContainer.Companion.REQUI
 import kr.co.soogong.master.ui.widget.RequirementDrawerContainer.Companion.REVIEW_TYPE
 import kr.co.soogong.master.uihelper.requirment.CallToCustomerHelper
 import kr.co.soogong.master.uihelper.requirment.action.EndRepairActivityHelper
+import kr.co.soogong.master.uihelper.requirment.action.MeasureActivityHelper
 import kr.co.soogong.master.uihelper.requirment.action.ViewRequirementActivityHelper
 import kr.co.soogong.master.uihelper.requirment.action.WriteEstimationActivityHelper
 import kr.co.soogong.master.utility.EventObserver
@@ -63,11 +61,6 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                     super.onBackPressed()
                 }
             }
-
-//            // 리뷰 요청하기 버튼
-//            askReviewButton.setOnClickListener {
-//                viewModel.askForReview()
-//            }
         }
     }
 
@@ -75,188 +68,6 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
         viewModel.requirement.observe(this@ViewRequirementActivity, { requirement ->
             setLayout(requirement)
             setButtons(RequirementStatus.getStatusFromRequirement(requirement))
-
-            bind {
-                flexibleContainer.removeAllViews()
-                actionBar.title.text = requirement.address
-
-                when (RequirementStatus.getStatusFromRequirement(requirement)) {
-                    Requested, RequestMeasure -> {
-                        // view : 고객 요청 내용(spread)
-                        RequirementDrawerContainer.addDrawerContainer(
-                            context = this@ViewRequirementActivity,
-                            container = flexibleContainer,
-                            requirementDto = requirement,
-                            contentType = REQUIREMENT_TYPE,
-                            isSpread = true,
-                            includingCancel = false
-                        )
-                    }
-
-                    Estimated -> {
-                        // view : 나의 제안 내용(spread), 고객 요청 내용
-                        RequirementDrawerContainer.addDrawerContainer(
-                            context = this@ViewRequirementActivity,
-                            container = flexibleContainer,
-                            requirementDto = requirement,
-                            contentType = ESTIMATION_TYPE,
-                            isSpread = true,
-                            includingCancel = false
-                        )
-                        RequirementDrawerContainer.addDrawerContainer(
-                            context = this@ViewRequirementActivity,
-                            container = flexibleContainer,
-                            requirementDto = requirement,
-                            contentType = REQUIREMENT_TYPE,
-                            isSpread = false,
-                            includingCancel = false
-                        )
-                    }
-
-                    Repairing -> {
-                        // view : 고객 요청 내용(spread, includingCancel), 나의 제안 내용
-                        RequirementDrawerContainer.addDrawerContainer(
-                            context = this@ViewRequirementActivity,
-                            container = flexibleContainer,
-                            requirementDto = requirement,
-                            contentType = REQUIREMENT_TYPE,
-                            isSpread = true,
-                            includingCancel = true
-                        )
-                        RequirementDrawerContainer.addDrawerContainer(
-                            context = this@ViewRequirementActivity,
-                            container = flexibleContainer,
-                            requirementDto = requirement,
-                            contentType = ESTIMATION_TYPE,
-                            isSpread = false,
-                            includingCancel = false
-                        )
-                    }
-
-                    RequestFinish -> {
-                        // view : 고객 요청 내용(spread), 나의 제안 내용
-                        RequirementDrawerContainer.addDrawerContainer(
-                            context = this@ViewRequirementActivity,
-                            container = flexibleContainer,
-                            requirementDto = requirement,
-                            contentType = REQUIREMENT_TYPE,
-                            isSpread = true,
-                            includingCancel = false
-                        )
-                        RequirementDrawerContainer.addDrawerContainer(
-                            context = this@ViewRequirementActivity,
-                            container = flexibleContainer,
-                            requirementDto = requirement,
-                            contentType = ESTIMATION_TYPE,
-                            isSpread = false,
-                            includingCancel = false
-                        )
-                    }
-
-                    Measuring -> {
-                        // view : 고객요청(spread, includingCancel)
-                        RequirementDrawerContainer.addDrawerContainer(
-                            context = this@ViewRequirementActivity,
-                            container = flexibleContainer,
-                            requirementDto = requirement,
-                            contentType = REQUIREMENT_TYPE,
-                            isSpread = true,
-                            includingCancel = true
-                        )
-                    }
-
-                    Measured -> {
-                        // view : 나의 실측 내용(spread, includingCancel), 고객요청
-                        RequirementDrawerContainer.addDrawerContainer(
-                            context = this@ViewRequirementActivity,
-                            container = flexibleContainer,
-                            requirementDto = requirement,
-                            contentType = ESTIMATION_TYPE,
-                            isSpread = true,
-                            includingCancel = true
-                        )
-                    }
-
-                    Done -> {
-                        // view : 나의 최종 시공 내용(spread), 나의 제안 내용, 고객 요청 내용
-                        RequirementDrawerContainer.addDrawerContainer(
-                            context = this@ViewRequirementActivity,
-                            container = flexibleContainer,
-                            requirementDto = requirement,
-                            contentType = REPAIR_TYPE,
-                            isSpread = true,
-                            includingCancel = false
-                        )
-                        RequirementDrawerContainer.addDrawerContainer(
-                            context = this@ViewRequirementActivity,
-                            container = flexibleContainer,
-                            requirementDto = requirement,
-                            contentType = ESTIMATION_TYPE,
-                            isSpread = false,
-                            includingCancel = false
-                        )
-                        RequirementDrawerContainer.addDrawerContainer(
-                            context = this@ViewRequirementActivity,
-                            container = flexibleContainer,
-                            requirementDto = requirement,
-                            contentType = REQUIREMENT_TYPE,
-                            isSpread = false,
-                            includingCancel = false
-                        )
-                    }
-
-                    Closed -> {
-                        // view : 고객 리뷰(spread), 나의 최종 시공 내용, 고객 요청 내용
-                        RequirementDrawerContainer.addDrawerContainer(
-                            context = this@ViewRequirementActivity,
-                            container = flexibleContainer,
-                            requirementDto = requirement,
-                            contentType = REVIEW_TYPE,
-                            isSpread = true,
-                            includingCancel = false
-                        )
-                        RequirementDrawerContainer.addDrawerContainer(
-                            context = this@ViewRequirementActivity,
-                            container = flexibleContainer,
-                            requirementDto = requirement,
-                            contentType = ESTIMATION_TYPE,
-                            isSpread = false,
-                            includingCancel = false
-                        )
-                        RequirementDrawerContainer.addDrawerContainer(
-                            context = this@ViewRequirementActivity,
-                            container = flexibleContainer,
-                            requirementDto = requirement,
-                            contentType = REQUIREMENT_TYPE,
-                            isSpread = false,
-                            includingCancel = false
-                        )
-                    }
-
-                    Canceled -> {
-                        // view : 시공 취소 사유, 고객 요청 내용
-                        RequirementDrawerContainer.addDrawerContainer(
-                            context = this@ViewRequirementActivity,
-                            container = flexibleContainer,
-                            requirementDto = requirement,
-                            contentType = CANCEL_TYPE,
-                            isSpread = true,
-                            includingCancel = false
-                        )
-                        RequirementDrawerContainer.addDrawerContainer(
-                            context = this@ViewRequirementActivity,
-                            container = flexibleContainer,
-                            requirementDto = requirement,
-                            contentType = REQUIREMENT_TYPE,
-                            isSpread = false,
-                            includingCancel = false
-                        )
-                    }
-                    else -> Unit
-                }
-
-                setButtons(RequirementStatus.getStatusFromRequirement(requirement))
-            }
         })
 
         viewModel.action.observe(this@ViewRequirementActivity, EventObserver { event ->
@@ -506,9 +317,9 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                     leftButton.setBackgroundColor(resources.getColor(R.color.color_FF711D, null))
                     leftButton.setOnClickListener {
                         val dialog = CustomDialog.newInstance(
-                            getAcceptMeasureDialogData(this@ViewRequirementActivity),
+                            getRefuseMeasureDialogData(this@ViewRequirementActivity),
                             yesClick = {
-                                // TODO: 2021/08/24 실측 화면으로 이동
+                                // TODO: 2021/08/24 실측 취소 화면으로 이동
                             },
                             noClick = { }
                         )
@@ -519,9 +330,8 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                     rightButton.setBackgroundColor(resources.getColor(R.color.color_22D47B, null))
                     rightButton.setOnClickListener {
                         val dialog = CustomDialog.newInstance(
-                            getRefuseMeasureDialogData(this@ViewRequirementActivity),
-                            yesClick = {
-                                // TODO: 2021/08/24 실측 포기 로직 처리
+                            getAcceptMeasureDialogData(this@ViewRequirementActivity),
+                            yesClick = {    // TODO: 2021/08/26 실측 할래요 로직 처리 필요!!
                             },
                             noClick = { }
                         )
@@ -564,8 +374,8 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                     rightButton.setTextColor(getColor(R.color.color_FFFFFF))
                     rightButton.setBackgroundColor(resources.getColor(R.color.color_22D47B, null))
                     rightButton.setOnClickListener {
-                        startActivity(  // TODO: 2021/08/25 실측 견석서 보내는 화면 작업 후 변경 필요
-                            EndRepairActivityHelper.getIntent(
+                        startActivity(
+                            MeasureActivityHelper.getIntent(
                                 this@ViewRequirementActivity,
                                 requirementId
                             )
@@ -596,92 +406,6 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                     rightButton.isVisible = false
                 }
 
-                else -> {
-                    buttonsDivider.isVisible = false
-                    leftButton.isVisible = false
-                    rightButton.isVisible = false
-                }
-            }
-    private fun setButtons(requirementStatus: RequirementStatus) {
-        with(binding) {
-            when (requirementStatus) {
-                Requested -> {
-                    // Buttons : 견적을 내기 어려워요 / 견적을 보낼래요.
-                    leftButton.text = getString(R.string.refuse_estimate_text)
-                    leftButton.setTextColor(getColor(R.color.color_FFFFFF))
-                    leftButton.background = resources.getDrawable(R.color.color_FF711D, null)
-                    leftButton.setOnClickListener {
-                        val dialog = CustomDialog.newInstance(
-                            getRefuseEstimateDialogData(this@ViewRequirementActivity),
-                            yesClick = {
-                                viewModel.refuseToEstimate()
-                            },
-                            noClick = { }
-                        )
-                        dialog.show(supportFragmentManager, dialog.tag)
-                    }
-                    rightButton.text = getString(R.string.accept_estimate_text)
-                    rightButton.setTextColor(getColor(R.color.color_FFFFFF))
-                    rightButton.background = resources.getDrawable(R.color.color_22D47B, null)
-                    rightButton.setOnClickListener {
-                        startActivity(
-                            WriteEstimationActivityHelper.getIntent(
-                                this@ViewRequirementActivity,
-                                requirementId
-                            )
-                        )
-                    }
-                }
-                RequestMeasure -> {
-                    // Buttons : 실측 안할래요 / 실측 할래요
-                    leftButton.text = getString(R.string.refuse_measure_text)
-                    leftButton.setTextColor(getColor(R.color.color_FFFFFF))
-                    leftButton.background = resources.getDrawable(R.color.color_FF711D, null)
-                    leftButton.setOnClickListener {
-                        val dialog = CustomDialog.newInstance(
-                            getAcceptMeasureDialogData(this@ViewRequirementActivity),
-                            yesClick = {
-                                // TODO: 2021/08/24 실측 화면으로 이동
-                            },
-                            noClick = { }
-                        )
-                        dialog.show(supportFragmentManager, dialog.tag)
-                    }
-                    rightButton.text = getString(R.string.accept_measure_text)
-                    rightButton.setTextColor(getColor(R.color.color_FFFFFF))
-                    rightButton.background = resources.getDrawable(R.color.color_22D47B, null)
-                    rightButton.setOnClickListener {
-                        val dialog = CustomDialog.newInstance(
-                            getRefuseMeasureDialogData(this@ViewRequirementActivity),
-                            yesClick = {
-                                // TODO: 2021/08/24 실측 포기 로직 처리
-                            },
-                            noClick = { }
-                        )
-                        dialog.show(supportFragmentManager, dialog.tag)
-                    }
-                }
-                Repairing -> {
-                    // Buttons : 고객에게 전화하기 / 실측 할래요.
-                    leftButton.text =
-                        getString(R.string.call_to_customer_text)     // TODO: 2021/08/23 다시 전화하기 버튼 활성화..
-                    leftButton.setTextColor(getColor(R.color.color_1FC472))
-                    leftButton.background = resources.getDrawable(R.color.color_FFFFFF, null)
-                    leftButton.setOnClickListener {
-                        viewModel.callToClient()
-                    }
-                    rightButton.text = getString(R.string.repair_done_text)
-                    rightButton.setTextColor(getColor(R.color.color_FFFFFF))
-                    rightButton.background = resources.getDrawable(R.color.color_22D47B, null)
-                    rightButton.setOnClickListener {
-                        startActivity(
-                            EndRepairActivityHelper.getIntent(
-                                this@ViewRequirementActivity,
-                                requirementId
-                            )
-                        )
-                    }
-                }
                 else -> {
                     buttonsDivider.isVisible = false
                     leftButton.isVisible = false

@@ -83,7 +83,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/my_review_label"
                 app:layout_constraintTop_toTopOf="@id/my_review_label"
-                android:text="@{String.valueOf(vm.myReview.reviews.size) + '개'}"
+                android:text="@{String.valueOf(vm.myReview.reviewCount) + '개'}"
                 tools:text="20개" />
             <!-- end review layout header -->
 
