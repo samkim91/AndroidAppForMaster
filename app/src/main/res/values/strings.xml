@@ -160,6 +160,9 @@
     <string name="estimation_material_cost">자재비</string>
     <string name="description_label">세부내용</string>
     <string name="estimation_description_label">제안내용</string>
+    <string name="masters_estimation_description_label">마스터님의 제안 내용 (선택)</string>
+    <string name="masters_estimation_description_hint_text">특별히 제안할 내용, 현장에서 가격이 변동될 수 있는 사항 등 고객이 선택하는데에 도움이 되는 내용을 작성해 주세요.\n마스터님의 전화번호는 고객에게 자동으로 전달됩니다.</string>
+
     <string name="measure_attachment_label">실측정보</string>
     <string name="view_estimate_transmission_detail_work_date">시공시기</string>
     <string name="repair_actual_price">최종 시공가</string>
@@ -177,7 +180,12 @@
     <!-- Write Estimate -->
     <string name="write_estimate_title">견적서 작성</string>
     <string name="send_estimation">견적서 보내기</string>
+    <string name="choose_estimation_type_text">견적 유형 선택</string>
     <string name="show_requirement_content">요청 내용 보기</string>
+    <string name="insert_number_only_with_unit_text">숫자만 입력해주세요. (단위 : 원)</string>
+    <string name="estimation_price_text">견적가</string>
+
+
     <string name="integration_estimation">통합 견적</string>
     <string name="estimation_by_item">항목별 견적</string>
 

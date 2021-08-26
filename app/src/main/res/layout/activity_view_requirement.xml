@@ -76,7 +76,6 @@
                     app:requirementToken="@{vm.requirement.token}" />
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/thick_line"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/gap_10"
                     android:layout_marginTop="@dimen/gap_20"
