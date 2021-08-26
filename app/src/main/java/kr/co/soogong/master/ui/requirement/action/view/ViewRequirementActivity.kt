@@ -6,7 +6,6 @@ import androidx.core.view.isVisible
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.dto.requirement.RequirementDto
-import kr.co.soogong.master.data.dto.requirement.estimation.EstimationDto
 import kr.co.soogong.master.data.model.requirement.*
 import kr.co.soogong.master.databinding.ActivityViewRequirementBinding
 import kr.co.soogong.master.ui.base.BaseActivity
@@ -14,8 +13,6 @@ import kr.co.soogong.master.ui.dialog.popup.CustomDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData.Companion.getAcceptMeasureDialogData
 import kr.co.soogong.master.ui.dialog.popup.DialogData.Companion.getRefuseEstimateDialogData
 import kr.co.soogong.master.ui.dialog.popup.DialogData.Companion.getRefuseMeasureDialogData
-import kr.co.soogong.master.ui.profile.review.ReviewViewHolder
-import kr.co.soogong.master.ui.profile.review.ReviewViewHolderHelper
 import kr.co.soogong.master.ui.requirement.action.view.ViewRequirementViewModel.Companion.ASK_FOR_REVIEW_SUCCESSFULLY
 import kr.co.soogong.master.ui.requirement.action.view.ViewRequirementViewModel.Companion.CALL_TO_CUSTOMER_SUCCESSFULLY
 import kr.co.soogong.master.ui.requirement.action.view.ViewRequirementViewModel.Companion.REFUSE_TO_ESTIMATE_SUCCESSFULLY
@@ -28,6 +25,7 @@ import kr.co.soogong.master.ui.widget.RequirementDrawerContainer.Companion.REQUI
 import kr.co.soogong.master.ui.widget.RequirementDrawerContainer.Companion.REVIEW_TYPE
 import kr.co.soogong.master.uihelper.requirment.CallToCustomerHelper
 import kr.co.soogong.master.uihelper.requirment.action.EndRepairActivityHelper
+import kr.co.soogong.master.uihelper.requirment.action.MeasureActivityHelper
 import kr.co.soogong.master.uihelper.requirment.action.ViewRequirementActivityHelper
 import kr.co.soogong.master.uihelper.requirment.action.WriteEstimationActivityHelper
 import kr.co.soogong.master.utility.EventObserver
@@ -319,9 +317,9 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                     leftButton.setBackgroundColor(resources.getColor(R.color.color_FF711D, null))
                     leftButton.setOnClickListener {
                         val dialog = CustomDialog.newInstance(
-                            getAcceptMeasureDialogData(this@ViewRequirementActivity),
+                            getRefuseMeasureDialogData(this@ViewRequirementActivity),
                             yesClick = {
-                                // TODO: 2021/08/24 실측 화면으로 이동
+                                // TODO: 2021/08/24 실측 취소 화면으로 이동
                             },
                             noClick = { }
                         )
@@ -332,9 +330,8 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                     rightButton.setBackgroundColor(resources.getColor(R.color.color_22D47B, null))
                     rightButton.setOnClickListener {
                         val dialog = CustomDialog.newInstance(
-                            getRefuseMeasureDialogData(this@ViewRequirementActivity),
-                            yesClick = {
-                                // TODO: 2021/08/24 실측 포기 로직 처리
+                            getAcceptMeasureDialogData(this@ViewRequirementActivity),
+                            yesClick = {    // TODO: 2021/08/26 실측 할래요 로직 처리 필요!!
                             },
                             noClick = { }
                         )
@@ -377,8 +374,8 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                     rightButton.setTextColor(getColor(R.color.color_FFFFFF))
                     rightButton.setBackgroundColor(resources.getColor(R.color.color_22D47B, null))
                     rightButton.setOnClickListener {
-                        startActivity(  // TODO: 2021/08/25 실측 견석서 보내는 화면 작업 후 변경 필요
-                            EndRepairActivityHelper.getIntent(
+                        startActivity(
+                            MeasureActivityHelper.getIntent(
                                 this@ViewRequirementActivity,
                                 requirementId
                             )

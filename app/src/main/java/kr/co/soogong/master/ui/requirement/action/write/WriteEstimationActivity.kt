@@ -3,10 +3,8 @@ package kr.co.soogong.master.ui.requirement.action.write
 import android.icu.text.DecimalFormat
 import android.os.Bundle
 import android.view.View
-import android.view.WindowManager
 import androidx.activity.viewModels
 import androidx.core.content.res.ResourcesCompat
-import androidx.core.view.isVisible
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.model.requirement.estimation.EstimationTypeCode
@@ -14,15 +12,11 @@ import kr.co.soogong.master.databinding.ActivityWriteEstimationBinding
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.ui.dialog.popup.CustomDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData.Companion.getCancelSendingEstimationDialogData
-import kr.co.soogong.master.ui.image.RectangleImageAdapter
 import kr.co.soogong.master.ui.requirement.action.write.WriteEstimationViewModel.Companion.SEND_ESTIMATION_SUCCESSFULLY
 import kr.co.soogong.master.ui.requirement.action.write.WriteEstimationViewModel.Companion.SEND_MESSAGE_FAILED
 import kr.co.soogong.master.ui.widget.RequirementDrawerContainer
 import kr.co.soogong.master.ui.widget.RequirementDrawerContainer.Companion.REQUIREMENT_TYPE
-import kr.co.soogong.master.ui.widget.RequirementQna
-import kr.co.soogong.master.uihelper.image.ImageViewActivityHelper
 import kr.co.soogong.master.utility.EventObserver
-import kr.co.soogong.master.utility.extension.startHalfRotateAnimation
 import kr.co.soogong.master.utility.extension.toast
 import kr.co.soogong.master.utility.validation.ValidationHelper
 import timber.log.Timber

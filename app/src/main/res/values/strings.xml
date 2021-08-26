@@ -152,6 +152,8 @@
     <string name="requirement_intro_title_of_close">%s\n고객이 리뷰를 남겼습니다.</string>
     <string name="requirement_intro_title_of_canceled">취소되었습니다.</string>
 
+    <string name="alert_box_title_for_view_requirement_in_measuring">고객과의 전화가 필요합니다.</string>
+    <string name="alert_box_content_for_view_requirement_in_measuring">현장 실측 중 자세한 실측 정보를 남긴 메모가 있다면 사진을 찍어 올려주세요. 추후 마스터 등급에 긍정적인 영향을 줄 수 있습니다.</string>
 
     <!-- Transmission Card & Done Card in View Estimate -->
     <string name="estimation_total_cost">총 견적가</string>
@@ -185,9 +187,14 @@
     <string name="insert_number_only_with_unit_text">숫자만 입력해주세요. (단위 : 원)</string>
     <string name="estimation_price_text">견적가</string>
 
-
     <string name="integration_estimation">통합 견적</string>
     <string name="estimation_by_item">항목별 견적</string>
+
+    <!-- Measure   -->
+    <string name="measure_image_holder_label">실측 정보 (선택)</string>
+    <string name="alert_box_title_for_measure">현장 실측 중 작성한 메모를 찍어 올려주세요!</string>
+    <string name="alert_box_content_for_measure">현장 실측 중 자세한 실측 정보를 남긴 메모가 있다면 사진을 찍어 올려주세요. 추후 마스터 등급에 긍정적인 영향을 줄 수 있습니다.</string>
+
 
     <!-- End Estimate -->
     <string name="end_repair_title">최종 정보</string>
