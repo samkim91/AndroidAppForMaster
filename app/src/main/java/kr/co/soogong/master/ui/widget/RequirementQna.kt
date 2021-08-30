@@ -4,12 +4,10 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.constraintlayout.widget.ConstraintLayout
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.dto.requirement.RequirementDto
 import kr.co.soogong.master.databinding.ViewRequirementQnaBinding
-import kr.co.soogong.master.utility.extension.dp
 
 class RequirementQna @JvmOverloads constructor(
     context: Context,

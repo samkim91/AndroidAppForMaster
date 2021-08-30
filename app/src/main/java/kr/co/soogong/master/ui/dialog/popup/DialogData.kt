@@ -8,14 +8,14 @@ import kr.co.soogong.master.R
 
 @Parcelize
 data class DialogData(
-    var title: String?,
-    @ColorInt var titleTxtColor: Int,
-    var description: String?,
-    @ColorInt var descriptionTxtColor: Int,
-    var positiveBtnText: String?,
-    @ColorInt var positiveBtnTextColor: Int,
-    var negativeBtnText: String?,
-    @ColorInt var negativeBtnTextColor: Int
+    val title: String?,
+    @ColorInt val titleTxtColor: Int,
+    val description: String?,
+    @ColorInt val descriptionTxtColor: Int,
+    val positiveBtnText: String?,
+    @ColorInt val positiveBtnTextColor: Int,
+    val negativeBtnText: String?,
+    @ColorInt val negativeBtnTextColor: Int
 ) : Parcelable {
     companion object {
         fun getRefuseEstimateDialogData(context: Context) =
