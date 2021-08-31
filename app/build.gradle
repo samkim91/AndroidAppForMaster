@@ -118,7 +118,6 @@ dependencies {
     // Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
     implementation "androidx.fragment:fragment-ktx:$fragmentVersion"
-    implementation "androidx.room:room-ktx:$roomVersion"
     implementation "androidx.activity:activity-ktx:$activityKtxVersion"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$archLifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$archLifecycleVersion"

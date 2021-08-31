@@ -6,6 +6,8 @@ import androidx.core.content.res.ResourcesCompat
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
+import kr.co.soogong.master.SoogongMasterMessagingService.Companion.initNotificationChannel
+import kr.co.soogong.master.SoogongMasterMessagingService.Companion.removeBrokenChannel
 import kr.co.soogong.master.databinding.ActivityMainBinding
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.uihelper.main.MainBadge
@@ -23,9 +25,12 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
         Timber.tag(TAG).d("onCreate: ")
         initLayout()
         registerFCM()
+        removeBrokenChannel(this)
+        initNotificationChannel(this)
     }
 
     private fun registerFCM() {
+        Timber.tag(TAG).d("registerFCM: ")
         viewModel.registerFCM()
     }
 
