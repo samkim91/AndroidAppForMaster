@@ -34,8 +34,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingBottom="@dimen/gap_150">
+                android:orientation="vertical">
 
                 <kr.co.soogong.master.ui.widget.RequirementIntro
                     android:id="@+id/requirement_intro"
@@ -47,6 +46,16 @@
                     app:initByRequirement="@{vm.requirement}" />
 
                 <!--todo progress bar-->
+                <kr.co.soogong.master.ui.widget.RequirementProgress
+                    android:id="@+id/requirement_status"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/gap_16"
+                    android:layout_marginStart="@dimen/gap_20"
+                    android:layout_marginEnd="@dimen/gap_20"
+                    app:startingText="@{@string/progress_starting_text}"
+                    app:endingText="@{@string/progress_ending_text}"
+                    />
 
                 <kr.co.soogong.master.ui.widget.AlertBox
                     android:id="@+id/alert_box"
@@ -89,6 +98,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/gap_150"
+                    android:background="@color/F2F2F2"
+                    />
             </LinearLayout>
         </ScrollView>
 
