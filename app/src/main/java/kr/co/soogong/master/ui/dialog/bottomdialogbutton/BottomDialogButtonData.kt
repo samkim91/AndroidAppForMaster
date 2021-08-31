@@ -5,12 +5,12 @@ import androidx.annotation.ColorInt
 import kr.co.soogong.master.R
 
 data class BottomDialogButtonData(
-    var title: String?,
-    @ColorInt var titleTxtColor: Int,
-    var leftButtonText: String?,
-    @ColorInt var leftButtonTextColor: Int,
-    var rightButtonText: String?,
-    @ColorInt var rightButtonTextColor: Int
+    val title: String?,
+    @ColorInt val titleTxtColor: Int,
+    val leftButtonText: String?,
+    @ColorInt val leftButtonTextColor: Int,
+    val rightButtonText: String?,
+    @ColorInt val rightButtonTextColor: Int
 ) {
     companion object {
         fun getDialogDataForImage(context: Context) =

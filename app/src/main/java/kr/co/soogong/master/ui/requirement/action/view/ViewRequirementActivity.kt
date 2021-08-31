@@ -61,6 +61,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                     super.onBackPressed()
                 }
             }
+            requirementStatus.setOnStatusChangeListener()
         }
     }
 
@@ -68,6 +69,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
         viewModel.requirement.observe(this@ViewRequirementActivity, { requirement ->
             setLayout(requirement)
             setButtons(RequirementStatus.getStatusFromRequirement(requirement))
+            binding.requirementStatus.initLayout(requirement)
         })
 
         viewModel.action.observe(this@ViewRequirementActivity, EventObserver { event ->
