@@ -70,22 +70,32 @@
             android:id="@+id/line"
             android:layout_width="0dp"
             android:layout_height="@dimen/line_height"
-            android:layout_marginTop="@dimen/requirement_card_line_margin_top"
+            android:layout_marginTop="@dimen/gap_12"
             android:background="@color/line_color"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/status_text" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:barrierMargin="@dimen/gap_4"
+            app:constraint_referenced_ids="line"/>
 
         <include
             android:id="@+id/measurement_badge"
             layout="@layout/measurement_badge"
             android:layout_width="@dimen/gap_85"
             android:layout_height="@dimen/gap_26"
-            app:layout_constraintTop_toBottomOf="@id/line"
+            android:visibility="gone"
+            tools:visibility="visible"
+            app:layout_constraintTop_toBottomOf="@id/barrier"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
-            android:layout_marginTop="@dimen/gap_12"
+            android:layout_marginTop="@dimen/gap_8"
             />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -187,7 +197,7 @@
             android:layout_height="@dimen/requirement_card_button_default_height"
             android:layout_marginStart="@dimen/requirement_card_done_button_margin_start"
             android:layout_marginTop="@dimen/requirement_card_done_button_margin_top"
-            android:background="@drawable/shape_fill_green_background"
+            android:background="@drawable/default_rounded_button_selector"
             android:textColor="@color/basic_white"
             android:visibility="gone"
             tools:text="시공 완료"

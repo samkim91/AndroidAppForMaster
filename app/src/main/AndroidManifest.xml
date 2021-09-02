@@ -18,7 +18,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="false">
-        <activity android:name=".ui.auth.signup.steps.ViewPolicyActivity"></activity>
+        <activity android:name=".ui.auth.signup.steps.ViewPolicyActivity"/>
         <activity android:name=".ui.profile.detail.requiredinformation.EditRequiredInformationActivity" />
         <activity android:name=".ui.profile.review.MyReviewsActivity" />
         <activity android:name=".ui.profile.detail.EditProfileContainerActivity" />

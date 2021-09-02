@@ -61,15 +61,13 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                     super.onBackPressed()
                 }
             }
-            requirementStatus.setOnStatusChangeListener()
         }
     }
 
     private fun registerEventObserve() {
         viewModel.requirement.observe(this@ViewRequirementActivity, { requirement ->
             setLayout(requirement)
-            setButtons(RequirementStatus.getStatusFromRequirement(requirement))
-            binding.requirementStatus.initLayout(requirement)
+            setButtons(requirement)
         })
 
         viewModel.action.observe(this@ViewRequirementActivity, EventObserver { event ->
@@ -275,15 +273,16 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                         isSpread = false,
                         includingCancel = false
                     )
+                    requirementStatus.isVisible = false
                 }
                 else -> Unit
             }
         }
     }
 
-    private fun setButtons(requirementStatus: RequirementStatus) {
+    private fun setButtons(requirementDto: RequirementDto) {
         with(binding) {
-            when (requirementStatus) {
+            when (RequirementStatus.getStatusFromRequirement(requirementDto)) {
                 Requested -> {
                     // Buttons : 견적을 내기 어려워요 / 견적을 보낼래요.
                     leftButton.text = getString(R.string.refuse_estimate_text)
@@ -399,13 +398,31 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
 
                 Done -> {
                     // Button : 리뷰 요청하기
-                    leftButton.text = getString(R.string.request_review_text)
-                    leftButton.setTextColor(getColor(R.color.color_FFFFFF))
-                    leftButton.setBackgroundColor(resources.getColor(R.color.color_1FC472, null))
-                    leftButton.setOnClickListener {
-                        viewModel.askForReview()
-                    }
                     rightButton.isVisible = false
+                    requirementDto.estimationDto?.repair?.requestReviewYn?.let { requestReviewYn ->
+                        if (requestReviewYn) {
+                            leftButton.text = getString(R.string.ask_for_review_successful)
+                            leftButton.setTextColor(getColor(R.color.color_FFFFFF))
+                            leftButton.setBackgroundColor(
+                                resources.getColor(
+                                    R.color.color_90E9BD,
+                                    null
+                                )
+                            )
+                        } else {
+                            leftButton.text = getString(R.string.request_review_text)
+                            leftButton.setTextColor(getColor(R.color.color_FFFFFF))
+                            leftButton.setBackgroundColor(
+                                resources.getColor(
+                                    R.color.color_1FC472,
+                                    null
+                                )
+                            )
+                            leftButton.setOnClickListener {
+                                viewModel.askForReview()
+                            }
+                        }
+                    }
                 }
 
                 else -> {

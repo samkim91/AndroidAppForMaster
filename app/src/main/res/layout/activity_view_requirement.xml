@@ -53,6 +53,7 @@
                     android:layout_marginTop="@dimen/gap_16"
                     android:layout_marginStart="@dimen/gap_20"
                     android:layout_marginEnd="@dimen/gap_20"
+                    app:requirementDto="@{vm.requirement}"
                     app:startingText="@{@string/progress_starting_text}"
                     app:endingText="@{@string/progress_ending_text}"
                     />
@@ -145,7 +146,7 @@
             style="@style/text_style_16sp.bold"
             android:layout_width="@dimen/gap_0"
             android:layout_height="@dimen/gap_48"
-            android:background="@drawable/default_button_selector"
+            android:background="@color/color_1FC472"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/left_button"

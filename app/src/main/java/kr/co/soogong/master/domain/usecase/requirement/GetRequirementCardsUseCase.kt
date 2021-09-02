@@ -14,7 +14,7 @@ class GetRequirementCardsUseCase @Inject constructor(
         statusArray: List<String>,
         canceledYn: Boolean = false
     ): Flowable<List<RequirementCard>> {
-        return requirementRepository.getRequirementsFromAll(statusArray, canceledYn)
+        return requirementRepository.getRequirementsByStatus(statusArray, canceledYn)
             .map { dtoList ->
                 dtoList.map { dto ->
                     RequirementCard.fromRequirementDto(dto)
