@@ -9,6 +9,7 @@ import androidx.core.view.isNotEmpty
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import kr.co.soogong.master.R
+import kr.co.soogong.master.data.model.profile.SecretaryCodeTable
 import kr.co.soogong.master.data.model.requirement.RequirementCard
 import kr.co.soogong.master.databinding.ViewHolderRequirementItemBinding
 import kr.co.soogong.master.ui.*
@@ -39,6 +40,7 @@ abstract class RequirementCardViewHolder(
             }
 
             if (additionalInfoContainer.isNotEmpty()) additionalInfoContainer.removeAllViews()
+            measurementBadge.root.isVisible = requirementCard.typeCode == SecretaryCodeTable.code
         }
     }
 }

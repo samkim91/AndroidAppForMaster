@@ -50,13 +50,12 @@
                     android:id="@+id/requirement_status"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/gap_16"
                     android:layout_marginStart="@dimen/gap_20"
+                    android:layout_marginTop="@dimen/gap_16"
                     android:layout_marginEnd="@dimen/gap_20"
-                    app:requirementDto="@{vm.requirement}"
-                    app:startingText="@{@string/progress_starting_text}"
                     app:endingText="@{@string/progress_ending_text}"
-                    />
+                    app:requirementDto="@{vm.requirement}"
+                    app:startingText="@{@string/progress_starting_text}" />
 
                 <kr.co.soogong.master.ui.widget.AlertBox
                     android:id="@+id/alert_box"
@@ -85,6 +84,7 @@
                     android:layout_marginEnd="@dimen/gap_20"
                     app:address="@{vm.requirement.address}"
                     app:createdAt="@{vm.requirement.createdAt}"
+                    app:measurementBadgeVisibility="@{vm.requirement.typeCode}"
                     app:project="@{vm.requirement.projectName}"
                     app:requirementToken="@{vm.requirement.token}" />
 
@@ -103,8 +103,7 @@
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/gap_150"
-                    android:background="@color/F2F2F2"
-                    />
+                    android:background="@color/F2F2F2" />
             </LinearLayout>
         </ScrollView>
 

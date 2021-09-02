@@ -7,6 +7,8 @@ import java.util.*
 data class RequirementCard(
     val id: Int,
     val token: String?,
+    val typeCode: String?,
+    val typeName: String?,
     val project: String?,
     val address: String?,
     val status: RequirementStatus?,
@@ -22,6 +24,8 @@ data class RequirementCard(
             return RequirementCard(
                 id = requirementDto.id,
                 token = requirementDto.token,
+                typeCode = requirementDto.typeCode,
+                typeName = requirementDto.typeName,
                 project = requirementDto.projectName,
                 address = requirementDto.address,
                 status = RequirementStatus.getStatusFromRequirement(requirementDto),
