@@ -70,7 +70,7 @@ class ViewRequirementViewModel @Inject constructor(
                 requirementId = requirement.value?.estimationDto?.requirementId,
                 masterId = requirement.value?.estimationDto?.masterId,
                 masterResponseCode = EstimationResponseCode.REFUSED,
-                type = null,
+                typeCode = null,
                 price = null,
                 description = null,
                 choosenYn = null,

@@ -24,10 +24,7 @@ import kr.co.soogong.master.ui.widget.RequirementDrawerContainer.Companion.REPAI
 import kr.co.soogong.master.ui.widget.RequirementDrawerContainer.Companion.REQUIREMENT_TYPE
 import kr.co.soogong.master.ui.widget.RequirementDrawerContainer.Companion.REVIEW_TYPE
 import kr.co.soogong.master.uihelper.requirment.CallToCustomerHelper
-import kr.co.soogong.master.uihelper.requirment.action.EndRepairActivityHelper
-import kr.co.soogong.master.uihelper.requirment.action.MeasureActivityHelper
-import kr.co.soogong.master.uihelper.requirment.action.ViewRequirementActivityHelper
-import kr.co.soogong.master.uihelper.requirment.action.WriteEstimationActivityHelper
+import kr.co.soogong.master.uihelper.requirment.action.*
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
@@ -73,7 +70,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
         viewModel.action.observe(this@ViewRequirementActivity, EventObserver { event ->
             when (event) {
                 REFUSE_TO_ESTIMATE_SUCCESSFULLY -> {
-                    toast(getString(R.string.view_estimate_on_refuse_to_estimate_success))
+                    toast(getString(R.string.refuse_to_estimate_or_measure_successfully_text))
                     onBackPressed()
                 }
                 CALL_TO_CUSTOMER_SUCCESSFULLY -> {
@@ -320,7 +317,12 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                         val dialog = CustomDialog.newInstance(
                             getRefuseMeasureDialogData(this@ViewRequirementActivity),
                             yesClick = {
-                                // TODO: 2021/08/24 실측 취소 화면으로 이동
+                                startActivity(
+                                    CancelActivityHelper.getIntent(
+                                        this@ViewRequirementActivity,
+                                        requirementId
+                                    )
+                                )
                             },
                             noClick = { }
                         )
@@ -332,7 +334,8 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                     rightButton.setOnClickListener {
                         val dialog = CustomDialog.newInstance(
                             getAcceptMeasureDialogData(this@ViewRequirementActivity),
-                            yesClick = {    // TODO: 2021/08/26 실측 할래요 로직 처리 필요!!
+                            yesClick = {
+                                // TODO: 2021/09/03 실측 수락 로직 추가 필요
                             },
                             noClick = { }
                         )

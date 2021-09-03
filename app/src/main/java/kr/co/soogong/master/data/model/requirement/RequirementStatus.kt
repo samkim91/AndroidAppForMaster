@@ -1,6 +1,7 @@
 package kr.co.soogong.master.data.model.requirement
 
 import kr.co.soogong.master.data.dto.requirement.RequirementDto
+import kr.co.soogong.master.data.model.requirement.estimation.EstimationResponseCode
 
 sealed class RequirementStatus {
     abstract val asInt: Int
@@ -16,7 +17,7 @@ sealed class RequirementStatus {
                 // 견적탭
                 Requested.code -> Requested
                 Estimated.code -> {
-                    if (requirement.estimationDto?.masterResponseCode == "Default") Requested else Estimated
+                    if (requirement.estimationDto?.masterResponseCode == EstimationResponseCode.DEFAULT) Requested else Estimated
                 }
                 // 시공탭
                 Repairing.code -> Repairing

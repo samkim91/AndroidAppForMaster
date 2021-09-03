@@ -56,7 +56,7 @@
             android:name=".ui.image.ImageActivity"
             android:launchMode="singleTask" />
         <activity
-            android:name=".ui.requirement.action.cancel.CancelRepairActivity"
+            android:name=".ui.requirement.action.cancel.CancelActivity"
             android:launchMode="singleTask" />
         <activity
             android:name=".ui.requirement.action.end.EndRepairActivity"

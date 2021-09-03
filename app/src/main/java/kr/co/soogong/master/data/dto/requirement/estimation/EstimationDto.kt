@@ -24,22 +24,28 @@ data class EstimationDto(
     val masterResponseCode: String?,
 
     @SerializedName("type")
-    val type: String?,
+    val typeCode: String?,
 
     @SerializedName("price")
     val price: Int?,
 
     @SerializedName("description")
-    val description: String?,
+    val description: String? = null,
 
     @SerializedName("choosenYn")
-    val choosenYn: Boolean?,
+    val choosenYn: Boolean? = null,
 
     @SerializedName("estimationPrices")
-    val estimationPrices: List<EstimationPriceDto>?,
+    val estimationPrices: List<EstimationPriceDto>? = emptyList(),
 
     @SerializedName("repair")
-    val repair: RepairDto?,
+    val repair: RepairDto? = null,
+
+    @SerializedName("refuseCode")
+    val refuseCode: String? = null,
+
+    @SerializedName("refuseDescription")
+    val refuseDescription: String? = null,
 
     @SerializedName("createdAt")
     val createdAt: Date?,
