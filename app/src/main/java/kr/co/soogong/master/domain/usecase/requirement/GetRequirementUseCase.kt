@@ -11,6 +11,6 @@ class GetRequirementUseCase @Inject constructor(
     private val requirementRepository: RequirementRepository,
 ) {
     operator fun invoke(requirementId: Int): Flowable<RequirementDto> {
-        return requirementRepository.getRequirementFromAll(requirementId)
+        return requirementRepository.getRequirementById(requirementId)
     }
 }

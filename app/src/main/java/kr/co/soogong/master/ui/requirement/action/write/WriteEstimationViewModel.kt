@@ -27,7 +27,8 @@ class WriteEstimationViewModel @Inject constructor(
     val savedStateHandle: SavedStateHandle
 ) : BaseViewModel() {
 
-    private val requirementId = WriteEstimationActivityHelper.getRequirementIdFromSavedState(savedStateHandle)
+    private val requirementId =
+        WriteEstimationActivityHelper.getRequirementIdFromSavedState(savedStateHandle)
 
     private val _requirement = MutableLiveData<RequirementDto>()
     val requirement: LiveData<RequirementDto>
@@ -67,7 +68,7 @@ class WriteEstimationViewModel @Inject constructor(
                 requirementId = requirement.value?.estimationDto?.requirementId,
                 masterId = requirement.value?.estimationDto?.masterId,
                 masterResponseCode = EstimationResponseCode.ACCEPTED,
-                type = estimationType.value,
+                typeCode = estimationType.value,
                 price = when (estimationType.value) {
                     EstimationTypeCode.INTEGRATION -> {
                         simpleCost.value?.replace(",", "")?.toInt()

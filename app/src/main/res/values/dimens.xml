@@ -21,6 +21,7 @@
     <dimen name="sign_up_margin_top_52">52dp</dimen>
 
 
+    <dimen name="gap_minus_6">-6dp</dimen>
     <dimen name="gap_0">0dp</dimen>
 
     <dimen name="gap_1">1dp</dimen>

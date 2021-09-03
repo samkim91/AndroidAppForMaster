@@ -10,6 +10,7 @@ import kr.co.soogong.master.data.model.requirement.RequestMeasure
 import kr.co.soogong.master.data.model.requirement.Requested
 import kr.co.soogong.master.data.model.requirement.RequirementStatus
 import kr.co.soogong.master.ui.widget.RequirementDueDate
+import java.util.*
 
 @BindingAdapter("setDueDate")
 fun RequirementDueDate.setDueDate(requirementDto: RequirementDto?) {
@@ -19,18 +20,36 @@ fun RequirementDueDate.setDueDate(requirementDto: RequirementDto?) {
                 this.isVisible = true
                 this.bringToFront()
                 label = context.getString(R.string.requirements_card_due_date)
-                date = it.closedAt
+                date = getEstimationDueDate(it.createdAt)
             }
             // TODO: 2021/08/23 수공비서에서 추가된 상태값(실측 제한) 관련 조건 추가
             RequestMeasure -> {
                 this.isVisible = true
                 this.bringToFront()
                 label = context.getString(R.string.requirements_card_response_measure_due_date)
-                date = it.closedAt
+                date = getMeasureDueDate(it.createdAt)
             }
             else -> {
                 this.isVisible = false
             }
         }
     }
+}
+
+fun getEstimationDueDate(createdAt: Date?): Date {
+    val calendar = Calendar.getInstance(Locale.KOREA)
+    createdAt?.let {
+        calendar.time = it
+        calendar.add(Calendar.DATE, 1)
+    }
+    return calendar.time
+}
+
+fun getMeasureDueDate(createdAt: Date?): Date {
+    val calendar = Calendar.getInstance(Locale.KOREA)
+    createdAt?.let {
+        calendar.time = it
+        calendar.add(Calendar.HOUR, 1)
+    }
+    return calendar.time
 }

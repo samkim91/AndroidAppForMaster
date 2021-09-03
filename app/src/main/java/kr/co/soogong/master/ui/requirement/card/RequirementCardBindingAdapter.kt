@@ -13,23 +13,3 @@ fun TextView.setCreatedAt(date: Date?) {
         text = simpleDateFormat.format(it)
     }
 }
-
-//@BindingAdapter(value = ["setRequirementStatus", "priceAmount"])
-//fun AmountView.setAmount(status: RequirementStatus?, priceAmount: Int?) {
-//    title = when (status) {
-//        Estimated, Repairing -> {
-//            context.getString(R.string.requirements_card_amount_title)
-//        }
-//        Done, Closed -> {
-//            context.getString(R.string.requirements_card_amount_done_title)
-//        }
-//        else -> {
-//            ""
-//        }
-//    }
-//    priceAmount?.let {
-//        detail =
-//            if (it != 0) "${DecimalFormat("#,###").format(it)}원"
-//            else context.getString(R.string.not_estimated_text)
-//    }
-//}

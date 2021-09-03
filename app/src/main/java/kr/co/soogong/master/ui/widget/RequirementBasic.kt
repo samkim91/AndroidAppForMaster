@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import kr.co.soogong.master.R
+import kr.co.soogong.master.data.model.profile.SecretaryCodeTable
 import kr.co.soogong.master.databinding.ViewRequirementBasicBinding
 import java.util.*
 
@@ -48,12 +49,9 @@ class RequirementBasic @JvmOverloads constructor(
                 context.getString(R.string.requirement_token_label, value)
         }
 
-    // TODO: 2021/08/23 수공비서건인지 데이터 확인 필요
-    var measurementBadgeVisibility: Boolean? = false
+    var measurementBadgeVisibility: String? = ""
         set(value) {
             field = value
-            value?.let {
-                binding.measurementBadge.root.isVisible = it
-            }
+            binding.measurementBadge.root.isVisible = value == SecretaryCodeTable.code
         }
 }

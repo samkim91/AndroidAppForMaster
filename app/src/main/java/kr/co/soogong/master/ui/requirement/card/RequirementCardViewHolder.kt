@@ -9,11 +9,13 @@ import androidx.core.view.isNotEmpty
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import kr.co.soogong.master.R
+import kr.co.soogong.master.data.model.profile.SecretaryCodeTable
 import kr.co.soogong.master.data.model.requirement.RequirementCard
 import kr.co.soogong.master.databinding.ViewHolderRequirementItemBinding
 import kr.co.soogong.master.ui.*
 import kr.co.soogong.master.ui.widget.RequirementCardAdditionalInfo
 import kr.co.soogong.master.ui.widget.RequirementCardAdditionalInfo.Companion.setContainerTheme
+import kr.co.soogong.master.utility.extension.getEstimationDueDate
 import java.util.*
 
 // Requirement Card viewHolder 들의 추상클래스
@@ -38,6 +40,7 @@ abstract class RequirementCardViewHolder(
             }
 
             if (additionalInfoContainer.isNotEmpty()) additionalInfoContainer.removeAllViews()
+            measurementBadge.root.isVisible = requirementCard.typeCode == SecretaryCodeTable.code
         }
     }
 }
@@ -67,7 +70,7 @@ class RequestedViewHolder(
                     theme = ORANGE_THEME,
                     type = CALENDAR_TYPE,
                     titleData = context.getString(R.string.requirements_card_due_date),
-                    contentData = dateFormat.format(requirementCard.closedAt),
+                    contentData = dateFormat.format(getEstimationDueDate(requirementCard.createdAt)),
                     alertData = context.getString(R.string.requirements_card_due_date_alert)
                 )
             })
@@ -217,7 +220,7 @@ class DoneViewHolder(
                     theme = GREEN_THEME,
                     type = MONEY_TYPE,
                     titleData = context.getString(R.string.requirements_card_amount_done_title),
-                    contentData = "${moneyFormat.format(requirementCard.estimationDto?.price)}원",
+                    contentData = "${moneyFormat.format(requirementCard.estimationDto?.repair?.actualPrice)}원",
                     alertData = ""
                 )
             })
@@ -282,7 +285,7 @@ class ClosedViewHolder(
                     theme = GRAY_THEME,
                     type = MONEY_TYPE,
                     titleData = context.getString(R.string.requirements_card_amount_done_title),
-                    contentData = "${moneyFormat.format(requirementCard.estimationDto?.price)}원",
+                    contentData = "${moneyFormat.format(requirementCard.estimationDto?.repair?.actualPrice)}원",
                     alertData = ""
                 )
             })

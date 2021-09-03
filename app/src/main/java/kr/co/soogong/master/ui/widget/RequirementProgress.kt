@@ -19,6 +19,16 @@ class RequirementProgress @JvmOverloads constructor(
     private var binding =
         ViewRequirementProgressBinding.inflate(LayoutInflater.from(context), this, true)
 
+    var requirementDto: RequirementDto? = null
+        set(value) {
+            value?.let {
+                field = value
+                setOnStatusChangeListener()
+                max = 5
+                progress = convertStatusToProgress(it)
+            }
+        }
+
     var startingText: String? = ""
         set(value) {
             field = value
@@ -47,30 +57,30 @@ class RequirementProgress @JvmOverloads constructor(
 
     // 수공비서 퍼널 (1.실측 요청 -> 2.실측 예정 -> 3.실측 완료 -> 4.시공 예정)
     // 일반 퍼널 (1.견적 요청 -> 2.매칭 대기 -> 3.시공 예정 -> 4.고객 완료 요청)
-    fun initLayout(requirementDto: RequirementDto) {
-        max = 5
-        progress = convertStatusToProgress(requirementDto)
-    }
-
-    private fun convertStatusToProgress(requirementDto: RequirementDto): Int =
-        when (RequirementStatus.getStatusFromRequirement(requirementDto)) {
+    private fun convertStatusToProgress(requirementDto: RequirementDto): Int {
+        Timber.tag(TAG).d("convertStatusToProgress: $requirementDto")
+        return when (RequirementStatus.getStatusFromRequirement(requirementDto)) {
             Requested -> 1
             Estimated -> 2
             Repairing -> 3
             RequestFinish -> 4
             else -> max
         }
+    }
 
-    private fun convertProgressToStatus(progress: Int): String =
-        when (progress) {
+    private fun convertProgressToStatus(progress: Int): String {
+        Timber.tag(TAG).d("convertStatusToProgress: $progress")
+        return when (progress) {
             1 -> Requested.inKorean
             2 -> Estimated.inKorean
             3 -> Repairing.inKorean
             4 -> RequestFinish.inKorean
             else -> ""
         }
+    }
 
     fun setOnStatusChangeListener() {
+        Timber.tag(TAG).d("setOnStatusChangeListener: ")
         with(binding) {
             seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
                 override fun onProgressChanged(
@@ -78,6 +88,8 @@ class RequirementProgress @JvmOverloads constructor(
                     progress: Int,
                     fromUser: Boolean
                 ) {
+                    Timber.tag(TAG).d("onProgressChanged: $progress")
+
                     if (progress == 0 || progress == max) {
                         indicator.isVisible = false
                         if (progress == max) endingPoint.isEnabled = true
@@ -87,10 +99,14 @@ class RequirementProgress @JvmOverloads constructor(
                         endingPoint.isEnabled = false
                     }
 
-                    val pos = (seekBar!!.thumb.bounds.left - 22).toFloat()
-                    Timber.tag(TAG).d("position: $pos")
+                    val pos = (seekBar!!.thumb.bounds.left - 25).toFloat()
                     indicatorText.translationX = pos
                     indicatorLine.translationX = pos
+                    // TODO: 2021/08/31 progress 가 4 이상으로 가면, 레이아웃이 깨지는데 확인 필요
+//                    Timber.tag(TAG).d("position: $pos")
+//                    val width = seekBar!!.width - seekBar.paddingLeft - seekBar.paddingRight
+//                    val thumbsPos = (seekBar.paddingLeft + width * seekBar.progress / seekBar.max - 72).toFloat()
+
 
                     indicatorText.text = convertProgressToStatus(progress)
                 }
@@ -104,8 +120,5 @@ class RequirementProgress @JvmOverloads constructor(
 
     companion object {
         private const val TAG = "RequirementProgress"
-
-        const val GENERAL_TYPE = 100
-        const val SECRETARY_TYPE = 200
     }
 }

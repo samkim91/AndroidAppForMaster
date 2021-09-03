@@ -36,6 +36,8 @@ class MeasureActivity : BaseActivity<ActivityMeasureBinding>(
                     onBackPressed()
                 }
 
+                // TODO: 2021/09/03 사진 추가하는 로직 필요
+
                 button.text = getString(R.string.send_estimation)
                 button.setOnClickListener {
                     if (!simpleCost.alertVisible && ValidationHelper.isIntRange(viewModel.simpleCost.value!!)) viewModel.sendEstimation()

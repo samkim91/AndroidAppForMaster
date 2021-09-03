@@ -24,10 +24,7 @@ import kr.co.soogong.master.ui.widget.RequirementDrawerContainer.Companion.REPAI
 import kr.co.soogong.master.ui.widget.RequirementDrawerContainer.Companion.REQUIREMENT_TYPE
 import kr.co.soogong.master.ui.widget.RequirementDrawerContainer.Companion.REVIEW_TYPE
 import kr.co.soogong.master.uihelper.requirment.CallToCustomerHelper
-import kr.co.soogong.master.uihelper.requirment.action.EndRepairActivityHelper
-import kr.co.soogong.master.uihelper.requirment.action.MeasureActivityHelper
-import kr.co.soogong.master.uihelper.requirment.action.ViewRequirementActivityHelper
-import kr.co.soogong.master.uihelper.requirment.action.WriteEstimationActivityHelper
+import kr.co.soogong.master.uihelper.requirment.action.*
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
@@ -61,21 +58,19 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                     super.onBackPressed()
                 }
             }
-            requirementStatus.setOnStatusChangeListener()
         }
     }
 
     private fun registerEventObserve() {
         viewModel.requirement.observe(this@ViewRequirementActivity, { requirement ->
             setLayout(requirement)
-            setButtons(RequirementStatus.getStatusFromRequirement(requirement))
-            binding.requirementStatus.initLayout(requirement)
+            setButtons(requirement)
         })
 
         viewModel.action.observe(this@ViewRequirementActivity, EventObserver { event ->
             when (event) {
                 REFUSE_TO_ESTIMATE_SUCCESSFULLY -> {
-                    toast(getString(R.string.view_estimate_on_refuse_to_estimate_success))
+                    toast(getString(R.string.refuse_to_estimate_or_measure_successfully_text))
                     onBackPressed()
                 }
                 CALL_TO_CUSTOMER_SUCCESSFULLY -> {
@@ -275,15 +270,16 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                         isSpread = false,
                         includingCancel = false
                     )
+                    requirementStatus.isVisible = false
                 }
                 else -> Unit
             }
         }
     }
 
-    private fun setButtons(requirementStatus: RequirementStatus) {
+    private fun setButtons(requirementDto: RequirementDto) {
         with(binding) {
-            when (requirementStatus) {
+            when (RequirementStatus.getStatusFromRequirement(requirementDto)) {
                 Requested -> {
                     // Buttons : 견적을 내기 어려워요 / 견적을 보낼래요.
                     leftButton.text = getString(R.string.refuse_estimate_text)
@@ -321,7 +317,12 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                         val dialog = CustomDialog.newInstance(
                             getRefuseMeasureDialogData(this@ViewRequirementActivity),
                             yesClick = {
-                                // TODO: 2021/08/24 실측 취소 화면으로 이동
+                                startActivity(
+                                    CancelActivityHelper.getIntent(
+                                        this@ViewRequirementActivity,
+                                        requirementId
+                                    )
+                                )
                             },
                             noClick = { }
                         )
@@ -333,7 +334,8 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                     rightButton.setOnClickListener {
                         val dialog = CustomDialog.newInstance(
                             getAcceptMeasureDialogData(this@ViewRequirementActivity),
-                            yesClick = {    // TODO: 2021/08/26 실측 할래요 로직 처리 필요!!
+                            yesClick = {
+                                // TODO: 2021/09/03 실측 수락 로직 추가 필요
                             },
                             noClick = { }
                         )
@@ -399,13 +401,31 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
 
                 Done -> {
                     // Button : 리뷰 요청하기
-                    leftButton.text = getString(R.string.request_review_text)
-                    leftButton.setTextColor(getColor(R.color.color_FFFFFF))
-                    leftButton.setBackgroundColor(resources.getColor(R.color.color_1FC472, null))
-                    leftButton.setOnClickListener {
-                        viewModel.askForReview()
-                    }
                     rightButton.isVisible = false
+                    requirementDto.estimationDto?.repair?.requestReviewYn?.let { requestReviewYn ->
+                        if (requestReviewYn) {
+                            leftButton.text = getString(R.string.ask_for_review_successful)
+                            leftButton.setTextColor(getColor(R.color.color_FFFFFF))
+                            leftButton.setBackgroundColor(
+                                resources.getColor(
+                                    R.color.color_90E9BD,
+                                    null
+                                )
+                            )
+                        } else {
+                            leftButton.text = getString(R.string.request_review_text)
+                            leftButton.setTextColor(getColor(R.color.color_FFFFFF))
+                            leftButton.setBackgroundColor(
+                                resources.getColor(
+                                    R.color.color_1FC472,
+                                    null
+                                )
+                            )
+                            leftButton.setOnClickListener {
+                                viewModel.askForReview()
+                            }
+                        }
+                    }
                 }
 
                 else -> {

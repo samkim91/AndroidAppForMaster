@@ -4,9 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.Gravity
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -14,10 +12,10 @@ import androidx.core.view.isVisible
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.dto.requirement.RequirementDto
 import kr.co.soogong.master.data.model.profile.Review
-import kr.co.soogong.master.data.model.requirement.repair.RepairCanceledReason
+import kr.co.soogong.master.data.model.requirement.repair.CanceledReason
 import kr.co.soogong.master.databinding.ViewRequirementDrawerContainerBinding
 import kr.co.soogong.master.ui.profile.review.ReviewViewHolderHelper
-import kr.co.soogong.master.uihelper.requirment.action.CancelRepairActivityHelper
+import kr.co.soogong.master.uihelper.requirment.action.CancelActivityHelper
 import kr.co.soogong.master.utility.extension.dp
 import kr.co.soogong.master.utility.extension.startHalfRotateAnimation
 
@@ -135,7 +133,7 @@ class RequirementDrawerContainer @JvmOverloads constructor(
                         EstimationDetail(context).apply {
                             key = context.getString(R.string.cancel_repair_title)
                             value =
-                                RepairCanceledReason.getCanceledReason(requirement.canceledCode).inKorean
+                                CanceledReason.getCanceledReasonFromCode(requirement.canceledCode).inKorean
                             bold = true
                         }.run {
                             container.addView(this)
@@ -188,7 +186,7 @@ class RequirementDrawerContainer @JvmOverloads constructor(
                 setTextAppearance(R.style.text_style_16sp_bold)
                 setOnClickListener {
                     context.startActivity(
-                        CancelRepairActivityHelper.getIntent(
+                        CancelActivityHelper.getIntent(
                             context,
                             requirementDto.id
                         )

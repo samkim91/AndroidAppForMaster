@@ -89,7 +89,7 @@ class EditOtherFlexibleOptionFragment : BaseFragment<FragmentEditOtherFlexibleOp
                     groupCode = OtherFlexibleOptionCodeTable.code,
                     code = CodeTable.findCodeTableByKorean(chip.text.toString()).code,
                     name = chip.text.toString(),
-                    value = if(chip.isChecked) "1" else "0"
+                    value = if (chip.isChecked) "1" else "0"
                 )
             }.toList()
 

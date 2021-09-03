@@ -176,11 +176,8 @@
     <!--  Cancel Estimate  -->
     <string name="cancel_estimate_title">취소 사유</string>
     <string name="cancel_estimate_cancel_option_label">어떤 이유로 취소 되었나요?</string>
-    <string name="cancel_estimate_cancel_option_1">고객의 단순 변심</string>
-    <string name="cancel_estimate_cancel_option_2">고객의 연락 부재</string>
-    <string name="cancel_estimate_cancel_option_3">현장 실측 결과 시공이 불가</string>
-    <string name="cancel_estimate_cancel_option_4">견적가와 현장 실측 결과가 상이하여 고객이 취소</string>
-    <string name="cancel_estimate_cancel_option_detail_label">상세 내용을 입력해주세요. (선택)</string>
+    <string name="asking_write_detail_label">상세 내용을 입력해주세요. (선택)</string>
+    <string name="asking_write_canceled_reason_detail_label">취소 사유에 대해 더 하고 싶은 말이 있으시면 작성해주세요.</string>
 
     <!-- Write Estimate -->
     <string name="write_estimate_title">견적서 작성</string>
@@ -337,9 +334,10 @@
 
     <string name="send_message_succeeded">고객에게 견적서가 전달되었습니다!\n매칭을 기다려주세요.</string>
     <string name="cancel_estimate_succeeded">시공이 취소되었습니다.\n더 좋은 문의를 드리도록 노력할게요.</string>
+    <string name="cancel_measure_succeeded">실측이 취소되었습니다.\n더 좋은 문의를 드리도록 노력할게요.</string>
 
     <string name="end_estimate_succeeded">시공 완료 처리 되었고,\n고객님께 리뷰 요청이 전송되었어요.</string>
-    <string name="view_estimate_on_refuse_to_estimate_success">문의가 삭제되었습니다.</string>
+    <string name="refuse_to_estimate_or_measure_successfully_text">문의가 삭제되었습니다.</string>
     <string name="error_message_of_request_failed">해당 요청을 처리할 수 없습니다. 다시 요청하거나 수공에 연락해주세요.</string>
     <string name="ask_for_review_successful">리뷰 요청을 완료했어요!</string>
     <string name="sign_up_successfully">회원 가입이 완료되었습니다!\n필수 정보를 모두 입력하고\n문의를 처리해보세요!</string>

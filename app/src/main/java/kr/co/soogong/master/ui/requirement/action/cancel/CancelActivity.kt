@@ -2,28 +2,24 @@ package kr.co.soogong.master.ui.requirement.action.cancel
 
 import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.core.view.isVisible
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
+import kr.co.soogong.master.data.model.profile.CompareCodeTable
 import kr.co.soogong.master.data.model.requirement.repair.*
-import kr.co.soogong.master.databinding.ActivityCancelRepairBinding
+import kr.co.soogong.master.databinding.ActivityCancelBinding
 import kr.co.soogong.master.ui.base.BaseActivity
-import kr.co.soogong.master.ui.requirement.action.cancel.CancelRepairViewModel.Companion.CANCEL_ESTIMATION_FAILED
-import kr.co.soogong.master.ui.requirement.action.cancel.CancelRepairViewModel.Companion.CANCEL_ESTIMATION_SUCCESSFULLY
-import kr.co.soogong.master.uihelper.requirment.action.CancelRepairActivityHelper
+import kr.co.soogong.master.ui.requirement.action.cancel.CancelViewModel.Companion.CANCEL_ESTIMATION_SUCCESSFULLY
+import kr.co.soogong.master.ui.requirement.action.cancel.CancelViewModel.Companion.CANCEL_MEASURE_SUCCESSFULLY
+import kr.co.soogong.master.ui.requirement.action.cancel.CancelViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
 
 @AndroidEntryPoint
-class CancelRepairActivity : BaseActivity<ActivityCancelRepairBinding>(
-    R.layout.activity_cancel_repair
+class CancelActivity : BaseActivity<ActivityCancelBinding>(
+    R.layout.activity_cancel
 ) {
-    val requirementId: Int by lazy {
-        CancelRepairActivityHelper.getRequirementId(intent)
-    }
-
-    private val viewModel: CancelRepairViewModel by viewModels()
+    private val viewModel: CancelViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +34,7 @@ class CancelRepairActivity : BaseActivity<ActivityCancelRepairBinding>(
         bind {
             vm = viewModel
 
-            lifecycleOwner = this@CancelRepairActivity
+            lifecycleOwner = this@CancelActivity
 
             with(actionBar) {
                 title.text = getString(R.string.cancel_estimate_title)
@@ -47,21 +43,19 @@ class CancelRepairActivity : BaseActivity<ActivityCancelRepairBinding>(
                 }
                 button.text = getString(R.string.writing_done)
                 button.setOnClickListener {
-                    viewModel.canceledCode.observe(this@CancelRepairActivity, {
-                        alert.isVisible = it.isNullOrEmpty()
+                    viewModel.canceledCode.observe(this@CancelActivity, {
+                        canceledOptions.alertVisible = it.isNullOrEmpty()
                     })
 
-                    if (!alert.isVisible) viewModel.saveRepair()
-                }
+                    if (canceledOptions.alertVisible) return@setOnClickListener
 
-                cancelOption.setOnCheckedChangeListener { _, checkedId ->
-                    viewModel.canceledCode.value = when (checkedId) {
-                        cancelOption1.id -> ChangeOfMind.code
-                        cancelOption2.id -> NoResponse.code
-                        cancelOption3.id -> RepairImpossible.code
-                        cancelOption4.id -> DifferentCost.code
-                        else -> ""
-                    }
+                    if (viewModel.requirement.value?.typeCode == CompareCodeTable.code) viewModel.saveRepair() else viewModel.saveEstimation()
+                }
+                CanceledReasonRadioGroupHelper(this@CancelActivity, canceledOptions)
+
+                canceledOptions.addCheckedChangeListener { _, position ->
+                    viewModel.canceledCode.value =
+                        CanceledReasonRadioGroupHelper.canceledReasons[position].code
                 }
             }
         }
@@ -69,14 +63,17 @@ class CancelRepairActivity : BaseActivity<ActivityCancelRepairBinding>(
 
     private fun registerEventObserve() {
         Timber.tag(TAG).d("registerEventObserve: ")
-
-        viewModel.action.observe(this@CancelRepairActivity, EventObserver { event ->
+        viewModel.action.observe(this@CancelActivity, EventObserver { event ->
             when (event) {
                 CANCEL_ESTIMATION_SUCCESSFULLY -> {
                     toast(getString(R.string.cancel_estimate_succeeded))
                     super.onBackPressed()
                 }
-                CANCEL_ESTIMATION_FAILED -> {
+                CANCEL_MEASURE_SUCCESSFULLY -> {
+                    toast(getString(R.string.refuse_to_estimate_or_measure_successfully_text))
+                    super.onBackPressed()
+                }
+                REQUEST_FAILED -> {
                     toast(getString(R.string.error_message_of_request_failed))
                 }
             }
@@ -89,7 +86,7 @@ class CancelRepairActivity : BaseActivity<ActivityCancelRepairBinding>(
     }
 
     companion object {
-        private const val TAG = "CancelEstimationActivity"
+        private const val TAG = "CancelActivity"
     }
 
 }

@@ -51,9 +51,9 @@
                     android:layout_marginStart="@dimen/gap_20"
                     android:layout_marginTop="@dimen/gap_20"
                     android:layout_marginEnd="@dimen/gap_20"
-                    app:measurementBadgeVisibility="@{false}"
                     app:address="@{vm.requirement.address}"
                     app:createdAt="@{vm.requirement.createdAt}"
+                    app:measurementBadgeVisibility="@{vm.requirement.typeCode}"
                     app:project="@{vm.requirement.projectName}"
                     app:requirementToken="@{vm.requirement.token}" />
 
@@ -72,8 +72,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="@dimen/gap_50"
-                    >
+                    android:paddingBottom="@dimen/gap_50">
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/request_type"
@@ -227,8 +226,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:visibility="gone"
-                        tools:visibility="visible"
-                        app:constraint_referenced_ids="labor_cost,material_cost,travel_cost,total_cost" />
+                        app:constraint_referenced_ids="labor_cost,material_cost,travel_cost,total_cost"
+                        tools:visibility="visible" />
 
                     <androidx.constraintlayout.widget.Barrier
                         android:id="@+id/request_barrier"
