@@ -12,4 +12,10 @@
     * OkHttp3
     * retrofit2
     * gson
+    * room
     * glide
+    * firebase
+    * dagger-hilt
+    * ted-permission, image picker
+    * naver
+    * kakao
