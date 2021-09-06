@@ -5,6 +5,8 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
+import kr.co.soogong.master.data.model.profile.CompareCodeTable
+import kr.co.soogong.master.data.model.requirement.RequirementCard
 import kr.co.soogong.master.databinding.FragmentRequirementProgressBinding
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.dialog.popup.CustomDialog
@@ -15,7 +17,9 @@ import kr.co.soogong.master.ui.requirement.progressStatus
 import kr.co.soogong.master.uihelper.requirment.CallToCustomerHelper
 import kr.co.soogong.master.uihelper.requirment.RequirementsBadge
 import kr.co.soogong.master.uihelper.requirment.action.EndRepairActivityHelper
+import kr.co.soogong.master.uihelper.requirment.action.MeasureActivityHelper
 import kr.co.soogong.master.uihelper.requirment.action.ViewRequirementActivityHelper
+import kr.co.soogong.master.uihelper.requirment.action.WriteEstimationActivityHelper
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.extension.onCheckedChanged
 import kr.co.soogong.master.utility.extension.toast
@@ -54,25 +58,33 @@ class ProgressFragment : BaseFragment<FragmentRequirementProgressBinding>(
                         )
                     )
                 },
-                callButtonClick = { keycode, number ->
-                    val dialog = CustomDialog.newInstance(getCallToCustomerDialogData(requireContext()),
-                        yesClick = {
-                            viewModel.callToClient(
-                                requirementId = keycode
-                            )
-                            startActivity(CallToCustomerHelper.getIntent(number.toString()))
-                        },
-                        noClick = { }
-                    )
+                leftButtonClick = { keycode, number ->
+                    val dialog =
+                        CustomDialog.newInstance(getCallToCustomerDialogData(requireContext()),
+                            yesClick = {
+                                viewModel.callToClient(
+                                    requirementId = keycode
+                                )
+                                startActivity(CallToCustomerHelper.getIntent(number.toString()))
+                            },
+                            noClick = { }
+                        )
 
                     dialog.show(childFragmentManager, dialog.tag)
                 },
-                doneButtonClick = { requirementId, _ ->
+                rightButtonClick = { requirementId, requirement ->
                     startActivity(
-                        EndRepairActivityHelper.getIntent(
-                            requireContext(),
-                            requirementId
-                        )
+                        if ((requirement as RequirementCard).typeCode == CompareCodeTable.code) {
+                            EndRepairActivityHelper.getIntent(
+                                requireContext(),
+                                requirementId
+                            )
+                        } else {
+                            MeasureActivityHelper.getIntent(
+                                requireContext(),
+                                requirementId
+                            )
+                        }
                     )
                 }
             )

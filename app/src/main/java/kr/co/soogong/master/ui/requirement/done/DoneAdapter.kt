@@ -9,13 +9,13 @@ import kr.co.soogong.master.ui.requirement.card.RequirementCardViewHolderHelper
 
 class DoneAdapter(
     private val cardClickListener: (requirementId: Int) -> Unit,
-    private val reviewButtonClick: (requirementId: Int, Any?) -> Unit
+    private val rightButtonClick: (requirementId: Int, Any?) -> Unit
 ) : ListAdapter<RequirementCard, RequirementCardViewHolder>(RequirementCardDiffUtil()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         RequirementCardViewHolderHelper.create(parent, viewType)
 
     override fun onBindViewHolder(holder: RequirementCardViewHolder, position: Int) {
-        holder.bind(getItem(position), cardClickListener, null, reviewButtonClick)
+        holder.bind(getItem(position), cardClickListener, null, rightButtonClick)
     }
 
     override fun getItemViewType(position: Int): Int =

@@ -92,6 +92,7 @@
     <string name="requirements_card_start_time">최초 요청일 : %s</string>
     <string name="requirements_card_due_date">견적 마감일 : </string>
     <string name="requirements_card_response_measure_due_date">실측 선택 마감 : </string>
+    <string name="requirements_card_measuring_date">실측 예정일 : </string>
     <string name="requirements_card_done_date">시공 완료일 : </string>
     <string name="requirements_card_amount_title">나의 견적가 :</string>
     <string name="requirements_card_amount_done_title">최종 시공가 :</string>
@@ -338,6 +339,7 @@
 
     <string name="end_estimate_succeeded">시공 완료 처리 되었고,\n고객님께 리뷰 요청이 전송되었어요.</string>
     <string name="refuse_to_estimate_or_measure_successfully_text">문의가 삭제되었습니다.</string>
+    <string name="respond_to_measure_successfully_text">현장 실측 요청을 수락했습니다!\n전화로 고객과 상담해주세요.</string>
     <string name="error_message_of_request_failed">해당 요청을 처리할 수 없습니다. 다시 요청하거나 수공에 연락해주세요.</string>
     <string name="ask_for_review_successful">리뷰 요청을 완료했어요!</string>
     <string name="sign_up_successfully">회원 가입이 완료되었습니다!\n필수 정보를 모두 입력하고\n문의를 처리해보세요!</string>

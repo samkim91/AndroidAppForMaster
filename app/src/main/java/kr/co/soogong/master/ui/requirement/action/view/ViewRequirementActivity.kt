@@ -13,6 +13,7 @@ import kr.co.soogong.master.ui.dialog.popup.CustomDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData.Companion.getAcceptMeasureDialogData
 import kr.co.soogong.master.ui.dialog.popup.DialogData.Companion.getRefuseEstimateDialogData
 import kr.co.soogong.master.ui.dialog.popup.DialogData.Companion.getRefuseMeasureDialogData
+import kr.co.soogong.master.ui.requirement.action.view.ViewRequirementViewModel.Companion.RESPOND_TO_MEASURE_SUCCESSFULLY
 import kr.co.soogong.master.ui.requirement.action.view.ViewRequirementViewModel.Companion.ASK_FOR_REVIEW_SUCCESSFULLY
 import kr.co.soogong.master.ui.requirement.action.view.ViewRequirementViewModel.Companion.CALL_TO_CUSTOMER_SUCCESSFULLY
 import kr.co.soogong.master.ui.requirement.action.view.ViewRequirementViewModel.Companion.REFUSE_TO_ESTIMATE_SUCCESSFULLY
@@ -62,9 +63,12 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
     }
 
     private fun registerEventObserve() {
+        Timber.tag(TAG).d("registerEventObserve: ")
         viewModel.requirement.observe(this@ViewRequirementActivity, { requirement ->
+            Timber.tag(TAG).d("requirement updated: $requirement")
             setLayout(requirement)
             setButtons(requirement)
+            binding.requirementStatus.requirementDto = requirement
         })
 
         viewModel.action.observe(this@ViewRequirementActivity, EventObserver { event ->
@@ -77,6 +81,10 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                     viewModel.requirement.value?.let {
                         startActivity(CallToCustomerHelper.getIntent(it.tel))
                     }
+                }
+                RESPOND_TO_MEASURE_SUCCESSFULLY -> {
+                    toast(getString(R.string.respond_to_measure_successfully_text))
+                    onBackPressed()
                 }
                 ASK_FOR_REVIEW_SUCCESSFULLY -> {
                     setReviewAsked()
@@ -91,10 +99,12 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
 
     override fun onStart() {
         super.onStart()
+        Timber.tag(TAG).d("onStart: ")
         viewModel.requestRequirement()
     }
 
     private fun setLayout(requirement: RequirementDto) {
+        Timber.tag(TAG).d("setLayout: ")
         bind {
             flexibleContainer.removeAllViews()
             actionBar.title.text = requirement.address
@@ -278,6 +288,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
     }
 
     private fun setButtons(requirementDto: RequirementDto) {
+        Timber.tag(TAG).d("setButtons: ")
         with(binding) {
             when (RequirementStatus.getStatusFromRequirement(requirementDto)) {
                 Requested -> {
@@ -335,7 +346,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                         val dialog = CustomDialog.newInstance(
                             getAcceptMeasureDialogData(this@ViewRequirementActivity),
                             yesClick = {
-                                // TODO: 2021/09/03 실측 수락 로직 추가 필요
+                                viewModel.respondToMeasure()
                             },
                             noClick = { }
                         )

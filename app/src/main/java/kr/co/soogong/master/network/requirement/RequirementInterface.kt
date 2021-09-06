@@ -6,10 +6,9 @@ import kr.co.soogong.master.contract.HttpContract
 import kr.co.soogong.master.data.dto.requirement.RequirementDto
 import kr.co.soogong.master.data.dto.requirement.estimation.EstimationDto
 import kr.co.soogong.master.data.dto.requirement.repair.RepairDto
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Query
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import retrofit2.http.*
 
 interface RequirementInterface {
     @GET(HttpContract.GET_REQUIREMENT_LIST_BY_UID)
@@ -18,8 +17,12 @@ interface RequirementInterface {
     @GET(HttpContract.GET_REQUIREMENT)
     fun getRequirement(@Query("requirementId") requirementId : Int, @Query("masterUid") masterUid: String): Single<RequirementDto>
 
+    @Multipart
     @POST(HttpContract.SAVE_ESTIMATION)
-    fun saveEstimation(@Body body: EstimationDto): Single<EstimationDto>
+    fun saveEstimation(@Part("estimationDto") estimationDto: RequestBody, @Part measurementImage: MultipartBody.Part?): Single<EstimationDto>
+
+    @POST(HttpContract.RESPOND_TO_MEASURE)
+    fun respondToMeasure(@Body estimationDto: EstimationDto): Single<EstimationDto>
 
     @POST(HttpContract.SAVE_REPAIR)
     fun saveRepair(@Body repairDto: RepairDto): Single<RequirementDto>

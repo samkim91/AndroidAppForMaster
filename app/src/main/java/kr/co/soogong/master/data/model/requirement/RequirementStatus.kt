@@ -14,18 +14,22 @@ sealed class RequirementStatus {
             if (requirement?.canceledYn == true) return Canceled
 
             return when (requirement?.status) {
-                // 견적탭
+                // 문의 탭
                 Requested.code -> Requested
                 Estimated.code -> {
                     if (requirement.estimationDto?.masterResponseCode == EstimationResponseCode.DEFAULT) Requested else Estimated
                 }
-                // 시공탭
+                // 진행중 탭
+                Measuring.code -> Measuring
+                Measured.code -> Measured
                 Repairing.code -> Repairing
                 RequestFinish.code -> RequestFinish
-                // 완료탭
+                // 완료취소 탭
                 Done.code -> Done
                 Closed.code -> Closed
                 Impossible.code -> Impossible
+                // 실측 요청
+                RequestMeasure.code -> RequestMeasure
                 else -> Failed
             }
         }

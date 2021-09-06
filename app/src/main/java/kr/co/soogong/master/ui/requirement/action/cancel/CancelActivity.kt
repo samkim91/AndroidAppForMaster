@@ -1,6 +1,7 @@
 package kr.co.soogong.master.ui.requirement.action.cancel
 
 import android.os.Bundle
+import android.widget.RadioButton
 import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
@@ -49,13 +50,15 @@ class CancelActivity : BaseActivity<ActivityCancelBinding>(
 
                     if (canceledOptions.alertVisible) return@setOnClickListener
 
-                    if (viewModel.requirement.value?.typeCode == CompareCodeTable.code) viewModel.saveRepair() else viewModel.saveEstimation()
+                    if (viewModel.requirement.value?.typeCode == CompareCodeTable.code) viewModel.saveRepair() else viewModel.respondToMeasure()
                 }
                 CanceledReasonRadioGroupHelper(this@CancelActivity, canceledOptions)
 
-                canceledOptions.addCheckedChangeListener { _, position ->
+                canceledOptions.addCheckedChangeListener { group, checkedId ->
+                    val index = group.indexOfChild(group.findViewById<RadioButton>(checkedId))
+
                     viewModel.canceledCode.value =
-                        CanceledReasonRadioGroupHelper.canceledReasons[position].code
+                        CanceledReasonRadioGroupHelper.canceledReasons[index].code
                 }
             }
         }

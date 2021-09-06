@@ -25,27 +25,12 @@ class SaveMasterUseCase @Inject constructor(
     ): Single<MasterDto> {
         val master = MultipartGenerator.createJson(masterDto)
 
-        val profileImage =
-            if (profileImageUri != null && profileImageUri != Uri.EMPTY)
-                MultipartGenerator.createFile(context, "profileImage", profileImageUri)
-            else
-                null
+        val profileImage = MultipartGenerator.createFile(context, "profileImage", profileImageUri)
 
         val businessRegistImage =
-            if (businessRegistImageUri != null && businessRegistImageUri != Uri.EMPTY)
-                MultipartGenerator.createFile(
-                    context,
-                    "businessRegistImage",
-                    businessRegistImageUri
-                )
-            else
-                null
+            MultipartGenerator.createFile(context, "businessRegistImage", businessRegistImageUri)
 
-        val shopImages =
-            if (!shopImagesUris.isNullOrEmpty())
-                MultipartGenerator.createFiles(context, "shopImages", shopImagesUris)
-            else
-                null
+        val shopImages = MultipartGenerator.createFiles(context, "shopImages", shopImagesUris)
 
         return profileService.saveMaster(master, profileImage, businessRegistImage, shopImages)
             .doOnSuccess {

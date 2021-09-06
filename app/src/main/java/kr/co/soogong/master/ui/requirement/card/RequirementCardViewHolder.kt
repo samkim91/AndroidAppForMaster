@@ -115,6 +115,96 @@ class EstimatedViewHolder(
     }
 }
 
+// 실측예정 상태
+class MeasuringViewHolder(
+    override val context: Context,
+    override val binding: ViewHolderRequirementItemBinding,
+) : RequirementCardViewHolder(context, binding) {
+    override fun bind(
+        requirementCard: RequirementCard,
+        cardClickListener: (requirementId: Int) -> Unit,
+        leftButtonClickListener: ((requirementId: Int, extraInfo: Any?) -> Unit)?,
+        rightButtonClickListener: ((requirementId: Int, extraInfo: Any?) -> Unit)?
+    ) {
+        super.bind(
+            requirementCard,
+            cardClickListener,
+            leftButtonClickListener,
+            rightButtonClickListener
+        )
+
+        with(binding) {
+            setContainerTheme(context, additionalInfoContainer, GREEN_THEME)
+            additionalInfoContainer.addView(RequirementCardAdditionalInfo(context).apply {
+                setLayout(
+                    theme = GREEN_THEME,
+                    type = CALENDAR_TYPE,
+                    titleData = context.getString(R.string.requirements_card_measuring_date),
+                    contentData = requirementCard.measuringDate?.let { dateFormat.format(it) },
+                    alertData = ""
+                )
+
+                leftButton.isVisible = true
+                rightButton.isVisible = true
+                leftButton.setText(R.string.call_to_customer_text)
+                rightButton.setText(R.string.send_estimation)
+
+                // TODO.. 첫 전화인지, 아닌지에 따라 버튼의 UI를 변경해줘야햠. Figma 참고
+                leftButton.setOnClickListener {
+                    leftButtonClickListener?.invoke(requirementCard.id, requirementCard.tel)
+                }
+
+                rightButton.setOnClickListener {
+                    rightButtonClickListener?.invoke(requirementCard.id, requirementCard)
+                }
+            })
+        }
+    }
+}
+
+// 실측완료 상태
+class MeasuredViewHolder(
+    override val context: Context,
+    override val binding: ViewHolderRequirementItemBinding,
+) : RequirementCardViewHolder(context, binding) {
+    override fun bind(
+        requirementCard: RequirementCard,
+        cardClickListener: (requirementId: Int) -> Unit,
+        leftButtonClickListener: ((requirementId: Int, extraInfo: Any?) -> Unit)?,
+        rightButtonClickListener: ((requirementId: Int, extraInfo: Any?) -> Unit)?
+    ) {
+        super.bind(
+            requirementCard,
+            cardClickListener,
+            leftButtonClickListener,
+            rightButtonClickListener
+        )
+
+        with(binding) {
+            newBadge.visibility = View.GONE
+
+            setContainerTheme(context, additionalInfoContainer, GRAY_THEME)
+            additionalInfoContainer.addView(RequirementCardAdditionalInfo(context).apply {
+                setLayout(
+                    theme = GRAY_THEME,
+                    type = MONEY_TYPE,
+                    titleData = context.getString(R.string.requirements_card_amount_title),
+                    contentData = "${moneyFormat.format(requirementCard.estimationDto?.price)}원",
+                    alertData = ""
+                )
+            })
+
+            leftButton.isVisible = true
+            leftButton.setText(R.string.call_to_customer_text)
+
+            // TODO.. 첫 전화인지, 아닌지에 따라 버튼의 UI를 변경해줘야햠. Figma 참고
+            leftButton.setOnClickListener {
+                leftButtonClickListener?.invoke(requirementCard.id, requirementCard.tel)
+            }
+        }
+    }
+}
+
 // 시공예정 상태
 class RepairingViewHolder(
     override val context: Context,
@@ -332,3 +422,4 @@ class CanceledViewHolder(
         }
     }
 }
+

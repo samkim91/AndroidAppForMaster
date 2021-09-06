@@ -45,7 +45,6 @@
                     android:layout_marginEnd="@dimen/gap_20"
                     app:initByRequirement="@{vm.requirement}" />
 
-                <!--todo progress bar-->
                 <kr.co.soogong.master.ui.widget.RequirementProgress
                     android:id="@+id/requirement_status"
                     android:layout_width="match_parent"
@@ -54,7 +53,6 @@
                     android:layout_marginTop="@dimen/gap_16"
                     android:layout_marginEnd="@dimen/gap_20"
                     app:endingText="@{@string/progress_ending_text}"
-                    app:requirementDto="@{vm.requirement}"
                     app:startingText="@{@string/progress_starting_text}" />
 
                 <kr.co.soogong.master.ui.widget.AlertBox

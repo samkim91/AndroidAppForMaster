@@ -12,10 +12,7 @@ import kr.co.soogong.master.data.dto.requirement.estimation.EstimationDto
 import kr.co.soogong.master.data.dto.requirement.repair.RepairDto
 import kr.co.soogong.master.data.model.profile.Review
 import kr.co.soogong.master.data.model.requirement.estimation.EstimationResponseCode
-import kr.co.soogong.master.domain.usecase.requirement.CallToClientUseCase
-import kr.co.soogong.master.domain.usecase.requirement.GetRequirementUseCase
-import kr.co.soogong.master.domain.usecase.requirement.RequestReviewUseCase
-import kr.co.soogong.master.domain.usecase.requirement.SaveEstimationUseCase
+import kr.co.soogong.master.domain.usecase.requirement.*
 import kr.co.soogong.master.ui.base.BaseViewModel
 import kr.co.soogong.master.uihelper.requirment.action.ViewRequirementActivityHelper
 import timber.log.Timber
@@ -25,6 +22,7 @@ import javax.inject.Inject
 class ViewRequirementViewModel @Inject constructor(
     private val getRequirementUseCase: GetRequirementUseCase,
     private val saveEstimationUseCase: SaveEstimationUseCase,
+    private val respondToMeasureUseCase: RespondToMeasureUseCase,
     private val callToClientUseCase: CallToClientUseCase,
     private val requestReviewUseCase: RequestReviewUseCase,
     val savedStateHandle: SavedStateHandle
@@ -62,7 +60,7 @@ class ViewRequirementViewModel @Inject constructor(
     }
 
     fun refuseToEstimate() {
-        Timber.tag(TAG).d("requestRequirement: ")
+        Timber.tag(TAG).d("refuseToEstimate: ")
         saveEstimationUseCase(
             estimationDto = EstimationDto(
                 id = requirement.value?.estimationDto?.id,
@@ -78,7 +76,7 @@ class ViewRequirementViewModel @Inject constructor(
                 repair = null,
                 createdAt = null,
                 updatedAt = null,
-            )
+            ), measurementImageUri = null
         )
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -89,6 +87,34 @@ class ViewRequirementViewModel @Inject constructor(
                 },
                 onError = {
                     Timber.tag(TAG).w("refuseToEstimate is failed: $it")
+                    setAction(REQUEST_FAILED)
+                }).addToDisposable()
+    }
+
+    fun respondToMeasure() {
+        Timber.tag(TAG).d("respondToMeasure: ")
+        respondToMeasureUseCase(
+            estimationDto = EstimationDto(
+                id = requirement.value?.estimationDto?.id,
+                token = requirement.value?.estimationDto?.token,
+                requirementId = requirement.value?.estimationDto?.requirementId,
+                masterId = requirement.value?.estimationDto?.masterId,
+                masterResponseCode = EstimationResponseCode.ACCEPTED,
+                typeCode = null,
+                price = null,
+                createdAt = null,
+                updatedAt = null,
+            )
+        )
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeBy(
+                onSuccess = {
+                    Timber.tag(TAG).d("acceptToMeasure is successful: $it")
+                    setAction(RESPOND_TO_MEASURE_SUCCESSFULLY)
+                },
+                onError = {
+                    Timber.tag(TAG).w("acceptToMeasure is failed: $it")
                     setAction(REQUEST_FAILED)
                 }).addToDisposable()
     }
@@ -140,6 +166,7 @@ class ViewRequirementViewModel @Inject constructor(
     companion object {
         private const val TAG = "ViewRequirementViewModel"
         const val REFUSE_TO_ESTIMATE_SUCCESSFULLY = "REFUSE_TO_ESTIMATE_SUCCESSFULLY"
+        const val RESPOND_TO_MEASURE_SUCCESSFULLY = "RESPOND_TO_MEASURE_SUCCESSFULLY"
         const val CALL_TO_CUSTOMER_SUCCESSFULLY = "CALL_TO_CUSTOMER_SUCCESSFULLY"
         const val ASK_FOR_REVIEW_SUCCESSFULLY = "ASK_FOR_REVIEW_SUCCESSFULLY"
         const val REQUEST_FAILED = "REQUEST_FAILED"

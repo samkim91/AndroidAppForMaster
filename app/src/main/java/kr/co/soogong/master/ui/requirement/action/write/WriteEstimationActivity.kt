@@ -12,8 +12,8 @@ import kr.co.soogong.master.databinding.ActivityWriteEstimationBinding
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.ui.dialog.popup.CustomDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData.Companion.getCancelSendingEstimationDialogData
+import kr.co.soogong.master.ui.requirement.action.write.WriteEstimationViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.ui.requirement.action.write.WriteEstimationViewModel.Companion.SEND_ESTIMATION_SUCCESSFULLY
-import kr.co.soogong.master.ui.requirement.action.write.WriteEstimationViewModel.Companion.SEND_MESSAGE_FAILED
 import kr.co.soogong.master.ui.widget.RequirementDrawerContainer
 import kr.co.soogong.master.ui.widget.RequirementDrawerContainer.Companion.REQUIREMENT_TYPE
 import kr.co.soogong.master.utility.EventObserver
@@ -116,13 +116,13 @@ class WriteEstimationActivity : BaseActivity<ActivityWriteEstimationBinding>(
             setTotalAmount()
         })
 
-        viewModel.action.observe(this, EventObserver { event ->
+        viewModel.action.observe(this@WriteEstimationActivity, EventObserver { event ->
             when (event) {
                 SEND_ESTIMATION_SUCCESSFULLY -> {
                     toast(getString(R.string.send_message_succeeded))
                     super.onBackPressed()
                 }
-                SEND_MESSAGE_FAILED -> {
+                REQUEST_FAILED -> {
                     toast(getString(R.string.error_message_of_request_failed))
                 }
             }
