@@ -1,5 +1,6 @@
 package kr.co.soogong.master.ui.widget
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
@@ -7,6 +8,7 @@ import android.widget.SeekBar
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import kr.co.soogong.master.data.dto.requirement.RequirementDto
+import kr.co.soogong.master.data.model.profile.CompareCodeTable
 import kr.co.soogong.master.data.model.requirement.*
 import kr.co.soogong.master.databinding.ViewRequirementProgressBinding
 import timber.log.Timber
@@ -25,7 +27,7 @@ class RequirementProgress @JvmOverloads constructor(
                 field = value
                 setOnStatusChangeListener()
                 max = 5
-                progress = convertStatusToProgress(it)
+                progress = convertStatusToProgress()
             }
         }
 
@@ -57,31 +59,54 @@ class RequirementProgress @JvmOverloads constructor(
 
     // 수공비서 퍼널 (1.실측 요청 -> 2.실측 예정 -> 3.실측 완료 -> 4.시공 예정)
     // 일반 퍼널 (1.견적 요청 -> 2.매칭 대기 -> 3.시공 예정 -> 4.고객 완료 요청)
-    private fun convertStatusToProgress(requirementDto: RequirementDto): Int {
-        Timber.tag(TAG).d("convertStatusToProgress: $requirementDto")
-        return when (RequirementStatus.getStatusFromRequirement(requirementDto)) {
-            Requested -> 1
-            Estimated -> 2
-            Repairing -> 3
-            RequestFinish -> 4
-            else -> max
+    private fun convertStatusToProgress(): Int {
+        Timber.tag(TAG).d("convertStatusToProgress: ${requirementDto?.status}")
+        return if (requirementDto?.typeCode == CompareCodeTable.code) {
+            when (RequirementStatus.getStatusFromRequirement(requirementDto)) {
+                Requested -> 1
+                Estimated -> 2
+                Repairing -> 3
+                RequestFinish -> 4
+                else -> max
+            }
+        } else {
+            when (RequirementStatus.getStatusFromRequirement(requirementDto)) {
+                RequestMeasure -> 1
+                Measuring -> 2
+                Measured -> 3
+                Repairing -> 4
+                else -> max
+            }
         }
     }
 
     private fun convertProgressToStatus(progress: Int): String {
         Timber.tag(TAG).d("convertStatusToProgress: $progress")
-        return when (progress) {
-            1 -> Requested.inKorean
-            2 -> Estimated.inKorean
-            3 -> Repairing.inKorean
-            4 -> RequestFinish.inKorean
-            else -> ""
+        return if (requirementDto?.typeCode == CompareCodeTable.code) {
+            when (progress) {
+                1 -> Requested.inKorean
+                2 -> Estimated.inKorean
+                3 -> Repairing.inKorean
+                4 -> RequestFinish.inKorean
+                else -> ""
+            }
+        } else {
+            when (progress) {
+                1 -> RequestMeasure.inKorean
+                2 -> Measuring.inKorean
+                3 -> Measured.inKorean
+                4 -> Repairing.inKorean
+                else -> ""
+            }
         }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     fun setOnStatusChangeListener() {
         Timber.tag(TAG).d("setOnStatusChangeListener: ")
         with(binding) {
+            seekBar.setOnTouchListener { _, _ -> return@setOnTouchListener true }
+
             seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
                 override fun onProgressChanged(
                     seekBar: SeekBar?,
@@ -100,6 +125,7 @@ class RequirementProgress @JvmOverloads constructor(
                     }
 
                     val pos = (seekBar!!.thumb.bounds.left - 25).toFloat()
+                    Timber.tag(TAG).d("${indicatorText.translationX} will be $pos")
                     indicatorText.translationX = pos
                     indicatorLine.translationX = pos
                     // TODO: 2021/08/31 progress 가 4 이상으로 가면, 레이아웃이 깨지는데 확인 필요

@@ -12,7 +12,7 @@ import kr.co.soogong.master.data.dto.requirement.estimation.EstimationDto
 import kr.co.soogong.master.data.dto.requirement.repair.RepairDto
 import kr.co.soogong.master.data.model.requirement.estimation.EstimationResponseCode
 import kr.co.soogong.master.domain.usecase.requirement.GetRequirementUseCase
-import kr.co.soogong.master.domain.usecase.requirement.SaveEstimationUseCase
+import kr.co.soogong.master.domain.usecase.requirement.RespondToMeasureUseCase
 import kr.co.soogong.master.domain.usecase.requirement.SaveRepairUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import kr.co.soogong.master.uihelper.requirment.action.CancelActivityHelper
@@ -23,11 +23,12 @@ import javax.inject.Inject
 class CancelViewModel @Inject constructor(
     private val getRequirementUseCase: GetRequirementUseCase,
     private val saveRepairUseCase: SaveRepairUseCase,
-    private val saveEstimationUseCase: SaveEstimationUseCase,
+    private val respondToMeasureUseCase: RespondToMeasureUseCase,
     val savedStateHandle: SavedStateHandle
 ) : BaseViewModel() {
 
-    private val requirementId = CancelActivityHelper.getRequirementIdFromSavedState(savedStateHandle)
+    private val requirementId =
+        CancelActivityHelper.getRequirementIdFromSavedState(savedStateHandle)
 
     private val _requirement = MutableLiveData<RequirementDto>()
     val requirement: LiveData<RequirementDto>
@@ -78,9 +79,9 @@ class CancelViewModel @Inject constructor(
             ).addToDisposable()
     }
 
-    fun saveEstimation() {
-        Timber.tag(TAG).d("saveEstimation: ")
-        saveEstimationUseCase(
+    fun respondToMeasure() {
+        Timber.tag(TAG).d("respondToMeasure: ")
+        respondToMeasureUseCase(
             EstimationDto(
                 id = _requirement.value?.estimationDto?.id,
                 token = _requirement.value?.estimationDto?.token,
@@ -99,11 +100,11 @@ class CancelViewModel @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
                 onSuccess = {
-                    Timber.tag(TAG).d("Canceled Successfully: $it")
+                    Timber.tag(TAG).d("respondToMeasure Successfully: $it")
                     setAction(CANCEL_ESTIMATION_SUCCESSFULLY)
                 },
                 onError = {
-                    Timber.tag(TAG).d("Canceled Failed: $it")
+                    Timber.tag(TAG).d("respondToMeasure Failed: $it")
                     setAction(REQUEST_FAILED)
                 }
             ).addToDisposable()

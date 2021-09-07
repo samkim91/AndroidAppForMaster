@@ -55,9 +55,9 @@ class PortfolioViewModel @Inject constructor(
                 title = title.value,
                 description = description.value,
                 type = PortfolioCodeTable.code,
-                beforeImageUri = imageBeforeJob.value,
-                afterImageUri = imageAfterJob.value,
-            )
+            ),
+            beforeImageUri = imageBeforeJob.value,
+            afterImageUri = imageAfterJob.value,
         )
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

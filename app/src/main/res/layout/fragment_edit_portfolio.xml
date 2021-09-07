@@ -90,7 +90,7 @@
                         android:id="@+id/image_before_job_close_icon"
                         android:layout_width="@dimen/gap_24"
                         android:layout_height="@dimen/gap_24"
-                        android:layout_gravity="right"
+                        android:layout_gravity="end"
                         android:background="@drawable/ic_close_in_image"
                         bind:onClick="@{vm::clearImageBeforeJob}" />
                 </androidx.cardview.widget.CardView>
@@ -137,7 +137,7 @@
                         android:id="@+id/image_after_job_close_icon"
                         android:layout_width="@dimen/gap_24"
                         android:layout_height="@dimen/gap_24"
-                        android:layout_gravity="right"
+                        android:layout_gravity="end"
                         android:background="@drawable/ic_close_in_image"
                         bind:onClick="@{vm::clearImageAfterJob}" />
                 </androidx.cardview.widget.CardView>

@@ -33,12 +33,6 @@ data class PortfolioDto(
     @SerializedName("afterRepairImage")
     val afterImage: AttachmentDto? = null,
 
-    @SerializedName("beforeImageUri")
-    val beforeImageUri: Uri? = null,
-
-    @SerializedName("afterImageUri")
-    val afterImageUri: Uri? = null,
-
     @SerializedName("price")
     val price: Int? = null,
 

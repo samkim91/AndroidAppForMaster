@@ -9,14 +9,14 @@ import kr.co.soogong.master.ui.requirement.card.RequirementCardViewHolderHelper
 
 class ProgressAdapter(
     private val cardClickListener: (Int) -> Unit,
-    private val callButtonClick: (Int, Any?) -> Unit,
-    private val doneButtonClick: (Int, Any?) -> Unit
+    private val leftButtonClick: (Int, Any?) -> Unit,
+    private val rightButtonClick: (Int, Any?) -> Unit
 ) : ListAdapter<RequirementCard, RequirementCardViewHolder>(RequirementCardDiffUtil()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         RequirementCardViewHolderHelper.create(parent, viewType)
 
     override fun onBindViewHolder(holder: RequirementCardViewHolder, position: Int) {
-        holder.bind(getItem(position), cardClickListener, callButtonClick, doneButtonClick)
+        holder.bind(getItem(position), cardClickListener, leftButtonClick, rightButtonClick)
     }
 
     override fun getItemViewType(position: Int): Int =

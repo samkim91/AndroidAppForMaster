@@ -53,7 +53,7 @@ class DoneFragment : BaseFragment<FragmentRequirementDoneBinding>(
                         )
                     )
                 },
-                reviewButtonClick = { _, requirementCard ->
+                rightButtonClick = { _, requirementCard ->
                     viewModel.askForReview(requirementCard = (requirementCard as? RequirementCard))
                 }
             )

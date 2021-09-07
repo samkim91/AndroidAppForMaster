@@ -22,8 +22,8 @@ class RequirementCardAdditionalInfo @JvmOverloads constructor(
     fun setLayout(
         theme: Int,
         type: Int,
-        titleData: String,
-        contentData: String,
+        titleData: String?,
+        contentData: String?,
         alertData: String
     ) {
         setTheme(theme)

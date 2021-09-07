@@ -18,22 +18,28 @@ object RequirementCardViewHolderHelper {
                 RequestedViewHolder(parent.context, binding)
             }
             Estimated.asInt -> {
-                EstimatedViewHolder(parent.context,binding)
+                EstimatedViewHolder(parent.context, binding)
+            }
+            Measuring.asInt -> {
+                MeasuringViewHolder(parent.context, binding)
+            }
+            Measured.asInt -> {
+                MeasuredViewHolder(parent.context, binding)
             }
             Repairing.asInt -> {
-                RepairingViewHolder(parent.context,binding)
+                RepairingViewHolder(parent.context, binding)
             }
             RequestFinish.asInt -> {
-                RequestFinishViewHolder(parent.context,binding)
+                RequestFinishViewHolder(parent.context, binding)
             }
             Done.asInt -> {
-                DoneViewHolder(parent.context,binding)
+                DoneViewHolder(parent.context, binding)
             }
             Closed.asInt -> {
-                ClosedViewHolder(parent.context,binding)
+                ClosedViewHolder(parent.context, binding)
             }
             else -> {
-                CanceledViewHolder(parent.context,binding)
+                CanceledViewHolder(parent.context, binding)
             }
         }
     }

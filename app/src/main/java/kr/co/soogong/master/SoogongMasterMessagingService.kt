@@ -44,6 +44,7 @@ class SoogongMasterMessagingService : FirebaseMessagingService() {
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setContentTitle(remoteMessage.data["Title"])
             .setContentText(remoteMessage.data["Body"])
+            .setAutoCancel(true)
             .setSound(Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://${packageName}/raw/soogong_alert_sound"))
             .setVibrate(longArrayOf(0, 500, 500, 500, 500))
             .setContentIntent(getPendingIntent(remoteMessage))

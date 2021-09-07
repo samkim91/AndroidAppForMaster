@@ -55,7 +55,7 @@ class TitleRadioGroup @JvmOverloads constructor(
     fun addCheckedChangeListener(
         onCheckedChange: (
             group: RadioGroup,
-            position: Int,
+            checkedId: Int,
         ) -> Unit
     ) {
         binding.radioGroup.setOnCheckedChangeListener { group, checkedId ->

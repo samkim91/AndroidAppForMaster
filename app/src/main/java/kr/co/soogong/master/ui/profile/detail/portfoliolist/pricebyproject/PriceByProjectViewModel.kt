@@ -51,7 +51,9 @@ class PriceByProjectViewModel @Inject constructor(
                 description = description.value,
                 type = PriceByProjectCodeTable.code,
                 price = price.value?.replace(",", "")?.toInt(),
-            )
+            ),
+            beforeImageUri = null,
+            afterImageUri = null,
         ).subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(

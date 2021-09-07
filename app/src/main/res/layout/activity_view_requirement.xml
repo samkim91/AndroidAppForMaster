@@ -27,6 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/gap_0"
             android:overScrollMode="never"
+            app:layout_constraintBottom_toBottomOf="@id/buttons_divider"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/action_bar">
@@ -45,7 +46,6 @@
                     android:layout_marginEnd="@dimen/gap_20"
                     app:initByRequirement="@{vm.requirement}" />
 
-                <!--todo progress bar-->
                 <kr.co.soogong.master.ui.widget.RequirementProgress
                     android:id="@+id/requirement_status"
                     android:layout_width="match_parent"
@@ -54,7 +54,6 @@
                     android:layout_marginTop="@dimen/gap_16"
                     android:layout_marginEnd="@dimen/gap_20"
                     app:endingText="@{@string/progress_ending_text}"
-                    app:requirementDto="@{vm.requirement}"
                     app:startingText="@{@string/progress_starting_text}" />
 
                 <kr.co.soogong.master.ui.widget.AlertBox
