@@ -37,7 +37,6 @@ class EndRepairActivity : BaseActivity<ActivityEndRepairBinding>(
 
     override fun initLayout() {
         Timber.tag(TAG).d("initLayout: ")
-
         bind {
             vm = viewModel
             lifecycleOwner = this@EndRepairActivity
@@ -61,17 +60,18 @@ class EndRepairActivity : BaseActivity<ActivityEndRepairBinding>(
             }
 
             calender.setOnDateChangeListener { _: CalendarView, year: Int, month: Int, day: Int ->
-                Timber.tag(TAG).d("setOnDateChangeListener: ${year-month-day}")
+                Timber.tag(TAG).d("setOnDateChangeListener: ${year - month - day}")
                 viewModel.actualDate.value?.set(year, month, day)
             }
 
             actualPrice.addFocusChangeListener(onFocusChange = { _, hasFocus ->
-                if(!viewModel.actualPrice.value.isNullOrEmpty()) {
+                if (!viewModel.actualPrice.value.isNullOrEmpty()) {
                     viewModel.actualPrice.value?.replace(",", "").let {
-                        if(hasFocus) {
+                        if (hasFocus) {
                             viewModel.actualPrice.value = it
                         } else {
-                            viewModel.actualPrice.value = DecimalFormat("#,###").format(it?.toLong())
+                            viewModel.actualPrice.value =
+                                DecimalFormat("#,###").format(it?.toLong())
                         }
                     }
                 }
