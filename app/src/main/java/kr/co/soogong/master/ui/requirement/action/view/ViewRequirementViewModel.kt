@@ -47,6 +47,10 @@ class ViewRequirementViewModel @Inject constructor(
             .subscribeBy(
                 onNext = {
                     Timber.tag(TAG).d("requestRequirement successfully: $it")
+                    if (it.estimationDto?.masterResponseCode == EstimationResponseCode.REFUSED) {
+                        Timber.tag(TAG).d("invalid requirement: ${it.estimationDto.masterResponseCode}")
+                        setAction(INVALID_REQUIREMENT)
+                    }
                     _requirement.value = it
                     it.estimationDto?.repair?.review?.let { reviewDto ->
                         _review.value = Review.fromReviewDto(reviewDto)
@@ -166,6 +170,7 @@ class ViewRequirementViewModel @Inject constructor(
     companion object {
         private const val TAG = "ViewRequirementViewModel"
         const val REFUSE_TO_ESTIMATE_SUCCESSFULLY = "REFUSE_TO_ESTIMATE_SUCCESSFULLY"
+        const val INVALID_REQUIREMENT = "INVALID_REQUIREMENT"
         const val RESPOND_TO_MEASURE_SUCCESSFULLY = "RESPOND_TO_MEASURE_SUCCESSFULLY"
         const val CALL_TO_CUSTOMER_SUCCESSFULLY = "CALL_TO_CUSTOMER_SUCCESSFULLY"
         const val ASK_FOR_REVIEW_SUCCESSFULLY = "ASK_FOR_REVIEW_SUCCESSFULLY"

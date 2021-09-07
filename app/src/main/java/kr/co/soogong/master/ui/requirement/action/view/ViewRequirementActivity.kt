@@ -16,6 +16,7 @@ import kr.co.soogong.master.ui.dialog.popup.DialogData.Companion.getRefuseMeasur
 import kr.co.soogong.master.ui.requirement.action.view.ViewRequirementViewModel.Companion.RESPOND_TO_MEASURE_SUCCESSFULLY
 import kr.co.soogong.master.ui.requirement.action.view.ViewRequirementViewModel.Companion.ASK_FOR_REVIEW_SUCCESSFULLY
 import kr.co.soogong.master.ui.requirement.action.view.ViewRequirementViewModel.Companion.CALL_TO_CUSTOMER_SUCCESSFULLY
+import kr.co.soogong.master.ui.requirement.action.view.ViewRequirementViewModel.Companion.INVALID_REQUIREMENT
 import kr.co.soogong.master.ui.requirement.action.view.ViewRequirementViewModel.Companion.REFUSE_TO_ESTIMATE_SUCCESSFULLY
 import kr.co.soogong.master.ui.requirement.action.view.ViewRequirementViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.ui.widget.RequirementDrawerContainer
@@ -75,6 +76,9 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
             when (event) {
                 REFUSE_TO_ESTIMATE_SUCCESSFULLY -> {
                     toast(getString(R.string.refuse_to_estimate_or_measure_successfully_text))
+                    onBackPressed()
+                }
+                INVALID_REQUIREMENT -> {
                     onBackPressed()
                 }
                 CALL_TO_CUSTOMER_SUCCESSFULLY -> {

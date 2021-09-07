@@ -27,6 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/gap_0"
             android:overScrollMode="never"
+            app:layout_constraintBottom_toBottomOf="@id/buttons_divider"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/action_bar">

@@ -182,6 +182,13 @@ class MeasuredViewHolder(
 
         with(binding) {
             newBadge.visibility = View.GONE
+            statusText.setTextColor(
+                ResourcesCompat.getColor(
+                    root.resources,
+                    R.color.color_616161,
+                    null
+                )
+            )
 
             setContainerTheme(context, additionalInfoContainer, GRAY_THEME)
             additionalInfoContainer.addView(RequirementCardAdditionalInfo(context).apply {

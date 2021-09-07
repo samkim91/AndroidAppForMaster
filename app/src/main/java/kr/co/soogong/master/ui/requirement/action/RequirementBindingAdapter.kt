@@ -84,7 +84,7 @@ fun RequirementIntro.initByRequirement(requirementDto: RequirementDto?) {
         Closed -> {
             title = context.getString(
                 R.string.requirement_intro_title_of_close,
-                requirementDto?.estimationDto?.repair?.review?.createdAt
+                SimpleDateFormat("yyyy.MM.dd (E) - HH:mm", Locale.KOREA).format(requirementDto?.estimationDto?.repair?.review?.createdAt)
             )
             subtitle = ""
             theme = GRAY_THEME

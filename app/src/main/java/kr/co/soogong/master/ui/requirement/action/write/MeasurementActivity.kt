@@ -66,6 +66,7 @@ class MeasurementActivity : BaseActivity<ActivityMeasurementBinding>(
 
                 button.text = getString(R.string.send_estimation)
                 button.setOnClickListener {
+                    registerCostObserver()
                     if (!simpleCost.alertVisible && ValidationHelper.isIntRange(viewModel.simpleCost.value!!)) viewModel.sendEstimation()
                 }
             }
@@ -74,24 +75,33 @@ class MeasurementActivity : BaseActivity<ActivityMeasurementBinding>(
 
     private fun registerEventObserve() {
         Timber.tag(TAG).d("registerEventObserve: ")
+        viewModel.action.observe(this@MeasurementActivity, EventObserver { event ->
+            when (event) {
+                SEND_ESTIMATION_SUCCESSFULLY -> {
+                    toast(getString(R.string.send_message_succeeded))
+                    super.onBackPressed()
+                }
+                REQUEST_FAILED -> {
+                    toast(getString(R.string.error_message_of_request_failed))
+                }
+            }
+        })
+    }
+
+    private fun registerCostObserver() {
+        Timber.tag(TAG).d("registerCostObserver: ")
         bind {
             viewModel.simpleCost.observe(this@MeasurementActivity, {
                 simpleCost.alertVisible =
                     simpleCost.text.isNullOrEmpty() || simpleCost.text.toString().replace(",", "")
                         .toLong() < 10000
             })
-            viewModel.action.observe(this@MeasurementActivity, EventObserver { event ->
-                when (event) {
-                    SEND_ESTIMATION_SUCCESSFULLY -> {
-                        toast(getString(R.string.send_message_succeeded))
-                        super.onBackPressed()
-                    }
-                    REQUEST_FAILED -> {
-                        toast(getString(R.string.error_message_of_request_failed))
-                    }
-                }
-            })
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        viewModel.requestRequirement()
     }
 
     override fun onBackPressed() {

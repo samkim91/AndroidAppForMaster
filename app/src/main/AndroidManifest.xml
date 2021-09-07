@@ -63,7 +63,7 @@
             android:launchMode="singleTask" />
         <activity
             android:name=".ui.requirement.action.view.ViewRequirementActivity"
-            android:launchMode="singleTask" />
+            android:launchMode="standard" />        <!-- 실측요청건을 고려 standard 로 설정 -->
         <activity
             android:name=".ui.requirement.action.write.WriteEstimationActivity"
             android:launchMode="singleTask" />

@@ -32,7 +32,8 @@
             android:overScrollMode="never"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/action_bar">
+            app:layout_constraintTop_toBottomOf="@id/action_bar"
+            app:layout_constraintBottom_toBottomOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -82,7 +83,6 @@
                     app:layout_constraintTop_toBottomOf="@id/measurement_image_holder_label"
                     bind:visible="@{vm.measurementImage == Uri.EMPTY}" />
 
-
                 <androidx.cardview.widget.CardView
                     android:id="@+id/measurement_image_holder"
                     android:layout_width="@dimen/gap_100"
@@ -92,14 +92,13 @@
                     app:cardElevation="@dimen/gap_0"
                     app:layout_constraintStart_toStartOf="@id/measurement_image_holder_label"
                     app:layout_constraintTop_toBottomOf="@id/measurement_image_holder_label"
-                    bind:visible="@{vm.measurementImage == Uri.EMPTY}">
+                    bind:visible="@{vm.measurementImage != Uri.EMPTY}">
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/image_view"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        bind:visible="@{vm.measurementImage == Uri.EMPTY}" />
-
+                        bind:image_uri="@{vm.measurementImage}" />
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/image_view_close_icon"
@@ -115,13 +114,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/gap_20"
-                    android:layout_marginTop="@dimen/gap_12"
+                    android:layout_marginTop="@dimen/gap_124"
                     android:layout_marginEnd="@dimen/gap_20"
                     app:alertContent="@{@string/alert_box_content_for_measure}"
                     app:alertTitle="@{@string/alert_box_title_for_measure}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/measurement_image_holder"
+                    app:layout_constraintTop_toBottomOf="@id/measurement_image_holder_label"
                     app:theme="@{101}" />
 
                 <kr.co.soogong.master.ui.widget.TitleEditTextCounterView
