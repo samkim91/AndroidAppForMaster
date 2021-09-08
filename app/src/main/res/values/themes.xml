@@ -193,11 +193,11 @@
         <item name="android:fontFamily">@font/bold</item>
     </style>
 
-    <style name="CustomTabText" parent="Widget.MaterialComponents.TabLayout">
-        <item name="android:textSize">@dimen/text_title_size</item>
-        <item name="android:fontFamily">@font/medium</item>
-        <item name="android:textColor">@color/primary_text_color</item>
-    </style>
+<!--    <style name="CustomTabText" parent="Widget.MaterialComponents.TabLayout">-->
+<!--        <item name="android:textSize">@dimen/text_title_size</item>-->
+<!--        <item name="android:fontFamily">@font/medium</item>-->
+<!--        <item name="android:textColor">@color/primary_text_color</item>-->
+<!--    </style>-->
 
     <style name="SignUpTabText" parent="Widget.MaterialComponents.TabLayout">
         <item name="android:textSize">@dimen/text_size_14sp</item>
