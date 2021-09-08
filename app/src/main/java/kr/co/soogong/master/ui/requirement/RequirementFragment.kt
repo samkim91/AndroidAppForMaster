@@ -90,6 +90,7 @@ class RequirementFragment : BaseFragment<FragmentRequirementBinding>(
 
     private fun visibleBadge(tab: TabLayout.Tab?, badgeCount: Int) {
         tab?.orCreateBadge?.number = badgeCount
+        tab?.badge?.badgeTextColor = resources.getColor(R.color.color_FFFFFF, null)
     }
 
     private fun invisibleBadge(tab: TabLayout.Tab?) {

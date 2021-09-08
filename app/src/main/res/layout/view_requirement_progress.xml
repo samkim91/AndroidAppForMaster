@@ -49,6 +49,7 @@
             android:layout_marginTop="@dimen/gap_38"
             android:layout_marginEnd="@dimen/gap_8"
             android:progressTint="@color/color_0C5E47"
+            android:progressBackgroundTint="@color/color_CECECE"
             android:thumb="@color/transparent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

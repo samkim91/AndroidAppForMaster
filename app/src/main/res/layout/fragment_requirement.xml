@@ -21,8 +21,11 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:tabBackground="@color/color_FFFFFF"
             app:tabIndicatorColor="@color/color_22D47B"
-            app:tabTextAppearance="@style/CustomTabText" />
+            app:tabTextColor="@color/color_404040"
+            app:tabSelectedTextColor="@color/color_1FC472"
+            app:tabTextAppearance="@style/text_style_16sp.medium" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/line"
