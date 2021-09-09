@@ -45,7 +45,11 @@ class RequirementFragment : BaseFragment<FragmentRequirementBinding>(
                 }.attach()
             }
 
-            bottomViewForFillingProfileInfoContainer.setOnClickListener {
+            searchBar.setOnClickListener {
+                // TODO: 2021/09/09 search activity 로 이동
+            }
+
+            bottomViewContainer.setOnClickListener {
                 startActivity(EditRequiredInformationActivityHelper.getIntent(requireContext()))
             }
         }
@@ -55,8 +59,8 @@ class RequirementFragment : BaseFragment<FragmentRequirementBinding>(
         super.onResume()
         Timber.tag(TAG).d("onResume: ")
         bind {
-            // 필수 정보를 입력하라는 안내를 보여줄지 검사
-            bottomViewForFillingProfileInfoContainer.isVisible =
+            // 필수 정보를 입력하라는 bottom view 를 보여줄지 결정
+            bottomView.isVisible =
                 getMasterApprovedStatusUseCase().let { it == NotApprovedCodeTable.code || it == RequestApproveCodeTable.code }
         }
     }

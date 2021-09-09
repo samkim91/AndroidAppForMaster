@@ -41,7 +41,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/alert_text_to_fill_up_required_information"
+                android:id="@+id/bottom_view_text"
                 style="@style/text_style_14sp.regular"
                 android:layout_width="@dimen/gap_0"
                 android:layout_height="wrap_content"
