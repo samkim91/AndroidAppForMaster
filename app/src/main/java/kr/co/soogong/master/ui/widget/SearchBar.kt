@@ -19,10 +19,12 @@ class SearchBar @JvmOverloads constructor(
     val searchEditText: AppCompatEditText
         get() = binding.searchText
 
-    var searchTextEnable: Boolean = true
+    var searchTextDisable: Boolean = false
         set(value) {
             field = value
-            binding.searchText.isEnabled = value
+            binding.searchText.isClickable = value
+            binding.searchText.isCursorVisible = !value
+            binding.searchText.isFocusable = !value
         }
 
     var searchText: String? = ""

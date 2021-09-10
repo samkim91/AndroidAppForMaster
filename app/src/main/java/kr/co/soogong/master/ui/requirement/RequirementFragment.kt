@@ -14,6 +14,7 @@ import kr.co.soogong.master.domain.usecase.auth.GetMasterApprovedStatusUseCase
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.uihelper.profile.EditRequiredInformationActivityHelper
 import kr.co.soogong.master.uihelper.requirment.RequirementsBadge
+import kr.co.soogong.master.uihelper.requirment.action.SearchActivityHelper
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -45,8 +46,8 @@ class RequirementFragment : BaseFragment<FragmentRequirementBinding>(
                 }.attach()
             }
 
-            searchBar.setOnClickListener {
-                // TODO: 2021/09/09 search activity 로 이동
+            searchBar.setSearchEditTextClickListener {
+                startActivity(SearchActivityHelper.getIntent(requireContext()))
             }
 
             bottomViewContainer.setOnClickListener {

@@ -62,6 +62,9 @@
             android:name=".ui.requirement.action.end.EndRepairActivity"
             android:launchMode="singleTask" />
         <activity
+            android:name=".ui.requirement.action.search.SearchActivity"
+            android:launchMode="singleTask" />
+        <activity
             android:name=".ui.requirement.action.view.ViewRequirementActivity"
             android:launchMode="standard" />        <!-- 실측요청건을 고려 standard 로 설정 -->
         <activity

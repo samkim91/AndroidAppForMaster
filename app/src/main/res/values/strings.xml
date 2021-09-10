@@ -181,6 +181,9 @@
     <string name="asking_write_canceled_reason_detail_label">취소 사유에 대해 더 하고 싶은 말이 있으시면 작성해주세요.</string>
 
     <!-- Write Estimate -->
+    <string name="requirements_not_found">해당 내용을 찾지 못 하였습니다.</string>
+
+    <!-- Write Estimate -->
     <string name="write_estimate_title">견적서 작성</string>
     <string name="send_estimation">견적서 보내기</string>
     <string name="choose_estimation_type_text">견적 유형 선택</string>
