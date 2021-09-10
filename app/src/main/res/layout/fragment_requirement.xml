@@ -27,7 +27,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:searchTextEnable="@{false}"
+            app:searchTextDisable="@{true}"
             app:searchTextHint="@{@string/search_bar_hint_text}" />
 
         <com.google.android.material.tabs.TabLayout
