@@ -33,6 +33,7 @@ object CanceledReasonRadioGroupHelper {
             radio.text = canceledReason.inKorean
             radio.height = 34.dp
             radio.setTextAppearance(R.style.text_style_14sp_medium)
+            radio.setTextColor(context.resources.getColor(R.color.text_basic_color, null))
             radio.buttonTintList = ColorStateList.valueOf(context.getColor(R.color.color_22D47B))
             radioGroup.addRadioButton(radio)
         }

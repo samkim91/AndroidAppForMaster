@@ -8,11 +8,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.dto.requirement.RequirementDto
-import kr.co.soogong.master.data.dto.requirement.estimation.EstimationDto
 import kr.co.soogong.master.data.dto.requirement.repair.RepairDto
-import kr.co.soogong.master.data.model.requirement.estimation.EstimationResponseCode
 import kr.co.soogong.master.domain.usecase.requirement.GetRequirementUseCase
-import kr.co.soogong.master.domain.usecase.requirement.RespondToMeasureUseCase
 import kr.co.soogong.master.domain.usecase.requirement.SaveRepairUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import kr.co.soogong.master.uihelper.requirment.action.CancelActivityHelper
@@ -23,7 +20,6 @@ import javax.inject.Inject
 class CancelViewModel @Inject constructor(
     private val getRequirementUseCase: GetRequirementUseCase,
     private val saveRepairUseCase: SaveRepairUseCase,
-    private val respondToMeasureUseCase: RespondToMeasureUseCase,
     val savedStateHandle: SavedStateHandle
 ) : BaseViewModel() {
 
@@ -74,37 +70,6 @@ class CancelViewModel @Inject constructor(
                 },
                 onError = {
                     Timber.tag(TAG).d("Canceled Failed: $it")
-                    setAction(REQUEST_FAILED)
-                }
-            ).addToDisposable()
-    }
-
-    fun respondToMeasure() {
-        Timber.tag(TAG).d("respondToMeasure: ")
-        respondToMeasureUseCase(
-            EstimationDto(
-                id = _requirement.value?.estimationDto?.id,
-                token = _requirement.value?.estimationDto?.token,
-                requirementId = _requirement.value?.estimationDto?.requirementId,
-                masterId = _requirement.value?.estimationDto?.masterId,
-                typeCode = _requirement.value?.typeCode,
-                price = null,
-                refuseCode = canceledCode.value,
-                refuseDescription = canceledDescription.value,
-                masterResponseCode = EstimationResponseCode.REFUSED,
-                createdAt = null,
-                updatedAt = null,
-            )
-        )
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeBy(
-                onSuccess = {
-                    Timber.tag(TAG).d("respondToMeasure Successfully: $it")
-                    setAction(CANCEL_ESTIMATION_SUCCESSFULLY)
-                },
-                onError = {
-                    Timber.tag(TAG).d("respondToMeasure Failed: $it")
                     setAction(REQUEST_FAILED)
                 }
             ).addToDisposable()
