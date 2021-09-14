@@ -5,6 +5,7 @@ import io.reactivex.Single
 import kr.co.soogong.master.data.dto.requirement.RequirementDto
 import kr.co.soogong.master.data.dto.requirement.estimation.EstimationDto
 import kr.co.soogong.master.data.dto.requirement.repair.RepairDto
+import kr.co.soogong.master.data.dto.requirement.search.SearchDto
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Retrofit
@@ -15,8 +16,12 @@ class RequirementService @Inject constructor(
 ) {
     private val requirementInterface = retrofit.create(RequirementInterface::class.java)
 
-    fun getRequirementList(masterUid: String, statusArray: List<String>): Single<List<RequirementDto>> {
-        return requirementInterface.getRequirementList(masterUid, statusArray)
+    fun getRequirementsByStatus(masterUid: String, statusArray: List<String>): Single<List<RequirementDto>> {
+        return requirementInterface.getRequirementsByStatus(masterUid, statusArray)
+    }
+
+    fun searchRequirements(masterUid: String, searchingText: String, searchingPeriod: Int): Single<List<RequirementDto>> {
+        return requirementInterface.searchRequirements(masterUid, searchingText, searchingPeriod)
     }
 
     fun getRequirement(requirementId: Int, masterUid: String): Single<RequirementDto> {
