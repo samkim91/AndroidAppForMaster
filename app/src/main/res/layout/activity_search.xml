@@ -28,6 +28,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:searchBarContent="@={vm.searchingText}"
             app:searchTextHint="@{@string/search_bar_hint_text}" />
 
         <Spinner
@@ -40,6 +41,16 @@
             app:layout_constraintStart_toStartOf="@id/search_bar"
             app:layout_constraintTop_toBottomOf="@id/search_bar"
             app:setItems="@{vm.spinnerItems}" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/dropdown_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/gap_16"
+            android:background="@drawable/ic_dropdown_arrow"
+            app:layout_constraintBottom_toBottomOf="@id/spinner"
+            app:layout_constraintEnd_toEndOf="@id/spinner"
+            app:layout_constraintTop_toTopOf="@id/spinner" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/line"
@@ -59,21 +70,18 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/line"
-
+            app:onRefresh="@{vm::searchRequirements}"
             app:setLoadingColor="@{R.color.app_color}">
-            <!--            app:onRefresh="@{vm::requestList}"-->
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/received_list"
+                android:id="@+id/requirements"
                 android:layout_width="@dimen/gap_0"
                 android:layout_height="@dimen/gap_0"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:setDivider="@{@drawable/thick_divider}"
-
+                bind:received_list="@{vm.requirements}"
                 tools:listitem="@layout/view_holder_requirement_item" />
-            <!--            bind:received_list="@{vm.receivedList}"-->
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/empty_icon"
@@ -84,8 +92,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/swipe_refresh_layout"
-            app:layout_constraintVertical_chainStyle="packed" />
-        <!--        bind:visible="@{vm.receivedList.empty}"-->
+            app:layout_constraintVertical_chainStyle="packed"
+            bind:visible="@{vm.requirements.empty}" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/empty_text"
@@ -97,7 +105,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/empty_icon" />
-        <!--        bind:visible="@{vm.receivedList.empty}"-->
+            app:layout_constraintTop_toBottomOf="@id/empty_icon"
+            bind:visible="@{vm.requirements.empty}" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

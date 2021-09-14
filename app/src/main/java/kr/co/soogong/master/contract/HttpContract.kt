@@ -20,6 +20,7 @@ object HttpContract {
     //region Requirement
     const val GET_REQUIREMENT_LIST_BY_UID = "master/find-all-requirement-by-uid"
     const val GET_REQUIREMENT = "master/find-requirement-one"
+    const val SEARCH_REQUIREMENTS = "requirement/search-for-master"
     //endregion
 
     //region Estimations
