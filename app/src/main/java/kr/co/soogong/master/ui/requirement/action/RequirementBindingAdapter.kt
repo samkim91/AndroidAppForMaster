@@ -51,12 +51,11 @@ fun RequirementIntro.initByRequirement(requirementDto: RequirementDto?) {
             theme = GRAY_THEME
         }
         RequestMeasure -> {
-            title = context.getString(R.string.requirement_intro_title_of_request_measure, SimpleDateFormat("yyyy.MM.dd (E) - HH:mm", Locale.KOREA).format(requirementDto?.measuringDate))
+            title = context.getString(R.string.requirement_intro_title_of_request_measure)
             subtitle = ""
             theme = GREEN_THEME
         }
         Repairing -> {
-            // TODO: 2021/08/23 수공비서건인지 아닌지에 따라 분기 필요.. 수공비서건은 시공 예정일 추가
             title = context.getString(R.string.requirement_intro_title_of_repairing_from_funnel)
             subtitle = context.getString(R.string.requirement_intro_subtitle_of_repairing)
             theme = GREEN_THEME
@@ -67,7 +66,7 @@ fun RequirementIntro.initByRequirement(requirementDto: RequirementDto?) {
             theme = GREEN_THEME
         }
         Measuring -> {
-            title = context.getString(R.string.requirement_intro_title_of_measuring, SimpleDateFormat("yyyy.MM.dd (E) - HH:mm", Locale.KOREA).format(requirementDto?.measuringDate))
+            title = context.getString(R.string.requirement_intro_title_of_measuring)
             subtitle = context.getString(R.string.requirement_intro_subtitle_of_measuring)
             theme = GREEN_THEME
         }

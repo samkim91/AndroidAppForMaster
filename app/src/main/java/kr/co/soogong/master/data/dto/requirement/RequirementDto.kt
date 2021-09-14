@@ -68,9 +68,6 @@ data class RequirementDto(
     @SerializedName("canceledDescription")
     val canceledDescription: String? = null,
 
-    @SerializedName("measuringDate")
-    val measuringDate: Date? = null,
-
     @SerializedName("closedAt")
     val closedAt: Date?,
 
