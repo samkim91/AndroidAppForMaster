@@ -92,7 +92,6 @@
     <string name="requirements_card_start_time">최초 요청일 : %s</string>
     <string name="requirements_card_due_date">견적 마감일 : </string>
     <string name="requirements_card_response_measure_due_date">실측 선택 마감 : </string>
-    <string name="requirements_card_measuring_date">실측 예정일 : </string>
     <string name="requirements_card_done_date">시공 완료일 : </string>
     <string name="requirements_card_amount_title">나의 견적가 :</string>
     <string name="requirements_card_amount_done_title">최종 시공가 :</string>
@@ -133,7 +132,7 @@
     <string name="requirement_intro_title_of_estimated">견적서를 전달했습니다.\n고객의 선택을 기다려주세요.</string>
     <string name="requirement_intro_subtitle_of_estimated">2주 내 고객 미응답 시 해당 문의가 삭제됩니다.</string>
 
-    <string name="requirement_intro_title_of_request_measure">%s\n현장 실측 요청이 왔습니다.</string>
+    <string name="requirement_intro_title_of_request_measure">현장 실측 요청이 왔습니다.</string>
 
     <string name="requirement_intro_title_of_repairing_from_funnel">고객의 선택을 받았습니다!\n시공일정을 잡아주세요.</string>
     <string name="requirement_intro_title_of_repairing_from_secretary">%s\n시공 예정입니다.</string>
@@ -142,7 +141,7 @@
     <string name="requirement_intro_title_of_request_finish">시공 완료 요청이 왔습니다.\n완료 처리를 해주세요.</string>
     <string name="requirement_intro_subtitle_of_request_finish">시공 완료버튼을 눌러 최종 정보를 입력해주세요.\n<b><font color="#2E2E2E">미입력 시 배정에 불이익</font></b>이 있을 수 있습니다.</string>
 
-    <string name="requirement_intro_title_of_measuring">%s\n실측 예정입니다.</string>
+    <string name="requirement_intro_title_of_measuring">실측 예정입니다.</string>
     <string name="requirement_intro_subtitle_of_measuring">실측 완료 시 견적서 보내기를 눌러\n실측 정보를 입력해주세요.\n<b><font color="#2E2E2E">미입력 시 배정에 불이익</font></b>이 있을 수 있습니다.</string>
 
     <string name="requirement_intro_title_of_measured">실측이 완료됐습니다.\n고객의 선택을 기다려주세요.</string>

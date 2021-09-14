@@ -134,30 +134,19 @@ class MeasuringViewHolder(
         )
 
         with(binding) {
-            setContainerTheme(context, additionalInfoContainer, GREEN_THEME)
-            additionalInfoContainer.addView(RequirementCardAdditionalInfo(context).apply {
-                setLayout(
-                    theme = GREEN_THEME,
-                    type = CALENDAR_TYPE,
-                    titleData = context.getString(R.string.requirements_card_measuring_date),
-                    contentData = requirementCard.measuringDate?.let { dateFormat.format(it) },
-                    alertData = ""
-                )
+            leftButton.isVisible = true
+            rightButton.isVisible = true
+            leftButton.setText(R.string.call_to_customer_text)
+            rightButton.setText(R.string.send_estimation)
 
-                leftButton.isVisible = true
-                rightButton.isVisible = true
-                leftButton.setText(R.string.call_to_customer_text)
-                rightButton.setText(R.string.send_estimation)
+            // TODO.. 첫 전화인지, 아닌지에 따라 버튼의 UI를 변경해줘야햠. Figma 참고
+            leftButton.setOnClickListener {
+                leftButtonClickListener?.invoke(requirementCard.id, requirementCard.tel)
+            }
 
-                // TODO.. 첫 전화인지, 아닌지에 따라 버튼의 UI를 변경해줘야햠. Figma 참고
-                leftButton.setOnClickListener {
-                    leftButtonClickListener?.invoke(requirementCard.id, requirementCard.tel)
-                }
-
-                rightButton.setOnClickListener {
-                    rightButtonClickListener?.invoke(requirementCard.id, requirementCard)
-                }
-            })
+            rightButton.setOnClickListener {
+                rightButtonClickListener?.invoke(requirementCard.id, requirementCard)
+            }
         }
     }
 }

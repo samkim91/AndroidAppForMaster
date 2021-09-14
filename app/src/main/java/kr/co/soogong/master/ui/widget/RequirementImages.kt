@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.isVisible
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.dto.AttachmentDto
 import kr.co.soogong.master.databinding.ViewRequirementImagesBinding
@@ -28,6 +29,11 @@ class RequirementImages @JvmOverloads constructor(
     var images: MutableList<AttachmentDto> = arrayListOf()
         set(value) {
             field = value
+            if(value.isEmpty()) {
+                binding.question.isVisible = false
+                return
+            }
+
             binding.imagesRecyclerView.adapter = RectangleImageAdapter(
                 cardClickListener = { position ->
                     context.startActivity(

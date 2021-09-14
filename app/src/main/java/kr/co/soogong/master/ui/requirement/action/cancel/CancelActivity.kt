@@ -39,9 +39,11 @@ class CancelActivity : BaseActivity<ActivityCancelBinding>(
 
             with(actionBar) {
                 title.text = getString(R.string.cancel_estimate_title)
+
                 backButton.setOnClickListener {
                     super.onBackPressed()
                 }
+
                 button.text = getString(R.string.writing_done)
                 button.setOnClickListener {
                     viewModel.canceledCode.observe(this@CancelActivity, {
@@ -50,13 +52,13 @@ class CancelActivity : BaseActivity<ActivityCancelBinding>(
 
                     if (canceledOptions.alertVisible) return@setOnClickListener
 
-                    if (viewModel.requirement.value?.typeCode == CompareCodeTable.code) viewModel.saveRepair() else viewModel.respondToMeasure()
+                    viewModel.saveRepair()
                 }
+
                 CanceledReasonRadioGroupHelper(this@CancelActivity, canceledOptions)
 
                 canceledOptions.addCheckedChangeListener { group, checkedId ->
                     val index = group.indexOfChild(group.findViewById<RadioButton>(checkedId))
-
                     viewModel.canceledCode.value =
                         CanceledReasonRadioGroupHelper.canceledReasons[index].code
                 }
