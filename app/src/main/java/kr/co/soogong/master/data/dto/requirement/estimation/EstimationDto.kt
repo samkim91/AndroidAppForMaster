@@ -32,6 +32,9 @@ data class EstimationDto(
     @SerializedName("description")
     val description: String? = null,
 
+    @SerializedName("requestConsultingYn")
+    val requestConsultingYn: Boolean? = null,
+
     @SerializedName("choosenYn")
     val choosenYn: Boolean? = null,
 

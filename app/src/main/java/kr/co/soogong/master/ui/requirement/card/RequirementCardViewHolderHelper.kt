@@ -20,6 +20,9 @@ object RequirementCardViewHolderHelper {
             Estimated.asInt -> {
                 EstimatedViewHolder(parent.context, binding)
             }
+            RequestConsult.asInt -> {
+                RequestConsultViewHolder(parent.context, binding)
+            }
             Measuring.asInt -> {
                 MeasuringViewHolder(parent.context, binding)
             }

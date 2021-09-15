@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/bind"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -106,6 +107,17 @@
             </LinearLayout>
         </ScrollView>
 
+        <kr.co.soogong.master.ui.widget.BlueButton
+            android:id="@+id/call_to_customer_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/gap_14"
+            app:buttonText="@{@string/consult_with_customer_button_text}"
+            app:layout_constraintBottom_toTopOf="@id/requirement_due_date"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            bind:visible="@{vm.requirement.estimationDto.requestConsultingYn}" />
+
         <kr.co.soogong.master.ui.widget.RequirementDueDate
             android:id="@+id/requirement_due_date"
             android:layout_width="match_parent"
@@ -115,7 +127,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:setDueDate="@{vm.requirement}" />
+            app:setDueDate="@{vm.requirement}"
+            tools:visibility="visible" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/buttons_divider"

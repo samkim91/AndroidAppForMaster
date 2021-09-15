@@ -115,6 +115,39 @@ class EstimatedViewHolder(
     }
 }
 
+// 상담요청 상태
+class RequestConsultViewHolder(
+    override val context: Context,
+    override val binding: ViewHolderRequirementItemBinding,
+) : RequirementCardViewHolder(context, binding) {
+    override fun bind(
+        requirementCard: RequirementCard,
+        cardClickListener: (requirementId: Int) -> Unit,
+        leftButtonClickListener: ((requirementId: Int, extraInfo: Any?) -> Unit)?,
+        rightButtonClickListener: ((requirementId: Int, extraInfo: Any?) -> Unit)?
+    ) {
+        super.bind(
+            requirementCard,
+            cardClickListener,
+            leftButtonClickListener,
+            rightButtonClickListener
+        )
+
+        with(binding) {
+            setContainerTheme(context, additionalInfoContainer, ORANGE_THEME)
+            additionalInfoContainer.addView(RequirementCardAdditionalInfo(context).apply {
+                setLayout(
+                    theme = ORANGE_THEME,
+                    type = CALENDAR_TYPE,
+                    titleData = context.getString(R.string.requirements_card_due_date),
+                    contentData = dateFormat.format(getEstimationDueDate(requirementCard.createdAt)),
+                    alertData = context.getString(R.string.requirements_card_due_date_alert)
+                )
+            })
+        }
+    }
+}
+
 // 실측예정 상태
 class MeasuringViewHolder(
     override val context: Context,

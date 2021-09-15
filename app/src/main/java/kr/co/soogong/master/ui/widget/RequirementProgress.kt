@@ -63,7 +63,7 @@ class RequirementProgress @JvmOverloads constructor(
         Timber.tag(TAG).d("convertStatusToProgress: ${requirementDto?.status}")
         return if (requirementDto?.typeCode == CompareCodeTable.code) {
             when (RequirementStatus.getStatusFromRequirement(requirementDto)) {
-                Requested -> 1
+                Requested, RequestConsult -> 1
                 Estimated -> 2
                 Repairing -> 3
                 RequestFinish -> 4
@@ -84,7 +84,7 @@ class RequirementProgress @JvmOverloads constructor(
         Timber.tag(TAG).d("convertStatusToProgress: $progress")
         return if (requirementDto?.typeCode == CompareCodeTable.code) {
             when (progress) {
-                1 -> Requested.inKorean
+                1 -> if (requirementDto?.estimationDto?.requestConsultingYn != true) Requested.inKorean else RequestConsult.inKorean
                 2 -> Estimated.inKorean
                 3 -> Repairing.inKorean
                 4 -> RequestFinish.inKorean

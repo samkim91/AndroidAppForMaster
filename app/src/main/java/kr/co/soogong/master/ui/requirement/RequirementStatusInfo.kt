@@ -17,6 +17,7 @@ val allCodes = listOf(
 val receivedStatus = listOf(
     Requested,
     Estimated,
+    RequestConsult,
 )
 
 val receivedCodes = listOf(
