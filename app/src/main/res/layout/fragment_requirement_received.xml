@@ -22,10 +22,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/shape_fill_gray_top_bottom_line_background"
-            android:scrollbars="none"
+            android:fadingEdgeLength="@dimen/gap_20"
             android:foregroundGravity="center_horizontal"
             android:requiresFadingEdge="horizontal"
-            android:fadingEdgeLength="@dimen/gap_20"
+            android:scrollbars="none"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -36,11 +36,10 @@
                 android:layout_height="wrap_content"
                 android:paddingStart="@dimen/gap_20"
                 android:paddingTop="@dimen/gap_4"
-                android:paddingBottom="@dimen/gap_4"
                 android:paddingEnd="@dimen/gap_20"
-                app:singleSelection="true"
+                android:paddingBottom="@dimen/gap_4"
                 app:singleLine="true"
-                />
+                app:singleSelection="true" />
         </HorizontalScrollView>
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -58,8 +57,9 @@
                 android:id="@+id/received_list"
                 android:layout_width="@dimen/gap_0"
                 android:layout_height="@dimen/gap_0"
-                app:setDivider="@{@drawable/thick_divider}"
+                android:nestedScrollingEnabled="false"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:setDivider="@{@drawable/thick_divider}"
                 bind:received_list="@{vm.receivedList}"
                 tools:listitem="@layout/view_holder_requirement_item" />
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

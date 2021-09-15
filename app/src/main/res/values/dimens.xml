@@ -63,6 +63,7 @@
 
     <dimen name="gap_48">48dp</dimen>
     <dimen name="gap_50">50dp</dimen>
+    <dimen name="gap_55">55dp</dimen>
     <dimen name="gap_52">52dp</dimen>
     <dimen name="gap_56">56dp</dimen>
     <dimen name="gap_72">72dp</dimen>
@@ -72,13 +73,14 @@
     <dimen name="gap_90">90dp</dimen>
     <dimen name="gap_92">92dp</dimen>
 
-
     <dimen name="gap_100">100dp</dimen>
+    <dimen name="gap_102">102dp</dimen>
     <dimen name="gap_120">120dp</dimen>
     <dimen name="gap_124">124dp</dimen>
     <dimen name="gap_130">130dp</dimen>
     <dimen name="gap_150">150dp</dimen>
     <dimen name="gap_180">180dp</dimen>
+    <dimen name="gap_220">220dp</dimen>
     <dimen name="gap_230">230dp</dimen>
 
     <!--  Sign In  -->
@@ -233,8 +235,6 @@
     <dimen name="estimation_card_call_to_customer_button_margin_top">32dp</dimen>
 
 
-
-
     <!-- Cancel Estimate View -->
     <dimen name="cancel_estimation_default_margin_start_20">20dp</dimen>
     <dimen name="cancel_estimation_margin_start_15">15dp</dimen>
@@ -243,8 +243,6 @@
     <dimen name="cancel_estimation_margin_top_6">6dp</dimen>
     <dimen name="cancel_estimation_margin_top_13">13dp</dimen>
     <dimen name="cancel_estimation_margin_top_52">52dp</dimen>
-
-
 
 
     <!--  Widget  -->
@@ -266,7 +264,6 @@
     <dimen name="chips_height_37dp">37dp</dimen>
 
     <dimen name="chips_width_156dp">156dp</dimen>
-
 
 
     <!--  Drawable  -->

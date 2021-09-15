@@ -129,6 +129,9 @@
     <string name="requirement_intro_title_of_requested">견적요청이 왔습니다.</string>
     <string name="requirement_intro_subtitle_of_requested">견적에 대한 의사표현을 해주세요.\n<font color="#2E2E2E">미응답 시 추후 요청에 제한</font>이 있을 수 있습니다.</string>
 
+    <string name="requirement_intro_title_of_request_consult">상세상담 요청이 왔습니다.</string>
+    <string name="requirement_intro_subtitle_of_request_consult">견적에 대한 상세상담을 해주세요.\n<font color="#2E2E2E">미응답 시 추후 요청에 제한</font>이 있을 수 있습니다.</string>
+
     <string name="requirement_intro_title_of_estimated">견적서를 전달했습니다.\n고객의 선택을 기다려주세요.</string>
     <string name="requirement_intro_subtitle_of_estimated">2주 내 고객 미응답 시 해당 문의가 삭제됩니다.</string>
 
@@ -157,6 +160,7 @@
 
     <string name="progress_starting_text">문의접수</string>
     <string name="progress_ending_text">시공완료</string>
+    <string name="consult_with_customer_button_text">고객과 상담하기</string>
 
     <!-- Transmission Card & Done Card in View Estimate -->
     <string name="estimation_total_cost">총 견적가</string>

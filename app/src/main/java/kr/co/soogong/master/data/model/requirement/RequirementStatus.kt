@@ -15,7 +15,9 @@ sealed class RequirementStatus {
 
             return when (requirement?.status) {
                 // 문의 탭
-                Requested.code -> Requested
+                Requested.code -> {
+                    if (requirement.estimationDto?.requestConsultingYn != true) Requested else RequestConsult
+                }
                 Estimated.code -> {
                     if (requirement.estimationDto?.masterResponseCode == EstimationResponseCode.DEFAULT) Requested else Estimated
                 }
@@ -49,6 +51,13 @@ object Estimated : RequirementStatus() {
     override val code = "Estimated"
     override val asInt = 101
     override val introductionText = "고객의 선택을 기다려주세요"
+}
+
+object RequestConsult : RequirementStatus() {
+    override val inKorean = "상담요청"
+    override val code = "RequestConsult"
+    override val asInt = 102
+    override val introductionText = "견적서를 작성해주세요"
 }
 // end region : Received Tab
 

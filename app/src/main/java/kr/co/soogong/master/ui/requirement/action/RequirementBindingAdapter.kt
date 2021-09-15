@@ -50,6 +50,11 @@ fun RequirementIntro.initByRequirement(requirementDto: RequirementDto?) {
             subtitle = context.getString(R.string.requirement_intro_subtitle_of_estimated)
             theme = GRAY_THEME
         }
+        RequestConsult -> {
+            title = context.getString(R.string.requirement_intro_title_of_request_consult)
+            subtitle = context.getString(R.string.requirement_intro_subtitle_of_request_consult)
+            theme = GREEN_THEME
+        }
         RequestMeasure -> {
             title = context.getString(R.string.requirement_intro_title_of_request_measure)
             subtitle = ""
@@ -83,7 +88,10 @@ fun RequirementIntro.initByRequirement(requirementDto: RequirementDto?) {
         Closed -> {
             title = context.getString(
                 R.string.requirement_intro_title_of_close,
-                SimpleDateFormat("yyyy.MM.dd (E) - HH:mm", Locale.KOREA).format(requirementDto?.estimationDto?.repair?.review?.createdAt)
+                SimpleDateFormat(
+                    "yyyy.MM.dd (E) - HH:mm",
+                    Locale.KOREA
+                ).format(requirementDto?.estimationDto?.repair?.review?.createdAt)
             )
             subtitle = ""
             theme = GRAY_THEME
