@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:bind="http://schemas.android.com/bind"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
-        <import type="kr.co.soogong.master.data.model.requirement.RequirementStatus" />
 
         <variable
             name="vm"
@@ -116,7 +113,7 @@
             app:layout_constraintBottom_toTopOf="@id/requirement_due_date"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            bind:visible="@{vm.requirement.estimationDto.requestConsultingYn}" />
+             />
 
         <kr.co.soogong.master.ui.widget.RequirementDueDate
             android:id="@+id/requirement_due_date"

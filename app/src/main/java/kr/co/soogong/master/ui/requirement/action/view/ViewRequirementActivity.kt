@@ -74,7 +74,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
             setLayout(requirement)
             setButtons(requirement)
             binding.requirementStatus.requirementDto = requirement
-            showNoticeDialog(requirement)
+            setSpecificLayout(requirement)
         })
 
         viewModel.action.observe(this@ViewRequirementActivity, EventObserver { event ->
@@ -106,14 +106,18 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
         })
     }
 
-    private fun showNoticeDialog(requirement: RequirementDto) {
-        if (RequirementStatus.getStatusFromRequirement(requirement) == RequestConsult) {
-            val dialog = CustomDialog.newInstance(
-                dialogData = getRequestConsultAlertDialogData(this),
-                yesClick = { },
-                noClick = { }
-            )
-            dialog.show(supportFragmentManager, dialog.tag)
+    private fun setSpecificLayout(requirement: RequirementDto) {
+        (RequirementStatus.getStatusFromRequirement(requirement) == RequestConsult).let { boolean ->
+            binding.callToCustomerButton.isVisible = boolean
+
+            if (boolean) {
+                val dialog = CustomDialog.newInstance(
+                    dialogData = getRequestConsultAlertDialogData(this),
+                    yesClick = { },
+                    noClick = { }
+                )
+                dialog.show(supportFragmentManager, dialog.tag)
+            }
         }
     }
 
