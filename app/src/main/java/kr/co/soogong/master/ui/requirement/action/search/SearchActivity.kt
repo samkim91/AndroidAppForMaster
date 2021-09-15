@@ -36,6 +36,10 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>(
             lifecycleOwner = this@SearchActivity
             vm = viewModel
 
+            searchBar.setCancelIconClickListener {
+                viewModel.searchingText.value = ""
+            }
+
             searchBar.setCancelTextClickListener {
                 super.onBackPressed()
             }
@@ -75,13 +79,17 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>(
 
     private fun registerEventObserve() {
         Timber.tag(TAG).d("registerEventObserve: ")
+        viewModel.searchingText.observe(this, {     // 검색단어 삭제 버튼 활성화 여부
+            binding.searchBar.cancelIconVisibility = it.isNotEmpty()
+        })
+
         viewModel.searchingText.debounce(500L, CoroutineScope(Dispatchers.Main))
-            .observe(this, {
+            .observe(this, {        // 검색을 자동으로 실행해주는 기능인데, 글자가 바뀔 때마다 검색되면 요청이 많으니, 0.5초 간격으로 하나로 모아서 요청
                 viewModel.searchRequirements()
             })
 
         viewModel.action.observe(this, EventObserver { action ->
-            when(action) {
+            when (action) {
                 SEARCH_REQUIREMENTS_FAILED -> toast(getString(R.string.error_message_of_request_failed))
             }
         })
