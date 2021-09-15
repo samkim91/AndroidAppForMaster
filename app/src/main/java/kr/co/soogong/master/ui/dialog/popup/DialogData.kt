@@ -28,14 +28,10 @@ data class DialogData(
 
         fun getRequestConsultAlertDialogData(context: Context) =
             DialogData(
-                "고객님이 상세상담 통화를 요청하셨어요.\n고객님과 빠르게 통화하고 시공 가능성을\n높여보세요.",
-                context.getColor(R.color.text_basic_color),
-                "24시간동안 통화를 하지 않을 경우\n배정에 불이익이 있을 수 있어요.",
-                context.getColor(R.color.text_alert_color),
-                "네",
-                context.getColor(R.color.text_basic_color),
-                "아니요",
-                context.getColor(R.color.text_basic_color)
+                "고객님이 상세상담 통화를 요청하셨어요.\n고객님과 빠르게 통화하고 시공 가능성을\n높여보세요.", context.getColor(R.color.text_basic_color),
+                "24시간동안 통화를 하지 않을 경우\n배정에 불이익이 있을 수 있어요.", context.getColor(R.color.text_alert_color),
+                "확인", context.getColor(R.color.text_basic_color),
+                null, context.getColor(R.color.text_basic_color)
             )
 
         fun getAcceptMeasureDialogData(context: Context) =

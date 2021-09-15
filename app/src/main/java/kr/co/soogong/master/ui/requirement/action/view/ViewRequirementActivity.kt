@@ -13,6 +13,7 @@ import kr.co.soogong.master.ui.dialog.popup.CustomDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData.Companion.getAcceptMeasureDialogData
 import kr.co.soogong.master.ui.dialog.popup.DialogData.Companion.getRefuseEstimateDialogData
 import kr.co.soogong.master.ui.dialog.popup.DialogData.Companion.getRefuseMeasureDialogData
+import kr.co.soogong.master.ui.dialog.popup.DialogData.Companion.getRequestConsultAlertDialogData
 import kr.co.soogong.master.ui.requirement.action.view.ViewRequirementViewModel.Companion.ASK_FOR_REVIEW_SUCCESSFULLY
 import kr.co.soogong.master.ui.requirement.action.view.ViewRequirementViewModel.Companion.CALL_TO_CUSTOMER_SUCCESSFULLY
 import kr.co.soogong.master.ui.requirement.action.view.ViewRequirementViewModel.Companion.INVALID_REQUIREMENT
@@ -70,10 +71,10 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
     private fun registerEventObserve() {
         Timber.tag(TAG).d("registerEventObserve: ")
         viewModel.requirement.observe(this@ViewRequirementActivity, { requirement ->
-            Timber.tag(TAG).d("requirement updated: $requirement")
             setLayout(requirement)
             setButtons(requirement)
             binding.requirementStatus.requirementDto = requirement
+            showNoticeDialog(requirement)
         })
 
         viewModel.action.observe(this@ViewRequirementActivity, EventObserver { event ->
@@ -103,6 +104,17 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                 }
             }
         })
+    }
+
+    private fun showNoticeDialog(requirement: RequirementDto) {
+        if (RequirementStatus.getStatusFromRequirement(requirement) == RequestConsult) {
+            val dialog = CustomDialog.newInstance(
+                dialogData = getRequestConsultAlertDialogData(this),
+                yesClick = { },
+                noClick = { }
+            )
+            dialog.show(supportFragmentManager, dialog.tag)
+        }
     }
 
     override fun onStart() {
