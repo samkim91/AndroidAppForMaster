@@ -28,6 +28,7 @@
             android:layout_marginStart="@dimen/actionbar_title_margin_start"
             android:ellipsize="end"
             android:gravity="center_vertical"
+            android:layout_marginEnd="@dimen/gap_10"
             android:lines="1"
             android:textColor="@color/color_2E2E2E"
             app:layout_constraintBottom_toBottomOf="parent"

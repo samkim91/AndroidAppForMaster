@@ -48,6 +48,7 @@ class ReceivedViewModel @Inject constructor(
                     Timber.tag(TAG).d("requestList onNext: $it")
                     if (_index.value == 0) sendEvent(BADGE_UPDATE, it.count())
                     when (_index.value) {
+                        1 -> _receivedList.postValue(it.filter { requirementCard -> requirementCard.estimationDto?.requestConsultingYn == false })
                         2 -> _receivedList.postValue(it.filter { requirementCard -> requirementCard.status == Estimated })
                         3 -> _receivedList.postValue(it.filter { requirementCard -> requirementCard.estimationDto?.requestConsultingYn == true })
                         else -> _receivedList.postValue(it)
