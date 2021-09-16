@@ -1,7 +1,9 @@
 package kr.co.soogong.master.ui.requirement.action.view
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
+import androidx.appcompat.widget.AppCompatButton
 import androidx.core.view.isVisible
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
@@ -60,6 +62,15 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                 backButton.setOnClickListener {
                     super.onBackPressed()
                 }
+                button.text = getString(R.string.progress_ending_text)
+                button.setOnClickListener {
+                    viewModel.requirement.value?.id?.let {
+                        startActivity(
+                            EndRepairActivityHelper.getIntent(this@ViewRequirementActivity, it)
+                        )
+                    }
+                }
+                root.findViewById<AppCompatButton>(R.id.button).isVisible = false
             }
 
             callToCustomerButton.setOnClickListener {
@@ -135,6 +146,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
 
             when (RequirementStatus.getStatusFromRequirement(requirement)) {
                 Requested, RequestConsult, RequestMeasure -> {
+                    actionBar.root.findViewById<AppCompatButton>(R.id.button).isVisible = true
                     // view : 고객 요청 내용(spread)
                     RequirementDrawerContainer.addDrawerContainer(
                         context = this@ViewRequirementActivity,
@@ -147,6 +159,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                 }
 
                 Estimated -> {
+                    actionBar.root.findViewById<AppCompatButton>(R.id.button).isVisible = true
                     // view : 나의 제안 내용(spread), 고객 요청 내용
                     RequirementDrawerContainer.addDrawerContainer(
                         context = this@ViewRequirementActivity,
