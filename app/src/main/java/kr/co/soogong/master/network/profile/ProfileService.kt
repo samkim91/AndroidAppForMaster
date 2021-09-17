@@ -14,6 +14,10 @@ class ProfileService @Inject constructor(
 ) {
     private val profileInterface = retrofit.create(ProfileInterface::class.java)
 
+    fun getMasterSimpleInfo(uid: String?): Single<MasterDto> {
+        return profileInterface.getMasterSimpleInfo(uid)
+    }
+
     fun getMasterByUid(uid: String?): Single<MasterDto> {
         return profileInterface.getMasterByUid(uid)
     }
