@@ -29,6 +29,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
         initNotificationChannel(this)
     }
 
+    override fun onStart() {
+        super.onStart()
+        viewModel.getMasterSimpleInfo()
+    }
+
     private fun registerFCM() {
         Timber.tag(TAG).d("registerFCM: ")
         viewModel.registerFCM()

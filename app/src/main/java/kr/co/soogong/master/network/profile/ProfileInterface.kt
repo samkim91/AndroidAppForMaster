@@ -10,6 +10,9 @@ import okhttp3.ResponseBody
 import retrofit2.http.*
 
 interface ProfileInterface {
+    @GET(HttpContract.GET_MASTER_SIMPLE_INFO)
+    fun getMasterSimpleInfo(@Query("uid") uid: String?): Single<MasterDto>
+
     @GET(HttpContract.GET_MASTER_BY_UID)
     fun getMasterByUid(@Query("uid") uid: String?): Single<MasterDto>
 

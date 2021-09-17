@@ -37,35 +37,15 @@ class SplashActivity : AppCompatActivity() {
     private fun checkSignIn() {
         Timber.tag(TAG).d("checkSignIn: ")
 
-        val masterUid = getMasterUidInSharedUseCase()
-        Timber.tag(TAG).d("masterId: $masterUid")
+        getMasterUidInSharedUseCase().let { masterUid ->
+            Timber.tag(TAG).d("masterUid is: $masterUid")
 
-        if(!masterUid.isNullOrEmpty()) {
-            startActivity(MainActivityHelper.getIntent(this))
-            return
+            if (masterUid.isNullOrEmpty()) {
+                startActivity(SignMainActivityHelper.getIntent(this))
+            } else {
+                startActivity(MainActivityHelper.getIntent(this))
+            }
         }
-
-        Timber.tag(TAG).d("masterUid is null")
-        startActivity(SignMainActivityHelper.getIntent(this))
-
-//        getMasterUidInSharedUseCase()?.let { masterUid ->
-//            Timber.tag(TAG).d("masterId: $masterUid")
-//
-//            saveMasterUidInSharedUseCase(masterUid)
-//            startActivity(MainActivityHelper.getIntent(this))
-//            return
-//        }
-//
-//        getMasterIdFromFirebaseUseCase()?.let { masterUid ->
-//            Timber.tag(TAG).d("masterId: $masterUid")
-//
-//            saveMasterUidInSharedUseCase(masterUid)
-//            startActivity(MainActivityHelper.getIntent(this))
-//            return
-//        }
-
-        Timber.tag(TAG).d("masterUid is null")
-        startActivity(SignMainActivityHelper.getIntent(this))
     }
 
     companion object {
