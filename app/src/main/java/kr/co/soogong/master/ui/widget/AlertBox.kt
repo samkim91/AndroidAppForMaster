@@ -5,11 +5,8 @@ import android.content.res.ColorStateList
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.view.isVisible
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ViewAlertBoxBinding
-import kr.co.soogong.master.databinding.ViewRequirementIntroBinding
-import kr.co.soogong.master.ui.GREEN_THEME
 import kr.co.soogong.master.ui.ORANGE_THEME
 
 class AlertBox @JvmOverloads constructor(
@@ -25,12 +22,12 @@ class AlertBox @JvmOverloads constructor(
             field = value
             when (value) {
                 ORANGE_THEME -> {
-                    this.setBackgroundResource(R.drawable.shape_fill_orange_border_radius8)
+                    this.setBackgroundResource(R.drawable.shape_light_orange_background_light_orange_border_radius8)
                     binding.alertTitle.setTextColor(context.getColor(R.color.color_FF711D))
                     binding.speakerIcon.backgroundTintList = ColorStateList.valueOf(context.getColor(R.color.color_FF711D))
                 }
                 else -> {
-                    this.setBackgroundResource(R.drawable.shape_fill_green_border_radius8)
+                    this.setBackgroundResource(R.drawable.shape_light_green_background_light_green_border_radius8)
                     binding.alertTitle.setTextColor(context.getColor(R.color.color_1FB571))
                     binding.speakerIcon.backgroundTintList = ColorStateList.valueOf(context.getColor(R.color.color_1FB571))
                 }

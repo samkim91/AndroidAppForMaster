@@ -15,7 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/color_0C5E47"
-            android:background="@drawable/shape_fill_white_board_green_radius50"
+            android:background="@drawable/shape_white_background_dark_green_border_radius50"
             android:paddingStart="@dimen/gap_12"
             android:paddingTop="@dimen/gap_3"
             android:paddingEnd="@dimen/gap_12"

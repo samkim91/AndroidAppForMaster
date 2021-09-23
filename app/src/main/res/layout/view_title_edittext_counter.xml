@@ -36,7 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/view_edit_count_box_text_box_margin_top"
-            android:background="@drawable/shape_fill_transparent_board_gray"
+            android:background="@drawable/shape_transparent_background_board_gray_radius8"
             android:padding="@dimen/view_edit_count_box_text_box_padding"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

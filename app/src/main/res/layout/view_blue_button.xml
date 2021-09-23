@@ -12,7 +12,7 @@
             android:id="@+id/container"
             android:layout_width="@dimen/gap_220"
             android:layout_height="@dimen/gap_55"
-            android:background="@drawable/shape_blue_background_no_border_radius33"
+            android:background="@drawable/shape_blue_background_radius33"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

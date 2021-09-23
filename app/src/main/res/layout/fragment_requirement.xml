@@ -66,7 +66,7 @@
             android:id="@+id/bottom_view_container"
             android:layout_width="match_parent"
             android:layout_height="@dimen/gap_72"
-            android:background="@drawable/shape_fill_green_transparent_background_top_radius"
+            android:background="@drawable/shape_dark_green_transparent_background_radius_top20"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -87,7 +87,7 @@
             android:id="@+id/bottom_view_button"
             android:layout_width="@dimen/gap_92"
             android:layout_height="@dimen/gap_37"
-            android:background="@drawable/shape_fill_white_background_radius20"
+            android:background="@drawable/shape_white_background_radius20"
             app:layout_constraintBottom_toBottomOf="@id/bottom_view_container"
             app:layout_constraintEnd_toEndOf="@id/bottom_view_container"
             app:layout_constraintStart_toEndOf="@id/bottom_view_text"

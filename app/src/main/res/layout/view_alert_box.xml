@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/gap_18"
-        tools:background="@drawable/shape_fill_green_border_radius8">
+        tools:background="@drawable/shape_light_green_background_light_green_border_radius8">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/speaker_icon"

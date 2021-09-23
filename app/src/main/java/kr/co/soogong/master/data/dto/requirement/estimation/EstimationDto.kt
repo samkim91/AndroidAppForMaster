@@ -35,6 +35,9 @@ data class EstimationDto(
     @SerializedName("requestConsultingYn")
     val requestConsultingYn: Boolean? = null,
 
+    @SerializedName("fromMasterCallCnt")
+    val fromMasterCallCnt: Int? = null,
+
     @SerializedName("choosenYn")
     val choosenYn: Boolean? = null,
 

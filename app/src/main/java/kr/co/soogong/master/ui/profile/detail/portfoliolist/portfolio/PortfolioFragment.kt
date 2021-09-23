@@ -10,7 +10,6 @@ import gun0912.tedimagepicker.builder.TedImagePicker
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentEditPortfolioBinding
 import kr.co.soogong.master.ui.base.BaseFragment
-import kr.co.soogong.master.ui.base.BaseViewModel.Companion.DISMISS_LOADING
 import kr.co.soogong.master.ui.profile.detail.portfoliolist.portfolio.PortfolioViewModel.Companion.GET_PORTFOLIO_FAILED
 import kr.co.soogong.master.ui.profile.detail.portfoliolist.portfolio.PortfolioViewModel.Companion.SAVE_PORTFOLIO_FAILED
 import kr.co.soogong.master.ui.profile.detail.portfoliolist.portfolio.PortfolioViewModel.Companion.SAVE_PORTFOLIO_SUCCESSFULLY
@@ -83,7 +82,7 @@ class PortfolioFragment : BaseFragment<FragmentEditPortfolioBinding>(
                 PermissionHelper.checkImagePermission(context = requireContext(),
                     onGranted = {
                         TedImagePicker.with(requireContext())
-                            .buttonBackground(R.drawable.shape_fill_green_background)
+                            .buttonBackground(R.drawable.shape_green_background_radius8)
                             .start { uri ->
                                 if (FileHelper.isImageExtension(uri, requireContext()) == false) {
                                     requireContext().toast(getString(R.string.invalid_image_extension))
@@ -100,7 +99,7 @@ class PortfolioFragment : BaseFragment<FragmentEditPortfolioBinding>(
                 PermissionHelper.checkImagePermission(context = requireContext(),
                     onGranted = {
                         TedImagePicker.with(requireContext())
-                            .buttonBackground(R.drawable.shape_fill_green_background)
+                            .buttonBackground(R.drawable.shape_green_background_radius8)
                             .start { uri ->
                                 if (FileHelper.isImageExtension(uri, requireContext()) == false) {
                                     requireContext().toast(getString(R.string.invalid_image_extension))

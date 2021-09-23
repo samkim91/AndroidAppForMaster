@@ -10,7 +10,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="280dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/shape_fill_white_background"
+            android:background="@drawable/shape_white_background_gray_border_radius8"
             android:gravity="center">
 
             <TextView

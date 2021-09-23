@@ -38,7 +38,7 @@
                     android:layout_width="0dp"
                     android:layout_height="@dimen/gap_40"
                     android:text="@string/get_images_button_text"
-                    android:background="@drawable/shape_fill_transparent_board_green"
+                    android:background="@drawable/shape_transparent_background_green_board_radius8"
                     android:textColor="@color/color_1FC472"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
