@@ -10,37 +10,57 @@
 
         <variable
             name="vm"
-            type="kr.co.soogong.master.ui.requirement.received.ReceivedViewModel" />
+            type="kr.co.soogong.master.ui.requirement.action.search.SearchViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <HorizontalScrollView
-            android:id="@+id/filter_container"
+        <kr.co.soogong.master.ui.widget.SearchBar
+            android:id="@+id/search_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/shape_fill_gray_top_bottom_line_background"
-            android:fadingEdgeLength="@dimen/gap_20"
-            android:foregroundGravity="center_horizontal"
-            android:requiresFadingEdge="horizontal"
-            android:scrollbars="none"
+            android:layout_marginStart="@dimen/gap_15"
+            android:layout_marginTop="@dimen/gap_28"
+            android:layout_marginEnd="@dimen/gap_15"
+            app:cancelTextVisibility="@{true}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:searchBarContent="@={vm.searchingText}"
+            app:searchTextHint="@{@string/search_bar_hint_text}" />
 
-            <com.google.android.material.chip.ChipGroup
-                android:id="@+id/filter_group"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingStart="@dimen/gap_20"
-                android:paddingTop="@dimen/gap_4"
-                android:paddingEnd="@dimen/gap_20"
-                android:paddingBottom="@dimen/gap_4"
-                app:singleLine="true"
-                app:singleSelection="true" />
-        </HorizontalScrollView>
+        <Spinner
+            android:id="@+id/spinner"
+            style="@style/text_style_15sp.medium"
+            android:layout_width="@dimen/gap_90"
+            android:layout_height="@dimen/gap_40"
+            android:layout_marginTop="@dimen/gap_16"
+            android:background="@drawable/shape_white_background_gray_border_radius80"
+            app:layout_constraintStart_toStartOf="@id/search_bar"
+            app:layout_constraintTop_toBottomOf="@id/search_bar"
+            app:setItems="@{vm.spinnerItems}" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/dropdown_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/gap_16"
+            android:background="@drawable/ic_dropdown_arrow"
+            app:layout_constraintBottom_toBottomOf="@id/spinner"
+            app:layout_constraintEnd_toEndOf="@id/spinner"
+            app:layout_constraintTop_toTopOf="@id/spinner" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/line"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="@dimen/gap_1"
+            android:layout_marginTop="@dimen/gap_15"
+            android:background="@color/line_color"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/spinner" />
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/swipe_refresh_layout"
@@ -49,18 +69,17 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/filter_container"
-            app:onRefresh="@{vm::requestList}"
+            app:layout_constraintTop_toBottomOf="@id/line"
+            app:onRefresh="@{vm::searchRequirements}"
             app:setLoadingColor="@{R.color.app_color}">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/received_list"
+                android:id="@+id/requirements"
                 android:layout_width="@dimen/gap_0"
                 android:layout_height="@dimen/gap_0"
-                android:nestedScrollingEnabled="false"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:setDivider="@{@drawable/thick_divider}"
-                bind:received_list="@{vm.receivedList}"
+                bind:received_list="@{vm.requirements}"
                 tools:listitem="@layout/view_holder_requirement_item" />
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
@@ -74,20 +93,19 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/swipe_refresh_layout"
             app:layout_constraintVertical_chainStyle="packed"
-            bind:visible="@{vm.receivedList.empty}" />
+            bind:visible="@{vm.requirements.empty}" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/empty_text"
             style="@style/text_style_18sp.bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/requirements_request_none_status"
+            android:text="@string/requirements_not_found"
             android:textColor="@color/color_BDBDBD"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/empty_icon"
-            bind:visible="@{vm.receivedList.empty}" />
-
+            bind:visible="@{vm.requirements.empty}" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

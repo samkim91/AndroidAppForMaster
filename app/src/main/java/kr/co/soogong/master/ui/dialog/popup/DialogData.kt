@@ -26,6 +26,14 @@ data class DialogData(
                 "아니요", context.getColor(R.color.text_basic_color)
             )
 
+        fun getRequestConsultAlertDialogData(context: Context) =
+            DialogData(
+                "고객님이 상세상담 통화를 요청하셨어요.\n고객님과 빠르게 통화하고 시공 가능성을\n높여보세요.", context.getColor(R.color.text_basic_color),
+                "24시간동안 통화를 하지 않을 경우\n배정에 불이익이 있을 수 있어요.", context.getColor(R.color.text_alert_color),
+                "확인", context.getColor(R.color.text_basic_color),
+                null, context.getColor(R.color.text_basic_color)
+            )
+
         fun getAcceptMeasureDialogData(context: Context) =
             DialogData(
                 "현장 실측 요청을 수락하시겠어요?", context.getColor(R.color.text_basic_color),
@@ -84,10 +92,14 @@ data class DialogData(
 
         fun getAskingFillProfileDialogData(context: Context) =
             DialogData(
-                "문의를 처리하려면\n필수 정보 등록이 필요해요.\n지금 등록하시겠어요?", context.getColor(R.color.text_basic_color),
-                null, context.getColor(R.color.text_alert_color),
-                "네", context.getColor(R.color.text_basic_color),
-                "아니요", context.getColor(R.color.text_basic_color)
+                "문의를 처리하려면\n필수 정보 등록이 필요해요.\n지금 등록하시겠어요?",
+                context.getColor(R.color.text_basic_color),
+                null,
+                context.getColor(R.color.text_alert_color),
+                "네",
+                context.getColor(R.color.text_basic_color),
+                "아니요",
+                context.getColor(R.color.text_basic_color)
             )
 
         fun getWaitingUntilApprovalDialogData(context: Context) =
@@ -116,10 +128,14 @@ data class DialogData(
 
         fun getConfirmingForRequiredDialogData(context: Context) =
             DialogData(
-                "해당 정보를 수정하시면,\n수공에서 승인하기 전까지 서비스 이용이 제한됩니다.", context.getColor(R.color.text_basic_color),
-                null, context.getColor(R.color.text_alert_color),
-                "확인", context.getColor(R.color.text_basic_color),
-                "취소", context.getColor(R.color.text_basic_color)
+                "해당 정보를 수정하시면,\n수공에서 승인하기 전까지 서비스 이용이 제한됩니다.",
+                context.getColor(R.color.text_basic_color),
+                null,
+                context.getColor(R.color.text_alert_color),
+                "확인",
+                context.getColor(R.color.text_basic_color),
+                "취소",
+                context.getColor(R.color.text_basic_color)
             )
     }
 }

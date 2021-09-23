@@ -68,13 +68,13 @@
     <string name="bottom_view_for_filling_profile_info_button_text">등록하기</string>
     <string name="alert_text_to_fill_up_required_information"><b>필수 정보를 모두 등록</b>하고, 승인이 완료되면\n<b>문의 처리가 가능</b>합니다!</string>
 
+    <string name="cancel_text">취소</string>
+    <string name="search_bar_hint_text">프로젝트 또는 주소로 검색해 보세요.</string>
+
     <!--  Requirements  -->
     <string name="requirements_received_tab_name">문의</string>
     <string name="requirements_progress_tab_name">진행중</string>
     <string name="requirements_done_tab_name">완료·취소</string>
-    <string name="requirements_received_code">Received</string>
-    <string name="requirements_progress_code">Progress</string>
-    <string name="requirements_done_code">Done</string>
 
     <!-- Requirements : Request -->
     <string name="requirements_request_none_status">아직 들어온 문의가 없습니다.</string>
@@ -129,6 +129,9 @@
     <string name="requirement_intro_title_of_requested">견적요청이 왔습니다.</string>
     <string name="requirement_intro_subtitle_of_requested">견적에 대한 의사표현을 해주세요.\n<font color="#2E2E2E">미응답 시 추후 요청에 제한</font>이 있을 수 있습니다.</string>
 
+    <string name="requirement_intro_title_of_request_consult">상세상담 요청이 왔습니다.</string>
+    <string name="requirement_intro_subtitle_of_request_consult">견적에 대한 상세상담을 해주세요.\n<font color="#2E2E2E">미응답 시 추후 요청에 제한</font>이 있을 수 있습니다.</string>
+
     <string name="requirement_intro_title_of_estimated">견적서를 전달했습니다.\n고객의 선택을 기다려주세요.</string>
     <string name="requirement_intro_subtitle_of_estimated">2주 내 고객 미응답 시 해당 문의가 삭제됩니다.</string>
 
@@ -157,6 +160,7 @@
 
     <string name="progress_starting_text">문의접수</string>
     <string name="progress_ending_text">시공완료</string>
+    <string name="consult_with_customer_button_text">고객과 상담하기</string>
 
     <!-- Transmission Card & Done Card in View Estimate -->
     <string name="estimation_total_cost">총 견적가</string>
@@ -178,6 +182,9 @@
     <string name="cancel_estimate_cancel_option_label">어떤 이유로 취소 되었나요?</string>
     <string name="asking_write_detail_label">상세 내용을 입력해주세요. (선택)</string>
     <string name="asking_write_canceled_reason_detail_label">취소 사유에 대해 더 하고 싶은 말이 있으시면 작성해주세요.</string>
+
+    <!-- Write Estimate -->
+    <string name="requirements_not_found">해당 내용을 찾지 못 하였습니다.</string>
 
     <!-- Write Estimate -->
     <string name="write_estimate_title">견적서 작성</string>

@@ -14,6 +14,7 @@ import kr.co.soogong.master.domain.usecase.auth.GetMasterApprovedStatusUseCase
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.uihelper.profile.EditRequiredInformationActivityHelper
 import kr.co.soogong.master.uihelper.requirment.RequirementsBadge
+import kr.co.soogong.master.uihelper.requirment.action.SearchActivityHelper
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -45,7 +46,11 @@ class RequirementFragment : BaseFragment<FragmentRequirementBinding>(
                 }.attach()
             }
 
-            bottomViewForFillingProfileInfoContainer.setOnClickListener {
+            searchBar.setSearchEditTextClickListener {
+                startActivity(SearchActivityHelper.getIntent(requireContext()))
+            }
+
+            bottomViewContainer.setOnClickListener {
                 startActivity(EditRequiredInformationActivityHelper.getIntent(requireContext()))
             }
         }
@@ -55,8 +60,8 @@ class RequirementFragment : BaseFragment<FragmentRequirementBinding>(
         super.onResume()
         Timber.tag(TAG).d("onResume: ")
         bind {
-            // 필수 정보를 입력하라는 안내를 보여줄지 검사
-            bottomViewForFillingProfileInfoContainer.isVisible =
+            // 필수 정보를 입력하라는 bottom view 를 보여줄지 결정
+            bottomView.isVisible =
                 getMasterApprovedStatusUseCase().let { it == NotApprovedCodeTable.code || it == RequestApproveCodeTable.code }
         }
     }

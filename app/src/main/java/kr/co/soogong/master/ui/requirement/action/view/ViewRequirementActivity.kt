@@ -1,7 +1,9 @@
 package kr.co.soogong.master.ui.requirement.action.view
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
+import androidx.appcompat.widget.AppCompatButton
 import androidx.core.view.isVisible
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
@@ -13,12 +15,13 @@ import kr.co.soogong.master.ui.dialog.popup.CustomDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData.Companion.getAcceptMeasureDialogData
 import kr.co.soogong.master.ui.dialog.popup.DialogData.Companion.getRefuseEstimateDialogData
 import kr.co.soogong.master.ui.dialog.popup.DialogData.Companion.getRefuseMeasureDialogData
-import kr.co.soogong.master.ui.requirement.action.view.ViewRequirementViewModel.Companion.RESPOND_TO_MEASURE_SUCCESSFULLY
+import kr.co.soogong.master.ui.dialog.popup.DialogData.Companion.getRequestConsultAlertDialogData
 import kr.co.soogong.master.ui.requirement.action.view.ViewRequirementViewModel.Companion.ASK_FOR_REVIEW_SUCCESSFULLY
 import kr.co.soogong.master.ui.requirement.action.view.ViewRequirementViewModel.Companion.CALL_TO_CUSTOMER_SUCCESSFULLY
 import kr.co.soogong.master.ui.requirement.action.view.ViewRequirementViewModel.Companion.INVALID_REQUIREMENT
 import kr.co.soogong.master.ui.requirement.action.view.ViewRequirementViewModel.Companion.REFUSE_TO_ESTIMATE_SUCCESSFULLY
 import kr.co.soogong.master.ui.requirement.action.view.ViewRequirementViewModel.Companion.REQUEST_FAILED
+import kr.co.soogong.master.ui.requirement.action.view.ViewRequirementViewModel.Companion.RESPOND_TO_MEASURE_SUCCESSFULLY
 import kr.co.soogong.master.ui.widget.RequirementDrawerContainer
 import kr.co.soogong.master.ui.widget.RequirementDrawerContainer.Companion.CANCEL_TYPE
 import kr.co.soogong.master.ui.widget.RequirementDrawerContainer.Companion.ESTIMATION_TYPE
@@ -59,6 +62,19 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                 backButton.setOnClickListener {
                     super.onBackPressed()
                 }
+                button.text = getString(R.string.progress_ending_text)
+                button.setOnClickListener {
+                    viewModel.requirement.value?.id?.let {
+                        startActivity(
+                            EndRepairActivityHelper.getIntent(this@ViewRequirementActivity, it)
+                        )
+                    }
+                }
+                root.findViewById<AppCompatButton>(R.id.button).isVisible = false
+            }
+
+            callToCustomerButton.setOnClickListener {
+                viewModel.callToClient()
             }
         }
     }
@@ -66,10 +82,10 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
     private fun registerEventObserve() {
         Timber.tag(TAG).d("registerEventObserve: ")
         viewModel.requirement.observe(this@ViewRequirementActivity, { requirement ->
-            Timber.tag(TAG).d("requirement updated: $requirement")
             setLayout(requirement)
             setButtons(requirement)
             binding.requirementStatus.requirementDto = requirement
+            setSpecificLayout(requirement)
         })
 
         viewModel.action.observe(this@ViewRequirementActivity, EventObserver { event ->
@@ -101,6 +117,21 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
         })
     }
 
+    private fun setSpecificLayout(requirement: RequirementDto) {
+        (RequirementStatus.getStatusFromRequirement(requirement) == RequestConsult).let { boolean ->
+            binding.callToCustomerButton.isVisible = boolean
+
+            if (boolean) {
+                val dialog = CustomDialog.newInstance(
+                    dialogData = getRequestConsultAlertDialogData(this),
+                    yesClick = { },
+                    noClick = { }
+                )
+                dialog.show(supportFragmentManager, dialog.tag)
+            }
+        }
+    }
+
     override fun onStart() {
         super.onStart()
         Timber.tag(TAG).d("onStart: ")
@@ -114,7 +145,8 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
             actionBar.title.text = requirement.address
 
             when (RequirementStatus.getStatusFromRequirement(requirement)) {
-                Requested, RequestMeasure -> {
+                Requested, RequestConsult, RequestMeasure -> {
+                    actionBar.root.findViewById<AppCompatButton>(R.id.button).isVisible = true
                     // view : 고객 요청 내용(spread)
                     RequirementDrawerContainer.addDrawerContainer(
                         context = this@ViewRequirementActivity,
@@ -127,6 +159,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                 }
 
                 Estimated -> {
+                    actionBar.root.findViewById<AppCompatButton>(R.id.button).isVisible = true
                     // view : 나의 제안 내용(spread), 고객 요청 내용
                     RequirementDrawerContainer.addDrawerContainer(
                         context = this@ViewRequirementActivity,
@@ -295,7 +328,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
         Timber.tag(TAG).d("setButtons: ")
         with(binding) {
             when (RequirementStatus.getStatusFromRequirement(requirementDto)) {
-                Requested -> {
+                Requested, RequestConsult -> {
                     // Buttons : 견적을 내기 어려워요 / 견적을 보낼래요.
                     leftButton.text = getString(R.string.refuse_estimate_text)
                     leftButton.setTextColor(getColor(R.color.color_FFFFFF))
