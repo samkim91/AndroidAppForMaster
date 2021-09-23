@@ -93,7 +93,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/gap_20"
-                android:background="@drawable/shape_fill_gray_top_bottom_line_background"
+                android:background="@drawable/shape_gray_background_gray_border"
                 android:paddingTop="@dimen/gap_16"
                 android:paddingBottom="@dimen/gap_16"
                 app:layout_constraintEnd_toEndOf="parent"

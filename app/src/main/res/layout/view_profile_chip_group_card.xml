@@ -8,7 +8,7 @@
         android:id="@+id/profile_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/shape_radius8_white_background"
+        android:background="@drawable/shape_white_background_radius8"
         android:paddingStart="@dimen/gap_16"
         android:paddingTop="@dimen/gap_20"
         android:paddingEnd="@dimen/gap_16"

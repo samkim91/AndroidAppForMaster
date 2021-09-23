@@ -172,7 +172,12 @@ class MeasuringViewHolder(
             leftButton.setText(R.string.call_to_customer_text)
             rightButton.setText(R.string.send_estimation)
 
-            // TODO.. 첫 전화인지, 아닌지에 따라 버튼의 UI를 변경해줘야햠. Figma 참고
+            if (requirementCard.estimationDto?.fromMasterCallCnt!! > 0) {
+                leftButton.setText(R.string.recall_to_customer_text)
+                leftButton.setTextColor(context.resources.getColor(R.color.color_555555, null))
+                leftButton.setBackgroundResource(R.drawable.shape_white_background_darkgray_border_radius8)
+            }
+
             leftButton.setOnClickListener {
                 leftButtonClickListener?.invoke(requirementCard.id, requirementCard.tel)
             }
@@ -205,8 +210,7 @@ class MeasuredViewHolder(
         with(binding) {
             newBadge.visibility = View.GONE
             statusText.setTextColor(
-                ResourcesCompat.getColor(
-                    root.resources,
+                context.resources.getColor(
                     R.color.color_616161,
                     null
                 )
@@ -226,7 +230,12 @@ class MeasuredViewHolder(
             leftButton.isVisible = true
             leftButton.setText(R.string.call_to_customer_text)
 
-            // TODO.. 첫 전화인지, 아닌지에 따라 버튼의 UI를 변경해줘야햠. Figma 참고
+            if (requirementCard.estimationDto?.fromMasterCallCnt!! > 0) {
+                leftButton.setText(R.string.recall_to_customer_text)
+                leftButton.setTextColor(context.resources.getColor(R.color.color_555555, null))
+                leftButton.setBackgroundResource(R.drawable.shape_white_background_darkgray_border_radius8)
+            }
+
             leftButton.setOnClickListener {
                 leftButtonClickListener?.invoke(requirementCard.id, requirementCard.tel)
             }
@@ -273,7 +282,12 @@ class RepairingViewHolder(
             leftButton.setText(R.string.call_to_customer_text)
             rightButton.setText(R.string.repair_done_text)
 
-            // TODO.. 첫 전화인지, 아닌지에 따라 버튼의 UI를 변경해줘야햠. Figma 참고
+            if (requirementCard.estimationDto?.fromMasterCallCnt!! > 0) {
+                leftButton.setText(R.string.recall_to_customer_text)
+                leftButton.setTextColor(context.resources.getColor(R.color.color_555555, null))
+                leftButton.setBackgroundResource(R.drawable.shape_white_background_darkgray_border_radius8)
+            }
+
             leftButton.setOnClickListener {
                 leftButtonClickListener?.invoke(requirementCard.id, requirementCard.tel)
             }
@@ -391,8 +405,7 @@ class ClosedViewHolder(
         with(binding) {
             newBadge.visibility = View.GONE
             statusText.setTextColor(
-                ResourcesCompat.getColor(
-                    root.resources,
+                context.resources.getColor(
                     R.color.color_616161,
                     null
                 )
@@ -442,8 +455,7 @@ class CanceledViewHolder(
         with(binding) {
             newBadge.visibility = View.GONE
             statusText.setTextColor(
-                ResourcesCompat.getColor(
-                    root.resources,
+                context.resources.getColor(
                     R.color.color_616161,
                     null
                 )

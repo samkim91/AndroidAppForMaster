@@ -330,119 +330,159 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
             when (RequirementStatus.getStatusFromRequirement(requirementDto)) {
                 Requested, RequestConsult -> {
                     // Buttons : 견적을 내기 어려워요 / 견적을 보낼래요.
-                    leftButton.text = getString(R.string.refuse_estimate_text)
-                    leftButton.setTextColor(getColor(R.color.color_FFFFFF))
-                    leftButton.setBackgroundColor(resources.getColor(R.color.color_FF711D, null))
-                    leftButton.setOnClickListener {
-                        val dialog = CustomDialog.newInstance(
-                            getRefuseEstimateDialogData(this@ViewRequirementActivity),
-                            yesClick = {
-                                viewModel.refuseToEstimate()
-                            },
-                            noClick = { }
-                        )
-                        dialog.show(supportFragmentManager, dialog.tag)
-                    }
-                    rightButton.text = getString(R.string.accept_estimate_text)
-                    rightButton.setTextColor(getColor(R.color.color_FFFFFF))
-                    rightButton.setBackgroundColor(resources.getColor(R.color.color_22D47B, null))
-                    rightButton.setOnClickListener {
-                        startActivity(
-                            WriteEstimationActivityHelper.getIntent(
-                                this@ViewRequirementActivity,
-                                requirementId
+                    with(leftButton) {
+                        text = getString(R.string.refuse_estimate_text)
+                        setTextColor(getColor(R.color.color_FFFFFF))
+                        setBackgroundColor(resources.getColor(R.color.color_FF711D, null))
+                        setOnClickListener {
+                            val dialog = CustomDialog.newInstance(
+                                getRefuseEstimateDialogData(this@ViewRequirementActivity),
+                                yesClick = {
+                                    viewModel.refuseToEstimate()
+                                },
+                                noClick = { }
                             )
-                        )
+                            dialog.show(supportFragmentManager, dialog.tag)
+                        }
+                    }
+                    with(rightButton) {
+                        text = getString(R.string.accept_estimate_text)
+                        setTextColor(getColor(R.color.color_FFFFFF))
+                        setBackgroundColor(resources.getColor(R.color.color_22D47B, null))
+                        setOnClickListener {
+                            startActivity(
+                                WriteEstimationActivityHelper.getIntent(
+                                    this@ViewRequirementActivity,
+                                    requirementId
+                                )
+                            )
+                        }
                     }
                 }
 
                 RequestMeasure -> {
                     // Buttons : 실측 안할래요 / 실측 할래요
-                    leftButton.text = getString(R.string.refuse_measure_text)
-                    leftButton.setTextColor(getColor(R.color.color_FFFFFF))
-                    leftButton.setBackgroundColor(resources.getColor(R.color.color_FF711D, null))
-                    leftButton.setOnClickListener {
-                        val dialog = CustomDialog.newInstance(
-                            getRefuseMeasureDialogData(this@ViewRequirementActivity),
-                            yesClick = {
-                                startActivity(
-                                    CancelActivityHelper.getIntent(
-                                        this@ViewRequirementActivity,
-                                        requirementId
+                    with(leftButton) {
+                        text = getString(R.string.refuse_measure_text)
+                        setTextColor(getColor(R.color.color_FFFFFF))
+                        setBackgroundColor(resources.getColor(R.color.color_FF711D, null))
+                        setOnClickListener {
+                            val dialog = CustomDialog.newInstance(
+                                getRefuseMeasureDialogData(this@ViewRequirementActivity),
+                                yesClick = {
+                                    startActivity(
+                                        CancelActivityHelper.getIntent(
+                                            this@ViewRequirementActivity,
+                                            requirementId
+                                        )
                                     )
-                                )
-                            },
-                            noClick = { }
-                        )
-                        dialog.show(supportFragmentManager, dialog.tag)
+                                },
+                                noClick = { }
+                            )
+                            dialog.show(supportFragmentManager, dialog.tag)
+                        }
                     }
-                    rightButton.text = getString(R.string.accept_measure_text)
-                    rightButton.setTextColor(getColor(R.color.color_FFFFFF))
-                    rightButton.setBackgroundColor(resources.getColor(R.color.color_22D47B, null))
-                    rightButton.setOnClickListener {
-                        val dialog = CustomDialog.newInstance(
-                            getAcceptMeasureDialogData(this@ViewRequirementActivity),
-                            yesClick = {
-                                viewModel.respondToMeasure()
-                            },
-                            noClick = { }
-                        )
-                        dialog.show(supportFragmentManager, dialog.tag)
+                    with(rightButton) {
+                        text = getString(R.string.accept_measure_text)
+                        setTextColor(getColor(R.color.color_FFFFFF))
+                        setBackgroundColor(resources.getColor(R.color.color_22D47B, null))
+                        setOnClickListener {
+                            val dialog = CustomDialog.newInstance(
+                                getAcceptMeasureDialogData(this@ViewRequirementActivity),
+                                yesClick = {
+                                    viewModel.respondToMeasure()
+                                },
+                                noClick = { }
+                            )
+                            dialog.show(supportFragmentManager, dialog.tag)
+                        }
                     }
                 }
 
                 Repairing, RequestFinish -> {
                     // Buttons : 고객에게 전화하기 / 시공 완료
-                    leftButton.text =
-                        getString(R.string.call_to_customer_text)     // TODO: 2021/08/23 다시 전화하기 버튼 활성화..
-                    leftButton.setTextColor(getColor(R.color.color_1FC472))
-                    leftButton.setBackgroundColor(resources.getColor(R.color.color_FFFFFF, null))
-                    leftButton.setOnClickListener {
-                        viewModel.callToClient()
+                    with(leftButton) {
+                        when {
+                            requirementDto.estimationDto?.fromMasterCallCnt!! > 0 -> {
+                                text = getString(R.string.recall_to_customer_text)
+                                setTextColor(getColor(R.color.color_555555))
+                            }
+                            else -> {
+                                text = getString(R.string.call_to_customer_text)
+                                setTextColor(getColor(R.color.color_1FC472))
+                            }
+                        }
+                        setBackgroundColor(resources.getColor(R.color.color_FFFFFF, null))
+                        setOnClickListener {
+                            viewModel.callToClient()
+                        }
                     }
-                    rightButton.text = getString(R.string.repair_done_text)
-                    rightButton.setTextColor(getColor(R.color.color_FFFFFF))
-                    rightButton.setBackgroundColor(resources.getColor(R.color.color_22D47B, null))
-                    rightButton.setOnClickListener {
-                        startActivity(
-                            EndRepairActivityHelper.getIntent(
-                                this@ViewRequirementActivity,
-                                requirementId
+                    with(rightButton) {
+                        text = getString(R.string.repair_done_text)
+                        setTextColor(getColor(R.color.color_FFFFFF))
+                        setBackgroundColor(resources.getColor(R.color.color_22D47B, null))
+                        setOnClickListener {
+                            startActivity(
+                                EndRepairActivityHelper.getIntent(
+                                    this@ViewRequirementActivity,
+                                    requirementId
+                                )
                             )
-                        )
+                        }
                     }
                 }
 
                 Measuring -> {
                     // Buttons : 고객에게 전화하기 / 견적서 보내기
-                    leftButton.text =
-                        getString(R.string.call_to_customer_text)     // TODO: 2021/08/23 다시 전화하기 버튼 활성화..
-                    leftButton.setTextColor(getColor(R.color.color_1FC472))
-                    leftButton.setBackgroundColor(resources.getColor(R.color.color_FFFFFF, null))
-                    leftButton.setOnClickListener {
-                        viewModel.callToClient()
+                    with(leftButton) {
+                        when {
+                            requirementDto.estimationDto?.fromMasterCallCnt!! > 0 -> {
+                                text = getString(R.string.recall_to_customer_text)
+                                setTextColor(getColor(R.color.color_555555))
+                            }
+                            else -> {
+                                text = getString(R.string.call_to_customer_text)
+                                setTextColor(getColor(R.color.color_1FC472))
+                            }
+                        }
+                        setBackgroundColor(resources.getColor(R.color.color_FFFFFF, null))
+                        setOnClickListener {
+                            viewModel.callToClient()
+                        }
                     }
-                    rightButton.text = getString(R.string.send_estimation)
-                    rightButton.setTextColor(getColor(R.color.color_FFFFFF))
-                    rightButton.setBackgroundColor(resources.getColor(R.color.color_22D47B, null))
-                    rightButton.setOnClickListener {
-                        startActivity(
-                            MeasureActivityHelper.getIntent(
-                                this@ViewRequirementActivity,
-                                requirementId
+                    with(rightButton) {
+                        text = getString(R.string.send_estimation)
+                        setTextColor(getColor(R.color.color_FFFFFF))
+                        setBackgroundColor(resources.getColor(R.color.color_22D47B, null))
+                        setOnClickListener {
+                            startActivity(
+                                MeasureActivityHelper.getIntent(
+                                    this@ViewRequirementActivity,
+                                    requirementId
+                                )
                             )
-                        )
+                        }
                     }
                 }
 
                 Measured -> {
                     // Button : 고객에게 전화하기
-                    leftButton.text =
-                        getString(R.string.call_to_customer_text)     // TODO: 2021/08/23 다시 전화하기 버튼 활성화..
-                    leftButton.setTextColor(getColor(R.color.color_1FC472))
-                    leftButton.setBackgroundColor(resources.getColor(R.color.color_FFFFFF, null))
-                    leftButton.setOnClickListener {
-                        viewModel.callToClient()
+                    with(leftButton) {
+                        when {
+                            requirementDto.estimationDto?.fromMasterCallCnt!! > 0 -> {
+                                text = getString(R.string.recall_to_customer_text)
+                                setTextColor(getColor(R.color.color_555555))
+                            }
+                            else -> {
+                                text = getString(R.string.call_to_customer_text)
+                                setTextColor(getColor(R.color.color_1FC472))
+                            }
+                        }
+                        setTextColor(getColor(R.color.color_1FC472))
+                        setBackgroundColor(resources.getColor(R.color.color_FFFFFF, null))
+                        setOnClickListener {
+                            viewModel.callToClient()
+                        }
                     }
                     rightButton.isVisible = false
                 }
@@ -450,27 +490,29 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                 Done -> {
                     // Button : 리뷰 요청하기
                     rightButton.isVisible = false
-                    requirementDto.estimationDto?.repair?.requestReviewYn?.let { requestReviewYn ->
-                        if (requestReviewYn) {
-                            leftButton.text = getString(R.string.ask_for_review_successful)
-                            leftButton.setTextColor(getColor(R.color.color_FFFFFF))
-                            leftButton.setBackgroundColor(
-                                resources.getColor(
-                                    R.color.color_90E9BD,
-                                    null
+                    with(leftButton) {
+                        requirementDto.estimationDto?.repair?.requestReviewYn?.let { requestReviewYn ->
+                            if (requestReviewYn) {
+                                text = getString(R.string.ask_for_review_successful)
+                                setTextColor(getColor(R.color.color_FFFFFF))
+                                setBackgroundColor(
+                                    resources.getColor(
+                                        R.color.color_90E9BD,
+                                        null
+                                    )
                                 )
-                            )
-                        } else {
-                            leftButton.text = getString(R.string.request_review_text)
-                            leftButton.setTextColor(getColor(R.color.color_FFFFFF))
-                            leftButton.setBackgroundColor(
-                                resources.getColor(
-                                    R.color.color_1FC472,
-                                    null
+                            } else {
+                                text = getString(R.string.request_review_text)
+                                setTextColor(getColor(R.color.color_FFFFFF))
+                                setBackgroundColor(
+                                    resources.getColor(
+                                        R.color.color_1FC472,
+                                        null
+                                    )
                                 )
-                            )
-                            leftButton.setOnClickListener {
-                                viewModel.askForReview()
+                                setOnClickListener {
+                                    viewModel.askForReview()
+                                }
                             }
                         }
                     }

@@ -47,7 +47,7 @@
             android:layout_marginBottom="@dimen/gap_8"
             android:paddingStart="@dimen/gap_16"
             android:paddingEnd="@dimen/gap_16"
-            android:background="@drawable/shape_fill_app_color"
+            android:background="@drawable/shape_app_color_background_radius6"
             android:text="@string/send_estimation"
             android:textColor="@color/basic_white"
             app:layout_constraintBottom_toBottomOf="parent"

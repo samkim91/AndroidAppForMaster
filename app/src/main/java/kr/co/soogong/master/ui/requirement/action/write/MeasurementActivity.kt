@@ -47,7 +47,7 @@ class MeasurementActivity : BaseActivity<ActivityMeasurementBinding>(
                     PermissionHelper.checkImagePermission(context = this@MeasurementActivity,
                         onGranted = {
                             TedImagePicker.with(this@MeasurementActivity)
-                                .buttonBackground(R.drawable.shape_fill_green_background)
+                                .buttonBackground(R.drawable.shape_green_background_radius8)
                                 .start { uri ->
                                     if (FileHelper.isImageExtension(
                                             uri,

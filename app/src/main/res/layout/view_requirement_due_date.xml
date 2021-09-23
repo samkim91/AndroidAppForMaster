@@ -6,7 +6,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/gap_40"
-        android:background="@drawable/shape_fill_gray_top_round">
+        android:background="@drawable/shape_dark_transparent_background_radius_top20">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/clock_icon"

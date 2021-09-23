@@ -16,10 +16,17 @@ sealed class RequirementStatus {
             return when (requirement?.status) {
                 // 문의 탭
                 Requested.code -> {
-                    if (requirement.estimationDto?.requestConsultingYn != true) Requested else RequestConsult
+                    when {
+                        requirement.estimationDto?.requestConsultingYn != true -> Requested
+                        else -> RequestConsult
+                    }
                 }
                 Estimated.code -> {
-                    if (requirement.estimationDto?.masterResponseCode == EstimationResponseCode.DEFAULT) Requested else Estimated
+                    when {
+                        requirement.estimationDto?.requestConsultingYn == true -> RequestConsult
+                        requirement.estimationDto?.masterResponseCode == EstimationResponseCode.DEFAULT -> Requested
+                        else -> Estimated
+                    }
                 }
                 // 진행중 탭
                 Measuring.code -> Measuring

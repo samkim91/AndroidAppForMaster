@@ -75,7 +75,7 @@ class WriteEstimationActivity : BaseActivity<ActivityWriteEstimationBinding>(
                         totalCost.setEditTextBackground(
                             ResourcesCompat.getDrawable(
                                 resources,
-                                R.drawable.shape_fill_gray_background_gray_border,
+                                R.drawable.shape_gray_background_gray_border_radius50,
                                 null
                             )
                         )
