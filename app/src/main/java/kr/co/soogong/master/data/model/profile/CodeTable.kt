@@ -49,6 +49,8 @@ sealed class CodeTable {
                 GuaranteeCodeTable.code -> GuaranteeCodeTable
                 else -> FreeCodeTable
             }
+
+        fun isSecretaryRequirement(code: String?): Boolean = code == SecretaryCodeTable.code
     }
 }
 

@@ -8,6 +8,7 @@ import android.widget.SeekBar
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import kr.co.soogong.master.data.dto.requirement.RequirementDto
+import kr.co.soogong.master.data.model.profile.CodeTable
 import kr.co.soogong.master.data.model.profile.CompareCodeTable
 import kr.co.soogong.master.data.model.requirement.*
 import kr.co.soogong.master.databinding.ViewRequirementProgressBinding
@@ -61,15 +62,7 @@ class RequirementProgress @JvmOverloads constructor(
     // 일반 퍼널 (1.견적 요청 -> 2.매칭 대기 -> 3.시공 예정 -> 4.고객 완료 요청)
     private fun convertStatusToProgress(): Int {
         Timber.tag(TAG).d("convertStatusToProgress: ${requirementDto?.status}")
-        return if (requirementDto?.typeCode == CompareCodeTable.code) {
-            when (RequirementStatus.getStatusFromRequirement(requirementDto)) {
-                Requested, RequestConsult -> 1
-                Estimated -> 2
-                Repairing -> 3
-                RequestFinish -> 4
-                else -> max
-            }
-        } else {
+        return if (CodeTable.isSecretaryRequirement(requirementDto?.typeCode)) {
             when (RequirementStatus.getStatusFromRequirement(requirementDto)) {
                 RequestMeasure -> 1
                 Measuring -> 2
@@ -77,25 +70,33 @@ class RequirementProgress @JvmOverloads constructor(
                 Repairing -> 4
                 else -> max
             }
+        } else {
+            when (RequirementStatus.getStatusFromRequirement(requirementDto)) {
+                Requested, RequestConsult -> 1
+                Estimated -> 2
+                Repairing -> 3
+                RequestFinish -> 4
+                else -> max
+            }
         }
     }
 
     private fun convertProgressToStatus(progress: Int): String {
         Timber.tag(TAG).d("convertStatusToProgress: $progress")
-        return if (requirementDto?.typeCode == CompareCodeTable.code) {
-            when (progress) {
-                1 -> if (requirementDto?.estimationDto?.requestConsultingYn != true) Requested.inKorean else RequestConsult.inKorean
-                2 -> Estimated.inKorean
-                3 -> Repairing.inKorean
-                4 -> RequestFinish.inKorean
-                else -> ""
-            }
-        } else {
+        return if (CodeTable.isSecretaryRequirement(requirementDto?.typeCode)) {
             when (progress) {
                 1 -> RequestMeasure.inKorean
                 2 -> Measuring.inKorean
                 3 -> Measured.inKorean
                 4 -> Repairing.inKorean
+                else -> ""
+            }
+        } else {
+            when (progress) {
+                1 -> if (requirementDto?.estimationDto?.requestConsultingYn != true) Requested.inKorean else RequestConsult.inKorean
+                2 -> Estimated.inKorean
+                3 -> Repairing.inKorean
+                4 -> RequestFinish.inKorean
                 else -> ""
             }
         }

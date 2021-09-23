@@ -105,7 +105,7 @@
     <string name="requirement_drawer_title_of_canceled_reason">시공 취소 사유</string>
     <string name="requirement_drawer_title_of_customer_request">고객 요청 내용</string>
     <string name="requirement_drawer_title_of_my_estimation">나의 제안 내용</string>
-
+    <string name="requirement_drawer_title_of_my_measurement">나의 실측 내용</string>
     <string name="view_requirement_images_label">사진이 있다면 견적에 도움이 됩니다.</string>
     <string name="view_requirement_description">정확한 견적을 위해 마스터에게 더 설명드릴 사항이 있나요?</string>
 
