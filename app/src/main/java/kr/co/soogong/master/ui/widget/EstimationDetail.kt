@@ -12,6 +12,9 @@ import androidx.core.view.isVisible
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.dto.requirement.RequirementDto
 import kr.co.soogong.master.data.dto.requirement.estimation.EstimationDto
+import kr.co.soogong.master.data.model.requirement.Closed
+import kr.co.soogong.master.data.model.requirement.Done
+import kr.co.soogong.master.data.model.requirement.RequirementStatus
 import kr.co.soogong.master.data.model.requirement.estimation.EstimationPriceTypeCode
 import kr.co.soogong.master.databinding.ViewEstimationDetailBinding
 import kr.co.soogong.master.utility.extension.dp
@@ -32,7 +35,7 @@ class EstimationDetail @JvmOverloads constructor(
 
     var value: String? = ""
         set(value) {
-            if(!value.isNullOrEmpty()) {
+            if (!value.isNullOrEmpty()) {
                 field = value
                 binding.value.text = value
             }
@@ -40,7 +43,7 @@ class EstimationDetail @JvmOverloads constructor(
 
     var image: String? = ""
         set(value) {
-            if(!value.isNullOrEmpty()) {
+            if (!value.isNullOrEmpty()) {
                 field = value
                 binding.cardView.isVisible = true
                 binding.value.isVisible = false
@@ -62,6 +65,23 @@ class EstimationDetail @JvmOverloads constructor(
             requirementDto: RequirementDto,
             includingCancel: Boolean,
         ) {
+            requirementDto.estimationDto?.let {
+                addCommonEstimationDetail(context, container, requirementDto)
+
+                // 취소하기
+                if (includingCancel) RequirementDrawerContainer.addCancelButton(
+                    context,
+                    container,
+                    requirementDto
+                )
+            }
+        }
+
+        fun addDoneDetail(
+            context: Context,
+            container: ViewGroup,
+            requirementDto: RequirementDto,
+        ) {
             requirementDto.estimationDto?.let { estimation ->
                 // 최종 시공가
                 if (estimation.repair?.actualPrice != null) {
@@ -73,7 +93,16 @@ class EstimationDetail @JvmOverloads constructor(
                         container.addView(this)
                     }
                 }
+                addCommonEstimationDetail(context, container, requirementDto)
+            }
+        }
 
+        private fun addCommonEstimationDetail(
+            context: Context,
+            container: ViewGroup,
+            requirementDto: RequirementDto,
+        ) {
+            requirementDto.estimationDto?.let { estimation ->
                 // 총 견적가
                 if (estimation.price != null) {
                     EstimationDetail(context).apply {
@@ -127,13 +156,6 @@ class EstimationDetail @JvmOverloads constructor(
 //                        container.addView(this)
 //                    }
 //                }
-
-                // 취소하기
-                if (includingCancel) RequirementDrawerContainer.addCancelButton(
-                    context,
-                    container,
-                    requirementDto
-                )
             }
         }
     }

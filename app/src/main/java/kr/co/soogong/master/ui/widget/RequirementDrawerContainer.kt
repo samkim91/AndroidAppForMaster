@@ -11,6 +11,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.dto.requirement.RequirementDto
+import kr.co.soogong.master.data.model.profile.CodeTable
 import kr.co.soogong.master.data.model.profile.Review
 import kr.co.soogong.master.data.model.requirement.repair.CanceledReason
 import kr.co.soogong.master.databinding.ViewRequirementDrawerContainerBinding
@@ -78,7 +79,10 @@ class RequirementDrawerContainer @JvmOverloads constructor(
                     }
                     ESTIMATION_TYPE -> {
                         label =
-                            context.getString(R.string.requirement_drawer_title_of_my_estimation)
+                            if (CodeTable.isSecretaryRequirement(requirementDto.typeCode))
+                                context.getString(R.string.requirement_drawer_title_of_my_measurement)
+                            else
+                                context.getString(R.string.requirement_drawer_title_of_my_estimation)
                         EstimationDetail.addEstimationDetail(
                             context,
                             detailContainer,
@@ -89,11 +93,10 @@ class RequirementDrawerContainer @JvmOverloads constructor(
                     REPAIR_TYPE -> {
                         label =
                             context.getString(R.string.requirement_drawer_title_of_repair)
-                        EstimationDetail.addEstimationDetail(
+                        EstimationDetail.addDoneDetail(
                             context,
                             detailContainer,
-                            requirementDto,
-                            includingCancel
+                            requirementDto
                         )
                     }
                     CANCEL_TYPE -> {
