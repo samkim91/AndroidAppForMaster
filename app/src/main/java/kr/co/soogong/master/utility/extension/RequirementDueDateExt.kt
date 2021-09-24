@@ -10,6 +10,7 @@ import kr.co.soogong.master.data.model.requirement.RequestConsult
 import kr.co.soogong.master.data.model.requirement.RequestMeasure
 import kr.co.soogong.master.data.model.requirement.Requested
 import kr.co.soogong.master.data.model.requirement.RequirementStatus
+import kr.co.soogong.master.data.model.requirement.estimation.EstimationResponseCode
 import kr.co.soogong.master.ui.widget.RequirementDueDate
 import java.util.*
 
@@ -18,14 +19,18 @@ fun RequirementDueDate.setDueDate(requirementDto: RequirementDto?) {
     requirementDto?.let {
         when (RequirementStatus.getStatusFromRequirement(it)) {
             Requested, RequestConsult -> {
-                this.isVisible = true
-                this.bringToFront()
-                label = context.getString(R.string.requirements_card_due_date)
-                date = getEstimationDueDate(it.createdAt)
+                (requirementDto.estimationDto?.masterResponseCode == EstimationResponseCode.ACCEPTED).let { accepted ->
+                    if (accepted) {
+                        this.isVisible = false
+                        return
+                    }
+                    this.isVisible = true
+                    label = context.getString(R.string.requirements_card_due_date)
+                    date = getEstimationDueDate(it.createdAt)
+                }
             }
             RequestMeasure -> {
                 this.isVisible = true
-                this.bringToFront()
                 label = context.getString(R.string.requirements_card_response_measure_due_date)
                 date = getMeasureDueDate(it.createdAt)
             }
