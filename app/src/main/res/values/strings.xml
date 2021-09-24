@@ -362,5 +362,15 @@
     <string name="firebase_auth_too_many_requests">너무 많은 요청이 있습니다. 잠시 후 다시 시도해주세요.</string>
     <string name="firebase_auth_invalid_credentials">휴대전화 번호 또는 인증번호가 올바르지 않습니다.</string>
 
+    <string name="required_profile_empty_introduction">업체소개를 등록해주세요.</string>
+    <string name="required_profile_empty_shop_images">대표 이미지를 등록해주세요.</string>
+    <string name="required_profile_empty_business_unit_information">사업자 정보를 등록해주세요.</string>
+    <string name="required_profile_empty_warranty_information">A/S 정보를 등록해주세요.</string>
+    <string name="required_profile_empty_career">경력을 등록해주세요.</string>
+    <string name="required_profile_empty_owner_name">대표자명을 등록해주세요.</string>
+    <string name="required_profile_empty_phone_number">휴대폰번호를 등록해주세요.</string>
+    <string name="required_profile_empty_major">시공업종을 등록해주세요.</string>
+    <string name="required_profile_empty_address">업체 주소를 등록해주세요.</string>
+    <string name="required_profile_empty_service">서비스 가능 범위를 등록해주세요.</string>
 
 </resources>
