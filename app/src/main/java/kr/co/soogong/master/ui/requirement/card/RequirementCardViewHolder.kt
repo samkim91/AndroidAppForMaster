@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.model.profile.SecretaryCodeTable
 import kr.co.soogong.master.data.model.requirement.RequirementCard
+import kr.co.soogong.master.data.model.requirement.estimation.EstimationResponseCode
 import kr.co.soogong.master.databinding.ViewHolderRequirementItemBinding
 import kr.co.soogong.master.ui.*
 import kr.co.soogong.master.ui.widget.RequirementCardAdditionalInfo
@@ -134,6 +135,24 @@ class RequestConsultViewHolder(
         )
 
         with(binding) {
+            if (requirementCard.estimationDto?.masterResponseCode == EstimationResponseCode.ACCEPTED) {
+                setContainerTheme(context, additionalInfoContainer, GRAY_THEME)
+                additionalInfoContainer.addView(RequirementCardAdditionalInfo(context).apply {
+                    setLayout(
+                        theme = GRAY_THEME,
+                        type = MONEY_TYPE,
+                        titleData = context.getString(R.string.requirements_card_amount_title),
+                        contentData = if (requirementCard.estimationDto.price!! > 0) "${
+                            moneyFormat.format(
+                                requirementCard.estimationDto.price
+                            )
+                        }원" else context.getString(R.string.not_estimated_text),
+                        alertData = context.getString(R.string.requirements_card_waiting_label),
+                    )
+                })
+                return
+            }
+
             setContainerTheme(context, additionalInfoContainer, ORANGE_THEME)
             additionalInfoContainer.addView(RequirementCardAdditionalInfo(context).apply {
                 setLayout(

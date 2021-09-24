@@ -129,6 +129,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                     yesClick = {},
                     noClick = {}
                 )
+
                 dialog.show(supportFragmentManager, dialog.tag)
             }
         }
@@ -163,15 +164,37 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
             when (RequirementStatus.getStatusFromRequirement(requirement)) {
                 Requested, RequestConsult, RequestMeasure -> {
                     actionBar.root.findViewById<AppCompatButton>(R.id.button).isVisible = true
-                    // view : 고객 요청 내용(spread)
-                    RequirementDrawerContainer.addDrawerContainer(
-                        context = this@ViewRequirementActivity,
-                        container = flexibleContainer,
-                        requirementDto = requirement,
-                        contentType = REQUIREMENT_TYPE,
-                        isSpread = true,
-                        includingCancel = false
-                    )
+                    (requirement.estimationDto?.masterResponseCode == EstimationResponseCode.ACCEPTED).let { accepted ->
+                        if (accepted) {
+                            // view : 나의 제안 내용(spread), 고객 요청 내용
+                            RequirementDrawerContainer.addDrawerContainer(
+                                context = this@ViewRequirementActivity,
+                                container = flexibleContainer,
+                                requirementDto = requirement,
+                                contentType = ESTIMATION_TYPE,
+                                isSpread = true,
+                                includingCancel = false
+                            )
+                            RequirementDrawerContainer.addDrawerContainer(
+                                context = this@ViewRequirementActivity,
+                                container = flexibleContainer,
+                                requirementDto = requirement,
+                                contentType = REQUIREMENT_TYPE,
+                                isSpread = false,
+                                includingCancel = false
+                            )
+                            return@let
+                        }
+                        // view : 고객 요청 내용(spread)
+                        RequirementDrawerContainer.addDrawerContainer(
+                            context = this@ViewRequirementActivity,
+                            container = flexibleContainer,
+                            requirementDto = requirement,
+                            contentType = REQUIREMENT_TYPE,
+                            isSpread = true,
+                            includingCancel = false
+                        )
+                    }
                 }
 
                 Estimated -> {
@@ -345,33 +368,41 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
         with(binding) {
             when (RequirementStatus.getStatusFromRequirement(requirementDto)) {
                 Requested, RequestConsult -> {
-                    // Buttons : 견적을 내기 어려워요 / 견적을 보낼래요.
-                    with(leftButton) {
-                        text = getString(R.string.refuse_estimate_text)
-                        setTextColor(getColor(R.color.color_FFFFFF))
-                        setBackgroundColor(resources.getColor(R.color.color_FF711D, null))
-                        setOnClickListener {
-                            val dialog = CustomDialog.newInstance(
-                                getRefuseEstimateDialogData(this@ViewRequirementActivity),
-                                yesClick = {
-                                    viewModel.refuseToEstimate()
-                                },
-                                noClick = { }
-                            )
-                            dialog.show(supportFragmentManager, dialog.tag)
+                    (requirementDto.estimationDto?.masterResponseCode == EstimationResponseCode.ACCEPTED).let { accepted ->
+                        if (accepted) {
+                            buttonsDivider.isVisible = false
+                            leftButton.isVisible = false
+                            rightButton.isVisible = false
+                            return@let
                         }
-                    }
-                    with(rightButton) {
-                        text = getString(R.string.accept_estimate_text)
-                        setTextColor(getColor(R.color.color_FFFFFF))
-                        setBackgroundColor(resources.getColor(R.color.color_22D47B, null))
-                        setOnClickListener {
-                            startActivity(
-                                WriteEstimationActivityHelper.getIntent(
-                                    this@ViewRequirementActivity,
-                                    requirementId
+                        // Buttons : 견적을 내기 어려워요 / 견적을 보낼래요.
+                        with(leftButton) {
+                            text = getString(R.string.refuse_estimate_text)
+                            setTextColor(getColor(R.color.color_FFFFFF))
+                            setBackgroundColor(resources.getColor(R.color.color_FF711D, null))
+                            setOnClickListener {
+                                val dialog = CustomDialog.newInstance(
+                                    getRefuseEstimateDialogData(this@ViewRequirementActivity),
+                                    yesClick = {
+                                        viewModel.refuseToEstimate()
+                                    },
+                                    noClick = { }
                                 )
-                            )
+                                dialog.show(supportFragmentManager, dialog.tag)
+                            }
+                        }
+                        with(rightButton) {
+                            text = getString(R.string.accept_estimate_text)
+                            setTextColor(getColor(R.color.color_FFFFFF))
+                            setBackgroundColor(resources.getColor(R.color.color_22D47B, null))
+                            setOnClickListener {
+                                startActivity(
+                                    WriteEstimationActivityHelper.getIntent(
+                                        this@ViewRequirementActivity,
+                                        requirementId
+                                    )
+                                )
+                            }
                         }
                     }
                 }

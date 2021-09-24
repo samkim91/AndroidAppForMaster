@@ -64,7 +64,7 @@ object RequestConsult : RequirementStatus() {
     override val inKorean = "상담요청"
     override val code = "RequestConsult"
     override val asInt = 102
-    override val introductionText = "견적서를 작성해주세요"
+    override val introductionText = "고객에게 연락해주세요"
 }
 // end region : Received Tab
 
