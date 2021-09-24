@@ -1,7 +1,6 @@
 package kr.co.soogong.master.ui.requirement.action.view
 
 import android.os.Bundle
-import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.view.isVisible
@@ -9,10 +8,12 @@ import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.dto.requirement.RequirementDto
 import kr.co.soogong.master.data.model.requirement.*
+import kr.co.soogong.master.data.model.requirement.estimation.EstimationResponseCode
 import kr.co.soogong.master.databinding.ActivityViewRequirementBinding
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.ui.dialog.popup.CustomDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData.Companion.getAcceptMeasureDialogData
+import kr.co.soogong.master.ui.dialog.popup.DialogData.Companion.getExpiredRequestConsultDialogData
 import kr.co.soogong.master.ui.dialog.popup.DialogData.Companion.getRefuseEstimateDialogData
 import kr.co.soogong.master.ui.dialog.popup.DialogData.Companion.getRefuseMeasureDialogData
 import kr.co.soogong.master.ui.dialog.popup.DialogData.Companion.getRequestConsultAlertDialogData
@@ -82,10 +83,11 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
     private fun registerEventObserve() {
         Timber.tag(TAG).d("registerEventObserve: ")
         viewModel.requirement.observe(this@ViewRequirementActivity, { requirement ->
+            if (!isValidRequirement(requirement)) return@observe
             setLayout(requirement)
             setButtons(requirement)
             binding.requirementStatus.requirementDto = requirement
-            setSpecificLayout(requirement)
+            setLayoutForRequestConsult(requirement)
         })
 
         viewModel.action.observe(this@ViewRequirementActivity, EventObserver { event ->
@@ -117,19 +119,33 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
         })
     }
 
-    private fun setSpecificLayout(requirement: RequirementDto) {
+    private fun setLayoutForRequestConsult(requirement: RequirementDto) {
         (RequirementStatus.getStatusFromRequirement(requirement) == RequestConsult).let { boolean ->
             binding.callToCustomerButton.isVisible = boolean
 
             if (boolean) {
                 val dialog = CustomDialog.newInstance(
                     dialogData = getRequestConsultAlertDialogData(this),
-                    yesClick = { },
-                    noClick = { }
+                    yesClick = {},
+                    noClick = {}
                 )
                 dialog.show(supportFragmentManager, dialog.tag)
             }
         }
+    }
+
+    private fun isValidRequirement(requirement: RequirementDto): Boolean {
+        if (requirement.estimationDto?.masterResponseCode == EstimationResponseCode.EXPIRED) {
+            val dialog = CustomDialog.newInstance(
+                dialogData = getExpiredRequestConsultDialogData(this),
+                yesClick = { onBackPressed() },
+                noClick = {}
+            )
+            dialog.isCancelable = false
+            dialog.show(supportFragmentManager, dialog.tag)
+            return false
+        }
+        return true
     }
 
     override fun onStart() {

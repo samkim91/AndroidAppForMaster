@@ -34,6 +34,14 @@ data class DialogData(
                 null, context.getColor(R.color.text_basic_color)
             )
 
+        fun getExpiredRequestConsultDialogData(context: Context) =
+            DialogData(
+                "이미 마감된 문의입니다.", context.getColor(R.color.text_basic_color),
+                null, context.getColor(R.color.text_alert_color),
+                "닫기", context.getColor(R.color.text_basic_color),
+                null, context.getColor(R.color.text_basic_color)
+            )
+
         fun getAcceptMeasureDialogData(context: Context) =
             DialogData(
                 "현장 실측 요청을 수락하시겠어요?", context.getColor(R.color.text_basic_color),

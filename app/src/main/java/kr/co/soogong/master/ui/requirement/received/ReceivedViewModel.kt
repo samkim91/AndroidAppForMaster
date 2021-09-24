@@ -36,7 +36,7 @@ class ReceivedViewModel @Inject constructor(
 
         getRequirementCardsUseCase(
             when (_index.value) {
-                1, 3 -> listOf(Requested.code)
+                1 -> listOf(Requested.code)
                 2 -> listOf(Estimated.code)
                 else -> receivedCodes
             }
