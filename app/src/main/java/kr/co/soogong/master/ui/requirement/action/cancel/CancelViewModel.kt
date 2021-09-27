@@ -39,7 +39,7 @@ class CancelViewModel @Inject constructor(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
-                onNext = {
+                onSuccess = {
                     Timber.tag(TAG).d("requestRequirement successfully: $it")
                     _requirement.value = it
                 },

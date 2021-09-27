@@ -45,7 +45,7 @@ class ViewRequirementViewModel @Inject constructor(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
-                onNext = {
+                onSuccess = {
                     Timber.tag(TAG).d("requestRequirement successfully: $it")
                     if (it.estimationDto?.masterResponseCode == EstimationResponseCode.REFUSED) {
                         Timber.tag(TAG).d("invalid requirement: ${it.estimationDto.masterResponseCode}")

@@ -1,7 +1,7 @@
 package kr.co.soogong.master.domain.usecase.requirement
 
 import dagger.Reusable
-import io.reactivex.Flowable
+import io.reactivex.Single
 import kr.co.soogong.master.data.dto.requirement.RequirementDto
 import kr.co.soogong.master.data.repository.RequirementRepository
 import javax.inject.Inject
@@ -10,7 +10,7 @@ import javax.inject.Inject
 class GetRequirementUseCase @Inject constructor(
     private val requirementRepository: RequirementRepository,
 ) {
-    operator fun invoke(requirementId: Int): Flowable<RequirementDto> {
+    operator fun invoke(requirementId: Int): Single<RequirementDto> {
         return requirementRepository.getRequirementById(requirementId)
     }
 }

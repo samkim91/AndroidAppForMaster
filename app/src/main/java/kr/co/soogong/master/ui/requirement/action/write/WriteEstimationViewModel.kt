@@ -55,7 +55,7 @@ class WriteEstimationViewModel @Inject constructor(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
-                onNext = {
+                onSuccess = {
                     _requirement.value = it
                 },
                 onError = {
