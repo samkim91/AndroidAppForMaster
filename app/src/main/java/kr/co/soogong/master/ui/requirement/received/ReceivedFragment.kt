@@ -3,7 +3,6 @@ package kr.co.soogong.master.ui.requirement.received
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
-import com.google.android.material.chip.Chip
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.model.profile.NotApprovedCodeTable

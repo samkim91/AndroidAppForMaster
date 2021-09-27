@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
 
     <data>
 
@@ -23,7 +25,6 @@
             android:layout_marginBottom="@dimen/gap_11"
             app:cancelIconVisibility="@{false}"
             app:cancelTextVisibility="@{false}"
-            app:layout_constraintBottom_toTopOf="@id/main_tabs"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -34,7 +35,6 @@
             android:id="@+id/main_tabs"
             android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@id/main_view_pager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/search_bar"
@@ -44,81 +44,25 @@
             app:tabTextAppearance="@style/text_style_16sp.medium"
             app:tabTextColor="@color/color_404040" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/line"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/gap_1"
-            android:background="@color/line_color"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/main_tabs" />
-
         <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/main_view_pager"
+            android:id="@+id/requirements_view_pager"
             android:layout_width="@dimen/gap_0"
             android:layout_height="@dimen/gap_0"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/line" />
+            app:layout_constraintTop_toBottomOf="@id/main_tabs" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/bottom_view_container"
+        <include
+            android:id="@+id/bottom_view"
+            layout="@layout/view_required_information_bottom_alert"
             android:layout_width="match_parent"
             android:layout_height="@dimen/gap_72"
-            android:background="@drawable/shape_dark_green_transparent_background_radius_top20"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/bottom_view_text"
-            style="@style/text_style_14sp.medium"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/alert_text_to_fill_up_required_information"
-            android:textColor="@color/color_FFFFFF"
-            app:layout_constraintBottom_toBottomOf="@id/bottom_view_container"
-            app:layout_constraintEnd_toStartOf="@id/bottom_view_button"
-            app:layout_constraintStart_toStartOf="@id/bottom_view_container"
-            app:layout_constraintTop_toTopOf="@id/bottom_view_container" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/bottom_view_button"
-            android:layout_width="@dimen/gap_92"
-            android:layout_height="@dimen/gap_37"
-            android:background="@drawable/shape_white_background_radius20"
-            app:layout_constraintBottom_toBottomOf="@id/bottom_view_container"
-            app:layout_constraintEnd_toEndOf="@id/bottom_view_container"
-            app:layout_constraintStart_toEndOf="@id/bottom_view_text"
-            app:layout_constraintTop_toTopOf="@id/bottom_view_container" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/bottom_view_button_text"
-            style="@style/text_style_14sp.bold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/bottom_view_for_filling_profile_info_button_text"
-            android:textColor="@color/color_00664E"
-            app:layout_constraintBottom_toBottomOf="@id/bottom_view_button"
-            app:layout_constraintEnd_toStartOf="@id/bottom_view_button_arrow"
-            app:layout_constraintStart_toStartOf="@id/bottom_view_button"
-            app:layout_constraintTop_toTopOf="@id/bottom_view_button" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/bottom_view_button_arrow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_green_arrow_right"
-            app:layout_constraintBottom_toBottomOf="@id/bottom_view_button_text"
-            app:layout_constraintEnd_toEndOf="@id/bottom_view_button"
-            app:layout_constraintStart_toEndOf="@id/bottom_view_button_text"
-            app:layout_constraintTop_toTopOf="@id/bottom_view_button_text" />
-
-        <androidx.constraintlayout.widget.Group
-            android:id="@+id/bottom_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:constraint_referenced_ids="bottom_view_container, bottom_view_text, bottom_view_button, bottom_view_button_text, bottom_view_button_arrow" />
+            android:visibility="gone"
+            tools:visibility="visible"
+            />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
