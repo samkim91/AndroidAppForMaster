@@ -53,6 +53,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/canceled_options"
                     app:limitedCount='@{100}'
+                    app:alertText="@{@string/alert_required_field}"
                     app:content="@={vm.canceledDescription}"
                     app:title="@{@string/asking_write_detail_label}" />
             </androidx.constraintlayout.widget.ConstraintLayout>

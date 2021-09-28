@@ -163,6 +163,7 @@
 
     <string name="progress_starting_text">문의접수</string>
     <string name="progress_ending_text">시공완료</string>
+    <string name="progress_ending_text_with_date">%s 시공완료</string>
     <string name="consult_with_customer_button_text">고객과 상담하기</string>
 
     <!-- Transmission Card & Done Card in View Estimate -->

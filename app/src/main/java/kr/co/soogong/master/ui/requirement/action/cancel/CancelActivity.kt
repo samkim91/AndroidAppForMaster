@@ -6,6 +6,7 @@ import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.model.profile.CompareCodeTable
+import kr.co.soogong.master.data.model.requirement.estimation.EstimationResponseCode
 import kr.co.soogong.master.data.model.requirement.repair.*
 import kr.co.soogong.master.databinding.ActivityCancelBinding
 import kr.co.soogong.master.ui.base.BaseActivity
@@ -50,17 +51,20 @@ class CancelActivity : BaseActivity<ActivityCancelBinding>(
                         canceledOptions.alertVisible = it.isNullOrEmpty()
                     })
 
-                    if (canceledOptions.alertVisible) return@setOnClickListener
+                    if (canceledOptions.alertVisible || cancelOptionDetail.alertVisible) return@setOnClickListener
 
-                    viewModel.saveRepair()
+                    if (viewModel.requirement.value?.estimationDto?.masterResponseCode == EstimationResponseCode.ACCEPTED) viewModel.saveRepair() else viewModel.respondToMeasure()
                 }
 
                 CanceledReasonRadioGroupHelper(this@CancelActivity, canceledOptions)
 
                 canceledOptions.addCheckedChangeListener { group, checkedId ->
-                    val index = group.indexOfChild(group.findViewById<RadioButton>(checkedId))
-                    viewModel.canceledCode.value =
-                        CanceledReasonRadioGroupHelper.canceledReasons[index].code
+                    group.indexOfChild(group.findViewById<RadioButton>(checkedId)).let {
+                        viewModel.canceledCode.value =
+                            CanceledReasonRadioGroupHelper.canceledReasons[it].code
+
+                        cancelOptionDetail.alertVisible = it == CanceledReasonRadioGroupHelper.canceledReasons.lastIndex
+                    }
                 }
             }
         }

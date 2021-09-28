@@ -109,6 +109,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/gap_14"
+            android:visibility="gone"
             app:buttonText="@{@string/consult_with_customer_button_text}"
             app:layout_constraintBottom_toTopOf="@id/requirement_due_date"
             app:layout_constraintEnd_toEndOf="parent"
