@@ -10,8 +10,11 @@ import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.dto.requirement.RequirementDto
 import kr.co.soogong.master.data.dto.requirement.estimation.EstimationDto
 import kr.co.soogong.master.data.dto.requirement.repair.RepairDto
+import kr.co.soogong.master.data.model.profile.NotApprovedCodeTable
+import kr.co.soogong.master.data.model.profile.RequestApproveCodeTable
 import kr.co.soogong.master.data.model.profile.Review
 import kr.co.soogong.master.data.model.requirement.estimation.EstimationResponseCode
+import kr.co.soogong.master.domain.usecase.profile.GetMasterSimpleInfoUseCase
 import kr.co.soogong.master.domain.usecase.requirement.*
 import kr.co.soogong.master.ui.base.BaseViewModel
 import kr.co.soogong.master.uihelper.requirment.action.ViewRequirementActivityHelper
@@ -25,6 +28,7 @@ class ViewRequirementViewModel @Inject constructor(
     private val respondToMeasureUseCase: RespondToMeasureUseCase,
     private val callToClientUseCase: CallToClientUseCase,
     private val requestReviewUseCase: RequestReviewUseCase,
+    private val getMasterSimpleInfoUseCase: GetMasterSimpleInfoUseCase,
     val savedStateHandle: SavedStateHandle
 ) : BaseViewModel() {
     // Note : activity 에서 viewModel 로 데이터 넘기는 법. savedStateHandle 에서 가져온다.
@@ -167,6 +171,25 @@ class ViewRequirementViewModel @Inject constructor(
             ).addToDisposable()
     }
 
+    fun requestMasterSimpleInfo() {
+        Timber.tag(TAG).d("requestMasterSimpleInfo: ")
+        getMasterSimpleInfoUseCase()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeBy(
+                onSuccess = { masterDto ->
+                    Timber.tag(TAG).d("requestMasterSimpleInfo successful: $masterDto")
+                    masterDto?.approvedStatus.let {
+                        if (it == NotApprovedCodeTable.code || it == RequestApproveCodeTable.code) setAction(NOT_APPROVED_MASTER)
+                    }
+                },
+                onError = {
+                    Timber.tag(TAG).d("requestMasterSimpleInfo failed: $it")
+                    setAction(REQUEST_FAILED)
+                }
+            ).addToDisposable()
+    }
+
     companion object {
         private const val TAG = "ViewRequirementViewModel"
         const val REFUSE_TO_ESTIMATE_SUCCESSFULLY = "REFUSE_TO_ESTIMATE_SUCCESSFULLY"
@@ -174,6 +197,7 @@ class ViewRequirementViewModel @Inject constructor(
         const val RESPOND_TO_MEASURE_SUCCESSFULLY = "RESPOND_TO_MEASURE_SUCCESSFULLY"
         const val CALL_TO_CUSTOMER_SUCCESSFULLY = "CALL_TO_CUSTOMER_SUCCESSFULLY"
         const val ASK_FOR_REVIEW_SUCCESSFULLY = "ASK_FOR_REVIEW_SUCCESSFULLY"
+        const val NOT_APPROVED_MASTER = "NOT_APPROVED_MASTER"
         const val REQUEST_FAILED = "REQUEST_FAILED"
     }
 }

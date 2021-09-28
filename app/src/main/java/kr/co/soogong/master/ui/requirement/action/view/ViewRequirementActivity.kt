@@ -20,6 +20,7 @@ import kr.co.soogong.master.ui.dialog.popup.DialogData.Companion.getRequestConsu
 import kr.co.soogong.master.ui.requirement.action.view.ViewRequirementViewModel.Companion.ASK_FOR_REVIEW_SUCCESSFULLY
 import kr.co.soogong.master.ui.requirement.action.view.ViewRequirementViewModel.Companion.CALL_TO_CUSTOMER_SUCCESSFULLY
 import kr.co.soogong.master.ui.requirement.action.view.ViewRequirementViewModel.Companion.INVALID_REQUIREMENT
+import kr.co.soogong.master.ui.requirement.action.view.ViewRequirementViewModel.Companion.NOT_APPROVED_MASTER
 import kr.co.soogong.master.ui.requirement.action.view.ViewRequirementViewModel.Companion.REFUSE_TO_ESTIMATE_SUCCESSFULLY
 import kr.co.soogong.master.ui.requirement.action.view.ViewRequirementViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.ui.requirement.action.view.ViewRequirementViewModel.Companion.RESPOND_TO_MEASURE_SUCCESSFULLY
@@ -112,6 +113,10 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                     setReviewAsked()
                     toast(getString(R.string.ask_for_review_successful))
                 }
+                NOT_APPROVED_MASTER -> {
+                    toast(getString(R.string.not_approved_master))
+                    onBackPressed()
+                }
                 REQUEST_FAILED -> {
                     toast(getString(R.string.error_message_of_request_failed))
                 }
@@ -152,6 +157,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
     override fun onStart() {
         super.onStart()
         Timber.tag(TAG).d("onStart: ")
+        viewModel.requestMasterSimpleInfo()
         viewModel.requestRequirement()
     }
 
