@@ -20,12 +20,5 @@ class SaveMasterBasicDataInSharedUseCase @Inject constructor(
         sharedPreferences.edit()
             .putString(AppSharedPreferenceContract.MASTER_UID, masterDto.uid!!)
             .apply()
-
-        // save master approved status
-        sharedPreferences.edit()
-            .putString(
-                AppSharedPreferenceContract.MASTER_APPROVED_STATUS,
-                masterDto.approvedStatus
-            ).apply()
     }
 }

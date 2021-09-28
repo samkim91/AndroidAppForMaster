@@ -12,7 +12,7 @@ import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.dialog.popup.CustomDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData
 import kr.co.soogong.master.ui.requirement.RequirementChipGroupHelper
-import kr.co.soogong.master.ui.requirement.received.ReceivedViewModel.Companion.REQUEST_LIST_FAILED
+import kr.co.soogong.master.ui.requirement.received.ReceivedViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.ui.requirement.receivedStatus
 import kr.co.soogong.master.uihelper.profile.EditRequiredInformationActivityHelper
 import kr.co.soogong.master.uihelper.requirment.RequirementsBadge
@@ -48,7 +48,7 @@ class ReceivedFragment : BaseFragment<FragmentRequirementReceivedBinding>(
 
             receivedList.adapter =
                 ReceivedAdapter(cardClickListener = { requirementId ->
-                    viewModel.masterApprovedStatus.value?.let {
+                    viewModel.masterSimpleInfo.value?.approvedStatus.let {
                         when (it) {
                             // 미승인 상태이면, 필수정보를 채우도록 이동
                             NotApprovedCodeTable.code -> {
@@ -92,7 +92,7 @@ class ReceivedFragment : BaseFragment<FragmentRequirementReceivedBinding>(
     override fun onResume() {
         super.onResume()
         Timber.tag(TAG).d("onResume: ")
-        viewModel.requestMasterApprovedStatus()
+        viewModel.requestMasterSimpleInfo()
         viewModel.requestList()
     }
 
@@ -111,7 +111,7 @@ class ReceivedFragment : BaseFragment<FragmentRequirementReceivedBinding>(
                 ReceivedViewModel.BADGE_UPDATE -> {
                     binding.receivedList.scrollToPosition(0)
                 }
-                REQUEST_LIST_FAILED -> {
+                REQUEST_FAILED -> {
                     requireContext().toast(getString(R.string.error_message_of_request_failed))
                 }
             }
