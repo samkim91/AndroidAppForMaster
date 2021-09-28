@@ -25,12 +25,6 @@ class RequirementRepository @Inject constructor(
 
     fun getRequirementById(requirementId: Int): Single<RequirementDto> {
         Timber.tag(TAG).d("getRequirementFromAll start: $requirementId")
-//        return getRequirementFromServer(requirementId)
-//            .subscribeOn(Schedulers.io())
-//            .timeout(3, TimeUnit.SECONDS)
-//            .doOnError { Timber.tag(TAG).d("getRequirementById failed: $it") }
-//            .onErrorResumeNext(getRequirementFromLocal(requirementId))
-
         return getRequirementFromServer(requirementId)
             .doOnError { Timber.tag(TAG).d("getRequirementById failed: $it") }
             .onErrorResumeNext(getRequirementFromLocal(requirementId))

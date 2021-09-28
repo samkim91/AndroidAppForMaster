@@ -387,6 +387,7 @@ class DoneViewHolder(
             })
 
             rightButton.isVisible = true
+            rightButton.isEnabled = true
             rightButton.setText(R.string.requirements_card_review_button)
 
             rightButton.setOnClickListener {

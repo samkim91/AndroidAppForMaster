@@ -69,6 +69,7 @@ class CustomDialog() : DialogFragment() {
 
                 if (dialogData.negativeBtnText.isNullOrEmpty()) {
                     btnNo.isVisible = false
+                    line.isVisible = false
                 } else {
                     btnNo.text = dialogData.negativeBtnText
                     btnNo.setTextColor(dialogData.negativeBtnTextColor)
@@ -80,6 +81,7 @@ class CustomDialog() : DialogFragment() {
 
                 if (dialogData.positiveBtnText.isNullOrEmpty()) {
                     btnYes.isVisible = false
+                    line.isVisible = false
                 } else {
                     btnYes.text = dialogData.positiveBtnText
                     btnYes.setTextColor(dialogData.positiveBtnTextColor)

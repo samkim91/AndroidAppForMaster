@@ -38,7 +38,7 @@ class RequirementFragment : BaseFragment<FragmentRequirementBinding>(
         bind {
             lifecycleOwner = viewLifecycleOwner
 
-            with(mainViewPager) {
+            with(requirementsViewPager) {
                 isUserInputEnabled = false
                 adapter = RequirementPagerAdapter(this@RequirementFragment)
                 TabLayoutMediator(mainTabs, this) { tab, position ->
@@ -50,7 +50,7 @@ class RequirementFragment : BaseFragment<FragmentRequirementBinding>(
                 startActivity(SearchActivityHelper.getIntent(requireContext()))
             }
 
-            bottomViewContainer.setOnClickListener {
+            bottomView.container.setOnClickListener {
                 startActivity(EditRequiredInformationActivityHelper.getIntent(requireContext()))
             }
         }
@@ -61,7 +61,7 @@ class RequirementFragment : BaseFragment<FragmentRequirementBinding>(
         Timber.tag(TAG).d("onResume: ")
         bind {
             // 필수 정보를 입력하라는 bottom view 를 보여줄지 결정
-            bottomView.isVisible =
+            bottomView.root.isVisible =
                 getMasterApprovedStatusUseCase().let { it == NotApprovedCodeTable.code || it == RequestApproveCodeTable.code }
         }
     }
