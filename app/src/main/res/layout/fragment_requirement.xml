@@ -15,6 +15,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+<!--        <kr.co.soogong.master.ui.widget.TitleSwitchCompat-->
+<!--            android:id="@+id/accepting_measurement_switch"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:underLine="@{false}" />-->
+
         <kr.co.soogong.master.ui.widget.SearchBar
             android:id="@+id/search_bar"
             android:layout_width="match_parent"

@@ -76,6 +76,9 @@
     <string name="requirements_progress_tab_name">진행중</string>
     <string name="requirements_done_tab_name">완료·취소</string>
 
+    <string name="accepting_request_measurement">현장 실측 요청건 받는 중</string>
+    <string name="holding_request_measurement">버튼을 눌러 현장 실측 요청건을 받아보세요 >></string>
+
     <!-- Requirements : Request -->
     <string name="requirements_request_none_status">아직 들어온 문의가 없습니다.</string>
 
