@@ -280,6 +280,14 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                         isSpread = true,
                         includingCancel = true
                     )
+                    RequirementDrawerContainer.addDrawerContainer(
+                        context = this@ViewRequirementActivity,
+                        container = flexibleContainer,
+                        requirementDto = requirement,
+                        contentType = REQUIREMENT_TYPE,
+                        isSpread = false,
+                        includingCancel = false
+                    )
                 }
 
                 Done -> {
