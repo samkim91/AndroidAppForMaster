@@ -1,5 +1,6 @@
 package kr.co.soogong.master.ui.requirement.action.view
 
+import android.icu.text.SimpleDateFormat
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.widget.AppCompatButton
@@ -168,7 +169,20 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
             actionBar.title.text = requirement.address
 
             when (RequirementStatus.getStatusFromRequirement(requirement)) {
-                Requested, RequestConsult, RequestMeasure -> {
+                RequestMeasure -> {
+                    actionBar.root.findViewById<AppCompatButton>(R.id.button).isVisible = false
+                    // view : 고객 요청 내용(spread)
+                    RequirementDrawerContainer.addDrawerContainer(
+                        context = this@ViewRequirementActivity,
+                        container = flexibleContainer,
+                        requirementDto = requirement,
+                        contentType = REQUIREMENT_TYPE,
+                        isSpread = true,
+                        includingCancel = false
+                    )
+                }
+
+                Requested, RequestConsult -> {
                     actionBar.root.findViewById<AppCompatButton>(R.id.button).isVisible = true
                     (requirement.estimationDto?.masterResponseCode == EstimationResponseCode.ACCEPTED).let { accepted ->
                         if (accepted) {
@@ -322,6 +336,15 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                         isSpread = false,
                         includingCancel = false
                     )
+                    // 시공완료일
+                    requirementStatus.endingText = getString(
+                        R.string.progress_ending_text_with_date,
+                        SimpleDateFormat(
+                            "yyyy.MM.dd.",
+                            Locale.KOREA
+                        ).format(requirement.estimationDto?.repair?.actualDate)
+                    )
+                    requirementStatus.endingTextColor = getColor(R.color.color_0C5E47)
                 }
 
                 Closed -> {
@@ -350,6 +373,15 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                         isSpread = false,
                         includingCancel = false
                     )
+                    // 시공완료일
+                    requirementStatus.endingText = getString(
+                        R.string.progress_ending_text_with_date,
+                        SimpleDateFormat(
+                            "yyyy.MM.dd.",
+                            Locale.KOREA
+                        ).format(requirement.estimationDto?.repair?.actualDate)
+                    )
+                    requirementStatus.endingTextColor = getColor(R.color.color_0C5E47)
                 }
 
                 Canceled -> {

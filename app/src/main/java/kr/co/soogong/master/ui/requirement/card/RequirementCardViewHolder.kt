@@ -25,6 +25,7 @@ abstract class RequirementCardViewHolder(
     open val binding: ViewHolderRequirementItemBinding,
 ) : RecyclerView.ViewHolder(binding.root) {
     val dateFormat = SimpleDateFormat("yyyy.MM.dd(E) - HH:mm", Locale.KOREA)
+    val dateFormatWithoutHour = SimpleDateFormat("yyyy.MM.dd(E)", Locale.KOREA)
     val moneyFormat = DecimalFormat("#,###")
 
     open fun bind(
@@ -381,7 +382,7 @@ class DoneViewHolder(
                     theme = GREEN_THEME,
                     type = CALENDAR_TYPE,
                     titleData = context.getString(R.string.requirements_card_done_date),
-                    contentData = dateFormat.format(requirementCard.estimationDto?.repair?.actualDate),
+                    contentData = dateFormatWithoutHour.format(requirementCard.estimationDto?.repair?.actualDate),
                     alertData = ""
                 )
             })
@@ -446,7 +447,7 @@ class ClosedViewHolder(
                     theme = GRAY_THEME,
                     type = CALENDAR_TYPE,
                     titleData = context.getString(R.string.requirements_card_done_date),
-                    contentData = dateFormat.format(requirementCard.estimationDto?.repair?.actualDate),
+                    contentData = dateFormatWithoutHour.format(requirementCard.estimationDto?.repair?.actualDate),
                     alertData = ""
                 )
             })

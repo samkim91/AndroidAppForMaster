@@ -39,11 +39,27 @@ class RequirementProgress @JvmOverloads constructor(
             binding.startingText.text = value
         }
 
+    var startingTextColor: Int? = null
+        set(value) {
+            value?.let {
+                field = it
+                binding.startingText.setTextColor(it)
+            }
+        }
+
     var endingText: String? = ""
         set(value) {
             field = value
             binding.endingText.isVisible = !value.isNullOrEmpty()
             binding.endingText.text = value
+        }
+
+    var endingTextColor: Int? = null
+        set(value) {
+            value?.let {
+                field = it
+                binding.endingText.setTextColor(it)
+            }
         }
 
     var progress: Int = Int.MIN_VALUE
@@ -133,7 +149,6 @@ class RequirementProgress @JvmOverloads constructor(
 //                    Timber.tag(TAG).d("position: $pos")
 //                    val width = seekBar!!.width - seekBar.paddingLeft - seekBar.paddingRight
 //                    val thumbsPos = (seekBar.paddingLeft + width * seekBar.progress / seekBar.max - 72).toFloat()
-
 
                     indicatorText.text = convertProgressToStatus(progress)
                 }
