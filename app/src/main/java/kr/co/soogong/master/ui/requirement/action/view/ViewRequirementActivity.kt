@@ -276,6 +276,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                 }
 
                 Measuring -> {
+                    actionBar.root.findViewById<AppCompatButton>(R.id.button).isVisible = true
                     // view : 고객요청(spread, includingCancel)
                     RequirementDrawerContainer.addDrawerContainer(
                         context = this@ViewRequirementActivity,
@@ -288,6 +289,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                 }
 
                 Measured -> {
+                    actionBar.root.findViewById<AppCompatButton>(R.id.button).isVisible = true
                     // view : 나의 실측 내용(spread, includingCancel), 고객요청
                     RequirementDrawerContainer.addDrawerContainer(
                         context = this@ViewRequirementActivity,

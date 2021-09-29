@@ -6,6 +6,8 @@ import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.model.profile.CompareCodeTable
+import kr.co.soogong.master.data.model.requirement.Measured
+import kr.co.soogong.master.data.model.requirement.Measuring
 import kr.co.soogong.master.data.model.requirement.RequirementCard
 import kr.co.soogong.master.databinding.FragmentRequirementProgressBinding
 import kr.co.soogong.master.ui.base.BaseFragment
@@ -58,12 +60,12 @@ class ProgressFragment : BaseFragment<FragmentRequirementProgressBinding>(
                         )
                     )
                 },
-                leftButtonClick = { keycode, number ->
+                leftButtonClick = { requirementId, number ->
                     val dialog =
                         CustomDialog.newInstance(getCallToCustomerDialogData(requireContext()),
                             yesClick = {
                                 viewModel.callToClient(
-                                    requirementId = keycode
+                                    requirementId = requirementId
                                 )
                                 startActivity(CallToCustomerHelper.getIntent(number.toString()))
                             },
@@ -80,10 +82,17 @@ class ProgressFragment : BaseFragment<FragmentRequirementProgressBinding>(
                                 requirementId
                             )
                         } else {
-                            MeasureActivityHelper.getIntent(
-                                requireContext(),
-                                requirementId
-                            )
+                            if (requirement.status == Measuring) {
+                                MeasureActivityHelper.getIntent(
+                                    requireContext(),
+                                    requirementId
+                                )
+                            } else {
+                                EndRepairActivityHelper.getIntent(
+                                    requireContext(),
+                                    requirementId
+                                )
+                            }
                         }
                     )
                 }

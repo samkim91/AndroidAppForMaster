@@ -76,6 +76,13 @@ class RequestedViewHolder(
                     alertData = context.getString(R.string.requirements_card_due_date_alert)
                 )
             })
+
+            rightButton.isVisible = true
+            rightButton.setText(R.string.repair_done_text)
+
+            rightButton.setOnClickListener {
+                rightButtonClickListener?.invoke(requirementCard.id, requirementCard)
+            }
         }
     }
 }
@@ -113,6 +120,13 @@ class EstimatedViewHolder(
                     alertData = context.getString(R.string.requirements_card_waiting_label),
                 )
             })
+
+            rightButton.isVisible = true
+            rightButton.setText(R.string.repair_done_text)
+
+            rightButton.setOnClickListener {
+                rightButtonClickListener?.invoke(requirementCard.id, requirementCard)
+            }
         }
     }
 }
@@ -164,6 +178,13 @@ class RequestConsultViewHolder(
                     alertData = context.getString(R.string.requirements_card_due_date_alert)
                 )
             })
+
+            rightButton.isVisible = true
+            rightButton.setText(R.string.repair_done_text)
+
+            rightButton.setOnClickListener {
+                rightButtonClickListener?.invoke(requirementCard.id, requirementCard)
+            }
         }
     }
 }
@@ -258,6 +279,13 @@ class MeasuredViewHolder(
 
             leftButton.setOnClickListener {
                 leftButtonClickListener?.invoke(requirementCard.id, requirementCard.tel)
+            }
+
+            rightButton.isVisible = true
+            rightButton.setText(R.string.repair_done_text)
+
+            rightButton.setOnClickListener {
+                rightButtonClickListener?.invoke(requirementCard.id, requirementCard)
             }
         }
     }
