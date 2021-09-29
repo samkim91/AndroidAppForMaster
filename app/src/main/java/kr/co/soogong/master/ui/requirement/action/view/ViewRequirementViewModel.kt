@@ -32,8 +32,7 @@ class ViewRequirementViewModel @Inject constructor(
     val savedStateHandle: SavedStateHandle
 ) : BaseViewModel() {
     // Note : activity 에서 viewModel 로 데이터 넘기는 법. savedStateHandle 에서 가져온다.
-    private val requirementId =
-        ViewRequirementActivityHelper.getRequirementIdFromSavedState(savedStateHandle)
+    val requirementId = MutableLiveData(ViewRequirementActivityHelper.getRequirementIdFromSavedState(savedStateHandle))
 
     private val _requirement = MutableLiveData<RequirementDto>()
     val requirement: LiveData<RequirementDto>
@@ -44,8 +43,8 @@ class ViewRequirementViewModel @Inject constructor(
         get() = _review
 
     fun requestRequirement() {
-        Timber.tag(TAG).d("requestRequirement: $requirementId")
-        getRequirementUseCase(requirementId)
+        Timber.tag(TAG).d("requestRequirement: ${requirementId.value}")
+        getRequirementUseCase(requirementId.value!!)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(

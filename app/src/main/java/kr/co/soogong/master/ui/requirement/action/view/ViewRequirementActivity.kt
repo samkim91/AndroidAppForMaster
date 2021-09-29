@@ -1,5 +1,6 @@
 package kr.co.soogong.master.ui.requirement.action.view
 
+import android.content.Intent
 import android.icu.text.SimpleDateFormat
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -42,10 +43,6 @@ import java.util.*
 class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
     R.layout.activity_view_requirement
 ) {
-    private val requirementId: Int by lazy {
-        ViewRequirementActivityHelper.getRequirementId(intent)
-    }
-
     private val viewModel: ViewRequirementViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -311,21 +308,13 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                 }
 
                 Done -> {
-                    // view : 나의 최종 시공 내용(spread), 나의 제안 내용, 고객 요청 내용
+                    // view : 나의 최종 시공 내용(spread), 고객 요청 내용
                     RequirementDrawerContainer.addDrawerContainer(
                         context = this@ViewRequirementActivity,
                         container = flexibleContainer,
                         requirementDto = requirement,
                         contentType = REPAIR_TYPE,
                         isSpread = true,
-                        includingCancel = false
-                    )
-                    RequirementDrawerContainer.addDrawerContainer(
-                        context = this@ViewRequirementActivity,
-                        container = flexibleContainer,
-                        requirementDto = requirement,
-                        contentType = ESTIMATION_TYPE,
-                        isSpread = false,
                         includingCancel = false
                     )
                     RequirementDrawerContainer.addDrawerContainer(
@@ -445,7 +434,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                                 startActivity(
                                     WriteEstimationActivityHelper.getIntent(
                                         this@ViewRequirementActivity,
-                                        requirementId
+                                        viewModel.requirementId.value!!
                                     )
                                 )
                             }
@@ -466,7 +455,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                                     startActivity(
                                         CancelActivityHelper.getIntent(
                                             this@ViewRequirementActivity,
-                                            requirementId
+                                            viewModel.requirementId.value!!
                                         )
                                     )
                                 },
@@ -518,7 +507,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                             startActivity(
                                 EndRepairActivityHelper.getIntent(
                                     this@ViewRequirementActivity,
-                                    requirementId
+                                    viewModel.requirementId.value!!
                                 )
                             )
                         }
@@ -551,7 +540,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                             startActivity(
                                 MeasureActivityHelper.getIntent(
                                     this@ViewRequirementActivity,
-                                    requirementId
+                                    viewModel.requirementId.value!!
                                 )
                             )
                         }
@@ -623,6 +612,15 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
     private fun setReviewAsked() {
         binding.rightButton.isEnabled = false
         binding.rightButton.text = getString(R.string.ask_for_review_successful)
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        // Note: ViewRequirement 화면에서 noti 로 해당 requirement 에 접근했을 때, 화면을 refresh 해주기 위함
+        intent?.let {
+            viewModel.requirementId.value = ViewRequirementActivityHelper.getRequirementId(it)
+        }
+        onStart()
     }
 
     companion object {
