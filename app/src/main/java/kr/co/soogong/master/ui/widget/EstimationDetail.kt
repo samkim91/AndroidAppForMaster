@@ -6,18 +6,12 @@ import android.icu.text.DecimalFormat
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.dto.requirement.RequirementDto
-import kr.co.soogong.master.data.dto.requirement.estimation.EstimationDto
-import kr.co.soogong.master.data.model.requirement.Closed
-import kr.co.soogong.master.data.model.requirement.Done
-import kr.co.soogong.master.data.model.requirement.RequirementStatus
 import kr.co.soogong.master.data.model.requirement.estimation.EstimationPriceTypeCode
 import kr.co.soogong.master.databinding.ViewEstimationDetailBinding
-import kr.co.soogong.master.utility.extension.dp
 
 class EstimationDetail @JvmOverloads constructor(
     context: Context,
@@ -147,15 +141,13 @@ class EstimationDetail @JvmOverloads constructor(
                     }
                 }
 
-                // TODO: 2021/08/24 estimation 에 실측정보가 온다면 이것을 그려줘야한다.
-//                if (estimation.measureAttachment != null) {
-//                    EstimationDetail(context).apply {
-//                        key = context.getString(R.string.estimation_total_cost)
-//                        image = estimation.measureAttachment
-//                    }.run {
-//                        container.addView(this)
-//                    }
-//                }
+                // 실측 사진
+                if (!estimation.measurementImages.isNullOrEmpty()) TitleRectangleImages(context).apply {
+                    question = context.getString(R.string.view_requirement_estimation_images_label)
+                    images = estimation.measurementImages
+                }.run {
+                    container.addView(this)
+                }
             }
         }
     }
