@@ -12,7 +12,7 @@ import kr.co.soogong.master.ui.image.RectangleImageAdapter
 import kr.co.soogong.master.ui.image.setList
 import kr.co.soogong.master.uihelper.image.ImageViewActivityHelper
 
-class RequirementImages @JvmOverloads constructor(
+class TitleRectangleImages @JvmOverloads constructor(
     context: Context,
     attributeSet: AttributeSet? = null,
     defStyle: Int = 0
@@ -22,18 +22,17 @@ class RequirementImages @JvmOverloads constructor(
 
     var question: String = ""
         set(value) {
+            if (value.isEmpty()) return
+
             field = value
             binding.question.text = value
         }
 
     var images: MutableList<AttachmentDto> = arrayListOf()
         set(value) {
-            field = value
-            if(value.isEmpty()) {
-                binding.question.isVisible = false
-                return
-            }
+            if (value.isEmpty()) return
 
+            field = value
             binding.imagesRecyclerView.adapter = RectangleImageAdapter(
                 cardClickListener = { position ->
                     context.startActivity(

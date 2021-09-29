@@ -64,12 +64,11 @@ class RequirementQna @JvmOverloads constructor(
             }
 
             // images 추가
-            requirementDto.images?.let {
-                RequirementImages(context).apply {
-                    images = it
-                }.run {
-                    container.addView(this)
-                }
+            if (!requirementDto.images.isNullOrEmpty()) TitleRectangleImages(context).apply {
+                question = context.getString(R.string.view_requirement_images_label)
+                images = requirementDto.images
+            }.run {
+                container.addView(this)
             }
 
             // 취소하기
