@@ -11,6 +11,7 @@ import kr.co.soogong.master.data.dto.requirement.RequirementDto
 import kr.co.soogong.master.data.dto.requirement.estimation.EstimationDto
 import kr.co.soogong.master.data.dto.requirement.repair.RepairDto
 import kr.co.soogong.master.data.model.requirement.estimation.EstimationResponseCode
+import kr.co.soogong.master.data.model.requirement.repair.OutOfContactClient
 import kr.co.soogong.master.domain.usecase.requirement.GetRequirementUseCase
 import kr.co.soogong.master.domain.usecase.requirement.RespondToMeasureUseCase
 import kr.co.soogong.master.domain.usecase.requirement.SaveRepairUseCase
@@ -34,7 +35,7 @@ class CancelViewModel @Inject constructor(
     val requirement: LiveData<RequirementDto>
         get() = _requirement
 
-    val canceledCode = MutableLiveData("")
+    val canceledCode = MutableLiveData(OutOfContactClient.code)
     val canceledDescription = MutableLiveData("")
 
     fun requestRequirement() {

@@ -49,6 +49,12 @@ class CancelActivity : BaseActivity<ActivityCancelBinding>(
                 button.setOnClickListener {
                     viewModel.canceledCode.observe(this@CancelActivity, {
                         canceledOptions.alertVisible = it.isNullOrEmpty()
+                        cancelOptionDetail.alertVisible = it == CanceledReasonRadioGroupHelper.canceledReasons.last().code
+                    })
+
+                    viewModel.canceledDescription.observe(this@CancelActivity, {
+                        cancelOptionDetail.alertVisible =
+                            viewModel.canceledCode.value == CanceledReasonRadioGroupHelper.canceledReasons.last().code && it.length < 10
                     })
 
                     if (canceledOptions.alertVisible || cancelOptionDetail.alertVisible) return@setOnClickListener
@@ -62,8 +68,6 @@ class CancelActivity : BaseActivity<ActivityCancelBinding>(
                     group.indexOfChild(group.findViewById<RadioButton>(checkedId)).let {
                         viewModel.canceledCode.value =
                             CanceledReasonRadioGroupHelper.canceledReasons[it].code
-
-                        cancelOptionDetail.alertVisible = it == CanceledReasonRadioGroupHelper.canceledReasons.lastIndex
                     }
                 }
             }
