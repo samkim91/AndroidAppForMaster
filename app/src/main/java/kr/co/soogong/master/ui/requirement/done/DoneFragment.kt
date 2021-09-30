@@ -45,18 +45,7 @@ class DoneFragment : BaseFragment<FragmentRequirementDoneBinding>(
             RequirementChipGroupHelper(layoutInflater, filterGroup, doneStatus)
             filterGroup.onCheckedChanged { index -> viewModel.onFilterChange(index) }
 
-            doneList.adapter = RequirementCardsAdapter(
-                onCardClicked = { requirementId ->
-                    startActivity(
-                        ViewRequirementActivityHelper.getIntent(
-                            requireContext(),
-                            requirementId,
-                        )
-                    )
-                },
-                onLeftButtonClicked = { },
-                onRightButtonClicked = { requirementCard -> viewModel.askForReview(requirementCard) }
-            )
+            doneList.adapter = RequirementCardsAdapter(requireContext(), childFragmentManager, viewModel)
         }
     }
 

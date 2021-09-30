@@ -48,57 +48,7 @@ class ReceivedFragment : BaseFragment<FragmentRequirementReceivedBinding>(
             RequirementChipGroupHelper(layoutInflater, filterGroup, receivedStatus)
             filterGroup.onCheckedChanged { index -> viewModel.onFilterChange(index) }
 
-            receivedList.adapter =
-                RequirementCardsAdapter(onCardClicked = { requirementId ->
-                    viewModel.masterSimpleInfo.value?.approvedStatus.let {
-                        when (it) {
-                            // 미승인 상태이면, 필수정보를 채우도록 이동
-                            NotApprovedCodeTable.code -> {
-                                val dialog =
-                                    CustomDialog.newInstance(
-                                        DialogData.getAskingFillProfileDialogData(requireContext()),
-                                        yesClick = {
-                                            startActivity(
-                                                EditRequiredInformationActivityHelper.getIntent(
-                                                    requireContext()
-                                                )
-                                            )
-                                        },
-                                        noClick = { })
-                                dialog.show(parentFragmentManager, dialog.tag)
-                            }
-                            // 승인요청 상태이면, 승인될 때까지 기다리라는 문구
-                            RequestApproveCodeTable.code -> {
-                                val dialog =
-                                    CustomDialog.newInstance(
-                                        DialogData.getWaitingUntilApprovalDialogData(
-                                            requireContext()
-                                        ),
-                                        yesClick = { },
-                                        noClick = { })
-                                dialog.show(parentFragmentManager, dialog.tag)
-                            }
-                            // 승인 상태이면, 문의 세부정보로 이동
-                            else -> {
-                                startActivity(
-                                    ViewRequirementActivityHelper.getIntent(
-                                        requireContext(),
-                                        requirementId,
-                                    )
-                                )
-                            }
-                        }
-                    }
-                },
-                    onLeftButtonClicked = { },
-                    onRightButtonClicked = { requirementCard ->
-                        startActivity(
-                            EndRepairActivityHelper.getIntent(
-                                requireContext(),
-                                requirementCard.id
-                            )
-                        )
-                    })
+            receivedList.adapter = RequirementCardsAdapter(requireContext(), childFragmentManager, viewModel)
         }
     }
 

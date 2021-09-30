@@ -47,22 +47,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>(
 
             setSpinnerSelectedListener()
 
-            requirements.adapter = RequirementCardsAdapter(
-                onCardClicked = { requirementId ->
-                    startActivity(
-                        ViewRequirementActivityHelper.getIntent(this@SearchActivity, requirementId)
-                    )
-                },
-                onLeftButtonClicked = { },
-                onRightButtonClicked = { requirementCard ->
-                    startActivity(
-                        EndRepairActivityHelper.getIntent(
-                            this@SearchActivity,
-                            requirementCard.id
-                        )
-                    )
-                }
-            )
+            requirements.adapter = RequirementCardsAdapter(this@SearchActivity, supportFragmentManager, viewModel)
         }
     }
 

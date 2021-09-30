@@ -50,47 +50,7 @@ class ProgressFragment : BaseFragment<FragmentRequirementProgressBinding>(
             RequirementChipGroupHelper(layoutInflater, filterGroup, progressStatus)
             filterGroup.onCheckedChanged { index -> viewModel.onFilterChange(index) }
 
-            progressList.adapter = RequirementCardsAdapter(
-                onCardClicked = { requirementId ->
-                    startActivity(
-                        ViewRequirementActivityHelper.getIntent(
-                            requireContext(),
-                            requirementId,
-                        )
-                    )
-                },
-                onLeftButtonClicked = { requirementCard ->
-                    val dialog =
-                        CustomDialog.newInstance(getCallToCustomerDialogData(requireContext()),
-                            yesClick = {
-                                viewModel.callToClient(requirementId = requirementCard.id)
-                                startActivity(CallToCustomerHelper.getIntent(requirementCard.tel.toString()))
-                            },
-                            noClick = { }
-                        )
-
-                    dialog.show(childFragmentManager, dialog.tag)
-                },
-                onRightButtonClicked = { requirementCard ->
-                    startActivity(
-                        if (requirementCard.typeCode == CompareCodeTable.code) {
-                            EndRepairActivityHelper.getIntent(requireContext(), requirementCard.id)
-                        } else {
-                            if (requirementCard.status == Measuring) {
-                                MeasureActivityHelper.getIntent(
-                                    requireContext(),
-                                    requirementCard.id
-                                )
-                            } else {
-                                EndRepairActivityHelper.getIntent(
-                                    requireContext(),
-                                    requirementCard.id
-                                )
-                            }
-                        }
-                    )
-                }
-            )
+            progressList.adapter = RequirementCardsAdapter(requireContext(), childFragmentManager, viewModel)
         }
     }
 
