@@ -5,6 +5,8 @@ import io.reactivex.Maybe
 import io.reactivex.Single
 import kr.co.soogong.master.data.dto.requirement.RequirementDto
 import kr.co.soogong.master.data.dto.requirement.estimation.EstimationDto
+import kr.co.soogong.master.data.dto.requirement.search.SearchDto
+import java.util.*
 
 @Dao
 interface RequirementDao {
@@ -16,6 +18,9 @@ interface RequirementDao {
 
     @Query("SELECT * FROM Requirement WHERE id = :id")
     fun getItem(id: Int): Single<RequirementDto>
+
+//    @Query("SELECT * FROM Requirement WHERE address LIKE :searchingText AND createdAt > :searchingPeriod ORDER BY id DESC")
+//    fun searchList(searchingText: String, searchingPeriod: Date): Single<List<RequirementDto>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(requirement: RequirementDto)

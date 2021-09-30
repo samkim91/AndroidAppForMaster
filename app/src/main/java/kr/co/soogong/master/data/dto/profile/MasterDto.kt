@@ -101,6 +101,9 @@ data class MasterDto(
     @SerializedName("marketingPushAtNight")
     val marketingPushAtNight: Boolean? = null,
 
+    @SerializedName("freeMeasureYn")
+    val freeMeasureYn: Boolean? = null,
+
     @SerializedName("masterConfigs")
     val masterConfigs: List<MasterConfigDto>? = null,
 

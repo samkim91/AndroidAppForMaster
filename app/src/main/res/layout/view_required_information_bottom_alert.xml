@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/gap_72"
+        android:background="@drawable/shape_dark_green_transparent_background_radius_top20">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/bottom_view_text"
+            style="@style/text_style_14sp.medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/alert_text_to_fill_up_required_information"
+            android:textColor="@color/color_FFFFFF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/bottom_view_button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/bottom_view_button"
+            android:layout_width="@dimen/gap_92"
+            android:layout_height="@dimen/gap_37"
+            android:background="@drawable/shape_white_background_radius20"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/bottom_view_text"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/bottom_view_button_text"
+            style="@style/text_style_14sp.bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/bottom_view_for_filling_profile_info_button_text"
+            android:textColor="@color/color_00664E"
+            app:layout_constraintBottom_toBottomOf="@id/bottom_view_button"
+            app:layout_constraintEnd_toStartOf="@id/bottom_view_button_arrow"
+            app:layout_constraintStart_toStartOf="@id/bottom_view_button"
+            app:layout_constraintTop_toTopOf="@id/bottom_view_button" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/bottom_view_button_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_green_arrow_right"
+            app:layout_constraintBottom_toBottomOf="@id/bottom_view_button_text"
+            app:layout_constraintEnd_toEndOf="@id/bottom_view_button"
+            app:layout_constraintStart_toEndOf="@id/bottom_view_button_text"
+            app:layout_constraintTop_toTopOf="@id/bottom_view_button_text" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

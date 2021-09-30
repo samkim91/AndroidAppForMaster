@@ -5,9 +5,10 @@
     <color name="transparent">#00FFFFFF</color>
 
     <color name="basic_white">#FFFFFF</color>
-    <color name="color_F8F8F8">#F8F8F8</color>
+
     <color name="color_F5F5F5">#F5F5F5</color>
     <color name="color_EEEEEE">#EEEEEE</color>
+    <color name="color_F2F2F2">#F2F2F2</color>
     <color name="color_E0E0E0">#E0E0E0</color>
     <color name="color_BDBDBD">#BDBDBD</color>
     <color name="color_9E9E9E">#9E9E9E</color>
@@ -17,6 +18,7 @@
     <color name="color_212121">#212121</color>
     <color name="color_121212">#121212</color>
     <color name="color_2E2E2E">#2E2E2E</color>
+    <color name="color_A8A8A8">#A8A8A8</color>
     <color name="color_22D47B">#22D47B</color>
     <color name="color_1FC472">#1FC472</color>
     <color name="color_8022D47B">#8022D47B</color>
@@ -27,6 +29,21 @@
     <color name="color_FFFFFF">#FFFFFF</color>
     <color name="color_00664E">#00664E</color>
     <color name="color_C4C4C4">#C4C4C4</color>
+    <color name="color_404040">#404040</color>
+    <color name="color_2196F3">#2196F3</color>
+    <color name="color_F0FCF2">#F0FCF2</color>
+    <color name="color_FFF2EB">#FFF2EB</color>
+    <color name="color_FFE1D2">#FFE1D2</color>
+    <color name="color_F8F8F8">#F8F8F8</color>
+    <color name="color_909090">#909090</color>
+    <color name="color_0C5E47">#0C5E47</color>
+    <color name="color_D4FADB">#D4FADB</color>
+    <color name="color_1FB571">#1FB571</color>
+    <color name="color_CECECE">#CECECE</color>
+    <color name="color_FAD8C5">#FAD8C5</color>
+    <color name="color_000000">#000000</color>
+    <color name="color_1B8C61">#1B8C61</color>
+    <color name="color_08362F">#08362F</color>
 
     <color name="text_basic_color">@color/color_121212</color>
     <color name="text_primary_color">@color/color_616161</color>
@@ -35,7 +52,8 @@
     <color name="text_kakao_color">#381E1E</color>
 
     <color name="gray_background_color">#F5F5F5</color>
-    <color name="line_color">@color/color_E0E0E0</color>
+    <color name="line_color">#E3E3E3</color>
+    <color name="F2F2F2">#F2F2F2</color>
     <color name="color_kakao">#FFE600</color>
 
     <!--  SignUp  -->

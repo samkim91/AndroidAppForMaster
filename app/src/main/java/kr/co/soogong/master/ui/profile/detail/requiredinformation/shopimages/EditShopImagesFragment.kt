@@ -50,7 +50,7 @@ class EditShopImagesFragment : BaseFragment<FragmentEditShopImagesBinding>(
                             10 - viewModel.shopImages.getItemCount()
 
                         TedImagePicker.with(requireContext())
-                            .buttonBackground(R.drawable.shape_fill_green_background)
+                            .buttonBackground(R.drawable.shape_green_background_radius8)
                             .max(
                                 availableImagesCount,
                                 resources.getString(R.string.maximum_images_count)
@@ -87,7 +87,7 @@ class EditShopImagesFragment : BaseFragment<FragmentEditShopImagesBinding>(
 
             defaultButton.setOnClickListener {
                 if (viewModel.profile.value?.approvedStatus == ApprovedCodeTable.code) {
-                    val dialog = CustomDialog(
+                    val dialog = CustomDialog.newInstance(
                         dialogData = DialogData.getConfirmingForRequiredDialogData(requireContext()),
                         yesClick = {
                             loading.show(parentFragmentManager, loading.tag)

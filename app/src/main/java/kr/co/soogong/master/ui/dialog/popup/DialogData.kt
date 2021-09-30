@@ -1,24 +1,59 @@
 package kr.co.soogong.master.ui.dialog.popup
 
 import android.content.Context
+import android.os.Parcelable
 import androidx.annotation.ColorInt
+import kotlinx.parcelize.Parcelize
 import kr.co.soogong.master.R
 
+@Parcelize
 data class DialogData(
-    var title: String?,
-    @ColorInt var titleTxtColor: Int,
-    var description: String?,
-    @ColorInt var descriptionTxtColor: Int,
-    var positiveBtnText: String?,
-    @ColorInt var positiveBtnTextColor: Int,
-    var negativeBtnText: String?,
-    @ColorInt var negativeBtnTextColor: Int
-) {
+    val title: String?,
+    @ColorInt val titleTxtColor: Int,
+    val description: String?,
+    @ColorInt val descriptionTxtColor: Int,
+    val positiveBtnText: String?,
+    @ColorInt val positiveBtnTextColor: Int,
+    val negativeBtnText: String?,
+    @ColorInt val negativeBtnTextColor: Int
+) : Parcelable {
     companion object {
         fun getRefuseEstimateDialogData(context: Context) =
             DialogData(
                 "견적을 내기 어려우신가요?", context.getColor(R.color.text_basic_color),
                 "해당 문의가 삭제됩니다.", context.getColor(R.color.text_alert_color),
+                "네", context.getColor(R.color.text_basic_color),
+                "아니요", context.getColor(R.color.text_basic_color)
+            )
+
+        fun getRequestConsultAlertDialogData(context: Context) =
+            DialogData(
+                "고객님이 상세상담 통화를 요청하셨어요.\n고객님과 빠르게 통화하고 시공 가능성을\n높여보세요.", context.getColor(R.color.text_basic_color),
+                "24시간동안 통화를 하지 않을 경우\n배정에 불이익이 있을 수 있어요.", context.getColor(R.color.text_alert_color),
+                "확인", context.getColor(R.color.text_basic_color),
+                null, context.getColor(R.color.text_basic_color)
+            )
+
+        fun getExpiredRequestConsultDialogData(context: Context) =
+            DialogData(
+                "이미 마감된 문의입니다.", context.getColor(R.color.text_basic_color),
+                null, context.getColor(R.color.text_alert_color),
+                "닫기", context.getColor(R.color.text_basic_color),
+                null, context.getColor(R.color.text_basic_color)
+            )
+
+        fun getAcceptMeasureDialogData(context: Context) =
+            DialogData(
+                "현장 실측 요청을 수락하시겠어요?", context.getColor(R.color.text_basic_color),
+                "수락 후 고객과 통화해\n정확한 시공 내용을 파악해주세요.", context.getColor(R.color.color_1FC472),
+                "네", context.getColor(R.color.text_basic_color),
+                "아니요", context.getColor(R.color.text_basic_color)
+            )
+
+        fun getRefuseMeasureDialogData(context: Context) =
+            DialogData(
+                "실측을 포기하시겠어요?", context.getColor(R.color.text_basic_color),
+                null, context.getColor(R.color.color_1FC472),
                 "네", context.getColor(R.color.text_basic_color),
                 "아니요", context.getColor(R.color.text_basic_color)
             )
@@ -65,10 +100,14 @@ data class DialogData(
 
         fun getAskingFillProfileDialogData(context: Context) =
             DialogData(
-                "문의를 처리하려면\n필수 정보 등록이 필요해요.\n지금 등록하시겠어요?", context.getColor(R.color.text_basic_color),
-                null, context.getColor(R.color.text_alert_color),
-                "네", context.getColor(R.color.text_basic_color),
-                "아니요", context.getColor(R.color.text_basic_color)
+                "문의를 처리하려면\n필수 정보 등록이 필요해요.\n지금 등록하시겠어요?",
+                context.getColor(R.color.text_basic_color),
+                null,
+                context.getColor(R.color.text_alert_color),
+                "네",
+                context.getColor(R.color.text_basic_color),
+                "아니요",
+                context.getColor(R.color.text_basic_color)
             )
 
         fun getWaitingUntilApprovalDialogData(context: Context) =
@@ -76,7 +115,7 @@ data class DialogData(
                 "승인이 완료되어야\n문의 처리가 가능해요.", context.getColor(R.color.text_basic_color),
                 "승인이 완료되면 알림톡으로\n바로 알려드릴게요!", context.getColor(R.color.color_1FC472),
                 "확인", context.getColor(R.color.text_basic_color),
-                "취소", context.getColor(R.color.text_basic_color)
+                null, context.getColor(R.color.text_basic_color)
             )
 
         fun getAskingDeletePortfolioDialogData(context: Context) =
@@ -97,10 +136,14 @@ data class DialogData(
 
         fun getConfirmingForRequiredDialogData(context: Context) =
             DialogData(
-                "해당 정보를 수정하시면,\n수공에서 승인하기 전까지 서비스 이용이 제한됩니다.", context.getColor(R.color.text_basic_color),
-                null, context.getColor(R.color.text_alert_color),
-                "확인", context.getColor(R.color.text_basic_color),
-                "취소", context.getColor(R.color.text_basic_color)
+                "해당 정보를 수정하시면,\n수공에서 승인하기 전까지 서비스 이용이 제한됩니다.",
+                context.getColor(R.color.text_basic_color),
+                null,
+                context.getColor(R.color.text_alert_color),
+                "확인",
+                context.getColor(R.color.text_basic_color),
+                "취소",
+                context.getColor(R.color.text_basic_color)
             )
     }
 }

@@ -4,11 +4,11 @@
 
     <TextView
         android:id="@+id/address"
-        style="@style/medium_text_style.regular"
+        style="@style/text_style_16sp.regular"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginTop="8dp"
-        android:background="@drawable/shape_fill_white_background"
+        android:background="@drawable/shape_white_background_gray_border_radius8"
         android:gravity="center"
         android:textColor="@color/primary_text_color"
         android:visibility="visible"

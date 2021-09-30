@@ -68,69 +68,104 @@
     <string name="bottom_view_for_filling_profile_info_button_text">등록하기</string>
     <string name="alert_text_to_fill_up_required_information"><b>필수 정보를 모두 등록</b>하고, 승인이 완료되면\n<b>문의 처리가 가능</b>합니다!</string>
 
+    <string name="cancel_text">취소</string>
+    <string name="search_bar_hint_text">프로젝트 또는 주소로 검색해 보세요.</string>
+
     <!--  Requirements  -->
-    <string name="requirements_received_name">견적</string>
-    <string name="requirements_progress_name">시공</string>
-    <string name="requirements_done_name">완료</string>
-    <string name="requirements_received_code">Received</string>
-    <string name="requirements_progress_code">Progress</string>
-    <string name="requirements_done_code">Done</string>
+    <string name="requirements_received_tab_name">문의</string>
+    <string name="requirements_progress_tab_name">진행중</string>
+    <string name="requirements_done_tab_name">완료·취소</string>
+
+    <string name="accepting_request_measurement">현장 실측 요청건 받는 중</string>
+    <string name="holding_request_measurement">버튼을 눌러 현장 실측 요청건을 받아보세요 >></string>
 
     <!-- Requirements : Request -->
     <string name="requirements_request_none_status">아직 들어온 문의가 없습니다.</string>
-    <string name="requirements_request_filter_option_1">전체</string>
-    <string name="requirements_request_filter_option_2">견적요청</string>
-    <string name="requirements_request_filter_option_3">매칭대기</string>
 
     <!-- Requirements : Progress -->
     <string name="requirements_progress_none_status">아직 진행중인 문의가 없습니다.</string>
-    <string name="requirements_progress_filter_option_1">전체</string>
-    <string name="requirements_progress_filter_option_2">시공진행중</string>
-    <string name="requirements_progress_filter_option_3">고객완료요청</string>
 
     <!-- Requirements : Done -->
     <string name="requirements_done_none_status">아직 완료된 문의가 없습니다.</string>
-    <string name="requirements_done_filter_option_1">전체</string>
-    <string name="requirements_done_filter_option_2">시공완료</string>
-    <string name="requirements_done_filter_option_3">평가완료</string>
-    <string name="requirements_done_filter_option_4">시공취소</string>
 
     <!-- RequirementsCard -->
     <string name="requirements_card_waiting_label">2주 내 고객의 응답이 없을 시 해당 문의건은 삭제됩니다.</string>
-    <string name="requirements_card_call_button">고객에게 전화하기</string>
-    <string name="requirements_card_call_re_button">다시 전화하기</string>
-    <string name="requirements_card_done_button">시공 완료</string>
     <string name="requirements_card_review_button">리뷰 요청하기</string>
     <string name="requirements_card_review_button_done">리뷰 요청을 완료했어요!</string>
     <string name="requirements_card_start_time">최초 요청일 : %s</string>
-    <string name="requirements_card_matched_time">고객매칭 완료일 : %s</string>
-    <string name="requirements_card_request_finish_time">완료 요청일 : %s</string>
-    <string name="requirements_card_repair_done_time">시공 완료일 : %s</string>
-    <string name="requirements_card_end_time">견적 마감일 : %s</string>
-    <string name="requirements_card_amount_title">나의 견적가</string>
-    <string name="requirements_card_amount_done_title">최종 시공가</string>
+    <string name="requirements_card_due_date">견적 마감일 : </string>
+    <string name="requirements_card_response_measure_due_date">실측 선택 마감 : </string>
+    <string name="requirements_card_done_date">시공 완료일 : </string>
+    <string name="requirements_card_amount_title">나의 견적가 :</string>
+    <string name="requirements_card_amount_done_title">최종 시공가 :</string>
+    <string name="requirements_card_due_date_alert">마감일이 지나면 해당 문의가 삭제됩니다.</string>
     <string name="not_estimated_text">견적 미발송</string>
+    <string name="measurement_text">현장실측</string>
 
     <!-- View Requirement -->
-    <string name="view_estimate_customer_review_title">고객 리뷰</string>
-    <string name="view_repair_title">나의 최종 시공 내용</string>
-    <string name="view_repair_canceled_title">시공 취소 사유</string>
-    <string name="view_estimate_customer_request_title">고객 요청 내용</string>
-    <string name="view_estimate_photo_title">사진이 있다면 견적에 도움이 됩니다.</string>
+    <string name="requirement_drawer_title_of_customer_review">고객 리뷰</string>
+    <string name="requirement_drawer_title_of_repair">나의 최종 시공 내용</string>
+    <string name="requirement_drawer_title_of_canceled_reason">시공 취소 사유</string>
+    <string name="requirement_drawer_title_of_customer_request">고객 요청 내용</string>
+    <string name="requirement_drawer_title_of_my_estimation">나의 제안 내용</string>
+    <string name="requirement_drawer_title_of_my_measurement">나의 실측 내용</string>
+    <string name="view_requirement_images_label">사진이 있다면 견적에 도움이 됩니다.</string>
     <string name="view_requirement_description">정확한 견적을 위해 마스터에게 더 설명드릴 사항이 있나요?</string>
-    <string name="view_estimate_transmission_title">나의 제안 내용</string>
-    <string name="view_estimate_accept">견적을 보낼래요</string>
-    <string name="view_estimate_refuse">견적을 내기 어려워요</string>
-    <string name="view_estimate_cancelled">취소 됐음</string>
-    <string name="view_estimate_done_button">시공 완료</string>
-    <string name="view_estimate_ask_review">리뷰 요청하기</string>
+    <string name="view_requirement_estimation_images_label">견적 관련 사진</string>
+
+    <string name="accept_estimate_text">견적을 보낼래요</string>
+    <string name="refuse_estimate_text">견적을 내기 어려워요</string>
+    <string name="accept_measure_text">실측 할래요</string>
+    <string name="refuse_measure_text">실측 안할래요</string>
+    <string name="cancel_requirement_text"><u>취소하기</u></string>
+    <string name="repair_done_text">시공 완료</string>
+    <string name="request_review_text">리뷰 요청하기</string>
+    <string name="call_to_customer_text">고객에게 전화하기</string>
+    <string name="recall_to_customer_text">다시 전화하기</string>
 
     <string name="master_recommendation_label">마스터 추천도</string>
     <string name="master_kindness_label">친절도</string>
     <string name="master_quality_label">퀄리티</string>
     <string name="price_affordability_label">가격만족</string>
     <string name="punctuality_label">기일준수</string>
+    <string name="requirement_token_label">문의 번호 : %s</string>
 
+    <string name="requirement_intro_title_of_requested">견적요청이 왔습니다.</string>
+    <string name="requirement_intro_subtitle_of_requested">견적에 대한 의사표현을 해주세요.\n<font color="#2E2E2E">미응답 시 추후 요청에 제한</font>이 있을 수 있습니다.</string>
+
+    <string name="requirement_intro_title_of_request_consult">상세상담 요청이 왔습니다.</string>
+    <string name="requirement_intro_subtitle_of_request_consult">견적에 대한 상세상담을 해주세요.\n<font color="#2E2E2E">미응답 시 추후 요청에 제한</font>이 있을 수 있습니다.</string>
+
+    <string name="requirement_intro_title_of_estimated">견적서를 전달했습니다.\n고객의 선택을 기다려주세요.</string>
+    <string name="requirement_intro_subtitle_of_estimated">2주 내 고객 미응답 시 해당 문의가 삭제됩니다.</string>
+
+    <string name="requirement_intro_title_of_request_measure">현장 실측 요청이 왔습니다.</string>
+
+    <string name="requirement_intro_title_of_repairing_from_funnel">고객의 선택을 받았습니다!\n시공일정을 잡아주세요.</string>
+    <string name="requirement_intro_title_of_repairing_from_secretary">%s\n시공 예정입니다.</string>
+    <string name="requirement_intro_subtitle_of_repairing">시공 완료 시 시공 완료버튼을 눌러\n최종 정보를 입력해주세요.\n<b><font color="#2E2E2E">미입력 시 배정에 불이익</font></b>이 있을 수 있습니다.</string>
+
+    <string name="requirement_intro_title_of_request_finish">시공 완료 요청이 왔습니다.\n완료 처리를 해주세요.</string>
+    <string name="requirement_intro_subtitle_of_request_finish">시공 완료버튼을 눌러 최종 정보를 입력해주세요.\n<b><font color="#2E2E2E">미입력 시 배정에 불이익</font></b>이 있을 수 있습니다.</string>
+
+    <string name="requirement_intro_title_of_measuring">실측 예정입니다.</string>
+    <string name="requirement_intro_subtitle_of_measuring">실측 완료 시 견적서 보내기를 눌러\n실측 정보를 입력해주세요.\n<b><font color="#2E2E2E">미입력 시 배정에 불이익</font></b>이 있을 수 있습니다.</string>
+
+    <string name="requirement_intro_title_of_measured">실측이 완료됐습니다.\n고객의 선택을 기다려주세요.</string>
+
+    <string name="requirement_intro_title_of_done">시공을 완료 했습니다!</string>
+    <string name="requirement_intro_subtitle_of_done">고객에게 리뷰요청을 해주세요.\n<b><font color="#2E2E2E">배정에 유리</font></b>할 수 있습니다.</string>
+
+    <string name="requirement_intro_title_of_close">%s\n고객이 리뷰를 남겼습니다.</string>
+    <string name="requirement_intro_title_of_canceled">취소되었습니다.</string>
+
+    <string name="alert_box_title_for_view_requirement_in_measuring">고객과의 전화가 필요합니다.</string>
+    <string name="alert_box_content_for_view_requirement_in_measuring">현장 실측 중 자세한 실측 정보를 남긴 메모가 있다면 사진을 찍어 올려주세요. 추후 마스터 등급에 긍정적인 영향을 줄 수 있습니다.</string>
+
+    <string name="progress_starting_text">문의접수</string>
+    <string name="progress_ending_text">시공완료</string>
+    <string name="progress_ending_text_with_date">%s 시공완료</string>
+    <string name="consult_with_customer_button_text">고객과 상담하기</string>
 
     <!-- Transmission Card & Done Card in View Estimate -->
     <string name="estimation_total_cost">총 견적가</string>
@@ -139,6 +174,10 @@
     <string name="estimation_material_cost">자재비</string>
     <string name="description_label">세부내용</string>
     <string name="estimation_description_label">제안내용</string>
+    <string name="masters_estimation_description_label">마스터님의 제안 내용 (선택)</string>
+    <string name="masters_estimation_description_hint_text">특별히 제안할 내용, 현장에서 가격이 변동될 수 있는 사항 등 고객이 선택하는데에 도움이 되는 내용을 작성해 주세요.\n마스터님의 전화번호는 고객에게 자동으로 전달됩니다.</string>
+
+    <string name="measure_attachment_label">실측정보</string>
     <string name="view_estimate_transmission_detail_work_date">시공시기</string>
     <string name="repair_actual_price">최종 시공가</string>
     <string name="cancel_repair_title">취소 사유</string>
@@ -146,18 +185,28 @@
     <!--  Cancel Estimate  -->
     <string name="cancel_estimate_title">취소 사유</string>
     <string name="cancel_estimate_cancel_option_label">어떤 이유로 취소 되었나요?</string>
-    <string name="cancel_estimate_cancel_option_1">고객의 단순 변심</string>
-    <string name="cancel_estimate_cancel_option_2">고객의 연락 부재</string>
-    <string name="cancel_estimate_cancel_option_3">현장 실측 결과 시공이 불가</string>
-    <string name="cancel_estimate_cancel_option_4">견적가와 현장 실측 결과가 상이하여 고객이 취소</string>
-    <string name="cancel_estimate_cancel_option_detail_label">상세 내용을 입력해주세요. (선택)</string>
+    <string name="asking_write_detail_label">상세 내용을 입력해주세요. (선택)</string>
+    <string name="asking_write_canceled_reason_detail_label">취소 사유에 대해 더 하고 싶은 말이 있으시면 작성해주세요.</string>
+
+    <!-- Write Estimate -->
+    <string name="requirements_not_found">해당 내용을 찾지 못 하였습니다.</string>
 
     <!-- Write Estimate -->
     <string name="write_estimate_title">견적서 작성</string>
     <string name="send_estimation">견적서 보내기</string>
+    <string name="choose_estimation_type_text">견적 유형 선택</string>
     <string name="show_requirement_content">요청 내용 보기</string>
+    <string name="insert_number_only_with_unit_text">숫자만 입력해주세요. (단위 : 원)</string>
+    <string name="estimation_price_text">견적가</string>
+
     <string name="integration_estimation">통합 견적</string>
     <string name="estimation_by_item">항목별 견적</string>
+
+    <!-- Measure   -->
+    <string name="measure_image_holder_label">실측 정보 (선택)</string>
+    <string name="alert_box_title_for_measure">현장 실측 중 작성한 메모를 찍어 올려주세요!</string>
+    <string name="alert_box_content_for_measure">현장 실측 중 자세한 실측 정보를 남긴 메모가 있다면 사진을 찍어 올려주세요. 추후 마스터 등급에 긍정적인 영향을 줄 수 있습니다.</string>
+
 
     <!-- End Estimate -->
     <string name="end_repair_title">최종 정보</string>
@@ -297,12 +346,15 @@
 
     <string name="send_message_succeeded">고객에게 견적서가 전달되었습니다!\n매칭을 기다려주세요.</string>
     <string name="cancel_estimate_succeeded">시공이 취소되었습니다.\n더 좋은 문의를 드리도록 노력할게요.</string>
+    <string name="cancel_measure_succeeded">실측이 취소되었습니다.\n더 좋은 문의를 드리도록 노력할게요.</string>
 
     <string name="end_estimate_succeeded">시공 완료 처리 되었고,\n고객님께 리뷰 요청이 전송되었어요.</string>
-    <string name="view_estimate_on_refuse_to_estimate_success">문의가 삭제되었습니다.</string>
+    <string name="refuse_to_estimate_or_measure_successfully_text">문의가 삭제되었습니다.</string>
+    <string name="respond_to_measure_successfully_text">현장 실측 요청을 수락했습니다!\n전화로 고객과 상담해주세요.</string>
     <string name="error_message_of_request_failed">해당 요청을 처리할 수 없습니다. 다시 요청하거나 수공에 연락해주세요.</string>
     <string name="ask_for_review_successful">리뷰 요청을 완료했어요!</string>
     <string name="sign_up_successfully">회원 가입이 완료되었습니다!\n필수 정보를 모두 입력하고\n문의를 처리해보세요!</string>
+    <string name="not_approved_master">승인된 마스터만 열람하실 수 있습니다.</string>
 
     <string name="request_permission_for_image">이미지를 추가하시려면 권한을 허용해주세요.</string>
     <string name="request_permission_for_call">전화하시려면 권한을 허용해주세요.</string>
@@ -316,5 +368,15 @@
     <string name="firebase_auth_too_many_requests">너무 많은 요청이 있습니다. 잠시 후 다시 시도해주세요.</string>
     <string name="firebase_auth_invalid_credentials">휴대전화 번호 또는 인증번호가 올바르지 않습니다.</string>
 
+    <string name="required_profile_empty_introduction">업체소개를 등록해주세요.</string>
+    <string name="required_profile_empty_shop_images">대표 이미지를 등록해주세요.</string>
+    <string name="required_profile_empty_business_unit_information">사업자 정보를 등록해주세요.</string>
+    <string name="required_profile_empty_warranty_information">A/S 정보를 등록해주세요.</string>
+    <string name="required_profile_empty_career">경력을 등록해주세요.</string>
+    <string name="required_profile_empty_owner_name">대표자명을 등록해주세요.</string>
+    <string name="required_profile_empty_phone_number">휴대폰번호를 등록해주세요.</string>
+    <string name="required_profile_empty_major">시공업종을 등록해주세요.</string>
+    <string name="required_profile_empty_address">업체 주소를 등록해주세요.</string>
+    <string name="required_profile_empty_service">서비스 가능 범위를 등록해주세요.</string>
 
 </resources>

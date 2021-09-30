@@ -3,6 +3,7 @@ package kr.co.soogong.master.data.dto.requirement.estimation
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
+import kr.co.soogong.master.data.dto.AttachmentDto
 import kr.co.soogong.master.data.dto.requirement.repair.RepairDto
 import java.util.*
 
@@ -24,22 +25,37 @@ data class EstimationDto(
     val masterResponseCode: String?,
 
     @SerializedName("type")
-    val type: String?,
+    val typeCode: String?,
 
     @SerializedName("price")
     val price: Int?,
 
     @SerializedName("description")
-    val description: String?,
+    val description: String? = null,
+
+    @SerializedName("requestConsultingYn")
+    val requestConsultingYn: Boolean? = null,
+
+    @SerializedName("fromMasterCallCnt")
+    val fromMasterCallCnt: Int? = null,
 
     @SerializedName("choosenYn")
-    val choosenYn: Boolean?,
+    val choosenYn: Boolean? = null,
 
     @SerializedName("estimationPrices")
-    val estimationPrices: List<EstimationPriceDto>?,
+    val estimationPrices: List<EstimationPriceDto>? = emptyList(),
+
+    @SerializedName("measurementImages")
+    val measurementImages: MutableList<AttachmentDto>? = mutableListOf(),
 
     @SerializedName("repair")
-    val repair: RepairDto?,
+    val repair: RepairDto? = null,
+
+    @SerializedName("refuseCode")
+    val refuseCode: String? = null,
+
+    @SerializedName("refuseDescription")
+    val refuseDescription: String? = null,
 
     @SerializedName("createdAt")
     val createdAt: Date?,

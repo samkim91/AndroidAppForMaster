@@ -34,11 +34,11 @@
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/get_images_button"
-                    style="@style/medium_text_style.bold"
+                    style="@style/text_style_16sp.bold"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/gap_40"
                     android:text="@string/get_images_button_text"
-                    android:background="@drawable/shape_fill_transparent_board_green"
+                    android:background="@drawable/shape_transparent_background_green_board_radius8"
                     android:textColor="@color/color_1FC472"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -63,7 +63,7 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/default_button"
-            style="@style/medium_text_style.bold"
+            style="@style/text_style_16sp.bold"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:background="@color/color_22D47B"

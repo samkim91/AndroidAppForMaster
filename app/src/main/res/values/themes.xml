@@ -65,111 +65,142 @@
         <item name="android:textColor">@color/list_item_description_text_color</item>
     </style>
 
-    <style name="tiny_text_style">
-        <item name="android:textSize">@dimen/text_tiny_size</item>
+    <style name="text_style_12sp">
+        <item name="android:textSize">@dimen/text_size_12sp</item>
     </style>
 
-    <style name="tiny_text_style.medium" parent="tiny_text_style">
+    <style name="text_style_12sp.medium" parent="text_style_12sp">
         <item name="android:fontFamily">@font/medium</item>
     </style>
 
-    <style name="tiny_text_style.regular" parent="tiny_text_style">
+    <style name="text_style_12sp.regular" parent="text_style_12sp">
         <item name="android:fontFamily">@font/regular</item>
     </style>
 
-    <style name="tiny_text_style.bold" parent="tiny_text_style">
+    <style name="text_style_12sp.bold" parent="text_style_12sp">
         <item name="android:fontFamily">@font/bold</item>
     </style>
 
-    <style name="tiny_small_text_style">
-        <item name="android:textSize">@dimen/text_tiny_small_size</item>
+    <style name="text_style_13sp">
+        <item name="android:textSize">@dimen/text_size_13sp</item>
     </style>
 
-    <style name="tiny_small_text_style.medium" parent="tiny_small_text_style">
+    <style name="text_style_13sp.medium" parent="text_style_13sp">
         <item name="android:fontFamily">@font/medium</item>
     </style>
 
-    <style name="tiny_small_text_style.regular" parent="tiny_small_text_style">
+    <style name="text_style_13sp.regular" parent="text_style_13sp">
         <item name="android:fontFamily">@font/regular</item>
     </style>
 
-    <style name="tiny_small_text_style.bold" parent="tiny_small_text_style">
+    <style name="text_style_13sp.bold" parent="text_style_13sp">
         <item name="android:fontFamily">@font/bold</item>
     </style>
 
-
-    <style name="small_text_style">
-        <item name="android:textSize">@dimen/text_small_size</item>
+    <style name="text_style_14sp">
+        <item name="android:textSize">@dimen/text_size_14sp</item>
     </style>
 
-    <style name="small_text_style.medium" parent="small_text_style">
+    <style name="text_style_14sp.medium" parent="text_style_14sp">
         <item name="android:fontFamily">@font/medium</item>
     </style>
 
-    <style name="small_text_style.regular" parent="small_text_style">
+    <style name="text_style_14sp.regular" parent="text_style_14sp">
         <item name="android:fontFamily">@font/regular</item>
     </style>
 
-    <style name="small_text_style.bold" parent="small_text_style">
+    <style name="text_style_14sp.bold" parent="text_style_14sp">
         <item name="android:fontFamily">@font/bold</item>
     </style>
 
-    <style name="medium_text_style">
-        <item name="android:textSize">@dimen/text_medium_size</item>
+    <style name="text_style_15sp">
+        <item name="android:textSize">@dimen/text_size_15sp</item>
     </style>
 
-    <style name="medium_text_style.medium" parent="medium_text_style">
+    <style name="text_style_15sp.medium" parent="text_style_15sp">
         <item name="android:fontFamily">@font/medium</item>
     </style>
 
-    <style name="medium_text_style.regular" parent="medium_text_style">
+    <style name="text_style_15sp.regular" parent="text_style_15sp">
         <item name="android:fontFamily">@font/regular</item>
     </style>
 
-    <style name="medium_text_style.bold" parent="medium_text_style">
+    <style name="text_style_15sp.bold" parent="text_style_15sp">
         <item name="android:fontFamily">@font/bold</item>
     </style>
 
-    <style name="big_text_style">
-        <item name="android:textSize">@dimen/text_big_size</item>
+    <style name="text_style_16sp">
+        <item name="android:textSize">@dimen/text_size_16sp</item>
     </style>
 
-    <style name="big_text_style.medium" parent="big_text_style">
+    <style name="text_style_16sp.medium" parent="text_style_16sp">
         <item name="android:fontFamily">@font/medium</item>
     </style>
 
-    <style name="big_text_style.regular" parent="big_text_style">
+    <style name="text_style_16sp.regular" parent="text_style_16sp">
         <item name="android:fontFamily">@font/regular</item>
     </style>
 
-    <style name="big_text_style.bold" parent="big_text_style">
+    <style name="text_style_16sp.bold" parent="text_style_16sp">
         <item name="android:fontFamily">@font/bold</item>
     </style>
 
-    <style name="large_text_style">
-        <item name="android:textSize">@dimen/text_large_size</item>
+    <style name="text_style_18sp">
+        <item name="android:textSize">@dimen/text_size_18sp</item>
     </style>
 
-    <style name="large_text_style.medium" parent="large_text_style">
+    <style name="text_style_18sp.medium" parent="text_style_18sp">
         <item name="android:fontFamily">@font/medium</item>
     </style>
 
-    <style name="large_text_style.regular" parent="large_text_style">
+    <style name="text_style_18sp.regular" parent="text_style_18sp">
         <item name="android:fontFamily">@font/regular</item>
     </style>
 
-    <style name="large_text_style.bold" parent="large_text_style">
+    <style name="text_style_18sp.bold" parent="text_style_18sp">
         <item name="android:fontFamily">@font/bold</item>
     </style>
 
-    <style name="CustomTabText" parent="Widget.MaterialComponents.TabLayout">
-        <item name="android:textSize">@dimen/text_title_size</item>
-        <item name="android:fontFamily">@font/medium</item>
-        <item name="android:textColor">@color/primary_text_color</item>
+    <style name="text_style_20sp">
+        <item name="android:textSize">@dimen/text_size_20sp</item>
     </style>
+
+    <style name="text_style_20sp.medium" parent="text_style_20sp">
+        <item name="android:fontFamily">@font/medium</item>
+    </style>
+
+    <style name="text_style_20sp.regular" parent="text_style_20sp">
+        <item name="android:fontFamily">@font/regular</item>
+    </style>
+
+    <style name="text_style_20sp.bold" parent="text_style_20sp">
+        <item name="android:fontFamily">@font/bold</item>
+    </style>
+
+    <style name="text_style_22sp">
+        <item name="android:textSize">@dimen/text_size_22sp</item>
+    </style>
+
+    <style name="text_style_22sp.medium" parent="text_style_22sp">
+        <item name="android:fontFamily">@font/medium</item>
+    </style>
+
+    <style name="text_style_22sp.regular" parent="text_style_22sp">
+        <item name="android:fontFamily">@font/regular</item>
+    </style>
+
+    <style name="text_style_22sp.bold" parent="text_style_22sp">
+        <item name="android:fontFamily">@font/bold</item>
+    </style>
+
+<!--    <style name="CustomTabText" parent="Widget.MaterialComponents.TabLayout">-->
+<!--        <item name="android:textSize">@dimen/text_title_size</item>-->
+<!--        <item name="android:fontFamily">@font/medium</item>-->
+<!--        <item name="android:textColor">@color/primary_text_color</item>-->
+<!--    </style>-->
 
     <style name="SignUpTabText" parent="Widget.MaterialComponents.TabLayout">
-        <item name="android:textSize">@dimen/text_small_size</item>
+        <item name="android:textSize">@dimen/text_size_14sp</item>
         <item name="android:fontFamily">@font/medium</item>
         <item name="android:textColor">@color/color_BDBDBD</item>
     </style>
@@ -181,6 +212,15 @@
         <item name="chipStrokeWidth">@dimen/chips_stroke_width_1dp</item>
         <item name="chipCornerRadius">@dimen/chips_radius_8dp</item>
         <item name="chipMinHeight">@dimen/chips_height_40dp</item>
+    </style>
+
+    <style name="ChipChoiceRoundStyle" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="chipBackgroundColor">@color/chip_selector_for_requirement_status</item>
+        <item name="android:textColor">@color/text_selector_for_requirement_status</item>
+        <item name="chipStrokeColor">@color/stroke_selector_for_requirement_status</item>
+        <item name="chipStrokeWidth">@dimen/chips_stroke_width_1dp</item>
+        <item name="chipCornerRadius">@dimen/chips_radius_20dp</item>
+        <item name="chipMinHeight">@dimen/chips_height_38dp</item>
     </style>
 
     <style name="ChipEntryRoundStyle" parent="Widget.MaterialComponents.Chip.Entry">

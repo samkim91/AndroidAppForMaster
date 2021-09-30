@@ -17,7 +17,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/title"
-            style="@style/medium_text_style.medium"
+            style="@style/text_style_16sp.medium"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/notice_view_holder_list_item_title_margin_top"
@@ -35,7 +35,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/date"
-            style="@style/small_text_style.regular"
+            style="@style/text_style_14sp.regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/text_primary_color"

@@ -14,7 +14,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/title"
-            style="@style/big_text_style.medium"
+            style="@style/text_style_18sp.medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/text_basic_color"
@@ -26,7 +26,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/sub_title"
-            style="@style/small_text_style.medium"
+            style="@style/text_style_14sp.medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/gap_4"
@@ -39,11 +39,11 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/default_button"
-            style="@style/medium_text_style.bold"
+            style="@style/text_style_16sp.bold"
             android:layout_width="0dp"
             android:layout_height="@dimen/gap_40"
             android:layout_marginTop="@dimen/gap_12"
-            android:background="@drawable/shape_fill_transparent_board_green"
+            android:background="@drawable/shape_transparent_background_green_board_radius8"
             android:textColor="@color/color_1FC472"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

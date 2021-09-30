@@ -23,6 +23,12 @@ data class RequirementDto(
     @SerializedName("uid")
     val uid: String?,
 
+    @SerializedName("typeCode")
+    val typeCode: String?,
+
+    @SerializedName("typeName")
+    val typeName: String?,
+
     @SerializedName("projectId")
     val projectId: Int?,
 

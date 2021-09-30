@@ -33,7 +33,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/user_name"
-                style="@style/medium_text_style.bold"
+                style="@style/text_style_16sp.bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -52,7 +52,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/user_name_end"
-                style="@style/small_text_style.regular"
+                style="@style/text_style_14sp.regular"
                 android:textColor="@color/color_555555"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -76,12 +76,12 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/show_profile_button"
-                style="@style/medium_text_style.bold"
+                style="@style/text_style_16sp.bold"
                 android:layout_width="@dimen/gap_0"
                 android:layout_height="@dimen/gap_40"
                 android:layout_marginStart="@dimen/gap_20"
                 android:layout_marginEnd="@dimen/gap_20"
-                android:background="@drawable/shape_fill_green_background"
+                android:background="@drawable/shape_green_background_radius8"
                 android:text="@string/open_my_page"
                 android:textColor="@color/basic_white"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -90,13 +90,13 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/request_review_by_sharing_button"
-                style="@style/medium_text_style.bold"
+                style="@style/text_style_16sp.bold"
                 android:layout_width="@dimen/gap_0"
                 android:layout_height="@dimen/gap_40"
                 android:layout_marginStart="@dimen/gap_20"
                 android:layout_marginTop="@dimen/gap_10"
                 android:layout_marginEnd="@dimen/gap_20"
-                android:background="@drawable/shape_fill_white_board_green"
+                android:background="@drawable/shape_white_background_green_border_radius8"
                 android:text="@string/request_review_button_text"
                 android:textColor="@color/color_1FC472"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -152,7 +152,7 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/profile_card_container_label"
-                    style="@style/medium_text_style.medium"
+                    style="@style/text_style_16sp.medium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/gap_20"
@@ -171,7 +171,7 @@
                     android:layout_marginStart="@dimen/gap_20"
                     android:layout_marginTop="@dimen/gap_16"
                     android:layout_marginEnd="@dimen/gap_20"
-                    android:background="@drawable/shape_radius8_white_background"
+                    android:background="@drawable/shape_white_background_radius8"
                     android:elevation="@dimen/gap_4"
                     app:defaultButtonByItems="@{vm.profile.basicInformation.portfolios.size > 0}"
                     app:firstDetail='@{vm.profile.basicInformation.portfolios.size > 0 ? vm.profile.basicInformation.portfolios.size+"개의 포트폴리오를 올리셨어요!" : ""}'
@@ -189,7 +189,7 @@
                     android:layout_marginStart="@dimen/gap_20"
                     android:layout_marginTop="@dimen/gap_24"
                     android:layout_marginEnd="@dimen/gap_20"
-                    android:background="@drawable/shape_radius8_white_background"
+                    android:background="@drawable/shape_white_background_radius8"
                     android:elevation="@dimen/gap_4"
                     app:defaultButtonByItems='@{vm.profile.basicInformation.priceByProjects.size > 0}'
                     app:firstDetail='@{vm.profile.basicInformation.priceByProjects.size > 0 ? vm.profile.basicInformation.priceByProjects.size+"개의 가격 정보를 올리셨어요!" : ""}'
@@ -207,7 +207,7 @@
                     android:layout_marginStart="@dimen/gap_20"
                     android:layout_marginTop="@dimen/gap_24"
                     android:layout_marginEnd="@dimen/gap_20"
-                    android:background="@drawable/shape_radius8_white_background"
+                    android:background="@drawable/shape_white_background_radius8"
                     android:elevation="@dimen/gap_4"
                     app:defaultButtonByImageV3="@{vm.profile.basicInformation.profileImage.url}"
                     app:firstDetailWithSimpleText="@{vm.profile.basicInformation.profileImage.url}"
@@ -227,7 +227,7 @@
                     android:layout_marginTop="@dimen/gap_24"
                     android:layout_marginEnd="@dimen/gap_20"
                     android:layout_marginBottom="@dimen/gap_24"
-                    android:background="@drawable/shape_radius8_white_background"
+                    android:background="@drawable/shape_white_background_radius8"
                     android:elevation="@dimen/gap_4"
                     app:chipGroupWithoutTitle="@{vm.profile.basicInformation.flexibleCost}"
                     app:defaultButtonByList="@{vm.profile.basicInformation.flexibleCost}"
@@ -247,7 +247,7 @@
                     android:layout_marginTop="@dimen/gap_24"
                     android:layout_marginEnd="@dimen/gap_20"
                     android:layout_marginBottom="@dimen/gap_24"
-                    android:background="@drawable/shape_radius8_white_background"
+                    android:background="@drawable/shape_white_background_radius8"
                     android:elevation="@dimen/gap_4"
                     app:chipGroupWithoutTitle="@{vm.profile.basicInformation.otherFlexibleOption}"
                     app:defaultButtonByList="@{vm.profile.basicInformation.otherFlexibleOption}"
@@ -265,7 +265,7 @@
                     android:layout_marginTop="@dimen/gap_24"
                     android:layout_marginEnd="@dimen/gap_20"
                     android:layout_marginBottom="@dimen/gap_24"
-                    android:background="@drawable/shape_radius8_white_background"
+                    android:background="@drawable/shape_white_background_radius8"
                     android:elevation="@dimen/gap_4"
                     app:defaultButtonByString="@{vm.profile.basicInformation.email}"
                     app:firstDetail="@{vm.profile.basicInformation.email}"

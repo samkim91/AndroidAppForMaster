@@ -8,7 +8,7 @@
         android:id="@+id/profile_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/shape_radius8_white_background"
+        android:background="@drawable/shape_white_background_radius8"
         android:paddingStart="@dimen/gap_16"
         android:paddingTop="@dimen/gap_20"
         android:paddingEnd="@dimen/gap_16"
@@ -16,7 +16,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/title"
-            style="@style/big_text_style.medium"
+            style="@style/text_style_18sp.medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/text_basic_color"
@@ -48,7 +48,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/sub_title"
-            style="@style/small_text_style.medium"
+            style="@style/text_style_14sp.medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/gap_8"
@@ -73,7 +73,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/detail"
-            style="@style/medium_text_style.regular"
+            style="@style/text_style_16sp.regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/gap_16"
@@ -92,7 +92,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/default_button"
-            style="@style/medium_text_style.bold"
+            style="@style/text_style_16sp.bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/gap_16"

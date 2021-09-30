@@ -13,7 +13,7 @@ fun createLabelToggle(
     clickable: Boolean = true
 ): View {
     val contextWrapper =
-        ContextThemeWrapper(context, R.style.small_text_style_medium)
+        ContextThemeWrapper(context, R.style.text_style_14sp_medium)
     val toggle = LabelToggle(contextWrapper)
 
     with(toggle) {

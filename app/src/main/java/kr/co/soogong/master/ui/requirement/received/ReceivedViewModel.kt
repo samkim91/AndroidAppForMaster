@@ -6,49 +6,54 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
+import kr.co.soogong.master.data.dto.profile.MasterDto
+import kr.co.soogong.master.data.model.requirement.Estimated
+import kr.co.soogong.master.data.model.requirement.Requested
 import kr.co.soogong.master.data.model.requirement.RequirementCard
-import kr.co.soogong.master.data.model.requirement.RequirementStatus
-import kr.co.soogong.master.domain.usecase.auth.GetMasterApprovedStatusUseCase
-import kr.co.soogong.master.domain.usecase.requirement.GetRequirementCardsFromLocalUseCase
+import kr.co.soogong.master.domain.usecase.profile.GetMasterSimpleInfoUseCase
 import kr.co.soogong.master.domain.usecase.requirement.GetRequirementCardsUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
+import kr.co.soogong.master.ui.requirement.receivedCodes
 import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class ReceivedViewModel @Inject constructor(
-    val getMasterApprovedStatusUseCase: GetMasterApprovedStatusUseCase,
+    private val getMasterSimpleInfoUseCase: GetMasterSimpleInfoUseCase,
     private val getRequirementCardsUseCase: GetRequirementCardsUseCase,
-    private val getRequirementCardsFromLocalUseCase: GetRequirementCardsFromLocalUseCase,
 ) : BaseViewModel() {
-    private val _masterApprovedStatus = MutableLiveData<String>()
-    val masterApprovedStatus: LiveData<String>
-        get() = _masterApprovedStatus
+    private val _masterSimpleInfo = MutableLiveData<MasterDto>()
+    val masterSimpleInfo: LiveData<MasterDto>
+        get() = _masterSimpleInfo
 
     private val _receivedList = MutableLiveData<List<RequirementCard>>()
     val receivedList: LiveData<List<RequirementCard>>
         get() = _receivedList
 
-    private val _index = MutableLiveData<Int>()
+    private val _index = MutableLiveData(0)
 
     fun requestList() {
-        Timber.tag(TAG).d("requestList: ${_index.value}")
+        Timber.tag(TAG).d("requestList: $_index")
 
-        getRequirementCardsUseCase(RequirementStatus.getReceivedCodes())
+        getRequirementCardsUseCase(
+            when (_index.value) {
+                1 -> listOf(Requested.code)
+                2 -> listOf(Estimated.code)
+                else -> receivedCodes
+            }
+        )
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
                 onNext = {
                     Timber.tag(TAG).d("requestList onNext: $it")
-                    sendEvent(BADGE_UPDATE, it.count())
-
-                    _receivedList.postValue(it.filter { card ->
-                        when (_index.value) {
-                            1 -> card.status == RequirementStatus.Requested
-                            2 -> card.status == RequirementStatus.Estimated
-                            else -> card.status != null
-                        }
-                    })
+                    if (_index.value == 0) sendEvent(BADGE_UPDATE, it.count())
+                    when (_index.value) {
+                        1 -> _receivedList.postValue(it.filter { requirementCard -> requirementCard.estimationDto?.requestConsultingYn == false })
+                        2 -> _receivedList.postValue(it.filter { requirementCard -> requirementCard.status == Estimated })
+                        3 -> _receivedList.postValue(it.filter { requirementCard -> requirementCard.estimationDto?.requestConsultingYn == true })
+                        else -> _receivedList.postValue(it)
+                    }
                 },
                 onComplete = { },
                 onError = {
@@ -59,38 +64,30 @@ class ReceivedViewModel @Inject constructor(
     }
 
     fun onFilterChange(index: Int) {
-        Timber.tag(TAG).d("onFilterChange: $index")
-
         _index.value = index
-        getRequirementCardsFromLocalUseCase(
-            when (index) {
-                1 -> listOf(RequirementStatus.Requested.toCode())
-                2 -> listOf(RequirementStatus.Estimated.toCode())
-                else -> RequirementStatus.getReceivedCodes()
-            }
-        )
+        requestList()
+    }
+
+    fun requestMasterSimpleInfo() {
+        Timber.tag(TAG).d("requestMasterSimpleInfo: ")
+        getMasterSimpleInfoUseCase()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
                 onSuccess = {
-                    Timber.tag(TAG).d("onFilterChange successfully: $it")
-                    _receivedList.postValue(it)
+                    Timber.tag(TAG).d("requestMasterSimpleInfo successful: $it")
+                    _masterSimpleInfo.value = it
                 },
                 onError = {
-                    Timber.tag(TAG).d("onFilterChange failed: $it")
-                    _receivedList.postValue(emptyList())
-                },
+                    Timber.tag(TAG).d("requestMasterSimpleInfo failed: $it")
+                    setAction(REQUEST_FAILED)
+                }
             ).addToDisposable()
-    }
-
-    fun requestMasterApprovedStatus() {
-        Timber.tag(TAG).d("requestMasterApprovedStatus: ")
-        _masterApprovedStatus.value = getMasterApprovedStatusUseCase()
     }
 
     companion object {
         private const val TAG = "ReceivedViewModel"
         const val BADGE_UPDATE = "BADGE_UPDATE"
-        const val REQUEST_LIST_FAILED = "REQUEST_LIST_FAILED"
+        const val REQUEST_FAILED = "REQUEST_FAILED"
     }
 }

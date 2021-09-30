@@ -3,6 +3,7 @@ package kr.co.soogong.master.data.repository
 import dagger.Reusable
 import io.reactivex.Flowable
 import io.reactivex.Observable
+import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
@@ -22,26 +23,25 @@ class RequirementRepository @Inject constructor(
 ) {
     private val compositeDisposable = CompositeDisposable()
 
-    fun getRequirementFromAll(requirementId: Int): Flowable<RequirementDto> {
+    fun getRequirementById(requirementId: Int): Single<RequirementDto> {
         Timber.tag(TAG).d("getRequirementFromAll start: $requirementId")
-        return getRequirementFromLocal(requirementId)
-            .concatWith(getRequirementFromServer(requirementId))
+        return getRequirementFromServer(requirementId)
+            .doOnError { Timber.tag(TAG).d("getRequirementById failed: $it") }
+            .onErrorResumeNext(getRequirementFromLocal(requirementId))
     }
 
-    private fun getRequirementFromLocal(requirementId: Int): Flowable<RequirementDto> {
+    private fun getRequirementFromLocal(requirementId: Int): Single<RequirementDto> {
         Timber.tag(TAG).d("getRequirementFromLocal start: $requirementId")
         return requirementDao.getItem(requirementId)
-            .toFlowable()
-            .doOnNext {
+            .doOnSuccess {
                 Timber.tag(TAG).d("getRequirementFromLocal: $it")
             }
     }
 
-    private fun getRequirementFromServer(requirementId: Int): Flowable<RequirementDto> {
+    private fun getRequirementFromServer(requirementId: Int): Single<RequirementDto> {
         Timber.tag(TAG).d("getRequirementFromServer start: $requirementId")
         return requirementService.getRequirement(requirementId, getMasterUidFromSharedUseCase()!!)
-            .toFlowable()
-            .doOnNext {
+            .doOnSuccess {
                 Timber.tag(TAG).d("getRequirementFromServer: $it ")
                 saveRequirementInLocal(it)
             }
@@ -50,6 +50,7 @@ class RequirementRepository @Inject constructor(
     private fun saveRequirementInLocal(requirementDto: RequirementDto) {
         Timber.tag(TAG).d("saveRequirementInLocal start: ")
         val disposable = Observable.fromCallable {
+            requirementDao.remove(requirementDto)
             requirementDao.insert(requirementDto)
         }
             .subscribeOn(Schedulers.io())
@@ -61,17 +62,16 @@ class RequirementRepository @Inject constructor(
         disposable.addTo(compositeDisposable)
     }
 
-    fun getRequirementsFromAll(
+    fun getRequirementsByStatus(
         statusArray: List<String>,
         canceledYn: Boolean = false
     ): Flowable<List<RequirementDto>> {
-        return Flowable.concatArray(
-            getRequirementsFromLocal(statusArray, canceledYn),
-            getRequirementsFromServer(statusArray)
-        )
+        return getRequirementsFromLocal(statusArray, canceledYn)
+            .onErrorResumeNext(Flowable.empty())
+            .concatWith(getRequirementsFromServer(statusArray))
     }
 
-    fun getRequirementsFromLocal(
+    private fun getRequirementsFromLocal(
         statusArray: List<String>,
         canceledYn: Boolean = false
     ): Flowable<List<RequirementDto>> {
@@ -90,18 +90,24 @@ class RequirementRepository @Inject constructor(
 
     private fun getRequirementsFromServer(statusArray: List<String>): Flowable<List<RequirementDto>> {
         Timber.tag(TAG).d("getRequirementFromServer start: $statusArray")
-        return requirementService.getRequirementList(getMasterUidFromSharedUseCase()!!, statusArray)
+        return requirementService.getRequirementsByStatus(
+            getMasterUidFromSharedUseCase()!!,
+            statusArray
+        )
             .toFlowable()
             .doOnNext {
-                Timber.tag(TAG).d("getRequirementFromServer: ${it.size}")
-                saveRequirementsInLocal(it)
+                Timber.tag(TAG).d("getRequirementsFromServer: ${it.size}")
+                saveRequirementsInLocal(statusArray, it)
             }
     }
 
-    private fun saveRequirementsInLocal(list: List<RequirementDto>?) {
+    private fun saveRequirementsInLocal(statusArray: List<String>, newList: List<RequirementDto>?) {
         Timber.tag(TAG).d("saveRequirementsInLocal start: ")
         val disposable =
-            Observable.fromCallable { list?.toTypedArray()?.let { requirementDao.insertAll(*it) } }
+            Observable.fromCallable {
+                requirementDao.removeByStatus(statusArray)
+                newList?.toTypedArray()?.let { requirementDao.insertAll(*it) }
+            }
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.io())
                 .subscribeBy {
@@ -109,6 +115,29 @@ class RequirementRepository @Inject constructor(
                 }
 
         disposable.addTo(compositeDisposable)
+    }
+
+    fun searchRequirements(
+        searchingText: String,
+        searchingPeriod: Int,
+    ): Flowable<List<RequirementDto>> {
+        return searchRequirementsFromServer(searchingText, searchingPeriod)
+    }
+
+    private fun searchRequirementsFromServer(
+        searchingText: String,
+        searchingPeriod: Int,
+    ): Flowable<List<RequirementDto>> {
+        Timber.tag(TAG).d("searchRequirementsFromServer start: $searchingText, $searchingPeriod")
+        return requirementService.searchRequirements(
+            getMasterUidFromSharedUseCase()!!,
+            searchingText,
+            searchingPeriod
+        )
+            .toFlowable()
+            .doOnNext {
+                Timber.tag(TAG).d("searchRequirementsFromServer: ${it.size}")
+            }
     }
 
     companion object {

@@ -38,29 +38,33 @@ class SoogongMasterMessagingService : FirebaseMessagingService() {
     }
 
     private fun sendNotification(remoteMessage: RemoteMessage) {
+        val notificationId = Random.nextInt()
+
         val builder = NotificationCompat.Builder(this, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_notification_icon)
             .setColor(resources.getColor(R.color.color_22D47B, null))
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setContentTitle(remoteMessage.data["Title"])
             .setContentText(remoteMessage.data["Body"])
+            .setAutoCancel(true)
             .setSound(Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://${packageName}/raw/soogong_alert_sound"))
             .setVibrate(longArrayOf(0, 500, 500, 500, 500))
-            .setContentIntent(getPendingIntent(remoteMessage))
+            .setContentIntent(getPendingIntent(remoteMessage, notificationId))
 
         val notificationManager =
             getSystemService(Context.NOTIFICATION_SERVICE) as? NotificationManager
 
-        notificationManager?.notify(Random.nextInt(), builder.build())
+        notificationManager?.notify(notificationId, builder.build())
     }
 
-    private fun getPendingIntent(remoteMessage: RemoteMessage) =
+    private fun getPendingIntent(remoteMessage: RemoteMessage, notificationId: Int) =
         PendingIntent.getActivity(
             this,
-            0,
+            notificationId,
             when (remoteMessage.data["Destination"]) {
                 "ViewRequirement" -> {
                     val requirementId = remoteMessage.data["RequirementId"]
+                    Timber.tag(TAG).d("requirementId: $requirementId")
                     if (requirementId?.isNotEmpty()!!) {
                         ViewRequirementActivityHelper.getIntent(this, requirementId.toInt())
                     } else {

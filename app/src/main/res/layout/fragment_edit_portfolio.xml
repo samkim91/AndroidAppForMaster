@@ -50,7 +50,7 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/before_job_label"
-                    style="@style/medium_text_style.medium"
+                    style="@style/text_style_16sp.medium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/gap_28"
@@ -90,14 +90,14 @@
                         android:id="@+id/image_before_job_close_icon"
                         android:layout_width="@dimen/gap_24"
                         android:layout_height="@dimen/gap_24"
-                        android:layout_gravity="right"
+                        android:layout_gravity="end"
                         android:background="@drawable/ic_close_in_image"
                         bind:onClick="@{vm::clearImageBeforeJob}" />
                 </androidx.cardview.widget.CardView>
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/after_job_label"
-                    style="@style/medium_text_style.medium"
+                    style="@style/text_style_16sp.medium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/gap_28"
@@ -137,7 +137,7 @@
                         android:id="@+id/image_after_job_close_icon"
                         android:layout_width="@dimen/gap_24"
                         android:layout_height="@dimen/gap_24"
-                        android:layout_gravity="right"
+                        android:layout_gravity="end"
                         android:background="@drawable/ic_close_in_image"
                         bind:onClick="@{vm::clearImageAfterJob}" />
                 </androidx.cardview.widget.CardView>
@@ -151,7 +151,7 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/alert"
-                    style="@style/small_text_style.regular"
+                    style="@style/text_style_14sp.regular"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/gap_4"
@@ -180,7 +180,7 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/default_button"
-            style="@style/medium_text_style.bold"
+            style="@style/text_style_16sp.bold"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:background="@color/color_22D47B"

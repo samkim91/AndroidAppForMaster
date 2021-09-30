@@ -6,11 +6,11 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/shape_fill_white_background_top_radius">
+        android:background="@drawable/shape_white_background_radius_top20">
 
         <TextView
             android:id="@+id/dialog_title"
-            style="@style/small_text_style.bold"
+            style="@style/text_style_14sp.bold"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/gap_12"
@@ -41,7 +41,7 @@
 
         <Button
             android:id="@+id/left_button"
-            style="@style/medium_text_style.bold"
+            style="@style/text_style_16sp.bold"
             android:layout_width="0dp"
             android:layout_height="@dimen/gap_52"
             android:background="@android:color/transparent"
@@ -53,7 +53,7 @@
 
         <Button
             android:id="@+id/right_button"
-            style="@style/medium_text_style.bold"
+            style="@style/text_style_16sp.bold"
             android:layout_width="0dp"
             android:layout_height="@dimen/gap_52"
             android:background="@android:color/transparent"

@@ -10,6 +10,7 @@ import android.view.View
 import android.widget.EditText
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.isVisible
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ViewTitleEdittextCounterBinding
 
@@ -82,7 +83,7 @@ class TitleEditTextCounterView @JvmOverloads constructor(
     var alertVisible: Boolean = false
         set(value) {
             field = value
-            binding.alert.visibility = if (value) View.VISIBLE else View.GONE
+            binding.alert.isVisible = value
         }
 
     var limitedCount: Int = 0

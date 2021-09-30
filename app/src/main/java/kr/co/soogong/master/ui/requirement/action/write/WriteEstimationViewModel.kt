@@ -1,5 +1,7 @@
 package kr.co.soogong.master.ui.requirement.action.write
 
+import android.net.Uri
+import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
@@ -27,7 +29,8 @@ class WriteEstimationViewModel @Inject constructor(
     val savedStateHandle: SavedStateHandle
 ) : BaseViewModel() {
 
-    private val requirementId = WriteEstimationActivityHelper.getRequirementIdFromSavedState(savedStateHandle)
+    private val requirementId =
+        WriteEstimationActivityHelper.getRequirementIdFromSavedState(savedStateHandle)
 
     private val _requirement = MutableLiveData<RequirementDto>()
     val requirement: LiveData<RequirementDto>
@@ -41,7 +44,10 @@ class WriteEstimationViewModel @Inject constructor(
     val materialCost = MutableLiveData("")
     val travelCost = MutableLiveData("")
     val totalCost = MutableLiveData("")
+
     val description = MutableLiveData("")
+
+    val measurementImage = MutableLiveData(Uri.EMPTY)
 
     fun requestRequirement() {
         Timber.tag(TAG).d("requestRequirement: $requirementId")
@@ -49,7 +55,7 @@ class WriteEstimationViewModel @Inject constructor(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
-                onNext = {
+                onSuccess = {
                     _requirement.value = it
                 },
                 onError = {
@@ -67,17 +73,16 @@ class WriteEstimationViewModel @Inject constructor(
                 requirementId = requirement.value?.estimationDto?.requirementId,
                 masterId = requirement.value?.estimationDto?.masterId,
                 masterResponseCode = EstimationResponseCode.ACCEPTED,
-                type = estimationType.value,
+                typeCode = estimationType.value,
                 price = when (estimationType.value) {
-                    EstimationTypeCode.INTEGRATION -> {
-                        simpleCost.value?.replace(",", "")?.toInt()
+                    EstimationTypeCode.BY_ITEM -> {
+                        totalCost.value?.replace(",", "")?.toInt()
                     }
                     else -> {
-                        totalCost.value?.replace(",", "")?.toInt()
+                        simpleCost.value?.replace(",", "")?.toInt()
                     }
                 },
                 description = description.value,
-                choosenYn = null,
                 estimationPrices = when (estimationType.value) {
                     EstimationTypeCode.BY_ITEM -> {
                         listOf(
@@ -100,10 +105,10 @@ class WriteEstimationViewModel @Inject constructor(
                     }
                     else -> null
                 },
-                repair = null,
                 createdAt = null,
                 updatedAt = null,
-            )
+            ),
+            measurementImageUri = measurementImage.value,
         )
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -112,17 +117,19 @@ class WriteEstimationViewModel @Inject constructor(
                     setAction(SEND_ESTIMATION_SUCCESSFULLY)
                 },
                 onError = {
-                    setAction(SEND_ESTIMATION_FAILED)
+                    setAction(REQUEST_FAILED)
                 }
             ).addToDisposable()
+    }
+
+    fun clearImage(v: View) {
+        measurementImage.value = Uri.EMPTY
     }
 
     companion object {
         private const val TAG = "WriteEstimationViewModel"
 
         const val SEND_ESTIMATION_SUCCESSFULLY = "SEND_ESTIMATION_SUCCESSFULLY"
-        const val SEND_ESTIMATION_FAILED = "SEND_ESTIMATION_FAILED"
         const val REQUEST_FAILED = "REQUEST_FAILED"
-        const val SEND_MESSAGE_FAILED = "EMAIL_ERROR"
     }
 }

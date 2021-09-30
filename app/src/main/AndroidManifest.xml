@@ -17,8 +17,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="false">
-        <activity android:name=".ui.auth.signup.steps.ViewPolicyActivity"></activity>
+        android:usesCleartextTraffic="true">
+        <activity android:name=".ui.auth.signup.steps.ViewPolicyActivity" />
         <activity android:name=".ui.profile.detail.requiredinformation.EditRequiredInformationActivity" />
         <activity android:name=".ui.profile.review.MyReviewsActivity" />
         <activity android:name=".ui.profile.detail.EditProfileContainerActivity" />
@@ -29,56 +29,30 @@
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ui.auth.SignMainActivity"
-            android:launchMode="singleTask" />
+        <activity android:name=".ui.auth.SignMainActivity" />
         <activity
             android:name=".ui.auth.signup.SignUpActivity"
-            android:launchMode="singleTask"
             android:windowSoftInputMode="adjustResize" />
-        <activity
-            android:name=".ui.auth.signup.AddressActivity"
-            android:launchMode="singleTask" />
-        <activity
-            android:name=".ui.auth.signin.SignInActivity"
-            android:launchMode="singleTask" /> <!-- todo: 가로화면도 지원하도록 버그를 잡아야함 -->
-        <activity
-            android:name=".ui.main.MainActivity"
-            android:launchMode="singleTask" />
-        <activity
-            android:name=".ui.major.MajorActivity"
-            android:launchMode="singleTask" />
-        <activity
-            android:name=".ui.image.ImageActivity"
-            android:launchMode="singleTask" />
-        <activity
-            android:name=".ui.requirement.action.cancel.CancelRepairActivity"
-            android:launchMode="singleTask" />
-        <activity
-            android:name=".ui.requirement.action.end.EndRepairActivity"
-            android:launchMode="singleTask" />
+        <activity android:name=".ui.auth.signup.AddressActivity" />
+        <activity android:name=".ui.auth.signin.SignInActivity" />
+        <activity android:name=".ui.main.MainActivity" />
+        <activity android:name=".ui.major.MajorActivity" />
+        <activity android:name=".ui.image.ImageActivity" />
+        <activity android:name=".ui.requirement.action.cancel.CancelActivity" />
+        <activity android:name=".ui.requirement.action.end.EndRepairActivity" />
+        <activity android:name=".ui.requirement.action.search.SearchActivity" />
         <activity
             android:name=".ui.requirement.action.view.ViewRequirementActivity"
-            android:launchMode="singleTask" />
-        <activity
-            android:name=".ui.requirement.action.write.WriteEstimationActivity"
-            android:launchMode="singleTask" />
-        <activity
-            android:name=".ui.mypage.account.AccountActivity"
-            android:launchMode="singleTask" />
-        <activity
-            android:name=".ui.mypage.alarm.AlarmActivity"
-            android:launchMode="singleTask" />
-        <activity
-            android:name=".ui.mypage.notice.NoticeActivity"
-            android:launchMode="singleTask" />
-        <activity
-            android:name=".ui.mypage.notice.detail.NoticeDetailActivity"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTop" />        <!-- 실측요청건을 고려 singleTop 로 설정 -->
+        <activity android:name=".ui.requirement.action.write.WriteEstimationActivity" />
+        <activity android:name=".ui.requirement.action.write.MeasurementActivity" />
+        <activity android:name=".ui.mypage.account.AccountActivity" />
+        <activity android:name=".ui.mypage.alarm.AlarmActivity" />
+        <activity android:name=".ui.mypage.notice.NoticeActivity" />
+        <activity android:name=".ui.mypage.notice.detail.NoticeDetailActivity" />
 
         <service
             android:name=".SoogongMasterMessagingService"

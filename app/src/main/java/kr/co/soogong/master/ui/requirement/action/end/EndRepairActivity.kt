@@ -22,10 +22,6 @@ import java.util.*
 class EndRepairActivity : BaseActivity<ActivityEndRepairBinding>(
     R.layout.activity_end_repair
 ) {
-    val requirementId: Int by lazy {
-        EndRepairActivityHelper.getRequirementId(intent)
-    }
-
     private val viewModel: EndRepairViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {

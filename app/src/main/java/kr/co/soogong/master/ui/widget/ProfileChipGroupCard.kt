@@ -1,6 +1,7 @@
 package kr.co.soogong.master.ui.widget
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
@@ -108,7 +109,7 @@ class ProfileChipGroupCard @JvmOverloads constructor(
 
                     titleTextView.text = item.category?.name
                     titleTextView.setTextColor(resources.getColor(R.color.text_basic_color, null))
-                    titleTextView.setTextAppearance(R.style.medium_text_style_regular)
+                    titleTextView.setTextAppearance(R.style.text_style_16sp_regular)
 
                     binding.chipGroupContainer.addView(titleTextView, params)
                     addChipGroup(item.projects)
@@ -150,7 +151,8 @@ class ProfileChipGroupCard @JvmOverloads constructor(
                     else -> it.toString()
                 }
                 chip.setTextColor(resources.getColor(R.color.text_basic_color, null))
-                chip.setTextAppearance(R.style.medium_text_style_regular)
+                chip.setTextAppearance(R.style.text_style_16sp_regular)
+                chip.chipBackgroundColor = ColorStateList.valueOf(context.getColor(R.color.color_E3E3E3))
 
                 chipGroup.addView(chip)
             }

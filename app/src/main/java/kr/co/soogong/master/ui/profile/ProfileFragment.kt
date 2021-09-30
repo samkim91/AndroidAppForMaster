@@ -157,7 +157,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
         PermissionHelper.checkImagePermission(context = requireContext(),
             onGranted = {
                 TedImagePicker.with(requireContext())
-                    .buttonBackground(R.drawable.shape_fill_green_background)
+                    .buttonBackground(R.drawable.shape_green_background_radius8)
                     .start { uri ->
                         if (FileHelper.isImageExtension(uri, requireContext()) == false) {
                             requireContext().toast(getString(R.string.invalid_image_extension))
@@ -167,7 +167,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
                         viewModel.profileImage.value = uri
 
                         if (viewModel.profile.value?.approvedStatus == ApprovedCodeTable.code) {
-                            val dialog = CustomDialog(
+                            val dialog = CustomDialog.newInstance(
                                 dialogData = DialogData.getConfirmingForRequiredDialogData(
                                     requireContext()
                                 ),

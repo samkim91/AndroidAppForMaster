@@ -107,7 +107,7 @@ class PortfolioListActivity : BaseActivity<ActivityEditProfileWithCardBinding>(
         binding.recyclerview.adapter =
             PortfolioListAdapter(
                 leftButtonClickListener = { id ->
-                    val dialog = CustomDialog(
+                    val dialog = CustomDialog.newInstance(
                         dialogData = when(pageName) {
                             PORTFOLIO -> DialogData.getAskingDeletePortfolioDialogData(this@PortfolioListActivity)
                             else -> DialogData.getAskingDeletePriceByProjectDialogData(this@PortfolioListActivity)

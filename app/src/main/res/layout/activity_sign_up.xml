@@ -42,7 +42,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/progress_percent_indicator"
-            style="@style/small_text_style.medium"
+            style="@style/text_style_14sp.medium"
             android:textColor="@color/color_1FC472"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

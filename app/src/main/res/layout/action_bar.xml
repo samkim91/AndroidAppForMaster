@@ -22,7 +22,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/title"
-            style="@style/big_text_style.medium"
+            style="@style/text_style_18sp.medium"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="@dimen/actionbar_title_margin_start"

@@ -22,7 +22,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/master_store_name"
-                style="@style/medium_text_style.medium"
+                style="@style/text_style_16sp.medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/my_page_master_store_name_margin_start"
@@ -41,7 +41,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/master_label"
-                style="@style/small_text_style.medium"
+                style="@style/text_style_14sp.medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/my_page_master_label_margin_start"
@@ -55,7 +55,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/master_id"
-                style="@style/small_text_style.medium"
+                style="@style/text_style_14sp.medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/gap_20"
@@ -77,7 +77,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    style="@style/small_text_style.medium"
+                    style="@style/text_style_14sp.medium"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_marginEnd="@dimen/my_page_account_setting_label_margin_end"
@@ -110,7 +110,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/notice_title"
-                style="@style/medium_text_style.medium"
+                style="@style/text_style_16sp.medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/my_page_margin_start"
@@ -153,7 +153,7 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/detail_title"
-                    style="@style/small_text_style.medium"
+                    style="@style/text_style_14sp.medium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/my_page_notice_total_margin_end"
@@ -207,7 +207,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/empty_text"
-                style="@style/small_text_style.medium"
+                style="@style/text_style_14sp.medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/empty_notice_list_message"
@@ -247,7 +247,7 @@
                 android:layout_marginStart="@dimen/my_page_margin_start"
                 android:layout_marginTop="@dimen/my_page_call_button_margin_top"
                 android:layout_marginEnd="@dimen/my_page_margin_end"
-                android:background="@drawable/shape_fill_transparent_board_green"
+                android:background="@drawable/shape_transparent_background_green_board_radius8"
                 android:onClick="@{() -> vm.callAction()}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -266,7 +266,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/call_button_text"
-                style="@style/medium_text_style.bold"
+                style="@style/text_style_16sp.bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/my_page_call_button_text_margin_start"
@@ -284,7 +284,7 @@
                 android:layout_marginStart="@dimen/my_page_margin_start"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="@dimen/my_page_margin_end"
-                android:background="@drawable/shape_fill_kakao_background"
+                android:background="@drawable/shape_kakao_background_radius8"
                 android:onClick="@{() -> vm.kakaoAction()}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -303,7 +303,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/kakao_talk_btn_text"
-                style="@style/medium_text_style.bold"
+                style="@style/text_style_16sp.bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/my_page_kakao_button_text_margin_start"
@@ -316,7 +316,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/time"
-                style="@style/medium_text_style.medium"
+                style="@style/text_style_16sp.medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/my_page_time_notice_margin_top"

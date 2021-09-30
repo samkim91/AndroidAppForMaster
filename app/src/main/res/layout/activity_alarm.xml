@@ -26,9 +26,7 @@
                 android:id="@+id/marketing_push"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/alarm_margin_start"
                 android:layout_marginTop="@dimen/gap_1"
-                android:layout_marginEnd="@dimen/alarm_margin_end"
                 app:checked="@{vm.marketingPush}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -40,8 +38,6 @@
                 android:id="@+id/marketing_push_at_night"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/alarm_margin_start"
-                android:layout_marginEnd="@dimen/alarm_margin_end"
                 app:checked="@{vm.marketingPushAtNight}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -51,14 +47,14 @@
                 app:title='@{"야간 마케팅 푸시 알림"}' />
 
             <androidx.appcompat.widget.AppCompatTextView
+                style="@style/text_style_13sp.medium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/tiny_small_text_style.medium"
-                android:textColor="@color/color_9E9E9E"
                 android:layout_marginStart="@dimen/gap_20"
                 android:layout_marginTop="@dimen/gap_15"
                 android:layout_marginEnd="@dimen/gap_20"
                 android:text="@string/introduction_alarm_text"
+                android:textColor="@color/color_9E9E9E"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/marketing_push_at_night" />

@@ -1,691 +1,166 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:bind="http://schemas.android.com/bind"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="kr.co.soogong.master.data.model.requirement.RequirementStatus"/>
 
         <variable
             name="vm"
             type="kr.co.soogong.master.ui.requirement.action.view.ViewRequirementViewModel" />
     </data>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
         <include
             android:id="@+id/action_bar"
-            layout="@layout/action_bar" />
+            layout="@layout/action_bar_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="@dimen/gap_0"
+            android:overScrollMode="never"
+            app:layout_constraintBottom_toBottomOf="@id/buttons_divider"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/action_bar">
 
-            <ScrollView
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:overScrollMode="never">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <kr.co.soogong.master.ui.widget.RequirementIntro
+                    android:id="@+id/requirement_intro"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="120dp">
+                    android:layout_marginStart="@dimen/gap_20"
+                    android:layout_marginTop="@dimen/gap_32"
+                    android:layout_marginEnd="@dimen/gap_20"
+                    app:initByRequirement="@{vm.requirement}" />
 
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/banner_image"
-                        android:layout_width="0dp"
-                        android:layout_height="120dp"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/ic_banner_2"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                <kr.co.soogong.master.ui.widget.RequirementProgress
+                    android:id="@+id/requirement_status"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/gap_20"
+                    android:layout_marginTop="@dimen/gap_16"
+                    android:layout_marginEnd="@dimen/gap_20"
+                    app:endingText="@{@string/progress_ending_text}"
+                    app:startingText="@{@string/progress_starting_text}" />
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/status_text"
-                        style="@style/medium_text_style.bold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="32dp"
-                        android:textColor="@color/color_1FC472"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/banner_image"
-                        bind:status="@{vm.requirement}"
-                        tools:text="견적요청" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/location"
-                        style="@style/big_text_style.bold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="@dimen/requirement_card_location_margin_top"
-                        android:layout_marginEnd="20dp"
-                        android:ellipsize="end"
-                        android:lines="1"
-                        android:text="@{vm.requirement.address}"
-                        android:textColor="@color/primary_text_color"
-                        app:layout_constrainedWidth="true"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/status_text"
-                        tools:text="서울시 관악구 봉천동 70 봉천동 70 123-124" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/project"
-                        style="@style/big_text_style.bold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="@dimen/requirement_card_type_margin_top"
-                        android:layout_marginEnd="20dp"
-                        android:ellipsize="end"
-                        android:lines="1"
-                        android:text="@{vm.requirement.projectName}"
-                        android:textColor="@color/primary_text_color"
-                        app:layout_constrainedWidth="true"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/location"
-                        tools:text="욕실 위생도기 및 수전 설치/교체 123123123123" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/first_time"
-                        style="@style/small_text_style.medium"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="@dimen/requirement_card_first_time_margin_top"
-                        android:textColor="@color/tertiary_text_color"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/project"
-                        bind:requested_date="@{vm.requirement.createdAt}"
-                        tools:text="최초 요청일 : 2021.01.11 - 13:20" />
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/line"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/line_height"
-                        android:layout_marginStart="@dimen/estimation_card_default_margin_start"
-                        android:layout_marginTop="@dimen/estimation_card_default_margin_top"
-                        android:layout_marginEnd="@dimen/estimation_card_default_margin_end"
-                        android:background="@color/line_color"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/first_time" />
-
-
-                    <!-- region 고객 리뷰 -->
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/customer_review_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingStart="@dimen/estimation_card_default_margin_start"
-                        android:paddingEnd="@dimen/estimation_card_default_margin_end"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/line">
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/customer_review_title"
-                            style="@style/medium_text_style.bold"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/estimation_card_default_margin_top"
-                            android:text="@string/view_estimate_customer_review_title"
-                            android:textColor="@color/text_basic_color"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/master_recommendation_rating_text"
-                            style="@style/tiny_text_style.medium"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/estimation_card_master_rating_margin_top"
-                            android:layout_marginEnd="@dimen/estimation_card_default_margin_start"
-                            android:text="@string/master_recommendation_label"
-                            android:textColor="@color/text_basic_color"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/customer_review_title" />
-
-                        <androidx.appcompat.widget.AppCompatRatingBar
-                            android:id="@+id/master_recommendation_rating_bar"
-                            style="@style/Widget.AppCompat.RatingBar.Small"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/estimation_card_master_rating_bar_margin_start"
-                            android:numStars="5"
-                            android:progressTint="@color/color_22D47B"
-                            android:rating="@{Float.valueOf(String.valueOf(vm.review.recommendation))}"
-                            app:layout_constraintStart_toEndOf="@id/master_recommendation_rating_text"
-                            app:layout_constraintTop_toTopOf="@id/master_recommendation_rating_text" />
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/master_rating_kindness_text"
-                            style="@style/tiny_text_style.medium"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/estimation_card_master_rating_margin_top_8"
-                            android:layout_marginEnd="@dimen/estimation_card_default_margin_start"
-                            android:text="@string/master_kindness_label"
-                            android:textColor="@color/text_basic_color"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/master_recommendation_rating_text" />
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/master_rating_kindness_score"
-                            style="@style/tiny_text_style.medium"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/estimation_card_master_rating_margin_start_2"
-                            android:textColor="@color/color_1FC472"
-                            android:text="@{String.valueOf(vm.review.kindness)}"
-                            app:layout_constraintStart_toEndOf="@id/master_rating_kindness_text"
-                            app:layout_constraintTop_toTopOf="@id/master_rating_kindness_text"
-                            tools:text="4" />
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/master_rating_quality_text"
-                            style="@style/tiny_text_style.medium"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/estimation_card_master_rating_margin_start_10"
-                            android:text="@string/master_quality_label"
-                            android:textColor="@color/text_basic_color"
-                            app:layout_constraintStart_toEndOf="@id/master_rating_kindness_score"
-                            app:layout_constraintTop_toTopOf="@id/master_rating_kindness_text" />
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/master_rating_quality_score"
-                            style="@style/tiny_text_style.medium"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/estimation_card_master_rating_margin_start_2"
-                            android:text="@{String.valueOf(vm.review.quality)}"
-                            android:textColor="@color/color_1FC472"
-                            app:layout_constraintStart_toEndOf="@id/master_rating_quality_text"
-                            app:layout_constraintTop_toTopOf="@id/master_rating_kindness_text"
-                            tools:text="4" />
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/master_rating_affordability_text"
-                            style="@style/tiny_text_style.medium"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/estimation_card_master_rating_margin_start_10"
-                            android:text="@string/price_affordability_label"
-                            android:textColor="@color/text_basic_color"
-                            app:layout_constraintStart_toEndOf="@id/master_rating_quality_score"
-                            app:layout_constraintTop_toTopOf="@id/master_rating_kindness_text" />
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/master_rating_affordability_score"
-                            style="@style/tiny_text_style.medium"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/estimation_card_master_rating_margin_start_2"
-                            android:text="@{String.valueOf(vm.review.affordability)}"
-                            android:textColor="@color/color_1FC472"
-                            app:layout_constraintStart_toEndOf="@id/master_rating_affordability_text"
-                            app:layout_constraintTop_toTopOf="@id/master_rating_kindness_text"
-                            tools:text="4" />
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/master_rating_punctuality_text"
-                            style="@style/tiny_text_style.medium"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/estimation_card_master_rating_margin_start_10"
-                            android:text="@string/punctuality_label"
-                            android:textColor="@color/text_basic_color"
-                            app:layout_constraintStart_toEndOf="@id/master_rating_affordability_score"
-                            app:layout_constraintTop_toTopOf="@id/master_rating_kindness_text" />
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/master_rating_punctuality_score"
-                            style="@style/tiny_text_style.medium"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/estimation_card_master_rating_margin_start_2"
-                            android:text="@{String.valueOf(vm.review.punctuality)}"
-                            android:textColor="@color/color_1FC472"
-                            app:layout_constraintStart_toEndOf="@id/master_rating_punctuality_text"
-                            app:layout_constraintTop_toTopOf="@id/master_rating_kindness_text"
-                            tools:text="4" />
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/customer_review_type"
-                            style="@style/tiny_text_style.regular"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@{vm.review.projectType}"
-                            android:layout_marginTop="@dimen/estimation_card_master_rating_margin_top_10"
-                            android:textColor="@color/text_primary_color"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/master_rating_kindness_text"
-                            tools:text="욕실 위생도기 및 수전 설치/교체 시공" />
-
-                        <kr.co.prnd.readmore.ReadMoreTextView
-                            android:id="@+id/customer_review_content"
-                            style="@style/small_text_style.regular"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/estimation_card_master_rating_margin_top_12"
-                            android:textColor="@color/primary_text_color"
-                            android:text="@{vm.review.reviewContent}"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/customer_review_type"
-                            app:readMoreColor="@color/color_1FC472"
-                            app:readMoreMaxLine="5"
-                            app:readMoreText="...더보기"
-                            tools:text="너무 꼼꼼히 잘 해주셨어요. 다음에 또 부탁드리고 싶네요! 감사합니다." />
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/review_photo_list"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/estimation_card_master_rating_margin_top_12"
-                            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/customer_review_content"
-                            app:spanCount="4"
-                            bind:visible="@{vm.review.imageList}"
-                            bind:photo_list="@{vm.review.imageList}" />
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/customer_review_date"
-                            style="@style/tiny_text_style.regular"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/estimation_card_master_rating_margin_top_12"
-                            bind:to_date_string="@{vm.review.createdAt}"
-                            android:textColor="@color/text_primary_color"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/review_photo_list"
-                            tools:text="2020.07.01" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/customer_review_divider"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/divider_height"
-                        android:layout_marginTop="@dimen/estimation_card_default_margin_top"
-                        android:background="@drawable/divider"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/customer_review_layout" />
-
-                    <androidx.constraintlayout.widget.Group
-                        android:id="@+id/customer_review_group"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:visibility="gone"
-                        app:constraint_referenced_ids="customer_review_layout, customer_review_divider" />
-                    <!-- region end 고객 리뷰 -->
-
-                    <!-- region 나의 최종 시공 내용 -->
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/repair_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingStart="@dimen/estimation_card_default_margin_start"
-                        android:paddingEnd="@dimen/estimation_card_default_margin_end"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/customer_review_divider">
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/repair_title"
-                            style="@style/medium_text_style.bold"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/estimation_card_default_margin_top"
-                            android:text="@string/view_repair_title"
-                            android:textColor="@color/text_basic_color"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <LinearLayout
-                            android:id="@+id/custom_frame_for_repair_detail"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/repair_title" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/repair_divider"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/divider_height"
-                        android:layout_marginTop="@dimen/estimation_card_default_margin_top"
-                        android:background="@drawable/divider"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/repair_layout" />
-
-                    <androidx.constraintlayout.widget.Group
-                        android:id="@+id/repair_group"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:visibility="gone"
-                        app:constraint_referenced_ids="repair_divider, repair_layout" />
-                    <!-- region end 나의 최종 시공 내용 -->
-
-                    <!-- region 고객 요청 내용 -->
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/customer_request_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:paddingStart="@dimen/estimation_card_default_margin_start"
-                        android:paddingEnd="@dimen/estimation_card_default_margin_end"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/repair_divider"
-                        app:layout_constraintEnd_toEndOf="parent">
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/customer_request_title"
-                            style="@style/medium_text_style.bold"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/estimation_card_default_margin_top"
-                            android:text="@string/view_estimate_customer_request_title"
-                            android:textColor="@color/text_basic_color"
-                            app:layout_constraintHorizontal_bias="0"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="@id/customer_request_layout"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            />
-
-                        <LinearLayout
-                            android:id="@+id/custom_frame"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/customer_request_title" />
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/photo_title"
-                            style="@style/small_text_style.regular"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="12dp"
-                            android:text="@string/view_estimate_photo_title"
-                            android:textColor="@color/text_primary_color"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/custom_frame"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0"
-                            bind:visible="@{vm.requirement.images}" />
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/photo_list"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/gap_4"
-                            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/photo_title"
-                            app:spanCount="4"
-                            bind:photo_list="@{vm.requirement.images}"
-                            bind:visible="@{vm.requirement.images}"
-                            tools:listitem="@layout/view_holder_image" />
-
-                        <ImageView
-                            android:id="@+id/call_button"
-                            android:layout_width="@dimen/estimation_card_call_to_customer_button_width"
-                            android:layout_height="@dimen/estimation_card_call_to_customer_button_height"
-                            android:layout_marginTop="@dimen/estimation_card_call_to_customer_button_margin_top"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/photo_list" />
-<!--                        android:onClick="@{() -> vm.callToClient()}"-->
-
-                        <ImageView
-                            android:id="@+id/call_button_icon"
-                            android:layout_width="@dimen/my_page_call_button_icon_width"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/ic_call"
-                            app:layout_constraintBottom_toBottomOf="@id/call_button"
-                            app:layout_constraintEnd_toStartOf="@id/call_button_text"
-                            app:layout_constraintHorizontal_chainStyle="packed"
-                            app:layout_constraintStart_toStartOf="@id/call_button"
-                            app:layout_constraintTop_toTopOf="@id/call_button" />
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/call_button_text"
-                            style="@style/medium_text_style.bold"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/my_page_call_button_text_margin_start"
-                            android:text="@string/requirements_card_call_button"
-                            android:textColor="@color/color_1FC472"
-                            app:layout_constraintBottom_toBottomOf="@id/call_button"
-                            app:layout_constraintEnd_toEndOf="@id/call_button"
-                            app:layout_constraintStart_toEndOf="@id/call_button_icon"
-                            app:layout_constraintTop_toTopOf="@id/call_button" />
-
-                        <androidx.constraintlayout.widget.Group
-                            android:id="@+id/call_to_customer_container"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:visibility="gone"
-                            app:constraint_referenced_ids="call_button, call_button_icon, call_button_text" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/customer_request_divider"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/divider_height"
-                        android:layout_marginTop="@dimen/estimation_card_default_margin_top"
-                        android:background="@drawable/divider"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/customer_request_layout" />
-
-                    <androidx.constraintlayout.widget.Group
-                        android:id="@+id/customer_request_group"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:visibility="visible"
-                        app:constraint_referenced_ids="customer_request_divider, customer_request_layout" />
-                    <!-- region end 고객 요청 내용 -->
-
-                    <!-- region 나의 제안 내용 -->
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/estimation_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingStart="@dimen/estimation_card_default_margin_start"
-                        android:paddingEnd="@dimen/estimation_card_default_margin_end"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/customer_request_divider">
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/estimation_title"
-                            style="@style/medium_text_style.bold"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/estimation_card_default_margin_top"
-                            android:text="@string/view_estimate_transmission_title"
-                            android:textColor="@color/text_basic_color"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <LinearLayout
-                            android:id="@+id/custom_frame_for_estimation_detail"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/estimation_title" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/estimation_divider"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/divider_height"
-                        android:layout_marginTop="@dimen/estimation_card_default_margin_top"
-                        android:background="@drawable/divider"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/estimation_layout" />
-
-                    <androidx.constraintlayout.widget.Group
-                        android:id="@+id/estimation_group"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:visibility="gone"
-                        app:constraint_referenced_ids="estimation_divider, estimation_layout" />
-                    <!-- region end 나의 제안 내용 -->
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </ScrollView>
-
-            <!-- region 견적 마감일 -->
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/due_date_container"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                app:layout_constraintBottom_toTopOf="@id/refuse_button"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
+                <kr.co.soogong.master.ui.widget.AlertBox
+                    android:id="@+id/alert_box"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/gap_20"
+                    android:layout_marginTop="@dimen/gap_16"
+                    android:layout_marginEnd="@dimen/gap_20"
+                    android:visibility="gone"
+                    app:alertContent="@{@string/alert_box_content_for_view_requirement_in_measuring}"
+                    app:alertTitle="@{@string/alert_box_title_for_view_requirement_in_measuring}"
+                    app:theme="@{100}" />
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/end_time_background"
-                    android:layout_width="0dp"
-                    android:layout_height="40dp"
-                    android:background="@drawable/shape_fill_gray_top_round"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/line_height"
+                    android:layout_marginTop="@dimen/estimation_card_default_margin_top"
+                    android:background="@color/line_color" />
+
+                <kr.co.soogong.master.ui.widget.RequirementBasic
+                    android:id="@+id/requirement_basic"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/gap_20"
+                    android:layout_marginTop="@dimen/gap_20"
+                    android:layout_marginEnd="@dimen/gap_20"
+                    app:address="@{vm.requirement.address}"
+                    app:createdAt="@{vm.requirement.createdAt}"
+                    app:measurementBadgeVisibility="@{vm.requirement.typeCode}"
+                    app:project="@{vm.requirement.projectName}"
+                    app:requirementToken="@{vm.requirement.token}" />
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/end_time_icon"
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
-                    android:layout_marginEnd="4dp"
-                    android:src="@drawable/ic_alarm"
-                    app:layout_constraintBottom_toBottomOf="@id/end_time_background"
-                    app:layout_constraintEnd_toStartOf="@id/end_time_label"
-                    app:layout_constraintHorizontal_chainStyle="packed"
-                    app:layout_constraintStart_toStartOf="@id/end_time_background"
-                    app:layout_constraintTop_toTopOf="@id/end_time_background" />
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/gap_10"
+                    android:layout_marginTop="@dimen/gap_20"
+                    android:background="@drawable/thick_shading_line" />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/end_time_label"
-                    style="@style/small_text_style.bold"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:id="@+id/flexible_container"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/color_FF711D"
-                    app:layout_constraintBottom_toBottomOf="@id/end_time_background"
-                    app:layout_constraintEnd_toStartOf="@id/end_time"
-                    app:layout_constraintStart_toEndOf="@id/end_time_icon"
-                    app:layout_constraintTop_toTopOf="@id/end_time_background"
-                    tools:text="견적 마감일 : " />
+                    android:orientation="vertical" />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/end_time"
-                    style="@style/small_text_style.bold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/basic_white"
-                    app:layout_constraintBottom_toBottomOf="@id/end_time_background"
-                    app:layout_constraintEnd_toEndOf="@id/end_time_background"
-                    app:layout_constraintStart_toEndOf="@id/end_time_label"
-                    app:layout_constraintTop_toTopOf="@id/end_time_background"
-                    bind:closed_date="@{vm.requirement.closedAt}"
-                    tools:text="2022.01.11 - 13:20" />
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/gap_150"
+                    android:background="@color/F2F2F2" />
+            </LinearLayout>
+        </ScrollView>
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
-            <!-- region end 견적 마감일 -->
+        <kr.co.soogong.master.ui.widget.BlueButton
+            android:id="@+id/call_to_customer_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/gap_14"
+            android:visibility="gone"
+            app:buttonText="@{@string/consult_with_customer_button_text}"
+            app:layout_constraintBottom_toTopOf="@id/requirement_due_date"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+             />
 
-            <!-- region 견적을 보낼래요/견적을 내기 어려워요 버튼 -->
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/refuse_button"
-                style="@style/medium_text_style.bold"
-                android:layout_width="0dp"
-                android:layout_height="48dp"
-                android:background="@color/color_FF711D"
-                android:text="@string/view_estimate_refuse"
-                android:textColor="@color/basic_white"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/accept_button"
-                app:layout_constraintStart_toStartOf="parent" />
+        <kr.co.soogong.master.ui.widget.RequirementDueDate
+            android:id="@+id/requirement_due_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/gap_48"
+            android:visibility="gone"
+            android:elevation="@dimen/gap_1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:setDueDate="@{vm.requirement}"
+            tools:visibility="visible" />
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/accept_button"
-                style="@style/medium_text_style.bold"
-                android:layout_width="0dp"
-                android:layout_height="48dp"
-                android:background="@color/color_22D47B"
-                android:text="@string/view_estimate_accept"
-                android:textColor="@color/basic_white"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/refuse_button" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/buttons_divider"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_height"
+            android:layout_marginBottom="@dimen/gap_48"
+            android:background="@color/line_color"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
-            <androidx.constraintlayout.widget.Group
-                android:id="@+id/requested_button_group"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                app:constraint_referenced_ids="due_date_container, accept_button, refuse_button" />
-            <!-- region end 승인/취소 버튼 -->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/left_button"
+            style="@style/text_style_16sp.bold"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="@dimen/gap_48"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/right_button"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:background="@color/color_FF711D"
+            tools:text="실측 안할래요"
+            tools:textColor="@color/basic_white" />
 
-            <!-- region 취소 됐음/시공 완료 버튼 -->
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/cancel_button"
-                style="@style/medium_text_style.bold"
-                android:layout_width="0dp"
-                android:layout_height="48dp"
-                android:background="@color/color_FF711D"
-                android:text="@string/view_estimate_cancelled"
-                android:textColor="@color/basic_white"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/done_button"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/done_button"
-                style="@style/medium_text_style.bold"
-                android:layout_width="0dp"
-                android:layout_height="48dp"
-                android:background="@color/color_22D47B"
-                android:text="@string/view_estimate_done_button"
-                android:textColor="@color/basic_white"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/cancel_button" />
-            <!-- region end 취소 됐음/시공 완료 버튼 -->
-
-            <!-- region 리뷰 요청 버튼 -->
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/ask_review_button"
-                style="@style/medium_text_style.bold"
-                android:layout_width="0dp"
-                android:layout_height="48dp"
-                android:background="@drawable/default_button_selector"
-                android:text="@string/view_estimate_ask_review"
-                android:textColor="@color/basic_white"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </LinearLayout>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/right_button"
+            style="@style/text_style_16sp.bold"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="@dimen/gap_48"
+            android:background="@color/color_1FC472"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/left_button"
+            tools:text="실측 할래요"
+            tools:textColor="@color/basic_white" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

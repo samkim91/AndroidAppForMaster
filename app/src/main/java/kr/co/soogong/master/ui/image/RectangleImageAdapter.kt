@@ -25,7 +25,6 @@ class RectangleImageAdapter(
                 cardClickListener(position)
             }
         }
-
     }
 
     override fun getItemCount(): Int = imageList.size

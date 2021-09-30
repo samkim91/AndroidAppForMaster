@@ -85,7 +85,7 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
                         dialogBundle = BottomDialogBundle.getCareerYearBundle(),
                         itemClick = { _, value ->
                             if (viewModel.profile.value?.approvedStatus == ApprovedCodeTable.code) {
-                                val dialog = CustomDialog(
+                                val dialog = CustomDialog.newInstance(
                                     dialogData = DialogData.getConfirmingForRequiredDialogData(this@EditRequiredInformationActivity),
                                     yesClick = { viewModel.saveCareerPeriod(value) },
                                     noClick = { })
@@ -152,6 +152,9 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
             }
 
             defaultButton.setOnClickListener {
+                if (!isFulfilled(this@EditRequiredInformationActivity, binding, viewModel))
+                    return@setOnClickListener
+
                 viewModel.requestApprove()
             }
         }
@@ -186,14 +189,14 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
                 MASTER_APPROVED_STATUS -> {
                     when (value) {
                         NotApprovedCodeTable.code -> {
-                            setRequirementInformationPercentage()
-                            setLayoutForNotApprovedMaster()
+                            setRequirementInformationPercentage(this, binding, viewModel)
+                            setLayoutForNotApprovedMaster(this, binding)
                         }
                         RequestApproveCodeTable.code -> {
-                            setRequirementInformationPercentage()
-                            setLayoutForRequestApproveMaster()
+                            setRequirementInformationPercentage(this, binding, viewModel)
+                            setLayoutForRequestApproveMaster(this, binding)
                         }
-                        else -> setLayoutForApprovedMaster()
+                        else -> setLayoutForApprovedMaster(binding)
                     }
                 }
             }
@@ -204,77 +207,6 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
         Timber.tag(TAG).d("onStart: ")
         super.onStart()
         viewModel.requestRequiredInformation()
-    }
-
-    private fun setLayoutForNotApprovedMaster() {
-        bind {
-            alertContainerToFillUpRequiredInformation.isVisible = true
-            requiredProfileCardPercentage.isVisible = true
-            defaultButton.isVisible = true
-            defaultButton.isEnabled = viewModel.percentage.value == 100.0f
-            defaultButton.text = getString(R.string.request_confirmation)
-        }
-    }
-
-    private fun setLayoutForRequestApproveMaster() {
-        bind {
-            alertContainerToFillUpRequiredInformation.isVisible = true
-            requiredProfileCardPercentage.isVisible = true
-            groupSawCheckForConfirmedMaster.isVisible = false
-            defaultButton.isVisible = true
-            defaultButton.isEnabled = false
-            defaultButton.text = getString(R.string.waiting_for_confirmation)
-        }
-    }
-
-    private fun setLayoutForApprovedMaster() {
-        bind {
-            alertContainerToFillUpRequiredInformation.isVisible = false
-            requiredProfileCardPercentage.isVisible = false
-            groupSawCheckForConfirmedMaster.isVisible = true
-            defaultButton.isVisible = false
-        }
-    }
-
-    private fun setRequirementInformationPercentage() {
-        bind {
-            val totalCount = 10
-            var filledCount = 0
-
-            with(viewModel.requiredInformation) {
-                if (!value?.introduction.isNullOrEmpty()) filledCount++
-                if (!value?.shopImages.isNullOrEmpty()) filledCount++
-                if (!value?.businessUnitInformation?.businessType.isNullOrEmpty()) filledCount++
-                if (value?.warrantyInformation?.warrantyPeriod != null && value?.warrantyInformation?.warrantyDescription != null) filledCount++
-                if (!value?.career.isNullOrEmpty()) filledCount++
-                if (!value?.tel.isNullOrEmpty()) filledCount++
-                if (!value?.ownerName.isNullOrEmpty()) filledCount++
-                if (!value?.majors.isNullOrEmpty()) filledCount++
-                if (!value?.companyAddress?.roadAddress.isNullOrEmpty()) filledCount++
-                if (value?.serviceArea != null) filledCount++
-            }
-
-            viewModel.percentage.value = filledCount.toFloat() / totalCount.toFloat() * 100f
-
-            requiredProfileCardPercentage.text =
-                getString(R.string.percentage_of_required_information, viewModel.percentage.value?.toInt())
-
-            if (viewModel.percentage.value == 100.0f) {
-                requiredProfileCardPercentage.setTextColor(
-                    resources.getColor(
-                        R.color.color_1FC472,
-                        null
-                    )
-                )
-            } else {
-                requiredProfileCardPercentage.setTextColor(
-                    resources.getColor(
-                        R.color.color_FF711D,
-                        null
-                    )
-                )
-            }
-        }
     }
 
     private fun startActivityCommonCode(pageName: String) {

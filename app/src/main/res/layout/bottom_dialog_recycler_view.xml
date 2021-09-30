@@ -11,7 +11,7 @@
 
         <TextView
             android:id="@+id/dialog_title"
-            style="@style/big_text_style.bold"
+            style="@style/text_style_18sp.bold"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/gap_20"
@@ -24,7 +24,7 @@
 
         <TextView
             android:id="@+id/dialog_subtitle"
-            style="@style/medium_text_style.bold"
+            style="@style/text_style_16sp.bold"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/gap_20"

@@ -20,32 +20,37 @@ sealed class CodeTable {
                 DisposalCodeTable.inKorean -> DisposalCodeTable
                 ElevatorProtectionCodeTable.inKorean -> ElevatorProtectionCodeTable
                 IntimeCodeTable.inKorean -> IntimeCodeTable
+                NoiseCodeTable.inKorean -> NoiseCodeTable
                 AsCodeTable.inKorean -> AsCodeTable
                 SoleCodeTable.inKorean -> SoleCodeTable
                 CorporateCodeTable.inKorean -> CorporateCodeTable
                 FreelancerCodeTable.inKorean -> FreelancerCodeTable
-                else -> NoiseCodeTable
+                CompareCodeTable.inKorean -> CompareCodeTable
+                SecretaryCodeTable.inKorean -> SecretaryCodeTable
+                else -> PortfolioCodeTable
             }
 
         fun findBusinessTypeByKorean(string: String): CodeTable =
-            when(string) {
+            when (string) {
                 SoleCodeTable.inKorean -> SoleCodeTable
                 CorporateCodeTable.inKorean -> CorporateCodeTable
                 else -> FreelancerCodeTable
             }
 
         fun findBusinessTypeByCode(code: String): CodeTable =
-            when(code) {
+            when (code) {
                 SoleCodeTable.code -> SoleCodeTable
                 CorporateCodeTable.code -> CorporateCodeTable
                 else -> FreelancerCodeTable
             }
 
         fun findSubscriptionPlanByCode(code: String): CodeTable =
-            when(code) {
+            when (code) {
                 GuaranteeCodeTable.code -> GuaranteeCodeTable
                 else -> FreeCodeTable
             }
+
+        fun isSecretaryRequirement(code: String?): Boolean = code == SecretaryCodeTable.code
     }
 }
 
@@ -124,44 +129,54 @@ object NoiseCodeTable : CodeTable() {
     override val inKorean: String = "시끄러울 수 있음"
 }
 
-object FreeCodeTable: CodeTable() {
+object FreeCodeTable : CodeTable() {
     override val code: String = "Free"
     override val inKorean: String = "마스터"
 }
 
-object GuaranteeCodeTable: CodeTable() {
+object GuaranteeCodeTable : CodeTable() {
     override val code: String = "Guarantee"
     override val inKorean: String = "개런티 마스터"
 }
 
-object NotApprovedCodeTable: CodeTable() {
+object NotApprovedCodeTable : CodeTable() {
     override val code: String = "NotApproved"
     override val inKorean: String = "미승인"
 }
 
-object RequestApproveCodeTable: CodeTable() {
+object RequestApproveCodeTable : CodeTable() {
     override val code: String = "RequestApprove"
     override val inKorean: String = "승인 대기"
 }
 
-object ApprovedCodeTable: CodeTable() {
+object ApprovedCodeTable : CodeTable() {
     override val code: String = "Approved"
     override val inKorean: String = "승인"
 }
 
-object SoleCodeTable: CodeTable() {
+object SoleCodeTable : CodeTable() {
     override val code: String = "Sole"
     override val inKorean: String = "개인사업자"
 }
 
-object CorporateCodeTable: CodeTable() {
+object CorporateCodeTable : CodeTable() {
     override val code: String = "Corporate"
     override val inKorean: String = "법인사업자"
 }
 
-object FreelancerCodeTable: CodeTable() {
+object FreelancerCodeTable : CodeTable() {
     override val code: String = "Freelancer"
     override val inKorean: String = "프리랜서"
+}
+
+object CompareCodeTable : CodeTable() {
+    override val code: String = "Compare"
+    override val inKorean: String = "비교견적"
+}
+
+object SecretaryCodeTable : CodeTable() {
+    override val code: String = "Secretary"
+    override val inKorean: String = "수공비서"
 }
 
 

@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import androidx.core.content.res.ResourcesCompat
-import androidx.core.view.isVisible
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.model.requirement.estimation.EstimationTypeCode
@@ -13,12 +12,11 @@ import kr.co.soogong.master.databinding.ActivityWriteEstimationBinding
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.ui.dialog.popup.CustomDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData.Companion.getCancelSendingEstimationDialogData
-import kr.co.soogong.master.ui.image.RectangleImageAdapter
-import kr.co.soogong.master.ui.requirement.action.write.WriteEstimationViewModel.Companion.SEND_MESSAGE_FAILED
+import kr.co.soogong.master.ui.requirement.action.write.WriteEstimationViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.ui.requirement.action.write.WriteEstimationViewModel.Companion.SEND_ESTIMATION_SUCCESSFULLY
-import kr.co.soogong.master.uihelper.image.ImageViewActivityHelper
+import kr.co.soogong.master.ui.widget.RequirementDrawerContainer
+import kr.co.soogong.master.ui.widget.RequirementDrawerContainer.Companion.REQUIREMENT_TYPE
 import kr.co.soogong.master.utility.EventObserver
-import kr.co.soogong.master.utility.extension.addAdditionInfoView
 import kr.co.soogong.master.utility.extension.toast
 import kr.co.soogong.master.utility.validation.ValidationHelper
 import timber.log.Timber
@@ -48,39 +46,19 @@ class WriteEstimationActivity : BaseActivity<ActivityWriteEstimationBinding>(
                     customBackPressed()
                 }
 
-
                 button.text = getString(R.string.send_estimation)
                 button.setOnClickListener {
                     registerCostsObserve()
-                    if (viewModel.estimationType.value == EstimationTypeCode.INTEGRATION){
+                    if (viewModel.estimationType.value == EstimationTypeCode.INTEGRATION) {
                         if (!simpleCost.alertVisible && ValidationHelper.isIntRange(viewModel.simpleCost.value!!)) viewModel.sendEstimation()
                     } else {
-                        if((!laborCost.alertVisible && !materialCost.alertVisible && !travelCost.alertVisible) && ValidationHelper.isIntRange(viewModel.totalCost.value!!)) viewModel.sendEstimation()
+                        if ((!laborCost.alertVisible && !materialCost.alertVisible && !travelCost.alertVisible) && ValidationHelper.isIntRange(
+                                viewModel.totalCost.value!!
+                            )
+                        ) viewModel.sendEstimation()
                     }
                 }
             }
-
-            detailButton.setOnClickListener() {
-                if (detailContainer.isVisible) {
-                    detailContainer.visibility = View.GONE
-                    detailIcon.setImageResource(R.drawable.ic_arrow_down)
-                } else {
-                    detailContainer.visibility = View.VISIBLE
-                    detailIcon.setImageResource(R.drawable.ic_arrow_up)
-                }
-            }
-
-            photoList.adapter = RectangleImageAdapter(
-                cardClickListener = { position ->
-                    startActivity(
-                        ImageViewActivityHelper.getIntent(
-                            this@WriteEstimationActivity,
-                            viewModel.requirement.value?.images,
-                            position
-                        )
-                    )
-                }
-            )
 
             requestTypeGroup.setOnCheckedChangeListener { _, checkedId ->
                 when (checkedId) {
@@ -97,7 +75,7 @@ class WriteEstimationActivity : BaseActivity<ActivityWriteEstimationBinding>(
                         totalCost.setEditTextBackground(
                             ResourcesCompat.getDrawable(
                                 resources,
-                                R.drawable.shape_fill_gray_background_gray_border,
+                                R.drawable.shape_gray_background_gray_border_radius50,
                                 null
                             )
                         )
@@ -116,6 +94,10 @@ class WriteEstimationActivity : BaseActivity<ActivityWriteEstimationBinding>(
                     }
                 }
             })
+            // TODO: 2021/08/25 화면 열릴 때 키보드가 나오고 포커스 되는것 까지 구현 필요
+//            if(simpleCost.requestFocus()) window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE)
+//            if (scrollView.post { scrollView.fullScroll(View.FOCUS_DOWN) }) window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE
+//            )
         }
     }
 
@@ -134,20 +116,29 @@ class WriteEstimationActivity : BaseActivity<ActivityWriteEstimationBinding>(
             setTotalAmount()
         })
 
-        viewModel.action.observe(this, EventObserver { event ->
+        viewModel.action.observe(this@WriteEstimationActivity, EventObserver { event ->
             when (event) {
                 SEND_ESTIMATION_SUCCESSFULLY -> {
                     toast(getString(R.string.send_message_succeeded))
                     super.onBackPressed()
                 }
-                SEND_MESSAGE_FAILED -> {
+                REQUEST_FAILED -> {
                     toast(getString(R.string.error_message_of_request_failed))
                 }
             }
         })
 
         viewModel.requirement.observe(this, { requirement ->
-            addAdditionInfoView(binding.customFrame, this, requirement.requirementQnas, requirement.description)
+            binding.flexibleContainer.removeAllViews()
+            // view : 고객 요청 내용
+            RequirementDrawerContainer.addDrawerContainer(
+                context = this,
+                container = binding.flexibleContainer,
+                requirementDto = requirement,
+                contentType = REQUIREMENT_TYPE,
+                isSpread = false,
+                includingCancel = false
+            )
         })
     }
 
@@ -197,8 +188,8 @@ class WriteEstimationActivity : BaseActivity<ActivityWriteEstimationBinding>(
         customBackPressed()
     }
 
-    private fun customBackPressed(){
-        val dialog = CustomDialog(
+    private fun customBackPressed() {
+        val dialog = CustomDialog.newInstance(
             getCancelSendingEstimationDialogData(this@WriteEstimationActivity),
             yesClick = {
                 finish()

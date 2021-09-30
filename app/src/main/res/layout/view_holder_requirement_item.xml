@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:bind="http://schemas.android.com/bind"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -26,11 +25,11 @@
         <!-- region 기본요소 -->
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/status_text"
-            style="@style/small_text_style.bold"
+            style="@style/text_style_14sp.bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/requirement_card_status_margin_top"
-            android:text="@{data.status.toString()}"
+            android:text="@{data.status.inKorean}"
             android:textColor="@color/color_1FC472"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -58,7 +57,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/status_detail"
-            style="@style/small_text_style.medium"
+            style="@style/text_style_14sp.medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/requirement_card_status_detail_margin_top"
@@ -71,32 +70,31 @@
             android:id="@+id/line"
             android:layout_width="0dp"
             android:layout_height="@dimen/line_height"
-            android:layout_marginTop="@dimen/requirement_card_line_margin_top"
+            android:layout_marginTop="@dimen/gap_12"
             android:background="@color/line_color"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/status_text" />
 
-<!--        <androidx.appcompat.widget.AppCompatTextView-->
-<!--            android:id="@+id/request_id"-->
-<!--            style="@style/medium_text_style.medium"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginTop="@dimen/requirement_card_request_id_margin_top"-->
-<!--            android:ellipsize="end"-->
-<!--            android:maxLines="1"-->
-<!--            android:text="@{data.token}"-->
-<!--            android:textColor="@color/text_primary_color"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@id/line"-->
-<!--            tools:text="5156161" />-->
+        <include
+            android:id="@+id/measurement_badge"
+            layout="@layout/measurement_badge"
+            android:layout_width="@dimen/gap_85"
+            android:layout_height="@dimen/gap_26"
+            android:layout_marginTop="@dimen/gap_8"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/line"
+            tools:visibility="visible" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/location"
-            style="@style/big_text_style.bold"
+            style="@style/text_style_18sp.bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/requirement_card_location_margin_top"
+            android:layout_marginTop="@dimen/gap_8"
             android:layout_marginEnd="@dimen/requirement_card_location_margin_end"
             android:ellipsize="end"
             android:maxLines="1"
@@ -106,15 +104,15 @@
             app:layout_constraintEnd_toStartOf="@id/arrow_button"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/line"
+            app:layout_constraintTop_toBottomOf="@id/measurement_badge"
+            app:layout_goneMarginTop="@dimen/gap_12"
             tools:text="서울시 관악구 봉천동 70 봉천동 70 123-124" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/type"
-            style="@style/big_text_style.bold"
+            android:id="@+id/project"
+            style="@style/text_style_16sp.medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/requirement_card_type_margin_top"
             android:layout_marginEnd="@dimen/requirement_card_type_margin_end"
             android:ellipsize="end"
             android:maxLines="1"
@@ -132,125 +130,75 @@
             android:layout_width="@dimen/requirement_card_arrow_button_width"
             android:layout_height="@dimen/requirement_card_arrow_button_height"
             android:src="@drawable/ic_arrow_right"
-            app:layout_constraintBottom_toBottomOf="@id/type"
+            app:layout_constraintBottom_toBottomOf="@id/project"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/location" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/first_date"
-            style="@style/small_text_style.medium"
+            android:id="@+id/created_at"
+            style="@style/text_style_12sp.regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/requirement_card_first_time_margin_top"
+            android:layout_marginTop="@dimen/gap_4"
             android:textColor="@color/tertiary_text_color"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/type"
-            tools:text="최초 요청일 : 2021.01.11 - 13:20" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/second_date"
-            style="@style/small_text_style.medium"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/requirement_card_end_time_margin_top"
-            android:textColor="@color/alert_color"
-            android:visibility="gone"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/first_date"
-            bind:second_datetime_to_string="@{data.closedAt}"
-            tools:text="견적 마감일 : 2021.01.12 - 01:20" />
+            app:layout_constraintTop_toBottomOf="@id/project"
+            app:setDate="@{data.createdAt}"
+            tools:text="2021.01.11 - 13:20" />
         <!-- endregion -->
 
-        <!-- region 매칭대기 -->
-        <kr.co.soogong.master.ui.widget.AmountView
-            android:id="@+id/my_amount"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/requirement_card_amount_view_height"
-            android:layout_marginTop="@dimen/requirement_card_amount_view_margin_top"
-            android:visibility="gone"
-            app:layout_constraintBottom_toTopOf="@id/waiting_label"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/first_date" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/waiting_label"
-            style="@style/small_text_style.medium"
-            android:layout_width="wrap_content"
+        <!-- region 가격/날짜 등 추가정보 -->
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/additional_info_container"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/requirement_card_waiting_view_margin_top"
-            android:gravity="center"
-            android:text="@string/requirements_card_waiting_label"
-            android:textColor="@color/alert_color"
+            android:layout_marginTop="@dimen/gap_12"
+            android:background="@drawable/shape_white_background_radius20"
+            android:orientation="vertical"
+            android:padding="@dimen/gap_8"
             android:visibility="gone"
+            app:divider="@drawable/shape_linear_layout_divider"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/my_amount" />
+            app:layout_constraintTop_toBottomOf="@id/created_at"
+            app:showDividers="middle"
+            tools:backgroundTint="@color/color_FFF2EB" />
         <!-- endregion -->
 
-        <!-- region 시공진행중 -->
+        <!-- region 버튼 -->
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/call_button"
-            style="@style/medium_text_style.bold"
-            android:layout_width="0dp"
+            android:id="@+id/left_button"
+            style="@style/text_style_16sp.bold"
+            android:layout_width="@dimen/gap_0"
             android:layout_height="@dimen/requirement_card_button_default_height"
             android:layout_marginTop="@dimen/requirement_card_call_button_margin_top"
             android:layout_marginEnd="@dimen/requirement_card_call_button_margin_end"
-            android:background="@drawable/shape_fill_transparent_board_green"
-            android:text="@string/requirements_card_call_button"
+            android:background="@drawable/shape_transparent_background_green_board_radius8"
             android:textColor="@color/color_1FC472"
             android:visibility="gone"
-            app:layout_constraintEnd_toStartOf="@id/done_button"
+            tools:visibility="visible"
+            app:layout_constraintEnd_toStartOf="@id/right_button"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/my_amount" />
+            app:layout_constraintTop_toBottomOf="@id/additional_info_container"
+            tools:text="고객에게 전화하기" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/done_button"
-            style="@style/medium_text_style.bold"
-            android:layout_width="0dp"
+            android:id="@+id/right_button"
+            style="@style/text_style_16sp.bold"
+            android:layout_width="@dimen/gap_0"
             android:layout_height="@dimen/requirement_card_button_default_height"
             android:layout_marginStart="@dimen/requirement_card_done_button_margin_start"
             android:layout_marginTop="@dimen/requirement_card_done_button_margin_top"
-            android:background="@drawable/shape_fill_green_background"
-            android:text="@string/requirements_card_done_button"
-            android:textColor="@color/basic_white"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/call_button"
-            app:layout_constraintTop_toBottomOf="@id/my_amount" />
-        <!-- endregion -->
-
-        <!-- region 고객완료요청 -->
-        <!--        <androidx.appcompat.widget.AppCompatButton-->
-        <!--            android:id="@+id/done_button2"-->
-        <!--            style="@style/medium_text_style.bold"-->
-        <!--            android:layout_width="0dp"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_marginStart="@dimen/requirement_card_done_button_margin_start"-->
-        <!--            android:layout_marginTop="@dimen/requirement_card_done_button_margin_top"-->
-        <!--            android:background="@drawable/shape_fill_green_background"-->
-        <!--            android:text="@string/requirements_card_done_button"-->
-        <!--            android:textColor="@color/basic_white"-->
-        <!--            android:visibility="gone"-->
-        <!--            app:layout_constraintEnd_toEndOf="parent"-->
-        <!--            app:layout_constraintStart_toStartOf="parent"-->
-        <!--            app:layout_constraintTop_toBottomOf="@id/my_amount" />-->
-        <!-- endregion -->
-
-        <!-- region 시공완료 -->
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/review_button"
-            style="@style/medium_text_style.bold"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/requirement_card_button_default_height"
-            android:layout_marginTop="@dimen/requirement_card_review_button_margin_top"
             android:background="@drawable/default_rounded_button_selector"
             android:textColor="@color/basic_white"
             android:visibility="gone"
+            tools:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/my_amount" />
+            app:layout_constraintStart_toEndOf="@id/left_button"
+            app:layout_constraintTop_toBottomOf="@id/additional_info_container"
+            tools:text="시공 완료" />
         <!-- endregion -->
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

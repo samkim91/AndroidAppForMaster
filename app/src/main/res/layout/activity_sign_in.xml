@@ -65,7 +65,7 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/alert_unknown_user"
-                    style="@style/small_text_style.regular"
+                    style="@style/text_style_14sp.regular"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/gap_4"
@@ -89,10 +89,10 @@
 
                     <androidx.appcompat.widget.AppCompatEditText
                         android:id="@+id/certification_code"
-                        style="@style/small_text_style.regular"
+                        style="@style/text_style_14sp.regular"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/shape_fill_white_background"
+                        android:background="@drawable/shape_white_background_gray_border_radius8"
                         android:hint="@string/insert_certification_code_edittext_hint"
                         android:inputType="numberSigned"
                         android:maxLength="6"
@@ -110,7 +110,7 @@
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/timer_view"
-                        style="@style/small_text_style.medium"
+                        style="@style/text_style_14sp.medium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/gap_10"
@@ -122,7 +122,7 @@
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/alert_wrong_certification_code"
-                        style="@style/small_text_style.regular"
+                        style="@style/text_style_14sp.regular"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/gap_4"
@@ -136,7 +136,7 @@
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/alert_expired_certification_time"
-                        style="@style/small_text_style.regular"
+                        style="@style/text_style_14sp.regular"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/gap_4"
@@ -150,7 +150,7 @@
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/alert_invalid_certification_code"
-                        style="@style/small_text_style.regular"
+                        style="@style/text_style_14sp.regular"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/gap_4"
@@ -164,7 +164,7 @@
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/alert_empty_certification_code"
-                        style="@style/small_text_style.regular"
+                        style="@style/text_style_14sp.regular"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/gap_4"
@@ -178,7 +178,7 @@
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/confirming_certification_code_received"
-                        style="@style/small_text_style.medium"
+                        style="@style/text_style_14sp.medium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/gap_16"
@@ -191,7 +191,7 @@
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/request_certification_code_again_text"
-                        style="@style/small_text_style.medium"
+                        style="@style/text_style_14sp.medium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/gap_4"
@@ -206,7 +206,7 @@
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/default_button"
-                    style="@style/medium_text_style.bold"
+                    style="@style/text_style_16sp.bold"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/gap_40"
                     android:layout_marginTop="@dimen/gap_20"
