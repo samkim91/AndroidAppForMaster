@@ -11,9 +11,7 @@ import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ActivitySearchBinding
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.ui.requirement.action.search.SearchViewModel.Companion.SEARCH_REQUIREMENTS_FAILED
-import kr.co.soogong.master.ui.requirement.RequirementCardsAdapter
-import kr.co.soogong.master.uihelper.requirment.action.EndRepairActivityHelper
-import kr.co.soogong.master.uihelper.requirment.action.ViewRequirementActivityHelper
+import kr.co.soogong.master.ui.requirement.card.RequirementCardsAdapter
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.extension.debounce
 import kr.co.soogong.master.utility.extension.toast

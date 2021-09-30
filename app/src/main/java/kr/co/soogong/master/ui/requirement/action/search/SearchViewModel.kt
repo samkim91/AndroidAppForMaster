@@ -1,21 +1,25 @@
 package kr.co.soogong.master.ui.requirement.action.search
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import kr.co.soogong.master.data.model.requirement.RequirementCard
+import kr.co.soogong.master.domain.usecase.profile.GetMasterSimpleInfoUseCase
+import kr.co.soogong.master.domain.usecase.requirement.CallToClientUseCase
+import kr.co.soogong.master.domain.usecase.requirement.RequestReviewUseCase
 import kr.co.soogong.master.domain.usecase.requirement.SearchRequirementCardsUseCase
-import kr.co.soogong.master.ui.base.BaseViewModel
+import kr.co.soogong.master.ui.requirement.RequirementViewModel
 import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class SearchViewModel @Inject constructor(
-    private val searchRequirementCardsUseCase: SearchRequirementCardsUseCase
-) : BaseViewModel() {
+    private val searchRequirementCardsUseCase: SearchRequirementCardsUseCase,
+    getMasterSimpleInfoUseCase: GetMasterSimpleInfoUseCase,
+    callToClientUseCase: CallToClientUseCase,
+    requestReviewUseCase: RequestReviewUseCase,
+) : RequirementViewModel(getMasterSimpleInfoUseCase, callToClientUseCase, requestReviewUseCase) {
 
     val searchingText = MutableLiveData("")
 
@@ -24,10 +28,6 @@ class SearchViewModel @Inject constructor(
         get() = _spinnerItems
 
     val searchingPeriod = MutableLiveData(0)
-
-    private val _requirements = MutableLiveData<List<RequirementCard>>()
-    val requirements: LiveData<List<RequirementCard>>
-        get() = _requirements
 
     fun searchRequirements() {
         Timber.tag(TAG).d("searchRequirements: ${searchingText.value} / ${searchingPeriod.value}")
@@ -41,7 +41,7 @@ class SearchViewModel @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
                 onNext = {
-                    _requirements.postValue(it)
+                    requirements.postValue(it)
                 },
                 onError = {
                     setAction(SEARCH_REQUIREMENTS_FAILED)

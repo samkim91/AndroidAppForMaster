@@ -15,6 +15,7 @@ import kr.co.soogong.master.ui.MONEY_TYPE
 import kr.co.soogong.master.ui.base.BaseViewModel
 import kr.co.soogong.master.ui.dialog.popup.CustomDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData
+import kr.co.soogong.master.ui.requirement.RequirementViewModel
 import kr.co.soogong.master.ui.requirement.progress.ProgressViewModel
 import kr.co.soogong.master.ui.widget.RequirementCardAdditionalInfo
 import kr.co.soogong.master.ui.widget.RequirementCardAdditionalInfo.Companion.setContainerTheme
@@ -31,7 +32,7 @@ open class ProgressCardViewHolder(
     override fun bind(
         context: Context,
         fragmentManager: FragmentManager,
-        viewModel: BaseViewModel,
+        viewModel: RequirementViewModel,
         requirementCard: RequirementCard
     ) {
         super.bind(context, fragmentManager, viewModel, requirementCard)
@@ -50,7 +51,7 @@ open class ProgressCardViewHolder(
                 CustomDialog.newInstance(
                     DialogData.getCallToCustomerDialogData(context),
                     yesClick = {
-                        (viewModel as ProgressViewModel).callToClient(requirementId = requirementCard.id)
+                        viewModel.callToClient(requirementId = requirementCard.id)
                         context.startActivity(CallToCustomerHelper.getIntent(requirementCard.tel.toString()))
                     },
                     noClick = { }
@@ -80,7 +81,7 @@ class MeasuringCardViewHolder(
     override fun bind(
         context: Context,
         fragmentManager: FragmentManager,
-        viewModel: BaseViewModel,
+        viewModel: RequirementViewModel,
         requirementCard: RequirementCard
     ) {
         super.bind(context, fragmentManager, viewModel, requirementCard)
@@ -118,7 +119,7 @@ class MeasuredCardViewHolder(
     override fun bind(
         context: Context,
         fragmentManager: FragmentManager,
-        viewModel: BaseViewModel,
+        viewModel: RequirementViewModel,
         requirementCard: RequirementCard
     ) {
         super.bind(context, fragmentManager, viewModel, requirementCard)
@@ -153,7 +154,7 @@ class RepairingCardViewHolder(
     override fun bind(
         context: Context,
         fragmentManager: FragmentManager,
-        viewModel: BaseViewModel,
+        viewModel: RequirementViewModel,
         requirementCard: RequirementCard
     ) {
         super.bind(context, fragmentManager, viewModel, requirementCard)
@@ -184,7 +185,7 @@ class RequestFinishCardViewHolder(
     override fun bind(
         context: Context,
         fragmentManager: FragmentManager,
-        viewModel: BaseViewModel,
+        viewModel: RequirementViewModel,
         requirementCard: RequirementCard
     ) {
         super.bind(context, fragmentManager, viewModel, requirementCard)

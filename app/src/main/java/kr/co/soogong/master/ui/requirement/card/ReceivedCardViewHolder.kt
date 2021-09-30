@@ -13,10 +13,9 @@ import kr.co.soogong.master.ui.CALENDAR_TYPE
 import kr.co.soogong.master.ui.GRAY_THEME
 import kr.co.soogong.master.ui.MONEY_TYPE
 import kr.co.soogong.master.ui.ORANGE_THEME
-import kr.co.soogong.master.ui.base.BaseViewModel
 import kr.co.soogong.master.ui.dialog.popup.CustomDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData
-import kr.co.soogong.master.ui.requirement.received.ReceivedViewModel
+import kr.co.soogong.master.ui.requirement.RequirementViewModel
 import kr.co.soogong.master.ui.widget.RequirementCardAdditionalInfo
 import kr.co.soogong.master.ui.widget.RequirementCardAdditionalInfo.Companion.setContainerTheme
 import kr.co.soogong.master.uihelper.profile.EditRequiredInformationActivityHelper
@@ -33,14 +32,14 @@ open class ReceivedCardViewHolder(
     override fun bind(
         context: Context,
         fragmentManager: FragmentManager,
-        viewModel: BaseViewModel,
+        viewModel: RequirementViewModel,
         requirementCard: RequirementCard
     ) {
         super.bind(context, fragmentManager, viewModel, requirementCard)
 
         with(binding) {
             setCardClickListener {
-                (viewModel as ReceivedViewModel).masterSimpleInfo.value?.approvedStatus.let {
+                viewModel.masterSimpleInfo.value?.approvedStatus.let {
                     when (it) {
                         // 미승인 상태이면, 필수정보를 채우도록 이동
                         NotApprovedCodeTable.code -> {
@@ -102,7 +101,7 @@ class RequestedCardViewHolder(
     override fun bind(
         context: Context,
         fragmentManager: FragmentManager,
-        viewModel: BaseViewModel,
+        viewModel: RequirementViewModel,
         requirementCard: RequirementCard
     ) {
         super.bind(context, fragmentManager, viewModel, requirementCard)
@@ -129,7 +128,7 @@ class EstimatedCardViewHolder(
     override fun bind(
         context: Context,
         fragmentManager: FragmentManager,
-        viewModel: BaseViewModel,
+        viewModel: RequirementViewModel,
         requirementCard: RequirementCard
     ) {
         super.bind(context, fragmentManager, viewModel, requirementCard)
@@ -159,7 +158,7 @@ class RequestConsultCardViewHolder(
     override fun bind(
         context: Context,
         fragmentManager: FragmentManager,
-        viewModel: BaseViewModel,
+        viewModel: RequirementViewModel,
         requirementCard: RequirementCard
     ) {
         super.bind(context, fragmentManager, viewModel, requirementCard)

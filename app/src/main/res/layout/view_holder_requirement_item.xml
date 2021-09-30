@@ -151,7 +151,6 @@
             android:textColor="@color/tertiary_text_color"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/project"
-            app:setDate="@{data.createdAt}"
             tools:text="2021.01.11 - 13:20" />
         <!-- endregion -->
 

@@ -11,8 +11,7 @@ import kr.co.soogong.master.ui.CALENDAR_TYPE
 import kr.co.soogong.master.ui.GRAY_THEME
 import kr.co.soogong.master.ui.GREEN_THEME
 import kr.co.soogong.master.ui.MONEY_TYPE
-import kr.co.soogong.master.ui.base.BaseViewModel
-import kr.co.soogong.master.ui.requirement.done.DoneViewModel
+import kr.co.soogong.master.ui.requirement.RequirementViewModel
 import kr.co.soogong.master.ui.widget.RequirementCardAdditionalInfo
 import kr.co.soogong.master.ui.widget.RequirementCardAdditionalInfo.Companion.setContainerTheme
 
@@ -25,7 +24,7 @@ class DoneViewHolder(
     override fun bind(
         context: Context,
         fragmentManager: FragmentManager,
-        viewModel: BaseViewModel,
+        viewModel: RequirementViewModel,
         requirementCard: RequirementCard
     ) {
         super.bind(context, fragmentManager, viewModel, requirementCard)
@@ -54,7 +53,7 @@ class DoneViewHolder(
             rightButton.isVisible = true
             rightButton.isEnabled = true
             rightButton.setText(R.string.requirements_card_review_button)
-            setRightButtonClickListener { (viewModel as DoneViewModel).askForReview(requirementCard) }
+            setRightButtonClickListener { viewModel.askForReview(requirementCard) }
 
             requirementCard.estimationDto?.repair?.requestReviewYn?.let { requestReviewYn ->
                 if (requestReviewYn) {
@@ -73,7 +72,7 @@ class ClosedViewHolder(
     override fun bind(
         context: Context,
         fragmentManager: FragmentManager,
-        viewModel: BaseViewModel,
+        viewModel: RequirementViewModel,
         requirementCard: RequirementCard
     ) {
         super.bind(context, fragmentManager, viewModel, requirementCard)
@@ -117,7 +116,7 @@ class CanceledViewHolder(
     override fun bind(
         context: Context,
         fragmentManager: FragmentManager,
-        viewModel: BaseViewModel,
+        viewModel: RequirementViewModel,
         requirementCard: RequirementCard
     ) {
         super.bind(context, fragmentManager, viewModel, requirementCard)
