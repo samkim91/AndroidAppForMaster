@@ -8,6 +8,7 @@ import kr.co.soogong.master.R
 import kr.co.soogong.master.data.model.requirement.RequirementCard
 import kr.co.soogong.master.databinding.FragmentRequirementDoneBinding
 import kr.co.soogong.master.ui.base.BaseFragment
+import kr.co.soogong.master.ui.requirement.RequirementCardsAdapter
 import kr.co.soogong.master.ui.requirement.RequirementChipGroupHelper
 import kr.co.soogong.master.ui.requirement.done.DoneViewModel.Companion.ASK_FOR_REVIEW_FAILED
 import kr.co.soogong.master.ui.requirement.done.DoneViewModel.Companion.ASK_FOR_REVIEW_SUCCESSFULLY
@@ -44,8 +45,8 @@ class DoneFragment : BaseFragment<FragmentRequirementDoneBinding>(
             RequirementChipGroupHelper(layoutInflater, filterGroup, doneStatus)
             filterGroup.onCheckedChanged { index -> viewModel.onFilterChange(index) }
 
-            doneList.adapter = DoneAdapter(
-                cardClickListener = { requirementId ->
+            doneList.adapter = RequirementCardsAdapter(
+                onCardClicked = { requirementId ->
                     startActivity(
                         ViewRequirementActivityHelper.getIntent(
                             requireContext(),
@@ -53,9 +54,8 @@ class DoneFragment : BaseFragment<FragmentRequirementDoneBinding>(
                         )
                     )
                 },
-                rightButtonClick = { _, requirementCard ->
-                    viewModel.askForReview(requirementCard = (requirementCard as? RequirementCard))
-                }
+                onLeftButtonClicked = { },
+                onRightButtonClicked = { requirementCard -> viewModel.askForReview(requirementCard) }
             )
         }
     }

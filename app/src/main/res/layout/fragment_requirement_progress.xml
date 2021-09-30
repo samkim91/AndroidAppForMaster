@@ -60,7 +60,7 @@
                 android:layout_height="@dimen/gap_0"
                 app:setDivider="@{@drawable/thick_divider}"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                bind:progress_list="@{vm.progressList}"
+                app:requirement_cards="@{vm.progressList}"
                 tools:listitem="@layout/view_holder_requirement_item" />
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 

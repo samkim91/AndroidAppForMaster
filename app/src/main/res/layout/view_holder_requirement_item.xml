@@ -12,6 +12,14 @@
         <variable
             name="card_click_listener"
             type="android.view.View.OnClickListener" />
+
+        <variable
+            name="left_button_click_listener"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="right_button_click_listener"
+            type="android.view.View.OnClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -174,13 +182,14 @@
             android:layout_marginTop="@dimen/requirement_card_call_button_margin_top"
             android:layout_marginEnd="@dimen/requirement_card_call_button_margin_end"
             android:background="@drawable/shape_transparent_background_green_board_radius8"
+            android:onClick="@{left_button_click_listener}"
             android:textColor="@color/color_1FC472"
             android:visibility="gone"
-            tools:visibility="visible"
             app:layout_constraintEnd_toStartOf="@id/right_button"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/additional_info_container"
-            tools:text="고객에게 전화하기" />
+            tools:text="고객에게 전화하기"
+            tools:visibility="visible" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/right_button"
@@ -190,13 +199,14 @@
             android:layout_marginStart="@dimen/requirement_card_done_button_margin_start"
             android:layout_marginTop="@dimen/requirement_card_done_button_margin_top"
             android:background="@drawable/default_rounded_button_selector"
+            android:onClick="@{right_button_click_listener}"
             android:textColor="@color/basic_white"
             android:visibility="gone"
-            tools:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/left_button"
             app:layout_constraintTop_toBottomOf="@id/additional_info_container"
-            tools:text="시공 완료" />
+            tools:text="시공 완료"
+            tools:visibility="visible" />
         <!-- endregion -->
 
 

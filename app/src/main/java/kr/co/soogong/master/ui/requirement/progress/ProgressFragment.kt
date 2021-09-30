@@ -6,7 +6,6 @@ import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.model.profile.CompareCodeTable
-import kr.co.soogong.master.data.model.requirement.Measured
 import kr.co.soogong.master.data.model.requirement.Measuring
 import kr.co.soogong.master.data.model.requirement.RequirementCard
 import kr.co.soogong.master.databinding.FragmentRequirementProgressBinding
@@ -16,12 +15,12 @@ import kr.co.soogong.master.ui.dialog.popup.DialogData.Companion.getCallToCustom
 import kr.co.soogong.master.ui.requirement.RequirementChipGroupHelper
 import kr.co.soogong.master.ui.requirement.progress.ProgressViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.ui.requirement.progressStatus
+import kr.co.soogong.master.ui.requirement.RequirementCardsAdapter
 import kr.co.soogong.master.uihelper.requirment.CallToCustomerHelper
 import kr.co.soogong.master.uihelper.requirment.RequirementsBadge
 import kr.co.soogong.master.uihelper.requirment.action.EndRepairActivityHelper
 import kr.co.soogong.master.uihelper.requirment.action.MeasureActivityHelper
 import kr.co.soogong.master.uihelper.requirment.action.ViewRequirementActivityHelper
-import kr.co.soogong.master.uihelper.requirment.action.WriteEstimationActivityHelper
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.extension.onCheckedChanged
 import kr.co.soogong.master.utility.extension.toast
@@ -51,8 +50,8 @@ class ProgressFragment : BaseFragment<FragmentRequirementProgressBinding>(
             RequirementChipGroupHelper(layoutInflater, filterGroup, progressStatus)
             filterGroup.onCheckedChanged { index -> viewModel.onFilterChange(index) }
 
-            progressList.adapter = ProgressAdapter(
-                cardClickListener = { requirementId ->
+            progressList.adapter = RequirementCardsAdapter(
+                onCardClicked = { requirementId ->
                     startActivity(
                         ViewRequirementActivityHelper.getIntent(
                             requireContext(),
@@ -60,37 +59,32 @@ class ProgressFragment : BaseFragment<FragmentRequirementProgressBinding>(
                         )
                     )
                 },
-                leftButtonClick = { requirementId, number ->
+                onLeftButtonClicked = { requirementCard ->
                     val dialog =
                         CustomDialog.newInstance(getCallToCustomerDialogData(requireContext()),
                             yesClick = {
-                                viewModel.callToClient(
-                                    requirementId = requirementId
-                                )
-                                startActivity(CallToCustomerHelper.getIntent(number.toString()))
+                                viewModel.callToClient(requirementId = requirementCard.id)
+                                startActivity(CallToCustomerHelper.getIntent(requirementCard.tel.toString()))
                             },
                             noClick = { }
                         )
 
                     dialog.show(childFragmentManager, dialog.tag)
                 },
-                rightButtonClick = { requirementId, requirement ->
+                onRightButtonClicked = { requirementCard ->
                     startActivity(
-                        if ((requirement as RequirementCard).typeCode == CompareCodeTable.code) {
-                            EndRepairActivityHelper.getIntent(
-                                requireContext(),
-                                requirementId
-                            )
+                        if (requirementCard.typeCode == CompareCodeTable.code) {
+                            EndRepairActivityHelper.getIntent(requireContext(), requirementCard.id)
                         } else {
-                            if (requirement.status == Measuring) {
+                            if (requirementCard.status == Measuring) {
                                 MeasureActivityHelper.getIntent(
                                     requireContext(),
-                                    requirementId
+                                    requirementCard.id
                                 )
                             } else {
                                 EndRepairActivityHelper.getIntent(
                                     requireContext(),
-                                    requirementId
+                                    requirementCard.id
                                 )
                             }
                         }

@@ -4,7 +4,6 @@ import android.content.Context
 import android.icu.text.DecimalFormat
 import android.icu.text.SimpleDateFormat
 import android.view.View
-import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isNotEmpty
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
@@ -30,17 +29,18 @@ abstract class RequirementCardViewHolder(
 
     open fun bind(
         requirementCard: RequirementCard,
-        cardClickListener: ((requirementId: Int) -> Unit),
-        leftButtonClickListener: ((requirementId: Int, extraInfo: Any?) -> Unit)? = null,
-        rightButtonClickListener: ((requirementId: Int, extraInfo: Any?) -> Unit)? = null,
+        onCardClicked: (requirementId: Int) -> Unit,
+        onLeftButtonClicked: (requirementCard: RequirementCard) -> Unit,
+        onRightButtonClicked: (requirementCard: RequirementCard) -> Unit,
     ) {
         with(binding) {
             data = requirementCard
 
-            setCardClickListener {
-                cardClickListener(requirementCard.id)
-            }
+            setCardClickListener { onCardClicked(requirementCard.id) }
+            setLeftButtonClickListener { onLeftButtonClicked(requirementCard) }
+            setRightButtonClickListener { onRightButtonClicked(requirementCard) }
 
+            // Note: additionalInfoContainer 에 있는 views 중복 방지
             if (additionalInfoContainer.isNotEmpty()) additionalInfoContainer.removeAllViews()
             measurementBadge.root.isVisible = requirementCard.typeCode == SecretaryCodeTable.code
         }
@@ -54,16 +54,11 @@ class RequestedViewHolder(
 ) : RequirementCardViewHolder(context, binding) {
     override fun bind(
         requirementCard: RequirementCard,
-        cardClickListener: (requirementId: Int) -> Unit,
-        leftButtonClickListener: ((requirementId: Int, extraInfo: Any?) -> Unit)?,
-        rightButtonClickListener: ((requirementId: Int, extraInfo: Any?) -> Unit)?
+        onCardClicked: (requirementId: Int) -> Unit,
+        onLeftButtonClicked: (requirementCard: RequirementCard) -> Unit,
+        onRightButtonClicked: (requirementCard: RequirementCard) -> Unit,
     ) {
-        super.bind(
-            requirementCard,
-            cardClickListener,
-            leftButtonClickListener,
-            rightButtonClickListener
-        )
+        super.bind(requirementCard, onCardClicked, onLeftButtonClicked, onRightButtonClicked)
 
         with(binding) {
             setContainerTheme(context, additionalInfoContainer, ORANGE_THEME)
@@ -79,10 +74,6 @@ class RequestedViewHolder(
 
             rightButton.isVisible = true
             rightButton.setText(R.string.repair_done_text)
-
-            rightButton.setOnClickListener {
-                rightButtonClickListener?.invoke(requirementCard.id, requirementCard)
-            }
         }
     }
 }
@@ -94,16 +85,11 @@ class EstimatedViewHolder(
 ) : RequirementCardViewHolder(context, binding) {
     override fun bind(
         requirementCard: RequirementCard,
-        cardClickListener: (requirementId: Int) -> Unit,
-        leftButtonClickListener: ((requirementId: Int, extraInfo: Any?) -> Unit)?,
-        rightButtonClickListener: ((requirementId: Int, extraInfo: Any?) -> Unit)?
+        onCardClicked: (requirementId: Int) -> Unit,
+        onLeftButtonClicked: (requirementCard: RequirementCard) -> Unit,
+        onRightButtonClicked: (requirementCard: RequirementCard) -> Unit,
     ) {
-        super.bind(
-            requirementCard,
-            cardClickListener,
-            leftButtonClickListener,
-            rightButtonClickListener
-        )
+        super.bind(requirementCard, onCardClicked, onLeftButtonClicked, onRightButtonClicked)
 
         with(binding) {
             setContainerTheme(context, additionalInfoContainer, GRAY_THEME)
@@ -112,21 +98,16 @@ class EstimatedViewHolder(
                     theme = GRAY_THEME,
                     type = MONEY_TYPE,
                     titleData = context.getString(R.string.requirements_card_amount_title),
-                    contentData = if (requirementCard.estimationDto?.price!! > 0) "${
-                        moneyFormat.format(
-                            requirementCard.estimationDto.price
-                        )
-                    }원" else context.getString(R.string.not_estimated_text),
+                    contentData = if (requirementCard.estimationDto?.price!! > 0)
+                        "${moneyFormat.format(requirementCard.estimationDto.price)}원" else context.getString(
+                        R.string.not_estimated_text
+                    ),
                     alertData = context.getString(R.string.requirements_card_waiting_label),
                 )
             })
 
             rightButton.isVisible = true
             rightButton.setText(R.string.repair_done_text)
-
-            rightButton.setOnClickListener {
-                rightButtonClickListener?.invoke(requirementCard.id, requirementCard)
-            }
         }
     }
 }
@@ -138,16 +119,11 @@ class RequestConsultViewHolder(
 ) : RequirementCardViewHolder(context, binding) {
     override fun bind(
         requirementCard: RequirementCard,
-        cardClickListener: (requirementId: Int) -> Unit,
-        leftButtonClickListener: ((requirementId: Int, extraInfo: Any?) -> Unit)?,
-        rightButtonClickListener: ((requirementId: Int, extraInfo: Any?) -> Unit)?
+        onCardClicked: (requirementId: Int) -> Unit,
+        onLeftButtonClicked: (requirementCard: RequirementCard) -> Unit,
+        onRightButtonClicked: (requirementCard: RequirementCard) -> Unit
     ) {
-        super.bind(
-            requirementCard,
-            cardClickListener,
-            leftButtonClickListener,
-            rightButtonClickListener
-        )
+        super.bind(requirementCard, onCardClicked, onLeftButtonClicked, onRightButtonClicked)
 
         with(binding) {
             if (requirementCard.estimationDto?.masterResponseCode == EstimationResponseCode.ACCEPTED) {
@@ -181,10 +157,6 @@ class RequestConsultViewHolder(
 
             rightButton.isVisible = true
             rightButton.setText(R.string.repair_done_text)
-
-            rightButton.setOnClickListener {
-                rightButtonClickListener?.invoke(requirementCard.id, requirementCard)
-            }
         }
     }
 }
@@ -196,16 +168,11 @@ class MeasuringViewHolder(
 ) : RequirementCardViewHolder(context, binding) {
     override fun bind(
         requirementCard: RequirementCard,
-        cardClickListener: (requirementId: Int) -> Unit,
-        leftButtonClickListener: ((requirementId: Int, extraInfo: Any?) -> Unit)?,
-        rightButtonClickListener: ((requirementId: Int, extraInfo: Any?) -> Unit)?
+        onCardClicked: (requirementId: Int) -> Unit,
+        onLeftButtonClicked: (requirementCard: RequirementCard) -> Unit,
+        onRightButtonClicked: (requirementCard: RequirementCard) -> Unit
     ) {
-        super.bind(
-            requirementCard,
-            cardClickListener,
-            leftButtonClickListener,
-            rightButtonClickListener
-        )
+        super.bind(requirementCard, onCardClicked, onLeftButtonClicked, onRightButtonClicked)
 
         with(binding) {
             leftButton.isVisible = true
@@ -218,14 +185,6 @@ class MeasuringViewHolder(
                 leftButton.setTextColor(context.resources.getColor(R.color.color_555555, null))
                 leftButton.setBackgroundResource(R.drawable.shape_white_background_darkgray_border_radius8)
             }
-
-            leftButton.setOnClickListener {
-                leftButtonClickListener?.invoke(requirementCard.id, requirementCard.tel)
-            }
-
-            rightButton.setOnClickListener {
-                rightButtonClickListener?.invoke(requirementCard.id, requirementCard)
-            }
         }
     }
 }
@@ -237,16 +196,11 @@ class MeasuredViewHolder(
 ) : RequirementCardViewHolder(context, binding) {
     override fun bind(
         requirementCard: RequirementCard,
-        cardClickListener: (requirementId: Int) -> Unit,
-        leftButtonClickListener: ((requirementId: Int, extraInfo: Any?) -> Unit)?,
-        rightButtonClickListener: ((requirementId: Int, extraInfo: Any?) -> Unit)?
+        onCardClicked: (requirementId: Int) -> Unit,
+        onLeftButtonClicked: (requirementCard: RequirementCard) -> Unit,
+        onRightButtonClicked: (requirementCard: RequirementCard) -> Unit
     ) {
-        super.bind(
-            requirementCard,
-            cardClickListener,
-            leftButtonClickListener,
-            rightButtonClickListener
-        )
+        super.bind(requirementCard, onCardClicked, onLeftButtonClicked, onRightButtonClicked)
 
         with(binding) {
             newBadge.visibility = View.GONE
@@ -270,23 +224,14 @@ class MeasuredViewHolder(
 
             leftButton.isVisible = true
             leftButton.setText(R.string.call_to_customer_text)
-
             if (requirementCard.estimationDto?.fromMasterCallCnt!! > 0) {
                 leftButton.setText(R.string.recall_to_customer_text)
                 leftButton.setTextColor(context.resources.getColor(R.color.color_555555, null))
                 leftButton.setBackgroundResource(R.drawable.shape_white_background_darkgray_border_radius8)
             }
 
-            leftButton.setOnClickListener {
-                leftButtonClickListener?.invoke(requirementCard.id, requirementCard.tel)
-            }
-
             rightButton.isVisible = true
             rightButton.setText(R.string.repair_done_text)
-
-            rightButton.setOnClickListener {
-                rightButtonClickListener?.invoke(requirementCard.id, requirementCard)
-            }
         }
     }
 }
@@ -298,16 +243,11 @@ class RepairingViewHolder(
 ) : RequirementCardViewHolder(context, binding) {
     override fun bind(
         requirementCard: RequirementCard,
-        cardClickListener: (requirementId: Int) -> Unit,
-        leftButtonClickListener: ((requirementId: Int, extraInfo: Any?) -> Unit)?,
-        rightButtonClickListener: ((requirementId: Int, extraInfo: Any?) -> Unit)?
+        onCardClicked: (requirementId: Int) -> Unit,
+        onLeftButtonClicked: (requirementCard: RequirementCard) -> Unit,
+        onRightButtonClicked: (requirementCard: RequirementCard) -> Unit
     ) {
-        super.bind(
-            requirementCard,
-            cardClickListener,
-            leftButtonClickListener,
-            rightButtonClickListener
-        )
+        super.bind(requirementCard, onCardClicked, onLeftButtonClicked, onRightButtonClicked)
 
         with(binding) {
             setContainerTheme(context, additionalInfoContainer, GREEN_THEME)
@@ -326,23 +266,15 @@ class RepairingViewHolder(
             })
 
             leftButton.isVisible = true
-            rightButton.isVisible = true
             leftButton.setText(R.string.call_to_customer_text)
-            rightButton.setText(R.string.repair_done_text)
-
             if (requirementCard.estimationDto?.fromMasterCallCnt!! > 0) {
                 leftButton.setText(R.string.recall_to_customer_text)
                 leftButton.setTextColor(context.resources.getColor(R.color.color_555555, null))
                 leftButton.setBackgroundResource(R.drawable.shape_white_background_darkgray_border_radius8)
             }
 
-            leftButton.setOnClickListener {
-                leftButtonClickListener?.invoke(requirementCard.id, requirementCard.tel)
-            }
-
-            rightButton.setOnClickListener {
-                rightButtonClickListener?.invoke(requirementCard.id, requirementCard)
-            }
+            rightButton.isVisible = true
+            rightButton.setText(R.string.repair_done_text)
         }
     }
 }
@@ -354,24 +286,15 @@ class RequestFinishViewHolder(
 ) : RequirementCardViewHolder(context, binding) {
     override fun bind(
         requirementCard: RequirementCard,
-        cardClickListener: (requirementId: Int) -> Unit,
-        leftButtonClickListener: ((requirementId: Int, extraInfo: Any?) -> Unit)?,
-        rightButtonClickListener: ((requirementId: Int, extraInfo: Any?) -> Unit)?
+        onCardClicked: (requirementId: Int) -> Unit,
+        onLeftButtonClicked: (requirementCard: RequirementCard) -> Unit,
+        onRightButtonClicked: (requirementCard: RequirementCard) -> Unit
     ) {
-        super.bind(
-            requirementCard,
-            cardClickListener,
-            leftButtonClickListener,
-            rightButtonClickListener
-        )
+        super.bind(requirementCard, onCardClicked, onLeftButtonClicked, onRightButtonClicked)
 
         with(binding) {
             rightButton.isVisible = true
             rightButton.setText(R.string.repair_done_text)
-
-            rightButton.setOnClickListener {
-                rightButtonClickListener?.invoke(requirementCard.id, requirementCard)
-            }
         }
     }
 }
@@ -383,16 +306,11 @@ class DoneViewHolder(
 ) : RequirementCardViewHolder(context, binding) {
     override fun bind(
         requirementCard: RequirementCard,
-        cardClickListener: (requirementId: Int) -> Unit,
-        leftButtonClickListener: ((requirementId: Int, extraInfo: Any?) -> Unit)?,
-        rightButtonClickListener: ((requirementId: Int, extraInfo: Any?) -> Unit)?
+        onCardClicked: (requirementId: Int) -> Unit,
+        onLeftButtonClicked: (requirementCard: RequirementCard) -> Unit,
+        onRightButtonClicked: (requirementCard: RequirementCard) -> Unit
     ) {
-        super.bind(
-            requirementCard,
-            cardClickListener,
-            leftButtonClickListener,
-            rightButtonClickListener
-        )
+        super.bind(requirementCard, onCardClicked, onLeftButtonClicked, onRightButtonClicked)
 
         with(binding) {
             setContainerTheme(context, additionalInfoContainer, GREEN_THEME)
@@ -419,10 +337,6 @@ class DoneViewHolder(
             rightButton.isEnabled = true
             rightButton.setText(R.string.requirements_card_review_button)
 
-            rightButton.setOnClickListener {
-                rightButtonClickListener?.invoke(requirementCard.id, requirementCard)
-            }
-
             requirementCard.estimationDto?.repair?.requestReviewYn?.let { requestReviewYn ->
                 if (requestReviewYn) {
                     rightButton.setText(R.string.ask_for_review_successful)
@@ -440,16 +354,11 @@ class ClosedViewHolder(
 ) : RequirementCardViewHolder(context, binding) {
     override fun bind(
         requirementCard: RequirementCard,
-        cardClickListener: (requirementId: Int) -> Unit,
-        leftButtonClickListener: ((requirementId: Int, extraInfo: Any?) -> Unit)?,
-        rightButtonClickListener: ((requirementId: Int, extraInfo: Any?) -> Unit)?
+        onCardClicked: (requirementId: Int) -> Unit,
+        onLeftButtonClicked: (requirementCard: RequirementCard) -> Unit,
+        onRightButtonClicked: (requirementCard: RequirementCard) -> Unit
     ) {
-        super.bind(
-            requirementCard,
-            cardClickListener,
-            leftButtonClickListener,
-            rightButtonClickListener
-        )
+        super.bind(requirementCard, onCardClicked, onLeftButtonClicked, onRightButtonClicked)
 
         with(binding) {
             newBadge.visibility = View.GONE
@@ -490,16 +399,11 @@ class CanceledViewHolder(
 ) : RequirementCardViewHolder(context, binding) {
     override fun bind(
         requirementCard: RequirementCard,
-        cardClickListener: (requirementId: Int) -> Unit,
-        leftButtonClickListener: ((requirementId: Int, extraInfo: Any?) -> Unit)?,
-        rightButtonClickListener: ((requirementId: Int, extraInfo: Any?) -> Unit)?
+        onCardClicked: (requirementId: Int) -> Unit,
+        onLeftButtonClicked: (requirementCard: RequirementCard) -> Unit,
+        onRightButtonClicked: (requirementCard: RequirementCard) -> Unit
     ) {
-        super.bind(
-            requirementCard,
-            cardClickListener,
-            leftButtonClickListener,
-            rightButtonClickListener
-        )
+        super.bind(requirementCard, onCardClicked, onLeftButtonClicked, onRightButtonClicked)
 
         with(binding) {
             newBadge.visibility = View.GONE

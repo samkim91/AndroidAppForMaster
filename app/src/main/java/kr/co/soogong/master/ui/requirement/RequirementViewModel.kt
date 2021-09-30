@@ -41,7 +41,7 @@ class RequirementViewModel @Inject constructor(
 
     fun activateRequestingMeasurement(v: CompoundButton, isChecked: Boolean) {
         Timber.tag(TAG).d("activateRequestingMeasurement: $isChecked")
-
+        // TODO: 2021/09/30 Re-4차 개발 예정
     }
 
     companion object {

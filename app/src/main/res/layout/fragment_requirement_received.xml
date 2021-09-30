@@ -60,7 +60,7 @@
                 android:nestedScrollingEnabled="false"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:setDivider="@{@drawable/thick_divider}"
-                bind:received_list="@{vm.receivedList}"
+                app:requirement_cards="@{vm.receivedList}"
                 tools:listitem="@layout/view_holder_requirement_item" />
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 

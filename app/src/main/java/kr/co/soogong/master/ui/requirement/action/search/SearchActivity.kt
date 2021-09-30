@@ -11,7 +11,7 @@ import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ActivitySearchBinding
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.ui.requirement.action.search.SearchViewModel.Companion.SEARCH_REQUIREMENTS_FAILED
-import kr.co.soogong.master.ui.requirement.received.ReceivedAdapter
+import kr.co.soogong.master.ui.requirement.RequirementCardsAdapter
 import kr.co.soogong.master.uihelper.requirment.action.EndRepairActivityHelper
 import kr.co.soogong.master.uihelper.requirment.action.ViewRequirementActivityHelper
 import kr.co.soogong.master.utility.EventObserver
@@ -47,18 +47,18 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>(
 
             setSpinnerSelectedListener()
 
-            requirements.adapter = ReceivedAdapter(
-                cardClickListener = { requirementId ->
+            requirements.adapter = RequirementCardsAdapter(
+                onCardClicked = { requirementId ->
                     startActivity(
                         ViewRequirementActivityHelper.getIntent(this@SearchActivity, requirementId)
                     )
                 },
-                leftButtonClick = { _, _ -> },
-                rightButtonClick = { requirementId, _ ->
+                onLeftButtonClicked = { },
+                onRightButtonClicked = { requirementCard ->
                     startActivity(
                         EndRepairActivityHelper.getIntent(
                             this@SearchActivity,
-                            requirementId
+                            requirementCard.id
                         )
                     )
                 }
