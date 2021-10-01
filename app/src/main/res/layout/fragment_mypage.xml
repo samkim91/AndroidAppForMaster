@@ -324,10 +324,24 @@
                 android:gravity="center"
                 android:text="@string/my_page_time_notice"
                 android:textColor="@color/secondary_text_color"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/kakao_talk_btn" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/version"
+                style="@style/text_style_12sp.regular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/gap_20"
+                android:layout_marginBottom="@dimen/gap_20"
+                android:layout_marginEnd="@dimen/gap_20"
+                android:text="@{vm.version}"
+                tools:text="버전 : 1.0.0"
+                android:textColor="@color/secondary_text_color"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/time" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

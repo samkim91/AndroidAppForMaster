@@ -32,6 +32,7 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(
 
         initLayout()
         registerEventObserve()
+        checkVersion()
     }
 
     override fun initLayout() {
@@ -82,6 +83,10 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(
                 }
             })
         }
+    }
+
+    private fun checkVersion() {
+        viewModel.version.value = getString(R.string.version_text, requireContext().packageManager.getPackageInfo(requireContext().packageName, 0).versionName)
     }
 
     override fun onResume() {

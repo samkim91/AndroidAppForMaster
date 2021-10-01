@@ -31,6 +31,8 @@ class MyPageViewModel @Inject constructor(
     val noticeList: LiveData<List<Notice>>
         get() = _noticeList
 
+    val version = MutableLiveData("")
+
     private fun requestUserProfile() {
         getProfileUseCase()
             .subscribeOn(Schedulers.io())
