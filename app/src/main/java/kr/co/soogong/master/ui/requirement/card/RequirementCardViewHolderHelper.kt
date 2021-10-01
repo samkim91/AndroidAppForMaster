@@ -15,34 +15,34 @@ object RequirementCardViewHolderHelper {
 
         return when (viewType) {
             Requested.asInt -> {
-                RequestedViewHolder(parent.context, binding)
+                RequestedCardViewHolder(binding)
             }
             Estimated.asInt -> {
-                EstimatedViewHolder(parent.context, binding)
+                EstimatedCardViewHolder(binding)
             }
             RequestConsult.asInt -> {
-                RequestConsultViewHolder(parent.context, binding)
+                RequestConsultCardViewHolder(binding)
             }
             Measuring.asInt -> {
-                MeasuringViewHolder(parent.context, binding)
+                MeasuringCardViewHolder(binding)
             }
             Measured.asInt -> {
-                MeasuredViewHolder(parent.context, binding)
+                MeasuredCardViewHolder(binding)
             }
             Repairing.asInt -> {
-                RepairingViewHolder(parent.context, binding)
+                RepairingCardViewHolder(binding)
             }
             RequestFinish.asInt -> {
-                RequestFinishViewHolder(parent.context, binding)
+                RequestFinishCardViewHolder(binding)
             }
             Done.asInt -> {
-                DoneViewHolder(parent.context, binding)
+                DoneViewHolder(binding)
             }
             Closed.asInt -> {
-                ClosedViewHolder(parent.context, binding)
+                ClosedViewHolder(binding)
             }
             else -> {
-                CanceledViewHolder(parent.context, binding)
+                CanceledViewHolder(binding)
             }
         }
     }
