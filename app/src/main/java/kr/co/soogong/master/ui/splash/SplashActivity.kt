@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.domain.usecase.auth.GetMasterIdFromFirebaseUseCase
 import kr.co.soogong.master.domain.usecase.auth.GetMasterUidFromSharedUseCase
-import kr.co.soogong.master.domain.usecase.auth.SaveMasterUidInSharedUseCase
 import kr.co.soogong.master.uihelper.auth.SignMainActivityHelper
 import kr.co.soogong.master.uihelper.main.MainActivityHelper
 import timber.log.Timber
@@ -19,9 +18,6 @@ class SplashActivity : AppCompatActivity() {
 
     @Inject
     lateinit var getMasterUidInSharedUseCase: GetMasterUidFromSharedUseCase
-
-    @Inject
-    lateinit var saveMasterUidInSharedUseCase: SaveMasterUidInSharedUseCase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
