@@ -10,6 +10,7 @@ object HttpContract {
     const val IS_MASTER_EXISTENT = "master/is-existent"
     const val SAVE_FCM_TOKEN = "firebase/save-token"
     const val UPDATE_UID_BY_TEL = "master/{tel}"
+    const val GET_APP_VERSION = "version/android"
     //endregion
 
     //region Category
