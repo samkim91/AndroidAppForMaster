@@ -18,6 +18,22 @@ data class DialogData(
     @ColorInt val negativeBtnTextColor: Int
 ) : Parcelable {
     companion object {
+        fun getUpdatingAppMandatory(context: Context) =
+            DialogData(
+                "앱을 사용하시려면 업데이트 해주세요.", context.getColor(R.color.text_basic_color),
+                null, context.getColor(R.color.text_alert_color),
+                "확인", context.getColor(R.color.text_basic_color),
+                null, context.getColor(R.color.text_basic_color)
+            )
+
+        fun getUpdatingAppRecommended(context: Context) =
+            DialogData(
+                "앱 업데이트를 통해 개선된 기능과 새로운 서비스를 이용해 보세요.", context.getColor(R.color.text_basic_color),
+                null, context.getColor(R.color.text_alert_color),
+                "확인", context.getColor(R.color.text_basic_color),
+                "취소", context.getColor(R.color.text_basic_color)
+            )
+
         fun getRefuseEstimateDialogData(context: Context) =
             DialogData(
                 "견적을 내기 어려우신가요?", context.getColor(R.color.text_basic_color),

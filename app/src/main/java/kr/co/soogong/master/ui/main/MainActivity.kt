@@ -1,17 +1,26 @@
 package kr.co.soogong.master.ui.main
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.core.content.res.ResourcesCompat
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
+import kr.co.soogong.master.BuildConfig
 import kr.co.soogong.master.R
 import kr.co.soogong.master.SoogongMasterMessagingService.Companion.initNotificationChannel
 import kr.co.soogong.master.SoogongMasterMessagingService.Companion.removeBrokenChannel
+import kr.co.soogong.master.data.dto.auth.VersionDto
 import kr.co.soogong.master.databinding.ActivityMainBinding
 import kr.co.soogong.master.ui.base.BaseActivity
+import kr.co.soogong.master.ui.dialog.popup.CustomDialog
+import kr.co.soogong.master.ui.dialog.popup.DialogData
+import kr.co.soogong.master.ui.main.MainViewModel.Companion.GET_VERSION_SUCCESSFULLY
 import kr.co.soogong.master.uihelper.main.MainBadge
+import kr.co.soogong.master.utility.EventObserver
 import timber.log.Timber
+import kotlin.system.exitProcess
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>(
@@ -23,7 +32,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Timber.tag(TAG).d("onCreate: ")
+        viewModel.checkLatestVersion()
         initLayout()
+        registerEventObserve()
         registerFCM()
         removeBrokenChannel(this)
         initNotificationChannel(this)
@@ -55,6 +66,37 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
                 }.attach()
             }
         }
+    }
+
+    private fun registerEventObserve() {
+        viewModel.event.observe(this, EventObserver { (event, value) ->
+            when (event) {
+                GET_VERSION_SUCCESSFULLY -> {
+                    (value as VersionDto).let { versionDto ->
+                        this.packageManager.getPackageInfo(this.packageName, 0).versionName.let { currentVersion ->
+                            Timber.tag(TAG).d("Version current / latest : $currentVersion / ${versionDto.version}")
+
+                            if (currentVersion != versionDto.version) {
+                                CustomDialog.newInstance(
+                                    dialogData = if (versionDto.mandatoryYn) DialogData.getUpdatingAppMandatory(this)
+                                                else DialogData.getUpdatingAppRecommended(this),
+                                    yesClick = {
+                                        startActivity(Intent(Intent.ACTION_VIEW).apply {
+                                            data = Uri.parse("https://play.google.com/store/apps/details?id=kr.co.soogong.master")
+                                            setPackage("com.android.vending")
+                                        })
+                                    },
+                                    noClick = { }
+                                ).run {
+                                    if (versionDto.mandatoryYn) isCancelable = false
+                                    show(supportFragmentManager, tag)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        })
     }
 
     override fun setRequirementsBadge(badgeCount: Int) {
