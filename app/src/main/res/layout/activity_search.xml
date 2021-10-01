@@ -79,7 +79,7 @@
                 android:layout_height="@dimen/gap_0"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:setDivider="@{@drawable/thick_divider}"
-                bind:received_list="@{vm.requirements}"
+                app:requirement_cards="@{vm.requirements}"
                 tools:listitem="@layout/view_holder_requirement_item" />
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 

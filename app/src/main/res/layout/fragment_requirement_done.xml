@@ -60,7 +60,7 @@
                 android:layout_height="0dp"
                 app:setDivider="@{@drawable/thick_divider}"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                bind:done_list="@{vm.doneList}"
+                app:requirement_cards="@{vm.requirements}"
                 tools:listitem="@layout/view_holder_requirement_item" />
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
@@ -74,7 +74,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/swipe_refresh_layout"
             app:layout_constraintVertical_chainStyle="packed"
-            bind:visible="@{vm.doneList.empty}" />
+            bind:visible="@{vm.requirements.empty}" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/empty_text"
@@ -87,7 +87,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/empty_icon"
-            bind:visible="@{vm.doneList.empty}" />
+            bind:visible="@{vm.requirements.empty}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
