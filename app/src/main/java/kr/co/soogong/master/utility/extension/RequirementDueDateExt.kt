@@ -55,6 +55,7 @@ fun getMeasureDueDate(createdAt: Date?): Date {
     createdAt?.let {
         calendar.time = it
         calendar.add(Calendar.HOUR, 1)
+        calendar.add(Calendar.MINUTE, 30)
     }
     return calendar.time
 }
