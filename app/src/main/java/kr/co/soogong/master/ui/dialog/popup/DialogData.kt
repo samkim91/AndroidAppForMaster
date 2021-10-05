@@ -42,6 +42,14 @@ data class DialogData(
                 "아니요", context.getColor(R.color.text_basic_color)
             )
 
+        fun getConfirmRepairDoneDialogData(context: Context) =
+            DialogData(
+                "시공을 완료 하셨나요?", context.getColor(R.color.text_basic_color),
+                "고객님과 합의되었을 때만 완료처리를\n해주세요. 완료처리를 하면 고객님께\n자동으로 리뷰요청을 하게 됩니다.", context.getColor(R.color.text_alert_color),
+                "네", context.getColor(R.color.text_basic_color),
+                "아니요", context.getColor(R.color.text_basic_color)
+            )
+
         fun getRequestConsultAlertDialogData(context: Context) =
             DialogData(
                 "고객님이 상세상담 통화를 요청하셨어요.\n고객님과 빠르게 통화하고 시공 가능성을\n높여보세요.", context.getColor(R.color.text_basic_color),

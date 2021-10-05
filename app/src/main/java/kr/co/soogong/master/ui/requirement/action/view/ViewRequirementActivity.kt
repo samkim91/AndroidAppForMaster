@@ -14,6 +14,7 @@ import kr.co.soogong.master.data.model.requirement.estimation.EstimationResponse
 import kr.co.soogong.master.databinding.ActivityViewRequirementBinding
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.ui.dialog.popup.CustomDialog
+import kr.co.soogong.master.ui.dialog.popup.DialogData
 import kr.co.soogong.master.ui.dialog.popup.DialogData.Companion.getAcceptMeasureDialogData
 import kr.co.soogong.master.ui.dialog.popup.DialogData.Companion.getExpiredRequestConsultDialogData
 import kr.co.soogong.master.ui.dialog.popup.DialogData.Companion.getRefuseEstimateDialogData
@@ -65,9 +66,17 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                 button.text = getString(R.string.progress_ending_text)
                 button.setOnClickListener {
                     viewModel.requirement.value?.id?.let {
-                        startActivity(
-                            EndRepairActivityHelper.getIntent(this@ViewRequirementActivity, it)
-                        )
+                        CustomDialog.newInstance(
+                            dialogData = DialogData.getConfirmRepairDoneDialogData(this@ViewRequirementActivity),
+                            yesClick = {
+                                startActivity(
+                                    EndRepairActivityHelper.getIntent(this@ViewRequirementActivity, it)
+                                )
+                            },
+                            noClick = {}
+                        ).run {
+                            show(supportFragmentManager, this.tag)
+                        }
                     }
                 }
                 root.findViewById<AppCompatButton>(R.id.button).isVisible = false
