@@ -56,7 +56,7 @@ class RequirementRepository @Inject constructor(
             .subscribeOn(Schedulers.io())
             .observeOn(Schedulers.io())
             .subscribeBy {
-                Timber.tag(TAG).d("saveRequirementInLocal: $it")
+                Timber.tag(TAG).d("saveRequirementInLocal: ")
             }
 
         disposable.addTo(compositeDisposable)
@@ -111,7 +111,7 @@ class RequirementRepository @Inject constructor(
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.io())
                 .subscribeBy {
-                    Timber.tag(TAG).d("saveRequirementsInLocal: $it")
+                    Timber.tag(TAG).d("saveRequirementsInLocal: ")
                 }
 
         disposable.addTo(compositeDisposable)

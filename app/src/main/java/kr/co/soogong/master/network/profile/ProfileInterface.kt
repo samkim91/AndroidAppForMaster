@@ -33,6 +33,18 @@ interface ProfileInterface {
         @Part afterImageFile: MultipartBody.Part?,
     ): Single<PortfolioDto>
 
+    @FormUrlEncoded
+    @PATCH(HttpContract.UPDATE_REQUEST_MEASURE_YN)
+    fun updateRequestMeasureYn(
+        @Field("uid") uid: String,
+    ): Single<MasterDto>
+
+    @FormUrlEncoded
+    @PATCH(HttpContract.UPDATE_FREE_MEASURE_YN)
+    fun updateFreeMeasureYn(
+        @Field("masterDto") masterDto: MasterDto,
+    ): Single<MasterDto>
+
     @GET(HttpContract.GET_PORTFOLIOS)
     fun getPortfoliosByUid(@Query("uid") uid: String?): Single<List<PortfolioDto>>
 

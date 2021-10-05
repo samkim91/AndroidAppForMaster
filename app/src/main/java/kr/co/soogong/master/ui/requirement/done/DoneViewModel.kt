@@ -8,6 +8,7 @@ import kr.co.soogong.master.data.model.requirement.Canceled
 import kr.co.soogong.master.data.model.requirement.Closed
 import kr.co.soogong.master.data.model.requirement.Done
 import kr.co.soogong.master.domain.usecase.profile.GetMasterSimpleInfoUseCase
+import kr.co.soogong.master.domain.usecase.profile.UpdateRequestMeasureYnUseCase
 import kr.co.soogong.master.domain.usecase.requirement.CallToClientUseCase
 import kr.co.soogong.master.domain.usecase.requirement.GetRequirementCardsUseCase
 import kr.co.soogong.master.domain.usecase.requirement.RequestReviewUseCase
@@ -22,7 +23,8 @@ class DoneViewModel @Inject constructor(
     getMasterSimpleInfoUseCase: GetMasterSimpleInfoUseCase,
     callToClientUseCase: CallToClientUseCase,
     requestReviewUseCase: RequestReviewUseCase,
-) : RequirementViewModel(getMasterSimpleInfoUseCase, callToClientUseCase, requestReviewUseCase) {
+    updateRequestMeasureYnUseCase: UpdateRequestMeasureYnUseCase,
+) : RequirementViewModel(getMasterSimpleInfoUseCase, callToClientUseCase, requestReviewUseCase, updateRequestMeasureYnUseCase) {
 
     override fun requestList() {
         Timber.tag(TAG).d("onFilterChange: ${index.value}")
@@ -39,7 +41,7 @@ class DoneViewModel @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
                 onNext = {
-                    Timber.tag(TAG).d("requestList successfully: $it")
+                    Timber.tag(TAG).d("requestList successfully: ")
                     if (index.value == 0) sendEvent(BADGE_UPDATE, it.count())
                     requirements.postValue(it)
                 },

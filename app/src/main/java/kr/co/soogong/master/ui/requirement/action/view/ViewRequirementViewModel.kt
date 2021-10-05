@@ -179,7 +179,7 @@ class ViewRequirementViewModel @Inject constructor(
                 onSuccess = { masterDto ->
                     Timber.tag(TAG).d("requestMasterSimpleInfo successful: $masterDto")
                     masterDto?.approvedStatus.let {
-                        if (it == NotApprovedCodeTable.code || it == RequestApproveCodeTable.code) setAction(NOT_APPROVED_MASTER)
+                        if (it == NotApprovedCodeTable.code) setAction(NOT_APPROVED_MASTER)
                     }
                 },
                 onError = {

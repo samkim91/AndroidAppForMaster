@@ -49,7 +49,6 @@ class ReceivedFragment : BaseFragment<FragmentRequirementReceivedBinding>(
     override fun onResume() {
         super.onResume()
         Timber.tag(TAG).d("onResume: ")
-        viewModel.requestMasterSimpleInfo()
         viewModel.requestList()
     }
 

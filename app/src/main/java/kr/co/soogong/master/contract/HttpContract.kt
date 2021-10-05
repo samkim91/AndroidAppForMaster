@@ -40,6 +40,8 @@ object HttpContract {
     const val GET_MASTER_SIMPLE_INFO = "master/find-simple-info"
     const val GET_MASTER_BY_UID = "master/find-by-uid"
     const val SAVE_MASTER = "master/save"
+    const val UPDATE_REQUEST_MEASURE_YN = "master/request-measure-yn"
+    const val UPDATE_FREE_MEASURE_YN = "master/free-measure-yn"
     const val REQUEST_REVIEW_BY_SHARING = "https://soogong.co.kr/my-soogong/easy-review/"
     //endregion
 

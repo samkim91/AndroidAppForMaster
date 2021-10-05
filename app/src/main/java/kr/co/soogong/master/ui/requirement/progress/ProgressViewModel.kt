@@ -9,6 +9,7 @@ import kr.co.soogong.master.data.model.requirement.Measuring
 import kr.co.soogong.master.data.model.requirement.Repairing
 import kr.co.soogong.master.data.model.requirement.RequestFinish
 import kr.co.soogong.master.domain.usecase.profile.GetMasterSimpleInfoUseCase
+import kr.co.soogong.master.domain.usecase.profile.UpdateRequestMeasureYnUseCase
 import kr.co.soogong.master.domain.usecase.requirement.CallToClientUseCase
 import kr.co.soogong.master.domain.usecase.requirement.GetRequirementCardsUseCase
 import kr.co.soogong.master.domain.usecase.requirement.RequestReviewUseCase
@@ -23,7 +24,8 @@ class ProgressViewModel @Inject constructor(
     getMasterSimpleInfoUseCase: GetMasterSimpleInfoUseCase,
     callToClientUseCase: CallToClientUseCase,
     requestReviewUseCase: RequestReviewUseCase,
-) : RequirementViewModel(getMasterSimpleInfoUseCase, callToClientUseCase, requestReviewUseCase) {
+    updateRequestMeasureYnUseCase: UpdateRequestMeasureYnUseCase,
+) : RequirementViewModel(getMasterSimpleInfoUseCase, callToClientUseCase, requestReviewUseCase, updateRequestMeasureYnUseCase) {
 
     override fun requestList() {
         Timber.tag(TAG).d("requestList: ${index.value}")
@@ -41,7 +43,7 @@ class ProgressViewModel @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
                 onNext = {
-                    Timber.tag(TAG).d("requestList successfully: $it")
+                    Timber.tag(TAG).d("requestList successfully: ")
                     if (index.value == 0) sendEvent(BADGE_UPDATE, it.count())
                     requirements.postValue(it)
                 },

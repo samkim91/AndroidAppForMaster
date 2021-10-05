@@ -8,21 +8,22 @@
 
         <variable
             name="vm"
-            type="kr.co.soogong.master.ui.main.MainViewModel" />
+            type="kr.co.soogong.master.ui.requirement.RequirementViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-<!--        <kr.co.soogong.master.ui.widget.TitleSwitchCompat-->
-<!--            android:id="@+id/accepting_measurement_switch"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            app:layout_constraintTop_toTopOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:underLine="@{false}" />-->
+        <kr.co.soogong.master.ui.widget.TitleSwitchCompat
+            android:id="@+id/accepting_measurement_switch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:underLine="@{false}" />
 
         <kr.co.soogong.master.ui.widget.SearchBar
             android:id="@+id/search_bar"
@@ -36,7 +37,7 @@
             app:cancelTextVisibility="@{false}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/accepting_measurement_switch"
             app:searchTextDisable="@{true}"
             app:searchTextHint="@{@string/search_bar_hint_text}" />
 

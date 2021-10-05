@@ -20,6 +20,17 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="앱 푸시 알림" />
 
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/double_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/gap_9"
+            android:background="@drawable/ic_double_arrow"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/switch_compat"
+            app:layout_constraintEnd_toStartOf="@id/switch_compat"
+            app:layout_constraintTop_toTopOf="@id/switch_compat" />
+
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/switch_compat"
             android:layout_width="wrap_content"
