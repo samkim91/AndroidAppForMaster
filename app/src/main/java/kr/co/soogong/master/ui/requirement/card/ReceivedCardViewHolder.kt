@@ -83,12 +83,20 @@ open class ReceivedCardViewHolder(
             rightButton.isVisible = true
             rightButton.setText(R.string.repair_done_text)
             setRightButtonClickListener {
-                context.startActivity(
-                    EndRepairActivityHelper.getIntent(
-                        context,
-                        requirementCard.id
-                    )
-                )
+                CustomDialog.newInstance(
+                    dialogData = DialogData.getConfirmRepairDoneDialogData(context),
+                    yesClick = {
+                        context.startActivity(
+                            EndRepairActivityHelper.getIntent(
+                                context,
+                                requirementCard.id
+                            )
+                        )
+                    },
+                    noClick = {}
+                ).run {
+                    show(fragmentManager, this.tag)
+                }
             }
         }
     }
@@ -117,6 +125,8 @@ class RequestedCardViewHolder(
                     alertData = context.getString(R.string.requirements_card_due_date_alert)
                 )
             })
+
+            rightButton.isVisible = false
         }
     }
 }
