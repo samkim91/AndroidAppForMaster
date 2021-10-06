@@ -294,6 +294,22 @@
     <string name="link_copied_successfully">링크가 복사되었습니다.</string>
     <string name="request_review_by_sharing_failed">해당 기능을 찾지 못 하였습니다. 다른 방법으로 공유하기를 통해 다른 앱을 선택해주세요.</string>
 
+    <string name="profile_card_title_for_free_measure">무료 방문 실측 여부</string>
+    <string name="profile_card_subtitle_for_free_measure">방문 실측이 무료일 경우에만 우선 실측 배정이 가능합니다.</string>
+    <string name="profile_card_title_for_portfolio">포트폴리오</string>
+    <string name="profile_card_subtitle_for_portfolio">실제 시공 정보와 사진이 쌓일 수록 고객의 신뢰감도 함께 쌓입니다.</string>
+    <string name="profile_card_title_for_price_by_project">시공 종류별 가격</string>
+    <string name="profile_card_subtitle_for_price_by_project">다양한 시공의 가격 정보는 고객 선택에 중요한 기준이 됩니다.</string>
+    <string name="profile_card_title_for_profile_image">프로필 사진</string>
+    <string name="profile_card_subtitle_for_profile_image">고객이 마스터님을 알아볼 수 있게 얼굴을 알려주세요.</string>
+    <string name="profile_card_title_for_flexible_cost">현장 가격 변동 요인</string>
+    <string name="profile_card_subtitle_for_flexible_cost">고객이 당황하지 않도록 현장의 가격 변동요인을 알려주세요.</string>
+    <string name="profile_card_title_for_other_flexible_options">기타 변동 가능사항</string>
+    <string name="profile_card_title_for_email">이메일</string>
+
+    <string name="edit_free_measure_fragment_title">방문 실측이 무료일 경우에만 우선 실측 배정이 가능합니다. </string>
+    <string name="edit_free_measure_fragment_agree_text">가능합니다.</string>
+    <string name="edit_free_measure_fragment_disagree_text">불가능합니다.</string>
 
     <!-- Request Detail -->
     <string name="request_date">접수일시</string>

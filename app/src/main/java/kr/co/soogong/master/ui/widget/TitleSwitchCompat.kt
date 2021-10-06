@@ -62,9 +62,12 @@ class TitleSwitchCompat @JvmOverloads constructor(
     }
 
     fun setLayoutForRequestMeasure(masterDto: MasterDto) {
-        Timber.tag("TitleSwitchCompat").i("setLayoutForReceivingRequestMeasure: ")
+        Timber.tag("TitleSwitchCompat").d("setLayoutForReceivingRequestMeasure: ")
         with(binding) {
-            if (masterDto.secretaryYn != true) return
+            if (masterDto.secretaryYn != true || masterDto.freeMeasureYn != true) {
+                this@TitleSwitchCompat.isVisible = false
+                return
+            }
 
             this@TitleSwitchCompat.isVisible = true
             title.setTextAppearance(R.style.text_style_16sp_bold)
@@ -75,7 +78,7 @@ class TitleSwitchCompat @JvmOverloads constructor(
     }
 
     fun changeTextAndBackgroundForRequestMeasure(requestMeasureYn: Boolean) {
-        Timber.tag("TitleSwitchCompat").i("changeTextAndBackgroundForRequestMeasure: $requestMeasureYn")
+        Timber.tag("TitleSwitchCompat").d("changeTextAndBackgroundForRequestMeasure: $requestMeasureYn")
         with(binding) {
             if (requestMeasureYn) {
                 container.setBackgroundColor(resources.getColor(R.color.color_1B8C61, null))
