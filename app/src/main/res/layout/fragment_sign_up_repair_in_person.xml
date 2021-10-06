@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -31,27 +32,49 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:title='@{"주소를 입력해주세요."}' />
+                app:title="@{@string/sign_up_repair_in_person_title}" />
 
-            <kr.co.soogong.master.ui.widget.TitleEditTextButton
-                android:id="@+id/address"
+            <kr.co.soogong.master.ui.widget.TextCheckBox
+                android:id="@+id/repair_in_person_checkbox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/gap_20"
-                android:layout_marginTop="@dimen/gap_19"
+                android:layout_marginTop="@dimen/gap_32"
                 android:layout_marginEnd="@dimen/gap_20"
-                app:alertText='@{"필수 정보입니다."}'
-                app:buttonText='@{"검색"}'
-                app:firstContent="@={vm.roadAddress}"
+                app:check="@{vm.privacyPolicy &amp;&amp; vm.marketingPush}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/title_widget"
-                app:secondContent="@={vm.detailAddress}"
-                app:setFirstEditTextEnable="@{false}"
-                app:setFirstEditTextHint='@{"주소를 검색해주세요."}'
-                app:setMaxLengthSecond="@{100}"
-                app:setSecondEditTextHint='@{"상세주소를 입력해주세요."}'
-                app:titleVisible="@{false}" />
+                app:text="@{@string/sign_up_repair_in_person_checkbox}" />
+
+            <kr.co.soogong.master.ui.widget.AlertBox
+                android:id="@+id/alert_box"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/gap_20"
+                android:layout_marginTop="@dimen/gap_26"
+                android:layout_marginEnd="@dimen/gap_20"
+                app:alertContent="@{@string/sign_up_repair_in_person_alert_box_content}"
+                app:alertTitle="@{@string/sign_up_repair_in_person_alert_box_title}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/alert_repair_in_person_required"
+                app:theme="@{101}" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/alert_repair_in_person_required"
+                style="@style/text_style_14sp.regular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/gap_20"
+                android:text="@string/alert_required_field"
+                android:textColor="@color/color_FF711D"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/repair_in_person_checkbox"
+                tools:visibility="visible" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/default_button"
