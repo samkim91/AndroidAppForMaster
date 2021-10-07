@@ -9,6 +9,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
+import kr.co.soogong.master.data.dto.AttachmentDto
 import kr.co.soogong.master.data.dto.requirement.RequirementDto
 import kr.co.soogong.master.data.dto.requirement.estimation.EstimationDto
 import kr.co.soogong.master.data.dto.requirement.estimation.EstimationPriceDto
@@ -19,6 +20,7 @@ import kr.co.soogong.master.domain.usecase.requirement.GetRequirementUseCase
 import kr.co.soogong.master.domain.usecase.requirement.SaveEstimationUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import kr.co.soogong.master.uihelper.requirment.action.WriteEstimationActivityHelper
+import kr.co.soogong.master.utility.ListLiveData
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -48,6 +50,9 @@ class WriteEstimationViewModel @Inject constructor(
     val description = MutableLiveData("")
 
     val measurementImage = MutableLiveData(Uri.EMPTY)
+
+    val isSavingTemplate = MutableLiveData(false)
+    val estimationImages = ListLiveData<AttachmentDto>()
 
     fun requestRequirement() {
         Timber.tag(TAG).d("requestRequirement: $requirementId")

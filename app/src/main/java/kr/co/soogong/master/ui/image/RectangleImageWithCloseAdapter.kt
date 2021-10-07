@@ -11,16 +11,22 @@ class RectangleImageWithCloseAdapter(
     private val closeClickListener: (Int) -> Unit,
 ) : ListAdapter<AttachmentDto, RectangleImageWithCloseHolder>(RectangleImageWithCloseDiffUtil()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        RectangleImageWithCloseHolder(ViewHolderImageDeleteButtonBinding.inflate(
-            LayoutInflater.from(parent.context),
-            parent,
-            false))
+        RectangleImageWithCloseHolder(
+            ViewHolderImageDeleteButtonBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
 
     override fun onBindViewHolder(holder: RectangleImageWithCloseHolder, position: Int) {
-        val params = holder.itemView.layoutParams as ViewGroup.MarginLayoutParams
-        params.marginEnd = 10.dp
-        params.bottomMargin = 10.dp
-        holder.itemView.layoutParams = params
+        holder.itemView.layoutParams =
+            (holder.itemView.layoutParams as ViewGroup.MarginLayoutParams).apply {
+                marginStart = 5.dp
+                marginEnd = 5.dp
+                bottomMargin = 1.dp
+                topMargin = 1.dp
+            }
 
         holder.binding(currentList[position], closeClickListener)
     }

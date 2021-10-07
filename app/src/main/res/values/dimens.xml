@@ -28,6 +28,7 @@
     <dimen name="gap_2">2dp</dimen>
     <dimen name="gap_3">3dp</dimen>
     <dimen name="gap_4">4dp</dimen>
+    <dimen name="gap_5">5dp</dimen>
     <dimen name="gap_6">6dp</dimen>
     <dimen name="gap_8">8dp</dimen>
     <dimen name="gap_9">9dp</dimen>

@@ -6,3 +6,6 @@ const val GRAY_THEME = 102
 
 const val MONEY_TYPE = 200
 const val CALENDAR_TYPE = 201
+
+const val SPEAKER_TYPE = 300
+const val DOCUMENT_TYPE = 301

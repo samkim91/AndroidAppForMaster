@@ -9,32 +9,32 @@ class ListLiveData<T> : MutableLiveData<MutableList<T>>() {
         value = temp
     }
 
-    fun add(item: T){
+    fun add(item: T) {
         temp.add(item)
         value = temp
     }
 
-    fun addAll(items: List<T>){
+    fun addAll(items: List<T>) {
         temp.addAll(items)
         value = temp
     }
 
-    fun remove(item: T){
+    fun remove(item: T) {
         temp.remove(item)
         value = temp
     }
 
-    fun removeAt(position: Int){
+    fun removeAt(position: Int) {
         temp.removeAt(position)
         value = temp
     }
 
-    fun clear(){
+    fun clear() {
         temp.clear()
         value = temp
     }
 
-    fun getItemCount() : Int{
+    fun getItemCount(): Int {
         return value?.count() ?: 0
     }
 }

@@ -56,8 +56,11 @@ class EditShopImagesFragment : BaseFragment<FragmentEditShopImagesBinding>(
                                 resources.getString(R.string.maximum_images_count)
                             )
                             .startMultiImage { uriList ->
-                                if (FileHelper.isImageExtension(uriList, requireContext()) == false)
-                                {
+                                if (FileHelper.isImageExtension(
+                                        uriList,
+                                        requireContext()
+                                    ) == false
+                                ) {
                                     requireContext().toast(getString(R.string.invalid_image_extension))
                                     return@startMultiImage
                                 }
@@ -115,9 +118,6 @@ class EditShopImagesFragment : BaseFragment<FragmentEditShopImagesBinding>(
                     )
                 )
             }
-        })
-        viewModel.shopImages.observe(viewLifecycleOwner, {
-            Timber.tag(TAG).d("onChanged: $it")
         })
     }
 

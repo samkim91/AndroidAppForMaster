@@ -3,7 +3,7 @@ package kr.co.soogong.master.ui.image
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import kr.co.soogong.master.data.dto.AttachmentDto
-import kr.co.soogong.master.utility.ListLiveData
+import timber.log.Timber
 
 @BindingAdapter("bind:photo_list_with_close")
 fun RecyclerView.setClosableList(items: List<AttachmentDto>?) {

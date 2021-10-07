@@ -6,7 +6,9 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.core.content.res.ResourcesCompat
 import dagger.hilt.android.AndroidEntryPoint
+import gun0912.tedimagepicker.builder.TedImagePicker
 import kr.co.soogong.master.R
+import kr.co.soogong.master.data.dto.AttachmentDto
 import kr.co.soogong.master.data.model.requirement.estimation.EstimationTypeCode
 import kr.co.soogong.master.databinding.ActivityWriteEstimationBinding
 import kr.co.soogong.master.ui.base.BaseActivity
@@ -17,6 +19,8 @@ import kr.co.soogong.master.ui.requirement.action.write.WriteEstimationViewModel
 import kr.co.soogong.master.ui.widget.RequirementDrawerContainer
 import kr.co.soogong.master.ui.widget.RequirementDrawerContainer.Companion.REQUIREMENT_TYPE
 import kr.co.soogong.master.utility.EventObserver
+import kr.co.soogong.master.utility.FileHelper
+import kr.co.soogong.master.utility.PermissionHelper
 import kr.co.soogong.master.utility.extension.toast
 import kr.co.soogong.master.utility.validation.ValidationHelper
 import timber.log.Timber
@@ -94,6 +98,54 @@ class WriteEstimationActivity : BaseActivity<ActivityWriteEstimationBinding>(
                     }
                 }
             })
+
+            alertBoxForLoadingEstimationTemplate.setOnClickListener {
+                // TODO: 2021/10/06 templateActivity 불러오기
+            }
+
+            checkboxForAddingEstimationTemplate.setCheckClick {
+                viewModel.isSavingTemplate.value =
+                    checkboxForAddingEstimationTemplate.checkBox.isChecked
+            }
+
+            estimationImagesPicker.setAdapter { viewModel.estimationImages.removeAt(it) }
+
+            estimationImagesPicker.addIconClickListener {
+                PermissionHelper.checkImagePermission(context = this@WriteEstimationActivity,
+                    onGranted = {
+                        TedImagePicker.with(this@WriteEstimationActivity)
+                            .buttonBackground(R.drawable.shape_green_background_radius8)
+                            .max(
+                                (10 - viewModel.estimationImages.getItemCount()),
+                                resources.getString(R.string.maximum_images_count)
+                            )
+                            .startMultiImage { uriList ->
+                                if (FileHelper.isImageExtension(
+                                        uriList,
+                                        this@WriteEstimationActivity
+                                    ) == false
+                                ) {
+                                    toast(getString(R.string.invalid_image_extension))
+                                    return@startMultiImage
+                                }
+
+                                viewModel.estimationImages.addAll(uriList.map {
+                                    AttachmentDto(
+                                        id = null,
+                                        partOf = null,
+                                        referenceId = null,
+                                        description = null,
+                                        s3Name = null,
+                                        fileName = null,
+                                        url = null,
+                                        uri = it,
+                                    )
+                                })
+                            }
+                    },
+                    onDenied = { })
+            }
+
             // TODO: 2021/08/25 화면 열릴 때 키보드가 나오고 포커스 되는것 까지 구현 필요
 //            if(simpleCost.requestFocus()) window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE)
 //            if (scrollView.post { scrollView.fullScroll(View.FOCUS_DOWN) }) window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE
