@@ -15,7 +15,7 @@ data class DialogData(
     val positiveBtnText: String?,
     @ColorInt val positiveBtnTextColor: Int,
     val negativeBtnText: String?,
-    @ColorInt val negativeBtnTextColor: Int
+    @ColorInt val negativeBtnTextColor: Int,
 ) : Parcelable {
     companion object {
         fun getUpdatingAppMandatory(context: Context) =
@@ -44,18 +44,26 @@ data class DialogData(
 
         fun getConfirmRepairDoneDialogData(context: Context) =
             DialogData(
-                "시공을 완료 하셨나요?", context.getColor(R.color.text_basic_color),
-                "고객님과 합의되었을 때만 완료처리를\n해주세요. 완료처리를 하면 고객님께\n자동으로 리뷰요청을 하게 됩니다.", context.getColor(R.color.text_alert_color),
-                "네", context.getColor(R.color.text_basic_color),
-                "아니요", context.getColor(R.color.text_basic_color)
+                "시공을 완료 하셨나요?",
+                context.getColor(R.color.text_basic_color),
+                "고객님과 합의되었을 때만 완료처리를\n해주세요. 완료처리를 하면 고객님께\n자동으로 리뷰요청을 하게 됩니다.",
+                context.getColor(R.color.text_alert_color),
+                "네",
+                context.getColor(R.color.text_basic_color),
+                "아니요",
+                context.getColor(R.color.text_basic_color)
             )
 
         fun getRequestConsultAlertDialogData(context: Context) =
             DialogData(
-                "고객님이 상세상담 통화를 요청하셨어요.\n고객님과 빠르게 통화하고 시공 가능성을\n높여보세요.", context.getColor(R.color.text_basic_color),
-                "24시간동안 통화를 하지 않을 경우\n배정에 불이익이 있을 수 있어요.", context.getColor(R.color.text_alert_color),
-                "확인", context.getColor(R.color.text_basic_color),
-                null, context.getColor(R.color.text_basic_color)
+                "고객님이 상세상담 통화를 요청하셨어요.\n고객님과 빠르게 통화하고 시공 가능성을\n높여보세요.",
+                context.getColor(R.color.text_basic_color),
+                "24시간동안 통화를 하지 않을 경우\n배정에 불이익이 있을 수 있어요.",
+                context.getColor(R.color.text_alert_color),
+                "확인",
+                context.getColor(R.color.text_basic_color),
+                null,
+                context.getColor(R.color.text_basic_color)
             )
 
         fun getExpiredRequestConsultDialogData(context: Context) =
@@ -167,6 +175,30 @@ data class DialogData(
                 "확인",
                 context.getColor(R.color.text_basic_color),
                 "취소",
+                context.getColor(R.color.text_basic_color)
+            )
+
+        fun getConfirmingForDeletingEstimationTemplate(context: Context) =
+            DialogData(
+                "제안 내용을 삭제할까요?",
+                context.getColor(R.color.text_basic_color),
+                "삭제된 내용은 복구가 불가능합니다.\n삭제하시겠습니까?",
+                context.getColor(R.color.text_alert_color),
+                "네",
+                context.getColor(R.color.text_basic_color),
+                "아니요",
+                context.getColor(R.color.text_basic_color)
+            )
+
+        fun getConfirmingForIgnoreChangeOfEstimationTemplate(context: Context) =
+            DialogData(
+                "변경사항 확인",
+                context.getColor(R.color.text_basic_color),
+                "변경사항을 삭제하시겠습니까?",
+                context.getColor(R.color.text_alert_color),
+                "계속 수정",
+                context.getColor(R.color.text_basic_color),
+                "삭제",
                 context.getColor(R.color.text_basic_color)
             )
     }

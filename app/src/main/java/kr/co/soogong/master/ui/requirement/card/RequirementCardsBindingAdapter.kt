@@ -1,11 +1,10 @@
-@file:JvmName("ReceivedBindingAdapter")
+@file:JvmName("RequirementCardsBindingAdapter")
 
-package kr.co.soogong.master.ui.requirement.received
+package kr.co.soogong.master.ui.requirement.card
 
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import kr.co.soogong.master.data.model.requirement.RequirementCard
-import kr.co.soogong.master.ui.requirement.card.RequirementCardsAdapter
 
 @BindingAdapter("requirement_cards")
 fun RecyclerView.setRequirementCards(items: List<RequirementCard>?) {

@@ -84,7 +84,7 @@
                     app:subTitleVisible="@{true}"
                     app:titleVisible="@{false}" />
 
-                <kr.co.soogong.master.ui.widget.TitleEditTextCounterView
+                <kr.co.soogong.master.ui.widget.TitleEditTextCounter
                     android:id="@+id/other_cost_info"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

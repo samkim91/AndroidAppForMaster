@@ -150,12 +150,13 @@ class EstimatedCardViewHolder(
                     theme = GRAY_THEME,
                     type = MONEY_TYPE,
                     titleData = context.getString(R.string.requirements_card_amount_title),
-                    contentData = if (requirementCard.estimationDto?.price!! > 0)
-                        "${moneyFormat.format(requirementCard.estimationDto.price)}원" else context.getString(
-                        R.string.not_estimated_text
-                    ),
-                    alertData = context.getString(R.string.requirements_card_waiting_label),
-                )
+                    contentData = requirementCard.estimationDto?.price?.let {
+                        if (it > 0)
+                            "${moneyFormat.format(it)}원" else context.getString(
+                            R.string.not_estimated_text
+                        )},
+                        alertData = context.getString(R.string.requirements_card_waiting_label),
+                        )
             })
         }
     }

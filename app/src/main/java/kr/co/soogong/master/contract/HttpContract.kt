@@ -35,6 +35,12 @@ object HttpContract {
     const val REQUEST_REVIEW = "repair/request-review"
     //endregion
 
+    //region Estimation Template
+    const val GET_ESTIMATION_TEMPLATES = "estimation-template/find-by-master-uid"
+    const val SAVE_ESTIMATION_TEMPLATE = "estimation-template"
+    const val DELETE_ESTIMATION_TEMPLATE = "estimation-template/{id}"
+    //endregion
+
     //region Profile
     const val MY_PAGE_URL = "https://soogong.co.kr/master/detail/"
     const val GET_MASTER_SIMPLE_INFO = "master/find-simple-info"

@@ -96,6 +96,16 @@
     <!-- Requirements : Search -->
     <string name="requirements_not_found">해당 내용을 찾지 못 하였습니다.</string>
 
+    <!-- Estimation Templates -->
+    <string name="estimation_template_action_bar_text">자주 쓰는 제안</string>
+    <string name="estimation_templates_not_found">자주 쓰는 제안 내용이 없습니다.</string>
+    <string name="add_button_text">추가하기</string>
+    <string name="delete_button_text">삭제</string>
+    <string name="edit_button_text">수정</string>
+    <string name="apply_button_text">적용</string>
+
+    <string name="bottom_dialog_estimation_template_title">마스터님의 제안 내용</string>
+
     <!-- RequirementsCard -->
     <string name="requirements_card_waiting_label">2주 내 고객의 응답이 없을 시 해당 문의건은 삭제됩니다.</string>
     <string name="requirements_card_review_button">리뷰 요청하기</string>
@@ -209,7 +219,7 @@
 
     <string name="alert_box_title_for_loading_estimation_template">자주쓰는 제안 내용 불러오기</string>
     <string name="checkbox_text_for_adding_estimation_template">자주 쓰는 제안 내용에 추가하기</string>
-    <string name="alert_box_title_for_estimation_template">연락처를 게재하는 등의 직거래 유도 시 서비스 이용이 제한될 수 있습니다.</string>
+    <string name="alert_box_title_for_estimation_template">주의 : 명함, 간판 등 직거래 유도 시 서비스 이용이 제한됩니다.</string>
     <string name="estimation_images_picker_title">사진 첨부 (선택)</string>
 
     <!-- Measure   -->

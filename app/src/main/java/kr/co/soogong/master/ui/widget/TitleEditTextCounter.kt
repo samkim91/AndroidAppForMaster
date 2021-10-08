@@ -6,7 +6,6 @@ import android.text.InputFilter
 import android.text.TextWatcher
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import android.view.View
 import android.widget.EditText
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -14,10 +13,10 @@ import androidx.core.view.isVisible
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ViewTitleEdittextCounterBinding
 
-class TitleEditTextCounterView @JvmOverloads constructor(
+class TitleEditTextCounter @JvmOverloads constructor(
     context: Context,
     attributeSet: AttributeSet? = null,
-    defStyle: Int = 0
+    defStyle: Int = 0,
 ) : ConstraintLayout(context, attributeSet, defStyle) {
     private var binding =
         ViewTitleEdittextCounterBinding.inflate(LayoutInflater.from(context), this, true)
@@ -35,14 +34,14 @@ class TitleEditTextCounterView @JvmOverloads constructor(
     var titleVisible: Boolean = false
         set(value) {
             field = value
-            binding.title.visibility = if (value) View.VISIBLE else View.GONE
+            binding.title.isVisible = value
         }
 
     var subTitle: String? = ""
         set(value) {
             field = value
-            if(!value.isNullOrEmpty()){
-                binding.subTitle.visibility = View.VISIBLE
+            if (!value.isNullOrEmpty()) {
+                binding.subTitle.isVisible = true
                 binding.subTitle.text = value
             }
 
@@ -52,7 +51,8 @@ class TitleEditTextCounterView @JvmOverloads constructor(
         set(value) {
             // 기본적으로 회색이나, 필요에 따라서 검정색으로 변경
             field = value
-            if(value) binding.subTitle.setTextColor(resources.getColor(R.color.text_basic_color, null))
+            if (value) binding.subTitle.setTextColor(resources.getColor(R.color.text_basic_color,
+                null))
             else binding.subTitle.setTextColor(resources.getColor(R.color.text_primary_color, null))
         }
 
@@ -69,7 +69,7 @@ class TitleEditTextCounterView @JvmOverloads constructor(
         }
 
     var hintText: String = ""
-        set(value){
+        set(value) {
             field = value
             binding.text.hint = value
         }

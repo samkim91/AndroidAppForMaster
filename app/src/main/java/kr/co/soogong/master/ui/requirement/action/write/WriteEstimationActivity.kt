@@ -1,8 +1,10 @@
 package kr.co.soogong.master.ui.requirement.action.write
 
+import android.app.Activity
 import android.icu.text.DecimalFormat
 import android.os.Bundle
 import android.view.View
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.core.content.res.ResourcesCompat
 import dagger.hilt.android.AndroidEntryPoint
@@ -18,6 +20,7 @@ import kr.co.soogong.master.ui.requirement.action.write.WriteEstimationViewModel
 import kr.co.soogong.master.ui.requirement.action.write.WriteEstimationViewModel.Companion.SEND_ESTIMATION_SUCCESSFULLY
 import kr.co.soogong.master.ui.widget.RequirementDrawerContainer
 import kr.co.soogong.master.ui.widget.RequirementDrawerContainer.Companion.REQUIREMENT_TYPE
+import kr.co.soogong.master.uihelper.requirment.action.EstimationTemplatesActivityHelper
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.FileHelper
 import kr.co.soogong.master.utility.PermissionHelper
@@ -30,6 +33,15 @@ class WriteEstimationActivity : BaseActivity<ActivityWriteEstimationBinding>(
     R.layout.activity_write_estimation
 ) {
     private val viewModel: WriteEstimationViewModel by viewModels()
+
+    private val estimationTemplateLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            Timber.tag(TAG).d("StartActivityForResult: $result")
+            if (result.resultCode == Activity.RESULT_OK) {
+                viewModel.description.value =
+                    EstimationTemplatesActivityHelper.getResponse(result.data!!)
+            }
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -100,7 +112,7 @@ class WriteEstimationActivity : BaseActivity<ActivityWriteEstimationBinding>(
             })
 
             alertBoxForLoadingEstimationTemplate.setOnClickListener {
-                // TODO: 2021/10/06 templateActivity 불러오기
+                estimationTemplateLauncher.launch(EstimationTemplatesActivityHelper.getIntent(this@WriteEstimationActivity))
             }
 
             checkboxForAddingEstimationTemplate.setCheckClick {

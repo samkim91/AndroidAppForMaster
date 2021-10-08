@@ -49,6 +49,7 @@
             android:launchMode="singleTop" />        <!-- 실측요청건을 고려 singleTop 로 설정 -->
         <activity android:name=".ui.requirement.action.write.WriteEstimationActivity" />
         <activity android:name=".ui.requirement.action.write.MeasurementActivity" />
+        <activity android:name=".ui.requirement.action.write.template.EstimationTemplatesActivity" />
         <activity android:name=".ui.mypage.account.AccountActivity" />
         <activity android:name=".ui.mypage.alarm.AlarmActivity" />
         <activity android:name=".ui.mypage.notice.NoticeActivity" />
