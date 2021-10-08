@@ -35,7 +35,7 @@ interface RequirementInterface {
     @POST(HttpContract.SAVE_ESTIMATION)
     fun saveEstimation(
         @Part("estimationDto") estimationDto: RequestBody,
-        @Part measurementImage: MultipartBody.Part?,
+        @Part measurementImage: List<MultipartBody.Part?>?,
     ): Single<EstimationDto>
 
     @POST(HttpContract.RESPOND_TO_MEASURE)

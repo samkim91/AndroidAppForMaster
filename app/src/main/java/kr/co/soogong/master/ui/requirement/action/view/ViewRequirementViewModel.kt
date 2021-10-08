@@ -83,7 +83,7 @@ class ViewRequirementViewModel @Inject constructor(
                 repair = null,
                 createdAt = null,
                 updatedAt = null,
-            ), measurementImageUri = null
+            ), imageUris = null
         )
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

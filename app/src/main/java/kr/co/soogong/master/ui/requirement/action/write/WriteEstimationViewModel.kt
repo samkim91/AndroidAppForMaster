@@ -1,7 +1,5 @@
 package kr.co.soogong.master.ui.requirement.action.write
 
-import android.net.Uri
-import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
@@ -49,8 +47,6 @@ class WriteEstimationViewModel @Inject constructor(
 
     val description = MutableLiveData("")
 
-    val measurementImage = MutableLiveData(Uri.EMPTY)
-
     val isSavingTemplate = MutableLiveData(false)
     val estimationImages = ListLiveData<AttachmentDto>()
 
@@ -87,6 +83,7 @@ class WriteEstimationViewModel @Inject constructor(
                         simpleCost.value?.replace(",", "")?.toInt()
                     }
                 },
+                isSavingTemplate = isSavingTemplate.value ?: false,
                 description = description.value,
                 estimationPrices = when (estimationType.value) {
                     EstimationTypeCode.BY_ITEM -> {
@@ -113,7 +110,7 @@ class WriteEstimationViewModel @Inject constructor(
                 createdAt = null,
                 updatedAt = null,
             ),
-            measurementImageUri = measurementImage.value,
+            imageUris = estimationImages.value?.map { it.uri!! },
         )
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -125,10 +122,6 @@ class WriteEstimationViewModel @Inject constructor(
                     setAction(REQUEST_FAILED)
                 }
             ).addToDisposable()
-    }
-
-    fun clearImage(v: View) {
-        measurementImage.value = Uri.EMPTY
     }
 
     companion object {

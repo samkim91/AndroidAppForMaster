@@ -37,7 +37,7 @@ class RequirementService @Inject constructor(
 
     fun saveEstimation(
         estimationDto: RequestBody,
-        measurementImage: MultipartBody.Part? = null,
+        measurementImage: List<MultipartBody.Part?>? = null,
     ): Single<EstimationDto> {
         return requirementInterface.saveEstimation(estimationDto, measurementImage)
     }

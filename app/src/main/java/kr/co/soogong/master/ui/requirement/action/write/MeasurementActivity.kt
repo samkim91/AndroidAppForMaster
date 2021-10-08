@@ -5,6 +5,7 @@ import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import gun0912.tedimagepicker.builder.TedImagePicker
 import kr.co.soogong.master.R
+import kr.co.soogong.master.data.dto.AttachmentDto
 import kr.co.soogong.master.databinding.ActivityMeasurementBinding
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.ui.dialog.popup.CustomDialog
@@ -43,22 +44,37 @@ class MeasurementActivity : BaseActivity<ActivityMeasurementBinding>(
                     onBackPressed()
                 }
 
-                cameraIconForMeasurementImage.setOnClickListener {
+                measurementImagesPicker.setAdapter { viewModel.estimationImages.removeAt(it) }
+
+                measurementImagesPicker.addIconClickListener {
                     PermissionHelper.checkImagePermission(context = this@MeasurementActivity,
                         onGranted = {
                             TedImagePicker.with(this@MeasurementActivity)
                                 .buttonBackground(R.drawable.shape_green_background_radius8)
-                                .start { uri ->
-                                    if (FileHelper.isImageExtension(
-                                            uri,
-                                            this@MeasurementActivity
-                                        ) == false
+                                .max(
+                                    (10 - viewModel.estimationImages.getItemCount()),
+                                    resources.getString(R.string.maximum_images_count)
+                                )
+                                .startMultiImage { uriList ->
+                                    if (FileHelper.isImageExtension(uriList,
+                                            this@MeasurementActivity) == false
                                     ) {
                                         toast(getString(R.string.invalid_image_extension))
-                                        return@start
+                                        return@startMultiImage
                                     }
 
-                                    viewModel.measurementImage.value = uri
+                                    viewModel.estimationImages.addAll(uriList.map {
+                                        AttachmentDto(
+                                            id = null,
+                                            partOf = null,
+                                            referenceId = null,
+                                            description = null,
+                                            s3Name = null,
+                                            fileName = null,
+                                            url = null,
+                                            uri = it,
+                                        )
+                                    })
                                 }
                         },
                         onDenied = { })
