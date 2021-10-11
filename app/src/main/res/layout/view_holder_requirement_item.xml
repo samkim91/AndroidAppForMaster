@@ -98,7 +98,7 @@
             tools:visibility="visible" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/location"
+            android:id="@+id/address"
             style="@style/text_style_18sp.bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -114,13 +114,31 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/measurement_badge"
             app:layout_goneMarginTop="@dimen/gap_12"
-            tools:text="서울시 관악구 봉천동 70 봉천동 70 123-124" />
+            tools:text="서울특별시 서초구 바우뫼로 213" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/old_address"
+            style="@style/text_style_16sp.medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/requirement_card_location_margin_end"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@{data.oldAddress}"
+            android:textColor="@color/color_A8A8A8"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintEnd_toStartOf="@id/arrow_button"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="@id/address"
+            app:layout_constraintTop_toBottomOf="@id/address"
+            tools:text="서울특별시 서초구 양재동 4-15" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/project"
             style="@style/text_style_16sp.medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_2"
             android:layout_marginEnd="@dimen/requirement_card_type_margin_end"
             android:ellipsize="end"
             android:maxLines="1"
@@ -130,7 +148,7 @@
             app:layout_constraintEnd_toStartOf="@id/arrow_button"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/location"
+            app:layout_constraintTop_toBottomOf="@id/old_address"
             tools:text="욕실 위생도기 및 수전 설치/교체 123123123123" />
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -140,7 +158,7 @@
             android:src="@drawable/ic_arrow_right"
             app:layout_constraintBottom_toBottomOf="@id/project"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/location" />
+            app:layout_constraintTop_toTopOf="@id/address" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/created_at"

@@ -38,6 +38,9 @@ data class RequirementDto(
     @SerializedName("address")
     val address: String?,
 
+    @SerializedName("oldAddress")
+    val oldAddress: String?,
+
     @SerializedName("status")
     val status: String?,
 

@@ -54,6 +54,7 @@
                     app:address="@{vm.requirement.address}"
                     app:createdAt="@{vm.requirement.createdAt}"
                     app:measurementBadgeVisibility="@{vm.requirement.typeCode}"
+                    app:oldAddress="@{vm.requirement.oldAddress}"
                     app:project="@{vm.requirement.projectName}"
                     app:requirementToken="@{vm.requirement.token}" />
 
