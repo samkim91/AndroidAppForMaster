@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -19,7 +18,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:fillViewport="true">
 
             <kr.co.soogong.master.ui.widget.LargeTitleSubtitle
@@ -38,55 +37,51 @@
                 android:id="@+id/agreed_all"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/gap_32"
                 android:layout_marginStart="@dimen/gap_20"
+                android:layout_marginTop="@dimen/gap_32"
                 android:layout_marginEnd="@dimen/gap_20"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/title_widget"
-                app:text='@{"모두 동의합니다. (선택 정보 포함)"}'
                 app:check="@{vm.privacyPolicy &amp;&amp; vm.marketingPush}"
-
-                />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/title_widget"
+                app:text='@{"모두 동의합니다. (선택 정보 포함)"}' />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/line"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/line_height"
-                android:background="@color/line_color"
-                android:layout_marginTop="@dimen/gap_20"
                 android:layout_marginStart="@dimen/gap_20"
+                android:layout_marginTop="@dimen/gap_20"
                 android:layout_marginEnd="@dimen/gap_20"
-                app:layout_constraintTop_toBottomOf="@id/agreed_all"
+                android:background="@color/line_color"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/agreed_all" />
 
             <kr.co.soogong.master.ui.widget.TextCheckBox
                 android:id="@+id/agreed_privacy_policy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/gap_20"
                 android:layout_marginStart="@dimen/gap_20"
+                android:layout_marginTop="@dimen/gap_20"
                 android:layout_marginEnd="@dimen/gap_20"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/line"
                 app:check="@={vm.privacyPolicy}"
-                />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/line" />
 
             <kr.co.soogong.master.ui.widget.TextCheckBox
                 android:id="@+id/agreed_marketing"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/gap_20"
                 android:layout_marginStart="@dimen/gap_20"
+                android:layout_marginTop="@dimen/gap_20"
                 android:layout_marginEnd="@dimen/gap_20"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/agreed_privacy_policy"
-                app:text='@{"마케팅 수신에 동의합니다. (선택)"}'
                 app:check="@={vm.marketingPush}"
-                />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/agreed_privacy_policy"
+                app:text='@{"마케팅 수신에 동의합니다. (선택)"}' />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/alert_privacy_policy_agreement_required"

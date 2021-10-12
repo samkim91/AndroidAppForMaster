@@ -56,31 +56,25 @@ class RequirementRepository @Inject constructor(
             .subscribeOn(Schedulers.io())
             .observeOn(Schedulers.io())
             .subscribeBy {
-                Timber.tag(TAG).d("saveRequirementInLocal: $it")
+                Timber.tag(TAG).d("saveRequirementInLocal: ")
             }
 
         disposable.addTo(compositeDisposable)
     }
 
     fun getRequirementsByStatus(
-        statusArray: List<String>,
-        canceledYn: Boolean = false
+        statusArray: List<String>
     ): Flowable<List<RequirementDto>> {
-        return getRequirementsFromLocal(statusArray, canceledYn)
+        return getRequirementsFromLocal(statusArray)
             .onErrorResumeNext(Flowable.empty())
             .concatWith(getRequirementsFromServer(statusArray))
     }
 
     private fun getRequirementsFromLocal(
-        statusArray: List<String>,
-        canceledYn: Boolean = false
+        statusArray: List<String>
     ): Flowable<List<RequirementDto>> {
-        Timber.tag(TAG).d("getRequirementsFromLocal start: $statusArray $canceledYn")
-        return if (canceledYn) {
-            requirementDao.getListByStatusIncludingCanceled(statusArray, canceledYn)
-        } else {
-            requirementDao.getListByStatus(statusArray, canceledYn)
-        }
+        Timber.tag(TAG).d("getRequirementsFromLocal start: $statusArray")
+        return requirementDao.getListByStatus(statusArray)
             .filter { it.isNotEmpty() }
             .toFlowable()
             .doOnNext {
@@ -111,7 +105,7 @@ class RequirementRepository @Inject constructor(
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.io())
                 .subscribeBy {
-                    Timber.tag(TAG).d("saveRequirementsInLocal: $it")
+                    Timber.tag(TAG).d("saveRequirementsInLocal: ")
                 }
 
         disposable.addTo(compositeDisposable)

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/bind"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="data"
+            type="kr.co.soogong.master.data.dto.requirement.estimationTemplate.EstimationTemplateDto" />
+
+        <variable
+            name="left_button_click_listener"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="middle_button_click_listener"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="right_button_click_listener"
+            type="android.view.View.OnClickListener" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/gap_25"
+        android:paddingTop="@dimen/gap_16"
+        android:paddingEnd="@dimen/gap_25"
+        android:paddingBottom="@dimen/gap_16">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textview_created_at"
+            style="@style/text_style_16sp.bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_909090"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            bind:to_date_string="@{data.createdAt}"
+            tools:text="2021. 09. 21" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textview_description"
+            style="@style/text_style_18sp.regular"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_2"
+            android:text="@{data.description}"
+            android:textColor="@color/color_2E2E2E"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textview_created_at"
+            tools:text="두번째내용두번째내용두번째내용두번째내용두번째내용두번째내용두번째내용두번째내용두번째내용두번째내용두번째내용 내용이 길어질 수록 어떻게 될까요? 긴 내용은 길게 그냥 보여주는게 나을까" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/left_button"
+            style="@style/text_style_16sp.bold"
+            android:layout_width="@dimen/gap_96"
+            android:layout_height="@dimen/gap_40"
+            android:layout_marginTop="@dimen/gap_8"
+            android:background="@drawable/shape_red_background_radius5"
+            android:drawableStart="@drawable/ic_trash_box"
+            android:drawablePadding="@dimen/gap_5"
+            android:gravity="center_vertical"
+            android:onClick="@{left_button_click_listener}"
+            android:paddingStart="@dimen/gap_15"
+            android:paddingEnd="@dimen/gap_15"
+            android:text="@string/delete_button_text"
+            android:textColor="@color/basic_white"
+            app:layout_constraintEnd_toStartOf="@id/middle_button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textview_description" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/middle_button"
+            style="@style/text_style_16sp.bold"
+            android:layout_width="@dimen/gap_96"
+            android:layout_height="@dimen/gap_40"
+            android:background="@drawable/shape_blue_background_radius5"
+            android:drawableStart="@drawable/ic_pencil"
+            android:drawablePadding="@dimen/gap_5"
+            android:gravity="center_vertical"
+            android:onClick="@{middle_button_click_listener}"
+            android:paddingStart="@dimen/gap_15"
+            android:paddingEnd="@dimen/gap_15"
+            android:text="@string/edit_button_text"
+            android:textColor="@color/basic_white"
+            app:layout_constraintEnd_toStartOf="@id/right_button"
+            app:layout_constraintStart_toEndOf="@id/left_button"
+            app:layout_constraintTop_toTopOf="@id/left_button" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/right_button"
+            style="@style/text_style_16sp.bold"
+            android:layout_width="@dimen/gap_96"
+            android:layout_height="@dimen/gap_40"
+            android:background="@drawable/shape_green_background_radius5"
+            android:drawableStart="@drawable/ic_simple_check"
+            android:drawablePadding="@dimen/gap_5"
+            android:gravity="center_vertical"
+            android:onClick="@{right_button_click_listener}"
+            android:paddingStart="@dimen/gap_15"
+            android:paddingEnd="@dimen/gap_15"
+            android:text="@string/apply_button_text"
+            android:textColor="@color/basic_white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/middle_button"
+            app:layout_constraintTop_toTopOf="@id/left_button" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

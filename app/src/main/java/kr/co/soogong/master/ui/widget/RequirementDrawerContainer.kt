@@ -23,7 +23,7 @@ import kr.co.soogong.master.utility.extension.startHalfRotateAnimation
 class RequirementDrawerContainer @JvmOverloads constructor(
     context: Context,
     attributeSet: AttributeSet? = null,
-    defStyle: Int = 0
+    defStyle: Int = 0,
 ) : ConstraintLayout(context, attributeSet, defStyle) {
     private var binding =
         ViewRequirementDrawerContainerBinding.inflate(LayoutInflater.from(context), this, true)
@@ -41,8 +41,10 @@ class RequirementDrawerContainer @JvmOverloads constructor(
             field = value
             with(binding) {
                 detailContainer.isVisible = value
-                drawerLabel.setOnClickListener {
-                    drawerIcon.startHalfRotateAnimation(!detailContainer.isVisible)
+                drawerIcon.startHalfRotateAnimation(!detailContainer.isVisible)     // 화살표 이미지 초기 셋
+
+                drawerLabel.setOnClickListener {        // 펼치기를 할 떄마다 화살표 이미지 애니메이션 적용
+                    drawerIcon.startHalfRotateAnimation(detailContainer.isVisible)
                     detailContainer.isVisible = !detailContainer.isVisible
                 }
             }
@@ -128,27 +130,23 @@ class RequirementDrawerContainer @JvmOverloads constructor(
         private fun addCanceledDetail(
             context: Context,
             container: ViewGroup,
-            requirementDto: RequirementDto
+            requirementDto: RequirementDto,
         ) {
             requirementDto.let { requirement ->
-                requirement.canceledYn?.let { isCanceled ->
-                    if (isCanceled) {
-                        EstimationDetail(context).apply {
-                            key = context.getString(R.string.cancel_repair_title)
-                            value =
-                                CanceledReason.getCanceledReasonFromCode(requirement.canceledCode).inKorean
-                            bold = true
-                        }.run {
-                            container.addView(this)
-                        }
+                EstimationDetail(context).apply {
+                    key = context.getString(R.string.cancel_repair_title)
+                    value =
+                        CanceledReason.getCanceledReasonFromCode(requirement.canceledCode).inKorean
+                    bold = true
+                }.run {
+                    container.addView(this)
+                }
 
-                        EstimationDetail(context).apply {
-                            key = context.getString(R.string.description_label)
-                            value = requirement.canceledDescription
-                        }.run {
-                            container.addView(this)
-                        }
-                    }
+                EstimationDetail(context).apply {
+                    key = context.getString(R.string.description_label)
+                    value = requirement.canceledDescription
+                }.run {
+                    container.addView(this)
                 }
             }
         }
@@ -156,7 +154,7 @@ class RequirementDrawerContainer @JvmOverloads constructor(
         private fun addReviewDetail(
             context: Context,
             container: ViewGroup,
-            requirementDto: RequirementDto
+            requirementDto: RequirementDto,
         ) {
             requirementDto.estimationDto?.repair?.review?.let {
                 ReviewViewHolderHelper.create(container).run {
@@ -173,7 +171,7 @@ class RequirementDrawerContainer @JvmOverloads constructor(
         fun addCancelButton(
             context: Context,
             container: ViewGroup,
-            requirementDto: RequirementDto
+            requirementDto: RequirementDto,
         ) {
             val params = LinearLayoutCompat.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,

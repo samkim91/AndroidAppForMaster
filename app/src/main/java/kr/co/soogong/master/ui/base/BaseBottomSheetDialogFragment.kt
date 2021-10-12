@@ -7,19 +7,25 @@ import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.FragmentManager
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import kr.co.soogong.master.ui.dialog.loading.LoadingDialog
 
 abstract class BaseBottomSheetDialogFragment<B : ViewDataBinding>(
-    @LayoutRes private val layout: Int
+    @LayoutRes private val layout: Int,
 ) : BottomSheetDialogFragment() {
 
     protected lateinit var binding: B
         private set
 
+    protected val loading: LoadingDialog by lazy {
+        LoadingDialog.newInstance()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         binding = DataBindingUtil.inflate(inflater, layout, container, false)
         return binding.root
@@ -29,7 +35,17 @@ abstract class BaseBottomSheetDialogFragment<B : ViewDataBinding>(
         binding.run(action)
     }
 
+    protected abstract fun initLayout()
+
     protected fun <T : ViewDataBinding> bind(binding: T, action: T.() -> Unit) {
         binding.run(action)
+    }
+
+    protected fun showLoading(fragmentManager: FragmentManager) {
+        loading.show(fragmentManager, loading.tag)
+    }
+
+    protected fun dismissLoading() {
+        loading.dismiss()
     }
 }

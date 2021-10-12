@@ -45,6 +45,7 @@
     <color name="color_1B8C61">#1B8C61</color>
     <color name="color_08362F">#08362F</color>
 
+
     <color name="text_basic_color">@color/color_121212</color>
     <color name="text_primary_color">@color/color_616161</color>
     <color name="text_hint_color">@color/color_9E9E9E</color>

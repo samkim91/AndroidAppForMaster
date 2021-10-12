@@ -9,6 +9,7 @@ import kr.co.soogong.master.data.dto.profile.PortfolioDto
 
 @Parcelize
 data class BasicInformation(
+    val freeMeasureYn: Boolean?,
     val portfolios: List<PortfolioDto>?,
     val priceByProjects: List<PortfolioDto>?,
     val profileImage: AttachmentDto?,
@@ -19,6 +20,7 @@ data class BasicInformation(
     companion object {
         fun fromMasterDto(masterDto: MasterDto): BasicInformation {
             return BasicInformation(
+                freeMeasureYn = masterDto.freeMeasureYn,
                 portfolios = masterDto.masterPortfolios?.filter { portfolioDto -> portfolioDto.type == PortfolioCodeTable.code },
                 priceByProjects = masterDto.masterPortfolios?.filter { portfolioDto -> portfolioDto.type == PriceByProjectCodeTable.code },
                 profileImage = masterDto.profileImage,

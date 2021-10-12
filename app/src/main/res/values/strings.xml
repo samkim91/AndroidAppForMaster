@@ -31,6 +31,11 @@
     <string name="end_time_text">까지</string>
     <string name="sign_up_over">회원가입 완료</string>
 
+    <string name="sign_up_repair_in_person_title">수공은 직접 시공하는 마스터님만을 위한 서비스 입니다. 직접 시공하시나요?</string>
+    <string name="sign_up_repair_in_person_checkbox">직접 시공합니다.</string>
+    <string name="sign_up_repair_in_person_alert_box_title">직접 시공 범위</string>
+    <string name="sign_up_repair_in_person_alert_box_content">하청이 아닌 본인 또는 소속 직원이 직접 고객님들에게 서비스를 제공합니다. 하청으로 인해 발생하는 문제는 수공이 책임지지 않습니다.</string>
+
 
     <!-- Sign In -->
     <string name="sign_in_activity_name">로그인</string>
@@ -77,7 +82,7 @@
     <string name="requirements_done_tab_name">완료·취소</string>
 
     <string name="accepting_request_measurement">현장 실측 요청건 받는 중</string>
-    <string name="holding_request_measurement">버튼을 눌러 현장 실측 요청건을 받아보세요 >></string>
+    <string name="holding_request_measurement"><font color='#0069C8'>무료 현장 실측 요청건</font>을 받아보세요</string>
 
     <!-- Requirements : Request -->
     <string name="requirements_request_none_status">아직 들어온 문의가 없습니다.</string>
@@ -87,6 +92,19 @@
 
     <!-- Requirements : Done -->
     <string name="requirements_done_none_status">아직 완료된 문의가 없습니다.</string>
+
+    <!-- Requirements : Search -->
+    <string name="requirements_not_found">해당 내용을 찾지 못 하였습니다.</string>
+
+    <!-- Estimation Templates -->
+    <string name="estimation_template_action_bar_text">자주 쓰는 제안</string>
+    <string name="estimation_templates_not_found">자주 쓰는 제안 내용이 없습니다.</string>
+    <string name="add_button_text">추가하기</string>
+    <string name="delete_button_text">삭제</string>
+    <string name="edit_button_text">수정</string>
+    <string name="apply_button_text">적용</string>
+
+    <string name="bottom_dialog_estimation_template_title">마스터님의 제안 내용</string>
 
     <!-- RequirementsCard -->
     <string name="requirements_card_waiting_label">2주 내 고객의 응답이 없을 시 해당 문의건은 삭제됩니다.</string>
@@ -189,9 +207,6 @@
     <string name="asking_write_canceled_reason_detail_label">취소 사유에 대해 더 하고 싶은 말이 있으시면 작성해주세요.</string>
 
     <!-- Write Estimate -->
-    <string name="requirements_not_found">해당 내용을 찾지 못 하였습니다.</string>
-
-    <!-- Write Estimate -->
     <string name="write_estimate_title">견적서 작성</string>
     <string name="send_estimation">견적서 보내기</string>
     <string name="choose_estimation_type_text">견적 유형 선택</string>
@@ -201,6 +216,11 @@
 
     <string name="integration_estimation">통합 견적</string>
     <string name="estimation_by_item">항목별 견적</string>
+
+    <string name="alert_box_title_for_loading_estimation_template">자주쓰는 제안 내용 불러오기</string>
+    <string name="checkbox_text_for_adding_estimation_template">자주 쓰는 제안 내용에 추가하기</string>
+    <string name="alert_box_title_for_estimation_template">주의 : 명함, 간판 등 직거래 유도 시 서비스 이용이 제한됩니다.</string>
+    <string name="estimation_images_picker_title">사진 첨부 (선택)</string>
 
     <!-- Measure   -->
     <string name="measure_image_holder_label">실측 정보 (선택)</string>
@@ -294,6 +314,22 @@
     <string name="link_copied_successfully">링크가 복사되었습니다.</string>
     <string name="request_review_by_sharing_failed">해당 기능을 찾지 못 하였습니다. 다른 방법으로 공유하기를 통해 다른 앱을 선택해주세요.</string>
 
+    <string name="profile_card_title_for_free_measure">무료 방문 실측 여부</string>
+    <string name="profile_card_subtitle_for_free_measure">방문 실측이 무료일 경우에만 우선 실측 배정이 가능합니다.</string>
+    <string name="profile_card_title_for_portfolio">포트폴리오</string>
+    <string name="profile_card_subtitle_for_portfolio">실제 시공 정보와 사진이 쌓일 수록 고객의 신뢰감도 함께 쌓입니다.</string>
+    <string name="profile_card_title_for_price_by_project">시공 종류별 가격</string>
+    <string name="profile_card_subtitle_for_price_by_project">다양한 시공의 가격 정보는 고객 선택에 중요한 기준이 됩니다.</string>
+    <string name="profile_card_title_for_profile_image">프로필 사진</string>
+    <string name="profile_card_subtitle_for_profile_image">고객이 마스터님을 알아볼 수 있게 얼굴을 알려주세요.</string>
+    <string name="profile_card_title_for_flexible_cost">현장 가격 변동 요인</string>
+    <string name="profile_card_subtitle_for_flexible_cost">고객이 당황하지 않도록 현장의 가격 변동요인을 알려주세요.</string>
+    <string name="profile_card_title_for_other_flexible_options">기타 변동 가능사항</string>
+    <string name="profile_card_title_for_email">이메일</string>
+
+    <string name="edit_free_measure_fragment_title">방문 실측이 무료일 경우에만 우선 실측 배정이 가능합니다. </string>
+    <string name="edit_free_measure_fragment_agree_text">가능합니다.</string>
+    <string name="edit_free_measure_fragment_disagree_text">불가능합니다.</string>
 
     <!-- Request Detail -->
     <string name="request_date">접수일시</string>

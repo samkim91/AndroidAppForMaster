@@ -11,13 +11,15 @@ data class RequirementCard(
     val typeName: String?,
     val project: String?,
     val address: String?,
+    val oldAddress: String?,
     val status: RequirementStatus?,
+    val subStatus: String?,
     val tel: String?,
     val closedAt: Date?,
     val createdAt: Date?,
     val updatedAt: Date?,
     val introductionText: String?,
-    val estimationDto: EstimationDto?
+    val estimationDto: EstimationDto?,
 ) {
     companion object {
         fun fromRequirementDto(requirementDto: RequirementDto): RequirementCard {
@@ -28,7 +30,9 @@ data class RequirementCard(
                 typeName = requirementDto.typeName,
                 project = requirementDto.projectName,
                 address = requirementDto.address,
+                oldAddress = requirementDto.oldAddress,
                 status = RequirementStatus.getStatusFromRequirement(requirementDto),
+                subStatus = requirementDto.subStatus,
                 tel = requirementDto.tel,
                 closedAt = requirementDto.closedAt,
                 createdAt = requirementDto.createdAt,

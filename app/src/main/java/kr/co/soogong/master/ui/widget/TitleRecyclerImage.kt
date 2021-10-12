@@ -1,14 +1,14 @@
 package kr.co.soogong.master.ui.widget
 
 import android.content.Context
-import android.net.Uri
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.isVisible
 import kr.co.soogong.master.data.dto.AttachmentDto
 import kr.co.soogong.master.databinding.ViewTitleRecyclerImageBinding
 import kr.co.soogong.master.ui.image.RectangleImageWithCloseAdapter
+import kr.co.soogong.master.ui.image.setClosableList
 
 class TitleRecyclerImage @JvmOverloads constructor(
     context: Context,
@@ -22,26 +22,14 @@ class TitleRecyclerImage @JvmOverloads constructor(
         set(value) {
             field = value
             binding.title.text = value
-            titleVisible = !value.isNullOrEmpty()
-        }
-
-    var titleVisible: Boolean = true
-        set(value) {
-            field = value
-            binding.title.visibility = if (value) View.VISIBLE else View.GONE
+            if (value.isNullOrEmpty()) binding.title.isVisible = false
         }
 
     var subTitle: String? = ""
         set(value) {
             field = value
             binding.subTitle.text = value
-            subTitleVisible = !value.isNullOrEmpty()
-        }
-
-    var subTitleVisible: Boolean = false
-        set(value) {
-            field = value
-            binding.subTitle.visibility = if (value) View.VISIBLE else View.GONE
+            if (!value.isNullOrEmpty()) binding.subTitle.isVisible = true
         }
 
     var alertText: String? = ""
@@ -53,28 +41,28 @@ class TitleRecyclerImage @JvmOverloads constructor(
     var alertVisible: Boolean = false
         set(value) {
             field = value
-            binding.alert.visibility = if (value) View.VISIBLE else View.GONE
+            binding.alert.isVisible = value
         }
 
     var cameraIconVisible: Boolean = true
         set(value) {
             field = value
-            binding.cameraIcon.visibility = if (value) View.VISIBLE else View.GONE
+            binding.cameraIcon.isVisible = value
         }
 
-
-    var photoListVisible: Boolean = false
+    var images: MutableList<AttachmentDto> = arrayListOf()
         set(value) {
             field = value
-            binding.photoList.visibility = if (value) View.VISIBLE else View.GONE
+            binding.photoList.setClosableList(value)
         }
 
     fun setAdapter(
         closeClick: (Int) -> Unit
     ) {
-        binding.photoList.adapter = RectangleImageWithCloseAdapter(closeClickListener = { position ->
-            closeClick(position)
-        })
+        binding.photoList.adapter =
+            RectangleImageWithCloseAdapter(closeClickListener = { position ->
+                closeClick(position)
+            })
     }
 
     fun addIconClickListener(

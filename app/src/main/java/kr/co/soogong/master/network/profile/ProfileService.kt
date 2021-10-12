@@ -39,6 +39,18 @@ class ProfileService @Inject constructor(
         return profileInterface.savePortfolio(portfolioDto, beforeImageFile, afterImageFile)
     }
 
+    fun updateRequestMeasureYn(
+        uid: String,
+    ): Single<MasterDto> {
+        return profileInterface.updateRequestMeasureYn(uid)
+    }
+
+    fun updateFreeMeasureYn(
+        masterDto: MasterDto,
+    ): Single<MasterDto> {
+        return profileInterface.updateFreeMeasureYn(masterDto)
+    }
+
     fun getPortfoliosByUid(uid: String?): Single<List<PortfolioDto>> {
         return profileInterface.getPortfoliosByUid(uid)
     }

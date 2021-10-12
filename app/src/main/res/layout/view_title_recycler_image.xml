@@ -36,32 +36,30 @@
             android:layout_width="@dimen/gap_100"
             android:layout_height="@dimen/gap_100"
             android:layout_marginTop="@dimen/gap_12"
-            android:layout_marginEnd="@dimen/gap_10"
+            android:layout_marginEnd="@dimen/gap_5"
             android:background="@drawable/ic_camera"
-            app:layout_constraintTop_toBottomOf="@id/sub_title"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/photo_list"
-            />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sub_title" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/photo_list"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/gap_12"
+            android:layout_height="@dimen/gap_102"
             android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            tools:listitem="@layout/view_holder_image_delete_button"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="@id/camera_icon"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/camera_icon"
-            app:layout_constraintTop_toBottomOf="@id/sub_title" />
+            app:layout_constraintTop_toTopOf="@id/camera_icon"
+            tools:listitem="@layout/view_holder_image_delete_button" />
 
         <androidx.constraintlayout.widget.Barrier
             android:id="@+id/photo_list_barrier"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:barrierDirection="bottom"
-            app:constraint_referenced_ids="camera_icon, photo_list"
-            />
+            app:constraint_referenced_ids="camera_icon, photo_list" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/alert"
@@ -74,7 +72,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/photo_list_barrier"
-            tools:text="필수 정보입니다." />
+            tools:text="필수 정보입니다."
+            tools:visibility="visible" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

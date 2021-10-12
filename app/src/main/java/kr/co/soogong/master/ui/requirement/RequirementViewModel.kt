@@ -11,6 +11,7 @@ import kr.co.soogong.master.data.dto.profile.MasterDto
 import kr.co.soogong.master.data.dto.requirement.repair.RepairDto
 import kr.co.soogong.master.data.model.requirement.RequirementCard
 import kr.co.soogong.master.domain.usecase.profile.GetMasterSimpleInfoUseCase
+import kr.co.soogong.master.domain.usecase.profile.UpdateRequestMeasureYnUseCase
 import kr.co.soogong.master.domain.usecase.requirement.CallToClientUseCase
 import kr.co.soogong.master.domain.usecase.requirement.RequestReviewUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
@@ -22,17 +23,23 @@ open class RequirementViewModel @Inject constructor(
     private val getMasterSimpleInfoUseCase: GetMasterSimpleInfoUseCase,
     private val callToClientUseCase: CallToClientUseCase,
     private val requestReviewUseCase: RequestReviewUseCase,
+    private val updateRequestMeasureYnUseCase: UpdateRequestMeasureYnUseCase,
+    // TODO: 2021/10/05 필요한 useCase 가 추가될 때마다, params 가 늘어나는 구조이다. DI 를 활용하는 방법을 찾아보자..
 ) : BaseViewModel() {
 
     private val _masterSimpleInfo = MutableLiveData<MasterDto>()
     val masterSimpleInfo: LiveData<MasterDto>
         get() = _masterSimpleInfo
 
+    private val _requestMeasureYn = MutableLiveData(false)
+    val requestMeasureYn: LiveData<Boolean>
+        get() = _requestMeasureYn
+
     val requirements = MutableLiveData<List<RequirementCard>>()
 
     val index = MutableLiveData(0)
 
-    open fun requestList() { }
+    open fun requestList() {}
 
     fun onFilterChange(index: Int) {
         this.index.value = index
@@ -42,75 +49,84 @@ open class RequirementViewModel @Inject constructor(
     // 문의탭의 함수들
     fun requestMasterSimpleInfo() {
         Timber.tag(TAG).d("requestMasterSimpleInfo: ")
-        getMasterSimpleInfoUseCase.let {
-            it().subscribeOn(Schedulers.io())
+        getMasterSimpleInfoUseCase()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeBy(
+                onSuccess = {
+                    Timber.tag(TAG).d("requestMasterSimpleInfo successful: $it")
+                    _masterSimpleInfo.value = it
+                    it.requestMeasureYn?.let { boolean -> _requestMeasureYn.value = boolean }
+                },
+                onError = {
+                    Timber.tag(TAG).d("requestMasterSimpleInfo failed: $it")
+                    setAction(REQUEST_FAILED)
+                }
+            ).addToDisposable()
+    }
+
+    // 진행탭의 함수들
+    fun callToClient(requirementId: Int) {
+        Timber.tag(TAG).d("callToCustomer: $requirementId")
+        requirements.value?.find { it.id == requirementId }?.estimationDto?.id?.let { estimationId ->
+            callToClientUseCase(estimationId)
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
                     onSuccess = {
-                        Timber.tag(TAG).d("requestMasterSimpleInfo successful: $it")
-                        _masterSimpleInfo.value = it
+                        Timber.tag(TAG).d("callToClient successfully: $it")
                     },
                     onError = {
-                        Timber.tag(TAG).d("requestMasterSimpleInfo failed: $it")
+                        Timber.tag(TAG).d("callToClient successfully: $it")
                         setAction(REQUEST_FAILED)
                     }
                 ).addToDisposable()
         }
     }
 
-    // 진행탭의 함수들
-    fun callToClient(requirementId: Int) {
-        Timber.tag(TAG).d("callToCustomer: $requirementId")
-        val requirementCard = requirements.value?.find {
-            it.id == requirementId
-        }
-
-        requirementCard?.estimationDto?.id?.let { estimationId ->
-            callToClientUseCase.let {
-                it(estimationId).subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribeBy(
-                        onSuccess = {
-                            Timber.tag(TAG).d("callToClient successfully: $it")
-                        },
-                        onError = {
-                            Timber.tag(TAG).d("callToClient successfully: $it")
-                            setAction(REQUEST_FAILED)
-                        }
-                    ).addToDisposable()
-            }
-        }
-    }
-
     // 완료탭의 함수들
     fun askForReview(requirementCard: RequirementCard?) {
         Timber.tag(TAG).d("askForReview: ")
-        requestReviewUseCase.let {
-            it(
-                RepairDto(
-                    id = requirementCard?.estimationDto?.repair?.id,
-                    requirementToken = requirementCard?.token,
-                    estimationId = requirementCard?.estimationDto?.id,
-                )
-            ).subscribeOn(Schedulers.io())
+        requestReviewUseCase(
+            RepairDto(
+                id = requirementCard?.estimationDto?.repair?.id,
+                requirementToken = requirementCard?.token,
+                estimationId = requirementCard?.estimationDto?.id,
+            )
+        ).subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeBy(
+                onSuccess = {
+                    Timber.tag(TAG).d("ASK_FOR_REVIEW_SUCCEEDED: $it")
+                    requestList()
+                    setAction(ASK_FOR_REVIEW_SUCCESSFULLY)
+                },
+                onError = {
+                    Timber.tag(TAG).d("ASK_FOR_REVIEW_FAILED: $it")
+                    setAction(ASK_FOR_REVIEW_FAILED)
+                }
+            ).addToDisposable()
+    }
+
+    fun updateRequestMeasureYn(v: CompoundButton, isChecked: Boolean) {
+        Timber.tag(TAG).d("updateRequestMeasureYn: ${_masterSimpleInfo.value?.requestMeasureYn} to $isChecked")
+        if (_masterSimpleInfo.value?.requestMeasureYn == isChecked) return
+
+        _masterSimpleInfo.value?.uid?.let { uid ->
+            updateRequestMeasureYnUseCase(uid)
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
                     onSuccess = {
-                        Timber.tag(TAG).d("ASK_FOR_REVIEW_SUCCEEDED: $it")
-                        requestList()
-                        setAction(ASK_FOR_REVIEW_SUCCESSFULLY)
+                        Timber.tag(TAG).d("updateRequestMeasureYn successful: $it")
+                        _masterSimpleInfo.value = it
                     },
                     onError = {
-                        Timber.tag(TAG).d("ASK_FOR_REVIEW_FAILED: $it")
-                        setAction(ASK_FOR_REVIEW_FAILED)
+                        Timber.tag(TAG).d("updateRequestMeasureYn failed: $it")
+                        setAction(REQUEST_FAILED)
                     }
                 ).addToDisposable()
         }
-    }
-
-    fun activateRequestingMeasurement(v: CompoundButton, isChecked: Boolean) {
-        Timber.tag(TAG).d("activateRequestingMeasurement: $isChecked")
-        // TODO: 2021/09/30 Re-4차 개발 예정 (마스터가 실측요청건을 받을지 안 받을지 정하는 메소드)
     }
 
     companion object {

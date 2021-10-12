@@ -14,7 +14,7 @@ import java.util.*
 class RequirementBasic @JvmOverloads constructor(
     context: Context,
     attributeSet: AttributeSet? = null,
-    defStyle: Int = 0
+    defStyle: Int = 0,
 ) : ConstraintLayout(context, attributeSet, defStyle) {
     private var binding =
         ViewRequirementBasicBinding.inflate(LayoutInflater.from(context), this, true)
@@ -23,6 +23,12 @@ class RequirementBasic @JvmOverloads constructor(
         set(value) {
             field = value
             binding.address.text = value
+        }
+
+    var oldAddress: String? = ""
+        set(value) {
+            field = value
+            binding.oldAddress.text = value
         }
 
     var project: String? = ""

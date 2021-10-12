@@ -30,10 +30,10 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/gap_0"
             android:overScrollMode="never"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/action_bar"
-            app:layout_constraintBottom_toBottomOf="parent">
+            app:layout_constraintTop_toBottomOf="@id/action_bar">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -58,72 +58,34 @@
                     app:setMaxLength="@{13}"
                     app:title="@{@string/estimation_price_text}" />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/measurement_image_holder_label"
-                    style="@style/text_style_16sp.medium"
-                    android:layout_width="wrap_content"
+                <kr.co.soogong.master.ui.widget.TitleRecyclerImage
+                    android:id="@+id/measurement_images_picker"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/gap_20"
                     android:layout_marginTop="@dimen/gap_40"
                     android:layout_marginEnd="@dimen/gap_20"
-                    android:text="@string/measure_image_holder_label"
-                    android:textColor="@color/text_basic_color"
+                    app:images="@{vm.estimationImages}"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/simpleCost" />
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/camera_icon_for_measurement_image"
-                    android:layout_width="@dimen/gap_100"
-                    android:layout_height="@dimen/gap_100"
-                    android:layout_marginTop="@dimen/gap_12"
-                    android:background="@drawable/ic_camera"
-                    app:layout_constraintStart_toStartOf="@id/measurement_image_holder_label"
-                    app:layout_constraintTop_toBottomOf="@id/measurement_image_holder_label"
-                    bind:visible="@{vm.measurementImage == Uri.EMPTY}" />
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/measurement_image_holder"
-                    android:layout_width="@dimen/gap_100"
-                    android:layout_height="@dimen/gap_100"
-                    android:layout_marginTop="@dimen/gap_12"
-                    app:cardCornerRadius="@dimen/gap_8"
-                    app:cardElevation="@dimen/gap_0"
-                    app:layout_constraintStart_toStartOf="@id/measurement_image_holder_label"
-                    app:layout_constraintTop_toBottomOf="@id/measurement_image_holder_label"
-                    bind:visible="@{vm.measurementImage != Uri.EMPTY}">
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/image_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        bind:image_uri="@{vm.measurementImage}" />
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/image_view_close_icon"
-                        android:layout_width="@dimen/gap_24"
-                        android:layout_height="@dimen/gap_24"
-                        android:layout_gravity="end"
-                        android:background="@drawable/ic_close_in_image"
-                        bind:onClick="@{vm::clearImage}" />
-                </androidx.cardview.widget.CardView>
+                    app:layout_constraintTop_toBottomOf="@id/simpleCost"
+                    app:title="@{@string/measure_image_holder_label}" />
 
                 <kr.co.soogong.master.ui.widget.AlertBox
                     android:id="@+id/alert_box"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/gap_20"
-                    android:layout_marginTop="@dimen/gap_124"
+                    android:layout_marginTop="@dimen/gap_52"
                     android:layout_marginEnd="@dimen/gap_20"
                     app:alertContent="@{@string/alert_box_content_for_measure}"
                     app:alertTitle="@{@string/alert_box_title_for_measure}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/measurement_image_holder_label"
+                    app:layout_constraintTop_toBottomOf="@id/measurement_images_picker"
                     app:theme="@{101}" />
 
-                <kr.co.soogong.master.ui.widget.TitleEditTextCounterView
+                <kr.co.soogong.master.ui.widget.TitleEditTextCounter
                     android:id="@+id/write_detail"
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"

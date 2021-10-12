@@ -33,6 +33,9 @@ data class EstimationDto(
     @SerializedName("description")
     val description: String? = null,
 
+    @SerializedName("isSavingTemplate")
+    val isSavingTemplate: Boolean = false,
+
     @SerializedName("requestConsultingYn")
     val requestConsultingYn: Boolean? = null,
 
@@ -45,8 +48,8 @@ data class EstimationDto(
     @SerializedName("estimationPrices")
     val estimationPrices: List<EstimationPriceDto>? = emptyList(),
 
-    @SerializedName("measurementImages")
-    val measurementImages: MutableList<AttachmentDto>? = mutableListOf(),
+    @SerializedName("images")
+    val images: MutableList<AttachmentDto>? = mutableListOf(),
 
     @SerializedName("repair")
     val repair: RepairDto? = null,

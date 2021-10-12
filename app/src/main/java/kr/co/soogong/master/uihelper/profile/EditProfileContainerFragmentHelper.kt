@@ -3,21 +3,23 @@ package kr.co.soogong.master.uihelper.profile
 import androidx.fragment.app.Fragment
 import kr.co.soogong.master.ui.profile.detail.email.EditEmailFragment
 import kr.co.soogong.master.ui.profile.detail.flexiblecost.EditFlexibleCostFragment
+import kr.co.soogong.master.ui.profile.detail.freeMeasure.EditFreeMeasureFragment
 import kr.co.soogong.master.ui.profile.detail.otherflexibleoption.EditOtherFlexibleOptionFragment
+import kr.co.soogong.master.ui.profile.detail.portfoliolist.portfolio.PortfolioFragment
+import kr.co.soogong.master.ui.profile.detail.portfoliolist.pricebyproject.PriceByProjectFragment
 import kr.co.soogong.master.ui.profile.detail.requiredinformation.address.EditAddressFragment
-import kr.co.soogong.master.ui.profile.detail.requiredinformation.introduction.EditIntroductionFragment
-import kr.co.soogong.master.ui.profile.detail.requiredinformation.ownername.EditOwnerNameFragment
-import kr.co.soogong.master.ui.profile.detail.requiredinformation.major.EditMajorFragment
 import kr.co.soogong.master.ui.profile.detail.requiredinformation.businessunitinformation.EditBusinessUnitInformationFragment
+import kr.co.soogong.master.ui.profile.detail.requiredinformation.introduction.EditIntroductionFragment
+import kr.co.soogong.master.ui.profile.detail.requiredinformation.major.EditMajorFragment
+import kr.co.soogong.master.ui.profile.detail.requiredinformation.ownername.EditOwnerNameFragment
 import kr.co.soogong.master.ui.profile.detail.requiredinformation.phonenumber.EditPhoneNumberFragment
 import kr.co.soogong.master.ui.profile.detail.requiredinformation.shopimages.EditShopImagesFragment
 import kr.co.soogong.master.ui.profile.detail.requiredinformation.warranty.EditWarrantyInformationFragment
-import kr.co.soogong.master.ui.profile.detail.portfoliolist.portfolio.PortfolioFragment
-import kr.co.soogong.master.ui.profile.detail.portfoliolist.pricebyproject.PriceByProjectFragment
 
 object EditProfileContainerFragmentHelper {
     const val TAG = "EditProfileContainerFragmentHelper"
 
+    const val FREE_MEASURE = "무료 방문 실측 여부 수정하기"
     const val EDIT_PORTFOLIO = "포트폴리오 수정하기"
     const val ADD_PORTFOLIO = "포트폴리오 추가하기"
     const val EDIT_PRICE_BY_PROJECTS = "시공 종류별 가격 수정하기"
@@ -37,10 +39,14 @@ object EditProfileContainerFragmentHelper {
 
     fun getFragment(pageName: String, itemId: Int = -1): Fragment =
         when (pageName) {
+            FREE_MEASURE -> EditFreeMeasureFragment.newInstance()
             ADD_PORTFOLIO -> PortfolioFragment.newInstance(ADD_PORTFOLIO, null)
             EDIT_PORTFOLIO -> PortfolioFragment.newInstance(EDIT_PORTFOLIO, itemId)
             ADD_PRICE_BY_PROJECTS -> PriceByProjectFragment.newInstance(ADD_PRICE_BY_PROJECTS, null)
-            EDIT_PRICE_BY_PROJECTS -> PriceByProjectFragment.newInstance(EDIT_PRICE_BY_PROJECTS, itemId)
+            EDIT_PRICE_BY_PROJECTS -> PriceByProjectFragment.newInstance(
+                EDIT_PRICE_BY_PROJECTS,
+                itemId
+            )
             EDIT_FLEXIBLE_COST -> EditFlexibleCostFragment.newInstance()
             EDIT_OTHER_FLEXIBLE_OPTION -> EditOtherFlexibleOptionFragment.newInstance()
             EDIT_EMAIL -> EditEmailFragment.newInstance()
