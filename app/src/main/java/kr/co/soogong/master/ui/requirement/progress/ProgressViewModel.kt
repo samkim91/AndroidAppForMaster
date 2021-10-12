@@ -4,17 +4,14 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import kr.co.soogong.master.data.model.requirement.Measured
-import kr.co.soogong.master.data.model.requirement.Measuring
-import kr.co.soogong.master.data.model.requirement.Repairing
-import kr.co.soogong.master.data.model.requirement.RequestFinish
+import kr.co.soogong.master.data.model.requirement.RequirementStatus
+import kr.co.soogong.master.data.model.requirement.RequirementStatus.Companion.progressCodes
 import kr.co.soogong.master.domain.usecase.profile.GetMasterSimpleInfoUseCase
 import kr.co.soogong.master.domain.usecase.profile.UpdateRequestMeasureYnUseCase
 import kr.co.soogong.master.domain.usecase.requirement.CallToClientUseCase
 import kr.co.soogong.master.domain.usecase.requirement.GetRequirementCardsUseCase
 import kr.co.soogong.master.domain.usecase.requirement.RequestReviewUseCase
 import kr.co.soogong.master.ui.requirement.RequirementViewModel
-import kr.co.soogong.master.ui.requirement.progressCodes
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -32,10 +29,10 @@ class ProgressViewModel @Inject constructor(
 
         getRequirementCardsUseCase(
             when (index.value) {
-                1 -> listOf(Measuring.code)
-                2 -> listOf(Measured.code)
-                3 -> listOf(Repairing.code)
-                4 -> listOf(RequestFinish.code)
+                1 -> listOf(RequirementStatus.Measuring.code)
+                2 -> listOf(RequirementStatus.Measured.code)
+                3 -> listOf(RequirementStatus.Repairing.code)
+                4 -> listOf(RequirementStatus.RequestFinish.code)
                 else -> progressCodes
             }
         )

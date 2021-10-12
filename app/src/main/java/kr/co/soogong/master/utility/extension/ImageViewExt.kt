@@ -37,6 +37,6 @@ fun ImageView.startHalfRotateAnimation(origin: Boolean) {
     startAnimation(
         AnimationUtils.loadAnimation(
             context,
-            if (origin) R.anim.rotate_half_clockwise else R.anim.rotate_half_more_clockwise
+            if (origin) R.anim.rotate_half_more_clockwise else R.anim.rotate_half_clockwise
         ).apply { fillAfter = true })
 }

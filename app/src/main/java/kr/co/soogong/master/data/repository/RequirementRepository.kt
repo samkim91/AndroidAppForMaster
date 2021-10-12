@@ -63,24 +63,18 @@ class RequirementRepository @Inject constructor(
     }
 
     fun getRequirementsByStatus(
-        statusArray: List<String>,
-        canceledYn: Boolean = false
+        statusArray: List<String>
     ): Flowable<List<RequirementDto>> {
-        return getRequirementsFromLocal(statusArray, canceledYn)
+        return getRequirementsFromLocal(statusArray)
             .onErrorResumeNext(Flowable.empty())
             .concatWith(getRequirementsFromServer(statusArray))
     }
 
     private fun getRequirementsFromLocal(
-        statusArray: List<String>,
-        canceledYn: Boolean = false
+        statusArray: List<String>
     ): Flowable<List<RequirementDto>> {
-        Timber.tag(TAG).d("getRequirementsFromLocal start: $statusArray $canceledYn")
-        return if (canceledYn) {
-            requirementDao.getListByStatusIncludingCanceled(statusArray, canceledYn)
-        } else {
-            requirementDao.getListByStatus(statusArray, canceledYn)
-        }
+        Timber.tag(TAG).d("getRequirementsFromLocal start: $statusArray")
+        return requirementDao.getListByStatus(statusArray)
             .filter { it.isNotEmpty() }
             .toFlowable()
             .doOnNext {

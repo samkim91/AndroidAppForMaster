@@ -132,7 +132,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
     }
 
     private fun setLayoutForRequestConsult(requirement: RequirementDto) {
-        (RequirementStatus.getStatusFromRequirement(requirement) == RequestConsult).let { boolean ->
+        (RequirementStatus.getStatusFromRequirement(requirement) is RequirementStatus.RequestConsult).let { boolean ->
             binding.callToCustomerButton.isVisible = boolean
 
             if (boolean) {
@@ -175,7 +175,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
             actionBar.title.text = requirement.address
 
             when (RequirementStatus.getStatusFromRequirement(requirement)) {
-                RequestMeasure -> {
+                is RequirementStatus.RequestMeasure -> {
                     actionBar.root.findViewById<AppCompatButton>(R.id.button).isVisible = false
                     // view : 고객 요청 내용(spread)
                     RequirementDrawerContainer.addDrawerContainer(
@@ -188,7 +188,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                     )
                 }
 
-                Requested, RequestConsult -> {
+                is RequirementStatus.Requested, RequirementStatus.RequestConsult -> {
                     actionBar.root.findViewById<AppCompatButton>(R.id.button).isVisible = true
                     (requirement.estimationDto?.masterResponseCode == EstimationResponseCode.ACCEPTED).let { accepted ->
                         if (accepted) {
@@ -223,7 +223,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                     }
                 }
 
-                Estimated -> {
+                is RequirementStatus.Estimated -> {
                     actionBar.root.findViewById<AppCompatButton>(R.id.button).isVisible = true
                     // view : 나의 제안 내용(spread), 고객 요청 내용
                     RequirementDrawerContainer.addDrawerContainer(
@@ -244,7 +244,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                     )
                 }
 
-                Repairing -> {
+                is RequirementStatus.Repairing -> {
                     // view : 고객 요청 내용(spread, includingCancel), 나의 제안 내용
                     RequirementDrawerContainer.addDrawerContainer(
                         context = this@ViewRequirementActivity,
@@ -264,7 +264,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                     )
                 }
 
-                RequestFinish -> {
+                is RequirementStatus.RequestFinish -> {
                     // view : 고객 요청 내용(spread), 나의 제안 내용
                     RequirementDrawerContainer.addDrawerContainer(
                         context = this@ViewRequirementActivity,
@@ -284,7 +284,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                     )
                 }
 
-                Measuring -> {
+                is RequirementStatus.Measuring -> {
                     actionBar.root.findViewById<AppCompatButton>(R.id.button).isVisible = true
                     // view : 고객요청(spread, includingCancel)
                     RequirementDrawerContainer.addDrawerContainer(
@@ -297,7 +297,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                     )
                 }
 
-                Measured -> {
+                is RequirementStatus.Measured -> {
                     actionBar.root.findViewById<AppCompatButton>(R.id.button).isVisible = true
                     // view : 나의 실측 내용(spread, includingCancel), 고객요청
                     RequirementDrawerContainer.addDrawerContainer(
@@ -318,7 +318,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                     )
                 }
 
-                Done -> {
+                is RequirementStatus.Done -> {
                     // view : 나의 최종 시공 내용(spread), 고객 요청 내용
                     RequirementDrawerContainer.addDrawerContainer(
                         context = this@ViewRequirementActivity,
@@ -347,7 +347,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                     requirementStatus.endingTextColor = getColor(R.color.color_0C5E47)
                 }
 
-                Closed -> {
+                is RequirementStatus.Closed -> {
                     // view : 고객 리뷰(spread), 나의 최종 시공 내용, 고객 요청 내용
                     RequirementDrawerContainer.addDrawerContainer(
                         context = this@ViewRequirementActivity,
@@ -384,7 +384,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                     requirementStatus.endingTextColor = getColor(R.color.color_0C5E47)
                 }
 
-                Canceled -> {
+                is RequirementStatus.Canceled -> {
                     // view : 시공 취소 사유, 고객 요청 내용
                     RequirementDrawerContainer.addDrawerContainer(
                         context = this@ViewRequirementActivity,
@@ -404,7 +404,6 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                     )
                     requirementStatus.isVisible = false
                 }
-                else -> Unit
             }
         }
     }
@@ -413,7 +412,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
         Timber.tag(TAG).d("setButtons: ")
         with(binding) {
             when (RequirementStatus.getStatusFromRequirement(requirementDto)) {
-                Requested, RequestConsult -> {
+                is RequirementStatus.Requested, RequirementStatus.RequestConsult -> {
                     (requirementDto.estimationDto?.masterResponseCode == EstimationResponseCode.ACCEPTED).let { accepted ->
                         if (accepted) {
                             buttonsDivider.isVisible = false
@@ -453,7 +452,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                     }
                 }
 
-                RequestMeasure -> {
+                is RequirementStatus.RequestMeasure -> {
                     // Buttons : 실측 안할래요 / 실측 할래요
                     with(leftButton) {
                         text = getString(R.string.refuse_measure_text)
@@ -492,7 +491,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                     }
                 }
 
-                Repairing, RequestFinish -> {
+                is RequirementStatus.Repairing, RequirementStatus.RequestFinish -> {
                     // Buttons : 고객에게 전화하기 / 시공 완료
                     with(leftButton) {
                         when {
@@ -525,7 +524,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                     }
                 }
 
-                Measuring -> {
+                is RequirementStatus.Measuring -> {
                     // Buttons : 고객에게 전화하기 / 견적서 보내기
                     with(leftButton) {
                         when {
@@ -558,7 +557,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                     }
                 }
 
-                Measured -> {
+                is RequirementStatus.Measured -> {
                     // Button : 고객에게 전화하기
                     with(leftButton) {
                         when {
@@ -580,7 +579,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                     rightButton.isVisible = false
                 }
 
-                Done -> {
+                is RequirementStatus.Done -> {
                     // Button : 리뷰 요청하기
                     rightButton.isVisible = false
                     with(leftButton) {

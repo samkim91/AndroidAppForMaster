@@ -138,7 +138,6 @@
             style="@style/text_style_16sp.medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/gap_2"
             android:layout_marginEnd="@dimen/requirement_card_type_margin_end"
             android:ellipsize="end"
             android:maxLines="1"

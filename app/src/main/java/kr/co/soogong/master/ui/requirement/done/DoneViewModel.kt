@@ -4,16 +4,14 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import kr.co.soogong.master.data.model.requirement.Canceled
-import kr.co.soogong.master.data.model.requirement.Closed
-import kr.co.soogong.master.data.model.requirement.Done
+import kr.co.soogong.master.data.model.requirement.RequirementStatus
+import kr.co.soogong.master.data.model.requirement.RequirementStatus.Companion.doneCodes
 import kr.co.soogong.master.domain.usecase.profile.GetMasterSimpleInfoUseCase
 import kr.co.soogong.master.domain.usecase.profile.UpdateRequestMeasureYnUseCase
 import kr.co.soogong.master.domain.usecase.requirement.CallToClientUseCase
 import kr.co.soogong.master.domain.usecase.requirement.GetRequirementCardsUseCase
 import kr.co.soogong.master.domain.usecase.requirement.RequestReviewUseCase
 import kr.co.soogong.master.ui.requirement.RequirementViewModel
-import kr.co.soogong.master.ui.requirement.doneCodes
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -31,11 +29,11 @@ class DoneViewModel @Inject constructor(
 
         getRequirementCardsUseCase(
             when (index.value) {
-                1 -> listOf(Done.code)
-                2 -> listOf(Closed.code)
-                3 -> listOf(Canceled.code)
+                1 -> listOf(RequirementStatus.Done.code)
+                2 -> listOf(RequirementStatus.Closed.code)
+                3 -> listOf(RequirementStatus.Canceled.code)
                 else -> doneCodes
-            }, index.value == 3
+            }
         )
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

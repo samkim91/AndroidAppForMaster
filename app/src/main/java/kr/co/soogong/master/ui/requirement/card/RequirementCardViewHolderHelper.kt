@@ -14,31 +14,31 @@ object RequirementCardViewHolderHelper {
         )
 
         return when (viewType) {
-            Requested.asInt -> {
+            RequirementStatus.Requested.asInt -> {
                 RequestedCardViewHolder(binding)
             }
-            Estimated.asInt -> {
+            RequirementStatus.Estimated.asInt -> {
                 EstimatedCardViewHolder(binding)
             }
-            RequestConsult.asInt -> {
+            RequirementStatus.RequestConsult.asInt -> {
                 RequestConsultCardViewHolder(binding)
             }
-            Measuring.asInt -> {
+            RequirementStatus.Measuring.asInt -> {
                 MeasuringCardViewHolder(binding)
             }
-            Measured.asInt -> {
+            RequirementStatus.Measured.asInt -> {
                 MeasuredCardViewHolder(binding)
             }
-            Repairing.asInt -> {
+            RequirementStatus.Repairing.asInt -> {
                 RepairingCardViewHolder(binding)
             }
-            RequestFinish.asInt -> {
+            RequirementStatus.RequestFinish.asInt -> {
                 RequestFinishCardViewHolder(binding)
             }
-            Done.asInt -> {
+            RequirementStatus.Done.asInt -> {
                 DoneViewHolder(binding)
             }
-            Closed.asInt -> {
+            RequirementStatus.Closed.asInt -> {
                 ClosedViewHolder(binding)
             }
             else -> {

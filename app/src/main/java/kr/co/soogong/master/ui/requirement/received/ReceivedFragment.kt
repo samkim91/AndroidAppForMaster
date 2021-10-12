@@ -5,12 +5,12 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
+import kr.co.soogong.master.data.model.requirement.RequirementStatus.Companion.receivedStatus
 import kr.co.soogong.master.databinding.FragmentRequirementReceivedBinding
 import kr.co.soogong.master.ui.base.BaseFragment
-import kr.co.soogong.master.ui.requirement.card.RequirementCardsAdapter
 import kr.co.soogong.master.ui.requirement.RequirementChipGroupHelper
 import kr.co.soogong.master.ui.requirement.RequirementViewModel.Companion.REQUEST_FAILED
-import kr.co.soogong.master.ui.requirement.receivedStatus
+import kr.co.soogong.master.ui.requirement.card.RequirementCardsAdapter
 import kr.co.soogong.master.uihelper.requirment.RequirementsBadge
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.extension.onCheckedChanged

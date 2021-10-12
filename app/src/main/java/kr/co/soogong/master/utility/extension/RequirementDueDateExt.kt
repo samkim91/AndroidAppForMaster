@@ -6,9 +6,6 @@ import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.dto.requirement.RequirementDto
-import kr.co.soogong.master.data.model.requirement.RequestConsult
-import kr.co.soogong.master.data.model.requirement.RequestMeasure
-import kr.co.soogong.master.data.model.requirement.Requested
 import kr.co.soogong.master.data.model.requirement.RequirementStatus
 import kr.co.soogong.master.data.model.requirement.estimation.EstimationResponseCode
 import kr.co.soogong.master.ui.widget.RequirementDueDate
@@ -18,7 +15,7 @@ import java.util.*
 fun RequirementDueDate.setDueDate(requirementDto: RequirementDto?) {
     requirementDto?.let {
         when (RequirementStatus.getStatusFromRequirement(it)) {
-            Requested, RequestConsult -> {
+            is RequirementStatus.Requested, RequirementStatus.RequestConsult -> {
                 (requirementDto.estimationDto?.masterResponseCode == EstimationResponseCode.ACCEPTED).let { accepted ->
                     if (accepted) {
                         this.isVisible = false
@@ -29,7 +26,7 @@ fun RequirementDueDate.setDueDate(requirementDto: RequirementDto?) {
                     date = getEstimationDueDate(it.createdAt)
                 }
             }
-            RequestMeasure -> {
+            is RequirementStatus.RequestMeasure -> {
                 this.isVisible = true
                 label = context.getString(R.string.requirements_card_response_measure_due_date)
                 date = getMeasureDueDate(it.createdAt)
