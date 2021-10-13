@@ -42,15 +42,12 @@ class SearchViewModel @Inject constructor(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
-                onNext = {
+                onSuccess = {
                     requirements.postValue(it)
                 },
                 onError = {
                     setAction(SEARCH_REQUIREMENTS_FAILED)
-                },
-                onComplete = {
-                    Timber.tag(TAG).d("requirements onComplete: ")
-                },
+                }
             ).addToDisposable()
     }
 
