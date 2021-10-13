@@ -66,12 +66,15 @@ class WriteEstimationActivity : BaseActivity<ActivityWriteEstimationBinding>(
                 button.setOnClickListener {
                     registerCostsObserve()
                     if (viewModel.estimationType.value == EstimationTypeCode.INTEGRATION) {
-                        if (!simpleCost.alertVisible && ValidationHelper.isIntRange(viewModel.simpleCost.value!!)) viewModel.sendEstimation()
+                        if (!simpleCost.alertVisible && ValidationHelper.isIntRange(viewModel.simpleCost.value!!)) {
+                            showLoading(supportFragmentManager)
+                            viewModel.sendEstimation()
+                        }
                     } else {
-                        if ((!laborCost.alertVisible && !materialCost.alertVisible && !travelCost.alertVisible) && ValidationHelper.isIntRange(
-                                viewModel.totalCost.value!!
-                            )
-                        ) viewModel.sendEstimation()
+                        if ((!laborCost.alertVisible && !materialCost.alertVisible && !travelCost.alertVisible) && ValidationHelper.isIntRange(viewModel.totalCost.value!!)) {
+                            showLoading(supportFragmentManager)
+                            viewModel.sendEstimation()
+                        }
                     }
                 }
             }
@@ -181,6 +184,7 @@ class WriteEstimationActivity : BaseActivity<ActivityWriteEstimationBinding>(
         })
 
         viewModel.action.observe(this@WriteEstimationActivity, EventObserver { event ->
+            dismissLoading()
             when (event) {
                 SEND_ESTIMATION_SUCCESSFULLY -> {
                     toast(getString(R.string.send_message_succeeded))

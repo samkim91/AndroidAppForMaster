@@ -27,8 +27,8 @@ android {
         applicationId "kr.co.soogong.master"
         minSdkVersion rootProject.minSdkVersion
         targetSdkVersion rootProject.targetSdkVersion
-        versionCode 41
-        versionName "1.4.0"
+        versionCode 42
+        versionName "1.4.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -39,18 +39,21 @@ android {
     }
 
     buildTypes {
-//        alpha {
-//            applicationIdSuffix '.alpha'
-//            debuggable true
-//            minifyEnabled false
-//        }
-//
-//        beta {
-//            applicationIdSuffix '.beta'
-//            debuggable false
-//            minifyEnabled false
-//            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-//        }
+        debug {
+            manifestPlaceholders.cleartextTrafficPermitted = "false"
+        }
+
+        local {
+            initWith debug
+            versionNameSuffix '.local'
+            manifestPlaceholders.cleartextTrafficPermitted = "true"
+        }
+
+        internal {
+            initWith debug
+            versionNameSuffix '.internal'
+            manifestPlaceholders.cleartextTrafficPermitted = "false"
+        }
 
         release {
             debuggable false
