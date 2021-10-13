@@ -37,8 +37,8 @@ class ReceivedViewModel @Inject constructor(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
-                onNext = {
-                    Timber.tag(TAG).d("requestList onNext: ")
+                onSuccess = {
+                    Timber.tag(TAG).d("requestList successfully: ")
                     if (index.value == 0) sendEvent(BADGE_UPDATE, it.count())
                     when (index.value) {
                         1 -> requirements.postValue(it.filter { requirementCard -> requirementCard.estimationDto?.requestConsultingYn == false })
@@ -47,7 +47,6 @@ class ReceivedViewModel @Inject constructor(
                         else -> requirements.postValue(it)
                     }
                 },
-                onComplete = { },
                 onError = {
                     Timber.tag(TAG).d("requestList failed: $it")
                     requirements.postValue(emptyList())

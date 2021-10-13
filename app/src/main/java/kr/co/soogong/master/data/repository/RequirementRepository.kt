@@ -1,7 +1,6 @@
 package kr.co.soogong.master.data.repository
 
 import dagger.Reusable
-import io.reactivex.Flowable
 import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
@@ -26,8 +25,8 @@ class RequirementRepository @Inject constructor(
     fun getRequirementById(requirementId: Int): Single<RequirementDto> {
         Timber.tag(TAG).d("getRequirementFromAll start: $requirementId")
         return getRequirementFromServer(requirementId)
-            .doOnError { Timber.tag(TAG).d("getRequirementById failed: $it") }
             .onErrorResumeNext(getRequirementFromLocal(requirementId))
+            .doOnError { Timber.tag(TAG).d("getRequirementById failed: $it") }
     }
 
     private fun getRequirementFromLocal(requirementId: Int): Single<RequirementDto> {
@@ -63,33 +62,30 @@ class RequirementRepository @Inject constructor(
     }
 
     fun getRequirementsByStatus(
-        statusArray: List<String>
-    ): Flowable<List<RequirementDto>> {
-        return getRequirementsFromLocal(statusArray)
-            .onErrorResumeNext(Flowable.empty())
-            .concatWith(getRequirementsFromServer(statusArray))
+        statusArray: List<String>,
+    ): Single<List<RequirementDto>> {
+        return getRequirementsFromServer(statusArray)
+            .onErrorResumeNext(getRequirementsFromLocal(statusArray))
+            .doOnError { Timber.tag(TAG).d("getRequirementsByStatus failed: $it") }
     }
 
     private fun getRequirementsFromLocal(
-        statusArray: List<String>
-    ): Flowable<List<RequirementDto>> {
+        statusArray: List<String>,
+    ): Single<List<RequirementDto>> {
         Timber.tag(TAG).d("getRequirementsFromLocal start: $statusArray")
         return requirementDao.getListByStatus(statusArray)
-            .filter { it.isNotEmpty() }
-            .toFlowable()
-            .doOnNext {
+            .doOnSuccess {
                 Timber.tag(TAG).d("getRequirementsFromLocal: ${it.size}")
             }
     }
 
-    private fun getRequirementsFromServer(statusArray: List<String>): Flowable<List<RequirementDto>> {
+    private fun getRequirementsFromServer(statusArray: List<String>): Single<List<RequirementDto>> {
         Timber.tag(TAG).d("getRequirementFromServer start: $statusArray")
         return requirementService.getRequirementsByStatus(
             getMasterUidFromSharedUseCase()!!,
             statusArray
         )
-            .toFlowable()
-            .doOnNext {
+            .doOnSuccess {
                 Timber.tag(TAG).d("getRequirementsFromServer: ${it.size}")
                 saveRequirementsInLocal(statusArray, it)
             }
@@ -111,25 +107,16 @@ class RequirementRepository @Inject constructor(
         disposable.addTo(compositeDisposable)
     }
 
-    fun searchRequirements(
+    fun searchRequirementsFromServer(
         searchingText: String,
         searchingPeriod: Int,
-    ): Flowable<List<RequirementDto>> {
-        return searchRequirementsFromServer(searchingText, searchingPeriod)
-    }
-
-    private fun searchRequirementsFromServer(
-        searchingText: String,
-        searchingPeriod: Int,
-    ): Flowable<List<RequirementDto>> {
+    ): Single<List<RequirementDto>> {
         Timber.tag(TAG).d("searchRequirementsFromServer start: $searchingText, $searchingPeriod")
-        return requirementService.searchRequirements(
-            getMasterUidFromSharedUseCase()!!,
+        return requirementService.searchRequirements(getMasterUidFromSharedUseCase()!!,
             searchingText,
             searchingPeriod
         )
-            .toFlowable()
-            .doOnNext {
+            .doOnSuccess {
                 Timber.tag(TAG).d("searchRequirementsFromServer: ${it.size}")
             }
     }
