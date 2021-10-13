@@ -93,14 +93,14 @@ class EditShopImagesFragment : BaseFragment<FragmentEditShopImagesBinding>(
                     val dialog = CustomDialog.newInstance(
                         dialogData = DialogData.getConfirmingForRequiredDialogData(requireContext()),
                         yesClick = {
-                            loading.show(parentFragmentManager, loading.tag)
+                            showLoading(parentFragmentManager)
                             viewModel.saveShopImages()
                         },
                         noClick = { })
 
                     dialog.show(parentFragmentManager, dialog.tag)
                 } else {
-                    loading.show(parentFragmentManager, loading.tag)
+                    showLoading(parentFragmentManager)
                     viewModel.saveShopImages()
                 }
             }
@@ -110,6 +110,7 @@ class EditShopImagesFragment : BaseFragment<FragmentEditShopImagesBinding>(
     private fun registerEventObserve() {
         Timber.tag(TAG).d("registerEventObserve: ")
         viewModel.action.observe(viewLifecycleOwner, EventObserver { event ->
+            dismissLoading()
             when (event) {
                 SAVE_SHOP_IMAGES_SUCCESSFULLY -> activity?.onBackPressed()
                 SAVE_SHOP_IMAGES_FAILED, GET_SHOP_IMAGES_FAILED -> requireContext().toast(
