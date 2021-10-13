@@ -29,7 +29,7 @@ fun RequirementDueDate.setDueDate(requirementDto: RequirementDto?) {
             is RequirementStatus.RequestMeasure -> {
                 this.isVisible = true
                 label = context.getString(R.string.requirements_card_response_measure_due_date)
-                date = getMeasureDueDate(it.createdAt)
+                date = getMeasureDueDate(requirementDto.estimationDto?.createdAt)
             }
             else -> {
                 this.isVisible = false
