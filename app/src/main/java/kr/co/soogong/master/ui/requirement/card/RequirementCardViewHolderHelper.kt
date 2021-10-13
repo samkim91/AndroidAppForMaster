@@ -14,36 +14,21 @@ object RequirementCardViewHolderHelper {
         )
 
         return when (viewType) {
-            RequirementStatus.Requested.asInt -> {
-                RequestedCardViewHolder(binding)
-            }
-            RequirementStatus.Estimated.asInt -> {
-                EstimatedCardViewHolder(binding)
-            }
-            RequirementStatus.RequestConsult.asInt -> {
-                RequestConsultCardViewHolder(binding)
-            }
-            RequirementStatus.Measuring.asInt -> {
-                MeasuringCardViewHolder(binding)
-            }
-            RequirementStatus.Measured.asInt -> {
-                MeasuredCardViewHolder(binding)
-            }
-            RequirementStatus.Repairing.asInt -> {
-                RepairingCardViewHolder(binding)
-            }
-            RequirementStatus.RequestFinish.asInt -> {
-                RequestFinishCardViewHolder(binding)
-            }
-            RequirementStatus.Done.asInt -> {
-                DoneViewHolder(binding)
-            }
-            RequirementStatus.Closed.asInt -> {
-                ClosedViewHolder(binding)
-            }
-            else -> {
-                CanceledViewHolder(binding)
-            }
+            RequirementStatus.Requested.asInt -> RequestedCardViewHolder(binding)
+            RequirementStatus.RequestConsult.asInt -> RequestConsultCardViewHolder(binding)
+            RequirementStatus.RequestMeasure.asInt -> RequestMeasureCardViewHolder(binding)
+            RequirementStatus.Estimated.asInt -> EstimatedCardViewHolder(binding)
+
+            RequirementStatus.Measuring.asInt -> MeasuringCardViewHolder(binding)
+            RequirementStatus.Measured.asInt -> MeasuredCardViewHolder(binding)
+            RequirementStatus.Repairing.asInt -> RepairingCardViewHolder(binding)
+            RequirementStatus.RequestFinish.asInt -> RequestFinishCardViewHolder(binding)
+
+            RequirementStatus.Done.asInt -> DoneViewHolder(binding)
+            RequirementStatus.Closed.asInt -> ClosedViewHolder(binding)
+            RequirementStatus.Canceled.asInt -> CanceledViewHolder(binding)
+
+            else -> CanceledViewHolder(binding)
         }
     }
 }

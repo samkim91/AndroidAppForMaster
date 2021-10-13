@@ -17,29 +17,29 @@ sealed class RequirementStatus {
         override val introductionText = "견적서를 작성해주세요"
     }
 
+    object RequestConsult : RequirementStatus() {
+        override val inKorean = "상담요청"
+        override val code = "RequestConsult"
+        override val asInt = 101
+        override val introductionText = "고객에게 연락해주세요"
+    }
+
+    object RequestMeasure : RequirementStatus() {
+        override val inKorean = "실측요청"
+        override val code = "RequestMeasure"
+        override val asInt = 102
+        override val introductionText = ""
+    }
+
     object Estimated : RequirementStatus() {
         override val inKorean = "매칭대기"
         override val code = "Estimated"
         override val asInt = 101
         override val introductionText = "고객의 선택을 기다려주세요"
     }
-
-    object RequestConsult : RequirementStatus() {
-        override val inKorean = "상담요청"
-        override val code = "RequestConsult"
-        override val asInt = 102
-        override val introductionText = "고객에게 연락해주세요"
-    }
     // end region : Received Tab
 
     // region : Progress Tab
-    object RequestMeasure : RequirementStatus() {
-        override val inKorean = "실측요청"
-        override val code = "RequestMeasure"
-        override val asInt = 200
-        override val introductionText = ""
-    }
-
     object Measuring : RequirementStatus() {
         override val inKorean = "실측예정"
         override val code = "Measuring"
@@ -124,28 +124,12 @@ sealed class RequirementStatus {
             }
         }
 
-        val requirementCodes = listOf(
-            Requested.code,
-            Estimated.code,
-            Measuring.code,
-            Measured.code,
-            Repairing.code,
-            RequestFinish.code,
-            Done.code,
-            Closed.code,
-            Canceled.code,
-        )
-
         val receivedStatus = listOf(
             Requested,
-            Estimated,
             RequestConsult,
-        )
-
-        val receivedCodes = listOf(
-            Requested.code,
-            Estimated.code,
-        )
+            RequestMeasure,
+            Estimated,
+            )
 
         val progressStatus = listOf(
             Measuring,
@@ -154,23 +138,10 @@ sealed class RequirementStatus {
             RequestFinish,
         )
 
-        val progressCodes = listOf(
-            Measuring.code,
-            Measured.code,
-            Repairing.code,
-            RequestFinish.code,
-        )
-
         val doneStatus = listOf(
             Done,
             Closed,
             Canceled,
-        )
-
-        val doneCodes = listOf(
-            Done.code,
-            Closed.code,
-            Canceled.code,
         )
     }
 }

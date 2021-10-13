@@ -112,11 +112,13 @@
     <string name="requirements_card_review_button_done">리뷰 요청을 완료했어요!</string>
     <string name="requirements_card_start_time">최초 요청일 : %s</string>
     <string name="requirements_card_due_date">견적 마감일 : </string>
+    <string name="requirements_card_due_time">응답 마감시간 : </string>
     <string name="requirements_card_response_measure_due_date">실측 선택 마감 : </string>
     <string name="requirements_card_done_date">시공 완료일 : </string>
     <string name="requirements_card_amount_title">나의 견적가 :</string>
     <string name="requirements_card_amount_done_title">최종 시공가 :</string>
     <string name="requirements_card_due_date_alert">마감일이 지나면 해당 문의가 삭제됩니다.</string>
+    <string name="requirements_card_due_time_alert">마감시간이 지나면 해당 문의가 삭제됩니다.</string>
     <string name="not_estimated_text">견적 미발송</string>
     <string name="measurement_text">현장실측</string>
 

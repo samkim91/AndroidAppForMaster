@@ -4,8 +4,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import kr.co.soogong.master.data.model.requirement.RequirementStatus
-import kr.co.soogong.master.data.model.requirement.RequirementStatus.Companion.doneCodes
+import kr.co.soogong.master.data.model.requirement.RequirementStatus.Companion.doneStatus
 import kr.co.soogong.master.domain.usecase.profile.GetMasterSimpleInfoUseCase
 import kr.co.soogong.master.domain.usecase.profile.UpdateRequestMeasureYnUseCase
 import kr.co.soogong.master.domain.usecase.requirement.CallToClientUseCase
@@ -27,27 +26,28 @@ class DoneViewModel @Inject constructor(
     override fun requestList() {
         Timber.tag(TAG).d("onFilterChange: ${index.value}")
 
-        getRequirementCardsUseCase(
-            when (index.value) {
-                1 -> listOf(RequirementStatus.Done.code)
-                2 -> listOf(RequirementStatus.Closed.code)
-                3 -> listOf(RequirementStatus.Canceled.code)
-                else -> doneCodes
-            }
-        )
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeBy(
-                onSuccess = {
-                    Timber.tag(TAG).d("requestList successfully: ")
-                    if (index.value == 0) sendEvent(BADGE_UPDATE, it.count())
-                    requirements.postValue(it)
-                },
-                onError = {
-                    Timber.tag(TAG).d("requestList failed: $it")
-                    requirements.postValue(emptyList())
+        index.value?.let { _index ->
+            getRequirementCardsUseCase(
+                if (_index == 0) {
+                    doneStatus.map { it.code }
+                } else {
+                    listOf(doneStatus[_index - 1].code)
                 }
-            ).addToDisposable()
+            )
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeBy(
+                    onSuccess = {
+                        Timber.tag(TAG).d("requestList successfully: ")
+                        if (_index == 0) sendEvent(BADGE_UPDATE, it.count())
+                        requirements.postValue(it)
+                    },
+                    onError = {
+                        Timber.tag(TAG).d("requestList failed: $it")
+                        requirements.postValue(emptyList())
+                    }
+                ).addToDisposable()
+        }
     }
 
     companion object {
