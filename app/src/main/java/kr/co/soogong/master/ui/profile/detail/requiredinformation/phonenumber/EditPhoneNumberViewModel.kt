@@ -15,6 +15,7 @@ import kr.co.soogong.master.data.model.profile.Profile
 import kr.co.soogong.master.domain.usecase.profile.GetProfileUseCase
 import kr.co.soogong.master.domain.usecase.profile.SaveMasterUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
+import kr.co.soogong.master.utility.PhoneNumberHelper
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -66,7 +67,7 @@ class EditPhoneNumberViewModel @Inject constructor(
                 MasterDto(
                     id = _profile.value?.id,
                     uid = _profile.value?.uid,
-                    tel = tel.value,
+                    tel = PhoneNumberHelper.toGlobalNumber(it),
                 )
             )
                 .subscribeOn(Schedulers.io())

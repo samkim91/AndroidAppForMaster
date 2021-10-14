@@ -158,7 +158,7 @@ class EditPhoneNumberFragment :
 
             override fun onCodeSent(
                 verificationId: String,
-                token: PhoneAuthProvider.ForceResendingToken
+                token: PhoneAuthProvider.ForceResendingToken,
             ) {
                 Timber.tag(TAG).d("onCodeSent: $verificationId, $token")
                 binding.defaultButton.isEnabled = true
@@ -235,7 +235,6 @@ class EditPhoneNumberFragment :
     private fun resendVerificationCode() {
         Timber.tag(TAG)
             .d("resendVerificationCode: ${viewModel.tel.value}, ${viewModel.resendToken.value}")
-
         startTimer()
         requireContext().toast(getString(R.string.certification_code_requested_again))
 
@@ -255,6 +254,7 @@ class EditPhoneNumberFragment :
     }
 
     private fun startTimer() {
+        binding.defaultButton.isEnabled = false
         binding.alertExpiredCertificationTime.visibility = View.GONE
         timer.start()
     }

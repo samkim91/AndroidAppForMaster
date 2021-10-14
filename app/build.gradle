@@ -27,8 +27,8 @@ android {
         applicationId "kr.co.soogong.master"
         minSdkVersion rootProject.minSdkVersion
         targetSdkVersion rootProject.targetSdkVersion
-        versionCode 42
-        versionName "1.4.1"
+        versionCode 43
+        versionName "1.4.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -40,6 +40,7 @@ android {
 
     buildTypes {
         debug {
+            versionNameSuffix '.debug'
             manifestPlaceholders.cleartextTrafficPermitted = "false"
         }
 
