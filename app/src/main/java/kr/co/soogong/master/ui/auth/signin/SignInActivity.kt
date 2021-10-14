@@ -170,7 +170,7 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(
 
             override fun onCodeSent(
                 verificationId: String,
-                token: PhoneAuthProvider.ForceResendingToken
+                token: PhoneAuthProvider.ForceResendingToken,
             ) {
                 Timber.tag(TAG).d("onCodeSent: $verificationId, $token")
                 binding.defaultButton.isEnabled = true
@@ -267,6 +267,7 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(
     }
 
     private fun startTimer() {
+        binding.defaultButton.isEnabled = false
         binding.alertExpiredCertificationTime.visibility = View.GONE
         timer.start()
     }
