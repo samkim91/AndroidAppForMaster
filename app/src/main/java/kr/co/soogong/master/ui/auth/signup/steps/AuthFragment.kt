@@ -87,6 +87,7 @@ class AuthFragment : BaseFragment<FragmentSignUpAuthBinding>(
     }
 
     private fun startTimer() {
+        binding.rightButton.isEnabled = false
         binding.alertExpiredCertificationTime.visibility = View.GONE
         timer.start()
     }
