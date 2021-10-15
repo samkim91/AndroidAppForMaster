@@ -59,6 +59,7 @@ android {
         release {
             debuggable false
             minifyEnabled false
+            manifestPlaceholders.cleartextTrafficPermitted = "false"
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
         }

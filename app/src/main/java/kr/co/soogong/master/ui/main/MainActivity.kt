@@ -82,7 +82,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
                                                 else DialogData.getUpdatingAppRecommended(this),
                                     yesClick = {
                                         startActivity(Intent(Intent.ACTION_VIEW).apply {
-                                            data = Uri.parse("https://play.google.com/store/apps/details?id=kr.co.soogong.master")
+                                            data = Uri.parse("https://play.google.com/store/search?q=%EC%88%98%EA%B3%B5")
                                             setPackage("com.android.vending")
                                         })
                                     },
