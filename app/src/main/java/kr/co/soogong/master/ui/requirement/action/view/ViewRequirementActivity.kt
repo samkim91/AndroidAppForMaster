@@ -135,7 +135,8 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
         (RequirementStatus.getStatusFromRequirement(requirement) is RequirementStatus.RequestConsult).let { boolean ->
             binding.callToCustomerButton.isVisible = boolean
 
-            if (boolean) {
+            // NOTE: 상호 통화한 적이 한번도 없으면 다이얼로그로 전화하라고 안내
+            if (boolean && requirement.estimationDto?.fromMasterCallCnt == 0 && requirement.estimationDto.fromClientCallCnt == 0) {
                 val dialog = CustomDialog.newInstance(
                     dialogData = getRequestConsultAlertDialogData(this),
                     yesClick = {},
