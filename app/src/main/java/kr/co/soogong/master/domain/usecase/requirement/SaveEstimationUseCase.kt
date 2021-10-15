@@ -17,12 +17,12 @@ class SaveEstimationUseCase @Inject constructor(
     private val requirementService: RequirementService,
     @ApplicationContext private val context: Context,
 ) {
-    operator fun invoke(estimationDto: EstimationDto, measurementImageUri: Uri?): Single<EstimationDto> {
+    operator fun invoke(estimationDto: EstimationDto, imageUris: List<Uri>?): Single<EstimationDto> {
         val estimation = MultipartGenerator.createJson(estimationDto)
 
-        val measurementImage = MultipartGenerator.createFile(context, "measurementImage", measurementImageUri)
+        val images = MultipartGenerator.createFiles(context, "images", imageUris)
 
-        return requirementService.saveEstimation(estimation, measurementImage)
+        return requirementService.saveEstimation(estimation, images)
             .doOnSuccess {
                 requirementDao.updateEstimation(requirementId = it.requirementId, it)
             }

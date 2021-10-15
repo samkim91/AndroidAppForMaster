@@ -54,6 +54,7 @@
                     app:address="@{vm.requirement.address}"
                     app:createdAt="@{vm.requirement.createdAt}"
                     app:measurementBadgeVisibility="@{vm.requirement.typeCode}"
+                    app:oldAddress="@{vm.requirement.oldAddress}"
                     app:project="@{vm.requirement.projectName}"
                     app:requirementToken="@{vm.requirement.token}" />
 
@@ -236,22 +237,78 @@
                         app:barrierDirection="bottom"
                         app:constraint_referenced_ids="simpleCost,total_cost" />
 
-                    <kr.co.soogong.master.ui.widget.TitleEditTextCounterView
+                    <kr.co.soogong.master.ui.widget.AlertBox
+                        android:id="@+id/alert_box_for_loading_estimation_template"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/gap_20"
+                        android:layout_marginTop="@dimen/gap_52"
+                        android:layout_marginEnd="@dimen/gap_20"
+                        app:alertTitle="@{@string/alert_box_title_for_loading_estimation_template}"
+                        app:arrowVisibility="@{true}"
+                        app:icon="@{301}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/request_barrier"
+                        app:theme="@{101}" />
+
+                    <kr.co.soogong.master.ui.widget.TitleEditTextCounter
                         android:id="@+id/write_detail"
                         android:layout_width="@dimen/gap_0"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/gap_20"
-                        android:layout_marginTop="@dimen/gap_28"
+                        android:layout_marginTop="@dimen/gap_16"
                         android:layout_marginEnd="@dimen/gap_20"
                         android:layout_marginBottom="@dimen/gap_30"
                         app:content="@={vm.description}"
                         app:hintText="@{@string/masters_estimation_description_hint_text}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/alert_box_for_loading_estimation_template"
+                        app:limitedCount='@{500}'
+                        app:title="@{@string/masters_estimation_description_label}" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/alert_box_for_estimation_template"
+                        style="@style/text_style_14sp.regular"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/gap_20"
+                        android:layout_marginTop="@dimen/gap_5"
+                        android:layout_marginEnd="@dimen/gap_20"
+                        android:text="@string/alert_box_title_for_estimation_template"
+                        android:textColor="@color/text_alert_color"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/write_detail" />
+
+                    <kr.co.soogong.master.ui.widget.TextCheckBox
+                        android:id="@+id/checkbox_for_adding_estimation_template"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/gap_20"
+                        android:layout_marginEnd="@dimen/gap_20"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/alert_box_for_estimation_template"
+                        app:text="@{@string/checkbox_text_for_adding_estimation_template}" />
+
+                    <kr.co.soogong.master.ui.widget.TitleRecyclerImage
+                        android:id="@+id/estimation_images_picker"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/gap_20"
+                        android:layout_marginTop="@dimen/gap_12"
+                        android:layout_marginEnd="@dimen/gap_20"
+                        android:layout_marginBottom="@dimen/gap_50"
+                        app:images="@{vm.estimationImages}"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/request_barrier"
-                        app:limitedCount='@{500}'
-                        app:title="@{@string/masters_estimation_description_label}" />
+                        app:layout_constraintTop_toBottomOf="@id/checkbox_for_adding_estimation_template"
+                        app:title="@{@string/estimation_images_picker_title}" />
+
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.appcompat.widget.LinearLayoutCompat>
         </ScrollView>

@@ -19,9 +19,11 @@ import kr.co.soogong.master.ui.requirement.RequirementViewModel
 import kr.co.soogong.master.ui.widget.RequirementCardAdditionalInfo
 import kr.co.soogong.master.ui.widget.RequirementCardAdditionalInfo.Companion.setContainerTheme
 import kr.co.soogong.master.uihelper.profile.EditRequiredInformationActivityHelper
+import kr.co.soogong.master.uihelper.requirment.CallToCustomerHelper
 import kr.co.soogong.master.uihelper.requirment.action.EndRepairActivityHelper
 import kr.co.soogong.master.uihelper.requirment.action.ViewRequirementActivityHelper
 import kr.co.soogong.master.utility.extension.getEstimationDueDate
+import kr.co.soogong.master.utility.extension.getMeasureDueDate
 
 // 문의탭의 viewHolders
 
@@ -131,36 +133,6 @@ class RequestedCardViewHolder(
     }
 }
 
-// 매칭대기 상태
-class EstimatedCardViewHolder(
-    private val binding: ViewHolderRequirementItemBinding,
-) : ReceivedCardViewHolder(binding) {
-    override fun bind(
-        context: Context,
-        fragmentManager: FragmentManager,
-        viewModel: RequirementViewModel,
-        requirementCard: RequirementCard
-    ) {
-        super.bind(context, fragmentManager, viewModel, requirementCard)
-
-        with(binding) {
-            setContainerTheme(context, additionalInfoContainer, GRAY_THEME)
-            additionalInfoContainer.addView(RequirementCardAdditionalInfo(context).apply {
-                setLayout(
-                    theme = GRAY_THEME,
-                    type = MONEY_TYPE,
-                    titleData = context.getString(R.string.requirements_card_amount_title),
-                    contentData = if (requirementCard.estimationDto?.price!! > 0)
-                        "${moneyFormat.format(requirementCard.estimationDto.price)}원" else context.getString(
-                        R.string.not_estimated_text
-                    ),
-                    alertData = context.getString(R.string.requirements_card_waiting_label),
-                )
-            })
-        }
-    }
-}
-
 // 상담요청 상태
 class RequestConsultCardViewHolder(
     private val binding: ViewHolderRequirementItemBinding,
@@ -174,6 +146,28 @@ class RequestConsultCardViewHolder(
         super.bind(context, fragmentManager, viewModel, requirementCard)
 
         with(binding) {
+            leftButton.isVisible = true
+            leftButton.setText(R.string.call_to_customer_text)
+
+            if (requirementCard.estimationDto?.fromMasterCallCnt!! > 0) {
+                leftButton.setText(R.string.recall_to_customer_text)
+                leftButton.setTextColor(context.resources.getColor(R.color.color_555555, null))
+                leftButton.setBackgroundResource(R.drawable.shape_white_background_darkgray_border_radius8)
+            }
+
+            setLeftButtonClickListener {
+                CustomDialog.newInstance(
+                    DialogData.getCallToCustomerDialogData(context),
+                    yesClick = {
+                        viewModel.callToClient(requirementId = requirementCard.id)
+                        context.startActivity(CallToCustomerHelper.getIntent(requirementCard.tel.toString()))
+                    },
+                    noClick = { }
+                ).run {
+                    this.show(fragmentManager, this.tag)
+                }
+            }
+
             if (requirementCard.estimationDto?.masterResponseCode == EstimationResponseCode.ACCEPTED) {
                 setContainerTheme(context, additionalInfoContainer, GRAY_THEME)
                 additionalInfoContainer.addView(RequirementCardAdditionalInfo(context).apply {
@@ -200,6 +194,66 @@ class RequestConsultCardViewHolder(
                     titleData = context.getString(R.string.requirements_card_due_date),
                     contentData = dateFormat.format(getEstimationDueDate(requirementCard.createdAt)),
                     alertData = context.getString(R.string.requirements_card_due_date_alert)
+                )
+            })
+        }
+    }
+}
+
+// 실측요청 상태
+class RequestMeasureCardViewHolder(
+    private val binding: ViewHolderRequirementItemBinding,
+) : ReceivedCardViewHolder(binding) {
+    override fun bind(
+        context: Context,
+        fragmentManager: FragmentManager,
+        viewModel: RequirementViewModel,
+        requirementCard: RequirementCard
+    ) {
+        super.bind(context, fragmentManager, viewModel, requirementCard)
+
+        with(binding) {
+            setContainerTheme(context, additionalInfoContainer, ORANGE_THEME)
+            additionalInfoContainer.addView(RequirementCardAdditionalInfo(context).apply {
+                setLayout(
+                    theme = ORANGE_THEME,
+                    type = CALENDAR_TYPE,
+                    titleData = context.getString(R.string.requirements_card_due_time),
+                    contentData = dateFormat.format(getMeasureDueDate(requirementCard.estimationDto?.createdAt)),
+                    alertData = context.getString(R.string.requirements_card_due_time_alert)
+                )
+            })
+
+            rightButton.isVisible = false
+        }
+    }
+}
+
+// 매칭대기 상태
+class EstimatedCardViewHolder(
+    private val binding: ViewHolderRequirementItemBinding,
+) : ReceivedCardViewHolder(binding) {
+    override fun bind(
+        context: Context,
+        fragmentManager: FragmentManager,
+        viewModel: RequirementViewModel,
+        requirementCard: RequirementCard
+    ) {
+        super.bind(context, fragmentManager, viewModel, requirementCard)
+
+        with(binding) {
+            setContainerTheme(context, additionalInfoContainer, GRAY_THEME)
+            additionalInfoContainer.addView(RequirementCardAdditionalInfo(context).apply {
+                setLayout(
+                    theme = GRAY_THEME,
+                    type = MONEY_TYPE,
+                    titleData = context.getString(R.string.requirements_card_amount_title),
+                    contentData = requirementCard.estimationDto?.price?.let {
+                        if (it > 0)
+                            "${moneyFormat.format(it)}원" else context.getString(
+                            R.string.not_estimated_text
+                        )},
+                    alertData = context.getString(R.string.requirements_card_waiting_label),
                 )
             })
         }

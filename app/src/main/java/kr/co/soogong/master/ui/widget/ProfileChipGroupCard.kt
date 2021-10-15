@@ -91,11 +91,23 @@ class ProfileChipGroupCard @JvmOverloads constructor(
             }
         }
 
+    // 등록하기 <-> 수정하기 버튼 셋
+    var defaultButtonByFlag: Boolean? = null
+        set(value) {
+            field = value
+            if (value == null) {
+                ButtonHelper.setRegisteringButton(binding.defaultButton)
+            } else {
+                ButtonHelper.setModifyingButton(binding.defaultButton)
+            }
+        }
+
     var chipGroupWithTitle: List<Major>? = emptyList()
         set(value) {
             field = value
+            binding.chipGroupContainer.removeAllViews()
+
             if (!value.isNullOrEmpty()) {
-                binding.chipGroupContainer.removeAllViews()
                 newBadgeVisible = false
                 binding.subTitle.visibility = View.GONE
 
@@ -130,6 +142,19 @@ class ProfileChipGroupCard @JvmOverloads constructor(
             }
         }
 
+    var chipGroupWithoutTitleByFlag: Boolean? = null
+        set(value) {
+            field = value
+            binding.chipGroupContainer.removeAllViews()
+
+            if (value != null) {
+                newBadgeVisible = false
+                binding.subTitle.visibility = View.GONE
+
+                if (value == true) addChipGroup(listOf("가능")) else addChipGroup(listOf("불가능"))
+            }
+        }
+
     private fun addChipGroup(items: List<Any?>?) {
         val chipGroup = ChipGroup(context)
         val params = LinearLayout.LayoutParams(
@@ -152,7 +177,8 @@ class ProfileChipGroupCard @JvmOverloads constructor(
                 }
                 chip.setTextColor(resources.getColor(R.color.text_basic_color, null))
                 chip.setTextAppearance(R.style.text_style_16sp_regular)
-                chip.chipBackgroundColor = ColorStateList.valueOf(context.getColor(R.color.color_E3E3E3))
+                chip.chipBackgroundColor =
+                    ColorStateList.valueOf(context.getColor(R.color.color_E3E3E3))
 
                 chipGroup.addView(chip)
             }

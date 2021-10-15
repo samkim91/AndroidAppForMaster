@@ -16,7 +16,6 @@ import kr.co.soogong.master.domain.usecase.auth.CheckUserExistentUseCase
 import kr.co.soogong.master.domain.usecase.auth.SignUpUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import kr.co.soogong.master.utility.ListLiveData
-import kr.co.soogong.master.utility.PhoneNumberHelper
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -33,6 +32,7 @@ class SignUpViewModel @Inject constructor(
 
     // AuthFragment
     val certificationCode = MutableLiveData("")
+
     // Firebase Auth
     val auth = MutableLiveData(Firebase.auth)
     val phoneAuthCredential = MutableLiveData<PhoneAuthCredential>()
@@ -55,6 +55,9 @@ class SignUpViewModel @Inject constructor(
     // ServiceAreaFragment
     val serviceArea = MutableLiveData("")
     val serviceAreaToInt = MutableLiveData(0)
+
+    // RepairInPersonFragment
+    val repairInPerson = MutableLiveData(false)
 
     // PrivatePolicyFragment
     val privacyPolicy = MutableLiveData(false)

@@ -52,6 +52,10 @@ class RequirementFragment : BaseFragment<FragmentRequirementBinding>(
             bottomView.container.setOnClickListener {
                 startActivity(EditRequiredInformationActivityHelper.getIntent(requireContext()))
             }
+
+            acceptingMeasurementSwitch.setSwitchClick { button, isChecked ->
+                viewModel.updateRequestMeasureYn(button, isChecked)
+            }
         }
     }
 
@@ -59,6 +63,12 @@ class RequirementFragment : BaseFragment<FragmentRequirementBinding>(
         viewModel.masterSimpleInfo.observe(viewLifecycleOwner, { masterDto ->
             binding.bottomView.root.isVisible =
                 masterDto.approvedStatus == NotApprovedCodeTable.code || masterDto.approvedStatus == RequestApproveCodeTable.code
+
+            binding.acceptingMeasurementSwitch.setLayoutForRequestMeasure(masterDto = masterDto)
+        })
+
+        viewModel.requestMeasureYn.observe(viewLifecycleOwner, { requestMeasureYn ->
+            binding.acceptingMeasurementSwitch.changeTextAndBackgroundForRequestMeasure(requestMeasureYn)
         })
     }
 

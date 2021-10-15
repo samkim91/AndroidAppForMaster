@@ -28,8 +28,10 @@
     <dimen name="gap_2">2dp</dimen>
     <dimen name="gap_3">3dp</dimen>
     <dimen name="gap_4">4dp</dimen>
+    <dimen name="gap_5">5dp</dimen>
     <dimen name="gap_6">6dp</dimen>
     <dimen name="gap_8">8dp</dimen>
+    <dimen name="gap_9">9dp</dimen>
 
     <dimen name="gap_10">10dp</dimen>
 
@@ -66,12 +68,14 @@
     <dimen name="gap_55">55dp</dimen>
     <dimen name="gap_52">52dp</dimen>
     <dimen name="gap_56">56dp</dimen>
+    <dimen name="gap_64">64dp</dimen>
     <dimen name="gap_72">72dp</dimen>
     <dimen name="gap_74">74dp</dimen>
     <dimen name="gap_80">80dp</dimen>
     <dimen name="gap_85">85dp</dimen>
     <dimen name="gap_90">90dp</dimen>
     <dimen name="gap_92">92dp</dimen>
+    <dimen name="gap_96">96dp</dimen>
 
     <dimen name="gap_100">100dp</dimen>
     <dimen name="gap_102">102dp</dimen>

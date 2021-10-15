@@ -44,7 +44,8 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>(
                 }
             }
 
-            progressPercentIndicator.text = SignUpProgressHelper(signUpViewPager.currentItem)
+            progressPercentIndicator.text =
+                SignUpProgressHelper.getPercentage(signUpViewPager.currentItem)
 
             with(signUpViewPager) {
                 isUserInputEnabled = false
@@ -56,10 +57,11 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>(
     fun moveToNext() {
         Timber.tag(TAG).d("moveToNext: ")
         bind {
-            if (signUpViewPager.currentItem < TabCount - 1) {
+            if (signUpViewPager.currentItem < SignUpProgressHelper.TabCount - 1) {
                 signUpViewPager.currentItem++
                 viewModel.indicator.value = viewModel.indicator.value?.plus(1)
-                progressPercentIndicator.text = SignUpProgressHelper(signUpViewPager.currentItem)
+                progressPercentIndicator.text =
+                    SignUpProgressHelper.getPercentage(signUpViewPager.currentItem)
             }
         }
     }
@@ -70,24 +72,27 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>(
             if (signUpViewPager.currentItem > 0) {
                 signUpViewPager.currentItem--
                 viewModel.indicator.value = viewModel.indicator.value?.minus(1)
-                progressPercentIndicator.text = SignUpProgressHelper(signUpViewPager.currentItem)
+                progressPercentIndicator.text =
+                    SignUpProgressHelper.getPercentage(signUpViewPager.currentItem)
             }
         }
     }
 
     override fun onBackPressed() {
         Timber.tag(TAG).d("onBackPressed: ")
-        val dialog = CustomDialog.newInstance(DialogData.getQuitSignUpDialogData(this@SignUpActivity),
+        CustomDialog.newInstance(DialogData.getQuitSignUpDialogData(this@SignUpActivity),
             yesClick = { },
             noClick = {
                 Firebase.auth.currentUser?.delete()
                     ?.addOnCompleteListener { task ->
-                        Timber.tag(TAG).d("addOnCompleteListener successfully: ${task.isSuccessful}")
+                        Timber.tag(TAG)
+                            .d("addOnCompleteListener successfully: ${task.isSuccessful}")
                         finish()
                     }
             })
-
-        dialog.show(supportFragmentManager, dialog.tag)
+            .run {
+                show(supportFragmentManager, tag)
+            }
     }
 
     fun finishActivityWithoutDialog() {

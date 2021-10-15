@@ -9,7 +9,6 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import kr.co.soogong.master.data.dto.requirement.RequirementDto
 import kr.co.soogong.master.data.model.profile.CodeTable
-import kr.co.soogong.master.data.model.profile.CompareCodeTable
 import kr.co.soogong.master.data.model.requirement.*
 import kr.co.soogong.master.databinding.ViewRequirementProgressBinding
 import timber.log.Timber
@@ -17,7 +16,7 @@ import timber.log.Timber
 class RequirementProgress @JvmOverloads constructor(
     context: Context,
     attributeSet: AttributeSet? = null,
-    defStyle: Int = 0
+    defStyle: Int = 0,
 ) : ConstraintLayout(context, attributeSet, defStyle) {
     private var binding =
         ViewRequirementProgressBinding.inflate(LayoutInflater.from(context), this, true)
@@ -80,18 +79,18 @@ class RequirementProgress @JvmOverloads constructor(
         Timber.tag(TAG).d("convertStatusToProgress: ${requirementDto?.status}")
         return if (CodeTable.isSecretaryRequirement(requirementDto?.typeCode)) {
             when (RequirementStatus.getStatusFromRequirement(requirementDto)) {
-                RequestMeasure -> 1
-                Measuring -> 2
-                Measured -> 3
-                Repairing -> 4
+                RequirementStatus.RequestMeasure -> 1
+                RequirementStatus.Measuring -> 2
+                RequirementStatus.Measured -> 3
+                RequirementStatus.Repairing -> 4
                 else -> max
             }
         } else {
             when (RequirementStatus.getStatusFromRequirement(requirementDto)) {
-                Requested, RequestConsult -> 1
-                Estimated -> 2
-                Repairing -> 3
-                RequestFinish -> 4
+                RequirementStatus.Requested, RequirementStatus.RequestConsult -> 1
+                RequirementStatus.Estimated -> 2
+                RequirementStatus.Repairing -> 3
+                RequirementStatus.RequestFinish -> 4
                 else -> max
             }
         }
@@ -101,18 +100,18 @@ class RequirementProgress @JvmOverloads constructor(
         Timber.tag(TAG).d("convertStatusToProgress: $progress")
         return if (CodeTable.isSecretaryRequirement(requirementDto?.typeCode)) {
             when (progress) {
-                1 -> RequestMeasure.inKorean
-                2 -> Measuring.inKorean
-                3 -> Measured.inKorean
-                4 -> Repairing.inKorean
+                1 -> RequirementStatus.RequestMeasure.inKorean
+                2 -> RequirementStatus.Measuring.inKorean
+                3 -> RequirementStatus.Measured.inKorean
+                4 -> RequirementStatus.Repairing.inKorean
                 else -> ""
             }
         } else {
             when (progress) {
-                1 -> if (requirementDto?.estimationDto?.requestConsultingYn != true) Requested.inKorean else RequestConsult.inKorean
-                2 -> Estimated.inKorean
-                3 -> Repairing.inKorean
-                4 -> RequestFinish.inKorean
+                1 -> if (requirementDto?.estimationDto?.requestConsultingYn != true) RequirementStatus.Requested.inKorean else RequirementStatus.RequestConsult.inKorean
+                2 -> RequirementStatus.Estimated.inKorean
+                3 -> RequirementStatus.Repairing.inKorean
+                4 -> RequirementStatus.RequestFinish.inKorean
                 else -> ""
             }
         }
@@ -128,7 +127,7 @@ class RequirementProgress @JvmOverloads constructor(
                 override fun onProgressChanged(
                     seekBar: SeekBar?,
                     progress: Int,
-                    fromUser: Boolean
+                    fromUser: Boolean,
                 ) {
                     Timber.tag(TAG).d("onProgressChanged: $progress")
 

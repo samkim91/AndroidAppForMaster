@@ -14,36 +14,21 @@ object RequirementCardViewHolderHelper {
         )
 
         return when (viewType) {
-            Requested.asInt -> {
-                RequestedCardViewHolder(binding)
-            }
-            Estimated.asInt -> {
-                EstimatedCardViewHolder(binding)
-            }
-            RequestConsult.asInt -> {
-                RequestConsultCardViewHolder(binding)
-            }
-            Measuring.asInt -> {
-                MeasuringCardViewHolder(binding)
-            }
-            Measured.asInt -> {
-                MeasuredCardViewHolder(binding)
-            }
-            Repairing.asInt -> {
-                RepairingCardViewHolder(binding)
-            }
-            RequestFinish.asInt -> {
-                RequestFinishCardViewHolder(binding)
-            }
-            Done.asInt -> {
-                DoneViewHolder(binding)
-            }
-            Closed.asInt -> {
-                ClosedViewHolder(binding)
-            }
-            else -> {
-                CanceledViewHolder(binding)
-            }
+            RequirementStatus.Requested.asInt -> RequestedCardViewHolder(binding)
+            RequirementStatus.RequestConsult.asInt -> RequestConsultCardViewHolder(binding)
+            RequirementStatus.RequestMeasure.asInt -> RequestMeasureCardViewHolder(binding)
+            RequirementStatus.Estimated.asInt -> EstimatedCardViewHolder(binding)
+
+            RequirementStatus.Measuring.asInt -> MeasuringCardViewHolder(binding)
+            RequirementStatus.Measured.asInt -> MeasuredCardViewHolder(binding)
+            RequirementStatus.Repairing.asInt -> RepairingCardViewHolder(binding)
+            RequirementStatus.RequestFinish.asInt -> RequestFinishCardViewHolder(binding)
+
+            RequirementStatus.Done.asInt -> DoneViewHolder(binding)
+            RequirementStatus.Closed.asInt -> ClosedViewHolder(binding)
+            RequirementStatus.Canceled.asInt -> CanceledViewHolder(binding)
+
+            else -> CanceledViewHolder(binding)
         }
     }
 }

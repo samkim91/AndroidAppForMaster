@@ -1,7 +1,7 @@
 package kr.co.soogong.master.domain.usecase.requirement
 
 import dagger.Reusable
-import io.reactivex.Flowable
+import io.reactivex.Single
 import kr.co.soogong.master.data.model.requirement.RequirementCard
 import kr.co.soogong.master.data.repository.RequirementRepository
 import javax.inject.Inject
@@ -12,9 +12,8 @@ class GetRequirementCardsUseCase @Inject constructor(
 ) {
     operator fun invoke(
         statusArray: List<String>,
-        canceledYn: Boolean = false
-    ): Flowable<List<RequirementCard>> {
-        return requirementRepository.getRequirementsByStatus(statusArray, canceledYn)
+    ): Single<List<RequirementCard>> {
+        return requirementRepository.getRequirementsByStatus(statusArray)
             .map { dtoList ->
                 dtoList.map { dto ->
                     RequirementCard.fromRequirementDto(dto)

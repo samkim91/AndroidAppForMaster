@@ -2,8 +2,10 @@ package kr.co.soogong.master.contract
 
 object HttpContract {
 //    const val LOCAL_URL = "http://192.168.0.50:8080/"       // Myeonghwan's local
-    const val LOCAL_URL = "http://192.168.0.32:8080/"     // Jihun's local
+    const val LOCAL_URL_JH = "http://192.168.0.32:8080/"     // Jihun's local
+    const val LOCAL_URL = "http://192.168.0.40:8080/"     // Jaeyeon's local
     const val DEV_URL = "https://backenddev.soogong.co.kr"
+    const val TEST_URL = "https://backendtest.soogong.co.kr"
     const val PROD_URL = "https://backend.soogong.co.kr/"
 
     //region Auth
@@ -35,11 +37,19 @@ object HttpContract {
     const val REQUEST_REVIEW = "repair/request-review"
     //endregion
 
+    //region Estimation Template
+    const val GET_ESTIMATION_TEMPLATES = "estimation-template/find-by-master-uid"
+    const val SAVE_ESTIMATION_TEMPLATE = "estimation-template"
+    const val DELETE_ESTIMATION_TEMPLATE = "estimation-template/{id}"
+    //endregion
+
     //region Profile
     const val MY_PAGE_URL = "https://soogong.co.kr/master/detail/"
     const val GET_MASTER_SIMPLE_INFO = "master/find-simple-info"
     const val GET_MASTER_BY_UID = "master/find-by-uid"
     const val SAVE_MASTER = "master/save"
+    const val UPDATE_REQUEST_MEASURE_YN = "master/request-measure-yn"
+    const val UPDATE_FREE_MEASURE_YN = "master/free-measure-yn"
     const val REQUEST_REVIEW_BY_SHARING = "https://soogong.co.kr/my-soogong/easy-review/"
     //endregion
 

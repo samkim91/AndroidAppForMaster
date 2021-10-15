@@ -20,6 +20,7 @@ import kr.co.soogong.master.uihelper.profile.*
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_EMAIL
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_FLEXIBLE_COST
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_OTHER_FLEXIBLE_OPTION
+import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.FREE_MEASURE
 import kr.co.soogong.master.uihelper.profile.PortfolioListActivityHelper.PORTFOLIO
 import kr.co.soogong.master.uihelper.profile.PortfolioListActivityHelper.PRICE_BY_PROJECTS
 import kr.co.soogong.master.utility.EventObserver
@@ -82,6 +83,15 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
             editRequiredInfo.setOnClickListener {
                 startActivity(
                     EditRequiredInformationActivityHelper.getIntent(requireContext())
+                )
+            }
+
+            freeMeasure.setOnClickListener {
+                startActivity(
+                    EditProfileContainerActivityHelper.getIntent(
+                        requireContext(),
+                        FREE_MEASURE
+                    )
                 )
             }
 

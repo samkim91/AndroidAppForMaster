@@ -49,5 +49,7 @@ open class RequirementCardViewHolder(
             createdAt.text = simpleDateFormat.format(requirementCard.createdAt)
         }
     }
+
+    // TODO: 2021/10/13 버튼의 경우 상태에 따라 같은 버튼을 쓰는 경우가 있다. 이를 부모 뷰홀더에서 정의하고 사용하는 방법으로 리팩토링 해보자.
 }
 

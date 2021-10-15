@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -32,29 +31,29 @@
                     android:id="@+id/canceled_options"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/gap_52"
                     android:layout_marginStart="@dimen/gap_20"
+                    android:layout_marginTop="@dimen/gap_52"
                     android:layout_marginEnd="@dimen/gap_20"
-                    app:title="@{@string/cancel_estimate_cancel_option_label}"
                     app:alertText="@{@string/alert_required_field}"
-                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"/>
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:title="@{@string/cancel_estimate_cancel_option_label}" />
 
-                <kr.co.soogong.master.ui.widget.TitleEditTextCounterView
+                <kr.co.soogong.master.ui.widget.TitleEditTextCounter
                     android:id="@+id/cancel_option_detail"
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/cancel_estimation_default_margin_start_20"
                     android:layout_marginTop="@dimen/cancel_estimation_margin_top_52"
                     android:layout_marginEnd="@dimen/cancel_estimation_default_margin_end_20"
+                    app:alertText="@{@string/alert_required_field}"
+                    app:content="@={vm.canceledDescription}"
                     app:hintText="@{@string/asking_write_canceled_reason_detail_label}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/canceled_options"
                     app:limitedCount='@{100}'
-                    app:alertText="@{@string/alert_required_field}"
-                    app:content="@={vm.canceledDescription}"
                     app:title="@{@string/asking_write_detail_label}" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>

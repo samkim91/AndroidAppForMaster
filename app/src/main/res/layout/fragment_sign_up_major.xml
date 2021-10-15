@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -19,7 +18,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:fillViewport="true">
 
             <kr.co.soogong.master.ui.widget.LargeTitleSubtitle
@@ -48,11 +47,10 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/title_widget"
-                app:setFirstEditTextHint='@{"시공 가능한 업종을 선택해주세요."}'
-                app:titleVisible="@{false}"
-                app:setSecondEditTextVisible="@{false}"
                 app:setFirstEditTextEnable="@{false}"
-                />
+                app:setFirstEditTextHint='@{"시공 가능한 업종을 선택해주세요."}'
+                app:setSecondEditTextVisible="@{false}"
+                app:titleVisible="@{false}" />
 
             <LinearLayout
                 android:id="@+id/major_container"
@@ -60,12 +58,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/gap_20"
                 android:layout_marginEnd="@dimen/gap_20"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toTopOf="@id/default_button"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/major"
-                app:layout_constraintBottom_toTopOf="@id/default_button"
-                app:layout_constraintVertical_chainStyle="spread_inside"
-                android:orientation="vertical" />
+                app:layout_constraintVertical_chainStyle="spread_inside" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/default_button"
@@ -75,12 +73,11 @@
                 android:background="@color/color_22D47B"
                 android:text="@string/next_button_text"
                 android:textColor="@color/basic_white"
-                app:layout_constraintTop_toBottomOf="@id/major_container"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintVertical_chainStyle="spread_inside"
-                />
+                app:layout_constraintTop_toBottomOf="@id/major_container"
+                app:layout_constraintVertical_chainStyle="spread_inside" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

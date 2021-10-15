@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="vm"
             type="kr.co.soogong.master.ui.auth.signup.SignUpViewModel" />
 
         <variable
-            name="progress"
-            type="kr.co.soogong.master.ui.auth.signup.SignUpTabInfoKt" />
-
+            name="signUpProgressHelper"
+            type="kr.co.soogong.master.utility.SignUpProgressHelper" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/gap_20"
             android:layout_marginEnd="@dimen/gap_8"
-            android:max="@{progress.TabCount}"
+            android:max="@{signUpProgressHelper.TabCount}"
             android:progress="@{vm.indicator}"
             app:indicatorColor="@color/color_22D47B"
             app:layout_constraintEnd_toStartOf="@id/progress_percent_indicator"
@@ -43,10 +43,10 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/progress_percent_indicator"
             style="@style/text_style_14sp.medium"
-            android:textColor="@color/color_1FC472"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/gap_20"
+            android:textColor="@color/color_1FC472"
             app:layout_constraintBottom_toBottomOf="@id/progress_indicator"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/progress_indicator"

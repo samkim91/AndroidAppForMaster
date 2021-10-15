@@ -4,13 +4,14 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import kr.co.soogong.master.ui.auth.signup.steps.*
+import kr.co.soogong.master.utility.SignUpProgressHelper
 import timber.log.Timber
 
 class SignUpPagerAdapter(
     fragmentActivity: FragmentActivity,
 ) : FragmentStateAdapter(fragmentActivity) {
 
-    override fun getItemCount(): Int = TabCount
+    override fun getItemCount(): Int = SignUpProgressHelper.TabCount
 
     override fun createFragment(position: Int): Fragment {
         Timber.tag(TAG).d("createFragment: $position")
@@ -21,7 +22,8 @@ class SignUpPagerAdapter(
             3 -> MajorFragment.newInstance()
             4 -> AddressFragment.newInstance()
             5 -> ServiceAreaFragment.newInstance()
-            6 -> PrivatePolicyFragment.newInstance()
+            6 -> RepairInPersonFragment.newInstance()
+            7 -> PrivatePolicyFragment.newInstance()
             else -> Fragment()
         }
     }

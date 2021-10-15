@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -19,7 +18,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:fillViewport="true">
 
             <kr.co.soogong.master.ui.widget.LargeTitleSubtitle
@@ -43,17 +42,16 @@
                 android:layout_marginEnd="@dimen/gap_20"
                 app:alertText='@{"필수 정보입니다."}'
                 app:buttonText='@{"검색"}'
+                app:firstContent="@={vm.roadAddress}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/title_widget"
-                app:setFirstEditTextHint='@{"주소를 검색해주세요."}'
-                app:firstContent="@={vm.roadAddress}"
                 app:secondContent="@={vm.detailAddress}"
-                app:setMaxLengthSecond="@{100}"
-                app:titleVisible="@{false}"
-                app:setSecondEditTextHint='@{"상세주소를 입력해주세요."}'
                 app:setFirstEditTextEnable="@{false}"
-                />
+                app:setFirstEditTextHint='@{"주소를 검색해주세요."}'
+                app:setMaxLengthSecond="@{100}"
+                app:setSecondEditTextHint='@{"상세주소를 입력해주세요."}'
+                app:titleVisible="@{false}" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/default_button"

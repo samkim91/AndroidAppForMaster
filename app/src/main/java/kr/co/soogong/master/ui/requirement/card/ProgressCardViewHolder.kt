@@ -6,17 +6,15 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentManager
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.model.profile.CompareCodeTable
-import kr.co.soogong.master.data.model.requirement.Measuring
 import kr.co.soogong.master.data.model.requirement.RequirementCard
+import kr.co.soogong.master.data.model.requirement.RequirementStatus
 import kr.co.soogong.master.databinding.ViewHolderRequirementItemBinding
 import kr.co.soogong.master.ui.GRAY_THEME
 import kr.co.soogong.master.ui.GREEN_THEME
 import kr.co.soogong.master.ui.MONEY_TYPE
-import kr.co.soogong.master.ui.base.BaseViewModel
 import kr.co.soogong.master.ui.dialog.popup.CustomDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData
 import kr.co.soogong.master.ui.requirement.RequirementViewModel
-import kr.co.soogong.master.ui.requirement.progress.ProgressViewModel
 import kr.co.soogong.master.ui.widget.RequirementCardAdditionalInfo
 import kr.co.soogong.master.ui.widget.RequirementCardAdditionalInfo.Companion.setContainerTheme
 import kr.co.soogong.master.uihelper.requirment.CallToCustomerHelper
@@ -94,7 +92,7 @@ class MeasuringCardViewHolder(
                     if (requirementCard.typeCode == CompareCodeTable.code) {
                         EndRepairActivityHelper.getIntent(context, requirementCard.id)
                     } else {
-                        if (requirementCard.status == Measuring) {
+                        if (requirementCard.status is RequirementStatus.Measuring) {
                             MeasureActivityHelper.getIntent(
                                 context,
                                 requirementCard.id

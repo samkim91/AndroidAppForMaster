@@ -142,9 +142,9 @@ class EstimationDetail @JvmOverloads constructor(
                 }
 
                 // 실측 사진
-                if (!estimation.measurementImages.isNullOrEmpty()) TitleRectangleImages(context).apply {
+                if (!estimation.images.isNullOrEmpty()) TitleRectangleImages(context).apply {
                     question = context.getString(R.string.view_requirement_estimation_images_label)
-                    images = estimation.measurementImages
+                    images = estimation.images
                 }.run {
                     container.addView(this)
                 }

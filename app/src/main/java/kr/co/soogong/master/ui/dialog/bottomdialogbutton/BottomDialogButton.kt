@@ -9,10 +9,11 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kr.co.soogong.master.databinding.BottomDialogButtonBinding
 import timber.log.Timber
 
+// TODO: 2021/10/07 아직 사용하지 않고 있어서 리팩토링을 안 했는데, BottomDialogRecyclerView 를 참고해서 상속으로 변경해야함.
 class BottomDialogButton(
     private val dialogData: BottomDialogButtonData,
     private val leftButtonClick: () -> Unit,
-    private var rightButtonClick: () -> Unit
+    private var rightButtonClick: () -> Unit,
 ) : BottomSheetDialogFragment() {
     lateinit var binding: BottomDialogButtonBinding
 
@@ -24,8 +25,8 @@ class BottomDialogButton(
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+        savedInstanceState: Bundle?,
+    ): View {
         Timber.tag(TAG).d("onCreateView: ")
 
         binding = BottomDialogButtonBinding.inflate(inflater, container, false)
@@ -41,7 +42,7 @@ class BottomDialogButton(
         super.onViewCreated(view, savedInstanceState)
         Timber.tag(TAG).d("onViewCreated: ")
 
-        with(binding){
+        with(binding) {
             dialogTitle.text = dialogData.title
             leftButton.text = dialogData.leftButtonText
             leftButton.setTextColor(dialogData.leftButtonTextColor)
@@ -58,7 +59,7 @@ class BottomDialogButton(
         }
     }
 
-    companion object{
+    companion object {
         private const val TAG = "CustomBottomSheetDialog"
     }
 }

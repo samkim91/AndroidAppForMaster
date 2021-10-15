@@ -40,52 +40,52 @@ fun TextView.setStatus(requirementDto: RequirementDto?) {
 @BindingAdapter("initByRequirement")
 fun RequirementIntro.initByRequirement(requirementDto: RequirementDto?) {
     when (RequirementStatus.getStatusFromRequirement(requirementDto)) {
-        Requested -> {
+        RequirementStatus.Requested -> {
             title = context.getString(R.string.requirement_intro_title_of_requested)
             subtitle = context.getString(R.string.requirement_intro_subtitle_of_requested)
             theme = GREEN_THEME
         }
-        Estimated -> {
+        RequirementStatus.Estimated -> {
             title = context.getString(R.string.requirement_intro_title_of_estimated)
             subtitle = context.getString(R.string.requirement_intro_subtitle_of_estimated)
             theme = GRAY_THEME
         }
-        RequestConsult -> {
+        RequirementStatus.RequestConsult -> {
             title = context.getString(R.string.requirement_intro_title_of_request_consult)
             subtitle = context.getString(R.string.requirement_intro_subtitle_of_request_consult)
             theme = GREEN_THEME
         }
-        RequestMeasure -> {
+        RequirementStatus.RequestMeasure -> {
             title = context.getString(R.string.requirement_intro_title_of_request_measure)
             subtitle = ""
             theme = GREEN_THEME
         }
-        Repairing -> {
+        RequirementStatus.Repairing -> {
             title = context.getString(R.string.requirement_intro_title_of_repairing_from_funnel)
             subtitle = context.getString(R.string.requirement_intro_subtitle_of_repairing)
             theme = GREEN_THEME
         }
-        RequestFinish -> {
+        RequirementStatus.RequestFinish -> {
             title = context.getString(R.string.requirement_intro_title_of_request_finish)
             subtitle = context.getString(R.string.requirement_intro_subtitle_of_request_finish)
             theme = GREEN_THEME
         }
-        Measuring -> {
+        RequirementStatus.Measuring -> {
             title = context.getString(R.string.requirement_intro_title_of_measuring)
             subtitle = context.getString(R.string.requirement_intro_subtitle_of_measuring)
             theme = GREEN_THEME
         }
-        Measured -> {
+        RequirementStatus.Measured -> {
             title = context.getString(R.string.requirement_intro_title_of_measured)
             subtitle = ""
             theme = GREEN_THEME
         }
-        Done -> {
+        RequirementStatus.Done -> {
             title = context.getString(R.string.requirement_intro_title_of_done)
             subtitle = context.getString(R.string.requirement_intro_subtitle_of_done)
             theme = GREEN_THEME
         }
-        Closed -> {
+        RequirementStatus.Closed -> {
             title = context.getString(
                 R.string.requirement_intro_title_of_close,
                 SimpleDateFormat(
@@ -96,16 +96,10 @@ fun RequirementIntro.initByRequirement(requirementDto: RequirementDto?) {
             subtitle = ""
             theme = GRAY_THEME
         }
-        Canceled -> {
+        RequirementStatus.Canceled -> {
             title = context.getString(R.string.requirement_intro_title_of_canceled)
-            subtitle = ""
-            theme = GRAY_THEME
-        }
-        else -> {
-            title = ""
             subtitle = ""
             theme = GRAY_THEME
         }
     }
 }
-

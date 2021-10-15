@@ -4,6 +4,7 @@
 .idea
 debug/
 release/
+internal/
 /build
 /local.properties
 .DS_Store
