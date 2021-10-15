@@ -17,8 +17,11 @@ import kr.co.soogong.master.databinding.FragmentEditPhoneNumberBinding
 import kr.co.soogong.master.ui.auth.signup.LimitTime
 import kr.co.soogong.master.ui.auth.signup.TimerTerm
 import kr.co.soogong.master.ui.base.BaseFragment
-import kr.co.soogong.master.ui.profile.detail.requiredinformation.phonenumber.EditPhoneNumberViewModel.Companion.GET_PROFILE_FAILED
-import kr.co.soogong.master.ui.profile.detail.requiredinformation.phonenumber.EditPhoneNumberViewModel.Companion.SAVE_PHONE_NUMBER_FAILED
+import kr.co.soogong.master.ui.dialog.popup.CustomDialog
+import kr.co.soogong.master.ui.dialog.popup.DialogData
+import kr.co.soogong.master.ui.profile.detail.requiredinformation.phonenumber.EditPhoneNumberViewModel.Companion.PHONE_NUMBER_EXIST
+import kr.co.soogong.master.ui.profile.detail.requiredinformation.phonenumber.EditPhoneNumberViewModel.Companion.PHONE_NUMBER_NOT_EXIST
+import kr.co.soogong.master.ui.profile.detail.requiredinformation.phonenumber.EditPhoneNumberViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.ui.profile.detail.requiredinformation.phonenumber.EditPhoneNumberViewModel.Companion.SAVE_PHONE_NUMBER_SUCCESSFULLY
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.PhoneNumberHelper
@@ -84,7 +87,7 @@ class EditPhoneNumberFragment :
                     id.alertVisible = !ValidationHelper.isPhoneNumberFormat(it)
                 })
 
-                if (!id.alertVisible) startPhoneNumberVerification()
+                if (!id.alertVisible) viewModel.checkUserExist()
             }
 
             requestCertificationCodeAgainText.setOnClickListener {
@@ -121,12 +124,10 @@ class EditPhoneNumberFragment :
 
         viewModel.action.observe(viewLifecycleOwner, EventObserver { event ->
             when (event) {
-                SAVE_PHONE_NUMBER_SUCCESSFULLY -> {
-                    activity?.onBackPressed()
-                }
-                GET_PROFILE_FAILED, SAVE_PHONE_NUMBER_FAILED -> {
-                    requireContext().toast(getString(R.string.error_message_of_request_failed))
-                }
+                SAVE_PHONE_NUMBER_SUCCESSFULLY -> activity?.onBackPressed()
+                PHONE_NUMBER_EXIST -> showDialog()
+                PHONE_NUMBER_NOT_EXIST -> startPhoneNumberVerification()
+                REQUEST_FAILED -> requireContext().toast(getString(R.string.error_message_of_request_failed))
             }
         })
     }
@@ -261,6 +262,16 @@ class EditPhoneNumberFragment :
 
     private fun stopTimer() {
         timer.cancel()
+    }
+
+    private fun showDialog() {
+        val dialog = CustomDialog.newInstance(
+            DialogData.getUserExistDialogData(requireContext()),
+            yesClick = {},
+            noClick = {}
+        )
+
+        dialog.show(parentFragmentManager, tag)
     }
 
     companion object {

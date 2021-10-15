@@ -88,8 +88,10 @@ class EstimationTemplatesActivity : BaseActivity<ActivityEstimationTemplatesBind
                 viewModel.estimationTemplate.value = it
             },
             confirmClick = {
-                viewModel.estimationTemplate.value = it
-                viewModel.saveEstimationTemplate()
+                if (it.description.isNotEmpty()) {
+                    viewModel.estimationTemplate.value = it
+                    viewModel.saveEstimationTemplate()
+                }
             },
             cancelListener = {
                 if (it.description.isNotEmpty()) CustomDialog.newInstance(

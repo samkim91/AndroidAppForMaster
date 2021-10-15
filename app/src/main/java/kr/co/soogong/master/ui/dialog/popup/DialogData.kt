@@ -130,6 +130,18 @@ data class DialogData(
                 context.getColor(R.color.text_hint_color)
             )
 
+        fun getUserExistDialogData(context: Context) =
+            DialogData(
+                "이미 존재하는 번호입니다.",
+                context.getColor(R.color.text_basic_color),
+                null,
+                context.getColor(R.color.text_alert_color),
+                "확인",
+                context.getColor(R.color.text_basic_color),
+                null,
+                context.getColor(R.color.text_hint_color)
+            )
+
         fun getAskingFillProfileDialogData(context: Context) =
             DialogData(
                 "문의를 처리하려면\n필수 정보 등록이 필요해요.\n지금 등록하시겠어요?",
