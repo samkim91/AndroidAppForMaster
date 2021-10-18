@@ -130,7 +130,7 @@
                     </RadioGroup>
 
                     <kr.co.soogong.master.ui.widget.TitleEditText
-                        android:id="@+id/simpleCost"
+                        android:id="@+id/simple_cost"
                         android:layout_width="@dimen/gap_0"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/gap_20"
@@ -148,6 +148,25 @@
                         app:setInputType="@{InputType.TYPE_CLASS_NUMBER}"
                         app:setMaxLength="@{13}"
                         app:title="@{@string/estimation_price_text}" />
+
+                    <kr.co.soogong.master.ui.widget.TextCheckBox
+                        android:id="@+id/checkbox_for_simple_cost_including_vat"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/gap_20"
+                        android:layout_marginEnd="@dimen/gap_20"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/simple_cost"
+                        app:text="@{@string/checkbox_text_for_including_vat}" />
+
+                    <androidx.constraintlayout.widget.Group
+                        android:id="@+id/estimation_integration"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="visible"
+                        app:constraint_referenced_ids="simple_cost, checkbox_for_simple_cost_including_vat"
+                        tools:visibility="visible" />
 
                     <kr.co.soogong.master.ui.widget.TitleEditText
                         android:id="@+id/labor_cost"
@@ -222,20 +241,31 @@
                         app:setInputType="@{InputType.TYPE_CLASS_TEXT}"
                         app:title="@{@string/estimation_total_cost}" />
 
+                    <kr.co.soogong.master.ui.widget.TextCheckBox
+                        android:id="@+id/checkbox_for_total_cost_including_vat"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/gap_20"
+                        android:layout_marginEnd="@dimen/gap_20"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/total_cost"
+                        app:text="@{@string/checkbox_text_for_including_vat}" />
+
                     <androidx.constraintlayout.widget.Group
                         android:id="@+id/estimation_by_item_group"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:visibility="gone"
-                        app:constraint_referenced_ids="labor_cost,material_cost,travel_cost,total_cost"
-                        tools:visibility="visible" />
+                        app:constraint_referenced_ids="labor_cost,material_cost,travel_cost,total_cost, checkbox_for_total_cost_including_vat"
+                        tools:visibility="gone" />
 
                     <androidx.constraintlayout.widget.Barrier
                         android:id="@+id/request_barrier"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:barrierDirection="bottom"
-                        app:constraint_referenced_ids="simpleCost,total_cost" />
+                        app:constraint_referenced_ids="checkbox_for_simple_cost_including_vat, checkbox_for_total_cost_including_vat" />
 
                     <kr.co.soogong.master.ui.widget.AlertBox
                         android:id="@+id/alert_box_for_loading_estimation_template"
