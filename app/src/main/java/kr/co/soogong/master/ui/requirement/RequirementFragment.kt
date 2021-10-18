@@ -12,10 +12,14 @@ import kr.co.soogong.master.data.model.profile.NotApprovedCodeTable
 import kr.co.soogong.master.data.model.profile.RequestApproveCodeTable
 import kr.co.soogong.master.databinding.FragmentRequirementBinding
 import kr.co.soogong.master.ui.base.BaseFragment
+import kr.co.soogong.master.ui.dialog.popup.CustomDialog
+import kr.co.soogong.master.ui.dialog.popup.DialogData
+import kr.co.soogong.master.ui.main.MainActivity
 import kr.co.soogong.master.uihelper.profile.EditRequiredInformationActivityHelper
 import kr.co.soogong.master.uihelper.requirment.RequirementsBadge
 import kr.co.soogong.master.uihelper.requirment.action.SearchActivityHelper
 import timber.log.Timber
+import kotlin.system.exitProcess
 
 @AndroidEntryPoint
 class RequirementFragment : BaseFragment<FragmentRequirementBinding>(
@@ -53,8 +57,8 @@ class RequirementFragment : BaseFragment<FragmentRequirementBinding>(
                 startActivity(EditRequiredInformationActivityHelper.getIntent(requireContext()))
             }
 
-            acceptingMeasurementSwitch.setSwitchClick { button, isChecked ->
-                viewModel.updateRequestMeasureYn(button, isChecked)
+            acceptingMeasurementSwitch.setSwitchClick { _, isChecked ->
+                viewModel.updateRequestMeasureYn(isChecked)
             }
         }
     }
@@ -65,20 +69,33 @@ class RequirementFragment : BaseFragment<FragmentRequirementBinding>(
                 masterDto.approvedStatus == NotApprovedCodeTable.code || masterDto.approvedStatus == RequestApproveCodeTable.code
 
             binding.acceptingMeasurementSwitch.setLayoutForRequestMeasure(masterDto = masterDto)
+
+            if (masterDto.directRepairYn != true) {
+                CustomDialog.newInstance(
+                    dialogData = DialogData.getConfirmingDirectRepairYn(requireContext()),
+                    yesClick = { viewModel.updateDirectRepairYn(true) },
+                    noClick = {
+                        viewModel.updateDirectRepairYn(false)
+                        exitProcess(0)
+                    }
+                ).run {
+                    show(parentFragmentManager, tag)
+                    isCancelable = false
+                }
+            }
         })
 
         viewModel.requestMeasureYn.observe(viewLifecycleOwner, { requestMeasureYn ->
-            binding.acceptingMeasurementSwitch.changeTextAndBackgroundForRequestMeasure(requestMeasureYn)
+            binding.acceptingMeasurementSwitch.changeTextAndBackgroundForRequestMeasure(
+                requestMeasureYn)
         })
     }
 
     override fun onResume() {
         super.onResume()
         Timber.tag(TAG).d("onResume: ")
-        bind {
-            // 필수 정보를 입력하라는 bottom view 를 보여줄지 결정
-            viewModel.requestMasterSimpleInfo()
-        }
+        // 필수 정보를 입력하라는 bottom view 를 보여줄지 결정
+        viewModel.requestMasterSimpleInfo()
     }
 
     override fun setReceivedBadge(badgeCount: Int) {

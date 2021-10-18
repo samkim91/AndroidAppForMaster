@@ -1,6 +1,5 @@
 package kr.co.soogong.master.ui.requirement
 
-import android.widget.CompoundButton
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -11,6 +10,7 @@ import kr.co.soogong.master.data.dto.profile.MasterDto
 import kr.co.soogong.master.data.dto.requirement.repair.RepairDto
 import kr.co.soogong.master.data.model.requirement.RequirementCard
 import kr.co.soogong.master.domain.usecase.profile.GetMasterSimpleInfoUseCase
+import kr.co.soogong.master.domain.usecase.profile.UpdateDirectRepairYnUseCase
 import kr.co.soogong.master.domain.usecase.profile.UpdateRequestMeasureYnUseCase
 import kr.co.soogong.master.domain.usecase.requirement.CallToClientUseCase
 import kr.co.soogong.master.domain.usecase.requirement.RequestReviewUseCase
@@ -24,6 +24,7 @@ open class RequirementViewModel @Inject constructor(
     private val callToClientUseCase: CallToClientUseCase,
     private val requestReviewUseCase: RequestReviewUseCase,
     private val updateRequestMeasureYnUseCase: UpdateRequestMeasureYnUseCase,
+    private val updateDirectRepairYnUseCase: UpdateDirectRepairYnUseCase,
     // TODO: 2021/10/05 필요한 useCase 가 추가될 때마다, params 가 늘어나는 구조이다. DI 를 활용하는 방법을 찾아보자..
 ) : BaseViewModel() {
 
@@ -108,8 +109,9 @@ open class RequirementViewModel @Inject constructor(
             ).addToDisposable()
     }
 
-    fun updateRequestMeasureYn(v: CompoundButton, isChecked: Boolean) {
-        Timber.tag(TAG).d("updateRequestMeasureYn: ${_masterSimpleInfo.value?.requestMeasureYn} to $isChecked")
+    fun updateRequestMeasureYn(isChecked: Boolean) {
+        Timber.tag(TAG)
+            .d("updateRequestMeasureYn: ${_masterSimpleInfo.value?.requestMeasureYn} to $isChecked")
         if (_masterSimpleInfo.value?.requestMeasureYn == isChecked) return
 
         _masterSimpleInfo.value?.uid?.let { uid ->
@@ -127,6 +129,28 @@ open class RequirementViewModel @Inject constructor(
                     }
                 ).addToDisposable()
         }
+    }
+
+    fun updateDirectRepairYn(directRepairYn: Boolean) {
+        Timber.tag(TAG).d("updateDirectRepairYn to: $directRepairYn")
+
+        updateDirectRepairYnUseCase(
+            MasterDto(
+                id = _masterSimpleInfo.value?.id,
+                directRepairYn = directRepairYn)
+        )
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeBy(
+                onSuccess = {
+                    Timber.tag(TAG).d("updateDirectRepairYn successful: $it")
+                    _masterSimpleInfo.value = it
+                },
+                onError = {
+                    Timber.tag(TAG).d("updateDirectRepairYn failed: $it")
+                    setAction(REQUEST_FAILED)
+                }
+            ).addToDisposable()
     }
 
     companion object {

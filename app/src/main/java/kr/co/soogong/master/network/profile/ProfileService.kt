@@ -51,6 +51,12 @@ class ProfileService @Inject constructor(
         return profileInterface.updateFreeMeasureYn(masterDto)
     }
 
+    fun updateDirectRepairYn(
+        masterDto: MasterDto,
+    ): Single<MasterDto> {
+        return profileInterface.updateDirectRepairYn(masterDto)
+    }
+
     fun getPortfoliosByUid(uid: String?): Single<List<PortfolioDto>> {
         return profileInterface.getPortfoliosByUid(uid)
     }

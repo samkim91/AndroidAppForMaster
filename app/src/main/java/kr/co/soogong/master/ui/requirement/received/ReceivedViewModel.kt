@@ -8,6 +8,7 @@ import kr.co.soogong.master.data.model.profile.SecretaryCodeTable
 import kr.co.soogong.master.data.model.requirement.RequirementStatus
 import kr.co.soogong.master.data.model.requirement.RequirementStatus.Companion.receivedStatus
 import kr.co.soogong.master.domain.usecase.profile.GetMasterSimpleInfoUseCase
+import kr.co.soogong.master.domain.usecase.profile.UpdateDirectRepairYnUseCase
 import kr.co.soogong.master.domain.usecase.profile.UpdateRequestMeasureYnUseCase
 import kr.co.soogong.master.domain.usecase.requirement.CallToClientUseCase
 import kr.co.soogong.master.domain.usecase.requirement.GetRequirementCardsUseCase
@@ -23,7 +24,8 @@ class ReceivedViewModel @Inject constructor(
     callToClientUseCase: CallToClientUseCase,
     requestReviewUseCase: RequestReviewUseCase,
     updateRequestMeasureYnUseCase: UpdateRequestMeasureYnUseCase,
-) : RequirementViewModel(getMasterSimpleInfoUseCase, callToClientUseCase, requestReviewUseCase, updateRequestMeasureYnUseCase) {
+    updateDirectRepairYnUseCase: UpdateDirectRepairYnUseCase,
+) : RequirementViewModel(getMasterSimpleInfoUseCase, callToClientUseCase, requestReviewUseCase, updateRequestMeasureYnUseCase, updateDirectRepairYnUseCase) {
 
     override fun requestList() {
         Timber.tag(TAG).d("requestList: ${index.value}")

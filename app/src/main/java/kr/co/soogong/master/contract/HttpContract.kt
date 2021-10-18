@@ -50,6 +50,7 @@ object HttpContract {
     const val SAVE_MASTER = "master/save"
     const val UPDATE_REQUEST_MEASURE_YN = "master/request-measure-yn"
     const val UPDATE_FREE_MEASURE_YN = "master/free-measure-yn"
+    const val UPDATE_DIRECT_REPAIR_YN = "master/direct-repair-yn"
     const val REQUEST_REVIEW_BY_SHARING = "https://soogong.co.kr/my-soogong/easy-review/"
     //endregion
 

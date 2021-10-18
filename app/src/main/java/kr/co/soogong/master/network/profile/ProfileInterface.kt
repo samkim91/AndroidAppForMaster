@@ -40,6 +40,12 @@ interface ProfileInterface {
     ): Single<MasterDto>
 
     @FormUrlEncoded
+    @PATCH(HttpContract.UPDATE_DIRECT_REPAIR_YN)
+    fun updateDirectRepairYn(
+        @Field("masterDto") masterDto: MasterDto,
+    ): Single<MasterDto>
+
+    @FormUrlEncoded
     @PATCH(HttpContract.UPDATE_FREE_MEASURE_YN)
     fun updateFreeMeasureYn(
         @Field("masterDto") masterDto: MasterDto,
