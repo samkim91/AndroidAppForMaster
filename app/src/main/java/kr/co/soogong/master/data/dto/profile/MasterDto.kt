@@ -107,6 +107,9 @@ data class MasterDto(
     @SerializedName("secretaryYn")
     val secretaryYn: Boolean? = null,
 
+    @SerializedName("directRepairYn")
+    val directRepairYn: Boolean? = null,
+
     @SerializedName("requestMeasureYn")
     val requestMeasureYn: Boolean? = null,
 

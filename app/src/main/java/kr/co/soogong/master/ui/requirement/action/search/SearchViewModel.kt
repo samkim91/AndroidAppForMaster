@@ -6,6 +6,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.domain.usecase.profile.GetMasterSimpleInfoUseCase
+import kr.co.soogong.master.domain.usecase.profile.UpdateDirectRepairYnUseCase
 import kr.co.soogong.master.domain.usecase.profile.UpdateRequestMeasureYnUseCase
 import kr.co.soogong.master.domain.usecase.requirement.CallToClientUseCase
 import kr.co.soogong.master.domain.usecase.requirement.RequestReviewUseCase
@@ -21,7 +22,8 @@ class SearchViewModel @Inject constructor(
     callToClientUseCase: CallToClientUseCase,
     requestReviewUseCase: RequestReviewUseCase,
     updateRequestMeasureYnUseCase: UpdateRequestMeasureYnUseCase,
-) : RequirementViewModel(getMasterSimpleInfoUseCase, callToClientUseCase, requestReviewUseCase, updateRequestMeasureYnUseCase) {
+    updateDirectRepairYnUseCase: UpdateDirectRepairYnUseCase,
+) : RequirementViewModel(getMasterSimpleInfoUseCase, callToClientUseCase, requestReviewUseCase, updateRequestMeasureYnUseCase, updateDirectRepairYnUseCase) {
 
     val searchingText = MutableLiveData("")
 

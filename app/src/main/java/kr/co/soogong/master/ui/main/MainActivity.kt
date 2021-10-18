@@ -7,7 +7,6 @@ import androidx.activity.viewModels
 import androidx.core.content.res.ResourcesCompat
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
-import kr.co.soogong.master.BuildConfig
 import kr.co.soogong.master.R
 import kr.co.soogong.master.SoogongMasterMessagingService.Companion.initNotificationChannel
 import kr.co.soogong.master.SoogongMasterMessagingService.Companion.removeBrokenChannel
@@ -38,11 +37,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
         registerFCM()
         removeBrokenChannel(this)
         initNotificationChannel(this)
-    }
-
-    override fun onStart() {
-        super.onStart()
-        viewModel.getMasterSimpleInfo()
     }
 
     private fun registerFCM() {
@@ -86,7 +80,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
                                             setPackage("com.android.vending")
                                         })
                                     },
-                                    noClick = { }
+                                    noClick = {
+                                        if (versionDto.mandatoryYn) exitProcess(0)
+                                    }
                                 ).run {
                                     if (versionDto.mandatoryYn) isCancelable = false
                                     show(supportFragmentManager, tag)
