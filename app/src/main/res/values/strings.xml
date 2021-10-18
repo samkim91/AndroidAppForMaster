@@ -219,6 +219,8 @@
     <string name="integration_estimation">통합 견적</string>
     <string name="estimation_by_item">항목별 견적</string>
 
+    <string name="checkbox_text_for_including_vat">부가세 포함</string>
+
     <string name="alert_box_title_for_loading_estimation_template">자주쓰는 제안 내용 불러오기</string>
     <string name="checkbox_text_for_adding_estimation_template">자주 쓰는 제안 내용에 추가하기</string>
     <string name="alert_box_title_for_estimation_template">주의 : 명함, 간판 등 직거래 유도 시 서비스 이용이 제한됩니다.</string>

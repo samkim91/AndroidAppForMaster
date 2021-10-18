@@ -71,7 +71,9 @@ class WriteEstimationActivity : BaseActivity<ActivityWriteEstimationBinding>(
                             viewModel.sendEstimation()
                         }
                     } else {
-                        if ((!laborCost.alertVisible && !materialCost.alertVisible && !travelCost.alertVisible) && ValidationHelper.isIntRange(viewModel.totalCost.value!!)) {
+                        if ((!laborCost.alertVisible && !materialCost.alertVisible && !travelCost.alertVisible) && ValidationHelper.isIntRange(
+                                viewModel.totalCost.value!!)
+                        ) {
                             showLoading(supportFragmentManager)
                             viewModel.sendEstimation()
                         }
@@ -82,22 +84,15 @@ class WriteEstimationActivity : BaseActivity<ActivityWriteEstimationBinding>(
             requestTypeGroup.setOnCheckedChangeListener { _, checkedId ->
                 when (checkedId) {
                     filterOption1.id -> {
-                        simpleCost.visibility = View.VISIBLE
+                        estimationIntegration.visibility = View.VISIBLE
                         estimationByItemGroup.visibility = View.GONE
                         viewModel.estimationType.value = EstimationTypeCode.INTEGRATION
                     }
 
                     filterOption2.id -> {
-                        simpleCost.visibility = View.GONE
+                        estimationIntegration.visibility = View.GONE
                         estimationByItemGroup.visibility = View.VISIBLE
                         viewModel.estimationType.value = EstimationTypeCode.BY_ITEM
-                        totalCost.setEditTextBackground(
-                            ResourcesCompat.getDrawable(
-                                resources,
-                                R.drawable.shape_gray_background_gray_border_radius50,
-                                null
-                            )
-                        )
                     }
                 }
             }
@@ -114,13 +109,28 @@ class WriteEstimationActivity : BaseActivity<ActivityWriteEstimationBinding>(
                 }
             })
 
+            totalCost.setEditTextBackground(
+                ResourcesCompat.getDrawable(
+                    resources,
+                    R.drawable.shape_gray_background_gray_border_radius50,
+                    null
+                )
+            )
+
+            checkboxForSimpleCostIncludingVat.checkBox.setOnCheckedChangeListener { _, isChecked ->
+                viewModel.includingVat.value = isChecked
+            }
+
+            checkboxForTotalCostIncludingVat.checkBox.setOnCheckedChangeListener { _, isChecked ->
+                viewModel.includingVat.value = isChecked
+            }
+
             alertBoxForLoadingEstimationTemplate.setOnClickListener {
                 estimationTemplateLauncher.launch(EstimationTemplatesActivityHelper.getIntent(this@WriteEstimationActivity))
             }
 
-            checkboxForAddingEstimationTemplate.setCheckClick {
-                viewModel.isSavingTemplate.value =
-                    checkboxForAddingEstimationTemplate.checkBox.isChecked
+            checkboxForAddingEstimationTemplate.checkBox.setOnCheckedChangeListener { _, isChecked ->
+                viewModel.isSavingTemplate.value = isChecked
             }
 
             estimationImagesPicker.setAdapter { viewModel.estimationImages.removeAt(it) }

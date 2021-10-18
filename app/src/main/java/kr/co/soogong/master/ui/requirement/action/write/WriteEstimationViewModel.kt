@@ -26,7 +26,7 @@ import javax.inject.Inject
 class WriteEstimationViewModel @Inject constructor(
     private val saveEstimationUseCase: SaveEstimationUseCase,
     private val getRequirementUseCase: GetRequirementUseCase,
-    val savedStateHandle: SavedStateHandle
+    val savedStateHandle: SavedStateHandle,
 ) : BaseViewModel() {
 
     private val requirementId =
@@ -44,6 +44,8 @@ class WriteEstimationViewModel @Inject constructor(
     val materialCost = MutableLiveData("")
     val travelCost = MutableLiveData("")
     val totalCost = MutableLiveData("")
+
+    val includingVat = MutableLiveData(false)
 
     val description = MutableLiveData("")
 
@@ -83,6 +85,7 @@ class WriteEstimationViewModel @Inject constructor(
                         simpleCost.value?.replace(",", "")?.toInt()
                     }
                 },
+                includingVat = includingVat.value,
                 isSavingTemplate = isSavingTemplate.value ?: false,
                 description = description.value,
                 estimationPrices = when (estimationType.value) {
