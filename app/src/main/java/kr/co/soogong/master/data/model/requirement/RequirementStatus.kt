@@ -34,7 +34,7 @@ sealed class RequirementStatus {
     object Estimated : RequirementStatus() {
         override val inKorean = "매칭대기"
         override val code = "Estimated"
-        override val asInt = 101
+        override val asInt = 103
         override val introductionText = "고객의 선택을 기다려주세요"
     }
     // end region : Received Tab
