@@ -8,8 +8,8 @@ import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.dto.requirement.RequirementDto
 import kr.co.soogong.master.data.dto.requirement.repair.RepairDto
-import kr.co.soogong.master.domain.usecase.requirement.SaveRepairUseCase
 import kr.co.soogong.master.domain.usecase.requirement.GetRequirementUseCase
+import kr.co.soogong.master.domain.usecase.requirement.SaveRepairUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import kr.co.soogong.master.uihelper.requirment.action.EndRepairActivityHelper
 import timber.log.Timber
@@ -20,7 +20,7 @@ import javax.inject.Inject
 class EndRepairViewModel @Inject constructor(
     private val getRequirementUseCase: GetRequirementUseCase,
     private val saveRepairUseCase: SaveRepairUseCase,
-    val savedStateHandle: SavedStateHandle
+    val savedStateHandle: SavedStateHandle,
 ) : BaseViewModel() {
     private val requirementId =
         EndRepairActivityHelper.getRequirementIdFromSavedState(savedStateHandle)
@@ -29,6 +29,7 @@ class EndRepairViewModel @Inject constructor(
 
     val actualPrice = MutableLiveData("")
     val actualDate = MutableLiveData(Calendar.getInstance())
+    val includingVat = MutableLiveData(false)
 
     fun requestRequirement() {
         Timber.tag(TAG).d("requestRequirement: $requirementId")
@@ -57,6 +58,7 @@ class EndRepairViewModel @Inject constructor(
                 estimationId = _requirement.value?.estimationDto?.id,
                 actualDate = actualDate.value?.time,
                 actualPrice = actualPrice.value?.replace(",", "")?.toInt(),
+                includingVat = includingVat.value,
                 warrantyDueDate = actualDate.value?.let { // TODO: 2021/06/23 추후 백엔드에서 하는 것으로 수정 필요...
                     val warrantyDate = it
                     warrantyDate.add(Calendar.YEAR, 1)

@@ -25,7 +25,7 @@ class DoneViewHolder(
         context: Context,
         fragmentManager: FragmentManager,
         viewModel: RequirementViewModel,
-        requirementCard: RequirementCard
+        requirementCard: RequirementCard,
     ) {
         super.bind(context, fragmentManager, viewModel, requirementCard)
 
@@ -37,6 +37,8 @@ class DoneViewHolder(
                     type = MONEY_TYPE,
                     titleData = context.getString(R.string.requirements_card_amount_done_title),
                     contentData = "${moneyFormat.format(requirementCard.estimationDto?.repair?.actualPrice)}원",
+                    extraData = if (requirementCard.estimationDto?.repair?.actualPrice!! > 0) context.getString(
+                        if (requirementCard.estimationDto.repair.includingVat == true) R.string.vat_included else R.string.vat_not_included) else "",
                     alertData = ""
                 )
             })
@@ -46,6 +48,7 @@ class DoneViewHolder(
                     type = CALENDAR_TYPE,
                     titleData = context.getString(R.string.requirements_card_done_date),
                     contentData = dateFormatWithoutHour.format(requirementCard.estimationDto?.repair?.actualDate),
+                    extraData = "",
                     alertData = ""
                 )
             })
@@ -73,7 +76,7 @@ class ClosedViewHolder(
         context: Context,
         fragmentManager: FragmentManager,
         viewModel: RequirementViewModel,
-        requirementCard: RequirementCard
+        requirementCard: RequirementCard,
     ) {
         super.bind(context, fragmentManager, viewModel, requirementCard)
 
@@ -93,6 +96,8 @@ class ClosedViewHolder(
                     type = MONEY_TYPE,
                     titleData = context.getString(R.string.requirements_card_amount_done_title),
                     contentData = "${moneyFormat.format(requirementCard.estimationDto?.repair?.actualPrice)}원",
+                    extraData = if (requirementCard.estimationDto?.repair?.actualPrice!! > 0) context.getString(
+                        if (requirementCard.estimationDto.repair.includingVat == true) R.string.vat_included else R.string.vat_not_included) else "",
                     alertData = ""
                 )
             })
@@ -102,6 +107,7 @@ class ClosedViewHolder(
                     type = CALENDAR_TYPE,
                     titleData = context.getString(R.string.requirements_card_done_date),
                     contentData = dateFormatWithoutHour.format(requirementCard.estimationDto?.repair?.actualDate),
+                    extraData = "",
                     alertData = ""
                 )
             })
@@ -117,7 +123,7 @@ class CanceledViewHolder(
         context: Context,
         fragmentManager: FragmentManager,
         viewModel: RequirementViewModel,
-        requirementCard: RequirementCard
+        requirementCard: RequirementCard,
     ) {
         super.bind(context, fragmentManager, viewModel, requirementCard)
 

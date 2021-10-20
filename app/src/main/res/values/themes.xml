@@ -66,6 +66,22 @@
         <item name="android:textColor">@color/list_item_description_text_color</item>
     </style>
 
+    <style name="text_style_10sp">
+        <item name="android:textSize">@dimen/text_size_10sp</item>
+    </style>
+
+    <style name="text_style_10sp.medium" parent="text_style_10sp">
+        <item name="android:fontFamily">@font/medium</item>
+    </style>
+
+    <style name="text_style_10sp.regular" parent="text_style_10sp">
+        <item name="android:fontFamily">@font/regular</item>
+    </style>
+
+    <style name="text_style_10sp.bold" parent="text_style_10sp">
+        <item name="android:fontFamily">@font/bold</item>
+    </style>
+
     <style name="text_style_12sp">
         <item name="android:textSize">@dimen/text_size_12sp</item>
     </style>

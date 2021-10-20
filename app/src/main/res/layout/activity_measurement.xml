@@ -40,7 +40,7 @@
                 android:layout_height="wrap_content">
 
                 <kr.co.soogong.master.ui.widget.TitleEditText
-                    android:id="@+id/simpleCost"
+                    android:id="@+id/simple_cost"
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/gap_20"
@@ -58,6 +58,17 @@
                     app:setMaxLength="@{10}"
                     app:title="@{@string/estimation_price_text}" />
 
+                <kr.co.soogong.master.ui.widget.TextCheckBox
+                    android:id="@+id/checkbox_for_simple_cost_including_vat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/gap_20"
+                    android:layout_marginEnd="@dimen/gap_20"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/simple_cost"
+                    app:text="@{@string/checkbox_text_for_including_vat}" />
+
                 <kr.co.soogong.master.ui.widget.TitleRecyclerImage
                     android:id="@+id/measurement_images_picker"
                     android:layout_width="match_parent"
@@ -68,7 +79,7 @@
                     app:images="@{vm.estimationImages}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/simpleCost"
+                    app:layout_constraintTop_toBottomOf="@id/checkbox_for_simple_cost_including_vat"
                     app:title="@{@string/measure_image_holder_label}" />
 
                 <kr.co.soogong.master.ui.widget.AlertBox

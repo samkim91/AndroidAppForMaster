@@ -31,7 +31,7 @@ open class ProgressCardViewHolder(
         context: Context,
         fragmentManager: FragmentManager,
         viewModel: RequirementViewModel,
-        requirementCard: RequirementCard
+        requirementCard: RequirementCard,
     ) {
         super.bind(context, fragmentManager, viewModel, requirementCard)
 
@@ -80,7 +80,7 @@ class MeasuringCardViewHolder(
         context: Context,
         fragmentManager: FragmentManager,
         viewModel: RequirementViewModel,
-        requirementCard: RequirementCard
+        requirementCard: RequirementCard,
     ) {
         super.bind(context, fragmentManager, viewModel, requirementCard)
 
@@ -118,7 +118,7 @@ class MeasuredCardViewHolder(
         context: Context,
         fragmentManager: FragmentManager,
         viewModel: RequirementViewModel,
-        requirementCard: RequirementCard
+        requirementCard: RequirementCard,
     ) {
         super.bind(context, fragmentManager, viewModel, requirementCard)
 
@@ -138,6 +138,7 @@ class MeasuredCardViewHolder(
                     type = MONEY_TYPE,
                     titleData = context.getString(R.string.requirements_card_amount_title),
                     contentData = "${moneyFormat.format(requirementCard.estimationDto?.price)}원",
+                    extraData = context.getString(if (requirementCard.estimationDto?.includingVat == true) R.string.vat_included else R.string.vat_not_included),
                     alertData = ""
                 )
             })
@@ -153,7 +154,7 @@ class RepairingCardViewHolder(
         context: Context,
         fragmentManager: FragmentManager,
         viewModel: RequirementViewModel,
-        requirementCard: RequirementCard
+        requirementCard: RequirementCard,
     ) {
         super.bind(context, fragmentManager, viewModel, requirementCard)
 
@@ -169,6 +170,7 @@ class RepairingCardViewHolder(
                             requirementCard.estimationDto.price
                         )
                     }원" else context.getString(R.string.not_estimated_text),
+                    extraData = if (requirementCard.estimationDto.price > 0) context.getString(if (requirementCard.estimationDto.includingVat == true) R.string.vat_included else R.string.vat_not_included) else "",
                     alertData = ""
                 )
             })
@@ -184,7 +186,7 @@ class RequestFinishCardViewHolder(
         context: Context,
         fragmentManager: FragmentManager,
         viewModel: RequirementViewModel,
-        requirementCard: RequirementCard
+        requirementCard: RequirementCard,
     ) {
         super.bind(context, fragmentManager, viewModel, requirementCard)
 
