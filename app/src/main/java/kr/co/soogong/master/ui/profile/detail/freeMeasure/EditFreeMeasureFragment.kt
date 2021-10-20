@@ -35,19 +35,17 @@ class EditFreeMeasureFragment : BaseFragment<FragmentEditFreeMeasureBinding>(
             lifecycleOwner = viewLifecycleOwner
 
             defaultButton.setOnClickListener {
-                if (viewModel.agree.value == null || viewModel.disagree.value == null) return@setOnClickListener
+                if (viewModel.agreement.value == null) return@setOnClickListener
 
                 viewModel.saveFreeMeasure()
             }
 
             agreeCheckbox.setCheckClick {
-                viewModel.agree.value = true
-                viewModel.disagree.value = false
+                viewModel.agreement.value = true
             }
 
             disagreeCheckbox.setCheckClick {
-                viewModel.agree.value = false
-                viewModel.disagree.value = true
+                viewModel.agreement.value = false
             }
         }
     }

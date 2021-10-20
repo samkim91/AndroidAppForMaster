@@ -14,7 +14,7 @@ import kr.co.soogong.master.ui.*
 class RequirementCardAdditionalInfo @JvmOverloads constructor(
     context: Context,
     attributeSet: AttributeSet? = null,
-    defStyle: Int = 0
+    defStyle: Int = 0,
 ) : ConstraintLayout(context, attributeSet, defStyle) {
     private var binding =
         ViewRequirementCardAdditionalInfoBinding.inflate(LayoutInflater.from(context), this, true)
@@ -24,7 +24,8 @@ class RequirementCardAdditionalInfo @JvmOverloads constructor(
         type: Int,
         titleData: String?,
         contentData: String?,
-        alertData: String
+        extraData: String?,
+        alertData: String?,
     ) {
         setTheme(theme)
         setType(type)
@@ -32,9 +33,16 @@ class RequirementCardAdditionalInfo @JvmOverloads constructor(
         with(binding) {
             key = titleData
             value = contentData
-            alert = alertData
 
-            alertTextview.isVisible = alertData.isNotEmpty()
+            if (!extraData.isNullOrEmpty()) {
+                extraTextview.isVisible = true
+                extra = extraData
+            }
+
+            if (!alertData.isNullOrEmpty()) {
+                alertTextview.isVisible = true
+                alert = alertData
+            }
         }
     }
 
@@ -79,17 +87,20 @@ class RequirementCardAdditionalInfo @JvmOverloads constructor(
     companion object {
         fun setContainerTheme(context: Context, container: LinearLayoutCompat, theme: Int) {
             container.isVisible = true
-            when(theme) {
+            when (theme) {
                 ORANGE_THEME -> {
-                    container.backgroundTintList = ColorStateList.valueOf(context.getColor(R.color.color_FFF2EB))
+                    container.backgroundTintList =
+                        ColorStateList.valueOf(context.getColor(R.color.color_FFF2EB))
                     container.dividerDrawable.setTintList(ColorStateList.valueOf(context.getColor(R.color.color_FFE1D2)))
                 }
                 GREEN_THEME -> {
-                    container.backgroundTintList = ColorStateList.valueOf(context.getColor(R.color.color_F0FCF2))
+                    container.backgroundTintList =
+                        ColorStateList.valueOf(context.getColor(R.color.color_F0FCF2))
                     container.dividerDrawable.setTintList(ColorStateList.valueOf(context.getColor(R.color.color_D4FADB)))
                 }
                 else -> {
-                    container.backgroundTintList = ColorStateList.valueOf(context.getColor(R.color.color_F8F8F8))
+                    container.backgroundTintList =
+                        ColorStateList.valueOf(context.getColor(R.color.color_F8F8F8))
                     container.dividerDrawable.setTintList(ColorStateList.valueOf(context.getColor(R.color.color_E3E3E3)))
                 }
             }

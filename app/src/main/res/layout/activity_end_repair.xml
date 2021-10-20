@@ -31,7 +31,7 @@
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/banner_image"
                     android:layout_width="0dp"
-                    android:layout_height="120dp"
+                    android:layout_height="@dimen/gap_120"
                     android:scaleType="centerCrop"
                     android:src="@drawable/ic_banner_5"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -42,34 +42,45 @@
                     android:id="@+id/actual_price"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="32dp"
-                    android:layout_marginEnd="20dp"
+                    android:layout_marginStart="@dimen/gap_20"
+                    android:layout_marginTop="@dimen/gap_32"
+                    android:layout_marginEnd="@dimen/gap_20"
                     android:textColor="@color/text_basic_color"
-                    app:alertText='@{"견적은 1만원 이상으로 보내주세요."}'
+                    app:alertText="@{@string/minimum_cost}"
                     app:alertVisible="@{false}"
                     app:content="@={vm.actualPrice}"
-                    app:hintText='@{"숫자만 입력해주세요. (단위 : 원)"}'
+                    app:hintText="@{@string/insert_number_only_with_unit_text}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/banner_image"
                     app:setInputType="@{InputType.TYPE_CLASS_NUMBER}"
                     app:setMaxLength="@{13}"
-                    app:title='@{"고객과 거래한 최종시공가를 입력해주세요."}' />
+                    app:title="@{@string/end_estimate_price_title}" />
+
+                <kr.co.soogong.master.ui.widget.TextCheckBox
+                    android:id="@+id/checkbox_for_actual_price_including_vat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/gap_20"
+                    android:layout_marginEnd="@dimen/gap_20"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/actual_price"
+                    app:text="@{@string/checkbox_text_for_including_vat}" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/calender_title"
                     style="@style/text_style_16sp.medium"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="28dp"
-                    android:layout_marginEnd="20dp"
+                    android:layout_marginStart="@dimen/gap_20"
+                    android:layout_marginTop="@dimen/gap_28"
+                    android:layout_marginEnd="@dimen/gap_20"
                     android:text="@string/end_estimate_calendar_title"
                     android:textColor="@color/text_basic_color"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/actual_price" />
+                    app:layout_constraintTop_toBottomOf="@id/checkbox_for_actual_price_including_vat" />
 
                 <CalendarView
                     android:id="@+id/calender"

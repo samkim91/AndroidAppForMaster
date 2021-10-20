@@ -1,11 +1,8 @@
 package kr.co.soogong.master.ui.widget
 
-import android.widget.CompoundButton
-import androidx.appcompat.widget.AppCompatButton
 import androidx.databinding.BindingAdapter
 import androidx.databinding.InverseBindingAdapter
 import androidx.databinding.InverseBindingListener
-import timber.log.Timber
 
 object TextCheckBoxReverseBinding {
     @JvmStatic

@@ -121,6 +121,10 @@
     <string name="requirements_card_due_time_alert">마감시간이 지나면 해당 문의가 삭제됩니다.</string>
     <string name="not_estimated_text">견적 미발송</string>
     <string name="measurement_text">현장실측</string>
+    <string name="vat_included">부가세 포함</string>
+    <string name="vat_not_included">부가세 미포함</string>
+
+
 
     <!-- View Requirement -->
     <string name="requirement_drawer_title_of_customer_review">고객 리뷰</string>

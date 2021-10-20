@@ -3,7 +3,6 @@ package kr.co.soogong.master.data.dto.requirement.repair
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
-import kr.co.soogong.master.data.dto.AttachmentDto
 import kr.co.soogong.master.data.dto.requirement.review.ReviewDto
 import java.util.*
 
@@ -26,6 +25,9 @@ data class RepairDto(
 
     @SerializedName("actualPrice")
     val actualPrice: Int? = null,
+
+    @SerializedName("vatYn")
+    val includingVat: Boolean? = null,
 
     @SerializedName("warrantyDueDate")
     val warrantyDueDate: Date? = null,

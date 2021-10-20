@@ -137,6 +137,7 @@ open class RequirementViewModel @Inject constructor(
         updateDirectRepairYnUseCase(
             MasterDto(
                 id = _masterSimpleInfo.value?.id,
+                uid = _masterSimpleInfo.value?.uid,
                 directRepairYn = directRepairYn)
         )
             .subscribeOn(Schedulers.io())
@@ -145,6 +146,7 @@ open class RequirementViewModel @Inject constructor(
                 onSuccess = {
                     Timber.tag(TAG).d("updateDirectRepairYn successful: $it")
                     _masterSimpleInfo.value = it
+                    sendEvent(UPDATE_DIRECT_REPAIR_SUCCESSFULLY, it.directRepairYn!!)
                 },
                 onError = {
                     Timber.tag(TAG).d("updateDirectRepairYn failed: $it")
@@ -156,6 +158,7 @@ open class RequirementViewModel @Inject constructor(
     companion object {
         private const val TAG = "RequirementViewModel"
         const val ASK_FOR_REVIEW_SUCCESSFULLY = "ASK_FOR_REVIEW_SUCCESSFULLY"
+        const val UPDATE_DIRECT_REPAIR_SUCCESSFULLY = "UPDATE_DIRECT_REPAIR_SUCCESSFULLY"
         const val ASK_FOR_REVIEW_FAILED = "ASK_FOR_REVIEW_FAILED"
         const val REQUEST_FAILED = "REQUEST_FAILED"
     }

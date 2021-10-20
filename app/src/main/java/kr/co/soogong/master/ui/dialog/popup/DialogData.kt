@@ -216,9 +216,9 @@ data class DialogData(
 
         fun getConfirmingDirectRepairYn(context: Context) =
             DialogData(
-                "변경사항 확인",
+                "직접 시공하시나요?",
                 context.getColor(R.color.text_basic_color),
-                "수공은 직접 시공하는 마스터님만 사용할 수 있는 서비스입니다. 직접 시공하지 않으면 서비스 이용이 제한됩니다.",
+                "수공은 직접 시공하는 마스터님만 사용할 수\n있는 서비스입니다. 직접 시공하지 않으면\n 서비스 이용이 제한됩니다.",
                 context.getColor(R.color.text_alert_color),
                 "네",
                 context.getColor(R.color.text_basic_color),

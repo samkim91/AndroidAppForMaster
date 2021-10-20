@@ -70,7 +70,8 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                             dialogData = DialogData.getConfirmRepairDoneDialogData(this@ViewRequirementActivity),
                             yesClick = {
                                 startActivity(
-                                    EndRepairActivityHelper.getIntent(this@ViewRequirementActivity, it)
+                                    EndRepairActivityHelper.getIntent(this@ViewRequirementActivity,
+                                        it)
                                 )
                             },
                             noClick = {}
@@ -362,7 +363,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                         context = this@ViewRequirementActivity,
                         container = flexibleContainer,
                         requirementDto = requirement,
-                        contentType = ESTIMATION_TYPE,
+                        contentType = REPAIR_TYPE,
                         isSpread = false,
                         includingCancel = false
                     )
