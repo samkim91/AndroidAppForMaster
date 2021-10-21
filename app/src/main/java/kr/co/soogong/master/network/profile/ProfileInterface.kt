@@ -33,6 +33,7 @@ interface ProfileInterface {
         @Part afterImageFile: MultipartBody.Part?,
     ): Single<PortfolioDto>
 
+    @FormUrlEncoded
     @PATCH(HttpContract.UPDATE_REQUEST_MEASURE_YN)
     fun updateRequestMeasureYn(
         @Field("uid") uid: String,
