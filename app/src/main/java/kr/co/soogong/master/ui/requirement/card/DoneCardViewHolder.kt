@@ -12,6 +12,7 @@ import kr.co.soogong.master.ui.GRAY_THEME
 import kr.co.soogong.master.ui.GREEN_THEME
 import kr.co.soogong.master.ui.MONEY_TYPE
 import kr.co.soogong.master.ui.requirement.RequirementViewModel
+import kr.co.soogong.master.ui.requirement.done.DoneViewModel
 import kr.co.soogong.master.ui.widget.RequirementCardAdditionalInfo
 import kr.co.soogong.master.ui.widget.RequirementCardAdditionalInfo.Companion.setContainerTheme
 
@@ -56,7 +57,7 @@ class DoneViewHolder(
             rightButton.isVisible = true
             rightButton.isEnabled = true
             rightButton.setText(R.string.requirements_card_review_button)
-            setRightButtonClickListener { viewModel.askForReview(requirementCard) }
+            setRightButtonClickListener { (viewModel as DoneViewModel).askForReview(requirementCard) }
 
             requirementCard.estimationDto?.repair?.requestReviewYn?.let { requestReviewYn ->
                 if (requestReviewYn) {

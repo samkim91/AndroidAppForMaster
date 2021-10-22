@@ -5,25 +5,15 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import kr.co.soogong.master.domain.usecase.profile.GetMasterSimpleInfoUseCase
-import kr.co.soogong.master.domain.usecase.profile.UpdateDirectRepairYnUseCase
-import kr.co.soogong.master.domain.usecase.profile.UpdateRequestMeasureYnUseCase
-import kr.co.soogong.master.domain.usecase.requirement.CallToClientUseCase
-import kr.co.soogong.master.domain.usecase.requirement.RequestReviewUseCase
-import kr.co.soogong.master.domain.usecase.requirement.SearchRequirementCardsUseCase
 import kr.co.soogong.master.ui.requirement.RequirementViewModel
+import kr.co.soogong.master.ui.requirement.RequirementViewModelAggregate
 import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class SearchViewModel @Inject constructor(
-    private val searchRequirementCardsUseCase: SearchRequirementCardsUseCase,
-    getMasterSimpleInfoUseCase: GetMasterSimpleInfoUseCase,
-    callToClientUseCase: CallToClientUseCase,
-    requestReviewUseCase: RequestReviewUseCase,
-    updateRequestMeasureYnUseCase: UpdateRequestMeasureYnUseCase,
-    updateDirectRepairYnUseCase: UpdateDirectRepairYnUseCase,
-) : RequirementViewModel(getMasterSimpleInfoUseCase, callToClientUseCase, requestReviewUseCase, updateRequestMeasureYnUseCase, updateDirectRepairYnUseCase) {
+    private val requirementViewModelAggregate: RequirementViewModelAggregate,
+) : RequirementViewModel(requirementViewModelAggregate) {
 
     val searchingText = MutableLiveData("")
 
@@ -37,7 +27,7 @@ class SearchViewModel @Inject constructor(
         Timber.tag(TAG).d("searchRequirements: ${searchingText.value} / ${searchingPeriod.value}")
         if (searchingText.value.isNullOrEmpty()) return
 
-        searchRequirementCardsUseCase(
+        requirementViewModelAggregate.searchRequirementCardsUseCase(
             searchingText = searchingText.value!!,
             searchingPeriod = searchingPeriod.value!!
         )
