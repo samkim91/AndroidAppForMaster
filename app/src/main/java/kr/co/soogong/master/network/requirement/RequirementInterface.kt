@@ -4,6 +4,7 @@ import com.google.gson.JsonObject
 import io.reactivex.Single
 import kr.co.soogong.master.contract.HttpContract
 import kr.co.soogong.master.data.dto.common.Code
+import kr.co.soogong.master.data.dto.requirement.CustomerRequest
 import kr.co.soogong.master.data.dto.requirement.RequirementDto
 import kr.co.soogong.master.data.dto.requirement.estimation.EstimationDto
 import kr.co.soogong.master.data.dto.requirement.estimationTemplate.EstimationTemplateDto
@@ -66,4 +67,8 @@ interface RequirementInterface {
     @POST(HttpContract.REQUEST_REVIEW)
     fun requestReview(@Body repairDto: RepairDto): Single<JsonObject>
 
+    @GET(HttpContract.GET_CUSTOMER_REQUESTS)
+    fun getCustomerRequests(
+        @Query("uid") masterUid: String,
+    ): Single<CustomerRequest>
 }
