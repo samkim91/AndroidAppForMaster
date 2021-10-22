@@ -2,6 +2,7 @@ package kr.co.soogong.master.network.requirement
 
 import com.google.gson.JsonObject
 import io.reactivex.Single
+import kr.co.soogong.master.data.dto.common.Code
 import kr.co.soogong.master.data.dto.requirement.RequirementDto
 import kr.co.soogong.master.data.dto.requirement.estimation.EstimationDto
 import kr.co.soogong.master.data.dto.requirement.estimationTemplate.EstimationTemplateDto
@@ -61,6 +62,8 @@ class RequirementService @Inject constructor(
     fun deleteEstimationTemplate(id: Int): Single<Boolean> {
         return requirementInterface.deleteEstimationTemplate(id)
     }
+
+    fun getCanceledReasons(groupCodes: List<String>) = requirementInterface.getCanceledReasons(groupCodes)
 
     fun callToClient(estimationId: Int): Single<Boolean> {
         val data = HashMap<String, Any>()

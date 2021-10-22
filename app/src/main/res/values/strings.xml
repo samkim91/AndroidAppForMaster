@@ -7,6 +7,7 @@
     <string name="sign_up_sign_in_button_text">로그인</string>
     <string name="sign_up_sign_up_button_text">가입신청</string>
     <string name="alert_required_field">필수 정보입니다.</string>
+    <string name="alert_fill_text_over_10">10자 이상으로 입력해주세요.</string>
     <string name="retype_phone_number_button_text">휴대폰번호 재입력</string>
     <string name="check_certification_code_button_text">인증완료</string>
     <string name="alert_wrong_certification_code">인증번호가 틀립니다.</string>

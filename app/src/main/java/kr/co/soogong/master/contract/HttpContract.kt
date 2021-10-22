@@ -37,6 +37,10 @@ object HttpContract {
     const val REQUEST_REVIEW = "repair/request-review"
     //endregion
 
+    //region Cancel
+    const val GET_CANCELED_REASONS = "code/find-all-by-groupCodes"
+    //endregion
+
     //region Estimation Template
     const val GET_ESTIMATION_TEMPLATES = "estimation-template/find-by-master-uid"
     const val SAVE_ESTIMATION_TEMPLATE = "estimation-template"
