@@ -49,25 +49,7 @@ class MainViewModel @Inject constructor(
             .addToDisposable()
     }
 
-    fun checkLatestVersion() {
-        Timber.tag(TAG).d("checkLatestVersion: ")
-
-        getVersionUseCase()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeBy(
-                onSuccess = {
-                    Timber.tag(TAG).d("getLatestVersion success: $it")
-                    sendEvent(GET_VERSION_SUCCESSFULLY, it)
-                },
-                onError = {
-                    Timber.tag(TAG).d("getLatestVersion failed: $it")
-                }
-            ).addToDisposable()
-    }
-
     companion object {
         private const val TAG = "MainViewModel"
-        const val GET_VERSION_SUCCESSFULLY = "GET_VERSION_SUCCESSFULLY"
     }
 }
