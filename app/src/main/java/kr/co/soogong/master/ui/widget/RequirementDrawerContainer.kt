@@ -55,6 +55,7 @@ class RequirementDrawerContainer @JvmOverloads constructor(
     companion object {
         const val REQUIREMENT_TYPE = 100
         const val ESTIMATION_TYPE = 200
+        const val PREVIOUS_ESTIMATION_TYPE = 201
         const val REPAIR_TYPE = 300
         const val REVIEW_TYPE = 400
         const val CANCEL_TYPE = 500
@@ -72,11 +73,20 @@ class RequirementDrawerContainer @JvmOverloads constructor(
                     REQUIREMENT_TYPE -> {
                         label =
                             context.getString(R.string.requirement_drawer_title_of_customer_request)
-                        RequirementQna.addRequirementQna(
+                        RequirementDetail.addRequirementDetail(
                             context,
                             detailContainer,
                             requirementDto,
                             includingCancel
+                        )
+                    }
+                    PREVIOUS_ESTIMATION_TYPE -> {
+                        label =
+                            context.getString(R.string.requirement_drawer_title_of_previous_estimation)
+                        RequirementDetail.addPreviousEstimationDetail(
+                            context,
+                            detailContainer,
+                            requirementDto
                         )
                     }
                     ESTIMATION_TYPE -> {
