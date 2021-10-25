@@ -50,6 +50,9 @@ data class RequirementDto(
     @SerializedName("tel")
     val tel: String?,
 
+    @SerializedName("safetyNumber")
+    val safetyNumber: String? = null,
+
     @SerializedName("description")
     val description: String?,
 
