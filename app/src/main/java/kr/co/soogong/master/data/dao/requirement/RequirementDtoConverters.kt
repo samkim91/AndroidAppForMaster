@@ -4,6 +4,7 @@ import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kr.co.soogong.master.data.dto.AttachmentDto
+import kr.co.soogong.master.data.dto.requirement.PreviousRequirementDto
 import kr.co.soogong.master.data.dto.requirement.estimation.EstimationDto
 import kr.co.soogong.master.data.dto.requirement.qna.RequirementQnaDto
 import java.util.*
@@ -28,6 +29,18 @@ class RequirementDtoConverters {
     fun stringToEstimation(estimationString: String?): EstimationDto? {
         return estimationString?.let {
             Gson().fromJson(it, object : TypeToken<EstimationDto>() {}.type)
+        }
+    }
+
+    @TypeConverter
+    fun preRequirementToString(previousRequirementDto: PreviousRequirementDto?): String? {
+        return previousRequirementDto?.let { Gson().toJson(it) }
+    }
+
+    @TypeConverter
+    fun stringToPreRequirement(preRequirementString: String?): PreviousRequirementDto? {
+        return preRequirementString?.let {
+            Gson().fromJson(it, object : TypeToken<PreviousRequirementDto>() {}.type)
         }
     }
 
