@@ -161,7 +161,8 @@ class RequestConsultCardViewHolder(
                     DialogData.getCallToCustomerDialogData(context),
                     yesClick = {
                         viewModel.callToClient(requirementId = requirementCard.id)
-                        context.startActivity(CallToCustomerHelper.getIntent(requirementCard.tel.toString()))
+                        context.startActivity(CallToCustomerHelper.getIntent(
+                            if (requirementCard.safetyNumber.isNullOrEmpty()) requirementCard.tel else requirementCard.safetyNumber))
                     },
                     noClick = { }
                 ).run {

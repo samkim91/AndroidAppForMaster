@@ -111,7 +111,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                 }
                 CALL_TO_CUSTOMER_SUCCESSFULLY -> {
                     viewModel.requirement.value?.let {
-                        startActivity(CallToCustomerHelper.getIntent(it.tel))
+                        startActivity(CallToCustomerHelper.getIntent(if (it.safetyNumber.isNullOrEmpty()) it.tel else it.safetyNumber))
                     }
                 }
                 RESPOND_TO_MEASURE_SUCCESSFULLY -> {
