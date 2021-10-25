@@ -128,7 +128,9 @@ class RequirementFragment : BaseFragment<FragmentRequirementBinding>(
                 )
             },
             noClick = { }
-        )
+        ).let {
+            it.show(parentFragmentManager, it.tag)
+        }
     }
 
     override fun onResume() {

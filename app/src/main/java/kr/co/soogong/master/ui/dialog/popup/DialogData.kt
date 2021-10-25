@@ -228,11 +228,11 @@ data class DialogData(
 
         fun getNoticeForRequestMeasure(context: Context, count: Int) =
             DialogData(
-                "상세상담 요청 ${count}건",
+                "현장실측 요청 ${count}건",
                 context.getColor(R.color.text_basic_color),
-                "시공을 희망하는 고객님이 기다리고\n있어요. 먼저 고객님께 연락해서\n시공확률을 높여보세요.",
+                "고객님이 방문 요청을 하셨어요.\n내용을 확인한 뒤\n실측여부 버튼을 클릭해 주세요.",
                 context.getColor(R.color.color_1FC472),
-                "상담하러 가기",
+                "확인하러 가기",
                 context.getColor(R.color.text_basic_color),
                 null,
                 context.getColor(R.color.text_basic_color),
@@ -240,11 +240,11 @@ data class DialogData(
 
         fun getNoticeForRequestConsulting(context: Context, count: Int) =
             DialogData(
-                "현장실측 요청 ${count}건",
+                "상세상담 요청 ${count}건",
                 context.getColor(R.color.text_basic_color),
-                "고객님이 방문 요청을 하셨어요.\n내용을 확인한 뒤\n실측여부 버튼을 클릭해 주세요.",
+                "시공을 희망하는 고객님이 기다리고\n있어요. 먼저 고객님께 연락해서\n시공확률을 높여보세요.",
                 context.getColor(R.color.color_1FC472),
-                "확인하러 가기",
+                "상담하러 가기",
                 context.getColor(R.color.text_basic_color),
                 null,
                 context.getColor(R.color.text_basic_color),

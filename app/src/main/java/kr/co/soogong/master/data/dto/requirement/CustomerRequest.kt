@@ -7,13 +7,13 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class CustomerRequest(
     @SerializedName("requestMeasureList")
-    val requestMeasureList: List<Int>,
+    val requestMeasureList: List<Int> = emptyList(),
 
     @SerializedName("requestConsultingList")
-    val requestConsultingList: List<Int>,
+    val requestConsultingList: List<Int> = emptyList(),
 
     @SerializedName("isEmpty")
-    val isEmpty: Boolean,
+    val isEmpty: Boolean = false,
 ) : Parcelable {
     companion object {
 
