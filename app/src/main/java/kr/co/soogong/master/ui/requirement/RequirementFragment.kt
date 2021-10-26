@@ -15,7 +15,6 @@ import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.dialog.popup.CustomDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData
 import kr.co.soogong.master.ui.requirement.RequirementViewModel.Companion.REQUEST_FAILED
-import kr.co.soogong.master.ui.requirement.RequirementViewModel.Companion.UPDATE_DIRECT_REPAIR_SUCCESSFULLY
 import kr.co.soogong.master.uihelper.profile.EditRequiredInformationActivityHelper
 import kr.co.soogong.master.uihelper.requirment.RequirementsBadge
 import kr.co.soogong.master.uihelper.requirment.action.SearchActivityHelper
@@ -23,7 +22,6 @@ import kr.co.soogong.master.uihelper.requirment.action.ViewRequirementActivityHe
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
-import kotlin.system.exitProcess
 
 @AndroidEntryPoint
 class RequirementFragment : BaseFragment<FragmentRequirementBinding>(
@@ -74,28 +72,11 @@ class RequirementFragment : BaseFragment<FragmentRequirementBinding>(
 
             binding.acceptingMeasurementSwitch.setLayoutForRequestMeasure(masterDto = masterDto)
 
-            if (masterDto.directRepairYn != true) {
-                CustomDialog.newInstance(
-                    dialogData = DialogData.getConfirmingDirectRepairYn(requireContext()),
-                    yesClick = { viewModel.updateDirectRepairYn(true) },
-                    noClick = { viewModel.updateDirectRepairYn(false) }
-                ).apply {
-                    isCancelable = false
-                }.show(parentFragmentManager, tag)
-            }
         })
 
         viewModel.requestMeasureYn.observe(viewLifecycleOwner, { requestMeasureYn ->
             binding.acceptingMeasurementSwitch.changeTextAndBackgroundForRequestMeasure(
                 requestMeasureYn)
-        })
-
-        viewModel.event.observe(viewLifecycleOwner, EventObserver { (event, value) ->
-            when (event) {
-                UPDATE_DIRECT_REPAIR_SUCCESSFULLY -> if (!(value as Boolean)) {
-                    exitProcess(0)
-                }
-            }
         })
 
         viewModel.action.observe(viewLifecycleOwner, EventObserver { action ->
