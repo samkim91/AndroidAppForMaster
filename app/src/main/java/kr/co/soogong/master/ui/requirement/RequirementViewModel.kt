@@ -80,30 +80,6 @@ open class RequirementViewModel @Inject constructor(
         }
     }
 
-    fun updateDirectRepairYn(directRepairYn: Boolean) {
-        Timber.tag(TAG).d("updateDirectRepairYn to: $directRepairYn")
-
-        requirementViewModelAggregate.updateDirectRepairYnUseCase(
-            MasterDto(
-                id = _masterSimpleInfo.value?.id,
-                uid = _masterSimpleInfo.value?.uid,
-                directRepairYn = directRepairYn)
-        )
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeBy(
-                onSuccess = {
-                    Timber.tag(TAG).d("updateDirectRepairYn successful: $it")
-                    _masterSimpleInfo.value = it
-                    sendEvent(UPDATE_DIRECT_REPAIR_SUCCESSFULLY, it.directRepairYn!!)
-                },
-                onError = {
-                    Timber.tag(TAG).d("updateDirectRepairYn failed: $it")
-                    setAction(REQUEST_FAILED)
-                }
-            ).addToDisposable()
-    }
-
     fun getCustomerRequests() {
         Timber.tag(TAG).d("getCustomerRequests: ")
 
