@@ -118,7 +118,7 @@ class EstimationDetail @JvmOverloads constructor(
                             context.getString(R.string.not_estimated_text)
                         }
                         extra =
-                            if (estimation.includingVat != null) context.getString(if (estimation.includingVat == true) R.string.vat_included else R.string.vat_not_included) else ""
+                            if (estimation.price > 0) context.getString(if (estimation.includingVat == true) R.string.vat_included else R.string.vat_not_included) else ""
                     }.run {
                         container.addView(this)
                     }

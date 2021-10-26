@@ -37,6 +37,7 @@ import kr.co.soogong.master.ui.widget.RequirementDrawerContainer.Companion.REVIE
 import kr.co.soogong.master.uihelper.requirment.CallToCustomerHelper
 import kr.co.soogong.master.uihelper.requirment.action.*
 import kr.co.soogong.master.utility.EventObserver
+import kr.co.soogong.master.utility.extension.setDueDate
 import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
 import java.util.*
@@ -96,6 +97,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
             if (!isValidRequirement(requirement)) return@observe
             setLayout(requirement)
             setButtons(requirement)
+            binding.requirementDueDate.setDueDate(requirement)
             binding.requirementStatus.requirementDto = requirement
             setLayoutForRequestConsult(requirement)
         })
@@ -275,6 +277,16 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                         isSpread = false,
                         includingCancel = false
                     )
+                    requirement.measurement?.let {
+                        RequirementDrawerContainer.addDrawerContainer(
+                            context = this@ViewRequirementActivity,
+                            container = flexibleContainer,
+                            requirementDto = requirement,
+                            contentType = PREVIOUS_ESTIMATION_TYPE,
+                            isSpread = false,
+                            includingCancel = false
+                        )
+                    }
                 }
 
                 is RequirementStatus.Repairing -> {
@@ -514,17 +526,18 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
     private fun setButtons(requirementDto: RequirementDto) {
         Timber.tag(TAG).d("setButtons: ")
         with(binding) {
+            buttonsDivider.isVisible = false
+            leftButton.isVisible = false
+            rightButton.isVisible = false
+
             when (RequirementStatus.getStatusFromRequirement(requirementDto)) {
                 is RequirementStatus.Requested, RequirementStatus.RequestConsult -> {
                     (requirementDto.estimationDto?.masterResponseCode == EstimationResponseCode.ACCEPTED).let { accepted ->
-                        if (accepted) {
-                            buttonsDivider.isVisible = false
-                            leftButton.isVisible = false
-                            rightButton.isVisible = false
-                            return@let
-                        }
+                        if (accepted) return@let
                         // Buttons : 견적을 내기 어려워요 / 견적을 보낼래요.
+                        buttonsDivider.isVisible = true
                         with(leftButton) {
+                            isVisible = true
                             text = getString(R.string.refuse_estimate_text)
                             setTextColor(getColor(R.color.color_FFFFFF))
                             setBackgroundColor(resources.getColor(R.color.color_FF711D, null))
@@ -540,6 +553,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                             }
                         }
                         with(rightButton) {
+                            isVisible = true
                             text = getString(R.string.accept_estimate_text)
                             setTextColor(getColor(R.color.color_FFFFFF))
                             setBackgroundColor(resources.getColor(R.color.color_22D47B, null))
@@ -557,7 +571,9 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
 
                 is RequirementStatus.RequestMeasure -> {
                     // Buttons : 실측 안할래요 / 실측 할래요
+                    buttonsDivider.isVisible = true
                     with(leftButton) {
+                        isVisible = true
                         text = getString(R.string.refuse_measure_text)
                         setTextColor(getColor(R.color.color_FFFFFF))
                         setBackgroundColor(resources.getColor(R.color.color_FF711D, null))
@@ -578,6 +594,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                         }
                     }
                     with(rightButton) {
+                        isVisible = true
                         text = getString(R.string.accept_measure_text)
                         setTextColor(getColor(R.color.color_FFFFFF))
                         setBackgroundColor(resources.getColor(R.color.color_22D47B, null))
@@ -596,7 +613,9 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
 
                 is RequirementStatus.Repairing, RequirementStatus.RequestFinish -> {
                     // Buttons : 고객에게 전화하기 / 시공 완료
+                    buttonsDivider.isVisible = true
                     with(leftButton) {
+                        isVisible = true
                         when {
                             requirementDto.estimationDto?.fromMasterCallCnt!! > 0 -> {
                                 text = getString(R.string.recall_to_customer_text)
@@ -613,6 +632,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                         }
                     }
                     with(rightButton) {
+                        isVisible = true
                         text = getString(R.string.repair_done_text)
                         setTextColor(getColor(R.color.color_FFFFFF))
                         setBackgroundColor(resources.getColor(R.color.color_22D47B, null))
@@ -629,7 +649,9 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
 
                 is RequirementStatus.Measuring -> {
                     // Buttons : 고객에게 전화하기 / 견적서 보내기
+                    buttonsDivider.isVisible = true
                     with(leftButton) {
+                        isVisible = true
                         when {
                             requirementDto.estimationDto?.fromMasterCallCnt!! > 0 -> {
                                 text = getString(R.string.recall_to_customer_text)
@@ -646,6 +668,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                         }
                     }
                     with(rightButton) {
+                        isVisible = true
                         text = getString(R.string.send_estimation)
                         setTextColor(getColor(R.color.color_FFFFFF))
                         setBackgroundColor(resources.getColor(R.color.color_22D47B, null))
@@ -662,7 +685,9 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
 
                 is RequirementStatus.Measured -> {
                     // Button : 고객에게 전화하기
+                    buttonsDivider.isVisible = true
                     with(leftButton) {
+                        isVisible = true
                         when {
                             requirementDto.estimationDto?.fromMasterCallCnt!! > 0 -> {
                                 text = getString(R.string.recall_to_customer_text)
@@ -679,13 +704,13 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                             viewModel.callToClient()
                         }
                     }
-                    rightButton.isVisible = false
                 }
 
                 is RequirementStatus.Done -> {
                     // Button : 리뷰 요청하기
-                    rightButton.isVisible = false
+                    buttonsDivider.isVisible = true
                     with(leftButton) {
+                        isVisible = true
                         requirementDto.estimationDto?.repair?.requestReviewYn?.let { requestReviewYn ->
                             if (requestReviewYn) {
                                 text = getString(R.string.ask_for_review_successful)
@@ -713,11 +738,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                     }
                 }
 
-                else -> {
-                    buttonsDivider.isVisible = false
-                    leftButton.isVisible = false
-                    rightButton.isVisible = false
-                }
+                else -> { }
             }
         }
     }
@@ -733,7 +754,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
         intent?.let {
             viewModel.requirementId.value = ViewRequirementActivityHelper.getRequirementId(it)
         }
-        onStart()
+        viewModel.requestRequirement()
     }
 
     companion object {

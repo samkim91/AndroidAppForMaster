@@ -126,7 +126,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:setDueDate="@{vm.requirement}"
             tools:visibility="visible" />
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -135,21 +134,25 @@
             android:layout_height="@dimen/line_height"
             android:layout_marginBottom="@dimen/gap_48"
             android:background="@color/line_color"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            tools:visibility="visible" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/left_button"
             style="@style/text_style_16sp.bold"
             android:layout_width="@dimen/gap_0"
             android:layout_height="@dimen/gap_48"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/right_button"
             app:layout_constraintStart_toStartOf="parent"
             tools:background="@color/color_FF711D"
             tools:text="실측 안할래요"
-            tools:textColor="@color/basic_white" />
+            tools:textColor="@color/basic_white"
+            tools:visibility="visible" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/right_button"
@@ -157,10 +160,12 @@
             android:layout_width="@dimen/gap_0"
             android:layout_height="@dimen/gap_48"
             android:background="@color/color_1FC472"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/left_button"
             tools:text="실측 할래요"
-            tools:textColor="@color/basic_white" />
+            tools:textColor="@color/basic_white"
+            tools:visibility="visible" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
