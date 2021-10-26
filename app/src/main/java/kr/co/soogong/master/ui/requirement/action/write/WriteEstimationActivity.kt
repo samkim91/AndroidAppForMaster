@@ -19,6 +19,7 @@ import kr.co.soogong.master.ui.dialog.popup.DialogData.Companion.getCancelSendin
 import kr.co.soogong.master.ui.requirement.action.write.WriteEstimationViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.ui.requirement.action.write.WriteEstimationViewModel.Companion.SEND_ESTIMATION_SUCCESSFULLY
 import kr.co.soogong.master.ui.widget.RequirementDrawerContainer
+import kr.co.soogong.master.ui.widget.RequirementDrawerContainer.Companion.PREVIOUS_ESTIMATION_TYPE
 import kr.co.soogong.master.ui.widget.RequirementDrawerContainer.Companion.REQUIREMENT_TYPE
 import kr.co.soogong.master.uihelper.requirment.action.EstimationTemplatesActivityHelper
 import kr.co.soogong.master.utility.EventObserver
@@ -208,7 +209,7 @@ class WriteEstimationActivity : BaseActivity<ActivityWriteEstimationBinding>(
 
         viewModel.requirement.observe(this, { requirement ->
             binding.flexibleContainer.removeAllViews()
-            // view : 고객 요청 내용
+            // view : 고객 요청 내용, 이전 실측 내용(있으면)
             RequirementDrawerContainer.addDrawerContainer(
                 context = this,
                 container = binding.flexibleContainer,
@@ -217,6 +218,16 @@ class WriteEstimationActivity : BaseActivity<ActivityWriteEstimationBinding>(
                 isSpread = false,
                 includingCancel = false
             )
+            requirement.measurement?.let {
+                RequirementDrawerContainer.addDrawerContainer(
+                    context = this,
+                    container = binding.flexibleContainer,
+                    requirementDto = requirement,
+                    contentType = PREVIOUS_ESTIMATION_TYPE,
+                    isSpread = false,
+                    includingCancel = false
+                )
+            }
         })
     }
 
