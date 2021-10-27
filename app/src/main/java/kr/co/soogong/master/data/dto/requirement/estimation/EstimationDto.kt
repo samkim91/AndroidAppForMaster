@@ -30,6 +30,9 @@ data class EstimationDto(
     @SerializedName("price")
     val price: Int?,
 
+    @SerializedName("vatYn")
+    val includingVat: Boolean? = null,
+
     @SerializedName("description")
     val description: String? = null,
 

@@ -50,6 +50,9 @@ data class RequirementDto(
     @SerializedName("tel")
     val tel: String?,
 
+    @SerializedName("safetyNumber")
+    val safetyNumber: String? = null,
+
     @SerializedName("description")
     val description: String?,
 
@@ -58,6 +61,12 @@ data class RequirementDto(
 
     @SerializedName("estimation")
     val estimationDto: EstimationDto?,
+
+    @SerializedName("fromRequirement")
+    val previousRequirementDto: PreviousRequirementDto?,
+
+    @SerializedName("measurement")
+    val measurement: EstimationDto?,
 
     @SerializedName("images")
     val images: MutableList<AttachmentDto>?,
@@ -70,6 +79,9 @@ data class RequirementDto(
 
     @SerializedName("canceledDescription")
     val canceledDescription: String? = null,
+
+    @SerializedName("canceledBy")
+    val canceledBy: String? = null,
 
     @SerializedName("closedAt")
     val closedAt: Date?,

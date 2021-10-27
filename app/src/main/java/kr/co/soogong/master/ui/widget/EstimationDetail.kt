@@ -16,7 +16,7 @@ import kr.co.soogong.master.databinding.ViewEstimationDetailBinding
 class EstimationDetail @JvmOverloads constructor(
     context: Context,
     attributeSet: AttributeSet? = null,
-    defStyle: Int = 0
+    defStyle: Int = 0,
 ) : ConstraintLayout(context, attributeSet, defStyle) {
     private var binding =
         ViewEstimationDetailBinding.inflate(LayoutInflater.from(context), this, true)
@@ -32,6 +32,15 @@ class EstimationDetail @JvmOverloads constructor(
             if (!value.isNullOrEmpty()) {
                 field = value
                 binding.value.text = value
+            }
+        }
+
+    var extra: String? = ""
+        set(value) {
+            if (!value.isNullOrEmpty()) {
+                field = value
+                binding.extra.text = value
+                binding.extra.isVisible = true
             }
         }
 
@@ -83,6 +92,8 @@ class EstimationDetail @JvmOverloads constructor(
                         key = context.getString(R.string.repair_actual_price)
                         value = "${DecimalFormat("#,###").format(estimation.repair.actualPrice)}원"
                         bold = true
+                        extra =
+                            if (estimation.repair.actualPrice > 0) context.getString(if (estimation.repair.includingVat == true) R.string.vat_included else R.string.vat_not_included) else ""
                     }.run {
                         container.addView(this)
                     }
@@ -106,6 +117,8 @@ class EstimationDetail @JvmOverloads constructor(
                         } else {
                             context.getString(R.string.not_estimated_text)
                         }
+                        extra =
+                            if (estimation.price > 0) context.getString(if (estimation.includingVat == true) R.string.vat_included else R.string.vat_not_included) else ""
                     }.run {
                         container.addView(this)
                     }

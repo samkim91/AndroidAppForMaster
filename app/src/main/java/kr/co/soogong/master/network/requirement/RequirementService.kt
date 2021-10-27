@@ -62,6 +62,9 @@ class RequirementService @Inject constructor(
         return requirementInterface.deleteEstimationTemplate(id)
     }
 
+    fun getCanceledReasons(groupCodes: List<String>) =
+        requirementInterface.getCanceledReasons(groupCodes)
+
     fun callToClient(estimationId: Int): Single<Boolean> {
         val data = HashMap<String, Any>()
         data["estimationId"] = estimationId
@@ -73,4 +76,6 @@ class RequirementService @Inject constructor(
     fun requestReview(repairDto: RepairDto): Single<JsonObject> {
         return requirementInterface.requestReview(repairDto)
     }
+
+    fun getCustomerRequests(masterUid: String) = requirementInterface.getCustomerRequests(masterUid)
 }

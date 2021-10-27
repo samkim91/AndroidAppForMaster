@@ -7,11 +7,12 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
+import kr.co.soogong.master.data.dto.common.Code
 import kr.co.soogong.master.data.dto.requirement.RequirementDto
 import kr.co.soogong.master.data.dto.requirement.estimation.EstimationDto
 import kr.co.soogong.master.data.dto.requirement.repair.RepairDto
 import kr.co.soogong.master.data.model.requirement.estimation.EstimationResponseCode
-import kr.co.soogong.master.data.model.requirement.repair.OutOfContactClient
+import kr.co.soogong.master.domain.usecase.requirement.GetCanceledReasonsUseCase
 import kr.co.soogong.master.domain.usecase.requirement.GetRequirementUseCase
 import kr.co.soogong.master.domain.usecase.requirement.RespondToMeasureUseCase
 import kr.co.soogong.master.domain.usecase.requirement.SaveRepairUseCase
@@ -25,7 +26,8 @@ class CancelViewModel @Inject constructor(
     private val getRequirementUseCase: GetRequirementUseCase,
     private val saveRepairUseCase: SaveRepairUseCase,
     private val respondToMeasureUseCase: RespondToMeasureUseCase,
-    val savedStateHandle: SavedStateHandle
+    private val canceledReasonsUseCase: GetCanceledReasonsUseCase,
+    val savedStateHandle: SavedStateHandle,
 ) : BaseViewModel() {
 
     private val requirementId =
@@ -35,8 +37,27 @@ class CancelViewModel @Inject constructor(
     val requirement: LiveData<RequirementDto>
         get() = _requirement
 
-    val canceledCode = MutableLiveData(OutOfContactClient.code)
+    val canceledReasons = MutableLiveData<List<Code>>()
+
+    val canceledCode = MutableLiveData("")
     val canceledDescription = MutableLiveData("")
+
+    fun requestCanceledReasons() {
+        Timber.tag(TAG).d("requestCanceledReasons: ")
+        canceledReasonsUseCase()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeBy(
+                onSuccess = {
+                    Timber.tag(TAG).d("requestCanceledReasons successfully: $it")
+                    canceledReasons.postValue(it)
+                },
+                onError = {
+                    Timber.tag(TAG).d("requestCanceledReasons failed: $it")
+                    setAction(REQUEST_FAILED)
+                }
+            ).addToDisposable()
+    }
 
     fun requestRequirement() {
         Timber.tag(TAG).d("requestRequirement: $requirementId")

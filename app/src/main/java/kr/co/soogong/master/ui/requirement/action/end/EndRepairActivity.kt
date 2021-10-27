@@ -10,7 +10,6 @@ import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.ui.requirement.action.end.EndRepairViewModel.Companion.END_REPAIR_FAILED
 import kr.co.soogong.master.ui.requirement.action.end.EndRepairViewModel.Companion.END_REPAIR_SUCCESSFULLY
 import kr.co.soogong.master.ui.requirement.action.end.EndRepairViewModel.Companion.REQUEST_FAILED
-import kr.co.soogong.master.uihelper.requirment.action.EndRepairActivityHelper
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.extension.toast
 import kr.co.soogong.master.utility.validation.ValidationHelper
@@ -55,11 +54,6 @@ class EndRepairActivity : BaseActivity<ActivityEndRepairBinding>(
                 }
             }
 
-            calender.setOnDateChangeListener { _: CalendarView, year: Int, month: Int, day: Int ->
-                Timber.tag(TAG).d("setOnDateChangeListener: ${year - month - day}")
-                viewModel.actualDate.value?.set(year, month, day)
-            }
-
             actualPrice.addFocusChangeListener(onFocusChange = { _, hasFocus ->
                 if (!viewModel.actualPrice.value.isNullOrEmpty()) {
                     viewModel.actualPrice.value?.replace(",", "").let {
@@ -72,6 +66,15 @@ class EndRepairActivity : BaseActivity<ActivityEndRepairBinding>(
                     }
                 }
             })
+
+            checkboxForActualPriceIncludingVat.checkBox.setOnCheckedChangeListener { _, isChecked ->
+                viewModel.includingVat.value = isChecked
+            }
+
+            calender.setOnDateChangeListener { _: CalendarView, year: Int, month: Int, day: Int ->
+                Timber.tag(TAG).d("setOnDateChangeListener: ${year - month - day}")
+                viewModel.actualDate.value?.set(year, month, day)
+            }
         }
     }
 

@@ -9,9 +9,9 @@ import kr.co.soogong.master.data.model.requirement.RequirementStatus.Companion.d
 import kr.co.soogong.master.databinding.FragmentRequirementDoneBinding
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.requirement.RequirementChipGroupHelper
-import kr.co.soogong.master.ui.requirement.RequirementViewModel.Companion.ASK_FOR_REVIEW_FAILED
-import kr.co.soogong.master.ui.requirement.RequirementViewModel.Companion.ASK_FOR_REVIEW_SUCCESSFULLY
 import kr.co.soogong.master.ui.requirement.card.RequirementCardsAdapter
+import kr.co.soogong.master.ui.requirement.done.DoneViewModel.Companion.ASK_FOR_REVIEW_FAILED
+import kr.co.soogong.master.ui.requirement.done.DoneViewModel.Companion.ASK_FOR_REVIEW_SUCCESSFULLY
 import kr.co.soogong.master.ui.requirement.done.DoneViewModel.Companion.BADGE_UPDATE
 import kr.co.soogong.master.uihelper.requirment.RequirementsBadge
 import kr.co.soogong.master.utility.EventObserver
@@ -43,7 +43,8 @@ class DoneFragment : BaseFragment<FragmentRequirementDoneBinding>(
             RequirementChipGroupHelper(layoutInflater, filterGroup, doneStatus)
             filterGroup.onCheckedChanged { index -> viewModel.onFilterChange(index) }
 
-            doneList.adapter = RequirementCardsAdapter(requireContext(), childFragmentManager, viewModel)
+            doneList.adapter =
+                RequirementCardsAdapter(requireContext(), childFragmentManager, viewModel)
         }
     }
 

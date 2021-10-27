@@ -12,9 +12,15 @@ import kr.co.soogong.master.data.model.profile.NotApprovedCodeTable
 import kr.co.soogong.master.data.model.profile.RequestApproveCodeTable
 import kr.co.soogong.master.databinding.FragmentRequirementBinding
 import kr.co.soogong.master.ui.base.BaseFragment
+import kr.co.soogong.master.ui.dialog.popup.CustomDialog
+import kr.co.soogong.master.ui.dialog.popup.DialogData
+import kr.co.soogong.master.ui.requirement.RequirementViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.uihelper.profile.EditRequiredInformationActivityHelper
 import kr.co.soogong.master.uihelper.requirment.RequirementsBadge
 import kr.co.soogong.master.uihelper.requirment.action.SearchActivityHelper
+import kr.co.soogong.master.uihelper.requirment.action.ViewRequirementActivityHelper
+import kr.co.soogong.master.utility.EventObserver
+import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -53,8 +59,8 @@ class RequirementFragment : BaseFragment<FragmentRequirementBinding>(
                 startActivity(EditRequiredInformationActivityHelper.getIntent(requireContext()))
             }
 
-            acceptingMeasurementSwitch.setSwitchClick { button, isChecked ->
-                viewModel.updateRequestMeasureYn(button, isChecked)
+            acceptingMeasurementSwitch.setSwitchClick { _, isChecked ->
+                viewModel.updateRequestMeasureYn(isChecked)
             }
         }
     }
@@ -65,20 +71,55 @@ class RequirementFragment : BaseFragment<FragmentRequirementBinding>(
                 masterDto.approvedStatus == NotApprovedCodeTable.code || masterDto.approvedStatus == RequestApproveCodeTable.code
 
             binding.acceptingMeasurementSwitch.setLayoutForRequestMeasure(masterDto = masterDto)
+
         })
 
         viewModel.requestMeasureYn.observe(viewLifecycleOwner, { requestMeasureYn ->
-            binding.acceptingMeasurementSwitch.changeTextAndBackgroundForRequestMeasure(requestMeasureYn)
+            binding.acceptingMeasurementSwitch.changeTextAndBackgroundForRequestMeasure(
+                requestMeasureYn)
         })
+
+        viewModel.action.observe(viewLifecycleOwner, EventObserver { action ->
+            when (action) {
+                REQUEST_FAILED -> requireContext().toast(getString(R.string.error_message_of_request_failed))
+            }
+        })
+
+        viewModel.customerRequests.observe(viewLifecycleOwner, { request ->
+            when {
+                request.isEmpty -> Unit
+                request.requestMeasureList.isNotEmpty() ->
+                    showDialogForViewRequirement(REQUEST_MEASURE, request.requestMeasureList)
+                request.requestConsultingList.isNotEmpty() ->
+                    showDialogForViewRequirement(REQUEST_CONSULTING, request.requestConsultingList)
+            }
+        })
+    }
+
+    fun showDialogForViewRequirement(type: Int, list: List<Int>) {
+        CustomDialog.newInstance(
+            dialogData = if (type == REQUEST_MEASURE)
+                DialogData.getNoticeForRequestMeasure(requireContext(), list.count())
+            else
+                DialogData.getNoticeForRequestConsulting(requireContext(), list.count()),
+            yesClick = {
+                startActivity(
+                    ViewRequirementActivityHelper.getIntent(requireContext(),
+                        list.first())
+                )
+            },
+            noClick = { }
+        ).let {
+            it.show(parentFragmentManager, it.tag)
+        }
     }
 
     override fun onResume() {
         super.onResume()
         Timber.tag(TAG).d("onResume: ")
-        bind {
-            // 필수 정보를 입력하라는 bottom view 를 보여줄지 결정
-            viewModel.requestMasterSimpleInfo()
-        }
+        // 필수 정보를 입력하라는 bottom view 를 보여줄지 결정
+        viewModel.requestMasterSimpleInfo()
+        viewModel.getCustomerRequests()
     }
 
     override fun setReceivedBadge(badgeCount: Int) {
@@ -119,6 +160,9 @@ class RequirementFragment : BaseFragment<FragmentRequirementBinding>(
 
     companion object {
         private const val TAG = "RequirementsFragment"
+
+        private const val REQUEST_MEASURE = 10
+        private const val REQUEST_CONSULTING = 20
 
         fun newInstance(): RequirementFragment {
             return RequirementFragment()

@@ -66,6 +66,10 @@ class MeasurementActivity : BaseActivity<ActivityMeasurementBinding>(
                 }
             }
 
+            checkboxForSimpleCostIncludingVat.checkBox.setOnCheckedChangeListener { _, isChecked ->
+                viewModel.includingVat.value = isChecked
+            }
+
             measurementImagesPicker.setAdapter { viewModel.estimationImages.removeAt(it) }
 
             measurementImagesPicker.addIconClickListener {

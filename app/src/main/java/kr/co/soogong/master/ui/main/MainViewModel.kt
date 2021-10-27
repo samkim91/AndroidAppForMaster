@@ -7,7 +7,6 @@ import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.domain.usecase.auth.GetVersionUseCase
 import kr.co.soogong.master.domain.usecase.auth.SaveFCMTokenUseCase
-import kr.co.soogong.master.domain.usecase.profile.GetMasterSimpleInfoUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import timber.log.Timber
 import javax.inject.Inject
@@ -15,7 +14,6 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val saveFCMTokenUseCase: SaveFCMTokenUseCase,
-    private val getMasterSimpleInfoUseCase: GetMasterSimpleInfoUseCase,
     private val getVersionUseCase: GetVersionUseCase,
 ) : BaseViewModel() {
 
@@ -51,41 +49,7 @@ class MainViewModel @Inject constructor(
             .addToDisposable()
     }
 
-    fun getMasterSimpleInfo() {
-        Timber.tag(TAG).d("getMasterSimpleInfo: ")
-
-        getMasterSimpleInfoUseCase()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeBy(
-                onSuccess = {
-                    Timber.tag(TAG).d("getMasterSimpleInfoUseCase successfully: $it")
-                },
-                onError = {
-                    Timber.tag(TAG).d("getMasterSimpleInfoUseCase failed: $it")
-                }
-            ).addToDisposable()
-    }
-
-    fun checkLatestVersion() {
-        Timber.tag(TAG).d("checkLatestVersion: ")
-
-        getVersionUseCase()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeBy(
-                onSuccess = {
-                    Timber.tag(TAG).d("getLatestVersion success: $it")
-                    sendEvent(GET_VERSION_SUCCESSFULLY, it)
-                },
-                onError = {
-                    Timber.tag(TAG).d("getLatestVersion failed: $it")
-                }
-            ).addToDisposable()
-    }
-
     companion object {
         private const val TAG = "MainViewModel"
-        const val GET_VERSION_SUCCESSFULLY = "GET_VERSION_SUCCESSFULLY"
     }
 }

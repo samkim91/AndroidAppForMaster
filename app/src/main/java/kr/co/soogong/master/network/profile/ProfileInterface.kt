@@ -39,10 +39,14 @@ interface ProfileInterface {
         @Field("uid") uid: String,
     ): Single<MasterDto>
 
-    @FormUrlEncoded
+    @PATCH(HttpContract.UPDATE_DIRECT_REPAIR_YN)
+    fun updateDirectRepairYn(
+        @Body masterDto: MasterDto,
+    ): Single<MasterDto>
+
     @PATCH(HttpContract.UPDATE_FREE_MEASURE_YN)
     fun updateFreeMeasureYn(
-        @Field("masterDto") masterDto: MasterDto,
+        @Body masterDto: MasterDto,
     ): Single<MasterDto>
 
     @GET(HttpContract.GET_PORTFOLIOS)

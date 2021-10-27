@@ -5,7 +5,6 @@ import android.widget.RadioButton
 import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.model.profile.CompareCodeTable
 import kr.co.soogong.master.data.model.requirement.estimation.EstimationResponseCode
 import kr.co.soogong.master.data.model.requirement.repair.*
 import kr.co.soogong.master.databinding.ActivityCancelBinding
@@ -49,12 +48,11 @@ class CancelActivity : BaseActivity<ActivityCancelBinding>(
                 button.setOnClickListener {
                     viewModel.canceledCode.observe(this@CancelActivity, {
                         canceledOptions.alertVisible = it.isNullOrEmpty()
-                        cancelOptionDetail.alertVisible = it == CanceledReasonRadioGroupHelper.canceledReasons.last().code
                     })
 
                     viewModel.canceledDescription.observe(this@CancelActivity, {
                         cancelOptionDetail.alertVisible =
-                            viewModel.canceledCode.value == CanceledReasonRadioGroupHelper.canceledReasons.last().code && it.length < 10
+                            viewModel.canceledCode.value == viewModel.canceledReasons.value?.last()?.code && it.length < 10
                     })
 
                     if (canceledOptions.alertVisible || cancelOptionDetail.alertVisible) return@setOnClickListener
@@ -62,12 +60,10 @@ class CancelActivity : BaseActivity<ActivityCancelBinding>(
                     if (viewModel.requirement.value?.estimationDto?.masterResponseCode == EstimationResponseCode.ACCEPTED) viewModel.saveRepair() else viewModel.respondToMeasure()
                 }
 
-                CanceledReasonRadioGroupHelper(this@CancelActivity, canceledOptions)
-
                 canceledOptions.addCheckedChangeListener { group, checkedId ->
                     group.indexOfChild(group.findViewById<RadioButton>(checkedId)).let {
                         viewModel.canceledCode.value =
-                            CanceledReasonRadioGroupHelper.canceledReasons[it].code
+                            viewModel.canceledReasons.value?.get(it)?.code
                     }
                 }
             }
@@ -91,10 +87,15 @@ class CancelActivity : BaseActivity<ActivityCancelBinding>(
                 }
             }
         })
+
+        viewModel.canceledReasons.observe(this, { reasons ->
+            CanceledReasonRadioGroupHelper(this, binding.canceledOptions, reasons)
+        })
     }
 
     override fun onStart() {
         super.onStart()
+        viewModel.requestCanceledReasons()
         viewModel.requestRequirement()
     }
 

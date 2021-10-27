@@ -35,7 +35,7 @@ open class ReceivedCardViewHolder(
         context: Context,
         fragmentManager: FragmentManager,
         viewModel: RequirementViewModel,
-        requirementCard: RequirementCard
+        requirementCard: RequirementCard,
     ) {
         super.bind(context, fragmentManager, viewModel, requirementCard)
 
@@ -112,7 +112,7 @@ class RequestedCardViewHolder(
         context: Context,
         fragmentManager: FragmentManager,
         viewModel: RequirementViewModel,
-        requirementCard: RequirementCard
+        requirementCard: RequirementCard,
     ) {
         super.bind(context, fragmentManager, viewModel, requirementCard)
 
@@ -124,6 +124,7 @@ class RequestedCardViewHolder(
                     type = CALENDAR_TYPE,
                     titleData = context.getString(R.string.requirements_card_due_date),
                     contentData = dateFormat.format(getEstimationDueDate(requirementCard.createdAt)),
+                    extraData = "",
                     alertData = context.getString(R.string.requirements_card_due_date_alert)
                 )
             })
@@ -141,7 +142,7 @@ class RequestConsultCardViewHolder(
         context: Context,
         fragmentManager: FragmentManager,
         viewModel: RequirementViewModel,
-        requirementCard: RequirementCard
+        requirementCard: RequirementCard,
     ) {
         super.bind(context, fragmentManager, viewModel, requirementCard)
 
@@ -160,7 +161,8 @@ class RequestConsultCardViewHolder(
                     DialogData.getCallToCustomerDialogData(context),
                     yesClick = {
                         viewModel.callToClient(requirementId = requirementCard.id)
-                        context.startActivity(CallToCustomerHelper.getIntent(requirementCard.tel.toString()))
+                        context.startActivity(CallToCustomerHelper.getIntent(
+                            if (requirementCard.safetyNumber.isNullOrEmpty()) requirementCard.tel else requirementCard.safetyNumber))
                     },
                     noClick = { }
                 ).run {
@@ -168,7 +170,7 @@ class RequestConsultCardViewHolder(
                 }
             }
 
-            if (requirementCard.estimationDto?.masterResponseCode == EstimationResponseCode.ACCEPTED) {
+            if (requirementCard.estimationDto.masterResponseCode == EstimationResponseCode.ACCEPTED) {
                 setContainerTheme(context, additionalInfoContainer, GRAY_THEME)
                 additionalInfoContainer.addView(RequirementCardAdditionalInfo(context).apply {
                     setLayout(
@@ -180,6 +182,8 @@ class RequestConsultCardViewHolder(
                                 requirementCard.estimationDto.price
                             )
                         }원" else context.getString(R.string.not_estimated_text),
+                        extraData = if (requirementCard.estimationDto.price > 0) context.getString(
+                            if (requirementCard.estimationDto.includingVat == true) R.string.vat_included else R.string.vat_not_included) else "",
                         alertData = context.getString(R.string.requirements_card_waiting_label),
                     )
                 })
@@ -193,6 +197,7 @@ class RequestConsultCardViewHolder(
                     type = CALENDAR_TYPE,
                     titleData = context.getString(R.string.requirements_card_due_date),
                     contentData = dateFormat.format(getEstimationDueDate(requirementCard.createdAt)),
+                    extraData = "",
                     alertData = context.getString(R.string.requirements_card_due_date_alert)
                 )
             })
@@ -208,7 +213,7 @@ class RequestMeasureCardViewHolder(
         context: Context,
         fragmentManager: FragmentManager,
         viewModel: RequirementViewModel,
-        requirementCard: RequirementCard
+        requirementCard: RequirementCard,
     ) {
         super.bind(context, fragmentManager, viewModel, requirementCard)
 
@@ -220,6 +225,7 @@ class RequestMeasureCardViewHolder(
                     type = CALENDAR_TYPE,
                     titleData = context.getString(R.string.requirements_card_due_time),
                     contentData = dateFormat.format(getMeasureDueDate(requirementCard.estimationDto?.createdAt)),
+                    extraData = "",
                     alertData = context.getString(R.string.requirements_card_due_time_alert)
                 )
             })
@@ -237,7 +243,7 @@ class EstimatedCardViewHolder(
         context: Context,
         fragmentManager: FragmentManager,
         viewModel: RequirementViewModel,
-        requirementCard: RequirementCard
+        requirementCard: RequirementCard,
     ) {
         super.bind(context, fragmentManager, viewModel, requirementCard)
 
@@ -252,7 +258,9 @@ class EstimatedCardViewHolder(
                         if (it > 0)
                             "${moneyFormat.format(it)}원" else context.getString(
                             R.string.not_estimated_text
-                        )},
+                        )
+                    },
+                    extraData = if (requirementCard.estimationDto?.price!! > 0) context.getString(if (requirementCard.estimationDto.includingVat == true) R.string.vat_included else R.string.vat_not_included) else "",
                     alertData = context.getString(R.string.requirements_card_waiting_label),
                 )
             })

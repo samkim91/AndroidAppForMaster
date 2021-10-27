@@ -19,6 +19,7 @@ import kr.co.soogong.master.ui.dialog.popup.DialogData.Companion.getCancelSendin
 import kr.co.soogong.master.ui.requirement.action.write.WriteEstimationViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.ui.requirement.action.write.WriteEstimationViewModel.Companion.SEND_ESTIMATION_SUCCESSFULLY
 import kr.co.soogong.master.ui.widget.RequirementDrawerContainer
+import kr.co.soogong.master.ui.widget.RequirementDrawerContainer.Companion.PREVIOUS_ESTIMATION_TYPE
 import kr.co.soogong.master.ui.widget.RequirementDrawerContainer.Companion.REQUIREMENT_TYPE
 import kr.co.soogong.master.uihelper.requirment.action.EstimationTemplatesActivityHelper
 import kr.co.soogong.master.utility.EventObserver
@@ -71,7 +72,9 @@ class WriteEstimationActivity : BaseActivity<ActivityWriteEstimationBinding>(
                             viewModel.sendEstimation()
                         }
                     } else {
-                        if ((!laborCost.alertVisible && !materialCost.alertVisible && !travelCost.alertVisible) && ValidationHelper.isIntRange(viewModel.totalCost.value!!)) {
+                        if ((!laborCost.alertVisible && !materialCost.alertVisible && !travelCost.alertVisible) && ValidationHelper.isIntRange(
+                                viewModel.totalCost.value!!)
+                        ) {
                             showLoading(supportFragmentManager)
                             viewModel.sendEstimation()
                         }
@@ -82,22 +85,15 @@ class WriteEstimationActivity : BaseActivity<ActivityWriteEstimationBinding>(
             requestTypeGroup.setOnCheckedChangeListener { _, checkedId ->
                 when (checkedId) {
                     filterOption1.id -> {
-                        simpleCost.visibility = View.VISIBLE
+                        estimationIntegration.visibility = View.VISIBLE
                         estimationByItemGroup.visibility = View.GONE
                         viewModel.estimationType.value = EstimationTypeCode.INTEGRATION
                     }
 
                     filterOption2.id -> {
-                        simpleCost.visibility = View.GONE
+                        estimationIntegration.visibility = View.GONE
                         estimationByItemGroup.visibility = View.VISIBLE
                         viewModel.estimationType.value = EstimationTypeCode.BY_ITEM
-                        totalCost.setEditTextBackground(
-                            ResourcesCompat.getDrawable(
-                                resources,
-                                R.drawable.shape_gray_background_gray_border_radius50,
-                                null
-                            )
-                        )
                     }
                 }
             }
@@ -114,13 +110,28 @@ class WriteEstimationActivity : BaseActivity<ActivityWriteEstimationBinding>(
                 }
             })
 
+            totalCost.setEditTextBackground(
+                ResourcesCompat.getDrawable(
+                    resources,
+                    R.drawable.shape_gray_background_gray_border_radius50,
+                    null
+                )
+            )
+
+            checkboxForSimpleCostIncludingVat.checkBox.setOnCheckedChangeListener { _, isChecked ->
+                viewModel.includingVat.value = isChecked
+            }
+
+            checkboxForTotalCostIncludingVat.checkBox.setOnCheckedChangeListener { _, isChecked ->
+                viewModel.includingVat.value = isChecked
+            }
+
             alertBoxForLoadingEstimationTemplate.setOnClickListener {
                 estimationTemplateLauncher.launch(EstimationTemplatesActivityHelper.getIntent(this@WriteEstimationActivity))
             }
 
-            checkboxForAddingEstimationTemplate.setCheckClick {
-                viewModel.isSavingTemplate.value =
-                    checkboxForAddingEstimationTemplate.checkBox.isChecked
+            checkboxForAddingEstimationTemplate.checkBox.setOnCheckedChangeListener { _, isChecked ->
+                viewModel.isSavingTemplate.value = isChecked
             }
 
             estimationImagesPicker.setAdapter { viewModel.estimationImages.removeAt(it) }
@@ -198,7 +209,7 @@ class WriteEstimationActivity : BaseActivity<ActivityWriteEstimationBinding>(
 
         viewModel.requirement.observe(this, { requirement ->
             binding.flexibleContainer.removeAllViews()
-            // view : 고객 요청 내용
+            // view : 고객 요청 내용, 이전 실측 내용(있으면)
             RequirementDrawerContainer.addDrawerContainer(
                 context = this,
                 container = binding.flexibleContainer,
@@ -207,6 +218,16 @@ class WriteEstimationActivity : BaseActivity<ActivityWriteEstimationBinding>(
                 isSpread = false,
                 includingCancel = false
             )
+            requirement.measurement?.let {
+                RequirementDrawerContainer.addDrawerContainer(
+                    context = this,
+                    container = binding.flexibleContainer,
+                    requirementDto = requirement,
+                    contentType = PREVIOUS_ESTIMATION_TYPE,
+                    isSpread = false,
+                    includingCancel = false
+                )
+            }
         })
     }
 

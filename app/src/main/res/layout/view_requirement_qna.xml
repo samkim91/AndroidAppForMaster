@@ -11,7 +11,7 @@
         >
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/question"
+            android:id="@+id/key"
             style="@style/text_style_14sp.regular"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -24,7 +24,7 @@
             tools:text="프로젝트별 질문1" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/answer"
+            android:id="@+id/value"
             style="@style/text_style_16sp.medium"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -32,10 +32,25 @@
             android:gravity="center_vertical"
             android:text="@string/null_text"
             android:textColor="@color/text_basic_color"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/extra"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/question"
+            app:layout_constraintTop_toBottomOf="@id/key"
             tools:text="프로젝트 질문 답변" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/extra"
+            style="@style/text_style_10sp.medium"
+            android:layout_width="wrap_content"
+            android:padding="@dimen/gap_4"
+            android:background="@drawable/shape_white_background_gray_border_radius4"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_A8A8A8"
+            android:visibility="gone"
+            tools:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@id/value"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/value"
+            tools:text="부가세 포함" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/line"
@@ -46,6 +61,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/answer" />
+            app:layout_constraintTop_toBottomOf="@id/value" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

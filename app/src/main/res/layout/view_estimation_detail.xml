@@ -15,17 +15,19 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/gap_8"
-        android:paddingBottom="@dimen/gap_8"
         >
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/key"
             style="@style/text_style_14sp.regular"
+            android:layout_marginTop="@dimen/gap_8"
+            android:layout_marginBottom="@dimen/gap_8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/text_primary_color"
+            app:layout_constraintVertical_bias="0"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="제안내용" />
 
@@ -33,13 +35,29 @@
             android:id="@+id/value"
             style="@style/text_style_14sp.medium"
             android:layout_width="wrap_content"
-            android:gravity="right"
+            android:gravity="end"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/gap_4"
             android:maxWidth="@dimen/gap_230"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/key"
+            app:layout_constraintEnd_toStartOf="@id/extra"
             android:textColor="@color/text_basic_color"
             tools:text="다른 업체보다 빠르고 정확한 시공을 자신합니다. 시공 후 문제가 생긴다면 책임지고 A/S 해드려요. 연락주시면 더 정확한 안내가 가능합" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/extra"
+            style="@style/text_style_10sp.medium"
+            android:layout_width="wrap_content"
+            android:padding="@dimen/gap_4"
+            android:background="@drawable/shape_white_background_gray_border_radius4"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_A8A8A8"
+            android:visibility="gone"
+            tools:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@id/value"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/value"
+            tools:text="부가세 포함" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/card_view"

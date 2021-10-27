@@ -1,6 +1,7 @@
 package kr.co.soogong.master.ui.profile.detail
 
 import androidx.lifecycle.MutableLiveData
+import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
@@ -48,6 +49,16 @@ open class EditProfileContainerViewModel(
                 onError = {
                     setAction(REQUEST_FAILED)
                 }
+            ).addToDisposable()
+    }
+
+    fun saveMasterV2(request: Single<MasterDto>) {
+        request
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeBy(
+                onSuccess = { setAction(SAVE_MASTER_SUCCESSFULLY) },
+                onError = { setAction(REQUEST_FAILED) }
             ).addToDisposable()
     }
 

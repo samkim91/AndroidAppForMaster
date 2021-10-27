@@ -213,5 +213,41 @@ data class DialogData(
                 "삭제",
                 context.getColor(R.color.text_basic_color)
             )
+
+        fun getConfirmingDirectRepairYn(context: Context) =
+            DialogData(
+                "직접 시공하시나요?",
+                context.getColor(R.color.text_basic_color),
+                "수공은 직접 시공하는 마스터님만 사용할 수\n있는 서비스입니다. 직접 시공하지 않으면\n 서비스 이용이 제한됩니다.",
+                context.getColor(R.color.text_alert_color),
+                "네",
+                context.getColor(R.color.text_basic_color),
+                "아니요",
+                context.getColor(R.color.text_basic_color)
+            )
+
+        fun getNoticeForRequestMeasure(context: Context, count: Int) =
+            DialogData(
+                "현장실측 요청 ${count}건",
+                context.getColor(R.color.text_basic_color),
+                "고객님이 방문 요청을 하셨어요.\n내용을 확인한 뒤\n실측여부 버튼을 클릭해 주세요.",
+                context.getColor(R.color.color_1FC472),
+                "확인하러 가기",
+                context.getColor(R.color.text_basic_color),
+                null,
+                context.getColor(R.color.text_basic_color),
+            )
+
+        fun getNoticeForRequestConsulting(context: Context, count: Int) =
+            DialogData(
+                "상세상담 요청 ${count}건",
+                context.getColor(R.color.text_basic_color),
+                "시공을 희망하는 고객님이 기다리고\n있어요. 먼저 고객님께 연락해서\n시공확률을 높여보세요.",
+                context.getColor(R.color.color_1FC472),
+                "상담하러 가기",
+                context.getColor(R.color.text_basic_color),
+                null,
+                context.getColor(R.color.text_basic_color),
+            )
     }
 }
