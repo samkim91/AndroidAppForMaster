@@ -82,6 +82,14 @@ data class DialogData(
                 "아니요", context.getColor(R.color.text_basic_color)
             )
 
+        fun getRecommendingCallingCustomer(context: Context) =
+            DialogData(
+                "가급적 15분 내료 고객님에게 전화하여 현장방문 일정을 잡아주세요.", context.getColor(R.color.text_basic_color),
+                null, context.getColor(R.color.color_1FC472),
+                "고객에게 전화하기", context.getColor(R.color.text_basic_color),
+                null, context.getColor(R.color.text_basic_color)
+            )
+
         fun getRefuseMeasureDialogData(context: Context) =
             DialogData(
                 "실측을 포기하시겠어요?", context.getColor(R.color.text_basic_color),

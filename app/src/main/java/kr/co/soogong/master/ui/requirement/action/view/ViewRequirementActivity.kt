@@ -95,11 +95,12 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
         Timber.tag(TAG).d("registerEventObserve: ")
         viewModel.requirement.observe(this@ViewRequirementActivity, { requirement ->
             if (!isValidRequirement(requirement)) return@observe
-            setLayout(requirement)
+            setFlexibleContainerLayout(requirement)
             setButtons(requirement)
             binding.requirementDueDate.setDueDate(requirement)
             binding.requirementStatus.requirementDto = requirement
             setLayoutForRequestConsult(requirement)
+            showDialogForCallingCustomer(requirement)
         })
 
         viewModel.action.observe(this@ViewRequirementActivity, EventObserver { event ->
@@ -117,8 +118,8 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                     }
                 }
                 RESPOND_TO_MEASURE_SUCCESSFULLY -> {
-                    toast(getString(R.string.respond_to_measure_successfully_text))
-                    onBackPressed()
+                    // 화면 리프레시 하고 다이얼로그 띄우기
+                    viewModel.requestRequirement()
                 }
                 ASK_FOR_REVIEW_SUCCESSFULLY -> {
                     setReviewAsked()
@@ -141,26 +142,40 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
 
             // NOTE: 상호 통화한 적이 한번도 없으면 다이얼로그로 전화하라고 안내
             if (boolean && requirement.estimationDto?.fromMasterCallCnt == 0 && requirement.estimationDto.fromClientCallCnt == 0) {
-                val dialog = CustomDialog.newInstance(
+                CustomDialog.newInstance(
                     dialogData = getRequestConsultAlertDialogData(this),
                     yesClick = {},
                     noClick = {}
-                )
+                ).let {
+                    it.show(supportFragmentManager, it.tag)
+                }
+            }
+        }
+    }
 
-                dialog.show(supportFragmentManager, dialog.tag)
+    private fun showDialogForCallingCustomer(requirement: RequirementDto) {
+        (RequirementStatus.getStatusFromRequirement(requirement) is RequirementStatus.Measuring).let { boolean ->
+            if (boolean && requirement.estimationDto?.fromMasterCallCnt == 0 && requirement.estimationDto.fromClientCallCnt == 0) {
+                CustomDialog.newInstance(DialogData.getRecommendingCallingCustomer(this),
+                    yesClick = { viewModel.callToClient() },
+                    noClick = {}
+                ).let {
+                    it.show(supportFragmentManager, it.tag)
+                }
             }
         }
     }
 
     private fun isValidRequirement(requirement: RequirementDto): Boolean {
         if (requirement.estimationDto?.masterResponseCode == EstimationResponseCode.EXPIRED) {
-            val dialog = CustomDialog.newInstance(
+            CustomDialog.newInstance(
                 dialogData = getExpiredRequestConsultDialogData(this),
                 yesClick = { onBackPressed() },
                 noClick = {}
-            )
-            dialog.isCancelable = false
-            dialog.show(supportFragmentManager, dialog.tag)
+            ).let {
+                it.isCancelable = false
+                it.show(supportFragmentManager, it.tag)
+            }
             return false
         }
         return true
@@ -173,7 +188,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
         viewModel.requestRequirement()
     }
 
-    private fun setLayout(requirement: RequirementDto) {
+    private fun setFlexibleContainerLayout(requirement: RequirementDto) {
         Timber.tag(TAG).d("setLayout: ")
         bind {
             flexibleContainer.removeAllViews()
@@ -542,14 +557,15 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                             setTextColor(getColor(R.color.color_FFFFFF))
                             setBackgroundColor(resources.getColor(R.color.color_FF711D, null))
                             setOnClickListener {
-                                val dialog = CustomDialog.newInstance(
+                                CustomDialog.newInstance(
                                     getRefuseEstimateDialogData(this@ViewRequirementActivity),
                                     yesClick = {
                                         viewModel.refuseToEstimate()
                                     },
                                     noClick = { }
-                                )
-                                dialog.show(supportFragmentManager, dialog.tag)
+                                ).let {
+                                    it.show(supportFragmentManager, it.tag)
+                                }
                             }
                         }
                         with(rightButton) {
@@ -578,7 +594,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                         setTextColor(getColor(R.color.color_FFFFFF))
                         setBackgroundColor(resources.getColor(R.color.color_FF711D, null))
                         setOnClickListener {
-                            val dialog = CustomDialog.newInstance(
+                            CustomDialog.newInstance(
                                 getRefuseMeasureDialogData(this@ViewRequirementActivity),
                                 yesClick = {
                                     startActivity(
@@ -589,8 +605,9 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                                     )
                                 },
                                 noClick = { }
-                            )
-                            dialog.show(supportFragmentManager, dialog.tag)
+                            ).let {
+                                it.show(supportFragmentManager, it.tag)
+                            }
                         }
                     }
                     with(rightButton) {
@@ -599,14 +616,15 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                         setTextColor(getColor(R.color.color_FFFFFF))
                         setBackgroundColor(resources.getColor(R.color.color_22D47B, null))
                         setOnClickListener {
-                            val dialog = CustomDialog.newInstance(
+                            CustomDialog.newInstance(
                                 getAcceptMeasureDialogData(this@ViewRequirementActivity),
                                 yesClick = {
                                     viewModel.respondToMeasure()
                                 },
                                 noClick = { }
-                            )
-                            dialog.show(supportFragmentManager, dialog.tag)
+                            ).let {
+                                it.show(supportFragmentManager, it.tag)
+                            }
                         }
                     }
                 }
@@ -738,7 +756,8 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                     }
                 }
 
-                else -> { }
+                else -> {
+                }
             }
         }
     }
