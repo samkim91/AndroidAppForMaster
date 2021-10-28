@@ -387,7 +387,7 @@
 
 
     <!-- widget text -->
-    <string name="minimum_cost">견적은 1만원 이상으로 보내주세요.</string>
+    <string name="minimum_cost">1만원 이상으로 보내주세요.</string>
 
     <!-- toast text -->
     <string name="certification_code_requested">인증번호를 요청 했습니다.</string>
