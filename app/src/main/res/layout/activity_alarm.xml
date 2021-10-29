@@ -38,6 +38,7 @@
                 android:id="@+id/marketing_push_at_night"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 app:checked="@{vm.marketingPushAtNight}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
