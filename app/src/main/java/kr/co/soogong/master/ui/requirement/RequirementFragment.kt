@@ -71,7 +71,6 @@ class RequirementFragment : BaseFragment<FragmentRequirementBinding>(
                 masterDto.approvedStatus == NotApprovedCodeTable.code || masterDto.approvedStatus == RequestApproveCodeTable.code
 
             binding.acceptingMeasurementSwitch.setLayoutForRequestMeasure(masterDto = masterDto)
-
         })
 
         viewModel.requestMeasureYn.observe(viewLifecycleOwner, { requestMeasureYn ->
