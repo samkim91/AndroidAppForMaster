@@ -95,11 +95,12 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
         Timber.tag(TAG).d("registerEventObserve: ")
         viewModel.requirement.observe(this@ViewRequirementActivity, { requirement ->
             if (!isValidRequirement(requirement)) return@observe
-            setLayout(requirement)
+            setFlexibleContainerLayout(requirement)
             setButtons(requirement)
             binding.requirementDueDate.setDueDate(requirement)
             binding.requirementStatus.requirementDto = requirement
             setLayoutForRequestConsult(requirement)
+            showDialogForCallingCustomer(requirement)
         })
 
         viewModel.action.observe(this@ViewRequirementActivity, EventObserver { event ->
@@ -117,8 +118,8 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                     }
                 }
                 RESPOND_TO_MEASURE_SUCCESSFULLY -> {
-                    toast(getString(R.string.respond_to_measure_successfully_text))
-                    onBackPressed()
+                    // 화면 리프레시 하고 다이얼로그 띄우기
+                    viewModel.requestRequirement()
                 }
                 ASK_FOR_REVIEW_SUCCESSFULLY -> {
                     setReviewAsked()
@@ -154,6 +155,21 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
         }
     }
 
+    private fun showDialogForCallingCustomer(requirement: RequirementDto) {
+        (RequirementStatus.getStatusFromRequirement(requirement) is RequirementStatus.Measuring).let { boolean ->
+            if (boolean && requirement.estimationDto?.fromMasterCallCnt == 0 && requirement.estimationDto.fromClientCallCnt == 0) {
+                CustomDialog.newInstance(DialogData.getRecommendingCallingCustomer(this))
+                ).let {
+                    it.setButtonsClickListener(
+                        onPositive = { viewModel.callToClient() },
+                        onNegative = {}
+                    )
+                    it.show(supportFragmentManager, it.tag)
+                }
+            }
+        }
+    }
+
     private fun isValidRequirement(requirement: RequirementDto): Boolean {
         if (requirement.estimationDto?.masterResponseCode == EstimationResponseCode.EXPIRED) {
             CustomDialog.newInstance(
@@ -178,7 +194,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
         viewModel.requestRequirement()
     }
 
-    private fun setLayout(requirement: RequirementDto) {
+    private fun setFlexibleContainerLayout(requirement: RequirementDto) {
         Timber.tag(TAG).d("setLayout: ")
         bind {
             flexibleContainer.removeAllViews()
