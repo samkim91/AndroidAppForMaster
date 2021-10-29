@@ -71,7 +71,6 @@ class RequirementFragment : BaseFragment<FragmentRequirementBinding>(
                 masterDto.approvedStatus == NotApprovedCodeTable.code || masterDto.approvedStatus == RequestApproveCodeTable.code
 
             binding.acceptingMeasurementSwitch.setLayoutForRequestMeasure(masterDto = masterDto)
-
         })
 
         viewModel.requestMeasureYn.observe(viewLifecycleOwner, { requestMeasureYn ->
@@ -101,15 +100,16 @@ class RequirementFragment : BaseFragment<FragmentRequirementBinding>(
             dialogData = if (type == REQUEST_MEASURE)
                 DialogData.getNoticeForRequestMeasure(requireContext(), list.count())
             else
-                DialogData.getNoticeForRequestConsulting(requireContext(), list.count()),
-            yesClick = {
-                startActivity(
-                    ViewRequirementActivityHelper.getIntent(requireContext(),
-                        list.first())
-                )
-            },
-            noClick = { }
+                DialogData.getNoticeForRequestConsulting(requireContext(), list.count())
         ).let {
+            it.setButtonsClickListener(
+                onPositive = {
+                    startActivity(
+                        ViewRequirementActivityHelper.getIntent(requireContext(), list.first())
+                    )
+                },
+                onNegative = { }
+            )
             it.show(parentFragmentManager, it.tag)
         }
     }

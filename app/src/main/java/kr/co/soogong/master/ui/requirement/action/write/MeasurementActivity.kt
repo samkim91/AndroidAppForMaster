@@ -154,15 +154,17 @@ class MeasurementActivity : BaseActivity<ActivityMeasurementBinding>(
     }
 
     private fun customBackPressed() {
-        val dialog = CustomDialog.newInstance(
-            DialogData.getCancelSendingEstimationDialogData(this),
-            yesClick = {
-                finish()
-            },
-            noClick = { }
-        )
-
-        dialog.show(supportFragmentManager, dialog.tag)
+        CustomDialog.newInstance(
+            DialogData.getCancelSendingEstimationDialogData(this)
+        ).let {
+            it.setButtonsClickListener(
+                onPositive = {
+                    finish()
+                },
+                onNegative = { }
+            )
+            it.show(supportFragmentManager, it.tag)
+        }
     }
 
     companion object {

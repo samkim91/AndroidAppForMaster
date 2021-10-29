@@ -47,15 +47,17 @@ open class ProgressCardViewHolder(
 
             setLeftButtonClickListener {
                 CustomDialog.newInstance(
-                    DialogData.getCallToCustomerDialogData(context),
-                    yesClick = {
-                        viewModel.callToClient(requirementId = requirementCard.id)
-                        context.startActivity(CallToCustomerHelper.getIntent(
-                            if (requirementCard.safetyNumber.isNullOrEmpty()) requirementCard.tel else requirementCard.safetyNumber))
-                    },
-                    noClick = { }
-                ).run {
-                    this.show(fragmentManager, this.tag)
+                    DialogData.getCallToCustomerDialogData(context)
+                ).let {
+                    it.setButtonsClickListener(
+                        onPositive = {
+                            viewModel.callToClient(requirementId = requirementCard.id)
+                            context.startActivity(CallToCustomerHelper.getIntent(
+                                if (requirementCard.safetyNumber.isNullOrEmpty()) requirementCard.tel else requirementCard.safetyNumber))
+                        },
+                        onNegative = { }
+                    )
+                    it.show(fragmentManager, it.tag)
                 }
             }
 

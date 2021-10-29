@@ -1,9 +1,7 @@
 package kr.co.soogong.master.ui.profile.detail.requiredinformation
 
 import android.os.Bundle
-import android.view.View
 import androidx.activity.viewModels
-import androidx.core.view.isVisible
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.model.profile.ApprovedCodeTable
@@ -85,12 +83,15 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
                         dialogBundle = BottomDialogBundle.getCareerYearBundle(),
                         itemClick = { _, value ->
                             if (viewModel.profile.value?.approvedStatus == ApprovedCodeTable.code) {
-                                val dialog = CustomDialog.newInstance(
-                                    dialogData = DialogData.getConfirmingForRequiredDialogData(this@EditRequiredInformationActivity),
-                                    yesClick = { viewModel.saveCareerPeriod(value) },
-                                    noClick = { })
-
-                                dialog.show(supportFragmentManager, dialog.tag)
+                                CustomDialog.newInstance(DialogData.getConfirmingForRequiredDialogData(
+                                    this@EditRequiredInformationActivity))
+                                    .let {
+                                        it.setButtonsClickListener(
+                                            onPositive = { viewModel.saveCareerPeriod(value) },
+                                            onNegative = { }
+                                        )
+                                        it.show(supportFragmentManager, it.tag)
+                                    }
                             } else {
                                 viewModel.saveCareerPeriod(value)
                             }

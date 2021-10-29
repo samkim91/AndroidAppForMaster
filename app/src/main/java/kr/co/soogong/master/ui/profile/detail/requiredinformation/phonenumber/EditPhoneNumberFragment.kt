@@ -265,13 +265,14 @@ class EditPhoneNumberFragment :
     }
 
     private fun showDialog() {
-        val dialog = CustomDialog.newInstance(
-            DialogData.getUserExistDialogData(requireContext()),
-            yesClick = {},
-            noClick = {}
-        )
-
-        dialog.show(parentFragmentManager, tag)
+        CustomDialog.newInstance(DialogData.getUserExistDialogData(requireContext()))
+            .let {
+                it.setButtonsClickListener(
+                    onPositive = {},
+                    onNegative = {}
+                )
+                it.show(parentFragmentManager, it.tag)
+            }
     }
 
     companion object {

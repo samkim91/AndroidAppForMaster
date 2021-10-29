@@ -278,15 +278,17 @@ class WriteEstimationActivity : BaseActivity<ActivityWriteEstimationBinding>(
     }
 
     private fun customBackPressed() {
-        val dialog = CustomDialog.newInstance(
-            getCancelSendingEstimationDialogData(this@WriteEstimationActivity),
-            yesClick = {
-                finish()
-            },
-            noClick = { }
-        )
-
-        dialog.show(supportFragmentManager, dialog.tag)
+        CustomDialog.newInstance(
+            getCancelSendingEstimationDialogData(this@WriteEstimationActivity)
+        ).let {
+            it.setButtonsClickListener(
+                onPositive = {
+                    finish()
+                },
+                onNegative = { }
+            )
+            it.show(supportFragmentManager, it.tag)
+        }
     }
 
     companion object {

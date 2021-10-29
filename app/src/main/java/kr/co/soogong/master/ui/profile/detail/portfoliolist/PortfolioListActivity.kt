@@ -107,17 +107,17 @@ class PortfolioListActivity : BaseActivity<ActivityEditProfileWithCardBinding>(
         binding.recyclerview.adapter =
             PortfolioListAdapter(
                 leftButtonClickListener = { id ->
-                    val dialog = CustomDialog.newInstance(
-                        dialogData = when(pageName) {
+                    CustomDialog.newInstance(
+                        dialogData = when (pageName) {
                             PORTFOLIO -> DialogData.getAskingDeletePortfolioDialogData(this@PortfolioListActivity)
                             else -> DialogData.getAskingDeletePriceByProjectDialogData(this@PortfolioListActivity)
-                        },
-                        yesClick = {
-                            viewModel.deletePortfolio(id)
-                        },
-                        noClick = { })
-
-                    dialog.show(supportFragmentManager, dialog.tag)
+                        }).let {
+                        it.setButtonsClickListener(
+                            onPositive = { viewModel.deletePortfolio(id) },
+                            onNegative = { }
+                        )
+                        it.show(supportFragmentManager, it.tag)
+                    }
                 },
                 rightButtonClickListener = { id ->
                     startActivity(
@@ -132,7 +132,7 @@ class PortfolioListActivity : BaseActivity<ActivityEditProfileWithCardBinding>(
 
     private fun registerEventObserve() {
         viewModel.action.observe(this, EventObserver { event ->
-            when(event) {
+            when (event) {
                 REQUEST_FAILED -> toast(getString(R.string.error_message_of_request_failed))
             }
         })
