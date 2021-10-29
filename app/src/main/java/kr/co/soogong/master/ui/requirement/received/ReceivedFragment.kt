@@ -50,6 +50,7 @@ class ReceivedFragment : BaseFragment<FragmentRequirementReceivedBinding>(
         super.onResume()
         Timber.tag(TAG).d("onResume: ")
         viewModel.requestList()
+        viewModel.requestMasterSimpleInfo()
     }
 
     private fun registerEventObserve() {

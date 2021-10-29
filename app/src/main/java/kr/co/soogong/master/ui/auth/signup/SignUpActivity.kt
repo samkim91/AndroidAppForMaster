@@ -91,6 +91,10 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>(
                                     .d("addOnCompleteListener successfully: ${task.isSuccessful}")
                                 finish()
                             }
+                            ?.addOnFailureListener { it ->
+                                Timber.tag(TAG).d("addOnFailureListener: $it")
+                                finish()
+                            }
                     }
                 )
                 it.show(supportFragmentManager, it.tag)
