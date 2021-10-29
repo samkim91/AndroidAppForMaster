@@ -47,12 +47,15 @@ class EditOwnerNameFragment :
                 if (ownerName.alertVisible) return@setOnClickListener
 
                 if (viewModel.profile.value?.approvedStatus == ApprovedCodeTable.code) {
-                    val dialog = CustomDialog.newInstance(
-                        dialogData = DialogData.getConfirmingForRequiredDialogData(requireContext()),
-                        yesClick = { viewModel.saveOwnerName() },
-                        noClick = { })
-
-                    dialog.show(parentFragmentManager, dialog.tag)
+                    CustomDialog.newInstance(
+                        DialogData.getConfirmingForRequiredDialogData(requireContext()))
+                        .let {
+                            it.setButtonsClickListener(
+                                onPositive = { viewModel.saveOwnerName() },
+                                onNegative = { }
+                            )
+                            it.show(parentFragmentManager, it.tag)
+                        }
                 } else {
                     viewModel.saveOwnerName()
                 }

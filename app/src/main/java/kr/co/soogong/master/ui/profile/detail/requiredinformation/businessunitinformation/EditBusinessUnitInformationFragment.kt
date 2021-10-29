@@ -91,12 +91,15 @@ class EditBusinessUnitInformationFragment :
                 }
 
                 if (viewModel.profile.value?.approvedStatus == ApprovedCodeTable.code) {
-                    val dialog = CustomDialog.newInstance(
-                        dialogData = DialogData.getConfirmingForRequiredDialogData(requireContext()),
-                        yesClick = { viewModel.saveBusinessUnitInformation() },
-                        noClick = { })
-
-                    dialog.show(parentFragmentManager, dialog.tag)
+                    CustomDialog.newInstance(
+                        dialogData = DialogData.getConfirmingForRequiredDialogData(requireContext()))
+                        .let {
+                            it.setButtonsClickListener(
+                                onPositive = { viewModel.saveBusinessUnitInformation() },
+                                onNegative = { }
+                            )
+                            it.show(parentFragmentManager, it.tag)
+                        }
                 } else {
                     viewModel.saveBusinessUnitInformation()
                 }
@@ -115,7 +118,8 @@ class EditBusinessUnitInformationFragment :
                         businessName.isVisible = false
                         shopName.subTitleVisible = true
                         businessNumber.title = getString(R.string.requesting_birthday_label)
-                        businessRegistImageHolderLabel.text = getString(R.string.identical_image_holder_label)
+                        businessRegistImageHolderLabel.text =
+                            getString(R.string.identical_image_holder_label)
                     }
                     else -> {       // 사업자일 경우 레이아웃
                         viewModel.businessType.value =
@@ -123,7 +127,8 @@ class EditBusinessUnitInformationFragment :
                         businessName.isVisible = true
                         shopName.subTitleVisible = false
                         businessNumber.title = getString(R.string.requesting_business_number_label)
-                        businessRegistImageHolderLabel.text = getString(R.string.business_identical_image_holder_label)
+                        businessRegistImageHolderLabel.text =
+                            getString(R.string.business_identical_image_holder_label)
                     }
                 }
             }

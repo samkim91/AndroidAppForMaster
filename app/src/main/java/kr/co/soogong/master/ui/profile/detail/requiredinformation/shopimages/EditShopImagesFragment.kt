@@ -90,15 +90,18 @@ class EditShopImagesFragment : BaseFragment<FragmentEditShopImagesBinding>(
 
             defaultButton.setOnClickListener {
                 if (viewModel.profile.value?.approvedStatus == ApprovedCodeTable.code) {
-                    val dialog = CustomDialog.newInstance(
-                        dialogData = DialogData.getConfirmingForRequiredDialogData(requireContext()),
-                        yesClick = {
-                            showLoading(parentFragmentManager)
-                            viewModel.saveShopImages()
-                        },
-                        noClick = { })
-
-                    dialog.show(parentFragmentManager, dialog.tag)
+                    CustomDialog.newInstance(
+                        DialogData.getConfirmingForRequiredDialogData(requireContext()))
+                        .let {
+                            it.setButtonsClickListener(
+                                onPositive = {
+                                    showLoading(parentFragmentManager)
+                                    viewModel.saveShopImages()
+                                },
+                                onNegative = { }
+                            )
+                            it.show(parentFragmentManager, it.tag)
+                        }
                 } else {
                     showLoading(parentFragmentManager)
                     viewModel.saveShopImages()
