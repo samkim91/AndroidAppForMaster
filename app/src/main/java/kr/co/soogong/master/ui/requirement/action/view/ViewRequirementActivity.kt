@@ -159,7 +159,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
         (RequirementStatus.getStatusFromRequirement(requirement) is RequirementStatus.Measuring).let { boolean ->
             if (boolean && requirement.estimationDto?.fromMasterCallCnt == 0 && requirement.estimationDto.fromClientCallCnt == 0) {
                 CustomDialog.newInstance(DialogData.getRecommendingCallingCustomer(this))
-                ).let {
+                .let {
                     it.setButtonsClickListener(
                         onPositive = { viewModel.callToClient() },
                         onNegative = {}
