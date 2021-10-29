@@ -49,14 +49,16 @@ class EstimationTemplatesActivity : BaseActivity<ActivityEstimationTemplatesBind
                 leftButtonClick = { template ->
                     Timber.tag(TAG).d("leftButtonClick: $template")
                     CustomDialog.newInstance(
-                        dialogData = DialogData.getConfirmingForDeletingEstimationTemplate(this@EstimationTemplatesActivity),
-                        yesClick = {
-                            viewModel.estimationTemplate.value = template
-                            viewModel.deleteEstimationTemplate()
-                        },
-                        noClick = {}
-                    ).run {
-                        show(supportFragmentManager, tag)
+                        DialogData.getConfirmingForDeletingEstimationTemplate(this@EstimationTemplatesActivity)
+                    ).let {
+                        it.setButtonsClickListener(
+                            onPositive = {
+                                viewModel.estimationTemplate.value = template
+                                viewModel.deleteEstimationTemplate()
+                            },
+                            onNegative = {}
+                        )
+                        it.show(supportFragmentManager, it.tag)
                     }
                 },
                 middleButtonClick = { template ->
@@ -95,11 +97,13 @@ class EstimationTemplatesActivity : BaseActivity<ActivityEstimationTemplatesBind
             },
             cancelListener = {
                 if (it.description.isNotEmpty()) CustomDialog.newInstance(
-                    dialogData = DialogData.getConfirmingForIgnoreChangeOfEstimationTemplate(this),
-                    yesClick = { showBottomSheetDialog(it) },
-                    noClick = { }
-                ).run {
-                    show(supportFragmentManager, tag)
+                    DialogData.getConfirmingForIgnoreChangeOfEstimationTemplate(this)
+                ).let { dialog ->
+                    dialog.setButtonsClickListener(
+                        onPositive = { showBottomSheetDialog(it) },
+                        onNegative = { }
+                    )
+                    dialog.show(supportFragmentManager, dialog.tag)
                 }
             }
         ).run {

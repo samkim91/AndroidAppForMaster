@@ -10,7 +10,6 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
 import kr.co.soogong.master.databinding.DialogCustomBinding
 import timber.log.Timber
-import java.io.Serializable
 
 class CustomDialog() : DialogFragment() {
     lateinit var binding: DialogCustomBinding
@@ -19,14 +18,23 @@ class CustomDialog() : DialogFragment() {
         arguments?.getParcelable(DIALOG_DATA)
     }
 
-    @Suppress("UNCHECKED_CAST")
-    private val yesClick: () -> Unit by lazy {
-        arguments?.getSerializable(YES_CLICK) as () -> Unit
+    private lateinit var customDialogClickListener: CustomDialogClickListener
+
+    interface CustomDialogClickListener {
+        fun onPositiveClicked()
+        fun onNegativeClicked()
     }
 
-    @Suppress("UNCHECKED_CAST")
-    private val noClick: () -> Unit by lazy {
-        arguments?.getSerializable(NO_CLICK) as () -> Unit
+    fun setButtonsClickListener(onPositive: () -> Unit, onNegative: () -> Unit) {
+        this.customDialogClickListener = object : CustomDialogClickListener {
+            override fun onPositiveClicked() {
+                onPositive()
+            }
+
+            override fun onNegativeClicked() {
+                onNegative()
+            }
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,7 +45,7 @@ class CustomDialog() : DialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         Timber.tag(TAG).d("onCreateView: ")
 
@@ -73,7 +81,7 @@ class CustomDialog() : DialogFragment() {
                     btnNo.text = dialogData.negativeBtnText
                     btnNo.setTextColor(dialogData.negativeBtnTextColor)
                     btnNo.setOnClickListener {
-                        noClick()
+                        if (::customDialogClickListener.isInitialized) customDialogClickListener.onNegativeClicked()
                         dismiss()
                     }
                 }
@@ -85,7 +93,7 @@ class CustomDialog() : DialogFragment() {
                     btnYes.text = dialogData.positiveBtnText
                     btnYes.setTextColor(dialogData.positiveBtnTextColor)
                     btnYes.setOnClickListener {
-                        yesClick()
+                        if (::customDialogClickListener.isInitialized) customDialogClickListener.onPositiveClicked()
                         dismiss()
                     }
                 }
@@ -96,20 +104,15 @@ class CustomDialog() : DialogFragment() {
     companion object {
         private const val TAG = "CustomDialog"
         private const val DIALOG_DATA = "DIALOG_DATA"
-        private const val YES_CLICK = "YES_CLICK"
-        private const val NO_CLICK = "NO_CLICK"
 
         fun newInstance(
             dialogData: DialogData,
-            yesClick: () -> Unit,
-            noClick: () -> Unit
-        ): CustomDialog {
-            val args = Bundle()
-            args.putParcelable(DIALOG_DATA, dialogData)
-            args.putSerializable(YES_CLICK, yesClick as Serializable)
-            args.putSerializable(NO_CLICK, noClick as Serializable)
-
-            return CustomDialog().apply { arguments = args }
+            cancelable: Boolean = true,
+        ) = CustomDialog().apply {
+            arguments = Bundle().apply {
+                putParcelable(DIALOG_DATA, dialogData)
+            }
+            isCancelable = cancelable
         }
     }
 }

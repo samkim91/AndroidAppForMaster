@@ -10,7 +10,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.model.major.Major
 import kr.co.soogong.master.data.model.profile.ApprovedCodeTable
-import kr.co.soogong.master.data.model.profile.RequestApproveCodeTable
 import kr.co.soogong.master.databinding.FragmentEditMajorBinding
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.dialog.popup.CustomDialog
@@ -82,12 +81,15 @@ class EditMajorFragment : BaseFragment<FragmentEditMajorBinding>(
                 if (major.alertVisible) return@setOnClickListener
 
                 if (viewModel.profile.value?.approvedStatus == ApprovedCodeTable.code) {
-                    val dialog = CustomDialog.newInstance(
-                        dialogData = DialogData.getConfirmingForRequiredDialogData(requireContext()),
-                        yesClick = { viewModel.saveMajor() },
-                        noClick = { })
-
-                    dialog.show(parentFragmentManager, dialog.tag)
+                    CustomDialog.newInstance(
+                        DialogData.getConfirmingForRequiredDialogData(requireContext()))
+                        .let {
+                            it.setButtonsClickListener(
+                                onPositive = { viewModel.saveMajor() },
+                                onNegative = { }
+                            )
+                            it.show(parentFragmentManager, it.tag)
+                        }
                 } else {
                     viewModel.saveMajor()
                 }

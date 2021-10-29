@@ -80,18 +80,20 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>(
 
     override fun onBackPressed() {
         Timber.tag(TAG).d("onBackPressed: ")
-        CustomDialog.newInstance(DialogData.getQuitSignUpDialogData(this@SignUpActivity),
-            yesClick = { },
-            noClick = {
-                Firebase.auth.currentUser?.delete()
-                    ?.addOnCompleteListener { task ->
-                        Timber.tag(TAG)
-                            .d("addOnCompleteListener successfully: ${task.isSuccessful}")
-                        finish()
+        CustomDialog.newInstance(DialogData.getQuitSignUpDialogData(this@SignUpActivity))
+            .let {
+                it.setButtonsClickListener(
+                    onPositive = { },
+                    onNegative = {
+                        Firebase.auth.currentUser?.delete()
+                            ?.addOnCompleteListener { task ->
+                                Timber.tag(TAG)
+                                    .d("addOnCompleteListener successfully: ${task.isSuccessful}")
+                                finish()
+                            }
                     }
-            })
-            .run {
-                show(supportFragmentManager, tag)
+                )
+                it.show(supportFragmentManager, it.tag)
             }
     }
 

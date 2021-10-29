@@ -46,26 +46,29 @@ class SplashActivity : AppCompatActivity() {
 
                             if (currentVersion != versionDto.version) {
                                 CustomDialog.newInstance(
-                                    dialogData = if (versionDto.mandatoryYn) DialogData.getUpdatingAppMandatory(
-                                        this)
-                                    else DialogData.getUpdatingAppRecommended(this),
-                                    yesClick = {
-                                        startActivity(Intent(Intent.ACTION_VIEW).apply {
-                                            data =
-                                                Uri.parse("https://play.google.com/store/search?q=%EC%88%98%EA%B3%B5")
-                                            setPackage("com.android.vending")
-                                        })
-                                    },
-                                    noClick = {
-                                        if (versionDto.mandatoryYn) {
-                                            exitProcess(0)
-                                        } else {
-                                            viewModel.checkSignIn()
+                                    dialogData = if (versionDto.mandatoryYn)
+                                        DialogData.getUpdatingAppMandatory(this)
+                                    else
+                                        DialogData.getUpdatingAppRecommended(this),
+                                    cancelable = false
+                                ).let {
+                                    it.setButtonsClickListener(
+                                        onPositive = {
+                                            startActivity(Intent(Intent.ACTION_VIEW).apply {
+                                                data =
+                                                    Uri.parse("https://play.google.com/store/search?q=%EC%88%98%EA%B3%B5")
+                                                setPackage("com.android.vending")
+                                            })
+                                        },
+                                        onNegative = {
+                                            if (versionDto.mandatoryYn) {
+                                                exitProcess(0)
+                                            } else {
+                                                viewModel.checkSignIn()
+                                            }
                                         }
-                                    }
-                                ).run {
-                                    isCancelable = false
-                                    show(supportFragmentManager, tag)
+                                    )
+                                    it.show(supportFragmentManager, it.tag)
                                 }
                             } else {
                                 viewModel.checkSignIn()
@@ -79,11 +82,13 @@ class SplashActivity : AppCompatActivity() {
                         else {
                             CustomDialog.newInstance(
                                 dialogData = DialogData.getConfirmingDirectRepairYn(this),
-                                yesClick = { viewModel.updateDirectRepairYn(true) },
-                                noClick = { viewModel.updateDirectRepairYn(false) }
-                            ).apply {
-                                isCancelable = false
-                                show(supportFragmentManager, tag)
+                                cancelable = false
+                            ).let { dialog ->
+                                dialog.setButtonsClickListener(
+                                    onPositive = { viewModel.updateDirectRepairYn(true) },
+                                    onNegative = { viewModel.updateDirectRepairYn(false) }
+                                )
+                                dialog.show(supportFragmentManager, dialog.tag)
                             }
                         }
                     }

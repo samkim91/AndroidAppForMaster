@@ -45,29 +45,33 @@ open class ReceivedCardViewHolder(
                     when (it) {
                         // 미승인 상태이면, 필수정보를 채우도록 이동
                         NotApprovedCodeTable.code -> {
-                            val dialog =
-                                CustomDialog.newInstance(
-                                    DialogData.getAskingFillProfileDialogData(context),
-                                    yesClick = {
+                            CustomDialog.newInstance(
+                                DialogData.getAskingFillProfileDialogData(context),
+                            ).let { dialog ->
+                                dialog.setButtonsClickListener(
+                                    onPositive = {
                                         context.startActivity(
                                             EditRequiredInformationActivityHelper.getIntent(
                                                 context
                                             )
                                         )
                                     },
-                                    noClick = { })
-                            dialog.show(fragmentManager, dialog.tag)
+                                    onNegative = { }
+                                )
+                                dialog.show(fragmentManager, dialog.tag)
+                            }
                         }
                         // 승인요청 상태이면, 승인될 때까지 기다리라는 문구
                         RequestApproveCodeTable.code -> {
-                            val dialog =
-                                CustomDialog.newInstance(
-                                    DialogData.getWaitingUntilApprovalDialogData(
-                                        context
-                                    ),
-                                    yesClick = { },
-                                    noClick = { })
-                            dialog.show(fragmentManager, dialog.tag)
+                            CustomDialog.newInstance(
+                                DialogData.getWaitingUntilApprovalDialogData(context)
+                            ).let { dialog ->
+                                dialog.setButtonsClickListener(
+                                    onPositive = { },
+                                    onNegative = { }
+                                )
+                                dialog.show(fragmentManager, dialog.tag)
+                            }
                         }
                         // 승인 상태이면, 문의 세부정보로 이동
                         else -> {
@@ -86,18 +90,21 @@ open class ReceivedCardViewHolder(
             rightButton.setText(R.string.repair_done_text)
             setRightButtonClickListener {
                 CustomDialog.newInstance(
-                    dialogData = DialogData.getConfirmRepairDoneDialogData(context),
-                    yesClick = {
-                        context.startActivity(
-                            EndRepairActivityHelper.getIntent(
-                                context,
-                                requirementCard.id
+                    dialogData = DialogData.getConfirmRepairDoneDialogData(context)
+                ).let {
+                    it.setButtonsClickListener(
+                        onPositive = {
+                            context.startActivity(
+                                EndRepairActivityHelper.getIntent(
+                                    context,
+                                    requirementCard.id
+                                )
                             )
-                        )
-                    },
-                    noClick = {}
-                ).run {
-                    show(fragmentManager, this.tag)
+                        },
+                        onNegative = {}
+                    )
+
+                    it.show(fragmentManager, it.tag)
                 }
             }
         }
@@ -158,15 +165,17 @@ class RequestConsultCardViewHolder(
 
             setLeftButtonClickListener {
                 CustomDialog.newInstance(
-                    DialogData.getCallToCustomerDialogData(context),
-                    yesClick = {
-                        viewModel.callToClient(requirementId = requirementCard.id)
-                        context.startActivity(CallToCustomerHelper.getIntent(
-                            if (requirementCard.safetyNumber.isNullOrEmpty()) requirementCard.tel else requirementCard.safetyNumber))
-                    },
-                    noClick = { }
-                ).run {
-                    this.show(fragmentManager, this.tag)
+                    DialogData.getCallToCustomerDialogData(context)
+                ).let {
+                    it.setButtonsClickListener(
+                        onPositive = {
+                            viewModel.callToClient(requirementId = requirementCard.id)
+                            context.startActivity(CallToCustomerHelper.getIntent(
+                                if (requirementCard.safetyNumber.isNullOrEmpty()) requirementCard.tel else requirementCard.safetyNumber))
+                        },
+                        onNegative = { }
+                    )
+                    it.show(fragmentManager, it.tag)
                 }
             }
 
