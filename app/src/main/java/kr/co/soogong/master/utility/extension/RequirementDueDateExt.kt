@@ -9,7 +9,9 @@ import kr.co.soogong.master.data.dto.requirement.RequirementDto
 import kr.co.soogong.master.data.model.requirement.RequirementStatus
 import kr.co.soogong.master.data.model.requirement.estimation.EstimationResponseCode
 import kr.co.soogong.master.ui.widget.RequirementDueDate
-import java.util.*
+import kr.co.soogong.master.utility.TimeHelper
+import kr.co.soogong.master.utility.TimeHelper.WITHIN_24_HOURS
+import kr.co.soogong.master.utility.TimeHelper.WITHIN_90_MINUTES
 
 @BindingAdapter("setDueDate")
 fun RequirementDueDate.setDueDate(requirementDto: RequirementDto?) {
@@ -23,36 +25,18 @@ fun RequirementDueDate.setDueDate(requirementDto: RequirementDto?) {
                     }
                     this.isVisible = true
                     label = context.getString(R.string.requirements_card_due_date)
-                    date = getEstimationDueDate(it.createdAt)
+                    date = TimeHelper.getDueTime(it.createdAt, WITHIN_24_HOURS)
                 }
             }
             is RequirementStatus.RequestMeasure -> {
                 this.isVisible = true
                 label = context.getString(R.string.requirements_card_response_measure_due_date)
-                date = getMeasureDueDate(requirementDto.estimationDto?.createdAt)
+                date = TimeHelper.getDueTime(requirementDto.estimationDto?.createdAt,
+                    WITHIN_90_MINUTES)
             }
             else -> {
                 this.isVisible = false
             }
         }
     }
-}
-
-fun getEstimationDueDate(createdAt: Date?): Date {
-    val calendar = Calendar.getInstance(Locale.KOREA)
-    createdAt?.let {
-        calendar.time = it
-        calendar.add(Calendar.DATE, 1)
-    }
-    return calendar.time
-}
-
-fun getMeasureDueDate(createdAt: Date?): Date {
-    val calendar = Calendar.getInstance(Locale.KOREA)
-    createdAt?.let {
-        calendar.time = it
-        calendar.add(Calendar.HOUR, 1)
-        calendar.add(Calendar.MINUTE, 30)
-    }
-    return calendar.time
 }
