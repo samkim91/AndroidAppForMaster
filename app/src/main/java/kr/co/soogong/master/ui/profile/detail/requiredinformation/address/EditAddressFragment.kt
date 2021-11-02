@@ -10,12 +10,11 @@ import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentEditAddressBinding
 import kr.co.soogong.master.ui.base.BaseFragment
-import kr.co.soogong.master.ui.profile.detail.requiredinformation.address.EditAddressViewModel.Companion.GET_COMPANY_ADDRESS_FAILED
-import kr.co.soogong.master.ui.profile.detail.requiredinformation.address.EditAddressViewModel.Companion.SAVE_COMPANY_ADDRESS_FAILED
-import kr.co.soogong.master.ui.profile.detail.requiredinformation.address.EditAddressViewModel.Companion.SAVE_COMPANY_ADDRESS_SUCCESSFULLY
-import kr.co.soogong.master.utility.LocationHelper
+import kr.co.soogong.master.ui.profile.detail.EditProfileContainerViewModel.Companion.REQUEST_FAILED
+import kr.co.soogong.master.ui.profile.detail.EditProfileContainerViewModel.Companion.SAVE_MASTER_SUCCESSFULLY
 import kr.co.soogong.master.uihelper.auth.signup.AddressActivityHelper
 import kr.co.soogong.master.utility.EventObserver
+import kr.co.soogong.master.utility.LocationHelper
 import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
 
@@ -53,7 +52,7 @@ class EditAddressFragment : BaseFragment<FragmentEditAddressBinding>(
             address.setButtonClickListener {
                 getAddressLauncher.launch(
                     Intent(AddressActivityHelper.getIntent(
-                    requireContext()))
+                        requireContext()))
                 )
             }
 
@@ -77,11 +76,11 @@ class EditAddressFragment : BaseFragment<FragmentEditAddressBinding>(
     private fun registerEventObserve() {
         Timber.tag(TAG).d("registerEventObserve: ")
         viewModel.action.observe(viewLifecycleOwner, EventObserver { event ->
-            when(event) {
-                SAVE_COMPANY_ADDRESS_SUCCESSFULLY -> {
+            when (event) {
+                SAVE_MASTER_SUCCESSFULLY -> {
                     activity?.onBackPressed()
                 }
-                SAVE_COMPANY_ADDRESS_FAILED, GET_COMPANY_ADDRESS_FAILED -> {
+                REQUEST_FAILED -> {
                     requireContext().toast(getString(R.string.error_message_of_request_failed))
                 }
             }

@@ -11,15 +11,15 @@ import kr.co.soogong.master.domain.usecase.profile.GetProfileUseCase
 import kr.co.soogong.master.domain.usecase.profile.SaveMasterUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogItem
+import kr.co.soogong.master.ui.profile.detail.EditProfileContainerViewModel
 import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class EditWarrantyInformationViewModel @Inject constructor(
-    private val getProfileUseCase: GetProfileUseCase,
-    private val saveMasterUseCase: SaveMasterUseCase,
-) : BaseViewModel() {
-    private val _profile = MutableLiveData<Profile>()
+    getProfileUseCase: GetProfileUseCase,
+    saveMasterUseCase: SaveMasterUseCase,
+) : EditProfileContainerViewModel(getProfileUseCase, saveMasterUseCase) {
 
     val warrantyPeriod = MutableLiveData<Int>()
     val warrantyPeriodForLayout = MutableLiveData<String>()
@@ -28,49 +28,35 @@ class EditWarrantyInformationViewModel @Inject constructor(
     fun requestWarrantyInformation() {
         Timber.tag(TAG).d("requestWarrantyInformation: ")
 
-        getProfileUseCase()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeBy(
-                onSuccess = { profile ->
-                    _profile.value = profile
-                    profile.requiredInformation?.warrantyInformation?.warrantyPeriod?.let {
-                        warrantyPeriod.postValue(it)
-                        warrantyPeriodForLayout.postValue(
-                            BottomDialogItem.getWarrantyPeriodList().find { item ->
-                                item.value == it
-                            }?.key)
-                    }
-                    profile.requiredInformation?.warrantyInformation?.warrantyDescription?.let {
-                        warrantyDescription.postValue(it)
-                    }
-                },
-                onError = { setAction(GET_WARRANTY_INFORMATION_FAILED) }
-            ).addToDisposable()
+        requestProfile {
+            profile.value = it
+            it.requiredInformation?.warrantyInformation?.warrantyPeriod?.let { period ->
+                warrantyPeriod.postValue(period)
+                warrantyPeriodForLayout.postValue(
+                    BottomDialogItem.getWarrantyPeriodList().find { item ->
+                        item.value == period
+                    }?.key)
+            }
+            it.requiredInformation?.warrantyInformation?.warrantyDescription?.let { description ->
+                warrantyDescription.postValue(description)
+            }
+        }
     }
 
     fun saveWarrantyInfo() {
         Timber.tag(TAG).d("saveWarrantyInfo: ")
 
-        saveMasterUseCase(
+        saveMaster(
             MasterDto(
-                id = _profile.value?.id,
-                uid = _profile.value?.uid,
+                id = profile.value?.id,
+                uid = profile.value?.uid,
                 warrantyPeriod = warrantyPeriod.value,
                 warrantyDescription = warrantyDescription.value,
             )
-        ).subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeBy(
-                onSuccess = { setAction(SAVE_WARRANTY_INFORMATION_SUCCESSFULLY) },
-                onError = { setAction(SAVE_WARRANTY_INFORMATION_FAILED) }
-            ).addToDisposable()
+        )
     }
 
     companion object {
         private const val TAG = "EditWarrantyInformationViewModel"
-        const val SAVE_WARRANTY_INFORMATION_SUCCESSFULLY = "SAVE_WARRANTY_INFORMATION_SUCCESSFULLY"
-        const val SAVE_WARRANTY_INFORMATION_FAILED = "SAVE_WARRANTY_INFORMATION_FAILED"
-        const val GET_WARRANTY_INFORMATION_FAILED = "GET_WARRANTY_INFORMATION_FAILED"
     }
 }

@@ -11,22 +11,20 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.dto.profile.MasterDto
-import kr.co.soogong.master.data.model.profile.Profile
 import kr.co.soogong.master.domain.usecase.auth.CheckUserExistentUseCase
 import kr.co.soogong.master.domain.usecase.profile.GetProfileUseCase
 import kr.co.soogong.master.domain.usecase.profile.SaveMasterUseCase
-import kr.co.soogong.master.ui.base.BaseViewModel
+import kr.co.soogong.master.ui.profile.detail.EditProfileContainerViewModel
 import kr.co.soogong.master.utility.PhoneNumberHelper
 import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class EditPhoneNumberViewModel @Inject constructor(
-    private val getProfileUseCase: GetProfileUseCase,
-    private val saveMasterUseCase: SaveMasterUseCase,
     private val checkUserExistentUseCase: CheckUserExistentUseCase,
-) : BaseViewModel() {
-    private val _profile = MutableLiveData<Profile>()
+    getProfileUseCase: GetProfileUseCase,
+    saveMasterUseCase: SaveMasterUseCase,
+) : EditProfileContainerViewModel(getProfileUseCase, saveMasterUseCase) {
 
     val tel = MutableLiveData("")
     val certificationCode = MutableLiveData("")
@@ -47,59 +45,41 @@ class EditPhoneNumberViewModel @Inject constructor(
     fun requestProfile() {
         Timber.tag(TAG).d("requestProfile: ")
 
-        getProfileUseCase()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeBy(
-                onSuccess = { profile ->
-                    _profile.value = profile
-                },
-                onError = {
-                    setAction(REQUEST_FAILED)
-                }
-            ).addToDisposable()
-
+        requestProfile {
+            profile.value = it
+        }
     }
 
     fun checkUserExist() {
         Timber.tag(TAG).d("checkUserExist: ")
 
-        tel.value?.let { tel ->
-            checkUserExistentUseCase(tel)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeBy(
-                    onSuccess = {
-                        Timber.tag(TAG).d("onSuccess: $it")
-                        if (it) setAction(PHONE_NUMBER_EXIST) else setAction(
-                            PHONE_NUMBER_NOT_EXIST)
-                    },
-                    onError = {
-                        Timber.tag(TAG).d("onError: $it")
-                        setAction(REQUEST_FAILED)
-                    }
-                ).addToDisposable()
-        }
+
+        checkUserExistentUseCase(tel.value!!)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeBy(
+                onSuccess = {
+                    Timber.tag(TAG).d("onSuccess: $it")
+                    if (it) setAction(PHONE_NUMBER_EXIST) else setAction(
+                        PHONE_NUMBER_NOT_EXIST)
+                },
+                onError = {
+                    Timber.tag(TAG).d("onError: $it")
+                    setAction(REQUEST_FAILED)
+                }
+            ).addToDisposable()
     }
 
     fun savePhoneNumber() {
         Timber.tag(TAG).d("savePhoneNumber: ")
 
-        tel.value?.let {
-            saveMasterUseCase(
-                MasterDto(
-                    id = _profile.value?.id,
-                    uid = _profile.value?.uid,
-                    tel = PhoneNumberHelper.toGlobalNumber(it),
-                )
+        saveMaster(
+            MasterDto(
+                id = profile.value?.id,
+                uid = profile.value?.uid,
+                tel = PhoneNumberHelper.toGlobalNumber(tel.value!!),
             )
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeBy(
-                    onSuccess = { setAction(SAVE_PHONE_NUMBER_SUCCESSFULLY) },
-                    onError = { setAction(REQUEST_FAILED) }
-                ).addToDisposable()
-        }
+        )
     }
 
 
@@ -108,7 +88,5 @@ class EditPhoneNumberViewModel @Inject constructor(
         const val REQUEST_FAILED = "REQUEST_FAILED"
         const val PHONE_NUMBER_EXIST = "PHONE_NUMBER_EXIST"
         const val PHONE_NUMBER_NOT_EXIST = "PHONE_NUMBER_NOT_EXIST"
-        const val SAVE_PHONE_NUMBER_SUCCESSFULLY =
-            "SAVE_PHONE_NUMBER_SUCCESSFULLY"
     }
 }

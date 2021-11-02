@@ -9,9 +9,8 @@ import kr.co.soogong.master.databinding.FragmentEditEmailBinding
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogBundle
 import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogRecyclerView
-import kr.co.soogong.master.ui.profile.detail.email.EditEmailViewModel.Companion.GET_EMAIL_FAILED
-import kr.co.soogong.master.ui.profile.detail.email.EditEmailViewModel.Companion.SAVE_EMAIL_FAILED
-import kr.co.soogong.master.ui.profile.detail.email.EditEmailViewModel.Companion.SAVE_EMAIL_SUCCESSFULLY
+import kr.co.soogong.master.ui.profile.detail.EditProfileContainerViewModel.Companion.REQUEST_FAILED
+import kr.co.soogong.master.ui.profile.detail.EditProfileContainerViewModel.Companion.SAVE_MASTER_SUCCESSFULLY
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.extension.toast
 import kr.co.soogong.master.utility.validation.ValidationHelper
@@ -49,7 +48,7 @@ class EditEmailFragment :
                     if (!ValidationHelper.isValidDomain(it)) email.alertVisible = true
                 }
 
-                if (!email.alertVisible) viewModel.saveEmailInfo()
+                if (!email.alertVisible) viewModel.saveEmailAddress()
             }
 
             email.addDropdownClickListener {
@@ -80,10 +79,10 @@ class EditEmailFragment :
         Timber.tag(TAG).d("registerEventObserve: ")
         viewModel.action.observe(viewLifecycleOwner, EventObserver { event ->
             when (event) {
-                SAVE_EMAIL_SUCCESSFULLY -> {
+                SAVE_MASTER_SUCCESSFULLY -> {
                     activity?.onBackPressed()
                 }
-                SAVE_EMAIL_FAILED, GET_EMAIL_FAILED -> {
+                REQUEST_FAILED -> {
                     requireContext().toast(getString(R.string.error_message_of_request_failed))
                 }
             }
