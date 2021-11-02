@@ -10,9 +10,8 @@ import kr.co.soogong.master.databinding.FragmentEditOwnerNameBinding
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.dialog.popup.CustomDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData
-import kr.co.soogong.master.ui.profile.detail.requiredinformation.ownername.EditOwnerNameViewModel.Companion.GET_OWNER_NAME_FAILED
-import kr.co.soogong.master.ui.profile.detail.requiredinformation.ownername.EditOwnerNameViewModel.Companion.SAVE_OWNER_NAME_FAILED
-import kr.co.soogong.master.ui.profile.detail.requiredinformation.ownername.EditOwnerNameViewModel.Companion.SAVE_OWNER_NAME_SUCCESSFULLY
+import kr.co.soogong.master.ui.profile.detail.EditProfileContainerViewModel.Companion.REQUEST_FAILED
+import kr.co.soogong.master.ui.profile.detail.EditProfileContainerViewModel.Companion.SAVE_MASTER_SUCCESSFULLY
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
@@ -67,8 +66,8 @@ class EditOwnerNameFragment :
         Timber.tag(TAG).d("registerEventObserve: ")
         viewModel.action.observe(viewLifecycleOwner, EventObserver { event ->
             when (event) {
-                SAVE_OWNER_NAME_SUCCESSFULLY -> activity?.onBackPressed()
-                SAVE_OWNER_NAME_FAILED, GET_OWNER_NAME_FAILED -> requireContext().toast(getString(R.string.error_message_of_request_failed))
+                SAVE_MASTER_SUCCESSFULLY -> activity?.onBackPressed()
+                REQUEST_FAILED -> requireContext().toast(getString(R.string.error_message_of_request_failed))
             }
         })
     }

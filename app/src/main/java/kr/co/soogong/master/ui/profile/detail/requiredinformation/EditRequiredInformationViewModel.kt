@@ -12,22 +12,21 @@ import kr.co.soogong.master.data.model.profile.Profile
 import kr.co.soogong.master.data.model.profile.RequestApproveCodeTable
 import kr.co.soogong.master.data.model.profile.RequiredInformation
 import kr.co.soogong.master.domain.usecase.profile.GetMasterUseCase
+import kr.co.soogong.master.domain.usecase.profile.GetProfileUseCase
 import kr.co.soogong.master.domain.usecase.profile.SaveMasterUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
+import kr.co.soogong.master.ui.profile.detail.EditProfileContainerViewModel
 import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class EditRequiredInformationViewModel @Inject constructor(
     private val getMasterUseCase: GetMasterUseCase,
-    private val saveMasterUseCase: SaveMasterUseCase,
-) : BaseViewModel() {
-    private val _profile = MutableLiveData<Profile>()
-    val profile: LiveData<Profile>
-        get() = _profile
+    getProfileUseCase: GetProfileUseCase,
+    saveMasterUseCase: SaveMasterUseCase,
+) : EditProfileContainerViewModel(getProfileUseCase, saveMasterUseCase) {
 
     val requiredInformation = MutableLiveData<RequiredInformation?>()
-
     val percentage = MutableLiveData<Float>()
 
     fun requestRequiredInformation() {
@@ -37,12 +36,13 @@ class EditRequiredInformationViewModel @Inject constructor(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
-                onSuccess = { masterProfile ->
-                    val profileFromMasterDto = Profile.fromMasterDto(masterProfile)
-                    this._profile.value = profileFromMasterDto
-                    requiredInformation.value = profileFromMasterDto.requiredInformation
+                onSuccess = { master ->
+                    Profile.fromMasterDto(master).let {
+                        profile.value = it
+                        requiredInformation.value = it.requiredInformation
+                    }
                     setAction(GET_PROFILE_SUCCESSFULLY)
-                    sendEvent(MASTER_APPROVED_STATUS, masterProfile.approvedStatus!!)
+                    sendEvent(MASTER_APPROVED_STATUS, master.approvedStatus!!)
                 },
                 onError = {
                     setAction(GET_PROFILE_FAILED)
@@ -53,56 +53,38 @@ class EditRequiredInformationViewModel @Inject constructor(
     fun saveCareerPeriod(careerPeriod: Int) {
         Timber.tag(TAG).d("saveCareerPeriod: ")
 
-        saveMasterUseCase(
+        saveMaster(
             MasterDto(
-                id = _profile.value?.id,
-                uid = _profile.value?.uid,
+                id = profile.value?.id,
+                uid = profile.value?.uid,
                 openDate = CareerConverter.toOpenDate(careerPeriod),
-                approvedStatus = if (_profile.value?.approvedStatus == ApprovedCodeTable.code) RequestApproveCodeTable.code else null,
+                approvedStatus = if (profile.value?.approvedStatus == ApprovedCodeTable.code) RequestApproveCodeTable.code else null,
             )
         )
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeBy(
-                onSuccess = { requestRequiredInformation() },
-                onError = { setAction(SAVE_MASTER_INFORMATION_FAILED) }
-            ).addToDisposable()
     }
 
     fun saveServiceArea(radius: Int) {
         Timber.tag(TAG).d("saveServiceArea: ")
 
-        saveMasterUseCase(
+        saveMaster(
             MasterDto(
-                id = _profile.value?.id,
-                uid = _profile.value?.uid,
+                id = profile.value?.id,
+                uid = profile.value?.uid,
                 serviceArea = radius,
             )
         )
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeBy(
-                onSuccess = { requestRequiredInformation() },
-                onError = { setAction(SAVE_MASTER_INFORMATION_FAILED) }
-            ).addToDisposable()
     }
 
     fun requestApprove() {
         Timber.tag(TAG).d("requestApprove: ")
 
-        saveMasterUseCase(
+        saveMaster(
             MasterDto(
-                id = _profile.value?.id,
-                uid = _profile.value?.uid,
+                id = profile.value?.id,
+                uid = profile.value?.uid,
                 approvedStatus = RequestApproveCodeTable.code,
             )
         )
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeBy(
-                onSuccess = { requestRequiredInformation() },
-                onError = { setAction(SAVE_MASTER_INFORMATION_FAILED) }
-            ).addToDisposable()
     }
 
     companion object {

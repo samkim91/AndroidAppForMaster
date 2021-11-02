@@ -3,31 +3,23 @@ package kr.co.soogong.master.ui.profile.detail.requiredinformation.businessuniti
 import android.net.Uri
 import android.view.View
 import androidx.core.net.toUri
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.rxkotlin.subscribeBy
-import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.dto.profile.MasterDto
 import kr.co.soogong.master.data.model.profile.ApprovedCodeTable
 import kr.co.soogong.master.data.model.profile.FreelancerCodeTable
-import kr.co.soogong.master.data.model.profile.Profile
 import kr.co.soogong.master.data.model.profile.RequestApproveCodeTable
 import kr.co.soogong.master.domain.usecase.profile.GetProfileUseCase
 import kr.co.soogong.master.domain.usecase.profile.SaveMasterUseCase
-import kr.co.soogong.master.ui.base.BaseViewModel
+import kr.co.soogong.master.ui.profile.detail.EditProfileContainerViewModel
 import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class EditBusinessUnitInformationViewModel @Inject constructor(
-    private val getProfileUseCase: GetProfileUseCase,
-    private val saveMasterUseCase: SaveMasterUseCase,
-) : BaseViewModel() {
-    private val _profile = MutableLiveData<Profile>()
-    val profile: LiveData<Profile>
-        get() = _profile
+    getProfileUseCase: GetProfileUseCase,
+    saveMasterUseCase: SaveMasterUseCase,
+) : EditProfileContainerViewModel(getProfileUseCase, saveMasterUseCase) {
 
     val businessType = MutableLiveData("")
     val businessName = MutableLiveData("")
@@ -37,69 +29,47 @@ class EditBusinessUnitInformationViewModel @Inject constructor(
 
     fun requestBusinessUnitInformation() {
         Timber.tag(TAG).d("requestBusinessUnitInformation: ")
-        getProfileUseCase()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeBy(
-                onSuccess = { masterProfile ->
-                    Timber.tag(TAG).d("requestBusinessUnitInformation successfully: $masterProfile")
 
-                    this._profile.value = masterProfile
-                    masterProfile.requiredInformation?.businessUnitInformation?.businessType?.let { businessType ->
-                        this.businessType.postValue(businessType)
-                        masterProfile.requiredInformation.businessUnitInformation.businessName?.let {
-                            businessName.postValue(it)
-                        }
-                        masterProfile.requiredInformation.businessUnitInformation.shopName?.let {
-                            shopName.postValue(it)
-                        }
-                        masterProfile.requiredInformation.businessUnitInformation.businessRegistImage?.url?.let {
-                            businessRegistImage.postValue(it.toUri())
-                        }
-                        masterProfile.requiredInformation.businessUnitInformation.businessNumber?.let {
-                            businessNumber.postValue(it)
-                        }
-                    }
-                },
-                onError = {
-                    Timber.tag(TAG).d("requestBusinessUnitInformation failed: $it")
-                    setAction(REQUEST_FAILED)
+        requestProfile {
+            profile.value = it
+            it.requiredInformation?.businessUnitInformation?.businessType?.let { type ->
+                businessType.postValue(type)
+                it.requiredInformation.businessUnitInformation.businessName?.let { name ->
+                    businessName.postValue(name)
                 }
-            ).addToDisposable()
+                it.requiredInformation.businessUnitInformation.shopName?.let { name ->
+                    shopName.postValue(name)
+                }
+                it.requiredInformation.businessUnitInformation.businessRegistImage?.url?.let { image ->
+                    businessRegistImage.postValue(image.toUri())
+                }
+                it.requiredInformation.businessUnitInformation.businessNumber?.let { number ->
+                    businessNumber.postValue(number)
+                }
+            }
+        }
     }
 
     fun saveBusinessUnitInformation() {
         Timber.tag(TAG).d("saveBusinessUnitInformation: ")
-        saveMasterUseCase(
+
+        saveMaster(
             MasterDto(
-                id = _profile.value?.id,
-                uid = _profile.value?.uid,
+                id = profile.value?.id,
+                uid = profile.value?.uid,
                 businessType = businessType.value,
                 businessName = if (businessType.value != FreelancerCodeTable.code) businessName.value else "",
                 shopName = shopName.value,
                 businessNumber = businessNumber.value,
-                approvedStatus = if (_profile.value?.approvedStatus == ApprovedCodeTable.code) RequestApproveCodeTable.code else null,
+                approvedStatus = if (profile.value?.approvedStatus == ApprovedCodeTable.code) RequestApproveCodeTable.code else null,
             ),
             businessRegistImageUri = businessRegistImage.value,
-        ).subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeBy(
-                onSuccess = {
-                    Timber.tag(TAG).d("saveBusinessUnitInformation successfully: $it")
-                    setAction(SAVE_BUSINESS_INFORMATION_SUCCESSFULLY)
-                },
-                onError = {
-                    Timber.tag(TAG).d("saveBusinessUnitInformation failed: $it")
-                    setAction(REQUEST_FAILED)
-                }
-            ).addToDisposable()
+        )
     }
 
     fun clearImage(v: View) = businessRegistImage.postValue(Uri.EMPTY)
 
     companion object {
         private const val TAG = "EditBusinessUnitInformationViewModel"
-        const val SAVE_BUSINESS_INFORMATION_SUCCESSFULLY = "SAVE_BUSINESS_INFORMATION_SUCCESSFULLY"
-        const val REQUEST_FAILED = "REQUEST_FAILED"
     }
 }

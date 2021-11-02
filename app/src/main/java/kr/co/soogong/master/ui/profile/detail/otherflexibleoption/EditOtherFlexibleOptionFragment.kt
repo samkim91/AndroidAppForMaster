@@ -12,9 +12,8 @@ import kr.co.soogong.master.data.model.profile.CodeTable
 import kr.co.soogong.master.data.model.profile.OtherFlexibleOptionCodeTable
 import kr.co.soogong.master.databinding.FragmentEditOtherFlexibleOptionBinding
 import kr.co.soogong.master.ui.base.BaseFragment
-import kr.co.soogong.master.ui.profile.detail.otherflexibleoption.EditOtherFlexibleOptionViewModel.Companion.GET_OTHER_FLEXIBLE_OPTION_FAILED
-import kr.co.soogong.master.ui.profile.detail.otherflexibleoption.EditOtherFlexibleOptionViewModel.Companion.SAVE_OTHER_FLEXIBLE_OPTION_FAILED
-import kr.co.soogong.master.ui.profile.detail.otherflexibleoption.EditOtherFlexibleOptionViewModel.Companion.SAVE_OTHER_FLEXIBLE_OPTION_SUCCESSFULLY
+import kr.co.soogong.master.ui.profile.detail.EditProfileContainerViewModel.Companion.REQUEST_FAILED
+import kr.co.soogong.master.ui.profile.detail.EditProfileContainerViewModel.Companion.SAVE_MASTER_SUCCESSFULLY
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
@@ -69,10 +68,10 @@ class EditOtherFlexibleOptionFragment : BaseFragment<FragmentEditOtherFlexibleOp
 
         viewModel.action.observe(viewLifecycleOwner, EventObserver { event ->
             when (event) {
-                SAVE_OTHER_FLEXIBLE_OPTION_SUCCESSFULLY -> {
+                SAVE_MASTER_SUCCESSFULLY -> {
                     activity?.onBackPressed()
                 }
-                SAVE_OTHER_FLEXIBLE_OPTION_FAILED, GET_OTHER_FLEXIBLE_OPTION_FAILED -> {
+                REQUEST_FAILED -> {
                     requireContext().toast(getString(R.string.error_message_of_request_failed))
                 }
             }

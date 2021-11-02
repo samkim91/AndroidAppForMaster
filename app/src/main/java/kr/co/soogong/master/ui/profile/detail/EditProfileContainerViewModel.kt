@@ -1,5 +1,6 @@
 package kr.co.soogong.master.ui.profile.detail
 
+import android.net.Uri
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -20,7 +21,7 @@ open class EditProfileContainerViewModel(
 
     val profile = MutableLiveData<Profile>()
 
-    fun requestProfile(function: (Profile) -> Unit) {
+    fun requestProfile(onSuccess: (Profile) -> Unit) {
         Timber.tag(TAG).d("requestProfile: ")
         getProfileUseCase()
             .subscribeOn(Schedulers.io())
@@ -28,7 +29,7 @@ open class EditProfileContainerViewModel(
             .subscribeBy(
                 onSuccess = {
                     profile.value = it
-                    function(it)
+                    onSuccess(it)
                 },
                 onError = {
                     setAction(REQUEST_FAILED)
@@ -36,10 +37,18 @@ open class EditProfileContainerViewModel(
             ).addToDisposable()
     }
 
-    fun saveMaster(masterDto: MasterDto) {
+    fun saveMaster(
+        masterDto: MasterDto,
+        profileImageUri: Uri? = null,
+        businessRegistImageUri: Uri? = null,
+        shopImagesUris: List<Uri>? = null,
+    ) {
         Timber.tag(TAG).d("saveMaster: $masterDto")
         saveMasterUseCase(
-            masterDto
+            masterDto,
+            profileImageUri,
+            businessRegistImageUri,
+            shopImagesUris
         ).subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
