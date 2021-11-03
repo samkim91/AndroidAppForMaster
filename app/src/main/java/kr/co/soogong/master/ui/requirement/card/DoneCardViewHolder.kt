@@ -15,6 +15,8 @@ import kr.co.soogong.master.ui.requirement.RequirementViewModel
 import kr.co.soogong.master.ui.requirement.done.DoneViewModel
 import kr.co.soogong.master.ui.widget.RequirementCardAdditionalInfo
 import kr.co.soogong.master.ui.widget.RequirementCardAdditionalInfo.Companion.setContainerTheme
+import kr.co.soogong.master.utility.extension.formatDate
+import kr.co.soogong.master.utility.extension.formatMoney
 
 // 완료탭의 viewHolders
 
@@ -37,7 +39,7 @@ class DoneViewHolder(
                     theme = GREEN_THEME,
                     type = MONEY_TYPE,
                     titleData = context.getString(R.string.requirements_card_amount_done_title),
-                    contentData = "${moneyFormat.format(requirementCard.estimationDto?.repair?.actualPrice)}원",
+                    contentData = requirementCard.estimationDto?.repair?.actualPrice.formatMoney(),
                     extraData = if (requirementCard.estimationDto?.repair?.actualPrice!! > 0) context.getString(
                         if (requirementCard.estimationDto.repair.includingVat == true) R.string.vat_included else R.string.vat_not_included) else "",
                     alertData = ""
@@ -48,7 +50,7 @@ class DoneViewHolder(
                     theme = GREEN_THEME,
                     type = CALENDAR_TYPE,
                     titleData = context.getString(R.string.requirements_card_done_date),
-                    contentData = dateFormatWithoutHour.format(requirementCard.estimationDto?.repair?.actualDate),
+                    contentData = requirementCard.estimationDto?.repair?.actualDate.formatDate(),
                     extraData = "",
                     alertData = ""
                 )
@@ -96,7 +98,7 @@ class ClosedViewHolder(
                     theme = GRAY_THEME,
                     type = MONEY_TYPE,
                     titleData = context.getString(R.string.requirements_card_amount_done_title),
-                    contentData = "${moneyFormat.format(requirementCard.estimationDto?.repair?.actualPrice)}원",
+                    contentData = requirementCard.estimationDto?.repair?.actualPrice.formatMoney(),
                     extraData = if (requirementCard.estimationDto?.repair?.actualPrice!! > 0) context.getString(
                         if (requirementCard.estimationDto.repair.includingVat == true) R.string.vat_included else R.string.vat_not_included) else "",
                     alertData = ""
@@ -107,7 +109,7 @@ class ClosedViewHolder(
                     theme = GRAY_THEME,
                     type = CALENDAR_TYPE,
                     titleData = context.getString(R.string.requirements_card_done_date),
-                    contentData = dateFormatWithoutHour.format(requirementCard.estimationDto?.repair?.actualDate),
+                    contentData = requirementCard.estimationDto?.repair?.actualDate.formatDate(),
                     extraData = "",
                     alertData = ""
                 )

@@ -1,7 +1,6 @@
 package kr.co.soogong.master.ui.widget
 
 import android.content.Context
-import android.icu.text.DecimalFormat
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -13,6 +12,7 @@ import kr.co.soogong.master.R
 import kr.co.soogong.master.data.dto.requirement.RequirementDto
 import kr.co.soogong.master.databinding.ViewRequirementQnaBinding
 import kr.co.soogong.master.utility.extension.dp
+import kr.co.soogong.master.utility.extension.formatMoney
 
 class RequirementDetail @JvmOverloads constructor(
     context: Context,
@@ -133,7 +133,7 @@ class RequirementDetail @JvmOverloads constructor(
                     // 다른 마스터님의 견적가
                     RequirementDetail(context).apply {
                         key = context.getString(R.string.price_of_previous_estimation)
-                        value = "${DecimalFormat("#,###").format(measurement.price)}원"
+                        value = measurement.price.formatMoney()
                         extra =
                             if (measurement.includingVat != null) context.getString(if (measurement.includingVat == true) R.string.vat_included else R.string.vat_not_included) else ""
                     }.run {

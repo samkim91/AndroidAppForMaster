@@ -1,7 +1,6 @@
 package kr.co.soogong.master.ui.requirement.action.view
 
 import android.content.Intent
-import android.icu.text.SimpleDateFormat
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.widget.AppCompatButton
@@ -37,6 +36,7 @@ import kr.co.soogong.master.ui.widget.RequirementDrawerContainer.Companion.REVIE
 import kr.co.soogong.master.uihelper.requirment.CallToCustomerHelper
 import kr.co.soogong.master.uihelper.requirment.action.*
 import kr.co.soogong.master.utility.EventObserver
+import kr.co.soogong.master.utility.extension.formatDateWithoutDay
 import kr.co.soogong.master.utility.extension.setDueDate
 import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
@@ -455,10 +455,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                     // 시공완료일
                     requirementStatus.endingText = getString(
                         R.string.progress_ending_text_with_date,
-                        SimpleDateFormat(
-                            "yyyy.MM.dd.",
-                            Locale.KOREA
-                        ).format(requirement.estimationDto?.repair?.actualDate)
+                        requirement.estimationDto?.repair?.actualDate.formatDateWithoutDay()
                     )
                     requirementStatus.endingTextColor = getColor(R.color.color_0C5E47)
                 }
@@ -502,10 +499,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                     // 시공완료일
                     requirementStatus.endingText = getString(
                         R.string.progress_ending_text_with_date,
-                        SimpleDateFormat(
-                            "yyyy.MM.dd.",
-                            Locale.KOREA
-                        ).format(requirement.estimationDto?.repair?.actualDate)
+                        requirement.estimationDto?.repair?.actualDate.formatDateWithoutDay()
                     )
                     requirementStatus.endingTextColor = getColor(R.color.color_0C5E47)
                 }
