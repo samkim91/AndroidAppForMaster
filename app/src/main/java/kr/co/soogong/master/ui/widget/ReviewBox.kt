@@ -1,12 +1,12 @@
 package kr.co.soogong.master.ui.widget
 
 import android.content.Context
-import android.icu.text.DecimalFormat
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ViewReviewBoxBinding
+import kr.co.soogong.master.utility.extension.formatDecimal
 
 class ReviewBox @JvmOverloads constructor(
     context: Context,
@@ -39,8 +39,7 @@ class ReviewBox @JvmOverloads constructor(
                     setTextColor(resources.getColor(R.color.color_C4C4C4, null))
                     return
                 }
-                text = DecimalFormat("#.#").format(value)
-//                text = value.let { round(it*10) / 10 }.toString()
+                text = value.formatDecimal()
                 setTextColor(resources.getColor(R.color.color_1FC472, null))
             }
         }

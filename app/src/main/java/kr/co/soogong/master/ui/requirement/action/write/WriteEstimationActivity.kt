@@ -1,7 +1,6 @@
 package kr.co.soogong.master.ui.requirement.action.write
 
 import android.app.Activity
-import android.icu.text.DecimalFormat
 import android.os.Bundle
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
@@ -25,6 +24,7 @@ import kr.co.soogong.master.uihelper.requirment.action.EstimationTemplatesActivi
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.FileHelper
 import kr.co.soogong.master.utility.PermissionHelper
+import kr.co.soogong.master.utility.extension.formatComma
 import kr.co.soogong.master.utility.extension.toast
 import kr.co.soogong.master.utility.validation.ValidationHelper
 import timber.log.Timber
@@ -104,7 +104,7 @@ class WriteEstimationActivity : BaseActivity<ActivityWriteEstimationBinding>(
                         if (hasFocus) {
                             viewModel.simpleCost.value = it
                         } else {
-                            viewModel.simpleCost.value = DecimalFormat("#,###").format(it?.toLong())
+                            viewModel.simpleCost.value = it?.toLong().formatComma()
                         }
                     }
                 }
@@ -268,8 +268,7 @@ class WriteEstimationActivity : BaseActivity<ActivityWriteEstimationBinding>(
             val travelCostInt =
                 if (travelCost.value.isNullOrEmpty()) 0 else travelCost.value!!.toLong()
 
-            totalCost.value =
-                DecimalFormat("#,###").format(laborCostInt + materialCostInt + travelCostInt)
+            totalCost.value = (laborCostInt + materialCostInt + travelCostInt).formatComma()
         }
     }
 

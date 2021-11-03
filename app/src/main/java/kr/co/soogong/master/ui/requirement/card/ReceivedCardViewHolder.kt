@@ -25,6 +25,7 @@ import kr.co.soogong.master.uihelper.requirment.action.ViewRequirementActivityHe
 import kr.co.soogong.master.utility.TimeHelper
 import kr.co.soogong.master.utility.TimeHelper.WITHIN_24_HOURS
 import kr.co.soogong.master.utility.TimeHelper.WITHIN_90_MINUTES
+import kr.co.soogong.master.utility.extension.formatMoney
 
 // 문의탭의 viewHolders
 
@@ -187,11 +188,8 @@ class RequestConsultCardViewHolder(
                         theme = GRAY_THEME,
                         type = MONEY_TYPE,
                         titleData = context.getString(R.string.requirements_card_amount_title),
-                        contentData = if (requirementCard.estimationDto.price!! > 0) "${
-                            moneyFormat.format(
-                                requirementCard.estimationDto.price
-                            )
-                        }원" else context.getString(R.string.not_estimated_text),
+                        contentData = if (requirementCard.estimationDto.price!! > 0) requirementCard.estimationDto.price.formatMoney() else context.getString(
+                            R.string.not_estimated_text),
                         extraData = if (requirementCard.estimationDto.price > 0) context.getString(
                             if (requirementCard.estimationDto.includingVat == true) R.string.vat_included else R.string.vat_not_included) else "",
                         alertData = context.getString(R.string.requirements_card_waiting_label),
@@ -266,10 +264,7 @@ class EstimatedCardViewHolder(
                     type = MONEY_TYPE,
                     titleData = context.getString(R.string.requirements_card_amount_title),
                     contentData = requirementCard.estimationDto?.price?.let {
-                        if (it > 0)
-                            "${moneyFormat.format(it)}원" else context.getString(
-                            R.string.not_estimated_text
-                        )
+                        if (it > 0) it.formatMoney() else context.getString(R.string.not_estimated_text)
                     },
                     extraData = if (requirementCard.estimationDto?.price!! > 0) context.getString(if (requirementCard.estimationDto.includingVat == true) R.string.vat_included else R.string.vat_not_included) else "",
                     alertData = context.getString(R.string.requirements_card_waiting_label),

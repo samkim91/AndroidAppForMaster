@@ -2,7 +2,6 @@
 
 package kr.co.soogong.master.utility.extension
 
-import android.icu.text.DecimalFormat
 import android.text.*
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
@@ -10,25 +9,17 @@ import android.view.View
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import kr.co.soogong.master.data.model.profile.CodeTable
-import java.text.SimpleDateFormat
 import java.util.*
-
-@BindingAdapter("bind:to_datetime_string")
-fun TextView.setDateTime(date: Date?) {
-    val simpleDateFormat = SimpleDateFormat("yyyy. MM. dd hh:mm")
-    text = simpleDateFormat.format(date ?: System.currentTimeMillis())
-}
 
 @BindingAdapter("bind:to_date_string")
 fun TextView.setDate(date: Date?) {
-    val simpleDateFormat = SimpleDateFormat("yyyy. MM. dd")
-    text = simpleDateFormat.format(date ?: System.currentTimeMillis())
+    text = date.formatDateWithoutDay()
 }
 
 @BindingAdapter("bind:set_price")
 fun TextView.setPrice(price: Int?) {
     price?.let {
-        text = "${DecimalFormat("#,###").format(it)}원"
+        text = price.formatMoney()
     }
 }
 

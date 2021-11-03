@@ -1,33 +1,14 @@
 package kr.co.soogong.master.ui.requirement.action
 
-import android.icu.text.SimpleDateFormat
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.dto.requirement.RequirementDto
-import kr.co.soogong.master.data.model.requirement.*
+import kr.co.soogong.master.data.model.requirement.RequirementStatus
 import kr.co.soogong.master.ui.GRAY_THEME
 import kr.co.soogong.master.ui.GREEN_THEME
 import kr.co.soogong.master.ui.widget.RequirementIntro
-import java.util.*
-
-@BindingAdapter("bind:requested_date")
-fun TextView.setRequestedDate(date: Date?) {
-    // 최초 요청일 : 2021.01.11 - 13:20
-    val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd - HH:mm", Locale.KOREA)
-    date?.let {
-        text = context.getString(R.string.requirements_card_start_time, simpleDateFormat.format(it))
-    }
-}
-
-@BindingAdapter("bind:closed_date")
-fun TextView.setClosedDate(date: Date?) {
-    // 2022.01.11 - 13:20
-    val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd - HH:mm", Locale.KOREA)
-    date?.let {
-        text = simpleDateFormat.format(it)
-    }
-}
+import kr.co.soogong.master.utility.extension.formatFullDateTime
 
 @BindingAdapter("bind:status")
 fun TextView.setStatus(requirementDto: RequirementDto?) {
@@ -88,10 +69,7 @@ fun RequirementIntro.initByRequirement(requirementDto: RequirementDto?) {
         RequirementStatus.Closed -> {
             title = context.getString(
                 R.string.requirement_intro_title_of_close,
-                SimpleDateFormat(
-                    "yyyy.MM.dd (E) - HH:mm",
-                    Locale.KOREA
-                ).format(requirementDto?.estimationDto?.repair?.review?.createdAt)
+                requirementDto?.estimationDto?.repair?.review?.createdAt.formatFullDateTime()
             )
             subtitle = ""
             theme = GRAY_THEME
