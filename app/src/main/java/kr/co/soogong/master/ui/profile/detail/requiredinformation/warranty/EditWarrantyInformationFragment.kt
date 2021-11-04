@@ -2,7 +2,6 @@ package kr.co.soogong.master.ui.profile.detail.requiredinformation.warranty
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
@@ -10,9 +9,8 @@ import kr.co.soogong.master.databinding.FragmentEditWarrantyInformationBinding
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogBundle
 import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogRecyclerView
-import kr.co.soogong.master.ui.profile.detail.requiredinformation.warranty.EditWarrantyInformationViewModel.Companion.GET_WARRANTY_INFORMATION_FAILED
-import kr.co.soogong.master.ui.profile.detail.requiredinformation.warranty.EditWarrantyInformationViewModel.Companion.SAVE_WARRANTY_INFORMATION_FAILED
-import kr.co.soogong.master.ui.profile.detail.requiredinformation.warranty.EditWarrantyInformationViewModel.Companion.SAVE_WARRANTY_INFORMATION_SUCCESSFULLY
+import kr.co.soogong.master.ui.profile.detail.EditProfileContainerViewModel.Companion.REQUEST_FAILED
+import kr.co.soogong.master.ui.profile.detail.EditProfileContainerViewModel.Companion.SAVE_MASTER_SUCCESSFULLY
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
@@ -44,7 +42,7 @@ class EditWarrantyInformationFragment : BaseFragment<FragmentEditWarrantyInforma
                     BottomDialogRecyclerView.newInstance(
                         dialogBundle = BottomDialogBundle.getWarrantyPeriodBundle(),
                         itemClick = { key, value ->
-                            if(value == -1) {
+                            if (value == -1) {
                                 viewModel.warrantyDescription.value = ""
                             }
                             viewModel.warrantyPeriodForLayout.value = key
@@ -77,10 +75,8 @@ class EditWarrantyInformationFragment : BaseFragment<FragmentEditWarrantyInforma
         Timber.tag(TAG).d("registerEventObserve: ")
         viewModel.action.observe(viewLifecycleOwner, EventObserver { event ->
             when (event) {
-                SAVE_WARRANTY_INFORMATION_SUCCESSFULLY -> activity?.onBackPressed()
-                SAVE_WARRANTY_INFORMATION_FAILED, GET_WARRANTY_INFORMATION_FAILED -> requireContext().toast(
-                    getString(R.string.error_message_of_request_failed)
-                )
+                SAVE_MASTER_SUCCESSFULLY -> activity?.onBackPressed()
+                REQUEST_FAILED -> requireContext().toast(getString(R.string.error_message_of_request_failed))
             }
         })
     }

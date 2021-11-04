@@ -2,7 +2,6 @@ package kr.co.soogong.master.ui.profile.detail.requiredinformation
 
 import timber.log.Timber
 import java.text.SimpleDateFormat
-import java.time.format.DateTimeFormatter
 import java.util.*
 
 object CareerConverter {

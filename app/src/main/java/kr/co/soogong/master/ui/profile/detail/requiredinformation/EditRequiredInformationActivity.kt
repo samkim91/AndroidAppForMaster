@@ -13,6 +13,7 @@ import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogBundl
 import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogRecyclerView
 import kr.co.soogong.master.ui.dialog.popup.CustomDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData
+import kr.co.soogong.master.ui.profile.detail.EditProfileContainerViewModel.Companion.SAVE_MASTER_SUCCESSFULLY
 import kr.co.soogong.master.ui.profile.detail.requiredinformation.EditRequiredInformationViewModel.Companion.GET_PROFILE_FAILED
 import kr.co.soogong.master.ui.profile.detail.requiredinformation.EditRequiredInformationViewModel.Companion.GET_PROFILE_SUCCESSFULLY
 import kr.co.soogong.master.ui.profile.detail.requiredinformation.EditRequiredInformationViewModel.Companion.MASTER_APPROVED_STATUS
@@ -181,6 +182,7 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
                         )
                     }
                 }
+                SAVE_MASTER_SUCCESSFULLY -> viewModel.requestRequiredInformation()
                 SAVE_MASTER_INFORMATION_FAILED, GET_PROFILE_FAILED -> toast(getString(R.string.error_message_of_request_failed))
             }
         })

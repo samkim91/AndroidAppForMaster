@@ -11,10 +11,10 @@ import kr.co.soogong.master.ui.requirement.action.end.EndRepairViewModel.Compani
 import kr.co.soogong.master.ui.requirement.action.end.EndRepairViewModel.Companion.END_REPAIR_SUCCESSFULLY
 import kr.co.soogong.master.ui.requirement.action.end.EndRepairViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.utility.EventObserver
+import kr.co.soogong.master.utility.extension.formatComma
 import kr.co.soogong.master.utility.extension.toast
 import kr.co.soogong.master.utility.validation.ValidationHelper
 import timber.log.Timber
-import java.text.DecimalFormat
 import java.util.*
 
 @AndroidEntryPoint
@@ -60,8 +60,7 @@ class EndRepairActivity : BaseActivity<ActivityEndRepairBinding>(
                         if (hasFocus) {
                             viewModel.actualPrice.value = it
                         } else {
-                            viewModel.actualPrice.value =
-                                DecimalFormat("#,###").format(it?.toLong())
+                            viewModel.actualPrice.value = it?.toLong().formatComma()
                         }
                     }
                 }

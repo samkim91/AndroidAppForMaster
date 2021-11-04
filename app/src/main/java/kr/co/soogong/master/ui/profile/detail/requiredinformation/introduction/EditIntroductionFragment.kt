@@ -7,9 +7,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentEditIntroductionBinding
 import kr.co.soogong.master.ui.base.BaseFragment
-import kr.co.soogong.master.ui.profile.detail.requiredinformation.introduction.EditIntroductionViewModel.Companion.GET_INTRODUCTION_FAILED
-import kr.co.soogong.master.ui.profile.detail.requiredinformation.introduction.EditIntroductionViewModel.Companion.SAVE_INTRODUCTION_FAILED
-import kr.co.soogong.master.ui.profile.detail.requiredinformation.introduction.EditIntroductionViewModel.Companion.SAVE_INTRODUCTION_SUCCESSFULLY
+import kr.co.soogong.master.ui.profile.detail.EditProfileContainerViewModel.Companion.REQUEST_FAILED
+import kr.co.soogong.master.ui.profile.detail.EditProfileContainerViewModel.Companion.SAVE_MASTER_SUCCESSFULLY
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
@@ -49,10 +48,10 @@ class EditIntroductionFragment : BaseFragment<FragmentEditIntroductionBinding>(
         Timber.tag(TAG).d("registerEventObserve: ")
         viewModel.action.observe(viewLifecycleOwner, EventObserver { event ->
             when (event) {
-                SAVE_INTRODUCTION_SUCCESSFULLY -> {
+                SAVE_MASTER_SUCCESSFULLY -> {
                     activity?.onBackPressed()
                 }
-                SAVE_INTRODUCTION_FAILED, GET_INTRODUCTION_FAILED -> {
+                REQUEST_FAILED -> {
                     requireContext().toast(getString(R.string.error_message_of_request_failed))
                 }
             }

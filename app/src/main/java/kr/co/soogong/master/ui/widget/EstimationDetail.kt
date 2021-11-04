@@ -2,7 +2,6 @@ package kr.co.soogong.master.ui.widget
 
 import android.content.Context
 import android.graphics.Typeface
-import android.icu.text.DecimalFormat
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -12,6 +11,7 @@ import kr.co.soogong.master.R
 import kr.co.soogong.master.data.dto.requirement.RequirementDto
 import kr.co.soogong.master.data.model.requirement.estimation.EstimationPriceTypeCode
 import kr.co.soogong.master.databinding.ViewEstimationDetailBinding
+import kr.co.soogong.master.utility.extension.formatMoney
 
 class EstimationDetail @JvmOverloads constructor(
     context: Context,
@@ -90,7 +90,7 @@ class EstimationDetail @JvmOverloads constructor(
                 if (estimation.repair?.actualPrice != null) {
                     EstimationDetail(context).apply {
                         key = context.getString(R.string.repair_actual_price)
-                        value = "${DecimalFormat("#,###").format(estimation.repair.actualPrice)}원"
+                        value = estimation.repair.actualPrice.formatMoney()
                         bold = true
                         extra =
                             if (estimation.repair.actualPrice > 0) context.getString(if (estimation.repair.includingVat == true) R.string.vat_included else R.string.vat_not_included) else ""
@@ -112,11 +112,7 @@ class EstimationDetail @JvmOverloads constructor(
                 if (estimation.price != null) {
                     EstimationDetail(context).apply {
                         key = context.getString(R.string.estimation_total_cost)
-                        value = if (estimation.price != 0) {
-                            "${DecimalFormat("#,###").format(estimation.price)}원"
-                        } else {
-                            context.getString(R.string.not_estimated_text)
-                        }
+                        value = if (estimation.price != 0) estimation.price.formatMoney() else context.getString(R.string.not_estimated_text)
                         extra =
                             if (estimation.price > 0) context.getString(if (estimation.includingVat == true) R.string.vat_included else R.string.vat_not_included) else ""
                     }.run {
@@ -137,7 +133,7 @@ class EstimationDetail @JvmOverloads constructor(
                                     context.getString(R.string.estimation_travel_cost)
                                 else -> ""
                             }
-                            value = "${DecimalFormat("#,###").format(it.partialPrice)}원"
+                            value = it.partialPrice.formatMoney()
                         }.run {
                             container.addView(this)
                         }

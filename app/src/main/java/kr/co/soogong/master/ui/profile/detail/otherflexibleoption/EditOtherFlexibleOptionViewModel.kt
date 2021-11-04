@@ -11,65 +11,42 @@ import kr.co.soogong.master.data.model.profile.Profile
 import kr.co.soogong.master.domain.usecase.profile.GetProfileUseCase
 import kr.co.soogong.master.domain.usecase.profile.SaveMasterUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
+import kr.co.soogong.master.ui.profile.detail.EditProfileContainerViewModel
 import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class EditOtherFlexibleOptionViewModel @Inject constructor(
-    private val saveMasterUseCase: SaveMasterUseCase,
-    private val getProfileUseCase: GetProfileUseCase,
-) : BaseViewModel() {
-    private val _profile = MutableLiveData<Profile>()
+    getProfileUseCase: GetProfileUseCase,
+    saveMasterUseCase: SaveMasterUseCase,
+) : EditProfileContainerViewModel(getProfileUseCase, saveMasterUseCase) {
+
     val otherFlexibleOption = MutableLiveData<List<MasterConfigDto>>()
 
     fun requestOtherFlexibleOption() {
         Timber.tag(TAG).d("requestOtherFlexibleOption: ")
 
-        getProfileUseCase()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeBy(
-                onSuccess = { profile ->
-                    Timber.tag(TAG).d("requestOtherFlexibleOption successfully: $profile")
-                    _profile.value = profile
-                    profile.basicInformation?.otherFlexibleOption?.let {
-                        otherFlexibleOption.postValue(it)
-                    }
-                },
-                onError = { setAction(GET_OTHER_FLEXIBLE_OPTION_FAILED) }
-            ).addToDisposable()
+        requestProfile {
+            profile.value = it
+            it.basicInformation?.otherFlexibleOption?.let { configs ->
+                otherFlexibleOption.postValue(configs)
+            }
+        }
     }
 
     fun saveOtherFlexibleOption() {
         Timber.tag(TAG).d("saveOtherFlexibleOption: ${otherFlexibleOption.value}")
 
-        saveMasterUseCase(
+        saveMaster(
             MasterDto(
-                id = _profile.value?.id,
-                uid = _profile.value?.uid,
+                id = profile.value?.id,
+                uid = profile.value?.uid,
                 masterConfigs = otherFlexibleOption.value,
             )
         )
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeBy(
-                onSuccess = {
-                    Timber.tag(TAG).d("saveOtherFlexibleOption successfully: $it")
-                    setAction(SAVE_OTHER_FLEXIBLE_OPTION_SUCCESSFULLY)
-                },
-                onError = {
-                    Timber.tag(TAG).d("saveOtherFlexibleOption successfully: $it")
-                    setAction(SAVE_OTHER_FLEXIBLE_OPTION_FAILED)
-                }
-            ).addToDisposable()
     }
 
     companion object {
         private const val TAG = "EditOtherFlexibleOptionViewModel"
-
-        const val SAVE_OTHER_FLEXIBLE_OPTION_SUCCESSFULLY =
-            "SAVE_OTHER_FLEXIBLE_OPTION_SUCCESSFULLY"
-        const val SAVE_OTHER_FLEXIBLE_OPTION_FAILED = "SAVE_OTHER_FLEXIBLE_OPTION_FAILED"
-        const val GET_OTHER_FLEXIBLE_OPTION_FAILED = "GET_OTHER_FLEXIBLE_OPTION_FAILED"
     }
 }

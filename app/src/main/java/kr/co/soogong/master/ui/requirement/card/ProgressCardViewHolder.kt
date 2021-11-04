@@ -20,6 +20,7 @@ import kr.co.soogong.master.ui.widget.RequirementCardAdditionalInfo.Companion.se
 import kr.co.soogong.master.uihelper.requirment.CallToCustomerHelper
 import kr.co.soogong.master.uihelper.requirment.action.EndRepairActivityHelper
 import kr.co.soogong.master.uihelper.requirment.action.MeasureActivityHelper
+import kr.co.soogong.master.utility.extension.formatMoney
 
 // 진행중탭의 viewHolders
 
@@ -140,7 +141,7 @@ class MeasuredCardViewHolder(
                     theme = GRAY_THEME,
                     type = MONEY_TYPE,
                     titleData = context.getString(R.string.requirements_card_amount_title),
-                    contentData = "${moneyFormat.format(requirementCard.estimationDto?.price)}원",
+                    contentData = requirementCard.estimationDto?.price.formatMoney(),
                     extraData = context.getString(if (requirementCard.estimationDto?.includingVat == true) R.string.vat_included else R.string.vat_not_included),
                     alertData = ""
                 )
@@ -168,11 +169,8 @@ class RepairingCardViewHolder(
                     theme = GREEN_THEME,
                     type = MONEY_TYPE,
                     titleData = context.getString(R.string.requirements_card_amount_title),
-                    contentData = if (requirementCard.estimationDto?.price!! > 0) "${
-                        moneyFormat.format(
-                            requirementCard.estimationDto.price
-                        )
-                    }원" else context.getString(R.string.not_estimated_text),
+                    contentData = if (requirementCard.estimationDto?.price!! > 0) requirementCard.estimationDto.price.formatMoney() else context.getString(
+                        R.string.not_estimated_text),
                     extraData = if (requirementCard.estimationDto.price > 0) context.getString(if (requirementCard.estimationDto.includingVat == true) R.string.vat_included else R.string.vat_not_included) else "",
                     alertData = ""
                 )

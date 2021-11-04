@@ -14,9 +14,8 @@ import kr.co.soogong.master.databinding.FragmentEditMajorBinding
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.dialog.popup.CustomDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData
-import kr.co.soogong.master.ui.profile.detail.requiredinformation.major.EditMajorViewModel.Companion.GET_MAJOR_FAILED
-import kr.co.soogong.master.ui.profile.detail.requiredinformation.major.EditMajorViewModel.Companion.SAVE_MAJOR_FAILED
-import kr.co.soogong.master.ui.profile.detail.requiredinformation.major.EditMajorViewModel.Companion.SAVE_MAJOR_SUCCESSFULLY
+import kr.co.soogong.master.ui.profile.detail.EditProfileContainerViewModel.Companion.REQUEST_FAILED
+import kr.co.soogong.master.ui.profile.detail.EditProfileContainerViewModel.Companion.SAVE_MASTER_SUCCESSFULLY
 import kr.co.soogong.master.uihelper.major.MajorActivityHelper
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.MajorChipGroupHelper
@@ -109,10 +108,10 @@ class EditMajorFragment : BaseFragment<FragmentEditMajorBinding>(
 
         viewModel.action.observe(viewLifecycleOwner, EventObserver { event ->
             when (event) {
-                SAVE_MAJOR_SUCCESSFULLY -> {
+                SAVE_MASTER_SUCCESSFULLY -> {
                     activity?.onBackPressed()
                 }
-                SAVE_MAJOR_FAILED, GET_MAJOR_FAILED -> {
+                REQUEST_FAILED -> {
                     requireContext().toast(getString(R.string.error_message_of_request_failed))
                 }
             }

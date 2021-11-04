@@ -13,9 +13,8 @@ import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.dialog.popup.CustomDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData
 import kr.co.soogong.master.ui.image.RectangleImageWithCloseAdapter
-import kr.co.soogong.master.ui.profile.detail.requiredinformation.shopimages.EditShopImagesViewModel.Companion.GET_SHOP_IMAGES_FAILED
-import kr.co.soogong.master.ui.profile.detail.requiredinformation.shopimages.EditShopImagesViewModel.Companion.SAVE_SHOP_IMAGES_FAILED
-import kr.co.soogong.master.ui.profile.detail.requiredinformation.shopimages.EditShopImagesViewModel.Companion.SAVE_SHOP_IMAGES_SUCCESSFULLY
+import kr.co.soogong.master.ui.profile.detail.EditProfileContainerViewModel.Companion.REQUEST_FAILED
+import kr.co.soogong.master.ui.profile.detail.EditProfileContainerViewModel.Companion.SAVE_MASTER_SUCCESSFULLY
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.FileHelper
 import kr.co.soogong.master.utility.PermissionHelper
@@ -115,12 +114,10 @@ class EditShopImagesFragment : BaseFragment<FragmentEditShopImagesBinding>(
         viewModel.action.observe(viewLifecycleOwner, EventObserver { event ->
             dismissLoading()
             when (event) {
-                SAVE_SHOP_IMAGES_SUCCESSFULLY -> activity?.onBackPressed()
-                SAVE_SHOP_IMAGES_FAILED, GET_SHOP_IMAGES_FAILED -> requireContext().toast(
-                    getString(
-                        R.string.error_message_of_request_failed
-                    )
-                )
+                SAVE_MASTER_SUCCESSFULLY -> activity?.onBackPressed()
+                REQUEST_FAILED -> requireContext().toast(getString(
+                    R.string.error_message_of_request_failed
+                ))
             }
         })
     }

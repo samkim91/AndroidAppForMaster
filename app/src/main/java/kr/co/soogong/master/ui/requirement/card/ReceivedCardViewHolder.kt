@@ -22,8 +22,10 @@ import kr.co.soogong.master.uihelper.profile.EditRequiredInformationActivityHelp
 import kr.co.soogong.master.uihelper.requirment.CallToCustomerHelper
 import kr.co.soogong.master.uihelper.requirment.action.EndRepairActivityHelper
 import kr.co.soogong.master.uihelper.requirment.action.ViewRequirementActivityHelper
-import kr.co.soogong.master.utility.extension.getEstimationDueDate
-import kr.co.soogong.master.utility.extension.getMeasureDueDate
+import kr.co.soogong.master.utility.TimeHelper
+import kr.co.soogong.master.utility.TimeHelper.WITHIN_24_HOURS
+import kr.co.soogong.master.utility.TimeHelper.WITHIN_90_MINUTES
+import kr.co.soogong.master.utility.extension.formatMoney
 
 // 문의탭의 viewHolders
 
@@ -130,7 +132,7 @@ class RequestedCardViewHolder(
                     theme = ORANGE_THEME,
                     type = CALENDAR_TYPE,
                     titleData = context.getString(R.string.requirements_card_due_date),
-                    contentData = dateFormat.format(getEstimationDueDate(requirementCard.createdAt)),
+                    contentData = TimeHelper.getDueTime(requirementCard.createdAt, WITHIN_24_HOURS),
                     extraData = "",
                     alertData = context.getString(R.string.requirements_card_due_date_alert)
                 )
@@ -186,11 +188,8 @@ class RequestConsultCardViewHolder(
                         theme = GRAY_THEME,
                         type = MONEY_TYPE,
                         titleData = context.getString(R.string.requirements_card_amount_title),
-                        contentData = if (requirementCard.estimationDto.price!! > 0) "${
-                            moneyFormat.format(
-                                requirementCard.estimationDto.price
-                            )
-                        }원" else context.getString(R.string.not_estimated_text),
+                        contentData = if (requirementCard.estimationDto.price!! > 0) requirementCard.estimationDto.price.formatMoney() else context.getString(
+                            R.string.not_estimated_text),
                         extraData = if (requirementCard.estimationDto.price > 0) context.getString(
                             if (requirementCard.estimationDto.includingVat == true) R.string.vat_included else R.string.vat_not_included) else "",
                         alertData = context.getString(R.string.requirements_card_waiting_label),
@@ -205,7 +204,7 @@ class RequestConsultCardViewHolder(
                     theme = ORANGE_THEME,
                     type = CALENDAR_TYPE,
                     titleData = context.getString(R.string.requirements_card_due_date),
-                    contentData = dateFormat.format(getEstimationDueDate(requirementCard.createdAt)),
+                    contentData = TimeHelper.getDueTime(requirementCard.createdAt, WITHIN_24_HOURS),
                     extraData = "",
                     alertData = context.getString(R.string.requirements_card_due_date_alert)
                 )
@@ -233,7 +232,8 @@ class RequestMeasureCardViewHolder(
                     theme = ORANGE_THEME,
                     type = CALENDAR_TYPE,
                     titleData = context.getString(R.string.requirements_card_due_time),
-                    contentData = dateFormat.format(getMeasureDueDate(requirementCard.estimationDto?.createdAt)),
+                    contentData = TimeHelper.getDueTime(requirementCard.estimationDto?.createdAt,
+                        WITHIN_90_MINUTES),
                     extraData = "",
                     alertData = context.getString(R.string.requirements_card_due_time_alert)
                 )
@@ -264,10 +264,7 @@ class EstimatedCardViewHolder(
                     type = MONEY_TYPE,
                     titleData = context.getString(R.string.requirements_card_amount_title),
                     contentData = requirementCard.estimationDto?.price?.let {
-                        if (it > 0)
-                            "${moneyFormat.format(it)}원" else context.getString(
-                            R.string.not_estimated_text
-                        )
+                        if (it > 0) it.formatMoney() else context.getString(R.string.not_estimated_text)
                     },
                     extraData = if (requirementCard.estimationDto?.price!! > 0) context.getString(if (requirementCard.estimationDto.includingVat == true) R.string.vat_included else R.string.vat_not_included) else "",
                     alertData = context.getString(R.string.requirements_card_waiting_label),

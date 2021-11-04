@@ -7,8 +7,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentEditFlexibleCostBinding
 import kr.co.soogong.master.ui.base.BaseFragment
-import kr.co.soogong.master.ui.profile.detail.flexiblecost.EditFlexibleCostViewModel.Companion.REQUEST_FAILED
-import kr.co.soogong.master.ui.profile.detail.flexiblecost.EditFlexibleCostViewModel.Companion.SAVE_FLEXIBLE_COST_SUCCESSFULLY
+import kr.co.soogong.master.ui.profile.detail.EditProfileContainerViewModel.Companion.REQUEST_FAILED
+import kr.co.soogong.master.ui.profile.detail.EditProfileContainerViewModel.Companion.SAVE_MASTER_SUCCESSFULLY
 import kr.co.soogong.master.ui.profile.detail.flexiblecost.FlexibleCostChipGroupHelper.CRANE_USAGE
 import kr.co.soogong.master.ui.profile.detail.flexiblecost.FlexibleCostChipGroupHelper.PACKAGE_COST
 import kr.co.soogong.master.ui.profile.detail.flexiblecost.FlexibleCostChipGroupHelper.TRAVEL_COST
@@ -55,13 +55,9 @@ class EditFlexibleCostFragment : BaseFragment<FragmentEditFlexibleCostBinding>(
         Timber.tag(TAG).d("registerEventObserve: ")
 
         viewModel.action.observe(viewLifecycleOwner, EventObserver { event ->
-            when(event) {
-                SAVE_FLEXIBLE_COST_SUCCESSFULLY -> {
-                    activity?.onBackPressed()
-                }
-                REQUEST_FAILED -> {
-                    requireContext().toast(getString(R.string.error_message_of_request_failed))
-                }
+            when (event) {
+                SAVE_MASTER_SUCCESSFULLY -> activity?.onBackPressed()
+                REQUEST_FAILED -> requireContext().toast(getString(R.string.error_message_of_request_failed))
             }
         })
     }

@@ -1,7 +1,6 @@
 package kr.co.soogong.master.ui.widget
 
 import android.content.Context
-import android.icu.text.SimpleDateFormat
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -9,6 +8,7 @@ import androidx.core.view.isVisible
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.model.profile.SecretaryCodeTable
 import kr.co.soogong.master.databinding.ViewRequirementBasicBinding
+import kr.co.soogong.master.utility.extension.formatFullDateTimeWithoutDay
 import java.util.*
 
 class RequirementBasic @JvmOverloads constructor(
@@ -43,7 +43,7 @@ class RequirementBasic @JvmOverloads constructor(
             value?.let {
                 binding.createdAt.text = context.getString(
                     R.string.requirements_card_start_time,
-                    SimpleDateFormat("yyyy.MM.dd - HH:mm", Locale.KOREA).format(it)
+                    it.formatFullDateTimeWithoutDay()
                 )
             }
         }
