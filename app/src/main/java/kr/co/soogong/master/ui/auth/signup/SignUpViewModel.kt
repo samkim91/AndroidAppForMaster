@@ -100,7 +100,7 @@ class SignUpViewModel @Inject constructor(
                 serviceArea = serviceAreaToInt.value,
                 privatePolicy = privacyPolicy.value,
                 marketingPush = marketingPush.value,
-                marketingPushAtNight = marketingPush.value,
+                pushAtNight = true,
             )
         )
             .subscribeOn(Schedulers.io())

@@ -32,20 +32,19 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:switchClick="@{vm::changeMarketingPush}"
-                app:title='@{"마케팅 푸시 알림"}' />
+                app:title="@{@string/label_for_marketing_push}" />
 
             <kr.co.soogong.master.ui.widget.TitleSwitchCompat
-                android:id="@+id/marketing_push_at_night"
+                android:id="@+id/push_at_night"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
-                app:checked="@{vm.marketingPushAtNight}"
+                app:checked="@{vm.pushAtNight}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/marketing_push"
-                app:subtitle='@{"오후 9시 ~ 오전 8시까지"}'
+                app:subtitle="@{@string/subtitle_for_push_at_night}"
                 app:switchClick="@{vm::changeMarketingPushAtNight}"
-                app:title='@{"야간 마케팅 푸시 알림"}' />
+                app:title="@{@string/label_for_push_at_night}" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 style="@style/text_style_13sp.medium"
@@ -58,7 +57,7 @@
                 android:textColor="@color/color_9E9E9E"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/marketing_push_at_night" />
+                app:layout_constraintTop_toBottomOf="@id/push_at_night" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
