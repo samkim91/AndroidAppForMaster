@@ -24,20 +24,19 @@ class AlarmViewModel @Inject constructor(
     val marketingPush: LiveData<Boolean>
         get() = _marketingPush
 
-    private val _marketingPushAtNight = MutableLiveData(false)
-    val marketingPushAtNight: LiveData<Boolean>
-        get() = _marketingPushAtNight
+    private val _pushAtNight = MutableLiveData(false)
+    val pushAtNight: LiveData<Boolean>
+        get() = _pushAtNight
 
     fun changeMarketingPush(v: CompoundButton, isChecked: Boolean) {
         Timber.tag(TAG).d("changeMarketingPush: $isChecked")
         _marketingPush.postValue(isChecked)
-        // TODO: 2021/07/07 수정 필요 ... 초기로딩에서도 실행되고 있음
         saveAlarmStatus(MARKETING, isChecked)
     }
 
     fun changeMarketingPushAtNight(v: CompoundButton, isChecked: Boolean) {
         Timber.tag(TAG).d("changeMarketingPushAtNight: $isChecked")
-        _marketingPushAtNight.postValue(isChecked)
+        _pushAtNight.postValue(isChecked)
         saveAlarmStatus(MARKETING_AT_NIGHT, isChecked)
     }
 
@@ -46,12 +45,12 @@ class AlarmViewModel @Inject constructor(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ masterDto ->
-                Timber.tag(TAG).w("requestAlarmStatus successfully: $masterDto")
+                Timber.tag(TAG).d("requestAlarmStatus successfully: ")
                 _masterDto.value = masterDto
                 _marketingPush.postValue(masterDto.marketingPush)
-                _marketingPushAtNight.postValue(masterDto.marketingPushAtNight)
+                _pushAtNight.postValue(masterDto.pushAtNight)
             }, {
-                Timber.tag(TAG).w("requestAlarmStatus failed: $it")
+                Timber.tag(TAG).d("requestAlarmStatus failed: $it")
             })
             .addToDisposable()
     }
@@ -62,15 +61,15 @@ class AlarmViewModel @Inject constructor(
                 id = _masterDto.value?.id,
                 uid = _masterDto.value?.uid,
                 marketingPush = if (type == MARKETING) isChecked else null,
-                marketingPushAtNight = if (type == MARKETING_AT_NIGHT) isChecked else null,
+                pushAtNight = if (type == MARKETING_AT_NIGHT) isChecked else null,
             )
         )
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                Timber.tag(TAG).w("saveAlarmStatus successfully: $it")
+                Timber.tag(TAG).d("saveAlarmStatus successfully: ")
             }, {
-                Timber.tag(TAG).w("saveAlarmStatus failed: $it")
+                Timber.tag(TAG).d("saveAlarmStatus failed: $it")
             })
             .addToDisposable()
     }
