@@ -191,6 +191,29 @@ fun setBottomButtons(
                     }
                 }
 
+                is RequirementStatus.Estimated -> {
+                    if (requirement.safetyNumber.isNullOrEmpty()) return
+                    // Button : 고객에게 전화하기
+                    buttonsDivider.isVisible = true
+                    with(leftButton) {
+                        isVisible = true
+                        when {
+                            requirement.estimationDto?.fromMasterCallCnt!! > 0 -> {
+                                text = getString(R.string.recall_to_customer_text)
+                                setTextColor(getColor(R.color.color_555555))
+                            }
+                            else -> {
+                                text = getString(R.string.call_to_customer_text)
+                                setTextColor(getColor(R.color.color_1FC472))
+                            }
+                        }
+                        setBackgroundColor(resources.getColor(R.color.color_FFFFFF, null))
+                        setOnClickListener {
+                            viewModel.callToClient()
+                        }
+                    }
+                }
+
                 is RequirementStatus.Measured -> {
                     // Button : 고객에게 전화하기
                     buttonsDivider.isVisible = true
@@ -206,7 +229,6 @@ fun setBottomButtons(
                                 setTextColor(getColor(R.color.color_1FC472))
                             }
                         }
-                        setTextColor(getColor(R.color.color_1FC472))
                         setBackgroundColor(resources.getColor(R.color.color_FFFFFF, null))
                         setOnClickListener {
                             viewModel.callToClient()

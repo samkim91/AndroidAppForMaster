@@ -5,27 +5,20 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentManager
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.model.profile.CompareCodeTable
 import kr.co.soogong.master.data.model.requirement.RequirementCard
-import kr.co.soogong.master.data.model.requirement.RequirementStatus
 import kr.co.soogong.master.databinding.ViewHolderRequirementItemBinding
 import kr.co.soogong.master.ui.GRAY_THEME
 import kr.co.soogong.master.ui.GREEN_THEME
 import kr.co.soogong.master.ui.MONEY_TYPE
-import kr.co.soogong.master.ui.dialog.popup.CustomDialog
-import kr.co.soogong.master.ui.dialog.popup.DialogData
 import kr.co.soogong.master.ui.requirement.RequirementViewModel
 import kr.co.soogong.master.ui.widget.RequirementCardAdditionalInfo
 import kr.co.soogong.master.ui.widget.RequirementCardAdditionalInfo.Companion.setContainerTheme
-import kr.co.soogong.master.uihelper.requirment.CallToCustomerHelper
-import kr.co.soogong.master.uihelper.requirment.action.EndRepairActivityHelper
-import kr.co.soogong.master.uihelper.requirment.action.MeasureActivityHelper
 import kr.co.soogong.master.utility.extension.formatMoney
 
 // 진행중탭의 viewHolders
 
-// 진행중탭의 부모 viewHolder
-open class ProgressCardViewHolder(
+// 실측예정 상태
+class MeasuringCardViewHolder(
     private val binding: ViewHolderRequirementItemBinding,
 ) : RequirementCardViewHolder(binding) {
     override fun bind(
@@ -36,88 +29,15 @@ open class ProgressCardViewHolder(
     ) {
         super.bind(context, fragmentManager, viewModel, requirementCard)
 
-        with(binding) {
-            leftButton.isVisible = true
-            leftButton.setText(R.string.call_to_customer_text)
-
-            if (requirementCard.estimationDto?.fromMasterCallCnt!! > 0) {
-                leftButton.setText(R.string.recall_to_customer_text)
-                leftButton.setTextColor(context.resources.getColor(R.color.color_555555, null))
-                leftButton.setBackgroundResource(R.drawable.shape_white_background_darkgray_border_radius8)
-            }
-
-            setLeftButtonClickListener {
-                CustomDialog.newInstance(
-                    DialogData.getCallToCustomerDialogData(context)
-                ).let {
-                    it.setButtonsClickListener(
-                        onPositive = {
-                            viewModel.callToClient(requirementId = requirementCard.id)
-                            context.startActivity(CallToCustomerHelper.getIntent(
-                                if (requirementCard.safetyNumber.isNullOrEmpty()) requirementCard.tel else requirementCard.safetyNumber))
-                        },
-                        onNegative = { }
-                    )
-                    it.show(fragmentManager, it.tag)
-                }
-            }
-
-            rightButton.isVisible = true
-            rightButton.setText(R.string.repair_done_text)
-            setRightButtonClickListener {
-                context.startActivity(
-                    EndRepairActivityHelper.getIntent(
-                        context,
-                        requirementCard.id
-                    )
-                )
-            }
-        }
-    }
-}
-
-// 실측예정 상태
-class MeasuringCardViewHolder(
-    private val binding: ViewHolderRequirementItemBinding,
-) : ProgressCardViewHolder(binding) {
-    override fun bind(
-        context: Context,
-        fragmentManager: FragmentManager,
-        viewModel: RequirementViewModel,
-        requirementCard: RequirementCard,
-    ) {
-        super.bind(context, fragmentManager, viewModel, requirementCard)
-
-        with(binding) {
-            rightButton.isVisible = true
-            rightButton.setText(R.string.send_estimation)
-            setRightButtonClickListener {
-                context.startActivity(
-                    if (requirementCard.typeCode == CompareCodeTable.code) {
-                        EndRepairActivityHelper.getIntent(context, requirementCard.id)
-                    } else {
-                        if (requirementCard.status is RequirementStatus.Measuring) {
-                            MeasureActivityHelper.getIntent(
-                                context,
-                                requirementCard.id
-                            )
-                        } else {
-                            EndRepairActivityHelper.getIntent(
-                                context,
-                                requirementCard.id
-                            )
-                        }
-                    }
-                )
-            }
-        }
+        setCallToClientButton(context, fragmentManager, binding, viewModel, requirementCard)
+        setWriteEstimationButton(context, fragmentManager, binding, viewModel, requirementCard)
     }
 }
 
 // 실측완료 상태
 class MeasuredCardViewHolder(
     private val binding: ViewHolderRequirementItemBinding,
-) : ProgressCardViewHolder(binding) {
+) : RequirementCardViewHolder(binding) {
     override fun bind(
         context: Context,
         fragmentManager: FragmentManager,
@@ -134,6 +54,9 @@ class MeasuredCardViewHolder(
                     null
                 )
             )
+
+            setCallToClientButton(context, fragmentManager, binding, viewModel, requirementCard)
+            setRepairDoneButton(context, fragmentManager, binding, viewModel, requirementCard)
 
             setContainerTheme(context, additionalInfoContainer, GRAY_THEME)
             additionalInfoContainer.addView(RequirementCardAdditionalInfo(context).apply {
@@ -153,7 +76,7 @@ class MeasuredCardViewHolder(
 // 시공예정 상태
 class RepairingCardViewHolder(
     private val binding: ViewHolderRequirementItemBinding,
-) : ProgressCardViewHolder(binding) {
+) : RequirementCardViewHolder(binding) {
     override fun bind(
         context: Context,
         fragmentManager: FragmentManager,
@@ -163,6 +86,9 @@ class RepairingCardViewHolder(
         super.bind(context, fragmentManager, viewModel, requirementCard)
 
         with(binding) {
+            setCallToClientButton(context, fragmentManager, binding, viewModel, requirementCard)
+            setRepairDoneButton(context, fragmentManager, binding, viewModel, requirementCard)
+
             setContainerTheme(context, additionalInfoContainer, GREEN_THEME)
             additionalInfoContainer.addView(RequirementCardAdditionalInfo(context).apply {
                 setLayout(
@@ -179,10 +105,10 @@ class RepairingCardViewHolder(
     }
 }
 
-// 고객완료요청 상태
+// 고객완료요청 상태 : 현재는 사용하는 곳이 없다..
 class RequestFinishCardViewHolder(
     private val binding: ViewHolderRequirementItemBinding,
-) : ProgressCardViewHolder(binding) {
+) : RequirementCardViewHolder(binding) {
     override fun bind(
         context: Context,
         fragmentManager: FragmentManager,
