@@ -1,14 +1,15 @@
 package kr.co.soogong.master.ui.main
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import androidx.activity.viewModels
-import androidx.core.content.res.ResourcesCompat
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.SoogongMasterMessagingService.Companion.initNotificationChannel
 import kr.co.soogong.master.SoogongMasterMessagingService.Companion.removeBrokenChannel
 import kr.co.soogong.master.databinding.ActivityMainBinding
+import kr.co.soogong.master.databinding.ViewMainActivityTabItemBinding
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.uihelper.main.MainBadge
 import timber.log.Timber
@@ -44,9 +45,14 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
                 isUserInputEnabled = false
                 adapter = MainPagerAdapter(this@MainActivity)
                 TabLayoutMediator(mainTabs, this) { tab, position ->
-                    tab.text = getString(TabTextList[position])
-                    tab.icon =
-                        ResourcesCompat.getDrawable(resources, TabIconList[position], null)
+                    ViewMainActivityTabItemBinding
+                        .inflate(LayoutInflater.from(this@MainActivity), null, false)
+                        .apply {
+                            icon = TabIcons[position]
+                            label = TabTextList[position]
+                        }.run {
+                            tab.customView = this@run.root
+                        }
                 }.attach()
             }
         }

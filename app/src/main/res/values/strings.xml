@@ -69,9 +69,11 @@
     <string name="notice_page_name">공지사항</string>
 
     <!-- Main Page -->
-    <string name="main_page_request_name">문의현황</string>
-    <string name="main_page_profile_name">프로필</string>
-    <string name="main_page_my_page_name">마이페이지</string>
+    <string name="main_activity_navigation_bar_home">홈</string>
+    <string name="main_activity_navigation_bar_requirements">문의 목록</string>
+    <string name="main_activity_navigation_bar_profile">내 프로필</string>
+    <string name="main_activity_navigation_bar_preferences">설정</string>
+
     <string name="bottom_view_for_filling_profile_info_button_text">등록하기</string>
     <string name="alert_text_to_fill_up_required_information"><b>필수 정보를 모두 등록</b>하고, 승인이 완료되면\n<b>문의 처리가 가능</b>합니다!</string>
 

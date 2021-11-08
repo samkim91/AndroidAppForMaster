@@ -9,7 +9,7 @@ import kr.co.soogong.master.ui.requirement.RequirementFragment
 import timber.log.Timber
 
 class MainPagerAdapter(
-    fragmentActivity: FragmentActivity
+    fragmentActivity: FragmentActivity,
 ) : FragmentStateAdapter(fragmentActivity) {
 
     override fun getItemCount(): Int = TabCount
@@ -20,7 +20,7 @@ class MainPagerAdapter(
             0 -> RequirementFragment.newInstance()
             1 -> ProfileFragment.newInstance()
             2 -> MyPageFragment.newInstance()
-            else -> Fragment()
+            else -> Fragment()      // TODO: 2021/11/08 홈 프래그먼트 추가 필요!!
         }
     }
 
