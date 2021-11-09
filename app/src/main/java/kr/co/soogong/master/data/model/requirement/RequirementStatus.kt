@@ -124,12 +124,25 @@ sealed class RequirementStatus {
             }
         }
 
+        val statusForNewRequirements = listOf(
+            Requested,
+            RequestConsult,
+            RequestMeasure,
+            Estimated,
+            Measuring,
+            Measured,
+            Repairing,
+            Done,
+            Closed,
+            Canceled,
+        )
+
         val receivedStatus = listOf(
             Requested,
             RequestConsult,
             RequestMeasure,
             Estimated,
-            )
+        )
 
         val progressStatus = listOf(
             Measuring,

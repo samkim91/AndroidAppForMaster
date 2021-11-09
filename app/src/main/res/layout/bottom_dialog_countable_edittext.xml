@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/gap_10"
             android:text="@string/bottom_dialog_estimation_template_title"
-            android:textColor="@color/color_2E2E2E"
+            android:textColor="@color/c_2E2E2E"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toEndOf="@id/close_button"

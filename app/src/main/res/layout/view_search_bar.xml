@@ -31,7 +31,7 @@
             android:paddingEnd="@dimen/gap_16"
             android:paddingBottom="@dimen/gap_10"
             android:textColorHint="@color/text_hint_color"
-            android:textColor="@color/color_2E2E2E"
+            android:textColor="@color/c_2E2E2E"
             android:singleLine="true"
             android:maxLength="20"
             app:layout_constraintEnd_toStartOf="@id/cancel_text"

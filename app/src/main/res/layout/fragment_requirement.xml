@@ -48,11 +48,11 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/search_bar"
-            app:tabBackground="@color/color_FFFFFF"
+            app:tabBackground="@color/c_FFFFFF"
             app:tabIndicatorColor="@color/color_22D47B"
             app:tabSelectedTextColor="@color/color_1FC472"
             app:tabTextAppearance="@style/text_style_16sp.medium"
-            app:tabTextColor="@color/color_404040" />
+            app:tabTextColor="@color/c_404040" />
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/requirements_view_pager"

@@ -2,9 +2,5 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
     <solid android:color="@color/c_FFFFFF" />
 
-    <corners android:radius="@dimen/gap_80" />
-
-    <stroke
-        android:width="@dimen/board_size"
-        android:color="@color/color_EEEEEE" />
+    <corners android:radius="@dimen/gap_15" />
 </shape>

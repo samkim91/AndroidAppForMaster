@@ -86,6 +86,7 @@
     <dimen name="gap_180">180dp</dimen>
     <dimen name="gap_220">220dp</dimen>
     <dimen name="gap_230">230dp</dimen>
+    <dimen name="gap_350">350dp</dimen>
 
     <!--  Sign In  -->
     <dimen name="sign_in_logo_margin_top">25dp</dimen>

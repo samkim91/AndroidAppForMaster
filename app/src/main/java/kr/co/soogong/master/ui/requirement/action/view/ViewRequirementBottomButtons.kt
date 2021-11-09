@@ -38,7 +38,7 @@ fun setBottomButtons(
                         with(leftButton) {
                             isVisible = true
                             text = getString(R.string.refuse_estimate_text)
-                            setTextColor(getColor(R.color.color_FFFFFF))
+                            setTextColor(getColor(R.color.c_FFFFFF))
                             setBackgroundColor(resources.getColor(R.color.color_FF711D, null))
                             setOnClickListener {
                                 CustomDialog.newInstance(
@@ -57,7 +57,7 @@ fun setBottomButtons(
                         with(rightButton) {
                             isVisible = true
                             text = getString(R.string.accept_estimate_text)
-                            setTextColor(getColor(R.color.color_FFFFFF))
+                            setTextColor(getColor(R.color.c_FFFFFF))
                             setBackgroundColor(resources.getColor(R.color.color_22D47B, null))
                             setOnClickListener {
                                 startActivity(
@@ -77,7 +77,7 @@ fun setBottomButtons(
                     with(leftButton) {
                         isVisible = true
                         text = getString(R.string.refuse_measure_text)
-                        setTextColor(getColor(R.color.color_FFFFFF))
+                        setTextColor(getColor(R.color.c_FFFFFF))
                         setBackgroundColor(resources.getColor(R.color.color_FF711D, null))
                         setOnClickListener {
                             CustomDialog.newInstance(
@@ -101,7 +101,7 @@ fun setBottomButtons(
                     with(rightButton) {
                         isVisible = true
                         text = getString(R.string.accept_measure_text)
-                        setTextColor(getColor(R.color.color_FFFFFF))
+                        setTextColor(getColor(R.color.c_FFFFFF))
                         setBackgroundColor(resources.getColor(R.color.color_22D47B, null))
                         setOnClickListener {
                             CustomDialog.newInstance(
@@ -134,7 +134,7 @@ fun setBottomButtons(
                                 setTextColor(getColor(R.color.color_1FC472))
                             }
                         }
-                        setBackgroundColor(resources.getColor(R.color.color_FFFFFF, null))
+                        setBackgroundColor(resources.getColor(R.color.c_FFFFFF, null))
                         setOnClickListener {
                             viewModel.callToClient()
                         }
@@ -142,7 +142,7 @@ fun setBottomButtons(
                     with(rightButton) {
                         isVisible = true
                         text = getString(R.string.repair_done_text)
-                        setTextColor(getColor(R.color.color_FFFFFF))
+                        setTextColor(getColor(R.color.c_FFFFFF))
                         setBackgroundColor(resources.getColor(R.color.color_22D47B, null))
                         setOnClickListener {
                             startActivity(
@@ -170,7 +170,7 @@ fun setBottomButtons(
                                 setTextColor(getColor(R.color.color_1FC472))
                             }
                         }
-                        setBackgroundColor(resources.getColor(R.color.color_FFFFFF, null))
+                        setBackgroundColor(resources.getColor(R.color.c_FFFFFF, null))
                         setOnClickListener {
                             viewModel.callToClient()
                         }
@@ -178,7 +178,7 @@ fun setBottomButtons(
                     with(rightButton) {
                         isVisible = true
                         text = getString(R.string.send_estimation)
-                        setTextColor(getColor(R.color.color_FFFFFF))
+                        setTextColor(getColor(R.color.c_FFFFFF))
                         setBackgroundColor(resources.getColor(R.color.color_22D47B, null))
                         setOnClickListener {
                             startActivity(
@@ -207,7 +207,7 @@ fun setBottomButtons(
                                 setTextColor(getColor(R.color.color_1FC472))
                             }
                         }
-                        setBackgroundColor(resources.getColor(R.color.color_FFFFFF, null))
+                        setBackgroundColor(resources.getColor(R.color.c_FFFFFF, null))
                         setOnClickListener {
                             viewModel.callToClient()
                         }
@@ -229,7 +229,7 @@ fun setBottomButtons(
                                 setTextColor(getColor(R.color.color_1FC472))
                             }
                         }
-                        setBackgroundColor(resources.getColor(R.color.color_FFFFFF, null))
+                        setBackgroundColor(resources.getColor(R.color.c_FFFFFF, null))
                         setOnClickListener {
                             viewModel.callToClient()
                         }
@@ -244,7 +244,7 @@ fun setBottomButtons(
                         requirement.estimationDto?.repair?.requestReviewYn?.let { requestReviewYn ->
                             if (requestReviewYn) {
                                 text = getString(R.string.ask_for_review_successful)
-                                setTextColor(getColor(R.color.color_FFFFFF))
+                                setTextColor(getColor(R.color.c_FFFFFF))
                                 setBackgroundColor(
                                     resources.getColor(
                                         R.color.color_90E9BD,
@@ -253,7 +253,7 @@ fun setBottomButtons(
                                 )
                             } else {
                                 text = getString(R.string.request_review_text)
-                                setTextColor(getColor(R.color.color_FFFFFF))
+                                setTextColor(getColor(R.color.c_FFFFFF))
                                 setBackgroundColor(
                                     resources.getColor(
                                         R.color.color_1FC472,

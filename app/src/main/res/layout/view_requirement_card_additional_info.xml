@@ -88,7 +88,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{alert}"
-            android:textColor="@color/color_909090"
+            android:textColor="@color/c_909090"
             android:visibility="gone"
             tools:visibility="visible"
             app:layout_constraintStart_toStartOf="@id/key_textview"

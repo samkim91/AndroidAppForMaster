@@ -1,6 +1,8 @@
 package kr.co.soogong.master.ui.requirement.card
 
 import android.content.Context
+import android.view.LayoutInflater
+import android.view.ViewGroup
 import androidx.core.view.isNotEmpty
 import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentManager
@@ -252,6 +254,34 @@ open class RequirementCardViewHolder(
                     rightButton.setText(R.string.ask_for_review_successful)
                     rightButton.isEnabled = false
                 }
+            }
+        }
+    }
+
+    companion object {
+        fun create(parent: ViewGroup, viewType: Int): RequirementCardViewHolder {
+            val binding = ViewHolderRequirementItemBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+
+            return when (viewType) {
+                RequirementStatus.Requested.asInt -> RequestedCardViewHolder(binding)
+                RequirementStatus.RequestConsult.asInt -> RequestConsultCardViewHolder(binding)
+                RequirementStatus.RequestMeasure.asInt -> RequestMeasureCardViewHolder(binding)
+                RequirementStatus.Estimated.asInt -> EstimatedCardViewHolder(binding)
+
+                RequirementStatus.Measuring.asInt -> MeasuringCardViewHolder(binding)
+                RequirementStatus.Measured.asInt -> MeasuredCardViewHolder(binding)
+                RequirementStatus.Repairing.asInt -> RepairingCardViewHolder(binding)
+                RequirementStatus.RequestFinish.asInt -> RequestFinishCardViewHolder(binding)
+
+                RequirementStatus.Done.asInt -> DoneViewHolder(binding)
+                RequirementStatus.Closed.asInt -> ClosedViewHolder(binding)
+                RequirementStatus.Canceled.asInt -> CanceledViewHolder(binding)
+
+                else -> CanceledViewHolder(binding)
             }
         }
     }

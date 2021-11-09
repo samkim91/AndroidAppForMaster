@@ -14,7 +14,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/alert_text_to_fill_up_required_information"
-            android:textColor="@color/color_FFFFFF"
+            android:textColor="@color/c_FFFFFF"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/bottom_view_button"
             app:layout_constraintStart_toStartOf="parent"

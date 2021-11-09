@@ -63,7 +63,7 @@ class RequirementCardAdditionalInfo @JvmOverloads constructor(
                 }
                 GRAY_THEME -> {
                     icon.imageTintList =
-                        ColorStateList.valueOf(context.getColor(R.color.color_909090))
+                        ColorStateList.valueOf(context.getColor(R.color.c_909090))
                     keyTextview.setTextColor(context.getColor(R.color.color_555555))
                     valueTextview.setTextColor(context.getColor(R.color.color_555555))
                 }

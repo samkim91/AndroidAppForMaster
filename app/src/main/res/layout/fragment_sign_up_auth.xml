@@ -73,7 +73,7 @@
                 android:paddingBottom="@dimen/gap_10"
                 android:singleLine="true"
                 android:text="@={vm.certificationCode}"
-                android:textColor="@color/color_2E2E2E"
+                android:textColor="@color/c_2E2E2E"
                 android:textColorHint="@color/text_hint_color"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

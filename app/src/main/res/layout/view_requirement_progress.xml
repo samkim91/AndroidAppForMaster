@@ -75,7 +75,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/gap_12"
-            android:textColor="@color/color_909090"
+            android:textColor="@color/c_909090"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/seek_bar"
             tools:text="문의접수" />
@@ -96,7 +96,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/gap_12"
-            android:textColor="@color/color_909090"
+            android:textColor="@color/c_909090"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/seek_bar"
             tools:text="시공완료" />

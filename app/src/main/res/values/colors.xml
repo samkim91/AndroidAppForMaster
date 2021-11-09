@@ -17,7 +17,7 @@
     <color name="color_E500664E">#E500664E</color>
     <color name="color_212121">#212121</color>
     <color name="color_121212">#121212</color>
-    <color name="color_2E2E2E">#2E2E2E</color>
+
     <color name="color_A8A8A8">#A8A8A8</color>
     <color name="color_22D47B">#22D47B</color>
     <color name="color_1FC472">#1FC472</color>
@@ -25,21 +25,20 @@
     <color name="color_FF711D">#FF711D</color>
     <color name="color_EB4B2F">#EB4B2F</color>
     <color name="color_E3E3E3">#e3e3e3</color>
-    <color name="c_4D000000">#4D000000</color>
+
     <color name="color_90E9BD">#90E9BD</color>
-    <color name="color_FFFFFF">#FFFFFF</color>
+    <color name="c_FFFFFF">#FFFFFF</color>
     <color name="color_00664E">#00664E</color>
     <color name="color_C4C4C4">#C4C4C4</color>
-    <color name="color_404040">#404040</color>
+    <color name="c_404040">#404040</color>
     <color name="color_2196F3">#2196F3</color>
     <color name="color_F0FCF2">#F0FCF2</color>
     <color name="color_FFF2EB">#FFF2EB</color>
     <color name="color_FFE1D2">#FFE1D2</color>
     <color name="color_F8F8F8">#F8F8F8</color>
     <color name="c_F0F9F9F9">#F0F9F9F9</color>
-    <color name="color_909090">#909090</color>
+    <color name="c_909090">#909090</color>
     <color name="color_0C5E47">#0C5E47</color>
-    <color name="c_C1C1C1">#C1C1C1</color>
     <color name="color_D4FADB">#D4FADB</color>
     <color name="color_1FB571">#1FB571</color>
     <color name="color_CECECE">#CECECE</color>
@@ -48,6 +47,16 @@
     <color name="color_1B8C61">#1B8C61</color>
     <color name="color_08362F">#08362F</color>
 
+    <color name="c_4D000000">#4D000000</color>
+    <color name="c_C1C1C1">#C1C1C1</color>
+    <color name="c_7C7C7C">#7C7C7C</color>
+    <color name="c_2E2E2E">#2E2E2E</color>
+    <color name="c_313030">#313030</color>
+    <color name="c_F9F9F9">#F9F9F9</color>
+    <color name="c_535353">#535353</color>
+    <color name="c_B9B9B9">#B9B9B9</color>
+    <color name="c_EBEBEB">#EBEBEB</color>
+    <color name="c_CDCDCD">#CDCDCD</color>
 
     <color name="text_basic_color">@color/color_121212</color>
     <color name="text_primary_color">@color/color_616161</color>

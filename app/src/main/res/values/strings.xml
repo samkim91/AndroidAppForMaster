@@ -73,12 +73,20 @@
     <string name="main_activity_navigation_bar_requirements">문의 목록</string>
     <string name="main_activity_navigation_bar_profile">내 프로필</string>
     <string name="main_activity_navigation_bar_preferences">설정</string>
+    <string name="label_for_switch_compat">실측 요청 받기</string>
+    <string name="summary_item">%s건</string>
+    <string name="new_requirements_container_label">새로 들어온 문의</string>
 
     <string name="bottom_view_for_filling_profile_info_button_text">등록하기</string>
     <string name="alert_text_to_fill_up_required_information"><b>필수 정보를 모두 등록</b>하고, 승인이 완료되면\n<b>문의 처리가 가능</b>합니다!</string>
 
     <string name="cancel_text">취소</string>
     <string name="search_bar_hint_text">프로젝트 또는 주소로 검색해 보세요.</string>
+
+    <!-- Home -->
+    <string name="summary_label_for_request">요청</string>
+    <string name="summary_label_for_progress">진행</string>
+    <string name="summary_label_for_completion">완료</string>
 
     <!--  Requirements  -->
     <string name="requirements_received_tab_name">문의</string>

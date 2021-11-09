@@ -45,7 +45,7 @@
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/text"
                 style="@style/text_style_14sp.medium"
-                android:textColor="@color/color_2E2E2E"
+                android:textColor="@color/c_2E2E2E"
                 android:textColorHint="@color/text_hint_color"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

@@ -18,7 +18,7 @@
             android:layout_marginEnd="@dimen/gap_20"
             android:layout_marginBottom="@dimen/gap_12"
             android:gravity="start"
-            android:textColor="@color/color_2E2E2E"
+            android:textColor="@color/c_2E2E2E"
             android:visibility="gone"
             tools:text="제목" />
 

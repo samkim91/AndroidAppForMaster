@@ -30,7 +30,7 @@
             android:fontFamily="@font/medium"
             android:gravity="center"
             android:lines="1"
-            android:textColor="@color/color_2E2E2E"
+            android:textColor="@color/c_2E2E2E"
             android:textSize="@dimen/text_title_size"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
