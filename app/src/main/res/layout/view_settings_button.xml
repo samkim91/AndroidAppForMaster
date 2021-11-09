@@ -45,7 +45,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="@string/badge_text"
+                android:text="@string/new_badge_text"
                 android:textColor="@color/c_FFFFFF"
                 android:textSize="@dimen/badge_text_size"
                 android:textStyle="bold" />

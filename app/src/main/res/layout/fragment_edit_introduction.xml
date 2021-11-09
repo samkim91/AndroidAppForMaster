@@ -34,7 +34,7 @@
                     android:id="@+id/introduction"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    app:alertText='@{"10자 이상으로 입력해주세요."}'
+                    app:alertText="@{@string/fill_text_over_10}"
                     app:blackSubTitle="@{false}"
                     app:hintText='@{"예시) 강남 지역 30년 역사의 싱크대 장인! 믿고 맡겨주세요!"}'
                     app:layout_constraintEnd_toEndOf="parent"

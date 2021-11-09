@@ -39,7 +39,7 @@ class EstimationTemplatesActivity : BaseActivity<ActivityEstimationTemplatesBind
                 backButton.setOnClickListener {
                     super.onBackPressed()
                 }
-                button.text = getString(R.string.add_button_text)
+                button.text = getString(R.string.addition)
                 button.setOnClickListener {
                     showBottomSheetDialog(null)
                 }

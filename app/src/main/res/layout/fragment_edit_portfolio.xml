@@ -167,7 +167,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/gap_28"
-                    app:alertText='@{"10자 이상으로 입력해주세요."}'
+                    app:alertText="@{@string/fill_text_over_10}"
                     app:content="@={vm.description}"
                     app:hintText='@{"해당 시공에 대해 간단한 설명을 해주세요."}'
                     app:layout_constraintStart_toStartOf="parent"

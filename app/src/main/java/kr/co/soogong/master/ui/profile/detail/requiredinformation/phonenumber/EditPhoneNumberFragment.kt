@@ -116,7 +116,7 @@ class EditPhoneNumberFragment :
                 id.buttonColor = isEnabled
                 id.buttonBackground = isEnabled
                 id.buttonText =
-                    if (!isEnabled) getString(R.string.certification_text) else getString(R.string.retype_text)
+                    if (!isEnabled) getString(R.string.certification) else getString(R.string.retyping)
                 certificationCodeContainer.isVisible = isEnabled
                 requestCertificationCodeAgainGroup.isVisible = isEnabled
             })

@@ -144,7 +144,7 @@ class RequirementDrawerContainer @JvmOverloads constructor(
         ) {
             requirementDto.let { requirement ->
                 EstimationDetail(context).apply {
-                    key = context.getString(R.string.cancel_repair_title)
+                    key = context.getString(R.string.canceled_reason_text)
                     value =
                         CanceledReason.getCanceledReasonFromCode(requirement.canceledCode).inKorean
                     bold = true

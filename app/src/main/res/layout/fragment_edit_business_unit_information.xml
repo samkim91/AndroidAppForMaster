@@ -80,7 +80,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/business_name"
                     app:setMaxLength="@{20}"
-                    app:subTitle='@{"업체 이름이 없을 경우 시공하시는 분의 이름을 입력해주세요."}'
+                    app:subTitle="@{@string/requesting_shop_name_subtitle}"
                     app:title='@{"업체 이름을 입력해주세요."}' />
 
                 <kr.co.soogong.master.ui.widget.TitleEditText
@@ -152,7 +152,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:text="@string/alert_required_field"
+                    android:text="@string/required_field_alert"
                     android:textColor="@color/text_alert_color"
                     android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"

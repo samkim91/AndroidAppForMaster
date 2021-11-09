@@ -38,7 +38,7 @@ class CancelActivity : BaseActivity<ActivityCancelBinding>(
             lifecycleOwner = this@CancelActivity
 
             with(actionBar) {
-                title.text = getString(R.string.cancel_estimate_title)
+                title.text = getString(R.string.canceled_reason_text)
 
                 backButton.setOnClickListener {
                     super.onBackPressed()

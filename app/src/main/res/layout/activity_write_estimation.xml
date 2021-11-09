@@ -158,7 +158,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/simple_cost"
-                        app:text="@{@string/checkbox_text_for_including_vat}" />
+                        app:text="@{@string/vat_included}" />
 
                     <androidx.constraintlayout.widget.Group
                         android:id="@+id/estimation_integration"
@@ -176,7 +176,7 @@
                         android:layout_marginTop="@dimen/gap_52"
                         android:layout_marginEnd="@dimen/gap_20"
                         android:textColor="@color/text_basic_color"
-                        app:alertText="@{@string/alert_required_field}"
+                        app:alertText="@{@string/required_field_alert}"
                         app:alertVisible="@{false}"
                         app:content="@={vm.laborCost}"
                         app:hintText="@{@string/minimum_cost}"
@@ -195,7 +195,7 @@
                         android:layout_marginTop="@dimen/gap_28"
                         android:layout_marginEnd="@dimen/gap_20"
                         android:textColor="@color/text_basic_color"
-                        app:alertText="@{@string/alert_required_field}"
+                        app:alertText="@{@string/required_field_alert}"
                         app:alertVisible="@{false}"
                         app:content="@={vm.materialCost}"
                         app:hintText="@{@string/minimum_cost}"
@@ -214,7 +214,7 @@
                         android:layout_marginTop="@dimen/gap_28"
                         android:layout_marginEnd="@dimen/gap_20"
                         android:textColor="@color/text_basic_color"
-                        app:alertText="@{@string/alert_required_field}"
+                        app:alertText="@{@string/required_field_alert}"
                         app:alertVisible="@{false}"
                         app:content="@={vm.travelCost}"
                         app:hintText="@{@string/minimum_cost}"
@@ -250,7 +250,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/total_cost"
-                        app:text="@{@string/checkbox_text_for_including_vat}" />
+                        app:text="@{@string/vat_included}" />
 
                     <androidx.constraintlayout.widget.Group
                         android:id="@+id/estimation_by_item_group"

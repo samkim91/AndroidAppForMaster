@@ -67,7 +67,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/simple_cost"
-                    app:text="@{@string/checkbox_text_for_including_vat}" />
+                    app:text="@{@string/vat_included}" />
 
                 <kr.co.soogong.master.ui.widget.TitleRecyclerImage
                     android:id="@+id/measurement_images_picker"

@@ -35,7 +35,7 @@
             style="@style/text_style_14sp.bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/bottom_view_for_filling_profile_info_button_text"
+            android:text="@string/register"
             android:textColor="@color/c_00664E"
             app:layout_constraintBottom_toBottomOf="@id/bottom_view_button"
             app:layout_constraintEnd_toStartOf="@id/bottom_view_button_arrow"

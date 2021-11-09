@@ -55,7 +55,7 @@
             android:layout_marginBottom="@dimen/sign_up_activity_button_margin_bottom"
             android:background="@drawable/shape_white_background_green_border_radius8"
             android:onClick="@{() -> vm.signInAction()}"
-            android:text="@string/sign_up_sign_in_button_text"
+            android:text="@string/sign_in_button_text"
             android:textColor="@color/c_1FC472"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/sign_up"

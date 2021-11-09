@@ -72,7 +72,7 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(
             lifecycleOwner = this@SignInActivity
 
             with(actionBar) {
-                title.text = getString(R.string.sign_in_activity_name)
+                title.text = getString(R.string.sign_in_button_text)
                 backButton.setOnClickListener {
                     super.onBackPressed()
                 }
@@ -120,7 +120,7 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(
                 id.buttonColor = isEnabled
                 id.buttonBackground = isEnabled
                 id.buttonText =
-                    if (!isEnabled) getString(R.string.certification_text) else getString(R.string.retype_text)
+                    if (!isEnabled) getString(R.string.certification) else getString(R.string.retyping)
                 certificationCodeContainer.isVisible = isEnabled
             })
 
