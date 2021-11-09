@@ -4,7 +4,7 @@
 
     <stroke
         android:width="@dimen/board_size"
-        android:color="@color/color_22D47B" />
+        android:color="@color/c_22D47B" />
 
     <corners android:radius="@dimen/radius_size_8" />
 </shape>

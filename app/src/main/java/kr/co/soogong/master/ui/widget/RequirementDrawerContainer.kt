@@ -193,7 +193,7 @@ class RequirementDrawerContainer @JvmOverloads constructor(
             val textView = TextView(context).apply {
                 text = context.getString(R.string.cancel_requirement_text)
                 gravity = Gravity.CENTER
-                setTextColor(context.getColor(R.color.color_FF711D))
+                setTextColor(context.getColor(R.color.c_FF711D))
                 setTextAppearance(R.style.text_style_16sp_bold)
                 setOnClickListener {
                     context.startActivity(

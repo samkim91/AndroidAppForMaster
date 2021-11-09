@@ -41,7 +41,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="@string/badge_text"
-                android:textColor="@color/basic_white"
+                android:textColor="@color/c_FFFFFF"
                 android:textSize="@dimen/badge_text_size"
                 android:textStyle="bold" />
         </FrameLayout>
@@ -53,7 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/gap_8"
             android:layout_marginEnd="@dimen/gap_16"
-            android:textColor="@color/color_616161"
+            android:textColor="@color/c_616161"
             android:visibility="gone"
             app:layout_constrainedWidth="true"
             app:layout_constraintEnd_toEndOf="parent"
@@ -96,7 +96,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/gap_16"
-            android:textColor="@color/color_1FC472"
+            android:textColor="@color/c_1FC472"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/button_barrier"
             android:text="@string/register" />

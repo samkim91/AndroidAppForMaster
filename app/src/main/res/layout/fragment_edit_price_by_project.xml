@@ -81,13 +81,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/gap_52"
-                    android:background="@color/color_F8F8F8"
+                    android:background="@color/c_F8F8F8"
                     android:paddingStart="@dimen/gap_20"
                     android:paddingTop="@dimen/gap_24"
                     android:paddingEnd="@dimen/gap_20"
                     android:paddingBottom="@dimen/gap_24"
                     android:text="@string/example_for_edit_price_by_project"
-                    android:textColor="@color/color_616161"
+                    android:textColor="@color/c_616161"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/job_description" />
@@ -99,9 +99,9 @@
             style="@style/text_style_16sp.bold"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:background="@color/color_22D47B"
+            android:background="@color/c_22D47B"
             android:text="@string/writing_done"
-            android:textColor="@color/basic_white" />
+            android:textColor="@color/c_FFFFFF" />
     </LinearLayout>
 
 </layout>

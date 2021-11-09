@@ -281,7 +281,7 @@ fun setFlexibleContainer(
                     R.string.progress_ending_text_with_date,
                     requirement.estimationDto?.repair?.actualDate.formatDateWithoutDay()
                 )
-                requirementStatus.endingTextColor = context.getColor(R.color.color_0C5E47)
+                requirementStatus.endingTextColor = context.getColor(R.color.c_0C5E47)
             }
 
             is RequirementStatus.Closed -> {
@@ -325,7 +325,7 @@ fun setFlexibleContainer(
                     R.string.progress_ending_text_with_date,
                     requirement.estimationDto?.repair?.actualDate.formatDateWithoutDay()
                 )
-                requirementStatus.endingTextColor = context.getColor(R.color.color_0C5E47)
+                requirementStatus.endingTextColor = context.getColor(R.color.c_0C5E47)
             }
 
             is RequirementStatus.Canceled -> {

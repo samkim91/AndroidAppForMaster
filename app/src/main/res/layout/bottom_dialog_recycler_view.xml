@@ -31,14 +31,14 @@
             android:layout_marginBottom="@dimen/gap_24"
             android:layout_marginEnd="@dimen/gap_20"
             android:gravity="center"
-            android:textColor="@color/color_616161"
+            android:textColor="@color/c_616161"
             tools:text="부제목" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/line"
             android:layout_width="match_parent"
             android:layout_height="@dimen/line_height"
-            android:background="@color/color_E3E3E3" />
+            android:background="@color/c_E3E3E3" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/bottom_sheet_dialog_recyclerview"

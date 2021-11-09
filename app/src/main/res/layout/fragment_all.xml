@@ -31,7 +31,7 @@
                 android:id="@+id/line"
                 android:layout_width="0dp"
                 android:layout_height="1dp"
-                android:background="@color/line_color"
+                android:background="@color/c_E3E3E3"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />

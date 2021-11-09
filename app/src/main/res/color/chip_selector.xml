@@ -3,6 +3,6 @@
     <item android:color="?attr/colorPrimary" android:state_enabled="true" android:state_selected="true"/>
     <item android:color="?attr/colorPrimary" android:state_enabled="true" android:state_checked="true"/>
 
-    <item android:color="@color/color_BDBDBD" android:state_enabled="true"/>
-    <item android:color="@color/color_BDBDBD"/>
+    <item android:color="@color/c_BDBDBD" android:state_enabled="true"/>
+    <item android:color="@color/c_BDBDBD"/>
 </selector>

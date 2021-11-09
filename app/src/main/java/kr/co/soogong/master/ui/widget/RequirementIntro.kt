@@ -35,10 +35,10 @@ class RequirementIntro @JvmOverloads constructor(
             field = value
             when (value) {
                 GREEN_THEME -> {
-                    binding.title.setTextColor(context.getColor(R.color.color_1FC472))
+                    binding.title.setTextColor(context.getColor(R.color.c_1FC472))
                 }
                 else -> {
-                    binding.title.setTextColor(context.getColor(R.color.color_555555))
+                    binding.title.setTextColor(context.getColor(R.color.c_555555))
                 }
             }
         }

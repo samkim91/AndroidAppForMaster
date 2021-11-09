@@ -13,7 +13,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/gap_4"
             android:background="@drawable/ic_small_bar"
-            android:backgroundTint="@color/color_E3E3E3"
+            android:backgroundTint="@color/c_E3E3E3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -25,7 +25,7 @@
             android:layout_marginTop="@dimen/gap_14"
             android:layout_marginStart="@dimen/gap_24"
             android:background="@drawable/ic_close_rounded"
-            android:backgroundTint="@color/color_A8A8A8"
+            android:backgroundTint="@color/c_A8A8A8"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/header_bar" />
 
@@ -36,7 +36,7 @@
             android:layout_marginTop="@dimen/gap_14"
             android:layout_marginEnd="@dimen/gap_24"
             android:background="@drawable/ic_simple_check"
-            android:backgroundTint="@color/color_A8A8A8"
+            android:backgroundTint="@color/c_A8A8A8"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/header_bar" />
 

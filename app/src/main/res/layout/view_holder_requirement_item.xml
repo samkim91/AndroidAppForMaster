@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/requirement_card_status_margin_top"
             android:text="@{data.status.inKorean}"
-            android:textColor="@color/color_1FC472"
+            android:textColor="@color/c_1FC472"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="견적요청" />
@@ -58,7 +58,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="@string/badge_text"
-                android:textColor="@color/basic_white"
+                android:textColor="@color/c_FFFFFF"
                 android:textSize="@dimen/badge_text_size"
                 android:textStyle="bold" />
         </FrameLayout>
@@ -79,7 +79,7 @@
             android:layout_width="0dp"
             android:layout_height="@dimen/line_height"
             android:layout_marginTop="@dimen/gap_12"
-            android:background="@color/line_color"
+            android:background="@color/c_E3E3E3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/status_text" />
@@ -107,7 +107,7 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:text="@{data.address}"
-            android:textColor="@color/primary_text_color"
+            android:textColor="@color/text_basic_color"
             app:layout_constrainedWidth="true"
             app:layout_constraintEnd_toStartOf="@id/arrow_button"
             app:layout_constraintHorizontal_bias="0"
@@ -125,7 +125,7 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:text="@{data.oldAddress}"
-            android:textColor="@color/color_A8A8A8"
+            android:textColor="@color/c_A8A8A8"
             app:layout_constrainedWidth="true"
             app:layout_constraintEnd_toStartOf="@id/arrow_button"
             app:layout_constraintHorizontal_bias="0"
@@ -142,7 +142,7 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:text="@{data.project}"
-            android:textColor="@color/primary_text_color"
+            android:textColor="@color/text_basic_color"
             app:layout_constrainedWidth="true"
             app:layout_constraintEnd_toStartOf="@id/arrow_button"
             app:layout_constraintHorizontal_bias="0"
@@ -165,7 +165,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/gap_4"
-            android:textColor="@color/tertiary_text_color"
+            android:textColor="@color/text_hint_color"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/project"
             tools:text="2021.01.11 - 13:20" />
@@ -186,7 +186,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/created_at"
             app:showDividers="middle"
-            tools:backgroundTint="@color/color_FFF2EB" />
+            tools:backgroundTint="@color/c_FFF2EB" />
         <!-- endregion -->
 
         <!-- region 버튼 -->
@@ -199,7 +199,7 @@
             android:layout_marginEnd="@dimen/requirement_card_call_button_margin_end"
             android:background="@drawable/shape_transparent_background_green_board_radius8"
             android:onClick="@{left_button_click_listener}"
-            android:textColor="@color/color_1FC472"
+            android:textColor="@color/c_1FC472"
             android:visibility="gone"
             app:layout_constraintEnd_toStartOf="@id/right_button"
             app:layout_constraintStart_toStartOf="parent"
@@ -216,7 +216,7 @@
             android:layout_marginTop="@dimen/requirement_card_done_button_margin_top"
             android:background="@drawable/default_rounded_button_selector"
             android:onClick="@{right_button_click_listener}"
-            android:textColor="@color/basic_white"
+            android:textColor="@color/c_FFFFFF"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/left_button"

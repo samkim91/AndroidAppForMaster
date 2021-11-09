@@ -100,7 +100,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/gap_10"
-                        android:textColor="@color/color_FF711D"
+                        android:textColor="@color/c_FF711D"
                         app:layout_constraintBottom_toBottomOf="@id/certification_code"
                         app:layout_constraintEnd_toEndOf="@id/certification_code"
                         app:layout_constraintTop_toTopOf="@id/certification_code"
@@ -113,7 +113,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/gap_4"
                         android:text="@string/alert_wrong_certification_code"
-                        android:textColor="@color/color_FF711D"
+                        android:textColor="@color/c_FF711D"
                         android:visibility="gone"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0"
@@ -127,7 +127,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/gap_4"
                         android:text="@string/alert_expired_certification_time"
-                        android:textColor="@color/color_FF711D"
+                        android:textColor="@color/c_FF711D"
                         android:visibility="gone"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0"
@@ -141,7 +141,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/gap_4"
                         android:text="@string/alert_invalid_certification_code"
-                        android:textColor="@color/color_FF711D"
+                        android:textColor="@color/c_FF711D"
                         android:visibility="gone"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0"
@@ -155,7 +155,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/gap_4"
                         android:text="@string/alert_empty_certification_code"
-                        android:textColor="@color/color_FF711D"
+                        android:textColor="@color/c_FF711D"
                         android:visibility="gone"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0"
@@ -209,7 +209,7 @@
             android:background="@drawable/default_button_selector"
             android:enabled="false"
             android:text="@string/modifying_done"
-            android:textColor="@color/basic_white" />
+            android:textColor="@color/c_FFFFFF" />
     </LinearLayout>
 
 </layout>

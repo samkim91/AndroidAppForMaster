@@ -17,7 +17,7 @@
             android:layout_marginBottom="24dp"
             android:ellipsize="end"
             android:maxLines="1"
-            android:textColor="@color/primary_text_color"
+            android:textColor="@color/text_basic_color"
             app:layout_constrainedWidth="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/badge"
@@ -46,7 +46,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="@string/badge_text"
-                android:textColor="@color/basic_white"
+                android:textColor="@color/c_FFFFFF"
                 android:textSize="@dimen/badge_text_size"
                 android:textStyle="bold" />
         </FrameLayout>
@@ -54,7 +54,7 @@
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/line_color"
+            android:background="@color/c_E3E3E3"
             app:layout_constraintBottom_toBottomOf="parent" />
 
         <androidx.appcompat.widget.AppCompatImageView

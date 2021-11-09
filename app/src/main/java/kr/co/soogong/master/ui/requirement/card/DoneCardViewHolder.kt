@@ -75,7 +75,7 @@ class ClosedViewHolder(
             newBadge.visibility = View.GONE
             statusText.setTextColor(
                 context.resources.getColor(
-                    R.color.color_616161,
+                    R.color.c_616161,
                     null
                 )
             )
@@ -122,7 +122,7 @@ class CanceledViewHolder(
             newBadge.visibility = View.GONE
             statusText.setTextColor(
                 context.resources.getColor(
-                    R.color.color_616161,
+                    R.color.c_616161,
                     null
                 )
             )

@@ -49,7 +49,7 @@
             android:paddingEnd="@dimen/gap_16"
             android:background="@drawable/shape_app_color_background_radius6"
             android:text="@string/send_estimation"
-            android:textColor="@color/basic_white"
+            android:textColor="@color/c_FFFFFF"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -58,7 +58,7 @@
             android:id="@+id/line"
             android:layout_width="@dimen/gap_0"
             android:layout_height="@dimen/line_height"
-            android:background="@color/line_color"
+            android:background="@color/c_E3E3E3"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

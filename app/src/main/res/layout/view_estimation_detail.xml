@@ -51,7 +51,7 @@
             android:padding="@dimen/gap_4"
             android:background="@drawable/shape_white_background_gray_border_radius4"
             android:layout_height="wrap_content"
-            android:textColor="@color/color_A8A8A8"
+            android:textColor="@color/c_A8A8A8"
             android:visibility="gone"
             tools:visibility="visible"
             app:layout_constraintBottom_toBottomOf="@id/value"

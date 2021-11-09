@@ -33,11 +33,11 @@
             android:layout_marginEnd="@dimen/gap_8"
             android:max="@{signUpProgressHelper.TabCount}"
             android:progress="@{vm.indicator}"
-            app:indicatorColor="@color/color_22D47B"
+            app:indicatorColor="@color/c_22D47B"
             app:layout_constraintEnd_toStartOf="@id/progress_percent_indicator"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/action_bar"
-            app:trackColor="@color/color_EEEEEE"
+            app:trackColor="@color/c_EEEEEE"
             app:trackThickness="@dimen/gap_2" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -46,7 +46,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/gap_20"
-            android:textColor="@color/color_1FC472"
+            android:textColor="@color/c_1FC472"
             app:layout_constraintBottom_toBottomOf="@id/progress_indicator"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/progress_indicator"

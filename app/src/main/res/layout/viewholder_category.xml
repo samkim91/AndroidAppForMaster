@@ -15,7 +15,7 @@
             android:layout_marginTop="14dp"
             android:layout_marginEnd="0dp"
             android:layout_marginBottom="14dp"
-            android:textColor="@color/primary_text_color"
+            android:textColor="@color/text_basic_color"
             tools:text="업종 및 프로젝트" />
 
     </LinearLayout>

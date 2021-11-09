@@ -58,7 +58,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/gap_10"
                 android:text="@string/empty_notice_list_message"
-                android:textColor="@color/color_BDBDBD"
+                android:textColor="@color/c_BDBDBD"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="@id/list"
                 app:layout_constraintEnd_toEndOf="@id/list"

@@ -20,7 +20,7 @@ object CanceledReasonRadioGroupHelper {
                 height = 34.dp
                 setTextAppearance(R.style.text_style_14sp_medium)
                 setTextColor(context.resources.getColor(R.color.text_basic_color, null))
-                buttonTintList = ColorStateList.valueOf(context.getColor(R.color.color_22D47B))
+                buttonTintList = ColorStateList.valueOf(context.getColor(R.color.c_22D47B))
                 radioGroup.addRadioButton(this)
             }
         }

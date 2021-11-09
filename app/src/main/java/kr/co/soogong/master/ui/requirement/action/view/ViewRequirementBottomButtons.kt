@@ -39,7 +39,7 @@ fun setBottomButtons(
                             isVisible = true
                             text = getString(R.string.refuse_estimate_text)
                             setTextColor(getColor(R.color.c_FFFFFF))
-                            setBackgroundColor(resources.getColor(R.color.color_FF711D, null))
+                            setBackgroundColor(resources.getColor(R.color.c_FF711D, null))
                             setOnClickListener {
                                 CustomDialog.newInstance(
                                     DialogData.getRefuseEstimateDialogData(context)
@@ -58,7 +58,7 @@ fun setBottomButtons(
                             isVisible = true
                             text = getString(R.string.accept_estimate_text)
                             setTextColor(getColor(R.color.c_FFFFFF))
-                            setBackgroundColor(resources.getColor(R.color.color_22D47B, null))
+                            setBackgroundColor(resources.getColor(R.color.c_22D47B, null))
                             setOnClickListener {
                                 startActivity(
                                     WriteEstimationActivityHelper.getIntent(
@@ -78,7 +78,7 @@ fun setBottomButtons(
                         isVisible = true
                         text = getString(R.string.refuse_measure_text)
                         setTextColor(getColor(R.color.c_FFFFFF))
-                        setBackgroundColor(resources.getColor(R.color.color_FF711D, null))
+                        setBackgroundColor(resources.getColor(R.color.c_FF711D, null))
                         setOnClickListener {
                             CustomDialog.newInstance(
                                 DialogData.getRefuseMeasureDialogData(activity)
@@ -102,7 +102,7 @@ fun setBottomButtons(
                         isVisible = true
                         text = getString(R.string.accept_measure_text)
                         setTextColor(getColor(R.color.c_FFFFFF))
-                        setBackgroundColor(resources.getColor(R.color.color_22D47B, null))
+                        setBackgroundColor(resources.getColor(R.color.c_22D47B, null))
                         setOnClickListener {
                             CustomDialog.newInstance(
                                 DialogData.getAcceptMeasureDialogData(activity)
@@ -127,11 +127,11 @@ fun setBottomButtons(
                         when {
                             requirement.estimationDto?.fromMasterCallCnt!! > 0 -> {
                                 text = getString(R.string.recall_to_customer_text)
-                                setTextColor(getColor(R.color.color_555555))
+                                setTextColor(getColor(R.color.c_555555))
                             }
                             else -> {
                                 text = getString(R.string.call_to_customer_text)
-                                setTextColor(getColor(R.color.color_1FC472))
+                                setTextColor(getColor(R.color.c_1FC472))
                             }
                         }
                         setBackgroundColor(resources.getColor(R.color.c_FFFFFF, null))
@@ -143,7 +143,7 @@ fun setBottomButtons(
                         isVisible = true
                         text = getString(R.string.repair_done_text)
                         setTextColor(getColor(R.color.c_FFFFFF))
-                        setBackgroundColor(resources.getColor(R.color.color_22D47B, null))
+                        setBackgroundColor(resources.getColor(R.color.c_22D47B, null))
                         setOnClickListener {
                             startActivity(
                                 EndRepairActivityHelper.getIntent(
@@ -163,11 +163,11 @@ fun setBottomButtons(
                         when {
                             requirement.estimationDto?.fromMasterCallCnt!! > 0 -> {
                                 text = getString(R.string.recall_to_customer_text)
-                                setTextColor(getColor(R.color.color_555555))
+                                setTextColor(getColor(R.color.c_555555))
                             }
                             else -> {
                                 text = getString(R.string.call_to_customer_text)
-                                setTextColor(getColor(R.color.color_1FC472))
+                                setTextColor(getColor(R.color.c_1FC472))
                             }
                         }
                         setBackgroundColor(resources.getColor(R.color.c_FFFFFF, null))
@@ -179,7 +179,7 @@ fun setBottomButtons(
                         isVisible = true
                         text = getString(R.string.send_estimation)
                         setTextColor(getColor(R.color.c_FFFFFF))
-                        setBackgroundColor(resources.getColor(R.color.color_22D47B, null))
+                        setBackgroundColor(resources.getColor(R.color.c_22D47B, null))
                         setOnClickListener {
                             startActivity(
                                 MeasureActivityHelper.getIntent(
@@ -200,11 +200,11 @@ fun setBottomButtons(
                         when {
                             requirement.estimationDto?.fromMasterCallCnt!! > 0 -> {
                                 text = getString(R.string.recall_to_customer_text)
-                                setTextColor(getColor(R.color.color_555555))
+                                setTextColor(getColor(R.color.c_555555))
                             }
                             else -> {
                                 text = getString(R.string.call_to_customer_text)
-                                setTextColor(getColor(R.color.color_1FC472))
+                                setTextColor(getColor(R.color.c_1FC472))
                             }
                         }
                         setBackgroundColor(resources.getColor(R.color.c_FFFFFF, null))
@@ -222,11 +222,11 @@ fun setBottomButtons(
                         when {
                             requirement.estimationDto?.fromMasterCallCnt!! > 0 -> {
                                 text = getString(R.string.recall_to_customer_text)
-                                setTextColor(getColor(R.color.color_555555))
+                                setTextColor(getColor(R.color.c_555555))
                             }
                             else -> {
                                 text = getString(R.string.call_to_customer_text)
-                                setTextColor(getColor(R.color.color_1FC472))
+                                setTextColor(getColor(R.color.c_1FC472))
                             }
                         }
                         setBackgroundColor(resources.getColor(R.color.c_FFFFFF, null))
@@ -247,7 +247,7 @@ fun setBottomButtons(
                                 setTextColor(getColor(R.color.c_FFFFFF))
                                 setBackgroundColor(
                                     resources.getColor(
-                                        R.color.color_90E9BD,
+                                        R.color.c_90E9BD,
                                         null
                                     )
                                 )
@@ -256,7 +256,7 @@ fun setBottomButtons(
                                 setTextColor(getColor(R.color.c_FFFFFF))
                                 setBackgroundColor(
                                     resources.getColor(
-                                        R.color.color_1FC472,
+                                        R.color.c_1FC472,
                                         null
                                     )
                                 )

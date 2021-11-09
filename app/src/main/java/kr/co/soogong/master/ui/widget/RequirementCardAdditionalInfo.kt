@@ -51,21 +51,21 @@ class RequirementCardAdditionalInfo @JvmOverloads constructor(
             when (theme) {
                 ORANGE_THEME -> {
                     icon.imageTintList =
-                        ColorStateList.valueOf(context.getColor(R.color.color_FF711D))
-                    keyTextview.setTextColor(context.getColor(R.color.color_FF711D))
-                    valueTextview.setTextColor(context.getColor(R.color.color_FF711D))
+                        ColorStateList.valueOf(context.getColor(R.color.c_FF711D))
+                    keyTextview.setTextColor(context.getColor(R.color.c_FF711D))
+                    valueTextview.setTextColor(context.getColor(R.color.c_FF711D))
                 }
                 GREEN_THEME -> {
                     icon.imageTintList =
-                        ColorStateList.valueOf(context.getColor(R.color.color_0C5E47))
-                    keyTextview.setTextColor(context.getColor(R.color.color_0C5E47))
-                    valueTextview.setTextColor(context.getColor(R.color.color_0C5E47))
+                        ColorStateList.valueOf(context.getColor(R.color.c_0C5E47))
+                    keyTextview.setTextColor(context.getColor(R.color.c_0C5E47))
+                    valueTextview.setTextColor(context.getColor(R.color.c_0C5E47))
                 }
                 GRAY_THEME -> {
                     icon.imageTintList =
                         ColorStateList.valueOf(context.getColor(R.color.c_909090))
-                    keyTextview.setTextColor(context.getColor(R.color.color_555555))
-                    valueTextview.setTextColor(context.getColor(R.color.color_555555))
+                    keyTextview.setTextColor(context.getColor(R.color.c_555555))
+                    valueTextview.setTextColor(context.getColor(R.color.c_555555))
                 }
             }
         }
@@ -90,18 +90,18 @@ class RequirementCardAdditionalInfo @JvmOverloads constructor(
             when (theme) {
                 ORANGE_THEME -> {
                     container.backgroundTintList =
-                        ColorStateList.valueOf(context.getColor(R.color.color_FFF2EB))
-                    container.dividerDrawable.setTintList(ColorStateList.valueOf(context.getColor(R.color.color_FFE1D2)))
+                        ColorStateList.valueOf(context.getColor(R.color.c_FFF2EB))
+                    container.dividerDrawable.setTintList(ColorStateList.valueOf(context.getColor(R.color.c_FFE1D2)))
                 }
                 GREEN_THEME -> {
                     container.backgroundTintList =
-                        ColorStateList.valueOf(context.getColor(R.color.color_F0FCF2))
-                    container.dividerDrawable.setTintList(ColorStateList.valueOf(context.getColor(R.color.color_D4FADB)))
+                        ColorStateList.valueOf(context.getColor(R.color.c_F0FCF2))
+                    container.dividerDrawable.setTintList(ColorStateList.valueOf(context.getColor(R.color.c_D4FADB)))
                 }
                 else -> {
                     container.backgroundTintList =
-                        ColorStateList.valueOf(context.getColor(R.color.color_F8F8F8))
-                    container.dividerDrawable.setTintList(ColorStateList.valueOf(context.getColor(R.color.color_E3E3E3)))
+                        ColorStateList.valueOf(context.getColor(R.color.c_F8F8F8))
+                    container.dividerDrawable.setTintList(ColorStateList.valueOf(context.getColor(R.color.c_E3E3E3)))
                 }
             }
         }

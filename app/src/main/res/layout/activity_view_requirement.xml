@@ -70,7 +70,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/line_height"
                     android:layout_marginTop="@dimen/estimation_card_default_margin_top"
-                    android:background="@color/line_color" />
+                    android:background="@color/c_E3E3E3" />
 
                 <kr.co.soogong.master.ui.widget.RequirementBasic
                     android:id="@+id/requirement_basic"
@@ -101,7 +101,7 @@
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/gap_150"
-                    android:background="@color/F2F2F2" />
+                    android:background="@color/c_F2F2F2" />
             </LinearLayout>
         </ScrollView>
 
@@ -133,7 +133,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/line_height"
             android:layout_marginBottom="@dimen/gap_48"
-            android:background="@color/line_color"
+            android:background="@color/c_E3E3E3"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -149,9 +149,9 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/right_button"
             app:layout_constraintStart_toStartOf="parent"
-            tools:background="@color/color_FF711D"
+            tools:background="@color/c_FF711D"
             tools:text="실측 안할래요"
-            tools:textColor="@color/basic_white"
+            tools:textColor="@color/c_FFFFFF"
             tools:visibility="visible" />
 
         <androidx.appcompat.widget.AppCompatButton
@@ -159,13 +159,13 @@
             style="@style/text_style_16sp.bold"
             android:layout_width="@dimen/gap_0"
             android:layout_height="@dimen/gap_48"
-            android:background="@color/color_1FC472"
+            android:background="@color/c_1FC472"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/left_button"
             tools:text="실측 할래요"
-            tools:textColor="@color/basic_white"
+            tools:textColor="@color/c_FFFFFF"
             tools:visibility="visible" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

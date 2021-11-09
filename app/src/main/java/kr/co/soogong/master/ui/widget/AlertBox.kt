@@ -24,25 +24,25 @@ class AlertBox @JvmOverloads constructor(
         set(value) {
             field = value
             binding.arrowButton.backgroundTintList =
-                ColorStateList.valueOf(context.getColor(R.color.basic_white))
+                ColorStateList.valueOf(context.getColor(R.color.c_FFFFFF))
             when (value) {
                 ORANGE_THEME -> {
                     this.setBackgroundResource(R.drawable.shape_light_orange_background_light_orange_border_radius8)
-                    binding.alertTitle.setTextColor(context.getColor(R.color.color_FF711D))
+                    binding.alertTitle.setTextColor(context.getColor(R.color.c_FF711D))
                     binding.typeIcon.backgroundTintList =
-                        ColorStateList.valueOf(context.getColor(R.color.color_FF711D))
+                        ColorStateList.valueOf(context.getColor(R.color.c_FF711D))
                 }
                 GREEN_THEME -> {
                     this.setBackgroundResource(R.drawable.shape_light_green_background_light_green_border_radius8)
-                    binding.alertTitle.setTextColor(context.getColor(R.color.color_1FB571))
+                    binding.alertTitle.setTextColor(context.getColor(R.color.c_1FB571))
                     binding.typeIcon.backgroundTintList =
-                        ColorStateList.valueOf(context.getColor(R.color.color_1FB571))
+                        ColorStateList.valueOf(context.getColor(R.color.c_1FB571))
                 }
                 else -> {
                     this.setBackgroundResource(R.drawable.shape_light_grey_background_light_grey_border_radius8)
-                    binding.alertTitle.setTextColor(context.getColor(R.color.color_616161))
+                    binding.alertTitle.setTextColor(context.getColor(R.color.c_616161))
                     binding.typeIcon.backgroundTintList =
-                        ColorStateList.valueOf(context.getColor(R.color.color_616161))
+                        ColorStateList.valueOf(context.getColor(R.color.c_616161))
                 }
             }
         }

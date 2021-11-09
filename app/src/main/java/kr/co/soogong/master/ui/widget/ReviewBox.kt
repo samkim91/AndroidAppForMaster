@@ -22,11 +22,11 @@ class ReviewBox @JvmOverloads constructor(
             with(binding.reviewCount) {
                 if (value == null || value == 0) {
                     text = resources.getString(R.string.special_symbol_stroke)
-                    setTextColor(resources.getColor(R.color.color_C4C4C4, null))
+                    setTextColor(resources.getColor(R.color.c_C4C4C4, null))
                     return
                 }
                 text = value.toString()
-                setTextColor(resources.getColor(R.color.color_1FC472, null))
+                setTextColor(resources.getColor(R.color.c_1FC472, null))
             }
         }
 
@@ -36,11 +36,11 @@ class ReviewBox @JvmOverloads constructor(
             with(binding.recommendCount) {
                 if (value == null || value == 0.0) {
                     text = resources.getString(R.string.special_symbol_stroke)
-                    setTextColor(resources.getColor(R.color.color_C4C4C4, null))
+                    setTextColor(resources.getColor(R.color.c_C4C4C4, null))
                     return
                 }
                 text = value.formatDecimal()
-                setTextColor(resources.getColor(R.color.color_1FC472, null))
+                setTextColor(resources.getColor(R.color.c_1FC472, null))
             }
         }
 }

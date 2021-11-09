@@ -166,9 +166,9 @@
             style="@style/text_style_16sp.bold"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:background="@color/color_22D47B"
+            android:background="@color/c_22D47B"
             android:text="@string/save"
-            android:textColor="@color/basic_white" />
+            android:textColor="@color/c_FFFFFF" />
     </LinearLayout>
 
 </layout>

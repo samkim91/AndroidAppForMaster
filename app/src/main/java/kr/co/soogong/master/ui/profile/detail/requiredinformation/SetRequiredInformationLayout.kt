@@ -1,7 +1,6 @@
 package kr.co.soogong.master.ui.profile.detail.requiredinformation
 
 import android.content.Context
-import android.widget.Toast
 import androidx.core.view.isVisible
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ActivityEditRequiredInformationBinding
@@ -78,14 +77,14 @@ fun setRequirementInformationPercentage(
         if (viewModel.percentage.value == 100.0f) {
             requiredProfileCardPercentage.setTextColor(
                 context.resources.getColor(
-                    R.color.color_1FC472,
+                    R.color.c_1FC472,
                     null
                 )
             )
         } else {
             requiredProfileCardPercentage.setTextColor(
                 context.resources.getColor(
-                    R.color.color_FF711D,
+                    R.color.c_FF711D,
                     null
                 )
             )

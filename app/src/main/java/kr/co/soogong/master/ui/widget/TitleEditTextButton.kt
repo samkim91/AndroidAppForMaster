@@ -125,9 +125,9 @@ class TitleEditTextButton @JvmOverloads constructor(
         set(value) {
             field = value
             if(value) {
-                binding.button.setTextColor(resources.getColor(R.color.color_616161, null))
+                binding.button.setTextColor(resources.getColor(R.color.c_616161, null))
             }else {
-                binding.button.setTextColor(resources.getColor(R.color.color_1FC472, null))
+                binding.button.setTextColor(resources.getColor(R.color.c_1FC472, null))
             }
         }
 

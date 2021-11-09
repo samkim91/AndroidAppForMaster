@@ -129,7 +129,7 @@ open class RequirementCardViewHolder(
 
             if (requirementCard.estimationDto?.fromMasterCallCnt!! > 0) {
                 leftButton.setText(R.string.recall_to_customer_text)
-                leftButton.setTextColor(context.resources.getColor(R.color.color_555555, null))
+                leftButton.setTextColor(context.resources.getColor(R.color.c_555555, null))
                 leftButton.setBackgroundResource(R.drawable.shape_white_background_darkgray_border_radius8)
             }
 

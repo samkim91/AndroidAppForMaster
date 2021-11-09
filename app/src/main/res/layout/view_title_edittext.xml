@@ -23,7 +23,7 @@
             style="@style/text_style_14sp.medium"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textColor="@color/color_616161"
+            android:textColor="@color/c_616161"
             android:visibility="gone"
             android:layout_marginTop="@dimen/view_title_edittext_subtitle_margin_top"
             app:layout_constraintEnd_toEndOf="parent"

@@ -91,8 +91,8 @@ class NaverMapHelper(
         coordinate.let { c ->
             if (circleOverlay.isAdded) circleOverlay.map = null
             circleOverlay = CircleOverlay(LatLng(c.latitude!!, c.longitude!!), (radius * 1000.0))
-            circleOverlay.outlineColor = context.resources.getColor(R.color.color_22D47B, null)
-            circleOverlay.color = context.resources.getColor(R.color.color_8022D47B, null)
+            circleOverlay.outlineColor = context.resources.getColor(R.color.c_22D47B, null)
+            circleOverlay.color = context.resources.getColor(R.color.c_8022D47B, null)
             circleOverlay.map = naverMap
         }
     }

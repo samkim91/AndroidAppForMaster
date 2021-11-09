@@ -178,7 +178,7 @@ class ProfileChipGroupCard @JvmOverloads constructor(
                 chip.setTextColor(resources.getColor(R.color.text_basic_color, null))
                 chip.setTextAppearance(R.style.text_style_16sp_regular)
                 chip.chipBackgroundColor =
-                    ColorStateList.valueOf(context.getColor(R.color.color_E3E3E3))
+                    ColorStateList.valueOf(context.getColor(R.color.c_E3E3E3))
 
                 chipGroup.addView(chip)
             }

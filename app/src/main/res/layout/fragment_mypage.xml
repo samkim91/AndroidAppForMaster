@@ -47,7 +47,7 @@
                 android:layout_marginStart="@dimen/my_page_master_label_margin_start"
                 android:layout_marginEnd="@dimen/my_page_master_label_margin_top"
                 app:subscriptionPlan="@{vm.profile.subscriptionPlan}"
-                android:textColor="@color/color_555555"
+                android:textColor="@color/c_555555"
                 app:layout_constraintBottom_toBottomOf="@id/master_store_name"
                 app:layout_constraintEnd_toStartOf="@id/account_setting"
                 app:layout_constraintStart_toEndOf="@id/master_store_name"
@@ -105,7 +105,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/my_page_line_height"
                 android:layout_marginTop="@dimen/my_page_line_margin_top"
-                android:background="@color/line_color"
+                android:background="@color/c_E3E3E3"
                 app:layout_constraintTop_toBottomOf="@id/master_id" />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -116,7 +116,7 @@
                 android:layout_marginStart="@dimen/my_page_margin_start"
                 android:layout_marginTop="@dimen/my_page_notice_margin_top"
                 android:text="@string/my_page_notice"
-                android:textColor="@color/primary_text_color"
+                android:textColor="@color/text_basic_color"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/line" />
 
@@ -137,7 +137,7 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:text="@string/badge_text"
-                    android:textColor="@color/basic_white"
+                    android:textColor="@color/c_FFFFFF"
                     android:textSize="@dimen/my_page_notice_badge_text_size"
                     android:textStyle="bold" />
             </FrameLayout>
@@ -158,7 +158,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/my_page_notice_total_margin_end"
                     android:text="@string/my_page_notice_total"
-                    android:textColor="@color/secondary_text_color"
+                    android:textColor="@color/text_primary_color"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/arrow_button"
                     app:layout_constraintStart_toStartOf="parent"
@@ -211,7 +211,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/empty_notice_list_message"
-                android:textColor="@color/color_BDBDBD"
+                android:textColor="@color/c_BDBDBD"
                 android:textSize="18sp"
                 android:layout_marginTop="@dimen/gap_10"
                 app:layout_constraintBottom_toBottomOf="@id/notice_list"
@@ -271,7 +271,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/my_page_call_button_text_margin_start"
                 android:text="@string/my_page_call_text"
-                android:textColor="@color/color_1FC472"
+                android:textColor="@color/c_1FC472"
                 app:layout_constraintBottom_toBottomOf="@id/call_button"
                 app:layout_constraintEnd_toEndOf="@id/call_button"
                 app:layout_constraintStart_toEndOf="@id/call_button_icon"
@@ -308,7 +308,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/my_page_kakao_button_text_margin_start"
                 android:text="@string/my_page_kakao_text"
-                android:textColor="@color/text_kakao_color"
+                android:textColor="@color/c_381E1E"
                 app:layout_constraintBottom_toBottomOf="@id/kakao_talk_btn"
                 app:layout_constraintEnd_toEndOf="@id/kakao_talk_btn"
                 app:layout_constraintStart_toEndOf="@id/kakao_talk_btn_icon"
@@ -323,7 +323,7 @@
                 android:layout_marginBottom="@dimen/my_page_time_notice_margin_bottom"
                 android:gravity="center"
                 android:text="@string/my_page_time_notice"
-                android:textColor="@color/secondary_text_color"
+                android:textColor="@color/text_primary_color"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/kakao_talk_btn" />
@@ -338,7 +338,7 @@
                 android:layout_marginEnd="@dimen/gap_20"
                 android:text="@{vm.version}"
                 tools:text="버전 : 1.0.0"
-                android:textColor="@color/secondary_text_color"
+                android:textColor="@color/text_primary_color"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/time" />

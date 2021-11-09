@@ -6,5 +6,5 @@
 
     <stroke
         android:width="@dimen/board_size"
-        android:color="@color/color_EEEEEE" />
+        android:color="@color/c_EEEEEE" />
 </shape>

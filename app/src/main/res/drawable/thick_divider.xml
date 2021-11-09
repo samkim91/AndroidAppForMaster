@@ -4,5 +4,5 @@
     <size
         android:width="@dimen/gap_8"
         android:height="@dimen/gap_8" />
-    <solid android:color="@color/color_F2F2F2" />
+    <solid android:color="@color/c_F2F2F2" />
 </shape>

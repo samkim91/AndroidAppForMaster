@@ -77,7 +77,7 @@ data class DialogData(
         fun getAcceptMeasureDialogData(context: Context) =
             DialogData(
                 "현장 실측 요청을 수락하시겠어요?", context.getColor(R.color.text_basic_color),
-                "수락 후 고객과 통화해\n정확한 시공 내용을 파악해주세요.", context.getColor(R.color.color_1FC472),
+                "수락 후 고객과 통화해\n정확한 시공 내용을 파악해주세요.", context.getColor(R.color.c_1FC472),
                 "네", context.getColor(R.color.text_basic_color),
                 "아니요", context.getColor(R.color.text_basic_color)
             )
@@ -85,7 +85,7 @@ data class DialogData(
         fun getRecommendingCallingCustomer(context: Context) =
             DialogData(
                 "가급적 15분 내료 고객님에게 전화하여 현장방문 일정을 잡아주세요.", context.getColor(R.color.text_basic_color),
-                null, context.getColor(R.color.color_1FC472),
+                null, context.getColor(R.color.c_1FC472),
                 "고객에게 전화하기", context.getColor(R.color.text_basic_color),
                 null, context.getColor(R.color.text_basic_color)
             )
@@ -93,7 +93,7 @@ data class DialogData(
         fun getRefuseMeasureDialogData(context: Context) =
             DialogData(
                 "실측을 포기하시겠어요?", context.getColor(R.color.text_basic_color),
-                null, context.getColor(R.color.color_1FC472),
+                null, context.getColor(R.color.c_1FC472),
                 "네", context.getColor(R.color.text_basic_color),
                 "아니요", context.getColor(R.color.text_basic_color)
             )
@@ -165,7 +165,7 @@ data class DialogData(
         fun getWaitingUntilApprovalDialogData(context: Context) =
             DialogData(
                 "승인이 완료되어야\n문의 처리가 가능해요.", context.getColor(R.color.text_basic_color),
-                "승인이 완료되면 알림톡으로\n바로 알려드릴게요!", context.getColor(R.color.color_1FC472),
+                "승인이 완료되면 알림톡으로\n바로 알려드릴게요!", context.getColor(R.color.c_1FC472),
                 "확인", context.getColor(R.color.text_basic_color),
                 null, context.getColor(R.color.text_basic_color)
             )
@@ -239,7 +239,7 @@ data class DialogData(
                 "현장실측 요청 ${count}건",
                 context.getColor(R.color.text_basic_color),
                 "고객님이 방문 요청을 하셨어요.\n내용을 확인한 뒤\n실측여부 버튼을 클릭해 주세요.",
-                context.getColor(R.color.color_1FC472),
+                context.getColor(R.color.c_1FC472),
                 "확인하러 가기",
                 context.getColor(R.color.text_basic_color),
                 null,
@@ -251,7 +251,7 @@ data class DialogData(
                 "상세상담 요청 ${count}건",
                 context.getColor(R.color.text_basic_color),
                 "시공을 희망하는 고객님이 기다리고\n있어요. 먼저 고객님께 연락해서\n시공확률을 높여보세요.",
-                context.getColor(R.color.color_1FC472),
+                context.getColor(R.color.c_1FC472),
                 "상담하러 가기",
                 context.getColor(R.color.text_basic_color),
                 null,

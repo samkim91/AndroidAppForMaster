@@ -39,7 +39,7 @@
                     android:layout_height="@dimen/gap_40"
                     android:text="@string/get_images_button_text"
                     android:background="@drawable/shape_transparent_background_green_board_radius8"
-                    android:textColor="@color/color_1FC472"
+                    android:textColor="@color/c_1FC472"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -66,9 +66,9 @@
             style="@style/text_style_16sp.bold"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:background="@color/color_22D47B"
+            android:background="@color/c_22D47B"
             android:text="@string/save"
-            android:textColor="@color/basic_white" />
+            android:textColor="@color/c_FFFFFF" />
     </LinearLayout>
 
 </layout>

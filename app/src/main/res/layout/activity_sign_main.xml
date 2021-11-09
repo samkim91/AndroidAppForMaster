@@ -13,7 +13,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/sign_main_background_color">
+        android:background="@color/c_E8EAEA">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="match_parent"
@@ -40,7 +40,7 @@
             android:layout_marginTop="@dimen/sign_up_master_description_margin_top"
             android:gravity="center"
             android:text="@string/sign_up_master_description"
-            android:textColor="@color/secondary_text_color"
+            android:textColor="@color/text_primary_color"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/logo" />
@@ -56,7 +56,7 @@
             android:background="@drawable/shape_white_background_green_border_radius8"
             android:onClick="@{() -> vm.signInAction()}"
             android:text="@string/sign_up_sign_in_button_text"
-            android:textColor="@color/color_1FC472"
+            android:textColor="@color/c_1FC472"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/sign_up"
             app:layout_constraintStart_toStartOf="parent" />
@@ -72,7 +72,7 @@
             android:background="@drawable/shape_green_background_radius8"
             android:onClick="@{() -> vm.signUpAction()}"
             android:text="@string/sign_up_sign_up_button_text"
-            android:textColor="@color/basic_white"
+            android:textColor="@color/c_FFFFFF"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/sign_in" />

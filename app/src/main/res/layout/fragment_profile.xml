@@ -56,7 +56,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="20dp"
-                android:textColor="@color/color_555555"
+                android:textColor="@color/c_555555"
                 app:layout_constraintBottom_toBottomOf="@id/user_name"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/user_name"
@@ -83,7 +83,7 @@
                 android:layout_marginEnd="@dimen/gap_20"
                 android:background="@drawable/shape_green_background_radius8"
                 android:text="@string/open_my_page"
-                android:textColor="@color/basic_white"
+                android:textColor="@color/c_FFFFFF"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/review_box" />
@@ -98,7 +98,7 @@
                 android:layout_marginEnd="@dimen/gap_20"
                 android:background="@drawable/shape_white_background_green_border_radius8"
                 android:text="@string/request_review_button_text"
-                android:textColor="@color/color_1FC472"
+                android:textColor="@color/c_1FC472"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/show_profile_button" />
@@ -118,7 +118,7 @@
                 android:id="@+id/line"
                 android:layout_width="0dp"
                 android:layout_height="10dp"
-                android:background="@color/line_color"
+                android:background="@color/c_E3E3E3"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/banner_image" />
@@ -136,7 +136,7 @@
                 android:id="@+id/line2"
                 android:layout_width="0dp"
                 android:layout_height="10dp"
-                android:background="@color/line_color"
+                android:background="@color/c_E3E3E3"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/edit_required_info" />
@@ -145,7 +145,7 @@
                 android:id="@+id/profile_card_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/color_F5F5F5"
+                android:background="@color/c_F5F5F5"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/line2">
@@ -159,7 +159,7 @@
                     android:layout_marginTop="@dimen/gap_24"
                     android:layout_marginEnd="@dimen/gap_20"
                     android:text="@string/profile_card_container_label"
-                    android:textColor="@color/color_121212"
+                    android:textColor="@color/c_121212"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 

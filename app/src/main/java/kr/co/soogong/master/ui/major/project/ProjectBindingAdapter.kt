@@ -18,11 +18,11 @@ fun Button.setSelectText(list: List<Project>?) {
     when{
         list.isNullOrEmpty() || list.none { it.checked } -> {
             text = "전문 분야를 모두 선택해주세요"
-            setBackgroundColor(resources.getColor(R.color.color_90E9BD, null))
+            setBackgroundColor(resources.getColor(R.color.c_90E9BD, null))
         }
         else -> {
             text = "${list.filter { it.checked }.size}개 선택 완료"
-            setBackgroundColor(resources.getColor(R.color.color_22D47B, null))
+            setBackgroundColor(resources.getColor(R.color.c_22D47B, null))
         }
     }
 }

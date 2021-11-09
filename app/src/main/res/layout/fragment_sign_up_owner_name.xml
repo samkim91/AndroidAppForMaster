@@ -56,9 +56,9 @@
                 style="@style/text_style_16sp.bold"
                 android:layout_width="@dimen/gap_0"
                 android:layout_height="@dimen/gap_48"
-                android:background="@color/color_22D47B"
+                android:background="@color/c_22D47B"
                 android:text="@string/next_button_text"
-                android:textColor="@color/basic_white"
+                android:textColor="@color/c_FFFFFF"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />

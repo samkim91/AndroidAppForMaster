@@ -103,7 +103,7 @@ class RequirementDetail @JvmOverloads constructor(
                     // 부가 정보 부제목
                     AppCompatTextView(context).apply {
                         text = context.getString(R.string.subtitle_of_previous_estimation)
-                        setTextColor(resources.getColor(R.color.color_22D47B, null))
+                        setTextColor(resources.getColor(R.color.c_22D47B, null))
                         setTextAppearance(R.style.text_style_12sp_bold)
                     }.run {
                         LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT,

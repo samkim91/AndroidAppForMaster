@@ -26,7 +26,7 @@
                 <TextView
                     android:id="@+id/policy"
                     style="@style/text_style_16sp.medium"
-                    android:textColor="@color/color_616161"
+                    android:textColor="@color/c_616161"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/gap_32"

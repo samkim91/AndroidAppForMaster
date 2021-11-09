@@ -34,7 +34,7 @@
             android:id="@+id/thin_line"
             android:layout_width="0dp"
             android:layout_height="@dimen/line_height"
-            android:background="@color/line_color"
+            android:background="@color/c_E3E3E3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/drawer_label" />

@@ -38,7 +38,7 @@
             style="@style/text_style_16sp.medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/color_A8A8A8"
+            android:textColor="@color/c_A8A8A8"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="@id/address"

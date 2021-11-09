@@ -35,7 +35,7 @@
             style="@style/text_style_18sp.bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/basic_white"
+            android:textColor="@color/c_FFFFFF"
             app:layout_constraintBottom_toBottomOf="@id/container"
             app:layout_constraintEnd_toEndOf="@id/container"
             app:layout_constraintStart_toEndOf="@id/icon"

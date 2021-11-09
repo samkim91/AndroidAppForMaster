@@ -71,7 +71,7 @@ class TitleSwitchCompat @JvmOverloads constructor(
 
             this@TitleSwitchCompat.isVisible = true
             title.setTextAppearance(R.style.text_style_16sp_bold)
-            title.setTextColor(resources.getColor(R.color.basic_white, null))
+            title.setTextColor(resources.getColor(R.color.c_FFFFFF, null))
 
             masterDto.requestMeasureYn?.let { changeTextAndBackgroundForRequestMeasure(it) }
         }
@@ -81,13 +81,13 @@ class TitleSwitchCompat @JvmOverloads constructor(
         Timber.tag("TitleSwitchCompat").d("changeTextAndBackgroundForRequestMeasure: $requestMeasureYn")
         with(binding) {
             if (requestMeasureYn) {
-                container.setBackgroundColor(resources.getColor(R.color.color_1B8C61, null))
+                container.setBackgroundColor(resources.getColor(R.color.c_1B8C61, null))
                 this@TitleSwitchCompat.title =
                     resources.getString(R.string.accepting_request_measurement)
                 this@TitleSwitchCompat.doubleArrowVisibility = false
                 checked = true
             } else {
-                container.setBackgroundColor(resources.getColor(R.color.color_08362F, null))
+                container.setBackgroundColor(resources.getColor(R.color.c_08362F, null))
                 this@TitleSwitchCompat.title =
                     resources.getString(R.string.holding_request_measurement)
                 this@TitleSwitchCompat.doubleArrowVisibility = true
