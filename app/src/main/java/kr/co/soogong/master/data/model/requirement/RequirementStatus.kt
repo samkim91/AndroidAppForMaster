@@ -9,7 +9,7 @@ sealed class RequirementStatus {
     abstract val introductionText: String
     abstract val inKorean: String
 
-    // region : Received Tab
+    // region : Before progress tab
     object Requested : RequirementStatus() {
         override val inKorean = "견적요청"
         override val code = "Requested"
@@ -31,15 +31,6 @@ sealed class RequirementStatus {
         override val introductionText = ""
     }
 
-    object Estimated : RequirementStatus() {
-        override val inKorean = "매칭대기"
-        override val code = "Estimated"
-        override val asInt = 103
-        override val introductionText = "고객의 선택을 기다려주세요"
-    }
-    // end region : Received Tab
-
-    // region : Progress Tab
     object Measuring : RequirementStatus() {
         override val inKorean = "실측예정"
         override val code = "Measuring"
@@ -54,6 +45,15 @@ sealed class RequirementStatus {
         override val introductionText = "고객의 선택을 기다려주세요"
     }
 
+    object Estimated : RequirementStatus() {
+        override val inKorean = "매칭대기"
+        override val code = "Estimated"
+        override val asInt = 103
+        override val introductionText = "고객의 선택을 기다려주세요"
+    }
+    // end region : Before progress tab
+
+    // region : In progress tab
     object Repairing : RequirementStatus() {
         override val inKorean = "시공예정"
         override val code = "Repairing"
@@ -61,22 +61,15 @@ sealed class RequirementStatus {
         override val introductionText = ""
     }
 
-    object RequestFinish : RequirementStatus() {
-        override val inKorean = "고객완료 요청"
-        override val code = "RequestFinish"
-        override val asInt = 204
-        override val introductionText = "수리를 완료하고 리뷰를 쌓아보세요"
-    }
-    // end region : Progress Tab
-
-    // region : Done Tab
     object Done : RequirementStatus() {
         override val inKorean = "시공완료"
         override val code = "Done"
         override val asInt = 300
         override val introductionText = "고객에게 리뷰요청을 해주세요"
     }
+    // end region : In progress tab
 
+    // region : Done tab
     object Closed : RequirementStatus() {
         override val inKorean = "평가완료"
         override val code = "Closed"
@@ -90,18 +83,21 @@ sealed class RequirementStatus {
         override val asInt = 302
         override val introductionText = ""
     }
-    // end region : Done Tab
+    // end region : Done tab
 
     companion object {
         fun getStatusFromRequirement(requirement: RequirementDto?): RequirementStatus {
             return when (requirement?.status) {
-                // 문의 탭
+                // 진행 전
                 Requested.code -> {
                     when {
                         requirement.estimationDto?.requestConsultingYn != true -> Requested
                         else -> RequestConsult
                     }
                 }
+                RequestMeasure.code -> RequestMeasure
+                Measuring.code -> Measuring
+                Measured.code -> Measured
                 Estimated.code -> {
                     when {
                         requirement.estimationDto?.requestConsultingYn == true -> RequestConsult
@@ -109,18 +105,41 @@ sealed class RequirementStatus {
                         else -> Estimated
                     }
                 }
-                // 진행중 탭
-                Measuring.code -> Measuring
-                Measured.code -> Measured
+                // 진행 중
                 Repairing.code -> Repairing
-                RequestFinish.code -> RequestFinish
-                // 완료취소 탭
                 Done.code -> Done
+                // 완료취소 탭
                 Closed.code -> Closed
                 Canceled.code -> Canceled
-                // 실측 요청
-                RequestMeasure.code -> RequestMeasure
                 else -> Canceled
+            }
+        }
+
+        fun getRequirementStatusFromTabIndex(
+            mainTabIndex: Int?,
+            filterTabIndex: Int?,
+        ): List<String> {
+            if (mainTabIndex == null || filterTabIndex == null) return emptyList()
+
+            return if (mainTabIndex == 0) {
+                when (filterTabIndex) {
+                    0 -> listOf(Requested.code,
+                        RequestMeasure.code,
+                        Measuring.code,
+                        Measured.code,
+                        Estimated.code)
+                    1, 3 -> listOf(Requested.code, Estimated.code)
+                    2 -> listOf(RequestMeasure.code, Measuring.code, Measured.code)
+                    4 -> listOf(Estimated.code)
+                    else -> emptyList()
+                }
+            } else {
+                when (filterTabIndex) {
+                    0 -> listOf(Repairing.code, Done.code)
+                    1 -> listOf(Repairing.code)
+                    2 -> listOf(Done.code)
+                    else -> emptyList()
+                }
             }
         }
 
@@ -148,7 +167,6 @@ sealed class RequirementStatus {
             Measuring,
             Measured,
             Repairing,
-            RequestFinish,
         )
 
         val doneStatus = listOf(

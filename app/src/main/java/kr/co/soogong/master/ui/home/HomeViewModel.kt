@@ -15,7 +15,7 @@ class HomeViewModel @Inject constructor(
     private val requirementViewModelAggregate: RequirementViewModelAggregate,
 ) : RequirementViewModel(requirementViewModelAggregate) {
 
-    override fun requestList() {
+    fun requestList() {
         Timber.tag(TAG).d("requestList: ")
 
         requirementViewModelAggregate.getRequirementCardsUseCase(

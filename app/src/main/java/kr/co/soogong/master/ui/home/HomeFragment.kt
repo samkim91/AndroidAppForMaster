@@ -67,7 +67,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
         super.onResume()
         Timber.tag(TAG).d("onResume: ")
         viewModel.requestMasterSimpleInfo()
-        viewModel.requestList()
+        viewModel.requestRequirements()
     }
 
     private fun setVisibilityForRequestMeasure(masterDto: MasterDto) {

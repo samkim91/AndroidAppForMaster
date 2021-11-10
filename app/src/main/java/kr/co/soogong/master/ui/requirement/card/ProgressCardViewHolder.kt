@@ -2,7 +2,6 @@ package kr.co.soogong.master.ui.requirement.card
 
 import android.content.Context
 import android.view.View
-import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentManager
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.model.requirement.RequirementCard
@@ -101,24 +100,6 @@ class RepairingCardViewHolder(
                     alertData = ""
                 )
             })
-        }
-    }
-}
-
-// 고객완료요청 상태 : 현재는 사용하는 곳이 없다..
-class RequestFinishCardViewHolder(
-    private val binding: ViewHolderRequirementItemBinding,
-) : RequirementCardViewHolder(binding) {
-    override fun bind(
-        context: Context,
-        fragmentManager: FragmentManager,
-        viewModel: RequirementViewModel,
-        requirementCard: RequirementCard,
-    ) {
-        super.bind(context, fragmentManager, viewModel, requirementCard)
-
-        with(binding) {
-            leftButton.isVisible = false
         }
     }
 }

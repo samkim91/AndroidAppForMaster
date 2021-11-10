@@ -9,6 +9,7 @@ import kr.co.soogong.master.databinding.FragmentRequirementListBinding
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.requirement.RequirementViewModel
 import kr.co.soogong.master.ui.requirement.RequirementViewModel.Companion.REQUEST_FAILED
+import kr.co.soogong.master.ui.requirement.card.RequirementCardsAdapter
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
@@ -34,15 +35,15 @@ class RequirementListFragment : BaseFragment<FragmentRequirementListBinding>(
             vm = viewModel
             lifecycleOwner = viewLifecycleOwner
 
-
+            recyclerViewRequirements.adapter =
+                RequirementCardsAdapter(requireContext(), childFragmentManager, viewModel)
         }
     }
 
     override fun onResume() {
         super.onResume()
         Timber.tag(TAG).d("onResume: ")
-        viewModel.requestList()
-        viewModel.requestMasterSimpleInfo()
+        viewModel.requestRequirements()
     }
 
     private fun registerEventObserve() {

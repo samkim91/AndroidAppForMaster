@@ -164,36 +164,6 @@ fun setFlexibleContainer(
                 }
             }
 
-            is RequirementStatus.RequestFinish -> {
-                // view : 고객 요청 내용(spread), 나의 제안 내용, 이전 실측 내용(있으면)
-                RequirementDrawerContainer.addDrawerContainer(
-                    context = context,
-                    container = flexibleContainer,
-                    requirementDto = requirement,
-                    contentType = RequirementDrawerContainer.REQUIREMENT_TYPE,
-                    isSpread = true,
-                    includingCancel = false
-                )
-                RequirementDrawerContainer.addDrawerContainer(
-                    context = context,
-                    container = flexibleContainer,
-                    requirementDto = requirement,
-                    contentType = RequirementDrawerContainer.ESTIMATION_TYPE,
-                    isSpread = false,
-                    includingCancel = false
-                )
-                requirement.measurement?.let {
-                    RequirementDrawerContainer.addDrawerContainer(
-                        context = context,
-                        container = flexibleContainer,
-                        requirementDto = requirement,
-                        contentType = RequirementDrawerContainer.PREVIOUS_ESTIMATION_TYPE,
-                        isSpread = false,
-                        includingCancel = false
-                    )
-                }
-            }
-
             is RequirementStatus.Measuring -> {
                 actionBar.root.findViewById<AppCompatButton>(R.id.button).isVisible = true
                 // view : 고객요청(spread, includingCancel), 이전 실측 내용(있으면, spread)

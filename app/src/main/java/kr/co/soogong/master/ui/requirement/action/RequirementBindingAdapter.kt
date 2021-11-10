@@ -46,11 +46,6 @@ fun RequirementIntro.initByRequirement(requirementDto: RequirementDto?) {
             subtitle = context.getString(R.string.requirement_intro_subtitle_of_repairing)
             theme = GREEN_THEME
         }
-        RequirementStatus.RequestFinish -> {
-            title = context.getString(R.string.requirement_intro_title_of_request_finish)
-            subtitle = context.getString(R.string.requirement_intro_subtitle_of_request_finish)
-            theme = GREEN_THEME
-        }
         RequirementStatus.Measuring -> {
             title = context.getString(R.string.requirement_intro_title_of_measuring)
             subtitle = context.getString(R.string.requirement_intro_subtitle_of_measuring)

@@ -90,7 +90,6 @@ class RequirementProgress @JvmOverloads constructor(
                 RequirementStatus.Requested, RequirementStatus.RequestConsult -> 1
                 RequirementStatus.Estimated -> 2
                 RequirementStatus.Repairing -> 3
-                RequirementStatus.RequestFinish -> 4
                 else -> max
             }
         }
@@ -111,7 +110,6 @@ class RequirementProgress @JvmOverloads constructor(
                 1 -> if (requirementDto?.estimationDto?.requestConsultingYn != true) RequirementStatus.Requested.inKorean else RequirementStatus.RequestConsult.inKorean
                 2 -> RequirementStatus.Estimated.inKorean
                 3 -> RequirementStatus.Repairing.inKorean
-                4 -> RequirementStatus.RequestFinish.inKorean
                 else -> ""
             }
         }

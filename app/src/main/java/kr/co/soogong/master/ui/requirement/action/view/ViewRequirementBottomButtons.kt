@@ -119,7 +119,7 @@ fun setBottomButtons(
                     }
                 }
 
-                is RequirementStatus.Repairing, RequirementStatus.RequestFinish -> {
+                is RequirementStatus.Repairing -> {
                     // Buttons : 고객에게 전화하기 / 시공 완료
                     buttonsDivider.isVisible = true
                     with(leftButton) {

@@ -1,6 +1,5 @@
 package kr.co.soogong.master.ui.requirement
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -8,7 +7,9 @@ import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.dto.profile.MasterDto
 import kr.co.soogong.master.data.dto.requirement.CustomerRequest
+import kr.co.soogong.master.data.dto.requirement.repair.RepairDto
 import kr.co.soogong.master.data.model.requirement.RequirementCard
+import kr.co.soogong.master.data.model.requirement.RequirementStatus
 import kr.co.soogong.master.ui.base.BaseViewModel
 import timber.log.Timber
 import javax.inject.Inject
@@ -17,23 +18,32 @@ import javax.inject.Inject
 open class RequirementViewModel @Inject constructor(
     private val requirementViewModelAggregate: RequirementViewModelAggregate,
 ) : BaseViewModel() {
-
-    private val _masterSimpleInfo = MutableLiveData<MasterDto>()
-    val masterSimpleInfo: LiveData<MasterDto>
-        get() = _masterSimpleInfo
-
-    val requirements = MutableLiveData<List<RequirementCard>>()
-
-    val customerRequests = MutableLiveData<CustomerRequest>()
-
     val mainTabIndex = MutableLiveData(0)
     val filterTabIndex = MutableLiveData(0)
 
-    open fun requestList() {}
+    val masterSimpleInfo = MutableLiveData<MasterDto>()
+    val requirements = MutableLiveData<List<RequirementCard>>()
+    val customerRequests = MutableLiveData<CustomerRequest>()
 
-    fun onFilterChange(index: Int) {
-        this.filterTabIndex.value = index
-        requestList()
+    fun requestRequirements() {
+        Timber.tag(TAG).d("requestRequirements: ${mainTabIndex.value} / ${filterTabIndex.value}")
+
+        requirementViewModelAggregate.getRequirementCardsUseCase(
+            RequirementStatus.getRequirementStatusFromTabIndex(mainTabIndex.value,
+                filterTabIndex.value)
+        )
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeBy(
+                onSuccess = {
+                    Timber.tag(TAG).d("requestRequirements successfully: ")
+                    requirements.postValue(it)
+                },
+                onError = {
+                    Timber.tag(TAG).d("requestMasterSimpleInfo failed: $it")
+                    setAction(REQUEST_FAILED)
+                }
+            ).addToDisposable()
     }
 
     // region : 문의현황 프래그먼트 로드 시 실행 함수
@@ -45,7 +55,7 @@ open class RequirementViewModel @Inject constructor(
             .subscribeBy(
                 onSuccess = {
                     Timber.tag(TAG).d("requestMasterSimpleInfo successful: $it")
-                    _masterSimpleInfo.value = it
+                    masterSimpleInfo.postValue(it)
                 },
                 onError = {
                     Timber.tag(TAG).d("requestMasterSimpleInfo failed: $it")
@@ -63,7 +73,7 @@ open class RequirementViewModel @Inject constructor(
             .subscribeBy(
                 onSuccess = {
                     Timber.tag(TAG).d("getCustomerRequests onSuccess: $it")
-                    customerRequests.value = it
+                    customerRequests.postValue(it)
                 },
                 onError = {
                     Timber.tag(TAG).d("getCustomerRequests onError: ")
@@ -95,17 +105,17 @@ open class RequirementViewModel @Inject constructor(
 
     fun updateRequestMeasureYn(isChecked: Boolean) {
         Timber.tag(TAG)
-            .d("updateRequestMeasureYn: ${_masterSimpleInfo.value?.requestMeasureYn} to $isChecked")
-        if (_masterSimpleInfo.value?.requestMeasureYn == isChecked) return
+            .d("updateRequestMeasureYn: ${masterSimpleInfo.value?.requestMeasureYn} to $isChecked")
+        if (masterSimpleInfo.value?.requestMeasureYn == isChecked) return
 
-        _masterSimpleInfo.value?.uid?.let { uid ->
+        masterSimpleInfo.value?.uid?.let { uid ->
             requirementViewModelAggregate.updateRequestMeasureYnUseCase(uid)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
                     onSuccess = {
                         Timber.tag(TAG).d("updateRequestMeasureYn successful: $it")
-                        _masterSimpleInfo.value = it
+                        masterSimpleInfo.postValue(it)
                     },
                     onError = {
                         Timber.tag(TAG).d("updateRequestMeasureYn failed: $it")
@@ -115,8 +125,32 @@ open class RequirementViewModel @Inject constructor(
         }
     }
 
+    fun askForReview(requirementCard: RequirementCard?) {
+        Timber.tag(TAG).d("askForReview: ")
+        requirementViewModelAggregate.requestReviewUseCase(
+            RepairDto(
+                id = requirementCard?.estimationDto?.repair?.id,
+                requirementToken = requirementCard?.token,
+                estimationId = requirementCard?.estimationDto?.id,
+            )
+        ).subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeBy(
+                onSuccess = {
+                    Timber.tag(TAG).d("ASK_FOR_REVIEW_SUCCEEDED: $it")
+                    setAction(ASK_FOR_REVIEW_SUCCESSFULLY)
+                },
+                onError = {
+                    Timber.tag(TAG).d("ASK_FOR_REVIEW_FAILED: $it")
+                    setAction(ASK_FOR_REVIEW_FAILED)
+                }
+            ).addToDisposable()
+    }
+
     companion object {
         private const val TAG = "RequirementViewModel"
         const val REQUEST_FAILED = "REQUEST_FAILED"
+        const val ASK_FOR_REVIEW_SUCCESSFULLY = "ASK_FOR_REVIEW_SUCCESSFULLY"
+        const val ASK_FOR_REVIEW_FAILED = "ASK_FOR_REVIEW_FAILED"
     }
 }

@@ -18,7 +18,6 @@ import kr.co.soogong.master.databinding.ViewHolderRequirementItemBinding
 import kr.co.soogong.master.ui.dialog.popup.CustomDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData
 import kr.co.soogong.master.ui.requirement.RequirementViewModel
-import kr.co.soogong.master.ui.requirement.done.DoneViewModel
 import kr.co.soogong.master.uihelper.profile.EditRequiredInformationActivityHelper
 import kr.co.soogong.master.uihelper.requirment.CallToCustomerHelper
 import kr.co.soogong.master.uihelper.requirment.action.EndRepairActivityHelper
@@ -247,7 +246,7 @@ open class RequirementCardViewHolder(
             rightButton.isVisible = true
             rightButton.isEnabled = true
             rightButton.setText(R.string.requirements_card_review_button)
-            setRightButtonClickListener { (viewModel as DoneViewModel).askForReview(requirementCard) }
+            setRightButtonClickListener { viewModel.askForReview(requirementCard) }
 
             requirementCard.estimationDto?.repair?.requestReviewYn?.let { requestReviewYn ->
                 if (requestReviewYn) {
@@ -275,7 +274,6 @@ open class RequirementCardViewHolder(
                 RequirementStatus.Measuring.asInt -> MeasuringCardViewHolder(binding)
                 RequirementStatus.Measured.asInt -> MeasuredCardViewHolder(binding)
                 RequirementStatus.Repairing.asInt -> RepairingCardViewHolder(binding)
-                RequirementStatus.RequestFinish.asInt -> RequestFinishCardViewHolder(binding)
 
                 RequirementStatus.Done.asInt -> DoneViewHolder(binding)
                 RequirementStatus.Closed.asInt -> ClosedViewHolder(binding)
