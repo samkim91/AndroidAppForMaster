@@ -18,9 +18,9 @@ class DoneViewModel @Inject constructor(
 ) : RequirementViewModel(requirementViewModelAggregate) {
 
     override fun requestList() {
-        Timber.tag(TAG).d("onFilterChange: ${index.value}")
+        Timber.tag(TAG).d("onFilterChange: ${filterTabIndex.value}")
 
-        index.value?.let { _index ->
+        filterTabIndex.value?.let { _index ->
             requirementViewModelAggregate.getRequirementCardsUseCase(
                 if (_index == 0) {
                     doneStatus.map { it.code }

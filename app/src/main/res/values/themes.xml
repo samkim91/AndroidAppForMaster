@@ -210,6 +210,139 @@
         <item name="android:fontFamily">@font/bold</item>
     </style>
 
+    <!-- New fonts -->
+    <style name="caption_2">
+        <item name="android:textSize">@dimen/text_size_11sp</item>
+    </style>
+
+    <style name="caption_2.regular" parent="caption_2">
+        <item name="android:fontFamily">@font/regular</item>
+    </style>
+
+    <style name="caption_2.bold" parent="caption_2">
+        <item name="android:fontFamily">@font/medium</item>
+    </style>
+
+    <style name="caption_1">
+        <item name="android:textSize">@dimen/text_size_12sp</item>
+    </style>
+
+    <style name="caption_1.regular" parent="caption_1">
+        <item name="android:fontFamily">@font/regular</item>
+    </style>
+
+    <style name="caption_1.bold" parent="caption_1">
+        <item name="android:fontFamily">@font/medium</item>
+    </style>
+
+    <style name="foot_note">
+        <item name="android:textSize">@dimen/text_size_13sp</item>
+    </style>
+
+    <style name="foot_note.regular" parent="foot_note">
+        <item name="android:fontFamily">@font/regular</item>
+    </style>
+
+    <style name="foot_note.bold" parent="foot_note">
+        <item name="android:fontFamily">@font/medium</item>
+    </style>
+
+    <style name="sub_headline">
+        <item name="android:textSize">@dimen/text_size_15sp</item>
+    </style>
+
+    <style name="sub_headline.regular" parent="sub_headline">
+        <item name="android:fontFamily">@font/regular</item>
+    </style>
+
+    <style name="sub_headline.bold" parent="sub_headline">
+        <item name="android:fontFamily">@font/medium</item>
+    </style>
+
+    <style name="call_out">
+        <item name="android:textSize">@dimen/text_size_16sp</item>
+    </style>
+
+    <style name="call_out.regular" parent="call_out">
+        <item name="android:fontFamily">@font/regular</item>
+    </style>
+
+    <style name="call_out.bold" parent="call_out">
+        <item name="android:fontFamily">@font/medium</item>
+    </style>
+
+    <style name="body">
+        <item name="android:textSize">@dimen/text_size_17sp</item>
+    </style>
+
+    <style name="body.regular" parent="body">
+        <item name="android:fontFamily">@font/regular</item>
+    </style>
+
+    <style name="body.bold" parent="body">
+        <item name="android:fontFamily">@font/medium</item>
+    </style>
+
+    <style name="headline">
+        <item name="android:textSize">@dimen/text_size_17sp</item>
+    </style>
+
+    <style name="headline.regular" parent="headline">
+        <item name="android:fontFamily">@font/medium</item>
+    </style>
+
+    <style name="headline.bold" parent="headline">
+        <item name="android:fontFamily">@font/medium</item>
+    </style>
+
+    <style name="title_3">
+        <item name="android:textSize">@dimen/text_size_20sp</item>
+    </style>
+
+    <style name="title_3.regular" parent="title_3">
+        <item name="android:fontFamily">@font/regular</item>
+    </style>
+
+    <style name="title_3.bold" parent="title_3">
+        <item name="android:fontFamily">@font/bold</item>
+    </style>
+
+    <style name="title_2">
+        <item name="android:textSize">@dimen/text_size_22sp</item>
+    </style>
+
+    <style name="title_2.regular" parent="title_2">
+        <item name="android:fontFamily">@font/regular</item>
+    </style>
+
+    <style name="title_2.bold" parent="title_2">
+        <item name="android:fontFamily">@font/bold</item>
+    </style>
+
+    <style name="title_1">
+        <item name="android:textSize">@dimen/text_size_28sp</item>
+    </style>
+
+    <style name="title_1.regular" parent="title_1">
+        <item name="android:fontFamily">@font/regular</item>
+    </style>
+
+    <style name="title_1.bold" parent="title_1">
+        <item name="android:fontFamily">@font/bold</item>
+    </style>
+
+    <style name="large_title">
+        <item name="android:textSize">@dimen/text_size_34sp</item>
+    </style>
+
+    <style name="large_title.regular" parent="large_title">
+        <item name="android:fontFamily">@font/regular</item>
+    </style>
+
+    <style name="large_title.bold" parent="large_title">
+        <item name="android:fontFamily">@font/bold</item>
+    </style>
+
 <!--    <style name="CustomTabText" parent="Widget.MaterialComponents.TabLayout">-->
 <!--        <item name="android:textSize">@dimen/text_title_size</item>-->
 <!--        <item name="android:fontFamily">@font/medium</item>-->

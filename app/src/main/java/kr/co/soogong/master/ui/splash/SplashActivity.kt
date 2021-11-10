@@ -79,17 +79,15 @@ class SplashActivity : AppCompatActivity() {
                 GET_MASTER_DIRECT_REPAIR -> {
                     (value as Boolean).let {
                         if (it) startActivity(MainActivityHelper.getIntent(this))
-                        else {
-                            CustomDialog.newInstance(
-                                dialogData = DialogData.getConfirmingDirectRepairYn(this),
-                                cancelable = false
-                            ).let { dialog ->
-                                dialog.setButtonsClickListener(
-                                    onPositive = { viewModel.updateDirectRepairYn(true) },
-                                    onNegative = { viewModel.updateDirectRepairYn(false) }
-                                )
-                                dialog.show(supportFragmentManager, dialog.tag)
-                            }
+                        else CustomDialog.newInstance(
+                            dialogData = DialogData.getConfirmingDirectRepairYn(this),
+                            cancelable = false
+                        ).let { dialog ->
+                            dialog.setButtonsClickListener(
+                                onPositive = { viewModel.updateDirectRepairYn(true) },
+                                onNegative = { viewModel.updateDirectRepairYn(false) }
+                            )
+                            dialog.show(supportFragmentManager, dialog.tag)
                         }
                     }
                 }

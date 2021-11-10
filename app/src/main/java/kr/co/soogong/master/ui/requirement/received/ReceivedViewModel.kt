@@ -18,9 +18,9 @@ class ReceivedViewModel @Inject constructor(
 ) : RequirementViewModel(requirementViewModelAggregate) {
 
     override fun requestList() {
-        Timber.tag(TAG).d("requestList: ${index.value}")
+        Timber.tag(TAG).d("requestList: ${filterTabIndex.value}")
 
-        index.value?.let { _index ->
+        filterTabIndex.value?.let { _index ->
             requirementViewModelAggregate.getRequirementCardsUseCase(
                 if (_index == 0 || _index == 2) {
                     receivedStatus.map { it.code }

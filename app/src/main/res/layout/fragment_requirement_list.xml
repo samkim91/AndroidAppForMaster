@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="kr.co.soogong.master.R" />
+
+        <variable
+            name="vm"
+            type="kr.co.soogong.master.ui.requirement.RequirementViewModel" />
+    </data>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:onRefresh="@{vm::requestList}"
+        app:setLoadingColor="@{R.color.app_color}">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_requirements"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/background"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:requirement_cards="@{vm.requirements}"
+            tools:listitem="@layout/view_holder_requirement_item" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+</layout>

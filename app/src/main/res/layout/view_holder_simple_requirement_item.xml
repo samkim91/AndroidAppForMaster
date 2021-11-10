@@ -34,11 +34,11 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/text_view_number"
-            style="@style/text_style_16sp.medium"
+            style="@style/call_out.bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{number}"
-            android:textColor="@color/c_000000"
+            android:textColor="@color/pure_black"
             app:layout_constraintBottom_toBottomOf="@id/image_view_number"
             app:layout_constraintEnd_toEndOf="@id/image_view_number"
             app:layout_constraintStart_toStartOf="@id/image_view_number"
@@ -47,12 +47,12 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/text_view_project"
-            style="@style/text_style_16sp.bold"
+            style="@style/call_out.bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/gap_20"
             android:text="@{data.project}"
-            android:textColor="@color/c_404040"
+            android:textColor="@color/dark_grey_1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toEndOf="@id/image_view_number"
@@ -61,11 +61,11 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/text_view_address"
-            style="@style/text_style_14sp.regular"
+            style="@style/foot_note.regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{data.oldAddress != null ? data.oldAddress : data.address}"
-            android:textColor="@color/c_909090"
+            android:textColor="@color/grey_3"
             app:layout_constrainedWidth="true"
             app:layout_constraintEnd_toStartOf="@id/line"
             app:layout_constraintHorizontal_bias="0"
@@ -81,7 +81,7 @@
             android:layout_marginStart="@dimen/gap_8"
             android:layout_marginTop="@dimen/gap_2"
             android:layout_marginBottom="@dimen/gap_2"
-            android:background="@color/c_CDCDCD"
+            android:background="@color/light_grey_2"
             app:layout_constraintBottom_toBottomOf="@id/text_view_distance"
             app:layout_constraintEnd_toStartOf="@id/text_view_distance"
             app:layout_constraintHorizontal_chainStyle="packed"
@@ -90,18 +90,16 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/text_view_distance"
-            style="@style/text_style_14sp.regular"
+            style="@style/foot_note.regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/gap_8"
             android:text="@{data.distance.toString() + 'm'}"
-            android:textColor="@color/c_909090"
+            android:textColor="@color/grey_3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toEndOf="@id/line"
             app:layout_constraintTop_toTopOf="@id/text_view_address"
             tools:text="68m" />
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

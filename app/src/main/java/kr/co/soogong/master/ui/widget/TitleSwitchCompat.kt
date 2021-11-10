@@ -45,12 +45,6 @@ class TitleSwitchCompat @JvmOverloads constructor(
             return field
         }
 
-    var doubleArrowVisibility: Boolean = false
-        set(value) {
-            field = value
-            binding.doubleArrow.isVisible = value
-        }
-
     var underLine: Boolean = true
         set(value) {
             field = value
@@ -59,40 +53,5 @@ class TitleSwitchCompat @JvmOverloads constructor(
 
     fun setSwitchClick(listener: CompoundButton.OnCheckedChangeListener) {
         binding.switchCompat.setOnCheckedChangeListener(listener)
-    }
-
-    fun setLayoutForRequestMeasure(masterDto: MasterDto) {
-        Timber.tag("TitleSwitchCompat").d("setLayoutForReceivingRequestMeasure: ")
-        with(binding) {
-            if (masterDto.secretaryYn != true || masterDto.freeMeasureYn != true) {
-                this@TitleSwitchCompat.isVisible = false
-                return
-            }
-
-            this@TitleSwitchCompat.isVisible = true
-            title.setTextAppearance(R.style.text_style_16sp_bold)
-            title.setTextColor(resources.getColor(R.color.c_FFFFFF, null))
-
-            masterDto.requestMeasureYn?.let { changeTextAndBackgroundForRequestMeasure(it) }
-        }
-    }
-
-    fun changeTextAndBackgroundForRequestMeasure(requestMeasureYn: Boolean) {
-        Timber.tag("TitleSwitchCompat").d("changeTextAndBackgroundForRequestMeasure: $requestMeasureYn")
-        with(binding) {
-            if (requestMeasureYn) {
-                container.setBackgroundColor(resources.getColor(R.color.c_1B8C61, null))
-                this@TitleSwitchCompat.title =
-                    resources.getString(R.string.accepting_request_measurement)
-                this@TitleSwitchCompat.doubleArrowVisibility = false
-                checked = true
-            } else {
-                container.setBackgroundColor(resources.getColor(R.color.c_08362F, null))
-                this@TitleSwitchCompat.title =
-                    resources.getString(R.string.holding_request_measurement)
-                this@TitleSwitchCompat.doubleArrowVisibility = true
-                checked = false
-            }
-        }
     }
 }

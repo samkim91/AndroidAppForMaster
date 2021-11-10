@@ -19,7 +19,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/c_F9F9F9">
+            android:background="@color/background">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/logo"
@@ -35,7 +35,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/text_view_for_switch"
-                style="@style/text_style_12sp.medium"
+                style="@style/caption_1.bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/gap_1"
@@ -61,8 +61,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
-                tools:visibility="visible"
-                app:constraint_referenced_ids="text_view_for_switch, switch_compat" />
+                app:constraint_referenced_ids="text_view_for_switch, switch_compat"
+                tools:visibility="visible" />
 
             <androidx.constraintlayout.widget.Barrier
                 android:id="@+id/barrier_for_header"
@@ -138,15 +138,15 @@
                 android:layout_marginBottom="@dimen/gap_16"
                 android:background="@drawable/shape_white_background_radius15"
                 android:elevation="@dimen/gap_1"
-                app:layout_constraintHeight_min="@dimen/gap_350"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_min="@dimen/gap_350"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/barrier_for_summary" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/new_requirements_container_label"
-                style="@style/text_style_16sp.medium"
+                style="@style/call_out.bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/gap_16"

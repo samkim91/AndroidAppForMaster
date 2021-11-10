@@ -64,7 +64,7 @@
             android:layout_width="@dimen/gap_12"
             android:layout_height="@dimen/gap_12"
             android:layout_marginStart="@dimen/gap_10"
-            android:background="@drawable/selector_circle_for_requirement_progress"
+            android:background="@color/selector_circle_for_requirement_progress"
             app:layout_constraintBottom_toBottomOf="@id/seek_bar"
             app:layout_constraintStart_toStartOf="@id/seek_bar"
             app:layout_constraintTop_toTopOf="@id/seek_bar" />
@@ -85,7 +85,7 @@
             android:layout_width="@dimen/gap_12"
             android:layout_height="@dimen/gap_12"
             android:layout_marginEnd="@dimen/gap_10"
-            android:background="@drawable/selector_circle_for_requirement_progress"
+            android:background="@color/selector_circle_for_requirement_progress"
             app:layout_constraintBottom_toBottomOf="@id/seek_bar"
             app:layout_constraintEnd_toEndOf="@id/seek_bar"
             app:layout_constraintTop_toTopOf="@id/seek_bar" />

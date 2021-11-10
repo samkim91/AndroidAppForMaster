@@ -1,4 +1,4 @@
-@file:JvmName("StringExt")
+@file:JvmName("FormatExt")
 
 package kr.co.soogong.master.utility.extension
 

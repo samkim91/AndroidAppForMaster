@@ -12,8 +12,8 @@ val TabTextList = listOf(
 )
 
 val TabIcons = listOf(
-    R.drawable.selector_main_activity_tab_home,
-    R.drawable.selector_main_activity_tab_requirements,
-    R.drawable.selector_main_activity_tab_profile,
-    R.drawable.selector_main_activity_tab_preferences,
+    R.color.selector_main_activity_tab_home,
+    R.color.selector_main_activity_tab_requirements,
+    R.color.selector_main_activity_tab_profile,
+    R.color.selector_main_activity_tab_preferences,
 )
