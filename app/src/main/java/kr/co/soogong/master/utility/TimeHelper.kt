@@ -31,6 +31,6 @@ object TimeHelper {
 
         if (hours < 0.0 || leftMinutes < 0.0) return "만료"
 
-        return "${hours}시간 ${leftMinutes}분 남음"
+        return "${hours}시간 ${leftMinutes}분"
     }
 }

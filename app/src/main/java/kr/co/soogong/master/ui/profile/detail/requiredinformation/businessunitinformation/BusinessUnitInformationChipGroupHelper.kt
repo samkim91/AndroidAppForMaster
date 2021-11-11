@@ -12,13 +12,15 @@ object BusinessUnitInformationChipGroupHelper {
 
     operator fun invoke(
         layoutInflater: LayoutInflater,
-        chipGroup: TitleChipGroup
+        chipGroup: TitleChipGroup,
     ) {
         chipGroup.chipGroup.isSingleSelection = true
         chipGroup.chipGroup.isSelectionRequired = true
 
         businessUnitInformation.map { item ->
-            val chip = layoutInflater.inflate(R.layout.single_chip_choice_rectangular_layout, null) as Chip
+            val chip = layoutInflater.inflate(R.layout.single_chip_choice_rectangular_layout,
+                chipGroup,
+                false) as Chip
             chip.text = item
             chip.minWidth = 156.dp
             chip.minHeight = 40.dp

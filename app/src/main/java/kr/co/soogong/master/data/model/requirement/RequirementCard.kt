@@ -2,6 +2,7 @@ package kr.co.soogong.master.data.model.requirement
 
 import kr.co.soogong.master.data.dto.requirement.RequirementDto
 import kr.co.soogong.master.data.dto.requirement.estimation.EstimationDto
+import kr.co.soogong.master.data.dto.requirement.qna.RequirementQnaDto
 import java.util.*
 
 data class RequirementCard(
@@ -17,6 +18,7 @@ data class RequirementCard(
     val subStatus: String?,
     val tel: String?,
     val safetyNumber: String?,
+    val requirementQnas: List<RequirementQnaDto>?,
     val closedAt: Date?,
     val createdAt: Date?,
     val updatedAt: Date?,
@@ -38,6 +40,7 @@ data class RequirementCard(
                 subStatus = requirementDto.subStatus,
                 tel = requirementDto.tel,
                 safetyNumber = requirementDto.safetyNumber,
+                requirementQnas = requirementDto.requirementQnas,
                 closedAt = requirementDto.closedAt,
                 createdAt = requirementDto.createdAt,
                 updatedAt = requirementDto.updatedAt,

@@ -21,6 +21,6 @@
             android:layout_height="match_parent"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             bind:category_list="@{vm.list}"
-            tools:listitem="@layout/viewholder_category" />
+            tools:listitem="@layout/view_holder_category" />
     </FrameLayout>
 </layout>

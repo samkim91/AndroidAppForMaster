@@ -4,14 +4,14 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kr.co.soogong.master.data.model.major.Category
-import kr.co.soogong.master.databinding.ViewholderCategoryBinding
+import kr.co.soogong.master.databinding.ViewHolderCategoryBinding
 
 class CategoryViewHolder(
-    private val binding: ViewholderCategoryBinding
+    private val binding: ViewHolderCategoryBinding,
 ) : RecyclerView.ViewHolder(binding.root) {
     fun bind(
         category: Category,
-        clickListener: (Category) -> Unit
+        clickListener: (Category) -> Unit,
     ) {
         binding.run {
             text.text = category.name
@@ -26,7 +26,7 @@ class CategoryViewHolder(
 
     companion object {
         fun create(parent: ViewGroup): CategoryViewHolder {
-            val binding = ViewholderCategoryBinding.inflate(
+            val binding = ViewHolderCategoryBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false

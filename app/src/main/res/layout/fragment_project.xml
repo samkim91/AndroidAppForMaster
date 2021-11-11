@@ -30,7 +30,7 @@
             app:layout_constraintTop_toTopOf="parent"
             bind:project_list="@{vm.list}"
             tools:itemCount="4"
-            tools:listitem="@layout/viewholder_project" />
+            tools:listitem="@layout/view_holder_project" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/select"

@@ -18,16 +18,18 @@ object FlexibleCostChipGroupHelper {
     operator fun invoke(
         layoutInflater: LayoutInflater,
         chipGroup: TitleChipGroup,
-        category: String
+        category: String,
     ) {
-       val items = when(category) {
-           TRAVEL_COST -> travelCostItems
-           CRANE_USAGE -> craneUsageItems
-           else -> packageCostItems
-       }
+        val items = when (category) {
+            TRAVEL_COST -> travelCostItems
+            CRANE_USAGE -> craneUsageItems
+            else -> packageCostItems
+        }
 
         items.map { item ->
-            val chip = layoutInflater.inflate(R.layout.single_chip_choice_rectangular_layout, null) as Chip
+            val chip = layoutInflater.inflate(R.layout.single_chip_choice_rectangular_layout,
+                chipGroup,
+                false) as Chip
             chip.text = item
             chip.minWidth = 156.dp
             chip.minHeight = 40.dp

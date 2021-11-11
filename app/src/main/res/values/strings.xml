@@ -115,15 +115,8 @@
     <string name="tab_name_for_repairing">시공예정</string>
     <string name="tab_name_for_done">시공완료</string>
 
-
     <!-- Requirements : Request -->
-    <string name="requirements_request_none_status">아직 들어온 문의가 없습니다.</string>
-
-    <!-- Requirements : Progress -->
-    <string name="requirements_progress_none_status">아직 진행중인 문의가 없습니다.</string>
-
-    <!-- Requirements : Done -->
-    <string name="requirements_done_none_status">아직 완료된 문의가 없습니다.</string>
+    <string name="requirements_empty">문의가 없습니다.</string>
 
     <!-- Requirements : Search -->
     <string name="requirements_not_found">해당 내용을 찾지 못 하였습니다.</string>
@@ -139,9 +132,12 @@
     <string name="requirements_card_review_button_done">리뷰 요청을 완료했어요!</string>
     <string name="requirements_card_start_time">최초 요청일 : %s</string>
     <string name="requirements_card_due_date">견적 마감일 : </string>
+    <string name="requirements_card_estimation_due_time">견적 마감까지 %s</string>
+    <string name="requirements_card_request_measure_due_time">응답 마감까지 %s</string>
     <string name="requirements_card_due_time">응답 마감시간 : </string>
     <string name="requirements_card_response_measure_due_date">실측 선택 마감 : </string>
     <string name="requirements_card_done_date">시공 완료일 : </string>
+    <string name="requirements_card_view_detail">자세히 보기</string>
     <string name="requirements_card_amount_title">나의 견적가 :</string>
     <string name="requirements_card_amount_done_title">최종 시공가 :</string>
     <string name="requirements_card_due_date_alert">마감일이 지나면 해당 문의가 삭제됩니다.</string>

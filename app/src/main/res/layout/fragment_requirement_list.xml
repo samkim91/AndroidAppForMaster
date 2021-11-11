@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/bind"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -12,25 +13,55 @@
             type="kr.co.soogong.master.ui.requirement.RequirementViewModel" />
     </data>
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/swipe_refresh_layout"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:onRefresh="@{vm::requestRequirements}"
-        app:setLoadingColor="@{R.color.app_color}">
+        android:layout_height="match_parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view_requirements"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_refresh_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/background"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:requirement_cards="@{vm.requirements}"
-            tools:listitem="@layout/view_holder_requirement_item" />
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:onRefresh="@{vm::requestRequirements}"
+            app:setLoadingColor="@{R.color.app_color}">
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_requirements"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/background"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:requirement_cards="@{vm.requirements}"
+                tools:listitem="@layout/view_holder_requirement_card" />
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/empty_icon"
+            android:layout_width="@dimen/gap_40"
+            android:layout_height="@dimen/gap_40"
+            android:background="@drawable/ic_requirements_filled"
+            android:backgroundTint="@color/grey_1"
+            app:layout_constraintBottom_toTopOf="@id/empty_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
+            bind:visible="@{vm.requirements.empty}" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/empty_text"
+            style="@style/call_out.regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/requirements_empty"
+            android:textColor="@color/grey_4"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/empty_icon"
+            bind:visible="@{vm.requirements.empty}" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

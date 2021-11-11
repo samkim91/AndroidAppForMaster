@@ -42,7 +42,7 @@
             android:textColor="@color/text_primary_color"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/notice_title"
-            bind:to_date_string="@{data.date}"
+            app:dateWithoutDay="@{data.date}"
             tools:text="2020. 8. 26" />
 
         <androidx.appcompat.widget.AppCompatImageView

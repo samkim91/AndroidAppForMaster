@@ -40,7 +40,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            bind:to_date_string="@{data.createdAt}"
+            app:dateWithoutDay="@{data.createdAt}"
             tools:text="2021. 09. 21" />
 
         <androidx.appcompat.widget.AppCompatTextView

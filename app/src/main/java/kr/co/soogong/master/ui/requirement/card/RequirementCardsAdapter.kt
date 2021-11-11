@@ -13,10 +13,10 @@ class RequirementCardsAdapter(
     private val viewModel: RequirementViewModel,
 ) : ListAdapter<RequirementCard, RequirementCardViewHolder>(RequirementCardDiffUtil()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        RequirementCardViewHolder.create(parent, viewType)
+        RequirementCardViewHolder.create(context, fragmentManager, viewModel, parent, viewType)
 
     override fun onBindViewHolder(holder: RequirementCardViewHolder, position: Int) =
-        holder.bind(context, fragmentManager, viewModel, currentList[position])
+        holder.bind(currentList[position])
 
     override fun getItemViewType(position: Int): Int =
         currentList[position].status?.asInt!!

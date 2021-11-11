@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="data"
+            type="kr.co.soogong.master.data.model.requirement.RequirementCard" />
+
+        <variable
+            name="left_button_click_listener"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="right_button_click_listener"
+            type="android.view.View.OnClickListener" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/pure_white"
+        app:cardCornerRadius="@dimen/gap_14"
+        app:cardElevation="@dimen/gap_1">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/start_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="@dimen/gap_14" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/top_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="@dimen/gap_14" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/end_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="@dimen/gap_14" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/bottom_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_end="@dimen/gap_14" />
+
+            <!-- region 기본요소 -->
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_view_created_at"
+                style="@style/foot_note.bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/pure_black"
+                app:dateWithoutDay="@{data.createdAt}"
+                app:layout_constraintBottom_toBottomOf="@id/text_view_status"
+                app:layout_constraintStart_toStartOf="@id/start_guideline"
+                app:layout_constraintTop_toTopOf="@id/text_view_status"
+                tools:text="2021. 11. 3" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_view_status"
+                style="@style/foot_note.bold"
+                android:layout_width="@dimen/gap_68"
+                android:layout_height="@dimen/gap_32"
+                android:background="@drawable/background_white_solid_radius4"
+                android:gravity="center"
+                android:text="@{data.status.inKorean}"
+                app:layout_constraintEnd_toEndOf="@id/end_guideline"
+                app:layout_constraintTop_toTopOf="@id/top_guideline"
+                tools:text="견적요청" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_view_address"
+                style="@style/title_3.bold"
+                android:layout_width="@dimen/gap_0"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/gap_12"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="@{data.oldAddress != null ? data.oldAddress : data.address}"
+                android:textColor="@color/pure_black"
+                app:layout_constraintEnd_toEndOf="@id/end_guideline"
+                app:layout_constraintStart_toStartOf="@id/start_guideline"
+                app:layout_constraintTop_toBottomOf="@id/text_view_status"
+                app:layout_constraintWidth_percent="0.93"
+                tools:text="부산광역시 강서구 녹산산단382로14번가길 10~29번지(송정동) 부산광역시 강서구 녹산산단382로14번가길 10~29번지(송정동)" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_view_project"
+                style="@style/sub_headline.regular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/gap_8"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@{data.project}"
+                android:textColor="@color/grey_3"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintEnd_toEndOf="@id/end_guideline"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="@id/start_guideline"
+                app:layout_constraintTop_toBottomOf="@id/text_view_address"
+                tools:text="욕실 위생도기 및 수전 설치/교체 123123123123" />
+            <!-- endregion -->
+
+            <!-- region 주요 QnA -->
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chip_group_qna"
+                android:layout_width="@dimen/gap_0"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/gap_8"
+                app:chipSpacingVertical="@dimen/gap_4"
+                app:chipSpacingHorizontal="@dimen/gap_8"
+                app:layout_constraintEnd_toEndOf="@id/end_guideline"
+                app:layout_constraintStart_toStartOf="@id/start_guideline"
+                app:layout_constraintTop_toBottomOf="@id/text_view_project" />
+            <!-- endregion -->
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_view_due_time"
+                style="@style/caption_1.bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/gap_14"
+                android:maxLines="1"
+                android:textColor="@color/grey_1"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/end_guideline"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="@id/start_guideline"
+                app:layout_constraintTop_toBottomOf="@id/chip_group_qna"
+                tools:text="견적 마감까지 8시간 21분"
+                tools:visibility="visible" />
+
+            <!-- region 버튼 -->
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button_left"
+                style="@style/sub_headline.bold"
+                android:layout_width="@dimen/gap_0"
+                android:layout_height="@dimen/gap_48"
+                android:layout_marginTop="@dimen/requirement_card_call_button_margin_top"
+                android:layout_marginEnd="@dimen/gap_10"
+                android:background="@drawable/background_white_solid_grey_stroke_radius8"
+                android:onClick="@{left_button_click_listener}"
+                android:stateListAnimator="@null"
+                android:textColor="@color/dark_grey_2"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/bottom_guideline"
+                app:layout_constraintEnd_toStartOf="@id/button_right"
+                app:layout_constraintStart_toStartOf="@id/start_guideline"
+                app:layout_constraintTop_toBottomOf="@id/text_view_due_time"
+                app:layout_goneMarginEnd="@dimen/gap_0"
+                tools:text="견적 거절"
+                tools:visibility="visible" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button_right"
+                style="@style/sub_headline.bold"
+                android:layout_width="@dimen/gap_0"
+                android:layout_height="@dimen/gap_48"
+                android:layout_marginTop="@dimen/requirement_card_call_button_margin_top"
+                android:background="@drawable/background_white_solid_green_stroke_radius8"
+                android:onClick="@{right_button_click_listener}"
+                android:stateListAnimator="@null"
+                android:textColor="@color/brand_green"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/bottom_guideline"
+                app:layout_constraintEnd_toEndOf="@id/end_guideline"
+                app:layout_constraintStart_toEndOf="@id/button_left"
+                app:layout_constraintTop_toBottomOf="@id/text_view_due_time"
+                tools:text="자세히 보기"
+                tools:visibility="visible" />
+            <!-- endregion -->
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

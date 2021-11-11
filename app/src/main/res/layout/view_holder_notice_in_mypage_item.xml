@@ -43,7 +43,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/title"
             app:layout_constraintTop_toTopOf="parent"
-            bind:to_date_string="@{data.date}"
+            app:dateWithoutDay="@{data.date}"
             tools:text="2020. 8. 26" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

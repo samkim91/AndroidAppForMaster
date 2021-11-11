@@ -355,6 +355,11 @@
         <item name="android:textColor">@color/c_BDBDBD</item>
     </style>
 
+    <style name="ChipChoiceGreyRectangular" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="chipBackgroundColor">@color/background</item>
+        <item name="chipCornerRadius">@dimen/gap_4</item>
+    </style>
+
     <style name="ChipChoiceRectangularStyle" parent="Widget.MaterialComponents.Chip.Choice">
         <item name="chipBackgroundColor">@color/c_FFFFFF</item>
         <item name="android:textColor">@color/chip_selector</item>

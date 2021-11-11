@@ -23,7 +23,7 @@ fun Date?.formatDate(): String {
 
 fun Date?.formatDateWithoutDay(): String {
     if (this == null) return ""
-    return SimpleDateFormat("yyyy.MM.dd", Locale.KOREA).format(this)
+    return SimpleDateFormat("yyyy. MM. dd", Locale.KOREA).format(this)
 }
 
 fun Int?.formatMoney(): String {
