@@ -106,7 +106,7 @@ class PortfolioListActivity : BaseActivity<ActivityEditProfileWithCardBinding>(
     private fun setRecyclerview() {
         binding.recyclerview.adapter =
             PortfolioListAdapter(
-                leftButtonClickListener = { id ->
+                buttonLeftClickListener = { id ->
                     CustomDialog.newInstance(
                         dialogData = when (pageName) {
                             PORTFOLIO -> DialogData.getAskingDeletePortfolioDialogData(this@PortfolioListActivity)
@@ -119,7 +119,7 @@ class PortfolioListActivity : BaseActivity<ActivityEditProfileWithCardBinding>(
                         it.show(supportFragmentManager, it.tag)
                     }
                 },
-                rightButtonClickListener = { id ->
+                buttonRightClickListener = { id ->
                     startActivity(
                         EditProfileContainerActivityHelper.getIntent(
                             this@PortfolioListActivity,

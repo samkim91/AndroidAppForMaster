@@ -46,8 +46,8 @@ class EstimationTemplatesActivity : BaseActivity<ActivityEstimationTemplatesBind
             }
 
             recyclerviewForTemplates.adapter = EstimationTemplateAdapter(
-                leftButtonClick = { template ->
-                    Timber.tag(TAG).d("leftButtonClick: $template")
+                buttonLeftClick = { template ->
+                    Timber.tag(TAG).d("buttonLeftClick: $template")
                     CustomDialog.newInstance(
                         DialogData.getConfirmingForDeletingEstimationTemplate(this@EstimationTemplatesActivity)
                     ).let {
@@ -69,8 +69,8 @@ class EstimationTemplatesActivity : BaseActivity<ActivityEstimationTemplatesBind
                             description = template.description)
                     )
                 },
-                rightButtonClick = { template ->
-                    Timber.tag(TAG).d("rightButtonClick: $template")
+                buttonRightClick = { template ->
+                    Timber.tag(TAG).d("buttonRightClick: $template")
                     this@EstimationTemplatesActivity.run {
                         setResult(
                             RESULT_OK,

@@ -2,8 +2,6 @@
 <resources>
     <!-- Basic -->
     <color name="transparent">#00FFFFFF</color>
-    <color name="pure_white">@color/c_FFFFFF</color>
-    <color name="pure_black">@color/c_000000</color>
 
     <color name="app_color">@color/c_22D47B</color>
     <color name="text_basic_color">@color/c_121212</color>

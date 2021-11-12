@@ -11,21 +11,21 @@ class PortfolioViewHolder(
 
     fun binding(
         portfolioDto: PortfolioDto,
-        leftButtonClickListener: ((id: Int) -> Unit),
-        rightButtonClickListener: ((id: Int) -> Unit),
+        buttonLeftClickListener: ((id: Int) -> Unit),
+        buttonRightClickListener: ((id: Int) -> Unit),
     ) {
         with(binding) {
             data = portfolioDto
 
             setDeleteButtonClickListener {
                 portfolioDto.id?.let {
-                    leftButtonClickListener(it)
+                    buttonLeftClickListener(it)
                 }
             }
 
             setEditButtonClickListener {
                 portfolioDto.id?.let {
-                    rightButtonClickListener(it)
+                    buttonRightClickListener(it)
                 }
             }
 

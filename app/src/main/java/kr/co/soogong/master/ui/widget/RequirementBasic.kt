@@ -4,11 +4,9 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.view.isVisible
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.model.profile.SecretaryCodeTable
-import kr.co.soogong.master.databinding.ViewRequirementBasicBinding
-import kr.co.soogong.master.utility.extension.formatFullDateTimeWithoutDay
+import kr.co.soogong.master.databinding.WidgetRequirementBasicBinding
+import kr.co.soogong.master.utility.extension.formatDateWithoutDay
 import java.util.*
 
 class RequirementBasic @JvmOverloads constructor(
@@ -17,47 +15,48 @@ class RequirementBasic @JvmOverloads constructor(
     defStyle: Int = 0,
 ) : ConstraintLayout(context, attributeSet, defStyle) {
     private var binding =
-        ViewRequirementBasicBinding.inflate(LayoutInflater.from(context), this, true)
+        WidgetRequirementBasicBinding.inflate(LayoutInflater.from(context), this, true)
 
-    var address: String? = ""
-        set(value) {
-            field = value
-            binding.address.text = value
-        }
-
-    var oldAddress: String? = ""
-        set(value) {
-            field = value
-            binding.oldAddress.text = value
-        }
-
-    var project: String? = ""
-        set(value) {
-            field = value
-            binding.project.text = value
-        }
-
-    var createdAt: Date? = Date()
+    var createdAt: Date? = null
         set(value) {
             field = value
             value?.let {
-                binding.createdAt.text = context.getString(
-                    R.string.requirements_card_start_time,
-                    it.formatFullDateTimeWithoutDay()
-                )
+                binding.textViewCreatedAt.text =
+                    context.getString(R.string.requirement_basic_created_at,
+                        it.formatDateWithoutDay())
             }
         }
 
     var requirementToken: String? = ""
         set(value) {
             field = value
-            binding.requirementToken.text =
-                context.getString(R.string.requirement_token_label, value)
+            value?.let {
+                binding.textViewRequirementToken.text =
+                    context.getString(R.string.requirement_basic_requirement_token, value)
+            }
         }
 
-    var measurementBadgeVisibility: String? = ""
+    var address: String? = ""
         set(value) {
             field = value
-            binding.measurementBadge.root.isVisible = value == SecretaryCodeTable.code
+            value?.let {
+                binding.textViewAddress.text = value
+            }
+        }
+
+    var project: String? = ""
+        set(value) {
+            field = value
+            value?.let {
+                binding.textViewProject.text = value
+            }
+        }
+
+    var onButtonClick: OnClickListener? = null
+        set(value) {
+            field = value
+            value?.let {
+                binding.buttonCallToCustomer.setOnClickListener(value)
+            }
         }
 }

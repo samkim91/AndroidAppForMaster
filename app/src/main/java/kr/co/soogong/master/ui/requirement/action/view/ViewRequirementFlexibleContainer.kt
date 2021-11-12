@@ -9,7 +9,6 @@ import kr.co.soogong.master.data.model.requirement.RequirementStatus
 import kr.co.soogong.master.data.model.requirement.estimation.EstimationResponseCode
 import kr.co.soogong.master.databinding.ActivityViewRequirementBinding
 import kr.co.soogong.master.ui.widget.RequirementDrawerContainer
-import kr.co.soogong.master.utility.extension.formatDateWithoutDay
 import timber.log.Timber
 
 // Note: 1차 리팩토링이고, 중복되는 함수들은 다시 빼내야함.
@@ -22,11 +21,9 @@ fun setFlexibleContainer(
 
     with(binding) {
         flexibleContainer.removeAllViews()
-        actionBar.title.text = requirement.address
 
         when (RequirementStatus.getStatusFromRequirement(requirement)) {
             is RequirementStatus.RequestMeasure -> {
-                actionBar.root.findViewById<AppCompatButton>(R.id.button).isVisible = false
                 // view : 고객 요청 내용(spread), 이전 실측 내용(있으면, spread)
                 RequirementDrawerContainer.addDrawerContainer(
                     context = context,
@@ -49,7 +46,6 @@ fun setFlexibleContainer(
             }
 
             is RequirementStatus.Requested, RequirementStatus.RequestConsult -> {
-                actionBar.root.findViewById<AppCompatButton>(R.id.button).isVisible = true
                 (requirement.estimationDto?.masterResponseCode == EstimationResponseCode.ACCEPTED).let { accepted ->
                     if (accepted) {
                         // view : 나의 제안 내용(spread), 고객 요청 내용, 이전 실측 내용(있으면)
@@ -104,7 +100,6 @@ fun setFlexibleContainer(
             }
 
             is RequirementStatus.Estimated -> {
-                actionBar.root.findViewById<AppCompatButton>(R.id.button).isVisible = true
                 // view : 나의 제안 내용(spread), 고객 요청 내용, 이전 실측 내용(있으면)
                 RequirementDrawerContainer.addDrawerContainer(
                     context = context,
@@ -165,7 +160,6 @@ fun setFlexibleContainer(
             }
 
             is RequirementStatus.Measuring -> {
-                actionBar.root.findViewById<AppCompatButton>(R.id.button).isVisible = true
                 // view : 고객요청(spread, includingCancel), 이전 실측 내용(있으면, spread)
                 RequirementDrawerContainer.addDrawerContainer(
                     context = context,
@@ -188,7 +182,6 @@ fun setFlexibleContainer(
             }
 
             is RequirementStatus.Measured -> {
-                actionBar.root.findViewById<AppCompatButton>(R.id.button).isVisible = true
                 // view : 나의 실측 내용(spread, includingCancel), 고객요청, 이전 실측 내용(있으면)
                 RequirementDrawerContainer.addDrawerContainer(
                     context = context,
@@ -246,12 +239,8 @@ fun setFlexibleContainer(
                         includingCancel = false
                     )
                 }
-                // 시공완료일
-                requirementStatus.endingText = context.getString(
-                    R.string.progress_ending_text_with_date,
-                    requirement.estimationDto?.repair?.actualDate.formatDateWithoutDay()
-                )
-                requirementStatus.endingTextColor = context.getColor(R.color.c_0C5E47)
+
+
             }
 
             is RequirementStatus.Closed -> {
@@ -290,12 +279,6 @@ fun setFlexibleContainer(
                         includingCancel = false
                     )
                 }
-                // 시공완료일
-                requirementStatus.endingText = context.getString(
-                    R.string.progress_ending_text_with_date,
-                    requirement.estimationDto?.repair?.actualDate.formatDateWithoutDay()
-                )
-                requirementStatus.endingTextColor = context.getColor(R.color.c_0C5E47)
             }
 
             is RequirementStatus.Canceled -> {
@@ -326,7 +309,6 @@ fun setFlexibleContainer(
                         includingCancel = false
                     )
                 }
-                requirementStatus.isVisible = false
             }
         }
     }

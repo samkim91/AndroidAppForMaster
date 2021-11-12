@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.EditText
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.res.ResourcesCompat
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ViewTitleEdittextButtonBinding
 
@@ -135,9 +136,9 @@ class TitleEditTextButton @JvmOverloads constructor(
         set(value) {
             field = value
             if(value){
-                binding.button.background = resources.getDrawable(R.drawable.shape_white_background_gray_border_radius8, null)
+                binding.button.background = ResourcesCompat.getDrawable(resources, R.drawable.background_white_solid_light_grey1_stroke_radius8, null)
             }else {
-                binding.button.background = resources.getDrawable(R.drawable.shape_white_background_green_border_radius8, null)
+                binding.button.background = ResourcesCompat.getDrawable(resources, R.drawable.shape_white_background_green_border_radius8, null)
             }
         }
 

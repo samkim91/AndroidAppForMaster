@@ -63,7 +63,7 @@
                 android:layout_marginStart="@dimen/gap_20"
                 android:layout_marginTop="@dimen/gap_8"
                 android:layout_marginEnd="@dimen/gap_20"
-                android:background="@drawable/shape_white_background_gray_border_radius8"
+                android:background="@drawable/background_white_solid_light_grey1_stroke_radius8"
                 android:hint="@string/insert_certification_code_edittext_hint"
                 android:inputType="numberSigned"
                 android:maxLength="6"
@@ -158,7 +158,7 @@
                 android:layout_marginBottom="@dimen/gap_32"
                 android:text="@string/confirming_certification_code_received"
                 android:textColor="@color/text_primary_color"
-                app:layout_constraintBottom_toTopOf="@id/left_button"
+                app:layout_constraintBottom_toTopOf="@id/button_left"
                 app:layout_constraintEnd_toStartOf="@id/request_certification_code_again_text"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toStartOf="parent" />
@@ -177,7 +177,7 @@
                 app:layout_constraintStart_toEndOf="@id/confirming_certification_code_received" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/left_button"
+                android:id="@+id/button_left"
                 style="@style/text_style_16sp.bold"
                 android:layout_width="@dimen/gap_0"
                 android:layout_height="@dimen/gap_48"
@@ -185,11 +185,11 @@
                 android:text="@string/retype_phone_number_button_text"
                 android:textColor="@color/c_616161"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/right_button"
+                app:layout_constraintEnd_toStartOf="@id/button_right"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/right_button"
+                android:id="@+id/button_right"
                 style="@style/text_style_16sp.bold"
                 android:layout_width="@dimen/gap_0"
                 android:layout_height="@dimen/gap_48"
@@ -199,7 +199,7 @@
                 android:textColor="@color/c_FFFFFF"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/left_button" />
+                app:layout_constraintStart_toEndOf="@id/button_left" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

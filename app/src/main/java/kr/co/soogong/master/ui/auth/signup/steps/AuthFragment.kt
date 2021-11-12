@@ -39,7 +39,7 @@ class AuthFragment : BaseFragment<FragmentSignUpAuthBinding>(
         }
 
         override fun onFinish() {
-            binding.rightButton.isEnabled = false
+            binding.buttonRight.isEnabled = false
             binding.alertExpiredCertificationTime.isVisible = true
         }
     }
@@ -69,11 +69,11 @@ class AuthFragment : BaseFragment<FragmentSignUpAuthBinding>(
                 resendVerificationCode()
             }
 
-            leftButton.setOnClickListener {
+            buttonLeft.setOnClickListener {
                 (activity as? SignUpActivity)?.moveToPrevious()
             }
 
-            rightButton.setOnClickListener {
+            buttonRight.setOnClickListener {
                 viewModel.certificationCode.observe(viewLifecycleOwner, {
                     alertInvalidCertificationCode.isVisible = it.length < 6
                     if (alertWrongCertificationCode.isVisible) alertWrongCertificationCode.isVisible = false
@@ -87,7 +87,7 @@ class AuthFragment : BaseFragment<FragmentSignUpAuthBinding>(
     }
 
     private fun startTimer() {
-        binding.rightButton.isEnabled = false
+        binding.buttonRight.isEnabled = false
         binding.alertExpiredCertificationTime.visibility = View.GONE
         timer.start()
     }
@@ -126,7 +126,7 @@ class AuthFragment : BaseFragment<FragmentSignUpAuthBinding>(
                 token: PhoneAuthProvider.ForceResendingToken
             ) {
                 Timber.tag(TAG).d("onCodeSent: $verificationId, $token")
-                binding.rightButton.isEnabled = true
+                binding.buttonRight.isEnabled = true
 
                 viewModel.storedVerificationId.value = verificationId
                 viewModel.resendToken.value = token

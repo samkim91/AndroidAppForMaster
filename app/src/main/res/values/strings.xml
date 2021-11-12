@@ -130,7 +130,7 @@
     <string name="requirements_card_waiting_label">2주 내 고객의 응답이 없을 시 해당 문의건은 삭제됩니다.</string>
     <string name="requirements_card_review_button">리뷰 요청하기</string>
     <string name="requirements_card_review_button_done">리뷰 요청을 완료했어요!</string>
-    <string name="requirements_card_start_time">최초 요청일 : %s</string>
+
     <string name="requirements_card_due_date">견적 마감일 : </string>
     <string name="requirements_card_estimation_due_time">견적 마감까지 %s</string>
     <string name="requirements_card_request_measure_due_time">응답 마감까지 %s</string>
@@ -146,6 +146,12 @@
     <string name="measurement_text">현장실측</string>
 
     <!-- View Requirement -->
+    <string name="view_requirement_action_title">받은 문의</string>
+
+    <string name="requirement_basic_call_to_customer">전화연결</string>
+    <string name="requirement_basic_created_at">%s 요청</string>
+    <string name="requirement_basic_requirement_token">문의번호 %s</string>
+
     <string name="requirement_drawer_title_of_customer_review">고객 리뷰</string>
     <string name="requirement_drawer_title_of_repair">나의 최종 시공 내용</string>
     <string name="requirement_drawer_title_of_canceled_reason">시공 취소 사유</string>
@@ -357,7 +363,6 @@
     <string name="master_quality_label">퀄리티</string>
     <string name="price_affordability_label">가격만족</string>
     <string name="punctuality_label">기일준수</string>
-    <string name="requirement_token_label">문의 번호 : %s</string>
 
     <!-- toast text -->
     <string name="certification_code_requested">인증번호를 요청 했습니다.</string>

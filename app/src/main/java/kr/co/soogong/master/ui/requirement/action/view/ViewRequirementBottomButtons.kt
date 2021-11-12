@@ -25,17 +25,15 @@ fun setBottomButtons(
 
     with(activity) {
         with(binding) {
-            buttonsDivider.isVisible = false
-            leftButton.isVisible = false
-            rightButton.isVisible = false
+            buttonLeft.isVisible = false
+            buttonRight.isVisible = false
 
             when (RequirementStatus.getStatusFromRequirement(requirement)) {
                 is RequirementStatus.Requested, RequirementStatus.RequestConsult -> {
                     (requirement.estimationDto?.masterResponseCode == EstimationResponseCode.ACCEPTED).let { accepted ->
                         if (accepted) return@let
                         // Buttons : 견적을 내기 어려워요 / 견적을 보낼래요.
-                        buttonsDivider.isVisible = true
-                        with(leftButton) {
+                        with(buttonLeft) {
                             isVisible = true
                             text = getString(R.string.refuse_estimate_text)
                             setTextColor(getColor(R.color.c_FFFFFF))
@@ -54,7 +52,7 @@ fun setBottomButtons(
                                 }
                             }
                         }
-                        with(rightButton) {
+                        with(buttonRight) {
                             isVisible = true
                             text = getString(R.string.accept_estimate_text)
                             setTextColor(getColor(R.color.c_FFFFFF))
@@ -73,8 +71,7 @@ fun setBottomButtons(
 
                 is RequirementStatus.RequestMeasure -> {
                     // Buttons : 실측 안할래요 / 실측 할래요
-                    buttonsDivider.isVisible = true
-                    with(leftButton) {
+                    with(buttonLeft) {
                         isVisible = true
                         text = getString(R.string.refuse_measure_text)
                         setTextColor(getColor(R.color.c_FFFFFF))
@@ -98,7 +95,7 @@ fun setBottomButtons(
                             }
                         }
                     }
-                    with(rightButton) {
+                    with(buttonRight) {
                         isVisible = true
                         text = getString(R.string.accept_measure_text)
                         setTextColor(getColor(R.color.c_FFFFFF))
@@ -121,8 +118,7 @@ fun setBottomButtons(
 
                 is RequirementStatus.Repairing -> {
                     // Buttons : 고객에게 전화하기 / 시공 완료
-                    buttonsDivider.isVisible = true
-                    with(leftButton) {
+                    with(buttonLeft) {
                         isVisible = true
                         when {
                             requirement.estimationDto?.fromMasterCallCnt!! > 0 -> {
@@ -139,7 +135,7 @@ fun setBottomButtons(
                             viewModel.callToClient()
                         }
                     }
-                    with(rightButton) {
+                    with(buttonRight) {
                         isVisible = true
                         text = getString(R.string.repair_done_text)
                         setTextColor(getColor(R.color.c_FFFFFF))
@@ -157,8 +153,7 @@ fun setBottomButtons(
 
                 is RequirementStatus.Measuring -> {
                     // Buttons : 고객에게 전화하기 / 견적서 보내기
-                    buttonsDivider.isVisible = true
-                    with(leftButton) {
+                    with(buttonLeft) {
                         isVisible = true
                         when {
                             requirement.estimationDto?.fromMasterCallCnt!! > 0 -> {
@@ -175,7 +170,7 @@ fun setBottomButtons(
                             viewModel.callToClient()
                         }
                     }
-                    with(rightButton) {
+                    with(buttonRight) {
                         isVisible = true
                         text = getString(R.string.send_estimation)
                         setTextColor(getColor(R.color.c_FFFFFF))
@@ -194,8 +189,7 @@ fun setBottomButtons(
                 is RequirementStatus.Estimated -> {
                     if (requirement.safetyNumber.isNullOrEmpty()) return
                     // Button : 고객에게 전화하기
-                    buttonsDivider.isVisible = true
-                    with(leftButton) {
+                    with(buttonLeft) {
                         isVisible = true
                         when {
                             requirement.estimationDto?.fromMasterCallCnt!! > 0 -> {
@@ -216,8 +210,7 @@ fun setBottomButtons(
 
                 is RequirementStatus.Measured -> {
                     // Button : 고객에게 전화하기
-                    buttonsDivider.isVisible = true
-                    with(leftButton) {
+                    with(buttonLeft) {
                         isVisible = true
                         when {
                             requirement.estimationDto?.fromMasterCallCnt!! > 0 -> {
@@ -238,8 +231,7 @@ fun setBottomButtons(
 
                 is RequirementStatus.Done -> {
                     // Button : 리뷰 요청하기
-                    buttonsDivider.isVisible = true
-                    with(leftButton) {
+                    with(buttonLeft) {
                         isVisible = true
                         requirement.estimationDto?.repair?.requestReviewYn?.let { requestReviewYn ->
                             if (requestReviewYn) {

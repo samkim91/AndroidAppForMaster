@@ -7,8 +7,8 @@ import kr.co.soogong.master.data.dto.profile.PortfolioDto
 import kr.co.soogong.master.databinding.ViewHolderPortfolioBinding
 
 class PortfolioListAdapter(
-    private val leftButtonClickListener: (id: Int) -> Unit,
-    private val rightButtonClickListener: (id: Int) -> Unit
+    private val buttonLeftClickListener: (id: Int) -> Unit,
+    private val buttonRightClickListener: (id: Int) -> Unit
 ) : ListAdapter<PortfolioDto, PortfolioViewHolder>(PortfolioListDiffUtil()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         PortfolioViewHolder(
@@ -20,6 +20,6 @@ class PortfolioListAdapter(
         )
 
     override fun onBindViewHolder(holder: PortfolioViewHolder, position: Int) {
-        holder.binding(currentList[position], leftButtonClickListener, rightButtonClickListener)
+        holder.binding(currentList[position], buttonLeftClickListener, buttonRightClickListener)
     }
 }
