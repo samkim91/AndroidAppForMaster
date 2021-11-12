@@ -37,14 +37,6 @@ open class RequirementCardViewHolder(
     open fun bind(
         requirementCard: RequirementCard,
     ) {
-        this.itemView.layoutParams =
-            (this.itemView.layoutParams as ViewGroup.MarginLayoutParams).apply {
-                topMargin = 4.dp
-                bottomMargin = 4.dp
-                marginStart = 16.dp
-                marginEnd = 16.dp
-            }
-
         with(binding) {
             buttonLeft.isVisible = false
             textViewDueTime.isVisible = false

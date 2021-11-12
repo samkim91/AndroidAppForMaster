@@ -30,7 +30,10 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view_requirements"
+                android:clipToPadding="false"
                 android:layout_width="match_parent"
+                android:paddingTop="@dimen/gap_8"
+                android:paddingBottom="@dimen/gap_16"
                 android:layout_height="match_parent"
                 android:background="@color/background"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
