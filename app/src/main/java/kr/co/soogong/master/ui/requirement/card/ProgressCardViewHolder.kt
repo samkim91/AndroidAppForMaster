@@ -20,8 +20,6 @@ class MeasuringCardViewHolder(
     ) {
         super.bind(requirementCard)
 
-//        setCallToClientButton(requirementCard)
-//        setWriteEstimationButton(requirementCard)
         setRequirementCardStatusTheme(THEME_BLUE)
 
     }
@@ -39,13 +37,9 @@ class MeasuredCardViewHolder(
     ) {
         super.bind(requirementCard)
 
-        with(binding) {
 
-//            setCallToClientButton(requirementCard)
-//            setRepairDoneButton(requirementCard)
-            setRequirementCardStatusTheme(THEME_GREY)
+        setRequirementCardStatusTheme(THEME_GREY)
 
-        }
     }
 }
 
@@ -61,11 +55,6 @@ class RepairingCardViewHolder(
     ) {
         super.bind(requirementCard)
 
-        with(binding) {
-//            setCallToClientButton(requirementCard)
-//            setRepairDoneButton(requirementCard)
-            setRequirementCardStatusTheme(THEME_BLUE)
-
-        }
+        setRequirementCardStatusTheme(THEME_BLUE)
     }
 }

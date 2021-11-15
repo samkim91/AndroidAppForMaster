@@ -1,7 +1,12 @@
 package kr.co.soogong.master.ui.requirement.action.view
 
 import android.content.Context
+import android.view.Gravity
+import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatButton
+import androidx.appcompat.widget.AppCompatTextView
+import androidx.appcompat.widget.LinearLayoutCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentManager
 import kr.co.soogong.master.R
@@ -14,9 +19,12 @@ import kr.co.soogong.master.uihelper.requirment.action.CancelActivityHelper
 import kr.co.soogong.master.uihelper.requirment.action.EndRepairActivityHelper
 import kr.co.soogong.master.uihelper.requirment.action.MeasureActivityHelper
 import kr.co.soogong.master.uihelper.requirment.action.WriteEstimationActivityHelper
+import kr.co.soogong.master.utility.extension.dp
 import timber.log.Timber
 
-// Note: 1차 리팩토링이고, 중복되는 함수들은 다시 빼내야함.
+// 버튼은 총 3가지로 구성되어 있다.
+// #1 버튼 : flexibleContainer 하단에 추가되는 버튼
+// #2, 3 버튼 : ViewRequirement 하단에 고정되는 좌/우 버튼
 fun setBottomButtons(
     activity: ViewRequirementActivity,
     viewModel: ViewRequirementViewModel,
@@ -31,7 +39,8 @@ fun setBottomButtons(
 
         when (RequirementStatus.getStatusFromRequirement(requirement)) {
             is RequirementStatus.Requested -> {
-                // buttons : 견적 거절, 견적 보내기
+                // buttons : 1. 시공 완료, 2. 견적 거절, 3. 견적 보내기
+                addEndRepairButton(activity, binding.flexibleContainer, requirement)
                 setRefuseEstimationButton(activity,
                     activity.supportFragmentManager,
                     viewModel,
@@ -40,12 +49,13 @@ fun setBottomButtons(
             }
 
             is RequirementStatus.Estimated -> {
-                // Button : 시공 완료
+                // Button : 3. 시공 완료
                 setEndRepairButton(activity, viewModel, buttonRight)
             }
 
             is RequirementStatus.RequestMeasure -> {
-                // Buttons : 실측 거절, 실측 수락
+                // Buttons : 1. 시공 완료, 2. 실측 거절, 3. 실측 수락
+                addEndRepairButton(activity, binding.flexibleContainer, requirement)
                 setRefuseMeasureButton(activity,
                     activity.supportFragmentManager,
                     viewModel,
@@ -57,7 +67,8 @@ fun setBottomButtons(
             }
 
             is RequirementStatus.Measuring -> {
-                // Buttons : 실측 취소, 실측 입력
+                // Buttons : 1. 시공 완료, 2. 실측 취소, 3. 실측 입력
+                addEndRepairButton(activity, binding.flexibleContainer, requirement)
                 setCancelMeasureButton(activity, viewModel, buttonLeft)
                 setSendMeasureButton(activity, viewModel, buttonRight)
             }
@@ -78,6 +89,40 @@ fun setBottomButtons(
             }
         }
     }
+}
+
+private fun addEndRepairButton(
+    context: Context,
+    container: ViewGroup,
+    requirementDto: RequirementDto,
+) {
+    val params = LinearLayoutCompat.LayoutParams(
+        ViewGroup.LayoutParams.MATCH_PARENT,
+        ViewGroup.LayoutParams.WRAP_CONTENT
+    ).apply {
+        setMargins(0, 24.dp, 0, 28.dp)
+    }
+
+    val textView = AppCompatTextView(context).apply {
+        height = 48.dp
+        text = context.getString(R.string.repair_done_text)
+        gravity = Gravity.CENTER
+        background = ResourcesCompat.getDrawable(resources,
+            R.drawable.background_white_solid_light_grey2_stroke_radius8,
+            null)
+        setTextColor(ResourcesCompat.getColor(resources, R.color.black, null))
+        setTextAppearance(R.style.foot_note_regular)
+        setOnClickListener {
+            context.startActivity(
+                EndRepairActivityHelper.getIntent(
+                    context,
+                    requirementDto.id
+                )
+            )
+        }
+    }
+
+    container.addView(textView, params)
 }
 
 private fun setAcceptEstimationButton(

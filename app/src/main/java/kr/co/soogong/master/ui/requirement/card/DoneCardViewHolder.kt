@@ -20,10 +20,7 @@ class DoneViewHolder(
     ) {
         super.bind(requirementCard)
 
-        with(binding) {
-//            setRequestReviewButton(requirementCard)
-
-        }
+        setRequirementCardStatusTheme(THEME_GREY)
     }
 }
 
@@ -39,9 +36,7 @@ class ClosedViewHolder(
     ) {
         super.bind(requirementCard)
 
-        with(binding) {
-
-        }
+        setRequirementCardStatusTheme(THEME_GREY)
     }
 }
 

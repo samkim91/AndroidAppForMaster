@@ -88,7 +88,7 @@ class LabelContentTag @JvmOverloads constructor(
             TitleRectangleImages(context).also { item ->
                 item.label = context.getString(R.string.view_requirement_images_label)
                 item.images = requirementDto.images
-                container.addView(item)
+                container.addView(item, params)
             }
         }
 
@@ -140,7 +140,7 @@ class LabelContentTag @JvmOverloads constructor(
                     item.label =
                         context.getString(R.string.view_requirement_estimation_images_label)
                     item.images = estimation.images
-                    container.addView(item)
+                    container.addView(item, params)
                 }
             }
         }
@@ -219,7 +219,7 @@ class LabelContentTag @JvmOverloads constructor(
                     TitleRectangleImages(context).also { item ->
                         item.label = context.getString(R.string.measure_attachment_label)
                         item.images = requirementDto.measurement.images
-                        container.addView(item)
+                        container.addView(item, params)
                     }
                 }
             }

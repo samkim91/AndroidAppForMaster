@@ -144,7 +144,7 @@ fun setFlexibleContainer(
             }
 
             is RequirementStatus.Closed -> {
-                // view : 고객 리뷰(spread), 나의 최종 시공 내용, 고객 요청 내용, 이전 실측 내용(있으면)
+                // view : 고객 리뷰, 나의 최종 시공 내용, 고객 요청 내용, 이전 실측 내용(있으면)
                 IconLabelContainer.addIconLabelContainer(
                     context = context,
                     container = flexibleContainer,

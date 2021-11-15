@@ -2,20 +2,14 @@ package kr.co.soogong.master.ui.atomic.molecules
 
 import android.content.Context
 import android.util.AttributeSet
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.appcompat.widget.AppCompatTextView
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.res.ResourcesCompat
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.dto.requirement.RequirementDto
 import kr.co.soogong.master.data.model.profile.CodeTable
 import kr.co.soogong.master.databinding.ViewIconLabelContainerBinding
-import kr.co.soogong.master.uihelper.requirment.action.CancelActivityHelper
-import kr.co.soogong.master.uihelper.requirment.action.EndRepairActivityHelper
 import kr.co.soogong.master.utility.extension.dp
 
 class IconLabelContainer @JvmOverloads constructor(
@@ -114,66 +108,6 @@ class IconLabelContainer @JvmOverloads constructor(
                         ViewGroup.LayoutParams.WRAP_CONTENT).apply { topMargin = 24.dp }
                 )
             }
-        }
-
-        fun addRepairDoneButton(
-            context: Context,
-            container: ViewGroup,
-            requirementDto: RequirementDto,
-        ) {
-            val params = LinearLayoutCompat.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT
-            ).apply {
-                setMargins(0, 24.dp, 0, 28.dp)
-            }
-
-            val textView = AppCompatTextView(context).apply {
-                text = context.getString(R.string.repair_done_text)
-                gravity = Gravity.CENTER
-                setTextColor(ResourcesCompat.getColor(resources, R.color.black, null))
-                setTextAppearance(R.style.foot_note_regular)
-                setOnClickListener {
-                    context.startActivity(
-                        EndRepairActivityHelper.getIntent(
-                            context,
-                            requirementDto.id
-                        )
-                    )
-                }
-            }
-
-            container.addView(textView, params)
-        }
-
-        fun addCancelButton(
-            context: Context,
-            container: ViewGroup,
-            requirementDto: RequirementDto,
-        ) {
-            val params = LinearLayoutCompat.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT
-            ).apply {
-                setMargins(0, 12.dp, 0, 12.dp)
-            }
-
-            val textView = TextView(context).apply {
-                text = context.getString(R.string.cancel_requirement_text)
-                gravity = Gravity.CENTER
-                setTextColor(context.getColor(R.color.c_FF711D))
-                setTextAppearance(R.style.text_style_16sp_bold)
-                setOnClickListener {
-                    context.startActivity(
-                        CancelActivityHelper.getIntent(
-                            context,
-                            requirementDto.id
-                        )
-                    )
-                }
-            }
-
-            container.addView(textView, params)
         }
     }
 }
