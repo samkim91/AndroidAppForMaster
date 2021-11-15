@@ -38,7 +38,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <kr.co.soogong.master.ui.widget.TitleEditText
+                <kr.co.soogong.master.ui.atomic.molecules.TitleEditText
                     android:id="@+id/actual_price"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -57,7 +57,7 @@
                     app:setMaxLength="@{13}"
                     app:title="@{@string/end_estimate_price_title}" />
 
-                <kr.co.soogong.master.ui.widget.TextCheckBox
+                <kr.co.soogong.master.ui.atomic.molecules.TextCheckBox
                     android:id="@+id/checkbox_for_actual_price_including_vat"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

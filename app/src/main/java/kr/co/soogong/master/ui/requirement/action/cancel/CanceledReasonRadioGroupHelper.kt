@@ -5,7 +5,7 @@ import android.content.res.ColorStateList
 import android.widget.RadioButton
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.dto.common.Code
-import kr.co.soogong.master.ui.widget.TitleRadioGroup
+import kr.co.soogong.master.ui.atomic.molecules.TitleRadioGroup
 import kr.co.soogong.master.utility.extension.dp
 
 object CanceledReasonRadioGroupHelper {

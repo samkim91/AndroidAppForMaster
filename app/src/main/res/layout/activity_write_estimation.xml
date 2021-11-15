@@ -44,7 +44,7 @@
                     android:scaleType="centerCrop"
                     android:src="@drawable/ic_banner_3" />
 
-                <kr.co.soogong.master.ui.widget.RequirementBasic
+                <kr.co.soogong.master.ui.atomic.organisms.RequirementBasic
                     android:id="@+id/requirement_basic"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -127,7 +127,7 @@
                             android:textColor="@color/filter_text_selector_2" />
                     </RadioGroup>
 
-                    <kr.co.soogong.master.ui.widget.TitleEditText
+                    <kr.co.soogong.master.ui.atomic.molecules.TitleEditText
                         android:id="@+id/simple_cost"
                         android:layout_width="@dimen/gap_0"
                         android:layout_height="wrap_content"
@@ -147,7 +147,7 @@
                         app:setMaxLength="@{13}"
                         app:title="@{@string/estimation_price_text}" />
 
-                    <kr.co.soogong.master.ui.widget.TextCheckBox
+                    <kr.co.soogong.master.ui.atomic.molecules.TextCheckBox
                         android:id="@+id/checkbox_for_simple_cost_including_vat"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -166,7 +166,7 @@
                         app:constraint_referenced_ids="simple_cost, checkbox_for_simple_cost_including_vat"
                         tools:visibility="visible" />
 
-                    <kr.co.soogong.master.ui.widget.TitleEditText
+                    <kr.co.soogong.master.ui.atomic.molecules.TitleEditText
                         android:id="@+id/labor_cost"
                         android:layout_width="@dimen/gap_0"
                         android:layout_height="wrap_content"
@@ -185,7 +185,7 @@
                         app:setMaxLength="@{13}"
                         app:title="@{@string/estimation_labor_cost}" />
 
-                    <kr.co.soogong.master.ui.widget.TitleEditText
+                    <kr.co.soogong.master.ui.atomic.molecules.TitleEditText
                         android:id="@+id/material_cost"
                         android:layout_width="@dimen/gap_0"
                         android:layout_height="wrap_content"
@@ -204,7 +204,7 @@
                         app:setMaxLength="@{13}"
                         app:title="@{@string/estimation_material_cost}" />
 
-                    <kr.co.soogong.master.ui.widget.TitleEditText
+                    <kr.co.soogong.master.ui.atomic.molecules.TitleEditText
                         android:id="@+id/travel_cost"
                         android:layout_width="@dimen/gap_0"
                         android:layout_height="wrap_content"
@@ -223,7 +223,7 @@
                         app:setMaxLength="@{13}"
                         app:title="@{@string/estimation_travel_cost}" />
 
-                    <kr.co.soogong.master.ui.widget.TitleEditText
+                    <kr.co.soogong.master.ui.atomic.molecules.TitleEditText
                         android:id="@+id/total_cost"
                         android:layout_width="@dimen/gap_0"
                         android:layout_height="wrap_content"
@@ -239,7 +239,7 @@
                         app:setInputType="@{InputType.TYPE_CLASS_TEXT}"
                         app:title="@{@string/estimation_total_cost}" />
 
-                    <kr.co.soogong.master.ui.widget.TextCheckBox
+                    <kr.co.soogong.master.ui.atomic.molecules.TextCheckBox
                         android:id="@+id/checkbox_for_total_cost_including_vat"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -265,7 +265,7 @@
                         app:barrierDirection="bottom"
                         app:constraint_referenced_ids="checkbox_for_simple_cost_including_vat, checkbox_for_total_cost_including_vat" />
 
-                    <kr.co.soogong.master.ui.widget.AlertBox
+                    <kr.co.soogong.master.ui.atomic.molecules.AlertBox
                         android:id="@+id/alert_box_for_loading_estimation_template"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -280,7 +280,7 @@
                         app:layout_constraintTop_toBottomOf="@id/request_barrier"
                         app:theme="@{101}" />
 
-                    <kr.co.soogong.master.ui.widget.TitleEditTextCounter
+                    <kr.co.soogong.master.ui.atomic.molecules.TitleEditTextCounter
                         android:id="@+id/write_detail"
                         android:layout_width="@dimen/gap_0"
                         android:layout_height="wrap_content"
@@ -310,7 +310,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/write_detail" />
 
-                    <kr.co.soogong.master.ui.widget.TextCheckBox
+                    <kr.co.soogong.master.ui.atomic.molecules.TextCheckBox
                         android:id="@+id/checkbox_for_adding_estimation_template"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -321,7 +321,7 @@
                         app:layout_constraintTop_toBottomOf="@id/alert_box_for_estimation_template"
                         app:text="@{@string/checkbox_text_for_adding_estimation_template}" />
 
-                    <kr.co.soogong.master.ui.widget.TitleRecyclerImage
+                    <kr.co.soogong.master.ui.atomic.molecules.TitleRecyclerImage
                         android:id="@+id/estimation_images_picker"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

@@ -6,17 +6,15 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/gap_12"
-        android:paddingBottom="@dimen/gap_12"
         >
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/question"
-            style="@style/text_style_14sp.regular"
+            android:id="@+id/text_view_label"
+            style="@style/sub_headline.regular"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:text="@string/view_requirement_images_label"
-            android:textColor="@color/text_primary_color"
+            android:textColor="@color/grey_1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
@@ -26,12 +24,12 @@
             android:id="@+id/images_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/gap_12"
+            android:layout_marginTop="@dimen/gap_8"
             android:overScrollMode="never"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/question"
+            app:layout_constraintTop_toBottomOf="@id/text_view_label"
             app:spanCount="4"
             tools:listitem="@layout/view_holder_image" />
 

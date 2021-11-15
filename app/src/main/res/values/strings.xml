@@ -152,24 +152,49 @@
     <string name="requirement_basic_created_at">%s 요청</string>
     <string name="requirement_basic_requirement_token">문의번호 %s</string>
 
-    <string name="requirement_drawer_title_of_customer_review">고객 리뷰</string>
-    <string name="requirement_drawer_title_of_repair">나의 최종 시공 내용</string>
-    <string name="requirement_drawer_title_of_canceled_reason">시공 취소 사유</string>
-    <string name="requirement_drawer_title_of_customer_request">고객 요청 내용</string>
-    <string name="requirement_drawer_title_of_my_estimation">나의 제안 내용</string>
-    <string name="requirement_drawer_title_of_previous_estimation">부가 정보</string>
-    <string name="requirement_drawer_title_of_my_measurement">나의 실측 내용</string>
+    <string name="view_requirement_customer_request_label">📄 고객님 요청 내용</string>
+    <string name="view_requirement_my_estimation_label">💬 나의 제안 내용</string>
+    <string name="view_requirement_my_measurement_label">💬 나의 실측 내용</string>
+    <string name="view_requirement_previous_estimation_label">🗂 부가 정보</string>
+    <string name="view_requirement_my_repair_label">🛠 나의 최종 시공 내용</string>
+    <string name="view_requirement_canceled_reason_label">🚫 시공 취소 사유</string>
+    <string name="view_requirement_customer_review_label">📝 고객리뷰 내용</string>
+
     <string name="view_requirement_images_label">사진이 있다면 견적에 도움이 됩니다.</string>
     <string name="view_requirement_description">정확한 견적을 위해 마스터에게 더 설명드릴 사항이 있나요?</string>
     <string name="view_requirement_estimation_images_label">견적 관련 사진</string>
 
-    <string name="accept_estimate_text">견적을 보낼래요</string>
-    <string name="refuse_estimate_text">견적을 내기 어려워요</string>
-    <string name="accept_measure_text">실측 할래요</string>
-    <string name="refuse_measure_text">실측 안할래요</string>
+    <string name="estimation_total_cost">총 견적가</string>
+    <string name="estimation_labor_cost">인건비</string>
+    <string name="estimation_travel_cost">출장비</string>
+    <string name="estimation_material_cost">자재비</string>
+    <string name="description_label">세부내용</string>
+    <string name="estimation_description_label">제안내용</string>
+    <string name="masters_estimation_description_label">마스터님의 제안 내용 (선택)</string>
+    <string name="masters_estimation_description_hint_text">특별히 제안할 내용, 현장에서 가격이 변동될 수 있는 사항 등 고객이 선택하는데에 도움이 되는 내용을 작성해 주세요.\n마스터님의 전화번호는 고객에게 자동으로 전달됩니다.</string>
+
+    <string name="repair_actual_price">최종 시공가</string>
+    <string name="canceled_reason_label">취소 사유</string>
+    <string name="subtitle_of_previous_estimation">이전에 다른 마스터님에게 상담 또는 실측을 받았던 견적입니다.</string>
+    <string name="canceled_reason_of_client">추가 요청 사유</string>
+    <string name="price_of_previous_estimation">다른 마스터님의 견적가</string>
+    <string name="description_of_previous_estimation">다른 마스터님의 코멘트</string>
+    <string name="measure_attachment_label">실측 사진</string>
+
+    <string name="write_estimation">견적 보내기</string>
+    <string name="refuse_estimation">견적 거절</string>
+
+    <string name="accept_measure">실측 수락</string>
+    <string name="refuse_measure">실측 거절</string>
+    <string name="cancel_measure">실측 취소</string>
+    <string name="send_measure">실측 입력</string>
+    <string name="request_review">리뷰 요청</string>
+    <string name="request_review_done">리뷰 요청 완료</string>
+
     <string name="cancel_requirement_text"><u>취소하기</u></string>
     <string name="repair_done_text">시공 완료</string>
-    <string name="request_review_text">리뷰 요청하기</string>
+    <string name="cancel_repair">시공 취소</string>
+
     <string name="call_to_customer_text">고객에게 전화하기</string>
     <string name="recall_to_customer_text">다시 전화하기</string>
 
@@ -210,24 +235,6 @@
     <string name="progress_ending_text">시공완료</string>
     <string name="progress_ending_text_with_date">%s 시공완료</string>
     <string name="consult_with_customer_button_text">고객과 상담하기</string>
-
-    <!-- Estimation Detail in ViewRequirement -->
-    <string name="estimation_total_cost">총 견적가</string>
-    <string name="estimation_labor_cost">인건비</string>
-    <string name="estimation_travel_cost">출장비</string>
-    <string name="estimation_material_cost">자재비</string>
-    <string name="description_label">세부내용</string>
-    <string name="estimation_description_label">제안내용</string>
-    <string name="masters_estimation_description_label">마스터님의 제안 내용 (선택)</string>
-    <string name="masters_estimation_description_hint_text">특별히 제안할 내용, 현장에서 가격이 변동될 수 있는 사항 등 고객이 선택하는데에 도움이 되는 내용을 작성해 주세요.\n마스터님의 전화번호는 고객에게 자동으로 전달됩니다.</string>
-
-    <string name="repair_actual_price">최종 시공가</string>
-    <string name="canceled_reason_text">취소 사유</string>
-    <string name="subtitle_of_previous_estimation">이전에 다른 마스터님에게 상담 또는 실측을 받았던 견적입니다.</string>
-    <string name="canceled_reason_of_client">추가 요청 사유</string>
-    <string name="price_of_previous_estimation">다른 마스터님의 견적가</string>
-    <string name="description_of_previous_estimation">다른 마스터님의 코멘트</string>
-    <string name="measure_attachment_label">실측 사진</string>
 
     <!--  Cancel Estimate  -->
     <string name="cancel_estimate_cancel_option_label">어떤 이유로 취소 되었나요?</string>

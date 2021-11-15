@@ -9,7 +9,7 @@ import androidx.core.view.isEmpty
 import com.google.android.material.chip.Chip
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.model.major.Major
-import kr.co.soogong.master.ui.widget.TitleChipGroup
+import kr.co.soogong.master.ui.atomic.molecules.TitleChipGroup
 import kr.co.soogong.master.utility.extension.dp
 
 // Todo.. 굉장히 코드가 더러운데.. 2 way binding을 사용하는 방법을 찾아봐야함.

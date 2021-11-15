@@ -41,7 +41,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <kr.co.soogong.master.ui.widget.TextCheckBox
+                <kr.co.soogong.master.ui.atomic.molecules.TextCheckBox
                     android:id="@+id/agree_checkbox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -52,7 +52,7 @@
                     app:layout_constraintTop_toBottomOf="@id/title"
                     app:text="@{@string/edit_free_measure_fragment_agree_text}" />
 
-                <kr.co.soogong.master.ui.widget.TextCheckBox
+                <kr.co.soogong.master.ui.atomic.molecules.TextCheckBox
                     android:id="@+id/disagree_checkbox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

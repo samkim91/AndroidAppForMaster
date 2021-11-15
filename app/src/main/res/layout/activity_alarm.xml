@@ -22,7 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <kr.co.soogong.master.ui.widget.TitleSwitchCompat
+            <kr.co.soogong.master.ui.atomic.molecules.TitleSwitchCompat
                 android:id="@+id/marketing_push"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -34,7 +34,7 @@
                 app:switchClick="@{vm::changeMarketingPush}"
                 app:title="@{@string/label_for_marketing_push}" />
 
-            <kr.co.soogong.master.ui.widget.TitleSwitchCompat
+            <kr.co.soogong.master.ui.atomic.molecules.TitleSwitchCompat
                 android:id="@+id/push_at_night"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -27,7 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <kr.co.soogong.master.ui.widget.TitleRadioGroup
+                <kr.co.soogong.master.ui.atomic.molecules.TitleRadioGroup
                     android:id="@+id/canceled_options"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -40,7 +40,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:title="@{@string/cancel_estimate_cancel_option_label}" />
 
-                <kr.co.soogong.master.ui.widget.TitleEditTextCounter
+                <kr.co.soogong.master.ui.atomic.molecules.TitleEditTextCounter
                     android:id="@+id/cancel_option_detail"
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"

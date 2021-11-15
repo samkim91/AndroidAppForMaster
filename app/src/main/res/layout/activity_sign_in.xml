@@ -45,7 +45,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <kr.co.soogong.master.ui.widget.TitleEditTextButton
+                <kr.co.soogong.master.ui.atomic.molecules.TitleEditTextButton
                     android:id="@+id/id"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

@@ -42,7 +42,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     />
 
-                <kr.co.soogong.master.ui.widget.TitleChipGroup
+                <kr.co.soogong.master.ui.atomic.molecules.TitleChipGroup
                     android:id="@+id/travel_cost_chip_group"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -56,7 +56,7 @@
                     app:subTitleVisible="@{true}"
                     app:titleVisible="@{false}" />
 
-                <kr.co.soogong.master.ui.widget.TitleChipGroup
+                <kr.co.soogong.master.ui.atomic.molecules.TitleChipGroup
                     android:id="@+id/crane_usage_chip_group"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -70,7 +70,7 @@
                     app:subTitleVisible="@{true}"
                     app:titleVisible="@{false}" />
 
-                <kr.co.soogong.master.ui.widget.TitleChipGroup
+                <kr.co.soogong.master.ui.atomic.molecules.TitleChipGroup
                     android:id="@+id/package_cost_chip_group"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -84,7 +84,7 @@
                     app:subTitleVisible="@{true}"
                     app:titleVisible="@{false}" />
 
-                <kr.co.soogong.master.ui.widget.TitleEditTextCounter
+                <kr.co.soogong.master.ui.atomic.molecules.TitleEditTextCounter
                     android:id="@+id/other_cost_info"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

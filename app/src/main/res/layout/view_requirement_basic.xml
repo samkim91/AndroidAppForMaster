@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="data"
+            type="kr.co.soogong.master.data.dto.requirement.RequirementDto" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_view_created_at"
+            style="@style/foot_note.bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="2021. 11. 3 요청" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_view_requirement_token"
+            style="@style/caption_2.bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="middle"
+            android:maxLines="1"
+            android:textColor="@color/grey_1"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintBottom_toBottomOf="@id/text_view_created_at"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1"
+            app:layout_constraintStart_toEndOf="@id/text_view_created_at"
+            app:layout_constraintTop_toTopOf="@id/text_view_created_at"
+            tools:text="문의번호 20211103241231" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_view_address"
+            style="@style/sub_headline.bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_28"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="@{data.oldAddress}"
+            android:textColor="@color/black"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintEnd_toStartOf="@id/button_call_to_customer"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_view_created_at"
+            tools:text="서울특별시 관악구 봉천동 70 서울특별시 관악구 봉천동 70 서울특별시 관악구 봉천동 70" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_view_project"
+            style="@style/foot_note.regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_4"
+            android:text="@{data.projectName}"
+            android:textColor="@color/grey_3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_view_address"
+            tools:text="실내 누수탐지" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_call_to_customer"
+            style="@style/caption_1.bold"
+            android:layout_width="@dimen/gap_80"
+            android:layout_height="@dimen/gap_32"
+            android:background="@drawable/background_white_solid_light_grey1_stroke_radius8"
+            android:stateListAnimator="@null"
+            android:text="@string/requirement_basic_call_to_customer"
+            android:textColor="@color/dark_grey_1"
+            app:layout_constraintBottom_toBottomOf="@id/text_view_address"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/text_view_address" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/image_view_line"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="@dimen/gap_1"
+            android:layout_marginTop="@dimen/gap_24"
+            android:background="@drawable/thin_divider"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_view_project" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

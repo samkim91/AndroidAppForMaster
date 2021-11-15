@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:fillViewport="true">
 
-            <kr.co.soogong.master.ui.widget.LargeTitleSubtitle
+            <kr.co.soogong.master.ui.atomic.molecules.LargeTitleSubtitle
                 android:id="@+id/title_widget"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -34,7 +34,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:title="@{@string/sign_up_repair_in_person_title}" />
 
-            <kr.co.soogong.master.ui.widget.TextCheckBox
+            <kr.co.soogong.master.ui.atomic.molecules.TextCheckBox
                 android:id="@+id/repair_in_person_checkbox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -47,7 +47,7 @@
                 app:layout_constraintTop_toBottomOf="@id/title_widget"
                 app:text="@{@string/sign_up_repair_in_person_checkbox}" />
 
-            <kr.co.soogong.master.ui.widget.AlertBox
+            <kr.co.soogong.master.ui.atomic.molecules.AlertBox
                 android:id="@+id/alert_box"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

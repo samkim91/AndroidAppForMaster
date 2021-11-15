@@ -90,10 +90,7 @@ sealed class RequirementStatus {
             return when (requirement?.status) {
                 // 진행 전
                 Requested.code -> {
-                    when {
-                        requirement.estimationDto?.requestConsultingYn != true -> Requested
-                        else -> RequestConsult
-                    }
+                    if (requirement.estimationDto?.requestConsultingYn == true) RequestConsult else Requested
                 }
                 RequestMeasure.code -> RequestMeasure
                 Measuring.code -> Measuring
@@ -151,25 +148,6 @@ sealed class RequirementStatus {
             Measuring,
             Measured,
             Repairing,
-            Done,
-            Closed,
-            Canceled,
-        )
-
-        val receivedStatus = listOf(
-            Requested,
-            RequestConsult,
-            RequestMeasure,
-            Estimated,
-        )
-
-        val progressStatus = listOf(
-            Measuring,
-            Measured,
-            Repairing,
-        )
-
-        val doneStatus = listOf(
             Done,
             Closed,
             Canceled,

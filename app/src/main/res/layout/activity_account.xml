@@ -18,7 +18,7 @@
             android:id="@+id/action_bar"
             layout="@layout/action_bar" />
 
-        <kr.co.soogong.master.ui.widget.SettingsButton
+        <kr.co.soogong.master.ui.atomic.molecules.SettingsButton
             android:id="@+id/button_withdrawal"
             android:layout_width="match_parent"
             android:layout_height="@dimen/account_page_setting_button_height"

@@ -12,14 +12,14 @@ import kr.co.soogong.master.R
 import kr.co.soogong.master.data.dto.AttachmentDto
 import kr.co.soogong.master.data.model.requirement.estimation.EstimationTypeCode
 import kr.co.soogong.master.databinding.ActivityWriteEstimationBinding
+import kr.co.soogong.master.ui.atomic.molecules.IconLabelContainer
+import kr.co.soogong.master.ui.atomic.molecules.IconLabelContainer.Companion.PREVIOUS_ESTIMATION_TYPE
+import kr.co.soogong.master.ui.atomic.molecules.IconLabelContainer.Companion.REQUIREMENT_TYPE
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.ui.dialog.popup.CustomDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData.Companion.getCancelSendingEstimationDialogData
 import kr.co.soogong.master.ui.requirement.action.write.WriteEstimationViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.ui.requirement.action.write.WriteEstimationViewModel.Companion.SEND_ESTIMATION_SUCCESSFULLY
-import kr.co.soogong.master.ui.widget.RequirementDrawerContainer
-import kr.co.soogong.master.ui.widget.RequirementDrawerContainer.Companion.PREVIOUS_ESTIMATION_TYPE
-import kr.co.soogong.master.ui.widget.RequirementDrawerContainer.Companion.REQUIREMENT_TYPE
 import kr.co.soogong.master.uihelper.requirment.action.EstimationTemplatesActivityHelper
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.FileHelper
@@ -210,22 +210,18 @@ class WriteEstimationActivity : BaseActivity<ActivityWriteEstimationBinding>(
         viewModel.requirement.observe(this, { requirement ->
             binding.flexibleContainer.removeAllViews()
             // view : 고객 요청 내용, 이전 실측 내용(있으면)
-            RequirementDrawerContainer.addDrawerContainer(
+            IconLabelContainer.addIconLabelContainer(
                 context = this,
                 container = binding.flexibleContainer,
                 requirementDto = requirement,
                 contentType = REQUIREMENT_TYPE,
-                isSpread = false,
-                includingCancel = false
             )
             requirement.measurement?.let {
-                RequirementDrawerContainer.addDrawerContainer(
+                IconLabelContainer.addIconLabelContainer(
                     context = this,
                     container = binding.flexibleContainer,
                     requirementDto = requirement,
                     contentType = PREVIOUS_ESTIMATION_TYPE,
-                    isSpread = false,
-                    includingCancel = false
                 )
             }
         })

@@ -54,7 +54,7 @@
             app:layout_constraintBottom_toTopOf="@id/edittext_description"
             app:layout_constraintTop_toBottomOf="@id/close_button" />
 
-        <kr.co.soogong.master.ui.widget.TitleEditTextCounter
+        <kr.co.soogong.master.ui.atomic.molecules.TitleEditTextCounter
             android:id="@+id/edittext_description"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

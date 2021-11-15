@@ -30,7 +30,7 @@
                 android:paddingEnd="@dimen/gap_20"
                 android:paddingBottom="@dimen/gap_52">
 
-                <kr.co.soogong.master.ui.widget.TitleEditTextCounter
+                <kr.co.soogong.master.ui.atomic.molecules.TitleEditTextCounter
                     android:id="@+id/introduction"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
