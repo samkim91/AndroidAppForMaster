@@ -66,22 +66,20 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
                 app:dateWithoutDay="@{data.createdAt}"
-                app:layout_constraintBottom_toBottomOf="@id/text_view_status"
+                app:layout_constraintBottom_toBottomOf="@id/ft_status"
                 app:layout_constraintStart_toStartOf="@id/start_guideline"
-                app:layout_constraintTop_toTopOf="@id/text_view_status"
+                app:layout_constraintTop_toTopOf="@id/ft_status"
                 tools:text="2021. 11. 3" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/text_view_status"
-                style="@style/foot_note.bold"
+            <kr.co.soogong.master.ui.atomic.atoms.FilledText
+                android:id="@+id/ft_status"
                 android:layout_width="@dimen/gap_68"
                 android:layout_height="@dimen/gap_32"
-                android:background="@drawable/background_white_solid_radius4"
-                android:gravity="center"
-                android:text="@{data.status.inKorean}"
                 app:layout_constraintEnd_toEndOf="@id/end_guideline"
                 app:layout_constraintTop_toTopOf="@id/top_guideline"
-                tools:text="견적요청" />
+                app:content="@{data.status.inKorean}"
+
+                />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/text_view_address"
@@ -95,7 +93,7 @@
                 android:textColor="@color/black"
                 app:layout_constraintEnd_toEndOf="@id/end_guideline"
                 app:layout_constraintStart_toStartOf="@id/start_guideline"
-                app:layout_constraintTop_toBottomOf="@id/text_view_status"
+                app:layout_constraintTop_toBottomOf="@id/ft_status"
                 app:layout_constraintWidth_percent="0.93"
                 tools:text="부산광역시 강서구 녹산산단382로14번가길 10~29번지(송정동) 부산광역시 강서구 녹산산단382로14번가길 10~29번지(송정동)" />
 

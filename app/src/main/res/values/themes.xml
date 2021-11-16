@@ -4,9 +4,11 @@
         <!-- Customize your theme here. -->
         <item name="colorAccent">@color/c_69A9F1</item>
         <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
-        <item name="android:windowBackground">@color/c_FFFFFF</item>
-        <item name="colorPrimary">@color/c_1FC472</item>
-        <item name="colorPrimaryDark">@color/c_1FC472</item>
+        <item name="android:windowBackground">@color/white</item>
+        <item name="colorPrimary">@color/brand_green</item>
+        <item name="colorSecondary">@color/brand_blue</item>
+        <item name="colorError">@color/brand_red</item>
+        <item name="colorPrimaryDark">@color/brand_green</item>
     </style>
 
     <!-- Splash theme. -->
@@ -349,10 +351,13 @@
 <!--        <item name="android:textColor">@color/text_basic_color</item>-->
 <!--    </style>-->
 
-    <style name="SignUpTabText" parent="Widget.MaterialComponents.TabLayout">
-        <item name="android:textSize">@dimen/text_size_14sp</item>
-        <item name="android:fontFamily">@font/medium</item>
-        <item name="android:textColor">@color/c_BDBDBD</item>
+
+    <style name="MaterialSmallComponentRadius6" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="cornerSize">@dimen/gap_6</item>
+    </style>
+
+    <style name="MaterialSmallComponentRadius8" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerSize">@dimen/gap_8</item>
     </style>
 
     <style name="ChipChoiceGreyRectangular" parent="Widget.MaterialComponents.Chip.Choice">
