@@ -120,6 +120,21 @@ class RequirementFragment : BaseFragment<FragmentRequirementBinding>(
         // 필수 정보를 입력하라는 bottom view 를 보여줄지 결정
         viewModel.requestMasterSimpleInfo()
         viewModel.getCustomerRequests()
+        checkShowNoticeForCalling()
+    }
+
+    private fun checkShowNoticeForCalling() {
+        if (viewModel.getShowNoticeForCalling())
+            CustomDialog.newInstance(DialogData.getNoticeForCallingToCustomer(requireContext()))
+                .let {
+                    it.setButtonsClickListener(
+                        onPositive = { },
+                        onNegative = {
+                            viewModel.saveShowNoticeForCalling()
+                        }
+                    )
+                    it.show(parentFragmentManager, it.tag)
+                }
     }
 
     override fun setReceivedBadge(badgeCount: Int) {

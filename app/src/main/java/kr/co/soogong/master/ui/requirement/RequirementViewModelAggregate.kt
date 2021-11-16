@@ -1,5 +1,7 @@
 package kr.co.soogong.master.ui.requirement
 
+import kr.co.soogong.master.domain.usecase.common.GetNoticeForCallingFromSharedUseCase
+import kr.co.soogong.master.domain.usecase.common.SaveNoticeForCallingInSharedUseCase
 import kr.co.soogong.master.domain.usecase.profile.GetMasterSimpleInfoUseCase
 import kr.co.soogong.master.domain.usecase.profile.UpdateDirectRepairYnUseCase
 import kr.co.soogong.master.domain.usecase.profile.UpdateRequestMeasureYnUseCase
@@ -15,4 +17,6 @@ class RequirementViewModelAggregate @Inject constructor(
     val updateDirectRepairYnUseCase: UpdateDirectRepairYnUseCase,
     val searchRequirementCardsUseCase: SearchRequirementCardsUseCase,
     val getCustomerRequestsUseCase: GetCustomerRequestsUseCase,
+    val saveNoticeForCallingInSharedUseCase: SaveNoticeForCallingInSharedUseCase,
+    val getNoticeForCallingFromSharedUseCase: GetNoticeForCallingFromSharedUseCase,
 ) {}
