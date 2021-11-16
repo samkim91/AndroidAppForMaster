@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.isVisible
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ViewRequirementBasicBinding
 import kr.co.soogong.master.utility.extension.formatDateWithoutDay
@@ -57,6 +58,14 @@ class RequirementBasic @JvmOverloads constructor(
             field = value
             value?.let {
                 binding.buttonCallToCustomer.setOnClickListener(value)
+            }
+        }
+
+    var buttonCallToCustomerVisibility: Boolean = true
+        set(value) {
+            field = value
+            value.let {
+                binding.buttonCallToCustomer.isVisible = value
             }
         }
 }

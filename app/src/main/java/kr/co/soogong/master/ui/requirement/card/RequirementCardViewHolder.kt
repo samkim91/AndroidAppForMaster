@@ -9,7 +9,6 @@ import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.chip.Chip
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.model.profile.CompareCodeTable
 import kr.co.soogong.master.data.model.profile.NotApprovedCodeTable
 import kr.co.soogong.master.data.model.profile.RequestApproveCodeTable
 import kr.co.soogong.master.data.model.requirement.RequirementCard
@@ -23,9 +22,6 @@ import kr.co.soogong.master.uihelper.requirment.CallToCustomerHelper
 import kr.co.soogong.master.uihelper.requirment.action.EndRepairActivityHelper
 import kr.co.soogong.master.uihelper.requirment.action.MeasureActivityHelper
 import kr.co.soogong.master.uihelper.requirment.action.ViewRequirementActivityHelper
-import kr.co.soogong.master.utility.extension.dp
-
-// TODO: 2021/11/11 각 상태별로 나타내야하는 버튼이 정의되면 다시 작업 필요 !!!
 
 // Requirement Card viewHolder 들의 부모클래스
 open class RequirementCardViewHolder(
@@ -74,6 +70,7 @@ open class RequirementCardViewHolder(
         with(binding.chipGroupQna) {
             this.removeAllViews()       // 데이터 바인딩 과정 중에 생긴 중복칩 삭제
             requirementCard.requirementQnas?.let { qnaList ->
+                // 너무 많은 데이터를 보여주면 화면이 커지기 때문에, 6개만 추출
                 qnaList.take(6).map { qna ->
                     (LayoutInflater.from(context)
                         .inflate(R.layout.item_chip_choice_grey_rectangular, this, false) as Chip)
@@ -87,54 +84,41 @@ open class RequirementCardViewHolder(
         }
     }
 
-    fun setApprovedMasterOnly(
-        requirementCard: RequirementCard,
+    fun checkMasterApprovedStatus(
+        function: () -> Unit,
     ) {
-        with(binding) {
-            setRightButtonClickListener {
-                viewModel.masterSimpleInfo.value?.approvedStatus.let {
-                    when (it) {
-                        // 미승인 상태이면, 필수정보를 채우도록 이동
-                        NotApprovedCodeTable.code -> {
-                            CustomDialog.newInstance(
-                                DialogData.getAskingFillProfileDialogData(context),
-                            ).let { dialog ->
-                                dialog.setButtonsClickListener(
-                                    onPositive = {
-                                        context.startActivity(
-                                            EditRequiredInformationActivityHelper.getIntent(
-                                                context
-                                            )
-                                        )
-                                    },
-                                    onNegative = { }
+        viewModel.masterSimpleInfo.value?.approvedStatus.let {
+            when (it) {
+                // 미승인 상태이면, 필수정보를 채우도록 이동
+                NotApprovedCodeTable.code ->
+                    CustomDialog.newInstance(
+                        DialogData.getAskingFillProfileDialogData(context),
+                    ).let { dialog ->
+                        dialog.setButtonsClickListener(
+                            onPositive = {
+                                context.startActivity(
+                                    EditRequiredInformationActivityHelper.getIntent(
+                                        context
+                                    )
                                 )
-                                dialog.show(fragmentManager, dialog.tag)
-                            }
-                        }
-                        // 승인요청 상태이면, 승인될 때까지 기다리라는 문구
-                        RequestApproveCodeTable.code -> {
-                            CustomDialog.newInstance(
-                                DialogData.getWaitingUntilApprovalDialogData(context)
-                            ).let { dialog ->
-                                dialog.setButtonsClickListener(
-                                    onPositive = { },
-                                    onNegative = { }
-                                )
-                                dialog.show(fragmentManager, dialog.tag)
-                            }
-                        }
-                        // 승인 상태이면, 문의 세부정보로 이동
-                        else -> {
-                            context.startActivity(
-                                ViewRequirementActivityHelper.getIntent(
-                                    context,
-                                    requirementCard.id,
-                                )
-                            )
-                        }
+                            },
+                            onNegative = { }
+                        )
+                        dialog.show(fragmentManager, dialog.tag)
                     }
-                }
+                // 승인요청 상태이면, 승인될 때까지 기다리라는 문구
+                RequestApproveCodeTable.code ->
+                    CustomDialog.newInstance(
+                        DialogData.getWaitingUntilApprovalDialogData(context)
+                    ).let { dialog ->
+                        dialog.setButtonsClickListener(
+                            onPositive = { },
+                            onNegative = { }
+                        )
+                        dialog.show(fragmentManager, dialog.tag)
+                    }
+                // 승인 상태이면, 함수 실행
+                else -> function()
             }
         }
     }
@@ -144,55 +128,42 @@ open class RequirementCardViewHolder(
     ) {
         with(binding) {
             buttonLeft.isVisible = true
-            buttonLeft.setText(R.string.call_to_customer_text)
-
-            if (requirementCard.estimationDto?.fromMasterCallCnt!! > 0) {
-                buttonLeft.setText(R.string.recall_to_customer_text)
-                buttonLeft.setTextColor(context.resources.getColor(R.color.c_555555, null))
-                buttonLeft.setBackgroundResource(R.drawable.shape_white_background_darkgray_border_radius8)
-            }
+            buttonLeft.setText(R.string.call_to_customer)
 
             setLeftButtonClickListener {
-                CustomDialog.newInstance(
-                    DialogData.getCallToCustomerDialogData(context)
-                ).let {
-                    it.setButtonsClickListener(
-                        onPositive = {
-                            viewModel.callToClient(requirementId = requirementCard.id)
-                            context.startActivity(CallToCustomerHelper.getIntent(
-                                if (requirementCard.safetyNumber.isNullOrEmpty()) requirementCard.tel else requirementCard.safetyNumber))
-                        },
-                        onNegative = { }
-                    )
-                    it.show(fragmentManager, it.tag)
+                checkMasterApprovedStatus {
+                    CustomDialog.newInstance(
+                        DialogData.getCallToCustomerDialogData(context)
+                    ).let {
+                        it.setButtonsClickListener(
+                            onPositive = {
+                                viewModel.callToClient(requirementId = requirementCard.id)
+                                context.startActivity(CallToCustomerHelper.getIntent(
+                                    if (requirementCard.safetyNumber.isNullOrEmpty()) requirementCard.tel else requirementCard.safetyNumber))
+                            },
+                            onNegative = { }
+                        )
+                        it.show(fragmentManager, it.tag)
+                    }
                 }
             }
         }
     }
 
-    fun setRepairDoneButtonConfirming(
+    fun setSendMeasureButton(
         requirementCard: RequirementCard,
     ) {
         with(binding) {
-            buttonRight.isVisible = true
-            buttonRight.setText(R.string.repair_done_text)
+            buttonLeft.isVisible = true
+            buttonLeft.setText(R.string.send_measure)
             setRightButtonClickListener {
-                CustomDialog.newInstance(
-                    dialogData = DialogData.getConfirmRepairDoneDialogData(context)
-                ).let {
-                    it.setButtonsClickListener(
-                        onPositive = {
-                            context.startActivity(
-                                EndRepairActivityHelper.getIntent(
-                                    context,
-                                    requirementCard.id
-                                )
-                            )
-                        },
-                        onNegative = {}
+                checkMasterApprovedStatus {
+                    context.startActivity(
+                        MeasureActivityHelper.getIntent(
+                            context,
+                            requirementCard.id
+                        )
                     )
-
-                    it.show(fragmentManager, it.tag)
                 }
             }
         }
@@ -202,9 +173,9 @@ open class RequirementCardViewHolder(
         requirementCard: RequirementCard,
     ) {
         with(binding) {
-            buttonRight.isVisible = true
-            buttonRight.setText(R.string.repair_done_text)
-            setRightButtonClickListener {
+            buttonLeft.isVisible = true
+            buttonLeft.setText(R.string.repair_done_text)
+            setLeftButtonClickListener {
                 context.startActivity(
                     EndRepairActivityHelper.getIntent(
                         context,
@@ -215,48 +186,14 @@ open class RequirementCardViewHolder(
         }
     }
 
-    fun setWriteEstimationButton(
-        requirementCard: RequirementCard,
-    ) {
-        with(binding) {
-            buttonRight.isVisible = true
-            buttonRight.setText(R.string.send_estimation)
-            setRightButtonClickListener {
-                context.startActivity(
-                    if (requirementCard.typeCode == CompareCodeTable.code) {
-                        EndRepairActivityHelper.getIntent(context, requirementCard.id)
-                    } else {
-                        if (requirementCard.status is RequirementStatus.Measuring) {
-                            MeasureActivityHelper.getIntent(
-                                context,
-                                requirementCard.id
-                            )
-                        } else {
-                            EndRepairActivityHelper.getIntent(
-                                context,
-                                requirementCard.id
-                            )
-                        }
-                    }
-                )
-            }
-        }
-    }
-
     fun setRequestReviewButton(
         requirementCard: RequirementCard,
     ) {
         with(binding) {
-            buttonRight.isVisible = true
-            buttonRight.isEnabled = true
-            buttonRight.setText(R.string.requirements_card_review_button)
-            setRightButtonClickListener { viewModel.askForReview(requirementCard) }
-
-            requirementCard.estimationDto?.repair?.requestReviewYn?.let { requestReviewYn ->
-                if (requestReviewYn) {
-                    buttonRight.setText(R.string.ask_for_review_successful)
-                    buttonRight.isEnabled = false
-                }
+            if (requirementCard.estimationDto?.repair?.requestReviewYn != true) {
+                buttonLeft.isVisible = true
+                buttonLeft.setText(R.string.request_review)
+                setLeftButtonClickListener { viewModel.askForReview(requirementCard) }
             }
         }
     }

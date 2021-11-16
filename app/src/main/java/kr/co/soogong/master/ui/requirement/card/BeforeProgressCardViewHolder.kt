@@ -8,7 +8,7 @@ import kr.co.soogong.master.ui.requirement.RequirementViewModel
 import kr.co.soogong.master.utility.extension.setEstimationDueTime
 import kr.co.soogong.master.utility.extension.setRequestMeasureDueTime
 
-// 문의탭의 viewHolders
+// 진행전 탭의 viewHolders (견적요청, 실측, 매칭대기)
 
 // 견적요청 상태
 class RequestedCardViewHolder(
@@ -22,11 +22,9 @@ class RequestedCardViewHolder(
     ) {
         super.bind(requirementCard)
 
-        with(binding) {
-            setApprovedMasterOnly(requirementCard)
-            setRequirementCardStatusTheme(THEME_BLUE)
-            textViewDueTime.setEstimationDueTime(requirementCard.createdAt)
-        }
+        setRequirementCardStatusTheme(THEME_BLUE)
+        setCallToClientButton(requirementCard)
+        binding.textViewDueTime.setEstimationDueTime(requirementCard.createdAt)
     }
 }
 
@@ -42,11 +40,43 @@ class RequestMeasureCardViewHolder(
     ) {
         super.bind(requirementCard)
 
-        with(binding) {
-            setApprovedMasterOnly(requirementCard)
-            setRequirementCardStatusTheme(THEME_BLUE)
-            textViewDueTime.setRequestMeasureDueTime(requirementCard.createdAt)
-        }
+        setRequirementCardStatusTheme(THEME_BLUE)
+        setCallToClientButton(requirementCard)
+        binding.textViewDueTime.setRequestMeasureDueTime(requirementCard.createdAt)
+    }
+}
+
+// 실측예정 상태
+class MeasuringCardViewHolder(
+    private val context: Context,
+    private val fragmentManager: FragmentManager,
+    private val viewModel: RequirementViewModel,
+    private val binding: ViewHolderRequirementCardBinding,
+) : RequirementCardViewHolder(context, fragmentManager, viewModel, binding) {
+    override fun bind(
+        requirementCard: RequirementCard,
+    ) {
+        super.bind(requirementCard)
+
+        setRequirementCardStatusTheme(THEME_BLUE)
+        setSendMeasureButton(requirementCard)
+    }
+}
+
+// 실측완료 상태
+class MeasuredCardViewHolder(
+    private val context: Context,
+    private val fragmentManager: FragmentManager,
+    private val viewModel: RequirementViewModel,
+    private val binding: ViewHolderRequirementCardBinding,
+) : RequirementCardViewHolder(context, fragmentManager, viewModel, binding) {
+    override fun bind(
+        requirementCard: RequirementCard,
+    ) {
+        super.bind(requirementCard)
+
+        setRequirementCardStatusTheme(THEME_GREY)
+        setCallToClientButton(requirementCard)
     }
 }
 
@@ -62,10 +92,7 @@ class RequestConsultCardViewHolder(
     ) {
         super.bind(requirementCard)
 
-        with(binding) {
-            setApprovedMasterOnly(requirementCard)
-            setRequirementCardStatusTheme(THEME_BLUE)
-        }
+        setRequirementCardStatusTheme(THEME_BLUE)
     }
 }
 
@@ -81,13 +108,7 @@ class EstimatedCardViewHolder(
     ) {
         super.bind(requirementCard)
 
-        with(binding) {
-            setApprovedMasterOnly(requirementCard)
-            setRequirementCardStatusTheme(THEME_GREY)
-
-//            if (!requirementCard.safetyNumber.isNullOrEmpty()) setCallToClientButton(requirementCard)
-//            setRepairDoneButtonConfirming(requirementCard)
-
-        }
+        setRequirementCardStatusTheme(THEME_GREY)
+        setCallToClientButton(requirementCard)
     }
 }

@@ -8,22 +8,6 @@ import kr.co.soogong.master.ui.requirement.RequirementViewModel
 
 // 완료탭의 viewHolders
 
-// 시공완료 상태
-class DoneViewHolder(
-    private val context: Context,
-    private val fragmentManager: FragmentManager,
-    private val viewModel: RequirementViewModel,
-    private val binding: ViewHolderRequirementCardBinding,
-) : RequirementCardViewHolder(context, fragmentManager, viewModel, binding) {
-    override fun bind(
-        requirementCard: RequirementCard,
-    ) {
-        super.bind(requirementCard)
-
-        setRequirementCardStatusTheme(THEME_GREY)
-    }
-}
-
 // 평가완료 상태
 class ClosedViewHolder(
     private val context: Context,
@@ -52,9 +36,6 @@ class CanceledViewHolder(
     ) {
         super.bind(requirementCard)
 
-        with(binding) {
-
-        }
     }
 }
 

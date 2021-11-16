@@ -46,7 +46,6 @@ open class RequirementViewModel @Inject constructor(
             ).addToDisposable()
     }
 
-    // region : 문의현황 프래그먼트 로드 시 실행 함수
     fun requestMasterSimpleInfo() {
         Timber.tag(TAG).d("requestMasterSimpleInfo: ")
         requirementViewModelAggregate.getMasterSimpleInfoUseCase()
@@ -81,9 +80,7 @@ open class RequirementViewModel @Inject constructor(
                 }
             ).addToDisposable()
     }
-    // end region : 문의현황 프래그먼트 로드 시 실행 함수
 
-    // region : 문의, 진행탭에서 실행할 수 있는 함수
     fun callToClient(requirementId: Int) {
         Timber.tag(TAG).d("callToCustomer: $requirementId")
         requirements.value?.find { it.id == requirementId }?.estimationDto?.id?.let { estimationId ->
@@ -101,7 +98,6 @@ open class RequirementViewModel @Inject constructor(
                 ).addToDisposable()
         }
     }
-    // end region : 문의, 진행탭에서 실행할 수 있는 함수
 
     fun updateRequestMeasureYn(isChecked: Boolean) {
         Timber.tag(TAG)
@@ -142,7 +138,7 @@ open class RequirementViewModel @Inject constructor(
                 },
                 onError = {
                     Timber.tag(TAG).d("ASK_FOR_REVIEW_FAILED: $it")
-                    setAction(ASK_FOR_REVIEW_FAILED)
+                    setAction(REQUEST_FAILED)
                 }
             ).addToDisposable()
     }
@@ -151,6 +147,5 @@ open class RequirementViewModel @Inject constructor(
         private const val TAG = "RequirementViewModel"
         const val REQUEST_FAILED = "REQUEST_FAILED"
         const val ASK_FOR_REVIEW_SUCCESSFULLY = "ASK_FOR_REVIEW_SUCCESSFULLY"
-        const val ASK_FOR_REVIEW_FAILED = "ASK_FOR_REVIEW_FAILED"
     }
 }

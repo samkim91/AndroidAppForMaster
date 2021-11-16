@@ -148,7 +148,6 @@
     <!-- View Requirement -->
     <string name="view_requirement_action_title">받은 문의</string>
 
-    <string name="requirement_basic_call_to_customer">전화연결</string>
     <string name="requirement_basic_created_at">%s 요청</string>
     <string name="requirement_basic_requirement_token">문의번호 %s</string>
 
@@ -195,8 +194,7 @@
     <string name="repair_done_text">시공 완료</string>
     <string name="cancel_repair">시공 취소</string>
 
-    <string name="call_to_customer_text">고객에게 전화하기</string>
-    <string name="recall_to_customer_text">다시 전화하기</string>
+    <string name="call_to_customer">전화연결</string>
 
     <!-- Requirement Intro -->
     <string name="requirement_intro_title_of_requested">견적요청이 왔습니다.</string>

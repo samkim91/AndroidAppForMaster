@@ -141,6 +141,7 @@ fun setFlexibleContainer(
                         contentType = PREVIOUS_ESTIMATION_TYPE,
                     )
                 }
+                binding.requirementBasic.buttonCallToCustomerVisibility = false
             }
 
             is RequirementStatus.Closed -> {
@@ -171,6 +172,7 @@ fun setFlexibleContainer(
                         contentType = PREVIOUS_ESTIMATION_TYPE,
                     )
                 }
+                binding.requirementBasic.buttonCallToCustomerVisibility = false
             }
 
             is RequirementStatus.Canceled -> {
@@ -195,6 +197,7 @@ fun setFlexibleContainer(
                         contentType = PREVIOUS_ESTIMATION_TYPE,
                     )
                 }
+                binding.requirementBasic.buttonCallToCustomerVisibility = false
             }
         }
     }

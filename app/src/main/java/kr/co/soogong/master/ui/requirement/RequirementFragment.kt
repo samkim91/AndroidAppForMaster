@@ -11,6 +11,7 @@ import kr.co.soogong.master.databinding.FragmentRequirementBinding
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.dialog.popup.CustomDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData
+import kr.co.soogong.master.ui.requirement.RequirementViewModel.Companion.ASK_FOR_REVIEW_SUCCESSFULLY
 import kr.co.soogong.master.ui.requirement.RequirementViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.ui.requirement.list.RequirementListPagerAdapter
 import kr.co.soogong.master.ui.requirement.list.TAB_TEXTS_REQUIREMENTS_BEFORE_PROGRESS
@@ -99,6 +100,7 @@ class RequirementFragment : BaseFragment<FragmentRequirementBinding>(
         viewModel.action.observe(viewLifecycleOwner, EventObserver { action ->
             when (action) {
                 REQUEST_FAILED -> requireContext().toast(getString(R.string.error_message_of_request_failed))
+                ASK_FOR_REVIEW_SUCCESSFULLY -> requireContext().toast(getString(R.string.requirements_card_review_button_done))
             }
         })
 

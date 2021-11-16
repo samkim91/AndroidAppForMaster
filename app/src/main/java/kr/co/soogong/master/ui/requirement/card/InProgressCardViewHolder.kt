@@ -8,41 +8,6 @@ import kr.co.soogong.master.ui.requirement.RequirementViewModel
 
 // 진행중탭의 viewHolders
 
-// 실측예정 상태
-class MeasuringCardViewHolder(
-    private val context: Context,
-    private val fragmentManager: FragmentManager,
-    private val viewModel: RequirementViewModel,
-    private val binding: ViewHolderRequirementCardBinding,
-) : RequirementCardViewHolder(context, fragmentManager, viewModel, binding) {
-    override fun bind(
-        requirementCard: RequirementCard,
-    ) {
-        super.bind(requirementCard)
-
-        setRequirementCardStatusTheme(THEME_BLUE)
-
-    }
-}
-
-// 실측완료 상태
-class MeasuredCardViewHolder(
-    private val context: Context,
-    private val fragmentManager: FragmentManager,
-    private val viewModel: RequirementViewModel,
-    private val binding: ViewHolderRequirementCardBinding,
-) : RequirementCardViewHolder(context, fragmentManager, viewModel, binding) {
-    override fun bind(
-        requirementCard: RequirementCard,
-    ) {
-        super.bind(requirementCard)
-
-
-        setRequirementCardStatusTheme(THEME_GREY)
-
-    }
-}
-
 // 시공예정 상태
 class RepairingCardViewHolder(
     private val context: Context,
@@ -56,5 +21,23 @@ class RepairingCardViewHolder(
         super.bind(requirementCard)
 
         setRequirementCardStatusTheme(THEME_BLUE)
+        setRepairDoneButton(requirementCard)
+    }
+}
+
+// 시공완료 상태
+class DoneViewHolder(
+    private val context: Context,
+    private val fragmentManager: FragmentManager,
+    private val viewModel: RequirementViewModel,
+    private val binding: ViewHolderRequirementCardBinding,
+) : RequirementCardViewHolder(context, fragmentManager, viewModel, binding) {
+    override fun bind(
+        requirementCard: RequirementCard,
+    ) {
+        super.bind(requirementCard)
+
+        setRequirementCardStatusTheme(THEME_GREY)
+        setRequestReviewButton(requirementCard)
     }
 }

@@ -77,7 +77,7 @@
             android:layout_height="@dimen/gap_32"
             android:background="@drawable/background_white_solid_light_grey1_stroke_radius8"
             android:stateListAnimator="@null"
-            android:text="@string/requirement_basic_call_to_customer"
+            android:text="@string/call_to_customer"
             android:textColor="@color/dark_grey_1"
             app:layout_constraintBottom_toBottomOf="@id/text_view_address"
             app:layout_constraintEnd_toEndOf="parent"
