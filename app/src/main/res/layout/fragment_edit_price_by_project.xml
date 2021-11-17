@@ -30,7 +30,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <kr.co.soogong.master.ui.atomic.molecules.TitleEditText
+                <kr.co.soogong.master.atomic.molecules.TitleEditText
                     android:id="@+id/project_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -45,7 +45,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:title='@{"시공 종류"}' />
 
-                <kr.co.soogong.master.ui.atomic.molecules.TitleEditText
+                <kr.co.soogong.master.atomic.molecules.TitleEditText
                     android:id="@+id/project_price"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -61,7 +61,7 @@
                     app:setInputType="@{inputType.TYPE_CLASS_NUMBER}"
                     app:title='@{"가격"}' />
 
-                <kr.co.soogong.master.ui.atomic.molecules.TitleEditTextCounter
+                <kr.co.soogong.master.atomic.molecules.TitleEditTextCounter
                     android:id="@+id/job_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

@@ -29,7 +29,7 @@
                 android:paddingEnd="@dimen/gap_20"
                 android:paddingBottom="@dimen/gap_52">
 
-                <kr.co.soogong.master.ui.atomic.molecules.TitleChipGroup
+                <kr.co.soogong.master.atomic.molecules.TitleChipGroup
                     android:id="@+id/other_options_chip_group"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

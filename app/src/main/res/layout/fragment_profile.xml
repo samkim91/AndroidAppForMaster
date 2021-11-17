@@ -64,7 +64,7 @@
                 app:subscriptionPlan="@{vm.profile.subscriptionPlan}"
                 tools:text="개런티 마스터" />
 
-            <kr.co.soogong.master.ui.atomic.organisms.ReviewBox
+            <kr.co.soogong.master.atomic.organisms.ReviewBox
                 android:id="@+id/review_box"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
@@ -123,7 +123,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/banner_image" />
 
-            <kr.co.soogong.master.ui.atomic.molecules.SettingsButton
+            <kr.co.soogong.master.atomic.molecules.SettingsButton
                 android:id="@+id/edit_required_info"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -164,7 +164,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <!-- 무료 방문 실측 여부 -->
-                <kr.co.soogong.master.ui.atomic.molecules.ProfileChipGroupCard
+                <kr.co.soogong.master.atomic.molecules.ProfileChipGroupCard
                     android:id="@+id/free_measure"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -182,7 +182,7 @@
                     app:title="@{@string/profile_card_title_for_free_measure}" />
 
                 <!-- 포트폴리오 -->
-                <kr.co.soogong.master.ui.atomic.molecules.ProfileDefaultCard
+                <kr.co.soogong.master.atomic.molecules.ProfileDefaultCard
                     android:id="@+id/portfolio"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -200,7 +200,7 @@
                     app:title="@{@string/profile_card_title_for_portfolio}" />
 
                 <!-- 시공 종류별 가격 -->
-                <kr.co.soogong.master.ui.atomic.molecules.ProfileDefaultCard
+                <kr.co.soogong.master.atomic.molecules.ProfileDefaultCard
                     android:id="@+id/price_by_project"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -218,7 +218,7 @@
                     app:title="@{@string/profile_card_title_for_price_by_project}" />
 
                 <!-- 프로필 사진 -->
-                <kr.co.soogong.master.ui.atomic.molecules.ProfileImageCard
+                <kr.co.soogong.master.atomic.molecules.ProfileImageCard
                     android:id="@+id/profile_image"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -237,7 +237,7 @@
                     app:title="@{@string/profile_card_title_for_profile_image}" />
 
                 <!-- 현장 가격 변동 요인 -->
-                <kr.co.soogong.master.ui.atomic.molecules.ProfileChipGroupCard
+                <kr.co.soogong.master.atomic.molecules.ProfileChipGroupCard
                     android:id="@+id/flexible_cost"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -256,7 +256,7 @@
                     app:title="@{@string/profile_card_title_for_flexible_cost}" />
 
                 <!-- 기타 변동 가능사항 -->
-                <kr.co.soogong.master.ui.atomic.molecules.ProfileChipGroupCard
+                <kr.co.soogong.master.atomic.molecules.ProfileChipGroupCard
                     android:id="@+id/other_flexible_option"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -273,7 +273,7 @@
                     app:title="@{@string/profile_card_title_for_other_flexible_options}" />
 
                 <!-- 이메일 -->
-                <kr.co.soogong.master.ui.atomic.molecules.ProfileDefaultCard
+                <kr.co.soogong.master.atomic.molecules.ProfileDefaultCard
                     android:id="@+id/email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

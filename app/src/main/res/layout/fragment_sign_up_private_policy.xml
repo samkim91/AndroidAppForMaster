@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:fillViewport="true">
 
-            <kr.co.soogong.master.ui.atomic.molecules.LargeTitleSubtitle
+            <kr.co.soogong.master.atomic.molecules.LargeTitleSubtitle
                 android:id="@+id/title_widget"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -33,7 +33,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:title='@{"수공 마스터 앱 서비스 이용 약관에\n동의하고 수공과 함께해 주세요!"}' />
 
-            <kr.co.soogong.master.ui.atomic.molecules.TextCheckBox
+            <kr.co.soogong.master.atomic.molecules.TextCheckBox
                 android:id="@+id/agreed_all"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -58,7 +58,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/agreed_all" />
 
-            <kr.co.soogong.master.ui.atomic.molecules.TextCheckBox
+            <kr.co.soogong.master.atomic.molecules.TextCheckBox
                 android:id="@+id/agreed_privacy_policy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -70,7 +70,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/line" />
 
-            <kr.co.soogong.master.ui.atomic.molecules.TextCheckBox
+            <kr.co.soogong.master.atomic.molecules.TextCheckBox
                 android:id="@+id/agreed_marketing"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -31,7 +31,7 @@
                 android:paddingEnd="@dimen/gap_20"
                 android:paddingBottom="@dimen/gap_52">
 
-                <kr.co.soogong.master.ui.atomic.molecules.TitleDropdown
+                <kr.co.soogong.master.atomic.molecules.TitleDropdown
                     android:id="@+id/warranty_period"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -43,7 +43,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:title='@{"A/S 기간 정보를 알려주세요."}' />
 
-                <kr.co.soogong.master.ui.atomic.molecules.TitleEditTextCounter
+                <kr.co.soogong.master.atomic.molecules.TitleEditTextCounter
                     android:id="@+id/warranty_description"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"

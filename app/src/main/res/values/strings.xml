@@ -148,7 +148,6 @@
     <!-- View Requirement -->
     <string name="view_requirement_action_title">받은 문의</string>
 
-    <string name="requirement_basic_created_at">%s 요청</string>
     <string name="requirement_basic_requirement_token">문의번호 %s</string>
 
     <string name="view_requirement_customer_request_label">📄 고객님 요청 내용</string>

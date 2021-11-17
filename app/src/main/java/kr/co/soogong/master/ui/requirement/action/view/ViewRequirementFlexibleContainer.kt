@@ -5,13 +5,13 @@ import kr.co.soogong.master.data.dto.requirement.RequirementDto
 import kr.co.soogong.master.data.model.requirement.RequirementStatus
 import kr.co.soogong.master.data.model.requirement.estimation.EstimationResponseCode
 import kr.co.soogong.master.databinding.ActivityViewRequirementBinding
-import kr.co.soogong.master.ui.atomic.molecules.IconLabelContainer
-import kr.co.soogong.master.ui.atomic.molecules.IconLabelContainer.Companion.CANCEL_TYPE
-import kr.co.soogong.master.ui.atomic.molecules.IconLabelContainer.Companion.ESTIMATION_TYPE
-import kr.co.soogong.master.ui.atomic.molecules.IconLabelContainer.Companion.PREVIOUS_ESTIMATION_TYPE
-import kr.co.soogong.master.ui.atomic.molecules.IconLabelContainer.Companion.REPAIR_TYPE
-import kr.co.soogong.master.ui.atomic.molecules.IconLabelContainer.Companion.REQUIREMENT_TYPE
-import kr.co.soogong.master.ui.atomic.molecules.IconLabelContainer.Companion.REVIEW_TYPE
+import kr.co.soogong.master.atomic.molecules.IconLabelContainer
+import kr.co.soogong.master.atomic.molecules.IconLabelContainer.Companion.CANCEL_TYPE
+import kr.co.soogong.master.atomic.molecules.IconLabelContainer.Companion.ESTIMATION_TYPE
+import kr.co.soogong.master.atomic.molecules.IconLabelContainer.Companion.PREVIOUS_ESTIMATION_TYPE
+import kr.co.soogong.master.atomic.molecules.IconLabelContainer.Companion.REPAIR_TYPE
+import kr.co.soogong.master.atomic.molecules.IconLabelContainer.Companion.REQUIREMENT_TYPE
+import kr.co.soogong.master.atomic.molecules.IconLabelContainer.Companion.REVIEW_TYPE
 import timber.log.Timber
 
 // Note: 1차 리팩토링이고, 중복되는 함수들은 다시 빼내야함.
