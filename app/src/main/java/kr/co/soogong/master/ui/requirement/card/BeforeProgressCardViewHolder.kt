@@ -22,9 +22,8 @@ class RequestedCardViewHolder(
     ) {
         super.bind(requirementCard)
 
-        setRequirementCardStatusTheme(THEME_BLUE)
         setCallToClientButton(requirementCard)
-        binding.textViewDueTime.setEstimationDueTime(requirementCard.createdAt)
+        binding.tvDueTime.setEstimationDueTime(requirementCard.createdAt)
     }
 }
 
@@ -40,9 +39,8 @@ class RequestMeasureCardViewHolder(
     ) {
         super.bind(requirementCard)
 
-        setRequirementCardStatusTheme(THEME_BLUE)
         setCallToClientButton(requirementCard)
-        binding.textViewDueTime.setRequestMeasureDueTime(requirementCard.createdAt)
+        binding.tvDueTime.setRequestMeasureDueTime(requirementCard.createdAt)
     }
 }
 
@@ -58,7 +56,6 @@ class MeasuringCardViewHolder(
     ) {
         super.bind(requirementCard)
 
-        setRequirementCardStatusTheme(THEME_BLUE)
         setSendMeasureButton(requirementCard)
     }
 }
@@ -75,7 +72,6 @@ class MeasuredCardViewHolder(
     ) {
         super.bind(requirementCard)
 
-        setRequirementCardStatusTheme(THEME_GREY)
         setCallToClientButton(requirementCard)
     }
 }
@@ -92,7 +88,6 @@ class RequestConsultCardViewHolder(
     ) {
         super.bind(requirementCard)
 
-        setRequirementCardStatusTheme(THEME_BLUE)
     }
 }
 
@@ -108,7 +103,6 @@ class EstimatedCardViewHolder(
     ) {
         super.bind(requirementCard)
 
-        setRequirementCardStatusTheme(THEME_GREY)
         setCallToClientButton(requirementCard)
     }
 }
