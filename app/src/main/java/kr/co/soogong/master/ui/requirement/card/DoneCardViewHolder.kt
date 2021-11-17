@@ -20,7 +20,6 @@ class ClosedViewHolder(
     ) {
         super.bind(requirementCard)
 
-        setRequirementCardStatusTheme(THEME_GREY)
     }
 }
 

@@ -20,7 +20,6 @@ class RepairingCardViewHolder(
     ) {
         super.bind(requirementCard)
 
-        setRequirementCardStatusTheme(THEME_BLUE)
         setRepairDoneButton(requirementCard)
     }
 }
@@ -37,7 +36,6 @@ class DoneViewHolder(
     ) {
         super.bind(requirementCard)
 
-        setRequirementCardStatusTheme(THEME_GREY)
         setRequestReviewButton(requirementCard)
     }
 }

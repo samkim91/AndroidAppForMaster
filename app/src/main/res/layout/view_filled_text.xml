@@ -2,16 +2,22 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_content"
-        style="@style/foot_note.bold"
+    <merge
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/background_white_solid_radius4"
-        android:gravity="center"
-        android:paddingStart="@dimen/gap_10"
-        android:paddingTop="@dimen/gap_5"
-        android:paddingEnd="@dimen/gap_10"
-        android:paddingBottom="@dimen/gap_5"
-        tools:text="견적요청" />
+        tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_content"
+            style="@style/foot_note.bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_white_solid_radius4"
+            android:gravity="center"
+            android:paddingStart="@dimen/gap_10"
+            android:paddingTop="@dimen/gap_5"
+            android:paddingEnd="@dimen/gap_10"
+            android:paddingBottom="@dimen/gap_5"
+            tools:text="실측요청" />
+    </merge>
 </layout>

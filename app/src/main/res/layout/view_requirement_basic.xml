@@ -11,11 +11,12 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/text_view_requirement_token"
+            android:id="@+id/tv_requirement_token"
             style="@style/caption_2.bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -23,24 +24,34 @@
             android:maxLines="1"
             android:textColor="@color/grey_1"
             app:layout_constrainedWidth="true"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             tools:text="문의번호 20211103241231" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/text_view_created_at"
+            android:id="@+id/tv_created_at"
             style="@style/foot_note.bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:maxLines="1"
             android:layout_marginTop="@dimen/gap_2"
+            android:maxLines="1"
             android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_view_requirement_token"
+            app:layout_constraintTop_toBottomOf="@id/tv_requirement_token"
             tools:text="2021. 11. 3" />
 
+        <kr.co.soogong.master.ui.atomic.atoms.FilledText
+            android:id="@+id/ft_status"
+            android:layout_width="@dimen/gap_68"
+            android:layout_height="@dimen/gap_32"
+            app:content="@{data.status}"
+            app:layout_constraintBottom_toBottomOf="@id/tv_created_at"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_requirement_token"
+            app:setThemeFromRequirement="@{data}" />
+
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/text_view_address"
+            android:id="@+id/tv_address"
             style="@style/sub_headline.bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -49,15 +60,15 @@
             android:maxLines="2"
             android:text="@{data.oldAddress}"
             android:textColor="@color/black"
-            app:layout_constraintHorizontal_bias="0"
             app:layout_constrainedWidth="true"
             app:layout_constraintEnd_toStartOf="@id/button_call_to_customer"
+            app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_view_created_at"
+            app:layout_constraintTop_toBottomOf="@id/tv_created_at"
             tools:text="서울특별시 관악구 봉천동 70 서울특별시 관악구 봉천동 70 서울특별시 관악구 봉천동 70" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/text_view_project"
+            android:id="@+id/tv_project"
             style="@style/foot_note.regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -65,8 +76,24 @@
             android:text="@{data.projectName}"
             android:textColor="@color/grey_3"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_view_address"
+            app:layout_constraintTop_toBottomOf="@id/tv_address"
             tools:text="실내 누수탐지" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_due_time"
+            style="@style/caption_1.bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_4"
+            android:maxLines="1"
+            android:textColor="@color/grey_1"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_project"
+            tools:text="견적 마감까지 8시간 21분"
+            tools:visibility="visible" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button_call_to_customer"
@@ -77,9 +104,9 @@
             android:stateListAnimator="@null"
             android:text="@string/call_to_customer"
             android:textColor="@color/grey_2"
-            app:layout_constraintBottom_toBottomOf="@id/text_view_address"
+            app:layout_constraintBottom_toBottomOf="@id/tv_address"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/text_view_address" />
+            app:layout_constraintTop_toTopOf="@id/tv_address" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/image_view_line"
@@ -89,6 +116,6 @@
             android:background="@drawable/thin_divider"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_view_project" />
+            app:layout_constraintTop_toBottomOf="@id/tv_project" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

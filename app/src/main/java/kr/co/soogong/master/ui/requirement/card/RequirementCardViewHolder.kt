@@ -1,7 +1,6 @@
 package kr.co.soogong.master.ui.requirement.card
 
 import android.content.Context
-import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
@@ -35,7 +34,7 @@ open class RequirementCardViewHolder(
     ) {
         with(binding) {
             buttonLeft.isVisible = false
-            textViewDueTime.isVisible = false
+            tvDueTime.isVisible = false
 
             data = requirementCard
 
@@ -54,20 +53,8 @@ open class RequirementCardViewHolder(
         }
     }
 
-    fun setRequirementCardStatusTheme(theme: Int) {
-        with(binding.textViewStatus) {
-            if (theme == THEME_BLUE) {
-                backgroundTintList = ColorStateList.valueOf(context.getColor(R.color.c_1A227ED4))
-                setTextColor(context.getColor(R.color.brand_blue))
-            } else {
-                backgroundTintList = ColorStateList.valueOf(context.getColor(R.color.background))
-                setTextColor(context.getColor(R.color.dark_grey_1))
-            }
-        }
-    }
-
     private fun setQnaChipGroup(requirementCard: RequirementCard) {
-        with(binding.chipGroupQna) {
+        with(binding.cgQna) {
             this.removeAllViews()       // 데이터 바인딩 과정 중에 생긴 중복칩 삭제
             requirementCard.requirementQnas?.let { qnaList ->
                 // 너무 많은 데이터를 보여주면 화면이 커지기 때문에, 6개만 추출
