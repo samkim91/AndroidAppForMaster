@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import com.google.android.material.chip.Chip
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.model.profile.*
-import kr.co.soogong.master.ui.atomic.molecules.TitleChipGroup
+import kr.co.soogong.master.atomic.molecules.TitleChipGroup
 import kr.co.soogong.master.utility.extension.dp
 
 object OtherFlexibleOptionChipGroupHelper {

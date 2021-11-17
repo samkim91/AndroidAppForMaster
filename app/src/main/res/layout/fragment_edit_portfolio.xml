@@ -35,7 +35,7 @@
                 android:paddingEnd="@dimen/gap_20"
                 android:paddingBottom="@dimen/gap_52">
 
-                <kr.co.soogong.master.ui.atomic.molecules.TitleEditText
+                <kr.co.soogong.master.atomic.molecules.TitleEditText
                     android:id="@+id/job_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -162,7 +162,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/images_barrier" />
 
-                <kr.co.soogong.master.ui.atomic.molecules.TitleEditTextCounter
+                <kr.co.soogong.master.atomic.molecules.TitleEditTextCounter
                     android:id="@+id/job_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

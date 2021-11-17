@@ -71,7 +71,7 @@
                 app:barrierDirection="bottom"
                 app:constraint_referenced_ids="logo, text_view_for_switch, switch_compat" />
 
-            <kr.co.soogong.master.ui.atomic.molecules.LabelCountIcon
+            <kr.co.soogong.master.atomic.molecules.LabelCountIcon
                 android:id="@+id/summary_of_request"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -88,7 +88,7 @@
                 app:summary="@{0}"
                 app:title="@{@string/summary_label_for_request}" />
 
-            <kr.co.soogong.master.ui.atomic.molecules.LabelCountIcon
+            <kr.co.soogong.master.atomic.molecules.LabelCountIcon
                 android:id="@+id/summary_of_progress"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -105,7 +105,7 @@
                 app:summary="@{0}"
                 app:title="@{@string/summary_label_for_progress}" />
 
-            <kr.co.soogong.master.ui.atomic.molecules.LabelCountIcon
+            <kr.co.soogong.master.atomic.molecules.LabelCountIcon
                 android:id="@+id/summary_of_completion"
                 android:layout_width="0dp"
                 android:layout_height="0dp"

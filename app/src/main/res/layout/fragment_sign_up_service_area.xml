@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:fillViewport="true">
 
-            <kr.co.soogong.master.ui.atomic.molecules.LargeTitleSubtitle
+            <kr.co.soogong.master.atomic.molecules.LargeTitleSubtitle
                 android:id="@+id/title_widget"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -33,7 +33,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:title='@{"서비스 가능한 범위를 선택해주세요."}' />
 
-            <kr.co.soogong.master.ui.atomic.molecules.TitleDropdown
+            <kr.co.soogong.master.atomic.molecules.TitleDropdown
                 android:id="@+id/service_area"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

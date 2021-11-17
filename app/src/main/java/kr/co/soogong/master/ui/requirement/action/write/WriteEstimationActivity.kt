@@ -12,9 +12,9 @@ import kr.co.soogong.master.R
 import kr.co.soogong.master.data.dto.AttachmentDto
 import kr.co.soogong.master.data.model.requirement.estimation.EstimationTypeCode
 import kr.co.soogong.master.databinding.ActivityWriteEstimationBinding
-import kr.co.soogong.master.ui.atomic.molecules.IconLabelContainer
-import kr.co.soogong.master.ui.atomic.molecules.IconLabelContainer.Companion.PREVIOUS_ESTIMATION_TYPE
-import kr.co.soogong.master.ui.atomic.molecules.IconLabelContainer.Companion.REQUIREMENT_TYPE
+import kr.co.soogong.master.atomic.molecules.IconLabelContainer
+import kr.co.soogong.master.atomic.molecules.IconLabelContainer.Companion.PREVIOUS_ESTIMATION_TYPE
+import kr.co.soogong.master.atomic.molecules.IconLabelContainer.Companion.REQUIREMENT_TYPE
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.ui.dialog.popup.CustomDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData.Companion.getCancelSendingEstimationDialogData

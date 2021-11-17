@@ -37,6 +37,7 @@ open class RequirementCardViewHolder(
             tvDueTime.isVisible = false
 
             data = requirementCard
+            tvRequirementToken.text = context.getString(R.string.requirement_basic_requirement_token, requirementCard.token)
 
             setQnaChipGroup(requirementCard)
 
@@ -143,7 +144,7 @@ open class RequirementCardViewHolder(
         with(binding) {
             buttonLeft.isVisible = true
             buttonLeft.setText(R.string.send_measure)
-            setRightButtonClickListener {
+            setLeftButtonClickListener {
                 checkMasterApprovedStatus {
                     context.startActivity(
                         MeasureActivityHelper.getIntent(

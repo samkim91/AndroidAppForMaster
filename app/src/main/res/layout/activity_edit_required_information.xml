@@ -126,7 +126,7 @@
                     app:constraint_referenced_ids="icon_saw_check_for_confirmed_master, text_saw_check_for_confirmed_master" />
 
                 <!-- 업체 소개 INTRODUCTION -->
-                <kr.co.soogong.master.ui.atomic.molecules.ProfileDefaultCard
+                <kr.co.soogong.master.atomic.molecules.ProfileDefaultCard
                     android:id="@+id/introduction"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -144,7 +144,7 @@
                     app:title='@{"업체 소개"}' />
 
                 <!-- 대표 이미지 SHOP_IMAGES -->
-                <kr.co.soogong.master.ui.atomic.molecules.ProfileImageCard
+                <kr.co.soogong.master.atomic.molecules.ProfileImageCard
                     android:id="@+id/shop_images"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -164,7 +164,7 @@
                     app:title='@{"대표 이미지"}' />
 
                 <!-- 사업자 정보 BUSINESS_UNIT_INFORMATION -->
-                <kr.co.soogong.master.ui.atomic.molecules.ProfileImageCard
+                <kr.co.soogong.master.atomic.molecules.ProfileImageCard
                     android:id="@+id/business_unit_information"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -183,7 +183,7 @@
                     app:title='@{"사업자 정보"}' />
 
                 <!-- A/S 정보 WARRANTY_INFORMATION -->
-                <kr.co.soogong.master.ui.atomic.molecules.ProfileDefaultCard
+                <kr.co.soogong.master.atomic.molecules.ProfileDefaultCard
                     android:id="@+id/warranty_information"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -202,7 +202,7 @@
                     app:title='@{"A/S 정보"}' />
 
                 <!-- 경력 CAREER -->
-                <kr.co.soogong.master.ui.atomic.molecules.ProfileDefaultCard
+                <kr.co.soogong.master.atomic.molecules.ProfileDefaultCard
                     android:id="@+id/career"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -221,7 +221,7 @@
                     app:title='@{"경력"}' />
 
                 <!-- 연락처 PHONE_NUMBER -->
-                <kr.co.soogong.master.ui.atomic.molecules.ProfileDefaultCard
+                <kr.co.soogong.master.atomic.molecules.ProfileDefaultCard
                     android:id="@+id/phone_number"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -238,7 +238,7 @@
                     app:title='@{"휴대폰번호"}' />
 
                 <!-- 대표명 OWNER_NAME -->
-                <kr.co.soogong.master.ui.atomic.molecules.ProfileDefaultCard
+                <kr.co.soogong.master.atomic.molecules.ProfileDefaultCard
                     android:id="@+id/owner_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -255,7 +255,7 @@
                     app:title='@{"대표자명"}' />
 
                 <!-- 시공 업종 MAJOR -->
-                <kr.co.soogong.master.ui.atomic.molecules.ProfileChipGroupCard
+                <kr.co.soogong.master.atomic.molecules.ProfileChipGroupCard
                     android:id="@+id/major"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -272,7 +272,7 @@
                     app:title='@{"시공 업종"}' />
 
                 <!-- 업체 주소 ADDRESS -->
-                <kr.co.soogong.master.ui.atomic.molecules.ProfileDefaultCard
+                <kr.co.soogong.master.atomic.molecules.ProfileDefaultCard
                     android:id="@+id/address"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -291,7 +291,7 @@
                     app:title='@{"업체 주소"}' />
 
                 <!-- 서비스 가능 범위 SERVICE_AREA -->
-                <kr.co.soogong.master.ui.atomic.molecules.ProfileMapCard
+                <kr.co.soogong.master.atomic.molecules.ProfileMapCard
                     android:id="@+id/service_area"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:fillViewport="true">
 
-            <kr.co.soogong.master.ui.atomic.molecules.LargeTitleSubtitle
+            <kr.co.soogong.master.atomic.molecules.LargeTitleSubtitle
                 android:id="@+id/title_widget"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -39,7 +39,7 @@
                 app:subTitleVisible="@{true}"
                 app:title='@{"휴대폰번호를 입력해주세요."}' />
 
-            <kr.co.soogong.master.ui.atomic.molecules.TitleEditText
+            <kr.co.soogong.master.atomic.molecules.TitleEditText
                 android:id="@+id/phone_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

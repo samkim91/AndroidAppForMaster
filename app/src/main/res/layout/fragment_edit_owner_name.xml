@@ -30,7 +30,7 @@
                 android:paddingEnd="@dimen/gap_20"
                 android:paddingBottom="@dimen/gap_52">
 
-                <kr.co.soogong.master.ui.atomic.molecules.TitleEditText
+                <kr.co.soogong.master.atomic.molecules.TitleEditText
                     android:id="@+id/owner_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

@@ -36,7 +36,7 @@
                 android:orientation="vertical"
                 android:padding="@dimen/gap_16">
 
-                <kr.co.soogong.master.ui.atomic.organisms.RequirementBasic
+                <kr.co.soogong.master.atomic.organisms.RequirementBasic
                     android:id="@+id/requirement_basic"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -44,6 +44,7 @@
                     app:createdAt="@{vm.requirement.createdAt}"
                     app:onButtonClick="@{() -> vm.callToClient()}"
                     app:project="@{vm.requirement.projectName}"
+                    app:status="@{vm.requirement}"
                     app:requirementToken="@{vm.requirement.token}" />
 
                 <LinearLayout
