@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.res.ResourcesCompat
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.common.Theme
+import kr.co.soogong.master.data.common.ColorTheme
 import kr.co.soogong.master.databinding.ViewFilledLabelBinding
 
 class FilledLabel @JvmOverloads constructor(
@@ -24,26 +24,26 @@ class FilledLabel @JvmOverloads constructor(
             }
         }
 
-    var theme: Theme? = null
+    var colorTheme: ColorTheme? = null
         set(value) {
             field = value
             value?.let {
                 when (value) {
-                    is Theme.Blue -> {
+                    is ColorTheme.Blue -> {
                         binding.tvContent.backgroundTintList =
                             ResourcesCompat.getColorStateList(resources, R.color.c_1A227ED4, null)
                         binding.tvContent.setTextColor(ResourcesCompat.getColor(resources,
                             R.color.brand_blue,
                             null))
                     }
-                    is Theme.Grey -> {
+                    is ColorTheme.Grey -> {
                         binding.tvContent.backgroundTintList =
                             ResourcesCompat.getColorStateList(resources, R.color.background, null)
                         binding.tvContent.setTextColor(ResourcesCompat.getColor(resources,
                             R.color.grey_4,
                             null))
                     }
-                    is Theme.Red -> {
+                    is ColorTheme.Red -> {
                         binding.tvContent.backgroundTintList =
                             ResourcesCompat.getColorStateList(resources, R.color.brand_red, null)
                                 ?.withAlpha(10)
