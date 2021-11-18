@@ -6,7 +6,7 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/bt_button"
-            style="@style/call_out.bold"
+            style="@style/caption_1.bold"
             android:layout_width="match_parent"
             android:layout_height="@dimen/gap_36"
             android:gravity="center"
