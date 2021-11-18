@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ViewReviewBoxBinding
-import kr.co.soogong.master.utility.extension.formatDecimal
 
 class ReviewBox @JvmOverloads constructor(
     context: Context,
@@ -16,31 +15,29 @@ class ReviewBox @JvmOverloads constructor(
     private val binding =
         ViewReviewBoxBinding.inflate(LayoutInflater.from(context), this, true)
 
-    var reviewCount: Int? = 0
+    var recommendCount: Double? = null
         set(value) {
             field = value
-            with(binding.reviewCount) {
-                if (value == null || value == 0) {
-                    text = resources.getString(R.string.special_symbol_stroke)
-                    setTextColor(resources.getColor(R.color.c_C4C4C4, null))
-                    return
-                }
-                text = value.toString()
-                setTextColor(resources.getColor(R.color.c_1FC472, null))
+            value?.let {
+                binding.tvRecommendCount.text = it.toString()
             }
         }
 
-    var recommendCount: Double? = 0.0
+    var reviewCount: Int? = null
         set(value) {
             field = value
-            with(binding.recommendCount) {
-                if (value == null || value == 0.0) {
-                    text = resources.getString(R.string.special_symbol_stroke)
-                    setTextColor(resources.getColor(R.color.c_C4C4C4, null))
-                    return
-                }
-                text = value.formatDecimal()
-                setTextColor(resources.getColor(R.color.c_1FC472, null))
+            value?.let {
+                binding.tvReviewCount.text =
+                    if (it > 1000) resources.getString(R.string.over_one_thousand) else it.toString()
+            }
+        }
+
+    var completionCount: Int? = null
+        set(value) {
+            field = value
+            value?.let {
+                binding.tvCompletionCount.text =
+                    if (it > 1000) resources.getString(R.string.over_one_thousand) else it.toString()
             }
         }
 }

@@ -5,69 +5,88 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_background_solid_radius8"
+        android:paddingTop="@dimen/gap_17"
+        android:paddingBottom="@dimen/gap_17">
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/recommend_count_label"
-            style="@style/text_style_14sp.medium"
+            android:id="@+id/tv_recommend_count"
+            style="@style/headline.bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/gap_8"
-            android:text="@string/recommend_rate_label"
-            android:textColor="@color/text_basic_color"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/recommend_count"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/recommend_count"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/gap_32"
-            android:fontFamily="@font/bold"
-            android:textColor="@color/c_1FC472"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="@id/recommend_count_label"
-            app:layout_constraintEnd_toStartOf="@id/vertical_line"
-            app:layout_constraintTop_toTopOf="@id/recommend_count_label"
+            android:layout_marginBottom="@dimen/gap_4"
+            android:text="@string/special_symbol_stroke"
+            android:textColor="@color/brand_green"
+            app:layout_constraintBottom_toTopOf="@id/tv_recommend_count_label"
+            app:layout_constraintEnd_toEndOf="@id/tv_recommend_count_label"
+            app:layout_constraintStart_toStartOf="@id/tv_recommend_count_label"
             tools:text="4.6" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/review_count_label"
-            style="@style/text_style_14sp.medium"
+            android:id="@+id/tv_recommend_count_label"
+            style="@style/sub_headline.regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/gap_32"
-            android:text="@string/review_count_label"
-            android:textColor="@color/text_basic_color"
+            android:layout_marginStart="@dimen/gap_35"
+            android:text="@string/recommend_rate_label"
+            android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/vertical_line"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintEnd_toStartOf="@id/tv_review_count_label"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/review_count"
+            android:id="@+id/tv_review_count"
+            style="@style/headline.bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/bold"
-            android:textColor="@color/c_1FC472"
-            android:textSize="24sp"
-            android:layout_marginStart="@dimen/gap_8"
-            app:layout_constraintBottom_toBottomOf="@id/review_count_label"
-            app:layout_constraintStart_toEndOf="@id/review_count_label"
-            app:layout_constraintTop_toTopOf="@id/review_count_label"
-            tools:text="50,000" />
+            android:layout_marginBottom="@dimen/gap_4"
+            android:text="@string/special_symbol_stroke"
+            android:textColor="@color/brand_green"
+            app:layout_constraintBottom_toTopOf="@id/tv_review_count_label"
+            app:layout_constraintEnd_toEndOf="@id/tv_review_count_label"
+            app:layout_constraintStart_toStartOf="@id/tv_review_count_label"
+            tools:text="+999" />
 
-        <View
-            android:id="@+id/vertical_line"
-            android:layout_width="@dimen/gap_1"
-            android:layout_height="@dimen/gap_20"
-            android:layout_marginTop="@dimen/gap_28"
-            android:layout_marginBottom="@dimen/gap_28"
-            android:background="@color/c_BDBDBD"
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_review_count_label"
+            style="@style/sub_headline.regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/review_count_label"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/tv_completion_count_label"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toEndOf="@id/tv_recommend_count_label" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_completion_count"
+            style="@style/headline.bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/gap_4"
+            android:text="@string/special_symbol_stroke"
+            android:textColor="@color/brand_green"
+            app:layout_constraintBottom_toTopOf="@id/tv_completion_count_label"
+            app:layout_constraintEnd_toEndOf="@id/tv_completion_count_label"
+            app:layout_constraintStart_toStartOf="@id/tv_completion_count_label"
+            tools:text="+999" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_completion_count_label"
+            style="@style/sub_headline.regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/gap_35"
+            android:text="@string/completion_count_label"
+            android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toEndOf="@id/tv_review_count_label" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

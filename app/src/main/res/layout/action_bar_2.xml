@@ -14,6 +14,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/gap_24"
             android:background="@drawable/ic_arrow_left"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -51,7 +52,7 @@
             android:layout_width="@dimen/gap_0"
             android:layout_height="@dimen/line_height"
             android:layout_marginTop="@dimen/gap_11"
-            android:background="@color/c_4D000000"
+            android:background="@color/light_grey_1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_title" />

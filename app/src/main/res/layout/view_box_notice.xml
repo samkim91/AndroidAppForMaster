@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/gap_8"
+        android:paddingTop="@dimen/gap_28"
+        android:paddingEnd="@dimen/gap_8"
+        android:paddingBottom="@dimen/gap_28"
+        tools:background="@drawable/background_background_solid_radius16">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_icon_container"
+            android:layout_width="@dimen/gap_40"
+            android:layout_height="@dimen/gap_40"
+            android:background="@drawable/background_white_solid_light_grey1_stroke_radius20"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/iv_icon_container"
+            app:layout_constraintEnd_toEndOf="@id/iv_icon_container"
+            app:layout_constraintStart_toStartOf="@id/iv_icon_container"
+            app:layout_constraintTop_toTopOf="@id/iv_icon_container"
+            tools:background="@drawable/ic_speaker" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_content"
+            style="@style/foot_note.bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/gap_12"
+            android:breakStrategy="simple"
+            android:lineSpacingExtra="@dimen/gap_2"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toEndOf="@id/iv_icon_container"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_goneMarginStart="@dimen/gap_0"
+            tools:text="마스터분들의 공정하고 투명한 거래를 위해 연락처, 간판 등 직거래 유도를 자제해 주세요."
+            tools:textColor="@color/grey_3" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

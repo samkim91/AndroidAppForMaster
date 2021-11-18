@@ -7,14 +7,14 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.res.ResourcesCompat
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.common.ColorTheme
-import kr.co.soogong.master.databinding.ViewFilledLabelBinding
+import kr.co.soogong.master.databinding.ViewLabelFilledBinding
 
-class FilledLabel @JvmOverloads constructor(
+class LabelFilled @JvmOverloads constructor(
     context: Context,
     attributeSet: AttributeSet? = null,
     defStyle: Int = 0,
 ) : ConstraintLayout(context, attributeSet, defStyle) {
-    private val binding = ViewFilledLabelBinding.inflate(LayoutInflater.from(context), this, true)
+    private val binding = ViewLabelFilledBinding.inflate(LayoutInflater.from(context), this, true)
 
     var content: String? = null
         set(value) {
@@ -28,7 +28,7 @@ class FilledLabel @JvmOverloads constructor(
         set(value) {
             field = value
             value?.let {
-                when (value) {
+                when (it) {
                     is ColorTheme.Blue -> {
                         binding.tvContent.backgroundTintList =
                             ResourcesCompat.getColorStateList(resources, R.color.c_1A227ED4, null)

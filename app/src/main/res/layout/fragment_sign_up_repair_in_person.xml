@@ -47,19 +47,17 @@
                 app:layout_constraintTop_toBottomOf="@id/title_widget"
                 app:text="@{@string/sign_up_repair_in_person_checkbox}" />
 
-            <kr.co.soogong.master.atomic.molecules.AlertBox
+            <kr.co.soogong.master.atomic.molecules.BoxNotice
                 android:id="@+id/alert_box"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/gap_20"
                 android:layout_marginTop="@dimen/gap_26"
                 android:layout_marginEnd="@dimen/gap_20"
-                app:alertContent="@{@string/sign_up_repair_in_person_alert_box_content}"
-                app:alertTitle="@{@string/sign_up_repair_in_person_alert_box_title}"
+                app:content="@{@string/sign_up_repair_in_person_alert_box_content}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/alert_repair_in_person_required"
-                app:theme="@{101}" />
+                app:layout_constraintTop_toBottomOf="@id/alert_repair_in_person_required" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/alert_repair_in_person_required"

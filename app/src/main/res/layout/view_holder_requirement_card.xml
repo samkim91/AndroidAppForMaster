@@ -56,7 +56,7 @@
                 app:layout_constraintTop_toBottomOf="@id/tv_requirement_token"
                 tools:text="2021. 11. 3" />
 
-            <kr.co.soogong.master.atomic.atoms.FilledLabel
+            <kr.co.soogong.master.atomic.atoms.LabelFilled
                 android:id="@+id/ft_status"
                 android:layout_width="@dimen/gap_68"
                 android:layout_height="@dimen/gap_32"

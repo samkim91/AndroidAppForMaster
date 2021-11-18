@@ -6,6 +6,8 @@ import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import gun0912.tedimagepicker.builder.TedImagePicker
 import kr.co.soogong.master.R
+import kr.co.soogong.master.data.common.ButtonTheme
+import kr.co.soogong.master.data.common.ColorTheme
 import kr.co.soogong.master.data.model.profile.ApprovedCodeTable
 import kr.co.soogong.master.databinding.FragmentProfileBinding
 import kr.co.soogong.master.ui.base.BaseFragment
@@ -49,6 +51,8 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
         bind {
             vm = viewModel
             lifecycleOwner = viewLifecycleOwner
+            buttonThemeRequestReview = ButtonTheme.OutlinedPrimary
+            colorThemeProfileGuideline = ColorTheme.Grey
 
             reviewBox.setOnClickListener {
                 startActivity(
@@ -56,35 +60,34 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
                 )
             }
 
-            showProfileButton.setOnClickListener {
-                startActivity(
-                    ShowMyProfileInWebHelper.getIntent(viewModel.profile.value?.uid)
-                )
+//            showProfileButton.setOnClickListener {
+//                startActivity(
+//                    ShowMyProfileInWebHelper.getIntent(viewModel.profile.value?.uid)
+//                )
+//            }
+
+            bbRequestReview.onButtonClick = View.OnClickListener {
+                BottomDialogRecyclerView.newInstance(
+                    dialogBundle = BottomDialogBundle.getRequestingReviewBundle(),
+                    itemClick = { wayOfRequesting, _ ->
+                        Timber.tag(TAG).d("requestReviewButton: $wayOfRequesting is clicked")
+                        RequestReviewHelper.requestReviewBySharing(
+                            requireContext(),
+                            viewModel.profile.value?.uid,
+                            viewModel.profile.value?.representativeName,
+                            wayOfRequesting
+                        )
+                    }
+                ).let {
+                    it.show(parentFragmentManager, it.tag)
+                }
             }
 
-            requestReviewBySharingButton.setOnClickListener {
-                val bottomDialog =
-                    BottomDialogRecyclerView.newInstance(
-                        dialogBundle = BottomDialogBundle.getRequestingReviewBundle(),
-                        itemClick = { wayOfRequesting, _ ->
-                            Timber.tag(TAG).d("requestReviewButton: $wayOfRequesting is clicked")
-                            RequestReviewHelper.requestReviewBySharing(
-                                requireContext(),
-                                viewModel.profile.value?.uid,
-                                viewModel.profile.value?.representativeName,
-                                wayOfRequesting
-                            )
-                        }
-                    )
-
-                bottomDialog.show(parentFragmentManager, bottomDialog.tag)
-            }
-
-            editRequiredInfo.setOnClickListener {
-                startActivity(
-                    EditRequiredInformationActivityHelper.getIntent(requireContext())
-                )
-            }
+//            editRequiredInfo.setOnClickListener {
+//                startActivity(
+//                    EditRequiredInformationActivityHelper.getIntent(requireContext())
+//                )
+//            }
 
             freeMeasure.setOnClickListener {
                 startActivity(
