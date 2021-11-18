@@ -7,14 +7,14 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.res.ResourcesCompat
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.common.ShapeTheme
-import kr.co.soogong.master.databinding.ViewOutlinedLabelBinding
+import kr.co.soogong.master.databinding.ViewLabelOutlinedBinding
 
-class OutlinedLabel @JvmOverloads constructor(
+class LabelOutlined @JvmOverloads constructor(
     context: Context,
     attributeSet: AttributeSet? = null,
     defStyle: Int = 0,
 ) : ConstraintLayout(context, attributeSet, defStyle) {
-    private val binding = ViewOutlinedLabelBinding.inflate(LayoutInflater.from(context), this, true)
+    private val binding = ViewLabelOutlinedBinding.inflate(LayoutInflater.from(context), this, true)
 
     var content: String? = null
         set(value) {
