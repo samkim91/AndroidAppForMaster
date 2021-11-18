@@ -8,7 +8,11 @@
 
         <variable
             name="buttonThemeRequestReview"
-            type="kr.co.soogong.master.data.common.ButtonTheme"/>
+            type="kr.co.soogong.master.data.common.ButtonTheme" />
+
+        <variable
+            name="colorThemeProfileGuideline"
+            type="kr.co.soogong.master.data.common.ColorTheme" />
 
         <variable
             name="vm"
@@ -29,14 +33,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_begin="@dimen/gap_16"/>
+                app:layout_constraintGuide_begin="@dimen/gap_16" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/end_guide_line"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_end="@dimen/gap_16"/>
+                app:layout_constraintGuide_end="@dimen/gap_16" />
 
             <kr.co.soogong.master.atomic.molecules.ActionBar
                 android:id="@+id/ab_header"
@@ -62,17 +66,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/ic_add"
-                bind:visible="@{vm.profile.basicInformation.profileImage.url.empty}"
                 app:layout_constraintBottom_toBottomOf="@id/iv_profile_image"
-                app:layout_constraintEnd_toEndOf="@id/iv_profile_image" />
+                app:layout_constraintEnd_toEndOf="@id/iv_profile_image"
+                bind:visible="@{vm.profile.basicInformation.profileImage.url.empty}" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_subscription_plan"
                 style="@style/caption_2.bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/brand_green"
                 android:layout_marginTop="@dimen/gap_16"
+                android:textColor="@color/brand_green"
                 app:layout_constraintEnd_toEndOf="@id/end_guide_line"
                 app:layout_constraintStart_toStartOf="@id/start_guide_line"
                 app:layout_constraintTop_toBottomOf="@id/iv_profile_image"
@@ -113,8 +117,8 @@
                 android:layout_width="@dimen/gap_0"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/gap_16"
-                app:buttonTheme="@{buttonThemeRequestReview}"
                 app:buttonText="@{@string/request_review_label}"
+                app:buttonTheme="@{buttonThemeRequestReview}"
                 app:layout_constraintEnd_toEndOf="@id/end_guide_line"
                 app:layout_constraintStart_toStartOf="@id/start_guide_line"
                 app:layout_constraintTop_toBottomOf="@id/review_box" />
@@ -123,11 +127,23 @@
                 android:id="@+id/line"
                 android:layout_width="@dimen/gap_0"
                 android:layout_height="@dimen/gap_1"
-                android:background="@color/light_grey_2"
                 android:layout_marginTop="@dimen/gap_24"
+                android:background="@color/light_grey_2"
                 app:layout_constraintEnd_toEndOf="@id/end_guide_line"
                 app:layout_constraintStart_toStartOf="@id/start_guide_line"
                 app:layout_constraintTop_toBottomOf="@id/bb_request_review" />
+
+            <kr.co.soogong.master.atomic.molecules.BoxNotice
+                android:id="@+id/bn_profile_guideline"
+                android:layout_width="@dimen/gap_0"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/gap_16"
+                app:colorTheme="@{colorThemeProfileGuideline}"
+                app:content="@{@string/profile_guideline}"
+                app:icon="@{@drawable/ic_speaker}"
+                app:layout_constraintEnd_toEndOf="@id/end_guide_line"
+                app:layout_constraintStart_toStartOf="@id/start_guide_line"
+                app:layout_constraintTop_toBottomOf="@id/line" />
 
             <kr.co.soogong.master.atomic.molecules.SettingsButton
                 android:id="@+id/edit_required_info"
@@ -135,7 +151,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/line"
+                app:layout_constraintTop_toBottomOf="@id/bn_profile_guideline"
                 app:title='@{"필수 정보 등록·수정하기"}' />
 
             <androidx.appcompat.widget.AppCompatImageView

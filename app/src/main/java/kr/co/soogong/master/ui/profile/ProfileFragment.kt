@@ -7,6 +7,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import gun0912.tedimagepicker.builder.TedImagePicker
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.common.ButtonTheme
+import kr.co.soogong.master.data.common.ColorTheme
 import kr.co.soogong.master.data.model.profile.ApprovedCodeTable
 import kr.co.soogong.master.databinding.FragmentProfileBinding
 import kr.co.soogong.master.ui.base.BaseFragment
@@ -51,6 +52,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
             vm = viewModel
             lifecycleOwner = viewLifecycleOwner
             buttonThemeRequestReview = ButtonTheme.OutlinedPrimary
+            colorThemeProfileGuideline = ColorTheme.Grey
 
             reviewBox.setOnClickListener {
                 startActivity(

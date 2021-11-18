@@ -269,6 +269,8 @@
     <!-- Profile -->
     <string name="open_my_page">내 페이지 보기</string>
     <string name="request_review_label">리뷰 요청하기</string>
+    <string name="profile_guideline">마스터분들의 공정하고 투명한 거래를 위해 연락처, 간판 등 직거래 유도를 자제해 주세요.</string>
+
     <string name="fill_representative_name">프로필에서 대표이름을 입력해주세요.</string>
     <string name="master_type">마스터유형</string>
     <string name="store_name">업체명</string>

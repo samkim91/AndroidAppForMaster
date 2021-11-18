@@ -82,34 +82,30 @@
                     app:layout_constraintTop_toBottomOf="@id/checkbox_for_simple_cost_including_vat"
                     app:title="@{@string/measure_image_holder_label}" />
 
-                <kr.co.soogong.master.atomic.molecules.AlertBox
+                <kr.co.soogong.master.atomic.molecules.BoxNotice
                     android:id="@+id/alert_box"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/gap_20"
                     android:layout_marginTop="@dimen/gap_24"
                     android:layout_marginEnd="@dimen/gap_20"
-                    app:alertContent="@{@string/alert_box_content_for_measure}"
-                    app:alertTitle="@{@string/alert_box_title_for_measure}"
+                    app:content="@{@string/alert_box_content_for_measure}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/measurement_images_picker"
-                    app:theme="@{101}" />
+                    app:layout_constraintTop_toBottomOf="@id/measurement_images_picker" />
 
-                <kr.co.soogong.master.atomic.molecules.AlertBox
+                <kr.co.soogong.master.atomic.molecules.BoxNotice
                     android:id="@+id/alert_box_for_loading_estimation_template"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/gap_20"
                     android:layout_marginTop="@dimen/gap_24"
                     android:layout_marginEnd="@dimen/gap_20"
-                    app:alertTitle="@{@string/alert_box_title_for_loading_estimation_template}"
-                    app:arrowVisibility="@{true}"
-                    app:icon="@{301}"
+                    app:content="@{@string/alert_box_title_for_loading_estimation_template}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/alert_box"
-                    app:theme="@{101}" />
+                    />
 
                 <kr.co.soogong.master.atomic.molecules.TitleEditTextCounter
                     android:id="@+id/write_detail"

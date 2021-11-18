@@ -28,7 +28,7 @@ class LabelFilled @JvmOverloads constructor(
         set(value) {
             field = value
             value?.let {
-                when (value) {
+                when (it) {
                     is ColorTheme.Blue -> {
                         binding.tvContent.backgroundTintList =
                             ResourcesCompat.getColorStateList(resources, R.color.c_1A227ED4, null)

@@ -265,20 +265,18 @@
                         app:barrierDirection="bottom"
                         app:constraint_referenced_ids="checkbox_for_simple_cost_including_vat, checkbox_for_total_cost_including_vat" />
 
-                    <kr.co.soogong.master.atomic.molecules.AlertBox
+                    <kr.co.soogong.master.atomic.molecules.BoxNotice
                         android:id="@+id/alert_box_for_loading_estimation_template"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/gap_20"
                         android:layout_marginTop="@dimen/gap_52"
                         android:layout_marginEnd="@dimen/gap_20"
-                        app:alertTitle="@{@string/alert_box_title_for_loading_estimation_template}"
-                        app:arrowVisibility="@{true}"
-                        app:icon="@{301}"
+                        app:content="@{@string/alert_box_title_for_loading_estimation_template}"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/request_barrier"
-                        app:theme="@{101}" />
+                        />
 
                     <kr.co.soogong.master.atomic.molecules.TitleEditTextCounter
                         android:id="@+id/write_detail"
