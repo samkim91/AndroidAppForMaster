@@ -83,11 +83,11 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
                 }
             }
 
-            editRequiredInfo.setOnClickListener {
-                startActivity(
-                    EditRequiredInformationActivityHelper.getIntent(requireContext())
-                )
-            }
+//            editRequiredInfo.setOnClickListener {
+//                startActivity(
+//                    EditRequiredInformationActivityHelper.getIntent(requireContext())
+//                )
+//            }
 
             freeMeasure.setOnClickListener {
                 startActivity(

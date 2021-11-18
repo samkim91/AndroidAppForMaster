@@ -45,6 +45,7 @@
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toEndOf="@id/iv_icon_container"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_goneMarginStart="@dimen/gap_0"
             tools:text="마스터분들의 공정하고 투명한 거래를 위해 연락처, 간판 등 직거래 유도를 자제해 주세요."
             tools:textColor="@color/grey_3" />
     </androidx.constraintlayout.widget.ConstraintLayout>
