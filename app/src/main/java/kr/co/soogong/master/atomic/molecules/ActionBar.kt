@@ -3,9 +3,8 @@ package kr.co.soogong.master.atomic.molecules
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import androidx.appcompat.widget.AppCompatImageView
-import androidx.appcompat.widget.AppCompatTextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.isVisible
 import kr.co.soogong.master.databinding.ActionBar2Binding
 
 class ActionBar @JvmOverloads constructor(
@@ -23,8 +22,21 @@ class ActionBar @JvmOverloads constructor(
             }
         }
 
-    val backButton: AppCompatImageView = binding.ivBack
-    val anyButton: AppCompatTextView = binding.tvAny
+    var backButtonVisibility: Boolean? = null
+        set(value) {
+            field = value
+            value?.let {
+                binding.ivBack.isVisible = it
+            }
+        }
+
+    var anyButtonVisibility: Boolean? = null
+        set(value) {
+            field = value
+            value?.let {
+                binding.tvAny.isVisible = it
+            }
+        }
 
     fun setButtonBackClickListener(listener: OnClickListener) {
         binding.ivBack.setOnClickListener(listener)

@@ -7,6 +7,10 @@
     <data>
 
         <variable
+            name="buttonThemeRequestReview"
+            type="kr.co.soogong.master.data.common.ButtonTheme"/>
+
+        <variable
             name="vm"
             type="kr.co.soogong.master.ui.profile.ProfileViewModel" />
     </data>
@@ -20,108 +24,110 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/user_profile_img"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                android:layout_marginTop="78dp"
-                android:src="@drawable/ic_user_picture"
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/start_guide_line"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="@dimen/gap_16"/>
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/end_guide_line"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="@dimen/gap_16"/>
+
+            <kr.co.soogong.master.atomic.molecules.ActionBar
+                android:id="@+id/ab_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                bind:image_url="@{vm.profile.basicInformation.profileImage.url}" />
+                app:title="@{@string/main_activity_navigation_bar_profile}" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/user_name"
-                style="@style/text_style_16sp.bold"
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_profile_image"
+                android:layout_width="@dimen/gap_80"
+                android:layout_height="@dimen/gap_80"
+                android:layout_marginTop="@dimen/gap_44"
+                app:layout_constraintEnd_toEndOf="@id/end_guide_line"
+                app:layout_constraintStart_toStartOf="@id/start_guide_line"
+                app:layout_constraintTop_toBottomOf="@id/ab_header"
+                app:setCircleImageByUrl="@{vm.profile.basicInformation.profileImage.url}" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_add"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="4dp"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:text='@{vm.profile.representativeName.length() != 0 ? vm.profile.representativeName : "프로필에서 대표이름을 입력해주세요."}'
-                android:textColor="@color/text_basic_color"
-                app:layout_constrainedWidth="true"
-                app:layout_constraintEnd_toStartOf="@id/user_name_end"
-                app:layout_constraintHorizontal_chainStyle="packed"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/user_profile_img"
-                tools:text="이레하우징" />
+                android:background="@drawable/ic_add"
+                bind:visible="@{vm.profile.basicInformation.profileImage.url != null}"
+                app:layout_constraintBottom_toBottomOf="@id/iv_profile_image"
+                app:layout_constraintEnd_toEndOf="@id/iv_profile_image" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/user_name_end"
-                style="@style/text_style_14sp.regular"
+                android:id="@+id/tv_subscription_plan"
+                style="@style/caption_2.bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="20dp"
-                android:textColor="@color/c_555555"
-                app:layout_constraintBottom_toBottomOf="@id/user_name"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/user_name"
-                app:layout_constraintTop_toTopOf="@id/user_name"
+                android:textColor="@color/brand_green"
+                android:layout_marginTop="@dimen/gap_16"
+                app:layout_constraintEnd_toEndOf="@id/end_guide_line"
+                app:layout_constraintStart_toStartOf="@id/start_guide_line"
+                app:layout_constraintTop_toBottomOf="@id/iv_profile_image"
                 app:subscriptionPlan="@{vm.profile.subscriptionPlan}"
                 tools:text="개런티 마스터" />
 
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_representative_name"
+                style="@style/headline.bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/gap_1"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@{vm.profile.representativeName != null ? vm.profile.representativeName : @string/fill_representative_name}"
+                android:textColor="@color/black"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintEnd_toEndOf="@id/end_guide_line"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="@id/start_guide_line"
+                app:layout_constraintTop_toBottomOf="@id/tv_subscription_plan"
+                tools:text="마그컹컹컹" />
+
             <kr.co.soogong.master.atomic.organisms.ReviewBox
                 android:id="@+id/review_box"
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/user_name"
+                android:layout_width="@dimen/gap_0"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/gap_26"
+                app:layout_constraintEnd_toEndOf="@id/end_guide_line"
+                app:layout_constraintStart_toStartOf="@id/start_guide_line"
+                app:layout_constraintTop_toBottomOf="@id/tv_representative_name"
                 app:recommendCount="@{vm.profile.myReview.averageRecommendation}"
                 app:reviewCount="@{vm.profile.myReview.reviews.size}" />
+            <!-- todo : 완료수 추가 필요 -->
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/show_profile_button"
-                style="@style/text_style_16sp.bold"
+            <kr.co.soogong.master.atomic.atoms.ButtonBig
+                android:id="@+id/bb_request_review"
                 android:layout_width="@dimen/gap_0"
-                android:layout_height="@dimen/gap_40"
-                android:layout_marginStart="@dimen/gap_20"
-                android:layout_marginEnd="@dimen/gap_20"
-                android:background="@drawable/shape_green_background_radius8"
-                android:text="@string/open_my_page"
-                android:textColor="@color/c_FFFFFF"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/gap_16"
+                app:buttonTheme="@{buttonThemeRequestReview}"
+                app:buttonText="@{@string/request_review_label}"
+                app:layout_constraintEnd_toEndOf="@id/end_guide_line"
+                app:layout_constraintStart_toStartOf="@id/start_guide_line"
                 app:layout_constraintTop_toBottomOf="@id/review_box" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/request_review_by_sharing_button"
-                style="@style/text_style_16sp.bold"
-                android:layout_width="@dimen/gap_0"
-                android:layout_height="@dimen/gap_40"
-                android:layout_marginStart="@dimen/gap_20"
-                android:layout_marginTop="@dimen/gap_10"
-                android:layout_marginEnd="@dimen/gap_20"
-                android:background="@drawable/shape_white_background_green_border_radius8"
-                android:text="@string/request_review_button_text"
-                android:textColor="@color/c_1FC472"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/show_profile_button" />
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/banner_image"
-                android:layout_width="@dimen/gap_0"
-                android:layout_height="@dimen/gap_120"
-                android:layout_marginTop="@dimen/gap_24"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_banner_6"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/request_review_by_sharing_button" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/line"
-                android:layout_width="0dp"
-                android:layout_height="10dp"
-                android:background="@color/c_E3E3E3"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/banner_image" />
+                android:layout_width="@dimen/gap_0"
+                android:layout_height="@dimen/gap_1"
+                android:background="@color/light_grey_2"
+                android:layout_marginTop="@dimen/gap_24"
+                app:layout_constraintEnd_toEndOf="@id/end_guide_line"
+                app:layout_constraintStart_toStartOf="@id/start_guide_line"
+                app:layout_constraintTop_toBottomOf="@id/bb_request_review" />
 
             <kr.co.soogong.master.atomic.molecules.SettingsButton
                 android:id="@+id/edit_required_info"

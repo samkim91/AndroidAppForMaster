@@ -84,7 +84,7 @@ data class DialogData(
 
         fun getRecommendingCallingCustomer(context: Context) =
             DialogData(
-                "가급적 15분 내료 고객님에게 전화하여 현장방문 일정을 잡아주세요.", context.getColor(R.color.text_basic_color),
+                "가급적 15분 내로 고객님에게 전화하여 현장방문 일정을 잡아주세요.", context.getColor(R.color.text_basic_color),
                 null, context.getColor(R.color.c_1FC472),
                 "고객에게 전화하기", context.getColor(R.color.text_basic_color),
                 null, context.getColor(R.color.text_basic_color)
