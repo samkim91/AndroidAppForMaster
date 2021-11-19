@@ -34,12 +34,14 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_requirement_token"
                 style="@style/caption_2.bold"
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/gap_0"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/gap_10"
                 android:ellipsize="middle"
                 android:maxLines="1"
                 android:textColor="@color/grey_1"
                 app:layout_constrainedWidth="true"
+                app:layout_constraintEnd_toStartOf="@id/lf_status"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="문의번호 20211103241231" />
@@ -57,7 +59,7 @@
                 tools:text="2021. 11. 3" />
 
             <kr.co.soogong.master.atomic.atoms.LabelFilled
-                android:id="@+id/ft_status"
+                android:id="@+id/lf_status"
                 android:layout_width="@dimen/gap_68"
                 android:layout_height="@dimen/gap_32"
                 app:content="@{data.status.inKorean}"
@@ -79,7 +81,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ft_status"
+                app:layout_constraintTop_toBottomOf="@id/lf_status"
                 app:layout_constraintWidth_percent="0.93"
                 tools:text="부산광역시 강서구 녹산산단382로14번가길 10~29번지(송정동) 부산광역시 강서구 녹산산단382로14번가길 10~29번지(송정동)" />
 

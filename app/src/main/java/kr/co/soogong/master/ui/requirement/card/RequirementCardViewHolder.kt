@@ -37,7 +37,9 @@ open class RequirementCardViewHolder(
             tvDueTime.isVisible = false
 
             data = requirementCard
-            tvRequirementToken.text = context.getString(R.string.requirement_basic_requirement_token, requirementCard.token)
+            tvRequirementToken.text =
+                context.getString(R.string.requirement_basic_requirement_token,
+                    requirementCard.token)
 
             setQnaChipGroup(requirementCard)
 
@@ -187,9 +189,6 @@ open class RequirementCardViewHolder(
     }
 
     companion object {
-        const val THEME_BLUE = 1
-        const val THEME_GREY = 2
-
         fun create(
             context: Context,
             fragmentManager: FragmentManager,
@@ -208,14 +207,17 @@ open class RequirementCardViewHolder(
                     fragmentManager,
                     viewModel,
                     binding)
+
                 RequirementStatus.RequestConsult.asInt -> RequestConsultCardViewHolder(context,
                     fragmentManager,
                     viewModel,
                     binding)
+
                 RequirementStatus.RequestMeasure.asInt -> RequestMeasureCardViewHolder(context,
                     fragmentManager,
                     viewModel,
                     binding)
+
                 RequirementStatus.Estimated.asInt -> EstimatedCardViewHolder(context,
                     fragmentManager,
                     viewModel,
@@ -225,10 +227,12 @@ open class RequirementCardViewHolder(
                     fragmentManager,
                     viewModel,
                     binding)
+
                 RequirementStatus.Measured.asInt -> MeasuredCardViewHolder(context,
                     fragmentManager,
                     viewModel,
                     binding)
+
                 RequirementStatus.Repairing.asInt -> RepairingCardViewHolder(context,
                     fragmentManager,
                     viewModel,
@@ -238,10 +242,12 @@ open class RequirementCardViewHolder(
                     fragmentManager,
                     viewModel,
                     binding)
+
                 RequirementStatus.Closed.asInt -> ClosedViewHolder(context,
                     fragmentManager,
                     viewModel,
                     binding)
+
                 RequirementStatus.Canceled.asInt -> CanceledViewHolder(context,
                     fragmentManager,
                     viewModel,
