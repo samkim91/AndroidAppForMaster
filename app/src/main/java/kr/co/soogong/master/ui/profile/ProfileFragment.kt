@@ -53,6 +53,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
             lifecycleOwner = viewLifecycleOwner
             buttonThemeRequestReview = ButtonTheme.OutlinedPrimary
             colorThemeProfileGuideline = ColorTheme.Grey
+            colorThemeRequiredInformationProgress = ColorTheme.Red
 
             reviewBox.setOnClickListener {
                 startActivity(

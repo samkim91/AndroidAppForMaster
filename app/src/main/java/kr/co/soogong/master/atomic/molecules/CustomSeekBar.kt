@@ -1,4 +1,4 @@
-package kr.co.soogong.master.atomic.organisms
+package kr.co.soogong.master.atomic.molecules
 
 import android.content.Context
 import android.graphics.Canvas
