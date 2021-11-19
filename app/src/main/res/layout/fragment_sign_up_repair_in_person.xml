@@ -47,7 +47,7 @@
                 app:layout_constraintTop_toBottomOf="@id/title_widget"
                 app:text="@{@string/sign_up_repair_in_person_checkbox}" />
 
-            <kr.co.soogong.master.atomic.molecules.BoxNotice
+            <kr.co.soogong.master.atomic.molecules.BoxIconContent
                 android:id="@+id/alert_box"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

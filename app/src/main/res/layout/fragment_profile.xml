@@ -128,7 +128,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/bb_request_review" />
 
-                <kr.co.soogong.master.atomic.molecules.BoxNotice
+                <kr.co.soogong.master.atomic.molecules.BoxIconContent
                     android:id="@+id/bn_profile_guideline"
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"
@@ -146,12 +146,22 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/gap_24"
                     app:colorThemeLabelFilled="@{colorThemeRequiredInformationProgress}"
+                    app:contentLabelFilled="@{@string/requirement}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:contentLabelFilled="@{@string/requirement}"
                     app:layout_constraintTop_toBottomOf="@id/bn_profile_guideline"
                     app:percent="@{40.0}"
                     app:title="@{@string/completion_of_required_information}" />
+
+                <kr.co.soogong.master.atomic.molecules.BoxContentCancellable
+                    android:id="@+id/bcc_required_information"
+                    android:layout_width="@dimen/gap_0"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/gap_12"
+                    app:content="@{@string/explanation_of_required_information}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tpi_required_information" />
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/line2"
@@ -161,7 +171,7 @@
                     android:background="@color/c_E3E3E3"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tpi_required_information" />
+                    app:layout_constraintTop_toBottomOf="@id/bcc_required_information" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/profile_card_container"

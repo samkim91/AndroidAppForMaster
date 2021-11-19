@@ -265,7 +265,7 @@
                         app:barrierDirection="bottom"
                         app:constraint_referenced_ids="checkbox_for_simple_cost_including_vat, checkbox_for_total_cost_including_vat" />
 
-                    <kr.co.soogong.master.atomic.molecules.BoxNotice
+                    <kr.co.soogong.master.atomic.molecules.BoxIconContent
                         android:id="@+id/alert_box_for_loading_estimation_template"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

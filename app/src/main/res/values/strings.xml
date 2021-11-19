@@ -31,7 +31,6 @@
     <string name="option">선택</string>
     <string name="vat_included">부가세 포함</string>
     <string name="vat_not_included">부가세 미포함</string>
-
     <string name="save">저장하기</string>
     <string name="modify">수정하기</string>
     <string name="edit">편집하기</string>
@@ -274,6 +273,7 @@
     <string name="request_review_label">리뷰 요청하기</string>
     <string name="profile_guideline">마스터분들의 공정하고 투명한 거래를 위해 연락처, 간판 등 직거래 유도를 자제해 주세요.</string>
     <string name="completion_of_required_information">필수 정보 완성도</string>
+    <string name="explanation_of_required_information">필수 정보를 모두 등록하고, 승인이 완료되면 문의 처리가 가능 합니다.</string>
 
     <string name="fill_representative_name">프로필에서 대표이름을 입력해주세요.</string>
     <string name="master_type">마스터유형</string>
