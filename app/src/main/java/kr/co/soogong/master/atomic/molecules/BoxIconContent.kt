@@ -8,15 +8,15 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.res.ResourcesCompat
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.common.ColorTheme
-import kr.co.soogong.master.databinding.ViewBoxNoticeBinding
+import kr.co.soogong.master.databinding.ViewBoxIconContentBinding
 
-class BoxNotice @JvmOverloads constructor(
+class BoxIconContent @JvmOverloads constructor(
     context: Context,
     attributeSet: AttributeSet? = null,
     defStyle: Int = 0,
 ) : ConstraintLayout(context, attributeSet, defStyle) {
     private var binding =
-        ViewBoxNoticeBinding.inflate(LayoutInflater.from(context), this, true)
+        ViewBoxIconContentBinding.inflate(LayoutInflater.from(context), this, true)
 
     var icon: Drawable? = null
         set(value) {
