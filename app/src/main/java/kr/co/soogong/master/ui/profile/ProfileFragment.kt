@@ -19,12 +19,6 @@ import kr.co.soogong.master.ui.dialog.popup.DialogData
 import kr.co.soogong.master.ui.profile.ProfileViewModel.Companion.GET_PROFILE_FAILED
 import kr.co.soogong.master.ui.profile.ProfileViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.uihelper.profile.*
-import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_EMAIL
-import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_FLEXIBLE_COST
-import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_OTHER_FLEXIBLE_OPTION
-import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.FREE_MEASURE
-import kr.co.soogong.master.uihelper.profile.PortfolioListActivityHelper.PORTFOLIO
-import kr.co.soogong.master.uihelper.profile.PortfolioListActivityHelper.PRICE_BY_PROJECTS
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.FileHelper
 import kr.co.soogong.master.utility.PermissionHelper
@@ -90,65 +84,65 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
 //                )
 //            }
 
-            freeMeasure.setOnClickListener {
-                startActivity(
-                    EditProfileContainerActivityHelper.getIntent(
-                        requireContext(),
-                        FREE_MEASURE
-                    )
-                )
-            }
-
-            portfolio.addDefaultButtonClickListener {
-                startActivity(
-                    PortfolioListActivityHelper.getIntent(requireContext(), PORTFOLIO)
-                )
-            }
-
-            priceByProject.addDefaultButtonClickListener {
-                startActivity(
-                    PortfolioListActivityHelper.getIntent(requireContext(), PRICE_BY_PROJECTS)
-                )
-            }
-
-            profileImage.addDefaultButtonClickListener {
-                getSingleImage()
-            }
-
-            profileImage.addFirstButtonClickListener {
-                // todo.. 삭제 기능 추가 필요
-            }
-
-            profileImage.addSecondButtonClickListener {
-                getSingleImage()
-            }
-
-            flexibleCost.addDefaultButtonClickListener {
-                startActivity(
-                    EditProfileContainerActivityHelper.getIntent(
-                        requireContext(),
-                        EDIT_FLEXIBLE_COST
-                    )
-                )
-            }
-
-            otherFlexibleOption.addDefaultButtonClickListener {
-                startActivity(
-                    EditProfileContainerActivityHelper.getIntent(
-                        requireContext(),
-                        EDIT_OTHER_FLEXIBLE_OPTION
-                    )
-                )
-            }
-
-            email.addDefaultButtonClickListener {
-                startActivity(
-                    EditProfileContainerActivityHelper.getIntent(
-                        requireContext(),
-                        EDIT_EMAIL
-                    )
-                )
-            }
+//            freeMeasure.setOnClickListener {
+//                startActivity(
+//                    EditProfileContainerActivityHelper.getIntent(
+//                        requireContext(),
+//                        FREE_MEASURE
+//                    )
+//                )
+//            }
+//
+//            portfolio.addDefaultButtonClickListener {
+//                startActivity(
+//                    PortfolioListActivityHelper.getIntent(requireContext(), PORTFOLIO)
+//                )
+//            }
+//
+//            priceByProject.addDefaultButtonClickListener {
+//                startActivity(
+//                    PortfolioListActivityHelper.getIntent(requireContext(), PRICE_BY_PROJECTS)
+//                )
+//            }
+//
+//            profileImage.addDefaultButtonClickListener {
+//                getSingleImage()
+//            }
+//
+//            profileImage.addFirstButtonClickListener {
+//                // todo.. 삭제 기능 추가 필요
+//            }
+//
+//            profileImage.addSecondButtonClickListener {
+//                getSingleImage()
+//            }
+//
+//            flexibleCost.addDefaultButtonClickListener {
+//                startActivity(
+//                    EditProfileContainerActivityHelper.getIntent(
+//                        requireContext(),
+//                        EDIT_FLEXIBLE_COST
+//                    )
+//                )
+//            }
+//
+//            otherFlexibleOption.addDefaultButtonClickListener {
+//                startActivity(
+//                    EditProfileContainerActivityHelper.getIntent(
+//                        requireContext(),
+//                        EDIT_OTHER_FLEXIBLE_OPTION
+//                    )
+//                )
+//            }
+//
+//            email.addDefaultButtonClickListener {
+//                startActivity(
+//                    EditProfileContainerActivityHelper.getIntent(
+//                        requireContext(),
+//                        EDIT_EMAIL
+//                    )
+//                )
+//            }
         }
     }
 

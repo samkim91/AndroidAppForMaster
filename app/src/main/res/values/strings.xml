@@ -274,6 +274,20 @@
     <string name="profile_guideline">마스터분들의 공정하고 투명한 거래를 위해 연락처, 간판 등 직거래 유도를 자제해 주세요.</string>
     <string name="completion_of_required_information">필수 정보 완성도</string>
     <string name="explanation_of_required_information">필수 정보를 모두 등록하고, 승인이 완료되면 문의 처리가 가능 합니다.</string>
+    <string name="representative_name">대표자명</string>
+    <string name="company_introduction">업체 소개</string>
+    <string name="shop_images">대표 이미지</string>
+    <string name="business_unit_information">사업자 정보</string>
+    <string name="warranty_information">A/S 정보</string>
+    <string name="contact_information">휴대폰 정보</string>
+    <string name="career">경력</string>
+    <string name="projects">시공 가능 업종</string>
+    <string name="service_area">활동 지역</string>
+    <string name="free_measure">무료 방문 실측 여부</string>
+    <string name="portfolio">포트폴리오</string>
+    <string name="price_by_project">시공 종류별 가격</string>
+    <string name="master_configs">기타 변동 요인</string>
+    <string name="email_address">이메일 주소</string>
 
     <string name="fill_representative_name">프로필에서 대표이름을 입력해주세요.</string>
     <string name="master_type">마스터유형</string>
