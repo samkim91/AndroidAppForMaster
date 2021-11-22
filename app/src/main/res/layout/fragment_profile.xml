@@ -195,6 +195,56 @@
                     app:layout_constraintTop_toBottomOf="@id/tbc_company_introduction"
                     app:title="@{@string/shop_images}" />
 
+                <kr.co.soogong.master.atomic.molecules.TitleButtonContent
+                    android:id="@+id/tbc_business_unit_information"
+                    android:layout_width="@dimen/gap_0"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/gap_33"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tie_shop_images"
+                    app:title="@{@string/business_unit_information}" />
+
+                <kr.co.soogong.master.atomic.molecules.TitleButtonContent
+                    android:id="@+id/tbc_warranty_information"
+                    android:layout_width="@dimen/gap_0"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/gap_33"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tbc_business_unit_information"
+                    app:title="@{@string/warranty_information}" />
+
+                <kr.co.soogong.master.atomic.molecules.TitleButtonContent
+                    android:id="@+id/tbc_contact_information"
+                    android:layout_width="@dimen/gap_0"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/gap_33"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tbc_warranty_information"
+                    app:title="@{@string/contact_information}" />
+
+                <kr.co.soogong.master.atomic.molecules.TitleButtonContent
+                    android:id="@+id/tbc_career"
+                    android:layout_width="@dimen/gap_0"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/gap_33"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tbc_contact_information"
+                    app:title="@{@string/career}" />
+
+                <kr.co.soogong.master.atomic.molecules.TitleButtonChipGroup
+                    android:id="@+id/tbc_projects"
+                    android:layout_width="@dimen/gap_0"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/gap_33"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tbc_career"
+                    app:title="@{@string/projects}" />
+
 
                 <!--                <androidx.appcompat.widget.AppCompatImageView-->
                 <!--                    android:id="@+id/line2"-->
