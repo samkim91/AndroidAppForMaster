@@ -67,7 +67,7 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button_left"
-            style="@style/sub_headline.bold"
+            style="@style/subheadline.bold"
             android:layout_width="@dimen/gap_0"
             android:layout_height="@dimen/gap_0"
             android:layout_marginStart="@dimen/gap_16"
@@ -89,7 +89,7 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button_right"
-            style="@style/sub_headline.bold"
+            style="@style/subheadline.bold"
             android:layout_width="@dimen/gap_0"
             android:layout_height="@dimen/gap_0"
             android:layout_marginTop="@dimen/gap_8"

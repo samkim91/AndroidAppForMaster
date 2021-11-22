@@ -62,7 +62,7 @@
             app:tabPaddingEnd="@dimen/gap_8"
             app:tabPaddingStart="@dimen/gap_8"
             app:tabSelectedTextColor="@color/black"
-            app:tabTextAppearance="@style/sub_headline.regular"
+            app:tabTextAppearance="@style/subheadline.regular"
             app:tabTextColor="@color/light_grey_2" />
 
         <androidx.viewpager2.widget.ViewPager2

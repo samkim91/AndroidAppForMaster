@@ -8,8 +8,8 @@
         android:layout_height="match_parent">
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/text_view_title"
-            style="@style/foot_note.bold"
+            android:id="@+id/tv_footnote"
+            style="@style/footnote.bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/gap_10"
@@ -22,17 +22,17 @@
             tools:text="요청" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/text_view_count"
+            android:id="@+id/tv_count"
             style="@style/call_out.bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/c_2E2E2E"
-            app:layout_constraintStart_toStartOf="@id/text_view_title"
-            app:layout_constraintTop_toBottomOf="@id/text_view_title"
+            app:layout_constraintStart_toStartOf="@id/tv_footnote"
+            app:layout_constraintTop_toBottomOf="@id/tv_footnote"
             tools:text="+999건" />
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/image_view_icon"
+            android:id="@+id/iv_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/gap_9"

@@ -111,7 +111,7 @@ private fun addEndRepairButton(
             R.drawable.bg_solid_white_stroke_light_grey2_radius8,
             null)
         setTextColor(ResourcesCompat.getColor(resources, R.color.black, null))
-        setTextAppearance(R.style.foot_note_regular)
+        setTextAppearance(R.style.footnote_regular)
         setOnClickListener {
             context.startActivity(
                 EndRepairActivityHelper.getIntent(

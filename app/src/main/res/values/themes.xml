@@ -237,27 +237,27 @@
         <item name="android:fontFamily">@font/medium</item>
     </style>
 
-    <style name="foot_note">
+    <style name="footnote">
         <item name="android:textSize">@dimen/text_size_13sp</item>
     </style>
 
-    <style name="foot_note.regular" parent="foot_note">
+    <style name="footnote.regular" parent="footnote">
         <item name="android:fontFamily">@font/regular</item>
     </style>
 
-    <style name="foot_note.bold" parent="foot_note">
+    <style name="footnote.bold" parent="footnote">
         <item name="android:fontFamily">@font/medium</item>
     </style>
 
-    <style name="sub_headline">
+    <style name="subheadline">
         <item name="android:textSize">@dimen/text_size_15sp</item>
     </style>
 
-    <style name="sub_headline.regular" parent="sub_headline">
+    <style name="subheadline.regular" parent="subheadline">
         <item name="android:fontFamily">@font/regular</item>
     </style>
 
-    <style name="sub_headline.bold" parent="sub_headline">
+    <style name="subheadline.bold" parent="subheadline">
         <item name="android:fontFamily">@font/medium</item>
     </style>
 

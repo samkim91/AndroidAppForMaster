@@ -9,6 +9,6 @@
     android:maxWidth="@dimen/gap_100"
     app:chipMinTouchTargetSize="@dimen/gap_0"
     android:ellipsize="end"
-    android:textAppearance="@style/foot_note.regular"
+    android:textAppearance="@style/footnote.regular"
     style="@style/ChipChoiceGreyRectangular"
     tools:text="실내 누수 탐지" />

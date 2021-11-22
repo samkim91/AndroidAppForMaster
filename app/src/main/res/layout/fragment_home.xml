@@ -71,7 +71,7 @@
                 app:barrierDirection="bottom"
                 app:constraint_referenced_ids="logo, text_view_for_switch, switch_compat" />
 
-            <kr.co.soogong.master.atomic.molecules.LabelCountIcon
+            <kr.co.soogong.master.atomic.molecules.FootnoteContentIcon
                 android:id="@+id/summary_of_request"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -85,10 +85,10 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/barrier_for_header"
                 app:layout_constraintWidth_percent="0.28"
-                app:summary="@{0}"
-                app:title="@{@string/summary_label_for_request}" />
+                app:count="@{0}"
+                app:footnote="@{@string/summary_label_for_request}" />
 
-            <kr.co.soogong.master.atomic.molecules.LabelCountIcon
+            <kr.co.soogong.master.atomic.molecules.FootnoteContentIcon
                 android:id="@+id/summary_of_progress"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -102,10 +102,10 @@
                 app:layout_constraintStart_toEndOf="@id/summary_of_request"
                 app:layout_constraintTop_toTopOf="@id/summary_of_request"
                 app:layout_constraintWidth_percent="0.28"
-                app:summary="@{0}"
-                app:title="@{@string/summary_label_for_progress}" />
+                app:count="@{0}"
+                app:footnote="@{@string/summary_label_for_progress}" />
 
-            <kr.co.soogong.master.atomic.molecules.LabelCountIcon
+            <kr.co.soogong.master.atomic.molecules.FootnoteContentIcon
                 android:id="@+id/summary_of_completion"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -118,8 +118,8 @@
                 app:layout_constraintStart_toEndOf="@id/summary_of_progress"
                 app:layout_constraintTop_toTopOf="@id/summary_of_request"
                 app:layout_constraintWidth_percent="0.28"
-                app:summary="@{0}"
-                app:title="@{@string/summary_label_for_completion}" />
+                app:count="@{0}"
+                app:footnote="@{@string/summary_label_for_completion}" />
 
             <androidx.constraintlayout.widget.Barrier
                 android:id="@+id/barrier_for_summary"

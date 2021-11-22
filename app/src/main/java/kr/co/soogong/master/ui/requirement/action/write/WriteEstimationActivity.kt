@@ -12,9 +12,9 @@ import kr.co.soogong.master.R
 import kr.co.soogong.master.data.dto.AttachmentDto
 import kr.co.soogong.master.data.model.requirement.estimation.EstimationTypeCode
 import kr.co.soogong.master.databinding.ActivityWriteEstimationBinding
-import kr.co.soogong.master.atomic.molecules.IconLabelContainer
-import kr.co.soogong.master.atomic.molecules.IconLabelContainer.Companion.PREVIOUS_ESTIMATION_TYPE
-import kr.co.soogong.master.atomic.molecules.IconLabelContainer.Companion.REQUIREMENT_TYPE
+import kr.co.soogong.master.atomic.molecules.Title3Container
+import kr.co.soogong.master.atomic.molecules.Title3Container.Companion.PREVIOUS_ESTIMATION_TYPE
+import kr.co.soogong.master.atomic.molecules.Title3Container.Companion.REQUIREMENT_TYPE
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.ui.dialog.popup.CustomDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData.Companion.getCancelSendingEstimationDialogData
@@ -210,14 +210,14 @@ class WriteEstimationActivity : BaseActivity<ActivityWriteEstimationBinding>(
         viewModel.requirement.observe(this, { requirement ->
             binding.flexibleContainer.removeAllViews()
             // view : 고객 요청 내용, 이전 실측 내용(있으면)
-            IconLabelContainer.addIconLabelContainer(
+            Title3Container.addIconLabelContainer(
                 context = this,
                 container = binding.flexibleContainer,
                 requirementDto = requirement,
                 contentType = REQUIREMENT_TYPE,
             )
             requirement.measurement?.let {
-                IconLabelContainer.addIconLabelContainer(
+                Title3Container.addIconLabelContainer(
                     context = this,
                     container = binding.flexibleContainer,
                     requirementDto = requirement,

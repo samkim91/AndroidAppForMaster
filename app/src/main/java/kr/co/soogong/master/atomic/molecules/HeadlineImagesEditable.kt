@@ -5,16 +5,16 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import kr.co.soogong.master.data.dto.AttachmentDto
-import kr.co.soogong.master.databinding.ViewTitleImagesEditableBinding
+import kr.co.soogong.master.databinding.ViewHeadlineImagesEditableBinding
 import kr.co.soogong.master.utility.extension.setImageUrl
 
-class TitleImagesEditable @JvmOverloads constructor(
+class HeadlineImagesEditable @JvmOverloads constructor(
     context: Context,
     attributeSet: AttributeSet? = null,
     defStyle: Int = 0,
 ) : ConstraintLayout(context, attributeSet, defStyle) {
     private val binding =
-        ViewTitleImagesEditableBinding.inflate(LayoutInflater.from(context), this, true)
+        ViewHeadlineImagesEditableBinding.inflate(LayoutInflater.from(context), this, true)
 
     var title: String? = null
         set(value) {

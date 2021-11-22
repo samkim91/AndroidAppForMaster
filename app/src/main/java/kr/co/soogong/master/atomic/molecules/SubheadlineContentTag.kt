@@ -14,32 +14,32 @@ import kr.co.soogong.master.data.dto.requirement.RequirementDto
 import kr.co.soogong.master.data.model.profile.Review
 import kr.co.soogong.master.data.model.requirement.estimation.EstimationPriceTypeCode
 import kr.co.soogong.master.data.model.requirement.repair.CanceledReason
-import kr.co.soogong.master.databinding.ViewLabelContentTagBinding
+import kr.co.soogong.master.databinding.ViewSubheadlineContentTagBinding
 import kr.co.soogong.master.ui.profile.review.ReviewViewHolderHelper
 import kr.co.soogong.master.utility.extension.dp
 import kr.co.soogong.master.utility.extension.formatMoney
 
-class LabelContentTag @JvmOverloads constructor(
+class SubheadlineContentTag @JvmOverloads constructor(
     context: Context,
     attributeSet: AttributeSet? = null,
     defStyle: Int = 0,
 ) : ConstraintLayout(context, attributeSet, defStyle) {
     private var binding =
-        ViewLabelContentTagBinding.inflate(LayoutInflater.from(context), this, true)
+        ViewSubheadlineContentTagBinding.inflate(LayoutInflater.from(context), this, true)
 
-    var label: String? = ""
+    var subheadline: String? = ""
         set(value) {
             field = value
-            if (!value.isNullOrEmpty()) binding.textViewLabel.text = value
+            if (!value.isNullOrEmpty()) binding.tvSubheadline.text = value
         }
 
     var content: String? = ""
         set(value) {
             field = value
             if (value.isNullOrEmpty()) {
-                binding.textViewContent.setText(R.string.null_text)
+                binding.tvContent.setText(R.string.null_text)
             } else {
-                binding.textViewContent.text = value
+                binding.tvContent.text = value
             }
         }
 
@@ -47,8 +47,8 @@ class LabelContentTag @JvmOverloads constructor(
         set(value) {
             field = value
             if (!value.isNullOrEmpty()) {
-                binding.textViewTag.isVisible = true
-                binding.textViewTag.text = value
+                binding.tvTag.isVisible = true
+                binding.tvTag.text = value
             }
         }
 
@@ -68,8 +68,8 @@ class LabelContentTag @JvmOverloads constructor(
             // Qna 추가
             requirementDto.requirementQnas?.let { qnaList ->
                 qnaList.map { qna ->
-                    LabelContentTag(context).also { item ->
-                        item.label = qna.question
+                    SubheadlineContentTag(context).also { item ->
+                        item.subheadline = qna.question
                         item.content = qna.answer
                         container.addView(item, params)
                     }
@@ -77,8 +77,8 @@ class LabelContentTag @JvmOverloads constructor(
             }
 
             // description 추가
-            LabelContentTag(context).also { item ->
-                item.label = context.getString(R.string.view_requirement_description)
+            SubheadlineContentTag(context).also { item ->
+                item.subheadline = context.getString(R.string.view_requirement_description)
                 item.content = requirementDto.description
                 container.addView(item, params)
             }
@@ -99,8 +99,8 @@ class LabelContentTag @JvmOverloads constructor(
         ) {
             requirementDto.estimationDto?.let { estimation ->
                 // 총 견적가
-                LabelContentTag(context).also { item ->
-                    item.label = context.getString(R.string.estimation_total_cost)
+                SubheadlineContentTag(context).also { item ->
+                    item.subheadline = context.getString(R.string.estimation_total_cost)
                     item.content =
                         if (estimation.price != 0) estimation.price.formatMoney() else context.getString(
                             R.string.not_estimated_text)
@@ -112,8 +112,8 @@ class LabelContentTag @JvmOverloads constructor(
                 // 항목별 견적가
                 if (!estimation.estimationPrices.isNullOrEmpty())
                     estimation.estimationPrices.map { price ->
-                        LabelContentTag(context).also { item ->
-                            item.label = when (price.priceTypeCode) {
+                        SubheadlineContentTag(context).also { item ->
+                            item.subheadline = when (price.priceTypeCode) {
                                 EstimationPriceTypeCode.LABOR ->
                                     context.getString(R.string.estimation_labor_cost)
                                 EstimationPriceTypeCode.MATERIAL ->
@@ -128,8 +128,8 @@ class LabelContentTag @JvmOverloads constructor(
                     }
 
                 // 제안내용
-                LabelContentTag(context).also { item ->
-                    item.label = context.getString(R.string.estimation_description_label)
+                SubheadlineContentTag(context).also { item ->
+                    item.subheadline = context.getString(R.string.estimation_description_label)
                     item.content = estimation.description
                     container.addView(item, params)
                 }
@@ -152,8 +152,8 @@ class LabelContentTag @JvmOverloads constructor(
         ) {
             requirementDto.estimationDto?.let { estimation ->
                 // 최종 시공가
-                LabelContentTag(context).also { item ->
-                    item.label = context.getString(R.string.repair_actual_price)
+                SubheadlineContentTag(context).also { item ->
+                    item.subheadline = context.getString(R.string.repair_actual_price)
                     item.content = estimation.repair?.actualPrice.formatMoney()
                     item.tag =
                         if (estimation.repair?.actualPrice!! > 0) context.getString(if (estimation.repair.includingVat == true) R.string.vat_included else R.string.vat_not_included) else ""
@@ -185,22 +185,22 @@ class LabelContentTag @JvmOverloads constructor(
                     }
 
                     // 추가 요청 사유
-                    LabelContentTag(context).also { item ->
-                        item.label = context.getString(R.string.canceled_reason_of_client)
+                    SubheadlineContentTag(context).also { item ->
+                        item.subheadline = context.getString(R.string.canceled_reason_of_client)
                         item.content = preRequirement.cancelName
                         container.addView(item, params)
                     }
 
                     // 세부내용
-                    LabelContentTag(context).also { item ->
-                        item.label = context.getString(R.string.description_label)
+                    SubheadlineContentTag(context).also { item ->
+                        item.subheadline = context.getString(R.string.description_label)
                         item.content = preRequirement.canceledDescription
                         container.addView(item, params)
                     }
 
                     // 다른 마스터님의 견적가
-                    LabelContentTag(context).also { item ->
-                        item.label = context.getString(R.string.price_of_previous_estimation)
+                    SubheadlineContentTag(context).also { item ->
+                        item.subheadline = context.getString(R.string.price_of_previous_estimation)
                         item.content = measurement.price.formatMoney()
                         item.tag =
                             if (measurement.includingVat != null) context.getString(if (measurement.includingVat == true) R.string.vat_included else R.string.vat_not_included) else ""
@@ -208,8 +208,9 @@ class LabelContentTag @JvmOverloads constructor(
                     }
 
                     // 다른 마스터님의 코멘트
-                    LabelContentTag(context).also { item ->
-                        item.label = context.getString(R.string.description_of_previous_estimation)
+                    SubheadlineContentTag(context).also { item ->
+                        item.subheadline =
+                            context.getString(R.string.description_of_previous_estimation)
                         item.content = measurement.description
                         container.addView(item, params)
                     }
@@ -231,15 +232,15 @@ class LabelContentTag @JvmOverloads constructor(
             requirementDto: RequirementDto,
         ) {
             requirementDto.let { requirement ->
-                LabelContentTag(context).also { item ->
-                    item.label = context.getString(R.string.canceled_reason_label)
+                SubheadlineContentTag(context).also { item ->
+                    item.subheadline = context.getString(R.string.canceled_reason_label)
                     item.content =
                         CanceledReason.getCanceledReasonFromCode(requirement.canceledCode).inKorean
                     container.addView(item, params)
                 }
 
-                LabelContentTag(context).also { item ->
-                    item.label = context.getString(R.string.description_label)
+                SubheadlineContentTag(context).also { item ->
+                    item.subheadline = context.getString(R.string.description_label)
                     item.content = requirement.canceledDescription
                     container.addView(item, params)
                 }
