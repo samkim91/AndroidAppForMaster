@@ -68,9 +68,10 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_subscription_plan"
                     style="@style/caption_2.bold"
-                    android:layout_width="wrap_content"
+                    android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/gap_16"
+                    android:gravity="center"
                     android:textColor="@color/brand_green"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -81,16 +82,17 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_representative_name"
                     style="@style/headline.bold"
-                    android:layout_width="wrap_content"
+                    android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/gap_1"
                     android:ellipsize="end"
+                    android:gravity="center"
+                    android:hint="@string/fill_representative_name"
                     android:maxLines="1"
-                    android:text="@{vm.profile.representativeName != null ? vm.profile.representativeName : @string/fill_representative_name}"
+                    android:text="@{vm.profile.representativeName}"
                     android:textColor="@color/black"
                     app:layout_constrainedWidth="true"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_chainStyle="packed"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_subscription_plan"
                     tools:text="마그컹컹컹" />
@@ -156,7 +158,7 @@
                 <kr.co.soogong.master.atomic.molecules.BoxContentCancellable
                     android:id="@+id/bcc_required_information"
                     android:layout_width="@dimen/gap_0"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/gap_12"
                     app:content="@{@string/explanation_of_required_information}"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -164,14 +166,25 @@
                     app:layout_constraintTop_toBottomOf="@id/tpi_required_information" />
 
                 <kr.co.soogong.master.atomic.molecules.TitleButtonContent
-                    android:id="@+id/tbc_representative_name"
+                    android:id="@+id/tbc_owner_name"
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/gap_33"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/bcc_required_information"
-                    app:title="@{@string/representative_name}" />
+                    app:title="@{@string/owner_name}" />
+
+                <kr.co.soogong.master.atomic.molecules.TitleButtonContent
+                    android:id="@+id/tbc_company_introduction"
+                    android:layout_width="@dimen/gap_0"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/gap_33"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tbc_owner_name"
+                    app:title="@{@string/company_introduction}" />
+
 
                 <!--                <androidx.appcompat.widget.AppCompatImageView-->
                 <!--                    android:id="@+id/line2"-->
