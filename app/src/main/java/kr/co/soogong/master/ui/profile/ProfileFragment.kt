@@ -96,7 +96,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
             }
 
             tieShopImages.onButtonClick = View.OnClickListener {
-                getSingleImage()
+
             }
 
 //            editRequiredInfo.setOnClickListener {
