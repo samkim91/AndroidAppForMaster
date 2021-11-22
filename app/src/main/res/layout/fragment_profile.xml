@@ -19,6 +19,10 @@
             type="kr.co.soogong.master.data.common.ColorTheme" />
 
         <variable
+            name="colorThemeOptionalInformationProgress"
+            type="kr.co.soogong.master.data.common.ColorTheme" />
+
+        <variable
             name="vm"
             type="kr.co.soogong.master.ui.profile.ProfileViewModel" />
     </data>
@@ -44,13 +48,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingStart="@dimen/gap_16"
-                android:paddingEnd="@dimen/gap_16">
+                android:paddingEnd="@dimen/gap_16"
+                android:paddingBottom="@dimen/gap_54">
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/iv_profile_image"
-                    android:layout_width="@dimen/gap_80"
-                    android:layout_height="@dimen/gap_80"
+                    android:layout_width="@dimen/gap_0"
+                    android:layout_height="@dimen/gap_0"
                     android:layout_marginTop="@dimen/gap_20"
+                    app:layout_constraintWidth_percent="0.25"
+                    app:layout_constraintDimensionRatio="H, 1:1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -98,7 +105,7 @@
                     tools:text="마그컹컹컹" />
 
                 <kr.co.soogong.master.atomic.organisms.ReviewBox
-                    android:id="@+id/review_box"
+                    android:id="@+id/rb_my_reviews"
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/gap_26"
@@ -118,7 +125,7 @@
                     app:buttonTheme="@{buttonThemeRequestReview}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/review_box" />
+                    app:layout_constraintTop_toBottomOf="@id/rb_my_reviews" />
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/line"
@@ -131,7 +138,7 @@
                     app:layout_constraintTop_toBottomOf="@id/bb_request_review" />
 
                 <kr.co.soogong.master.atomic.molecules.BoxIconContent
-                    android:id="@+id/bn_profile_guideline"
+                    android:id="@+id/bic_profile_guideline"
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/gap_16"
@@ -143,7 +150,7 @@
                     app:layout_constraintTop_toBottomOf="@id/line" />
 
                 <kr.co.soogong.master.atomic.molecules.SubheadlineProgressIndicator
-                    android:id="@+id/tpi_required_information"
+                    android:id="@+id/spi_required_information"
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/gap_24"
@@ -151,7 +158,7 @@
                     app:contentLabelFilled="@{@string/requirement}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/bn_profile_guideline"
+                    app:layout_constraintTop_toBottomOf="@id/bic_profile_guideline"
                     app:percent="@{40.0}"
                     app:title="@{@string/completion_of_required_information}" />
 
@@ -163,10 +170,10 @@
                     app:content="@{@string/explanation_of_required_information}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tpi_required_information" />
+                    app:layout_constraintTop_toBottomOf="@id/spi_required_information" />
 
                 <kr.co.soogong.master.atomic.molecules.HeadlineButtonContent
-                    android:id="@+id/tbc_owner_name"
+                    android:id="@+id/hbc_owner_name"
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/gap_33"
@@ -176,53 +183,53 @@
                     app:title="@{@string/owner_name}" />
 
                 <kr.co.soogong.master.atomic.molecules.HeadlineButtonContent
-                    android:id="@+id/tbc_company_introduction"
+                    android:id="@+id/hbc_company_introduction"
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/gap_33"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tbc_owner_name"
+                    app:layout_constraintTop_toBottomOf="@id/hbc_owner_name"
                     app:title="@{@string/company_introduction}" />
 
                 <kr.co.soogong.master.atomic.molecules.HeadlineImagesEditable
-                    android:id="@+id/tie_shop_images"
+                    android:id="@+id/hie_shop_images"
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/gap_33"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tbc_company_introduction"
+                    app:layout_constraintTop_toBottomOf="@id/hbc_company_introduction"
                     app:title="@{@string/shop_images}" />
 
                 <kr.co.soogong.master.atomic.molecules.HeadlineButtonContent
-                    android:id="@+id/tbc_business_unit_information"
+                    android:id="@+id/hbc_business_unit_information"
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/gap_33"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tie_shop_images"
+                    app:layout_constraintTop_toBottomOf="@id/hie_shop_images"
                     app:title="@{@string/business_unit_information}" />
 
                 <kr.co.soogong.master.atomic.molecules.HeadlineButtonContent
-                    android:id="@+id/tbc_warranty_information"
+                    android:id="@+id/hbc_warranty_information"
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/gap_33"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tbc_business_unit_information"
+                    app:layout_constraintTop_toBottomOf="@id/hbc_business_unit_information"
                     app:title="@{@string/warranty_information}" />
 
                 <kr.co.soogong.master.atomic.molecules.HeadlineButtonContent
-                    android:id="@+id/tbc_contact_information"
+                    android:id="@+id/hbc_contact_information"
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/gap_33"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tbc_warranty_information"
+                    app:layout_constraintTop_toBottomOf="@id/hbc_warranty_information"
                     app:title="@{@string/contact_information}" />
 
                 <kr.co.soogong.master.atomic.molecules.HeadlineButtonContent
@@ -232,11 +239,11 @@
                     android:layout_marginTop="@dimen/gap_33"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tbc_contact_information"
+                    app:layout_constraintTop_toBottomOf="@id/hbc_contact_information"
                     app:title="@{@string/career}" />
 
                 <kr.co.soogong.master.atomic.molecules.HeadlineButtonChipGroup
-                    android:id="@+id/tbc_projects"
+                    android:id="@+id/hbcg_projects"
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/gap_33"
@@ -245,6 +252,91 @@
                     app:layout_constraintTop_toBottomOf="@id/tbc_career"
                     app:title="@{@string/projects}" />
 
+                <kr.co.soogong.master.atomic.molecules.HeadlineButtonContent
+                    android:id="@+id/hbc_service_area"
+                    android:layout_width="@dimen/gap_0"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/gap_33"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/hbcg_projects"
+                    app:title="@{@string/service_area}" />
+
+                <kr.co.soogong.master.atomic.molecules.SubheadlineProgressIndicator
+                    android:id="@+id/spi_optional_information"
+                    android:layout_width="@dimen/gap_0"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/gap_60"
+                    app:colorThemeLabelFilled="@{colorThemeOptionalInformationProgress}"
+                    app:contentLabelFilled="@{@string/option}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/hbc_service_area"
+                    app:percent="@{30.0}"
+                    app:title="@{@string/completion_of_optional_information}" />
+
+                <kr.co.soogong.master.atomic.molecules.BoxContentCancellable
+                    android:id="@+id/bcc_optional_information"
+                    android:layout_width="@dimen/gap_0"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/gap_12"
+                    app:content="@{@string/explanation_of_required_information}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/spi_optional_information" />
+
+                <kr.co.soogong.master.atomic.molecules.HeadlineButtonContent
+                    android:id="@+id/hbc_free_measure"
+                    android:layout_width="@dimen/gap_0"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/gap_33"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/bcc_optional_information"
+                    app:title="@{@string/free_measure}" />
+
+                <kr.co.soogong.master.atomic.molecules.HeadlineButtonContent
+                    android:id="@+id/hbc_portfolio"
+                    android:layout_width="@dimen/gap_0"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/gap_33"
+                    app:hint="@{@string/portfolio_hint}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/hbc_free_measure"
+                    app:title="@{@string/portfolio}" />
+
+                <kr.co.soogong.master.atomic.molecules.HeadlineButtonContent
+                    android:id="@+id/hbc_price_by_project"
+                    android:layout_width="@dimen/gap_0"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/gap_33"
+                    app:hint="@{@string/price_by_project_hint}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/hbc_portfolio"
+                    app:title="@{@string/price_by_project}" />
+
+                <kr.co.soogong.master.atomic.molecules.HeadlineButtonContent
+                    android:id="@+id/hbc_master_configs"
+                    android:layout_width="@dimen/gap_0"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/gap_33"
+                    app:hint="@{@string/master_configs_hint}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/hbc_price_by_project"
+                    app:title="@{@string/master_configs}" />
+
+                <kr.co.soogong.master.atomic.molecules.HeadlineButtonContent
+                    android:id="@+id/hbc_email_address"
+                    android:layout_width="@dimen/gap_0"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/gap_33"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/hbc_master_configs"
+                    app:title="@{@string/email_address}" />
 
                 <!--                <androidx.appcompat.widget.AppCompatImageView-->
                 <!--                    android:id="@+id/line2"-->
