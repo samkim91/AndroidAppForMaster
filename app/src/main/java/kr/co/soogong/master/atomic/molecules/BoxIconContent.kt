@@ -41,7 +41,7 @@ class BoxIconContent @JvmOverloads constructor(
                 when (it) {
                     is ColorTheme.Grey -> {
                         this.background = ResourcesCompat.getDrawable(resources,
-                            R.drawable.background_background_solid_radius16,
+                            R.drawable.bg_solid_background_radius16,
                             null)
                         binding.tvContent.setTextColor(ResourcesCompat.getColor(resources,
                             R.color.grey_3,

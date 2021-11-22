@@ -10,13 +10,13 @@
         android:paddingTop="@dimen/gap_28"
         android:paddingEnd="@dimen/gap_8"
         android:paddingBottom="@dimen/gap_28"
-        tools:background="@drawable/background_background_solid_radius16">
+        tools:background="@drawable/bg_solid_background_radius16">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_icon_container"
             android:layout_width="@dimen/gap_40"
             android:layout_height="@dimen/gap_40"
-            android:background="@drawable/background_white_solid_light_grey1_stroke_radius20"
+            android:background="@drawable/bg_solid_white_stroke_light_grey1_radius20"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

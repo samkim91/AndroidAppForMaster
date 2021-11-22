@@ -92,7 +92,11 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
             }
 
             tbcCompanyIntroduction.onButtonClick = View.OnClickListener {
-                tbcCompanyIntroduction.tvContent.isVisible = true
+
+            }
+
+            tieShopImages.onButtonClick = View.OnClickListener {
+                getSingleImage()
             }
 
 //            editRequiredInfo.setOnClickListener {

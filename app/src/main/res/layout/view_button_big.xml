@@ -11,7 +11,7 @@
             android:layout_height="@dimen/gap_56"
             android:gravity="center"
             android:stateListAnimator="@null"
-            tools:background="@drawable/background_selector_white_solid_green_stroke_radius8"
+            tools:background="@drawable/bg_solid_white_stroke_green_selector_radius8"
             tools:textColor="@color/selector_green_alpha50"
             tools:enabled="true"
             tools:text="버튼명" />

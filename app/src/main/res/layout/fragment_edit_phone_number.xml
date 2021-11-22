@@ -78,7 +78,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/gap_12"
-                        android:background="@drawable/background_white_solid_light_grey1_stroke_radius8"
+                        android:background="@drawable/bg_solid_white_stroke_light_grey1_radius8"
                         android:hint="@string/insert_certification_code_edittext_hint"
                         android:inputType="numberSigned"
                         android:maxLength="6"

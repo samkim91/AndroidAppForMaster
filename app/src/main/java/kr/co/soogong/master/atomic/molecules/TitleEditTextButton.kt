@@ -137,7 +137,7 @@ class TitleEditTextButton @JvmOverloads constructor(
             field = value
             if (value) {
                 binding.button.background = ResourcesCompat.getDrawable(resources,
-                    R.drawable.background_white_solid_light_grey1_stroke_radius8,
+                    R.drawable.bg_solid_white_stroke_light_grey1_radius8,
                     null)
             } else {
                 binding.button.background = ResourcesCompat.getDrawable(resources,

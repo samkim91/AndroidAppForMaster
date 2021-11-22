@@ -32,13 +32,13 @@ class LabelOutlined @JvmOverloads constructor(
                     is ShapeTheme.Circle -> {
                         binding.tvContent.background =
                             ResourcesCompat.getDrawable(resources,
-                                R.drawable.background_white_solid_light_grey2_stroke_radius20,
+                                R.drawable.bg_solid_white_stroke_light_grey2_radius20,
                                 null)
                     }
                     is ShapeTheme.Rectangle -> {
                         binding.tvContent.background =
                             ResourcesCompat.getDrawable(resources,
-                                R.drawable.background_white_solid_light_grey2_stroke_radius4,
+                                R.drawable.bg_solid_white_stroke_light_grey2_radius4,
                                 null)
                     }
                 }
