@@ -70,7 +70,9 @@
     <dimen name="gap_50">50dp</dimen>
     <dimen name="gap_55">55dp</dimen>
     <dimen name="gap_52">52dp</dimen>
+    <dimen name="gap_54">54dp</dimen>
     <dimen name="gap_56">56dp</dimen>
+    <dimen name="gap_60">60dp</dimen>
     <dimen name="gap_64">64dp</dimen>
     <dimen name="gap_68">68dp</dimen>
     <dimen name="gap_72">72dp</dimen>

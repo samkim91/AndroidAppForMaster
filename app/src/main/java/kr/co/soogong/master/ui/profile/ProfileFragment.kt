@@ -51,8 +51,9 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
             buttonThemeRequestReview = ButtonTheme.OutlinedPrimary
             colorThemeProfileGuideline = ColorTheme.Grey
             colorThemeRequiredInformationProgress = ColorTheme.Red
+            colorThemeOptionalInformationProgress = ColorTheme.Grey
 
-            reviewBox.setOnClickListener {
+            rbMyReviews.setOnClickListener {
                 startActivity(
                     MyReviewsActivityHelper.getIntent(requireContext())
                 )
@@ -81,8 +82,8 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
                 }
             }
 
-            tbcOwnerName.onButtonClick = View.OnClickListener {
-                with(tbcOwnerName.tvContent) {      // 대표자명 수정을 위해, 포커스와 키보드 보이게 처리
+            hbcOwnerName.onButtonClick = View.OnClickListener {
+                with(hbcOwnerName.tvContent) {      // 대표자명 수정을 위해, 포커스와 키보드 보이게 처리
                     this.isVisible = true
                     this.isEnabled = true
                     this.requestFocus()
@@ -91,11 +92,11 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
                 }
             }
 
-            tbcCompanyIntroduction.onButtonClick = View.OnClickListener {
+            hbcCompanyIntroduction.onButtonClick = View.OnClickListener {
 
             }
 
-            tieShopImages.onButtonClick = View.OnClickListener {
+            hieShopImages.onButtonClick = View.OnClickListener {
 
             }
 
