@@ -1,7 +1,10 @@
 package kr.co.soogong.master.ui.profile
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.InputMethodManager
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import gun0912.tedimagepicker.builder.TedImagePicker
@@ -76,6 +79,20 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
                 ).let {
                     it.show(parentFragmentManager, it.tag)
                 }
+            }
+
+            tbcOwnerName.onButtonClick = View.OnClickListener {
+                with(tbcOwnerName.tvContent) {      // 대표자명 수정을 위해, 포커스와 키보드 보이게 처리
+                    this.isVisible = true
+                    this.isEnabled = true
+                    this.requestFocus()
+                    (requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager)
+                        .showSoftInput(this, 0)
+                }
+            }
+
+            tbcCompanyIntroduction.onButtonClick = View.OnClickListener {
+                tbcCompanyIntroduction.tvContent.isVisible = true
             }
 
 //            editRequiredInfo.setOnClickListener {

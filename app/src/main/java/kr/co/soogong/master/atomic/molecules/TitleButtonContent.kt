@@ -28,14 +28,24 @@ class TitleButtonContent @JvmOverloads constructor(
             value?.let { binding.tvTitle.text = it }
         }
 
-    // 데이터/힌트가 모두 다르므로, TitleButtonContentExt 를 참고
+    val tvContent = binding.tvContent
+
     var content: String? = null
         set(value) {
             field = value
             value?.let {
-                binding.tvContent.text = it
+                binding.tvContent.setText(it)
                 binding.tvContent.isVisible = true
                 setButtonStatus()
+            }
+        }
+
+    var hint: String? = null
+        set(value) {
+            field = value
+            value?.let {
+                binding.tvContent.hint = it
+                binding.tvContent.isVisible = true
             }
         }
 
