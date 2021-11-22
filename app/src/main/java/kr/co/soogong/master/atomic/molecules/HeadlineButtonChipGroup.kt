@@ -5,18 +5,17 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.res.ResourcesCompat
-import androidx.core.view.isVisible
 import kr.co.soogong.master.R
-import kr.co.soogong.master.databinding.ViewTitleButtonContentBinding
+import kr.co.soogong.master.databinding.ViewHeadlineButtonChipGroupBinding
 
-class TitleButtonContent @JvmOverloads constructor(
+class HeadlineButtonChipGroup @JvmOverloads constructor(
     context: Context,
     attributeSet: AttributeSet? = null,
     defStyle: Int = 0,
 ) : ConstraintLayout(context, attributeSet, defStyle) {
 
     private val binding =
-        ViewTitleButtonContentBinding.inflate(LayoutInflater.from(context), this, true)
+        ViewHeadlineButtonChipGroupBinding.inflate(LayoutInflater.from(context), this, true)
 
     init {
         setButtonStatus()
@@ -28,24 +27,11 @@ class TitleButtonContent @JvmOverloads constructor(
             value?.let { binding.tvTitle.text = it }
         }
 
-    val tvContent = binding.tvContent
-
-    var content: String? = null
+    var chips: List<String>? = null
         set(value) {
             field = value
             value?.let {
-                binding.tvContent.setText(it)
-                binding.tvContent.isVisible = true
                 setButtonStatus()
-            }
-        }
-
-    var hint: String? = null
-        set(value) {
-            field = value
-            value?.let {
-                binding.tvContent.hint = it
-                binding.tvContent.isVisible = true
             }
         }
 
@@ -57,7 +43,7 @@ class TitleButtonContent @JvmOverloads constructor(
 
     private fun setButtonStatus() {
         with(binding.tvButton) {
-            if (content.isNullOrEmpty()) {
+            if (chips.isNullOrEmpty()) {
                 text = resources.getString(R.string.register)
                 setTextColor(ResourcesCompat.getColor(resources, R.color.brand_green, null))
             } else {

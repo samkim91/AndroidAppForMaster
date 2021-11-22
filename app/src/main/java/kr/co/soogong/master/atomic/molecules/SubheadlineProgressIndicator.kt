@@ -6,16 +6,16 @@ import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.common.ColorTheme
-import kr.co.soogong.master.databinding.ViewTitleProgressIndicatorBinding
+import kr.co.soogong.master.databinding.ViewSubheadlineProgressIndicatorBinding
 import kotlin.math.roundToInt
 
-class TitleProgressIndicator @JvmOverloads constructor(
+class SubheadlineProgressIndicator @JvmOverloads constructor(
     context: Context,
     attributeSet: AttributeSet? = null,
     defStyle: Int = 0,
 ) : ConstraintLayout(context, attributeSet, defStyle) {
     val binding =
-        ViewTitleProgressIndicatorBinding.inflate(LayoutInflater.from(context), this, true)
+        ViewSubheadlineProgressIndicatorBinding.inflate(LayoutInflater.from(context), this, true)
 
     var title: String? = null
         set(value) {

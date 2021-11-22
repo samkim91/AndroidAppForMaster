@@ -16,7 +16,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_title"
-            style="@style/sub_headline.bold"
+            style="@style/subheadline.bold"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/gap_4"
@@ -36,7 +36,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_percent"
-            style="@style/sub_headline.bold"
+            style="@style/subheadline.bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/gap_4"

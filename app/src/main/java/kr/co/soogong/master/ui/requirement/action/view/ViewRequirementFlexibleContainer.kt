@@ -5,13 +5,13 @@ import kr.co.soogong.master.data.dto.requirement.RequirementDto
 import kr.co.soogong.master.data.model.requirement.RequirementStatus
 import kr.co.soogong.master.data.model.requirement.estimation.EstimationResponseCode
 import kr.co.soogong.master.databinding.ActivityViewRequirementBinding
-import kr.co.soogong.master.atomic.molecules.IconLabelContainer
-import kr.co.soogong.master.atomic.molecules.IconLabelContainer.Companion.CANCEL_TYPE
-import kr.co.soogong.master.atomic.molecules.IconLabelContainer.Companion.ESTIMATION_TYPE
-import kr.co.soogong.master.atomic.molecules.IconLabelContainer.Companion.PREVIOUS_ESTIMATION_TYPE
-import kr.co.soogong.master.atomic.molecules.IconLabelContainer.Companion.REPAIR_TYPE
-import kr.co.soogong.master.atomic.molecules.IconLabelContainer.Companion.REQUIREMENT_TYPE
-import kr.co.soogong.master.atomic.molecules.IconLabelContainer.Companion.REVIEW_TYPE
+import kr.co.soogong.master.atomic.molecules.Title3Container
+import kr.co.soogong.master.atomic.molecules.Title3Container.Companion.CANCEL_TYPE
+import kr.co.soogong.master.atomic.molecules.Title3Container.Companion.ESTIMATION_TYPE
+import kr.co.soogong.master.atomic.molecules.Title3Container.Companion.PREVIOUS_ESTIMATION_TYPE
+import kr.co.soogong.master.atomic.molecules.Title3Container.Companion.REPAIR_TYPE
+import kr.co.soogong.master.atomic.molecules.Title3Container.Companion.REQUIREMENT_TYPE
+import kr.co.soogong.master.atomic.molecules.Title3Container.Companion.REVIEW_TYPE
 import timber.log.Timber
 
 // Note: 1차 리팩토링이고, 중복되는 함수들은 다시 빼내야함.
@@ -28,13 +28,13 @@ fun setFlexibleContainer(
         when (RequirementStatus.getStatusFromRequirement(requirement)) {
             is RequirementStatus.Requested, RequirementStatus.RequestMeasure -> {
                 // view : 고객 요청 내용, 이전 실측 내용(있으면)
-                IconLabelContainer.addIconLabelContainer(
+                Title3Container.addIconLabelContainer(
                     context = context,
                     container = flexibleContainer,
                     requirementDto = requirement,
                     contentType = REQUIREMENT_TYPE)
                 requirement.measurement?.let {
-                    IconLabelContainer.addIconLabelContainer(
+                    Title3Container.addIconLabelContainer(
                         context = context,
                         container = flexibleContainer,
                         requirementDto = requirement,
@@ -46,7 +46,7 @@ fun setFlexibleContainer(
                 (requirement.estimationDto?.masterResponseCode == EstimationResponseCode.ACCEPTED).let { accepted ->
                     if (accepted) {
                         // view : 나의 제안 내용
-                        IconLabelContainer.addIconLabelContainer(
+                        Title3Container.addIconLabelContainer(
                             context = context,
                             container = flexibleContainer,
                             requirementDto = requirement,
@@ -54,14 +54,14 @@ fun setFlexibleContainer(
                         )
                     }
                     // view : 고객 요청 내용, 이전 실측 내용(있으면)
-                    IconLabelContainer.addIconLabelContainer(
+                    Title3Container.addIconLabelContainer(
                         context = context,
                         container = flexibleContainer,
                         requirementDto = requirement,
                         contentType = REQUIREMENT_TYPE,
                     )
                     requirement.measurement?.let {
-                        IconLabelContainer.addIconLabelContainer(
+                        Title3Container.addIconLabelContainer(
                             context = context,
                             container = flexibleContainer,
                             requirementDto = requirement,
@@ -73,20 +73,20 @@ fun setFlexibleContainer(
 
             is RequirementStatus.Estimated, RequirementStatus.Measured -> {
                 // view : 나의 제안 내용, 고객 요청 내용, 이전 실측 내용
-                IconLabelContainer.addIconLabelContainer(
+                Title3Container.addIconLabelContainer(
                     context = context,
                     container = flexibleContainer,
                     requirementDto = requirement,
                     contentType = ESTIMATION_TYPE,
                 )
-                IconLabelContainer.addIconLabelContainer(
+                Title3Container.addIconLabelContainer(
                     context = context,
                     container = flexibleContainer,
                     requirementDto = requirement,
                     contentType = REQUIREMENT_TYPE,
                 )
                 requirement.measurement?.let {
-                    IconLabelContainer.addIconLabelContainer(
+                    Title3Container.addIconLabelContainer(
                         context = context,
                         container = flexibleContainer,
                         requirementDto = requirement,
@@ -97,20 +97,20 @@ fun setFlexibleContainer(
 
             is RequirementStatus.Repairing, RequirementStatus.Measuring -> {
                 // view : 고객 요청 내용, 나의 제안 내용, 이전 실측 내용
-                IconLabelContainer.addIconLabelContainer(
+                Title3Container.addIconLabelContainer(
                     context = context,
                     container = flexibleContainer,
                     requirementDto = requirement,
                     contentType = REQUIREMENT_TYPE,
                 )
-                IconLabelContainer.addIconLabelContainer(
+                Title3Container.addIconLabelContainer(
                     context = context,
                     container = flexibleContainer,
                     requirementDto = requirement,
                     contentType = ESTIMATION_TYPE,
                 )
                 requirement.measurement?.let {
-                    IconLabelContainer.addIconLabelContainer(
+                    Title3Container.addIconLabelContainer(
                         context = context,
                         container = flexibleContainer,
                         requirementDto = requirement,
@@ -121,20 +121,20 @@ fun setFlexibleContainer(
 
             is RequirementStatus.Done -> {
                 // view : 나의 최종 시공 내용, 고객 요청 내용, 이전 실측 내용(있으면)
-                IconLabelContainer.addIconLabelContainer(
+                Title3Container.addIconLabelContainer(
                     context = context,
                     container = flexibleContainer,
                     requirementDto = requirement,
                     contentType = REPAIR_TYPE,
                 )
-                IconLabelContainer.addIconLabelContainer(
+                Title3Container.addIconLabelContainer(
                     context = context,
                     container = flexibleContainer,
                     requirementDto = requirement,
                     contentType = REQUIREMENT_TYPE,
                 )
                 requirement.measurement?.let {
-                    IconLabelContainer.addIconLabelContainer(
+                    Title3Container.addIconLabelContainer(
                         context = context,
                         container = flexibleContainer,
                         requirementDto = requirement,
@@ -146,26 +146,26 @@ fun setFlexibleContainer(
 
             is RequirementStatus.Closed -> {
                 // view : 고객 리뷰, 나의 최종 시공 내용, 고객 요청 내용, 이전 실측 내용(있으면)
-                IconLabelContainer.addIconLabelContainer(
+                Title3Container.addIconLabelContainer(
                     context = context,
                     container = flexibleContainer,
                     requirementDto = requirement,
                     contentType = REVIEW_TYPE,
                 )
-                IconLabelContainer.addIconLabelContainer(
+                Title3Container.addIconLabelContainer(
                     context = context,
                     container = flexibleContainer,
                     requirementDto = requirement,
                     contentType = REPAIR_TYPE,
                 )
-                IconLabelContainer.addIconLabelContainer(
+                Title3Container.addIconLabelContainer(
                     context = context,
                     container = flexibleContainer,
                     requirementDto = requirement,
                     contentType = REQUIREMENT_TYPE,
                 )
                 requirement.measurement?.let {
-                    IconLabelContainer.addIconLabelContainer(
+                    Title3Container.addIconLabelContainer(
                         context = context,
                         container = flexibleContainer,
                         requirementDto = requirement,
@@ -177,20 +177,20 @@ fun setFlexibleContainer(
 
             is RequirementStatus.Canceled -> {
                 // view : 시공 취소 사유, 고객 요청 내용, 이전 실측 내용(있으면)
-                IconLabelContainer.addIconLabelContainer(
+                Title3Container.addIconLabelContainer(
                     context = context,
                     container = flexibleContainer,
                     requirementDto = requirement,
                     contentType = CANCEL_TYPE,
                 )
-                IconLabelContainer.addIconLabelContainer(
+                Title3Container.addIconLabelContainer(
                     context = context,
                     container = flexibleContainer,
                     requirementDto = requirement,
                     contentType = REQUIREMENT_TYPE,
                 )
                 requirement.measurement?.let {
-                    IconLabelContainer.addIconLabelContainer(
+                    Title3Container.addIconLabelContainer(
                         context = context,
                         container = flexibleContainer,
                         requirementDto = requirement,

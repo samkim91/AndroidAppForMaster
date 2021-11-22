@@ -5,12 +5,11 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
+        android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/text_view_label"
-            style="@style/sub_headline.regular"
+            android:id="@+id/tv_subheadline"
+            style="@style/subheadline.regular"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textColor="@color/grey_1"
@@ -21,23 +20,23 @@
             tools:text="프로젝트 질문" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/text_view_content"
-            style="@style/sub_headline.regular"
+            android:id="@+id/tv_content"
+            style="@style/subheadline.regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/gap_8"
             android:textColor="@color/black"
-            app:layout_constraintHorizontal_bias="0"
             app:layout_constrainedWidth="true"
-            app:layout_constraintEnd_toStartOf="@id/text_view_tag"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/tv_tag"
+            app:layout_constraintHorizontal_bias="0"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_view_label"
+            app:layout_constraintTop_toBottomOf="@id/tv_subheadline"
             tools:text="프로젝트 답변 프로젝트 답변 프로젝트 답변 프로젝트 답변 프로젝트 답변" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/text_view_tag"
+            android:id="@+id/tv_tag"
             style="@style/caption_2.bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -46,12 +45,12 @@
             android:padding="@dimen/gap_5"
             android:textColor="@color/grey_3"
             android:visibility="gone"
-            app:layout_constraintHorizontal_bias="0"
-            app:layout_constraintBottom_toBottomOf="@id/text_view_content"
+            app:layout_constraintBottom_toBottomOf="@id/tv_content"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
             app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toEndOf="@id/text_view_content"
-            app:layout_constraintTop_toTopOf="@id/text_view_content"
+            app:layout_constraintStart_toEndOf="@id/tv_content"
+            app:layout_constraintTop_toTopOf="@id/tv_content"
             tools:text="부가세 포함"
             tools:visibility="visible" />
     </androidx.constraintlayout.widget.ConstraintLayout>

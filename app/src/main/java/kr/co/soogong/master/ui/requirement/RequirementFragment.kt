@@ -59,16 +59,16 @@ class RequirementFragment : BaseFragment<FragmentRequirementBinding>(
                 }
             )
 
-            filterTabs.changeTabFont(0, R.style.sub_headline_regular)
+            filterTabs.changeTabFont(0, R.style.subheadline_regular)
             filterTabs.setTabClickListener(
                 onSelected = { tab ->
                     tab?.position.let {
-                        filterTabs.changeTabFont(it, R.style.sub_headline_bold)
+                        filterTabs.changeTabFont(it, R.style.subheadline_bold)
                         viewModel.filterTabIndex.value = it
                     }
                 },
                 onUnselected = { tab ->
-                    filterTabs.changeTabFont(tab?.position, R.style.sub_headline_regular)
+                    filterTabs.changeTabFont(tab?.position, R.style.subheadline_regular)
                 }
             )
 

@@ -20,7 +20,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_button"
-            style="@style/sub_headline.regular"
+            style="@style/subheadline.regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="@id/tv_title"
@@ -29,14 +29,23 @@
             tools:text="버튼"
             tools:textColor="@color/brand_red" />
 
-        <com.google.android.material.chip.ChipGroup
-            android:id="@+id/cg_chips"
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/tv_content"
+            style="@style/subheadline.regular"
             android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/gap_20"
+            android:background="@color/transparent"
+            android:breakStrategy="simple"
+            android:enabled="false"
+            android:textColor="@color/grey_2"
+            android:textColorHint="@color/grey_2"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_title" />
+            app:layout_constraintTop_toBottomOf="@id/tv_title"
+            tools:text="내용"
+            tools:visibility="visible" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_line"
@@ -46,7 +55,7 @@
             android:background="@color/light_grey_2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cg_chips"
+            app:layout_constraintTop_toBottomOf="@id/tv_content"
             app:layout_goneMarginTop="@dimen/gap_20" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

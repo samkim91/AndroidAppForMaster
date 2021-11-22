@@ -24,7 +24,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_created_at"
-            style="@style/foot_note.bold"
+            style="@style/footnote.bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/gap_2"
@@ -44,7 +44,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_address"
-            style="@style/sub_headline.bold"
+            style="@style/subheadline.bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/gap_18"
@@ -60,7 +60,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_project"
-            style="@style/foot_note.regular"
+            style="@style/footnote.regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/gap_4"

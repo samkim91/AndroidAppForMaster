@@ -5,17 +5,18 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.view.isVisible
 import kr.co.soogong.master.R
-import kr.co.soogong.master.databinding.ViewTitleButtonChipGroupBinding
+import kr.co.soogong.master.databinding.ViewHeadlineButtonContentBinding
 
-class TitleButtonChipGroup @JvmOverloads constructor(
+class HeadlineButtonContent @JvmOverloads constructor(
     context: Context,
     attributeSet: AttributeSet? = null,
     defStyle: Int = 0,
 ) : ConstraintLayout(context, attributeSet, defStyle) {
 
     private val binding =
-        ViewTitleButtonChipGroupBinding.inflate(LayoutInflater.from(context), this, true)
+        ViewHeadlineButtonContentBinding.inflate(LayoutInflater.from(context), this, true)
 
     init {
         setButtonStatus()
@@ -27,11 +28,24 @@ class TitleButtonChipGroup @JvmOverloads constructor(
             value?.let { binding.tvTitle.text = it }
         }
 
-    var chips: List<String>? = null
+    val tvContent = binding.tvContent
+
+    var content: String? = null
         set(value) {
             field = value
             value?.let {
+                binding.tvContent.setText(it)
+                binding.tvContent.isVisible = true
                 setButtonStatus()
+            }
+        }
+
+    var hint: String? = null
+        set(value) {
+            field = value
+            value?.let {
+                binding.tvContent.hint = it
+                binding.tvContent.isVisible = true
             }
         }
 
@@ -43,7 +57,7 @@ class TitleButtonChipGroup @JvmOverloads constructor(
 
     private fun setButtonStatus() {
         with(binding.tvButton) {
-            if (chips.isNullOrEmpty()) {
+            if (content.isNullOrEmpty()) {
                 text = resources.getString(R.string.register)
                 setTextColor(ResourcesCompat.getColor(resources, R.color.brand_green, null))
             } else {

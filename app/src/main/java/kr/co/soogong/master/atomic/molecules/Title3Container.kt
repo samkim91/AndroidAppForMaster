@@ -12,7 +12,7 @@ import kr.co.soogong.master.data.model.profile.CodeTable
 import kr.co.soogong.master.databinding.ViewIconLabelContainerBinding
 import kr.co.soogong.master.utility.extension.dp
 
-class IconLabelContainer @JvmOverloads constructor(
+class Title3Container @JvmOverloads constructor(
     context: Context,
     attributeSet: AttributeSet? = null,
     defStyle: Int = 0,
@@ -20,13 +20,13 @@ class IconLabelContainer @JvmOverloads constructor(
     private var binding =
         ViewIconLabelContainerBinding.inflate(LayoutInflater.from(context), this, true)
 
-    var label: String? = ""
+    var title: String? = ""
         set(value) {
             field = value
-            if (!value.isNullOrEmpty()) binding.textViewContainerLabel.text = value
+            if (!value.isNullOrEmpty()) binding.tvContainerTitle.text = value
         }
 
-    val detailContainer = binding.detailContainer
+    val detailContainer: LinearLayoutCompat = binding.llcDetailContainer
 
     companion object {
         const val REQUIREMENT_TYPE = 100
@@ -42,60 +42,60 @@ class IconLabelContainer @JvmOverloads constructor(
             requirementDto: RequirementDto,
             contentType: Int,
         ) {
-            IconLabelContainer(context).also { item ->
+            Title3Container(context).also { item ->
                 when (contentType) {
                     REQUIREMENT_TYPE -> {
-                        item.label =
+                        item.title =
                             context.getString(R.string.view_requirement_customer_request_label)
-                        LabelContentTag.addRequirementQnas(
+                        SubheadlineContentTag.addRequirementQnas(
                             context,
                             item.detailContainer,
                             requirementDto,
                         )
                     }
                     PREVIOUS_ESTIMATION_TYPE -> {
-                        item.label =
+                        item.title =
                             context.getString(R.string.view_requirement_previous_estimation_label)
-                        LabelContentTag.addPreviousEstimation(
+                        SubheadlineContentTag.addPreviousEstimation(
                             context,
                             item.detailContainer,
                             requirementDto
                         )
                     }
                     ESTIMATION_TYPE -> {
-                        item.label =
+                        item.title =
                             if (CodeTable.isSecretaryRequirement(requirementDto.typeCode))
                                 context.getString(R.string.view_requirement_my_measurement_label)
                             else
                                 context.getString(R.string.view_requirement_my_estimation_label)
-                        LabelContentTag.addEstimationDetail(
+                        SubheadlineContentTag.addEstimationDetail(
                             context,
                             item.detailContainer,
                             requirementDto,
                         )
                     }
                     REPAIR_TYPE -> {
-                        item.label =
+                        item.title =
                             context.getString(R.string.view_requirement_my_repair_label)
-                        LabelContentTag.addDoneDetail(
+                        SubheadlineContentTag.addDoneDetail(
                             context,
                             item.detailContainer,
                             requirementDto
                         )
                     }
                     CANCEL_TYPE -> {
-                        item.label =
+                        item.title =
                             context.getString(R.string.view_requirement_canceled_reason_label)
-                        LabelContentTag.addCanceledReason(
+                        SubheadlineContentTag.addCanceledReason(
                             context,
                             item.detailContainer,
                             requirementDto
                         )
                     }
                     REVIEW_TYPE -> {
-                        item.label =
+                        item.title =
                             context.getString(R.string.view_requirement_customer_review_label)
-                        LabelContentTag.addReviewDetail(
+                        SubheadlineContentTag.addReviewDetail(
                             context,
                             item.detailContainer,
                             requirementDto
