@@ -90,7 +90,7 @@
             style="@style/caption_1.bold"
             android:layout_width="@dimen/gap_80"
             android:layout_height="@dimen/gap_32"
-            android:background="@drawable/background_white_solid_light_grey2_stroke_radius4"
+            android:background="@drawable/bg_solid_white_stroke_light_grey2_radius4"
             android:stateListAnimator="@null"
             android:text="@string/call_to_customer"
             android:textColor="@color/grey_2"

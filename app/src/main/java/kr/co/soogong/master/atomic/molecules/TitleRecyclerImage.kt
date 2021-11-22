@@ -25,24 +25,6 @@ class TitleRecyclerImage @JvmOverloads constructor(
             if (value.isNullOrEmpty()) binding.title.isVisible = false
         }
 
-    var subTitle: String? = ""
-        set(value) {
-            field = value
-            binding.subTitle.text = value
-            if (!value.isNullOrEmpty()) binding.subTitle.isVisible = true
-        }
-
-    var alertText: String? = ""
-        set(value) {
-            field = value
-            binding.alert.text = value
-        }
-
-    var alertVisible: Boolean = false
-        set(value) {
-            field = value
-            binding.alert.isVisible = value
-        }
 
     var cameraIconVisible: Boolean = true
         set(value) {

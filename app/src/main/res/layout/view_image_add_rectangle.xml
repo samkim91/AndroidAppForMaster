@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="@dimen/gap_105"
+        android:layout_height="@dimen/gap_105">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_container"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="@dimen/gap_0"
+            android:background="@drawable/bg_solid_white_stroke_light_grey2_dotted_radius10"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_icon"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="@dimen/gap_0"
+            android:background="@drawable/ic_add"
+            app:layout_constraintBottom_toBottomOf="@id/iv_container"
+            app:layout_constraintDimensionRatio="H, 5:5"
+            app:layout_constraintEnd_toEndOf="@id/iv_container"
+            app:layout_constraintStart_toStartOf="@id/iv_container"
+            app:layout_constraintTop_toTopOf="@id/iv_container"
+            app:layout_constraintWidth_percent="0.3" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

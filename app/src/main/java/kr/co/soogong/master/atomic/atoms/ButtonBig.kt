@@ -40,7 +40,7 @@ class ButtonBig @JvmOverloads constructor(
                     is ButtonTheme.Primary -> {
                         binding.btButton.background =
                             ResourcesCompat.getDrawable(resources,
-                                R.drawable.background_selector_green_solid_radius8,
+                                R.drawable.bg_solid_green_selector_radius8,
                                 null)
                         binding.btButton.setTextColor(ResourcesCompat.getColor(resources,
                             R.color.white,
@@ -49,7 +49,7 @@ class ButtonBig @JvmOverloads constructor(
                     is ButtonTheme.Secondary -> {
                         binding.btButton.background =
                             ResourcesCompat.getDrawable(resources,
-                                R.drawable.background_selector_light_grey1_solid_radius8,
+                                R.drawable.bg_solid_light_grey1_selector_radius8,
                                 null)
                         binding.btButton.setTextColor(ResourcesCompat.getColor(resources,
                             R.color.selector_dark_grey1_alpha50,
@@ -58,7 +58,7 @@ class ButtonBig @JvmOverloads constructor(
                     is ButtonTheme.Tertiary -> {
                         binding.btButton.background =
                             ResourcesCompat.getDrawable(resources,
-                                R.drawable.background_selector_red_solid_radius8,
+                                R.drawable.bg_solid_red_selector_radius8,
                                 null)
                         binding.btButton.setTextColor(ResourcesCompat.getColor(resources,
                             R.color.white,
@@ -67,7 +67,7 @@ class ButtonBig @JvmOverloads constructor(
                     is ButtonTheme.OutlinedPrimary -> {
                         binding.btButton.background =
                             ResourcesCompat.getDrawable(resources,
-                                R.drawable.background_selector_white_solid_green_stroke_radius8,
+                                R.drawable.bg_solid_white_stroke_green_selector_radius8,
                                 null)
                         binding.btButton.setTextColor(ResourcesCompat.getColor(resources,
                             R.color.selector_green_alpha50,
@@ -76,7 +76,7 @@ class ButtonBig @JvmOverloads constructor(
                     is ButtonTheme.OutlinedSecondary -> {
                         binding.btButton.background =
                             ResourcesCompat.getDrawable(resources,
-                                R.drawable.background_selector_white_solid_light_grey2_stroke_radius8,
+                                R.drawable.bg_solid_white_stroke_light_grey2_selector_radius8,
                                 null)
                         binding.btButton.setTextColor(ResourcesCompat.getColor(resources,
                             R.color.selector_dark_grey1_alpha50,

@@ -26,6 +26,7 @@
 
     <dimen name="gap_1">1dp</dimen>
     <dimen name="gap_2">2dp</dimen>
+    <dimen name="gap_2.5">2.5dp</dimen>
     <dimen name="gap_3">3dp</dimen>
     <dimen name="gap_4">4dp</dimen>
     <dimen name="gap_5">5dp</dimen>
@@ -82,6 +83,7 @@
 
     <dimen name="gap_100">100dp</dimen>
     <dimen name="gap_102">102dp</dimen>
+    <dimen name="gap_105">105dp</dimen>
     <dimen name="gap_120">120dp</dimen>
     <dimen name="gap_124">124dp</dimen>
     <dimen name="gap_130">130dp</dimen>

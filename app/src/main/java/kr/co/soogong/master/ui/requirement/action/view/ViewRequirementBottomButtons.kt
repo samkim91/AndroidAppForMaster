@@ -108,7 +108,7 @@ private fun addEndRepairButton(
         text = context.getString(R.string.repair_done_text)
         gravity = Gravity.CENTER
         background = ResourcesCompat.getDrawable(resources,
-            R.drawable.background_white_solid_light_grey2_stroke_radius8,
+            R.drawable.bg_solid_white_stroke_light_grey2_radius8,
             null)
         setTextColor(ResourcesCompat.getColor(resources, R.color.black, null))
         setTextAppearance(R.style.foot_note_regular)
