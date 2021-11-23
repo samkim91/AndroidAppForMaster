@@ -5,4 +5,5 @@ object AppSharedPreferenceContract {
 
     const val MASTER_ID = "MASTER_ID"
     const val MASTER_UID = "MASTER_UID"
+    const val NOTICE_FOR_CALLING = "NOTICE_FOR_CALLING"
 }

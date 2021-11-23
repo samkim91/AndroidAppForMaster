@@ -90,6 +90,14 @@ data class DialogData(
                 null, context.getColor(R.color.text_basic_color)
             )
 
+        fun getNoticeForCallingToCustomer(context: Context) =
+            DialogData(
+                "[공지]\n\n견적을 보내시면 고객님에게\n전화할 수 있는 버튼이 생성되니,\n활용해보세요.", context.getColor(R.color.text_basic_color),
+                "- 광고모델 한시적 운영 -", context.getColor(R.color.text_alert_color),
+                "확인", context.getColor(R.color.color_1FC472),
+                "다시보지않기", context.getColor(R.color.text_basic_color)
+            )
+
         fun getRefuseMeasureDialogData(context: Context) =
             DialogData(
                 "실측을 포기하시겠어요?", context.getColor(R.color.text_basic_color),

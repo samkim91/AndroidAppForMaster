@@ -143,6 +143,11 @@ open class RequirementViewModel @Inject constructor(
             ).addToDisposable()
     }
 
+    fun getShowNoticeForCalling() = requirementViewModelAggregate.getNoticeForCallingFromSharedUseCase()
+    fun saveShowNoticeForCalling() {
+        requirementViewModelAggregate.saveNoticeForCallingInSharedUseCase(false)
+    }
+
     companion object {
         private const val TAG = "RequirementViewModel"
         const val REQUEST_FAILED = "REQUEST_FAILED"
