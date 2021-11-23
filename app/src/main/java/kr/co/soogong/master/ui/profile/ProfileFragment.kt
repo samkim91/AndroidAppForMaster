@@ -93,7 +93,10 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
             }
 
             hbcCompanyIntroduction.onButtonClick = View.OnClickListener {
-
+                startActivity(
+                    EditProfileContainerActivityHelper.getIntent(requireContext(),
+                        EditProfileContainerFragmentHelper.EDIT_INTRODUCTION)
+                )
             }
 
             hieShopImages.onButtonClick = View.OnClickListener {

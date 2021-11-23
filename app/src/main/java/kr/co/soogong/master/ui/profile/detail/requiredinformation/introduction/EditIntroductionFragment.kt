@@ -36,10 +36,11 @@ class EditIntroductionFragment : BaseFragment<FragmentEditIntroductionBinding>(
 
             defaultButton.setOnClickListener {
                 viewModel.introduction.observe(viewLifecycleOwner, {
-                    introduction.alertVisible = it.length < 10
+                    stcIntroduction.editTextContainer.error =
+                        if (it.length < 10) resources.getString(R.string.fill_text_over_10) else null
                 })
 
-                if (!introduction.alertVisible) viewModel.saveIntroduction()
+                if (stcIntroduction.editTextContainer.error.isNullOrBlank()) viewModel.saveIntroduction()
             }
         }
     }

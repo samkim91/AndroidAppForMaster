@@ -12,6 +12,7 @@
     <string name="percent">%s%%</string>
     <string name="version_text">버전 : v%s</string>
 
+    <string name="divide_by">0 / %d</string>
     <string name="over_one_thousand">+999</string>
 
     <string name="next">다음</string>
@@ -295,7 +296,12 @@
     <string name="master_configs_hint">고객님이 당황하지 않도록 변동 요인을 알려주세요.</string>
     <string name="email_address">이메일 주소</string>
 
+    <!-- Edit Profile -->
+    <string name="brief_company_introduction">간단한 업체 소개를 해주세요.</string>
+    <string name="brief_company_introduction_hint">업체 이름과 함께 소개 영역에 들어가는 내용입니다. 고객에게 남기실 업체만의 특별한 점을 소개해 주세요!</string>
+
     <string name="fill_representative_name">프로필에서 대표이름을 입력해주세요.</string>
+
     <string name="master_type">마스터유형</string>
     <string name="store_name">업체명</string>
     <string name="short_introduce">한줄소개</string>

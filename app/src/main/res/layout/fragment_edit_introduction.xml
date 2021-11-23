@@ -25,25 +25,22 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingStart="@dimen/gap_20"
-                android:paddingTop="@dimen/gap_32"
-                android:paddingEnd="@dimen/gap_20"
-                android:paddingBottom="@dimen/gap_52">
+                android:paddingStart="@dimen/gap_16"
+                android:paddingTop="@dimen/gap_24"
+                android:paddingEnd="@dimen/gap_16">
 
-                <kr.co.soogong.master.atomic.molecules.TitleEditTextCounter
-                    android:id="@+id/introduction"
-                    android:layout_width="0dp"
+                <kr.co.soogong.master.atomic.molecules.SubheadlineTextareaCounter
+                    android:id="@+id/stc_introduction"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:alertText="@{@string/fill_text_over_10}"
-                    app:blackSubTitle="@{false}"
-                    app:hintText='@{"예시) 강남 지역 30년 역사의 싱크대 장인! 믿고 맡겨주세요!"}'
+                    app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:limitedCount='@{100}'
+                    app:subheadline="@{@string/brief_company_introduction}"
+                    app:hint="@{@string/brief_company_introduction_hint}"
+                    app:maxCount="@{150}"
                     app:content="@={vm.introduction}"
-                    app:subTitle='@{"업체이름과 함께 소개 영역에 들어가는 내용입니다. 고객에게 남기실 업체만의 특별한 점을 소개해주세요!"}'
-                    app:title='@{"간단한 업체 소개를 해주세요."}' />
+                    />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
 
