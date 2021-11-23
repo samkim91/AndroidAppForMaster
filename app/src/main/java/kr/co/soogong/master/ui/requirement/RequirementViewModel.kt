@@ -119,6 +119,11 @@ open class RequirementViewModel @Inject constructor(
     }
     // end region : 문의, 진행탭에서 실행할 수 있는 함수
 
+    fun getShowNoticeForCalling() = requirementViewModelAggregate.getNoticeForCallingFromSharedUseCase()
+    fun saveShowNoticeForCalling() {
+        requirementViewModelAggregate.saveNoticeForCallingInSharedUseCase(false)
+    }
+
     companion object {
         private const val TAG = "RequirementViewModel"
         const val UPDATE_DIRECT_REPAIR_SUCCESSFULLY = "UPDATE_DIRECT_REPAIR_SUCCESSFULLY"

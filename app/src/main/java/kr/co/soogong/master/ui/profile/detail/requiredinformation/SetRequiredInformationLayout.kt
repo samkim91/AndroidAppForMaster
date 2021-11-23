@@ -58,7 +58,7 @@ fun setRequirementInformationPercentage(
             if (!value?.introduction.isNullOrEmpty()) filledCount++
             if (!value?.shopImages.isNullOrEmpty()) filledCount++
             if (!value?.businessUnitInformation?.businessType.isNullOrEmpty()) filledCount++
-            if (value?.warrantyInformation?.warrantyPeriod != null && !value?.warrantyInformation?.warrantyDescription.isNullOrEmpty()) filledCount++
+            if (value?.warrantyInformation?.warrantyPeriod != null) filledCount++
             if (!value?.career.isNullOrEmpty()) filledCount++
             if (!value?.tel.isNullOrEmpty()) filledCount++
             if (!value?.ownerName.isNullOrEmpty()) filledCount++
@@ -116,7 +116,7 @@ fun isFulfilled(
                     context.toast(context.getString(R.string.required_profile_empty_business_unit_information))
                     return false
                 }
-                value?.warrantyInformation?.warrantyPeriod == null || value?.warrantyInformation?.warrantyDescription.isNullOrEmpty() -> {
+                value?.warrantyInformation?.warrantyPeriod == null -> {
                     warrantyInformation.parent.requestChildFocus(warrantyInformation, warrantyInformation)
                     context.toast(context.getString(R.string.required_profile_empty_warranty_information))
                     return false
