@@ -379,22 +379,6 @@
         <item name="cornerSize">10dp</item>
     </style>
 
-    <style name="outlinedTextarea1" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-        <item name="boxStrokeColor">@color/light_grey_2</item>
-        <item name="boxStrokeWidth">@dimen/gap_1</item>
-
-
-        <item name="boxStrokeWidthFocused">@dimen/gap_1</item>
-    </style>
-
-    <style name="MaterialSmallComponentRadius6" parent="Widget.MaterialComponents.Button.OutlinedButton">
-        <item name="cornerSize">@dimen/gap_6</item>
-    </style>
-
-    <style name="MaterialSmallComponentRadius8" parent="ShapeAppearance.MaterialComponents.SmallComponent">
-        <item name="cornerSize">@dimen/gap_8</item>
-    </style>
-
     <style name="ChipChoiceGreyRectangular" parent="Widget.MaterialComponents.Chip.Choice">
         <item name="chipBackgroundColor">@color/background</item>
         <item name="chipCornerRadius">@dimen/gap_4</item>
