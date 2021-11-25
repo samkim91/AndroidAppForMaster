@@ -100,7 +100,12 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
             }
 
             hieShopImages.onButtonClick = View.OnClickListener {
-
+                startActivity(
+                    EditProfileContainerActivityHelper.getIntent(
+                        requireContext(),
+                        EditProfileContainerFragmentHelper.EDIT_SHOP_IMAGES
+                    )
+                )
             }
 
 //            editRequiredInfo.setOnClickListener {
@@ -184,6 +189,24 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
         super.onResume()
         Timber.tag(TAG).d("onResume: ")
         viewModel.requestProfile()
+    }
+
+    private fun startActivityCommonCode(pageName: String) {
+        startActivity(
+            EditProfileContainerActivityHelper.getIntent(
+                requireContext(),
+                pageName
+            )
+        )
+    }
+
+    private fun startActivityCommonCode(pageName: String, itemId: Int) {
+        startActivity(
+            EditProfileContainerActivityHelper.getIntent(
+                requireContext(),
+                pageName
+            )
+        )
     }
 
     private fun getSingleImage() {

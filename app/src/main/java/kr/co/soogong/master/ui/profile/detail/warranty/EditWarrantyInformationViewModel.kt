@@ -1,15 +1,10 @@
-package kr.co.soogong.master.ui.profile.detail.requiredinformation.warranty
+package kr.co.soogong.master.ui.profile.detail.warranty
 
 import androidx.lifecycle.MutableLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.rxkotlin.subscribeBy
-import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.dto.profile.MasterDto
-import kr.co.soogong.master.data.model.profile.Profile
 import kr.co.soogong.master.domain.usecase.profile.GetProfileUseCase
 import kr.co.soogong.master.domain.usecase.profile.SaveMasterUseCase
-import kr.co.soogong.master.ui.base.BaseViewModel
 import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogItem
 import kr.co.soogong.master.ui.profile.detail.EditProfileContainerViewModel
 import timber.log.Timber

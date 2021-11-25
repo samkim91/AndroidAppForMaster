@@ -1,4 +1,4 @@
-package kr.co.soogong.master.ui.profile.detail.requiredinformation.major
+package kr.co.soogong.master.ui.profile.detail.major
 
 import android.app.Activity
 import android.content.Intent

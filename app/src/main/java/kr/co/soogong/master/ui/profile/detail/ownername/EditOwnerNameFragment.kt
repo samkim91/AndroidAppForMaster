@@ -1,4 +1,4 @@
-package kr.co.soogong.master.ui.profile.detail.requiredinformation.ownername
+package kr.co.soogong.master.ui.profile.detail.ownername
 
 import android.os.Bundle
 import android.view.View

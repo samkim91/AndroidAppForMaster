@@ -8,7 +8,7 @@
 
         <variable
             name="vm"
-            type="kr.co.soogong.master.ui.profile.detail.requiredinformation.warranty.EditWarrantyInformationViewModel" />
+            type="kr.co.soogong.master.ui.profile.detail.warranty.EditWarrantyInformationViewModel" />
     </data>
 
     <LinearLayout
@@ -51,13 +51,13 @@
                     app:alertText='@{"필수 정보입니다. 10자 이상으로 입력해주세요."}'
                     app:blackSubTitle="@{false}"
                     app:content="@={vm.warrantyDescription}"
-                    bind:visible="@{vm.warrantyPeriod != -1}"
                     app:hintText='@{"고객이 유의할 만한 예외사항이나 자재별 세부 A/S 방침을 입력해주세요."}'
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/warranty_period"
                     app:limitedCount='@{500}'
-                    app:title='@{"A/S의 관한 상세 정보를 입력해주세요."}' />
+                    app:title='@{"A/S의 관한 상세 정보를 입력해주세요."}'
+                    bind:visible="@{vm.warrantyPeriod != -1}" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
 

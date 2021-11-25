@@ -1,4 +1,4 @@
-package kr.co.soogong.master.ui.profile.detail.requiredinformation.warranty
+package kr.co.soogong.master.ui.profile.detail.warranty
 
 import android.os.Bundle
 import android.view.View

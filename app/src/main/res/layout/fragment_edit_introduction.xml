@@ -7,17 +7,13 @@
 
         <variable
             name="vm"
-            type="kr.co.soogong.master.ui.profile.detail.requiredinformation.introduction.EditIntroductionViewModel" />
+            type="kr.co.soogong.master.ui.profile.detail.introduction.EditIntroductionViewModel" />
     </data>
 
     <kr.co.soogong.master.atomic.molecules.SubheadlineTextareaCounter
         android:id="@+id/stc_introduction"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/gap_16"
-        android:layout_marginTop="@dimen/gap_24"
-        android:layout_marginEnd="@dimen/gap_16"
-        android:layout_marginBottom="@dimen/gap_24"
         app:content="@={vm.introduction}"
         app:hint="@{@string/brief_company_introduction_hint}"
         app:maxCount="@{150}"

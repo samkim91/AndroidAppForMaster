@@ -1,4 +1,4 @@
-package kr.co.soogong.master.ui.profile.detail.requiredinformation.phonenumber
+package kr.co.soogong.master.ui.profile.detail.phonenumber
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

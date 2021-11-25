@@ -1,4 +1,4 @@
-package kr.co.soogong.master.ui.profile.detail.requiredinformation.introduction
+package kr.co.soogong.master.ui.profile.detail.introduction
 
 import android.os.Bundle
 import android.view.View
