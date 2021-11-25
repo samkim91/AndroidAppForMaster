@@ -302,6 +302,10 @@
 
     <string name="fill_representative_name">프로필에서 대표이름을 입력해주세요.</string>
 
+    <string name="register_shop_images">대표 사진을 등록해 주세요.</string>
+    <string name="register_shop_images_hint">고객님에게 신뢰감을 줄 만한 사진을 등록해 주세요.</string>
+    <string name="getting_images">사진 등록하기</string>
+
     <string name="master_type">마스터유형</string>
     <string name="store_name">업체명</string>
     <string name="short_introduce">한줄소개</string>

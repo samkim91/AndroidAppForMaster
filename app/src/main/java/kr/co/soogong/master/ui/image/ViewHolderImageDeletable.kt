@@ -3,10 +3,10 @@ package kr.co.soogong.master.ui.image
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import kr.co.soogong.master.data.dto.AttachmentDto
-import kr.co.soogong.master.databinding.ViewHolderImageDeleteButtonBinding
+import kr.co.soogong.master.databinding.ViewHolderImageDeletableBinding
 
-class RectangleImageWithCloseHolder(
-    private val binding: ViewHolderImageDeleteButtonBinding,
+class ViewHolderImageDeletable(
+    private val binding: ViewHolderImageDeletableBinding,
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun binding(
@@ -23,6 +23,4 @@ class RectangleImageWithCloseHolder(
             executePendingBindings()
         }
     }
-
-
 }

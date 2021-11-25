@@ -6,6 +6,7 @@ import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import gun0912.tedimagepicker.builder.TedImagePicker
 import kr.co.soogong.master.R
+import kr.co.soogong.master.data.common.ButtonTheme
 import kr.co.soogong.master.data.dto.AttachmentDto
 import kr.co.soogong.master.databinding.FragmentEditShopImagesBinding
 import kr.co.soogong.master.ui.base.BaseFragment
@@ -39,7 +40,9 @@ class EditShopImagesFragment : BaseFragment<FragmentEditShopImagesBinding>(
             vm = viewModel
             lifecycleOwner = viewLifecycleOwner
 
-            getImagesButton.setOnClickListener {
+            buttonThemeGettingImages = ButtonTheme.OutlinedPrimary
+
+            gettingImagesClickListener = View.OnClickListener {
                 PermissionHelper.checkImagePermission(context = requireContext(),
                     onGranted = {
                         val availableImagesCount =
