@@ -7,6 +7,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentEditIntroductionBinding
 import kr.co.soogong.master.ui.base.BaseFragment
+import kr.co.soogong.master.ui.profile.detail.EditProfileContainerActivity
 import kr.co.soogong.master.ui.profile.detail.EditProfileContainerViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.ui.profile.detail.EditProfileContainerViewModel.Companion.SAVE_MASTER_SUCCESSFULLY
 import kr.co.soogong.master.utility.EventObserver
@@ -34,7 +35,7 @@ class EditIntroductionFragment : BaseFragment<FragmentEditIntroductionBinding>(
             vm = viewModel
             lifecycleOwner = viewLifecycleOwner
 
-            defaultButton.setOnClickListener {
+            (activity as EditProfileContainerActivity).setSaveButtonClickListener {
                 viewModel.introduction.observe(viewLifecycleOwner, {
                     stcIntroduction.editTextContainer.error =
                         if (it.length < 10) resources.getString(R.string.fill_text_over_10) else null
