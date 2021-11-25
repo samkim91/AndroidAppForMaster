@@ -37,7 +37,11 @@
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/fcv_container"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/gap_24"
+                android:paddingStart="@dimen/gap_16"
+                android:paddingEnd="@dimen/gap_16"
+                android:paddingBottom="@dimen/gap_24" />
         </ScrollView>
 
         <kr.co.soogong.master.atomic.atoms.ButtonFilled

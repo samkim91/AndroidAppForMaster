@@ -7,14 +7,14 @@ import kr.co.soogong.master.ui.profile.detail.freeMeasure.EditFreeMeasureFragmen
 import kr.co.soogong.master.ui.profile.detail.otherflexibleoption.EditOtherFlexibleOptionFragment
 import kr.co.soogong.master.ui.profile.detail.portfoliolist.portfolio.PortfolioFragment
 import kr.co.soogong.master.ui.profile.detail.portfoliolist.pricebyproject.PriceByProjectFragment
-import kr.co.soogong.master.ui.profile.detail.requiredinformation.address.EditAddressFragment
-import kr.co.soogong.master.ui.profile.detail.requiredinformation.businessunitinformation.EditBusinessUnitInformationFragment
-import kr.co.soogong.master.ui.profile.detail.requiredinformation.introduction.EditIntroductionFragment
-import kr.co.soogong.master.ui.profile.detail.requiredinformation.major.EditMajorFragment
-import kr.co.soogong.master.ui.profile.detail.requiredinformation.ownername.EditOwnerNameFragment
-import kr.co.soogong.master.ui.profile.detail.requiredinformation.phonenumber.EditPhoneNumberFragment
-import kr.co.soogong.master.ui.profile.detail.requiredinformation.shopimages.EditShopImagesFragment
-import kr.co.soogong.master.ui.profile.detail.requiredinformation.warranty.EditWarrantyInformationFragment
+import kr.co.soogong.master.ui.profile.detail.address.EditAddressFragment
+import kr.co.soogong.master.ui.profile.detail.businessunitinformation.EditBusinessUnitInformationFragment
+import kr.co.soogong.master.ui.profile.detail.introduction.EditIntroductionFragment
+import kr.co.soogong.master.ui.profile.detail.major.EditMajorFragment
+import kr.co.soogong.master.ui.profile.detail.ownername.EditOwnerNameFragment
+import kr.co.soogong.master.ui.profile.detail.phonenumber.EditPhoneNumberFragment
+import kr.co.soogong.master.ui.profile.detail.shopimages.EditShopImagesFragment
+import kr.co.soogong.master.ui.profile.detail.warranty.EditWarrantyInformationFragment
 
 object EditProfileContainerFragmentHelper {
     const val TAG = "EditProfileContainerFragmentHelper"

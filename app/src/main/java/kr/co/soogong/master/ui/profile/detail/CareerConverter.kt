@@ -1,4 +1,4 @@
-package kr.co.soogong.master.ui.profile.detail.requiredinformation
+package kr.co.soogong.master.ui.profile.detail
 
 import timber.log.Timber
 import java.text.SimpleDateFormat

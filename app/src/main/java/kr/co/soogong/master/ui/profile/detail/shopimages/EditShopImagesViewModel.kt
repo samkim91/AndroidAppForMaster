@@ -1,4 +1,4 @@
-package kr.co.soogong.master.ui.profile.detail.requiredinformation.shopimages
+package kr.co.soogong.master.ui.profile.detail.shopimages
 
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kr.co.soogong.master.data.dto.AttachmentDto

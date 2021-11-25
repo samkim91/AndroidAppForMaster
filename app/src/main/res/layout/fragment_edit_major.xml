@@ -7,7 +7,7 @@
 
         <variable
             name="vm"
-            type="kr.co.soogong.master.ui.profile.detail.requiredinformation.major.EditMajorViewModel" />
+            type="kr.co.soogong.master.ui.profile.detail.major.EditMajorViewModel" />
     </data>
 
     <LinearLayout

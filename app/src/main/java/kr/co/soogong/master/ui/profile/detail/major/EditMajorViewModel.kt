@@ -1,4 +1,4 @@
-package kr.co.soogong.master.ui.profile.detail.requiredinformation.major
+package kr.co.soogong.master.ui.profile.detail.major
 
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kr.co.soogong.master.data.dto.profile.MajorDto

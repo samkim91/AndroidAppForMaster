@@ -1,4 +1,4 @@
-package kr.co.soogong.master.ui.profile.detail.requiredinformation.businessunitinformation
+package kr.co.soogong.master.ui.profile.detail.businessunitinformation
 
 import android.view.LayoutInflater
 import com.google.android.material.chip.Chip

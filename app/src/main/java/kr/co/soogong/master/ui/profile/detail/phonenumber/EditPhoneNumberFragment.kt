@@ -1,4 +1,4 @@
-package kr.co.soogong.master.ui.profile.detail.requiredinformation.phonenumber
+package kr.co.soogong.master.ui.profile.detail.phonenumber
 
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -20,9 +20,9 @@ import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.dialog.popup.CustomDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData
 import kr.co.soogong.master.ui.profile.detail.EditProfileContainerViewModel.Companion.SAVE_MASTER_SUCCESSFULLY
-import kr.co.soogong.master.ui.profile.detail.requiredinformation.phonenumber.EditPhoneNumberViewModel.Companion.PHONE_NUMBER_EXIST
-import kr.co.soogong.master.ui.profile.detail.requiredinformation.phonenumber.EditPhoneNumberViewModel.Companion.PHONE_NUMBER_NOT_EXIST
-import kr.co.soogong.master.ui.profile.detail.requiredinformation.phonenumber.EditPhoneNumberViewModel.Companion.REQUEST_FAILED
+import kr.co.soogong.master.ui.profile.detail.phonenumber.EditPhoneNumberViewModel.Companion.PHONE_NUMBER_EXIST
+import kr.co.soogong.master.ui.profile.detail.phonenumber.EditPhoneNumberViewModel.Companion.PHONE_NUMBER_NOT_EXIST
+import kr.co.soogong.master.ui.profile.detail.phonenumber.EditPhoneNumberViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.PhoneNumberHelper
 import kr.co.soogong.master.utility.extension.toast
