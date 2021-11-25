@@ -87,6 +87,7 @@
     <dimen name="gap_100">100dp</dimen>
     <dimen name="gap_102">102dp</dimen>
     <dimen name="gap_105">105dp</dimen>
+    <dimen name="gap_110">110dp</dimen>
     <dimen name="gap_120">120dp</dimen>
     <dimen name="gap_124">124dp</dimen>
     <dimen name="gap_130">130dp</dimen>

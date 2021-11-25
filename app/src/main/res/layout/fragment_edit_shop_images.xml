@@ -10,38 +10,44 @@
         <variable
             name="vm"
             type="kr.co.soogong.master.ui.profile.detail.shopimages.EditShopImagesViewModel" />
+
+        <variable
+            name="buttonThemeGettingImages"
+            type="kr.co.soogong.master.data.common.ButtonTheme" />
+
+        <variable
+            name="gettingImagesClickListener"
+            type="android.view.View.OnClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="@dimen/gap_16"
-        android:layout_marginTop="@dimen/gap_24"
-        android:layout_marginEnd="@dimen/gap_16"
-        android:layout_marginBottom="@dimen/gap_24">
+        android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/get_images_button"
-            style="@style/text_style_16sp.bold"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/gap_40"
-            android:background="@drawable/shape_transparent_background_green_board_radius8"
-            android:text="@string/get_images_button_text"
-            android:textColor="@color/c_1FC472"
+        <kr.co.soogong.master.atomic.molecules.SubheadlineButtonBig
+            android:id="@+id/sbb_getting_images"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="wrap_content"
+            app:hint="@{@string/register_shop_images_hint}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:buttonTheme="@{buttonThemeGettingImages}"
+            app:buttonText="@{@string/getting_images}"
+            app:onButtonClick="@{gettingImagesClickListener}"
+            app:subheadline="@{@string/register_shop_images}" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/image_list"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/gap_24"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintVertical_bias="0"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/get_images_button"
+            app:layout_constraintTop_toBottomOf="@id/sbb_getting_images"
             app:spanCount="3"
             bind:photo_list_with_close="@{vm.shopImages}"
             tools:listitem="@layout/view_holder_image_deletable" />
