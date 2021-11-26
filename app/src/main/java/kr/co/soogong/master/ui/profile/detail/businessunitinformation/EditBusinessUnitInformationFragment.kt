@@ -10,6 +10,7 @@ import com.google.android.material.chip.Chip
 import dagger.hilt.android.AndroidEntryPoint
 import gun0912.tedimagepicker.builder.TedImagePicker
 import kr.co.soogong.master.R
+import kr.co.soogong.master.atomic.molecules.SubheadlineChipGroup
 import kr.co.soogong.master.data.model.profile.ApprovedCodeTable
 import kr.co.soogong.master.data.model.profile.CorporateCodeTable
 import kr.co.soogong.master.data.model.profile.FreelancerCodeTable
@@ -18,6 +19,7 @@ import kr.co.soogong.master.databinding.FragmentEditBusinessUnitInformationBindi
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.dialog.popup.CustomDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData
+import kr.co.soogong.master.ui.profile.detail.EditProfileContainerActivity
 import kr.co.soogong.master.ui.profile.detail.EditProfileContainerViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.ui.profile.detail.EditProfileContainerViewModel.Companion.SAVE_MASTER_SUCCESSFULLY
 import kr.co.soogong.master.utility.EventObserver
@@ -67,7 +69,9 @@ class EditBusinessUnitInformationFragment :
                     onDenied = { })
             }
 
-            defaultButton.setOnClickListener {
+
+
+            (activity as EditProfileContainerActivity).setSaveButtonClickListener {
                 viewModel.businessName.observe(viewLifecycleOwner, {
                     businessName.alertVisible = it.isNullOrEmpty()
                 })
@@ -85,9 +89,9 @@ class EditBusinessUnitInformationFragment :
                 })
 
                 if (viewModel.businessType.value == FreelancerCodeTable.code) {
-                    if (shopName.alertVisible || businessNumber.alertVisible || alert.isVisible) return@setOnClickListener
+                    if (shopName.alertVisible || businessNumber.alertVisible || alert.isVisible) return@setSaveButtonClickListener
                 } else {
-                    if (businessName.alertVisible || shopName.alertVisible || businessNumber.alertVisible || alert.isVisible) return@setOnClickListener
+                    if (businessName.alertVisible || shopName.alertVisible || businessNumber.alertVisible || alert.isVisible) return@setSaveButtonClickListener
                 }
 
                 if (viewModel.profile.value?.approvedStatus == ApprovedCodeTable.code) {
@@ -109,9 +113,14 @@ class EditBusinessUnitInformationFragment :
 
     private fun initChips() {
         bind {
-            BusinessUnitInformationChipGroupHelper(layoutInflater, businessUnitType)
 
-            businessUnitType.addCheckedChangeListener { group, position ->
+            SubheadlineChipGroup
+                .initChips(requireContext(),
+                    layoutInflater,
+                    scgBusinessType,
+                    viewModel.businessTypes.value!!)
+
+            scgBusinessType.addCheckedChangeListener { group, position ->
                 when (position) {
                     group.getChildAt(2).id -> {     // 프리랜서일 경우 레이아웃
                         viewModel.businessType.value = FreelancerCodeTable.code
@@ -138,7 +147,7 @@ class EditBusinessUnitInformationFragment :
     private fun registerEventObserve() {
         Timber.tag(TAG).d("registerEventObserve: ")
         viewModel.businessType.observe(viewLifecycleOwner, { businessType ->
-            binding.businessUnitType.chipGroup.children.forEach {
+            binding.scgBusinessType.container.children.forEach {
                 val chip = it as? Chip
                 if (chip?.text.toString() == businessType) chip?.isChecked = true
             }

@@ -22,6 +22,9 @@ import kr.co.soogong.master.ui.dialog.popup.DialogData
 import kr.co.soogong.master.ui.profile.ProfileViewModel.Companion.GET_PROFILE_FAILED
 import kr.co.soogong.master.ui.profile.ProfileViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.uihelper.profile.*
+import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_BUSINESS_UNIT_INFORMATION
+import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_INTRODUCTION
+import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_SHOP_IMAGES
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.FileHelper
 import kr.co.soogong.master.utility.PermissionHelper
@@ -92,21 +95,14 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
                 }
             }
 
-            hbcCompanyIntroduction.onButtonClick = View.OnClickListener {
-                startActivity(
-                    EditProfileContainerActivityHelper.getIntent(requireContext(),
-                        EditProfileContainerFragmentHelper.EDIT_INTRODUCTION)
-                )
-            }
+            hbcCompanyIntroduction.onButtonClick =
+                View.OnClickListener { startActivityCommonCode(EDIT_INTRODUCTION) }
 
-            hieShopImages.onButtonClick = View.OnClickListener {
-                startActivity(
-                    EditProfileContainerActivityHelper.getIntent(
-                        requireContext(),
-                        EditProfileContainerFragmentHelper.EDIT_SHOP_IMAGES
-                    )
-                )
-            }
+            hieShopImages.onButtonClick =
+                View.OnClickListener { startActivityCommonCode(EDIT_SHOP_IMAGES) }
+
+            hbcBusinessUnitInformation.onButtonClick =
+                View.OnClickListener { startActivityCommonCode(EDIT_BUSINESS_UNIT_INFORMATION) }
 
 //            editRequiredInfo.setOnClickListener {
 //                startActivity(
