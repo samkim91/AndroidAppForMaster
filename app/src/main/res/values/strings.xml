@@ -307,6 +307,9 @@
     <string name="getting_images">사진 등록하기</string>
     <string name="registered_images">등록된 사진</string>
 
+    <string name="select_business_type">사업자 등록여부를 알려주세요.</string>
+
+
     <string name="master_type">마스터유형</string>
     <string name="store_name">업체명</string>
     <string name="short_introduce">한줄소개</string>

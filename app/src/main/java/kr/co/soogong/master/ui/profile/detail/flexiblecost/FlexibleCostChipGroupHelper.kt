@@ -27,7 +27,7 @@ object FlexibleCostChipGroupHelper {
         }
 
         items.map { item ->
-            val chip = layoutInflater.inflate(R.layout.single_chip_choice_rectangular_layout,
+            val chip = layoutInflater.inflate(R.layout.chip_choice_rectangular,
                 chipGroup,
                 false) as Chip
             chip.text = item

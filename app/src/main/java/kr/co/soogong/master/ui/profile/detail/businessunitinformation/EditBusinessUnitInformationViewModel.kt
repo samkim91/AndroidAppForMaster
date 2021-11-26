@@ -3,12 +3,11 @@ package kr.co.soogong.master.ui.profile.detail.businessunitinformation
 import android.net.Uri
 import android.view.View
 import androidx.core.net.toUri
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kr.co.soogong.master.data.dto.profile.MasterDto
-import kr.co.soogong.master.data.model.profile.ApprovedCodeTable
-import kr.co.soogong.master.data.model.profile.FreelancerCodeTable
-import kr.co.soogong.master.data.model.profile.RequestApproveCodeTable
+import kr.co.soogong.master.data.model.profile.*
 import kr.co.soogong.master.domain.usecase.profile.GetProfileUseCase
 import kr.co.soogong.master.domain.usecase.profile.SaveMasterUseCase
 import kr.co.soogong.master.ui.profile.detail.EditProfileContainerViewModel
@@ -20,6 +19,12 @@ class EditBusinessUnitInformationViewModel @Inject constructor(
     getProfileUseCase: GetProfileUseCase,
     saveMasterUseCase: SaveMasterUseCase,
 ) : EditProfileContainerViewModel(getProfileUseCase, saveMasterUseCase) {
+
+    private val _businessTypes = MutableLiveData(listOf(SoleCodeTable.inKorean,
+        CorporateCodeTable.inKorean,
+        FreelancerCodeTable.inKorean))
+    val businessTypes: LiveData<List<String>>
+        get() = _businessTypes
 
     val businessType = MutableLiveData("")
     val businessName = MutableLiveData("")
