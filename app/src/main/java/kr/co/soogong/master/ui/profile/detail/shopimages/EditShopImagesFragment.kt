@@ -8,9 +8,13 @@ import gun0912.tedimagepicker.builder.TedImagePicker
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.common.ButtonTheme
 import kr.co.soogong.master.data.dto.AttachmentDto
+import kr.co.soogong.master.data.model.profile.ApprovedCodeTable
 import kr.co.soogong.master.databinding.FragmentEditShopImagesBinding
 import kr.co.soogong.master.ui.base.BaseFragment
+import kr.co.soogong.master.ui.dialog.popup.CustomDialog
+import kr.co.soogong.master.ui.dialog.popup.DialogData
 import kr.co.soogong.master.ui.image.RectangleImageWithCloseAdapter
+import kr.co.soogong.master.ui.profile.detail.EditProfileContainerActivity
 import kr.co.soogong.master.ui.profile.detail.EditProfileContainerViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.ui.profile.detail.EditProfileContainerViewModel.Companion.SAVE_MASTER_SUCCESSFULLY
 import kr.co.soogong.master.utility.EventObserver
@@ -81,31 +85,31 @@ class EditShopImagesFragment : BaseFragment<FragmentEditShopImagesBinding>(
                     onDenied = { })
             }
 
-            imageList.adapter = RectangleImageWithCloseAdapter(
+            rvRegisteredImages.adapter = RectangleImageWithCloseAdapter(
                 closeClickListener = { position ->
                     viewModel.shopImages.removeAt(position)
                 }
             )
 
-//            defaultButton.setOnClickListener {
-//                if (viewModel.profile.value?.approvedStatus == ApprovedCodeTable.code) {
-//                    CustomDialog.newInstance(
-//                        DialogData.getConfirmingForRequiredDialogData(requireContext()))
-//                        .let {
-//                            it.setButtonsClickListener(
-//                                onPositive = {
-//                                    showLoading(parentFragmentManager)
-//                                    viewModel.saveShopImages()
-//                                },
-//                                onNegative = { }
-//                            )
-//                            it.show(parentFragmentManager, it.tag)
-//                        }
-//                } else {
-//                    showLoading(parentFragmentManager)
-//                    viewModel.saveShopImages()
-//                }
-//            }
+            (activity as EditProfileContainerActivity).setSaveButtonClickListener {
+                if (viewModel.profile.value?.approvedStatus == ApprovedCodeTable.code) {
+                    CustomDialog.newInstance(
+                        DialogData.getConfirmingForRequiredDialogData(requireContext()))
+                        .let {
+                            it.setButtonsClickListener(
+                                onPositive = {
+                                    showLoading(parentFragmentManager)
+                                    viewModel.saveShopImages()
+                                },
+                                onNegative = { }
+                            )
+                            it.show(parentFragmentManager, it.tag)
+                        }
+                } else {
+                    showLoading(parentFragmentManager)
+                    viewModel.saveShopImages()
+                }
+            }
         }
     }
 
