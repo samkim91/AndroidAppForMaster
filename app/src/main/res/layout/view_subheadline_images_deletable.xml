@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/bind"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="java.util.List" />
+
+        <import type="kr.co.soogong.master.data.dto.AttachmentDto" />
+
+        <variable
+            name="images"
+            type="List&lt;AttachmentDto>" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_subheadline"
+            style="@style/subheadline.bold"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="wrap_content"
+            android:text="@string/registered_images"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            bind:visible="@{images}" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_images_deletable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_20"
+            app:images_deletable="@{images}"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_subheadline"
+            app:layout_constraintVertical_bias="0"
+            app:spanCount="3"
+            tools:listitem="@layout/view_holder_image_deletable" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

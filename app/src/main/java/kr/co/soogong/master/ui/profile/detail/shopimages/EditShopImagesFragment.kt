@@ -13,7 +13,6 @@ import kr.co.soogong.master.databinding.FragmentEditShopImagesBinding
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.dialog.popup.CustomDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData
-import kr.co.soogong.master.ui.image.RectangleImageWithCloseAdapter
 import kr.co.soogong.master.ui.profile.detail.EditProfileContainerActivity
 import kr.co.soogong.master.ui.profile.detail.EditProfileContainerViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.ui.profile.detail.EditProfileContainerViewModel.Companion.SAVE_MASTER_SUCCESSFULLY
@@ -85,11 +84,9 @@ class EditShopImagesFragment : BaseFragment<FragmentEditShopImagesBinding>(
                     onDenied = { })
             }
 
-            rvRegisteredImages.adapter = RectangleImageWithCloseAdapter(
-                closeClickListener = { position ->
-                    viewModel.shopImages.removeAt(position)
-                }
-            )
+            sidRegisteredImages.setImagesDeletableAdapter { position ->
+                viewModel.shopImages.removeAt(position)
+            }
 
             (activity as EditProfileContainerActivity).setSaveButtonClickListener {
                 if (viewModel.profile.value?.approvedStatus == ApprovedCodeTable.code) {
