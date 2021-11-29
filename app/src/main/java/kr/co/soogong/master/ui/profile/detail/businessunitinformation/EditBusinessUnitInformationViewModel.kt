@@ -1,16 +1,15 @@
 package kr.co.soogong.master.ui.profile.detail.businessunitinformation
 
-import android.net.Uri
-import android.view.View
-import androidx.core.net.toUri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kr.co.soogong.master.data.dto.AttachmentDto
 import kr.co.soogong.master.data.dto.profile.MasterDto
 import kr.co.soogong.master.data.model.profile.*
 import kr.co.soogong.master.domain.usecase.profile.GetProfileUseCase
 import kr.co.soogong.master.domain.usecase.profile.SaveMasterUseCase
 import kr.co.soogong.master.ui.profile.detail.EditProfileContainerViewModel
+import kr.co.soogong.master.utility.ListLiveData
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -29,7 +28,8 @@ class EditBusinessUnitInformationViewModel @Inject constructor(
     val businessName = MutableLiveData("")
     val shopName = MutableLiveData("")
     val businessNumber = MutableLiveData("")
-    val businessRegistImage = MutableLiveData(Uri.EMPTY)
+
+    val businessRegistImage = ListLiveData<AttachmentDto>()
 
     fun requestBusinessUnitInformation() {
         Timber.tag(TAG).d("requestBusinessUnitInformation: ")
@@ -45,8 +45,8 @@ class EditBusinessUnitInformationViewModel @Inject constructor(
                 it.requiredInformation.businessUnitInformation.shopName?.let { name ->
                     shopName.postValue(name)
                 }
-                it.requiredInformation.businessUnitInformation.businessRegistImage?.url?.let { image ->
-                    businessRegistImage.postValue(image.toUri())
+                it.requiredInformation.businessUnitInformation.businessRegistImage?.let { image ->
+                    businessRegistImage.add(image)
                 }
                 it.requiredInformation.businessUnitInformation.businessNumber?.let { number ->
                     businessNumber.postValue(number)
@@ -68,11 +68,9 @@ class EditBusinessUnitInformationViewModel @Inject constructor(
                 businessNumber = businessNumber.value,
                 approvedStatus = if (profile.value?.approvedStatus == ApprovedCodeTable.code) RequestApproveCodeTable.code else null,
             ),
-            businessRegistImageUri = businessRegistImage.value,
+            businessRegistImageUri = businessRegistImage.value?.first()?.uri,
         )
     }
-
-    fun clearImage(v: View) = businessRegistImage.postValue(Uri.EMPTY)
 
     companion object {
         private const val TAG = "EditBusinessUnitInformationViewModel"

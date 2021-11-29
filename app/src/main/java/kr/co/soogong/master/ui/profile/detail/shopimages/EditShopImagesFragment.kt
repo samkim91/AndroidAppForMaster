@@ -48,8 +48,7 @@ class EditShopImagesFragment : BaseFragment<FragmentEditShopImagesBinding>(
             gettingImagesClickListener = View.OnClickListener {
                 PermissionHelper.checkImagePermission(context = requireContext(),
                     onGranted = {
-                        val availableImagesCount =
-                            10 - viewModel.shopImages.getItemCount()
+                        val availableImagesCount = 10 - viewModel.shopImages.getItemCount()
 
                         TedImagePicker.with(requireContext())
                             .buttonBackground(R.drawable.shape_green_background_radius8)
@@ -58,11 +57,7 @@ class EditShopImagesFragment : BaseFragment<FragmentEditShopImagesBinding>(
                                 resources.getString(R.string.maximum_images_count)
                             )
                             .startMultiImage { uriList ->
-                                if (FileHelper.isImageExtension(
-                                        uriList,
-                                        requireContext()
-                                    ) == false
-                                ) {
+                                if (FileHelper.isImageExtension(uriList, requireContext()) == false) {
                                     requireContext().toast(getString(R.string.invalid_image_extension))
                                     return@startMultiImage
                                 }

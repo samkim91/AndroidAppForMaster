@@ -28,7 +28,7 @@ class SubheadlineButtonBig @JvmOverloads constructor(
             field = value
             value?.let {
                 binding.tvFootnote.text = it
-                binding.tvFootnote.isVisible = true
+                binding.tvFootnote.isVisible = it.isNotEmpty()
             }
         }
 
