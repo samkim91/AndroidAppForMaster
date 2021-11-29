@@ -15,7 +15,7 @@
         android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_title"
+            android:id="@+id/tv_subheadline"
             style="@style/subheadline.bold"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -30,9 +30,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/gap_8"
-            app:layout_constraintBottom_toBottomOf="@id/tv_title"
-            app:layout_constraintStart_toEndOf="@id/tv_title"
-            app:layout_constraintTop_toTopOf="@id/tv_title" />
+            app:layout_constraintBottom_toBottomOf="@id/tv_subheadline"
+            app:layout_constraintStart_toEndOf="@id/tv_subheadline"
+            app:layout_constraintTop_toTopOf="@id/tv_subheadline" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_percent"
@@ -51,9 +51,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/gap_12"
             app:layout_constraintEnd_toEndOf="parent"
-            app:trackCornerRadius="@dimen/gap_20"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_title"
-            app:trackColor="@color/light_grey_1" />
+            app:layout_constraintTop_toBottomOf="@id/tv_subheadline"
+            app:trackColor="@color/light_grey_1"
+            app:trackCornerRadius="@dimen/gap_20" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

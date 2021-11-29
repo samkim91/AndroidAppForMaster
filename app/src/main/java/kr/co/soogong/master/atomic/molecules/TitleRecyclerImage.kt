@@ -8,7 +8,7 @@ import androidx.core.view.isVisible
 import kr.co.soogong.master.data.dto.AttachmentDto
 import kr.co.soogong.master.databinding.ViewTitleRecyclerImageBinding
 import kr.co.soogong.master.ui.image.RectangleImageWithCloseAdapter
-import kr.co.soogong.master.ui.image.setClosableList
+import kr.co.soogong.master.ui.image.setImagesDeletable
 
 class TitleRecyclerImage @JvmOverloads constructor(
     context: Context,
@@ -35,7 +35,7 @@ class TitleRecyclerImage @JvmOverloads constructor(
     var images: MutableList<AttachmentDto> = arrayListOf()
         set(value) {
             field = value
-            binding.photoList.setClosableList(value)
+            binding.photoList.setImagesDeletable(value)
         }
 
     fun setAdapter(

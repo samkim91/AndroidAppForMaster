@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:bind="http://schemas.android.com/bind"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -37,32 +35,15 @@
             app:onButtonClick="@{gettingImagesClickListener}"
             app:subheadline="@{@string/register_shop_images}" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_registered_images"
-            style="@style/subheadline.bold"
+        <kr.co.soogong.master.atomic.molecules.SubheadlineImagesDeletable
+            android:id="@+id/sid_registered_images"
             android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/gap_24"
-            android:text="@string/registered_images"
-            android:textColor="@color/black"
+            app:images="@{vm.shopImages}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/sbb_getting_images"
-            bind:visible="@{vm.shopImages}" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_registered_images"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/gap_20"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_registered_images"
-            app:layout_constraintVertical_bias="0"
-            app:spanCount="3"
-            bind:photo_list_with_close="@{vm.shopImages}"
-            tools:listitem="@layout/view_holder_image_deletable" />
+            app:subheadline="@{@string/registered_images}" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

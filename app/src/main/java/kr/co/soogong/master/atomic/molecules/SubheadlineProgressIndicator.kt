@@ -21,7 +21,7 @@ class SubheadlineProgressIndicator @JvmOverloads constructor(
         set(value) {
             field = value
             value?.let {
-                binding.tvTitle.text = it
+                binding.tvSubheadline.text = it
             }
         }
 
