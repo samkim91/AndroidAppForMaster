@@ -18,23 +18,14 @@ class SubheadlineTextareaCounter @JvmOverloads constructor(
     private var binding =
         ViewSubheadlineTextareaCounterBinding.inflate(LayoutInflater.from(context), this, true)
 
+    val textInputLayout: TextInputLayout = binding.tcContent.tilContainer
+    val textInputEditText: TextInputEditText = binding.tcContent.tieEdittext
+
     var subheadline: String? = null
         set(value) {
             field = value
             value?.let { binding.tvSubheadline.text = value }
         }
-
-    val editTextContainer: TextInputLayout = binding.tcContent.tilContainer
-    val editText: TextInputEditText = binding.tcContent.tieEdittext
-
-    // ReverseBinding 으로 인해 필요 없어짐
-//    var content: String? = null
-//        set(value) {
-//            field = value
-//            value?.let {
-//                binding.tcContent.tieEdittext.setText(it)
-//            }
-//        }
 
     var hint: String? = null
         set(value) {
@@ -48,8 +39,8 @@ class SubheadlineTextareaCounter @JvmOverloads constructor(
     var maxCount: Int = 0
         set(value) {
             field = value
-            binding.tcContent.tilContainer.counterMaxLength = value
-            binding.tcContent.tieEdittext.filters += InputFilter.LengthFilter(value)      // Edittext 의 max 값 추가
+            textInputLayout.counterMaxLength = value
+            textInputEditText.filters += InputFilter.LengthFilter(value)      // Edittext 의 max 값 추가
         }
 
 }

@@ -19,14 +19,8 @@ class TextInput @JvmOverloads constructor(
     private var binding =
         ViewTextInputBinding.inflate(LayoutInflater.from(context), this, true)
 
-    val editTextContainer: TextInputLayout = binding.tilContainer
-    val editText: TextInputEditText = binding.tieEdittext
-
-    var hint: String? = null
-        set(value) {
-            field = value
-            value?.let { binding.tilContainer.hint = it }
-        }
+    val textInputLayout: TextInputLayout = binding.tilContainer
+    val textInputEditText: TextInputEditText = binding.tieEdittext
 
     var enabled: Boolean? = null
         set(value) {
