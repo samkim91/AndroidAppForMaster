@@ -20,13 +20,12 @@ class EditBusinessUnitInformationViewModel @Inject constructor(
     saveMasterUseCase: SaveMasterUseCase,
 ) : EditProfileContainerViewModel(getProfileUseCase, saveMasterUseCase) {
 
-    private val _businessTypes = MutableLiveData(listOf(SoleCodeTable.inKorean,
-        CorporateCodeTable.inKorean,
-        FreelancerCodeTable.inKorean))
-    val businessTypes: LiveData<List<String>>
+    private val _businessTypes =
+        MutableLiveData(listOf(SoleCodeTable, CorporateCodeTable, FreelancerCodeTable))
+    val businessTypes: LiveData<List<CodeTable>>
         get() = _businessTypes
 
-    val businessType = MutableLiveData("")
+    val businessType = MutableLiveData<CodeTable>(_businessTypes.value?.get(0))
     val businessName = MutableLiveData("")
     val shopName = MutableLiveData("")
     val businessNumber = MutableLiveData("")
@@ -38,7 +37,8 @@ class EditBusinessUnitInformationViewModel @Inject constructor(
         requestProfile {
             profile.value = it
             it.requiredInformation?.businessUnitInformation?.businessType?.let { type ->
-                businessType.postValue(type)
+                businessType.value =
+                    _businessTypes.value?.find { mType -> mType.inKorean == type }
                 it.requiredInformation.businessUnitInformation.businessName?.let { name ->
                     businessName.postValue(name)
                 }
@@ -62,8 +62,8 @@ class EditBusinessUnitInformationViewModel @Inject constructor(
             MasterDto(
                 id = profile.value?.id,
                 uid = profile.value?.uid,
-                businessType = businessType.value,
-                businessName = if (businessType.value != FreelancerCodeTable.code) businessName.value else "",
+                businessType = businessType.value?.code,
+                businessName = if (businessType.value != FreelancerCodeTable) businessName.value else "",
                 shopName = shopName.value,
                 businessNumber = businessNumber.value,
                 approvedStatus = if (profile.value?.approvedStatus == ApprovedCodeTable.code) RequestApproveCodeTable.code else null,
