@@ -360,13 +360,14 @@
         <item name="boxBackgroundColor">@null</item>
         <item name="boxStrokeWidth">@dimen/gap_1</item>
         <item name="boxStrokeWidthFocused">@dimen/gap_1</item>
-        <item name="boxStrokeColor">@color/selector_light_grey2_only</item>
+        <item name="boxStrokeColor">@color/selector_light_grey2_default_green_enabled_focused</item>
         <item name="boxStrokeErrorColor">@color/brand_red</item>
 
         <item name="counterTextAppearance">@style/caption_1.regular</item>
         <item name="counterTextColor">@color/light_grey_2</item>
         <item name="hintTextAppearance">@style/caption_1.regular</item>
         <item name="hintTextColor">@color/light_grey_2</item>
+        <item name="android:textColorHint">@color/light_grey_2</item>
         <item name="errorTextAppearance">@style/caption_1.regular</item>
         <item name="errorTextColor">@color/brand_red</item>
 
