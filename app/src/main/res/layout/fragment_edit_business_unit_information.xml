@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:bind="http://schemas.android.com/bind">
 
+
     <data>
 
         <import type="android.net.Uri" />
@@ -30,48 +31,43 @@
             app:layout_constraintTop_toTopOf="parent"
             app:subheadline="@{@string/select_business_type}" />
 
-        <kr.co.soogong.master.atomic.molecules.TitleEditText
-            android:id="@+id/business_name"
-            android:layout_width="match_parent"
+        <kr.co.soogong.master.atomic.molecules.SubheadlineTextInput
+            android:id="@+id/sti_business_name"
+            android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/gap_16"
-            app:alertText='@{"필수 정보입니다."}'
             app:content="@={vm.businessName}"
-            app:hintText='@{"예시) 수공"}'
+            app:hint="@{@string/type_business_name_hint}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/scg_business_type"
-            app:title='@{"사업자 등록상호를 입력해주세요."}' />
+            app:maxCount="@{30}"
+            app:subheadline="@{@string/type_business_name}" />
 
-        <kr.co.soogong.master.atomic.molecules.TitleEditText
-            android:id="@+id/shop_name"
-            android:layout_width="match_parent"
+        <kr.co.soogong.master.atomic.molecules.SubheadlineTextInput
+            android:id="@+id/sti_shop_name"
+            android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/gap_28"
-            app:alertText='@{"2자 이상 20자 이내로 입력해주세요."}'
+            android:layout_marginTop="@dimen/gap_16"
             app:content="@={vm.shopName}"
-            app:hintText='@{"예시) 수공"}'
+            app:hint="@{@string/type_shop_name_hint}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/business_name"
-            app:setMaxLength="@{20}"
-            app:subTitle="@{@string/requesting_shop_name_subtitle}"
-            app:title='@{"업체 이름을 입력해주세요."}' />
+            app:layout_constraintTop_toBottomOf="@id/sti_business_name"
+            app:subheadline="@{@string/type_shop_name}" />
 
-        <kr.co.soogong.master.atomic.molecules.TitleEditText
-            android:id="@+id/business_number"
-            android:layout_width="match_parent"
+        <kr.co.soogong.master.atomic.molecules.SubheadlineTextInput
+            android:id="@+id/sti_business_number"
+            android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/gap_28"
-            app:alertText='@{"필수 정보입니다."}'
+            android:layout_marginTop="@dimen/gap_16"
             app:content="@={vm.businessNumber}"
-            app:hintText='@{"사업자등록번호 예시) 1053578512"}'
+            app:hint="@{@string/type_business_number_hint}"
+            app:inputType="@{InputType.TYPE_CLASS_NUMBER}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/shop_name"
-            app:setInputType="@{InputType.TYPE_CLASS_NUMBER}"
-            app:setMaxLength="@{10}"
-            app:title='@{"사업자등록번호를 입력해주세요."}' />
+            app:layout_constraintTop_toBottomOf="@id/sti_shop_name"
+            app:subheadline="@{@string/type_business_number}" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/business_regist_image_holder_label"
@@ -83,7 +79,7 @@
             android:textColor="@color/text_basic_color"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/business_number" />
+            app:layout_constraintTop_toBottomOf="@id/sti_business_number" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/camera_icon_for_business_regist_image"
@@ -120,18 +116,5 @@
                 android:background="@drawable/ic_close_in_image"
                 bind:onClick="@{vm::clearImage}" />
         </androidx.cardview.widget.CardView>
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/alert"
-            style="@style/text_style_14sp.regular"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="@string/required_field_alert"
-            android:textColor="@color/text_alert_color"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/camera_icon_for_business_regist_image" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

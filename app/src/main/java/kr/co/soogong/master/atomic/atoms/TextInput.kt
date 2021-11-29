@@ -15,14 +15,14 @@ class TextInput @JvmOverloads constructor(
     context: Context,
     attributeSet: AttributeSet? = null,
     defStyle: Int = 0,
-) : ConstraintLayout(context, attributeSet, defStyle) {
+) : ConstraintLayout(context, attributeSet, defStyle), ITextInput {
     private var binding =
         ViewTextInputBinding.inflate(LayoutInflater.from(context), this, true)
 
-    val textInputLayout: TextInputLayout = binding.tilContainer
-    val textInputEditText: TextInputEditText = binding.tieEdittext
+    override val textInputLayout: TextInputLayout = binding.tilContainer
+    override val textInputEditText: TextInputEditText = binding.tieEdittext
 
-    var enabled: Boolean? = null
+    override var enabled: Boolean? = null
         set(value) {
             field = value
             value?.let {
@@ -36,7 +36,7 @@ class TextInput @JvmOverloads constructor(
             }
         }
 
-    var maxCount: Int? = null
+    override var maxCount: Int? = null
         set(value) {
             field = value
             value?.let {
@@ -45,5 +45,4 @@ class TextInput @JvmOverloads constructor(
                 binding.tieEdittext.filters += InputFilter.LengthFilter(value)      // Edittext 의 max 값 추가
             }
         }
-
 }
