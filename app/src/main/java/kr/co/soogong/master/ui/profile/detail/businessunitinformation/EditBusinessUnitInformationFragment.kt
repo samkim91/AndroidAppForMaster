@@ -8,6 +8,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import gun0912.tedimagepicker.builder.TedImagePicker
 import kr.co.soogong.master.R
 import kr.co.soogong.master.atomic.molecules.SubheadlineChipGroup
+import kr.co.soogong.master.data.common.ButtonTheme
+import kr.co.soogong.master.data.dto.AttachmentDto
 import kr.co.soogong.master.data.model.profile.*
 import kr.co.soogong.master.databinding.FragmentEditBusinessUnitInformationBinding
 import kr.co.soogong.master.ui.base.BaseFragment
@@ -44,9 +46,8 @@ class EditBusinessUnitInformationFragment :
             vm = viewModel
             lifecycleOwner = viewLifecycleOwner
 
-            initChips()
-
-            cameraIconForBusinessRegistImage.setOnClickListener {
+            buttonThemeGettingImages = ButtonTheme.OutlinedPrimary
+            gettingImagesClickListener = View.OnClickListener {
                 PermissionHelper.checkImagePermission(context = requireContext(),
                     onGranted = {
                         TedImagePicker.with(requireContext())
@@ -57,11 +58,28 @@ class EditBusinessUnitInformationFragment :
                                     return@start
                                 }
 
-                                viewModel.businessRegistImage.value = uri
+                                viewModel.businessRegistImage.clear()
+                                viewModel.businessRegistImage.add(
+                                    AttachmentDto(
+                                        id = null,
+                                        partOf = null,
+                                        referenceId = null,
+                                        description = null,
+                                        s3Name = null,
+                                        fileName = null,
+                                        url = null,
+                                        uri = uri)
+                                )
                             }
                     },
                     onDenied = { })
             }
+
+            sidRegisteredImages.setImagesDeletableAdapter { position ->
+                viewModel.businessRegistImage.removeAt(position)
+            }
+
+            initChips()
 
             (activity as EditProfileContainerActivity).setSaveButtonClickListener {
                 viewModel.businessName.observe(viewLifecycleOwner, {
@@ -81,10 +99,6 @@ class EditBusinessUnitInformationFragment :
                         else -> null
                     }
                 })
-
-//                viewModel.businessRegistImage.observe(viewLifecycleOwner, {
-//                    alert.visibility = if (it == Uri.EMPTY) View.VISIBLE else View.GONE
-//                })
 
                 if (viewModel.businessType.value == FreelancerCodeTable) {
                     if (!stiShopName.error.isNullOrBlank() || !stiBusinessNumber.error.isNullOrBlank()) return@setSaveButtonClickListener
@@ -144,15 +158,15 @@ class EditBusinessUnitInformationFragment :
                     stiBusinessName.isVisible = false
                     stiBusinessNumber.subheadline = getString(R.string.type_birthday)
                     stiBusinessNumber.hint = getString(R.string.type_birthday_hint)
-                    businessRegistImageHolderLabel.text =
-                        getString(R.string.identical_image_holder_label)
+                    sbbGettingImages.subheadline = getString(R.string.upload_social_security_image)
+                    sbbGettingImages.hint = getString(R.string.upload_social_security_image_hint)
                 }
                 else -> {       // 법인 또는 개인사업자일 경우 레이아웃
                     stiBusinessName.isVisible = true
                     stiBusinessNumber.subheadline = getString(R.string.type_business_number)
                     stiBusinessNumber.hint = getString(R.string.type_business_number_hint)
-                    businessRegistImageHolderLabel.text =
-                        getString(R.string.business_identical_image_holder_label)
+                    sbbGettingImages.subheadline = getString(R.string.upload_business_regist_image)
+                    sbbGettingImages.hint = ""
                 }
             }
         }

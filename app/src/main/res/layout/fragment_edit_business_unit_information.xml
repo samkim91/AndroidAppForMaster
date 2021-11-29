@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:bind="http://schemas.android.com/bind">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
     <data>
@@ -11,9 +10,19 @@
 
         <import type="android.text.InputType" />
 
+        <import type="kr.co.soogong.master.data.common.ButtonTheme" />
+
         <variable
             name="vm"
             type="kr.co.soogong.master.ui.profile.detail.businessunitinformation.EditBusinessUnitInformationViewModel" />
+
+        <variable
+            name="buttonThemeGettingImages"
+            type="ButtonTheme" />
+
+        <variable
+            name="gettingImagesClickListener"
+            type="android.view.View.OnClickListener" />
 
     </data>
 
@@ -69,52 +78,28 @@
             app:layout_constraintTop_toBottomOf="@id/sti_shop_name"
             app:subheadline="@{@string/type_business_number}" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/business_regist_image_holder_label"
-            style="@style/text_style_16sp.medium"
-            android:layout_width="0dp"
+        <kr.co.soogong.master.atomic.molecules.SubheadlineButtonBig
+            android:id="@+id/sbb_getting_images"
+            android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/gap_28"
-            android:text="@string/business_identical_image_holder_label"
-            android:textColor="@color/text_basic_color"
+            android:layout_marginTop="@dimen/gap_16"
+            app:buttonText="@{@string/getting_images}"
+            app:buttonTheme="@{buttonThemeGettingImages}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/sti_business_number" />
+            app:layout_constraintTop_toBottomOf="@id/sti_business_number"
+            app:onButtonClick="@{gettingImagesClickListener}"
+            app:subheadline="@{@string/upload_business_regist_image}" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/camera_icon_for_business_regist_image"
-            android:layout_width="@dimen/gap_100"
-            android:layout_height="@dimen/gap_100"
-            android:layout_marginTop="@dimen/gap_12"
-            android:background="@drawable/ic_camera"
-            app:layout_constraintStart_toStartOf="@id/business_regist_image_holder_label"
-            app:layout_constraintTop_toBottomOf="@id/business_regist_image_holder_label"
-            bind:visible="@{vm.businessRegistImage == Uri.EMPTY}" />
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/business_regist_image_holder"
-            android:layout_width="@dimen/gap_100"
-            android:layout_height="@dimen/gap_100"
-            android:layout_marginTop="@dimen/gap_12"
-            app:cardCornerRadius="@dimen/gap_8"
-            app:cardElevation="@dimen/gap_0"
-            app:layout_constraintStart_toStartOf="@id/business_regist_image_holder_label"
-            app:layout_constraintTop_toBottomOf="@id/business_regist_image_holder_label"
-            bind:visible="@{vm.businessRegistImage != Uri.EMPTY}">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/image_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                bind:image_uri="@{vm.businessRegistImage}" />
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/image_view_close_icon"
-                android:layout_width="@dimen/gap_24"
-                android:layout_height="@dimen/gap_24"
-                android:layout_gravity="end"
-                android:background="@drawable/ic_close_in_image"
-                bind:onClick="@{vm::clearImage}" />
-        </androidx.cardview.widget.CardView>
+        <kr.co.soogong.master.atomic.molecules.SubheadlineImagesDeletable
+            android:id="@+id/sid_registered_images"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_24"
+            app:images="@{vm.businessRegistImage}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sbb_getting_images"
+            app:subheadline="@{@string/registered_images}" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

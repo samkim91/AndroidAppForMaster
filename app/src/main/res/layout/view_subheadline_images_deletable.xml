@@ -36,7 +36,7 @@
             android:id="@+id/rv_images_deletable"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/gap_20"
+            android:layout_marginTop="@dimen/gap_10"
             app:images_deletable="@{images}"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"

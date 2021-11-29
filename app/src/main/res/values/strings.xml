@@ -317,7 +317,9 @@
     <string name="type_business_number_hint">사업자등록번호</string>
     <string name="type_birthday">생년월일을 입력해주세요.</string>
     <string name="type_birthday_hint">생년월일</string>
-
+    <string name="upload_business_regist_image">사업자등록증 사진을 올려주세요.</string>
+    <string name="upload_social_security_image">신분증 정면 사진을 올려주세요.</string>
+    <string name="upload_social_security_image_hint">개인정보 보호를 위해 주민번호 뒷자리는 가려주세요.</string>
 
     <string name="master_type">마스터유형</string>
     <string name="store_name">업체명</string>
