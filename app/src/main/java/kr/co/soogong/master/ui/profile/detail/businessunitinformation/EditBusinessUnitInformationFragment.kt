@@ -1,6 +1,5 @@
 package kr.co.soogong.master.ui.profile.detail.businessunitinformation
 
-import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
@@ -66,25 +65,31 @@ class EditBusinessUnitInformationFragment :
 
             (activity as EditProfileContainerActivity).setSaveButtonClickListener {
                 viewModel.businessName.observe(viewLifecycleOwner, {
-                    businessName.alertVisible = it.isNullOrEmpty()
+                    stiBusinessName.error =
+                        if (it.isNullOrEmpty()) getString(R.string.required_field_alert) else null
                 })
 
                 viewModel.shopName.observe(viewLifecycleOwner, {
-                    shopName.alertVisible = it.length < 2 || it.length > 20
+                    stiShopName.error =
+                        if (it.length < 2 || it.length > 20) getString(R.string.required_value_between_2_and_20) else null
                 })
 
                 viewModel.businessNumber.observe(viewLifecycleOwner, {
-                    businessNumber.alertVisible = it.isNullOrEmpty()
+                    stiBusinessNumber.error = when {
+                        it.isNullOrBlank() -> getString(R.string.required_field_alert)
+                        it.length > 10 -> getString(R.string.fill_text_under_10)
+                        else -> null
+                    }
                 })
 
-                viewModel.businessRegistImage.observe(viewLifecycleOwner, {
-                    alert.visibility = if (it == Uri.EMPTY) View.VISIBLE else View.GONE
-                })
+//                viewModel.businessRegistImage.observe(viewLifecycleOwner, {
+//                    alert.visibility = if (it == Uri.EMPTY) View.VISIBLE else View.GONE
+//                })
 
                 if (viewModel.businessType.value == FreelancerCodeTable) {
-                    if (shopName.alertVisible || businessNumber.alertVisible || alert.isVisible) return@setSaveButtonClickListener
+                    if (!stiShopName.error.isNullOrBlank() || !stiBusinessNumber.error.isNullOrBlank()) return@setSaveButtonClickListener
                 } else {
-                    if (businessName.alertVisible || shopName.alertVisible || businessNumber.alertVisible || alert.isVisible) return@setSaveButtonClickListener
+                    if (!stiBusinessName.error.isNullOrBlank() || !stiShopName.error.isNullOrBlank() || !stiBusinessNumber.error.isNullOrBlank()) return@setSaveButtonClickListener
                 }
 
                 if (viewModel.profile.value?.approvedStatus == ApprovedCodeTable.code) {
@@ -136,16 +141,16 @@ class EditBusinessUnitInformationFragment :
         with(binding) {
             when (businessType) {
                 FreelancerCodeTable -> {        // 프리랜서일 경우 레이아웃
-                    businessName.isVisible = false
-                    shopName.subTitleVisible = true
-                    businessNumber.title = getString(R.string.requesting_birthday_label)
+                    stiBusinessName.isVisible = false
+                    stiBusinessNumber.subheadline = getString(R.string.type_birthday)
+                    stiBusinessNumber.hint = getString(R.string.type_birthday_hint)
                     businessRegistImageHolderLabel.text =
                         getString(R.string.identical_image_holder_label)
                 }
                 else -> {       // 법인 또는 개인사업자일 경우 레이아웃
-                    businessName.isVisible = true
-                    shopName.subTitleVisible = false
-                    businessNumber.title = getString(R.string.requesting_business_number_label)
+                    stiBusinessName.isVisible = true
+                    stiBusinessNumber.subheadline = getString(R.string.type_business_number)
+                    stiBusinessNumber.hint = getString(R.string.type_business_number_hint)
                     businessRegistImageHolderLabel.text =
                         getString(R.string.business_identical_image_holder_label)
                 }
