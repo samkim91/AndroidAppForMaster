@@ -3,33 +3,30 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <merge
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/til_container"
-            style="@style/outlinedTextarea"
+            style="@style/outlinedTextInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:endIconMode="clear_text"
-            app:endIconTint="@color/light_grey_2"
-            app:errorEnabled="true"
-            app:helperTextEnabled="true"
+            app:endIconMode="dropdown_menu"
+            app:endIconTint="@color/dark_grey_2"
             app:hintEnabled="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/tie_edittext"
+            <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                android:id="@+id/actv_item"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingStart="@dimen/gap_14"
-                android:paddingTop="@dimen/gap_14"
-                android:paddingEnd="@dimen/gap_14"
-                android:paddingBottom="@dimen/gap_14"
-                tools:text="내용" />
+                android:layout_height="@dimen/gap_60"
+                android:inputType="none"
+                android:padding="@dimen/gap_14"
+                tools:text="선택" />
         </com.google.android.material.textfield.TextInputLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </merge>
 </layout>

@@ -10,7 +10,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/til_container"
-            style="@style/outlinedTextarea"
+            style="@style/outlinedTextInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:endIconMode="clear_text"
@@ -26,10 +26,8 @@
                 android:id="@+id/tie_edittext"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingStart="@dimen/gap_14"
-                android:paddingTop="@dimen/gap_14"
-                android:paddingEnd="@dimen/gap_14"
-                android:paddingBottom="@dimen/gap_14"
+                android:maxLines="1"
+                android:padding="@dimen/gap_14"
                 tools:text="내용" />
         </com.google.android.material.textfield.TextInputLayout>
     </merge>
