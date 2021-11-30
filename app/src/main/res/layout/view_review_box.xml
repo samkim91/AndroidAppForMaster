@@ -3,12 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <merge
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_solid_background_radius8"
         android:paddingTop="@dimen/gap_17"
-        android:paddingBottom="@dimen/gap_17">
+        android:paddingBottom="@dimen/gap_17"
+        tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_recommend_count"
@@ -86,7 +87,5 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_chainStyle="spread_inside"
             app:layout_constraintStart_toEndOf="@id/tv_review_count_label" />
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </merge>
 </layout>

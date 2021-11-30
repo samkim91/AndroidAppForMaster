@@ -3,23 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <merge
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingStart="@dimen/gap_8"
-        android:paddingTop="@dimen/gap_28"
-        android:paddingEnd="@dimen/gap_8"
-        android:paddingBottom="@dimen/gap_28"
-        tools:background="@drawable/bg_solid_background_radius16">
+        tools:background="@drawable/bg_solid_background_radius16"
+        tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_icon_container"
             android:layout_width="@dimen/gap_40"
             android:layout_height="@dimen/gap_40"
+            android:layout_marginStart="@dimen/gap_8"
             android:background="@drawable/bg_solid_white_stroke_light_grey1_radius20"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/tv_content"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@id/tv_content" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_icon"
@@ -37,6 +35,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/gap_12"
+            android:layout_marginTop="@dimen/gap_28"
+            android:layout_marginEnd="@dimen/gap_8"
+            android:layout_marginBottom="@dimen/gap_28"
             android:breakStrategy="simple"
             android:lineSpacingExtra="@dimen/gap_2"
             app:layout_constrainedWidth="true"
@@ -48,5 +49,5 @@
             app:layout_goneMarginStart="@dimen/gap_0"
             tools:text="마스터분들의 공정하고 투명한 거래를 위해 연락처, 간판 등 직거래 유도를 자제해 주세요."
             tools:textColor="@color/grey_3" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </merge>
 </layout>

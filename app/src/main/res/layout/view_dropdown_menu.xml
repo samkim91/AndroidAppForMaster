@@ -3,33 +3,33 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <merge
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
+        android:layout_height="wrap_content">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/til_container"
             style="@style/outlinedTextarea"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:counterEnabled="true"
+            app:endIconMode="clear_text"
+            app:endIconTint="@color/light_grey_2"
             app:errorEnabled="true"
+            app:helperTextEnabled="true"
+            app:hintEnabled="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:counterMaxLength="150">
+            app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/tie_edittext"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="top"
-                android:lines="8"
-                android:paddingStart="@dimen/gap_18"
+                android:paddingStart="@dimen/gap_14"
                 android:paddingTop="@dimen/gap_14"
-                android:paddingEnd="@dimen/gap_18"
-                android:paddingBottom="@dimen/gap_14" />
+                android:paddingEnd="@dimen/gap_14"
+                android:paddingBottom="@dimen/gap_14"
+                tools:text="내용" />
         </com.google.android.material.textfield.TextInputLayout>
-    </merge>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

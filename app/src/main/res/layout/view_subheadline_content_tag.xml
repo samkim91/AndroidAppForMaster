@@ -3,9 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <merge
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_subheadline"
@@ -52,5 +53,5 @@
             app:layout_constraintTop_toTopOf="@id/tv_content"
             tools:text="부가세 포함"
             tools:visibility="visible" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </merge>
 </layout>
