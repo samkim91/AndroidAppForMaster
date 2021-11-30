@@ -1,25 +1,27 @@
 package kr.co.soogong.master.atomic.molecules
 
 import android.content.Context
-import android.text.InputFilter
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import kr.co.soogong.master.atomic.atoms.ITextInput
+import kr.co.soogong.master.atomic.atoms.TextareaCounter
 import kr.co.soogong.master.databinding.ViewSubheadlineTextareaCounterBinding
 
 class SubheadlineTextareaCounter @JvmOverloads constructor(
     context: Context,
     attributeSet: AttributeSet? = null,
     defStyle: Int = 0,
-) : ConstraintLayout(context, attributeSet, defStyle) {
+) : ConstraintLayout(context, attributeSet, defStyle), ITextInput {
     private var binding =
         ViewSubheadlineTextareaCounterBinding.inflate(LayoutInflater.from(context), this, true)
 
-    val textInputLayout: TextInputLayout = binding.tcContent.tilContainer
-    val textInputEditText: TextInputEditText = binding.tcContent.tieEdittext
+    private val textareaCounter: TextareaCounter = binding.tContent
+    override val textInputLayout: TextInputLayout = binding.tContent.textInputLayout
+    override val textInputEditText: TextInputEditText = binding.tContent.textInputEditText
 
     var subheadline: String? = null
         set(value) {
@@ -36,11 +38,15 @@ class SubheadlineTextareaCounter @JvmOverloads constructor(
             }
         }
 
-    var maxCount: Int = 0
+    override var maxCount: Int? = null
         set(value) {
             field = value
-            textInputLayout.counterMaxLength = value
-            textInputEditText.filters += InputFilter.LengthFilter(value)      // Edittext 의 max 값 추가
+            textareaCounter.maxCount = value
         }
 
+    override var enabled: Boolean? = null
+        set(value) {
+            field = value
+            textareaCounter.enabled = value
+        }
 }

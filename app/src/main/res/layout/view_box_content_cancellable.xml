@@ -3,20 +3,32 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <merge
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_solid_grey3_radius12"
-        android:padding="@dimen/gap_15">
+        tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_layout"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="@dimen/gap_0"
+            android:background="@drawable/bg_solid_grey3_radius12"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_content"
             style="@style/footnote.bold"
             android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/gap_15"
+            android:layout_marginTop="@dimen/gap_15"
+            android:layout_marginEnd="@dimen/gap_10"
+            android:layout_marginBottom="@dimen/gap_15"
             android:breakStrategy="simple"
             android:textColor="@color/white"
-            android:layout_marginEnd="@dimen/gap_10"
             app:layout_constrainedWidth="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/iv_icon"
@@ -29,10 +41,11 @@
             android:id="@+id/iv_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/gap_15"
             android:background="@drawable/ic_cancel"
             android:backgroundTint="@color/light_grey_1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </merge>
 </layout>
