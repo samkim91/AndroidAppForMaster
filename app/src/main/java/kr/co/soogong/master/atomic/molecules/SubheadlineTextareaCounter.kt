@@ -29,13 +29,25 @@ class SubheadlineTextareaCounter @JvmOverloads constructor(
             value?.let { binding.tvSubheadline.text = value }
         }
 
-    var hint: String? = null
+    override var hint: String? = null
         set(value) {
             field = value
             value?.let {
                 binding.tvFootnote.text = it
                 binding.tvFootnote.isVisible = true
             }
+        }
+
+    override var helper: String? = null
+        set(value) {
+            field = value
+            value?.let { textareaCounter.helper = it }
+        }
+
+    override var error: String? = null
+        set(value) {
+            field = value
+            textareaCounter.error = value
         }
 
     override var maxCount: Int? = null

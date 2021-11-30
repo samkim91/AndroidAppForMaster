@@ -25,6 +25,7 @@ import kr.co.soogong.master.uihelper.profile.*
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_BUSINESS_UNIT_INFORMATION
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_INTRODUCTION
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_SHOP_IMAGES
+import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_WARRANTY_INFORMATION
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.FileHelper
 import kr.co.soogong.master.utility.PermissionHelper
@@ -103,6 +104,9 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
 
             hbcBusinessUnitInformation.onButtonClick =
                 View.OnClickListener { startActivityCommonCode(EDIT_BUSINESS_UNIT_INFORMATION) }
+
+            hbcWarrantyInformation.onButtonClick =
+                View.OnClickListener { startActivityCommonCode(EDIT_WARRANTY_INFORMATION) }
 
 //            editRequiredInfo.setOnClickListener {
 //                startActivity(

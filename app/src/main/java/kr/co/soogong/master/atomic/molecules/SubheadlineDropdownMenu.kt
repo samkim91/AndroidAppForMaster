@@ -24,22 +24,16 @@ class SubheadlineDropdownMenu @JvmOverloads constructor(
     override val autoCompleteTextView: MaterialAutoCompleteTextView =
         dropdownMenu.autoCompleteTextView
 
-    override var adapter: ArrayAdapter<Any>? = null
-        set(value) {
-            field = value
-            value?.let { dropdownMenu.adapter = value }
-        }
-
     var subheadline: String? = null
         set(value) {
             field = value
             value?.let { binding.tvSubheadline.text = value }
         }
 
-    var hint: String? = null
+    var selectedItem: Pair<String, Int>? = null
         set(value) {
             field = value
-            value?.let { textInputLayout.hint = it }
+            value?.let { autoCompleteTextView.setText(it.first, false) }
         }
 
     var inputType: Int? = null
@@ -48,9 +42,27 @@ class SubheadlineDropdownMenu @JvmOverloads constructor(
             value?.let { autoCompleteTextView.inputType = it }
         }
 
-    var helper: String? = null
+    override var hint: String? = null
         set(value) {
             field = value
-            value?.let { textInputLayout.helperText = it }
+            dropdownMenu.hint = value
+        }
+
+    override var error: String? = null
+        set(value) {
+            field = value
+            dropdownMenu.error = value
+        }
+
+    override var helper: String? = null
+        set(value) {
+            field = value
+            dropdownMenu.helper = value
+        }
+
+    override var adapter: ArrayAdapter<Any>? = null
+        set(value) {
+            field = value
+            value?.let { dropdownMenu.adapter = value }
         }
 }

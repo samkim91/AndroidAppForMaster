@@ -2,13 +2,13 @@ package kr.co.soogong.master.ui.profile.detail.warranty
 
 import android.os.Bundle
 import android.view.View
+import android.widget.ArrayAdapter
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentEditWarrantyInformationBinding
 import kr.co.soogong.master.ui.base.BaseFragment
-import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogBundle
-import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogRecyclerView
+import kr.co.soogong.master.ui.profile.detail.EditProfileContainerActivity
 import kr.co.soogong.master.ui.profile.detail.EditProfileContainerViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.ui.profile.detail.EditProfileContainerViewModel.Companion.SAVE_MASTER_SUCCESSFULLY
 import kr.co.soogong.master.utility.EventObserver
@@ -36,36 +36,30 @@ class EditWarrantyInformationFragment : BaseFragment<FragmentEditWarrantyInforma
             vm = viewModel
             lifecycleOwner = viewLifecycleOwner
 
-            warrantyPeriod.addDropdownClickListener {
-                Timber.tag(TAG).w("Dropdown Clicked")
-                val bottomDialog =
-                    BottomDialogRecyclerView.newInstance(
-                        dialogBundle = BottomDialogBundle.getWarrantyPeriodBundle(),
-                        itemClick = { key, value ->
-                            if (value == -1) {
-                                viewModel.warrantyDescription.value = ""
-                            }
-                            viewModel.warrantyPeriodForLayout.value = key
-                            viewModel.warrantyPeriod.value = value
-                        }
-                    )
+            sdmWarrantyPeriod.adapter =
+                ArrayAdapter(requireContext(),
+                    R.layout.textview_item_dropdown,
+                    viewModel.warrantyPeriods.map { it.first })
 
-                bottomDialog.show(parentFragmentManager, bottomDialog.tag)
+            sdmWarrantyPeriod.autoCompleteTextView.setOnItemClickListener { _, _, position, _ ->
+                viewModel.selectedPeriod.value = viewModel.warrantyPeriods[position]
             }
 
-            defaultButton.setOnClickListener {
-                viewModel.warrantyPeriod.observe(viewLifecycleOwner, {
-                    warrantyPeriod.alertVisible = it == null
+            (activity as EditProfileContainerActivity).setSaveButtonClickListener {
+                viewModel.selectedPeriod.observe(viewLifecycleOwner, { pair ->
+                    sdmWarrantyPeriod.error =
+                        if (pair == null) getString(R.string.required_field_alert) else null
                 })
 
                 viewModel.warrantyDescription.observe(viewLifecycleOwner, {
-                    warrantyDescription.alertVisible = it.length < 10
+                    stcWarrantyInformation.error =
+                        if (it.length < 10) getString(R.string.fill_text_over_10) else null
                 })
 
-                if (viewModel.warrantyPeriod.value != -1) {
-                    if (!warrantyPeriod.alertVisible && !warrantyDescription.alertVisible) viewModel.saveWarrantyInfo()
-                } else {
-                    if (!warrantyPeriod.alertVisible) viewModel.saveWarrantyInfo()
+                if (viewModel.selectedPeriod.value?.second == -1) {     // 보증기간 없음 선택 시
+                    if (sdmWarrantyPeriod.error.isNullOrBlank()) viewModel.saveWarrantyInfo()
+                } else {        // 보증기간 있을 시
+                    if (sdmWarrantyPeriod.error.isNullOrBlank() && stcWarrantyInformation.error.isNullOrBlank()) viewModel.saveWarrantyInfo()
                 }
             }
         }

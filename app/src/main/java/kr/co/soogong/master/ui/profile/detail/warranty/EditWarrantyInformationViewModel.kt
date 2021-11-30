@@ -2,10 +2,10 @@ package kr.co.soogong.master.ui.profile.detail.warranty
 
 import androidx.lifecycle.MutableLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kr.co.soogong.master.atomic.atoms.DropdownMenu
 import kr.co.soogong.master.data.dto.profile.MasterDto
 import kr.co.soogong.master.domain.usecase.profile.GetProfileUseCase
 import kr.co.soogong.master.domain.usecase.profile.SaveMasterUseCase
-import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogItem
 import kr.co.soogong.master.ui.profile.detail.EditProfileContainerViewModel
 import timber.log.Timber
 import javax.inject.Inject
@@ -16,8 +16,8 @@ class EditWarrantyInformationViewModel @Inject constructor(
     saveMasterUseCase: SaveMasterUseCase,
 ) : EditProfileContainerViewModel(getProfileUseCase, saveMasterUseCase) {
 
-    val warrantyPeriod = MutableLiveData<Int>()
-    val warrantyPeriodForLayout = MutableLiveData<String>()
+    val warrantyPeriods = DropdownMenu.getWarrantyPeriods()
+    val selectedPeriod = MutableLiveData<Pair<String, Int>>()
     val warrantyDescription = MutableLiveData("")
 
     fun requestWarrantyInformation() {
@@ -26,11 +26,11 @@ class EditWarrantyInformationViewModel @Inject constructor(
         requestProfile {
             profile.value = it
             it.requiredInformation?.warrantyInformation?.warrantyPeriod?.let { period ->
-                warrantyPeriod.postValue(period)
-                warrantyPeriodForLayout.postValue(
-                    BottomDialogItem.getWarrantyPeriodList().find { item ->
-                        item.value == period
-                    }?.key)
+                Timber.tag(TAG).d("warrantyPeriod: $period")
+
+                selectedPeriod.postValue(warrantyPeriods.find { pair ->
+                    pair.second == period
+                })
             }
             it.requiredInformation?.warrantyInformation?.warrantyDescription?.let { description ->
                 warrantyDescription.postValue(description)
@@ -39,14 +39,14 @@ class EditWarrantyInformationViewModel @Inject constructor(
     }
 
     fun saveWarrantyInfo() {
-        Timber.tag(TAG).d("saveWarrantyInfo: ")
+        Timber.tag(TAG).d("saveWarrantyInfo: ${selectedPeriod.value}")
 
         saveMaster(
             MasterDto(
                 id = profile.value?.id,
                 uid = profile.value?.uid,
-                warrantyPeriod = warrantyPeriod.value,
-                warrantyDescription = warrantyDescription.value,
+                warrantyPeriod = selectedPeriod.value?.second,
+                warrantyDescription = if (selectedPeriod.value?.second != -1) warrantyDescription.value else null,
             )
         )
     }
