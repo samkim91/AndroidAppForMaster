@@ -352,7 +352,7 @@
     <!--        <item name="android:textColor">@color/text_basic_color</item>-->
     <!--    </style>-->
 
-    <style name="outlinedTextarea">
+    <style name="outlinedTextInputLayout">
         <item name="android:textAppearance">@style/subheadline.regular</item>
         <item name="android:textColor">@color/black</item>
 
