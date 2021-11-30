@@ -8,4 +8,7 @@ interface IDropdownMenu {
     val textInputLayout: TextInputLayout
     val autoCompleteTextView: MaterialAutoCompleteTextView
     var adapter: ArrayAdapter<Any>?
+    var error: String?
+    var hint: String?
+    var helper: String?
 }

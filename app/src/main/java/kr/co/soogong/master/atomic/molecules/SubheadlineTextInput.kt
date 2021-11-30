@@ -28,28 +28,28 @@ class SubheadlineTextInput @JvmOverloads constructor(
             value?.let { binding.tvSubheadline.text = value }
         }
 
-    var hint: String? = null
-        set(value) {
-            field = value
-            value?.let { textInputLayout.hint = it }
-        }
-
     var inputType: Int? = null
         set(value) {
             field = value
             value?.let { textInputEditText.inputType = it }
         }
 
-    var helper: String? = null
+    override var hint: String? = null
         set(value) {
             field = value
-            value?.let { textInputLayout.helperText = it }
+            textInput.hint = value
         }
 
-    var error: String? = null
+    override var helper: String? = null
         set(value) {
             field = value
-            textInputLayout.error = value
+            textInput.helper = value
+        }
+
+    override var error: String? = null
+        set(value) {
+            field = value
+            textInput.error = value
         }
 
     override var enabled: Boolean? = null

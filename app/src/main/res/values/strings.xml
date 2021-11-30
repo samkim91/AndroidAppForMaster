@@ -321,6 +321,13 @@
     <string name="upload_social_security_image">신분증 정면 사진을 올려주세요.</string>
     <string name="upload_social_security_image_hint">개인정보 보호를 위해 주민번호 뒷자리는 가려주세요.</string>
 
+    <string name="select_warranty_period">A/S 기간 정보를 알려주세요.</string>
+    <string name="select_warranty_period_hint">A/S 보증 기간</string>
+
+    <string name="type_warranty_description">A/S에 관한 상세정보를 입력해 주세요.</string>
+
+
+
     <string name="master_type">마스터유형</string>
     <string name="store_name">업체명</string>
     <string name="short_introduce">한줄소개</string>

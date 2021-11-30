@@ -11,64 +11,32 @@
             type="kr.co.soogong.master.ui.profile.detail.warranty.EditWarrantyInformationViewModel" />
     </data>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
-        <ScrollView
+        <kr.co.soogong.master.atomic.molecules.SubheadlineDropdownMenu
+            android:id="@+id/sdm_warranty_period"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="wrap_content"
+            app:hint="@{@string/select_warranty_period_hint}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:selectedItem="@{vm.selectedPeriod}"
+            app:subheadline="@{@string/select_warranty_period}" />
+
+        <kr.co.soogong.master.atomic.molecules.SubheadlineTextareaCounter
+            android:id="@+id/stc_warranty_information"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:fillViewport="true"
-            android:overScrollMode="never">
+            android:layout_height="wrap_content"
+            app:content="@={vm.warrantyDescription}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sdm_warranty_period"
+            app:maxCount="@{500}"
+            app:subheadline="@{@string/type_warranty_description}"
+            bind:visible="@{vm.selectedPeriod.second != -1}" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingStart="@dimen/gap_20"
-                android:paddingTop="@dimen/gap_32"
-                android:paddingEnd="@dimen/gap_20"
-                android:paddingBottom="@dimen/gap_52">
-
-                <kr.co.soogong.master.atomic.molecules.TitleDropdown
-                    android:id="@+id/warranty_period"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:alertText='@{"필수 정보입니다."}'
-                    app:content="@{vm.warrantyPeriodForLayout}"
-                    app:hintText='@{"보증 가능한 A/S 기간을 선택해주세요."}'
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:title='@{"A/S 기간 정보를 알려주세요."}' />
-
-                <kr.co.soogong.master.atomic.molecules.TitleEditTextCounter
-                    android:id="@+id/warranty_description"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/gap_20"
-                    app:alertText='@{"필수 정보입니다. 10자 이상으로 입력해주세요."}'
-                    app:blackSubTitle="@{false}"
-                    app:content="@={vm.warrantyDescription}"
-                    app:hintText='@{"고객이 유의할 만한 예외사항이나 자재별 세부 A/S 방침을 입력해주세요."}'
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/warranty_period"
-                    app:limitedCount='@{500}'
-                    app:title='@{"A/S의 관한 상세 정보를 입력해주세요."}'
-                    bind:visible="@{vm.warrantyPeriod != -1}" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </ScrollView>
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/default_button"
-            style="@style/text_style_16sp.bold"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:background="@color/c_22D47B"
-            android:text="@string/save"
-            android:textColor="@color/c_FFFFFF" />
-    </LinearLayout>
-
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

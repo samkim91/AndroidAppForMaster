@@ -22,6 +22,24 @@ class TextInput @JvmOverloads constructor(
     override val textInputLayout: TextInputLayout = binding.tilContainer
     override val textInputEditText: TextInputEditText = binding.tieEdittext
 
+    override var error: String? = null
+        set(value) {
+            field = value
+            textInputLayout.error = value
+        }
+
+    override var hint: String? = null
+        set(value) {
+            field = value
+            textInputLayout.hint = value
+        }
+
+    override var helper: String? = null
+        set(value) {
+            field = value
+            textInputLayout.helperText = value
+        }
+
     override var enabled: Boolean? = null
         set(value) {
             field = value
