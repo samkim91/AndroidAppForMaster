@@ -16,6 +16,7 @@ import kr.co.soogong.master.ui.dialog.popup.CustomDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData
 import kr.co.soogong.master.ui.dialog.popup.DialogData.Companion.getExpiredRequestConsultDialogData
 import kr.co.soogong.master.ui.dialog.popup.DialogData.Companion.getRequestConsultAlertDialogData
+import kr.co.soogong.master.ui.dialog.popup.DialogData.Companion.getUserExistDialogData
 import kr.co.soogong.master.ui.requirement.action.view.ViewRequirementViewModel.Companion.ASK_FOR_REVIEW_SUCCESSFULLY
 import kr.co.soogong.master.ui.requirement.action.view.ViewRequirementViewModel.Companion.CALL_TO_CUSTOMER_SUCCESSFULLY
 import kr.co.soogong.master.ui.requirement.action.view.ViewRequirementViewModel.Companion.INVALID_REQUIREMENT
@@ -145,9 +146,9 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
     }
 
     private fun showDialogForCallingCustomer(requirement: RequirementDto) {
-        (RequirementStatus.getStatusFromRequirement(requirement) is RequirementStatus.Measuring).let { boolean ->
-            if (boolean && requirement.estimationDto?.fromMasterCallCnt == 0 && requirement.estimationDto.fromClientCallCnt == 0) {
-                CustomDialog.newInstance(DialogData.getRecommendingCallingCustomer(this))
+        when (RequirementStatus.getStatusFromRequirement(requirement)) {
+            is RequirementStatus.Estimated -> {
+                CustomDialog.newInstance(DialogData.getNoticeForCallingCustomerInViewRequirement(this))
                     .let {
                         it.setButtonsClickListener(
                             onPositive = { viewModel.callToClient() },
@@ -156,6 +157,19 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                         it.show(supportFragmentManager, it.tag)
                     }
             }
+            is RequirementStatus.Measuring -> {
+                if (requirement.estimationDto?.fromMasterCallCnt == 0 && requirement.estimationDto.fromClientCallCnt == 0) {
+                    CustomDialog.newInstance(DialogData.getRecommendingCallingCustomer(this))
+                        .let {
+                            it.setButtonsClickListener(
+                                onPositive = { viewModel.callToClient() },
+                                onNegative = {}
+                            )
+                            it.show(supportFragmentManager, it.tag)
+                        }
+                }
+            }
+            else -> {}
         }
     }
 
