@@ -5,8 +5,6 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
-import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
 import kr.co.soogong.master.atomic.atoms.ITextInput
 import kr.co.soogong.master.atomic.atoms.TextareaCounter
 import kr.co.soogong.master.databinding.ViewSubheadlineTextareaCounterBinding
@@ -19,9 +17,7 @@ class SubheadlineTextareaCounter @JvmOverloads constructor(
     private var binding =
         ViewSubheadlineTextareaCounterBinding.inflate(LayoutInflater.from(context), this, true)
 
-    private val textareaCounter: TextareaCounter = binding.tContent
-    override val textInputLayout: TextInputLayout = binding.tContent.textInputLayout
-    override val textInputEditText: TextInputEditText = binding.tContent.textInputEditText
+    val textareaCounter: TextareaCounter = binding.tContent
 
     var subheadline: String? = null
         set(value) {

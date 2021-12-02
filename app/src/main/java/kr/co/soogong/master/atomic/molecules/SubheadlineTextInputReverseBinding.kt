@@ -10,9 +10,9 @@ object SubheadlineTextInputReverseBinding {
     @JvmStatic
     @BindingAdapter("content")
     fun setTitleEditTextCounterContent(view: SubheadlineTextInput, content: String?) {
-        val oldContent = view.textInputEditText.text.toString()
+        val oldContent = view.textInput.textInputEditText.text.toString()
         if (oldContent != content) {
-            view.textInputEditText.setText(content)
+            view.textInput.textInputEditText.setText(content)
         }
     }
 
@@ -34,12 +34,12 @@ object SubheadlineTextInputReverseBinding {
             }
         }
 
-        view.textInputEditText.addTextChangedListener(watcher)
+        view.textInput.textInputEditText.addTextChangedListener(watcher)
     }
 
     @JvmStatic
     @InverseBindingAdapter(attribute = "content", event = "contentAttrChanged")
     fun getContent(view: SubheadlineTextInput): String {
-        return view.textInputEditText.text.toString()
+        return view.textInput.textInputEditText.text.toString()
     }
 }

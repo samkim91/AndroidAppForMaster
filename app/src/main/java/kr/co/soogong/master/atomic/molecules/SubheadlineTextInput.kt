@@ -4,8 +4,6 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
-import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
 import kr.co.soogong.master.atomic.atoms.ITextInput
 import kr.co.soogong.master.atomic.atoms.TextInput
 import kr.co.soogong.master.databinding.ViewSubheadlineTextInputBinding
@@ -18,20 +16,18 @@ class SubheadlineTextInput @JvmOverloads constructor(
     private var binding =
         ViewSubheadlineTextInputBinding.inflate(LayoutInflater.from(context), this, true)
 
-    val textInput: TextInput = binding.tiContent
-    override val textInputLayout: TextInputLayout = textInput.textInputLayout
-    override val textInputEditText: TextInputEditText = textInput.textInputEditText
-
     var subheadline: String? = null
         set(value) {
             field = value
             value?.let { binding.tvSubheadline.text = value }
         }
 
+    val textInput: TextInput = binding.tiContent
+
     var inputType: Int? = null
         set(value) {
             field = value
-            value?.let { textInputEditText.inputType = it }
+            textInput.inputType = value
         }
 
     override var hint: String? = null
@@ -55,12 +51,12 @@ class SubheadlineTextInput @JvmOverloads constructor(
     override var enabled: Boolean? = null
         set(value) {
             field = value
-            value?.let { textInput.enabled = it }
+            textInput.enabled = value
         }
 
     override var maxCount: Int? = null
         set(value) {
             field = value
-            value?.let { textInput.maxCount = it }
+            textInput.maxCount = value
         }
 }
