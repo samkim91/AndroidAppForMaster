@@ -10,9 +10,9 @@ object SubheadlineTextareaCounterReverseBinding {
     @JvmStatic
     @BindingAdapter("content")
     fun setTitleEditTextCounterContent(view: SubheadlineTextareaCounter, content: String?) {
-        val oldContent = view.textInputEditText.text.toString()
+        val oldContent = view.textareaCounter.textInputEditText.text.toString()
         if (oldContent != content) {
-            view.textInputEditText.setText(content)
+            view.textareaCounter.textInputEditText.setText(content)
         }
     }
 
@@ -34,12 +34,12 @@ object SubheadlineTextareaCounterReverseBinding {
             }
         }
 
-        view.textInputEditText.addTextChangedListener(watcher)
+        view.textareaCounter.textInputEditText.addTextChangedListener(watcher)
     }
 
     @JvmStatic
     @InverseBindingAdapter(attribute = "content", event = "contentAttrChanged")
     fun getContent(view: SubheadlineTextareaCounter): String {
-        return view.textInputEditText.text.toString()
+        return view.textareaCounter.textInputEditText.text.toString()
     }
 }

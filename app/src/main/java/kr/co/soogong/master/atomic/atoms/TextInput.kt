@@ -19,8 +19,8 @@ class TextInput @JvmOverloads constructor(
     private var binding =
         ViewTextInputBinding.inflate(LayoutInflater.from(context), this, true)
 
-    override val textInputLayout: TextInputLayout = binding.tilContainer
-    override val textInputEditText: TextInputEditText = binding.tieEdittext
+    val textInputLayout: TextInputLayout = binding.tilContainer
+    val textInputEditText: TextInputEditText = binding.tieEdittext
 
     override var error: String? = null
         set(value) {
@@ -44,7 +44,7 @@ class TextInput @JvmOverloads constructor(
         set(value) {
             field = value
             value?.let {
-                with(binding.tieEdittext) {
+                with(textInputEditText) {
                     isEnabled = it
                     setTextColor(ResourcesCompat.getColor(resources, R.color.grey_3, null))
                     setBackgroundColor(ResourcesCompat.getColor(resources,
@@ -58,9 +58,15 @@ class TextInput @JvmOverloads constructor(
         set(value) {
             field = value
             value?.let {
-                binding.tilContainer.isCounterEnabled = true
-                binding.tilContainer.counterMaxLength = value
-                binding.tieEdittext.filters += InputFilter.LengthFilter(value)      // Edittext 의 max 값 추가
+                textInputLayout.isCounterEnabled = true
+                textInputLayout.counterMaxLength = value
+                textInputEditText.filters += InputFilter.LengthFilter(value)      // Edittext 의 max 값 추가
             }
+        }
+
+    var inputType: Int? = null
+        set(value) {
+            field = value
+            value?.let { textInputEditText.inputType = it }
         }
 }

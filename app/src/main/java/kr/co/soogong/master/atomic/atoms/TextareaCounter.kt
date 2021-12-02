@@ -19,8 +19,8 @@ class TextareaCounter @JvmOverloads constructor(
     private var binding =
         ViewTextareaCounterBinding.inflate(LayoutInflater.from(context), this, true)
 
-    override val textInputLayout: TextInputLayout = binding.tilContainer
-    override val textInputEditText: TextInputEditText = binding.tieEdittext
+    val textInputLayout: TextInputLayout = binding.tilContainer
+    val textInputEditText: TextInputEditText = binding.tieEdittext
 
     override var error: String? = null
         set(value) {

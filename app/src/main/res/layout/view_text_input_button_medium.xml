@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <merge
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
+
+        <kr.co.soogong.master.atomic.atoms.TextInput
+            android:id="@+id/ti_content"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toStartOf="@id/bb_button"
+            app:layout_constraintHorizontal_weight="7"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <kr.co.soogong.master.atomic.atoms.ButtonMedium
+            android:id="@+id/bb_button"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/gap_8"
+            android:layout_marginTop="@dimen/gap_6"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="3"
+            app:layout_constraintStart_toEndOf="@id/ti_content"
+            app:layout_constraintTop_toTopOf="@id/ti_content" />
+    </merge>
+</layout>

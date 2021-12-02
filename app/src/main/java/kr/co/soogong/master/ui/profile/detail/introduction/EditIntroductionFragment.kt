@@ -37,11 +37,11 @@ class EditIntroductionFragment : BaseFragment<FragmentEditIntroductionBinding>(
 
             (activity as EditProfileContainerActivity).setSaveButtonClickListener {
                 viewModel.introduction.observe(viewLifecycleOwner, {
-                    stcIntroduction.textInputLayout.error =
+                    stcIntroduction.textareaCounter.textInputEditText.error =
                         if (it.length < 10) resources.getString(R.string.fill_text_over_10) else null
                 })
 
-                if (stcIntroduction.textInputLayout.error.isNullOrBlank()) viewModel.saveIntroduction()
+                if (stcIntroduction.textareaCounter.textInputEditText.error.isNullOrBlank()) viewModel.saveIntroduction()
             }
         }
     }
