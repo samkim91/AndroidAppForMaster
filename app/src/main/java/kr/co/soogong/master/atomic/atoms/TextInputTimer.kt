@@ -1,6 +1,7 @@
 package kr.co.soogong.master.atomic.atoms
 
 import android.content.Context
+import android.os.CountDownTimer
 import android.text.InputFilter
 import android.util.AttributeSet
 import android.view.LayoutInflater
@@ -9,18 +10,48 @@ import androidx.core.content.res.ResourcesCompat
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import kr.co.soogong.master.R
-import kr.co.soogong.master.databinding.ViewTextInputBinding
+import kr.co.soogong.master.databinding.ViewTextInputTimerBinding
 
-class TextInput @JvmOverloads constructor(
+class TextInputTimer @JvmOverloads constructor(
     context: Context,
     attributeSet: AttributeSet? = null,
     defStyle: Int = 0,
 ) : ConstraintLayout(context, attributeSet, defStyle), ITextInput {
     private var binding =
-        ViewTextInputBinding.inflate(LayoutInflater.from(context), this, true)
+        ViewTextInputTimerBinding.inflate(LayoutInflater.from(context), this, true)
 
     val textInputLayout: TextInputLayout = binding.tilContainer
     val textInputEditText: TextInputEditText = binding.tieEdittext
+
+    init {
+        // 기본값
+        initTimer(2, 1, {}, {})
+    }
+
+    // Firebase SMS 인증 제한시간이 2분으로 default 타이머는 2분에, 1초씩 감소 / 필요 시, 원하는 값으로 재지정 필요
+    private lateinit var timer: CountDownTimer
+
+    fun initTimer(minute: Int, interval: Long, onTick: () -> Unit, onFinish: () -> Unit) {
+        timer = object : CountDownTimer(minute * 60L * 1000, interval * 1000L) {
+            override fun onTick(millisUntilFinished: Long) {
+                onTick()
+            }
+
+            override fun onFinish() {
+                onFinish()
+            }
+        }
+    }
+
+    fun startTimer(onStart: () -> Unit) {
+        onStart()
+        timer.start()
+    }
+
+    fun stopTimer(onStop: () -> Unit) {
+        onStop()
+        timer.cancel()
+    }
 
     override var error: String? = null
         set(value) {
@@ -61,8 +92,6 @@ class TextInput @JvmOverloads constructor(
         set(value) {
             field = value
             value?.let {
-                textInputLayout.isCounterEnabled = true
-                textInputLayout.counterMaxLength = value
                 textInputEditText.filters += InputFilter.LengthFilter(value)      // Edittext 의 max 값 추가
             }
         }

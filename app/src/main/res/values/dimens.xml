@@ -49,6 +49,9 @@
 
     <dimen name="gap_19">19dp</dimen>
     <dimen name="gap_20">20dp</dimen>
+    <dimen name="gap_21">21dp</dimen>
+    <dimen name="gap_22">22dp</dimen>
+    <dimen name="gap_23">23dp</dimen>
     <dimen name="gap_24">24dp</dimen>
     <dimen name="gap_25">25dp</dimen>
     <dimen name="gap_26">26dp</dimen>
