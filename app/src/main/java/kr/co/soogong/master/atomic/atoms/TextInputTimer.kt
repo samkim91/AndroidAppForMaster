@@ -35,6 +35,7 @@ class TextInputTimer @JvmOverloads constructor(
         timer = object : CountDownTimer(minute * 60L * 1000, interval * 1000L) {
             override fun onTick(millisUntilFinished: Long) {
                 onTick()
+                binding.tvTimer.text = resources.getString(R.string.timer_form, millisUntilFinished / 1000 / 60, millisUntilFinished / 1000 % 60)
             }
 
             override fun onFinish() {

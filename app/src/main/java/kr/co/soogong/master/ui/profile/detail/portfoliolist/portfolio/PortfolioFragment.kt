@@ -28,8 +28,8 @@ class PortfolioFragment : BaseFragment<FragmentEditPortfolioBinding>(
     private val pageName: String by lazy {
         arguments?.getString(PAGE_NAME) ?: ADD_PORTFOLIO
     }
-    private val portfolioId: Int by lazy {
-        arguments?.getInt(PORTFOLIO_ID) ?: -1
+    private val portfolioId: Int? by lazy {
+        arguments?.getInt(PORTFOLIO_ID)
     }
 
     private val viewModel: PortfolioViewModel by viewModels()
@@ -54,7 +54,7 @@ class PortfolioFragment : BaseFragment<FragmentEditPortfolioBinding>(
                 }
                 EDIT_PORTFOLIO -> {
                     defaultButton.text = getString(R.string.modifying_done)
-                    viewModel.requestPortfolio(portfolioId)
+                    portfolioId?.let { viewModel.requestPortfolio(it) }
                 }
             }
 
@@ -134,7 +134,7 @@ class PortfolioFragment : BaseFragment<FragmentEditPortfolioBinding>(
             val fragment = PortfolioFragment()
             val args = Bundle()
             args.putString(PAGE_NAME, pageName)
-            args.putInt(PORTFOLIO_ID, portfolioId ?: -1)
+            portfolioId?.let { args.putInt(PORTFOLIO_ID, it) }
             fragment.arguments = args
             return fragment
         }

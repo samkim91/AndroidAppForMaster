@@ -38,6 +38,7 @@
     <string name="delete">삭제하기</string>
     <string name="register">등록하기</string>
     <string name="certify">인증하기</string>
+    <string name="timer_form">%1$d:%2$d</string>
 
     <string name="required_field_alert">필수 정보입니다.</string>
     <string name="fill_text_over_10">10자 이상으로 입력해주세요.</string>
@@ -49,12 +50,18 @@
     <string name="certification_code">인증번호</string>
     <string name="certification">인증</string>
     <string name="check_certification_code_button_text">인증완료</string>
-    <string name="alert_wrong_certification_code">인증번호가 틀립니다.</string>
-    <string name="alert_expired_certification_time">인증시간이 초과되었습니다. 인증번호를 재청요해주세요.</string>
+
+
     <string name="alert_empty_certification_code">인증번호를 입력해주세요.</string>
     <string name="confirming_certification_code_received">인증번호를 받지 못하셨나요?</string>
     <string name="request_certification_code_text">인증번호 요청</string>
-    <string name="request_certification_code_again_text"><u>인증번호 재요청</u></string>
+
+    <string name="resend_certification_code"><u>재요청하기</u></string>
+    <string name="expired_certification_code">인증시간이 초과되었습니다. 인증번호를 재청요해주세요.</string>
+    <string name="invalid_phone_number">휴대폰번호 형식이 올바르지 않습니다.</string>
+    <string name="wrong_certification_code">인증번호가 틀립니다.</string>
+    <string name="invalid_certification_code">6자리 숫자로 입력해주세요.</string>
+    <string name="invalid_credential">인증에 실패했습니다. 다시 시도해주세요.</string>
 
 
     <!-- Sign Up -->
@@ -325,7 +332,6 @@
     <string name="select_warranty_period_hint">A/S 보증 기간</string>
 
     <string name="type_warranty_description">A/S에 관한 상세정보를 입력해 주세요.</string>
-
 
 
     <string name="master_type">마스터유형</string>

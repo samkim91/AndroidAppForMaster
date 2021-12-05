@@ -37,7 +37,7 @@ object EditProfileContainerFragmentHelper {
     const val EDIT_ADDRESS = "업체 주소 수정하기"
     const val EDIT_MAJOR = "시공 업종 수정하기"
 
-    fun getFragment(pageName: String, itemId: Int = -1): Fragment =
+    fun getFragment(pageName: String, itemId: Int?): Fragment =
         when (pageName) {
             FREE_MEASURE -> EditFreeMeasureFragment.newInstance()
             ADD_PORTFOLIO -> PortfolioFragment.newInstance(ADD_PORTFOLIO, null)

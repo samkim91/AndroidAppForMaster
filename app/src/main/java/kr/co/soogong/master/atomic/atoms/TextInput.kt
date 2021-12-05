@@ -57,17 +57,25 @@ class TextInput @JvmOverloads constructor(
             }
         }
 
+    override var max: Int? = null
+        set(value) {
+            field = value
+            value?.let {
+                textInputEditText.filters += InputFilter.LengthFilter(it)      // Edittext 의 max 값 추가
+            }
+        }
+
     override var maxCount: Int? = null
         set(value) {
             field = value
             value?.let {
                 textInputLayout.isCounterEnabled = true
-                textInputLayout.counterMaxLength = value
-                textInputEditText.filters += InputFilter.LengthFilter(value)      // Edittext 의 max 값 추가
+                textInputLayout.counterMaxLength = it
+                this.max = it
             }
         }
 
-    var inputType: Int? = null
+    override var inputType: Int? = null
         set(value) {
             field = value
             value?.let { textInputEditText.inputType = it }

@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:bind="http://schemas.android.com/bind">
 
     <data>
 
@@ -23,10 +25,26 @@
             android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
+            app:buttonText="@{@string/certify}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_resend_certification_code"
+            style="@style/caption_1.regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_5"
+            android:paddingStart="@dimen/gap_10"
+            android:paddingTop="@dimen/gap_5"
+            android:paddingEnd="@dimen/gap_0"
+            android:text="@string/resend_certification_code"
+            tools:visibility="visible"
+            android:textColor="@color/grey_3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/stibmtit_auth_phone_number" />
         <!--        <kr.co.soogong.master.atomic.molecules.TitleEditTextButton-->
         <!--            android:id="@+id/id"-->
         <!--            android:layout_width="match_parent"-->

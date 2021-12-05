@@ -6,4 +6,6 @@ interface ITextInput {
     var helper: String?
     var enabled: Boolean?
     var maxCount: Int?
+    var max: Int?
+    var inputType: Int?
 }
