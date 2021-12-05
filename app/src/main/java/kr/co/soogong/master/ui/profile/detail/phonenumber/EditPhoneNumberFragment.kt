@@ -1,9 +1,7 @@
 package kr.co.soogong.master.ui.profile.detail.phonenumber
 
 import android.os.Bundle
-import android.os.CountDownTimer
 import android.view.View
-import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
@@ -15,18 +13,18 @@ import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentEditPhoneNumberBinding
 import kr.co.soogong.master.ui.auth.signup.LimitTime
-import kr.co.soogong.master.ui.auth.signup.TimerTerm
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.dialog.popup.CustomDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData
+import kr.co.soogong.master.ui.profile.detail.EditProfileContainerActivity
 import kr.co.soogong.master.ui.profile.detail.EditProfileContainerViewModel.Companion.SAVE_MASTER_SUCCESSFULLY
 import kr.co.soogong.master.ui.profile.detail.phonenumber.EditPhoneNumberViewModel.Companion.PHONE_NUMBER_EXIST
 import kr.co.soogong.master.ui.profile.detail.phonenumber.EditPhoneNumberViewModel.Companion.PHONE_NUMBER_NOT_EXIST
 import kr.co.soogong.master.ui.profile.detail.phonenumber.EditPhoneNumberViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.PhoneNumberHelper
+import kr.co.soogong.master.utility.extension.isValidPhoneNumber
 import kr.co.soogong.master.utility.extension.toast
-import kr.co.soogong.master.utility.validation.ValidationHelper
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
 
@@ -39,17 +37,17 @@ class EditPhoneNumberFragment :
 
     private lateinit var callbacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks
 
-    private val timer = object : CountDownTimer(LimitTime * 1000, TimerTerm) {
-        override fun onTick(millisUntilFinished: Long) {
-            binding.timerView.text =
-                "${millisUntilFinished / 1000 / 60}:${millisUntilFinished / 1000 % 60}"
-        }
-
-        override fun onFinish() {
-            binding.defaultButton.isEnabled = false
-            binding.alertExpiredCertificationTime.visibility = View.VISIBLE
-        }
-    }
+//    private val timer = object : CountDownTimer(LimitTime * 1000, TimerTerm) {
+//        override fun onTick(millisUntilFinished: Long) {
+//            binding.timerView.text =
+//                "${millisUntilFinished / 1000 / 60}:${millisUntilFinished / 1000 % 60}"
+//        }
+//
+//        override fun onFinish() {
+//            binding.defaultButton.isEnabled = false
+//            binding.alertExpiredCertificationTime.visibility = View.VISIBLE
+//        }
+//    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -67,7 +65,7 @@ class EditPhoneNumberFragment :
 
     override fun onDestroy() {
         super.onDestroy()
-        stopTimer()
+        binding.stibmtitAuthPhoneNumber.textInputTimer.stopTimer { }
     }
 
     override fun initLayout() {
@@ -77,33 +75,50 @@ class EditPhoneNumberFragment :
             vm = viewModel
             lifecycleOwner = viewLifecycleOwner
 
-            id.setButtonClickListener {
-                if (viewModel.isEnabled.value!!) {
-                    viewModel.changeEnabled()
-                    return@setButtonClickListener
+            (activity as EditProfileContainerActivity).setSaveButtonEnabled(false)
+
+            stibmtitAuthPhoneNumber.textInputTimer.initTimer(
+                minute = 2,
+                interval = 1L,
+                onTick = { },
+                onFinish = {
+                    binding.stibmtitAuthPhoneNumber.textInputTimerError =
+                        getString(R.string.expired_certification_code)
+                }
+            )
+
+            // 휴대폰 번호 validation 및 존재하는 유저인지 확인
+            stibmtitAuthPhoneNumber.onButtonClick = View.OnClickListener {
+                if (stibmtitAuthPhoneNumber.enabled == false) {     // "재입력"에 대한 코드
+                    stibmtitAuthPhoneNumber.enabled = true
+                    stibmtitAuthPhoneNumber.buttonText = getString(R.string.certify)
+                    stibmtitAuthPhoneNumber.textInputButtonMedium.textInput.textInputEditText.setText(
+                        "")
+                    return@OnClickListener
                 }
 
+                // "인증하기"에 대한 코드
                 viewModel.tel.observe(viewLifecycleOwner, {
-                    id.alertVisible = !ValidationHelper.isPhoneNumberFormat(it)
+                    stibmtitAuthPhoneNumber.error =
+                        if (!it.isValidPhoneNumber()) getString(R.string.invalid_phone_number) else null
                 })
 
-                if (!id.alertVisible) viewModel.checkUserExist()
+                if (stibmtitAuthPhoneNumber.error.isNullOrBlank()) viewModel.checkUserExist()
             }
 
-            requestCertificationCodeAgainText.setOnClickListener {
-                resendVerificationCode()
+            // "재요청하기"에 대한 코드
+            tvResendCertificationCode.setOnClickListener {
+                startPhoneNumberVerification(isFirst = false)
             }
 
-            defaultButton.setOnClickListener {
+            // 저장하기
+            (activity as EditProfileContainerActivity).setSaveButtonClickListener {
                 viewModel.certificationCode.observe(viewLifecycleOwner, {
-                    alertInvalidCertificationCode.isVisible = it.length < 6
-                    if (alertWrongCertificationCode.isVisible) alertWrongCertificationCode.isVisible =
-                        false
+                    stibmtitAuthPhoneNumber.textInputTimerError =
+                        if (it.length != 6) getString(R.string.invalid_certification_code) else null
                 })
 
-                if (!alertWrongCertificationCode.isVisible && !alertExpiredCertificationTime.isVisible && !alertInvalidCertificationCode.isVisible) {
-                    verifyPhoneNumberWithCode()
-                }
+                if (!stibmtitAuthPhoneNumber.textInputTimerError.isNullOrBlank()) verifyPhoneNumberWithCode()
             }
         }
     }
@@ -112,21 +127,21 @@ class EditPhoneNumberFragment :
         Timber.tag(TAG).d("registerEventObserve: ")
         bind {
             viewModel.isEnabled.observe(viewLifecycleOwner, { isEnabled ->
-                id.setFirstEditTextEnable = !isEnabled
-                id.buttonColor = isEnabled
-                id.buttonBackground = isEnabled
-                id.buttonText =
-                    if (!isEnabled) getString(R.string.certification) else getString(R.string.retyping)
-                certificationCodeContainer.isVisible = isEnabled
-                requestCertificationCodeAgainGroup.isVisible = isEnabled
+//                id.setFirstEditTextEnable = !isEnabled
+//                id.buttonColor = isEnabled
+//                id.buttonBackground = isEnabled
+//                id.buttonText =
+//                    if (!isEnabled) getString(R.string.certification) else getString(R.string.retyping)
+//                certificationCodeContainer.isVisible = isEnabled
+//                requestCertificationCodeAgainGroup.isVisible = isEnabled
             })
         }
 
         viewModel.action.observe(viewLifecycleOwner, EventObserver { event ->
             when (event) {
                 SAVE_MASTER_SUCCESSFULLY -> activity?.onBackPressed()
-                PHONE_NUMBER_EXIST -> showDialog()
-                PHONE_NUMBER_NOT_EXIST -> startPhoneNumberVerification()
+                PHONE_NUMBER_EXIST -> showDialogForUserExist()
+                PHONE_NUMBER_NOT_EXIST -> startPhoneNumberVerification(isFirst = true)
                 REQUEST_FAILED -> requireContext().toast(getString(R.string.error_message_of_request_failed))
             }
         })
@@ -146,7 +161,8 @@ class EditPhoneNumberFragment :
 
                 if (e is FirebaseAuthInvalidCredentialsException) {
                     // Invalid request
-                    binding.alertInvalidCertificationCode.isVisible = true
+                    binding.stibmtitAuthPhoneNumber.textInputTimerError =
+                        getString(R.string.invalid_credential)
                     return
                 } else if (e is FirebaseTooManyRequestsException) {
                     // The SMS quota for the project has been exceeded
@@ -162,7 +178,7 @@ class EditPhoneNumberFragment :
                 token: PhoneAuthProvider.ForceResendingToken,
             ) {
                 Timber.tag(TAG).d("onCodeSent: $verificationId, $token")
-                binding.defaultButton.isEnabled = true
+                (activity as EditProfileContainerActivity).setSaveButtonEnabled(true)
 
                 viewModel.storedVerificationId.value = verificationId
                 viewModel.resendToken.value = token
@@ -170,14 +186,20 @@ class EditPhoneNumberFragment :
         }
     }
 
-    private fun startPhoneNumberVerification() {
+    private fun startPhoneNumberVerification(isFirst: Boolean) {
         Timber.tag(TAG).d("startPhoneNumberVerification: ${viewModel.tel.value}")
-        viewModel.changeEnabled()
-        startTimer()
+        with(binding) {
+            stibmtitAuthPhoneNumber.enabled = false
+            stibmtitAuthPhoneNumber.buttonText = getString(R.string.retyping)
+            stibmtitAuthPhoneNumber.textInputTimer.startTimer {
+                stibmtitAuthPhoneNumber.textInputTimerError = null
+            }
+        }
 
         viewModel.auth.value?.let { auth ->
             viewModel.tel.value?.let { phoneNumber ->
-                requireContext().toast(getString(R.string.certification_code_requested))
+                requireContext().toast(if (isFirst) getString(R.string.certification_code_requested) else getString(
+                    R.string.certification_code_requested_again))
 
                 val options = PhoneAuthOptions.newBuilder(auth)
                     .setPhoneNumber(PhoneNumberHelper.toGlobalNumber(phoneNumber))      // Phone number to verify
@@ -187,8 +209,14 @@ class EditPhoneNumberFragment :
                     )                            // Timeout and unit
                     .setActivity(requireActivity())                                      // Activity (for callback binding)
                     .setCallbacks(callbacks)                                            // OnVerificationStateChangedCallbacks
-                    .build()
-                PhoneAuthProvider.verifyPhoneNumber(options)
+
+                // 재요청일 땐, resendToken 을 강제로 set 해준다
+                if (!isFirst) viewModel.resendToken.value?.let { resendToken ->
+                    Timber.tag(TAG).d("resendVerificationCode: $resendToken")
+                    options.setForceResendingToken(resendToken)          // callback's ForceResendingToken
+                }
+
+                PhoneAuthProvider.verifyPhoneNumber(options.build())
             }
         }
     }
@@ -224,7 +252,8 @@ class EditPhoneNumberFragment :
                     Timber.tag(TAG).d("signInWithPhoneAuthCredential failed: ${task.exception}")
                     if (task.exception is FirebaseAuthInvalidCredentialsException) {
                         // The verification code entered was invalid
-                        binding.alertWrongCertificationCode.isVisible = true
+                        binding.stibmtitAuthPhoneNumber.textInputTimerError =
+                            getString(R.string.wrong_certification_code)
                     } else {
                         requireContext().toast(getString(R.string.error_message_of_request_failed))
                     }
@@ -233,38 +262,7 @@ class EditPhoneNumberFragment :
         }
     }
 
-    private fun resendVerificationCode() {
-        Timber.tag(TAG)
-            .d("resendVerificationCode: ${viewModel.tel.value}, ${viewModel.resendToken.value}")
-        startTimer()
-        requireContext().toast(getString(R.string.certification_code_requested_again))
-
-        viewModel.auth.value?.let { auth ->
-            viewModel.tel.value?.let { phoneNumber ->
-                val optionsBuilder = PhoneAuthOptions.newBuilder(auth)
-                    .setPhoneNumber(PhoneNumberHelper.toGlobalNumber(phoneNumber))
-                    .setTimeout(LimitTime, TimeUnit.SECONDS)
-                    .setActivity(requireActivity())
-                    .setCallbacks(callbacks)
-                viewModel.resendToken.value?.let { resendToken ->
-                    optionsBuilder.setForceResendingToken(resendToken)          // callback's ForceResendingToken
-                }
-                PhoneAuthProvider.verifyPhoneNumber(optionsBuilder.build())
-            }
-        }
-    }
-
-    private fun startTimer() {
-        binding.defaultButton.isEnabled = false
-        binding.alertExpiredCertificationTime.visibility = View.GONE
-        timer.start()
-    }
-
-    private fun stopTimer() {
-        timer.cancel()
-    }
-
-    private fun showDialog() {
+    private fun showDialogForUserExist() {
         CustomDialog.newInstance(DialogData.getUserExistDialogData(requireContext()))
             .let {
                 it.setButtonsClickListener(

@@ -5,6 +5,8 @@ import android.text.InputType
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
+import kr.co.soogong.master.atomic.atoms.IButton
+import kr.co.soogong.master.atomic.atoms.ITextInput
 import kr.co.soogong.master.atomic.atoms.TextInputButtonMedium
 import kr.co.soogong.master.atomic.atoms.TextInputTimer
 import kr.co.soogong.master.data.common.ButtonTheme
@@ -14,7 +16,7 @@ class SubheadlineTextInputButtonMediumTextInputTimer @JvmOverloads constructor(
     context: Context,
     attributeSet: AttributeSet? = null,
     defStyle: Int = 0,
-) : ConstraintLayout(context, attributeSet, defStyle) {
+) : ConstraintLayout(context, attributeSet, defStyle), ITextInput, IButton {
     private var binding =
         ViewSubheadlineTextInputButtonMediumTextInputTimerBinding.inflate(LayoutInflater.from(
             context), this, true)
@@ -28,67 +30,63 @@ class SubheadlineTextInputButtonMediumTextInputTimer @JvmOverloads constructor(
     val textInputButtonMedium: TextInputButtonMedium = binding.tibmComponent
     val textInputTimer: TextInputTimer = binding.titComponent
 
+    // 첫 번째 row ( TextInput + Button )에 대한 setters
+    override var error: String? = null
+        set(value) {
+            field = value
+            textInputButtonMedium.error = value
+        }
+
+    override var hint: String? = null
+        set(value) {
+            field = value
+            textInputButtonMedium.hint = value
+        }
+
+    override var helper: String? = null
+        set(value) {
+            field = value
+            textInputButtonMedium.helper = value
+        }
+    override var enabled: Boolean? = null
+        set(value) {
+            field = value
+            textInputButtonMedium.enabled = value
+        }
+    override var maxCount: Int? = null
+        set(value) {
+            field = value
+            textInputButtonMedium.maxCount = value
+        }
+    override var buttonText: String? = null
+        set(value) {
+            field = value
+            textInputButtonMedium.buttonText = value
+        }
+    override var buttonEnable: Boolean? = null
+        set(value) {
+            field = value
+            textInputButtonMedium.buttonEnable = value
+        }
+    override var buttonTheme: ButtonTheme? = null
+        set(value) {
+            field = value
+            textInputButtonMedium.buttonTheme = value
+        }
+    override var onButtonClick: OnClickListener? = null
+        set(value) {
+            field = value
+            textInputButtonMedium.onButtonClick = value
+        }
+
     var textInputButtonMediumInputType: Int = InputType.TYPE_NULL
         set(value) {
             field = value
             textInputButtonMedium.textInput.inputType = value
         }
 
-    var textInputButtonMediumHint: String? = null
-        set(value) {
-            field = value
-            textInputButtonMedium.hint = value
-        }
-
-    var textInputButtonMediumError: String? = null
-        set(value) {
-            field = value
-            textInputButtonMedium.error = value
-        }
-
-    var textInputButtonMediumHelper: String? = null
-        set(value) {
-            field = value
-            textInputButtonMedium.helper = value
-        }
-
-    var textInputButtonMediumEnabled: Boolean? = null
-        set(value) {
-            field = value
-            textInputButtonMedium.enabled = value
-        }
-
-    var textInputButtonMediumMaxCount: Int? = null
-        set(value) {
-            field = value
-            textInputButtonMedium.maxCount = value
-        }
-
-    var textInputButtonMediumButtonText: String? = null
-        set(value) {
-            field = value
-            textInputButtonMedium.buttonText = value
-        }
-
-    var textInputButtonMediumButtonEnabled: Boolean? = null
-        set(value) {
-            field = value
-            textInputButtonMedium.buttonEnable = value
-        }
-
-    var textInputButtonMediumButtonTheme: ButtonTheme? = null
-        set(value) {
-            field = value
-            textInputButtonMedium.buttonTheme = value
-        }
-
-    var textInputButtonMediumOnButtonClick: OnClickListener? = null
-        set(value) {
-            field = value
-            textInputButtonMedium.onButtonClick = value
-        }
-
-    var contentTimerInputType: Int = InputType.TYPE_NULL
+    // 두 번째 row (TextInput + Timer) 에 대한 setters
+    var textInputTimerInputType: Int = InputType.TYPE_NULL
         set(value) {
             field = value
             textInputTimer.textInputEditText.inputType = value

@@ -19,7 +19,7 @@ class EditProfileContainerActivity : BaseActivity<ActivityEditProfileContainerBi
         EditProfileContainerActivityHelper.getPageName(intent)
     }
 
-    private val itemId: Int by lazy {
+    private val itemId: Int? by lazy {
         EditProfileContainerActivityHelper.getItemId(intent)
     }
 
@@ -50,6 +50,10 @@ class EditProfileContainerActivity : BaseActivity<ActivityEditProfileContainerBi
         binding.bfSave.onButtonClick = View.OnClickListener {
             onClick()
         }
+    }
+
+    fun setSaveButtonEnabled(enabled: Boolean) {
+        binding.bfSave.isEnabled = enabled
     }
 
     companion object {

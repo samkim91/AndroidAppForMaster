@@ -24,6 +24,7 @@ import kr.co.soogong.master.ui.profile.ProfileViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.uihelper.profile.*
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_BUSINESS_UNIT_INFORMATION
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_INTRODUCTION
+import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_PHONE_NUMBER
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_SHOP_IMAGES
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_WARRANTY_INFORMATION
 import kr.co.soogong.master.utility.EventObserver
@@ -108,6 +109,9 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
             hbcWarrantyInformation.onButtonClick =
                 View.OnClickListener { startActivityCommonCode(EDIT_WARRANTY_INFORMATION) }
 
+            hbcContactInformation.onButtonClick =
+                View.OnClickListener { startActivityCommonCode(EDIT_PHONE_NUMBER) }
+
 //            editRequiredInfo.setOnClickListener {
 //                startActivity(
 //                    EditRequiredInformationActivityHelper.getIntent(requireContext())
@@ -191,20 +195,12 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
         viewModel.requestProfile()
     }
 
-    private fun startActivityCommonCode(pageName: String) {
+    private fun startActivityCommonCode(pageName: String, itemId: Int? = null) {
         startActivity(
             EditProfileContainerActivityHelper.getIntent(
                 requireContext(),
-                pageName
-            )
-        )
-    }
-
-    private fun startActivityCommonCode(pageName: String, itemId: Int) {
-        startActivity(
-            EditProfileContainerActivityHelper.getIntent(
-                requireContext(),
-                pageName
+                pageName,
+                itemId
             )
         )
     }
