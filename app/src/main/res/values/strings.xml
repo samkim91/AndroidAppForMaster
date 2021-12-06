@@ -332,6 +332,8 @@
     <string name="select_warranty_period_hint">A/S 보증 기간</string>
 
     <string name="type_warranty_description">A/S에 관한 상세정보를 입력해 주세요.</string>
+    <string name="type_phone_number">연락이 가능한 휴대폰번호를 입력해주세요.</string>
+    <string name="type_phone_number_hint">휴대폰 번호</string>
 
 
     <string name="master_type">마스터유형</string>

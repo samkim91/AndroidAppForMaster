@@ -23,11 +23,6 @@ class TextInputTimer @JvmOverloads constructor(
     val textInputLayout: TextInputLayout = binding.tilContainer
     val textInputEditText: TextInputEditText = binding.tieEdittext
 
-    init {
-        // 기본값
-        initTimer(2, 1, {}, {})
-    }
-
     // Firebase SMS 인증 제한시간이 2분으로 default 타이머는 2분에, 1초씩 감소 / 필요 시, 원하는 값으로 재지정 필요
     private lateinit var timer: CountDownTimer
 
@@ -35,7 +30,9 @@ class TextInputTimer @JvmOverloads constructor(
         timer = object : CountDownTimer(minute * 60L * 1000, interval * 1000L) {
             override fun onTick(millisUntilFinished: Long) {
                 onTick()
-                binding.tvTimer.text = resources.getString(R.string.timer_form, millisUntilFinished / 1000 / 60, millisUntilFinished / 1000 % 60)
+                binding.tvTimer.text = resources.getString(R.string.timer_form,
+                    millisUntilFinished / 1000 / 60,
+                    millisUntilFinished / 1000 % 60)
             }
 
             override fun onFinish() {
@@ -93,11 +90,19 @@ class TextInputTimer @JvmOverloads constructor(
         set(value) {
             field = value
             value?.let {
-                textInputEditText.filters += InputFilter.LengthFilter(value)      // Edittext 의 max 값 추가
+                textInputLayout.isCounterEnabled = true
+                textInputLayout.counterMaxLength = it
+                this.max = it
             }
         }
 
-    var inputType: Int? = null
+    override var max: Int? = null
+        set(value) {
+            field = value
+            value?.let { textInputEditText.filters += InputFilter.LengthFilter(it) }      // Edittext 의 max 값 추가
+        }
+
+    override var inputType: Int? = null
         set(value) {
             field = value
             value?.let { textInputEditText.inputType = it }

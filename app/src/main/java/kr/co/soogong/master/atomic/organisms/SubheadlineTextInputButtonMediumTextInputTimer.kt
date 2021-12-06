@@ -58,6 +58,19 @@ class SubheadlineTextInputButtonMediumTextInputTimer @JvmOverloads constructor(
             field = value
             textInputButtonMedium.maxCount = value
         }
+
+    override var max: Int? = null
+        set(value) {
+            field = value
+            textInputButtonMedium.max = value
+        }
+
+    override var inputType: Int? = null
+        set(value) {
+            field = value
+            textInputButtonMedium.inputType = value
+        }
+
     override var buttonText: String? = null
         set(value) {
             field = value
@@ -120,5 +133,11 @@ class SubheadlineTextInputButtonMediumTextInputTimer @JvmOverloads constructor(
         set(value) {
             field = value
             textInputTimer.maxCount = value
+        }
+
+    var textInputTimerMax: Int? = null
+        set(value) {
+            field = value
+            textInputTimer.max = value
         }
 }

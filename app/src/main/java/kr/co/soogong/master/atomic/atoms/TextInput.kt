@@ -49,10 +49,10 @@ class TextInput @JvmOverloads constructor(
             value?.let {
                 with(textInputEditText) {
                     isEnabled = it
-                    setTextColor(ResourcesCompat.getColor(resources, R.color.grey_3, null))
-                    setBackgroundColor(ResourcesCompat.getColor(resources,
-                        R.color.light_grey_1,
-                        null))
+//                    setTextColor(ResourcesCompat.getColor(resources, R.color.grey_3, null))
+//                    setBackgroundColor(ResourcesCompat.getColor(resources,
+//                        R.color.light_grey_1,
+//                        null))
                 }
             }
         }

@@ -9,7 +9,9 @@
 
         <import type="android.text.InputType" />
 
-        <import type="kr.co.soogong.master.data.common.ButtonTheme" />
+        <variable
+            name="authPhoneNumberButtonTheme"
+            type="kr.co.soogong.master.data.common.ButtonTheme" />
 
         <variable
             name="vm"
@@ -25,7 +27,17 @@
             android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
+            app:hint="@{@string/type_phone_number_hint}"
+            app:subheadline="@{@string/type_phone_number}"
+            app:buttonTheme="@{authPhoneNumberButtonTheme}"
             app:buttonText="@{@string/certify}"
+            app:max="@{11}"
+            app:firstContent="@={vm.tel}"
+            app:secondContent="@={vm.certificationCode}"
+            app:inputType="@{InputType.TYPE_CLASS_NUMBER}"
+            app:textInputTimerInputType="@{InputType.TYPE_CLASS_NUMBER}"
+            app:textInputTimerMax="@{6}"
+            app:textInputTimerHint="@{@string/certification_code}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

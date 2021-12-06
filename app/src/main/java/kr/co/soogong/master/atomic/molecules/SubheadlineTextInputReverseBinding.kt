@@ -9,7 +9,7 @@ import androidx.databinding.InverseBindingListener
 object SubheadlineTextInputReverseBinding {
     @JvmStatic
     @BindingAdapter("content")
-    fun setTitleEditTextCounterContent(view: SubheadlineTextInput, content: String?) {
+    fun setSubheadlineTextInputContent(view: SubheadlineTextInput, content: String?) {
         val oldContent = view.textInput.textInputEditText.text.toString()
         if (oldContent != content) {
             view.textInput.textInputEditText.setText(content)
@@ -18,7 +18,7 @@ object SubheadlineTextInputReverseBinding {
 
     @JvmStatic
     @BindingAdapter("contentAttrChanged")
-    fun setTitleEditTextCounterInverseBindingListener(
+    fun setSubheadlineTextInputInverseBindingListener(
         view: SubheadlineTextInput,
         listener: InverseBindingListener?,
     ) {
@@ -39,7 +39,7 @@ object SubheadlineTextInputReverseBinding {
 
     @JvmStatic
     @InverseBindingAdapter(attribute = "content", event = "contentAttrChanged")
-    fun getContent(view: SubheadlineTextInput): String {
+    fun getSubheadlineTextInputContent(view: SubheadlineTextInput): String {
         return view.textInput.textInputEditText.text.toString()
     }
 }
