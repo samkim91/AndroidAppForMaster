@@ -108,7 +108,7 @@ class EditPhoneNumberFragment :
                         if (it.length != 6) getString(R.string.invalid_certification_code) else null
                 })
 
-                if (!stibmtitAuthPhoneNumber.textInputTimerError.isNullOrBlank()) verifyPhoneNumberWithCode()
+                if (stibmtitAuthPhoneNumber.textInputTimerError.isNullOrBlank()) verifyPhoneNumberWithCode()
             }
         }
     }

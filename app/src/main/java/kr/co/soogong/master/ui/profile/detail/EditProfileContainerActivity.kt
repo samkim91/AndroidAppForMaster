@@ -53,7 +53,8 @@ class EditProfileContainerActivity : BaseActivity<ActivityEditProfileContainerBi
     }
 
     fun setSaveButtonEnabled(enabled: Boolean) {
-        binding.bfSave.isEnabled = enabled
+        Timber.tag(TAG).d("setSaveButtonEnabled: $enabled")
+        binding.bfSave.buttonEnable = enabled
     }
 
     companion object {
