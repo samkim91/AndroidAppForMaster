@@ -11,6 +11,7 @@ import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
+import kr.co.soogong.master.data.common.ButtonTheme
 import kr.co.soogong.master.databinding.FragmentEditPhoneNumberBinding
 import kr.co.soogong.master.ui.auth.signup.LimitTime
 import kr.co.soogong.master.ui.base.BaseFragment
@@ -37,18 +38,6 @@ class EditPhoneNumberFragment :
 
     private lateinit var callbacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks
 
-//    private val timer = object : CountDownTimer(LimitTime * 1000, TimerTerm) {
-//        override fun onTick(millisUntilFinished: Long) {
-//            binding.timerView.text =
-//                "${millisUntilFinished / 1000 / 60}:${millisUntilFinished / 1000 % 60}"
-//        }
-//
-//        override fun onFinish() {
-//            binding.defaultButton.isEnabled = false
-//            binding.alertExpiredCertificationTime.visibility = View.VISIBLE
-//        }
-//    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Timber.tag(TAG).d("onViewCreated: ")
@@ -74,6 +63,7 @@ class EditPhoneNumberFragment :
         bind {
             vm = viewModel
             lifecycleOwner = viewLifecycleOwner
+            authPhoneNumberButtonTheme = ButtonTheme.Primary
 
             (activity as EditProfileContainerActivity).setSaveButtonEnabled(false)
 
@@ -125,18 +115,6 @@ class EditPhoneNumberFragment :
 
     private fun registerEventObserve() {
         Timber.tag(TAG).d("registerEventObserve: ")
-        bind {
-            viewModel.isEnabled.observe(viewLifecycleOwner, { isEnabled ->
-//                id.setFirstEditTextEnable = !isEnabled
-//                id.buttonColor = isEnabled
-//                id.buttonBackground = isEnabled
-//                id.buttonText =
-//                    if (!isEnabled) getString(R.string.certification) else getString(R.string.retyping)
-//                certificationCodeContainer.isVisible = isEnabled
-//                requestCertificationCodeAgainGroup.isVisible = isEnabled
-            })
-        }
-
         viewModel.action.observe(viewLifecycleOwner, EventObserver { event ->
             when (event) {
                 SAVE_MASTER_SUCCESSFULLY -> activity?.onBackPressed()
@@ -158,6 +136,7 @@ class EditPhoneNumberFragment :
 
             override fun onVerificationFailed(e: FirebaseException) {
                 Timber.tag(TAG).d("onVerificationFailed: $e")
+                binding.stibmtitAuthPhoneNumber.textInputTimer.stopTimer { }
 
                 if (e is FirebaseAuthInvalidCredentialsException) {
                     // Invalid request
@@ -198,9 +177,6 @@ class EditPhoneNumberFragment :
 
         viewModel.auth.value?.let { auth ->
             viewModel.tel.value?.let { phoneNumber ->
-                requireContext().toast(if (isFirst) getString(R.string.certification_code_requested) else getString(
-                    R.string.certification_code_requested_again))
-
                 val options = PhoneAuthOptions.newBuilder(auth)
                     .setPhoneNumber(PhoneNumberHelper.toGlobalNumber(phoneNumber))      // Phone number to verify
                     .setTimeout(
@@ -217,6 +193,9 @@ class EditPhoneNumberFragment :
                 }
 
                 PhoneAuthProvider.verifyPhoneNumber(options.build())
+
+                requireContext().toast(if (isFirst) getString(R.string.certification_code_requested) else getString(
+                    R.string.certification_code_requested_again))
             }
         }
     }
@@ -257,6 +236,8 @@ class EditPhoneNumberFragment :
                     } else {
                         requireContext().toast(getString(R.string.error_message_of_request_failed))
                     }
+
+                    binding.stibmtitAuthPhoneNumber.textInputTimer.stopTimer { }
                 }
             }
         }

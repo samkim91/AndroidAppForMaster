@@ -34,14 +34,6 @@ class EditPhoneNumberViewModel @Inject constructor(
     val resendToken = MutableLiveData<PhoneAuthProvider.ForceResendingToken>()
     val uid = MutableLiveData("")
 
-    private val _isEnabled = MutableLiveData(false)
-    val isEnabled: LiveData<Boolean>
-        get() = _isEnabled
-
-    fun changeEnabled() {
-        _isEnabled.value = !_isEnabled.value!!
-    }
-
     fun requestProfile() {
         Timber.tag(TAG).d("requestProfile: ")
 
@@ -52,7 +44,6 @@ class EditPhoneNumberViewModel @Inject constructor(
 
     fun checkUserExist() {
         Timber.tag(TAG).d("checkUserExist: ")
-
 
         checkUserExistentUseCase(tel.value!!)
             .subscribeOn(Schedulers.io())
@@ -81,7 +72,6 @@ class EditPhoneNumberViewModel @Inject constructor(
             )
         )
     }
-
 
     companion object {
         private const val TAG = "EditPhoneNumberViewModel"

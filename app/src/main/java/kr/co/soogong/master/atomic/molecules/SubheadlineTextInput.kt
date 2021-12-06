@@ -24,7 +24,7 @@ class SubheadlineTextInput @JvmOverloads constructor(
 
     val textInput: TextInput = binding.tiContent
 
-    var inputType: Int? = null
+    override var inputType: Int? = null
         set(value) {
             field = value
             textInput.inputType = value
@@ -58,5 +58,11 @@ class SubheadlineTextInput @JvmOverloads constructor(
         set(value) {
             field = value
             textInput.maxCount = value
+        }
+
+    override var max: Int? = null
+        set(value) {
+            field = value
+            textInput.max = value
         }
 }

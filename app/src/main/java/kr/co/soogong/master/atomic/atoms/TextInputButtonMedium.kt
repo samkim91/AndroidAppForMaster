@@ -48,6 +48,17 @@ class TextInputButtonMedium @JvmOverloads constructor(
             field = value
             textInput.maxCount = value
         }
+    override var max: Int? = null
+        set(value) {
+            field = value
+            textInput.max = value
+        }
+
+    override var inputType: Int? = null
+        set(value) {
+            field = value
+            textInput.inputType = value
+        }
 
     override var buttonText: String? = null
         set(value) {

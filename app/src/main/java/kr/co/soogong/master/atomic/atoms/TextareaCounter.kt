@@ -58,9 +58,23 @@ class TextareaCounter @JvmOverloads constructor(
         set(value) {
             field = value
             value?.let {
-                binding.tilContainer.isCounterEnabled = true
-                binding.tilContainer.counterMaxLength = value
-                binding.tieEdittext.filters += InputFilter.LengthFilter(value)      // Edittext 의 max 값 추가
+                textInputLayout.isCounterEnabled = true
+                textInputLayout.counterMaxLength = value
+                this.max = value
             }
+        }
+
+    override var max: Int? = null
+        set(value) {
+            field = value
+            value?.let {
+                textInputEditText.filters += InputFilter.LengthFilter(it)      // Edittext 의 max 값 추가
+            }
+        }
+
+    override var inputType: Int? = null
+        set(value) {
+            field = value
+            value?.let { textInputEditText.inputType = it }
         }
 }
