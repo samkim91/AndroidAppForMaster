@@ -43,7 +43,6 @@ class EditPhoneNumberFragment :
         Timber.tag(TAG).d("onViewCreated: ")
         initLayout()
         registerEventObserve()
-
         initFirebaseAuthCallbacks()
     }
 

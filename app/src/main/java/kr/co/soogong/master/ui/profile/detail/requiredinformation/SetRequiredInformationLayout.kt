@@ -61,7 +61,7 @@ fun setRequirementInformationPercentage(
             if (!value?.career.isNullOrEmpty()) filledCount++
             if (!value?.tel.isNullOrEmpty()) filledCount++
             if (!value?.ownerName.isNullOrEmpty()) filledCount++
-            if (!value?.majors.isNullOrEmpty()) filledCount++
+            if (!value?.projects.isNullOrEmpty()) filledCount++
             if (!value?.companyAddress?.roadAddress.isNullOrEmpty()) filledCount++
             if (value?.serviceArea != null) filledCount++
         }
@@ -111,12 +111,14 @@ fun isFulfilled(
                     return false
                 }
                 value?.businessUnitInformation?.businessType.isNullOrEmpty() -> {
-                    businessUnitInformation.parent.requestChildFocus(businessUnitInformation, businessUnitInformation)
+                    businessUnitInformation.parent.requestChildFocus(businessUnitInformation,
+                        businessUnitInformation)
                     context.toast(context.getString(R.string.required_profile_empty_business_unit_information))
                     return false
                 }
                 value?.warrantyInformation?.warrantyPeriod == null -> {
-                    warrantyInformation.parent.requestChildFocus(warrantyInformation, warrantyInformation)
+                    warrantyInformation.parent.requestChildFocus(warrantyInformation,
+                        warrantyInformation)
                     context.toast(context.getString(R.string.required_profile_empty_warranty_information))
                     return false
                 }
@@ -135,7 +137,7 @@ fun isFulfilled(
                     context.toast(context.getString(R.string.required_profile_empty_owner_name))
                     return false
                 }
-                value?.majors.isNullOrEmpty() -> {
+                value?.projects.isNullOrEmpty() -> {
                     major.parent.requestChildFocus(major, major)
                     context.toast(context.getString(R.string.required_profile_empty_major))
                     return false

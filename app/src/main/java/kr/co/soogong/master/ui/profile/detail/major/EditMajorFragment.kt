@@ -8,17 +8,18 @@ import androidx.activity.result.contract.ActivityResultContracts.StartActivityFo
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
+import kr.co.soogong.master.data.common.ButtonTheme
 import kr.co.soogong.master.data.model.major.Major
 import kr.co.soogong.master.data.model.profile.ApprovedCodeTable
 import kr.co.soogong.master.databinding.FragmentEditMajorBinding
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.dialog.popup.CustomDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData
+import kr.co.soogong.master.ui.profile.detail.EditProfileContainerActivity
 import kr.co.soogong.master.ui.profile.detail.EditProfileContainerViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.ui.profile.detail.EditProfileContainerViewModel.Companion.SAVE_MASTER_SUCCESSFULLY
 import kr.co.soogong.master.uihelper.major.MajorActivityHelper
 import kr.co.soogong.master.utility.EventObserver
-import kr.co.soogong.master.utility.MajorChipGroupHelper
 import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
 
@@ -28,7 +29,7 @@ class EditMajorFragment : BaseFragment<FragmentEditMajorBinding>(
 ) {
     private val viewModel: EditMajorViewModel by viewModels()
 
-    private var getMajorLauncher =
+    private val getMajorLauncher =
         registerForActivityResult(StartActivityForResult()) { result ->
             Timber.tag(TAG).d("StartActivityForResult: $result")
             if (result.resultCode == Activity.RESULT_OK) {
@@ -37,12 +38,16 @@ class EditMajorFragment : BaseFragment<FragmentEditMajorBinding>(
                     data?.getParcelableExtra(MajorActivityHelper.BUNDLE_MAJOR)
                         ?: Major(null, null)
                 }
-                MajorChipGroupHelper.makeEntryChipGroupWithSubtitleForMajor(
-                    layoutInflater = layoutInflater,
-                    container = binding.majorContainer,
-                    newMajor = selectedMajor,
-                    viewModelBusinessTypes = viewModel.majors
-                )
+                result.data?.let {
+                    val selectedProjects = MajorActivityHelper.getProjectsFromIntent(it)
+                }
+
+//                MajorChipGroupHelper.makeEntryChipGroupWithSubtitleForMajor(
+//                    layoutInflater = layoutInflater,
+//                    container = binding.majorContainer,
+//                    newMajor = selectedMajor,
+//                    viewModelBusinessTypes = viewModel.majors
+//                )
             }
         }
 
@@ -52,7 +57,6 @@ class EditMajorFragment : BaseFragment<FragmentEditMajorBinding>(
         initLayout()
         registerEventObserve()
         viewModel.requestMajor()
-
     }
 
     override fun initLayout() {
@@ -61,24 +65,20 @@ class EditMajorFragment : BaseFragment<FragmentEditMajorBinding>(
         bind {
             vm = viewModel
             lifecycleOwner = viewLifecycleOwner
-
-            major.setButtonClickListener {
-                getMajorLauncher.launch(
-                    Intent(
-                        MajorActivityHelper.getIntent(
-                            requireContext()
-                        )
-                    )
-                )
+            buttonThemeAddingMajors = ButtonTheme.Primary
+            addingMajorsClickListener = View.OnClickListener {
+                getMajorLauncher.launch(MajorActivityHelper.getIntent(requireContext()))
             }
 
-            defaultButton.setOnClickListener {
-                viewModel.majors.observe(viewLifecycleOwner, {
-                    major.alertVisible = it.isNullOrEmpty()
+            (activity as EditProfileContainerActivity).setSaveButtonClickListener {
+                viewModel.projects.observe(viewLifecycleOwner, {
+                    sbbSelectMajors.error =
+                        if (it.isNullOrEmpty()) getString(R.string.required_field_alert) else null
                 })
 
-                if (major.alertVisible) return@setOnClickListener
+                if (!sbbSelectMajors.error.isNullOrEmpty()) return@setSaveButtonClickListener
 
+                // 시공 가능 업종을 수정하면, 프로필의 승인상태가 변경된다. 따라서 마스터 승인상태에 따라 아래 코드가 실행
                 if (viewModel.profile.value?.approvedStatus == ApprovedCodeTable.code) {
                     CustomDialog.newInstance(
                         DialogData.getConfirmingForRequiredDialogData(requireContext()))
@@ -98,12 +98,12 @@ class EditMajorFragment : BaseFragment<FragmentEditMajorBinding>(
 
     private fun registerEventObserve() {
         Timber.tag(TAG).d("registerEventObserve: ")
-        viewModel.majors.observe(viewLifecycleOwner, {
-            MajorChipGroupHelper.addMajorToContainer(
-                layoutInflater = layoutInflater,
-                container = binding.majorContainer,
-                majorList = viewModel.majors
-            )
+        viewModel.projects.observe(viewLifecycleOwner, {
+//            MajorChipGroupHelper.addMajorToContainer(
+//                layoutInflater = layoutInflater,
+//                container = binding.majorContainer,
+//                majorList = viewModel.majors
+//            )
         })
 
         viewModel.action.observe(viewLifecycleOwner, EventObserver { event ->

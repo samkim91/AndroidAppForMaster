@@ -3,36 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.appcompat.widget.AppCompatCheckBox
+        android:id="@+id/cb_content"
+        style="@style/call_out.regular"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/text"
-            style="@style/text_style_16sp.medium"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="14dp"
-            android:layout_marginEnd="0dp"
-            android:layout_marginBottom="14dp"
-            android:textColor="@color/text_basic_color"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/check"
-            app:layout_constraintHorizontal_bias="0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="업종 및 프로젝트" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/check"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginEnd="20dp"
-            android:src="@drawable/ic_inactive_check_box"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        android:paddingStart="@dimen/gap_8"
+        android:paddingEnd="@dimen/gap_0"
+        android:layout_height="wrap_content"
+        android:button="@drawable/check_box_rectangle"
+        android:textColor="@color/dark_grey_2"
+        tools:text="프로젝트" />
 </layout>

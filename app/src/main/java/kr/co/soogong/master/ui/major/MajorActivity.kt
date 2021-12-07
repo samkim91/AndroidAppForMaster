@@ -3,7 +3,7 @@ package kr.co.soogong.master.ui.major
 import android.os.Bundle
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.model.major.Category
+import kr.co.soogong.master.data.dto.profile.CategoryDto
 import kr.co.soogong.master.databinding.ActivityMajorBinding
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.ui.major.category.CategoryFragment
@@ -13,7 +13,8 @@ import timber.log.Timber
 @AndroidEntryPoint
 class MajorActivity : BaseActivity<ActivityMajorBinding>(
     R.layout.activity_major
-), MajorFragment {
+) {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Timber.tag(TAG).d("onCreate: ")
@@ -21,51 +22,48 @@ class MajorActivity : BaseActivity<ActivityMajorBinding>(
     }
 
     override fun initLayout() {
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment, CategoryFragment.newInstance())
-            .commit()
-
-        setCategorySelectFragmentActionbar()
-    }
-
-    private fun setCategorySelectFragmentActionbar() {
-        with(binding.actionBar) {
-            title.text = "업종 및 프로젝트 선택"
-            backButton.setOnClickListener {
-                super.onBackPressed()
-            }
+        bind {
+            abHeader.setButtonBackClickListener { onBackPressed() }
+            setCategoryFragment()
         }
     }
 
-    override fun setProjectFragment(category: Category) {
+    private fun setCategoryFragment() {
+        with(binding.abHeader) {
+            title = getString(R.string.selecting_project)
+        }
+
+        supportFragmentManager.beginTransaction()
+            .replace(binding.fcvContainer.id, CategoryFragment.newInstance())
+            .commit()
+    }
+
+    fun moveToProjectFragment(category: CategoryDto) {
+        with(binding.abHeader) {
+            title = category.name
+        }
+
         supportFragmentManager.beginTransaction()
             .setCustomAnimations(
                 R.anim.slide_in_from_right, R.anim.slide_out_to_left,
                 R.anim.slide_in_from_left, R.anim.slide_out_to_right
             )
-            .replace(R.id.fragment, ProjectFragment.newInstance(category))
+            .replace(binding.fcvContainer.id, ProjectFragment.newInstance(category.id!!))
             .addToBackStack(null)
             .commit()
-
-        with(binding.actionBar) {
-            title.text = category.name
-            backButton.setOnClickListener {
-                supportFragmentManager.popBackStack()
-                setCategorySelectFragmentActionbar()
-            }
-        }
     }
 
     override fun onBackPressed() {
         if (supportFragmentManager.backStackEntryCount > 0) {
-            supportFragmentManager.popBackStack()
-            setCategorySelectFragmentActionbar()
+            supportFragmentManager.popBackStack()       // ProjectFragment 에서는 CategoryFragment 가 나오게 함
+            setCategoryFragment()
         } else {
-            super.onBackPressed()
+            super.onBackPressed()       // CategoryFragment 에서는 Activity 를 종료
         }
     }
 
     companion object {
         private const val TAG = "MajorActivity"
+
     }
 }

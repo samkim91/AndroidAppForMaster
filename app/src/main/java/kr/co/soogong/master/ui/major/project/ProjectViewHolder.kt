@@ -3,39 +3,39 @@ package kr.co.soogong.master.ui.major.project
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import kr.co.soogong.master.R
-import kr.co.soogong.master.data.model.major.Project
+import kr.co.soogong.master.data.dto.profile.ProjectDto
 import kr.co.soogong.master.databinding.ViewHolderProjectBinding
+import kr.co.soogong.master.utility.extension.dp
 
 class ProjectViewHolder(
     private val binding: ViewHolderProjectBinding,
 ) : RecyclerView.ViewHolder(binding.root) {
     fun bind(
-        project: Project,
-        position: Int,
-        clickListener: (Int, Project) -> Unit,
+        project: ProjectDto,
+        itemClickListener: (project: ProjectDto, isChecked: Boolean) -> Unit,
     ) {
         binding.run {
-            text.text = project.name
+            cbContent.text = project.name
 
-            if (project.checked) check.setImageResource(R.drawable.ic_active_check_box) else check.setImageResource(
-                R.drawable.ic_inactive_check_box)
+            itemView.layoutParams =
+                (itemView.layoutParams as ViewGroup.MarginLayoutParams).apply {
+                    marginStart = 15.dp
+                    marginEnd = 15.dp
+                    bottomMargin = 10.dp
+                    topMargin = 10.dp
+                }
 
-            root.setOnClickListener {
-                clickListener(position, project)
+            itemView.setOnClickListener {
+                itemClickListener(project, cbContent.isChecked)
             }
-            executePendingBindings()
         }
     }
 
     companion object {
-        fun create(parent: ViewGroup): ProjectViewHolder {
-            val binding = ViewHolderProjectBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-            )
-            return ProjectViewHolder(binding)
-        }
+        fun create(parent: ViewGroup) = ProjectViewHolder(ViewHolderProjectBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        ))
     }
 }

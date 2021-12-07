@@ -1,22 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <LinearLayout
+    <androidx.appcompat.widget.AppCompatRadioButton
+        android:id="@+id/rb_content"
+        style="@style/call_out.regular"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/text"
-            style="@style/text_style_16sp.medium"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="14dp"
-            android:layout_marginEnd="0dp"
-            android:layout_marginBottom="14dp"
-            android:textColor="@color/text_basic_color"
-            tools:text="업종 및 프로젝트" />
-
-    </LinearLayout>
+        android:layout_height="wrap_content"
+        android:textColor="@color/dark_grey_2"
+        app:buttonTint="@color/brand_green"
+        tools:text="업종" />
 </layout>

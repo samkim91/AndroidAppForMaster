@@ -4,7 +4,7 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 import kr.co.soogong.master.data.dto.AttachmentDto
 import kr.co.soogong.master.data.dto.profile.MasterDto
-import kr.co.soogong.master.data.model.major.Major
+import kr.co.soogong.master.data.dto.profile.ProjectDto
 import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogItem
 import kr.co.soogong.master.ui.profile.detail.CareerConverter
 
@@ -17,7 +17,7 @@ data class RequiredInformation(
     val career: String?,
     val tel: String?,
     val ownerName: String?,
-    val majors: List<Major>?,
+    val projects: List<ProjectDto>?,
     val companyAddress: CompanyAddress?,
     val coordinate: Coordinate?,
     var serviceArea: Int?,
@@ -45,7 +45,7 @@ data class RequiredInformation(
                 career = masterDto.openDate?.let { CareerConverter.toCareer(it) },
                 tel = masterDto.tel,
                 ownerName = masterDto.ownerName,
-                majors = Major.fromMasterDto(masterDto),
+                projects = masterDto.projects,
                 companyAddress = CompanyAddress(
                     masterDto.roadAddress,
                     masterDto.detailAddress,

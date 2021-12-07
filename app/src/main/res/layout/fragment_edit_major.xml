@@ -6,67 +6,43 @@
     <data>
 
         <variable
+            name="buttonThemeAddingMajors"
+            type="kr.co.soogong.master.data.common.ButtonTheme" />
+
+        <variable
+            name="addingMajorsClickListener"
+            type="android.view.View.OnClickListener" />
+
+        <variable
             name="vm"
             type="kr.co.soogong.master.ui.profile.detail.major.EditMajorViewModel" />
     </data>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
-        <ScrollView
+        <kr.co.soogong.master.atomic.molecules.SubheadlineButtonBig
+            android:id="@+id/sbb_select_majors"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_16"
+            app:buttonText="@{@string/adding_projects}"
+            app:buttonTheme="@{buttonThemeAddingMajors}"
+            app:hint="@{@string/select_projects_hint}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:onButtonClick="@{addingMajorsClickListener}"
+            app:subheadline="@{@string/select_projects}" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/cg_container"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:fillViewport="true"
-            android:overScrollMode="never">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingStart="@dimen/gap_20"
-                android:paddingTop="@dimen/gap_32"
-                android:paddingEnd="@dimen/gap_20"
-                android:paddingBottom="@dimen/gap_52">
-
-                <kr.co.soogong.master.atomic.molecules.TitleEditTextButton
-                    android:id="@+id/major"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:alertText='@{"필수 정보입니다."}'
-                    app:buttonText='@{"선택"}'
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:setFirstEditTextEnable="@{false}"
-                    app:setFirstEditTextHint='@{"시공 가능한 업종을 선택해주세요."}'
-                    app:setSecondEditTextVisible="@{false}"
-                    app:subTitle='@{"중복 선택 가능합니다."}'
-                    app:subTitleVisible="@{true}"
-                    app:title='@{"시공 가능 업종을 선택해주세요."}' />
-
-                <LinearLayout
-                    android:id="@+id/major_container"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/major"
-                    app:layout_constraintVertical_bias="0" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </ScrollView>
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/default_button"
-            style="@style/text_style_16sp.bold"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:background="@color/c_22D47B"
-            android:text="@string/save"
-            android:textColor="@color/c_FFFFFF" />
-    </LinearLayout>
-
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sbb_select_majors"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
