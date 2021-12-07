@@ -19,6 +19,18 @@ class ListLiveData<T> : MutableLiveData<MutableList<T>>() {
         value = temp
     }
 
+    fun addAllToSet(items: List<T>) {
+        temp.addAll(items)
+        temp.toSet()
+        value = temp
+    }
+
+    fun addToSet(item: T) {
+        temp.add(item)
+        temp.toSet()
+        value = temp
+    }
+
     fun remove(item: T) {
         temp.remove(item)
         value = temp

@@ -119,7 +119,9 @@ data class MasterDto(
     val masterPortfolios: List<PortfolioDto>? = null,
 
     @SerializedName("projects")
-    val majors: List<MajorDto>? = null,
+    val projects: List<ProjectDto>? = null,
+
+//    val majors: List<MajorDto>? = null,
 
     @SerializedName("reviews")
     val reviews: List<ReviewDto>? = null,

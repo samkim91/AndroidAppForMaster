@@ -3,13 +3,11 @@ package kr.co.soogong.master.ui.major.category
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentCategoryBinding
 import kr.co.soogong.master.ui.base.BaseFragment
-import kr.co.soogong.master.ui.major.MajorFragment
+import kr.co.soogong.master.ui.major.MajorActivity
 import kr.co.soogong.master.ui.major.category.CategoryViewModel.Companion.GET_CATEGORY_FAILED
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.extension.toast
@@ -20,8 +18,6 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding>(
     R.layout.fragment_category
 ) {
     private val viewModel: CategoryViewModel by viewModels()
-
-    private var majorFragment: MajorFragment? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -35,20 +31,12 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding>(
             vm = viewModel
             lifecycleOwner = viewLifecycleOwner
 
-            list.adapter = CategoryAdapter(
-                clickListener = { category ->
-                    majorFragment?.setProjectFragment(category)
+            rvCategories.adapter = CategoryAdapter(
+                itemClickListener = { category ->
+                    (activity as MajorActivity).moveToProjectFragment(category = category)
                 }
             )
-
-            val dividerItemDecoration = DividerItemDecoration(
-                requireContext(),
-                LinearLayoutManager(requireContext()).orientation
-            )
-            list.addItemDecoration(dividerItemDecoration)
-
         }
-        majorFragment = activity as? MajorFragment
     }
 
     private fun registerEventObserve() {

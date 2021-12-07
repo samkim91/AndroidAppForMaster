@@ -7,12 +7,6 @@ import kr.co.soogong.master.R
 import kr.co.soogong.master.data.model.major.Project
 import timber.log.Timber
 
-@BindingAdapter("bind:project_list")
-fun RecyclerView.setList(items: List<Project>?) {
-    Timber.tag("TAG").d("setList: $items")
-    (adapter as? ProjectAdapter)?.submitList(items ?: emptyList())
-}
-
 @BindingAdapter("bind:select_text")
 fun Button.setSelectText(list: List<Project>?) {
     when{

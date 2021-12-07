@@ -26,11 +26,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/c_00664E"
-            android:visibility="gone"
             android:paddingStart="@dimen/gap_20"
             android:paddingTop="@dimen/gap_16"
             android:paddingEnd="@dimen/gap_20"
-            android:paddingBottom="@dimen/gap_16">
+            android:paddingBottom="@dimen/gap_16"
+            android:visibility="gone">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/alert_icon_to_fill_up_required_information"
@@ -264,12 +264,13 @@
                     android:layout_marginEnd="@dimen/gap_20"
                     android:background="@drawable/shape_white_background_radius8"
                     android:elevation="@dimen/gap_4"
-                    app:chipGroupWithTitle="@{vm.requiredInformation.majors}"
-                    app:defaultButtonByList="@{vm.requiredInformation.majors}"
+
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/owner_name"
                     app:title='@{"시공 업종"}' />
+<!--                app:chipGroupWithTitle="@{vm.requiredInformation.projects}"-->
+<!--                app:defaultButtonByList="@{vm.requiredInformation.projects}"-->
 
                 <!-- 업체 주소 ADDRESS -->
                 <kr.co.soogong.master.atomic.molecules.ProfileDefaultCard
@@ -315,11 +316,11 @@
             android:id="@+id/default_button"
             style="@style/text_style_16sp.bold"
             android:layout_width="match_parent"
-            android:visibility="gone"
             android:layout_height="@dimen/gap_48"
             android:background="@drawable/default_button_selector"
             android:text="@string/request_confirmation"
-            android:textColor="@color/c_FFFFFF" />
+            android:textColor="@color/c_FFFFFF"
+            android:visibility="gone" />
     </LinearLayout>
 
 
