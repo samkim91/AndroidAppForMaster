@@ -7,8 +7,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentEditEmailBinding
 import kr.co.soogong.master.ui.base.BaseFragment
-import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogBundle
-import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogRecyclerView
+import kr.co.soogong.master.ui.dialog.bottomSheetDialogRecyclerView.BottomSheetDialogBundle
+import kr.co.soogong.master.ui.dialog.bottomSheetDialogRecyclerView.BottomSheetDialogRecyclerView
 import kr.co.soogong.master.ui.profile.detail.EditProfileContainerViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.ui.profile.detail.EditProfileContainerViewModel.Companion.SAVE_MASTER_SUCCESSFULLY
 import kr.co.soogong.master.utility.EventObserver
@@ -52,25 +52,24 @@ class EditEmailFragment :
             }
 
             email.addDropdownClickListener {
-                val bottomDialog =
-                    BottomDialogRecyclerView.newInstance(
-                        dialogBundle = BottomDialogBundle.getEmailDomainsBundle(),
-                        itemClick = { domain, _ ->
-                            if (domain == BottomDialogBundle.getEmailDomainsBundle().list.last().key) {
-                                viewModel.domain.value = ""
-                                email.secondDetailView.hint =
-                                    getString(R.string.email_domain_type_hint_text)
-                                email.secondDetailView.isEnabled = true
-                            } else {
-                                viewModel.domain.value = domain
-                                email.secondDetailView.hint =
-                                    getString(R.string.email_domain_default_hint_text)
-                                email.secondDetailView.isEnabled = false
-                            }
+                BottomSheetDialogRecyclerView.newInstance(
+                    sheetDialogBundle = BottomSheetDialogBundle.getEmailDomainsBundle()
+                ).let {
+                    it.setItemClickListener { dialogItem ->
+                        if (dialogItem.key == BottomSheetDialogBundle.getEmailDomainsBundle().list.last().key) {
+                            viewModel.domain.value = ""
+                            email.secondDetailView.hint =
+                                getString(R.string.email_domain_type_hint_text)
+                            email.secondDetailView.isEnabled = true
+                        } else {
+                            viewModel.domain.value = dialogItem.key
+                            email.secondDetailView.hint =
+                                getString(R.string.email_domain_default_hint_text)
+                            email.secondDetailView.isEnabled = false
                         }
-                    )
-
-                bottomDialog.show(parentFragmentManager, bottomDialog.tag)
+                    }
+                    it.show(parentFragmentManager, it.tag)
+                }
             }
         }
     }

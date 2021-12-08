@@ -15,8 +15,8 @@ import kr.co.soogong.master.data.model.profile.ApprovedCodeTable
 import kr.co.soogong.master.databinding.FragmentProfileBinding
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.base.BaseViewModel.Companion.DISMISS_LOADING
-import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogBundle
-import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogRecyclerView
+import kr.co.soogong.master.ui.dialog.bottomSheetDialogRecyclerView.BottomSheetDialogBundle
+import kr.co.soogong.master.ui.dialog.bottomSheetDialogRecyclerView.BottomSheetDialogRecyclerView
 import kr.co.soogong.master.ui.dialog.popup.CustomDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData
 import kr.co.soogong.master.ui.profile.ProfileViewModel.Companion.GET_PROFILE_FAILED
@@ -72,18 +72,18 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
 //            }
 
             bbRequestReview.onButtonClick = View.OnClickListener {
-                BottomDialogRecyclerView.newInstance(
-                    dialogBundle = BottomDialogBundle.getRequestingReviewBundle(),
-                    itemClick = { wayOfRequesting, _ ->
-                        Timber.tag(TAG).d("requestReviewButton: $wayOfRequesting is clicked")
+                BottomSheetDialogRecyclerView.newInstance(
+                    sheetDialogBundle = BottomSheetDialogBundle.getRequestingReviewBundle()
+                ).let {
+                    it.setItemClickListener { dialogItem ->
+                        Timber.tag(TAG).d("requestReviewButton: ${dialogItem.key} is clicked")
                         RequestReviewHelper.requestReviewBySharing(
                             requireContext(),
                             viewModel.profile.value?.uid,
                             viewModel.profile.value?.representativeName,
-                            wayOfRequesting
+                            dialogItem.value
                         )
                     }
-                ).let {
                     it.show(parentFragmentManager, it.tag)
                 }
             }
@@ -116,6 +116,28 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
             hbcgProjects.onButtonClick =
                 View.OnClickListener { startActivityCommonCode(EDIT_MAJOR) }
 
+            hbcCareer.onButtonClick = View.OnClickListener {
+                BottomSheetDialogRecyclerView.newInstance(
+                    sheetDialogBundle = BottomSheetDialogBundle.getCareerYearBundle()
+                ).let {
+                    it.setItemClickListener { dialogItem ->
+                        if (viewModel.profile.value?.approvedStatus == ApprovedCodeTable.code) {
+                            CustomDialog.newInstance(DialogData.getConfirmingForRequiredDialogData(
+                                requireContext()))
+                                .let { dialog ->
+                                    dialog.setButtonsClickListener(
+                                        onPositive = { viewModel.saveCareerPeriod(dialogItem.value) },
+                                        onNegative = { }
+                                    )
+                                    dialog.show(parentFragmentManager, it.tag)
+                                }
+                        } else {
+                            viewModel.saveCareerPeriod(dialogItem.value)
+                        }
+                    }
+                    it.show(parentFragmentManager, it.tag)
+                }
+            }
 //            editRequiredInfo.setOnClickListener {
 //                startActivity(
 //                    EditRequiredInformationActivityHelper.getIntent(requireContext())

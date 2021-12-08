@@ -14,6 +14,7 @@ import kr.co.soogong.master.data.model.profile.RequestApproveCodeTable
 import kr.co.soogong.master.domain.usecase.profile.GetMasterUseCase
 import kr.co.soogong.master.domain.usecase.profile.SaveMasterUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
+import kr.co.soogong.master.ui.profile.detail.CareerConverter
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -55,6 +56,55 @@ class ProfileViewModel @Inject constructor(
                 approvedStatus = if (_profile.value?.approvedStatus == ApprovedCodeTable.code) RequestApproveCodeTable.code else null,
             ),
             profileImageUri = profileImage.value,
+        )
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doAfterTerminate { setAction(DISMISS_LOADING) }
+            .subscribeBy(
+                onSuccess = {
+                    Timber.tag(TAG).d("saveMasterProfile successfully: $it")
+                },
+                onError = {
+                    Timber.tag(TAG).d("saveMasterProfile failed: $it")
+                    setAction(REQUEST_FAILED)
+                }
+            ).addToDisposable()
+    }
+
+    fun saveCareerPeriod(careerPeriod: Int) {
+        Timber.tag(TAG).d("saveCareerPeriod: ")
+
+        saveMasterUseCase(
+            MasterDto(
+                id = profile.value?.id,
+                uid = profile.value?.uid,
+                openDate = CareerConverter.toOpenDate(careerPeriod),
+                approvedStatus = if (profile.value?.approvedStatus == ApprovedCodeTable.code) RequestApproveCodeTable.code else null,
+            )
+        )
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doAfterTerminate { setAction(DISMISS_LOADING) }
+            .subscribeBy(
+                onSuccess = {
+                    Timber.tag(TAG).d("saveMasterProfile successfully: $it")
+                },
+                onError = {
+                    Timber.tag(TAG).d("saveMasterProfile failed: $it")
+                    setAction(REQUEST_FAILED)
+                }
+            ).addToDisposable()
+    }
+
+    fun saveServiceArea(radius: Int) {
+        Timber.tag(TAG).d("saveServiceArea: ")
+
+        saveMasterUseCase(
+            MasterDto(
+                id = profile.value?.id,
+                uid = profile.value?.uid,
+                serviceArea = radius,
+            )
         )
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
