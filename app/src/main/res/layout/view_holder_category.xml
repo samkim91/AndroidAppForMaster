@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.appcompat.widget.AppCompatRadioButton
@@ -8,7 +7,9 @@
         style="@style/call_out.regular"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:button="@drawable/radio_button"
+        android:paddingStart="@dimen/gap_8"
+        android:paddingEnd="@dimen/gap_0"
         android:textColor="@color/dark_grey_2"
-        app:buttonTint="@color/brand_green"
         tools:text="업종" />
 </layout>

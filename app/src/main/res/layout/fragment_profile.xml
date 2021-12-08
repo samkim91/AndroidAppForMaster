@@ -56,11 +56,11 @@
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="@dimen/gap_0"
                     android:layout_marginTop="@dimen/gap_20"
-                    app:layout_constraintWidth_percent="0.25"
                     app:layout_constraintDimensionRatio="H, 1:1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintWidth_percent="0.25"
                     app:setCircleImageByUrl="@{vm.profile.basicInformation.profileImage.url}" />
 
                 <androidx.appcompat.widget.AppCompatImageView
@@ -233,7 +233,7 @@
                     app:title="@{@string/contact_information}" />
 
                 <kr.co.soogong.master.atomic.molecules.HeadlineButtonContent
-                    android:id="@+id/tbc_career"
+                    android:id="@+id/hbc_career"
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/gap_33"
@@ -249,7 +249,7 @@
                     android:layout_marginTop="@dimen/gap_33"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tbc_career"
+                    app:layout_constraintTop_toBottomOf="@id/hbc_career"
                     app:title="@{@string/projects}" />
 
                 <kr.co.soogong.master.atomic.molecules.HeadlineButtonContent
