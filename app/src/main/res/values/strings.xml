@@ -39,6 +39,7 @@
     <string name="register">등록하기</string>
     <string name="certify">인증하기</string>
     <string name="timer_form">%1$d:%2$d</string>
+    <string name="selecting_done">선택완료</string>
 
     <string name="required_field_alert">필수 정보입니다.</string>
     <string name="fill_text_over_10">10자 이상으로 입력해주세요.</string>
@@ -339,6 +340,7 @@
     <string name="adding_projects">업종 추가하기</string>
 
     <string name="selecting_project">업종 선택</string>
+
 
 
     <string name="master_type">마스터유형</string>

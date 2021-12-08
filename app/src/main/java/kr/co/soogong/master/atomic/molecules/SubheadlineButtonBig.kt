@@ -35,7 +35,7 @@ class SubheadlineButtonBig @JvmOverloads constructor(
     var error: String? = null
         set(value) {
             field = value
-            binding.tvError.isVisible = value.isNullOrEmpty()
+            binding.tvError.isVisible = !value.isNullOrEmpty()
             binding.tvError.text = value
         }
 
