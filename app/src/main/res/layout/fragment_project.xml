@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:bind="http://schemas.android.com/bind"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -38,13 +37,15 @@
         <kr.co.soogong.master.atomic.atoms.ButtonBig
             android:id="@+id/bb_selecting_done"
             android:layout_width="@dimen/gap_0"
-            android:layout_height="@dimen/gap_48"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/gap_16"
+            android:layout_marginEnd="@dimen/gap_16"
+            android:layout_marginBottom="@dimen/gap_12"
+            app:buttonText="@{@string/selecting_done}"
             app:buttonTheme="@{buttonThemeSelectingDone}"
-            app:onButtonClick="@{selectingDoneClickListener}"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            />
-
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:onButtonClick="@{selectingDoneClickListener}" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
