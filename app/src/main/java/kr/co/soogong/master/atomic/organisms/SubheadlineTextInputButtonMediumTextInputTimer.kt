@@ -48,10 +48,10 @@ class SubheadlineTextInputButtonMediumTextInputTimer @JvmOverloads constructor(
             field = value
             textInputButtonMedium.helper = value
         }
-    override var enabled: Boolean? = null
+    override var inputEnabled: Boolean? = null
         set(value) {
             field = value
-            textInputButtonMedium.enabled = value
+            textInputButtonMedium.inputEnabled = value
         }
     override var maxCount: Int? = null
         set(value) {
@@ -126,7 +126,7 @@ class SubheadlineTextInputButtonMediumTextInputTimer @JvmOverloads constructor(
     var textInputTimerEnabled: Boolean? = null
         set(value) {
             field = value
-            textInputTimer.enabled = value
+            textInputTimer.inputEnabled = value
         }
 
     var textInputTimerMaxCount: Int? = null

@@ -11,7 +11,7 @@ object AddressActivityHelper {
         }
     }
 
-    const val SEARCH_ADDRESS_ACTIVITY = 10000
+    fun getAddressFromIntent(intent: Intent) = intent.extras?.getString(ADDRESS)
 
     const val AREA = "AREA"
     const val LOCATION = "LOCATION"

@@ -22,6 +22,7 @@ import kr.co.soogong.master.ui.dialog.popup.DialogData
 import kr.co.soogong.master.ui.profile.ProfileViewModel.Companion.GET_PROFILE_FAILED
 import kr.co.soogong.master.ui.profile.ProfileViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.uihelper.profile.*
+import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_ADDRESS
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_BUSINESS_UNIT_INFORMATION
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_INTRODUCTION
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_MAJOR
@@ -138,6 +139,11 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
                     it.show(parentFragmentManager, it.tag)
                 }
             }
+
+            hbcServiceAddress.onButtonClick =
+                View.OnClickListener { startActivityCommonCode(EDIT_ADDRESS) }
+
+
 //            editRequiredInfo.setOnClickListener {
 //                startActivity(
 //                    EditRequiredInformationActivityHelper.getIntent(requireContext())

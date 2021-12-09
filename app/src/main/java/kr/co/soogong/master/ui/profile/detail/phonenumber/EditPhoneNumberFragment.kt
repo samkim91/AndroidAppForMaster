@@ -78,8 +78,8 @@ class EditPhoneNumberFragment :
 
             // 휴대폰 번호 validation 및 존재하는 유저인지 확인
             stibmtitAuthPhoneNumber.onButtonClick = View.OnClickListener {
-                if (stibmtitAuthPhoneNumber.enabled == false) {     // "재입력"에 대한 코드
-                    stibmtitAuthPhoneNumber.enabled = true
+                if (stibmtitAuthPhoneNumber.inputEnabled == false) {     // "재입력"에 대한 코드
+                    stibmtitAuthPhoneNumber.inputEnabled = true
                     stibmtitAuthPhoneNumber.buttonText = getString(R.string.certify)
                     stibmtitAuthPhoneNumber.textInputButtonMedium.textInput.textInputEditText.setText(
                         "")
@@ -167,7 +167,7 @@ class EditPhoneNumberFragment :
     private fun startPhoneNumberVerification(isFirst: Boolean) {
         Timber.tag(TAG).d("startPhoneNumberVerification: ${viewModel.tel.value}")
         with(binding) {
-            stibmtitAuthPhoneNumber.enabled = false
+            stibmtitAuthPhoneNumber.inputEnabled = false
             stibmtitAuthPhoneNumber.buttonText = getString(R.string.retyping)
             stibmtitAuthPhoneNumber.textInputTimer.startTimer {
                 stibmtitAuthPhoneNumber.textInputTimerError = null

@@ -1,6 +1,7 @@
 package kr.co.soogong.master.atomic.atoms
 
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.text.InputFilter
 import android.util.AttributeSet
 import android.view.LayoutInflater
@@ -8,6 +9,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.res.ResourcesCompat
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import com.google.android.material.textfield.TextInputLayout.END_ICON_CLEAR_TEXT
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ViewTextInputBinding
 
@@ -21,6 +23,21 @@ class TextInput @JvmOverloads constructor(
 
     val textInputLayout: TextInputLayout = binding.tilContainer
     val textInputEditText: TextInputEditText = binding.tieEdittext
+
+    var startIcon: Drawable? = null
+        set(value) {
+            field = value
+            textInputLayout.startIconDrawable = value
+            textInputLayout.setStartIconTintList(
+                ResourcesCompat.getColorStateList(resources, R.color.dark_grey_1, null)
+            )
+        }
+
+    var endIcon: Int? = null
+        set(value) {
+            field = value
+            textInputLayout.endIconMode = value ?: END_ICON_CLEAR_TEXT
+        }
 
     override var error: String? = null
         set(value) {
@@ -43,16 +60,12 @@ class TextInput @JvmOverloads constructor(
             textInputLayout.isHelperTextEnabled = !value.isNullOrBlank()
         }
 
-    override var enabled: Boolean? = null
+    override var inputEnabled: Boolean? = null
         set(value) {
             field = value
             value?.let {
                 with(textInputEditText) {
                     isEnabled = it
-//                    setTextColor(ResourcesCompat.getColor(resources, R.color.grey_3, null))
-//                    setBackgroundColor(ResourcesCompat.getColor(resources,
-//                        R.color.light_grey_1,
-//                        null))
                 }
             }
         }

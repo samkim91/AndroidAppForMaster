@@ -37,7 +37,7 @@
 
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/cg_container"
-            android:layout_width="match_parent"
+            android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/gap_24"
             app:layout_constraintEnd_toEndOf="parent"

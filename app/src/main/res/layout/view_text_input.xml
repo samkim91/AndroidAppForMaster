@@ -23,8 +23,8 @@
                 android:id="@+id/tie_edittext"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:maxLines="1"
                 android:padding="@dimen/gap_14"
+                android:singleLine="true"
                 tools:text="내용" />
         </com.google.android.material.textfield.TextInputLayout>
     </merge>

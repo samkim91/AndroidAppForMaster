@@ -40,7 +40,7 @@ class TextareaCounter @JvmOverloads constructor(
             textInputLayout.helperText = value
         }
 
-    override var enabled: Boolean? = null
+    override var inputEnabled: Boolean? = null
         set(value) {
             field = value
             value?.let {

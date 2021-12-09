@@ -37,10 +37,10 @@ class TextInputButtonMedium @JvmOverloads constructor(
             textInput.helper = value
         }
 
-    override var enabled: Boolean? = null
+    override var inputEnabled: Boolean? = null
         set(value) {
             field = value
-            textInput.enabled = value
+            textInput.inputEnabled = value
         }
 
     override var maxCount: Int? = null

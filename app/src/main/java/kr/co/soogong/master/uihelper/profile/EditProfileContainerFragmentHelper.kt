@@ -1,18 +1,18 @@
 package kr.co.soogong.master.uihelper.profile
 
 import androidx.fragment.app.Fragment
+import kr.co.soogong.master.ui.profile.detail.address.EditAddressFragment
+import kr.co.soogong.master.ui.profile.detail.businessunitinformation.EditBusinessUnitInformationFragment
 import kr.co.soogong.master.ui.profile.detail.email.EditEmailFragment
 import kr.co.soogong.master.ui.profile.detail.flexiblecost.EditFlexibleCostFragment
 import kr.co.soogong.master.ui.profile.detail.freeMeasure.EditFreeMeasureFragment
-import kr.co.soogong.master.ui.profile.detail.otherflexibleoption.EditOtherFlexibleOptionFragment
-import kr.co.soogong.master.ui.profile.detail.portfoliolist.portfolio.PortfolioFragment
-import kr.co.soogong.master.ui.profile.detail.portfoliolist.pricebyproject.PriceByProjectFragment
-import kr.co.soogong.master.ui.profile.detail.address.EditAddressFragment
-import kr.co.soogong.master.ui.profile.detail.businessunitinformation.EditBusinessUnitInformationFragment
 import kr.co.soogong.master.ui.profile.detail.introduction.EditIntroductionFragment
 import kr.co.soogong.master.ui.profile.detail.major.EditMajorFragment
+import kr.co.soogong.master.ui.profile.detail.otherflexibleoption.EditOtherFlexibleOptionFragment
 import kr.co.soogong.master.ui.profile.detail.ownername.EditOwnerNameFragment
 import kr.co.soogong.master.ui.profile.detail.phonenumber.EditPhoneNumberFragment
+import kr.co.soogong.master.ui.profile.detail.portfoliolist.portfolio.PortfolioFragment
+import kr.co.soogong.master.ui.profile.detail.portfoliolist.pricebyproject.PriceByProjectFragment
 import kr.co.soogong.master.ui.profile.detail.shopimages.EditShopImagesFragment
 import kr.co.soogong.master.ui.profile.detail.warranty.EditWarrantyInformationFragment
 
@@ -28,14 +28,14 @@ object EditProfileContainerFragmentHelper {
     const val EDIT_OTHER_FLEXIBLE_OPTION = "기타 변동 가능사항 등록·수정하기"
     const val EDIT_EMAIL = "이메일 등록·수정하기"
 
-    const val EDIT_INTRODUCTION = "업체 소개 등록·수정하기"
-    const val EDIT_SHOP_IMAGES = "대표 이미지 편집하기"
-    const val EDIT_BUSINESS_UNIT_INFORMATION = "사업자 정보 등록·수정하기"
-    const val EDIT_WARRANTY_INFORMATION = "A/S 정보 등록·수정하기"
+    const val EDIT_INTRODUCTION = "업체 소개"
+    const val EDIT_SHOP_IMAGES = "대표 이미지"
+    const val EDIT_BUSINESS_UNIT_INFORMATION = "사업자 정보"
+    const val EDIT_WARRANTY_INFORMATION = "A/S 정보"
     const val EDIT_OWNER_NAME = "대표자명 등록·수정하기"
-    const val EDIT_PHONE_NUMBER = "휴대폰번호 수정하기"
-    const val EDIT_ADDRESS = "업체 주소 수정하기"
-    const val EDIT_MAJOR = "시공 업종 수정하기"
+    const val EDIT_PHONE_NUMBER = "휴대폰 번호"
+    const val EDIT_ADDRESS = "활동 지역"
+    const val EDIT_MAJOR = "시공 가능 업종"
 
     fun getFragment(pageName: String, itemId: Int?): Fragment =
         when (pageName) {

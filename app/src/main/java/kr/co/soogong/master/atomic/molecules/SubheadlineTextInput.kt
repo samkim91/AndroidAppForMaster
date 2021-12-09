@@ -1,6 +1,7 @@
 package kr.co.soogong.master.atomic.molecules
 
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -23,6 +24,18 @@ class SubheadlineTextInput @JvmOverloads constructor(
         }
 
     val textInput: TextInput = binding.tiContent
+
+    var startIcon: Drawable? = null
+        set(value) {
+            field = value
+            textInput.startIcon = value
+        }
+
+    var endIcon: Int? = null
+        set(value) {
+            field = value
+            textInput.endIcon = value
+        }
 
     override var inputType: Int? = null
         set(value) {
@@ -48,10 +61,10 @@ class SubheadlineTextInput @JvmOverloads constructor(
             textInput.error = value
         }
 
-    override var enabled: Boolean? = null
+    override var inputEnabled: Boolean? = null
         set(value) {
             field = value
-            textInput.enabled = value
+            textInput.inputEnabled = value
         }
 
     override var maxCount: Int? = null
