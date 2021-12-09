@@ -253,7 +253,7 @@
                     app:title="@{@string/projects}" />
 
                 <kr.co.soogong.master.atomic.molecules.HeadlineButtonContent
-                    android:id="@+id/hbc_service_area"
+                    android:id="@+id/hbc_service_address"
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/gap_33"
@@ -271,7 +271,7 @@
                     app:contentLabelFilled="@{@string/option}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/hbc_service_area"
+                    app:layout_constraintTop_toBottomOf="@id/hbc_service_address"
                     app:percent="@{30.0}"
                     app:title="@{@string/completion_of_optional_information}" />
 

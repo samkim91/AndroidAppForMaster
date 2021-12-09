@@ -52,10 +52,10 @@ class SubheadlineTextareaCounter @JvmOverloads constructor(
             textareaCounter.maxCount = value
         }
 
-    override var enabled: Boolean? = null
+    override var inputEnabled: Boolean? = null
         set(value) {
             field = value
-            textareaCounter.enabled = value
+            textareaCounter.inputEnabled = value
         }
 
     override var max: Int? = null

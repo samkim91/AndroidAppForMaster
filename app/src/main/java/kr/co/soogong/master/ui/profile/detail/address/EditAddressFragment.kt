@@ -10,6 +10,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentEditAddressBinding
 import kr.co.soogong.master.ui.base.BaseFragment
+import kr.co.soogong.master.ui.profile.detail.EditProfileContainerActivity
 import kr.co.soogong.master.ui.profile.detail.EditProfileContainerViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.ui.profile.detail.EditProfileContainerViewModel.Companion.SAVE_MASTER_SUCCESSFULLY
 import kr.co.soogong.master.uihelper.auth.signup.AddressActivityHelper
@@ -29,7 +30,7 @@ class EditAddressFragment : BaseFragment<FragmentEditAddressBinding>(
             Timber.tag(TAG).d("StartActivityForResult: $result")
             if (result.resultCode == Activity.RESULT_OK) {
                 viewModel.roadAddress.value =
-                    result.data?.extras?.getString(AddressActivityHelper.ADDRESS).toString()
+                    result.data?.let { AddressActivityHelper.getAddressFromIntent(it) }
                 viewModel.detailAddress.value = ""
             }
         }
@@ -49,19 +50,19 @@ class EditAddressFragment : BaseFragment<FragmentEditAddressBinding>(
             vm = viewModel
             lifecycleOwner = viewLifecycleOwner
 
-            address.setButtonClickListener {
+            ivClickable.setOnClickListener {
                 getAddressLauncher.launch(
-                    Intent(AddressActivityHelper.getIntent(
-                        requireContext()))
+                    Intent(AddressActivityHelper.getIntent(requireContext()))
                 )
             }
 
-            defaultButton.setOnClickListener {
+            (activity as EditProfileContainerActivity).setSaveButtonClickListener {
                 viewModel.roadAddress.observe(viewLifecycleOwner, {
-                    address.alertVisible = it.isNullOrEmpty()
+                    stiRoadAddress.error =
+                        if (it.isNullOrEmpty()) getString(R.string.required_field_alert) else null
                 })
 
-                if (!address.alertVisible) {
+                if (stiRoadAddress.error.isNullOrBlank()) {
                     val latlng = LocationHelper.changeAddressToLatLng(requireContext(),
                         "${viewModel.roadAddress.value} ${viewModel.detailAddress.value}")
                     viewModel.latitude.value = latlng["latitude"]

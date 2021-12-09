@@ -72,7 +72,7 @@ class TextInputTimer @JvmOverloads constructor(
             textInputLayout.isHelperTextEnabled = !value.isNullOrBlank()
         }
 
-    override var enabled: Boolean? = null
+    override var inputEnabled: Boolean? = null
         set(value) {
             field = value
             value?.let {
