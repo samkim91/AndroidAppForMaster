@@ -28,6 +28,7 @@ import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_PHONE_NUMBER
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_SHOP_IMAGES
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_WARRANTY_INFORMATION
+import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.FREE_MEASURE
 import kr.co.soogong.master.utility.*
 import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
@@ -162,18 +163,12 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
                 }
             }
 
+            hbcFreeMeasure.onButtonClick =
+                View.OnClickListener { startActivityCommonCode(FREE_MEASURE) }
+
 //            editRequiredInfo.setOnClickListener {
 //                startActivity(
 //                    EditRequiredInformationActivityHelper.getIntent(requireContext())
-//                )
-//            }
-
-//            freeMeasure.setOnClickListener {
-//                startActivity(
-//                    EditProfileContainerActivityHelper.getIntent(
-//                        requireContext(),
-//                        FREE_MEASURE
-//                    )
 //                )
 //            }
 //

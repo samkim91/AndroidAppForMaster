@@ -5,7 +5,7 @@ import kr.co.soogong.master.ui.profile.detail.address.EditAddressFragment
 import kr.co.soogong.master.ui.profile.detail.businessunitinformation.EditBusinessUnitInformationFragment
 import kr.co.soogong.master.ui.profile.detail.email.EditEmailFragment
 import kr.co.soogong.master.ui.profile.detail.flexiblecost.EditFlexibleCostFragment
-import kr.co.soogong.master.ui.profile.detail.freeMeasure.EditFreeMeasureFragment
+import kr.co.soogong.master.ui.profile.detail.freemeasure.EditFreeMeasureFragment
 import kr.co.soogong.master.ui.profile.detail.introduction.EditIntroductionFragment
 import kr.co.soogong.master.ui.profile.detail.major.EditMajorFragment
 import kr.co.soogong.master.ui.profile.detail.otherflexibleoption.EditOtherFlexibleOptionFragment

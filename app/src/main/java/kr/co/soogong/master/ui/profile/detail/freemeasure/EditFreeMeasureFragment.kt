@@ -1,12 +1,14 @@
-package kr.co.soogong.master.ui.profile.detail.freeMeasure
+package kr.co.soogong.master.ui.profile.detail.freemeasure
 
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
+import kr.co.soogong.master.atomic.molecules.SubheadlineChipGroup
 import kr.co.soogong.master.databinding.FragmentEditFreeMeasureBinding
 import kr.co.soogong.master.ui.base.BaseFragment
+import kr.co.soogong.master.ui.profile.detail.EditProfileContainerActivity
 import kr.co.soogong.master.ui.profile.detail.EditProfileContainerViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.ui.profile.detail.EditProfileContainerViewModel.Companion.SAVE_MASTER_SUCCESSFULLY
 import kr.co.soogong.master.utility.EventObserver
@@ -34,20 +36,22 @@ class EditFreeMeasureFragment : BaseFragment<FragmentEditFreeMeasureBinding>(
             vm = viewModel
             lifecycleOwner = viewLifecycleOwner
 
-            defaultButton.setOnClickListener {
-                if (viewModel.agreement.value == null) return@setOnClickListener
+            initChips()
 
-                viewModel.saveFreeMeasure()
-            }
-
-            agreeCheckbox.setCheckClick {
-                viewModel.agreement.value = true
-            }
-
-            disagreeCheckbox.setCheckClick {
-                viewModel.agreement.value = false
+            (activity as EditProfileContainerActivity).setSaveButtonClickListener {
+                if (viewModel.freeMeasure.value != null) viewModel.saveFreeMeasure()
             }
         }
+    }
+
+    private fun initChips() {
+        SubheadlineChipGroup
+            .initChips(
+                requireContext(),
+                layoutInflater,
+                binding.scgFreeMeasure,
+                viewModel.freeMeasureOptions.value?.map { it.inKorean }!!
+            )
     }
 
     private fun registerEventObserve() {

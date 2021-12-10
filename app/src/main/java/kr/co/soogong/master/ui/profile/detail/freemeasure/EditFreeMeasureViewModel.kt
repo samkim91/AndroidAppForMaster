@@ -1,12 +1,17 @@
-package kr.co.soogong.master.ui.profile.detail.freeMeasure
+package kr.co.soogong.master.ui.profile.detail.freemeasure
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kr.co.soogong.master.data.dto.profile.MasterDto
+import kr.co.soogong.master.data.model.profile.CodeTable
+import kr.co.soogong.master.data.model.profile.ImpossibleCodeTable
+import kr.co.soogong.master.data.model.profile.PossibleCodeTable
 import kr.co.soogong.master.domain.usecase.profile.GetProfileUseCase
 import kr.co.soogong.master.domain.usecase.profile.SaveMasterUseCase
 import kr.co.soogong.master.domain.usecase.profile.UpdateFreeMeasureYnUseCase
 import kr.co.soogong.master.ui.profile.detail.EditProfileContainerViewModel
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -16,12 +21,20 @@ class EditFreeMeasureViewModel @Inject constructor(
     private val updateFreeMeasureYnUseCase: UpdateFreeMeasureYnUseCase,
 ) : EditProfileContainerViewModel(getProfileUseCase, saveMasterUseCase) {
 
-    val agreement = MutableLiveData<Boolean>(false)
+    private val _freeMeasureOptions =
+        MutableLiveData(listOf(PossibleCodeTable, ImpossibleCodeTable))
+    val freeMeasureOptions: LiveData<List<CodeTable>>
+        get() = _freeMeasureOptions
+
+    val freeMeasure = MutableLiveData<CodeTable>(_freeMeasureOptions.value?.get(0))
 
     fun requestFreeMeasure() {
         requestProfile {
             it.basicInformation?.freeMeasureYn?.let { boolean ->
-                if (boolean) agreement.postValue(boolean)
+                Timber.tag(TAG).d("requestFreeMeasure: $boolean")
+                freeMeasure.postValue(_freeMeasureOptions.value?.find { options ->
+                    options.asValue == boolean
+                })
             }
         }
     }
@@ -32,7 +45,7 @@ class EditFreeMeasureViewModel @Inject constructor(
                 MasterDto(
                     id = profile.value?.id,
                     uid = profile.value?.uid,
-                    freeMeasureYn = agreement.value == true
+                    freeMeasureYn = freeMeasure.value?.asValue as Boolean
                 )
             )
         )
