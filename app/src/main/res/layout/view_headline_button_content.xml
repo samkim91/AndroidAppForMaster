@@ -22,17 +22,18 @@
             android:id="@+id/tv_button"
             style="@style/subheadline.regular"
             android:layout_width="wrap_content"
-            android:paddingStart="@dimen/gap_10"
-            android:paddingEnd="@dimen/gap_0"
-            android:paddingTop="@dimen/gap_5"
-            android:paddingBottom="@dimen/gap_5"
             android:layout_height="wrap_content"
+            android:paddingStart="@dimen/gap_10"
+            android:paddingTop="@dimen/gap_5"
+            android:paddingEnd="@dimen/gap_0"
+            android:paddingBottom="@dimen/gap_5"
             app:layout_constraintBottom_toBottomOf="@id/tv_title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/tv_title"
             tools:text="버튼"
             tools:textColor="@color/brand_red" />
 
+        <!-- 바로 수정하는 기능이 필요해서, TextView 가 아닌 EditText 를 사용 -->
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/tv_content"
             style="@style/subheadline.regular"

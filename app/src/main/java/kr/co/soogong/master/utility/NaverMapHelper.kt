@@ -50,6 +50,9 @@ class NaverMapHelper(
     // 카메라 위치를 잡아주는 메소드
     fun setLocation(coordinate: Coordinate?, radius: Int?) {
         Timber.tag(TAG).d("setLocation: $coordinate, $radius")
+
+        if (!::naverMap.isInitialized) return
+
         coordinate?.let { c ->
             naverMap.moveCamera(
                 CameraUpdate.scrollTo(
