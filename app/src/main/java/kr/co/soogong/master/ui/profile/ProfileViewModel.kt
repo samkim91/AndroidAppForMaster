@@ -36,12 +36,12 @@ class ProfileViewModel @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
                 onSuccess = {
-                    Timber.tag(TAG).d("getMasterSuccessfully: $it")
+                    Timber.tag(TAG).d("getMasterSuccessfully: ")
                     _profile.value = Profile.fromMasterDto(it)
                 },
                 onError = {
                     Timber.tag(TAG).d("getMasterFailed: $it")
-                    setAction(GET_PROFILE_FAILED)
+                    setAction(REQUEST_FAILED)
                 }
             )
             .addToDisposable()
@@ -62,7 +62,7 @@ class ProfileViewModel @Inject constructor(
             .doAfterTerminate { setAction(DISMISS_LOADING) }
             .subscribeBy(
                 onSuccess = {
-                    Timber.tag(TAG).d("saveMasterProfile successfully: $it")
+                    Timber.tag(TAG).d("saveMasterProfile successfully: ")
                 },
                 onError = {
                     Timber.tag(TAG).d("saveMasterProfile failed: $it")
@@ -87,7 +87,7 @@ class ProfileViewModel @Inject constructor(
             .doAfterTerminate { setAction(DISMISS_LOADING) }
             .subscribeBy(
                 onSuccess = {
-                    Timber.tag(TAG).d("saveMasterProfile successfully: $it")
+                    Timber.tag(TAG).d("saveMasterProfile successfully: ")
                 },
                 onError = {
                     Timber.tag(TAG).d("saveMasterProfile failed: $it")
@@ -96,22 +96,22 @@ class ProfileViewModel @Inject constructor(
             ).addToDisposable()
     }
 
-    fun saveServiceArea(radius: Int) {
+    fun saveServiceArea() {
         Timber.tag(TAG).d("saveServiceArea: ")
 
         saveMasterUseCase(
             MasterDto(
-                id = profile.value?.id,
-                uid = profile.value?.uid,
-                serviceArea = radius,
+                id = _profile.value?.id,
+                uid = _profile.value?.uid,
+                serviceArea = _profile.value?.requiredInformation?.serviceArea,
             )
         )
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .doAfterTerminate { setAction(DISMISS_LOADING) }
             .subscribeBy(
                 onSuccess = {
-                    Timber.tag(TAG).d("saveMasterProfile successfully: $it")
+                    Timber.tag(TAG).d("saveMasterProfile successfully: ")
+                    requestProfile()
                 },
                 onError = {
                     Timber.tag(TAG).d("saveMasterProfile failed: $it")
@@ -122,7 +122,6 @@ class ProfileViewModel @Inject constructor(
 
     companion object {
         private const val TAG = "ProfileViewModel"
-        const val GET_PROFILE_FAILED = "GET_PROFILE_FAILED"
         const val REQUEST_FAILED = "REQUEST_FAILED"
     }
 }

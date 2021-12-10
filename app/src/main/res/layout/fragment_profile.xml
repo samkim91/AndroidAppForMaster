@@ -260,6 +260,17 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/hbcg_projects"
+                    app:title="@{@string/service_address}" />
+
+                <kr.co.soogong.master.atomic.molecules.HeadlineButtonMap
+                    android:id="@+id/hbm_service_area"
+                    android:layout_width="@dimen/gap_0"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/gap_33"
+                    app:content="@{@string/kilo_meters_digit(vm.profile.requiredInformation.serviceArea)}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/hbc_service_address"
                     app:title="@{@string/service_area}" />
 
                 <kr.co.soogong.master.atomic.molecules.SubheadlineProgressIndicator
@@ -271,7 +282,7 @@
                     app:contentLabelFilled="@{@string/option}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/hbc_service_address"
+                    app:layout_constraintTop_toBottomOf="@id/hbm_service_area"
                     app:percent="@{30.0}"
                     app:title="@{@string/completion_of_optional_information}" />
 

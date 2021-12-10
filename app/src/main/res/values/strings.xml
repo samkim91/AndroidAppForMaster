@@ -8,6 +8,7 @@
     <string name="special_symbol_stroke">-</string>
 
     <string name="kilo_meters">km</string>
+    <string name="kilo_meters_digit">%d km</string>
     <string name="years">%d년</string>
     <string name="percent">%s%%</string>
     <string name="version_text">버전 : v%s</string>
@@ -292,7 +293,8 @@
     <string name="contact_information">휴대폰 정보</string>
     <string name="career">경력</string>
     <string name="projects">시공 가능 업종</string>
-    <string name="service_area">활동 지역</string>
+    <string name="service_address">활동 지역</string>
+    <string name="service_area">서비스 가능 범위</string>
 
     <string name="completion_of_optional_information">선택 정보 완성도</string>
     <string name="explanation_of_optional_information">선택정보를 입력하고 더 많은 고객님들과 접점을 만들어 보세요.</string>

@@ -19,7 +19,6 @@ import kr.co.soogong.master.ui.dialog.bottomSheetDialogRecyclerView.BottomSheetD
 import kr.co.soogong.master.ui.dialog.bottomSheetDialogRecyclerView.BottomSheetDialogRecyclerView
 import kr.co.soogong.master.ui.dialog.popup.CustomDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData
-import kr.co.soogong.master.ui.profile.ProfileViewModel.Companion.GET_PROFILE_FAILED
 import kr.co.soogong.master.ui.profile.ProfileViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.uihelper.profile.*
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_ADDRESS
@@ -29,9 +28,7 @@ import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_PHONE_NUMBER
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_SHOP_IMAGES
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_WARRANTY_INFORMATION
-import kr.co.soogong.master.utility.EventObserver
-import kr.co.soogong.master.utility.FileHelper
-import kr.co.soogong.master.utility.PermissionHelper
+import kr.co.soogong.master.utility.*
 import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
 
@@ -40,6 +37,16 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
     R.layout.fragment_profile
 ) {
     private val viewModel: ProfileViewModel by viewModels()
+
+    private val naverMapHelper: NaverMapHelper by lazy {
+        NaverMapHelper(
+            context = requireContext(),
+            fragmentManager = childFragmentManager,
+            frameLayout = binding.hbmServiceArea.flMapContainer,
+            coordinate = null,
+            radius = null,
+        )
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -143,6 +150,17 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
             hbcServiceAddress.onButtonClick =
                 View.OnClickListener { startActivityCommonCode(EDIT_ADDRESS) }
 
+            hbmServiceArea.onButtonClick = View.OnClickListener {
+                BottomSheetDialogRecyclerView.newInstance(
+                    sheetDialogBundle = BottomSheetDialogBundle.getServiceAreaBundle()
+                ).let {
+                    it.setItemClickListener { dialogItem ->
+                        viewModel.profile.value?.requiredInformation?.serviceArea = dialogItem.value
+                        viewModel.saveServiceArea()
+                    }
+                    it.show(parentFragmentManager, it.tag)
+                }
+            }
 
 //            editRequiredInfo.setOnClickListener {
 //                startActivity(
@@ -215,9 +233,15 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
     private fun registerEventObserve() {
         viewModel.action.observe(viewLifecycleOwner, EventObserver { event ->
             when (event) {
-                GET_PROFILE_FAILED, REQUEST_FAILED -> requireContext().toast(getString(R.string.error_message_of_request_failed))
+                REQUEST_FAILED -> requireContext().toast(getString(R.string.error_message_of_request_failed))
                 DISMISS_LOADING -> dismissLoading()
             }
+        })
+        viewModel.profile.observe(viewLifecycleOwner, { profile ->
+            naverMapHelper.setLocation(
+                profile?.requiredInformation?.coordinate,
+                profile?.requiredInformation?.serviceArea
+            )
         })
     }
 
@@ -225,6 +249,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
         super.onResume()
         Timber.tag(TAG).d("onResume: ")
         viewModel.requestProfile()
+        naverMapHelper
     }
 
     private fun startActivityCommonCode(pageName: String, itemId: Int? = null) {
