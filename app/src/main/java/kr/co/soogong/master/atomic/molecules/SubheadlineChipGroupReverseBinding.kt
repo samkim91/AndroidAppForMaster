@@ -16,7 +16,7 @@ object SubheadlineChipGroupReverseBinding {
     ) {
         val oldChip = view.container.findViewById<Chip>(view.container.checkedChipId)
 
-        if (oldChip?.text.toString() != checkedChipCode?.inKorean) {
+        if (oldChip?.text != checkedChipCode?.inKorean) {
             view.container.children.find { chip ->
                 (chip as Chip).text.toString() == checkedChipCode?.inKorean
             }.let { chip ->
@@ -40,7 +40,7 @@ object SubheadlineChipGroupReverseBinding {
     @InverseBindingAdapter(attribute = "checkedChipCode", event = "checkedChipCodeAttrChanged")
     fun getSubheadlineChipGroupCheckedChip(view: SubheadlineChipGroup): CodeTable? {
         return view.container.findViewById<Chip>(view.container.checkedChipId)?.run {
-            CodeTable.findBusinessTypeByKorean(this.text.toString())
+            CodeTable.findCodeTableByKorean(this.text.toString())
         }
     }
 }

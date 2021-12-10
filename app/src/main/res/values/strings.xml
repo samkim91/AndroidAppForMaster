@@ -346,6 +346,12 @@
     <string name="address">주소</string>
     <string name="detail_address">상세주소</string>
 
+    <string name="select_free_measure">방문 실측이 무료일 경우에만 우선 실측 배정이 가능합니다.</string>
+
+
+
+
+
 
     <string name="master_type">마스터유형</string>
     <string name="store_name">업체명</string>
