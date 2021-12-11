@@ -2,9 +2,8 @@ package kr.co.soogong.master.ui.profile.detail.ownername
 
 import androidx.lifecycle.MutableLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kr.co.soogong.master.data.common.CodeTable
 import kr.co.soogong.master.data.dto.profile.MasterDto
-import kr.co.soogong.master.data.model.profile.ApprovedCodeTable
-import kr.co.soogong.master.data.model.profile.RequestApproveCodeTable
 import kr.co.soogong.master.domain.usecase.profile.GetProfileUseCase
 import kr.co.soogong.master.domain.usecase.profile.SaveMasterUseCase
 import kr.co.soogong.master.ui.profile.detail.EditProfileContainerViewModel
@@ -36,7 +35,7 @@ class EditOwnerNameViewModel @Inject constructor(
                 id = profile.value?.id,
                 uid = profile.value?.uid,
                 ownerName = ownerName.value,
-                approvedStatus = if (profile.value?.approvedStatus == ApprovedCodeTable.code) RequestApproveCodeTable.code else null,
+                approvedStatus = if (profile.value?.approvedStatus == CodeTable.APPROVED.code) CodeTable.REQUEST_APPROVE.code else null,
             )
         )
     }

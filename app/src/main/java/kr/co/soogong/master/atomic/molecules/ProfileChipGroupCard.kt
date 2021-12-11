@@ -13,11 +13,10 @@ import androidx.core.view.isVisible
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import kr.co.soogong.master.R
+import kr.co.soogong.master.data.common.CodeTable
 import kr.co.soogong.master.data.dto.profile.MasterConfigDto
 import kr.co.soogong.master.data.model.major.Major
 import kr.co.soogong.master.data.model.major.Project
-import kr.co.soogong.master.data.model.profile.FlexibleCostCodeTable
-import kr.co.soogong.master.data.model.profile.OtherInfoCodeTable
 import kr.co.soogong.master.databinding.ViewProfileChipGroupCardBinding
 import kr.co.soogong.master.utility.ButtonHelper
 
@@ -73,7 +72,7 @@ class ProfileChipGroupCard @JvmOverloads constructor(
             field = value
             binding.detail.isVisible = false
             value?.find { masterConfigDto ->
-                masterConfigDto.code == OtherInfoCodeTable.code
+                masterConfigDto.code == CodeTable.OTHER_INFO.code
             }?.let {
                 binding.detail.isVisible = true
                 binding.detail.text = it.value
@@ -167,8 +166,8 @@ class ProfileChipGroupCard @JvmOverloads constructor(
                 val chip = Chip(context)
                 chip.text = when (it) {
                     is Project -> it.name
-                    is MasterConfigDto -> if (it.groupCode == FlexibleCostCodeTable.code) {
-                        if (it.code == OtherInfoCodeTable.code) return@let
+                    is MasterConfigDto -> if (it.groupCode == CodeTable.FLEXIBLE_COST.code) {
+                        if (it.code == CodeTable.OTHER_INFO.code) return@let
                         "${it.name} ${it.value}"
                     } else {
                         "${it.name}"

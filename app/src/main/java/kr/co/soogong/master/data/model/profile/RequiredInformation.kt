@@ -2,6 +2,7 @@ package kr.co.soogong.master.data.model.profile
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
+import kr.co.soogong.master.data.common.CodeTable
 import kr.co.soogong.master.data.dto.AttachmentDto
 import kr.co.soogong.master.data.dto.profile.MasterDto
 import kr.co.soogong.master.data.dto.profile.ProjectDto
@@ -28,7 +29,7 @@ data class RequiredInformation(
                 introduction = masterDto.introduction,
                 shopImages = masterDto.shopImages,
                 businessUnitInformation = BusinessUnitInformation(
-                    businessType = masterDto.businessType?.let { CodeTable.findBusinessTypeByCode(it).inKorean },
+                    businessType = masterDto.businessType?.let { CodeTable.getCodeTableByCode(it)?.inKorean },
                     businessName = masterDto.businessName,
                     shopName = masterDto.shopName,
                     businessNumber = masterDto.businessNumber,

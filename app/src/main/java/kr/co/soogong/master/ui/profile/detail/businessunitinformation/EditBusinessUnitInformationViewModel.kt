@@ -3,9 +3,9 @@ package kr.co.soogong.master.ui.profile.detail.businessunitinformation
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kr.co.soogong.master.data.common.CodeTable
 import kr.co.soogong.master.data.dto.AttachmentDto
 import kr.co.soogong.master.data.dto.profile.MasterDto
-import kr.co.soogong.master.data.model.profile.*
 import kr.co.soogong.master.domain.usecase.profile.GetProfileUseCase
 import kr.co.soogong.master.domain.usecase.profile.SaveMasterUseCase
 import kr.co.soogong.master.ui.profile.detail.EditProfileContainerViewModel
@@ -20,7 +20,7 @@ class EditBusinessUnitInformationViewModel @Inject constructor(
 ) : EditProfileContainerViewModel(getProfileUseCase, saveMasterUseCase) {
 
     private val _businessTypes =
-        MutableLiveData(listOf(SoleCodeTable, CorporateCodeTable, FreelancerCodeTable))
+        MutableLiveData(listOf(CodeTable.SOLE, CodeTable.CORPORATE, CodeTable.FREELANCER))
     val businessTypes: LiveData<List<CodeTable>>
         get() = _businessTypes
 
@@ -63,10 +63,10 @@ class EditBusinessUnitInformationViewModel @Inject constructor(
                 id = profile.value?.id,
                 uid = profile.value?.uid,
                 businessType = businessType.value?.code,
-                businessName = if (businessType.value != FreelancerCodeTable) businessName.value else "",
+                businessName = if (businessType.value != CodeTable.FREELANCER) businessName.value else "",
                 shopName = shopName.value,
                 businessNumber = businessNumber.value,
-                approvedStatus = if (profile.value?.approvedStatus == ApprovedCodeTable.code) RequestApproveCodeTable.code else null,
+                approvedStatus = if (profile.value?.approvedStatus == CodeTable.APPROVED.code) CodeTable.REQUEST_APPROVE.code else null,
             ),
             businessRegistImageUri = businessRegistImage.value?.first()?.uri,
         )

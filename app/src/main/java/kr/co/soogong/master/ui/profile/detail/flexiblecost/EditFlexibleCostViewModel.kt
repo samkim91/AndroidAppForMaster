@@ -2,15 +2,11 @@ package kr.co.soogong.master.ui.profile.detail.flexiblecost
 
 import androidx.lifecycle.MutableLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.rxkotlin.subscribeBy
-import io.reactivex.schedulers.Schedulers
+import kr.co.soogong.master.data.common.CodeTable
 import kr.co.soogong.master.data.dto.profile.MasterConfigDto
 import kr.co.soogong.master.data.dto.profile.MasterDto
-import kr.co.soogong.master.data.model.profile.*
 import kr.co.soogong.master.domain.usecase.profile.GetProfileUseCase
 import kr.co.soogong.master.domain.usecase.profile.SaveMasterUseCase
-import kr.co.soogong.master.ui.base.BaseViewModel
 import kr.co.soogong.master.ui.profile.detail.EditProfileContainerViewModel
 import timber.log.Timber
 import javax.inject.Inject
@@ -36,16 +32,16 @@ class EditFlexibleCostViewModel @Inject constructor(
             it.basicInformation?.flexibleCost?.let { masterConfigList ->
                 flexibleCost.postValue(masterConfigList)
 
-                masterConfigList.find { masterConfigDto -> masterConfigDto.code == TravelCostCodeTable.code }?.value?.let { value ->
+                masterConfigList.find { masterConfigDto -> masterConfigDto.code == CodeTable.TRAVEL_COST.code }?.value?.let { value ->
                     travelCostValue.postValue(value)
                 }
-                masterConfigList.find { masterConfigDto -> masterConfigDto.code == CraneUsageCodeTable.code }?.value?.let { value ->
+                masterConfigList.find { masterConfigDto -> masterConfigDto.code == CodeTable.CRANE_USAGE.code }?.value?.let { value ->
                     craneUsageValue.postValue(value)
                 }
-                masterConfigList.find { masterConfigDto -> masterConfigDto.code == PackageCostCodeTable.code }?.value?.let { value ->
+                masterConfigList.find { masterConfigDto -> masterConfigDto.code == CodeTable.PACKAGE_COST.code }?.value?.let { value ->
                     packageCostValue.postValue(value)
                 }
-                masterConfigList.find { masterConfigDto -> masterConfigDto.code == OtherInfoCodeTable.code }?.value?.let { value ->
+                masterConfigList.find { masterConfigDto -> masterConfigDto.code == CodeTable.OTHER_INFO.code }?.value?.let { value ->
                     otherCostInformation.postValue(value)
                 }
             }
@@ -57,27 +53,27 @@ class EditFlexibleCostViewModel @Inject constructor(
 
         val configList = listOf(
             MasterConfigDto(
-                groupCode = FlexibleCostCodeTable.code,
-                code = TravelCostCodeTable.code,
-                name = TravelCostCodeTable.inKorean,
+                groupCode = CodeTable.FLEXIBLE_COST.code,
+                code = CodeTable.TRAVEL_COST.code,
+                name = CodeTable.TRAVEL_COST.inKorean,
                 value = travelCostValue.value
             ),
             MasterConfigDto(
-                groupCode = FlexibleCostCodeTable.code,
-                code = CraneUsageCodeTable.code,
-                name = CraneUsageCodeTable.inKorean,
+                groupCode = CodeTable.FLEXIBLE_COST.code,
+                code = CodeTable.CRANE_USAGE.code,
+                name = CodeTable.CRANE_USAGE.inKorean,
                 value = craneUsageValue.value
             ),
             MasterConfigDto(
-                groupCode = FlexibleCostCodeTable.code,
-                code = PackageCostCodeTable.code,
-                name = PackageCostCodeTable.inKorean,
+                groupCode = CodeTable.FLEXIBLE_COST.code,
+                code = CodeTable.PACKAGE_COST.code,
+                name = CodeTable.PACKAGE_COST.inKorean,
                 value = packageCostValue.value
             ),
             MasterConfigDto(
-                groupCode = FlexibleCostCodeTable.code,
-                code = OtherInfoCodeTable.code,
-                name = OtherInfoCodeTable.inKorean,
+                groupCode = CodeTable.FLEXIBLE_COST.code,
+                code = CodeTable.OTHER_INFO.code,
+                name = CodeTable.OTHER_INFO.inKorean,
                 value = if (!otherCostInformation.value.isNullOrEmpty()) otherCostInformation.value else null
             ),
         )

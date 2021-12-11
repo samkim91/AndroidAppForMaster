@@ -8,12 +8,12 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
+import kr.co.soogong.master.data.common.CodeTable
 import kr.co.soogong.master.data.dto.profile.PortfolioDto
 import kr.co.soogong.master.domain.usecase.auth.GetMasterIdFromSharedUseCase
 import kr.co.soogong.master.domain.usecase.profile.GetPortfolioUseCase
 import kr.co.soogong.master.domain.usecase.profile.SavePortfolioUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
-import kr.co.soogong.master.data.model.profile.PortfolioCodeTable
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -21,7 +21,7 @@ import javax.inject.Inject
 class PortfolioViewModel @Inject constructor(
     private val getMasterIdFromSharedUseCase: GetMasterIdFromSharedUseCase,
     private val savePortfolioUseCase: SavePortfolioUseCase,
-    private val getPortfolioUseCase: GetPortfolioUseCase
+    private val getPortfolioUseCase: GetPortfolioUseCase,
 ) : BaseViewModel() {
     val id = MutableLiveData(-1)
     val title = MutableLiveData<String>()
@@ -31,7 +31,7 @@ class PortfolioViewModel @Inject constructor(
 
     fun requestPortfolio(portfolioId: Int) {
         Timber.tag(TAG).d("requestPortfolio: $portfolioId")
-        getPortfolioUseCase(portfolioId, PortfolioCodeTable.code)
+        getPortfolioUseCase(portfolioId, CodeTable.PORTFOLIO.code)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
@@ -54,7 +54,7 @@ class PortfolioViewModel @Inject constructor(
                 masterId = getMasterIdFromSharedUseCase(),
                 title = title.value,
                 description = description.value,
-                type = PortfolioCodeTable.code,
+                type = CodeTable.PORTFOLIO.code,
             ),
             beforeImageUri = imageBeforeJob.value,
             afterImageUri = imageAfterJob.value,

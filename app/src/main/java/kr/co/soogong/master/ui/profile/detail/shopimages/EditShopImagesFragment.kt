@@ -7,8 +7,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import gun0912.tedimagepicker.builder.TedImagePicker
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.common.ButtonTheme
+import kr.co.soogong.master.data.common.CodeTable
 import kr.co.soogong.master.data.dto.AttachmentDto
-import kr.co.soogong.master.data.model.profile.ApprovedCodeTable
 import kr.co.soogong.master.databinding.FragmentEditShopImagesBinding
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.dialog.popup.CustomDialog
@@ -57,7 +57,9 @@ class EditShopImagesFragment : BaseFragment<FragmentEditShopImagesBinding>(
                                 resources.getString(R.string.maximum_images_count)
                             )
                             .startMultiImage { uriList ->
-                                if (FileHelper.isImageExtension(uriList, requireContext()) == false) {
+                                if (FileHelper.isImageExtension(uriList,
+                                        requireContext()) == false
+                                ) {
                                     requireContext().toast(getString(R.string.invalid_image_extension))
                                     return@startMultiImage
                                 }
@@ -84,7 +86,7 @@ class EditShopImagesFragment : BaseFragment<FragmentEditShopImagesBinding>(
             }
 
             (activity as EditProfileContainerActivity).setSaveButtonClickListener {
-                if (viewModel.profile.value?.approvedStatus == ApprovedCodeTable.code) {
+                if (viewModel.profile.value?.approvedStatus == CodeTable.APPROVED.code) {
                     CustomDialog.newInstance(
                         DialogData.getConfirmingForRequiredDialogData(requireContext()))
                         .let {

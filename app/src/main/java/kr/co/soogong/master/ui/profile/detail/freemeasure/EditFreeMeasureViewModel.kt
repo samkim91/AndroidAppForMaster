@@ -3,10 +3,8 @@ package kr.co.soogong.master.ui.profile.detail.freemeasure
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kr.co.soogong.master.data.common.CodeTable
 import kr.co.soogong.master.data.dto.profile.MasterDto
-import kr.co.soogong.master.data.model.profile.CodeTable
-import kr.co.soogong.master.data.model.profile.ImpossibleCodeTable
-import kr.co.soogong.master.data.model.profile.PossibleCodeTable
 import kr.co.soogong.master.domain.usecase.profile.GetProfileUseCase
 import kr.co.soogong.master.domain.usecase.profile.SaveMasterUseCase
 import kr.co.soogong.master.domain.usecase.profile.UpdateFreeMeasureYnUseCase
@@ -22,7 +20,7 @@ class EditFreeMeasureViewModel @Inject constructor(
 ) : EditProfileContainerViewModel(getProfileUseCase, saveMasterUseCase) {
 
     private val _freeMeasureOptions =
-        MutableLiveData(listOf(PossibleCodeTable, ImpossibleCodeTable))
+        MutableLiveData(listOf(CodeTable.POSSIBLE, CodeTable.IMPOSSIBLE))
     val freeMeasureOptions: LiveData<List<CodeTable>>
         get() = _freeMeasureOptions
 

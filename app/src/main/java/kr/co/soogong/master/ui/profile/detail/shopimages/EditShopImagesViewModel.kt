@@ -1,10 +1,9 @@
 package kr.co.soogong.master.ui.profile.detail.shopimages
 
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kr.co.soogong.master.data.common.CodeTable
 import kr.co.soogong.master.data.dto.AttachmentDto
 import kr.co.soogong.master.data.dto.profile.MasterDto
-import kr.co.soogong.master.data.model.profile.ApprovedCodeTable
-import kr.co.soogong.master.data.model.profile.RequestApproveCodeTable
 import kr.co.soogong.master.domain.usecase.profile.GetProfileUseCase
 import kr.co.soogong.master.domain.usecase.profile.SaveMasterUseCase
 import kr.co.soogong.master.ui.profile.detail.EditProfileContainerViewModel
@@ -42,7 +41,7 @@ class EditShopImagesViewModel @Inject constructor(
                     uid = profile.value?.uid,
                     shopImages = shopImages.value,
                     updateShopImagesYn = true,
-                    approvedStatus = if (profile.value?.approvedStatus == ApprovedCodeTable.code) RequestApproveCodeTable.code else null,
+                    approvedStatus = if (profile.value?.approvedStatus == CodeTable.APPROVED.code) CodeTable.REQUEST_APPROVE.code else null,
                 ),
                 shopImagesUris = list.map {
                     it.uri!!

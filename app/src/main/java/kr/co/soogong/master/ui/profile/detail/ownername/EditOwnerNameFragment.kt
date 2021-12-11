@@ -5,7 +5,7 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.model.profile.ApprovedCodeTable
+import kr.co.soogong.master.data.common.CodeTable
 import kr.co.soogong.master.databinding.FragmentEditOwnerNameBinding
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.dialog.popup.CustomDialog
@@ -45,7 +45,7 @@ class EditOwnerNameFragment :
 
                 if (ownerName.alertVisible) return@setOnClickListener
 
-                if (viewModel.profile.value?.approvedStatus == ApprovedCodeTable.code) {
+                if (viewModel.profile.value?.approvedStatus == CodeTable.APPROVED.code) {
                     CustomDialog.newInstance(
                         DialogData.getConfirmingForRequiredDialogData(requireContext()))
                         .let {
