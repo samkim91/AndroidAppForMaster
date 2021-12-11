@@ -7,9 +7,8 @@ import androidx.fragment.app.viewModels
 import com.google.android.material.chip.Chip
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
+import kr.co.soogong.master.data.common.CodeTable
 import kr.co.soogong.master.data.dto.profile.MasterConfigDto
-import kr.co.soogong.master.data.model.profile.CodeTable
-import kr.co.soogong.master.data.model.profile.OtherFlexibleOptionCodeTable
 import kr.co.soogong.master.databinding.FragmentEditOtherFlexibleOptionBinding
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.profile.detail.EditProfileContainerViewModel.Companion.REQUEST_FAILED
@@ -85,8 +84,8 @@ class EditOtherFlexibleOptionFragment : BaseFragment<FragmentEditOtherFlexibleOp
 
                 MasterConfigDto(
                     id = viewModel.otherFlexibleOption.value?.find { masterConfigDto -> masterConfigDto.name == chip.text.toString() }?.id,
-                    groupCode = OtherFlexibleOptionCodeTable.code,
-                    code = CodeTable.findCodeTableByKorean(chip.text.toString()).code,
+                    groupCode = CodeTable.OTHER_FLEXIBLE_OPTION.code,
+                    code = CodeTable.getCodeTableByKorean(chip.text.toString())?.code,
                     name = chip.text.toString(),
                     value = if (chip.isChecked) "1" else "0"
                 )

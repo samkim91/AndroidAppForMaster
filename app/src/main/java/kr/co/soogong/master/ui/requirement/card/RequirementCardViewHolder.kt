@@ -8,8 +8,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.chip.Chip
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.model.profile.NotApprovedCodeTable
-import kr.co.soogong.master.data.model.profile.RequestApproveCodeTable
+import kr.co.soogong.master.data.common.CodeTable
 import kr.co.soogong.master.data.model.requirement.RequirementCard
 import kr.co.soogong.master.data.model.requirement.RequirementStatus
 import kr.co.soogong.master.databinding.ViewHolderRequirementCardBinding
@@ -80,7 +79,7 @@ open class RequirementCardViewHolder(
         viewModel.masterSimpleInfo.value?.approvedStatus.let {
             when (it) {
                 // 미승인 상태이면, 필수정보를 채우도록 이동
-                NotApprovedCodeTable.code ->
+                CodeTable.NOT_APPROVED.code ->
                     CustomDialog.newInstance(
                         DialogData.getAskingFillProfileDialogData(context),
                     ).let { dialog ->
@@ -97,7 +96,7 @@ open class RequirementCardViewHolder(
                         dialog.show(fragmentManager, dialog.tag)
                     }
                 // 승인요청 상태이면, 승인될 때까지 기다리라는 문구
-                RequestApproveCodeTable.code ->
+                CodeTable.REQUEST_APPROVE.code ->
                     CustomDialog.newInstance(
                         DialogData.getWaitingUntilApprovalDialogData(context)
                     ).let { dialog ->

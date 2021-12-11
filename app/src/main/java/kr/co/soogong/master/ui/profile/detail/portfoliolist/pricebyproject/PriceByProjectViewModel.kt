@@ -5,12 +5,12 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
+import kr.co.soogong.master.data.common.CodeTable
 import kr.co.soogong.master.data.dto.profile.PortfolioDto
 import kr.co.soogong.master.domain.usecase.auth.GetMasterIdFromSharedUseCase
 import kr.co.soogong.master.domain.usecase.profile.GetPortfolioUseCase
 import kr.co.soogong.master.domain.usecase.profile.SavePortfolioUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
-import kr.co.soogong.master.data.model.profile.PriceByProjectCodeTable
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -49,7 +49,7 @@ class PriceByProjectViewModel @Inject constructor(
                 masterId = getMasterIdFromSharedUseCase(),
                 title = title.value!!,
                 description = description.value,
-                type = PriceByProjectCodeTable.code,
+                type = CodeTable.PRICE_BY_PROJECT.code,
                 price = price.value?.replace(",", "")?.toInt(),
             ),
             beforeImageUri = null,

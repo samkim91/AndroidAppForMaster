@@ -4,19 +4,19 @@ import android.view.LayoutInflater
 import com.google.android.material.chip.Chip
 import kr.co.soogong.master.R
 import kr.co.soogong.master.atomic.molecules.TitleChipGroup
-import kr.co.soogong.master.data.model.profile.*
+import kr.co.soogong.master.data.common.CodeTable
 import kr.co.soogong.master.utility.extension.dp
 
 object OtherFlexibleOptionChipGroupHelper {
     private val otherFlexibleOption =
         listOf(
-            MaskCodeTable.inKorean,
-            OvershoesCodeTable.inKorean,
-            DisposalCodeTable.inKorean,
-            ElevatorProtectionCodeTable.inKorean,
-            IntimeCodeTable.inKorean,
-            AsCodeTable.inKorean,
-            NoiseCodeTable.inKorean,
+            CodeTable.MASK.inKorean,
+            CodeTable.OVERSHOES.inKorean,
+            CodeTable.DISPOSAL.inKorean,
+            CodeTable.ELEVATOR_PROTECTION.inKorean,
+            CodeTable.IN_TIME.inKorean,
+            CodeTable.WARRANTY.inKorean,
+            CodeTable.NOISE.inKorean,
         )
 
     operator fun invoke(

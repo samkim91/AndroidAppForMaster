@@ -4,9 +4,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.model.profile.ApprovedCodeTable
-import kr.co.soogong.master.data.model.profile.NotApprovedCodeTable
-import kr.co.soogong.master.data.model.profile.RequestApproveCodeTable
+import kr.co.soogong.master.data.common.CodeTable
 import kr.co.soogong.master.databinding.ActivityEditRequiredInformationBinding
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.ui.dialog.bottomSheetDialogRecyclerView.BottomSheetDialogBundle
@@ -83,7 +81,7 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
                     sheetDialogBundle = BottomSheetDialogBundle.getCareerYearBundle()
                 ).let {
                     it.setItemClickListener { dialogItem ->
-                        if (viewModel.profile.value?.approvedStatus == ApprovedCodeTable.code) {
+                        if (viewModel.profile.value?.approvedStatus == CodeTable.APPROVED.code) {
                             CustomDialog.newInstance(DialogData.getConfirmingForRequiredDialogData(
                                 this@EditRequiredInformationActivity))
                                 .let { dialog ->
@@ -189,11 +187,11 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
             when (event) {
                 MASTER_APPROVED_STATUS -> {
                     when (value) {
-                        NotApprovedCodeTable.code -> {
+                        CodeTable.NOT_APPROVED.code -> {
                             setRequirementInformationPercentage(this, binding, viewModel)
                             setLayoutForNotApprovedMaster(this, binding)
                         }
-                        RequestApproveCodeTable.code -> {
+                        CodeTable.REQUEST_APPROVE.code -> {
                             setRequirementInformationPercentage(this, binding, viewModel)
                             setLayoutForRequestApproveMaster(this, binding)
                         }

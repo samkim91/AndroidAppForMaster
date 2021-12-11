@@ -9,6 +9,7 @@ import gun0912.tedimagepicker.builder.TedImagePicker
 import kr.co.soogong.master.R
 import kr.co.soogong.master.atomic.molecules.SubheadlineChipGroup
 import kr.co.soogong.master.data.common.ButtonTheme
+import kr.co.soogong.master.data.common.CodeTable
 import kr.co.soogong.master.data.dto.AttachmentDto
 import kr.co.soogong.master.data.model.profile.*
 import kr.co.soogong.master.databinding.FragmentEditBusinessUnitInformationBinding
@@ -100,13 +101,13 @@ class EditBusinessUnitInformationFragment :
                     }
                 })
 
-                if (viewModel.businessType.value == FreelancerCodeTable) {
+                if (viewModel.businessType.value == CodeTable.FREELANCER) {
                     if (!stiShopName.error.isNullOrBlank() || !stiBusinessNumber.error.isNullOrBlank()) return@setSaveButtonClickListener
                 } else {
                     if (!stiBusinessName.error.isNullOrBlank() || !stiShopName.error.isNullOrBlank() || !stiBusinessNumber.error.isNullOrBlank()) return@setSaveButtonClickListener
                 }
 
-                if (viewModel.profile.value?.approvedStatus == ApprovedCodeTable.code) {
+                if (viewModel.profile.value?.approvedStatus == CodeTable.APPROVED.code) {
                     CustomDialog.newInstance(
                         dialogData = DialogData.getConfirmingForRequiredDialogData(requireContext()))
                         .let {
@@ -154,7 +155,7 @@ class EditBusinessUnitInformationFragment :
         Timber.tag(TAG).d("setLayoutByBusinessType: ${businessType.code}")
         with(binding) {
             when (businessType) {
-                FreelancerCodeTable -> {        // 프리랜서일 경우 레이아웃
+                CodeTable.FREELANCER -> {        // 프리랜서일 경우 레이아웃
                     stiBusinessName.isVisible = false
                     stiBusinessNumber.subheadline = getString(R.string.type_birthday)
                     stiBusinessNumber.hint = getString(R.string.type_birthday_hint)

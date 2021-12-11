@@ -9,7 +9,7 @@ import com.google.android.material.chip.Chip
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.common.ButtonTheme
-import kr.co.soogong.master.data.model.profile.ApprovedCodeTable
+import kr.co.soogong.master.data.common.CodeTable
 import kr.co.soogong.master.databinding.FragmentEditMajorBinding
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.dialog.popup.CustomDialog
@@ -68,7 +68,7 @@ class EditMajorFragment : BaseFragment<FragmentEditMajorBinding>(
                 if (!sbbSelectMajors.error.isNullOrEmpty()) return@setSaveButtonClickListener
 
                 // 시공 가능 업종을 수정하면, 프로필의 승인상태가 변경된다. 따라서 마스터 승인상태에 따라 아래 코드가 실행
-                if (viewModel.profile.value?.approvedStatus == ApprovedCodeTable.code) {
+                if (viewModel.profile.value?.approvedStatus == CodeTable.APPROVED.code) {
                     CustomDialog.newInstance(
                         DialogData.getConfirmingForRequiredDialogData(requireContext()))
                         .let {

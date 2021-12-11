@@ -5,7 +5,7 @@ import androidx.databinding.BindingAdapter
 import androidx.databinding.InverseBindingAdapter
 import androidx.databinding.InverseBindingListener
 import com.google.android.material.chip.Chip
-import kr.co.soogong.master.data.model.profile.CodeTable
+import kr.co.soogong.master.data.common.CodeTable
 
 object SubheadlineChipGroupReverseBinding {
     @JvmStatic
@@ -40,7 +40,7 @@ object SubheadlineChipGroupReverseBinding {
     @InverseBindingAdapter(attribute = "checkedChipCode", event = "checkedChipCodeAttrChanged")
     fun getSubheadlineChipGroupCheckedChip(view: SubheadlineChipGroup): CodeTable? {
         return view.container.findViewById<Chip>(view.container.checkedChipId)?.run {
-            CodeTable.findCodeTableByKorean(this.text.toString())
+            CodeTable.getCodeTableByKorean(this.text.toString())
         }
     }
 }

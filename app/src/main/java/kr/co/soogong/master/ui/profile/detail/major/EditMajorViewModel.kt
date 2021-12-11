@@ -1,10 +1,9 @@
 package kr.co.soogong.master.ui.profile.detail.major
 
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kr.co.soogong.master.data.common.CodeTable
 import kr.co.soogong.master.data.dto.profile.MasterDto
 import kr.co.soogong.master.data.dto.profile.ProjectDto
-import kr.co.soogong.master.data.model.profile.ApprovedCodeTable
-import kr.co.soogong.master.data.model.profile.RequestApproveCodeTable
 import kr.co.soogong.master.domain.usecase.profile.GetProfileUseCase
 import kr.co.soogong.master.domain.usecase.profile.SaveMasterUseCase
 import kr.co.soogong.master.ui.profile.detail.EditProfileContainerViewModel
@@ -39,7 +38,7 @@ class EditMajorViewModel @Inject constructor(
                     id = profile.value?.id,
                     uid = profile.value?.uid,
                     projects = projects.value,
-                    approvedStatus = if (profile.value?.approvedStatus == ApprovedCodeTable.code) RequestApproveCodeTable.code else null,
+                    approvedStatus = if (profile.value?.approvedStatus == CodeTable.APPROVED.code) CodeTable.REQUEST_APPROVE.code else null,
                 )
             )
         }

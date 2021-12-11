@@ -10,8 +10,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import gun0912.tedimagepicker.builder.TedImagePicker
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.common.ButtonTheme
+import kr.co.soogong.master.data.common.CodeTable
 import kr.co.soogong.master.data.common.ColorTheme
-import kr.co.soogong.master.data.model.profile.ApprovedCodeTable
 import kr.co.soogong.master.databinding.FragmentProfileBinding
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.base.BaseViewModel.Companion.DISMISS_LOADING
@@ -130,7 +130,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
                     sheetDialogBundle = BottomSheetDialogBundle.getCareerYearBundle()
                 ).let {
                     it.setItemClickListener { dialogItem ->
-                        if (viewModel.profile.value?.approvedStatus == ApprovedCodeTable.code) {
+                        if (viewModel.profile.value?.approvedStatus == CodeTable.APPROVED.code) {
                             CustomDialog.newInstance(DialogData.getConfirmingForRequiredDialogData(
                                 requireContext()))
                                 .let { dialog ->
@@ -270,7 +270,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
 
                         viewModel.profileImage.value = uri
 
-                        if (viewModel.profile.value?.approvedStatus == ApprovedCodeTable.code) {
+                        if (viewModel.profile.value?.approvedStatus == CodeTable.APPROVED.code) {
                             CustomDialog.newInstance(
                                 DialogData.getConfirmingForRequiredDialogData(requireContext()))
                                 .let {

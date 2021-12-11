@@ -9,7 +9,7 @@ import android.view.View
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.model.profile.CodeTable
+import kr.co.soogong.master.data.common.CodeTable
 import kr.co.soogong.master.utility.TimeHelper
 import kr.co.soogong.master.utility.TimeHelper.WITHIN_24_HOURS
 import kr.co.soogong.master.utility.TimeHelper.WITHIN_90_MINUTES
@@ -40,7 +40,7 @@ fun TextView.setPrice(price: Int?) {
 @BindingAdapter("subscriptionPlan")
 fun TextView.setSubscriptionPlan(subscriptionPlan: String?) {
     if (!subscriptionPlan.isNullOrEmpty()) {
-        text = CodeTable.findSubscriptionPlanByCode(subscriptionPlan).inKorean
+        text = CodeTable.getCodeTableByCode(subscriptionPlan)?.inKorean
     }
 }
 
