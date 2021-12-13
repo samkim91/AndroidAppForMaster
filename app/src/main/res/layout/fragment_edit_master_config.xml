@@ -7,7 +7,7 @@
 
         <variable
             name="vm"
-            type="kr.co.soogong.master.ui.profile.detail.flexiblecost.EditMasterConfigViewModel" />
+            type="kr.co.soogong.master.ui.profile.detail.masterconfig.EditMasterConfigViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

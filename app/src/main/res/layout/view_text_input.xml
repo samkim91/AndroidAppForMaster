@@ -25,6 +25,7 @@
                 android:layout_height="wrap_content"
                 android:padding="@dimen/gap_14"
                 android:singleLine="true"
+                android:textColor="@color/black"
                 tools:text="내용" />
         </com.google.android.material.textfield.TextInputLayout>
     </merge>

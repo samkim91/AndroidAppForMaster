@@ -30,6 +30,7 @@
                 android:paddingTop="@dimen/gap_14"
                 android:paddingEnd="@dimen/gap_18"
                 android:paddingBottom="@dimen/gap_14"
+                android:textColor="@color/black"
                 tools:text="긴 내용" />
         </com.google.android.material.textfield.TextInputLayout>
     </merge>
