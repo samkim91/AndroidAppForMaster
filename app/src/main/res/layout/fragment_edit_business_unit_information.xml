@@ -35,9 +35,11 @@
             android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"
             app:checkedChipCode="@={vm.businessType}"
+            app:chipRequired="@{true}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:singleChip="@{true}"
             app:subheadline="@{@string/select_business_type}" />
 
         <kr.co.soogong.master.atomic.molecules.SubheadlineTextInput

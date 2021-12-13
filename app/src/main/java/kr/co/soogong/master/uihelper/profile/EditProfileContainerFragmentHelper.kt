@@ -4,7 +4,7 @@ import androidx.fragment.app.Fragment
 import kr.co.soogong.master.ui.profile.detail.address.EditAddressFragment
 import kr.co.soogong.master.ui.profile.detail.businessunitinformation.EditBusinessUnitInformationFragment
 import kr.co.soogong.master.ui.profile.detail.email.EditEmailFragment
-import kr.co.soogong.master.ui.profile.detail.flexiblecost.EditFlexibleCostFragment
+import kr.co.soogong.master.ui.profile.detail.flexiblecost.EditMasterConfigFragment
 import kr.co.soogong.master.ui.profile.detail.freemeasure.EditFreeMeasureFragment
 import kr.co.soogong.master.ui.profile.detail.introduction.EditIntroductionFragment
 import kr.co.soogong.master.ui.profile.detail.major.EditMajorFragment
@@ -24,7 +24,7 @@ object EditProfileContainerFragmentHelper {
     const val ADD_PORTFOLIO = "포트폴리오 추가하기"
     const val EDIT_PRICE_BY_PROJECTS = "시공 종류별 가격 수정하기"
     const val ADD_PRICE_BY_PROJECTS = "시공 종류별 가격 추가하기"
-    const val EDIT_FLEXIBLE_COST = "현장 가격 변동 요인 등록·수정하기"
+
     const val EDIT_OTHER_FLEXIBLE_OPTION = "기타 변동 가능사항 등록·수정하기"
     const val EDIT_EMAIL = "이메일 등록·수정하기"
 
@@ -36,6 +36,7 @@ object EditProfileContainerFragmentHelper {
     const val EDIT_PHONE_NUMBER = "휴대폰 번호"
     const val EDIT_ADDRESS = "활동 지역"
     const val EDIT_MAJOR = "시공 가능 업종"
+    const val EDIT_MASTER_CONFIG = "기타 변동 요인"
 
     fun getFragment(pageName: String, itemId: Int?): Fragment =
         when (pageName) {
@@ -47,7 +48,7 @@ object EditProfileContainerFragmentHelper {
                 EDIT_PRICE_BY_PROJECTS,
                 itemId
             )
-            EDIT_FLEXIBLE_COST -> EditFlexibleCostFragment.newInstance()
+            EDIT_MASTER_CONFIG -> EditMasterConfigFragment.newInstance()
             EDIT_OTHER_FLEXIBLE_OPTION -> EditOtherFlexibleOptionFragment.newInstance()
             EDIT_EMAIL -> EditEmailFragment.newInstance()
 

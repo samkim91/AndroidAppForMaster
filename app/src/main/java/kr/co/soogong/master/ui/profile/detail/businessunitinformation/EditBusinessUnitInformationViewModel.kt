@@ -1,6 +1,5 @@
 package kr.co.soogong.master.ui.profile.detail.businessunitinformation
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kr.co.soogong.master.data.common.CodeTable
@@ -19,12 +18,9 @@ class EditBusinessUnitInformationViewModel @Inject constructor(
     saveMasterUseCase: SaveMasterUseCase,
 ) : EditProfileContainerViewModel(getProfileUseCase, saveMasterUseCase) {
 
-    private val _businessTypes =
-        MutableLiveData(listOf(CodeTable.SOLE, CodeTable.CORPORATE, CodeTable.FREELANCER))
-    val businessTypes: LiveData<List<CodeTable>>
-        get() = _businessTypes
+    val businessTypes = listOf(CodeTable.SOLE, CodeTable.CORPORATE, CodeTable.FREELANCER)
 
-    val businessType = MutableLiveData<CodeTable>(_businessTypes.value?.get(0))
+    val businessType = MutableLiveData(businessTypes[0])
     val businessName = MutableLiveData("")
     val shopName = MutableLiveData("")
     val businessNumber = MutableLiveData("")
@@ -38,7 +34,7 @@ class EditBusinessUnitInformationViewModel @Inject constructor(
             profile.value = it
             it.requiredInformation?.businessUnitInformation?.businessType?.let { type ->
                 businessType.value =
-                    _businessTypes.value?.find { mType -> mType.inKorean == type }
+                    businessTypes.find { mType -> mType.inKorean == type }
                 it.requiredInformation.businessUnitInformation.businessName?.let { name ->
                     businessName.postValue(name)
                 }

@@ -3,7 +3,7 @@ package kr.co.soogong.master.network.requirement
 import com.google.gson.JsonObject
 import io.reactivex.Single
 import kr.co.soogong.master.contract.HttpContract
-import kr.co.soogong.master.data.dto.common.Code
+import kr.co.soogong.master.data.dto.common.CodeDto
 import kr.co.soogong.master.data.dto.requirement.CustomerRequest
 import kr.co.soogong.master.data.dto.requirement.RequirementDto
 import kr.co.soogong.master.data.dto.requirement.estimation.EstimationDto
@@ -59,7 +59,7 @@ interface RequirementInterface {
     @GET(HttpContract.GET_CANCELED_REASONS)
     fun getCanceledReasons(
         @Query("groupCodes") groupCodes: List<String>,
-    ): Single<List<Code>>
+    ): Single<List<CodeDto>>
 
     @POST(HttpContract.CALL_TO_CLIENT)
     fun callToClient(@Body data: HashMap<String, Any>): Single<Boolean>

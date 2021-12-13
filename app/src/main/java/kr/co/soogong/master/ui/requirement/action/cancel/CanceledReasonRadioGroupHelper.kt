@@ -4,15 +4,15 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.widget.RadioButton
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.dto.common.Code
 import kr.co.soogong.master.atomic.molecules.TitleRadioGroup
+import kr.co.soogong.master.data.dto.common.CodeDto
 import kr.co.soogong.master.utility.extension.dp
 
 object CanceledReasonRadioGroupHelper {
     operator fun invoke(
         context: Context,
         radioGroup: TitleRadioGroup,
-        canceledReasons: List<Code>,
+        canceledReasons: List<CodeDto>,
     ) {
         canceledReasons.map { reason ->
             RadioButton(context).apply {

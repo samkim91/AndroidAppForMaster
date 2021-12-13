@@ -19,7 +19,7 @@ object SubheadlineChipGroupReverseBinding {
         if (oldChip?.text != checkedChipCode?.inKorean) {
             view.container.children.find { chip ->
                 (chip as Chip).text.toString() == checkedChipCode?.inKorean
-            }.let { chip ->
+            }?.let { chip ->
                 (chip as Chip).isChecked = true
             }
         }
@@ -43,4 +43,39 @@ object SubheadlineChipGroupReverseBinding {
             CodeTable.getCodeTableByKorean(this.text.toString())
         }
     }
+
+
+//    @JvmStatic
+//    @BindingAdapter("checkedChipsCode")
+//    fun setSubheadlineChipGroupCheckedChips(
+//        view: SubheadlineChipGroup,
+//        checkedChipsCode: List<CodeTable>?,
+//    ) {
+//        checkedChipsCode?.map { checkedChipCode ->
+//            view.container.children.find { chip ->
+//                (chip as Chip).text.toString() == checkedChipCode.inKorean
+//            }?.run { (this as Chip).isChecked = true }
+//        }
+//    }
+//
+//    @JvmStatic
+//    @BindingAdapter("checkedChipsCodeAttrChanged")
+//    fun setSubheadlineChipGroupCheckedChipsInverseBindingListener(
+//        view: SubheadlineChipGroup,
+//        listener: InverseBindingListener?,
+//    ) {
+//        view.container.setOnCheckedChangeListener { _, _ ->
+//            listener?.onChange()
+//        }
+//    }
+//
+//    @JvmStatic
+//    @InverseBindingAdapter(attribute = "checkedChipsCode", event = "checkedChipsCodeAttrChanged")
+//    fun getSubheadlineChipGroupCheckedChips(view: SubheadlineChipGroup): List<CodeTable?> {
+//        return view.container.checkedChipIds.map { chipId ->
+//            view.container.findViewById<Chip>(chipId).run {
+//                CodeTable.getCodeTableByKorean(this.text.toString())
+//            }
+//        }
+//    }
 }

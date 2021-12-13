@@ -7,7 +7,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import kr.co.soogong.master.data.dto.common.Code
+import kr.co.soogong.master.data.dto.common.CodeDto
 import kr.co.soogong.master.data.dto.requirement.RequirementDto
 import kr.co.soogong.master.data.dto.requirement.estimation.EstimationDto
 import kr.co.soogong.master.data.dto.requirement.repair.RepairDto
@@ -37,7 +37,7 @@ class CancelViewModel @Inject constructor(
     val requirement: LiveData<RequirementDto>
         get() = _requirement
 
-    val canceledReasons = MutableLiveData<List<Code>>()
+    val canceledReasons = MutableLiveData<List<CodeDto>>()
 
     val canceledCode = MutableLiveData("")
     val canceledDescription = MutableLiveData("")
