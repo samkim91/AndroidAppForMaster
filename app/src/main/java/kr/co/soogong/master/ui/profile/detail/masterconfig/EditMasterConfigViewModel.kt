@@ -1,4 +1,4 @@
-package kr.co.soogong.master.ui.profile.detail.flexiblecost
+package kr.co.soogong.master.ui.profile.detail.masterconfig
 
 import androidx.lifecycle.MutableLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel

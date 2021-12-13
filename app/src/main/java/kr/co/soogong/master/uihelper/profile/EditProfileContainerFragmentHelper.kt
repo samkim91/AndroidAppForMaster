@@ -4,11 +4,10 @@ import androidx.fragment.app.Fragment
 import kr.co.soogong.master.ui.profile.detail.address.EditAddressFragment
 import kr.co.soogong.master.ui.profile.detail.businessunitinformation.EditBusinessUnitInformationFragment
 import kr.co.soogong.master.ui.profile.detail.email.EditEmailFragment
-import kr.co.soogong.master.ui.profile.detail.flexiblecost.EditMasterConfigFragment
 import kr.co.soogong.master.ui.profile.detail.freemeasure.EditFreeMeasureFragment
 import kr.co.soogong.master.ui.profile.detail.introduction.EditIntroductionFragment
 import kr.co.soogong.master.ui.profile.detail.major.EditMajorFragment
-import kr.co.soogong.master.ui.profile.detail.otherflexibleoption.EditOtherFlexibleOptionFragment
+import kr.co.soogong.master.ui.profile.detail.masterconfig.EditMasterConfigFragment
 import kr.co.soogong.master.ui.profile.detail.ownername.EditOwnerNameFragment
 import kr.co.soogong.master.ui.profile.detail.phonenumber.EditPhoneNumberFragment
 import kr.co.soogong.master.ui.profile.detail.portfoliolist.portfolio.PortfolioFragment
@@ -25,7 +24,6 @@ object EditProfileContainerFragmentHelper {
     const val EDIT_PRICE_BY_PROJECTS = "시공 종류별 가격 수정하기"
     const val ADD_PRICE_BY_PROJECTS = "시공 종류별 가격 추가하기"
 
-    const val EDIT_OTHER_FLEXIBLE_OPTION = "기타 변동 가능사항 등록·수정하기"
     const val EDIT_EMAIL = "이메일 등록·수정하기"
 
     const val EDIT_INTRODUCTION = "업체 소개"
@@ -49,7 +47,6 @@ object EditProfileContainerFragmentHelper {
                 itemId
             )
             EDIT_MASTER_CONFIG -> EditMasterConfigFragment.newInstance()
-            EDIT_OTHER_FLEXIBLE_OPTION -> EditOtherFlexibleOptionFragment.newInstance()
             EDIT_EMAIL -> EditEmailFragment.newInstance()
 
             EDIT_INTRODUCTION -> EditIntroductionFragment.newInstance()

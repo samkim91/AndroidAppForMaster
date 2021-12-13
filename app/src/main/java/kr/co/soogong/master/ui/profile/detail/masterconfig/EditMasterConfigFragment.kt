@@ -1,4 +1,4 @@
-package kr.co.soogong.master.ui.profile.detail.flexiblecost
+package kr.co.soogong.master.ui.profile.detail.masterconfig
 
 import android.os.Bundle
 import android.view.View
