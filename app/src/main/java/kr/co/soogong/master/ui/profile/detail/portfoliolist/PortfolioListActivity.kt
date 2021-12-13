@@ -6,7 +6,7 @@ import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.common.ButtonTheme
-import kr.co.soogong.master.databinding.ActivityEditPortfolioContainerBinding
+import kr.co.soogong.master.databinding.ActivityPortfolioListBinding
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.ui.dialog.popup.CustomDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData
@@ -23,8 +23,8 @@ import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
 
 @AndroidEntryPoint
-class PortfolioListActivity : BaseActivity<ActivityEditPortfolioContainerBinding>(
-    R.layout.activity_edit_portfolio_container
+class PortfolioListActivity : BaseActivity<ActivityPortfolioListBinding>(
+    R.layout.activity_portfolio_list
 ) {
     private val viewModel: PortfolioListViewModel by viewModels()
 
@@ -93,6 +93,7 @@ class PortfolioListActivity : BaseActivity<ActivityEditPortfolioContainerBinding
     private fun setRecyclerview() {
         binding.rvItems.adapter =
             PortfolioListAdapter(
+                context = this,
                 buttonLeftClickListener = { id ->
                     CustomDialog.newInstance(
                         dialogData = when (viewModel.pageName) {

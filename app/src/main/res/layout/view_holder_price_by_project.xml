@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:bind="http://schemas.android.com/bind"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -48,50 +47,46 @@
                 style="@style/subheadline.regular"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:ellipsize="end"
                 android:text="@{data.title}"
                 android:textColor="@color/grey_3"
-                android:ellipsize="end"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="루버 방충망 설치" />
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cv_before_image"
-                android:layout_width="@dimen/gap_100"
-                android:layout_height="@dimen/gap_100"
-                android:layout_marginTop="@dimen/gap_12"
-                app:cardCornerRadius="@dimen/gap_10"
-                app:cardElevation="@dimen/gap_0"
-                app:layout_constraintStart_toStartOf="@id/tv_subheadline"
-                app:layout_constraintTop_toBottomOf="@id/tv_subheadline">
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_price"
+                style="@style/subheadline.regular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/gap_14"
+                android:ellipsize="end"
+                android:textColor="@color/grey_3"
+                app:convertToPrice="@{data.price}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_subheadline"
+                tools:text="50,000원" />
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/before_repair_image_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    bind:image_url="@{data.beforeImage.url}"
-                    tools:background="@drawable/ic_empty_image" />
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cv_after_image"
-                android:layout_width="@dimen/gap_100"
-                android:layout_height="@dimen/gap_100"
-                android:layout_marginStart="@dimen/gap_14"
-                app:cardCornerRadius="@dimen/gap_10"
-                app:cardElevation="@dimen/gap_0"
-                app:layout_constraintStart_toEndOf="@id/cv_before_image"
-                app:layout_constraintTop_toTopOf="@id/cv_before_image">
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/after_repair_image_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    bind:image_url="@{data.afterImage.url}"
-                    tools:background="@drawable/ic_empty_image" />
-            </androidx.cardview.widget.CardView>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_description"
+                style="@style/subheadline.regular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/gap_14"
+                android:breakStrategy="simple"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="@{data.description}"
+                android:textColor="@color/grey_3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_price"
+                tools:text="내용입력내용입력내용입력내용입력내용입력내용입력내용입력내용입력내용입력내용입력" />
 
             <kr.co.soogong.master.atomic.atoms.ButtonMedium
                 android:id="@+id/bm_left_button"
@@ -101,7 +96,7 @@
                 app:buttonTheme="@{buttonThemeLeft}"
                 app:layout_constraintEnd_toStartOf="@id/bm_right_button"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cv_before_image" />
+                app:layout_constraintTop_toBottomOf="@id/tv_description" />
 
             <kr.co.soogong.master.atomic.atoms.ButtonMedium
                 android:id="@+id/bm_right_button"
@@ -112,7 +107,7 @@
                 app:buttonTheme="@{buttonThemeRight}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/bm_left_button"
-                app:layout_constraintTop_toBottomOf="@id/cv_before_image" />
+                app:layout_constraintTop_toBottomOf="@id/tv_description" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </layout>
