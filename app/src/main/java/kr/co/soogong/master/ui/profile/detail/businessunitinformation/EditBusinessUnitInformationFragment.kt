@@ -129,7 +129,7 @@ class EditBusinessUnitInformationFragment :
             .initChips(requireContext(),
                 layoutInflater,
                 binding.scgBusinessType,
-                viewModel.businessTypes.value?.map { it.inKorean }!!)
+                viewModel.businessTypes.map { it.inKorean })
     }
 
     private fun registerEventObserve() {

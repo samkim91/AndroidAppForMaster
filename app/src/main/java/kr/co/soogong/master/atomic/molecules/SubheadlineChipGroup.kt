@@ -26,6 +26,18 @@ class SubheadlineChipGroup @JvmOverloads constructor(
     val container: ChipGroup
         get() = binding.cgContainer
 
+    var singleChip: Boolean = true
+        set(value) {
+            field = value
+            container.isSingleSelection = value
+        }
+
+    var chipRequired: Boolean = false
+        set(value) {
+            field = value
+            container.isSelectionRequired = value
+        }
+
     companion object {
 
         fun initChips(

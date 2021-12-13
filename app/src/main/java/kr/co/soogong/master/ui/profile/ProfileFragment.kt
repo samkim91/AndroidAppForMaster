@@ -25,6 +25,7 @@ import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_BUSINESS_UNIT_INFORMATION
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_INTRODUCTION
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_MAJOR
+import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_MASTER_CONFIG
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_PHONE_NUMBER
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_SHOP_IMAGES
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_WARRANTY_INFORMATION
@@ -165,6 +166,9 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
 
             hbcFreeMeasure.onButtonClick =
                 View.OnClickListener { startActivityCommonCode(FREE_MEASURE) }
+
+            hbcMasterConfigs.onButtonClick =
+                View.OnClickListener { startActivityCommonCode(EDIT_MASTER_CONFIG) }
 
 //            editRequiredInfo.setOnClickListener {
 //                startActivity(

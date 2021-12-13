@@ -347,7 +347,12 @@
     <string name="detail_address">상세주소</string>
 
     <string name="select_free_measure">방문 실측이 무료일 경우에만 우선 실측 배정이 가능합니다.</string>
-
+    <string name="travel_cost">출장비</string>
+    <string name="crane_usage">크레인 사용</string>
+    <string name="package_cost">짐 정리 비용</string>
+    <string name="other_cost_info">기타 변동 가능 사항</string>
+    <string name="other_cost_info_hint">현장에서 견적가격이 변동될 수 있는 사항을 입력해주세요.</string>
+    <string name="other_options">기타 옵션을 선택해 주세요.(중복선택 가능)</string>
 
 
 
