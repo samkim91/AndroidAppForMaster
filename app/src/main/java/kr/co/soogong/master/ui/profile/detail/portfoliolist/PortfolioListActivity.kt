@@ -1,10 +1,12 @@
 package kr.co.soogong.master.ui.profile.detail.portfoliolist
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
-import kr.co.soogong.master.databinding.ActivityEditProfileWithCardBinding
+import kr.co.soogong.master.data.common.ButtonTheme
+import kr.co.soogong.master.databinding.ActivityEditPortfolioContainerBinding
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.ui.dialog.popup.CustomDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData
@@ -14,7 +16,6 @@ import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.ADD_PRICE_BY_PROJECTS
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_PORTFOLIO
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_PRICE_BY_PROJECTS
-import kr.co.soogong.master.uihelper.profile.PortfolioListActivityHelper
 import kr.co.soogong.master.uihelper.profile.PortfolioListActivityHelper.PORTFOLIO
 import kr.co.soogong.master.uihelper.profile.PortfolioListActivityHelper.PRICE_BY_PROJECTS
 import kr.co.soogong.master.utility.EventObserver
@@ -22,13 +23,9 @@ import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
 
 @AndroidEntryPoint
-class PortfolioListActivity : BaseActivity<ActivityEditProfileWithCardBinding>(
-    R.layout.activity_edit_profile_with_card
+class PortfolioListActivity : BaseActivity<ActivityEditPortfolioContainerBinding>(
+    R.layout.activity_edit_portfolio_container
 ) {
-    private val pageName: String by lazy {
-        PortfolioListActivityHelper.getPageName(intent)
-    }
-
     private val viewModel: PortfolioListViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,77 +35,67 @@ class PortfolioListActivity : BaseActivity<ActivityEditProfileWithCardBinding>(
         registerEventObserve()
     }
 
-    override fun onStart() {
-        super.onStart()
-        Timber.tag(TAG).d("onStart: ")
-        viewModel.requestPortfolioList()
-    }
-
     override fun initLayout() {
         Timber.tag(TAG).d("initLayout: ")
         bind {
             vm = viewModel
             lifecycleOwner = this@PortfolioListActivity
 
-            with(actionBar) {
-                backButton.setOnClickListener {
-                    super.onBackPressed()
+            with(abHeader) {
+                setButtonBackClickListener {
+                    onBackPressed()
                 }
             }
 
-            setLayout()
-            setDefaultButton()
+            setBasicLayout()
+            setButtonClickListener()
             setRecyclerview()
         }
     }
 
-    private fun setLayout() {
-        bind {
-            when (pageName) {
+    private fun setBasicLayout() {
+        with(binding) {
+            when (viewModel.pageName) {
                 PORTFOLIO -> {
-                    actionBar.title.text = PORTFOLIO
-                    with(introductionCard) {
-                        title =
-                            getString(kr.co.soogong.master.R.string.introduction_card_title_for_portfolio)
-                        subTitle =
-                            getString(kr.co.soogong.master.R.string.introduction_card_subtitle_for_portfolio)
-                        defaultButtonText =
-                            getString(kr.co.soogong.master.R.string.introduction_card_button_text_for_portfolio)
+                    abHeader.title = PORTFOLIO
+                    with(sbbAddingItem) {
+                        subheadline = getString(R.string.write_portfolio)
+                        hint = getString(R.string.write_portfolio_hint)
+                        buttonText = getString(R.string.add_portfolio)
                     }
+                    tvAddedItems.text = getString(R.string.added_portfolio)
                 }
                 PRICE_BY_PROJECTS -> {
-                    actionBar.title.text = PRICE_BY_PROJECTS
-                    with(introductionCard) {
-                        title =
-                            getString(kr.co.soogong.master.R.string.introduction_card_title_for_price_by_projects)
-                        subTitle =
-                            getString(kr.co.soogong.master.R.string.introduction_card_subtitle_for_price_by_projects)
-                        defaultButtonText =
-                            getString(kr.co.soogong.master.R.string.introduction_card_button_text_for_price_by_projects)
+                    abHeader.title = PRICE_BY_PROJECTS
+                    with(sbbAddingItem) {
+                        subheadline = getString(R.string.write_price_by_project)
+                        hint = getString(R.string.write_price_by_project_hint)
+                        buttonText = getString(R.string.add_price_by_project)
                     }
+                    tvAddedItems.text = getString(R.string.added_price_by_project)
                 }
             }
         }
     }
 
-    private fun setDefaultButton() {
-        binding.introductionCard.addDefaultButtonClickListener {
-            Timber.tag(TAG).w("DefaultButtonClickListener: ")
+    private fun setButtonClickListener() {
+        binding.buttonThemeAddingItem = ButtonTheme.OutlinedPrimary
+        binding.addingItemClickListener = View.OnClickListener {
             startActivity(
                 EditProfileContainerActivityHelper.getIntent(
                     this@PortfolioListActivity,
-                    if (pageName == PORTFOLIO) ADD_PORTFOLIO else ADD_PRICE_BY_PROJECTS
+                    if (viewModel.pageName == PORTFOLIO) ADD_PORTFOLIO else ADD_PRICE_BY_PROJECTS
                 )
             )
         }
     }
 
     private fun setRecyclerview() {
-        binding.recyclerview.adapter =
+        binding.rvItems.adapter =
             PortfolioListAdapter(
                 buttonLeftClickListener = { id ->
                     CustomDialog.newInstance(
-                        dialogData = when (pageName) {
+                        dialogData = when (viewModel.pageName) {
                             PORTFOLIO -> DialogData.getAskingDeletePortfolioDialogData(this@PortfolioListActivity)
                             else -> DialogData.getAskingDeletePriceByProjectDialogData(this@PortfolioListActivity)
                         }).let {
@@ -123,7 +110,7 @@ class PortfolioListActivity : BaseActivity<ActivityEditProfileWithCardBinding>(
                     startActivity(
                         EditProfileContainerActivityHelper.getIntent(
                             this@PortfolioListActivity,
-                            if (pageName == PORTFOLIO) EDIT_PORTFOLIO else EDIT_PRICE_BY_PROJECTS,
+                            if (viewModel.pageName == PORTFOLIO) EDIT_PORTFOLIO else EDIT_PRICE_BY_PROJECTS,
                             id
                         )
                     )

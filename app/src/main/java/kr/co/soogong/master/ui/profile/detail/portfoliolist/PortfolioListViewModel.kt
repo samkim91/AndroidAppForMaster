@@ -23,11 +23,15 @@ class PortfolioListViewModel @Inject constructor(
     private val deletePortfolioUseCase: DeletePortfolioUseCase,
     val savedStateHandle: SavedStateHandle,
 ) : BaseViewModel() {
-    private val pageName = PortfolioListActivityHelper.getPageNameFromSavedState(savedStateHandle)
+    val pageName = PortfolioListActivityHelper.getPageNameFromSavedState(savedStateHandle)
 
-    private val _itemList = MutableLiveData<List<PortfolioDto>>()
-    val itemList: LiveData<List<PortfolioDto>>
-        get() = _itemList
+    private val _items = MutableLiveData<List<PortfolioDto>>()
+    val items: LiveData<List<PortfolioDto>>
+        get() = _items
+
+    init {
+        requestPortfolioList()
+    }
 
     fun requestPortfolioList() {
         val type = when (pageName) {
@@ -42,7 +46,7 @@ class PortfolioListViewModel @Inject constructor(
             .subscribeBy(
                 onSuccess = {
                     Timber.tag(TAG).d("requestPortfolioList successfully: $it")
-                    _itemList.postValue(it.filter { portfolioDto -> portfolioDto.type == type })
+                    _items.postValue(it.filter { portfolioDto -> portfolioDto.type == type })
                 },
                 onError = {
                     Timber.tag(TAG).d("requestPortfolioList failed: $it")

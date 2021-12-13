@@ -354,7 +354,15 @@
     <string name="other_cost_info_hint">현장에서 견적가격이 변동될 수 있는 사항을 입력해주세요.</string>
     <string name="other_options">기타 옵션을 선택해 주세요.(중복선택 가능)</string>
 
+    <string name="write_portfolio">마스터님의 포트폴리오를 작성해주세요.</string>
+    <string name="write_portfolio_hint">포트폴리오 사진과 실제 시공 정보가 많을수록, 더많이 노출되고, 고객이 선택하는데 더 좋은 기준이 됩니다.</string>
+    <string name="add_portfolio">포트폴리오 추가하기</string>
+    <string name="added_portfolio">등록된 포트폴리오</string>
 
+    <string name="write_price_by_project">시공 종류별 가격을 입력해주세요.</string>
+    <string name="write_price_by_project_hint">다양한 시공을 입력해 주실수록 선택률이 상승합니다.</string>
+    <string name="add_price_by_project">시공 종류별 가격 추가하기</string>
+    <string name="added_price_by_project">등록된 시공 종류별 가격</string>
 
 
 
@@ -379,13 +387,7 @@
     <string name="edit_flexible_cost_screen_title">현장 가격 변동 사항을 선택해주세요.</string>
     <string name="simple_text_for_registered_image">사진 등록이 완료됐어요!</string>
 
-    <string name="introduction_card_title_for_portfolio">마스터님의 포트폴리오를 작성해주세요.</string>
-    <string name="introduction_card_subtitle_for_portfolio">포트폴리오 사진과 실제 시공 정보가 많을수록, 더많이 노출되고, 고객이 선택하는데 더 좋은 기준이 됩니다.</string>
-    <string name="introduction_card_button_text_for_portfolio">포트폴리오 추가하기</string>
 
-    <string name="introduction_card_title_for_price_by_projects">시공 종류별 가격을 입력해주세요.</string>
-    <string name="introduction_card_subtitle_for_price_by_projects">다양한 시공을 입력해 주실수록 선택률이 상승합니다.</string>
-    <string name="introduction_card_button_text_for_price_by_projects">시공 종류별 가격 추가하기</string>
 
     <string name="title_edit_required_information_activity">필수 정보 등록·수정하기</string>
     <string name="percentage_of_required_information">%d%% 등록</string>

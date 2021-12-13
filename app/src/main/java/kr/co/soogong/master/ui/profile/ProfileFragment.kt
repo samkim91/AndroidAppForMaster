@@ -30,6 +30,8 @@ import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_SHOP_IMAGES
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_WARRANTY_INFORMATION
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.FREE_MEASURE
+import kr.co.soogong.master.uihelper.profile.PortfolioListActivityHelper.PORTFOLIO
+import kr.co.soogong.master.uihelper.profile.PortfolioListActivityHelper.PRICE_BY_PROJECTS
 import kr.co.soogong.master.utility.*
 import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
@@ -169,6 +171,15 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
 
             hbcMasterConfigs.onButtonClick =
                 View.OnClickListener { startActivityCommonCode(EDIT_MASTER_CONFIG) }
+
+            hbcPortfolio.onButtonClick = View.OnClickListener {
+                startActivity(PortfolioListActivityHelper.getIntent(requireContext(), PORTFOLIO))
+            }
+
+            hbcPriceByProject.onButtonClick = View.OnClickListener {
+                startActivity(PortfolioListActivityHelper.getIntent(requireContext(),
+                    PRICE_BY_PROJECTS))
+            }
 
 //            editRequiredInfo.setOnClickListener {
 //                startActivity(

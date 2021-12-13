@@ -21,7 +21,6 @@ import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_BUSINESS_UNIT_INFORMATION
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_INTRODUCTION
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_MAJOR
-import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_OWNER_NAME
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_PHONE_NUMBER
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_SHOP_IMAGES
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_WARRANTY_INFORMATION
@@ -97,10 +96,6 @@ class EditRequiredInformationActivity : BaseActivity<ActivityEditRequiredInforma
                     }
                     it.show(supportFragmentManager, it.tag)
                 }
-            }
-
-            ownerName.addDefaultButtonClickListener {
-                startActivityCommonCode(EDIT_OWNER_NAME)
             }
 
             phoneNumber.addDefaultButtonClickListener {
