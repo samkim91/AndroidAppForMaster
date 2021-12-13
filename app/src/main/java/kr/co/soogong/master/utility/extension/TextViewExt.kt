@@ -30,7 +30,7 @@ fun TextView.setRequestMeasureDueTime(createdAt: Date?) {
         TimeHelper.getDueTime(createdAt, WITHIN_90_MINUTES))
 }
 
-@BindingAdapter("bind:set_price")
+@BindingAdapter("convertToPrice")
 fun TextView.setPrice(price: Int?) {
     price?.let {
         text = price.formatMoney()
