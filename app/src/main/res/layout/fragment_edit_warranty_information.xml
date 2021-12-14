@@ -21,7 +21,7 @@
             android:id="@+id/sdm_warranty_period"
             android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"
-            app:hint="@{@string/select_warranty_period_hint}"
+            app:dropdownHint="@{@string/select_warranty_period_hint}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

@@ -23,6 +23,7 @@ import kr.co.soogong.master.ui.profile.ProfileViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.uihelper.profile.*
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_ADDRESS
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_BUSINESS_UNIT_INFORMATION
+import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_EMAIL
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_INTRODUCTION
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_MAJOR
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_MASTER_CONFIG
@@ -180,6 +181,9 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
                 startActivity(PortfolioListActivityHelper.getIntent(requireContext(),
                     PRICE_BY_PROJECTS))
             }
+
+            hbcEmailAddress.onButtonClick =
+                View.OnClickListener { startActivityCommonCode(EDIT_EMAIL) }
 
 //            editRequiredInfo.setOnClickListener {
 //                startActivity(

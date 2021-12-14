@@ -105,7 +105,9 @@ class SubheadlineEmailForm @JvmOverloads constructor(
     var selectedItem: Pair<String, Int>? = null
         set(value) {
             field = value
-            value?.let { autoCompleteTextView.setText(it.first, false) }
+            value?.let {
+                autoCompleteTextView.setText(it.first, false)
+            }
         }
 
     override var dropdownAdapter: ArrayAdapter<Any>? = null
