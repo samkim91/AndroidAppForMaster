@@ -2,7 +2,8 @@
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:bind="http://schemas.android.com/bind">
+    xmlns:bind="http://schemas.android.com/bind"
+    xmlns:tools="http://schemas.android.com/tools">
 
 
     <data>
@@ -15,177 +16,255 @@
 
     </data>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:fillViewport="true"
-            android:overScrollMode="never">
+        <kr.co.soogong.master.atomic.molecules.SubheadlineTextInput
+            android:id="@+id/sti_title"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="wrap_content"
+            app:content="@={vm.title}"
+            app:hint="@{@string/title}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:max="@{150}"
+            app:subheadline="@{@string/portfolio_title}" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingStart="@dimen/gap_20"
-                android:paddingTop="@dimen/gap_32"
-                android:paddingEnd="@dimen/gap_20"
-                android:paddingBottom="@dimen/gap_52">
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_before_repairing"
+            style="@style/subheadline.bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_30"
+            android:text="@string/image_before_job"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sti_title" />
 
-                <kr.co.soogong.master.atomic.molecules.TitleEditText
-                    android:id="@+id/job_title"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:alertText='@{"필수 정보입니다."}'
-                    app:content="@={vm.title}"
-                    app:hintText='@{"해당 시공의 제목을 작성해주세요."}'
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:setMaxLength="@{300}"
-                    app:title='@{"시공 제목"}' />
+        <include
+            android:id="@+id/iv_adding_before_image"
+            layout="@layout/view_image_add_rectangle"
+            android:layout_width="@dimen/gap_100"
+            android:layout_height="@dimen/gap_100"
+            android:layout_marginTop="@dimen/gap_10"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_before_repairing"
+            bind:visible="@{vm.imageBeforeRepairing.size() == 0}" />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/before_job_label"
-                    style="@style/text_style_16sp.medium"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/gap_28"
-                    android:text="@string/image_before_job_label"
-                    android:textColor="@color/text_basic_color"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/job_title" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_before_image"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:overScrollMode="never"
+            app:images_deletable="@{vm.imageBeforeRepairing}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iv_adding_before_image"
+            app:layout_constraintTop_toBottomOf="@id/tv_before_repairing"
+            bind:visible="@{vm.imageBeforeRepairing.size() != 0}"
+            tools:listitem="@layout/view_holder_image_deletable" />
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/camera_icon_before_job"
-                    android:layout_width="@dimen/gap_100"
-                    android:layout_height="@dimen/gap_100"
-                    android:layout_marginTop="@dimen/gap_12"
-                    android:background="@drawable/ic_camera"
-                    app:layout_constraintStart_toStartOf="@id/before_job_label"
-                    app:layout_constraintTop_toBottomOf="@id/before_job_label"
-                    bind:visible="@{vm.imageBeforeJob == Uri.EMPTY}" />
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier_before_repairing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="iv_adding_before_image, rv_before_image" />
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/image_before_job"
-                    android:layout_width="@dimen/gap_100"
-                    android:layout_height="@dimen/gap_100"
-                    android:layout_marginTop="@dimen/gap_12"
-                    app:cardCornerRadius="@dimen/gap_8"
-                    app:cardElevation="@dimen/gap_0"
-                    app:layout_constraintStart_toStartOf="@id/before_job_label"
-                    app:layout_constraintTop_toBottomOf="@id/before_job_label"
-                    bind:visible="@{vm.imageBeforeJob != Uri.EMPTY}">
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_alert_before_image"
+            style="@style/caption_1.regular"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_4"
+            android:text="@string/required_field_alert"
+            android:textColor="@color/brand_red"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/barrier_before_repairing"
+            tools:visibility="visible" />
 
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/image_before_job_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        bind:image_uri="@{vm.imageBeforeJob}" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_after_repairing"
+            style="@style/subheadline.bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_18"
+            android:text="@string/image_after_job"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_alert_before_image" />
 
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/image_before_job_close_icon"
-                        android:layout_width="@dimen/gap_24"
-                        android:layout_height="@dimen/gap_24"
-                        android:layout_gravity="end"
-                        android:background="@drawable/ic_close_in_image"
-                        bind:onClick="@{vm::clearImageBeforeJob}" />
-                </androidx.cardview.widget.CardView>
+        <include
+            android:id="@+id/iv_adding_after_image"
+            layout="@layout/view_image_add_rectangle"
+            android:layout_width="@dimen/gap_100"
+            android:layout_height="@dimen/gap_100"
+            android:layout_marginTop="@dimen/gap_10"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_after_repairing"
+            bind:visible="@{vm.imageAfterRepairing.size() == 0}" />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/after_job_label"
-                    style="@style/text_style_16sp.medium"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/gap_28"
-                    android:text="@string/image_after_job_label"
-                    android:textColor="@color/text_basic_color"
-                    app:layout_constraintStart_toEndOf="@id/before_job_label"
-                    app:layout_constraintTop_toTopOf="@id/before_job_label" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_after_image"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:overScrollMode="never"
+            app:images_deletable="@{vm.imageAfterRepairing}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iv_adding_after_image"
+            app:layout_constraintTop_toBottomOf="@id/tv_after_repairing"
+            bind:visible="@{vm.imageAfterRepairing.size() != 0}"
+            tools:listitem="@layout/view_holder_image_deletable" />
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/camera_icon_after_job"
-                    android:layout_width="@dimen/gap_100"
-                    android:layout_height="@dimen/gap_100"
-                    android:layout_marginTop="@dimen/gap_12"
-                    android:background="@drawable/ic_camera"
-                    app:layout_constraintStart_toStartOf="@id/after_job_label"
-                    app:layout_constraintTop_toBottomOf="@id/after_job_label"
-                    bind:visible="@{vm.imageAfterJob == Uri.EMPTY}" />
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier_after_repairing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="iv_adding_after_image, rv_after_image" />
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/image_after_job"
-                    android:layout_width="@dimen/gap_100"
-                    android:layout_height="@dimen/gap_100"
-                    android:layout_marginTop="@dimen/gap_12"
-                    app:cardCornerRadius="@dimen/gap_8"
-                    app:cardElevation="@dimen/gap_0"
-                    app:layout_constraintStart_toStartOf="@id/after_job_label"
-                    app:layout_constraintTop_toBottomOf="@id/after_job_label"
-                    bind:visible="@{vm.imageAfterJob != Uri.EMPTY}">
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_alert_after_image"
+            style="@style/caption_1.regular"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_4"
+            android:text="@string/required_field_alert"
+            android:textColor="@color/brand_red"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/barrier_after_repairing"
+            tools:visibility="visible" />
 
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/image_after_job_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        bind:image_uri="@{vm.imageAfterJob}" />
+        <kr.co.soogong.master.atomic.molecules.SubheadlineTextareaCounter
+            android:id="@+id/stc_description"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_24"
+            app:content="@={vm.description}"
+            app:hint="@{@string/portfolio_description_hint}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_alert_after_image"
+            app:maxCount="@{500}"
+            app:subheadline="@{@string/portfolio_description}" />
 
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/image_after_job_close_icon"
-                        android:layout_width="@dimen/gap_24"
-                        android:layout_height="@dimen/gap_24"
-                        android:layout_gravity="end"
-                        android:background="@drawable/ic_close_in_image"
-                        bind:onClick="@{vm::clearImageAfterJob}" />
-                </androidx.cardview.widget.CardView>
 
-                <androidx.constraintlayout.widget.Barrier
-                    android:id="@+id/images_barrier"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:barrierDirection="bottom"
-                    app:constraint_referenced_ids="camera_icon_before_job, camera_icon_after_job, image_before_job, image_after_job" />
+        <!--        <androidx.cardview.widget.CardView-->
+        <!--            android:id="@+id/image_before_job"-->
+        <!--            android:layout_width="@dimen/gap_100"-->
+        <!--            android:layout_height="@dimen/gap_100"-->
+        <!--            android:layout_marginTop="@dimen/gap_12"-->
+        <!--            app:cardCornerRadius="@dimen/gap_8"-->
+        <!--            app:cardElevation="@dimen/gap_0"-->
+        <!--            app:layout_constraintStart_toStartOf="@id/tv_before_job_label"-->
+        <!--            app:layout_constraintTop_toBottomOf="@id/tv_before_job_label"-->
+        <!--            tools:visibility="gone"-->
+        <!--            bind:visible="@{vm.imageBeforeJob != Uri.EMPTY}">-->
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/alert"
-                    style="@style/text_style_14sp.regular"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/gap_4"
-                    android:text="필수 정보입니다."
-                    android:textColor="@color/text_alert_color"
-                    android:visibility="gone"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/images_barrier" />
+        <!--            <androidx.appcompat.widget.AppCompatImageView-->
+        <!--                android:id="@+id/image_before_job_view"-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="match_parent"-->
+        <!--                bind:image_uri="@{vm.imageBeforeJob}" />-->
 
-                <kr.co.soogong.master.atomic.molecules.TitleEditTextCounter
-                    android:id="@+id/job_description"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/gap_28"
-                    app:alertText="@{@string/fill_text_over_10}"
-                    app:content="@={vm.description}"
-                    app:hintText='@{"해당 시공에 대해 간단한 설명을 해주세요."}'
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/alert"
-                    app:limitedCount='@{500}'
-                    app:title='@{"시공 설명"}' />
+        <!--            <androidx.appcompat.widget.AppCompatImageView-->
+        <!--                android:id="@+id/image_before_job_close_icon"-->
+        <!--                android:layout_width="@dimen/gap_24"-->
+        <!--                android:layout_height="@dimen/gap_24"-->
+        <!--                android:layout_gravity="end"-->
+        <!--                android:background="@drawable/ic_close_in_image"-->
+        <!--                bind:onClick="@{vm::clearImageBeforeJob}" />-->
+        <!--        </androidx.cardview.widget.CardView>-->
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </ScrollView>
+        <!--        <androidx.appcompat.widget.AppCompatTextView-->
+        <!--            android:id="@+id/after_job_label"-->
+        <!--            style="@style/text_style_16sp.medium"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginStart="@dimen/gap_28"-->
+        <!--            android:text="@string/image_after_job"-->
+        <!--            android:textColor="@color/text_basic_color"-->
+        <!--            app:layout_constraintStart_toEndOf="@id/before_job_label"-->
+        <!--            app:layout_constraintTop_toTopOf="@id/before_job_label" />-->
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/default_button"
-            style="@style/text_style_16sp.bold"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:background="@color/c_22D47B"
-            android:text="@string/writing_done"
-            android:textColor="@color/c_FFFFFF" />
-    </LinearLayout>
+        <!--        <androidx.appcompat.widget.AppCompatImageView-->
+        <!--            android:id="@+id/camera_icon_after_job"-->
+        <!--            android:layout_width="@dimen/gap_100"-->
+        <!--            android:layout_height="@dimen/gap_100"-->
+        <!--            android:layout_marginTop="@dimen/gap_12"-->
+        <!--            android:background="@drawable/ic_camera"-->
+        <!--            app:layout_constraintStart_toStartOf="@id/after_job_label"-->
+        <!--            app:layout_constraintTop_toBottomOf="@id/after_job_label"-->
+        <!--            bind:visible="@{vm.imageAfterJob == Uri.EMPTY}" />-->
 
+        <!--        <androidx.cardview.widget.CardView-->
+        <!--            android:id="@+id/image_after_job"-->
+        <!--            android:layout_width="@dimen/gap_100"-->
+        <!--            android:layout_height="@dimen/gap_100"-->
+        <!--            android:layout_marginTop="@dimen/gap_12"-->
+        <!--            app:cardCornerRadius="@dimen/gap_8"-->
+        <!--            app:cardElevation="@dimen/gap_0"-->
+        <!--            tools:visibility="gone"-->
+        <!--            app:layout_constraintStart_toStartOf="@id/after_job_label"-->
+        <!--            app:layout_constraintTop_toBottomOf="@id/after_job_label"-->
+        <!--            bind:visible="@{vm.imageAfterJob != Uri.EMPTY}">-->
+
+        <!--            <androidx.appcompat.widget.AppCompatImageView-->
+        <!--                android:id="@+id/image_after_job_view"-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="match_parent"-->
+        <!--                bind:image_uri="@{vm.imageAfterJob}" />-->
+
+        <!--            <androidx.appcompat.widget.AppCompatImageView-->
+        <!--                android:id="@+id/image_after_job_close_icon"-->
+        <!--                android:layout_width="@dimen/gap_24"-->
+        <!--                android:layout_height="@dimen/gap_24"-->
+        <!--                android:layout_gravity="end"-->
+        <!--                android:background="@drawable/ic_close_in_image"-->
+        <!--                bind:onClick="@{vm::clearImageAfterJob}" />-->
+        <!--        </androidx.cardview.widget.CardView>-->
+
+        <!--        <androidx.constraintlayout.widget.Barrier-->
+        <!--            android:id="@+id/images_barrier"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            app:barrierDirection="bottom"-->
+        <!--            app:constraint_referenced_ids="camera_icon_before_job, camera_icon_after_job, image_before_job, image_after_job" />-->
+
+        <!--        <androidx.appcompat.widget.AppCompatTextView-->
+        <!--            android:id="@+id/alert"-->
+        <!--            style="@style/text_style_14sp.regular"-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginTop="@dimen/gap_4"-->
+        <!--            android:text="필수 정보입니다."-->
+        <!--            android:textColor="@color/text_alert_color"-->
+        <!--            android:visibility="gone"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toBottomOf="@id/images_barrier" />-->
+
+        <!--        <kr.co.soogong.master.atomic.molecules.TitleEditTextCounter-->
+        <!--            android:id="@+id/job_description"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginTop="@dimen/gap_28"-->
+        <!--            app:alertText="@{@string/fill_text_over_10}"-->
+        <!--            app:content="@={vm.description}"-->
+        <!--            app:hintText='@{"해당 시공에 대해 간단한 설명을 해주세요."}'-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toBottomOf="@id/alert"-->
+        <!--            app:limitedCount='@{500}'-->
+        <!--            app:title='@{"시공 설명"}' />-->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

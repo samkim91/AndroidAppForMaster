@@ -45,6 +45,7 @@
     <string name="required_field_alert">필수 정보입니다.</string>
     <string name="fill_text_over_10">10자 이상으로 입력해주세요.</string>
     <string name="fill_text_under_10">10자 이하로 입력해주세요.</string>
+    <string name="too_large_number">숫자가 너무 큽니다.</string>
     <string name="minimum_cost">1만원 이상으로 보내주세요.</string>
     <string name="required_value_between_2_and_20">2자 이상 20자 이내로 입력해주세요.</string>
 
@@ -364,6 +365,18 @@
     <string name="add_price_by_project">시공 종류별 가격 추가하기</string>
     <string name="added_price_by_project">등록된 시공 종류별 가격</string>
 
+    <string name="portfolio_title">시공 제목</string>
+    <string name="title">제목</string>
+    <string name="portfolio_description">시공 내용</string>
+    <string name="portfolio_description_hint">해당 시공에 대해 간단한 설명을 해주세요.</string>
+
+    <string name="price_by_project_title">시공 종류</string>
+    <string name="type">종류</string>
+    <string name="price_by_project_price">시공 가격</string>
+    <string name="price">가격</string>
+    <string name="price_by_project_description">시공 내용</string>
+    <string name="price_by_project_description_hint">해당 시공에 대해 간단한 설명을 해주세요.</string>
+
 
 
     <string name="master_type">마스터유형</string>
@@ -382,8 +395,8 @@
     <string name="confirmed_text">승인완료</string>
     <string name="profile_card_container_label">추가 정보 등록·수정</string>
     <string name="required_profile_card_container_label">필수 정보 등록·수정</string>
-    <string name="image_before_job_label">시공 전 사진</string>
-    <string name="image_after_job_label">시공 후 사진</string>
+    <string name="image_before_job">시공 전</string>
+    <string name="image_after_job">시공 후</string>
     <string name="edit_flexible_cost_screen_title">현장 가격 변동 사항을 선택해주세요.</string>
     <string name="simple_text_for_registered_image">사진 등록이 완료됐어요!</string>
 
@@ -397,7 +410,7 @@
     <string name="example_for_edit_price_by_project">예시)\n\n
 - 시공 종류 : 싱크대 상판 연마작업\n
 - 가격 : 100,000\n
-- 시공 설명 : 제거가 어려운 오염이 가득한 주방 대리석 상판을 연마 하는 작업입니다.\n\n
+- 시공 설명 : 제거가 어려운 오염이 가득한 주방 대리석 상판을 연마하는 작업입니다.\n\n
 - 시공 종류 : 깨진 타일 보수\n
 - 가격 : 200,000\n
 - 시공 설명 : 출장 시공비 포함\n\n
