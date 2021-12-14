@@ -36,7 +36,7 @@ class EditWarrantyInformationFragment : BaseFragment<FragmentEditWarrantyInforma
             vm = viewModel
             lifecycleOwner = viewLifecycleOwner
 
-            sdmWarrantyPeriod.adapter =
+            sdmWarrantyPeriod.dropdownAdapter =
                 ArrayAdapter(requireContext(),
                     R.layout.textview_item_dropdown,
                     viewModel.warrantyPeriods.map { it.first })
@@ -47,7 +47,7 @@ class EditWarrantyInformationFragment : BaseFragment<FragmentEditWarrantyInforma
 
             (activity as EditProfileContainerActivity).setSaveButtonClickListener {
                 viewModel.selectedPeriod.observe(viewLifecycleOwner, { pair ->
-                    sdmWarrantyPeriod.error =
+                    sdmWarrantyPeriod.dropdownError =
                         if (pair == null) getString(R.string.required_field_alert) else null
                 })
 
@@ -57,9 +57,9 @@ class EditWarrantyInformationFragment : BaseFragment<FragmentEditWarrantyInforma
                 })
 
                 if (viewModel.selectedPeriod.value?.second == -1) {     // 보증기간 없음 선택 시
-                    if (sdmWarrantyPeriod.error.isNullOrBlank()) viewModel.saveWarrantyInfo()
+                    if (sdmWarrantyPeriod.dropdownError.isNullOrBlank()) viewModel.saveWarrantyInfo()
                 } else {        // 보증기간 있을 시
-                    if (sdmWarrantyPeriod.error.isNullOrBlank() && stcWarrantyInformation.error.isNullOrBlank()) viewModel.saveWarrantyInfo()
+                    if (sdmWarrantyPeriod.dropdownError.isNullOrBlank() && stcWarrantyInformation.error.isNullOrBlank()) viewModel.saveWarrantyInfo()
                 }
             }
         }

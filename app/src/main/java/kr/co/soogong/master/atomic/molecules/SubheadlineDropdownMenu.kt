@@ -20,8 +20,8 @@ class SubheadlineDropdownMenu @JvmOverloads constructor(
         ViewSubheadlineDropdownMenuBinding.inflate(LayoutInflater.from(context), this, true)
 
     val dropdownMenu: DropdownMenu = binding.dmItems
-    override val textInputLayout: TextInputLayout = dropdownMenu.textInputLayout
-    override val autoCompleteTextView: MaterialAutoCompleteTextView =
+    val textInputLayout: TextInputLayout = dropdownMenu.textInputLayout
+    val autoCompleteTextView: MaterialAutoCompleteTextView =
         dropdownMenu.autoCompleteTextView
 
     var subheadline: String? = null
@@ -36,33 +36,33 @@ class SubheadlineDropdownMenu @JvmOverloads constructor(
             value?.let { autoCompleteTextView.setText(it.first, false) }
         }
 
-    var inputType: Int? = null
+    override var dropdownHint: String? = null
         set(value) {
             field = value
-            value?.let { autoCompleteTextView.inputType = it }
+            dropdownMenu.dropdownHint = value
         }
 
-    override var hint: String? = null
+    override var dropdownError: String? = null
         set(value) {
             field = value
-            dropdownMenu.hint = value
+            dropdownMenu.dropdownError = value
         }
 
-    override var error: String? = null
+    override var dropdownHelper: String? = null
         set(value) {
             field = value
-            dropdownMenu.error = value
+            dropdownMenu.dropdownHelper = value
         }
 
-    override var helper: String? = null
+    override var dropdownInputType: Int? = null
         set(value) {
             field = value
-            dropdownMenu.helper = value
+            dropdownMenu.dropdownInputType = value
         }
 
-    override var adapter: ArrayAdapter<Any>? = null
+    override var dropdownAdapter: ArrayAdapter<Any>? = null
         set(value) {
             field = value
-            value?.let { dropdownMenu.adapter = value }
+            value?.let { dropdownMenu.dropdownAdapter = value }
         }
 }

@@ -15,9 +15,6 @@
             android:layout_height="wrap_content"
             app:endIconMode="dropdown_menu"
             app:endIconTint="@color/dark_grey_2"
-            app:errorEnabled="true"
-            app:helperTextEnabled="true"
-            app:hintEnabled="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -25,7 +22,7 @@
             <com.google.android.material.textfield.MaterialAutoCompleteTextView
                 android:id="@+id/actv_item"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/gap_60"
+                android:layout_height="wrap_content"
                 android:dropDownHeight="250dp"
                 android:dropDownVerticalOffset="@dimen/gap_4"
                 android:inputType="none"

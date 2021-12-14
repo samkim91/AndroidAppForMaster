@@ -6,6 +6,8 @@
 
     <data>
 
+        <import type="android.view.inputmethod.EditorInfo" />
+
         <variable
             name="vm"
             type="kr.co.soogong.master.ui.profile.detail.warranty.EditWarrantyInformationViewModel" />
@@ -30,6 +32,7 @@
             android:id="@+id/stc_warranty_information"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_24"
             app:content="@={vm.warrantyDescription}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
