@@ -27,24 +27,21 @@ object EditProfileContainerFragmentHelper {
     const val EDIT_ADDRESS = "활동 지역"
 
     // 선택 정보
-    const val FREE_MEASURE = "무료 방문 실측 여부 수정하기"
-    const val EDIT_PORTFOLIO = "포트폴리오 수정하기"
-    const val ADD_PORTFOLIO = "포트폴리오 추가하기"
-    const val EDIT_PRICE_BY_PROJECTS = "시공 종류별 가격 수정하기"
-    const val ADD_PRICE_BY_PROJECTS = "시공 종류별 가격 추가하기"
+    const val FREE_MEASURE = "무료 방문 실측 여부"
+    const val EDIT_PORTFOLIO = "포트폴리오 수정"
+    const val ADD_PORTFOLIO = "포트폴리오 추가"
+    const val EDIT_PRICE_BY_PROJECTS = "시공 종류별 가격 수정"
+    const val ADD_PRICE_BY_PROJECTS = "시공 종류별 가격 추가"
     const val EDIT_MASTER_CONFIG = "기타 변동 요인"
-    const val EDIT_EMAIL = "이메일 등록·수정하기"
+    const val EDIT_EMAIL = "이메일"
 
     fun getFragment(pageName: String, itemId: Int?): Fragment =
         when (pageName) {
             FREE_MEASURE -> EditFreeMeasureFragment.newInstance()
-            ADD_PORTFOLIO -> PortfolioFragment.newInstance(ADD_PORTFOLIO, null)
-            EDIT_PORTFOLIO -> PortfolioFragment.newInstance(EDIT_PORTFOLIO, itemId)
-            ADD_PRICE_BY_PROJECTS -> PriceByProjectFragment.newInstance(ADD_PRICE_BY_PROJECTS, null)
-            EDIT_PRICE_BY_PROJECTS -> PriceByProjectFragment.newInstance(
-                EDIT_PRICE_BY_PROJECTS,
-                itemId
-            )
+            ADD_PORTFOLIO -> PortfolioFragment.newInstance()
+            EDIT_PORTFOLIO -> PortfolioFragment.newInstance(itemId)
+            ADD_PRICE_BY_PROJECTS -> PriceByProjectFragment.newInstance()
+            EDIT_PRICE_BY_PROJECTS -> PriceByProjectFragment.newInstance(itemId)
             EDIT_MASTER_CONFIG -> EditMasterConfigFragment.newInstance()
             EDIT_EMAIL -> EditEmailFragment.newInstance()
 

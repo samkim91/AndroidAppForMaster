@@ -126,6 +126,11 @@ class PortfolioListActivity : BaseActivity<ActivityPortfolioListBinding>(
         })
     }
 
+    override fun onStart() {
+        super.onStart()
+        viewModel.requestPortfolioList()    // 화면이 열릴 때마다, 새로고침
+    }
+
     companion object {
         private const val TAG = "EditProfileWithCardActivity"
 

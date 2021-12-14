@@ -1,6 +1,7 @@
 package kr.co.soogong.master.ui.profile.detail.portfoliolist.pricebyproject
 
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
@@ -19,33 +20,40 @@ class PriceByProjectViewModel @Inject constructor(
     private val getMasterIdFromSharedUseCase: GetMasterIdFromSharedUseCase,
     private val savePortfolioUseCase: SavePortfolioUseCase,
     private val getPortfolioUseCase: GetPortfolioUseCase,
+    val savedStateHandle: SavedStateHandle,
 ) : BaseViewModel() {
-    val id = MutableLiveData<Int>()
+    val id = PriceByProjectFragment.getPriceByProjectId(savedStateHandle)
+
     val title = MutableLiveData<String>()
     val price = MutableLiveData<String>()
     val description = MutableLiveData<String>()
 
-    fun requestPriceByProject(priceByProjectId: Int) {
-        Timber.tag(TAG).d("requestPriceByProject: $priceByProjectId")
-        getPortfolioUseCase(priceByProjectId, "price")
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeBy(
-                onSuccess = { priceByProject ->
-                    priceByProject.id?.let { id.postValue(it) }
-                    priceByProject.title?.let { title.postValue(it) }
-                    priceByProject.price?.let { price.postValue(it.toString()) }
-                    priceByProject.description?.let { description.postValue(it) }
-                },
-                onError = { setAction(GET_PRICE_BY_PROJECT_FAILED) }
-            ).addToDisposable()
+    init {
+        requestPriceByProject()
+    }
+
+    fun requestPriceByProject() {
+        Timber.tag(TAG).d("requestPriceByProject: $id")
+        id?.let {
+            getPortfolioUseCase(id, "price")
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeBy(
+                    onSuccess = { priceByProject ->
+                        priceByProject.title?.let { title.postValue(it) }
+                        priceByProject.price?.let { price.postValue(it.toString()) }
+                        priceByProject.description?.let { description.postValue(it) }
+                    },
+                    onError = { setAction(REQUEST_FAILED) }
+                ).addToDisposable()
+        }
     }
 
     fun savePriceByProject() {
-        Timber.tag(TAG).d("savePriceByProject: ${id.value}")
+        Timber.tag(TAG).d("savePriceByProject: $id")
         savePortfolioUseCase(
             PortfolioDto(
-                id = if (id.value == -1) null else id.value,
+                id = id,
                 masterId = getMasterIdFromSharedUseCase(),
                 title = title.value!!,
                 description = description.value,
@@ -63,7 +71,7 @@ class PriceByProjectViewModel @Inject constructor(
                 },
                 onError = {
                     Timber.tag(TAG).d("savePriceByProject failed: $it")
-                    setAction(SAVE_PRICE_BY_PROJECT_FAILED)
+                    setAction(REQUEST_FAILED)
                 }
             ).addToDisposable()
     }
@@ -72,7 +80,6 @@ class PriceByProjectViewModel @Inject constructor(
         private const val TAG = "EditPortfolioViewModel"
 
         const val SAVE_PRICE_BY_PROJECT_SUCCESSFULLY = "SAVE_PRICE_BY_PROJECT_SUCCESSFULLY"
-        const val SAVE_PRICE_BY_PROJECT_FAILED = "SAVE_PRICE_BY_PROJECT_FAILED"
-        const val GET_PRICE_BY_PROJECT_FAILED = "GET_PRICE_BY_PROJECT_FAILED"
+        const val REQUEST_FAILED = "REQUEST_FAILED"
     }
 }

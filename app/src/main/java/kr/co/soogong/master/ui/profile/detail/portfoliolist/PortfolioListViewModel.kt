@@ -29,10 +29,6 @@ class PortfolioListViewModel @Inject constructor(
     val items: LiveData<List<PortfolioDto>>
         get() = _items
 
-    init {
-        requestPortfolioList()
-    }
-
     fun requestPortfolioList() {
         val type = when (pageName) {
             PORTFOLIO -> CodeTable.PORTFOLIO.code
