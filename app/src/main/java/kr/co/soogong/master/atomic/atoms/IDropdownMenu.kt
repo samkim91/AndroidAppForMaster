@@ -1,14 +1,11 @@
 package kr.co.soogong.master.atomic.atoms
 
 import android.widget.ArrayAdapter
-import com.google.android.material.textfield.MaterialAutoCompleteTextView
-import com.google.android.material.textfield.TextInputLayout
 
 interface IDropdownMenu {
-    val textInputLayout: TextInputLayout
-    val autoCompleteTextView: MaterialAutoCompleteTextView
-    var adapter: ArrayAdapter<Any>?
-    var error: String?
-    var hint: String?
-    var helper: String?
+    var dropdownAdapter: ArrayAdapter<Any>?
+    var dropdownError: String?
+    var dropdownHint: String?
+    var dropdownHelper: String?
+    var dropdownInputType: Int?
 }

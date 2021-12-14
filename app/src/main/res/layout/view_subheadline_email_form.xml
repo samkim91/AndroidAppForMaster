@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <merge
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_subheadline"
+            style="@style/subheadline.bold"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="subheadline : ex) A/S 기간 정보를 알려주세요." />
+
+        <kr.co.soogong.master.atomic.atoms.TextInput
+            android:id="@+id/ti_local_part"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_8"
+            app:layout_constraintEnd_toStartOf="@id/tv_at"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_subheadline" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_at"
+            style="@style/subheadline.regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/gap_4"
+            android:layout_marginEnd="@dimen/gap_4"
+            android:text="@string/at_text"
+            android:textColor="@color/grey_1"
+            app:layout_constraintBottom_toBottomOf="@id/ti_local_part"
+            app:layout_constraintEnd_toStartOf="@id/dm_domain"
+            app:layout_constraintStart_toEndOf="@id/ti_local_part"
+            app:layout_constraintTop_toTopOf="@id/ti_local_part" />
+
+        <kr.co.soogong.master.atomic.atoms.DropdownMenu
+            android:id="@+id/dm_domain"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_8"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tv_at"
+            app:layout_constraintTop_toBottomOf="@id/tv_subheadline" />
+    </merge>
+</layout>

@@ -18,35 +18,44 @@ class DropdownMenu @JvmOverloads constructor(
     private var binding =
         ViewDropdownMenuBinding.inflate(LayoutInflater.from(context), this, true)
 
-    override val textInputLayout: TextInputLayout = binding.tilContainer
-    override val autoCompleteTextView: MaterialAutoCompleteTextView = binding.actvItem
+    val textInputLayout: TextInputLayout = binding.tilContainer
+    val autoCompleteTextView: MaterialAutoCompleteTextView = binding.actvItem
 
     init {
         autoCompleteTextView.setDropDownBackgroundResource(R.drawable.bg_solid_white_stroke_light_grey2_radius6_padding16)
     }
 
-    override var adapter: ArrayAdapter<Any>? = null
+    override var dropdownAdapter: ArrayAdapter<Any>? = null
         set(value) {
             field = value
             autoCompleteTextView.setAdapter(value)
         }
 
-    override var error: String? = null
+    override var dropdownError: String? = null
         set(value) {
             field = value
             textInputLayout.error = value
+            textInputLayout.isErrorEnabled = !value.isNullOrBlank()
         }
 
-    override var hint: String? = null
+    override var dropdownHint: String? = null
         set(value) {
             field = value
             textInputLayout.hint = value
+            textInputLayout.isHintEnabled = !value.isNullOrBlank()
         }
 
-    override var helper: String? = null
+    override var dropdownHelper: String? = null
         set(value) {
             field = value
             textInputLayout.helperText = value
+            textInputLayout.isHelperTextEnabled = !value.isNullOrBlank()
+        }
+
+    override var dropdownInputType: Int? = null
+        set(value) {
+            field = value
+            value?.let { autoCompleteTextView.inputType = value }
         }
 
     companion object {
