@@ -2,6 +2,7 @@ package kr.co.soogong.master.ui.profile.detail.email
 
 import androidx.lifecycle.MutableLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kr.co.soogong.master.atomic.atoms.DropdownMenu
 import kr.co.soogong.master.data.dto.profile.MasterDto
 import kr.co.soogong.master.domain.usecase.profile.GetProfileUseCase
 import kr.co.soogong.master.domain.usecase.profile.SaveMasterUseCase
@@ -15,8 +16,10 @@ class EditEmailViewModel @Inject constructor(
     saveMasterUseCase: SaveMasterUseCase,
 ) : EditProfileContainerViewModel(getProfileUseCase, saveMasterUseCase) {
 
+    val domains = DropdownMenu.getDomains()
+
     val localPart = MutableLiveData("")
-    val domain = MutableLiveData("")
+    val domain = MutableLiveData<Pair<String, Int>>()
 
     fun requestEmail() {
         Timber.tag(TAG).d("requestEmail: ")
@@ -27,7 +30,11 @@ class EditEmailViewModel @Inject constructor(
                 if (email.contains("@")) {
                     email.split("@").let { split ->
                         localPart.postValue(split[0])
-                        domain.postValue(split[1])
+                        domains.find { pair -> pair.first == split[1] }.run {
+                            if (this != null) domain.postValue(this)
+                            else domain.postValue(Pair(split[1],
+                                domains.last().second))    // 값이 없을 때, 직접 입력 및 그냥 보여주기
+                        }
                     }
                 } else {
                     localPart.postValue(email)
@@ -43,7 +50,7 @@ class EditEmailViewModel @Inject constructor(
             MasterDto(
                 id = profile.value?.id,
                 uid = profile.value?.uid,
-                email = "${localPart.value}@${domain.value}",
+                email = "${localPart.value}@${domain.value?.first}",
             )
         )
     }

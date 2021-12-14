@@ -36,10 +36,9 @@ class EditWarrantyInformationFragment : BaseFragment<FragmentEditWarrantyInforma
             vm = viewModel
             lifecycleOwner = viewLifecycleOwner
 
-            sdmWarrantyPeriod.dropdownAdapter =
-                ArrayAdapter(requireContext(),
-                    R.layout.textview_item_dropdown,
-                    viewModel.warrantyPeriods.map { it.first })
+            sdmWarrantyPeriod.dropdownAdapter = ArrayAdapter(requireContext(),
+                R.layout.textview_item_dropdown,
+                viewModel.warrantyPeriods.map { it.first })
 
             sdmWarrantyPeriod.autoCompleteTextView.setOnItemClickListener { _, _, position, _ ->
                 viewModel.selectedPeriod.value = viewModel.warrantyPeriods[position]

@@ -74,5 +74,18 @@ class DropdownMenu @JvmOverloads constructor(
                 Pair("9년", 9),
                 Pair("10년", 10),
             )
+
+        fun getDomains(): List<Pair<String, Int>> =
+            listOf(
+                Pair("naver.com", 0),
+                Pair("gmail.com", 1),
+                Pair("kakao.com", 2),
+                Pair("daum.com", 3),
+                Pair("hanmail.com", 4),
+                Pair("hotmail.com", 5),
+                Pair("yahoo.com", 6),
+                Pair("nate.com", 7),
+                Pair("직접 입력", 8),
+            )
     }
 }

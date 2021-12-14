@@ -377,6 +377,9 @@
     <string name="price_by_project_description">시공 내용</string>
     <string name="price_by_project_description_hint">해당 시공에 대해 간단한 설명을 해주세요.</string>
 
+    <string name="type_email">이메일을 입력해 주세요.</string>
+    <string name="invalid_email_format">올바른 이메일을 입력해주세요.</string>
+
 
 
     <string name="master_type">마스터유형</string>
