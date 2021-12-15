@@ -15,6 +15,7 @@ import kr.co.soogong.master.data.common.ColorTheme
 import kr.co.soogong.master.databinding.FragmentProfileBinding
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.base.BaseViewModel.Companion.DISMISS_LOADING
+import kr.co.soogong.master.ui.base.BaseViewModel.Companion.SHOW_LOADING
 import kr.co.soogong.master.ui.dialog.bottomSheetDialogRecyclerView.BottomSheetDialogBundle
 import kr.co.soogong.master.ui.dialog.bottomSheetDialogRecyclerView.BottomSheetDialogRecyclerView
 import kr.co.soogong.master.ui.dialog.popup.CustomDialog
@@ -80,6 +81,11 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
 
             abHeader.setButtonAnyClickListener {
                 startActivity(ShowMyProfileInWebHelper.getIntent(viewModel.profile.value?.uid))
+            }
+
+            // TODO: 2021/12/15 Profile image 삭제 기능 필요
+            ivProfileImage.setOnClickListener {
+                getSingleImage()
             }
 
             bbRequestReview.onButtonClick = View.OnClickListener {
@@ -182,12 +188,6 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
 
             hbcEmailAddress.onButtonClick =
                 View.OnClickListener { startActivityCommonCode(EDIT_EMAIL) }
-
-            // TODO: 2021/12/15 Profile image 삭제 기능 필요
-
-//            profileImage.addDefaultButtonClickListener {
-//                getSingleImage()
-//            }
         }
     }
 
@@ -195,7 +195,11 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
         viewModel.action.observe(viewLifecycleOwner, EventObserver { event ->
             when (event) {
                 REQUEST_FAILED -> requireContext().toast(getString(R.string.error_message_of_request_failed))
-                DISMISS_LOADING -> dismissLoading()
+                SHOW_LOADING -> showLoading(parentFragmentManager)
+                DISMISS_LOADING -> {
+                    dismissLoading()
+                    viewModel.requestProfile()
+                }
             }
         })
         viewModel.profile.observe(viewLifecycleOwner, { profile ->
@@ -206,11 +210,15 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
         })
     }
 
+    override fun onStart() {
+        super.onStart()
+        naverMapHelper
+    }
+
     override fun onResume() {
         super.onResume()
         Timber.tag(TAG).d("onResume: ")
         viewModel.requestProfile()
-        naverMapHelper
     }
 
     private fun startActivityCommonCode(pageName: String, itemId: Int? = null) {
@@ -242,7 +250,6 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
                                 .let {
                                     it.setButtonsClickListener(
                                         onPositive = {
-                                            showLoading(parentFragmentManager)
                                             viewModel.saveMasterProfileImage()
                                         },
                                         onNegative = { }
@@ -250,7 +257,6 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
                                     it.show(parentFragmentManager, it.tag)
                                 }
                         } else {
-                            showLoading(parentFragmentManager)
                             viewModel.saveMasterProfileImage()
                         }
                     }
@@ -261,12 +267,6 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
 
     companion object {
         private const val TAG = "ProfileFragment"
-        fun newInstance(): ProfileFragment {
-            val args = Bundle()
-
-            val fragment = ProfileFragment()
-            fragment.arguments = args
-            return fragment
-        }
+        fun newInstance() = ProfileFragment()
     }
 }

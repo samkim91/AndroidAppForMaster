@@ -199,8 +199,6 @@ class RequirementFragment : BaseFragment<FragmentRequirementBinding>(
         private const val REQUEST_MEASURE = 10
         private const val REQUEST_CONSULTING = 20
 
-        fun newInstance(): RequirementFragment {
-            return RequirementFragment()
-        }
+        fun newInstance() = RequirementFragment()
     }
 }

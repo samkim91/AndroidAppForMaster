@@ -30,6 +30,7 @@ class EditShopImagesViewModel @Inject constructor(
         }
     }
 
+    // TODO: 2021/12/15 BaseViewModel 의 show/dismiss loading 을 사용하도록 변경해야함
     fun saveShopImages() {
         Timber.tag(TAG).d("saveShopImages: ")
         shopImages.value?.filter { attachmentDto ->

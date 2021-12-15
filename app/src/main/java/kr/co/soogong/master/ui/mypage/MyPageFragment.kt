@@ -86,7 +86,9 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(
     }
 
     private fun checkVersion() {
-        viewModel.version.value = getString(R.string.version_text, requireContext().packageManager.getPackageInfo(requireContext().packageName, 0).versionName)
+        viewModel.version.value = getString(R.string.version_text,
+            requireContext().packageManager.getPackageInfo(requireContext().packageName,
+                0).versionName)
     }
 
     override fun onResume() {
@@ -98,8 +100,6 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(
     companion object {
         private const val TAG = "MyPageFragment"
 
-        fun newInstance(): MyPageFragment {
-            return MyPageFragment()
-        }
+        fun newInstance() = MyPageFragment()
     }
 }
