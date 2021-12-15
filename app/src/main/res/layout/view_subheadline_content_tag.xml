@@ -35,13 +35,14 @@
             app:layout_constraintTop_toBottomOf="@id/tv_subheadline"
             tools:text="프로젝트 답변 프로젝트 답변 프로젝트 답변 프로젝트 답변 프로젝트 답변" />
 
+        <!-- todo : LabelOutlined 로 바꿔야함 -->
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_tag"
             style="@style/caption_2.bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/gap_8"
-            android:background="@drawable/bg_solid_white_stroke_light_grey2_radius4"
+            android:background="@drawable/bg_solid_transparent_stroke_light_grey2_radius4"
             android:padding="@dimen/gap_5"
             android:textColor="@color/grey_3"
             android:visibility="gone"
