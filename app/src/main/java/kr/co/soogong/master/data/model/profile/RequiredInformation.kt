@@ -7,6 +7,7 @@ import kr.co.soogong.master.data.dto.AttachmentDto
 import kr.co.soogong.master.data.dto.profile.MasterDto
 import kr.co.soogong.master.data.dto.profile.ProjectDto
 import kr.co.soogong.master.ui.profile.detail.CareerConverter
+import kr.co.soogong.master.utility.PhoneNumberHelper
 
 @Parcelize
 data class RequiredInformation(
@@ -39,7 +40,7 @@ data class RequiredInformation(
                     warrantyDescription = masterDto.warrantyDescription,
                 ),
                 career = masterDto.openDate?.let { CareerConverter.toCareer(it) },
-                tel = masterDto.tel,
+                tel = masterDto.tel?.let { PhoneNumberHelper.addDashToLocalNumber(it) },
                 ownerName = masterDto.ownerName,
                 majors = masterDto.projects,
                 companyAddress = CompanyAddress(

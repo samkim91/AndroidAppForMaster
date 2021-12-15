@@ -9,7 +9,6 @@ import kr.co.soogong.master.data.dto.profile.MasterDto
 data class Profile(
     val id: Int,
     val uid: String?,
-    val tel: String?,
     val representativeName: String?,
     val subscriptionPlan: String?,
     val approvedStatus: String?,
@@ -24,7 +23,6 @@ data class Profile(
             return Profile(
                 id = masterDto.id!!,
                 uid = masterDto.uid,
-                tel = masterDto.tel,
                 representativeName = if (!masterDto.shopName.isNullOrEmpty()) masterDto.shopName else masterDto.ownerName,
                 subscriptionPlan = masterDto.subscriptionPlan,
                 approvedStatus = masterDto.approvedStatus,

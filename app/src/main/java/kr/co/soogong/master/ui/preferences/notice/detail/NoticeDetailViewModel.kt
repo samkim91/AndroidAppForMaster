@@ -1,4 +1,4 @@
-package kr.co.soogong.master.ui.mypage.notice.detail
+package kr.co.soogong.master.ui.preferences.notice.detail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

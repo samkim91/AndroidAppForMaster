@@ -4,9 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.SavedStateHandle
-import kr.co.soogong.master.data.model.mypage.Notice
-import kr.co.soogong.master.ui.mypage.notice.detail.NoticeDetailActivity
-import kr.co.soogong.master.uihelper.requirment.action.EndRepairActivityHelper
+import kr.co.soogong.master.ui.preferences.notice.detail.NoticeDetailActivity
 
 object NoticeDetailActivityHelper {
     private const val EXTRA_KEY_BUNDLE = "EXTRA_KEY_BUNDLE_NOTICE_DETAIL"

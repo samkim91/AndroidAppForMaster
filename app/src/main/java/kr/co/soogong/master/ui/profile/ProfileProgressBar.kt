@@ -1,13 +1,8 @@
 package kr.co.soogong.master.ui.profile
 
-import android.content.Context
-import kr.co.soogong.master.R
 import kr.co.soogong.master.data.common.CodeTable
 import kr.co.soogong.master.data.model.profile.BasicInformation
 import kr.co.soogong.master.data.model.profile.RequiredInformation
-import kr.co.soogong.master.databinding.ActivityEditRequiredInformationBinding
-import kr.co.soogong.master.ui.profile.detail.requiredinformation.EditRequiredInformationViewModel
-import kr.co.soogong.master.utility.extension.toast
 import kotlin.reflect.full.declaredMemberProperties
 
 fun setRequirementInformationPercentage(
@@ -55,73 +50,5 @@ fun setRequirementInformationPercentage(
         }
 
         viewModel.percentageBasic.value = filledBasic.toDouble() / totalBasic.toDouble() * 100.0
-    }
-}
-
-fun isFulfilled(
-    context: Context,
-    binding: ActivityEditRequiredInformationBinding,
-    viewModel: EditRequiredInformationViewModel,
-): Boolean {
-    with(binding) {
-        with(viewModel.requiredInformation) {
-            when {
-                value?.introduction.isNullOrEmpty() -> {
-                    introduction.parent.requestChildFocus(introduction, introduction)
-                    context.toast(context.getString(R.string.required_profile_empty_introduction))
-                    return false
-                }
-                value?.shopImages.isNullOrEmpty() -> {
-                    shopImages.parent.requestChildFocus(shopImages, shopImages)
-                    context.toast(context.getString(R.string.required_profile_empty_shop_images))
-                    return false
-                }
-                value?.businessUnitInformation?.businessType.isNullOrEmpty() -> {
-                    businessUnitInformation.parent.requestChildFocus(businessUnitInformation,
-                        businessUnitInformation)
-                    context.toast(context.getString(R.string.required_profile_empty_business_unit_information))
-                    return false
-                }
-                value?.warrantyInformation?.warrantyPeriod == null -> {
-                    warrantyInformation.parent.requestChildFocus(warrantyInformation,
-                        warrantyInformation)
-                    context.toast(context.getString(R.string.required_profile_empty_warranty_information))
-                    return false
-                }
-                value?.career.isNullOrEmpty() -> {
-                    career.parent.requestChildFocus(career, career)
-                    context.toast(context.getString(R.string.required_profile_empty_career))
-                    return false
-                }
-                value?.tel.isNullOrEmpty() -> {
-                    phoneNumber.parent.requestChildFocus(phoneNumber, phoneNumber)
-                    context.toast(context.getString(R.string.required_profile_empty_phone_number))
-                    return false
-                }
-                value?.ownerName.isNullOrEmpty() -> {
-                    ownerName.parent.requestChildFocus(ownerName, ownerName)
-                    context.toast(context.getString(R.string.required_profile_empty_owner_name))
-                    return false
-                }
-                value?.majors.isNullOrEmpty() -> {
-                    major.parent.requestChildFocus(major, major)
-                    context.toast(context.getString(R.string.required_profile_empty_major))
-                    return false
-                }
-                value?.companyAddress?.roadAddress.isNullOrEmpty() -> {
-                    address.parent.requestChildFocus(address, address)
-                    context.toast(context.getString(R.string.required_profile_empty_address))
-                    return false
-                }
-                value?.serviceArea == null -> {
-                    serviceArea.parent.requestChildFocus(serviceArea, serviceArea)
-                    context.toast(context.getString(R.string.required_profile_empty_service))
-                    return false
-                }
-                else -> {
-                    return true
-                }
-            }
-        }
     }
 }

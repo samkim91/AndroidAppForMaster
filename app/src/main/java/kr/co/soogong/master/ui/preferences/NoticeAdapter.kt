@@ -1,18 +1,18 @@
-package kr.co.soogong.master.ui.mypage
+package kr.co.soogong.master.ui.preferences
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import kr.co.soogong.master.data.model.mypage.Notice
-import kr.co.soogong.master.ui.mypage.notice.NoticeDiffUtil
-import kr.co.soogong.master.ui.mypage.notice.NoticeInMyPageViewHolder
-import kr.co.soogong.master.ui.mypage.notice.NoticeInMyPageViewHolder.Companion.NoticeMypageListView
-import kr.co.soogong.master.ui.mypage.notice.NoticeViewHolder
-import kr.co.soogong.master.ui.mypage.notice.NoticeViewHolder.Companion.NoticeView
+import kr.co.soogong.master.ui.preferences.notice.NoticeDiffUtil
+import kr.co.soogong.master.ui.preferences.notice.NoticeInMyPageViewHolder
+import kr.co.soogong.master.ui.preferences.notice.NoticeInMyPageViewHolder.Companion.NoticeMypageListView
+import kr.co.soogong.master.ui.preferences.notice.NoticeViewHolder
+import kr.co.soogong.master.ui.preferences.notice.NoticeViewHolder.Companion.NoticeView
 
 class NoticeAdapter(
     private val useView: Int,
-    private val clickListener: (Int) -> Unit
+    private val clickListener: (Int) -> Unit,
 ) : ListAdapter<Notice, RecyclerView.ViewHolder>(NoticeDiffUtil()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (useView) {

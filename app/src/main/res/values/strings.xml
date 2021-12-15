@@ -11,7 +11,7 @@
     <string name="kilo_meters_digit">%d km</string>
     <string name="years">%d년</string>
     <string name="percent">%d%%</string>
-    <string name="version_text">버전 : v%s</string>
+    <string name="version_text">v%s</string>
 
     <string name="divide_by">0 / %d</string>
     <string name="over_one_thousand">+999</string>
@@ -89,8 +89,12 @@
     <string name="insert_certification_code_edittext_hint">인증번호 6자리 입력</string>
 
     <!-- My Page-->
-    <string name="my_page_account_setting_label">계정설정</string>
-    <string name="my_page_notice">공지사항</string>
+
+    <string name="notice">공지사항</string>
+    <string name="setting_alarm">알림 설정</string>
+    <string name="logout">로그아웃</string>
+    <string name="app_version">앱 버전</string>
+
     <string name="empty_notice_list_message">등록된 공지사항이 없습니다.</string>
     <string name="my_page_notice_total">전체보기</string>
     <string name="my_page_call_text">전화 문의하기</string>
@@ -101,7 +105,7 @@
     <string name="account_page_name">계정설정</string>
 
     <!-- Alarm -->
-    <string name="alarm_page_name">알림 설정</string>
+
     <string name="label_for_marketing_push">마케팅 푸시 알림</string>
     <string name="label_for_push_at_night">야간 푸시 알림</string>
     <string name="subtitle_for_push_at_night">오후 9시 ~ 오전 7시까지</string>

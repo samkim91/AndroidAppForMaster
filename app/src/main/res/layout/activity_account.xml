@@ -6,7 +6,7 @@
 
         <variable
             name="vm"
-            type="kr.co.soogong.master.ui.mypage.account.AccountViewModel" />
+            type="kr.co.soogong.master.ui.preferences.account.AccountViewModel" />
     </data>
 
     <LinearLayout

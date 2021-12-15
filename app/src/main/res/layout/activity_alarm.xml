@@ -6,7 +6,7 @@
 
         <variable
             name="vm"
-            type="kr.co.soogong.master.ui.mypage.alarm.AlarmViewModel" />
+            type="kr.co.soogong.master.ui.preferences.alarm.AlarmViewModel" />
     </data>
 
     <LinearLayout
