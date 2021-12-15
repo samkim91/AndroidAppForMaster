@@ -14,8 +14,7 @@ data class BasicInformation(
     val portfolios: List<PortfolioDto>?,
     val priceByProjects: List<PortfolioDto>?,
     val profileImage: AttachmentDto?,
-    val flexibleCost: List<MasterConfigDto>?,
-    val otherFlexibleOption: List<MasterConfigDto>?,
+    val masterConfigs: List<MasterConfigDto>?,
     val email: String?,
 ) : Parcelable {
     companion object {
@@ -25,8 +24,7 @@ data class BasicInformation(
                 portfolios = masterDto.masterPortfolios?.filter { portfolioDto -> portfolioDto.type == CodeTable.PORTFOLIO.code },
                 priceByProjects = masterDto.masterPortfolios?.filter { portfolioDto -> portfolioDto.type == CodeTable.PRICE_BY_PROJECT.code },
                 profileImage = masterDto.profileImage,
-                flexibleCost = masterDto.masterConfigs?.filter { masterConfigDto -> masterConfigDto.groupCode == CodeTable.FLEXIBLE_COST.code },
-                otherFlexibleOption = masterDto.masterConfigs?.filter { masterConfigDto -> masterConfigDto.groupCode == CodeTable.OTHER_FLEXIBLE_OPTION.code },
+                masterConfigs = masterDto.masterConfigs,
                 email = masterDto.email,
             )
         }

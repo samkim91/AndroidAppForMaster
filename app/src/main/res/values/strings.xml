@@ -41,6 +41,9 @@
     <string name="certify">인증하기</string>
     <string name="timer_form">%1$d:%2$d</string>
     <string name="selecting_done">선택완료</string>
+    <string name="possible">가능</string>
+    <string name="impossible">불가능</string>
+
 
     <string name="required_field_alert">필수 정보입니다.</string>
     <string name="fill_text_over_10">10자 이상으로 입력해주세요.</string>
@@ -302,8 +305,10 @@
     <string name="free_measure">무료 방문 실측 여부</string>
     <string name="portfolio">포트폴리오</string>
     <string name="portfolio_hint">알찬 포트폴리오로 고객님께 어필해보세요.</string>
+    <string name="portfolio_filled">%d개의 포트폴리오가 있습니다.</string>
     <string name="price_by_project">시공 종류별 가격</string>
     <string name="price_by_project_hint">다양한 시공의 가격 정보는 고객 선택에 중요한 기준이 됩니다.</string>
+    <string name="price_by_project_filled">%d개의 시공 종류별 가격이 있습니다.</string>
     <string name="master_configs">기타 변동 요인</string>
     <string name="master_configs_hint">고객님이 당황하지 않도록 변동 요인을 알려주세요.</string>
     <string name="email_address">이메일 주소</string>
@@ -381,7 +386,6 @@
     <string name="invalid_email_format">올바른 이메일을 입력해주세요.</string>
 
 
-
     <string name="master_type">마스터유형</string>
     <string name="store_name">업체명</string>
     <string name="short_introduce">한줄소개</string>
@@ -402,7 +406,6 @@
     <string name="image_after_job">시공 후</string>
     <string name="edit_flexible_cost_screen_title">현장 가격 변동 사항을 선택해주세요.</string>
     <string name="simple_text_for_registered_image">사진 등록이 완료됐어요!</string>
-
 
 
     <string name="title_edit_required_information_activity">필수 정보 등록·수정하기</string>
@@ -455,8 +458,7 @@
     <string name="profile_card_title_for_email">이메일</string>
 
     <string name="edit_free_measure_fragment_title">방문 실측이 무료일 경우에만 우선 실측 배정이 가능합니다. </string>
-    <string name="edit_free_measure_fragment_agree_text">가능합니다.</string>
-    <string name="edit_free_measure_fragment_disagree_text">불가능합니다.</string>
+
 
     <!--  FCM  -->
     <string name="default_notification_channel_id" translatable="false">soogong_master</string>
