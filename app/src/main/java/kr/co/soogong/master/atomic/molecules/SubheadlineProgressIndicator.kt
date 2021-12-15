@@ -46,7 +46,7 @@ class SubheadlineProgressIndicator @JvmOverloads constructor(
             field = value
             value?.let { double ->
                 double.roundToInt().let { int ->
-                    binding.tvPercent.text = resources.getString(R.string.percent, int.toString())
+                    binding.tvPercent.text = resources.getString(R.string.percent, int)
                     binding.lpiProgress.progress = int
                 }
             }

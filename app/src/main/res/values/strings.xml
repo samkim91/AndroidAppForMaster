@@ -10,7 +10,7 @@
     <string name="kilo_meters">km</string>
     <string name="kilo_meters_digit">%d km</string>
     <string name="years">%d년</string>
-    <string name="percent">%s%%</string>
+    <string name="percent">%d%%</string>
     <string name="version_text">버전 : v%s</string>
 
     <string name="divide_by">0 / %d</string>

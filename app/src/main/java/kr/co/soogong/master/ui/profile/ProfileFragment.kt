@@ -207,6 +207,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
                 profile?.requiredInformation?.coordinate,
                 profile?.requiredInformation?.serviceArea
             )
+            setRequirementInformationPercentage(viewModel)
         })
     }
 

@@ -161,7 +161,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/bic_profile_guideline"
-                    app:percent="@{40.0}"
+                    app:percent="@{vm.percentageRequired}"
                     app:title="@{@string/completion_of_required_information}" />
 
                 <kr.co.soogong.master.atomic.molecules.BoxContentCancellable
@@ -305,7 +305,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/hbm_service_area"
-                    app:percent="@{30.0}"
+                    app:percent="@{vm.percentageBasic}"
                     app:title="@{@string/completion_of_optional_information}" />
 
                 <kr.co.soogong.master.atomic.molecules.BoxContentCancellable
