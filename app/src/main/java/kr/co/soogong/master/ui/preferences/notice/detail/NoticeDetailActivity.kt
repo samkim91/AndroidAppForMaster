@@ -1,25 +1,23 @@
-package kr.co.soogong.master.ui.mypage.alarm
+package kr.co.soogong.master.ui.preferences.notice.detail
 
 import android.os.Bundle
 import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
-import kr.co.soogong.master.databinding.ActivityAlarmBinding
+import kr.co.soogong.master.databinding.ActivityNoticeDetailBinding
 import kr.co.soogong.master.ui.base.BaseActivity
 import timber.log.Timber
 
 @AndroidEntryPoint
-class AlarmActivity : BaseActivity<ActivityAlarmBinding>(
-    R.layout.activity_alarm
+class NoticeDetailActivity : BaseActivity<ActivityNoticeDetailBinding>(
+    R.layout.activity_notice_detail
 ) {
-
-    private val viewModel: AlarmViewModel by viewModels()
+    private val viewModel: NoticeDetailViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Timber.tag(TAG).d("onCreate: ")
         initLayout()
-        viewModel.requestAlarmStatus()
     }
 
     override fun initLayout() {
@@ -27,10 +25,10 @@ class AlarmActivity : BaseActivity<ActivityAlarmBinding>(
 
         bind {
             vm = viewModel
-            lifecycleOwner = this@AlarmActivity
+            lifecycleOwner = this@NoticeDetailActivity
 
             with(actionBar) {
-                title.text = getString(R.string.alarm_page_name)
+                title.text = "공지 사항"
                 backButton.setOnClickListener {
                     super.onBackPressed()
                 }
@@ -38,7 +36,13 @@ class AlarmActivity : BaseActivity<ActivityAlarmBinding>(
         }
     }
 
+    override fun onStart() {
+        super.onStart()
+        viewModel.requestNotice()
+    }
+
     companion object {
-        private const val TAG = "AlarmActivity"
+        private const val TAG = "NoticeDetailActivity"
     }
 }
+

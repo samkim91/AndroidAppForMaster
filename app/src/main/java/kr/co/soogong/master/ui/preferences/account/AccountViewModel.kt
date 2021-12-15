@@ -1,4 +1,4 @@
-package kr.co.soogong.master.ui.mypage.account
+package kr.co.soogong.master.ui.preferences.account
 
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kr.co.soogong.master.ui.base.BaseViewModel

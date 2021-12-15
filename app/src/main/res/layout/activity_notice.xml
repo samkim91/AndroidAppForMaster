@@ -8,7 +8,7 @@
 
         <variable
             name="vm"
-            type="kr.co.soogong.master.ui.mypage.notice.NoticeViewModel" />
+            type="kr.co.soogong.master.ui.preferences.notice.NoticeViewModel" />
     </data>
 
     <LinearLayout

@@ -1,19 +1,20 @@
-package kr.co.soogong.master.ui.mypage.notice.detail
+package kr.co.soogong.master.ui.preferences.notice
 
 import android.os.Bundle
 import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
-import kr.co.soogong.master.databinding.ActivityNoticeDetailBinding
+import kr.co.soogong.master.databinding.ActivityNoticeBinding
 import kr.co.soogong.master.ui.base.BaseActivity
+import kr.co.soogong.master.ui.preferences.NoticeAdapter
 import kr.co.soogong.master.uihelper.mypage.notice.detail.NoticeDetailActivityHelper
 import timber.log.Timber
 
 @AndroidEntryPoint
-class NoticeDetailActivity : BaseActivity<ActivityNoticeDetailBinding>(
-    R.layout.activity_notice_detail
+class NoticeActivity : BaseActivity<ActivityNoticeBinding>(
+    R.layout.activity_notice
 ) {
-    private val viewModel: NoticeDetailViewModel by viewModels()
+    private val viewModel: NoticeViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,10 +27,14 @@ class NoticeDetailActivity : BaseActivity<ActivityNoticeDetailBinding>(
 
         bind {
             vm = viewModel
-            lifecycleOwner = this@NoticeDetailActivity
+            lifecycleOwner = this@NoticeActivity
+
+            list.adapter = NoticeAdapter(NoticeViewHolder.NoticeView) {
+                startActivity(NoticeDetailActivityHelper.getIntent(this@NoticeActivity, it))
+            }
 
             with(actionBar) {
-                title.text = "공지 사항"
+                title.text = getString(R.string.notice)
                 backButton.setOnClickListener {
                     super.onBackPressed()
                 }
@@ -39,11 +44,11 @@ class NoticeDetailActivity : BaseActivity<ActivityNoticeDetailBinding>(
 
     override fun onStart() {
         super.onStart()
-        viewModel.requestNotice()
+        Timber.tag(TAG).d("onStart: ")
+        viewModel.getNoticeList()
     }
 
     companion object {
-        private const val TAG = "NoticeDetailActivity"
+        private const val TAG = "NoticeActivity"
     }
 }
-

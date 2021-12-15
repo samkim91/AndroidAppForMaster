@@ -1,4 +1,4 @@
-package kr.co.soogong.master.ui.mypage
+package kr.co.soogong.master.ui.preferences
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -18,7 +18,7 @@ import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
-class MyPageViewModel @Inject constructor(
+class PreferencesViewModel @Inject constructor(
     private val getProfileUseCase: GetProfileUseCase,
     private val getNoticeListUseCase: GetNoticeListUseCase,
     private val signOutUseCase: SignOutUseCase,
@@ -32,6 +32,11 @@ class MyPageViewModel @Inject constructor(
         get() = _noticeList
 
     val version = MutableLiveData("")
+
+    fun getData() {
+        requestNoticeList()
+        requestUserProfile()
+    }
 
     private fun requestUserProfile() {
         getProfileUseCase()
@@ -60,29 +65,32 @@ class MyPageViewModel @Inject constructor(
             .addToDisposable()
     }
 
-    fun initialize() {
-        requestNoticeList()
-        requestUserProfile()
-    }
-
-    fun alarmSettingAction() {
-        Timber.tag(TAG).i("Alarm Setting Button")
+    fun moveToSettingAlarm() {
+        Timber.tag(TAG).i("moveToSettingAlarm")
         setAction(ALARM)
     }
 
-    fun accountSettingAction() {
-        Timber.tag(TAG).i("Account Setting Button")
-        setAction(ACCOUNT)
-    }
-
-    fun noticeViewAction() {
-        Timber.tag(TAG).i("Notice View Button")
+    fun moveToNotice() {
+        Timber.tag(TAG).i("moveToNotice")
         setAction(NOTICE)
     }
 
-    fun callAction() {
-        Timber.tag(TAG).i("CALL Button")
-        setAction(CALL)
+    fun requestLogout() {
+        Timber.tag(TAG).i("requestLogout")
+        setAction(REQUEST_LOGOUT)
+    }
+
+    fun logout() {
+        Timber.tag(TAG).i("logout")
+        viewModelScope.launch {
+            signOutUseCase()
+            setAction(LOGOUT)
+        }
+    }
+
+    fun updateVersion() {
+        Timber.tag(TAG).i("logout")
+        setAction(VERSION)
     }
 
     fun kakaoAction() {
@@ -90,21 +98,26 @@ class MyPageViewModel @Inject constructor(
         setAction(KAKAO)
     }
 
-    fun logout() {
-        Timber.tag(TAG).i("Logout Button")
-        viewModelScope.launch {
-            signOutUseCase()
-            setAction(LOGOUT)
-        }
-    }
+//    fun callToSoogong() {
+//        Timber.tag(TAG).i("callToSoogong")
+//        setAction(CALL)
+//    }
+
+    //    fun accountSettingAction() {
+//        Timber.tag(TAG).i("Account Setting Button")
+//        setAction(ACCOUNT)
+//    }
 
     companion object {
-        private const val TAG = "MyPageViewModel"
-        const val ACCOUNT = "ACCOUNT"
-        const val ALARM = "ALARM"
+        private const val TAG = "PreferencesViewModel"
         const val NOTICE = "NOTICE"
-        const val CALL = "CALL"
-        const val KAKAO = "KAKAO"
+        const val ALARM = "ALARM"
+        const val REQUEST_LOGOUT = "REQUEST_LOGOUT"
         const val LOGOUT = "LOGOUT"
+        const val VERSION = "VERSION"
+
+        const val KAKAO = "KAKAO"
+        //        const val ACCOUNT = "ACCOUNT"
+        //        const val CALL = "CALL"
     }
 }

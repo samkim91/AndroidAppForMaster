@@ -1,4 +1,4 @@
-package kr.co.soogong.master.ui.mypage.alarm
+package kr.co.soogong.master.ui.preferences.alarm
 
 import android.widget.CompoundButton
 import androidx.lifecycle.LiveData

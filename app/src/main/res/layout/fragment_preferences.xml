@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="kr.co.soogong.master.ui.preferences.PreferencesViewModel" />
+
+        <variable
+            name="shapeThemeLabelApprovedStatus"
+            type="kr.co.soogong.master.data.common.ShapeTheme" />
+    </data>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <kr.co.soogong.master.atomic.molecules.ActionBar
+            android:id="@+id/ab_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title="@{@string/main_activity_navigation_bar_preferences}" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:overScrollMode="never">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/gap_16"
+                android:paddingTop="@dimen/gap_24"
+                android:paddingEnd="@dimen/gap_16"
+                android:paddingBottom="@dimen/gap_24">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_profile_image"
+                    android:layout_width="@dimen/gap_0"
+                    android:layout_height="@dimen/gap_0"
+                    app:layout_constraintDimensionRatio="H, 1:1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintWidth_percent="0.20"
+                    app:setCircleImageByUrl="@{vm.profile.basicInformation.profileImage.url}" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_owner_name"
+                    style="@style/headline.bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/gap_16"
+                    android:text="@{vm.profile.requiredInformation.ownerName}"
+                    android:textColor="@color/black"
+                    app:layout_constraintBottom_toTopOf="@id/tv_tel"
+                    app:layout_constraintStart_toEndOf="@id/iv_profile_image"
+                    app:layout_constraintTop_toTopOf="@id/iv_profile_image"
+                    app:layout_constraintVertical_chainStyle="packed"
+                    tools:text="마스터이름" />
+
+                <kr.co.soogong.master.atomic.atoms.LabelOutlined
+                    android:id="@+id/lo_approved_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/gap_6"
+                    app:approvedStatusToLabel="@{vm.profile.approvedStatus}"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_owner_name"
+                    app:layout_constraintStart_toEndOf="@id/tv_owner_name"
+                    app:layout_constraintTop_toTopOf="@id/tv_owner_name"
+                    app:shapeTheme="@{shapeThemeLabelApprovedStatus}" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_tel"
+                    style="@style/footnote.regular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/gap_4"
+                    android:text="@{vm.profile.requiredInformation.tel}"
+                    android:textColor="@color/grey_2"
+                    app:layout_constraintBottom_toBottomOf="@id/iv_profile_image"
+                    app:layout_constraintStart_toStartOf="@id/tv_owner_name"
+                    app:layout_constraintTop_toBottomOf="@id/tv_owner_name"
+                    tools:text="010-1234-1234" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_divider_profile"
+                    android:layout_width="@dimen/gap_0"
+                    android:layout_height="@dimen/gap_1"
+                    android:layout_marginTop="@dimen/gap_24"
+                    android:background="@color/light_grey_1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/iv_profile_image" />
+
+                <kr.co.soogong.master.atomic.molecules.IconSubheadlineArrow
+                    android:id="@+id/isa_notice"
+                    android:layout_width="@dimen/gap_0"
+                    android:layout_height="@dimen/gap_64"
+                    android:layout_marginTop="@dimen/gap_24"
+                    android:onClick="@{() -> vm.moveToNotice()}"
+                    app:icon="@{@drawable/ic_speaker}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/iv_divider_profile"
+                    app:subheadline="@{@string/notice}" />
+
+                <kr.co.soogong.master.atomic.molecules.IconSubheadlineArrow
+                    android:id="@+id/isa_setting_alarm"
+                    android:layout_width="@dimen/gap_0"
+                    android:layout_height="@dimen/gap_64"
+                    android:onClick="@{() -> vm.moveToSettingAlarm()}"
+                    app:icon="@{@drawable/ic_bell}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/isa_notice"
+                    app:subheadline="@{@string/setting_alarm}" />
+
+                <kr.co.soogong.master.atomic.molecules.IconSubheadlineArrow
+                    android:id="@+id/isa_logout"
+                    android:layout_width="@dimen/gap_0"
+                    android:layout_height="@dimen/gap_64"
+                    android:onClick="@{() -> vm.requestLogout()}"
+                    app:icon="@{@drawable/ic_logout}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/isa_setting_alarm"
+                    app:subheadline="@{@string/logout}" />
+
+                <kr.co.soogong.master.atomic.molecules.IconSubheadlineArrow
+                    android:id="@+id/isa_app_version"
+                    android:layout_width="@dimen/gap_0"
+                    android:layout_height="@dimen/gap_64"
+                    android:onClick="@{() -> vm.updateVersion()}"
+                    app:endText="@{@string/version_text(vm.version)}"
+                    app:icon="@{@drawable/ic_bulb}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/isa_logout"
+                    app:subheadline="@{@string/app_version}" />
+
+                <!--            <androidx.appcompat.widget.AppCompatTextView-->
+                <!--                android:id="@+id/master_store_name"-->
+                <!--                style="@style/text_style_16sp.medium"-->
+                <!--                android:layout_width="wrap_content"-->
+                <!--                android:layout_height="wrap_content"-->
+                <!--                android:layout_marginStart="@dimen/my_page_master_store_name_margin_start"-->
+                <!--                android:layout_marginTop="@dimen/my_page_master_store_name_margin_top"-->
+                <!--                android:ellipsize="end"-->
+                <!--                android:maxLines="1"-->
+                <!--                android:text='@{vm.profile.representativeName.length() != 0 ? vm.profile.representativeName : "프로필에서 대표이름을 입력해주세요."}'-->
+                <!--                android:textColor="@color/text_basic_color"-->
+                <!--                app:layout_constrainedWidth="true"-->
+                <!--                app:layout_constraintEnd_toStartOf="@id/master_label"-->
+                <!--                app:layout_constraintHorizontal_bias="0"-->
+                <!--                app:layout_constraintHorizontal_chainStyle="packed"-->
+                <!--                app:layout_constraintStart_toStartOf="parent"-->
+                <!--                app:layout_constraintTop_toTopOf="parent"-->
+                <!--                tools:text="이레하우징이레하우징이레이레하우징이레하우징이레" />-->
+
+                <!--            <androidx.appcompat.widget.AppCompatTextView-->
+                <!--                android:id="@+id/master_label"-->
+                <!--                style="@style/text_style_14sp.medium"-->
+                <!--                android:layout_width="wrap_content"-->
+                <!--                android:layout_height="wrap_content"-->
+                <!--                android:layout_marginStart="@dimen/my_page_master_label_margin_start"-->
+                <!--                android:layout_marginEnd="@dimen/my_page_master_label_margin_top"-->
+                <!--                app:subscriptionPlan="@{vm.profile.subscriptionPlan}"-->
+                <!--                android:textColor="@color/c_555555"-->
+                <!--                app:layout_constraintBottom_toBottomOf="@id/master_store_name"-->
+                <!--                app:layout_constraintEnd_toStartOf="@id/account_setting"-->
+                <!--                app:layout_constraintStart_toEndOf="@id/master_store_name"-->
+                <!--                app:layout_constraintTop_toTopOf="@id/master_store_name" />-->
+
+                <!--            <androidx.appcompat.widget.AppCompatTextView-->
+                <!--                android:id="@+id/master_id"-->
+                <!--                style="@style/text_style_14sp.medium"-->
+                <!--                android:layout_width="wrap_content"-->
+                <!--                android:layout_height="wrap_content"-->
+                <!--                android:layout_marginStart="@dimen/gap_20"-->
+                <!--                android:layout_marginTop="@dimen/gap_20"-->
+                <!--                android:text='@{vm.profile.tel.length() != 0 ? vm.profile.tel : "프로필에서 휴대폰 번호를 입력해주세요."}'-->
+                <!--                android:textColor="@color/text_basic_color"-->
+                <!--                app:layout_constraintStart_toStartOf="parent"-->
+                <!--                app:layout_constraintTop_toBottomOf="@id/master_store_name"-->
+                <!--                tools:text="010-3278-7026" />-->
+
+                <!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+                <!--                android:id="@+id/account_setting"-->
+                <!--                android:layout_width="wrap_content"-->
+                <!--                android:layout_height="wrap_content"-->
+                <!--                android:layout_marginEnd="@dimen/my_page_account_setting_margin_end"-->
+                <!--                android:onClick="@{() -> vm.accountSettingAction()}"-->
+                <!--                app:layout_constraintBottom_toBottomOf="@id/line"-->
+                <!--                app:layout_constraintEnd_toEndOf="parent"-->
+                <!--                app:layout_constraintTop_toTopOf="parent">-->
+
+                <!--                <androidx.appcompat.widget.AppCompatTextView-->
+                <!--                    style="@style/text_style_14sp.medium"-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="0dp"-->
+                <!--                    android:layout_marginEnd="@dimen/my_page_account_setting_label_margin_end"-->
+                <!--                    android:gravity="center"-->
+                <!--                    android:text="@string/my_page_account_setting_label"-->
+                <!--                    android:textColor="@color/text_basic_color"-->
+                <!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+                <!--                    app:layout_constraintEnd_toStartOf="@id/account_setting_icon"-->
+                <!--                    app:layout_constraintTop_toTopOf="parent" />-->
+
+                <!--                <androidx.appcompat.widget.AppCompatImageView-->
+                <!--                    android:id="@+id/account_setting_icon"-->
+                <!--                    android:layout_width="@dimen/my_page_account_setting_icon_width"-->
+                <!--                    android:layout_height="@dimen/my_page_account_setting_icon_height"-->
+                <!--                    android:src="@drawable/ic_settings"-->
+                <!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+                <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+                <!--                    app:layout_constraintTop_toTopOf="parent" />-->
+
+
+                <!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+                <!--            <androidx.appcompat.widget.AppCompatImageView-->
+                <!--                android:id="@+id/line"-->
+                <!--                android:layout_width="match_parent"-->
+                <!--                android:layout_height="@dimen/my_page_line_height"-->
+                <!--                android:layout_marginTop="@dimen/my_page_line_margin_top"-->
+                <!--                android:background="@color/c_E3E3E3"-->
+                <!--                app:layout_constraintTop_toBottomOf="@id/master_id" />-->
+
+                <!--            <androidx.appcompat.widget.AppCompatTextView-->
+                <!--                android:id="@+id/notice_title"-->
+                <!--                style="@style/text_style_16sp.medium"-->
+                <!--                android:layout_width="wrap_content"-->
+                <!--                android:layout_height="wrap_content"-->
+                <!--                android:layout_marginStart="@dimen/my_page_margin_start"-->
+                <!--                android:layout_marginTop="@dimen/my_page_notice_margin_top"-->
+                <!--                android:text="@string/my_page_notice"-->
+                <!--                android:textColor="@color/text_basic_color"-->
+                <!--                app:layout_constraintStart_toStartOf="parent"-->
+                <!--                app:layout_constraintTop_toBottomOf="@id/line" />-->
+
+                <!--            <FrameLayout-->
+                <!--                android:id="@+id/notice_new"-->
+                <!--                android:layout_width="@dimen/my_page_notice_badge_width"-->
+                <!--                android:layout_height="@dimen/my_page_notice_badge_height"-->
+                <!--                android:layout_marginStart="@dimen/my_page_notice_badge_margin_start"-->
+                <!--                android:background="@drawable/badge_background"-->
+                <!--                android:visibility="gone"-->
+                <!--                bind:notice_list_new_visible="@{vm.noticeList}"-->
+                <!--                app:layout_constraintBottom_toBottomOf="@id/notice_title"-->
+                <!--                app:layout_constraintStart_toEndOf="@id/notice_title"-->
+                <!--                app:layout_constraintTop_toTopOf="@id/notice_title">-->
+
+                <!--                <TextView-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="match_parent"-->
+                <!--                    android:gravity="center"-->
+                <!--                    android:text="@string/new_badge_text"-->
+                <!--                    android:textColor="@color/c_FFFFFF"-->
+                <!--                    android:textSize="@dimen/my_page_notice_badge_text_size"-->
+                <!--                    android:textStyle="bold" />-->
+                <!--            </FrameLayout>-->
+
+                <!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+                <!--                android:layout_width="wrap_content"-->
+                <!--                android:layout_height="wrap_content"-->
+                <!--                android:layout_marginTop="@dimen/my_page_notice_total_margin_top"-->
+                <!--                android:layout_marginEnd="@dimen/my_page_margin_end"-->
+                <!--                android:onClick="@{() ->vm.noticeViewAction()}"-->
+                <!--                app:layout_constraintEnd_toEndOf="parent"-->
+                <!--                app:layout_constraintTop_toBottomOf="@id/line">-->
+
+                <!--                <androidx.appcompat.widget.AppCompatTextView-->
+                <!--                    android:id="@+id/detail_title"-->
+                <!--                    style="@style/text_style_14sp.medium"-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginEnd="@dimen/my_page_notice_total_margin_end"-->
+                <!--                    android:text="@string/my_page_notice_total"-->
+                <!--                    android:textColor="@color/text_primary_color"-->
+                <!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+                <!--                    app:layout_constraintEnd_toStartOf="@id/arrow_button"-->
+                <!--                    app:layout_constraintStart_toStartOf="parent"-->
+                <!--                    app:layout_constraintTop_toTopOf="parent" />-->
+
+                <!--                <androidx.appcompat.widget.AppCompatImageView-->
+                <!--                    android:id="@+id/arrow_button"-->
+                <!--                    android:layout_width="@dimen/my_page_notice_total_arrow_width"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:src="@drawable/ic_arrow_right"-->
+                <!--                    app:layout_constraintBottom_toBottomOf="@id/detail_title"-->
+                <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+                <!--                    app:layout_constraintTop_toTopOf="@id/detail_title" />-->
+
+                <!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+                <!--            <androidx.recyclerview.widget.RecyclerView-->
+                <!--                android:id="@+id/notice_list"-->
+                <!--                android:layout_width="match_parent"-->
+                <!--                android:layout_height="wrap_content"-->
+                <!--                android:layout_marginStart="@dimen/my_page_margin_start"-->
+                <!--                android:layout_marginTop="@dimen/my_page_notice_list_margin_top"-->
+                <!--                android:layout_marginEnd="@dimen/my_page_margin_end"-->
+                <!--                android:background="@drawable/line_round_corner"-->
+                <!--                android:minHeight="@dimen/my_page_notice_list_height"-->
+                <!--                android:overScrollMode="never"-->
+                <!--                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
+                <!--                app:layout_constraintEnd_toEndOf="parent"-->
+                <!--                app:layout_constraintStart_toStartOf="parent"-->
+                <!--                app:layout_constraintTop_toBottomOf="@id/notice_title"-->
+                <!--                bind:notice_list="@{vm.noticeList}"-->
+                <!--                tools:itemCount="3"-->
+                <!--                tools:listitem="@layout/view_holder_notice_in_mypage_item" />-->
+
+                <!--            <androidx.appcompat.widget.AppCompatImageView-->
+                <!--                android:id="@+id/empty_icon"-->
+                <!--                android:layout_width="@dimen/gap_24"-->
+                <!--                android:layout_height="@dimen/gap_24"-->
+                <!--                android:src="@drawable/ic_no_card"-->
+                <!--                app:layout_constraintBottom_toTopOf="@id/empty_text"-->
+                <!--                app:layout_constraintEnd_toEndOf="@id/notice_list"-->
+                <!--                app:layout_constraintStart_toStartOf="@id/notice_list"-->
+                <!--                app:layout_constraintTop_toTopOf="@id/notice_list"-->
+                <!--                app:layout_constraintVertical_chainStyle="packed"-->
+                <!--                bind:visible="@{vm.noticeList.empty}" />-->
+
+                <!--            <androidx.appcompat.widget.AppCompatTextView-->
+                <!--                android:id="@+id/empty_text"-->
+                <!--                style="@style/text_style_14sp.medium"-->
+                <!--                android:layout_width="wrap_content"-->
+                <!--                android:layout_height="wrap_content"-->
+                <!--                android:text="@string/empty_notice_list_message"-->
+                <!--                android:textColor="@color/c_BDBDBD"-->
+                <!--                android:textSize="18sp"-->
+                <!--                android:layout_marginTop="@dimen/gap_10"-->
+                <!--                app:layout_constraintBottom_toBottomOf="@id/notice_list"-->
+                <!--                app:layout_constraintEnd_toEndOf="@id/notice_list"-->
+                <!--                app:layout_constraintStart_toStartOf="@id/notice_list"-->
+                <!--                app:layout_constraintTop_toBottomOf="@id/empty_icon"-->
+                <!--                bind:visible="@{vm.noticeList.empty}" />-->
+
+                <!--            <kr.co.soogong.master.atomic.molecules.SettingsButton-->
+                <!--                android:id="@+id/button_setting_alarm"-->
+                <!--                android:layout_width="match_parent"-->
+                <!--                android:layout_height="@dimen/my_page_setting_button_height"-->
+                <!--                android:onClick="@{() -> vm.alarmSettingAction()}"-->
+                <!--                app:layout_constraintEnd_toEndOf="parent"-->
+                <!--                app:layout_constraintStart_toStartOf="parent"-->
+                <!--                app:layout_constraintTop_toBottomOf="@id/notice_list"-->
+                <!--                app:title='@{"알림 설정"}' />-->
+
+                <!--            <kr.co.soogong.master.atomic.molecules.SettingsButton-->
+                <!--                android:id="@+id/button_logout"-->
+                <!--                android:layout_width="match_parent"-->
+                <!--                android:layout_height="@dimen/my_page_logout_button_height"-->
+                <!--                android:onClick="@{() -> vm.logout()}"-->
+                <!--                app:layout_constraintEnd_toEndOf="parent"-->
+                <!--                app:layout_constraintStart_toStartOf="parent"-->
+                <!--                app:layout_constraintTop_toBottomOf="@id/button_setting_alarm"-->
+                <!--                app:title='@{"로그아웃"}' />-->
+
+                <!--            <ImageView-->
+                <!--                android:id="@+id/call_button"-->
+                <!--                android:layout_width="match_parent"-->
+                <!--                android:layout_height="@dimen/my_page_call_button_height"-->
+                <!--                android:layout_marginStart="@dimen/my_page_margin_start"-->
+                <!--                android:layout_marginTop="@dimen/my_page_call_button_margin_top"-->
+                <!--                android:layout_marginEnd="@dimen/my_page_margin_end"-->
+                <!--                android:background="@drawable/shape_transparent_background_green_board_radius8"-->
+                <!--                android:onClick="@{() -> vm.callAction()}"-->
+                <!--                app:layout_constraintEnd_toEndOf="parent"-->
+                <!--                app:layout_constraintStart_toStartOf="parent"-->
+                <!--                app:layout_constraintTop_toBottomOf="@id/button_logout" />-->
+
+                <!--            <ImageView-->
+                <!--                android:id="@+id/call_button_icon"-->
+                <!--                android:layout_width="@dimen/my_page_call_button_icon_width"-->
+                <!--                android:layout_height="wrap_content"-->
+                <!--                android:src="@drawable/ic_call"-->
+                <!--                app:layout_constraintBottom_toBottomOf="@id/call_button"-->
+                <!--                app:layout_constraintEnd_toStartOf="@id/call_button_text"-->
+                <!--                app:layout_constraintHorizontal_chainStyle="packed"-->
+                <!--                app:layout_constraintStart_toStartOf="@id/call_button"-->
+                <!--                app:layout_constraintTop_toTopOf="@id/call_button" />-->
+
+                <!--            <androidx.appcompat.widget.AppCompatTextView-->
+                <!--                android:id="@+id/call_button_text"-->
+                <!--                style="@style/text_style_16sp.bold"-->
+                <!--                android:layout_width="wrap_content"-->
+                <!--                android:layout_height="wrap_content"-->
+                <!--                android:layout_marginStart="@dimen/my_page_call_button_text_margin_start"-->
+                <!--                android:text="@string/my_page_call_text"-->
+                <!--                android:textColor="@color/c_1FC472"-->
+                <!--                app:layout_constraintBottom_toBottomOf="@id/call_button"-->
+                <!--                app:layout_constraintEnd_toEndOf="@id/call_button"-->
+                <!--                app:layout_constraintStart_toEndOf="@id/call_button_icon"-->
+                <!--                app:layout_constraintTop_toTopOf="@id/call_button" />-->
+
+                <!--            <ImageView-->
+                <!--                android:id="@+id/kakao_talk_btn"-->
+                <!--                android:layout_width="match_parent"-->
+                <!--                android:layout_height="@dimen/button_height"-->
+                <!--                android:layout_marginStart="@dimen/my_page_margin_start"-->
+                <!--                android:layout_marginTop="8dp"-->
+                <!--                android:layout_marginEnd="@dimen/my_page_margin_end"-->
+                <!--                android:background="@drawable/shape_kakao_background_radius8"-->
+                <!--                android:onClick="@{() -> vm.kakaoAction()}"-->
+                <!--                app:layout_constraintEnd_toEndOf="parent"-->
+                <!--                app:layout_constraintStart_toStartOf="parent"-->
+                <!--                app:layout_constraintTop_toBottomOf="@id/call_button" />-->
+
+                <!--            <ImageView-->
+                <!--                android:id="@+id/kakao_talk_btn_icon"-->
+                <!--                android:layout_width="@dimen/my_page_kakao_button_icon_width"-->
+                <!--                android:layout_height="wrap_content"-->
+                <!--                android:src="@drawable/ic_kakao"-->
+                <!--                app:layout_constraintBottom_toBottomOf="@id/kakao_talk_btn"-->
+                <!--                app:layout_constraintEnd_toStartOf="@id/kakao_talk_btn_text"-->
+                <!--                app:layout_constraintHorizontal_chainStyle="packed"-->
+                <!--                app:layout_constraintStart_toStartOf="@id/kakao_talk_btn"-->
+                <!--                app:layout_constraintTop_toTopOf="@id/kakao_talk_btn" />-->
+
+                <!--            <androidx.appcompat.widget.AppCompatTextView-->
+                <!--                android:id="@+id/kakao_talk_btn_text"-->
+                <!--                style="@style/text_style_16sp.bold"-->
+                <!--                android:layout_width="wrap_content"-->
+                <!--                android:layout_height="wrap_content"-->
+                <!--                android:layout_marginStart="@dimen/my_page_kakao_button_text_margin_start"-->
+                <!--                android:text="@string/my_page_kakao_text"-->
+                <!--                android:textColor="@color/c_381E1E"-->
+                <!--                app:layout_constraintBottom_toBottomOf="@id/kakao_talk_btn"-->
+                <!--                app:layout_constraintEnd_toEndOf="@id/kakao_talk_btn"-->
+                <!--                app:layout_constraintStart_toEndOf="@id/kakao_talk_btn_icon"-->
+                <!--                app:layout_constraintTop_toTopOf="@id/kakao_talk_btn" />-->
+
+                <!--            <androidx.appcompat.widget.AppCompatTextView-->
+                <!--                android:id="@+id/time"-->
+                <!--                style="@style/text_style_16sp.medium"-->
+                <!--                android:layout_width="wrap_content"-->
+                <!--                android:layout_height="wrap_content"-->
+                <!--                android:layout_marginTop="@dimen/my_page_time_notice_margin_top"-->
+                <!--                android:layout_marginBottom="@dimen/my_page_time_notice_margin_bottom"-->
+                <!--                android:gravity="center"-->
+                <!--                android:text="@string/my_page_time_notice"-->
+                <!--                android:textColor="@color/text_primary_color"-->
+                <!--                app:layout_constraintEnd_toEndOf="parent"-->
+                <!--                app:layout_constraintStart_toStartOf="parent"-->
+                <!--                app:layout_constraintTop_toBottomOf="@id/kakao_talk_btn" />-->
+
+                <!--            <androidx.appcompat.widget.AppCompatTextView-->
+                <!--                android:id="@+id/version"-->
+                <!--                style="@style/text_style_12sp.regular"-->
+                <!--                android:layout_width="wrap_content"-->
+                <!--                android:layout_height="wrap_content"-->
+                <!--                android:layout_marginTop="@dimen/gap_20"-->
+                <!--                android:layout_marginBottom="@dimen/gap_20"-->
+                <!--                android:layout_marginEnd="@dimen/gap_20"-->
+                <!--                android:text="@{vm.version}"-->
+                <!--                tools:text="버전 : 1.0.0"-->
+                <!--                android:textColor="@color/text_primary_color"-->
+                <!--                app:layout_constraintBottom_toBottomOf="parent"-->
+                <!--                app:layout_constraintEnd_toEndOf="parent"-->
+                <!--                app:layout_constraintTop_toBottomOf="@id/time" />-->
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</layout>

@@ -1,4 +1,4 @@
-package kr.co.soogong.master.ui.mypage
+package kr.co.soogong.master.ui.preferences
 
 import android.view.View
 import android.widget.FrameLayout

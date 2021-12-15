@@ -277,5 +277,17 @@ data class DialogData(
                 null,
                 context.getColor(R.color.text_basic_color),
             )
+
+        fun getConfirmingLogout(context: Context) =
+            DialogData(
+                "정말 로그아웃 하시겠습니까?",
+                context.getColor(R.color.text_basic_color),
+                null,
+                context.getColor(R.color.c_1FC472),
+                "네",
+                context.getColor(R.color.text_basic_color),
+                "아니요",
+                context.getColor(R.color.text_basic_color),
+            )
     }
 }

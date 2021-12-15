@@ -5,7 +5,9 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.res.ResourcesCompat
+import androidx.databinding.BindingAdapter
 import kr.co.soogong.master.R
+import kr.co.soogong.master.data.common.CodeTable
 import kr.co.soogong.master.data.common.ShapeTheme
 import kr.co.soogong.master.databinding.ViewLabelOutlinedBinding
 
@@ -44,4 +46,14 @@ class LabelOutlined @JvmOverloads constructor(
                 }
             }
         }
+
+    companion object {
+        @JvmStatic
+        @BindingAdapter("approvedStatusToLabel")
+        fun LabelOutlined.convertApprovedStatusToLabel(approvedStatus: String?) {
+            approvedStatus?.let { status ->
+                this.content = CodeTable.getCodeTableByCode(status)?.inKorean
+            }
+        }
+    }
 }

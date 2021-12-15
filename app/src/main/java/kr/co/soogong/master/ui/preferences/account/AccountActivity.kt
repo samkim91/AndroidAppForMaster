@@ -1,4 +1,4 @@
-package kr.co.soogong.master.ui.mypage.account
+package kr.co.soogong.master.ui.preferences.account
 
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -6,7 +6,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ActivityAccountBinding
 import kr.co.soogong.master.ui.base.BaseActivity
-import kr.co.soogong.master.ui.mypage.account.AccountViewModel.Companion.WITHDRAWAL
+import kr.co.soogong.master.ui.preferences.account.AccountViewModel.Companion.WITHDRAWAL
 import kr.co.soogong.master.utility.EventObserver
 import timber.log.Timber
 

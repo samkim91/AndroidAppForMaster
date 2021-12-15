@@ -5,7 +5,7 @@
 
     <merge
         android:layout_width="match_parent"
-        android:layout_height="@dimen/gap_64"
+        android:layout_height="wrap_content"
         tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -26,10 +26,10 @@
             android:ellipsize="end"
             android:singleLine="true"
             android:textColor="@color/grey_4"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/tv_end_text"
             app:layout_constraintHorizontal_bias="0"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constrainedWidth="true"
             app:layout_constraintStart_toEndOf="@id/iv_icon"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="타이틀" />
@@ -39,16 +39,16 @@
             style="@style/footnote.regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/gap_6"
+            android:layout_marginEnd="@dimen/gap_10"
             android:ellipsize="end"
             android:singleLine="true"
             android:textColor="@color/grey_3"
             android:visibility="gone"
-            tools:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/iv_arrow"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="내용" />
+            tools:text="내용"
+            tools:visibility="visible" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_arrow"

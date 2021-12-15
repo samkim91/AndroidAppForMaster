@@ -1,4 +1,4 @@
-package kr.co.soogong.master.ui.mypage.notice
+package kr.co.soogong.master.ui.preferences.notice
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
