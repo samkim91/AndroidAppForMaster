@@ -183,61 +183,10 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
             hbcEmailAddress.onButtonClick =
                 View.OnClickListener { startActivityCommonCode(EDIT_EMAIL) }
 
-//            editRequiredInfo.setOnClickListener {
-//                startActivity(
-//                    EditRequiredInformationActivityHelper.getIntent(requireContext())
-//                )
-//            }
-//
-//            portfolio.addDefaultButtonClickListener {
-//                startActivity(
-//                    PortfolioListActivityHelper.getIntent(requireContext(), PORTFOLIO)
-//                )
-//            }
-//
-//            priceByProject.addDefaultButtonClickListener {
-//                startActivity(
-//                    PortfolioListActivityHelper.getIntent(requireContext(), PRICE_BY_PROJECTS)
-//                )
-//            }
-//
+            // TODO: 2021/12/15 Profile image 삭제 기능 필요
+
 //            profileImage.addDefaultButtonClickListener {
 //                getSingleImage()
-//            }
-//
-//            profileImage.addFirstButtonClickListener {
-//                // todo.. 삭제 기능 추가 필요
-//            }
-//
-//            profileImage.addSecondButtonClickListener {
-//                getSingleImage()
-//            }
-//
-//            flexibleCost.addDefaultButtonClickListener {
-//                startActivity(
-//                    EditProfileContainerActivityHelper.getIntent(
-//                        requireContext(),
-//                        EDIT_FLEXIBLE_COST
-//                    )
-//                )
-//            }
-//
-//            otherFlexibleOption.addDefaultButtonClickListener {
-//                startActivity(
-//                    EditProfileContainerActivityHelper.getIntent(
-//                        requireContext(),
-//                        EDIT_OTHER_FLEXIBLE_OPTION
-//                    )
-//                )
-//            }
-//
-//            email.addDefaultButtonClickListener {
-//                startActivity(
-//                    EditProfileContainerActivityHelper.getIntent(
-//                        requireContext(),
-//                        EDIT_EMAIL
-//                    )
-//                )
 //            }
         }
     }

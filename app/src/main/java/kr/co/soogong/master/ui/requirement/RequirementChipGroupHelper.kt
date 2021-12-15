@@ -15,7 +15,7 @@ object RequirementChipGroupHelper {
         chipGroup.isSingleSelection = true
         chipGroup.isSelectionRequired = true
 
-        val whole = layoutInflater.inflate(R.layout.single_chip_choice_rounded_layout,
+        val whole = layoutInflater.inflate(R.layout.chip_choice_rounded,
             chipGroup,
             false) as Chip
         whole.text = "전체"
@@ -24,7 +24,7 @@ object RequirementChipGroupHelper {
 
         status.map { item ->
             val chip =
-                layoutInflater.inflate(R.layout.single_chip_choice_rounded_layout,
+                layoutInflater.inflate(R.layout.chip_choice_rounded,
                     chipGroup,
                     false) as Chip
             chip.text = item.inKorean

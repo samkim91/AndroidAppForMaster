@@ -61,7 +61,7 @@ fun setRequirementInformationPercentage(
             if (!value?.career.isNullOrEmpty()) filledCount++
             if (!value?.tel.isNullOrEmpty()) filledCount++
             if (!value?.ownerName.isNullOrEmpty()) filledCount++
-            if (!value?.projects.isNullOrEmpty()) filledCount++
+            if (!value?.majors.isNullOrEmpty()) filledCount++
             if (!value?.companyAddress?.roadAddress.isNullOrEmpty()) filledCount++
             if (value?.serviceArea != null) filledCount++
         }
@@ -137,7 +137,7 @@ fun isFulfilled(
                     context.toast(context.getString(R.string.required_profile_empty_owner_name))
                     return false
                 }
-                value?.projects.isNullOrEmpty() -> {
+                value?.majors.isNullOrEmpty() -> {
                     major.parent.requestChildFocus(major, major)
                     context.toast(context.getString(R.string.required_profile_empty_major))
                     return false

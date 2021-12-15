@@ -6,7 +6,6 @@ import kr.co.soogong.master.data.common.CodeTable
 import kr.co.soogong.master.data.dto.AttachmentDto
 import kr.co.soogong.master.data.dto.profile.MasterDto
 import kr.co.soogong.master.data.dto.profile.ProjectDto
-import kr.co.soogong.master.ui.dialog.bottomSheetDialogRecyclerView.BottomSheetDialogItem
 import kr.co.soogong.master.ui.profile.detail.CareerConverter
 
 @Parcelize
@@ -18,7 +17,7 @@ data class RequiredInformation(
     val career: String?,
     val tel: String?,
     val ownerName: String?,
-    val projects: List<ProjectDto>?,
+    val majors: List<ProjectDto>?,
     val companyAddress: CompanyAddress?,
     val coordinate: Coordinate?,
     var serviceArea: Int?,
@@ -37,16 +36,12 @@ data class RequiredInformation(
                 ),
                 warrantyInformation = WarrantyInformation(
                     warrantyPeriod = masterDto.warrantyPeriod,
-                    warrantyPeriodForLayout = BottomSheetDialogItem.getWarrantyPeriodList()
-                        .find { item ->
-                            item.value == masterDto.warrantyPeriod
-                        }?.key,
                     warrantyDescription = masterDto.warrantyDescription,
                 ),
                 career = masterDto.openDate?.let { CareerConverter.toCareer(it) },
                 tel = masterDto.tel,
                 ownerName = masterDto.ownerName,
-                projects = masterDto.projects,
+                majors = masterDto.projects,
                 companyAddress = CompanyAddress(
                     masterDto.roadAddress,
                     masterDto.detailAddress,
