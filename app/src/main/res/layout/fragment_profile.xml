@@ -294,6 +294,7 @@
                     app:layout_constraintTop_toBottomOf="@id/hbc_service_address"
                     app:title="@{@string/service_area}" />
 
+                <!-- 선택 정보 -->
                 <kr.co.soogong.master.atomic.molecules.SubheadlineProgressIndicator
                     android:id="@+id/spi_optional_information"
                     android:layout_width="@dimen/gap_0"
@@ -317,39 +318,46 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/spi_optional_information" />
 
+                <!-- 무료 방문 실측 여부 -->
                 <kr.co.soogong.master.atomic.molecules.HeadlineButtonContent
                     android:id="@+id/hbc_free_measure"
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/gap_33"
+                    app:content="@{vm.profile.basicInformation.freeMeasureYn ? @string/possible : @string/impossible}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/bcc_optional_information"
                     app:title="@{@string/free_measure}" />
 
+                <!-- 포트폴리오 -->
                 <kr.co.soogong.master.atomic.molecules.HeadlineButtonContent
                     android:id="@+id/hbc_portfolio"
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/gap_33"
+                    app:content="@{vm.profile.basicInformation.portfolios.size() > 0 ? @string/portfolio_filled(vm.profile.basicInformation.portfolios.size()) : null}"
                     app:hint="@{@string/portfolio_hint}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/hbc_free_measure"
                     app:title="@{@string/portfolio}" />
 
+                <!-- 시공 종류별 가격 -->
                 <kr.co.soogong.master.atomic.molecules.HeadlineButtonContent
                     android:id="@+id/hbc_price_by_project"
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/gap_33"
+                    app:content="@{vm.profile.basicInformation.priceByProjects.size() > 0 ? @string/price_by_project_filled(vm.profile.basicInformation.priceByProjects.size()) : null}"
                     app:hint="@{@string/price_by_project_hint}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/hbc_portfolio"
                     app:title="@{@string/price_by_project}" />
 
-                <kr.co.soogong.master.atomic.molecules.HeadlineButtonContent
+                <!-- 기타 변동 요인 -->
+                <kr.co.soogong.master.atomic.molecules.HeadlineButtonChipGroup
                     android:id="@+id/hbc_master_configs"
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"
@@ -358,6 +366,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/hbc_price_by_project"
+                    app:masterConfigsToChips="@{vm.profile.basicInformation.masterConfigs}"
                     app:title="@{@string/master_configs}" />
 
                 <kr.co.soogong.master.atomic.molecules.HeadlineButtonContent
@@ -365,6 +374,7 @@
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/gap_33"
+                    app:content="@{vm.profile.basicInformation.email}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/hbc_master_configs"

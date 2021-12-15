@@ -9,6 +9,8 @@ import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 import com.google.android.material.chip.Chip
 import kr.co.soogong.master.R
+import kr.co.soogong.master.data.common.CodeTable
+import kr.co.soogong.master.data.dto.profile.MasterConfigDto
 import kr.co.soogong.master.data.dto.profile.ProjectDto
 import kr.co.soogong.master.databinding.ViewHeadlineButtonChipGroupBinding
 
@@ -31,10 +33,18 @@ class HeadlineButtonChipGroup @JvmOverloads constructor(
             value?.let { binding.tvTitle.text = it }
         }
 
+    var hint: String? = null
+        set(value) {
+            field = value
+            binding.tvHint.isVisible = !value.isNullOrEmpty()
+            value?.let { binding.tvHint.text = it }
+        }
+
     var chips: List<String>? = null
         set(value) {
             field = value
             value?.let {
+                hint = null
                 generateChips()
                 setButtonStatus()
             }
@@ -78,6 +88,19 @@ class HeadlineButtonChipGroup @JvmOverloads constructor(
         @BindingAdapter("majorsToChips")
         fun HeadlineButtonChipGroup.convertMajorsToChips(majors: List<ProjectDto>?) {
             this.chips = majors?.map { it.name!! }
+        }
+
+        @JvmStatic
+        @BindingAdapter("masterConfigsToChips")
+        fun HeadlineButtonChipGroup.convertMasterConfigsToChips(masterConfigs: List<MasterConfigDto>?) {
+            this.chips = masterConfigs?.map { config ->
+                when (config.code) {
+                    // 현장 가격 변동 요인은 name + value
+                    CodeTable.TRAVEL_COST.code, CodeTable.CRANE_USAGE.code, CodeTable.PACKAGE_COST.code -> config.name!! + " " + config.value!!
+                    // 기타 변동 사항은 name
+                    else -> config.name!!
+                }
+            }
         }
     }
 }

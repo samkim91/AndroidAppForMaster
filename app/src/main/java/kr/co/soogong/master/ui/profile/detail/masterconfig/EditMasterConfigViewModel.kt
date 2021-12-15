@@ -45,29 +45,21 @@ class EditMasterConfigViewModel @Inject constructor(
         Timber.tag(TAG).d("requestFlexibleCosts: ")
 
         requestProfile {
-            it.basicInformation?.flexibleCost?.map { masterConfig ->
-
-                when (masterConfig.code) {
-                    CodeTable.TRAVEL_COST.code -> travelCost.postValue(travelCosts.find { cost -> cost.inKorean == masterConfig.value })
-                    CodeTable.CRANE_USAGE.code -> craneUsage.postValue(craneUsages.find { usage -> usage.inKorean == masterConfig.value })
-                    CodeTable.PACKAGE_COST.code -> packageCost.postValue(packageCosts.find { cost -> cost.inKorean == masterConfig.value })
-                    else -> masterConfig.value?.run { otherCostInformation.postValue(this) }
+            it.basicInformation?.masterConfigs?.map { masterConfig ->
+                if (masterConfig.groupCode == CodeTable.FLEXIBLE_COST.code) {       // 현장 가격 변동 요인
+                    when (masterConfig.code) {
+                        CodeTable.TRAVEL_COST.code -> travelCost.postValue(travelCosts.find { cost -> cost.inKorean == masterConfig.value })
+                        CodeTable.CRANE_USAGE.code -> craneUsage.postValue(craneUsages.find { usage -> usage.inKorean == masterConfig.value })
+                        CodeTable.PACKAGE_COST.code -> packageCost.postValue(packageCosts.find { cost -> cost.inKorean == masterConfig.value })
+                        CodeTable.OTHER_INFO.code -> masterConfig.value?.run {
+                            otherCostInformation.postValue(this)
+                        }
+                        else -> Unit
+                    }
+                } else {        // 기타 변동 사항
+                    otherOptions.find { option -> option.code == masterConfig.code }
+                        ?.run { otherOption.addToSet(this) }
                 }
-
-//                travelCost.postValue(travelCosts.find { cost -> cost.inKorean == masterConfigList.find { masterConfig -> masterConfig.code == CodeTable.TRAVEL_COST.code }?.value })
-//
-//                craneUsage.postValue(craneUsages.find { usage -> usage.inKorean == masterConfigList.find { masterConfig -> masterConfig.code == CodeTable.CRANE_USAGE.code }?.value })
-//
-//                packageCost.postValue(packageCosts.find { cost -> cost.inKorean == masterConfigList.find { masterConfig -> masterConfig.code == CodeTable.PACKAGE_COST.code }?.value })
-//
-//                masterConfigList.find { masterConfigDto -> masterConfigDto.code == CodeTable.OTHER_INFO.code }?.value?.let { value ->
-//                    otherCostInformation.postValue(value)
-//                }
-            }
-
-            it.basicInformation?.otherFlexibleOption?.map { masterConfig ->
-                otherOptions.find { option -> option.code == masterConfig.code }
-                    ?.run { otherOption.addToSet(this) }
             }
         }
     }
