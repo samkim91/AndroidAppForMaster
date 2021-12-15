@@ -17,13 +17,6 @@ data class BottomSheetDialogBundle(
                 list = BottomSheetDialogItem.getServiceAreaList(),
             )
 
-        fun getWarrantyPeriodBundle(): BottomSheetDialogBundle =
-            BottomSheetDialogBundle(
-                title = "A/S 보증기간",
-                subtitle = "",
-                list = BottomSheetDialogItem.getWarrantyPeriodList(),
-            )
-
         fun getCareerYearBundle(): BottomSheetDialogBundle =
             BottomSheetDialogBundle(
                 title = "경력",

@@ -30,11 +30,12 @@ class ActionBar @JvmOverloads constructor(
             }
         }
 
-    var anyButtonVisibility: Boolean? = null
+    var anyButtonText: String? = null
         set(value) {
             field = value
             value?.let {
-                binding.tvAny.isVisible = it
+                binding.tvAny.text = it
+                binding.tvAny.isVisible = true
             }
         }
 

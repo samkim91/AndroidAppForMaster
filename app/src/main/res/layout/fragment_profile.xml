@@ -36,6 +36,7 @@
             android:id="@+id/ab_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:anyButtonText="@{@string/open_my_profile}"
             app:title="@{@string/main_activity_navigation_bar_profile}" />
 
         <ScrollView
@@ -149,6 +150,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/line" />
 
+                <!-- 필수 정보 -->
                 <kr.co.soogong.master.atomic.molecules.SubheadlineProgressIndicator
                     android:id="@+id/spi_required_information"
                     android:layout_width="@dimen/gap_0"
@@ -172,76 +174,91 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/spi_required_information" />
 
+                <!-- 대표자명 -->
                 <kr.co.soogong.master.atomic.molecules.HeadlineButtonContent
                     android:id="@+id/hbc_owner_name"
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/gap_33"
+                    app:content="@{vm.profile.requiredInformation.ownerName}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/bcc_required_information"
                     app:title="@{@string/owner_name}" />
 
+                <!-- 업체 소개 -->
                 <kr.co.soogong.master.atomic.molecules.HeadlineButtonContent
                     android:id="@+id/hbc_company_introduction"
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/gap_33"
+                    app:content="@{vm.profile.requiredInformation.introduction}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/hbc_owner_name"
                     app:title="@{@string/company_introduction}" />
 
+                <!-- 대표 이미지 -->
                 <kr.co.soogong.master.atomic.molecules.HeadlineImagesEditable
                     android:id="@+id/hie_shop_images"
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/gap_33"
+                    app:images="@{vm.profile.requiredInformation.shopImages}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/hbc_company_introduction"
                     app:title="@{@string/shop_images}" />
 
+                <!-- 사업자 정보 -->
                 <kr.co.soogong.master.atomic.molecules.HeadlineButtonContent
                     android:id="@+id/hbc_business_unit_information"
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/gap_33"
+                    app:content="@{vm.profile.requiredInformation.businessUnitInformation.businessType + `, ` + vm.profile.requiredInformation.businessUnitInformation.businessName}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/hie_shop_images"
                     app:title="@{@string/business_unit_information}" />
 
+                <!-- A/S 정보 -->
                 <kr.co.soogong.master.atomic.molecules.HeadlineButtonContent
                     android:id="@+id/hbc_warranty_information"
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/gap_33"
+                    app:content="@{vm.profile.requiredInformation.warrantyInformation.warrantyPeriod.toString() + `년, ` + vm.profile.requiredInformation.warrantyInformation.warrantyDescription}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/hbc_business_unit_information"
                     app:title="@{@string/warranty_information}" />
 
+                <!-- 휴대폰(연락처) 정보 -->
                 <kr.co.soogong.master.atomic.molecules.HeadlineButtonContent
                     android:id="@+id/hbc_contact_information"
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/gap_33"
+                    app:content="@{vm.profile.requiredInformation.tel}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/hbc_warranty_information"
                     app:title="@{@string/contact_information}" />
 
+                <!-- 경력 -->
                 <kr.co.soogong.master.atomic.molecules.HeadlineButtonContent
                     android:id="@+id/hbc_career"
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/gap_33"
+                    app:content="@{vm.profile.requiredInformation.career}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/hbc_contact_information"
                     app:title="@{@string/career}" />
 
+                <!-- 시공 가능 업종 -->
                 <kr.co.soogong.master.atomic.molecules.HeadlineButtonChipGroup
                     android:id="@+id/hbcg_projects"
                     android:layout_width="@dimen/gap_0"
@@ -250,18 +267,22 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/hbc_career"
+                    app:majorsToChips="@{vm.profile.requiredInformation.majors}"
                     app:title="@{@string/projects}" />
 
+                <!-- 활동 지역 -->
                 <kr.co.soogong.master.atomic.molecules.HeadlineButtonContent
                     android:id="@+id/hbc_service_address"
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/gap_33"
+                    app:content="@{vm.profile.requiredInformation.companyAddress.roadAddress + ` ` + vm.profile.requiredInformation.companyAddress.detailAddress}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/hbcg_projects"
                     app:title="@{@string/service_address}" />
 
+                <!-- 서비스 가능 범위 -->
                 <kr.co.soogong.master.atomic.molecules.HeadlineButtonMap
                     android:id="@+id/hbm_service_area"
                     android:layout_width="@dimen/gap_0"
@@ -348,168 +369,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/hbc_master_configs"
                     app:title="@{@string/email_address}" />
-
-                <!--                <androidx.appcompat.widget.AppCompatImageView-->
-                <!--                    android:id="@+id/line2"-->
-                <!--                    android:layout_width="0dp"-->
-                <!--                    android:layout_height="10dp"-->
-                <!--                    android:layout_marginTop="20dp"-->
-                <!--                    android:background="@color/c_E3E3E3"-->
-                <!--                    app:layout_constraintEnd_toEndOf="parent"-->
-                <!--                    app:layout_constraintStart_toStartOf="parent"-->
-                <!--                    app:layout_constraintTop_toBottomOf="@id/bcc_required_information" />-->
-
-                <!--                <androidx.constraintlayout.widget.ConstraintLayout-->
-                <!--                    android:id="@+id/profile_card_container"-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:background="@color/c_F5F5F5"-->
-                <!--                    app:layout_constraintEnd_toEndOf="parent"-->
-                <!--                    app:layout_constraintStart_toStartOf="parent"-->
-                <!--                    app:layout_constraintTop_toBottomOf="@id/line2">-->
-
-                <!--                    <androidx.appcompat.widget.AppCompatTextView-->
-                <!--                        android:id="@+id/profile_card_container_label"-->
-                <!--                        style="@style/text_style_16sp.medium"-->
-                <!--                        android:layout_width="wrap_content"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:layout_marginStart="@dimen/gap_20"-->
-                <!--                        android:layout_marginTop="@dimen/gap_24"-->
-                <!--                        android:layout_marginEnd="@dimen/gap_20"-->
-                <!--                        android:text="@string/profile_card_container_label"-->
-                <!--                        android:textColor="@color/c_121212"-->
-                <!--                        app:layout_constraintStart_toStartOf="parent"-->
-                <!--                        app:layout_constraintTop_toTopOf="parent" />-->
-
-                <!--                    &lt;!&ndash; 무료 방문 실측 여부 &ndash;&gt;-->
-                <!--                    <kr.co.soogong.master.atomic.molecules.ProfileChipGroupCard-->
-                <!--                        android:id="@+id/free_measure"-->
-                <!--                        android:layout_width="match_parent"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:layout_marginStart="@dimen/gap_20"-->
-                <!--                        android:layout_marginTop="@dimen/gap_16"-->
-                <!--                        android:layout_marginEnd="@dimen/gap_20"-->
-                <!--                        android:background="@drawable/shape_white_background_radius8"-->
-                <!--                        android:elevation="@dimen/gap_4"-->
-                <!--                        app:chipGroupWithoutTitleByFlag="@{vm.profile.basicInformation.freeMeasureYn}"-->
-                <!--                        app:defaultButtonByFlag="@{vm.profile.basicInformation.freeMeasureYn}"-->
-                <!--                        app:layout_constraintEnd_toEndOf="parent"-->
-                <!--                        app:layout_constraintStart_toStartOf="parent"-->
-                <!--                        app:layout_constraintTop_toBottomOf="@id/profile_card_container_label"-->
-                <!--                        app:subTitle="@{@string/profile_card_subtitle_for_free_measure}"-->
-                <!--                        app:title="@{@string/profile_card_title_for_free_measure}" />-->
-
-                <!--                    &lt;!&ndash; 포트폴리오 &ndash;&gt;-->
-                <!--                    <kr.co.soogong.master.atomic.molecules.ProfileDefaultCard-->
-                <!--                        android:id="@+id/portfolio"-->
-                <!--                        android:layout_width="match_parent"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:layout_marginStart="@dimen/gap_20"-->
-                <!--                        android:layout_marginTop="@dimen/gap_24"-->
-                <!--                        android:layout_marginEnd="@dimen/gap_20"-->
-                <!--                        android:background="@drawable/shape_white_background_radius8"-->
-                <!--                        android:elevation="@dimen/gap_4"-->
-                <!--                        app:defaultButtonByItems="@{vm.profile.basicInformation.portfolios.size > 0}"-->
-                <!--                        app:firstDetail='@{vm.profile.basicInformation.portfolios.size > 0 ? vm.profile.basicInformation.portfolios.size+"개의 포트폴리오를 올리셨어요!" : ""}'-->
-                <!--                        app:layout_constraintEnd_toEndOf="parent"-->
-                <!--                        app:layout_constraintStart_toStartOf="parent"-->
-                <!--                        app:layout_constraintTop_toBottomOf="@id/free_measure"-->
-                <!--                        app:subTitle="@{@string/profile_card_subtitle_for_portfolio}"-->
-                <!--                        app:title="@{@string/profile_card_title_for_portfolio}" />-->
-
-                <!--                    &lt;!&ndash; 시공 종류별 가격 &ndash;&gt;-->
-                <!--                    <kr.co.soogong.master.atomic.molecules.ProfileDefaultCard-->
-                <!--                        android:id="@+id/price_by_project"-->
-                <!--                        android:layout_width="match_parent"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:layout_marginStart="@dimen/gap_20"-->
-                <!--                        android:layout_marginTop="@dimen/gap_24"-->
-                <!--                        android:layout_marginEnd="@dimen/gap_20"-->
-                <!--                        android:background="@drawable/shape_white_background_radius8"-->
-                <!--                        android:elevation="@dimen/gap_4"-->
-                <!--                        app:defaultButtonByItems='@{vm.profile.basicInformation.priceByProjects.size > 0}'-->
-                <!--                        app:firstDetail='@{vm.profile.basicInformation.priceByProjects.size > 0 ? vm.profile.basicInformation.priceByProjects.size+"개의 가격 정보를 올리셨어요!" : ""}'-->
-                <!--                        app:layout_constraintEnd_toEndOf="parent"-->
-                <!--                        app:layout_constraintStart_toStartOf="parent"-->
-                <!--                        app:layout_constraintTop_toBottomOf="@id/portfolio"-->
-                <!--                        app:subTitle="@{@string/profile_card_subtitle_for_price_by_project}"-->
-                <!--                        app:title="@{@string/profile_card_title_for_price_by_project}" />-->
-
-                <!--                    &lt;!&ndash; 프로필 사진 &ndash;&gt;-->
-                <!--                    <kr.co.soogong.master.atomic.molecules.ProfileImageCard-->
-                <!--                        android:id="@+id/profile_image"-->
-                <!--                        android:layout_width="match_parent"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:layout_marginStart="@dimen/gap_20"-->
-                <!--                        android:layout_marginTop="@dimen/gap_24"-->
-                <!--                        android:layout_marginEnd="@dimen/gap_20"-->
-                <!--                        android:background="@drawable/shape_white_background_radius8"-->
-                <!--                        android:elevation="@dimen/gap_4"-->
-                <!--                        app:defaultButtonByImageV3="@{vm.profile.basicInformation.profileImage.url}"-->
-                <!--                        app:firstDetailWithSimpleText="@{vm.profile.basicInformation.profileImage.url}"-->
-                <!--                        app:imageUrl="@{vm.profile.basicInformation.profileImage.url}"-->
-                <!--                        app:layout_constraintEnd_toEndOf="parent"-->
-                <!--                        app:layout_constraintStart_toStartOf="parent"-->
-                <!--                        app:layout_constraintTop_toBottomOf="@id/price_by_project"-->
-                <!--                        app:subTitle="@{@string/profile_card_subtitle_for_profile_image}"-->
-                <!--                        app:title="@{@string/profile_card_title_for_profile_image}" />-->
-
-                <!--                    &lt;!&ndash; 현장 가격 변동 요인 &ndash;&gt;-->
-                <!--                    <kr.co.soogong.master.atomic.molecules.ProfileChipGroupCard-->
-                <!--                        android:id="@+id/flexible_cost"-->
-                <!--                        android:layout_width="match_parent"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:layout_marginStart="@dimen/gap_20"-->
-                <!--                        android:layout_marginTop="@dimen/gap_24"-->
-                <!--                        android:layout_marginEnd="@dimen/gap_20"-->
-                <!--                        android:background="@drawable/shape_white_background_radius8"-->
-                <!--                        android:elevation="@dimen/gap_4"-->
-                <!--                        app:chipGroupWithoutTitle="@{vm.profile.basicInformation.flexibleCost}"-->
-                <!--                        app:defaultButtonByList="@{vm.profile.basicInformation.flexibleCost}"-->
-                <!--                        app:detail="@{vm.profile.basicInformation.flexibleCost}"-->
-                <!--                        app:layout_constraintEnd_toEndOf="parent"-->
-                <!--                        app:layout_constraintStart_toStartOf="parent"-->
-                <!--                        app:layout_constraintTop_toBottomOf="@id/profile_image"-->
-                <!--                        app:subTitle="@{@string/profile_card_subtitle_for_flexible_cost}"-->
-                <!--                        app:title="@{@string/profile_card_title_for_flexible_cost}" />-->
-
-                <!--                    &lt;!&ndash; 기타 변동 가능사항 &ndash;&gt;-->
-                <!--                    <kr.co.soogong.master.atomic.molecules.ProfileChipGroupCard-->
-                <!--                        android:id="@+id/other_flexible_option"-->
-                <!--                        android:layout_width="match_parent"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:layout_marginStart="@dimen/gap_20"-->
-                <!--                        android:layout_marginTop="@dimen/gap_24"-->
-                <!--                        android:layout_marginEnd="@dimen/gap_20"-->
-                <!--                        android:background="@drawable/shape_white_background_radius8"-->
-                <!--                        android:elevation="@dimen/gap_4"-->
-                <!--                        app:chipGroupWithoutTitle="@{vm.profile.basicInformation.otherFlexibleOption}"-->
-                <!--                        app:defaultButtonByList="@{vm.profile.basicInformation.otherFlexibleOption}"-->
-                <!--                        app:layout_constraintEnd_toEndOf="parent"-->
-                <!--                        app:layout_constraintStart_toStartOf="parent"-->
-                <!--                        app:layout_constraintTop_toBottomOf="@id/flexible_cost"-->
-                <!--                        app:title="@{@string/profile_card_title_for_other_flexible_options}" />-->
-
-                <!--                    &lt;!&ndash; 이메일 &ndash;&gt;-->
-                <!--                    <kr.co.soogong.master.atomic.molecules.ProfileDefaultCard-->
-                <!--                        android:id="@+id/email"-->
-                <!--                        android:layout_width="match_parent"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:layout_marginStart="@dimen/gap_20"-->
-                <!--                        android:layout_marginTop="@dimen/gap_24"-->
-                <!--                        android:layout_marginEnd="@dimen/gap_20"-->
-                <!--                        android:layout_marginBottom="@dimen/gap_24"-->
-                <!--                        android:background="@drawable/shape_white_background_radius8"-->
-                <!--                        android:elevation="@dimen/gap_4"-->
-                <!--                        app:defaultButtonByString="@{vm.profile.basicInformation.email}"-->
-                <!--                        app:firstDetail="@{vm.profile.basicInformation.email}"-->
-                <!--                        app:layout_constraintBottom_toBottomOf="parent"-->
-                <!--                        app:layout_constraintEnd_toEndOf="parent"-->
-                <!--                        app:layout_constraintStart_toStartOf="parent"-->
-                <!--                        app:layout_constraintTop_toBottomOf="@id/other_flexible_option"-->
-                <!--                        app:title="@{@string/profile_card_title_for_email}" />-->
-
-                <!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
     </androidx.appcompat.widget.LinearLayoutCompat>

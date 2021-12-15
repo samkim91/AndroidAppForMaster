@@ -390,18 +390,21 @@
         <item name="android:textColor">@color/selector_green_grey2</item>
         <item name="android:textAppearance">@style/call_out.bold</item>
         <item name="chipStrokeColor">@color/selector_green_light_grey2</item>
+        <item name="chipMinTouchTargetSize">@dimen/gap_0</item>
         <item name="chipStrokeWidth">@dimen/gap_1</item>
         <item name="chipCornerRadius">@dimen/gap_8</item>
         <item name="chipMinHeight">@dimen/gap_48</item>
     </style>
 
     <style name="ChipChoiceRoundStyle" parent="Widget.MaterialComponents.Chip.Choice">
-        <item name="chipBackgroundColor">@color/chip_selector_for_requirement_status</item>
-        <item name="android:textColor">@color/text_selector_for_requirement_status</item>
-        <item name="chipStrokeColor">@color/stroke_selector_for_requirement_status</item>
-        <item name="chipStrokeWidth">@dimen/chips_stroke_width_1dp</item>
-        <item name="chipCornerRadius">@dimen/chips_radius_20dp</item>
-        <item name="chipMinHeight">@dimen/chips_height_38dp</item>
+        <item name="chipBackgroundColor">@color/white</item>
+        <item name="android:textColor">@color/grey_3</item>
+        <item name="android:textAppearance">@style/caption_2.bold</item>
+        <item name="chipStrokeColor">@color/light_grey_2</item>
+        <item name="chipMinTouchTargetSize">@dimen/gap_0</item>
+        <item name="chipStrokeWidth">@dimen/gap_1</item>
+        <item name="chipCornerRadius">@dimen/gap_20</item>
+        <item name="chipMinHeight">@dimen/gap_25</item>
     </style>
 
     <style name="ChipEntryRoundStyle" parent="Widget.MaterialComponents.Chip.Entry">
@@ -409,6 +412,7 @@
         <item name="android:textColor">@color/grey_2</item>
         <item name="chipStrokeColor">@color/light_grey_2</item>
         <item name="chipStrokeWidth">@dimen/gap_1</item>
+        <item name="chipMinTouchTargetSize">@dimen/gap_0</item>
         <item name="closeIcon">@drawable/ic_cancel</item>
         <item name="closeIconTint">@color/light_grey_2</item>
         <item name="chipCornerRadius">@dimen/gap_20</item>

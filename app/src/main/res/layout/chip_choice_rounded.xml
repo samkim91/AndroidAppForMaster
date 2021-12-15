@@ -3,7 +3,5 @@
     style="@style/ChipChoiceRoundStyle"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:minWidth="@dimen/gap_56"
     android:textAlignment="center"
-    android:textAppearance="@style/text_style_15sp.medium"
-    tools:text="전체" />
+    tools:text="내용" />

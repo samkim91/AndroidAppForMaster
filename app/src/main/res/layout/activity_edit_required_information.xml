@@ -192,8 +192,8 @@
                     android:layout_marginEnd="@dimen/gap_20"
                     android:background="@drawable/shape_white_background_radius8"
                     android:elevation="@dimen/gap_4"
-                    app:defaultButtonByString="@{vm.requiredInformation.warrantyInformation.warrantyPeriodForLayout}"
-                    app:firstDetail="@{vm.requiredInformation.warrantyInformation.warrantyPeriodForLayout}"
+                    app:defaultButtonByString="@{vm.requiredInformation.warrantyInformation.warrantyPeriod.toString()}"
+                    app:firstDetail="@{vm.requiredInformation.warrantyInformation.warrantyPeriod.toString()}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/business_unit_information"
@@ -269,8 +269,8 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/owner_name"
                     app:title='@{"시공 업종"}' />
-<!--                app:chipGroupWithTitle="@{vm.requiredInformation.projects}"-->
-<!--                app:defaultButtonByList="@{vm.requiredInformation.projects}"-->
+                <!--                app:chipGroupWithTitle="@{vm.requiredInformation.projects}"-->
+                <!--                app:defaultButtonByList="@{vm.requiredInformation.projects}"-->
 
                 <!-- 업체 주소 ADDRESS -->
                 <kr.co.soogong.master.atomic.molecules.ProfileDefaultCard

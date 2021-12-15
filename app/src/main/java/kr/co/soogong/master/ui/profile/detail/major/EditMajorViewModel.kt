@@ -24,7 +24,7 @@ class EditMajorViewModel @Inject constructor(
 
         requestProfile {
             profile.value = it
-            it.requiredInformation?.projects?.let { list ->
+            it.requiredInformation?.majors?.let { list ->
                 projects.addAll(list)
             }
         }

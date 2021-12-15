@@ -71,22 +71,6 @@ data class BottomSheetDialogItem(
                 BottomSheetDialogItem("40년", 40),
             )
 
-        fun getWarrantyPeriodList(): List<BottomSheetDialogItem> =
-            listOf(
-                BottomSheetDialogItem("보증기간 없음", -1),
-                BottomSheetDialogItem("직접 입력", 0),
-                BottomSheetDialogItem("1년", 1),
-                BottomSheetDialogItem("2년", 2),
-                BottomSheetDialogItem("3년", 3),
-                BottomSheetDialogItem("4년", 4),
-                BottomSheetDialogItem("5년", 5),
-                BottomSheetDialogItem("6년", 6),
-                BottomSheetDialogItem("7년", 7),
-                BottomSheetDialogItem("8년", 8),
-                BottomSheetDialogItem("9년", 9),
-                BottomSheetDialogItem("10년", 10),
-            )
-
         fun getEmailDomainsList(): List<BottomSheetDialogItem> =
             listOf(
                 BottomSheetDialogItem("naver.com", 0),
