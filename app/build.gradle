@@ -127,6 +127,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$archLifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$archLifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$archLifecycleVersion"
+    implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
 
     // okHttp
     implementation "com.squareup.okhttp3:okhttp:$okhttpVersion"
