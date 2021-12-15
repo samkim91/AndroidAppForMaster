@@ -11,6 +11,8 @@ import kr.co.soogong.master.R
 import kr.co.soogong.master.data.dto.AttachmentDto
 import kr.co.soogong.master.databinding.FragmentEditPortfolioBinding
 import kr.co.soogong.master.ui.base.BaseFragment
+import kr.co.soogong.master.ui.base.BaseViewModel.Companion.DISMISS_LOADING
+import kr.co.soogong.master.ui.base.BaseViewModel.Companion.SHOW_LOADING
 import kr.co.soogong.master.ui.image.RectangleImageWithCloseAdapter
 import kr.co.soogong.master.ui.profile.detail.EditProfileContainerActivity
 import kr.co.soogong.master.ui.profile.detail.portfoliolist.portfolio.PortfolioViewModel.Companion.REQUEST_FAILED
@@ -124,7 +126,6 @@ class PortfolioFragment : BaseFragment<FragmentEditPortfolioBinding>(
                 })
 
                 if (stiTitle.error.isNullOrBlank() && !tvAlertBeforeImage.isVisible && !tvAlertAfterImage.isVisible && stcDescription.error.isNullOrBlank()) {
-                    showLoading(parentFragmentManager)
                     viewModel.savePortfolio()
                 }
             }
@@ -138,6 +139,8 @@ class PortfolioFragment : BaseFragment<FragmentEditPortfolioBinding>(
             when (event) {
                 SAVE_PORTFOLIO_SUCCESSFULLY -> activity?.onBackPressed()
                 REQUEST_FAILED -> requireContext().toast(getString(R.string.error_message_of_request_failed))
+                SHOW_LOADING -> showLoading(parentFragmentManager)
+                DISMISS_LOADING -> dismissLoading()
             }
         })
     }

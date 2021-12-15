@@ -117,6 +117,8 @@ class WriteEstimationViewModel @Inject constructor(
         )
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
+            .doOnSubscribe { setAction(SHOW_LOADING) }
+            .doAfterTerminate { setAction(DISMISS_LOADING) }
             .subscribeBy(
                 onSuccess = {
                     setAction(SEND_ESTIMATION_SUCCESSFULLY)

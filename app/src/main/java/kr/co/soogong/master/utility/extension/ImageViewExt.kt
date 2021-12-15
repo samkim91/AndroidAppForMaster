@@ -43,7 +43,7 @@ fun ImageView.setCircleImageByUrl(url: String?) {
             .load(
                 if (it.isEmpty()) R.drawable.ic_empty_image else it
             )
-            .transform(CenterCrop(), RoundedCorners(40))
+            .circleCrop()
             .into(this)
     }
 }

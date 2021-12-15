@@ -10,6 +10,8 @@ import kr.co.soogong.master.R
 import kr.co.soogong.master.data.dto.AttachmentDto
 import kr.co.soogong.master.databinding.ActivityMeasurementBinding
 import kr.co.soogong.master.ui.base.BaseActivity
+import kr.co.soogong.master.ui.base.BaseViewModel.Companion.DISMISS_LOADING
+import kr.co.soogong.master.ui.base.BaseViewModel.Companion.SHOW_LOADING
 import kr.co.soogong.master.ui.dialog.popup.CustomDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData
 import kr.co.soogong.master.ui.requirement.action.write.WriteEstimationViewModel.Companion.REQUEST_FAILED
@@ -60,7 +62,6 @@ class MeasurementActivity : BaseActivity<ActivityMeasurementBinding>(
                 button.setOnClickListener {
                     registerCostObserver()
                     if (!simpleCost.alertVisible && ValidationHelper.isIntRange(viewModel.simpleCost.value!!)) {
-                        showLoading(supportFragmentManager)
                         viewModel.sendEstimation()
                     }
                 }
@@ -129,6 +130,8 @@ class MeasurementActivity : BaseActivity<ActivityMeasurementBinding>(
                 REQUEST_FAILED -> {
                     toast(getString(R.string.error_message_of_request_failed))
                 }
+                SHOW_LOADING -> showLoading(supportFragmentManager)
+                DISMISS_LOADING -> dismissLoading()
             }
         })
     }

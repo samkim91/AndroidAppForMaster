@@ -85,6 +85,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
     companion object {
         private const val TAG = "HomeFragment"
 
-        fun newInstance(): HomeFragment = HomeFragment()
+        fun newInstance() = HomeFragment()
     }
 }
