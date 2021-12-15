@@ -29,16 +29,16 @@ class LabelOutlined @JvmOverloads constructor(
             field = value
             value?.let {
                 when (value) {
-                    is ShapeTheme.Circle -> {
+                    ShapeTheme.Circle -> {
                         binding.tvContent.background =
                             ResourcesCompat.getDrawable(resources,
-                                R.drawable.bg_solid_white_stroke_light_grey2_radius20,
+                                R.drawable.bg_solid_transparent_stroke_light_grey2_radius20,
                                 null)
                     }
-                    is ShapeTheme.Rectangle -> {
+                    ShapeTheme.Rectangle -> {
                         binding.tvContent.background =
                             ResourcesCompat.getDrawable(resources,
-                                R.drawable.bg_solid_white_stroke_light_grey2_radius4,
+                                R.drawable.bg_solid_transparent_stroke_light_grey2_radius4,
                                 null)
                     }
                 }
