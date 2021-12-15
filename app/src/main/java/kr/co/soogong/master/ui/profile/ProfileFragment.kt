@@ -78,11 +78,9 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
                 )
             }
 
-//            showProfileButton.setOnClickListener {
-//                startActivity(
-//                    ShowMyProfileInWebHelper.getIntent(viewModel.profile.value?.uid)
-//                )
-//            }
+            abHeader.setButtonAnyClickListener {
+                startActivity(ShowMyProfileInWebHelper.getIntent(viewModel.profile.value?.uid))
+            }
 
             bbRequestReview.onButtonClick = View.OnClickListener {
                 BottomSheetDialogRecyclerView.newInstance(

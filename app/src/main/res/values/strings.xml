@@ -281,7 +281,7 @@
     <string name="end_estimate_calendar_title">시공 완료일자를 선택해주세요.</string>
 
     <!-- Profile -->
-    <string name="open_my_page">내 페이지 보기</string>
+    <string name="open_my_profile">미리보기</string>
     <string name="request_review_label">리뷰 요청하기</string>
     <string name="profile_guideline">마스터분들의 공정하고 투명한 거래를 위해 연락처, 간판 등 직거래 유도를 자제해 주세요.</string>
     <string name="completion_of_required_information">필수 정보 완성도</string>
