@@ -13,12 +13,14 @@ import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.dialog.popup.CustomDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData
 import kr.co.soogong.master.ui.preferences.PreferencesViewModel.Companion.ALARM
+import kr.co.soogong.master.ui.preferences.PreferencesViewModel.Companion.CUSTOMER_SERVICE
 import kr.co.soogong.master.ui.preferences.PreferencesViewModel.Companion.LOGOUT
 import kr.co.soogong.master.ui.preferences.PreferencesViewModel.Companion.NOTICE
 import kr.co.soogong.master.ui.preferences.PreferencesViewModel.Companion.REQUEST_LOGOUT
 import kr.co.soogong.master.ui.preferences.PreferencesViewModel.Companion.VERSION
 import kr.co.soogong.master.uihelper.auth.SignMainActivityHelper
 import kr.co.soogong.master.uihelper.preferences.PreferencesContainerActivityHelper
+import kr.co.soogong.master.uihelper.preferences.PreferencesDetailFragmentHelper.CUSTOMER_SERVICE_PAGE
 import kr.co.soogong.master.uihelper.preferences.PreferencesDetailFragmentHelper.NOTICE_PAGE
 import kr.co.soogong.master.uihelper.preferences.PreferencesDetailFragmentHelper.SETTING_ALARM_PAGE
 import kr.co.soogong.master.utility.EventObserver
@@ -77,23 +79,9 @@ class PreferencesFragment : BaseFragment<FragmentPreferencesBinding>(
                             Uri.parse("https://play.google.com/store/search?q=%EC%88%98%EA%B3%B5")
                         setPackage("com.android.vending")
                     })
-//                    KAKAO -> {
-//                        val url = TalkApiClient.instance.addChannelUrl("_xgxkbJxb")
-//                        Timber.tag(TAG).d("MyPageViewModel.KAKAO clicked: $url")
-//                        KakaoCustomTabsClient.openWithDefault(requireContext(), url)
-//                    }
-                    //                    MyPageViewModel.ACCOUNT -> {
-//                        startActivity(AccountActivityHelper.getIntent(requireContext()))
-//                    }
-
-//                    MyPageViewModel.CALL -> {
-//                        startActivity(
-//                            Intent(
-//                                Intent.ACTION_DIAL,
-//                                Uri.parse("tel:16444095")
-//                            )
-//                        )
-//                    }
+                    CUSTOMER_SERVICE -> startActivity(PreferencesContainerActivityHelper.getIntent(
+                        requireContext(),
+                        CUSTOMER_SERVICE_PAGE))
                 }
             })
         }

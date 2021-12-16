@@ -89,7 +89,6 @@
     <string name="insert_certification_code_edittext_hint">인증번호 6자리 입력</string>
 
     <!-- My Page-->
-
     <string name="notice">공지사항</string>
     <string name="setting_alarm">알림 설정</string>
     <string name="logout">로그아웃</string>
@@ -106,8 +105,14 @@
     <!-- Account -->
     <string name="account_page_name">계정설정</string>
 
-    <!-- Alarm -->
+    <!-- Customer Service -->
+    <string name="customer_service_introduction">고객센터 운영 안내</string>
+    <string name="customer_service_time_on">∙ 평일 10:00 – 19:00 (점심시간 13:00 – 14:00)</string>
+    <string name="customer_service_time_off">∙ 토, 일/공휴일 휴무</string>
+    <string name="asking_via_phone">전화 문의하기</string>
+    <string name="asking_via_kakao_talk">카카오톡 문의하기</string>
 
+    <!-- Alarm -->
     <string name="label_for_marketing_push">마케팅 푸시 알림</string>
     <string name="label_for_push_at_night">야간 푸시 알림</string>
     <string name="subtitle_for_push_at_night">오후 9시 ~ 오전 7시까지</string>

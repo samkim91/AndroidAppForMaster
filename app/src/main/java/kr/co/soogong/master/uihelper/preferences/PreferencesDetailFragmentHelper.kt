@@ -2,6 +2,7 @@ package kr.co.soogong.master.uihelper.preferences
 
 import androidx.fragment.app.Fragment
 import kr.co.soogong.master.ui.preferences.detail.alarm.AlarmFragment
+import kr.co.soogong.master.ui.preferences.detail.customerservice.CustomerServiceFragment
 import kr.co.soogong.master.ui.preferences.detail.notice.NoticeFragment
 
 object PreferencesDetailFragmentHelper {
@@ -15,6 +16,7 @@ object PreferencesDetailFragmentHelper {
         when (pageName) {
             NOTICE_PAGE -> NoticeFragment.newInstance()
             SETTING_ALARM_PAGE -> AlarmFragment.newInstance()
+            CUSTOMER_SERVICE_PAGE -> CustomerServiceFragment.newInstance()
             else -> Fragment()
 
         }
