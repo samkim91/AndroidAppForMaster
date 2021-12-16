@@ -82,6 +82,15 @@ class ButtonBig @JvmOverloads constructor(
                             R.color.selector_dark_grey1_alpha50,
                             null))
                     }
+                    is ButtonTheme.Kakao -> {
+                        binding.btButton.background =
+                            ResourcesCompat.getDrawable(resources,
+                                R.drawable.bg_solid_yellow_selector_radius8,
+                                null)
+                        binding.btButton.setTextColor(ResourcesCompat.getColor(resources,
+                            R.color.selector_black_alpha50,
+                            null))
+                    }
                 }
             }
         }

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="kr.co.soogong.master.ui.preferences.detail.customerservice.CustomerServiceViewModel" />
+
+        <variable
+            name="buttonThemeCall"
+            type="kr.co.soogong.master.data.common.ButtonTheme" />
+
+        <variable
+            name="buttonThemeKakao"
+            type="kr.co.soogong.master.data.common.ButtonTheme" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingStart="@dimen/gap_16"
+        android:paddingTop="@dimen/gap_24"
+        android:paddingEnd="@dimen/gap_16"
+        android:paddingBottom="@dimen/gap_24">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_title"
+            style="@style/call_out.bold"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="wrap_content"
+            android:text="@string/customer_service_introduction"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_time_on"
+            style="@style/caption_1.bold"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_16"
+            android:text="@string/customer_service_time_on"
+            android:textColor="@color/grey_4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_title" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_time_off"
+            style="@style/caption_1.bold"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_8"
+            android:text="@string/customer_service_time_off"
+            android:textColor="@color/brand_red"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_time_on" />
+
+        <kr.co.soogong.master.atomic.atoms.ButtonBig
+            android:id="@+id/bb_via_phone"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_30"
+            app:buttonText="@{@string/asking_via_phone}"
+            app:buttonTheme="@{buttonThemeCall}"
+            app:onButtonClick="@{() -> vm.contactViaCall()}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_time_off" />
+
+        <kr.co.soogong.master.atomic.atoms.ButtonBig
+            android:id="@+id/bb_via_kakao_talk"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_12"
+            app:onButtonClick="@{() -> vm.contactViaKakao()}"
+            app:buttonText="@{@string/asking_via_kakao_talk}"
+            app:buttonTheme="@{buttonThemeKakao}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/bb_via_phone" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
