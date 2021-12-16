@@ -99,8 +99,8 @@
                 <kr.co.soogong.master.atomic.molecules.IconSubheadlineArrow
                     android:id="@+id/isa_notice"
                     android:layout_width="@dimen/gap_0"
-                    android:layout_height="@dimen/gap_64"
-                    android:layout_marginTop="@dimen/gap_24"
+                    android:layout_height="@dimen/gap_40"
+                    android:layout_marginTop="@dimen/gap_16"
                     android:onClick="@{() -> vm.moveToNotice()}"
                     app:icon="@{@drawable/ic_speaker}"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -111,7 +111,8 @@
                 <kr.co.soogong.master.atomic.molecules.IconSubheadlineArrow
                     android:id="@+id/isa_setting_alarm"
                     android:layout_width="@dimen/gap_0"
-                    android:layout_height="@dimen/gap_64"
+                    android:layout_height="@dimen/gap_40"
+                    android:layout_marginTop="@dimen/gap_16"
                     android:onClick="@{() -> vm.moveToSettingAlarm()}"
                     app:icon="@{@drawable/ic_bell}"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -122,7 +123,8 @@
                 <kr.co.soogong.master.atomic.molecules.IconSubheadlineArrow
                     android:id="@+id/isa_logout"
                     android:layout_width="@dimen/gap_0"
-                    android:layout_height="@dimen/gap_64"
+                    android:layout_height="@dimen/gap_40"
+                    android:layout_marginTop="@dimen/gap_16"
                     android:onClick="@{() -> vm.requestLogout()}"
                     app:icon="@{@drawable/ic_logout}"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -133,7 +135,8 @@
                 <kr.co.soogong.master.atomic.molecules.IconSubheadlineArrow
                     android:id="@+id/isa_app_version"
                     android:layout_width="@dimen/gap_0"
-                    android:layout_height="@dimen/gap_64"
+                    android:layout_height="@dimen/gap_40"
+                    android:layout_marginTop="@dimen/gap_16"
                     android:onClick="@{() -> vm.updateVersion()}"
                     app:endText="@{@string/version_text(vm.version)}"
                     app:icon="@{@drawable/ic_bulb}"
@@ -141,6 +144,28 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/isa_logout"
                     app:subheadline="@{@string/app_version}" />
+
+                <kr.co.soogong.master.atomic.molecules.IconSubheadlineArrow
+                    android:id="@+id/isa_customer_service"
+                    android:layout_width="@dimen/gap_0"
+                    android:layout_height="@dimen/gap_40"
+                    android:layout_marginTop="@dimen/gap_16"
+                    android:onClick="@{() -> vm.moveToCustomerService()}"
+                    app:icon="@{@drawable/ic_headphone}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/isa_app_version"
+                    app:subheadline="@{@string/customer_service}" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_divider_bottom"
+                    android:layout_width="@dimen/gap_0"
+                    android:layout_height="@dimen/gap_1"
+                    android:layout_marginTop="@dimen/gap_16"
+                    android:background="@color/light_grey_1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/isa_customer_service" />
 
                 <!--            <androidx.appcompat.widget.AppCompatTextView-->
                 <!--                android:id="@+id/master_store_name"-->

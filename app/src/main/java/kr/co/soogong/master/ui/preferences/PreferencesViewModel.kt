@@ -89,8 +89,13 @@ class PreferencesViewModel @Inject constructor(
     }
 
     fun updateVersion() {
-        Timber.tag(TAG).i("logout")
+        Timber.tag(TAG).i("updateVersion")
         setAction(VERSION)
+    }
+
+    fun moveToCustomerService() {
+        Timber.tag(TAG).i("moveToCustomerService")
+        setAction(CUSTOMER_SERVICE)
     }
 
     fun kakaoAction() {
@@ -115,6 +120,7 @@ class PreferencesViewModel @Inject constructor(
         const val REQUEST_LOGOUT = "REQUEST_LOGOUT"
         const val LOGOUT = "LOGOUT"
         const val VERSION = "VERSION"
+        const val CUSTOMER_SERVICE = "CUSTOMER_SERVICE"
 
         const val KAKAO = "KAKAO"
         //        const val ACCOUNT = "ACCOUNT"
