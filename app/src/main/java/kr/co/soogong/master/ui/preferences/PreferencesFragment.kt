@@ -5,8 +5,6 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
-import com.kakao.sdk.common.util.KakaoCustomTabsClient
-import com.kakao.sdk.talk.TalkApiClient
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.common.ShapeTheme
@@ -15,14 +13,14 @@ import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.dialog.popup.CustomDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData
 import kr.co.soogong.master.ui.preferences.PreferencesViewModel.Companion.ALARM
-import kr.co.soogong.master.ui.preferences.PreferencesViewModel.Companion.KAKAO
 import kr.co.soogong.master.ui.preferences.PreferencesViewModel.Companion.LOGOUT
 import kr.co.soogong.master.ui.preferences.PreferencesViewModel.Companion.NOTICE
 import kr.co.soogong.master.ui.preferences.PreferencesViewModel.Companion.REQUEST_LOGOUT
 import kr.co.soogong.master.ui.preferences.PreferencesViewModel.Companion.VERSION
 import kr.co.soogong.master.uihelper.auth.SignMainActivityHelper
-import kr.co.soogong.master.uihelper.mypage.alarm.AlarmActivityHelper
-import kr.co.soogong.master.uihelper.mypage.notice.NoticeActivityHelper
+import kr.co.soogong.master.uihelper.preferences.AlarmActivityHelper
+import kr.co.soogong.master.uihelper.preferences.PreferencesContainerActivityHelper
+import kr.co.soogong.master.uihelper.preferences.PreferencesDetailFragmentHelper
 import kr.co.soogong.master.utility.EventObserver
 import timber.log.Timber
 
@@ -50,9 +48,6 @@ class PreferencesFragment : BaseFragment<FragmentPreferencesBinding>(
             lifecycleOwner = viewLifecycleOwner
             shapeThemeLabelApprovedStatus = ShapeTheme.Circle
 
-//            noticeList.adapter = NoticeAdapter(NoticeInMyPageViewHolder.NoticeMypageListView) {
-//                startActivity(NoticeDetailActivityHelper.getIntent(requireContext(), it))
-//            }
         }
     }
 
@@ -63,7 +58,8 @@ class PreferencesFragment : BaseFragment<FragmentPreferencesBinding>(
             action.observe(viewLifecycleOwner, EventObserver { event ->
                 when (event) {
                     NOTICE -> {
-                        startActivity(NoticeActivityHelper.getIntent(requireContext()))
+                        startActivity(PreferencesContainerActivityHelper.getIntent(requireContext(),
+                            PreferencesDetailFragmentHelper.NOTICE_PAGE))
                     }
 
                     ALARM -> {
@@ -82,11 +78,6 @@ class PreferencesFragment : BaseFragment<FragmentPreferencesBinding>(
                     LOGOUT -> {
                         startActivity(SignMainActivityHelper.getIntent(requireContext()))
                     }
-                    KAKAO -> {
-                        val url = TalkApiClient.instance.addChannelUrl("_xgxkbJxb")
-                        Timber.tag(TAG).d("MyPageViewModel.KAKAO clicked: $url")
-                        KakaoCustomTabsClient.openWithDefault(requireContext(), url)
-                    }
                     VERSION -> {
                         startActivity(Intent(Intent.ACTION_VIEW)
                             .apply {
@@ -96,6 +87,11 @@ class PreferencesFragment : BaseFragment<FragmentPreferencesBinding>(
                             }
                         )
                     }
+//                    KAKAO -> {
+//                        val url = TalkApiClient.instance.addChannelUrl("_xgxkbJxb")
+//                        Timber.tag(TAG).d("MyPageViewModel.KAKAO clicked: $url")
+//                        KakaoCustomTabsClient.openWithDefault(requireContext(), url)
+//                    }
                     //                    MyPageViewModel.ACCOUNT -> {
 //                        startActivity(AccountActivityHelper.getIntent(requireContext()))
 //                    }
@@ -121,7 +117,7 @@ class PreferencesFragment : BaseFragment<FragmentPreferencesBinding>(
     override fun onResume() {
         super.onResume()
         Timber.tag(TAG).d("onResume: ")
-        viewModel.getData()
+        viewModel.requestUserProfile()
     }
 
     companion object {

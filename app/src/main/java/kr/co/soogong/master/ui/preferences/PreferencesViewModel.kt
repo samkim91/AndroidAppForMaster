@@ -10,7 +10,6 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.launch
 import kr.co.soogong.master.data.model.mypage.Notice
 import kr.co.soogong.master.data.model.profile.Profile
-import kr.co.soogong.master.domain.usecase.mypage.GetNoticeListUseCase
 import kr.co.soogong.master.domain.usecase.mypage.SignOutUseCase
 import kr.co.soogong.master.domain.usecase.profile.GetProfileUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
@@ -20,7 +19,6 @@ import javax.inject.Inject
 @HiltViewModel
 class PreferencesViewModel @Inject constructor(
     private val getProfileUseCase: GetProfileUseCase,
-    private val getNoticeListUseCase: GetNoticeListUseCase,
     private val signOutUseCase: SignOutUseCase,
 ) : BaseViewModel() {
     private val _profile = MutableLiveData<Profile?>(null)
@@ -33,12 +31,7 @@ class PreferencesViewModel @Inject constructor(
 
     val version = MutableLiveData("")
 
-    fun getData() {
-        requestNoticeList()
-        requestUserProfile()
-    }
-
-    private fun requestUserProfile() {
+    fun requestUserProfile() {
         getProfileUseCase()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -46,23 +39,6 @@ class PreferencesViewModel @Inject constructor(
                 onSuccess = { _profile.value = it },
                 onError = { }
             ).addToDisposable()
-    }
-
-    private fun requestNoticeList() {
-        getNoticeListUseCase()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeBy(
-                onError =
-                {
-                    Timber.tag(TAG).w("getNoticeList: $it")
-                },
-                onNext = { list ->
-                    _noticeList.postValue(list.take(3))
-                },
-                onComplete = {}
-            )
-            .addToDisposable()
     }
 
     fun moveToSettingAlarm() {
@@ -98,16 +74,6 @@ class PreferencesViewModel @Inject constructor(
         setAction(CUSTOMER_SERVICE)
     }
 
-    fun kakaoAction() {
-        Timber.tag(TAG).i("KAKAO Button")
-        setAction(KAKAO)
-    }
-
-//    fun callToSoogong() {
-//        Timber.tag(TAG).i("callToSoogong")
-//        setAction(CALL)
-//    }
-
     //    fun accountSettingAction() {
 //        Timber.tag(TAG).i("Account Setting Button")
 //        setAction(ACCOUNT)
@@ -121,9 +87,5 @@ class PreferencesViewModel @Inject constructor(
         const val LOGOUT = "LOGOUT"
         const val VERSION = "VERSION"
         const val CUSTOMER_SERVICE = "CUSTOMER_SERVICE"
-
-        const val KAKAO = "KAKAO"
-        //        const val ACCOUNT = "ACCOUNT"
-        //        const val CALL = "CALL"
     }
 }

@@ -1,4 +1,4 @@
-package kr.co.soogong.master.uihelper.mypage.account
+package kr.co.soogong.master.uihelper.preferences
 
 import android.content.Context
 import android.content.Intent
