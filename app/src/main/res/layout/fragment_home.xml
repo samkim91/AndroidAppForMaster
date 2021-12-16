@@ -38,7 +38,7 @@
                 style="@style/caption_1.bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/gap_1"
+                android:layout_marginEnd="@dimen/gap_4"
                 android:text="@string/label_for_switch_compat"
                 android:textColor="@color/c_313030"
                 app:layout_constraintBottom_toBottomOf="@id/switch_compat"
@@ -50,10 +50,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/gap_16"
-                android:thumb="@drawable/thumb"
                 app:layout_constraintBottom_toBottomOf="@id/logo"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/logo"
+                app:thumbTint="@color/white"
                 app:track="@drawable/track" />
 
             <androidx.constraintlayout.widget.Group
@@ -79,14 +79,14 @@
                 android:layout_marginTop="@dimen/gap_16"
                 android:background="@drawable/shape_white_background_radius15"
                 android:elevation="@dimen/gap_1"
+                app:count="@{0}"
+                app:footnote="@{@string/summary_label_for_request}"
                 app:icon="@{@drawable/ic_chat}"
                 app:layout_constraintDimensionRatio="H, 5:6"
                 app:layout_constraintEnd_toStartOf="@id/summary_of_progress"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/barrier_for_header"
-                app:layout_constraintWidth_percent="0.28"
-                app:count="@{0}"
-                app:footnote="@{@string/summary_label_for_request}" />
+                app:layout_constraintWidth_percent="0.28" />
 
             <kr.co.soogong.master.atomic.molecules.FootnoteContentIcon
                 android:id="@+id/summary_of_progress"
@@ -96,14 +96,14 @@
                 android:layout_marginEnd="@dimen/gap_14"
                 android:background="@drawable/shape_white_background_radius15"
                 android:elevation="@dimen/gap_1"
+                app:count="@{0}"
+                app:footnote="@{@string/summary_label_for_progress}"
                 app:icon="@{@drawable/ic_ruler}"
                 app:layout_constraintDimensionRatio="H, 5:6"
                 app:layout_constraintEnd_toStartOf="@id/summary_of_completion"
                 app:layout_constraintStart_toEndOf="@id/summary_of_request"
                 app:layout_constraintTop_toTopOf="@id/summary_of_request"
-                app:layout_constraintWidth_percent="0.28"
-                app:count="@{0}"
-                app:footnote="@{@string/summary_label_for_progress}" />
+                app:layout_constraintWidth_percent="0.28" />
 
             <kr.co.soogong.master.atomic.molecules.FootnoteContentIcon
                 android:id="@+id/summary_of_completion"
@@ -112,14 +112,14 @@
                 android:layout_marginEnd="@dimen/gap_16"
                 android:background="@drawable/shape_white_background_radius15"
                 android:elevation="@dimen/gap_1"
+                app:count="@{0}"
+                app:footnote="@{@string/summary_label_for_completion}"
                 app:icon="@{@drawable/ic_hammer}"
                 app:layout_constraintDimensionRatio="H, 5:6"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/summary_of_progress"
                 app:layout_constraintTop_toTopOf="@id/summary_of_request"
-                app:layout_constraintWidth_percent="0.28"
-                app:count="@{0}"
-                app:footnote="@{@string/summary_label_for_completion}" />
+                app:layout_constraintWidth_percent="0.28" />
 
             <androidx.constraintlayout.widget.Barrier
                 android:id="@+id/barrier_for_summary"
