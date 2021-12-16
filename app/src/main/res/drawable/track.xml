@@ -3,17 +3,15 @@
 
     <item android:state_checked="false">
         <shape android:dither="true" android:shape="rectangle">
-            <solid android:color="@color/c_B9B9B9" />
+            <solid android:color="@color/light_grey_2" />
             <corners android:radius="24dp" />
-            <size android:width="34dp" android:height="14dp" />
         </shape>
     </item>
 
     <item android:state_checked="true">
         <shape android:dither="true" android:shape="rectangle">
-            <solid android:color="@color/app_color" />
+            <solid android:color="@color/brand_green" />
             <corners android:radius="24dp" />
-            <size android:width="34dp" android:height="14dp" />
         </shape>
     </item>
 

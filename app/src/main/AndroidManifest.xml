@@ -52,7 +52,6 @@
         <activity android:name=".ui.requirement.action.write.template.EstimationTemplatesActivity" />
         <activity android:name=".ui.preferences.account.AccountActivity" />
         <activity android:name=".ui.preferences.detail.PreferencesContainerActivity" />
-        <activity android:name=".ui.preferences.alarm.AlarmActivity" />
 
         <service
             android:name=".SoogongMasterMessagingService"

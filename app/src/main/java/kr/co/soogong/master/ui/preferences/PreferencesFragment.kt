@@ -18,9 +18,9 @@ import kr.co.soogong.master.ui.preferences.PreferencesViewModel.Companion.NOTICE
 import kr.co.soogong.master.ui.preferences.PreferencesViewModel.Companion.REQUEST_LOGOUT
 import kr.co.soogong.master.ui.preferences.PreferencesViewModel.Companion.VERSION
 import kr.co.soogong.master.uihelper.auth.SignMainActivityHelper
-import kr.co.soogong.master.uihelper.preferences.AlarmActivityHelper
 import kr.co.soogong.master.uihelper.preferences.PreferencesContainerActivityHelper
-import kr.co.soogong.master.uihelper.preferences.PreferencesDetailFragmentHelper
+import kr.co.soogong.master.uihelper.preferences.PreferencesDetailFragmentHelper.NOTICE_PAGE
+import kr.co.soogong.master.uihelper.preferences.PreferencesDetailFragmentHelper.SETTING_ALARM_PAGE
 import kr.co.soogong.master.utility.EventObserver
 import timber.log.Timber
 
@@ -57,36 +57,26 @@ class PreferencesFragment : BaseFragment<FragmentPreferencesBinding>(
         with(viewModel) {
             action.observe(viewLifecycleOwner, EventObserver { event ->
                 when (event) {
-                    NOTICE -> {
+                    NOTICE ->
                         startActivity(PreferencesContainerActivityHelper.getIntent(requireContext(),
-                            PreferencesDetailFragmentHelper.NOTICE_PAGE))
-                    }
-
-                    ALARM -> {
-                        startActivity(AlarmActivityHelper.getIntent(requireContext()))
-                    }
-                    REQUEST_LOGOUT -> {
-                        CustomDialog.newInstance(
-                            dialogData = DialogData.getConfirmingLogout(requireContext())).let {
-                            it.setButtonsClickListener(
-                                onPositive = { viewModel.logout() },
-                                onNegative = { }
-                            )
-                            it.show(parentFragmentManager, it.tag)
-                        }
-                    }
-                    LOGOUT -> {
-                        startActivity(SignMainActivityHelper.getIntent(requireContext()))
-                    }
-                    VERSION -> {
-                        startActivity(Intent(Intent.ACTION_VIEW)
-                            .apply {
-                                data =
-                                    Uri.parse("https://play.google.com/store/search?q=%EC%88%98%EA%B3%B5")
-                                setPackage("com.android.vending")
-                            }
+                            NOTICE_PAGE))
+                    ALARM ->
+                        startActivity(PreferencesContainerActivityHelper.getIntent(requireContext(),
+                            SETTING_ALARM_PAGE))
+                    REQUEST_LOGOUT -> CustomDialog.newInstance(
+                        dialogData = DialogData.getConfirmingLogout(requireContext())).let {
+                        it.setButtonsClickListener(
+                            onPositive = { viewModel.logout() },
+                            onNegative = { }
                         )
+                        it.show(parentFragmentManager, it.tag)
                     }
+                    LOGOUT -> startActivity(SignMainActivityHelper.getIntent(requireContext()))
+                    VERSION -> startActivity(Intent(Intent.ACTION_VIEW).apply {
+                        data =
+                            Uri.parse("https://play.google.com/store/search?q=%EC%88%98%EA%B3%B5")
+                        setPackage("com.android.vending")
+                    })
 //                    KAKAO -> {
 //                        val url = TalkApiClient.instance.addChannelUrl("_xgxkbJxb")
 //                        Timber.tag(TAG).d("MyPageViewModel.KAKAO clicked: $url")

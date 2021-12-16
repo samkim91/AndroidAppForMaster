@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="kr.co.soogong.master.ui.preferences.detail.alarm.AlarmViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/gap_16">
+
+        <kr.co.soogong.master.atomic.molecules.SubheadlineSwitch
+            android:id="@+id/ss_marketing_push"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_1"
+            app:checked="@{vm.marketingPush}"
+            app:content="@{@string/introduction_alarm_text}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:subheadline="@{@string/label_for_marketing_push}"
+            app:switchClick="@{vm::changeMarketingPush}" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_divider_marketing_push"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="@dimen/gap_1"
+            android:layout_marginTop="@dimen/gap_16"
+            android:background="@color/light_grey_1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ss_marketing_push" />
+
+        <kr.co.soogong.master.atomic.molecules.SubheadlineSwitch
+            android:id="@+id/ss_push_at_night"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_16"
+            app:checked="@{vm.pushAtNight}"
+            app:content="@{@string/subtitle_for_push_at_night}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_divider_marketing_push"
+            app:subheadline="@{@string/label_for_push_at_night}"
+            app:switchClick="@{vm::changeMarketingPushAtNight}" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_divider_push_at_night"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="@dimen/gap_1"
+            android:layout_marginTop="@dimen/gap_16"
+            android:background="@color/light_grey_1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ss_push_at_night" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
