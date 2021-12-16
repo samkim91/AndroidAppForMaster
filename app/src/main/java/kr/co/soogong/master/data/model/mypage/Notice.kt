@@ -3,7 +3,6 @@ package kr.co.soogong.master.data.model.mypage
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.google.gson.JsonObject
 import kotlinx.parcelize.Parcelize
 import kr.co.soogong.master.data.dto.mypage.NoticeDto
 import java.util.*

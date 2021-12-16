@@ -1,4 +1,4 @@
-package kr.co.soogong.master.ui.preferences.notice
+package kr.co.soogong.master.ui.preferences.detail.notice
 
 import androidx.recyclerview.widget.DiffUtil
 import kr.co.soogong.master.data.model.mypage.Notice
