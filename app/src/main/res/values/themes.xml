@@ -380,6 +380,45 @@
         <item name="cornerSize">10dp</item>
     </style>
 
+    <style name="button">
+        <item name="android:gravity">center</item>
+        <item name="android:stateListAnimator">@null</item>
+    </style>
+
+    <style name="button.small" parent="button">
+        <item name="android:textAppearance">@style/caption_1.bold</item>
+        <item name="android:layout_height">@dimen/gap_36</item>
+        <item name="android:layout_width">@dimen/gap_0</item>
+    </style>
+
+    <style name="button.small.primary" parent="button.small">
+        <item name="android:background">@drawable/bg_solid_green_selector_radius8</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="button.small.secondary" parent="button.small">
+        <item name="android:background">@drawable/bg_solid_light_grey1_selector_radius8</item>
+        <item name="android:textColor">@color/selector_dark_grey1_alpha50</item>
+    </style>
+
+    <style name="button.medium" parent="button">
+        <item name="android:textAppearance">@style/subheadline.bold</item>
+        <item name="android:layout_height">@dimen/gap_48</item>
+        <item name="android:layout_width">@dimen/gap_0</item>
+    </style>
+
+    <style name="button.medium.primary" parent="button.medium">
+        <item name="android:background">@drawable/bg_solid_green_selector_radius8</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="button.medium.secondary" parent="button.medium">
+        <item name="android:background">@drawable/bg_solid_light_grey1_selector_radius8</item>
+        <item name="android:textColor">@color/selector_dark_grey1_alpha50</item>
+    </style>
+
+
+
     <style name="ChipChoiceGreyRectangular" parent="Widget.MaterialComponents.Chip.Choice">
         <item name="chipBackgroundColor">@color/background</item>
         <item name="chipCornerRadius">@dimen/gap_4</item>

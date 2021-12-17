@@ -11,7 +11,7 @@ import kr.co.soogong.master.data.common.CodeTable
 import kr.co.soogong.master.data.dto.AttachmentDto
 import kr.co.soogong.master.databinding.FragmentEditShopImagesBinding
 import kr.co.soogong.master.ui.base.BaseFragment
-import kr.co.soogong.master.ui.dialog.popup.CustomDialog
+import kr.co.soogong.master.ui.dialog.popup.DefaultDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData
 import kr.co.soogong.master.ui.profile.detail.EditProfileContainerActivity
 import kr.co.soogong.master.ui.profile.detail.EditProfileContainerViewModel.Companion.REQUEST_FAILED
@@ -87,8 +87,8 @@ class EditShopImagesFragment : BaseFragment<FragmentEditShopImagesBinding>(
 
             (activity as EditProfileContainerActivity).setSaveButtonClickListener {
                 if (viewModel.profile.value?.approvedStatus == CodeTable.APPROVED.code) {
-                    CustomDialog.newInstance(
-                        DialogData.getConfirmingForRequiredDialogData(requireContext()))
+                    DefaultDialog.newInstance(
+                        DialogData.getConfirmingForRequiredDialogData())
                         .let {
                             it.setButtonsClickListener(
                                 onPositive = {

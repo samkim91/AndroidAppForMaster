@@ -99,6 +99,7 @@
     <dimen name="gap_180">180dp</dimen>
     <dimen name="gap_220">220dp</dimen>
     <dimen name="gap_230">230dp</dimen>
+    <dimen name="gap_310">310dp</dimen>
     <dimen name="gap_350">350dp</dimen>
 
     <!--  Sign In  -->

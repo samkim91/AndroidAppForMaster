@@ -18,7 +18,7 @@ import kr.co.soogong.master.ui.base.BaseViewModel.Companion.DISMISS_LOADING
 import kr.co.soogong.master.ui.base.BaseViewModel.Companion.SHOW_LOADING
 import kr.co.soogong.master.ui.dialog.bottomSheetDialogRecyclerView.BottomSheetDialogBundle
 import kr.co.soogong.master.ui.dialog.bottomSheetDialogRecyclerView.BottomSheetDialogRecyclerView
-import kr.co.soogong.master.ui.dialog.popup.CustomDialog
+import kr.co.soogong.master.ui.dialog.popup.DefaultDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData
 import kr.co.soogong.master.ui.profile.ProfileViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.uihelper.profile.*
@@ -139,8 +139,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
                 ).let {
                     it.setItemClickListener { dialogItem ->
                         if (viewModel.profile.value?.approvedStatus == CodeTable.APPROVED.code) {
-                            CustomDialog.newInstance(DialogData.getConfirmingForRequiredDialogData(
-                                requireContext()))
+                            DefaultDialog.newInstance(DialogData.getConfirmingForRequiredDialogData())
                                 .let { dialog ->
                                     dialog.setButtonsClickListener(
                                         onPositive = { viewModel.saveCareerPeriod(dialogItem.value) },
@@ -246,8 +245,8 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
                         viewModel.profileImage.value = uri
 
                         if (viewModel.profile.value?.approvedStatus == CodeTable.APPROVED.code) {
-                            CustomDialog.newInstance(
-                                DialogData.getConfirmingForRequiredDialogData(requireContext()))
+                            DefaultDialog.newInstance(
+                                DialogData.getConfirmingForRequiredDialogData())
                                 .let {
                                     it.setButtonsClickListener(
                                         onPositive = {

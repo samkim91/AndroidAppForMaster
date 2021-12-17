@@ -9,7 +9,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentRequirementBinding
 import kr.co.soogong.master.ui.base.BaseFragment
-import kr.co.soogong.master.ui.dialog.popup.CustomDialog
+import kr.co.soogong.master.ui.dialog.popup.DefaultDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData
 import kr.co.soogong.master.ui.requirement.RequirementViewModel.Companion.ASK_FOR_REVIEW_SUCCESSFULLY
 import kr.co.soogong.master.ui.requirement.RequirementViewModel.Companion.REQUEST_FAILED
@@ -116,11 +116,11 @@ class RequirementFragment : BaseFragment<FragmentRequirementBinding>(
     }
 
     fun showDialogForViewRequirement(type: Int, list: List<Int>) {
-        CustomDialog.newInstance(
+        DefaultDialog.newInstance(
             dialogData = if (type == REQUEST_MEASURE)
-                DialogData.getNoticeForRequestMeasure(requireContext(), list.count())
+                DialogData.getNoticeForRequestMeasure(list.count())
             else
-                DialogData.getNoticeForRequestConsulting(requireContext(), list.count())
+                DialogData.getNoticeForRequestConsulting(list.count())
         ).let {
             it.setButtonsClickListener(
                 onPositive = {
@@ -145,7 +145,7 @@ class RequirementFragment : BaseFragment<FragmentRequirementBinding>(
 
     private fun checkShowNoticeForCalling() {
         if (viewModel.getShowNoticeForCalling())
-            CustomDialog.newInstance(DialogData.getNoticeForCallingToCustomer(requireContext()))
+            DefaultDialog.newInstance(DialogData.getNoticeForCallingToCustomer())
                 .let {
                     it.setButtonsClickListener(
                         onPositive = { },

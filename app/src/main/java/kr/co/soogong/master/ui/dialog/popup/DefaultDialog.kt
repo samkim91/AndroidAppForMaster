@@ -8,25 +8,25 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
-import kr.co.soogong.master.databinding.DialogCustomBinding
+import kr.co.soogong.master.databinding.DialogDefaultBinding
 import timber.log.Timber
 
-class CustomDialog() : DialogFragment() {
-    lateinit var binding: DialogCustomBinding
+class DefaultDialog() : DialogFragment() {
+    private lateinit var binding: DialogDefaultBinding
 
     private val dialogData: DialogData? by lazy {
         arguments?.getParcelable(DIALOG_DATA)
     }
 
-    private lateinit var customDialogClickListener: CustomDialogClickListener
+    private lateinit var defaultDialogClickListener: DefaultDialogClickListener
 
-    interface CustomDialogClickListener {
+    interface DefaultDialogClickListener {
         fun onPositiveClicked()
         fun onNegativeClicked()
     }
 
     fun setButtonsClickListener(onPositive: () -> Unit, onNegative: () -> Unit) {
-        this.customDialogClickListener = object : CustomDialogClickListener {
+        this.defaultDialogClickListener = object : DefaultDialogClickListener {
             override fun onPositiveClicked() {
                 onPositive()
             }
@@ -49,7 +49,7 @@ class CustomDialog() : DialogFragment() {
     ): View {
         Timber.tag(TAG).d("onCreateView: ")
 
-        binding = DialogCustomBinding.inflate(inflater, container, false)
+        binding = DialogDefaultBinding.inflate(inflater, container, false)
 
         // 다이얼로그 둥글게
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
@@ -63,37 +63,38 @@ class CustomDialog() : DialogFragment() {
 
         dialogData?.let { dialogData ->
             with(binding) {
-                txtDialogContent.text = dialogData.title
-                txtDialogContent.setTextColor(dialogData.titleTxtColor)
+                tvTitle.text = dialogData.title
 
-                if (dialogData.description == null) {
-                    txtDialogAlert.visibility = View.GONE
+                if (dialogData.content.isEmpty()) {
+                    tvContent.isVisible = false
                 } else {
-                    txtDialogAlert.visibility = View.VISIBLE
-                    txtDialogAlert.text = dialogData.description
-                    txtDialogAlert.setTextColor(dialogData.descriptionTxtColor)
+                    tvContent.isVisible = true
+                    tvContent.text = dialogData.content
                 }
 
-                if (dialogData.negativeBtnText.isNullOrEmpty()) {
-                    btnNo.isVisible = false
-                    line.isVisible = false
+                if (dialogData.alert.isEmpty()) {
+                    tvAlert.isVisible = false
                 } else {
-                    btnNo.text = dialogData.negativeBtnText
-                    btnNo.setTextColor(dialogData.negativeBtnTextColor)
-                    btnNo.setOnClickListener {
-                        if (::customDialogClickListener.isInitialized) customDialogClickListener.onNegativeClicked()
+                    tvAlert.isVisible = true
+                    tvAlert.text = dialogData.alert
+                }
+
+                if (dialogData.negativeText.isEmpty()) {
+                    bNegative.isVisible = false
+                } else {
+                    bNegative.text = dialogData.negativeText
+                    bNegative.setOnClickListener {
+                        if (::defaultDialogClickListener.isInitialized) defaultDialogClickListener.onNegativeClicked()
                         dismiss()
                     }
                 }
 
-                if (dialogData.positiveBtnText.isNullOrEmpty()) {
-                    btnYes.isVisible = false
-                    line.isVisible = false
+                if (dialogData.positiveText.isEmpty()) {
+                    bPositive.isVisible = false
                 } else {
-                    btnYes.text = dialogData.positiveBtnText
-                    btnYes.setTextColor(dialogData.positiveBtnTextColor)
-                    btnYes.setOnClickListener {
-                        if (::customDialogClickListener.isInitialized) customDialogClickListener.onPositiveClicked()
+                    bPositive.text = dialogData.positiveText
+                    bPositive.setOnClickListener {
+                        if (::defaultDialogClickListener.isInitialized) defaultDialogClickListener.onPositiveClicked()
                         dismiss()
                     }
                 }
@@ -102,13 +103,13 @@ class CustomDialog() : DialogFragment() {
     }
 
     companion object {
-        private const val TAG = "CustomDialog"
+        private const val TAG = "DefaultDialog"
         private const val DIALOG_DATA = "DIALOG_DATA"
 
         fun newInstance(
             dialogData: DialogData,
             cancelable: Boolean = true,
-        ) = CustomDialog().apply {
+        ) = DefaultDialog().apply {
             arguments = Bundle().apply {
                 putParcelable(DIALOG_DATA, dialogData)
             }

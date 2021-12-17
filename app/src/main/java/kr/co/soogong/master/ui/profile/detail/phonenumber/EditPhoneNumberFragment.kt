@@ -15,7 +15,7 @@ import kr.co.soogong.master.data.common.ButtonTheme
 import kr.co.soogong.master.databinding.FragmentEditPhoneNumberBinding
 import kr.co.soogong.master.ui.auth.signup.LimitTime
 import kr.co.soogong.master.ui.base.BaseFragment
-import kr.co.soogong.master.ui.dialog.popup.CustomDialog
+import kr.co.soogong.master.ui.dialog.popup.DefaultDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData
 import kr.co.soogong.master.ui.profile.detail.EditProfileContainerActivity
 import kr.co.soogong.master.ui.profile.detail.EditProfileContainerViewModel.Companion.SAVE_MASTER_SUCCESSFULLY
@@ -243,7 +243,7 @@ class EditPhoneNumberFragment :
     }
 
     private fun showDialogForUserExist() {
-        CustomDialog.newInstance(DialogData.getUserExistDialogData(requireContext()))
+        DefaultDialog.newInstance(DialogData.getUserExistDialogData())
             .let {
                 it.setButtonsClickListener(
                     onPositive = {},

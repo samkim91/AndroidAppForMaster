@@ -12,7 +12,7 @@ import kr.co.soogong.master.databinding.ActivityMeasurementBinding
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.ui.base.BaseViewModel.Companion.DISMISS_LOADING
 import kr.co.soogong.master.ui.base.BaseViewModel.Companion.SHOW_LOADING
-import kr.co.soogong.master.ui.dialog.popup.CustomDialog
+import kr.co.soogong.master.ui.dialog.popup.DefaultDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData
 import kr.co.soogong.master.ui.requirement.action.write.WriteEstimationViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.ui.requirement.action.write.WriteEstimationViewModel.Companion.SEND_ESTIMATION_SUCCESSFULLY
@@ -157,8 +157,8 @@ class MeasurementActivity : BaseActivity<ActivityMeasurementBinding>(
     }
 
     private fun customBackPressed() {
-        CustomDialog.newInstance(
-            DialogData.getCancelSendingEstimationDialogData(this)
+        DefaultDialog.newInstance(
+            DialogData.getCancelSendingEstimationDialogData()
         ).let {
             it.setButtonsClickListener(
                 onPositive = {

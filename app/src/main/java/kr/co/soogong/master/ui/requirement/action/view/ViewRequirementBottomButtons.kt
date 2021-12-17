@@ -13,7 +13,7 @@ import kr.co.soogong.master.R
 import kr.co.soogong.master.data.dto.requirement.RequirementDto
 import kr.co.soogong.master.data.model.requirement.RequirementStatus
 import kr.co.soogong.master.databinding.ActivityViewRequirementBinding
-import kr.co.soogong.master.ui.dialog.popup.CustomDialog
+import kr.co.soogong.master.ui.dialog.popup.DefaultDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData
 import kr.co.soogong.master.uihelper.requirment.action.CancelActivityHelper
 import kr.co.soogong.master.uihelper.requirment.action.EndRepairActivityHelper
@@ -154,8 +154,8 @@ private fun setRefuseEstimationButton(
         isVisible = true
         text = context.getString(R.string.refuse_estimation)
         setOnClickListener {
-            CustomDialog.newInstance(
-                DialogData.getRefuseEstimateDialogData(context)
+            DefaultDialog.newInstance(
+                DialogData.getRefuseEstimateDialogData()
             ).let {
                 it.setButtonsClickListener(
                     onPositive = {
@@ -198,8 +198,8 @@ private fun setRefuseMeasureButton(
         isVisible = true
         text = context.getString(R.string.refuse_measure)
         setOnClickListener {
-            CustomDialog.newInstance(
-                DialogData.getRefuseMeasureDialogData(context)
+            DefaultDialog.newInstance(
+                DialogData.getRefuseMeasureDialogData()
             ).let {
                 it.setButtonsClickListener(
                     onPositive = {
@@ -228,8 +228,8 @@ private fun setAcceptMeasureButton(
         isVisible = true
         text = context.getString(R.string.accept_measure)
         setOnClickListener {
-            CustomDialog.newInstance(
-                DialogData.getAcceptMeasureDialogData(context)
+            DefaultDialog.newInstance(
+                DialogData.getAcceptMeasureDialogData()
             ).let {
                 it.setButtonsClickListener(
                     onPositive = {

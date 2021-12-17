@@ -10,7 +10,7 @@ import kr.co.soogong.master.R
 import kr.co.soogong.master.data.common.ShapeTheme
 import kr.co.soogong.master.databinding.FragmentPreferencesBinding
 import kr.co.soogong.master.ui.base.BaseFragment
-import kr.co.soogong.master.ui.dialog.popup.CustomDialog
+import kr.co.soogong.master.ui.dialog.popup.DefaultDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData
 import kr.co.soogong.master.ui.preferences.PreferencesViewModel.Companion.ALARM
 import kr.co.soogong.master.ui.preferences.PreferencesViewModel.Companion.CUSTOMER_SERVICE
@@ -65,8 +65,8 @@ class PreferencesFragment : BaseFragment<FragmentPreferencesBinding>(
                     ALARM ->
                         startActivity(PreferencesContainerActivityHelper.getIntent(requireContext(),
                             SETTING_ALARM_PAGE))
-                    REQUEST_LOGOUT -> CustomDialog.newInstance(
-                        dialogData = DialogData.getConfirmingLogout(requireContext())).let {
+                    REQUEST_LOGOUT -> DefaultDialog.newInstance(
+                        dialogData = DialogData.getConfirmingLogout()).let {
                         it.setButtonsClickListener(
                             onPositive = { viewModel.logout() },
                             onNegative = { }

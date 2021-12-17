@@ -8,7 +8,7 @@ import kr.co.soogong.master.data.dto.requirement.estimationTemplate.EstimationTe
 import kr.co.soogong.master.databinding.ActivityEstimationTemplatesBinding
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.ui.dialog.bottomDialogCountableEdittext.BottomDialogCountableEdittext
-import kr.co.soogong.master.ui.dialog.popup.CustomDialog
+import kr.co.soogong.master.ui.dialog.popup.DefaultDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData
 import kr.co.soogong.master.ui.requirement.action.write.template.EstimationTemplatesViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.uihelper.requirment.action.EstimationTemplatesActivityHelper
@@ -48,8 +48,8 @@ class EstimationTemplatesActivity : BaseActivity<ActivityEstimationTemplatesBind
             recyclerviewForTemplates.adapter = EstimationTemplateAdapter(
                 buttonLeftClick = { template ->
                     Timber.tag(TAG).d("buttonLeftClick: $template")
-                    CustomDialog.newInstance(
-                        DialogData.getConfirmingForDeletingEstimationTemplate(this@EstimationTemplatesActivity)
+                    DefaultDialog.newInstance(
+                        DialogData.getConfirmingForDeletingEstimationTemplate()
                     ).let {
                         it.setButtonsClickListener(
                             onPositive = {
@@ -96,8 +96,8 @@ class EstimationTemplatesActivity : BaseActivity<ActivityEstimationTemplatesBind
                 }
             },
             cancelListener = {
-                if (it.description.isNotEmpty()) CustomDialog.newInstance(
-                    DialogData.getConfirmingForIgnoreChangeOfEstimationTemplate(this)
+                if (it.description.isNotEmpty()) DefaultDialog.newInstance(
+                    DialogData.getConfirmingForIgnoreChangeOfEstimationTemplate()
                 ).let { dialog ->
                     dialog.setButtonsClickListener(
                         onPositive = { showBottomSheetDialog(it) },

@@ -12,7 +12,7 @@ import kr.co.soogong.master.ui.auth.signup.SignUpViewModel.Companion.CHECK_PHONE
 import kr.co.soogong.master.ui.auth.signup.SignUpViewModel.Companion.PHONE_NUMBER_EXIST
 import kr.co.soogong.master.ui.auth.signup.SignUpViewModel.Companion.PHONE_NUMBER_NOT_EXIST
 import kr.co.soogong.master.ui.base.BaseFragment
-import kr.co.soogong.master.ui.dialog.popup.CustomDialog
+import kr.co.soogong.master.ui.dialog.popup.DefaultDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.extension.toast
@@ -67,7 +67,7 @@ class PhoneNumberFragment : BaseFragment<FragmentSignUpPhoneNumberBinding>(
     }
 
     private fun showDialog() {
-        CustomDialog.newInstance(DialogData.getExistentUserDialogData(requireContext()))
+        DefaultDialog.newInstance(DialogData.getExistentUserDialogData())
             .let {
                 it.setButtonsClickListener(
                     onPositive = { (activity as? SignUpActivity)?.finishActivityWithoutDialog() },

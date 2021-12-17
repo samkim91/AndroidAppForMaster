@@ -8,7 +8,7 @@ import kr.co.soogong.master.R
 import kr.co.soogong.master.data.common.ButtonTheme
 import kr.co.soogong.master.databinding.ActivityPortfolioListBinding
 import kr.co.soogong.master.ui.base.BaseActivity
-import kr.co.soogong.master.ui.dialog.popup.CustomDialog
+import kr.co.soogong.master.ui.dialog.popup.DefaultDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData
 import kr.co.soogong.master.ui.profile.detail.portfoliolist.PortfolioListViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerActivityHelper
@@ -95,10 +95,10 @@ class PortfolioListActivity : BaseActivity<ActivityPortfolioListBinding>(
             PortfolioListAdapter(
                 context = this,
                 buttonLeftClickListener = { id ->
-                    CustomDialog.newInstance(
+                    DefaultDialog.newInstance(
                         dialogData = when (viewModel.pageName) {
-                            PORTFOLIO -> DialogData.getAskingDeletePortfolioDialogData(this@PortfolioListActivity)
-                            else -> DialogData.getAskingDeletePriceByProjectDialogData(this@PortfolioListActivity)
+                            PORTFOLIO -> DialogData.getAskingDeletePortfolioDialogData()
+                            else -> DialogData.getAskingDeletePriceByProjectDialogData()
                         }).let {
                         it.setButtonsClickListener(
                             onPositive = { viewModel.deletePortfolio(id) },

@@ -12,7 +12,7 @@ import kr.co.soogong.master.data.common.CodeTable
 import kr.co.soogong.master.data.model.requirement.RequirementCard
 import kr.co.soogong.master.data.model.requirement.RequirementStatus
 import kr.co.soogong.master.databinding.ViewHolderRequirementCardBinding
-import kr.co.soogong.master.ui.dialog.popup.CustomDialog
+import kr.co.soogong.master.ui.dialog.popup.DefaultDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData
 import kr.co.soogong.master.ui.requirement.RequirementViewModel
 import kr.co.soogong.master.uihelper.profile.EditRequiredInformationActivityHelper
@@ -80,8 +80,8 @@ open class RequirementCardViewHolder(
             when (it) {
                 // 미승인 상태이면, 필수정보를 채우도록 이동
                 CodeTable.NOT_APPROVED.code ->
-                    CustomDialog.newInstance(
-                        DialogData.getAskingFillProfileDialogData(context),
+                    DefaultDialog.newInstance(
+                        DialogData.getAskingFillProfileDialogData(),
                     ).let { dialog ->
                         dialog.setButtonsClickListener(
                             onPositive = {
@@ -97,8 +97,8 @@ open class RequirementCardViewHolder(
                     }
                 // 승인요청 상태이면, 승인될 때까지 기다리라는 문구
                 CodeTable.REQUEST_APPROVE.code ->
-                    CustomDialog.newInstance(
-                        DialogData.getWaitingUntilApprovalDialogData(context)
+                    DefaultDialog.newInstance(
+                        DialogData.getWaitingUntilApprovalDialogData()
                     ).let { dialog ->
                         dialog.setButtonsClickListener(
                             onPositive = { },
@@ -121,8 +121,8 @@ open class RequirementCardViewHolder(
 
             setLeftButtonClickListener {
                 checkMasterApprovedStatus {
-                    CustomDialog.newInstance(
-                        DialogData.getCallToCustomerDialogData(context)
+                    DefaultDialog.newInstance(
+                        DialogData.getCallToCustomerDialogData()
                     ).let {
                         it.setButtonsClickListener(
                             onPositive = {
