@@ -14,7 +14,7 @@ import kr.co.soogong.master.data.dto.AttachmentDto
 import kr.co.soogong.master.data.model.profile.*
 import kr.co.soogong.master.databinding.FragmentEditBusinessUnitInformationBinding
 import kr.co.soogong.master.ui.base.BaseFragment
-import kr.co.soogong.master.ui.dialog.popup.CustomDialog
+import kr.co.soogong.master.ui.dialog.popup.DefaultDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData
 import kr.co.soogong.master.ui.profile.detail.EditProfileContainerActivity
 import kr.co.soogong.master.ui.profile.detail.EditProfileContainerViewModel.Companion.REQUEST_FAILED
@@ -108,8 +108,8 @@ class EditBusinessUnitInformationFragment :
                 }
 
                 if (viewModel.profile.value?.approvedStatus == CodeTable.APPROVED.code) {
-                    CustomDialog.newInstance(
-                        dialogData = DialogData.getConfirmingForRequiredDialogData(requireContext()))
+                    DefaultDialog.newInstance(
+                        dialogData = DialogData.getConfirmingForRequiredDialogData())
                         .let {
                             it.setButtonsClickListener(
                                 onPositive = { viewModel.saveBusinessUnitInformation() },

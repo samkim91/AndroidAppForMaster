@@ -18,8 +18,8 @@ import kr.co.soogong.master.databinding.ActivityWriteEstimationBinding
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.ui.base.BaseViewModel.Companion.DISMISS_LOADING
 import kr.co.soogong.master.ui.base.BaseViewModel.Companion.SHOW_LOADING
-import kr.co.soogong.master.ui.dialog.popup.CustomDialog
-import kr.co.soogong.master.ui.dialog.popup.DialogData.Companion.getCancelSendingEstimationDialogData
+import kr.co.soogong.master.ui.dialog.popup.DefaultDialog
+import kr.co.soogong.master.ui.dialog.popup.DialogData
 import kr.co.soogong.master.ui.requirement.action.write.WriteEstimationViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.ui.requirement.action.write.WriteEstimationViewModel.Companion.SEND_ESTIMATION_SUCCESSFULLY
 import kr.co.soogong.master.uihelper.requirment.action.EstimationTemplatesActivityHelper
@@ -274,8 +274,8 @@ class WriteEstimationActivity : BaseActivity<ActivityWriteEstimationBinding>(
     }
 
     private fun customBackPressed() {
-        CustomDialog.newInstance(
-            getCancelSendingEstimationDialogData(this@WriteEstimationActivity)
+        DefaultDialog.newInstance(
+            DialogData.getCancelSendingEstimationDialogData()
         ).let {
             it.setButtonsClickListener(
                 onPositive = {
