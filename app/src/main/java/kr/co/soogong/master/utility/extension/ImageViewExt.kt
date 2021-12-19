@@ -15,14 +15,14 @@ fun ImageView.setImageUrl(url: String?) {
     if (url.isNullOrEmpty()) {
         Glide.with(this.context)
             .load(R.drawable.ic_empty_image)
-            .transform(CenterCrop(), RoundedCorners(16))
+            .transform(CenterCrop(), RoundedCorners(8.dp))
             .into(this)
         return
     }
 
     Glide.with(this.context)
         .load(url)
-        .transform(CenterCrop(), RoundedCorners(16))
+        .transform(CenterCrop(), RoundedCorners(8.dp))
         .into(this)
 }
 
@@ -31,7 +31,7 @@ fun ImageView.setImageUri(uri: Uri?) {
     uri?.let {
         Glide.with(this.context)
             .load(it)
-            .transform(CenterCrop(), RoundedCorners(16))
+            .transform(CenterCrop(), RoundedCorners(8.dp))
             .into(this)
     }
 }

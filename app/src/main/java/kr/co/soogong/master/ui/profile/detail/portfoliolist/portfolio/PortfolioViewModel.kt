@@ -82,9 +82,21 @@ class PortfolioViewModel @Inject constructor(
             ).addToDisposable()
     }
 
+    fun startImagePickerForBefore() {
+        Timber.tag(TAG).d("startImagePickerForBefore: ")
+        setAction(START_IMAGE_PICKER_FOR_BEFORE)
+    }
+
+    fun startImagePickerForAfter() {
+        Timber.tag(TAG).d("startImagePickerForAfter: ")
+        setAction(START_IMAGE_PICKER_FOR_AFTER)
+    }
+
     companion object {
         private const val TAG = "EditPortfolioViewModel"
         const val SAVE_PORTFOLIO_SUCCESSFULLY = "SAVE_PORTFOLIO_SUCCESSFULLY"
         const val REQUEST_FAILED = "REQUEST_FAILED"
+        const val START_IMAGE_PICKER_FOR_BEFORE = "START_IMAGE_PICKER_FOR_BEFORE"
+        const val START_IMAGE_PICKER_FOR_AFTER = "START_IMAGE_PICKER_FOR_AFTER"
     }
 }
