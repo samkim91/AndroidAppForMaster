@@ -4,12 +4,8 @@
 
     <androidx.appcompat.widget.AppCompatCheckBox
         android:id="@+id/cb_content"
-        style="@style/call_out.regular"
+        style="@style/checkbox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:button="@drawable/check_box_rectangle"
-        android:paddingStart="@dimen/gap_8"
-        android:paddingEnd="@dimen/gap_0"
-        android:textColor="@color/dark_grey_2"
         tools:text="프로젝트" />
 </layout>

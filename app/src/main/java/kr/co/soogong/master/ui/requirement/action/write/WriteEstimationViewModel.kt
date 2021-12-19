@@ -7,13 +7,13 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
+import kr.co.soogong.master.data.common.CodeTable
 import kr.co.soogong.master.data.dto.AttachmentDto
 import kr.co.soogong.master.data.dto.requirement.RequirementDto
 import kr.co.soogong.master.data.dto.requirement.estimation.EstimationDto
 import kr.co.soogong.master.data.dto.requirement.estimation.EstimationPriceDto
 import kr.co.soogong.master.data.model.requirement.estimation.EstimationPriceTypeCode
 import kr.co.soogong.master.data.model.requirement.estimation.EstimationResponseCode
-import kr.co.soogong.master.data.model.requirement.estimation.EstimationTypeCode
 import kr.co.soogong.master.domain.usecase.requirement.GetRequirementUseCase
 import kr.co.soogong.master.domain.usecase.requirement.SaveEstimationUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
@@ -29,14 +29,15 @@ class WriteEstimationViewModel @Inject constructor(
     val savedStateHandle: SavedStateHandle,
 ) : BaseViewModel() {
 
+    val estimationTypes = listOf(CodeTable.INTEGRATION, CodeTable.BY_ITEM)
+    val estimationType = MutableLiveData(estimationTypes[0])
+
     private val requirementId =
         WriteEstimationActivityHelper.getRequirementIdFromSavedState(savedStateHandle)
 
     private val _requirement = MutableLiveData<RequirementDto>()
     val requirement: LiveData<RequirementDto>
         get() = _requirement
-
-    val estimationType = MutableLiveData(EstimationTypeCode.INTEGRATION)  // Integration or ByItem
 
     val simpleCost = MutableLiveData("")
 
@@ -69,6 +70,7 @@ class WriteEstimationViewModel @Inject constructor(
 
     fun sendEstimation() {
         Timber.tag(TAG).d("sendEstimation: ")
+
         saveEstimationUseCase(
             estimationDto = EstimationDto(
                 id = requirement.value?.estimationDto?.id,
@@ -76,9 +78,9 @@ class WriteEstimationViewModel @Inject constructor(
                 requirementId = requirement.value?.estimationDto?.requirementId,
                 masterId = requirement.value?.estimationDto?.masterId,
                 masterResponseCode = EstimationResponseCode.ACCEPTED,
-                typeCode = estimationType.value,
+                typeCode = estimationType.value?.code,
                 price = when (estimationType.value) {
-                    EstimationTypeCode.BY_ITEM -> {
+                    CodeTable.BY_ITEM -> {
                         totalCost.value?.replace(",", "")?.toInt()
                     }
                     else -> {
@@ -89,7 +91,7 @@ class WriteEstimationViewModel @Inject constructor(
                 isSavingTemplate = isSavingTemplate.value ?: false,
                 description = description.value,
                 estimationPrices = when (estimationType.value) {
-                    EstimationTypeCode.BY_ITEM -> {
+                    CodeTable.BY_ITEM -> {
                         listOf(
                             EstimationPriceDto.inputToEstimationPriceDto(
                                 requirement.value?.estimationDto,
@@ -129,10 +131,29 @@ class WriteEstimationViewModel @Inject constructor(
             ).addToDisposable()
     }
 
+    fun startEstimationTemplate() {
+        Timber.tag(TAG).d("startEstimationTemplate: ")
+        setAction(START_ESTIMATION_TEMPLATE)
+    }
+
+    fun startImagePicker() {
+        Timber.tag(TAG).d("startImagePicker: ")
+        setAction(START_IMAGE_PICKER)
+    }
+
+    fun startViewRequirement() {
+        Timber.tag(TAG).d("startViewRequirement: ")
+        setAction(START_VIEW_REQUIREMENT)
+    }
+
     companion object {
         private const val TAG = "WriteEstimationViewModel"
 
         const val SEND_ESTIMATION_SUCCESSFULLY = "SEND_ESTIMATION_SUCCESSFULLY"
         const val REQUEST_FAILED = "REQUEST_FAILED"
+        const val START_ESTIMATION_TEMPLATE = "START_ESTIMATION_TEMPLATE"
+        const val START_IMAGE_PICKER = "START_IMAGE_PICKER"
+        const val START_VIEW_REQUIREMENT = "START_VIEW_REQUIREMENT"
+
     }
 }

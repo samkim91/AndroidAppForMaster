@@ -198,8 +198,6 @@
     <string name="estimation_material_cost">자재비</string>
     <string name="description_label">세부내용</string>
     <string name="estimation_description_label">제안내용</string>
-    <string name="masters_estimation_description_label">마스터님의 제안 내용 (선택)</string>
-    <string name="masters_estimation_description_hint_text">특별히 제안할 내용, 현장에서 가격이 변동될 수 있는 사항 등 고객이 선택하는데에 도움이 되는 내용을 작성해 주세요.\n마스터님의 전화번호는 고객에게 자동으로 전달됩니다.</string>
 
     <string name="repair_actual_price">최종 시공가</string>
     <string name="canceled_reason_label">취소 사유</string>
@@ -269,21 +267,26 @@
     <string name="asking_write_canceled_reason_detail_label">취소 사유에 대해 더 하고 싶은 말이 있으시면 작성해주세요.</string>
 
     <!-- Write Estimate -->
-    <string name="write_estimate_title">견적서 작성</string>
-    <string name="send_estimation">견적서 보내기</string>
-    <string name="choose_estimation_type_text">견적 유형 선택</string>
-    <string name="show_requirement_content">요청 내용 보기</string>
-    <string name="insert_number_only_with_unit_text">숫자만 입력해주세요. (단위 : 원)</string>
-    <string name="estimation_price_text">견적가</string>
+    <string name="writing_estimation">견적서 작성</string>
+    <string name="opening_requirement">요청내용 보기</string>
 
+    <string name="choosing_estimation_type">견적 유형 선택</string>
     <string name="integration_estimation">통합 견적</string>
     <string name="estimation_by_item">항목별 견적</string>
 
-    <string name="alert_box_title_for_loading_estimation_template">자주쓰는 제안 내용 불러오기</string>
-    <string name="checkbox_text_for_adding_estimation_template">자주 쓰는 제안 내용에 추가하기</string>
-    <string name="alert_box_title_for_estimation_template">주의 : 명함, 간판 등 직거래 유도 시 서비스 이용이 제한됩니다.</string>
-    <string name="estimation_images_picker_title">사진 첨부 (선택)</string>
+    <string name="estimation_cost">견적가</string>
 
+    <string name="insert_number_only_with_unit_text">숫자만 입력해주세요. (단위 : 원)</string>
+
+    <string name="getting_estimation_template">자주쓰는 제안 내용 불러오기</string>
+    <string name="adding_estimation_template">자주 쓰는 제안 내용에 추가하기</string>
+
+    <string name="estimation_description">마스터님의 제안 내용 (선택)</string>
+    <string name="estimation_description_notice">주의 : 명함, 간판 등 직거래 유도 시 서비스 이용이 제한됩니다.</string>
+
+    <string name="adding_images_option">사진 첨부 (선택)</string>
+
+    <string name="sending_estimation">견적 보내기</string>
     <!-- Measure  -->
     <string name="measure_image_holder_label">실측 정보 (선택)</string>
     <string name="alert_box_title_for_measure">현장 실측 중 작성한 메모를 찍어 올려주세요!</string>

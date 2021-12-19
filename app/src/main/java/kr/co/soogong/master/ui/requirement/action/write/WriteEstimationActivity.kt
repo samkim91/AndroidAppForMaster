@@ -2,18 +2,15 @@ package kr.co.soogong.master.ui.requirement.action.write
 
 import android.app.Activity
 import android.os.Bundle
-import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
-import androidx.core.content.res.ResourcesCompat
 import dagger.hilt.android.AndroidEntryPoint
 import gun0912.tedimagepicker.builder.TedImagePicker
 import kr.co.soogong.master.R
-import kr.co.soogong.master.atomic.molecules.Title3Container
-import kr.co.soogong.master.atomic.molecules.Title3Container.Companion.PREVIOUS_ESTIMATION_TYPE
-import kr.co.soogong.master.atomic.molecules.Title3Container.Companion.REQUIREMENT_TYPE
+import kr.co.soogong.master.atomic.molecules.SubheadlineChipGroup
+import kr.co.soogong.master.data.common.CodeTable
+import kr.co.soogong.master.data.common.ColorTheme
 import kr.co.soogong.master.data.dto.AttachmentDto
-import kr.co.soogong.master.data.model.requirement.estimation.EstimationTypeCode
 import kr.co.soogong.master.databinding.ActivityWriteEstimationBinding
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.ui.base.BaseViewModel.Companion.DISMISS_LOADING
@@ -22,10 +19,15 @@ import kr.co.soogong.master.ui.dialog.popup.DefaultDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData
 import kr.co.soogong.master.ui.requirement.action.write.WriteEstimationViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.ui.requirement.action.write.WriteEstimationViewModel.Companion.SEND_ESTIMATION_SUCCESSFULLY
+import kr.co.soogong.master.ui.requirement.action.write.WriteEstimationViewModel.Companion.START_ESTIMATION_TEMPLATE
+import kr.co.soogong.master.ui.requirement.action.write.WriteEstimationViewModel.Companion.START_IMAGE_PICKER
+import kr.co.soogong.master.ui.requirement.action.write.WriteEstimationViewModel.Companion.START_VIEW_REQUIREMENT
 import kr.co.soogong.master.uihelper.requirment.action.EstimationTemplatesActivityHelper
+import kr.co.soogong.master.uihelper.requirment.action.ViewRequirementActivityHelper
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.FileHelper
 import kr.co.soogong.master.utility.PermissionHelper
+import kr.co.soogong.master.utility.extension.exceptComma
 import kr.co.soogong.master.utility.extension.formatComma
 import kr.co.soogong.master.utility.extension.toast
 import kr.co.soogong.master.utility.validation.ValidationHelper
@@ -59,117 +61,23 @@ class WriteEstimationActivity : BaseActivity<ActivityWriteEstimationBinding>(
             vm = viewModel
             lifecycleOwner = this@WriteEstimationActivity
 
-            with(actionBar) {
-                title.text = getString(R.string.write_estimate_title)
-                backButton.setOnClickListener {
-                    customBackPressed()
+            colorThemeEstimationTemplate = ColorTheme.Green
+
+            initChipGroup()
+
+            with(abHeader) {
+                setButtonBackClickListener { onBackPressed() }
+            }
+
+            saidAttachments.setImagesDeletableAdapter { viewModel.estimationImages.removeAt(it) }
+
+            bSendEstimation.setOnClickListener {
+                registerCostsObserve()
+                if (viewModel.estimationType.value == CodeTable.INTEGRATION) {
+                    if (stiEstimationCost.error.isNullOrEmpty()) viewModel.sendEstimation()
+                } else {
+                    if (stiLaborCost.error.isNullOrEmpty() && stiMaterialCost.error.isNullOrEmpty() && stiTravelCost.error.isNullOrEmpty()) viewModel.sendEstimation()
                 }
-
-                button.text = getString(R.string.send_estimation)
-                button.setOnClickListener {
-                    registerCostsObserve()
-                    if (viewModel.estimationType.value == EstimationTypeCode.INTEGRATION) {
-                        if (!simpleCost.alertVisible && ValidationHelper.isIntRange(viewModel.simpleCost.value!!)) {
-                            viewModel.sendEstimation()
-                        }
-                    } else {
-                        if ((!laborCost.alertVisible && !materialCost.alertVisible && !travelCost.alertVisible) && ValidationHelper.isIntRange(
-                                viewModel.totalCost.value!!)
-                        ) {
-                            viewModel.sendEstimation()
-                        }
-                    }
-                }
-            }
-
-            requestTypeGroup.setOnCheckedChangeListener { _, checkedId ->
-                when (checkedId) {
-                    filterOption1.id -> {
-                        estimationIntegration.visibility = View.VISIBLE
-                        estimationByItemGroup.visibility = View.GONE
-                        viewModel.estimationType.value = EstimationTypeCode.INTEGRATION
-                    }
-
-                    filterOption2.id -> {
-                        estimationIntegration.visibility = View.GONE
-                        estimationByItemGroup.visibility = View.VISIBLE
-                        viewModel.estimationType.value = EstimationTypeCode.BY_ITEM
-                    }
-                }
-            }
-
-            simpleCost.addFocusChangeListener(onFocusChange = { _, hasFocus ->
-                if (!viewModel.simpleCost.value.isNullOrEmpty()) {     // ?. 이 제대로 작동하지 않는다.
-                    viewModel.simpleCost.value?.replace(",", "").let {
-                        if (hasFocus) {
-                            viewModel.simpleCost.value = it
-                        } else {
-                            viewModel.simpleCost.value = it?.toLong().formatComma()
-                        }
-                    }
-                }
-            })
-
-            totalCost.setEditTextBackground(
-                ResourcesCompat.getDrawable(
-                    resources,
-                    R.drawable.shape_gray_background_gray_border_radius50,
-                    null
-                )
-            )
-
-            checkboxForSimpleCostIncludingVat.checkBox.setOnCheckedChangeListener { _, isChecked ->
-                viewModel.includingVat.value = isChecked
-            }
-
-            checkboxForTotalCostIncludingVat.checkBox.setOnCheckedChangeListener { _, isChecked ->
-                viewModel.includingVat.value = isChecked
-            }
-
-            alertBoxForLoadingEstimationTemplate.setOnClickListener {
-                estimationTemplateLauncher.launch(EstimationTemplatesActivityHelper.getIntent(this@WriteEstimationActivity))
-            }
-
-            checkboxForAddingEstimationTemplate.checkBox.setOnCheckedChangeListener { _, isChecked ->
-                viewModel.isSavingTemplate.value = isChecked
-            }
-
-            estimationImagesPicker.setAdapter { viewModel.estimationImages.removeAt(it) }
-
-            estimationImagesPicker.addIconClickListener {
-                PermissionHelper.checkImagePermission(context = this@WriteEstimationActivity,
-                    onGranted = {
-                        TedImagePicker.with(this@WriteEstimationActivity)
-                            .buttonBackground(R.drawable.shape_green_background_radius8)
-                            .max(
-                                (10 - viewModel.estimationImages.getItemCount()),
-                                resources.getString(R.string.maximum_images_count)
-                            )
-                            .startMultiImage { uriList ->
-                                if (FileHelper.isImageExtension(
-                                        uriList,
-                                        this@WriteEstimationActivity
-                                    ) == false
-                                ) {
-                                    toast(getString(R.string.invalid_image_extension))
-                                    return@startMultiImage
-                                }
-
-                                viewModel.estimationImages.addAll(uriList.map {
-                                    AttachmentDto(
-                                        id = null,
-                                        partOf = null,
-                                        referenceId = null,
-                                        description = null,
-                                        s3Name = null,
-                                        fileName = null,
-                                        url = null,
-                                        uri = it,
-                                    )
-                                })
-                            }
-                    },
-                    onDenied = { })
             }
 
             // TODO: 2021/08/25 화면 열릴 때 키보드가 나오고 포커스 되는것 까지 구현 필요
@@ -196,6 +104,46 @@ class WriteEstimationActivity : BaseActivity<ActivityWriteEstimationBinding>(
 
         viewModel.action.observe(this@WriteEstimationActivity, EventObserver { event ->
             when (event) {
+                START_ESTIMATION_TEMPLATE -> estimationTemplateLauncher.launch(
+                    EstimationTemplatesActivityHelper.getIntent(this@WriteEstimationActivity))
+                START_IMAGE_PICKER -> {
+                    PermissionHelper.checkImagePermission(context = this@WriteEstimationActivity,
+                        onGranted = {
+                            TedImagePicker.with(this@WriteEstimationActivity)
+                                .buttonBackground(R.drawable.shape_green_background_radius8)
+                                .max(
+                                    (10 - viewModel.estimationImages.getItemCount()),
+                                    resources.getString(R.string.maximum_images_count)
+                                )
+                                .startMultiImage { uriList ->
+                                    if (FileHelper.isImageExtension(
+                                            uriList,
+                                            this@WriteEstimationActivity
+                                        ) == false
+                                    ) {
+                                        toast(getString(R.string.invalid_image_extension))
+                                        return@startMultiImage
+                                    }
+
+                                    viewModel.estimationImages.addAll(uriList.map {
+                                        AttachmentDto(
+                                            id = null,
+                                            partOf = null,
+                                            referenceId = null,
+                                            description = null,
+                                            s3Name = null,
+                                            fileName = null,
+                                            url = null,
+                                            uri = it,
+                                        )
+                                    })
+                                }
+                        },
+                        onDenied = { })
+                }
+                START_VIEW_REQUIREMENT -> viewModel.requirement.value?.let {
+                    startActivity(ViewRequirementActivityHelper.getIntent(this, it.id))
+                }
                 SEND_ESTIMATION_SUCCESSFULLY -> {
                     toast(getString(R.string.send_message_succeeded))
                     super.onBackPressed()
@@ -207,25 +155,6 @@ class WriteEstimationActivity : BaseActivity<ActivityWriteEstimationBinding>(
                 DISMISS_LOADING -> dismissLoading()
             }
         })
-
-        viewModel.requirement.observe(this, { requirement ->
-            binding.flexibleContainer.removeAllViews()
-            // view : 고객 요청 내용, 이전 실측 내용(있으면)
-            Title3Container.addIconLabelContainer(
-                context = this,
-                container = binding.flexibleContainer,
-                requirementDto = requirement,
-                contentType = REQUIREMENT_TYPE,
-            )
-            requirement.measurement?.let {
-                Title3Container.addIconLabelContainer(
-                    context = this,
-                    container = binding.flexibleContainer,
-                    requirementDto = requirement,
-                    contentType = PREVIOUS_ESTIMATION_TYPE,
-                )
-            }
-        })
     }
 
     override fun onStart() {
@@ -233,39 +162,57 @@ class WriteEstimationActivity : BaseActivity<ActivityWriteEstimationBinding>(
         viewModel.requestRequirement()
     }
 
+    private fun initChipGroup() {
+        SubheadlineChipGroup.initChips(
+            this,
+            layoutInflater,
+            binding.scgEstimationType,
+            viewModel.estimationTypes.map { it.inKorean }
+        )
+    }
+
     private fun registerCostsObserve() {
         Timber.tag(TAG).d("registerCostsObserve: ")
         bind {
             viewModel.simpleCost.observe(this@WriteEstimationActivity, {
-                simpleCost.alertVisible =
-                    simpleCost.text.isNullOrEmpty() || simpleCost.text.toString().replace(",", "")
-                        .toLong() < 10000
+                stiEstimationCost.error = when {
+                    it.exceptComma().toLong() < 10000 -> getString(R.string.minimum_cost)
+                    !ValidationHelper.isIntRange(it) -> getString(R.string.too_large_number)
+                    else -> null
+                }
             })
 
             viewModel.laborCost.observe(this@WriteEstimationActivity, {
-                laborCost.alertVisible = laborCost.text.isNullOrEmpty()
+                stiLaborCost.error =
+                    if (it.isNullOrEmpty()) getString(R.string.required_field_alert) else null
             })
 
             viewModel.materialCost.observe(this@WriteEstimationActivity, {
-                materialCost.alertVisible = materialCost.text.isNullOrEmpty()
+                stiMaterialCost.error =
+                    if (it.isNullOrEmpty()) getString(R.string.required_field_alert) else null
             })
 
             viewModel.travelCost.observe(this@WriteEstimationActivity, {
-                travelCost.alertVisible = travelCost.text.isNullOrEmpty()
+                stiTravelCost.error =
+                    if (it.isNullOrEmpty()) getString(R.string.required_field_alert) else null
+            })
+
+            viewModel.totalCost.observe(this@WriteEstimationActivity, {
+                stiTotalCost.error = when {
+                    it.exceptComma().toLong() < 10000 -> getString(R.string.minimum_cost)
+                    !ValidationHelper.isIntRange(it) -> getString(R.string.too_large_number)
+                    else -> null
+                }
             })
         }
     }
 
     private fun setTotalAmount() {
         with(viewModel) {
-            val laborCostInt =
-                if (laborCost.value.isNullOrEmpty()) 0 else laborCost.value!!.toLong()
-            val materialCostInt =
-                if (materialCost.value.isNullOrEmpty()) 0 else materialCost.value!!.toLong()
-            val travelCostInt =
-                if (travelCost.value.isNullOrEmpty()) 0 else travelCost.value!!.toLong()
-
-            totalCost.value = (laborCostInt + materialCostInt + travelCostInt).formatComma()
+            totalCost.value = (laborCost.value.exceptComma().toLong()
+                    + materialCost.value.exceptComma().toLong()
+                    + travelCost.value.exceptComma().toLong())
+                .formatComma()
         }
     }
 
@@ -274,12 +221,13 @@ class WriteEstimationActivity : BaseActivity<ActivityWriteEstimationBinding>(
     }
 
     private fun customBackPressed() {
+        // 견적 작성 그만둘지 확인 다이얼로그 전시
         DefaultDialog.newInstance(
             DialogData.getCancelSendingEstimationDialogData()
         ).let {
             it.setButtonsClickListener(
                 onPositive = {
-                    finish()
+                    super.onBackPressed()
                 },
                 onNegative = { }
             )

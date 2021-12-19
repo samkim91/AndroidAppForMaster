@@ -53,12 +53,12 @@ class MeasurementActivity : BaseActivity<ActivityMeasurementBinding>(
             vm = viewModel
 
             with(actionBar) {
-                title.text = getString(R.string.write_estimate_title)
+                title.text = getString(R.string.writing_estimation)
                 backButton.setOnClickListener {
                     onBackPressed()
                 }
 
-                button.text = getString(R.string.send_estimation)
+                button.text = getString(R.string.sending_estimation)
                 button.setOnClickListener {
                     registerCostObserver()
                     if (!simpleCost.alertVisible && ValidationHelper.isIntRange(viewModel.simpleCost.value!!)) {

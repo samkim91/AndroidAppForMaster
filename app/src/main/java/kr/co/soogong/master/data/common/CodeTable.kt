@@ -15,6 +15,8 @@ enum class CodeTable(
     NOT_REQUIRED("NotRequired", "사용 안함", ""),
     OVER_TWO("OverTwo", "2층 이상", ""),
     NO_ELEVATOR("NoElevator", "엘리베이터 사용 불가시", ""),
+    INTEGRATION("Integration", "통합 견적", ""),
+    BY_ITEM("ByItem", "항목별 견적", ""),
 
     // 포트폴리오 및 시공종류별 가격
     PORTFOLIO("Portfolio", "포트폴리오", ""),
