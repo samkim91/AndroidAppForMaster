@@ -51,6 +51,7 @@ class LabelFilled @JvmOverloads constructor(
                             R.color.brand_red,
                             null))
                     }
+                    is ColorTheme.Green -> { }
                 }
             }
         }

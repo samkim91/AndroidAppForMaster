@@ -32,12 +32,10 @@ class HeadlineImagesEditable @JvmOverloads constructor(
                 for (i in 0 until value.size) {
                     when (i) {
                         0 -> {
-                            binding.ivFirstImage.ivContainer.setImageUrl(value[i].url)
-                            binding.ivFirstImage.ivIcon.isVisible = false
+                            binding.ivFirstImage.image = value[i]
                         }
                         1 -> {
-                            binding.ivLastImage.ivContainer.setImageUrl(value[i].url)
-                            binding.ivLastImage.ivIcon.isVisible = false
+                            binding.ivLastImage.image = value[i]
                         }
                         else -> return
                     }
@@ -48,7 +46,7 @@ class HeadlineImagesEditable @JvmOverloads constructor(
     var onButtonClick: OnClickListener? = null
         set(value) {
             field = value
-            value?.let { binding.ivAddingImages.ivContainer.setOnClickListener(it) }
+            value?.let { binding.ivAddingImages.setOnClickListener(it) }
         }
 
 //    fun setAddingImagesClickListener(

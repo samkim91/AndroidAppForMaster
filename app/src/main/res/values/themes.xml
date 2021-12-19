@@ -417,6 +417,29 @@
         <item name="android:textColor">@color/selector_dark_grey1_alpha50</item>
     </style>
 
+    <style name="button.big" parent="button">
+        <item name="android:textAppearance">@style/call_out.regular</item>
+        <item name="android:layout_height">@dimen/gap_56</item>
+        <item name="android:layout_width">@dimen/gap_0</item>
+    </style>
+
+    <style name="button.big.primary" parent="button.big">
+        <item name="android:background">@drawable/bg_solid_green_selector_radius8</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="button.big.secondary" parent="button.big">
+        <item name="android:background">@drawable/bg_solid_light_grey1_selector_radius8</item>
+        <item name="android:textColor">@color/selector_dark_grey1_alpha50</item>
+    </style>
+
+    <style name="checkbox">
+        <item name="android:textAppearance">@style/call_out.regular</item>
+        <item name="android:button">@drawable/check_box_rectangle</item>
+        <item name="android:paddingStart">@dimen/gap_8</item>
+        <item name="android:paddingEnd">@dimen/gap_0</item>
+        <item name="android:textColor">@color/dark_grey_2</item>
+    </style>
 
 
     <style name="ChipChoiceGreyRectangular" parent="Widget.MaterialComponents.Chip.Choice">

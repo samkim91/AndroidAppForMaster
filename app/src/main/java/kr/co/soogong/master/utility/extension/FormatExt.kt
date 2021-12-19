@@ -41,6 +41,11 @@ fun Long?.formatComma(): String {
     return DecimalFormat("#,###").format(this)
 }
 
+fun String?.exceptComma(): String {
+    if (this.isNullOrEmpty()) return "0"
+    return this.replace(",", "")
+}
+
 fun Double?.formatDecimal(): String {
     if (this == null) return "0.0"
     return DecimalFormat("#.#").format(this)

@@ -3,9 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <merge
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_title"
@@ -18,9 +19,8 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="대표 이미지" />
 
-        <include
+        <kr.co.soogong.master.atomic.molecules.ImageAddRectangle
             android:id="@+id/iv_adding_images"
-            layout="@layout/view_image_add_rectangle"
             android:layout_width="@dimen/gap_0"
             android:layout_height="@dimen/gap_0"
             android:layout_marginTop="@dimen/gap_20"
@@ -31,9 +31,8 @@
             app:layout_constraintEnd_toStartOf="@id/iv_first_image"
             app:layout_constraintTop_toBottomOf="@id/tv_title"/>
 
-        <include
+        <kr.co.soogong.master.atomic.molecules.ImageEmptyRectangle
             android:id="@+id/iv_first_image"
-            layout="@layout/view_image_empty_rectangle"
             android:layout_width="@dimen/gap_0"
             android:layout_height="@dimen/gap_0"
             app:layout_constraintWidth_percent="0.32"
@@ -43,9 +42,8 @@
             app:layout_constraintEnd_toStartOf="@id/iv_last_image"
             />
 
-        <include
+        <kr.co.soogong.master.atomic.molecules.ImageEmptyRectangle
             android:id="@+id/iv_last_image"
-            layout="@layout/view_image_empty_rectangle"
             android:layout_width="@dimen/gap_0"
             android:layout_height="@dimen/gap_0"
             app:layout_constraintWidth_percent="0.32"
@@ -65,5 +63,5 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_adding_images" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </merge>
 </layout>

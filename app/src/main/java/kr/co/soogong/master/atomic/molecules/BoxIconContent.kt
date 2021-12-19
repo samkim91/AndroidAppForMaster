@@ -52,6 +52,7 @@ class BoxIconContent @JvmOverloads constructor(
                     }
                     is ColorTheme.Red -> {
                     }
+                    is ColorTheme.Green -> { }
                 }
             }
         }

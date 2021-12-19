@@ -56,7 +56,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:setInputType="@{InputType.TYPE_CLASS_NUMBER}"
                     app:setMaxLength="@{10}"
-                    app:title="@{@string/estimation_price_text}" />
+                    app:title="@{@string/estimation_cost}" />
 
                 <kr.co.soogong.master.atomic.molecules.TextCheckBox
                     android:id="@+id/checkbox_for_simple_cost_including_vat"
@@ -101,7 +101,7 @@
                     android:layout_marginStart="@dimen/gap_20"
                     android:layout_marginTop="@dimen/gap_24"
                     android:layout_marginEnd="@dimen/gap_20"
-                    app:content="@{@string/alert_box_title_for_loading_estimation_template}"
+                    app:content="@{@string/getting_estimation_template}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/alert_box"
@@ -116,12 +116,11 @@
                     android:layout_marginEnd="@dimen/gap_20"
                     android:layout_marginBottom="@dimen/gap_30"
                     app:content="@={vm.description}"
-                    app:hintText="@{@string/masters_estimation_description_hint_text}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/alert_box_for_loading_estimation_template"
                     app:limitedCount='@{500}'
-                    app:title="@{@string/masters_estimation_description_label}" />
+                    app:title="@{@string/estimation_description}" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/alert_box_for_estimation_template"
@@ -131,7 +130,7 @@
                     android:layout_marginStart="@dimen/gap_20"
                     android:layout_marginTop="@dimen/gap_5"
                     android:layout_marginEnd="@dimen/gap_20"
-                    android:text="@string/alert_box_title_for_estimation_template"
+                    android:text="@string/estimation_description_notice"
                     android:textColor="@color/text_alert_color"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -148,7 +147,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/alert_box_for_estimation_template"
-                    app:text="@{@string/checkbox_text_for_adding_estimation_template}" />
+                    app:text="@{@string/adding_estimation_template}" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
