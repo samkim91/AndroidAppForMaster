@@ -33,7 +33,7 @@
 
         <kr.co.soogong.master.atomic.molecules.ImageAddRectangle
             android:id="@+id/iv_adding_image"
-            android:layout_width="@dimen/gap_105"
+            android:layout_width="@dimen/gap_100"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/gap_10"
             app:layout_constraintStart_toStartOf="parent"
@@ -43,6 +43,7 @@
             android:id="@+id/rv_images"
             android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/gap_6"
             android:orientation="horizontal"
             android:overScrollMode="never"
             app:images_deletable="@{images}"
@@ -52,5 +53,19 @@
             app:layout_constraintTop_toBottomOf="@id/tv_subheadline"
             bind:visible="@{images.size() != 0}"
             tools:listitem="@layout/view_holder_image_deletable" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_alert"
+            style="@style/caption_1.regular"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_4"
+            android:textColor="@color/brand_red"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_adding_image"
+            tools:text="@string/required_field_alert"
+            tools:visibility="visible" />
     </merge>
 </layout>
