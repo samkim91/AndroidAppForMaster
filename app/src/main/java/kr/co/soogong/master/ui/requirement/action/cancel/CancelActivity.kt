@@ -5,7 +5,7 @@ import android.widget.RadioButton
 import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.common.CodeTable
+import kr.co.soogong.master.data.model.requirement.RequirementStatus
 import kr.co.soogong.master.data.model.requirement.repair.*
 import kr.co.soogong.master.databinding.ActivityCancelBinding
 import kr.co.soogong.master.ui.base.BaseActivity
@@ -57,7 +57,7 @@ class CancelActivity : BaseActivity<ActivityCancelBinding>(
 
                     if (canceledOptions.alertVisible || cancelOptionDetail.alertVisible) return@setOnClickListener
 
-                    if (viewModel.requirement.value?.typeCode == CodeTable.COMPARE.code) viewModel.saveRepair() else viewModel.respondToMeasure()
+                    if (viewModel.requirement.value?.status == RequirementStatus.RequestMeasure.code) viewModel.respondToMeasure() else viewModel.saveRepair()
                 }
 
                 canceledOptions.addCheckedChangeListener { group, checkedId ->
