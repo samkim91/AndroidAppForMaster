@@ -524,13 +524,23 @@
     </style>
     <!-- end section 버튼 스타일 -->
 
-    <style name="checkbox">
+    <style name="check_box_rectangle">
         <item name="android:textAppearance">@style/call_out.regular</item>
         <item name="android:button">@drawable/check_box_rectangle</item>
         <item name="android:paddingStart">@dimen/gap_8</item>
         <item name="android:paddingEnd">@dimen/gap_0</item>
         <item name="android:textColor">@color/dark_grey_2</item>
     </style>
+
+    <style name="radio_button">
+        <item name="android:textAppearance">@style/call_out.regular</item>
+        <item name="android:button">@drawable/radio_button</item>
+        <item name="android:paddingStart">@dimen/gap_8</item>
+        <item name="android:paddingEnd">@dimen/gap_0</item>
+        <item name="android:textColor">@color/dark_grey_2</item>
+    </style>
+
+
 
     <style name="ChipChoiceGreyRectangular" parent="Widget.MaterialComponents.Chip.Choice">
         <item name="chipBackgroundColor">@color/background</item>

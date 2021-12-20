@@ -233,7 +233,7 @@ class SubheadlineContentTag @JvmOverloads constructor(
         ) {
             requirementDto.let { requirement ->
                 SubheadlineContentTag(context).also { item ->
-                    item.subheadline = context.getString(R.string.canceled_reason_label)
+                    item.subheadline = context.getString(R.string.canceled_reason)
                     item.content =
                         CanceledReason.getCanceledReasonFromCode(requirement.canceledCode).inKorean
                     container.addView(item, params)

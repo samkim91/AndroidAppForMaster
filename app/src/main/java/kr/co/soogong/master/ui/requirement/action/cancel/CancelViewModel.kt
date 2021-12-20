@@ -42,7 +42,12 @@ class CancelViewModel @Inject constructor(
     val canceledCode = MutableLiveData("")
     val canceledDescription = MutableLiveData("")
 
-    fun requestCanceledReasons() {
+    init {
+        requestCanceledReasons()
+        requestRequirement()
+    }
+
+    private fun requestCanceledReasons() {
         Timber.tag(TAG).d("requestCanceledReasons: ")
         canceledReasonsUseCase()
             .subscribeOn(Schedulers.io())
@@ -59,7 +64,7 @@ class CancelViewModel @Inject constructor(
             ).addToDisposable()
     }
 
-    fun requestRequirement() {
+    private fun requestRequirement() {
         Timber.tag(TAG).d("requestRequirement: $requirementId")
         getRequirementUseCase(requirementId)
             .subscribeOn(Schedulers.io())

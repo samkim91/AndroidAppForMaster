@@ -5,6 +5,7 @@ import android.widget.RadioButton
 import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
+import kr.co.soogong.master.atomic.molecules.SubheadlineRadioGroup
 import kr.co.soogong.master.data.model.requirement.RequirementStatus
 import kr.co.soogong.master.data.model.requirement.repair.*
 import kr.co.soogong.master.databinding.ActivityCancelBinding
@@ -34,37 +35,35 @@ class CancelActivity : BaseActivity<ActivityCancelBinding>(
 
         bind {
             vm = viewModel
-
             lifecycleOwner = this@CancelActivity
 
-            with(actionBar) {
-                title.text = getString(R.string.canceled_reason_label)
+            abHeader.setButtonBackClickListener { onBackPressed() }
 
-                backButton.setOnClickListener {
-                    super.onBackPressed()
-                }
+            bCancel.setOnClickListener {
+                viewModel.canceledCode.observe(this@CancelActivity, {
+                    srgCanceledOptions.error =
+                        if (it.isNullOrEmpty()) getString(R.string.required_field_alert) else null
+                })
 
-                button.text = getString(R.string.writing_done)
-                button.setOnClickListener {
-                    viewModel.canceledCode.observe(this@CancelActivity, {
-                        canceledOptions.alertVisible = it.isNullOrEmpty()
-                    })
+                viewModel.canceledDescription.observe(this@CancelActivity, {
+                    stcDescription.error =
+                        if (viewModel.canceledCode.value == viewModel.canceledReasons.value?.last()?.code && it.length < 10)
+                            getString(R.string.fill_text_over_10)
+                        else
+                            null
+                })
 
-                    viewModel.canceledDescription.observe(this@CancelActivity, {
-                        cancelOptionDetail.alertVisible =
-                            viewModel.canceledCode.value == viewModel.canceledReasons.value?.last()?.code && it.length < 10
-                    })
+                if (!srgCanceledOptions.error.isNullOrEmpty() || !stcDescription.error.isNullOrEmpty()) return@setOnClickListener
 
-                    if (canceledOptions.alertVisible || cancelOptionDetail.alertVisible) return@setOnClickListener
+                // 실측 요청 -> 거절
+                // 이외(실측 예정, 실측 완료, 매칭 대기, 시공 예정 등) -> 시공 취소
+                if (viewModel.requirement.value?.status == RequirementStatus.RequestMeasure.code) viewModel.respondToMeasure() else viewModel.saveRepair()
+            }
 
-                    if (viewModel.requirement.value?.status == RequirementStatus.RequestMeasure.code) viewModel.respondToMeasure() else viewModel.saveRepair()
-                }
-
-                canceledOptions.addCheckedChangeListener { group, checkedId ->
-                    group.indexOfChild(group.findViewById<RadioButton>(checkedId)).let {
-                        viewModel.canceledCode.value =
-                            viewModel.canceledReasons.value?.get(it)?.code
-                    }
+            srgCanceledOptions.addCheckedChangeListener { group, checkedId ->
+                group.indexOfChild(group.findViewById<RadioButton>(checkedId)).let { position ->
+                    viewModel.canceledCode.value =
+                        viewModel.canceledReasons.value?.get(position)?.code
                 }
             }
         }
@@ -89,14 +88,13 @@ class CancelActivity : BaseActivity<ActivityCancelBinding>(
         })
 
         viewModel.canceledReasons.observe(this, { reasons ->
-            CanceledReasonRadioGroupHelper(this, binding.canceledOptions, reasons)
+            // 취소사유 바인딩
+            SubheadlineRadioGroup.addRadioButtons(
+                this,
+                binding.srgCanceledOptions.radioGroup,
+                reasons.map { it.name }
+            )
         })
-    }
-
-    override fun onStart() {
-        super.onStart()
-        viewModel.requestCanceledReasons()
-        viewModel.requestRequirement()
     }
 
     companion object {
