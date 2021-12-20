@@ -104,7 +104,7 @@ data class DialogData(
 
         fun getCancelSendingEstimationDialogData() =
             DialogData(
-                "견적 작성 취소",
+                "작성 취소",
                 "이 화면에서 나가면 작성했던 내용이 모두 삭제됩니다.",
                 "",
                 "확인",

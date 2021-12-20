@@ -110,12 +110,17 @@ class EditShopImagesFragment : BaseFragment<FragmentEditShopImagesBinding>(
     private fun registerEventObserve() {
         Timber.tag(TAG).d("registerEventObserve: ")
         viewModel.action.observe(viewLifecycleOwner, EventObserver { event ->
-            dismissLoading()
             when (event) {
-                SAVE_MASTER_SUCCESSFULLY -> activity?.onBackPressed()
-                REQUEST_FAILED -> requireContext().toast(getString(
-                    R.string.error_message_of_request_failed
-                ))
+                SAVE_MASTER_SUCCESSFULLY -> {
+                    dismissLoading()
+                    activity?.onBackPressed()
+                }
+                REQUEST_FAILED -> {
+                    dismissLoading()
+                    requireContext().toast(getString(
+                        R.string.error_message_of_request_failed
+                    ))
+                }
             }
         })
     }

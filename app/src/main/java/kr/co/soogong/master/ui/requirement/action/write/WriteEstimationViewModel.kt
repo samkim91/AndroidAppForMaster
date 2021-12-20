@@ -53,6 +53,10 @@ class WriteEstimationViewModel @Inject constructor(
     val isSavingTemplate = MutableLiveData(false)
     val estimationImages = ListLiveData<AttachmentDto>()
 
+    init {
+        requestRequirement()
+    }
+
     fun requestRequirement() {
         Timber.tag(TAG).d("requestRequirement: $requirementId")
         getRequirementUseCase(requirementId)

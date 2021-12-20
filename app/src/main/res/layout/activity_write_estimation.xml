@@ -30,7 +30,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:title="@{@string/writing_estimation}" />
+            app:title="@{@string/writing_measurement}" />
 
         <ScrollView
             android:layout_width="@dimen/gap_0"
@@ -51,9 +51,10 @@
                 <kr.co.soogong.master.atomic.molecules.IconCallOutArrow
                     android:id="@+id/isa_open_requirement"
                     android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{() -> vm.startViewRequirement()}"
                     android:paddingTop="@dimen/gap_8"
                     android:paddingBottom="@dimen/gap_8"
-                    android:layout_height="wrap_content"
                     app:callOut="@{@string/opening_requirement}" />
 
                 <androidx.appcompat.widget.AppCompatImageView

@@ -287,7 +287,10 @@
     <string name="adding_images_option">사진 첨부 (선택)</string>
 
     <string name="sending_estimation">견적 보내기</string>
+
     <!-- Measure  -->
+    <string name="writing_measurement">실측 정보</string>
+
     <string name="measure_image_holder_label">실측 정보 (선택)</string>
     <string name="alert_box_title_for_measure">현장 실측 중 작성한 메모를 찍어 올려주세요!</string>
     <string name="alert_box_content_for_measure">현장 실측 중 자세한 실측 정보를 남긴 메모가 있다면 사진을 찍어 올려주세요. 추후 마스터 등급에 긍정적인 영향을 줄 수 있습니다.</string>

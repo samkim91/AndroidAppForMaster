@@ -46,9 +46,13 @@
         <activity android:name=".ui.requirement.action.search.SearchActivity" />
         <activity
             android:name=".ui.requirement.action.view.ViewRequirementActivity"
-            android:launchMode="singleTop" />        <!-- 실측요청건을 고려 singleTop 로 설정 -->
-        <activity android:name=".ui.requirement.action.write.WriteEstimationActivity" />
-        <activity android:name=".ui.requirement.action.write.MeasurementActivity" />
+            android:launchMode="singleTask" />        <!-- 실측요청건을 고려 singleTop 로 설정 -->
+        <activity
+            android:name=".ui.requirement.action.write.WriteEstimationActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".ui.requirement.action.write.MeasurementActivity"
+            android:launchMode="singleTask" />
         <activity android:name=".ui.requirement.action.write.template.EstimationTemplatesActivity" />
         <activity android:name=".ui.preferences.account.AccountActivity" />
         <activity android:name=".ui.preferences.detail.PreferencesContainerActivity" />
