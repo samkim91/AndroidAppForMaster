@@ -195,7 +195,7 @@ data class DialogData(
         fun getConfirmingForDeletingEstimationTemplate() =
             DialogData(
                 "[주의]",
-                "삭제된 내용은 복구가 불가능합니다.\n삭제하시겠습니까?",
+                "삭제된 내용은 복구가 불가능합니다. 삭제하시겠습니까?",
                 "",
                 "네",
                 "아니요",
@@ -203,8 +203,8 @@ data class DialogData(
 
         fun getConfirmingForIgnoreChangeOfEstimationTemplate() =
             DialogData(
-                "변경사항 확인",
-                "변경사항을 삭제하시겠습니까?",
+                "[주의]",
+                "내용을 저장하지 않으셨습니다. 저장하지 않은 내용은 복구가 불가능합니다.",
                 "",
                 "계속 수정",
                 "삭제",

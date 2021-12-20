@@ -30,7 +30,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed"
             app:layout_constraintWidth_percent="0.35"
-            bind:visible="@{vm.list.size() == 0}" />
+            bind:visible="@{vm.list.empty}" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_empty"
@@ -44,7 +44,7 @@
             app:layout_constraintEnd_toEndOf="@id/iv_bolty"
             app:layout_constraintStart_toStartOf="@id/iv_bolty"
             app:layout_constraintTop_toBottomOf="@id/iv_bolty"
-            bind:visible="@{vm.list.size() == 0}" />
+            bind:visible="@{vm.list.empty}" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_notice"

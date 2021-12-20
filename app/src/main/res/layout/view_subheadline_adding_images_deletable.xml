@@ -51,7 +51,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/iv_adding_image"
             app:layout_constraintTop_toBottomOf="@id/tv_subheadline"
-            bind:visible="@{images.size() != 0}"
+            bind:visible="@{images}"
             tools:listitem="@layout/view_holder_image_deletable" />
 
         <androidx.appcompat.widget.AppCompatTextView

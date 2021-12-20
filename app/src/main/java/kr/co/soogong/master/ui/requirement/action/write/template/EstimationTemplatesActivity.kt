@@ -7,7 +7,7 @@ import kr.co.soogong.master.R
 import kr.co.soogong.master.data.dto.requirement.estimationTemplate.EstimationTemplateDto
 import kr.co.soogong.master.databinding.ActivityEstimationTemplatesBinding
 import kr.co.soogong.master.ui.base.BaseActivity
-import kr.co.soogong.master.ui.dialog.bottomDialogCountableEdittext.BottomDialogCountableEdittext
+import kr.co.soogong.master.ui.dialog.bottomDialogCountableEdittext.BottomSheetDialogEstimationTemplate
 import kr.co.soogong.master.ui.dialog.popup.DefaultDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData
 import kr.co.soogong.master.ui.requirement.action.write.template.EstimationTemplatesViewModel.Companion.REQUEST_FAILED
@@ -34,19 +34,10 @@ class EstimationTemplatesActivity : BaseActivity<ActivityEstimationTemplatesBind
             vm = viewModel
             lifecycleOwner = this@EstimationTemplatesActivity
 
-            with(actionBar) {
-                title.text = getString(R.string.estimation_template_action_bar_text)
-                backButton.setOnClickListener {
-                    super.onBackPressed()
-                }
-                button.text = getString(R.string.addition)
-                button.setOnClickListener {
-                    showBottomSheetDialog(null)
-                }
-            }
+            abHeader.setButtonBackClickListener { onBackPressed() }
 
             recyclerviewForTemplates.adapter = EstimationTemplateAdapter(
-                buttonLeftClick = { template ->
+                onDeletingClicked = { template ->
                     Timber.tag(TAG).d("buttonLeftClick: $template")
                     DefaultDialog.newInstance(
                         DialogData.getConfirmingForDeletingEstimationTemplate()
@@ -61,7 +52,7 @@ class EstimationTemplatesActivity : BaseActivity<ActivityEstimationTemplatesBind
                         it.show(supportFragmentManager, it.tag)
                     }
                 },
-                middleButtonClick = { template ->
+                onEditingClicked = { template ->
                     Timber.tag(TAG).d("middleButtonClick: $template")
                     showBottomSheetDialog(
                         EstimationTemplateDto(id = template.id,
@@ -69,7 +60,7 @@ class EstimationTemplatesActivity : BaseActivity<ActivityEstimationTemplatesBind
                             description = template.description)
                     )
                 },
-                buttonRightClick = { template ->
+                onApplyingClicked = { template ->
                     Timber.tag(TAG).d("buttonRightClick: $template")
                     this@EstimationTemplatesActivity.run {
                         setResult(
@@ -84,30 +75,32 @@ class EstimationTemplatesActivity : BaseActivity<ActivityEstimationTemplatesBind
     }
 
     private fun showBottomSheetDialog(estimationTemplateDto: EstimationTemplateDto?) {
-        BottomDialogCountableEdittext.newInstance(
-            estimationTemplateDto = estimationTemplateDto,
-            closeClick = {
-                viewModel.estimationTemplate.value = it
-            },
-            confirmClick = {
-                if (it.description.isNotEmpty()) {
-                    viewModel.estimationTemplate.value = it
-                    viewModel.saveEstimationTemplate()
+        BottomSheetDialogEstimationTemplate.newInstance(
+            estimationTemplateDto = estimationTemplateDto
+        ).let {
+            it.setButtonsClickListener(
+                onClose = { templateDto ->
+                    viewModel.estimationTemplate.value = templateDto
+                },
+                onConfirm = { templateDto ->
+                    if (templateDto.description.isNotEmpty()) {
+                        viewModel.estimationTemplate.value = templateDto
+                        viewModel.saveEstimationTemplate()
+                    }
+                },
+                onCancel = { templateDto ->
+                    if (templateDto.description.isNotEmpty()) DefaultDialog.newInstance(
+                        DialogData.getConfirmingForIgnoreChangeOfEstimationTemplate()
+                    ).let { dialog ->
+                        dialog.setButtonsClickListener(
+                            onPositive = { showBottomSheetDialog(templateDto) },
+                            onNegative = { }
+                        )
+                        dialog.show(supportFragmentManager, dialog.tag)
+                    }
                 }
-            },
-            cancelListener = {
-                if (it.description.isNotEmpty()) DefaultDialog.newInstance(
-                    DialogData.getConfirmingForIgnoreChangeOfEstimationTemplate()
-                ).let { dialog ->
-                    dialog.setButtonsClickListener(
-                        onPositive = { showBottomSheetDialog(it) },
-                        onNegative = { }
-                    )
-                    dialog.show(supportFragmentManager, dialog.tag)
-                }
-            }
-        ).run {
-            show(supportFragmentManager, tag)
+            )
+            it.show(supportFragmentManager, it.tag)
         }
     }
 
@@ -115,6 +108,7 @@ class EstimationTemplatesActivity : BaseActivity<ActivityEstimationTemplatesBind
         Timber.tag(TAG).d("registerEventObserve: ")
         viewModel.action.observe(this, EventObserver { event ->
             when (event) {
+                EstimationTemplatesViewModel.START_ADDING_TEMPLATE -> showBottomSheetDialog(null)
                 REQUEST_FAILED -> {
                     toast(getString(R.string.error_message_of_request_failed))
                 }
