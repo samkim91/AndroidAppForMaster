@@ -157,11 +157,6 @@ class WriteEstimationActivity : BaseActivity<ActivityWriteEstimationBinding>(
         })
     }
 
-    override fun onStart() {
-        super.onStart()
-        viewModel.requestRequirement()
-    }
-
     private fun initChipGroup() {
         SubheadlineChipGroup.initChips(
             this,

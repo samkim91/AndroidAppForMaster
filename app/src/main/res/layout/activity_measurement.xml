@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:bind="http://schemas.android.com/bind">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
         <import type="android.text.InputType" />
 
         <import type="android.net.Uri" />
+
+        <variable
+            name="colorThemeEstimationTemplate"
+            type="kr.co.soogong.master.data.common.ColorTheme" />
 
         <variable
             name="vm"
@@ -18,137 +21,128 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include
-            android:id="@+id/action_bar"
-            layout="@layout/action_bar_button"
+        <kr.co.soogong.master.atomic.molecules.ActionBar
+            android:id="@+id/ab_header"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="wrap_content"
+            app:backButtonVisibility="@{true}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="@{@string/writing_estimation}" />
 
         <ScrollView
-            android:id="@+id/scroll_view"
-            android:layout_width="match_parent"
+            android:layout_width="@dimen/gap_0"
             android:layout_height="@dimen/gap_0"
             android:overScrollMode="never"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/iv_button_container"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/action_bar">
+            app:layout_constraintTop_toBottomOf="@id/ab_header">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/gap_16">
 
-                <kr.co.soogong.master.atomic.molecules.TitleEditText
-                    android:id="@+id/simple_cost"
-                    android:layout_width="@dimen/gap_0"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/gap_20"
-                    android:layout_marginTop="@dimen/gap_24"
-                    android:layout_marginEnd="@dimen/gap_20"
-                    android:textColor="@color/text_basic_color"
-                    app:alertText="@{@string/minimum_cost}"
-                    app:alertVisible="@{false}"
-                    app:content="@={vm.simpleCost}"
-                    app:hintText="@{@string/insert_number_only_with_unit_text}"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:setInputType="@{InputType.TYPE_CLASS_NUMBER}"
-                    app:setMaxLength="@{10}"
-                    app:title="@{@string/estimation_cost}" />
-
-                <kr.co.soogong.master.atomic.molecules.TextCheckBox
-                    android:id="@+id/checkbox_for_simple_cost_including_vat"
+                <kr.co.soogong.master.atomic.molecules.IconCallOutArrow
+                    android:id="@+id/isa_open_requirement"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/gap_20"
-                    android:layout_marginEnd="@dimen/gap_20"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/simple_cost"
-                    app:text="@{@string/vat_included}" />
+                    android:onClick="@{() -> vm.startViewRequirement()}"
+                    android:paddingTop="@dimen/gap_8"
+                    android:paddingBottom="@dimen/gap_8"
+                    app:callOut="@{@string/opening_requirement}" />
 
-                <kr.co.soogong.master.atomic.molecules.TitleRecyclerImage
-                    android:id="@+id/measurement_images_picker"
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_open_requirement_divider"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/gap_20"
-                    android:layout_marginTop="@dimen/gap_24"
-                    android:layout_marginEnd="@dimen/gap_20"
-                    app:images="@{vm.estimationImages}"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/checkbox_for_simple_cost_including_vat"
-                    app:title="@{@string/measure_image_holder_label}" />
-
-                <kr.co.soogong.master.atomic.molecules.BoxIconContent
-                    android:id="@+id/alert_box"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/gap_20"
-                    android:layout_marginTop="@dimen/gap_24"
-                    android:layout_marginEnd="@dimen/gap_20"
-                    app:content="@{@string/alert_box_content_for_measure}"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/measurement_images_picker" />
-
-                <kr.co.soogong.master.atomic.molecules.BoxIconContent
-                    android:id="@+id/alert_box_for_loading_estimation_template"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/gap_20"
-                    android:layout_marginTop="@dimen/gap_24"
-                    android:layout_marginEnd="@dimen/gap_20"
-                    app:content="@{@string/getting_estimation_template}"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/alert_box"
-                    />
-
-                <kr.co.soogong.master.atomic.molecules.TitleEditTextCounter
-                    android:id="@+id/write_detail"
-                    android:layout_width="@dimen/gap_0"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/gap_20"
+                    android:layout_height="@dimen/gap_1"
                     android:layout_marginTop="@dimen/gap_16"
-                    android:layout_marginEnd="@dimen/gap_20"
-                    android:layout_marginBottom="@dimen/gap_30"
-                    app:content="@={vm.description}"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/alert_box_for_loading_estimation_template"
-                    app:limitedCount='@{500}'
-                    app:title="@{@string/estimation_description}" />
+                    android:background="@color/light_grey_1" />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/alert_box_for_estimation_template"
-                    style="@style/text_style_14sp.regular"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/gap_20"
-                    android:layout_marginTop="@dimen/gap_5"
-                    android:layout_marginEnd="@dimen/gap_20"
-                    android:text="@string/estimation_description_notice"
-                    android:textColor="@color/text_alert_color"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/write_detail" />
-
-                <kr.co.soogong.master.atomic.molecules.TextCheckBox
-                    android:id="@+id/checkbox_for_adding_estimation_template"
+                <kr.co.soogong.master.atomic.molecules.SubheadlineTextInput
+                    android:id="@+id/sti_estimation_cost"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/gap_20"
-                    android:layout_marginEnd="@dimen/gap_20"
-                    android:layout_marginBottom="@dimen/gap_50"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/alert_box_for_estimation_template"
-                    app:text="@{@string/adding_estimation_template}" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    android:layout_marginTop="@dimen/gap_16"
+                    app:content="@={vm.simpleCost}"
+                    app:inputType="@{InputType.TYPE_CLASS_NUMBER}"
+                    app:max="@{10}"
+                    app:subheadline="@{@string/estimation_cost}" />
+
+                <androidx.appcompat.widget.AppCompatCheckBox
+                    android:id="@+id/cb_including_vat"
+                    style="@style/checkbox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="@={vm.includingVat}"
+                    android:text="@string/vat_included" />
+
+                <kr.co.soogong.master.atomic.molecules.SubheadlineAddingImagesDeletable
+                    android:id="@+id/said_attachments"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/gap_30"
+                    app:images="@{vm.estimationImages}"
+                    app:onButtonClick="@{() -> vm.startImagePicker()}"
+                    app:subheadline="@{@string/adding_images_option}" />
+
+                <kr.co.soogong.master.atomic.molecules.IconCallOutArrow
+                    android:id="@+id/ica_getting_estimation_template"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/gap_24"
+                    android:onClick="@{() -> vm.startEstimationTemplate()}"
+                    android:paddingStart="@dimen/gap_12"
+                    android:paddingTop="@dimen/gap_18"
+                    android:paddingEnd="@dimen/gap_12"
+                    android:paddingBottom="@dimen/gap_18"
+                    app:callOut="@{@string/getting_estimation_template}"
+                    app:colorTheme="@{colorThemeEstimationTemplate}"
+                    app:icon="@{@drawable/ic_requirements}" />
+
+                <kr.co.soogong.master.atomic.molecules.SubheadlineTextareaCounter
+                    android:id="@+id/tc_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/gap_24"
+                    app:content="@={vm.description}"
+                    app:hint="@{@string/estimation_description_notice}"
+                    app:maxCount="@{150}"
+                    app:subheadline="@{@string/estimation_description}" />
+
+                <androidx.appcompat.widget.AppCompatCheckBox
+                    android:id="@+id/cb_adding_estimation_template"
+                    style="@style/checkbox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="@={vm.isSavingTemplate}"
+                    android:text="@string/adding_estimation_template" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
         </ScrollView>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_button_container"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/gap_64"
+            android:background="@color/white"
+            android:elevation="@dimen/gap_10"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/b_send_estimation"
+            style="@style/button.big.primary"
+            android:layout_marginStart="@dimen/gap_16"
+            android:layout_marginEnd="@dimen/gap_16"
+            android:elevation="@dimen/gap_10"
+            android:text="@string/writing_done"
+            app:layout_constraintBottom_toBottomOf="@id/iv_button_container"
+            app:layout_constraintEnd_toEndOf="@id/iv_button_container"
+            app:layout_constraintStart_toStartOf="@id/iv_button_container"
+            app:layout_constraintTop_toTopOf="@id/iv_button_container" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

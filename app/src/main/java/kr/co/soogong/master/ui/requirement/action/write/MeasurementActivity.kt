@@ -7,6 +7,7 @@ import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import gun0912.tedimagepicker.builder.TedImagePicker
 import kr.co.soogong.master.R
+import kr.co.soogong.master.data.common.ColorTheme
 import kr.co.soogong.master.data.dto.AttachmentDto
 import kr.co.soogong.master.databinding.ActivityMeasurementBinding
 import kr.co.soogong.master.ui.base.BaseActivity
@@ -17,9 +18,11 @@ import kr.co.soogong.master.ui.dialog.popup.DialogData
 import kr.co.soogong.master.ui.requirement.action.write.WriteEstimationViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.ui.requirement.action.write.WriteEstimationViewModel.Companion.SEND_ESTIMATION_SUCCESSFULLY
 import kr.co.soogong.master.uihelper.requirment.action.EstimationTemplatesActivityHelper
+import kr.co.soogong.master.uihelper.requirment.action.ViewRequirementActivityHelper
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.FileHelper
 import kr.co.soogong.master.utility.PermissionHelper
+import kr.co.soogong.master.utility.extension.exceptComma
 import kr.co.soogong.master.utility.extension.toast
 import kr.co.soogong.master.utility.validation.ValidationHelper
 import timber.log.Timber
@@ -52,77 +55,65 @@ class MeasurementActivity : BaseActivity<ActivityMeasurementBinding>(
             lifecycleOwner = this@MeasurementActivity
             vm = viewModel
 
-            with(actionBar) {
-                title.text = getString(R.string.writing_estimation)
-                backButton.setOnClickListener {
+            colorThemeEstimationTemplate = ColorTheme.Green
+
+            with(abHeader) {
+                setButtonBackClickListener {
                     onBackPressed()
                 }
-
-                button.text = getString(R.string.sending_estimation)
-                button.setOnClickListener {
-                    registerCostObserver()
-                    if (!simpleCost.alertVisible && ValidationHelper.isIntRange(viewModel.simpleCost.value!!)) {
-                        viewModel.sendEstimation()
-                    }
-                }
             }
 
-            checkboxForSimpleCostIncludingVat.checkBox.setOnCheckedChangeListener { _, isChecked ->
-                viewModel.includingVat.value = isChecked
+            bSendEstimation.setOnClickListener {
+                registerCostObserver()
+                if (stiEstimationCost.error.isNullOrEmpty()) viewModel.sendEstimation()
             }
 
-            measurementImagesPicker.setAdapter { viewModel.estimationImages.removeAt(it) }
-
-            measurementImagesPicker.addIconClickListener {
-                PermissionHelper.checkImagePermission(context = this@MeasurementActivity,
-                    onGranted = {
-                        TedImagePicker.with(this@MeasurementActivity)
-                            .buttonBackground(R.drawable.shape_green_background_radius8)
-                            .max(
-                                (10 - viewModel.estimationImages.getItemCount()),
-                                resources.getString(R.string.maximum_images_count)
-                            )
-                            .startMultiImage { uriList ->
-                                if (FileHelper.isImageExtension(uriList,
-                                        this@MeasurementActivity) == false
-                                ) {
-                                    toast(getString(R.string.invalid_image_extension))
-                                    return@startMultiImage
-                                }
-
-                                viewModel.estimationImages.addAll(uriList.map {
-                                    AttachmentDto(
-                                        id = null,
-                                        partOf = null,
-                                        referenceId = null,
-                                        description = null,
-                                        s3Name = null,
-                                        fileName = null,
-                                        url = null,
-                                        uri = it,
-                                    )
-                                })
-                            }
-                    },
-                    onDenied = { })
-            }
-
-            alertBoxForLoadingEstimationTemplate.setOnClickListener {
-                estimationTemplateLauncher.launch(EstimationTemplatesActivityHelper.getIntent(this@MeasurementActivity))
-            }
-
-            checkboxForAddingEstimationTemplate.setCheckClick {
-                viewModel.isSavingTemplate.value =
-                    checkboxForAddingEstimationTemplate.checkBox.isChecked
-            }
+            saidAttachments.setImagesDeletableAdapter { viewModel.estimationImages.removeAt(it) }
         }
     }
 
     private fun registerEventObserve() {
         Timber.tag(TAG).d("registerEventObserve: ")
         viewModel.action.observe(this@MeasurementActivity, EventObserver { event ->
-            dismissLoading()
             when (event) {
+                WriteEstimationViewModel.START_ESTIMATION_TEMPLATE -> estimationTemplateLauncher.launch(
+                    EstimationTemplatesActivityHelper.getIntent(this))
+                WriteEstimationViewModel.START_IMAGE_PICKER -> {
+                    PermissionHelper.checkImagePermission(context = this@MeasurementActivity,
+                        onGranted = {
+                            TedImagePicker.with(this@MeasurementActivity)
+                                .buttonBackground(R.drawable.shape_green_background_radius8)
+                                .max(
+                                    (10 - viewModel.estimationImages.getItemCount()),
+                                    resources.getString(R.string.maximum_images_count)
+                                )
+                                .startMultiImage { uriList ->
+                                    if (FileHelper.isImageExtension(uriList,
+                                            this@MeasurementActivity) == false
+                                    ) {
+                                        toast(getString(R.string.invalid_image_extension))
+                                        return@startMultiImage
+                                    }
+
+                                    viewModel.estimationImages.addAll(uriList.map {
+                                        AttachmentDto(
+                                            id = null,
+                                            partOf = null,
+                                            referenceId = null,
+                                            description = null,
+                                            s3Name = null,
+                                            fileName = null,
+                                            url = null,
+                                            uri = it,
+                                        )
+                                    })
+                                }
+                        },
+                        onDenied = { })
+                }
+                WriteEstimationViewModel.START_VIEW_REQUIREMENT -> viewModel.requirement.value?.let {
+                    startActivity(ViewRequirementActivityHelper.getIntent(this, it.id))
+                }
                 SEND_ESTIMATION_SUCCESSFULLY -> {
                     toast(getString(R.string.send_message_succeeded))
                     super.onBackPressed()
@@ -140,16 +131,13 @@ class MeasurementActivity : BaseActivity<ActivityMeasurementBinding>(
         Timber.tag(TAG).d("registerCostObserver: ")
         bind {
             viewModel.simpleCost.observe(this@MeasurementActivity, {
-                simpleCost.alertVisible =
-                    simpleCost.text.isNullOrEmpty() || simpleCost.text.toString().replace(",", "")
-                        .toLong() < 10000
+                stiEstimationCost.error = when {
+                    it.exceptComma().toLong() < 10000 -> getString(R.string.minimum_cost)
+                    !ValidationHelper.isIntRange(it) -> getString(R.string.too_large_number)
+                    else -> null
+                }
             })
         }
-    }
-
-    override fun onStart() {
-        super.onStart()
-        viewModel.requestRequirement()
     }
 
     override fun onBackPressed() {
@@ -162,7 +150,7 @@ class MeasurementActivity : BaseActivity<ActivityMeasurementBinding>(
         ).let {
             it.setButtonsClickListener(
                 onPositive = {
-                    finish()
+                    super.onBackPressed()
                 },
                 onNegative = { }
             )

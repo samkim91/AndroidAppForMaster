@@ -90,7 +90,8 @@ sealed class RequirementStatus {
             return when (requirement?.status) {
                 // 진행 전
                 Requested.code -> {
-                    if (requirement.estimationDto?.requestConsultingYn == true) RequestConsult else Requested
+                    if (requirement.estimationDto?.requestConsultingYn == true) RequestConsult
+                    else Requested
                 }
                 RequestMeasure.code -> RequestMeasure
                 Measuring.code -> Measuring
@@ -125,8 +126,9 @@ sealed class RequirementStatus {
                         Measuring.code,
                         Measured.code,
                         Estimated.code)
-                    1, 3 -> listOf(Requested.code, Estimated.code)
+                    1 -> listOf(Requested.code)
                     2 -> listOf(RequestMeasure.code, Measuring.code, Measured.code)
+                    3 -> listOf(Requested.code, Estimated.code)
                     4 -> listOf(Estimated.code)
                     else -> emptyList()
                 }
