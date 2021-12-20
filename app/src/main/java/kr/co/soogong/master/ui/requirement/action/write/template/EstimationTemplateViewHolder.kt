@@ -12,23 +12,23 @@ class EstimationTemplateViewHolder(
 
     fun bind(
         estimationTemplateDto: EstimationTemplateDto,
-        buttonLeftClick: (EstimationTemplateDto) -> Unit,
-        middleButtonClick: (EstimationTemplateDto) -> Unit,
-        buttonRightClick: (EstimationTemplateDto) -> Unit,
+        onDeletingClicked: (EstimationTemplateDto) -> Unit,
+        onEditingClicked: (EstimationTemplateDto) -> Unit,
+        onApplyingClicked: (EstimationTemplateDto) -> Unit,
     ) {
         with(binding) {
             data = estimationTemplateDto
 
-            setLeftButtonClickListener {
-                buttonLeftClick(estimationTemplateDto)
+            setDeleteClickListener {
+                onDeletingClicked(estimationTemplateDto)
             }
 
-            setMiddleButtonClickListener {
-                middleButtonClick(estimationTemplateDto)
+            setEditingClickListener {
+                onEditingClicked(estimationTemplateDto)
             }
 
-            setRightButtonClickListener {
-                buttonRightClick(estimationTemplateDto)
+            setApplyingClickListener {
+                onApplyingClicked(estimationTemplateDto)
             }
         }
     }

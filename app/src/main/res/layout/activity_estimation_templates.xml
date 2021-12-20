@@ -11,58 +11,83 @@
             type="kr.co.soogong.master.ui.requirement.action.write.template.EstimationTemplatesViewModel" />
     </data>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <include
-            android:id="@+id/action_bar"
-            layout="@layout/action_bar_button" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <kr.co.soogong.master.atomic.molecules.ActionBar
+            android:id="@+id/ab_header"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            app:backButtonVisibility="@{true}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="@{@string/estimation_template}" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerview_for_templates"
-                android:layout_width="@dimen/gap_0"
-                android:layout_height="@dimen/gap_0"
-                app:estimation_templates="@{vm.estimationTemplates}"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:setDivider="@{@drawable/thin_divider}"
-                tools:listitem="@layout/view_holder_estimation_template_item" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview_for_templates"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="@dimen/gap_0"
+            app:estimation_templates="@{vm.estimationTemplates}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toTopOf="@id/iv_button_container"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ab_header"
+            app:setDivider="@{@drawable/thin_divider}"
+            tools:listitem="@layout/view_holder_estimation_template_item" />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/empty_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_no_card"
-                app:layout_constraintBottom_toTopOf="@id/empty_text"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_chainStyle="packed"
-                bind:visible="@{vm.estimationTemplates.empty}" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_empty"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="@dimen/gap_0"
+            android:background="@drawable/ic_requirements_filled"
+            android:backgroundTint="@color/light_grey_2"
+            app:layout_constraintBottom_toTopOf="@id/tv_empty"
+            app:layout_constraintDimensionRatio="H, 1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ab_header"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:layout_constraintWidth_percent="0.15"
+            bind:visible="@{vm.estimationTemplates.empty}" />
 
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_empty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_20"
+            android:text="@string/estimation_templates_not_found"
+            android:textAppearance="@style/subheadline.regular"
+            android:textColor="@color/grey_2"
+            app:layout_constraintBottom_toTopOf="@id/iv_button_container"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_empty"
+            bind:visible="@{vm.estimationTemplates.empty}" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/empty_text"
-                style="@style/text_style_18sp.bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/estimation_templates_not_found"
-                android:textColor="@color/c_BDBDBD"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/empty_icon"
-                bind:visible="@{vm.estimationTemplates.empty}" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_button_container"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/gap_64"
+            android:background="@color/white"
+            android:elevation="@dimen/gap_10"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
-    </LinearLayout>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/b_addition"
+            style="@style/button.big.primary"
+            android:layout_marginStart="@dimen/gap_16"
+            android:layout_marginEnd="@dimen/gap_16"
+            android:elevation="@dimen/gap_10"
+            android:onClick="@{() -> vm.startAddingTemplate()}"
+            android:text="@string/addition"
+            app:layout_constraintBottom_toBottomOf="@id/iv_button_container"
+            app:layout_constraintEnd_toEndOf="@id/iv_button_container"
+            app:layout_constraintStart_toStartOf="@id/iv_button_container"
+            app:layout_constraintTop_toTopOf="@id/iv_button_container" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

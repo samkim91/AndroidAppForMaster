@@ -82,8 +82,14 @@ class EstimationTemplatesViewModel @Inject constructor(
         }
     }
 
+    fun startAddingTemplate() {
+        Timber.tag(TAG).d("startAddingTemplate: ")
+        setAction(START_ADDING_TEMPLATE)
+    }
+
     companion object {
         private const val TAG = "EstimationTemplatesViewModel"
         const val REQUEST_FAILED = "REQUEST_FAILED"
+        const val START_ADDING_TEMPLATE = "START_ADDING_TEMPLATE"
     }
 }

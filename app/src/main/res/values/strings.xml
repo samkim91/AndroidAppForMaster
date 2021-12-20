@@ -152,7 +152,7 @@
     <string name="requirements_not_found">해당 내용을 찾지 못 하였습니다.</string>
 
     <!-- Estimation Templates -->
-    <string name="estimation_template_action_bar_text">자주 쓰는 제안</string>
+    <string name="estimation_template">자주 쓰는 제안</string>
     <string name="estimation_templates_not_found">자주 쓰는 제안 내용이 없습니다.</string>
     <string name="bottom_dialog_estimation_template_title">마스터님의 제안 내용</string>
 

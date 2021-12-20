@@ -46,14 +46,15 @@ class BottomSheetDialogRecyclerView :
         super.onViewCreated(view, savedInstanceState)
         Timber.tag(TAG).d("onViewCreated: ")
 
+        // 내부에 recyclerView 가 있어서, 드래그 기능을 제거
+        (dialog as? BottomSheetDialog)?.let {
+            it.behavior.isDraggable = false
+        }
+
         initLayout()
     }
 
     override fun initLayout() {
-        (dialog as? BottomSheetDialog)?.let {       // 내부에 recyeclerView 가 있어서, 드래그 기능을 제거
-            it.behavior.isDraggable = false
-        }
-
         with(binding) {
             bottomSheetDialogBundle?.let { dialogBundle ->
                 tvTitle.text = dialogBundle.title

@@ -380,11 +380,13 @@
         <item name="cornerSize">10dp</item>
     </style>
 
+    <!-- start section 버튼 스타일 -->
     <style name="button">
         <item name="android:gravity">center</item>
         <item name="android:stateListAnimator">@null</item>
     </style>
 
+    <!-- 버튼 small -->
     <style name="button.small" parent="button">
         <item name="android:textAppearance">@style/caption_1.bold</item>
         <item name="android:layout_height">@dimen/gap_36</item>
@@ -401,6 +403,25 @@
         <item name="android:textColor">@color/selector_dark_grey1_alpha50</item>
     </style>
 
+    <style name="button.small.tertiary" parent="button.small">
+        <item name="android:background">@drawable/bg_solid_red_selector_radius8</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="button.small.outlined_primary" parent="button.small">
+        <item name="android:background">@drawable/bg_solid_white_stroke_green_selector_radius8
+        </item>
+        <item name="android:textColor">@color/selector_green_alpha50</item>
+    </style>
+
+    <style name="button.small.outlined_secondary" parent="button.small">
+        <item name="android:background">
+            @drawable/bg_solid_white_stroke_light_grey2_selector_radius8
+        </item>
+        <item name="android:textColor">@color/selector_dark_grey1_alpha50</item>
+    </style>
+
+    <!-- 버튼 medium -->
     <style name="button.medium" parent="button">
         <item name="android:textAppearance">@style/subheadline.bold</item>
         <item name="android:layout_height">@dimen/gap_48</item>
@@ -417,6 +438,25 @@
         <item name="android:textColor">@color/selector_dark_grey1_alpha50</item>
     </style>
 
+    <style name="button.medium.tertiary" parent="button.medium">
+        <item name="android:background">@drawable/bg_solid_red_selector_radius8</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="button.medium.outlined_primary" parent="button.medium">
+        <item name="android:background">@drawable/bg_solid_white_stroke_green_selector_radius8
+        </item>
+        <item name="android:textColor">@color/selector_green_alpha50</item>
+    </style>
+
+    <style name="button.medium.outlined_secondary" parent="button.medium">
+        <item name="android:background">
+            @drawable/bg_solid_white_stroke_light_grey2_selector_radius8
+        </item>
+        <item name="android:textColor">@color/selector_dark_grey1_alpha50</item>
+    </style>
+
+    <!-- 버튼 big -->
     <style name="button.big" parent="button">
         <item name="android:textAppearance">@style/call_out.regular</item>
         <item name="android:layout_height">@dimen/gap_56</item>
@@ -433,6 +473,57 @@
         <item name="android:textColor">@color/selector_dark_grey1_alpha50</item>
     </style>
 
+    <style name="button.big.tertiary" parent="button.big">
+        <item name="android:background">@drawable/bg_solid_red_selector_radius8</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="button.big.outlined_primary" parent="button.big">
+        <item name="android:background">@drawable/bg_solid_white_stroke_green_selector_radius8
+        </item>
+        <item name="android:textColor">@color/selector_green_alpha50</item>
+    </style>
+
+    <style name="button.big.outlined_secondary" parent="button.big">
+        <item name="android:background">
+            @drawable/bg_solid_white_stroke_light_grey2_selector_radius8
+        </item>
+        <item name="android:textColor">@color/selector_dark_grey1_alpha50</item>
+    </style>
+
+    <!-- 버튼 filled -->
+    <style name="button.filled" parent="button">
+        <item name="android:textAppearance">@style/call_out.bold</item>
+        <item name="android:layout_height">@dimen/gap_56</item>
+        <item name="android:layout_width">@dimen/gap_0</item>
+    </style>
+
+    <style name="button.filled.primary" parent="button.filled">
+        <item name="android:background">@drawable/bg_solid_green_selector</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="button.filled.secondary" parent="button.filled">
+        <item name="android:background">@drawable/bg_solid_light_grey1_selector</item>
+        <item name="android:textColor">@color/selector_dark_grey1_alpha50</item>
+    </style>
+
+    <style name="button.filled.tertiary" parent="button.filled">
+        <item name="android:background">@drawable/bg_solid_red_selector</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="button.filled.outlined_primary" parent="button.filled">
+        <item name="android:background">@drawable/bg_solid_white_stroke_green_selector</item>
+        <item name="android:textColor">@color/selector_green_alpha50</item>
+    </style>
+
+    <style name="button.filled.outlined_secondary" parent="button.filled">
+        <item name="android:background">@drawable/bg_solid_white_stroke_light_grey2_selector</item>
+        <item name="android:textColor">@color/selector_dark_grey1_alpha50</item>
+    </style>
+    <!-- end section 버튼 스타일 -->
+
     <style name="checkbox">
         <item name="android:textAppearance">@style/call_out.regular</item>
         <item name="android:button">@drawable/check_box_rectangle</item>
@@ -440,7 +531,6 @@
         <item name="android:paddingEnd">@dimen/gap_0</item>
         <item name="android:textColor">@color/dark_grey_2</item>
     </style>
-
 
     <style name="ChipChoiceGreyRectangular" parent="Widget.MaterialComponents.Chip.Choice">
         <item name="chipBackgroundColor">@color/background</item>
