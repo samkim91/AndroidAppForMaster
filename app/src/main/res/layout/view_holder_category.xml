@@ -4,12 +4,8 @@
 
     <androidx.appcompat.widget.AppCompatRadioButton
         android:id="@+id/rb_content"
-        style="@style/call_out.regular"
+        style="@style/radio_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:button="@drawable/radio_button"
-        android:paddingStart="@dimen/gap_8"
-        android:paddingEnd="@dimen/gap_0"
-        android:textColor="@color/dark_grey_2"
         tools:text="업종" />
 </layout>

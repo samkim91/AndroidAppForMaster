@@ -130,7 +130,7 @@
 
                 <androidx.appcompat.widget.AppCompatCheckBox
                     android:id="@+id/cb_including_vat"
-                    style="@style/checkbox"
+                    style="@style/check_box_rectangle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:checked="@={vm.includingVat}"
@@ -162,7 +162,7 @@
 
                 <androidx.appcompat.widget.AppCompatCheckBox
                     android:id="@+id/cb_adding_estimation_template"
-                    style="@style/checkbox"
+                    style="@style/check_box_rectangle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:checked="@={vm.isSavingTemplate}"

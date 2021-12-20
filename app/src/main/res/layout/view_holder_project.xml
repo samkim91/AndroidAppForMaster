@@ -4,7 +4,7 @@
 
     <androidx.appcompat.widget.AppCompatCheckBox
         android:id="@+id/cb_content"
-        style="@style/checkbox"
+        style="@style/check_box_rectangle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:text="프로젝트" />
