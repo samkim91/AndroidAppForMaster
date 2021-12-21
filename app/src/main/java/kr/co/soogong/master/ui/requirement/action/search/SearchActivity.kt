@@ -2,9 +2,8 @@ package kr.co.soogong.master.ui.requirement.action.search
 
 import android.os.Bundle
 import android.view.KeyEvent
-import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
@@ -38,15 +37,8 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>(
             lifecycleOwner = this@SearchActivity
             vm = viewModel
 
-            searchBar.setCancelIconClickListener {
-                viewModel.searchingText.value = ""
-            }
-
-            searchBar.setCancelTextClickListener {
-                super.onBackPressed()
-            }
-
-            searchBar.searchEditText.setOnKeyListener { _, keyCode, event ->
+            // 엔터 버튼 누르면 키보드 사라짐
+            sbSearch.searchEditText.setOnKeyListener { _, keyCode, event ->
                 if ((keyCode == KeyEvent.KEYCODE_ENTER) && (event.action == KeyEvent.ACTION_DOWN)) {
                     (getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager).apply {
                         hideSoftInputFromWindow(currentFocus?.windowToken, 0)
@@ -57,40 +49,26 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>(
                 }
             }
 
-            setSpinnerSelectedListener()
-
             requirements.adapter =
                 RequirementCardsAdapter(this@SearchActivity, supportFragmentManager, viewModel)
+
+            setSearchPeriodDropdown()
         }
     }
 
-    private fun setSpinnerSelectedListener() {
-        binding.spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long,
-            ) {
-                Timber.tag(TAG).d("selected Item: $position")
-                viewModel.searchingPeriod.value = getSearchingPeriod(periods[position])
-                binding.spinner.setSelection(position)
-                viewModel.searchRequirements()
-            }
+    private fun setSearchPeriodDropdown() {
+        binding.actvItem.setAdapter(ArrayAdapter(this,
+            R.layout.textview_item_dropdown,
+            viewModel.spinnerItems.map { it.first }))
 
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                viewModel.searchingPeriod.value = getSearchingPeriod(periods[0])
-                binding.spinner.setSelection(0)
-            }
+        binding.actvItem.setOnItemClickListener { _, _, position, _ ->
+            viewModel.searchingPeriod.value = viewModel.spinnerItems[position].second
+            viewModel.searchRequirements()
         }
     }
 
     private fun registerEventObserve() {
         Timber.tag(TAG).d("registerEventObserve: ")
-        viewModel.searchingText.observe(this, {     // 검색단어 삭제 버튼 활성화 여부
-            binding.searchBar.cancelIconVisibility = it.isNotEmpty()
-        })
-
         viewModel.searchingText.debounce(500L, CoroutineScope(Dispatchers.Main))
             .observe(
                 this,
@@ -102,18 +80,12 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>(
             when (action) {
                 SEARCH_REQUIREMENTS_FAILED -> toast(getString(R.string.error_message_of_request_failed))
                 ASK_FOR_REVIEW_SUCCESSFULLY -> viewModel.searchRequirements()
+                SearchViewModel.CANCEL_ACTIVITY -> onBackPressed()
             }
         })
-
-    }
-
-    override fun onResume() {
-        super.onResume()
-        viewModel.searchRequirements()
     }
 
     companion object {
         private const val TAG = "SearchActivity"
-
     }
 }

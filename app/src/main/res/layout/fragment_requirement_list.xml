@@ -30,14 +30,14 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view_requirements"
-                android:clipToPadding="false"
                 android:layout_width="match_parent"
-                android:paddingTop="@dimen/gap_8"
-                android:paddingBottom="@dimen/gap_16"
-                android:paddingStart="@dimen/gap_16"
-                android:paddingEnd="@dimen/gap_16"
                 android:layout_height="match_parent"
                 android:background="@color/background"
+                android:clipToPadding="false"
+                android:paddingStart="@dimen/gap_16"
+                android:paddingTop="@dimen/gap_8"
+                android:paddingEnd="@dimen/gap_16"
+                android:paddingBottom="@dimen/gap_16"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:requirement_cards="@{vm.requirements}"
                 tools:listitem="@layout/view_holder_requirement_card" />
