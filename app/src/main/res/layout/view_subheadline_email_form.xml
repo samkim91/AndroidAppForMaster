@@ -38,17 +38,28 @@
             android:text="@string/at_text"
             android:textColor="@color/grey_1"
             app:layout_constraintBottom_toBottomOf="@id/ti_local_part"
-            app:layout_constraintEnd_toStartOf="@id/dm_domain"
+            app:layout_constraintEnd_toStartOf="@id/til_container"
             app:layout_constraintStart_toEndOf="@id/ti_local_part"
             app:layout_constraintTop_toTopOf="@id/ti_local_part" />
 
-        <kr.co.soogong.master.atomic.atoms.DropdownMenu
-            android:id="@+id/dm_domain"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_container"
+            style="@style/outlinedTextInputLayout.dropdown"
             android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/gap_8"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/tv_at"
-            app:layout_constraintTop_toBottomOf="@id/tv_subheadline" />
+            app:layout_constraintTop_toBottomOf="@id/tv_subheadline">
+
+            <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                android:id="@+id/actv_item"
+                style="@style/autoCompleteTextViewStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none"
+                app:popupDrawable="@{@drawable/bg_solid_white_stroke_light_grey2_radius6_padding16}"
+                tools:text="gmail.com" />
+        </com.google.android.material.textfield.TextInputLayout>
     </merge>
 </layout>
