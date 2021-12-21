@@ -4,10 +4,9 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.ArrayAdapter
+import androidx.appcompat.widget.AppCompatAutoCompleteTextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import com.google.android.material.textfield.MaterialAutoCompleteTextView
 import com.google.android.material.textfield.TextInputLayout
-import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ViewDropdownMenuBinding
 
 class DropdownMenu @JvmOverloads constructor(
@@ -19,11 +18,7 @@ class DropdownMenu @JvmOverloads constructor(
         ViewDropdownMenuBinding.inflate(LayoutInflater.from(context), this, true)
 
     val textInputLayout: TextInputLayout = binding.tilContainer
-    val autoCompleteTextView: MaterialAutoCompleteTextView = binding.actvItem
-
-    init {
-        autoCompleteTextView.setDropDownBackgroundResource(R.drawable.bg_solid_white_stroke_light_grey2_radius6_padding16)
-    }
+    val autoCompleteTextView: AppCompatAutoCompleteTextView = binding.actvItem
 
     override var dropdownAdapter: ArrayAdapter<Any>? = null
         set(value) {
