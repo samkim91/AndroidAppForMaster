@@ -8,8 +8,8 @@ import androidx.databinding.InverseBindingListener
 
 object SearchBarReverseBinding {
     @JvmStatic
-    @BindingAdapter("searchBarContent")
-    fun setSearchBarContent(view: SearchBar, content: String?) {
+    @BindingAdapter("searchText")
+    fun setSearchBarText(view: SearchBar, content: String?) {
         val oldContent = view.searchEditText.text.toString()
         if (oldContent != content) {
             view.searchEditText.setText(content)
@@ -17,8 +17,8 @@ object SearchBarReverseBinding {
     }
 
     @JvmStatic
-    @BindingAdapter("searchBarContentAttrChanged")
-    fun setSearchBarContentInverseBindingListener(
+    @BindingAdapter("searchTextAttrChanged")
+    fun setSearchBarTextInverseBindingListener(
         view: SearchBar,
         listener: InverseBindingListener?,
     ) {
@@ -38,8 +38,8 @@ object SearchBarReverseBinding {
     }
 
     @JvmStatic
-    @InverseBindingAdapter(attribute = "searchBarContent", event = "searchBarContentAttrChanged")
-    fun getSearchBarContent(view: SearchBar): String {
+    @InverseBindingAdapter(attribute = "searchText", event = "searchTextAttrChanged")
+    fun getSearchBarText(view: SearchBar): String {
         return view.searchEditText.text.toString()
     }
 }

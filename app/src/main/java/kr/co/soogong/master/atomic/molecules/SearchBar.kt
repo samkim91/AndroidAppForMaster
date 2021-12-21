@@ -3,9 +3,10 @@ package kr.co.soogong.master.atomic.molecules
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import androidx.appcompat.widget.AppCompatEditText
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import kr.co.soogong.master.databinding.ViewSearchBarBinding
 
 class SearchBar @JvmOverloads constructor(
@@ -16,50 +17,23 @@ class SearchBar @JvmOverloads constructor(
     private val binding =
         ViewSearchBarBinding.inflate(LayoutInflater.from(context), this, true)
 
-    val searchEditText: AppCompatEditText
-        get() = binding.searchText
+    val searchTextContainer: TextInputLayout
+        get() = binding.tilContainer
 
-    var searchTextDisable: Boolean = false
+    val searchEditText: TextInputEditText
+        get() = binding.tieEdittext
+
+    var searchHint: String? = null
         set(value) {
             field = value
-            binding.searchText.isClickable = value
-            binding.searchText.isCursorVisible = !value
-            binding.searchText.isFocusable = !value
+            searchTextContainer.isHintEnabled = true
+            searchTextContainer.hint = value
         }
 
-    var searchText: String? = ""
+    var onCancelClick: OnClickListener? = null
         set(value) {
             field = value
-            binding.searchText.setText(value)
+            binding.tvCancel.isVisible = true
+            binding.tvCancel.setOnClickListener(field)
         }
-
-    var searchTextHint: String? = ""
-        set(value) {
-            field = value
-            binding.searchText.hint = value
-        }
-
-    var cancelIconVisibility: Boolean = false
-        set(value) {
-            field = value
-            binding.cancelIcon.isVisible = value
-        }
-
-    var cancelTextVisibility: Boolean = false
-        set(value) {
-            field = value
-            binding.cancelText.isVisible = value
-        }
-
-    fun setSearchEditTextClickListener(listener: OnClickListener) {
-        binding.searchText.setOnClickListener(listener)
-    }
-
-    fun setCancelIconClickListener(listener: OnClickListener) {
-        binding.cancelIcon.setOnClickListener(listener)
-    }
-
-    fun setCancelTextClickListener(listener: OnClickListener) {
-        binding.cancelText.setOnClickListener(listener)
-    }
 }

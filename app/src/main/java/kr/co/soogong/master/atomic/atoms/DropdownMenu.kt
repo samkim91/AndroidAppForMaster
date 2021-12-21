@@ -87,5 +87,13 @@ class DropdownMenu @JvmOverloads constructor(
                 Pair("nate.com", 7),
                 Pair("직접 입력", 8),
             )
+
+        fun getSearchingPeriod(): List<Pair<String, Int>> =
+            listOf(
+                Pair("7일", 7),
+                Pair("30일", 30),
+                Pair("90일", 90),
+                Pair("전체", 0),
+            )
     }
 }

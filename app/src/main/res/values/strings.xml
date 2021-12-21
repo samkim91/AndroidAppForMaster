@@ -134,7 +134,6 @@
     <string name="requirement_in_progress_tab">진행 중</string>
     <string name="requirements_done_tab_name">완료·취소</string>
     <string name="alert_text_to_fill_up_required_information"><b>필수 정보를 모두 등록</b>하고, 승인이 완료되면\n<b>문의 처리가 가능</b>합니다!</string>
-    <string name="search_bar_hint_text">프로젝트 또는 주소로 검색해 보세요.</string>
 
     <!--  RequirementListFragment  -->
     <string name="tab_name_for_whole">전체</string>
@@ -150,6 +149,7 @@
 
     <!-- Requirements : Search -->
     <string name="requirements_not_found">해당 내용을 찾지 못 하였습니다.</string>
+    <string name="search_bar_hint_text">프로젝트 또는 주소</string>
 
     <!-- Estimation Templates -->
     <string name="estimation_template">자주 쓰는 제안</string>
