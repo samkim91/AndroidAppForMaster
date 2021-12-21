@@ -65,6 +65,9 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>(
             viewModel.searchingPeriod.value = viewModel.spinnerItems[position].second
             viewModel.searchRequirements()
         }
+
+        // 초기값 지정
+        binding.actvItem.setText(viewModel.spinnerItems.first().first, false)
     }
 
     private fun registerEventObserve() {

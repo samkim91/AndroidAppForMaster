@@ -33,24 +33,21 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/til_container"
-            style="@style/outlinedTextInputLayoutForDropdown"
+            style="@style/outlinedTextInputLayout.dropdown.small"
             android:layout_width="@dimen/gap_100"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/gap_16"
             android:layout_marginTop="@dimen/gap_8"
-            app:endIconMode="dropdown_menu"
-            app:endIconTint="@color/dark_grey_2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/sb_search">
 
             <com.google.android.material.textfield.MaterialAutoCompleteTextView
                 android:id="@+id/actv_item"
-                style="@style/outlinedTextInputAutoCompleteTextView"
-                android:layout_width="wrap_content"
+                style="@style/autoCompleteTextViewStyle"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="none"
-                app:popupDrawable="@{@drawable/bg_solid_white_stroke_light_grey2_radius6_padding16}"
-                tools:text="90일" />
+                app:popupDrawable="@{@drawable/bg_solid_white_stroke_light_grey2_radius6_padding16}" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.appcompat.widget.AppCompatImageView

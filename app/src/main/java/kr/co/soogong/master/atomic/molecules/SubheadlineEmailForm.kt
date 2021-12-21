@@ -8,7 +8,6 @@ import androidx.appcompat.widget.AppCompatAutoCompleteTextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
-import kr.co.soogong.master.atomic.atoms.DropdownMenu
 import kr.co.soogong.master.atomic.atoms.IDropdownMenu
 import kr.co.soogong.master.atomic.atoms.ITextInput
 import kr.co.soogong.master.atomic.atoms.TextInput
@@ -26,9 +25,8 @@ class SubheadlineEmailForm @JvmOverloads constructor(
     val textInputLayout: TextInputLayout = textInput.textInputLayout
     val textInputEditText: TextInputEditText = textInput.textInputEditText
 
-    val dropdownMenu: DropdownMenu = binding.dmDomain
-    val dropdownTextInputLayout: TextInputLayout = dropdownMenu.textInputLayout
-    val autoCompleteTextView: AppCompatAutoCompleteTextView = dropdownMenu.autoCompleteTextView
+    val dropdownTextInputLayout: TextInputLayout = binding.tilContainer
+    val autoCompleteTextView: AppCompatAutoCompleteTextView = binding.actvItem
 
     var subheadline: String? = null
         set(value) {
@@ -78,30 +76,6 @@ class SubheadlineEmailForm @JvmOverloads constructor(
             textInput.max = value
         }
 
-    override var dropdownHint: String? = null
-        set(value) {
-            field = value
-            dropdownMenu.dropdownHint = value
-        }
-
-    override var dropdownError: String? = null
-        set(value) {
-            field = value
-            dropdownMenu.dropdownError = value
-        }
-
-    override var dropdownHelper: String? = null
-        set(value) {
-            field = value
-            dropdownMenu.dropdownHelper = value
-        }
-
-    override var dropdownInputType: Int? = null
-        set(value) {
-            field = value
-            dropdownMenu.dropdownInputType = value
-        }
-
     var selectedItem: Pair<String, Int>? = null
         set(value) {
             field = value
@@ -110,9 +84,36 @@ class SubheadlineEmailForm @JvmOverloads constructor(
             }
         }
 
+    override var dropdownHint: String? = null
+        set(value) {
+            field = value
+            dropdownTextInputLayout.isHintEnabled = !value.isNullOrEmpty()
+            dropdownTextInputLayout.hint = value
+        }
+
+    override var dropdownError: String? = null
+        set(value) {
+            field = value
+            dropdownTextInputLayout.isErrorEnabled = !value.isNullOrEmpty()
+            dropdownTextInputLayout.error = value
+        }
+
+    override var dropdownHelper: String? = null
+        set(value) {
+            field = value
+            dropdownTextInputLayout.isHelperTextEnabled = !value.isNullOrEmpty()
+            dropdownTextInputLayout.helperText = value
+        }
+
+    override var dropdownInputType: Int? = null
+        set(value) {
+            field = value
+            value?.let { autoCompleteTextView.inputType = value }
+        }
+
     override var dropdownAdapter: ArrayAdapter<Any>? = null
         set(value) {
             field = value
-            value?.let { dropdownMenu.dropdownAdapter = value }
+            value?.let { autoCompleteTextView.setAdapter(value) }
         }
 }

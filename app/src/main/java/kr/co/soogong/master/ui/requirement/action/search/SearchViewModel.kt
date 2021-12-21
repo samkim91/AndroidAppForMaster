@@ -5,7 +5,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import kr.co.soogong.master.atomic.atoms.DropdownMenu
+import kr.co.soogong.master.data.common.DropdownItems
 import kr.co.soogong.master.ui.requirement.RequirementViewModel
 import kr.co.soogong.master.ui.requirement.RequirementViewModelAggregate
 import timber.log.Timber
@@ -16,12 +16,9 @@ class SearchViewModel @Inject constructor(
     private val requirementViewModelAggregate: RequirementViewModelAggregate,
 ) : RequirementViewModel(requirementViewModelAggregate) {
 
-    private val _spinnerItems = DropdownMenu.getSearchingPeriod()
-    val spinnerItems: List<Pair<String, Int>>
-        get() = _spinnerItems
-
+    val spinnerItems: List<Pair<String, Int>> = DropdownItems.searchingPeriods
     val searchingText = MutableLiveData("")
-    val searchingPeriod = MutableLiveData(_spinnerItems.first().second)
+    val searchingPeriod = MutableLiveData(spinnerItems.first().second)
 
     fun searchRequirements() {
         Timber.tag(TAG).d("searchRequirements: ${searchingText.value} / ${searchingPeriod.value}")

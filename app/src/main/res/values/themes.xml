@@ -352,10 +352,22 @@
     <!--        <item name="android:textColor">@color/text_basic_color</item>-->
     <!--    </style>-->
 
+    <style name="roundCorner30">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/gap_30</item>
+    </style>
+
+    <style name="roundCorner10">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">10dp</item>
+    </style>
+
     <!-- start TextInput styles -->
     <style name="outlinedTextInputLayout">
         <item name="android:textAppearance">@style/subheadline.regular</item>
         <item name="android:textColor">@color/black</item>
+        <item name="endIconMode">clear_text</item>
+        <item name="endIconTint">@color/light_grey_2</item>
 
         <item name="boxBackgroundMode">outline</item>
         <item name="boxBackgroundColor">@null</item>
@@ -372,13 +384,8 @@
         <item name="errorTextAppearance">@style/caption_1.regular</item>
         <item name="errorTextColor">@color/brand_red</item>
 
-        <item name="shapeAppearance">@style/outlinedTextareaShapeAppearance</item>
+        <item name="shapeAppearance">@style/roundCorner10</item>
         <item name="shapeAppearanceOverlay">@null</item>
-    </style>
-
-    <style name="outlinedTextareaShapeAppearance">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">10dp</item>
     </style>
 
     <style name="outlinedTextInputEditText">
@@ -390,23 +397,21 @@
     <!-- end TextInput styles -->
 
     <!-- Dropdown styles -->
-    <style name="outlinedTextInputLayoutForDropdown" parent="outlinedTextInputLayout">
-        <item name="shapeAppearance">@style/outlinedTextInputLayoutForDropdownShapeAppearance</item>
+    <style name="outlinedTextInputLayout.dropdown" parent="outlinedTextInputLayout">
+        <item name="endIconMode">dropdown_menu</item>
+        <item name="endIconTint">@color/dark_grey_2</item>
+        <item name="shapeAppearance">@style/roundCorner10</item>
         <item name="shapeAppearanceOverlay">@null</item>
     </style>
 
-    <style name="outlinedTextInputLayoutForDropdownShapeAppearance">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">@dimen/gap_30</item>
+    <style name="outlinedTextInputLayout.dropdown.small" parent="outlinedTextInputLayout.dropdown">
+        <item name="shapeAppearance">@style/roundCorner30</item>
+        <item name="shapeAppearanceOverlay">@null</item>
     </style>
 
-    <style name="outlinedTextInputAutoCompleteTextView">
+    <style name="autoCompleteTextViewStyle" parent="outlinedTextInputEditText">
         <item name="android:dropDownHeight">@dimen/gap_250</item>
         <item name="android:dropDownVerticalOffset">@dimen/gap_4</item>
-        <item name="android:paddingStart">@dimen/gap_20</item>
-        <item name="android:singleLine">true</item>
-        <item name="android:textColor">@color/black</item>
-        <item name="android:textAppearance">@style/caption_1.bold</item>
     </style>
     <!-- end Dropdown styles -->
 
