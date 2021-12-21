@@ -297,8 +297,8 @@
 
     <!-- End Estimate -->
     <string name="end_repair_title">최종 정보</string>
-    <string name="end_estimate_price_title">고객과 거래한 최종시공가를 입력해주세요.</string>
-    <string name="end_estimate_calendar_title">시공 완료일자를 선택해주세요.</string>
+    <string name="actual_price">최종 시공가</string>
+    <string name="end_estimate_calendar_title">시공 완료일자</string>
 
     <!-- Profile -->
     <string name="open_my_profile">미리보기</string>
