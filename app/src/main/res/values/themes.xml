@@ -585,8 +585,10 @@
         <item name="buttonTint">@color/check_box_selector</item>
     </style>
 
-    <style name="CalenderViewCustom" parent="Theme.AppCompat">
-        <item name="colorAccent">@color/app_color</item>
+    <style name="CalenderViewCustom">
+        <item name="colorAccent">@color/brand_green</item>
+        <item name="android:dateTextAppearance">@style/subheadline.bold</item>
+        <item name="android:weekDayTextAppearance">@style/subheadline.bold</item>
         <item name="android:colorForeground">@color/text_basic_color</item>
     </style>
 </resources>

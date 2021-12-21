@@ -27,9 +27,13 @@ class EndRepairViewModel @Inject constructor(
 
     private val _requirement = MutableLiveData<RequirementDto>()
 
-    val actualPrice = MutableLiveData("")
+    val actualPrice = MutableLiveData<String>()
     val actualDate = MutableLiveData(Calendar.getInstance())
     val includingVat = MutableLiveData(false)
+
+    init {
+        requestRequirement()
+    }
 
     fun requestRequirement() {
         Timber.tag(TAG).d("requestRequirement: $requirementId")
@@ -75,7 +79,7 @@ class EndRepairViewModel @Inject constructor(
                 },
                 onError = {
                     Timber.tag(TAG).d("END_REPAIR_FAILED: $it")
-                    setAction(END_REPAIR_FAILED)
+                    setAction(REQUEST_FAILED)
                 }).addToDisposable()
     }
 
@@ -83,7 +87,6 @@ class EndRepairViewModel @Inject constructor(
         private const val TAG = "EndRepairViewModel"
         const val REQUEST_FAILED = "REQUEST_FAILED"
         const val END_REPAIR_SUCCESSFULLY = "END_REPAIR_SUCCESSFULLY"
-        const val END_REPAIR_FAILED = "END_REPAIR_FAILED"
     }
 
 }
