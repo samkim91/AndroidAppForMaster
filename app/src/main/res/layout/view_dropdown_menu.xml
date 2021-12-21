@@ -29,6 +29,7 @@
                 android:padding="@dimen/gap_14"
                 android:textAppearance="@style/call_out.regular"
                 android:textColor="@color/dark_grey_2"
+                app:popupDrawable="@{@drawable/bg_solid_white_stroke_light_grey2_radius6_padding16}"
                 tools:text="선택" />
         </com.google.android.material.textfield.TextInputLayout>
     </merge>

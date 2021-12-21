@@ -49,6 +49,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:inputType="none"
+                app:popupDrawable="@{@drawable/bg_solid_white_stroke_light_grey2_radius6_padding16}"
                 tools:text="90일" />
         </com.google.android.material.textfield.TextInputLayout>
 

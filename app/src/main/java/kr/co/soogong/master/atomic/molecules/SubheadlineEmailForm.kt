@@ -4,8 +4,8 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.ArrayAdapter
+import androidx.appcompat.widget.AppCompatAutoCompleteTextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import com.google.android.material.textfield.MaterialAutoCompleteTextView
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import kr.co.soogong.master.atomic.atoms.DropdownMenu
@@ -28,7 +28,7 @@ class SubheadlineEmailForm @JvmOverloads constructor(
 
     val dropdownMenu: DropdownMenu = binding.dmDomain
     val dropdownTextInputLayout: TextInputLayout = dropdownMenu.textInputLayout
-    val autoCompleteTextView: MaterialAutoCompleteTextView = dropdownMenu.autoCompleteTextView
+    val autoCompleteTextView: AppCompatAutoCompleteTextView = dropdownMenu.autoCompleteTextView
 
     var subheadline: String? = null
         set(value) {
