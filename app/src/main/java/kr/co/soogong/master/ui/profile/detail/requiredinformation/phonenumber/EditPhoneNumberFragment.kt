@@ -46,7 +46,6 @@ class EditPhoneNumberFragment :
         }
 
         override fun onFinish() {
-            binding.defaultButton.isEnabled = false
             binding.alertExpiredCertificationTime.visibility = View.VISIBLE
         }
     }
@@ -162,8 +161,6 @@ class EditPhoneNumberFragment :
                 token: PhoneAuthProvider.ForceResendingToken,
             ) {
                 Timber.tag(TAG).d("onCodeSent: $verificationId, $token")
-                binding.defaultButton.isEnabled = true
-
                 viewModel.storedVerificationId.value = verificationId
                 viewModel.resendToken.value = token
             }
@@ -255,7 +252,6 @@ class EditPhoneNumberFragment :
     }
 
     private fun startTimer() {
-        binding.defaultButton.isEnabled = false
         binding.alertExpiredCertificationTime.visibility = View.GONE
         timer.start()
     }

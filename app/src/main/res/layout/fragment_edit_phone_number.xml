@@ -207,7 +207,7 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:background="@drawable/default_button_selector"
-            android:enabled="false"
+            android:enabled="@{vm.certificationCode.length() == 6}"
             android:text="@string/modifying_done"
             android:textColor="@color/basic_white" />
     </LinearLayout>
