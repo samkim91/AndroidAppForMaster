@@ -13,7 +13,7 @@
     <string name="alert_wrong_certification_code">인증번호가 틀립니다.</string>
     <string name="alert_unknown_user">가입되지 않은 번호입니다.</string>
     <string name="alert_invalid_certification_code">6자리 숫자로 입력해주세요.</string>
-    <string name="alert_expired_certification_time">인증시간이 초과되었습니다. 인증번호를 재청요해주세요.</string>
+    <string name="alert_expired_certification_time">인증시간이 초과되었습니다. 인증번호를 재요청해주세요.</string>
     <string name="alert_empty_certification_code">인증번호를 입력해주세요.</string>
     <string name="confirming_certification_code_received">인증번호를 받지 못하셨나요?</string>
     <string name="request_certification_code_again_text"><u>인증번호 재요청</u></string>

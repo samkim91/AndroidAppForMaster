@@ -39,7 +39,6 @@ class AuthFragment : BaseFragment<FragmentSignUpAuthBinding>(
         }
 
         override fun onFinish() {
-            binding.rightButton.isEnabled = false
             binding.alertExpiredCertificationTime.isVisible = true
         }
     }
@@ -76,7 +75,8 @@ class AuthFragment : BaseFragment<FragmentSignUpAuthBinding>(
             rightButton.setOnClickListener {
                 viewModel.certificationCode.observe(viewLifecycleOwner, {
                     alertInvalidCertificationCode.isVisible = it.length < 6
-                    if (alertWrongCertificationCode.isVisible) alertWrongCertificationCode.isVisible = false
+                    if (alertWrongCertificationCode.isVisible) alertWrongCertificationCode.isVisible =
+                        false
                 })
 
                 if (!alertWrongCertificationCode.isVisible && !alertExpiredCertificationTime.isVisible && !alertInvalidCertificationCode.isVisible) {
@@ -87,7 +87,6 @@ class AuthFragment : BaseFragment<FragmentSignUpAuthBinding>(
     }
 
     private fun startTimer() {
-        binding.rightButton.isEnabled = false
         binding.alertExpiredCertificationTime.visibility = View.GONE
         timer.start()
     }
@@ -123,11 +122,9 @@ class AuthFragment : BaseFragment<FragmentSignUpAuthBinding>(
 
             override fun onCodeSent(
                 verificationId: String,
-                token: PhoneAuthProvider.ForceResendingToken
+                token: PhoneAuthProvider.ForceResendingToken,
             ) {
                 Timber.tag(TAG).d("onCodeSent: $verificationId, $token")
-                binding.rightButton.isEnabled = true
-
                 viewModel.storedVerificationId.value = verificationId
                 viewModel.resendToken.value = token
             }
@@ -160,9 +157,10 @@ class AuthFragment : BaseFragment<FragmentSignUpAuthBinding>(
         Timber.tag(TAG)
             .d("verifyPhoneNumberWithCode: ${viewModel.storedVerificationId.value}, ${viewModel.certificationCode.value}")
 
-        if(!viewModel.storedVerificationId.value.isNullOrEmpty() && !viewModel.certificationCode.value.isNullOrEmpty()){
+        if (!viewModel.storedVerificationId.value.isNullOrEmpty() && !viewModel.certificationCode.value.isNullOrEmpty()) {
             viewModel.phoneAuthCredential.value =
-                PhoneAuthProvider.getCredential(viewModel.storedVerificationId.value!!, viewModel.certificationCode.value!!)
+                PhoneAuthProvider.getCredential(viewModel.storedVerificationId.value!!,
+                    viewModel.certificationCode.value!!)
             Timber.tag(TAG).d("getPhoneAuthCredential: ${viewModel.phoneAuthCredential.value}")
             signInWithPhoneAuthCredential()
         }
