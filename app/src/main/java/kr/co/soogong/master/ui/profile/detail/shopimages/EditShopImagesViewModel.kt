@@ -2,7 +2,7 @@ package kr.co.soogong.master.ui.profile.detail.shopimages
 
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kr.co.soogong.master.data.common.CodeTable
-import kr.co.soogong.master.data.dto.AttachmentDto
+import kr.co.soogong.master.data.dto.common.AttachmentDto
 import kr.co.soogong.master.data.dto.profile.MasterDto
 import kr.co.soogong.master.domain.usecase.profile.GetProfileUseCase
 import kr.co.soogong.master.domain.usecase.profile.SaveMasterUseCase

@@ -5,7 +5,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
-import kr.co.soogong.master.data.dto.AttachmentDto
+import kr.co.soogong.master.data.dto.common.AttachmentDto
 import kr.co.soogong.master.databinding.ViewTitleRecyclerImageBinding
 import kr.co.soogong.master.ui.image.RectangleImageWithCloseAdapter
 import kr.co.soogong.master.ui.image.setImagesDeletable

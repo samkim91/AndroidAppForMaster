@@ -2,7 +2,7 @@ package kr.co.soogong.master.ui.image
 
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import kr.co.soogong.master.data.dto.AttachmentDto
+import kr.co.soogong.master.data.dto.common.AttachmentDto
 
 
 @BindingAdapter("bind:photo_list")

@@ -7,7 +7,7 @@
 
         <variable
             name="data"
-            type="kr.co.soogong.master.data.model.requirement.RequirementCard" />
+            type="kr.co.soogong.master.data.model.requirement.RequirementCardV2" />
 
         <variable
             name="left_button_click_listener"
@@ -93,7 +93,7 @@
                 android:layout_marginTop="@dimen/gap_4"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="@{data.project}"
+                android:text="@{data.projectName}"
                 android:textColor="@color/grey_3"
                 app:layout_constrainedWidth="true"
                 app:layout_constraintEnd_toEndOf="parent"

@@ -2,7 +2,7 @@ package kr.co.soogong.master.ui.image
 
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
-import kr.co.soogong.master.data.dto.AttachmentDto
+import kr.co.soogong.master.data.dto.common.AttachmentDto
 import kr.co.soogong.master.databinding.ViewHolderImageDeletableBinding
 
 class ViewHolderImageDeletable(

@@ -1,4 +1,4 @@
-package kr.co.soogong.master.data.dto
+package kr.co.soogong.master.data.dto.common
 
 import android.net.Uri
 import android.os.Parcelable

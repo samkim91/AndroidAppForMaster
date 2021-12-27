@@ -43,7 +43,7 @@ class RequirementListFragment : BaseFragment<FragmentRequirementListBinding>(
     override fun onResume() {
         super.onResume()
         Timber.tag(TAG).d("onResume: ")
-        viewModel.requestRequirements()
+        viewModel.initList()
     }
 
     private fun registerEventObserve() {

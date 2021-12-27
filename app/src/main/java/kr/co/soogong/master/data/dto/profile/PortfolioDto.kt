@@ -1,11 +1,9 @@
 package kr.co.soogong.master.data.dto.profile
 
-import android.net.Uri
 import android.os.Parcelable
-import androidx.room.Ignore
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
-import kr.co.soogong.master.data.dto.AttachmentDto
+import kr.co.soogong.master.data.dto.common.AttachmentDto
 
 @Parcelize
 data class PortfolioDto(
@@ -39,7 +37,7 @@ data class PortfolioDto(
     @SerializedName("useYn")
     val useYn: Boolean? = null,
 
-) : Parcelable {
+    ) : Parcelable {
     companion object {
 
     }

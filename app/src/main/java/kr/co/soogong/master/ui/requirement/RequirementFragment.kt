@@ -63,8 +63,8 @@ class RequirementFragment : BaseFragment<FragmentRequirementBinding>(
             filterTabs.setTabClickListener(
                 onSelected = { tab ->
                     tab?.position.let {
-                        filterTabs.changeTabFont(it, R.style.subheadline_bold)
                         viewModel.filterTabIndex.value = it
+                        filterTabs.changeTabFont(it, R.style.subheadline_bold)
                     }
                 },
                 onUnselected = { tab ->
@@ -112,6 +112,14 @@ class RequirementFragment : BaseFragment<FragmentRequirementBinding>(
                 request.requestConsultingList.isNotEmpty() ->
                     showDialogForViewRequirement(REQUEST_CONSULTING, request.requestConsultingList)
             }
+        })
+
+        viewModel.mainTabIndex.observe(viewLifecycleOwner, { index ->
+
+        })
+
+        viewModel.filterTabIndex.observe(viewLifecycleOwner, { index ->
+
         })
     }
 

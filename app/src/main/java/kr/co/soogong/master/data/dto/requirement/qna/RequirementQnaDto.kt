@@ -12,12 +12,8 @@ data class RequirementQnaDto(
     @SerializedName("question")
     val question: String?,
 
-    @SerializedName("answerId")
-    val answerId: Int?,
-
     @SerializedName("answer")
     val answer: String?,
-
 ) : Parcelable {
     companion object {
 
