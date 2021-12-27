@@ -32,6 +32,7 @@ open class EditProfileContainerViewModel(
                     onSuccess(it)
                 },
                 onError = {
+                    Timber.tag(TAG).d("requestProfile failed: $it")
                     setAction(REQUEST_FAILED)
                 }
             ).addToDisposable()

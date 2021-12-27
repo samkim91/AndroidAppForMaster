@@ -63,7 +63,7 @@
     <string name="request_certification_code_text">인증번호 요청</string>
 
     <string name="resend_certification_code"><u>재요청하기</u></string>
-    <string name="expired_certification_code">인증시간이 초과되었습니다. 인증번호를 재청요해주세요.</string>
+    <string name="expired_certification_code">인증시간이 초과되었습니다. 인증번호를 재요청해주세요.</string>
     <string name="invalid_phone_number">휴대폰번호 형식이 올바르지 않습니다.</string>
     <string name="wrong_certification_code">인증번호가 틀립니다.</string>
     <string name="invalid_certification_code">6자리 숫자로 입력해주세요.</string>

@@ -58,6 +58,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
         }
     }
 
+    fun setCurrentTab(tabIndex: Int) {
+        Timber.tag(TAG).d("setCurrentTab: $tabIndex")
+        binding.mainViewPager.currentItem = tabIndex
+    }
+
     override fun setRequirementsBadge(badgeCount: Int) {
         val badge = binding.mainTabs.getTabAt(0)?.orCreateBadge
         badge?.number = badgeCount

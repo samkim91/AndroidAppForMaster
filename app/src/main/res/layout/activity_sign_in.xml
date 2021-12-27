@@ -211,7 +211,7 @@
                     android:layout_height="@dimen/gap_40"
                     android:layout_marginTop="@dimen/gap_20"
                     android:background="@drawable/default_rounded_button_selector"
-                    android:enabled="false"
+                    android:enabled="@{vm.certificationCode.length() == 6}"
                     android:text="@string/sign_in_button_text"
                     android:textColor="@color/c_FFFFFF"
                     app:layout_constraintEnd_toEndOf="parent"

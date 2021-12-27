@@ -7,7 +7,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentHomeBinding
 import kr.co.soogong.master.ui.base.BaseFragment
+import kr.co.soogong.master.ui.main.MainActivity
 import kr.co.soogong.master.ui.requirement.RequirementViewModel.Companion.REQUEST_FAILED
+import kr.co.soogong.master.ui.requirement.RequirementViewModel.Companion.SET_CURRENT_TAB
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
@@ -37,9 +39,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
                 viewModel.updateRequestMeasureYn(isChecked)
             }
 
-            newRequirementsRecyclerView.adapter = SimpleRequirementCardAdapter(
-                requireContext(), childFragmentManager, viewModel
-            )
+            newRequirementsRecyclerView.adapter =
+                SimpleRequirementCardAdapter(requireContext(), childFragmentManager, viewModel)
         }
     }
 
@@ -50,6 +51,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
             action.observe(viewLifecycleOwner, EventObserver { event ->
                 when (event) {
                     REQUEST_FAILED -> requireContext().toast(getString(R.string.error_message_of_request_failed))
+                }
+            })
+            event.observe(viewLifecycleOwner, EventObserver { (event, value) ->
+                when (event) {
+                    SET_CURRENT_TAB -> (activity as MainActivity).setCurrentTab(value as Int)
                 }
             })
             masterSimpleInfo.observe(viewLifecycleOwner, { masterDto ->
