@@ -11,18 +11,9 @@ data class PageableContentDto<T>(
     val pageable: PageableDto,
 
     @SerializedName("last")
-    val last: Boolean,
+    var last: Boolean,
 
-    @SerializedName("first")
-    val first: Boolean,
-
-    @SerializedName("empty")
-    val empty: Boolean,
-
-    @SerializedName("totalElements")
-    val totalElements: Int,
-
-    @SerializedName("totalPages")
-    val totalPages: Int,
+    @SerializedName("numberOfElements")
+    var numberOfElements: Int,
 )
 

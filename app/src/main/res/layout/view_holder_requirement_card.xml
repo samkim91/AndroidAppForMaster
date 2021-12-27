@@ -7,7 +7,7 @@
 
         <variable
             name="data"
-            type="kr.co.soogong.master.data.model.requirement.RequirementCardV2" />
+            type="kr.co.soogong.master.data.model.requirement.RequirementCard" />
 
         <variable
             name="left_button_click_listener"

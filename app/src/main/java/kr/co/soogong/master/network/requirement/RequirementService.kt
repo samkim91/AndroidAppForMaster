@@ -33,8 +33,18 @@ class RequirementService @Inject constructor(
         masterUid: String,
         searchingText: String,
         searchingPeriod: Int,
-    ): Single<List<RequirementDto>> {
-        return requirementInterface.searchRequirements(masterUid, searchingText, searchingPeriod)
+        readYns: Boolean?,
+        offset: Int,
+        pageSize: Int,
+    ): Single<ResponseDto<PageableContentDto<RequirementCardDto>>> {
+        return requirementInterface.searchRequirements(
+            masterUid,
+            searchingText,
+            searchingPeriod,
+            readYns,
+            offset,
+            pageSize,
+        )
     }
 
     fun getRequirement(requirementId: Int, masterUid: String): Single<RequirementDto> {

@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import kr.co.soogong.master.data.common.CodeTable
-import kr.co.soogong.master.data.model.requirement.RequirementCardV2
+import kr.co.soogong.master.data.model.requirement.RequirementCard
 import kr.co.soogong.master.databinding.ViewHolderSimpleRequirementItemBinding
 import kr.co.soogong.master.ui.dialog.popup.DefaultDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData
@@ -19,7 +19,7 @@ class SimpleRequirementCardViewHolder(
         context: Context,
         fragmentManager: FragmentManager,
         viewModel: RequirementViewModel,
-        requirementCard: RequirementCardV2,
+        requirementCard: RequirementCard,
         position: Int,
     ) {
         with(binding) {
@@ -35,7 +35,7 @@ class SimpleRequirementCardViewHolder(
         fragmentManager: FragmentManager,
         binding: ViewHolderSimpleRequirementItemBinding,
         viewModel: RequirementViewModel,
-        requirementCard: RequirementCardV2,
+        requirementCard: RequirementCard,
     ) {
         with(binding) {
             setCardClickListener {

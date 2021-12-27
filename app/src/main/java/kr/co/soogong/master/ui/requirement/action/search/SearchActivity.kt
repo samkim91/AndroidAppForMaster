@@ -72,12 +72,9 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>(
 
     private fun registerEventObserve() {
         Timber.tag(TAG).d("registerEventObserve: ")
+        // 검색을 자동으로 실행해주는 기능인데, 글자가 바뀔 때마다 검색되면 요청이 많으니, 0.5초 간격으로 하나로 모아서 요청
         viewModel.searchingText.debounce(500L, CoroutineScope(Dispatchers.Main))
-            .observe(
-                this,
-                {        // 검색을 자동으로 실행해주는 기능인데, 글자가 바뀔 때마다 검색되면 요청이 많으니, 0.5초 간격으로 하나로 모아서 요청
-                    viewModel.searchRequirements()
-                })
+            .observe(this, { viewModel.searchRequirements() })
 
         viewModel.action.observe(this, EventObserver { action ->
             when (action) {

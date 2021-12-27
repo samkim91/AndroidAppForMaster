@@ -82,6 +82,7 @@
                 android:paddingEnd="@dimen/gap_16"
                 android:paddingBottom="@dimen/gap_16"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:onScroll="@{vm}"
                 app:requirement_cards="@{vm.requirements}"
                 tools:listitem="@layout/view_holder_requirement_card" />
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
@@ -91,6 +92,7 @@
             android:layout_width="@dimen/gap_0"
             android:layout_height="@dimen/gap_0"
             android:background="@drawable/ic_nutty_sweat"
+            bind:visible="@{vm.notFound}"
             app:layout_constraintBottom_toTopOf="@id/tv_empty"
             app:layout_constraintDimensionRatio="H, 1:1"
             app:layout_constraintEnd_toEndOf="parent"
@@ -98,7 +100,7 @@
             app:layout_constraintTop_toTopOf="@id/swipe_refresh_layout"
             app:layout_constraintVertical_chainStyle="packed"
             app:layout_constraintWidth_percent="0.35"
-            bind:visible="@{vm.requirements.empty}" />
+            tools:visibility="visible" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_empty"
@@ -108,10 +110,11 @@
             android:text="@string/requirements_not_found"
             android:textAppearance="@style/call_out.regular"
             android:textColor="@color/grey_4"
+            bind:visible="@{vm.notFound}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_nutty"
-            bind:visible="@{vm.requirements.empty}" />
+            tools:visibility="visible" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

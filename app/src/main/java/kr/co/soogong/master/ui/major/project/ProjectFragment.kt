@@ -36,7 +36,7 @@ class ProjectFragment : BaseFragment<FragmentProjectBinding>(
             buttonThemeSelectingDone = ButtonTheme.Primary
 
             list.adapter = ProjectAdapter(itemClickListener = { project, isChecked ->
-                if (isChecked) viewModel.checkedList.addToSet(project)
+                if (isChecked) viewModel.checkedList.add(project)
                 else viewModel.checkedList.remove(project)
             })
 

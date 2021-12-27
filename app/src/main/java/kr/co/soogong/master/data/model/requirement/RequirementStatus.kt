@@ -85,21 +85,6 @@ sealed class RequirementStatus {
     }
     // end region : Done tab
 
-
-    object BeforeProcess : RequirementStatus() {
-        override val inKorean = "진행 전"
-        override val code = "BeforeProcess"
-        override val asInt = 100
-        override val introductionText = ""
-    }
-
-    object Processing : RequirementStatus() {
-        override val inKorean = "진행 중"
-        override val code = "Processing"
-        override val asInt = 200
-        override val introductionText = ""
-    }
-
     companion object {
         fun getStatusFromRequirement(requirement: RequirementDto?): RequirementStatus {
             return when (requirement?.status) {
@@ -144,40 +129,25 @@ sealed class RequirementStatus {
             mainTabIndex: Int?,
             filterTabIndex: Int?,
         ): String {
-            if (mainTabIndex == null || filterTabIndex == null) return "all"
+            if (mainTabIndex == null || filterTabIndex == null) return "All"
 
             return if (mainTabIndex == 0) {
                 when (filterTabIndex) {
-                    0 -> BeforeProcess.code
+                    0 -> "BeforeProcess"
                     1 -> Requested.code
-//                    2 -> RequestMeasure.code, Measuring.code, Measured.code
                     2 -> RequestMeasure.code
-//                    3 -> Requested.code, Estimated.code
                     3 -> RequestConsult.code
                     4 -> Estimated.code
                     else -> ""
                 }
             } else {
                 when (filterTabIndex) {
-                    0 -> Processing.code
+                    0 -> "Processing"
                     1 -> Repairing.code
                     2 -> Done.code
                     else -> ""
                 }
             }
         }
-
-        val statusForNewRequirements = listOf(
-            Requested,
-            RequestConsult,
-            RequestMeasure,
-            Estimated,
-            Measuring,
-            Measured,
-            Repairing,
-            Done,
-            Closed,
-            Canceled,
-        )
     }
 }
