@@ -31,7 +31,10 @@ interface RequirementInterface {
         @Query("masterUid") masterUid: String,
         @Query("search") searchingText: String,
         @Query("interval") searchingPeriod: Int,
-    ): Single<List<RequirementDto>>
+        @Query("readYns") readYns: Boolean?,
+        @Query("offset") offset: Int,
+        @Query("pageSize") pageSize: Int,
+    ): Single<ResponseDto<PageableContentDto<RequirementCardDto>>>
 
     @GET(HttpContract.GET_REQUIREMENT)
     fun getRequirement(

@@ -34,7 +34,7 @@ class EditMajorFragment : BaseFragment<FragmentEditMajorBinding>(
             if (result.resultCode == Activity.RESULT_OK) {
                 result.data?.let { intent ->
                     MajorActivityHelper.getProjectsFromIntent(intent)?.let { array ->
-                        viewModel.projects.addAllToSet(array.toList())
+                        viewModel.projects.addAll(array.toList())
                     }
                 }
             }

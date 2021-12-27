@@ -2,7 +2,7 @@ package kr.co.soogong.master.ui.requirement.card
 
 import android.content.Context
 import androidx.fragment.app.FragmentManager
-import kr.co.soogong.master.data.model.requirement.RequirementCardV2
+import kr.co.soogong.master.data.model.requirement.RequirementCard
 import kr.co.soogong.master.databinding.ViewHolderRequirementCardBinding
 import kr.co.soogong.master.ui.requirement.RequirementViewModel
 
@@ -16,7 +16,7 @@ class RepairingCardViewHolder(
     private val binding: ViewHolderRequirementCardBinding,
 ) : RequirementCardViewHolder(context, fragmentManager, viewModel, binding) {
     override fun bind(
-        requirementCard: RequirementCardV2,
+        requirementCard: RequirementCard,
     ) {
         super.bind(requirementCard)
 
@@ -32,7 +32,7 @@ class DoneViewHolder(
     private val binding: ViewHolderRequirementCardBinding,
 ) : RequirementCardViewHolder(context, fragmentManager, viewModel, binding) {
     override fun bind(
-        requirementCard: RequirementCardV2,
+        requirementCard: RequirementCard,
     ) {
         super.bind(requirementCard)
 

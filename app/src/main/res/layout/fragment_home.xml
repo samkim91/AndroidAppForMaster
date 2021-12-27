@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="kr.co.soogong.master.R" />
+
         <variable
             name="vm"
             type="kr.co.soogong.master.ui.home.HomeViewModel" />
@@ -168,22 +170,30 @@
                 app:layout_constraintEnd_toEndOf="@id/new_requirements_container"
                 app:layout_constraintTop_toTopOf="@id/new_requirements_container_label" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/new_requirements_recycler_view"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/swipe_refresh_layout"
+                android:layout_width="@dimen/gap_0"
+                android:layout_height="@dimen/gap_0"
                 android:layout_marginStart="@dimen/gap_16"
                 android:layout_marginTop="@dimen/gap_16"
                 android:layout_marginEnd="@dimen/gap_16"
                 android:layout_marginBottom="@dimen/gap_16"
                 android:elevation="@dimen/gap_1"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintBottom_toBottomOf="@id/new_requirements_container"
                 app:layout_constraintEnd_toEndOf="@id/new_requirements_container"
                 app:layout_constraintStart_toStartOf="@id/new_requirements_container"
                 app:layout_constraintTop_toBottomOf="@id/new_requirements_container_label"
-                app:simple_requirement_cards="@{vm.requirements}"
-                tools:listitem="@layout/view_holder_simple_requirement_item" />
+                app:onRefresh="@{vm::initListUnread}"
+                app:setLoadingColor="@{R.color.app_color}">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/new_requirements_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:simple_requirement_cards="@{vm.requirements}"
+                    tools:listitem="@layout/view_holder_simple_requirement_item" />
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </layout>

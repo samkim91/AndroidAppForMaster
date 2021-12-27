@@ -6,11 +6,11 @@ import androidx.databinding.BindingAdapter
 import kr.co.soogong.master.atomic.atoms.LabelFilled
 import kr.co.soogong.master.data.common.ColorTheme
 import kr.co.soogong.master.data.dto.requirement.RequirementDto
-import kr.co.soogong.master.data.model.requirement.RequirementCardV2
+import kr.co.soogong.master.data.model.requirement.RequirementCard
 import kr.co.soogong.master.data.model.requirement.RequirementStatus
 
 @BindingAdapter("setThemeFromRequirementCard")
-fun LabelFilled.setThemeFromRequirement(requirementCard: RequirementCardV2?) {
+fun LabelFilled.setThemeFromRequirement(requirementCard: RequirementCard?) {
     this.colorTheme = when (requirementCard?.status) {
         is RequirementStatus.Requested, RequirementStatus.RequestMeasure, RequirementStatus.Measuring, RequirementStatus.Repairing -> ColorTheme.Blue
         else -> ColorTheme.Grey

@@ -5,10 +5,10 @@ import com.google.gson.annotations.SerializedName
 
 data class PageableDto(
     @SerializedName("offset")
-    val offset: Int,
+    var offset: Int,
 
     @SerializedName("pageNumber")
-    val pageNumber: Int,
+    var pageNumber: Int,
 
     @SerializedName("pageSize")
     val pageSize: Int,

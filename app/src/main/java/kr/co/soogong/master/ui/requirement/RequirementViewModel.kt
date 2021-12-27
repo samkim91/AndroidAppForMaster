@@ -9,10 +9,12 @@ import kr.co.soogong.master.data.dto.profile.MasterDto
 import kr.co.soogong.master.data.dto.requirement.CustomerRequest
 import kr.co.soogong.master.data.dto.requirement.repair.RepairDto
 import kr.co.soogong.master.data.model.common.EndlessScrollableViewModel
-import kr.co.soogong.master.data.model.requirement.RequirementCardV2
+import kr.co.soogong.master.data.model.requirement.RequirementCard
 import kr.co.soogong.master.data.model.requirement.RequirementStatus
 import kr.co.soogong.master.utility.ListLiveData
+import retrofit2.HttpException
 import timber.log.Timber
+import java.net.HttpURLConnection
 import javax.inject.Inject
 
 @HiltViewModel
@@ -23,7 +25,7 @@ open class RequirementViewModel @Inject constructor(
     val filterTabIndex = MutableLiveData(0)
 
     val masterSimpleInfo = MutableLiveData<MasterDto>()
-    val requirements = ListLiveData<RequirementCardV2>()
+    val requirements = ListLiveData<RequirementCard>()
     val customerRequests = MutableLiveData<CustomerRequest>()
 
     fun initList() {
@@ -38,7 +40,7 @@ open class RequirementViewModel @Inject constructor(
         requestRequirements()
     }
 
-    fun requestRequirements() {
+    private fun requestRequirements() {
         Timber.tag(TAG).d("requestRequirements: ${mainTabIndex.value} / ${filterTabIndex.value}")
 
         requirementViewModelAggregate.getRequirementCardsUseCase(
@@ -53,12 +55,14 @@ open class RequirementViewModel @Inject constructor(
                 onSuccess = {
                     Timber.tag(TAG).d("requestRequirements successfully: ")
                     last = it.last
-                    totalItemCount += pageSize
+                    totalItemCount += it.numberOfElements
                     requirements.addAll(it.content)
                 },
                 onError = {
                     Timber.tag(TAG).d("requestRequirements failed: $it")
-                    setAction(REQUEST_FAILED)
+                    // 인피니티 스크롤에서 데이터가 없는 것은 보여줄 필요가 없기 때문에, 예외처리
+                    if ((it as HttpException).code() != HttpURLConnection.HTTP_NOT_FOUND) setAction(
+                        REQUEST_FAILED)
                 }
             ).addToDisposable()
     }
@@ -138,7 +142,7 @@ open class RequirementViewModel @Inject constructor(
         }
     }
 
-    fun askForReview(requirementCard: RequirementCardV2?) {
+    fun askForReview(requirementCard: RequirementCard?) {
         Timber.tag(TAG).d("askForReview: ")
         requirementViewModelAggregate.requestReviewUseCase(
             RepairDto(

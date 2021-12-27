@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.ListAdapter
-import kr.co.soogong.master.data.model.requirement.RequirementCardV2
+import kr.co.soogong.master.data.model.requirement.RequirementCard
 import kr.co.soogong.master.databinding.ViewHolderSimpleRequirementItemBinding
 import kr.co.soogong.master.ui.requirement.RequirementViewModel
 import kr.co.soogong.master.ui.requirement.card.RequirementCardDiffUtil
@@ -15,7 +15,7 @@ class SimpleRequirementCardAdapter(
     private val context: Context,
     private val fragmentManager: FragmentManager,
     private val viewModel: RequirementViewModel,
-) : ListAdapter<RequirementCardV2, SimpleRequirementCardViewHolder>(RequirementCardDiffUtil()) {
+) : ListAdapter<RequirementCard, SimpleRequirementCardViewHolder>(RequirementCardDiffUtil()) {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,

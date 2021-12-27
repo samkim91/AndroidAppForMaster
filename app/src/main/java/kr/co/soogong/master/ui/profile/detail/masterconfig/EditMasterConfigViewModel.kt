@@ -58,7 +58,7 @@ class EditMasterConfigViewModel @Inject constructor(
                     }
                 } else {        // 기타 변동 사항
                     otherOptions.find { option -> option.code == masterConfig.code }
-                        ?.run { otherOption.addToSet(this) }
+                        ?.run { otherOption.add(this) }
                 }
             }
         }
