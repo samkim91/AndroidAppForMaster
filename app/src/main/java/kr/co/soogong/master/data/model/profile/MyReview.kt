@@ -3,12 +3,12 @@ package kr.co.soogong.master.data.model.profile
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 import kr.co.soogong.master.data.dto.profile.MasterDto
-import kotlin.math.round
 
 @Parcelize
 data class MyReview(
-    val reviewCount: Int?,
     val averageRecommendation: Double?,
+    val reviewCount: Int?,
+    val repairCount: Int?,
     val averageKindness: Double?,
     val averageQuality: Double?,
     val averageAffordability: Double?,
@@ -18,8 +18,9 @@ data class MyReview(
     companion object {
         fun fromMasterDto(masterDto: MasterDto): MyReview {
             return MyReview(
-                reviewCount = masterDto.reviewCount,
                 averageRecommendation = masterDto.reviewRecommendationAvg,
+                reviewCount = masterDto.reviewCount,
+                repairCount = masterDto.repairCount,
                 averageKindness = masterDto.reviewKindnessAvg,
                 averageQuality = masterDto.reviewQualityAvg,
                 averageAffordability = masterDto.reviewAffordabilityAvg,

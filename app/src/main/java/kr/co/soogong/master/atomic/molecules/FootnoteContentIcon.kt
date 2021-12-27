@@ -28,11 +28,9 @@ class FootnoteContentIcon @JvmOverloads constructor(
         set(value) {
             value?.let {
                 field = it
-                binding.tvCount.text = context.getString(R.string.summary_item, it.toString())
-                if (it > 1000)
-                    "+${context.getString(R.string.summary_item, it.toString())}"
-                else
-                    context.getString(R.string.summary_item, it.toString())
+                binding.tvCount.text =
+                    if (it > 1000) "+${context.getString(R.string.summary_item, it.toString())}"
+                    else context.getString(R.string.summary_item, it.toString())
             }
         }
 

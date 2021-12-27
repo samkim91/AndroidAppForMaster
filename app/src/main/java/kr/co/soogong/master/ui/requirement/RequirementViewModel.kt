@@ -164,6 +164,10 @@ open class RequirementViewModel @Inject constructor(
             ).addToDisposable()
     }
 
+    fun setCurrentTab(tabIndex: Int) {
+        sendEvent(SET_CURRENT_TAB, tabIndex)
+    }
+
     fun getShowNoticeForCalling() =
         requirementViewModelAggregate.getNoticeForCallingFromSharedUseCase()
 
@@ -175,5 +179,7 @@ open class RequirementViewModel @Inject constructor(
         private const val TAG = "RequirementViewModel"
         const val REQUEST_FAILED = "REQUEST_FAILED"
         const val ASK_FOR_REVIEW_SUCCESSFULLY = "ASK_FOR_REVIEW_SUCCESSFULLY"
+
+        const val SET_CURRENT_TAB = "SET_CURRENT_TAB"
     }
 }

@@ -110,6 +110,7 @@
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/gap_26"
+                    app:completionCount="@{vm.profile.myReview.repairCount}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_representative_name"

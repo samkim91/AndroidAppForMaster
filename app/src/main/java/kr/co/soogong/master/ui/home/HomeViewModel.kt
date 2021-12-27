@@ -83,9 +83,7 @@ class HomeViewModel @Inject constructor(
             ).addToDisposable()
     }
 
-
     companion object {
         private const val TAG = "HomeViewModel"
-
     }
 }
