@@ -64,8 +64,6 @@ class EditPhoneNumberFragment :
             lifecycleOwner = viewLifecycleOwner
             authPhoneNumberButtonTheme = ButtonTheme.Primary
 
-            (activity as EditProfileContainerActivity).setSaveButtonEnabled(false)
-
             stibmtitAuthPhoneNumber.textInputTimer.initTimer(
                 minute = 2,
                 interval = 1L,
@@ -156,8 +154,6 @@ class EditPhoneNumberFragment :
                 token: PhoneAuthProvider.ForceResendingToken,
             ) {
                 Timber.tag(TAG).d("onCodeSent: $verificationId, $token")
-                (activity as EditProfileContainerActivity).setSaveButtonEnabled(true)
-
                 viewModel.storedVerificationId.value = verificationId
                 viewModel.resendToken.value = token
             }

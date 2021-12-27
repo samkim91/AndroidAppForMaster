@@ -194,7 +194,7 @@
                 android:layout_width="@dimen/gap_0"
                 android:layout_height="@dimen/gap_48"
                 android:background="@drawable/default_button_selector"
-                android:enabled="false"
+                android:enabled="@{vm.certificationCode.length() == 6}"
                 android:text="@string/check_certification_code_button_text"
                 android:textColor="@color/c_FFFFFF"
                 app:layout_constraintBottom_toBottomOf="parent"
