@@ -127,7 +127,7 @@
     <!-- Home -->
     <string name="label_for_switch_compat">실측 요청 받기</string>
     <string name="summary_item">%s건</string>
-    <string name="new_requirements_container_label">새로 들어온 문의</string>
+    <string name="new_requirements_container">새로 들어온 문의</string>
 
     <!--  RequirementFragment  -->
     <string name="requirement_before_progress_tab">진행 전</string>
