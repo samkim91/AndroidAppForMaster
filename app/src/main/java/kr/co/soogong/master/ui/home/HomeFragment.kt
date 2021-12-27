@@ -2,11 +2,9 @@ package kr.co.soogong.master.ui.home
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.dto.profile.MasterDto
 import kr.co.soogong.master.databinding.FragmentHomeBinding
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.requirement.RequirementViewModel.Companion.REQUEST_FAILED
@@ -58,7 +56,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
                 masterDto.requestMeasureYn?.let {
                     binding.switchCompat.isChecked = it
                 }
-                setVisibilityForRequestMeasure(masterDto)
             })
         }
     }
@@ -67,19 +64,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
         super.onResume()
         Timber.tag(TAG).d("onResume: ")
         viewModel.requestMasterSimpleInfo()
+        viewModel.requestRequirementTotal()
         viewModel.initListUnread()
-    }
-
-    private fun setVisibilityForRequestMeasure(masterDto: MasterDto) {
-        Timber.tag(TAG).d("setVisibilityForRequestMeasure: ")
-        with(binding) {
-            if (masterDto.secretaryYn != true || masterDto.freeMeasureYn != true) {
-                switchGroup.isVisible = false
-                return
-            }
-
-            switchGroup.isVisible = true
-        }
     }
 
     companion object {

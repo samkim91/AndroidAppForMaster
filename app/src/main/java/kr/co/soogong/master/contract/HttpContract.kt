@@ -20,9 +20,12 @@ object HttpContract {
     const val PROJECT_LIST = "project/find-all-by-categoryId"
     //endregion
 
+    // region Home
+    const val REQUIREMENT_TOTAL = "master/home/counts"
+    // endregion
+
     //region Requirement
     const val GET_REQUIREMENTS = "master/requirement"
-
     const val GET_REQUIREMENT = "master/find-requirement-one"
     const val SEARCH_REQUIREMENTS = "requirement/search-for-master"
     //endregion
