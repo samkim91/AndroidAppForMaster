@@ -9,7 +9,7 @@
 
         <import type="java.util.List" />
 
-        <import type="kr.co.soogong.master.data.dto.AttachmentDto" />
+        <import type="kr.co.soogong.master.data.dto.common.AttachmentDto" />
 
         <variable
             name="images"

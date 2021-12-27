@@ -7,7 +7,7 @@
 
         <variable
             name="data"
-            type="kr.co.soogong.master.data.model.requirement.RequirementCard" />
+            type="kr.co.soogong.master.data.model.requirement.RequirementCardV2" />
 
         <variable
             name="number"
@@ -51,7 +51,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/gap_20"
-            android:text="@{data.project}"
+            android:text="@{data.projectName}"
             android:textColor="@color/dark_grey_1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
@@ -94,12 +94,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/gap_8"
-            android:text="@{data.distance.toString() + 'm'}"
+
             android:textColor="@color/grey_3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toEndOf="@id/line"
             app:layout_constraintTop_toTopOf="@id/text_view_address"
             tools:text="68m" />
+        <!--        android:text="@{data.distance.toString() + 'm'}"-->
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

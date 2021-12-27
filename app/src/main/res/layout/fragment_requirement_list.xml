@@ -25,7 +25,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:onRefresh="@{vm::requestRequirements}"
+            app:onRefresh="@{vm::initList}"
             app:setLoadingColor="@{R.color.app_color}">
 
             <androidx.recyclerview.widget.RecyclerView
@@ -39,34 +39,37 @@
                 android:paddingEnd="@dimen/gap_16"
                 android:paddingBottom="@dimen/gap_16"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:onScroll="@{vm}"
                 app:requirement_cards="@{vm.requirements}"
                 tools:listitem="@layout/view_holder_requirement_card" />
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/empty_icon"
-            android:layout_width="@dimen/gap_40"
-            android:layout_height="@dimen/gap_40"
-            android:background="@drawable/ic_requirements_filled"
-            android:backgroundTint="@color/grey_1"
-            app:layout_constraintBottom_toTopOf="@id/empty_text"
+            android:id="@+id/iv_nutty"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="@dimen/gap_0"
+            android:background="@drawable/ic_nutty_sweat"
+            app:layout_constraintBottom_toTopOf="@id/tv_empty"
+            app:layout_constraintDimensionRatio="H, 1:1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@id/swipe_refresh_layout"
             app:layout_constraintVertical_chainStyle="packed"
+            app:layout_constraintWidth_percent="0.35"
             bind:visible="@{vm.requirements.empty}" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/empty_text"
-            style="@style/call_out.regular"
+            android:id="@+id/tv_empty"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_2"
             android:text="@string/requirements_empty"
+            android:textAppearance="@style/call_out.regular"
             android:textColor="@color/grey_4"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/empty_icon"
+            app:layout_constraintTop_toBottomOf="@id/iv_nutty"
             bind:visible="@{vm.requirements.empty}" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

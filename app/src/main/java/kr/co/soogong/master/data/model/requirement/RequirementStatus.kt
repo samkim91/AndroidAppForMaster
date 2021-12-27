@@ -13,42 +13,42 @@ sealed class RequirementStatus {
     object Requested : RequirementStatus() {
         override val inKorean = "견적요청"
         override val code = "Requested"
-        override val asInt = 100
+        override val asInt = 101
         override val introductionText = "견적서를 작성해주세요"
     }
 
     object RequestConsult : RequirementStatus() {
         override val inKorean = "상담요청"
-        override val code = "RequestConsult"
-        override val asInt = 101
+        override val code = "RequestConsulting"
+        override val asInt = 102
         override val introductionText = "고객에게 연락해주세요"
     }
 
     object RequestMeasure : RequirementStatus() {
         override val inKorean = "실측요청"
         override val code = "RequestMeasure"
-        override val asInt = 102
+        override val asInt = 103
         override val introductionText = ""
     }
 
     object Measuring : RequirementStatus() {
         override val inKorean = "실측예정"
         override val code = "Measuring"
-        override val asInt = 201
+        override val asInt = 104
         override val introductionText = "필요시 고객과 전화로 상담해주세요"
     }
 
     object Measured : RequirementStatus() {
         override val inKorean = "실측완료"
         override val code = "Measured"
-        override val asInt = 202
+        override val asInt = 105
         override val introductionText = "고객의 선택을 기다려주세요"
     }
 
     object Estimated : RequirementStatus() {
         override val inKorean = "매칭대기"
         override val code = "Estimated"
-        override val asInt = 103
+        override val asInt = 106
         override val introductionText = "고객의 선택을 기다려주세요"
     }
     // end region : Before progress tab
@@ -57,14 +57,14 @@ sealed class RequirementStatus {
     object Repairing : RequirementStatus() {
         override val inKorean = "시공예정"
         override val code = "Repairing"
-        override val asInt = 203
+        override val asInt = 201
         override val introductionText = ""
     }
 
     object Done : RequirementStatus() {
         override val inKorean = "시공완료"
         override val code = "Done"
-        override val asInt = 300
+        override val asInt = 202
         override val introductionText = "고객에게 리뷰요청을 해주세요"
     }
     // end region : In progress tab
@@ -84,6 +84,21 @@ sealed class RequirementStatus {
         override val introductionText = ""
     }
     // end region : Done tab
+
+
+    object BeforeProcess : RequirementStatus() {
+        override val inKorean = "진행 전"
+        override val code = "BeforeProcess"
+        override val asInt = 100
+        override val introductionText = ""
+    }
+
+    object Processing : RequirementStatus() {
+        override val inKorean = "진행 중"
+        override val code = "Processing"
+        override val asInt = 200
+        override val introductionText = ""
+    }
 
     companion object {
         fun getStatusFromRequirement(requirement: RequirementDto?): RequirementStatus {
@@ -113,31 +128,41 @@ sealed class RequirementStatus {
             }
         }
 
+        fun getStatusFromString(statusString: String): RequirementStatus = when (statusString) {
+            Requested.code -> Requested
+            RequestMeasure.code -> RequestMeasure
+            Measuring.code -> Measuring
+            Measured.code -> Measured
+            Estimated.code -> Estimated
+            Repairing.code -> Repairing
+            Done.code -> Done
+            Closed.code -> Closed
+            else -> Canceled
+        }
+
         fun getRequirementStatusFromTabIndex(
             mainTabIndex: Int?,
             filterTabIndex: Int?,
-        ): List<String> {
-            if (mainTabIndex == null || filterTabIndex == null) return emptyList()
+        ): String {
+            if (mainTabIndex == null || filterTabIndex == null) return "all"
 
             return if (mainTabIndex == 0) {
                 when (filterTabIndex) {
-                    0 -> listOf(Requested.code,
-                        RequestMeasure.code,
-                        Measuring.code,
-                        Measured.code,
-                        Estimated.code)
-                    1 -> listOf(Requested.code)
-                    2 -> listOf(RequestMeasure.code, Measuring.code, Measured.code)
-                    3 -> listOf(Requested.code, Estimated.code)
-                    4 -> listOf(Estimated.code)
-                    else -> emptyList()
+                    0 -> BeforeProcess.code
+                    1 -> Requested.code
+//                    2 -> RequestMeasure.code, Measuring.code, Measured.code
+                    2 -> RequestMeasure.code
+//                    3 -> Requested.code, Estimated.code
+                    3 -> RequestConsult.code
+                    4 -> Estimated.code
+                    else -> ""
                 }
             } else {
                 when (filterTabIndex) {
-                    0 -> listOf(Repairing.code, Done.code)
-                    1 -> listOf(Repairing.code)
-                    2 -> listOf(Done.code)
-                    else -> emptyList()
+                    0 -> Processing.code
+                    1 -> Repairing.code
+                    2 -> Done.code
+                    else -> ""
                 }
             }
         }

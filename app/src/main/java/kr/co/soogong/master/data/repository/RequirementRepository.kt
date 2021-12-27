@@ -8,6 +8,9 @@ import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.dao.requirement.RequirementDao
+import kr.co.soogong.master.data.dto.common.PageableContentDto
+import kr.co.soogong.master.data.dto.common.ResponseDto
+import kr.co.soogong.master.data.dto.requirement.RequirementCardDto
 import kr.co.soogong.master.data.dto.requirement.RequirementDto
 import kr.co.soogong.master.domain.usecase.auth.GetMasterUidFromSharedUseCase
 import kr.co.soogong.master.network.requirement.RequirementService
@@ -62,10 +65,13 @@ class RequirementRepository @Inject constructor(
     }
 
     fun getRequirementsByStatus(
-        statusArray: List<String>,
-    ): Single<List<RequirementDto>> {
-        return getRequirementsFromServer(statusArray)
-            .onErrorResumeNext(getRequirementsFromLocal(statusArray))
+        status: String,
+        readYns: Boolean?,
+        offset: Int,
+        pageSize: Int,
+    ): Single<ResponseDto<PageableContentDto<RequirementCardDto>>> {
+        return getRequirementsFromServer(status, readYns, offset, pageSize)
+//            .onErrorResumeNext(getRequirementsFromLocal(statusArray))
             .doOnError { Timber.tag(TAG).d("getRequirementsByStatus failed: $it") }
     }
 
@@ -79,15 +85,21 @@ class RequirementRepository @Inject constructor(
             }
     }
 
-    private fun getRequirementsFromServer(statusArray: List<String>): Single<List<RequirementDto>> {
-        Timber.tag(TAG).d("getRequirementFromServer start: $statusArray")
-        return requirementService.getRequirementsByStatus(
-            getMasterUidFromSharedUseCase()!!,
-            statusArray
-        )
+    private fun getRequirementsFromServer(
+        status: String,
+        readYns: Boolean?,
+        offset: Int,
+        pageSize: Int,
+    ): Single<ResponseDto<PageableContentDto<RequirementCardDto>>> {
+        Timber.tag(TAG).d("getRequirementFromServer start: $status")
+        return requirementService.getRequirements(getMasterUidFromSharedUseCase()!!,
+            status,
+            readYns,
+            offset,
+            pageSize)
             .doOnSuccess {
-                Timber.tag(TAG).d("getRequirementsFromServer: ${it.size}")
-                saveRequirementsInLocal(statusArray, it)
+                Timber.tag(TAG).d("getRequirementsFromServer: $it")
+//                saveRequirementsInLocal(status, it)
             }
     }
 

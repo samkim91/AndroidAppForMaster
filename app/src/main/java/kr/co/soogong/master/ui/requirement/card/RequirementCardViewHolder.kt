@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.chip.Chip
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.common.CodeTable
-import kr.co.soogong.master.data.model.requirement.RequirementCard
+import kr.co.soogong.master.data.model.requirement.RequirementCardV2
 import kr.co.soogong.master.data.model.requirement.RequirementStatus
 import kr.co.soogong.master.databinding.ViewHolderRequirementCardBinding
 import kr.co.soogong.master.ui.dialog.popup.DefaultDialog
@@ -29,7 +29,7 @@ open class RequirementCardViewHolder(
     private val binding: ViewHolderRequirementCardBinding,
 ) : RecyclerView.ViewHolder(binding.root) {
     open fun bind(
-        requirementCard: RequirementCard,
+        requirementCard: RequirementCardV2,
     ) {
         with(binding) {
             buttonLeft.isVisible = false
@@ -55,10 +55,10 @@ open class RequirementCardViewHolder(
         }
     }
 
-    private fun setQnaChipGroup(requirementCard: RequirementCard) {
+    private fun setQnaChipGroup(requirementCard: RequirementCardV2) {
         with(binding.cgQna) {
             this.removeAllViews()       // 데이터 바인딩 과정 중에 생긴 중복칩 삭제
-            requirementCard.requirementQnas?.let { qnaList ->
+            requirementCard.requirementQnas.let { qnaList ->
                 // 너무 많은 데이터를 보여주면 화면이 커지기 때문에, 6개만 추출
                 qnaList.take(6).map { qna ->
                     (LayoutInflater.from(context)
@@ -113,7 +113,7 @@ open class RequirementCardViewHolder(
     }
 
     fun setCallToClientButton(
-        requirementCard: RequirementCard,
+        requirementCard: RequirementCardV2,
     ) {
         with(binding) {
             buttonLeft.isVisible = true
@@ -127,8 +127,7 @@ open class RequirementCardViewHolder(
                         it.setButtonsClickListener(
                             onPositive = {
                                 viewModel.callToClient(requirementId = requirementCard.id)
-                                context.startActivity(CallToCustomerHelper.getIntent(
-                                    if (requirementCard.safetyNumber.isNullOrEmpty()) requirementCard.tel else requirementCard.safetyNumber))
+                                context.startActivity(CallToCustomerHelper.getIntent(requirementCard.phoneNumber))
                             },
                             onNegative = { }
                         )
@@ -140,7 +139,7 @@ open class RequirementCardViewHolder(
     }
 
     fun setSendMeasureButton(
-        requirementCard: RequirementCard,
+        requirementCard: RequirementCardV2,
     ) {
         with(binding) {
             buttonLeft.isVisible = true
@@ -159,7 +158,7 @@ open class RequirementCardViewHolder(
     }
 
     fun setRepairDoneButton(
-        requirementCard: RequirementCard,
+        requirementCard: RequirementCardV2,
     ) {
         with(binding) {
             buttonLeft.isVisible = true
@@ -176,10 +175,10 @@ open class RequirementCardViewHolder(
     }
 
     fun setRequestReviewButton(
-        requirementCard: RequirementCard,
+        requirementCard: RequirementCardV2,
     ) {
         with(binding) {
-            if (requirementCard.estimationDto?.repair?.requestReviewYn != true) {
+            if (!requirementCard.requestReviewYn) {
                 buttonLeft.isVisible = true
                 buttonLeft.setText(R.string.request_review)
                 setLeftButtonClickListener { viewModel.askForReview(requirementCard) }

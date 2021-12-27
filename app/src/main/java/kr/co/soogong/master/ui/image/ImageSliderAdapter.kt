@@ -10,7 +10,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.ortiz.touchview.TouchImageView
-import kr.co.soogong.master.data.dto.AttachmentDto
+import kr.co.soogong.master.data.dto.common.AttachmentDto
 import timber.log.Timber
 
 class ImageSliderAdapter() : RecyclerView.Adapter<ImageSliderAdapter.ImageViewHolder>() {
@@ -63,7 +63,7 @@ class ImageSliderAdapter() : RecyclerView.Adapter<ImageSliderAdapter.ImageViewHo
                 // URL Drawable 을 뽑은 뒤 넣어주고 있다.
                 override fun onResourceReady(
                     resource: Drawable,
-                    transition: Transition<in Drawable?>?
+                    transition: Transition<in Drawable?>?,
                 ) {
                     Timber.tag(TAG).d("onResourceReady: $position")
                     holder.imagePlace.setImageDrawable(resource)

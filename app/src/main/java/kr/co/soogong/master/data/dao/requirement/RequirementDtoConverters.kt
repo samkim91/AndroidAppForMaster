@@ -3,7 +3,7 @@ package kr.co.soogong.master.data.dao.requirement
 import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import kr.co.soogong.master.data.dto.AttachmentDto
+import kr.co.soogong.master.data.dto.common.AttachmentDto
 import kr.co.soogong.master.data.dto.requirement.PreviousRequirementDto
 import kr.co.soogong.master.data.dto.requirement.estimation.EstimationDto
 import kr.co.soogong.master.data.dto.requirement.qna.RequirementQnaDto

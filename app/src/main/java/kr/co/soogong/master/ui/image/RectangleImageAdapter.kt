@@ -3,7 +3,7 @@ package kr.co.soogong.master.ui.image
 import android.view.ViewGroup
 import androidx.core.view.setMargins
 import androidx.recyclerview.widget.RecyclerView
-import kr.co.soogong.master.data.dto.AttachmentDto
+import kr.co.soogong.master.data.dto.common.AttachmentDto
 import kr.co.soogong.master.utility.extension.dp
 
 class RectangleImageAdapter(

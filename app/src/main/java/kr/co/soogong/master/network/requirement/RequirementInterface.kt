@@ -4,7 +4,10 @@ import com.google.gson.JsonObject
 import io.reactivex.Single
 import kr.co.soogong.master.contract.HttpContract
 import kr.co.soogong.master.data.dto.common.CodeDto
+import kr.co.soogong.master.data.dto.common.PageableContentDto
+import kr.co.soogong.master.data.dto.common.ResponseDto
 import kr.co.soogong.master.data.dto.requirement.CustomerRequest
+import kr.co.soogong.master.data.dto.requirement.RequirementCardDto
 import kr.co.soogong.master.data.dto.requirement.RequirementDto
 import kr.co.soogong.master.data.dto.requirement.estimation.EstimationDto
 import kr.co.soogong.master.data.dto.requirement.estimationTemplate.EstimationTemplateDto
@@ -14,11 +17,14 @@ import okhttp3.RequestBody
 import retrofit2.http.*
 
 interface RequirementInterface {
-    @GET(HttpContract.GET_REQUIREMENT_LIST_BY_UID)
-    fun getRequirementsByStatus(
+    @GET(HttpContract.GET_REQUIREMENTS)
+    fun getRequirements(
         @Query("masterUid") masterUid: String,
-        @Query("statusArray") statusArray: List<String>,
-    ): Single<List<RequirementDto>>
+        @Query("status") status: String,
+        @Query("readYns") readYns: Boolean?,
+        @Query("offset") offset: Int,
+        @Query("pageSize") pageSize: Int,
+    ): Single<ResponseDto<PageableContentDto<RequirementCardDto>>>
 
     @GET(HttpContract.SEARCH_REQUIREMENTS)
     fun searchRequirements(

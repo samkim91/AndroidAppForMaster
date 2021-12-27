@@ -32,7 +32,7 @@ class SearchViewModel @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
                 onSuccess = {
-                    requirements.postValue(it)
+//                    requirements.postValue(it)
                 },
                 onError = {
                     setAction(SEARCH_REQUIREMENTS_FAILED)
