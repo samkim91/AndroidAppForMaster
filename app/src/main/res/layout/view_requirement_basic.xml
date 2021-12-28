@@ -4,24 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <merge
-        tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_requirement_token"
             style="@style/caption_2.bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/gap_10"
             android:ellipsize="middle"
             android:maxLines="1"
             android:textColor="@color/grey_1"
             app:layout_constrainedWidth="true"
-            app:layout_constraintHorizontal_bias="0"
             app:layout_constraintEnd_toStartOf="@id/ft_status"
+            app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="문의번호 20211103241231" />
+            tools:text="문의번호 20211103241231 문의번호 20211103241231 문의번호 20211103241231 문의번호 20211103241231" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_created_at"
@@ -83,8 +84,7 @@
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_project"
-            tools:text="견적 마감까지 8시간 21분"
-            tools:visibility="visible" />
+            tools:text="견적 마감까지 8시간 21분" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button_call_to_customer"
@@ -95,18 +95,20 @@
             android:stateListAnimator="@null"
             android:text="@string/call_to_customer"
             android:textColor="@color/grey_2"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@id/tv_address"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/tv_address" />
+            app:layout_constraintTop_toTopOf="@id/tv_address"
+            tools:visibility="visible" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/image_view_line"
             android:layout_width="@dimen/gap_0"
             android:layout_height="@dimen/gap_1"
             android:layout_marginTop="@dimen/gap_24"
-            android:background="@drawable/thin_divider"
+            android:background="@color/light_grey_1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_project" />
+            app:layout_constraintTop_toBottomOf="@id/tv_due_time" />
     </merge>
 </layout>

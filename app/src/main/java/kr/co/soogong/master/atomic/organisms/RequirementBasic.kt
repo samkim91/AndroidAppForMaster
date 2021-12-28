@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.model.requirement.Requirement
+import kr.co.soogong.master.data.model.requirement.RequirementStatus
 import kr.co.soogong.master.databinding.ViewRequirementBasicBinding
 import kr.co.soogong.master.utility.extension.formatDateWithoutDay
 import java.util.*
@@ -36,12 +36,12 @@ class RequirementBasic @JvmOverloads constructor(
             }
         }
 
-    var status: Requirement? = null
+    var status: RequirementStatus? = null
         set(value) {
             field = value
             value?.let {
-                binding.ftStatus.content = value.status.inKorean
-                binding.ftStatus.colorTheme = value.status.theme
+                binding.ftStatus.content = value.inKorean
+                binding.ftStatus.colorTheme = value.theme
             }
         }
 
@@ -69,7 +69,7 @@ class RequirementBasic @JvmOverloads constructor(
             }
         }
 
-    var buttonCallToCustomerVisibility: Boolean = true
+    var buttonCallToCustomerVisibility: Boolean = false
         set(value) {
             field = value
             value.let {

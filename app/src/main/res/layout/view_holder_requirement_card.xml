@@ -100,7 +100,7 @@
                 app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_address"
-                tools:text="욕실 위생도기 및 수전 설치/교체 123123123123" />
+                tools:text="욕실 위생도기 및 수전 설치/교체" />
 
             <com.google.android.material.chip.ChipGroup
                 android:id="@+id/cg_qna"
@@ -126,8 +126,7 @@
                 app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/cg_qna"
-                tools:text="견적 마감까지 8시간 21분"
-                tools:visibility="visible" />
+                tools:text="견적 마감까지 8시간 21분" />
 
             <!-- region 버튼 -->
             <androidx.appcompat.widget.AppCompatButton

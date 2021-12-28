@@ -14,12 +14,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include
-            android:id="@+id/action_bar"
-            layout="@layout/action_bar"
+        <kr.co.soogong.master.atomic.molecules.ActionBar
+            android:id="@+id/ab_header"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="wrap_content"
+            app:backButtonVisibility="@{true}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="@{@string/view_requirement_action_title}" />
 
         <ScrollView
             android:layout_width="match_parent"
@@ -28,7 +31,7 @@
             app:layout_constraintBottom_toTopOf="@id/buttons_container"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/action_bar">
+            app:layout_constraintTop_toBottomOf="@id/ab_header">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -44,8 +47,8 @@
                     app:createdAt="@{vm.requirement.createdAt}"
                     app:onButtonClick="@{() -> vm.callToClient()}"
                     app:project="@{vm.requirement.projectName}"
-                    app:status="@{vm.requirement}"
-                    app:requirementToken="@{vm.requirement.token}" />
+                    app:requirementToken="@{vm.requirement.token}"
+                    app:status="@{vm.requirement.status}" />
 
                 <LinearLayout
                     android:id="@+id/flexible_container"

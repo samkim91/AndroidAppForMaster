@@ -7,6 +7,7 @@ import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.view.View
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.common.CodeTable
@@ -20,12 +21,14 @@ fun TextView.setDateWithoutDay(date: Date?) {
     text = date.formatDateWithoutDay()
 }
 
-fun TextView.setEstimationDueTime(createdAt: Date?) {
+fun TextView.setEstimationDueTime(createdAt: Date) {
+    isVisible = true
     text = context.getString(R.string.requirements_card_estimation_due_time,
         TimeHelper.getDueTime(createdAt, WITHIN_24_HOURS))
 }
 
-fun TextView.setRequestMeasureDueTime(createdAt: Date?) {
+fun TextView.setRequestMeasureDueTime(createdAt: Date) {
+    isVisible = true
     text = context.getString(R.string.requirements_card_request_measure_due_time,
         TimeHelper.getDueTime(createdAt, WITHIN_90_MINUTES))
 }
