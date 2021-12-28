@@ -22,7 +22,7 @@
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="문의번호 20211103241231 문의번호 20211103241231 문의번호 20211103241231 문의번호 20211103241231" />
+            tools:text="문의번호 20211103241231" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_created_at"

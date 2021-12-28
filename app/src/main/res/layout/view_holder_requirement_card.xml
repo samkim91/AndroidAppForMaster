@@ -21,7 +21,6 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/gap_8"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="@dimen/gap_14"
         app:cardElevation="@dimen/gap_1">
@@ -100,7 +99,7 @@
                 app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_address"
-                tools:text="욕실 위생도기 및 수전 설치/교체" />
+                tools:text="욕실 위생도기 및 수전 설치/교체 " />
 
             <com.google.android.material.chip.ChipGroup
                 android:id="@+id/cg_qna"
@@ -131,15 +130,10 @@
             <!-- region 버튼 -->
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/button_left"
-                style="@style/subheadline.bold"
-                android:layout_width="@dimen/gap_0"
-                android:layout_height="@dimen/gap_48"
+                style="@style/button.medium.outlined_secondary"
                 android:layout_marginTop="@dimen/requirement_card_call_button_margin_top"
                 android:layout_marginEnd="@dimen/gap_10"
-                android:background="@drawable/bg_solid_white_stroke_light_grey2_radius8"
                 android:onClick="@{left_button_click_listener}"
-                android:stateListAnimator="@null"
-                android:textColor="@color/dark_grey_2"
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/button_right"
@@ -151,14 +145,9 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/button_right"
-                style="@style/subheadline.bold"
-                android:layout_width="@dimen/gap_0"
-                android:layout_height="@dimen/gap_48"
+                style="@style/button.medium.outlined_primary"
                 android:layout_marginTop="@dimen/requirement_card_call_button_margin_top"
-                android:background="@drawable/bg_solid_white_stroke_green_radius8"
                 android:onClick="@{right_button_click_listener}"
-                android:stateListAnimator="@null"
-                android:textColor="@color/brand_green"
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
