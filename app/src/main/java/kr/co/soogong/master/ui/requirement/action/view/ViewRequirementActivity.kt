@@ -5,7 +5,6 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.dto.requirement.RequirementDto
 import kr.co.soogong.master.data.model.requirement.*
 import kr.co.soogong.master.data.model.requirement.estimation.EstimationResponseCode
 import kr.co.soogong.master.databinding.ActivityViewRequirementBinding
@@ -76,7 +75,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                 }
                 CALL_TO_CUSTOMER_SUCCESSFULLY -> {
                     viewModel.requirement.value?.let {
-                        startActivity(CallToCustomerHelper.getIntent(if (it.safetyNumber.isNullOrEmpty()) it.tel else it.safetyNumber))
+                        startActivity(CallToCustomerHelper.getIntent(it.phoneNumber))
                     }
                 }
                 RESPOND_TO_MEASURE_SUCCESSFULLY -> {
@@ -97,8 +96,8 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
         })
     }
 
-    private fun setLayoutForRequestConsult(requirement: RequirementDto) {
-        (RequirementStatus.getStatusFromRequirement(requirement) is RequirementStatus.RequestConsult).let { boolean ->
+    private fun setLayoutForRequestConsult(requirement: Requirement) {
+        (requirement.status is RequirementStatus.RequestConsult).let { boolean ->
 
             // NOTE: 상호 통화한 적이 한번도 없으면 다이얼로그로 전화하라고 안내
             if (boolean && requirement.estimationDto?.fromMasterCallCnt == 0 && requirement.estimationDto.fromClientCallCnt == 0) {
@@ -115,8 +114,8 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
         }
     }
 
-    private fun showDialogForCallingCustomer(requirement: RequirementDto) {
-        when (RequirementStatus.getStatusFromRequirement(requirement)) {
+    private fun showDialogForCallingCustomer(requirement: Requirement) {
+        when (requirement.status) {
             is RequirementStatus.Estimated -> {
                 DefaultDialog.newInstance(DialogData.getNoticeForCallingCustomerInViewRequirement())
                     .let {
@@ -144,7 +143,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
         }
     }
 
-    private fun isValidRequirement(requirement: RequirementDto): Boolean {
+    private fun isValidRequirement(requirement: Requirement): Boolean {
         if (requirement.estimationDto?.masterResponseCode == EstimationResponseCode.EXPIRED) {
             DefaultDialog.newInstance(
                 dialogData = getExpiredRequestConsultDialogData(),

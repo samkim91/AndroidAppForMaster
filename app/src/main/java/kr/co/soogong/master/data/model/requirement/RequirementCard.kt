@@ -15,7 +15,7 @@ data class RequirementCard(
     val oldAddress: String,
     val distance: Int,
     val status: RequirementStatus,
-    val subStatus: RequirementStatus,
+    val subStatus: String,
     val phoneNumber: String,
     val requirementQnas: List<RequirementQnaDto>,
     val estimationId: Int,
@@ -31,8 +31,8 @@ data class RequirementCard(
     val createdAt: Date,
 ) {
     companion object {
-        fun fromRequirementCardDto(requirementCardDto: RequirementCardDto): RequirementCard {
-            return RequirementCard(
+        fun fromRequirementCardDto(requirementCardDto: RequirementCardDto) =
+            RequirementCard(
                 id = requirementCardDto.id,
                 token = requirementCardDto.token,
                 typeCode = requirementCardDto.typeCode,
@@ -42,8 +42,8 @@ data class RequirementCard(
                 address = requirementCardDto.address,
                 oldAddress = requirementCardDto.oldAddress,
                 distance = requirementCardDto.distance,
-                status = RequirementStatus.getStatusFromString(requirementCardDto.status),
-                subStatus = RequirementStatus.getStatusFromString(requirementCardDto.subStatus),
+                status = RequirementStatus.getStatusFromRequirementCardDto(requirementCardDto),
+                subStatus = requirementCardDto.subStatus,
                 phoneNumber = requirementCardDto.safetyNumber ?: requirementCardDto.tel,
                 requirementQnas = requirementCardDto.requirementQnas,
                 estimationId = requirementCardDto.estimationId,
@@ -58,6 +58,5 @@ data class RequirementCard(
                 closedAt = requirementCardDto.closedAt,
                 createdAt = requirementCardDto.createdAt,
             )
-        }
     }
 }

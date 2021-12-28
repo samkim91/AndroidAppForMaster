@@ -8,9 +8,9 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.dto.common.CodeDto
-import kr.co.soogong.master.data.dto.requirement.RequirementDto
 import kr.co.soogong.master.data.dto.requirement.estimation.EstimationDto
 import kr.co.soogong.master.data.dto.requirement.repair.RepairDto
+import kr.co.soogong.master.data.model.requirement.Requirement
 import kr.co.soogong.master.data.model.requirement.estimation.EstimationResponseCode
 import kr.co.soogong.master.domain.usecase.requirement.GetCanceledReasonsUseCase
 import kr.co.soogong.master.domain.usecase.requirement.GetRequirementUseCase
@@ -33,8 +33,8 @@ class CancelViewModel @Inject constructor(
     private val requirementId =
         CancelActivityHelper.getRequirementIdFromSavedState(savedStateHandle)
 
-    private val _requirement = MutableLiveData<RequirementDto>()
-    val requirement: LiveData<RequirementDto>
+    private val _requirement = MutableLiveData<Requirement>()
+    val requirement: LiveData<Requirement>
         get() = _requirement
 
     val canceledReasons = MutableLiveData<List<CodeDto>>()

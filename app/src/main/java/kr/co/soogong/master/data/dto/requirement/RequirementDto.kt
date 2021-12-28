@@ -18,40 +18,37 @@ data class RequirementDto(
     val id: Int,
 
     @SerializedName("token")
-    val token: String?,
-
-    @SerializedName("uid")
-    val uid: String?,
+    val token: String,
 
     @SerializedName("typeCode")
-    val typeCode: String?,
+    val typeCode: String,
 
     @SerializedName("typeName")
-    val typeName: String?,
+    val typeName: String,
 
     @SerializedName("projectId")
-    val projectId: Int?,
+    val projectId: Int,
 
     @SerializedName("projectName")
     val projectName: String?,
 
     @SerializedName("address")
-    val address: String?,
+    val address: String,
 
     @SerializedName("oldAddress")
     val oldAddress: String?,
 
     @SerializedName("distance")
-    val distance: Int? = null,
+    val distance: Int?,
 
     @SerializedName("status")
-    val status: String?,
+    val status: String,
 
-    @SerializedName("subStatus")
-    val subStatus: String?,
+    @SerializedName("subStatusCode")
+    val subStatus: String,
 
     @SerializedName("tel")
-    val tel: String?,
+    val tel: String,
 
     @SerializedName("safetyNumber")
     val safetyNumber: String? = null,
@@ -75,25 +72,25 @@ data class RequirementDto(
     val images: MutableList<AttachmentDto>?,
 
     @SerializedName("canceledCode")
-    val canceledCode: String? = null,
+    val canceledCode: String?,
 
     @SerializedName("cancelName")
-    val cancelName: String? = null,
+    val cancelName: String?,
 
     @SerializedName("canceledDescription")
-    val canceledDescription: String? = null,
+    val canceledDescription: String?,
 
     @SerializedName("canceledBy")
-    val canceledBy: String? = null,
+    val canceledBy: String?,
 
     @SerializedName("closedAt")
-    val closedAt: Date?,
+    val closedAt: Date,
 
     @SerializedName("createdAt")
-    val createdAt: Date?,
+    val createdAt: Date,
 
     @SerializedName("updatedAt")
-    val updatedAt: Date?,
+    val updatedAt: Date,
 ) : Parcelable {
     companion object {
 

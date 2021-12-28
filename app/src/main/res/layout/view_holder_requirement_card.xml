@@ -62,11 +62,11 @@
                 android:id="@+id/lf_status"
                 android:layout_width="@dimen/gap_68"
                 android:layout_height="@dimen/gap_32"
+                app:colorTheme="@{data.status.theme}"
                 app:content="@{data.status.inKorean}"
                 app:layout_constraintBottom_toBottomOf="@id/tv_created_at"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/tv_requirement_token"
-                app:setThemeFromRequirementCard="@{data}" />
+                app:layout_constraintTop_toTopOf="@id/tv_requirement_token" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_address"

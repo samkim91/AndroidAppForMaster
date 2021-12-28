@@ -10,8 +10,8 @@ import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.dto.requirement.RequirementDto
 import kr.co.soogong.master.data.model.profile.Review
+import kr.co.soogong.master.data.model.requirement.Requirement
 import kr.co.soogong.master.data.model.requirement.estimation.EstimationPriceTypeCode
 import kr.co.soogong.master.data.model.requirement.repair.CanceledReason
 import kr.co.soogong.master.databinding.ViewSubheadlineContentTagBinding
@@ -63,10 +63,10 @@ class SubheadlineContentTag @JvmOverloads constructor(
         fun addRequirementQnas(
             context: Context,
             container: ViewGroup,
-            requirementDto: RequirementDto,
+            requirement: Requirement,
         ) {
             // Qna 추가
-            requirementDto.requirementQnas?.let { qnaList ->
+            requirement.requirementQnas?.let { qnaList ->
                 qnaList.map { qna ->
                     SubheadlineContentTag(context).also { item ->
                         item.subheadline = qna.question
@@ -79,15 +79,15 @@ class SubheadlineContentTag @JvmOverloads constructor(
             // description 추가
             SubheadlineContentTag(context).also { item ->
                 item.subheadline = context.getString(R.string.view_requirement_description)
-                item.content = requirementDto.description
+                item.content = requirement.description
                 container.addView(item, params)
             }
 
             // images 추가
-            if (requirementDto.images.isNullOrEmpty()) return
+            if (requirement.images.isNullOrEmpty()) return
             TitleRectangleImages(context).also { item ->
                 item.label = context.getString(R.string.view_requirement_images_label)
-                item.images = requirementDto.images
+                item.images = requirement.images
                 container.addView(item, params)
             }
         }
@@ -95,9 +95,9 @@ class SubheadlineContentTag @JvmOverloads constructor(
         fun addEstimationDetail(
             context: Context,
             container: ViewGroup,
-            requirementDto: RequirementDto,
+            requirement: Requirement,
         ) {
-            requirementDto.estimationDto?.let { estimation ->
+            requirement.estimationDto?.let { estimation ->
                 // 총 견적가
                 SubheadlineContentTag(context).also { item ->
                     item.subheadline = context.getString(R.string.estimation_total_cost)
@@ -148,9 +148,9 @@ class SubheadlineContentTag @JvmOverloads constructor(
         fun addDoneDetail(
             context: Context,
             container: ViewGroup,
-            requirementDto: RequirementDto,
+            requirement: Requirement,
         ) {
-            requirementDto.estimationDto?.let { estimation ->
+            requirement.estimationDto?.let { estimation ->
                 // 최종 시공가
                 SubheadlineContentTag(context).also { item ->
                     item.subheadline = context.getString(R.string.repair_actual_price)
@@ -160,7 +160,7 @@ class SubheadlineContentTag @JvmOverloads constructor(
                     container.addView(item, params)
                 }
                 // 제안 내용
-                addEstimationDetail(context, container, requirementDto)
+                addEstimationDetail(context, container, requirement)
             }
         }
 
@@ -168,10 +168,10 @@ class SubheadlineContentTag @JvmOverloads constructor(
         fun addPreviousEstimation(
             context: Context,
             container: ViewGroup,
-            requirementDto: RequirementDto,
+            requirement: Requirement,
         ) {
-            requirementDto.measurement?.let { measurement ->
-                requirementDto.previousRequirementDto?.let { preRequirement ->
+            requirement.measurement?.let { measurement ->
+                requirement.previousRequirementDto?.let { preRequirement ->
                     // 부가 정보 부제목
                     AppCompatTextView(context).apply {
                         text = context.getString(R.string.subtitle_of_previous_estimation)
@@ -216,10 +216,10 @@ class SubheadlineContentTag @JvmOverloads constructor(
                     }
 
                     // 실측자료(사진)
-                    if (requirementDto.measurement.images.isNullOrEmpty()) return
+                    if (requirement.measurement.images.isNullOrEmpty()) return
                     TitleRectangleImages(context).also { item ->
                         item.label = context.getString(R.string.measure_attachment_label)
-                        item.images = requirementDto.measurement.images
+                        item.images = requirement.measurement.images
                         container.addView(item, params)
                     }
                 }
@@ -229,13 +229,13 @@ class SubheadlineContentTag @JvmOverloads constructor(
         fun addCanceledReason(
             context: Context,
             container: ViewGroup,
-            requirementDto: RequirementDto,
+            requirement: Requirement,
         ) {
-            requirementDto.let { requirement ->
+            requirement.let { mRequirement ->
                 SubheadlineContentTag(context).also { item ->
                     item.subheadline = context.getString(R.string.canceled_reason)
                     item.content =
-                        CanceledReason.getCanceledReasonFromCode(requirement.canceledCode).inKorean
+                        CanceledReason.getCanceledReasonFromCode(mRequirement.canceledCode).inKorean
                     container.addView(item, params)
                 }
 
@@ -250,9 +250,9 @@ class SubheadlineContentTag @JvmOverloads constructor(
         fun addReviewDetail(
             context: Context,
             container: ViewGroup,
-            requirementDto: RequirementDto,
+            requirement: Requirement,
         ) {
-            requirementDto.estimationDto?.repair?.review?.let { review ->
+            requirement.estimationDto?.repair?.review?.let { review ->
                 ReviewViewHolderHelper.create(container).also { viewHolder ->
                     viewHolder.binding(context, Review.fromReviewDto(review))
                     viewHolder.itemView.layoutParams.let { params ->

@@ -6,8 +6,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import kr.co.soogong.master.data.dto.requirement.RequirementDto
 import kr.co.soogong.master.data.dto.requirement.repair.RepairDto
+import kr.co.soogong.master.data.model.requirement.Requirement
 import kr.co.soogong.master.domain.usecase.requirement.GetRequirementUseCase
 import kr.co.soogong.master.domain.usecase.requirement.SaveRepairUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
@@ -25,7 +25,7 @@ class EndRepairViewModel @Inject constructor(
     private val requirementId =
         EndRepairActivityHelper.getRequirementIdFromSavedState(savedStateHandle)
 
-    private val _requirement = MutableLiveData<RequirementDto>()
+    private val _requirement = MutableLiveData<Requirement>()
 
     val actualPrice = MutableLiveData<String>()
     val actualDate = MutableLiveData(Calendar.getInstance())

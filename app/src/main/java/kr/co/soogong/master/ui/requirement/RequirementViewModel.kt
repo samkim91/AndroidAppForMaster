@@ -28,6 +28,8 @@ open class RequirementViewModel @Inject constructor(
     val requirements = ListLiveData<RequirementCard>()
     val customerRequests = MutableLiveData<CustomerRequest>()
 
+    val isEmptyList = MutableLiveData(false)
+
     fun initList() {
         Timber.tag(TAG).d("onRefresh: ")
         requirements.clear()
@@ -42,6 +44,7 @@ open class RequirementViewModel @Inject constructor(
 
     private fun requestRequirements() {
         Timber.tag(TAG).d("requestRequirements: ${mainTabIndex.value} / ${filterTabIndex.value}")
+        isEmptyList.postValue(false)
 
         requirementViewModelAggregate.getRequirementCardsUseCase(
             RequirementStatus.getRequirementStatusFromTabIndex(mainTabIndex.value,
@@ -61,8 +64,9 @@ open class RequirementViewModel @Inject constructor(
                 onError = {
                     Timber.tag(TAG).d("requestRequirements failed: $it")
                     // 인피니티 스크롤에서 데이터가 없는 것은 보여줄 필요가 없기 때문에, 예외처리
-                    if ((it as HttpException).code() != HttpURLConnection.HTTP_NOT_FOUND) setAction(
-                        REQUEST_FAILED)
+                    if ((it as HttpException).code() != HttpURLConnection.HTTP_NOT_FOUND)
+                        setAction(REQUEST_FAILED)
+                    else isEmptyList.postValue(true)
                 }
             ).addToDisposable()
     }

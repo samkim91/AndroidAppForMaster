@@ -8,7 +8,7 @@ import kr.co.soogong.master.atomic.molecules.Title3Container.Companion.PREVIOUS_
 import kr.co.soogong.master.atomic.molecules.Title3Container.Companion.REPAIR_TYPE
 import kr.co.soogong.master.atomic.molecules.Title3Container.Companion.REQUIREMENT_TYPE
 import kr.co.soogong.master.atomic.molecules.Title3Container.Companion.REVIEW_TYPE
-import kr.co.soogong.master.data.dto.requirement.RequirementDto
+import kr.co.soogong.master.data.model.requirement.Requirement
 import kr.co.soogong.master.data.model.requirement.RequirementStatus
 import kr.co.soogong.master.data.model.requirement.estimation.EstimationResponseCode
 import kr.co.soogong.master.databinding.ActivityViewRequirementBinding
@@ -18,26 +18,26 @@ import timber.log.Timber
 fun setFlexibleContainer(
     context: Context,
     binding: ActivityViewRequirementBinding,
-    requirement: RequirementDto,
+    requirement: Requirement,
 ) {
     Timber.tag("ViewRequirementActivity").d("setFlexibleContainer: ")
 
     with(binding) {
         flexibleContainer.removeAllViews()
 
-        when (RequirementStatus.getStatusFromRequirement(requirement)) {
+        when (requirement.status) {
             is RequirementStatus.Requested, RequirementStatus.RequestMeasure -> {
                 // view : 고객 요청 내용, 이전 실측 내용(있으면)
                 Title3Container.addIconLabelContainer(
                     context = context,
                     container = flexibleContainer,
-                    requirementDto = requirement,
+                    requirement = requirement,
                     contentType = REQUIREMENT_TYPE)
                 requirement.measurement?.let {
                     Title3Container.addIconLabelContainer(
                         context = context,
                         container = flexibleContainer,
-                        requirementDto = requirement,
+                        requirement = requirement,
                         contentType = PREVIOUS_ESTIMATION_TYPE)
                 }
             }
@@ -49,7 +49,7 @@ fun setFlexibleContainer(
                         Title3Container.addIconLabelContainer(
                             context = context,
                             container = flexibleContainer,
-                            requirementDto = requirement,
+                            requirement = requirement,
                             contentType = ESTIMATION_TYPE,
                         )
                     }
@@ -57,14 +57,14 @@ fun setFlexibleContainer(
                     Title3Container.addIconLabelContainer(
                         context = context,
                         container = flexibleContainer,
-                        requirementDto = requirement,
+                        requirement = requirement,
                         contentType = REQUIREMENT_TYPE,
                     )
                     requirement.measurement?.let {
                         Title3Container.addIconLabelContainer(
                             context = context,
                             container = flexibleContainer,
-                            requirementDto = requirement,
+                            requirement = requirement,
                             contentType = PREVIOUS_ESTIMATION_TYPE,
                         )
                     }
@@ -76,20 +76,20 @@ fun setFlexibleContainer(
                 Title3Container.addIconLabelContainer(
                     context = context,
                     container = flexibleContainer,
-                    requirementDto = requirement,
+                    requirement = requirement,
                     contentType = ESTIMATION_TYPE,
                 )
                 Title3Container.addIconLabelContainer(
                     context = context,
                     container = flexibleContainer,
-                    requirementDto = requirement,
+                    requirement = requirement,
                     contentType = REQUIREMENT_TYPE,
                 )
                 requirement.measurement?.let {
                     Title3Container.addIconLabelContainer(
                         context = context,
                         container = flexibleContainer,
-                        requirementDto = requirement,
+                        requirement = requirement,
                         contentType = PREVIOUS_ESTIMATION_TYPE,
                     )
                 }
@@ -100,20 +100,20 @@ fun setFlexibleContainer(
                 Title3Container.addIconLabelContainer(
                     context = context,
                     container = flexibleContainer,
-                    requirementDto = requirement,
+                    requirement = requirement,
                     contentType = REQUIREMENT_TYPE,
                 )
                 Title3Container.addIconLabelContainer(
                     context = context,
                     container = flexibleContainer,
-                    requirementDto = requirement,
+                    requirement = requirement,
                     contentType = ESTIMATION_TYPE,
                 )
                 requirement.measurement?.let {
                     Title3Container.addIconLabelContainer(
                         context = context,
                         container = flexibleContainer,
-                        requirementDto = requirement,
+                        requirement = requirement,
                         contentType = PREVIOUS_ESTIMATION_TYPE,
                     )
                 }
@@ -124,20 +124,20 @@ fun setFlexibleContainer(
                 Title3Container.addIconLabelContainer(
                     context = context,
                     container = flexibleContainer,
-                    requirementDto = requirement,
+                    requirement = requirement,
                     contentType = REPAIR_TYPE,
                 )
                 Title3Container.addIconLabelContainer(
                     context = context,
                     container = flexibleContainer,
-                    requirementDto = requirement,
+                    requirement = requirement,
                     contentType = REQUIREMENT_TYPE,
                 )
                 requirement.measurement?.let {
                     Title3Container.addIconLabelContainer(
                         context = context,
                         container = flexibleContainer,
-                        requirementDto = requirement,
+                        requirement = requirement,
                         contentType = PREVIOUS_ESTIMATION_TYPE,
                     )
                 }
@@ -149,26 +149,26 @@ fun setFlexibleContainer(
                 Title3Container.addIconLabelContainer(
                     context = context,
                     container = flexibleContainer,
-                    requirementDto = requirement,
+                    requirement = requirement,
                     contentType = REVIEW_TYPE,
                 )
                 Title3Container.addIconLabelContainer(
                     context = context,
                     container = flexibleContainer,
-                    requirementDto = requirement,
+                    requirement = requirement,
                     contentType = REPAIR_TYPE,
                 )
                 Title3Container.addIconLabelContainer(
                     context = context,
                     container = flexibleContainer,
-                    requirementDto = requirement,
+                    requirement = requirement,
                     contentType = REQUIREMENT_TYPE,
                 )
                 requirement.measurement?.let {
                     Title3Container.addIconLabelContainer(
                         context = context,
                         container = flexibleContainer,
-                        requirementDto = requirement,
+                        requirement = requirement,
                         contentType = PREVIOUS_ESTIMATION_TYPE,
                     )
                 }
@@ -180,27 +180,24 @@ fun setFlexibleContainer(
                 Title3Container.addIconLabelContainer(
                     context = context,
                     container = flexibleContainer,
-                    requirementDto = requirement,
+                    requirement = requirement,
                     contentType = CANCEL_TYPE,
                 )
                 Title3Container.addIconLabelContainer(
                     context = context,
                     container = flexibleContainer,
-                    requirementDto = requirement,
+                    requirement = requirement,
                     contentType = REQUIREMENT_TYPE,
                 )
                 requirement.measurement?.let {
                     Title3Container.addIconLabelContainer(
                         context = context,
                         container = flexibleContainer,
-                        requirementDto = requirement,
+                        requirement = requirement,
                         contentType = PREVIOUS_ESTIMATION_TYPE,
                     )
                 }
                 binding.requirementBasic.buttonCallToCustomerVisibility = false
-            }
-
-            else -> {
             }
         }
     }

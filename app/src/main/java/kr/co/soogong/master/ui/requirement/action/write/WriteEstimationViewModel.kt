@@ -9,9 +9,9 @@ import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.common.CodeTable
 import kr.co.soogong.master.data.dto.common.AttachmentDto
-import kr.co.soogong.master.data.dto.requirement.RequirementDto
 import kr.co.soogong.master.data.dto.requirement.estimation.EstimationDto
 import kr.co.soogong.master.data.dto.requirement.estimation.EstimationPriceDto
+import kr.co.soogong.master.data.model.requirement.Requirement
 import kr.co.soogong.master.data.model.requirement.estimation.EstimationPriceTypeCode
 import kr.co.soogong.master.data.model.requirement.estimation.EstimationResponseCode
 import kr.co.soogong.master.domain.usecase.requirement.GetRequirementUseCase
@@ -35,8 +35,8 @@ class WriteEstimationViewModel @Inject constructor(
     private val requirementId =
         WriteEstimationActivityHelper.getRequirementIdFromSavedState(savedStateHandle)
 
-    private val _requirement = MutableLiveData<RequirementDto>()
-    val requirement: LiveData<RequirementDto>
+    private val _requirement = MutableLiveData<Requirement>()
+    val requirement: LiveData<Requirement>
         get() = _requirement
 
     val simpleCost = MutableLiveData("")

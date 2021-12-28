@@ -8,7 +8,7 @@ import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.constraintlayout.widget.ConstraintLayout
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.common.CodeTable
-import kr.co.soogong.master.data.dto.requirement.RequirementDto
+import kr.co.soogong.master.data.model.requirement.Requirement
 import kr.co.soogong.master.databinding.ViewIconLabelContainerBinding
 import kr.co.soogong.master.utility.extension.dp
 
@@ -39,7 +39,7 @@ class Title3Container @JvmOverloads constructor(
         fun addIconLabelContainer(
             context: Context,
             container: ViewGroup,
-            requirementDto: RequirementDto,
+            requirement: Requirement,
             contentType: Int,
         ) {
             Title3Container(context).also { item ->
@@ -50,7 +50,7 @@ class Title3Container @JvmOverloads constructor(
                         SubheadlineContentTag.addRequirementQnas(
                             context,
                             item.detailContainer,
-                            requirementDto,
+                            requirement,
                         )
                     }
                     PREVIOUS_ESTIMATION_TYPE -> {
@@ -59,19 +59,19 @@ class Title3Container @JvmOverloads constructor(
                         SubheadlineContentTag.addPreviousEstimation(
                             context,
                             item.detailContainer,
-                            requirementDto
+                            requirement
                         )
                     }
                     ESTIMATION_TYPE -> {
                         item.title =
-                            if (CodeTable.getCodeTableByCode(requirementDto.typeCode!!) == CodeTable.SECRETARY)
+                            if (CodeTable.getCodeTableByCode(requirement.typeCode) == CodeTable.SECRETARY)
                                 context.getString(R.string.view_requirement_my_measurement_label)
                             else
                                 context.getString(R.string.view_requirement_my_estimation_label)
                         SubheadlineContentTag.addEstimationDetail(
                             context,
                             item.detailContainer,
-                            requirementDto,
+                            requirement,
                         )
                     }
                     REPAIR_TYPE -> {
@@ -80,7 +80,7 @@ class Title3Container @JvmOverloads constructor(
                         SubheadlineContentTag.addDoneDetail(
                             context,
                             item.detailContainer,
-                            requirementDto
+                            requirement
                         )
                     }
                     CANCEL_TYPE -> {
@@ -89,7 +89,7 @@ class Title3Container @JvmOverloads constructor(
                         SubheadlineContentTag.addCanceledReason(
                             context,
                             item.detailContainer,
-                            requirementDto
+                            requirement
                         )
                     }
                     REVIEW_TYPE -> {
@@ -98,7 +98,7 @@ class Title3Container @JvmOverloads constructor(
                         SubheadlineContentTag.addReviewDetail(
                             context,
                             item.detailContainer,
-                            requirementDto
+                            requirement
                         )
                     }
                 }

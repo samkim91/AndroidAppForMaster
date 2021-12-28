@@ -8,10 +8,10 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.common.CodeTable
-import kr.co.soogong.master.data.dto.requirement.RequirementDto
 import kr.co.soogong.master.data.dto.requirement.estimation.EstimationDto
 import kr.co.soogong.master.data.dto.requirement.repair.RepairDto
 import kr.co.soogong.master.data.model.profile.Review
+import kr.co.soogong.master.data.model.requirement.Requirement
 import kr.co.soogong.master.data.model.requirement.estimation.EstimationResponseCode
 import kr.co.soogong.master.domain.usecase.profile.GetMasterSimpleInfoUseCase
 import kr.co.soogong.master.domain.usecase.requirement.*
@@ -35,8 +35,8 @@ class ViewRequirementViewModel @Inject constructor(
         MutableLiveData(ViewRequirementActivityHelper.getRequirementIdFromSavedState(
             savedStateHandle))
 
-    private val _requirement = MutableLiveData<RequirementDto>()
-    val requirement: LiveData<RequirementDto>
+    private val _requirement = MutableLiveData<Requirement>()
+    val requirement: LiveData<Requirement>
         get() = _requirement
 
     private val _review = MutableLiveData<Review>()
