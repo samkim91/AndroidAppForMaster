@@ -10,7 +10,7 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentManager
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.dto.requirement.RequirementDto
+import kr.co.soogong.master.data.model.requirement.Requirement
 import kr.co.soogong.master.data.model.requirement.RequirementStatus
 import kr.co.soogong.master.databinding.ActivityViewRequirementBinding
 import kr.co.soogong.master.ui.dialog.popup.DefaultDialog
@@ -29,7 +29,7 @@ fun setBottomButtons(
     activity: ViewRequirementActivity,
     viewModel: ViewRequirementViewModel,
     binding: ActivityViewRequirementBinding,
-    requirement: RequirementDto,
+    requirement: Requirement,
 ) {
     Timber.tag("ViewRequirementActivity").d("setBottomButtons: ")
 
@@ -37,7 +37,7 @@ fun setBottomButtons(
         buttonLeft.isVisible = false
         buttonRight.isVisible = false
 
-        when (RequirementStatus.getStatusFromRequirement(requirement)) {
+        when (requirement.status) {
             is RequirementStatus.Requested -> {
                 // buttons : 1. 시공 완료, 2. 견적 거절, 3. 견적 보내기
                 addEndRepairButton(activity, binding.flexibleContainer, requirement)
@@ -94,7 +94,7 @@ fun setBottomButtons(
 private fun addEndRepairButton(
     context: Context,
     container: ViewGroup,
-    requirementDto: RequirementDto,
+    requirement: Requirement,
 ) {
     val params = LinearLayoutCompat.LayoutParams(
         ViewGroup.LayoutParams.MATCH_PARENT,
@@ -116,7 +116,7 @@ private fun addEndRepairButton(
             context.startActivity(
                 EndRepairActivityHelper.getIntent(
                     context,
-                    requirementDto.id
+                    requirement.id
                 )
             )
         }

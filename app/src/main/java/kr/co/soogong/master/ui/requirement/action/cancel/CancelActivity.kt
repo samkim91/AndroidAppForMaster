@@ -57,7 +57,7 @@ class CancelActivity : BaseActivity<ActivityCancelBinding>(
 
                 // 실측 요청 -> 거절
                 // 이외(실측 예정, 실측 완료, 매칭 대기, 시공 예정 등) -> 시공 취소
-                if (viewModel.requirement.value?.status == RequirementStatus.RequestMeasure.code) viewModel.respondToMeasure() else viewModel.saveRepair()
+                if (viewModel.requirement.value?.status is RequirementStatus.RequestMeasure) viewModel.respondToMeasure() else viewModel.saveRepair()
             }
 
             srgCanceledOptions.addCheckedChangeListener { group, checkedId ->

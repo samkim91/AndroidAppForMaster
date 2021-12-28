@@ -52,6 +52,9 @@ data class RequirementCardDto(
     @SerializedName("requirementQnas")
     val requirementQnas: List<RequirementQnaDto>,
 
+    @SerializedName("requestConsultingYn")
+    val requestConsultingYn: Boolean,
+
     @SerializedName("estimationId")
     val estimationId: Int,
 

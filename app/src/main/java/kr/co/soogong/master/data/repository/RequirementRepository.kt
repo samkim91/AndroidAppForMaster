@@ -28,7 +28,7 @@ class RequirementRepository @Inject constructor(
     fun getRequirementById(requirementId: Int): Single<RequirementDto> {
         Timber.tag(TAG).d("getRequirementFromAll start: $requirementId")
         return getRequirementFromServer(requirementId)
-            .onErrorResumeNext(getRequirementFromLocal(requirementId))
+//            .onErrorResumeNext(getRequirementFromLocal(requirementId))
             .doOnError { Timber.tag(TAG).d("getRequirementById failed: ") }
     }
 
@@ -43,10 +43,10 @@ class RequirementRepository @Inject constructor(
     private fun getRequirementFromServer(requirementId: Int): Single<RequirementDto> {
         Timber.tag(TAG).d("getRequirementFromServer start: $requirementId")
         return requirementService.getRequirement(requirementId, getMasterUidFromSharedUseCase()!!)
-            .doOnSuccess {
-                Timber.tag(TAG).d("getRequirementFromServer: ")
-                saveRequirementInLocal(it)
-            }
+//            .doOnSuccess {
+//                Timber.tag(TAG).d("getRequirementFromServer: ")
+//                saveRequirementInLocal(it)
+//            }
     }
 
     private fun saveRequirementInLocal(requirementDto: RequirementDto) {

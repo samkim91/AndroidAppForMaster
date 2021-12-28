@@ -6,11 +6,9 @@ import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.dto.requirement.RequirementDto
+import kr.co.soogong.master.data.model.requirement.Requirement
 import kr.co.soogong.master.databinding.ViewRequirementBasicBinding
 import kr.co.soogong.master.utility.extension.formatDateWithoutDay
-import kr.co.soogong.master.utility.extension.setContentFromRequirement
-import kr.co.soogong.master.utility.extension.setThemeFromRequirement
 import java.util.*
 
 class RequirementBasic @JvmOverloads constructor(
@@ -38,12 +36,12 @@ class RequirementBasic @JvmOverloads constructor(
             }
         }
 
-    var status: RequirementDto? = null
+    var status: Requirement? = null
         set(value) {
             field = value
             value?.let {
-                binding.ftStatus.setContentFromRequirement(value)
-                binding.ftStatus.setThemeFromRequirement(value)
+                binding.ftStatus.content = value.status.inKorean
+                binding.ftStatus.colorTheme = value.status.theme
             }
         }
 
