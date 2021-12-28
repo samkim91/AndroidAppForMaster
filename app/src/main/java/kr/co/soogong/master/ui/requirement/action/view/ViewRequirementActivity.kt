@@ -45,11 +45,8 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
             vm = viewModel
             lifecycleOwner = this@ViewRequirementActivity
 
-            with(actionBar) {
-                backButton.setOnClickListener {
-                    super.onBackPressed()
-                }
-                title.text = getString(R.string.view_requirement_action_title)
+            abHeader.setButtonBackClickListener {
+                onBackPressed()
             }
         }
     }
@@ -60,7 +57,6 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
             if (!isValidRequirement(requirement)) return@observe
             setFlexibleContainer(this, binding, requirement)
             setBottomButtons(this, viewModel, binding, requirement)
-            setLayoutForRequestConsult(requirement)
             showDialogForCallingCustomer(requirement)
         })
 
@@ -70,52 +66,25 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                     toast(getString(R.string.refuse_to_estimate_or_measure_successfully_text))
                     onBackPressed()
                 }
-                INVALID_REQUIREMENT -> {
-                    onBackPressed()
+                INVALID_REQUIREMENT -> onBackPressed()
+                CALL_TO_CUSTOMER_SUCCESSFULLY -> viewModel.requirement.value?.let {
+                    startActivity(CallToCustomerHelper.getIntent(it.phoneNumber))
                 }
-                CALL_TO_CUSTOMER_SUCCESSFULLY -> {
-                    viewModel.requirement.value?.let {
-                        startActivity(CallToCustomerHelper.getIntent(it.phoneNumber))
-                    }
-                }
-                RESPOND_TO_MEASURE_SUCCESSFULLY -> {
-                    // 화면 리프레시 하고 다이얼로그 띄우기
-                    viewModel.requestRequirement()
-                }
-                ASK_FOR_REVIEW_SUCCESSFULLY -> {
-                    toast(getString(R.string.ask_for_review_successful))
-                }
+                // 화면 리프레시 하고 다이얼로그 띄우기
+                RESPOND_TO_MEASURE_SUCCESSFULLY -> viewModel.requestRequirement()
+                ASK_FOR_REVIEW_SUCCESSFULLY -> toast(getString(R.string.ask_for_review_successful))
                 NOT_APPROVED_MASTER -> {
                     toast(getString(R.string.not_approved_master))
                     onBackPressed()
                 }
-                REQUEST_FAILED -> {
-                    toast(getString(R.string.error_message_of_request_failed))
-                }
+                REQUEST_FAILED -> toast(getString(R.string.error_message_of_request_failed))
             }
         })
     }
 
-    private fun setLayoutForRequestConsult(requirement: Requirement) {
-        (requirement.status is RequirementStatus.RequestConsult).let { boolean ->
-
-            // NOTE: 상호 통화한 적이 한번도 없으면 다이얼로그로 전화하라고 안내
-            if (boolean && requirement.estimationDto?.fromMasterCallCnt == 0 && requirement.estimationDto.fromClientCallCnt == 0) {
-                DefaultDialog.newInstance(
-                    DialogData.getRequestConsultAlertDialogData()
-                ).let {
-                    it.setButtonsClickListener(
-                        onPositive = {},
-                        onNegative = {}
-                    )
-                    it.show(supportFragmentManager, it.tag)
-                }
-            }
-        }
-    }
-
     private fun showDialogForCallingCustomer(requirement: Requirement) {
         when (requirement.status) {
+            // NOTE: 매칭대기 상태에서, 전화기능이 오픈되었다는 것을 안내
             is RequirementStatus.Estimated -> {
                 DefaultDialog.newInstance(DialogData.getNoticeForCallingCustomerInViewRequirement())
                     .let {
@@ -126,6 +95,22 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                         it.show(supportFragmentManager, it.tag)
                     }
             }
+
+            // NOTE: 상담요청 상태에서, 상호 통화한 적이 한번도 없으면 전화하라고 안내
+            is RequirementStatus.RequestConsult -> {
+                if (requirement.estimationDto?.fromMasterCallCnt == 0 && requirement.estimationDto.fromClientCallCnt == 0) {
+                    DefaultDialog.newInstance(DialogData.getRequestConsultAlertDialogData())
+                        .let {
+                            it.setButtonsClickListener(
+                                onPositive = {},
+                                onNegative = {}
+                            )
+                            it.show(supportFragmentManager, it.tag)
+                        }
+                }
+            }
+
+            // NOTE: 실측예정 상태에서, 상호 통화한 적이 한번도 없으면 전화하라고 안내
             is RequirementStatus.Measuring -> {
                 if (requirement.estimationDto?.fromMasterCallCnt == 0 && requirement.estimationDto.fromClientCallCnt == 0) {
                     DefaultDialog.newInstance(DialogData.getRecommendingCallingCustomer())
@@ -138,8 +123,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                         }
                 }
             }
-            else -> {
-            }
+            else -> Unit
         }
     }
 

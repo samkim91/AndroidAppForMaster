@@ -162,10 +162,8 @@
     <string name="requirements_card_review_button_done">리뷰 요청을 완료했어요!</string>
 
     <string name="requirements_card_due_date">견적 마감일 : </string>
-    <string name="requirements_card_estimation_due_time">견적 마감까지 %s</string>
-    <string name="requirements_card_request_measure_due_time">응답 마감까지 %s</string>
-    <string name="requirements_card_due_time">응답 마감시간 : </string>
-    <string name="requirements_card_response_measure_due_date">실측 선택 마감 : </string>
+    <string name="requirements_card_estimation_due_time">견적 마감시간 %s</string>
+    <string name="requirements_card_request_measure_due_time">응답 마감시간 %s</string>
     <string name="requirements_card_done_date">시공 완료일 : </string>
     <string name="requirements_card_view_detail">자세히 보기</string>
     <string name="requirements_card_amount_title">나의 견적가 :</string>

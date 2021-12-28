@@ -26,8 +26,9 @@ fun setFlexibleContainer(
         flexibleContainer.removeAllViews()
 
         when (requirement.status) {
+            // 견적요청, 실측요청
+            // view : 고객 요청 내용, 이전 실측 내용(있으면)
             is RequirementStatus.Requested, RequirementStatus.RequestMeasure -> {
-                // view : 고객 요청 내용, 이전 실측 내용(있으면)
                 Title3Container.addIconLabelContainer(
                     context = context,
                     container = flexibleContainer,
@@ -42,37 +43,36 @@ fun setFlexibleContainer(
                 }
             }
 
+            // 상담요청
+            // view : 나의 제안 내용(있으면), 고객 요청 내용, 이전 실측 내용(있으면)
             is RequirementStatus.RequestConsult -> {
-                (requirement.estimationDto?.masterResponseCode == EstimationResponseCode.ACCEPTED).let { accepted ->
-                    if (accepted) {
-                        // view : 나의 제안 내용
-                        Title3Container.addIconLabelContainer(
-                            context = context,
-                            container = flexibleContainer,
-                            requirement = requirement,
-                            contentType = ESTIMATION_TYPE,
-                        )
-                    }
-                    // view : 고객 요청 내용, 이전 실측 내용(있으면)
+                if (requirement.estimationDto?.masterResponseCode == EstimationResponseCode.ACCEPTED) {
                     Title3Container.addIconLabelContainer(
                         context = context,
                         container = flexibleContainer,
                         requirement = requirement,
-                        contentType = REQUIREMENT_TYPE,
+                        contentType = ESTIMATION_TYPE,
                     )
-                    requirement.measurement?.let {
-                        Title3Container.addIconLabelContainer(
-                            context = context,
-                            container = flexibleContainer,
-                            requirement = requirement,
-                            contentType = PREVIOUS_ESTIMATION_TYPE,
-                        )
-                    }
+                }
+                Title3Container.addIconLabelContainer(
+                    context = context,
+                    container = flexibleContainer,
+                    requirement = requirement,
+                    contentType = REQUIREMENT_TYPE,
+                )
+                requirement.measurement?.let {
+                    Title3Container.addIconLabelContainer(
+                        context = context,
+                        container = flexibleContainer,
+                        requirement = requirement,
+                        contentType = PREVIOUS_ESTIMATION_TYPE,
+                    )
                 }
             }
 
+            // 매칭대기, 실측완료
+            // view : 나의 제안 내용, 고객 요청 내용, 이전 실측 내용
             is RequirementStatus.Estimated, RequirementStatus.Measured -> {
-                // view : 나의 제안 내용, 고객 요청 내용, 이전 실측 내용
                 Title3Container.addIconLabelContainer(
                     context = context,
                     container = flexibleContainer,
@@ -95,8 +95,9 @@ fun setFlexibleContainer(
                 }
             }
 
+            // 시공예정, 실측예정
+            // view : 고객 요청 내용, 나의 제안 내용, 이전 실측 내용
             is RequirementStatus.Repairing, RequirementStatus.Measuring -> {
-                // view : 고객 요청 내용, 나의 제안 내용, 이전 실측 내용
                 Title3Container.addIconLabelContainer(
                     context = context,
                     container = flexibleContainer,
@@ -119,8 +120,9 @@ fun setFlexibleContainer(
                 }
             }
 
+            // 시공완료
+            // view : 나의 최종 시공 내용, 고객 요청 내용, 이전 실측 내용(있으면)
             is RequirementStatus.Done -> {
-                // view : 나의 최종 시공 내용, 고객 요청 내용, 이전 실측 내용(있으면)
                 Title3Container.addIconLabelContainer(
                     context = context,
                     container = flexibleContainer,
@@ -144,8 +146,9 @@ fun setFlexibleContainer(
                 binding.requirementBasic.buttonCallToCustomerVisibility = false
             }
 
+            // 평가완료
+            // view : 고객 리뷰, 나의 최종 시공 내용, 고객 요청 내용, 이전 실측 내용(있으면)
             is RequirementStatus.Closed -> {
-                // view : 고객 리뷰, 나의 최종 시공 내용, 고객 요청 내용, 이전 실측 내용(있으면)
                 Title3Container.addIconLabelContainer(
                     context = context,
                     container = flexibleContainer,
@@ -175,8 +178,9 @@ fun setFlexibleContainer(
                 binding.requirementBasic.buttonCallToCustomerVisibility = false
             }
 
+            // 시공취소
+            // view : 시공 취소 사유, 고객 요청 내용, 이전 실측 내용(있으면)
             is RequirementStatus.Canceled -> {
-                // view : 시공 취소 사유, 고객 요청 내용, 이전 실측 내용(있으면)
                 Title3Container.addIconLabelContainer(
                     context = context,
                     container = flexibleContainer,

@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentManager
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.model.requirement.Requirement
 import kr.co.soogong.master.data.model.requirement.RequirementStatus
+import kr.co.soogong.master.data.model.requirement.estimation.EstimationResponseCode
 import kr.co.soogong.master.databinding.ActivityViewRequirementBinding
 import kr.co.soogong.master.ui.dialog.popup.DefaultDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData
@@ -22,9 +23,10 @@ import kr.co.soogong.master.uihelper.requirment.action.WriteEstimationActivityHe
 import kr.co.soogong.master.utility.extension.dp
 import timber.log.Timber
 
-// 버튼은 총 3가지로 구성되어 있다.
-// #1 버튼 : flexibleContainer 하단에 추가되는 버튼
-// #2, 3 버튼 : ViewRequirement 하단에 고정되는 좌/우 버튼
+// 버튼은 총 4가지로 구성되어 있다.
+// #1 버튼 : RequirementBasic 에 포함된 전화연결 버튼
+// #2 버튼 : flexibleContainer 하단에 추가되는 버튼
+// #3, 4 버튼 : ViewRequirement 하단에 고정되는 좌/우 버튼
 fun setBottomButtons(
     activity: ViewRequirementActivity,
     viewModel: ViewRequirementViewModel,
@@ -38,55 +40,71 @@ fun setBottomButtons(
         buttonRight.isVisible = false
 
         when (requirement.status) {
+            // 견적요청
+            // Buttons : 2. 시공완료, 3. 견적거절, 4. 견적보내기
             is RequirementStatus.Requested -> {
-                // buttons : 1. 시공 완료, 2. 견적 거절, 3. 견적 보내기
                 addEndRepairButton(activity, binding.flexibleContainer, requirement)
-                setRefuseEstimationButton(activity,
-                    activity.supportFragmentManager,
-                    viewModel,
-                    buttonLeft)
-                setAcceptEstimationButton(activity, viewModel, buttonRight)
+                buttonLeft.setRefuseEstimation(activity.supportFragmentManager, viewModel)
+                buttonRight.setAcceptEstimation(viewModel)
             }
 
+            // 매칭대기
+            // Buttons : 1. 전화연결, 3. 시공완료
             is RequirementStatus.Estimated -> {
-                // Button : 3. 시공 완료
-                setEndRepairButton(activity, viewModel, buttonRight)
+                binding.requirementBasic.buttonCallToCustomerVisibility = true
+                buttonRight.setEndRepair(viewModel)
             }
 
+            // 상담요청
+            // Buttons: 1. 전화연결,
+            RequirementStatus.RequestConsult -> {
+                binding.requirementBasic.buttonCallToCustomerVisibility = true
+
+                // 견적을 냈으면 -> 매칭대기와 같이 3. 시공완료
+                // 견적을 안 냈으면 -> 견적요청과 같이 2. 시공완료, 3. 견적거절, 4. 견적보내기
+                if (requirement.estimationDto?.masterResponseCode == EstimationResponseCode.ACCEPTED) {
+                    buttonRight.setEndRepair(viewModel)
+                } else {
+                    addEndRepairButton(activity, binding.flexibleContainer, requirement)
+                    buttonLeft.setRefuseEstimation(activity.supportFragmentManager, viewModel)
+                    buttonRight.setAcceptEstimation(viewModel)
+                }
+            }
+
+            // 실측요청
+            // Buttons : 1. 전화연결, 2. 시공완료, 3. 실측거절, 4. 실측수락
             is RequirementStatus.RequestMeasure -> {
-                // Buttons : 1. 시공 완료, 2. 실측 거절, 3. 실측 수락
+                binding.requirementBasic.buttonCallToCustomerVisibility = true
                 addEndRepairButton(activity, binding.flexibleContainer, requirement)
-                setRefuseMeasureButton(activity,
-                    activity.supportFragmentManager,
-                    viewModel,
-                    buttonLeft)
-                setAcceptMeasureButton(activity,
-                    activity.supportFragmentManager,
-                    viewModel,
-                    buttonRight)
+                buttonLeft.setRefuseMeasure(activity.supportFragmentManager, viewModel)
+                buttonRight.setAcceptMeasure(activity.supportFragmentManager, viewModel)
             }
 
+            // 실측예정
+            // Buttons : 1. 전화연결, 2. 시공완료, 3. 실측취소, 4. 실측입력
             is RequirementStatus.Measuring -> {
-                // Buttons : 1. 시공 완료, 2. 실측 취소, 3. 실측 입력
+                binding.requirementBasic.buttonCallToCustomerVisibility = true
                 addEndRepairButton(activity, binding.flexibleContainer, requirement)
-                setCancelMeasureButton(activity, viewModel, buttonLeft)
-                setSendMeasureButton(activity, viewModel, buttonRight)
+                buttonLeft.setCancelMeasure(viewModel)
+                buttonRight.setSendMeasure(viewModel)
             }
 
+            // 실측완료, 시공예정
+            // Buttons : 1. 전화연결, 2. 시공취소, 3. 시공완료
             is RequirementStatus.Measured, RequirementStatus.Repairing -> {
-                // Button : 시공 취소, 시공 완료
-                setCancelRepairButton(activity, viewModel, buttonLeft)
-                setEndRepairButton(activity, viewModel, buttonRight)
+                binding.requirementBasic.buttonCallToCustomerVisibility = true
+                buttonLeft.setCancelRepair(viewModel)
+                buttonRight.setEndRepair(viewModel)
             }
 
+            // 시공완료
+            // Button : 1. 리뷰요청
             is RequirementStatus.Done -> {
-                // Button : 리뷰 요청
-                setAskReviewButton(activity, viewModel, buttonRight)
+                buttonRight.setAskReview(viewModel)
             }
 
-            else -> {
+            is RequirementStatus.Canceled, RequirementStatus.Closed ->
                 buttonsContainer.isVisible = false
-            }
         }
     }
 }
@@ -125,196 +143,160 @@ private fun addEndRepairButton(
     container.addView(textView, params)
 }
 
-private fun setAcceptEstimationButton(
-    context: Context,
+private fun AppCompatButton.setAcceptEstimation(
     viewModel: ViewRequirementViewModel,
-    button: AppCompatButton,
 ) {
-    with(button) {
-        isVisible = true
-        text = context.getString(R.string.write_estimation)
-        setOnClickListener {
-            context.startActivity(
-                WriteEstimationActivityHelper.getIntent(
-                    context,
-                    viewModel.requirementId.value!!
-                )
+    isVisible = true
+    text = context.getString(R.string.write_estimation)
+    setOnClickListener {
+        context.startActivity(
+            WriteEstimationActivityHelper.getIntent(
+                context,
+                viewModel.requirementId.value!!
             )
-        }
+        )
     }
 }
 
-private fun setRefuseEstimationButton(
-    context: Context,
+private fun AppCompatButton.setRefuseEstimation(
     fragmentManager: FragmentManager,
     viewModel: ViewRequirementViewModel,
-    button: AppCompatButton,
 ) {
-    with(button) {
-        isVisible = true
-        text = context.getString(R.string.refuse_estimation)
-        setOnClickListener {
-            DefaultDialog.newInstance(
-                DialogData.getRefuseEstimateDialogData()
-            ).let {
-                it.setButtonsClickListener(
-                    onPositive = {
-                        viewModel.refuseToEstimate()
-                    },
-                    onNegative = { }
-                )
-                it.show(fragmentManager, it.tag)
-            }
-        }
-    }
-}
-
-private fun setEndRepairButton(
-    context: Context,
-    viewModel: ViewRequirementViewModel,
-    button: AppCompatButton,
-) {
-    with(button) {
-        isVisible = true
-        text = context.getString(R.string.repair_done_text)
-        setOnClickListener {
-            context.startActivity(
-                EndRepairActivityHelper.getIntent(
-                    context,
-                    viewModel.requirementId.value!!
-                )
+    isVisible = true
+    text = context.getString(R.string.refuse_estimation)
+    setOnClickListener {
+        DefaultDialog.newInstance(
+            DialogData.getRefuseEstimateDialogData()
+        ).let {
+            it.setButtonsClickListener(
+                onPositive = {
+                    viewModel.refuseToEstimate()
+                },
+                onNegative = { }
             )
+            it.show(fragmentManager, it.tag)
         }
     }
 }
 
-private fun setRefuseMeasureButton(
-    context: Context,
+private fun AppCompatButton.setEndRepair(
+    viewModel: ViewRequirementViewModel,
+) {
+    isVisible = true
+    text = context.getString(R.string.repair_done_text)
+    setOnClickListener {
+        context.startActivity(
+            EndRepairActivityHelper.getIntent(
+                context,
+                viewModel.requirementId.value!!
+            )
+        )
+    }
+}
+
+private fun AppCompatButton.setRefuseMeasure(
     fragmentManager: FragmentManager,
     viewModel: ViewRequirementViewModel,
-    button: AppCompatButton,
 ) {
-    with(button) {
-        isVisible = true
-        text = context.getString(R.string.refuse_measure)
-        setOnClickListener {
-            DefaultDialog.newInstance(
-                DialogData.getRefuseMeasureDialogData()
-            ).let {
-                it.setButtonsClickListener(
-                    onPositive = {
-                        context.startActivity(
-                            CancelActivityHelper.getIntent(
-                                context,
-                                viewModel.requirementId.value!!
-                            )
+    isVisible = true
+    text = context.getString(R.string.refuse_measure)
+    setOnClickListener {
+        DefaultDialog.newInstance(
+            DialogData.getRefuseMeasureDialogData()
+        ).let {
+            it.setButtonsClickListener(
+                onPositive = {
+                    context.startActivity(
+                        CancelActivityHelper.getIntent(
+                            context,
+                            viewModel.requirementId.value!!
                         )
-                    },
-                    onNegative = { }
-                )
-                it.show(fragmentManager, it.tag)
-            }
+                    )
+                },
+                onNegative = { }
+            )
+            it.show(fragmentManager, it.tag)
         }
     }
 }
 
-private fun setAcceptMeasureButton(
-    context: Context,
+private fun AppCompatButton.setAcceptMeasure(
     fragmentManager: FragmentManager,
     viewModel: ViewRequirementViewModel,
-    button: AppCompatButton,
 ) {
-    with(button) {
-        isVisible = true
-        text = context.getString(R.string.accept_measure)
-        setOnClickListener {
-            DefaultDialog.newInstance(
-                DialogData.getAcceptMeasureDialogData()
-            ).let {
-                it.setButtonsClickListener(
-                    onPositive = {
-                        viewModel.respondToMeasure()
-                    },
-                    onNegative = { }
-                )
-                it.show(fragmentManager, it.tag)
-            }
-        }
-    }
-}
-
-private fun setCancelMeasureButton(
-    context: Context,
-    viewModel: ViewRequirementViewModel,
-    button: AppCompatButton,
-) {
-    with(button) {
-        isVisible = true
-        text = context.getString(R.string.cancel_measure)
-        setOnClickListener {
-            context.startActivity(
-                CancelActivityHelper.getIntent(
-                    context,
-                    viewModel.requirementId.value!!
-                )
+    isVisible = true
+    text = context.getString(R.string.accept_measure)
+    setOnClickListener {
+        DefaultDialog.newInstance(
+            DialogData.getAcceptMeasureDialogData()
+        ).let {
+            it.setButtonsClickListener(
+                onPositive = {
+                    viewModel.respondToMeasure()
+                },
+                onNegative = { }
             )
+            it.show(fragmentManager, it.tag)
         }
     }
 }
 
-private fun setCancelRepairButton(
-    context: Context,
+private fun AppCompatButton.setCancelMeasure(
     viewModel: ViewRequirementViewModel,
-    button: AppCompatButton,
 ) {
-    with(button) {
-        isVisible = true
-        text = context.getString(R.string.cancel_repair)
-        setOnClickListener {
-            context.startActivity(
-                CancelActivityHelper.getIntent(
-                    context,
-                    viewModel.requirementId.value!!
-                )
+    isVisible = true
+    text = context.getString(R.string.cancel_measure)
+    setOnClickListener {
+        context.startActivity(
+            CancelActivityHelper.getIntent(
+                context,
+                viewModel.requirementId.value!!
             )
-        }
+        )
     }
 }
 
-private fun setSendMeasureButton(
-    context: Context,
+private fun AppCompatButton.setCancelRepair(
     viewModel: ViewRequirementViewModel,
-    button: AppCompatButton,
 ) {
-    with(button) {
-        isVisible = true
-        text = context.getString(R.string.send_measure)
-        setOnClickListener {
-            context.startActivity(
-                MeasureActivityHelper.getIntent(
-                    context,
-                    viewModel.requirementId.value!!
-                )
+    isVisible = true
+    text = context.getString(R.string.cancel_repair)
+    setOnClickListener {
+        context.startActivity(
+            CancelActivityHelper.getIntent(
+                context,
+                viewModel.requirementId.value!!
             )
-        }
+        )
     }
 }
 
-private fun setAskReviewButton(
-    context: Context,
+private fun AppCompatButton.setSendMeasure(
     viewModel: ViewRequirementViewModel,
-    button: AppCompatButton,
 ) {
-    with(button) {
-        isVisible = true
-        viewModel.requirement.value?.estimationDto?.repair?.requestReviewYn?.let { requestReviewYn ->
-            if (requestReviewYn) {
-                text = context.getString(R.string.request_review_done)
-                isClickable = false
-            } else {
-                text = context.getString(R.string.request_review)
-                setOnClickListener { viewModel.askForReview() }
-            }
+    isVisible = true
+    text = context.getString(R.string.send_measure)
+    setOnClickListener {
+        context.startActivity(
+            MeasureActivityHelper.getIntent(
+                context,
+                viewModel.requirementId.value!!
+            )
+        )
+    }
+}
+
+private fun AppCompatButton.setAskReview(
+    viewModel: ViewRequirementViewModel,
+) {
+    isVisible = true
+    viewModel.requirement.value?.estimationDto?.repair?.requestReviewYn?.let { requestReviewYn ->
+        if (requestReviewYn) {
+            text = context.getString(R.string.request_review_done)
+            isClickable = false
+        } else {
+            text = context.getString(R.string.request_review)
+            setOnClickListener { viewModel.askForReview() }
         }
     }
 }
