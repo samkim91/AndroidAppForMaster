@@ -194,6 +194,8 @@
                     android:layout_height="match_parent"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:onScroll="@{vm}"
+                    app:setBottomSpace="@{15}"
+                    app:setTopSpace="@{15}"
                     app:simple_requirement_cards="@{vm.requirements}"
                     tools:listitem="@layout/view_holder_simple_requirement_item" />
             </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

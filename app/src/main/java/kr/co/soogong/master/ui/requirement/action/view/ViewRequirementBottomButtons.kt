@@ -1,12 +1,10 @@
 package kr.co.soogong.master.ui.requirement.action.view
 
 import android.content.Context
-import android.view.Gravity
 import android.view.ViewGroup
+import androidx.appcompat.view.ContextThemeWrapper
 import androidx.appcompat.widget.AppCompatButton
-import androidx.appcompat.widget.AppCompatTextView
 import androidx.appcompat.widget.LinearLayoutCompat
-import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentManager
 import kr.co.soogong.master.R
@@ -114,33 +112,32 @@ private fun addEndRepairButton(
     container: ViewGroup,
     requirement: Requirement,
 ) {
-    val params = LinearLayoutCompat.LayoutParams(
-        ViewGroup.LayoutParams.MATCH_PARENT,
-        ViewGroup.LayoutParams.WRAP_CONTENT
-    ).apply {
-        setMargins(0, 24.dp, 0, 28.dp)
-    }
-
-    val textView = AppCompatTextView(context).apply {
-        height = 48.dp
-        text = context.getString(R.string.repair_done_text)
-        gravity = Gravity.CENTER
-        background = ResourcesCompat.getDrawable(resources,
-            R.drawable.bg_solid_white_stroke_light_grey2_radius8,
-            null)
-        setTextColor(ResourcesCompat.getColor(resources, R.color.black, null))
-        setTextAppearance(R.style.footnote_regular)
-        setOnClickListener {
-            context.startActivity(
-                EndRepairActivityHelper.getIntent(
-                    context,
-                    requirement.id
-                )
-            )
+    container.addView(
+        // style 로 정의된 theme 을 적용하려고, ContextThemeWrapper 과 병행하여 AppCompatButton 생성 시 style 을 추가! 무슨 이유인지 하나만 하면 적용이 안 됨.
+        AppCompatButton(
+            ContextThemeWrapper(context, R.style.button_medium_outlined_secondary),
+            null,
+            R.style.button_medium_outlined_secondary)
+            .apply {
+                text = context.getString(R.string.repair_done_text)
+                height = 48.dp      // style 에 정의된 height 가 작용하지 않아서, 다시 set
+                setOnClickListener {
+                    context.startActivity(
+                        EndRepairActivityHelper.getIntent(
+                            context,
+                            requirement.id
+                        )
+                    )
+                }
+            },
+        // 위 아래 간격 부여
+        LinearLayoutCompat.LayoutParams(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        ).apply {
+            setMargins(0, 24.dp, 0, 24.dp)
         }
-    }
-
-    container.addView(textView, params)
+    )
 }
 
 private fun AppCompatButton.setAcceptEstimation(

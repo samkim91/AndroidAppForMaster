@@ -41,6 +41,7 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:onScroll="@{vm}"
                 app:requirement_cards="@{vm.requirements}"
+                app:setTopSpace="@{8}"
                 tools:listitem="@layout/view_holder_requirement_card" />
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 

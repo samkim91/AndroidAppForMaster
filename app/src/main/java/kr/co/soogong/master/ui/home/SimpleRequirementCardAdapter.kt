@@ -9,17 +9,13 @@ import kr.co.soogong.master.data.model.requirement.RequirementCard
 import kr.co.soogong.master.databinding.ViewHolderSimpleRequirementItemBinding
 import kr.co.soogong.master.ui.requirement.RequirementViewModel
 import kr.co.soogong.master.ui.requirement.card.RequirementCardDiffUtil
-import kr.co.soogong.master.utility.extension.dp
 
 class SimpleRequirementCardAdapter(
     private val context: Context,
     private val fragmentManager: FragmentManager,
     private val viewModel: RequirementViewModel,
 ) : ListAdapter<RequirementCard, SimpleRequirementCardViewHolder>(RequirementCardDiffUtil()) {
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int,
-    ): SimpleRequirementCardViewHolder =
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         SimpleRequirementCardViewHolder(
             ViewHolderSimpleRequirementItemBinding.inflate(
                 LayoutInflater.from(parent.context),
@@ -28,13 +24,6 @@ class SimpleRequirementCardAdapter(
             )
         )
 
-    override fun onBindViewHolder(holder: SimpleRequirementCardViewHolder, position: Int) {
-        holder.itemView.layoutParams =
-            (holder.itemView.layoutParams as ViewGroup.MarginLayoutParams).apply {
-                bottomMargin = 15.dp
-                topMargin = 15.dp
-            }
-
+    override fun onBindViewHolder(holder: SimpleRequirementCardViewHolder, position: Int) =
         holder.bind(context, fragmentManager, viewModel, currentList[position], position)
-    }
 }

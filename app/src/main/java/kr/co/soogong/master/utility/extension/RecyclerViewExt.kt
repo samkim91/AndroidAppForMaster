@@ -12,6 +12,13 @@ import kr.co.soogong.master.data.dto.profile.ProjectDto
 import kr.co.soogong.master.data.model.common.EndlessScrollableViewModel
 import kr.co.soogong.master.ui.major.category.CategoryAdapter
 import kr.co.soogong.master.ui.major.project.ProjectAdapter
+import kr.co.soogong.master.utility.SpaceItemDecoration
+
+@BindingAdapter(value = ["setStartSpace", "setTopSpace", "setEndSpace", "setBottomSpace"],
+    requireAll = false)
+fun RecyclerView.setItemSpace(startSpace: Int?, topSpace: Int?, endSpace: Int?, bottomSpace: Int?) {
+    this.addItemDecoration(SpaceItemDecoration(startSpace, topSpace, endSpace, bottomSpace))
+}
 
 @BindingAdapter("setDivider")
 fun RecyclerView.setDivider(drawable: Drawable) {
@@ -21,6 +28,7 @@ fun RecyclerView.setDivider(drawable: Drawable) {
 
     this.addItemDecoration(dividerItemDecoration)
 }
+
 
 @BindingAdapter("categories")
 fun RecyclerView.setCategories(items: List<CategoryDto>?) {
