@@ -64,8 +64,8 @@
                 android:id="@+id/switch_group"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                bind:visible="@{vm.masterSimpleInfo.secretaryYn &amp;&amp; vm.masterSimpleInfo.freeMeasureYn}"
                 app:constraint_referenced_ids="tv_for_switch, switch_compat"
+                bind:visible="@{vm.masterSimpleInfo.secretaryYn &amp;&amp; vm.masterSimpleInfo.freeMeasureYn}"
                 tools:visibility="visible" />
 
             <androidx.constraintlayout.widget.Barrier
@@ -193,6 +193,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:onScroll="@{vm}"
                     app:simple_requirement_cards="@{vm.requirements}"
                     tools:listitem="@layout/view_holder_simple_requirement_item" />
             </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

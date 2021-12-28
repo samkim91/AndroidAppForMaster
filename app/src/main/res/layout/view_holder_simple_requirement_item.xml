@@ -94,13 +94,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/gap_8"
-
+            android:text="@{@string/kilo_meters_digit(data.distance)}"
             android:textColor="@color/grey_3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toEndOf="@id/line"
             app:layout_constraintTop_toTopOf="@id/text_view_address"
-            tools:text="68m" />
-        <!--        android:text="@{data.distance.toString() + 'm'}"-->
+            tools:text="6km" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
