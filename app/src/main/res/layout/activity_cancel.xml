@@ -9,53 +9,74 @@
             type="kr.co.soogong.master.ui.requirement.action.cancel.CancelViewModel" />
     </data>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <include
-            android:id="@+id/action_bar"
-            layout="@layout/action_bar_button" />
+        <kr.co.soogong.master.atomic.molecules.ActionBar
+            android:id="@+id/ab_header"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="wrap_content"
+            app:backButtonVisibility="@{true}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="@{@string/canceled_reason}" />
 
         <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:overScrollMode="never">
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="@dimen/gap_0"
+            android:fillViewport="true"
+            android:overScrollMode="never"
+            app:layout_constraintBottom_toTopOf="@id/iv_button_container"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ab_header">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/gap_16">
 
-                <kr.co.soogong.master.ui.widget.TitleRadioGroup
-                    android:id="@+id/canceled_options"
+                <kr.co.soogong.master.atomic.molecules.SubheadlineRadioGroup
+                    android:id="@+id/srg_canceled_options"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/gap_20"
-                    android:layout_marginTop="@dimen/gap_52"
-                    android:layout_marginEnd="@dimen/gap_20"
-                    app:alertText="@{@string/alert_required_field}"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:title="@{@string/cancel_estimate_cancel_option_label}" />
+                    app:subheadline="@{@string/reason_for_cancellation}" />
 
-                <kr.co.soogong.master.ui.widget.TitleEditTextCounter
-                    android:id="@+id/cancel_option_detail"
-                    android:layout_width="@dimen/gap_0"
+                <kr.co.soogong.master.atomic.molecules.SubheadlineTextareaCounter
+                    android:id="@+id/stc_description"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/cancel_estimation_default_margin_start_20"
-                    android:layout_marginTop="@dimen/cancel_estimation_margin_top_52"
-                    android:layout_marginEnd="@dimen/cancel_estimation_default_margin_end_20"
-                    app:alertText="@{@string/alert_fill_text_over_10}"
+                    android:layout_marginTop="@dimen/gap_24"
                     app:content="@={vm.canceledDescription}"
-                    app:hintText="@{@string/asking_write_canceled_reason_detail_label}"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/canceled_options"
-                    app:limitedCount='@{100}'
-                    app:title="@{@string/asking_write_detail_label}" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    app:hint="@{@string/canceled_reason_detail}"
+                    app:maxCount="@{100}"
+                    app:subheadline="@{@string/write_detail_description}" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
         </ScrollView>
-    </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_button_container"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/gap_64"
+            android:background="@color/white"
+            android:elevation="@dimen/gap_10"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/b_cancel"
+            style="@style/button.big.primary"
+            android:layout_marginStart="@dimen/gap_16"
+            android:layout_marginEnd="@dimen/gap_16"
+            android:elevation="@dimen/gap_10"
+            android:text="@string/writing_done"
+            app:layout_constraintBottom_toBottomOf="@id/iv_button_container"
+            app:layout_constraintEnd_toEndOf="@id/iv_button_container"
+            app:layout_constraintStart_toStartOf="@id/iv_button_container"
+            app:layout_constraintTop_toTopOf="@id/iv_button_container" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

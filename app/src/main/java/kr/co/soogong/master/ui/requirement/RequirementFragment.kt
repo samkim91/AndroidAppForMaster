@@ -2,24 +2,26 @@ package kr.co.soogong.master.ui.requirement
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.model.profile.NotApprovedCodeTable
-import kr.co.soogong.master.data.model.profile.RequestApproveCodeTable
 import kr.co.soogong.master.databinding.FragmentRequirementBinding
 import kr.co.soogong.master.ui.base.BaseFragment
-import kr.co.soogong.master.ui.dialog.popup.CustomDialog
+import kr.co.soogong.master.ui.dialog.popup.DefaultDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData
+import kr.co.soogong.master.ui.requirement.RequirementViewModel.Companion.ASK_FOR_REVIEW_SUCCESSFULLY
 import kr.co.soogong.master.ui.requirement.RequirementViewModel.Companion.REQUEST_FAILED
-import kr.co.soogong.master.uihelper.profile.EditRequiredInformationActivityHelper
+import kr.co.soogong.master.ui.requirement.list.RequirementListPagerAdapter
+import kr.co.soogong.master.ui.requirement.list.TAB_TEXTS_REQUIREMENTS_BEFORE_PROGRESS
+import kr.co.soogong.master.ui.requirement.list.TAB_TEXTS_REQUIREMENTS_IN_PROGRESS
 import kr.co.soogong.master.uihelper.requirment.RequirementsBadge
 import kr.co.soogong.master.uihelper.requirment.action.SearchActivityHelper
 import kr.co.soogong.master.uihelper.requirment.action.ViewRequirementActivityHelper
 import kr.co.soogong.master.utility.EventObserver
+import kr.co.soogong.master.utility.extension.changeTabFont
+import kr.co.soogong.master.utility.extension.setTabClickListener
 import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
 
@@ -43,44 +45,62 @@ class RequirementFragment : BaseFragment<FragmentRequirementBinding>(
         bind {
             lifecycleOwner = viewLifecycleOwner
 
-            with(requirementsViewPager) {
-                isUserInputEnabled = false
-                adapter = RequirementPagerAdapter(this@RequirementFragment)
-                TabLayoutMediator(mainTabs, this) { tab, position ->
-                    tab.text = getString(TabTextList[position])
-                }.attach()
-            }
+            mainTabs.changeTabFont(0, R.style.title_3_bold)
+            mainTabs.setTabClickListener(
+                onSelected = { tab ->
+                    tab?.position.let {
+                        mainTabs.changeTabFont(it, R.style.title_3_bold)
+                        viewModel.mainTabIndex.value = it
+                        setViewPager()
+                    }
+                },
+                onUnselected = { tab ->
+                    mainTabs.changeTabFont(tab?.position, R.style.title_3_regular)
+                }
+            )
 
-            searchBar.setSearchEditTextClickListener {
+            filterTabs.changeTabFont(0, R.style.subheadline_regular)
+            filterTabs.setTabClickListener(
+                onSelected = { tab ->
+                    tab?.position.let {
+                        viewModel.filterTabIndex.value = it
+                        filterTabs.changeTabFont(it, R.style.subheadline_bold)
+                    }
+                },
+                onUnselected = { tab ->
+                    filterTabs.changeTabFont(tab?.position, R.style.subheadline_regular)
+                }
+            )
+
+            setSearchIconClick {
                 startActivity(SearchActivityHelper.getIntent(requireContext()))
             }
 
-            bottomView.container.setOnClickListener {
-                startActivity(EditRequiredInformationActivityHelper.getIntent(requireContext()))
-            }
+            setViewPager()
+        }
+    }
 
-            acceptingMeasurementSwitch.setSwitchClick { _, isChecked ->
-                viewModel.updateRequestMeasureYn(isChecked)
+    private fun setViewPager() {
+        Timber.tag(TAG).d("setViewPager start: ${viewModel.mainTabIndex.value}")
+        viewModel.mainTabIndex.value?.let { mainTabIndex ->
+            bind {
+                with(requirementsViewPager) {
+                    adapter = RequirementListPagerAdapter(this@RequirementFragment, mainTabIndex)
+                    TabLayoutMediator(filterTabs, this) { tab, position ->
+                        tab.text =
+                            if (mainTabIndex == 0) getString(TAB_TEXTS_REQUIREMENTS_BEFORE_PROGRESS[position])
+                            else getString(TAB_TEXTS_REQUIREMENTS_IN_PROGRESS[position])
+                    }.attach()
+                }
             }
         }
     }
 
     private fun registerEventObserve() {
-        viewModel.masterSimpleInfo.observe(viewLifecycleOwner, { masterDto ->
-            binding.bottomView.root.isVisible =
-                masterDto.approvedStatus == NotApprovedCodeTable.code || masterDto.approvedStatus == RequestApproveCodeTable.code
-
-            binding.acceptingMeasurementSwitch.setLayoutForRequestMeasure(masterDto = masterDto)
-        })
-
-        viewModel.requestMeasureYn.observe(viewLifecycleOwner, { requestMeasureYn ->
-            binding.acceptingMeasurementSwitch.changeTextAndBackgroundForRequestMeasure(
-                requestMeasureYn)
-        })
-
         viewModel.action.observe(viewLifecycleOwner, EventObserver { action ->
             when (action) {
                 REQUEST_FAILED -> requireContext().toast(getString(R.string.error_message_of_request_failed))
+                ASK_FOR_REVIEW_SUCCESSFULLY -> requireContext().toast(getString(R.string.requirements_card_review_button_done))
             }
         })
 
@@ -93,14 +113,22 @@ class RequirementFragment : BaseFragment<FragmentRequirementBinding>(
                     showDialogForViewRequirement(REQUEST_CONSULTING, request.requestConsultingList)
             }
         })
+
+        viewModel.mainTabIndex.observe(viewLifecycleOwner, { index ->
+
+        })
+
+        viewModel.filterTabIndex.observe(viewLifecycleOwner, { index ->
+
+        })
     }
 
     fun showDialogForViewRequirement(type: Int, list: List<Int>) {
-        CustomDialog.newInstance(
+        DefaultDialog.newInstance(
             dialogData = if (type == REQUEST_MEASURE)
-                DialogData.getNoticeForRequestMeasure(requireContext(), list.count())
+                DialogData.getNoticeForRequestMeasure(list.count())
             else
-                DialogData.getNoticeForRequestConsulting(requireContext(), list.count())
+                DialogData.getNoticeForRequestConsulting(list.count())
         ).let {
             it.setButtonsClickListener(
                 onPositive = {
@@ -125,7 +153,7 @@ class RequirementFragment : BaseFragment<FragmentRequirementBinding>(
 
     private fun checkShowNoticeForCalling() {
         if (viewModel.getShowNoticeForCalling())
-            CustomDialog.newInstance(DialogData.getNoticeForCallingToCustomer(requireContext()))
+            DefaultDialog.newInstance(DialogData.getNoticeForCallingToCustomer())
                 .let {
                     it.setButtonsClickListener(
                         onPositive = { },
@@ -166,7 +194,7 @@ class RequirementFragment : BaseFragment<FragmentRequirementBinding>(
 
     private fun visibleBadge(tab: TabLayout.Tab?, badgeCount: Int) {
         tab?.orCreateBadge?.number = badgeCount
-        tab?.badge?.badgeTextColor = resources.getColor(R.color.color_FFFFFF, null)
+        tab?.badge?.badgeTextColor = resources.getColor(R.color.c_FFFFFF, null)
     }
 
     private fun invisibleBadge(tab: TabLayout.Tab?) {
@@ -179,8 +207,6 @@ class RequirementFragment : BaseFragment<FragmentRequirementBinding>(
         private const val REQUEST_MEASURE = 10
         private const val REQUEST_CONSULTING = 20
 
-        fun newInstance(): RequirementFragment {
-            return RequirementFragment()
-        }
+        fun newInstance() = RequirementFragment()
     }
 }

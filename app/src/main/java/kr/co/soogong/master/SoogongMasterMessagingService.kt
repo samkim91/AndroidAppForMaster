@@ -42,7 +42,7 @@ class SoogongMasterMessagingService : FirebaseMessagingService() {
 
         val builder = NotificationCompat.Builder(this, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_notification_icon)
-            .setColor(resources.getColor(R.color.color_22D47B, null))
+            .setColor(resources.getColor(R.color.c_22D47B, null))
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setContentTitle(remoteMessage.data["Title"])
             .setContentText(remoteMessage.data["Body"])

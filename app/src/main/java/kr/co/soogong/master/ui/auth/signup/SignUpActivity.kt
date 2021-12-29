@@ -9,7 +9,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ActivitySignUpBinding
 import kr.co.soogong.master.ui.base.BaseActivity
-import kr.co.soogong.master.ui.dialog.popup.CustomDialog
+import kr.co.soogong.master.ui.dialog.popup.DefaultDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData
 import kr.co.soogong.master.utility.SignUpProgressHelper
 import timber.log.Timber
@@ -80,7 +80,7 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>(
 
     override fun onBackPressed() {
         Timber.tag(TAG).d("onBackPressed: ")
-        CustomDialog.newInstance(DialogData.getQuitSignUpDialogData(this@SignUpActivity))
+        DefaultDialog.newInstance(DialogData.getQuitSignUpDialogData())
             .let {
                 it.setButtonsClickListener(
                     onPositive = { },

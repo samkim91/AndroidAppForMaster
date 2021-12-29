@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="data"
+            type="kr.co.soogong.master.data.model.requirement.RequirementCard" />
+
+        <variable
+            name="number"
+            type="String" />
+
+        <variable
+            name="card_click_listener"
+            type="android.view.View.OnClickListener" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="@{card_click_listener}">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/image_view_number"
+            android:layout_width="@dimen/gap_40"
+            android:layout_height="@dimen/gap_40"
+            android:background="@drawable/shape_gray_background_circle_40"
+            app:layout_constraintBottom_toBottomOf="@id/text_view_project"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/text_view_project" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_view_number"
+            style="@style/call_out.bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{number}"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="@id/image_view_number"
+            app:layout_constraintEnd_toEndOf="@id/image_view_number"
+            app:layout_constraintStart_toStartOf="@id/image_view_number"
+            app:layout_constraintTop_toTopOf="@id/image_view_number"
+            tools:text="01" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_view_project"
+            style="@style/call_out.bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/gap_20"
+            android:text="@{data.projectName}"
+            android:textColor="@color/dark_grey_1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toEndOf="@id/image_view_number"
+            app:layout_constraintTop_toTopOf="@id/image_view_number"
+            tools:text="욕실 위생도기 및 수전 설치/교체" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_view_address"
+            style="@style/footnote.regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{data.oldAddress != null ? data.oldAddress : data.address}"
+            android:textColor="@color/grey_3"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintEnd_toStartOf="@id/line"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="@id/text_view_project"
+            app:layout_constraintTop_toBottomOf="@id/text_view_project"
+            tools:text="서울시 관악구 봉천동 70" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/line"
+            android:layout_width="@dimen/gap_1"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/gap_8"
+            android:layout_marginTop="@dimen/gap_2"
+            android:layout_marginBottom="@dimen/gap_2"
+            android:background="@color/light_grey_2"
+            app:layout_constraintBottom_toBottomOf="@id/text_view_distance"
+            app:layout_constraintEnd_toStartOf="@id/text_view_distance"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toEndOf="@id/text_view_address"
+            app:layout_constraintTop_toTopOf="@id/text_view_distance" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_view_distance"
+            style="@style/footnote.regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/gap_8"
+            android:text="@{@string/kilo_meters_digit(data.distance)}"
+            android:textColor="@color/grey_3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toEndOf="@id/line"
+            app:layout_constraintTop_toTopOf="@id/text_view_address"
+            tools:text="6km" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

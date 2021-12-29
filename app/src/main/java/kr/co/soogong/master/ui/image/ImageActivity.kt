@@ -1,7 +1,6 @@
 package kr.co.soogong.master.ui.image
 
 import android.os.Bundle
-import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -10,7 +9,7 @@ import androidx.core.view.isVisible
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.dto.AttachmentDto
+import kr.co.soogong.master.data.dto.common.AttachmentDto
 import kr.co.soogong.master.databinding.ActivityImageBinding
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.uihelper.image.ImageViewActivityHelper
@@ -62,7 +61,7 @@ class ImageActivity : BaseActivity<ActivityImageBinding>(
                     postDelayed({
                         Timber.tag(TAG).i("setCurrentItem: $startPosition")
                         setCurrentItem(startPosition, false)
-                        visibility = View.VISIBLE
+                        isVisible = true
                     }, 500)
                 }
             }

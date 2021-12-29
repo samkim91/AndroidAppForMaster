@@ -8,7 +8,7 @@
         android:shape="line">
 
         <stroke
-            android:color="@color/color_0C5E47"
+            android:color="@color/c_0C5E47"
             android:width="@dimen/gap_1"
             android:dashGap="@dimen/gap_2"
             android:dashWidth="@dimen/gap_2"/>

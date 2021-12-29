@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:bind="http://schemas.android.com/bind">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
 
     <data>
 
@@ -10,165 +10,98 @@
 
         <import type="android.text.InputType" />
 
+        <import type="kr.co.soogong.master.data.common.ButtonTheme" />
+
         <variable
             name="vm"
-            type="kr.co.soogong.master.ui.profile.detail.requiredinformation.businessunitinformation.EditBusinessUnitInformationViewModel" />
+            type="kr.co.soogong.master.ui.profile.detail.businessunitinformation.EditBusinessUnitInformationViewModel" />
+
+        <variable
+            name="buttonThemeGettingImages"
+            type="ButtonTheme" />
+
+        <variable
+            name="gettingImagesClickListener"
+            type="android.view.View.OnClickListener" />
 
     </data>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:fillViewport="true"
-            android:overScrollMode="never">
+        <kr.co.soogong.master.atomic.molecules.SubheadlineChipGroup
+            android:id="@+id/scg_business_type"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="wrap_content"
+            app:checkedChipCode="@={vm.businessType}"
+            app:chipRequired="@{true}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:singleChip="@{true}"
+            app:subheadline="@{@string/select_business_type}" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingStart="@dimen/gap_20"
-                android:paddingTop="@dimen/gap_32"
-                android:paddingEnd="@dimen/gap_20"
-                android:paddingBottom="@dimen/gap_52">
+        <kr.co.soogong.master.atomic.molecules.SubheadlineTextInput
+            android:id="@+id/sti_business_name"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_16"
+            app:content="@={vm.businessName}"
+            app:hint="@{@string/type_business_name_hint}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/scg_business_type"
+            app:maxCount="@{30}"
+            app:subheadline="@{@string/type_business_name}" />
 
-                <kr.co.soogong.master.ui.widget.TitleChipGroup
-                    android:id="@+id/business_unit_type"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:alertText='@{"필수 정보입니다."}'
-                    app:blackSubTitle="@{false}"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:title='@{"사업자 등록여부를 알려주세요."}' />
+        <kr.co.soogong.master.atomic.molecules.SubheadlineTextInput
+            android:id="@+id/sti_shop_name"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_16"
+            app:content="@={vm.shopName}"
+            app:hint="@{@string/type_shop_name_hint}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sti_business_name"
+            app:subheadline="@{@string/type_shop_name}" />
 
-                <androidx.constraintlayout.widget.Barrier
-                    android:id="@+id/barrier"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:barrierDirection="bottom"
-                    app:barrierMargin="@dimen/gap_24"
-                    app:constraint_referenced_ids="business_unit_type" />
+        <kr.co.soogong.master.atomic.molecules.SubheadlineTextInput
+            android:id="@+id/sti_business_number"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_16"
+            app:content="@={vm.businessNumber}"
+            app:hint="@{@string/type_business_number_hint}"
+            app:inputType="@{InputType.TYPE_CLASS_NUMBER}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sti_shop_name"
+            app:subheadline="@{@string/type_business_number}" />
 
-                <kr.co.soogong.master.ui.widget.TitleEditText
-                    android:id="@+id/business_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/gap_28"
-                    app:alertText='@{"필수 정보입니다."}'
-                    app:content="@={vm.businessName}"
-                    app:hintText='@{"예시) 수공"}'
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/barrier"
-                    app:title='@{"사업자 등록상호를 입력해주세요."}' />
+        <kr.co.soogong.master.atomic.molecules.SubheadlineButtonBig
+            android:id="@+id/sbb_getting_images"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_16"
+            app:buttonText="@{@string/getting_images}"
+            app:buttonTheme="@{buttonThemeGettingImages}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sti_business_number"
+            app:onButtonClick="@{gettingImagesClickListener}"
+            app:subheadline="@{@string/upload_business_regist_image}" />
 
-                <kr.co.soogong.master.ui.widget.TitleEditText
-                    android:id="@+id/shop_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/gap_28"
-                    app:alertText='@{"2자 이상 20자 이내로 입력해주세요."}'
-                    app:content="@={vm.shopName}"
-                    app:hintText='@{"예시) 수공"}'
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/business_name"
-                    app:setMaxLength="@{20}"
-                    app:subTitle='@{"업체 이름이 없을 경우 시공하시는 분의 이름을 입력해주세요."}'
-                    app:title='@{"업체 이름을 입력해주세요."}' />
-
-                <kr.co.soogong.master.ui.widget.TitleEditText
-                    android:id="@+id/business_number"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/gap_28"
-                    app:alertText='@{"필수 정보입니다."}'
-                    app:content="@={vm.businessNumber}"
-                    app:hintText='@{"사업자등록번호 예시) 1053578512"}'
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/shop_name"
-                    app:setInputType="@{InputType.TYPE_CLASS_NUMBER}"
-                    app:setMaxLength="@{10}"
-                    app:title='@{"사업자등록번호를 입력해주세요."}' />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/business_regist_image_holder_label"
-                    style="@style/text_style_16sp.medium"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/gap_28"
-                    android:text="@string/business_identical_image_holder_label"
-                    android:textColor="@color/text_basic_color"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/business_number" />
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/camera_icon_for_business_regist_image"
-                    android:layout_width="@dimen/gap_100"
-                    android:layout_height="@dimen/gap_100"
-                    android:layout_marginTop="@dimen/gap_12"
-                    android:background="@drawable/ic_camera"
-                    app:layout_constraintStart_toStartOf="@id/business_regist_image_holder_label"
-                    app:layout_constraintTop_toBottomOf="@id/business_regist_image_holder_label"
-                    bind:visible="@{vm.businessRegistImage == Uri.EMPTY}" />
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/business_regist_image_holder"
-                    android:layout_width="@dimen/gap_100"
-                    android:layout_height="@dimen/gap_100"
-                    android:layout_marginTop="@dimen/gap_12"
-                    app:cardCornerRadius="@dimen/gap_8"
-                    app:cardElevation="@dimen/gap_0"
-                    app:layout_constraintStart_toStartOf="@id/business_regist_image_holder_label"
-                    app:layout_constraintTop_toBottomOf="@id/business_regist_image_holder_label"
-                    bind:visible="@{vm.businessRegistImage != Uri.EMPTY}">
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/image_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        bind:image_uri="@{vm.businessRegistImage}" />
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/image_view_close_icon"
-                        android:layout_width="@dimen/gap_24"
-                        android:layout_height="@dimen/gap_24"
-                        android:layout_gravity="end"
-                        android:background="@drawable/ic_close_in_image"
-                        bind:onClick="@{vm::clearImage}" />
-                </androidx.cardview.widget.CardView>
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/alert"
-                    style="@style/text_style_14sp.regular"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="@string/alert_required_field"
-                    android:textColor="@color/text_alert_color"
-                    android:visibility="gone"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/camera_icon_for_business_regist_image" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </ScrollView>
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/default_button"
-            style="@style/text_style_16sp.bold"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:background="@color/color_22D47B"
-            android:text="@string/save"
-            android:textColor="@color/basic_white" />
-    </LinearLayout>
-
+        <kr.co.soogong.master.atomic.molecules.SubheadlineImagesDeletable
+            android:id="@+id/sid_registered_images"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_24"
+            app:images="@{vm.businessRegistImage}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sbb_getting_images"
+            app:subheadline="@{@string/registered_images}" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

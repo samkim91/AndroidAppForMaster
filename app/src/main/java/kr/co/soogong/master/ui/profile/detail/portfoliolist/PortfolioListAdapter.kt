@@ -1,25 +1,27 @@
 package kr.co.soogong.master.ui.profile.detail.portfoliolist
 
-import android.view.LayoutInflater
+import android.content.Context
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import kr.co.soogong.master.data.dto.profile.PortfolioDto
-import kr.co.soogong.master.databinding.ViewHolderPortfolioBinding
 
 class PortfolioListAdapter(
-    private val leftButtonClickListener: (id: Int) -> Unit,
-    private val rightButtonClickListener: (id: Int) -> Unit
-) : ListAdapter<PortfolioDto, PortfolioViewHolder>(PortfolioListDiffUtil()) {
+    private val context: Context,
+    private val buttonLeftClickListener: (id: Int) -> Unit,
+    private val buttonRightClickListener: (id: Int) -> Unit,
+) : ListAdapter<PortfolioDto, PortfolioCommonViewHolder>(PortfolioListDiffUtil()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        PortfolioViewHolder(
-            ViewHolderPortfolioBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-            )
-        )
+        PortfolioCommonViewHolder.create(parent, viewType)
 
-    override fun onBindViewHolder(holder: PortfolioViewHolder, position: Int) {
-        holder.binding(currentList[position], leftButtonClickListener, rightButtonClickListener)
-    }
+    override fun onBindViewHolder(holder: PortfolioCommonViewHolder, position: Int) =
+        holder.binding(context,
+            currentList[position],
+            buttonLeftClickListener,
+            buttonRightClickListener)
+
+    override fun getItemViewType(position: Int): Int =
+        when (currentList[position].type) {
+            "Portfolio" -> 0
+            else -> 1
+        }
 }

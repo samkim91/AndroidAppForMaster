@@ -2,13 +2,14 @@ package kr.co.soogong.master.ui.profile.detail.email
 
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.EditorInfo
+import android.widget.ArrayAdapter
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentEditEmailBinding
 import kr.co.soogong.master.ui.base.BaseFragment
-import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogBundle
-import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogRecyclerView
+import kr.co.soogong.master.ui.profile.detail.EditProfileContainerActivity
 import kr.co.soogong.master.ui.profile.detail.EditProfileContainerViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.ui.profile.detail.EditProfileContainerViewModel.Companion.SAVE_MASTER_SUCCESSFULLY
 import kr.co.soogong.master.utility.EventObserver
@@ -38,39 +39,38 @@ class EditEmailFragment :
             vm = viewModel
             lifecycleOwner = viewLifecycleOwner
 
-            defaultButton.setOnClickListener {
-                viewModel.localPart.observe(viewLifecycleOwner, {
-                    email.alertVisible = !ValidationHelper.isValidLocalPart(it)
-                })
+            sefEmail.dropdownAdapter = ArrayAdapter(requireContext(),
+                R.layout.textview_item_dropdown,
+                viewModel.domains.map { it.first })
 
-                // 하나의 alert text 에 두개 모두를 만족해야 패스할 수 있는 방법을 찾아봐야함 ..
-                viewModel.domain.value?.let {
-                    if (!ValidationHelper.isValidDomain(it)) email.alertVisible = true
+            sefEmail.autoCompleteTextView.setOnItemClickListener { _, _, position, _ ->
+                if (position == viewModel.domains.last().second) {      // 직접 입력 시 텍스트 지움 및 수정 가능
+                    viewModel.domain.value = Pair("", viewModel.domains.last().second)
+                    sefEmail.dropdownInputType = EditorInfo.TYPE_CLASS_TEXT
+                } else {        // 직접 입력이 아닐 시 수정 불가능
+                    viewModel.domain.value = viewModel.domains[position]
+                    sefEmail.dropdownInputType = EditorInfo.TYPE_NULL
                 }
-
-                if (!email.alertVisible) viewModel.saveEmailAddress()
             }
 
-            email.addDropdownClickListener {
-                val bottomDialog =
-                    BottomDialogRecyclerView.newInstance(
-                        dialogBundle = BottomDialogBundle.getEmailDomainsBundle(),
-                        itemClick = { domain, _ ->
-                            if (domain == BottomDialogBundle.getEmailDomainsBundle().list.last().key) {
-                                viewModel.domain.value = ""
-                                email.secondDetailView.hint =
-                                    getString(R.string.email_domain_type_hint_text)
-                                email.secondDetailView.isEnabled = true
-                            } else {
-                                viewModel.domain.value = domain
-                                email.secondDetailView.hint =
-                                    getString(R.string.email_domain_default_hint_text)
-                                email.secondDetailView.isEnabled = false
-                            }
-                        }
-                    )
+            (activity as EditProfileContainerActivity).setSaveButtonClickListener {
+                // 도메인이 직접 입력일 시, 해당 값을 viewModel 에 set
+                if (viewModel.domain.value?.second == viewModel.domains.last().second) {
+                    viewModel.domain.value = Pair(sefEmail.autoCompleteTextView.text.toString(),
+                        viewModel.domains.last().second)
+                }
 
-                bottomDialog.show(parentFragmentManager, bottomDialog.tag)
+                viewModel.localPart.observe(viewLifecycleOwner, {
+                    sefEmail.error =
+                        if (!ValidationHelper.isValidLocalPart(it)) getString(R.string.invalid_email_format) else null
+                })
+
+                viewModel.domain.observe(viewLifecycleOwner, {
+                    sefEmail.dropdownError =
+                        if (!ValidationHelper.isValidDomain(it.first)) getString(R.string.invalid_email_format) else null
+                })
+
+                if (sefEmail.error.isNullOrBlank() && sefEmail.dropdownError.isNullOrBlank()) viewModel.saveEmailAddress()
             }
         }
     }
@@ -79,12 +79,8 @@ class EditEmailFragment :
         Timber.tag(TAG).d("registerEventObserve: ")
         viewModel.action.observe(viewLifecycleOwner, EventObserver { event ->
             when (event) {
-                SAVE_MASTER_SUCCESSFULLY -> {
-                    activity?.onBackPressed()
-                }
-                REQUEST_FAILED -> {
-                    requireContext().toast(getString(R.string.error_message_of_request_failed))
-                }
+                SAVE_MASTER_SUCCESSFULLY -> activity?.onBackPressed()
+                REQUEST_FAILED -> requireContext().toast(getString(R.string.error_message_of_request_failed))
             }
         })
     }

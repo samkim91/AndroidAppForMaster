@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.dto.auth.VersionDto
-import kr.co.soogong.master.ui.dialog.popup.CustomDialog
+import kr.co.soogong.master.ui.dialog.popup.DefaultDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData
 import kr.co.soogong.master.ui.splash.SplashViewModel.Companion.GET_MASTER_DIRECT_REPAIR
 import kr.co.soogong.master.ui.splash.SplashViewModel.Companion.GET_MASTER_UID_FAILED
@@ -45,11 +45,11 @@ class SplashActivity : AppCompatActivity() {
                                 .d("Ver current/latest: $currentVersion/${versionDto.version}")
 
                             if (currentVersion != versionDto.version) {
-                                CustomDialog.newInstance(
+                                DefaultDialog.newInstance(
                                     dialogData = if (versionDto.mandatoryYn)
-                                        DialogData.getUpdatingAppMandatory(this)
+                                        DialogData.getUpdatingAppMandatory()
                                     else
-                                        DialogData.getUpdatingAppRecommended(this),
+                                        DialogData.getUpdatingAppRecommended(),
                                     cancelable = false
                                 ).let {
                                     it.setButtonsClickListener(
@@ -79,17 +79,15 @@ class SplashActivity : AppCompatActivity() {
                 GET_MASTER_DIRECT_REPAIR -> {
                     (value as Boolean).let {
                         if (it) startActivity(MainActivityHelper.getIntent(this))
-                        else {
-                            CustomDialog.newInstance(
-                                dialogData = DialogData.getConfirmingDirectRepairYn(this),
-                                cancelable = false
-                            ).let { dialog ->
-                                dialog.setButtonsClickListener(
-                                    onPositive = { viewModel.updateDirectRepairYn(true) },
-                                    onNegative = { viewModel.updateDirectRepairYn(false) }
-                                )
-                                dialog.show(supportFragmentManager, dialog.tag)
-                            }
+                        else DefaultDialog.newInstance(
+                            dialogData = DialogData.getConfirmingDirectRepairYn(),
+                            cancelable = false
+                        ).let { dialog ->
+                            dialog.setButtonsClickListener(
+                                onPositive = { viewModel.updateDirectRepairYn(true) },
+                                onNegative = { viewModel.updateDirectRepairYn(false) }
+                            )
+                            dialog.show(supportFragmentManager, dialog.tag)
                         }
                     }
                 }

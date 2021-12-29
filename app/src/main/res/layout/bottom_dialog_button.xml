@@ -15,7 +15,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/gap_12"
             android:gravity="center"
-            android:textColor="@color/color_616161"
+            android:textColor="@color/c_616161"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -26,7 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/line_height"
             android:layout_marginTop="@dimen/gap_11"
-            android:background="@color/color_BDBDBD"
+            android:background="@color/c_BDBDBD"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/dialog_title" />
@@ -40,26 +40,26 @@
         <!--            app:layout_constraintTop_toBottomOf="@id/line" />-->
 
         <Button
-            android:id="@+id/left_button"
+            android:id="@+id/button_left"
             style="@style/text_style_16sp.bold"
             android:layout_width="0dp"
             android:layout_height="@dimen/gap_52"
             android:background="@android:color/transparent"
             android:textColor="@color/text_basic_color"
-            app:layout_constraintEnd_toStartOf="@+id/right_button"
+            app:layout_constraintEnd_toStartOf="@+id/button_right"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/line"
             tools:text="카메라" />
 
         <Button
-            android:id="@+id/right_button"
+            android:id="@+id/button_right"
             style="@style/text_style_16sp.bold"
             android:layout_width="0dp"
             android:layout_height="@dimen/gap_52"
             android:background="@android:color/transparent"
             android:textColor="@color/text_basic_color"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/left_button"
+            app:layout_constraintStart_toEndOf="@+id/button_left"
             app:layout_constraintTop_toBottomOf="@id/line"
             tools:text="갤러리" />
 
@@ -68,10 +68,10 @@
             android:layout_width="1dp"
             android:layout_height="16dp"
             android:background="#D8D8D8"
-            app:layout_constraintBottom_toBottomOf="@id/left_button"
-            app:layout_constraintEnd_toStartOf="@id/left_button"
-            app:layout_constraintStart_toEndOf="@id/right_button"
-            app:layout_constraintTop_toTopOf="@id/left_button" />
+            app:layout_constraintBottom_toBottomOf="@id/button_left"
+            app:layout_constraintEnd_toStartOf="@id/button_left"
+            app:layout_constraintStart_toEndOf="@id/button_right"
+            app:layout_constraintTop_toTopOf="@id/button_left" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

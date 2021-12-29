@@ -9,207 +9,219 @@
         <import type="android.text.InputType" />
 
         <variable
+            name="authPhoneNumberButtonTheme"
+            type="kr.co.soogong.master.data.common.ButtonTheme" />
+
+        <variable
             name="vm"
-            type="kr.co.soogong.master.ui.profile.detail.requiredinformation.phonenumber.EditPhoneNumberViewModel" />
+            type="kr.co.soogong.master.ui.profile.detail.phonenumber.EditPhoneNumberViewModel" />
     </data>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:fillViewport="true"
-            android:overScrollMode="never">
+        <kr.co.soogong.master.atomic.organisms.SubheadlineTextInputButtonMediumTextInputTimer
+            android:id="@+id/stibmtit_auth_phone_number"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:hint="@{@string/type_phone_number_hint}"
+            app:subheadline="@{@string/type_phone_number}"
+            app:buttonTheme="@{authPhoneNumberButtonTheme}"
+            app:buttonText="@{@string/certify}"
+            app:max="@{11}"
+            app:firstContent="@={vm.tel}"
+            app:secondContent="@={vm.certificationCode}"
+            app:inputType="@{InputType.TYPE_CLASS_NUMBER}"
+            app:textInputTimerInputType="@{InputType.TYPE_CLASS_NUMBER}"
+            app:textInputTimerMax="@{6}"
+            app:textInputTimerHint="@{@string/certification_code}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingStart="@dimen/gap_20"
-                android:paddingTop="@dimen/gap_32"
-                android:paddingEnd="@dimen/gap_20">
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_resend_certification_code"
+            style="@style/caption_1.regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_5"
+            android:paddingStart="@dimen/gap_10"
+            android:paddingTop="@dimen/gap_5"
+            android:paddingEnd="@dimen/gap_0"
+            android:text="@string/resend_certification_code"
+            tools:visibility="visible"
+            android:textColor="@color/grey_3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/stibmtit_auth_phone_number" />
+        <!--        <kr.co.soogong.master.atomic.molecules.TitleEditTextButton-->
+        <!--            android:id="@+id/id"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            app:alertText='@{"휴대폰번호 형식이 올바르지 않습니다."}'-->
+        <!--            app:buttonText='@{"인증"}'-->
+        <!--            app:firstContent="@={vm.tel}"-->
+        <!--            app:inputTypeFirst="@{InputType.TYPE_CLASS_NUMBER}"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toTopOf="parent"-->
+        <!--            app:setFirstEditTextEnable="@{true}"-->
+        <!--            app:setFirstEditTextHint='@{"숫자만 입력해주세요."}'-->
+        <!--            app:setMaxLengthFirst="@{11}"-->
+        <!--            app:setSecondEditTextVisible="@{false}"-->
+        <!--            app:subTitle='@{"연락이 가능한 휴대폰번호를 입력해주세요."}'-->
+        <!--            app:subTitleVisible="@{true}"-->
+        <!--            app:title='@{"휴대폰번호"}' />-->
 
-                <kr.co.soogong.master.ui.widget.TitleEditTextButton
-                    android:id="@+id/id"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:alertText='@{"휴대폰번호 형식이 올바르지 않습니다."}'
-                    app:buttonText='@{"인증"}'
-                    app:firstContent="@={vm.tel}"
-                    app:inputTypeFirst="@{InputType.TYPE_CLASS_NUMBER}"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:setFirstEditTextEnable="@{true}"
-                    app:setFirstEditTextHint='@{"숫자만 입력해주세요."}'
-                    app:setMaxLengthFirst="@{11}"
-                    app:setSecondEditTextVisible="@{false}"
-                    app:subTitle='@{"연락이 가능한 휴대폰번호를 입력해주세요."}'
-                    app:subTitleVisible="@{true}"
-                    app:title='@{"휴대폰번호"}' />
+        <!--        <androidx.constraintlayout.widget.ConstraintLayout-->
+        <!--            android:id="@+id/certification_code_container"-->
+        <!--            android:layout_width="@dimen/gap_0"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginTop="@dimen/gap_20"-->
+        <!--            android:visibility="gone"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toBottomOf="@id/id">-->
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/certification_code_container"
-                    android:layout_width="@dimen/gap_0"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/gap_20"
-                    android:visibility="gone"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/id">
+        <!--            <androidx.appcompat.widget.AppCompatTextView-->
+        <!--                android:id="@+id/certification_code_label"-->
+        <!--                style="@style/text_style_16sp.medium"-->
+        <!--                android:layout_width="@dimen/gap_0"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:text="@string/certification_code"-->
+        <!--                android:textColor="@color/text_basic_color"-->
+        <!--                app:layout_constraintEnd_toEndOf="parent"-->
+        <!--                app:layout_constraintStart_toStartOf="parent"-->
+        <!--                app:layout_constraintTop_toTopOf="parent" />-->
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/certification_code_label"
-                        style="@style/text_style_16sp.medium"
-                        android:layout_width="@dimen/gap_0"
-                        android:layout_height="wrap_content"
-                        android:text="@string/certification_code"
-                        android:textColor="@color/text_basic_color"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+        <!--            <androidx.appcompat.widget.AppCompatEditText-->
+        <!--                android:id="@+id/certification_code"-->
+        <!--                style="@style/text_style_14sp.regular"-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_marginTop="@dimen/gap_12"-->
+        <!--                android:background="@drawable/bg_solid_white_stroke_light_grey1_radius8"-->
+        <!--                android:hint="@string/insert_certification_code_edittext_hint"-->
+        <!--                android:inputType="numberSigned"-->
+        <!--                android:maxLength="6"-->
+        <!--                android:paddingStart="@dimen/gap_16"-->
+        <!--                android:paddingTop="@dimen/gap_10"-->
+        <!--                android:paddingEnd="@dimen/gap_16"-->
+        <!--                android:paddingBottom="@dimen/gap_10"-->
+        <!--                android:singleLine="true"-->
+        <!--                android:text="@={vm.certificationCode}"-->
+        <!--                android:textColor="@color/c_2E2E2E"-->
+        <!--                android:textColorHint="@color/text_hint_color"-->
+        <!--                app:layout_constraintEnd_toEndOf="parent"-->
+        <!--                app:layout_constraintStart_toStartOf="parent"-->
+        <!--                app:layout_constraintTop_toBottomOf="@id/certification_code_label" />-->
 
-                    <androidx.appcompat.widget.AppCompatEditText
-                        android:id="@+id/certification_code"
-                        style="@style/text_style_14sp.regular"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/gap_12"
-                        android:background="@drawable/shape_white_background_gray_border_radius8"
-                        android:hint="@string/insert_certification_code_edittext_hint"
-                        android:inputType="numberSigned"
-                        android:maxLength="6"
-                        android:paddingStart="@dimen/gap_16"
-                        android:paddingTop="@dimen/gap_10"
-                        android:paddingEnd="@dimen/gap_16"
-                        android:paddingBottom="@dimen/gap_10"
-                        android:singleLine="true"
-                        android:text="@={vm.certificationCode}"
-                        android:textColor="@color/color_2E2E2E"
-                        android:textColorHint="@color/text_hint_color"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/certification_code_label" />
+        <!--            <androidx.appcompat.widget.AppCompatTextView-->
+        <!--                android:id="@+id/timer_view"-->
+        <!--                style="@style/text_style_14sp.medium"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_marginEnd="@dimen/gap_10"-->
+        <!--                android:textColor="@color/c_FF711D"-->
+        <!--                app:layout_constraintBottom_toBottomOf="@id/certification_code"-->
+        <!--                app:layout_constraintEnd_toEndOf="@id/certification_code"-->
+        <!--                app:layout_constraintTop_toTopOf="@id/certification_code"-->
+        <!--                tools:text="0:00" />-->
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/timer_view"
-                        style="@style/text_style_14sp.medium"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/gap_10"
-                        android:textColor="@color/color_FF711D"
-                        app:layout_constraintBottom_toBottomOf="@id/certification_code"
-                        app:layout_constraintEnd_toEndOf="@id/certification_code"
-                        app:layout_constraintTop_toTopOf="@id/certification_code"
-                        tools:text="0:00" />
+        <!--            <androidx.appcompat.widget.AppCompatTextView-->
+        <!--                android:id="@+id/alert_wrong_certification_code"-->
+        <!--                style="@style/text_style_14sp.regular"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_marginTop="@dimen/gap_4"-->
+        <!--                android:text="@string/alert_wrong_certification_code"-->
+        <!--                android:textColor="@color/c_FF711D"-->
+        <!--                android:visibility="gone"-->
+        <!--                app:layout_constraintEnd_toEndOf="parent"-->
+        <!--                app:layout_constraintHorizontal_bias="0"-->
+        <!--                app:layout_constraintStart_toStartOf="parent"-->
+        <!--                app:layout_constraintTop_toBottomOf="@id/certification_code" />-->
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/alert_wrong_certification_code"
-                        style="@style/text_style_14sp.regular"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/gap_4"
-                        android:text="@string/alert_wrong_certification_code"
-                        android:textColor="@color/color_FF711D"
-                        android:visibility="gone"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/certification_code" />
+        <!--            <androidx.appcompat.widget.AppCompatTextView-->
+        <!--                android:id="@+id/alert_expired_certification_time"-->
+        <!--                style="@style/text_style_14sp.regular"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_marginTop="@dimen/gap_4"-->
+        <!--                android:text="@string/alert_expired_certification_time"-->
+        <!--                android:textColor="@color/c_FF711D"-->
+        <!--                android:visibility="gone"-->
+        <!--                app:layout_constraintEnd_toEndOf="parent"-->
+        <!--                app:layout_constraintHorizontal_bias="0"-->
+        <!--                app:layout_constraintStart_toStartOf="parent"-->
+        <!--                app:layout_constraintTop_toBottomOf="@id/alert_wrong_certification_code" />-->
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/alert_expired_certification_time"
-                        style="@style/text_style_14sp.regular"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/gap_4"
-                        android:text="@string/alert_expired_certification_time"
-                        android:textColor="@color/color_FF711D"
-                        android:visibility="gone"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/alert_wrong_certification_code" />
+        <!--            <androidx.appcompat.widget.AppCompatTextView-->
+        <!--                android:id="@+id/alert_invalid_certification_code"-->
+        <!--                style="@style/text_style_14sp.regular"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_marginTop="@dimen/gap_4"-->
+        <!--                android:text="@string/alert_invalid_certification_code"-->
+        <!--                android:textColor="@color/c_FF711D"-->
+        <!--                android:visibility="gone"-->
+        <!--                app:layout_constraintEnd_toEndOf="parent"-->
+        <!--                app:layout_constraintHorizontal_bias="0"-->
+        <!--                app:layout_constraintStart_toStartOf="parent"-->
+        <!--                app:layout_constraintTop_toBottomOf="@id/alert_expired_certification_time" />-->
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/alert_invalid_certification_code"
-                        style="@style/text_style_14sp.regular"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/gap_4"
-                        android:text="@string/alert_invalid_certification_code"
-                        android:textColor="@color/color_FF711D"
-                        android:visibility="gone"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/alert_expired_certification_time" />
+        <!--            <androidx.appcompat.widget.AppCompatTextView-->
+        <!--                android:id="@+id/alert_empty_certification_code"-->
+        <!--                style="@style/text_style_14sp.regular"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_marginTop="@dimen/gap_4"-->
+        <!--                android:text="@string/alert_empty_certification_code"-->
+        <!--                android:textColor="@color/c_FF711D"-->
+        <!--                android:visibility="gone"-->
+        <!--                app:layout_constraintEnd_toEndOf="parent"-->
+        <!--                app:layout_constraintHorizontal_bias="0"-->
+        <!--                app:layout_constraintStart_toStartOf="parent"-->
+        <!--                app:layout_constraintTop_toBottomOf="@id/alert_invalid_certification_code" />-->
+        <!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/alert_empty_certification_code"
-                        style="@style/text_style_14sp.regular"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/gap_4"
-                        android:text="@string/alert_empty_certification_code"
-                        android:textColor="@color/color_FF711D"
-                        android:visibility="gone"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/alert_invalid_certification_code" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
+        <!--        <androidx.appcompat.widget.AppCompatTextView-->
+        <!--            android:id="@+id/confirming_certification_code_received"-->
+        <!--            style="@style/text_style_14sp.medium"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginBottom="@dimen/gap_32"-->
+        <!--            android:text="@string/confirming_certification_code_received"-->
+        <!--            android:textColor="@color/text_primary_color"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            app:layout_constraintEnd_toStartOf="@id/request_certification_code_again_text"-->
+        <!--            app:layout_constraintHorizontal_chainStyle="packed"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toBottomOf="@id/certification_code_container"-->
+        <!--            app:layout_constraintVertical_bias="1" />-->
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/confirming_certification_code_received"
-                    style="@style/text_style_14sp.medium"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/gap_32"
-                    android:text="@string/confirming_certification_code_received"
-                    android:textColor="@color/text_primary_color"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/request_certification_code_again_text"
-                    app:layout_constraintHorizontal_chainStyle="packed"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/certification_code_container"
-                    app:layout_constraintVertical_bias="1" />
+        <!--        <androidx.appcompat.widget.AppCompatTextView-->
+        <!--            android:id="@+id/request_certification_code_again_text"-->
+        <!--            style="@style/text_style_14sp.medium"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--        android:layout_height="wrap_content"-->
+        <!--        android:layout_marginStart="@dimen/gap_4"-->
+        <!--            android:layout_marginBottom="@dimen/gap_32"-->
+        <!--            android:text="@string/request_certification_code_again_text"-->
+        <!--            android:textColor="@color/text_primary_color"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintHorizontal_chainStyle="packed"-->
+        <!--            app:layout_constraintStart_toEndOf="@id/confirming_certification_code_received"-->
+        <!--            app:layout_constraintTop_toTopOf="@id/confirming_certification_code_received" />-->
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/request_certification_code_again_text"
-                    style="@style/text_style_14sp.medium"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/gap_4"
-                    android:layout_marginBottom="@dimen/gap_32"
-                    android:text="@string/request_certification_code_again_text"
-                    android:textColor="@color/text_primary_color"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_chainStyle="packed"
-                    app:layout_constraintStart_toEndOf="@id/confirming_certification_code_received"
-                    app:layout_constraintTop_toTopOf="@id/confirming_certification_code_received" />
-
-                <androidx.constraintlayout.widget.Group
-                    android:id="@+id/request_certification_code_again_group"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    app:constraint_referenced_ids="request_certification_code_again_text,confirming_certification_code_received" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </ScrollView>
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/default_button"
-            style="@style/text_style_16sp.bold"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:background="@drawable/default_button_selector"
-            android:enabled="@{vm.certificationCode.length() == 6}"
-            android:text="@string/modifying_done"
-            android:textColor="@color/basic_white" />
-    </LinearLayout>
+        <!--        <androidx.constraintlayout.widget.Group-->
+        <!--            android:id="@+id/request_certification_code_again_group"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:visibility="gone"-->
+        <!--            app:constraint_referenced_ids="request_certification_code_again_text,confirming_certification_code_received" />-->
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

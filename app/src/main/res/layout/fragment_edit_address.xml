@@ -7,55 +7,46 @@
 
         <variable
             name="vm"
-            type="kr.co.soogong.master.ui.profile.detail.requiredinformation.address.EditAddressViewModel" />
+            type="kr.co.soogong.master.ui.profile.detail.address.EditAddressViewModel" />
+
+        <import type="com.google.android.material.textfield.TextInputLayout" />
     </data>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:fillViewport="true"
-            android:overScrollMode="never">
+        <kr.co.soogong.master.atomic.molecules.SubheadlineTextInput
+            android:id="@+id/sti_road_address"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="wrap_content"
+            app:content="@={vm.roadAddress}"
+            app:endIcon="@{TextInputLayout.END_ICON_NONE}"
+            app:hint="@{@string/address}"
+            app:inputEnabled="@{false}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:startIcon="@{@drawable/ic_search}"
+            app:subheadline="@{@string/type_road_address}" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingStart="@dimen/gap_20"
-                android:paddingTop="@dimen/gap_32"
-                android:paddingEnd="@dimen/gap_20"
-                android:paddingBottom="@dimen/gap_52">
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_clickable"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="@dimen/gap_48"
+            app:layout_constraintBottom_toBottomOf="@id/sti_road_address"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
-                <kr.co.soogong.master.ui.widget.TitleEditTextButton
-                    android:id="@+id/address"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:alertText='@{"필수 정보입니다."}'
-                    app:buttonText='@{"검색"}'
-                    app:firstContent="@={vm.roadAddress}"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:secondContent="@={vm.detailAddress}"
-                    app:setFirstEditTextEnable="@{false}"
-                    app:setFirstEditTextHint='@{"주소를 검색해주세요."}'
-                    app:setSecondEditTextHint='@{"상세주소를 입력해주세요."}'
-                    app:title='@{"주소를 선택해주세요."}' />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </ScrollView>
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/default_button"
-            style="@style/text_style_16sp.bold"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:background="@color/color_22D47B"
-            android:text="@string/save"
-            android:textColor="@color/basic_white" />
-    </LinearLayout>
-
+        <kr.co.soogong.master.atomic.atoms.TextInput
+            android:id="@+id/ti_detail_address"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_6"
+            app:content="@={vm.detailAddress}"
+            app:hint="@{@string/detail_address}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sti_road_address" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

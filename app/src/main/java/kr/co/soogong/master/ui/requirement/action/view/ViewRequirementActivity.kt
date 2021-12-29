@@ -3,20 +3,15 @@ package kr.co.soogong.master.ui.requirement.action.view
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.appcompat.widget.AppCompatButton
-import androidx.core.view.isVisible
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.dto.requirement.RequirementDto
 import kr.co.soogong.master.data.model.requirement.*
 import kr.co.soogong.master.data.model.requirement.estimation.EstimationResponseCode
 import kr.co.soogong.master.databinding.ActivityViewRequirementBinding
 import kr.co.soogong.master.ui.base.BaseActivity
-import kr.co.soogong.master.ui.dialog.popup.CustomDialog
+import kr.co.soogong.master.ui.dialog.popup.DefaultDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData
 import kr.co.soogong.master.ui.dialog.popup.DialogData.Companion.getExpiredRequestConsultDialogData
-import kr.co.soogong.master.ui.dialog.popup.DialogData.Companion.getRequestConsultAlertDialogData
-import kr.co.soogong.master.ui.dialog.popup.DialogData.Companion.getUserExistDialogData
 import kr.co.soogong.master.ui.requirement.action.view.ViewRequirementViewModel.Companion.ASK_FOR_REVIEW_SUCCESSFULLY
 import kr.co.soogong.master.ui.requirement.action.view.ViewRequirementViewModel.Companion.CALL_TO_CUSTOMER_SUCCESSFULLY
 import kr.co.soogong.master.ui.requirement.action.view.ViewRequirementViewModel.Companion.INVALID_REQUIREMENT
@@ -27,7 +22,6 @@ import kr.co.soogong.master.ui.requirement.action.view.ViewRequirementViewModel.
 import kr.co.soogong.master.uihelper.requirment.CallToCustomerHelper
 import kr.co.soogong.master.uihelper.requirment.action.*
 import kr.co.soogong.master.utility.EventObserver
-import kr.co.soogong.master.utility.extension.setDueDate
 import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
 import java.util.*
@@ -51,32 +45,8 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
             vm = viewModel
             lifecycleOwner = this@ViewRequirementActivity
 
-            with(actionBar) {
-                backButton.setOnClickListener {
-                    super.onBackPressed()
-                }
-                button.text = getString(R.string.progress_ending_text)
-                button.setOnClickListener {
-                    viewModel.requirement.value?.id?.let { id ->
-                        CustomDialog.newInstance(
-                            DialogData.getConfirmRepairDoneDialogData(this@ViewRequirementActivity)
-                        ).let {
-                            it.setButtonsClickListener(
-                                onPositive = {
-                                    startActivity(EndRepairActivityHelper.getIntent(this@ViewRequirementActivity,
-                                        id))
-                                },
-                                onNegative = {}
-                            )
-                            it.show(supportFragmentManager, it.tag)
-                        }
-                    }
-                }
-                root.findViewById<AppCompatButton>(R.id.button).isVisible = false
-            }
-
-            callToCustomerButton.setOnClickListener {
-                viewModel.callToClient()
+            abHeader.setButtonBackClickListener {
+                onBackPressed()
             }
         }
     }
@@ -87,9 +57,6 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
             if (!isValidRequirement(requirement)) return@observe
             setFlexibleContainer(this, binding, requirement)
             setBottomButtons(this, viewModel, binding, requirement)
-            binding.requirementDueDate.setDueDate(requirement)
-            binding.requirementStatus.requirementDto = requirement
-            setLayoutForRequestConsult(requirement)
             showDialogForCallingCustomer(requirement)
         })
 
@@ -99,56 +66,27 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                     toast(getString(R.string.refuse_to_estimate_or_measure_successfully_text))
                     onBackPressed()
                 }
-                INVALID_REQUIREMENT -> {
-                    onBackPressed()
+                INVALID_REQUIREMENT -> onBackPressed()
+                CALL_TO_CUSTOMER_SUCCESSFULLY -> viewModel.requirement.value?.let {
+                    startActivity(CallToCustomerHelper.getIntent(it.phoneNumber))
                 }
-                CALL_TO_CUSTOMER_SUCCESSFULLY -> {
-                    viewModel.requirement.value?.let {
-                        startActivity(CallToCustomerHelper.getIntent(if (it.safetyNumber.isNullOrEmpty()) it.tel else it.safetyNumber))
-                    }
-                }
-                RESPOND_TO_MEASURE_SUCCESSFULLY -> {
-                    // 화면 리프레시 하고 다이얼로그 띄우기
-                    viewModel.requestRequirement()
-                }
-                ASK_FOR_REVIEW_SUCCESSFULLY -> {
-                    setReviewAsked()
-                    toast(getString(R.string.ask_for_review_successful))
-                }
+                // 화면 리프레시 하고 다이얼로그 띄우기
+                RESPOND_TO_MEASURE_SUCCESSFULLY -> viewModel.requestRequirement()
+                ASK_FOR_REVIEW_SUCCESSFULLY -> toast(getString(R.string.ask_for_review_successful))
                 NOT_APPROVED_MASTER -> {
                     toast(getString(R.string.not_approved_master))
                     onBackPressed()
                 }
-                REQUEST_FAILED -> {
-                    toast(getString(R.string.error_message_of_request_failed))
-                }
+                REQUEST_FAILED -> toast(getString(R.string.error_message_of_request_failed))
             }
         })
     }
 
-    private fun setLayoutForRequestConsult(requirement: RequirementDto) {
-        (RequirementStatus.getStatusFromRequirement(requirement) is RequirementStatus.RequestConsult).let { boolean ->
-            binding.callToCustomerButton.isVisible = boolean
-
-            // NOTE: 상호 통화한 적이 한번도 없으면 다이얼로그로 전화하라고 안내
-            if (boolean && requirement.estimationDto?.fromMasterCallCnt == 0 && requirement.estimationDto.fromClientCallCnt == 0) {
-                CustomDialog.newInstance(
-                    getRequestConsultAlertDialogData(this)
-                ).let {
-                    it.setButtonsClickListener(
-                        onPositive = {},
-                        onNegative = {}
-                    )
-                    it.show(supportFragmentManager, it.tag)
-                }
-            }
-        }
-    }
-
-    private fun showDialogForCallingCustomer(requirement: RequirementDto) {
-        when (RequirementStatus.getStatusFromRequirement(requirement)) {
+    private fun showDialogForCallingCustomer(requirement: Requirement) {
+        when (requirement.status) {
+            // NOTE: 매칭대기 상태에서, 전화기능이 오픈되었다는 것을 안내
             is RequirementStatus.Estimated -> {
-                CustomDialog.newInstance(DialogData.getNoticeForCallingCustomerInViewRequirement(this))
+                DefaultDialog.newInstance(DialogData.getNoticeForCallingCustomerInViewRequirement())
                     .let {
                         it.setButtonsClickListener(
                             onPositive = { viewModel.callToClient() },
@@ -157,9 +95,25 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                         it.show(supportFragmentManager, it.tag)
                     }
             }
+
+            // NOTE: 상담요청 상태에서, 상호 통화한 적이 한번도 없으면 전화하라고 안내
+            is RequirementStatus.RequestConsult -> {
+                if (requirement.estimationDto?.fromMasterCallCnt == 0 && requirement.estimationDto.fromClientCallCnt == 0) {
+                    DefaultDialog.newInstance(DialogData.getRequestConsultAlertDialogData())
+                        .let {
+                            it.setButtonsClickListener(
+                                onPositive = {},
+                                onNegative = {}
+                            )
+                            it.show(supportFragmentManager, it.tag)
+                        }
+                }
+            }
+
+            // NOTE: 실측예정 상태에서, 상호 통화한 적이 한번도 없으면 전화하라고 안내
             is RequirementStatus.Measuring -> {
                 if (requirement.estimationDto?.fromMasterCallCnt == 0 && requirement.estimationDto.fromClientCallCnt == 0) {
-                    CustomDialog.newInstance(DialogData.getRecommendingCallingCustomer(this))
+                    DefaultDialog.newInstance(DialogData.getRecommendingCallingCustomer())
                         .let {
                             it.setButtonsClickListener(
                                 onPositive = { viewModel.callToClient() },
@@ -169,14 +123,14 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                         }
                 }
             }
-            else -> {}
+            else -> Unit
         }
     }
 
-    private fun isValidRequirement(requirement: RequirementDto): Boolean {
+    private fun isValidRequirement(requirement: Requirement): Boolean {
         if (requirement.estimationDto?.masterResponseCode == EstimationResponseCode.EXPIRED) {
-            CustomDialog.newInstance(
-                dialogData = getExpiredRequestConsultDialogData(this),
+            DefaultDialog.newInstance(
+                dialogData = getExpiredRequestConsultDialogData(),
                 cancelable = false
             ).let {
                 it.setButtonsClickListener(
@@ -197,18 +151,13 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
         viewModel.requestRequirement()
     }
 
-    private fun setReviewAsked() {
-        binding.rightButton.isEnabled = false
-        binding.rightButton.text = getString(R.string.ask_for_review_successful)
-    }
-
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
         // Note: ViewRequirement 화면에서 notification 으로 해당 requirement 에 접근했을 때, 화면을 refresh 해주기 위함
         intent?.let {
             viewModel.requirementId.value = ViewRequirementActivityHelper.getRequirementId(it)
+            viewModel.requestRequirement()
         }
-        viewModel.requestRequirement()
     }
 
     companion object {

@@ -11,8 +11,8 @@ import kr.co.soogong.master.databinding.FragmentSignUpServiceAreaBinding
 import kr.co.soogong.master.ui.auth.signup.SignUpActivity
 import kr.co.soogong.master.ui.auth.signup.SignUpViewModel
 import kr.co.soogong.master.ui.base.BaseFragment
-import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogBundle
-import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogRecyclerView
+import kr.co.soogong.master.ui.dialog.bottomSheetDialogRecyclerView.BottomSheetDialogBundle
+import kr.co.soogong.master.ui.dialog.bottomSheetDialogRecyclerView.BottomSheetDialogRecyclerView
 import kr.co.soogong.master.utility.NaverMapHelper
 import kr.co.soogong.master.utility.PermissionHelper
 import timber.log.Timber
@@ -50,22 +50,21 @@ class ServiceAreaFragment : BaseFragment<FragmentSignUpServiceAreaBinding>(
                 PermissionHelper.checkLocationPermission(
                     context = requireContext(),
                     onGranted = {
-                        val bottomDialog =
-                            BottomDialogRecyclerView.newInstance(
-                                dialogBundle = BottomDialogBundle.getServiceAreaBundle(),
-                                itemClick = { text, radius ->
-                                    viewModel.serviceArea.value = text
-                                    viewModel.serviceAreaToInt.value = radius
-                                    naverMapHelper.setLocation(
-                                        Coordinate(
-                                            viewModel.latitude.value,
-                                            viewModel.longitude.value
-                                        ), radius
-                                    )
-                                }
-                            )
-
-                        bottomDialog.show(parentFragmentManager, bottomDialog.tag)
+                        BottomSheetDialogRecyclerView.newInstance(
+                            sheetDialogBundle = BottomSheetDialogBundle.getServiceAreaBundle()
+                        ).let {
+                            it.setItemClickListener { dialogItem ->
+                                viewModel.serviceArea.value = dialogItem.key
+                                viewModel.serviceAreaToInt.value = dialogItem.value
+                                naverMapHelper.setLocation(
+                                    Coordinate(
+                                        viewModel.latitude.value,
+                                        viewModel.longitude.value
+                                    ), dialogItem.value
+                                )
+                            }
+                            it.show(parentFragmentManager, it.tag)
+                        }
                     },
                     onDenied = { }
                 )

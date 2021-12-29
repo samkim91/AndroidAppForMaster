@@ -6,8 +6,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import kr.co.soogong.master.data.dto.requirement.RequirementDto
 import kr.co.soogong.master.data.dto.requirement.repair.RepairDto
+import kr.co.soogong.master.data.model.requirement.Requirement
 import kr.co.soogong.master.domain.usecase.requirement.GetRequirementUseCase
 import kr.co.soogong.master.domain.usecase.requirement.SaveRepairUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
@@ -25,11 +25,15 @@ class EndRepairViewModel @Inject constructor(
     private val requirementId =
         EndRepairActivityHelper.getRequirementIdFromSavedState(savedStateHandle)
 
-    private val _requirement = MutableLiveData<RequirementDto>()
+    private val _requirement = MutableLiveData<Requirement>()
 
-    val actualPrice = MutableLiveData("")
+    val actualPrice = MutableLiveData<String>()
     val actualDate = MutableLiveData(Calendar.getInstance())
     val includingVat = MutableLiveData(false)
+
+    init {
+        requestRequirement()
+    }
 
     fun requestRequirement() {
         Timber.tag(TAG).d("requestRequirement: $requirementId")
@@ -75,7 +79,7 @@ class EndRepairViewModel @Inject constructor(
                 },
                 onError = {
                     Timber.tag(TAG).d("END_REPAIR_FAILED: $it")
-                    setAction(END_REPAIR_FAILED)
+                    setAction(REQUEST_FAILED)
                 }).addToDisposable()
     }
 
@@ -83,7 +87,6 @@ class EndRepairViewModel @Inject constructor(
         private const val TAG = "EndRepairViewModel"
         const val REQUEST_FAILED = "REQUEST_FAILED"
         const val END_REPAIR_SUCCESSFULLY = "END_REPAIR_SUCCESSFULLY"
-        const val END_REPAIR_FAILED = "END_REPAIR_FAILED"
     }
 
 }

@@ -9,7 +9,7 @@ import androidx.core.view.isEmpty
 import com.google.android.material.chip.Chip
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.model.major.Major
-import kr.co.soogong.master.ui.widget.TitleChipGroup
+import kr.co.soogong.master.atomic.molecules.TitleChipGroup
 import kr.co.soogong.master.utility.extension.dp
 
 // Todo.. 굉장히 코드가 더러운데.. 2 way binding을 사용하는 방법을 찾아봐야함.
@@ -28,9 +28,9 @@ object MajorChipGroupHelper {
 
     private fun addNewMajor(
         newMajor: Major,
-        majorList: ListLiveData<Major>
+        majorList: ListLiveData<Major>,
     ) {
-        // 새로 선택된 업종을 viewModel에 갱신해준다.
+        // 새로 선택된 업종을 viewModel 에 갱신해준다.
         val tempList = majorList.value
         tempList?.removeIf { it.category?.id == newMajor.category?.id }
         tempList?.add(newMajor)
@@ -40,12 +40,12 @@ object MajorChipGroupHelper {
     fun addMajorToContainer(
         layoutInflater: LayoutInflater,
         container: LinearLayout,
-        majorList: ListLiveData<Major>
+        majorList: ListLiveData<Major>,
     ) {
-        // 기존 View들을 삭제한다.
+        // 기존 View 들을 삭제한다.
         container.removeAllViews()
 
-        // BusinessType List만큼 View를 그려준다.
+        // BusinessType List 만큼 View 를 그려준다.
         var params = ConstraintLayout.LayoutParams(
             ViewGroup.LayoutParams.MATCH_PARENT,
             ViewGroup.LayoutParams.WRAP_CONTENT
@@ -61,7 +61,7 @@ object MajorChipGroupHelper {
                         val chipGroup = titleChipGroup.binding.chipGroup
                         chipGroup.removeView(chip)
 
-                        // view에서 삭제된 아이템을 code에서 찾아서 동기화
+                        // view 에서 삭제된 아이템을 code 에서 찾아서 동기화
                         val tempList = majorList.value
                         tempList?.find { temp ->
                             temp.category == businessType.category
@@ -72,7 +72,7 @@ object MajorChipGroupHelper {
                         }
                         majorList.value = tempList
 
-                        // ChipGroup에 Chip이 하나도 없다면, 해당 ChipGroup의 Container에서도 삭제
+                        // ChipGroup 에 Chip 이 하나도 없다면, 해당 ChipGroup 의 Container 에서도 삭제
                         if (chipGroup.isEmpty()) container.run {
                             removeView(titleChipGroup)
 
@@ -89,7 +89,7 @@ object MajorChipGroupHelper {
     private fun makeEntryChipGroupWithSubTitle(
         layoutInflater: LayoutInflater,
         item: Major,
-        closeClickListener: (titleChipGroup: TitleChipGroup, chip: View, itemId: Int) -> Unit
+        closeClickListener: (titleChipGroup: TitleChipGroup, chip: View, itemId: Int) -> Unit,
     ): ViewGroup {
         val titleChipGroup = TitleChipGroup(layoutInflater.context)
 
@@ -99,7 +99,9 @@ object MajorChipGroupHelper {
         titleChipGroup.blackSubTitle = true
 
         item.projects?.map { project ->
-            val chip = layoutInflater.inflate(R.layout.single_chip_entry_layout, null) as Chip
+            val chip = layoutInflater.inflate(R.layout.single_chip_entry_layout,
+                titleChipGroup,
+                false) as Chip
             chip.setOnCloseIconClickListener {
                 closeClickListener(titleChipGroup, it, project.id!!)
             }

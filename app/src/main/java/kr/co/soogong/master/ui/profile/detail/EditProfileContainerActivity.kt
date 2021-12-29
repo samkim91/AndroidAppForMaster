@@ -1,12 +1,14 @@
 package kr.co.soogong.master.ui.profile.detail
 
 import android.os.Bundle
+import android.view.View
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
+import kr.co.soogong.master.data.common.ButtonTheme
 import kr.co.soogong.master.databinding.ActivityEditProfileContainerBinding
 import kr.co.soogong.master.ui.base.BaseActivity
-import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerActivityHelper
+import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -17,7 +19,7 @@ class EditProfileContainerActivity : BaseActivity<ActivityEditProfileContainerBi
         EditProfileContainerActivityHelper.getPageName(intent)
     }
 
-    private val itemId: Int by lazy {
+    private val itemId: Int? by lazy {
         EditProfileContainerActivityHelper.getItemId(intent)
     }
 
@@ -31,16 +33,23 @@ class EditProfileContainerActivity : BaseActivity<ActivityEditProfileContainerBi
         Timber.tag(TAG).d("initLayout: $pageName / $itemId")
 
         bind {
-            with(actionBar) {
-                title.text = pageName
-                backButton.setOnClickListener {
-                    super.onBackPressed()
-                }
+            buttonThemeSave = ButtonTheme.Primary
+
+            with(abHeader) {
+                title = pageName
+                setButtonBackClickListener { super.onBackPressed() }
             }
         }
 
         supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment, EditProfileContainerFragmentHelper.getFragment(pageName, itemId)).commit()
+            .replace(R.id.fcv_container,
+                EditProfileContainerFragmentHelper.getFragment(pageName, itemId)).commit()
+    }
+
+    fun setSaveButtonClickListener(onClick: () -> Unit) {
+        binding.bfSave.onButtonClick = View.OnClickListener {
+            onClick()
+        }
     }
 
     companion object {

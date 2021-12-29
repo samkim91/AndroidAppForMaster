@@ -7,10 +7,10 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import kr.co.soogong.master.data.dto.common.Code
-import kr.co.soogong.master.data.dto.requirement.RequirementDto
+import kr.co.soogong.master.data.dto.common.CodeDto
 import kr.co.soogong.master.data.dto.requirement.estimation.EstimationDto
 import kr.co.soogong.master.data.dto.requirement.repair.RepairDto
+import kr.co.soogong.master.data.model.requirement.Requirement
 import kr.co.soogong.master.data.model.requirement.estimation.EstimationResponseCode
 import kr.co.soogong.master.domain.usecase.requirement.GetCanceledReasonsUseCase
 import kr.co.soogong.master.domain.usecase.requirement.GetRequirementUseCase
@@ -33,16 +33,21 @@ class CancelViewModel @Inject constructor(
     private val requirementId =
         CancelActivityHelper.getRequirementIdFromSavedState(savedStateHandle)
 
-    private val _requirement = MutableLiveData<RequirementDto>()
-    val requirement: LiveData<RequirementDto>
+    private val _requirement = MutableLiveData<Requirement>()
+    val requirement: LiveData<Requirement>
         get() = _requirement
 
-    val canceledReasons = MutableLiveData<List<Code>>()
+    val canceledReasons = MutableLiveData<List<CodeDto>>()
 
     val canceledCode = MutableLiveData("")
     val canceledDescription = MutableLiveData("")
 
-    fun requestCanceledReasons() {
+    init {
+        requestCanceledReasons()
+        requestRequirement()
+    }
+
+    private fun requestCanceledReasons() {
         Timber.tag(TAG).d("requestCanceledReasons: ")
         canceledReasonsUseCase()
             .subscribeOn(Schedulers.io())
@@ -59,7 +64,7 @@ class CancelViewModel @Inject constructor(
             ).addToDisposable()
     }
 
-    fun requestRequirement() {
+    private fun requestRequirement() {
         Timber.tag(TAG).d("requestRequirement: $requirementId")
         getRequirementUseCase(requirementId)
             .subscribeOn(Schedulers.io())

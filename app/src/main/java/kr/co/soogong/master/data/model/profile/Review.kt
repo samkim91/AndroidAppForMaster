@@ -2,7 +2,7 @@ package kr.co.soogong.master.data.model.profile
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
-import kr.co.soogong.master.data.dto.AttachmentDto
+import kr.co.soogong.master.data.dto.common.AttachmentDto
 import kr.co.soogong.master.data.dto.requirement.review.ReviewDto
 import java.util.*
 

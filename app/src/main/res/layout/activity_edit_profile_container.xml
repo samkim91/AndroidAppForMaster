@@ -1,23 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
 
-    <LinearLayout
+        <variable
+            name="buttonThemeSave"
+            type="kr.co.soogong.master.data.common.ButtonTheme" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:background="@color/transparent">
 
-        <include
-            android:id="@+id/action_bar"
-            layout="@layout/action_bar" />
+        <kr.co.soogong.master.atomic.molecules.ActionBar
+            android:id="@+id/ab_header"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="wrap_content"
+            app:backButtonVisibility="@{true}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/fragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </LinearLayout>
+        <ScrollView
+            android:id="@+id/sv_container"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="@dimen/gap_0"
+            android:overScrollMode="never"
+            app:layout_constraintBottom_toTopOf="@id/bf_save"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ab_header">
 
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/fcv_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/gap_24"
+                android:paddingStart="@dimen/gap_16"
+                android:paddingEnd="@dimen/gap_16"
+                android:paddingBottom="@dimen/gap_24" />
+        </ScrollView>
 
-
+        <kr.co.soogong.master.atomic.atoms.ButtonFilled
+            android:id="@+id/bf_save"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="wrap_content"
+            app:buttonText="@{@string/save}"
+            app:buttonTheme="@{buttonThemeSave}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sv_container" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

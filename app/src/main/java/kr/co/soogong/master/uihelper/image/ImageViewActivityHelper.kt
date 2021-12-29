@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Parcelable
-import kr.co.soogong.master.data.dto.AttachmentDto
+import kr.co.soogong.master.data.dto.common.AttachmentDto
 import kr.co.soogong.master.ui.image.ImageActivity
 
 object ImageViewActivityHelper {
@@ -13,7 +13,11 @@ object ImageViewActivityHelper {
     private const val BUNDLE_KEY_IMAGES = "BUNDLE_KEY_IMAGES"
 
     // Intent 에 attachments 를 parse 하기 위해, mutableList 를 사용
-    fun getIntent(context: Context, images: MutableList<AttachmentDto>?, position: Int = 0): Intent {
+    fun getIntent(
+        context: Context,
+        images: MutableList<AttachmentDto>?,
+        position: Int = 0,
+    ): Intent {
         return Intent(context, ImageActivity::class.java).apply {
             putExtra(EXTRA_KEY_BUNDLE, Bundle().apply {
                 putInt(BUNDLE_KEY_IMAGE_POSITION, position)

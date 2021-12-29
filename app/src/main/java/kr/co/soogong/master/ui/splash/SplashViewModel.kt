@@ -24,16 +24,6 @@ class SplashViewModel @Inject constructor(
 
     private val _masterSimpleInfo = MutableLiveData<MasterDto>()
 
-    fun checkSignIn() {
-        Timber.tag(TAG).d("checkSignIn: ")
-
-        getMasterUidFromSharedUseCase().let { masterUid ->
-            Timber.tag(TAG).d("master Uid: $masterUid")
-            if (masterUid.isNullOrEmpty()) setAction(GET_MASTER_UID_FAILED)
-            else setAction(GET_MASTER_UID_SUCCESSFULLY)
-        }
-    }
-
     fun checkLatestVersion() {
         Timber.tag(TAG).d("checkLatestVersion: ")
 
@@ -49,6 +39,16 @@ class SplashViewModel @Inject constructor(
                     Timber.tag(TAG).d("getLatestVersion failed: $it")
                 }
             ).addToDisposable()
+    }
+
+    fun checkSignIn() {
+        Timber.tag(TAG).d("checkSignIn: ")
+
+        getMasterUidFromSharedUseCase().let { masterUid ->
+            Timber.tag(TAG).d("master Uid: $masterUid")
+            if (masterUid.isNullOrEmpty()) setAction(GET_MASTER_UID_FAILED)
+            else setAction(GET_MASTER_UID_SUCCESSFULLY)
+        }
     }
 
     fun requestMasterSimpleInfo() {
@@ -94,7 +94,7 @@ class SplashViewModel @Inject constructor(
     }
 
     companion object {
-        private const val TAG = "MainViewModel"
+        private const val TAG = "SplashViewModel"
         const val GET_VERSION_SUCCESSFULLY = "GET_VERSION_SUCCESSFULLY"
         const val GET_MASTER_UID_SUCCESSFULLY = "GET_MASTER_UID_SUCCESSFULLY"
         const val GET_MASTER_UID_FAILED = "GET_MASTER_UID_FAILED"

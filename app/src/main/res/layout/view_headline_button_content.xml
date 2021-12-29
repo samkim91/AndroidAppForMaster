@@ -1,0 +1,69 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <merge
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_title"
+            style="@style/headline.bold"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toStartOf="@id/tv_button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="제목" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_button"
+            style="@style/subheadline.regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/gap_10"
+            android:paddingTop="@dimen/gap_5"
+            android:paddingEnd="@dimen/gap_0"
+            android:paddingBottom="@dimen/gap_5"
+            app:layout_constraintBottom_toBottomOf="@id/tv_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_title"
+            tools:text="버튼"
+            tools:textColor="@color/brand_red" />
+
+        <!-- 바로 수정하는 기능이 필요해서, TextView 가 아닌 EditText 를 사용 -->
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/tv_content"
+            style="@style/subheadline.regular"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_20"
+            android:background="@color/transparent"
+            android:breakStrategy="simple"
+            android:ellipsize="end"
+            android:enabled="false"
+            android:maxLines="3"
+            android:textColor="@color/grey_2"
+            android:textColorHint="@color/grey_2"
+            app:layout_constrainedWidth="true"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_title"
+            tools:text="내용"
+            tools:visibility="visible" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_line"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="@dimen/gap_1"
+            android:layout_marginTop="@dimen/gap_12"
+            android:background="@color/light_grey_2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_content"
+            app:layout_goneMarginTop="@dimen/gap_20" />
+    </merge>
+</layout>

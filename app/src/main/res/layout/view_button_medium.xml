@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <merge
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/bt_button"
+            style="@style/subheadline.bold"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/gap_48"
+            android:gravity="center"
+            android:stateListAnimator="@null"
+            android:textColor="@color/white"
+            tools:background="@drawable/bg_solid_green_selector_radius8"
+            tools:textColor="@color/white"
+            tools:enabled="true"
+            tools:text="버튼명" />
+    </merge>
+</layout>

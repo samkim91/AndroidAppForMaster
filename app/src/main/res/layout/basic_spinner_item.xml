@@ -8,4 +8,4 @@
     android:paddingStart="@dimen/gap_14"
     android:paddingEnd="@dimen/gap_14"
     android:singleLine="true"
-    android:textColor="@color/color_404040" />
+    android:textColor="@color/c_404040" />

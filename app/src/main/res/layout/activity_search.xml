@@ -17,50 +17,48 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <kr.co.soogong.master.ui.widget.SearchBar
-            android:id="@+id/search_bar"
+        <kr.co.soogong.master.atomic.molecules.SearchBar
+            android:id="@+id/sb_search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/gap_15"
-            android:layout_marginTop="@dimen/gap_28"
-            android:layout_marginEnd="@dimen/gap_15"
-            app:cancelTextVisibility="@{true}"
+            android:layout_marginStart="@dimen/gap_16"
+            android:layout_marginTop="@dimen/gap_16"
+            android:layout_marginEnd="@dimen/gap_16"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:searchBarContent="@={vm.searchingText}"
-            app:searchTextHint="@{@string/search_bar_hint_text}" />
+            app:onCancelClick="@{() -> vm.cancelActivity()}"
+            app:searchHint="@{@string/search_bar_hint_text}"
+            app:searchText="@={vm.searchingText}" />
 
-        <Spinner
-            android:id="@+id/spinner"
-            style="@style/text_style_15sp.medium"
-            android:layout_width="@dimen/gap_90"
-            android:layout_height="@dimen/gap_40"
-            android:layout_marginTop="@dimen/gap_16"
-            android:background="@drawable/shape_white_background_gray_border_radius80"
-            app:layout_constraintStart_toStartOf="@id/search_bar"
-            app:layout_constraintTop_toBottomOf="@id/search_bar"
-            app:setItems="@{vm.spinnerItems}" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/dropdown_arrow"
-            android:layout_width="wrap_content"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_container"
+            style="@style/outlinedTextInputLayout.dropdown.small"
+            android:layout_width="@dimen/gap_100"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/gap_16"
-            android:background="@drawable/ic_dropdown_arrow"
-            app:layout_constraintBottom_toBottomOf="@id/spinner"
-            app:layout_constraintEnd_toEndOf="@id/spinner"
-            app:layout_constraintTop_toTopOf="@id/spinner" />
+            android:layout_marginStart="@dimen/gap_16"
+            android:layout_marginTop="@dimen/gap_8"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sb_search">
+
+            <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                android:id="@+id/actv_item"
+                style="@style/autoCompleteTextViewStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none"
+                app:popupDrawable="@{@drawable/bg_solid_white_stroke_light_grey2_radius6_padding16}" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/line"
             android:layout_width="@dimen/gap_0"
             android:layout_height="@dimen/gap_1"
-            android:layout_marginTop="@dimen/gap_15"
-            android:background="@color/line_color"
+            android:layout_marginTop="@dimen/gap_16"
+            android:background="@color/light_grey_1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/spinner" />
+            app:layout_constraintTop_toBottomOf="@id/til_container" />
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/swipe_refresh_layout"
@@ -77,35 +75,46 @@
                 android:id="@+id/requirements"
                 android:layout_width="@dimen/gap_0"
                 android:layout_height="@dimen/gap_0"
+                android:background="@color/background"
+                android:clipToPadding="false"
+                android:paddingStart="@dimen/gap_16"
+                android:paddingTop="@dimen/gap_8"
+                android:paddingEnd="@dimen/gap_16"
+                android:paddingBottom="@dimen/gap_16"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:setDivider="@{@drawable/thick_divider}"
+                app:onScroll="@{vm}"
                 app:requirement_cards="@{vm.requirements}"
-                tools:listitem="@layout/view_holder_requirement_item" />
+                tools:listitem="@layout/view_holder_requirement_card" />
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/empty_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_no_card"
-            app:layout_constraintBottom_toTopOf="@id/empty_text"
+            android:id="@+id/iv_nutty"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="@dimen/gap_0"
+            android:background="@drawable/ic_nutty_sweat"
+            bind:visible="@{vm.notFound}"
+            app:layout_constraintBottom_toTopOf="@id/tv_empty"
+            app:layout_constraintDimensionRatio="H, 1:1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/swipe_refresh_layout"
             app:layout_constraintVertical_chainStyle="packed"
-            bind:visible="@{vm.requirements.empty}" />
+            app:layout_constraintWidth_percent="0.35"
+            tools:visibility="visible" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/empty_text"
-            style="@style/text_style_18sp.bold"
+            android:id="@+id/tv_empty"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_2"
             android:text="@string/requirements_not_found"
-            android:textColor="@color/color_BDBDBD"
+            android:textAppearance="@style/call_out.regular"
+            android:textColor="@color/grey_4"
+            bind:visible="@{vm.notFound}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/empty_icon"
-            bind:visible="@{vm.requirements.empty}" />
+            app:layout_constraintTop_toBottomOf="@id/iv_nutty"
+            tools:visibility="visible" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

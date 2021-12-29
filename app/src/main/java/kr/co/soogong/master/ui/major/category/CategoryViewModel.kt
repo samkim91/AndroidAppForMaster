@@ -6,18 +6,19 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import kr.co.soogong.master.data.model.major.Category
+import kr.co.soogong.master.data.dto.profile.CategoryDto
 import kr.co.soogong.master.domain.usecase.major.GetCategoryListUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
+import kr.co.soogong.master.utility.ListLiveData
 import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class CategoryViewModel @Inject constructor(
-    private val getCategoryListUseCase: GetCategoryListUseCase
+    private val getCategoryListUseCase: GetCategoryListUseCase,
 ) : BaseViewModel() {
-    private val _list = MutableLiveData<List<Category>>(emptyList())
-    val list: LiveData<List<Category>>
+    private val _list = MutableLiveData<List<CategoryDto>>(emptyList())
+    val list: LiveData<List<CategoryDto>>
         get() = _list
 
     init {

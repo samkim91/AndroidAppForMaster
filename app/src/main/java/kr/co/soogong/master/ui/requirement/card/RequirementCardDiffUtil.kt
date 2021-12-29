@@ -8,7 +8,10 @@ class RequirementCardDiffUtil : DiffUtil.ItemCallback<RequirementCard>() {
         return oldItem.token == newItem.token
     }
 
-    override fun areContentsTheSame(oldItem: RequirementCard, newItem: RequirementCard): Boolean {
+    override fun areContentsTheSame(
+        oldItem: RequirementCard,
+        newItem: RequirementCard,
+    ): Boolean {
         return oldItem == newItem
     }
 }

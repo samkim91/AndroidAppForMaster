@@ -5,8 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
-import kotlinx.parcelize.RawValue
-import kr.co.soogong.master.data.dto.AttachmentDto
+import kr.co.soogong.master.data.dto.common.AttachmentDto
 import kr.co.soogong.master.data.dto.requirement.review.ReviewDto
 import java.util.*
 
@@ -98,8 +97,8 @@ data class MasterDto(
     @SerializedName("marketingPush")
     val marketingPush: Boolean? = null,
 
-    @SerializedName("marketingPushAtNight")
-    val marketingPushAtNight: Boolean? = null,
+    @SerializedName("pushAtNight")
+    val pushAtNight: Boolean? = null,
 
     @SerializedName("freeMeasureYn")
     val freeMeasureYn: Boolean? = null,
@@ -120,7 +119,10 @@ data class MasterDto(
     val masterPortfolios: List<PortfolioDto>? = null,
 
     @SerializedName("projects")
-    val majors: List<MajorDto>? = null,
+    val projects: List<ProjectDto>? = null,
+
+    @SerializedName("repairCount")
+    val repairCount: Int? = null,
 
     @SerializedName("reviews")
     val reviews: List<ReviewDto>? = null,
