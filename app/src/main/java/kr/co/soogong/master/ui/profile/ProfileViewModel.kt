@@ -116,7 +116,7 @@ class ProfileViewModel @Inject constructor(
             .doAfterTerminate { setAction(DISMISS_LOADING) }
             .subscribeBy(
                 onSuccess = {
-                    Timber.tag(TAG).d("saveMasterProfile successfully: ")
+                    Timber.tag(TAG).d("saveServiceArea onSuccess: ")
                 },
                 onError = {
                     Timber.tag(TAG).d("saveMasterProfile failed: $it")

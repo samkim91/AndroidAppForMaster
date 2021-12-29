@@ -24,6 +24,7 @@ interface RequirementInterface {
         @Query("readYns") readYns: Boolean?,
         @Query("offset") offset: Int,
         @Query("pageSize") pageSize: Int,
+        @Query("order") order: Int,
     ): Single<ResponseDto<PageableContentDto<RequirementCardDto>>>
 
     @GET(HttpContract.SEARCH_REQUIREMENTS)
@@ -34,6 +35,7 @@ interface RequirementInterface {
         @Query("readYns") readYns: Boolean?,
         @Query("offset") offset: Int,
         @Query("pageSize") pageSize: Int,
+        @Query("order") order: Int,
     ): Single<ResponseDto<PageableContentDto<RequirementCardDto>>>
 
     @GET(HttpContract.GET_REQUIREMENT)

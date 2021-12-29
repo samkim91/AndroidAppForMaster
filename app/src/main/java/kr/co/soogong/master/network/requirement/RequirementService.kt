@@ -25,8 +25,14 @@ class RequirementService @Inject constructor(
         readYns: Boolean?,
         offset: Int,
         pageSize: Int,
+        order: Int,
     ): Single<ResponseDto<PageableContentDto<RequirementCardDto>>> {
-        return requirementInterface.getRequirements(masterUid, status, readYns, offset, pageSize)
+        return requirementInterface.getRequirements(masterUid,
+            status,
+            readYns,
+            offset,
+            pageSize,
+            order)
     }
 
     fun searchRequirements(
@@ -36,6 +42,7 @@ class RequirementService @Inject constructor(
         readYns: Boolean?,
         offset: Int,
         pageSize: Int,
+        order: Int,
     ): Single<ResponseDto<PageableContentDto<RequirementCardDto>>> {
         return requirementInterface.searchRequirements(
             masterUid,
@@ -44,6 +51,7 @@ class RequirementService @Inject constructor(
             readYns,
             offset,
             pageSize,
+            order,
         )
     }
 
