@@ -18,7 +18,11 @@ class GetRequirementCardsUseCase @Inject constructor(
         offset: Int,
         pageSize: Int,
     ): Single<PageableContentDto<RequirementCard>> {
-        return requirementRepository.getRequirementsByStatus(status, readYns, offset, pageSize)
+        return requirementRepository.getRequirementsByStatus(status,
+            readYns,
+            offset,
+            pageSize,
+            1)      // order 1 생성시간역순, 0 생성시간순
             .map { responseDto ->
                 if (responseDto.code.toInt() == HttpsURLConnection.HTTP_OK) {
                     responseDto.data?.let { pageableContentDto ->

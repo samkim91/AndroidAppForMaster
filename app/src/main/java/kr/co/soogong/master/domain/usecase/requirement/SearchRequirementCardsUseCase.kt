@@ -23,7 +23,8 @@ class SearchRequirementCardsUseCase @Inject constructor(
             searchingPeriod,
             readYns,
             offset,
-            pageSize
+            pageSize,
+            1       // order 1 생성시간역순, 0 생성시간순
         ).map { responseDto ->
             if (responseDto.code.toInt() == HttpURLConnection.HTTP_OK) {
                 responseDto.data?.let { pageableContentDto ->

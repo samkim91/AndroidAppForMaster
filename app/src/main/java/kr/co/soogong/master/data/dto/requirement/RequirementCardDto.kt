@@ -32,7 +32,7 @@ data class RequirementCardDto(
     val address: String,
 
     @SerializedName("oldAddress")
-    val oldAddress: String,
+    val oldAddress: String?,
 
     @SerializedName("distance")
     val distance: Int,

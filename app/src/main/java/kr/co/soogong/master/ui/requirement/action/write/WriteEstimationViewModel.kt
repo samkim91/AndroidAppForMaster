@@ -124,15 +124,16 @@ class WriteEstimationViewModel @Inject constructor(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe { setAction(SHOW_LOADING) }
-            .doAfterTerminate { setAction(DISMISS_LOADING) }
             .subscribeBy(
                 onSuccess = {
+                    Timber.tag(TAG).d("sendEstimation onSuccess: ")
                     setAction(SEND_ESTIMATION_SUCCESSFULLY)
                 },
                 onError = {
                     setAction(REQUEST_FAILED)
                 }
-            ).addToDisposable()
+            )
+            .addToDisposable()
     }
 
     fun startEstimationTemplate() {
