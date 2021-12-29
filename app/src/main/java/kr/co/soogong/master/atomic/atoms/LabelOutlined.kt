@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.common.CodeTable
@@ -22,6 +23,7 @@ class LabelOutlined @JvmOverloads constructor(
         set(value) {
             field = value
             value?.let {
+                binding.tvContent.isVisible = true
                 binding.tvContent.text = value
             }
         }

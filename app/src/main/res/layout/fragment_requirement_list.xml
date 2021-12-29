@@ -57,7 +57,7 @@
             app:layout_constraintTop_toTopOf="@id/swipe_refresh_layout"
             app:layout_constraintVertical_chainStyle="packed"
             app:layout_constraintWidth_percent="0.35"
-            bind:visible="@{vm.isEmptyList}" />
+            bind:visible="@{vm.isEmptyList &amp;&amp; vm.requirements.empty}" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_empty"
@@ -71,6 +71,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_nutty"
-            bind:visible="@{vm.isEmptyList}" />
+            bind:visible="@{vm.isEmptyList &amp;&amp; vm.requirements.empty}" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

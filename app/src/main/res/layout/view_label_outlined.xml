@@ -17,6 +17,8 @@
             android:paddingTop="@dimen/gap_5"
             android:paddingEnd="@dimen/gap_8"
             android:paddingBottom="@dimen/gap_5"
+            tools:visibility="visible"
+            android:visibility="invisible"
             android:textColor="@color/grey_3"
             tools:background="@drawable/bg_solid_transparent_stroke_light_grey2_radius4"
             tools:text="라벨명" />
