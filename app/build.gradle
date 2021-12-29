@@ -127,6 +127,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$archLifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$archLifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$archLifecycleVersion"
+    implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
 
     // okHttp
     implementation "com.squareup.okhttp3:okhttp:$okhttpVersion"
@@ -193,9 +194,6 @@ dependencies {
 
     // Kakao
     implementation "com.kakao.sdk:v2-talk:$kakaoVersion"
-
-    // Button
-    implementation 'com.nex3z:toggle-button-group:1.2.3'
 
     // dagger 2
     implementation "com.google.dagger:dagger:$daggerVersion"

@@ -8,6 +8,9 @@ import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.dao.requirement.RequirementDao
+import kr.co.soogong.master.data.dto.common.PageableContentDto
+import kr.co.soogong.master.data.dto.common.ResponseDto
+import kr.co.soogong.master.data.dto.requirement.RequirementCardDto
 import kr.co.soogong.master.data.dto.requirement.RequirementDto
 import kr.co.soogong.master.domain.usecase.auth.GetMasterUidFromSharedUseCase
 import kr.co.soogong.master.network.requirement.RequirementService
@@ -25,25 +28,25 @@ class RequirementRepository @Inject constructor(
     fun getRequirementById(requirementId: Int): Single<RequirementDto> {
         Timber.tag(TAG).d("getRequirementFromAll start: $requirementId")
         return getRequirementFromServer(requirementId)
-            .onErrorResumeNext(getRequirementFromLocal(requirementId))
-            .doOnError { Timber.tag(TAG).d("getRequirementById failed: $it") }
+//            .onErrorResumeNext(getRequirementFromLocal(requirementId))
+            .doOnError { Timber.tag(TAG).d("getRequirementById failed: ") }
     }
 
     private fun getRequirementFromLocal(requirementId: Int): Single<RequirementDto> {
         Timber.tag(TAG).d("getRequirementFromLocal start: $requirementId")
         return requirementDao.getItem(requirementId)
             .doOnSuccess {
-                Timber.tag(TAG).d("getRequirementFromLocal: $it")
+                Timber.tag(TAG).d("getRequirementFromLocal: ")
             }
     }
 
     private fun getRequirementFromServer(requirementId: Int): Single<RequirementDto> {
         Timber.tag(TAG).d("getRequirementFromServer start: $requirementId")
         return requirementService.getRequirement(requirementId, getMasterUidFromSharedUseCase()!!)
-            .doOnSuccess {
-                Timber.tag(TAG).d("getRequirementFromServer: $it ")
-                saveRequirementInLocal(it)
-            }
+//            .doOnSuccess {
+//                Timber.tag(TAG).d("getRequirementFromServer: ")
+//                saveRequirementInLocal(it)
+//            }
     }
 
     private fun saveRequirementInLocal(requirementDto: RequirementDto) {
@@ -62,10 +65,13 @@ class RequirementRepository @Inject constructor(
     }
 
     fun getRequirementsByStatus(
-        statusArray: List<String>,
-    ): Single<List<RequirementDto>> {
-        return getRequirementsFromServer(statusArray)
-            .onErrorResumeNext(getRequirementsFromLocal(statusArray))
+        status: String,
+        readYns: Boolean?,
+        offset: Int,
+        pageSize: Int,
+    ): Single<ResponseDto<PageableContentDto<RequirementCardDto>>> {
+        return getRequirementsFromServer(status, readYns, offset, pageSize)
+//            .onErrorResumeNext(getRequirementsFromLocal(statusArray))
             .doOnError { Timber.tag(TAG).d("getRequirementsByStatus failed: $it") }
     }
 
@@ -75,19 +81,25 @@ class RequirementRepository @Inject constructor(
         Timber.tag(TAG).d("getRequirementsFromLocal start: $statusArray")
         return requirementDao.getListByStatus(statusArray)
             .doOnSuccess {
-                Timber.tag(TAG).d("getRequirementsFromLocal: ${it.size}")
+                Timber.tag(TAG).d("getRequirementsFromLocal: ")
             }
     }
 
-    private fun getRequirementsFromServer(statusArray: List<String>): Single<List<RequirementDto>> {
-        Timber.tag(TAG).d("getRequirementFromServer start: $statusArray")
-        return requirementService.getRequirementsByStatus(
-            getMasterUidFromSharedUseCase()!!,
-            statusArray
-        )
+    private fun getRequirementsFromServer(
+        status: String,
+        readYns: Boolean?,
+        offset: Int,
+        pageSize: Int,
+    ): Single<ResponseDto<PageableContentDto<RequirementCardDto>>> {
+        Timber.tag(TAG).d("getRequirementFromServer start: $status")
+        return requirementService.getRequirements(getMasterUidFromSharedUseCase()!!,
+            status,
+            readYns,
+            offset,
+            pageSize)
             .doOnSuccess {
-                Timber.tag(TAG).d("getRequirementsFromServer: ${it.size}")
-                saveRequirementsInLocal(statusArray, it)
+                Timber.tag(TAG).d("getRequirementsFromServer: ")
+//                saveRequirementsInLocal(status, it)
             }
     }
 
@@ -110,14 +122,21 @@ class RequirementRepository @Inject constructor(
     fun searchRequirementsFromServer(
         searchingText: String,
         searchingPeriod: Int,
-    ): Single<List<RequirementDto>> {
+        readYns: Boolean? = null,
+        offset: Int,
+        pageSize: Int,
+    ): Single<ResponseDto<PageableContentDto<RequirementCardDto>>> {
         Timber.tag(TAG).d("searchRequirementsFromServer start: $searchingText, $searchingPeriod")
-        return requirementService.searchRequirements(getMasterUidFromSharedUseCase()!!,
+        return requirementService.searchRequirements(
+            getMasterUidFromSharedUseCase()!!,
             searchingText,
-            searchingPeriod
+            searchingPeriod,
+            readYns,
+            offset,
+            pageSize,
         )
             .doOnSuccess {
-                Timber.tag(TAG).d("searchRequirementsFromServer: ${it.size}")
+                Timber.tag(TAG).d("searchRequirementsFromServer: ")
             }
     }
 

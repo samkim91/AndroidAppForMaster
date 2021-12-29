@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:fillViewport="true">
 
-            <kr.co.soogong.master.ui.widget.LargeTitleSubtitle
+            <kr.co.soogong.master.atomic.molecules.LargeTitleSubtitle
                 android:id="@+id/title_widget"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -63,7 +63,7 @@
                 android:layout_marginStart="@dimen/gap_20"
                 android:layout_marginTop="@dimen/gap_8"
                 android:layout_marginEnd="@dimen/gap_20"
-                android:background="@drawable/shape_white_background_gray_border_radius8"
+                android:background="@drawable/bg_solid_white_stroke_light_grey1_radius8"
                 android:hint="@string/insert_certification_code_edittext_hint"
                 android:inputType="numberSigned"
                 android:maxLength="6"
@@ -73,7 +73,7 @@
                 android:paddingBottom="@dimen/gap_10"
                 android:singleLine="true"
                 android:text="@={vm.certificationCode}"
-                android:textColor="@color/color_2E2E2E"
+                android:textColor="@color/c_2E2E2E"
                 android:textColorHint="@color/text_hint_color"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -85,7 +85,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/gap_10"
-                android:textColor="@color/color_FF711D"
+                android:textColor="@color/c_FF711D"
                 app:layout_constraintBottom_toBottomOf="@id/certification_code"
                 app:layout_constraintEnd_toEndOf="@id/certification_code"
                 app:layout_constraintTop_toTopOf="@id/certification_code"
@@ -98,8 +98,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/gap_20"
                 android:layout_marginTop="@dimen/gap_4"
-                android:text="@string/alert_wrong_certification_code"
-                android:textColor="@color/color_FF711D"
+                android:text="@string/wrong_certification_code"
+                android:textColor="@color/c_FF711D"
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0"
@@ -113,8 +113,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/gap_20"
                 android:layout_marginTop="@dimen/gap_4"
-                android:text="@string/alert_expired_certification_time"
-                android:textColor="@color/color_FF711D"
+                android:text="@string/expired_certification_code"
+                android:textColor="@color/c_FF711D"
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0"
@@ -129,7 +129,7 @@
                 android:layout_marginStart="@dimen/gap_20"
                 android:layout_marginTop="@dimen/gap_4"
                 android:text="@string/alert_invalid_certification_code"
-                android:textColor="@color/color_FF711D"
+                android:textColor="@color/c_FF711D"
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0"
@@ -143,7 +143,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/gap_4"
                 android:text="@string/alert_empty_certification_code"
-                android:textColor="@color/color_FF711D"
+                android:textColor="@color/c_FF711D"
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0"
@@ -158,7 +158,7 @@
                 android:layout_marginBottom="@dimen/gap_32"
                 android:text="@string/confirming_certification_code_received"
                 android:textColor="@color/text_primary_color"
-                app:layout_constraintBottom_toTopOf="@id/left_button"
+                app:layout_constraintBottom_toTopOf="@id/button_left"
                 app:layout_constraintEnd_toStartOf="@id/request_certification_code_again_text"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toStartOf="parent" />
@@ -169,7 +169,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/gap_4"
-                android:text="@string/request_certification_code_again_text"
+                android:text="@string/resend_certification_code"
                 android:textColor="@color/text_primary_color"
                 app:layout_constraintBottom_toBottomOf="@id/confirming_certification_code_received"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -177,29 +177,29 @@
                 app:layout_constraintStart_toEndOf="@id/confirming_certification_code_received" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/left_button"
+                android:id="@+id/button_left"
                 style="@style/text_style_16sp.bold"
                 android:layout_width="@dimen/gap_0"
                 android:layout_height="@dimen/gap_48"
                 android:background="@drawable/shape_white_background_gray_border"
                 android:text="@string/retype_phone_number_button_text"
-                android:textColor="@color/color_616161"
+                android:textColor="@color/c_616161"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/right_button"
+                app:layout_constraintEnd_toStartOf="@id/button_right"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/right_button"
+                android:id="@+id/button_right"
                 style="@style/text_style_16sp.bold"
                 android:layout_width="@dimen/gap_0"
                 android:layout_height="@dimen/gap_48"
                 android:background="@drawable/default_button_selector"
                 android:enabled="@{vm.certificationCode.length() == 6}"
                 android:text="@string/check_certification_code_button_text"
-                android:textColor="@color/basic_white"
+                android:textColor="@color/c_FFFFFF"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/left_button" />
+                app:layout_constraintStart_toEndOf="@id/button_left" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

@@ -7,9 +7,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
+import kr.co.soogong.master.data.common.CodeTable
 import kr.co.soogong.master.data.dto.profile.PortfolioDto
-import kr.co.soogong.master.data.model.profile.PortfolioCodeTable
-import kr.co.soogong.master.data.model.profile.PriceByProjectCodeTable
 import kr.co.soogong.master.domain.usecase.profile.DeletePortfolioUseCase
 import kr.co.soogong.master.domain.usecase.profile.GetPortfolioListUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
@@ -22,18 +21,18 @@ import javax.inject.Inject
 class PortfolioListViewModel @Inject constructor(
     private val getPortfolioListUseCase: GetPortfolioListUseCase,
     private val deletePortfolioUseCase: DeletePortfolioUseCase,
-    val savedStateHandle: SavedStateHandle
+    val savedStateHandle: SavedStateHandle,
 ) : BaseViewModel() {
-    private val pageName = PortfolioListActivityHelper.getPageNameFromSavedState(savedStateHandle)
+    val pageName = PortfolioListActivityHelper.getPageNameFromSavedState(savedStateHandle)
 
-    private val _itemList = MutableLiveData<List<PortfolioDto>>()
-    val itemList: LiveData<List<PortfolioDto>>
-        get() = _itemList
+    private val _items = MutableLiveData<List<PortfolioDto>>()
+    val items: LiveData<List<PortfolioDto>>
+        get() = _items
 
     fun requestPortfolioList() {
         val type = when (pageName) {
-            PORTFOLIO -> PortfolioCodeTable.code
-            else -> PriceByProjectCodeTable.code
+            PORTFOLIO -> CodeTable.PORTFOLIO.code
+            else -> CodeTable.PRICE_BY_PROJECT.code
         }
         Timber.tag(TAG).d("requestPortfolioList: $type")
 
@@ -43,7 +42,7 @@ class PortfolioListViewModel @Inject constructor(
             .subscribeBy(
                 onSuccess = {
                     Timber.tag(TAG).d("requestPortfolioList successfully: $it")
-                    _itemList.postValue(it.filter { portfolioDto -> portfolioDto.type == type })
+                    _items.postValue(it.filter { portfolioDto -> portfolioDto.type == type })
                 },
                 onError = {
                     Timber.tag(TAG).d("requestPortfolioList failed: $it")

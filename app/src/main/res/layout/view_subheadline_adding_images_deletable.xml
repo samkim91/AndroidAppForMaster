@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/bind"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="java.util.List" />
+
+        <import type="kr.co.soogong.master.data.dto.common.AttachmentDto" />
+
+        <variable
+            name="images"
+            type="List&lt;AttachmentDto>" />
+    </data>
+
+    <merge
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_subheadline"
+            style="@style/subheadline.bold"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="subheadline : ex) 사진 첨부 (선택)" />
+
+        <kr.co.soogong.master.atomic.molecules.ImageAddRectangle
+            android:id="@+id/iv_adding_image"
+            android:layout_width="@dimen/gap_100"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_10"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_subheadline" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_images"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/gap_6"
+            android:orientation="horizontal"
+            android:overScrollMode="never"
+            app:images_deletable="@{images}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iv_adding_image"
+            app:layout_constraintTop_toBottomOf="@id/tv_subheadline"
+            bind:visible="@{images}"
+            tools:listitem="@layout/view_holder_image_deletable" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_alert"
+            style="@style/caption_1.regular"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_4"
+            android:textColor="@color/brand_red"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_adding_image"
+            tools:text="@string/required_field_alert"
+            tools:visibility="visible" />
+    </merge>
+</layout>

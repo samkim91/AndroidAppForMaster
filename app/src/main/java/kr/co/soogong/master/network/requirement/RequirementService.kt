@@ -2,6 +2,9 @@ package kr.co.soogong.master.network.requirement
 
 import com.google.gson.JsonObject
 import io.reactivex.Single
+import kr.co.soogong.master.data.dto.common.PageableContentDto
+import kr.co.soogong.master.data.dto.common.ResponseDto
+import kr.co.soogong.master.data.dto.requirement.RequirementCardDto
 import kr.co.soogong.master.data.dto.requirement.RequirementDto
 import kr.co.soogong.master.data.dto.requirement.estimation.EstimationDto
 import kr.co.soogong.master.data.dto.requirement.estimationTemplate.EstimationTemplateDto
@@ -16,19 +19,32 @@ class RequirementService @Inject constructor(
 ) {
     private val requirementInterface = retrofit.create(RequirementInterface::class.java)
 
-    fun getRequirementsByStatus(
+    fun getRequirements(
         masterUid: String,
-        statusArray: List<String>,
-    ): Single<List<RequirementDto>> {
-        return requirementInterface.getRequirementsByStatus(masterUid, statusArray)
+        status: String,
+        readYns: Boolean?,
+        offset: Int,
+        pageSize: Int,
+    ): Single<ResponseDto<PageableContentDto<RequirementCardDto>>> {
+        return requirementInterface.getRequirements(masterUid, status, readYns, offset, pageSize)
     }
 
     fun searchRequirements(
         masterUid: String,
         searchingText: String,
         searchingPeriod: Int,
-    ): Single<List<RequirementDto>> {
-        return requirementInterface.searchRequirements(masterUid, searchingText, searchingPeriod)
+        readYns: Boolean?,
+        offset: Int,
+        pageSize: Int,
+    ): Single<ResponseDto<PageableContentDto<RequirementCardDto>>> {
+        return requirementInterface.searchRequirements(
+            masterUid,
+            searchingText,
+            searchingPeriod,
+            readYns,
+            offset,
+            pageSize,
+        )
     }
 
     fun getRequirement(requirementId: Int, masterUid: String): Single<RequirementDto> {

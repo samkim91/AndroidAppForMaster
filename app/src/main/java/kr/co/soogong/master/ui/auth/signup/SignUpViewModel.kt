@@ -9,8 +9,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import kr.co.soogong.master.data.dto.profile.MajorDto
 import kr.co.soogong.master.data.dto.profile.MasterDto
+import kr.co.soogong.master.data.dto.profile.ProjectDto
 import kr.co.soogong.master.data.model.major.Major
 import kr.co.soogong.master.domain.usecase.auth.CheckUserExistentUseCase
 import kr.co.soogong.master.domain.usecase.auth.SignUpUseCase
@@ -44,6 +44,7 @@ class SignUpViewModel @Inject constructor(
     val ownerName = MutableLiveData("")
 
     // MajorFragment
+    val projects = ListLiveData<ProjectDto>()
     val majors = ListLiveData<Major>()
 
     // AddressFragment
@@ -92,7 +93,7 @@ class SignUpViewModel @Inject constructor(
                 uid = uid.value,
                 ownerName = ownerName.value,
                 tel = tel.value,
-                majors = MajorDto.fromMajorList(majors.value?.toList()),
+                projects = projects.value,
                 roadAddress = roadAddress.value,
                 detailAddress = detailAddress.value,
                 latitude = latitude.value?.toFloat(),

@@ -11,177 +11,110 @@
             type="kr.co.soogong.master.data.dto.profile.PortfolioDto" />
 
         <variable
-            name="delete_button_click_listener"
+            name="onLeftButtonClick"
             type="android.view.View.OnClickListener" />
 
         <variable
-            name="edit_button_click_listener"
+            name="buttonThemeLeft"
+            type="kr.co.soogong.master.data.common.ButtonTheme" />
+
+        <variable
+            name="buttonThemeRight"
+            type="kr.co.soogong.master.data.common.ButtonTheme" />
+
+        <variable
+            name="onRightButtonClick"
             type="android.view.View.OnClickListener" />
     </data>
 
-    <LinearLayout
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/line"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/gap_10"
-            android:background="@color/line_color" />
+        android:layout_marginTop="@dimen/gap_5"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="@dimen/gap_14"
+        app:cardElevation="@dimen/gap_1">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="@dimen/gap_20"
-            android:paddingTop="@dimen/gap_32"
-            android:paddingEnd="@dimen/gap_20"
-            android:paddingBottom="@dimen/gap_12">
+            android:paddingStart="@dimen/gap_14"
+            android:paddingTop="@dimen/gap_18"
+            android:paddingEnd="@dimen/gap_14"
+            android:paddingBottom="@dimen/gap_18">
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/title"
-                style="@style/text_style_16sp.regular"
+                android:id="@+id/tv_subheadline"
+                style="@style/subheadline.regular"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:ellipsize="end"
                 android:text="@{data.title}"
-                android:textColor="@color/text_basic_color"
+                android:textColor="@color/grey_3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="루버 방충망 설치" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/before_repair_image_label"
-                style="@style/text_style_14sp.regular"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/gap_12"
-                android:text="@string/image_before_job_label"
-                android:textColor="@color/text_basic_color"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/title" />
-
             <androidx.cardview.widget.CardView
-                android:id="@+id/before_repair_image_card"
+                android:id="@+id/cv_before_image"
                 android:layout_width="@dimen/gap_100"
                 android:layout_height="@dimen/gap_100"
                 android:layout_marginTop="@dimen/gap_12"
-                app:cardCornerRadius="@dimen/gap_8"
+                app:cardCornerRadius="@dimen/gap_10"
                 app:cardElevation="@dimen/gap_0"
-                app:layout_constraintStart_toStartOf="@id/before_repair_image_label"
-                app:layout_constraintTop_toBottomOf="@id/before_repair_image_label">
+                app:layout_constraintStart_toStartOf="@id/tv_subheadline"
+                app:layout_constraintTop_toBottomOf="@id/tv_subheadline">
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/before_repair_image_view"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    bind:image_url="@{data.beforeImage.url}" />
+                    bind:image_url="@{data.beforeImage.url}"
+                    tools:background="@drawable/ic_empty_image" />
             </androidx.cardview.widget.CardView>
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/after_repair_image_label"
-                style="@style/text_style_14sp.regular"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/gap_38"
-                android:text="@string/image_after_job_label"
-                android:textColor="@color/text_basic_color"
-                app:layout_constraintStart_toEndOf="@id/before_repair_image_label"
-                app:layout_constraintTop_toTopOf="@id/before_repair_image_label" />
-
             <androidx.cardview.widget.CardView
-                android:id="@+id/after_repair_image_card"
+                android:id="@+id/cv_after_image"
                 android:layout_width="@dimen/gap_100"
                 android:layout_height="@dimen/gap_100"
-                android:layout_marginTop="@dimen/gap_12"
-                app:cardCornerRadius="@dimen/gap_8"
+                android:layout_marginStart="@dimen/gap_14"
+                app:cardCornerRadius="@dimen/gap_10"
                 app:cardElevation="@dimen/gap_0"
-                app:layout_constraintStart_toStartOf="@id/after_repair_image_label"
-                app:layout_constraintTop_toBottomOf="@id/after_repair_image_label">
+                app:layout_constraintStart_toEndOf="@id/cv_before_image"
+                app:layout_constraintTop_toTopOf="@id/cv_before_image">
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/after_repair_image_view"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    bind:image_url="@{data.afterImage.url}" />
+                    bind:image_url="@{data.afterImage.url}"
+                    tools:background="@drawable/ic_empty_image" />
             </androidx.cardview.widget.CardView>
 
-            <androidx.constraintlayout.widget.Group
-                android:id="@+id/portfolio_view_group"
-                bind:visible='@{data.type.equals("Portfolio")}'
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/after_repair_image_card"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:constraint_referenced_ids="before_repair_image_label,before_repair_image_card,after_repair_image_label,after_repair_image_card"/>
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/price"
-                style="@style/text_style_16sp.regular"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/gap_12"
-                bind:set_price="@{data.price}"
-                bind:visible='@{data.type.equals("Price")}'
-                android:textColor="@color/text_basic_color"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0"
-                app:layout_constraintTop_toBottomOf="@id/portfolio_view_group"
-                tools:text="100,000원" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/description"
-                style="@style/text_style_16sp.regular"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/gap_12"
-                android:text="@{data.description}"
-                android:textColor="@color/text_basic_color"
-                app:layout_constraintHorizontal_bias="0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/price"
-                app:layout_constraintEnd_toEndOf="parent"
-                tools:text="현관문교체를 했습네다현관문교체를 했습네다현관문교체를 했습네다현관문교체를 했습네다현관문교체를 했습네다현관문교체를 했습네다" />
-
-            <Button
-                android:id="@+id/delete_button"
-                style="@style/text_style_16sp.bold"
+            <kr.co.soogong.master.atomic.atoms.ButtonMedium
+                android:id="@+id/bm_left_button"
                 android:layout_width="@dimen/gap_0"
-                android:layout_height="52dp"
-                android:layout_marginTop="@dimen/gap_12"
-                android:background="@android:color/transparent"
-                android:onClick="@{delete_button_click_listener}"
-                android:text="@string/delete"
-                android:textColor="@color/color_FF711D"
-                app:layout_constraintEnd_toStartOf="@+id/edit_button"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/gap_14"
+                app:buttonTheme="@{buttonThemeLeft}"
+                app:layout_constraintEnd_toStartOf="@id/bm_right_button"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/description" />
+                app:layout_constraintTop_toBottomOf="@id/cv_before_image"
+                app:onButtonClick="@{onLeftButtonClick}" />
 
-            <Button
-                android:id="@+id/edit_button"
-                style="@style/text_style_16sp.bold"
-                android:layout_width="0dp"
-                android:layout_height="52dp"
-                android:background="@android:color/transparent"
-                android:onClick="@{edit_button_click_listener}"
-                android:text="@string/modify"
-                android:textColor="@color/color_616161"
+            <kr.co.soogong.master.atomic.atoms.ButtonMedium
+                android:id="@+id/bm_right_button"
+                android:layout_width="@dimen/gap_0"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/gap_10"
+                android:layout_marginTop="@dimen/gap_14"
+                app:buttonTheme="@{buttonThemeRight}"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/delete_button"
-                app:layout_constraintTop_toTopOf="@id/delete_button" />
-
-            <ImageView
-                android:id="@+id/divider"
-                android:layout_width="1dp"
-                android:layout_height="16dp"
-                android:background="#D8D8D8"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/delete_button"
-                app:layout_constraintStart_toEndOf="@id/edit_button"
-                app:layout_constraintTop_toTopOf="@id/delete_button" />
-
-
+                app:layout_constraintStart_toEndOf="@id/bm_left_button"
+                app:layout_constraintTop_toBottomOf="@id/cv_before_image"
+                app:onButtonClick="@{onRightButtonClick}" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </LinearLayout>
+    </androidx.cardview.widget.CardView>
 </layout>

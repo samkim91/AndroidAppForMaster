@@ -32,6 +32,7 @@ open class EditProfileContainerViewModel(
                     onSuccess(it)
                 },
                 onError = {
+                    Timber.tag(TAG).d("requestProfile failed: $it")
                     setAction(REQUEST_FAILED)
                 }
             ).addToDisposable()
@@ -75,6 +76,5 @@ open class EditProfileContainerViewModel(
         private const val TAG = "EditProfileContainerViewModel"
         const val SAVE_MASTER_SUCCESSFULLY = "SAVE_MASTER_SUCCESSFULLY"
         const val REQUEST_FAILED = "REQUEST_FAILED"
-
     }
 }

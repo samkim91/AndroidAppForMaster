@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:bind="http://schemas.android.com/bind"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -11,104 +10,84 @@
             type="kr.co.soogong.master.data.dto.requirement.estimationTemplate.EstimationTemplateDto" />
 
         <variable
-            name="left_button_click_listener"
+            name="deleteClickListener"
             type="android.view.View.OnClickListener" />
 
         <variable
-            name="middle_button_click_listener"
+            name="editingClickListener"
             type="android.view.View.OnClickListener" />
 
         <variable
-            name="right_button_click_listener"
+            name="applyingClickListener"
             type="android.view.View.OnClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingStart="@dimen/gap_25"
-        android:paddingTop="@dimen/gap_16"
-        android:paddingEnd="@dimen/gap_25"
-        android:paddingBottom="@dimen/gap_16">
+        android:padding="@dimen/gap_16">
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/textview_created_at"
-            style="@style/text_style_16sp.bold"
-            android:layout_width="match_parent"
+            android:id="@+id/tv_created_at"
+            android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"
-            android:textColor="@color/color_909090"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:textAppearance="@style/call_out.regular"
+            android:textColor="@color/grey_2"
+            app:dateWithoutDay="@{data.createdAt}"
+            app:layout_constraintEnd_toStartOf="@id/iv_delete"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            bind:to_date_string="@{data.createdAt}"
             tools:text="2021. 09. 21" />
 
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_trash_box"
+            android:backgroundTint="@color/grey_2"
+            android:onClick="@{deleteClickListener}"
+            app:layout_constraintBottom_toBottomOf="@id/tv_created_at"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_created_at" />
+
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/textview_description"
-            style="@style/text_style_18sp.regular"
+            android:id="@+id/tv_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/gap_2"
+            android:layout_marginTop="@dimen/gap_16"
             android:text="@{data.description}"
-            android:textColor="@color/color_2E2E2E"
+            android:textAppearance="@style/body.bold"
+            android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textview_created_at"
+            app:layout_constraintTop_toBottomOf="@id/tv_created_at"
             tools:text="두번째내용두번째내용두번째내용두번째내용두번째내용두번째내용두번째내용두번째내용두번째내용두번째내용두번째내용 내용이 길어질 수록 어떻게 될까요? 긴 내용은 길게 그냥 보여주는게 나을까" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/left_button"
-            style="@style/text_style_16sp.bold"
-            android:layout_width="@dimen/gap_96"
-            android:layout_height="@dimen/gap_40"
-            android:layout_marginTop="@dimen/gap_8"
-            android:background="@drawable/shape_red_background_radius5"
-            android:drawableStart="@drawable/ic_trash_box"
-            android:drawablePadding="@dimen/gap_5"
-            android:gravity="center_vertical"
-            android:onClick="@{left_button_click_listener}"
-            android:paddingStart="@dimen/gap_15"
-            android:paddingEnd="@dimen/gap_15"
-            android:text="@string/delete_button_text"
-            android:textColor="@color/basic_white"
-            app:layout_constraintEnd_toStartOf="@id/middle_button"
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier_buttons"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:barrierMargin="@dimen/gap_16"
+            app:constraint_referenced_ids="tv_description" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/b_editing"
+            style="@style/button.medium.outlined_secondary"
+            android:layout_marginEnd="@dimen/gap_12"
+            android:onClick="@{editingClickListener}"
+            android:text="@string/editing"
+            app:layout_constraintEnd_toStartOf="@id/b_applying"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textview_description" />
+            app:layout_constraintTop_toBottomOf="@id/barrier_buttons" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/middle_button"
-            style="@style/text_style_16sp.bold"
-            android:layout_width="@dimen/gap_96"
-            android:layout_height="@dimen/gap_40"
-            android:background="@drawable/shape_blue_background_radius5"
-            android:drawableStart="@drawable/ic_pencil"
-            android:drawablePadding="@dimen/gap_5"
-            android:gravity="center_vertical"
-            android:onClick="@{middle_button_click_listener}"
-            android:paddingStart="@dimen/gap_15"
-            android:paddingEnd="@dimen/gap_15"
-            android:text="@string/edit_button_text"
-            android:textColor="@color/basic_white"
-            app:layout_constraintEnd_toStartOf="@id/right_button"
-            app:layout_constraintStart_toEndOf="@id/left_button"
-            app:layout_constraintTop_toTopOf="@id/left_button" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/right_button"
-            style="@style/text_style_16sp.bold"
-            android:layout_width="@dimen/gap_96"
-            android:layout_height="@dimen/gap_40"
-            android:background="@drawable/shape_green_background_radius5"
-            android:drawableStart="@drawable/ic_simple_check"
-            android:drawablePadding="@dimen/gap_5"
-            android:gravity="center_vertical"
-            android:onClick="@{right_button_click_listener}"
-            android:paddingStart="@dimen/gap_15"
-            android:paddingEnd="@dimen/gap_15"
-            android:text="@string/apply_button_text"
-            android:textColor="@color/basic_white"
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/b_applying"
+            style="@style/button.medium.outlined_primary"
+            android:onClick="@{applyingClickListener}"
+            android:text="@string/applying"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/middle_button"
-            app:layout_constraintTop_toTopOf="@id/left_button" />
+            app:layout_constraintStart_toEndOf="@id/b_editing"
+            app:layout_constraintTop_toBottomOf="@id/barrier_buttons" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

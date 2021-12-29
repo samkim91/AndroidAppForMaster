@@ -3,8 +3,11 @@ package kr.co.soogong.master.network.requirement
 import com.google.gson.JsonObject
 import io.reactivex.Single
 import kr.co.soogong.master.contract.HttpContract
-import kr.co.soogong.master.data.dto.common.Code
+import kr.co.soogong.master.data.dto.common.CodeDto
+import kr.co.soogong.master.data.dto.common.PageableContentDto
+import kr.co.soogong.master.data.dto.common.ResponseDto
 import kr.co.soogong.master.data.dto.requirement.CustomerRequest
+import kr.co.soogong.master.data.dto.requirement.RequirementCardDto
 import kr.co.soogong.master.data.dto.requirement.RequirementDto
 import kr.co.soogong.master.data.dto.requirement.estimation.EstimationDto
 import kr.co.soogong.master.data.dto.requirement.estimationTemplate.EstimationTemplateDto
@@ -14,18 +17,24 @@ import okhttp3.RequestBody
 import retrofit2.http.*
 
 interface RequirementInterface {
-    @GET(HttpContract.GET_REQUIREMENT_LIST_BY_UID)
-    fun getRequirementsByStatus(
+    @GET(HttpContract.GET_REQUIREMENTS)
+    fun getRequirements(
         @Query("masterUid") masterUid: String,
-        @Query("statusArray") statusArray: List<String>,
-    ): Single<List<RequirementDto>>
+        @Query("status") status: String,
+        @Query("readYns") readYns: Boolean?,
+        @Query("offset") offset: Int,
+        @Query("pageSize") pageSize: Int,
+    ): Single<ResponseDto<PageableContentDto<RequirementCardDto>>>
 
     @GET(HttpContract.SEARCH_REQUIREMENTS)
     fun searchRequirements(
         @Query("masterUid") masterUid: String,
         @Query("search") searchingText: String,
         @Query("interval") searchingPeriod: Int,
-    ): Single<List<RequirementDto>>
+        @Query("readYns") readYns: Boolean?,
+        @Query("offset") offset: Int,
+        @Query("pageSize") pageSize: Int,
+    ): Single<ResponseDto<PageableContentDto<RequirementCardDto>>>
 
     @GET(HttpContract.GET_REQUIREMENT)
     fun getRequirement(
@@ -59,7 +68,7 @@ interface RequirementInterface {
     @GET(HttpContract.GET_CANCELED_REASONS)
     fun getCanceledReasons(
         @Query("groupCodes") groupCodes: List<String>,
-    ): Single<List<Code>>
+    ): Single<List<CodeDto>>
 
     @POST(HttpContract.CALL_TO_CLIENT)
     fun callToClient(@Body data: HashMap<String, Any>): Single<Boolean>

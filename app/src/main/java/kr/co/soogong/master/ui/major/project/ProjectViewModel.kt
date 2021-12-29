@@ -2,39 +2,40 @@ package kr.co.soogong.master.ui.major.project
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import dagger.assisted.Assisted
-import dagger.assisted.AssistedInject
+import androidx.lifecycle.SavedStateHandle
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import kr.co.soogong.master.data.model.major.Category
-import kr.co.soogong.master.data.model.major.Project
+import kr.co.soogong.master.data.dto.profile.ProjectDto
 import kr.co.soogong.master.domain.usecase.major.GetProjectListUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
+import kr.co.soogong.master.utility.ListLiveData
 import timber.log.Timber
+import javax.inject.Inject
 
-class ProjectViewModel @AssistedInject constructor(
+@HiltViewModel
+class ProjectViewModel @Inject constructor(
     private val getProjectListUseCase: GetProjectListUseCase,
-    @Assisted private val category: Category,
+    val savedStateHandle: SavedStateHandle,
 ) : BaseViewModel() {
-    private val _list = MutableLiveData<List<Project>>()
-    val list: LiveData<List<Project>>
+    val categoryId: MutableLiveData<Int> =
+        ProjectFragment.getCategoryIdFromSavedState(savedStateHandle)
+
+    // 뿌려주는 projects
+    private val _list = MutableLiveData<List<ProjectDto>>()
+    val list: LiveData<List<ProjectDto>>
         get() = _list
+
+    // 선택된 projects
+    val checkedList = ListLiveData<ProjectDto>()
 
     init {
         getProjectList()
     }
 
-    fun changeList(position: Int, project: Project) {
-        val items = list.value?.toMutableList()
-        items?.set(position, project)
-        _list.postValue(items ?: emptyList())
-    }
-
     private fun getProjectList() {
         Timber.tag(TAG).d("getProjectList: ")
-        getProjectListUseCase(category.id!!)
+        getProjectListUseCase(categoryId.value!!)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
@@ -47,23 +48,9 @@ class ProjectViewModel @AssistedInject constructor(
             .addToDisposable()
     }
 
-    @dagger.assisted.AssistedFactory
-    interface AssistedFactory {
-        fun create(category: Category): ProjectViewModel
-    }
-
     companion object {
         private const val TAG = "ProjectViewModel"
         const val GET_PROJECT_FAILED = "GET_PROJECT_FAILED"
 
-        fun provideFactory(
-            assistedFactory: AssistedFactory,
-            category: Category
-        ): ViewModelProvider.Factory = object : ViewModelProvider.Factory {
-            @Suppress("UNCHECKED_CAST")
-            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-                return assistedFactory.create(category) as T
-            }
-        }
     }
 }

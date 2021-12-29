@@ -14,158 +14,87 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include
-            android:id="@+id/action_bar"
-            layout="@layout/action_bar_button"
+        <kr.co.soogong.master.atomic.molecules.ActionBar
+            android:id="@+id/ab_header"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="wrap_content"
+            app:backButtonVisibility="@{true}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="@{@string/view_requirement_action_title}" />
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="@dimen/gap_0"
             android:overScrollMode="never"
-            app:layout_constraintBottom_toBottomOf="@id/buttons_divider"
+            app:layout_constraintBottom_toTopOf="@id/buttons_container"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/action_bar">
+            app:layout_constraintTop_toBottomOf="@id/ab_header">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="@dimen/gap_16">
 
-                <kr.co.soogong.master.ui.widget.RequirementIntro
-                    android:id="@+id/requirement_intro"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/gap_20"
-                    android:layout_marginTop="@dimen/gap_32"
-                    android:layout_marginEnd="@dimen/gap_20"
-                    app:initByRequirement="@{vm.requirement}" />
-
-                <kr.co.soogong.master.ui.widget.RequirementProgress
-                    android:id="@+id/requirement_status"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/gap_20"
-                    android:layout_marginTop="@dimen/gap_16"
-                    android:layout_marginEnd="@dimen/gap_20"
-                    app:endingText="@{@string/progress_ending_text}"
-                    app:startingText="@{@string/progress_starting_text}" />
-
-                <kr.co.soogong.master.ui.widget.AlertBox
-                    android:id="@+id/alert_box"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/gap_20"
-                    android:layout_marginTop="@dimen/gap_16"
-                    android:layout_marginEnd="@dimen/gap_20"
-                    android:visibility="gone"
-                    app:alertContent="@{@string/alert_box_content_for_view_requirement_in_measuring}"
-                    app:alertTitle="@{@string/alert_box_title_for_view_requirement_in_measuring}"
-                    app:theme="@{100}" />
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/line_height"
-                    android:layout_marginTop="@dimen/estimation_card_default_margin_top"
-                    android:background="@color/line_color" />
-
-                <kr.co.soogong.master.ui.widget.RequirementBasic
+                <kr.co.soogong.master.atomic.organisms.RequirementBasic
                     android:id="@+id/requirement_basic"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/gap_20"
-                    android:layout_marginTop="@dimen/gap_20"
-                    android:layout_marginEnd="@dimen/gap_20"
-                    app:address="@{vm.requirement.address}"
+                    app:address="@{vm.requirement.oldAddress != null ? vm.requirement.oldAddress : vm.requirement.address}"
                     app:createdAt="@{vm.requirement.createdAt}"
-                    app:measurementBadgeVisibility="@{vm.requirement.typeCode}"
-                    app:oldAddress="@{vm.requirement.oldAddress}"
+                    app:onButtonClick="@{() -> vm.callToClient()}"
                     app:project="@{vm.requirement.projectName}"
-                    app:requirementToken="@{vm.requirement.token}" />
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/gap_10"
-                    android:layout_marginTop="@dimen/gap_20"
-                    android:background="@drawable/thick_shading_line" />
+                    app:requirementToken="@{vm.requirement.token}"
+                    app:status="@{vm.requirement.status}" />
 
                 <LinearLayout
                     android:id="@+id/flexible_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical" />
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/gap_150"
-                    android:background="@color/F2F2F2" />
             </LinearLayout>
         </ScrollView>
 
-        <kr.co.soogong.master.ui.widget.BlueButton
-            android:id="@+id/call_to_customer_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/gap_14"
-            android:visibility="gone"
-            app:buttonText="@{@string/consult_with_customer_button_text}"
-            app:layout_constraintBottom_toTopOf="@id/requirement_due_date"
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/buttons_container"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/gap_64"
+            android:background="@color/white"
+            android:elevation="@dimen/gap_10"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <kr.co.soogong.master.ui.widget.RequirementDueDate
-            android:id="@+id/requirement_due_date"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/gap_48"
-            android:elevation="@dimen/gap_1"
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_left"
+            style="@style/button.medium.outlined_secondary"
+            android:layout_marginStart="@dimen/gap_16"
+            android:layout_marginEnd="@dimen/gap_12"
+            android:elevation="@dimen/gap_10"
             android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:visibility="visible" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/buttons_divider"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/line_height"
-            android:layout_marginBottom="@dimen/gap_48"
-            android:background="@color/line_color"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/buttons_container"
+            app:layout_constraintEnd_toStartOf="@id/button_right"
+            app:layout_constraintStart_toStartOf="@id/buttons_container"
+            app:layout_constraintTop_toTopOf="@id/buttons_container"
+            app:layout_goneMarginEnd="@dimen/gap_16"
+            tools:text="견적 거절"
             tools:visibility="visible" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/left_button"
-            style="@style/text_style_16sp.bold"
-            android:layout_width="@dimen/gap_0"
-            android:layout_height="@dimen/gap_48"
+            android:id="@+id/button_right"
+            style="@style/button.medium.outlined_primary"
+            android:layout_marginEnd="@dimen/gap_16"
+            android:elevation="@dimen/gap_10"
             android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/right_button"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:background="@color/color_FF711D"
-            tools:text="실측 안할래요"
-            tools:textColor="@color/basic_white"
-            tools:visibility="visible" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/right_button"
-            style="@style/text_style_16sp.bold"
-            android:layout_width="@dimen/gap_0"
-            android:layout_height="@dimen/gap_48"
-            android:background="@color/color_1FC472"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/left_button"
-            tools:text="실측 할래요"
-            tools:textColor="@color/basic_white"
+            app:layout_constraintBottom_toBottomOf="@id/buttons_container"
+            app:layout_constraintEnd_toEndOf="@id/buttons_container"
+            app:layout_constraintStart_toEndOf="@id/button_left"
+            app:layout_constraintTop_toTopOf="@id/buttons_container"
+            app:layout_goneMarginStart="@dimen/gap_16"
+            tools:text="견적 보내기"
             tools:visibility="visible" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

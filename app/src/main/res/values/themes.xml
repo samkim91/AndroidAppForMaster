@@ -2,11 +2,14 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">@color/c_69A9F1</item>
         <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
-        <item name="android:windowBackground">@color/app_background_color</item>
-        <item name="colorPrimary">@color/color_1FC472</item>
-        <item name="colorPrimaryDark">@color/color_1FC472</item>
+        <item name="android:windowBackground">@color/white</item>
+        <item name="colorPrimary">@color/brand_green</item>
+        <item name="colorSecondary">@color/brand_blue</item>
+        <item name="colorError">@color/brand_red</item>
+        <item name="colorPrimaryDark">@color/brand_green</item>
+        <item name="textAppearanceCaption">@style/caption_1.regular</item>
     </style>
 
     <!-- Splash theme. -->
@@ -34,36 +37,36 @@
 
     <!-- ActionBar theme. -->
     <style name="AppActionBar" parent="android:Widget.DeviceDefault.ActionBar">
-        <item name="android:background">@color/action_bar_background_color</item>
+        <item name="android:background">@color/c_FAFAFA</item>
         <item name="android:titleTextStyle">@style/AppActionBar.Title</item>
     </style>
 
     <style name="AppActionBar.Title">
-        <item name="android:textColor">@color/action_bar_title_color</item>
+        <item name="android:textColor">@color/c_252525</item>
         <item name="android:textSize">@dimen/actionbar_title_collapsed_text_size</item>
         <item name="android:lineSpacingExtra">@dimen/actionbar_title_collapsed_extra_size</item>
     </style>
 
     <style name="AppActionBar.SubTitle">
-        <item name="android:textColor">@color/action_bar_sub_title_color</item>
+        <item name="android:textColor">@color/c_636363</item>
         <item name="android:textSize">@dimen/actionbar_sub_title_collapsed_text_size</item>
         <item name="android:lineSpacingExtra">@dimen/actionbar_title_collapsed_extra_size</item>
     </style>
 
     <style name="ListSubHeader" parent="TextAppearance.AppCompat.Subhead">
         <item name="android:textSize">@dimen/list_header_text_size</item>
-        <item name="android:textColor">@color/list_header_text_color</item>
+        <item name="android:textColor">@color/c_636363</item>
         <item name="android:textStyle">bold</item>
     </style>
 
     <style name="ListItemText" parent="TextAppearance.AppCompat.Medium">
         <item name="android:textSize">@dimen/list_item_text_size</item>
-        <item name="android:textColor">@color/list_item_text_color</item>
+        <item name="android:textColor">@color/c_252525</item>
     </style>
 
     <style name="ListItemDescriptionText" parent="TextAppearance.AppCompat.Small">
         <item name="android:textSize">@dimen/list_item_description_text_size</item>
-        <item name="android:textColor">@color/list_item_description_text_color</item>
+        <item name="android:textColor">@color/c_909090</item>
     </style>
 
     <style name="text_style_10sp">
@@ -210,51 +213,417 @@
         <item name="android:fontFamily">@font/bold</item>
     </style>
 
-<!--    <style name="CustomTabText" parent="Widget.MaterialComponents.TabLayout">-->
-<!--        <item name="android:textSize">@dimen/text_title_size</item>-->
-<!--        <item name="android:fontFamily">@font/medium</item>-->
-<!--        <item name="android:textColor">@color/primary_text_color</item>-->
-<!--    </style>-->
+    <!-- New fonts -->
+    <style name="caption_2">
+        <item name="android:textSize">@dimen/text_size_11sp</item>
+    </style>
 
-    <style name="SignUpTabText" parent="Widget.MaterialComponents.TabLayout">
-        <item name="android:textSize">@dimen/text_size_14sp</item>
+    <style name="caption_2.regular" parent="caption_2">
+        <item name="android:fontFamily">@font/regular</item>
+    </style>
+
+    <style name="caption_2.bold" parent="caption_2">
         <item name="android:fontFamily">@font/medium</item>
-        <item name="android:textColor">@color/color_BDBDBD</item>
+    </style>
+
+    <style name="caption_1">
+        <item name="android:textSize">@dimen/text_size_12sp</item>
+    </style>
+
+    <style name="caption_1.regular" parent="caption_1">
+        <item name="android:fontFamily">@font/regular</item>
+    </style>
+
+    <style name="caption_1.bold" parent="caption_1">
+        <item name="android:fontFamily">@font/medium</item>
+    </style>
+
+    <style name="footnote">
+        <item name="android:textSize">@dimen/text_size_13sp</item>
+    </style>
+
+    <style name="footnote.regular" parent="footnote">
+        <item name="android:fontFamily">@font/regular</item>
+    </style>
+
+    <style name="footnote.bold" parent="footnote">
+        <item name="android:fontFamily">@font/medium</item>
+    </style>
+
+    <style name="subheadline">
+        <item name="android:textSize">@dimen/text_size_15sp</item>
+    </style>
+
+    <style name="subheadline.regular" parent="subheadline">
+        <item name="android:fontFamily">@font/regular</item>
+    </style>
+
+    <style name="subheadline.bold" parent="subheadline">
+        <item name="android:fontFamily">@font/medium</item>
+    </style>
+
+    <style name="call_out">
+        <item name="android:textSize">@dimen/text_size_16sp</item>
+    </style>
+
+    <style name="call_out.regular" parent="call_out">
+        <item name="android:fontFamily">@font/regular</item>
+    </style>
+
+    <style name="call_out.bold" parent="call_out">
+        <item name="android:fontFamily">@font/medium</item>
+    </style>
+
+    <style name="body">
+        <item name="android:textSize">@dimen/text_size_17sp</item>
+    </style>
+
+    <style name="body.regular" parent="body">
+        <item name="android:fontFamily">@font/regular</item>
+    </style>
+
+    <style name="body.bold" parent="body">
+        <item name="android:fontFamily">@font/medium</item>
+    </style>
+
+    <style name="headline">
+        <item name="android:textSize">@dimen/text_size_17sp</item>
+    </style>
+
+    <style name="headline.regular" parent="headline">
+        <item name="android:fontFamily">@font/medium</item>
+    </style>
+
+    <style name="headline.bold" parent="headline">
+        <item name="android:fontFamily">@font/medium</item>
+    </style>
+
+    <style name="title_3">
+        <item name="android:textSize">@dimen/text_size_20sp</item>
+    </style>
+
+    <style name="title_3.regular" parent="title_3">
+        <item name="android:fontFamily">@font/regular</item>
+    </style>
+
+    <style name="title_3.bold" parent="title_3">
+        <item name="android:fontFamily">@font/bold</item>
+    </style>
+
+    <style name="title_2">
+        <item name="android:textSize">@dimen/text_size_22sp</item>
+    </style>
+
+    <style name="title_2.regular" parent="title_2">
+        <item name="android:fontFamily">@font/regular</item>
+    </style>
+
+    <style name="title_2.bold" parent="title_2">
+        <item name="android:fontFamily">@font/bold</item>
+    </style>
+
+    <style name="title_1">
+        <item name="android:textSize">@dimen/text_size_28sp</item>
+    </style>
+
+    <style name="title_1.regular" parent="title_1">
+        <item name="android:fontFamily">@font/regular</item>
+    </style>
+
+    <style name="title_1.bold" parent="title_1">
+        <item name="android:fontFamily">@font/bold</item>
+    </style>
+
+    <style name="large_title">
+        <item name="android:textSize">@dimen/text_size_34sp</item>
+    </style>
+
+    <style name="large_title.regular" parent="large_title">
+        <item name="android:fontFamily">@font/regular</item>
+    </style>
+
+    <style name="large_title.bold" parent="large_title">
+        <item name="android:fontFamily">@font/bold</item>
+    </style>
+
+    <!--    <style name="CustomTabText" parent="Widget.MaterialComponents.TabLayout">-->
+    <!--        <item name="android:textSize">@dimen/text_title_size</item>-->
+    <!--        <item name="android:fontFamily">@font/medium</item>-->
+    <!--        <item name="android:textColor">@color/text_basic_color</item>-->
+    <!--    </style>-->
+
+    <style name="roundCorner30">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/gap_30</item>
+    </style>
+
+    <style name="roundCorner10">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">10dp</item>
+    </style>
+
+    <!-- start TextInput styles -->
+    <style name="outlinedTextInputLayout">
+        <item name="android:textAppearance">@style/subheadline.regular</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="endIconMode">clear_text</item>
+        <item name="endIconTint">@color/light_grey_2</item>
+
+        <item name="boxBackgroundMode">outline</item>
+        <item name="boxBackgroundColor">@null</item>
+        <item name="boxStrokeWidth">@dimen/gap_1</item>
+        <item name="boxStrokeWidthFocused">@dimen/gap_1</item>
+        <item name="boxStrokeColor">@color/selector_light_grey2_default_green_enabled_focused</item>
+        <item name="boxStrokeErrorColor">@color/brand_red</item>
+
+        <item name="counterTextAppearance">@style/caption_1.regular</item>
+        <item name="counterTextColor">@color/light_grey_2</item>
+        <item name="hintTextAppearance">@style/caption_1.regular</item>
+        <item name="hintTextColor">@color/brand_green</item>
+        <item name="android:textColorHint">@color/light_grey_2</item>
+        <item name="errorTextAppearance">@style/caption_1.regular</item>
+        <item name="errorTextColor">@color/brand_red</item>
+
+        <item name="shapeAppearance">@style/roundCorner10</item>
+        <item name="shapeAppearanceOverlay">@null</item>
+    </style>
+
+    <style name="outlinedTextInputEditText">
+        <item name="android:padding">@dimen/gap_14</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textAppearance">@style/call_out.regular</item>
+    </style>
+    <!-- end TextInput styles -->
+
+    <!-- Dropdown styles -->
+    <style name="outlinedTextInputLayout.dropdown" parent="outlinedTextInputLayout">
+        <item name="endIconMode">dropdown_menu</item>
+        <item name="endIconTint">@color/dark_grey_2</item>
+        <item name="shapeAppearance">@style/roundCorner10</item>
+        <item name="shapeAppearanceOverlay">@null</item>
+    </style>
+
+    <style name="outlinedTextInputLayout.dropdown.small" parent="outlinedTextInputLayout.dropdown">
+        <item name="shapeAppearance">@style/roundCorner30</item>
+        <item name="shapeAppearanceOverlay">@null</item>
+    </style>
+
+    <style name="autoCompleteTextViewStyle" parent="outlinedTextInputEditText">
+        <item name="android:dropDownHeight">@dimen/gap_250</item>
+        <item name="android:dropDownVerticalOffset">@dimen/gap_4</item>
+    </style>
+    <!-- end Dropdown styles -->
+
+    <!-- start section 버튼 스타일 -->
+    <style name="button">
+        <item name="android:gravity">center</item>
+        <item name="android:stateListAnimator">@null</item>
+    </style>
+
+    <!-- 버튼 small -->
+    <style name="button.small" parent="button">
+        <item name="android:textAppearance">@style/caption_1.bold</item>
+        <item name="android:layout_height">@dimen/gap_36</item>
+        <item name="android:layout_width">@dimen/gap_0</item>
+    </style>
+
+    <style name="button.small.primary" parent="button.small">
+        <item name="android:background">@drawable/bg_solid_green_selector_radius8</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="button.small.secondary" parent="button.small">
+        <item name="android:background">@drawable/bg_solid_light_grey1_selector_radius8</item>
+        <item name="android:textColor">@color/selector_dark_grey1_alpha50</item>
+    </style>
+
+    <style name="button.small.tertiary" parent="button.small">
+        <item name="android:background">@drawable/bg_solid_red_selector_radius8</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="button.small.outlined_primary" parent="button.small">
+        <item name="android:background">@drawable/bg_solid_white_stroke_green_selector_radius8
+        </item>
+        <item name="android:textColor">@color/selector_green_alpha50</item>
+    </style>
+
+    <style name="button.small.outlined_secondary" parent="button.small">
+        <item name="android:background">
+            @drawable/bg_solid_white_stroke_light_grey2_selector_radius8
+        </item>
+        <item name="android:textColor">@color/selector_dark_grey1_alpha50</item>
+    </style>
+
+    <!-- 버튼 medium -->
+    <style name="button.medium" parent="button">
+        <item name="android:textAppearance">@style/subheadline.bold</item>
+        <item name="android:layout_height">@dimen/gap_48</item>
+        <item name="android:layout_width">@dimen/gap_0</item>
+    </style>
+
+    <style name="button.medium.primary" parent="button.medium">
+        <item name="android:background">@drawable/bg_solid_green_selector_radius8</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="button.medium.secondary" parent="button.medium">
+        <item name="android:background">@drawable/bg_solid_light_grey1_selector_radius8</item>
+        <item name="android:textColor">@color/selector_dark_grey1_alpha50</item>
+    </style>
+
+    <style name="button.medium.tertiary" parent="button.medium">
+        <item name="android:background">@drawable/bg_solid_red_selector_radius8</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="button.medium.outlined_primary" parent="button.medium">
+        <item name="android:background">@drawable/bg_solid_white_stroke_green_selector_radius8
+        </item>
+        <item name="android:textColor">@color/selector_green_alpha50</item>
+    </style>
+
+    <style name="button.medium.outlined_secondary" parent="button.medium">
+        <item name="android:background">
+            @drawable/bg_solid_white_stroke_light_grey2_selector_radius8
+        </item>
+        <item name="android:textColor">@color/selector_dark_grey1_alpha50</item>
+    </style>
+
+    <!-- 버튼 big -->
+    <style name="button.big" parent="button">
+        <item name="android:textAppearance">@style/call_out.regular</item>
+        <item name="android:layout_height">@dimen/gap_56</item>
+        <item name="android:layout_width">@dimen/gap_0</item>
+    </style>
+
+    <style name="button.big.primary" parent="button.big">
+        <item name="android:background">@drawable/bg_solid_green_selector_radius8</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="button.big.secondary" parent="button.big">
+        <item name="android:background">@drawable/bg_solid_light_grey1_selector_radius8</item>
+        <item name="android:textColor">@color/selector_dark_grey1_alpha50</item>
+    </style>
+
+    <style name="button.big.tertiary" parent="button.big">
+        <item name="android:background">@drawable/bg_solid_red_selector_radius8</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="button.big.outlined_primary" parent="button.big">
+        <item name="android:background">@drawable/bg_solid_white_stroke_green_selector_radius8
+        </item>
+        <item name="android:textColor">@color/selector_green_alpha50</item>
+    </style>
+
+    <style name="button.big.outlined_secondary" parent="button.big">
+        <item name="android:background">
+            @drawable/bg_solid_white_stroke_light_grey2_selector_radius8
+        </item>
+        <item name="android:textColor">@color/selector_dark_grey1_alpha50</item>
+    </style>
+
+    <!-- 버튼 filled -->
+    <style name="button.filled" parent="button">
+        <item name="android:textAppearance">@style/call_out.bold</item>
+        <item name="android:layout_height">@dimen/gap_56</item>
+        <item name="android:layout_width">@dimen/gap_0</item>
+    </style>
+
+    <style name="button.filled.primary" parent="button.filled">
+        <item name="android:background">@drawable/bg_solid_green_selector</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="button.filled.secondary" parent="button.filled">
+        <item name="android:background">@drawable/bg_solid_light_grey1_selector</item>
+        <item name="android:textColor">@color/selector_dark_grey1_alpha50</item>
+    </style>
+
+    <style name="button.filled.tertiary" parent="button.filled">
+        <item name="android:background">@drawable/bg_solid_red_selector</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="button.filled.outlined_primary" parent="button.filled">
+        <item name="android:background">@drawable/bg_solid_white_stroke_green_selector</item>
+        <item name="android:textColor">@color/selector_green_alpha50</item>
+    </style>
+
+    <style name="button.filled.outlined_secondary" parent="button.filled">
+        <item name="android:background">@drawable/bg_solid_white_stroke_light_grey2_selector</item>
+        <item name="android:textColor">@color/selector_dark_grey1_alpha50</item>
+    </style>
+    <!-- end section 버튼 스타일 -->
+
+    <style name="check_box_rectangle">
+        <item name="android:textAppearance">@style/call_out.regular</item>
+        <item name="android:button">@drawable/check_box_rectangle</item>
+        <item name="android:paddingStart">@dimen/gap_8</item>
+        <item name="android:paddingEnd">@dimen/gap_0</item>
+        <item name="android:textColor">@color/dark_grey_2</item>
+    </style>
+
+    <style name="radio_button">
+        <item name="android:textAppearance">@style/call_out.regular</item>
+        <item name="android:button">@drawable/radio_button</item>
+        <item name="android:paddingStart">@dimen/gap_8</item>
+        <item name="android:paddingEnd">@dimen/gap_0</item>
+        <item name="android:textColor">@color/dark_grey_2</item>
+    </style>
+
+
+
+    <style name="ChipChoiceGreyRectangular" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="chipBackgroundColor">@color/background</item>
+        <item name="chipCornerRadius">@dimen/gap_4</item>
     </style>
 
     <style name="ChipChoiceRectangularStyle" parent="Widget.MaterialComponents.Chip.Choice">
-        <item name="chipBackgroundColor">@color/basic_white</item>
-        <item name="android:textColor">@color/chip_selector</item>
-        <item name="chipStrokeColor">@color/chip_selector</item>
-        <item name="chipStrokeWidth">@dimen/chips_stroke_width_1dp</item>
-        <item name="chipCornerRadius">@dimen/chips_radius_8dp</item>
-        <item name="chipMinHeight">@dimen/chips_height_40dp</item>
+        <item name="chipBackgroundColor">@color/white</item>
+        <item name="android:textColor">@color/selector_green_grey2</item>
+        <item name="android:textAppearance">@style/call_out.bold</item>
+        <item name="chipStrokeColor">@color/selector_green_light_grey2</item>
+        <item name="chipMinTouchTargetSize">@dimen/gap_0</item>
+        <item name="chipStrokeWidth">@dimen/gap_1</item>
+        <item name="chipCornerRadius">@dimen/gap_8</item>
+        <item name="chipMinHeight">@dimen/gap_48</item>
     </style>
 
     <style name="ChipChoiceRoundStyle" parent="Widget.MaterialComponents.Chip.Choice">
-        <item name="chipBackgroundColor">@color/chip_selector_for_requirement_status</item>
-        <item name="android:textColor">@color/text_selector_for_requirement_status</item>
-        <item name="chipStrokeColor">@color/stroke_selector_for_requirement_status</item>
-        <item name="chipStrokeWidth">@dimen/chips_stroke_width_1dp</item>
-        <item name="chipCornerRadius">@dimen/chips_radius_20dp</item>
-        <item name="chipMinHeight">@dimen/chips_height_38dp</item>
+        <item name="chipBackgroundColor">@color/white</item>
+        <item name="android:textColor">@color/grey_3</item>
+        <item name="android:textAppearance">@style/caption_2.bold</item>
+        <item name="chipStrokeColor">@color/light_grey_2</item>
+        <item name="chipMinTouchTargetSize">@dimen/gap_0</item>
+        <item name="chipStrokeWidth">@dimen/gap_1</item>
+        <item name="chipCornerRadius">@dimen/gap_20</item>
+        <item name="chipMinHeight">@dimen/gap_25</item>
     </style>
 
     <style name="ChipEntryRoundStyle" parent="Widget.MaterialComponents.Chip.Entry">
-        <item name="chipBackgroundColor">@color/basic_white</item>
-        <item name="android:textColor">@color/color_1FC472</item>
-        <item name="chipStrokeColor">@color/color_1FC472</item>
-        <item name="chipStrokeWidth">@dimen/chips_stroke_width_1dp</item>
-        <item name="chipCornerRadius">@dimen/chips_radius_20dp</item>
-        <item name="chipMinHeight">@dimen/chips_height_37dp</item>
+        <item name="chipBackgroundColor">@color/background</item>
+        <item name="android:textColor">@color/grey_2</item>
+        <item name="chipStrokeColor">@color/light_grey_2</item>
+        <item name="chipStrokeWidth">@dimen/gap_1</item>
+        <item name="chipMinTouchTargetSize">@dimen/gap_0</item>
+        <item name="closeIcon">@drawable/ic_cancel</item>
+        <item name="closeIconTint">@color/light_grey_2</item>
+        <item name="chipCornerRadius">@dimen/gap_20</item>
+        <item name="chipMinHeight">@dimen/gap_34</item>
     </style>
 
     <style name="checkboxDefaultStyle" parent="Widget.AppCompat.CompoundButton.CheckBox">
         <item name="buttonTint">@color/check_box_selector</item>
     </style>
 
-    <style name="CalenderViewCustom" parent="Theme.AppCompat">
-        <item name="colorAccent">@color/app_color</item>
+    <style name="CalenderViewCustom">
+        <item name="colorAccent">@color/brand_green</item>
+        <item name="android:dateTextAppearance">@style/subheadline.bold</item>
+        <item name="android:weekDayTextAppearance">@style/subheadline.bold</item>
         <item name="android:colorForeground">@color/text_basic_color</item>
     </style>
 </resources>

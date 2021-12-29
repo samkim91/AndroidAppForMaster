@@ -26,10 +26,12 @@
 
     <dimen name="gap_1">1dp</dimen>
     <dimen name="gap_2">2dp</dimen>
+    <dimen name="gap_2.5">2.5dp</dimen>
     <dimen name="gap_3">3dp</dimen>
     <dimen name="gap_4">4dp</dimen>
     <dimen name="gap_5">5dp</dimen>
     <dimen name="gap_6">6dp</dimen>
+    <dimen name="gap_7">7dp</dimen>
     <dimen name="gap_8">8dp</dimen>
     <dimen name="gap_9">9dp</dimen>
 
@@ -47,6 +49,9 @@
 
     <dimen name="gap_19">19dp</dimen>
     <dimen name="gap_20">20dp</dimen>
+    <dimen name="gap_21">21dp</dimen>
+    <dimen name="gap_22">22dp</dimen>
+    <dimen name="gap_23">23dp</dimen>
     <dimen name="gap_24">24dp</dimen>
     <dimen name="gap_25">25dp</dimen>
     <dimen name="gap_26">26dp</dimen>
@@ -56,19 +61,26 @@
     <dimen name="gap_30">30dp</dimen>
     <dimen name="gap_32">32dp</dimen>
     <dimen name="gap_33">33dp</dimen>
+    <dimen name="gap_34">34dp</dimen>
     <dimen name="gap_35">35dp</dimen>
+    <dimen name="gap_36">36dp</dimen>
     <dimen name="gap_37">37dp</dimen>
     <dimen name="gap_38">38dp</dimen>
     <dimen name="gap_40">40dp</dimen>
     <dimen name="gap_42">42dp</dimen>
+    <dimen name="gap_44">44dp</dimen>
     <dimen name="gap_45">45dp</dimen>
 
     <dimen name="gap_48">48dp</dimen>
     <dimen name="gap_50">50dp</dimen>
     <dimen name="gap_55">55dp</dimen>
     <dimen name="gap_52">52dp</dimen>
+    <dimen name="gap_54">54dp</dimen>
     <dimen name="gap_56">56dp</dimen>
+    <dimen name="gap_60">60dp</dimen>
     <dimen name="gap_64">64dp</dimen>
+    <dimen name="gap_68">68dp</dimen>
+    <dimen name="gap_70">70dp</dimen>
     <dimen name="gap_72">72dp</dimen>
     <dimen name="gap_74">74dp</dimen>
     <dimen name="gap_80">80dp</dimen>
@@ -79,6 +91,9 @@
 
     <dimen name="gap_100">100dp</dimen>
     <dimen name="gap_102">102dp</dimen>
+    <dimen name="gap_104">104dp</dimen>
+    <dimen name="gap_105">105dp</dimen>
+    <dimen name="gap_110">110dp</dimen>
     <dimen name="gap_120">120dp</dimen>
     <dimen name="gap_124">124dp</dimen>
     <dimen name="gap_130">130dp</dimen>
@@ -86,6 +101,9 @@
     <dimen name="gap_180">180dp</dimen>
     <dimen name="gap_220">220dp</dimen>
     <dimen name="gap_230">230dp</dimen>
+    <dimen name="gap_250">250dp</dimen>
+    <dimen name="gap_310">310dp</dimen>
+    <dimen name="gap_350">350dp</dimen>
 
     <!--  Sign In  -->
     <dimen name="sign_in_logo_margin_top">25dp</dimen>
@@ -314,15 +332,18 @@
     <dimen name="list_icon_text_margin">12dp</dimen>
 
     <dimen name="text_size_10sp">10sp</dimen>
+    <dimen name="text_size_11sp">11sp</dimen>
     <dimen name="text_size_12sp">12sp</dimen>
     <dimen name="text_size_13sp">13sp</dimen>
     <dimen name="text_size_14sp">14sp</dimen>
     <dimen name="text_size_15sp">15sp</dimen>
     <dimen name="text_size_16sp">16sp</dimen>
-    <dimen name="text_title_size">18sp</dimen>
+    <dimen name="text_size_17sp">17sp</dimen>
     <dimen name="text_size_18sp">18sp</dimen>
     <dimen name="text_size_20sp">20sp</dimen>
     <dimen name="text_size_22sp">22sp</dimen>
+    <dimen name="text_size_28sp">28sp</dimen>
+    <dimen name="text_size_34sp">34sp</dimen>
 
 
 </resources>

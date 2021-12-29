@@ -68,11 +68,11 @@ class AuthFragment : BaseFragment<FragmentSignUpAuthBinding>(
                 resendVerificationCode()
             }
 
-            leftButton.setOnClickListener {
+            buttonLeft.setOnClickListener {
                 (activity as? SignUpActivity)?.moveToPrevious()
             }
 
-            rightButton.setOnClickListener {
+            buttonRight.setOnClickListener {
                 viewModel.certificationCode.observe(viewLifecycleOwner, {
                     alertInvalidCertificationCode.isVisible = it.length < 6
                     if (alertWrongCertificationCode.isVisible) alertWrongCertificationCode.isVisible =

@@ -11,101 +11,109 @@
             type="kr.co.soogong.master.ui.requirement.action.end.EndRepairViewModel" />
     </data>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <include
-            android:id="@+id/action_bar"
-            layout="@layout/action_bar_button" />
+        <kr.co.soogong.master.atomic.molecules.ActionBar
+            android:id="@+id/ab_header"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="wrap_content"
+            app:backButtonVisibility="@{true}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="@{@string/end_repair_title}" />
 
         <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="@dimen/gap_0"
+            android:fillViewport="true"
+            android:overScrollMode="never"
+            app:layout_constraintBottom_toTopOf="@id/iv_button_container"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ab_header">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/gap_16"
+                android:paddingBottom="@dimen/gap_16">
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/banner_image"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/gap_120"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/ic_banner_5"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <kr.co.soogong.master.ui.widget.TitleEditText
-                    android:id="@+id/actual_price"
-                    android:layout_width="0dp"
+                <kr.co.soogong.master.atomic.molecules.SubheadlineTextInput
+                    android:id="@+id/sti_actual_price"
+                    android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/gap_20"
-                    android:layout_marginTop="@dimen/gap_32"
-                    android:layout_marginEnd="@dimen/gap_20"
-                    android:textColor="@color/text_basic_color"
-                    app:alertText="@{@string/minimum_cost}"
-                    app:alertVisible="@{false}"
+                    android:layout_marginStart="@dimen/gap_16"
+                    android:layout_marginEnd="@dimen/gap_16"
                     app:content="@={vm.actualPrice}"
-                    app:hintText="@{@string/insert_number_only_with_unit_text}"
+                    app:inputType="@{InputType.TYPE_CLASS_NUMBER}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/banner_image"
-                    app:setInputType="@{InputType.TYPE_CLASS_NUMBER}"
-                    app:setMaxLength="@{13}"
-                    app:title="@{@string/end_estimate_price_title}" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:max="@{13}"
+                    app:subheadline="@{@string/actual_price}" />
 
-                <kr.co.soogong.master.ui.widget.TextCheckBox
-                    android:id="@+id/checkbox_for_actual_price_including_vat"
-                    android:layout_width="match_parent"
+                <androidx.appcompat.widget.AppCompatCheckBox
+                    android:id="@+id/cb_including_vat"
+                    style="@style/check_box_rectangle"
+                    android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/gap_20"
-                    android:layout_marginEnd="@dimen/gap_20"
+                    android:layout_marginStart="@dimen/gap_16"
+                    android:layout_marginEnd="@dimen/gap_16"
+                    android:checked="@{vm.includingVat}"
+                    android:text="@string/vat_included"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/actual_price"
-                    app:text="@{@string/checkbox_text_for_including_vat}" />
+                    app:layout_constraintTop_toBottomOf="@id/sti_actual_price" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/calender_title"
-                    style="@style/text_style_16sp.medium"
-                    android:layout_width="0dp"
+                    android:id="@+id/tv_calendar"
+                    android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/gap_20"
-                    android:layout_marginTop="@dimen/gap_28"
-                    android:layout_marginEnd="@dimen/gap_20"
+                    android:layout_marginStart="@dimen/gap_16"
+                    android:layout_marginTop="@dimen/gap_32"
+                    android:layout_marginEnd="@dimen/gap_16"
                     android:text="@string/end_estimate_calendar_title"
-                    android:textColor="@color/text_basic_color"
+                    android:textAppearance="@style/subheadline.bold"
+                    android:textColor="@color/black"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/checkbox_for_actual_price_including_vat" />
+                    app:layout_constraintTop_toBottomOf="@id/cb_including_vat" />
 
                 <CalendarView
-                    android:id="@+id/calender"
-                    android:layout_width="0dp"
+                    android:id="@+id/cv_calender"
+                    android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/gap_8"
                     android:theme="@style/CalenderViewCustom"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/calender_title" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/calender_alert"
-                    style="@style/text_style_14sp.regular"
-                    android:layout_width="@dimen/gap_0"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/gap_20"
-                    android:layout_marginEnd="20dp"
-                    android:text="@string/alert_required_field"
-                    android:textColor="@color/text_alert_color"
-                    android:visibility="gone"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/calender" />
-
+                    app:layout_constraintTop_toBottomOf="@id/tv_calendar" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
-    </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_button_container"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/gap_64"
+            android:background="@color/white"
+            android:elevation="@dimen/gap_10"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/b_end_repair"
+            style="@style/button.big.primary"
+            android:layout_marginStart="@dimen/gap_16"
+            android:layout_marginEnd="@dimen/gap_16"
+            android:elevation="@dimen/gap_10"
+            android:text="@string/writing_done"
+            app:layout_constraintBottom_toBottomOf="@id/iv_button_container"
+            app:layout_constraintEnd_toEndOf="@id/iv_button_container"
+            app:layout_constraintStart_toStartOf="@id/iv_button_container"
+            app:layout_constraintTop_toTopOf="@id/iv_button_container" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

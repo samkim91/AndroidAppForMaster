@@ -5,11 +5,10 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.SavedStateHandle
 import kr.co.soogong.master.ui.profile.detail.portfoliolist.PortfolioListActivity
-import kr.co.soogong.master.uihelper.requirment.action.WriteEstimationActivityHelper
 
 object PortfolioListActivityHelper {
-    const val PORTFOLIO = "포트폴리오 편집하기"
-    const val PRICE_BY_PROJECTS = "시공 종류별 가격 편집하기"
+    const val PORTFOLIO = "포트폴리오"
+    const val PRICE_BY_PROJECTS = "시공 종류별 가격"
 
     private const val EXTRA_BUNDLE_KEY = "EXTRA_BUNDLE_KEY"
     private const val EXTRA_STRING_KEY = "EXTRA_STRING_KEY"
@@ -20,10 +19,6 @@ object PortfolioListActivityHelper {
                 putString(EXTRA_STRING_KEY, pageName)
             })
         }
-    }
-
-    fun getPageName(intent: Intent): String {
-        return intent.getBundleExtra(EXTRA_BUNDLE_KEY)?.getString(EXTRA_STRING_KEY, "") ?: ""
     }
 
     fun getPageNameFromSavedState(savedStateHandle: SavedStateHandle): String {

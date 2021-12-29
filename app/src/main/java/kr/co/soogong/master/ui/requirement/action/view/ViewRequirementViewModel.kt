@@ -7,12 +7,11 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import kr.co.soogong.master.data.dto.requirement.RequirementDto
+import kr.co.soogong.master.data.common.CodeTable
 import kr.co.soogong.master.data.dto.requirement.estimation.EstimationDto
 import kr.co.soogong.master.data.dto.requirement.repair.RepairDto
-import kr.co.soogong.master.data.model.profile.NotApprovedCodeTable
-import kr.co.soogong.master.data.model.profile.RequestApproveCodeTable
 import kr.co.soogong.master.data.model.profile.Review
+import kr.co.soogong.master.data.model.requirement.Requirement
 import kr.co.soogong.master.data.model.requirement.estimation.EstimationResponseCode
 import kr.co.soogong.master.domain.usecase.profile.GetMasterSimpleInfoUseCase
 import kr.co.soogong.master.domain.usecase.requirement.*
@@ -29,13 +28,15 @@ class ViewRequirementViewModel @Inject constructor(
     private val callToClientUseCase: CallToClientUseCase,
     private val requestReviewUseCase: RequestReviewUseCase,
     private val getMasterSimpleInfoUseCase: GetMasterSimpleInfoUseCase,
-    val savedStateHandle: SavedStateHandle
+    val savedStateHandle: SavedStateHandle,
 ) : BaseViewModel() {
     // Note : activity 에서 viewModel 로 데이터 넘기는 법. savedStateHandle 에서 가져온다.
-    val requirementId = MutableLiveData(ViewRequirementActivityHelper.getRequirementIdFromSavedState(savedStateHandle))
+    val requirementId =
+        MutableLiveData(ViewRequirementActivityHelper.getRequirementIdFromSavedState(
+            savedStateHandle))
 
-    private val _requirement = MutableLiveData<RequirementDto>()
-    val requirement: LiveData<RequirementDto>
+    private val _requirement = MutableLiveData<Requirement>()
+    val requirement: LiveData<Requirement>
         get() = _requirement
 
     private val _review = MutableLiveData<Review>()
@@ -51,7 +52,8 @@ class ViewRequirementViewModel @Inject constructor(
                 onSuccess = {
                     Timber.tag(TAG).d("requestRequirement successfully: $it")
                     if (it.estimationDto?.masterResponseCode == EstimationResponseCode.REFUSED) {
-                        Timber.tag(TAG).d("invalid requirement: ${it.estimationDto.masterResponseCode}")
+                        Timber.tag(TAG)
+                            .d("invalid requirement: ${it.estimationDto.masterResponseCode}")
                         setAction(INVALID_REQUIREMENT)
                     }
                     _requirement.value = it
@@ -179,7 +181,7 @@ class ViewRequirementViewModel @Inject constructor(
                 onSuccess = { masterDto ->
                     Timber.tag(TAG).d("requestMasterSimpleInfo successful: $masterDto")
                     masterDto?.approvedStatus.let {
-                        if (it == NotApprovedCodeTable.code) setAction(NOT_APPROVED_MASTER)
+                        if (it == CodeTable.NOT_APPROVED.code) setAction(NOT_APPROVED_MASTER)
                     }
                 },
                 onError = {

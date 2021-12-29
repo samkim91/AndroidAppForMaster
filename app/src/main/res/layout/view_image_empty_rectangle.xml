@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <merge
+        android:layout_width="@dimen/gap_105"
+        android:layout_height="wrap_content"
+        tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_container"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="@dimen/gap_0"
+            app:layout_constraintDimensionRatio="H, 5:5"
+            android:background="@drawable/bg_solid_background_stroke_light_grey2_dotted_radius10"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_icon"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="@dimen/gap_0"
+            android:background="@drawable/ic_empty_image"
+            app:layout_constraintBottom_toBottomOf="@id/iv_container"
+            app:layout_constraintDimensionRatio="H, 5:5"
+            app:layout_constraintEnd_toEndOf="@id/iv_container"
+            app:layout_constraintStart_toStartOf="@id/iv_container"
+            app:layout_constraintTop_toTopOf="@id/iv_container"
+            app:layout_constraintWidth_percent="0.3" />
+    </merge>
+</layout>

@@ -5,11 +5,10 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.SavedStateHandle
 import kr.co.soogong.master.ui.requirement.action.view.ViewRequirementActivity
-import timber.log.Timber
 
 object ViewRequirementActivityHelper {
-    const val BUNDLE_KEY = "BUNDLE_KEY"
-    const val REQUIREMENT_ID = "REQUIREMENT_ID"
+    private const val BUNDLE_KEY = "BUNDLE_KEY"
+    private const val REQUIREMENT_ID = "REQUIREMENT_ID"
 
     fun getIntent(context: Context, id: Int): Intent {
         return Intent(context, ViewRequirementActivity::class.java).apply {

@@ -1,4 +1,4 @@
-@file:JvmName("StringExt")
+@file:JvmName("FormatExt")
 
 package kr.co.soogong.master.utility.extension
 
@@ -23,7 +23,7 @@ fun Date?.formatDate(): String {
 
 fun Date?.formatDateWithoutDay(): String {
     if (this == null) return ""
-    return SimpleDateFormat("yyyy.MM.dd", Locale.KOREA).format(this)
+    return SimpleDateFormat("yyyy. MM. dd", Locale.KOREA).format(this)
 }
 
 fun Int?.formatMoney(): String {
@@ -39,6 +39,11 @@ fun Int?.formatComma(): String {
 fun Long?.formatComma(): String {
     if (this == null) return "0"
     return DecimalFormat("#,###").format(this)
+}
+
+fun String?.exceptComma(): String {
+    if (this.isNullOrEmpty()) return "0"
+    return this.replace(",", "")
 }
 
 fun Double?.formatDecimal(): String {

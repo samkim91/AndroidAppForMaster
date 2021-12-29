@@ -1,20 +1,22 @@
 package kr.co.soogong.master.ui.profile.detail.portfoliolist.portfolio
 
-import android.net.Uri
 import android.os.Bundle
 import android.view.View
-import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.SavedStateHandle
 import dagger.hilt.android.AndroidEntryPoint
 import gun0912.tedimagepicker.builder.TedImagePicker
 import kr.co.soogong.master.R
+import kr.co.soogong.master.data.dto.common.AttachmentDto
 import kr.co.soogong.master.databinding.FragmentEditPortfolioBinding
 import kr.co.soogong.master.ui.base.BaseFragment
-import kr.co.soogong.master.ui.profile.detail.portfoliolist.portfolio.PortfolioViewModel.Companion.GET_PORTFOLIO_FAILED
-import kr.co.soogong.master.ui.profile.detail.portfoliolist.portfolio.PortfolioViewModel.Companion.SAVE_PORTFOLIO_FAILED
+import kr.co.soogong.master.ui.base.BaseViewModel.Companion.DISMISS_LOADING
+import kr.co.soogong.master.ui.base.BaseViewModel.Companion.SHOW_LOADING
+import kr.co.soogong.master.ui.profile.detail.EditProfileContainerActivity
+import kr.co.soogong.master.ui.profile.detail.portfoliolist.portfolio.PortfolioViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.ui.profile.detail.portfoliolist.portfolio.PortfolioViewModel.Companion.SAVE_PORTFOLIO_SUCCESSFULLY
-import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.ADD_PORTFOLIO
-import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_PORTFOLIO
+import kr.co.soogong.master.ui.profile.detail.portfoliolist.portfolio.PortfolioViewModel.Companion.START_IMAGE_PICKER_FOR_AFTER
+import kr.co.soogong.master.ui.profile.detail.portfoliolist.portfolio.PortfolioViewModel.Companion.START_IMAGE_PICKER_FOR_BEFORE
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.FileHelper
 import kr.co.soogong.master.utility.PermissionHelper
@@ -25,13 +27,6 @@ import timber.log.Timber
 class PortfolioFragment : BaseFragment<FragmentEditPortfolioBinding>(
     R.layout.fragment_edit_portfolio
 ) {
-    private val pageName: String by lazy {
-        arguments?.getString(PAGE_NAME) ?: ADD_PORTFOLIO
-    }
-    private val portfolioId: Int by lazy {
-        arguments?.getInt(PORTFOLIO_ID) ?: -1
-    }
-
     private val viewModel: PortfolioViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -48,68 +43,31 @@ class PortfolioFragment : BaseFragment<FragmentEditPortfolioBinding>(
             vm = viewModel
             lifecycleOwner = viewLifecycleOwner
 
-            when (pageName) {
-                ADD_PORTFOLIO -> {
-                    defaultButton.text = getString(R.string.writing_done)
-                }
-                EDIT_PORTFOLIO -> {
-                    defaultButton.text = getString(R.string.modifying_done)
-                    viewModel.requestPortfolio(portfolioId)
-                }
+            saidBeforeRepairing.setImagesDeletableAdapter {
+                viewModel.imageBeforeRepairing.removeAt(it)
             }
 
-            defaultButton.setOnClickListener {
+            saidAfterRepairing.setImagesDeletableAdapter { viewModel.imageAfterRepairing.removeAt(it) }
+
+            (activity as EditProfileContainerActivity).setSaveButtonClickListener {
                 viewModel.title.observe(viewLifecycleOwner, {
-                    jobTitle.alertVisible = it.isNullOrEmpty()
+                    stiTitle.error =
+                        if (it.isNullOrBlank()) getString(R.string.required_field_alert) else null
                 })
 
-                alert.isVisible =
-                    viewModel.imageBeforeJob.value?.equals(Uri.EMPTY)!! || viewModel.imageAfterJob.value?.equals(
-                        Uri.EMPTY
-                    )!!
+                saidBeforeRepairing.error =
+                    if (viewModel.imageBeforeRepairing.getItemCount() == 0) getString(R.string.required_field_alert) else null
+                saidAfterRepairing.error =
+                    if (viewModel.imageAfterRepairing.getItemCount() == 0) getString(R.string.required_field_alert) else null
 
                 viewModel.description.observe(viewLifecycleOwner, {
-                    jobDescription.alertVisible = it.length < 10
+                    stcDescription.error =
+                        if (it.length < 10) getString(R.string.fill_text_over_10) else null
                 })
 
-                if (!jobTitle.alertVisible && !alert.isVisible && !jobDescription.alertVisible) {
-                    showLoading(parentFragmentManager)
+                if (stiTitle.error.isNullOrEmpty() && saidBeforeRepairing.error.isNullOrEmpty() && saidAfterRepairing.error.isNullOrEmpty() && stcDescription.error.isNullOrBlank()) {
                     viewModel.savePortfolio()
                 }
-            }
-
-            cameraIconBeforeJob.setOnClickListener {
-                PermissionHelper.checkImagePermission(context = requireContext(),
-                    onGranted = {
-                        TedImagePicker.with(requireContext())
-                            .buttonBackground(R.drawable.shape_green_background_radius8)
-                            .start { uri ->
-                                if (FileHelper.isImageExtension(uri, requireContext()) == false) {
-                                    requireContext().toast(getString(R.string.invalid_image_extension))
-                                    return@start
-                                }
-
-                                viewModel.imageBeforeJob.value = uri
-                            }
-                    },
-                    onDenied = { })
-            }
-
-            cameraIconAfterJob.setOnClickListener {
-                PermissionHelper.checkImagePermission(context = requireContext(),
-                    onGranted = {
-                        TedImagePicker.with(requireContext())
-                            .buttonBackground(R.drawable.shape_green_background_radius8)
-                            .start { uri ->
-                                if (FileHelper.isImageExtension(uri, requireContext()) == false) {
-                                    requireContext().toast(getString(R.string.invalid_image_extension))
-                                    return@start
-                                }
-
-                                viewModel.imageAfterJob.value = uri
-                            }
-                    },
-                    onDenied = { })
             }
         }
     }
@@ -117,26 +75,71 @@ class PortfolioFragment : BaseFragment<FragmentEditPortfolioBinding>(
     private fun registerEventObserve() {
         Timber.tag(TAG).d("registerEventObserve: ")
         viewModel.action.observe(viewLifecycleOwner, EventObserver { event ->
-            dismissLoading()
             when (event) {
                 SAVE_PORTFOLIO_SUCCESSFULLY -> activity?.onBackPressed()
-                SAVE_PORTFOLIO_FAILED, GET_PORTFOLIO_FAILED -> requireContext().toast(getString(R.string.error_message_of_request_failed))
+                REQUEST_FAILED -> requireContext().toast(getString(R.string.error_message_of_request_failed))
+                SHOW_LOADING -> showLoading(parentFragmentManager)
+                DISMISS_LOADING -> dismissLoading()
+                START_IMAGE_PICKER_FOR_BEFORE, START_IMAGE_PICKER_FOR_AFTER -> {
+                    PermissionHelper.checkImagePermission(context = requireContext(),
+                        onGranted = {
+                            TedImagePicker.with(requireContext())
+                                .buttonBackground(R.drawable.shape_green_background_radius8)
+                                .start { uri ->
+                                    if (FileHelper.isImageExtension(uri,
+                                            requireContext()) == false
+                                    ) {
+                                        requireContext().toast(getString(R.string.invalid_image_extension))
+                                        return@start
+                                    }
+                                    if (event == START_IMAGE_PICKER_FOR_BEFORE) {
+                                        viewModel.imageBeforeRepairing.clear()
+                                        viewModel.imageBeforeRepairing.add(
+                                            AttachmentDto(
+                                                id = null,
+                                                partOf = null,
+                                                referenceId = null,
+                                                description = null,
+                                                s3Name = null,
+                                                fileName = null,
+                                                url = null,
+                                                uri = uri
+                                            )
+                                        )
+                                    } else {
+                                        viewModel.imageAfterRepairing.clear()
+                                        viewModel.imageAfterRepairing.add(
+                                            AttachmentDto(
+                                                id = null,
+                                                partOf = null,
+                                                referenceId = null,
+                                                description = null,
+                                                s3Name = null,
+                                                fileName = null,
+                                                url = null,
+                                                uri = uri
+                                            )
+                                        )
+                                    }
+                                }
+                        },
+                        onDenied = { })
+                }
             }
         })
     }
 
     companion object {
         private const val TAG = "EditPortfolioFragment"
-        private const val PAGE_NAME = "PAGE_NAME"
         private const val PORTFOLIO_ID = "PORTFOLIO_ID"
 
-        fun newInstance(pageName: String, portfolioId: Int?): PortfolioFragment {
-            val fragment = PortfolioFragment()
-            val args = Bundle()
-            args.putString(PAGE_NAME, pageName)
-            args.putInt(PORTFOLIO_ID, portfolioId ?: -1)
-            fragment.arguments = args
-            return fragment
+        fun newInstance(portfolioId: Int? = null) = PortfolioFragment().apply {
+            arguments = Bundle().apply {
+                portfolioId?.let { putInt(PORTFOLIO_ID, it) }
+            }
         }
+
+        fun getPortfolioId(savedStateHandle: SavedStateHandle): Int? =
+            savedStateHandle.get(PORTFOLIO_ID)
     }
 }

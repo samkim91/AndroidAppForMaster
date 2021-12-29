@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:fillViewport="true">
 
-            <kr.co.soogong.master.ui.widget.LargeTitleSubtitle
+            <kr.co.soogong.master.atomic.molecules.LargeTitleSubtitle
                 android:id="@+id/title_widget"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -39,7 +39,7 @@
                 app:subTitleVisible="@{true}"
                 app:title='@{"휴대폰번호를 입력해주세요."}' />
 
-            <kr.co.soogong.master.ui.widget.TitleEditText
+            <kr.co.soogong.master.atomic.molecules.TitleEditText
                 android:id="@+id/phone_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -61,9 +61,9 @@
                 style="@style/text_style_16sp.bold"
                 android:layout_width="@dimen/gap_0"
                 android:layout_height="@dimen/gap_48"
-                android:background="@color/color_22D47B"
-                android:text="@string/request_certification_number_button"
-                android:textColor="@color/basic_white"
+                android:background="@color/c_22D47B"
+                android:text="@string/request_certification_code_text"
+                android:textColor="@color/c_FFFFFF"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

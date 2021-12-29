@@ -1,0 +1,12 @@
+<androidx.appcompat.widget.AppCompatTextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/call_out.regular"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:maxLines="1"
+    android:paddingStart="@dimen/gap_13"
+    android:paddingTop="@dimen/gap_10"
+    android:paddingEnd="@dimen/gap_13"
+    android:paddingBottom="@dimen/gap_10"
+    android:textColor="@color/black"
+    tools:text="옵션 1" />

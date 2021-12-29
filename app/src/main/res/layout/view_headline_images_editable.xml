@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <merge
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_title"
+            style="@style/headline.bold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="대표 이미지" />
+
+        <kr.co.soogong.master.atomic.molecules.ImageAddRectangle
+            android:id="@+id/iv_adding_images"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="@dimen/gap_0"
+            android:layout_marginTop="@dimen/gap_20"
+            app:layout_constraintWidth_percent="0.32"
+            app:layout_constraintDimensionRatio="H, 5:5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintEnd_toStartOf="@id/iv_first_image"
+            app:layout_constraintTop_toBottomOf="@id/tv_title"/>
+
+        <kr.co.soogong.master.atomic.molecules.ImageEmptyRectangle
+            android:id="@+id/iv_first_image"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="@dimen/gap_0"
+            app:layout_constraintWidth_percent="0.32"
+            app:layout_constraintDimensionRatio="H, 5:5"
+            app:layout_constraintTop_toTopOf="@id/iv_adding_images"
+            app:layout_constraintStart_toEndOf="@id/iv_adding_images"
+            app:layout_constraintEnd_toStartOf="@id/iv_last_image"
+            />
+
+        <kr.co.soogong.master.atomic.molecules.ImageEmptyRectangle
+            android:id="@+id/iv_last_image"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="@dimen/gap_0"
+            app:layout_constraintWidth_percent="0.32"
+            app:layout_constraintDimensionRatio="H, 5:5"
+            app:layout_constraintTop_toTopOf="@id/iv_adding_images"
+            app:layout_constraintStart_toEndOf="@id/iv_first_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_line"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="@dimen/gap_1"
+            android:layout_marginTop="@dimen/gap_12"
+            android:background="@color/light_grey_2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_adding_images" />
+
+    </merge>
+</layout>

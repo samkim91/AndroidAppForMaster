@@ -30,7 +30,7 @@
             android:gravity="center_vertical"
             android:layout_marginEnd="@dimen/gap_10"
             android:lines="1"
-            android:textColor="@color/color_2E2E2E"
+            android:textColor="@color/c_2E2E2E"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/button"
             app:layout_constraintStart_toStartOf="parent"
@@ -48,8 +48,8 @@
             android:paddingStart="@dimen/gap_16"
             android:paddingEnd="@dimen/gap_16"
             android:background="@drawable/shape_app_color_background_radius6"
-            android:text="@string/send_estimation"
-            android:textColor="@color/basic_white"
+            android:text="@string/sending_estimation"
+            android:textColor="@color/c_FFFFFF"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -58,7 +58,7 @@
             android:id="@+id/line"
             android:layout_width="@dimen/gap_0"
             android:layout_height="@dimen/line_height"
-            android:background="@color/line_color"
+            android:background="@color/c_E3E3E3"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

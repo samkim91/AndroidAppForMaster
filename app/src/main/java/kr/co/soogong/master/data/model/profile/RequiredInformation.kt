@@ -2,11 +2,12 @@ package kr.co.soogong.master.data.model.profile
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
-import kr.co.soogong.master.data.dto.AttachmentDto
+import kr.co.soogong.master.data.common.CodeTable
+import kr.co.soogong.master.data.dto.common.AttachmentDto
 import kr.co.soogong.master.data.dto.profile.MasterDto
-import kr.co.soogong.master.data.model.major.Major
-import kr.co.soogong.master.ui.dialog.bottomdialogrecyclerview.BottomDialogItem
-import kr.co.soogong.master.ui.profile.detail.requiredinformation.CareerConverter
+import kr.co.soogong.master.data.dto.profile.ProjectDto
+import kr.co.soogong.master.ui.profile.detail.CareerConverter
+import kr.co.soogong.master.utility.PhoneNumberHelper
 
 @Parcelize
 data class RequiredInformation(
@@ -17,7 +18,7 @@ data class RequiredInformation(
     val career: String?,
     val tel: String?,
     val ownerName: String?,
-    val majors: List<Major>?,
+    val majors: List<ProjectDto>?,
     val companyAddress: CompanyAddress?,
     val coordinate: Coordinate?,
     var serviceArea: Int?,
@@ -28,7 +29,7 @@ data class RequiredInformation(
                 introduction = masterDto.introduction,
                 shopImages = masterDto.shopImages,
                 businessUnitInformation = BusinessUnitInformation(
-                    businessType = masterDto.businessType?.let {CodeTable.findBusinessTypeByCode(it).inKorean},
+                    businessType = masterDto.businessType?.let { CodeTable.getCodeTableByCode(it)?.inKorean },
                     businessName = masterDto.businessName,
                     shopName = masterDto.shopName,
                     businessNumber = masterDto.businessNumber,
@@ -36,15 +37,12 @@ data class RequiredInformation(
                 ),
                 warrantyInformation = WarrantyInformation(
                     warrantyPeriod = masterDto.warrantyPeriod,
-                    warrantyPeriodForLayout = BottomDialogItem.getWarrantyPeriodList().find { item ->
-                        item.value == masterDto.warrantyPeriod
-                    }?.key,
                     warrantyDescription = masterDto.warrantyDescription,
                 ),
                 career = masterDto.openDate?.let { CareerConverter.toCareer(it) },
-                tel = masterDto.tel,
+                tel = masterDto.tel?.let { PhoneNumberHelper.addDashToLocalNumber(it) },
                 ownerName = masterDto.ownerName,
-                majors = Major.fromMasterDto(masterDto),
+                majors = masterDto.projects,
                 companyAddress = CompanyAddress(
                     masterDto.roadAddress,
                     masterDto.detailAddress,

@@ -8,4 +8,4 @@
     app:closeIcon="@drawable/ic_close_small"
     app:closeIconEndPadding="@dimen/gap_10"
     app:closeIconSize="@dimen/gap_10"
-    app:closeIconTint="@color/color_616161" />
+    app:closeIconTint="@color/c_616161" />

@@ -7,11 +7,10 @@ import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ActivityEndRepairBinding
 import kr.co.soogong.master.ui.base.BaseActivity
-import kr.co.soogong.master.ui.requirement.action.end.EndRepairViewModel.Companion.END_REPAIR_FAILED
 import kr.co.soogong.master.ui.requirement.action.end.EndRepairViewModel.Companion.END_REPAIR_SUCCESSFULLY
 import kr.co.soogong.master.ui.requirement.action.end.EndRepairViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.utility.EventObserver
-import kr.co.soogong.master.utility.extension.formatComma
+import kr.co.soogong.master.utility.extension.exceptComma
 import kr.co.soogong.master.utility.extension.toast
 import kr.co.soogong.master.utility.validation.ValidationHelper
 import timber.log.Timber
@@ -36,43 +35,34 @@ class EndRepairActivity : BaseActivity<ActivityEndRepairBinding>(
             vm = viewModel
             lifecycleOwner = this@EndRepairActivity
 
-            with(actionBar) {
-                title.text = getString(R.string.end_repair_title)
-                backButton.setOnClickListener {
-                    super.onBackPressed()
-                }
-                button.text = getString(R.string.writing_done)
-                button.setOnClickListener {
-                    viewModel.actualPrice.observe(this@EndRepairActivity, {
-                        actualPrice.alertVisible =
-                            it.isNullOrEmpty() || it.replace(",", "").toLong() < 10000
-                    })
+            abHeader.setButtonBackClickListener { onBackPressed() }
 
-                    if (!actualPrice.alertVisible && ValidationHelper.isIntRange(viewModel.actualPrice.value!!)) {
-                        viewModel.saveRepair()
-                    }
-                }
-            }
+//            stiActualPrice.setOnFocusChangeListener { v, hasFocus ->
+//                if (!viewModel.actualPrice.value.isNullOrEmpty()) {
+//                    if (hasFocus) {
+//                        viewModel.actualPrice.value = viewModel.actualPrice.value?.replace(",", "")
+//                    } else {
+//                        viewModel.actualPrice.value =
+//                            viewModel.actualPrice.value?.toLong().formatComma()
+//                    }
+//                }
 
-            actualPrice.addFocusChangeListener(onFocusChange = { _, hasFocus ->
-                if (!viewModel.actualPrice.value.isNullOrEmpty()) {
-                    viewModel.actualPrice.value?.replace(",", "").let {
-                        if (hasFocus) {
-                            viewModel.actualPrice.value = it
-                        } else {
-                            viewModel.actualPrice.value = it?.toLong().formatComma()
-                        }
-                    }
-                }
-            })
 
-            checkboxForActualPriceIncludingVat.checkBox.setOnCheckedChangeListener { _, isChecked ->
-                viewModel.includingVat.value = isChecked
-            }
-
-            calender.setOnDateChangeListener { _: CalendarView, year: Int, month: Int, day: Int ->
+            cvCalender.setOnDateChangeListener { _: CalendarView, year: Int, month: Int, day: Int ->
                 Timber.tag(TAG).d("setOnDateChangeListener: ${year - month - day}")
                 viewModel.actualDate.value?.set(year, month, day)
+            }
+
+            bEndRepair.setOnClickListener {
+                viewModel.actualPrice.observe(this@EndRepairActivity, {
+                    stiActualPrice.error = when {
+                        it.exceptComma().toLong() < 10000 -> getString(R.string.minimum_cost)
+                        !ValidationHelper.isIntRange(it) -> getString(R.string.too_large_number)
+                        else -> null
+                    }
+                })
+
+                if (stiActualPrice.error.isNullOrEmpty()) viewModel.saveRepair()
             }
         }
     }
@@ -84,18 +74,11 @@ class EndRepairActivity : BaseActivity<ActivityEndRepairBinding>(
             when (event) {
                 END_REPAIR_SUCCESSFULLY -> {
                     toast(getString(R.string.end_estimate_succeeded))
-                    super.onBackPressed()
+                    onBackPressed()
                 }
-                REQUEST_FAILED, END_REPAIR_FAILED -> {
-                    toast(getString(R.string.error_message_of_request_failed))
-                }
+                REQUEST_FAILED -> toast(getString(R.string.error_message_of_request_failed))
             }
         })
-    }
-
-    override fun onStart() {
-        super.onStart()
-        viewModel.requestRequirement()
     }
 
     companion object {

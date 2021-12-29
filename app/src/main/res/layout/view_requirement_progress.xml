@@ -19,7 +19,7 @@
             android:paddingTop="@dimen/gap_3"
             android:paddingEnd="@dimen/gap_12"
             android:paddingBottom="@dimen/gap_3"
-            android:textColor="@color/color_0C5E47"
+            android:textColor="@color/c_0C5E47"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="견적요청" />
@@ -50,8 +50,8 @@
             android:layout_marginStart="@dimen/gap_8"
             android:layout_marginTop="@dimen/gap_38"
             android:layout_marginEnd="@dimen/gap_8"
-            android:progressBackgroundTint="@color/color_CECECE"
-            android:progressTint="@color/color_0C5E47"
+            android:progressBackgroundTint="@color/c_CECECE"
+            android:progressTint="@color/c_0C5E47"
             android:thumb="@color/transparent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -64,7 +64,7 @@
             android:layout_width="@dimen/gap_12"
             android:layout_height="@dimen/gap_12"
             android:layout_marginStart="@dimen/gap_10"
-            android:background="@drawable/selector_circle_for_requirement_progress"
+            android:background="@color/selector_circle_for_requirement_progress"
             app:layout_constraintBottom_toBottomOf="@id/seek_bar"
             app:layout_constraintStart_toStartOf="@id/seek_bar"
             app:layout_constraintTop_toTopOf="@id/seek_bar" />
@@ -75,7 +75,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/gap_12"
-            android:textColor="@color/color_909090"
+            android:textColor="@color/c_909090"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/seek_bar"
             tools:text="문의접수" />
@@ -85,7 +85,7 @@
             android:layout_width="@dimen/gap_12"
             android:layout_height="@dimen/gap_12"
             android:layout_marginEnd="@dimen/gap_10"
-            android:background="@drawable/selector_circle_for_requirement_progress"
+            android:background="@color/selector_circle_for_requirement_progress"
             app:layout_constraintBottom_toBottomOf="@id/seek_bar"
             app:layout_constraintEnd_toEndOf="@id/seek_bar"
             app:layout_constraintTop_toTopOf="@id/seek_bar" />
@@ -96,7 +96,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/gap_12"
-            android:textColor="@color/color_909090"
+            android:textColor="@color/c_909090"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/seek_bar"
             tools:text="시공완료" />

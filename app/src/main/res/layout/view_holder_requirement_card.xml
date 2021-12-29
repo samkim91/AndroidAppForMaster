@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="data"
+            type="kr.co.soogong.master.data.model.requirement.RequirementCard" />
+
+        <variable
+            name="left_button_click_listener"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="right_button_click_listener"
+            type="android.view.View.OnClickListener" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="@dimen/gap_14"
+        app:cardElevation="@dimen/gap_1">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/gap_14">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_requirement_token"
+                style="@style/caption_2.bold"
+                android:layout_width="@dimen/gap_0"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/gap_10"
+                android:ellipsize="middle"
+                android:maxLines="1"
+                android:textColor="@color/grey_1"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintEnd_toStartOf="@id/lf_status"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="문의번호 20211103241231" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_created_at"
+                style="@style/footnote.bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/gap_4"
+                android:textColor="@color/black"
+                app:dateWithoutDay="@{data.createdAt}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_requirement_token"
+                tools:text="2021. 11. 3" />
+
+            <kr.co.soogong.master.atomic.atoms.LabelFilled
+                android:id="@+id/lf_status"
+                android:layout_width="@dimen/gap_68"
+                android:layout_height="@dimen/gap_32"
+                app:colorTheme="@{data.status.theme}"
+                app:content="@{data.status.inKorean}"
+                app:layout_constraintBottom_toBottomOf="@id/tv_created_at"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_requirement_token" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_address"
+                style="@style/title_3.bold"
+                android:layout_width="@dimen/gap_0"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/gap_14"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="@{data.oldAddress != null ? data.oldAddress : data.address}"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/lf_status"
+                app:layout_constraintWidth_percent="0.93"
+                tools:text="부산광역시 강서구 녹산산단382로14번가길 10~29번지(송정동) 부산광역시 강서구 녹산산단382로14번가길 10~29번지(송정동)" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_project"
+                style="@style/subheadline.regular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/gap_4"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@{data.projectName}"
+                android:textColor="@color/grey_3"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_address"
+                tools:text="욕실 위생도기 및 수전 설치/교체 " />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/cg_qna"
+                android:layout_width="@dimen/gap_0"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/gap_8"
+                app:chipSpacingHorizontal="@dimen/gap_8"
+                app:chipSpacingVertical="@dimen/gap_4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_project" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_due_time"
+                style="@style/caption_1.bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/gap_14"
+                android:maxLines="1"
+                android:textColor="@color/grey_1"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cg_qna"
+                tools:text="견적 마감까지 8시간 21분" />
+
+            <!-- region 버튼 -->
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button_left"
+                style="@style/button.medium.outlined_secondary"
+                android:layout_marginTop="@dimen/requirement_card_call_button_margin_top"
+                android:layout_marginEnd="@dimen/gap_10"
+                android:onClick="@{left_button_click_listener}"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/button_right"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_due_time"
+                app:layout_goneMarginEnd="@dimen/gap_0"
+                tools:text="견적 거절"
+                tools:visibility="visible" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button_right"
+                style="@style/button.medium.outlined_primary"
+                android:layout_marginTop="@dimen/requirement_card_call_button_margin_top"
+                android:onClick="@{right_button_click_listener}"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/button_left"
+                app:layout_constraintTop_toBottomOf="@id/tv_due_time"
+                tools:text="자세히 보기"
+                tools:visibility="visible" />
+            <!-- endregion -->
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</layout>
