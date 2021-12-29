@@ -69,7 +69,6 @@ class PortfolioViewModel @Inject constructor(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe { setAction(SHOW_LOADING) }
-            .doAfterTerminate { setAction(DISMISS_LOADING) }
             .subscribeBy(
                 onSuccess = {
                     Timber.tag(TAG).d("savePortfolio successfully: $it")

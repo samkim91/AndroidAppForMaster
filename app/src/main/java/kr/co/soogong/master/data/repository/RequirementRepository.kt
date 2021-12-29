@@ -69,8 +69,9 @@ class RequirementRepository @Inject constructor(
         readYns: Boolean?,
         offset: Int,
         pageSize: Int,
+        order: Int,
     ): Single<ResponseDto<PageableContentDto<RequirementCardDto>>> {
-        return getRequirementsFromServer(status, readYns, offset, pageSize)
+        return getRequirementsFromServer(status, readYns, offset, pageSize, order)
 //            .onErrorResumeNext(getRequirementsFromLocal(statusArray))
             .doOnError { Timber.tag(TAG).d("getRequirementsByStatus failed: $it") }
     }
@@ -90,13 +91,15 @@ class RequirementRepository @Inject constructor(
         readYns: Boolean?,
         offset: Int,
         pageSize: Int,
+        order: Int,
     ): Single<ResponseDto<PageableContentDto<RequirementCardDto>>> {
         Timber.tag(TAG).d("getRequirementFromServer start: $status")
         return requirementService.getRequirements(getMasterUidFromSharedUseCase()!!,
             status,
             readYns,
             offset,
-            pageSize)
+            pageSize,
+            order)
             .doOnSuccess {
                 Timber.tag(TAG).d("getRequirementsFromServer: ")
 //                saveRequirementsInLocal(status, it)
@@ -125,6 +128,7 @@ class RequirementRepository @Inject constructor(
         readYns: Boolean? = null,
         offset: Int,
         pageSize: Int,
+        order: Int,
     ): Single<ResponseDto<PageableContentDto<RequirementCardDto>>> {
         Timber.tag(TAG).d("searchRequirementsFromServer start: $searchingText, $searchingPeriod")
         return requirementService.searchRequirements(
@@ -134,6 +138,7 @@ class RequirementRepository @Inject constructor(
             readYns,
             offset,
             pageSize,
+            order
         )
             .doOnSuccess {
                 Timber.tag(TAG).d("searchRequirementsFromServer: ")
