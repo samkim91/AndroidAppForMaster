@@ -52,13 +52,15 @@
                 app:setSecondEditTextVisible="@{false}"
                 app:titleVisible="@{false}" />
 
-            <LinearLayout
-                android:id="@+id/major_container"
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/cg_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/gap_20"
+                android:layout_marginTop="@dimen/gap_24"
                 android:layout_marginEnd="@dimen/gap_20"
-                android:orientation="vertical"
+                app:chipSpacingHorizontal="@dimen/gap_2"
+                app:chipSpacingVertical="@dimen/gap_4"
                 app:layout_constraintBottom_toTopOf="@id/default_button"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -76,7 +78,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/major_container"
+                app:layout_constraintTop_toBottomOf="@id/cg_container"
                 app:layout_constraintVertical_chainStyle="spread_inside" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

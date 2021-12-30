@@ -2,7 +2,7 @@ package kr.co.soogong.master.ui.profile.detail.email
 
 import androidx.lifecycle.MutableLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kr.co.soogong.master.data.common.DropdownItems
+import kr.co.soogong.master.data.common.DropdownItemList
 import kr.co.soogong.master.data.dto.profile.MasterDto
 import kr.co.soogong.master.domain.usecase.profile.GetProfileUseCase
 import kr.co.soogong.master.domain.usecase.profile.SaveMasterUseCase
@@ -16,7 +16,7 @@ class EditEmailViewModel @Inject constructor(
     saveMasterUseCase: SaveMasterUseCase,
 ) : EditProfileContainerViewModel(getProfileUseCase, saveMasterUseCase) {
 
-    val domains = DropdownItems.domains
+    val domains = DropdownItemList.domains
     val localPart = MutableLiveData("")
     val domain = MutableLiveData<Pair<String, Int>>()
 

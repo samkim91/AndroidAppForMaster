@@ -217,7 +217,7 @@
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/gap_33"
-                    app:content="@{vm.profile.requiredInformation.businessUnitInformation.businessType + `, ` + vm.profile.requiredInformation.businessUnitInformation.businessName}"
+                    app:content="@{vm.profile.requiredInformation.businessUnitInformation.businessType != null ? vm.profile.requiredInformation.businessUnitInformation.businessType + `, ` + vm.profile.requiredInformation.businessUnitInformation.businessName : null}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/hie_shop_images"
@@ -229,11 +229,11 @@
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/gap_33"
-                    app:content="@{vm.profile.requiredInformation.warrantyInformation.warrantyPeriod.toString() + `년, ` + vm.profile.requiredInformation.warrantyInformation.warrantyDescription}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/hbc_business_unit_information"
-                    app:title="@{@string/warranty_information}" />
+                    app:title="@{@string/warranty_information}"
+                    app:warrantyInformation="@{vm.profile.requiredInformation.warrantyInformation}" />
 
                 <!-- 휴대폰(연락처) 정보 -->
                 <kr.co.soogong.master.atomic.molecules.HeadlineButtonContent
