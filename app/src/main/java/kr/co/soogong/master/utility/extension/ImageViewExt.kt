@@ -12,16 +12,8 @@ import kr.co.soogong.master.R
 
 @BindingAdapter("bind:image_url")
 fun ImageView.setImageUrl(url: String?) {
-    if (url.isNullOrEmpty()) {
-        Glide.with(this.context)
-            .load(R.drawable.ic_empty_image)
-            .transform(CenterCrop(), RoundedCorners(8.dp))
-            .into(this)
-        return
-    }
-
     Glide.with(this.context)
-        .load(url)
+        .load(if (url.isNullOrEmpty()) R.drawable.ic_empty_image else url)
         .transform(CenterCrop(), RoundedCorners(8.dp))
         .into(this)
 }
@@ -38,12 +30,8 @@ fun ImageView.setImageUri(uri: Uri?) {
 
 @BindingAdapter("setCircleImageByUrl")
 fun ImageView.setCircleImageByUrl(url: String?) {
-    url?.let {
-        Glide.with(this.context)
-            .load(
-                if (it.isEmpty()) R.drawable.ic_empty_image else it
-            )
-            .circleCrop()
-            .into(this)
-    }
+    Glide.with(this.context)
+        .load(if (url.isNullOrEmpty()) R.drawable.ic_empty_image_circle else url)
+        .circleCrop()
+        .into(this)
 }

@@ -90,7 +90,7 @@ class EditPhoneNumberFragment :
                         if (!it.isValidPhoneNumber()) getString(R.string.invalid_phone_number) else null
                 })
 
-                if (stibmtitAuthPhoneNumber.error.isNullOrBlank()) viewModel.checkUserExist()
+                if (stibmtitAuthPhoneNumber.error.isNullOrEmpty()) viewModel.checkUserExist()
             }
 
             // "재요청하기"에 대한 코드
@@ -105,7 +105,7 @@ class EditPhoneNumberFragment :
                         if (it.length != 6) getString(R.string.invalid_certification_code) else null
                 })
 
-                if (stibmtitAuthPhoneNumber.textInputTimerError.isNullOrBlank()) verifyPhoneNumberWithCode()
+                if (stibmtitAuthPhoneNumber.textInputTimerError.isNullOrEmpty()) verifyPhoneNumberWithCode()
             }
         }
     }

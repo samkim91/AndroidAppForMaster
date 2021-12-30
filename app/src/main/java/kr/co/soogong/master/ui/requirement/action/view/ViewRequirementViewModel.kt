@@ -186,7 +186,10 @@ class ViewRequirementViewModel @Inject constructor(
                 onSuccess = { masterDto ->
                     Timber.tag(TAG).d("requestMasterSimpleInfo successful: $masterDto")
                     masterDto?.approvedStatus.let {
-                        if (it == CodeTable.NOT_APPROVED.code) setAction(NOT_APPROVED_MASTER)
+                        when (it) {
+                            CodeTable.NOT_APPROVED.code -> setAction(NOT_APPROVED_MASTER)
+                            CodeTable.REQUEST_APPROVE.code -> setAction(REQUEST_APPROVE_MASTER)
+                        }
                     }
                 },
                 onError = {
@@ -204,6 +207,7 @@ class ViewRequirementViewModel @Inject constructor(
         const val CALL_TO_CUSTOMER_SUCCESSFULLY = "CALL_TO_CUSTOMER_SUCCESSFULLY"
         const val ASK_FOR_REVIEW_SUCCESSFULLY = "ASK_FOR_REVIEW_SUCCESSFULLY"
         const val NOT_APPROVED_MASTER = "NOT_APPROVED_MASTER"
+        const val REQUEST_APPROVE_MASTER = "REQUEST_APPROVE_MASTER"
         const val REQUEST_FAILED = "REQUEST_FAILED"
     }
 }

@@ -17,6 +17,7 @@ import kr.co.soogong.master.ui.requirement.action.view.ViewRequirementViewModel.
 import kr.co.soogong.master.ui.requirement.action.view.ViewRequirementViewModel.Companion.INVALID_REQUIREMENT
 import kr.co.soogong.master.ui.requirement.action.view.ViewRequirementViewModel.Companion.NOT_APPROVED_MASTER
 import kr.co.soogong.master.ui.requirement.action.view.ViewRequirementViewModel.Companion.REFUSE_TO_ESTIMATE_SUCCESSFULLY
+import kr.co.soogong.master.ui.requirement.action.view.ViewRequirementViewModel.Companion.REQUEST_APPROVE_MASTER
 import kr.co.soogong.master.ui.requirement.action.view.ViewRequirementViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.ui.requirement.action.view.ViewRequirementViewModel.Companion.RESPOND_TO_MEASURE_SUCCESSFULLY
 import kr.co.soogong.master.uihelper.requirment.CallToCustomerHelper
@@ -74,8 +75,28 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                 RESPOND_TO_MEASURE_SUCCESSFULLY -> viewModel.requestRequirement()
                 ASK_FOR_REVIEW_SUCCESSFULLY -> toast(getString(R.string.ask_for_review_successful))
                 NOT_APPROVED_MASTER -> {
-                    toast(getString(R.string.not_approved_master))
-                    onBackPressed()
+                    DefaultDialog.newInstance(
+                        DialogData.getAskingFillProfileDialogData(),
+                        false
+                    ).let { dialog ->
+                        dialog.setButtonsClickListener(
+                            onPositive = { onBackPressed() },
+                            onNegative = { onBackPressed() }
+                        )
+                        dialog.show(supportFragmentManager, dialog.tag)
+                    }
+                }
+                REQUEST_APPROVE_MASTER -> {
+                    DefaultDialog.newInstance(
+                        DialogData.getWaitingUntilApprovalDialogData(),
+                        false
+                    ).let { dialog ->
+                        dialog.setButtonsClickListener(
+                            onPositive = { onBackPressed() },
+                            onNegative = { onBackPressed() }
+                        )
+                        dialog.show(supportFragmentManager, dialog.tag)
+                    }
                 }
                 REQUEST_FAILED -> toast(getString(R.string.error_message_of_request_failed))
             }

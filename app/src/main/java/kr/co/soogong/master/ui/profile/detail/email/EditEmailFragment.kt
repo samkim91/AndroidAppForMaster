@@ -70,7 +70,7 @@ class EditEmailFragment :
                         if (!ValidationHelper.isValidDomain(it.first)) getString(R.string.invalid_email_format) else null
                 })
 
-                if (sefEmail.error.isNullOrBlank() && sefEmail.dropdownError.isNullOrBlank()) viewModel.saveEmailAddress()
+                if (sefEmail.error.isNullOrEmpty() && sefEmail.dropdownError.isNullOrEmpty()) viewModel.saveEmailAddress()
             }
         }
     }

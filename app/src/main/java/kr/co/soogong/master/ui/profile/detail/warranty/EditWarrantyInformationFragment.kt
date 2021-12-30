@@ -56,9 +56,9 @@ class EditWarrantyInformationFragment : BaseFragment<FragmentEditWarrantyInforma
                 })
 
                 if (viewModel.selectedPeriod.value?.second == -1) {     // 보증기간 없음 선택 시
-                    if (sdmWarrantyPeriod.dropdownError.isNullOrBlank()) viewModel.saveWarrantyInfo()
+                    if (sdmWarrantyPeriod.dropdownError.isNullOrEmpty()) viewModel.saveWarrantyInfo()
                 } else {        // 보증기간 있을 시
-                    if (sdmWarrantyPeriod.dropdownError.isNullOrBlank() && stcWarrantyInformation.error.isNullOrBlank()) viewModel.saveWarrantyInfo()
+                    if (sdmWarrantyPeriod.dropdownError.isNullOrEmpty() && stcWarrantyInformation.error.isNullOrEmpty()) viewModel.saveWarrantyInfo()
                 }
             }
         }

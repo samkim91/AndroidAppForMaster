@@ -52,7 +52,7 @@ class PortfolioFragment : BaseFragment<FragmentEditPortfolioBinding>(
             (activity as EditProfileContainerActivity).setSaveButtonClickListener {
                 viewModel.title.observe(viewLifecycleOwner, {
                     stiTitle.error =
-                        if (it.isNullOrBlank()) getString(R.string.required_field_alert) else null
+                        if (it.isNullOrEmpty()) getString(R.string.required_field_alert) else null
                 })
 
                 saidBeforeRepairing.error =
@@ -65,7 +65,7 @@ class PortfolioFragment : BaseFragment<FragmentEditPortfolioBinding>(
                         if (it.length < 10) getString(R.string.fill_text_over_10) else null
                 })
 
-                if (stiTitle.error.isNullOrEmpty() && saidBeforeRepairing.error.isNullOrEmpty() && saidAfterRepairing.error.isNullOrEmpty() && stcDescription.error.isNullOrBlank()) {
+                if (stiTitle.error.isNullOrEmpty() && saidBeforeRepairing.error.isNullOrEmpty() && saidAfterRepairing.error.isNullOrEmpty() && stcDescription.error.isNullOrEmpty()) {
                     viewModel.savePortfolio()
                 }
             }

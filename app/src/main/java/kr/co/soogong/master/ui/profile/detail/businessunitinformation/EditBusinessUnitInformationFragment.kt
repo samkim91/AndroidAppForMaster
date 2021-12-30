@@ -95,16 +95,16 @@ class EditBusinessUnitInformationFragment :
 
                 viewModel.businessNumber.observe(viewLifecycleOwner, {
                     stiBusinessNumber.error = when {
-                        it.isNullOrBlank() -> getString(R.string.required_field_alert)
+                        it.isNullOrEmpty() -> getString(R.string.required_field_alert)
                         it.length > 10 -> getString(R.string.fill_text_under_10)
                         else -> null
                     }
                 })
 
                 if (viewModel.businessType.value == CodeTable.FREELANCER) {
-                    if (!stiShopName.error.isNullOrBlank() || !stiBusinessNumber.error.isNullOrBlank()) return@setSaveButtonClickListener
+                    if (!stiShopName.error.isNullOrEmpty() || !stiBusinessNumber.error.isNullOrEmpty()) return@setSaveButtonClickListener
                 } else {
-                    if (!stiBusinessName.error.isNullOrBlank() || !stiShopName.error.isNullOrBlank() || !stiBusinessNumber.error.isNullOrBlank()) return@setSaveButtonClickListener
+                    if (!stiBusinessName.error.isNullOrEmpty() || !stiShopName.error.isNullOrEmpty() || !stiBusinessNumber.error.isNullOrEmpty()) return@setSaveButtonClickListener
                 }
 
                 if (viewModel.profile.value?.approvedStatus == CodeTable.APPROVED.code) {

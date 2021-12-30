@@ -46,7 +46,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintWidth_percent="0.20"
-                    app:setCircleImageByUrl="@{vm.profile.basicInformation.profileImage.url}" />
+                    app:setCircleImageByUrl="@{vm.profile.basicInformation.profileImage != null ? vm.profile.basicInformation.profileImage.url : ``}" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_owner_name"
@@ -102,11 +102,11 @@
                     android:layout_height="@dimen/gap_40"
                     android:layout_marginTop="@dimen/gap_16"
                     android:onClick="@{() -> vm.moveToNotice()}"
+                    app:callOut="@{@string/notice}"
                     app:icon="@{@drawable/ic_speaker}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/iv_divider_profile"
-                    app:callOut="@{@string/notice}" />
+                    app:layout_constraintTop_toBottomOf="@id/iv_divider_profile" />
 
                 <kr.co.soogong.master.atomic.molecules.IconCallOutArrow
                     android:id="@+id/ica_setting_alarm"
@@ -114,11 +114,11 @@
                     android:layout_height="@dimen/gap_40"
                     android:layout_marginTop="@dimen/gap_16"
                     android:onClick="@{() -> vm.moveToSettingAlarm()}"
+                    app:callOut="@{@string/setting_alarm}"
                     app:icon="@{@drawable/ic_bell}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/ica_notice"
-                    app:callOut="@{@string/setting_alarm}" />
+                    app:layout_constraintTop_toBottomOf="@id/ica_notice" />
 
                 <kr.co.soogong.master.atomic.molecules.IconCallOutArrow
                     android:id="@+id/ica_logout"
@@ -126,11 +126,11 @@
                     android:layout_height="@dimen/gap_40"
                     android:layout_marginTop="@dimen/gap_16"
                     android:onClick="@{() -> vm.requestLogout()}"
+                    app:callOut="@{@string/logout}"
                     app:icon="@{@drawable/ic_logout}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/ica_setting_alarm"
-                    app:callOut="@{@string/logout}" />
+                    app:layout_constraintTop_toBottomOf="@id/ica_setting_alarm" />
 
                 <kr.co.soogong.master.atomic.molecules.IconCallOutArrow
                     android:id="@+id/ica_app_version"
@@ -138,12 +138,12 @@
                     android:layout_height="@dimen/gap_40"
                     android:layout_marginTop="@dimen/gap_16"
                     android:onClick="@{() -> vm.updateVersion()}"
+                    app:callOut="@{@string/app_version}"
                     app:endText="@{@string/version_text(vm.version)}"
                     app:icon="@{@drawable/ic_bulb}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/ica_logout"
-                    app:callOut="@{@string/app_version}" />
+                    app:layout_constraintTop_toBottomOf="@id/ica_logout" />
 
                 <kr.co.soogong.master.atomic.molecules.IconCallOutArrow
                     android:id="@+id/isa_customer_service"
@@ -151,11 +151,11 @@
                     android:layout_height="@dimen/gap_40"
                     android:layout_marginTop="@dimen/gap_16"
                     android:onClick="@{() -> vm.moveToCustomerService()}"
+                    app:callOut="@{@string/customer_service}"
                     app:icon="@{@drawable/ic_headphone}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/ica_app_version"
-                    app:callOut="@{@string/customer_service}" />
+                    app:layout_constraintTop_toBottomOf="@id/ica_app_version" />
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/iv_divider_bottom"

@@ -510,7 +510,6 @@
     <string name="error_message_of_request_failed">해당 요청을 처리할 수 없습니다. 다시 요청하거나 수공에 연락해주세요.</string>
     <string name="ask_for_review_successful">리뷰 요청을 완료했어요!</string>
     <string name="sign_up_successfully">회원 가입이 완료되었습니다!\n필수 정보를 모두 입력하고\n문의를 처리해보세요!</string>
-    <string name="not_approved_master">승인된 마스터만 열람하실 수 있습니다.</string>
 
     <string name="request_permission_for_image">이미지를 추가하시려면 권한을 허용해주세요.</string>
     <string name="request_permission_for_call">전화하시려면 권한을 허용해주세요.</string>
