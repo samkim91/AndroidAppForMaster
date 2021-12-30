@@ -6,7 +6,10 @@ import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
+import androidx.databinding.BindingAdapter
 import kr.co.soogong.master.R
+import kr.co.soogong.master.data.common.DropdownItemList
+import kr.co.soogong.master.data.model.profile.WarrantyInformation
 import kr.co.soogong.master.databinding.ViewHeadlineButtonContentBinding
 
 class HeadlineButtonContent @JvmOverloads constructor(
@@ -63,6 +66,29 @@ class HeadlineButtonContent @JvmOverloads constructor(
             } else {
                 text = resources.getString(R.string.editing)
                 setTextColor(ResourcesCompat.getColor(resources, R.color.brand_red, null))
+            }
+        }
+    }
+
+    companion object {
+        @JvmStatic
+        @BindingAdapter("warrantyInformation")
+        fun HeadlineButtonContent.setWarrantyInformation(warrantyInformation: WarrantyInformation?) {
+            when (warrantyInformation?.warrantyPeriod) {
+                null -> {
+                    this.content = null
+                }
+                DropdownItemList.warrantyPeriods[0].second -> {
+                    this.content = DropdownItemList.warrantyPeriods[0].first
+                }
+                DropdownItemList.warrantyPeriods[1].second -> {
+                    this.content = warrantyInformation.warrantyDescription
+                }
+                else -> {
+                    this.content = context.getString(R.string.years_comma,
+                        warrantyInformation.warrantyPeriod,
+                        warrantyInformation.warrantyDescription)
+                }
             }
         }
     }

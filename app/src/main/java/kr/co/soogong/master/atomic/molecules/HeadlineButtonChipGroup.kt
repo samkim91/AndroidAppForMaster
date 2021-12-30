@@ -37,14 +37,17 @@ class HeadlineButtonChipGroup @JvmOverloads constructor(
         set(value) {
             field = value
             binding.tvHint.isVisible = !value.isNullOrEmpty()
-            value?.let { binding.tvHint.text = it }
+            binding.tvHint.text = value
         }
 
     var chips: List<String>? = null
         set(value) {
             field = value
-            value?.let {
+            if (value.isNullOrEmpty()) {
+                binding.cgChips.isVisible = false
+            } else {
                 hint = null
+                binding.cgChips.isVisible = true
                 generateChips()
                 setButtonStatus()
             }
@@ -57,7 +60,6 @@ class HeadlineButtonChipGroup @JvmOverloads constructor(
         }
 
     private fun generateChips() {
-        binding.cgChips.isVisible = true
         binding.cgChips.removeAllViews()
 
         chips?.map { item ->

@@ -10,7 +10,9 @@ import kr.co.soogong.master.data.model.requirement.RequirementStatus
 import kr.co.soogong.master.domain.usecase.home.GetRequirementTotalUseCase
 import kr.co.soogong.master.ui.requirement.RequirementViewModel
 import kr.co.soogong.master.ui.requirement.RequirementViewModelAggregate
+import retrofit2.HttpException
 import timber.log.Timber
+import java.net.HttpURLConnection
 import javax.inject.Inject
 
 @HiltViewModel
@@ -58,7 +60,8 @@ class HomeViewModel @Inject constructor(
                 },
                 onError = {
                     Timber.tag(TAG).d("requestRequirementsUnread failed: $it")
-                    setAction(REQUEST_FAILED)
+                    if ((it as HttpException).code() != HttpURLConnection.HTTP_NOT_FOUND)
+                        setAction(REQUEST_FAILED)
                 }
             ).addToDisposable()
     }

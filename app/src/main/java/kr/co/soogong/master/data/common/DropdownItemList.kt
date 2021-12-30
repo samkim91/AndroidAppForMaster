@@ -1,6 +1,6 @@
 package kr.co.soogong.master.data.common
 
-object DropdownItems {
+object DropdownItemList {
     val warrantyPeriods: List<Pair<String, Int>> =
         listOf(
             Pair("보증기간 없음", -1),

@@ -85,16 +85,20 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>(
                 it.setButtonsClickListener(
                     onPositive = { },
                     onNegative = {
-                        Firebase.auth.currentUser?.delete()
-                            ?.addOnCompleteListener { task ->
-                                Timber.tag(TAG)
-                                    .d("addOnCompleteListener successfully: ${task.isSuccessful}")
-                                finish()
-                            }
-                            ?.addOnFailureListener { it ->
-                                Timber.tag(TAG).d("addOnFailureListener: $it")
-                                finish()
-                            }
+                        if (Firebase.auth.currentUser != null) {
+                            Firebase.auth.currentUser?.delete()
+                                ?.addOnCompleteListener { task ->
+                                    Timber.tag(TAG)
+                                        .d("addOnCompleteListener successfully: ${task.isSuccessful}")
+                                    super.onBackPressed()
+                                }
+                                ?.addOnFailureListener { it ->
+                                    Timber.tag(TAG).d("addOnFailureListener: $it")
+                                    super.onBackPressed()
+                                }
+                        } else {
+                            super.onBackPressed()
+                        }
                     }
                 )
                 it.show(supportFragmentManager, it.tag)

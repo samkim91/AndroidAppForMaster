@@ -11,7 +11,6 @@ import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.dto.profile.MasterDto
 import kr.co.soogong.master.data.dto.profile.ProjectDto
-import kr.co.soogong.master.data.model.major.Major
 import kr.co.soogong.master.domain.usecase.auth.CheckUserExistentUseCase
 import kr.co.soogong.master.domain.usecase.auth.SignUpUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
@@ -45,7 +44,6 @@ class SignUpViewModel @Inject constructor(
 
     // MajorFragment
     val projects = ListLiveData<ProjectDto>()
-    val majors = ListLiveData<Major>()
 
     // AddressFragment
     val roadAddress = MutableLiveData("")
