@@ -146,8 +146,6 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
 
     override fun onStart() {
         super.onStart()
-        Timber.tag(TAG).d("onStart: ")
-        viewModel.requestMasterSimpleInfo()
         viewModel.requestRequirement()
     }
 

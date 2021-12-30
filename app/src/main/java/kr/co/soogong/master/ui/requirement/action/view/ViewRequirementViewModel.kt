@@ -43,6 +43,10 @@ class ViewRequirementViewModel @Inject constructor(
     val review: LiveData<Review>
         get() = _review
 
+    init {
+        requestMasterSimpleInfo()
+    }
+
     fun requestRequirement() {
         Timber.tag(TAG).d("requestRequirement: ${requirementId.value}")
         getRequirementUseCase(requirementId.value!!)
@@ -163,6 +167,7 @@ class ViewRequirementViewModel @Inject constructor(
             .subscribeBy(
                 onSuccess = {
                     Timber.tag(TAG).d("ASK_FOR_REVIEW_SUCCEEDED: $it")
+                    requestRequirement()
                     setAction(ASK_FOR_REVIEW_SUCCESSFULLY)
                 },
                 onError = {
@@ -172,7 +177,7 @@ class ViewRequirementViewModel @Inject constructor(
             ).addToDisposable()
     }
 
-    fun requestMasterSimpleInfo() {
+    private fun requestMasterSimpleInfo() {
         Timber.tag(TAG).d("requestMasterSimpleInfo: ")
         getMasterSimpleInfoUseCase()
             .subscribeOn(Schedulers.io())

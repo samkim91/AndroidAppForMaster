@@ -152,7 +152,6 @@ class WriteEstimationActivity : BaseActivity<ActivityWriteEstimationBinding>(
                     toast(getString(R.string.error_message_of_request_failed))
                 }
                 SHOW_LOADING -> showLoading(supportFragmentManager)
-                DISMISS_LOADING -> dismissLoading()
             }
         })
     }

@@ -160,6 +160,7 @@ open class RequirementViewModel @Inject constructor(
                 onSuccess = {
                     Timber.tag(TAG).d("ASK_FOR_REVIEW_SUCCEEDED: $it")
                     setAction(ASK_FOR_REVIEW_SUCCESSFULLY)
+                    initList()
                 },
                 onError = {
                     Timber.tag(TAG).d("ASK_FOR_REVIEW_FAILED: $it")
