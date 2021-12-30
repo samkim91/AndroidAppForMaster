@@ -14,13 +14,13 @@ fun setRequirementInformationPercentage(
 
     viewModel.profile.value?.requiredInformation?.let { requiredInformation ->
         with(requiredInformation) {
-            if (!ownerName.isNullOrBlank()) filledRequired++
-            if (!introduction.isNullOrBlank()) filledRequired++
+            if (!ownerName.isNullOrEmpty()) filledRequired++
+            if (!introduction.isNullOrEmpty()) filledRequired++
             if (!shopImages.isNullOrEmpty()) filledRequired++
-            if (!businessUnitInformation?.businessType.isNullOrBlank()) filledRequired++
+            if (!businessUnitInformation?.businessType.isNullOrEmpty()) filledRequired++
             if (warrantyInformation?.warrantyPeriod != null) filledRequired++
-            if (!tel.isNullOrBlank()) filledRequired++
-            if (!career.isNullOrBlank()) filledRequired++
+            if (!tel.isNullOrEmpty()) filledRequired++
+            if (!career.isNullOrEmpty()) filledRequired++
             if (!majors.isNullOrEmpty()) filledRequired++
             if (!companyAddress?.roadAddress.isNullOrEmpty()) filledRequired++
             if (serviceArea != null) filledRequired++

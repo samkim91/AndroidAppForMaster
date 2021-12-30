@@ -45,12 +45,14 @@ open class RequirementCardViewHolder(
             buttonRight.isVisible = true
             buttonRight.setText(R.string.requirements_card_view_detail)
             setRightButtonClickListener {
-                context.startActivity(
-                    ViewRequirementActivityHelper.getIntent(
-                        context,
-                        requirementCard.id
+                checkMasterApprovedStatus {
+                    context.startActivity(
+                        ViewRequirementActivityHelper.getIntent(
+                            context,
+                            requirementCard.id
+                        )
                     )
-                )
+                }
             }
         }
     }
@@ -160,12 +162,14 @@ open class RequirementCardViewHolder(
             buttonLeft.isVisible = true
             buttonLeft.setText(R.string.repair_done_text)
             setLeftButtonClickListener {
-                context.startActivity(
-                    EndRepairActivityHelper.getIntent(
-                        context,
-                        requirementCard.id
+                checkMasterApprovedStatus {
+                    context.startActivity(
+                        EndRepairActivityHelper.getIntent(
+                            context,
+                            requirementCard.id
+                        )
                     )
-                )
+                }
             }
         }
     }
@@ -177,7 +181,11 @@ open class RequirementCardViewHolder(
             if (!requirementCard.requestReviewYn) {
                 buttonLeft.isVisible = true
                 buttonLeft.setText(R.string.request_review)
-                setLeftButtonClickListener { viewModel.askForReview(requirementCard) }
+                setLeftButtonClickListener {
+                    checkMasterApprovedStatus {
+                        viewModel.askForReview(requirementCard)
+                    }
+                }
             }
         }
     }

@@ -39,18 +39,23 @@ class PriceByProjectFragment : BaseFragment<FragmentEditPriceByProjectBinding>(
             (activity as EditProfileContainerActivity).setSaveButtonClickListener {
                 viewModel.title.observe(viewLifecycleOwner, {
                     stiTitle.error =
-                        if (it.isNullOrBlank()) getString(R.string.required_field_alert) else null
+                        if (it.isNullOrEmpty()) getString(R.string.required_field_alert) else null
                 })
 
                 viewModel.price.observe(viewLifecycleOwner, {
                     stiPrice.error = when {
-                        it.isNullOrBlank() -> getString(R.string.required_field_alert)
+                        it.isNullOrEmpty() -> getString(R.string.required_field_alert)
                         !ValidationHelper.isIntRange(it) -> getString(R.string.too_large_number)
                         else -> null
                     }
                 })
 
-                if (stiTitle.error.isNullOrBlank() && stiPrice.error.isNullOrBlank()) {
+                viewModel.description.observe(viewLifecycleOwner, {
+                    stcDescription.error =
+                        if (it.length < 10) getString(R.string.fill_text_over_10) else null
+                })
+
+                if (stiTitle.error.isNullOrEmpty() && stiPrice.error.isNullOrEmpty() && stcDescription.error.isNullOrEmpty()) {
                     viewModel.savePriceByProject()
                 }
             }

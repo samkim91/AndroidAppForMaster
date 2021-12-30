@@ -62,7 +62,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintWidth_percent="0.25"
-                    app:setCircleImageByUrl="@{vm.profile.basicInformation.profileImage.url}" />
+                    app:setCircleImageByUrl="@{vm.profile.basicInformation.profileImage != null ? vm.profile.basicInformation.profileImage.url : ``}" />
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/iv_add"
@@ -71,7 +71,7 @@
                     android:background="@drawable/ic_add"
                     app:layout_constraintBottom_toBottomOf="@id/iv_profile_image"
                     app:layout_constraintEnd_toEndOf="@id/iv_profile_image"
-                    bind:visible="@{vm.profile.basicInformation.profileImage.url.empty}" />
+                    bind:visible="@{vm.profile.basicInformation.profileImage == null}" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_subscription_plan"

@@ -55,21 +55,21 @@ class TextInputTimer @JvmOverloads constructor(
         set(value) {
             field = value
             textInputLayout.error = value
-            textInputLayout.isErrorEnabled = !value.isNullOrBlank()
+            textInputLayout.isErrorEnabled = !value.isNullOrEmpty()
         }
 
     override var hint: String? = null
         set(value) {
             field = value
             textInputLayout.hint = value
-            textInputLayout.isHintEnabled = !value.isNullOrBlank()
+            textInputLayout.isHintEnabled = !value.isNullOrEmpty()
         }
 
     override var helper: String? = null
         set(value) {
             field = value
             textInputLayout.helperText = value
-            textInputLayout.isHelperTextEnabled = !value.isNullOrBlank()
+            textInputLayout.isHelperTextEnabled = !value.isNullOrEmpty()
         }
 
     override var inputEnabled: Boolean? = null

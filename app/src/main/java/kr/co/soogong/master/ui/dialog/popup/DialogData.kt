@@ -225,7 +225,7 @@ data class DialogData(
                 "고객님이 방문 요청을 하셨어요. 내용을 확인한 뒤 실측여부 버튼을 클릭해 주세요.",
                 "",
                 "확인하러 가기",
-                "",
+                "닫기",
             )
 
         fun getNoticeForRequestConsulting(count: Int) =
@@ -234,7 +234,7 @@ data class DialogData(
                 "시공을 희망하는 고객님이 기다리고 있어요. 먼저 고객님께 연락해서 시공확률을 높여보세요.",
                 "",
                 "상담하러 가기",
-                "",
+                "닫기",
             )
 
         fun getConfirmingLogout() =

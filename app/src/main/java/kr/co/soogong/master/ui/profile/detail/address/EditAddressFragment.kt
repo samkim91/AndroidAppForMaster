@@ -62,7 +62,7 @@ class EditAddressFragment : BaseFragment<FragmentEditAddressBinding>(
                         if (it.isNullOrEmpty()) getString(R.string.required_field_alert) else null
                 })
 
-                if (stiRoadAddress.error.isNullOrBlank()) {
+                if (stiRoadAddress.error.isNullOrEmpty()) {
                     val latlng = LocationHelper.changeAddressToLatLng(requireContext(),
                         "${viewModel.roadAddress.value} ${viewModel.detailAddress.value}")
                     viewModel.latitude.value = latlng["latitude"]

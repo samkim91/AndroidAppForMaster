@@ -41,7 +41,7 @@ class EditIntroductionFragment : BaseFragment<FragmentEditIntroductionBinding>(
                         if (it.length < 10) resources.getString(R.string.fill_text_over_10) else null
                 })
 
-                if (stcIntroduction.textareaCounter.textInputEditText.error.isNullOrBlank()) viewModel.saveIntroduction()
+                if (stcIntroduction.textareaCounter.textInputEditText.error.isNullOrEmpty()) viewModel.saveIntroduction()
             }
         }
     }

@@ -113,14 +113,6 @@ class RequirementFragment : BaseFragment<FragmentRequirementBinding>(
                     showDialogForViewRequirement(REQUEST_CONSULTING, request.requestConsultingList)
             }
         })
-
-        viewModel.mainTabIndex.observe(viewLifecycleOwner, { index ->
-
-        })
-
-        viewModel.filterTabIndex.observe(viewLifecycleOwner, { index ->
-
-        })
     }
 
     fun showDialogForViewRequirement(type: Int, list: List<Int>) {
