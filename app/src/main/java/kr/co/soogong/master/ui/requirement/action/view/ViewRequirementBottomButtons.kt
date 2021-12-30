@@ -42,15 +42,15 @@ fun setBottomButtons(
             // Buttons : 2. 시공완료, 3. 견적거절, 4. 견적보내기
             is RequirementStatus.Requested -> {
                 addEndRepairButton(activity, binding.flexibleContainer, requirement)
-                buttonLeft.setRefuseEstimation(activity.supportFragmentManager, viewModel)
-                buttonRight.setAcceptEstimation(viewModel)
+                buttonLeft.setRefusingEstimation(activity.supportFragmentManager, viewModel)
+                buttonRight.setAcceptingEstimation(viewModel)
             }
 
             // 매칭대기
             // Buttons : 1. 전화연결, 3. 시공완료
             is RequirementStatus.Estimated -> {
                 binding.requirementBasic.buttonCallToCustomerVisibility = true
-                buttonRight.setEndRepair(viewModel)
+                buttonRight.setEndingRepair(viewModel)
             }
 
             // 상담요청
@@ -61,11 +61,11 @@ fun setBottomButtons(
                 // 견적을 냈으면 -> 매칭대기와 같이 3. 시공완료
                 // 견적을 안 냈으면 -> 견적요청과 같이 2. 시공완료, 3. 견적거절, 4. 견적보내기
                 if (requirement.estimationDto?.masterResponseCode == EstimationResponseCode.ACCEPTED) {
-                    buttonRight.setEndRepair(viewModel)
+                    buttonRight.setEndingRepair(viewModel)
                 } else {
                     addEndRepairButton(activity, binding.flexibleContainer, requirement)
-                    buttonLeft.setRefuseEstimation(activity.supportFragmentManager, viewModel)
-                    buttonRight.setAcceptEstimation(viewModel)
+                    buttonLeft.setRefusingEstimation(activity.supportFragmentManager, viewModel)
+                    buttonRight.setAcceptingEstimation(viewModel)
                 }
             }
 
@@ -74,8 +74,8 @@ fun setBottomButtons(
             is RequirementStatus.RequestMeasure -> {
                 binding.requirementBasic.buttonCallToCustomerVisibility = true
                 addEndRepairButton(activity, binding.flexibleContainer, requirement)
-                buttonLeft.setRefuseMeasure(activity.supportFragmentManager, viewModel)
-                buttonRight.setAcceptMeasure(activity.supportFragmentManager, viewModel)
+                buttonLeft.setRefusingMeasure(activity.supportFragmentManager, viewModel)
+                buttonRight.setAcceptingMeasure(activity.supportFragmentManager, viewModel)
             }
 
             // 실측예정
@@ -83,22 +83,25 @@ fun setBottomButtons(
             is RequirementStatus.Measuring -> {
                 binding.requirementBasic.buttonCallToCustomerVisibility = true
                 addEndRepairButton(activity, binding.flexibleContainer, requirement)
-                buttonLeft.setCancelMeasure(viewModel)
-                buttonRight.setSendMeasure(viewModel)
+                buttonLeft.setCancelingMeasure(viewModel)
+                buttonRight.setSendingMeasure(viewModel)
             }
 
             // 실측완료, 시공예정
             // Buttons : 1. 전화연결, 2. 시공취소, 3. 시공완료
             is RequirementStatus.Measured, RequirementStatus.Repairing -> {
                 binding.requirementBasic.buttonCallToCustomerVisibility = true
-                buttonLeft.setCancelRepair(viewModel)
-                buttonRight.setEndRepair(viewModel)
+                buttonLeft.setCancelingRepair(viewModel)
+                buttonRight.setEndingRepair(viewModel)
             }
 
             // 시공완료
             // Button : 1. 리뷰요청
             is RequirementStatus.Done -> {
-                buttonRight.setAskReview(viewModel)
+                viewModel.requirement.value?.estimationDto?.repair?.requestReviewYn?.run {
+                    if (this) buttonLeft.setAskingReviewDone()
+                    else buttonRight.setAskingReview(viewModel)
+                }
             }
 
             is RequirementStatus.Canceled, RequirementStatus.Closed ->
@@ -140,7 +143,7 @@ private fun addEndRepairButton(
     )
 }
 
-private fun AppCompatButton.setAcceptEstimation(
+private fun AppCompatButton.setAcceptingEstimation(
     viewModel: ViewRequirementViewModel,
 ) {
     isVisible = true
@@ -155,7 +158,7 @@ private fun AppCompatButton.setAcceptEstimation(
     }
 }
 
-private fun AppCompatButton.setRefuseEstimation(
+private fun AppCompatButton.setRefusingEstimation(
     fragmentManager: FragmentManager,
     viewModel: ViewRequirementViewModel,
 ) {
@@ -176,7 +179,7 @@ private fun AppCompatButton.setRefuseEstimation(
     }
 }
 
-private fun AppCompatButton.setEndRepair(
+private fun AppCompatButton.setEndingRepair(
     viewModel: ViewRequirementViewModel,
 ) {
     isVisible = true
@@ -191,7 +194,7 @@ private fun AppCompatButton.setEndRepair(
     }
 }
 
-private fun AppCompatButton.setRefuseMeasure(
+private fun AppCompatButton.setRefusingMeasure(
     fragmentManager: FragmentManager,
     viewModel: ViewRequirementViewModel,
 ) {
@@ -217,7 +220,7 @@ private fun AppCompatButton.setRefuseMeasure(
     }
 }
 
-private fun AppCompatButton.setAcceptMeasure(
+private fun AppCompatButton.setAcceptingMeasure(
     fragmentManager: FragmentManager,
     viewModel: ViewRequirementViewModel,
 ) {
@@ -238,7 +241,7 @@ private fun AppCompatButton.setAcceptMeasure(
     }
 }
 
-private fun AppCompatButton.setCancelMeasure(
+private fun AppCompatButton.setCancelingMeasure(
     viewModel: ViewRequirementViewModel,
 ) {
     isVisible = true
@@ -253,7 +256,7 @@ private fun AppCompatButton.setCancelMeasure(
     }
 }
 
-private fun AppCompatButton.setCancelRepair(
+private fun AppCompatButton.setCancelingRepair(
     viewModel: ViewRequirementViewModel,
 ) {
     isVisible = true
@@ -268,7 +271,7 @@ private fun AppCompatButton.setCancelRepair(
     }
 }
 
-private fun AppCompatButton.setSendMeasure(
+private fun AppCompatButton.setSendingMeasure(
     viewModel: ViewRequirementViewModel,
 ) {
     isVisible = true
@@ -283,18 +286,17 @@ private fun AppCompatButton.setSendMeasure(
     }
 }
 
-private fun AppCompatButton.setAskReview(
+private fun AppCompatButton.setAskingReview(
     viewModel: ViewRequirementViewModel,
 ) {
     isVisible = true
-    viewModel.requirement.value?.estimationDto?.repair?.requestReviewYn?.let { requestReviewYn ->
-        if (requestReviewYn) {
-            text = context.getString(R.string.request_review_done)
-            isClickable = false
-        } else {
-            text = context.getString(R.string.request_review)
-            setOnClickListener { viewModel.askForReview() }
-        }
-    }
+    text = context.getString(R.string.request_review)
+    setOnClickListener { viewModel.askForReview() }
+}
+
+private fun AppCompatButton.setAskingReviewDone() {
+    isVisible = true
+    text = context.getString(R.string.request_review_done)
+    isClickable = false
 }
 

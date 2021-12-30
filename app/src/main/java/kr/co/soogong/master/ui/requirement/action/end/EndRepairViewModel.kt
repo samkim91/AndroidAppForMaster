@@ -88,5 +88,4 @@ class EndRepairViewModel @Inject constructor(
         const val REQUEST_FAILED = "REQUEST_FAILED"
         const val END_REPAIR_SUCCESSFULLY = "END_REPAIR_SUCCESSFULLY"
     }
-
 }

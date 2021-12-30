@@ -62,7 +62,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/gap_16"
                     android:layout_marginEnd="@dimen/gap_16"
-                    android:checked="@{vm.includingVat}"
+                    android:checked="@={vm.includingVat}"
                     android:text="@string/vat_included"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
