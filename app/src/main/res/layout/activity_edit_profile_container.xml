@@ -38,8 +38,8 @@
                 android:id="@+id/fcv_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="@dimen/gap_24"
                 android:paddingStart="@dimen/gap_16"
+                android:paddingTop="@dimen/gap_24"
                 android:paddingEnd="@dimen/gap_16"
                 android:paddingBottom="@dimen/gap_24" />
         </ScrollView>
@@ -53,6 +53,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/sv_container" />
+            app:layout_constraintTop_toBottomOf="@id/fcv_container" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

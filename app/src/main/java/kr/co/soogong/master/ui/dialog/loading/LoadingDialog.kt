@@ -15,7 +15,7 @@ import kr.co.soogong.master.databinding.DialogCustomBinding
 import kr.co.soogong.master.databinding.DialogLoadingBinding
 import timber.log.Timber
 
-class LoadingDialog() : DialogFragment() {
+class LoadingDialog : DialogFragment() {
     lateinit var binding: DialogLoadingBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {

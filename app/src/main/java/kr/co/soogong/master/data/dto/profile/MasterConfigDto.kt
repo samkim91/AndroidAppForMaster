@@ -24,7 +24,5 @@ data class MasterConfigDto(
     @SerializedName("value")
     val value: String? = null,
 ) : Parcelable {
-    companion object {
-
-    }
+    companion object
 }

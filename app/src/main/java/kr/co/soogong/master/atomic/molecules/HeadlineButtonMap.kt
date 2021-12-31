@@ -35,7 +35,7 @@ class HeadlineButtonMap @JvmOverloads constructor(
         set(value) {
             field = value
             value?.let {
-                tvContent.setText(it)
+                tvContent.text = it
                 tvContent.isVisible = true
                 setButtonStatus()
             }

@@ -72,7 +72,5 @@ data class EstimationDto(
     @SerializedName("updatedAt")
     val updatedAt: Date?,
 ) : Parcelable {
-    companion object {
-
-    }
+    companion object
 }

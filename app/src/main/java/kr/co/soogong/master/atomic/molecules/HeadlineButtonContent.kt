@@ -58,15 +58,30 @@ class HeadlineButtonContent @JvmOverloads constructor(
             value?.let { binding.tvButton.setOnClickListener(it) }
         }
 
-    private fun setButtonStatus() {
+    fun setButtonStatus() {
         with(binding.tvButton) {
-            if (content.isNullOrEmpty()) {
-                text = resources.getString(R.string.register)
-                setTextColor(ResourcesCompat.getColor(resources, R.color.brand_green, null))
-            } else {
-                text = resources.getString(R.string.editing)
-                setTextColor(ResourcesCompat.getColor(resources, R.color.brand_red, null))
+            when {
+                binding.tvContent.text.isNullOrEmpty() -> {
+                    text = resources.getString(R.string.register)
+                    setTextColor(ResourcesCompat.getColor(resources, R.color.brand_green, null))
+                }
+                binding.tvContent.isEnabled -> {
+                    text = resources.getString(R.string.save)
+                    setTextColor(ResourcesCompat.getColor(resources, R.color.brand_green, null))
+                }
+                !binding.tvContent.isEnabled -> {
+                    text = resources.getString(R.string.editing)
+                    setTextColor(ResourcesCompat.getColor(resources, R.color.brand_red, null))
+                }
             }
+
+//            if (content.isNullOrEmpty()) {
+//                text = resources.getString(R.string.register)
+//                setTextColor(ResourcesCompat.getColor(resources, R.color.brand_green, null))
+//            } else {
+//                text = resources.getString(R.string.editing)
+//                setTextColor(ResourcesCompat.getColor(resources, R.color.brand_red, null))
+//            }
         }
     }
 

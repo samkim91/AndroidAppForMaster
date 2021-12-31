@@ -18,7 +18,5 @@ data class ReviewScoreDto(
     @SerializedName("score")
     val score: Float?,
 ) : Parcelable {
-    companion object {
-
-    }
+    companion object
 }

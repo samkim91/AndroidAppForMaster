@@ -13,9 +13,7 @@ class ClosedViewHolder(
     fragmentManager: FragmentManager,
     viewModel: RequirementViewModel,
     binding: ViewHolderRequirementCardBinding,
-) : RequirementCardViewHolder(context, fragmentManager, viewModel, binding) {
-
-}
+) : RequirementCardViewHolder(context, fragmentManager, viewModel, binding)
 
 // 시공취소 상태
 class CanceledViewHolder(
@@ -23,7 +21,5 @@ class CanceledViewHolder(
     fragmentManager: FragmentManager,
     viewModel: RequirementViewModel,
     binding: ViewHolderRequirementCardBinding,
-) : RequirementCardViewHolder(context, fragmentManager, viewModel, binding) {
-
-}
+) : RequirementCardViewHolder(context, fragmentManager, viewModel, binding)
 

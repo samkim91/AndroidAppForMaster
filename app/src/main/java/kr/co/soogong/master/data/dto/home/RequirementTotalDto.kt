@@ -12,6 +12,5 @@ data class RequirementTotalDto(
     @SerializedName("afterProcessCount")
     val afterProcessCount: Int,
 ) {
-    companion object {
-    }
+    companion object
 }

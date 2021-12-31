@@ -1,6 +1,6 @@
 @file:JvmName("ContextExt")
 
-package kr.co.soogong.master.utility.extension;
+package kr.co.soogong.master.utility.extension
 
 import android.content.Context
 import android.widget.Toast

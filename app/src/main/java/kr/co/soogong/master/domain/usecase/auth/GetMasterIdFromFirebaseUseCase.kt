@@ -8,6 +8,6 @@ import javax.inject.Inject
 @Reusable
 class GetMasterIdFromFirebaseUseCase @Inject constructor() {
     operator fun invoke(): String? {
-        return Firebase.auth.currentUser?.uid;
+        return Firebase.auth.currentUser?.uid
     }
 }

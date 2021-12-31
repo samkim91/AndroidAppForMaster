@@ -13,7 +13,7 @@ import com.ortiz.touchview.TouchImageView
 import kr.co.soogong.master.data.dto.common.AttachmentDto
 import timber.log.Timber
 
-class ImageSliderAdapter() : RecyclerView.Adapter<ImageSliderAdapter.ImageViewHolder>() {
+class ImageSliderAdapter : RecyclerView.Adapter<ImageSliderAdapter.ImageViewHolder>() {
 
     private val imageList: MutableList<AttachmentDto> = mutableListOf()
 

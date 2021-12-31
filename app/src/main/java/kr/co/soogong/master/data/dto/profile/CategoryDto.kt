@@ -15,7 +15,5 @@ data class CategoryDto(
     @SerializedName("nameEn")
     val nameEn: String? = null,
 ) : Parcelable {
-    companion object {
-
-    }
+    companion object
 }

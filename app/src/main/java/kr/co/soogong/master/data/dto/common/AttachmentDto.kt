@@ -32,7 +32,5 @@ data class AttachmentDto(
     val uri: Uri? = null,
 
     ) : Parcelable {
-    companion object {
-
-    }
+    companion object
 }

@@ -15,9 +15,7 @@ class RequestedCardViewHolder(
     fragmentManager: FragmentManager,
     viewModel: RequirementViewModel,
     binding: ViewHolderRequirementCardBinding,
-) : RequirementCardViewHolder(context, fragmentManager, viewModel, binding) {
-
-}
+) : RequirementCardViewHolder(context, fragmentManager, viewModel, binding)
 
 // 실측요청 상태
 class RequestMeasureCardViewHolder(

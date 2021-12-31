@@ -14,7 +14,5 @@ data class VersionDto(
     val mandatoryYn: Boolean,
 
     ) : Parcelable, Serializable {
-    companion object {
-
-    }
+    companion object
 }

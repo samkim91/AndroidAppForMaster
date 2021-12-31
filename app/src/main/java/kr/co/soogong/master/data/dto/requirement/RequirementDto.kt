@@ -92,7 +92,5 @@ data class RequirementDto(
     @SerializedName("updatedAt")
     val updatedAt: Date,
 ) : Parcelable {
-    companion object {
-
-    }
+    companion object
 }

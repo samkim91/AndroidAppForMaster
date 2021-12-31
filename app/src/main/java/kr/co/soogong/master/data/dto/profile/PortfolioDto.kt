@@ -38,7 +38,5 @@ data class PortfolioDto(
     val useYn: Boolean? = null,
 
     ) : Parcelable {
-    companion object {
-
-    }
+    companion object
 }

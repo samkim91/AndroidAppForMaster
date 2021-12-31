@@ -12,7 +12,5 @@ data class BusinessUnitInformation(
     val businessNumber: String?,
     val businessRegistImage: AttachmentDto?,
 ) : Parcelable {
-    companion object {
-
-    }
+    companion object
 }

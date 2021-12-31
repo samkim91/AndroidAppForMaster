@@ -33,7 +33,5 @@ data class PreviousRequirementDto(
     @SerializedName("updatedAt")
     val updatedAt: Date?,
 ) : Parcelable {
-    companion object {
-
-    }
+    companion object
 }
