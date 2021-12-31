@@ -13,7 +13,5 @@ data class FirebaseTokenDto(
     val token: String,
 
     ) : Parcelable {
-    companion object {
-
-    }
+    companion object
 }

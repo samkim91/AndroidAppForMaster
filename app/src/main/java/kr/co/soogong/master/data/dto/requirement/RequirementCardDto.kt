@@ -88,7 +88,5 @@ data class RequirementCardDto(
     @SerializedName("createdAt")
     val createdAt: Date,
 ) : Parcelable {
-    companion object {
-
-    }
+    companion object
 }

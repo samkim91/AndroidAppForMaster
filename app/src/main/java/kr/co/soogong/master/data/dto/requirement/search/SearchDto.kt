@@ -13,7 +13,5 @@ data class SearchDto(
     @SerializedName("interval")
     val searchingPeriod: Date,
 ) : Parcelable {
-    companion object {
-
-    }
+    companion object
 }

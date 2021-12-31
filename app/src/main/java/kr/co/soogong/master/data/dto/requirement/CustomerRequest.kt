@@ -15,7 +15,5 @@ data class CustomerRequest(
     @SerializedName("isEmpty")
     val isEmpty: Boolean = false,
 ) : Parcelable {
-    companion object {
-
-    }
+    companion object
 }

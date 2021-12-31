@@ -152,7 +152,5 @@ data class MasterDto(
     val updatedAt: Date? = null,
 
     ) : Parcelable {
-    companion object {
-
-    }
+    companion object
 }

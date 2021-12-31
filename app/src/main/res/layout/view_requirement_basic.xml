@@ -38,8 +38,8 @@
 
         <kr.co.soogong.master.atomic.atoms.LabelFilled
             android:id="@+id/ft_status"
-            android:layout_width="@dimen/gap_68"
-            android:layout_height="@dimen/gap_32"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="@id/tv_created_at"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/tv_requirement_token" />

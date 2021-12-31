@@ -24,9 +24,7 @@ data class CodeDto(
     @SerializedName("description")
     val description: String,
 ) : Parcelable {
-    companion object {
-
-    }
+    companion object
 }
 
 //"id": 78,

@@ -32,7 +32,5 @@ data class NoticeDto(
     @SerializedName("updatedAt")
     val updatedAt: Date,
 ) : Parcelable {
-    companion object {
-
-    }
+    companion object
 }

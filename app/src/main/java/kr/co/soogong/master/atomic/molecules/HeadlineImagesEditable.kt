@@ -44,12 +44,10 @@ class HeadlineImagesEditable @JvmOverloads constructor(
     var onButtonClick: OnClickListener? = null
         set(value) {
             field = value
-            value?.let { binding.ivAddingImages.setOnClickListener(it) }
+            value?.let {
+                binding.ivAddingImages.setOnClickListener(it)
+                binding.ivFirstImage.setOnClickListener(it)
+                binding.ivLastImage.setOnClickListener(it)
+            }
         }
-
-//    fun setAddingImagesClickListener(
-//        onClick: () -> Unit,
-//    ) {
-//        binding.cameraIcon.setOnClickListener { onClick() }
-//    }
 }

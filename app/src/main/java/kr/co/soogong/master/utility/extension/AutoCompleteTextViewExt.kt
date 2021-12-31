@@ -1,6 +1,6 @@
 @file:JvmName("AutoCompleteTextViewExt")
 
-package kr.co.soogong.master.utility.extension;
+package kr.co.soogong.master.utility.extension
 
 import android.graphics.drawable.Drawable
 import androidx.appcompat.widget.AppCompatAutoCompleteTextView

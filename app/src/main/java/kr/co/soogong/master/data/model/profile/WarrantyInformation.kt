@@ -8,7 +8,5 @@ data class WarrantyInformation(
     val warrantyPeriod: Int?,
     val warrantyDescription: String?,
 ) : Parcelable {
-    companion object {
-
-    }
+    companion object
 }

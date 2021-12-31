@@ -19,4 +19,4 @@ class RequirementViewModelAggregate @Inject constructor(
     val getCustomerRequestsUseCase: GetCustomerRequestsUseCase,
     val saveNoticeForCallingInSharedUseCase: SaveNoticeForCallingInSharedUseCase,
     val getNoticeForCallingFromSharedUseCase: GetNoticeForCallingFromSharedUseCase,
-) {}
+)

@@ -12,7 +12,5 @@ data class ProjectDto(
     @SerializedName("name")
     val name: String? = null,
 ) : Parcelable {
-    companion object {
-
-    }
+    companion object
 }

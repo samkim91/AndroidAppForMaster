@@ -26,6 +26,7 @@ class ProfileViewModel @Inject constructor(
     val profile: LiveData<Profile?>
         get() = _profile
 
+    val ownerName = MutableLiveData("")
     val profileImage = MutableLiveData(Uri.EMPTY)
 
     val percentageBasic = MutableLiveData<Double>()
@@ -37,9 +38,10 @@ class ProfileViewModel @Inject constructor(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
-                onSuccess = {
+                onSuccess = { masterDto ->
                     Timber.tag(TAG).d("getMasterSuccessfully: ")
-                    _profile.value = Profile.fromMasterDto(it)
+                    _profile.value = Profile.fromMasterDto(masterDto)
+                    masterDto.ownerName?.let { ownerName.value = it }
                 },
                 onError = {
                     Timber.tag(TAG).d("getMasterFailed: $it")
@@ -47,6 +49,26 @@ class ProfileViewModel @Inject constructor(
                 }
             )
             .addToDisposable()
+    }
+
+    fun saveOwnerName() {
+        Timber.tag(TAG).d("saveOwnerName: ")
+        saveMasterUseCase(
+            masterDto = MasterDto(
+                id = _profile.value?.id,
+                uid = _profile.value?.uid,
+                ownerName = ownerName.value
+            )
+        )
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeBy(
+                onSuccess = { Timber.tag(TAG).d("saveMasterProfile successfully: ") },
+                onError = {
+                    Timber.tag(TAG).d("saveMasterProfile failed: $it")
+                    setAction(REQUEST_FAILED)
+                }
+            ).addToDisposable()
     }
 
     fun saveMasterProfileImage() {

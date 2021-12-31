@@ -9,7 +9,5 @@ data class CompanyAddress(
     val roadAddress: String?,
     val detailAddress: String?,
 ) : Parcelable{
-    companion object {
-
-    }
+    companion object
 }

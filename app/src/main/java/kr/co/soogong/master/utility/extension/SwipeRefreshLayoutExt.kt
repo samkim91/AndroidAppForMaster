@@ -1,6 +1,6 @@
 @file:JvmName("SwipeRefreshLayoutExt")
 
-package kr.co.soogong.master.utility.extension;
+package kr.co.soogong.master.utility.extension
 
 import androidx.databinding.BindingAdapter
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout

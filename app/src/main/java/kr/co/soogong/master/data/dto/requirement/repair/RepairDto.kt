@@ -54,7 +54,5 @@ data class RepairDto(
     val updatedAt: Date? = null,
 
     ) : Parcelable {
-    companion object {
-
-    }
+    companion object
 }

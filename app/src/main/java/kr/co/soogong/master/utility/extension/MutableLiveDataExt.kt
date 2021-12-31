@@ -1,6 +1,6 @@
 @file:JvmName("MutableLiveDataExt")
 
-package kr.co.soogong.master.utility.extension;
+package kr.co.soogong.master.utility.extension
 
 import androidx.lifecycle.MutableLiveData
 

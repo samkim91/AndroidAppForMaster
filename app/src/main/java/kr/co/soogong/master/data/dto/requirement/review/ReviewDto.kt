@@ -29,7 +29,5 @@ data class ReviewDto(
     @SerializedName("updatedAt")
     val updatedAt: Date? = null,
 ) : Parcelable {
-    companion object {
-
-    }
+    companion object
 }

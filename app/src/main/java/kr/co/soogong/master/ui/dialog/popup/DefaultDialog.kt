@@ -11,7 +11,7 @@ import androidx.fragment.app.DialogFragment
 import kr.co.soogong.master.databinding.DialogDefaultBinding
 import timber.log.Timber
 
-class DefaultDialog() : DialogFragment() {
+class DefaultDialog : DialogFragment() {
     private lateinit var binding: DialogDefaultBinding
 
     private val dialogData: DialogData? by lazy {

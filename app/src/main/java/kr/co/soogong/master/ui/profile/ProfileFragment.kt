@@ -105,13 +105,22 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
                 }
             }
 
+            hbcOwnerName.tvContent.isSingleLine = true      // 기본 3줄이 max 인데, 여기는 한줄로 제한
             hbcOwnerName.onButtonClick = View.OnClickListener {
-                with(hbcOwnerName.tvContent) {      // 대표자명 수정을 위해, 포커스와 키보드 보이게 처리
-                    this.isVisible = true
-                    this.isEnabled = true
-                    this.requestFocus()
-                    (requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager)
-                        .showSoftInput(this, 0)
+                with(hbcOwnerName.tvContent) {
+                    if (this.isEnabled) {                 // 수정상태이면, 저장하기 버튼 활성화 및 클릭 이벤트 실행
+                        this.isEnabled = false
+                        hbcOwnerName.setButtonStatus()
+                        viewModel.saveOwnerName()
+                    } else {                              // 수정상태가 아니라면, 수정 가능하게 만들고 포커스와 키보드 보이게 처리
+                        this.isVisible = true
+                        this.isEnabled = true
+                        this.requestFocus()
+                        (requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager)
+                            .showSoftInput(this, 0)
+                        hbcOwnerName.setButtonStatus()
+                        this.setSelection(this.length())
+                    }
                 }
             }
 

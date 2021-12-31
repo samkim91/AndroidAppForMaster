@@ -14,6 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:counterEnabled="true"
+            app:endIconMode="none"
             app:errorEnabled="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -26,10 +27,13 @@
                 android:layout_height="wrap_content"
                 android:gravity="top"
                 android:lines="8"
+                android:overScrollMode="always"
                 android:paddingStart="@dimen/gap_18"
                 android:paddingTop="@dimen/gap_14"
                 android:paddingEnd="@dimen/gap_18"
                 android:paddingBottom="@dimen/gap_14"
+                android:scrollbarStyle="insideInset"
+                android:scrollbars="vertical"
                 android:textColor="@color/black"
                 tools:text="긴 내용" />
         </com.google.android.material.textfield.TextInputLayout>
