@@ -33,8 +33,11 @@ class EditMajorFragment : BaseFragment<FragmentEditMajorBinding>(
             Timber.tag(TAG).d("StartActivityForResult: $result")
             if (result.resultCode == Activity.RESULT_OK) {
                 result.data?.let { intent ->
-                    MajorActivityHelper.getProjectsFromIntent(intent)?.let { array ->
-                        viewModel.projects.addAll(array.toList())
+                    MajorActivityHelper.getProjectsFromIntent(intent)?.let { projects ->
+                        viewModel.projects.addAllAsSet(
+                            items = projects,
+                            distinct = { list -> list.distinctBy { it.id } }
+                        )
                     }
                 }
             }
