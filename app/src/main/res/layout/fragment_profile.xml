@@ -268,7 +268,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/hbc_career"
-                    app:majorsToChips="@{vm.profile.requiredInformation.majors}"
+                    app:projectsToChips="@{vm.profile.requiredInformation.projects}"
                     app:title="@{@string/projects}" />
 
                 <!-- 활동 지역 -->

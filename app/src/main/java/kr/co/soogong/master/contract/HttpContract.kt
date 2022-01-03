@@ -16,8 +16,8 @@ object HttpContract {
     //endregion
 
     //region Category
-    const val CATEGORY_LIST = "category/list"
-    const val PROJECT_LIST = "project/find-all-by-categoryId"
+    const val CATEGORIES = "category/list"
+    const val PROJECTS = "project/find-all-by-categoryId"
     //endregion
 
     // region Home

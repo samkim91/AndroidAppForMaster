@@ -19,7 +19,6 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="${cleartextTrafficPermitted}">
         <activity android:name=".ui.auth.signup.steps.ViewPolicyActivity" />
-        <activity android:name=".ui.profile.detail.requiredinformation.EditRequiredInformationActivity" />
         <activity android:name=".ui.profile.review.MyReviewsActivity" />
         <activity android:name=".ui.profile.detail.EditProfileContainerActivity" />
         <activity android:name=".ui.profile.detail.portfoliolist.PortfolioListActivity" />

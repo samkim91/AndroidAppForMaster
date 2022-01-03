@@ -11,7 +11,7 @@ import com.google.android.material.chip.Chip
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.common.CodeTable
 import kr.co.soogong.master.data.dto.profile.MasterConfigDto
-import kr.co.soogong.master.data.dto.profile.ProjectDto
+import kr.co.soogong.master.data.model.major.Project
 import kr.co.soogong.master.databinding.ViewHeadlineButtonChipGroupBinding
 
 class HeadlineButtonChipGroup @JvmOverloads constructor(
@@ -87,9 +87,9 @@ class HeadlineButtonChipGroup @JvmOverloads constructor(
     companion object {
 
         @JvmStatic
-        @BindingAdapter("majorsToChips")
-        fun HeadlineButtonChipGroup.convertMajorsToChips(majors: List<ProjectDto>?) {
-            this.chips = majors?.map { it.name!! }
+        @BindingAdapter("projectsToChips")
+        fun HeadlineButtonChipGroup.convertProjectsToChips(projects: List<Project>?) {
+            this.chips = projects?.map { it.name }
         }
 
         @JvmStatic

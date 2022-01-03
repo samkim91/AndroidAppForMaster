@@ -107,7 +107,7 @@ class EditMasterConfigViewModel @Inject constructor(
             MasterDto(
                 id = profile.value?.id,
                 uid = profile.value?.uid,
-                masterConfigs = list
+                masterConfigDtos = list
             )
         )
     }

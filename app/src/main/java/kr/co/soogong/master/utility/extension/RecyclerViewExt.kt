@@ -7,9 +7,9 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import kr.co.soogong.master.data.dto.profile.CategoryDto
-import kr.co.soogong.master.data.dto.profile.ProjectDto
 import kr.co.soogong.master.data.model.common.EndlessScrollableViewModel
+import kr.co.soogong.master.data.model.major.Category
+import kr.co.soogong.master.data.model.major.Project
 import kr.co.soogong.master.ui.major.category.CategoryAdapter
 import kr.co.soogong.master.ui.major.project.ProjectAdapter
 import kr.co.soogong.master.utility.SpaceItemDecoration
@@ -31,12 +31,12 @@ fun RecyclerView.setDivider(drawable: Drawable) {
 
 
 @BindingAdapter("categories")
-fun RecyclerView.setCategories(items: List<CategoryDto>?) {
+fun RecyclerView.setCategories(items: List<Category>?) {
     (adapter as? CategoryAdapter)?.submitList(items)
 }
 
 @BindingAdapter("projects")
-fun RecyclerView.setProjects(items: List<ProjectDto>?) {
+fun RecyclerView.setProjects(items: List<Project>?) {
     (adapter as? ProjectAdapter)?.submitList(items)
 }
 

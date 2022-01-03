@@ -5,9 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import kr.co.soogong.master.data.dto.profile.ProjectDto
-import kr.co.soogong.master.domain.usecase.major.GetProjectListUseCase
+import kr.co.soogong.master.data.model.major.Project
+import kr.co.soogong.master.domain.usecase.major.GetProjectsUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import kr.co.soogong.master.utility.ListLiveData
 import timber.log.Timber
@@ -15,42 +16,43 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ProjectViewModel @Inject constructor(
-    private val getProjectListUseCase: GetProjectListUseCase,
+    private val getProjectsUseCase: GetProjectsUseCase,
     val savedStateHandle: SavedStateHandle,
 ) : BaseViewModel() {
     val categoryId: MutableLiveData<Int> =
         ProjectFragment.getCategoryIdFromSavedState(savedStateHandle)
 
     // 뿌려주는 projects
-    private val _list = MutableLiveData<List<ProjectDto>>()
-    val list: LiveData<List<ProjectDto>>
-        get() = _list
+    private val _projects = MutableLiveData<List<Project>>()
+    val projects: LiveData<List<Project>>
+        get() = _projects
 
     // 선택된 projects
-    val checkedList = ListLiveData<ProjectDto>()
+    val checkedList = ListLiveData<Project>()
 
     init {
-        getProjectList()
+        requestProjects()
     }
 
-    private fun getProjectList() {
+    private fun requestProjects() {
         Timber.tag(TAG).d("getProjectList: ")
-        getProjectListUseCase(categoryId.value!!)
+        getProjectsUseCase(categoryId.value!!)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                Timber.tag(TAG).d("getProjectList: $it")
-                _list.postValue(it)
-            }, {
-                Timber.tag(TAG).w("getProjectList: $it")
-                setAction(GET_PROJECT_FAILED)
-            })
+            .subscribeBy(
+                onSuccess = {
+                    Timber.tag(TAG).d("getProjectList successfully: $it")
+                    _projects.postValue(it)
+                },
+                onError = {
+                    Timber.tag(TAG).w("getProjectList failed: $it")
+                    setAction(GET_PROJECT_FAILED)
+                })
             .addToDisposable()
     }
 
     companion object {
         private const val TAG = "ProjectViewModel"
         const val GET_PROJECT_FAILED = "GET_PROJECT_FAILED"
-
     }
 }

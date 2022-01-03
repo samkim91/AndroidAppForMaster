@@ -18,12 +18,16 @@
             android:id="@+id/rv_categories"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            app:categories="@{vm.categories}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:categories="@{vm.list}"
+            app:setBottomSpace="@{10}"
+            app:setEndSpace="@{15}"
+            app:setStartSpace="@{15}"
+            app:setTopSpace="@{10}"
             tools:listitem="@layout/view_holder_category" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

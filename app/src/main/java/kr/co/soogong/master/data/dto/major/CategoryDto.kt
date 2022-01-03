@@ -1,16 +1,19 @@
-package kr.co.soogong.master.data.dto.profile
+package kr.co.soogong.master.data.dto.major
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class ProjectDto(
+data class CategoryDto(
     @SerializedName("id")
-    val id: Int? = null,
+    val id: Int,
 
     @SerializedName("name")
-    val name: String? = null,
+    val name: String,
+
+    @SerializedName("nameEn")
+    val nameEn: String?,
 ) : Parcelable {
     companion object
 }

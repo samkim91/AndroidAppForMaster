@@ -3,9 +3,9 @@ package kr.co.soogong.master.data.dao.profile
 import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import kr.co.soogong.master.data.dto.major.ProjectDto
 import kr.co.soogong.master.data.dto.profile.MasterConfigDto
 import kr.co.soogong.master.data.dto.profile.PortfolioDto
-import kr.co.soogong.master.data.dto.profile.ProjectDto
 import kr.co.soogong.master.data.dto.requirement.review.ReviewDto
 
 class MasterDtoConverters {

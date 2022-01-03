@@ -2,8 +2,9 @@ package kr.co.soogong.master.ui.profile.detail.major
 
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kr.co.soogong.master.data.common.CodeTable
+import kr.co.soogong.master.data.dto.major.ProjectDto
 import kr.co.soogong.master.data.dto.profile.MasterDto
-import kr.co.soogong.master.data.dto.profile.ProjectDto
+import kr.co.soogong.master.data.model.major.Project
 import kr.co.soogong.master.domain.usecase.profile.GetProfileUseCase
 import kr.co.soogong.master.domain.usecase.profile.SaveMasterUseCase
 import kr.co.soogong.master.ui.profile.detail.EditProfileContainerViewModel
@@ -17,14 +18,14 @@ class EditMajorViewModel @Inject constructor(
     saveMasterUseCase: SaveMasterUseCase,
 ) : EditProfileContainerViewModel(getProfileUseCase, saveMasterUseCase) {
 
-    val projects = ListLiveData<ProjectDto>()
+    val projects = ListLiveData<Project>()
 
     fun requestMajor() {
         Timber.tag(TAG).d("requestMajor: ")
 
         requestProfile {
             profile.value = it
-            it.requiredInformation?.majors?.let { list ->
+            it.requiredInformation?.projects?.let { list ->
                 projects.addAll(list)
             }
         }
@@ -37,7 +38,7 @@ class EditMajorViewModel @Inject constructor(
                 MasterDto(
                     id = profile.value?.id,
                     uid = profile.value?.uid,
-                    projects = projects.value,
+                    projectDtos = ProjectDto.fromProjects(projects.value),
                     approvedStatus = if (profile.value?.approvedStatus == CodeTable.APPROVED.code) CodeTable.REQUEST_APPROVE.code else null,
                 )
             )
