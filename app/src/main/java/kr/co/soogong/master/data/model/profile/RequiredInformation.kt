@@ -5,7 +5,7 @@ import kotlinx.parcelize.Parcelize
 import kr.co.soogong.master.data.common.CodeTable
 import kr.co.soogong.master.data.dto.common.AttachmentDto
 import kr.co.soogong.master.data.dto.profile.MasterDto
-import kr.co.soogong.master.data.dto.profile.ProjectDto
+import kr.co.soogong.master.data.model.major.Project
 import kr.co.soogong.master.ui.profile.detail.CareerConverter
 import kr.co.soogong.master.utility.PhoneNumberHelper
 
@@ -18,7 +18,7 @@ data class RequiredInformation(
     val career: String?,
     val tel: String?,
     val ownerName: String?,
-    val majors: List<ProjectDto>?,
+    val projects: List<Project>?,
     val companyAddress: CompanyAddress?,
     val coordinate: Coordinate?,
     var serviceArea: Int?,
@@ -42,7 +42,7 @@ data class RequiredInformation(
                 career = masterDto.openDate?.let { CareerConverter.toCareer(it) },
                 tel = masterDto.tel?.let { PhoneNumberHelper.addDashToLocalNumber(it) },
                 ownerName = masterDto.ownerName,
-                majors = masterDto.projects,
+                projects = Project.fromProjectDtos(masterDto.projectDtos),
                 companyAddress = CompanyAddress(
                     masterDto.roadAddress,
                     masterDto.detailAddress,

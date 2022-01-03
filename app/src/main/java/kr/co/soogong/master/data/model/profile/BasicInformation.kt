@@ -21,10 +21,10 @@ data class BasicInformation(
         fun fromMasterDto(masterDto: MasterDto): BasicInformation {
             return BasicInformation(
                 freeMeasureYn = masterDto.freeMeasureYn,
-                portfolios = masterDto.masterPortfolios?.filter { portfolioDto -> portfolioDto.type == CodeTable.PORTFOLIO.code },
-                priceByProjects = masterDto.masterPortfolios?.filter { portfolioDto -> portfolioDto.type == CodeTable.PRICE_BY_PROJECT.code },
+                portfolios = masterDto.masterPortfolioDtos?.filter { portfolioDto -> portfolioDto.type == CodeTable.PORTFOLIO.code },
+                priceByProjects = masterDto.masterPortfolioDtos?.filter { portfolioDto -> portfolioDto.type == CodeTable.PRICE_BY_PROJECT.code },
                 profileImage = masterDto.profileImage,
-                masterConfigs = masterDto.masterConfigs,
+                masterConfigs = masterDto.masterConfigDtos,
                 email = masterDto.email,
             )
         }

@@ -25,7 +25,7 @@ class RetrofitModule {
 
     @Provides
     @Reusable
-    fun provideCategoryService(retrofit: Retrofit): MajorService {
+    fun provideMajorService(retrofit: Retrofit): MajorService {
         return MajorService(retrofit)
     }
 

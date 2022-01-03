@@ -21,7 +21,7 @@ fun setRequirementInformationPercentage(
             if (warrantyInformation?.warrantyPeriod != null) filledRequired++
             if (!tel.isNullOrEmpty()) filledRequired++
             if (!career.isNullOrEmpty()) filledRequired++
-            if (!majors.isNullOrEmpty()) filledRequired++
+            if (!projects.isNullOrEmpty()) filledRequired++
             if (!companyAddress?.roadAddress.isNullOrEmpty()) filledRequired++
             if (serviceArea != null) filledRequired++
         }

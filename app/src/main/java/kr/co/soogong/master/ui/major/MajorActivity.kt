@@ -3,7 +3,7 @@ package kr.co.soogong.master.ui.major
 import android.os.Bundle
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.dto.profile.CategoryDto
+import kr.co.soogong.master.data.model.major.Category
 import kr.co.soogong.master.databinding.ActivityMajorBinding
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.ui.major.category.CategoryFragment
@@ -38,7 +38,7 @@ class MajorActivity : BaseActivity<ActivityMajorBinding>(
             .commit()
     }
 
-    fun moveToProjectFragment(category: CategoryDto) {
+    fun moveToProjectFragment(category: Category) {
         with(binding.abHeader) {
             title = category.name
         }
@@ -48,7 +48,7 @@ class MajorActivity : BaseActivity<ActivityMajorBinding>(
                 R.anim.slide_in_from_right, R.anim.slide_out_to_left,
                 R.anim.slide_in_from_left, R.anim.slide_out_to_right
             )
-            .replace(binding.fcvContainer.id, ProjectFragment.newInstance(category.id!!))
+            .replace(binding.fcvContainer.id, ProjectFragment.newInstance(category.id))
             .addToBackStack(null)
             .commit()
     }

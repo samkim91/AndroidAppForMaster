@@ -6,6 +6,7 @@ import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 import kr.co.soogong.master.data.dto.common.AttachmentDto
+import kr.co.soogong.master.data.dto.major.ProjectDto
 import kr.co.soogong.master.data.dto.requirement.review.ReviewDto
 import java.util.*
 
@@ -113,13 +114,13 @@ data class MasterDto(
     val requestMeasureYn: Boolean? = null,
 
     @SerializedName("masterConfigs")
-    val masterConfigs: List<MasterConfigDto>? = null,
+    val masterConfigDtos: List<MasterConfigDto>? = null,
 
     @SerializedName("masterPortfolios")
-    val masterPortfolios: List<PortfolioDto>? = null,
+    val masterPortfolioDtos: List<PortfolioDto>? = null,
 
     @SerializedName("projects")
-    val projects: List<ProjectDto>? = null,
+    val projectDtos: List<ProjectDto>? = null,
 
     @SerializedName("repairCount")
     val repairCount: Int? = null,
