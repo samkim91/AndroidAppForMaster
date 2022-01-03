@@ -19,6 +19,17 @@ class ListLiveData<T> : MutableLiveData<MutableList<T>>() {
         value = temp
     }
 
+    fun replaceAll(items: List<T>) {
+        temp.clear()
+        temp.addAll(items)
+        value = temp
+    }
+
+    fun addAllAsSet(items: List<T>, distinct: (List<T>) -> List<T>) {
+        addAll(items)
+        replaceAll(distinct(temp))
+    }
+
     fun remove(item: T) {
         temp.remove(item)
         value = temp
@@ -36,5 +47,9 @@ class ListLiveData<T> : MutableLiveData<MutableList<T>>() {
 
     fun getItemCount(): Int {
         return value?.count() ?: 0
+    }
+
+    companion object {
+
     }
 }

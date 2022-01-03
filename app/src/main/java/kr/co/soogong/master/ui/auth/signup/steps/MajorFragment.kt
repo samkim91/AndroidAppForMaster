@@ -26,20 +26,12 @@ class MajorFragment : BaseFragment<FragmentSignUpMajorBinding>(
         registerForActivityResult(StartActivityForResult()) { result ->
             Timber.tag(TAG).d("StartActivityForResult: $result")
             if (result.resultCode == Activity.RESULT_OK) {
-//                val data: Intent? = result.data
-//                val selectedMajor: Major by lazy {
-//                    data?.getParcelableExtra(BUNDLE_MAJOR) ?: Major(null, null)
-//                }
-//                MajorChipGroupHelper.makeEntryChipGroupWithSubtitleForMajor(
-//                    layoutInflater = layoutInflater,
-//                    container = binding.majorContainer,
-//                    newMajor = selectedMajor,
-//                    viewModelBusinessTypes = viewModel.majors
-//                )
-
                 result.data?.let { intent ->
                     MajorActivityHelper.getProjectsFromIntent(intent)?.let { projects ->
-                        viewModel.projects.addAll(projects)
+                        viewModel.projects.addAllAsSet(
+                            items = projects,
+                            distinct = { list -> list.distinctBy { it.id } }
+                        )
                     }
                 }
             }
