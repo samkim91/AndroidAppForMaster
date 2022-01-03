@@ -13,7 +13,6 @@ import kr.co.soogong.master.data.common.ColorTheme
 import kr.co.soogong.master.data.dto.common.AttachmentDto
 import kr.co.soogong.master.databinding.ActivityWriteEstimationBinding
 import kr.co.soogong.master.ui.base.BaseActivity
-import kr.co.soogong.master.ui.base.BaseViewModel.Companion.DISMISS_LOADING
 import kr.co.soogong.master.ui.base.BaseViewModel.Companion.SHOW_LOADING
 import kr.co.soogong.master.ui.dialog.popup.DefaultDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData
@@ -76,7 +75,7 @@ class WriteEstimationActivity : BaseActivity<ActivityWriteEstimationBinding>(
                 if (viewModel.estimationType.value == CodeTable.INTEGRATION) {
                     if (stiEstimationCost.error.isNullOrEmpty()) viewModel.sendEstimation()
                 } else {
-                    if (stiLaborCost.error.isNullOrEmpty() && stiMaterialCost.error.isNullOrEmpty() && stiTravelCost.error.isNullOrEmpty()) viewModel.sendEstimation()
+                    if (stiLaborCost.error.isNullOrEmpty() && stiMaterialCost.error.isNullOrEmpty() && stiTravelCost.error.isNullOrEmpty() && stiTotalCost.error.isNullOrEmpty()) viewModel.sendEstimation()
                 }
             }
 
