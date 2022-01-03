@@ -14,8 +14,8 @@ class RespondToMeasureUseCase @Inject constructor(
 ) {
     operator fun invoke(estimationDto: EstimationDto): Single<EstimationDto> {
         return requirementService.respondToMeasure(estimationDto)
-            .doOnSuccess {
-                requirementDao.updateEstimation(requirementId = it.requirementId, it)
-            }
+//            .doOnSuccess {
+//                requirementDao.updateEstimation(requirementId = it.requirementId, it)
+//            }
     }
 }

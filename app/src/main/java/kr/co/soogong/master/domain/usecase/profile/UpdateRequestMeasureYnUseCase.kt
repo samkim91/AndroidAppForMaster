@@ -16,8 +16,8 @@ class UpdateRequestMeasureYnUseCase @Inject constructor(
         uid: String,
     ): Single<MasterDto> {
         return profileService.updateRequestMeasureYn(uid)
-            .doOnSuccess {
-                masterDao.update(it)
-            }
+//            .doOnSuccess {
+//                masterDao.update(it)
+//            }
     }
 }

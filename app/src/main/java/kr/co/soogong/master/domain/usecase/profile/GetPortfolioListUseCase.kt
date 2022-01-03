@@ -17,7 +17,7 @@ class GetPortfolioListUseCase @Inject constructor(
     operator fun invoke(): Single<List<PortfolioDto>> {
         return profileService.getPortfoliosByUid(getMasterUidFromSharedUseCase())
             .doOnSuccess {
-                masterDao.updatePortfolios(getMasterUidFromSharedUseCase(), it)
+//                masterDao.updatePortfolios(getMasterUidFromSharedUseCase(), it)
             }
     }
 }

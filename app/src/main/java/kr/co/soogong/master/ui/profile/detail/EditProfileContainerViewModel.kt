@@ -13,7 +13,6 @@ import kr.co.soogong.master.domain.usecase.profile.SaveMasterUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import timber.log.Timber
 
-// TODO: 2021/10/06 추후 EditProfile 을 하는 모든 viewModels 를 이것으로 상속시켜야한다.
 open class EditProfileContainerViewModel(
     private val getProfileUseCase: GetProfileUseCase,
     private val saveMasterUseCase: SaveMasterUseCase,
@@ -54,9 +53,11 @@ open class EditProfileContainerViewModel(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
                 onSuccess = {
+                    Timber.tag(TAG).d("saveMaster successful: $it")
                     setAction(SAVE_MASTER_SUCCESSFULLY)
                 },
                 onError = {
+                    Timber.tag(TAG).d("saveMaster failed: $it")
                     setAction(REQUEST_FAILED)
                 }
             ).addToDisposable()
@@ -67,8 +68,14 @@ open class EditProfileContainerViewModel(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
-                onSuccess = { setAction(SAVE_MASTER_SUCCESSFULLY) },
-                onError = { setAction(REQUEST_FAILED) }
+                onSuccess = {
+                    Timber.tag(TAG).d("saveMasterV2 successful: $it")
+                    setAction(SAVE_MASTER_SUCCESSFULLY)
+                            },
+                onError = {
+                    Timber.tag(TAG).d("saveMasterV2 failed: $it")
+                    setAction(REQUEST_FAILED)
+                }
             ).addToDisposable()
     }
 
