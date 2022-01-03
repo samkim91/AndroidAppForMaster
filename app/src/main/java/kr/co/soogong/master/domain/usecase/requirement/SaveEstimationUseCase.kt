@@ -23,8 +23,8 @@ class SaveEstimationUseCase @Inject constructor(
         val images = MultipartGenerator.createFiles(context, "images", imageUris)
 
         return requirementService.saveEstimation(estimation, images)
-            .doOnSuccess {
-                requirementDao.updateEstimation(requirementId = it.requirementId, it)
-            }
+//            .doOnSuccess {
+//                requirementDao.updateEstimation(requirementId = it.requirementId, it)
+//            }
     }
 }

@@ -16,8 +16,8 @@ class UpdateDirectRepairYnUseCase @Inject constructor(
         masterDto: MasterDto,
     ): Single<MasterDto> {
         return profileService.updateDirectRepairYn(masterDto)
-            .doOnSuccess {
-                masterDao.update(it)
-            }
+//            .doOnSuccess {
+//                masterDao.update(it)
+//            }
     }
 }

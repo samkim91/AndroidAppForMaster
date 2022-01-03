@@ -33,8 +33,8 @@ class SaveMasterUseCase @Inject constructor(
         val shopImages = MultipartGenerator.createFiles(context, "shopImages", shopImagesUris)
 
         return profileService.saveMaster(master, profileImage, businessRegistImage, shopImages)
-            .doOnSuccess {
-                masterDao.insert(it)
-            }
+//            .doOnSuccess {
+//                masterDao.insert(it)
+//            }
     }
 }

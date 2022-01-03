@@ -22,7 +22,7 @@ class SignUpUseCase @Inject constructor(
         return profileService.saveMaster(master).doOnSuccess {
             saveMasterBasicDataInSharedUseCase(it)
 
-            masterDao.insert(it)
+//            masterDao.insert(it)
         }.doOnError {
             Firebase.auth.signOut()
         }
