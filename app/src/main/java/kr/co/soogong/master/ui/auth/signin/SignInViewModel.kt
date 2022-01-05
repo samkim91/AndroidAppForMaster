@@ -19,7 +19,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SignInViewModel @Inject constructor(
     private val checkUserExistentUseCase: CheckUserExistentUseCase,
-    private val signInUseCase: SignInUseCase
+    private val signInUseCase: SignInUseCase,
 ) : BaseViewModel() {
     val tel = MutableLiveData("")
     val certificationCode = MutableLiveData("")
@@ -51,7 +51,7 @@ class SignInViewModel @Inject constructor(
                     },
                     onError = {
                         Timber.tag(TAG).d("onError: $it")
-                        setAction(CHECK_PHONE_NUMBER_FAILED)
+                        setAction(REQUEST_FAILED)
                     }
                 ).addToDisposable()
         }
@@ -71,7 +71,7 @@ class SignInViewModel @Inject constructor(
                     },
                     onError = {
                         Timber.tag(TAG).d("failToSignIn: $it ")
-                        setAction(SIGN_IN_FAILED)
+                        setAction(REQUEST_FAILED)
                     }
                 ).addToDisposable()
         }
@@ -81,8 +81,7 @@ class SignInViewModel @Inject constructor(
         private const val TAG = "SignInViewModel"
         const val PHONE_NUMBER_EXIST = "PHONE_NUMBER_EXIST"
         const val PHONE_NUMBER_NOT_EXIST = "PHONE_NUMBER_NOT_EXIST"
-        const val CHECK_PHONE_NUMBER_FAILED = "CHECK_PHONE_NUMBER_FAILED"
         const val SIGN_IN_SUCCESSFULLY = "SIGN_IN_SUCCESSFULLY"
-        const val SIGN_IN_FAILED = "SIGN_IN_FAILED"
+        const val REQUEST_FAILED = "REQUEST_FAILED"
     }
 }
