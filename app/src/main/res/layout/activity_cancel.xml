@@ -52,7 +52,7 @@
                     android:layout_marginTop="@dimen/gap_24"
                     app:content="@={vm.canceledDescription}"
                     app:hint="@{@string/canceled_reason_detail}"
-                    app:maxCount="@{100}"
+                    app:maxCount="@{500}"
                     app:subheadline="@{@string/write_detail_description}" />
             </androidx.appcompat.widget.LinearLayoutCompat>
         </ScrollView>
