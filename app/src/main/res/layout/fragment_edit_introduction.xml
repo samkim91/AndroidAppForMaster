@@ -16,6 +16,6 @@
         android:layout_height="wrap_content"
         app:content="@={vm.introduction}"
         app:hint="@{@string/brief_company_introduction_hint}"
-        app:maxCount="@{150}"
+        app:maxCount="@{500}"
         app:subheadline="@{@string/brief_company_introduction}" />
 </layout>
