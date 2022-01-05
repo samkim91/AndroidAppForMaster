@@ -16,7 +16,7 @@ import kr.co.soogong.master.ui.splash.SplashViewModel.Companion.GET_MASTER_UID_S
 import kr.co.soogong.master.ui.splash.SplashViewModel.Companion.GET_VERSION_SUCCESSFULLY
 import kr.co.soogong.master.ui.splash.SplashViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.ui.splash.SplashViewModel.Companion.UPDATE_DIRECT_REPAIR_SUCCESSFULLY
-import kr.co.soogong.master.uihelper.auth.SignMainActivityHelper
+import kr.co.soogong.master.uihelper.auth.AuthContainerActivityHelper
 import kr.co.soogong.master.uihelper.main.MainActivityHelper
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.extension.toast
@@ -103,7 +103,7 @@ class SplashActivity : AppCompatActivity() {
         viewModel.action.observe(this, EventObserver { action ->
             when (action) {
                 GET_MASTER_UID_SUCCESSFULLY -> viewModel.requestMasterSimpleInfo()
-                GET_MASTER_UID_FAILED -> startActivity(SignMainActivityHelper.getIntent(this))
+                GET_MASTER_UID_FAILED -> startActivity(AuthContainerActivityHelper.getIntent(this))
                 REQUEST_FAILED -> toast(getString(R.string.error_message_of_request_failed))
             }
         })

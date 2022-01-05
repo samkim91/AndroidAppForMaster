@@ -6,7 +6,7 @@ import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
-class SignMainViewModel @Inject constructor() : BaseViewModel() {
+class AuthContainerViewModel @Inject constructor() : BaseViewModel() {
     fun moveToSignUp() {
         Timber.tag(TAG).d("moveToSignUp: ")
         setAction(SIGN_UP)
