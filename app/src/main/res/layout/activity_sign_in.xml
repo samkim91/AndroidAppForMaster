@@ -212,7 +212,7 @@
                     android:layout_marginTop="@dimen/gap_20"
                     android:background="@drawable/default_rounded_button_selector"
                     android:enabled="@{vm.certificationCode.length() == 6}"
-                    android:text="@string/sign_in_button_text"
+                    android:text="@string/sign_in"
                     android:textColor="@color/c_FFFFFF"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

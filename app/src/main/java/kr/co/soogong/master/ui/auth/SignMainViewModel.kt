@@ -7,19 +7,19 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SignMainViewModel @Inject constructor() : BaseViewModel() {
-    fun signUpAction() {
-        Timber.tag(TAG).d("signUpAction: ")
-        setAction(SIGNUP)
+    fun moveToSignUp() {
+        Timber.tag(TAG).d("moveToSignUp: ")
+        setAction(SIGN_UP)
     }
 
-    fun signInAction() {
-        Timber.tag(TAG).d("signInAction: ")
-        setAction(SIGNIN)
+    fun moveToSignIn() {
+        Timber.tag(TAG).d("moveToSignIn: ")
+        setAction(SIGN_IN)
     }
 
     companion object {
         private const val TAG = "SignMainViewModel"
-        const val SIGNUP = "SIGNUP"
-        const val SIGNIN = "SIGNIN"
+        const val SIGN_UP = "SIGN_UP"
+        const val SIGN_IN = "SIGN_IN"
     }
 }

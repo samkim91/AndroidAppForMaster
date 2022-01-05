@@ -73,7 +73,7 @@
 
     <!-- Sign Up -->
     <string name="sign_up_master_description">수공마스터 서비스를 이용하기 위해\n회원가입 및 로그인이 필요합니다</string>
-    <string name="sign_up_sign_up_button_text">가입신청</string>
+    <string name="sign_up">가입신청</string>
     <string name="retype_phone_number_button_text">휴대폰번호 재입력</string>
     <string name="alert_unknown_user">가입되지 않은 번호입니다.</string>
     <string name="alert_invalid_certification_code">6자리 숫자로 입력해주세요.</string>
@@ -86,7 +86,7 @@
     <string name="sign_up_repair_in_person_alert_box_content">하청이 아닌 본인 또는 소속 직원이 직접 고객님들에게 서비스를 제공합니다. 하청으로 인해 발생하는 문제는 수공이 책임지지 않습니다.</string>
 
     <!-- Sign In -->
-    <string name="sign_in_button_text">로그인</string>
+    <string name="sign_in">로그인</string>
     <string name="insert_certification_code_edittext_hint">인증번호 6자리 입력</string>
 
     <!-- My Page-->

@@ -71,7 +71,7 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(
             lifecycleOwner = this@SignInActivity
 
             with(actionBar) {
-                title.text = getString(R.string.sign_in_button_text)
+                title.text = getString(R.string.sign_in)
                 backButton.setOnClickListener {
                     super.onBackPressed()
                 }

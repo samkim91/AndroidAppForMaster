@@ -37,10 +37,10 @@ class SignMainActivity : BaseActivity<ActivitySignMainBinding>(
     private fun registerEventObserve() {
         viewModel.action.observe(this, EventObserver { event ->
             when (event) {
-                SignMainViewModel.SIGNUP -> {
+                SignMainViewModel.SIGN_UP -> {
                     startActivity(SignUpActivityHelper.getIntent(this@SignMainActivity))
                 }
-                SignMainViewModel.SIGNIN -> {
+                SignMainViewModel.SIGN_IN -> {
                     startActivity(SignInActivityHelper.getIntent(this@SignMainActivity))
                 }
             }
