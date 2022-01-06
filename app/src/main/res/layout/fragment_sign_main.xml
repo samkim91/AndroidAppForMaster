@@ -34,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/gap_11"
-            android:text="@string/sign_up_master_description"
+            android:text="@string/sign_up_introduction"
             android:textAppearance="@style/footnote.regular"
             android:textColor="@color/grey_3"
             app:layout_constraintBottom_toTopOf="@id/b_sign_in"

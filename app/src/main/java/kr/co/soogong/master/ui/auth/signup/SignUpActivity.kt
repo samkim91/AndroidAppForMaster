@@ -8,10 +8,10 @@ import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ActivitySignUpBinding
+import kr.co.soogong.master.ui.SIGN_UP_STEPS
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.ui.dialog.popup.DefaultDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData
-import kr.co.soogong.master.utility.SignUpProgressHelper
 import timber.log.Timber
 import java.util.*
 
@@ -44,12 +44,9 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>(
                 }
             }
 
-            progressPercentIndicator.text =
-                SignUpProgressHelper.getPercentage(signUpViewPager.currentItem)
-
             with(signUpViewPager) {
                 isUserInputEnabled = false
-                adapter = SignUpPagerAdapter(this@SignUpActivity)
+//                adapter = SignUpPagerAdapter(this@SignUpActivity)
             }
         }
     }
@@ -57,11 +54,9 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>(
     fun moveToNext() {
         Timber.tag(TAG).d("moveToNext: ")
         bind {
-            if (signUpViewPager.currentItem < SignUpProgressHelper.TabCount - 1) {
+            if (signUpViewPager.currentItem < SIGN_UP_STEPS - 1) {
                 signUpViewPager.currentItem++
                 viewModel.indicator.value = viewModel.indicator.value?.plus(1)
-                progressPercentIndicator.text =
-                    SignUpProgressHelper.getPercentage(signUpViewPager.currentItem)
             }
         }
     }
@@ -72,8 +67,6 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>(
             if (signUpViewPager.currentItem > 0) {
                 signUpViewPager.currentItem--
                 viewModel.indicator.value = viewModel.indicator.value?.minus(1)
-                progressPercentIndicator.text =
-                    SignUpProgressHelper.getPercentage(signUpViewPager.currentItem)
             }
         }
     }

@@ -9,6 +9,7 @@ import kr.co.soogong.master.ui.auth.AuthContainerViewModel.Companion.SIGN_IN
 import kr.co.soogong.master.ui.auth.AuthContainerViewModel.Companion.SIGN_UP
 import kr.co.soogong.master.ui.auth.signin.SignInFragment
 import kr.co.soogong.master.ui.auth.signmain.SignMainFragment
+import kr.co.soogong.master.ui.auth.signup.SignUpFragment
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.utility.EventObserver
 import timber.log.Timber
@@ -40,17 +41,15 @@ class AuthContainerActivity : BaseActivity<ActivityAuthContainerBinding>(
 
         viewModel.action.observe(this, EventObserver { action ->
             when (action) {
-                SIGN_UP -> {
-
-                }
-                SIGN_IN -> {
+                SIGN_UP, SIGN_IN -> {
                     supportFragmentManager.beginTransaction()
                         .setCustomAnimations(
                             R.anim.slide_in_from_right, R.anim.slide_out_to_left,
                             R.anim.slide_in_from_left, R.anim.slide_out_to_right
                         )
-                        .replace(binding.fcvContainer.id, SignInFragment.newInstance())
-                        .addToBackStack(SIGN_IN)
+                        .replace(binding.fcvContainer.id,
+                            if (action == SIGN_UP) SignUpFragment.newInstance() else SignInFragment.newInstance())
+                        .addToBackStack(if (action == SIGN_UP) SIGN_UP else SIGN_IN)
                         .commit()
                 }
             }

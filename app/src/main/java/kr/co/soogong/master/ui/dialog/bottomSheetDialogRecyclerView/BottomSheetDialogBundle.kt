@@ -24,13 +24,6 @@ data class BottomSheetDialogBundle(
                 list = BottomSheetDialogItem.getCareerYearList(),
             )
 
-        fun getEmailDomainsBundle() =
-            BottomSheetDialogBundle(
-                title = "이메일 주소",
-                subtitle = "",
-                list = BottomSheetDialogItem.getEmailDomainsList(),
-            )
-
         fun getRequestingReviewBundle() =
             BottomSheetDialogBundle(
                 title = "직접 시공했던 고객에게 링크를 공유해 리뷰를 쌓아보세요!",

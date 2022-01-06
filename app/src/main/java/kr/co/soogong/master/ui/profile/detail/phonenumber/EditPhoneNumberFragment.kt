@@ -13,7 +13,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.common.ButtonTheme
 import kr.co.soogong.master.databinding.FragmentEditPhoneNumberBinding
-import kr.co.soogong.master.ui.auth.signup.LimitTime
+import kr.co.soogong.master.ui.LIMIT_TIME_TO_AUTH
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.dialog.popup.DefaultDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData
@@ -174,7 +174,7 @@ class EditPhoneNumberFragment : BaseFragment<FragmentEditPhoneNumberBinding>(
                 val options = PhoneAuthOptions.newBuilder(auth)
                     .setPhoneNumber(PhoneNumberHelper.toGlobalNumber(phoneNumber))      // Phone number to verify
                     .setTimeout(
-                        LimitTime,
+                        LIMIT_TIME_TO_AUTH,
                         TimeUnit.SECONDS
                     )                            // Timeout and unit
                     .setActivity(requireActivity())                                      // Activity (for callback binding)
