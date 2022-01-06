@@ -63,12 +63,15 @@ class EditAddressFragment : BaseFragment<FragmentEditAddressBinding>(
                 })
 
                 if (stiRoadAddress.error.isNullOrEmpty()) {
-                    val latlng = LocationHelper.changeAddressToLatLng(requireContext(),
-                        "${viewModel.roadAddress.value} ${viewModel.detailAddress.value}")
-                    viewModel.latitude.value = latlng["latitude"]
-                    viewModel.longitude.value = latlng["longitude"]
+                    LocationHelper.changeAddressToLatLng(
+                        context = requireContext(),
+                        address = "${viewModel.roadAddress.value} ${viewModel.detailAddress.value}"
+                    ).run {
+                        viewModel.latitude.value = this["latitude"]
+                        viewModel.longitude.value = this["longitude"]
 
-                    viewModel.saveCompanyAddress()
+                        viewModel.saveCompanyAddress()
+                    }
                 }
             }
         }

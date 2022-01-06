@@ -8,7 +8,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentSignUpPrivatePolicyBinding
 import kr.co.soogong.master.ui.auth.signup.SignUpViewModel
-import kr.co.soogong.master.ui.auth.signup.SignUpViewModel.Companion.SIGN_UP_FAILED
+import kr.co.soogong.master.ui.auth.signup.SignUpViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.ui.auth.signup.SignUpViewModel.Companion.SIGN_UP_SUCCESSFULLY
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.uihelper.auth.signup.ViewPolicyActivityHelper
@@ -85,7 +85,7 @@ class PrivatePolicyFragment : BaseFragment<FragmentSignUpPrivatePolicyBinding>(
                     requireContext().toast(getString(R.string.sign_up_successfully))
                     startActivity(MainActivityHelper.getIntent(requireContext()))
                 }
-                SIGN_UP_FAILED -> {
+                REQUEST_FAILED -> {
                     requireContext().toast(getString(R.string.error_message_of_request_failed))
                 }
             }

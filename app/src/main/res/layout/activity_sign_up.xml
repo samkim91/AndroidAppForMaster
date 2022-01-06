@@ -8,10 +8,6 @@
         <variable
             name="vm"
             type="kr.co.soogong.master.ui.auth.signup.SignUpViewModel" />
-
-        <variable
-            name="signUpProgressHelper"
-            type="kr.co.soogong.master.utility.SignUpProgressHelper" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -31,7 +27,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/gap_20"
             android:layout_marginEnd="@dimen/gap_8"
-            android:max="@{signUpProgressHelper.TabCount}"
             android:progress="@{vm.indicator}"
             app:indicatorColor="@color/c_22D47B"
             app:layout_constraintEnd_toStartOf="@id/progress_percent_indicator"
