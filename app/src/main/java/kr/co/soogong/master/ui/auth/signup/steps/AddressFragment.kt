@@ -1,17 +1,15 @@
 package kr.co.soogong.master.ui.auth.signup.steps
 
 import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Job
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentSignUpAddressBinding
-import kr.co.soogong.master.ui.auth.signup.SignUpActivity
 import kr.co.soogong.master.ui.auth.signup.SignUpViewModel
+import kr.co.soogong.master.ui.auth.signup.SignUpViewModel.Companion.VALIDATE_ADDRESS
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.uihelper.auth.signup.AddressActivityHelper
 import kr.co.soogong.master.utility.LocationHelper
@@ -21,7 +19,7 @@ import timber.log.Timber
 class AddressFragment : BaseFragment<FragmentSignUpAddressBinding>(
     R.layout.fragment_sign_up_address
 ) {
-    private val viewModel: SignUpViewModel by activityViewModels()
+    private val viewModel: SignUpViewModel by viewModels({ requireParentFragment() })
 
     private val getAddressLauncher =
         registerForActivityResult(StartActivityForResult()) { result ->
@@ -29,6 +27,7 @@ class AddressFragment : BaseFragment<FragmentSignUpAddressBinding>(
             if (result.resultCode == Activity.RESULT_OK) {
                 viewModel.roadAddress.value =
                     result.data?.extras?.getString(AddressActivityHelper.ADDRESS).toString()
+                viewModel.detailAddress.value = ""
             }
         }
 
@@ -36,6 +35,7 @@ class AddressFragment : BaseFragment<FragmentSignUpAddressBinding>(
         super.onViewCreated(view, savedInstanceState)
         Timber.tag(TAG).d("onViewCreated: ")
         initLayout()
+        registerEventObserver()
     }
 
     override fun initLayout() {
@@ -45,33 +45,33 @@ class AddressFragment : BaseFragment<FragmentSignUpAddressBinding>(
             vm = viewModel
             lifecycleOwner = viewLifecycleOwner
 
-            address.setButtonClickListener {
-                getAddressLauncher.launch(
-                    Intent(
-                        AddressActivityHelper.getIntent(
-                            requireContext()
-                        )
-                    )
-                )
-            }
-
-            defaultButton.setOnClickListener {
-                viewModel.roadAddress.observe(viewLifecycleOwner, {
-                    address.alertVisible = it.isNullOrEmpty()
-                })
-
-                if (!address.alertVisible) {
-                    val latlng = LocationHelper.changeAddressToLatLng(
-                        requireContext(),
-                        "${viewModel.roadAddress.value} ${viewModel.detailAddress.value}"
-                    )
-                    viewModel.latitude.value = latlng["latitude"]
-                    viewModel.longitude.value = latlng["longitude"]
-
-                    (activity as? SignUpActivity)?.moveToNext()
-                }
+            roadAddressTextInputClickListener = View.OnClickListener {
+                getAddressLauncher.launch(AddressActivityHelper.getIntent(requireContext()))
             }
         }
+    }
+
+    private fun registerEventObserver() {
+        viewModel.validation.observe(viewLifecycleOwner, { validation ->
+            if (validation == VALIDATE_ADDRESS) {
+                viewModel.roadAddress.observe(viewLifecycleOwner, {
+                    binding.stiRoadAddress.error =
+                        if (it.isNullOrEmpty()) getString(R.string.required_field_alert) else null
+                })
+
+                if (binding.stiRoadAddress.error.isNullOrEmpty()) {
+                    LocationHelper.changeAddressToLatLng(
+                        context = requireContext(),
+                        address = "${viewModel.roadAddress.value} ${viewModel.detailAddress.value}"
+                    ).run {
+                        viewModel.latitude.value = this["latitude"]
+                        viewModel.longitude.value = this["longitude"]
+
+                        viewModel.moveToNext()
+                    }
+                }
+            }
+        })
     }
 
     companion object {

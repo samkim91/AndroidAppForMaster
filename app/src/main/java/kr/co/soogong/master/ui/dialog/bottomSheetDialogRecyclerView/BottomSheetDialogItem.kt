@@ -71,19 +71,6 @@ data class BottomSheetDialogItem(
                 BottomSheetDialogItem("40년", 40),
             )
 
-        fun getEmailDomainsList(): List<BottomSheetDialogItem> =
-            listOf(
-                BottomSheetDialogItem("naver.com", 0),
-                BottomSheetDialogItem("gmail.com", 0),
-                BottomSheetDialogItem("kakao.com", 0),
-                BottomSheetDialogItem("daum.com", 0),
-                BottomSheetDialogItem("hanmail.com", 0),
-                BottomSheetDialogItem("hotmail.com", 0),
-                BottomSheetDialogItem("yahoo.com", 0),
-                BottomSheetDialogItem("nate.com", 0),
-                BottomSheetDialogItem("이메일 직접입력", 0),
-            )
-
         fun getRequestingReviewList(): List<BottomSheetDialogItem> =
             listOf(
                 BottomSheetDialogItem("메시지로 공유하기", 0, ICON, R.drawable.ic_message),

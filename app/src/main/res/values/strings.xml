@@ -18,9 +18,9 @@
     <string name="over_one_thousand">+999</string>
 
     <string name="next">다음</string>
+    <string name="previous">이전</string>
     <string name="from">부터</string>
     <string name="up_to">까지</string>
-    <!--    <string name="previous_button_text">이전</string>-->
     <string name="summary_label_for_before_progress">진행 전</string>
     <string name="summary_label_for_progressing">진행 중</string>
     <string name="summary_label_for_after_process">완료</string>
@@ -72,21 +72,23 @@
 
 
     <!-- Sign Up -->
-    <string name="sign_up_master_description">수공마스터 서비스를 이용하기 위해\n회원가입 및 로그인이 필요합니다</string>
-    <string name="sign_up_sign_up_button_text">가입신청</string>
+    <string name="sign_up_introduction">수공마스터 서비스를 이용하기 위해\n회원가입 및 로그인이 필요합니다</string>
+    <string name="sign_up">회원가입</string>
     <string name="retype_phone_number_button_text">휴대폰번호 재입력</string>
     <string name="alert_unknown_user">가입되지 않은 번호입니다.</string>
     <string name="alert_invalid_certification_code">6자리 숫자로 입력해주세요.</string>
     <string name="alert_privacy_policy_agreement_required">이용약관 및 개인정보 처리방침에 동의해주세요. </string>
     <string name="sign_up_over">회원가입 완료</string>
 
+    <string name="type_owner_name">대표자명을 입력해주세요.</string>
+    <string name="select_service_area">서비스 가능 범위를 선택해주세요.</string>
     <string name="sign_up_repair_in_person_title">수공은 직접 시공하는 마스터님만을 위한 서비스 입니다. 직접 시공하시나요?</string>
     <string name="sign_up_repair_in_person_checkbox">직접 시공합니다.</string>
     <string name="sign_up_repair_in_person_alert_box_title">직접 시공 범위</string>
     <string name="sign_up_repair_in_person_alert_box_content">하청이 아닌 본인 또는 소속 직원이 직접 고객님들에게 서비스를 제공합니다. 하청으로 인해 발생하는 문제는 수공이 책임지지 않습니다.</string>
 
     <!-- Sign In -->
-    <string name="sign_in_button_text">로그인</string>
+    <string name="sign_in">로그인</string>
     <string name="insert_certification_code_edittext_hint">인증번호 6자리 입력</string>
 
     <!-- My Page-->
@@ -358,7 +360,7 @@
 
     <string name="type_warranty_description">A/S에 관한 상세정보를 입력해 주세요.</string>
     <string name="type_phone_number">연락이 가능한 휴대폰번호를 입력해주세요.</string>
-    <string name="type_phone_number_hint">휴대폰 번호</string>
+    <string name="type_phone_number_hint">휴대폰 번호 숫자만 입력</string>
     <string name="select_projects">시공 가능한 업종을 선택해 주세요.</string>
     <string name="select_projects_hint">중복 선택 가능합니다.</string>
     <string name="adding_projects">업종 추가하기</string>

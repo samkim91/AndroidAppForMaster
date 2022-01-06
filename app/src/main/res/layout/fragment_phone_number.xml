@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
@@ -9,17 +8,17 @@
         <import type="android.text.InputType" />
 
         <variable
-            name="authPhoneNumberButtonTheme"
-            type="kr.co.soogong.master.data.common.ButtonTheme" />
+            name="vm"
+            type="kr.co.soogong.master.ui.auth.signup.SignUpViewModel" />
 
         <variable
-            name="vm"
-            type="kr.co.soogong.master.ui.profile.detail.phonenumber.EditPhoneNumberViewModel" />
+            name="authPhoneNumberButtonTheme"
+            type="kr.co.soogong.master.data.common.ButtonTheme" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <kr.co.soogong.master.atomic.organisms.SubheadlineTextInputButtonMediumTextInputTimer
             android:id="@+id/stibmtit_auth_phone_number"

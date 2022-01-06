@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="kr.co.soogong.master.ui.auth.AuthContainerViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingStart="@dimen/gap_16"
+        android:paddingTop="@dimen/gap_24"
+        android:paddingEnd="@dimen/gap_16"
+        android:paddingBottom="@dimen/gap_24">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_main_logo"
+            app:layout_constraintBottom_toTopOf="@id/tv_introduction"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_introduction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_11"
+            android:text="@string/sign_up_introduction"
+            android:textAppearance="@style/footnote.regular"
+            android:textColor="@color/grey_3"
+            app:layout_constraintBottom_toTopOf="@id/b_sign_in"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_logo" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/b_sign_in"
+            style="@style/button.big.outlined_primary"
+            android:layout_marginBottom="@dimen/gap_8"
+            android:onClick="@{() -> vm.moveToSignIn()}"
+            android:text="@string/sign_in"
+            app:layout_constraintBottom_toTopOf="@id/b_sign_up"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/b_sign_up"
+            style="@style/button.big.primary"
+            android:onClick="@{() -> vm.moveToSignUp()}"
+            android:text="@string/sign_up"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

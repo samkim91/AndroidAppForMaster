@@ -62,7 +62,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/scg_package_cost"
-            app:maxCount="@{150}"
+            app:maxCount="@{500}"
             app:subheadline="@{@string/other_cost_info}" />
 
         <kr.co.soogong.master.atomic.molecules.SubheadlineChipGroup
@@ -76,74 +76,5 @@
             app:layout_constraintTop_toBottomOf="@id/stc_other_cost_info"
             app:singleChip="@{false}"
             app:subheadline="@{@string/other_options}" />
-
-
-        <!--        <androidx.appcompat.widget.AppCompatTextView-->
-        <!--            android:id="@+id/title"-->
-        <!--            style="@style/text_style_16sp.medium"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:text="@string/edit_flexible_cost_screen_title"-->
-        <!--            android:textColor="@color/text_basic_color"-->
-        <!--            app:layout_constraintEnd_toEndOf="parent"-->
-        <!--            app:layout_constraintStart_toStartOf="parent"-->
-        <!--            app:layout_constraintTop_toTopOf="parent" />-->
-
-        <!--        <kr.co.soogong.master.atomic.molecules.TitleChipGroup-->
-        <!--            android:id="@+id/travel_cost_chip_group"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_marginTop="@dimen/gap_12"-->
-        <!--            app:blackSubTitle="@{true}"-->
-        <!--            app:checkedChip="@={vm.travelCostValue}"-->
-        <!--            app:layout_constraintEnd_toEndOf="parent"-->
-        <!--            app:layout_constraintStart_toStartOf="parent"-->
-        <!--            app:layout_constraintTop_toBottomOf="@id/title"-->
-        <!--            app:subTitle='@{"출장비"}'-->
-        <!--            app:subTitleVisible="@{true}"-->
-        <!--            app:titleVisible="@{false}" />-->
-
-        <!--        <kr.co.soogong.master.atomic.molecules.TitleChipGroup-->
-        <!--            android:id="@+id/crane_usage_chip_group"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_marginTop="@dimen/gap_20"-->
-        <!--            app:blackSubTitle="@{true}"-->
-        <!--            app:checkedChip="@={vm.craneUsageValue}"-->
-        <!--            app:layout_constraintEnd_toEndOf="parent"-->
-        <!--            app:layout_constraintStart_toStartOf="parent"-->
-        <!--            app:layout_constraintTop_toBottomOf="@id/travel_cost_chip_group"-->
-        <!--            app:subTitle='@{"크레인 사용"}'-->
-        <!--            app:subTitleVisible="@{true}"-->
-        <!--            app:titleVisible="@{false}" />-->
-
-        <!--        <kr.co.soogong.master.atomic.molecules.TitleChipGroup-->
-        <!--            android:id="@+id/package_cost_chip_group"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_marginTop="@dimen/gap_20"-->
-        <!--            app:blackSubTitle="@{true}"-->
-        <!--            app:checkedChip="@={vm.packageCostValue}"-->
-        <!--            app:layout_constraintEnd_toEndOf="parent"-->
-        <!--            app:layout_constraintStart_toStartOf="parent"-->
-        <!--            app:layout_constraintTop_toBottomOf="@id/crane_usage_chip_group"-->
-        <!--            app:subTitle='@{"짐 정리 비용"}'-->
-        <!--            app:subTitleVisible="@{true}"-->
-        <!--            app:titleVisible="@{false}" />-->
-
-        <!--        <kr.co.soogong.master.atomic.molecules.TitleEditTextCounter-->
-        <!--            android:id="@+id/other_cost_info"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_marginTop="@dimen/gap_20"-->
-        <!--            app:blackSubTitle="@{true}"-->
-        <!--            app:content="@={vm.otherCostInformation}"-->
-        <!--            app:hintText='@{"현장에서 견적가격이 변동될 수 있는 사항을 입력해주세요."}'-->
-        <!--            app:layout_constraintEnd_toEndOf="parent"-->
-        <!--            app:layout_constraintStart_toStartOf="parent"-->
-        <!--            app:layout_constraintTop_toBottomOf="@id/package_cost_chip_group"-->
-        <!--            app:limitedCount='@{500}'-->
-        <!--            app:subTitle='@{"기타 변동 가능 사항"}'-->
-        <!--            app:titleVisible="@{false}" />-->
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

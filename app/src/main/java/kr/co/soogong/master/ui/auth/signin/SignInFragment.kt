@@ -1,4 +1,4 @@
-package kr.co.soogong.master.ui.profile.detail.phonenumber
+package kr.co.soogong.master.ui.auth.signin
 
 import android.os.Bundle
 import android.view.View
@@ -12,16 +12,15 @@ import com.google.firebase.auth.PhoneAuthProvider
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.common.ButtonTheme
-import kr.co.soogong.master.databinding.FragmentEditPhoneNumberBinding
+import kr.co.soogong.master.databinding.FragmentSignInBinding
 import kr.co.soogong.master.ui.LIMIT_TIME_TO_AUTH
+import kr.co.soogong.master.ui.auth.AuthContainerActivity
+import kr.co.soogong.master.ui.auth.signin.SignInViewModel.Companion.PHONE_NUMBER_EXIST
+import kr.co.soogong.master.ui.auth.signin.SignInViewModel.Companion.PHONE_NUMBER_NOT_EXIST
+import kr.co.soogong.master.ui.auth.signin.SignInViewModel.Companion.REQUEST_FAILED
+import kr.co.soogong.master.ui.auth.signin.SignInViewModel.Companion.SIGN_IN_SUCCESSFULLY
 import kr.co.soogong.master.ui.base.BaseFragment
-import kr.co.soogong.master.ui.dialog.popup.DefaultDialog
-import kr.co.soogong.master.ui.dialog.popup.DialogData
-import kr.co.soogong.master.ui.profile.detail.EditProfileContainerActivity
-import kr.co.soogong.master.ui.profile.detail.EditProfileContainerViewModel.Companion.SAVE_MASTER_SUCCESSFULLY
-import kr.co.soogong.master.ui.profile.detail.phonenumber.EditPhoneNumberViewModel.Companion.PHONE_NUMBER_EXIST
-import kr.co.soogong.master.ui.profile.detail.phonenumber.EditPhoneNumberViewModel.Companion.PHONE_NUMBER_NOT_EXIST
-import kr.co.soogong.master.ui.profile.detail.phonenumber.EditPhoneNumberViewModel.Companion.REQUEST_FAILED
+import kr.co.soogong.master.uihelper.main.MainActivityHelper
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.PhoneNumberHelper
 import kr.co.soogong.master.utility.extension.isValidPhoneNumber
@@ -30,10 +29,10 @@ import timber.log.Timber
 import java.util.concurrent.TimeUnit
 
 @AndroidEntryPoint
-class EditPhoneNumberFragment : BaseFragment<FragmentEditPhoneNumberBinding>(
-    R.layout.fragment_edit_phone_number
+class SignInFragment : BaseFragment<FragmentSignInBinding>(
+    R.layout.fragment_sign_in
 ) {
-    private val viewModel: EditPhoneNumberViewModel by viewModels()
+    private val viewModel: SignInViewModel by viewModels()
 
     private lateinit var callbacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks
 
@@ -41,18 +40,8 @@ class EditPhoneNumberFragment : BaseFragment<FragmentEditPhoneNumberBinding>(
         super.onViewCreated(view, savedInstanceState)
         Timber.tag(TAG).d("onViewCreated: ")
         initLayout()
-        registerEventObserve()
+        registerEventObserver()
         initFirebaseAuthCallbacks()
-    }
-
-    override fun onStart() {
-        super.onStart()
-        viewModel.requestProfile()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        binding.stibmtitAuthPhoneNumber.textInputTimer.stopTimer { }
     }
 
     override fun initLayout() {
@@ -62,6 +51,8 @@ class EditPhoneNumberFragment : BaseFragment<FragmentEditPhoneNumberBinding>(
             vm = viewModel
             lifecycleOwner = viewLifecycleOwner
             authPhoneNumberButtonTheme = ButtonTheme.Primary
+
+            abHeader.setButtonBackClickListener { (activity as AuthContainerActivity).onBackPressed() }
 
             stibmtitAuthPhoneNumber.textInputTimer.initTimer(
                 minute = 2,
@@ -97,8 +88,7 @@ class EditPhoneNumberFragment : BaseFragment<FragmentEditPhoneNumberBinding>(
                 startPhoneNumberVerification(isFirst = false)
             }
 
-            // 저장하기
-            (activity as EditProfileContainerActivity).setSaveButtonClickListener {
+            bSignIn.setOnClickListener {
                 viewModel.certificationCode.observe(viewLifecycleOwner, {
                     stibmtitAuthPhoneNumber.textInputTimerError =
                         if (it.length != 6) getString(R.string.invalid_certification_code) else null
@@ -109,13 +99,14 @@ class EditPhoneNumberFragment : BaseFragment<FragmentEditPhoneNumberBinding>(
         }
     }
 
-    private fun registerEventObserve() {
-        Timber.tag(TAG).d("registerEventObserve: ")
-        viewModel.action.observe(viewLifecycleOwner, EventObserver { event ->
-            when (event) {
-                SAVE_MASTER_SUCCESSFULLY -> activity?.onBackPressed()
-                PHONE_NUMBER_EXIST -> showDialogForUserExist()
-                PHONE_NUMBER_NOT_EXIST -> startPhoneNumberVerification(isFirst = true)
+    private fun registerEventObserver() {
+        Timber.tag(TAG).d("registerEventObserver: ")
+        viewModel.action.observe(viewLifecycleOwner, EventObserver { action ->
+            when (action) {
+                PHONE_NUMBER_EXIST -> startPhoneNumberVerification(isFirst = true)
+                PHONE_NUMBER_NOT_EXIST -> binding.stibmtitAuthPhoneNumber.error =
+                    getString(R.string.alert_unknown_user)
+                SIGN_IN_SUCCESSFULLY -> startActivity(MainActivityHelper.getIntent(requireContext()))
                 REQUEST_FAILED -> requireContext().toast(getString(R.string.error_message_of_request_failed))
             }
         })
@@ -160,7 +151,8 @@ class EditPhoneNumberFragment : BaseFragment<FragmentEditPhoneNumberBinding>(
     }
 
     private fun startPhoneNumberVerification(isFirst: Boolean) {
-        Timber.tag(TAG).d("startPhoneNumberVerification: ${viewModel.tel.value}")
+        Timber.tag(TAG)
+            .d("startPhoneNumberVerification: ${viewModel.tel.value}")
         with(binding) {
             stibmtitAuthPhoneNumber.inputEnabled = false
             stibmtitAuthPhoneNumber.buttonText = getString(R.string.retyping)
@@ -182,7 +174,8 @@ class EditPhoneNumberFragment : BaseFragment<FragmentEditPhoneNumberBinding>(
 
                 // 재요청일 땐, resendToken 을 강제로 set 해준다
                 if (!isFirst) viewModel.resendToken.value?.let { resendToken ->
-                    Timber.tag(TAG).d("resendVerificationCode: $resendToken")
+                    Timber.tag(TAG)
+                        .d("resendVerificationCode: $resendToken")
                     options.setForceResendingToken(resendToken)          // callback's ForceResendingToken
                 }
 
@@ -204,7 +197,8 @@ class EditPhoneNumberFragment : BaseFragment<FragmentEditPhoneNumberBinding>(
                     viewModel.storedVerificationId.value!!,
                     viewModel.certificationCode.value!!
                 )
-            Timber.tag(TAG).d("getPhoneAuthCredential: ${viewModel.phoneAuthCredential.value}")
+            Timber.tag(TAG)
+                .d("getPhoneAuthCredential: ${viewModel.phoneAuthCredential.value}")
             signInWithPhoneAuthCredential()
         }
     }
@@ -217,12 +211,14 @@ class EditPhoneNumberFragment : BaseFragment<FragmentEditPhoneNumberBinding>(
             viewModel.auth.value?.signInWithCredential(credential)?.addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
-                    Timber.tag(TAG).d("signInWithPhoneAuthCredential successfully: ")
+                    Timber.tag(TAG)
+                        .d("signInWithPhoneAuthCredential successfully: ")
                     viewModel.uid.value = task.result?.user?.uid
-                    viewModel.savePhoneNumber()
+                    viewModel.requestSignIn()
                 } else {
                     // Sign in failed, display a message and update the UI
-                    Timber.tag(TAG).d("signInWithPhoneAuthCredential failed: ${task.exception}")
+                    Timber.tag(TAG)
+                        .d("signInWithPhoneAuthCredential failed: ${task.exception}")
                     if (task.exception is FirebaseAuthInvalidCredentialsException) {
                         // The verification code entered was invalid
                         binding.stibmtitAuthPhoneNumber.textInputTimerError =
@@ -237,20 +233,14 @@ class EditPhoneNumberFragment : BaseFragment<FragmentEditPhoneNumberBinding>(
         }
     }
 
-    private fun showDialogForUserExist() {
-        DefaultDialog.newInstance(DialogData.getUserExistDialogData())
-            .let {
-                it.setButtonsClickListener(
-                    onPositive = {},
-                    onNegative = {}
-                )
-                it.show(parentFragmentManager, it.tag)
-            }
+    override fun onDestroy() {
+        super.onDestroy()
+        binding.stibmtitAuthPhoneNumber.textInputTimer.stopTimer { }
     }
 
     companion object {
-        private const val TAG = "EditPhoneNumberViewModel"
+        private const val TAG = "SignInFragment"
 
-        fun newInstance() = EditPhoneNumberFragment()
+        fun newInstance() = SignInFragment()
     }
 }

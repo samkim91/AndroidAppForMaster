@@ -11,10 +11,10 @@ class ActionBar @JvmOverloads constructor(
     context: Context,
     attributeSet: AttributeSet? = null,
     defStyle: Int = 0,
-) : ConstraintLayout(context, attributeSet, defStyle) {
+) : ConstraintLayout(context, attributeSet, defStyle), IActionBar {
     private val binding = ActionBar2Binding.inflate(LayoutInflater.from(context), this, true)
 
-    var title: String? = null
+    override var title: String? = null
         set(value) {
             field = value
             value?.let {
@@ -22,7 +22,7 @@ class ActionBar @JvmOverloads constructor(
             }
         }
 
-    var backButtonVisibility: Boolean? = null
+    override var backButtonVisibility: Boolean? = null
         set(value) {
             field = value
             value?.let {
@@ -30,7 +30,7 @@ class ActionBar @JvmOverloads constructor(
             }
         }
 
-    var anyButtonText: String? = null
+    override var anyButtonText: String? = null
         set(value) {
             field = value
             value?.let {
@@ -39,11 +39,11 @@ class ActionBar @JvmOverloads constructor(
             }
         }
 
-    fun setButtonBackClickListener(listener: OnClickListener) {
+    override fun setButtonBackClickListener(listener: OnClickListener) {
         binding.ivBack.setOnClickListener(listener)
     }
 
-    fun setButtonAnyClickListener(listener: OnClickListener) {
+    override fun setButtonAnyClickListener(listener: OnClickListener) {
         binding.tvAny.setOnClickListener(listener)
     }
 }

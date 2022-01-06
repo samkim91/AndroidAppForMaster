@@ -18,6 +18,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="${cleartextTrafficPermitted}">
+        <activity
+            android:name=".ui.auth.AuthContainerActivity"
+            android:screenOrientation="portrait" />
         <activity android:name=".ui.auth.signup.steps.ViewPolicyActivity" />
         <activity android:name=".ui.profile.review.MyReviewsActivity" />
         <activity android:name=".ui.profile.detail.EditProfileContainerActivity" />
@@ -28,15 +31,14 @@
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.auth.SignMainActivity" />
         <activity
             android:name=".ui.auth.signup.SignUpActivity"
             android:windowSoftInputMode="adjustResize" />
         <activity android:name=".ui.auth.signup.AddressActivity" />
-        <activity android:name=".ui.auth.signin.SignInActivity" />
         <activity android:name=".ui.main.MainActivity" />
         <activity android:name=".ui.major.MajorActivity" />
         <activity android:name=".ui.image.ImageActivity" />
@@ -45,7 +47,7 @@
         <activity android:name=".ui.requirement.action.search.SearchActivity" />
         <activity
             android:name=".ui.requirement.action.view.ViewRequirementActivity"
-            android:launchMode="singleTask" />        <!-- 실측요청건을 고려 singleTop 로 설정 -->
+            android:launchMode="singleTask" /> <!-- 실측요청건을 고려 singleTop 로 설정 -->
         <activity
             android:name=".ui.requirement.action.write.WriteEstimationActivity"
             android:launchMode="singleTask" />
@@ -73,8 +75,7 @@
             android:value="false" />
         <meta-data
             android:name="android.webkit.WebView.EnableSafeBrowsing"
-            android:value="true" /> <!-- javascript interface injection 관련 -->
-
+            android:value="true" />
     </application>
 
 </manifest>
