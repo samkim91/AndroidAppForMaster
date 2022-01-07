@@ -239,17 +239,17 @@ class PhoneNumberFragment : BaseFragment<FragmentPhoneNumberBinding>(
 
     private fun showDialogForUserExist() {
         DefaultDialog.newInstance(DialogData.getExistentUserDialogData())
-            .run {
-                setButtonsClickListener(
+            .let {
+                it.setButtonsClickListener(
                     onPositive = {},
                     onNegative = {}
                 )
-                show(parentFragmentManager, this.tag)
+                it.show(parentFragmentManager, it.tag)
             }
     }
 
     companion object {
-        private const val TAG = "AuthFragment"
+        private const val TAG = "PhoneNumberFragment"
 
         fun newInstance() = PhoneNumberFragment()
     }

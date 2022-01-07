@@ -35,6 +35,7 @@
             style="@style/check_box_rectangle"
             android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_8"
             android:checked="@={vm.repairInPerson}"
             android:text="@string/do_repair_in_person"
             app:layout_constraintEnd_toEndOf="parent"
@@ -43,22 +44,22 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_alert"
-            style="@style/caption_1.regular"
             android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"
             android:text="@string/required_field_alert"
+            android:textAppearance="@style/caption_1.regular"
             android:textColor="@color/brand_red"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cb_repair_in_person"
-            tools:visibility="visible" />
+            tools:visibility="gone" />
 
         <kr.co.soogong.master.atomic.molecules.BoxIconContent
             android:id="@+id/bic_notice"
             android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/gap_26"
+            android:layout_marginTop="@dimen/gap_8"
             app:colorTheme="@{colorThemeProfileGuideline}"
             app:content="@{@string/notice_for_repair_in_person}"
             app:icon="@{@drawable/ic_speaker}"
