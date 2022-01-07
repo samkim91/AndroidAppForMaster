@@ -1,11 +1,11 @@
-package kr.co.soogong.master.uihelper.major
+package kr.co.soogong.master.uihelper.common
 
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Parcelable
 import kr.co.soogong.master.data.model.major.Project
-import kr.co.soogong.master.ui.major.MajorActivity
+import kr.co.soogong.master.ui.common.MajorActivity
 
 object MajorActivityHelper {
     private const val BUNDLE_MAJOR = "BUNDLE_MAJOR"

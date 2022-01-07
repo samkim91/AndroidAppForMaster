@@ -1,4 +1,4 @@
-package kr.co.soogong.master.ui.auth.signup
+package kr.co.soogong.master.ui.common
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,13 +9,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kr.co.soogong.master.R
-import kr.co.soogong.master.databinding.ActivityAddressBinding
+import kr.co.soogong.master.databinding.ActivityKakaoAddressBinding
 import kr.co.soogong.master.ui.base.BaseActivity
-import kr.co.soogong.master.uihelper.auth.signup.AddressActivityHelper
+import kr.co.soogong.master.uihelper.common.KakaoAddressActivityHelper
 import timber.log.Timber
 
-class AddressActivity : BaseActivity<ActivityAddressBinding>(
-    R.layout.activity_address
+class KakaoAddressActivity : BaseActivity<ActivityKakaoAddressBinding>(
+    R.layout.activity_kakao_address
 ) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,9 +49,9 @@ class AddressActivity : BaseActivity<ActivityAddressBinding>(
                 withContext(Dispatchers.Main) {
                     val extra = Bundle()
                     val intent = Intent()
-                    extra.putString(AddressActivityHelper.AREA, area)
-                    extra.putString(AddressActivityHelper.LOCATION, location)
-                    extra.putString(AddressActivityHelper.ADDRESS, address)
+                    extra.putString(KakaoAddressActivityHelper.AREA, area)
+                    extra.putString(KakaoAddressActivityHelper.LOCATION, location)
+                    extra.putString(KakaoAddressActivityHelper.ADDRESS, address)
                     intent.putExtras(extra)
                     setResult(RESULT_OK, intent)
                     finish()
@@ -61,7 +61,7 @@ class AddressActivity : BaseActivity<ActivityAddressBinding>(
     }
 
     companion object {
-        private const val TAG = "AddressActivity"
+        private const val TAG = "KakaoAddressActivity"
     }
 
 

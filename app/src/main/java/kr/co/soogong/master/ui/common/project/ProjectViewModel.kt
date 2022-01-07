@@ -1,4 +1,4 @@
-package kr.co.soogong.master.ui.major.project
+package kr.co.soogong.master.ui.common.project
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

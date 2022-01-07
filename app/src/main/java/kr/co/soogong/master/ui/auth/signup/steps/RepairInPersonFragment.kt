@@ -7,15 +7,15 @@ import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.common.ColorTheme
-import kr.co.soogong.master.databinding.FragmentSignUpRepairInPersonBinding
+import kr.co.soogong.master.databinding.FragmentRepairInPersonBinding
 import kr.co.soogong.master.ui.auth.signup.SignUpViewModel
 import kr.co.soogong.master.ui.auth.signup.SignUpViewModel.Companion.VALIDATE_REPAIR_IN_PERSON
 import kr.co.soogong.master.ui.base.BaseFragment
 import timber.log.Timber
 
 @AndroidEntryPoint
-class RepairInPersonFragment : BaseFragment<FragmentSignUpRepairInPersonBinding>(
-    R.layout.fragment_sign_up_repair_in_person
+class RepairInPersonFragment : BaseFragment<FragmentRepairInPersonBinding>(
+    R.layout.fragment_repair_in_person
 ) {
     private val viewModel: SignUpViewModel by viewModels({ requireParentFragment() })
 

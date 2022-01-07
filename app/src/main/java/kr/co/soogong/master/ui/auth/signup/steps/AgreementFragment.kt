@@ -6,15 +6,15 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
-import kr.co.soogong.master.databinding.FragmentSignUpPrivatePolicyBinding
+import kr.co.soogong.master.databinding.FragmentAgreementBinding
 import kr.co.soogong.master.ui.auth.signup.SignUpViewModel
 import kr.co.soogong.master.ui.auth.signup.SignUpViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.ui.auth.signup.SignUpViewModel.Companion.SIGN_UP_SUCCESSFULLY
 import kr.co.soogong.master.ui.auth.signup.SignUpViewModel.Companion.VALIDATE_AGREEMENT
 import kr.co.soogong.master.ui.base.BaseFragment
-import kr.co.soogong.master.uihelper.auth.signup.ViewPolicyActivityHelper
-import kr.co.soogong.master.uihelper.auth.signup.ViewPolicyActivityHelper.PRIVATE_POLICY
-import kr.co.soogong.master.uihelper.auth.signup.ViewPolicyActivityHelper.TERMS_OF_SERVICE
+import kr.co.soogong.master.uihelper.auth.AgreementDetailActivityHelper
+import kr.co.soogong.master.uihelper.auth.AgreementDetailActivityHelper.PRIVATE_POLICY
+import kr.co.soogong.master.uihelper.auth.AgreementDetailActivityHelper.TERMS_OF_SERVICE
 import kr.co.soogong.master.uihelper.main.MainActivityHelper
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.extension.makeLinks
@@ -22,8 +22,8 @@ import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
 
 @AndroidEntryPoint
-class PrivatePolicyFragment : BaseFragment<FragmentSignUpPrivatePolicyBinding>(
-    R.layout.fragment_sign_up_private_policy
+class AgreementFragment : BaseFragment<FragmentAgreementBinding>(
+    R.layout.fragment_agreement
 ) {
     private val viewModel: SignUpViewModel by viewModels({ requireParentFragment() })
 
@@ -51,12 +51,12 @@ class PrivatePolicyFragment : BaseFragment<FragmentSignUpPrivatePolicyBinding>(
             cbAgreementPrivacyPolicy.makeLinks(
                 Pair("이용약관", View.OnClickListener {
                     startActivity(
-                        ViewPolicyActivityHelper.getIntent(requireContext(), TERMS_OF_SERVICE)
+                        AgreementDetailActivityHelper.getIntent(requireContext(), TERMS_OF_SERVICE)
                     )
                 }),
                 Pair("개인정보 처리방침", View.OnClickListener {
                     startActivity(
-                        ViewPolicyActivityHelper.getIntent(requireContext(), PRIVATE_POLICY)
+                        AgreementDetailActivityHelper.getIntent(requireContext(), PRIVATE_POLICY)
                     )
                 })
             )
@@ -74,7 +74,6 @@ class PrivatePolicyFragment : BaseFragment<FragmentSignUpPrivatePolicyBinding>(
             }
         })
 
-
         viewModel.action.observe(viewLifecycleOwner, EventObserver { event ->
             when (event) {
                 SIGN_UP_SUCCESSFULLY -> {
@@ -89,10 +88,8 @@ class PrivatePolicyFragment : BaseFragment<FragmentSignUpPrivatePolicyBinding>(
     }
 
     companion object {
-        private const val TAG = "PrivatePolicyFragment"
+        private const val TAG = "AgreementFragment"
 
-        fun newInstance(): PrivatePolicyFragment {
-            return PrivatePolicyFragment()
-        }
+        fun newInstance() = AgreementFragment()
     }
 }

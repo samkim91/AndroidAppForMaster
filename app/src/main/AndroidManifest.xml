@@ -21,7 +21,7 @@
         <activity
             android:name=".ui.auth.AuthContainerActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".ui.auth.signup.steps.ViewPolicyActivity" />
+        <activity android:name=".ui.auth.signup.steps.AgreementDetailActivity" />
         <activity android:name=".ui.profile.review.MyReviewsActivity" />
         <activity android:name=".ui.profile.detail.EditProfileContainerActivity" />
         <activity android:name=".ui.profile.detail.portfoliolist.PortfolioListActivity" />
@@ -35,12 +35,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ui.auth.signup.SignUpActivity"
-            android:windowSoftInputMode="adjustResize" />
-        <activity android:name=".ui.auth.signup.AddressActivity" />
+        <activity android:name=".ui.common.KakaoAddressActivity" />
         <activity android:name=".ui.main.MainActivity" />
-        <activity android:name=".ui.major.MajorActivity" />
+        <activity android:name=".ui.common.MajorActivity" />
         <activity android:name=".ui.image.ImageActivity" />
         <activity android:name=".ui.requirement.action.cancel.CancelActivity" />
         <activity android:name=".ui.requirement.action.end.EndRepairActivity" />

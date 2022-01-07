@@ -1,4 +1,4 @@
-package kr.co.soogong.master.ui.major.category
+package kr.co.soogong.master.ui.common.category
 
 import android.os.Bundle
 import android.view.View
@@ -7,8 +7,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentCategoryBinding
 import kr.co.soogong.master.ui.base.BaseFragment
-import kr.co.soogong.master.ui.major.MajorActivity
-import kr.co.soogong.master.ui.major.category.CategoryViewModel.Companion.GET_CATEGORY_FAILED
+import kr.co.soogong.master.ui.common.MajorActivity
+import kr.co.soogong.master.ui.common.category.CategoryViewModel.Companion.GET_CATEGORY_FAILED
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber

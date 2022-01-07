@@ -9,16 +9,16 @@ import com.google.android.material.chip.Chip
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.common.ButtonTheme
-import kr.co.soogong.master.databinding.FragmentSignUpMajorBinding
+import kr.co.soogong.master.databinding.FragmentMajorBinding
 import kr.co.soogong.master.ui.auth.signup.SignUpViewModel
 import kr.co.soogong.master.ui.auth.signup.SignUpViewModel.Companion.VALIDATE_MAJOR
 import kr.co.soogong.master.ui.base.BaseFragment
-import kr.co.soogong.master.uihelper.major.MajorActivityHelper
+import kr.co.soogong.master.uihelper.common.MajorActivityHelper
 import timber.log.Timber
 
 @AndroidEntryPoint
-class MajorFragment : BaseFragment<FragmentSignUpMajorBinding>(
-    R.layout.fragment_sign_up_major
+class MajorFragment : BaseFragment<FragmentMajorBinding>(
+    R.layout.fragment_major
 ) {
     private val viewModel: SignUpViewModel by viewModels({ requireParentFragment() })
 

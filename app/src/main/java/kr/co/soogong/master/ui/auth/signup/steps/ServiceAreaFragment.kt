@@ -7,7 +7,7 @@ import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.model.profile.Coordinate
-import kr.co.soogong.master.databinding.FragmentSignUpServiceAreaBinding
+import kr.co.soogong.master.databinding.FragmentServiceAreaBinding
 import kr.co.soogong.master.ui.auth.signup.SignUpViewModel
 import kr.co.soogong.master.ui.auth.signup.SignUpViewModel.Companion.VALIDATE_SERVICE_AREA
 import kr.co.soogong.master.ui.base.BaseFragment
@@ -15,8 +15,8 @@ import kr.co.soogong.master.utility.NaverMapHelper
 import timber.log.Timber
 
 @AndroidEntryPoint
-class ServiceAreaFragment : BaseFragment<FragmentSignUpServiceAreaBinding>(
-    R.layout.fragment_sign_up_service_area
+class ServiceAreaFragment : BaseFragment<FragmentServiceAreaBinding>(
+    R.layout.fragment_service_area
 ) {
     private val viewModel: SignUpViewModel by viewModels({ requireParentFragment() })
 

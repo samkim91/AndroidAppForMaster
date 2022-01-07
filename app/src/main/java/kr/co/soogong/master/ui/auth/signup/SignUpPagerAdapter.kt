@@ -21,7 +21,7 @@ class SignUpPagerAdapter(
             3 -> AddressFragment.newInstance()
             4 -> ServiceAreaFragment.newInstance()
             5 -> RepairInPersonFragment.newInstance()
-            6 -> PrivatePolicyFragment.newInstance()
+            6 -> AgreementFragment.newInstance()
             else -> Fragment()
         }
     }

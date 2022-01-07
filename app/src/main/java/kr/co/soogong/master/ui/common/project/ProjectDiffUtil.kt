@@ -1,4 +1,4 @@
-package kr.co.soogong.master.ui.major.project
+package kr.co.soogong.master.ui.common.project
 
 import androidx.recyclerview.widget.DiffUtil
 import kr.co.soogong.master.data.model.major.Project

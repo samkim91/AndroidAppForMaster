@@ -1,4 +1,4 @@
-package kr.co.soogong.master.ui.major
+package kr.co.soogong.master.ui.common
 
 import android.os.Bundle
 import dagger.hilt.android.AndroidEntryPoint
@@ -6,8 +6,8 @@ import kr.co.soogong.master.R
 import kr.co.soogong.master.data.model.major.Category
 import kr.co.soogong.master.databinding.ActivityMajorBinding
 import kr.co.soogong.master.ui.base.BaseActivity
-import kr.co.soogong.master.ui.major.category.CategoryFragment
-import kr.co.soogong.master.ui.major.project.ProjectFragment
+import kr.co.soogong.master.ui.common.category.CategoryFragment
+import kr.co.soogong.master.ui.common.project.ProjectFragment
 import timber.log.Timber
 
 @AndroidEntryPoint
