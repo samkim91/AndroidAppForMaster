@@ -68,7 +68,7 @@ class ServiceAreaFragment : BaseFragment<FragmentSignUpServiceAreaBinding>(
             if (validation == VALIDATE_SERVICE_AREA) {
                 viewModel.serviceArea.observe(viewLifecycleOwner, {
                     binding.sdmServiceArea.dropdownError =
-                        if (it == null) getString(R.string.required_field_alert) else null
+                        if (it.first.isEmpty()) getString(R.string.required_field_alert) else null
                 })
 
                 if (binding.sdmServiceArea.dropdownError.isNullOrEmpty()) viewModel.moveToNext()

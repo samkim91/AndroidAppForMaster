@@ -82,10 +82,9 @@
 
     <string name="type_owner_name">대표자명을 입력해주세요.</string>
     <string name="select_service_area">서비스 가능 범위를 선택해주세요.</string>
-    <string name="sign_up_repair_in_person_title">수공은 직접 시공하는 마스터님만을 위한 서비스 입니다. 직접 시공하시나요?</string>
-    <string name="sign_up_repair_in_person_checkbox">직접 시공합니다.</string>
-    <string name="sign_up_repair_in_person_alert_box_title">직접 시공 범위</string>
-    <string name="sign_up_repair_in_person_alert_box_content">하청이 아닌 본인 또는 소속 직원이 직접 고객님들에게 서비스를 제공합니다. 하청으로 인해 발생하는 문제는 수공이 책임지지 않습니다.</string>
+    <string name="asking_repair_in_person">수공은 직접 시공하는 마스터님만을 위한 서비스입니다. 직접 시공하시나요?</string>
+    <string name="do_repair_in_person">직접 시공합니다.</string>
+    <string name="notice_for_repair_in_person">직접 시공이란? 하청이 아닌 본인 또는 소속 직원이 직접 고객님들에게 서비스를 제공하는 것입니다. 하청으로 인해 발생하는 문제는 수공이 책임지지 않습니다.</string>
 
     <!-- Sign In -->
     <string name="sign_in">로그인</string>
