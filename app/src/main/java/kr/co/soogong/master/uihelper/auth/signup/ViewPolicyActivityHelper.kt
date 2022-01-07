@@ -20,7 +20,7 @@ object ViewPolicyActivityHelper {
         }
     }
 
-    fun getType(intent: Intent): String? {
-        return intent.getBundleExtra(BUNDLE_KEY)?.getString(STRING_KEY, "")
+    fun getDocumentType(intent: Intent): String {
+        return intent.getBundleExtra(BUNDLE_KEY)?.getString(STRING_KEY, "") ?: ""
     }
 }

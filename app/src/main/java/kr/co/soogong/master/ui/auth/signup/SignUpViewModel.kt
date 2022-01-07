@@ -75,6 +75,7 @@ class SignUpViewModel @Inject constructor(
             3 -> validation.postValue(VALIDATE_ADDRESS)
             4 -> validation.postValue(VALIDATE_SERVICE_AREA)
             5 -> validation.postValue(VALIDATE_REPAIR_IN_PERSON)
+            6 -> validation.postValue(VALIDATE_AGREEMENT)
         }
     }
 
@@ -155,5 +156,6 @@ class SignUpViewModel @Inject constructor(
         const val VALIDATE_ADDRESS = "VALIDATE_ADDRESS"
         const val VALIDATE_SERVICE_AREA = "VALIDATE_SERVICE_AREA"
         const val VALIDATE_REPAIR_IN_PERSON = "VALIDATE_REPAIR_IN_PERSON"
+        const val VALIDATE_AGREEMENT = "VALIDATE_AGREEMENT"
     }
 }

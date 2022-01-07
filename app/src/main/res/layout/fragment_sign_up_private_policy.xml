@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -10,106 +11,79 @@
 
     </data>
 
-    <ScrollView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true"
-        android:overScrollMode="never">
+        android:layout_height="wrap_content">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_subheadline"
+            android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"
-            android:fillViewport="true">
+            android:breakStrategy="simple"
+            android:text="@string/agreement_introduction"
+            android:textAppearance="@style/subheadline.bold"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <kr.co.soogong.master.atomic.molecules.LargeTitleSubtitle
-                android:id="@+id/title_widget"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/gap_20"
-                android:layout_marginTop="@dimen/gap_40"
-                android:layout_marginEnd="@dimen/gap_20"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:title='@{"수공 마스터 앱 서비스 이용 약관에\n동의하고 수공과 함께해 주세요!"}' />
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:id="@+id/cb_agreement_all"
+            style="@style/check_box_rectangle"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_8"
+            android:checked="@{vm.privacyPolicy &amp;&amp; vm.marketingPush}"
+            android:text="@string/agreement_all"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_subheadline" />
 
-            <kr.co.soogong.master.atomic.molecules.TextCheckBox
-                android:id="@+id/agreed_all"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/gap_20"
-                android:layout_marginTop="@dimen/gap_32"
-                android:layout_marginEnd="@dimen/gap_20"
-                app:check="@{vm.privacyPolicy &amp;&amp; vm.marketingPush}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/title_widget"
-                app:text='@{"모두 동의합니다. (선택 정보 포함)"}' />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_line"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="@dimen/line_height"
+            android:layout_marginTop="@dimen/gap_16"
+            android:background="@color/light_grey_2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cb_agreement_all" />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/line"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/line_height"
-                android:layout_marginStart="@dimen/gap_20"
-                android:layout_marginTop="@dimen/gap_20"
-                android:layout_marginEnd="@dimen/gap_20"
-                android:background="@color/c_E3E3E3"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/agreed_all" />
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:id="@+id/cb_agreement_privacy_policy"
+            style="@style/check_box_rectangle"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_16"
+            android:checked="@={vm.privacyPolicy}"
+            android:text="@string/agreement_privacy_policy"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_line" />
 
-            <kr.co.soogong.master.atomic.molecules.TextCheckBox
-                android:id="@+id/agreed_privacy_policy"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/gap_20"
-                android:layout_marginTop="@dimen/gap_20"
-                android:layout_marginEnd="@dimen/gap_20"
-                app:check="@={vm.privacyPolicy}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/line" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_alert"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="wrap_content"
+            android:text="@string/required_field_alert"
+            android:textAppearance="@style/caption_1.regular"
+            android:textColor="@color/brand_red"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cb_agreement_privacy_policy"
+            tools:visibility="visible" />
 
-            <kr.co.soogong.master.atomic.molecules.TextCheckBox
-                android:id="@+id/agreed_marketing"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/gap_20"
-                android:layout_marginTop="@dimen/gap_20"
-                android:layout_marginEnd="@dimen/gap_20"
-                app:check="@={vm.marketingPush}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/agreed_privacy_policy"
-                app:text='@{"마케팅 수신에 동의합니다. (선택)"}' />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/alert_privacy_policy_agreement_required"
-                style="@style/text_style_14sp.regular"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/gap_20"
-                android:layout_marginTop="@dimen/gap_4"
-                android:text="@string/alert_privacy_policy_agreement_required"
-                android:textColor="@color/c_FF711D"
-                android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/agreed_marketing" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/default_button"
-                style="@style/text_style_16sp.bold"
-                android:layout_width="@dimen/gap_0"
-                android:layout_height="@dimen/gap_48"
-                android:background="@color/c_22D47B"
-                android:text="@string/sign_up_over"
-                android:textColor="@color/c_FFFFFF"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:id="@+id/cb_agreement_marketing_push"
+            style="@style/check_box_rectangle"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_8"
+            android:checked="@={vm.marketingPush}"
+            android:text="@string/agreement_marketing_push"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_alert" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -3,13 +3,14 @@ package kr.co.soogong.master.ui.auth.signup.steps
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentSignUpPrivatePolicyBinding
 import kr.co.soogong.master.ui.auth.signup.SignUpViewModel
 import kr.co.soogong.master.ui.auth.signup.SignUpViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.ui.auth.signup.SignUpViewModel.Companion.SIGN_UP_SUCCESSFULLY
+import kr.co.soogong.master.ui.auth.signup.SignUpViewModel.Companion.VALIDATE_AGREEMENT
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.uihelper.auth.signup.ViewPolicyActivityHelper
 import kr.co.soogong.master.uihelper.auth.signup.ViewPolicyActivityHelper.PRIVATE_POLICY
@@ -24,13 +25,13 @@ import timber.log.Timber
 class PrivatePolicyFragment : BaseFragment<FragmentSignUpPrivatePolicyBinding>(
     R.layout.fragment_sign_up_private_policy
 ) {
-    private val viewModel: SignUpViewModel by activityViewModels()
+    private val viewModel: SignUpViewModel by viewModels({ requireParentFragment() })
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Timber.tag(TAG).d("onViewCreated: ")
         initLayout()
-        registerEventObserve()
+        registerEventObserver()
     }
 
     override fun initLayout() {
@@ -40,14 +41,14 @@ class PrivatePolicyFragment : BaseFragment<FragmentSignUpPrivatePolicyBinding>(
             vm = viewModel
             lifecycleOwner = viewLifecycleOwner
 
-            binding.agreedAll.setCheckClick {
-                val status = agreedAll.checkBox.isChecked
-                viewModel.privacyPolicy.value = status
-                viewModel.marketingPush.value = status
+            cbAgreementAll.setOnClickListener {
+                cbAgreementAll.isChecked.run {
+                    viewModel.privacyPolicy.value = this
+                    viewModel.marketingPush.value = this
+                }
             }
 
-            agreedPrivacyPolicy.text = "수공의 이용약관 및 개인정보 처리방침에\n동의합니다."
-            agreedPrivacyPolicy.textView.makeLinks(
+            cbAgreementPrivacyPolicy.makeLinks(
                 Pair("이용약관", View.OnClickListener {
                     startActivity(
                         ViewPolicyActivityHelper.getIntent(requireContext(), TERMS_OF_SERVICE)
@@ -59,26 +60,21 @@ class PrivatePolicyFragment : BaseFragment<FragmentSignUpPrivatePolicyBinding>(
                     )
                 })
             )
-
-            defaultButton.setOnClickListener {
-                viewModel.privacyPolicy.observe(viewLifecycleOwner, {
-                    alertPrivacyPolicyAgreementRequired.isVisible = !it
-                })
-
-                if (!alertPrivacyPolicyAgreementRequired.isVisible) {
-                    viewModel.signUp()
-                }
-            }
         }
     }
 
-    private fun registerEventObserve() {
-        viewModel.privacyPolicy.observe(viewLifecycleOwner, {
-            binding.agreedAll.checkBox.isChecked = it && viewModel.marketingPush.value!!
+    private fun registerEventObserver() {
+        viewModel.validation.observe(viewLifecycleOwner, { validation ->
+            if (validation == VALIDATE_AGREEMENT) {
+                viewModel.privacyPolicy.observe(viewLifecycleOwner, {
+                    binding.tvAlert.isVisible = !it
+                })
+
+                if (!binding.tvAlert.isVisible) viewModel.signUp()
+            }
         })
-        viewModel.marketingPush.observe(viewLifecycleOwner, {
-            binding.agreedAll.checkBox.isChecked = it && viewModel.privacyPolicy.value!!
-        })
+
+
         viewModel.action.observe(viewLifecycleOwner, EventObserver { event ->
             when (event) {
                 SIGN_UP_SUCCESSFULLY -> {
