@@ -8,9 +8,10 @@ import kr.co.soogong.master.databinding.ActivityAuthContainerBinding
 import kr.co.soogong.master.ui.auth.AuthContainerViewModel.Companion.SIGN_IN
 import kr.co.soogong.master.ui.auth.AuthContainerViewModel.Companion.SIGN_UP
 import kr.co.soogong.master.ui.auth.signin.SignInFragment
-import kr.co.soogong.master.ui.auth.signmain.SignMainFragment
 import kr.co.soogong.master.ui.auth.signup.SignUpFragment
 import kr.co.soogong.master.ui.base.BaseActivity
+import kr.co.soogong.master.ui.dialog.popup.DefaultDialog
+import kr.co.soogong.master.ui.dialog.popup.DialogData
 import kr.co.soogong.master.utility.EventObserver
 import timber.log.Timber
 
@@ -39,29 +40,49 @@ class AuthContainerActivity : BaseActivity<ActivityAuthContainerBinding>(
     private fun registerEventObserver() {
         Timber.tag(TAG).d("registerEventObserver: ")
 
-        viewModel.action.observe(this, EventObserver { action ->
-            when (action) {
-                SIGN_UP, SIGN_IN -> {
-                    supportFragmentManager.beginTransaction()
-                        .setCustomAnimations(
-                            R.anim.slide_in_from_right, R.anim.slide_out_to_left,
-                            R.anim.slide_in_from_left, R.anim.slide_out_to_right
-                        )
-                        .replace(binding.fcvContainer.id,
-                            if (action == SIGN_UP) SignUpFragment.newInstance() else SignInFragment.newInstance())
-                        .addToBackStack(if (action == SIGN_UP) SIGN_UP else SIGN_IN)
-                        .commit()
-                }
-            }
+        viewModel.action.observe(this, EventObserver { fragmentTag ->
+            supportFragmentManager.beginTransaction()
+                .setCustomAnimations(
+                    R.anim.slide_in_from_right, R.anim.slide_out_to_left,
+                    R.anim.slide_in_from_left, R.anim.slide_out_to_right
+                )
+                .replace(
+                    binding.fcvContainer.id,
+                    if (fragmentTag == SIGN_UP) SignUpFragment.newInstance() else SignInFragment.newInstance(),
+                    fragmentTag
+                )
+                .addToBackStack(fragmentTag)
+                .commit()
         })
     }
 
     override fun onBackPressed() {
-        if (supportFragmentManager.backStackEntryCount > 0) {       // 백스택에 프래그먼트가 있으면, 그 프래그먼트를 가져온다.
+        if (supportFragmentManager.backStackEntryCount > 0) {       // 백스택에 프래그먼트가 있으면, 자식 프래그먼트에 있다는 의미
+            // 회원가입 화면에서 뒤로가기를 눌렀을 때
+            supportFragmentManager.findFragmentByTag(SIGN_UP)?.let { fragment ->
+                if (fragment.isVisible) {
+                    showDialogForKeepingSignUp()
+                    return
+                }
+            }
+
+            // 로그인 화면에서 뒤로가기를 눌렀을 때
             supportFragmentManager.popBackStack()
         } else {
-            super.onBackPressed()       // 없으면, 액티비티의 백프레스
+            super.onBackPressed()       // 백스택이 없으면 SignMainFragment 라는 의미이고, 앱을 종료
         }
+    }
+
+    private fun showDialogForKeepingSignUp() {
+        DefaultDialog.newInstance(DialogData.getQuitSignUpDialogData())
+            .let {
+                it.setButtonsClickListener(
+                    onPositive = {},
+                    onNegative = { supportFragmentManager.popBackStack() }
+                )
+
+                it.show(supportFragmentManager, it.tag)
+            }
     }
 
     companion object {

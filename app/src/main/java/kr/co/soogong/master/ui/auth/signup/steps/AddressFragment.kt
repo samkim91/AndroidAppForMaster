@@ -7,17 +7,17 @@ import androidx.activity.result.contract.ActivityResultContracts.StartActivityFo
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
-import kr.co.soogong.master.databinding.FragmentSignUpAddressBinding
+import kr.co.soogong.master.databinding.FragmentAddressBinding
 import kr.co.soogong.master.ui.auth.signup.SignUpViewModel
 import kr.co.soogong.master.ui.auth.signup.SignUpViewModel.Companion.VALIDATE_ADDRESS
 import kr.co.soogong.master.ui.base.BaseFragment
-import kr.co.soogong.master.uihelper.auth.signup.AddressActivityHelper
+import kr.co.soogong.master.uihelper.common.KakaoAddressActivityHelper
 import kr.co.soogong.master.utility.LocationHelper
 import timber.log.Timber
 
 @AndroidEntryPoint
-class AddressFragment : BaseFragment<FragmentSignUpAddressBinding>(
-    R.layout.fragment_sign_up_address
+class AddressFragment : BaseFragment<FragmentAddressBinding>(
+    R.layout.fragment_address
 ) {
     private val viewModel: SignUpViewModel by viewModels({ requireParentFragment() })
 
@@ -26,7 +26,7 @@ class AddressFragment : BaseFragment<FragmentSignUpAddressBinding>(
             Timber.tag(TAG).d("StartActivityForResult: $result")
             if (result.resultCode == Activity.RESULT_OK) {
                 viewModel.roadAddress.value =
-                    result.data?.extras?.getString(AddressActivityHelper.ADDRESS).toString()
+                    result.data?.extras?.getString(KakaoAddressActivityHelper.ADDRESS).toString()
                 viewModel.detailAddress.value = ""
             }
         }
@@ -46,7 +46,7 @@ class AddressFragment : BaseFragment<FragmentSignUpAddressBinding>(
             lifecycleOwner = viewLifecycleOwner
 
             roadAddressTextInputClickListener = View.OnClickListener {
-                getAddressLauncher.launch(AddressActivityHelper.getIntent(requireContext()))
+                getAddressLauncher.launch(KakaoAddressActivityHelper.getIntent(requireContext()))
             }
         }
     }

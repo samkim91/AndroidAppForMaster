@@ -1,11 +1,11 @@
-package kr.co.soogong.master.uihelper.auth.signup
+package kr.co.soogong.master.uihelper.auth
 
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import kr.co.soogong.master.ui.auth.signup.steps.ViewPolicyActivity
+import kr.co.soogong.master.ui.auth.signup.steps.AgreementDetailActivity
 
-object ViewPolicyActivityHelper {
+object AgreementDetailActivityHelper {
     private const val BUNDLE_KEY = "BUNDLE_KEY"
     private const val STRING_KEY = "STRING_KEY"
 
@@ -13,7 +13,7 @@ object ViewPolicyActivityHelper {
     const val PRIVATE_POLICY = "POLICY"
 
     fun getIntent(context: Context, type: String): Intent {
-        return Intent(context, ViewPolicyActivity::class.java).apply {
+        return Intent(context, AgreementDetailActivity::class.java).apply {
             putExtra(BUNDLE_KEY, Bundle().apply {
                 putString(STRING_KEY, type)
             })

@@ -7,7 +7,7 @@
 
         <variable
             name="vm"
-            type="kr.co.soogong.master.ui.major.project.ProjectViewModel" />
+            type="kr.co.soogong.master.ui.common.project.ProjectViewModel" />
 
         <variable
             name="buttonThemeSelectingDone"

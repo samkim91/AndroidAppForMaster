@@ -1,4 +1,4 @@
-package kr.co.soogong.master.ui.major.category
+package kr.co.soogong.master.ui.common.category
 
 import androidx.recyclerview.widget.DiffUtil
 import kr.co.soogong.master.data.model.major.Category

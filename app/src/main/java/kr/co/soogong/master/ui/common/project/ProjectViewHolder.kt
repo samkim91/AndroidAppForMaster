@@ -1,4 +1,4 @@
-package kr.co.soogong.master.ui.major.project
+package kr.co.soogong.master.ui.common.project
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

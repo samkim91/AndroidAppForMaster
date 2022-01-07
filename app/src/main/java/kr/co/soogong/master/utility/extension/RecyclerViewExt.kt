@@ -10,8 +10,8 @@ import androidx.recyclerview.widget.RecyclerView
 import kr.co.soogong.master.data.model.common.EndlessScrollableViewModel
 import kr.co.soogong.master.data.model.major.Category
 import kr.co.soogong.master.data.model.major.Project
-import kr.co.soogong.master.ui.major.category.CategoryAdapter
-import kr.co.soogong.master.ui.major.project.ProjectAdapter
+import kr.co.soogong.master.ui.common.category.CategoryAdapter
+import kr.co.soogong.master.ui.common.project.ProjectAdapter
 import kr.co.soogong.master.utility.SpaceItemDecoration
 
 @BindingAdapter(value = ["setStartSpace", "setTopSpace", "setEndSpace", "setBottomSpace"],

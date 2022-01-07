@@ -5,15 +5,15 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
-import kr.co.soogong.master.databinding.FragmentSignUpOwnerNameBinding
+import kr.co.soogong.master.databinding.FragmentOwnerNameBinding
 import kr.co.soogong.master.ui.auth.signup.SignUpViewModel
 import kr.co.soogong.master.ui.auth.signup.SignUpViewModel.Companion.VALIDATE_OWNER_NAME
 import kr.co.soogong.master.ui.base.BaseFragment
 import timber.log.Timber
 
 @AndroidEntryPoint
-class OwnerNameFragment : BaseFragment<FragmentSignUpOwnerNameBinding>(
-    R.layout.fragment_sign_up_owner_name
+class OwnerNameFragment : BaseFragment<FragmentOwnerNameBinding>(
+    R.layout.fragment_owner_name
 ) {
     private val viewModel: SignUpViewModel by viewModels({ requireParentFragment() })
 

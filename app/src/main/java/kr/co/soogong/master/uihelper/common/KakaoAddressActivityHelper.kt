@@ -1,12 +1,12 @@
-package kr.co.soogong.master.uihelper.auth.signup
+package kr.co.soogong.master.uihelper.common
 
 import android.content.Context
 import android.content.Intent
-import kr.co.soogong.master.ui.auth.signup.AddressActivity
+import kr.co.soogong.master.ui.common.KakaoAddressActivity
 
-object AddressActivityHelper {
+object KakaoAddressActivityHelper {
     fun getIntent(context: Context): Intent {
-        return Intent(context, AddressActivity::class.java).apply {
+        return Intent(context, KakaoAddressActivity::class.java).apply {
             addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         }
     }

@@ -1,4 +1,4 @@
-package kr.co.soogong.master.ui.major.project
+package kr.co.soogong.master.ui.common.project
 
 import android.app.Activity.RESULT_OK
 import android.os.Bundle
@@ -10,8 +10,8 @@ import kr.co.soogong.master.R
 import kr.co.soogong.master.data.common.ButtonTheme
 import kr.co.soogong.master.databinding.FragmentProjectBinding
 import kr.co.soogong.master.ui.base.BaseFragment
-import kr.co.soogong.master.ui.major.project.ProjectViewModel.Companion.GET_PROJECT_FAILED
-import kr.co.soogong.master.uihelper.major.MajorActivityHelper
+import kr.co.soogong.master.ui.common.project.ProjectViewModel.Companion.GET_PROJECT_FAILED
+import kr.co.soogong.master.uihelper.common.MajorActivityHelper
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber

@@ -2,17 +2,17 @@ package kr.co.soogong.master.ui.auth.signup.steps
 
 import android.os.Bundle
 import kr.co.soogong.master.R
-import kr.co.soogong.master.databinding.ActivityViewPolicyBinding
+import kr.co.soogong.master.databinding.ActivityAgreementDetailBinding
 import kr.co.soogong.master.ui.base.BaseActivity
-import kr.co.soogong.master.uihelper.auth.signup.ViewPolicyActivityHelper
-import kr.co.soogong.master.uihelper.auth.signup.ViewPolicyActivityHelper.TERMS_OF_SERVICE
+import kr.co.soogong.master.uihelper.auth.AgreementDetailActivityHelper
+import kr.co.soogong.master.uihelper.auth.AgreementDetailActivityHelper.TERMS_OF_SERVICE
 import timber.log.Timber
 
-class ViewPolicyActivity : BaseActivity<ActivityViewPolicyBinding>(
-    R.layout.activity_view_policy
+class AgreementDetailActivity : BaseActivity<ActivityAgreementDetailBinding>(
+    R.layout.activity_agreement_detail
 ) {
     private val documentType: String by lazy {
-        ViewPolicyActivityHelper.getDocumentType(intent)
+        AgreementDetailActivityHelper.getDocumentType(intent)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,7 +25,7 @@ class ViewPolicyActivity : BaseActivity<ActivityViewPolicyBinding>(
         Timber.tag(TAG).d("initLayout: ")
 
         bind {
-            lifecycleOwner = this@ViewPolicyActivity
+            lifecycleOwner = this@AgreementDetailActivity
 
             abHeader.title =
                 if (documentType == TERMS_OF_SERVICE) getString(R.string.terms_of_service)
@@ -43,6 +43,6 @@ class ViewPolicyActivity : BaseActivity<ActivityViewPolicyBinding>(
     }
 
     companion object {
-        private const val TAG = "TermsOfServiceActivity"
+        private const val TAG = "AgreementDetailActivity"
     }
 }

@@ -1,4 +1,4 @@
-package kr.co.soogong.master.ui.auth.signmain
+package kr.co.soogong.master.ui.auth
 
 import android.os.Bundle
 import android.view.View
@@ -6,7 +6,6 @@ import androidx.fragment.app.activityViewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentSignMainBinding
-import kr.co.soogong.master.ui.auth.AuthContainerViewModel
 import kr.co.soogong.master.ui.base.BaseFragment
 import timber.log.Timber
 
