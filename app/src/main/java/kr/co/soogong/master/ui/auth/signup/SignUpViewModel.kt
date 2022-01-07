@@ -56,7 +56,7 @@ class SignUpViewModel @Inject constructor(
 
     // ServiceAreaFragment
     val serviceAreas: List<Pair<String, Int>> = DropdownItemList.serviceAreas
-    val serviceArea = MutableLiveData<Pair<String, Int>>(serviceAreas.first())
+    val serviceArea = MutableLiveData(Pair("", 0))
 
     // RepairInPersonFragment
     val repairInPerson = MutableLiveData(false)
@@ -74,6 +74,7 @@ class SignUpViewModel @Inject constructor(
             2 -> validation.postValue(VALIDATE_MAJOR)
             3 -> validation.postValue(VALIDATE_ADDRESS)
             4 -> validation.postValue(VALIDATE_SERVICE_AREA)
+            5 -> validation.postValue(VALIDATE_REPAIR_IN_PERSON)
         }
     }
 
@@ -153,5 +154,6 @@ class SignUpViewModel @Inject constructor(
         const val VALIDATE_MAJOR = "VALIDATE_MAJOR"
         const val VALIDATE_ADDRESS = "VALIDATE_ADDRESS"
         const val VALIDATE_SERVICE_AREA = "VALIDATE_SERVICE_AREA"
+        const val VALIDATE_REPAIR_IN_PERSON = "VALIDATE_REPAIR_IN_PERSON"
     }
 }
