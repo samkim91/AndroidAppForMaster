@@ -8,8 +8,8 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.common.CodeTable
-import kr.co.soogong.master.data.common.ShapeTheme
+import kr.co.soogong.master.data.global.CodeTable
+import kr.co.soogong.master.data.global.ShapeTheme
 import kr.co.soogong.master.databinding.ViewLabelOutlinedBinding
 
 class LabelOutlined @JvmOverloads constructor(

@@ -6,7 +6,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.common.ColorTheme
+import kr.co.soogong.master.data.global.ColorTheme
 import kr.co.soogong.master.databinding.FragmentRepairInPersonBinding
 import kr.co.soogong.master.ui.auth.signup.SignUpViewModel
 import kr.co.soogong.master.ui.auth.signup.SignUpViewModel.Companion.VALIDATE_REPAIR_IN_PERSON

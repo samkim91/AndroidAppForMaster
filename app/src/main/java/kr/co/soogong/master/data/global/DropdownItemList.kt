@@ -1,4 +1,4 @@
-package kr.co.soogong.master.data.common
+package kr.co.soogong.master.data.global
 
 object DropdownItemList {
     val warrantyPeriods: List<Pair<String, Int>> =

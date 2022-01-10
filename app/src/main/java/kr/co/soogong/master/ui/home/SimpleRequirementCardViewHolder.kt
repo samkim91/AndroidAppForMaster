@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.common.CodeTable
+import kr.co.soogong.master.data.global.CodeTable
 import kr.co.soogong.master.data.model.requirement.RequirementCard
 import kr.co.soogong.master.databinding.ViewHolderSimpleRequirementItemBinding
 import kr.co.soogong.master.ui.dialog.popup.DefaultDialog

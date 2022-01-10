@@ -1,6 +1,6 @@
 package kr.co.soogong.master.ui.profile
 
-import kr.co.soogong.master.data.common.CodeTable
+import kr.co.soogong.master.data.global.CodeTable
 import kr.co.soogong.master.data.model.profile.BasicInformation
 import kr.co.soogong.master.data.model.profile.RequiredInformation
 import kotlin.reflect.full.declaredMemberProperties

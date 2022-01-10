@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.res.ResourcesCompat
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.common.ColorTheme
+import kr.co.soogong.master.data.global.ColorTheme
 import kr.co.soogong.master.databinding.ViewLabelFilledBinding
 
 class LabelFilled @JvmOverloads constructor(
@@ -51,7 +51,8 @@ class LabelFilled @JvmOverloads constructor(
                             R.color.brand_red,
                             null))
                     }
-                    is ColorTheme.Green -> { }
+                    is ColorTheme.Green -> {
+                    }
                 }
             }
         }

@@ -2,8 +2,8 @@ package kr.co.soogong.master.domain.usecase.profile
 
 import dagger.Reusable
 import io.reactivex.Single
-import kr.co.soogong.master.data.common.CodeTable
 import kr.co.soogong.master.data.dto.profile.PortfolioDto
+import kr.co.soogong.master.data.global.CodeTable
 import javax.inject.Inject
 
 @Reusable

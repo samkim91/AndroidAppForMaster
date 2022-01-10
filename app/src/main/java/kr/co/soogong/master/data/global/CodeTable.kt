@@ -1,4 +1,4 @@
-package kr.co.soogong.master.data.common
+package kr.co.soogong.master.data.global
 
 enum class CodeTable(
     val code: String,
@@ -55,7 +55,16 @@ enum class CodeTable(
 
     // 문의 타입
     COMPARE("Compare", "비교견적", ""),
-    SECRETARY("Secretary", "수공비서", "");
+    SECRETARY("Secretary", "수공비서", ""),
+
+    // 리뷰 스코어 타입
+    RECOMMENDATION("Recommendation", "추천도", ""),
+    KINDNESS("Kindness", "친절도", ""),
+    QUALITY("Quality", "마감수준", ""),
+    AFFORDABILITY("Affordability", "가격만족", ""),
+    PUNCTUALITY("Punctuality", "기일준수", "")
+
+    ;
 
     companion object {
         fun getCodeTableByCode(keyword: String): CodeTable? = values().find {

@@ -1,8 +1,8 @@
 package kr.co.soogong.master.data.model.requirement
 
-import kr.co.soogong.master.data.common.ColorTheme
 import kr.co.soogong.master.data.dto.requirement.RequirementCardDto
 import kr.co.soogong.master.data.dto.requirement.RequirementDto
+import kr.co.soogong.master.data.global.ColorTheme
 import kr.co.soogong.master.data.model.requirement.estimation.EstimationResponseCode
 
 sealed class RequirementStatus {

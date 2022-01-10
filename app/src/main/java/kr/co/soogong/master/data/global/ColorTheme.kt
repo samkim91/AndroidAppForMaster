@@ -1,4 +1,4 @@
-package kr.co.soogong.master.data.common
+package kr.co.soogong.master.data.global
 
 sealed class ColorTheme {
     object Blue : ColorTheme()

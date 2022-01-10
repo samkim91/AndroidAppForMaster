@@ -8,9 +8,9 @@ import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.dto.profile.MasterDto
 import kr.co.soogong.master.data.dto.requirement.CustomerRequest
 import kr.co.soogong.master.data.dto.requirement.repair.RepairDto
-import kr.co.soogong.master.data.model.common.EndlessScrollableViewModel
 import kr.co.soogong.master.data.model.requirement.RequirementCard
 import kr.co.soogong.master.data.model.requirement.RequirementStatus
+import kr.co.soogong.master.ui.common.EndlessScrollableViewModel
 import kr.co.soogong.master.utility.ListLiveData
 import retrofit2.HttpException
 import timber.log.Timber

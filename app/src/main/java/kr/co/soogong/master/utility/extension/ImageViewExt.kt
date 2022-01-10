@@ -31,7 +31,7 @@ fun ImageView.setImageUri(uri: Uri?) {
 @BindingAdapter("setCircleImageByUrl")
 fun ImageView.setCircleImageByUrl(url: String?) {
     Glide.with(this.context)
-        .load(if (url.isNullOrEmpty()) R.drawable.ic_empty_image_circle else url)
+        .load(url)
         .circleCrop()
         .into(this)
 }

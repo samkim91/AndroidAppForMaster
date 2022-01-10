@@ -2,8 +2,8 @@ package kr.co.soogong.master.ui.profile.detail.warranty
 
 import androidx.lifecycle.MutableLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kr.co.soogong.master.data.common.DropdownItemList
 import kr.co.soogong.master.data.dto.profile.MasterDto
+import kr.co.soogong.master.data.global.DropdownItemList
 import kr.co.soogong.master.domain.usecase.profile.GetProfileUseCase
 import kr.co.soogong.master.domain.usecase.profile.SaveMasterUseCase
 import kr.co.soogong.master.ui.profile.detail.EditProfileContainerViewModel

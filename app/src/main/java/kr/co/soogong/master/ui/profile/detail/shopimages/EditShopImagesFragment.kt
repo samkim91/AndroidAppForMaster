@@ -6,9 +6,9 @@ import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import gun0912.tedimagepicker.builder.TedImagePicker
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.common.ButtonTheme
-import kr.co.soogong.master.data.common.CodeTable
 import kr.co.soogong.master.data.dto.common.AttachmentDto
+import kr.co.soogong.master.data.global.ButtonTheme
+import kr.co.soogong.master.data.global.CodeTable
 import kr.co.soogong.master.databinding.FragmentEditShopImagesBinding
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.dialog.popup.DefaultDialog

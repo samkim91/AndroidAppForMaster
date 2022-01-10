@@ -8,9 +8,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import gun0912.tedimagepicker.builder.TedImagePicker
 import kr.co.soogong.master.R
 import kr.co.soogong.master.atomic.molecules.SubheadlineChipGroup
-import kr.co.soogong.master.data.common.CodeTable
-import kr.co.soogong.master.data.common.ColorTheme
 import kr.co.soogong.master.data.dto.common.AttachmentDto
+import kr.co.soogong.master.data.global.CodeTable
+import kr.co.soogong.master.data.global.ColorTheme
 import kr.co.soogong.master.databinding.ActivityWriteEstimationBinding
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.ui.base.BaseViewModel.Companion.SHOW_LOADING

@@ -10,7 +10,7 @@
 
         <import type="android.text.InputType" />
 
-        <import type="kr.co.soogong.master.data.common.ButtonTheme" />
+        <import type="kr.co.soogong.master.data.global.ButtonTheme" />
 
         <variable
             name="vm"
