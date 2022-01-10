@@ -241,7 +241,9 @@ class PhoneNumberFragment : BaseFragment<FragmentPhoneNumberBinding>(
         DefaultDialog.newInstance(DialogData.getExistentUserDialogData())
             .let {
                 it.setButtonsClickListener(
-                    onPositive = {},
+                    onPositive = {      // 초기 화면으로 이동.. todo 바로 로그인화면으로 이동하면 더 좋을 듯 싶다.
+                        activity?.supportFragmentManager?.popBackStack()
+                    },
                     onNegative = {}
                 )
                 it.show(parentFragmentManager, it.tag)

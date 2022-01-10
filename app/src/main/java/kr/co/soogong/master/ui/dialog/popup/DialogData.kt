@@ -131,8 +131,8 @@ data class DialogData(
 
         fun getExistentUserDialogData() =
             DialogData(
-                "마스터님!",
-                "이미 수공의 마스터이시네요! 본인 인증을 통해 로그인해주세요.",
+                "이미 수공의 마스터이시네요!",
+                "본인 인증을 통해 로그인해주세요.",
                 "",
                 "확인",
                 "취소",
