@@ -9,7 +9,7 @@ class ReviewAdapter(
     private val context: Context,
 ) : ListAdapter<Review, ReviewViewHolder>(ReviewDiffUtil()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        ReviewViewHolderHelper.create(parent)
+        ReviewViewHolder.create(parent)
 
     override fun onBindViewHolder(holder: ReviewViewHolder, position: Int) =
         holder.binding(context, currentList[position])

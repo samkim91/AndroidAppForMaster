@@ -14,9 +14,12 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <include
-            android:id="@+id/action_bar"
-            layout="@layout/action_bar" />
+        <kr.co.soogong.master.atomic.molecules.ActionBar
+            android:id="@+id/ab_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:backButtonVisibility="@{true}"
+            app:title="@{@string/account_page_name}" />
 
         <kr.co.soogong.master.atomic.molecules.SettingsButton
             android:id="@+id/button_withdrawal"

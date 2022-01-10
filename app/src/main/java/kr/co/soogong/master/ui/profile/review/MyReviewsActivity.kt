@@ -46,11 +46,6 @@ class MyReviewsActivity : BaseActivity<ActivityMyReviewsBinding>(
         })
     }
 
-    override fun onStart() {
-        super.onStart()
-        viewModel.requestMyReviews()
-    }
-
     companion object {
         private const val TAG = "MyReviewsActivity"
     }

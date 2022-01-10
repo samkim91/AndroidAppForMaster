@@ -29,192 +29,7 @@
         <item name="android:background">@drawable/rounded_dialog</item>
     </style>
 
-    <style name="CustomActivityAnimation" parent="@android:style/Animation.Activity">
-        <item name="android:activityOpenEnterAnimation">@anim/slide_in_from_right</item>
-        <item name="android:activityOpenExitAnimation">@anim/slide_out_to_left</item>
-        <item name="android:activityCloseEnterAnimation">@anim/slide_in_from_left</item>
-        <item name="android:activityCloseExitAnimation">@anim/slide_out_to_right</item>
-    </style>
-
-    <!-- ActionBar theme. -->
-    <style name="AppActionBar" parent="android:Widget.DeviceDefault.ActionBar">
-        <item name="android:background">@color/c_FAFAFA</item>
-        <item name="android:titleTextStyle">@style/AppActionBar.Title</item>
-    </style>
-
-    <style name="AppActionBar.Title">
-        <item name="android:textColor">@color/c_252525</item>
-        <item name="android:textSize">@dimen/actionbar_title_collapsed_text_size</item>
-        <item name="android:lineSpacingExtra">@dimen/actionbar_title_collapsed_extra_size</item>
-    </style>
-
-    <style name="AppActionBar.SubTitle">
-        <item name="android:textColor">@color/c_636363</item>
-        <item name="android:textSize">@dimen/actionbar_sub_title_collapsed_text_size</item>
-        <item name="android:lineSpacingExtra">@dimen/actionbar_title_collapsed_extra_size</item>
-    </style>
-
-    <style name="ListSubHeader" parent="TextAppearance.AppCompat.Subhead">
-        <item name="android:textSize">@dimen/list_header_text_size</item>
-        <item name="android:textColor">@color/c_636363</item>
-        <item name="android:textStyle">bold</item>
-    </style>
-
-    <style name="ListItemText" parent="TextAppearance.AppCompat.Medium">
-        <item name="android:textSize">@dimen/list_item_text_size</item>
-        <item name="android:textColor">@color/c_252525</item>
-    </style>
-
-    <style name="ListItemDescriptionText" parent="TextAppearance.AppCompat.Small">
-        <item name="android:textSize">@dimen/list_item_description_text_size</item>
-        <item name="android:textColor">@color/c_909090</item>
-    </style>
-
-    <style name="text_style_10sp">
-        <item name="android:textSize">@dimen/text_size_10sp</item>
-    </style>
-
-    <style name="text_style_10sp.medium" parent="text_style_10sp">
-        <item name="android:fontFamily">@font/medium</item>
-    </style>
-
-    <style name="text_style_10sp.regular" parent="text_style_10sp">
-        <item name="android:fontFamily">@font/regular</item>
-    </style>
-
-    <style name="text_style_10sp.bold" parent="text_style_10sp">
-        <item name="android:fontFamily">@font/bold</item>
-    </style>
-
-    <style name="text_style_12sp">
-        <item name="android:textSize">@dimen/text_size_12sp</item>
-    </style>
-
-    <style name="text_style_12sp.medium" parent="text_style_12sp">
-        <item name="android:fontFamily">@font/medium</item>
-    </style>
-
-    <style name="text_style_12sp.regular" parent="text_style_12sp">
-        <item name="android:fontFamily">@font/regular</item>
-    </style>
-
-    <style name="text_style_12sp.bold" parent="text_style_12sp">
-        <item name="android:fontFamily">@font/bold</item>
-    </style>
-
-    <style name="text_style_13sp">
-        <item name="android:textSize">@dimen/text_size_13sp</item>
-    </style>
-
-    <style name="text_style_13sp.medium" parent="text_style_13sp">
-        <item name="android:fontFamily">@font/medium</item>
-    </style>
-
-    <style name="text_style_13sp.regular" parent="text_style_13sp">
-        <item name="android:fontFamily">@font/regular</item>
-    </style>
-
-    <style name="text_style_13sp.bold" parent="text_style_13sp">
-        <item name="android:fontFamily">@font/bold</item>
-    </style>
-
-    <style name="text_style_14sp">
-        <item name="android:textSize">@dimen/text_size_14sp</item>
-    </style>
-
-    <style name="text_style_14sp.medium" parent="text_style_14sp">
-        <item name="android:fontFamily">@font/medium</item>
-    </style>
-
-    <style name="text_style_14sp.regular" parent="text_style_14sp">
-        <item name="android:fontFamily">@font/regular</item>
-    </style>
-
-    <style name="text_style_14sp.bold" parent="text_style_14sp">
-        <item name="android:fontFamily">@font/bold</item>
-    </style>
-
-    <style name="text_style_15sp">
-        <item name="android:textSize">@dimen/text_size_15sp</item>
-    </style>
-
-    <style name="text_style_15sp.medium" parent="text_style_15sp">
-        <item name="android:fontFamily">@font/medium</item>
-    </style>
-
-    <style name="text_style_15sp.regular" parent="text_style_15sp">
-        <item name="android:fontFamily">@font/regular</item>
-    </style>
-
-    <style name="text_style_15sp.bold" parent="text_style_15sp">
-        <item name="android:fontFamily">@font/bold</item>
-    </style>
-
-    <style name="text_style_16sp">
-        <item name="android:textSize">@dimen/text_size_16sp</item>
-    </style>
-
-    <style name="text_style_16sp.medium" parent="text_style_16sp">
-        <item name="android:fontFamily">@font/medium</item>
-    </style>
-
-    <style name="text_style_16sp.regular" parent="text_style_16sp">
-        <item name="android:fontFamily">@font/regular</item>
-    </style>
-
-    <style name="text_style_16sp.bold" parent="text_style_16sp">
-        <item name="android:fontFamily">@font/bold</item>
-    </style>
-
-    <style name="text_style_18sp">
-        <item name="android:textSize">@dimen/text_size_18sp</item>
-    </style>
-
-    <style name="text_style_18sp.medium" parent="text_style_18sp">
-        <item name="android:fontFamily">@font/medium</item>
-    </style>
-
-    <style name="text_style_18sp.regular" parent="text_style_18sp">
-        <item name="android:fontFamily">@font/regular</item>
-    </style>
-
-    <style name="text_style_18sp.bold" parent="text_style_18sp">
-        <item name="android:fontFamily">@font/bold</item>
-    </style>
-
-    <style name="text_style_20sp">
-        <item name="android:textSize">@dimen/text_size_20sp</item>
-    </style>
-
-    <style name="text_style_20sp.medium" parent="text_style_20sp">
-        <item name="android:fontFamily">@font/medium</item>
-    </style>
-
-    <style name="text_style_20sp.regular" parent="text_style_20sp">
-        <item name="android:fontFamily">@font/regular</item>
-    </style>
-
-    <style name="text_style_20sp.bold" parent="text_style_20sp">
-        <item name="android:fontFamily">@font/bold</item>
-    </style>
-
-    <style name="text_style_22sp">
-        <item name="android:textSize">@dimen/text_size_22sp</item>
-    </style>
-
-    <style name="text_style_22sp.medium" parent="text_style_22sp">
-        <item name="android:fontFamily">@font/medium</item>
-    </style>
-
-    <style name="text_style_22sp.regular" parent="text_style_22sp">
-        <item name="android:fontFamily">@font/regular</item>
-    </style>
-
-    <style name="text_style_22sp.bold" parent="text_style_22sp">
-        <item name="android:fontFamily">@font/bold</item>
-    </style>
-
-    <!-- New fonts -->
+    <!-- Fonts -->
     <style name="caption_2">
         <item name="android:textSize">@dimen/text_size_11sp</item>
     </style>
@@ -279,20 +94,12 @@
         <item name="android:textSize">@dimen/text_size_17sp</item>
     </style>
 
-    <style name="body.regular" parent="body">
-        <item name="android:fontFamily">@font/regular</item>
-    </style>
-
     <style name="body.bold" parent="body">
         <item name="android:fontFamily">@font/medium</item>
     </style>
 
     <style name="headline">
         <item name="android:textSize">@dimen/text_size_17sp</item>
-    </style>
-
-    <style name="headline.regular" parent="headline">
-        <item name="android:fontFamily">@font/medium</item>
     </style>
 
     <style name="headline.bold" parent="headline">
@@ -310,48 +117,6 @@
     <style name="title_3.bold" parent="title_3">
         <item name="android:fontFamily">@font/bold</item>
     </style>
-
-    <style name="title_2">
-        <item name="android:textSize">@dimen/text_size_22sp</item>
-    </style>
-
-    <style name="title_2.regular" parent="title_2">
-        <item name="android:fontFamily">@font/regular</item>
-    </style>
-
-    <style name="title_2.bold" parent="title_2">
-        <item name="android:fontFamily">@font/bold</item>
-    </style>
-
-    <style name="title_1">
-        <item name="android:textSize">@dimen/text_size_28sp</item>
-    </style>
-
-    <style name="title_1.regular" parent="title_1">
-        <item name="android:fontFamily">@font/regular</item>
-    </style>
-
-    <style name="title_1.bold" parent="title_1">
-        <item name="android:fontFamily">@font/bold</item>
-    </style>
-
-    <style name="large_title">
-        <item name="android:textSize">@dimen/text_size_34sp</item>
-    </style>
-
-    <style name="large_title.regular" parent="large_title">
-        <item name="android:fontFamily">@font/regular</item>
-    </style>
-
-    <style name="large_title.bold" parent="large_title">
-        <item name="android:fontFamily">@font/bold</item>
-    </style>
-
-    <!--    <style name="CustomTabText" parent="Widget.MaterialComponents.TabLayout">-->
-    <!--        <item name="android:textSize">@dimen/text_title_size</item>-->
-    <!--        <item name="android:fontFamily">@font/medium</item>-->
-    <!--        <item name="android:textColor">@color/text_basic_color</item>-->
-    <!--    </style>-->
 
     <style name="roundCorner30">
         <item name="cornerFamily">rounded</item>
@@ -423,39 +188,6 @@
     </style>
 
     <!-- 버튼 small -->
-    <style name="button.small" parent="button">
-        <item name="android:textAppearance">@style/caption_1.bold</item>
-        <item name="android:layout_height">@dimen/gap_36</item>
-        <item name="android:layout_width">@dimen/gap_0</item>
-    </style>
-
-    <style name="button.small.primary" parent="button.small">
-        <item name="android:background">@drawable/bg_solid_green_selector_radius8</item>
-        <item name="android:textColor">@color/white</item>
-    </style>
-
-    <style name="button.small.secondary" parent="button.small">
-        <item name="android:background">@drawable/bg_solid_light_grey1_selector_radius8</item>
-        <item name="android:textColor">@color/selector_dark_grey1_alpha50</item>
-    </style>
-
-    <style name="button.small.tertiary" parent="button.small">
-        <item name="android:background">@drawable/bg_solid_red_selector_radius8</item>
-        <item name="android:textColor">@color/white</item>
-    </style>
-
-    <style name="button.small.outlined_primary" parent="button.small">
-        <item name="android:background">@drawable/bg_solid_white_stroke_green_selector_radius8
-        </item>
-        <item name="android:textColor">@color/selector_green_alpha50</item>
-    </style>
-
-    <style name="button.small.outlined_secondary" parent="button.small">
-        <item name="android:background">
-            @drawable/bg_solid_white_stroke_light_grey2_selector_radius8
-        </item>
-        <item name="android:textColor">@color/selector_dark_grey1_alpha50</item>
-    </style>
 
     <!-- 버튼 medium -->
     <style name="button.medium" parent="button">
@@ -472,11 +204,6 @@
     <style name="button.medium.secondary" parent="button.medium">
         <item name="android:background">@drawable/bg_solid_light_grey1_selector_radius8</item>
         <item name="android:textColor">@color/selector_dark_grey1_alpha50</item>
-    </style>
-
-    <style name="button.medium.tertiary" parent="button.medium">
-        <item name="android:background">@drawable/bg_solid_red_selector_radius8</item>
-        <item name="android:textColor">@color/white</item>
     </style>
 
     <style name="button.medium.outlined_primary" parent="button.medium">
@@ -504,60 +231,14 @@
         <item name="android:textColor">@color/white</item>
     </style>
 
-    <style name="button.big.secondary" parent="button.big">
-        <item name="android:background">@drawable/bg_solid_light_grey1_selector_radius8</item>
-        <item name="android:textColor">@color/selector_dark_grey1_alpha50</item>
-    </style>
-
-    <style name="button.big.tertiary" parent="button.big">
-        <item name="android:background">@drawable/bg_solid_red_selector_radius8</item>
-        <item name="android:textColor">@color/white</item>
-    </style>
-
     <style name="button.big.outlined_primary" parent="button.big">
         <item name="android:background">@drawable/bg_solid_white_stroke_green_selector_radius8
         </item>
         <item name="android:textColor">@color/selector_green_alpha50</item>
     </style>
 
-    <style name="button.big.outlined_secondary" parent="button.big">
-        <item name="android:background">
-            @drawable/bg_solid_white_stroke_light_grey2_selector_radius8
-        </item>
-        <item name="android:textColor">@color/selector_dark_grey1_alpha50</item>
-    </style>
-
     <!-- 버튼 filled -->
-    <style name="button.filled" parent="button">
-        <item name="android:textAppearance">@style/call_out.bold</item>
-        <item name="android:layout_height">@dimen/gap_56</item>
-        <item name="android:layout_width">@dimen/gap_0</item>
-    </style>
 
-    <style name="button.filled.primary" parent="button.filled">
-        <item name="android:background">@drawable/bg_solid_green_selector</item>
-        <item name="android:textColor">@color/white</item>
-    </style>
-
-    <style name="button.filled.secondary" parent="button.filled">
-        <item name="android:background">@drawable/bg_solid_light_grey1_selector</item>
-        <item name="android:textColor">@color/selector_dark_grey1_alpha50</item>
-    </style>
-
-    <style name="button.filled.tertiary" parent="button.filled">
-        <item name="android:background">@drawable/bg_solid_red_selector</item>
-        <item name="android:textColor">@color/white</item>
-    </style>
-
-    <style name="button.filled.outlined_primary" parent="button.filled">
-        <item name="android:background">@drawable/bg_solid_white_stroke_green_selector</item>
-        <item name="android:textColor">@color/selector_green_alpha50</item>
-    </style>
-
-    <style name="button.filled.outlined_secondary" parent="button.filled">
-        <item name="android:background">@drawable/bg_solid_white_stroke_light_grey2_selector</item>
-        <item name="android:textColor">@color/selector_dark_grey1_alpha50</item>
-    </style>
     <!-- end section 버튼 스타일 -->
 
     <style name="check_box_rectangle">
@@ -613,10 +294,6 @@
         <item name="closeIconTint">@color/light_grey_2</item>
         <item name="chipCornerRadius">@dimen/gap_20</item>
         <item name="chipMinHeight">@dimen/gap_34</item>
-    </style>
-
-    <style name="checkboxDefaultStyle" parent="Widget.AppCompat.CompoundButton.CheckBox">
-        <item name="buttonTint">@color/check_box_selector</item>
     </style>
 
     <style name="CalenderViewCustom">
