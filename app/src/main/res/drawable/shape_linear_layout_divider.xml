@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<inset xmlns:android="http://schemas.android.com/apk/res/android"
-    android:insetTop="@dimen/gap_8"
-    android:insetBottom="@dimen/gap_8">
-    <shape>
-        <size android:height="@dimen/gap_1" />
-        <solid android:color="@color/c_D4FADB" />
-    </shape>
-</inset>

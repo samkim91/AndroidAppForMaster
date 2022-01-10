@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="icon"
             type="Integer" />
@@ -23,19 +24,19 @@
             android:id="@+id/image_view_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:imageResource="@{icon}"
             app:layout_constraintBottom_toTopOf="@id/text_view_label"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:imageResource="@{icon}"
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@drawable/ic_requirements" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/text_view_label"
-            style="@style/text_style_10sp.medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{label}"
+            android:textAppearance="@style/caption_2.regular"
             android:textColor="@color/selector_main_activity_tab_label_color"
             app:layout_constraintBottom_toBottomOf="@id/image_view_icon"
             app:layout_constraintEnd_toEndOf="@id/image_view_icon"

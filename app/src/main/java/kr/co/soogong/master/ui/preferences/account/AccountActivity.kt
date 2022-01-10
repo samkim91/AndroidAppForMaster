@@ -30,12 +30,7 @@ class AccountActivity : BaseActivity<ActivityAccountBinding>(
             vm = viewModel
             lifecycleOwner = this@AccountActivity
 
-            with(actionBar) {
-                title.text = getString(R.string.account_page_name)
-                backButton.setOnClickListener {
-                    super.onBackPressed()
-                }
-            }
+            abHeader.setButtonBackClickListener { onBackPressed() }
         }
     }
 
