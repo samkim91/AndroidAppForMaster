@@ -5,7 +5,6 @@ import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ActivityAuthContainerBinding
-import kr.co.soogong.master.ui.auth.AuthContainerViewModel.Companion.SIGN_IN
 import kr.co.soogong.master.ui.auth.AuthContainerViewModel.Companion.SIGN_UP
 import kr.co.soogong.master.ui.auth.signin.SignInFragment
 import kr.co.soogong.master.ui.auth.signup.SignUpFragment

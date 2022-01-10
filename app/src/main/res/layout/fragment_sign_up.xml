@@ -65,6 +65,7 @@
             android:text="@string/next"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/b_previous" />
+            app:layout_constraintStart_toEndOf="@id/b_previous"
+            app:layout_goneMarginStart="@dimen/gap_16" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
