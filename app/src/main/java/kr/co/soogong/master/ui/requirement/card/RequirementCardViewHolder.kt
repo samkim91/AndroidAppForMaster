@@ -8,7 +8,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.chip.Chip
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.common.CodeTable
+import kr.co.soogong.master.data.global.CodeTable
 import kr.co.soogong.master.data.model.requirement.RequirementCard
 import kr.co.soogong.master.data.model.requirement.RequirementStatus
 import kr.co.soogong.master.databinding.ViewHolderRequirementCardBinding

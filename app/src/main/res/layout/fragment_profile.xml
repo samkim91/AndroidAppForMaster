@@ -8,19 +8,19 @@
 
         <variable
             name="buttonThemeRequestReview"
-            type="kr.co.soogong.master.data.common.ButtonTheme" />
+            type="kr.co.soogong.master.data.global.ButtonTheme" />
 
         <variable
             name="colorThemeProfileGuideline"
-            type="kr.co.soogong.master.data.common.ColorTheme" />
+            type="kr.co.soogong.master.data.global.ColorTheme" />
 
         <variable
             name="colorThemeRequiredInformationProgress"
-            type="kr.co.soogong.master.data.common.ColorTheme" />
+            type="kr.co.soogong.master.data.global.ColorTheme" />
 
         <variable
             name="colorThemeOptionalInformationProgress"
-            type="kr.co.soogong.master.data.common.ColorTheme" />
+            type="kr.co.soogong.master.data.global.ColorTheme" />
 
         <variable
             name="vm"
@@ -57,6 +57,7 @@
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="@dimen/gap_0"
                     android:layout_marginTop="@dimen/gap_20"
+                    android:background="@drawable/ic_nutty_circle"
                     app:layout_constraintDimensionRatio="H, 1:1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -114,7 +115,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_representative_name"
-                    app:recommendCount="@{vm.profile.myReview.averageRecommendation}"
+                    app:recommendation="@{vm.profile.myReview.averageRecommendation}"
                     app:reviewCount="@{vm.profile.myReview.reviewCount}" />
                 <!-- todo : 완료수 추가 필요 -->
 

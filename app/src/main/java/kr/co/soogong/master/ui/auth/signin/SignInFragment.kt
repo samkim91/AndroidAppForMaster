@@ -11,7 +11,7 @@ import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.common.ButtonTheme
+import kr.co.soogong.master.data.global.ButtonTheme
 import kr.co.soogong.master.databinding.FragmentSignInBinding
 import kr.co.soogong.master.ui.LIMIT_TIME_TO_AUTH
 import kr.co.soogong.master.ui.auth.AuthContainerActivity

@@ -7,7 +7,7 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.common.ShapeTheme
+import kr.co.soogong.master.data.global.ShapeTheme
 import kr.co.soogong.master.databinding.FragmentPreferencesBinding
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.dialog.popup.DefaultDialog

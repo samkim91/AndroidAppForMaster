@@ -10,7 +10,7 @@ import kr.co.soogong.master.atomic.atoms.IButton
 import kr.co.soogong.master.atomic.atoms.ITextInput
 import kr.co.soogong.master.atomic.atoms.TextInputButtonMedium
 import kr.co.soogong.master.atomic.atoms.TextInputTimer
-import kr.co.soogong.master.data.common.ButtonTheme
+import kr.co.soogong.master.data.global.ButtonTheme
 import kr.co.soogong.master.databinding.ViewSubheadlineTextInputButtonMediumTextInputTimerBinding
 
 class SubheadlineTextInputButtonMediumTextInputTimer @JvmOverloads constructor(

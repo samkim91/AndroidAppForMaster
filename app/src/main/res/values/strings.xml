@@ -493,17 +493,20 @@
     <string name="recommend_rate_label">추천도</string>
     <string name="review_count_label">리뷰수</string>
     <string name="completion_count_label">완료수</string>
-    <string name="my_reviews_action_bar_label">나의 리뷰 보기</string>
+    <string name="my_reviews">나의 리뷰 보기</string>
+    <string name="my_reviews_introduction">고객님들의 리뷰</string>
+    <string name="average_master_recommendation">%.1f/5</string>
+    <string name="review_count">%d개의 리뷰</string>
     <string name="empty_reviews_text">아직 남겨진 리뷰가 없습니다.</string>
     <string name="my_review_label">💬 리뷰</string>
 
 
     <!-- Review -->
-    <string name="master_recommendation_label">마스터 추천도</string>
-    <string name="master_kindness_label">친절도</string>
-    <string name="master_quality_label">퀄리티</string>
-    <string name="price_affordability_label">가격만족</string>
-    <string name="punctuality_label">기일준수</string>
+    <string name="user_nickname">익명</string>
+    <string name="kindness">친절도</string>
+    <string name="quality">퀄리티</string>
+    <string name="affordability">가격만족</string>
+    <string name="punctuality">기일준수</string>
 
     <!-- toast text -->
     <string name="certification_code_requested">인증번호를 요청 했습니다.</string>

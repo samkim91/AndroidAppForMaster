@@ -8,7 +8,7 @@ import com.google.android.material.chip.Chip
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.atomic.molecules.SubheadlineChipGroup
-import kr.co.soogong.master.data.common.CodeTable
+import kr.co.soogong.master.data.global.CodeTable
 import kr.co.soogong.master.databinding.FragmentEditMasterConfigBinding
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.profile.detail.EditProfileContainerActivity

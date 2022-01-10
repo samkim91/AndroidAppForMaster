@@ -11,7 +11,7 @@
 
         <variable
             name="buttonThemeSelectingDone"
-            type="kr.co.soogong.master.data.common.ButtonTheme" />
+            type="kr.co.soogong.master.data.global.ButtonTheme" />
 
         <variable
             name="selectingDoneClickListener"
@@ -31,11 +31,11 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:projects="@{vm.projects}"
             app:setBottomSpace="@{10}"
             app:setEndSpace="@{15}"
             app:setStartSpace="@{15}"
             app:setTopSpace="@{10}"
-            app:projects="@{vm.projects}"
             tools:listitem="@layout/view_holder_project" />
 
         <kr.co.soogong.master.atomic.atoms.ButtonBig

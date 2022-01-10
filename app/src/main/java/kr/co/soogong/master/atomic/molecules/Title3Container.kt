@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.constraintlayout.widget.ConstraintLayout
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.common.CodeTable
+import kr.co.soogong.master.data.global.CodeTable
 import kr.co.soogong.master.data.model.requirement.Requirement
 import kr.co.soogong.master.databinding.ViewIconLabelContainerBinding
 import kr.co.soogong.master.utility.extension.dp

@@ -576,8 +576,6 @@
         <item name="android:textColor">@color/dark_grey_2</item>
     </style>
 
-
-
     <style name="ChipChoiceGreyRectangular" parent="Widget.MaterialComponents.Chip.Choice">
         <item name="chipBackgroundColor">@color/background</item>
         <item name="chipCornerRadius">@dimen/gap_4</item>

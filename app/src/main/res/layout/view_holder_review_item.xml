@@ -9,155 +9,189 @@
         <variable
             name="data"
             type="kr.co.soogong.master.data.model.profile.Review" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/customer_review_layout"
+        android:id="@+id/review_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/line">
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_user_image"
+            android:layout_width="@dimen/gap_40"
+            android:layout_height="@dimen/gap_40"
+            android:background="@drawable/ic_nutty_circle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:setCircleImageByUrl="@{data.customerImage.url}" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/master_recommendation_rating_text"
-            style="@style/text_style_12sp.medium"
+            android:id="@+id/tv_user_nickname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/master_recommendation_label"
-            android:textColor="@color/text_basic_color"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_marginStart="@dimen/gap_10"
+            android:text="@{data.customerName != null ? data.customerName : @string/user_nickname}"
+            android:textAppearance="@style/subheadline.bold"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toTopOf="@id/rb_recommendation"
+            app:layout_constraintStart_toEndOf="@id/iv_user_image"
+            app:layout_constraintTop_toTopOf="@id/iv_user_image"
+            tools:text="닉네임" />
 
         <androidx.appcompat.widget.AppCompatRatingBar
-            android:id="@+id/master_recommendation_rating_bar"
+            android:id="@+id/rb_recommendation"
             style="@style/Widget.AppCompat.RatingBar.Small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/gap_6"
+            android:layout_marginStart="@dimen/gap_10"
             android:numStars="5"
-            android:progressTint="@color/c_22D47B"
-            android:rating="@{(float) data.recommendation}"
-            app:layout_constraintStart_toEndOf="@id/master_recommendation_rating_text"
-            app:layout_constraintTop_toTopOf="@id/master_recommendation_rating_text"
+            android:progressTint="@color/brand_green"
+            android:rating="@{data.recommendation.score}"
+            app:layout_constraintBottom_toBottomOf="@id/iv_user_image"
+            app:layout_constraintStart_toEndOf="@id/iv_user_image"
+            app:layout_constraintTop_toBottomOf="@id/tv_user_nickname"
             tools:rating="4" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/master_rating_kindness_text"
-            style="@style/text_style_12sp.medium"
+            android:id="@+id/tv_created_at"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/gap_10"
+            android:textAppearance="@style/caption_2.regular"
+            android:textColor="@color/grey_3"
+            app:dateWithoutDay="@{data.createdAt}"
+            app:layout_constraintBottom_toBottomOf="@id/rb_recommendation"
+            app:layout_constraintStart_toEndOf="@id/rb_recommendation"
+            app:layout_constraintTop_toTopOf="@id/rb_recommendation"
+            tools:text="2020. 07. 10" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier_scores"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:barrierMargin="@dimen/gap_20"
+            app:constraint_referenced_ids="iv_user_image, rb_recommendation, tv_created_at" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_kindness"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/kindness"
+            android:textAppearance="@style/caption_1.bold"
+            android:textColor="@color/dark_grey_1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/barrier_scores" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_kindness_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/gap_4"
+            android:text="@{String.valueOf(data.kindness.score)}"
+            android:textAppearance="@style/caption_1.bold"
+            android:textColor="@color/brand_green"
+            app:layout_constraintStart_toEndOf="@id/tv_kindness"
+            app:layout_constraintTop_toBottomOf="@id/barrier_scores"
+            tools:text="3" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_quality"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/gap_8"
+            android:text="@string/quality"
+            android:textAppearance="@style/caption_1.bold"
+            android:textColor="@color/dark_grey_1"
+            app:layout_constraintStart_toEndOf="@id/tv_kindness_score"
+            app:layout_constraintTop_toBottomOf="@id/barrier_scores" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_quality_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/gap_4"
+            android:text="@{String.valueOf(data.quality.score)}"
+            android:textAppearance="@style/caption_1.bold"
+            android:textColor="@color/brand_green"
+            app:layout_constraintStart_toEndOf="@id/tv_quality"
+            app:layout_constraintTop_toBottomOf="@id/barrier_scores"
+            tools:text="5" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_affordability"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/gap_8"
+            android:text="@string/affordability"
+            android:textAppearance="@style/caption_1.bold"
+            android:textColor="@color/dark_grey_1"
+            app:layout_constraintStart_toEndOf="@id/tv_quality_score"
+            app:layout_constraintTop_toBottomOf="@id/barrier_scores" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_affordability_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/gap_4"
+            android:text="@{String.valueOf(data.affordability.score)}"
+            android:textAppearance="@style/caption_1.bold"
+            android:textColor="@color/brand_green"
+            app:layout_constraintStart_toEndOf="@id/tv_affordability"
+            app:layout_constraintTop_toBottomOf="@id/barrier_scores"
+            tools:text="3" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_punctuality"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/gap_8"
+            android:text="@string/punctuality"
+            android:textAppearance="@style/caption_1.bold"
+            android:textColor="@color/dark_grey_1"
+            app:layout_constraintStart_toEndOf="@id/tv_affordability_score"
+            app:layout_constraintTop_toBottomOf="@id/barrier_scores" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_punctuality_score"
+            android:layout_width="6dp"
+            android:layout_height="15dp"
+            android:layout_marginStart="@dimen/gap_4"
+            android:text="@{String.valueOf(data.punctuality.score)}"
+            android:textAppearance="@style/caption_1.bold"
+            android:textColor="@color/brand_green"
+            app:layout_constraintStart_toEndOf="@id/tv_punctuality"
+            app:layout_constraintTop_toBottomOf="@id/barrier_scores"
+            tools:text="5" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_project_name"
+            android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/gap_8"
-            android:layout_marginEnd="@dimen/gap_20"
-            android:text="@string/master_kindness_label"
-            android:textColor="@color/text_basic_color"
+            android:breakStrategy="simple"
+            android:text="@{data.projectName}"
+            android:textAppearance="@style/footnote.regular"
+            android:textColor="@color/dark_grey_1"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/master_recommendation_rating_text" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/master_rating_kindness_score"
-            style="@style/text_style_12sp.medium"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/gap_2"
-            android:text="@{String.valueOf(data.kindness)}"
-            android:textColor="@color/c_1FC472"
-            app:layout_constraintStart_toEndOf="@id/master_rating_kindness_text"
-            app:layout_constraintTop_toTopOf="@id/master_rating_kindness_text"
-            tools:text="4" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/master_rating_quality_text"
-            style="@style/text_style_12sp.medium"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/gap_10"
-            android:text="@string/master_quality_label"
-            android:textColor="@color/text_basic_color"
-            app:layout_constraintStart_toEndOf="@id/master_rating_kindness_score"
-            app:layout_constraintTop_toTopOf="@id/master_rating_kindness_text" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/master_rating_quality_score"
-            style="@style/text_style_12sp.medium"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/gap_2"
-            android:text="@{String.valueOf(data.quality)}"
-            android:textColor="@color/c_1FC472"
-            app:layout_constraintStart_toEndOf="@id/master_rating_quality_text"
-            app:layout_constraintTop_toTopOf="@id/master_rating_kindness_text"
-            tools:text="4" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/master_rating_affordability_text"
-            style="@style/text_style_12sp.medium"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/gap_10"
-            android:text="@string/price_affordability_label"
-            android:textColor="@color/text_basic_color"
-            app:layout_constraintStart_toEndOf="@id/master_rating_quality_score"
-            app:layout_constraintTop_toTopOf="@id/master_rating_kindness_text" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/master_rating_affordability_score"
-            style="@style/text_style_12sp.medium"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/gap_2"
-            android:text="@{String.valueOf(data.affordability)}"
-            android:textColor="@color/c_1FC472"
-            app:layout_constraintStart_toEndOf="@id/master_rating_affordability_text"
-            app:layout_constraintTop_toTopOf="@id/master_rating_kindness_text"
-            tools:text="4" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/master_rating_punctuality_text"
-            style="@style/text_style_12sp.medium"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/gap_10"
-            android:text="@string/punctuality_label"
-            android:textColor="@color/text_basic_color"
-            app:layout_constraintStart_toEndOf="@id/master_rating_affordability_score"
-            app:layout_constraintTop_toTopOf="@id/master_rating_kindness_text" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/master_rating_punctuality_score"
-            style="@style/text_style_12sp.medium"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/gap_2"
-            android:text="@{String.valueOf(data.punctuality)}"
-            android:textColor="@color/c_1FC472"
-            app:layout_constraintStart_toEndOf="@id/master_rating_punctuality_text"
-            app:layout_constraintTop_toTopOf="@id/master_rating_kindness_text"
-            tools:text="4" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/customer_review_type"
-            style="@style/text_style_12sp.regular"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/gap_10"
-            android:text="@{data.projectType}"
-            android:textColor="@color/text_primary_color"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/master_rating_kindness_text"
+            app:layout_constraintTop_toBottomOf="@id/tv_kindness"
             tools:text="욕실 위생도기 및 수전 설치/교체 시공" />
 
         <kr.co.prnd.readmore.ReadMoreTextView
-            android:id="@+id/customer_review_content"
-            style="@style/text_style_14sp.regular"
-            android:layout_width="wrap_content"
+            android:id="@+id/tv_review_content"
+            android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/gap_12"
+            android:layout_marginTop="@dimen/gap_16"
             android:text="@{data.reviewContent}"
-            android:textColor="@color/text_basic_color"
+            android:textAppearance="@style/subheadline.regular"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/customer_review_type"
+            app:layout_constraintTop_toBottomOf="@id/tv_project_name"
             app:readMoreColor="@color/c_1FC472"
-            app:readMoreMaxLine="5"
+            app:readMoreMaxLine="3"
             app:readMoreText="...더보기"
             tools:text="너무 꼼꼼히 잘 해주셨어요. 다음에 또 부탁드리고 싶네요! 감사합니다." />
 
@@ -165,26 +199,14 @@
             android:id="@+id/review_photo_list"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/gap_12"
+            android:layout_marginTop="@dimen/gap_8"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/customer_review_content"
+            app:layout_constraintTop_toBottomOf="@id/tv_review_content"
             app:spanCount="4"
             bind:photo_list="@{data.imageList}"
             bind:visible="@{data.imageList}"
             tools:listitem="@layout/view_holder_image" />
-
-        <!--        <androidx.appcompat.widget.AppCompatTextView-->
-        <!--            android:id="@+id/customer_review_date"-->
-        <!--            style="@style/text_style_12sp.regular"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_marginTop="@dimen/gap_12"-->
-        <!--            app:dateWithoutDay="@{data.createdAt}"-->
-        <!--            android:textColor="@color/text_primary_color"-->
-        <!--            app:layout_constraintStart_toStartOf="parent"-->
-        <!--            app:layout_constraintTop_toBottomOf="@id/review_photo_list"-->
-        <!--            tools:text="2020.07.01" />-->
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

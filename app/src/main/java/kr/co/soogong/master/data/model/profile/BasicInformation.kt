@@ -2,11 +2,11 @@ package kr.co.soogong.master.data.model.profile
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
-import kr.co.soogong.master.data.common.CodeTable
 import kr.co.soogong.master.data.dto.common.AttachmentDto
 import kr.co.soogong.master.data.dto.profile.MasterConfigDto
 import kr.co.soogong.master.data.dto.profile.MasterDto
 import kr.co.soogong.master.data.dto.profile.PortfolioDto
+import kr.co.soogong.master.data.global.CodeTable
 
 @Parcelize
 data class BasicInformation(

@@ -7,7 +7,7 @@
 
         <variable
             name="buttonThemeSave"
-            type="kr.co.soogong.master.data.common.ButtonTheme" />
+            type="kr.co.soogong.master.data.global.ButtonTheme" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

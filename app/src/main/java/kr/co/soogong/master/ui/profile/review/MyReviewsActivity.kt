@@ -30,14 +30,9 @@ class MyReviewsActivity : BaseActivity<ActivityMyReviewsBinding>(
             vm = viewModel
             lifecycleOwner = this@MyReviewsActivity
 
-            with(actionBar) {
-                title.text = getString(R.string.my_reviews_action_bar_label)
-                backButton.setOnClickListener {
-                    super.onBackPressed()
-                }
-            }
+            abHeader.setButtonBackClickListener { onBackPressed() }
 
-            reviewList.adapter = ReviewAdapter(this@MyReviewsActivity)
+            rvReviews.adapter = ReviewAdapter(this@MyReviewsActivity)
         }
     }
 

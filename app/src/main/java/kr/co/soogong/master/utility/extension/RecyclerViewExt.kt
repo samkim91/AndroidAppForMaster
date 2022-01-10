@@ -3,13 +3,14 @@
 package kr.co.soogong.master.utility.extension
 
 import android.graphics.drawable.Drawable
+import android.graphics.drawable.InsetDrawable
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import kr.co.soogong.master.data.model.common.EndlessScrollableViewModel
 import kr.co.soogong.master.data.model.major.Category
 import kr.co.soogong.master.data.model.major.Project
+import kr.co.soogong.master.ui.common.EndlessScrollableViewModel
 import kr.co.soogong.master.ui.common.category.CategoryAdapter
 import kr.co.soogong.master.ui.common.project.ProjectAdapter
 import kr.co.soogong.master.utility.SpaceItemDecoration
@@ -22,11 +23,10 @@ fun RecyclerView.setItemSpace(startSpace: Int?, topSpace: Int?, endSpace: Int?, 
 
 @BindingAdapter("setDivider")
 fun RecyclerView.setDivider(drawable: Drawable) {
-    val dividerItemDecoration =
-        DividerItemDecoration(context, LinearLayoutManager(context).orientation)
-    dividerItemDecoration.setDrawable(drawable)
-
-    this.addItemDecoration(dividerItemDecoration)
+    this.addItemDecoration(DividerItemDecoration(context,
+        LinearLayoutManager(context).orientation).apply {
+        setDrawable(InsetDrawable(drawable, 16.dp, 0, 16.dp, 0))
+    })
 }
 
 

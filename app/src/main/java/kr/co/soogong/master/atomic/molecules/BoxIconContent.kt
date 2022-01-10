@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.res.ResourcesCompat
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.common.ColorTheme
+import kr.co.soogong.master.data.global.ColorTheme
 import kr.co.soogong.master.databinding.ViewBoxIconContentBinding
 
 class BoxIconContent @JvmOverloads constructor(
@@ -52,7 +52,8 @@ class BoxIconContent @JvmOverloads constructor(
                     }
                     is ColorTheme.Red -> {
                     }
-                    is ColorTheme.Green -> { }
+                    is ColorTheme.Green -> {
+                    }
                 }
             }
         }

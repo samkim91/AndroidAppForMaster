@@ -9,9 +9,9 @@ import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import gun0912.tedimagepicker.builder.TedImagePicker
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.common.ButtonTheme
-import kr.co.soogong.master.data.common.CodeTable
-import kr.co.soogong.master.data.common.ColorTheme
+import kr.co.soogong.master.data.global.ButtonTheme
+import kr.co.soogong.master.data.global.CodeTable
+import kr.co.soogong.master.data.global.ColorTheme
 import kr.co.soogong.master.databinding.FragmentProfileBinding
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.base.BaseViewModel.Companion.DISMISS_LOADING

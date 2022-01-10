@@ -8,7 +8,7 @@ import kr.co.soogong.master.atomic.atoms.ButtonMedium
 import kr.co.soogong.master.atomic.atoms.IButton
 import kr.co.soogong.master.atomic.atoms.ITextInput
 import kr.co.soogong.master.atomic.atoms.TextInput
-import kr.co.soogong.master.data.common.ButtonTheme
+import kr.co.soogong.master.data.global.ButtonTheme
 import kr.co.soogong.master.databinding.ViewSubheadlineTextInputButtonMediumBinding
 
 class SubheadlineTextInputButtonMedium @JvmOverloads constructor(

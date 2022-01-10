@@ -135,7 +135,7 @@ data class DialogData(
                 "본인 인증을 통해 로그인해주세요.",
                 "",
                 "확인",
-                "취소",
+                "",
             )
 
         fun getUserExistDialogData() =

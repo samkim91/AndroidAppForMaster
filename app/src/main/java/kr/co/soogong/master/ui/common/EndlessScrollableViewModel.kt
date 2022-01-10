@@ -1,4 +1,4 @@
-package kr.co.soogong.master.data.model.common
+package kr.co.soogong.master.ui.common
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.lifecycle.HiltViewModel

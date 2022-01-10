@@ -8,7 +8,7 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.common.DropdownItemList
+import kr.co.soogong.master.data.global.DropdownItemList
 import kr.co.soogong.master.data.model.profile.WarrantyInformation
 import kr.co.soogong.master.databinding.ViewHeadlineButtonContentBinding
 
