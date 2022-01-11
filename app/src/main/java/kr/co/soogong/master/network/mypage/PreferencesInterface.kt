@@ -9,9 +9,9 @@ import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Query
 
-interface MyPageInterface {
+interface PreferencesInterface {
     @GET(HttpContract.GET_NOTICE_LIST)
-    fun getNoticeList(@Query("typeCode") typeCode: String): Single<List<NoticeDto>>
+    fun getNotices(@Query("section") sections: List<String>): Single<List<NoticeDto>>
 
     @GET(HttpContract.GET_NOTICE)
     fun getNotice(@Query("id") id: Int): Single<NoticeDto>

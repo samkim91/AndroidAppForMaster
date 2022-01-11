@@ -8,7 +8,7 @@ import dagger.hilt.components.SingletonComponent
 import kr.co.soogong.master.network.auth.AuthService
 import kr.co.soogong.master.network.home.HomeService
 import kr.co.soogong.master.network.major.MajorService
-import kr.co.soogong.master.network.mypage.MyPageService
+import kr.co.soogong.master.network.mypage.PreferencesService
 import kr.co.soogong.master.network.profile.ProfileService
 import kr.co.soogong.master.network.requirement.RequirementService
 import retrofit2.Retrofit
@@ -43,8 +43,8 @@ class RetrofitModule {
 
     @Provides
     @Reusable
-    fun provideMyPageService(retrofit: Retrofit): MyPageService {
-        return MyPageService(retrofit)
+    fun provideMyPageService(retrofit: Retrofit): PreferencesService {
+        return PreferencesService(retrofit)
     }
 
     @Provides

@@ -32,7 +32,10 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding>(
             vm = viewModel
             lifecycleOwner = viewLifecycleOwner
 
-            rvNotice.adapter = NoticeAdapter(requireContext())
+            rvNotice.adapter = NoticeAdapter(
+                context = requireContext(),
+                itemClicked = { viewModel.updateNoticeIsNew(it) },
+            )
         }
     }
 

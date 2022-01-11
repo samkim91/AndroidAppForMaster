@@ -1,31 +1,35 @@
 package kr.co.soogong.master.data.model.mypage
 
 import android.os.Parcelable
-import androidx.room.Entity
-import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
 import kr.co.soogong.master.data.dto.mypage.NoticeDto
 import java.util.*
 
 @Parcelize
-@Entity(tableName = "Notice")
 data class Notice(
-    @PrimaryKey
     val id: Int,
+    val section: String,
     val title: String,
     val content: String,
+    val hitCount: Int,
     val isNew: Boolean,
-    val date: Date,
+    val createdBy: String,
+    val createdAt: Date,
+    val updatedBy: String,
+    val updatedAt: Date,
 ) : Parcelable {
     companion object {
-        fun fromNoticeDto(noticeDto: NoticeDto): Notice {
-            return Notice(
-                id = noticeDto.id,
-                title = noticeDto.title,
-                content = noticeDto.content,
-                isNew = true,
-                date = noticeDto.createdAt,
-            )
-        }
+        fun fromNoticeDto(noticeDto: NoticeDto): Notice = Notice(
+            id = noticeDto.id,
+            section = noticeDto.section,
+            title = noticeDto.title,
+            content = noticeDto.content,
+            hitCount = noticeDto.hitCount,
+            isNew = noticeDto.isNew ?: true,
+            createdBy = noticeDto.createdBy,
+            createdAt = noticeDto.createdAt,
+            updatedBy = noticeDto.updatedBy,
+            updatedAt = noticeDto.updatedAt,
+        )
     }
 }
