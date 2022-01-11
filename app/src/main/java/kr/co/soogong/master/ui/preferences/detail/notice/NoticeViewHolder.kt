@@ -17,22 +17,35 @@ class NoticeViewHolder(
     fun bind(
         context: Context,
         notice: Notice,
+        itemClicked: (Int) -> Unit,
     ) {
         binding.run {
             data = notice
 
             setOnItemClick {
-                // 화살표 모양 정의
-                ivArrow.background = if (flContentContainer.isVisible)
-                    ResourcesCompat.getDrawable(context.resources, R.drawable.ic_arrow_down, null)
-                else
-                    ResourcesCompat.getDrawable(context.resources, R.drawable.ic_arrow_up, null)
-
-                // 내용 컨테이너 보이는지 정의
-                flContentContainer.isVisible = !binding.flContentContainer.isVisible
+                spreadOrCollapseItem(context)
+                itemClicked(notice.id)
             }
 
             tvContent.text = Html.fromHtml(notice.content, 0)
+        }
+    }
+
+    fun spreadOrCollapseItem(
+        context: Context,
+    ) {
+        binding.run {
+            // 아이템 클릭 시 실행 필요한 코드 시작
+            ivRedDot.isVisible = false
+
+            // 화살표 모양 정의
+            ivArrow.background = if (flContentContainer.isVisible)
+                ResourcesCompat.getDrawable(context.resources, R.drawable.ic_arrow_down, null)
+            else
+                ResourcesCompat.getDrawable(context.resources, R.drawable.ic_arrow_up, null)
+
+            // 내용 컨테이너 보이는지 정의
+            flContentContainer.isVisible = !flContentContainer.isVisible
         }
     }
 

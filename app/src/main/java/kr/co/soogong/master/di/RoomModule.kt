@@ -4,7 +4,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import kr.co.soogong.master.data.dao.mypage.NoticeDao
+import kr.co.soogong.master.data.dao.preferences.NoticeDao
 import kr.co.soogong.master.data.dao.profile.MasterDao
 import kr.co.soogong.master.data.dao.requirement.RequirementDao
 import kr.co.soogong.master.domain.AppDatabase

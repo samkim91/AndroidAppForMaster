@@ -20,13 +20,23 @@
         android:usesCleartextTraffic="${cleartextTrafficPermitted}">
         <activity
             android:name=".ui.auth.AuthContainerActivity"
+            android:exported="true"
             android:screenOrientation="portrait" />
-        <activity android:name=".ui.auth.signup.steps.AgreementDetailActivity" />
-        <activity android:name=".ui.profile.review.MyReviewsActivity" />
-        <activity android:name=".ui.profile.detail.EditProfileContainerActivity" />
-        <activity android:name=".ui.profile.detail.portfoliolist.PortfolioListActivity" />
+        <activity
+            android:name=".ui.auth.signup.steps.AgreementDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.profile.review.MyReviewsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.profile.detail.EditProfileContainerActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.profile.detail.portfoliolist.PortfolioListActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.splash.SplashActivity"
+            android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/SplashTheme">
             <intent-filter>
@@ -35,25 +45,48 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.common.KakaoAddressActivity" />
-        <activity android:name=".ui.main.MainActivity" />
-        <activity android:name=".ui.common.MajorActivity" />
-        <activity android:name=".ui.image.ImageActivity" />
-        <activity android:name=".ui.requirement.action.cancel.CancelActivity" />
-        <activity android:name=".ui.requirement.action.end.EndRepairActivity" />
-        <activity android:name=".ui.requirement.action.search.SearchActivity" />
+        <activity
+            android:name=".ui.common.KakaoAddressActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.main.MainActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.common.MajorActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.image.ImageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.requirement.action.cancel.CancelActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.requirement.action.end.EndRepairActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.requirement.action.search.SearchActivity"
+            android:exported="true" />
         <activity
             android:name=".ui.requirement.action.view.ViewRequirementActivity"
+            android:exported="true"
             android:launchMode="singleTask" /> <!-- 실측요청건을 고려 singleTop 로 설정 -->
         <activity
             android:name=".ui.requirement.action.write.WriteEstimationActivity"
+            android:exported="true"
             android:launchMode="singleTask" />
         <activity
             android:name=".ui.requirement.action.write.MeasurementActivity"
+            android:exported="true"
             android:launchMode="singleTask" />
-        <activity android:name=".ui.requirement.action.write.template.EstimationTemplatesActivity" />
-        <activity android:name=".ui.preferences.account.AccountActivity" />
-        <activity android:name=".ui.preferences.detail.PreferencesContainerActivity" />
+        <activity
+            android:name=".ui.requirement.action.write.template.EstimationTemplatesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.preferences.account.AccountActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.preferences.detail.PreferencesContainerActivity"
+            android:exported="true" />
 
         <service
             android:name=".SoogongMasterMessagingService"

@@ -3,17 +3,16 @@ package kr.co.soogong.master.network.mypage
 import com.google.gson.JsonObject
 import io.reactivex.Single
 import kr.co.soogong.master.data.dto.mypage.NoticeDto
-import kr.co.soogong.master.data.model.mypage.Notice
 import retrofit2.Retrofit
 import javax.inject.Inject
 
-class MyPageService @Inject constructor(
-    retrofit: Retrofit
+class PreferencesService @Inject constructor(
+    retrofit: Retrofit,
 ) {
-    private val myPageInterface = retrofit.create(MyPageInterface::class.java)
+    private val myPageInterface = retrofit.create(PreferencesInterface::class.java)
 
-    fun getNoticeList(typeCode: String): Single<List<NoticeDto>> {
-        return myPageInterface.getNoticeList(typeCode)
+    fun getNotices(sections: List<String>): Single<List<NoticeDto>> {
+        return myPageInterface.getNotices(sections)
     }
 
     fun getNotice(id: Int): Single<NoticeDto> {
