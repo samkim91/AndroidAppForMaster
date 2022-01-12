@@ -9,6 +9,7 @@ import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentHomeBinding
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.main.MainViewModel
+import kr.co.soogong.master.ui.main.TAB_TEXTS_MAIN_NAVIGATION
 import kr.co.soogong.master.ui.requirement.RequirementViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.ui.requirement.RequirementViewModel.Companion.SET_CURRENT_TAB
 import kr.co.soogong.master.utility.EventObserver
@@ -46,13 +47,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
 
             fciBeforeProgress.setOnClickListener {
                 // 문의 목록 -> 진행 전 으로 이동
-                activityViewModel.selectedMainTabInMainActivity.value = 1
+                activityViewModel.selectedMainTabInMainActivity.value =
+                    TAB_TEXTS_MAIN_NAVIGATION.indexOf(R.string.main_activity_navigation_bar_requirements)
                 activityViewModel.selectedMainTabInRequirementFragment.value = 0
             }
 
             fciProcessing.setOnClickListener {
                 // 문의 목록 -> 진행 중 으로 이동
-                activityViewModel.selectedMainTabInMainActivity.value = 1
+                activityViewModel.selectedMainTabInMainActivity.value =
+                    TAB_TEXTS_MAIN_NAVIGATION.indexOf(R.string.main_activity_navigation_bar_requirements)
                 activityViewModel.selectedMainTabInRequirementFragment.value = 1
             }
         }
