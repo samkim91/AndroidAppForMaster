@@ -5,14 +5,14 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
-import kr.co.soogong.master.databinding.ActionBar2Binding
+import kr.co.soogong.master.databinding.ActionBarBinding
 
 class ActionBar @JvmOverloads constructor(
     context: Context,
     attributeSet: AttributeSet? = null,
     defStyle: Int = 0,
 ) : ConstraintLayout(context, attributeSet, defStyle), IActionBar {
-    private val binding = ActionBar2Binding.inflate(LayoutInflater.from(context), this, true)
+    private val binding = ActionBarBinding.inflate(LayoutInflater.from(context), this, true)
 
     override var title: String? = null
         set(value) {

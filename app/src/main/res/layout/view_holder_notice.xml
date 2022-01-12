@@ -21,13 +21,13 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_title"
-            style="@style/footnote.regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/gap_16"
             android:layout_marginTop="@dimen/gap_10"
             android:layout_marginEnd="@dimen/gap_8"
             android:text="@{data.title}"
+            android:textAppearance="@style/subheadline.bold"
             android:textColor="@color/black"
             app:layout_constrainedWidth="true"
             app:layout_constraintEnd_toStartOf="@id/iv_arrow"
@@ -48,11 +48,11 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_date"
-            style="@style/caption_2.regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/gap_6"
             android:layout_marginBottom="@dimen/gap_10"
+            android:textAppearance="@style/footnote.bold"
             android:textColor="@color/grey_2"
             app:dateWithoutDay="@{data.createdAt}"
             app:layout_constraintBottom_toTopOf="@id/fl_content_container"
@@ -102,6 +102,7 @@
                 android:paddingTop="@dimen/gap_16"
                 android:paddingEnd="@dimen/gap_24"
                 android:paddingBottom="@dimen/gap_16"
+                android:textAppearance="@style/subheadline.regular"
                 tools:text="내용" />
         </FrameLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
