@@ -25,14 +25,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
         super.onCreate(savedInstanceState)
         Timber.tag(TAG).d("onCreate: ")
         initLayout()
+        registerEventObserver()
         registerFCM()
         removeBrokenChannel(this)
         initNotificationChannel(this)
-    }
-
-    private fun registerFCM() {
-        Timber.tag(TAG).d("registerFCM: ")
-        viewModel.registerFCM()
     }
 
     override fun initLayout() {
@@ -58,9 +54,15 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
         }
     }
 
-    fun setCurrentTab(tabIndex: Int) {
-        Timber.tag(TAG).d("setCurrentTab: $tabIndex")
-        binding.mainViewPager.currentItem = tabIndex
+    private fun registerEventObserver() {
+        viewModel.selectedMainTabInMainActivity.observe(this, { position ->
+            binding.mainTabs.getTabAt(position)?.select()
+        })
+    }
+
+    private fun registerFCM() {
+        Timber.tag(TAG).d("registerFCM: ")
+        viewModel.registerFCM()
     }
 
     override fun setRequirementsBadge(badgeCount: Int) {

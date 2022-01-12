@@ -2,6 +2,7 @@ package kr.co.soogong.master.ui.requirement
 
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -11,6 +12,7 @@ import kr.co.soogong.master.databinding.FragmentRequirementBinding
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.dialog.popup.DefaultDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData
+import kr.co.soogong.master.ui.main.MainViewModel
 import kr.co.soogong.master.ui.requirement.RequirementViewModel.Companion.ASK_FOR_REVIEW_SUCCESSFULLY
 import kr.co.soogong.master.ui.requirement.RequirementViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.ui.requirement.list.RequirementListPagerAdapter
@@ -21,7 +23,7 @@ import kr.co.soogong.master.uihelper.requirment.action.SearchActivityHelper
 import kr.co.soogong.master.uihelper.requirment.action.ViewRequirementActivityHelper
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.extension.changeTabFont
-import kr.co.soogong.master.utility.extension.setTabClickListener
+import kr.co.soogong.master.utility.extension.setTabSelectedListener
 import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
 
@@ -30,6 +32,7 @@ class RequirementFragment : BaseFragment<FragmentRequirementBinding>(
     R.layout.fragment_requirement
 ), RequirementsBadge {
 
+    private val activityViewModel: MainViewModel by activityViewModels()
     private val viewModel: RequirementViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -46,7 +49,7 @@ class RequirementFragment : BaseFragment<FragmentRequirementBinding>(
             lifecycleOwner = viewLifecycleOwner
 
             mainTabs.changeTabFont(0, R.style.title_3_bold)
-            mainTabs.setTabClickListener(
+            mainTabs.setTabSelectedListener(
                 onSelected = { tab ->
                     tab?.position.let {
                         mainTabs.changeTabFont(it, R.style.title_3_bold)
@@ -60,7 +63,7 @@ class RequirementFragment : BaseFragment<FragmentRequirementBinding>(
             )
 
             filterTabs.changeTabFont(0, R.style.subheadline_regular)
-            filterTabs.setTabClickListener(
+            filterTabs.setTabSelectedListener(
                 onSelected = { tab ->
                     tab?.position.let {
                         viewModel.filterTabIndex.value = it
@@ -72,9 +75,7 @@ class RequirementFragment : BaseFragment<FragmentRequirementBinding>(
                 }
             )
 
-            setSearchIconClick {
-                startActivity(SearchActivityHelper.getIntent(requireContext()))
-            }
+            setSearchIconClick { startActivity(SearchActivityHelper.getIntent(requireContext())) }
 
             setViewPager()
         }
@@ -113,9 +114,14 @@ class RequirementFragment : BaseFragment<FragmentRequirementBinding>(
                     showDialogForViewRequirement(REQUEST_CONSULTING, request.requestConsultingList)
             }
         })
+
+        activityViewModel.selectedMainTabInRequirementFragment.observe(viewLifecycleOwner,
+            { position ->
+                binding.mainTabs.getTabAt(position)?.select()
+            })
     }
 
-    fun showDialogForViewRequirement(type: Int, list: List<Int>) {
+    private fun showDialogForViewRequirement(type: Int, list: List<Int>) {
         DefaultDialog.newInstance(
             dialogData = if (type == REQUEST_MEASURE)
                 DialogData.getNoticeForRequestMeasure(list.count())

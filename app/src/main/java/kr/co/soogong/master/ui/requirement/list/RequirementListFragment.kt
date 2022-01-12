@@ -2,12 +2,13 @@ package kr.co.soogong.master.ui.requirement.list
 
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentRequirementListBinding
 import kr.co.soogong.master.ui.base.BaseFragment
-import kr.co.soogong.master.ui.main.MainActivity
+import kr.co.soogong.master.ui.main.MainViewModel
 import kr.co.soogong.master.ui.requirement.RequirementViewModel
 import kr.co.soogong.master.ui.requirement.RequirementViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.ui.requirement.RequirementViewModel.Companion.SET_CURRENT_TAB
@@ -20,6 +21,8 @@ import timber.log.Timber
 class RequirementListFragment : BaseFragment<FragmentRequirementListBinding>(
     R.layout.fragment_requirement_list
 ) {
+
+    private val activityViewModel: MainViewModel by activityViewModels()
     private val viewModel: RequirementViewModel by viewModels({ requireParentFragment() })
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -61,7 +64,8 @@ class RequirementListFragment : BaseFragment<FragmentRequirementListBinding>(
 
         viewModel.event.observe(viewLifecycleOwner, EventObserver { (event, value) ->
             when (event) {
-                SET_CURRENT_TAB -> (activity as MainActivity).setCurrentTab(value as Int)
+                SET_CURRENT_TAB -> activityViewModel.selectedMainTabInMainActivity.value =
+                    value as Int
             }
         })
     }
