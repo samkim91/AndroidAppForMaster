@@ -8,7 +8,7 @@ class RequirementListPagerAdapter(
     private val type: Int,
 ) : FragmentStateAdapter(fragment) {
     override fun getItemCount() =
-        if (type == 0) TAB_COUNT_REQUIREMENTS_BEFORE_PROGRESS else TAB_COUNT_REQUIREMENTS_IN_PROGRESS
+        if (type == 0) TAB_TEXTS_REQUIREMENTS_BEFORE_PROGRESS.count() else TAB_TEXTS_REQUIREMENTS_IN_PROGRESS.count()
 
     override fun createFragment(position: Int) = RequirementListFragment.newInstance()
 }
