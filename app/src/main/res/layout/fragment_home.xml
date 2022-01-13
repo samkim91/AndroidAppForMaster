@@ -9,6 +9,10 @@
         <import type="kr.co.soogong.master.R" />
 
         <variable
+            name="activityVm"
+            type="kr.co.soogong.master.ui.main.MainViewModel" />
+
+        <variable
             name="vm"
             type="kr.co.soogong.master.ui.home.HomeViewModel" />
     </data>
@@ -54,6 +58,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/gap_16"
+                android:checked="@={vm.requestMeasureYn}"
                 app:layout_constraintBottom_toBottomOf="@id/iv_logo"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/iv_logo"
@@ -65,7 +70,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:constraint_referenced_ids="tv_for_switch, switch_compat"
-                bind:visible="@{vm.masterSimpleInfo.secretaryYn &amp;&amp; vm.masterSimpleInfo.freeMeasureYn}"
+                bind:visible="@{activityVm.masterSimpleInfo.secretaryYn &amp;&amp; activityVm.masterSimpleInfo.freeMeasureYn}"
                 tools:visibility="visible" />
 
             <androidx.constraintlayout.widget.Barrier
@@ -185,7 +190,7 @@
                 app:layout_constraintEnd_toEndOf="@id/iv_new_requirements_container"
                 app:layout_constraintStart_toStartOf="@id/iv_new_requirements_container"
                 app:layout_constraintTop_toBottomOf="@id/tv_new_requirements_container"
-                app:onRefresh="@{vm::initListUnread}"
+                app:onRefresh="@{vm::initList}"
                 app:setLoadingColor="@{R.color.app_color}">
 
                 <androidx.recyclerview.widget.RecyclerView

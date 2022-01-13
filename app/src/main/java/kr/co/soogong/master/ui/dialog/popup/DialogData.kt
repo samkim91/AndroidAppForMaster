@@ -84,15 +84,6 @@ data class DialogData(
                 "취소",
             )
 
-        fun getNoticeForCallingToCustomer() =
-            DialogData(
-                "[공지] 전화 기능 오픈",
-                "견적을 보내시면 고객님에게 전화할 수 있는 버튼이 생성되니, 활용해보세요.",
-                "※ 광고모델 한시적 운영",
-                "확인",
-                "다시보지않기",
-            )
-
         fun getRefuseMeasureDialogData() =
             DialogData(
                 "실측 포기",

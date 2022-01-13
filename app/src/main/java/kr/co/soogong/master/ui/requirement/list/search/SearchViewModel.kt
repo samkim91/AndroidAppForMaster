@@ -1,4 +1,4 @@
-package kr.co.soogong.master.ui.requirement.action.search
+package kr.co.soogong.master.ui.requirement.list.search
 
 import androidx.lifecycle.MutableLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -6,9 +6,9 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.global.DropdownItemList
-import kr.co.soogong.master.data.model.requirement.RequirementCard
-import kr.co.soogong.master.ui.requirement.RequirementViewModel
+import kr.co.soogong.master.domain.usecase.requirement.SearchRequirementCardsUseCase
 import kr.co.soogong.master.ui.requirement.RequirementViewModelAggregate
+import kr.co.soogong.master.ui.requirement.list.RequirementsViewModel
 import retrofit2.HttpException
 import timber.log.Timber
 import java.net.HttpURLConnection
@@ -16,27 +16,34 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SearchViewModel @Inject constructor(
-    private val requirementViewModelAggregate: RequirementViewModelAggregate,
-) : RequirementViewModel(requirementViewModelAggregate) {
+    requirementViewModelAggregate: RequirementViewModelAggregate,
+    private val searchRequirementCardsUseCase: SearchRequirementCardsUseCase,
+) : RequirementsViewModel(requirementViewModelAggregate) {
 
     val spinnerItems: List<Pair<String, Int>> = DropdownItemList.searchingPeriods
     val searchingText = MutableLiveData("")
     val searchingPeriod = MutableLiveData(spinnerItems.first().second)
 
-    val items = MutableLiveData<MutableList<RequirementCard>>()
     val notFound = MutableLiveData(false)
 
-    fun searchRequirements() {
-        Timber.tag(TAG).d("searchRequirements: ${searchingText.value} / ${searchingPeriod.value}")
-
-        // 리스트 및 페이지네이션 초기화
+    override fun initList() {
+        Timber.tag(TAG).d("initList: ")
+        notFound.postValue(false)
         requirements.clear()
         resetState()
-        notFound.postValue(false)
+        requestRequirements()
+    }
 
+    override fun loadMoreItems() {
+        Timber.tag(TAG).d("loadMoreItems: ")
+        requestRequirements()
+    }
+
+    override fun requestRequirements() {
+        Timber.tag(TAG).d("requestRequirements: ${searchingText.value} / ${searchingPeriod.value}")
         if (searchingText.value.isNullOrEmpty()) return
 
-        requirementViewModelAggregate.searchRequirementCardsUseCase(
+        searchRequirementCardsUseCase(
             searchingText = searchingText.value!!,
             searchingPeriod = searchingPeriod.value!!,
             offset = offset,

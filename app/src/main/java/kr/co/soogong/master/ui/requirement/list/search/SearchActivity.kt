@@ -1,4 +1,4 @@
-package kr.co.soogong.master.ui.requirement.action.search
+package kr.co.soogong.master.ui.requirement.list.search
 
 import android.os.Bundle
 import android.view.KeyEvent
@@ -11,9 +11,11 @@ import kotlinx.coroutines.Dispatchers
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ActivitySearchBinding
 import kr.co.soogong.master.ui.base.BaseActivity
-import kr.co.soogong.master.ui.requirement.RequirementViewModel.Companion.ASK_FOR_REVIEW_SUCCESSFULLY
-import kr.co.soogong.master.ui.requirement.action.search.SearchViewModel.Companion.SEARCH_REQUIREMENTS_FAILED
+import kr.co.soogong.master.ui.main.MainViewModel
 import kr.co.soogong.master.ui.requirement.card.RequirementCardsAdapter
+import kr.co.soogong.master.ui.requirement.list.RequirementsViewModel.Companion.ASK_FOR_REVIEW_SUCCESSFULLY
+import kr.co.soogong.master.ui.requirement.list.search.SearchViewModel.Companion.CANCEL_ACTIVITY
+import kr.co.soogong.master.ui.requirement.list.search.SearchViewModel.Companion.SEARCH_REQUIREMENTS_FAILED
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.extension.debounce
 import kr.co.soogong.master.utility.extension.toast
@@ -23,6 +25,7 @@ import timber.log.Timber
 class SearchActivity : BaseActivity<ActivitySearchBinding>(
     R.layout.activity_search
 ) {
+    private val mainViewModel: MainViewModel by viewModels()
     private val viewModel: SearchViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,7 +53,10 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>(
             }
 
             requirements.adapter =
-                RequirementCardsAdapter(this@SearchActivity, supportFragmentManager, viewModel)
+                RequirementCardsAdapter(this@SearchActivity,
+                    supportFragmentManager,
+                    mainViewModel,
+                    viewModel)
 
             setSearchPeriodDropdown()
         }
@@ -63,7 +69,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>(
 
         binding.actvItem.setOnItemClickListener { _, _, position, _ ->
             viewModel.searchingPeriod.value = viewModel.spinnerItems[position].second
-            viewModel.searchRequirements()
+            viewModel.initList()
         }
 
         // 초기값 지정
@@ -74,13 +80,13 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>(
         Timber.tag(TAG).d("registerEventObserve: ")
         // 검색을 자동으로 실행해주는 기능인데, 글자가 바뀔 때마다 검색되면 요청이 많으니, 0.5초 간격으로 하나로 모아서 요청
         viewModel.searchingText.debounce(500L, CoroutineScope(Dispatchers.Main))
-            .observe(this, { viewModel.searchRequirements() })
+            .observe(this, { viewModel.initList() })
 
         viewModel.action.observe(this, EventObserver { action ->
             when (action) {
                 SEARCH_REQUIREMENTS_FAILED -> toast(getString(R.string.error_message_of_request_failed))
-                ASK_FOR_REVIEW_SUCCESSFULLY -> viewModel.searchRequirements()
-                SearchViewModel.CANCEL_ACTIVITY -> onBackPressed()
+                ASK_FOR_REVIEW_SUCCESSFULLY -> viewModel.requestRequirements()
+                CANCEL_ACTIVITY -> onBackPressed()
             }
         })
     }

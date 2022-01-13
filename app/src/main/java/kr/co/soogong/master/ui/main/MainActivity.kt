@@ -29,7 +29,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
         initLayout()
         registerEventObserver()
         registerDynamicLinkListener()
-        registerFCM()
         removeBrokenChannel(this)
         initNotificationChannel(this)
     }
@@ -79,11 +78,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
             .addOnFailureListener {
                 Timber.tag(TAG).w("registerDynamicLinkListener onFailure: $it")
             }
-    }
-
-    private fun registerFCM() {
-        Timber.tag(TAG).d("registerFCM: ")
-        viewModel.registerFCM()
     }
 
     override fun setRequirementsBadge(badgeCount: Int) {

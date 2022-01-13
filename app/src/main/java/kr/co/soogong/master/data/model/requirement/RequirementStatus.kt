@@ -163,6 +163,8 @@ sealed class RequirementStatus {
                     else -> ""
                 }
             }
+
+            // 완료건은 "AfterProcess"
         }
     }
 }
