@@ -4,7 +4,8 @@ import android.content.Context
 import androidx.fragment.app.FragmentManager
 import kr.co.soogong.master.data.model.requirement.RequirementCard
 import kr.co.soogong.master.databinding.ViewHolderRequirementCardBinding
-import kr.co.soogong.master.ui.requirement.RequirementViewModel
+import kr.co.soogong.master.ui.main.MainViewModel
+import kr.co.soogong.master.ui.requirement.list.RequirementsViewModel
 
 // 진행중탭의 viewHolders
 
@@ -12,9 +13,10 @@ import kr.co.soogong.master.ui.requirement.RequirementViewModel
 class RepairingCardViewHolder(
     context: Context,
     fragmentManager: FragmentManager,
-    viewModel: RequirementViewModel,
+    activityViewModel: MainViewModel,
+    viewModel: RequirementsViewModel,
     binding: ViewHolderRequirementCardBinding,
-) : RequirementCardViewHolder(context, fragmentManager, viewModel, binding) {
+) : RequirementCardViewHolder(context, fragmentManager, activityViewModel, viewModel, binding) {
     override fun bind(
         requirementCard: RequirementCard,
     ) {
@@ -28,9 +30,10 @@ class RepairingCardViewHolder(
 class DoneViewHolder(
     context: Context,
     fragmentManager: FragmentManager,
-    viewModel: RequirementViewModel,
+    activityViewModel: MainViewModel,
+    viewModel: RequirementsViewModel,
     binding: ViewHolderRequirementCardBinding,
-) : RequirementCardViewHolder(context, fragmentManager, viewModel, binding) {
+) : RequirementCardViewHolder(context, fragmentManager, activityViewModel, viewModel, binding) {
     override fun bind(
         requirementCard: RequirementCard,
     ) {

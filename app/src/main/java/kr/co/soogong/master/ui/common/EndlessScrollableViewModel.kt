@@ -53,6 +53,9 @@ open class EndlessScrollableViewModel @Inject constructor(
         last = false
     }
 
+    // 리스트를 초기화해야할 때, 실행 (최초 로드, 스와이프 리프레시 등)
+    open fun initList() {}
+
     // 아이템을 더 불러오는 메소드. 실제 아이템을 불러올 코드에서 사용
     open fun loadMoreItems() {}
 

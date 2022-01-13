@@ -76,7 +76,10 @@
             android:name=".ui.requirement.action.end.EndRepairActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.requirement.action.search.SearchActivity"
+            android:name="kr.co.soogong.master.ui.requirement.list.search.SearchActivity"
+            android:exported="true" />
+        <activity
+            android:name="kr.co.soogong.master.ui.requirement.list.done.DoneActivity"
             android:exported="true" />
         <activity
             android:name=".ui.requirement.action.view.ViewRequirementActivity"

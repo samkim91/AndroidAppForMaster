@@ -9,8 +9,8 @@ import kr.co.soogong.master.data.model.requirement.RequirementCard
 import kr.co.soogong.master.databinding.ViewHolderSimpleRequirementItemBinding
 import kr.co.soogong.master.ui.dialog.popup.DefaultDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData
+import kr.co.soogong.master.ui.main.MainViewModel
 import kr.co.soogong.master.ui.main.TAB_TEXTS_MAIN_NAVIGATION
-import kr.co.soogong.master.ui.requirement.RequirementViewModel
 import kr.co.soogong.master.uihelper.requirment.action.ViewRequirementActivityHelper
 
 class SimpleRequirementCardViewHolder(
@@ -19,7 +19,7 @@ class SimpleRequirementCardViewHolder(
     fun bind(
         context: Context,
         fragmentManager: FragmentManager,
-        viewModel: RequirementViewModel,
+        activityViewModel: MainViewModel,
         requirementCard: RequirementCard,
         position: Int,
     ) {
@@ -30,7 +30,7 @@ class SimpleRequirementCardViewHolder(
             setApprovedMasterOnly(context,
                 fragmentManager,
                 this,
-                viewModel,
+                activityViewModel,
                 requirementCard)
         }
     }
@@ -39,12 +39,12 @@ class SimpleRequirementCardViewHolder(
         context: Context,
         fragmentManager: FragmentManager,
         binding: ViewHolderSimpleRequirementItemBinding,
-        viewModel: RequirementViewModel,
+        activityViewModel: MainViewModel,
         requirementCard: RequirementCard,
     ) {
         with(binding) {
             setCardClickListener {
-                viewModel.masterSimpleInfo.value?.approvedStatus.let {
+                activityViewModel.masterSimpleInfo.value?.approvedStatus.let {
                     when (it) {
                         // 미승인 상태이면, 필수정보를 채우도록 이동
                         CodeTable.NOT_APPROVED.code -> {
@@ -53,7 +53,8 @@ class SimpleRequirementCardViewHolder(
                             ).let { dialog ->
                                 dialog.setButtonsClickListener(
                                     onPositive = {
-                                        viewModel.setCurrentTab(TAB_TEXTS_MAIN_NAVIGATION.indexOf(R.string.main_activity_navigation_bar_profile))
+                                        activityViewModel.selectedMainTabInMainActivity.value =
+                                            TAB_TEXTS_MAIN_NAVIGATION.indexOf(R.string.main_activity_navigation_bar_profile)
                                     },
                                     onNegative = { }
                                 )

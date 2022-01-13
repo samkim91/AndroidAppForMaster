@@ -10,55 +10,22 @@
 
         <variable
             name="vm"
-            type="kr.co.soogong.master.ui.requirement.list.search.SearchViewModel" />
+            type="kr.co.soogong.master.ui.requirement.list.done.DoneViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <kr.co.soogong.master.atomic.molecules.SearchBar
-            android:id="@+id/sb_search"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/gap_16"
-            android:layout_marginTop="@dimen/gap_16"
-            android:layout_marginEnd="@dimen/gap_16"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:onCancelClick="@{() -> vm.cancelActivity()}"
-            app:searchHint="@{@string/search_bar_hint_text}"
-            app:searchText="@={vm.searchingText}" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_container"
-            style="@style/outlinedTextInputLayout.dropdown.small"
-            android:layout_width="@dimen/gap_100"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/gap_16"
-            android:layout_marginTop="@dimen/gap_8"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/sb_search">
-
-            <com.google.android.material.textfield.MaterialAutoCompleteTextView
-                android:id="@+id/actv_item"
-                style="@style/autoCompleteTextViewStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="none"
-                app:popupDrawable="@{@drawable/bg_solid_white_stroke_light_grey2_radius6_padding16}" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/line"
+        <kr.co.soogong.master.atomic.molecules.ActionBar
+            android:id="@+id/ab_header"
             android:layout_width="@dimen/gap_0"
-            android:layout_height="@dimen/gap_1"
-            android:layout_marginTop="@dimen/gap_16"
-            android:background="@color/light_grey_1"
+            android:layout_height="wrap_content"
+            app:backButtonVisibility="@{true}"
+            app:title="@{@string/requirements_done}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/til_container" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/swipe_refresh_layout"
@@ -67,12 +34,12 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/line"
+            app:layout_constraintTop_toBottomOf="@id/ab_header"
             app:onRefresh="@{vm::initList}"
             app:setLoadingColor="@{R.color.app_color}">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/requirements"
+                android:id="@+id/rv_requirements"
                 android:layout_width="@dimen/gap_0"
                 android:layout_height="@dimen/gap_0"
                 android:background="@color/background"
@@ -100,7 +67,7 @@
             app:layout_constraintTop_toTopOf="@id/swipe_refresh_layout"
             app:layout_constraintVertical_chainStyle="packed"
             app:layout_constraintWidth_percent="0.35"
-            bind:visible="@{vm.notFound}"
+            bind:visible="@{vm.isEmptyList &amp;&amp; vm.requirements.empty}"
             tools:visibility="visible" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -115,7 +82,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_nutty"
-            bind:visible="@{vm.notFound}"
+            bind:visible="@{vm.isEmptyList &amp;&amp; vm.requirements.empty}"
             tools:visibility="visible" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

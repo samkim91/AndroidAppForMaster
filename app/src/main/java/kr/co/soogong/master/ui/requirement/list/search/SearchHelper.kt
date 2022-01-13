@@ -1,4 +1,4 @@
-package kr.co.soogong.master.ui.requirement.action.search
+package kr.co.soogong.master.ui.requirement.list.search
 
 val periods = listOf("7일", "30일", "90일", "전체")
 
