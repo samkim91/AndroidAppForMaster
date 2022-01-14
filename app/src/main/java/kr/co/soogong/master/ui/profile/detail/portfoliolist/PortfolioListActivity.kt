@@ -97,8 +97,8 @@ class PortfolioListActivity : BaseActivity<ActivityPortfolioListBinding>(
                 buttonLeftClickListener = { id ->
                     DefaultDialog.newInstance(
                         dialogData = when (viewModel.pageName) {
-                            PORTFOLIO -> DialogData.getAskingDeletePortfolioDialogData()
-                            else -> DialogData.getAskingDeletePriceByProjectDialogData()
+                            PORTFOLIO -> DialogData.getAskingDeletePortfolio()
+                            else -> DialogData.getAskingDeletePriceByProject()
                         }).let {
                         it.setButtonsClickListener(
                             onPositive = { viewModel.deletePortfolio(id) },

@@ -148,7 +148,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
                 ).let {
                     it.setItemClickListener { dialogItem ->
                         if (viewModel.profile.value?.approvedStatus == CodeTable.APPROVED.code) {
-                            DefaultDialog.newInstance(DialogData.getConfirmingForRequiredDialogData())
+                            DefaultDialog.newInstance(DialogData.getConfirmingForLimitedService())
                                 .let { dialog ->
                                     dialog.setButtonsClickListener(
                                         onPositive = { viewModel.saveCareerPeriod(dialogItem.value) },
@@ -215,7 +215,10 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
                 profile?.requiredInformation?.coordinate,
                 profile?.requiredInformation?.serviceArea
             )
-            setRequirementInformationPercentage(viewModel)
+            setRequiredProfileInformationProgress(viewModel).run {
+                checkApprovedStatusAndRequiredField(parentFragmentManager, binding, viewModel, this)
+            }
+            setOptionalProfileInformationProgress(viewModel)
         })
     }
 
@@ -255,7 +258,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
 
                         if (viewModel.profile.value?.approvedStatus == CodeTable.APPROVED.code) {
                             DefaultDialog.newInstance(
-                                DialogData.getConfirmingForRequiredDialogData())
+                                DialogData.getConfirmingForLimitedService())
                                 .let {
                                     it.setButtonsClickListener(
                                         onPositive = {

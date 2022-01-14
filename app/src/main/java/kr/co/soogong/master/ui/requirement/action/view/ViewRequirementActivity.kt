@@ -11,7 +11,7 @@ import kr.co.soogong.master.databinding.ActivityViewRequirementBinding
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.ui.dialog.popup.DefaultDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData
-import kr.co.soogong.master.ui.dialog.popup.DialogData.Companion.getExpiredRequestConsultDialogData
+import kr.co.soogong.master.ui.dialog.popup.DialogData.Companion.getExpiredRequirement
 import kr.co.soogong.master.ui.requirement.action.view.ViewRequirementViewModel.Companion.ASK_FOR_REVIEW_SUCCESSFULLY
 import kr.co.soogong.master.ui.requirement.action.view.ViewRequirementViewModel.Companion.CALL_TO_CUSTOMER_SUCCESSFULLY
 import kr.co.soogong.master.ui.requirement.action.view.ViewRequirementViewModel.Companion.INVALID_REQUIREMENT
@@ -76,7 +76,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                 ASK_FOR_REVIEW_SUCCESSFULLY -> toast(getString(R.string.ask_for_review_successful))
                 NOT_APPROVED_MASTER -> {
                     DefaultDialog.newInstance(
-                        DialogData.getAskingFillProfileDialogData(),
+                        DialogData.getAskingFillProfile(),
                         false
                     ).let { dialog ->
                         dialog.setButtonsClickListener(
@@ -88,7 +88,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                 }
                 REQUEST_APPROVE_MASTER -> {
                     DefaultDialog.newInstance(
-                        DialogData.getWaitingUntilApprovalDialogData(),
+                        DialogData.getWaitingUntilApproval(),
                         false
                     ).let { dialog ->
                         dialog.setButtonsClickListener(
@@ -120,7 +120,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
             // NOTE: 상담요청 상태에서, 상호 통화한 적이 한번도 없으면 전화하라고 안내
             is RequirementStatus.RequestConsult -> {
                 if (requirement.estimationDto?.fromMasterCallCnt == 0 && requirement.estimationDto.fromClientCallCnt == 0) {
-                    DefaultDialog.newInstance(DialogData.getRequestConsultAlertDialogData())
+                    DefaultDialog.newInstance(DialogData.getAlertForRequestConsult())
                         .let {
                             it.setButtonsClickListener(
                                 onPositive = {},
@@ -151,7 +151,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
     private fun isValidRequirement(requirement: Requirement): Boolean {
         if (requirement.estimationDto?.masterResponseCode == EstimationResponseCode.EXPIRED) {
             DefaultDialog.newInstance(
-                dialogData = getExpiredRequestConsultDialogData(),
+                dialogData = getExpiredRequirement(),
                 cancelable = false
             ).let {
                 it.setButtonsClickListener(

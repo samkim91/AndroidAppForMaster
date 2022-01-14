@@ -73,7 +73,7 @@ class AuthContainerActivity : BaseActivity<ActivityAuthContainerBinding>(
     }
 
     private fun showDialogForKeepingSignUp() {
-        DefaultDialog.newInstance(DialogData.getQuitSignUpDialogData())
+        DefaultDialog.newInstance(DialogData.getConfirmingQuitSignUp())
             .let {
                 it.setButtonsClickListener(
                     onPositive = {},

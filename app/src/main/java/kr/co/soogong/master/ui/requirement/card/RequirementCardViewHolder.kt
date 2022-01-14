@@ -85,7 +85,7 @@ open class RequirementCardViewHolder(
                 // 미승인 상태이면, 필수정보를 채우도록 이동
                 CodeTable.NOT_APPROVED.code ->
                     DefaultDialog.newInstance(
-                        DialogData.getAskingFillProfileDialogData(),
+                        DialogData.getAskingFillProfile(),
                     ).let { dialog ->
                         dialog.setButtonsClickListener(
                             onPositive = {
@@ -99,7 +99,7 @@ open class RequirementCardViewHolder(
                 // 승인요청 상태이면, 승인될 때까지 기다리라는 문구
                 CodeTable.REQUEST_APPROVE.code ->
                     DefaultDialog.newInstance(
-                        DialogData.getWaitingUntilApprovalDialogData()
+                        DialogData.getWaitingUntilApproval()
                     ).let { dialog ->
                         dialog.setButtonsClickListener(
                             onPositive = { },
@@ -123,7 +123,7 @@ open class RequirementCardViewHolder(
             setLeftButtonClickListener {
                 checkMasterApprovedStatus {
                     DefaultDialog.newInstance(
-                        DialogData.getCallToCustomerDialogData()
+                        DialogData.getCallToCustomer()
                     ).let {
                         it.setButtonsClickListener(
                             onPositive = {

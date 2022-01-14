@@ -109,7 +109,7 @@ class EditBusinessUnitInformationFragment :
 
                 if (viewModel.profile.value?.approvedStatus == CodeTable.APPROVED.code) {
                     DefaultDialog.newInstance(
-                        dialogData = DialogData.getConfirmingForRequiredDialogData())
+                        dialogData = DialogData.getConfirmingForLimitedService())
                         .let {
                             it.setButtonsClickListener(
                                 onPositive = { viewModel.saveBusinessUnitInformation() },

@@ -88,7 +88,7 @@ class EditShopImagesFragment : BaseFragment<FragmentEditShopImagesBinding>(
             (activity as EditProfileContainerActivity).setSaveButtonClickListener {
                 if (viewModel.profile.value?.approvedStatus == CodeTable.APPROVED.code) {
                     DefaultDialog.newInstance(
-                        DialogData.getConfirmingForRequiredDialogData())
+                        DialogData.getConfirmingForLimitedService())
                         .let {
                             it.setButtonsClickListener(
                                 onPositive = {
