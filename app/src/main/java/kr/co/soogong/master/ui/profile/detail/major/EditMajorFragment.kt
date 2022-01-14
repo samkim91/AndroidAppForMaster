@@ -73,7 +73,7 @@ class EditMajorFragment : BaseFragment<FragmentEditMajorBinding>(
                 // 시공 가능 업종을 수정하면, 프로필의 승인상태가 변경된다. 따라서 마스터 승인상태에 따라 아래 코드가 실행
                 if (viewModel.profile.value?.approvedStatus == CodeTable.APPROVED.code) {
                     DefaultDialog.newInstance(
-                        DialogData.getConfirmingForRequiredDialogData())
+                        DialogData.getConfirmingForLimitedService())
                         .let {
                             it.setButtonsClickListener(
                                 onPositive = { viewModel.saveMajor() },

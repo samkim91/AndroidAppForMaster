@@ -30,7 +30,7 @@ data class DialogData(
                 "취소"
             )
 
-        fun getRefuseEstimateDialogData() =
+        fun getRefuseEstimate() =
             DialogData(
                 "견적 거절",
                 "견적을 거절하시면, 해당 문의가 삭제됩니다.",
@@ -39,7 +39,7 @@ data class DialogData(
                 "취소",
             )
 
-        fun getRequestConsultAlertDialogData() =
+        fun getAlertForRequestConsult() =
             DialogData(
                 "상세상담 요청",
                 "고객님이 상세상담 통화를 요청하셨어요. 고객님과 빠르게 통화하고 시공 가능성을 높여보세요.",
@@ -48,7 +48,7 @@ data class DialogData(
                 "",
             )
 
-        fun getExpiredRequestConsultDialogData() =
+        fun getExpiredRequirement() =
             DialogData(
                 "문의마감",
                 "이미 마감된 문의입니다.",
@@ -57,7 +57,7 @@ data class DialogData(
                 "",
             )
 
-        fun getAcceptMeasureDialogData() =
+        fun getAcceptMeasure() =
             DialogData(
                 "실측 수락",
                 "수락 후 고객과 통화해 정확한 시공 내용을 파악해주세요.",
@@ -84,7 +84,7 @@ data class DialogData(
                 "취소",
             )
 
-        fun getRefuseMeasureDialogData() =
+        fun getRefuseMeasure() =
             DialogData(
                 "실측 포기",
                 "실측을 포기하시겠어요?",
@@ -93,7 +93,7 @@ data class DialogData(
                 "아니요",
             )
 
-        fun getCancelSendingEstimationDialogData() =
+        fun getCancelSendingEstimation() =
             DialogData(
                 "작성 취소",
                 "이 화면에서 나가면 작성했던 내용이 모두 삭제됩니다.",
@@ -102,7 +102,7 @@ data class DialogData(
                 "취소",
             )
 
-        fun getCallToCustomerDialogData() =
+        fun getCallToCustomer() =
             DialogData(
                 "전화 연결",
                 "고객님에게 전화하시겠어요?",
@@ -111,7 +111,7 @@ data class DialogData(
                 "취소",
             )
 
-        fun getQuitSignUpDialogData() =
+        fun getConfirmingQuitSignUp() =
             DialogData(
                 "잠깐!",
                 "가입신청을 그만두지 마세요. 지금 가입하면 문의 수신, 견적 발송이 무료!",
@@ -120,7 +120,7 @@ data class DialogData(
                 "그만 할래요",
             )
 
-        fun getExistentUserDialogData() =
+        fun getExistentUser() =
             DialogData(
                 "이미 수공의 마스터이시네요!",
                 "본인 인증을 통해 로그인해주세요.",
@@ -129,7 +129,7 @@ data class DialogData(
                 "",
             )
 
-        fun getUserExistDialogData() =
+        fun getUserExist() =
             DialogData(
                 "잠깐!",
                 "이미 존재하는 번호입니다.",
@@ -138,7 +138,16 @@ data class DialogData(
                 "",
             )
 
-        fun getAskingFillProfileDialogData() =
+        fun notifyRequiredProfileInformation() =
+            DialogData(
+                "[주의]",
+                "수공 마스터앱을 이용하시려면 추가적인 마스터님의 정보가 필요해요!",
+                "",
+                "확인",
+                "",
+            )
+
+        fun getAskingFillProfile() =
             DialogData(
                 "필수 정보 요청",
                 "문의를 처리하려면 필수 정보 등록이 필요해요. 지금 등록하시겠어요?",
@@ -147,7 +156,7 @@ data class DialogData(
                 "아니요",
             )
 
-        fun getWaitingUntilApprovalDialogData() =
+        fun getWaitingUntilApproval() =
             DialogData(
                 "[주의]",
                 "승인이 완료되어야 문의 처리가 가능해요. 승인이 완료되면 알림톡으로 바로 알려드릴게요!",
@@ -156,7 +165,7 @@ data class DialogData(
                 "",
             )
 
-        fun getAskingDeletePortfolioDialogData() =
+        fun getAskingDeletePortfolio() =
             DialogData(
                 "[주의]",
                 "포트폴리오를 삭제하시겠어요?",
@@ -165,7 +174,7 @@ data class DialogData(
                 "아니요",
             )
 
-        fun getAskingDeletePriceByProjectDialogData() =
+        fun getAskingDeletePriceByProject() =
             DialogData(
                 "[주의]",
                 "시공 종류별 가격을 삭제하시겠어요?",
@@ -174,7 +183,7 @@ data class DialogData(
                 "아니요",
             )
 
-        fun getConfirmingForRequiredDialogData() =
+        fun getConfirmingForLimitedService() =
             DialogData(
                 "[주의]",
                 "해당 정보를 수정하시면, 수공에서 승인하기 전까지 서비스 이용이 제한됩니다.",

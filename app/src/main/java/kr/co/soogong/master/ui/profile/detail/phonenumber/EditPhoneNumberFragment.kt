@@ -238,7 +238,7 @@ class EditPhoneNumberFragment : BaseFragment<FragmentEditPhoneNumberBinding>(
     }
 
     private fun showDialogForUserExist() {
-        DefaultDialog.newInstance(DialogData.getUserExistDialogData())
+        DefaultDialog.newInstance(DialogData.getUserExist())
             .let {
                 it.setButtonsClickListener(
                     onPositive = {},

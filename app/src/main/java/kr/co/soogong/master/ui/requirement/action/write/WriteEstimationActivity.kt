@@ -216,7 +216,7 @@ class WriteEstimationActivity : BaseActivity<ActivityWriteEstimationBinding>(
     private fun customBackPressed() {
         // 견적 작성 그만둘지 확인 다이얼로그 전시
         DefaultDialog.newInstance(
-            DialogData.getCancelSendingEstimationDialogData()
+            DialogData.getCancelSendingEstimation()
         ).let {
             it.setButtonsClickListener(
                 onPositive = {

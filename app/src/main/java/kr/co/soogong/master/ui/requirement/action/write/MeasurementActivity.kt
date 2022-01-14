@@ -146,7 +146,7 @@ class MeasurementActivity : BaseActivity<ActivityMeasurementBinding>(
 
     private fun customBackPressed() {
         DefaultDialog.newInstance(
-            DialogData.getCancelSendingEstimationDialogData()
+            DialogData.getCancelSendingEstimation()
         ).let {
             it.setButtonsClickListener(
                 onPositive = {

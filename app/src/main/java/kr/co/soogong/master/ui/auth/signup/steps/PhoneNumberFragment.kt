@@ -238,7 +238,7 @@ class PhoneNumberFragment : BaseFragment<FragmentPhoneNumberBinding>(
     }
 
     private fun showDialogForUserExist() {
-        DefaultDialog.newInstance(DialogData.getExistentUserDialogData(), false)
+        DefaultDialog.newInstance(DialogData.getExistentUser(), false)
             .let {
                 it.setButtonsClickListener(
                     onPositive = {      // 초기 화면으로 이동.. todo 바로 로그인화면으로 이동하면 더 좋을 듯 싶다.
