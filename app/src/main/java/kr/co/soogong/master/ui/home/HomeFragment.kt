@@ -21,7 +21,7 @@ import timber.log.Timber
 class HomeFragment : BaseFragment<FragmentHomeBinding>(
     R.layout.fragment_home
 ) {
-    private val activityViewModel: MainViewModel by activityViewModels()
+    private val mainViewModel: MainViewModel by activityViewModels()
     private val viewModel: HomeViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -36,27 +36,27 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
         Timber.tag(TAG).d("initLayout: ")
 
         bind {
-            activityVm = activityViewModel
+            mainVm = mainViewModel
             vm = viewModel
             lifecycleOwner = viewLifecycleOwner
 
             newRequirementsRecyclerView.adapter =
                 SimpleRequirementCardAdapter(requireContext(),
                     childFragmentManager,
-                    activityViewModel)
+                    mainViewModel)
 
             fciBeforeProgress.setOnClickListener {
                 // 문의 목록 -> 진행 전 으로 이동
-                activityViewModel.selectedMainTabInMainActivity.value =
+                mainViewModel.selectedMainTabInMainActivity.value =
                     TAB_TEXTS_MAIN_NAVIGATION.indexOf(R.string.main_activity_navigation_bar_requirements)
-                activityViewModel.selectedMainTabInRequirementFragment.value = 0
+                mainViewModel.selectedMainTabInRequirementFragment.value = 0
             }
 
             fciProcessing.setOnClickListener {
                 // 문의 목록 -> 진행 중 으로 이동
-                activityViewModel.selectedMainTabInMainActivity.value =
+                mainViewModel.selectedMainTabInMainActivity.value =
                     TAB_TEXTS_MAIN_NAVIGATION.indexOf(R.string.main_activity_navigation_bar_requirements)
-                activityViewModel.selectedMainTabInRequirementFragment.value = 1
+                mainViewModel.selectedMainTabInRequirementFragment.value = 1
             }
 
             fciAfterProcess.setOnClickListener {
@@ -72,13 +72,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
             action.observe(viewLifecycleOwner, EventObserver { event ->
                 when (event) {
                     REQUEST_FAILED -> requireContext().toast(getString(R.string.error_message_of_request_failed))
-                    UPDATE_REQUEST_MEASURE_YN_SUCCESSFUL -> activityViewModel.requestMasterSimpleInfo()
+                    UPDATE_REQUEST_MEASURE_YN_SUCCESSFUL -> mainViewModel.requestMasterSimpleInfo()
                 }
             })
             requestMeasureYn.observe(viewLifecycleOwner, { boolean ->
-                if (boolean != activityViewModel.masterSimpleInfo.value?.requestMeasureYn) viewModel.updateRequestMeasureYn()
+                if (boolean != mainViewModel.masterSimpleInfo.value?.requestMeasureYn) viewModel.updateRequestMeasureYn()
             })
-            activityViewModel.masterSimpleInfo.observe(viewLifecycleOwner, { masterDto ->
+            mainViewModel.masterSimpleInfo.observe(viewLifecycleOwner, { masterDto ->
                 masterDto.requestMeasureYn?.let {
                     viewModel.requestMeasureYn.value = it
                 }

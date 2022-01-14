@@ -9,7 +9,7 @@
         <import type="kr.co.soogong.master.R" />
 
         <variable
-            name="activityVm"
+            name="mainVm"
             type="kr.co.soogong.master.ui.main.MainViewModel" />
 
         <variable
@@ -70,7 +70,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:constraint_referenced_ids="tv_for_switch, switch_compat"
-                bind:visible="@{activityVm.masterSimpleInfo.secretaryYn &amp;&amp; activityVm.masterSimpleInfo.freeMeasureYn}"
+                bind:visible="@{mainVm.masterSimpleInfo.secretaryYn &amp;&amp; mainVm.masterSimpleInfo.freeMeasureYn}"
                 tools:visibility="visible" />
 
             <androidx.constraintlayout.widget.Barrier

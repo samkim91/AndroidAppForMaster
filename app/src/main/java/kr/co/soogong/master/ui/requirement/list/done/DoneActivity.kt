@@ -46,13 +46,6 @@ class DoneActivity : BaseActivity<ActivityDoneBinding>(
         }
     }
 
-    override fun onStart() {
-        super.onStart()
-        Timber.tag(TAG).d("onStart: ")
-
-        viewModel.initList()
-    }
-
     private fun registerEventObserve() {
         Timber.tag(TAG).d("registerEventObserve: ")
 

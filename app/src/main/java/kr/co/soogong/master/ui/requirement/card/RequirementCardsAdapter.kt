@@ -11,13 +11,13 @@ import kr.co.soogong.master.ui.requirement.list.RequirementsViewModel
 class RequirementCardsAdapter(
     private val context: Context,
     private val fragmentManager: FragmentManager,
-    private val activityViewModel: MainViewModel,
+    private val mainViewModel: MainViewModel,
     private val viewModel: RequirementsViewModel,
 ) : ListAdapter<RequirementCard, RequirementCardViewHolder>(RequirementCardDiffUtil()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         RequirementCardViewHolder.create(context,
             fragmentManager,
-            activityViewModel,
+            mainViewModel,
             viewModel,
             parent,
             viewType)

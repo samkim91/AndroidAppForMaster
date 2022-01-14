@@ -26,7 +26,7 @@ import kr.co.soogong.master.uihelper.requirment.action.ViewRequirementActivityHe
 open class RequirementCardViewHolder(
     protected val context: Context,
     protected val fragmentManager: FragmentManager,
-    protected val activityViewModel: MainViewModel,
+    protected val mainViewModel: MainViewModel,
     protected val viewModel: RequirementsViewModel,
     protected val binding: ViewHolderRequirementCardBinding,
 ) : RecyclerView.ViewHolder(binding.root) {
@@ -80,7 +80,7 @@ open class RequirementCardViewHolder(
     fun checkMasterApprovedStatus(
         function: () -> Unit,
     ) {
-        activityViewModel.masterSimpleInfo.value?.approvedStatus.let {
+        mainViewModel.masterSimpleInfo.value?.approvedStatus.let {
             when (it) {
                 // 미승인 상태이면, 필수정보를 채우도록 이동
                 CodeTable.NOT_APPROVED.code ->
@@ -89,7 +89,7 @@ open class RequirementCardViewHolder(
                     ).let { dialog ->
                         dialog.setButtonsClickListener(
                             onPositive = {
-                                activityViewModel.selectedMainTabInMainActivity.value =
+                                mainViewModel.selectedMainTabInMainActivity.value =
                                     TAB_TEXTS_MAIN_NAVIGATION.indexOf(R.string.main_activity_navigation_bar_profile)
                             },
                             onNegative = { }
@@ -197,7 +197,7 @@ open class RequirementCardViewHolder(
         fun create(
             context: Context,
             fragmentManager: FragmentManager,
-            activityViewModel: MainViewModel,
+            mainViewModel: MainViewModel,
             viewModel: RequirementsViewModel,
             parent: ViewGroup,
             viewType: Int,
@@ -211,67 +211,67 @@ open class RequirementCardViewHolder(
             return when (viewType) {
                 RequirementStatus.Requested.asInt -> RequestedCardViewHolder(context,
                     fragmentManager,
-                    activityViewModel,
+                    mainViewModel,
                     viewModel,
                     binding)
 
                 RequirementStatus.RequestConsult.asInt -> RequestConsultCardViewHolder(context,
                     fragmentManager,
-                    activityViewModel,
+                    mainViewModel,
                     viewModel,
                     binding)
 
                 RequirementStatus.RequestMeasure.asInt -> RequestMeasureCardViewHolder(context,
                     fragmentManager,
-                    activityViewModel,
+                    mainViewModel,
                     viewModel,
                     binding)
 
                 RequirementStatus.Estimated.asInt -> EstimatedCardViewHolder(context,
                     fragmentManager,
-                    activityViewModel,
+                    mainViewModel,
                     viewModel,
                     binding)
 
                 RequirementStatus.Measuring.asInt -> MeasuringCardViewHolder(context,
                     fragmentManager,
-                    activityViewModel,
+                    mainViewModel,
                     viewModel,
                     binding)
 
                 RequirementStatus.Measured.asInt -> MeasuredCardViewHolder(context,
                     fragmentManager,
-                    activityViewModel,
+                    mainViewModel,
                     viewModel,
                     binding)
 
                 RequirementStatus.Repairing.asInt -> RepairingCardViewHolder(context,
                     fragmentManager,
-                    activityViewModel,
+                    mainViewModel,
                     viewModel,
                     binding)
 
                 RequirementStatus.Done.asInt -> DoneViewHolder(context,
                     fragmentManager,
-                    activityViewModel,
+                    mainViewModel,
                     viewModel,
                     binding)
 
                 RequirementStatus.Closed.asInt -> ClosedViewHolder(context,
                     fragmentManager,
-                    activityViewModel,
+                    mainViewModel,
                     viewModel,
                     binding)
 
                 RequirementStatus.Canceled.asInt -> CanceledViewHolder(context,
                     fragmentManager,
-                    activityViewModel,
+                    mainViewModel,
                     viewModel,
                     binding)
 
                 else -> CanceledViewHolder(context,
                     fragmentManager,
-                    activityViewModel,
+                    mainViewModel,
                     viewModel,
                     binding)
             }

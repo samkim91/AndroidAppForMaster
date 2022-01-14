@@ -16,6 +16,10 @@ class DoneViewModel @Inject constructor(
     private val requirementViewModelAggregate: RequirementViewModelAggregate,
 ) : RequirementsViewModel(requirementViewModelAggregate) {
 
+    init {
+        initList()
+    }
+
     override fun initList() {
         Timber.tag(TAG).d("initList: ")
         requirements.clear()

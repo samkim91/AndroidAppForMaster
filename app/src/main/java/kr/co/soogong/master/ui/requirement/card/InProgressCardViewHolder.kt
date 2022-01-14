@@ -13,10 +13,10 @@ import kr.co.soogong.master.ui.requirement.list.RequirementsViewModel
 class RepairingCardViewHolder(
     context: Context,
     fragmentManager: FragmentManager,
-    activityViewModel: MainViewModel,
+    mainViewModel: MainViewModel,
     viewModel: RequirementsViewModel,
     binding: ViewHolderRequirementCardBinding,
-) : RequirementCardViewHolder(context, fragmentManager, activityViewModel, viewModel, binding) {
+) : RequirementCardViewHolder(context, fragmentManager, mainViewModel, viewModel, binding) {
     override fun bind(
         requirementCard: RequirementCard,
     ) {
@@ -30,10 +30,10 @@ class RepairingCardViewHolder(
 class DoneViewHolder(
     context: Context,
     fragmentManager: FragmentManager,
-    activityViewModel: MainViewModel,
+    mainViewModel: MainViewModel,
     viewModel: RequirementsViewModel,
     binding: ViewHolderRequirementCardBinding,
-) : RequirementCardViewHolder(context, fragmentManager, activityViewModel, viewModel, binding) {
+) : RequirementCardViewHolder(context, fragmentManager, mainViewModel, viewModel, binding) {
     override fun bind(
         requirementCard: RequirementCard,
     ) {

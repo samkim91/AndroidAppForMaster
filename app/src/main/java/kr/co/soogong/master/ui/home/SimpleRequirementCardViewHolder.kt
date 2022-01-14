@@ -19,7 +19,7 @@ class SimpleRequirementCardViewHolder(
     fun bind(
         context: Context,
         fragmentManager: FragmentManager,
-        activityViewModel: MainViewModel,
+        mainViewModel: MainViewModel,
         requirementCard: RequirementCard,
         position: Int,
     ) {
@@ -30,7 +30,7 @@ class SimpleRequirementCardViewHolder(
             setApprovedMasterOnly(context,
                 fragmentManager,
                 this,
-                activityViewModel,
+                mainViewModel,
                 requirementCard)
         }
     }
@@ -39,12 +39,12 @@ class SimpleRequirementCardViewHolder(
         context: Context,
         fragmentManager: FragmentManager,
         binding: ViewHolderSimpleRequirementItemBinding,
-        activityViewModel: MainViewModel,
+        mainViewModel: MainViewModel,
         requirementCard: RequirementCard,
     ) {
         with(binding) {
             setCardClickListener {
-                activityViewModel.masterSimpleInfo.value?.approvedStatus.let {
+                mainViewModel.masterSimpleInfo.value?.approvedStatus.let {
                     when (it) {
                         // 미승인 상태이면, 필수정보를 채우도록 이동
                         CodeTable.NOT_APPROVED.code -> {
@@ -53,7 +53,7 @@ class SimpleRequirementCardViewHolder(
                             ).let { dialog ->
                                 dialog.setButtonsClickListener(
                                     onPositive = {
-                                        activityViewModel.selectedMainTabInMainActivity.value =
+                                        mainViewModel.selectedMainTabInMainActivity.value =
                                             TAB_TEXTS_MAIN_NAVIGATION.indexOf(R.string.main_activity_navigation_bar_profile)
                                     },
                                     onNegative = { }

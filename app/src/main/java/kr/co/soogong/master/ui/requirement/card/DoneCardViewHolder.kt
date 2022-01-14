@@ -16,10 +16,10 @@ import kr.co.soogong.master.utility.extension.formatMoney
 class ClosedViewHolder(
     context: Context,
     fragmentManager: FragmentManager,
-    activityViewModel: MainViewModel,
+    mainViewModel: MainViewModel,
     viewModel: RequirementsViewModel,
     binding: ViewHolderRequirementCardBinding,
-) : RequirementCardViewHolder(context, fragmentManager, activityViewModel, viewModel, binding) {
+) : RequirementCardViewHolder(context, fragmentManager, mainViewModel, viewModel, binding) {
     override fun bind(
         requirementCard: RequirementCard,
     ) {
@@ -36,10 +36,10 @@ class ClosedViewHolder(
 class CanceledViewHolder(
     context: Context,
     fragmentManager: FragmentManager,
-    activityViewModel: MainViewModel,
+    mainViewModel: MainViewModel,
     viewModel: RequirementsViewModel,
     binding: ViewHolderRequirementCardBinding,
-) : RequirementCardViewHolder(context, fragmentManager, activityViewModel, viewModel, binding) {
+) : RequirementCardViewHolder(context, fragmentManager, mainViewModel, viewModel, binding) {
     override fun bind(
         requirementCard: RequirementCard,
     ) {
