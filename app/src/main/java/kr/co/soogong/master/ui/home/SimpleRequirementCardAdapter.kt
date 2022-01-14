@@ -13,7 +13,7 @@ import kr.co.soogong.master.ui.requirement.card.RequirementCardDiffUtil
 class SimpleRequirementCardAdapter(
     private val context: Context,
     private val fragmentManager: FragmentManager,
-    private val activityViewModel: MainViewModel,
+    private val mainViewModel: MainViewModel,
 ) : ListAdapter<RequirementCard, SimpleRequirementCardViewHolder>(RequirementCardDiffUtil()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         SimpleRequirementCardViewHolder(
@@ -25,5 +25,5 @@ class SimpleRequirementCardAdapter(
         )
 
     override fun onBindViewHolder(holder: SimpleRequirementCardViewHolder, position: Int) =
-        holder.bind(context, fragmentManager, activityViewModel, currentList[position], position)
+        holder.bind(context, fragmentManager, mainViewModel, currentList[position], position)
 }

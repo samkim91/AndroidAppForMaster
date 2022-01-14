@@ -144,6 +144,13 @@
                 tools:text="🛠 최종 시공가 : 1,200,000원"
                 tools:visibility="visible" />
 
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrier_buttons"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="tv_due_time, tv_actual_price" />
+
             <!-- region 버튼 -->
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/button_left"
@@ -155,7 +162,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/button_right"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_due_time"
+                app:layout_constraintTop_toBottomOf="@id/barrier_buttons"
                 app:layout_goneMarginEnd="@dimen/gap_0"
                 tools:text="견적 거절"
                 tools:visibility="visible" />
@@ -169,7 +176,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/button_left"
-                app:layout_constraintTop_toBottomOf="@id/tv_due_time"
+                app:layout_constraintTop_toBottomOf="@id/barrier_buttons"
                 tools:text="자세히 보기"
                 tools:visibility="visible" />
             <!-- endregion -->

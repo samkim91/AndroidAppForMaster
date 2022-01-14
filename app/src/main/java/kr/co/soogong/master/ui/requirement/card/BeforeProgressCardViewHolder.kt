@@ -14,19 +14,19 @@ import kr.co.soogong.master.utility.extension.setRequestMeasureDueTime
 class RequestedCardViewHolder(
     context: Context,
     fragmentManager: FragmentManager,
-    activityViewModel: MainViewModel,
+    mainViewModel: MainViewModel,
     viewModel: RequirementsViewModel,
     binding: ViewHolderRequirementCardBinding,
-) : RequirementCardViewHolder(context, fragmentManager, activityViewModel, viewModel, binding)
+) : RequirementCardViewHolder(context, fragmentManager, mainViewModel, viewModel, binding)
 
 // 실측요청 상태
 class RequestMeasureCardViewHolder(
     context: Context,
     fragmentManager: FragmentManager,
-    activityViewModel: MainViewModel,
+    mainViewModel: MainViewModel,
     viewModel: RequirementsViewModel,
     binding: ViewHolderRequirementCardBinding,
-) : RequirementCardViewHolder(context, fragmentManager, activityViewModel, viewModel, binding) {
+) : RequirementCardViewHolder(context, fragmentManager, mainViewModel, viewModel, binding) {
     override fun bind(
         requirementCard: RequirementCard,
     ) {
@@ -41,10 +41,10 @@ class RequestMeasureCardViewHolder(
 class MeasuringCardViewHolder(
     context: Context,
     fragmentManager: FragmentManager,
-    activityViewModel: MainViewModel,
+    mainViewModel: MainViewModel,
     viewModel: RequirementsViewModel,
     binding: ViewHolderRequirementCardBinding,
-) : RequirementCardViewHolder(context, fragmentManager, activityViewModel, viewModel, binding) {
+) : RequirementCardViewHolder(context, fragmentManager, mainViewModel, viewModel, binding) {
     override fun bind(
         requirementCard: RequirementCard,
     ) {
@@ -58,10 +58,10 @@ class MeasuringCardViewHolder(
 class MeasuredCardViewHolder(
     context: Context,
     fragmentManager: FragmentManager,
-    activityViewModel: MainViewModel,
+    mainViewModel: MainViewModel,
     viewModel: RequirementsViewModel,
     binding: ViewHolderRequirementCardBinding,
-) : RequirementCardViewHolder(context, fragmentManager, activityViewModel, viewModel, binding) {
+) : RequirementCardViewHolder(context, fragmentManager, mainViewModel, viewModel, binding) {
     override fun bind(
         requirementCard: RequirementCard,
     ) {
@@ -75,10 +75,10 @@ class MeasuredCardViewHolder(
 class RequestConsultCardViewHolder(
     context: Context,
     fragmentManager: FragmentManager,
-    activityViewModel: MainViewModel,
+    mainViewModel: MainViewModel,
     viewModel: RequirementsViewModel,
     binding: ViewHolderRequirementCardBinding,
-) : RequirementCardViewHolder(context, fragmentManager, activityViewModel, viewModel, binding) {
+) : RequirementCardViewHolder(context, fragmentManager, mainViewModel, viewModel, binding) {
     override fun bind(
         requirementCard: RequirementCard,
     ) {
@@ -92,10 +92,10 @@ class RequestConsultCardViewHolder(
 class EstimatedCardViewHolder(
     context: Context,
     fragmentManager: FragmentManager,
-    activityViewModel: MainViewModel,
+    mainViewModel: MainViewModel,
     viewModel: RequirementsViewModel,
     binding: ViewHolderRequirementCardBinding,
-) : RequirementCardViewHolder(context, fragmentManager, activityViewModel, viewModel, binding) {
+) : RequirementCardViewHolder(context, fragmentManager, mainViewModel, viewModel, binding) {
     override fun bind(
         requirementCard: RequirementCard,
     ) {

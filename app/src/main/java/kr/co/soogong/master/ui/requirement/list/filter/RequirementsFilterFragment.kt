@@ -22,7 +22,7 @@ class RequirementsFilterFragment : BaseFragment<FragmentRequirementListBinding>(
     R.layout.fragment_requirement_list
 ) {
 
-    private val activityViewModel: MainViewModel by activityViewModels()
+    private val mainViewModel: MainViewModel by activityViewModels()
     private val parentViewModel: RequirementViewModel by viewModels({ requireParentFragment() })
     private val viewModel: RequirementsFilterViewModel by viewModels()
 
@@ -44,7 +44,7 @@ class RequirementsFilterFragment : BaseFragment<FragmentRequirementListBinding>(
             recyclerViewRequirements.adapter =
                 RequirementCardsAdapter(requireContext(),
                     childFragmentManager,
-                    activityViewModel,
+                    mainViewModel,
                     viewModel)
         }
     }

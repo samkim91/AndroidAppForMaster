@@ -31,7 +31,7 @@ class RequirementFragment : BaseFragment<FragmentRequirementBinding>(
     R.layout.fragment_requirement
 ), RequirementsBadge {
 
-    private val activityViewModel: MainViewModel by activityViewModels()
+    private val mainViewModel: MainViewModel by activityViewModels()
     private val viewModel: RequirementViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -113,7 +113,7 @@ class RequirementFragment : BaseFragment<FragmentRequirementBinding>(
             }
         })
 
-        activityViewModel.selectedMainTabInRequirementFragment.observe(viewLifecycleOwner,
+        mainViewModel.selectedMainTabInRequirementFragment.observe(viewLifecycleOwner,
             { position ->
                 binding.mainTabs.getTabAt(position)?.select()
             })
