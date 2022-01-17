@@ -259,7 +259,7 @@ class SubheadlineContentTag @JvmOverloads constructor(
                         params as MarginLayoutParams
                         params.topMargin = 12.dp
                     }
-                    container.addView(viewHolder.itemView)
+                    container.addView(viewHolder.itemView, params)
                 }
             }
         }
