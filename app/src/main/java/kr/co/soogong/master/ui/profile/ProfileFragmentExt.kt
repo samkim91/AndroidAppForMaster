@@ -44,6 +44,7 @@ fun setRequiredProfileInformationProgress(
     }
 }
 
+// 마스터의 승인상태와 필수 정보들의 입력 상태를 확인
 fun checkApprovedStatusAndRequiredField(
     fragmentManager: FragmentManager,
     binding: FragmentProfileBinding,
@@ -64,6 +65,7 @@ fun checkApprovedStatusAndRequiredField(
     }
 }
 
+// 빈 프로필이 있을 경우에, 안내 다이얼로그 전시
 fun showDialogForEmptyFields(
     fragmentManager: FragmentManager,
     binding: FragmentProfileBinding,
@@ -87,6 +89,7 @@ fun showDialogForEmptyFields(
     }
 }
 
+// 빈 프로필 필드로 스크롤
 fun focusEmptyField(binding: FragmentProfileBinding, pair: Pair<String, Boolean>) {
     Timber.tag(TAG).d("focusEmptyField: ")
 
@@ -110,7 +113,7 @@ fun focusEmptyField(binding: FragmentProfileBinding, pair: Pair<String, Boolean>
     }
 }
 
-// 프로필 선택정보 프로그래스 셋
+// 프로필 선택정보 프로그래스
 fun setOptionalProfileInformationProgress(
     viewModel: ProfileViewModel,
 ) {

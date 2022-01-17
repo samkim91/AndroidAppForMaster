@@ -6,6 +6,8 @@
 
     <data>
 
+        <import type="kr.co.soogong.master.data.global.CodeTable" />
+
         <variable
             name="buttonThemeRequestReview"
             type="kr.co.soogong.master.data.global.ButtonTheme" />
@@ -172,10 +174,14 @@
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/gap_12"
-                    app:content="@{@string/explanation_of_required_information}"
+                    android:visibility="gone"
+                    app:containerBackground="@{vm.profile.approvedStatus.equals(CodeTable.NOT_APPROVED.code) ? @drawable/bg_solid_grey3_radius12 : @drawable/bg_solid_green_radius12}"
+                    app:content="@{vm.profile.approvedStatus.equals(CodeTable.NOT_APPROVED.code) ? @string/explanation_of_required_information_not_approved : @string/explanation_of_required_information_request_approve}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/spi_required_information" />
+                    app:layout_constraintTop_toBottomOf="@id/spi_required_information"
+                    bind:visible="@{vm.percentageRequired != 100.0 || !vm.profile.approvedStatus.equals(CodeTable.APPROVED.code)}"
+                    tools:visibility="visible" />
 
                 <!-- 대표자명 -->
                 <kr.co.soogong.master.atomic.molecules.HeadlineButtonContent
@@ -316,10 +322,14 @@
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/gap_12"
-                    app:content="@{@string/explanation_of_required_information}"
+                    android:visibility="gone"
+                    app:containerBackground="@{@drawable/bg_solid_grey3_radius12}"
+                    app:content="@{@string/explanation_of_required_information_not_approved}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/spi_optional_information" />
+                    app:layout_constraintTop_toBottomOf="@id/spi_optional_information"
+                    bind:visible="@{vm.percentageBasic != 100.0}"
+                    tools:visibility="visible" />
 
                 <!-- 무료 방문 실측 여부 -->
                 <kr.co.soogong.master.atomic.molecules.HeadlineButtonContent
