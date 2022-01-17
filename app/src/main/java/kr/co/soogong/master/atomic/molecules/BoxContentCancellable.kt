@@ -1,13 +1,11 @@
 package kr.co.soogong.master.atomic.molecules
 
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
-import androidx.core.view.setPadding
-import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ViewBoxContentCancellableBinding
 
 class BoxContentCancellable @JvmOverloads constructor(
@@ -29,6 +27,14 @@ class BoxContentCancellable @JvmOverloads constructor(
             field = value
             value?.let {
                 binding.tvContent.text = it
+            }
+        }
+
+    var containerBackground: Drawable? = null
+        set(value) {
+            field = value
+            value?.let {
+                binding.ivLayout.background = it
             }
         }
 }

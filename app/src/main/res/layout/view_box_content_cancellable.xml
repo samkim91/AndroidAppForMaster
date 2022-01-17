@@ -12,11 +12,11 @@
             android:id="@+id/iv_layout"
             android:layout_width="@dimen/gap_0"
             android:layout_height="@dimen/gap_0"
-            android:background="@drawable/bg_solid_grey3_radius12"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:background="@drawable/bg_solid_grey3_radius12" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_content"
