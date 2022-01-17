@@ -101,10 +101,15 @@ class EditBusinessUnitInformationFragment :
                     }
                 })
 
+                viewModel.businessRegistImage.observe(viewLifecycleOwner, {
+                    sbbGettingImages.error =
+                        if (it.isNullOrEmpty()) getString(R.string.required_field_alert) else null
+                })
+
                 if (viewModel.businessType.value == CodeTable.FREELANCER) {
-                    if (!stiShopName.error.isNullOrEmpty() || !stiBusinessNumber.error.isNullOrEmpty()) return@setSaveButtonClickListener
+                    if (!stiShopName.error.isNullOrEmpty() || !stiBusinessNumber.error.isNullOrEmpty() || !sbbGettingImages.error.isNullOrEmpty()) return@setSaveButtonClickListener
                 } else {
-                    if (!stiBusinessName.error.isNullOrEmpty() || !stiShopName.error.isNullOrEmpty() || !stiBusinessNumber.error.isNullOrEmpty()) return@setSaveButtonClickListener
+                    if (!stiBusinessName.error.isNullOrEmpty() || !stiShopName.error.isNullOrEmpty() || !stiBusinessNumber.error.isNullOrEmpty() || !sbbGettingImages.error.isNullOrEmpty()) return@setSaveButtonClickListener
                 }
 
                 if (viewModel.profile.value?.approvedStatus == CodeTable.APPROVED.code) {
