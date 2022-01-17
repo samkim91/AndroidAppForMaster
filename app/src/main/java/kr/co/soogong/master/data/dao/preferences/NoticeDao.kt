@@ -6,7 +6,7 @@ import kr.co.soogong.master.data.dto.mypage.NoticeDto
 
 @Dao
 interface NoticeDao {
-    @Query("SELECT * FROM Notice ORDER BY id DESC")
+    @Query("SELECT * FROM Notice ORDER BY createdAt DESC")
     fun getNotices(): Single<List<NoticeDto>>
 
     @Query("SELECT * FROM Notice WHERE id = :id")
