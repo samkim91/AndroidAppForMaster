@@ -175,12 +175,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/gap_12"
                     android:visibility="gone"
-                    app:containerBackground="@{vm.profile.approvedStatus.equals(CodeTable.NOT_APPROVED.code) ? @drawable/bg_solid_grey3_radius12 : @drawable/bg_solid_green_radius12}"
-                    app:content="@{vm.profile.approvedStatus.equals(CodeTable.NOT_APPROVED.code) ? @string/explanation_of_required_information_not_approved : @string/explanation_of_required_information_request_approve}"
+                    app:approvedStatus="@{vm.profile.approvedStatus}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/spi_required_information"
-                    bind:visible="@{vm.percentageRequired != 100.0 || !vm.profile.approvedStatus.equals(CodeTable.APPROVED.code)}"
                     tools:visibility="visible" />
 
                 <!-- 대표자명 -->
@@ -323,11 +321,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/gap_12"
                     android:visibility="gone"
-                    app:containerBackground="@{@drawable/bg_solid_grey3_radius12}"
-                    app:content="@{@string/explanation_of_required_information_not_approved}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/spi_optional_information"
+                    app:percentage="@{vm.percentageBasic}"
                     bind:visible="@{vm.percentageBasic != 100.0}"
                     tools:visibility="visible" />
 
