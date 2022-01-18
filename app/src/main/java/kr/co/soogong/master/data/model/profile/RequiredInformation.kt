@@ -45,7 +45,7 @@ data class RequiredInformation(
                 projects = Project.fromProjectDtos(masterDto.projectDtos),
                 companyAddress = CompanyAddress(
                     masterDto.roadAddress,
-                    masterDto.detailAddress,
+                    masterDto.detailAddress ?: "",
                 ),
                 coordinate = Coordinate(
                     masterDto.latitude?.toDouble(),
