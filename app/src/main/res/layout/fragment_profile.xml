@@ -223,7 +223,7 @@
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/gap_33"
-                    app:content="@{vm.profile.requiredInformation.businessUnitInformation.businessType != null ? vm.profile.requiredInformation.businessUnitInformation.businessType + `, ` + vm.profile.requiredInformation.businessUnitInformation.businessName : null}"
+                    app:content="@{vm.profile.requiredInformation.businessUnitInformation.businessType != null ? vm.profile.requiredInformation.businessUnitInformation.businessType + `, ` + vm.profile.requiredInformation.businessUnitInformation.shopName : null}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/hie_shop_images"

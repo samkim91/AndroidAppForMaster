@@ -11,10 +11,12 @@ import kr.co.soogong.master.data.dto.auth.VersionDto
 import kr.co.soogong.master.ui.dialog.popup.DefaultDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData
 import kr.co.soogong.master.ui.splash.SplashViewModel.Companion.GET_MASTER_DIRECT_REPAIR
+import kr.co.soogong.master.ui.splash.SplashViewModel.Companion.GET_MASTER_DIRECT_REPAIR_FAILED
 import kr.co.soogong.master.ui.splash.SplashViewModel.Companion.GET_MASTER_UID_FAILED
 import kr.co.soogong.master.ui.splash.SplashViewModel.Companion.GET_MASTER_UID_SUCCESSFULLY
+import kr.co.soogong.master.ui.splash.SplashViewModel.Companion.GET_VERSION_INFO_FAILED
 import kr.co.soogong.master.ui.splash.SplashViewModel.Companion.GET_VERSION_SUCCESSFULLY
-import kr.co.soogong.master.ui.splash.SplashViewModel.Companion.REQUEST_FAILED
+import kr.co.soogong.master.ui.splash.SplashViewModel.Companion.UPDATE_DIRECT_REPAIR_FAILED
 import kr.co.soogong.master.ui.splash.SplashViewModel.Companion.UPDATE_DIRECT_REPAIR_SUCCESSFULLY
 import kr.co.soogong.master.uihelper.auth.AuthContainerActivityHelper
 import kr.co.soogong.master.uihelper.main.MainActivityHelper
@@ -104,7 +106,9 @@ class SplashActivity : AppCompatActivity() {
             when (action) {
                 GET_MASTER_UID_SUCCESSFULLY -> viewModel.requestMasterSimpleInfo()
                 GET_MASTER_UID_FAILED -> startActivity(AuthContainerActivityHelper.getIntent(this))
-                REQUEST_FAILED -> toast(getString(R.string.error_message_of_request_failed))
+                GET_VERSION_INFO_FAILED -> toast(getString(R.string.get_version_info_failed))
+                GET_MASTER_DIRECT_REPAIR_FAILED -> toast(getString(R.string.get_master_direct_repair_failed))
+                UPDATE_DIRECT_REPAIR_FAILED -> toast(getString(R.string.update_master_direct_repair_failed))
             }
         })
     }

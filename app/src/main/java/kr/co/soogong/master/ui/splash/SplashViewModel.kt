@@ -37,6 +37,7 @@ class SplashViewModel @Inject constructor(
                 },
                 onError = {
                     Timber.tag(TAG).d("getLatestVersion failed: $it")
+                    setAction(GET_VERSION_INFO_FAILED)
                 }
             ).addToDisposable()
     }
@@ -65,7 +66,7 @@ class SplashViewModel @Inject constructor(
                 },
                 onError = {
                     Timber.tag(TAG).d("requestMasterSimpleInfo failed: $it")
-                    setAction(REQUEST_FAILED)
+                    setAction(GET_MASTER_DIRECT_REPAIR_FAILED)
                 }
             ).addToDisposable()
     }
@@ -88,7 +89,7 @@ class SplashViewModel @Inject constructor(
                 },
                 onError = {
                     Timber.tag(TAG).d("updateDirectRepairYn failed: $it")
-                    setAction(REQUEST_FAILED)
+                    setAction(UPDATE_DIRECT_REPAIR_FAILED)
                 }
             ).addToDisposable()
     }
@@ -100,6 +101,9 @@ class SplashViewModel @Inject constructor(
         const val GET_MASTER_UID_FAILED = "GET_MASTER_UID_FAILED"
         const val GET_MASTER_DIRECT_REPAIR = "GET_MASTER_DIRECT_REPAIR"
         const val UPDATE_DIRECT_REPAIR_SUCCESSFULLY = "UPDATE_DIRECT_REPAIR_SUCCESSFULLY"
-        const val REQUEST_FAILED = "REQUEST_FAILED"
+
+        const val GET_VERSION_INFO_FAILED = "GET_VERSION_INFO_FAILED"
+        const val GET_MASTER_DIRECT_REPAIR_FAILED = "GET_MASTER_DIRECT_REPAIR_FAILED"
+        const val UPDATE_DIRECT_REPAIR_FAILED = "UPDATE_DIRECT_REPAIR_FAILED"
     }
 }

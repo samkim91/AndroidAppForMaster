@@ -36,11 +36,9 @@ class HeadlineButtonContent @JvmOverloads constructor(
     var content: String? = null
         set(value) {
             field = value
-            value?.let {
-                binding.tvContent.setText(it)
-                binding.tvContent.isVisible = true
-                setButtonStatus()
-            }
+            binding.tvContent.isVisible = !value.isNullOrEmpty()
+            binding.tvContent.setText(value)
+            setButtonStatus()
         }
 
     var hint: String? = null

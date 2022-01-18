@@ -29,14 +29,6 @@ class SignInViewModel @Inject constructor(
     val resendToken = MutableLiveData<PhoneAuthProvider.ForceResendingToken>()
     val uid = MutableLiveData("")
 
-    private val _isEnabled = MutableLiveData(false)
-    val isEnabled: LiveData<Boolean>
-        get() = _isEnabled
-
-    fun changeEnabled() {
-        _isEnabled.value = !_isEnabled.value!!
-    }
-
     fun checkUserExist() {
         Timber.tag(TAG).d("checkUserExist: ")
 
@@ -46,11 +38,11 @@ class SignInViewModel @Inject constructor(
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
                     onSuccess = {
-                        Timber.tag(TAG).d("onSuccess: $it")
+                        Timber.tag(TAG).d("checkUserExist onSuccess: $it")
                         if (it) setAction(PHONE_NUMBER_EXIST) else setAction(PHONE_NUMBER_NOT_EXIST)
                     },
                     onError = {
-                        Timber.tag(TAG).d("onError: $it")
+                        Timber.tag(TAG).d("checkUserExist onError: $it")
                         setAction(REQUEST_FAILED)
                     }
                 ).addToDisposable()
@@ -66,11 +58,11 @@ class SignInViewModel @Inject constructor(
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
                     onSuccess = {
-                        Timber.tag(TAG).d("successToSignIn: $it")
+                        Timber.tag(TAG).d("requestSignIn successToSignIn: $it")
                         setAction(SIGN_IN_SUCCESSFULLY)
                     },
                     onError = {
-                        Timber.tag(TAG).d("failToSignIn: $it ")
+                        Timber.tag(TAG).d("requestSignIn failToSignIn: $it ")
                         setAction(REQUEST_FAILED)
                     }
                 ).addToDisposable()
