@@ -10,7 +10,7 @@
 
         <variable
             name="colorThemeEstimationTemplate"
-            type="kr.co.soogong.master.data.common.ColorTheme" />
+            type="kr.co.soogong.master.data.global.ColorTheme" />
 
         <variable
             name="vm"
@@ -110,7 +110,7 @@
                     android:layout_marginTop="@dimen/gap_24"
                     app:content="@={vm.description}"
                     app:hint="@{@string/estimation_description_notice}"
-                    app:maxCount="@{150}"
+                    app:maxCount="@{500}"
                     app:subheadline="@{@string/estimation_description}" />
 
                 <androidx.appcompat.widget.AppCompatCheckBox

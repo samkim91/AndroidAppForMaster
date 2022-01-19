@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="kr.co.soogong.master.ui.auth.signup.SignUpViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <kr.co.soogong.master.atomic.molecules.SubheadlineTextInput
+            android:id="@+id/sti_owner_name"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="wrap_content"
+            app:content="@={vm.ownerName}"
+            app:hint="@{@string/owner_name}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:max="@{20}"
+            app:subheadline="@{@string/type_owner_name}" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

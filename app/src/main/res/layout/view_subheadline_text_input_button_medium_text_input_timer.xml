@@ -14,10 +14,12 @@
             android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="subheadline : ex) 업체 이름을 입력해주세요." />
+            tools:text="subheadline : ex) 업체 이름을 입력해주세요."
+            tools:visibility="visible" />
 
         <kr.co.soogong.master.atomic.atoms.TextInputButtonMedium
             android:id="@+id/tibm_component"

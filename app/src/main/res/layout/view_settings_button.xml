@@ -9,7 +9,6 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/title"
-            style="@style/text_style_16sp.medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -17,6 +16,7 @@
             android:layout_marginBottom="24dp"
             android:ellipsize="end"
             android:maxLines="1"
+            android:textAppearance="@style/call_out.regular"
             android:textColor="@color/text_basic_color"
             app:layout_constrainedWidth="true"
             app:layout_constraintBottom_toBottomOf="parent"

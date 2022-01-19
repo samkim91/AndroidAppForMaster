@@ -5,16 +5,16 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
-import kr.co.soogong.master.databinding.ActionBar2Binding
+import kr.co.soogong.master.databinding.ActionBarBinding
 
 class ActionBar @JvmOverloads constructor(
     context: Context,
     attributeSet: AttributeSet? = null,
     defStyle: Int = 0,
-) : ConstraintLayout(context, attributeSet, defStyle) {
-    private val binding = ActionBar2Binding.inflate(LayoutInflater.from(context), this, true)
+) : ConstraintLayout(context, attributeSet, defStyle), IActionBar {
+    private val binding = ActionBarBinding.inflate(LayoutInflater.from(context), this, true)
 
-    var title: String? = null
+    override var title: String? = null
         set(value) {
             field = value
             value?.let {
@@ -22,7 +22,7 @@ class ActionBar @JvmOverloads constructor(
             }
         }
 
-    var backButtonVisibility: Boolean? = null
+    override var backButtonVisibility: Boolean? = null
         set(value) {
             field = value
             value?.let {
@@ -30,7 +30,7 @@ class ActionBar @JvmOverloads constructor(
             }
         }
 
-    var anyButtonText: String? = null
+    override var anyButtonText: String? = null
         set(value) {
             field = value
             value?.let {
@@ -39,11 +39,11 @@ class ActionBar @JvmOverloads constructor(
             }
         }
 
-    fun setButtonBackClickListener(listener: OnClickListener) {
+    override fun setButtonBackClickListener(listener: OnClickListener) {
         binding.ivBack.setOnClickListener(listener)
     }
 
-    fun setButtonAnyClickListener(listener: OnClickListener) {
+    override fun setButtonAnyClickListener(listener: OnClickListener) {
         binding.tvAny.setOnClickListener(listener)
     }
 }

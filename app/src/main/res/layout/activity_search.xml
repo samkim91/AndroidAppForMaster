@@ -10,7 +10,7 @@
 
         <variable
             name="vm"
-            type="kr.co.soogong.master.ui.requirement.action.search.SearchViewModel" />
+            type="kr.co.soogong.master.ui.requirement.list.search.SearchViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -68,7 +68,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/line"
-            app:onRefresh="@{vm::searchRequirements}"
+            app:onRefresh="@{vm::initList}"
             app:setLoadingColor="@{R.color.app_color}">
 
             <androidx.recyclerview.widget.RecyclerView

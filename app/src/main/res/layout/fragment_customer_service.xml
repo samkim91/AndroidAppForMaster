@@ -10,11 +10,11 @@
 
         <variable
             name="buttonThemeCall"
-            type="kr.co.soogong.master.data.common.ButtonTheme" />
+            type="kr.co.soogong.master.data.global.ButtonTheme" />
 
         <variable
             name="buttonThemeKakao"
-            type="kr.co.soogong.master.data.common.ButtonTheme" />
+            type="kr.co.soogong.master.data.global.ButtonTheme" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -67,22 +67,22 @@
             android:layout_marginTop="@dimen/gap_30"
             app:buttonText="@{@string/asking_via_phone}"
             app:buttonTheme="@{buttonThemeCall}"
-            app:onButtonClick="@{() -> vm.contactViaCall()}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_time_off" />
+            app:layout_constraintTop_toBottomOf="@id/tv_time_off"
+            app:onButtonClick="@{() -> vm.contactViaCall()}" />
 
         <kr.co.soogong.master.atomic.atoms.ButtonBig
             android:id="@+id/bb_via_kakao_talk"
             android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/gap_12"
-            app:onButtonClick="@{() -> vm.contactViaKakao()}"
             app:buttonText="@{@string/asking_via_kakao_talk}"
             app:buttonTheme="@{buttonThemeKakao}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/bb_via_phone" />
+            app:layout_constraintTop_toBottomOf="@id/bb_via_phone"
+            app:onButtonClick="@{() -> vm.contactViaKakao()}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

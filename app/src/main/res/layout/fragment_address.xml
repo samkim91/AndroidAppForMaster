@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="com.google.android.material.textfield.TextInputLayout" />
+
+        <variable
+            name="vm"
+            type="kr.co.soogong.master.ui.auth.signup.SignUpViewModel" />
+
+        <variable
+            name="roadAddressTextInputClickListener"
+            type="android.view.View.OnClickListener" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <kr.co.soogong.master.atomic.molecules.SubheadlineTextInput
+            android:id="@+id/sti_road_address"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="wrap_content"
+            app:content="@={vm.roadAddress}"
+            app:endIcon="@{TextInputLayout.END_ICON_NONE}"
+            app:hint="@{@string/address}"
+            app:inputEnabled="@{false}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:startIcon="@{@drawable/ic_search}"
+            app:subheadline="@{@string/type_road_address}" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_clickable"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="@dimen/gap_48"
+            android:onClick="@{roadAddressTextInputClickListener}"
+            app:layout_constraintBottom_toBottomOf="@id/sti_road_address"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <kr.co.soogong.master.atomic.atoms.TextInput
+            android:id="@+id/ti_detail_address"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_6"
+            app:content="@={vm.detailAddress}"
+            app:hint="@{@string/detail_address}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sti_road_address" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

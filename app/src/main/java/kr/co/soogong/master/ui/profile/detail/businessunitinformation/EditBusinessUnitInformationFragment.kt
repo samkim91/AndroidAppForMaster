@@ -8,9 +8,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import gun0912.tedimagepicker.builder.TedImagePicker
 import kr.co.soogong.master.R
 import kr.co.soogong.master.atomic.molecules.SubheadlineChipGroup
-import kr.co.soogong.master.data.common.ButtonTheme
-import kr.co.soogong.master.data.common.CodeTable
 import kr.co.soogong.master.data.dto.common.AttachmentDto
+import kr.co.soogong.master.data.global.ButtonTheme
+import kr.co.soogong.master.data.global.CodeTable
 import kr.co.soogong.master.data.model.profile.*
 import kr.co.soogong.master.databinding.FragmentEditBusinessUnitInformationBinding
 import kr.co.soogong.master.ui.base.BaseFragment
@@ -101,15 +101,20 @@ class EditBusinessUnitInformationFragment :
                     }
                 })
 
+                viewModel.businessRegistImage.observe(viewLifecycleOwner, {
+                    sbbGettingImages.error =
+                        if (it.isNullOrEmpty()) getString(R.string.required_field_alert) else null
+                })
+
                 if (viewModel.businessType.value == CodeTable.FREELANCER) {
-                    if (!stiShopName.error.isNullOrEmpty() || !stiBusinessNumber.error.isNullOrEmpty()) return@setSaveButtonClickListener
+                    if (!stiShopName.error.isNullOrEmpty() || !stiBusinessNumber.error.isNullOrEmpty() || !sbbGettingImages.error.isNullOrEmpty()) return@setSaveButtonClickListener
                 } else {
-                    if (!stiBusinessName.error.isNullOrEmpty() || !stiShopName.error.isNullOrEmpty() || !stiBusinessNumber.error.isNullOrEmpty()) return@setSaveButtonClickListener
+                    if (!stiBusinessName.error.isNullOrEmpty() || !stiShopName.error.isNullOrEmpty() || !stiBusinessNumber.error.isNullOrEmpty() || !sbbGettingImages.error.isNullOrEmpty()) return@setSaveButtonClickListener
                 }
 
                 if (viewModel.profile.value?.approvedStatus == CodeTable.APPROVED.code) {
                     DefaultDialog.newInstance(
-                        dialogData = DialogData.getConfirmingForRequiredDialogData())
+                        dialogData = DialogData.getConfirmingForLimitedService())
                         .let {
                             it.setButtonsClickListener(
                                 onPositive = { viewModel.saveBusinessUnitInformation() },

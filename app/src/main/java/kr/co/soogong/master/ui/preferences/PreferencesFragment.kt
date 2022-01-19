@@ -7,7 +7,7 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.common.ShapeTheme
+import kr.co.soogong.master.data.global.ShapeTheme
 import kr.co.soogong.master.databinding.FragmentPreferencesBinding
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.dialog.popup.DefaultDialog
@@ -18,7 +18,7 @@ import kr.co.soogong.master.ui.preferences.PreferencesViewModel.Companion.LOGOUT
 import kr.co.soogong.master.ui.preferences.PreferencesViewModel.Companion.NOTICE
 import kr.co.soogong.master.ui.preferences.PreferencesViewModel.Companion.REQUEST_LOGOUT
 import kr.co.soogong.master.ui.preferences.PreferencesViewModel.Companion.VERSION
-import kr.co.soogong.master.uihelper.auth.SignMainActivityHelper
+import kr.co.soogong.master.uihelper.auth.AuthContainerActivityHelper
 import kr.co.soogong.master.uihelper.preferences.PreferencesContainerActivityHelper
 import kr.co.soogong.master.uihelper.preferences.PreferencesDetailFragmentHelper.CUSTOMER_SERVICE_PAGE
 import kr.co.soogong.master.uihelper.preferences.PreferencesDetailFragmentHelper.NOTICE_PAGE
@@ -73,7 +73,7 @@ class PreferencesFragment : BaseFragment<FragmentPreferencesBinding>(
                         )
                         it.show(parentFragmentManager, it.tag)
                     }
-                    LOGOUT -> startActivity(SignMainActivityHelper.getIntent(requireContext()))
+                    LOGOUT -> startActivity(AuthContainerActivityHelper.getIntent(requireContext()))
                     VERSION -> startActivity(Intent(Intent.ACTION_VIEW).apply {
                         data =
                             Uri.parse("https://play.google.com/store/search?q=%EC%88%98%EA%B3%B5")

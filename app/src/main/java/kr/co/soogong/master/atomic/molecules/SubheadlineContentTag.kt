@@ -15,7 +15,7 @@ import kr.co.soogong.master.data.model.requirement.Requirement
 import kr.co.soogong.master.data.model.requirement.estimation.EstimationPriceTypeCode
 import kr.co.soogong.master.data.model.requirement.repair.CanceledReason
 import kr.co.soogong.master.databinding.ViewSubheadlineContentTagBinding
-import kr.co.soogong.master.ui.profile.review.ReviewViewHolderHelper
+import kr.co.soogong.master.ui.profile.review.ReviewViewHolder
 import kr.co.soogong.master.utility.extension.dp
 import kr.co.soogong.master.utility.extension.formatMoney
 
@@ -176,7 +176,7 @@ class SubheadlineContentTag @JvmOverloads constructor(
                     AppCompatTextView(context).apply {
                         text = context.getString(R.string.subtitle_of_previous_estimation)
                         setTextColor(resources.getColor(R.color.c_22D47B, null))
-                        setTextAppearance(R.style.text_style_12sp_bold)
+                        setTextAppearance(R.style.caption_1_bold)
                     }.run {
                         LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT,
                             LayoutParams.WRAP_CONTENT)
@@ -253,13 +253,13 @@ class SubheadlineContentTag @JvmOverloads constructor(
             requirement: Requirement,
         ) {
             requirement.estimationDto?.repair?.review?.let { review ->
-                ReviewViewHolderHelper.create(container).also { viewHolder ->
+                ReviewViewHolder.create(container).also { viewHolder ->
                     viewHolder.binding(context, Review.fromReviewDto(review))
                     viewHolder.itemView.layoutParams.let { params ->
                         params as MarginLayoutParams
                         params.topMargin = 12.dp
                     }
-                    container.addView(viewHolder.itemView)
+                    container.addView(viewHolder.itemView, params)
                 }
             }
         }

@@ -5,7 +5,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.common.ColorTheme
+import kr.co.soogong.master.data.global.ColorTheme
 import kr.co.soogong.master.databinding.ViewSubheadlineProgressIndicatorBinding
 import kotlin.math.roundToInt
 

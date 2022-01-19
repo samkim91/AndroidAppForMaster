@@ -4,13 +4,13 @@ import android.content.Context
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.common.CodeTable
+import kr.co.soogong.master.data.global.CodeTable
 import kr.co.soogong.master.data.model.requirement.RequirementCard
 import kr.co.soogong.master.databinding.ViewHolderSimpleRequirementItemBinding
 import kr.co.soogong.master.ui.dialog.popup.DefaultDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData
-import kr.co.soogong.master.ui.main.TabTextList
-import kr.co.soogong.master.ui.requirement.RequirementViewModel
+import kr.co.soogong.master.ui.main.MainViewModel
+import kr.co.soogong.master.ui.main.TAB_TEXTS_MAIN_NAVIGATION
 import kr.co.soogong.master.uihelper.requirment.action.ViewRequirementActivityHelper
 
 class SimpleRequirementCardViewHolder(
@@ -19,7 +19,7 @@ class SimpleRequirementCardViewHolder(
     fun bind(
         context: Context,
         fragmentManager: FragmentManager,
-        viewModel: RequirementViewModel,
+        mainViewModel: MainViewModel,
         requirementCard: RequirementCard,
         position: Int,
     ) {
@@ -30,7 +30,7 @@ class SimpleRequirementCardViewHolder(
             setApprovedMasterOnly(context,
                 fragmentManager,
                 this,
-                viewModel,
+                mainViewModel,
                 requirementCard)
         }
     }
@@ -39,21 +39,22 @@ class SimpleRequirementCardViewHolder(
         context: Context,
         fragmentManager: FragmentManager,
         binding: ViewHolderSimpleRequirementItemBinding,
-        viewModel: RequirementViewModel,
+        mainViewModel: MainViewModel,
         requirementCard: RequirementCard,
     ) {
         with(binding) {
             setCardClickListener {
-                viewModel.masterSimpleInfo.value?.approvedStatus.let {
+                mainViewModel.masterSimpleInfo.value?.approvedStatus.let {
                     when (it) {
                         // 미승인 상태이면, 필수정보를 채우도록 이동
                         CodeTable.NOT_APPROVED.code -> {
                             DefaultDialog.newInstance(
-                                DialogData.getAskingFillProfileDialogData(),
+                                DialogData.getAskingFillProfile(),
                             ).let { dialog ->
                                 dialog.setButtonsClickListener(
                                     onPositive = {
-                                        viewModel.setCurrentTab(TabTextList.indexOf(R.string.main_activity_navigation_bar_profile))
+                                        mainViewModel.selectedMainTabInMainActivity.value =
+                                            TAB_TEXTS_MAIN_NAVIGATION.indexOf(R.string.main_activity_navigation_bar_profile)
                                     },
                                     onNegative = { }
                                 )
@@ -63,7 +64,7 @@ class SimpleRequirementCardViewHolder(
                         // 승인요청 상태이면, 승인될 때까지 기다리라는 문구
                         CodeTable.REQUEST_APPROVE.code -> {
                             DefaultDialog.newInstance(
-                                DialogData.getWaitingUntilApprovalDialogData()
+                                DialogData.getWaitingUntilApproval()
                             ).let { dialog ->
                                 dialog.setButtonsClickListener(
                                     onPositive = { },

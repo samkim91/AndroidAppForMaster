@@ -166,7 +166,7 @@ private fun AppCompatButton.setRefusingEstimation(
     text = context.getString(R.string.refuse_estimation)
     setOnClickListener {
         DefaultDialog.newInstance(
-            DialogData.getRefuseEstimateDialogData()
+            DialogData.getRefuseEstimate()
         ).let {
             it.setButtonsClickListener(
                 onPositive = {
@@ -202,7 +202,7 @@ private fun AppCompatButton.setRefusingMeasure(
     text = context.getString(R.string.refuse_measure)
     setOnClickListener {
         DefaultDialog.newInstance(
-            DialogData.getRefuseMeasureDialogData()
+            DialogData.getRefuseMeasure()
         ).let {
             it.setButtonsClickListener(
                 onPositive = {
@@ -228,7 +228,7 @@ private fun AppCompatButton.setAcceptingMeasure(
     text = context.getString(R.string.accept_measure)
     setOnClickListener {
         DefaultDialog.newInstance(
-            DialogData.getAcceptMeasureDialogData()
+            DialogData.getAcceptMeasure()
         ).let {
             it.setButtonsClickListener(
                 onPositive = {

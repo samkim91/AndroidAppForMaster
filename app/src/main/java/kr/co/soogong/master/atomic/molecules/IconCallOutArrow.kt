@@ -8,7 +8,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.common.ColorTheme
+import kr.co.soogong.master.data.global.ColorTheme
 import kr.co.soogong.master.databinding.ViewIconSubheadlineArrowBinding
 
 class IconCallOutArrow @JvmOverloads constructor(

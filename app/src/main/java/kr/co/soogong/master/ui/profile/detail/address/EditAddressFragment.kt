@@ -13,7 +13,7 @@ import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.profile.detail.EditProfileContainerActivity
 import kr.co.soogong.master.ui.profile.detail.EditProfileContainerViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.ui.profile.detail.EditProfileContainerViewModel.Companion.SAVE_MASTER_SUCCESSFULLY
-import kr.co.soogong.master.uihelper.auth.signup.AddressActivityHelper
+import kr.co.soogong.master.uihelper.common.KakaoAddressActivityHelper
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.LocationHelper
 import kr.co.soogong.master.utility.extension.toast
@@ -30,7 +30,7 @@ class EditAddressFragment : BaseFragment<FragmentEditAddressBinding>(
             Timber.tag(TAG).d("StartActivityForResult: $result")
             if (result.resultCode == Activity.RESULT_OK) {
                 viewModel.roadAddress.value =
-                    result.data?.let { AddressActivityHelper.getAddressFromIntent(it) }
+                    result.data?.let { KakaoAddressActivityHelper.getAddressFromIntent(it) }
                 viewModel.detailAddress.value = ""
             }
         }
@@ -52,7 +52,7 @@ class EditAddressFragment : BaseFragment<FragmentEditAddressBinding>(
 
             ivClickable.setOnClickListener {
                 getAddressLauncher.launch(
-                    Intent(AddressActivityHelper.getIntent(requireContext()))
+                    Intent(KakaoAddressActivityHelper.getIntent(requireContext()))
                 )
             }
 
@@ -63,12 +63,15 @@ class EditAddressFragment : BaseFragment<FragmentEditAddressBinding>(
                 })
 
                 if (stiRoadAddress.error.isNullOrEmpty()) {
-                    val latlng = LocationHelper.changeAddressToLatLng(requireContext(),
-                        "${viewModel.roadAddress.value} ${viewModel.detailAddress.value}")
-                    viewModel.latitude.value = latlng["latitude"]
-                    viewModel.longitude.value = latlng["longitude"]
+                    LocationHelper.changeAddressToLatLng(
+                        context = requireContext(),
+                        address = "${viewModel.roadAddress.value} ${viewModel.detailAddress.value}"
+                    ).run {
+                        viewModel.latitude.value = this["latitude"]
+                        viewModel.longitude.value = this["longitude"]
 
-                    viewModel.saveCompanyAddress()
+                        viewModel.saveCompanyAddress()
+                    }
                 }
             }
         }

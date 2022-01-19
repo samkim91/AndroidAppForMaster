@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.auth.signup.steps.AgreementDetailActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <kr.co.soogong.master.atomic.molecules.ActionBar
+            android:id="@+id/ab_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:backButtonVisibility="@{true}" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:overScrollMode="never">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_document"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/gap_16"
+                android:layout_marginTop="@dimen/gap_24"
+                android:layout_marginEnd="@dimen/gap_16"
+                android:breakStrategy="simple"
+                android:textAppearance="@style/call_out.regular"
+                android:textColor="@color/black" />
+        </ScrollView>
+    </LinearLayout>
+</layout>

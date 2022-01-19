@@ -8,7 +8,7 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.common.DropdownItemList
+import kr.co.soogong.master.data.global.DropdownItemList
 import kr.co.soogong.master.data.model.profile.WarrantyInformation
 import kr.co.soogong.master.databinding.ViewHeadlineButtonContentBinding
 
@@ -36,11 +36,9 @@ class HeadlineButtonContent @JvmOverloads constructor(
     var content: String? = null
         set(value) {
             field = value
-            value?.let {
-                binding.tvContent.setText(it)
-                binding.tvContent.isVisible = true
-                setButtonStatus()
-            }
+            binding.tvContent.isVisible = !value.isNullOrEmpty()
+            binding.tvContent.setText(value)
+            setButtonStatus()
         }
 
     var hint: String? = null
@@ -74,14 +72,6 @@ class HeadlineButtonContent @JvmOverloads constructor(
                     setTextColor(ResourcesCompat.getColor(resources, R.color.brand_red, null))
                 }
             }
-
-//            if (content.isNullOrEmpty()) {
-//                text = resources.getString(R.string.register)
-//                setTextColor(ResourcesCompat.getColor(resources, R.color.brand_green, null))
-//            } else {
-//                text = resources.getString(R.string.editing)
-//                setTextColor(ResourcesCompat.getColor(resources, R.color.brand_red, null))
-//            }
         }
     }
 

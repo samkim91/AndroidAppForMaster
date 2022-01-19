@@ -1,26 +1,26 @@
 package kr.co.soogong.master.ui.auth.signup.steps
 
 import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import com.google.android.material.chip.Chip
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
-import kr.co.soogong.master.databinding.FragmentSignUpMajorBinding
-import kr.co.soogong.master.ui.auth.signup.SignUpActivity
+import kr.co.soogong.master.data.global.ButtonTheme
+import kr.co.soogong.master.databinding.FragmentMajorBinding
 import kr.co.soogong.master.ui.auth.signup.SignUpViewModel
+import kr.co.soogong.master.ui.auth.signup.SignUpViewModel.Companion.VALIDATE_MAJOR
 import kr.co.soogong.master.ui.base.BaseFragment
-import kr.co.soogong.master.uihelper.major.MajorActivityHelper
+import kr.co.soogong.master.uihelper.common.MajorActivityHelper
 import timber.log.Timber
 
 @AndroidEntryPoint
-class MajorFragment : BaseFragment<FragmentSignUpMajorBinding>(
-    R.layout.fragment_sign_up_major
+class MajorFragment : BaseFragment<FragmentMajorBinding>(
+    R.layout.fragment_major
 ) {
-    private val viewModel: SignUpViewModel by activityViewModels()
+    private val viewModel: SignUpViewModel by viewModels({ requireParentFragment() })
 
     private var getMajorLauncher =
         registerForActivityResult(StartActivityForResult()) { result ->
@@ -37,7 +37,6 @@ class MajorFragment : BaseFragment<FragmentSignUpMajorBinding>(
             }
         }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Timber.tag(TAG).d("onViewCreated: ")
@@ -51,27 +50,9 @@ class MajorFragment : BaseFragment<FragmentSignUpMajorBinding>(
         bind {
             vm = viewModel
             lifecycleOwner = viewLifecycleOwner
-
-            major.setButtonClickListener {
-                getMajorLauncher.launch(
-                    Intent(
-                        MajorActivityHelper.getIntent(
-                            requireContext()
-                        )
-                    )
-                )
-            }
-
-            defaultButton.setOnClickListener {
-                viewModel.projects.observe(viewLifecycleOwner, {
-                    Timber.tag(TAG).d("defaultButton: ${it.size}")
-                    major.alertVisible = it.isNullOrEmpty()
-                })
-
-
-                if (!major.alertVisible) {
-                    (activity as? SignUpActivity)?.moveToNext()
-                }
+            buttonThemeAddingMajors = ButtonTheme.Primary
+            addingMajorsClickListener = View.OnClickListener {
+                getMajorLauncher.launch(MajorActivityHelper.getIntent(requireContext()))
             }
         }
     }
@@ -94,13 +75,22 @@ class MajorFragment : BaseFragment<FragmentSignUpMajorBinding>(
                 )
             }
         })
+
+        viewModel.validation.observe(viewLifecycleOwner, { validation ->
+            if (validation == VALIDATE_MAJOR) {
+                viewModel.projects.observe(viewLifecycleOwner, {
+                    binding.sbbSelectMajors.error =
+                        if (it.isNullOrEmpty()) getString(R.string.required_field_alert) else null
+                })
+
+                if (binding.sbbSelectMajors.error.isNullOrEmpty()) viewModel.moveToNext()
+            }
+        })
     }
 
     companion object {
         private const val TAG = "MajorFragment"
 
-        fun newInstance(): MajorFragment {
-            return MajorFragment()
-        }
+        fun newInstance() = MajorFragment()
     }
 }

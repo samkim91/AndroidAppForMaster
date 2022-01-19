@@ -69,9 +69,9 @@ object HttpContract {
     const val DELETE_PORTFOLIO = "masterPortfolio/delete/{id}"
     //endregion
 
-    //region MyPage
-    const val GET_NOTICE_LIST = "board/find-all-by-type"
-    const val GET_NOTICE = "board/find-by-id"
+    //region Preferences
+    const val GET_NOTICE_LIST = "notice/find-all-by-section"
+    const val GET_NOTICE = "notice/find-by-id"
     const val GET_ALARMS = "api/v1/branches/get_alarm"
     const val SET_ALARMS = "api/v1/branches/set_alarm"
     //endregion

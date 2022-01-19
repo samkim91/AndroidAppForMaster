@@ -53,10 +53,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/gap_11"
+            app:indicatorColor="@color/brand_green"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_title"
-            app:trackColor="@color/light_grey_1" />
+            app:trackColor="@color/light_grey_1"
+            app:trackThickness="@dimen/gap_4" />
 
     </merge>
 </layout>

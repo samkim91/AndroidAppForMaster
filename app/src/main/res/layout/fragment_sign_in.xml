@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.text.InputType" />
+
+        <variable
+            name="authPhoneNumberButtonTheme"
+            type="kr.co.soogong.master.data.global.ButtonTheme" />
+
+        <variable
+            name="vm"
+            type="kr.co.soogong.master.ui.auth.signin.SignInViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <kr.co.soogong.master.atomic.molecules.ActionBar
+            android:id="@+id/ab_header"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="wrap_content"
+            app:backButtonVisibility="@{true}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="@{@string/sign_in}" />
+
+        <ScrollView
+            android:id="@+id/sv_container"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="@dimen/gap_0"
+            android:fillViewport="true"
+            android:overScrollMode="never"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ab_header">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_logo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/gap_48"
+                    android:background="@drawable/ic_main_logo"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <kr.co.soogong.master.atomic.organisms.SubheadlineTextInputButtonMediumTextInputTimer
+                    android:id="@+id/stibmtit_auth_phone_number"
+                    android:layout_width="@dimen/gap_0"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/gap_16"
+                    android:layout_marginTop="@dimen/gap_48"
+                    android:layout_marginEnd="@dimen/gap_16"
+                    app:buttonText="@{@string/certify}"
+                    app:buttonTheme="@{authPhoneNumberButtonTheme}"
+                    app:firstContent="@={vm.tel}"
+                    app:hint="@{@string/type_phone_number_hint}"
+                    app:inputType="@{InputType.TYPE_CLASS_NUMBER}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/iv_logo"
+                    app:max="@{11}"
+                    app:secondContent="@={vm.certificationCode}"
+                    app:textInputTimerHint="@{@string/certification_code}"
+                    app:textInputTimerInputType="@{InputType.TYPE_CLASS_NUMBER}"
+                    app:textInputTimerMax="@{6}" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_resend_certification_code"
+                    style="@style/caption_1.regular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/gap_5"
+                    android:layout_marginEnd="@dimen/gap_16"
+                    android:paddingStart="@dimen/gap_10"
+                    android:paddingTop="@dimen/gap_5"
+                    android:paddingEnd="@dimen/gap_0"
+                    android:text="@string/resend_certification_code"
+                    android:textColor="@color/grey_3"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/stibmtit_auth_phone_number"
+                    app:layout_constraintVertical_bias="0"
+                    tools:visibility="visible" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/b_sign_in"
+            style="@style/button.big.primary"
+            android:layout_marginStart="@dimen/gap_16"
+            android:layout_marginEnd="@dimen/gap_16"
+            android:layout_marginBottom="@dimen/gap_24"
+            android:text="@string/sign_in"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

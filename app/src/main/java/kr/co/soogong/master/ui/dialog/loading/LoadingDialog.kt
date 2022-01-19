@@ -1,17 +1,13 @@
 package kr.co.soogong.master.ui.dialog.loading
 
 import android.app.Dialog
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.FragmentManager
 import kr.co.soogong.master.R
-import kr.co.soogong.master.databinding.DialogCustomBinding
 import kr.co.soogong.master.databinding.DialogLoadingBinding
 import timber.log.Timber
 
@@ -26,7 +22,7 @@ class LoadingDialog : DialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         Timber.tag(TAG).d("onCreateView: ")
         binding = DialogLoadingBinding.inflate(inflater, container, false)
@@ -41,7 +37,7 @@ class LoadingDialog : DialogFragment() {
         }
     }
 
-    companion object{
+    companion object {
         private const val TAG = "LoadingDialog"
 
         fun newInstance(): LoadingDialog {

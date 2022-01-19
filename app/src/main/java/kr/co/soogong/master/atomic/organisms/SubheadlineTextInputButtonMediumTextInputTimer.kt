@@ -5,11 +5,12 @@ import android.text.InputType
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.isVisible
 import kr.co.soogong.master.atomic.atoms.IButton
 import kr.co.soogong.master.atomic.atoms.ITextInput
 import kr.co.soogong.master.atomic.atoms.TextInputButtonMedium
 import kr.co.soogong.master.atomic.atoms.TextInputTimer
-import kr.co.soogong.master.data.common.ButtonTheme
+import kr.co.soogong.master.data.global.ButtonTheme
 import kr.co.soogong.master.databinding.ViewSubheadlineTextInputButtonMediumTextInputTimerBinding
 
 class SubheadlineTextInputButtonMediumTextInputTimer @JvmOverloads constructor(
@@ -24,7 +25,10 @@ class SubheadlineTextInputButtonMediumTextInputTimer @JvmOverloads constructor(
     var subheadline: String? = null
         set(value) {
             field = value
-            value?.let { binding.tvSubheadline.text = value }
+            value?.let {
+                binding.tvSubheadline.isVisible = true
+                binding.tvSubheadline.text = value
+            }
         }
 
     val textInputButtonMedium: TextInputButtonMedium = binding.tibmComponent

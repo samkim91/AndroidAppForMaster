@@ -11,9 +11,9 @@ import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.common.ButtonTheme
+import kr.co.soogong.master.data.global.ButtonTheme
 import kr.co.soogong.master.databinding.FragmentEditPhoneNumberBinding
-import kr.co.soogong.master.ui.auth.signup.LimitTime
+import kr.co.soogong.master.ui.LIMIT_TIME_TO_AUTH
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.dialog.popup.DefaultDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData
@@ -30,10 +30,9 @@ import timber.log.Timber
 import java.util.concurrent.TimeUnit
 
 @AndroidEntryPoint
-class EditPhoneNumberFragment :
-    BaseFragment<FragmentEditPhoneNumberBinding>(
-        R.layout.fragment_edit_phone_number
-    ) {
+class EditPhoneNumberFragment : BaseFragment<FragmentEditPhoneNumberBinding>(
+    R.layout.fragment_edit_phone_number
+) {
     private val viewModel: EditPhoneNumberViewModel by viewModels()
 
     private lateinit var callbacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks
@@ -175,7 +174,7 @@ class EditPhoneNumberFragment :
                 val options = PhoneAuthOptions.newBuilder(auth)
                     .setPhoneNumber(PhoneNumberHelper.toGlobalNumber(phoneNumber))      // Phone number to verify
                     .setTimeout(
-                        LimitTime,
+                        LIMIT_TIME_TO_AUTH,
                         TimeUnit.SECONDS
                     )                            // Timeout and unit
                     .setActivity(requireActivity())                                      // Activity (for callback binding)
@@ -239,7 +238,7 @@ class EditPhoneNumberFragment :
     }
 
     private fun showDialogForUserExist() {
-        DefaultDialog.newInstance(DialogData.getUserExistDialogData())
+        DefaultDialog.newInstance(DialogData.getUserExist())
             .let {
                 it.setButtonsClickListener(
                     onPositive = {},
