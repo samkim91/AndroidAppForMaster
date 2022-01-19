@@ -224,6 +224,7 @@ dependencies {
     // Swipe Refresh Layout
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:$swipeRefreshLayout"
 
-    // Touch Imageview
-    implementation "com.github.MikeOrtiz:TouchImageView:$touchImageView"
+    // PhotoView
+    implementation "com.github.chrisbanes:PhotoView:$photoView"
+
 }
