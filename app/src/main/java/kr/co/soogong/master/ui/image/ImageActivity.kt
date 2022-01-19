@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
-import androidx.core.view.isVisible
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
@@ -20,12 +19,12 @@ import timber.log.Timber
 class ImageActivity : BaseActivity<ActivityImageBinding>(
     R.layout.activity_image
 ) {
-    private val startPosition: Int by lazy {
-        ImageViewActivityHelper.getImagePosition(intent)
-    }
-
     private val images: List<AttachmentDto> by lazy {
         ImageViewActivityHelper.getImages(intent)
+    }
+
+    private val startPosition: Int by lazy {
+        ImageViewActivityHelper.getImagePosition(intent)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,8 +33,9 @@ class ImageActivity : BaseActivity<ActivityImageBinding>(
         initLayout()
     }
 
+    // TODO: 2022/01/19 rotation 시 indicator 와 page 가 안 맞는데, 확인 필요!
     override fun initLayout() {
-        Timber.tag(TAG).d("initLayout: ")
+        Timber.tag(TAG).d("initLayout: $startPosition")
         bind {
             lifecycleOwner = this@ImageActivity
 
@@ -45,7 +45,7 @@ class ImageActivity : BaseActivity<ActivityImageBinding>(
 
             with(sliderViewPager) {
                 offscreenPageLimit = 1
-                adapter = ImageSliderAdapter()
+                adapter = ImagePagerAdapter(this@ImageActivity, images = images)
                 registerOnPageChangeCallback(object : OnPageChangeCallback() {
                     override fun onPageSelected(position: Int) {
                         super.onPageSelected(position)
@@ -53,18 +53,10 @@ class ImageActivity : BaseActivity<ActivityImageBinding>(
                         setCurrentIndicator(position)
                     }
                 })
-                if (!images.isNullOrEmpty()) {
-                    setList(images)
-                    initIndicators(images.size)
-                    // 아래 postDelayed 를 사용한 이유는, TouchImageview library 사용하다보니, ViewPager2에 모든 recyclerview Items 를 만들고,
-                    // 초기값으로 0번째 item 을 셋하는 문제가 있어서, 약 0.5초 후에 선택된 사진을 보여주기 위함.
-                    postDelayed({
-                        Timber.tag(TAG).i("setCurrentItem: $startPosition")
-                        setCurrentItem(startPosition, false)
-                        isVisible = true
-                    }, 500)
-                }
             }
+
+            initIndicators(images.count())
+            sliderViewPager.currentItem = startPosition
         }
     }
 
@@ -92,7 +84,7 @@ class ImageActivity : BaseActivity<ActivityImageBinding>(
     }
 
     // 인디케이터에 변화주는 코드. 선택된 것을 활성화, 선택되지 않은 것들을 비활성화한다.
-    fun setCurrentIndicator(position: Int) {
+    private fun setCurrentIndicator(position: Int) {
         Timber.tag(TAG).d("setCurrentIndicator: $position")
         val childCount: Int = binding.layoutIndicators.childCount
         for (i in 0 until childCount) {
