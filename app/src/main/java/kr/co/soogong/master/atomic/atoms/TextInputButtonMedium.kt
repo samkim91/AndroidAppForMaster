@@ -4,7 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
-import kr.co.soogong.master.data.common.ButtonTheme
+import kr.co.soogong.master.data.global.ButtonTheme
 import kr.co.soogong.master.databinding.ViewTextInputButtonMediumBinding
 
 class TextInputButtonMedium @JvmOverloads constructor(

@@ -5,7 +5,7 @@ import android.widget.TextView
 import androidx.core.view.forEachIndexed
 import com.google.android.material.tabs.TabLayout
 
-fun TabLayout.setTabClickListener(
+fun TabLayout.setTabSelectedListener(
     onSelected: (TabLayout.Tab?) -> Unit,
     onUnselected: (TabLayout.Tab?) -> Unit,
 ) {
@@ -24,6 +24,7 @@ fun TabLayout.setTabClickListener(
     })
 }
 
+// TabLayout 에 있는 tab text 를 커스텀
 // 참고 : https://sweetcoding.tistory.com/168
 fun TabLayout.changeTabFont(position: Int?, style: Int) {
     (this.getChildAt(0) as ViewGroup).let { viewGroup ->

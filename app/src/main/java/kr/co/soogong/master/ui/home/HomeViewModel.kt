@@ -7,9 +7,10 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.model.requirement.RequirementStatus
+import kr.co.soogong.master.domain.usecase.auth.GetMasterUidFromSharedUseCase
 import kr.co.soogong.master.domain.usecase.home.GetRequirementTotalUseCase
-import kr.co.soogong.master.ui.requirement.RequirementViewModel
 import kr.co.soogong.master.ui.requirement.RequirementViewModelAggregate
+import kr.co.soogong.master.ui.requirement.list.RequirementsViewModel
 import retrofit2.HttpException
 import timber.log.Timber
 import java.net.HttpURLConnection
@@ -19,7 +20,8 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val requirementViewModelAggregate: RequirementViewModelAggregate,
     private val getRequirementTotalUseCase: GetRequirementTotalUseCase,
-) : RequirementViewModel(requirementViewModelAggregate) {
+    private val getMasterUidFromSharedUseCase: GetMasterUidFromSharedUseCase,
+) : RequirementsViewModel(requirementViewModelAggregate) {
 
     private val _beforeProgress = MutableLiveData(0)
     val beforeProgress: LiveData<Int>
@@ -33,14 +35,20 @@ class HomeViewModel @Inject constructor(
     val afterProcess: LiveData<Int>
         get() = _afterProcess
 
-    fun initListUnread() {
-        Timber.tag(TAG).d("initListUnread: ")
+    val requestMeasureYn = MutableLiveData<Boolean>()
+
+    override fun initList() {
+        Timber.tag(TAG).d("initList: ")
         requirements.clear()
         resetState()
-        requestRequirementsUnread()
+        requestRequirements()
     }
 
-    fun requestRequirementsUnread() {
+    override fun loadMoreItems() {
+        requestRequirements()
+    }
+
+    override fun requestRequirements() {
         Timber.tag(TAG).d("requestRequirementsUnread: ")
 
         requirementViewModelAggregate.getRequirementCardsUseCase(
@@ -86,7 +94,29 @@ class HomeViewModel @Inject constructor(
             ).addToDisposable()
     }
 
+    fun updateRequestMeasureYn() {
+        Timber.tag(TAG).d("updateRequestMeasureYn: ${requestMeasureYn.value}")
+
+        getMasterUidFromSharedUseCase()?.let { uid ->
+            requirementViewModelAggregate.updateRequestMeasureYnUseCase(uid)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeBy(
+                    onSuccess = {
+                        Timber.tag(TAG).d("updateRequestMeasureYn successful: $it")
+                        setAction(UPDATE_REQUEST_MEASURE_YN_SUCCESSFUL)
+                    },
+                    onError = {
+                        Timber.tag(TAG).d("updateRequestMeasureYn failed: $it")
+                        setAction(REQUEST_FAILED)
+                    }
+                ).addToDisposable()
+        }
+    }
+
     companion object {
         private const val TAG = "HomeViewModel"
+
+        const val UPDATE_REQUEST_MEASURE_YN_SUCCESSFUL = "UPDATE_REQUEST_MEASURE_YN_SUCCESSFUL"
     }
 }

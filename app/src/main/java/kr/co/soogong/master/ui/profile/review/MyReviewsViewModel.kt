@@ -20,7 +20,11 @@ class MyReviewsViewModel @Inject constructor(
     val myReview: LiveData<MyReview?>
         get() = _myReview
 
-    fun requestMyReviews() {
+    init {
+        requestMyReviews()
+    }
+
+    private fun requestMyReviews() {
         Timber.tag(TAG).d("requestMyReviews: ")
         getProfileUseCase()
             .subscribeOn(Schedulers.io())

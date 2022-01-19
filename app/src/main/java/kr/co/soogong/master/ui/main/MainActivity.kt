@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.activity.viewModels
 import com.google.android.material.tabs.TabLayoutMediator
+import com.google.firebase.dynamiclinks.ktx.dynamicLinks
+import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.SoogongMasterMessagingService.Companion.initNotificationChannel
@@ -25,14 +27,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
         super.onCreate(savedInstanceState)
         Timber.tag(TAG).d("onCreate: ")
         initLayout()
-        registerFCM()
+        registerEventObserver()
+        registerDynamicLinkListener()
         removeBrokenChannel(this)
         initNotificationChannel(this)
-    }
-
-    private fun registerFCM() {
-        Timber.tag(TAG).d("registerFCM: ")
-        viewModel.registerFCM()
     }
 
     override fun initLayout() {
@@ -48,8 +46,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
                     ViewMainActivityTabItemBinding
                         .inflate(LayoutInflater.from(this@MainActivity), null, false)
                         .apply {
-                            icon = TabIcons[position]
-                            label = TabTextList[position]
+                            icon = TAB_ICONS_MAIN_NAVIGATION[position]
+                            label = TAB_TEXTS_MAIN_NAVIGATION[position]
                         }.run {
                             tab.customView = this@run.root
                         }
@@ -58,9 +56,28 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
         }
     }
 
-    fun setCurrentTab(tabIndex: Int) {
-        Timber.tag(TAG).d("setCurrentTab: $tabIndex")
-        binding.mainViewPager.currentItem = tabIndex
+    private fun registerEventObserver() {
+        viewModel.selectedMainTabInMainActivity.observe(this, { position ->
+            binding.mainTabs.getTabAt(position)?.select()
+        })
+    }
+
+    // 인앱 메시지로 다이나믹링크를 받았을 때, 어떻게 처리할지 결정
+    private fun registerDynamicLinkListener() {
+        Firebase.dynamicLinks
+            .getDynamicLink(intent)
+            .addOnSuccessListener { pendingDynamicLinkData ->
+                if (pendingDynamicLinkData != null) {
+                    // link 쿼리에 value 가 대상 화면으로 날아옴
+                    when (pendingDynamicLinkData.link?.getQueryParameter("link")) {
+                        "noticeFragment" -> viewModel.selectedMainTabInMainActivity.value =
+                            TAB_TEXTS_MAIN_NAVIGATION.indexOf(R.string.main_activity_navigation_bar_preferences)
+                    }
+                }
+            }
+            .addOnFailureListener {
+                Timber.tag(TAG).w("registerDynamicLinkListener onFailure: $it")
+            }
     }
 
     override fun setRequirementsBadge(badgeCount: Int) {

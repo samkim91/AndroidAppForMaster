@@ -5,7 +5,7 @@ import android.view.View
 import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.common.ButtonTheme
+import kr.co.soogong.master.data.global.ButtonTheme
 import kr.co.soogong.master.databinding.ActivityPortfolioListBinding
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.ui.dialog.popup.DefaultDialog
@@ -97,8 +97,8 @@ class PortfolioListActivity : BaseActivity<ActivityPortfolioListBinding>(
                 buttonLeftClickListener = { id ->
                     DefaultDialog.newInstance(
                         dialogData = when (viewModel.pageName) {
-                            PORTFOLIO -> DialogData.getAskingDeletePortfolioDialogData()
-                            else -> DialogData.getAskingDeletePriceByProjectDialogData()
+                            PORTFOLIO -> DialogData.getAskingDeletePortfolio()
+                            else -> DialogData.getAskingDeletePriceByProject()
                         }).let {
                         it.setButtonsClickListener(
                             onPositive = { viewModel.deletePortfolio(id) },

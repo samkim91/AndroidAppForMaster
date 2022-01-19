@@ -9,9 +9,9 @@ import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import gun0912.tedimagepicker.builder.TedImagePicker
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.common.ButtonTheme
-import kr.co.soogong.master.data.common.CodeTable
-import kr.co.soogong.master.data.common.ColorTheme
+import kr.co.soogong.master.data.global.ButtonTheme
+import kr.co.soogong.master.data.global.CodeTable
+import kr.co.soogong.master.data.global.ColorTheme
 import kr.co.soogong.master.databinding.FragmentProfileBinding
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.base.BaseViewModel.Companion.DISMISS_LOADING
@@ -148,7 +148,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
                 ).let {
                     it.setItemClickListener { dialogItem ->
                         if (viewModel.profile.value?.approvedStatus == CodeTable.APPROVED.code) {
-                            DefaultDialog.newInstance(DialogData.getConfirmingForRequiredDialogData())
+                            DefaultDialog.newInstance(DialogData.getConfirmingForLimitedService())
                                 .let { dialog ->
                                     dialog.setButtonsClickListener(
                                         onPositive = { viewModel.saveCareerPeriod(dialogItem.value) },
@@ -215,7 +215,10 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
                 profile?.requiredInformation?.coordinate,
                 profile?.requiredInformation?.serviceArea
             )
-            setRequirementInformationPercentage(viewModel)
+            setRequiredProfileInformationProgress(viewModel).run {
+                checkApprovedStatusAndRequiredField(parentFragmentManager, binding, viewModel, this)
+            }
+            setOptionalProfileInformationProgress(viewModel)
         })
     }
 
@@ -255,7 +258,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
 
                         if (viewModel.profile.value?.approvedStatus == CodeTable.APPROVED.code) {
                             DefaultDialog.newInstance(
-                                DialogData.getConfirmingForRequiredDialogData())
+                                DialogData.getConfirmingForLimitedService())
                                 .let {
                                     it.setButtonsClickListener(
                                         onPositive = {

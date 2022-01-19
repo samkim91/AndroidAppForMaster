@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="terms_of_service_action_bar">이용약관</string>
-    <string name="terms_of_service">1. 이용약관</string>
-
-    <string name="private_policy_action_bar">개인정보 처리방침</string>
-    <string name="private_policy">1. 개인정보 처리방침</string>
-</resources>

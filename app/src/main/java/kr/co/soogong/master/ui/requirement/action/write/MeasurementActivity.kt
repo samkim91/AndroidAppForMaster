@@ -7,8 +7,8 @@ import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import gun0912.tedimagepicker.builder.TedImagePicker
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.common.ColorTheme
 import kr.co.soogong.master.data.dto.common.AttachmentDto
+import kr.co.soogong.master.data.global.ColorTheme
 import kr.co.soogong.master.databinding.ActivityMeasurementBinding
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.ui.base.BaseViewModel.Companion.DISMISS_LOADING
@@ -146,7 +146,7 @@ class MeasurementActivity : BaseActivity<ActivityMeasurementBinding>(
 
     private fun customBackPressed() {
         DefaultDialog.newInstance(
-            DialogData.getCancelSendingEstimationDialogData()
+            DialogData.getCancelSendingEstimation()
         ).let {
             it.setButtonsClickListener(
                 onPositive = {

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.text.InputType" />
+
+        <variable
+            name="vm"
+            type="kr.co.soogong.master.ui.auth.signup.SignUpViewModel" />
+
+        <variable
+            name="authPhoneNumberButtonTheme"
+            type="kr.co.soogong.master.data.global.ButtonTheme" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <kr.co.soogong.master.atomic.organisms.SubheadlineTextInputButtonMediumTextInputTimer
+            android:id="@+id/stibmtit_auth_phone_number"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="wrap_content"
+            app:buttonText="@{@string/certify}"
+            app:buttonTheme="@{authPhoneNumberButtonTheme}"
+            app:firstContent="@={vm.tel}"
+            app:hint="@{@string/type_phone_number_hint}"
+            app:inputType="@{InputType.TYPE_CLASS_NUMBER}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:max="@{11}"
+            app:secondContent="@={vm.certificationCode}"
+            app:subheadline="@{@string/type_phone_number}"
+            app:textInputTimerHint="@{@string/certification_code}"
+            app:textInputTimerInputType="@{InputType.TYPE_CLASS_NUMBER}"
+            app:textInputTimerMax="@{6}" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_resend_certification_code"
+            style="@style/caption_1.regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_5"
+            android:paddingStart="@dimen/gap_10"
+            android:paddingTop="@dimen/gap_5"
+            android:paddingEnd="@dimen/gap_0"
+            android:text="@string/resend_certification_code"
+            android:textColor="@color/grey_3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/stibmtit_auth_phone_number"
+            tools:visibility="visible" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -6,21 +6,23 @@
 
     <data>
 
+        <import type="kr.co.soogong.master.data.global.CodeTable" />
+
         <variable
             name="buttonThemeRequestReview"
-            type="kr.co.soogong.master.data.common.ButtonTheme" />
+            type="kr.co.soogong.master.data.global.ButtonTheme" />
 
         <variable
             name="colorThemeProfileGuideline"
-            type="kr.co.soogong.master.data.common.ColorTheme" />
+            type="kr.co.soogong.master.data.global.ColorTheme" />
 
         <variable
             name="colorThemeRequiredInformationProgress"
-            type="kr.co.soogong.master.data.common.ColorTheme" />
+            type="kr.co.soogong.master.data.global.ColorTheme" />
 
         <variable
             name="colorThemeOptionalInformationProgress"
-            type="kr.co.soogong.master.data.common.ColorTheme" />
+            type="kr.co.soogong.master.data.global.ColorTheme" />
 
         <variable
             name="vm"
@@ -40,6 +42,7 @@
             app:title="@{@string/main_activity_navigation_bar_profile}" />
 
         <ScrollView
+            android:id="@+id/sv_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fillViewport="true"
@@ -57,6 +60,7 @@
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="@dimen/gap_0"
                     android:layout_marginTop="@dimen/gap_20"
+                    android:background="@drawable/ic_nutty_circle"
                     app:layout_constraintDimensionRatio="H, 1:1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -114,7 +118,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_representative_name"
-                    app:recommendCount="@{vm.profile.myReview.averageRecommendation}"
+                    app:recommendation="@{vm.profile.myReview.averageRecommendation}"
                     app:reviewCount="@{vm.profile.myReview.reviewCount}" />
                 <!-- todo : 완료수 추가 필요 -->
 
@@ -170,10 +174,12 @@
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/gap_12"
-                    app:content="@{@string/explanation_of_required_information}"
+                    android:visibility="gone"
+                    app:approvedStatus="@{vm.profile.approvedStatus}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/spi_required_information" />
+                    app:layout_constraintTop_toBottomOf="@id/spi_required_information"
+                    tools:visibility="visible" />
 
                 <!-- 대표자명 -->
                 <kr.co.soogong.master.atomic.molecules.HeadlineButtonContent
@@ -217,7 +223,7 @@
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/gap_33"
-                    app:content="@{vm.profile.requiredInformation.businessUnitInformation.businessType != null ? vm.profile.requiredInformation.businessUnitInformation.businessType + `, ` + vm.profile.requiredInformation.businessUnitInformation.businessName : null}"
+                    app:content="@{vm.profile.requiredInformation.businessUnitInformation.businessType != null ? vm.profile.requiredInformation.businessUnitInformation.businessType + `, ` + vm.profile.requiredInformation.businessUnitInformation.shopName : null}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/hie_shop_images"
@@ -314,10 +320,13 @@
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/gap_12"
-                    app:content="@{@string/explanation_of_required_information}"
+                    android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/spi_optional_information" />
+                    app:layout_constraintTop_toBottomOf="@id/spi_optional_information"
+                    app:percentage="@{vm.percentageBasic}"
+                    bind:visible="@{vm.percentageBasic != 100.0}"
+                    tools:visibility="visible" />
 
                 <!-- 무료 방문 실측 여부 -->
                 <kr.co.soogong.master.atomic.molecules.HeadlineButtonContent

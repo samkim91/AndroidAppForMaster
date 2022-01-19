@@ -2,6 +2,7 @@ package kr.co.soogong.master.ui.requirement
 
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -11,17 +12,17 @@ import kr.co.soogong.master.databinding.FragmentRequirementBinding
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.dialog.popup.DefaultDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData
-import kr.co.soogong.master.ui.requirement.RequirementViewModel.Companion.ASK_FOR_REVIEW_SUCCESSFULLY
+import kr.co.soogong.master.ui.main.MainViewModel
 import kr.co.soogong.master.ui.requirement.RequirementViewModel.Companion.REQUEST_FAILED
-import kr.co.soogong.master.ui.requirement.list.RequirementListPagerAdapter
 import kr.co.soogong.master.ui.requirement.list.TAB_TEXTS_REQUIREMENTS_BEFORE_PROGRESS
 import kr.co.soogong.master.ui.requirement.list.TAB_TEXTS_REQUIREMENTS_IN_PROGRESS
+import kr.co.soogong.master.ui.requirement.list.filter.RequirementsFilterPagerAdapter
 import kr.co.soogong.master.uihelper.requirment.RequirementsBadge
-import kr.co.soogong.master.uihelper.requirment.action.SearchActivityHelper
+import kr.co.soogong.master.uihelper.requirment.SearchActivityHelper
 import kr.co.soogong.master.uihelper.requirment.action.ViewRequirementActivityHelper
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.extension.changeTabFont
-import kr.co.soogong.master.utility.extension.setTabClickListener
+import kr.co.soogong.master.utility.extension.setTabSelectedListener
 import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
 
@@ -30,6 +31,7 @@ class RequirementFragment : BaseFragment<FragmentRequirementBinding>(
     R.layout.fragment_requirement
 ), RequirementsBadge {
 
+    private val mainViewModel: MainViewModel by activityViewModels()
     private val viewModel: RequirementViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -46,7 +48,7 @@ class RequirementFragment : BaseFragment<FragmentRequirementBinding>(
             lifecycleOwner = viewLifecycleOwner
 
             mainTabs.changeTabFont(0, R.style.title_3_bold)
-            mainTabs.setTabClickListener(
+            mainTabs.setTabSelectedListener(
                 onSelected = { tab ->
                     tab?.position.let {
                         mainTabs.changeTabFont(it, R.style.title_3_bold)
@@ -60,7 +62,7 @@ class RequirementFragment : BaseFragment<FragmentRequirementBinding>(
             )
 
             filterTabs.changeTabFont(0, R.style.subheadline_regular)
-            filterTabs.setTabClickListener(
+            filterTabs.setTabSelectedListener(
                 onSelected = { tab ->
                     tab?.position.let {
                         viewModel.filterTabIndex.value = it
@@ -72,9 +74,7 @@ class RequirementFragment : BaseFragment<FragmentRequirementBinding>(
                 }
             )
 
-            setSearchIconClick {
-                startActivity(SearchActivityHelper.getIntent(requireContext()))
-            }
+            setSearchIconClick { startActivity(SearchActivityHelper.getIntent(requireContext())) }
 
             setViewPager()
         }
@@ -85,7 +85,7 @@ class RequirementFragment : BaseFragment<FragmentRequirementBinding>(
         viewModel.mainTabIndex.value?.let { mainTabIndex ->
             bind {
                 with(requirementsViewPager) {
-                    adapter = RequirementListPagerAdapter(this@RequirementFragment, mainTabIndex)
+                    adapter = RequirementsFilterPagerAdapter(this@RequirementFragment, mainTabIndex)
                     TabLayoutMediator(filterTabs, this) { tab, position ->
                         tab.text =
                             if (mainTabIndex == 0) getString(TAB_TEXTS_REQUIREMENTS_BEFORE_PROGRESS[position])
@@ -100,7 +100,6 @@ class RequirementFragment : BaseFragment<FragmentRequirementBinding>(
         viewModel.action.observe(viewLifecycleOwner, EventObserver { action ->
             when (action) {
                 REQUEST_FAILED -> requireContext().toast(getString(R.string.error_message_of_request_failed))
-                ASK_FOR_REVIEW_SUCCESSFULLY -> requireContext().toast(getString(R.string.requirements_card_review_button_done))
             }
         })
 
@@ -113,9 +112,14 @@ class RequirementFragment : BaseFragment<FragmentRequirementBinding>(
                     showDialogForViewRequirement(REQUEST_CONSULTING, request.requestConsultingList)
             }
         })
+
+        mainViewModel.selectedMainTabInRequirementFragment.observe(viewLifecycleOwner,
+            { position ->
+                binding.mainTabs.getTabAt(position)?.select()
+            })
     }
 
-    fun showDialogForViewRequirement(type: Int, list: List<Int>) {
+    private fun showDialogForViewRequirement(type: Int, list: List<Int>) {
         DefaultDialog.newInstance(
             dialogData = if (type == REQUEST_MEASURE)
                 DialogData.getNoticeForRequestMeasure(list.count())
@@ -137,24 +141,7 @@ class RequirementFragment : BaseFragment<FragmentRequirementBinding>(
     override fun onResume() {
         super.onResume()
         Timber.tag(TAG).d("onResume: ")
-        // 필수 정보를 입력하라는 bottom view 를 보여줄지 결정
-        viewModel.requestMasterSimpleInfo()
         viewModel.getCustomerRequests()
-        checkShowNoticeForCalling()
-    }
-
-    private fun checkShowNoticeForCalling() {
-        if (viewModel.getShowNoticeForCalling())
-            DefaultDialog.newInstance(DialogData.getNoticeForCallingToCustomer())
-                .let {
-                    it.setButtonsClickListener(
-                        onPositive = { },
-                        onNegative = {
-                            viewModel.saveShowNoticeForCalling()
-                        }
-                    )
-                    it.show(parentFragmentManager, it.tag)
-                }
     }
 
     override fun setReceivedBadge(badgeCount: Int) {

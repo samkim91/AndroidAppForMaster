@@ -8,8 +8,8 @@ import androidx.fragment.app.viewModels
 import com.google.android.material.chip.Chip
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.common.ButtonTheme
-import kr.co.soogong.master.data.common.CodeTable
+import kr.co.soogong.master.data.global.ButtonTheme
+import kr.co.soogong.master.data.global.CodeTable
 import kr.co.soogong.master.databinding.FragmentEditMajorBinding
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.dialog.popup.DefaultDialog
@@ -17,7 +17,7 @@ import kr.co.soogong.master.ui.dialog.popup.DialogData
 import kr.co.soogong.master.ui.profile.detail.EditProfileContainerActivity
 import kr.co.soogong.master.ui.profile.detail.EditProfileContainerViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.ui.profile.detail.EditProfileContainerViewModel.Companion.SAVE_MASTER_SUCCESSFULLY
-import kr.co.soogong.master.uihelper.major.MajorActivityHelper
+import kr.co.soogong.master.uihelper.common.MajorActivityHelper
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
@@ -73,7 +73,7 @@ class EditMajorFragment : BaseFragment<FragmentEditMajorBinding>(
                 // 시공 가능 업종을 수정하면, 프로필의 승인상태가 변경된다. 따라서 마스터 승인상태에 따라 아래 코드가 실행
                 if (viewModel.profile.value?.approvedStatus == CodeTable.APPROVED.code) {
                     DefaultDialog.newInstance(
-                        DialogData.getConfirmingForRequiredDialogData())
+                        DialogData.getConfirmingForLimitedService())
                         .let {
                             it.setButtonsClickListener(
                                 onPositive = { viewModel.saveMajor() },

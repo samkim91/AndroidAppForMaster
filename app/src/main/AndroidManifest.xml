@@ -18,43 +18,90 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="${cleartextTrafficPermitted}">
-        <activity android:name=".ui.auth.signup.steps.ViewPolicyActivity" />
-        <activity android:name=".ui.profile.review.MyReviewsActivity" />
-        <activity android:name=".ui.profile.detail.EditProfileContainerActivity" />
-        <activity android:name=".ui.profile.detail.portfoliolist.PortfolioListActivity" />
+        <activity
+            android:name=".ui.auth.AuthContainerActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.auth.signup.steps.AgreementDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.profile.review.MyReviewsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.profile.detail.EditProfileContainerActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.profile.detail.portfoliolist.PortfolioListActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.splash.SplashActivity"
+            android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.auth.SignMainActivity" />
         <activity
-            android:name=".ui.auth.signup.SignUpActivity"
-            android:windowSoftInputMode="adjustResize" />
-        <activity android:name=".ui.auth.signup.AddressActivity" />
-        <activity android:name=".ui.auth.signin.SignInActivity" />
-        <activity android:name=".ui.main.MainActivity" />
-        <activity android:name=".ui.major.MajorActivity" />
-        <activity android:name=".ui.image.ImageActivity" />
-        <activity android:name=".ui.requirement.action.cancel.CancelActivity" />
-        <activity android:name=".ui.requirement.action.end.EndRepairActivity" />
-        <activity android:name=".ui.requirement.action.search.SearchActivity" />
+            android:name=".ui.common.KakaoAddressActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.main.MainActivity"
+            android:exported="true">
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="soogong.page.link"
+                    android:scheme="https" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.common.MajorActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.image.ImageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.requirement.action.cancel.CancelActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.requirement.action.end.EndRepairActivity"
+            android:exported="false" />
+        <activity
+            android:name="kr.co.soogong.master.ui.requirement.list.search.SearchActivity"
+            android:exported="true" />
+        <activity
+            android:name="kr.co.soogong.master.ui.requirement.list.done.DoneActivity"
+            android:exported="true" />
         <activity
             android:name=".ui.requirement.action.view.ViewRequirementActivity"
-            android:launchMode="singleTask" />        <!-- 실측요청건을 고려 singleTop 로 설정 -->
+            android:exported="true"
+            android:launchMode="singleTask" /> <!-- 실측요청건을 고려 singleTop 로 설정 -->
         <activity
             android:name=".ui.requirement.action.write.WriteEstimationActivity"
+            android:exported="true"
             android:launchMode="singleTask" />
         <activity
             android:name=".ui.requirement.action.write.MeasurementActivity"
+            android:exported="true"
             android:launchMode="singleTask" />
-        <activity android:name=".ui.requirement.action.write.template.EstimationTemplatesActivity" />
-        <activity android:name=".ui.preferences.account.AccountActivity" />
-        <activity android:name=".ui.preferences.detail.PreferencesContainerActivity" />
+        <activity
+            android:name=".ui.requirement.action.write.template.EstimationTemplatesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.preferences.account.AccountActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.preferences.detail.PreferencesContainerActivity"
+            android:exported="true" />
 
         <service
             android:name=".SoogongMasterMessagingService"
@@ -73,8 +120,7 @@
             android:value="false" />
         <meta-data
             android:name="android.webkit.WebView.EnableSafeBrowsing"
-            android:value="true" /> <!-- javascript interface injection 관련 -->
-
+            android:value="true" />
     </application>
 
 </manifest>

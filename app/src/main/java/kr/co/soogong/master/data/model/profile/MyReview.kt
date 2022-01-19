@@ -6,13 +6,13 @@ import kr.co.soogong.master.data.dto.profile.MasterDto
 
 @Parcelize
 data class MyReview(
-    val averageRecommendation: Double?,
+    val averageRecommendation: Float?,
     val reviewCount: Int?,
     val repairCount: Int?,
-    val averageKindness: Double?,
-    val averageQuality: Double?,
-    val averageAffordability: Double?,
-    val averagePunctuality: Double?,
+    val averageKindness: Float?,
+    val averageQuality: Float?,
+    val averageAffordability: Float?,
+    val averagePunctuality: Float?,
     val reviews: List<Review>? = emptyList(),
 ) : Parcelable {
     companion object {

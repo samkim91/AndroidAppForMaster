@@ -3,25 +3,27 @@ package kr.co.soogong.master.ui.auth.signup.steps
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
-import kr.co.soogong.master.databinding.FragmentSignUpRepairInPersonBinding
-import kr.co.soogong.master.ui.auth.signup.SignUpActivity
+import kr.co.soogong.master.data.global.ColorTheme
+import kr.co.soogong.master.databinding.FragmentRepairInPersonBinding
 import kr.co.soogong.master.ui.auth.signup.SignUpViewModel
+import kr.co.soogong.master.ui.auth.signup.SignUpViewModel.Companion.VALIDATE_REPAIR_IN_PERSON
 import kr.co.soogong.master.ui.base.BaseFragment
 import timber.log.Timber
 
 @AndroidEntryPoint
-class RepairInPersonFragment : BaseFragment<FragmentSignUpRepairInPersonBinding>(
-    R.layout.fragment_sign_up_repair_in_person
+class RepairInPersonFragment : BaseFragment<FragmentRepairInPersonBinding>(
+    R.layout.fragment_repair_in_person
 ) {
-    private val viewModel: SignUpViewModel by activityViewModels()
+    private val viewModel: SignUpViewModel by viewModels({ requireParentFragment() })
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Timber.tag(TAG).d("onViewCreated: ")
         initLayout()
+        registerEventObserver()
     }
 
     override fun initLayout() {
@@ -30,28 +32,25 @@ class RepairInPersonFragment : BaseFragment<FragmentSignUpRepairInPersonBinding>
         bind {
             vm = viewModel
             lifecycleOwner = viewLifecycleOwner
+            colorThemeProfileGuideline = ColorTheme.Grey
+        }
+    }
 
-            binding.repairInPersonCheckbox.setCheckClick {
-                viewModel.repairInPerson.value = repairInPersonCheckbox.checkBox.isChecked
-            }
-
-            defaultButton.setOnClickListener {
+    private fun registerEventObserver() {
+        viewModel.validation.observe(viewLifecycleOwner, { validation ->
+            if (validation == VALIDATE_REPAIR_IN_PERSON) {
                 viewModel.repairInPerson.observe(viewLifecycleOwner, {
-                    alertRepairInPersonRequired.isVisible = !it
+                    binding.tvAlert.isVisible = !it
                 })
 
-                if (!alertRepairInPersonRequired.isVisible) {
-                    (activity as? SignUpActivity)?.moveToNext()
-                }
+                if (!binding.tvAlert.isVisible) viewModel.moveToNext()
             }
-        }
+        })
     }
 
     companion object {
         private const val TAG = "RepairInPersonFragment"
 
-        fun newInstance(): RepairInPersonFragment {
-            return RepairInPersonFragment()
-        }
+        fun newInstance() = RepairInPersonFragment()
     }
 }

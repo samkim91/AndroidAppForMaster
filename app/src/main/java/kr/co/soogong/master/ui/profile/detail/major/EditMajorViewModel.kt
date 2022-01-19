@@ -1,9 +1,9 @@
 package kr.co.soogong.master.ui.profile.detail.major
 
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kr.co.soogong.master.data.common.CodeTable
 import kr.co.soogong.master.data.dto.major.ProjectDto
 import kr.co.soogong.master.data.dto.profile.MasterDto
+import kr.co.soogong.master.data.global.CodeTable
 import kr.co.soogong.master.data.model.major.Project
 import kr.co.soogong.master.domain.usecase.profile.GetProfileUseCase
 import kr.co.soogong.master.domain.usecase.profile.SaveMasterUseCase

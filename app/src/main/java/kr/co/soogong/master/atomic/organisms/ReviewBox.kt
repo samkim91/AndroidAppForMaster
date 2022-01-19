@@ -15,7 +15,7 @@ class ReviewBox @JvmOverloads constructor(
     private val binding =
         ViewReviewBoxBinding.inflate(LayoutInflater.from(context), this, true)
 
-    var recommendCount: Double? = null
+    var recommendation: Float? = null
         set(value) {
             field = value
             value?.let {

@@ -7,7 +7,7 @@
 
         <variable
             name="colorThemeLabelFilled"
-            type="kr.co.soogong.master.data.common.ColorTheme" />
+            type="kr.co.soogong.master.data.global.ColorTheme" />
     </data>
 
     <merge

@@ -27,8 +27,8 @@ android {
         applicationId "kr.co.soogong.master"
         minSdkVersion rootProject.minSdkVersion
         targetSdkVersion rootProject.targetSdkVersion
-        versionCode 61
-        versionName "1.7.0"
+        versionCode 62
+        versionName "1.7.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -88,6 +88,8 @@ dependencies {
     implementation "androidx.room:room-runtime:$roomVersion"
     implementation "androidx.room:room-rxjava2:$roomVersion"
     implementation "androidx.room:room-ktx:$roomVersion"
+    implementation "androidx.room:room-paging:$roomVersion"
+
     implementation "androidx.cardview:cardview:$cardviewVersion"
     implementation "com.google.android.material:material:$materialVersion"
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
@@ -186,11 +188,13 @@ dependencies {
     androidTestImplementation "androidx.test.espresso:espresso-idling-resource:$espressoVersion"
 
     // Firebase
-    implementation platform('com.google.firebase:firebase-bom:28.1.0')
+    implementation platform("com.google.firebase:firebase-bom:$firebaseVersion")
     implementation 'com.google.firebase:firebase-auth-ktx'
     implementation 'com.google.firebase:firebase-messaging-ktx'
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.google.firebase:firebase-crashlytics-ktx'
+    implementation 'com.google.firebase:firebase-inappmessaging-display-ktx'
+    implementation 'com.google.firebase:firebase-dynamic-links-ktx'
 
     // Kakao
     implementation "com.kakao.sdk:v2-talk:$kakaoVersion"

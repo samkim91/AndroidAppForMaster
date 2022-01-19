@@ -11,9 +11,11 @@ import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.dto.major.ProjectDto
 import kr.co.soogong.master.data.dto.profile.MasterDto
+import kr.co.soogong.master.data.global.DropdownItemList
 import kr.co.soogong.master.data.model.major.Project
 import kr.co.soogong.master.domain.usecase.auth.CheckUserExistentUseCase
 import kr.co.soogong.master.domain.usecase.auth.SignUpUseCase
+import kr.co.soogong.master.ui.SIGN_UP_STEPS
 import kr.co.soogong.master.ui.base.BaseViewModel
 import kr.co.soogong.master.utility.ListLiveData
 import timber.log.Timber
@@ -25,12 +27,12 @@ class SignUpViewModel @Inject constructor(
     private val checkUserExistentUseCase: CheckUserExistentUseCase,
 ) : BaseViewModel() {
 
+    val pagesCount = SIGN_UP_STEPS
     val indicator = MutableLiveData(0)
+    val validation = MutableLiveData<String>()
 
     // PhoneNumberFragment
     val tel = MutableLiveData("")
-
-    // AuthFragment
     val certificationCode = MutableLiveData("")
 
     // Firebase Auth
@@ -53,8 +55,8 @@ class SignUpViewModel @Inject constructor(
     val longitude = MutableLiveData(0.0)
 
     // ServiceAreaFragment
-    val serviceArea = MutableLiveData("")
-    val serviceAreaToInt = MutableLiveData(0)
+    val serviceAreas: List<Pair<String, Int>> = DropdownItemList.serviceAreas
+    val serviceArea = MutableLiveData(Pair("", 0))
 
     // RepairInPersonFragment
     val repairInPerson = MutableLiveData(false)
@@ -63,6 +65,30 @@ class SignUpViewModel @Inject constructor(
     val privacyPolicy = MutableLiveData(false)
     val marketingPush = MutableLiveData(false)
 
+    fun checkValidation() {
+        Timber.tag(TAG).d("checkValidation: ${indicator.value}")
+
+        when (indicator.value) {
+            0 -> validation.postValue(VALIDATE_PHONE_NUMBER)
+            1 -> validation.postValue(VALIDATE_OWNER_NAME)
+            2 -> validation.postValue(VALIDATE_MAJOR)
+            3 -> validation.postValue(VALIDATE_ADDRESS)
+            4 -> validation.postValue(VALIDATE_SERVICE_AREA)
+            5 -> validation.postValue(VALIDATE_REPAIR_IN_PERSON)
+            6 -> validation.postValue(VALIDATE_AGREEMENT)
+        }
+    }
+
+
+    fun moveToNext() {
+        Timber.tag(TAG).d("moveToNext: ")
+        indicator.value = indicator.value?.plus(1)
+    }
+
+    fun moveToPrevious() {
+        Timber.tag(TAG).d("moveToPrevious: ")
+        indicator.value = indicator.value?.minus(1)
+    }
 
     fun checkUserExist() {
         Timber.tag(TAG).d("checkUserExist: ")
@@ -78,7 +104,7 @@ class SignUpViewModel @Inject constructor(
                     },
                     onError = {
                         Timber.tag(TAG).d("onError: $it")
-                        setAction(CHECK_PHONE_NUMBER_FAILED)
+                        setAction(REQUEST_FAILED)
                     }
                 ).addToDisposable()
         }
@@ -97,7 +123,7 @@ class SignUpViewModel @Inject constructor(
                 detailAddress = detailAddress.value,
                 latitude = latitude.value?.toFloat(),
                 longitude = longitude.value?.toFloat(),
-                serviceArea = serviceAreaToInt.value,
+                serviceArea = serviceArea.value?.second,
                 privatePolicy = privacyPolicy.value,
                 marketingPush = marketingPush.value,
                 pushAtNight = true,
@@ -111,19 +137,25 @@ class SignUpViewModel @Inject constructor(
             },
                 onError = {
                     Timber.tag(TAG).d("Sign Up Failed : $it")
-                    setAction(SIGN_UP_FAILED)
+                    setAction(REQUEST_FAILED)
                 }
             ).addToDisposable()
     }
 
     companion object {
         private const val TAG = "SignUpViewModel"
-        const val SIGN_UP_FAILED = "SIGN_UP_FAILED"
+        const val REQUEST_FAILED = "REQUEST_FAILED"
         const val SIGN_UP_SUCCESSFULLY = "SIGN_UP_SUCCESSFULLY"
 
         const val PHONE_NUMBER_EXIST = "PHONE_NUMBER_EXIST"
         const val PHONE_NUMBER_NOT_EXIST = "PHONE_NUMBER_NOT_EXIST"
-        const val CHECK_PHONE_NUMBER_FAILED = "CHECK_PHONE_NUMBER_FAILED"
 
+        const val VALIDATE_PHONE_NUMBER = "VALIDATE_PHONE_NUMBER"
+        const val VALIDATE_OWNER_NAME = "VALIDATE_OWNER_NAME"
+        const val VALIDATE_MAJOR = "VALIDATE_MAJOR"
+        const val VALIDATE_ADDRESS = "VALIDATE_ADDRESS"
+        const val VALIDATE_SERVICE_AREA = "VALIDATE_SERVICE_AREA"
+        const val VALIDATE_REPAIR_IN_PERSON = "VALIDATE_REPAIR_IN_PERSON"
+        const val VALIDATE_AGREEMENT = "VALIDATE_AGREEMENT"
     }
 }

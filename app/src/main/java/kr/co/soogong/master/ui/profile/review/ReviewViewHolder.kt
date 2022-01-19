@@ -1,6 +1,8 @@
 package kr.co.soogong.master.ui.profile.review
 
 import android.content.Context
+import android.view.LayoutInflater
+import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kr.co.soogong.master.data.model.profile.Review
 import kr.co.soogong.master.databinding.ViewHolderReviewItemBinding
@@ -32,5 +34,15 @@ class ReviewViewHolder(
 
             executePendingBindings()
         }
+    }
+
+    companion object {
+        fun create(parent: ViewGroup): ReviewViewHolder = ReviewViewHolder(
+            ViewHolderReviewItemBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
     }
 }
