@@ -1,6 +1,8 @@
 package kr.co.soogong.master.contract
 
 object HttpContract {
+    const val GOOGLE_STORE_URL = "https://play.google.com/store/search?q=%EC%88%98%EA%B3%B5"
+
     //    const val LOCAL_URL = "http://192.168.0.50:8080/"       // Myeonghwan's local
     const val LOCAL_URL_JH = "http://192.168.0.32:8080/"     // Jihun's local
     const val LOCAL_URL = "http://192.168.0.40:8080/"     // Jaeyeon's local

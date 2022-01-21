@@ -10,7 +10,7 @@ import javax.inject.Inject
 @Reusable
 class UpdateDirectRepairYnUseCase @Inject constructor(
     private val profileService: ProfileService,
-    private val masterDao: MasterDao,
+//    private val masterDao: MasterDao,
 ) {
     operator fun invoke(
         masterDto: MasterDto,
