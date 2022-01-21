@@ -372,8 +372,6 @@
 
     <!-- toast text -->
     <string name="get_version_info_failed">버전정보를 불러오는데 실패하였습니다. 인터넷 상태를 확인하거나 앱 종료 후 다시 실행해주세요.</string>
-    <string name="get_master_direct_repair_failed">마스터 정보를 불러오는데 실패했습니다. 수공에 문의해주세요.</string>
-    <string name="update_master_direct_repair_failed">직접 시공 여부를 업데이트하는데 실패했습니다. 수공에 문의해주세요.</string>
 
     <string name="certification_code_requested">인증번호를 요청 했습니다.</string>
     <string name="certification_code_requested_again">인증번호를 재요청 했습니다.</string>
