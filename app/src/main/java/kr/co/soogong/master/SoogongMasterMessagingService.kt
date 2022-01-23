@@ -73,7 +73,7 @@ class SoogongMasterMessagingService : FirebaseMessagingService() {
                 }
                 else -> MainActivityHelper.getIntent(this)
             },
-            PendingIntent.FLAG_ONE_SHOT
+            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
         )
 
     companion object {
