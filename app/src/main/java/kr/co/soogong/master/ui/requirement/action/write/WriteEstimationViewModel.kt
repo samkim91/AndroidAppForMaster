@@ -39,12 +39,12 @@ class WriteEstimationViewModel @Inject constructor(
     val requirement: LiveData<Requirement>
         get() = _requirement
 
-    val simpleCost = MutableLiveData("")
+    val simpleCost = MutableLiveData(0L)
 
-    val laborCost = MutableLiveData("")
-    val materialCost = MutableLiveData("")
-    val travelCost = MutableLiveData("")
-    val totalCost = MutableLiveData("")
+    val laborCost = MutableLiveData(0L)
+    val materialCost = MutableLiveData(0L)
+    val travelCost = MutableLiveData(0L)
+    val totalCost = MutableLiveData(0L)
 
     val includingVat = MutableLiveData(false)
 
@@ -57,7 +57,7 @@ class WriteEstimationViewModel @Inject constructor(
         requestRequirement()
     }
 
-    fun requestRequirement() {
+    private fun requestRequirement() {
         Timber.tag(TAG).d("requestRequirement: $requirementId")
         getRequirementUseCase(requirementId)
             .subscribeOn(Schedulers.io())
@@ -83,14 +83,7 @@ class WriteEstimationViewModel @Inject constructor(
                 masterId = requirement.value?.estimationDto?.masterId,
                 masterResponseCode = EstimationResponseCode.ACCEPTED,
                 typeCode = estimationType.value?.code,
-                price = when (estimationType.value) {
-                    CodeTable.BY_ITEM -> {
-                        totalCost.value?.replace(",", "")?.toInt()
-                    }
-                    else -> {
-                        simpleCost.value?.replace(",", "")?.toInt()
-                    }
-                },
+                price = if (estimationType.value == CodeTable.BY_ITEM) totalCost.value?.toInt() else simpleCost.value?.toInt(),
                 includingVat = includingVat.value,
                 isSavingTemplate = isSavingTemplate.value ?: false,
                 description = description.value,

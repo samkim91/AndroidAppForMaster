@@ -142,7 +142,6 @@
     <string name="estimation_templates_not_found">자주 쓰는 제안 내용이 없습니다.</string>
 
     <!-- RequirementsCard -->
-    <string name="requirements_card_review_button_done">리뷰 요청을 완료했어요!</string>
 
     <string name="requirements_card_estimation_due_time">견적 마감시간 %s</string>
     <string name="requirements_card_request_measure_due_time">응답 마감시간 %s</string>

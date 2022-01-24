@@ -10,9 +10,8 @@ import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.ui.requirement.action.end.EndRepairViewModel.Companion.END_REPAIR_SUCCESSFULLY
 import kr.co.soogong.master.ui.requirement.action.end.EndRepairViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.utility.EventObserver
-import kr.co.soogong.master.utility.extension.exceptComma
+import kr.co.soogong.master.utility.extension.isIntRange
 import kr.co.soogong.master.utility.extension.toast
-import kr.co.soogong.master.utility.validation.ValidationHelper
 import timber.log.Timber
 import java.util.*
 
@@ -37,30 +36,19 @@ class EndRepairActivity : BaseActivity<ActivityEndRepairBinding>(
 
             abHeader.setButtonBackClickListener { onBackPressed() }
 
-//            stiActualPrice.setOnFocusChangeListener { v, hasFocus ->
-//                if (!viewModel.actualPrice.value.isNullOrEmpty()) {
-//                    if (hasFocus) {
-//                        viewModel.actualPrice.value = viewModel.actualPrice.value?.replace(",", "")
-//                    } else {
-//                        viewModel.actualPrice.value =
-//                            viewModel.actualPrice.value?.toLong().formatComma()
-//                    }
-//                }
-
-
             cvCalender.setOnDateChangeListener { _: CalendarView, year: Int, month: Int, day: Int ->
                 Timber.tag(TAG).d("setOnDateChangeListener: ${year - month - day}")
                 viewModel.actualDate.value?.set(year, month, day)
             }
 
             bEndRepair.setOnClickListener {
-                viewModel.actualPrice.observe(this@EndRepairActivity, {
+                viewModel.actualPrice.value.let {
                     stiActualPrice.error = when {
-                        it.exceptComma().toLong() < 10000 -> getString(R.string.minimum_cost)
-                        !ValidationHelper.isIntRange(it) -> getString(R.string.too_large_number)
+                        it == null || it < 10000L -> getString(R.string.minimum_cost)
+                        !it.isIntRange() -> getString(R.string.too_large_number)
                         else -> null
                     }
-                })
+                }
 
                 if (stiActualPrice.error.isNullOrEmpty()) viewModel.saveRepair()
             }

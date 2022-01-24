@@ -67,9 +67,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/gap_16"
-                    app:content="@={vm.simpleCost}"
+                    app:contentLong="@={vm.simpleCost}"
                     app:inputType="@{InputType.TYPE_CLASS_NUMBER}"
                     app:max="@{10}"
+                    app:moneyFormatAtHelper="@{vm.simpleCost}"
                     app:subheadline="@{@string/estimation_cost}" />
 
                 <androidx.appcompat.widget.AppCompatCheckBox
