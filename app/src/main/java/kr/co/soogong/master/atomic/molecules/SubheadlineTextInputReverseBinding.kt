@@ -10,9 +10,20 @@ object SubheadlineTextInputReverseBinding {
     @JvmStatic
     @BindingAdapter("content")
     fun setSubheadlineTextInputContent(view: SubheadlineTextInput, content: String?) {
-        val oldContent = view.textInput.textInputEditText.text.toString()
+        val oldContent = view.textInputEditText.text.toString()
         if (oldContent != content) {
-            view.textInput.textInputEditText.setText(content)
+            view.textInputEditText.setText(content)
+        }
+    }
+
+    @JvmStatic
+    @BindingAdapter("contentLong")
+    fun setSubheadlineTextInputContent(view: SubheadlineTextInput, content: Long?) {
+        val oldContent = view.textInputEditText.text.toString()
+        val oldContentToLong = if (oldContent.isEmpty()) 0L else oldContent.toLong()
+
+        if (oldContentToLong != content) {
+            view.textInputEditText.setText(content.toString())
         }
     }
 
@@ -34,12 +45,20 @@ object SubheadlineTextInputReverseBinding {
             }
         }
 
-        view.textInput.textInputEditText.addTextChangedListener(watcher)
+        view.textInputEditText.addTextChangedListener(watcher)
     }
 
     @JvmStatic
     @InverseBindingAdapter(attribute = "content", event = "contentAttrChanged")
     fun getSubheadlineTextInputContent(view: SubheadlineTextInput): String {
-        return view.textInput.textInputEditText.text.toString()
+        return view.textInputEditText.text.toString()
+    }
+
+    @JvmStatic
+    @InverseBindingAdapter(attribute = "contentLong", event = "contentAttrChanged")
+    fun getSubheadlineTextInputContentInt(view: SubheadlineTextInput): Long {
+        return view.textInputEditText.text.toString().run {
+            if (this.isNotEmpty()) this.toLong() else 0L
+        }
     }
 }

@@ -79,9 +79,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/gap_16"
-                    app:content="@={vm.simpleCost}"
+                    app:contentLong="@={vm.simpleCost}"
                     app:inputType="@{InputType.TYPE_CLASS_NUMBER}"
                     app:max="@{10}"
+                    app:moneyFormatAtHelper="@{vm.simpleCost}"
                     app:subheadline="@{@string/estimation_cost}"
                     bind:visible="@{vm.estimationType == CodeTable.INTEGRATION}" />
 
@@ -90,9 +91,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/gap_16"
-                    app:content="@={vm.laborCost}"
+                    app:contentLong="@={vm.laborCost}"
                     app:inputType="@{InputType.TYPE_CLASS_NUMBER}"
                     app:max="@{10}"
+                    app:moneyFormatAtHelper="@{vm.laborCost}"
                     app:subheadline="@{@string/estimation_labor_cost}"
                     bind:visible="@{vm.estimationType == CodeTable.BY_ITEM}" />
 
@@ -101,9 +103,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/gap_30"
-                    app:content="@={vm.materialCost}"
+                    app:contentLong="@={vm.materialCost}"
                     app:inputType="@{InputType.TYPE_CLASS_NUMBER}"
                     app:max="@{10}"
+                    app:moneyFormatAtHelper="@{vm.materialCost}"
                     app:subheadline="@{@string/estimation_material_cost}"
                     bind:visible="@{vm.estimationType == CodeTable.BY_ITEM}" />
 
@@ -112,9 +115,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/gap_30"
-                    app:content="@={vm.travelCost}"
+                    app:contentLong="@={vm.travelCost}"
                     app:inputType="@{InputType.TYPE_CLASS_NUMBER}"
                     app:max="@{10}"
+                    app:moneyFormatAtHelper="@{vm.travelCost}"
                     app:subheadline="@{@string/estimation_travel_cost}"
                     bind:visible="@{vm.estimationType == CodeTable.BY_ITEM}" />
 
@@ -123,8 +127,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/gap_30"
-                    app:content="@{vm.totalCost}"
+                    app:contentLong="@{vm.totalCost}"
                     app:inputEnabled="@{false}"
+                    app:moneyFormatAtHelper="@{vm.totalCost}"
                     app:subheadline="@{@string/estimation_total_cost}"
                     bind:visible="@{vm.estimationType == CodeTable.BY_ITEM}" />
 

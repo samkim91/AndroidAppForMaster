@@ -13,8 +13,9 @@ import kr.co.soogong.master.ui.profile.detail.EditProfileContainerActivity
 import kr.co.soogong.master.ui.profile.detail.EditProfileContainerViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.ui.profile.detail.EditProfileContainerViewModel.Companion.SAVE_MASTER_SUCCESSFULLY
 import kr.co.soogong.master.utility.EventObserver
+import kr.co.soogong.master.utility.extension.isValidDomain
+import kr.co.soogong.master.utility.extension.isValidLocalPart
 import kr.co.soogong.master.utility.extension.toast
-import kr.co.soogong.master.utility.validation.ValidationHelper
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -62,12 +63,12 @@ class EditEmailFragment :
 
                 viewModel.localPart.observe(viewLifecycleOwner, {
                     sefEmail.error =
-                        if (!ValidationHelper.isValidLocalPart(it)) getString(R.string.invalid_email_format) else null
+                        if (!it.isValidLocalPart()) getString(R.string.invalid_email_format) else null
                 })
 
                 viewModel.domain.observe(viewLifecycleOwner, {
                     sefEmail.dropdownError =
-                        if (!ValidationHelper.isValidDomain(it.first)) getString(R.string.invalid_email_format) else null
+                        if (!it.first.isValidDomain()) getString(R.string.invalid_email_format) else null
                 })
 
                 if (sefEmail.error.isNullOrEmpty() && sefEmail.dropdownError.isNullOrEmpty()) viewModel.saveEmailAddress()
