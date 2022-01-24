@@ -26,10 +26,8 @@ import kr.co.soogong.master.uihelper.requirment.action.ViewRequirementActivityHe
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.FileHelper
 import kr.co.soogong.master.utility.PermissionHelper
-import kr.co.soogong.master.utility.extension.exceptComma
-import kr.co.soogong.master.utility.extension.formatComma
+import kr.co.soogong.master.utility.extension.isIntRange
 import kr.co.soogong.master.utility.extension.toast
-import kr.co.soogong.master.utility.validation.ValidationHelper
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -59,22 +57,21 @@ class WriteEstimationActivity : BaseActivity<ActivityWriteEstimationBinding>(
         bind {
             vm = viewModel
             lifecycleOwner = this@WriteEstimationActivity
-
             colorThemeEstimationTemplate = ColorTheme.Green
 
             initChipGroup()
 
-            with(abHeader) {
-                setButtonBackClickListener { onBackPressed() }
-            }
+            abHeader.setButtonBackClickListener { onBackPressed() }
 
             saidAttachments.setImagesDeletableAdapter { viewModel.estimationImages.removeAt(it) }
 
             bSendEstimation.setOnClickListener {
-                registerCostsObserve()
+
                 if (viewModel.estimationType.value == CodeTable.INTEGRATION) {
+                    validateSimpleCost()
                     if (stiEstimationCost.error.isNullOrEmpty()) viewModel.sendEstimation()
                 } else {
+                    validateTotalCost()
                     if (stiLaborCost.error.isNullOrEmpty() && stiMaterialCost.error.isNullOrEmpty() && stiTravelCost.error.isNullOrEmpty() && stiTotalCost.error.isNullOrEmpty()) viewModel.sendEstimation()
                 }
             }
@@ -164,48 +161,59 @@ class WriteEstimationActivity : BaseActivity<ActivityWriteEstimationBinding>(
         )
     }
 
-    private fun registerCostsObserve() {
-        Timber.tag(TAG).d("registerCostsObserve: ")
-        bind {
-            viewModel.simpleCost.observe(this@WriteEstimationActivity, {
+    private fun validateSimpleCost() {
+        Timber.tag(TAG).d("validateSimpleCost: ")
+        with(binding) {
+            viewModel.simpleCost.value.let {
                 stiEstimationCost.error = when {
-                    it.exceptComma().toLong() < 10000 -> getString(R.string.minimum_cost)
-                    !ValidationHelper.isIntRange(it) -> getString(R.string.too_large_number)
+                    it == null || it < 10000L -> getString(R.string.minimum_cost)
+                    !it.isIntRange() -> getString(R.string.too_large_number)
                     else -> null
                 }
-            })
+            }
+        }
+    }
 
-            viewModel.laborCost.observe(this@WriteEstimationActivity, {
-                stiLaborCost.error =
-                    if (it.isNullOrEmpty()) getString(R.string.required_field_alert) else null
-            })
+    private fun validateTotalCost() {
+        Timber.tag(TAG).d("validateTotalCost: ")
+        with(binding) {
+            viewModel.laborCost.value.let {
+                stiLaborCost.error = when {
+                    it == null || it == 0L -> getString(R.string.required_field_alert)
+                    !it.isIntRange() -> getString(R.string.too_large_number)
+                    else -> null
+                }
+            }
 
-            viewModel.materialCost.observe(this@WriteEstimationActivity, {
-                stiMaterialCost.error =
-                    if (it.isNullOrEmpty()) getString(R.string.required_field_alert) else null
-            })
+            viewModel.materialCost.value.let {
+                stiMaterialCost.error = when {
+                    it == null || it == 0L -> getString(R.string.required_field_alert)
+                    !it.isIntRange() -> getString(R.string.too_large_number)
+                    else -> null
+                }
+            }
 
-            viewModel.travelCost.observe(this@WriteEstimationActivity, {
-                stiTravelCost.error =
-                    if (it.isNullOrEmpty()) getString(R.string.required_field_alert) else null
-            })
+            viewModel.travelCost.value.let {
+                stiTravelCost.error = when {
+                    it == null || it == 0L -> getString(R.string.required_field_alert)
+                    !it.isIntRange() -> getString(R.string.too_large_number)
+                    else -> null
+                }
+            }
 
-            viewModel.totalCost.observe(this@WriteEstimationActivity, {
+            viewModel.totalCost.value.let {
                 stiTotalCost.error = when {
-                    it.exceptComma().toLong() < 10000 -> getString(R.string.minimum_cost)
-                    !ValidationHelper.isIntRange(it) -> getString(R.string.too_large_number)
+                    it == null || it < 10000 -> getString(R.string.minimum_cost)
+                    !it.isIntRange() -> getString(R.string.too_large_number)
                     else -> null
                 }
-            })
+            }
         }
     }
 
     private fun setTotalAmount() {
         with(viewModel) {
-            totalCost.value = (laborCost.value.exceptComma().toLong()
-                    + materialCost.value.exceptComma().toLong()
-                    + travelCost.value.exceptComma().toLong())
-                .formatComma()
+            totalCost.value = laborCost.value!! + materialCost.value!! + travelCost.value!!
         }
     }
 

@@ -12,8 +12,8 @@ import kr.co.soogong.master.ui.profile.detail.EditProfileContainerActivity
 import kr.co.soogong.master.ui.profile.detail.portfoliolist.pricebyproject.PriceByProjectViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.ui.profile.detail.portfoliolist.pricebyproject.PriceByProjectViewModel.Companion.SAVE_PRICE_BY_PROJECT_SUCCESSFULLY
 import kr.co.soogong.master.utility.EventObserver
+import kr.co.soogong.master.utility.extension.isIntRange
 import kr.co.soogong.master.utility.extension.toast
-import kr.co.soogong.master.utility.validation.ValidationHelper
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -42,13 +42,13 @@ class PriceByProjectFragment : BaseFragment<FragmentEditPriceByProjectBinding>(
                         if (it.isNullOrEmpty()) getString(R.string.required_field_alert) else null
                 })
 
-                viewModel.price.observe(viewLifecycleOwner, {
+                viewModel.price.value.let {
                     stiPrice.error = when {
-                        it.isNullOrEmpty() -> getString(R.string.required_field_alert)
-                        !ValidationHelper.isIntRange(it) -> getString(R.string.too_large_number)
+                        it == null || it < 10000L -> getString(R.string.minimum_cost)
+                        !it.isIntRange() -> getString(R.string.too_large_number)
                         else -> null
                     }
-                })
+                }
 
                 viewModel.description.observe(viewLifecycleOwner, {
                     stcDescription.error =

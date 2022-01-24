@@ -25,14 +25,14 @@ class PriceByProjectViewModel @Inject constructor(
     val id = PriceByProjectFragment.getPriceByProjectId(savedStateHandle)
 
     val title = MutableLiveData<String>()
-    val price = MutableLiveData<String>()
+    val price = MutableLiveData(0L)
     val description = MutableLiveData<String>()
 
     init {
         requestPriceByProject()
     }
 
-    fun requestPriceByProject() {
+    private fun requestPriceByProject() {
         Timber.tag(TAG).d("requestPriceByProject: $id")
         id?.let {
             getPortfolioUseCase(id, "price")
@@ -41,7 +41,7 @@ class PriceByProjectViewModel @Inject constructor(
                 .subscribeBy(
                     onSuccess = { priceByProject ->
                         priceByProject.title?.let { title.postValue(it) }
-                        priceByProject.price?.let { price.postValue(it.toString()) }
+                        priceByProject.price?.let { price.postValue(it.toLong()) }
                         priceByProject.description?.let { description.postValue(it) }
                     },
                     onError = { setAction(REQUEST_FAILED) }
@@ -58,7 +58,7 @@ class PriceByProjectViewModel @Inject constructor(
                 title = title.value!!,
                 description = description.value,
                 type = CodeTable.PRICE_BY_PROJECT.code,
-                price = price.value?.replace(",", "")?.toInt(),
+                price = price.value?.toInt(),
             ),
             beforeImageUri = null,
             afterImageUri = null,

@@ -47,12 +47,13 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/gap_16"
                     android:layout_marginEnd="@dimen/gap_16"
-                    app:content="@={vm.actualPrice}"
+                    app:contentLong="@={vm.actualPrice}"
                     app:inputType="@{InputType.TYPE_CLASS_NUMBER}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:max="@{13}"
+                    app:max="@{10}"
+                    app:moneyFormatAtHelper="@{vm.actualPrice}"
                     app:subheadline="@{@string/actual_price}" />
 
                 <androidx.appcompat.widget.AppCompatCheckBox

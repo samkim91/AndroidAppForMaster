@@ -11,7 +11,6 @@ import kr.co.soogong.master.data.dto.common.AttachmentDto
 import kr.co.soogong.master.data.global.ColorTheme
 import kr.co.soogong.master.databinding.ActivityMeasurementBinding
 import kr.co.soogong.master.ui.base.BaseActivity
-import kr.co.soogong.master.ui.base.BaseViewModel.Companion.DISMISS_LOADING
 import kr.co.soogong.master.ui.base.BaseViewModel.Companion.SHOW_LOADING
 import kr.co.soogong.master.ui.dialog.popup.DefaultDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData
@@ -22,9 +21,8 @@ import kr.co.soogong.master.uihelper.requirment.action.ViewRequirementActivityHe
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.FileHelper
 import kr.co.soogong.master.utility.PermissionHelper
-import kr.co.soogong.master.utility.extension.exceptComma
+import kr.co.soogong.master.utility.extension.isIntRange
 import kr.co.soogong.master.utility.extension.toast
-import kr.co.soogong.master.utility.validation.ValidationHelper
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -54,17 +52,12 @@ class MeasurementActivity : BaseActivity<ActivityMeasurementBinding>(
         bind {
             lifecycleOwner = this@MeasurementActivity
             vm = viewModel
-
             colorThemeEstimationTemplate = ColorTheme.Green
 
-            with(abHeader) {
-                setButtonBackClickListener {
-                    onBackPressed()
-                }
-            }
+            abHeader.setButtonBackClickListener { onBackPressed() }
 
             bSendEstimation.setOnClickListener {
-                registerCostObserver()
+                validateCost()
                 if (stiEstimationCost.error.isNullOrEmpty()) viewModel.sendEstimation()
             }
 
@@ -122,21 +115,20 @@ class MeasurementActivity : BaseActivity<ActivityMeasurementBinding>(
                     toast(getString(R.string.error_message_of_request_failed))
                 }
                 SHOW_LOADING -> showLoading(supportFragmentManager)
-                DISMISS_LOADING -> dismissLoading()
             }
         })
     }
 
-    private fun registerCostObserver() {
+    private fun validateCost() {
         Timber.tag(TAG).d("registerCostObserver: ")
-        bind {
-            viewModel.simpleCost.observe(this@MeasurementActivity, {
+        with(binding) {
+            viewModel.simpleCost.value.let {
                 stiEstimationCost.error = when {
-                    it.exceptComma().toLong() < 10000 -> getString(R.string.minimum_cost)
-                    !ValidationHelper.isIntRange(it) -> getString(R.string.too_large_number)
+                    it == null || it < 10000 -> getString(R.string.minimum_cost)
+                    !it.isIntRange() -> getString(R.string.too_large_number)
                     else -> null
                 }
-            })
+            }
         }
     }
 
