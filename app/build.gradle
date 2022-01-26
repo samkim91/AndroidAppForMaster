@@ -99,8 +99,8 @@ dependencies {
     implementation "androidx.annotation:annotation:$androidXAnnotations"
     implementation "androidx.appcompat:appcompat:$appCompatVersion"
     implementation "androidx.recyclerview:recyclerview:$recyclerViewVersion"
-    implementation "androidx.constraintlayout:constraintlayout:$constraintlayoutVersion"
-    implementation "androidx.constraintlayout:constraintlayout-solver:$constraintlayoutVersion"
+    implementation "androidx.constraintlayout:constraintlayout:$constraintlayout"
+    implementation "androidx.constraintlayout:constraintlayout-solver:$constraintlayoutSolver"
     implementation "androidx.security:security-crypto:$securityVersions"
 
     // timber
@@ -215,9 +215,8 @@ dependencies {
     kapt "com.google.dagger:hilt-compiler:$hiltVersion"
 
     // Ted permission
-    implementation "gun0912.ted:tedpermission:$tedPermissionVersion"
-    implementation "gun0912.ted:tedpermission-rx2:$tedPermissionVersion"
-    implementation "gun0912.ted:tedimagepicker:$tedImagePickerVersion"
+    implementation "io.github.ParkSangGwon:tedpermission-normal:$tedPermissionVersion"
+    implementation "io.github.ParkSangGwon:tedimagepicker:$tedImagePickerVersion"
 
     // Naver Map
     implementation "com.naver.maps:map-sdk:$naverMapVersion"

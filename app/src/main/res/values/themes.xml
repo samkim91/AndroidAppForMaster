@@ -149,6 +149,8 @@
         <item name="hintTextAppearance">@style/caption_1.regular</item>
         <item name="hintTextColor">@color/brand_green</item>
         <item name="android:textColorHint">@color/light_grey_2</item>
+        <item name="helperTextTextAppearance">@style/caption_1.regular</item>
+        <item name="helperTextTextColor">@color/light_grey_2</item>
         <item name="errorTextAppearance">@style/caption_1.regular</item>
         <item name="errorTextColor">@color/brand_red</item>
 

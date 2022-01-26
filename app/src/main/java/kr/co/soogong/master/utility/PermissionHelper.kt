@@ -1,8 +1,9 @@
 package kr.co.soogong.master.utility
 
+import android.Manifest
 import android.content.Context
 import com.gun0912.tedpermission.PermissionListener
-import com.gun0912.tedpermission.TedPermission
+import com.gun0912.tedpermission.normal.TedPermission
 import kr.co.soogong.master.R
 import timber.log.Timber
 
@@ -22,14 +23,13 @@ object PermissionHelper {
             }
         }
 
-        TedPermission.with(context)
+        TedPermission.create()
             .setPermissionListener(permission)
             .setRationaleMessage(context.getString(R.string.request_permission_for_image))
             .setDeniedMessage(context.getString(R.string.permission_denied_status_message))
             .setPermissions(
-//                android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                android.Manifest.permission.READ_EXTERNAL_STORAGE,
-                android.Manifest.permission.CAMERA,
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.CAMERA,
             )
             .check()
     }
@@ -47,12 +47,12 @@ object PermissionHelper {
             }
         }
 
-        TedPermission.with(context)
+        TedPermission.create()
             .setPermissionListener(permission)
             .setRationaleMessage(context.getString(R.string.request_permission_for_call))
             .setDeniedMessage(context.getString(R.string.permission_denied_status_message))
             .setPermissions(
-                 android.Manifest.permission.CALL_PHONE
+                Manifest.permission.CALL_PHONE
             )
             .check()
     }
@@ -70,13 +70,13 @@ object PermissionHelper {
             }
         }
 
-        TedPermission.with(context)
+        TedPermission.create()
             .setPermissionListener(permission)
             .setRationaleMessage(context.getString(R.string.request_permission_for_location))
             .setDeniedMessage(context.getString(R.string.permission_denied_status_message))
             .setPermissions(
-                android.Manifest.permission.ACCESS_COARSE_LOCATION,
-                android.Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_FINE_LOCATION,
             )
             .check()
     }
