@@ -15,7 +15,7 @@ abstract class BaseActivity<B : ViewDataBinding>(
     protected lateinit var binding: B
         private set
 
-    protected val loading: LoadingDialog by lazy {
+    private val loading: LoadingDialog by lazy {
         LoadingDialog.newInstance()
     }
 
