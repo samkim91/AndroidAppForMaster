@@ -52,5 +52,7 @@ abstract class BaseViewModel : ViewModel(), LifecycleObserver {
     companion object {
         const val SHOW_LOADING = "SHOW_LOADING"
         const val DISMISS_LOADING = "DISMISS_LOADING"
+
+        const val REQUEST_FAILED = "REQUEST_FAILED"
     }
 }

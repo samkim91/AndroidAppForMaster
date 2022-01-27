@@ -16,9 +16,6 @@ interface MasterDao {
     @Update(onConflict = OnConflictStrategy.REPLACE)
     fun update(masterDto: MasterDto)
 
-    @Query("UPDATE Master SET masterPortfolioDtos = :portfolioDtos WHERE uid = :uid")
-    fun updatePortfolios(uid: String?, portfolioDtos: List<PortfolioDto>)
-
     @Delete
     suspend fun delete(masterDto: MasterDto)
 

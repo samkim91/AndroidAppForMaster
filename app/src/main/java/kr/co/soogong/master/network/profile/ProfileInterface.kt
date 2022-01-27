@@ -2,6 +2,7 @@ package kr.co.soogong.master.network.profile
 
 import io.reactivex.Single
 import kr.co.soogong.master.contract.HttpContract
+import kr.co.soogong.master.data.dto.common.ResponseDto
 import kr.co.soogong.master.data.dto.profile.MasterDto
 import kr.co.soogong.master.data.dto.profile.PortfolioDto
 import okhttp3.MultipartBody
@@ -11,10 +12,10 @@ import retrofit2.http.*
 
 interface ProfileInterface {
     @GET(HttpContract.GET_MASTER_SIMPLE_INFO)
-    fun getMasterSimpleInfo(@Query("uid") uid: String?): Single<MasterDto>
+    fun getMasterSimpleInfo(@Path("uid") uid: String): Single<ResponseDto<MasterDto>>
 
-    @GET(HttpContract.GET_MASTER_BY_UID)
-    fun getMasterByUid(@Query("uid") uid: String?): Single<MasterDto>
+    @GET(HttpContract.GET_MASTER)
+    fun getMasterByUid(@Path("uid") uid: String): Single<ResponseDto<MasterDto>>
 
     @Multipart
     @POST(HttpContract.SAVE_MASTER)

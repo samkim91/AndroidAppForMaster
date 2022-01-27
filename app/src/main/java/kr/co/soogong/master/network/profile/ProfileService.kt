@@ -1,12 +1,14 @@
 package kr.co.soogong.master.network.profile
 
 import io.reactivex.Single
+import kr.co.soogong.master.data.dto.common.ResponseDto
 import kr.co.soogong.master.data.dto.profile.MasterDto
 import kr.co.soogong.master.data.dto.profile.PortfolioDto
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
 import retrofit2.Retrofit
+import timber.log.Timber
 import javax.inject.Inject
 
 class ProfileService @Inject constructor(
@@ -14,11 +16,11 @@ class ProfileService @Inject constructor(
 ) {
     private val profileInterface = retrofit.create(ProfileInterface::class.java)
 
-    fun getMasterSimpleInfo(uid: String?): Single<MasterDto> {
+    fun getMasterSimpleInfo(uid: String): Single<ResponseDto<MasterDto>> {
         return profileInterface.getMasterSimpleInfo(uid)
     }
 
-    fun getMasterByUid(uid: String?): Single<MasterDto> {
+    fun getMasterByUid(uid: String): Single<ResponseDto<MasterDto>> {
         return profileInterface.getMasterByUid(uid)
     }
 

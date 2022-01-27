@@ -75,14 +75,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
                     UPDATE_REQUEST_MEASURE_YN_SUCCESSFUL -> mainViewModel.requestMasterSimpleInfo()
                 }
             })
-            requestMeasureYn.observe(viewLifecycleOwner, { boolean ->
+            requestMeasureYn.observe(viewLifecycleOwner) { boolean ->
                 if (boolean != mainViewModel.masterSimpleInfo.value?.requestMeasureYn) viewModel.updateRequestMeasureYn()
-            })
-            mainViewModel.masterSimpleInfo.observe(viewLifecycleOwner, { masterDto ->
+            }
+            mainViewModel.masterSimpleInfo.observe(viewLifecycleOwner) { masterDto ->
                 masterDto.requestMeasureYn?.let {
                     viewModel.requestMeasureYn.value = it
                 }
-            })
+            }
         }
     }
 
