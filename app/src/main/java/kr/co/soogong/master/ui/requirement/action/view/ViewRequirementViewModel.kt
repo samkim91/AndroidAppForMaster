@@ -13,7 +13,7 @@ import kr.co.soogong.master.data.global.CodeTable
 import kr.co.soogong.master.data.model.profile.Review
 import kr.co.soogong.master.data.model.requirement.Requirement
 import kr.co.soogong.master.data.model.requirement.estimation.EstimationResponseCode
-import kr.co.soogong.master.domain.usecase.profile.GetMasterSimpleInfoUseCase
+import kr.co.soogong.master.data.repository.ProfileRepository
 import kr.co.soogong.master.domain.usecase.requirement.*
 import kr.co.soogong.master.ui.base.BaseViewModel
 import kr.co.soogong.master.uihelper.requirment.action.ViewRequirementActivityHelper
@@ -27,7 +27,7 @@ class ViewRequirementViewModel @Inject constructor(
     private val respondToMeasureUseCase: RespondToMeasureUseCase,
     private val callToClientUseCase: CallToClientUseCase,
     private val requestReviewUseCase: RequestReviewUseCase,
-    private val getMasterSimpleInfoUseCase: GetMasterSimpleInfoUseCase,
+    private val profileRepository: ProfileRepository,
     val savedStateHandle: SavedStateHandle,
 ) : BaseViewModel() {
     // Note : activity 에서 viewModel 로 데이터 넘기는 법. savedStateHandle 에서 가져온다.
@@ -179,7 +179,7 @@ class ViewRequirementViewModel @Inject constructor(
 
     private fun requestMasterSimpleInfo() {
         Timber.tag(TAG).d("requestMasterSimpleInfo: ")
-        getMasterSimpleInfoUseCase()
+        profileRepository.getMasterSimpleInfo()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(

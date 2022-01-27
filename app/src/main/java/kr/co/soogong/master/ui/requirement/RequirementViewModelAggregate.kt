@@ -12,5 +12,4 @@ class RequirementViewModelAggregate @Inject constructor(
     val callToClientUseCase: CallToClientUseCase,
     val requestReviewUseCase: RequestReviewUseCase,
     val updateRequestMeasureYnUseCase: UpdateRequestMeasureYnUseCase,
-    val getCustomerRequestsUseCase: GetCustomerRequestsUseCase,
 )

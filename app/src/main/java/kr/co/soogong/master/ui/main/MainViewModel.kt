@@ -7,8 +7,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.dto.profile.MasterDto
+import kr.co.soogong.master.data.repository.ProfileRepository
 import kr.co.soogong.master.domain.usecase.auth.SaveFCMTokenUseCase
-import kr.co.soogong.master.domain.usecase.profile.GetMasterSimpleInfoUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import timber.log.Timber
 import javax.inject.Inject
@@ -16,7 +16,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val saveFCMTokenUseCase: SaveFCMTokenUseCase,
-    private val getMasterSimpleInfoUseCase: GetMasterSimpleInfoUseCase,
+    private val profileRepository: ProfileRepository,
 ) : BaseViewModel() {
 
     // 마스터 기본 정보
@@ -57,7 +57,7 @@ class MainViewModel @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
                 onSuccess = {
-                    Timber.tag(TAG).d("sendRegistrationToServer successfully: $it")
+                    Timber.tag(TAG).d("sendRegistrationToServer successfully: ")
                 },
                 onError = {
                     Timber.tag(TAG).e("sendRegistrationToServer failed: $it")
@@ -67,17 +67,17 @@ class MainViewModel @Inject constructor(
 
     fun requestMasterSimpleInfo() {
         Timber.tag(TAG).d("requestMasterSimpleInfo: ")
-        getMasterSimpleInfoUseCase()
+        profileRepository.getMasterSimpleInfo()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
                 onSuccess = {
-                    Timber.tag(TAG).d("requestMasterSimpleInfo successful: $it")
+                    Timber.tag(TAG).d("requestMasterSimpleInfo successful: ")
                     masterSimpleInfo.postValue(it)
                 },
                 onError = {
                     Timber.tag(TAG).d("requestMasterSimpleInfo failed: $it")
-//                    setAction(REQUEST_FAILED)
+                    setAction(REQUEST_FAILED)
                 }
             ).addToDisposable()
     }

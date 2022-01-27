@@ -12,9 +12,6 @@ import retrofit2.http.Query
 
 interface AuthInterface {
 
-    @GET(HttpContract.GET_MASTER_BY_UID)
-    fun signIn(@Query("uid") uid: String): Single<MasterDto>
-
     @GET(HttpContract.IS_MASTER_EXISTENT)
     fun isMasterExistent(@Query("tel") tel: String): Single<Boolean>
 

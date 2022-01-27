@@ -12,10 +12,6 @@ class AuthService @Inject constructor(
 ) {
     private val authInterface = retrofit.create(AuthInterface::class.java)
 
-    fun signIn(uid: String): Single<MasterDto> {
-        return authInterface.signIn(uid)
-    }
-
     fun isMasterExistent(tel: String): Single<Boolean> {
         return authInterface.isMasterExistent(tel)
     }

@@ -10,7 +10,7 @@ import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.dto.profile.MasterDto
 import kr.co.soogong.master.data.global.CodeTable
 import kr.co.soogong.master.data.model.profile.Profile
-import kr.co.soogong.master.domain.usecase.profile.GetMasterUseCase
+import kr.co.soogong.master.domain.usecase.profile.GetProfileUseCase
 import kr.co.soogong.master.domain.usecase.profile.SaveMasterUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import kr.co.soogong.master.ui.profile.detail.CareerConverter
@@ -19,7 +19,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
-    private val getMasterUseCase: GetMasterUseCase,
+    private val getProfileUseCase: GetProfileUseCase,
     private val saveMasterUseCase: SaveMasterUseCase,
 ) : BaseViewModel() {
     private val _profile = MutableLiveData<Profile?>()
@@ -34,17 +34,17 @@ class ProfileViewModel @Inject constructor(
 
     fun requestProfile() {
         Timber.tag(TAG).d("requestProfile: ")
-        getMasterUseCase()
+        getProfileUseCase()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
-                onSuccess = { masterDto ->
-                    Timber.tag(TAG).d("getMasterSuccessfully: ")
-                    _profile.value = Profile.fromMasterDto(masterDto)
-                    masterDto.ownerName?.let { ownerName.value = it }
+                onSuccess = {
+                    Timber.tag(TAG).d("requestProfile Successfully: ")
+                    _profile.value = it
+                    it.requiredInformation?.ownerName?.run { ownerName.value = this }       // 2-way binding 을 위한 set
                 },
                 onError = {
-                    Timber.tag(TAG).d("getMasterFailed: $it")
+                    Timber.tag(TAG).d("requestProfile Failed: $it")
                     setAction(REQUEST_FAILED)
                 }
             )

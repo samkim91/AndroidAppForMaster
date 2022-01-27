@@ -19,7 +19,7 @@ import retrofit2.http.*
 interface RequirementInterface {
     @GET(HttpContract.GET_REQUIREMENTS)
     fun getRequirements(
-        @Query("masterUid") masterUid: String,
+        @Query("uid") masterUid: String,
         @Query("status") status: String,
         @Query("readYns") readYns: Boolean?,
         @Query("offset") offset: Int,

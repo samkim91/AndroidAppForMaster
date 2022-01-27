@@ -114,13 +114,12 @@
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/gap_26"
-                    app:completionCount="@{vm.profile.myReview.repairCount}"
+                    app:completionCount="@{vm.profile.reviewSummary.repairCount}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_representative_name"
-                    app:recommendation="@{vm.profile.myReview.averageRecommendation}"
-                    app:reviewCount="@{vm.profile.myReview.reviewCount}" />
-                <!-- todo : 완료수 추가 필요 -->
+                    app:recommendation="@{vm.profile.reviewSummary.averageRecommendation}"
+                    app:reviewCount="@{vm.profile.reviewSummary.reviewCount}" />
 
                 <kr.co.soogong.master.atomic.atoms.ButtonBig
                     android:id="@+id/bb_request_review"
@@ -346,7 +345,7 @@
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/gap_33"
-                    app:content="@{vm.profile.basicInformation.portfolios.size() > 0 ? @string/portfolio_filled(vm.profile.basicInformation.portfolios.size()) : null}"
+                    app:content="@{@string/portfolio_filled(vm.profile.basicInformation.portfolioCount)}"
                     app:hint="@{@string/portfolio_hint}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -359,7 +358,7 @@
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/gap_33"
-                    app:content="@{vm.profile.basicInformation.priceByProjects.size() > 0 ? @string/price_by_project_filled(vm.profile.basicInformation.priceByProjects.size()) : null}"
+                    app:content="@{@string/price_by_project_filled(vm.profile.basicInformation.priceByProjectCount)}"
                     app:hint="@{@string/price_by_project_hint}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

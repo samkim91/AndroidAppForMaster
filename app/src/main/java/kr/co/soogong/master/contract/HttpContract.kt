@@ -56,8 +56,8 @@ object HttpContract {
 
     //region Profile
     const val MY_PAGE_URL = "https://soogong.co.kr/master/detail/"
-    const val GET_MASTER_SIMPLE_INFO = "master/find-simple-info"
-    const val GET_MASTER_BY_UID = "master/find-by-uid"
+    const val GET_MASTER_SIMPLE_INFO = "master/v2/simple-info/{uid}"
+    const val GET_MASTER = "master/{uid}"
     const val SAVE_MASTER = "master/save"
     const val UPDATE_REQUEST_MEASURE_YN = "master/request-measure-yn"
     const val UPDATE_FREE_MEASURE_YN = "master/free-measure-yn"

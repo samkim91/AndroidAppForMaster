@@ -7,7 +7,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.dto.profile.MasterDto
-import kr.co.soogong.master.domain.usecase.profile.GetMasterUseCase
+import kr.co.soogong.master.data.repository.ProfileRepository
 import kr.co.soogong.master.domain.usecase.profile.SaveMasterUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import timber.log.Timber
@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AlarmViewModel @Inject constructor(
-    private val getMasterUseCase: GetMasterUseCase,
+    private val profileRepository: ProfileRepository,
     private val saveMasterUseCase: SaveMasterUseCase,
 ) : BaseViewModel() {
     private val _masterDto = MutableLiveData<MasterDto>()
@@ -33,14 +33,14 @@ class AlarmViewModel @Inject constructor(
     }
 
     private fun requestAlarmStatus() {
-        getMasterUseCase()
+        profileRepository.getMaster()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({ masterDto ->
+            .subscribe({
                 Timber.tag(TAG).d("requestAlarmStatus successfully: ")
-                _masterDto.value = masterDto
-                _marketingPush.postValue(masterDto.marketingPush)
-                _pushAtNight.postValue(masterDto.pushAtNight)
+                _masterDto.value = it
+                _marketingPush.postValue(it.marketingPush)
+                _pushAtNight.postValue(it.pushAtNight)
             }, {
                 Timber.tag(TAG).d("requestAlarmStatus failed: $it")
             })
