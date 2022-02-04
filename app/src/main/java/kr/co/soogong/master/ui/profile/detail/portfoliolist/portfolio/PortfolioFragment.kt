@@ -2,12 +2,15 @@ package kr.co.soogong.master.ui.profile.detail.portfoliolist.portfolio
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import dagger.hilt.android.AndroidEntryPoint
 import gun0912.tedimagepicker.builder.TedImagePicker
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.dto.common.AttachmentDto
+import kr.co.soogong.master.data.dto.profile.PortfolioDto
 import kr.co.soogong.master.databinding.FragmentEditPortfolioBinding
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.base.BaseViewModel.Companion.DISMISS_LOADING
@@ -50,20 +53,20 @@ class PortfolioFragment : BaseFragment<FragmentEditPortfolioBinding>(
             saidAfterRepairing.setImagesDeletableAdapter { viewModel.imageAfterRepairing.removeAt(it) }
 
             (activity as EditProfileContainerActivity).setSaveButtonClickListener {
-                viewModel.title.observe(viewLifecycleOwner, {
+                viewModel.title.observe(viewLifecycleOwner) {
                     stiTitle.error =
                         if (it.isNullOrEmpty()) getString(R.string.required_field_alert) else null
-                })
+                }
 
                 saidBeforeRepairing.error =
                     if (viewModel.imageBeforeRepairing.getItemCount() == 0) getString(R.string.required_field_alert) else null
                 saidAfterRepairing.error =
                     if (viewModel.imageAfterRepairing.getItemCount() == 0) getString(R.string.required_field_alert) else null
 
-                viewModel.description.observe(viewLifecycleOwner, {
+                viewModel.description.observe(viewLifecycleOwner) {
                     stcDescription.error =
                         if (it.length < 10) getString(R.string.fill_text_over_10) else null
-                })
+                }
 
                 if (stiTitle.error.isNullOrEmpty() && saidBeforeRepairing.error.isNullOrEmpty() && saidAfterRepairing.error.isNullOrEmpty() && stcDescription.error.isNullOrEmpty()) {
                     viewModel.savePortfolio()
@@ -131,15 +134,17 @@ class PortfolioFragment : BaseFragment<FragmentEditPortfolioBinding>(
 
     companion object {
         private const val TAG = "EditPortfolioFragment"
-        private const val PORTFOLIO_ID = "PORTFOLIO_ID"
+        private const val PORTFOLIO = "PORTFOLIO"
 
-        fun newInstance(portfolioId: Int? = null) = PortfolioFragment().apply {
-            arguments = Bundle().apply {
-                portfolioId?.let { putInt(PORTFOLIO_ID, it) }
+        fun newInstance(portfolioDto: PortfolioDto? = null) = PortfolioFragment().apply {
+            portfolioDto?.let {
+                arguments = bundleOf(
+                    PORTFOLIO to it
+                )
             }
         }
 
-        fun getPortfolioId(savedStateHandle: SavedStateHandle): Int? =
-            savedStateHandle.get(PORTFOLIO_ID)
+        fun getPortfolio(savedStateHandle: SavedStateHandle): MutableLiveData<PortfolioDto> =
+            savedStateHandle.getLiveData(PORTFOLIO)
     }
 }

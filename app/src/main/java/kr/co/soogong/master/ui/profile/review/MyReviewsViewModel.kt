@@ -19,7 +19,6 @@ import javax.inject.Inject
 class MyReviewsViewModel @Inject constructor(
     private val getProfileUseCase: GetProfileUseCase,
     private val profileRepository: ProfileRepository,
-    // TODO: 2022/01/27 pageable reviews api 필요
 ) : EndlessScrollableViewModel() {
     private val _profile = MutableLiveData<Profile>()
     val profile: LiveData<Profile>

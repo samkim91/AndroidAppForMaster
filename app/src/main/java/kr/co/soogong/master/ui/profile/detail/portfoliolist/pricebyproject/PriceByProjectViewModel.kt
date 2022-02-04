@@ -9,7 +9,6 @@ import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.dto.profile.PortfolioDto
 import kr.co.soogong.master.data.global.CodeTable
 import kr.co.soogong.master.domain.usecase.auth.GetMasterIdFromSharedUseCase
-import kr.co.soogong.master.domain.usecase.profile.GetPortfolioUseCase
 import kr.co.soogong.master.domain.usecase.profile.SavePortfolioUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import timber.log.Timber
@@ -19,41 +18,33 @@ import javax.inject.Inject
 class PriceByProjectViewModel @Inject constructor(
     private val getMasterIdFromSharedUseCase: GetMasterIdFromSharedUseCase,
     private val savePortfolioUseCase: SavePortfolioUseCase,
-    private val getPortfolioUseCase: GetPortfolioUseCase,
     val savedStateHandle: SavedStateHandle,
 ) : BaseViewModel() {
-    val id = PriceByProjectFragment.getPriceByProjectId(savedStateHandle)
+    val priceByProject = PriceByProjectFragment.getPriceByProject(savedStateHandle)
 
     val title = MutableLiveData<String>()
     val price = MutableLiveData(0L)
     val description = MutableLiveData<String>()
 
     init {
-        requestPriceByProject()
+        setInitialPriceByProject()
     }
 
-    private fun requestPriceByProject() {
-        Timber.tag(TAG).d("requestPriceByProject: $id")
-        id?.let {
-            getPortfolioUseCase(id, "price")
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeBy(
-                    onSuccess = { priceByProject ->
-                        priceByProject.title?.let { title.postValue(it) }
-                        priceByProject.price?.let { price.postValue(it.toLong()) }
-                        priceByProject.description?.let { description.postValue(it) }
-                    },
-                    onError = { setAction(REQUEST_FAILED) }
-                ).addToDisposable()
+    private fun setInitialPriceByProject() {
+        Timber.tag(TAG).d("setInitialPriceByProject: ")
+
+        priceByProject.value?.let { priceByProjectDto ->
+            priceByProjectDto.title?.let { title.postValue(it) }
+            priceByProjectDto.price?.let { price.postValue(it.toLong()) }
+            priceByProjectDto.description?.let { description.postValue(it) }
         }
     }
 
     fun savePriceByProject() {
-        Timber.tag(TAG).d("savePriceByProject: $id")
+        Timber.tag(TAG).d("savePriceByProject: $priceByProject")
         savePortfolioUseCase(
             PortfolioDto(
-                id = id,
+                id = priceByProject.value?.id,
                 masterId = getMasterIdFromSharedUseCase(),
                 title = title.value!!,
                 description = description.value,

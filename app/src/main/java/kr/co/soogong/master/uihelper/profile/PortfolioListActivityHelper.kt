@@ -3,25 +3,23 @@ package kr.co.soogong.master.uihelper.profile
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import androidx.core.os.bundleOf
 import androidx.lifecycle.SavedStateHandle
+import kr.co.soogong.master.data.global.CodeTable
 import kr.co.soogong.master.ui.profile.detail.portfoliolist.PortfolioListActivity
 
 object PortfolioListActivityHelper {
-    const val PORTFOLIO = "포트폴리오"
-    const val PRICE_BY_PROJECTS = "시공 종류별 가격"
-
     private const val EXTRA_BUNDLE_KEY = "EXTRA_BUNDLE_KEY"
-    private const val EXTRA_STRING_KEY = "EXTRA_STRING_KEY"
+    private const val EXTRA_DATA_KEY = "EXTRA_DATA_KEY"
 
-    fun getIntent(context: Context, pageName: String): Intent {
+    fun getIntent(context: Context, pageName: CodeTable): Intent {
         return Intent(context, PortfolioListActivity::class.java).apply {
-            putExtra(EXTRA_BUNDLE_KEY, Bundle().apply {
-                putString(EXTRA_STRING_KEY, pageName)
-            })
+            putExtra(EXTRA_BUNDLE_KEY, bundleOf(EXTRA_DATA_KEY to pageName))
         }
     }
 
-    fun getPageNameFromSavedState(savedStateHandle: SavedStateHandle): String {
-        return savedStateHandle.get<Bundle>(EXTRA_BUNDLE_KEY)?.getString(EXTRA_STRING_KEY) ?: ""
+    fun getTypeFromSavedState(savedStateHandle: SavedStateHandle): CodeTable {
+        return savedStateHandle.get<Bundle>(EXTRA_BUNDLE_KEY)
+            ?.getSerializable(EXTRA_DATA_KEY) as CodeTable
     }
 }

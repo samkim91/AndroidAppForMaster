@@ -42,9 +42,16 @@ interface ProfileInterface {
     ): Single<PortfolioDto>
 
     @GET(HttpContract.GET_PORTFOLIOS)
-    fun getPortfoliosByUid(@Query("uid") uid: String?): Single<List<PortfolioDto>>
+    fun getPortfolios(
+        @Query("uid") uid: String,
+        @Query("type") type: String,
+        @Query("offset") offset: Int,
+        @Query("pageSize") pageSize: Int,
+        @Query("order") order: Int,
+        @Query("orderBy") orderBy: String,
+    ): Single<ResponseDto<PageableContentDto<PortfolioDto>>>
 
-    @PUT(HttpContract.DELETE_PORTFOLIO)
+    @DELETE(HttpContract.DELETE_PORTFOLIO)
     fun deletePortfolio(@Path("id") portfolioId: Int): Single<ResponseBody>
 
     @GET(HttpContract.GET_REVIEWS)

@@ -46,8 +46,15 @@ class ProfileService @Inject constructor(
         return profileInterface.savePortfolio(portfolioDto, beforeImageFile, afterImageFile)
     }
 
-    fun getPortfoliosByUid(uid: String?): Single<List<PortfolioDto>> {
-        return profileInterface.getPortfoliosByUid(uid)
+    fun getPortfolios(
+        uid: String,
+        type: String,
+        offset: Int,
+        pageSize: Int,
+        order: Int,
+        orderBy: String,
+    ): Single<ResponseDto<PageableContentDto<PortfolioDto>>> {
+        return profileInterface.getPortfolios(uid, type, offset, pageSize, order, orderBy)
     }
 
     fun deletePortfolio(
