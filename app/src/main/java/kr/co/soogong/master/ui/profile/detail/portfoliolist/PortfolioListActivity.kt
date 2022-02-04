@@ -6,18 +6,17 @@ import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.global.ButtonTheme
+import kr.co.soogong.master.data.global.CodeTable
 import kr.co.soogong.master.databinding.ActivityPortfolioListBinding
 import kr.co.soogong.master.ui.base.BaseActivity
+import kr.co.soogong.master.ui.base.BaseViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.ui.dialog.popup.DefaultDialog
 import kr.co.soogong.master.ui.dialog.popup.DialogData
-import kr.co.soogong.master.ui.profile.detail.portfoliolist.PortfolioListViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerActivityHelper
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.ADD_PORTFOLIO
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.ADD_PRICE_BY_PROJECTS
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_PORTFOLIO
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_PRICE_BY_PROJECTS
-import kr.co.soogong.master.uihelper.profile.PortfolioListActivityHelper.PORTFOLIO
-import kr.co.soogong.master.uihelper.profile.PortfolioListActivityHelper.PRICE_BY_PROJECTS
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
@@ -47,34 +46,8 @@ class PortfolioListActivity : BaseActivity<ActivityPortfolioListBinding>(
                 }
             }
 
-            setBasicLayout()
             setButtonClickListener()
             setRecyclerview()
-        }
-    }
-
-    private fun setBasicLayout() {
-        with(binding) {
-            when (viewModel.pageName) {
-                PORTFOLIO -> {
-                    abHeader.title = PORTFOLIO
-                    with(sbbAddingItem) {
-                        subheadline = getString(R.string.write_portfolio)
-                        hint = getString(R.string.write_portfolio_hint)
-                        buttonText = getString(R.string.add_portfolio)
-                    }
-                    tvAddedItems.text = getString(R.string.added_portfolio)
-                }
-                PRICE_BY_PROJECTS -> {
-                    abHeader.title = PRICE_BY_PROJECTS
-                    with(sbbAddingItem) {
-                        subheadline = getString(R.string.write_price_by_project)
-                        hint = getString(R.string.write_price_by_project_hint)
-                        buttonText = getString(R.string.add_price_by_project)
-                    }
-                    tvAddedItems.text = getString(R.string.added_price_by_project)
-                }
-            }
         }
     }
 
@@ -82,9 +55,9 @@ class PortfolioListActivity : BaseActivity<ActivityPortfolioListBinding>(
         binding.buttonThemeAddingItem = ButtonTheme.OutlinedPrimary
         binding.addingItemClickListener = View.OnClickListener {
             startActivity(
-                EditProfileContainerActivityHelper.getIntent(
+                EditProfileContainerActivityHelper.getIntentIncludingPortfolio(
                     this@PortfolioListActivity,
-                    if (viewModel.pageName == PORTFOLIO) ADD_PORTFOLIO else ADD_PRICE_BY_PROJECTS
+                    if (viewModel.type == CodeTable.PORTFOLIO) ADD_PORTFOLIO else ADD_PRICE_BY_PROJECTS
                 )
             )
         }
@@ -96,8 +69,8 @@ class PortfolioListActivity : BaseActivity<ActivityPortfolioListBinding>(
                 context = this,
                 buttonLeftClickListener = { id ->
                     DefaultDialog.newInstance(
-                        dialogData = when (viewModel.pageName) {
-                            PORTFOLIO -> DialogData.getAskingDeletePortfolio()
+                        dialogData = when (viewModel.type) {
+                            CodeTable.PORTFOLIO -> DialogData.getAskingDeletePortfolio()
                             else -> DialogData.getAskingDeletePriceByProject()
                         }).let {
                         it.setButtonsClickListener(
@@ -107,12 +80,12 @@ class PortfolioListActivity : BaseActivity<ActivityPortfolioListBinding>(
                         it.show(supportFragmentManager, it.tag)
                     }
                 },
-                buttonRightClickListener = { id ->
+                buttonRightClickListener = { portfolioDto ->
                     startActivity(
-                        EditProfileContainerActivityHelper.getIntent(
+                        EditProfileContainerActivityHelper.getIntentIncludingPortfolio(
                             this@PortfolioListActivity,
-                            if (viewModel.pageName == PORTFOLIO) EDIT_PORTFOLIO else EDIT_PRICE_BY_PROJECTS,
-                            id
+                            if (viewModel.type == CodeTable.PORTFOLIO) EDIT_PORTFOLIO else EDIT_PRICE_BY_PROJECTS,
+                            portfolioDto
                         )
                     )
                 })
@@ -128,7 +101,7 @@ class PortfolioListActivity : BaseActivity<ActivityPortfolioListBinding>(
 
     override fun onStart() {
         super.onStart()
-        viewModel.requestPortfolioList()    // 화면이 열릴 때마다, 새로고침
+        viewModel.initList()
     }
 
     companion object {

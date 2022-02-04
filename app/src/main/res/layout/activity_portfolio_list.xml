@@ -6,6 +6,8 @@
 
     <data>
 
+        <import type="kr.co.soogong.master.data.global.CodeTable" />
+
         <variable
             name="vm"
             type="kr.co.soogong.master.ui.profile.detail.portfoliolist.PortfolioListViewModel" />
@@ -30,7 +32,8 @@
             app:backButtonVisibility="@{true}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="@{vm.type == CodeTable.PORTFOLIO ? CodeTable.PORTFOLIO.inKorean : CodeTable.PRICE_BY_PROJECT.inKorean}" />
 
         <kr.co.soogong.master.atomic.molecules.SubheadlineButtonBig
             android:id="@+id/sbb_adding_item"
@@ -39,11 +42,14 @@
             android:layout_marginStart="@dimen/gap_16"
             android:layout_marginTop="@dimen/gap_24"
             android:layout_marginEnd="@dimen/gap_16"
+            app:buttonText="@{vm.type == CodeTable.PORTFOLIO ? @string/add_portfolio : @string/add_price_by_project}"
             app:buttonTheme="@{buttonThemeAddingItem}"
+            app:hint="@{vm.type == CodeTable.PORTFOLIO ? @string/write_portfolio_hint : @string/write_price_by_project_hint}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/ab_header"
-            app:onButtonClick="@{addingItemClickListener}" />
+            app:onButtonClick="@{addingItemClickListener}"
+            app:subheadline="@{vm.type == CodeTable.PORTFOLIO ? @string/write_portfolio : @string/write_price_by_project}" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_added_items"
@@ -53,6 +59,7 @@
             android:layout_marginStart="@dimen/gap_16"
             android:layout_marginTop="@dimen/gap_20"
             android:layout_marginEnd="@dimen/gap_16"
+            android:text="@{vm.type == CodeTable.PORTFOLIO ? @string/added_portfolio : @string/added_price_by_project}"
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -73,7 +80,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_added_items"
-            bind:item_list="@{vm.items}"
+            app:onScroll="@{vm}"
+            app:portfolios="@{vm.items}"
             tools:listitem="@layout/view_holder_portfolio" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

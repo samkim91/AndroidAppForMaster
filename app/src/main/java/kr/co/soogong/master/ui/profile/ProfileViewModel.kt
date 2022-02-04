@@ -88,6 +88,7 @@ class ProfileViewModel @Inject constructor(
             .subscribeBy(
                 onSuccess = {
                     Timber.tag(TAG).d("saveMasterProfile successfully: ")
+                    requestProfile()
                 },
                 onError = {
                     Timber.tag(TAG).d("saveMasterProfile failed: $it")
@@ -114,6 +115,7 @@ class ProfileViewModel @Inject constructor(
             .subscribeBy(
                 onSuccess = {
                     Timber.tag(TAG).d("saveMasterProfile successfully: ")
+                    requestProfile()
                 },
                 onError = {
                     Timber.tag(TAG).d("saveMasterProfile failed: $it")
@@ -139,6 +141,7 @@ class ProfileViewModel @Inject constructor(
             .subscribeBy(
                 onSuccess = {
                     Timber.tag(TAG).d("saveServiceArea onSuccess: ")
+                    requestProfile()
                 },
                 onError = {
                     Timber.tag(TAG).d("saveMasterProfile failed: $it")

@@ -19,7 +19,7 @@ open class PortfolioCommonViewHolder(
         context: Context,
         portfolioDto: PortfolioDto,
         buttonLeftClickListener: (id: Int) -> Unit,
-        buttonRightClickListener: (id: Int) -> Unit,
+        buttonRightClickListener: (portfolioDto: PortfolioDto) -> Unit,
     ) {
     }
 
@@ -56,10 +56,13 @@ class PortfolioViewHolder(
         context: Context,
         portfolioDto: PortfolioDto,
         buttonLeftClickListener: (id: Int) -> Unit,
-        buttonRightClickListener: (id: Int) -> Unit,
+        buttonRightClickListener: (portFolioDto: PortfolioDto) -> Unit,
     ) {
         with(binding) {
             data = portfolioDto
+
+            buttonThemeLeft = ButtonTheme.OutlinedSecondary
+            bmLeftButton.buttonText = context.getString(R.string.delete)
 
             setOnLeftButtonClick {
                 portfolioDto.id?.let {
@@ -67,15 +70,12 @@ class PortfolioViewHolder(
                 }
             }
 
-            buttonThemeLeft = ButtonTheme.OutlinedSecondary
-            bmLeftButton.buttonText = context.getString(R.string.delete)
-
-            bmRightButton.buttonText = context.getString(R.string.modify)
             buttonThemeRight = ButtonTheme.OutlinedPrimary
+            bmRightButton.buttonText = context.getString(R.string.modify)
 
             setOnRightButtonClick {
                 portfolioDto.id?.let {
-                    buttonRightClickListener(it)
+                    buttonRightClickListener(portfolioDto)
                 }
             }
         }
@@ -90,10 +90,13 @@ class PriceByProjectViewHolder(
         context: Context,
         portfolioDto: PortfolioDto,
         buttonLeftClickListener: (id: Int) -> Unit,
-        buttonRightClickListener: (id: Int) -> Unit,
+        buttonRightClickListener: (portfolioDto: PortfolioDto) -> Unit,
     ) {
         with(binding) {
             data = portfolioDto
+
+            buttonThemeLeft = ButtonTheme.OutlinedSecondary
+            bmLeftButton.buttonText = context.getString(R.string.delete)
 
             setOnLeftButtonClick {
                 portfolioDto.id?.let {
@@ -101,15 +104,12 @@ class PriceByProjectViewHolder(
                 }
             }
 
-            buttonThemeLeft = ButtonTheme.OutlinedSecondary
-            bmLeftButton.buttonText = context.getString(R.string.delete)
-
-            bmRightButton.buttonText = context.getString(R.string.modify)
             buttonThemeRight = ButtonTheme.OutlinedPrimary
+            bmRightButton.buttonText = context.getString(R.string.modify)
 
             setOnRightButtonClick {
                 portfolioDto.id?.let {
-                    buttonRightClickListener(it)
+                    buttonRightClickListener(portfolioDto)
                 }
             }
         }

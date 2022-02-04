@@ -1,48 +1,46 @@
 package kr.co.soogong.master.ui.profile.detail.portfoliolist
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.dto.profile.PortfolioDto
-import kr.co.soogong.master.data.global.CodeTable
-import kr.co.soogong.master.domain.usecase.profile.DeletePortfolioUseCase
-import kr.co.soogong.master.domain.usecase.profile.GetPortfolioListUseCase
-import kr.co.soogong.master.ui.base.BaseViewModel
+import kr.co.soogong.master.data.repository.ProfileRepository
+import kr.co.soogong.master.ui.common.EndlessScrollableViewModel
 import kr.co.soogong.master.uihelper.profile.PortfolioListActivityHelper
-import kr.co.soogong.master.uihelper.profile.PortfolioListActivityHelper.PORTFOLIO
+import kr.co.soogong.master.utility.ListLiveData
 import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class PortfolioListViewModel @Inject constructor(
-    private val getPortfolioListUseCase: GetPortfolioListUseCase,
-    private val deletePortfolioUseCase: DeletePortfolioUseCase,
+    private val profileRepository: ProfileRepository,
     val savedStateHandle: SavedStateHandle,
-) : BaseViewModel() {
-    val pageName = PortfolioListActivityHelper.getPageNameFromSavedState(savedStateHandle)
+) : EndlessScrollableViewModel() {
+    val type = PortfolioListActivityHelper.getTypeFromSavedState(savedStateHandle)
 
-    private val _items = MutableLiveData<List<PortfolioDto>>()
-    val items: LiveData<List<PortfolioDto>>
-        get() = _items
+    val items = ListLiveData<PortfolioDto>()
 
-    fun requestPortfolioList() {
-        val type = when (pageName) {
-            PORTFOLIO -> CodeTable.PORTFOLIO.code
-            else -> CodeTable.PRICE_BY_PROJECT.code
-        }
+    override fun initList() {
+        Timber.tag(TAG).d("initList: ")
+        items.clear()
+        resetState()
+        requestPortfolios()
+    }
+
+    private fun requestPortfolios() {
         Timber.tag(TAG).d("requestPortfolioList: $type")
 
-        getPortfolioListUseCase()
+        profileRepository.getPortfolios(type = type.code, offset = offset, pageSize = pageSize)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
-                onSuccess = {
-                    Timber.tag(TAG).d("requestPortfolioList successfully: $it")
-                    _items.postValue(it.filter { portfolioDto -> portfolioDto.type == type })
+                onSuccess = { pageableContentDto ->
+                    Timber.tag(TAG).d("requestPortfolioList successfully: ")
+                    last = pageableContentDto.last
+                    totalItemCount += pageableContentDto.numberOfElements
+                    items.addAll(pageableContentDto.content)
                 },
                 onError = {
                     Timber.tag(TAG).d("requestPortfolioList failed: $it")
@@ -53,15 +51,14 @@ class PortfolioListViewModel @Inject constructor(
 
     fun deletePortfolio(itemId: Int) {
         Timber.tag(TAG).d("deletePortfolio: $itemId")
-        deletePortfolioUseCase(
-            itemId
-        )
+
+        profileRepository.deletePortfolio(itemId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
                 onSuccess = {
-                    Timber.tag(TAG).d("deletePortfolio successfully: $it")
-                    requestPortfolioList()
+                    Timber.tag(TAG).d("deletePortfolio successfully: ")
+                    initList()
                 },
                 onError = {
                     Timber.tag(TAG).d("deletePortfolio failed: $it")
@@ -72,6 +69,5 @@ class PortfolioListViewModel @Inject constructor(
 
     companion object {
         private const val TAG = "ProfileViewModel"
-        const val REQUEST_FAILED = "DELETE_ITEM_FAILED"
     }
 }

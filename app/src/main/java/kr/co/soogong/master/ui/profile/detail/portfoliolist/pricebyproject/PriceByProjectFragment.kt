@@ -2,10 +2,13 @@ package kr.co.soogong.master.ui.profile.detail.portfoliolist.pricebyproject
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
+import kr.co.soogong.master.data.dto.profile.PortfolioDto
 import kr.co.soogong.master.databinding.FragmentEditPriceByProjectBinding
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.profile.detail.EditProfileContainerActivity
@@ -37,10 +40,10 @@ class PriceByProjectFragment : BaseFragment<FragmentEditPriceByProjectBinding>(
             lifecycleOwner = viewLifecycleOwner
 
             (activity as EditProfileContainerActivity).setSaveButtonClickListener {
-                viewModel.title.observe(viewLifecycleOwner, {
+                viewModel.title.observe(viewLifecycleOwner) {
                     stiTitle.error =
                         if (it.isNullOrEmpty()) getString(R.string.required_field_alert) else null
-                })
+                }
 
                 viewModel.price.value.let {
                     stiPrice.error = when {
@@ -50,10 +53,10 @@ class PriceByProjectFragment : BaseFragment<FragmentEditPriceByProjectBinding>(
                     }
                 }
 
-                viewModel.description.observe(viewLifecycleOwner, {
+                viewModel.description.observe(viewLifecycleOwner) {
                     stcDescription.error =
                         if (it.length < 10) getString(R.string.fill_text_over_10) else null
-                })
+                }
 
                 if (stiTitle.error.isNullOrEmpty() && stiPrice.error.isNullOrEmpty() && stcDescription.error.isNullOrEmpty()) {
                     viewModel.savePriceByProject()
@@ -74,15 +77,17 @@ class PriceByProjectFragment : BaseFragment<FragmentEditPriceByProjectBinding>(
 
     companion object {
         private const val TAG = "EditPriceByProjectFragment"
-        private const val PRICE_BY_PROJECT_ID = "PRICE_BY_PROJECT_ID"
+        private const val PRICE_BY_PROJECT = "PRICE_BY_PROJECT"
 
-        fun newInstance(priceByProjectId: Int? = null) = PriceByProjectFragment().apply {
-            arguments = Bundle().apply {
-                priceByProjectId?.let { putInt(PRICE_BY_PROJECT_ID, it) }
+        fun newInstance(priceByProject: PortfolioDto? = null) = PriceByProjectFragment().apply {
+            priceByProject?.let {
+                arguments = bundleOf(
+                    PRICE_BY_PROJECT to it
+                )
             }
         }
 
-        fun getPriceByProjectId(savedStateHandle: SavedStateHandle): Int? =
-            savedStateHandle.get(PRICE_BY_PROJECT_ID)
+        fun getPriceByProject(savedStateHandle: SavedStateHandle): MutableLiveData<PortfolioDto> =
+            savedStateHandle.getLiveData(PRICE_BY_PROJECT)
     }
 }

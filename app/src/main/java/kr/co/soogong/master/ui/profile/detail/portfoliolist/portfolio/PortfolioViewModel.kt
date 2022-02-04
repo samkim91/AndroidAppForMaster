@@ -10,7 +10,6 @@ import kr.co.soogong.master.data.dto.common.AttachmentDto
 import kr.co.soogong.master.data.dto.profile.PortfolioDto
 import kr.co.soogong.master.data.global.CodeTable
 import kr.co.soogong.master.domain.usecase.auth.GetMasterIdFromSharedUseCase
-import kr.co.soogong.master.domain.usecase.profile.GetPortfolioUseCase
 import kr.co.soogong.master.domain.usecase.profile.SavePortfolioUseCase
 import kr.co.soogong.master.ui.base.BaseViewModel
 import kr.co.soogong.master.utility.ListLiveData
@@ -21,10 +20,9 @@ import javax.inject.Inject
 class PortfolioViewModel @Inject constructor(
     private val getMasterIdFromSharedUseCase: GetMasterIdFromSharedUseCase,
     private val savePortfolioUseCase: SavePortfolioUseCase,
-    private val getPortfolioUseCase: GetPortfolioUseCase,
     val savedStateHandle: SavedStateHandle,
 ) : BaseViewModel() {
-    val id = PortfolioFragment.getPortfolioId(savedStateHandle)     // 추가할 땐 null, 수정할 땐 포트폴리오 id
+    val portfolio = PortfolioFragment.getPortfolio(savedStateHandle)
 
     val title = MutableLiveData<String>()
     val imageBeforeRepairing = ListLiveData<AttachmentDto>()
@@ -32,32 +30,25 @@ class PortfolioViewModel @Inject constructor(
     val description = MutableLiveData<String>()
 
     init {
-        requestPortfolio()
+        setInitialPortfolio()
     }
 
-    private fun requestPortfolio() {
-        Timber.tag(TAG).d("requestPortfolio: $id")
-        id?.let {
-            getPortfolioUseCase(id, CodeTable.PORTFOLIO.code)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeBy(
-                    onSuccess = { portfolio ->
-                        portfolio.title?.let { title.postValue(it) }
-                        portfolio.beforeImage?.let { imageBeforeRepairing.add(it) }
-                        portfolio.afterImage?.let { imageAfterRepairing.add(it) }
-                        portfolio.description?.let { description.postValue(it) }
-                    },
-                    onError = { setAction(REQUEST_FAILED) }
-                ).addToDisposable()
+    private fun setInitialPortfolio() {
+        Timber.tag(TAG).d("setInitialPortfolio: $portfolio")
+
+        portfolio.value?.let { portfolioDto ->
+            portfolioDto.title?.let { title.postValue(it) }
+            portfolioDto.beforeImage?.let { imageBeforeRepairing.add(it) }
+            portfolioDto.afterImage?.let { imageAfterRepairing.add(it) }
+            portfolioDto.description?.let { description.postValue(it) }
         }
     }
 
     fun savePortfolio() {
-        Timber.tag(TAG).d("savePortfolio: $id")
+        Timber.tag(TAG).d("savePortfolio: $portfolio")
         savePortfolioUseCase(
             portfolio = PortfolioDto(
-                id = id,
+                id = portfolio.value?.id,
                 masterId = getMasterIdFromSharedUseCase(),
                 title = title.value,
                 description = description.value,

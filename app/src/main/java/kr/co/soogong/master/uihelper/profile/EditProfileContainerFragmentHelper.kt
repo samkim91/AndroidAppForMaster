@@ -1,6 +1,7 @@
 package kr.co.soogong.master.uihelper.profile
 
 import androidx.fragment.app.Fragment
+import kr.co.soogong.master.data.dto.profile.PortfolioDto
 import kr.co.soogong.master.ui.profile.detail.address.EditAddressFragment
 import kr.co.soogong.master.ui.profile.detail.businessunitinformation.EditBusinessUnitInformationFragment
 import kr.co.soogong.master.ui.profile.detail.email.EditEmailFragment
@@ -35,13 +36,9 @@ object EditProfileContainerFragmentHelper {
     const val EDIT_MASTER_CONFIG = "기타 변동 요인"
     const val EDIT_EMAIL = "이메일"
 
-    fun getFragment(pageName: String, itemId: Int?): Fragment =
+    fun getFragment(pageName: String): Fragment =
         when (pageName) {
             FREE_MEASURE -> EditFreeMeasureFragment.newInstance()
-            ADD_PORTFOLIO -> PortfolioFragment.newInstance()
-            EDIT_PORTFOLIO -> PortfolioFragment.newInstance(itemId)
-            ADD_PRICE_BY_PROJECTS -> PriceByProjectFragment.newInstance()
-            EDIT_PRICE_BY_PROJECTS -> PriceByProjectFragment.newInstance(itemId)
             EDIT_MASTER_CONFIG -> EditMasterConfigFragment.newInstance()
             EDIT_EMAIL -> EditEmailFragment.newInstance()
 
@@ -52,6 +49,15 @@ object EditProfileContainerFragmentHelper {
             EDIT_PHONE_NUMBER -> EditPhoneNumberFragment.newInstance()
             EDIT_MAJOR -> EditMajorFragment.newInstance()
             EDIT_ADDRESS -> EditAddressFragment.newInstance()
+            else -> Fragment()
+        }
+
+    fun getFragmentWithPortfolio(pageName: String, portfolioDto: PortfolioDto?): Fragment =
+        when (pageName) {
+            ADD_PORTFOLIO -> PortfolioFragment.newInstance()
+            EDIT_PORTFOLIO -> PortfolioFragment.newInstance(portfolioDto)
+            ADD_PRICE_BY_PROJECTS -> PriceByProjectFragment.newInstance()
+            EDIT_PRICE_BY_PROJECTS -> PriceByProjectFragment.newInstance(portfolioDto)
             else -> Fragment()
         }
 }

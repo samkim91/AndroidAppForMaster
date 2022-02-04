@@ -32,8 +32,6 @@ import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_SHOP_IMAGES
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_WARRANTY_INFORMATION
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.FREE_MEASURE
-import kr.co.soogong.master.uihelper.profile.PortfolioListActivityHelper.PORTFOLIO
-import kr.co.soogong.master.uihelper.profile.PortfolioListActivityHelper.PRICE_BY_PROJECTS
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.FileHelper
 import kr.co.soogong.master.utility.NaverMapHelper
@@ -77,9 +75,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
             colorThemeOptionalInformationProgress = ColorTheme.Grey
 
             rbMyReviews.setOnClickListener {
-                startActivity(
-                    MyReviewsActivityHelper.getIntent(requireContext())
-                )
+                startActivity(MyReviewsActivityHelper.getIntent(requireContext()))
             }
 
             abHeader.setButtonAnyClickListener {
@@ -189,12 +185,13 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
                 View.OnClickListener { startActivityCommonCode(EDIT_MASTER_CONFIG) }
 
             hbcPortfolio.onButtonClick = View.OnClickListener {
-                startActivity(PortfolioListActivityHelper.getIntent(requireContext(), PORTFOLIO))
+                startActivity(PortfolioListActivityHelper.getIntent(requireContext(),
+                    CodeTable.PORTFOLIO))
             }
 
             hbcPriceByProject.onButtonClick = View.OnClickListener {
                 startActivity(PortfolioListActivityHelper.getIntent(requireContext(),
-                    PRICE_BY_PROJECTS))
+                    CodeTable.PRICE_BY_PROJECT))
             }
 
             hbcEmailAddress.onButtonClick =
@@ -207,10 +204,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
             when (event) {
                 REQUEST_FAILED -> requireContext().toast(getString(R.string.error_message_of_request_failed))
                 SHOW_LOADING -> showLoading(parentFragmentManager)
-                DISMISS_LOADING -> {
-                    dismissLoading()
-                    viewModel.requestProfile()
-                }
+                DISMISS_LOADING -> dismissLoading()
             }
         })
         viewModel.profile.observe(viewLifecycleOwner) { profile ->
@@ -227,22 +221,14 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
 
     override fun onStart() {
         super.onStart()
+        Timber.tag(TAG).d("onStart: ")
         naverMapHelper
-    }
-
-    override fun onResume() {
-        super.onResume()
-        Timber.tag(TAG).d("onResume: ")
         viewModel.requestProfile()
     }
 
-    private fun startActivityCommonCode(pageName: String, itemId: Int? = null) {
+    private fun startActivityCommonCode(pageName: String) {
         startActivity(
-            EditProfileContainerActivityHelper.getIntent(
-                requireContext(),
-                pageName,
-                itemId
-            )
+            EditProfileContainerActivityHelper.getIntent(requireContext(), pageName)
         )
     }
 
