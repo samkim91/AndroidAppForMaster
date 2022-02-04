@@ -25,7 +25,7 @@ class ReviewViewHolder(
                     context.startActivity(
                         ImageViewActivityHelper.getIntent(
                             context,
-                            review.imageList,
+                            review.images,
                             position
                         )
                     )

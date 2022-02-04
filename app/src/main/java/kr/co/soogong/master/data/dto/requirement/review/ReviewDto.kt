@@ -3,7 +3,6 @@ package kr.co.soogong.master.data.dto.requirement.review
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
-import kr.co.soogong.master.data.dto.common.AttachmentDto
 import java.util.*
 
 @Parcelize
@@ -11,29 +10,38 @@ data class ReviewDto(
     @SerializedName("id")
     val id: Int,
 
-    @SerializedName("customerName")
-    val customerName: String?,
+    @SerializedName("nickname")
+    val customerNickname: String?,
 
-    @SerializedName("customerImage")
-    val customerImage: AttachmentDto?,
-
-    @SerializedName("content")
-    val content: String?,
+    @SerializedName("profileImageUrl")
+    val customerProfileImageUrl: String?,
 
     @SerializedName("projectName")
     val projectName: String?,
 
-    @SerializedName("attachments")
-    val attachments: MutableList<AttachmentDto>?,
+    @SerializedName("content")
+    val content: String?,
 
-    @SerializedName("reviewScores")
-    val reviewScores: List<ReviewScoreDto>?,
+    @SerializedName("imageUrls")
+    val images: List<String>?,
+
+    @SerializedName("recommendation")
+    val recommendation: Float?,
+
+    @SerializedName("quality")
+    val quality: Float?,
+
+    @SerializedName("affordability")
+    val affordability: Float?,
+
+    @SerializedName("kindness")
+    val kindness: Float?,
+
+    @SerializedName("punctuality")
+    val punctuality: Float?,
 
     @SerializedName("createdAt")
     val createdAt: Date,
-
-    @SerializedName("updatedAt")
-    val updatedAt: Date,
 ) : Parcelable {
     companion object
 }

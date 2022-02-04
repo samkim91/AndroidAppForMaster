@@ -6,34 +6,70 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import kr.co.soogong.master.data.model.profile.MyReview
+import kr.co.soogong.master.data.model.profile.Profile
+import kr.co.soogong.master.data.model.profile.Review
+import kr.co.soogong.master.data.repository.ProfileRepository
 import kr.co.soogong.master.domain.usecase.profile.GetProfileUseCase
-import kr.co.soogong.master.ui.base.BaseViewModel
+import kr.co.soogong.master.ui.common.EndlessScrollableViewModel
+import kr.co.soogong.master.utility.ListLiveData
 import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class MyReviewsViewModel @Inject constructor(
     private val getProfileUseCase: GetProfileUseCase,
-) : BaseViewModel() {
-    private val _myReview = MutableLiveData<MyReview?>()
-    val myReview: LiveData<MyReview?>
-        get() = _myReview
+    private val profileRepository: ProfileRepository,
+    // TODO: 2022/01/27 pageable reviews api 필요
+) : EndlessScrollableViewModel() {
+    private val _profile = MutableLiveData<Profile>()
+    val profile: LiveData<Profile>
+        get() = _profile
+
+    val reviews = ListLiveData<Review>()
 
     init {
+        requestProfile()
+        initList()
+    }
+
+    override fun initList() {
+        Timber.tag(TAG).d("initList: ")
+        reviews.clear()
+        resetState()
+        requestMyReviews()
+    }
+
+    override fun loadMoreItems() {
+        Timber.tag(TAG).d("loadMoreItems: ")
         requestMyReviews()
     }
 
     private fun requestMyReviews() {
         Timber.tag(TAG).d("requestMyReviews: ")
+
+        profileRepository.getReviews(offset, pageSize)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeBy(
+                onSuccess = { pageableContentDto ->
+                    Timber.tag(TAG).d("requestMyReviews successfully: ")
+                    last = pageableContentDto.last
+                    totalItemCount += pageableContentDto.numberOfElements
+                    reviews.addAll(pageableContentDto.content)
+                },
+                onError = { setAction(GET_MY_REVIEWS_FAILED) }
+            ).addToDisposable()
+    }
+
+    private fun requestProfile() {
+        Timber.tag(TAG).d("requestProfile: ")
         getProfileUseCase()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
-                onSuccess = { profile ->
-                    Timber.tag(TAG).d("requestMyReviews successfully: $profile")
-
-                    _myReview.value = profile.myReview
+                onSuccess = {
+                    Timber.tag(TAG).d("requestProfile successfully: $it")
+                    _profile.value = it
                 },
                 onError = { setAction(GET_MY_REVIEWS_FAILED) }
             ).addToDisposable()

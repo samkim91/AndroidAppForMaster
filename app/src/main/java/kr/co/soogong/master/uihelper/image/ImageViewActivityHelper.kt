@@ -2,9 +2,7 @@ package kr.co.soogong.master.uihelper.image
 
 import android.content.Context
 import android.content.Intent
-import android.os.Bundle
-import android.os.Parcelable
-import kr.co.soogong.master.data.dto.common.AttachmentDto
+import androidx.core.os.bundleOf
 import kr.co.soogong.master.ui.image.ImageActivity
 
 object ImageViewActivityHelper {
@@ -15,14 +13,14 @@ object ImageViewActivityHelper {
     // Intent 에 attachments 를 parse 하기 위해, mutableList 를 사용
     fun getIntent(
         context: Context,
-        images: MutableList<AttachmentDto>?,
+        images: List<String>,
         position: Int = 0,
     ): Intent {
         return Intent(context, ImageActivity::class.java).apply {
-            putExtra(EXTRA_KEY_BUNDLE, Bundle().apply {
-                putInt(BUNDLE_KEY_IMAGE_POSITION, position)
-                putParcelableArrayList(BUNDLE_KEY_IMAGES, ArrayList<Parcelable>(images))
-            })
+            putExtra(EXTRA_KEY_BUNDLE, bundleOf(
+                BUNDLE_KEY_IMAGE_POSITION to position,
+                BUNDLE_KEY_IMAGES to images
+            ))
         }
     }
 
@@ -30,8 +28,8 @@ object ImageViewActivityHelper {
         return intent.getBundleExtra(EXTRA_KEY_BUNDLE)?.getInt(BUNDLE_KEY_IMAGE_POSITION) ?: 0
     }
 
-    fun getImages(intent: Intent): MutableList<AttachmentDto> {
-        return intent.getBundleExtra(EXTRA_KEY_BUNDLE)?.getParcelableArrayList(
-            BUNDLE_KEY_IMAGES) ?: mutableListOf()
+    fun getImages(intent: Intent): List<String> {
+        return intent.getBundleExtra(EXTRA_KEY_BUNDLE)?.getStringArrayList(BUNDLE_KEY_IMAGES)
+            ?: emptyList()
     }
 }

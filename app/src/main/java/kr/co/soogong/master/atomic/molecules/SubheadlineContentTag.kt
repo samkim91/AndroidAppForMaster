@@ -53,7 +53,7 @@ class SubheadlineContentTag @JvmOverloads constructor(
         }
 
     companion object {
-        val params = LinearLayoutCompat.LayoutParams(
+        private val params = LinearLayoutCompat.LayoutParams(
             ViewGroup.LayoutParams.MATCH_PARENT,
             ViewGroup.LayoutParams.WRAP_CONTENT,
         ).also {
@@ -84,8 +84,7 @@ class SubheadlineContentTag @JvmOverloads constructor(
             }
 
             // images 추가
-            if (requirement.images.isNullOrEmpty()) return
-            TitleRectangleImages(context).also { item ->
+            if (!requirement.images.isNullOrEmpty()) TitleRectangleImages(context).also { item ->
                 item.label = context.getString(R.string.view_requirement_images_label)
                 item.images = requirement.images
                 container.addView(item, params)

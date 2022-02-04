@@ -7,7 +7,6 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 import kr.co.soogong.master.data.dto.common.AttachmentDto
 import kr.co.soogong.master.data.dto.major.ProjectDto
-import kr.co.soogong.master.data.dto.requirement.review.ReviewDto
 import java.util.*
 
 @Parcelize
@@ -116,17 +115,17 @@ data class MasterDto(
     @SerializedName("masterConfigs")
     val masterConfigDtos: List<MasterConfigDto>? = null,
 
-    @SerializedName("masterPortfolios")
-    val masterPortfolioDtos: List<PortfolioDto>? = null,
+    @SerializedName("portfolioCount")
+    val portfolioCount: Int? = null,
+
+    @SerializedName("priceByProjectCount")
+    val priceByProjectCount: Int? = null,
 
     @SerializedName("projects")
     val projectDtos: List<ProjectDto>? = null,
 
     @SerializedName("repairCount")
     val repairCount: Int? = null,
-
-    @SerializedName("reviews")
-    val reviews: List<ReviewDto>? = null,
 
     @SerializedName("reviewCount")
     val reviewCount: Int? = null,

@@ -59,6 +59,7 @@ object HttpContract {
     const val GET_MASTER_SIMPLE_INFO = "master/v2/simple-info/{uid}"
     const val GET_MASTER = "master/{uid}"
     const val SAVE_MASTER = "master/save"
+    const val GET_REVIEWS = "master/review"
     const val UPDATE_REQUEST_MEASURE_YN = "master/request-measure-yn"
     const val UPDATE_FREE_MEASURE_YN = "master/free-measure-yn"
     const val UPDATE_DIRECT_REPAIR_YN = "master/direct-repair-yn"
