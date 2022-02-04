@@ -6,5 +6,5 @@ import kr.co.soogong.master.data.model.profile.Review
 
 @BindingAdapter("bind:reviews")
 fun RecyclerView.setList(items: List<Review>?) {
-    (adapter as? ReviewAdapter)?.submitList(items ?: emptyList())
+    (adapter as? ReviewAdapter)?.submitList(items?.toMutableList() ?: emptyList())
 }

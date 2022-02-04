@@ -24,7 +24,7 @@
             android:background="@drawable/ic_nutty_circle"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:setCircleImageByUrl="@{data.customerImage.url}" />
+            app:setCircleImageByUrl="@{data.customerProfileImageUrl}" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_user_nickname"
@@ -47,7 +47,7 @@
             android:layout_marginStart="@dimen/gap_10"
             android:numStars="5"
             android:progressTint="@color/brand_green"
-            android:rating="@{data.recommendation.score}"
+            android:rating="@{data.recommendation}"
             app:layout_constraintBottom_toBottomOf="@id/iv_user_image"
             app:layout_constraintStart_toEndOf="@id/iv_user_image"
             app:layout_constraintTop_toBottomOf="@id/tv_user_nickname"
@@ -89,7 +89,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/gap_4"
-            android:text="@{String.valueOf(data.kindness.score)}"
+            android:text="@{String.valueOf((int) data.kindness)}"
             android:textAppearance="@style/caption_1.bold"
             android:textColor="@color/brand_green"
             app:layout_constraintStart_toEndOf="@id/tv_kindness"
@@ -112,7 +112,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/gap_4"
-            android:text="@{String.valueOf(data.quality.score)}"
+            android:text="@{String.valueOf((int)data.quality)}"
             android:textAppearance="@style/caption_1.bold"
             android:textColor="@color/brand_green"
             app:layout_constraintStart_toEndOf="@id/tv_quality"
@@ -135,7 +135,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/gap_4"
-            android:text="@{String.valueOf(data.affordability.score)}"
+            android:text="@{String.valueOf((int)data.affordability)}"
             android:textAppearance="@style/caption_1.bold"
             android:textColor="@color/brand_green"
             app:layout_constraintStart_toEndOf="@id/tv_affordability"
@@ -158,7 +158,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/gap_4"
-            android:text="@{String.valueOf(data.punctuality.score)}"
+            android:text="@{String.valueOf((int)data.punctuality)}"
             android:textAppearance="@style/caption_1.bold"
             android:textColor="@color/brand_green"
             app:layout_constraintStart_toEndOf="@id/tv_punctuality"
@@ -184,7 +184,7 @@
             android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/gap_16"
-            android:text="@{data.reviewContent}"
+            android:text="@{data.content}"
             android:textAppearance="@style/subheadline.regular"
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
@@ -200,13 +200,13 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/gap_8"
+            app:imageUrls="@{data.images}"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_review_content"
             app:spanCount="4"
-            bind:photo_list="@{data.imageList}"
-            bind:visible="@{data.imageList}"
+            bind:visible="@{data.images}"
             tools:listitem="@layout/view_holder_image" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

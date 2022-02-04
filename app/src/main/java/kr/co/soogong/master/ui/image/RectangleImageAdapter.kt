@@ -3,13 +3,12 @@ package kr.co.soogong.master.ui.image
 import android.view.ViewGroup
 import androidx.core.view.setMargins
 import androidx.recyclerview.widget.RecyclerView
-import kr.co.soogong.master.data.dto.common.AttachmentDto
 import kr.co.soogong.master.utility.extension.dp
 
 class RectangleImageAdapter(
     private val cardClickListener: ((Int) -> Unit),
 ) : RecyclerView.Adapter<RectangleImageViewHolder>() {
-    private val imageList: ArrayList<AttachmentDto> = arrayListOf()
+    private val images: MutableList<String> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RectangleImageViewHolder =
         RectangleImageViewHolder.create(parent, viewType)
@@ -19,21 +18,17 @@ class RectangleImageAdapter(
         params.setMargins(2.dp)
         holder.itemView.layoutParams = params
 
-        imageList[position].url?.let {
-            holder.binding(it)
-            holder.binding.setCardClickListener {
-                cardClickListener(position)
-            }
+        images[position].run {
+            holder.binding(this)
+            holder.binding.setCardClickListener { cardClickListener(position) }
         }
     }
 
-    override fun getItemCount(): Int = imageList.size
+    override fun getItemCount(): Int = images.size
 
-    fun setList(imageList: MutableList<AttachmentDto>?) {
-        imageList?.let {
-            this.imageList.clear()
-            this.imageList.addAll(it)
-            notifyDataSetChanged()
-        }
+    fun setImageUrls(imageUrls: List<String>) {
+        this.images.clear()
+        this.images.addAll(imageUrls)
+        notifyDataSetChanged()
     }
 }

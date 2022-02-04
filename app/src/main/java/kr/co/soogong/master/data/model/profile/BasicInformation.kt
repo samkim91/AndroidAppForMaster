@@ -5,14 +5,12 @@ import kotlinx.parcelize.Parcelize
 import kr.co.soogong.master.data.dto.common.AttachmentDto
 import kr.co.soogong.master.data.dto.profile.MasterConfigDto
 import kr.co.soogong.master.data.dto.profile.MasterDto
-import kr.co.soogong.master.data.dto.profile.PortfolioDto
-import kr.co.soogong.master.data.global.CodeTable
 
 @Parcelize
 data class BasicInformation(
     val freeMeasureYn: Boolean?,
-    val portfolios: List<PortfolioDto>?,
-    val priceByProjects: List<PortfolioDto>?,
+    val portfolioCount: Int,
+    val priceByProjectCount: Int,
     val profileImage: AttachmentDto?,
     val masterConfigs: List<MasterConfigDto>?,
     val email: String?,
@@ -21,8 +19,8 @@ data class BasicInformation(
         fun fromMasterDto(masterDto: MasterDto): BasicInformation {
             return BasicInformation(
                 freeMeasureYn = masterDto.freeMeasureYn,
-                portfolios = masterDto.masterPortfolioDtos?.filter { portfolioDto -> portfolioDto.type == CodeTable.PORTFOLIO.code },
-                priceByProjects = masterDto.masterPortfolioDtos?.filter { portfolioDto -> portfolioDto.type == CodeTable.PRICE_BY_PROJECT.code },
+                portfolioCount = masterDto.portfolioCount ?: 0,
+                priceByProjectCount = masterDto.priceByProjectCount ?: 0,
                 profileImage = masterDto.profileImage,
                 masterConfigs = masterDto.masterConfigDtos,
                 email = masterDto.email,

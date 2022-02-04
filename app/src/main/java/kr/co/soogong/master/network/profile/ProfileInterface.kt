@@ -2,15 +2,22 @@ package kr.co.soogong.master.network.profile
 
 import io.reactivex.Single
 import kr.co.soogong.master.contract.HttpContract
+import kr.co.soogong.master.data.dto.common.PageableContentDto
 import kr.co.soogong.master.data.dto.common.ResponseDto
 import kr.co.soogong.master.data.dto.profile.MasterDto
 import kr.co.soogong.master.data.dto.profile.PortfolioDto
+import kr.co.soogong.master.data.dto.requirement.review.ReviewDto
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
 import retrofit2.http.*
 
 interface ProfileInterface {
+
+    @FormUrlEncoded
+    @PATCH(HttpContract.UPDATE_UID_BY_TEL)
+    fun updateUidByTel(@Path("tel") tel: String, @Field("uid") uid: String): Single<MasterDto>
+
     @GET(HttpContract.GET_MASTER_SIMPLE_INFO)
     fun getMasterSimpleInfo(@Path("uid") uid: String): Single<ResponseDto<MasterDto>>
 
@@ -34,6 +41,21 @@ interface ProfileInterface {
         @Part afterImageFile: MultipartBody.Part?,
     ): Single<PortfolioDto>
 
+    @GET(HttpContract.GET_PORTFOLIOS)
+    fun getPortfoliosByUid(@Query("uid") uid: String?): Single<List<PortfolioDto>>
+
+    @PUT(HttpContract.DELETE_PORTFOLIO)
+    fun deletePortfolio(@Path("id") portfolioId: Int): Single<ResponseBody>
+
+    @GET(HttpContract.GET_REVIEWS)
+    fun getReviews(
+        @Query("uid") uid: String,
+        @Query("offset") offset: Int,
+        @Query("pageSize") pageSize: Int,
+        @Query("order") order: Int,
+        @Query("orderBy") orderBy: String,
+    ): Single<ResponseDto<PageableContentDto<ReviewDto>>>
+
     @FormUrlEncoded
     @PATCH(HttpContract.UPDATE_REQUEST_MEASURE_YN)
     fun updateRequestMeasureYn(
@@ -50,13 +72,4 @@ interface ProfileInterface {
         @Body masterDto: MasterDto,
     ): Single<MasterDto>
 
-    @GET(HttpContract.GET_PORTFOLIOS)
-    fun getPortfoliosByUid(@Query("uid") uid: String?): Single<List<PortfolioDto>>
-
-    @FormUrlEncoded
-    @PATCH(HttpContract.UPDATE_UID_BY_TEL)
-    fun updateUidByTel(@Path("tel") tel: String, @Field("uid") uid: String): Single<MasterDto>
-
-    @PUT(HttpContract.DELETE_PORTFOLIO)
-    fun deletePortfolio(@Path("id") portfolioId: Int): Single<ResponseBody>
 }

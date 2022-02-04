@@ -34,7 +34,10 @@ import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.
 import kr.co.soogong.master.uihelper.profile.EditProfileContainerFragmentHelper.FREE_MEASURE
 import kr.co.soogong.master.uihelper.profile.PortfolioListActivityHelper.PORTFOLIO
 import kr.co.soogong.master.uihelper.profile.PortfolioListActivityHelper.PRICE_BY_PROJECTS
-import kr.co.soogong.master.utility.*
+import kr.co.soogong.master.utility.EventObserver
+import kr.co.soogong.master.utility.FileHelper
+import kr.co.soogong.master.utility.NaverMapHelper
+import kr.co.soogong.master.utility.PermissionHelper
 import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
 
@@ -210,7 +213,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
                 }
             }
         })
-        viewModel.profile.observe(viewLifecycleOwner, { profile ->
+        viewModel.profile.observe(viewLifecycleOwner) { profile ->
             naverMapHelper.setLocation(
                 profile?.requiredInformation?.coordinate,
                 profile?.requiredInformation?.serviceArea
@@ -219,7 +222,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
                 checkApprovedStatusAndRequiredField(parentFragmentManager, binding, viewModel, this)
             }
             setOptionalProfileInformationProgress(viewModel)
-        })
+        }
     }
 
     override fun onStart() {

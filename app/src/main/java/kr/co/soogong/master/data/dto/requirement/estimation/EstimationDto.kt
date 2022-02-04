@@ -3,7 +3,6 @@ package kr.co.soogong.master.data.dto.requirement.estimation
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
-import kr.co.soogong.master.data.dto.common.AttachmentDto
 import kr.co.soogong.master.data.dto.requirement.repair.RepairDto
 import java.util.*
 
@@ -54,8 +53,8 @@ data class EstimationDto(
     @SerializedName("estimationPrices")
     val estimationPrices: List<EstimationPriceDto>? = emptyList(),
 
-    @SerializedName("images")
-    val images: MutableList<AttachmentDto>? = mutableListOf(),
+    @SerializedName("imageUrls")
+    val images: MutableList<String>? = mutableListOf(),
 
     @SerializedName("repair")
     val repair: RepairDto? = null,

@@ -57,6 +57,18 @@ class RequirementDtoConverters {
     }
 
     @TypeConverter
+    fun stringListToString(list: List<String>?): String? {
+        return list?.let { Gson().toJson(it) }
+    }
+
+    @TypeConverter
+    fun stringToStringList(string: String?): List<String>? {
+        return string?.let {
+            Gson().fromJson(it, object : TypeToken<List<String>>() {}.type)
+        }
+    }
+
+    @TypeConverter
     fun attachmentToString(attachment: AttachmentDto?): String? {
         return attachment?.let { Gson().toJson(it) }
     }

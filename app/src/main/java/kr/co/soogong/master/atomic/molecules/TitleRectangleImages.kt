@@ -4,10 +4,9 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
-import kr.co.soogong.master.data.dto.common.AttachmentDto
 import kr.co.soogong.master.databinding.ViewRequirementImagesBinding
 import kr.co.soogong.master.ui.image.RectangleImageAdapter
-import kr.co.soogong.master.ui.image.setList
+import kr.co.soogong.master.ui.image.setImageUrls
 import kr.co.soogong.master.uihelper.image.ImageViewActivityHelper
 
 class TitleRectangleImages @JvmOverloads constructor(
@@ -24,7 +23,7 @@ class TitleRectangleImages @JvmOverloads constructor(
             binding.textViewLabel.text = value
         }
 
-    var images: MutableList<AttachmentDto>? = arrayListOf()
+    var images: List<String>? = emptyList()
         set(value) {
             if (value.isNullOrEmpty()) return
 
@@ -34,12 +33,12 @@ class TitleRectangleImages @JvmOverloads constructor(
                     context.startActivity(
                         ImageViewActivityHelper.getIntent(
                             context,
-                            this.images,
+                            value,
                             position
                         )
                     )
                 }
             )
-            binding.imagesRecyclerView.setList(images)
+            binding.imagesRecyclerView.setImageUrls(value)
         }
 }

@@ -1,6 +1,5 @@
 package kr.co.soogong.master.data.model.requirement
 
-import kr.co.soogong.master.data.dto.common.AttachmentDto
 import kr.co.soogong.master.data.dto.requirement.PreviousRequirementDto
 import kr.co.soogong.master.data.dto.requirement.RequirementDto
 import kr.co.soogong.master.data.dto.requirement.estimation.EstimationDto
@@ -25,7 +24,7 @@ data class Requirement(
     val estimationDto: EstimationDto?,
     val previousRequirementDto: PreviousRequirementDto?,
     val measurement: EstimationDto?,
-    val images: MutableList<AttachmentDto>?,
+    val images: List<String>?,
     val canceledCode: String?,
     val cancelName: String?,
     val canceledDescription: String?,

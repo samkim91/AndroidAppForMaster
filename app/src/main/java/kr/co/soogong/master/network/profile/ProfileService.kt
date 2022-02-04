@@ -1,20 +1,25 @@
 package kr.co.soogong.master.network.profile
 
 import io.reactivex.Single
+import kr.co.soogong.master.data.dto.common.PageableContentDto
 import kr.co.soogong.master.data.dto.common.ResponseDto
 import kr.co.soogong.master.data.dto.profile.MasterDto
 import kr.co.soogong.master.data.dto.profile.PortfolioDto
+import kr.co.soogong.master.data.dto.requirement.review.ReviewDto
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
 import retrofit2.Retrofit
-import timber.log.Timber
 import javax.inject.Inject
 
 class ProfileService @Inject constructor(
-    retrofit: Retrofit
+    retrofit: Retrofit,
 ) {
     private val profileInterface = retrofit.create(ProfileInterface::class.java)
+
+    fun updateUidByTel(tel: String, uid: String): Single<MasterDto> {
+        return profileInterface.updateUidByTel(tel, uid)
+    }
 
     fun getMasterSimpleInfo(uid: String): Single<ResponseDto<MasterDto>> {
         return profileInterface.getMasterSimpleInfo(uid)
@@ -36,10 +41,29 @@ class ProfileService @Inject constructor(
     fun savePortfolio(
         portfolioDto: RequestBody,
         beforeImageFile: MultipartBody.Part?,
-        afterImageFile: MultipartBody.Part?
+        afterImageFile: MultipartBody.Part?,
     ): Single<PortfolioDto> {
         return profileInterface.savePortfolio(portfolioDto, beforeImageFile, afterImageFile)
     }
+
+    fun getPortfoliosByUid(uid: String?): Single<List<PortfolioDto>> {
+        return profileInterface.getPortfoliosByUid(uid)
+    }
+
+    fun deletePortfolio(
+        portfolioId: Int,
+    ): Single<ResponseBody> {
+        return profileInterface.deletePortfolio(portfolioId)
+    }
+
+    fun getReviews(
+        uid: String,
+        offset: Int,
+        pageSize: Int,
+        order: Int,
+        orderBy: String,
+    ): Single<ResponseDto<PageableContentDto<ReviewDto>>> =
+        profileInterface.getReviews(uid, offset, pageSize, order, orderBy)
 
     fun updateRequestMeasureYn(
         uid: String,
@@ -57,20 +81,6 @@ class ProfileService @Inject constructor(
         masterDto: MasterDto,
     ): Single<MasterDto> {
         return profileInterface.updateDirectRepairYn(masterDto)
-    }
-
-    fun getPortfoliosByUid(uid: String?): Single<List<PortfolioDto>> {
-        return profileInterface.getPortfoliosByUid(uid)
-    }
-
-    fun updateUidByTel(tel: String, uid: String): Single<MasterDto> {
-        return profileInterface.updateUidByTel(tel, uid)
-    }
-
-    fun deletePortfolio(
-        portfolioId: Int
-    ): Single<ResponseBody> {
-        return profileInterface.deletePortfolio(portfolioId)
     }
 
 }

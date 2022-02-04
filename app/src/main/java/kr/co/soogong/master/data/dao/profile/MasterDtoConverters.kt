@@ -6,7 +6,6 @@ import com.google.gson.reflect.TypeToken
 import kr.co.soogong.master.data.dto.major.ProjectDto
 import kr.co.soogong.master.data.dto.profile.MasterConfigDto
 import kr.co.soogong.master.data.dto.profile.PortfolioDto
-import kr.co.soogong.master.data.dto.requirement.review.ReviewDto
 
 class MasterDtoConverters {
     @TypeConverter
@@ -35,21 +34,6 @@ class MasterDtoConverters {
             Gson().fromJson(
                 it,
                 object : TypeToken<List<PortfolioDto>>() {}.type
-            )
-        }
-    }
-
-    @TypeConverter
-    fun reviewToString(list: List<ReviewDto>?): String? {
-        return list?.let { Gson().toJson(it) }
-    }
-
-    @TypeConverter
-    fun stringToReview(reviewString: String?): List<ReviewDto>? {
-        return reviewString?.let {
-            Gson().fromJson(
-                it,
-                object : TypeToken<List<ReviewDto>>() {}.type
             )
         }
     }

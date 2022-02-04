@@ -5,7 +5,9 @@ import android.net.Uri
 import dagger.Reusable
 import dagger.hilt.android.qualifiers.ApplicationContext
 import io.reactivex.Single
+import kr.co.soogong.master.data.dto.common.PageableContentDto
 import kr.co.soogong.master.data.dto.profile.MasterDto
+import kr.co.soogong.master.data.model.profile.Review
 import kr.co.soogong.master.domain.usecase.auth.GetMasterUidFromSharedUseCase
 import kr.co.soogong.master.domain.usecase.auth.SaveMasterBasicDataInSharedUseCase
 import kr.co.soogong.master.network.profile.ProfileService
@@ -61,6 +63,28 @@ class ProfileRepository @Inject constructor(
                 businessRegistImageUri),
             shopImages = MultipartGenerator.createFiles(context, "shopImages", shopImagesUris)
         )
+
+    fun getReviews(
+        offset: Int,
+        pageSize: Int,
+    ): Single<PageableContentDto<Review>> =
+        profileService.getReviews(getMasterUidFromSharedUseCase()!!, offset, pageSize, 1, "id")
+            .map { responseDto ->
+                if (responseDto.code.toInt() == HttpURLConnection.HTTP_OK) {
+                    responseDto.data?.let { pageableContentDto ->
+                        PageableContentDto(
+                            content = pageableContentDto.content.map { reviewDto ->
+                                Review.fromReviewDto(reviewDto)
+                            },
+                            pageable = pageableContentDto.pageable,
+                            last = pageableContentDto.last,
+                            numberOfElements = pageableContentDto.numberOfElements
+                        )
+                    }
+                } else {
+                    throw Exception(responseDto.messageKo)
+                }
+            }
 
 
     companion object {

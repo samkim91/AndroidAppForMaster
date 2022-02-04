@@ -8,7 +8,6 @@ import androidx.core.content.ContextCompat
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.dto.common.AttachmentDto
 import kr.co.soogong.master.databinding.ActivityImageBinding
 import kr.co.soogong.master.ui.base.BaseActivity
 import kr.co.soogong.master.uihelper.image.ImageViewActivityHelper
@@ -19,7 +18,7 @@ import timber.log.Timber
 class ImageActivity : BaseActivity<ActivityImageBinding>(
     R.layout.activity_image
 ) {
-    private val images: List<AttachmentDto> by lazy {
+    private val images: List<String> by lazy {
         ImageViewActivityHelper.getImages(intent)
     }
 
@@ -33,7 +32,6 @@ class ImageActivity : BaseActivity<ActivityImageBinding>(
         initLayout()
     }
 
-    // TODO: 2022/01/19 rotation 시 indicator 와 page 가 안 맞는데, 확인 필요!
     override fun initLayout() {
         Timber.tag(TAG).d("initLayout: $startPosition")
         bind {
