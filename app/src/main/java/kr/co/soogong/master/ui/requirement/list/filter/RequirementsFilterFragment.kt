@@ -2,11 +2,12 @@ package kr.co.soogong.master.ui.requirement.list.filter
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.SavedStateHandle
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.model.requirement.RequirementStatus
 import kr.co.soogong.master.databinding.FragmentRequirementListBinding
 import kr.co.soogong.master.ui.base.BaseFragment
 import kr.co.soogong.master.ui.main.MainViewModel
@@ -49,17 +50,6 @@ class RequirementsFilterFragment : BaseFragment<FragmentRequirementListBinding>(
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        Timber.tag(TAG).d("onResume: ")
-
-        viewModel.requirementStatus.value = RequirementStatus.getRequirementStatusFromTabIndex(
-            parentViewModel.mainTabIndex.value,
-            parentViewModel.filterTabIndex.value)
-
-        viewModel.initList()
-    }
-
     private fun registerEventObserve() {
         Timber.tag(TAG).d("registerEventObserve: ")
 
@@ -72,9 +62,23 @@ class RequirementsFilterFragment : BaseFragment<FragmentRequirementListBinding>(
         })
     }
 
+    override fun onStart() {
+        super.onStart()
+        Timber.tag(TAG).d("onStart: ")
+        viewModel.initList()
+    }
+
     companion object {
         private const val TAG = "RequirementsFilterFragment"
+        private const val REQUIREMENT_STATUS = "REQUIREMENT_STATUS"
 
-        fun newInstance() = RequirementsFilterFragment()
+        fun newInstance(status: String) = RequirementsFilterFragment().apply {
+            arguments = bundleOf(
+                REQUIREMENT_STATUS to status
+            )
+        }
+
+        fun getRequirementStatusFromSavedState(savedStateHandle: SavedStateHandle) =
+            savedStateHandle.getLiveData<String>(REQUIREMENT_STATUS)
     }
 }

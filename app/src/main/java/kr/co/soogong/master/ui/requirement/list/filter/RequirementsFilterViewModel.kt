@@ -1,6 +1,6 @@
 package kr.co.soogong.master.ui.requirement.list.filter
 
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
@@ -15,9 +15,11 @@ import javax.inject.Inject
 @HiltViewModel
 class RequirementsFilterViewModel @Inject constructor(
     private val requirementViewModelAggregate: RequirementViewModelAggregate,
+    savedStateHandle: SavedStateHandle,
 ) : RequirementsViewModel(requirementViewModelAggregate) {
 
-    val requirementStatus = MutableLiveData("")
+    val requirementStatus =
+        RequirementsFilterFragment.getRequirementStatusFromSavedState(savedStateHandle)
 
     override fun initList() {
         Timber.tag(TAG).d("initList: ")

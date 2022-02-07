@@ -53,7 +53,6 @@ class RequirementFragment : BaseFragment<FragmentRequirementBinding>(
                     tab?.position.let {
                         mainTabs.changeTabFont(it, R.style.title_3_bold)
                         viewModel.mainTabIndex.value = it
-                        setViewPager()
                     }
                 },
                 onUnselected = { tab ->
@@ -65,8 +64,8 @@ class RequirementFragment : BaseFragment<FragmentRequirementBinding>(
             filterTabs.setTabSelectedListener(
                 onSelected = { tab ->
                     tab?.position.let {
-                        viewModel.filterTabIndex.value = it
                         filterTabs.changeTabFont(it, R.style.subheadline_bold)
+                        viewModel.filterTabIndex.value = it
                     }
                 },
                 onUnselected = { tab ->
@@ -75,24 +74,6 @@ class RequirementFragment : BaseFragment<FragmentRequirementBinding>(
             )
 
             setSearchIconClick { startActivity(SearchActivityHelper.getIntent(requireContext())) }
-
-            setViewPager()
-        }
-    }
-
-    private fun setViewPager() {
-        Timber.tag(TAG).d("setViewPager start: ${viewModel.mainTabIndex.value}")
-        viewModel.mainTabIndex.value?.let { mainTabIndex ->
-            bind {
-                with(requirementsViewPager) {
-                    adapter = RequirementsFilterPagerAdapter(this@RequirementFragment, mainTabIndex)
-                    TabLayoutMediator(filterTabs, this) { tab, position ->
-                        tab.text =
-                            if (mainTabIndex == 0) getString(TAB_TEXTS_REQUIREMENTS_BEFORE_PROGRESS[position])
-                            else getString(TAB_TEXTS_REQUIREMENTS_IN_PROGRESS[position])
-                    }.attach()
-                }
-            }
         }
     }
 
@@ -103,7 +84,7 @@ class RequirementFragment : BaseFragment<FragmentRequirementBinding>(
             }
         })
 
-        viewModel.customerRequests.observe(viewLifecycleOwner, { request ->
+        viewModel.customerRequests.observe(viewLifecycleOwner) { request ->
             when {
                 request.isEmpty -> Unit
                 request.requestMeasureList.isNotEmpty() ->
@@ -111,12 +92,25 @@ class RequirementFragment : BaseFragment<FragmentRequirementBinding>(
                 request.requestConsultingList.isNotEmpty() ->
                     showDialogForViewRequirement(REQUEST_CONSULTING, request.requestConsultingList)
             }
-        })
+        }
 
-        mainViewModel.selectedMainTabInRequirementFragment.observe(viewLifecycleOwner,
-            { position ->
-                binding.mainTabs.getTabAt(position)?.select()
-            })
+        viewModel.mainTabIndex.observe(viewLifecycleOwner) { mainTabIndex ->
+            Timber.tag(TAG).d("setViewPager start: $mainTabIndex")
+            with(binding) {
+                requirementsViewPager.apply {
+                    adapter = RequirementsFilterPagerAdapter(this@RequirementFragment, mainTabIndex)
+                    TabLayoutMediator(filterTabs, this) { tab, position ->
+                        tab.text =
+                            if (mainTabIndex == 0) getString(TAB_TEXTS_REQUIREMENTS_BEFORE_PROGRESS[position])
+                            else getString(TAB_TEXTS_REQUIREMENTS_IN_PROGRESS[position])
+                    }.attach()
+                }
+            }
+        }
+
+        mainViewModel.selectedMainTabInRequirementFragment.observe(viewLifecycleOwner) { position ->
+            binding.mainTabs.getTabAt(position)?.select()
+        }
     }
 
     private fun showDialogForViewRequirement(type: Int, list: List<Int>) {
