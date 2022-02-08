@@ -19,7 +19,7 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="subheadline : ex) 연락이 가능한 휴대폰번호를 입력해주세요." />
 
-        <kr.co.soogong.master.atomic.atoms.TextInputButtonMedium
+        <kr.co.soogong.master.presentation.atomic.atoms.TextInputButtonMedium
             android:id="@+id/tibm_content"
             android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"

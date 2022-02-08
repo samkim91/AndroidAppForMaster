@@ -9,7 +9,7 @@
 
         <variable
             name="vm"
-            type="kr.co.soogong.master.ui.preferences.detail.notice.NoticeViewModel" />
+            type="kr.co.soogong.master.presentation.ui.preferences.detail.notice.NoticeViewModel" />
 
         <import type="com.google.android.material.textfield.TextInputLayout" />
     </data>

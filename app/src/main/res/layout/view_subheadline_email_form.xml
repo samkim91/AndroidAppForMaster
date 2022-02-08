@@ -19,7 +19,7 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="subheadline : ex) A/S 기간 정보를 알려주세요." />
 
-        <kr.co.soogong.master.atomic.atoms.TextInput
+        <kr.co.soogong.master.presentation.atomic.atoms.TextInput
             android:id="@+id/ti_local_part"
             android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"

@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <kr.co.soogong.master.atomic.molecules.ActionBar
+        <kr.co.soogong.master.presentation.atomic.molecules.ActionBar
             android:id="@+id/ab_header"
             android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"

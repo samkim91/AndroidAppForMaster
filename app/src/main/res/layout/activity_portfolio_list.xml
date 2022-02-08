@@ -6,15 +6,15 @@
 
     <data>
 
-        <import type="kr.co.soogong.master.data.global.CodeTable" />
+        <import type="kr.co.soogong.master.domain.entity.common.CodeTable" />
 
         <variable
             name="vm"
-            type="kr.co.soogong.master.ui.profile.detail.portfoliolist.PortfolioListViewModel" />
+            type="kr.co.soogong.master.presentation.ui.profile.detail.portfoliolist.PortfolioListViewModel" />
 
         <variable
             name="buttonThemeAddingItem"
-            type="kr.co.soogong.master.data.global.ButtonTheme" />
+            type="kr.co.soogong.master.domain.entity.common.ButtonTheme" />
 
         <variable
             name="addingItemClickListener"
@@ -25,7 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <kr.co.soogong.master.atomic.molecules.ActionBar
+        <kr.co.soogong.master.presentation.atomic.molecules.ActionBar
             android:id="@+id/ab_header"
             android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"
@@ -35,7 +35,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:title="@{vm.type == CodeTable.PORTFOLIO ? CodeTable.PORTFOLIO.inKorean : CodeTable.PRICE_BY_PROJECT.inKorean}" />
 
-        <kr.co.soogong.master.atomic.molecules.SubheadlineButtonBig
+        <kr.co.soogong.master.presentation.atomic.molecules.SubheadlineButtonBig
             android:id="@+id/sbb_adding_item"
             android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"

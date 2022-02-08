@@ -2,8 +2,8 @@ package kr.co.soogong.master.domain.usecase.requirement
 
 import dagger.Reusable
 import io.reactivex.Single
-import kr.co.soogong.master.data.model.requirement.Requirement
-import kr.co.soogong.master.data.repository.RequirementRepository
+import kr.co.soogong.master.domain.entity.requirement.Requirement
+import kr.co.soogong.master.domain.repository.RequirementRepository
 import javax.inject.Inject
 
 @Reusable

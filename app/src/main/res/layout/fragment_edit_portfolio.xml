@@ -10,7 +10,7 @@
 
         <variable
             name="vm"
-            type="kr.co.soogong.master.ui.profile.detail.portfoliolist.portfolio.PortfolioViewModel" />
+            type="kr.co.soogong.master.presentation.ui.profile.detail.portfoliolist.portfolio.PortfolioViewModel" />
 
     </data>
 
@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <kr.co.soogong.master.atomic.molecules.SubheadlineTextInput
+        <kr.co.soogong.master.presentation.atomic.molecules.SubheadlineTextInput
             android:id="@+id/sti_title"
             android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"
@@ -30,7 +30,7 @@
             app:max="@{150}"
             app:subheadline="@{@string/portfolio_title}" />
 
-        <kr.co.soogong.master.atomic.molecules.SubheadlineAddingImagesDeletable
+        <kr.co.soogong.master.presentation.atomic.molecules.SubheadlineAddingImagesDeletable
             android:id="@+id/said_before_repairing"
             android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"
@@ -42,7 +42,7 @@
             app:onButtonClick="@{() -> vm.startImagePickerForBefore()}"
             app:subheadline="@{@string/image_before_job}" />
 
-        <kr.co.soogong.master.atomic.molecules.SubheadlineAddingImagesDeletable
+        <kr.co.soogong.master.presentation.atomic.molecules.SubheadlineAddingImagesDeletable
             android:id="@+id/said_after_repairing"
             android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"
@@ -54,7 +54,7 @@
             app:onButtonClick="@{() -> vm.startImagePickerForAfter()}"
             app:subheadline="@{@string/image_before_job}" />
 
-        <kr.co.soogong.master.atomic.molecules.SubheadlineTextareaCounter
+        <kr.co.soogong.master.presentation.atomic.molecules.SubheadlineTextareaCounter
             android:id="@+id/stc_description"
             android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"

@@ -6,11 +6,11 @@
 
         <variable
             name="vm"
-            type="kr.co.soogong.master.ui.auth.signup.SignUpViewModel" />
+            type="kr.co.soogong.master.presentation.ui.auth.signup.SignUpViewModel" />
 
         <variable
             name="buttonThemeAddingMajors"
-            type="kr.co.soogong.master.data.global.ButtonTheme" />
+            type="kr.co.soogong.master.domain.entity.common.ButtonTheme" />
 
         <variable
             name="addingMajorsClickListener"
@@ -21,7 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <kr.co.soogong.master.atomic.molecules.SubheadlineButtonBig
+        <kr.co.soogong.master.presentation.atomic.molecules.SubheadlineButtonBig
             android:id="@+id/sbb_select_majors"
             android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"

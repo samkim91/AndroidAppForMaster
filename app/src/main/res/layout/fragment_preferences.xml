@@ -7,11 +7,11 @@
 
         <variable
             name="vm"
-            type="kr.co.soogong.master.ui.preferences.PreferencesViewModel" />
+            type="kr.co.soogong.master.presentation.ui.preferences.PreferencesViewModel" />
 
         <variable
             name="shapeThemeLabelApprovedStatus"
-            type="kr.co.soogong.master.data.global.ShapeTheme" />
+            type="kr.co.soogong.master.domain.entity.common.ShapeTheme" />
     </data>
 
     <androidx.appcompat.widget.LinearLayoutCompat
@@ -19,7 +19,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <kr.co.soogong.master.atomic.molecules.ActionBar
+        <kr.co.soogong.master.presentation.atomic.molecules.ActionBar
             android:id="@+id/ab_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -63,7 +63,7 @@
                     app:layout_constraintVertical_chainStyle="packed"
                     tools:text="마스터이름" />
 
-                <kr.co.soogong.master.atomic.atoms.LabelOutlined
+                <kr.co.soogong.master.presentation.atomic.atoms.LabelOutlined
                     android:id="@+id/lo_approved_status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -97,7 +97,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/iv_profile_image" />
 
-                <kr.co.soogong.master.atomic.molecules.IconCallOutArrow
+                <kr.co.soogong.master.presentation.atomic.molecules.IconCallOutArrow
                     android:id="@+id/ica_notice"
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="@dimen/gap_40"
@@ -109,7 +109,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/iv_divider_profile" />
 
-                <kr.co.soogong.master.atomic.molecules.IconCallOutArrow
+                <kr.co.soogong.master.presentation.atomic.molecules.IconCallOutArrow
                     android:id="@+id/ica_setting_alarm"
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="@dimen/gap_40"
@@ -121,7 +121,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/ica_notice" />
 
-                <kr.co.soogong.master.atomic.molecules.IconCallOutArrow
+                <kr.co.soogong.master.presentation.atomic.molecules.IconCallOutArrow
                     android:id="@+id/ica_logout"
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="@dimen/gap_40"
@@ -133,7 +133,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/ica_setting_alarm" />
 
-                <kr.co.soogong.master.atomic.molecules.IconCallOutArrow
+                <kr.co.soogong.master.presentation.atomic.molecules.IconCallOutArrow
                     android:id="@+id/ica_app_version"
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="@dimen/gap_40"
@@ -146,7 +146,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/ica_logout" />
 
-                <kr.co.soogong.master.atomic.molecules.IconCallOutArrow
+                <kr.co.soogong.master.presentation.atomic.molecules.IconCallOutArrow
                     android:id="@+id/isa_customer_service"
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="@dimen/gap_40"

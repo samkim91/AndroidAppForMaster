@@ -9,14 +9,14 @@
 
         <variable
             name="vm"
-            type="kr.co.soogong.master.ui.profile.detail.email.EditEmailViewModel" />
+            type="kr.co.soogong.master.presentation.ui.profile.detail.email.EditEmailViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <kr.co.soogong.master.atomic.molecules.SubheadlineEmailForm
+        <kr.co.soogong.master.presentation.atomic.molecules.SubheadlineEmailForm
             android:id="@+id/sef_email"
             android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"

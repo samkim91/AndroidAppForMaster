@@ -2,8 +2,8 @@ package kr.co.soogong.master.domain.usecase.auth
 
 import dagger.Reusable
 import io.reactivex.Single
-import kr.co.soogong.master.data.dto.auth.VersionDto
-import kr.co.soogong.master.network.auth.AuthService
+import kr.co.soogong.master.data.entity.auth.VersionDto
+import kr.co.soogong.master.data.network.auth.AuthService
 import javax.inject.Inject
 
 @Reusable

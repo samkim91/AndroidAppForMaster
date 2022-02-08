@@ -8,7 +8,7 @@
 
         <variable
             name="data"
-            type="kr.co.soogong.master.data.model.mypage.Notice" />
+            type="kr.co.soogong.master.domain.entity.preferences.Notice" />
 
         <variable
             name="onItemClick"

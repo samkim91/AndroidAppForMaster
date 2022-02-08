@@ -2,14 +2,14 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.auth.signup.steps.AgreementDetailActivity">
+    tools:context=".presentation.ui.auth.signup.steps.AgreementDetailActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <kr.co.soogong.master.atomic.molecules.ActionBar
+        <kr.co.soogong.master.presentation.atomic.molecules.ActionBar
             android:id="@+id/ab_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

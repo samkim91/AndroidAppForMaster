@@ -2,9 +2,9 @@ package kr.co.soogong.master.domain.usecase.profile
 
 import dagger.Reusable
 import io.reactivex.Single
-import kr.co.soogong.master.data.dao.profile.MasterDao
-import kr.co.soogong.master.data.dto.profile.MasterDto
-import kr.co.soogong.master.network.profile.ProfileService
+import kr.co.soogong.master.data.local.profile.MasterDao
+import kr.co.soogong.master.data.entity.profile.MasterDto
+import kr.co.soogong.master.data.network.profile.ProfileService
 import javax.inject.Inject
 
 @Reusable

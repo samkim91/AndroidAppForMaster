@@ -8,14 +8,14 @@
 
         <variable
             name="vm"
-            type="kr.co.soogong.master.ui.requirement.action.end.EndRepairViewModel" />
+            type="kr.co.soogong.master.presentation.ui.requirement.action.end.EndRepairViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <kr.co.soogong.master.atomic.molecules.ActionBar
+        <kr.co.soogong.master.presentation.atomic.molecules.ActionBar
             android:id="@+id/ab_header"
             android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"
@@ -41,7 +41,7 @@
                 android:paddingTop="@dimen/gap_16"
                 android:paddingBottom="@dimen/gap_16">
 
-                <kr.co.soogong.master.atomic.molecules.SubheadlineTextInput
+                <kr.co.soogong.master.presentation.atomic.molecules.SubheadlineTextInput
                     android:id="@+id/sti_actual_price"
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"

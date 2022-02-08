@@ -10,11 +10,11 @@
 
         <import type="android.text.InputType" />
 
-        <import type="kr.co.soogong.master.data.global.ButtonTheme" />
+        <import type="kr.co.soogong.master.domain.entity.common.ButtonTheme" />
 
         <variable
             name="vm"
-            type="kr.co.soogong.master.ui.profile.detail.businessunitinformation.EditBusinessUnitInformationViewModel" />
+            type="kr.co.soogong.master.presentation.ui.profile.detail.businessunitinformation.EditBusinessUnitInformationViewModel" />
 
         <variable
             name="buttonThemeGettingImages"
@@ -30,7 +30,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <kr.co.soogong.master.atomic.molecules.SubheadlineChipGroup
+        <kr.co.soogong.master.presentation.atomic.molecules.SubheadlineChipGroup
             android:id="@+id/scg_business_type"
             android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"
@@ -42,7 +42,7 @@
             app:singleChip="@{true}"
             app:subheadline="@{@string/select_business_type}" />
 
-        <kr.co.soogong.master.atomic.molecules.SubheadlineTextInput
+        <kr.co.soogong.master.presentation.atomic.molecules.SubheadlineTextInput
             android:id="@+id/sti_business_name"
             android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"
@@ -55,7 +55,7 @@
             app:maxCount="@{30}"
             app:subheadline="@{@string/type_business_name}" />
 
-        <kr.co.soogong.master.atomic.molecules.SubheadlineTextInput
+        <kr.co.soogong.master.presentation.atomic.molecules.SubheadlineTextInput
             android:id="@+id/sti_shop_name"
             android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"
@@ -67,7 +67,7 @@
             app:layout_constraintTop_toBottomOf="@id/sti_business_name"
             app:subheadline="@{@string/type_shop_name}" />
 
-        <kr.co.soogong.master.atomic.molecules.SubheadlineTextInput
+        <kr.co.soogong.master.presentation.atomic.molecules.SubheadlineTextInput
             android:id="@+id/sti_business_number"
             android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"
@@ -80,7 +80,7 @@
             app:layout_constraintTop_toBottomOf="@id/sti_shop_name"
             app:subheadline="@{@string/type_business_number}" />
 
-        <kr.co.soogong.master.atomic.molecules.SubheadlineButtonBig
+        <kr.co.soogong.master.presentation.atomic.molecules.SubheadlineButtonBig
             android:id="@+id/sbb_getting_images"
             android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"
@@ -93,7 +93,7 @@
             app:onButtonClick="@{gettingImagesClickListener}"
             app:subheadline="@{@string/upload_business_regist_image}" />
 
-        <kr.co.soogong.master.atomic.molecules.SubheadlineImagesDeletable
+        <kr.co.soogong.master.presentation.atomic.molecules.SubheadlineImagesDeletable
             android:id="@+id/sid_registered_images"
             android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"

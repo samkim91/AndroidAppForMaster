@@ -7,7 +7,7 @@
 
         <variable
             name="vm"
-            type="kr.co.soogong.master.ui.auth.signup.SignUpViewModel" />
+            type="kr.co.soogong.master.presentation.ui.auth.signup.SignUpViewModel" />
 
     </data>
 

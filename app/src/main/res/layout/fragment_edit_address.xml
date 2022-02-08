@@ -7,7 +7,7 @@
 
         <variable
             name="vm"
-            type="kr.co.soogong.master.ui.profile.detail.address.EditAddressViewModel" />
+            type="kr.co.soogong.master.presentation.ui.profile.detail.address.EditAddressViewModel" />
 
         <import type="com.google.android.material.textfield.TextInputLayout" />
     </data>
@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <kr.co.soogong.master.atomic.molecules.SubheadlineTextInput
+        <kr.co.soogong.master.presentation.atomic.molecules.SubheadlineTextInput
             android:id="@+id/sti_road_address"
             android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"
@@ -38,7 +38,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <kr.co.soogong.master.atomic.atoms.TextInput
+        <kr.co.soogong.master.presentation.atomic.atoms.TextInput
             android:id="@+id/ti_detail_address"
             android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"

@@ -10,18 +10,18 @@
 
         <variable
             name="authPhoneNumberButtonTheme"
-            type="kr.co.soogong.master.data.global.ButtonTheme" />
+            type="kr.co.soogong.master.domain.entity.common.ButtonTheme" />
 
         <variable
             name="vm"
-            type="kr.co.soogong.master.ui.profile.detail.phonenumber.EditPhoneNumberViewModel" />
+            type="kr.co.soogong.master.presentation.ui.profile.detail.phonenumber.EditPhoneNumberViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <kr.co.soogong.master.atomic.organisms.SubheadlineTextInputButtonMediumTextInputTimer
+        <kr.co.soogong.master.presentation.atomic.organisms.SubheadlineTextInputButtonMediumTextInputTimer
             android:id="@+id/stibmtit_auth_phone_number"
             android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"

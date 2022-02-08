@@ -7,7 +7,7 @@
 
         <variable
             name="data"
-            type="kr.co.soogong.master.data.dto.profile.PortfolioDto" />
+            type="kr.co.soogong.master.data.entity.profile.PortfolioDto" />
 
         <variable
             name="onLeftButtonClick"
@@ -15,11 +15,11 @@
 
         <variable
             name="buttonThemeLeft"
-            type="kr.co.soogong.master.data.global.ButtonTheme" />
+            type="kr.co.soogong.master.domain.entity.common.ButtonTheme" />
 
         <variable
             name="buttonThemeRight"
-            type="kr.co.soogong.master.data.global.ButtonTheme" />
+            type="kr.co.soogong.master.domain.entity.common.ButtonTheme" />
 
         <variable
             name="onRightButtonClick"
@@ -88,7 +88,7 @@
                 app:layout_constraintTop_toBottomOf="@id/tv_price"
                 tools:text="내용입력내용입력내용입력내용입력내용입력내용입력내용입력내용입력내용입력내용입력" />
 
-            <kr.co.soogong.master.atomic.atoms.ButtonMedium
+            <kr.co.soogong.master.presentation.atomic.atoms.ButtonMedium
                 android:id="@+id/bm_left_button"
                 android:layout_width="@dimen/gap_0"
                 android:layout_height="wrap_content"
@@ -99,7 +99,7 @@
                 app:layout_constraintTop_toBottomOf="@id/tv_description"
                 app:onButtonClick="@{onLeftButtonClick}" />
 
-            <kr.co.soogong.master.atomic.atoms.ButtonMedium
+            <kr.co.soogong.master.presentation.atomic.atoms.ButtonMedium
                 android:id="@+id/bm_right_button"
                 android:layout_width="@dimen/gap_0"
                 android:layout_height="wrap_content"

@@ -7,11 +7,11 @@
 
         <variable
             name="vm"
-            type="kr.co.soogong.master.ui.auth.signup.SignUpViewModel" />
+            type="kr.co.soogong.master.presentation.ui.auth.signup.SignUpViewModel" />
 
         <variable
             name="colorThemeProfileGuideline"
-            type="kr.co.soogong.master.data.global.ColorTheme" />
+            type="kr.co.soogong.master.domain.entity.common.ColorTheme" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -55,7 +55,7 @@
             app:layout_constraintTop_toBottomOf="@id/cb_repair_in_person"
             tools:visibility="gone" />
 
-        <kr.co.soogong.master.atomic.molecules.BoxIconContent
+        <kr.co.soogong.master.presentation.atomic.molecules.BoxIconContent
             android:id="@+id/bic_notice"
             android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"

@@ -5,9 +5,9 @@ import android.net.Uri
 import dagger.Reusable
 import dagger.hilt.android.qualifiers.ApplicationContext
 import io.reactivex.Single
-import kr.co.soogong.master.data.dao.profile.MasterDao
-import kr.co.soogong.master.data.dto.profile.MasterDto
-import kr.co.soogong.master.network.profile.ProfileService
+import kr.co.soogong.master.data.local.profile.MasterDao
+import kr.co.soogong.master.data.entity.profile.MasterDto
+import kr.co.soogong.master.data.network.profile.ProfileService
 import kr.co.soogong.master.utility.MultipartGenerator
 import javax.inject.Inject
 

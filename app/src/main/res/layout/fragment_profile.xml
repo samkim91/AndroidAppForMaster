@@ -6,27 +6,27 @@
 
     <data>
 
-        <import type="kr.co.soogong.master.data.global.CodeTable" />
+        <import type="kr.co.soogong.master.domain.entity.common.CodeTable" />
 
         <variable
             name="buttonThemeRequestReview"
-            type="kr.co.soogong.master.data.global.ButtonTheme" />
+            type="kr.co.soogong.master.domain.entity.common.ButtonTheme" />
 
         <variable
             name="colorThemeProfileGuideline"
-            type="kr.co.soogong.master.data.global.ColorTheme" />
+            type="kr.co.soogong.master.domain.entity.common.ColorTheme" />
 
         <variable
             name="colorThemeRequiredInformationProgress"
-            type="kr.co.soogong.master.data.global.ColorTheme" />
+            type="kr.co.soogong.master.domain.entity.common.ColorTheme" />
 
         <variable
             name="colorThemeOptionalInformationProgress"
-            type="kr.co.soogong.master.data.global.ColorTheme" />
+            type="kr.co.soogong.master.domain.entity.common.ColorTheme" />
 
         <variable
             name="vm"
-            type="kr.co.soogong.master.ui.profile.ProfileViewModel" />
+            type="kr.co.soogong.master.presentation.ui.profile.ProfileViewModel" />
     </data>
 
     <androidx.appcompat.widget.LinearLayoutCompat
@@ -34,7 +34,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <kr.co.soogong.master.atomic.molecules.ActionBar
+        <kr.co.soogong.master.presentation.atomic.molecules.ActionBar
             android:id="@+id/ab_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -109,7 +109,7 @@
                     app:layout_constraintTop_toBottomOf="@id/tv_subscription_plan"
                     tools:text="마그컹컹컹" />
 
-                <kr.co.soogong.master.atomic.organisms.ReviewBox
+                <kr.co.soogong.master.presentation.atomic.organisms.ReviewBox
                     android:id="@+id/rb_my_reviews"
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"
@@ -121,7 +121,7 @@
                     app:recommendation="@{vm.profile.reviewSummary.averageRecommendation}"
                     app:reviewCount="@{vm.profile.reviewSummary.reviewCount}" />
 
-                <kr.co.soogong.master.atomic.atoms.ButtonBig
+                <kr.co.soogong.master.presentation.atomic.atoms.ButtonBig
                     android:id="@+id/bb_request_review"
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"
@@ -142,7 +142,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/bb_request_review" />
 
-                <kr.co.soogong.master.atomic.molecules.BoxIconContent
+                <kr.co.soogong.master.presentation.atomic.molecules.BoxIconContent
                     android:id="@+id/bic_profile_guideline"
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"
@@ -155,7 +155,7 @@
                     app:layout_constraintTop_toBottomOf="@id/line" />
 
                 <!-- 필수 정보 -->
-                <kr.co.soogong.master.atomic.molecules.SubheadlineProgressIndicator
+                <kr.co.soogong.master.presentation.atomic.molecules.SubheadlineProgressIndicator
                     android:id="@+id/spi_required_information"
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"
@@ -168,7 +168,7 @@
                     app:percent="@{vm.percentageRequired}"
                     app:title="@{@string/completion_of_required_information}" />
 
-                <kr.co.soogong.master.atomic.molecules.BoxContentCancellable
+                <kr.co.soogong.master.presentation.atomic.molecules.BoxContentCancellable
                     android:id="@+id/bcc_required_information"
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"
@@ -181,7 +181,7 @@
                     tools:visibility="visible" />
 
                 <!-- 대표자명 -->
-                <kr.co.soogong.master.atomic.molecules.HeadlineButtonContent
+                <kr.co.soogong.master.presentation.atomic.molecules.HeadlineButtonContent
                     android:id="@+id/hbc_owner_name"
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"
@@ -193,7 +193,7 @@
                     app:title="@{@string/owner_name}" />
 
                 <!-- 업체 소개 -->
-                <kr.co.soogong.master.atomic.molecules.HeadlineButtonContent
+                <kr.co.soogong.master.presentation.atomic.molecules.HeadlineButtonContent
                     android:id="@+id/hbc_company_introduction"
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"
@@ -205,7 +205,7 @@
                     app:title="@{@string/company_introduction}" />
 
                 <!-- 대표 이미지 -->
-                <kr.co.soogong.master.atomic.molecules.HeadlineImagesEditable
+                <kr.co.soogong.master.presentation.atomic.molecules.HeadlineImagesEditable
                     android:id="@+id/hie_shop_images"
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"
@@ -217,7 +217,7 @@
                     app:title="@{@string/shop_images}" />
 
                 <!-- 사업자 정보 -->
-                <kr.co.soogong.master.atomic.molecules.HeadlineButtonContent
+                <kr.co.soogong.master.presentation.atomic.molecules.HeadlineButtonContent
                     android:id="@+id/hbc_business_unit_information"
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"
@@ -229,7 +229,7 @@
                     app:title="@{@string/business_unit_information}" />
 
                 <!-- A/S 정보 -->
-                <kr.co.soogong.master.atomic.molecules.HeadlineButtonContent
+                <kr.co.soogong.master.presentation.atomic.molecules.HeadlineButtonContent
                     android:id="@+id/hbc_warranty_information"
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"
@@ -241,7 +241,7 @@
                     app:warrantyInformation="@{vm.profile.requiredInformation.warrantyInformation}" />
 
                 <!-- 휴대폰(연락처) 정보 -->
-                <kr.co.soogong.master.atomic.molecules.HeadlineButtonContent
+                <kr.co.soogong.master.presentation.atomic.molecules.HeadlineButtonContent
                     android:id="@+id/hbc_contact_information"
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"
@@ -253,7 +253,7 @@
                     app:title="@{@string/contact_information}" />
 
                 <!-- 경력 -->
-                <kr.co.soogong.master.atomic.molecules.HeadlineButtonContent
+                <kr.co.soogong.master.presentation.atomic.molecules.HeadlineButtonContent
                     android:id="@+id/hbc_career"
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"
@@ -265,7 +265,7 @@
                     app:title="@{@string/career}" />
 
                 <!-- 시공 가능 업종 -->
-                <kr.co.soogong.master.atomic.molecules.HeadlineButtonChipGroup
+                <kr.co.soogong.master.presentation.atomic.molecules.HeadlineButtonChipGroup
                     android:id="@+id/hbcg_projects"
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"
@@ -277,7 +277,7 @@
                     app:title="@{@string/projects}" />
 
                 <!-- 활동 지역 -->
-                <kr.co.soogong.master.atomic.molecules.HeadlineButtonContent
+                <kr.co.soogong.master.presentation.atomic.molecules.HeadlineButtonContent
                     android:id="@+id/hbc_service_address"
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"
@@ -289,7 +289,7 @@
                     app:title="@{@string/service_address}" />
 
                 <!-- 서비스 가능 범위 -->
-                <kr.co.soogong.master.atomic.molecules.HeadlineButtonMap
+                <kr.co.soogong.master.presentation.atomic.molecules.HeadlineButtonMap
                     android:id="@+id/hbm_service_area"
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"
@@ -301,7 +301,7 @@
                     app:title="@{@string/service_area}" />
 
                 <!-- 선택 정보 -->
-                <kr.co.soogong.master.atomic.molecules.SubheadlineProgressIndicator
+                <kr.co.soogong.master.presentation.atomic.molecules.SubheadlineProgressIndicator
                     android:id="@+id/spi_optional_information"
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"
@@ -314,7 +314,7 @@
                     app:percent="@{vm.percentageBasic}"
                     app:title="@{@string/completion_of_optional_information}" />
 
-                <kr.co.soogong.master.atomic.molecules.BoxContentCancellable
+                <kr.co.soogong.master.presentation.atomic.molecules.BoxContentCancellable
                     android:id="@+id/bcc_optional_information"
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"
@@ -328,7 +328,7 @@
                     tools:visibility="visible" />
 
                 <!-- 무료 방문 실측 여부 -->
-                <kr.co.soogong.master.atomic.molecules.HeadlineButtonContent
+                <kr.co.soogong.master.presentation.atomic.molecules.HeadlineButtonContent
                     android:id="@+id/hbc_free_measure"
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"
@@ -340,7 +340,7 @@
                     app:title="@{@string/free_measure}" />
 
                 <!-- 포트폴리오 -->
-                <kr.co.soogong.master.atomic.molecules.HeadlineButtonContent
+                <kr.co.soogong.master.presentation.atomic.molecules.HeadlineButtonContent
                     android:id="@+id/hbc_portfolio"
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"
@@ -353,7 +353,7 @@
                     app:title="@{@string/portfolio}" />
 
                 <!-- 시공 종류별 가격 -->
-                <kr.co.soogong.master.atomic.molecules.HeadlineButtonContent
+                <kr.co.soogong.master.presentation.atomic.molecules.HeadlineButtonContent
                     android:id="@+id/hbc_price_by_project"
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"
@@ -366,7 +366,7 @@
                     app:title="@{@string/price_by_project}" />
 
                 <!-- 기타 변동 요인 -->
-                <kr.co.soogong.master.atomic.molecules.HeadlineButtonChipGroup
+                <kr.co.soogong.master.presentation.atomic.molecules.HeadlineButtonChipGroup
                     android:id="@+id/hbc_master_configs"
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"
@@ -378,7 +378,7 @@
                     app:masterConfigsToChips="@{vm.profile.basicInformation.masterConfigs}"
                     app:title="@{@string/master_configs}" />
 
-                <kr.co.soogong.master.atomic.molecules.HeadlineButtonContent
+                <kr.co.soogong.master.presentation.atomic.molecules.HeadlineButtonContent
                     android:id="@+id/hbc_email_address"
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"

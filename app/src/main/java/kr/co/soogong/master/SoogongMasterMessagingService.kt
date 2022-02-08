@@ -12,8 +12,8 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
-import kr.co.soogong.master.uihelper.main.MainActivityHelper
-import kr.co.soogong.master.uihelper.requirment.action.ViewRequirementActivityHelper
+import kr.co.soogong.master.presentation.uihelper.main.MainActivityHelper
+import kr.co.soogong.master.presentation.uihelper.requirment.action.ViewRequirementActivityHelper
 import timber.log.Timber
 import kotlin.random.Random
 

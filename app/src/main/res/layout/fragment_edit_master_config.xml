@@ -7,14 +7,14 @@
 
         <variable
             name="vm"
-            type="kr.co.soogong.master.ui.profile.detail.masterconfig.EditMasterConfigViewModel" />
+            type="kr.co.soogong.master.presentation.ui.profile.detail.masterconfig.EditMasterConfigViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <kr.co.soogong.master.atomic.molecules.SubheadlineChipGroup
+        <kr.co.soogong.master.presentation.atomic.molecules.SubheadlineChipGroup
             android:id="@+id/scg_travel_cost"
             android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"
@@ -26,7 +26,7 @@
             app:singleChip="@{true}"
             app:subheadline="@{@string/travel_cost}" />
 
-        <kr.co.soogong.master.atomic.molecules.SubheadlineChipGroup
+        <kr.co.soogong.master.presentation.atomic.molecules.SubheadlineChipGroup
             android:id="@+id/scg_crane_usage"
             android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"
@@ -39,7 +39,7 @@
             app:singleChip="@{true}"
             app:subheadline="@{@string/crane_usage}" />
 
-        <kr.co.soogong.master.atomic.molecules.SubheadlineChipGroup
+        <kr.co.soogong.master.presentation.atomic.molecules.SubheadlineChipGroup
             android:id="@+id/scg_package_cost"
             android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"
@@ -52,7 +52,7 @@
             app:singleChip="@{true}"
             app:subheadline="@{@string/package_cost}" />
 
-        <kr.co.soogong.master.atomic.molecules.SubheadlineTextareaCounter
+        <kr.co.soogong.master.presentation.atomic.molecules.SubheadlineTextareaCounter
             android:id="@+id/stc_other_cost_info"
             android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"
@@ -65,7 +65,7 @@
             app:maxCount="@{500}"
             app:subheadline="@{@string/other_cost_info}" />
 
-        <kr.co.soogong.master.atomic.molecules.SubheadlineChipGroup
+        <kr.co.soogong.master.presentation.atomic.molecules.SubheadlineChipGroup
             android:id="@+id/scg_other_options"
             android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"
