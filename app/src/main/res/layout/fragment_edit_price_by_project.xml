@@ -7,7 +7,7 @@
 
         <variable
             name="vm"
-            type="kr.co.soogong.master.ui.profile.detail.portfoliolist.pricebyproject.PriceByProjectViewModel" />
+            type="kr.co.soogong.master.presentation.ui.profile.detail.portfoliolist.pricebyproject.PriceByProjectViewModel" />
 
         <variable
             name="inputType"
@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <kr.co.soogong.master.atomic.molecules.SubheadlineTextInput
+        <kr.co.soogong.master.presentation.atomic.molecules.SubheadlineTextInput
             android:id="@+id/sti_title"
             android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"
@@ -30,7 +30,7 @@
             app:max="@{150}"
             app:subheadline="@{@string/price_by_project_title}" />
 
-        <kr.co.soogong.master.atomic.molecules.SubheadlineTextInput
+        <kr.co.soogong.master.presentation.atomic.molecules.SubheadlineTextInput
             android:id="@+id/sti_price"
             android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"
@@ -45,7 +45,7 @@
             app:max="@{10}"
             app:subheadline="@{@string/price_by_project_price}" />
 
-        <kr.co.soogong.master.atomic.molecules.SubheadlineTextareaCounter
+        <kr.co.soogong.master.presentation.atomic.molecules.SubheadlineTextareaCounter
             android:id="@+id/stc_description"
             android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"

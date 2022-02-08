@@ -6,15 +6,15 @@
 
         <variable
             name="vm"
-            type="kr.co.soogong.master.ui.preferences.detail.customerservice.CustomerServiceViewModel" />
+            type="kr.co.soogong.master.presentation.ui.preferences.detail.customerservice.CustomerServiceViewModel" />
 
         <variable
             name="buttonThemeCall"
-            type="kr.co.soogong.master.data.global.ButtonTheme" />
+            type="kr.co.soogong.master.domain.entity.common.ButtonTheme" />
 
         <variable
             name="buttonThemeKakao"
-            type="kr.co.soogong.master.data.global.ButtonTheme" />
+            type="kr.co.soogong.master.domain.entity.common.ButtonTheme" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -60,7 +60,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_time_on" />
 
-        <kr.co.soogong.master.atomic.atoms.ButtonBig
+        <kr.co.soogong.master.presentation.atomic.atoms.ButtonBig
             android:id="@+id/bb_via_phone"
             android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"
@@ -72,7 +72,7 @@
             app:layout_constraintTop_toBottomOf="@id/tv_time_off"
             app:onButtonClick="@{() -> vm.contactViaCall()}" />
 
-        <kr.co.soogong.master.atomic.atoms.ButtonBig
+        <kr.co.soogong.master.presentation.atomic.atoms.ButtonBig
             android:id="@+id/bb_via_kakao_talk"
             android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"

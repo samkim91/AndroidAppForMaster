@@ -7,7 +7,7 @@
 
         <variable
             name="data"
-            type="kr.co.soogong.master.data.model.requirement.RequirementCard" />
+            type="kr.co.soogong.master.domain.entity.requirement.RequirementCard" />
 
         <variable
             name="left_button_click_listener"
@@ -57,7 +57,7 @@
                 app:layout_constraintTop_toBottomOf="@id/tv_requirement_token"
                 tools:text="2021. 11. 3" />
 
-            <kr.co.soogong.master.atomic.atoms.LabelFilled
+            <kr.co.soogong.master.presentation.atomic.atoms.LabelFilled
                 android:id="@+id/lf_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

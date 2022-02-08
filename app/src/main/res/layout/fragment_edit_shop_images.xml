@@ -7,11 +7,11 @@
 
         <variable
             name="vm"
-            type="kr.co.soogong.master.ui.profile.detail.shopimages.EditShopImagesViewModel" />
+            type="kr.co.soogong.master.presentation.ui.profile.detail.shopimages.EditShopImagesViewModel" />
 
         <variable
             name="buttonThemeGettingImages"
-            type="kr.co.soogong.master.data.global.ButtonTheme" />
+            type="kr.co.soogong.master.domain.entity.common.ButtonTheme" />
 
         <variable
             name="gettingImagesClickListener"
@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <kr.co.soogong.master.atomic.molecules.SubheadlineButtonBig
+        <kr.co.soogong.master.presentation.atomic.molecules.SubheadlineButtonBig
             android:id="@+id/sbb_getting_images"
             android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"
@@ -35,7 +35,7 @@
             app:onButtonClick="@{gettingImagesClickListener}"
             app:subheadline="@{@string/register_shop_images}" />
 
-        <kr.co.soogong.master.atomic.molecules.SubheadlineImagesDeletable
+        <kr.co.soogong.master.presentation.atomic.molecules.SubheadlineImagesDeletable
             android:id="@+id/sid_registered_images"
             android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"

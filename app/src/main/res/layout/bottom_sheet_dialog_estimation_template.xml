@@ -64,7 +64,7 @@
             app:barrierMargin="@dimen/gap_16"
             app:constraint_referenced_ids="iv_close_button, iv_confirm_button" />
 
-        <kr.co.soogong.master.atomic.molecules.SubheadlineTextareaCounter
+        <kr.co.soogong.master.presentation.atomic.molecules.SubheadlineTextareaCounter
             android:id="@+id/stc_description"
             android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"

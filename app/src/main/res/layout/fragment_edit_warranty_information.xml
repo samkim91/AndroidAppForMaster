@@ -10,14 +10,14 @@
 
         <variable
             name="vm"
-            type="kr.co.soogong.master.ui.profile.detail.warranty.EditWarrantyInformationViewModel" />
+            type="kr.co.soogong.master.presentation.ui.profile.detail.warranty.EditWarrantyInformationViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <kr.co.soogong.master.atomic.molecules.SubheadlineDropdownMenu
+        <kr.co.soogong.master.presentation.atomic.molecules.SubheadlineDropdownMenu
             android:id="@+id/sdm_warranty_period"
             android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"
@@ -28,7 +28,7 @@
             app:selectedItem="@{vm.selectedPeriod}"
             app:subheadline="@{@string/select_warranty_period}" />
 
-        <kr.co.soogong.master.atomic.molecules.SubheadlineTextareaCounter
+        <kr.co.soogong.master.presentation.atomic.molecules.SubheadlineTextareaCounter
             android:id="@+id/stc_warranty_information"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -34,7 +34,7 @@
             tools:text="footnote: ex) 고객님에게 신뢰감을 줄 만한 사진을 등록해 주세요."
             tools:visibility="visible" />
 
-        <kr.co.soogong.master.atomic.atoms.ButtonBig
+        <kr.co.soogong.master.presentation.atomic.atoms.ButtonBig
             android:id="@+id/bb_button"
             android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"

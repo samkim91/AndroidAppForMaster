@@ -7,14 +7,14 @@
 
         <variable
             name="vm"
-            type="kr.co.soogong.master.ui.requirement.action.view.ViewRequirementViewModel" />
+            type="kr.co.soogong.master.presentation.ui.requirement.action.view.ViewRequirementViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <kr.co.soogong.master.atomic.molecules.ActionBar
+        <kr.co.soogong.master.presentation.atomic.molecules.ActionBar
             android:id="@+id/ab_header"
             android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"
@@ -39,7 +39,7 @@
                 android:orientation="vertical"
                 android:padding="@dimen/gap_16">
 
-                <kr.co.soogong.master.atomic.organisms.RequirementBasic
+                <kr.co.soogong.master.presentation.atomic.organisms.RequirementBasic
                     android:id="@+id/requirement_basic"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

@@ -7,10 +7,10 @@
 
         <variable
             name="vm"
-            type="kr.co.soogong.master.ui.profile.detail.introduction.EditIntroductionViewModel" />
+            type="kr.co.soogong.master.presentation.ui.profile.detail.introduction.EditIntroductionViewModel" />
     </data>
 
-    <kr.co.soogong.master.atomic.molecules.SubheadlineTextareaCounter
+    <kr.co.soogong.master.presentation.atomic.molecules.SubheadlineTextareaCounter
         android:id="@+id/stc_introduction"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -4,8 +4,8 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import dagger.Reusable
 import io.reactivex.Single
-import kr.co.soogong.master.data.dto.profile.MasterDto
-import kr.co.soogong.master.network.profile.ProfileService
+import kr.co.soogong.master.data.entity.profile.MasterDto
+import kr.co.soogong.master.data.network.profile.ProfileService
 import javax.inject.Inject
 
 @Reusable

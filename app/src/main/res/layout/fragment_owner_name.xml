@@ -6,7 +6,7 @@
 
         <variable
             name="vm"
-            type="kr.co.soogong.master.ui.auth.signup.SignUpViewModel" />
+            type="kr.co.soogong.master.presentation.ui.auth.signup.SignUpViewModel" />
 
     </data>
 
@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <kr.co.soogong.master.atomic.molecules.SubheadlineTextInput
+        <kr.co.soogong.master.presentation.atomic.molecules.SubheadlineTextInput
             android:id="@+id/sti_owner_name"
             android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"

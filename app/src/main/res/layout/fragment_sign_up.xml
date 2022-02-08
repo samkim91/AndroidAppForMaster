@@ -6,14 +6,14 @@
 
         <variable
             name="vm"
-            type="kr.co.soogong.master.ui.auth.signup.SignUpViewModel" />
+            type="kr.co.soogong.master.presentation.ui.auth.signup.SignUpViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <kr.co.soogong.master.atomic.molecules.ActionBarProgress
+        <kr.co.soogong.master.presentation.atomic.molecules.ActionBarProgress
             android:id="@+id/abp_header"
             android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"

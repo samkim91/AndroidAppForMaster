@@ -7,11 +7,11 @@
 
         <variable
             name="vm"
-            type="kr.co.soogong.master.ui.common.project.ProjectViewModel" />
+            type="kr.co.soogong.master.presentation.ui.common.project.ProjectViewModel" />
 
         <variable
             name="buttonThemeSelectingDone"
-            type="kr.co.soogong.master.data.global.ButtonTheme" />
+            type="kr.co.soogong.master.domain.entity.common.ButtonTheme" />
 
         <variable
             name="selectingDoneClickListener"
@@ -38,7 +38,7 @@
             app:setTopSpace="@{10}"
             tools:listitem="@layout/view_holder_project" />
 
-        <kr.co.soogong.master.atomic.atoms.ButtonBig
+        <kr.co.soogong.master.presentation.atomic.atoms.ButtonBig
             android:id="@+id/bb_selecting_done"
             android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"

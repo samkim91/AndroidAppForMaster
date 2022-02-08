@@ -6,7 +6,7 @@
 
         <variable
             name="vm"
-            type="kr.co.soogong.master.ui.auth.AuthContainerViewModel" />
+            type="kr.co.soogong.master.presentation.ui.auth.AuthContainerViewModel" />
 
     </data>
 

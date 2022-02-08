@@ -49,7 +49,5 @@ class ListLiveData<T> : MutableLiveData<MutableList<T>>() {
         return value?.count() ?: 0
     }
 
-    companion object {
-
-    }
+    companion object
 }

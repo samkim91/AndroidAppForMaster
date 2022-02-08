@@ -7,7 +7,7 @@
 
         <variable
             name="buttonThemeAddingMajors"
-            type="kr.co.soogong.master.data.global.ButtonTheme" />
+            type="kr.co.soogong.master.domain.entity.common.ButtonTheme" />
 
         <variable
             name="addingMajorsClickListener"
@@ -15,14 +15,14 @@
 
         <variable
             name="vm"
-            type="kr.co.soogong.master.ui.profile.detail.major.EditMajorViewModel" />
+            type="kr.co.soogong.master.presentation.ui.profile.detail.major.EditMajorViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <kr.co.soogong.master.atomic.molecules.SubheadlineButtonBig
+        <kr.co.soogong.master.presentation.atomic.molecules.SubheadlineButtonBig
             android:id="@+id/sbb_select_majors"
             android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"

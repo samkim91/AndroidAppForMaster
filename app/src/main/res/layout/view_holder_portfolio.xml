@@ -8,7 +8,7 @@
 
         <variable
             name="data"
-            type="kr.co.soogong.master.data.dto.profile.PortfolioDto" />
+            type="kr.co.soogong.master.data.entity.profile.PortfolioDto" />
 
         <variable
             name="onLeftButtonClick"
@@ -16,11 +16,11 @@
 
         <variable
             name="buttonThemeLeft"
-            type="kr.co.soogong.master.data.global.ButtonTheme" />
+            type="kr.co.soogong.master.domain.entity.common.ButtonTheme" />
 
         <variable
             name="buttonThemeRight"
-            type="kr.co.soogong.master.data.global.ButtonTheme" />
+            type="kr.co.soogong.master.domain.entity.common.ButtonTheme" />
 
         <variable
             name="onRightButtonClick"
@@ -93,7 +93,7 @@
                     tools:background="@drawable/ic_empty_image" />
             </androidx.cardview.widget.CardView>
 
-            <kr.co.soogong.master.atomic.atoms.ButtonMedium
+            <kr.co.soogong.master.presentation.atomic.atoms.ButtonMedium
                 android:id="@+id/bm_left_button"
                 android:layout_width="@dimen/gap_0"
                 android:layout_height="wrap_content"
@@ -104,7 +104,7 @@
                 app:layout_constraintTop_toBottomOf="@id/cv_before_image"
                 app:onButtonClick="@{onLeftButtonClick}" />
 
-            <kr.co.soogong.master.atomic.atoms.ButtonMedium
+            <kr.co.soogong.master.presentation.atomic.atoms.ButtonMedium
                 android:id="@+id/bm_right_button"
                 android:layout_width="@dimen/gap_0"
                 android:layout_height="wrap_content"

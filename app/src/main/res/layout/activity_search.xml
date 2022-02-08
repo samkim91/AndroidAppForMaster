@@ -10,14 +10,14 @@
 
         <variable
             name="vm"
-            type="kr.co.soogong.master.ui.requirement.list.search.SearchViewModel" />
+            type="kr.co.soogong.master.presentation.ui.requirement.list.search.SearchViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <kr.co.soogong.master.atomic.molecules.SearchBar
+        <kr.co.soogong.master.presentation.atomic.molecules.SearchBar
             android:id="@+id/sb_search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

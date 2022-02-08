@@ -10,18 +10,18 @@
 
         <variable
             name="colorThemeEstimationTemplate"
-            type="kr.co.soogong.master.data.global.ColorTheme" />
+            type="kr.co.soogong.master.domain.entity.common.ColorTheme" />
 
         <variable
             name="vm"
-            type="kr.co.soogong.master.ui.requirement.action.write.WriteEstimationViewModel" />
+            type="kr.co.soogong.master.presentation.ui.requirement.action.write.WriteEstimationViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <kr.co.soogong.master.atomic.molecules.ActionBar
+        <kr.co.soogong.master.presentation.atomic.molecules.ActionBar
             android:id="@+id/ab_header"
             android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"
@@ -46,7 +46,7 @@
                 android:orientation="vertical"
                 android:padding="@dimen/gap_16">
 
-                <kr.co.soogong.master.atomic.molecules.IconCallOutArrow
+                <kr.co.soogong.master.presentation.atomic.molecules.IconCallOutArrow
                     android:id="@+id/isa_open_requirement"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -62,7 +62,7 @@
                     android:layout_marginTop="@dimen/gap_16"
                     android:background="@color/light_grey_1" />
 
-                <kr.co.soogong.master.atomic.molecules.SubheadlineTextInput
+                <kr.co.soogong.master.presentation.atomic.molecules.SubheadlineTextInput
                     android:id="@+id/sti_estimation_cost"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -81,7 +81,7 @@
                     android:checked="@={vm.includingVat}"
                     android:text="@string/vat_included" />
 
-                <kr.co.soogong.master.atomic.molecules.SubheadlineAddingImagesDeletable
+                <kr.co.soogong.master.presentation.atomic.molecules.SubheadlineAddingImagesDeletable
                     android:id="@+id/said_attachments"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -90,7 +90,7 @@
                     app:onButtonClick="@{() -> vm.startImagePicker()}"
                     app:subheadline="@{@string/adding_images_option}" />
 
-                <kr.co.soogong.master.atomic.molecules.IconCallOutArrow
+                <kr.co.soogong.master.presentation.atomic.molecules.IconCallOutArrow
                     android:id="@+id/ica_getting_estimation_template"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -104,7 +104,7 @@
                     app:colorTheme="@{colorThemeEstimationTemplate}"
                     app:icon="@{@drawable/ic_requirements}" />
 
-                <kr.co.soogong.master.atomic.molecules.SubheadlineTextareaCounter
+                <kr.co.soogong.master.presentation.atomic.molecules.SubheadlineTextareaCounter
                     android:id="@+id/tc_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

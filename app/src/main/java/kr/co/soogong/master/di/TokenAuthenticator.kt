@@ -2,7 +2,7 @@ package kr.co.soogong.master.di
 
 import androidx.lifecycle.MutableLiveData
 import dagger.Lazy
-import kr.co.soogong.master.network.auth.AuthService
+import kr.co.soogong.master.data.network.auth.AuthService
 import okhttp3.Authenticator
 import okhttp3.Request
 import okhttp3.Response

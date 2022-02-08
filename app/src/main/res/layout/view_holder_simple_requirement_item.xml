@@ -7,7 +7,7 @@
 
         <variable
             name="data"
-            type="kr.co.soogong.master.data.model.requirement.RequirementCard" />
+            type="kr.co.soogong.master.domain.entity.requirement.RequirementCard" />
 
         <variable
             name="number"

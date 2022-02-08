@@ -7,14 +7,14 @@
 
         <variable
             name="vm"
-            type="kr.co.soogong.master.ui.profile.detail.freemeasure.EditFreeMeasureViewModel" />
+            type="kr.co.soogong.master.presentation.ui.profile.detail.freemeasure.EditFreeMeasureViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <kr.co.soogong.master.atomic.molecules.SubheadlineChipGroup
+        <kr.co.soogong.master.presentation.atomic.molecules.SubheadlineChipGroup
             android:id="@+id/scg_free_measure"
             android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"

@@ -8,11 +8,11 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import kr.co.soogong.master.data.model.major.Category
-import kr.co.soogong.master.data.model.major.Project
-import kr.co.soogong.master.ui.common.EndlessScrollableViewModel
-import kr.co.soogong.master.ui.common.category.CategoryAdapter
-import kr.co.soogong.master.ui.common.project.ProjectAdapter
+import kr.co.soogong.master.domain.entity.common.major.Category
+import kr.co.soogong.master.domain.entity.common.major.Project
+import kr.co.soogong.master.presentation.ui.common.EndlessScrollableViewModel
+import kr.co.soogong.master.presentation.ui.common.category.CategoryAdapter
+import kr.co.soogong.master.presentation.ui.common.project.ProjectAdapter
 import kr.co.soogong.master.utility.SpaceItemDecoration
 
 @BindingAdapter(value = ["setStartSpace", "setTopSpace", "setEndSpace", "setBottomSpace"],

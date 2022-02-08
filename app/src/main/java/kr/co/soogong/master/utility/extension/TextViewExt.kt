@@ -10,7 +10,7 @@ import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.global.CodeTable
+import kr.co.soogong.master.domain.entity.common.CodeTable
 import kr.co.soogong.master.utility.TimeHelper
 import kr.co.soogong.master.utility.TimeHelper.WITHIN_24_HOURS
 import kr.co.soogong.master.utility.TimeHelper.WITHIN_90_MINUTES

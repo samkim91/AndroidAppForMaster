@@ -6,14 +6,14 @@
 
         <variable
             name="vm"
-            type="kr.co.soogong.master.ui.requirement.action.cancel.CancelViewModel" />
+            type="kr.co.soogong.master.presentation.ui.requirement.action.cancel.CancelViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <kr.co.soogong.master.atomic.molecules.ActionBar
+        <kr.co.soogong.master.presentation.atomic.molecules.ActionBar
             android:id="@+id/ab_header"
             android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"
@@ -39,13 +39,13 @@
                 android:orientation="vertical"
                 android:padding="@dimen/gap_16">
 
-                <kr.co.soogong.master.atomic.molecules.SubheadlineRadioGroup
+                <kr.co.soogong.master.presentation.atomic.molecules.SubheadlineRadioGroup
                     android:id="@+id/srg_canceled_options"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:subheadline="@{@string/reason_for_cancellation}" />
 
-                <kr.co.soogong.master.atomic.molecules.SubheadlineTextareaCounter
+                <kr.co.soogong.master.presentation.atomic.molecules.SubheadlineTextareaCounter
                     android:id="@+id/stc_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

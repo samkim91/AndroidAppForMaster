@@ -34,7 +34,7 @@
             tools:text="footnote: ex) 업체 이름과 함께 소개 영역에 들어가는 내용입니다. 고객에게 남기실 업체만의 특별한 점을 소개해 주세요!"
             tools:visibility="visible" />
 
-        <kr.co.soogong.master.atomic.atoms.TextareaCounter
+        <kr.co.soogong.master.presentation.atomic.atoms.TextareaCounter
             android:id="@+id/t_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

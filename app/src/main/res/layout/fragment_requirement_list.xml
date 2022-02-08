@@ -10,7 +10,7 @@
 
         <variable
             name="vm"
-            type="kr.co.soogong.master.ui.requirement.list.filter.RequirementsFilterViewModel" />
+            type="kr.co.soogong.master.presentation.ui.requirement.list.filter.RequirementsFilterViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -7,7 +7,7 @@
 
         <variable
             name="data"
-            type="kr.co.soogong.master.data.dto.requirement.estimationTemplate.EstimationTemplateDto" />
+            type="kr.co.soogong.master.data.entity.requirement.estimationTemplate.EstimationTemplateDto" />
 
         <variable
             name="deleteClickListener"

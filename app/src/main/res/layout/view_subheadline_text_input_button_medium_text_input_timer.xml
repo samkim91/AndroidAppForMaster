@@ -21,7 +21,7 @@
             tools:text="subheadline : ex) 업체 이름을 입력해주세요."
             tools:visibility="visible" />
 
-        <kr.co.soogong.master.atomic.atoms.TextInputButtonMedium
+        <kr.co.soogong.master.presentation.atomic.atoms.TextInputButtonMedium
             android:id="@+id/tibm_component"
             android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"
@@ -30,7 +30,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_subheadline" />
 
-        <kr.co.soogong.master.atomic.atoms.TextInputTimer
+        <kr.co.soogong.master.presentation.atomic.atoms.TextInputTimer
             android:id="@+id/tit_component"
             android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"

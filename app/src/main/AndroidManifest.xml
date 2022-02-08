@@ -19,23 +19,23 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="${cleartextTrafficPermitted}">
         <activity
-            android:name=".ui.auth.AuthContainerActivity"
+            android:name="kr.co.soogong.master.presentation.ui.auth.AuthContainerActivity"
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.auth.signup.steps.AgreementDetailActivity"
+            android:name="kr.co.soogong.master.presentation.ui.auth.signup.steps.AgreementDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.profile.review.MyReviewsActivity"
+            android:name="kr.co.soogong.master.presentation.ui.profile.review.MyReviewsActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.profile.detail.EditProfileContainerActivity"
+            android:name="kr.co.soogong.master.presentation.ui.profile.detail.EditProfileContainerActivity"
             android:exported="true" />
         <activity
-            android:name=".ui.profile.detail.portfoliolist.PortfolioListActivity"
+            android:name="kr.co.soogong.master.presentation.ui.profile.detail.portfoliolist.PortfolioListActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.splash.SplashActivity"
+            android:name="kr.co.soogong.master.presentation.ui.splash.SplashActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/SplashTheme">
@@ -46,10 +46,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.common.KakaoAddressActivity"
+            android:name="kr.co.soogong.master.presentation.ui.common.KakaoAddressActivity"
             android:exported="true" />
         <activity
-            android:name=".ui.main.MainActivity"
+            android:name="kr.co.soogong.master.presentation.ui.main.MainActivity"
             android:exported="true">
 
             <intent-filter>
@@ -64,43 +64,43 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.common.MajorActivity"
+            android:name="kr.co.soogong.master.presentation.ui.common.MajorActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.image.ImageActivity"
+            android:name="kr.co.soogong.master.presentation.ui.common.image.ImageActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.requirement.action.cancel.CancelActivity"
+            android:name="kr.co.soogong.master.presentation.ui.requirement.action.cancel.CancelActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.requirement.action.end.EndRepairActivity"
+            android:name="kr.co.soogong.master.presentation.ui.requirement.action.end.EndRepairActivity"
             android:exported="false" />
         <activity
-            android:name="kr.co.soogong.master.ui.requirement.list.search.SearchActivity"
+            android:name="kr.co.soogong.master.presentation.ui.requirement.list.search.SearchActivity"
             android:exported="true" />
         <activity
-            android:name="kr.co.soogong.master.ui.requirement.list.done.DoneActivity"
+            android:name="kr.co.soogong.master.presentation.ui.requirement.list.done.DoneActivity"
             android:exported="true" />
         <activity
-            android:name=".ui.requirement.action.view.ViewRequirementActivity"
+            android:name="kr.co.soogong.master.presentation.ui.requirement.action.view.ViewRequirementActivity"
             android:exported="true"
             android:launchMode="singleTask" /> <!-- 실측요청건을 고려 singleTop 로 설정 -->
         <activity
-            android:name=".ui.requirement.action.write.WriteEstimationActivity"
+            android:name="kr.co.soogong.master.presentation.ui.requirement.action.write.WriteEstimationActivity"
             android:exported="true"
             android:launchMode="singleTask" />
         <activity
-            android:name=".ui.requirement.action.write.MeasurementActivity"
+            android:name="kr.co.soogong.master.presentation.ui.requirement.action.write.MeasurementActivity"
             android:exported="true"
             android:launchMode="singleTask" />
         <activity
-            android:name=".ui.requirement.action.write.template.EstimationTemplatesActivity"
+            android:name="kr.co.soogong.master.presentation.ui.requirement.action.write.template.EstimationTemplatesActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.preferences.account.AccountActivity"
+            android:name="kr.co.soogong.master.presentation.ui.preferences.account.AccountActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.preferences.detail.PreferencesContainerActivity"
+            android:name="kr.co.soogong.master.presentation.ui.preferences.detail.PreferencesContainerActivity"
             android:exported="true" />
 
         <service

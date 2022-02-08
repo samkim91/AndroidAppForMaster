@@ -6,7 +6,7 @@
 
         <variable
             name="vm"
-            type="kr.co.soogong.master.ui.preferences.account.AccountViewModel" />
+            type="kr.co.soogong.master.presentation.ui.preferences.account.AccountViewModel" />
     </data>
 
     <LinearLayout
@@ -14,14 +14,14 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <kr.co.soogong.master.atomic.molecules.ActionBar
+        <kr.co.soogong.master.presentation.atomic.molecules.ActionBar
             android:id="@+id/ab_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:backButtonVisibility="@{true}"
             app:title="@{@string/account_page_name}" />
 
-        <kr.co.soogong.master.atomic.molecules.SettingsButton
+        <kr.co.soogong.master.presentation.atomic.molecules.SettingsButton
             android:id="@+id/button_withdrawal"
             android:layout_width="match_parent"
             android:layout_height="@dimen/account_page_setting_button_height"
