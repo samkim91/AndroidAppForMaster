@@ -3,17 +3,26 @@ package kr.co.soogong.master.presentation.ui.requirement.card
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.appcompat.widget.AppCompatButton
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ViewHolderRequirementCardBinding
+import kr.co.soogong.master.domain.entity.common.CodeTable
 import kr.co.soogong.master.domain.entity.requirement.RequirementCard
 import kr.co.soogong.master.domain.entity.requirement.RequirementStatus
+import kr.co.soogong.master.presentation.ui.common.dialog.popup.DefaultDialog
+import kr.co.soogong.master.presentation.ui.common.dialog.popup.DialogData
 import kr.co.soogong.master.presentation.ui.main.MainViewModel
-import kr.co.soogong.master.presentation.ui.main.checkMasterApprovedStatus
+import kr.co.soogong.master.presentation.ui.main.TAB_TEXTS_MAIN_NAVIGATION
 import kr.co.soogong.master.presentation.ui.requirement.list.RequirementsViewModel
+import kr.co.soogong.master.presentation.uihelper.requirment.CallToCustomerHelper
+import kr.co.soogong.master.presentation.uihelper.requirment.action.EndRepairActivityHelper
+import kr.co.soogong.master.presentation.uihelper.requirment.action.MeasureActivityHelper
 import kr.co.soogong.master.presentation.uihelper.requirment.action.ViewRequirementActivityHelper
+import kr.co.soogong.master.presentation.uihelper.requirment.action.WriteEstimationActivityHelper
 import kr.co.soogong.master.utility.extension.formatMoney
 
 // Requirement Card viewHolder 들의 부모클래스
@@ -31,7 +40,7 @@ open class RequirementCardViewHolder(
             data = requirementCard
 
             setCardClickListener {
-                checkMasterApprovedStatus(fragmentManager, mainViewModel) {
+                checkMasterApprovedStatus {
                     context.startActivity(
                         ViewRequirementActivityHelper.getIntent(
                             context,
@@ -43,22 +52,7 @@ open class RequirementCardViewHolder(
         }
     }
 
-    fun setEstimationPrice(estimationPrice: Int) {
-        with(binding) {
-            tvPriceLabel.text = context.getString(R.string.my_estimation_price)
-            tvPrice.text = estimationPrice.formatMoney()
-            groupPrice.isVisible = true
-        }
-    }
-
-    fun setRepairPrice(actualPrice: Int) {
-        with(binding) {
-            tvPriceLabel.text = context.getString(R.string.repair_actual_price)
-            tvPrice.text = actualPrice.formatMoney()
-            groupPrice.isVisible = true
-        }
-    }
-
+    // NOTE: 2022/02/10 삭제된 함수. 추후 참고를 위해 살려둠.
 //    private fun setQnaChipGroup(requirementCard: RequirementCard) {
 //        with(binding.cgQna) {
 //            this.removeAllViews()       // 데이터 바인딩 과정 중에 생긴 중복칩 삭제
@@ -77,25 +71,205 @@ open class RequirementCardViewHolder(
 //        }
 //    }
 
-    companion object {
-        fun create(
-            context: Context,
-            fragmentManager: FragmentManager,
-            mainViewModel: MainViewModel,
-            viewModel: RequirementsViewModel,
-            parent: ViewGroup,
-            viewType: Int,
-        ): RequirementCardViewHolder {
-            val binding = ViewHolderRequirementCardBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-            )
+    protected fun setEstimationPrice(requirementCard: RequirementCard) {
+        with(binding) {
+            tvPriceLabel.text = context.getString(R.string.my_estimation_price)
+            tvPrice.text = requirementCard.estimationPrice.formatMoney()
+            groupPrice.isVisible = true
+        }
+    }
 
-            return when (viewType) {
-                RequirementStatus.Requested.asInt -> RequestedCardViewHolder(context,
-                    fragmentManager,
-                    mainViewModel,
+    protected fun setRepairPrice(requirementCard: RequirementCard) {
+        with(binding) {
+            tvPriceLabel.text = context.getString(R.string.repair_actual_price)
+            tvPrice.text = requirementCard.repairPrice.formatMoney()
+            groupPrice.isVisible = true
+        }
+    }
+
+    private fun checkMasterApprovedStatus(
+        function: () -> Unit,
+    ) {
+        mainViewModel.masterSimpleInfo.value?.approvedStatus.let {
+            when (it) {
+                // 미승인 상태이면, 필수정보를 채우도록 이동
+                CodeTable.NOT_APPROVED.code ->
+                    DefaultDialog.newInstance(
+                        DialogData.getAskingFillProfile(),
+                    ).let { dialog ->
+                        dialog.setButtonsClickListener(
+                            onPositive = {
+                                mainViewModel.selectedMainTabInMainActivity.value =
+                                    TAB_TEXTS_MAIN_NAVIGATION.indexOf(R.string.main_activity_navigation_bar_profile)
+                            },
+                            onNegative = { }
+                        )
+                        dialog.show(fragmentManager, dialog.tag)
+                    }
+                // 승인요청 상태이면, 승인될 때까지 기다리라는 문구
+                CodeTable.REQUEST_APPROVE.code ->
+                    DefaultDialog.newInstance(
+                        DialogData.getWaitingUntilApproval()
+                    ).let { dialog ->
+                        dialog.setButtonsClickListener(
+                            onPositive = { },
+                            onNegative = { }
+                        )
+                        dialog.show(fragmentManager, dialog.tag)
+                    }
+                // 승인 상태이면, 함수 실행
+                else -> function()
+            }
+        }
+    }
+
+    protected fun AppCompatButton.setSendingEstimation(
+        requirementCard: RequirementCard
+    ) {
+        this.isVisible = true
+        this.text = context.getString(R.string.write_estimation)
+        this.setOnClickListener {
+            checkMasterApprovedStatus {
+                context.startActivity(
+                    WriteEstimationActivityHelper.getIntent(
+                        context,
+                        requirementCard.id
+                    )
+                )
+            }
+        }
+    }
+
+    protected fun AppCompatButton.setCallToClient(
+        requirementCard: RequirementCard,
+    ) {
+        this.isVisible = true
+
+        if(!requirementCard.isCalled) {        // 전화하기
+            this.text = context.getString(R.string.call_to_customer)
+        } else {        // 다시 전화하기
+            this.text = context.getString(R.string.call_to_customer_again)
+            this.background = ResourcesCompat.getDrawable(resources,
+                R.drawable.bg_solid_transparent_stroke_light_grey2_selector_radius30,
+                null)
+            this.setTextColor(ResourcesCompat.getColor(resources, R.color.grey_4, null))
+        }
+
+        this.setOnClickListener {
+            checkMasterApprovedStatus {
+                DefaultDialog.newInstance(
+                    DialogData.getCallToCustomer()
+                ).let {
+                    it.setButtonsClickListener(
+                        onPositive = {
+                            viewModel.callToClient(requirementId = requirementCard.id)
+                            context.startActivity(CallToCustomerHelper.getIntent(requirementCard.phoneNumber))
+                        },
+                        onNegative = { }
+                    )
+                    it.show(fragmentManager, it.tag)
+                }
+            }
+        }
+    }
+
+    protected fun AppCompatButton.setAcceptingMeasure(
+        requirementCard: RequirementCard,
+    ) {
+        this.isVisible = true
+        this.text = context.getString(R.string.accept_measure)
+        setOnClickListener {
+            checkMasterApprovedStatus {
+                DefaultDialog.newInstance(
+                    DialogData.getAcceptMeasure()
+                ).let {
+                    it.setButtonsClickListener(
+                        onPositive = {
+                            viewModel.respondToMeasure(requirementCard)
+                        },
+                        onNegative = { }
+                    )
+                    it.show(fragmentManager, it.tag)
+                }
+            }
+        }
+    }
+
+    protected fun AppCompatButton.setSendMeasure(
+        requirementCard: RequirementCard,
+    ) {
+        this.isVisible = true
+        this.text = context.getString(R.string.send_measure)
+        this.setOnClickListener {
+            checkMasterApprovedStatus {
+                context.startActivity(
+                    MeasureActivityHelper.getIntent(
+                        context,
+                        requirementCard.id
+                    )
+                )
+            }
+        }
+    }
+
+    protected fun AppCompatButton.setRepairDone(
+        requirementCard: RequirementCard,
+    ) {
+        this.isVisible = true
+        this.text = context.getString(R.string.repair_done_text)
+        this.setOnClickListener {
+            checkMasterApprovedStatus {
+                context.startActivity(
+                    EndRepairActivityHelper.getIntent(
+                        context,
+                        requirementCard.id
+                    )
+                )
+            }
+        }
+    }
+
+    protected fun AppCompatButton.setAskForReview(
+        requirementCard: RequirementCard,
+    ) {
+        this.isVisible = true
+
+        if (!requirementCard.requestReviewYn) {     // 리뷰 요청
+            this.text = context.getString(R.string.request_review)
+            this.setOnClickListener {
+                checkMasterApprovedStatus {
+                    viewModel.askForReview(requirementCard)
+                }
+            }
+        } else {        // 리뷰 요청 완료
+            this.isEnabled = false
+            this.text = context.getString(R.string.request_review_done)
+            this.background = ResourcesCompat.getDrawable(resources,
+                R.drawable.bg_solid_light_grey1_selector_radius30,
+                null)
+            this.setTextColor(ResourcesCompat.getColor(resources, R.color.grey_1, null))
+        }
+    }
+
+companion object {
+    fun create(
+        context: Context,
+        fragmentManager: FragmentManager,
+        mainViewModel: MainViewModel,
+        viewModel: RequirementsViewModel,
+        parent: ViewGroup,
+        viewType: Int,
+    ): RequirementCardViewHolder {
+        val binding = ViewHolderRequirementCardBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        )
+
+        return when (viewType) {
+            RequirementStatus.Requested.asInt -> RequestedCardViewHolder(context,
+                fragmentManager,
+                mainViewModel,
                     viewModel,
                     binding)
 

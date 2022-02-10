@@ -5,10 +5,9 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
-import kr.co.soogong.master.databinding.ActivityViewRequirementBinding
-import kr.co.soogong.master.domain.entity.requirement.Requirement
-import kr.co.soogong.master.domain.entity.requirement.RequirementStatus
+import kr.co.soogong.master.domain.entity.requirement.*
 import kr.co.soogong.master.domain.entity.requirement.estimation.EstimationResponseCode
+import kr.co.soogong.master.databinding.ActivityViewRequirementBinding
 import kr.co.soogong.master.presentation.ui.base.BaseActivity
 import kr.co.soogong.master.presentation.ui.common.dialog.popup.DefaultDialog
 import kr.co.soogong.master.presentation.ui.common.dialog.popup.DialogData
@@ -22,7 +21,7 @@ import kr.co.soogong.master.presentation.ui.requirement.action.view.ViewRequirem
 import kr.co.soogong.master.presentation.ui.requirement.action.view.ViewRequirementViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.presentation.ui.requirement.action.view.ViewRequirementViewModel.Companion.RESPOND_TO_MEASURE_SUCCESSFULLY
 import kr.co.soogong.master.presentation.uihelper.requirment.CallToCustomerHelper
-import kr.co.soogong.master.presentation.uihelper.requirment.action.ViewRequirementActivityHelper
+import kr.co.soogong.master.presentation.uihelper.requirment.action.*
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
@@ -54,12 +53,12 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
 
     private fun registerEventObserve() {
         Timber.tag(TAG).d("registerEventObserve: ")
-        viewModel.requirement.observe(this@ViewRequirementActivity) { requirement ->
+        viewModel.requirement.observe(this@ViewRequirementActivity, { requirement ->
             if (!isValidRequirement(requirement)) return@observe
             setFlexibleContainer(this, binding, requirement)
             setBottomButtons(this, viewModel, binding, requirement)
             showDialogForCallingCustomer(requirement)
-        }
+        })
 
         viewModel.action.observe(this@ViewRequirementActivity, EventObserver { event ->
             when (event) {
@@ -110,7 +109,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                 DefaultDialog.newInstance(DialogData.getNoticeForCallingCustomerInViewRequirement())
                     .let {
                         it.setButtonsClickListener(
-                            onPositive = { viewModel.callToClient(viewModel.requirement.value?.estimationDto?.id!!) },
+                            onPositive = { viewModel.callToClient() },
                             onNegative = {}
                         )
                         it.show(supportFragmentManager, it.tag)
@@ -137,7 +136,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                     DefaultDialog.newInstance(DialogData.getRecommendingCallingCustomer())
                         .let {
                             it.setButtonsClickListener(
-                                onPositive = { viewModel.callToClient(viewModel.requirement.value?.estimationDto?.id!!) },
+                                onPositive = { viewModel.callToClient() },
                                 onNegative = {}
                             )
                             it.show(supportFragmentManager, it.tag)
