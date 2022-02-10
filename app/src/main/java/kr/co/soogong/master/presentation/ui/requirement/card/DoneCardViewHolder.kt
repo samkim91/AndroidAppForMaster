@@ -22,7 +22,7 @@ class ClosedViewHolder(
     ) {
         super.bind(requirementCard)
 
-        setRepairPrice(requirementCard.repairPrice)
+        setRepairPrice(requirementCard)
     }
 }
 
@@ -33,12 +33,5 @@ class CanceledViewHolder(
     mainViewModel: MainViewModel,
     viewModel: RequirementsViewModel,
     binding: ViewHolderRequirementCardBinding,
-) : RequirementCardViewHolder(context, fragmentManager, mainViewModel, viewModel, binding) {
-    override fun bind(
-        requirementCard: RequirementCard,
-    ) {
-        super.bind(requirementCard)
-
-    }
-}
+) : RequirementCardViewHolder(context, fragmentManager, mainViewModel, viewModel, binding)
 

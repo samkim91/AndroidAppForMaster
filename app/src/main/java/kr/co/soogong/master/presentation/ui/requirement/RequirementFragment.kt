@@ -114,8 +114,6 @@ class RequirementFragment : BaseFragment<FragmentRequirementBinding>(
     }
 
     private fun showDialogForViewRequirement(type: Int, list: List<Int>) {
-        if (parentFragmentManager.findFragmentByTag("Dialog")?.isVisible == true) return
-
         DefaultDialog.newInstance(
             dialogData = if (type == REQUEST_MEASURE)
                 DialogData.getNoticeForRequestMeasure(list.count())
@@ -130,7 +128,7 @@ class RequirementFragment : BaseFragment<FragmentRequirementBinding>(
                 },
                 onNegative = { }
             )
-            it.show(parentFragmentManager, "Dialog")
+            it.show(parentFragmentManager, it.tag)
         }
     }
 

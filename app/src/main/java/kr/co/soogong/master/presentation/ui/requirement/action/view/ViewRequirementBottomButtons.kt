@@ -8,15 +8,16 @@ import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentManager
 import kr.co.soogong.master.R
-import kr.co.soogong.master.databinding.ActivityViewRequirementBinding
 import kr.co.soogong.master.domain.entity.requirement.Requirement
 import kr.co.soogong.master.domain.entity.requirement.RequirementStatus
 import kr.co.soogong.master.domain.entity.requirement.estimation.EstimationResponseCode
+import kr.co.soogong.master.databinding.ActivityViewRequirementBinding
 import kr.co.soogong.master.presentation.ui.common.dialog.popup.DefaultDialog
 import kr.co.soogong.master.presentation.ui.common.dialog.popup.DialogData
 import kr.co.soogong.master.presentation.uihelper.requirment.action.CancelActivityHelper
 import kr.co.soogong.master.presentation.uihelper.requirment.action.EndRepairActivityHelper
 import kr.co.soogong.master.presentation.uihelper.requirment.action.MeasureActivityHelper
+import kr.co.soogong.master.presentation.uihelper.requirment.action.WriteEstimationActivityHelper
 import kr.co.soogong.master.utility.extension.dp
 import timber.log.Timber
 
@@ -42,7 +43,7 @@ fun setBottomButtons(
             is RequirementStatus.Requested -> {
                 addEndRepairButton(activity, binding.flexibleContainer, requirement)
                 buttonLeft.setRefusingEstimation(activity.supportFragmentManager, viewModel)
-//                buttonRight.setAcceptingEstimation(requirementId = viewModel.requirement.value?.id!!)
+                buttonRight.setAcceptingEstimation(viewModel)
             }
 
             // 매칭대기
@@ -64,7 +65,7 @@ fun setBottomButtons(
                 } else {
                     addEndRepairButton(activity, binding.flexibleContainer, requirement)
                     buttonLeft.setRefusingEstimation(activity.supportFragmentManager, viewModel)
-//                    buttonRight.setAcceptingEstimation(requirementId = viewModel.requirement.value?.id!!)
+                    buttonRight.setAcceptingEstimation(viewModel)
                 }
             }
 
@@ -74,17 +75,7 @@ fun setBottomButtons(
                 binding.requirementBasic.buttonCallToCustomerVisibility = true
                 addEndRepairButton(activity, binding.flexibleContainer, requirement)
                 buttonLeft.setRefusingMeasure(activity.supportFragmentManager, viewModel)
-//                buttonRight.setAcceptingMeasure(activity.supportFragmentManager, viewModel,
-//                    EstimationDto(
-//                        id = requirement.estimationDto?.id,
-//                        requirementId = requirement.id,
-//                        masterResponseCode = EstimationResponseCode.ACCEPTED,
-//                        masterId = null,
-//                        token = null,
-//                        typeCode = null,
-//                        price = null
-//                    )
-//                )
+                buttonRight.setAcceptingMeasure(activity.supportFragmentManager, viewModel)
             }
 
             // 실측예정
@@ -125,8 +116,7 @@ private fun addEndRepairButton(
     requirement: Requirement,
 ) {
     container.addView(
-        // NOTE : style 로 정의된 theme 을 적용하려고, ContextThemeWrapper 과 병행하여 AppCompatButton 생성 시 style 을 추가! 무슨 이유인지 하나만 하면 적용이 안 됨.
-        // TODO: 2022/02/09 차후 이거 적용해보자 : https://medium.com/mobile-app-development-publication/dynamically-change-android-views-style-56b18e59b33b
+        // style 로 정의된 theme 을 적용하려고, ContextThemeWrapper 과 병행하여 AppCompatButton 생성 시 style 을 추가! 무슨 이유인지 하나만 하면 적용이 안 됨.
         AppCompatButton(
             ContextThemeWrapper(context, R.style.button_medium_outlined_secondary),
             null,
@@ -151,6 +141,21 @@ private fun addEndRepairButton(
             setMargins(0, 24.dp, 0, 24.dp)
         }
     )
+}
+
+private fun AppCompatButton.setAcceptingEstimation(
+    viewModel: ViewRequirementViewModel,
+) {
+    isVisible = true
+    text = context.getString(R.string.write_estimation)
+    setOnClickListener {
+        context.startActivity(
+            WriteEstimationActivityHelper.getIntent(
+                context,
+                viewModel.requirementId.value!!
+            )
+        )
+    }
 }
 
 private fun AppCompatButton.setRefusingEstimation(
@@ -215,6 +220,27 @@ private fun AppCompatButton.setRefusingMeasure(
     }
 }
 
+private fun AppCompatButton.setAcceptingMeasure(
+    fragmentManager: FragmentManager,
+    viewModel: ViewRequirementViewModel,
+) {
+    isVisible = true
+    text = context.getString(R.string.accept_measure)
+    setOnClickListener {
+        DefaultDialog.newInstance(
+            DialogData.getAcceptMeasure()
+        ).let {
+            it.setButtonsClickListener(
+                onPositive = {
+                    viewModel.respondToMeasure()
+                },
+                onNegative = { }
+            )
+            it.show(fragmentManager, it.tag)
+        }
+    }
+}
+
 private fun AppCompatButton.setCancelingMeasure(
     viewModel: ViewRequirementViewModel,
 ) {
@@ -265,7 +291,7 @@ private fun AppCompatButton.setAskingReview(
 ) {
     isVisible = true
     text = context.getString(R.string.request_review)
-//    setOnClickListener { viewModel.askForReview() }
+    setOnClickListener { viewModel.askForReview() }
 }
 
 private fun AppCompatButton.setAskingReviewDone() {

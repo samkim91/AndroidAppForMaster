@@ -45,7 +45,7 @@
                     android:layout_height="wrap_content"
                     app:address="@{vm.requirement.oldAddress != null ? vm.requirement.oldAddress : vm.requirement.address}"
                     app:createdAt="@{vm.requirement.createdAt}"
-                    app:onButtonClick="@{() -> vm.callToClient(vm.requirement.estimationDto.id)}"
+                    app:onButtonClick="@{() -> vm.callToClient()}"
                     app:project="@{vm.requirement.projectName}"
                     app:requirementToken="@{vm.requirement.token}"
                     app:status="@{vm.requirement.status}" />
