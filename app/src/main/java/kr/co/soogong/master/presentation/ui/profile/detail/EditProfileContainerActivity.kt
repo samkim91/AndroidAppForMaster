@@ -42,7 +42,7 @@ class EditProfileContainerActivity : BaseActivity<ActivityEditProfileContainerBi
 
             with(abHeader) {
                 title = pageName
-                setButtonBackClickListener { super.onBackPressed() }
+                setIvBackClickListener { super.onBackPressed() }
             }
         }
 

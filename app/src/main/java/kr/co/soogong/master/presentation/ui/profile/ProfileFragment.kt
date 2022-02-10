@@ -78,7 +78,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
                 startActivity(MyReviewsActivityHelper.getIntent(requireContext()))
             }
 
-            abHeader.setButtonAnyClickListener {
+            abHeader.setIvBackClickListener {
                 startActivity(ShowMyProfileInWebHelper.getIntent(viewModel.profile.value?.uid))
             }
 

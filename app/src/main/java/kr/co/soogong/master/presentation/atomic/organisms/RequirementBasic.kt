@@ -4,11 +4,10 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.view.isVisible
 import kr.co.soogong.master.R
-import kr.co.soogong.master.domain.entity.requirement.RequirementStatus
 import kr.co.soogong.master.databinding.ViewRequirementBasicBinding
-import kr.co.soogong.master.utility.extension.formatDateWithoutDay
+import kr.co.soogong.master.domain.entity.requirement.RequirementStatus
+import kr.co.soogong.master.utility.extension.formatDateWithDay
 import java.util.*
 
 class RequirementBasic @JvmOverloads constructor(
@@ -32,7 +31,7 @@ class RequirementBasic @JvmOverloads constructor(
         set(value) {
             field = value
             value?.let {
-                binding.tvCreatedAt.text = it.formatDateWithoutDay()
+                binding.tvCreatedAt.text = it.formatDateWithDay()
             }
         }
 
@@ -58,22 +57,6 @@ class RequirementBasic @JvmOverloads constructor(
             field = value
             value?.let {
                 binding.tvProject.text = value
-            }
-        }
-
-    var onButtonClick: OnClickListener? = null
-        set(value) {
-            field = value
-            value?.let {
-                binding.buttonCallToCustomer.setOnClickListener(value)
-            }
-        }
-
-    var buttonCallToCustomerVisibility: Boolean = false
-        set(value) {
-            field = value
-            value.let {
-                binding.buttonCallToCustomer.isVisible = value
             }
         }
 }

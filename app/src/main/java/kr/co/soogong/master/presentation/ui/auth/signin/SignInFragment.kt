@@ -52,7 +52,7 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(
             lifecycleOwner = viewLifecycleOwner
             authPhoneNumberButtonTheme = ButtonTheme.Primary
 
-            abHeader.setButtonBackClickListener { (activity as AuthContainerActivity).onBackPressed() }
+            abHeader.setIvBackClickListener { (activity as AuthContainerActivity).onBackPressed() }
 
             stibmtitAuthPhoneNumber.textInputTimer.initTimer(
                 minute = 2,

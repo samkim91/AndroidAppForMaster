@@ -19,6 +19,8 @@
             android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"
             app:backButtonVisibility="@{true}"
+            app:icon="@{@drawable/ic_phone}"
+            app:ivIconClickListener="@{() -> vm.callToClient()}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -43,9 +45,8 @@
                     android:id="@+id/requirement_basic"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:address="@{vm.requirement.oldAddress != null ? vm.requirement.oldAddress : vm.requirement.address}"
+                    app:address="@{vm.requirement.oldAddress ?? vm.requirement.address}"
                     app:createdAt="@{vm.requirement.createdAt}"
-                    app:onButtonClick="@{() -> vm.callToClient(vm.requirement.estimationDto.id)}"
                     app:project="@{vm.requirement.projectName}"
                     app:requirementToken="@{vm.requirement.token}"
                     app:status="@{vm.requirement.status}" />
@@ -70,7 +71,7 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button_left"
-            style="@style/button.medium.outlined_secondary"
+            style="@style/button.medium.outlined_primary.rounded"
             android:layout_marginStart="@dimen/gap_16"
             android:layout_marginEnd="@dimen/gap_12"
             android:elevation="@dimen/gap_10"
@@ -85,7 +86,7 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button_right"
-            style="@style/button.medium.outlined_primary"
+            style="@style/button.medium.primary.rounded"
             android:layout_marginEnd="@dimen/gap_16"
             android:elevation="@dimen/gap_10"
             android:visibility="gone"

@@ -31,7 +31,7 @@ class AgreementDetailActivity : BaseActivity<ActivityAgreementDetailBinding>(
                 if (documentType == TERMS_OF_SERVICE) getString(R.string.terms_of_service)
                 else getString(R.string.private_policy)
 
-            abHeader.setButtonBackClickListener { onBackPressed() }
+            abHeader.setIvBackClickListener { onBackPressed() }
 
             tvDocument.text = when (documentType) {
                 TERMS_OF_SERVICE -> resources.assets.open("TermsOfService.txt").readBytes()

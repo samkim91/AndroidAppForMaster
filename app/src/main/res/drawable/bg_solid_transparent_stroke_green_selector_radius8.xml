@@ -6,5 +6,5 @@
         android:width="@dimen/board_size"
         android:color="@color/selector_green_alpha50" />
 
-    <corners android:radius="@dimen/gap_30" />
+    <corners android:radius="@dimen/gap_8" />
 </shape>

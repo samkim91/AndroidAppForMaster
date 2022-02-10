@@ -31,7 +31,7 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>(
             vm = viewModel
             lifecycleOwner = viewLifecycleOwner
 
-            abpHeader.setButtonBackClickListener { (activity as AuthContainerActivity).onBackPressed() }
+            abpHeader.setIvBackClickListener { (activity as AuthContainerActivity).onBackPressed() }
 
             with(vpContainer) {
                 isUserInputEnabled = false

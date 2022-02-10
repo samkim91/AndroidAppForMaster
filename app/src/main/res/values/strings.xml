@@ -181,7 +181,7 @@
     <string name="measure_attachment_label">실측 사진</string>
 
     <string name="write_estimation">견적 보내기</string>
-    <string name="refuse_estimation">견적 거절</string>
+    <string name="refuse_estimation">거절하기</string>
 
     <string name="accept_measure">실측 수락</string>
     <string name="refuse_measure">실측 거절</string>
@@ -379,6 +379,7 @@
 
     <string name="end_estimate_succeeded">시공 완료 처리 되었고,\n고객님께 리뷰 요청이 전송되었어요.</string>
     <string name="refuse_to_estimate_or_measure_successfully_text">문의가 삭제되었습니다.</string>
+    <string name="accepting_to_measure_successfully">고객님과 전화를 통해 실측 일정을 잡아주세요.</string>
     <string name="error_message_of_request_failed">해당 요청을 처리할 수 없습니다. 다시 요청하거나 수공에 연락해주세요.</string>
     <string name="ask_for_review_successful">리뷰 요청을 완료했어요!</string>
     <string name="sign_up_successfully">회원 가입이 완료되었습니다!\n필수 정보를 모두 입력하고\n문의를 처리해보세요!</string>

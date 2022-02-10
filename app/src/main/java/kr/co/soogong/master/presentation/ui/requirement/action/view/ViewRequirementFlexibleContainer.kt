@@ -1,6 +1,10 @@
 package kr.co.soogong.master.presentation.ui.requirement.action.view
 
 import android.content.Context
+import kr.co.soogong.master.databinding.ActivityViewRequirementBinding
+import kr.co.soogong.master.domain.entity.requirement.Requirement
+import kr.co.soogong.master.domain.entity.requirement.RequirementStatus
+import kr.co.soogong.master.domain.entity.requirement.estimation.EstimationResponseCode
 import kr.co.soogong.master.presentation.atomic.molecules.Title3Container
 import kr.co.soogong.master.presentation.atomic.molecules.Title3Container.Companion.CANCEL_TYPE
 import kr.co.soogong.master.presentation.atomic.molecules.Title3Container.Companion.ESTIMATION_TYPE
@@ -8,10 +12,6 @@ import kr.co.soogong.master.presentation.atomic.molecules.Title3Container.Compan
 import kr.co.soogong.master.presentation.atomic.molecules.Title3Container.Companion.REPAIR_TYPE
 import kr.co.soogong.master.presentation.atomic.molecules.Title3Container.Companion.REQUIREMENT_TYPE
 import kr.co.soogong.master.presentation.atomic.molecules.Title3Container.Companion.REVIEW_TYPE
-import kr.co.soogong.master.domain.entity.requirement.Requirement
-import kr.co.soogong.master.domain.entity.requirement.RequirementStatus
-import kr.co.soogong.master.domain.entity.requirement.estimation.EstimationResponseCode
-import kr.co.soogong.master.databinding.ActivityViewRequirementBinding
 import timber.log.Timber
 
 // Note: 1차 리팩토링이고, 중복되는 함수들은 다시 빼내야함.
@@ -143,7 +143,6 @@ fun setFlexibleContainer(
                         contentType = PREVIOUS_ESTIMATION_TYPE,
                     )
                 }
-                binding.requirementBasic.buttonCallToCustomerVisibility = false
             }
 
             // 평가완료
@@ -175,7 +174,6 @@ fun setFlexibleContainer(
                         contentType = PREVIOUS_ESTIMATION_TYPE,
                     )
                 }
-                binding.requirementBasic.buttonCallToCustomerVisibility = false
             }
 
             // 시공취소
@@ -201,7 +199,6 @@ fun setFlexibleContainer(
                         contentType = PREVIOUS_ESTIMATION_TYPE,
                     )
                 }
-                binding.requirementBasic.buttonCallToCustomerVisibility = false
             }
         }
     }

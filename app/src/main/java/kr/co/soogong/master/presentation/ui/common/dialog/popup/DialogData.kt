@@ -48,10 +48,10 @@ data class DialogData(
                 "",
             )
 
-        fun getExpiredRequirement() =
+        fun getInvalidRequirement() =
             DialogData(
-                "문의마감",
-                "이미 마감된 문의입니다.",
+                "[안내]",
+                "유효하지 않은 문의입니다.",
                 "",
                 "닫기",
                 "",

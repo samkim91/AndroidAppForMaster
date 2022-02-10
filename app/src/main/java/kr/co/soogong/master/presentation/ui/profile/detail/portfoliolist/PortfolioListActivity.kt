@@ -41,7 +41,7 @@ class PortfolioListActivity : BaseActivity<ActivityPortfolioListBinding>(
             lifecycleOwner = this@PortfolioListActivity
 
             with(abHeader) {
-                setButtonBackClickListener {
+                setIvBackClickListener {
                     onBackPressed()
                 }
             }

@@ -5,9 +5,9 @@ import android.widget.RadioButton
 import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
-import kr.co.soogong.master.presentation.atomic.molecules.SubheadlineRadioGroup
-import kr.co.soogong.master.domain.entity.requirement.RequirementStatus
 import kr.co.soogong.master.databinding.ActivityCancelBinding
+import kr.co.soogong.master.domain.entity.requirement.RequirementStatus
+import kr.co.soogong.master.presentation.atomic.molecules.SubheadlineRadioGroup
 import kr.co.soogong.master.presentation.ui.base.BaseActivity
 import kr.co.soogong.master.presentation.ui.requirement.action.cancel.CancelViewModel.Companion.CANCEL_ESTIMATION_SUCCESSFULLY
 import kr.co.soogong.master.presentation.ui.requirement.action.cancel.CancelViewModel.Companion.CANCEL_MEASURE_SUCCESSFULLY
@@ -36,7 +36,7 @@ class CancelActivity : BaseActivity<ActivityCancelBinding>(
             vm = viewModel
             lifecycleOwner = this@CancelActivity
 
-            abHeader.setButtonBackClickListener { onBackPressed() }
+            abHeader.setIvBackClickListener { onBackPressed() }
 
             bCancel.setOnClickListener {
                 viewModel.canceledCode.observe(this@CancelActivity, {
@@ -55,7 +55,7 @@ class CancelActivity : BaseActivity<ActivityCancelBinding>(
                 if (!srgCanceledOptions.error.isNullOrEmpty() || !stcDescription.error.isNullOrEmpty()) return@setOnClickListener
 
                 // 실측 요청 -> 거절
-                // 이외(실측 예정, 실측 완료, 매칭 대기, 시공 예정 등) -> 시공 취소
+                // 이외(실측 예정, 실측 완료, 시공 예정 등) -> 시공 취소
                 if (viewModel.requirement.value?.status is RequirementStatus.RequestMeasure) viewModel.respondToMeasure() else viewModel.saveRepair()
             }
 

@@ -33,7 +33,7 @@ class EndRepairActivity : BaseActivity<ActivityEndRepairBinding>(
             vm = viewModel
             lifecycleOwner = this@EndRepairActivity
 
-            abHeader.setButtonBackClickListener { onBackPressed() }
+            abHeader.setIvBackClickListener { onBackPressed() }
 
             cvCalender.setOnDateChangeListener { _: CalendarView, year: Int, month: Int, day: Int ->
                 Timber.tag(TAG).d("setOnDateChangeListener: ${year - month - day}")
