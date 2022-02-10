@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.res.ResourcesCompat
 import kr.co.soogong.master.R
-import kr.co.soogong.master.domain.entity.common.ButtonTheme
 import kr.co.soogong.master.databinding.ViewButtonMediumBinding
+import kr.co.soogong.master.domain.entity.common.ButtonTheme
 
 class ButtonMedium @JvmOverloads constructor(
     context: Context,
@@ -67,7 +67,7 @@ class ButtonMedium @JvmOverloads constructor(
                     is ButtonTheme.OutlinedPrimary -> {
                         binding.btButton.background =
                             ResourcesCompat.getDrawable(resources,
-                                R.drawable.bg_solid_white_stroke_green_selector_radius8,
+                                R.drawable.bg_solid_transparent_stroke_green_selector_radius8,
                                 null)
                         binding.btButton.setTextColor(ResourcesCompat.getColor(resources,
                             R.color.selector_green_alpha50,
@@ -76,7 +76,7 @@ class ButtonMedium @JvmOverloads constructor(
                     is ButtonTheme.OutlinedSecondary -> {
                         binding.btButton.background =
                             ResourcesCompat.getDrawable(resources,
-                                R.drawable.bg_solid_white_stroke_light_grey2_selector_radius8,
+                                R.drawable.bg_solid_transparent_stroke_light_grey2_selector_radius8,
                                 null)
                         binding.btButton.setTextColor(ResourcesCompat.getColor(resources,
                             R.color.selector_dark_grey1_alpha50,

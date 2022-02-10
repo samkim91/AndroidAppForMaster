@@ -16,6 +16,7 @@ import kr.co.soogong.master.domain.entity.requirement.estimation.EstimationRespo
 import kr.co.soogong.master.domain.repository.ProfileRepository
 import kr.co.soogong.master.domain.usecase.requirement.*
 import kr.co.soogong.master.presentation.ui.base.BaseViewModel
+import kr.co.soogong.master.presentation.ui.requirement.IRequirementViewModel
 import kr.co.soogong.master.presentation.uihelper.requirment.action.ViewRequirementActivityHelper
 import timber.log.Timber
 import javax.inject.Inject
@@ -29,7 +30,7 @@ class ViewRequirementViewModel @Inject constructor(
     private val requestReviewUseCase: RequestReviewUseCase,
     private val profileRepository: ProfileRepository,
     val savedStateHandle: SavedStateHandle,
-) : BaseViewModel() {
+) : BaseViewModel(), IRequirementViewModel {
     // Note : activity 에서 viewModel 로 데이터 넘기는 법. savedStateHandle 에서 가져온다.
     val requirementId =
         MutableLiveData(ViewRequirementActivityHelper.getRequirementIdFromSavedState(
@@ -104,7 +105,7 @@ class ViewRequirementViewModel @Inject constructor(
                 }).addToDisposable()
     }
 
-    fun respondToMeasure() {
+    override fun respondToMeasure(estimationDto: EstimationDto) {
         Timber.tag(TAG).d("respondToMeasure: ")
         respondToMeasureUseCase(
             estimationDto = EstimationDto(
@@ -132,7 +133,7 @@ class ViewRequirementViewModel @Inject constructor(
                 }).addToDisposable()
     }
 
-    fun callToClient() {
+    override fun callToClient(estimationId: Int) {
         Timber.tag(TAG).d("callToClient: ")
         _requirement.value?.estimationDto?.id?.let { estimationId ->
             callToClientUseCase(
@@ -153,15 +154,9 @@ class ViewRequirementViewModel @Inject constructor(
         }
     }
 
-    fun askForReview() {
+    override fun askForReview(repairDto: RepairDto) {
         Timber.tag(TAG).d("askForReview: ")
-        requestReviewUseCase(
-            RepairDto(
-                id = _requirement.value?.estimationDto?.repair?.id,
-                requirementToken = _requirement.value?.token,
-                estimationId = _requirement.value?.estimationDto?.id,
-            )
-        )
+        requestReviewUseCase(repairDto)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(

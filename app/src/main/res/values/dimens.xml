@@ -6,9 +6,11 @@
 
     <dimen name="gap_0">0dp</dimen>
 
+    <dimen name="gap_0.5">0.5dp</dimen>
     <dimen name="gap_1">1dp</dimen>
     <dimen name="gap_2">2dp</dimen>
     <dimen name="gap_2.5">2.5dp</dimen>
+    <dimen name="gap_3">3dp</dimen>
     <dimen name="gap_4">4dp</dimen>
     <dimen name="gap_5">5dp</dimen>
     <dimen name="gap_6">6dp</dimen>

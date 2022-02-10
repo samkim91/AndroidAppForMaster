@@ -35,7 +35,7 @@ data class RequirementCardDto(
     val oldAddress: String?,
 
     @SerializedName("distance")
-    val distance: Int,
+    val distance: Double,
 
     @SerializedName("status")
     val status: String,
@@ -48,6 +48,9 @@ data class RequirementCardDto(
 
     @SerializedName("safetyNumber")
     val safetyNumber: String? = null,
+
+    @SerializedName("isCalled")
+    val isCalled: Boolean,
 
     @SerializedName("requirementQnas")
     val requirementQnas: List<RequirementQnaDto>,

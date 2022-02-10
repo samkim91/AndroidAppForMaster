@@ -54,7 +54,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:max="@{10}"
                     app:moneyFormatAtHelper="@{vm.actualPrice}"
-                    app:subheadline="@{@string/actual_price}" />
+                    app:subheadline="@{@string/repair_actual_price}" />
 
                 <androidx.appcompat.widget.AppCompatCheckBox
                     android:id="@+id/cb_including_vat"

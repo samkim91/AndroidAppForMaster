@@ -66,10 +66,10 @@ data class EstimationDto(
     val refuseDescription: String? = null,
 
     @SerializedName("createdAt")
-    val createdAt: Date?,
+    val createdAt: Date? = null,
 
     @SerializedName("updatedAt")
-    val updatedAt: Date?,
+    val updatedAt: Date? = null,
 ) : Parcelable {
     companion object
 }
