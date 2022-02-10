@@ -7,13 +7,8 @@ import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.view.View
 import android.widget.TextView
-import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
-import kr.co.soogong.master.R
 import kr.co.soogong.master.domain.entity.common.CodeTable
-import kr.co.soogong.master.utility.TimeHelper
-import kr.co.soogong.master.utility.TimeHelper.WITHIN_24_HOURS
-import kr.co.soogong.master.utility.TimeHelper.WITHIN_90_MINUTES
 import java.util.*
 
 @BindingAdapter("dateWithoutDay")
@@ -21,16 +16,9 @@ fun TextView.setDateWithoutDay(date: Date?) {
     text = date.formatDateWithoutDay()
 }
 
-fun TextView.setEstimationDueTime(createdAt: Date) {
-    isVisible = true
-    text = context.getString(R.string.requirements_card_estimation_due_time,
-        TimeHelper.getDueTime(createdAt, WITHIN_24_HOURS))
-}
-
-fun TextView.setRequestMeasureDueTime(createdAt: Date) {
-    isVisible = true
-    text = context.getString(R.string.requirements_card_request_measure_due_time,
-        TimeHelper.getDueTime(createdAt, WITHIN_90_MINUTES))
+@BindingAdapter("dateWithDay")
+fun TextView.setDateWithDay(date: Date) {
+    text = date.formatDateWithDay()
 }
 
 @BindingAdapter("convertToPrice")

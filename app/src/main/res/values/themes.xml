@@ -216,14 +216,38 @@
     </style>
 
     <style name="button.medium.outlined_primary" parent="button.medium">
-        <item name="android:background">@drawable/bg_solid_white_stroke_green_selector_radius8
+        <item name="android:background">@drawable/bg_solid_transparent_stroke_green_selector_radius8
         </item>
         <item name="android:textColor">@color/selector_green_alpha50</item>
     </style>
 
     <style name="button.medium.outlined_secondary" parent="button.medium">
         <item name="android:background">
-            @drawable/bg_solid_white_stroke_light_grey2_selector_radius8
+            @drawable/bg_solid_transparent_stroke_light_grey2_selector_radius8
+        </item>
+        <item name="android:textColor">@color/selector_dark_grey1_alpha50</item>
+    </style>
+
+    <style name="button.medium.primary.rounded" parent="button.medium.primary">
+        <item name="android:background">@drawable/bg_solid_green_selector_radius30</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="button.medium.secondary.rounded" parent="button.medium.secondary">
+        <item name="android:background">@drawable/bg_solid_light_grey1_selector_radius30</item>
+        <item name="android:textColor">@color/selector_dark_grey1_alpha50</item>
+    </style>
+
+    <style name="button.medium.outlined_primary.rounded" parent="button.medium.outlined_primary">
+        <item name="android:background">
+            @drawable/bg_solid_transparent_stroke_green_selector_radius30
+        </item>
+        <item name="android:textColor">@color/selector_green_alpha50</item>
+    </style>
+
+    <style name="button.medium.outlined_secondary.rounded" parent="button.medium.outlined_secondary">
+        <item name="android:background">
+            @drawable/bg_solid_transparent_stroke_light_grey2_selector_radius30
         </item>
         <item name="android:textColor">@color/selector_dark_grey1_alpha50</item>
     </style>
@@ -241,7 +265,7 @@
     </style>
 
     <style name="button.big.outlined_primary" parent="button.big">
-        <item name="android:background">@drawable/bg_solid_white_stroke_green_selector_radius8
+        <item name="android:background">@drawable/bg_solid_transparent_stroke_green_selector_radius8
         </item>
         <item name="android:textColor">@color/selector_green_alpha50</item>
     </style>
@@ -266,6 +290,7 @@
         <item name="android:textColor">@color/dark_grey_2</item>
     </style>
 
+    <!-- start section Chip styles -->
     <style name="ChipChoiceGreyRectangular" parent="Widget.MaterialComponents.Chip.Choice">
         <item name="chipBackgroundColor">@color/background</item>
         <item name="chipCornerRadius">@dimen/gap_4</item>
@@ -304,11 +329,16 @@
         <item name="chipCornerRadius">@dimen/gap_20</item>
         <item name="chipMinHeight">@dimen/gap_34</item>
     </style>
+    <!-- end section Chip styles -->
 
+    <!-- start section CalendarView -->
     <style name="CalenderViewCustom">
         <item name="colorAccent">@color/brand_green</item>
         <item name="android:dateTextAppearance">@style/subheadline.bold</item>
         <item name="android:weekDayTextAppearance">@style/subheadline.bold</item>
         <item name="android:colorForeground">@color/text_basic_color</item>
     </style>
+    <!-- end section CalendarView -->
+
+
 </resources>

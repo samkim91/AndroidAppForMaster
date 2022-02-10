@@ -10,6 +10,7 @@ sealed class RequirementStatus {
     abstract val code: String
     abstract val inKorean: String
     abstract val theme: ColorTheme
+    abstract val guideLine: String
 
     // region : Before progress tab
     object Requested : RequirementStatus() {
@@ -17,6 +18,7 @@ sealed class RequirementStatus {
         override val code = "Requested"
         override val asInt = 101
         override val theme = ColorTheme.Blue
+        override val guideLine = "\uD83D\uDCC4 새로 들어온 문의입니다."
     }
 
     object RequestConsult : RequirementStatus() {
@@ -24,6 +26,7 @@ sealed class RequirementStatus {
         override val code = "RequestConsulting"
         override val asInt = 102
         override val theme = ColorTheme.Blue
+        override val guideLine = "\uD83D\uDCAC 고객님께 상담 요청이 왔습니다."
     }
 
     object RequestMeasure : RequirementStatus() {
@@ -31,6 +34,7 @@ sealed class RequirementStatus {
         override val code = "RequestMeasure"
         override val asInt = 103
         override val theme = ColorTheme.Blue
+        override val guideLine = "\uD83D\uDCD0 새로 들어온 실측 문의입니다."
     }
 
     object Measuring : RequirementStatus() {
@@ -38,6 +42,7 @@ sealed class RequirementStatus {
         override val code = "Measuring"
         override val asInt = 104
         override val theme = ColorTheme.Blue
+        override val guideLine = "\uD83D\uDCD0 실측이 예정된 견적입니다."
     }
 
     object Measured : RequirementStatus() {
@@ -45,6 +50,7 @@ sealed class RequirementStatus {
         override val code = "Measured"
         override val asInt = 105
         override val theme = ColorTheme.Grey
+        override val guideLine = "✔️ 실측이 완료되었습니다."
     }
 
     object Estimated : RequirementStatus() {
@@ -52,6 +58,7 @@ sealed class RequirementStatus {
         override val code = "Estimated"
         override val asInt = 106
         override val theme = ColorTheme.Grey
+        override val guideLine = "\uD83D\uDE4C 고객님의 선택을 기다려주세요."
     }
     // end region : Before progress tab
 
@@ -61,6 +68,7 @@ sealed class RequirementStatus {
         override val code = "Repairing"
         override val asInt = 201
         override val theme = ColorTheme.Blue
+        override val guideLine = "\uD83D\uDEE0 시공 예정인 견적입니다."
     }
 
     object Done : RequirementStatus() {
@@ -68,6 +76,7 @@ sealed class RequirementStatus {
         override val code = "Done"
         override val asInt = 202
         override val theme = ColorTheme.Grey
+        override val guideLine = "✔️ 고객님에게 리뷰요청을 해주세요."
     }
     // end region : In progress tab
 
@@ -77,6 +86,7 @@ sealed class RequirementStatus {
         override val code = "Closed"
         override val asInt = 301
         override val theme = ColorTheme.Grey
+        override val guideLine = "️\uD83D\uDCDD 고객님이 리뷰를 남겼습니다."
     }
 
     object Canceled : RequirementStatus() {
@@ -84,6 +94,7 @@ sealed class RequirementStatus {
         override val code = "Canceled"
         override val asInt = 302
         override val theme = ColorTheme.Grey
+        override val guideLine = "✔️ 취소된 문의입니다."
     }
     // end region : Done tab
 

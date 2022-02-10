@@ -5,9 +5,11 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
+import kr.co.soogong.master.data.entity.requirement.estimation.EstimationDto
 import kr.co.soogong.master.data.entity.requirement.repair.RepairDto
 import kr.co.soogong.master.domain.entity.requirement.RequirementCard
 import kr.co.soogong.master.presentation.ui.common.EndlessScrollableViewModel
+import kr.co.soogong.master.presentation.ui.requirement.IRequirementViewModel
 import kr.co.soogong.master.presentation.ui.requirement.RequirementViewModelAggregate
 import kr.co.soogong.master.utility.ListLiveData
 import timber.log.Timber
@@ -16,7 +18,7 @@ import javax.inject.Inject
 @HiltViewModel
 open class RequirementsViewModel @Inject constructor(
     private val requirementViewModelAggregate: RequirementViewModelAggregate,
-) : EndlessScrollableViewModel() {
+) : EndlessScrollableViewModel(), IRequirementViewModel {
 
     val requirements = ListLiveData<RequirementCard>()
     val isEmptyList = MutableLiveData(false)
@@ -26,7 +28,7 @@ open class RequirementsViewModel @Inject constructor(
 
     open fun requestRequirements() {}
 
-    fun callToClient(requirementId: Int) {
+    override fun callToClient(requirementId: Int) {
         Timber.tag(TAG).d("callToCustomer: $requirementId")
         requirements.value?.find { it.id == requirementId }?.estimationId?.let { estimationId ->
             requirementViewModelAggregate.callToClientUseCase(estimationId)
@@ -44,15 +46,26 @@ open class RequirementsViewModel @Inject constructor(
         }
     }
 
-    fun askForReview(requirementCard: RequirementCard?) {
+    override fun respondToMeasure(estimationDto: EstimationDto) {
+        Timber.tag(TAG).d("respondToMeasure: ")
+        requirementViewModelAggregate.respondToMeasureUseCase(estimationDto)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeBy(
+                onSuccess = {
+                    Timber.tag(TAG).d("acceptToMeasure is successful: $it")
+
+                },
+                onError = {
+                    Timber.tag(TAG).w("acceptToMeasure is failed: $it")
+                    setAction(REQUEST_FAILED)
+                }).addToDisposable()
+    }
+
+    override fun askForReview(repairDto: RepairDto) {
         Timber.tag(TAG).d("askForReview: ")
-        requirementViewModelAggregate.requestReviewUseCase(
-            RepairDto(
-                id = requirementCard?.repairId,
-                requirementToken = requirementCard?.token,
-                estimationId = requirementCard?.estimationId,
-            )
-        ).subscribeOn(Schedulers.io())
+        requirementViewModelAggregate.requestReviewUseCase(repairDto)
+            .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
                 onSuccess = {

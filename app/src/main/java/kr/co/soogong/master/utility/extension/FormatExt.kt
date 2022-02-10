@@ -18,10 +18,8 @@ fun Date?.formatFullDateTimeWithoutDay(): String {
     return SimpleDateFormat("yyyy.MM.dd - HH:mm", Locale.KOREA).format(this)
 }
 
-fun Date?.formatDate(): String {
-    if (this == null) return ""
-    return SimpleDateFormat("yyyy.MM.dd(E)", Locale.KOREA).format(this)
-}
+fun Date.formatDateWithDay(): String =
+    SimpleDateFormat("yyyy.MM.dd (E)", Locale.KOREA).format(this)
 
 fun Date?.formatDateWithoutDay(): String {
     if (this == null) return ""

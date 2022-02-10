@@ -4,6 +4,7 @@ import android.icu.util.Calendar
 import timber.log.Timber
 import java.util.*
 
+// NOTE: 2022/02/09 필요 여부에 따라서 리팩토링 필요
 object TimeHelper {
     const val TAG = "TimeHelper"
 

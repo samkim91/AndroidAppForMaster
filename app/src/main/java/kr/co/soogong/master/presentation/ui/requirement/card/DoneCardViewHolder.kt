@@ -1,14 +1,11 @@
 package kr.co.soogong.master.presentation.ui.requirement.card
 
 import android.content.Context
-import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentManager
-import kr.co.soogong.master.R
-import kr.co.soogong.master.domain.entity.requirement.RequirementCard
 import kr.co.soogong.master.databinding.ViewHolderRequirementCardBinding
+import kr.co.soogong.master.domain.entity.requirement.RequirementCard
 import kr.co.soogong.master.presentation.ui.main.MainViewModel
 import kr.co.soogong.master.presentation.ui.requirement.list.RequirementsViewModel
-import kr.co.soogong.master.utility.extension.formatMoney
 
 // 완료탭의 viewHolders
 
@@ -25,10 +22,7 @@ class ClosedViewHolder(
     ) {
         super.bind(requirementCard)
 
-        binding.tvActualPrice.isVisible = true
-        binding.tvActualPrice.text =
-            context.getString(R.string.repair_actual_price_in_requirement_card,
-                requirementCard.repairPrice.formatMoney())
+        setRepairPrice(requirementCard.repairPrice)
     }
 }
 
@@ -45,10 +39,6 @@ class CanceledViewHolder(
     ) {
         super.bind(requirementCard)
 
-        binding.tvActualPrice.isVisible = true
-        binding.tvActualPrice.text =
-            context.getString(R.string.repair_actual_price_in_requirement_card,
-                requirementCard.repairPrice.formatMoney())
     }
 }
 

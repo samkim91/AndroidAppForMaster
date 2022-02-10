@@ -8,6 +8,7 @@
     <string name="special_symbol_stroke">-</string>
 
     <string name="kilo_meters_digit">%d km</string>
+    <string name="kilo_meters_float">%f km</string>
     <string name="years_comma">%d년, %s</string>
     <string name="percent">%d%%</string>
     <string name="version_text">v%s</string>
@@ -143,9 +144,7 @@
 
     <!-- RequirementsCard -->
 
-    <string name="requirements_card_estimation_due_time">견적 마감시간 %s</string>
-    <string name="requirements_card_request_measure_due_time">응답 마감시간 %s</string>
-    <string name="requirements_card_view_detail">자세히 보기</string>
+    <string name="my_estimation_price">나의 견적가</string>
     <string name="not_estimated_text">견적 미발송</string>
 
     <!-- View Requirement -->
@@ -194,7 +193,8 @@
     <string name="repair_done_text">시공 완료</string>
     <string name="cancel_repair">시공 취소</string>
 
-    <string name="call_to_customer">전화연결</string>
+    <string name="call_to_customer">전화하기</string>
+    <string name="call_to_customer_again">다시 전화하기</string>
 
     <!-- Requirement Intro -->
 
@@ -226,7 +226,6 @@
 
     <!-- End Estimate -->
     <string name="end_repair_title">최종 정보</string>
-    <string name="actual_price">최종 시공가</string>
     <string name="end_estimate_calendar_title">시공 완료일자</string>
 
     <!-- Profile -->
