@@ -9,7 +9,6 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentManager
 import kr.co.soogong.master.R
-import kr.co.soogong.master.databinding.ActivityViewRequirementBinding
 import kr.co.soogong.master.domain.entity.requirement.Requirement
 import kr.co.soogong.master.domain.entity.requirement.RequirementStatus
 import kr.co.soogong.master.presentation.ui.common.dialog.popup.DefaultDialog

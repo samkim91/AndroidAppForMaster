@@ -56,6 +56,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
             showDialogForCallingCustomer(this, viewModel, requirement)
         }
 
+
         viewModel.event.observe(this, EventObserver { (event, value) ->
             when (event) {
                 CALL_TO_CLIENT -> startActivity(CallToCustomerHelper.getIntent(value.toString()))
