@@ -10,7 +10,6 @@ import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.entity.requirement.estimation.EstimationDto
 import kr.co.soogong.master.data.entity.requirement.repair.RepairDto
 import kr.co.soogong.master.domain.entity.common.CodeTable
-import kr.co.soogong.master.domain.entity.profile.Review
 import kr.co.soogong.master.domain.entity.requirement.Requirement
 import kr.co.soogong.master.domain.entity.requirement.estimation.EstimationResponseCode
 import kr.co.soogong.master.domain.repository.ProfileRepository
@@ -39,10 +38,6 @@ class ViewRequirementViewModel @Inject constructor(
     val requirement: LiveData<Requirement>
         get() = _requirement
 
-    private val _review = MutableLiveData<Review>()
-    val review: LiveData<Review>
-        get() = _review
-
     init {
         requestMasterSimpleInfo()
     }
@@ -55,15 +50,11 @@ class ViewRequirementViewModel @Inject constructor(
             .subscribeBy(
                 onSuccess = {
                     Timber.tag(TAG).d("requestRequirement successfully: $it")
-                    if (it.estimationDto?.masterResponseCode == EstimationResponseCode.REFUSED) {
-                        Timber.tag(TAG)
-                            .d("invalid requirement: ${it.estimationDto.masterResponseCode}")
+                    if (it.estimationDto?.masterResponseCode == EstimationResponseCode.REFUSED || it.estimationDto?.masterResponseCode == EstimationResponseCode.EXPIRED) {
+                        Timber.tag(TAG).d("invalid requirement: ")
                         setAction(INVALID_REQUIREMENT)
                     }
                     _requirement.value = it
-                    it.estimationDto?.repair?.review?.let { reviewDto ->
-                        _review.value = Review.fromReviewDto(reviewDto)
-                    }
                 },
                 onError = {
                     Timber.tag(TAG).d("requestRequirement failed: $it")
@@ -123,8 +114,9 @@ class ViewRequirementViewModel @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
                 onSuccess = {
-                    Timber.tag(TAG).d("acceptToMeasure is successful: $it")
-                    setAction(RESPOND_TO_MEASURE_SUCCESSFULLY)
+                    Timber.tag(TAG).d("acceptToMeasure is successful: ")
+                    requestRequirement()
+                    setAction(ACCEPT_TO_MEASURE_SUCCESSFULLY)
                 },
                 onError = {
                     Timber.tag(TAG).w("acceptToMeasure is failed: $it")
@@ -143,7 +135,6 @@ class ViewRequirementViewModel @Inject constructor(
                 .subscribeBy(
                     onSuccess = {
                         Timber.tag(TAG).d("callToClient successfully: $it")
-                        setAction(CALL_TO_CUSTOMER_SUCCESSFULLY)
                     },
                     onError = {
                         Timber.tag(TAG).d("callToClient failed: $it")
@@ -151,6 +142,8 @@ class ViewRequirementViewModel @Inject constructor(
                     }
                 ).addToDisposable()
         }
+
+        sendEvent(CALL_TO_CLIENT, requirement.value?.phoneNumber!!)
     }
 
     fun askForReview() {
@@ -203,8 +196,8 @@ class ViewRequirementViewModel @Inject constructor(
         private const val TAG = "ViewRequirementViewModel"
         const val REFUSE_TO_ESTIMATE_SUCCESSFULLY = "REFUSE_TO_ESTIMATE_SUCCESSFULLY"
         const val INVALID_REQUIREMENT = "INVALID_REQUIREMENT"
-        const val RESPOND_TO_MEASURE_SUCCESSFULLY = "RESPOND_TO_MEASURE_SUCCESSFULLY"
-        const val CALL_TO_CUSTOMER_SUCCESSFULLY = "CALL_TO_CUSTOMER_SUCCESSFULLY"
+        const val ACCEPT_TO_MEASURE_SUCCESSFULLY = "RESPOND_TO_MEASURE_SUCCESSFULLY"
+        const val CALL_TO_CLIENT = "CALL_TO_CLIENT"
         const val ASK_FOR_REVIEW_SUCCESSFULLY = "ASK_FOR_REVIEW_SUCCESSFULLY"
         const val NOT_APPROVED_MASTER = "NOT_APPROVED_MASTER"
         const val REQUEST_APPROVE_MASTER = "REQUEST_APPROVE_MASTER"

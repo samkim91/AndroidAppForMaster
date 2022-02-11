@@ -32,7 +32,7 @@ class PreferencesContainerActivity : BaseActivity<ActivityPreferencesContainerBi
             with(abHeader) {
                 title = pageName
 
-                setButtonBackClickListener {
+                setIvBackClickListener {
                     onBackPressed()
                 }
             }

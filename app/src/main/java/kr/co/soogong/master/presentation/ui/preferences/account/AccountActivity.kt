@@ -30,7 +30,7 @@ class AccountActivity : BaseActivity<ActivityAccountBinding>(
             vm = viewModel
             lifecycleOwner = this@AccountActivity
 
-            abHeader.setButtonBackClickListener { onBackPressed() }
+            abHeader.setIvBackClickListener { onBackPressed() }
         }
     }
 

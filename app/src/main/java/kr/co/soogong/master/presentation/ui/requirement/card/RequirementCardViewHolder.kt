@@ -124,7 +124,7 @@ open class RequirementCardViewHolder(
     }
 
     protected fun AppCompatButton.setSendingEstimation(
-        requirementCard: RequirementCard
+        requirementCard: RequirementCard,
     ) {
         this.isVisible = true
         this.text = context.getString(R.string.write_estimation)
@@ -145,7 +145,7 @@ open class RequirementCardViewHolder(
     ) {
         this.isVisible = true
 
-        if(!requirementCard.isCalled) {        // 전화하기
+        if (!requirementCard.isCalled) {        // 전화하기
             this.text = context.getString(R.string.call_to_customer)
         } else {        // 다시 전화하기
             this.text = context.getString(R.string.call_to_customer_again)
@@ -234,13 +234,19 @@ open class RequirementCardViewHolder(
     ) {
         this.isVisible = true
 
+        // TODO: 2022/02/11 refactoring.. requestReviewYn 에 확장함수를 붙여서 조건에 따라 값을 set 하도록 한다
         if (!requirementCard.requestReviewYn) {     // 리뷰 요청
+            this.isEnabled = true
             this.text = context.getString(R.string.request_review)
             this.setOnClickListener {
                 checkMasterApprovedStatus {
                     viewModel.askForReview(requirementCard)
                 }
             }
+            this.background = ResourcesCompat.getDrawable(resources,
+                R.drawable.bg_solid_light_grey1_selector_radius30,
+                null)
+            this.setTextColor(ResourcesCompat.getColor(resources, R.color.grey_1, null))
         } else {        // 리뷰 요청 완료
             this.isEnabled = false
             this.text = context.getString(R.string.request_review_done)
@@ -251,25 +257,25 @@ open class RequirementCardViewHolder(
         }
     }
 
-companion object {
-    fun create(
-        context: Context,
-        fragmentManager: FragmentManager,
-        mainViewModel: MainViewModel,
-        viewModel: RequirementsViewModel,
-        parent: ViewGroup,
-        viewType: Int,
-    ): RequirementCardViewHolder {
-        val binding = ViewHolderRequirementCardBinding.inflate(
-            LayoutInflater.from(parent.context),
-            parent,
-            false
-        )
+    companion object {
+        fun create(
+            context: Context,
+            fragmentManager: FragmentManager,
+            mainViewModel: MainViewModel,
+            viewModel: RequirementsViewModel,
+            parent: ViewGroup,
+            viewType: Int,
+        ): RequirementCardViewHolder {
+            val binding = ViewHolderRequirementCardBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
 
-        return when (viewType) {
-            RequirementStatus.Requested.asInt -> RequestedCardViewHolder(context,
-                fragmentManager,
-                mainViewModel,
+            return when (viewType) {
+                RequirementStatus.Requested.asInt -> RequestedCardViewHolder(context,
+                    fragmentManager,
+                    mainViewModel,
                     viewModel,
                     binding)
 

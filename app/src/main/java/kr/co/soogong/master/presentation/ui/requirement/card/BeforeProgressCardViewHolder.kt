@@ -44,7 +44,6 @@ class EstimatedCardViewHolder(
         super.bind(requirementCard)
 
         with(binding) {
-            buttonRight.setSendingEstimation(requirementCard)
             buttonLeft.setCallToClient(requirementCard)
         }
     }

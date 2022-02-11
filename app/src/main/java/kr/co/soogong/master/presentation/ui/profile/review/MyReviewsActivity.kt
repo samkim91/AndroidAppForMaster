@@ -30,7 +30,7 @@ class MyReviewsActivity : BaseActivity<ActivityMyReviewsBinding>(
             vm = viewModel
             lifecycleOwner = this@MyReviewsActivity
 
-            abHeader.setButtonBackClickListener { onBackPressed() }
+            abHeader.setIvBackClickListener { onBackPressed() }
 
             rvReviews.adapter = ReviewAdapter(this@MyReviewsActivity)
         }

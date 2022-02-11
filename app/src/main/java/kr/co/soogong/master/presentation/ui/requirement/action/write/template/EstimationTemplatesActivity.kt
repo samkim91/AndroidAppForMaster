@@ -34,7 +34,7 @@ class EstimationTemplatesActivity : BaseActivity<ActivityEstimationTemplatesBind
             vm = viewModel
             lifecycleOwner = this@EstimationTemplatesActivity
 
-            abHeader.setButtonBackClickListener { onBackPressed() }
+            abHeader.setIvBackClickListener { onBackPressed() }
 
             recyclerviewForTemplates.adapter = EstimationTemplateAdapter(
                 onDeletingClicked = { template ->

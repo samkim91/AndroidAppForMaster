@@ -23,7 +23,7 @@ class MajorActivity : BaseActivity<ActivityMajorBinding>(
 
     override fun initLayout() {
         bind {
-            abHeader.setButtonBackClickListener { onBackPressed() }
+            abHeader.setIvBackClickListener { onBackPressed() }
             setCategoryFragment()
         }
     }

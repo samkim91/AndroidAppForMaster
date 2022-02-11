@@ -54,7 +54,7 @@ class MeasurementActivity : BaseActivity<ActivityMeasurementBinding>(
             vm = viewModel
             colorThemeEstimationTemplate = ColorTheme.Green
 
-            abHeader.setButtonBackClickListener { onBackPressed() }
+            abHeader.setIvBackClickListener { onBackPressed() }
 
             bSendEstimation.setOnClickListener {
                 validateCost()

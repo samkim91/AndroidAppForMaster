@@ -38,8 +38,23 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Title" />
 
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/gap_10"
+            android:paddingTop="@dimen/gap_10"
+            android:paddingEnd="@dimen/gap_24"
+            android:paddingBottom="@dimen/gap_10"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/tv_title"
+            app:layout_constraintEnd_toStartOf="@id/tv_right"
+            app:layout_constraintTop_toTopOf="@id/tv_title"
+            tools:src="@drawable/ic_phone"
+            tools:visibility="visible" />
+
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_any"
+            android:id="@+id/tv_right"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"

@@ -36,7 +36,7 @@ class DoneActivity : BaseActivity<ActivityDoneBinding>(
             lifecycleOwner = this@DoneActivity
             vm = viewModel
 
-            abHeader.setButtonBackClickListener { onBackPressed() }
+            abHeader.setIvBackClickListener { onBackPressed() }
 
             rvRequirements.adapter = RequirementCardsAdapter(this@DoneActivity,
                 supportFragmentManager,

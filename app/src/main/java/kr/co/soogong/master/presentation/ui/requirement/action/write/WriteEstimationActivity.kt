@@ -61,7 +61,7 @@ class WriteEstimationActivity : BaseActivity<ActivityWriteEstimationBinding>(
 
             initChipGroup()
 
-            abHeader.setButtonBackClickListener { onBackPressed() }
+            abHeader.setIvBackClickListener { onBackPressed() }
 
             saidAttachments.setImagesDeletableAdapter { viewModel.estimationImages.removeAt(it) }
 
