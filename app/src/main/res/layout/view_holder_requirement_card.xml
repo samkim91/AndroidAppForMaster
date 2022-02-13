@@ -19,9 +19,9 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="@{card_click_listener}"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="@dimen/gap_14"
-        android:onClick="@{card_click_listener}"
         app:cardElevation="@dimen/gap_1">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -91,11 +91,11 @@
                 android:background="@drawable/bg_solid_background_radius8"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="@{data.status.guideLine}"
                 android:paddingStart="@dimen/gap_16"
                 android:paddingTop="@dimen/gap_12"
                 android:paddingEnd="@dimen/gap_16"
                 android:paddingBottom="@dimen/gap_12"
+                android:text="@{data.status.guideLine}"
                 android:textAppearance="@style/footnote.regular"
                 android:textColor="@color/grey_4"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -113,8 +113,8 @@
                 android:textAppearance="@style/subheadline.bold"
                 android:textColor="@color/black"
                 app:layout_constraintEnd_toStartOf="@id/tv_price"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_guideline"
                 tools:text="최종 시공가" />
 
@@ -122,10 +122,10 @@
                 android:id="@+id/tv_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="@style/subheadline.bold"
-                android:textColor="@color/brand_green"
                 android:paddingTop="@dimen/gap_8"
                 android:paddingBottom="@dimen/gap_8"
+                android:textAppearance="@style/subheadline.bold"
+                android:textColor="@color/brand_green"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/tv_price_label"
                 app:layout_constraintTop_toTopOf="@id/tv_price_label"
@@ -135,8 +135,8 @@
                 android:id="@+id/group_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:constraint_referenced_ids="tv_price, tv_price_label"
                 android:visibility="gone"
+                app:constraint_referenced_ids="tv_price, tv_price_label"
                 tools:visibility="visible" />
 
             <androidx.constraintlayout.widget.Barrier
@@ -155,9 +155,9 @@
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/button_right"
+                app:layout_constraintHorizontal_weight="4"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/barrier_buttons"
-                app:layout_constraintHorizontal_weight="4"
                 app:layout_goneMarginEnd="@dimen/gap_0"
                 tools:text="전화 하기"
                 tools:visibility="visible" />
@@ -169,8 +169,8 @@
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/button_left"
                 app:layout_constraintHorizontal_weight="6"
+                app:layout_constraintStart_toEndOf="@id/button_left"
                 app:layout_constraintTop_toBottomOf="@id/barrier_buttons"
                 tools:text="견적 보내기"
                 tools:visibility="visible" />

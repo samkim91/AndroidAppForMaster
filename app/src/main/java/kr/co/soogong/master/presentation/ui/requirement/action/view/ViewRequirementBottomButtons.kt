@@ -9,6 +9,7 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentManager
 import kr.co.soogong.master.R
+import kr.co.soogong.master.databinding.ActivityViewRequirementBinding
 import kr.co.soogong.master.domain.entity.requirement.Requirement
 import kr.co.soogong.master.domain.entity.requirement.RequirementStatus
 import kr.co.soogong.master.presentation.ui.common.dialog.popup.DefaultDialog
@@ -283,19 +284,21 @@ private fun AppCompatButton.setAskingReview(
     viewModel: ViewRequirementViewModel,
 ) {
     isVisible = true
+    setOnClickListener { viewModel.askForReview() }
 
-    viewModel.requirement.value?.estimationDto?.repair?.requestReviewYn?.run {
-        if (this) {
-            isEnabled = false
-            text = context.getString(R.string.request_review_done)
-            background = ResourcesCompat.getDrawable(resources,
-                R.drawable.bg_solid_light_grey1_selector_radius30,
-                null)
-            setTextColor(ResourcesCompat.getColor(resources, R.color.grey_1, null))
-        } else {
-            text = context.getString(R.string.request_review)
-            setOnClickListener { viewModel.askForReview() }
-        }
+    viewModel.requirement.value?.estimationDto?.repair?.requestReviewYn?.let { isRequestedReview ->
+        isEnabled = !isRequestedReview
+
+        text =
+            context.getString(if (isRequestedReview) R.string.request_review_done else R.string.request_review)
+
+        background = ResourcesCompat.getDrawable(resources,
+            if (isRequestedReview) R.drawable.bg_solid_light_grey1_selector_radius30 else R.drawable.bg_solid_green_selector_radius30,
+            null)
+
+        setTextColor(ResourcesCompat.getColor(resources,
+            if (isRequestedReview) R.color.grey_1 else R.color.white,
+            null))
     }
 }
 

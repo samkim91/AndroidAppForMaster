@@ -145,15 +145,17 @@ open class RequirementCardViewHolder(
     ) {
         this.isVisible = true
 
-        if (!requirementCard.isCalled) {        // 전화하기
-            this.text = context.getString(R.string.call_to_customer)
-        } else {        // 다시 전화하기
-            this.text = context.getString(R.string.call_to_customer_again)
-            this.background = ResourcesCompat.getDrawable(resources,
-                R.drawable.bg_solid_transparent_stroke_light_grey2_selector_radius30,
-                null)
-            this.setTextColor(ResourcesCompat.getColor(resources, R.color.grey_4, null))
-        }
+        this.text =
+            if (!requirementCard.isCalled) context.getString(R.string.call_to_customer)
+            else context.getString(R.string.call_to_customer_again)
+
+        this.background = ResourcesCompat.getDrawable(resources,
+            if (!requirementCard.isCalled) R.drawable.bg_solid_transparent_stroke_green_selector_radius30 else R.drawable.bg_solid_transparent_stroke_light_grey2_selector_radius30,
+            null)
+
+        this.setTextColor(ResourcesCompat.getColor(resources,
+            if (!requirementCard.isCalled) R.color.selector_green_alpha50 else R.color.grey_4,
+            null))
 
         this.setOnClickListener {
             checkMasterApprovedStatus {
@@ -234,27 +236,24 @@ open class RequirementCardViewHolder(
     ) {
         this.isVisible = true
 
-        // TODO: 2022/02/11 refactoring.. requestReviewYn 에 확장함수를 붙여서 조건에 따라 값을 set 하도록 한다
-        if (!requirementCard.requestReviewYn) {     // 리뷰 요청
-            this.isEnabled = true
-            this.text = context.getString(R.string.request_review)
-            this.setOnClickListener {
-                checkMasterApprovedStatus {
-                    viewModel.askForReview(requirementCard)
-                }
+        this.setOnClickListener {
+            checkMasterApprovedStatus {
+                viewModel.askForReview(requirementCard)
             }
-            this.background = ResourcesCompat.getDrawable(resources,
-                R.drawable.bg_solid_light_grey1_selector_radius30,
-                null)
-            this.setTextColor(ResourcesCompat.getColor(resources, R.color.grey_1, null))
-        } else {        // 리뷰 요청 완료
-            this.isEnabled = false
-            this.text = context.getString(R.string.request_review_done)
-            this.background = ResourcesCompat.getDrawable(resources,
-                R.drawable.bg_solid_light_grey1_selector_radius30,
-                null)
-            this.setTextColor(ResourcesCompat.getColor(resources, R.color.grey_1, null))
         }
+
+        this.isEnabled = !requirementCard.requestReviewYn
+        this.text =
+            if (!requirementCard.requestReviewYn) context.getString(R.string.request_review) else context.getString(
+                R.string.request_review_done)
+
+        this.background = ResourcesCompat.getDrawable(resources,
+            if (!requirementCard.requestReviewYn) R.drawable.bg_solid_green_selector_radius30 else R.drawable.bg_solid_light_grey1_selector_radius30,
+            null)
+
+        this.setTextColor(ResourcesCompat.getColor(resources,
+            if (!requirementCard.requestReviewYn) R.color.white else R.color.grey_1,
+            null))
     }
 
     companion object {
