@@ -19,46 +19,67 @@
         android:paddingBottom="@dimen/gap_24">
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/iv_logo"
+            android:id="@+id/iv_bolty"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/ic_main_logo"
-            app:layout_constraintBottom_toTopOf="@id/tv_introduction"
+            android:background="@drawable/ic_bolty"
+            app:layout_constraintBottom_toTopOf="@id/iv_logo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_12"
+            android:background="@drawable/ic_main_logo"
+            android:backgroundTint="@color/light_grey_2"
+            app:layout_constraintBottom_toTopOf="@id/tv_introduction"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_bolty"
             app:layout_constraintVertical_chainStyle="packed" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_introduction"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/gap_11"
+            android:layout_marginTop="@dimen/gap_20"
             android:text="@string/sign_up_introduction"
             android:textAppearance="@style/footnote.regular"
             android:textColor="@color/grey_3"
-            app:layout_constraintBottom_toTopOf="@id/b_sign_in"
+            app:layout_constraintBottom_toTopOf="@id/gl_buttons"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_logo" />
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_buttons"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_end="@dimen/gap_56" />
+
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/b_sign_in"
-            style="@style/button.big.outlined_primary"
-            android:layout_marginBottom="@dimen/gap_8"
+            style="@style/button.big.primary"
+            android:layout_marginStart="@dimen/gap_8"
             android:onClick="@{() -> vm.moveToSignIn()}"
             android:text="@string/sign_in"
-            app:layout_constraintBottom_toTopOf="@id/b_sign_up"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toEndOf="@id/b_sign_up"
+            app:layout_goneMarginStart="@dimen/gap_0" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/b_sign_up"
-            style="@style/button.big.primary"
+            style="@style/button.big.outlined_primary"
             android:onClick="@{() -> vm.moveToSignUp()}"
             android:text="@string/sign_up"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/b_sign_in"
             app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
