@@ -29,7 +29,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:title="@{@string/writing_estimation}" />
+            app:title="@{@string/writing_measurement}" />
 
         <ScrollView
             android:layout_width="@dimen/gap_0"

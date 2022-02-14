@@ -13,7 +13,7 @@
             android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toStartOf="@id/bb_button"
-            app:layout_constraintHorizontal_weight="7"
+            app:layout_constraintHorizontal_weight="8"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -24,7 +24,7 @@
             android:layout_marginStart="@dimen/gap_8"
             android:layout_marginTop="@dimen/gap_6"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_weight="3"
+            app:layout_constraintHorizontal_weight="2"
             app:layout_constraintStart_toEndOf="@id/ti_content"
             app:layout_constraintTop_toTopOf="@id/ti_content" />
     </merge>

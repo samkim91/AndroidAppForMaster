@@ -49,18 +49,49 @@
                     android:id="@+id/iv_logo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/gap_48"
+                    android:layout_marginStart="@dimen/gap_16"
+                    android:layout_marginTop="@dimen/gap_24"
                     android:background="@drawable/ic_main_logo"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    android:backgroundTint="@color/light_grey_2"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_welcome_message"
+                    android:layout_width="@dimen/gap_0"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/gap_16"
+                    android:layout_marginTop="@dimen/gap_16"
+                    android:layout_marginEnd="@dimen/gap_16"
+                    android:breakStrategy="simple"
+                    android:text="@string/welcome_message"
+                    android:textAppearance="@style/title_3.regular"
+                    android:textColor="@color/dark_grey_2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/iv_logo" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_ask_to_authentication"
+                    android:layout_width="@dimen/gap_0"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/gap_16"
+                    android:layout_marginTop="@dimen/gap_8"
+                    android:layout_marginEnd="@dimen/gap_16"
+                    android:breakStrategy="simple"
+                    android:text="@string/tv_ask_to_authentication"
+                    android:textAppearance="@style/footnote.regular"
+                    android:textColor="@color/grey_3"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_welcome_message" />
 
                 <kr.co.soogong.master.presentation.atomic.organisms.SubheadlineTextInputButtonMediumTextInputTimer
                     android:id="@+id/stibmtit_auth_phone_number"
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/gap_16"
-                    android:layout_marginTop="@dimen/gap_48"
+                    android:layout_marginTop="@dimen/gap_26"
                     android:layout_marginEnd="@dimen/gap_16"
                     app:buttonText="@{@string/certify}"
                     app:buttonTheme="@{authPhoneNumberButtonTheme}"
@@ -69,7 +100,7 @@
                     app:inputType="@{InputType.TYPE_CLASS_NUMBER}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/iv_logo"
+                    app:layout_constraintTop_toBottomOf="@id/tv_ask_to_authentication"
                     app:max="@{11}"
                     app:secondContent="@={vm.certificationCode}"
                     app:textInputTimerHint="@{@string/certification_code}"
@@ -86,27 +117,28 @@
                     android:paddingStart="@dimen/gap_10"
                     android:paddingTop="@dimen/gap_5"
                     android:paddingEnd="@dimen/gap_0"
+                    android:paddingBottom="@dimen/gap_5"
                     android:text="@string/resend_certification_code"
                     android:textColor="@color/grey_3"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/b_sign_in"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="1"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/stibmtit_auth_phone_number"
                     app:layout_constraintVertical_bias="0"
                     tools:visibility="visible" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/b_sign_in"
+                    style="@style/button.big.primary"
+                    android:layout_marginStart="@dimen/gap_16"
+                    android:layout_marginEnd="@dimen/gap_16"
+                    android:layout_marginBottom="@dimen/gap_24"
+                    android:text="@string/sign_in"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/b_sign_in"
-            style="@style/button.big.primary"
-            android:layout_marginStart="@dimen/gap_16"
-            android:layout_marginEnd="@dimen/gap_16"
-            android:layout_marginBottom="@dimen/gap_24"
-            android:text="@string/sign_in"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

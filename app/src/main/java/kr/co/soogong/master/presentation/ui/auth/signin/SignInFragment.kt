@@ -11,8 +11,8 @@ import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
-import kr.co.soogong.master.domain.entity.common.ButtonTheme
 import kr.co.soogong.master.databinding.FragmentSignInBinding
+import kr.co.soogong.master.domain.entity.common.ButtonTheme
 import kr.co.soogong.master.presentation.LIMIT_TIME_TO_AUTH
 import kr.co.soogong.master.presentation.ui.auth.AuthContainerActivity
 import kr.co.soogong.master.presentation.ui.auth.signin.SignInViewModel.Companion.PHONE_NUMBER_EXIST
@@ -54,6 +54,7 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(
 
             abHeader.setIvBackClickListener { (activity as AuthContainerActivity).onBackPressed() }
 
+            // 타이머 초기화
             stibmtitAuthPhoneNumber.textInputTimer.initTimer(
                 minute = 2,
                 interval = 1L,
@@ -85,6 +86,7 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(
 
             // "재요청하기"에 대한 코드
             tvResendCertificationCode.setOnClickListener {
+                // TODO: 2022/02/14 번호를 입력하지 않고 재요청을 누르면 에러가 발생한다. 예외처리 또는 로직 개선 필요
                 startPhoneNumberVerification(isFirst = false)
             }
 
