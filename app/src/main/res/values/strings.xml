@@ -78,6 +78,8 @@
     <string name="private_policy">개인정보 처리방침</string>
     <!-- Sign In -->
     <string name="sign_in">로그인</string>
+    <string name="welcome_message">마스터님 환영합니다.\n수리가 필요한 고객님들을 만나보세요.</string>
+    <string name="tv_ask_to_authentication">로그인을 위해서 전화번호 인증 해주세요!</string>
 
     <!-- My Page-->
     <string name="notice">공지사항</string>
