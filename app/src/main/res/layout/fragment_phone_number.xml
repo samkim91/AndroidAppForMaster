@@ -20,21 +20,31 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <kr.co.soogong.master.presentation.atomic.molecules.LogoTitle3Footnote
+            android:id="@+id/ltf_introduction"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="wrap_content"
+            app:footnote="@{@string/tv_ask_to_authentication_at_sign_up}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="@{@string/welcome_message_at_sign_up}" />
+
         <kr.co.soogong.master.presentation.atomic.organisms.SubheadlineTextInputButtonMediumTextInputTimer
             android:id="@+id/stibmtit_auth_phone_number"
             android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"
-            app:buttonText="@{@string/certify}"
+            app:buttonText="@{@string/certification}"
             app:buttonTheme="@{authPhoneNumberButtonTheme}"
             app:firstContent="@={vm.tel}"
             app:hint="@{@string/type_phone_number_hint}"
             app:inputType="@{InputType.TYPE_CLASS_NUMBER}"
             app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="@dimen/gap_26"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ltf_introduction"
             app:max="@{11}"
             app:secondContent="@={vm.certificationCode}"
-            app:subheadline="@{@string/type_phone_number}"
             app:textInputTimerHint="@{@string/certification_code}"
             app:textInputTimerInputType="@{InputType.TYPE_CLASS_NUMBER}"
             app:textInputTimerMax="@{6}" />
@@ -48,6 +58,7 @@
             android:paddingStart="@dimen/gap_10"
             android:paddingTop="@dimen/gap_5"
             android:paddingEnd="@dimen/gap_0"
+            android:paddingBottom="@dimen/gap_10"
             android:text="@string/resend_certification_code"
             android:textColor="@color/grey_3"
             app:layout_constraintEnd_toEndOf="parent"

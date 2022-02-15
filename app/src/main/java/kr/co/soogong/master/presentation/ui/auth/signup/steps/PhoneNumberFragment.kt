@@ -11,12 +11,11 @@ import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
-import kr.co.soogong.master.domain.entity.common.ButtonTheme
 import kr.co.soogong.master.databinding.FragmentPhoneNumberBinding
+import kr.co.soogong.master.domain.entity.common.ButtonTheme
 import kr.co.soogong.master.presentation.LIMIT_TIME_TO_AUTH
 import kr.co.soogong.master.presentation.ui.auth.signup.SignUpViewModel
-import kr.co.soogong.master.presentation.ui.auth.signup.SignUpViewModel.Companion.PHONE_NUMBER_EXIST
-import kr.co.soogong.master.presentation.ui.auth.signup.SignUpViewModel.Companion.PHONE_NUMBER_NOT_EXIST
+import kr.co.soogong.master.presentation.ui.auth.signup.SignUpViewModel.Companion.IS_PHONE_NUMBER_EXIST
 import kr.co.soogong.master.presentation.ui.auth.signup.SignUpViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.presentation.ui.auth.signup.SignUpViewModel.Companion.VALIDATE_PHONE_NUMBER
 import kr.co.soogong.master.presentation.ui.base.BaseFragment
@@ -67,7 +66,7 @@ class PhoneNumberFragment : BaseFragment<FragmentPhoneNumberBinding>(
             stibmtitAuthPhoneNumber.onButtonClick = View.OnClickListener {
                 if (stibmtitAuthPhoneNumber.inputEnabled == false) {     // "재입력"에 대한 코드
                     stibmtitAuthPhoneNumber.inputEnabled = true
-                    stibmtitAuthPhoneNumber.buttonText = getString(R.string.certify)
+                    stibmtitAuthPhoneNumber.buttonText = getString(R.string.certification)
                     stibmtitAuthPhoneNumber.textInputButtonMedium.textInput.textInputEditText.setText(
                         "")
                     return@OnClickListener
@@ -91,24 +90,38 @@ class PhoneNumberFragment : BaseFragment<FragmentPhoneNumberBinding>(
 
     private fun registerEventObserver() {
         Timber.tag(TAG).d("registerEventObserver: ")
+        viewModel.event.observe(viewLifecycleOwner, EventObserver { (event, value) ->
+            when (event) {
+                IS_PHONE_NUMBER_EXIST -> if (value as Boolean) showDialogForUserExist() else startPhoneNumberVerification(isFirst = true)
+            }
+        })
+
         viewModel.action.observe(viewLifecycleOwner, EventObserver { action ->
             when (action) {
-                PHONE_NUMBER_EXIST -> showDialogForUserExist()
-                PHONE_NUMBER_NOT_EXIST -> startPhoneNumberVerification(isFirst = true)
                 REQUEST_FAILED -> requireContext().toast(getString(R.string.error_message_of_request_failed))
             }
         })
 
-        viewModel.validation.observe(viewLifecycleOwner, { validation ->
-            if (validation == VALIDATE_PHONE_NUMBER) {
-                viewModel.certificationCode.observe(viewLifecycleOwner, {
-                    binding.stibmtitAuthPhoneNumber.textInputTimerError =
-                        if (it.length != 6) getString(R.string.invalid_certification_code) else null
-                })
-
-                if (binding.stibmtitAuthPhoneNumber.textInputTimerError.isNullOrEmpty()) verifyPhoneNumberWithCode()
+        viewModel.validation.observe(viewLifecycleOwner) { validation ->
+            when (validation) {
+                VALIDATE_PHONE_NUMBER -> validateValues()
             }
+        }
+
+        viewModel.tel.observe(viewLifecycleOwner) {
+
+        }
+    }
+
+    private fun validateValues() {
+        Timber.tag(TAG).d("validateValues: ")
+
+        viewModel.certificationCode.observe(viewLifecycleOwner, {
+            binding.stibmtitAuthPhoneNumber.textInputTimerError =
+                if (it.length != 6) getString(R.string.invalid_certification_code) else null
         })
+
+        if (binding.stibmtitAuthPhoneNumber.textInputTimerError.isNullOrEmpty()) verifyPhoneNumberWithCode()
     }
 
     private fun initFirebaseAuthCallbacks() {
@@ -150,8 +163,7 @@ class PhoneNumberFragment : BaseFragment<FragmentPhoneNumberBinding>(
     }
 
     private fun startPhoneNumberVerification(isFirst: Boolean) {
-        Timber.tag(TAG)
-            .d("startPhoneNumberVerification: ${viewModel.tel.value}")
+        Timber.tag(TAG).d("startPhoneNumberVerification: ${viewModel.tel.value}")
         with(binding) {
             stibmtitAuthPhoneNumber.inputEnabled = false
             stibmtitAuthPhoneNumber.buttonText = getString(R.string.retyping)
@@ -162,6 +174,8 @@ class PhoneNumberFragment : BaseFragment<FragmentPhoneNumberBinding>(
 
         viewModel.auth.value?.let { auth ->
             viewModel.tel.value?.let { phoneNumber ->
+                if (phoneNumber.isEmpty()) return
+
                 val options = PhoneAuthOptions.newBuilder(auth)
                     .setPhoneNumber(PhoneNumberHelper.toGlobalNumber(phoneNumber))      // Phone number to verify
                     .setTimeout(
@@ -213,7 +227,7 @@ class PhoneNumberFragment : BaseFragment<FragmentPhoneNumberBinding>(
                     Timber.tag(TAG)
                         .d("signInWithPhoneAuthCredential successfully: ")
                     viewModel.uid.value = task.result?.user?.uid
-                    viewModel.moveToNext()
+                    viewModel.setCurrentPage(1)
                 } else {
                     // Sign in failed, display a message and update the UI
                     Timber.tag(TAG)

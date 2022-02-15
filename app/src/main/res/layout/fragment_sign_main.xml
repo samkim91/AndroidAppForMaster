@@ -64,7 +64,7 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/b_sign_in"
-            style="@style/button.big.primary"
+            style="@style/button.medium.primary"
             android:layout_marginStart="@dimen/gap_8"
             android:onClick="@{() -> vm.moveToSignIn()}"
             android:text="@string/sign_in"
@@ -75,7 +75,7 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/b_sign_up"
-            style="@style/button.big.outlined_primary"
+            style="@style/button.medium.outlined_primary"
             android:onClick="@{() -> vm.moveToSignUp()}"
             android:text="@string/sign_up"
             app:layout_constraintBottom_toBottomOf="parent"

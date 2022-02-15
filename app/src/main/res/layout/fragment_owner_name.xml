@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -12,7 +13,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/gap_74">
 
         <kr.co.soogong.master.presentation.atomic.molecules.SubheadlineTextInput
             android:id="@+id/sti_owner_name"
@@ -25,5 +27,84 @@
             app:layout_constraintTop_toTopOf="parent"
             app:max="@{20}"
             app:subheadline="@{@string/type_owner_name}" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_agreement"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_48"
+            android:text="@string/agreement_introduction"
+            android:textAppearance="@style/subheadline.bold"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sti_owner_name" />
+
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:id="@+id/cb_agreement_all"
+            style="@style/check_box_rectangle"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_16"
+            android:checked="@{vm.termsOfService &amp;&amp; vm.privacyPolicy &amp;&amp; vm.marketingPush}"
+            android:onClick="@{(view) -> vm.checkAll(view)}"
+            android:text="@string/agreement_all"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_agreement" />
+
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:id="@+id/cb_agreement_terms_of_service"
+            style="@style/check_box_without_box"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="wrap_content"
+            android:checked="@={vm.termsOfService}"
+            android:text="@string/agreement_terms_of_service"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cb_agreement_all" />
+
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:id="@+id/cb_agreement_privacy_policy"
+            style="@style/check_box_without_box"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="wrap_content"
+            android:checked="@={vm.privacyPolicy}"
+            android:text="@string/agreement_privacy_policy"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cb_agreement_terms_of_service" />
+
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:id="@+id/cb_agreement_marketing_push"
+            style="@style/check_box_without_box"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="wrap_content"
+            android:checked="@={vm.marketingPush}"
+            android:text="@string/agreement_marketing_push"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cb_agreement_privacy_policy" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_alert"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="wrap_content"
+            android:text="@string/agreement_required"
+            android:textAppearance="@style/caption_1.regular"
+            android:textColor="@color/brand_red"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cb_agreement_marketing_push"
+            tools:visibility="visible" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group_agreement"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            tools:visibility="visible"
+            app:constraint_referenced_ids="tv_agreement, cb_agreement_all, cb_agreement_terms_of_service, cb_agreement_privacy_policy, cb_agreement_marketing_push" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

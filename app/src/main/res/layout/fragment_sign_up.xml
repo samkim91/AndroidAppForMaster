@@ -13,16 +13,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <kr.co.soogong.master.presentation.atomic.molecules.ActionBarProgress
-            android:id="@+id/abp_header"
+        <kr.co.soogong.master.presentation.atomic.molecules.ActionBar
+            android:id="@+id/ab_header"
             android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"
             app:backButtonVisibility="@{true}"
-            app:currentProgress="@{vm.indicator}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:maxProgress="@{vm.pagesCount}"
             app:title="@{@string/sign_up}" />
 
         <ScrollView
@@ -33,7 +31,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/abp_header">
+            app:layout_constraintTop_toBottomOf="@id/ab_header">
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/vp_container"
@@ -41,31 +39,19 @@
                 android:layout_height="wrap_content"
                 android:paddingStart="@dimen/gap_16"
                 android:paddingTop="@dimen/gap_24"
-                android:paddingEnd="@dimen/gap_16" />
+                android:paddingEnd="@dimen/gap_16"
+                android:paddingBottom="@dimen/gap_74" /> <!-- 하단 버튼을 위한 패딩 -->
         </ScrollView>
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/b_previous"
-            style="@style/button.medium.outlined_secondary"
+            android:id="@+id/b_bottom"
+            style="@style/button.big.primary"
             android:layout_marginStart="@dimen/gap_16"
-            android:layout_marginBottom="@dimen/gap_24"
-            android:onClick="@{() -> vm.moveToPrevious()}"
-            android:text="@string/previous"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/b_next"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/b_next"
-            style="@style/button.medium.primary"
-            android:layout_marginStart="@dimen/gap_8"
             android:layout_marginEnd="@dimen/gap_16"
             android:layout_marginBottom="@dimen/gap_24"
             android:onClick="@{() -> vm.checkValidation()}"
-            android:text="@string/next"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/b_previous"
-            app:layout_goneMarginStart="@dimen/gap_16" />
+            app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

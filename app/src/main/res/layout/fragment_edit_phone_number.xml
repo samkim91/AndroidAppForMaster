@@ -25,7 +25,7 @@
             android:id="@+id/stibmtit_auth_phone_number"
             android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"
-            app:buttonText="@{@string/certify}"
+            app:buttonText="@{@string/certification}"
             app:buttonTheme="@{authPhoneNumberButtonTheme}"
             app:firstContent="@={vm.tel}"
             app:hint="@{@string/type_phone_number_hint}"

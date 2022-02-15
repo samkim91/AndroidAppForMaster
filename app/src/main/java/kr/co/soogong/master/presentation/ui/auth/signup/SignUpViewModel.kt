@@ -1,5 +1,7 @@
 package kr.co.soogong.master.presentation.ui.auth.signup
 
+import android.view.View
+import androidx.appcompat.widget.AppCompatCheckBox
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthProvider
@@ -9,15 +11,10 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import kr.co.soogong.master.data.entity.common.major.ProjectDto
 import kr.co.soogong.master.data.entity.profile.MasterDto
-import kr.co.soogong.master.domain.entity.common.DropdownItemList
-import kr.co.soogong.master.domain.entity.common.major.Project
 import kr.co.soogong.master.domain.usecase.auth.CheckUserExistentUseCase
 import kr.co.soogong.master.domain.usecase.auth.SignUpUseCase
-import kr.co.soogong.master.presentation.SIGN_UP_STEPS
 import kr.co.soogong.master.presentation.ui.base.BaseViewModel
-import kr.co.soogong.master.utility.ListLiveData
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -27,9 +24,9 @@ class SignUpViewModel @Inject constructor(
     private val checkUserExistentUseCase: CheckUserExistentUseCase,
 ) : BaseViewModel() {
 
-    val pagesCount = SIGN_UP_STEPS
-    val indicator = MutableLiveData(0)
-    val validation = MutableLiveData<String>()
+    val totalPages: Int = 2
+    val currentPage = MutableLiveData(0)
+    val validation = MutableLiveData("")
 
     // PhoneNumberFragment
     val tel = MutableLiveData("")
@@ -44,50 +41,32 @@ class SignUpViewModel @Inject constructor(
 
     // OwnerNameFragment
     val ownerName = MutableLiveData("")
-
-    // MajorFragment
-    val projects = ListLiveData<Project>()
-
-    // AddressFragment
-    val roadAddress = MutableLiveData("")
-    val detailAddress = MutableLiveData("")
-    val latitude = MutableLiveData(0.0)
-    val longitude = MutableLiveData(0.0)
-
-    // ServiceAreaFragment
-    val serviceAreas: List<Pair<String, Int>> = DropdownItemList.serviceAreas
-    val serviceArea = MutableLiveData(Pair("", 0))
-
-    // RepairInPersonFragment
-    val repairInPerson = MutableLiveData(false)
-
-    // PrivatePolicyFragment
+    val termsOfService = MutableLiveData(false)
     val privacyPolicy = MutableLiveData(false)
     val marketingPush = MutableLiveData(false)
 
     fun checkValidation() {
-        Timber.tag(TAG).d("checkValidation: ${indicator.value}")
+        Timber.tag(TAG).d("checkValidation: ${currentPage.value}")
 
-        when (indicator.value) {
-            0 -> validation.postValue(VALIDATE_PHONE_NUMBER)
-            1 -> validation.postValue(VALIDATE_OWNER_NAME)
-            2 -> validation.postValue(VALIDATE_MAJOR)
-            3 -> validation.postValue(VALIDATE_ADDRESS)
-            4 -> validation.postValue(VALIDATE_SERVICE_AREA)
-            5 -> validation.postValue(VALIDATE_REPAIR_IN_PERSON)
-            6 -> validation.postValue(VALIDATE_AGREEMENT)
+        when (currentPage.value) {
+            0 -> validation.value = VALIDATE_PHONE_NUMBER
+            1 -> validation.value = VALIDATE_OWNER_NAME
         }
     }
 
+    fun checkAll(v: View) {
+        Timber.tag(TAG).d("checkAll: ")
 
-    fun moveToNext() {
-        Timber.tag(TAG).d("moveToNext: ")
-        indicator.value = indicator.value?.plus(1)
+        (v as AppCompatCheckBox).isChecked.run {
+            termsOfService.value = this
+            privacyPolicy.value = this
+            marketingPush.value = this
+        }
     }
 
-    fun moveToPrevious() {
-        Timber.tag(TAG).d("moveToPrevious: ")
-        indicator.value = indicator.value?.minus(1)
+    fun setCurrentPage(page: Int) {
+        Timber.tag(TAG).d("setCurrentPage: $page")
+        currentPage.value = page
     }
 
     fun checkUserExist() {
@@ -100,7 +79,7 @@ class SignUpViewModel @Inject constructor(
                 .subscribeBy(
                     onSuccess = {
                         Timber.tag(TAG).d("onSuccess: $it")
-                        if (it) setAction(PHONE_NUMBER_EXIST) else setAction(PHONE_NUMBER_NOT_EXIST)
+                        sendEvent(IS_PHONE_NUMBER_EXIST, it)
                     },
                     onError = {
                         Timber.tag(TAG).d("onError: $it")
@@ -118,12 +97,12 @@ class SignUpViewModel @Inject constructor(
                 uid = uid.value,
                 ownerName = ownerName.value,
                 tel = tel.value,
-                projectDtos = ProjectDto.fromProjects(projects.value),
-                roadAddress = roadAddress.value,
-                detailAddress = detailAddress.value,
-                latitude = latitude.value?.toFloat(),
-                longitude = longitude.value?.toFloat(),
-                serviceArea = serviceArea.value?.second,
+                projectDtos = emptyList(),
+                roadAddress = "",
+                detailAddress = "",
+                latitude = 0.0f,
+                longitude = 0.0f,
+                serviceArea = 0,
                 privatePolicy = privacyPolicy.value,
                 marketingPush = marketingPush.value,
                 pushAtNight = true,
@@ -144,18 +123,13 @@ class SignUpViewModel @Inject constructor(
 
     companion object {
         private const val TAG = "SignUpViewModel"
+
         const val REQUEST_FAILED = "REQUEST_FAILED"
         const val SIGN_UP_SUCCESSFULLY = "SIGN_UP_SUCCESSFULLY"
 
-        const val PHONE_NUMBER_EXIST = "PHONE_NUMBER_EXIST"
-        const val PHONE_NUMBER_NOT_EXIST = "PHONE_NUMBER_NOT_EXIST"
+        const val IS_PHONE_NUMBER_EXIST = "PHONE_NUMBER_EXIST"
 
         const val VALIDATE_PHONE_NUMBER = "VALIDATE_PHONE_NUMBER"
         const val VALIDATE_OWNER_NAME = "VALIDATE_OWNER_NAME"
-        const val VALIDATE_MAJOR = "VALIDATE_MAJOR"
-        const val VALIDATE_ADDRESS = "VALIDATE_ADDRESS"
-        const val VALIDATE_SERVICE_AREA = "VALIDATE_SERVICE_AREA"
-        const val VALIDATE_REPAIR_IN_PERSON = "VALIDATE_REPAIR_IN_PERSON"
-        const val VALIDATE_AGREEMENT = "VALIDATE_AGREEMENT"
     }
 }

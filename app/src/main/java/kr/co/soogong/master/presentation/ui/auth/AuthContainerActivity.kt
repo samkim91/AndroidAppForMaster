@@ -85,6 +85,6 @@ class AuthContainerActivity : BaseActivity<ActivityAuthContainerBinding>(
     }
 
     companion object {
-        private const val TAG = "SignActivity"
+        private const val TAG = "AuthContainerActivity"
     }
 }

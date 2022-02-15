@@ -69,7 +69,7 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(
             stibmtitAuthPhoneNumber.onButtonClick = View.OnClickListener {
                 if (stibmtitAuthPhoneNumber.inputEnabled == false) {     // "재입력"에 대한 코드
                     stibmtitAuthPhoneNumber.inputEnabled = true
-                    stibmtitAuthPhoneNumber.buttonText = getString(R.string.certify)
+                    stibmtitAuthPhoneNumber.buttonText = getString(R.string.certification)
                     stibmtitAuthPhoneNumber.textInputButtonMedium.textInput.textInputEditText.setText(
                         "")
                     return@OnClickListener
@@ -165,6 +165,8 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(
 
         viewModel.auth.value?.let { auth ->
             viewModel.tel.value?.let { phoneNumber ->
+                if (phoneNumber.isEmpty()) return
+
                 val options = PhoneAuthOptions.newBuilder(auth)
                     .setPhoneNumber(PhoneNumberHelper.toGlobalNumber(phoneNumber))      // Phone number to verify
                     .setTimeout(
