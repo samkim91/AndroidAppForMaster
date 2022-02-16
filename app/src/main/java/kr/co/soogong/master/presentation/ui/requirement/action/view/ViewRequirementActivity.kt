@@ -99,7 +99,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
 
     private fun alertNotApprovedMaster() {
         DefaultDialog.newInstance(
-            DialogData.getAskingFillProfile(),
+            DialogData.getAskingFillRequiredProfile(),
             false
         ).let { dialog ->
             dialog.setButtonsClickListener(

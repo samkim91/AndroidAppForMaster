@@ -8,7 +8,7 @@ import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.domain.entity.profile.Profile
 import kr.co.soogong.master.domain.entity.profile.Review
-import kr.co.soogong.master.domain.repository.ProfileRepository
+import kr.co.soogong.master.data.repository.ProfileRepository
 import kr.co.soogong.master.domain.usecase.profile.GetProfileUseCase
 import kr.co.soogong.master.presentation.ui.common.EndlessScrollableViewModel
 import kr.co.soogong.master.utility.ListLiveData

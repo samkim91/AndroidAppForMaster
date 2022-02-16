@@ -30,6 +30,15 @@ data class DialogData(
                 "취소"
             )
 
+        fun getRepairInPersonIntroduction() =
+            DialogData(
+                "직접 시공이란?",
+                "하청이 아닌 본인 또는 소속 직원이 직접 고객님들에게 서비스를 제공하는 것입니다. 하청으로 인해 발생하는 문제는 수공이 책임지지 않습니다.",
+                "수공은 직접 시공하는 마스터님만을 위한 서비스입니다.",
+                "확인",
+                ""
+            )
+
         fun getRefuseEstimate() =
             DialogData(
                 "견적 거절",
@@ -147,10 +156,19 @@ data class DialogData(
                 "",
             )
 
-        fun getAskingFillProfile() =
+        fun getAskingFillRequiredProfile() =
             DialogData(
                 "필수 정보 요청",
                 "문의를 처리하려면 필수 정보 등록이 필요해요. 지금 등록하시겠어요?",
+                "",
+                "네",
+                "아니요",
+            )
+
+        fun getAskingFillBasicProfile() =
+            DialogData(
+                "선택 정보 요청",
+                "추가 정보 입력을 통해 고객 매칭률을 높여보세요. 지금 입력하시겠어요?",
                 "",
                 "네",
                 "아니요",
@@ -208,15 +226,6 @@ data class DialogData(
                 "",
                 "계속 수정",
                 "삭제",
-            )
-
-        fun getConfirmingDirectRepairYn() =
-            DialogData(
-                "직접 시공 여부",
-                "수공은 직접 시공하는 마스터님만 사용할 수 있는 서비스입니다. 마스터님은 직접 시공하시나요?",
-                "직접 시공하지 않으면 서비스 이용이 제한됩니다.",
-                "네",
-                "아니요",
             )
 
         fun getNoticeForRequestMeasure(count: Int) =

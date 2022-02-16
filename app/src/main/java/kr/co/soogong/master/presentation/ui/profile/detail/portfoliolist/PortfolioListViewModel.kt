@@ -6,7 +6,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.entity.profile.PortfolioDto
-import kr.co.soogong.master.domain.repository.ProfileRepository
+import kr.co.soogong.master.data.repository.ProfileRepository
 import kr.co.soogong.master.presentation.ui.common.EndlessScrollableViewModel
 import kr.co.soogong.master.presentation.uihelper.profile.PortfolioListActivityHelper
 import kr.co.soogong.master.utility.ListLiveData

@@ -5,7 +5,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.domain.usecase.auth.GetMasterUidFromSharedUseCase
-import kr.co.soogong.master.domain.usecase.auth.GetVersionUseCase
+import kr.co.soogong.master.domain.usecase.preferences.GetVersionUseCase
 import kr.co.soogong.master.presentation.ui.base.BaseViewModel
 import timber.log.Timber
 import javax.inject.Inject

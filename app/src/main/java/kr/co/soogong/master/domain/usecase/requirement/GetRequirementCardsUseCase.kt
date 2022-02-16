@@ -4,13 +4,15 @@ import dagger.Reusable
 import io.reactivex.Single
 import kr.co.soogong.master.data.entity.common.PageableContentDto
 import kr.co.soogong.master.domain.entity.requirement.RequirementCard
-import kr.co.soogong.master.domain.repository.RequirementRepository
+import kr.co.soogong.master.data.repository.RequirementRepository
+import kr.co.soogong.master.domain.usecase.auth.GetMasterUidFromSharedUseCase
 import javax.inject.Inject
 import javax.net.ssl.HttpsURLConnection
 
 @Reusable
 class GetRequirementCardsUseCase @Inject constructor(
     private val requirementRepository: RequirementRepository,
+    private val masterUidFromSharedUseCase: GetMasterUidFromSharedUseCase,
 ) {
     operator fun invoke(
         status: String,
@@ -18,7 +20,9 @@ class GetRequirementCardsUseCase @Inject constructor(
         offset: Int,
         pageSize: Int,
     ): Single<PageableContentDto<RequirementCard>> {
-        return requirementRepository.getRequirementsByStatus(status,
+        return requirementRepository.getRequirementsByStatus(
+            masterUidFromSharedUseCase(),
+            status,
             readYns,
             offset,
             pageSize,

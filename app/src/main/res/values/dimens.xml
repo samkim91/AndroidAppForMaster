@@ -6,11 +6,9 @@
 
     <dimen name="gap_0">0dp</dimen>
 
-    <dimen name="gap_0.5">0.5dp</dimen>
     <dimen name="gap_1">1dp</dimen>
     <dimen name="gap_2">2dp</dimen>
     <dimen name="gap_2.5">2.5dp</dimen>
-    <dimen name="gap_3">3dp</dimen>
     <dimen name="gap_4">4dp</dimen>
     <dimen name="gap_5">5dp</dimen>
     <dimen name="gap_6">6dp</dimen>
@@ -50,7 +48,6 @@
     <dimen name="gap_60">60dp</dimen>
     <dimen name="gap_64">64dp</dimen>
     <dimen name="gap_74">74dp</dimen>
-    <dimen name="gap_80">80dp</dimen>
 
     <dimen name="gap_100">100dp</dimen>
     <dimen name="gap_105">105dp</dimen>
@@ -77,7 +74,6 @@
     <!--  Requirement Received  -->
 
     <!-- Requirement Card View -->
-    <dimen name="requirement_card_call_button_margin_top">12dp</dimen>
 
 
     <!-- Estimate View -->
@@ -95,7 +91,6 @@
     <dimen name="badge_width">16dp</dimen>
     <dimen name="badge_height">16dp</dimen>
     <dimen name="badge_text_size">10sp</dimen>
-    <dimen name="line_height">1dp</dimen>
 
 
     <dimen name="text_size_11sp">11sp</dimen>

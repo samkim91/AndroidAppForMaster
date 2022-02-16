@@ -41,44 +41,44 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_for_switch"
-                style="@style/caption_1.bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/gap_4"
-                android:text="@string/label_for_switch_compat"
-                android:textColor="@color/c_313030"
-                app:layout_constraintBottom_toBottomOf="@id/switch_compat"
-                app:layout_constraintEnd_toStartOf="@id/switch_compat"
-                app:layout_constraintTop_toTopOf="@id/switch_compat" />
+<!--            <androidx.appcompat.widget.AppCompatTextView-->
+<!--                android:id="@+id/tv_for_switch"-->
+<!--                style="@style/caption_1.bold"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginEnd="@dimen/gap_4"-->
+<!--                android:text="@string/label_for_switch_compat"-->
+<!--                android:textColor="@color/c_313030"-->
+<!--                app:layout_constraintBottom_toBottomOf="@id/switch_compat"-->
+<!--                app:layout_constraintEnd_toStartOf="@id/switch_compat"-->
+<!--                app:layout_constraintTop_toTopOf="@id/switch_compat" />-->
 
-            <androidx.appcompat.widget.SwitchCompat
-                android:id="@+id/switch_compat"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/gap_16"
-                android:checked="@={vm.requestMeasureYn}"
-                app:layout_constraintBottom_toBottomOf="@id/iv_logo"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/iv_logo"
-                app:thumbTint="@color/white"
-                app:track="@drawable/track" />
+<!--            <androidx.appcompat.widget.SwitchCompat-->
+<!--                android:id="@+id/switch_compat"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginEnd="@dimen/gap_16"-->
+<!--                android:checked="@={vm.requestMeasureYn}"-->
+<!--                app:layout_constraintBottom_toBottomOf="@id/iv_logo"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="@id/iv_logo"-->
+<!--                app:thumbTint="@color/white"-->
+<!--                app:track="@drawable/track" />-->
 
-            <androidx.constraintlayout.widget.Group
-                android:id="@+id/switch_group"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:constraint_referenced_ids="tv_for_switch, switch_compat"
-                bind:visible="@{mainVm.masterSimpleInfo.secretaryYn &amp;&amp; mainVm.masterSimpleInfo.freeMeasureYn}"
-                tools:visibility="visible" />
+<!--            <androidx.constraintlayout.widget.Group-->
+<!--                android:id="@+id/switch_group"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                app:constraint_referenced_ids="tv_for_switch, switch_compat"-->
+<!--                bind:visible="@{mainVm.masterSettings.secretaryYn &amp;&amp; mainVm.masterSettings.freeMeasureYn}"-->
+<!--                tools:visibility="visible" />-->
 
             <androidx.constraintlayout.widget.Barrier
                 android:id="@+id/barrier_for_header"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:barrierDirection="bottom"
-                app:constraint_referenced_ids="iv_logo, tv_for_switch, switch_compat" />
+                app:constraint_referenced_ids="iv_logo" />
 
             <kr.co.soogong.master.presentation.atomic.molecules.FootnoteContentIcon
                 android:id="@+id/fci_before_progress"

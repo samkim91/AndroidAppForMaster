@@ -3,7 +3,7 @@ package kr.co.soogong.master.domain.usecase.preferences
 import dagger.Reusable
 import io.reactivex.Single
 import kr.co.soogong.master.domain.entity.preferences.Notice
-import kr.co.soogong.master.domain.repository.PreferencesRepository
+import kr.co.soogong.master.data.repository.PreferencesRepository
 import javax.inject.Inject
 
 @Reusable

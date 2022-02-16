@@ -4,9 +4,9 @@ import android.content.Context
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import kr.co.soogong.master.R
-import kr.co.soogong.master.domain.entity.common.CodeTable
 import kr.co.soogong.master.domain.entity.requirement.RequirementCard
 import kr.co.soogong.master.databinding.ViewHolderSimpleRequirementItemBinding
+import kr.co.soogong.master.domain.entity.common.CodeTable
 import kr.co.soogong.master.presentation.ui.common.dialog.popup.DefaultDialog
 import kr.co.soogong.master.presentation.ui.common.dialog.popup.DialogData
 import kr.co.soogong.master.presentation.ui.main.MainViewModel
@@ -44,12 +44,12 @@ class SimpleRequirementCardViewHolder(
     ) {
         with(binding) {
             setCardClickListener {
-                mainViewModel.masterSimpleInfo.value?.approvedStatus.let {
+                mainViewModel.masterSettings.value?.approvedStatus.let {
                     when (it) {
                         // 미승인 상태이면, 필수정보를 채우도록 이동
                         CodeTable.NOT_APPROVED.code -> {
                             DefaultDialog.newInstance(
-                                DialogData.getAskingFillProfile(),
+                                DialogData.getAskingFillRequiredProfile(),
                             ).let { dialog ->
                                 dialog.setButtonsClickListener(
                                     onPositive = {

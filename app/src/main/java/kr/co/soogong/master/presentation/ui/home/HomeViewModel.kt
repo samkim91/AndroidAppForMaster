@@ -20,7 +20,6 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val requirementViewModelAggregate: RequirementViewModelAggregate,
     private val getRequirementTotalUseCase: GetRequirementTotalUseCase,
-    private val getMasterUidFromSharedUseCase: GetMasterUidFromSharedUseCase,
 ) : RequirementsViewModel(requirementViewModelAggregate) {
 
     private val _beforeProgress = MutableLiveData(0)
@@ -34,8 +33,6 @@ class HomeViewModel @Inject constructor(
     private val _afterProcess = MutableLiveData(0)
     val afterProcess: LiveData<Int>
         get() = _afterProcess
-
-    val requestMeasureYn = MutableLiveData<Boolean>()
 
     override fun initList() {
         Timber.tag(TAG).d("initList: ")
@@ -92,26 +89,6 @@ class HomeViewModel @Inject constructor(
                     setAction(REQUEST_FAILED)
                 }
             ).addToDisposable()
-    }
-
-    fun updateRequestMeasureYn() {
-        Timber.tag(TAG).d("updateRequestMeasureYn: ${requestMeasureYn.value}")
-
-        getMasterUidFromSharedUseCase()?.let { uid ->
-            requirementViewModelAggregate.updateRequestMeasureYnUseCase(uid)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeBy(
-                    onSuccess = {
-                        Timber.tag(TAG).d("updateRequestMeasureYn successful: $it")
-                        setAction(UPDATE_REQUEST_MEASURE_YN_SUCCESSFUL)
-                    },
-                    onError = {
-                        Timber.tag(TAG).d("updateRequestMeasureYn failed: $it")
-                        setAction(REQUEST_FAILED)
-                    }
-                ).addToDisposable()
-        }
     }
 
     companion object {

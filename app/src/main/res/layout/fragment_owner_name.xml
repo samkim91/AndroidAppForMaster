@@ -86,6 +86,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cb_agreement_privacy_policy" />
 
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:id="@+id/cb_repair_in_person"
+            style="@style/check_box_rectangle"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="wrap_content"
+            android:checked="@={vm.repairInPerson}"
+            android:breakStrategy="simple"
+            android:text="@string/agreement_repair_in_person"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cb_agreement_marketing_push" />
+
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_alert"
             android:layout_width="@dimen/gap_0"
@@ -96,7 +108,7 @@
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cb_agreement_marketing_push"
+            app:layout_constraintTop_toBottomOf="@id/cb_repair_in_person"
             tools:visibility="visible" />
 
         <androidx.constraintlayout.widget.Group
@@ -105,6 +117,6 @@
             android:layout_height="wrap_content"
             android:visibility="gone"
             tools:visibility="visible"
-            app:constraint_referenced_ids="tv_agreement, cb_agreement_all, cb_agreement_terms_of_service, cb_agreement_privacy_policy, cb_agreement_marketing_push" />
+            app:constraint_referenced_ids="tv_agreement, cb_agreement_all, cb_agreement_terms_of_service, cb_agreement_privacy_policy, cb_agreement_marketing_push, cb_repair_in_person" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

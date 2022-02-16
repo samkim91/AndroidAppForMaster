@@ -11,7 +11,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import kr.co.soogong.master.data.entity.profile.MasterDto
+import kr.co.soogong.master.data.entity.auth.MasterSignUpDto
 import kr.co.soogong.master.domain.usecase.auth.CheckUserExistentUseCase
 import kr.co.soogong.master.domain.usecase.auth.SignUpUseCase
 import kr.co.soogong.master.presentation.ui.base.BaseViewModel
@@ -20,8 +20,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SignUpViewModel @Inject constructor(
-    private val signUpUseCase: SignUpUseCase,
     private val checkUserExistentUseCase: CheckUserExistentUseCase,
+    private val signUpUseCase: SignUpUseCase,
 ) : BaseViewModel() {
 
     val totalPages: Int = 2
@@ -44,6 +44,7 @@ class SignUpViewModel @Inject constructor(
     val termsOfService = MutableLiveData(false)
     val privacyPolicy = MutableLiveData(false)
     val marketingPush = MutableLiveData(false)
+    val repairInPerson = MutableLiveData(false)
 
     fun checkValidation() {
         Timber.tag(TAG).d("checkValidation: ${currentPage.value}")
@@ -78,11 +79,11 @@ class SignUpViewModel @Inject constructor(
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
                     onSuccess = {
-                        Timber.tag(TAG).d("onSuccess: $it")
-                        sendEvent(IS_PHONE_NUMBER_EXIST, it)
+                        Timber.tag(TAG).d("checkUserExist successfully: $it")
+                        sendMessage(IS_PHONE_NUMBER_EXIST, it)
                     },
                     onError = {
-                        Timber.tag(TAG).d("onError: $it")
+                        Timber.tag(TAG).d("checkUserExist failed: $it")
                         setAction(REQUEST_FAILED)
                     }
                 ).addToDisposable()
@@ -92,30 +93,25 @@ class SignUpViewModel @Inject constructor(
     fun signUp() {
         Timber.tag(TAG).d("signUp : ")
         signUpUseCase(
-            MasterDto(
-                id = null,
-                uid = uid.value,
-                ownerName = ownerName.value,
-                tel = tel.value,
-                projectDtos = emptyList(),
-                roadAddress = "",
-                detailAddress = "",
-                latitude = 0.0f,
-                longitude = 0.0f,
-                serviceArea = 0,
-                privatePolicy = privacyPolicy.value,
-                marketingPush = marketingPush.value,
+            MasterSignUpDto(
+                uid = uid.value!!,
+                ownerName = ownerName.value!!,
+                tel = tel.value!!,
+                privatePolicy = privacyPolicy.value!!,
+                marketingPush = marketingPush.value!!,
                 pushAtNight = true,
+                repairInPerson = repairInPerson.value!!
             )
         )
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribeBy(onSuccess = {
-                Timber.tag(TAG).d("Sign Up Successful : $it")
-                setAction(SIGN_UP_SUCCESSFULLY)
-            },
+            .subscribeBy(
+                onSuccess = {
+                    Timber.tag(TAG).d("Sign Up Successful : $it")
+                    sendMessage(SIGN_UP_SUCCESSFULLY, "")
+                },
                 onError = {
-                    Timber.tag(TAG).d("Sign Up Failed : $it")
+                    Timber.tag(TAG).d("Sign Up failed : $it")
                     setAction(REQUEST_FAILED)
                 }
             ).addToDisposable()
@@ -124,7 +120,6 @@ class SignUpViewModel @Inject constructor(
     companion object {
         private const val TAG = "SignUpViewModel"
 
-        const val REQUEST_FAILED = "REQUEST_FAILED"
         const val SIGN_UP_SUCCESSFULLY = "SIGN_UP_SUCCESSFULLY"
 
         const val IS_PHONE_NUMBER_EXIST = "PHONE_NUMBER_EXIST"

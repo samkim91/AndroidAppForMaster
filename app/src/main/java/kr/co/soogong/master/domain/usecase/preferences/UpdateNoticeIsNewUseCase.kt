@@ -1,7 +1,7 @@
 package kr.co.soogong.master.domain.usecase.preferences
 
 import dagger.Reusable
-import kr.co.soogong.master.domain.repository.PreferencesRepository
+import kr.co.soogong.master.data.repository.PreferencesRepository
 import javax.inject.Inject
 
 @Reusable

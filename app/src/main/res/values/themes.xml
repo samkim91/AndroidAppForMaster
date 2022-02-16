@@ -237,10 +237,6 @@
         <item name="android:background">@drawable/bg_solid_green_selector_radius30</item>
     </style>
 
-    <style name="button.medium.secondary.rounded" parent="button.medium.secondary">
-        <item name="android:background">@drawable/bg_solid_light_grey1_selector_radius30</item>
-    </style>
-
     <style name="button.medium.tertiary.rounded" parent="button.medium.tertiary">
         <item name="android:background">@drawable/bg_solid_grey3_selector_radius30</item>
     </style>
@@ -248,12 +244,6 @@
     <style name="button.medium.outlined_primary.rounded" parent="button.medium.outlined_primary">
         <item name="android:background">
             @drawable/bg_solid_transparent_stroke_green_selector_radius30
-        </item>
-    </style>
-
-    <style name="button.medium.outlined_secondary.rounded" parent="button.medium.outlined_secondary">
-        <item name="android:background">
-            @drawable/bg_solid_transparent_stroke_light_grey2_selector_radius30
         </item>
     </style>
 
@@ -267,12 +257,6 @@
     <style name="button.big.primary" parent="button.big">
         <item name="android:background">@drawable/bg_solid_green_selector_radius8</item>
         <item name="android:textColor">@color/white</item>
-    </style>
-
-    <style name="button.big.outlined_primary" parent="button.big">
-        <item name="android:background">@drawable/bg_solid_transparent_stroke_green_selector_radius8
-        </item>
-        <item name="android:textColor">@color/selector_green_alpha50</item>
     </style>
 
     <!-- 버튼 filled -->
@@ -299,10 +283,6 @@
     </style>
 
     <!-- start section Chip styles -->
-    <style name="ChipChoiceGreyRectangular" parent="Widget.MaterialComponents.Chip.Choice">
-        <item name="chipBackgroundColor">@color/background</item>
-        <item name="chipCornerRadius">@dimen/gap_4</item>
-    </style>
 
     <style name="ChipChoiceRectangularStyle" parent="Widget.MaterialComponents.Chip.Choice">
         <item name="chipBackgroundColor">@color/white</item>

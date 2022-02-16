@@ -16,12 +16,10 @@ import kr.co.soogong.master.domain.entity.common.ButtonTheme
 import kr.co.soogong.master.presentation.LIMIT_TIME_TO_AUTH
 import kr.co.soogong.master.presentation.ui.auth.signup.SignUpViewModel
 import kr.co.soogong.master.presentation.ui.auth.signup.SignUpViewModel.Companion.IS_PHONE_NUMBER_EXIST
-import kr.co.soogong.master.presentation.ui.auth.signup.SignUpViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.presentation.ui.auth.signup.SignUpViewModel.Companion.VALIDATE_PHONE_NUMBER
 import kr.co.soogong.master.presentation.ui.base.BaseFragment
 import kr.co.soogong.master.presentation.ui.common.dialog.popup.DefaultDialog
 import kr.co.soogong.master.presentation.ui.common.dialog.popup.DialogData
-import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.PhoneNumberHelper
 import kr.co.soogong.master.utility.extension.isValidPhoneNumber
 import kr.co.soogong.master.utility.extension.toast
@@ -90,17 +88,14 @@ class PhoneNumberFragment : BaseFragment<FragmentPhoneNumberBinding>(
 
     private fun registerEventObserver() {
         Timber.tag(TAG).d("registerEventObserver: ")
-        viewModel.event.observe(viewLifecycleOwner, EventObserver { (event, value) ->
-            when (event) {
-                IS_PHONE_NUMBER_EXIST -> if (value as Boolean) showDialogForUserExist() else startPhoneNumberVerification(isFirst = true)
-            }
-        })
 
-        viewModel.action.observe(viewLifecycleOwner, EventObserver { action ->
-            when (action) {
-                REQUEST_FAILED -> requireContext().toast(getString(R.string.error_message_of_request_failed))
+        viewModel.message.observe(viewLifecycleOwner) { (key, value) ->
+            when (key) {
+                IS_PHONE_NUMBER_EXIST ->
+                    if (value as Boolean) showDialogForUserExist()
+                    else startPhoneNumberVerification(true)
             }
-        })
+        }
 
         viewModel.validation.observe(viewLifecycleOwner) { validation ->
             when (validation) {
@@ -108,9 +103,9 @@ class PhoneNumberFragment : BaseFragment<FragmentPhoneNumberBinding>(
             }
         }
 
-        viewModel.tel.observe(viewLifecycleOwner) {
-
-        }
+        viewModel.certificationCode.observe(viewLifecycleOwner, {
+            viewModel.sendEvent("test", it.length == 6)
+        })
     }
 
     private fun validateValues() {
