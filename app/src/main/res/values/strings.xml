@@ -34,7 +34,7 @@
     <string name="edit">편집하기</string>
     <string name="delete">삭제하기</string>
     <string name="register">등록하기</string>
-    <string name="certify">인증하기</string>
+    <string name="certification">인증</string>
     <string name="timer_form">%1$d:%2$d</string>
     <string name="selecting_done">선택완료</string>
     <string name="possible">가능</string>
@@ -61,25 +61,33 @@
     <!-- Sign Up -->
     <string name="sign_up_introduction">수공마스터 서비스를 이용하기 위해\n회원가입 및 로그인이 필요합니다</string>
     <string name="sign_up">회원가입</string>
+
     <string name="alert_unknown_user">가입되지 않은 번호입니다.</string>
 
     <string name="type_owner_name">대표자명을 입력해주세요.</string>
+
+    <string name="agreement_introduction">수공 마스터 앱 서비스 이용 약관에 동의하고\n수공과 함께해 주세요!</string>
+    <string name="agreement_all">전체동의 (선택 정보 포함)</string>
+    <string name="agreement_terms_of_service">[필수] 이용약관 동의</string>
+    <string name="agreement_privacy_policy">[필수] 개인정보 취급방침 동의</string>
+    <string name="agreement_marketing_push">[선택] 마케팅 정보수신 동의</string>
+
+    <string name="agreement_required">이용약관 및 개인정보 취급방침에 동의해주세요. </string>
+
+    <string name="terms_of_service">이용약관</string>
+    <string name="private_policy">개인정보 취급방침</string>
+
     <string name="select_service_area">서비스 가능 범위를 선택해주세요.</string>
     <string name="asking_repair_in_person">수공은 직접 시공하는 마스터님만을 위한 서비스입니다. 직접 시공하시나요?</string>
     <string name="do_repair_in_person">직접 시공합니다.</string>
     <string name="notice_for_repair_in_person">직접 시공이란? 하청이 아닌 본인 또는 소속 직원이 직접 고객님들에게 서비스를 제공하는 것입니다. 하청으로 인해 발생하는 문제는 수공이 책임지지 않습니다.</string>
 
-    <string name="agreement_introduction">수공 마스터 앱 서비스 이용 약관에 동의하고 수공과 함께해 주세요!</string>
-    <string name="agreement_all">모두 동의합니다. (선택 정보 포함)</string>
-    <string name="agreement_privacy_policy">수공의 이용약관 및 개인정보 처리방침에 동의합니다.</string>
-    <string name="agreement_marketing_push">마케팅 수신에 동의합니다. (선택)</string>
-
-    <string name="terms_of_service">이용약관</string>
-    <string name="private_policy">개인정보 처리방침</string>
     <!-- Sign In -->
     <string name="sign_in">로그인</string>
-    <string name="welcome_message">마스터님 환영합니다.\n수리가 필요한 고객님들을 만나보세요.</string>
-    <string name="tv_ask_to_authentication">로그인을 위해서 전화번호 인증 해주세요!</string>
+    <string name="welcome_message_at_sign_in">마스터님 환영합니다.\n수리가 필요한 고객님들을 만나보세요.</string>
+    <string name="tv_ask_to_authentication_at_sign_in">로그인을 위해서 전화번호 인증 해주세요!</string>
+    <string name="welcome_message_at_sign_up">수공의 검증된 마스터\n당신이 주인공 입니다.</string>
+    <string name="tv_ask_to_authentication_at_sign_up">회원가입을 위해 전화번호를 인증해 주세요.</string>
 
     <!-- My Page-->
     <string name="notice">공지사항</string>

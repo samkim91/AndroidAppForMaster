@@ -11,8 +11,8 @@ import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
-import kr.co.soogong.master.domain.entity.common.ButtonTheme
 import kr.co.soogong.master.databinding.FragmentEditPhoneNumberBinding
+import kr.co.soogong.master.domain.entity.common.ButtonTheme
 import kr.co.soogong.master.presentation.LIMIT_TIME_TO_AUTH
 import kr.co.soogong.master.presentation.ui.base.BaseFragment
 import kr.co.soogong.master.presentation.ui.common.dialog.popup.DefaultDialog
@@ -77,7 +77,7 @@ class EditPhoneNumberFragment : BaseFragment<FragmentEditPhoneNumberBinding>(
             stibmtitAuthPhoneNumber.onButtonClick = View.OnClickListener {
                 if (stibmtitAuthPhoneNumber.inputEnabled == false) {     // "재입력"에 대한 코드
                     stibmtitAuthPhoneNumber.inputEnabled = true
-                    stibmtitAuthPhoneNumber.buttonText = getString(R.string.certify)
+                    stibmtitAuthPhoneNumber.buttonText = getString(R.string.certification)
                     stibmtitAuthPhoneNumber.textInputButtonMedium.textInput.textInputEditText.setText(
                         "")
                     return@OnClickListener
@@ -171,6 +171,8 @@ class EditPhoneNumberFragment : BaseFragment<FragmentEditPhoneNumberBinding>(
 
         viewModel.auth.value?.let { auth ->
             viewModel.tel.value?.let { phoneNumber ->
+                if (phoneNumber.isEmpty()) return
+
                 val options = PhoneAuthOptions.newBuilder(auth)
                     .setPhoneNumber(PhoneNumberHelper.toGlobalNumber(phoneNumber))      // Phone number to verify
                     .setTimeout(

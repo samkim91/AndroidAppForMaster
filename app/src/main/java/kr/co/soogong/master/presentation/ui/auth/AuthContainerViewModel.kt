@@ -18,7 +18,7 @@ class AuthContainerViewModel @Inject constructor() : BaseViewModel() {
     }
 
     companion object {
-        private const val TAG = "SignMainViewModel"
+        private const val TAG = "AuthContainerViewModel"
         const val SIGN_UP = "SIGN_UP"
         const val SIGN_IN = "SIGN_IN"
     }

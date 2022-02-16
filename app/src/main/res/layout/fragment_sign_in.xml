@@ -45,46 +45,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/iv_logo"
-                    android:layout_width="wrap_content"
+                <kr.co.soogong.master.presentation.atomic.molecules.LogoTitle3Footnote
+                    android:id="@+id/ltf_introduction"
+                    android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"
+                    app:footnote="@{@string/tv_ask_to_authentication_at_sign_in}"
                     android:layout_marginStart="@dimen/gap_16"
                     android:layout_marginTop="@dimen/gap_24"
-                    android:background="@drawable/ic_main_logo"
-                    android:backgroundTint="@color/light_grey_2"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_welcome_message"
-                    android:layout_width="@dimen/gap_0"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/gap_16"
-                    android:layout_marginTop="@dimen/gap_16"
                     android:layout_marginEnd="@dimen/gap_16"
-                    android:breakStrategy="simple"
-                    android:text="@string/welcome_message"
-                    android:textAppearance="@style/title_3.regular"
-                    android:textColor="@color/dark_grey_2"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/iv_logo" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_ask_to_authentication"
-                    android:layout_width="@dimen/gap_0"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/gap_16"
-                    android:layout_marginTop="@dimen/gap_8"
-                    android:layout_marginEnd="@dimen/gap_16"
-                    android:breakStrategy="simple"
-                    android:text="@string/tv_ask_to_authentication"
-                    android:textAppearance="@style/footnote.regular"
-                    android:textColor="@color/grey_3"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_welcome_message" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:title="@{@string/welcome_message_at_sign_in}" />
 
                 <kr.co.soogong.master.presentation.atomic.organisms.SubheadlineTextInputButtonMediumTextInputTimer
                     android:id="@+id/stibmtit_auth_phone_number"
@@ -93,14 +65,14 @@
                     android:layout_marginStart="@dimen/gap_16"
                     android:layout_marginTop="@dimen/gap_26"
                     android:layout_marginEnd="@dimen/gap_16"
-                    app:buttonText="@{@string/certify}"
+                    app:buttonText="@{@string/certification}"
                     app:buttonTheme="@{authPhoneNumberButtonTheme}"
                     app:firstContent="@={vm.tel}"
                     app:hint="@{@string/type_phone_number_hint}"
                     app:inputType="@{InputType.TYPE_CLASS_NUMBER}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_ask_to_authentication"
+                    app:layout_constraintTop_toBottomOf="@id/ltf_introduction"
                     app:max="@{11}"
                     app:secondContent="@={vm.certificationCode}"
                     app:textInputTimerHint="@{@string/certification_code}"

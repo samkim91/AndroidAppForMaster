@@ -2,26 +2,22 @@ package kr.co.soogong.master.presentation.ui.auth.signup
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import kr.co.soogong.master.presentation.SIGN_UP_STEPS
-import kr.co.soogong.master.presentation.ui.auth.signup.steps.*
+import kr.co.soogong.master.presentation.ui.auth.signup.steps.OwnerNameFragment
+import kr.co.soogong.master.presentation.ui.auth.signup.steps.PhoneNumberFragment
 import timber.log.Timber
 
 class SignUpPagerAdapter(
     fragment: Fragment,
+    private val totalPages: Int,
 ) : FragmentStateAdapter(fragment) {
 
-    override fun getItemCount(): Int = SIGN_UP_STEPS
+    override fun getItemCount(): Int = totalPages
 
     override fun createFragment(position: Int): Fragment {
         Timber.tag(TAG).d("createFragment: $position")
         return when (position) {
             0 -> PhoneNumberFragment.newInstance()
             1 -> OwnerNameFragment.newInstance()
-            2 -> MajorFragment.newInstance()
-            3 -> AddressFragment.newInstance()
-            4 -> ServiceAreaFragment.newInstance()
-            5 -> RepairInPersonFragment.newInstance()
-            6 -> AgreementFragment.newInstance()
             else -> Fragment()
         }
     }
