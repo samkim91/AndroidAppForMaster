@@ -98,6 +98,7 @@ class RequirementFragment : BaseFragment<FragmentRequirementBinding>(
             Timber.tag(TAG).d("setViewPager start: $mainTabIndex")
             with(binding) {
                 requirementsViewPager.apply {
+                    offscreenPageLimit = 1
                     adapter = RequirementsFilterPagerAdapter(this@RequirementFragment, mainTabIndex)
                     TabLayoutMediator(filterTabs, this) { tab, position ->
                         tab.text =
