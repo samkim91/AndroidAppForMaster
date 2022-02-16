@@ -3,7 +3,7 @@ package kr.co.soogong.master.domain.usecase.common.major
 import dagger.Reusable
 import io.reactivex.Single
 import kr.co.soogong.master.domain.entity.common.major.Category
-import kr.co.soogong.master.data.network.common.major.MajorService
+import kr.co.soogong.master.data.datasource.network.common.major.MajorService
 import javax.inject.Inject
 
 @Reusable

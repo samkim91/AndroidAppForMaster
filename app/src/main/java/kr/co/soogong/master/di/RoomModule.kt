@@ -4,10 +4,10 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import kr.co.soogong.master.data.local.preferences.NoticeDao
-import kr.co.soogong.master.data.local.profile.MasterDao
-import kr.co.soogong.master.data.local.requirement.RequirementDao
-import kr.co.soogong.master.domain.AppDatabase
+import kr.co.soogong.master.data.datasource.local.preferences.NoticeDao
+import kr.co.soogong.master.data.datasource.local.profile.MasterDao
+import kr.co.soogong.master.data.datasource.local.requirement.RequirementDao
+import kr.co.soogong.master.data.datasource.local.AppDatabase
 import javax.inject.Singleton
 
 @Module

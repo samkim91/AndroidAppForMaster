@@ -7,7 +7,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.entity.profile.MasterDto
-import kr.co.soogong.master.domain.repository.ProfileRepository
+import kr.co.soogong.master.data.repository.ProfileRepository
 import kr.co.soogong.master.domain.usecase.profile.SaveMasterUseCase
 import kr.co.soogong.master.presentation.ui.base.BaseViewModel
 import timber.log.Timber

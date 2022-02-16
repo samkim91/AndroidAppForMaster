@@ -8,9 +8,13 @@ import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentOwnerNameBinding
 import kr.co.soogong.master.presentation.ui.auth.signup.SignUpViewModel
+import kr.co.soogong.master.presentation.ui.auth.signup.SignUpViewModel.Companion.SIGN_UP_SUCCESSFULLY
 import kr.co.soogong.master.presentation.ui.auth.signup.SignUpViewModel.Companion.VALIDATE_OWNER_NAME
 import kr.co.soogong.master.presentation.ui.base.BaseFragment
+import kr.co.soogong.master.presentation.ui.common.dialog.popup.DefaultDialog
+import kr.co.soogong.master.presentation.ui.common.dialog.popup.DialogData
 import kr.co.soogong.master.presentation.uihelper.auth.AgreementDetailActivityHelper
+import kr.co.soogong.master.presentation.uihelper.main.MainActivityHelper
 import kr.co.soogong.master.utility.extension.makeLinks
 import timber.log.Timber
 
@@ -57,11 +61,29 @@ class OwnerNameFragment : BaseFragment<FragmentOwnerNameBinding>(
                     )
                 })
             )
+
+            cbRepairInPerson.makeLinks(
+                Pair(getString(R.string.repair_in_person), View.OnClickListener {
+                    DefaultDialog.newInstance(DialogData.getRepairInPersonIntroduction())
+                        .let {
+                            it.setButtonsClickListener(
+                                onPositive = { },
+                                onNegative = { }
+                            )
+                            it.show(parentFragmentManager, it.tag)
+                        }
+                })
+            )
         }
     }
 
     private fun registerEventObserver() {
         Timber.tag(TAG).d("registerEventObserver: ")
+        viewModel.message.observe(viewLifecycleOwner) { (key, value) ->
+            when (key) {
+                SIGN_UP_SUCCESSFULLY -> startActivity(MainActivityHelper.getIntent(requireContext()))
+            }
+        }
 
         viewModel.validation.observe(viewLifecycleOwner) { validation ->
             when (validation) {
@@ -71,6 +93,7 @@ class OwnerNameFragment : BaseFragment<FragmentOwnerNameBinding>(
 
         viewModel.ownerName.observe(viewLifecycleOwner, { name ->
             binding.groupAgreement.isVisible = name.isNotEmpty()
+            binding.tvAlert.isVisible = false
         })
     }
 
@@ -83,11 +106,18 @@ class OwnerNameFragment : BaseFragment<FragmentOwnerNameBinding>(
         })
 
         viewModel.termsOfService.observe(viewLifecycleOwner) {
-            binding.tvAlert.isVisible = !(it && viewModel.privacyPolicy.value == true)
+            binding.tvAlert.isVisible =
+                (!it || viewModel.privacyPolicy.value == false || viewModel.repairInPerson.value == false) && binding.groupAgreement.isVisible
         }
 
         viewModel.privacyPolicy.observe(viewLifecycleOwner) {
-            binding.tvAlert.isVisible = !(it && viewModel.termsOfService.value == true)
+            binding.tvAlert.isVisible =
+                (!it || viewModel.termsOfService.value == false || viewModel.repairInPerson.value == false) && binding.groupAgreement.isVisible
+        }
+
+        viewModel.repairInPerson.observe(viewLifecycleOwner) {
+            binding.tvAlert.isVisible =
+                (!it || viewModel.privacyPolicy.value == false || viewModel.termsOfService.value == false) && binding.groupAgreement.isVisible
         }
 
         if (binding.stiOwnerName.error.isNullOrEmpty() && !binding.tvAlert.isVisible) viewModel.signUp()

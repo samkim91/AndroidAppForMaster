@@ -15,6 +15,7 @@ object HttpContract {
     const val SAVE_FCM_TOKEN = "firebase/save-token"
     const val UPDATE_UID_BY_TEL = "master/{tel}"
     const val GET_APP_VERSION = "version/android"
+    const val SIGN_UP = "master"
     //endregion
 
     //region Category
@@ -56,7 +57,7 @@ object HttpContract {
 
     //region Profile
     const val MY_PAGE_URL = "https://soogong.co.kr/master/detail/"
-    const val GET_MASTER_SIMPLE_INFO = "master/v2/simple-info/{uid}"
+    const val GET_MASTER_SETTINGS = "master/{uid}/settings"
     const val GET_MASTER = "master/{uid}"
     const val SAVE_MASTER = "master/save"
     const val GET_REVIEWS = "master/review"

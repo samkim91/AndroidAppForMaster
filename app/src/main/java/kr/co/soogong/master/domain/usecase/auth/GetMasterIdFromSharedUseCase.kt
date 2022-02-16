@@ -1,15 +1,13 @@
 package kr.co.soogong.master.domain.usecase.auth
 
-import android.content.SharedPreferences
 import dagger.Reusable
-import kr.co.soogong.master.contract.AppSharedPreferenceContract
+import kr.co.soogong.master.data.repository.ProfileRepository
 import javax.inject.Inject
 
 @Reusable
 class GetMasterIdFromSharedUseCase @Inject constructor(
-    private val sharedPreferences: SharedPreferences
+    private val profileRepository: ProfileRepository,
 ) {
-    operator fun invoke(): Int {
-        return sharedPreferences.getInt(AppSharedPreferenceContract.MASTER_ID, 0)
-    }
+    operator fun invoke(): Int =
+        profileRepository.getMasterIdFromShared()
 }

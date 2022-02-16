@@ -33,6 +33,9 @@ abstract class BaseViewModel : ViewModel(), LifecycleObserver {
         super.onCleared()
     }
 
+    // NOTE: 2022/02/16 event 로 감싸진 liveData 들은 프래그먼트 간 데이터 이동을 사용 했을 때,
+    // observe 가 최초 실행된 곳에서만 작동하는 문제가 있다. 왜 그런지는 아직 찾지 못 했음.
+    // 프래그먼트 간 데이터 이동 : (by viewModels({ requireParentFragment() })) 를 말함.
     private val _action = MutableLiveData<Event<String>>()
     val action: LiveData<Event<String>>
         get() = _action
@@ -41,12 +44,20 @@ abstract class BaseViewModel : ViewModel(), LifecycleObserver {
     val event: LiveData<Event<Pair<String, Any?>>>
         get() = _event
 
+    private val _message = MutableLiveData<Pair<String, Any>>()
+    val message: LiveData<Pair<String, Any>>
+        get() = _message
+
     fun setAction(event: String) {
         _action.postValue(Event(event))
     }
 
     fun sendEvent(event: String, message: Any) {
         _event.value = Event(event to message)
+    }
+
+    fun sendMessage(key: String, value: Any) {
+        _message.value = (key to value)
     }
 
     companion object {

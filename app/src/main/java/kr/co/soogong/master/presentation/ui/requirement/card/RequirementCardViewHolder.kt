@@ -90,12 +90,12 @@ open class RequirementCardViewHolder(
     private fun checkMasterApprovedStatus(
         function: () -> Unit,
     ) {
-        mainViewModel.masterSimpleInfo.value?.approvedStatus.let {
+        mainViewModel.masterSettings.value?.approvedStatus.let {
             when (it) {
                 // 미승인 상태이면, 필수정보를 채우도록 이동
                 CodeTable.NOT_APPROVED.code ->
                     DefaultDialog.newInstance(
-                        DialogData.getAskingFillProfile(),
+                        DialogData.getAskingFillRequiredProfile(),
                     ).let { dialog ->
                         dialog.setButtonsClickListener(
                             onPositive = {

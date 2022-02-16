@@ -72,17 +72,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
             action.observe(viewLifecycleOwner, EventObserver { event ->
                 when (event) {
                     REQUEST_FAILED -> requireContext().toast(getString(R.string.error_message_of_request_failed))
-                    UPDATE_REQUEST_MEASURE_YN_SUCCESSFUL -> mainViewModel.requestMasterSimpleInfo()
+                    UPDATE_REQUEST_MEASURE_YN_SUCCESSFUL -> mainViewModel.requestMasterSettings()
                 }
             })
-            requestMeasureYn.observe(viewLifecycleOwner) { boolean ->
-                if (boolean != mainViewModel.masterSimpleInfo.value?.requestMeasureYn) viewModel.updateRequestMeasureYn()
-            }
-            mainViewModel.masterSimpleInfo.observe(viewLifecycleOwner) { masterDto ->
-                masterDto.requestMeasureYn?.let {
-                    viewModel.requestMeasureYn.value = it
-                }
-            }
         }
     }
 

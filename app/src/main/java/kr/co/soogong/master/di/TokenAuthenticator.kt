@@ -1,8 +1,6 @@
 package kr.co.soogong.master.di
 
 import androidx.lifecycle.MutableLiveData
-import dagger.Lazy
-import kr.co.soogong.master.data.network.auth.AuthService
 import okhttp3.Authenticator
 import okhttp3.Request
 import okhttp3.Response
@@ -13,10 +11,7 @@ import javax.inject.Singleton
 // 메인참고 : https://medium.com/@theanilpaudel/using-the-power-of-retrofit-okhttp-and-dagger-2-for-jwt-token-authentication-ad8db6121eac
 // 보조참고 : https://akaisun.tistory.com/73
 @Singleton
-class TokenAuthenticator @Inject constructor(
-    private val authService: Lazy<AuthService>,     // dagger cycle dependency error를 막기 위해 dagger.lazy로 선언
-
-) : Authenticator {
+class TokenAuthenticator @Inject constructor() : Authenticator {
     private val newToken = MutableLiveData("")
 
     override fun authenticate(route: Route?, response: Response): Request? {

@@ -8,6 +8,10 @@ import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentSignUpBinding
 import kr.co.soogong.master.presentation.ui.auth.AuthContainerActivity
 import kr.co.soogong.master.presentation.ui.base.BaseFragment
+import kr.co.soogong.master.presentation.ui.base.BaseViewModel
+import kr.co.soogong.master.presentation.ui.base.BaseViewModel.Companion.REQUEST_FAILED
+import kr.co.soogong.master.utility.EventObserver
+import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -40,6 +44,18 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>(
     }
 
     private fun registerEventObserve() {
+        viewModel.action.observe(viewLifecycleOwner, EventObserver { action ->
+            when(action) {
+                REQUEST_FAILED -> requireContext().toast(getString(R.string.error_message_of_request_failed))
+            }
+        })
+
+        viewModel.event.observe(viewLifecycleOwner, EventObserver { (event, value) ->
+            when (event) {
+                "test" -> binding.bBottom.isEnabled = value as Boolean
+            }
+        })
+
         viewModel.currentPage.observe(viewLifecycleOwner, {
             binding.vpContainer.currentItem = it
             setBottomButton(it)
@@ -49,7 +65,7 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>(
     private fun setBottomButton(page: Int) {
         Timber.tag(TAG).d("setBottomButton: ")
 
-        when(page) {
+        when (page) {
             0 -> binding.bBottom.text = getString(R.string.next)
             1 -> binding.bBottom.text = getString(R.string.sign_up)
         }

@@ -3,7 +3,7 @@ package kr.co.soogong.master.domain.usecase.profile
 import dagger.Reusable
 import io.reactivex.Single
 import kr.co.soogong.master.domain.entity.profile.Profile
-import kr.co.soogong.master.domain.repository.ProfileRepository
+import kr.co.soogong.master.data.repository.ProfileRepository
 import javax.inject.Inject
 
 @Reusable

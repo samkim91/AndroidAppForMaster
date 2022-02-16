@@ -3,18 +3,19 @@ package kr.co.soogong.master.domain.usecase.auth
 import dagger.Reusable
 import io.reactivex.Single
 import kr.co.soogong.master.data.entity.auth.FirebaseTokenDto
-import kr.co.soogong.master.data.network.auth.AuthService
+import kr.co.soogong.master.data.repository.AuthRepository
+import kr.co.soogong.master.data.repository.ProfileRepository
 import javax.inject.Inject
 
 @Reusable
 class SaveFCMTokenUseCase @Inject constructor(
-    private val authService: AuthService,
-    private val getMasterIdFromSharedUseCase: GetMasterIdFromSharedUseCase,
+    private val authRepository: AuthRepository,
+    private val profileRepository: ProfileRepository,
 ) {
     operator fun invoke(token: String): Single<FirebaseTokenDto> {
-        return authService.saveFCMToken(
+        return authRepository.saveFCMToken(
             firebaseTokenDto = FirebaseTokenDto(
-                personId = getMasterIdFromSharedUseCase(),
+                personId = profileRepository.getMasterIdFromShared(),
                 token = token
             )
         )

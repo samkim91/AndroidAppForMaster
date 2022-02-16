@@ -12,7 +12,8 @@ import kr.co.soogong.master.data.entity.requirement.repair.RepairDto
 import kr.co.soogong.master.domain.entity.common.CodeTable
 import kr.co.soogong.master.domain.entity.requirement.Requirement
 import kr.co.soogong.master.domain.entity.requirement.estimation.EstimationResponseCode
-import kr.co.soogong.master.domain.repository.ProfileRepository
+import kr.co.soogong.master.data.repository.ProfileRepository
+import kr.co.soogong.master.domain.usecase.profile.GetMasterSettingsUseCase
 import kr.co.soogong.master.domain.usecase.requirement.*
 import kr.co.soogong.master.presentation.ui.base.BaseViewModel
 import kr.co.soogong.master.presentation.uihelper.requirment.action.ViewRequirementActivityHelper
@@ -26,7 +27,7 @@ class ViewRequirementViewModel @Inject constructor(
     private val respondToMeasureUseCase: RespondToMeasureUseCase,
     private val callToClientUseCase: CallToClientUseCase,
     private val requestReviewUseCase: RequestReviewUseCase,
-    private val profileRepository: ProfileRepository,
+    private val getMasterSettingsUseCase: GetMasterSettingsUseCase,
     val savedStateHandle: SavedStateHandle,
 ) : BaseViewModel() {
     // Note : activity 에서 viewModel 로 데이터 넘기는 법. savedStateHandle 에서 가져온다.
@@ -172,13 +173,13 @@ class ViewRequirementViewModel @Inject constructor(
 
     private fun requestMasterSimpleInfo() {
         Timber.tag(TAG).d("requestMasterSimpleInfo: ")
-        profileRepository.getMasterSimpleInfo()
+        getMasterSettingsUseCase()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
-                onSuccess = { masterDto ->
-                    Timber.tag(TAG).d("requestMasterSimpleInfo successful: $masterDto")
-                    masterDto?.approvedStatus.let {
+                onSuccess = { masterSettings ->
+                    Timber.tag(TAG).d("requestMasterSimpleInfo successful: $masterSettings")
+                    masterSettings.approvedStatus.let {
                         when (it) {
                             CodeTable.NOT_APPROVED.code -> setAction(NOT_APPROVED_MASTER)
                             CodeTable.REQUEST_APPROVE.code -> setAction(REQUEST_APPROVE_MASTER)
