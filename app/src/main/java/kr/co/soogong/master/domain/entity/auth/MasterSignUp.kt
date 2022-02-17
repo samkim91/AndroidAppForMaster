@@ -3,6 +3,7 @@ package kr.co.soogong.master.domain.entity.auth
 import kr.co.soogong.master.data.entity.auth.MasterSignUpDto
 
 data class MasterSignUp(
+    val id: Int,
     val uid: String,
     val ownerName: String,
     val tel: String,
@@ -14,6 +15,7 @@ data class MasterSignUp(
     companion object {
         fun fromDto(masterSignUpDto: MasterSignUpDto): MasterSignUp =
             MasterSignUp(
+                id = masterSignUpDto.id!!,
                 uid = masterSignUpDto.uid,
                 ownerName = masterSignUpDto.ownerName,
                 tel = masterSignUpDto.tel,

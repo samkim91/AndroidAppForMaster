@@ -4,6 +4,9 @@ import com.google.gson.annotations.SerializedName
 
 data class MasterSignUpDto(
 
+    @SerializedName("id")
+    val id: Int? = null,
+
     @SerializedName("uid")
     val uid: String,
 
