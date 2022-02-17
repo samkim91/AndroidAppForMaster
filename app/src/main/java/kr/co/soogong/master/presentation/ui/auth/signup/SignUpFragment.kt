@@ -2,6 +2,7 @@ package kr.co.soogong.master.presentation.ui.auth.signup
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
@@ -57,15 +58,18 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>(
 
         viewModel.currentPage.observe(viewLifecycleOwner) {
             binding.vpContainer.currentItem = it
-            setBottomButton(it)
+            setContainerView(it)
         }
     }
 
-    private fun setBottomButton(page: Int) {
+    private fun setContainerView(page: Int) {
         when (page) {
             0 -> binding.bBottom.text = getString(R.string.next)
             1 -> binding.bBottom.text = getString(R.string.sign_up)
-            2 -> binding.bBottom.text = getString(R.string.move_to_home)
+            2 -> {
+                binding.bBottom.text = getString(R.string.move_to_home)
+                binding.abHeader.backButtonVisibility = false
+            }
         }
     }
 
