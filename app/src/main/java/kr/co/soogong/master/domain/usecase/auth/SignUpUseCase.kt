@@ -19,7 +19,7 @@ class SignUpUseCase @Inject constructor(
         authRepository.signUp(masterSignUpDto)
             .doOnSuccess {
                 // TODO: 2022/02/16 id 추가
-                profileRepository.saveMasterKeysInShared(0, it.uid)
+                profileRepository.saveMasterKeysInShared(it.id, it.uid)
             }
             .doOnError {
                 Firebase.auth.signOut()
