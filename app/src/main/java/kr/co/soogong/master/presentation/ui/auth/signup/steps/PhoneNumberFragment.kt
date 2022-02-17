@@ -71,10 +71,10 @@ class PhoneNumberFragment : BaseFragment<FragmentPhoneNumberBinding>(
                 }
 
                 // "인증하기"에 대한 코드
-                viewModel.tel.observe(viewLifecycleOwner, {
+                viewModel.tel.observe(viewLifecycleOwner) {
                     stibmtitAuthPhoneNumber.error =
                         if (!it.isValidPhoneNumber()) getString(R.string.invalid_phone_number) else null
-                })
+                }
 
                 if (stibmtitAuthPhoneNumber.error.isNullOrEmpty()) viewModel.checkUserExist()
             }
@@ -94,27 +94,24 @@ class PhoneNumberFragment : BaseFragment<FragmentPhoneNumberBinding>(
                 IS_PHONE_NUMBER_EXIST ->
                     if (value as Boolean) showDialogForUserExist()
                     else startPhoneNumberVerification(true)
-            }
-        }
-
-        viewModel.validation.observe(viewLifecycleOwner) { validation ->
-            when (validation) {
                 VALIDATE_PHONE_NUMBER -> validateValues()
             }
         }
 
-        viewModel.certificationCode.observe(viewLifecycleOwner, {
+        viewModel.certificationCode.observe(viewLifecycleOwner) {
             viewModel.sendEvent("test", it.length == 6)
-        })
+        }
     }
 
     private fun validateValues() {
         Timber.tag(TAG).d("validateValues: ")
 
-        viewModel.certificationCode.observe(viewLifecycleOwner, {
-            binding.stibmtitAuthPhoneNumber.textInputTimerError =
-                if (it.length != 6) getString(R.string.invalid_certification_code) else null
-        })
+        with(viewModel) {
+            certificationCode.observe(viewLifecycleOwner) {
+                binding.stibmtitAuthPhoneNumber.textInputTimerError =
+                    if (it.length != 6) getString(R.string.invalid_certification_code) else null
+            }
+        }
 
         if (binding.stibmtitAuthPhoneNumber.textInputTimerError.isNullOrEmpty()) verifyPhoneNumberWithCode()
     }
@@ -200,7 +197,12 @@ class PhoneNumberFragment : BaseFragment<FragmentPhoneNumberBinding>(
         Timber.tag(TAG)
             .d("verifyPhoneNumberWithCode: ${viewModel.storedVerificationId.value}, ${viewModel.certificationCode.value}")
 
-        if (!viewModel.storedVerificationId.value.isNullOrEmpty() && !viewModel.certificationCode.value.isNullOrEmpty()) {
+        if (viewModel.storedVerificationId.value.isNullOrEmpty()) {
+            requireContext().toast(getString(R.string.firebase_auth_verification_not_exist))
+            return
+        }
+
+        if (!viewModel.certificationCode.value.isNullOrEmpty()) {
             viewModel.phoneAuthCredential.value =
                 PhoneAuthProvider.getCredential(
                     viewModel.storedVerificationId.value!!,

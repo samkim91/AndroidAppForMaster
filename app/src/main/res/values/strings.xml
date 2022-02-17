@@ -59,6 +59,7 @@
     <!-- Sign Up -->
     <string name="sign_up_introduction">수공마스터 서비스를 이용하기 위해\n회원가입 및 로그인이 필요합니다</string>
     <string name="sign_up">회원가입</string>
+    <string name="move_to_home">홈으로</string>
 
     <string name="alert_unknown_user">가입되지 않은 번호입니다.</string>
 
@@ -76,6 +77,9 @@
     <string name="terms_of_service">이용약관</string>
     <string name="private_policy">개인정보 취급방침</string>
     <string name="repair_in_person">직접 시공</string>
+
+    <string name="welcome_message_at_sign_up_done">반갑습니다, %s 마스터님\n회원가입이 완료되었습니다!</string>
+    <string name="encouraging_fill_profile">수공의 마스터가 되기 위해선\n프로필 설정을 통해 승인을 받아야 해요!</string>
 
     <!-- Sign In -->
     <string name="sign_in">로그인</string>
@@ -392,6 +396,7 @@
 
     <string name="maximum_images_count">사진은 최대 10장까지 업로드 가능합니다.</string>
     <string name="invalid_image_extension">지원하지 않는 이미지 형식입니다.\njpg, jpeg, png 만 업로드 가능합니다.</string>
+    <string name="firebase_auth_verification_not_exist">인증 문자가 발송 중 입니다. 문자를 받으시면, 인증코드를 입력 후 다시 시도해주세요.</string>
     <string name="firebase_auth_too_many_requests">너무 많은 요청이 있습니다. 잠시 후 다시 시도해주세요.</string>
 
 </resources>

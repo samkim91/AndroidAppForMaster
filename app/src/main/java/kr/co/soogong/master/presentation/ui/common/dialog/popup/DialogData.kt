@@ -84,15 +84,6 @@ data class DialogData(
                 "",
             )
 
-        fun getNoticeForCallingCustomerInViewRequirement() =
-            DialogData(
-                "전화 안내",
-                "고객님에게 전화할 수 있는 버튼이 생성되었으니 활용해보세요.",
-                "※ 광고모델 한시적 운영",
-                "전화하기",
-                "취소",
-            )
-
         fun getRefuseMeasure() =
             DialogData(
                 "실측 포기",

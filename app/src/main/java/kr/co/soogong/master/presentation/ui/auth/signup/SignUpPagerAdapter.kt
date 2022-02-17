@@ -4,6 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import kr.co.soogong.master.presentation.ui.auth.signup.steps.OwnerNameFragment
 import kr.co.soogong.master.presentation.ui.auth.signup.steps.PhoneNumberFragment
+import kr.co.soogong.master.presentation.ui.auth.signup.steps.SignUpDoneFragment
 import timber.log.Timber
 
 class SignUpPagerAdapter(
@@ -18,6 +19,7 @@ class SignUpPagerAdapter(
         return when (position) {
             0 -> PhoneNumberFragment.newInstance()
             1 -> OwnerNameFragment.newInstance()
+            2 -> SignUpDoneFragment.newInstance()
             else -> Fragment()
         }
     }

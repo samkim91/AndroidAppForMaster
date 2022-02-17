@@ -49,7 +49,7 @@
             android:layout_marginStart="@dimen/gap_16"
             android:layout_marginEnd="@dimen/gap_16"
             android:layout_marginBottom="@dimen/gap_24"
-            android:onClick="@{() -> vm.checkValidation()}"
+            android:onClick="@{() -> vm.onClickBottomButton()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

@@ -14,7 +14,6 @@ import kr.co.soogong.master.presentation.ui.base.BaseFragment
 import kr.co.soogong.master.presentation.ui.common.dialog.popup.DefaultDialog
 import kr.co.soogong.master.presentation.ui.common.dialog.popup.DialogData
 import kr.co.soogong.master.presentation.uihelper.auth.AgreementDetailActivityHelper
-import kr.co.soogong.master.presentation.uihelper.main.MainActivityHelper
 import kr.co.soogong.master.utility.extension.makeLinks
 import timber.log.Timber
 
@@ -79,31 +78,26 @@ class OwnerNameFragment : BaseFragment<FragmentOwnerNameBinding>(
 
     private fun registerEventObserver() {
         Timber.tag(TAG).d("registerEventObserver: ")
-        viewModel.message.observe(viewLifecycleOwner) { (key, value) ->
+        viewModel.message.observe(viewLifecycleOwner) { (key, _) ->
             when (key) {
-                SIGN_UP_SUCCESSFULLY -> startActivity(MainActivityHelper.getIntent(requireContext()))
-            }
-        }
-
-        viewModel.validation.observe(viewLifecycleOwner) { validation ->
-            when (validation) {
                 VALIDATE_OWNER_NAME -> validateValues()
+                SIGN_UP_SUCCESSFULLY -> viewModel.setCurrentPage(2)
             }
         }
 
-        viewModel.ownerName.observe(viewLifecycleOwner, { name ->
+        viewModel.ownerName.observe(viewLifecycleOwner) { name ->
             binding.groupAgreement.isVisible = name.isNotEmpty()
             binding.tvAlert.isVisible = false
-        })
+        }
     }
 
     private fun validateValues() {
         Timber.tag(TAG).d("validateValues: ")
 
-        viewModel.ownerName.observe(viewLifecycleOwner, {
+        viewModel.ownerName.observe(viewLifecycleOwner) {
             binding.stiOwnerName.error =
                 if (it.isNullOrEmpty()) getString(R.string.required_field_alert) else null
-        })
+        }
 
         viewModel.termsOfService.observe(viewLifecycleOwner) {
             binding.tvAlert.isVisible =
@@ -122,7 +116,6 @@ class OwnerNameFragment : BaseFragment<FragmentOwnerNameBinding>(
 
         if (binding.stiOwnerName.error.isNullOrEmpty() && !binding.tvAlert.isVisible) viewModel.signUp()
     }
-
 
     companion object {
         private const val TAG = "OwnerNameFragment"

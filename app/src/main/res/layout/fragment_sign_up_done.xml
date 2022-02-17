@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="kr.co.soogong.master.presentation.ui.auth.signup.SignUpViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/gap_74">
+
+        <kr.co.soogong.master.presentation.atomic.molecules.LogoTitle3Footnote
+            android:id="@+id/ltf_introduction"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/gap_16"
+            android:layout_marginTop="@dimen/gap_24"
+            android:layout_marginEnd="@dimen/gap_16"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="@{@string/welcome_message_at_sign_up_done(vm.ownerName)}" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_bolty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_110"
+            android:background="@drawable/ic_bolty"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ltf_introduction" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="@dimen/gap_0"
+            app:layout_constraintBottom_toBottomOf="@id/iv_bolty"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ltf_introduction"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/lottie_fireworks" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_encouraging_fill_profile"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_25"
+            android:gravity="center"
+            android:text="@string/encouraging_fill_profile"
+            android:textAppearance="@style/footnote.regular"
+            android:textColor="@color/dark_grey_1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_bolty" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

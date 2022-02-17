@@ -24,9 +24,8 @@ class SignUpViewModel @Inject constructor(
     private val signUpUseCase: SignUpUseCase,
 ) : BaseViewModel() {
 
-    val totalPages: Int = 2
+    val totalPages: Int = 3
     val currentPage = MutableLiveData(0)
-    val validation = MutableLiveData("")
 
     // PhoneNumberFragment
     val tel = MutableLiveData("")
@@ -46,12 +45,13 @@ class SignUpViewModel @Inject constructor(
     val marketingPush = MutableLiveData(false)
     val repairInPerson = MutableLiveData(false)
 
-    fun checkValidation() {
-        Timber.tag(TAG).d("checkValidation: ${currentPage.value}")
+    fun onClickBottomButton() {
+        Timber.tag(TAG).d("onClickBottomButton: ${currentPage.value}")
 
         when (currentPage.value) {
-            0 -> validation.value = VALIDATE_PHONE_NUMBER
-            1 -> validation.value = VALIDATE_OWNER_NAME
+            0 -> sendMessage(VALIDATE_PHONE_NUMBER, "")
+            1 -> sendMessage(VALIDATE_OWNER_NAME, "")
+            2 -> sendMessage(MOVE_TO_MAIN_ACTIVITY, "")
         }
     }
 
@@ -120,11 +120,11 @@ class SignUpViewModel @Inject constructor(
     companion object {
         private const val TAG = "SignUpViewModel"
 
-        const val SIGN_UP_SUCCESSFULLY = "SIGN_UP_SUCCESSFULLY"
-
         const val IS_PHONE_NUMBER_EXIST = "PHONE_NUMBER_EXIST"
 
         const val VALIDATE_PHONE_NUMBER = "VALIDATE_PHONE_NUMBER"
         const val VALIDATE_OWNER_NAME = "VALIDATE_OWNER_NAME"
+        const val SIGN_UP_SUCCESSFULLY = "SIGN_UP_SUCCESSFULLY"
+        const val MOVE_TO_MAIN_ACTIVITY = "MOVE_TO_MAIN_ACTIVITY"
     }
 }
