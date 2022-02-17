@@ -1,4 +1,4 @@
-package kr.co.soogong.master.presentation.ui.profile
+ package kr.co.soogong.master.presentation.ui.profile
 
 import android.net.Uri
 import androidx.lifecycle.LiveData
@@ -22,8 +22,8 @@ class ProfileViewModel @Inject constructor(
     private val getProfileUseCase: GetProfileUseCase,
     private val saveMasterUseCase: SaveMasterUseCase,
 ) : BaseViewModel() {
-    private val _profile = MutableLiveData<Profile?>()
-    val profile: LiveData<Profile?>
+    private val _profile = MutableLiveData<Profile>()
+    val profile: LiveData<Profile>
         get() = _profile
 
     val ownerName = MutableLiveData("")
@@ -41,7 +41,7 @@ class ProfileViewModel @Inject constructor(
                 onSuccess = {
                     Timber.tag(TAG).d("requestProfile Successfully: ")
                     _profile.value = it
-                    it.requiredInformation?.ownerName?.run { ownerName.value = this }       // 2-way binding 을 위한 set
+                    it.requiredInformation.ownerName.run { ownerName.value = this }       // 2-way binding 을 위한 set
                 },
                 onError = {
                     Timber.tag(TAG).d("requestProfile Failed: $it")
@@ -172,8 +172,15 @@ class ProfileViewModel @Inject constructor(
             ).addToDisposable()
     }
 
+    fun onClickRequestReview() {
+        Timber.tag(TAG).d("onClickRequestReview: ")
+        setAction(ON_CLICK_REQUEST_REVIEW)
+    }
+
     companion object {
         private const val TAG = "ProfileViewModel"
         const val REQUEST_FAILED = "REQUEST_FAILED"
+
+        const val ON_CLICK_REQUEST_REVIEW = "ON_CLICK_REQUEST_REVIEW"
     }
 }

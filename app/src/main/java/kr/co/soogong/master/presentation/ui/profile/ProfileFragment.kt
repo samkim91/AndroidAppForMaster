@@ -20,6 +20,7 @@ import kr.co.soogong.master.presentation.ui.common.dialog.bottomSheetDialogRecyc
 import kr.co.soogong.master.presentation.ui.common.dialog.bottomSheetDialogRecyclerView.BottomSheetDialogRecyclerView
 import kr.co.soogong.master.presentation.ui.common.dialog.popup.DefaultDialog
 import kr.co.soogong.master.presentation.ui.common.dialog.popup.DialogData
+import kr.co.soogong.master.presentation.ui.profile.ProfileViewModel.Companion.ON_CLICK_REQUEST_REVIEW
 import kr.co.soogong.master.presentation.ui.profile.ProfileViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.presentation.uihelper.profile.*
 import kr.co.soogong.master.presentation.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_ADDRESS
@@ -85,23 +86,6 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
             // TODO: 2021/12/15 Profile image 삭제 기능 필요
             ivProfileImage.setOnClickListener {
                 getSingleImage()
-            }
-
-            bbRequestReview.onButtonClick = View.OnClickListener {
-                BottomSheetDialogRecyclerView.newInstance(
-                    sheetDialogBundle = BottomSheetDialogBundle.getRequestingReviewBundle()
-                ).let {
-                    it.setItemClickListener { dialogItem ->
-                        Timber.tag(TAG).d("requestReviewButton: ${dialogItem.key} is clicked")
-                        RequestReviewHelper.requestReviewBySharing(
-                            requireContext(),
-                            viewModel.profile.value?.uid,
-                            viewModel.profile.value?.representativeName,
-                            dialogItem.value
-                        )
-                    }
-                    it.show(parentFragmentManager, it.tag)
-                }
             }
 
             hbcOwnerName.tvContent.isSingleLine = true      // 기본 3줄이 max 인데, 여기는 한줄로 제한
@@ -200,11 +184,12 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
     }
 
     private fun registerEventObserve() {
-        viewModel.action.observe(viewLifecycleOwner, EventObserver { event ->
-            when (event) {
+        viewModel.action.observe(viewLifecycleOwner, EventObserver { action ->
+            when (action) {
                 REQUEST_FAILED -> requireContext().toast(getString(R.string.error_message_of_request_failed))
                 SHOW_LOADING -> showLoading(parentFragmentManager)
                 DISMISS_LOADING -> dismissLoading()
+                ON_CLICK_REQUEST_REVIEW -> showRequestReview()
             }
         })
         viewModel.profile.observe(viewLifecycleOwner) { profile ->
@@ -216,6 +201,23 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
                 checkApprovedStatusAndRequiredField(parentFragmentManager, binding, viewModel, this)
             }
             setOptionalProfileInformationProgress(viewModel)
+        }
+    }
+
+    private fun showRequestReview() {
+        BottomSheetDialogRecyclerView.newInstance(
+            sheetDialogBundle = BottomSheetDialogBundle.getRequestingReviewBundle()
+        ).let {
+            it.setItemClickListener { dialogItem ->
+                Timber.tag(TAG).d("requestReviewButton: ${dialogItem.key} is clicked")
+                RequestReviewHelper.requestReviewBySharing(
+                    requireContext(),
+                    viewModel.profile.value?.uid,
+                    viewModel.profile.value?.representativeName,
+                    dialogItem.value
+                )
+            }
+            it.show(parentFragmentManager, it.tag)
         }
     }
 

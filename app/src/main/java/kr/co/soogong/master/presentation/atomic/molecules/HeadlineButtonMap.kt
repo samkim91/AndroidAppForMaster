@@ -18,10 +18,6 @@ class HeadlineButtonMap @JvmOverloads constructor(
     private val binding =
         ViewHeadlineButtonMapBinding.inflate(LayoutInflater.from(context), this, true)
 
-    init {
-        setButtonStatus()
-    }
-
     var title: String? = null
         set(value) {
             field = value
@@ -34,11 +30,9 @@ class HeadlineButtonMap @JvmOverloads constructor(
     var content: String? = null
         set(value) {
             field = value
-            value?.let {
-                tvContent.text = it
-                tvContent.isVisible = true
-                setButtonStatus()
-            }
+            tvContent.text = value
+            tvContent.isVisible = !value.isNullOrEmpty()
+            setButtonStatus()
         }
 
     var onButtonClick: OnClickListener? = null

@@ -52,7 +52,7 @@ data class MasterDto(
     @SerializedName("approvedStatus")
     val approvedStatus: String? = null,
 
-    @SerializedName("public")
+    @SerializedName("isPublic")
     val isPublic: Boolean? = null,
 
     @SerializedName("profileImage")

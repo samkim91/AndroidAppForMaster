@@ -116,7 +116,6 @@
     <string name="main_activity_navigation_bar_preferences">설정</string>
 
     <!-- Home -->
-    <string name="label_for_switch_compat">실측 요청 받기</string>
     <string name="summary_item">%s건</string>
     <string name="new_requirements_container">새로 들어온 문의</string>
 
@@ -254,10 +253,8 @@
     <string name="completion_of_optional_information">선택 정보 완성도</string>
     <string name="free_measure">무료 방문 실측 여부</string>
     <string name="portfolio">포트폴리오</string>
-    <string name="portfolio_hint">알찬 포트폴리오로 고객님께 어필해보세요.</string>
     <string name="portfolio_filled">%d개의 포트폴리오가 있습니다.</string>
     <string name="price_by_project">시공 종류별 가격</string>
-    <string name="price_by_project_hint">다양한 시공의 가격 정보는 고객 선택에 중요한 기준이 됩니다.</string>
     <string name="price_by_project_filled">%d개의 시공 종류별 가격이 있습니다.</string>
     <string name="master_configs">기타 변동 요인</string>
     <string name="master_configs_hint">고객님이 당황하지 않도록 변동 요인을 알려주세요.</string>
