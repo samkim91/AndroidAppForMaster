@@ -8,7 +8,6 @@ import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentSignUpBinding
 import kr.co.soogong.master.presentation.ui.auth.AuthContainerActivity
 import kr.co.soogong.master.presentation.ui.base.BaseFragment
-import kr.co.soogong.master.presentation.ui.base.BaseViewModel
 import kr.co.soogong.master.presentation.ui.base.BaseViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.extension.toast
@@ -56,18 +55,17 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>(
             }
         })
 
-        viewModel.currentPage.observe(viewLifecycleOwner, {
+        viewModel.currentPage.observe(viewLifecycleOwner) {
             binding.vpContainer.currentItem = it
             setBottomButton(it)
-        })
+        }
     }
 
     private fun setBottomButton(page: Int) {
-        Timber.tag(TAG).d("setBottomButton: ")
-
         when (page) {
             0 -> binding.bBottom.text = getString(R.string.next)
             1 -> binding.bBottom.text = getString(R.string.sign_up)
+            2 -> binding.bBottom.text = getString(R.string.move_to_home)
         }
     }
 

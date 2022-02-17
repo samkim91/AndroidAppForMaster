@@ -1,6 +1,5 @@
 package kr.co.soogong.master.domain.entity.auth
 
-import com.google.gson.annotations.SerializedName
 import kr.co.soogong.master.data.entity.auth.MasterSignUpDto
 
 data class MasterSignUp(
