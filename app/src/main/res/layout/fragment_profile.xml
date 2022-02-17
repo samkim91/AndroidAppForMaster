@@ -66,7 +66,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintWidth_percent="0.25"
-                    app:setCircleImageByUrl="@{vm.profile.basicInformation.profileImage != null ? vm.profile.basicInformation.profileImage.url : ``}" />
+                    app:setCircleImageByUrl="@{vm.profile.basicInformation.profileImage.url ?? ``}" />
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/iv_add"
@@ -121,13 +121,12 @@
                     app:recommendation="@{vm.profile.reviewSummary.averageRecommendation}"
                     app:reviewCount="@{vm.profile.reviewSummary.reviewCount}" />
 
-                <kr.co.soogong.master.presentation.atomic.atoms.ButtonBig
-                    android:id="@+id/bb_request_review"
-                    android:layout_width="@dimen/gap_0"
-                    android:layout_height="wrap_content"
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/b_request_review"
+                    style="@style/button.big.primary.outlined"
                     android:layout_marginTop="@dimen/gap_16"
-                    app:buttonText="@{@string/request_review_label}"
-                    app:buttonTheme="@{buttonThemeRequestReview}"
+                    android:text="@string/request_review_label"
+                    android:onClick="@{() -> vm.onClickRequestReview()}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/rb_my_reviews" />
@@ -140,7 +139,7 @@
                     android:background="@color/light_grey_2"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/bb_request_review" />
+                    app:layout_constraintTop_toBottomOf="@id/b_request_review" />
 
                 <kr.co.soogong.master.presentation.atomic.molecules.BoxIconContent
                     android:id="@+id/bic_profile_guideline"
@@ -222,7 +221,7 @@
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/gap_33"
-                    app:content="@{vm.profile.requiredInformation.businessUnitInformation.businessType != null ? vm.profile.requiredInformation.businessUnitInformation.businessType + `, ` + vm.profile.requiredInformation.businessUnitInformation.shopName : null}"
+                    app:content="@{vm.profile.requiredInformation.businessUnitInformation.businessType != null ? vm.profile.requiredInformation.businessUnitInformation.businessType + `, ` + vm.profile.requiredInformation.businessUnitInformation.shopName : ``}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/hie_shop_images"
@@ -282,7 +281,7 @@
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/gap_33"
-                    app:content="@{vm.profile.requiredInformation.companyAddress.roadAddress + ` ` + vm.profile.requiredInformation.companyAddress.detailAddress}"
+                    app:content="@{vm.profile.requiredInformation.companyAddress.roadAddress != null ? vm.profile.requiredInformation.companyAddress.roadAddress + ` ` + vm.profile.requiredInformation.companyAddress.detailAddress : ``}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/hbcg_projects"
@@ -294,7 +293,7 @@
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/gap_33"
-                    app:content="@{@string/kilo_meters_digit(vm.profile.requiredInformation.serviceArea)}"
+                    app:content="@{vm.profile.requiredInformation.serviceArea != null ? @string/kilo_meters_digit(vm.profile.requiredInformation.serviceArea) : ``}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/hbc_service_address"
@@ -346,7 +345,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/gap_33"
                     app:content="@{@string/portfolio_filled(vm.profile.basicInformation.portfolioCount)}"
-                    app:hint="@{@string/portfolio_hint}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/hbc_free_measure"
@@ -359,7 +357,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/gap_33"
                     app:content="@{@string/price_by_project_filled(vm.profile.basicInformation.priceByProjectCount)}"
-                    app:hint="@{@string/price_by_project_hint}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/hbc_portfolio"

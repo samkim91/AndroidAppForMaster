@@ -259,6 +259,11 @@
         <item name="android:textColor">@color/white</item>
     </style>
 
+    <style name="button.big.primary.outlined" parent="button.big.primary">
+        <item name="android:background">@drawable/bg_solid_transparent_stroke_green_selector_radius8</item>
+        <item name="android:textColor">@color/selector_green_alpha50</item>
+    </style>
+
     <!-- 버튼 filled -->
 
     <!-- end section 버튼 스타일 -->

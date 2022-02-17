@@ -11,20 +11,6 @@ fun showDialogForCallingCustomer(
     requirement: Requirement,
 ) {
     when (requirement.status) {
-        // NOTE: 매칭대기 상태에서, 전화기능이 오픈되었다는 것을 안내
-        is RequirementStatus.Estimated -> {
-            DefaultDialog.newInstance(DialogData.getNoticeForCallingCustomerInViewRequirement())
-                .let {
-                    it.setButtonsClickListener(
-                        onPositive = {
-                            viewModel.callToClient()
-                        },
-                        onNegative = {}
-                    )
-                    it.show(viewRequirementActivity.supportFragmentManager, it.tag)
-                }
-        }
-
         // NOTE: 상담요청 상태에서, 상호 통화한 적이 한번도 없으면 전화하라고 안내
         is RequirementStatus.RequestConsult -> {
             if (requirement.estimationDto?.fromMasterCallCnt == 0 && requirement.estimationDto.fromClientCallCnt == 0) {

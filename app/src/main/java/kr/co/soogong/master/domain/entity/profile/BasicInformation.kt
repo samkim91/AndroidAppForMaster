@@ -8,7 +8,7 @@ import kr.co.soogong.master.data.entity.profile.MasterDto
 
 @Parcelize
 data class BasicInformation(
-    val freeMeasureYn: Boolean?,
+    val freeMeasureYn: Boolean,
     val portfolioCount: Int,
     val priceByProjectCount: Int,
     val profileImage: AttachmentDto?,
@@ -18,7 +18,7 @@ data class BasicInformation(
     companion object {
         fun fromMasterDto(masterDto: MasterDto): BasicInformation {
             return BasicInformation(
-                freeMeasureYn = masterDto.freeMeasureYn,
+                freeMeasureYn = masterDto.freeMeasureYn!!,
                 portfolioCount = masterDto.portfolioCount ?: 0,
                 priceByProjectCount = masterDto.priceByProjectCount ?: 0,
                 profileImage = masterDto.profileImage,

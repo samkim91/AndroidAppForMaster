@@ -36,6 +36,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
         registerDynamicLinkListener()
         removeBrokenChannel(this)
         initNotificationChannel(this)
+
+        // 최초 앱 실행 시 프로필 업데이트 확인 차 요청
+        profileViewModel.requestProfile()
     }
 
     override fun initLayout() {
@@ -69,7 +72,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
         profileViewModel.profile.observe(this, { profile ->
             when {
                 profile?.approvedStatus == CodeTable.NOT_APPROVED.code -> moveToProfileFragment(true)
-                profile?.basicInformation?.portfolioCount == 0 || profile?.basicInformation?.priceByProjectCount == 0 -> moveToProfileFragment(false)
+                profile?.basicInformation?.portfolioCount == 0 || profile?.basicInformation?.priceByProjectCount == 0 -> moveToProfileFragment(
+                    false)
             }
         })
     }
@@ -105,11 +109,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
             )
             dialog.show(supportFragmentManager, dialog.tag)
         }
-    }
-
-    override fun onStart() {
-        super.onStart()
-        profileViewModel.requestProfile()
     }
 
     override fun setRequirementsBadge(badgeCount: Int) {

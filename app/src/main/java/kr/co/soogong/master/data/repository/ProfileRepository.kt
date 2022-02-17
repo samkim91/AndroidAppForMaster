@@ -12,6 +12,7 @@ import kr.co.soogong.master.data.entity.common.PageableContentDto
 import kr.co.soogong.master.data.entity.profile.MasterDto
 import kr.co.soogong.master.data.entity.profile.PortfolioDto
 import kr.co.soogong.master.domain.entity.profile.MasterSettings
+import kr.co.soogong.master.domain.entity.profile.Profile
 import kr.co.soogong.master.domain.entity.profile.Review
 import kr.co.soogong.master.utility.MultipartGenerator
 import okhttp3.ResponseBody
@@ -45,12 +46,12 @@ class ProfileRepository @Inject constructor(
     fun updateUidByTel(tel: String, uid: String): Single<MasterDto> =
         profileService.updateUidByTel(tel, uid)
 
-    fun getMaster(): Single<MasterDto> =
+    fun getMaster(): Single<Profile> =
         profileService.getMasterByUid(getMasterUidFromShared())
             .doOnSuccess { it.data?.run { saveMasterKeysInShared(this.id!!, this.uid!!) } }
             .map { responseDto ->
                 if (responseDto.code.toInt() == HttpURLConnection.HTTP_OK) {
-                    responseDto.data
+                    responseDto.data?.run { Profile.fromMasterDto(this) }
                 } else {
                     throw Exception(responseDto.messageKo)
                 }

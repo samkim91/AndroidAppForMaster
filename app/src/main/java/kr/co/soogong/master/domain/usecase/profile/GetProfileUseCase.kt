@@ -11,5 +11,5 @@ class GetProfileUseCase @Inject constructor(
     private val profileRepository: ProfileRepository,
 ) {
     operator fun invoke(): Single<Profile> =
-        profileRepository.getMaster().map { Profile.fromMasterDto(it) }
+        profileRepository.getMaster()
 }

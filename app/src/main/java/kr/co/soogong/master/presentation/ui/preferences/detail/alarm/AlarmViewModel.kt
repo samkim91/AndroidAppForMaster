@@ -8,6 +8,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.entity.profile.MasterDto
 import kr.co.soogong.master.data.repository.ProfileRepository
+import kr.co.soogong.master.domain.entity.profile.Profile
+import kr.co.soogong.master.domain.usecase.profile.GetProfileUseCase
 import kr.co.soogong.master.domain.usecase.profile.SaveMasterUseCase
 import kr.co.soogong.master.presentation.ui.base.BaseViewModel
 import timber.log.Timber
@@ -15,10 +17,10 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AlarmViewModel @Inject constructor(
-    private val profileRepository: ProfileRepository,
+    private val getProfileUseCase: GetProfileUseCase,
     private val saveMasterUseCase: SaveMasterUseCase,
 ) : BaseViewModel() {
-    private val _masterDto = MutableLiveData<MasterDto>()
+    private val _profile = MutableLiveData<Profile>()
 
     private val _marketingPush = MutableLiveData(false)
     val marketingPush: LiveData<Boolean>
@@ -33,12 +35,12 @@ class AlarmViewModel @Inject constructor(
     }
 
     private fun requestAlarmStatus() {
-        profileRepository.getMaster()
+        getProfileUseCase()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 Timber.tag(TAG).d("requestAlarmStatus successfully: ")
-                _masterDto.value = it
+                _profile.value = it
                 _marketingPush.postValue(it.marketingPush)
                 _pushAtNight.postValue(it.pushAtNight)
             }, {
@@ -62,8 +64,8 @@ class AlarmViewModel @Inject constructor(
     private fun saveAlarmStatus(type: String, isChecked: Boolean) {
         saveMasterUseCase(
             MasterDto(
-                id = _masterDto.value?.id,
-                uid = _masterDto.value?.uid,
+                id = _profile.value?.id,
+                uid = _profile.value?.uid,
                 marketingPush = if (type == MARKETING) isChecked else null,
                 pushAtNight = if (type == MARKETING_AT_NIGHT) isChecked else null,
             )

@@ -158,20 +158,20 @@ data class DialogData(
 
         fun getAskingFillRequiredProfile() =
             DialogData(
-                "필수 정보 요청",
-                "문의를 처리하려면 필수 정보 등록이 필요해요. 지금 등록하시겠어요?",
+                "잠시만요!",
+                "마스터 승인에 필요한 필수 정보를 아직 채우지 않았어요!",
                 "",
-                "네",
-                "아니요",
+                "프로필 설정하기",
+                "나중에 하기",
             )
 
         fun getAskingFillBasicProfile() =
             DialogData(
-                "선택 정보 요청",
-                "추가 정보 입력을 통해 고객 매칭률을 높여보세요. 지금 입력하시겠어요?",
+                "잠시만요!",
+                "선택정보를 넣으면 고객과의 매칭률이 올라갑니다!",
                 "",
-                "네",
-                "아니요",
+                "선택정보 채우기",
+                "나중에 하기",
             )
 
         fun getWaitingUntilApproval() =
