@@ -47,10 +47,7 @@ data class RequiredInformation(
                     masterDto.roadAddress,
                     masterDto.detailAddress ?: "",
                 ),
-                coordinate = Coordinate(
-                    masterDto.latitude?.toDouble(),
-                    masterDto.longitude?.toDouble(),
-                ),
+                coordinate = if (masterDto.latitude != null && masterDto.longitude != null) Coordinate(masterDto.latitude.toDouble(), masterDto.longitude.toDouble()) else null,
                 serviceArea = masterDto.serviceArea,
             )
         }

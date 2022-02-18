@@ -3,26 +3,28 @@ package kr.co.soogong.master.presentation.ui.profile.detail.masterconfig
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.children
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.google.android.material.chip.Chip
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
-import kr.co.soogong.master.presentation.atomic.molecules.SubheadlineChipGroup
-import kr.co.soogong.master.domain.entity.common.CodeTable
 import kr.co.soogong.master.databinding.FragmentEditMasterConfigBinding
+import kr.co.soogong.master.domain.entity.common.CodeTable
+import kr.co.soogong.master.presentation.atomic.molecules.SubheadlineChipGroup
 import kr.co.soogong.master.presentation.ui.base.BaseFragment
+import kr.co.soogong.master.presentation.ui.base.BaseViewModel.Companion.REQUEST_SUCCESS
 import kr.co.soogong.master.presentation.ui.profile.detail.EditProfileContainerActivity
-import kr.co.soogong.master.presentation.ui.profile.detail.EditProfileContainerViewModel.Companion.REQUEST_FAILED
-import kr.co.soogong.master.presentation.ui.profile.detail.EditProfileContainerViewModel.Companion.SAVE_MASTER_SUCCESSFULLY
+import kr.co.soogong.master.presentation.ui.profile.detail.EditProfileContainerViewModel
 import kr.co.soogong.master.utility.EventObserver
-import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
 
 @AndroidEntryPoint
 class EditMasterConfigFragment : BaseFragment<FragmentEditMasterConfigBinding>(
     R.layout.fragment_edit_master_config
 ) {
+
     private val viewModel: EditMasterConfigViewModel by viewModels()
+    private val editProfileContainerViewModel: EditProfileContainerViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -79,14 +81,7 @@ class EditMasterConfigFragment : BaseFragment<FragmentEditMasterConfigBinding>(
     private fun registerEventObserve() {
         Timber.tag(TAG).d("registerEventObserve: ")
 
-        viewModel.action.observe(viewLifecycleOwner, EventObserver { event ->
-            when (event) {
-                SAVE_MASTER_SUCCESSFULLY -> activity?.onBackPressed()
-                REQUEST_FAILED -> requireContext().toast(getString(R.string.error_message_of_request_failed))
-            }
-        })
-
-        viewModel.otherOption.observe(viewLifecycleOwner, { codeTableList ->
+        viewModel.otherOption.observe(viewLifecycleOwner) { codeTableList ->
             Timber.tag(TAG).w("otherOption: $codeTableList")
             codeTableList.map { codeTable ->
                 binding.scgOtherOptions.container.children.find { chip ->
@@ -94,6 +89,12 @@ class EditMasterConfigFragment : BaseFragment<FragmentEditMasterConfigBinding>(
                 }?.run {
                     (this as Chip).isChecked = true
                 }
+            }
+        }
+
+        viewModel.action.observe(viewLifecycleOwner, EventObserver { action ->
+            when (action) {
+                REQUEST_SUCCESS -> editProfileContainerViewModel.setAction(REQUEST_SUCCESS)
             }
         })
     }

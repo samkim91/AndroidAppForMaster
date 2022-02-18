@@ -6,26 +6,26 @@ import kr.co.soogong.master.data.entity.profile.MasterDto
 import kr.co.soogong.master.domain.entity.common.DropdownItemList
 import kr.co.soogong.master.domain.usecase.profile.GetProfileUseCase
 import kr.co.soogong.master.domain.usecase.profile.SaveMasterUseCase
-import kr.co.soogong.master.presentation.ui.profile.detail.EditProfileContainerViewModel
-import timber.log.Timber
+import kr.co.soogong.master.presentation.ui.profile.detail.EditProfileViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class EditEmailViewModel @Inject constructor(
     getProfileUseCase: GetProfileUseCase,
     saveMasterUseCase: SaveMasterUseCase,
-) : EditProfileContainerViewModel(getProfileUseCase, saveMasterUseCase) {
+) : EditProfileViewModel(getProfileUseCase, saveMasterUseCase) {
 
     val domains = DropdownItemList.domains
     val localPart = MutableLiveData("")
     val domain = MutableLiveData<Pair<String, Int>>()
 
-    fun requestEmail() {
-        Timber.tag(TAG).d("requestEmail: ")
+    init {
+        requestEmail()
+    }
 
+    private fun requestEmail() {
         requestProfile {
-            profile.postValue(it)
-            it.basicInformation?.email?.let { email ->
+            it.basicInformation.email?.let { email ->
                 if (email.contains("@")) {
                     email.split("@").let { split ->
                         localPart.postValue(split[0])
@@ -43,8 +43,6 @@ class EditEmailViewModel @Inject constructor(
     }
 
     fun saveEmailAddress() {
-        Timber.tag(TAG).d("saveEmailAddress: ")
-
         saveMaster(
             MasterDto(
                 id = profile.value?.id,

@@ -83,7 +83,7 @@ class AppModule {
                 when (BuildConfig.BUILD_TYPE) {
                     "release" -> HttpContract.PROD_URL
                     "internal" -> HttpContract.TEST_URL
-                    "local" -> HttpContract.LOCAL_URL
+                    "local" -> HttpContract.LOCAL_URL_MH
                     else -> HttpContract.DEV_URL
                 }
             )

@@ -4,33 +4,33 @@ import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.ArrayAdapter
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentEditEmailBinding
 import kr.co.soogong.master.presentation.ui.base.BaseFragment
+import kr.co.soogong.master.presentation.ui.base.BaseViewModel.Companion.REQUEST_SUCCESS
 import kr.co.soogong.master.presentation.ui.profile.detail.EditProfileContainerActivity
-import kr.co.soogong.master.presentation.ui.profile.detail.EditProfileContainerViewModel.Companion.REQUEST_FAILED
-import kr.co.soogong.master.presentation.ui.profile.detail.EditProfileContainerViewModel.Companion.SAVE_MASTER_SUCCESSFULLY
+import kr.co.soogong.master.presentation.ui.profile.detail.EditProfileContainerViewModel
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.extension.isValidDomain
 import kr.co.soogong.master.utility.extension.isValidLocalPart
-import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
 
 @AndroidEntryPoint
-class EditEmailFragment :
-    BaseFragment<FragmentEditEmailBinding>(
-        R.layout.fragment_edit_email
-    ) {
+class EditEmailFragment : BaseFragment<FragmentEditEmailBinding>(
+    R.layout.fragment_edit_email
+) {
+
     private val viewModel: EditEmailViewModel by viewModels()
+    private val editProfileContainerViewModel: EditProfileContainerViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Timber.tag(TAG).d("onViewCreated: ")
         initLayout()
         registerEventObserve()
-        viewModel.requestEmail()
     }
 
     override fun initLayout() {
@@ -61,15 +61,15 @@ class EditEmailFragment :
                         viewModel.domains.last().second)
                 }
 
-                viewModel.localPart.observe(viewLifecycleOwner, {
+                viewModel.localPart.observe(viewLifecycleOwner) {
                     sefEmail.error =
                         if (!it.isValidLocalPart()) getString(R.string.invalid_email_format) else null
-                })
+                }
 
-                viewModel.domain.observe(viewLifecycleOwner, {
+                viewModel.domain.observe(viewLifecycleOwner) {
                     sefEmail.dropdownError =
                         if (!it.first.isValidDomain()) getString(R.string.invalid_email_format) else null
-                })
+                }
 
                 if (sefEmail.error.isNullOrEmpty() && sefEmail.dropdownError.isNullOrEmpty()) viewModel.saveEmailAddress()
             }
@@ -78,10 +78,10 @@ class EditEmailFragment :
 
     private fun registerEventObserve() {
         Timber.tag(TAG).d("registerEventObserve: ")
-        viewModel.action.observe(viewLifecycleOwner, EventObserver { event ->
-            when (event) {
-                SAVE_MASTER_SUCCESSFULLY -> activity?.onBackPressed()
-                REQUEST_FAILED -> requireContext().toast(getString(R.string.error_message_of_request_failed))
+
+        viewModel.action.observe(viewLifecycleOwner, EventObserver { action ->
+            when (action) {
+                REQUEST_SUCCESS -> editProfileContainerViewModel.setAction(REQUEST_SUCCESS)
             }
         })
     }

@@ -55,7 +55,7 @@ class PortfolioListActivity : BaseActivity<ActivityPortfolioListBinding>(
         binding.buttonThemeAddingItem = ButtonTheme.OutlinedPrimary
         binding.addingItemClickListener = View.OnClickListener {
             startActivity(
-                EditProfileContainerActivityHelper.getIntentIncludingPortfolio(
+                EditProfileContainerActivityHelper.getIntentForEditingPortfolio(
                     this@PortfolioListActivity,
                     if (viewModel.type == CodeTable.PORTFOLIO) ADD_PORTFOLIO else ADD_PRICE_BY_PROJECTS
                 )
@@ -82,7 +82,7 @@ class PortfolioListActivity : BaseActivity<ActivityPortfolioListBinding>(
                 },
                 buttonRightClickListener = { portfolioDto ->
                     startActivity(
-                        EditProfileContainerActivityHelper.getIntentIncludingPortfolio(
+                        EditProfileContainerActivityHelper.getIntentForEditingPortfolio(
                             this@PortfolioListActivity,
                             if (viewModel.type == CodeTable.PORTFOLIO) EDIT_PORTFOLIO else EDIT_PRICE_BY_PROJECTS,
                             portfolioDto

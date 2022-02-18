@@ -69,7 +69,7 @@ class PriceByProjectFragment : BaseFragment<FragmentEditPriceByProjectBinding>(
         Timber.tag(TAG).d("registerEventObserve: ")
         viewModel.action.observe(viewLifecycleOwner, EventObserver { event ->
             when (event) {
-                SAVE_PRICE_BY_PROJECT_SUCCESSFULLY -> activity?.onBackPressed()
+                SAVE_PRICE_BY_PROJECT_SUCCESSFULLY -> activity?.finish()
                 REQUEST_FAILED -> requireContext().toast(getString(R.string.error_message_of_request_failed))
             }
         })

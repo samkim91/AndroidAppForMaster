@@ -21,7 +21,7 @@ class NaverMapHelper(
     val coordinate: Coordinate?,
     val radius: Int?,
 ) : OnMapReadyCallback {
-    lateinit var naverMap: NaverMap
+    private lateinit var naverMap: NaverMap
     private var marker = Marker()
     private var circleOverlay = CircleOverlay()
 
@@ -57,8 +57,8 @@ class NaverMapHelper(
             naverMap.moveCamera(
                 CameraUpdate.scrollTo(
                     LatLng(
-                        c.latitude!!,
-                        c.longitude!!
+                        c.latitude,
+                        c.longitude
                     )
                 )
             )
@@ -79,7 +79,7 @@ class NaverMapHelper(
         Timber.tag(TAG).d("setMarker: $coordinate")
         coordinate.let { c ->
             if (marker.isAdded) marker.map = null
-            marker = Marker(LatLng(c.latitude!!, c.longitude!!))
+            marker = Marker(LatLng(c.latitude, c.longitude))
             marker.width = Marker.SIZE_AUTO
             marker.height = Marker.SIZE_AUTO
             marker.map = naverMap
@@ -93,7 +93,7 @@ class NaverMapHelper(
 
         coordinate.let { c ->
             if (circleOverlay.isAdded) circleOverlay.map = null
-            circleOverlay = CircleOverlay(LatLng(c.latitude!!, c.longitude!!), (radius * 1000.0))
+            circleOverlay = CircleOverlay(LatLng(c.latitude, c.longitude), (radius * 1000.0))
             circleOverlay.outlineColor = context.resources.getColor(R.color.c_22D47B, null)
             circleOverlay.color = context.resources.getColor(R.color.c_8022D47B, null)
             circleOverlay.map = naverMap
