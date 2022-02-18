@@ -7,32 +7,32 @@ import kr.co.soogong.master.domain.entity.common.CodeTable
 import kr.co.soogong.master.domain.entity.common.major.Project
 import kr.co.soogong.master.domain.usecase.profile.GetProfileUseCase
 import kr.co.soogong.master.domain.usecase.profile.SaveMasterUseCase
-import kr.co.soogong.master.presentation.ui.profile.detail.EditProfileContainerViewModel
+import kr.co.soogong.master.presentation.ui.profile.detail.EditProfileViewModel
 import kr.co.soogong.master.utility.ListLiveData
-import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class EditMajorViewModel @Inject constructor(
     getProfileUseCase: GetProfileUseCase,
     saveMasterUseCase: SaveMasterUseCase,
-) : EditProfileContainerViewModel(getProfileUseCase, saveMasterUseCase) {
+) : EditProfileViewModel(getProfileUseCase, saveMasterUseCase) {
 
     val projects = ListLiveData<Project>()
 
-    fun requestMajor() {
-        Timber.tag(TAG).d("requestMajor: ")
+    init {
+        requestMajor()
+    }
 
+    private fun requestMajor() {
         requestProfile {
             profile.value = it
-            it.requiredInformation?.projects?.let { list ->
+            it.requiredInformation.projects?.let { list ->
                 projects.addAll(list)
             }
         }
     }
 
     fun saveMajor() {
-        Timber.tag(TAG).d("saveMajor: ")
         projects.value?.let {
             saveMaster(
                 MasterDto(

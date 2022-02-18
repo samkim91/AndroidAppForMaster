@@ -23,7 +23,7 @@ object EditProfileContainerActivityHelper {
         }
     }
 
-    fun getIntentIncludingPortfolio(
+    fun getIntentForEditingPortfolio(
         context: Context,
         pageName: String,
         portfolioDto: PortfolioDto? = null,
@@ -34,7 +34,6 @@ object EditProfileContainerActivityHelper {
                 EXTRA_PORTFOLIO to portfolioDto
             ))
         }
-
 
     fun getPageName(intent: Intent): String
         = intent.getBundleExtra(EXTRA_BUNDLE_KEY)?.getString(EXTRA_STRING_KEY) ?: ""

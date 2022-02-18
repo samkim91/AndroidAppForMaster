@@ -14,6 +14,10 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        app:hideKeyboardWhenFocused="@{true}"
         android:paddingBottom="@dimen/gap_74">
 
         <kr.co.soogong.master.presentation.atomic.molecules.SubheadlineTextInput
@@ -91,8 +95,8 @@
             style="@style/check_box_rectangle"
             android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"
-            android:checked="@={vm.repairInPerson}"
             android:breakStrategy="simple"
+            android:checked="@={vm.repairInPerson}"
             android:text="@string/agreement_repair_in_person"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -116,7 +120,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="gone"
-            tools:visibility="visible"
-            app:constraint_referenced_ids="tv_agreement, cb_agreement_all, cb_agreement_terms_of_service, cb_agreement_privacy_policy, cb_agreement_marketing_push, cb_repair_in_person" />
+            app:constraint_referenced_ids="tv_agreement, cb_agreement_all, cb_agreement_terms_of_service, cb_agreement_privacy_policy, cb_agreement_marketing_push, cb_repair_in_person"
+            tools:visibility="visible" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

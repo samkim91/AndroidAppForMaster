@@ -2,20 +2,21 @@ package kr.co.soogong.master.presentation.ui.profile.detail.shopimages
 
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import gun0912.tedimagepicker.builder.TedImagePicker
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.entity.common.AttachmentDto
+import kr.co.soogong.master.databinding.FragmentEditShopImagesBinding
 import kr.co.soogong.master.domain.entity.common.ButtonTheme
 import kr.co.soogong.master.domain.entity.common.CodeTable
-import kr.co.soogong.master.databinding.FragmentEditShopImagesBinding
 import kr.co.soogong.master.presentation.ui.base.BaseFragment
+import kr.co.soogong.master.presentation.ui.base.BaseViewModel.Companion.REQUEST_SUCCESS
 import kr.co.soogong.master.presentation.ui.common.dialog.popup.DefaultDialog
 import kr.co.soogong.master.presentation.ui.common.dialog.popup.DialogData
 import kr.co.soogong.master.presentation.ui.profile.detail.EditProfileContainerActivity
-import kr.co.soogong.master.presentation.ui.profile.detail.EditProfileContainerViewModel.Companion.REQUEST_FAILED
-import kr.co.soogong.master.presentation.ui.profile.detail.EditProfileContainerViewModel.Companion.SAVE_MASTER_SUCCESSFULLY
+import kr.co.soogong.master.presentation.ui.profile.detail.EditProfileContainerViewModel
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.FileHelper
 import kr.co.soogong.master.utility.PermissionHelper
@@ -26,14 +27,15 @@ import timber.log.Timber
 class EditShopImagesFragment : BaseFragment<FragmentEditShopImagesBinding>(
     R.layout.fragment_edit_shop_images
 ) {
+
     private val viewModel: EditShopImagesViewModel by viewModels()
+    private val editProfileContainerViewModel: EditProfileContainerViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Timber.tag(TAG).d("onViewCreated: ")
         initLayout()
         registerEventObserve()
-        viewModel.requestShopImages()
     }
 
     override fun initLayout() {
@@ -109,18 +111,10 @@ class EditShopImagesFragment : BaseFragment<FragmentEditShopImagesBinding>(
 
     private fun registerEventObserve() {
         Timber.tag(TAG).d("registerEventObserve: ")
-        viewModel.action.observe(viewLifecycleOwner, EventObserver { event ->
-            when (event) {
-                SAVE_MASTER_SUCCESSFULLY -> {
-                    dismissLoading()
-                    activity?.onBackPressed()
-                }
-                REQUEST_FAILED -> {
-                    dismissLoading()
-                    requireContext().toast(getString(
-                        R.string.error_message_of_request_failed
-                    ))
-                }
+
+        viewModel.action.observe(viewLifecycleOwner, EventObserver { action ->
+            when (action) {
+                REQUEST_SUCCESS -> editProfileContainerViewModel.setAction(REQUEST_SUCCESS)
             }
         })
     }

@@ -13,7 +13,7 @@ import kr.co.soogong.master.data.entity.profile.MasterDto
 import kr.co.soogong.master.domain.usecase.auth.CheckUserExistentUseCase
 import kr.co.soogong.master.domain.usecase.profile.GetProfileUseCase
 import kr.co.soogong.master.domain.usecase.profile.SaveMasterUseCase
-import kr.co.soogong.master.presentation.ui.profile.detail.EditProfileContainerViewModel
+import kr.co.soogong.master.presentation.ui.profile.detail.EditProfileViewModel
 import kr.co.soogong.master.utility.PhoneNumberHelper
 import timber.log.Timber
 import javax.inject.Inject
@@ -23,7 +23,7 @@ class EditPhoneNumberViewModel @Inject constructor(
     private val checkUserExistentUseCase: CheckUserExistentUseCase,
     getProfileUseCase: GetProfileUseCase,
     saveMasterUseCase: SaveMasterUseCase,
-) : EditProfileContainerViewModel(getProfileUseCase, saveMasterUseCase) {
+) : EditProfileViewModel(getProfileUseCase, saveMasterUseCase) {
 
     val tel = MutableLiveData("")
     val certificationCode = MutableLiveData("")
@@ -33,9 +33,11 @@ class EditPhoneNumberViewModel @Inject constructor(
     val resendToken = MutableLiveData<PhoneAuthProvider.ForceResendingToken>()
     val uid = MutableLiveData("")
 
-    fun requestProfile() {
-        Timber.tag(TAG).d("requestProfile: ")
+    init {
+        requestProfile()
+    }
 
+    private fun requestProfile() {
         requestProfile {
             profile.value = it
         }
@@ -74,7 +76,6 @@ class EditPhoneNumberViewModel @Inject constructor(
 
     companion object {
         private const val TAG = "EditPhoneNumberViewModel"
-        const val REQUEST_FAILED = "REQUEST_FAILED"
         const val PHONE_NUMBER_EXIST = "PHONE_NUMBER_EXIST"
         const val PHONE_NUMBER_NOT_EXIST = "PHONE_NUMBER_NOT_EXIST"
     }

@@ -7,16 +7,15 @@ import kr.co.soogong.master.data.entity.profile.MasterDto
 import kr.co.soogong.master.domain.entity.common.CodeTable
 import kr.co.soogong.master.domain.usecase.profile.GetProfileUseCase
 import kr.co.soogong.master.domain.usecase.profile.SaveMasterUseCase
-import kr.co.soogong.master.presentation.ui.profile.detail.EditProfileContainerViewModel
+import kr.co.soogong.master.presentation.ui.profile.detail.EditProfileViewModel
 import kr.co.soogong.master.utility.ListLiveData
-import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class EditMasterConfigViewModel @Inject constructor(
     getProfileUseCase: GetProfileUseCase,
     saveMasterUseCase: SaveMasterUseCase,
-) : EditProfileContainerViewModel(getProfileUseCase, saveMasterUseCase) {
+) : EditProfileViewModel(getProfileUseCase, saveMasterUseCase) {
 
     val travelCosts = listOf(CodeTable.EXIST, CodeTable.NOT_EXIST)
     val craneUsages = listOf(CodeTable.NOT_REQUIRED, CodeTable.OVER_TWO, CodeTable.NO_ELEVATOR)
@@ -41,11 +40,9 @@ class EditMasterConfigViewModel @Inject constructor(
         requestFlexibleCosts()
     }
 
-    fun requestFlexibleCosts() {
-        Timber.tag(TAG).d("requestFlexibleCosts: ")
-
+    private fun requestFlexibleCosts() {
         requestProfile {
-            it.basicInformation?.masterConfigs?.map { masterConfig ->
+            it.basicInformation.masterConfigs?.map { masterConfig ->
                 if (masterConfig.groupCode == CodeTable.FLEXIBLE_COST.code) {       // 현장 가격 변동 요인
                     when (masterConfig.code) {
                         CodeTable.TRAVEL_COST.code -> travelCost.postValue(travelCosts.find { cost -> cost.inKorean == masterConfig.value })
@@ -65,8 +62,6 @@ class EditMasterConfigViewModel @Inject constructor(
     }
 
     fun saveFlexibleCosts() {
-        Timber.tag(TAG).d("saveFlexibleCosts: ")
-
         mutableListOf<MasterConfigDto>().also { list ->
             travelCost.value?.let {
                 MasterConfigDto(

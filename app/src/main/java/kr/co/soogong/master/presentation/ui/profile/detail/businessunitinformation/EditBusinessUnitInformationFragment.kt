@@ -3,21 +3,22 @@ package kr.co.soogong.master.presentation.ui.profile.detail.businessunitinformat
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import gun0912.tedimagepicker.builder.TedImagePicker
 import kr.co.soogong.master.R
-import kr.co.soogong.master.presentation.atomic.molecules.SubheadlineChipGroup
 import kr.co.soogong.master.data.entity.common.AttachmentDto
+import kr.co.soogong.master.databinding.FragmentEditBusinessUnitInformationBinding
 import kr.co.soogong.master.domain.entity.common.ButtonTheme
 import kr.co.soogong.master.domain.entity.common.CodeTable
-import kr.co.soogong.master.databinding.FragmentEditBusinessUnitInformationBinding
+import kr.co.soogong.master.presentation.atomic.molecules.SubheadlineChipGroup
 import kr.co.soogong.master.presentation.ui.base.BaseFragment
+import kr.co.soogong.master.presentation.ui.base.BaseViewModel.Companion.REQUEST_SUCCESS
 import kr.co.soogong.master.presentation.ui.common.dialog.popup.DefaultDialog
 import kr.co.soogong.master.presentation.ui.common.dialog.popup.DialogData
 import kr.co.soogong.master.presentation.ui.profile.detail.EditProfileContainerActivity
-import kr.co.soogong.master.presentation.ui.profile.detail.EditProfileContainerViewModel.Companion.REQUEST_FAILED
-import kr.co.soogong.master.presentation.ui.profile.detail.EditProfileContainerViewModel.Companion.SAVE_MASTER_SUCCESSFULLY
+import kr.co.soogong.master.presentation.ui.profile.detail.EditProfileContainerViewModel
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.FileHelper
 import kr.co.soogong.master.utility.PermissionHelper
@@ -29,14 +30,15 @@ class EditBusinessUnitInformationFragment :
     BaseFragment<FragmentEditBusinessUnitInformationBinding>(
         R.layout.fragment_edit_business_unit_information
     ) {
+
     private val viewModel: EditBusinessUnitInformationViewModel by viewModels()
+    private val editProfileContainerViewModel: EditProfileContainerViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Timber.tag(TAG).d("onViewCreated: ")
         initLayout()
         registerEventObserve()
-        viewModel.requestBusinessUnitInformation()
     }
 
     override fun initLayout() {
@@ -82,28 +84,28 @@ class EditBusinessUnitInformationFragment :
             initChips()
 
             (activity as EditProfileContainerActivity).setSaveButtonClickListener {
-                viewModel.businessName.observe(viewLifecycleOwner, {
+                viewModel.businessName.observe(viewLifecycleOwner) {
                     stiBusinessName.error =
                         if (it.isNullOrEmpty()) getString(R.string.required_field_alert) else null
-                })
+                }
 
-                viewModel.shopName.observe(viewLifecycleOwner, {
+                viewModel.shopName.observe(viewLifecycleOwner) {
                     stiShopName.error =
                         if (it.length < 2 || it.length > 20) getString(R.string.required_value_between_2_and_20) else null
-                })
+                }
 
-                viewModel.businessNumber.observe(viewLifecycleOwner, {
+                viewModel.businessNumber.observe(viewLifecycleOwner) {
                     stiBusinessNumber.error = when {
                         it.isNullOrEmpty() -> getString(R.string.required_field_alert)
                         it.length > 10 -> getString(R.string.fill_text_under_10)
                         else -> null
                     }
-                })
+                }
 
-                viewModel.businessRegistImage.observe(viewLifecycleOwner, {
+                viewModel.businessRegistImage.observe(viewLifecycleOwner) {
                     sbbGettingImages.error =
                         if (it.isNullOrEmpty()) getString(R.string.required_field_alert) else null
-                })
+                }
 
                 if (viewModel.businessType.value == CodeTable.FREELANCER) {
                     if (!stiShopName.error.isNullOrEmpty() || !stiBusinessNumber.error.isNullOrEmpty() || !sbbGettingImages.error.isNullOrEmpty()) return@setSaveButtonClickListener
@@ -139,18 +141,13 @@ class EditBusinessUnitInformationFragment :
     private fun registerEventObserve() {
         Timber.tag(TAG).d("registerEventObserve: ")
 
-        viewModel.businessType.observe(viewLifecycleOwner, { type ->
+        viewModel.businessType.observe(viewLifecycleOwner) { type ->
             setLayoutByBusinessType(type)
-        })
+        }
 
-        viewModel.action.observe(viewLifecycleOwner, EventObserver { event ->
-            when (event) {
-                SAVE_MASTER_SUCCESSFULLY -> {
-                    activity?.onBackPressed()
-                }
-                REQUEST_FAILED -> {
-                    requireContext().toast(getString(R.string.error_message_of_request_failed))
-                }
+        viewModel.action.observe(viewLifecycleOwner, EventObserver { action ->
+            when (action) {
+                REQUEST_SUCCESS -> editProfileContainerViewModel.setAction(REQUEST_SUCCESS)
             }
         })
     }

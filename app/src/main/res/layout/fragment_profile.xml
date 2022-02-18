@@ -38,6 +38,7 @@
             android:id="@+id/ab_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:tvRightClickListener="@{() -> vm.onClickShowMyProfile()}"
             app:rightText="@{@string/open_my_profile}"
             app:title="@{@string/main_activity_navigation_bar_profile}" />
 

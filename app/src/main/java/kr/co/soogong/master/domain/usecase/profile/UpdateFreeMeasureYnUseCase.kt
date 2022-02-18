@@ -16,8 +16,5 @@ class UpdateFreeMeasureYnUseCase @Inject constructor(
         masterDto: MasterDto,
     ): Single<MasterDto> {
         return profileService.updateFreeMeasureYn(masterDto)
-//            .doOnSuccess {
-//                masterDao.update(it)
-//            }
     }
 }

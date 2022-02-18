@@ -25,12 +25,12 @@ fun setRequiredProfileInformationProgress(
         val fieldsEmptyStatus: MutableList<Pair<String, Boolean>> = mutableListOf()
 
         fieldsEmptyStatus.add("coordinate" to true)     // 경위도는 주소에 따라 set 되는 값으로 제외
-        fieldsEmptyStatus.add("ownerName" to !ownerName.isNullOrEmpty())
+        fieldsEmptyStatus.add("ownerName" to ownerName.isNotEmpty())
         fieldsEmptyStatus.add("introduction" to !introduction.isNullOrEmpty())
         fieldsEmptyStatus.add("shopImages" to !shopImages.isNullOrEmpty())
         fieldsEmptyStatus.add("businessUnitInformation" to !businessUnitInformation?.businessType.isNullOrEmpty())
         fieldsEmptyStatus.add("warrantyInformation" to (warrantyInformation?.warrantyPeriod != null))
-        fieldsEmptyStatus.add("tel" to !tel.isNullOrEmpty())
+        fieldsEmptyStatus.add("tel" to tel.isNotEmpty())
         fieldsEmptyStatus.add("career" to !career.isNullOrEmpty())
         fieldsEmptyStatus.add("projects" to !projects.isNullOrEmpty())
         fieldsEmptyStatus.add("companyAddress" to !companyAddress?.roadAddress.isNullOrEmpty())
@@ -120,11 +120,10 @@ fun setOptionalProfileInformationProgress(
     Timber.tag(TAG).d("setOptionalProfileInformationProgress: ")
 
     val totalBasic = BasicInformation::class.declaredMemberProperties.size
-    var filledBasic = 0
+    var filledBasic = 1 // freeMeasureYn 은 항상 있으니 1부터 시작
 
     viewModel.profile.value?.basicInformation?.let { basicInformation ->
         with(basicInformation) {
-            if (freeMeasureYn != null) filledBasic++
             if (portfolioCount != 0) filledBasic++
             if (priceByProjectCount != 0) filledBasic++
             if (!masterConfigs.isNullOrEmpty()) filledBasic++

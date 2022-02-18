@@ -9,10 +9,10 @@ import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import gun0912.tedimagepicker.builder.TedImagePicker
 import kr.co.soogong.master.R
+import kr.co.soogong.master.databinding.FragmentProfileBinding
 import kr.co.soogong.master.domain.entity.common.ButtonTheme
 import kr.co.soogong.master.domain.entity.common.CodeTable
 import kr.co.soogong.master.domain.entity.common.ColorTheme
-import kr.co.soogong.master.databinding.FragmentProfileBinding
 import kr.co.soogong.master.presentation.ui.base.BaseFragment
 import kr.co.soogong.master.presentation.ui.base.BaseViewModel.Companion.DISMISS_LOADING
 import kr.co.soogong.master.presentation.ui.base.BaseViewModel.Companion.SHOW_LOADING
@@ -21,6 +21,8 @@ import kr.co.soogong.master.presentation.ui.common.dialog.bottomSheetDialogRecyc
 import kr.co.soogong.master.presentation.ui.common.dialog.popup.DefaultDialog
 import kr.co.soogong.master.presentation.ui.common.dialog.popup.DialogData
 import kr.co.soogong.master.presentation.ui.profile.ProfileViewModel.Companion.ON_CLICK_REQUEST_REVIEW
+import kr.co.soogong.master.presentation.ui.profile.ProfileViewModel.Companion.ON_CLICK_SHOW_MY_PROFILE
+import kr.co.soogong.master.presentation.ui.profile.ProfileViewModel.Companion.REQUEST_APPROVE_SUCCESSFULLY
 import kr.co.soogong.master.presentation.ui.profile.ProfileViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.presentation.uihelper.profile.*
 import kr.co.soogong.master.presentation.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_ADDRESS
@@ -70,6 +72,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
         bind {
             vm = viewModel
             lifecycleOwner = viewLifecycleOwner
+
             buttonThemeRequestReview = ButtonTheme.OutlinedPrimary
             colorThemeProfileGuideline = ColorTheme.Grey
             colorThemeRequiredInformationProgress = ColorTheme.Red
@@ -77,10 +80,6 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
 
             rbMyReviews.setOnClickListener {
                 startActivity(MyReviewsActivityHelper.getIntent(requireContext()))
-            }
-
-            abHeader.setIvBackClickListener {
-                startActivity(ShowMyProfileInWebHelper.getIntent(viewModel.profile.value?.uid))
             }
 
             // TODO: 2021/12/15 Profile image 삭제 기능 필요
@@ -189,17 +188,26 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
                 REQUEST_FAILED -> requireContext().toast(getString(R.string.error_message_of_request_failed))
                 SHOW_LOADING -> showLoading(parentFragmentManager)
                 DISMISS_LOADING -> dismissLoading()
+                REQUEST_APPROVE_SUCCESSFULLY -> requireContext().toast(getString(R.string.explanation_of_required_information_request_approve))
                 ON_CLICK_REQUEST_REVIEW -> showRequestReview()
+                ON_CLICK_SHOW_MY_PROFILE -> startActivity(ShowMyProfileInWebHelper.getIntent(
+                    viewModel.profile.value?.uid))
             }
         })
+
         viewModel.profile.observe(viewLifecycleOwner) { profile ->
+            Timber.tag(TAG).d("profile: $profile")
+
+            // FIXME: null 값일 때 오류 발생
             naverMapHelper.setLocation(
-                profile?.requiredInformation?.coordinate,
-                profile?.requiredInformation?.serviceArea
+                profile.requiredInformation.coordinate,
+                profile.requiredInformation.serviceArea
             )
+
             setRequiredProfileInformationProgress(viewModel).run {
                 checkApprovedStatusAndRequiredField(parentFragmentManager, binding, viewModel, this)
             }
+
             setOptionalProfileInformationProgress(viewModel)
         }
     }
@@ -229,9 +237,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
     }
 
     private fun startActivityCommonCode(pageName: String) {
-        startActivity(
-            EditProfileContainerActivityHelper.getIntent(requireContext(), pageName)
-        )
+        startActivity(EditProfileContainerActivityHelper.getIntent(requireContext(), pageName))
     }
 
     private fun getSingleImage() {

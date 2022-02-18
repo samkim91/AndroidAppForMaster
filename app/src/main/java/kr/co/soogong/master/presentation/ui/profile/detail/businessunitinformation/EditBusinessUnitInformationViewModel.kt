@@ -7,16 +7,15 @@ import kr.co.soogong.master.data.entity.profile.MasterDto
 import kr.co.soogong.master.domain.entity.common.CodeTable
 import kr.co.soogong.master.domain.usecase.profile.GetProfileUseCase
 import kr.co.soogong.master.domain.usecase.profile.SaveMasterUseCase
-import kr.co.soogong.master.presentation.ui.profile.detail.EditProfileContainerViewModel
+import kr.co.soogong.master.presentation.ui.profile.detail.EditProfileViewModel
 import kr.co.soogong.master.utility.ListLiveData
-import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class EditBusinessUnitInformationViewModel @Inject constructor(
     getProfileUseCase: GetProfileUseCase,
     saveMasterUseCase: SaveMasterUseCase,
-) : EditProfileContainerViewModel(getProfileUseCase, saveMasterUseCase) {
+) : EditProfileViewModel(getProfileUseCase, saveMasterUseCase) {
 
     val businessTypes = listOf(CodeTable.SOLE, CodeTable.CORPORATE, CodeTable.FREELANCER)
 
@@ -27,12 +26,13 @@ class EditBusinessUnitInformationViewModel @Inject constructor(
 
     val businessRegistImage = ListLiveData<AttachmentDto>()
 
-    fun requestBusinessUnitInformation() {
-        Timber.tag(TAG).d("requestBusinessUnitInformation: ")
+    init {
+        requestBusinessUnitInformation()
+    }
 
+    private fun requestBusinessUnitInformation() {
         requestProfile {
-            profile.value = it
-            it.requiredInformation?.businessUnitInformation?.businessType?.let { type ->
+            it.requiredInformation.businessUnitInformation?.businessType?.let { type ->
                 businessType.value =
                     businessTypes.find { mType -> mType.inKorean == type }
                 it.requiredInformation.businessUnitInformation.businessName?.let { name ->
@@ -52,8 +52,6 @@ class EditBusinessUnitInformationViewModel @Inject constructor(
     }
 
     fun saveBusinessUnitInformation() {
-        Timber.tag(TAG).d("saveBusinessUnitInformation: ")
-
         saveMaster(
             MasterDto(
                 id = profile.value?.id,
