@@ -5,8 +5,8 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Coordinate(
-    val latitude: Double?,
-    val longitude: Double?,
+    val latitude: Double,
+    val longitude: Double,
 ) : Parcelable {
     companion object {
         val TEST_COORDINATE = Coordinate(37.481151, 127.041727)

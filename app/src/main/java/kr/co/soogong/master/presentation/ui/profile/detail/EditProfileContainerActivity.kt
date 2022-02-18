@@ -2,24 +2,31 @@ package kr.co.soogong.master.presentation.ui.profile.detail
 
 import android.os.Bundle
 import android.view.View
+import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.entity.profile.PortfolioDto
-import kr.co.soogong.master.domain.entity.common.ButtonTheme
 import kr.co.soogong.master.databinding.ActivityEditProfileContainerBinding
+import kr.co.soogong.master.domain.entity.common.ButtonTheme
 import kr.co.soogong.master.presentation.ui.base.BaseActivity
+import kr.co.soogong.master.presentation.ui.base.BaseViewModel.Companion.REQUEST_FAILED
+import kr.co.soogong.master.presentation.ui.base.BaseViewModel.Companion.REQUEST_SUCCESS
 import kr.co.soogong.master.presentation.uihelper.profile.EditProfileContainerActivityHelper
 import kr.co.soogong.master.presentation.uihelper.profile.EditProfileContainerFragmentHelper
 import kr.co.soogong.master.presentation.uihelper.profile.EditProfileContainerFragmentHelper.ADD_PORTFOLIO
 import kr.co.soogong.master.presentation.uihelper.profile.EditProfileContainerFragmentHelper.ADD_PRICE_BY_PROJECTS
 import kr.co.soogong.master.presentation.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_PORTFOLIO
 import kr.co.soogong.master.presentation.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_PRICE_BY_PROJECTS
+import kr.co.soogong.master.utility.EventObserver
+import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
 
 @AndroidEntryPoint
 class EditProfileContainerActivity : BaseActivity<ActivityEditProfileContainerBinding>(
     R.layout.activity_edit_profile_container
 ) {
+    private val viewModel: EditProfileContainerViewModel by viewModels()
+
     private val pageName: String by lazy {
         EditProfileContainerActivityHelper.getPageName(intent)
     }
@@ -32,6 +39,7 @@ class EditProfileContainerActivity : BaseActivity<ActivityEditProfileContainerBi
         super.onCreate(savedInstanceState)
         Timber.tag(TAG).d("onCreate: ")
         initLayout()
+        registerObservers()
     }
 
     override fun initLayout() {
@@ -54,6 +62,17 @@ class EditProfileContainerActivity : BaseActivity<ActivityEditProfileContainerBi
                         portfolioDto)
                 else EditProfileContainerFragmentHelper.getFragment(pageName)
             ).commit()
+    }
+
+    private fun registerObservers() {
+        Timber.tag(TAG).d("registerObservers: ")
+
+        viewModel.action.observe(this, EventObserver { action ->
+            when (action) {
+                REQUEST_SUCCESS -> this.finish()
+                REQUEST_FAILED -> toast(getString(R.string.error_message_of_request_failed))
+            }
+        })
     }
 
     fun setSaveButtonClickListener(onClick: () -> Unit) {

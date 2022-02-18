@@ -2,6 +2,7 @@ package kr.co.soogong.master.presentation.ui.profile.detail.phonenumber
 
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
@@ -15,13 +16,13 @@ import kr.co.soogong.master.databinding.FragmentEditPhoneNumberBinding
 import kr.co.soogong.master.domain.entity.common.ButtonTheme
 import kr.co.soogong.master.presentation.LIMIT_TIME_TO_AUTH
 import kr.co.soogong.master.presentation.ui.base.BaseFragment
+import kr.co.soogong.master.presentation.ui.base.BaseViewModel.Companion.REQUEST_SUCCESS
 import kr.co.soogong.master.presentation.ui.common.dialog.popup.DefaultDialog
 import kr.co.soogong.master.presentation.ui.common.dialog.popup.DialogData
 import kr.co.soogong.master.presentation.ui.profile.detail.EditProfileContainerActivity
-import kr.co.soogong.master.presentation.ui.profile.detail.EditProfileContainerViewModel.Companion.SAVE_MASTER_SUCCESSFULLY
+import kr.co.soogong.master.presentation.ui.profile.detail.EditProfileContainerViewModel
 import kr.co.soogong.master.presentation.ui.profile.detail.phonenumber.EditPhoneNumberViewModel.Companion.PHONE_NUMBER_EXIST
 import kr.co.soogong.master.presentation.ui.profile.detail.phonenumber.EditPhoneNumberViewModel.Companion.PHONE_NUMBER_NOT_EXIST
-import kr.co.soogong.master.presentation.ui.profile.detail.phonenumber.EditPhoneNumberViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.PhoneNumberHelper
 import kr.co.soogong.master.utility.extension.isValidPhoneNumber
@@ -33,7 +34,9 @@ import java.util.concurrent.TimeUnit
 class EditPhoneNumberFragment : BaseFragment<FragmentEditPhoneNumberBinding>(
     R.layout.fragment_edit_phone_number
 ) {
+
     private val viewModel: EditPhoneNumberViewModel by viewModels()
+    private val editProfileContainerViewModel: EditProfileContainerViewModel by activityViewModels()
 
     private lateinit var callbacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks
 
@@ -43,11 +46,6 @@ class EditPhoneNumberFragment : BaseFragment<FragmentEditPhoneNumberBinding>(
         initLayout()
         registerEventObserve()
         initFirebaseAuthCallbacks()
-    }
-
-    override fun onStart() {
-        super.onStart()
-        viewModel.requestProfile()
     }
 
     override fun onDestroy() {
@@ -84,10 +82,10 @@ class EditPhoneNumberFragment : BaseFragment<FragmentEditPhoneNumberBinding>(
                 }
 
                 // "인증하기"에 대한 코드
-                viewModel.tel.observe(viewLifecycleOwner, {
+                viewModel.tel.observe(viewLifecycleOwner) {
                     stibmtitAuthPhoneNumber.error =
                         if (!it.isValidPhoneNumber()) getString(R.string.invalid_phone_number) else null
-                })
+                }
 
                 if (stibmtitAuthPhoneNumber.error.isNullOrEmpty()) viewModel.checkUserExist()
             }
@@ -99,10 +97,10 @@ class EditPhoneNumberFragment : BaseFragment<FragmentEditPhoneNumberBinding>(
 
             // 저장하기
             (activity as EditProfileContainerActivity).setSaveButtonClickListener {
-                viewModel.certificationCode.observe(viewLifecycleOwner, {
+                viewModel.certificationCode.observe(viewLifecycleOwner) {
                     stibmtitAuthPhoneNumber.textInputTimerError =
                         if (it.length != 6) getString(R.string.invalid_certification_code) else null
-                })
+                }
 
                 if (stibmtitAuthPhoneNumber.textInputTimerError.isNullOrEmpty()) verifyPhoneNumberWithCode()
             }
@@ -113,10 +111,9 @@ class EditPhoneNumberFragment : BaseFragment<FragmentEditPhoneNumberBinding>(
         Timber.tag(TAG).d("registerEventObserve: ")
         viewModel.action.observe(viewLifecycleOwner, EventObserver { event ->
             when (event) {
-                SAVE_MASTER_SUCCESSFULLY -> activity?.onBackPressed()
                 PHONE_NUMBER_EXIST -> showDialogForUserExist()
                 PHONE_NUMBER_NOT_EXIST -> startPhoneNumberVerification(isFirst = true)
-                REQUEST_FAILED -> requireContext().toast(getString(R.string.error_message_of_request_failed))
+                REQUEST_SUCCESS -> editProfileContainerViewModel.setAction(REQUEST_SUCCESS)
             }
         })
     }

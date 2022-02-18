@@ -3,30 +3,31 @@ package kr.co.soogong.master.presentation.ui.profile.detail.warranty
 import android.os.Bundle
 import android.view.View
 import android.widget.ArrayAdapter
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentEditWarrantyInformationBinding
 import kr.co.soogong.master.presentation.ui.base.BaseFragment
+import kr.co.soogong.master.presentation.ui.base.BaseViewModel.Companion.REQUEST_SUCCESS
 import kr.co.soogong.master.presentation.ui.profile.detail.EditProfileContainerActivity
-import kr.co.soogong.master.presentation.ui.profile.detail.EditProfileContainerViewModel.Companion.REQUEST_FAILED
-import kr.co.soogong.master.presentation.ui.profile.detail.EditProfileContainerViewModel.Companion.SAVE_MASTER_SUCCESSFULLY
+import kr.co.soogong.master.presentation.ui.profile.detail.EditProfileContainerViewModel
 import kr.co.soogong.master.utility.EventObserver
-import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
 
 @AndroidEntryPoint
 class EditWarrantyInformationFragment : BaseFragment<FragmentEditWarrantyInformationBinding>(
     R.layout.fragment_edit_warranty_information
 ) {
+
     private val viewModel: EditWarrantyInformationViewModel by viewModels()
+    private val editProfileContainerViewModel: EditProfileContainerViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Timber.tag(TAG).d("onViewCreated: ")
         initLayout()
         registerEventObserve()
-        viewModel.requestWarrantyInformation()
     }
 
     override fun initLayout() {
@@ -45,15 +46,15 @@ class EditWarrantyInformationFragment : BaseFragment<FragmentEditWarrantyInforma
             }
 
             (activity as EditProfileContainerActivity).setSaveButtonClickListener {
-                viewModel.selectedPeriod.observe(viewLifecycleOwner, { pair ->
+                viewModel.selectedPeriod.observe(viewLifecycleOwner) { pair ->
                     sdmWarrantyPeriod.dropdownError =
                         if (pair == null) getString(R.string.required_field_alert) else null
-                })
+                }
 
-                viewModel.warrantyDescription.observe(viewLifecycleOwner, {
+                viewModel.warrantyDescription.observe(viewLifecycleOwner) {
                     stcWarrantyInformation.error =
                         if (it.length < 10) getString(R.string.fill_text_over_10) else null
-                })
+                }
 
                 if (viewModel.selectedPeriod.value?.second == -1) {     // 보증기간 없음 선택 시
                     if (sdmWarrantyPeriod.dropdownError.isNullOrEmpty()) viewModel.saveWarrantyInfo()
@@ -66,10 +67,10 @@ class EditWarrantyInformationFragment : BaseFragment<FragmentEditWarrantyInforma
 
     private fun registerEventObserve() {
         Timber.tag(TAG).d("registerEventObserve: ")
-        viewModel.action.observe(viewLifecycleOwner, EventObserver { event ->
-            when (event) {
-                SAVE_MASTER_SUCCESSFULLY -> activity?.onBackPressed()
-                REQUEST_FAILED -> requireContext().toast(getString(R.string.error_message_of_request_failed))
+
+        viewModel.action.observe(viewLifecycleOwner, EventObserver { action ->
+            when (action) {
+                REQUEST_SUCCESS -> editProfileContainerViewModel.setAction(REQUEST_SUCCESS)
             }
         })
     }

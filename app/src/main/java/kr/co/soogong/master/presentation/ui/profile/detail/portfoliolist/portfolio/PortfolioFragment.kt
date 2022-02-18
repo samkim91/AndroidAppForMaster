@@ -79,7 +79,7 @@ class PortfolioFragment : BaseFragment<FragmentEditPortfolioBinding>(
         Timber.tag(TAG).d("registerEventObserve: ")
         viewModel.action.observe(viewLifecycleOwner, EventObserver { event ->
             when (event) {
-                SAVE_PORTFOLIO_SUCCESSFULLY -> activity?.onBackPressed()
+                SAVE_PORTFOLIO_SUCCESSFULLY -> activity?.finish()
                 REQUEST_FAILED -> requireContext().toast(getString(R.string.error_message_of_request_failed))
                 SHOW_LOADING -> showLoading(parentFragmentManager)
                 DISMISS_LOADING -> dismissLoading()

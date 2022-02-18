@@ -1,4 +1,4 @@
- package kr.co.soogong.master.presentation.ui.profile
+package kr.co.soogong.master.presentation.ui.profile
 
 import android.net.Uri
 import androidx.lifecycle.LiveData
@@ -41,7 +41,9 @@ class ProfileViewModel @Inject constructor(
                 onSuccess = {
                     Timber.tag(TAG).d("requestProfile Successfully: ")
                     _profile.value = it
-                    it.requiredInformation.ownerName.run { ownerName.value = this }       // 2-way binding 을 위한 set
+                    it.requiredInformation.ownerName.run {
+                        ownerName.value = this
+                    }       // 2-way binding 을 위한 set
                 },
                 onError = {
                     Timber.tag(TAG).d("requestProfile Failed: $it")
@@ -164,6 +166,7 @@ class ProfileViewModel @Inject constructor(
             .subscribeBy(
                 onSuccess = {
                     Timber.tag(TAG).d("saveMasterProfile successfully: ")
+                    setAction(REQUEST_APPROVE_SUCCESSFULLY)
                 },
                 onError = {
                     Timber.tag(TAG).d("saveMasterProfile failed: $it")
@@ -172,15 +175,19 @@ class ProfileViewModel @Inject constructor(
             ).addToDisposable()
     }
 
-    fun onClickRequestReview() {
-        Timber.tag(TAG).d("onClickRequestReview: ")
-        setAction(ON_CLICK_REQUEST_REVIEW)
-    }
+    fun onClickRequestReview() =
+        setAction(ON_CLICK_REQUEST_REVIEW).apply { Timber.tag(TAG).d("onClickRequestReview: ") }
+
+    fun onClickShowMyProfile() =
+        setAction(ON_CLICK_SHOW_MY_PROFILE).apply { Timber.tag(TAG).d("onClickShowMyProfile: ") }
 
     companion object {
         private const val TAG = "ProfileViewModel"
         const val REQUEST_FAILED = "REQUEST_FAILED"
 
+        const val REQUEST_APPROVE_SUCCESSFULLY = "REQUEST_APPROVE_SUCCESSFULLY"
+
         const val ON_CLICK_REQUEST_REVIEW = "ON_CLICK_REQUEST_REVIEW"
+        const val ON_CLICK_SHOW_MY_PROFILE = "ON_CLICK_SHOW_MY_PROFILE"
     }
 }

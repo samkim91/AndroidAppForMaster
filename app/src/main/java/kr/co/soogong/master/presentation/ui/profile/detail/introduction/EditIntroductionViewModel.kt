@@ -5,30 +5,28 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kr.co.soogong.master.data.entity.profile.MasterDto
 import kr.co.soogong.master.domain.usecase.profile.GetProfileUseCase
 import kr.co.soogong.master.domain.usecase.profile.SaveMasterUseCase
-import kr.co.soogong.master.presentation.ui.profile.detail.EditProfileContainerViewModel
-import timber.log.Timber
+import kr.co.soogong.master.presentation.ui.profile.detail.EditProfileViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class EditIntroductionViewModel @Inject constructor(
     getProfileUseCase: GetProfileUseCase,
     saveMasterUseCase: SaveMasterUseCase,
-) : EditProfileContainerViewModel(getProfileUseCase, saveMasterUseCase) {
+) : EditProfileViewModel(getProfileUseCase, saveMasterUseCase) {
 
     val introduction = MutableLiveData("")
 
-    fun requestIntroduction() {
-        Timber.tag(TAG).d("requestIntroduction: ")
+    init {
+        requestIntroduction()
+    }
 
+    private fun requestIntroduction() {
         requestProfile {
-            profile.value = it
-            introduction.postValue(it.requiredInformation?.introduction)
+            introduction.postValue(it.requiredInformation.introduction)
         }
     }
 
     fun saveIntroduction() {
-        Timber.tag(TAG).d("saveIntroduction: ")
-
         saveMaster(
             MasterDto(
                 id = profile.value?.id,

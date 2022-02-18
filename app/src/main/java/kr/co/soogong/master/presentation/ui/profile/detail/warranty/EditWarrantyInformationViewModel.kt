@@ -6,7 +6,7 @@ import kr.co.soogong.master.data.entity.profile.MasterDto
 import kr.co.soogong.master.domain.entity.common.DropdownItemList
 import kr.co.soogong.master.domain.usecase.profile.GetProfileUseCase
 import kr.co.soogong.master.domain.usecase.profile.SaveMasterUseCase
-import kr.co.soogong.master.presentation.ui.profile.detail.EditProfileContainerViewModel
+import kr.co.soogong.master.presentation.ui.profile.detail.EditProfileViewModel
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -14,33 +14,32 @@ import javax.inject.Inject
 class EditWarrantyInformationViewModel @Inject constructor(
     getProfileUseCase: GetProfileUseCase,
     saveMasterUseCase: SaveMasterUseCase,
-) : EditProfileContainerViewModel(getProfileUseCase, saveMasterUseCase) {
+) : EditProfileViewModel(getProfileUseCase, saveMasterUseCase) {
 
     val warrantyPeriods = DropdownItemList.warrantyPeriods
     val selectedPeriod = MutableLiveData<Pair<String, Int>>()
     val warrantyDescription = MutableLiveData("")
 
-    fun requestWarrantyInformation() {
-        Timber.tag(TAG).d("requestWarrantyInformation: ")
+    init {
+        requestWarrantyInformation()
+    }
 
+    private fun requestWarrantyInformation() {
         requestProfile {
-            profile.value = it
-            it.requiredInformation?.warrantyInformation?.warrantyPeriod?.let { period ->
+            it.requiredInformation.warrantyInformation?.warrantyPeriod?.let { period ->
                 Timber.tag(TAG).d("warrantyPeriod: $period")
 
                 selectedPeriod.postValue(warrantyPeriods.find { pair ->
                     pair.second == period
                 })
             }
-            it.requiredInformation?.warrantyInformation?.warrantyDescription?.let { description ->
+            it.requiredInformation.warrantyInformation?.warrantyDescription?.let { description ->
                 warrantyDescription.postValue(description)
             }
         }
     }
 
     fun saveWarrantyInfo() {
-        Timber.tag(TAG).d("saveWarrantyInfo: ${selectedPeriod.value}")
-
         saveMaster(
             MasterDto(
                 id = profile.value?.id,

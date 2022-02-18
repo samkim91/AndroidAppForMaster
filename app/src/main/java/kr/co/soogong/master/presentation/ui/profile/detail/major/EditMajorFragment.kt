@@ -4,29 +4,31 @@ import android.app.Activity
 import android.os.Bundle
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.google.android.material.chip.Chip
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
+import kr.co.soogong.master.databinding.FragmentEditMajorBinding
 import kr.co.soogong.master.domain.entity.common.ButtonTheme
 import kr.co.soogong.master.domain.entity.common.CodeTable
-import kr.co.soogong.master.databinding.FragmentEditMajorBinding
 import kr.co.soogong.master.presentation.ui.base.BaseFragment
+import kr.co.soogong.master.presentation.ui.base.BaseViewModel.Companion.REQUEST_SUCCESS
 import kr.co.soogong.master.presentation.ui.common.dialog.popup.DefaultDialog
 import kr.co.soogong.master.presentation.ui.common.dialog.popup.DialogData
 import kr.co.soogong.master.presentation.ui.profile.detail.EditProfileContainerActivity
-import kr.co.soogong.master.presentation.ui.profile.detail.EditProfileContainerViewModel.Companion.REQUEST_FAILED
-import kr.co.soogong.master.presentation.ui.profile.detail.EditProfileContainerViewModel.Companion.SAVE_MASTER_SUCCESSFULLY
+import kr.co.soogong.master.presentation.ui.profile.detail.EditProfileContainerViewModel
 import kr.co.soogong.master.presentation.uihelper.common.MajorActivityHelper
 import kr.co.soogong.master.utility.EventObserver
-import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
 
 @AndroidEntryPoint
 class EditMajorFragment : BaseFragment<FragmentEditMajorBinding>(
     R.layout.fragment_edit_major
 ) {
+
     private val viewModel: EditMajorViewModel by viewModels()
+    private val editProfileContainerViewModel: EditProfileContainerViewModel by activityViewModels()
 
     private val getMajorLauncher =
         registerForActivityResult(StartActivityForResult()) { result ->
@@ -48,7 +50,6 @@ class EditMajorFragment : BaseFragment<FragmentEditMajorBinding>(
         Timber.tag(TAG).d("onViewCreated: ")
         initLayout()
         registerEventObserve()
-        viewModel.requestMajor()
     }
 
     override fun initLayout() {
@@ -63,10 +64,10 @@ class EditMajorFragment : BaseFragment<FragmentEditMajorBinding>(
             }
 
             (activity as EditProfileContainerActivity).setSaveButtonClickListener {
-                viewModel.projects.observe(viewLifecycleOwner, {
+                viewModel.projects.observe(viewLifecycleOwner) {
                     sbbSelectMajors.error =
                         if (it.isNullOrEmpty()) getString(R.string.required_field_alert) else null
-                })
+                }
 
                 if (!sbbSelectMajors.error.isNullOrEmpty()) return@setSaveButtonClickListener
 
@@ -90,7 +91,7 @@ class EditMajorFragment : BaseFragment<FragmentEditMajorBinding>(
 
     private fun registerEventObserve() {
         Timber.tag(TAG).d("registerEventObserve: ")
-        viewModel.projects.observe(viewLifecycleOwner, { projects ->
+        viewModel.projects.observe(viewLifecycleOwner) { projects ->
             binding.cgContainer.removeAllViews()    // update 가 일어날 때마다, 계속 chip 이 추가되기에 초기에 전체삭제
 
             projects.map { project ->
@@ -105,16 +106,12 @@ class EditMajorFragment : BaseFragment<FragmentEditMajorBinding>(
                     }
                 )
             }
-        })
+        }
 
-        viewModel.action.observe(viewLifecycleOwner, EventObserver { event ->
-            when (event) {
-                SAVE_MASTER_SUCCESSFULLY -> {
-                    activity?.onBackPressed()
-                }
-                REQUEST_FAILED -> {
-                    requireContext().toast(getString(R.string.error_message_of_request_failed))
-                }
+        viewModel.action.observe(viewLifecycleOwner, EventObserver { action ->
+            when (action) {
+                REQUEST_SUCCESS -> editProfileContainerViewModel.setAction(
+                    REQUEST_SUCCESS)
             }
         })
     }
