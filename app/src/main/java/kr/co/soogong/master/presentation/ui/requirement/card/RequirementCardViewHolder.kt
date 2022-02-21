@@ -146,15 +146,15 @@ open class RequirementCardViewHolder(
         this.isVisible = true
 
         this.text =
-            if (!requirementCard.isCalled) context.getString(R.string.call_to_customer)
-            else context.getString(R.string.call_to_customer_again)
+            if (requirementCard.contactYn) context.getString(R.string.call_to_customer_again)
+            else context.getString(R.string.call_to_customer)
 
         this.background = ResourcesCompat.getDrawable(resources,
-            if (!requirementCard.isCalled) R.drawable.bg_solid_transparent_stroke_green_selector_radius30 else R.drawable.bg_solid_transparent_stroke_light_grey2_selector_radius30,
+            if (requirementCard.contactYn) R.drawable.bg_solid_transparent_stroke_light_grey2_selector_radius30 else R.drawable.bg_solid_transparent_stroke_green_selector_radius30,
             null)
 
         this.setTextColor(ResourcesCompat.getColor(resources,
-            if (!requirementCard.isCalled) R.color.selector_green_alpha50 else R.color.grey_4,
+            if (requirementCard.contactYn) R.color.grey_4 else R.color.selector_green_alpha50,
             null))
 
         this.setOnClickListener {
