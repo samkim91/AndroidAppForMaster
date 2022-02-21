@@ -198,7 +198,6 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
         viewModel.profile.observe(viewLifecycleOwner) { profile ->
             Timber.tag(TAG).d("profile: $profile")
 
-            // FIXME: null 값일 때 오류 발생
             naverMapHelper.setLocation(
                 profile.requiredInformation.coordinate,
                 profile.requiredInformation.serviceArea

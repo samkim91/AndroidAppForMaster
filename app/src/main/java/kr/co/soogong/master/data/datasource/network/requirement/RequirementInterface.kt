@@ -1,6 +1,5 @@
 package kr.co.soogong.master.data.datasource.network.requirement
 
-import com.google.gson.JsonObject
 import io.reactivex.Single
 import kr.co.soogong.master.contract.HttpContract
 import kr.co.soogong.master.data.entity.common.CodeDto
@@ -74,9 +73,6 @@ interface RequirementInterface {
 
     @POST(HttpContract.CALL_TO_CLIENT)
     fun callToClient(@Body data: HashMap<String, Any>): Single<Boolean>
-
-    @POST(HttpContract.REQUEST_REVIEW)
-    fun requestReview(@Body repairDto: RepairDto): Single<JsonObject>
 
     @GET(HttpContract.GET_CUSTOMER_REQUESTS)
     fun getCustomerRequests(

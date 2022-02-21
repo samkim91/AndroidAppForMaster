@@ -11,6 +11,7 @@ import kr.co.soogong.master.data.datasource.network.common.major.MajorService
 import kr.co.soogong.master.data.datasource.network.preferences.PreferencesService
 import kr.co.soogong.master.data.datasource.network.profile.ProfileService
 import kr.co.soogong.master.data.datasource.network.requirement.RequirementService
+import kr.co.soogong.master.data.datasource.network.requirement.review.ReviewService
 import retrofit2.Retrofit
 
 @Module
@@ -39,6 +40,12 @@ class RetrofitModule {
     @Reusable
     fun provideRequirementService(retrofit: Retrofit): RequirementService {
         return RequirementService(retrofit)
+    }
+
+    @Provides
+    @Reusable
+    fun provideReviewService(retrofit: Retrofit): ReviewService {
+        return ReviewService(retrofit)
     }
 
     @Provides

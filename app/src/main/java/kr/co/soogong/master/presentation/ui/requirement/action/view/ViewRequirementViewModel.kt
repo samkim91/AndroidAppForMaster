@@ -3,16 +3,16 @@ package kr.co.soogong.master.presentation.ui.requirement.action.view
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.launch
 import kr.co.soogong.master.data.entity.requirement.estimation.EstimationDto
-import kr.co.soogong.master.data.entity.requirement.repair.RepairDto
 import kr.co.soogong.master.domain.entity.common.CodeTable
 import kr.co.soogong.master.domain.entity.requirement.Requirement
 import kr.co.soogong.master.domain.entity.requirement.estimation.EstimationResponseCode
-import kr.co.soogong.master.data.repository.ProfileRepository
 import kr.co.soogong.master.domain.usecase.profile.GetMasterSettingsUseCase
 import kr.co.soogong.master.domain.usecase.requirement.*
 import kr.co.soogong.master.presentation.ui.base.BaseViewModel
@@ -149,26 +149,17 @@ class ViewRequirementViewModel @Inject constructor(
 
     fun askForReview() {
         Timber.tag(TAG).d("askForReview: ")
-        requestReviewUseCase(
-            RepairDto(
-                id = _requirement.value?.estimationDto?.repair?.id,
-                requirementToken = _requirement.value?.token,
-                estimationId = _requirement.value?.estimationDto?.id,
-            )
-        )
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeBy(
-                onSuccess = {
-                    Timber.tag(TAG).d("ASK_FOR_REVIEW_SUCCEEDED: $it")
-                    requestRequirement()
-                    setAction(ASK_FOR_REVIEW_SUCCESSFULLY)
-                },
-                onError = {
-                    Timber.tag(TAG).d("ASK_FOR_REVIEW_FAILED: $it")
-                    setAction(REQUEST_FAILED)
-                }
-            ).addToDisposable()
+
+        viewModelScope.launch {
+            try {
+                requestReviewUseCase(_requirement.value?.estimationDto?.repair?.id!!)
+            } catch (e: Exception) {
+                setAction(REQUEST_FAILED)
+            }
+
+            requestRequirement()
+            setAction(ASK_FOR_REVIEW_SUCCESSFULLY)
+        }
     }
 
     private fun requestMasterSimpleInfo() {
