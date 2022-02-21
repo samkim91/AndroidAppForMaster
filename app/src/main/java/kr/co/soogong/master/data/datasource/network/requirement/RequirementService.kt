@@ -1,6 +1,5 @@
 package kr.co.soogong.master.data.datasource.network.requirement
 
-import com.google.gson.JsonObject
 import io.reactivex.Single
 import kr.co.soogong.master.data.entity.common.PageableContentDto
 import kr.co.soogong.master.data.entity.common.ResponseDto
@@ -95,10 +94,6 @@ class RequirementService @Inject constructor(
         data["from"] = "Master"
 
         return requirementInterface.callToClient(data)
-    }
-
-    fun requestReview(repairDto: RepairDto): Single<JsonObject> {
-        return requirementInterface.requestReview(repairDto)
     }
 
     fun getCustomerRequests(masterUid: String) = requirementInterface.getCustomerRequests(masterUid)

@@ -22,6 +22,10 @@ class ProfileViewModel @Inject constructor(
     private val getProfileUseCase: GetProfileUseCase,
     private val saveMasterUseCase: SaveMasterUseCase,
 ) : BaseViewModel() {
+    private val _isShownRequiredFieldDialog = MutableLiveData(false)
+    val isShownRequiredFieldDialog: LiveData<Boolean>
+        get() = _isShownRequiredFieldDialog
+
     private val _profile = MutableLiveData<Profile>()
     val profile: LiveData<Profile>
         get() = _profile
@@ -31,6 +35,10 @@ class ProfileViewModel @Inject constructor(
 
     val percentageBasic = MutableLiveData<Double>()
     val percentageRequired = MutableLiveData<Double>()
+
+    fun setIsShownRequiredFieldDialog(boolean: Boolean) {
+        _isShownRequiredFieldDialog.value = boolean
+    }
 
     fun requestProfile() {
         Timber.tag(TAG).d("requestProfile: ")

@@ -1,17 +1,17 @@
 package kr.co.soogong.master.presentation.ui.requirement.list
 
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.launch
 import kr.co.soogong.master.data.entity.requirement.estimation.EstimationDto
-import kr.co.soogong.master.data.entity.requirement.repair.RepairDto
 import kr.co.soogong.master.domain.entity.requirement.RequirementCard
 import kr.co.soogong.master.domain.entity.requirement.estimation.EstimationResponseCode
 import kr.co.soogong.master.presentation.ui.common.EndlessScrollableViewModel
 import kr.co.soogong.master.presentation.ui.requirement.RequirementViewModelAggregate
-import kr.co.soogong.master.presentation.ui.requirement.action.view.ViewRequirementViewModel
 import kr.co.soogong.master.utility.ListLiveData
 import timber.log.Timber
 import javax.inject.Inject
@@ -75,24 +75,16 @@ open class RequirementsViewModel @Inject constructor(
 
     fun askForReview(requirementCard: RequirementCard?) {
         Timber.tag(TAG).d("askForReview: ")
-        requirementViewModelAggregate.requestReviewUseCase(
-            RepairDto(
-                id = requirementCard?.repairId,
-                requirementToken = requirementCard?.token,
-                estimationId = requirementCard?.estimationId,
-            )
-        ).subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeBy(
-                onSuccess = {
-                    Timber.tag(TAG).d("ASK_FOR_REVIEW_SUCCEEDED: $it")
-                    initList()
-                },
-                onError = {
-                    Timber.tag(TAG).d("ASK_FOR_REVIEW_FAILED: $it")
-                    setAction(REQUEST_FAILED)
-                }
-            ).addToDisposable()
+
+        viewModelScope.launch {
+            try {
+                requirementViewModelAggregate.requestReviewUseCase(requirementCard?.repairId!!)
+            } catch (e:Exception) {
+                setAction(REQUEST_FAILED)
+            }
+
+            initList()
+        }
     }
 
     companion object {

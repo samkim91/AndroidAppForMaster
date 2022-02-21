@@ -42,7 +42,7 @@ object HttpContract {
 
     //region Repair
     const val SAVE_REPAIR = "repair/save"
-    const val REQUEST_REVIEW = "repair/request-review"
+    const val REQUEST_REVIEW_V2 = "repair/v2/request-review/{id}"
     //endregion
 
     //region Cancel
