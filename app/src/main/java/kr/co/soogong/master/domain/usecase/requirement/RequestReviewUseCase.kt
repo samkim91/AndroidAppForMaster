@@ -2,18 +2,18 @@ package kr.co.soogong.master.domain.usecase.requirement
 
 import com.google.gson.JsonObject
 import dagger.Reusable
-import io.reactivex.Single
-import kr.co.soogong.master.data.entity.requirement.repair.RepairDto
-import kr.co.soogong.master.data.datasource.network.requirement.RequirementService
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import kr.co.soogong.master.data.repository.ReviewRepository
 import javax.inject.Inject
 
 @Reusable
 class RequestReviewUseCase @Inject constructor(
-    private val requirementService: RequirementService,
+    private val reviewRepository: ReviewRepository,
 ) {
-    // TODO: 2022/02/16 repository 를 생성자로 가져와서, 작업하도록 변경 필요 !!
-
-    operator fun invoke(repairDto: RepairDto): Single<JsonObject> {
-        return requirementService.requestReview(repairDto)
+    suspend operator fun invoke(repairId: Int): JsonObject {
+        return withContext(Dispatchers.IO) {
+            reviewRepository.requestReview(repairId)
+        }
     }
 }
