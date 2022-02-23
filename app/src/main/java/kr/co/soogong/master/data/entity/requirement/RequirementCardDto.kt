@@ -49,8 +49,8 @@ data class RequirementCardDto(
     @SerializedName("safetyNumber")
     val safetyNumber: String? = null,
 
-    @SerializedName("isCalled")
-    val isCalled: Boolean,
+    @SerializedName("contactYn")
+    val contactYn: Boolean,
 
     @SerializedName("requirementQnas")
     val requirementQnas: List<RequirementQnaDto>,

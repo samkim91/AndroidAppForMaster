@@ -87,7 +87,7 @@ class ProfileViewModel @Inject constructor(
             masterDto = MasterDto(
                 id = _profile.value?.id,
                 uid = _profile.value?.uid,
-                approvedStatus = if (_profile.value?.approvedStatus == CodeTable.APPROVED.code) CodeTable.REQUEST_APPROVE.code else null,
+                approvedStatus = if (_profile.value?.approvedStatus == CodeTable.APPROVED) CodeTable.REQUEST_APPROVE.code else null,
             ),
             profileImageUri = profileImage.value,
         )
@@ -115,7 +115,7 @@ class ProfileViewModel @Inject constructor(
                 id = profile.value?.id,
                 uid = profile.value?.uid,
                 openDate = CareerConverter.toOpenDate(careerPeriod),
-                approvedStatus = if (profile.value?.approvedStatus == CodeTable.APPROVED.code) CodeTable.REQUEST_APPROVE.code else null,
+                approvedStatus = if (profile.value?.approvedStatus == CodeTable.APPROVED) CodeTable.REQUEST_APPROVE.code else null,
             )
         )
             .subscribeOn(Schedulers.io())

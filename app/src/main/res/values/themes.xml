@@ -260,7 +260,9 @@
     </style>
 
     <style name="button.big.primary.outlined" parent="button.big.primary">
-        <item name="android:background">@drawable/bg_solid_transparent_stroke_green_selector_radius8</item>
+        <item name="android:background">
+            @drawable/bg_solid_transparent_stroke_green_selector_radius8
+        </item>
         <item name="android:textColor">@color/selector_green_alpha50</item>
     </style>
 
@@ -268,6 +270,19 @@
 
     <!-- end section 버튼 스타일 -->
 
+    <!-- start section labels -->
+    <style name="label">
+        <item name="android:textAppearance">@style/caption_2.bold</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingStart">@dimen/gap_10</item>
+        <item name="android:paddingEnd">@dimen/gap_10</item>
+        <item name="android:paddingTop">@dimen/gap_5</item>
+        <item name="android:paddingBottom">@dimen/gap_5</item>
+    </style>
+
+    <!-- end section labels -->
+
+    <!-- start section checkable text -->
     <style name="checkable_text">
         <item name="android:textAppearance">@style/call_out.regular</item>
         <item name="android:paddingStart">@dimen/gap_8</item>
@@ -286,9 +301,9 @@
     <style name="radio_button" parent="checkable_text">
         <item name="android:button">@drawable/radio_button</item>
     </style>
+    <!-- end section checkable text -->
 
     <!-- start section Chip styles -->
-
     <style name="ChipChoiceRectangularStyle" parent="Widget.MaterialComponents.Chip.Choice">
         <item name="chipBackgroundColor">@color/white</item>
         <item name="android:textColor">@color/selector_green_grey2</item>

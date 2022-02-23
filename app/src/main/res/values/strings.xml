@@ -37,6 +37,7 @@
     <string name="selecting_done">선택완료</string>
     <string name="possible">가능</string>
     <string name="impossible">불가능</string>
+    <string name="copy">복사</string>
 
 
     <string name="required_field_alert">필수 정보입니다.</string>
@@ -157,6 +158,8 @@
 
     <!-- View Requirement -->
     <string name="view_requirement_action_title">받은 문의</string>
+    <string name="road_address">도로명</string>
+    <string name="old_address">지번</string>
 
     <string name="requirement_basic_requirement_token">문의번호 %s</string>
 
@@ -347,7 +350,6 @@
             \n
             고객님의 소중한 리뷰는 마스터님과 다른 고객님께 도움이됩니다.\n
             \n</string>
-    <string name="link_copied_successfully">링크가 복사되었습니다.</string>
     <string name="request_review_by_sharing_failed">해당 기능을 찾지 못 하였습니다. 다른 방법으로 공유하기를 통해 다른 앱을 선택해주세요.</string>
 
 
@@ -381,6 +383,8 @@
 
     <string name="send_message_succeeded">고객에게 견적서가 전달되었습니다!\n매칭을 기다려주세요.</string>
     <string name="cancel_estimate_succeeded">시공이 취소되었습니다.\n더 좋은 문의를 드리도록 노력할게요.</string>
+    <string name="link_copied_successfully">링크가 복사되었습니다.</string>
+    <string name="address_copied_successfully">주소가 복사되었습니다.</string>
 
     <string name="end_estimate_succeeded">시공 완료 처리 되었고,\n고객님께 리뷰 요청이 전송되었어요.</string>
     <string name="refuse_to_estimate_or_measure_successfully_text">문의가 삭제되었습니다.</string>

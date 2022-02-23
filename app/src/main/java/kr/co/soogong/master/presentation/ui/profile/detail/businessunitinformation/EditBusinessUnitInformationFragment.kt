@@ -113,7 +113,7 @@ class EditBusinessUnitInformationFragment :
                     if (!stiBusinessName.error.isNullOrEmpty() || !stiShopName.error.isNullOrEmpty() || !stiBusinessNumber.error.isNullOrEmpty() || !sbbGettingImages.error.isNullOrEmpty()) return@setSaveButtonClickListener
                 }
 
-                if (viewModel.profile.value?.approvedStatus == CodeTable.APPROVED.code) {
+                if (viewModel.profile.value?.approvedStatus == CodeTable.APPROVED) {
                     DefaultDialog.newInstance(
                         dialogData = DialogData.getConfirmingForLimitedService())
                         .let {

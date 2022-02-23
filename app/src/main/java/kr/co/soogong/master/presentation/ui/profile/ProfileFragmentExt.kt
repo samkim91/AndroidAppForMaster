@@ -55,7 +55,7 @@ fun checkApprovedStatusAndRequiredField(
 
     when {
         // 필수값이 비어 있으면, 다이얼로그를 띄워주고 "확인" 클릭 시 해당 항목에 포커싱
-        (viewModel.profile.value?.approvedStatus == CodeTable.NOT_APPROVED.code) && (viewModel.percentageRequired.value != 100.0) -> {
+        (viewModel.profile.value?.approvedStatus == CodeTable.NOT_APPROVED) && (viewModel.percentageRequired.value != 100.0) -> {
             // 이전에 한번 프로필 수정하라는 다이얼로그를 띄운적이 있으면 그냥 종료.
             if (viewModel.isShownRequiredFieldDialog.value == true) return
 
@@ -65,7 +65,7 @@ fun checkApprovedStatusAndRequiredField(
             showDialogForEmptyFields(fragmentManager, binding, fieldsEmptyStatus)
         }
         // 필수값이 다 차있으면, 승인요청 → 승인요청 후 필수항목 섹터의 안내 변경 (피그마 참고)
-        (viewModel.profile.value?.approvedStatus == CodeTable.NOT_APPROVED.code) && (viewModel.percentageRequired.value == 100.0) -> {
+        (viewModel.profile.value?.approvedStatus == CodeTable.NOT_APPROVED) && (viewModel.percentageRequired.value == 100.0) -> {
             viewModel.requestApprove()
         }
     }

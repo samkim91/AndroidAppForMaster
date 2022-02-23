@@ -8,20 +8,14 @@
 
         <import type="kr.co.soogong.master.domain.entity.common.CodeTable" />
 
+        <import type="kr.co.soogong.master.domain.entity.common.LabelTheme" />
+
         <variable
             name="buttonThemeRequestReview"
             type="kr.co.soogong.master.domain.entity.common.ButtonTheme" />
 
         <variable
             name="colorThemeProfileGuideline"
-            type="kr.co.soogong.master.domain.entity.common.ColorTheme" />
-
-        <variable
-            name="colorThemeRequiredInformationProgress"
-            type="kr.co.soogong.master.domain.entity.common.ColorTheme" />
-
-        <variable
-            name="colorThemeOptionalInformationProgress"
             type="kr.co.soogong.master.domain.entity.common.ColorTheme" />
 
         <variable
@@ -38,9 +32,9 @@
             android:id="@+id/ab_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tvRightClickListener="@{() -> vm.onClickShowMyProfile()}"
             app:rightText="@{@string/open_my_profile}"
-            app:title="@{@string/main_activity_navigation_bar_profile}" />
+            app:title="@{@string/main_activity_navigation_bar_profile}"
+            app:tvRightClickListener="@{() -> vm.onClickShowMyProfile()}" />
 
         <ScrollView
             android:id="@+id/sv_container"
@@ -126,8 +120,8 @@
                     android:id="@+id/b_request_review"
                     style="@style/button.big.primary.outlined"
                     android:layout_marginTop="@dimen/gap_16"
-                    android:text="@string/request_review_label"
                     android:onClick="@{() -> vm.onClickRequestReview()}"
+                    android:text="@string/request_review_label"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/rb_my_reviews" />
@@ -160,8 +154,8 @@
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/gap_24"
-                    app:colorThemeLabelFilled="@{colorThemeRequiredInformationProgress}"
-                    app:contentLabelFilled="@{@string/requirement}"
+                    app:contentLabel="@{@string/requirement}"
+                    app:labelTheme="@{LabelTheme.BASIC_RED}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/bic_profile_guideline"
@@ -306,8 +300,8 @@
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/gap_60"
-                    app:colorThemeLabelFilled="@{colorThemeOptionalInformationProgress}"
-                    app:contentLabelFilled="@{@string/option}"
+                    app:contentLabel="@{@string/option}"
+                    app:labelTheme="@{LabelTheme.BASIC_GREY}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/hbm_service_area"
