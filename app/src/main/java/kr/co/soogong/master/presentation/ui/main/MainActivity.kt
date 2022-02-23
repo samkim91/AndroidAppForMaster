@@ -65,17 +65,17 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
     }
 
     private fun registerEventObserver() {
-        viewModel.selectedMainTabInMainActivity.observe(this, { position ->
+        viewModel.selectedMainTabInMainActivity.observe(this) { position ->
             binding.mainTabs.getTabAt(position)?.select()
-        })
+        }
 
-        profileViewModel.profile.observe(this, { profile ->
+        profileViewModel.profile.observe(this) { profile ->
             when {
-                profile?.approvedStatus == CodeTable.NOT_APPROVED.code -> moveToProfileFragment(true)
+                profile?.approvedStatus == CodeTable.NOT_APPROVED -> moveToProfileFragment(true)
                 profile?.basicInformation?.portfolioCount == 0 || profile?.basicInformation?.priceByProjectCount == 0 -> moveToProfileFragment(
                     false)
             }
-        })
+        }
     }
 
     // 인앱 메시지로 다이나믹링크를 받았을 때, 어떻게 처리할지 결정

@@ -3,17 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <import type="kr.co.soogong.master.domain.entity.common.LabelTheme" />
+    </data>
+
     <merge
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
 
-        <kr.co.soogong.master.presentation.atomic.atoms.LabelFilled
-            android:id="@+id/ft_status"
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_status"
+            style="@style/label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="견적요청" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_created_at"
@@ -23,9 +30,9 @@
             android:maxLines="1"
             android:textAppearance="@style/caption_1.regular"
             android:textColor="@color/grey_2"
-            app:layout_constraintBottom_toBottomOf="@id/ft_status"
+            app:layout_constraintBottom_toBottomOf="@id/tv_status"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/ft_status"
+            app:layout_constraintTop_toTopOf="@id/tv_status"
             tools:text="2021. 11. 3 (목)" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -38,33 +45,93 @@
             android:textAppearance="@style/caption_2.bold"
             android:textColor="@color/grey_1"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ft_status"
+            app:layout_constraintTop_toBottomOf="@id/tv_status"
             tools:text="문의번호 20211103241231" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_address_label"
+            style="@style/label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/road_address"
+            app:labelTheme="@{LabelTheme.OUTLINED_GREY}"
+            app:layout_constraintBottom_toBottomOf="@id/tv_address"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_address" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_address"
             android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/gap_8"
+            android:layout_marginStart="@dimen/gap_8"
+            android:layout_marginTop="@dimen/gap_10"
             android:breakStrategy="simple"
             android:ellipsize="end"
-            android:maxLines="2"
             android:textAppearance="@style/subheadline.bold"
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tv_address_label"
             app:layout_constraintTop_toBottomOf="@id/tv_requirement_token"
-            tools:text="서울특별시 관악구 봉천동 70 서울특별시 관악구 봉천동 70 서울특별시 관악구 봉천동 70" />
+            tools:text="부산광역시 강서구 녹산산단382로14번가길 10~29번지(송정동)" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="tv_address_label, tv_address" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_old_address_label"
+            style="@style/label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/old_address"
+            app:labelTheme="@{LabelTheme.OUTLINED_GREY}"
+            app:layout_constraintBottom_toBottomOf="@id/tv_old_address"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_old_address" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_old_address"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/gap_8"
+            android:layout_marginTop="@dimen/gap_16"
+            android:breakStrategy="simple"
+            android:ellipsize="end"
+            android:textAppearance="@style/subheadline.bold"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@id/tv_old_address_label"
+            app:layout_constraintTop_toBottomOf="@id/barrier_address"
+            tools:text="부산광역시 강서구 송정동 1735-1" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier_old_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="tv_old_address_label, tv_old_address" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group_old_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:constraint_referenced_ids="barrier_old_address, tv_old_address,tv_old_address_label"
+            tools:visibility="visible" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_project"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/gap_8"
+            android:layout_marginTop="@dimen/gap_16"
             android:textAppearance="@style/footnote.regular"
             android:textColor="@color/grey_3"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_address"
+            app:layout_constraintTop_toBottomOf="@id/barrier_old_address"
             tools:text="실내 누수탐지" />
 
         <androidx.appcompat.widget.AppCompatImageView

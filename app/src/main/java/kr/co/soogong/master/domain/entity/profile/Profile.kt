@@ -4,6 +4,7 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 import kr.co.soogong.master.contract.HttpContract
 import kr.co.soogong.master.data.entity.profile.MasterDto
+import kr.co.soogong.master.domain.entity.common.CodeTable
 
 @Parcelize
 data class Profile(
@@ -11,7 +12,7 @@ data class Profile(
     val uid: String,
     val representativeName: String,
     val subscriptionPlan: String,
-    val approvedStatus: String,
+    val approvedStatus: CodeTable,
     val reviewSummary: ReviewSummary,
     val myPageUrl: String,
     val basicInformation: BasicInformation,
@@ -29,7 +30,7 @@ data class Profile(
                 uid = masterDto.uid!!,
                 representativeName = if (!masterDto.shopName.isNullOrEmpty()) masterDto.shopName else masterDto.ownerName!!,
                 subscriptionPlan = masterDto.subscriptionPlan!!,
-                approvedStatus = masterDto.approvedStatus!!,
+                approvedStatus = CodeTable.getCodeTableByCode(masterDto.approvedStatus!!)!!,
                 reviewSummary = ReviewSummary.fromMasterDto(masterDto),
                 myPageUrl = HttpContract.MY_PAGE_URL + masterDto.uid,
                 basicInformation = BasicInformation.fromMasterDto(masterDto),

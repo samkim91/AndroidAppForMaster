@@ -39,7 +39,7 @@ class EditMajorViewModel @Inject constructor(
                     id = profile.value?.id,
                     uid = profile.value?.uid,
                     projectDtos = ProjectDto.fromProjects(projects.value),
-                    approvedStatus = if (profile.value?.approvedStatus == CodeTable.APPROVED.code) CodeTable.REQUEST_APPROVE.code else null,
+                    approvedStatus = if (profile.value?.approvedStatus == CodeTable.APPROVED) CodeTable.REQUEST_APPROVE.code else null,
                 )
             )
         }
