@@ -38,9 +38,8 @@ fun setBottomButtons(
 
         when (requirement.status) {
             // 견적요청
-            // Buttons : 1. 거절하기, 2. 견적 보내기, 3. 시공완료
+            // Buttons : 1. 거절하기, 2. 견적 보내기
             is RequirementStatus.Requested -> {
-                addEndRepairButton(activity, binding.flexibleContainer, requirement)
                 buttonLeft.setRefusingEstimation(activity.supportFragmentManager, viewModel)
                 buttonRight.setAcceptingEstimation(viewModel)
             }

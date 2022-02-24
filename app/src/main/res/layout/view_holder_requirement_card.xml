@@ -29,14 +29,16 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/gap_14">
 
-            <kr.co.soogong.master.presentation.atomic.atoms.LabelFilled
-                android:id="@+id/lf_status"
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_status"
+                style="@style/label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:colorTheme="@{data.status.theme}"
-                app:content="@{data.status.inKorean}"
+                app:labelTheme="@{data.status.theme}"
+                app:text="@{data.status.inKorean}"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="견적요청" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_created_at"
@@ -45,9 +47,9 @@
                 android:textAppearance="@style/caption_1.regular"
                 android:textColor="@color/grey_2"
                 app:dateWithDay="@{data.createdAt}"
-                app:layout_constraintBottom_toBottomOf="@id/lf_status"
+                app:layout_constraintBottom_toBottomOf="@id/tv_status"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/lf_status"
+                app:layout_constraintTop_toTopOf="@id/tv_status"
                 tools:text="2021. 11.03 (목)" />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -63,7 +65,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/lf_status"
+                app:layout_constraintTop_toBottomOf="@id/tv_status"
                 tools:text="부산광역시 강서구 녹산산단382로14번가길 10~29번지(송정동) 부산광역시 강서구 녹산산단382로14번가길 10~29번지(송정동)" />
 
             <androidx.appcompat.widget.AppCompatTextView

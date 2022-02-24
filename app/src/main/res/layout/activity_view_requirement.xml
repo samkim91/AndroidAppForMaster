@@ -45,8 +45,9 @@
                     android:id="@+id/requirement_basic"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:address="@{vm.requirement.oldAddress ?? vm.requirement.address}"
+                    app:address="@{vm.requirement.address}"
                     app:createdAt="@{vm.requirement.createdAt}"
+                    app:oldAddress="@{vm.requirement.oldAddress}"
                     app:project="@{vm.requirement.projectName}"
                     app:requirementToken="@{vm.requirement.token}"
                     app:status="@{vm.requirement.status}" />

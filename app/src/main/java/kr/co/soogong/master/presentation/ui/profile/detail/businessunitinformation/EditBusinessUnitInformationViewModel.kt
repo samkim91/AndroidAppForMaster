@@ -60,7 +60,7 @@ class EditBusinessUnitInformationViewModel @Inject constructor(
                 businessName = if (businessType.value != CodeTable.FREELANCER) businessName.value else "",
                 shopName = shopName.value,
                 businessNumber = businessNumber.value,
-                approvedStatus = if (profile.value?.approvedStatus == CodeTable.APPROVED.code) CodeTable.REQUEST_APPROVE.code else null,
+                approvedStatus = if (profile.value?.approvedStatus == CodeTable.APPROVED) CodeTable.REQUEST_APPROVE.code else null,
             ),
             businessRegistImageUri = businessRegistImage.value?.first()?.uri,
         )

@@ -26,8 +26,10 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="필수 정보 완성도" />
 
-        <kr.co.soogong.master.presentation.atomic.atoms.LabelFilled
-            android:id="@+id/lf_label"
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_label"
+            tools:text="필수"
+            style="@style/label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/gap_8"

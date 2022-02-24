@@ -4,10 +4,13 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.isVisible
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ViewRequirementBasicBinding
 import kr.co.soogong.master.domain.entity.requirement.RequirementStatus
 import kr.co.soogong.master.utility.extension.formatDateWithDay
+import kr.co.soogong.master.utility.extension.setLabelTheme
+import kr.co.soogong.master.utility.extension.setUnderline
 import java.util.*
 
 class RequirementBasic @JvmOverloads constructor(
@@ -18,7 +21,7 @@ class RequirementBasic @JvmOverloads constructor(
     private var binding =
         ViewRequirementBasicBinding.inflate(LayoutInflater.from(context), this, true)
 
-    var requirementToken: String? = ""
+    var requirementToken: String? = null
         set(value) {
             field = value
             value?.let {
@@ -39,20 +42,31 @@ class RequirementBasic @JvmOverloads constructor(
         set(value) {
             field = value
             value?.let {
-                binding.ftStatus.content = value.inKorean
-                binding.ftStatus.colorTheme = value.theme
+                binding.tvStatus.text = value.inKorean
+                binding.tvStatus.setLabelTheme(value.theme)
             }
         }
 
-    var address: String? = ""
+    var address: String? = null
         set(value) {
             field = value
             value?.let {
                 binding.tvAddress.text = value
+                binding.tvAddress.setUnderline()
             }
         }
 
-    var project: String? = ""
+    var oldAddress: String? = null
+        set(value) {
+            field = value
+            value?.let {
+                binding.groupOldAddress.isVisible = it.isNotBlank()
+                binding.tvOldAddress.text = it
+                binding.tvOldAddress.setUnderline()
+            }
+        }
+
+    var project: String? = null
         set(value) {
             field = value
             value?.let {
