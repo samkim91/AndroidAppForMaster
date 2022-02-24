@@ -41,7 +41,7 @@ class EditShopImagesViewModel @Inject constructor(
                     uid = profile.value?.uid,
                     shopImages = shopImages.value,
                     updateShopImagesYn = true,
-                    approvedStatus = if (profile.value?.approvedStatus == CodeTable.APPROVED.code) CodeTable.REQUEST_APPROVE.code else null,
+                    approvedStatus = if (profile.value?.approvedStatus == CodeTable.APPROVED) CodeTable.REQUEST_APPROVE.code else null,
                 ),
                 shopImagesUris = list.map {
                     it.uri!!

@@ -2,13 +2,20 @@
 
 package kr.co.soogong.master.utility.extension
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.text.*
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
+import android.text.style.UnderlineSpan
 import android.view.View
 import android.widget.TextView
+import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.BindingAdapter
+import kr.co.soogong.master.R
 import kr.co.soogong.master.domain.entity.common.CodeTable
+import kr.co.soogong.master.domain.entity.common.LabelTheme
 import java.util.*
 
 @BindingAdapter("dateWithoutDay")
@@ -59,5 +66,32 @@ fun TextView.makeLinks(vararg links: Pair<String, View.OnClickListener>) {
         )
         this.movementMethod = LinkMovementMethod.getInstance()
         this.setText(spannableString, TextView.BufferType.SPANNABLE)
+    }
+}
+
+@BindingAdapter("labelTheme")
+fun TextView.setLabelTheme(labelTheme: LabelTheme) {
+    this.background = ResourcesCompat.getDrawable(resources, labelTheme.backgroundRes, null)
+    this.backgroundTintList = ResourcesCompat.getColorStateList(resources, labelTheme.backgroundTintRes, null)
+    this.setTextColor(ResourcesCompat.getColor(resources, labelTheme.textColorRes, null))
+    this.background.alpha = labelTheme.backgroundTintAlpha
+}
+
+fun TextView.setUnderline() {
+    SpannableString(this.text).let { spannableString ->
+        spannableString.setSpan(UnderlineSpan(), 0, spannableString.length, 0)
+        this@setUnderline.text = spannableString
+    }
+
+    this.setCopyToClipboard()
+}
+
+fun TextView.setCopyToClipboard() {
+    this.setOnClickListener {
+        (context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager).setPrimaryClip(
+            ClipData.newPlainText("주소", this.text)
+        )
+
+        context.toast(context.getString(R.string.address_copied_successfully))
     }
 }

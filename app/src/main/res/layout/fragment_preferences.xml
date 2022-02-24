@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:bind="http://schemas.android.com/bind">
 
     <data>
+
+        <import type="kr.co.soogong.master.domain.entity.common.CodeTable"/>
+
+        <import type="kr.co.soogong.master.domain.entity.common.LabelTheme"/>
 
         <variable
             name="vm"
             type="kr.co.soogong.master.presentation.ui.preferences.PreferencesViewModel" />
 
-        <variable
-            name="shapeThemeLabelApprovedStatus"
-            type="kr.co.soogong.master.domain.entity.common.ShapeTheme" />
     </data>
 
     <androidx.appcompat.widget.LinearLayoutCompat
@@ -63,16 +65,19 @@
                     app:layout_constraintVertical_chainStyle="packed"
                     tools:text="마스터이름" />
 
-                <kr.co.soogong.master.presentation.atomic.atoms.LabelOutlined
-                    android:id="@+id/lo_approved_status"
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_approved_status_label"
+                    style="@style/label"
+                    tools:text="미승인"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/gap_6"
-                    app:approvedStatusToLabel="@{vm.profile.approvedStatus}"
+                    android:text="@{vm.profile.approvedStatus.inKorean}"
+                    bind:visible="@{vm.profile.approvedStatus != null}"
+                    app:labelTheme="@{vm.profile.approvedStatus == CodeTable.APPROVED ? LabelTheme.OUTLINED_GREEN_ROUNDED : LabelTheme.OUTLINED_GREY_ROUNDED}"
                     app:layout_constraintBottom_toBottomOf="@id/tv_owner_name"
                     app:layout_constraintStart_toEndOf="@id/tv_owner_name"
-                    app:layout_constraintTop_toTopOf="@id/tv_owner_name"
-                    app:shapeTheme="@{shapeThemeLabelApprovedStatus}" />
+                    app:layout_constraintTop_toTopOf="@id/tv_owner_name"/>
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_tel"

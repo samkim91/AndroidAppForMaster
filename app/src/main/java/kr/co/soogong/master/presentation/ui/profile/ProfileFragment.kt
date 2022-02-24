@@ -75,8 +75,6 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
 
             buttonThemeRequestReview = ButtonTheme.OutlinedPrimary
             colorThemeProfileGuideline = ColorTheme.Grey
-            colorThemeRequiredInformationProgress = ColorTheme.Red
-            colorThemeOptionalInformationProgress = ColorTheme.Grey
 
             rbMyReviews.setOnClickListener {
                 startActivity(MyReviewsActivityHelper.getIntent(requireContext()))
@@ -129,7 +127,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
                     sheetDialogBundle = BottomSheetDialogBundle.getCareerYearBundle()
                 ).let {
                     it.setItemClickListener { dialogItem ->
-                        if (viewModel.profile.value?.approvedStatus == CodeTable.APPROVED.code) {
+                        if (viewModel.profile.value?.approvedStatus == CodeTable.APPROVED) {
                             DefaultDialog.newInstance(DialogData.getConfirmingForLimitedService())
                                 .let { dialog ->
                                     dialog.setButtonsClickListener(
@@ -252,7 +250,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
 
                         viewModel.profileImage.value = uri
 
-                        if (viewModel.profile.value?.approvedStatus == CodeTable.APPROVED.code) {
+                        if (viewModel.profile.value?.approvedStatus == CodeTable.APPROVED) {
                             DefaultDialog.newInstance(
                                 DialogData.getConfirmingForLimitedService())
                                 .let {

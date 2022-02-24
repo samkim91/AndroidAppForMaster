@@ -3,6 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <import type="kr.co.soogong.master.domain.entity.common.LabelTheme"/>
+    </data>
+
     <merge
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -35,17 +40,14 @@
             app:layout_constraintTop_toBottomOf="@id/tv_subheadline"
             tools:text="프로젝트 답변 프로젝트 답변 프로젝트 답변 프로젝트 답변 프로젝트 답변" />
 
-        <!-- todo : LabelOutlined 로 바꿔야함 -->
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_tag"
-            style="@style/caption_2.bold"
+            style="@style/label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/gap_8"
-            android:background="@drawable/bg_solid_transparent_stroke_light_grey2_radius4"
-            android:padding="@dimen/gap_5"
-            android:textColor="@color/grey_3"
             android:visibility="gone"
+            app:labelTheme="@{LabelTheme.OUTLINED_GREY}"
             app:layout_constraintBottom_toBottomOf="@id/tv_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"

@@ -45,11 +45,11 @@ class BoxContentCancellable @JvmOverloads constructor(
     companion object {
         @JvmStatic
         @BindingAdapter(value = ["approvedStatus"])
-        fun BoxContentCancellable.setByApprovedStatus(approvedStatus: String?) {
-            if (approvedStatus.isNullOrEmpty()) return
+        fun BoxContentCancellable.setByApprovedStatus(codeTable: CodeTable?) {
+            if (codeTable == null) return
 
-            when (approvedStatus) {
-                CodeTable.NOT_APPROVED.code -> {
+            when (codeTable) {
+                CodeTable.NOT_APPROVED -> {
                     this.isVisible = true
                     this.content =
                         context.getString(R.string.explanation_of_required_information_not_approved)
@@ -57,7 +57,7 @@ class BoxContentCancellable @JvmOverloads constructor(
                         R.drawable.bg_solid_grey3_radius12,
                         null)
                 }
-                CodeTable.REQUEST_APPROVE.code -> {
+                CodeTable.REQUEST_APPROVE -> {
                     this.isVisible = true
                     this.content =
                         context.getString(R.string.explanation_of_required_information_request_approve)
@@ -65,9 +65,10 @@ class BoxContentCancellable @JvmOverloads constructor(
                         R.drawable.bg_solid_green_radius12,
                         null)
                 }
-                CodeTable.APPROVED.code -> {
+                CodeTable.APPROVED -> {
                     this.isVisible = false
                 }
+                else -> Unit
             }
         }
 

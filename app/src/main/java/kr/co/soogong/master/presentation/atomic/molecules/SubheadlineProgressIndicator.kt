@@ -5,8 +5,9 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import kr.co.soogong.master.R
-import kr.co.soogong.master.domain.entity.common.ColorTheme
 import kr.co.soogong.master.databinding.ViewSubheadlineProgressIndicatorBinding
+import kr.co.soogong.master.domain.entity.common.LabelTheme
+import kr.co.soogong.master.utility.extension.setLabelTheme
 import kotlin.math.roundToInt
 
 class SubheadlineProgressIndicator @JvmOverloads constructor(
@@ -25,19 +26,19 @@ class SubheadlineProgressIndicator @JvmOverloads constructor(
             }
         }
 
-    var contentLabelFilled: String? = null
+    var contentLabel: String? = null
         set(value) {
             field = value
             value?.let {
-                binding.lfLabel.content = it
+                binding.tvLabel.text = it
             }
         }
 
-    var colorThemeLabelFilled: ColorTheme? = null
+    var labelTheme: LabelTheme? = null
         set(value) {
             field = value
             value?.let {
-                binding.lfLabel.colorTheme = it
+                binding.tvLabel.setLabelTheme(it)
             }
         }
 

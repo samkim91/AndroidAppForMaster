@@ -7,7 +7,6 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
-import kr.co.soogong.master.domain.entity.common.ShapeTheme
 import kr.co.soogong.master.databinding.FragmentPreferencesBinding
 import kr.co.soogong.master.presentation.ui.base.BaseFragment
 import kr.co.soogong.master.presentation.ui.common.dialog.popup.DefaultDialog
@@ -48,7 +47,6 @@ class PreferencesFragment : BaseFragment<FragmentPreferencesBinding>(
             vm = viewModel
 
             lifecycleOwner = viewLifecycleOwner
-            shapeThemeLabelApprovedStatus = ShapeTheme.Circle
 
         }
     }
