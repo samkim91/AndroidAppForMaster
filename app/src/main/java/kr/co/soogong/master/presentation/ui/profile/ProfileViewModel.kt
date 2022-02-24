@@ -49,7 +49,7 @@ class ProfileViewModel @Inject constructor(
                 onSuccess = {
                     Timber.tag(TAG).d("requestProfile Successfully: ")
                     _profile.value = it
-                    it.requiredInformation.ownerName.run {
+                    it.requiredInformation.ownerName?.run {
                         ownerName.value = this
                     }       // 2-way binding 을 위한 set
                 },

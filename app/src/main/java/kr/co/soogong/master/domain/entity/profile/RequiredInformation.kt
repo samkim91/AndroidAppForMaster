@@ -17,7 +17,7 @@ data class RequiredInformation(
     val warrantyInformation: WarrantyInformation?,
     val career: String?,
     val tel: String,
-    val ownerName: String,
+    val ownerName: String?,
     val projects: List<Project>?,
     val companyAddress: CompanyAddress?,
     val coordinate: Coordinate?,
@@ -41,7 +41,7 @@ data class RequiredInformation(
                 ),
                 career = masterDto.openDate?.let { CareerConverter.toCareer(it) },
                 tel = masterDto.tel?.let { PhoneNumberHelper.addDashToLocalNumber(it) }!!,
-                ownerName = masterDto.ownerName!!,
+                ownerName = masterDto.ownerName,
                 projects = Project.fromProjectDtos(masterDto.projectDtos),
                 companyAddress = CompanyAddress(
                     masterDto.roadAddress,
