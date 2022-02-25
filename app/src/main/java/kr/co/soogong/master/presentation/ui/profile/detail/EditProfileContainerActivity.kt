@@ -1,7 +1,6 @@
 package kr.co.soogong.master.presentation.ui.profile.detail
 
 import android.os.Bundle
-import android.view.View
 import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
@@ -76,9 +75,12 @@ class EditProfileContainerActivity : BaseActivity<ActivityEditProfileContainerBi
     }
 
     fun setSaveButtonClickListener(onClick: () -> Unit) {
-        binding.bfSave.onButtonClick = View.OnClickListener {
-            onClick()
-        }
+        binding.bSave.setOnClickListener { onClick() }
+    }
+
+    fun setSaveButtonEnabled(boolean: Boolean) {
+        Timber.tag(TAG).d("setSaveButtonEnabled: $boolean")
+        binding.bSave.isEnabled = boolean
     }
 
     companion object {
