@@ -25,7 +25,7 @@ fun setRequiredProfileInformationProgress(
         val fieldsEmptyStatus: MutableList<Pair<String, Boolean>> = mutableListOf()
 
         fieldsEmptyStatus.add("coordinate" to true)     // 경위도는 주소에 따라 set 되는 값으로 제외
-        fieldsEmptyStatus.add("ownerName" to ownerName.isNullOrEmpty())
+        fieldsEmptyStatus.add("ownerName" to !ownerName.isNullOrEmpty())
         fieldsEmptyStatus.add("introduction" to !introduction.isNullOrEmpty())
         fieldsEmptyStatus.add("shopImages" to !shopImages.isNullOrEmpty())
         fieldsEmptyStatus.add("businessUnitInformation" to !businessUnitInformation?.businessType.isNullOrEmpty())
