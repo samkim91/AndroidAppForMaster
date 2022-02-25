@@ -116,15 +116,15 @@ class AuthViewModel @Inject constructor(
         Timber.tag(TAG).d("signInWithPhoneAuthCredential: ")
 
         _auth.signInWithCredential(credential).addOnCompleteListener { task ->
-            when {
-                task.isSuccessful -> {
-                    Timber.tag(TAG).d("isSuccessful: ")
-                    sendEvent(TASK_SUCCESSFUL, task.result?.user?.uid!!)
-                }
-                task.isCanceled -> {
-                    Timber.tag(TAG).d("isCanceled: ")
+            if (task.isSuccessful) {
+                Timber.tag(TAG).d("isSuccessful: ")
+                sendEvent(TASK_SUCCESSFUL, task.result?.user?.uid!!)
+            } else {
+                Timber.tag(TAG).d("isCanceled: ")
+                if (task.exception is FirebaseAuthInvalidCredentialsException)
+                    setAction(INVALID_CREDENTIAL)
+                else
                     sendEvent(TASK_FAILED, task.exception?.message!!)
-                }
             }
         }
     }

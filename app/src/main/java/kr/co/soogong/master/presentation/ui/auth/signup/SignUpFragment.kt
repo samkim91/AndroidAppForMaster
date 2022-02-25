@@ -2,12 +2,12 @@ package kr.co.soogong.master.presentation.ui.auth.signup
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentSignUpBinding
 import kr.co.soogong.master.presentation.ui.auth.AuthContainerActivity
+import kr.co.soogong.master.presentation.ui.auth.signup.SignUpViewModel.Companion.BUTTON_ENABLED
 import kr.co.soogong.master.presentation.ui.base.BaseFragment
 import kr.co.soogong.master.presentation.ui.base.BaseViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.utility.EventObserver
@@ -52,7 +52,7 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>(
 
         viewModel.event.observe(viewLifecycleOwner, EventObserver { (event, value) ->
             when (event) {
-                "test" -> binding.bBottom.isEnabled = value as Boolean
+                BUTTON_ENABLED -> binding.bBottom.isEnabled = value as Boolean
             }
         })
 

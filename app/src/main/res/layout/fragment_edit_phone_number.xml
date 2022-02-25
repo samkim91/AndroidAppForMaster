@@ -15,6 +15,10 @@
         <variable
             name="vm"
             type="kr.co.soogong.master.presentation.ui.profile.detail.phonenumber.EditPhoneNumberViewModel" />
+
+        <variable
+            name="authVm"
+            type="kr.co.soogong.master.presentation.ui.auth.AuthViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -27,14 +31,14 @@
             android:layout_height="wrap_content"
             app:buttonText="@{@string/certification}"
             app:buttonTheme="@{authPhoneNumberButtonTheme}"
-            app:firstContent="@={vm.tel}"
+            app:firstContent="@={authVm.tel}"
             app:hint="@{@string/type_phone_number_hint}"
             app:inputType="@{InputType.TYPE_CLASS_NUMBER}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:max="@{11}"
-            app:secondContent="@={vm.certificationCode}"
+            app:secondContent="@={authVm.certificationCode}"
             app:subheadline="@{@string/type_phone_number}"
             app:textInputTimerHint="@{@string/certification_code}"
             app:textInputTimerInputType="@{InputType.TYPE_CLASS_NUMBER}"
