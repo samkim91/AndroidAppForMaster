@@ -100,7 +100,7 @@ sealed class RequirementStatus {
 
     companion object {
         fun getStatusFromRequirementDto(requirement: RequirementDto?): RequirementStatus {
-            return when (requirement?.status) {
+            return when (requirement?.statusCode) {
                 // 진행 전
                 Requested.code -> {
                     if (requirement.estimationDto?.requestConsultingYn == true) RequestConsult
@@ -127,7 +127,7 @@ sealed class RequirementStatus {
         }
 
         fun getStatusFromRequirementCardDto(requirementCardDto: RequirementCardDto) =
-            when (requirementCardDto.status) {
+            when (requirementCardDto.statusCode) {
                 // 진행 전
                 Requested.code -> {
                     if (requirementCardDto.requestConsultingYn) RequestConsult

@@ -37,11 +37,17 @@ data class RequirementDto(
     @SerializedName("oldAddress")
     val oldAddress: String?,
 
-    @SerializedName("status")
-    val status: String,
+    @SerializedName("statusCode")
+    val statusCode: String,
+
+    @SerializedName("statusName")
+    val statusName: String,
 
     @SerializedName("subStatusCode")
-    val subStatus: String,
+    val subStatusCode: String,
+
+    @SerializedName("subStatusName")
+    val subStatusName: String,
 
     @SerializedName("tel")
     val tel: String,
@@ -67,11 +73,11 @@ data class RequirementDto(
     @SerializedName("imageUrls")
     val images: List<String>?,
 
-    @SerializedName("canceledCode")
-    val canceledCode: String?,
+    @SerializedName("canceledReasonCode")
+    val canceledReasonCode: String?,
 
-    @SerializedName("cancelName")
-    val cancelName: String?,
+    @SerializedName("canceledReasonName")
+    val canceledReasonName: String?,
 
     @SerializedName("canceledDescription")
     val canceledDescription: String?,

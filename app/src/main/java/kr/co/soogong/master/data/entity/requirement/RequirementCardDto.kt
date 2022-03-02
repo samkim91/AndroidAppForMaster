@@ -7,9 +7,8 @@ import kr.co.soogong.master.data.entity.requirement.qna.RequirementQnaDto
 import java.util.*
 
 @Parcelize
-//@Entity(tableName = "RequirementCard")
 data class RequirementCardDto(
-//    @PrimaryKey
+
     @SerializedName("id")
     val id: Int,
 
@@ -37,11 +36,17 @@ data class RequirementCardDto(
     @SerializedName("distance")
     val distance: Double,
 
-    @SerializedName("status")
-    val status: String,
+    @SerializedName("statusCode")
+    val statusCode: String,
 
-    @SerializedName("subStatus")
-    val subStatus: String,
+    @SerializedName("statusName")
+    val statusName: String,
+
+    @SerializedName("subStatusCode")
+    val subStatusCode: String,
+
+    @SerializedName("subStatusName")
+    val subStatusName: String,
 
     @SerializedName("tel")
     val tel: String,
