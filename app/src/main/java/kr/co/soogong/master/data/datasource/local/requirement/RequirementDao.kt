@@ -7,7 +7,7 @@ import kr.co.soogong.master.data.entity.requirement.estimation.EstimationDto
 
 @Dao
 interface RequirementDao {
-    @Query("SELECT * FROM Requirement WHERE status IN (:status) ORDER BY id DESC")
+    @Query("SELECT * FROM Requirement WHERE statusCode IN (:status) ORDER BY id DESC")
     fun getListByStatus(status: List<String>): Single<List<RequirementDto>>
 
     @Query("SELECT * FROM Requirement WHERE id = :id")
@@ -28,7 +28,7 @@ interface RequirementDao {
     @Delete
     fun remove(requirement: RequirementDto)
 
-    @Query("DELETE FROM Requirement WHERE status In (:status)")
+    @Query("DELETE FROM Requirement WHERE statusCode In (:status)")
     fun removeByStatus(status: List<String>)
 
     @Query("DELETE FROM Requirement")
