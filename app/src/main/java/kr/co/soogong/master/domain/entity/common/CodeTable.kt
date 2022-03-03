@@ -42,6 +42,7 @@ enum class CodeTable(
     // 마스터 등급
     FREE("Free", "마스터", ""),
     GUARANTEE("Guarantee", "개런티 마스터", ""),
+    ADVISOR("Advisor", "어드바이저", ""),
 
     // 마스터 승인 상태
     NOT_APPROVED("NotApproved", "미승인", ""),

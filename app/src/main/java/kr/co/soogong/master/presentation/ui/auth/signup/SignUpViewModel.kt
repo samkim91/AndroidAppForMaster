@@ -87,8 +87,6 @@ class SignUpViewModel @Inject constructor(
     companion object {
         private const val TAG = "SignUpViewModel"
 
-        const val BUTTON_ENABLED = "BUTTON_ENABLED"
-
         const val VALIDATE_PHONE_NUMBER = "VALIDATE_PHONE_NUMBER"
         const val VALIDATE_OWNER_NAME = "VALIDATE_OWNER_NAME"
         const val SIGN_UP_SUCCESSFULLY = "SIGN_UP_SUCCESSFULLY"

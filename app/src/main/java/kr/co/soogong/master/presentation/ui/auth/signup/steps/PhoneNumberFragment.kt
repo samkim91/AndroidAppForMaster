@@ -9,7 +9,6 @@ import kr.co.soogong.master.databinding.FragmentPhoneNumberBinding
 import kr.co.soogong.master.domain.entity.common.ButtonTheme
 import kr.co.soogong.master.presentation.ui.auth.AuthViewModel
 import kr.co.soogong.master.presentation.ui.auth.signup.SignUpViewModel
-import kr.co.soogong.master.presentation.ui.auth.signup.SignUpViewModel.Companion.BUTTON_ENABLED
 import kr.co.soogong.master.presentation.ui.auth.signup.SignUpViewModel.Companion.VALIDATE_PHONE_NUMBER
 import kr.co.soogong.master.presentation.ui.base.BaseFragment
 import kr.co.soogong.master.presentation.ui.base.BaseViewModel.Companion.REQUEST_FAILED
@@ -126,10 +125,6 @@ class PhoneNumberFragment : BaseFragment<FragmentPhoneNumberBinding>(
                 AuthViewModel.TASK_FAILED -> requireContext().toast(value as String)
             }
         })
-
-        authViewModel.certificationCode.observe(viewLifecycleOwner) {
-            viewModel.sendEvent(BUTTON_ENABLED, it.length > 5)
-        }
     }
 
     private fun validateValues() {
