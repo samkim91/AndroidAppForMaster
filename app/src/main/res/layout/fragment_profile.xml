@@ -79,11 +79,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/gap_16"
                     android:gravity="center"
+                    android:text="@{vm.profile.subscriptionPlan.inKorean}"
                     android:textColor="@color/brand_green"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/iv_profile_image"
-                    app:subscriptionPlan="@{vm.profile.subscriptionPlan}"
                     tools:text="개런티 마스터" />
 
                 <androidx.appcompat.widget.AppCompatTextView
