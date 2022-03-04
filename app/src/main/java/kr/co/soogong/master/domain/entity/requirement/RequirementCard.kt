@@ -43,7 +43,7 @@ data class RequirementCard(
                 address = requirementCardDto.oldAddress ?: requirementCardDto.address,
                 distance = (requirementCardDto.distance * 10.0).roundToInt() / 10.0,
                 status = RequirementStatus.getStatusFromRequirementCardDto(requirementCardDto),
-                subStatus = requirementCardDto.subStatus,
+                subStatus = requirementCardDto.subStatusCode,
                 phoneNumber = requirementCardDto.safetyNumber ?: requirementCardDto.tel,
                 contactYn = requirementCardDto.contactYn,
                 requirementQnas = requirementCardDto.requirementQnas,

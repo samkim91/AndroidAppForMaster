@@ -380,6 +380,7 @@
 
     <string name="certification_code_requested">인증번호를 요청 했습니다.</string>
     <string name="certification_code_requested_again">인증번호를 재요청 했습니다.</string>
+    <string name="try_again">인증 과정을 다시 시작해주세요.</string>
 
     <string name="send_message_succeeded">고객에게 견적서가 전달되었습니다!\n매칭을 기다려주세요.</string>
     <string name="cancel_estimate_succeeded">시공이 취소되었습니다.\n더 좋은 문의를 드리도록 노력할게요.</string>

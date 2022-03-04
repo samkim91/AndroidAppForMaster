@@ -35,13 +35,6 @@ fun TextView.setPrice(price: Int?) {
     }
 }
 
-@BindingAdapter("subscriptionPlan")
-fun TextView.setSubscriptionPlan(subscriptionPlan: String?) {
-    if (!subscriptionPlan.isNullOrEmpty()) {
-        text = CodeTable.getCodeTableByCode(subscriptionPlan)?.inKorean
-    }
-}
-
 fun TextView.makeLinks(vararg links: Pair<String, View.OnClickListener>) {
     val spannableString = SpannableString(this.text)
     var startIndexOfLink = -1

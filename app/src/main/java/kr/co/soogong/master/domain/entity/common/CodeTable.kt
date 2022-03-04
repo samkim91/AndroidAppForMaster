@@ -36,12 +36,13 @@ enum class CodeTable(
     DISPOSAL("Disposal", "시공 쓰레기 처리", ""),
     ELEVATOR_PROTECTION("ElevatorProtection", "엘리베이터 보양작업", ""),
     IN_TIME("Intime", "약속시간 준수", ""),
-    WARRANTY("A/S", "마감불량 시 재시공", ""),
+    WARRANTY("DefectRework", "마감불량 시 재시공", ""),
     NOISE("Noise", "시끄러울 수 있음", ""),
 
     // 마스터 등급
     FREE("Free", "마스터", ""),
     GUARANTEE("Guarantee", "개런티 마스터", ""),
+    ADVISOR("Advisor", "어드바이저", ""),
 
     // 마스터 승인 상태
     NOT_APPROVED("NotApproved", "미승인", ""),

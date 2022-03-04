@@ -2,7 +2,6 @@ package kr.co.soogong.master.presentation.ui.auth.signup
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
@@ -45,14 +44,8 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>(
 
     private fun registerEventObserve() {
         viewModel.action.observe(viewLifecycleOwner, EventObserver { action ->
-            when(action) {
+            when (action) {
                 REQUEST_FAILED -> requireContext().toast(getString(R.string.error_message_of_request_failed))
-            }
-        })
-
-        viewModel.event.observe(viewLifecycleOwner, EventObserver { (event, value) ->
-            when (event) {
-                "test" -> binding.bBottom.isEnabled = value as Boolean
             }
         })
 

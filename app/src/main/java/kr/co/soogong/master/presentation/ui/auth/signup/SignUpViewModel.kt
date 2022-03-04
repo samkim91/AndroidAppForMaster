@@ -3,16 +3,11 @@ package kr.co.soogong.master.presentation.ui.auth.signup
 import android.view.View
 import androidx.appcompat.widget.AppCompatCheckBox
 import androidx.lifecycle.MutableLiveData
-import com.google.firebase.auth.PhoneAuthCredential
-import com.google.firebase.auth.PhoneAuthProvider
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.entity.auth.MasterSignUpDto
-import kr.co.soogong.master.domain.usecase.auth.CheckUserExistentUseCase
 import kr.co.soogong.master.domain.usecase.auth.SignUpUseCase
 import kr.co.soogong.master.presentation.ui.base.BaseViewModel
 import timber.log.Timber
@@ -20,7 +15,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SignUpViewModel @Inject constructor(
-    private val checkUserExistentUseCase: CheckUserExistentUseCase,
     private val signUpUseCase: SignUpUseCase,
 ) : BaseViewModel() {
 
@@ -29,13 +23,6 @@ class SignUpViewModel @Inject constructor(
 
     // PhoneNumberFragment
     val tel = MutableLiveData("")
-    val certificationCode = MutableLiveData("")
-
-    // Firebase Auth
-    val auth = MutableLiveData(Firebase.auth)
-    val phoneAuthCredential = MutableLiveData<PhoneAuthCredential>()
-    val storedVerificationId = MutableLiveData("")
-    val resendToken = MutableLiveData<PhoneAuthProvider.ForceResendingToken>()
     val uid = MutableLiveData("")
 
     // OwnerNameFragment
@@ -70,26 +57,6 @@ class SignUpViewModel @Inject constructor(
         currentPage.value = page
     }
 
-    fun checkUserExist() {
-        Timber.tag(TAG).d("checkUserExist: ")
-
-        tel.value?.let { tel ->
-            checkUserExistentUseCase(tel)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeBy(
-                    onSuccess = {
-                        Timber.tag(TAG).d("checkUserExist successfully: $it")
-                        sendMessage(IS_PHONE_NUMBER_EXIST, it)
-                    },
-                    onError = {
-                        Timber.tag(TAG).d("checkUserExist failed: $it")
-                        setAction(REQUEST_FAILED)
-                    }
-                ).addToDisposable()
-        }
-    }
-
     fun signUp() {
         Timber.tag(TAG).d("signUp : ")
         signUpUseCase(
@@ -119,8 +86,6 @@ class SignUpViewModel @Inject constructor(
 
     companion object {
         private const val TAG = "SignUpViewModel"
-
-        const val IS_PHONE_NUMBER_EXIST = "PHONE_NUMBER_EXIST"
 
         const val VALIDATE_PHONE_NUMBER = "VALIDATE_PHONE_NUMBER"
         const val VALIDATE_OWNER_NAME = "VALIDATE_OWNER_NAME"

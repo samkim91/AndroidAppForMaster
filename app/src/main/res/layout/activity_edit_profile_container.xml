@@ -29,7 +29,7 @@
             android:layout_width="@dimen/gap_0"
             android:layout_height="@dimen/gap_0"
             android:overScrollMode="never"
-            app:layout_constraintBottom_toTopOf="@id/bf_save"
+            app:layout_constraintBottom_toTopOf="@id/b_save"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/ab_header">
@@ -44,15 +44,13 @@
                 android:paddingBottom="@dimen/gap_24" />
         </ScrollView>
 
-        <kr.co.soogong.master.presentation.atomic.atoms.ButtonFilled
-            android:id="@+id/bf_save"
-            android:layout_width="@dimen/gap_0"
-            android:layout_height="wrap_content"
-            app:buttonText="@{@string/save}"
-            app:buttonTheme="@{buttonThemeSave}"
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/b_save"
+            style="@style/button.filled.primary"
+            android:text="@string/save"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/fcv_container" />
+            app:layout_constraintTop_toBottomOf="@id/sv_container"
+            app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
