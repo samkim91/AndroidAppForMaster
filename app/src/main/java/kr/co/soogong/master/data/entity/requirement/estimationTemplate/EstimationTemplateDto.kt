@@ -23,7 +23,7 @@ data class EstimationTemplateDto(
     val updatedAt: Date? = null,
 ) : Parcelable {
     companion object {
-        fun addMasterId(estimationTemplateDto: EstimationTemplateDto, masterId: Int) =
+        fun createWithMasterId(estimationTemplateDto: EstimationTemplateDto, masterId: Int) =
             EstimationTemplateDto(
                 id = estimationTemplateDto.id,
                 masterId = masterId,

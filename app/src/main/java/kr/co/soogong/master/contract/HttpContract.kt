@@ -1,14 +1,15 @@
 package kr.co.soogong.master.contract
 
 object HttpContract {
+    //region Common
     const val GOOGLE_STORE_URL = "https://play.google.com/store/search?q=%EC%88%98%EA%B3%B5"
-
     const val LOCAL_URL_MH = "http://192.168.0.14:8080/"       // Myeonghwan's local
     const val LOCAL_URL_JH = "http://192.168.0.32:8080/"     // Jihun's local
     const val LOCAL_URL_JY = "http://192.168.0.40:8080/"     // Jaeyeon's local
     const val DEV_URL = "https://backenddev.soogong.co.kr"
     const val TEST_URL = "https://backendtest.soogong.co.kr"
     const val PROD_URL = "https://backend.soogong.co.kr/"
+    //endregion
 
     //region Auth
     const val IS_MASTER_EXISTENT = "master/is-existent"
@@ -18,16 +19,13 @@ object HttpContract {
     const val SIGN_UP = "master"
     //endregion
 
-    //region Category
+    //region Major
     const val CATEGORIES = "category/list"
     const val PROJECTS = "project/find-all-by-categoryId"
     //endregion
 
-    // region Home
-    const val REQUIREMENT_TOTAL = "master/home/counts"
-    // endregion
-
     //region Requirement
+    const val REQUIREMENT_TOTAL = "master/home/counts"
     const val GET_REQUIREMENTS = "master/requirement"
     const val GET_REQUIREMENT = "master/find-requirement-one"
     const val SEARCH_REQUIREMENTS = "requirement/search-for-master"
@@ -38,6 +36,10 @@ object HttpContract {
     const val RESPOND_TO_MEASURE = "estimation/reply-measure"
     const val CALL_TO_CLIENT = "estimation/count-call"
     const val GET_CUSTOMER_REQUESTS = "estimation/get-contact-list"
+    //Estimation Template
+    const val GET_ESTIMATION_TEMPLATES = "estimation-template/find-by-master-uid"
+    const val SAVE_ESTIMATION_TEMPLATE = "estimation-template"
+    const val DELETE_ESTIMATION_TEMPLATE = "estimation-template/{id}"
     //endregion
 
     //region Repair
@@ -47,12 +49,6 @@ object HttpContract {
 
     //region Cancel
     const val GET_CANCELED_REASONS = "code/find-all-by-groupCodes"
-    //endregion
-
-    //region Estimation Template
-    const val GET_ESTIMATION_TEMPLATES = "estimation-template/find-by-master-uid"
-    const val SAVE_ESTIMATION_TEMPLATE = "estimation-template"
-    const val DELETE_ESTIMATION_TEMPLATE = "estimation-template/{id}"
     //endregion
 
     //region Profile
@@ -79,5 +75,4 @@ object HttpContract {
     const val GET_ALARMS = "api/v1/branches/get_alarm"
     const val SET_ALARMS = "api/v1/branches/set_alarm"
     //endregion
-
 }

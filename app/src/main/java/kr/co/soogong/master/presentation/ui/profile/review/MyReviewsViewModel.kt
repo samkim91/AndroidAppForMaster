@@ -8,8 +8,8 @@ import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.domain.entity.profile.Profile
 import kr.co.soogong.master.domain.entity.profile.Review
-import kr.co.soogong.master.data.repository.ProfileRepository
 import kr.co.soogong.master.domain.usecase.profile.GetProfileUseCase
+import kr.co.soogong.master.domain.usecase.requirement.review.GetReviewsUseCase
 import kr.co.soogong.master.presentation.ui.common.EndlessScrollableViewModel
 import kr.co.soogong.master.utility.ListLiveData
 import timber.log.Timber
@@ -18,7 +18,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MyReviewsViewModel @Inject constructor(
     private val getProfileUseCase: GetProfileUseCase,
-    private val profileRepository: ProfileRepository,
+    private val getReviewsUseCase: GetReviewsUseCase,
 ) : EndlessScrollableViewModel() {
     private val _profile = MutableLiveData<Profile>()
     val profile: LiveData<Profile>
@@ -46,7 +46,7 @@ class MyReviewsViewModel @Inject constructor(
     private fun requestMyReviews() {
         Timber.tag(TAG).d("requestMyReviews: ")
 
-        profileRepository.getReviews(offset, pageSize)
+        getReviewsUseCase(offset, pageSize)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(

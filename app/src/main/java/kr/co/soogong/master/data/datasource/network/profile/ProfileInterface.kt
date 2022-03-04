@@ -4,10 +4,9 @@ import io.reactivex.Single
 import kr.co.soogong.master.contract.HttpContract
 import kr.co.soogong.master.data.entity.common.PageableContentDto
 import kr.co.soogong.master.data.entity.common.ResponseDto
-import kr.co.soogong.master.data.entity.profile.MasterSettingsDto
 import kr.co.soogong.master.data.entity.profile.MasterDto
+import kr.co.soogong.master.data.entity.profile.MasterSettingsDto
 import kr.co.soogong.master.data.entity.profile.PortfolioDto
-import kr.co.soogong.master.data.entity.requirement.review.ReviewDto
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
@@ -55,15 +54,6 @@ interface ProfileInterface {
     @DELETE(HttpContract.DELETE_PORTFOLIO)
     fun deletePortfolio(@Path("id") portfolioId: Int): Single<ResponseBody>
 
-    @GET(HttpContract.GET_REVIEWS)
-    fun getReviews(
-        @Query("uid") uid: String,
-        @Query("offset") offset: Int,
-        @Query("pageSize") pageSize: Int,
-        @Query("order") order: Int,
-        @Query("orderBy") orderBy: String,
-    ): Single<ResponseDto<PageableContentDto<ReviewDto>>>
-
     @FormUrlEncoded
     @PATCH(HttpContract.UPDATE_REQUEST_MEASURE_YN)
     fun updateRequestMeasureYn(
@@ -76,8 +66,8 @@ interface ProfileInterface {
     ): Single<MasterDto>
 
     @PATCH(HttpContract.UPDATE_FREE_MEASURE_YN)
-    fun updateFreeMeasureYn(
+    suspend fun updateFreeMeasureYn(
         @Body masterDto: MasterDto,
-    ): Single<MasterDto>
+    )
 
 }

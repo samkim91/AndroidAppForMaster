@@ -15,7 +15,7 @@ import kr.co.soogong.master.domain.entity.requirement.Requirement
 import kr.co.soogong.master.domain.entity.requirement.estimation.EstimationPriceTypeCode
 import kr.co.soogong.master.domain.entity.requirement.estimation.EstimationResponseCode
 import kr.co.soogong.master.domain.usecase.requirement.GetRequirementUseCase
-import kr.co.soogong.master.domain.usecase.requirement.SaveEstimationUseCase
+import kr.co.soogong.master.domain.usecase.requirement.estimation.SaveEstimationUseCase
 import kr.co.soogong.master.presentation.ui.base.BaseViewModel
 import kr.co.soogong.master.presentation.uihelper.requirment.action.WriteEstimationActivityHelper
 import kr.co.soogong.master.utility.ListLiveData

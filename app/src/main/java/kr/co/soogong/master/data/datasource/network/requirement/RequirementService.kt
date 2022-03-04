@@ -18,6 +18,8 @@ class RequirementService @Inject constructor(
 ) {
     private val requirementInterface = retrofit.create(RequirementInterface::class.java)
 
+    fun getRequirementTotal(masterUid: String) = requirementInterface.getRequirementTotal(masterUid)
+
     fun getRequirements(
         masterUid: String,
         status: String,
@@ -58,43 +60,10 @@ class RequirementService @Inject constructor(
         return requirementInterface.getRequirement(masterUid, requirementId)
     }
 
-    fun saveEstimation(
-        estimationDto: RequestBody,
-        measurementImage: List<MultipartBody.Part?>? = null,
-    ): Single<EstimationDto> {
-        return requirementInterface.saveEstimation(estimationDto, measurementImage)
-    }
-
-    fun respondToMeasure(estimationDto: EstimationDto): Single<EstimationDto> {
-        return requirementInterface.respondToMeasure(estimationDto)
-    }
-
     fun saveRepair(repairDto: RepairDto): Single<RequirementDto> {
         return requirementInterface.saveRepair(repairDto)
     }
 
-    fun getEstimationTemplates(masterUid: String): Single<List<EstimationTemplateDto>> {
-        return requirementInterface.getEstimationTemplates(masterUid)
-    }
-
-    fun saveEstimationTemplate(estimationTemplateDto: EstimationTemplateDto): Single<EstimationTemplateDto> {
-        return requirementInterface.saveEstimationTemplate(estimationTemplateDto)
-    }
-
-    fun deleteEstimationTemplate(id: Int): Single<Boolean> {
-        return requirementInterface.deleteEstimationTemplate(id)
-    }
-
     fun getCanceledReasons(groupCodes: List<String>) =
         requirementInterface.getCanceledReasons(groupCodes)
-
-    fun callToClient(estimationId: Int): Single<Boolean> {
-        val data = HashMap<String, Any>()
-        data["estimationId"] = estimationId
-        data["from"] = "Master"
-
-        return requirementInterface.callToClient(data)
-    }
-
-    fun getCustomerRequests(masterUid: String) = requirementInterface.getCustomerRequests(masterUid)
 }
