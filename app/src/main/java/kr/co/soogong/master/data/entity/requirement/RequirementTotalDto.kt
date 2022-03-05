@@ -1,4 +1,4 @@
-package kr.co.soogong.master.data.entity.home
+package kr.co.soogong.master.data.entity.requirement
 
 import com.google.gson.annotations.SerializedName
 

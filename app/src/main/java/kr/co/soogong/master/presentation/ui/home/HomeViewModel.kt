@@ -7,8 +7,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.domain.entity.requirement.RequirementStatus
-import kr.co.soogong.master.domain.usecase.auth.GetMasterUidFromSharedUseCase
-import kr.co.soogong.master.domain.usecase.home.GetRequirementTotalUseCase
+import kr.co.soogong.master.domain.usecase.requirement.GetRequirementTotalUseCase
 import kr.co.soogong.master.presentation.ui.requirement.RequirementViewModelAggregate
 import kr.co.soogong.master.presentation.ui.requirement.list.RequirementsViewModel
 import retrofit2.HttpException

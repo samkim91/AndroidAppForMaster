@@ -63,22 +63,6 @@ open class EditProfileViewModel(
             ).addToDisposable()
     }
 
-    fun saveMasterV2(request: Single<MasterDto>) {
-        request
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeBy(
-                onSuccess = {
-                    Timber.tag(TAG).d("saveMasterV2 successful: $it")
-                    setAction(REQUEST_SUCCESS)
-                },
-                onError = {
-                    Timber.tag(TAG).d("saveMasterV2 failed: $it")
-                    setAction(REQUEST_FAILED)
-                }
-            ).addToDisposable()
-    }
-
     companion object {
         private const val TAG = "EditProfileOpenViewModel"
     }

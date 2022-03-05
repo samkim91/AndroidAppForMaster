@@ -2,7 +2,9 @@ package kr.co.soogong.master.presentation.ui.profile.detail.freemeasure
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import kr.co.soogong.master.data.entity.profile.MasterDto
 import kr.co.soogong.master.domain.entity.common.CodeTable
 import kr.co.soogong.master.domain.usecase.profile.GetProfileUseCase
@@ -21,6 +23,7 @@ class EditFreeMeasureViewModel @Inject constructor(
 
     private val _freeMeasureOptions =
         MutableLiveData(listOf(CodeTable.POSSIBLE, CodeTable.IMPOSSIBLE))
+
     val freeMeasureOptions: LiveData<List<CodeTable>>
         get() = _freeMeasureOptions
 
@@ -42,15 +45,22 @@ class EditFreeMeasureViewModel @Inject constructor(
     }
 
     fun saveFreeMeasure() {
-        saveMasterV2(
-            updateFreeMeasureYnUseCase(
-                MasterDto(
-                    id = profile.value?.id,
-                    uid = profile.value?.uid,
-                    freeMeasureYn = freeMeasure.value?.asValue as Boolean
+        viewModelScope.launch {
+            try {
+                updateFreeMeasureYnUseCase(
+                    MasterDto(
+                        id = profile.value?.id,
+                        uid = profile.value?.uid,
+                        freeMeasureYn = freeMeasure.value?.asValue as Boolean
+                    )
                 )
-            )
-        )
+
+                setAction(REQUEST_SUCCESS)
+            } catch (e: Exception) {
+                Timber.tag(TAG).e("saveFreeMeasure failed: $e")
+                setAction(REQUEST_FAILED)
+            }
+        }
     }
 
     companion object {

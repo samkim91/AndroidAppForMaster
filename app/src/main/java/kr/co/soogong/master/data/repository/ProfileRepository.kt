@@ -1,31 +1,25 @@
 package kr.co.soogong.master.data.repository
 
-import android.content.Context
 import android.content.SharedPreferences
-import android.net.Uri
 import dagger.Reusable
-import dagger.hilt.android.qualifiers.ApplicationContext
 import io.reactivex.Single
 import kr.co.soogong.master.contract.AppSharedPreferenceContract
 import kr.co.soogong.master.data.datasource.network.profile.ProfileService
 import kr.co.soogong.master.data.entity.common.PageableContentDto
 import kr.co.soogong.master.data.entity.profile.MasterDto
+import kr.co.soogong.master.data.entity.profile.MasterSettingsDto
 import kr.co.soogong.master.data.entity.profile.PortfolioDto
-import kr.co.soogong.master.domain.entity.profile.MasterSettings
-import kr.co.soogong.master.domain.entity.profile.Profile
-import kr.co.soogong.master.domain.entity.profile.Review
-import kr.co.soogong.master.utility.MultipartGenerator
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import okhttp3.ResponseBody
 import java.net.HttpURLConnection
 import javax.inject.Inject
 
 @Reusable
 class ProfileRepository @Inject constructor(
-    private val profileService: ProfileService,
     private val sharedPreferences: SharedPreferences,
-
+    private val profileService: ProfileService,
     //    private val masterDao: MasterDao,
-    @ApplicationContext private val context: Context,
 ) {
     fun getMasterIdFromShared(): Int =
         sharedPreferences.getInt(AppSharedPreferenceContract.MASTER_ID, -1)
@@ -46,76 +40,59 @@ class ProfileRepository @Inject constructor(
     fun updateUidByTel(tel: String, uid: String): Single<MasterDto> =
         profileService.updateUidByTel(tel, uid)
 
-    fun getMaster(): Single<Profile> =
+    fun getMaster(): Single<MasterDto> =
         profileService.getMasterByUid(getMasterUidFromShared())
             .doOnSuccess { it.data?.run { saveMasterKeysInShared(this.id!!, this.uid!!) } }
             .map { responseDto ->
                 if (responseDto.code.toInt() == HttpURLConnection.HTTP_OK) {
-                    responseDto.data?.run { Profile.fromMasterDto(this) }
+                    responseDto.data
                 } else {
                     throw Exception(responseDto.messageKo)
                 }
             }
 
-    fun getMasterSettings(): Single<MasterSettings> =
+    fun getMasterSettings(): Single<MasterSettingsDto> =
         profileService.getMasterSettings(getMasterUidFromShared())
             .map { responseDto ->
                 if (responseDto.code.toInt() == HttpURLConnection.HTTP_OK) {
-                    responseDto.data?.run { MasterSettings.fromDto(this) }
+                    responseDto.data
                 } else {
                     throw Exception(responseDto.messageKo)
                 }
             }
+
+    suspend fun updateFreeMeasureYn(masterDto: MasterDto) =
+        profileService.updateFreeMeasureYn(masterDto)
 
     // NOTE: 2022/01/27 차후 적용
-    fun saveMaster(
-        masterDto: MasterDto,
-        profileImageUri: Uri? = null,
-        businessRegistImageUri: Uri? = null,
-        shopImagesUris: List<Uri>? = null,
-    ): Single<MasterDto> =
-        profileService.saveMaster(
-            masterDto = MultipartGenerator.createJson(masterDto),
-            profileImage = MultipartGenerator.createFile(context, "profileImage", profileImageUri),
-            businessRegistImage = MultipartGenerator.createFile(context,
-                "businessRegistImage",
-                businessRegistImageUri),
-            shopImages = MultipartGenerator.createFiles(context, "shopImages", shopImagesUris)
-        )
-
-    fun getReviews(
-        offset: Int,
-        pageSize: Int,
-    ): Single<PageableContentDto<Review>> =
-        profileService.getReviews(getMasterUidFromShared(), offset, pageSize, 1, "id")
-            .map { responseDto ->
-                if (responseDto.code.toInt() == HttpURLConnection.HTTP_OK) {
-                    responseDto.data?.let { pageableContentDto ->
-                        PageableContentDto(
-                            content = pageableContentDto.content.map { reviewDto ->
-                                Review.fromReviewDto(reviewDto)
-                            },
-                            pageable = pageableContentDto.pageable,
-                            last = pageableContentDto.last,
-                            numberOfElements = pageableContentDto.numberOfElements
-                        )
-                    }
-                } else {
-                    throw Exception(responseDto.messageKo)
-                }
-            }
+//    fun saveMaster(
+//        masterDto: MasterDto,
+//        profileImageUri: Uri? = null,
+//        businessRegistImageUri: Uri? = null,
+//        shopImagesUris: List<Uri>? = null,
+//    ): Single<MasterDto> =
+//        profileService.saveMaster(
+//            masterDto = MultipartGenerator.createJson(masterDto),
+//            profileImage = MultipartGenerator.createFile(context, "profileImage", profileImageUri),
+//            businessRegistImage = MultipartGenerator.createFile(context,
+//                "businessRegistImage",
+//                businessRegistImageUri),
+//            shopImages = MultipartGenerator.createFiles(context, "shopImages", shopImagesUris)
+//        )
 
     fun getPortfolios(
         type: String,
         offset: Int,
         pageSize: Int,
+        order: Int,
+        orderBy: String,
     ): Single<PageableContentDto<PortfolioDto>> =
         profileService.getPortfolios(getMasterUidFromShared(),
             type,
             offset,
             pageSize,
-            1,
-            "id")
+            order,
+            orderBy)
             .map { responseDto ->
                 if (responseDto.code.toInt() == HttpURLConnection.HTTP_OK) {
                     responseDto.data?.let { pageableContentDto ->
@@ -130,6 +107,14 @@ class ProfileRepository @Inject constructor(
                     throw Exception(responseDto.messageKo)
                 }
             }
+
+    fun savePortfolio(
+        portfolioDto: RequestBody,
+        beforeImageFile: MultipartBody.Part?,
+        afterImageFile: MultipartBody.Part?,
+    ): Single<PortfolioDto> {
+        return profileService.savePortfolio(portfolioDto, beforeImageFile, afterImageFile)
+    }
 
     fun deletePortfolio(id: Int): Single<ResponseBody> = profileService.deletePortfolio(id)
 

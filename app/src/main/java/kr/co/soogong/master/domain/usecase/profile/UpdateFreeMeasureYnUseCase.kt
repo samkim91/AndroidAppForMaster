@@ -1,20 +1,18 @@
 package kr.co.soogong.master.domain.usecase.profile
 
 import dagger.Reusable
-import io.reactivex.Single
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import kr.co.soogong.master.data.entity.profile.MasterDto
-import kr.co.soogong.master.data.datasource.network.profile.ProfileService
+import kr.co.soogong.master.data.repository.ProfileRepository
 import javax.inject.Inject
 
 @Reusable
 class UpdateFreeMeasureYnUseCase @Inject constructor(
-    private val profileService: ProfileService,
+    private val profileRepository: ProfileRepository,
 ) {
-    // TODO: 2022/02/16 repository 를 생성자로 가져와서, 작업하도록 변경 필요 !!
-
-    operator fun invoke(
-        masterDto: MasterDto,
-    ): Single<MasterDto> {
-        return profileService.updateFreeMeasureYn(masterDto)
-    }
+    suspend operator fun invoke(masterDto: MasterDto) =
+        withContext(Dispatchers.IO) {
+            profileRepository.updateFreeMeasureYn(masterDto)
+        }
 }
