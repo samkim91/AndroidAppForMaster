@@ -1,4 +1,4 @@
-package kr.co.soogong.master.data.entity.requirement.estimationTemplate
+package kr.co.soogong.master.data.entity.requirement.estimation
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName

@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.entity.requirement.estimationTemplate.EstimationTemplateDto
+import kr.co.soogong.master.data.entity.requirement.estimation.EstimationTemplateDto
 import kr.co.soogong.master.databinding.ActivityEstimationTemplatesBinding
 import kr.co.soogong.master.presentation.ui.base.BaseActivity
 import kr.co.soogong.master.presentation.ui.common.dialog.bottomDialogCountableEdittext.BottomSheetDialogEstimationTemplate

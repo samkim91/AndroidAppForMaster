@@ -3,7 +3,7 @@ package kr.co.soogong.master.presentation.ui.requirement.action.write.template
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import kr.co.soogong.master.data.entity.requirement.estimationTemplate.EstimationTemplateDto
+import kr.co.soogong.master.data.entity.requirement.estimation.EstimationTemplateDto
 import kr.co.soogong.master.databinding.ViewHolderEstimationTemplateItemBinding
 
 class EstimationTemplateViewHolder(

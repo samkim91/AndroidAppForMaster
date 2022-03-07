@@ -147,9 +147,6 @@ class RequirementRepository @Inject constructor(
             }
     }
 
-    fun getCanceledReasons(groupCodes: List<String>) =
-        requirementService.getCanceledReasons(groupCodes)
-
     companion object {
         private const val TAG = "RequirementRepository"
     }
