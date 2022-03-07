@@ -1,4 +1,4 @@
-package kr.co.soogong.master.domain.usecase.requirement
+package kr.co.soogong.master.domain.usecase.requirement.repair
 
 import dagger.Reusable
 import io.reactivex.Single
