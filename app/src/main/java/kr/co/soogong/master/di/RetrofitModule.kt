@@ -11,6 +11,7 @@ import kr.co.soogong.master.data.datasource.network.preferences.PreferencesServi
 import kr.co.soogong.master.data.datasource.network.profile.ProfileService
 import kr.co.soogong.master.data.datasource.network.requirement.RequirementService
 import kr.co.soogong.master.data.datasource.network.requirement.estimation.EstimationService
+import kr.co.soogong.master.data.datasource.network.requirement.repair.RepairService
 import kr.co.soogong.master.data.datasource.network.requirement.review.ReviewService
 import retrofit2.Retrofit
 
@@ -40,6 +41,12 @@ class RetrofitModule {
     @Reusable
     fun provideEstimationService(retrofit: Retrofit): EstimationService {
         return EstimationService(retrofit)
+    }
+
+    @Provides
+    @Reusable
+    fun provideRepairService(retrofit: Retrofit): RepairService {
+        return RepairService(retrofit)
     }
 
     @Provides

@@ -5,7 +5,7 @@ import io.reactivex.Single
 import kr.co.soogong.master.data.datasource.network.requirement.estimation.EstimationService
 import kr.co.soogong.master.data.entity.requirement.CustomerRequest
 import kr.co.soogong.master.data.entity.requirement.estimation.EstimationDto
-import kr.co.soogong.master.data.entity.requirement.estimationTemplate.EstimationTemplateDto
+import kr.co.soogong.master.data.entity.requirement.estimation.EstimationTemplateDto
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import javax.inject.Inject

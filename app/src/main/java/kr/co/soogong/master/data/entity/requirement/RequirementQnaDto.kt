@@ -1,4 +1,4 @@
-package kr.co.soogong.master.data.entity.requirement.qna
+package kr.co.soogong.master.data.entity.requirement
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName

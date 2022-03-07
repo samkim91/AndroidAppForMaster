@@ -1,7 +1,7 @@
 package kr.co.soogong.master.domain.entity.requirement
 
 import kr.co.soogong.master.data.entity.requirement.RequirementCardDto
-import kr.co.soogong.master.data.entity.requirement.qna.RequirementQnaDto
+import kr.co.soogong.master.data.entity.requirement.RequirementQnaDto
 import java.util.*
 import kotlin.math.roundToInt
 

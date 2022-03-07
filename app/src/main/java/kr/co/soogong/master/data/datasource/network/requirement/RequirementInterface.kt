@@ -2,19 +2,13 @@ package kr.co.soogong.master.data.datasource.network.requirement
 
 import io.reactivex.Single
 import kr.co.soogong.master.contract.HttpContract
-import kr.co.soogong.master.data.entity.common.CodeDto
 import kr.co.soogong.master.data.entity.common.PageableContentDto
 import kr.co.soogong.master.data.entity.common.ResponseDto
-import kr.co.soogong.master.data.entity.requirement.CustomerRequest
 import kr.co.soogong.master.data.entity.requirement.RequirementCardDto
 import kr.co.soogong.master.data.entity.requirement.RequirementDto
 import kr.co.soogong.master.data.entity.requirement.RequirementTotalDto
-import kr.co.soogong.master.data.entity.requirement.estimation.EstimationDto
-import kr.co.soogong.master.data.entity.requirement.estimationTemplate.EstimationTemplateDto
-import kr.co.soogong.master.data.entity.requirement.repair.RepairDto
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
-import retrofit2.http.*
+import retrofit2.http.GET
+import retrofit2.http.Query
 
 interface RequirementInterface {
 
@@ -47,12 +41,4 @@ interface RequirementInterface {
         @Query("masterUid") masterUid: String,
         @Query("requirementId") requirementId: Int,
     ): Single<RequirementDto>
-
-    @POST(HttpContract.SAVE_REPAIR)
-    fun saveRepair(@Body repairDto: RepairDto): Single<RequirementDto>
-
-    @GET(HttpContract.GET_CANCELED_REASONS)
-    fun getCanceledReasons(
-        @Query("groupCodes") groupCodes: List<String>,
-    ): Single<List<CodeDto>>
 }

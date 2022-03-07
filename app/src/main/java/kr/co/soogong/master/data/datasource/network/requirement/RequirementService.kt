@@ -5,11 +5,6 @@ import kr.co.soogong.master.data.entity.common.PageableContentDto
 import kr.co.soogong.master.data.entity.common.ResponseDto
 import kr.co.soogong.master.data.entity.requirement.RequirementCardDto
 import kr.co.soogong.master.data.entity.requirement.RequirementDto
-import kr.co.soogong.master.data.entity.requirement.estimation.EstimationDto
-import kr.co.soogong.master.data.entity.requirement.estimationTemplate.EstimationTemplateDto
-import kr.co.soogong.master.data.entity.requirement.repair.RepairDto
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import retrofit2.Retrofit
 import javax.inject.Inject
 
@@ -59,11 +54,4 @@ class RequirementService @Inject constructor(
     fun getRequirement(masterUid: String, requirementId: Int): Single<RequirementDto> {
         return requirementInterface.getRequirement(masterUid, requirementId)
     }
-
-    fun saveRepair(repairDto: RepairDto): Single<RequirementDto> {
-        return requirementInterface.saveRepair(repairDto)
-    }
-
-    fun getCanceledReasons(groupCodes: List<String>) =
-        requirementInterface.getCanceledReasons(groupCodes)
 }

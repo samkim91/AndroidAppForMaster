@@ -8,7 +8,7 @@ import androidx.core.os.bundleOf
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.entity.requirement.estimationTemplate.EstimationTemplateDto
+import kr.co.soogong.master.data.entity.requirement.estimation.EstimationTemplateDto
 import kr.co.soogong.master.databinding.BottomSheetDialogEstimationTemplateBinding
 import kr.co.soogong.master.presentation.ui.base.BaseBottomSheetDialogFragment
 import timber.log.Timber
