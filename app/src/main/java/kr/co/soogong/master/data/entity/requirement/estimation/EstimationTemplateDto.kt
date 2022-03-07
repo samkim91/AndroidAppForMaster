@@ -1,4 +1,4 @@
-package kr.co.soogong.master.data.entity.requirement.estimationTemplate
+package kr.co.soogong.master.data.entity.requirement.estimation
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
@@ -23,7 +23,7 @@ data class EstimationTemplateDto(
     val updatedAt: Date? = null,
 ) : Parcelable {
     companion object {
-        fun addMasterId(estimationTemplateDto: EstimationTemplateDto, masterId: Int) =
+        fun createWithMasterId(estimationTemplateDto: EstimationTemplateDto, masterId: Int) =
             EstimationTemplateDto(
                 id = estimationTemplateDto.id,
                 masterId = masterId,

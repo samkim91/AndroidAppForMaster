@@ -15,6 +15,10 @@ import kr.co.soogong.master.domain.entity.requirement.Requirement
 import kr.co.soogong.master.domain.entity.requirement.estimation.EstimationResponseCode
 import kr.co.soogong.master.domain.usecase.profile.GetMasterSettingsUseCase
 import kr.co.soogong.master.domain.usecase.requirement.*
+import kr.co.soogong.master.domain.usecase.requirement.estimation.CallToClientUseCase
+import kr.co.soogong.master.domain.usecase.requirement.estimation.RespondToMeasureUseCase
+import kr.co.soogong.master.domain.usecase.requirement.estimation.SaveEstimationUseCase
+import kr.co.soogong.master.domain.usecase.requirement.review.RequestReviewUseCase
 import kr.co.soogong.master.presentation.ui.base.BaseViewModel
 import kr.co.soogong.master.presentation.uihelper.requirment.action.ViewRequirementActivityHelper
 import timber.log.Timber

@@ -5,11 +5,6 @@ import kr.co.soogong.master.data.entity.common.PageableContentDto
 import kr.co.soogong.master.data.entity.common.ResponseDto
 import kr.co.soogong.master.data.entity.requirement.RequirementCardDto
 import kr.co.soogong.master.data.entity.requirement.RequirementDto
-import kr.co.soogong.master.data.entity.requirement.estimation.EstimationDto
-import kr.co.soogong.master.data.entity.requirement.estimationTemplate.EstimationTemplateDto
-import kr.co.soogong.master.data.entity.requirement.repair.RepairDto
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import retrofit2.Retrofit
 import javax.inject.Inject
 
@@ -17,6 +12,8 @@ class RequirementService @Inject constructor(
     retrofit: Retrofit,
 ) {
     private val requirementInterface = retrofit.create(RequirementInterface::class.java)
+
+    fun getRequirementTotal(masterUid: String) = requirementInterface.getRequirementTotal(masterUid)
 
     fun getRequirements(
         masterUid: String,
@@ -57,44 +54,4 @@ class RequirementService @Inject constructor(
     fun getRequirement(masterUid: String, requirementId: Int): Single<RequirementDto> {
         return requirementInterface.getRequirement(masterUid, requirementId)
     }
-
-    fun saveEstimation(
-        estimationDto: RequestBody,
-        measurementImage: List<MultipartBody.Part?>? = null,
-    ): Single<EstimationDto> {
-        return requirementInterface.saveEstimation(estimationDto, measurementImage)
-    }
-
-    fun respondToMeasure(estimationDto: EstimationDto): Single<EstimationDto> {
-        return requirementInterface.respondToMeasure(estimationDto)
-    }
-
-    fun saveRepair(repairDto: RepairDto): Single<RequirementDto> {
-        return requirementInterface.saveRepair(repairDto)
-    }
-
-    fun getEstimationTemplates(masterUid: String): Single<List<EstimationTemplateDto>> {
-        return requirementInterface.getEstimationTemplates(masterUid)
-    }
-
-    fun saveEstimationTemplate(estimationTemplateDto: EstimationTemplateDto): Single<EstimationTemplateDto> {
-        return requirementInterface.saveEstimationTemplate(estimationTemplateDto)
-    }
-
-    fun deleteEstimationTemplate(id: Int): Single<Boolean> {
-        return requirementInterface.deleteEstimationTemplate(id)
-    }
-
-    fun getCanceledReasons(groupCodes: List<String>) =
-        requirementInterface.getCanceledReasons(groupCodes)
-
-    fun callToClient(estimationId: Int): Single<Boolean> {
-        val data = HashMap<String, Any>()
-        data["estimationId"] = estimationId
-        data["from"] = "Master"
-
-        return requirementInterface.callToClient(data)
-    }
-
-    fun getCustomerRequests(masterUid: String) = requirementInterface.getCustomerRequests(masterUid)
 }

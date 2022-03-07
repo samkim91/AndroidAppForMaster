@@ -9,7 +9,7 @@ import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.entity.requirement.repair.RepairDto
 import kr.co.soogong.master.domain.entity.requirement.Requirement
 import kr.co.soogong.master.domain.usecase.requirement.GetRequirementUseCase
-import kr.co.soogong.master.domain.usecase.requirement.SaveRepairUseCase
+import kr.co.soogong.master.domain.usecase.requirement.repair.SaveRepairUseCase
 import kr.co.soogong.master.presentation.ui.base.BaseViewModel
 import kr.co.soogong.master.presentation.uihelper.requirment.action.EndRepairActivityHelper
 import timber.log.Timber

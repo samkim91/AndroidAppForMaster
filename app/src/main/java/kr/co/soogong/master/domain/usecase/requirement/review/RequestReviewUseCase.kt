@@ -1,4 +1,4 @@
-package kr.co.soogong.master.domain.usecase.requirement
+package kr.co.soogong.master.domain.usecase.requirement.review
 
 import com.google.gson.JsonObject
 import dagger.Reusable

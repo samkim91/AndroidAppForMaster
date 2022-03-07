@@ -9,10 +9,12 @@ import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentEditFreeMeasureBinding
 import kr.co.soogong.master.presentation.atomic.molecules.SubheadlineChipGroup
 import kr.co.soogong.master.presentation.ui.base.BaseFragment
+import kr.co.soogong.master.presentation.ui.base.BaseViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.presentation.ui.base.BaseViewModel.Companion.REQUEST_SUCCESS
 import kr.co.soogong.master.presentation.ui.profile.detail.EditProfileContainerActivity
 import kr.co.soogong.master.presentation.ui.profile.detail.EditProfileContainerViewModel
 import kr.co.soogong.master.utility.EventObserver
+import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -61,6 +63,7 @@ class EditFreeMeasureFragment : BaseFragment<FragmentEditFreeMeasureBinding>(
         viewModel.action.observe(viewLifecycleOwner, EventObserver { action ->
             when (action) {
                 REQUEST_SUCCESS -> editProfileContainerViewModel.setAction(REQUEST_SUCCESS)
+                REQUEST_FAILED -> requireContext().toast(getString(R.string.error_message_of_request_failed))
             }
         })
     }

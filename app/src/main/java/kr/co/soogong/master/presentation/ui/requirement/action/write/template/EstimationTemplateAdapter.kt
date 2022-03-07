@@ -2,7 +2,7 @@ package kr.co.soogong.master.presentation.ui.requirement.action.write.template
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
-import kr.co.soogong.master.data.entity.requirement.estimationTemplate.EstimationTemplateDto
+import kr.co.soogong.master.data.entity.requirement.estimation.EstimationTemplateDto
 
 class EstimationTemplateAdapter(
     private val onDeletingClicked: (EstimationTemplateDto) -> Unit,

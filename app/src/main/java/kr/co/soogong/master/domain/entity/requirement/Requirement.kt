@@ -3,7 +3,7 @@ package kr.co.soogong.master.domain.entity.requirement
 import kr.co.soogong.master.data.entity.requirement.PreviousRequirementDto
 import kr.co.soogong.master.data.entity.requirement.RequirementDto
 import kr.co.soogong.master.data.entity.requirement.estimation.EstimationDto
-import kr.co.soogong.master.data.entity.requirement.qna.RequirementQnaDto
+import kr.co.soogong.master.data.entity.requirement.RequirementQnaDto
 import java.util.*
 
 data class Requirement(

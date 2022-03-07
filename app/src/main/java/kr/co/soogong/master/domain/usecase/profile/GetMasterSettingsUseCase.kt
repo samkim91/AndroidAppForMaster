@@ -11,5 +11,7 @@ class GetMasterSettingsUseCase @Inject constructor(
     private val profileRepository: ProfileRepository,
 ) {
     operator fun invoke(): Single<MasterSettings> =
-        profileRepository.getMasterSettings()
+        profileRepository.getMasterSettings().map {
+            MasterSettings.fromDto(it)
+        }
 }

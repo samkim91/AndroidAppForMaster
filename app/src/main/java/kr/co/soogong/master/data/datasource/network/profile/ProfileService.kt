@@ -3,10 +3,9 @@ package kr.co.soogong.master.data.datasource.network.profile
 import io.reactivex.Single
 import kr.co.soogong.master.data.entity.common.PageableContentDto
 import kr.co.soogong.master.data.entity.common.ResponseDto
-import kr.co.soogong.master.data.entity.profile.MasterSettingsDto
 import kr.co.soogong.master.data.entity.profile.MasterDto
+import kr.co.soogong.master.data.entity.profile.MasterSettingsDto
 import kr.co.soogong.master.data.entity.profile.PortfolioDto
-import kr.co.soogong.master.data.entity.requirement.review.ReviewDto
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
@@ -65,24 +64,9 @@ class ProfileService @Inject constructor(
         return profileInterface.deletePortfolio(portfolioId)
     }
 
-    fun getReviews(
-        uid: String,
-        offset: Int,
-        pageSize: Int,
-        order: Int,
-        orderBy: String,
-    ): Single<ResponseDto<PageableContentDto<ReviewDto>>> =
-        profileInterface.getReviews(uid, offset, pageSize, order, orderBy)
-
-    fun updateRequestMeasureYn(
-        uid: String,
-    ): Single<MasterDto> {
-        return profileInterface.updateRequestMeasureYn(uid)
-    }
-
-    fun updateFreeMeasureYn(
+    suspend fun updateFreeMeasureYn(
         masterDto: MasterDto,
-    ): Single<MasterDto> {
+    ) {
         return profileInterface.updateFreeMeasureYn(masterDto)
     }
 
@@ -90,6 +74,12 @@ class ProfileService @Inject constructor(
         masterDto: MasterDto,
     ): Single<MasterDto> {
         return profileInterface.updateDirectRepairYn(masterDto)
+    }
+
+    fun updateRequestMeasureYn(
+        uid: String,
+    ): Single<MasterDto> {
+        return profileInterface.updateRequestMeasureYn(uid)
     }
 
 }

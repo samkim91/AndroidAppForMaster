@@ -6,10 +6,10 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import kr.co.soogong.master.data.entity.requirement.estimationTemplate.EstimationTemplateDto
-import kr.co.soogong.master.domain.usecase.requirement.DeleteEstimationTemplateUseCase
-import kr.co.soogong.master.domain.usecase.requirement.GetEstimationTemplatesUseCase
-import kr.co.soogong.master.domain.usecase.requirement.SaveEstimationTemplateUseCase
+import kr.co.soogong.master.data.entity.requirement.estimation.EstimationTemplateDto
+import kr.co.soogong.master.domain.usecase.requirement.estimation.DeleteEstimationTemplateUseCase
+import kr.co.soogong.master.domain.usecase.requirement.estimation.GetEstimationTemplatesUseCase
+import kr.co.soogong.master.domain.usecase.requirement.estimation.SaveEstimationTemplateUseCase
 import kr.co.soogong.master.presentation.ui.base.BaseViewModel
 import timber.log.Timber
 import javax.inject.Inject

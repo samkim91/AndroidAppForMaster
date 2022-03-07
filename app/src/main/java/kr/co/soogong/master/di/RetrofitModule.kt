@@ -6,11 +6,12 @@ import dagger.Reusable
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import kr.co.soogong.master.data.datasource.network.auth.AuthService
-import kr.co.soogong.master.data.datasource.network.home.HomeService
 import kr.co.soogong.master.data.datasource.network.common.major.MajorService
 import kr.co.soogong.master.data.datasource.network.preferences.PreferencesService
 import kr.co.soogong.master.data.datasource.network.profile.ProfileService
 import kr.co.soogong.master.data.datasource.network.requirement.RequirementService
+import kr.co.soogong.master.data.datasource.network.requirement.estimation.EstimationService
+import kr.co.soogong.master.data.datasource.network.requirement.repair.RepairService
 import kr.co.soogong.master.data.datasource.network.requirement.review.ReviewService
 import retrofit2.Retrofit
 
@@ -32,14 +33,20 @@ class RetrofitModule {
 
     @Provides
     @Reusable
-    fun provideHomeService(retrofit: Retrofit): HomeService {
-        return HomeService(retrofit)
+    fun provideRequirementService(retrofit: Retrofit): RequirementService {
+        return RequirementService(retrofit)
     }
 
     @Provides
     @Reusable
-    fun provideRequirementService(retrofit: Retrofit): RequirementService {
-        return RequirementService(retrofit)
+    fun provideEstimationService(retrofit: Retrofit): EstimationService {
+        return EstimationService(retrofit)
+    }
+
+    @Provides
+    @Reusable
+    fun provideRepairService(retrofit: Retrofit): RepairService {
+        return RepairService(retrofit)
     }
 
     @Provides
@@ -50,13 +57,13 @@ class RetrofitModule {
 
     @Provides
     @Reusable
-    fun provideMyPageService(retrofit: Retrofit): PreferencesService {
-        return PreferencesService(retrofit)
+    fun provideProfileService(retrofit: Retrofit): ProfileService {
+        return ProfileService(retrofit)
     }
 
     @Provides
     @Reusable
-    fun provideProfileService(retrofit: Retrofit): ProfileService {
-        return ProfileService(retrofit)
+    fun providePreferencesService(retrofit: Retrofit): PreferencesService {
+        return PreferencesService(retrofit)
     }
 }

@@ -6,7 +6,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.entity.profile.PortfolioDto
-import kr.co.soogong.master.data.repository.ProfileRepository
+import kr.co.soogong.master.domain.usecase.profile.DeletePortfolioUseCase
+import kr.co.soogong.master.domain.usecase.profile.GetPortfoliosUseCase
 import kr.co.soogong.master.presentation.ui.common.EndlessScrollableViewModel
 import kr.co.soogong.master.presentation.uihelper.profile.PortfolioListActivityHelper
 import kr.co.soogong.master.utility.ListLiveData
@@ -15,8 +16,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class PortfolioListViewModel @Inject constructor(
-    private val profileRepository: ProfileRepository,
     val savedStateHandle: SavedStateHandle,
+    private val deletePortfolioUseCase: DeletePortfolioUseCase,
+    private val getPortfoliosUseCase: GetPortfoliosUseCase,
 ) : EndlessScrollableViewModel() {
     val type = PortfolioListActivityHelper.getTypeFromSavedState(savedStateHandle)
 
@@ -32,7 +34,7 @@ class PortfolioListViewModel @Inject constructor(
     private fun requestPortfolios() {
         Timber.tag(TAG).d("requestPortfolioList: $type")
 
-        profileRepository.getPortfolios(type = type.code, offset = offset, pageSize = pageSize)
+        getPortfoliosUseCase(type = type.code, offset = offset, pageSize = pageSize)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
@@ -52,7 +54,7 @@ class PortfolioListViewModel @Inject constructor(
     fun deletePortfolio(itemId: Int) {
         Timber.tag(TAG).d("deletePortfolio: $itemId")
 
-        profileRepository.deletePortfolio(itemId)
+        deletePortfolioUseCase(itemId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
