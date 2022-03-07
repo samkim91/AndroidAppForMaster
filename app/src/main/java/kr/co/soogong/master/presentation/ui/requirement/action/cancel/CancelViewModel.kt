@@ -12,10 +12,10 @@ import kr.co.soogong.master.data.entity.requirement.estimation.EstimationDto
 import kr.co.soogong.master.data.entity.requirement.repair.RepairDto
 import kr.co.soogong.master.domain.entity.requirement.Requirement
 import kr.co.soogong.master.domain.entity.requirement.estimation.EstimationResponseCode
-import kr.co.soogong.master.domain.usecase.requirement.GetCanceledReasonsUseCase
+import kr.co.soogong.master.domain.usecase.requirement.repair.GetCanceledReasonsUseCase
 import kr.co.soogong.master.domain.usecase.requirement.GetRequirementUseCase
 import kr.co.soogong.master.domain.usecase.requirement.estimation.RespondToMeasureUseCase
-import kr.co.soogong.master.domain.usecase.requirement.SaveRepairUseCase
+import kr.co.soogong.master.domain.usecase.requirement.repair.SaveRepairUseCase
 import kr.co.soogong.master.presentation.ui.base.BaseViewModel
 import kr.co.soogong.master.presentation.uihelper.requirment.action.CancelActivityHelper
 import timber.log.Timber
