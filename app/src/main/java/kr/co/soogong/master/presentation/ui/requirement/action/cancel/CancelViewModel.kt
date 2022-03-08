@@ -12,9 +12,9 @@ import kr.co.soogong.master.data.entity.requirement.estimation.EstimationDto
 import kr.co.soogong.master.data.entity.requirement.repair.RepairDto
 import kr.co.soogong.master.domain.entity.requirement.Requirement
 import kr.co.soogong.master.domain.entity.requirement.estimation.EstimationResponseCode
-import kr.co.soogong.master.domain.usecase.requirement.repair.GetCanceledReasonsUseCase
 import kr.co.soogong.master.domain.usecase.requirement.GetRequirementUseCase
 import kr.co.soogong.master.domain.usecase.requirement.estimation.RespondToMeasureUseCase
+import kr.co.soogong.master.domain.usecase.requirement.repair.GetCanceledReasonsUseCase
 import kr.co.soogong.master.domain.usecase.requirement.repair.SaveRepairUseCase
 import kr.co.soogong.master.presentation.ui.base.BaseViewModel
 import kr.co.soogong.master.presentation.uihelper.requirment.action.CancelActivityHelper
@@ -114,11 +114,11 @@ class CancelViewModel @Inject constructor(
                 token = _requirement.value?.estimationDto?.token,
                 requirementId = _requirement.value?.estimationDto?.requirementId,
                 masterId = _requirement.value?.estimationDto?.masterId,
-                typeCode = _requirement.value?.typeCode,
-                price = null,
+                masterResponseCode = EstimationResponseCode.REFUSED,
                 refuseCode = canceledCode.value,
                 refuseDescription = canceledDescription.value,
-                masterResponseCode = EstimationResponseCode.REFUSED,
+                typeCode = null,
+                price = null,
                 createdAt = null,
                 updatedAt = null,
             )
