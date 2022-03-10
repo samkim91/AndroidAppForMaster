@@ -183,6 +183,15 @@ data class DialogData(
                 "아니요",
             )
 
+        fun getAskingDeleteRepairPhoto() =
+            DialogData(
+                "[주의]",
+                "시공 사진을 삭제하시겠어요?",
+                "",
+                "네",
+                "아니요",
+            )
+
         fun getAskingDeletePriceByProject() =
             DialogData(
                 "[주의]",

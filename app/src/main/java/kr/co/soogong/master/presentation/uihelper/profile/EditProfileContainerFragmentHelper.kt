@@ -29,10 +29,12 @@ object EditProfileContainerFragmentHelper {
 
     // 선택 정보
     const val FREE_MEASURE = "무료 방문 실측 여부"
-    const val EDIT_PORTFOLIO = "포트폴리오 수정"
     const val ADD_PORTFOLIO = "포트폴리오 추가"
-    const val EDIT_PRICE_BY_PROJECTS = "시공 종류별 가격 수정"
+    const val EDIT_PORTFOLIO = "포트폴리오 수정"
+    const val ADD_REPAIR_PHOTO = "시공 사진 추가"
+    const val EDIT_REPAIR_PHOTO = "시공 사진 수정"
     const val ADD_PRICE_BY_PROJECTS = "시공 종류별 가격 추가"
+    const val EDIT_PRICE_BY_PROJECTS = "시공 종류별 가격 수정"
     const val EDIT_MASTER_CONFIG = "기타 변동 요인"
     const val EDIT_EMAIL = "이메일"
 
@@ -56,6 +58,8 @@ object EditProfileContainerFragmentHelper {
         when (pageName) {
             ADD_PORTFOLIO -> PortfolioFragment.newInstance()
             EDIT_PORTFOLIO -> PortfolioFragment.newInstance(portfolioDto)
+            ADD_REPAIR_PHOTO -> PortfolioFragment.newInstance()
+            EDIT_REPAIR_PHOTO -> PortfolioFragment.newInstance(portfolioDto)
             ADD_PRICE_BY_PROJECTS -> PriceByProjectFragment.newInstance()
             EDIT_PRICE_BY_PROJECTS -> PriceByProjectFragment.newInstance(portfolioDto)
             else -> Fragment()

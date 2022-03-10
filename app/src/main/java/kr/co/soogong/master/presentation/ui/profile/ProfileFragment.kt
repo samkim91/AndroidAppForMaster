@@ -13,6 +13,7 @@ import kr.co.soogong.master.databinding.FragmentProfileBinding
 import kr.co.soogong.master.domain.entity.common.ButtonTheme
 import kr.co.soogong.master.domain.entity.common.CodeTable
 import kr.co.soogong.master.domain.entity.common.ColorTheme
+import kr.co.soogong.master.domain.entity.profile.portfolio.PortfolioType
 import kr.co.soogong.master.presentation.ui.base.BaseFragment
 import kr.co.soogong.master.presentation.ui.base.BaseViewModel.Companion.DISMISS_LOADING
 import kr.co.soogong.master.presentation.ui.base.BaseViewModel.Companion.SHOW_LOADING
@@ -167,12 +168,17 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
 
             hbcPortfolio.onButtonClick = View.OnClickListener {
                 startActivity(PortfolioListActivityHelper.getIntent(requireContext(),
-                    CodeTable.PORTFOLIO))
+                    PortfolioType.PORTFOLIO))
+            }
+
+            hbcRepairPhoto.onButtonClick = View.OnClickListener {
+                startActivity(PortfolioListActivityHelper.getIntent(requireContext(),
+                    PortfolioType.REPAIR_PHOTO))
             }
 
             hbcPriceByProject.onButtonClick = View.OnClickListener {
                 startActivity(PortfolioListActivityHelper.getIntent(requireContext(),
-                    CodeTable.PRICE_BY_PROJECT))
+                    PortfolioType.PRICE_BY_PROJECT))
             }
 
             hbcEmailAddress.onButtonClick =
