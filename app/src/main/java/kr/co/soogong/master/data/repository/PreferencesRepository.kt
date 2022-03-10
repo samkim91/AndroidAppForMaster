@@ -3,9 +3,9 @@ package kr.co.soogong.master.data.repository
 import dagger.Reusable
 import io.reactivex.Single
 import kr.co.soogong.master.data.datasource.local.preferences.NoticeDao
-import kr.co.soogong.master.data.entity.preferences.NoticeDto
 import kr.co.soogong.master.data.datasource.network.preferences.PreferencesService
 import kr.co.soogong.master.data.entity.auth.VersionDto
+import kr.co.soogong.master.data.entity.preferences.NoticeDto
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -31,6 +31,14 @@ class PreferencesRepository @Inject constructor(
 
     fun updateNoticeIsNew(id: Int) {
         noticeDao.updateNoticeIsNew(id)
+    }
+
+    suspend fun setPushAtNight(masterUid: String) {
+        preferencesService.setPushAtNight(masterUid)
+    }
+
+    suspend fun setMarketingPush(masterUid: String) {
+        preferencesService.setMarketingPush(masterUid)
     }
 
     fun getVersion(): Single<VersionDto> =

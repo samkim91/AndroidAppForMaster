@@ -48,7 +48,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_divider_marketing_push"
             app:subheadline="@{@string/label_for_push_at_night}"
-            app:switchClick="@{vm::changeMarketingPushAtNight}" />
+            app:switchClick="@{vm::changePushAtNight}" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_divider_push_at_night"
