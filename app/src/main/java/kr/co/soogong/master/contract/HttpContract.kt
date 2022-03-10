@@ -72,7 +72,7 @@ object HttpContract {
     //region Preferences
     const val GET_NOTICE_LIST = "notice/find-all-by-section"
     const val GET_NOTICE = "notice/find-by-id"
-    const val GET_ALARMS = "api/v1/branches/get_alarm"
-    const val SET_ALARMS = "api/v1/branches/set_alarm"
+    const val SET_PUSH_AT_NIGHT = "master/{uid}/push-at-night"
+    const val SET_MARKETING_PUSH = "master/{uid}/marketing-push"
     //endregion
 }

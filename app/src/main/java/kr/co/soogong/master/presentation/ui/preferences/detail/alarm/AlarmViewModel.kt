@@ -3,14 +3,15 @@ package kr.co.soogong.master.presentation.ui.preferences.detail.alarm
 import android.widget.CompoundButton
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import kr.co.soogong.master.data.entity.profile.MasterDto
-import kr.co.soogong.master.data.repository.ProfileRepository
+import kotlinx.coroutines.launch
 import kr.co.soogong.master.domain.entity.profile.Profile
+import kr.co.soogong.master.domain.usecase.preferences.SetMarketingPushUseCase
+import kr.co.soogong.master.domain.usecase.preferences.SetPushAtNightUseCase
 import kr.co.soogong.master.domain.usecase.profile.GetProfileUseCase
-import kr.co.soogong.master.domain.usecase.profile.SaveMasterUseCase
 import kr.co.soogong.master.presentation.ui.base.BaseViewModel
 import timber.log.Timber
 import javax.inject.Inject
@@ -18,7 +19,8 @@ import javax.inject.Inject
 @HiltViewModel
 class AlarmViewModel @Inject constructor(
     private val getProfileUseCase: GetProfileUseCase,
-    private val saveMasterUseCase: SaveMasterUseCase,
+    private val setPushAtNightUseCase: SetPushAtNightUseCase,
+    private val setMarketingPushUseCase: SetMarketingPushUseCase,
 ) : BaseViewModel() {
     private val _profile = MutableLiveData<Profile>()
 
@@ -50,39 +52,34 @@ class AlarmViewModel @Inject constructor(
     }
 
     fun changeMarketingPush(v: CompoundButton, isChecked: Boolean) {
-        Timber.tag(TAG).d("changeMarketingPush: $isChecked")
-        _marketingPush.postValue(isChecked)
-        saveAlarmStatus(MARKETING, isChecked)
+        viewModelScope.launch {
+            try {
+                if (_marketingPush.value != isChecked) {
+                    setMarketingPushUseCase()
+                    _marketingPush.postValue(isChecked)
+                    Timber.tag(TAG).d("changeMarketingPush successfully: ")
+                }
+            } catch (e: Exception) {
+                Timber.tag(TAG).d("changeMarketingPush failed: $e")
+            }
+        }
     }
 
-    fun changeMarketingPushAtNight(v: CompoundButton, isChecked: Boolean) {
-        Timber.tag(TAG).d("changeMarketingPushAtNight: $isChecked")
-        _pushAtNight.postValue(isChecked)
-        saveAlarmStatus(MARKETING_AT_NIGHT, isChecked)
-    }
-
-    private fun saveAlarmStatus(type: String, isChecked: Boolean) {
-        saveMasterUseCase(
-            MasterDto(
-                id = _profile.value?.id,
-                uid = _profile.value?.uid,
-                marketingPush = if (type == MARKETING) isChecked else null,
-                pushAtNight = if (type == MARKETING_AT_NIGHT) isChecked else null,
-            )
-        )
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                Timber.tag(TAG).d("saveAlarmStatus successfully: ")
-            }, {
-                Timber.tag(TAG).d("saveAlarmStatus failed: $it")
-            })
-            .addToDisposable()
+    fun changePushAtNight(v: CompoundButton, isChecked: Boolean) {
+        viewModelScope.launch {
+            try {
+                if (_pushAtNight.value != isChecked) {
+                    setPushAtNightUseCase()
+                    _pushAtNight.postValue(isChecked)
+                    Timber.tag(TAG).d("changePushAtNight successfully: ")
+                }
+            } catch (e: Exception) {
+                Timber.tag(TAG).d("changePushAtNight failed: $e")
+            }
+        }
     }
 
     companion object {
         private const val TAG = "AlarmViewModel"
-        private const val MARKETING = "MARKETING"
-        private const val MARKETING_AT_NIGHT = "MARKETING_AT_NIGHT"
     }
 }
