@@ -51,7 +51,7 @@ open class RequirementsViewModel @Inject constructor(
         Timber.tag(TAG).d("respondToMeasure: ")
         requirementViewModelAggregate.respondToMeasureUseCase(
             estimationDto = EstimationDto(
-                id = requirementCard.id,
+                id = requirementCard.estimationId,
                 token = null,
                 requirementId = requirementCard.id,
                 masterId = null,

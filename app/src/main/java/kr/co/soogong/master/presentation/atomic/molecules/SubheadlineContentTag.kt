@@ -10,11 +10,10 @@ import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import kr.co.soogong.master.R
+import kr.co.soogong.master.databinding.ViewSubheadlineContentTagBinding
 import kr.co.soogong.master.domain.entity.profile.Review
 import kr.co.soogong.master.domain.entity.requirement.Requirement
 import kr.co.soogong.master.domain.entity.requirement.estimation.EstimationPriceTypeCode
-import kr.co.soogong.master.domain.entity.requirement.repair.CanceledReason
-import kr.co.soogong.master.databinding.ViewSubheadlineContentTagBinding
 import kr.co.soogong.master.presentation.ui.profile.review.ReviewViewHolder
 import kr.co.soogong.master.utility.extension.dp
 import kr.co.soogong.master.utility.extension.formatMoney
