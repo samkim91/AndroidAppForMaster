@@ -86,17 +86,17 @@ class WriteEstimationActivity : BaseActivity<ActivityWriteEstimationBinding>(
     private fun registerEventObserve() {
         Timber.tag(TAG).d("registerEventObserve: ")
 
-        viewModel.laborCost.observe(this@WriteEstimationActivity, {
+        viewModel.laborCost.observe(this@WriteEstimationActivity) {
             setTotalAmount()
-        })
+        }
 
-        viewModel.materialCost.observe(this@WriteEstimationActivity, {
+        viewModel.materialCost.observe(this@WriteEstimationActivity) {
             setTotalAmount()
-        })
+        }
 
-        viewModel.travelCost.observe(this@WriteEstimationActivity, {
+        viewModel.travelCost.observe(this@WriteEstimationActivity) {
             setTotalAmount()
-        })
+        }
 
         viewModel.action.observe(this@WriteEstimationActivity, EventObserver { event ->
             when (event) {
@@ -153,7 +153,7 @@ class WriteEstimationActivity : BaseActivity<ActivityWriteEstimationBinding>(
     }
 
     private fun initChipGroup() {
-        SubheadlineChipGroup.initChips(
+        SubheadlineChipGroup.initChoiceRectangularChips(
             this,
             layoutInflater,
             binding.scgEstimationType,

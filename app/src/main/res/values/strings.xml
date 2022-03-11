@@ -38,11 +38,14 @@
     <string name="possible">가능</string>
     <string name="impossible">불가능</string>
     <string name="copy">복사</string>
+    <string name="adding_images">사진 추가</string>
+    <string name="project_name">업종명</string>
 
 
     <string name="required_field_alert">필수 정보입니다.</string>
     <string name="fill_text_over_10">10자 이상으로 입력해주세요.</string>
     <string name="fill_text_under_10">10자 이하로 입력해주세요.</string>
+    <string name="choose_max_number">%d개 이하로 선택 가능합니다.</string>
     <string name="too_large_number">숫자가 너무 큽니다.</string>
     <string name="minimum_cost">1만원 이상으로 보내주세요.</string>
     <string name="required_value_between_2_and_20">2자 이상 20자 이내로 입력해주세요.</string>
@@ -331,6 +334,10 @@
     <string name="portfolio_description">시공 내용</string>
     <string name="portfolio_description_hint">해당 시공에 대해 간단한 설명을 해주세요.</string>
 
+    <string name="repair_photo_title">사진 제목</string>
+    <string name="repair_photo_description">사진 내용</string>
+    <string name="repair_photo_description_hint">해당 사진에 대해 간단한 설명을 해주세요.</string>
+
     <string name="price_by_project_title">시공 종류</string>
     <string name="type">종류</string>
     <string name="price_by_project_price">시공 가격</string>
@@ -344,7 +351,6 @@
 
     <string name="writing_done">작성 완료</string>
     <string name="image_before_job">시공 전</string>
-
 
     <string name="request_review_template">[수공 리뷰 작성 요청]\n
             \n

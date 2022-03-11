@@ -19,7 +19,8 @@ class ProjectViewModel @Inject constructor(
     private val getProjectsUseCase: GetProjectsUseCase,
     val savedStateHandle: SavedStateHandle,
 ) : BaseViewModel() {
-    val categoryId: MutableLiveData<Int> =
+    val maxNumber: Int = ProjectFragment.getMaxNumberFromSavedState(savedStateHandle)
+    private val categoryId: MutableLiveData<Int> =
         ProjectFragment.getCategoryIdFromSavedState(savedStateHandle)
 
     // 뿌려주는 projects

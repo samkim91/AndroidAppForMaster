@@ -132,7 +132,7 @@ class EditBusinessUnitInformationFragment :
 
     private fun initChips() {
         SubheadlineChipGroup
-            .initChips(requireContext(),
+            .initChoiceRectangularChips(requireContext(),
                 layoutInflater,
                 binding.scgBusinessType,
                 viewModel.businessTypes.map { it.inKorean })
