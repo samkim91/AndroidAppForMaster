@@ -118,6 +118,9 @@ data class MasterDto(
     @SerializedName("portfolioCount")
     val portfolioCount: Int? = null,
 
+    @SerializedName("photoCount")
+    val photoCount: Int? = null,
+
     @SerializedName("priceCount")
     val priceByProjectCount: Int? = null,
 

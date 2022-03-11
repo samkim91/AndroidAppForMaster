@@ -8,6 +8,8 @@
 
         <import type="kr.co.soogong.master.domain.entity.common.CodeTable" />
 
+        <import type="kr.co.soogong.master.domain.entity.profile.portfolio.PortfolioType" />
+
         <variable
             name="vm"
             type="kr.co.soogong.master.presentation.ui.profile.detail.portfoliolist.PortfolioListViewModel" />
@@ -33,7 +35,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:title="@{vm.type == CodeTable.PORTFOLIO ? CodeTable.PORTFOLIO.inKorean : CodeTable.PRICE_BY_PROJECT.inKorean}" />
+            app:title="@{vm.type.inKorean}" />
 
         <kr.co.soogong.master.presentation.atomic.molecules.SubheadlineButtonBig
             android:id="@+id/sbb_adding_item"
@@ -42,14 +44,14 @@
             android:layout_marginStart="@dimen/gap_16"
             android:layout_marginTop="@dimen/gap_24"
             android:layout_marginEnd="@dimen/gap_16"
-            app:buttonText="@{vm.type == CodeTable.PORTFOLIO ? @string/add_portfolio : @string/add_price_by_project}"
+            app:buttonText="@{@string/add_portfolio(vm.type.inKorean)}"
             app:buttonTheme="@{buttonThemeAddingItem}"
-            app:hint="@{vm.type == CodeTable.PORTFOLIO ? @string/write_portfolio_hint : @string/write_price_by_project_hint}"
+            app:hint="@{vm.type.hint}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/ab_header"
             app:onButtonClick="@{addingItemClickListener}"
-            app:subheadline="@{vm.type == CodeTable.PORTFOLIO ? @string/write_portfolio : @string/write_price_by_project}" />
+            app:subheadline="@{vm.type.subheadline}" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_added_items"
@@ -59,7 +61,7 @@
             android:layout_marginStart="@dimen/gap_16"
             android:layout_marginTop="@dimen/gap_20"
             android:layout_marginEnd="@dimen/gap_16"
-            android:text="@{vm.type == CodeTable.PORTFOLIO ? @string/added_portfolio : @string/added_price_by_project}"
+            android:text="@{@string/added_portfolio(vm.type.inKorean)}"
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

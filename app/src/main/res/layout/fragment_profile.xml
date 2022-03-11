@@ -345,6 +345,18 @@
                     app:layout_constraintTop_toBottomOf="@id/hbc_free_measure"
                     app:title="@{@string/portfolio}" />
 
+                <!-- 시공 사진 -->
+                <kr.co.soogong.master.presentation.atomic.molecules.HeadlineButtonContent
+                    android:id="@+id/hbc_repair_photo"
+                    android:layout_width="@dimen/gap_0"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/gap_33"
+                    app:content="@{@string/repair_photo_filled(vm.profile.basicInformation.repairPhotoCount)}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/hbc_portfolio"
+                    app:title="@{@string/repair_photo}" />
+
                 <!-- 시공 종류별 가격 -->
                 <kr.co.soogong.master.presentation.atomic.molecules.HeadlineButtonContent
                     android:id="@+id/hbc_price_by_project"
@@ -354,7 +366,7 @@
                     app:content="@{@string/price_by_project_filled(vm.profile.basicInformation.priceByProjectCount)}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/hbc_portfolio"
+                    app:layout_constraintTop_toBottomOf="@id/hbc_repair_photo"
                     app:title="@{@string/price_by_project}" />
 
                 <!-- 기타 변동 요인 -->

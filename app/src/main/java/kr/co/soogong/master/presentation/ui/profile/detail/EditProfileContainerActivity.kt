@@ -14,8 +14,10 @@ import kr.co.soogong.master.presentation.uihelper.profile.EditProfileContainerAc
 import kr.co.soogong.master.presentation.uihelper.profile.EditProfileContainerFragmentHelper
 import kr.co.soogong.master.presentation.uihelper.profile.EditProfileContainerFragmentHelper.ADD_PORTFOLIO
 import kr.co.soogong.master.presentation.uihelper.profile.EditProfileContainerFragmentHelper.ADD_PRICE_BY_PROJECTS
+import kr.co.soogong.master.presentation.uihelper.profile.EditProfileContainerFragmentHelper.ADD_REPAIR_PHOTO
 import kr.co.soogong.master.presentation.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_PORTFOLIO
 import kr.co.soogong.master.presentation.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_PRICE_BY_PROJECTS
+import kr.co.soogong.master.presentation.uihelper.profile.EditProfileContainerFragmentHelper.EDIT_REPAIR_PHOTO
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
@@ -56,7 +58,7 @@ class EditProfileContainerActivity : BaseActivity<ActivityEditProfileContainerBi
         supportFragmentManager.beginTransaction()
             .replace(
                 R.id.fcv_container,
-                if (pageName == ADD_PORTFOLIO || pageName == EDIT_PORTFOLIO || pageName == ADD_PRICE_BY_PROJECTS || pageName == EDIT_PRICE_BY_PROJECTS)
+                if (pageName == ADD_PORTFOLIO || pageName == EDIT_PORTFOLIO || pageName == ADD_REPAIR_PHOTO || pageName == EDIT_REPAIR_PHOTO || pageName == ADD_PRICE_BY_PROJECTS || pageName == EDIT_PRICE_BY_PROJECTS)
                     EditProfileContainerFragmentHelper.getFragmentWithPortfolio(pageName,
                         portfolioDto)
                 else EditProfileContainerFragmentHelper.getFragment(pageName)

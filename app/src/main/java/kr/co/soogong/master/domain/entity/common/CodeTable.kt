@@ -20,6 +20,7 @@ enum class CodeTable(
 
     // 포트폴리오 및 시공종류별 가격
     PORTFOLIO("Portfolio", "포트폴리오", ""),
+    REPAIR_PHOTO("Photo", "시공 사진", ""),
     PRICE_BY_PROJECT("Price", "시공 종류별 가격", ""),
 
     // 현장 가격 변동 요인
@@ -75,9 +76,6 @@ enum class CodeTable(
         fun getCodeTableByKorean(keyword: String): CodeTable? = values().find {
             it.inKorean == keyword
         }
-
-        fun getPortfolio(): List<CodeTable> =
-            listOf(PORTFOLIO, PRICE_BY_PROJECT)
     }
 }
 

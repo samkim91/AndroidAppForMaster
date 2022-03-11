@@ -261,6 +261,8 @@
     <string name="free_measure">무료 방문 실측 여부</string>
     <string name="portfolio">포트폴리오</string>
     <string name="portfolio_filled">%d개의 포트폴리오가 있습니다.</string>
+    <string name="repair_photo">시공 사진</string>
+    <string name="repair_photo_filled">%d개의 시공 사진이 있습니다.</string>
     <string name="price_by_project">시공 종류별 가격</string>
     <string name="price_by_project_filled">%d개의 시공 종류별 가격이 있습니다.</string>
     <string name="master_configs">기타 변동 요인</string>
@@ -316,8 +318,8 @@
 
     <string name="write_portfolio">마스터님의 포트폴리오를 작성해주세요.</string>
     <string name="write_portfolio_hint">포트폴리오 사진과 실제 시공 정보가 많을수록, 더많이 노출되고, 고객이 선택하는데 더 좋은 기준이 됩니다.</string>
-    <string name="add_portfolio">포트폴리오 추가하기</string>
-    <string name="added_portfolio">등록된 포트폴리오</string>
+    <string name="add_portfolio">%s 추가하기</string>
+    <string name="added_portfolio">등록된 %s</string>
 
     <string name="write_price_by_project">시공 종류별 가격을 입력해주세요.</string>
     <string name="write_price_by_project_hint">다양한 시공을 입력해 주실수록 선택률이 상승합니다.</string>

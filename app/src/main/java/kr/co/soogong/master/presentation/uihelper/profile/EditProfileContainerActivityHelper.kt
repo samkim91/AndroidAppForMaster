@@ -12,9 +12,9 @@ object EditProfileContainerActivityHelper {
     private const val EXTRA_STRING_KEY = "EXTRA_STRING_KEY"
     private const val EXTRA_PORTFOLIO = "EXTRA_PORTFOLIO"
 
-    // [Note] Edit Profile Container Activity 는 1depth 로 이동하는 경우와 2depth 로 이동하는 경우가 있다.
-    // 2depth 는 포트폴리오, 시공 종류별 가격 수정하는 경우이다. 앞의 두 경우는 "해당 포트폴리오, 시공 종류별 가격" item 의 id를 가지고 activity 로 이동해야하므로,
-    // itemId는 nullable parameter 이다.
+    // [Note] Edit Profile Container Activity 는 1depth 로 이동하는 경우와 2depth 로 이동하는 경우가 있음
+    // 2depth 는 포트폴리오, 시공 사진, 시공 종류별 가격 수정하는 경우
+    // 1depth 는 위를 제외한 나머지 수정하는 경우
     fun getIntent(context: Context, pageName: String): Intent {
         return Intent(context, EditProfileContainerActivity::class.java).apply {
             putExtra(EXTRA_BUNDLE_KEY, Bundle().apply {
@@ -35,8 +35,8 @@ object EditProfileContainerActivityHelper {
             ))
         }
 
-    fun getPageName(intent: Intent): String
-        = intent.getBundleExtra(EXTRA_BUNDLE_KEY)?.getString(EXTRA_STRING_KEY) ?: ""
+    fun getPageName(intent: Intent): String =
+        intent.getBundleExtra(EXTRA_BUNDLE_KEY)?.getString(EXTRA_STRING_KEY) ?: ""
 
     fun getPortfolio(intent: Intent): PortfolioDto? =
         intent.getBundleExtra(EXTRA_BUNDLE_KEY)?.getParcelable(EXTRA_PORTFOLIO)
