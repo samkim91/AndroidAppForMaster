@@ -7,12 +7,12 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
-import com.google.android.material.chip.Chip
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.entity.profile.MasterConfigDto
+import kr.co.soogong.master.databinding.ViewHeadlineButtonChipGroupBinding
 import kr.co.soogong.master.domain.entity.common.CodeTable
 import kr.co.soogong.master.domain.entity.common.major.Project
-import kr.co.soogong.master.databinding.ViewHeadlineButtonChipGroupBinding
+import kr.co.soogong.master.utility.extension.addChipChoiceRounded
 
 class HeadlineButtonChipGroup @JvmOverloads constructor(
     context: Context,
@@ -63,12 +63,7 @@ class HeadlineButtonChipGroup @JvmOverloads constructor(
         binding.cgChips.removeAllViews()
 
         chips?.map { item ->
-            (LayoutInflater.from(context).inflate(R.layout.chip_choice_rounded,
-                binding.cgChips,
-                false) as Chip).let { chip ->
-                chip.text = item
-                binding.cgChips.addView(chip)
-            }
+            binding.cgChips.addChipChoiceRounded(item) {}
         }
     }
 

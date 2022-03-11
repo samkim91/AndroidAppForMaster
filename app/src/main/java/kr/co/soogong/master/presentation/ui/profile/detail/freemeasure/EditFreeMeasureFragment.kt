@@ -49,7 +49,7 @@ class EditFreeMeasureFragment : BaseFragment<FragmentEditFreeMeasureBinding>(
 
     private fun initChips() {
         SubheadlineChipGroup
-            .initChips(
+            .initChoiceRectangularChips(
                 requireContext(),
                 layoutInflater,
                 binding.scgFreeMeasure,

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <data>
+
+        <import type="android.net.Uri" />
+
+        <variable
+            name="vm"
+            type="kr.co.soogong.master.presentation.ui.profile.detail.portfoliolist.repairphoto.RepairPhotoViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <kr.co.soogong.master.presentation.atomic.molecules.SubheadlineTextInput
+            android:id="@+id/sti_title"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="wrap_content"
+            app:content="@={vm.title}"
+            app:hint="@{@string/title}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:max="@{150}"
+            app:subheadline="@{@string/repair_photo_title}" />
+
+        <kr.co.soogong.master.presentation.atomic.molecules.SubheadlineTextareaCounter
+            android:id="@+id/stc_description"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_24"
+            app:content="@={vm.description}"
+            app:hint="@{@string/repair_photo_description_hint}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sti_title"
+            app:maxCount="@{500}"
+            app:subheadline="@{@string/repair_photo_description}" />
+
+        <kr.co.soogong.master.presentation.atomic.molecules.SubheadlineChipGroup
+            android:id="@+id/scg_project"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_16"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/stc_description"
+            app:subheadline="@{@string/selecting_project}" />
+
+        <kr.co.soogong.master.presentation.atomic.molecules.SubheadlineAddingImagesDeletable
+            android:id="@+id/said_before_repairing"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_30"
+            app:images="@{vm.repairPhotos}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/scg_project"
+            app:onButtonClick="@{() -> vm.startRepairPhotosPicker()}"
+            app:subheadline="@{@string/adding_images}" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

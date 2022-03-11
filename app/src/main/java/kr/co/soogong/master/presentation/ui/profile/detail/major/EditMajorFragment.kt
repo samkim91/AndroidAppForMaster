@@ -6,7 +6,6 @@ import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import com.google.android.material.chip.Chip
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.FragmentEditMajorBinding
@@ -20,6 +19,7 @@ import kr.co.soogong.master.presentation.ui.profile.detail.EditProfileContainerA
 import kr.co.soogong.master.presentation.ui.profile.detail.EditProfileContainerViewModel
 import kr.co.soogong.master.presentation.uihelper.common.MajorActivityHelper
 import kr.co.soogong.master.utility.EventObserver
+import kr.co.soogong.master.utility.extension.addChipEntryRounded
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -95,16 +95,9 @@ class EditMajorFragment : BaseFragment<FragmentEditMajorBinding>(
             binding.cgContainer.removeAllViews()    // update 가 일어날 때마다, 계속 chip 이 추가되기에 초기에 전체삭제
 
             projects.map { project ->
-                binding.cgContainer.addView(
-                    (layoutInflater.inflate(R.layout.chip_entry_layout,
-                        binding.cgContainer,
-                        false) as Chip).also { chip ->
-                        chip.text = project.name
-                        chip.setOnCloseIconClickListener {
-                            viewModel.projects.remove(project)
-                        }
-                    }
-                )
+                binding.cgContainer.addChipEntryRounded(project.name){
+                    viewModel.projects.remove(project)
+                }
             }
         }
 

@@ -49,28 +49,28 @@ class EditMasterConfigFragment : BaseFragment<FragmentEditMasterConfigBinding>(
     }
 
     private fun initChipsGroup() {
-        SubheadlineChipGroup.initChips(
+        SubheadlineChipGroup.initChoiceRectangularChips(
             requireContext(),
             layoutInflater,
             binding.scgTravelCost,
             viewModel.travelCosts.map { it.inKorean }
         )
 
-        SubheadlineChipGroup.initChips(
+        SubheadlineChipGroup.initChoiceRectangularChips(
             requireContext(),
             layoutInflater,
             binding.scgCraneUsage,
             viewModel.craneUsages.map { it.inKorean }
         )
 
-        SubheadlineChipGroup.initChips(
+        SubheadlineChipGroup.initChoiceRectangularChips(
             requireContext(),
             layoutInflater,
             binding.scgPackageCost,
             viewModel.packageCosts.map { it.inKorean }
         )
 
-        SubheadlineChipGroup.initChips(
+        SubheadlineChipGroup.initChoiceRectangularChips(
             requireContext(),
             layoutInflater,
             binding.scgOtherOptions,

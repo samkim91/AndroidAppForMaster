@@ -40,7 +40,7 @@ class SubheadlineChipGroup @JvmOverloads constructor(
 
     companion object {
 
-        fun initChips(
+        fun initChoiceRectangularChips(
             context: Context,
             layoutInflater: LayoutInflater,
             subheadlineChipGroup: SubheadlineChipGroup,

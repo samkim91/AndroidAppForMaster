@@ -8,6 +8,7 @@ import kr.co.soogong.master.databinding.ActivityMajorBinding
 import kr.co.soogong.master.presentation.ui.base.BaseActivity
 import kr.co.soogong.master.presentation.ui.common.category.CategoryFragment
 import kr.co.soogong.master.presentation.ui.common.project.ProjectFragment
+import kr.co.soogong.master.presentation.uihelper.common.MajorActivityHelper
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -48,7 +49,7 @@ class MajorActivity : BaseActivity<ActivityMajorBinding>(
                 R.anim.slide_in_from_right, R.anim.slide_out_to_left,
                 R.anim.slide_in_from_left, R.anim.slide_out_to_right
             )
-            .replace(binding.fcvContainer.id, ProjectFragment.newInstance(category.id))
+            .replace(binding.fcvContainer.id, ProjectFragment.newInstance(category.id, MajorActivityHelper.getMaxNumberFromIntent(intent)))
             .addToBackStack(null)
             .commit()
     }

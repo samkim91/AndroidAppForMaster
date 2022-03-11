@@ -12,6 +12,7 @@ import kr.co.soogong.master.presentation.ui.profile.detail.masterconfig.EditMast
 import kr.co.soogong.master.presentation.ui.profile.detail.phonenumber.EditPhoneNumberFragment
 import kr.co.soogong.master.presentation.ui.profile.detail.portfoliolist.portfolio.PortfolioFragment
 import kr.co.soogong.master.presentation.ui.profile.detail.portfoliolist.pricebyproject.PriceByProjectFragment
+import kr.co.soogong.master.presentation.ui.profile.detail.portfoliolist.repairphoto.RepairPhotoFragment
 import kr.co.soogong.master.presentation.ui.profile.detail.shopimages.EditShopImagesFragment
 import kr.co.soogong.master.presentation.ui.profile.detail.warranty.EditWarrantyInformationFragment
 
@@ -58,8 +59,8 @@ object EditProfileContainerFragmentHelper {
         when (pageName) {
             ADD_PORTFOLIO -> PortfolioFragment.newInstance()
             EDIT_PORTFOLIO -> PortfolioFragment.newInstance(portfolioDto)
-            ADD_REPAIR_PHOTO -> PortfolioFragment.newInstance()
-            EDIT_REPAIR_PHOTO -> PortfolioFragment.newInstance(portfolioDto)
+            ADD_REPAIR_PHOTO -> RepairPhotoFragment.newInstance()
+            EDIT_REPAIR_PHOTO -> RepairPhotoFragment.newInstance(portfolioDto)
             ADD_PRICE_BY_PROJECTS -> PriceByProjectFragment.newInstance()
             EDIT_PRICE_BY_PROJECTS -> PriceByProjectFragment.newInstance(portfolioDto)
             else -> Fragment()
