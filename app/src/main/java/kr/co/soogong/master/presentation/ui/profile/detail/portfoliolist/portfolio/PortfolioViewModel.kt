@@ -7,10 +7,9 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.entity.common.AttachmentDto
-import kr.co.soogong.master.data.entity.profile.PortfolioDto
-import kr.co.soogong.master.domain.entity.profile.portfolio.PortfolioType
+import kr.co.soogong.master.data.entity.profile.portfolio.SavePortfolioDto
 import kr.co.soogong.master.domain.usecase.auth.GetMasterIdFromSharedUseCase
-import kr.co.soogong.master.domain.usecase.profile.SavePortfolioUseCase
+import kr.co.soogong.master.domain.usecase.profile.portfolio.SavePortfolioUseCase
 import kr.co.soogong.master.presentation.ui.base.BaseViewModel
 import kr.co.soogong.master.utility.ListLiveData
 import timber.log.Timber
@@ -47,16 +46,14 @@ class PortfolioViewModel @Inject constructor(
     fun savePortfolio() {
         Timber.tag(TAG).d("savePortfolio: $portfolio")
         savePortfolioUseCase(
-            portfolio = PortfolioDto(
+            SavePortfolioDto(
                 id = portfolio.value?.id,
                 masterId = getMasterIdFromSharedUseCase(),
-                title = title.value,
-                description = description.value,
-                typeCode = PortfolioType.PORTFOLIO.code,
+                title = title.value!!,
+                description = description.value!!,
             ),
-            beforeImageUri = imageBeforeRepairing.value?.first()?.uri,
-            afterImageUri = imageAfterRepairing.value?.first()?.uri,
-            images = null,
+            imageBeforeRepairing.value?.first()?.uri,
+            imageAfterRepairing.value?.first()?.uri
         )
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

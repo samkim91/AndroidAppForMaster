@@ -1,4 +1,4 @@
-package kr.co.soogong.master.data.entity.profile
+package kr.co.soogong.master.data.entity.profile.portfolio
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName

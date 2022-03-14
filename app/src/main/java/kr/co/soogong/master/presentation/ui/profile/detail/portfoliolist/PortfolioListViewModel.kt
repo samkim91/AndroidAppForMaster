@@ -5,9 +5,9 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import kr.co.soogong.master.data.entity.profile.PortfolioDto
-import kr.co.soogong.master.domain.usecase.profile.DeletePortfolioUseCase
-import kr.co.soogong.master.domain.usecase.profile.GetPortfoliosUseCase
+import kr.co.soogong.master.data.entity.profile.portfolio.PortfolioDto
+import kr.co.soogong.master.domain.usecase.profile.portfolio.DeletePortfolioUseCase
+import kr.co.soogong.master.domain.usecase.profile.portfolio.GetPortfoliosUseCase
 import kr.co.soogong.master.presentation.ui.common.EndlessScrollableViewModel
 import kr.co.soogong.master.presentation.uihelper.profile.PortfolioListActivityHelper
 import kr.co.soogong.master.utility.ListLiveData

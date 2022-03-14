@@ -8,7 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.entity.profile.PortfolioDto
+import kr.co.soogong.master.data.entity.profile.portfolio.PortfolioDto
 import kr.co.soogong.master.databinding.FragmentEditPriceByProjectBinding
 import kr.co.soogong.master.presentation.ui.base.BaseFragment
 import kr.co.soogong.master.presentation.ui.profile.detail.EditProfileContainerActivity

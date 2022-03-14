@@ -12,7 +12,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import gun0912.tedimagepicker.builder.TedImagePicker
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.entity.common.AttachmentDto
-import kr.co.soogong.master.data.entity.profile.PortfolioDto
+import kr.co.soogong.master.data.entity.profile.portfolio.PortfolioDto
 import kr.co.soogong.master.databinding.FragmentEditRepairPhotoBinding
 import kr.co.soogong.master.presentation.ui.base.BaseFragment
 import kr.co.soogong.master.presentation.ui.base.BaseViewModel.Companion.DISMISS_LOADING
@@ -115,7 +115,7 @@ class RepairPhotoFragment : BaseFragment<FragmentEditRepairPhotoBinding>(
                                         return@startMultiImage
                                     }
 
-                                    viewModel.repairPhotos.clear()
+                                    viewModel.updateImage = true
                                     viewModel.repairPhotos.addAll(uris.map {
                                         AttachmentDto(
                                             id = null,

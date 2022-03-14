@@ -3,7 +3,7 @@ package kr.co.soogong.master.presentation.ui.profile.detail.portfoliolist
 import android.content.Context
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
-import kr.co.soogong.master.data.entity.profile.PortfolioDto
+import kr.co.soogong.master.data.entity.profile.portfolio.PortfolioDto
 import kr.co.soogong.master.domain.entity.profile.portfolio.PortfolioType
 
 class PortfolioListAdapter(

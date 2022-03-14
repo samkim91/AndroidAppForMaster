@@ -5,7 +5,7 @@ import kr.co.soogong.master.data.entity.common.PageableContentDto
 import kr.co.soogong.master.data.entity.common.ResponseDto
 import kr.co.soogong.master.data.entity.profile.MasterDto
 import kr.co.soogong.master.data.entity.profile.MasterSettingsDto
-import kr.co.soogong.master.data.entity.profile.PortfolioDto
+import kr.co.soogong.master.data.entity.profile.portfolio.PortfolioDto
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
@@ -39,13 +39,26 @@ class ProfileService @Inject constructor(
         return profileInterface.saveMaster(masterDto, profileImage, businessRegistImage, shopImages)
     }
 
+
     fun savePortfolio(
-        portfolioDto: RequestBody,
+        savePortfolioJson: RequestBody,
         beforeImageFile: MultipartBody.Part?,
         afterImageFile: MultipartBody.Part?,
+    ): Single<PortfolioDto> {
+        return profileInterface.savePortfolio(savePortfolioJson, beforeImageFile, afterImageFile)
+    }
+
+    fun saveRepairPhoto(
+        saveRepairPhotoJson: RequestBody,
         imageFiles: List<MultipartBody.Part?>?,
     ): Single<PortfolioDto> {
-        return profileInterface.savePortfolio(portfolioDto, beforeImageFile, afterImageFile, imageFiles)
+        return profileInterface.saveRepairPhoto(saveRepairPhotoJson, imageFiles)
+    }
+
+    fun savePriceByProject(
+        savePriceByProjectJson: RequestBody,
+    ): Single<PortfolioDto> {
+        return profileInterface.savePriceByProject(savePriceByProjectJson)
     }
 
     fun getPortfolios(
