@@ -5,7 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.core.os.bundleOf
 import androidx.lifecycle.SavedStateHandle
-import kr.co.soogong.master.domain.entity.profile.portfolio.PortfolioType
+import kr.co.soogong.master.domain.entity.common.PortfolioType
 import kr.co.soogong.master.presentation.ui.profile.detail.portfoliolist.PortfolioListActivity
 
 object PortfolioListActivityHelper {

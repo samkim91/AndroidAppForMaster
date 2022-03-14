@@ -12,13 +12,13 @@ import dagger.hilt.android.AndroidEntryPoint
 import gun0912.tedimagepicker.builder.TedImagePicker
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.entity.common.AttachmentDto
-import kr.co.soogong.master.data.entity.profile.portfolio.PortfolioDto
 import kr.co.soogong.master.databinding.FragmentEditRepairPhotoBinding
+import kr.co.soogong.master.domain.entity.profile.portfolio.RepairPhoto
 import kr.co.soogong.master.presentation.ui.base.BaseFragment
 import kr.co.soogong.master.presentation.ui.base.BaseViewModel.Companion.DISMISS_LOADING
+import kr.co.soogong.master.presentation.ui.base.BaseViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.presentation.ui.base.BaseViewModel.Companion.SHOW_LOADING
 import kr.co.soogong.master.presentation.ui.profile.detail.EditProfileContainerActivity
-import kr.co.soogong.master.presentation.ui.profile.detail.portfoliolist.portfolio.PortfolioViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.presentation.ui.profile.detail.portfoliolist.repairphoto.RepairPhotoViewModel.Companion.SAVE_PORTFOLIO_SUCCESSFULLY
 import kr.co.soogong.master.presentation.ui.profile.detail.portfoliolist.repairphoto.RepairPhotoViewModel.Companion.START_REPAIR_PHOTOS_PICKER
 import kr.co.soogong.master.presentation.uihelper.common.MajorActivityHelper
@@ -159,15 +159,15 @@ class RepairPhotoFragment : BaseFragment<FragmentEditRepairPhotoBinding>(
         private val TAG = RepairPhotoFragment::class.java.name
         private const val PORTFOLIO = "PORTFOLIO"
 
-        fun newInstance(portfolioDto: PortfolioDto? = null) = RepairPhotoFragment().apply {
-            portfolioDto?.let {
+        fun newInstance(repairPhoto: RepairPhoto? = null) = RepairPhotoFragment().apply {
+            repairPhoto?.let {
                 arguments = bundleOf(
                     PORTFOLIO to it
                 )
             }
         }
 
-        fun getPortfolio(savedStateHandle: SavedStateHandle): MutableLiveData<PortfolioDto> =
+        fun getRepairPhoto(savedStateHandle: SavedStateHandle): MutableLiveData<RepairPhoto> =
             savedStateHandle.getLiveData(PORTFOLIO)
     }
 }

@@ -9,7 +9,7 @@ import androidx.fragment.app.FragmentManager
 import kr.co.soogong.master.presentation.ui.common.dialog.loading.LoadingDialog
 
 abstract class BaseActivity<B : ViewDataBinding>(
-    @LayoutRes private val layout: Int
+    @LayoutRes private val layout: Int,
 ) : AppCompatActivity() {
 
     protected lateinit var binding: B
@@ -36,10 +36,10 @@ abstract class BaseActivity<B : ViewDataBinding>(
     }
 
     protected fun showLoading(fragmentManager: FragmentManager) {
-        loading.show(fragmentManager, loading.tag)
+        if (!loading.isVisible) loading.show(fragmentManager, loading.tag)
     }
 
     protected fun dismissLoading() {
-        loading.dismiss()
+        if (loading.isVisible) loading.dismiss()
     }
 }

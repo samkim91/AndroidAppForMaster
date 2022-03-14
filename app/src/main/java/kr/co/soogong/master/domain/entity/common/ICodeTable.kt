@@ -1,4 +1,4 @@
-package kr.co.soogong.master.domain.entity.profile.portfolio
+package kr.co.soogong.master.domain.entity.common
 
 sealed interface ICodeTable {
     val code: String

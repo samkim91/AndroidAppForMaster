@@ -3,14 +3,14 @@ package kr.co.soogong.master.presentation.ui.profile.detail.portfoliolist
 import android.content.Context
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
-import kr.co.soogong.master.data.entity.profile.portfolio.PortfolioDto
-import kr.co.soogong.master.domain.entity.profile.portfolio.PortfolioType
+import kr.co.soogong.master.domain.entity.common.PortfolioType
+import kr.co.soogong.master.domain.entity.profile.portfolio.IPortfolio
 
 class PortfolioListAdapter(
     private val context: Context,
-    private val buttonLeftClickListener: (id: Int) -> Unit,
-    private val buttonRightClickListener: (portfolioDto: PortfolioDto) -> Unit,
-) : ListAdapter<PortfolioDto, PortfolioCommonViewHolder>(PortfolioListDiffUtil()) {
+    private val buttonLeftClickListener: (iPortfolio: IPortfolio) -> Unit,
+    private val buttonRightClickListener: (iPortfolio: IPortfolio) -> Unit,
+) : ListAdapter<IPortfolio, PortfolioCommonViewHolder>(PortfolioListDiffUtil()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         PortfolioCommonViewHolder.create(parent, viewType)
 
@@ -21,10 +21,9 @@ class PortfolioListAdapter(
             buttonRightClickListener)
 
     override fun getItemViewType(position: Int): Int =
-        when (currentList[position].typeCode) {
-            PortfolioType.PORTFOLIO.code -> 0
-            PortfolioType.REPAIR_PHOTO.code -> 1
-            PortfolioType.PRICE_BY_PROJECT.code -> 2
-            else -> 0
+        when (currentList[position].type) {
+            PortfolioType.PORTFOLIO -> 0
+            PortfolioType.REPAIR_PHOTO -> 1
+            PortfolioType.PRICE_BY_PROJECT -> 2
         }
 }

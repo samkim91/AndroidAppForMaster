@@ -8,7 +8,7 @@
 
         <import type="kr.co.soogong.master.domain.entity.common.CodeTable" />
 
-        <import type="kr.co.soogong.master.domain.entity.profile.portfolio.PortfolioType" />
+        <import type="kr.co.soogong.master.domain.entity.common.PortfolioType" />
 
         <variable
             name="vm"

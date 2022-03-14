@@ -2,10 +2,9 @@ package kr.co.soogong.master.presentation.ui.profile.detail.portfoliolist.portfo
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.rxkotlin.subscribeBy
-import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.launch
 import kr.co.soogong.master.data.entity.common.AttachmentDto
 import kr.co.soogong.master.data.entity.profile.portfolio.SavePortfolioDto
 import kr.co.soogong.master.domain.usecase.auth.GetMasterIdFromSharedUseCase
@@ -36,38 +35,38 @@ class PortfolioViewModel @Inject constructor(
         Timber.tag(TAG).d("setInitialPortfolio: $portfolio")
 
         portfolio.value?.let { portfolioDto ->
-            portfolioDto.title?.let { title.postValue(it) }
+            portfolioDto.title.let { title.postValue(it) }
             portfolioDto.beforeImage?.let { imageBeforeRepairing.add(it) }
             portfolioDto.afterImage?.let { imageAfterRepairing.add(it) }
-            portfolioDto.description?.let { description.postValue(it) }
+            portfolioDto.description.let { description.postValue(it) }
         }
     }
 
     fun savePortfolio() {
         Timber.tag(TAG).d("savePortfolio: $portfolio")
-        savePortfolioUseCase(
-            SavePortfolioDto(
-                id = portfolio.value?.id,
-                masterId = getMasterIdFromSharedUseCase(),
-                title = title.value!!,
-                description = description.value!!,
-            ),
-            imageBeforeRepairing.value?.first()?.uri,
-            imageAfterRepairing.value?.first()?.uri
-        )
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .doOnSubscribe { setAction(SHOW_LOADING) }
-            .subscribeBy(
-                onSuccess = {
-                    Timber.tag(TAG).d("savePortfolio successfully: $it")
-                    setAction(SAVE_PORTFOLIO_SUCCESSFULLY)
-                },
-                onError = {
-                    Timber.tag(TAG).d("savePortfolio failed: $it")
-                    setAction(REQUEST_FAILED)
-                }
-            ).addToDisposable()
+        viewModelScope.launch {
+            try {
+                setAction(SHOW_LOADING)
+
+                savePortfolioUseCase(
+                    SavePortfolioDto(
+                        id = portfolio.value?.id,
+                        masterId = getMasterIdFromSharedUseCase(),
+                        title = title.value!!,
+                        description = description.value!!,
+                    ),
+                    imageBeforeRepairing.value?.first()?.uri,
+                    imageAfterRepairing.value?.first()?.uri
+                )
+
+                Timber.tag(TAG).d("savePortfolio successfully: ")
+                setAction(DISMISS_LOADING)
+                setAction(SAVE_PORTFOLIO_SUCCESSFULLY)
+            } catch (e: Exception) {
+                Timber.tag(TAG).d("savePortfolio failed: $e")
+                setAction(REQUEST_FAILED)
+            }
+        }
     }
 
     fun startImagePickerForBefore() {
@@ -81,9 +80,8 @@ class PortfolioViewModel @Inject constructor(
     }
 
     companion object {
-        private const val TAG = "EditPortfolioViewModel"
+        private val TAG = PortfolioViewModel::class.java.name
         const val SAVE_PORTFOLIO_SUCCESSFULLY = "SAVE_PORTFOLIO_SUCCESSFULLY"
-        const val REQUEST_FAILED = "REQUEST_FAILED"
         const val START_IMAGE_PICKER_FOR_BEFORE = "START_IMAGE_PICKER_FOR_BEFORE"
         const val START_IMAGE_PICKER_FOR_AFTER = "START_IMAGE_PICKER_FOR_AFTER"
     }

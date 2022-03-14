@@ -40,25 +40,25 @@ class ProfileService @Inject constructor(
     }
 
 
-    fun savePortfolio(
+    suspend fun savePortfolio(
         savePortfolioJson: RequestBody,
         beforeImageFile: MultipartBody.Part?,
         afterImageFile: MultipartBody.Part?,
-    ): Single<PortfolioDto> {
-        return profileInterface.savePortfolio(savePortfolioJson, beforeImageFile, afterImageFile)
+    ) {
+        profileInterface.savePortfolio(savePortfolioJson, beforeImageFile, afterImageFile)
     }
 
-    fun saveRepairPhoto(
+    suspend fun saveRepairPhoto(
         saveRepairPhotoJson: RequestBody,
         imageFiles: List<MultipartBody.Part?>?,
-    ): Single<PortfolioDto> {
-        return profileInterface.saveRepairPhoto(saveRepairPhotoJson, imageFiles)
+    ) {
+        profileInterface.saveRepairPhoto(saveRepairPhotoJson, imageFiles)
     }
 
-    fun savePriceByProject(
+    suspend fun savePriceByProject(
         savePriceByProjectJson: RequestBody,
-    ): Single<PortfolioDto> {
-        return profileInterface.savePriceByProject(savePriceByProjectJson)
+    ) {
+        profileInterface.savePriceByProject(savePriceByProjectJson)
     }
 
     fun getPortfolios(

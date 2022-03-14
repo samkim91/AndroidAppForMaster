@@ -7,7 +7,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ActivityPortfolioListBinding
 import kr.co.soogong.master.domain.entity.common.ButtonTheme
-import kr.co.soogong.master.domain.entity.profile.portfolio.PortfolioType
+import kr.co.soogong.master.domain.entity.common.PortfolioType
 import kr.co.soogong.master.presentation.ui.base.BaseActivity
 import kr.co.soogong.master.presentation.ui.base.BaseViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.presentation.ui.common.dialog.popup.DefaultDialog
@@ -74,7 +74,7 @@ class PortfolioListActivity : BaseActivity<ActivityPortfolioListBinding>(
         binding.rvItems.adapter =
             PortfolioListAdapter(
                 context = this,
-                buttonLeftClickListener = { id ->
+                buttonLeftClickListener = { iPortfolio ->
                     DefaultDialog.newInstance(
                         dialogData = when (viewModel.type) {
                             PortfolioType.PORTFOLIO -> DialogData.getAskingDeletePortfolio()
@@ -82,13 +82,13 @@ class PortfolioListActivity : BaseActivity<ActivityPortfolioListBinding>(
                             PortfolioType.PRICE_BY_PROJECT -> DialogData.getAskingDeletePriceByProject()
                         }).let {
                         it.setButtonsClickListener(
-                            onPositive = { viewModel.deletePortfolio(id) },
+                            onPositive = { viewModel.deletePortfolio(iPortfolio.id) },
                             onNegative = { }
                         )
                         it.show(supportFragmentManager, it.tag)
                     }
                 },
-                buttonRightClickListener = { portfolioDto ->
+                buttonRightClickListener = { iPortfolio ->
                     startActivity(
                         EditProfileContainerActivityHelper.getIntentForEditingPortfolio(
                             this@PortfolioListActivity,
@@ -97,7 +97,7 @@ class PortfolioListActivity : BaseActivity<ActivityPortfolioListBinding>(
                                 PortfolioType.REPAIR_PHOTO -> EDIT_REPAIR_PHOTO
                                 PortfolioType.PRICE_BY_PROJECT -> EDIT_PRICE_BY_PROJECTS
                             },
-                            portfolioDto
+                            iPortfolio
                         )
                     )
                 })
