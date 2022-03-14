@@ -35,24 +35,24 @@ interface ProfileInterface {
 
     @Multipart
     @PUT(HttpContract.SAVE_PORTFOLIO)
-    fun savePortfolio(
+    suspend fun savePortfolio(
         @Part("portfolioDto") savePortfolioJson: RequestBody,
         @Part beforeImageFile: MultipartBody.Part?,
         @Part afterImageFile: MultipartBody.Part?,
-    ): Single<PortfolioDto>
+    )
 
     @Multipart
     @PUT(HttpContract.SAVE_REPAIR_PHOTO)
-    fun saveRepairPhoto(
+    suspend fun saveRepairPhoto(
         @Part("photoDto") saveRepairPhotoJson: RequestBody,
         @Part imageFiles: List<MultipartBody.Part?>?,
-    ): Single<PortfolioDto>
+    )
 
     @Multipart
     @PUT(HttpContract.SAVE_PRICE_BY_PROJECT)
-    fun savePriceByProject(
+    suspend fun savePriceByProject(
         @Part("priceDto") savePriceByProjectJson: RequestBody,
-    ): Single<PortfolioDto>
+    )
 
     @GET(HttpContract.GET_PORTFOLIOS)
     fun getPortfolios(

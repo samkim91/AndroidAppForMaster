@@ -2,10 +2,9 @@ package kr.co.soogong.master.presentation.ui.profile.detail.portfoliolist.priceb
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.rxkotlin.subscribeBy
-import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.launch
 import kr.co.soogong.master.data.entity.profile.portfolio.SavePriceByProjectDto
 import kr.co.soogong.master.domain.usecase.auth.GetMasterIdFromSharedUseCase
 import kr.co.soogong.master.domain.usecase.profile.portfolio.SavePriceByProjectUseCase
@@ -33,40 +32,37 @@ class PriceByProjectViewModel @Inject constructor(
         Timber.tag(TAG).d("setInitialPriceByProject: ")
 
         priceByProject.value?.let { priceByProjectDto ->
-            priceByProjectDto.title?.let { title.postValue(it) }
-            priceByProjectDto.price?.let { price.postValue(it.toLong()) }
-            priceByProjectDto.description?.let { description.postValue(it) }
+            title.postValue(priceByProjectDto.title)
+            price.postValue(priceByProjectDto.price.toLong())
+            description.postValue(priceByProjectDto.description)
         }
     }
 
     fun savePriceByProject() {
         Timber.tag(TAG).d("savePriceByProject: $priceByProject")
-        savePriceByProjectUseCase(
-            SavePriceByProjectDto(
-                id = priceByProject.value?.id,
-                masterId = getMasterIdFromSharedUseCase(),
-                title = title.value!!,
-                description = description.value!!,
-                price = price.value?.toInt()!!,
-            )
-        ).subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeBy(
-                onSuccess = {
-                    Timber.tag(TAG).d("savePriceByProject successfully: $it")
-                    setAction(SAVE_PRICE_BY_PROJECT_SUCCESSFULLY)
-                },
-                onError = {
-                    Timber.tag(TAG).d("savePriceByProject failed: $it")
-                    setAction(REQUEST_FAILED)
-                }
-            ).addToDisposable()
+        viewModelScope.launch {
+            try {
+                savePriceByProjectUseCase(
+                    SavePriceByProjectDto(
+                        id = priceByProject.value?.id,
+                        masterId = getMasterIdFromSharedUseCase(),
+                        title = title.value!!,
+                        description = description.value!!,
+                        price = price.value?.toInt()!!,
+                    )
+                )
+
+                Timber.tag(TAG).d("savePriceByProject successfully: ")
+                setAction(SAVE_PRICE_BY_PROJECT_SUCCESSFULLY)
+            } catch (e: Exception) {
+                Timber.tag(TAG).d("savePriceByProject failed: $e")
+                setAction(REQUEST_FAILED)
+            }
+        }
     }
 
     companion object {
-        private const val TAG = "EditPortfolioViewModel"
-
+        private val TAG = PriceByProjectViewModel::class.java.name
         const val SAVE_PRICE_BY_PROJECT_SUCCESSFULLY = "SAVE_PRICE_BY_PROJECT_SUCCESSFULLY"
-        const val REQUEST_FAILED = "REQUEST_FAILED"
     }
 }

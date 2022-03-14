@@ -1,8 +1,8 @@
 package kr.co.soogong.master.domain.usecase.profile.portfolio
 
 import dagger.Reusable
-import io.reactivex.Single
-import kr.co.soogong.master.data.entity.profile.portfolio.PortfolioDto
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import kr.co.soogong.master.data.entity.profile.portfolio.SavePriceByProjectDto
 import kr.co.soogong.master.data.repository.ProfileRepository
 import kr.co.soogong.master.utility.MultipartGenerator
@@ -12,10 +12,11 @@ import javax.inject.Inject
 class SavePriceByProjectUseCase @Inject constructor(
     private val profileRepository: ProfileRepository,
 ) {
-    operator fun invoke(
+    suspend operator fun invoke(
         savePriceByProjectDto: SavePriceByProjectDto,
-    ): Single<PortfolioDto> =
+    ) = withContext(Dispatchers.IO) {
         profileRepository.savePriceByProject(
             savePriceByProjectJson = MultipartGenerator.createJson(savePriceByProjectDto),
         )
+    }
 }

@@ -2,10 +2,9 @@ package kr.co.soogong.master.presentation.ui.profile.detail.portfoliolist.repair
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.rxkotlin.subscribeBy
-import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.launch
 import kr.co.soogong.master.data.entity.common.AttachmentDto
 import kr.co.soogong.master.data.entity.profile.portfolio.SaveRepairPhotoDto
 import kr.co.soogong.master.domain.entity.common.major.Project
@@ -25,7 +24,7 @@ class RepairPhotoViewModel @Inject constructor(
     val maxPhoto: Int = 5
     val maxProject: Int = 1
 
-    val portfolio = RepairPhotoFragment.getPortfolio(savedStateHandle)
+    val portfolio = RepairPhotoFragment.getRepairPhoto(savedStateHandle)
 
     val title = MutableLiveData<String>()
     val description = MutableLiveData<String>()
@@ -40,46 +39,42 @@ class RepairPhotoViewModel @Inject constructor(
     private fun setInitialRepairPhoto() {
         Timber.tag(TAG).d("setInitialRepairPhoto: $portfolio")
 
-        portfolio.value?.let { portfolioDto ->
-            portfolioDto.title?.let { title.postValue(it) }
-            portfolioDto.images?.let { repairPhotos.addAll(it) }
-            portfolioDto.description?.let { description.postValue(it) }
-            portfolioDto.projectId?.let {
-                project.postValue(Project(id = portfolioDto.projectId,
-                    name = portfolioDto.projectName!!))
-            }
+        portfolio.value?.let { portfolio ->
+            title.postValue(portfolio.title)
+            portfolio.images?.let { repairPhotos.addAll(portfolio.images) }
+            description.postValue(portfolio.description)
+            project.postValue(portfolio.project)
         }
     }
 
     fun saveRepairPhoto() {
         Timber.tag(TAG).d("saveRepairPhoto: $portfolio")
-        saveRepairPhotoUseCase(
-            SaveRepairPhotoDto(
-                id = portfolio.value?.id,
-                masterId = getMasterIdFromSharedUseCase(),
-                projectId = project.value?.id!!,
-                title = title.value!!,
-                description = description.value!!,
-                images = repairPhotos.value,
-                updateImages = updateImage
-            ),
-            newImages = repairPhotos.value?.map { attachmentDto ->
-                attachmentDto.uri
+        viewModelScope.launch {
+            try {
+                setAction(SHOW_LOADING)
+                saveRepairPhotoUseCase(
+                    SaveRepairPhotoDto(
+                        id = portfolio.value?.id,
+                        masterId = getMasterIdFromSharedUseCase(),
+                        projectId = project.value?.id!!,
+                        title = title.value!!,
+                        description = description.value!!,
+                        images = repairPhotos.value,
+                        updateImages = updateImage
+                    ),
+                    newImages = repairPhotos.value?.map { attachmentDto ->
+                        attachmentDto.uri
+                    }
+                )
+
+                Timber.tag(TAG).d("savePortfolio successfully: ")
+                setAction(DISMISS_LOADING)
+                setAction(SAVE_PORTFOLIO_SUCCESSFULLY)
+            } catch (e: Exception) {
+                Timber.tag(TAG).d("savePortfolio failed: $e")
+                setAction(REQUEST_FAILED)
             }
-        )
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .doOnSubscribe { setAction(SHOW_LOADING) }
-            .subscribeBy(
-                onSuccess = {
-                    Timber.tag(TAG).d("savePortfolio successfully: $it")
-                    setAction(SAVE_PORTFOLIO_SUCCESSFULLY)
-                },
-                onError = {
-                    Timber.tag(TAG).d("savePortfolio failed: $it")
-                    setAction(REQUEST_FAILED)
-                }
-            ).addToDisposable()
+        }
     }
 
     fun startRepairPhotosPicker() {

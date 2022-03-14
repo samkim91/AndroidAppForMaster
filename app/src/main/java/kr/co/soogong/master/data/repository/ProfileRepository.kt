@@ -6,6 +6,7 @@ import io.reactivex.Single
 import kr.co.soogong.master.contract.AppSharedPreferenceContract
 import kr.co.soogong.master.data.datasource.network.profile.ProfileService
 import kr.co.soogong.master.data.entity.common.PageableContentDto
+import kr.co.soogong.master.data.entity.common.ResponseDto
 import kr.co.soogong.master.data.entity.profile.MasterDto
 import kr.co.soogong.master.data.entity.profile.MasterSettingsDto
 import kr.co.soogong.master.data.entity.profile.portfolio.PortfolioDto
@@ -86,48 +87,33 @@ class ProfileRepository @Inject constructor(
         pageSize: Int,
         order: Int,
         orderBy: String,
-    ): Single<PageableContentDto<PortfolioDto>> =
-        profileService.getPortfolios(
-            type,
+    ): Single<ResponseDto<PageableContentDto<PortfolioDto>>> =
+        profileService.getPortfolios(type,
             getMasterUidFromShared(),
             offset,
             pageSize,
             order,
             orderBy)
-            .map { responseDto ->
-                if (responseDto.code.toInt() == HttpURLConnection.HTTP_OK) {
-                    responseDto.data?.let { pageableContentDto ->
-                        PageableContentDto(
-                            content = pageableContentDto.content,
-                            pageable = pageableContentDto.pageable,
-                            last = pageableContentDto.last,
-                            numberOfElements = pageableContentDto.numberOfElements
-                        )
-                    }
-                } else {
-                    throw Exception(responseDto.messageKo)
-                }
-            }
 
-    fun savePortfolio(
+    suspend fun savePortfolio(
         savePortfolioJson: RequestBody,
         beforeImageFile: MultipartBody.Part?,
         afterImageFile: MultipartBody.Part?,
-    ): Single<PortfolioDto> {
-        return profileService.savePortfolio(savePortfolioJson, beforeImageFile, afterImageFile)
+    ) {
+        profileService.savePortfolio(savePortfolioJson, beforeImageFile, afterImageFile)
     }
 
-    fun saveRepairPhoto(
+    suspend fun saveRepairPhoto(
         saveRepairPhotoJson: RequestBody,
         imageFiles: List<MultipartBody.Part?>?,
-    ): Single<PortfolioDto> {
-        return profileService.saveRepairPhoto(saveRepairPhotoJson, imageFiles)
+    ) {
+        profileService.saveRepairPhoto(saveRepairPhotoJson, imageFiles)
     }
 
-    fun savePriceByProject(
+    suspend fun savePriceByProject(
         savePriceByProjectJson: RequestBody,
-    ): Single<PortfolioDto> {
-        return profileService.savePriceByProject(savePriceByProjectJson)
+    ) {
+        profileService.savePriceByProject(savePriceByProjectJson)
     }
 
     fun deletePortfolio(id: Int): Single<ResponseBody> = profileService.deletePortfolio(id)

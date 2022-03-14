@@ -1,7 +1,10 @@
 package kr.co.soogong.master.presentation.uihelper.profile
 
 import androidx.fragment.app.Fragment
-import kr.co.soogong.master.data.entity.profile.portfolio.PortfolioDto
+import kr.co.soogong.master.domain.entity.profile.portfolio.IPortfolio
+import kr.co.soogong.master.domain.entity.profile.portfolio.Portfolio
+import kr.co.soogong.master.domain.entity.profile.portfolio.PriceByProject
+import kr.co.soogong.master.domain.entity.profile.portfolio.RepairPhoto
 import kr.co.soogong.master.presentation.ui.profile.detail.address.EditAddressFragment
 import kr.co.soogong.master.presentation.ui.profile.detail.businessunitinformation.EditBusinessUnitInformationFragment
 import kr.co.soogong.master.presentation.ui.profile.detail.email.EditEmailFragment
@@ -55,14 +58,14 @@ object EditProfileContainerFragmentHelper {
             else -> Fragment()
         }
 
-    fun getFragmentWithPortfolio(pageName: String, portfolioDto: PortfolioDto?): Fragment =
+    fun getFragmentWithPortfolio(pageName: String, iPortfolio: IPortfolio?): Fragment =
         when (pageName) {
             ADD_PORTFOLIO -> PortfolioFragment.newInstance()
-            EDIT_PORTFOLIO -> PortfolioFragment.newInstance(portfolioDto)
+            EDIT_PORTFOLIO -> PortfolioFragment.newInstance(iPortfolio as Portfolio)
             ADD_REPAIR_PHOTO -> RepairPhotoFragment.newInstance()
-            EDIT_REPAIR_PHOTO -> RepairPhotoFragment.newInstance(portfolioDto)
+            EDIT_REPAIR_PHOTO -> RepairPhotoFragment.newInstance(iPortfolio as RepairPhoto)
             ADD_PRICE_BY_PROJECTS -> PriceByProjectFragment.newInstance()
-            EDIT_PRICE_BY_PROJECTS -> PriceByProjectFragment.newInstance(portfolioDto)
+            EDIT_PRICE_BY_PROJECTS -> PriceByProjectFragment.newInstance(iPortfolio as PriceByProject)
             else -> Fragment()
         }
 }

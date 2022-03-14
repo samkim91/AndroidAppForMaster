@@ -6,11 +6,14 @@ import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.entity.profile.portfolio.PortfolioDto
 import kr.co.soogong.master.databinding.ViewHolderPortfolioBinding
 import kr.co.soogong.master.databinding.ViewHolderPriceByProjectBinding
 import kr.co.soogong.master.databinding.ViewHolderRepairPhotoBinding
 import kr.co.soogong.master.domain.entity.common.ButtonTheme
+import kr.co.soogong.master.domain.entity.profile.portfolio.IPortfolio
+import kr.co.soogong.master.domain.entity.profile.portfolio.Portfolio
+import kr.co.soogong.master.domain.entity.profile.portfolio.PriceByProject
+import kr.co.soogong.master.domain.entity.profile.portfolio.RepairPhoto
 
 open class PortfolioCommonViewHolder(
     binding: ViewDataBinding,
@@ -18,10 +21,11 @@ open class PortfolioCommonViewHolder(
 
     open fun binding(
         context: Context,
-        portfolioDto: PortfolioDto,
-        buttonLeftClickListener: (id: Int) -> Unit,
-        buttonRightClickListener: (portfolioDto: PortfolioDto) -> Unit,
+        iPortfolio: IPortfolio,
+        buttonLeftClickListener: (iPortfolio: IPortfolio) -> Unit,
+        buttonRightClickListener: (iPortfolio: IPortfolio) -> Unit,
     ) {
+
     }
 
     companion object {
@@ -64,29 +68,25 @@ class PortfolioViewHolder(
 
     override fun binding(
         context: Context,
-        portfolioDto: PortfolioDto,
-        buttonLeftClickListener: (id: Int) -> Unit,
-        buttonRightClickListener: (portFolioDto: PortfolioDto) -> Unit,
+        iPortfolio: IPortfolio,
+        buttonLeftClickListener: (iPortfolio: IPortfolio) -> Unit,
+        buttonRightClickListener: (iPortfolio: IPortfolio) -> Unit,
     ) {
         with(binding) {
-            data = portfolioDto
+            data = (iPortfolio as Portfolio)
 
             buttonThemeLeft = ButtonTheme.OutlinedSecondary
             bmLeftButton.buttonText = context.getString(R.string.delete)
 
             setOnLeftButtonClick {
-                portfolioDto.id?.let {
-                    buttonLeftClickListener(it)
-                }
+                buttonLeftClickListener(iPortfolio)
             }
 
             buttonThemeRight = ButtonTheme.OutlinedPrimary
             bmRightButton.buttonText = context.getString(R.string.modify)
 
             setOnRightButtonClick {
-                portfolioDto.id?.let {
-                    buttonRightClickListener(portfolioDto)
-                }
+                buttonRightClickListener(iPortfolio)
             }
         }
     }
@@ -98,23 +98,19 @@ class RepairPhotoViewHolder(
 
     override fun binding(
         context: Context,
-        portfolioDto: PortfolioDto,
-        buttonLeftClickListener: (id: Int) -> Unit,
-        buttonRightClickListener: (portFolioDto: PortfolioDto) -> Unit,
+        iPortfolio: IPortfolio,
+        buttonLeftClickListener: (iPortfolio: IPortfolio) -> Unit,
+        buttonRightClickListener: (iPortfolio: IPortfolio) -> Unit,
     ) {
         with(binding) {
-            data = portfolioDto
+            data = (iPortfolio as RepairPhoto)
 
             setOnLeftButtonClick {
-                portfolioDto.id?.let {
-                    buttonLeftClickListener(it)
-                }
+                buttonLeftClickListener(iPortfolio)
             }
 
             setOnRightButtonClick {
-                portfolioDto.id?.let {
-                    buttonRightClickListener(portfolioDto)
-                }
+                buttonRightClickListener(iPortfolio)
             }
         }
     }
@@ -126,29 +122,25 @@ class PriceByProjectViewHolder(
 
     override fun binding(
         context: Context,
-        portfolioDto: PortfolioDto,
-        buttonLeftClickListener: (id: Int) -> Unit,
-        buttonRightClickListener: (portfolioDto: PortfolioDto) -> Unit,
+        iPortfolio: IPortfolio,
+        buttonLeftClickListener: (iPortfolio: IPortfolio) -> Unit,
+        buttonRightClickListener: (iPortfolio: IPortfolio) -> Unit,
     ) {
         with(binding) {
-            data = portfolioDto
+            data = (iPortfolio as PriceByProject)
 
             buttonThemeLeft = ButtonTheme.OutlinedSecondary
             bmLeftButton.buttonText = context.getString(R.string.delete)
 
             setOnLeftButtonClick {
-                portfolioDto.id?.let {
-                    buttonLeftClickListener(it)
-                }
+                buttonLeftClickListener(iPortfolio)
             }
 
             buttonThemeRight = ButtonTheme.OutlinedPrimary
             bmRightButton.buttonText = context.getString(R.string.modify)
 
             setOnRightButtonClick {
-                portfolioDto.id?.let {
-                    buttonRightClickListener(portfolioDto)
-                }
+                buttonRightClickListener(iPortfolio)
             }
         }
     }

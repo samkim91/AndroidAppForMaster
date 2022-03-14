@@ -1,4 +1,4 @@
-package kr.co.soogong.master.domain.entity.profile.portfolio
+package kr.co.soogong.master.domain.entity.common
 
 enum class PortfolioType(
     override val code: String,

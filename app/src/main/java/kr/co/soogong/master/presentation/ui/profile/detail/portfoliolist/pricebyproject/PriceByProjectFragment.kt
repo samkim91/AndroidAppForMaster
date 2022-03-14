@@ -8,11 +8,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.entity.profile.portfolio.PortfolioDto
 import kr.co.soogong.master.databinding.FragmentEditPriceByProjectBinding
+import kr.co.soogong.master.domain.entity.profile.portfolio.PriceByProject
 import kr.co.soogong.master.presentation.ui.base.BaseFragment
+import kr.co.soogong.master.presentation.ui.base.BaseViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.presentation.ui.profile.detail.EditProfileContainerActivity
-import kr.co.soogong.master.presentation.ui.profile.detail.portfoliolist.pricebyproject.PriceByProjectViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.presentation.ui.profile.detail.portfoliolist.pricebyproject.PriceByProjectViewModel.Companion.SAVE_PRICE_BY_PROJECT_SUCCESSFULLY
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.extension.isIntRange
@@ -76,10 +76,10 @@ class PriceByProjectFragment : BaseFragment<FragmentEditPriceByProjectBinding>(
     }
 
     companion object {
-        private const val TAG = "EditPriceByProjectFragment"
+        private val TAG = PriceByProjectFragment::class.java.name
         private const val PRICE_BY_PROJECT = "PRICE_BY_PROJECT"
 
-        fun newInstance(priceByProject: PortfolioDto? = null) = PriceByProjectFragment().apply {
+        fun newInstance(priceByProject: PriceByProject? = null) = PriceByProjectFragment().apply {
             priceByProject?.let {
                 arguments = bundleOf(
                     PRICE_BY_PROJECT to it
@@ -87,7 +87,7 @@ class PriceByProjectFragment : BaseFragment<FragmentEditPriceByProjectBinding>(
             }
         }
 
-        fun getPriceByProject(savedStateHandle: SavedStateHandle): MutableLiveData<PortfolioDto> =
+        fun getPriceByProject(savedStateHandle: SavedStateHandle): MutableLiveData<PriceByProject> =
             savedStateHandle.getLiveData(PRICE_BY_PROJECT)
     }
 }

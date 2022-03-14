@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.core.os.bundleOf
-import kr.co.soogong.master.data.entity.profile.portfolio.PortfolioDto
+import kr.co.soogong.master.domain.entity.profile.portfolio.IPortfolio
 import kr.co.soogong.master.presentation.ui.profile.detail.EditProfileContainerActivity
 
 object EditProfileContainerActivityHelper {
@@ -26,18 +26,18 @@ object EditProfileContainerActivityHelper {
     fun getIntentForEditingPortfolio(
         context: Context,
         pageName: String,
-        portfolioDto: PortfolioDto? = null,
+        iPortfolio: IPortfolio? = null,
     ): Intent =
         Intent(context, EditProfileContainerActivity::class.java).apply {
             putExtra(EXTRA_BUNDLE_KEY, bundleOf(
                 EXTRA_STRING_KEY to pageName,
-                EXTRA_PORTFOLIO to portfolioDto
+                EXTRA_PORTFOLIO to iPortfolio
             ))
         }
 
     fun getPageName(intent: Intent): String =
         intent.getBundleExtra(EXTRA_BUNDLE_KEY)?.getString(EXTRA_STRING_KEY) ?: ""
 
-    fun getPortfolio(intent: Intent): PortfolioDto? =
+    fun getPortfolio(intent: Intent): IPortfolio? =
         intent.getBundleExtra(EXTRA_BUNDLE_KEY)?.getParcelable(EXTRA_PORTFOLIO)
 }
