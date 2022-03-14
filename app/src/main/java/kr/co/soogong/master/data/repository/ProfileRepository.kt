@@ -87,8 +87,9 @@ class ProfileRepository @Inject constructor(
         order: Int,
         orderBy: String,
     ): Single<PageableContentDto<PortfolioDto>> =
-        profileService.getPortfolios(getMasterUidFromShared(),
+        profileService.getPortfolios(
             type,
+            getMasterUidFromShared(),
             offset,
             pageSize,
             order,
@@ -112,8 +113,9 @@ class ProfileRepository @Inject constructor(
         portfolioDto: RequestBody,
         beforeImageFile: MultipartBody.Part?,
         afterImageFile: MultipartBody.Part?,
+        imageFiles: List<MultipartBody.Part?>?,
     ): Single<PortfolioDto> {
-        return profileService.savePortfolio(portfolioDto, beforeImageFile, afterImageFile)
+        return profileService.savePortfolio(portfolioDto, beforeImageFile, afterImageFile, imageFiles)
     }
 
     fun deletePortfolio(id: Int): Single<ResponseBody> = profileService.deletePortfolio(id)

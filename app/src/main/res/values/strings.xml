@@ -407,7 +407,7 @@
 
     <string name="permission_denied_status_message">권한을 거부하셨습니다. 앱을 사용하시려면 [앱 설정]-[권한] 에서 권한을 허용해주세요.</string>
 
-    <string name="maximum_images_count">사진은 최대 10장까지 업로드 가능합니다.</string>
+    <string name="maximum_images_count">사진은 최대 %d 장까지 업로드 가능합니다.</string>
     <string name="invalid_image_extension">지원하지 않는 이미지 형식입니다.\njpg, jpeg, png 만 업로드 가능합니다.</string>
     <string name="firebase_auth_verification_not_exist">인증 문자가 발송 중 입니다. 문자를 받으시면, 인증코드를 입력 후 다시 시도해주세요.</string>
     <string name="firebase_auth_too_many_requests">너무 많은 요청이 있습니다. 잠시 후 다시 시도해주세요.</string>

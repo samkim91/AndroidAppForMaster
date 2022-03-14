@@ -7,7 +7,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.entity.profile.PortfolioDto
-import kr.co.soogong.master.domain.entity.common.CodeTable
+import kr.co.soogong.master.domain.entity.profile.portfolio.PortfolioType
 import kr.co.soogong.master.domain.usecase.auth.GetMasterIdFromSharedUseCase
 import kr.co.soogong.master.domain.usecase.profile.SavePortfolioUseCase
 import kr.co.soogong.master.presentation.ui.base.BaseViewModel
@@ -48,11 +48,12 @@ class PriceByProjectViewModel @Inject constructor(
                 masterId = getMasterIdFromSharedUseCase(),
                 title = title.value!!,
                 description = description.value,
-                type = CodeTable.PRICE_BY_PROJECT.code,
+                typeCode = PortfolioType.PRICE_BY_PROJECT.code,
                 price = price.value?.toInt(),
             ),
             beforeImageUri = null,
             afterImageUri = null,
+            images = null
         ).subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(

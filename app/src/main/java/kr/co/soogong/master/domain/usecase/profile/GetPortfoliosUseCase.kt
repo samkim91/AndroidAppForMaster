@@ -16,6 +16,6 @@ class GetPortfoliosUseCase @Inject constructor(
         offset: Int,
         pageSize: Int,
     ): Single<PageableContentDto<PortfolioDto>> {
-        return profileRepository.getPortfolios(type, offset, pageSize, 1, "id")
+        return profileRepository.getPortfolios(type.lowercase(), offset, pageSize, 1, "id")
     }
 }

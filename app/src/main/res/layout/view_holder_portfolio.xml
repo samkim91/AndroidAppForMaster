@@ -30,7 +30,6 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/gap_5"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="@dimen/gap_14"
         app:cardElevation="@dimen/gap_1">
@@ -38,10 +37,8 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="@dimen/gap_14"
-            android:paddingTop="@dimen/gap_18"
-            android:paddingEnd="@dimen/gap_14"
-            android:paddingBottom="@dimen/gap_18">
+            android:paddingHorizontal="@dimen/gap_14"
+            android:paddingVertical="@dimen/gap_16">
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_subheadline"

@@ -43,19 +43,20 @@ class ProfileService @Inject constructor(
         portfolioDto: RequestBody,
         beforeImageFile: MultipartBody.Part?,
         afterImageFile: MultipartBody.Part?,
+        imageFiles: List<MultipartBody.Part?>?,
     ): Single<PortfolioDto> {
-        return profileInterface.savePortfolio(portfolioDto, beforeImageFile, afterImageFile)
+        return profileInterface.savePortfolio(portfolioDto, beforeImageFile, afterImageFile, imageFiles)
     }
 
     fun getPortfolios(
-        uid: String,
         type: String,
+        uid: String,
         offset: Int,
         pageSize: Int,
         order: Int,
         orderBy: String,
     ): Single<ResponseDto<PageableContentDto<PortfolioDto>>> {
-        return profileInterface.getPortfolios(uid, type, offset, pageSize, order, orderBy)
+        return profileInterface.getPortfolios(type, uid, offset, pageSize, order, orderBy)
     }
 
     fun deletePortfolio(

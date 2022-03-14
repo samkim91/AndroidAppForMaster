@@ -7,9 +7,10 @@ import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.entity.profile.PortfolioDto
-import kr.co.soogong.master.domain.entity.common.ButtonTheme
 import kr.co.soogong.master.databinding.ViewHolderPortfolioBinding
 import kr.co.soogong.master.databinding.ViewHolderPriceByProjectBinding
+import kr.co.soogong.master.databinding.ViewHolderRepairPhotoBinding
+import kr.co.soogong.master.domain.entity.common.ButtonTheme
 
 open class PortfolioCommonViewHolder(
     binding: ViewDataBinding,
@@ -36,6 +37,15 @@ open class PortfolioCommonViewHolder(
                         false
                     )
                 )
+
+                1 -> RepairPhotoViewHolder(
+                    ViewHolderRepairPhotoBinding.inflate(
+                        LayoutInflater.from(parent.context),
+                        parent,
+                        false
+                    )
+                )
+
                 else -> PriceByProjectViewHolder(
                     ViewHolderPriceByProjectBinding.inflate(
                         LayoutInflater.from(parent.context),
@@ -72,6 +82,34 @@ class PortfolioViewHolder(
 
             buttonThemeRight = ButtonTheme.OutlinedPrimary
             bmRightButton.buttonText = context.getString(R.string.modify)
+
+            setOnRightButtonClick {
+                portfolioDto.id?.let {
+                    buttonRightClickListener(portfolioDto)
+                }
+            }
+        }
+    }
+}
+
+class RepairPhotoViewHolder(
+    private val binding: ViewHolderRepairPhotoBinding,
+) : PortfolioCommonViewHolder(binding) {
+
+    override fun binding(
+        context: Context,
+        portfolioDto: PortfolioDto,
+        buttonLeftClickListener: (id: Int) -> Unit,
+        buttonRightClickListener: (portFolioDto: PortfolioDto) -> Unit,
+    ) {
+        with(binding) {
+            data = portfolioDto
+
+            setOnLeftButtonClick {
+                portfolioDto.id?.let {
+                    buttonLeftClickListener(it)
+                }
+            }
 
             setOnRightButtonClick {
                 portfolioDto.id?.let {

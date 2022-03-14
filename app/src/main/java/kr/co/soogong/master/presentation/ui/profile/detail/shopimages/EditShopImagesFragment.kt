@@ -56,7 +56,7 @@ class EditShopImagesFragment : BaseFragment<FragmentEditShopImagesBinding>(
                             .buttonBackground(R.drawable.shape_green_background_radius8)
                             .max(
                                 availableImagesCount,
-                                resources.getString(R.string.maximum_images_count)
+                                resources.getString(R.string.maximum_images_count, 10)
                             )
                             .startMultiImage { uriList ->
                                 if (FileHelper.isImageExtension(uriList,

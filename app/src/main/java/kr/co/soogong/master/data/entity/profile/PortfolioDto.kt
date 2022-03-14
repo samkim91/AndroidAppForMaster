@@ -19,17 +19,26 @@ data class PortfolioDto(
     @SerializedName("description")
     val description: String? = null,
 
-    @SerializedName("project")
-    val project: String? = null,
+    @SerializedName("projectId")
+    val projectId: Int? = null,
 
-    @SerializedName("type")
-    val type: String?,
+    @SerializedName("projectName")
+    val projectName: String? = null,
+
+    @SerializedName("typeCode")
+    val typeCode: String?,
+
+    @SerializedName("updateImages")
+    val updateImages: Boolean? = null,
 
     @SerializedName("beforeRepairImage")
     val beforeImage: AttachmentDto? = null,
 
     @SerializedName("afterRepairImage")
     val afterImage: AttachmentDto? = null,
+
+    @SerializedName("images")
+    val images: List<AttachmentDto>? = null,
 
     @SerializedName("price")
     val price: Int? = null,
