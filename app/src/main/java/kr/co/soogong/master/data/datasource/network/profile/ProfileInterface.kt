@@ -39,12 +39,13 @@ interface ProfileInterface {
         @Part("portfolioDto") portfolioDto: RequestBody,
         @Part beforeImageFile: MultipartBody.Part?,
         @Part afterImageFile: MultipartBody.Part?,
+        @Part imageFiles: List<MultipartBody.Part?>?
     ): Single<PortfolioDto>
 
     @GET(HttpContract.GET_PORTFOLIOS)
     fun getPortfolios(
+        @Path("type") type: String,
         @Query("uid") uid: String,
-        @Query("type") type: String,
         @Query("offset") offset: Int,
         @Query("pageSize") pageSize: Int,
         @Query("order") order: Int,

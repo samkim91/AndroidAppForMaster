@@ -54,7 +54,7 @@
             app:subheadline="@{@string/selecting_project}" />
 
         <kr.co.soogong.master.presentation.atomic.molecules.SubheadlineAddingImagesDeletable
-            android:id="@+id/said_before_repairing"
+            android:id="@+id/said_repair_photo"
             android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/gap_30"

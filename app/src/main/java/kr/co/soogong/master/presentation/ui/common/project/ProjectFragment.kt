@@ -51,6 +51,11 @@ class ProjectFragment : BaseFragment<FragmentProjectBinding>(
 
             setSelectingDoneClickListener {
                 viewModel.checkedList.value?.let { projects ->
+                    if (projects.isEmpty()) {
+                        requireContext().toast(getString(R.string.select_projects))
+                        return@setSelectingDoneClickListener
+                    }
+
                     activity?.setResult(RESULT_OK,
                         MajorActivityHelper.getIntentIncludingProjects(projects))
                     activity?.finish()

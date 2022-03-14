@@ -8,8 +8,8 @@ import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.entity.common.AttachmentDto
 import kr.co.soogong.master.data.entity.profile.PortfolioDto
-import kr.co.soogong.master.domain.entity.common.CodeTable
 import kr.co.soogong.master.domain.entity.common.major.Project
+import kr.co.soogong.master.domain.entity.profile.portfolio.PortfolioType
 import kr.co.soogong.master.domain.usecase.auth.GetMasterIdFromSharedUseCase
 import kr.co.soogong.master.domain.usecase.profile.SavePortfolioUseCase
 import kr.co.soogong.master.presentation.ui.base.BaseViewModel
@@ -34,31 +34,40 @@ class RepairPhotoViewModel @Inject constructor(
     val repairPhotos = ListLiveData<AttachmentDto>()
 
     init {
-        setInitialPortfolio()
+        setInitialRepairPhoto()
     }
 
-    private fun setInitialPortfolio() {
-        Timber.tag(TAG).d("setInitialPortfolio: $portfolio")
+    private fun setInitialRepairPhoto() {
+        Timber.tag(TAG).d("setInitialRepairPhoto: $portfolio")
 
         portfolio.value?.let { portfolioDto ->
             portfolioDto.title?.let { title.postValue(it) }
-            portfolioDto.afterImage?.let { repairPhotos.add(it) }
+            portfolioDto.images?.let { repairPhotos.addAll(it) }
             portfolioDto.description?.let { description.postValue(it) }
+            portfolioDto.projectId?.let {
+                project.postValue(Project(id = portfolioDto.projectId,
+                    name = portfolioDto.projectName!!))
+            }
         }
     }
 
-    fun savePortfolio() {
-        Timber.tag(TAG).d("savePortfolio: $portfolio")
+    fun saveRepairPhoto() {
+        Timber.tag(TAG).d("saveRepairPhoto: $portfolio")
         savePortfolioUseCase(
             portfolio = PortfolioDto(
                 id = portfolio.value?.id,
                 masterId = getMasterIdFromSharedUseCase(),
+                projectId = project.value?.id,
                 title = title.value,
                 description = description.value,
-                type = CodeTable.PORTFOLIO.code,
+                typeCode = PortfolioType.REPAIR_PHOTO.code,
+                updateImages = true,
             ),
             beforeImageUri = null,
-            afterImageUri = repairPhotos.value?.first()?.uri,
+            afterImageUri = null,
+            images = repairPhotos.value?.map { attachmentDto ->
+                attachmentDto.uri
+            }
         )
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

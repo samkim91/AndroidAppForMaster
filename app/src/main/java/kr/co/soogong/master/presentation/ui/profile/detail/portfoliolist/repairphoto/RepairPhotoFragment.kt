@@ -63,7 +63,7 @@ class RepairPhotoFragment : BaseFragment<FragmentEditRepairPhotoBinding>(
             vm = viewModel
             lifecycleOwner = viewLifecycleOwner
 
-            saidBeforeRepairing.setImagesDeletableAdapter { viewModel.repairPhotos.removeAt(it) }
+            saidRepairPhoto.setImagesDeletableAdapter { viewModel.repairPhotos.removeAt(it) }
 
             (activity as EditProfileContainerActivity).setSaveButtonClickListener {
                 viewModel.title.observe(viewLifecycleOwner) {
@@ -71,7 +71,7 @@ class RepairPhotoFragment : BaseFragment<FragmentEditRepairPhotoBinding>(
                         if (it.isNullOrEmpty()) getString(R.string.required_field_alert) else null
                 }
 
-                saidBeforeRepairing.error =
+                saidRepairPhoto.error =
                     if (viewModel.repairPhotos.getItemCount() == 0) getString(R.string.required_field_alert) else null
 
                 viewModel.description.observe(viewLifecycleOwner) {
@@ -79,8 +79,13 @@ class RepairPhotoFragment : BaseFragment<FragmentEditRepairPhotoBinding>(
                         if (it.length < 10) getString(R.string.fill_text_over_10) else null
                 }
 
-                if (stiTitle.error.isNullOrEmpty() && saidBeforeRepairing.error.isNullOrEmpty() && stcDescription.error.isNullOrEmpty()) {
-                    viewModel.savePortfolio()
+                viewModel.project.observe(viewLifecycleOwner) {
+                    scgProject.error =
+                        if (it == null) getString(R.string.required_field_alert) else null
+                }
+
+                if (stiTitle.error.isNullOrEmpty() && saidRepairPhoto.error.isNullOrEmpty() && stcDescription.error.isNullOrEmpty() && scgProject.error.isNullOrEmpty()) {
+                    viewModel.saveRepairPhoto()
                 }
             }
         }
@@ -99,16 +104,19 @@ class RepairPhotoFragment : BaseFragment<FragmentEditRepairPhotoBinding>(
                         onGranted = {
                             TedImagePicker.with(requireContext())
                                 .buttonBackground(R.drawable.shape_green_background_radius8)
-                                .start { uri ->
-                                    if (FileHelper.isImageExtension(uri,
-                                            requireContext()) == false
+                                .max((viewModel.maxPhoto - viewModel.repairPhotos.getItemCount()),
+                                    resources.getString(R.string.maximum_images_count,
+                                        viewModel.maxPhoto)
+                                )
+                                .startMultiImage { uris ->
+                                    if (FileHelper.isImageExtension(uris, requireContext()) == false
                                     ) {
                                         requireContext().toast(getString(R.string.invalid_image_extension))
-                                        return@start
+                                        return@startMultiImage
                                     }
 
                                     viewModel.repairPhotos.clear()
-                                    viewModel.repairPhotos.add(
+                                    viewModel.repairPhotos.addAll(uris.map {
                                         AttachmentDto(
                                             id = null,
                                             partOf = null,
@@ -117,9 +125,9 @@ class RepairPhotoFragment : BaseFragment<FragmentEditRepairPhotoBinding>(
                                             s3Name = null,
                                             fileName = null,
                                             url = null,
-                                            uri = uri
+                                            uri = it
                                         )
-                                    )
+                                    })
                                 }
                         },
                         onDenied = { })

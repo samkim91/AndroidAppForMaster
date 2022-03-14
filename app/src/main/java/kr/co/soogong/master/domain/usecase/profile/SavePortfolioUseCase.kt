@@ -19,11 +19,13 @@ class SavePortfolioUseCase @Inject constructor(
         portfolio: PortfolioDto,
         beforeImageUri: Uri?,
         afterImageUri: Uri?,
+        images: List<Uri?>?,
     ): Single<PortfolioDto> {
         val portfolioDto = MultipartGenerator.createJson(portfolio)
         val beforeImageFile = MultipartGenerator.createFile(context, "beforeImageFile", beforeImageUri)
         val afterImageFile = MultipartGenerator.createFile(context, "afterImageFile", afterImageUri)
+        val imageFiles = MultipartGenerator.createFiles(context, "images", images)
 
-        return profileRepository.savePortfolio(portfolioDto, beforeImageFile, afterImageFile)
+        return profileRepository.savePortfolio(portfolioDto, beforeImageFile, afterImageFile, imageFiles)
     }
 }

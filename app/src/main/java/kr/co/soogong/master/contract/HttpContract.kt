@@ -65,7 +65,7 @@ object HttpContract {
 
     //region Portfolio
     const val SAVE_PORTFOLIO = "master/portfolio/save"
-    const val GET_PORTFOLIOS = "master/portfolio"
+    const val GET_PORTFOLIOS = "master/{type}"
     const val DELETE_PORTFOLIO = "master/portfolio/{id}"
     //endregion
 
