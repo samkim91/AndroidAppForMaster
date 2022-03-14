@@ -1,7 +1,7 @@
 package kr.co.soogong.master.presentation.uihelper.profile
 
 import androidx.fragment.app.Fragment
-import kr.co.soogong.master.data.entity.profile.PortfolioDto
+import kr.co.soogong.master.data.entity.profile.portfolio.PortfolioDto
 import kr.co.soogong.master.presentation.ui.profile.detail.address.EditAddressFragment
 import kr.co.soogong.master.presentation.ui.profile.detail.businessunitinformation.EditBusinessUnitInformationFragment
 import kr.co.soogong.master.presentation.ui.profile.detail.email.EditEmailFragment

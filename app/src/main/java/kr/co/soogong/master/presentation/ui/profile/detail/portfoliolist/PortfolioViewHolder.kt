@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.entity.profile.PortfolioDto
+import kr.co.soogong.master.data.entity.profile.portfolio.PortfolioDto
 import kr.co.soogong.master.databinding.ViewHolderPortfolioBinding
 import kr.co.soogong.master.databinding.ViewHolderPriceByProjectBinding
 import kr.co.soogong.master.databinding.ViewHolderRepairPhotoBinding

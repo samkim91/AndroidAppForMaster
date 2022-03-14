@@ -1,9 +1,9 @@
-package kr.co.soogong.master.domain.usecase.profile
+package kr.co.soogong.master.domain.usecase.profile.portfolio
 
 import dagger.Reusable
 import io.reactivex.Single
 import kr.co.soogong.master.data.entity.common.PageableContentDto
-import kr.co.soogong.master.data.entity.profile.PortfolioDto
+import kr.co.soogong.master.data.entity.profile.portfolio.PortfolioDto
 import kr.co.soogong.master.data.repository.ProfileRepository
 import javax.inject.Inject
 

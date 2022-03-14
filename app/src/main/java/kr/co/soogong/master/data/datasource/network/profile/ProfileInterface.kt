@@ -6,7 +6,7 @@ import kr.co.soogong.master.data.entity.common.PageableContentDto
 import kr.co.soogong.master.data.entity.common.ResponseDto
 import kr.co.soogong.master.data.entity.profile.MasterDto
 import kr.co.soogong.master.data.entity.profile.MasterSettingsDto
-import kr.co.soogong.master.data.entity.profile.PortfolioDto
+import kr.co.soogong.master.data.entity.profile.portfolio.PortfolioDto
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
@@ -34,12 +34,24 @@ interface ProfileInterface {
     ): Single<MasterDto>
 
     @Multipart
-    @POST(HttpContract.SAVE_PORTFOLIO)
+    @PUT(HttpContract.SAVE_PORTFOLIO)
     fun savePortfolio(
-        @Part("portfolioDto") portfolioDto: RequestBody,
+        @Part("portfolioDto") savePortfolioJson: RequestBody,
         @Part beforeImageFile: MultipartBody.Part?,
         @Part afterImageFile: MultipartBody.Part?,
-        @Part imageFiles: List<MultipartBody.Part?>?
+    ): Single<PortfolioDto>
+
+    @Multipart
+    @PUT(HttpContract.SAVE_REPAIR_PHOTO)
+    fun saveRepairPhoto(
+        @Part("photoDto") saveRepairPhotoJson: RequestBody,
+        @Part imageFiles: List<MultipartBody.Part?>?,
+    ): Single<PortfolioDto>
+
+    @Multipart
+    @PUT(HttpContract.SAVE_PRICE_BY_PROJECT)
+    fun savePriceByProject(
+        @Part("priceDto") savePriceByProjectJson: RequestBody,
     ): Single<PortfolioDto>
 
     @GET(HttpContract.GET_PORTFOLIOS)

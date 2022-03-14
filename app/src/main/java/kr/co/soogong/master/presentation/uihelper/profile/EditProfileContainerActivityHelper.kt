@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.core.os.bundleOf
-import kr.co.soogong.master.data.entity.profile.PortfolioDto
+import kr.co.soogong.master.data.entity.profile.portfolio.PortfolioDto
 import kr.co.soogong.master.presentation.ui.profile.detail.EditProfileContainerActivity
 
 object EditProfileContainerActivityHelper {

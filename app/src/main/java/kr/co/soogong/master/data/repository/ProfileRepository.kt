@@ -8,7 +8,7 @@ import kr.co.soogong.master.data.datasource.network.profile.ProfileService
 import kr.co.soogong.master.data.entity.common.PageableContentDto
 import kr.co.soogong.master.data.entity.profile.MasterDto
 import kr.co.soogong.master.data.entity.profile.MasterSettingsDto
-import kr.co.soogong.master.data.entity.profile.PortfolioDto
+import kr.co.soogong.master.data.entity.profile.portfolio.PortfolioDto
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
@@ -110,12 +110,24 @@ class ProfileRepository @Inject constructor(
             }
 
     fun savePortfolio(
-        portfolioDto: RequestBody,
+        savePortfolioJson: RequestBody,
         beforeImageFile: MultipartBody.Part?,
         afterImageFile: MultipartBody.Part?,
+    ): Single<PortfolioDto> {
+        return profileService.savePortfolio(savePortfolioJson, beforeImageFile, afterImageFile)
+    }
+
+    fun saveRepairPhoto(
+        saveRepairPhotoJson: RequestBody,
         imageFiles: List<MultipartBody.Part?>?,
     ): Single<PortfolioDto> {
-        return profileService.savePortfolio(portfolioDto, beforeImageFile, afterImageFile, imageFiles)
+        return profileService.saveRepairPhoto(saveRepairPhotoJson, imageFiles)
+    }
+
+    fun savePriceByProject(
+        savePriceByProjectJson: RequestBody,
+    ): Single<PortfolioDto> {
+        return profileService.savePriceByProject(savePriceByProjectJson)
     }
 
     fun deletePortfolio(id: Int): Single<ResponseBody> = profileService.deletePortfolio(id)

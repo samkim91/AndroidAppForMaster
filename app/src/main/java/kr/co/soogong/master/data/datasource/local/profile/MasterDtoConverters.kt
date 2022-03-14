@@ -5,7 +5,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kr.co.soogong.master.data.entity.common.major.ProjectDto
 import kr.co.soogong.master.data.entity.profile.MasterConfigDto
-import kr.co.soogong.master.data.entity.profile.PortfolioDto
+import kr.co.soogong.master.data.entity.profile.portfolio.PortfolioDto
 
 class MasterDtoConverters {
     @TypeConverter

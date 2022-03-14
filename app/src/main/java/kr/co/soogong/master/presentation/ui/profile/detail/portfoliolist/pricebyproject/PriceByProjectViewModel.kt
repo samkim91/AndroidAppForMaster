@@ -6,10 +6,9 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import kr.co.soogong.master.data.entity.profile.PortfolioDto
-import kr.co.soogong.master.domain.entity.profile.portfolio.PortfolioType
+import kr.co.soogong.master.data.entity.profile.portfolio.SavePriceByProjectDto
 import kr.co.soogong.master.domain.usecase.auth.GetMasterIdFromSharedUseCase
-import kr.co.soogong.master.domain.usecase.profile.SavePortfolioUseCase
+import kr.co.soogong.master.domain.usecase.profile.portfolio.SavePriceByProjectUseCase
 import kr.co.soogong.master.presentation.ui.base.BaseViewModel
 import timber.log.Timber
 import javax.inject.Inject
@@ -17,7 +16,7 @@ import javax.inject.Inject
 @HiltViewModel
 class PriceByProjectViewModel @Inject constructor(
     private val getMasterIdFromSharedUseCase: GetMasterIdFromSharedUseCase,
-    private val savePortfolioUseCase: SavePortfolioUseCase,
+    private val savePriceByProjectUseCase: SavePriceByProjectUseCase,
     val savedStateHandle: SavedStateHandle,
 ) : BaseViewModel() {
     val priceByProject = PriceByProjectFragment.getPriceByProject(savedStateHandle)
@@ -42,18 +41,14 @@ class PriceByProjectViewModel @Inject constructor(
 
     fun savePriceByProject() {
         Timber.tag(TAG).d("savePriceByProject: $priceByProject")
-        savePortfolioUseCase(
-            PortfolioDto(
+        savePriceByProjectUseCase(
+            SavePriceByProjectDto(
                 id = priceByProject.value?.id,
                 masterId = getMasterIdFromSharedUseCase(),
                 title = title.value!!,
-                description = description.value,
-                typeCode = PortfolioType.PRICE_BY_PROJECT.code,
-                price = price.value?.toInt(),
-            ),
-            beforeImageUri = null,
-            afterImageUri = null,
-            images = null
+                description = description.value!!,
+                price = price.value?.toInt()!!,
+            )
         ).subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
