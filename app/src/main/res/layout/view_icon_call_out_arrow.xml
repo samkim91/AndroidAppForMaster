@@ -21,7 +21,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_title"
-            style="@style/call_out.regular"
+            android:textAppearance="@style/call_out.regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/gap_6"
@@ -38,7 +38,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_end_text"
-            style="@style/caption_1.regular"
+            android:textAppearance="@style/caption_1.regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/gap_10"

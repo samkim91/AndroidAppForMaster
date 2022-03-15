@@ -40,6 +40,10 @@
     <string name="copy">복사</string>
     <string name="adding_images">사진 추가</string>
     <string name="project_name">업종명</string>
+    <string name="memo">메모</string>
+    <string name="writing_memo">메모 남기기</string>
+    <string name="adding_memo">메모 추가</string>
+    <string name="memo_introduction">마스터님만 볼 수 있는 메모입니다.</string>
 
 
     <string name="required_field_alert">필수 정보입니다.</string>

@@ -52,6 +52,14 @@
                     app:requirementToken="@{vm.requirement.token}"
                     app:status="@{vm.requirement.status}" />
 
+                <kr.co.soogong.master.presentation.atomic.molecules.MemoHolder
+                    android:id="@+id/mh_master_memo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:onContainerClickListener="@{() -> vm.showMenuBottomSheetDialog()}"
+                    app:content="@{vm.requirement.estimationDto.masterMemo}"
+                    app:label="@{@string/memo}" />
+
                 <LinearLayout
                     android:id="@+id/flexible_container"
                     android:layout_width="match_parent"
