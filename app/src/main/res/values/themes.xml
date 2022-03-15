@@ -134,6 +134,7 @@
     <style name="outlinedTextInputLayout">
         <item name="android:textAppearance">@style/subheadline.regular</item>
         <item name="android:textColor">@color/black</item>
+        <item name="startIconTint">@color/light_grey_2</item>
         <item name="endIconMode">clear_text</item>
         <item name="endIconTint">@color/light_grey_2</item>
 

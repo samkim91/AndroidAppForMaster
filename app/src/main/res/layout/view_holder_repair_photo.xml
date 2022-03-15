@@ -64,13 +64,13 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_subheadline"
-                style="@style/subheadline.bold"
                 android:layout_width="@dimen/gap_0"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/gap_14"
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:text="@{data.title}"
+                android:textAppearance="@style/subheadline.bold"
                 android:textColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/cv_images"

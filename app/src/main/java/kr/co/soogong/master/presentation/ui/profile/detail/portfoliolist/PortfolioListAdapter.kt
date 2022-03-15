@@ -15,7 +15,7 @@ class PortfolioListAdapter(
         PortfolioCommonViewHolder.create(parent, viewType)
 
     override fun onBindViewHolder(holder: PortfolioCommonViewHolder, position: Int) =
-        holder.binding(context,
+        holder.bind(context,
             currentList[position],
             buttonLeftClickListener,
             buttonRightClickListener)
