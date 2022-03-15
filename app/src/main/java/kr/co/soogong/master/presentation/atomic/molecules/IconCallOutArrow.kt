@@ -8,8 +8,8 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
 import kr.co.soogong.master.R
+import kr.co.soogong.master.databinding.ViewIconCallOutArrowBinding
 import kr.co.soogong.master.domain.entity.common.ColorTheme
-import kr.co.soogong.master.databinding.ViewIconSubheadlineArrowBinding
 
 class IconCallOutArrow @JvmOverloads constructor(
     context: Context,
@@ -17,7 +17,7 @@ class IconCallOutArrow @JvmOverloads constructor(
     defStyle: Int = 0,
 ) : ConstraintLayout(context, attributeSet, defStyle) {
     private val binding =
-        ViewIconSubheadlineArrowBinding.inflate(LayoutInflater.from(context), this, true)
+        ViewIconCallOutArrowBinding.inflate(LayoutInflater.from(context), this, true)
 
     var icon: Drawable? = null
         set(value) {

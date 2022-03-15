@@ -188,8 +188,13 @@ class ViewRequirementViewModel @Inject constructor(
             ).addToDisposable()
     }
 
+    fun showMenuBottomSheetDialog() {
+        Timber.tag(TAG).d("showMenuBottomSheetDialog: ")
+        setAction(SHOW_MEMO_BOTTOM_SHEET_DIALOG)
+    }
+
     companion object {
-        private const val TAG = "ViewRequirementViewModel"
+        private val TAG = ViewRequirementViewModel::class.java.name
         const val REFUSE_TO_ESTIMATE_SUCCESSFULLY = "REFUSE_TO_ESTIMATE_SUCCESSFULLY"
         const val INVALID_REQUIREMENT = "INVALID_REQUIREMENT"
         const val ACCEPT_TO_MEASURE_SUCCESSFULLY = "RESPOND_TO_MEASURE_SUCCESSFULLY"
@@ -197,6 +202,6 @@ class ViewRequirementViewModel @Inject constructor(
         const val ASK_FOR_REVIEW_SUCCESSFULLY = "ASK_FOR_REVIEW_SUCCESSFULLY"
         const val NOT_APPROVED_MASTER = "NOT_APPROVED_MASTER"
         const val REQUEST_APPROVE_MASTER = "REQUEST_APPROVE_MASTER"
-        const val REQUEST_FAILED = "REQUEST_FAILED"
+        const val SHOW_MEMO_BOTTOM_SHEET_DIALOG = "SHOW_MEMO_BOTTOM_SHEET_DIALOG"
     }
 }

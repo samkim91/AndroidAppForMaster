@@ -5,15 +5,15 @@
     <data>
 
         <variable
-            name="estimationDescription"
+            name="content"
             type="String" />
 
         <variable
-            name="closeClickListener"
+            name="negativeClickListener"
             type="android.view.View.OnClickListener" />
 
         <variable
-            name="confirmClickListener"
+            name="positiveClickListener"
             type="android.view.View.OnClickListener" />
     </data>
 
@@ -40,7 +40,7 @@
             android:layout_marginTop="@dimen/gap_24"
             android:background="@drawable/ic_close_rounded"
             android:backgroundTint="@color/grey_2"
-            android:onClick="@{closeClickListener}"
+            android:onClick="@{negativeClickListener}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -52,7 +52,7 @@
             android:layout_marginEnd="@dimen/gap_20"
             android:background="@drawable/ic_simple_check"
             android:backgroundTint="@color/grey_2"
-            android:onClick="@{confirmClickListener}"
+            android:onClick="@{positiveClickListener}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -71,13 +71,10 @@
             android:layout_marginStart="@dimen/gap_16"
             android:layout_marginEnd="@dimen/gap_16"
             android:layout_marginBottom="@dimen/gap_16"
-            app:content="@{estimationDescription}"
-            app:hint="@{@string/estimation_description_notice}"
+            app:content="@{content}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/barrier_description"
-            app:maxCount="@{500}"
-            app:subheadline="@{@string/estimation_description}" />
+            app:layout_constraintTop_toBottomOf="@id/barrier_description" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -7,7 +7,8 @@ import kr.co.soogong.master.R
 import kr.co.soogong.master.data.entity.requirement.estimation.EstimationTemplateDto
 import kr.co.soogong.master.databinding.ActivityEstimationTemplatesBinding
 import kr.co.soogong.master.presentation.ui.base.BaseActivity
-import kr.co.soogong.master.presentation.ui.common.dialog.bottomDialogCountableEdittext.BottomSheetDialogEstimationTemplate
+import kr.co.soogong.master.presentation.ui.common.dialog.bottomDialogCountableEdittext.BottomDialogCountableEdittext
+import kr.co.soogong.master.presentation.ui.common.dialog.bottomDialogCountableEdittext.BottomDialogData
 import kr.co.soogong.master.presentation.ui.common.dialog.popup.DefaultDialog
 import kr.co.soogong.master.presentation.ui.common.dialog.popup.DialogData
 import kr.co.soogong.master.presentation.ui.requirement.action.write.template.EstimationTemplatesViewModel.Companion.REQUEST_FAILED
@@ -54,19 +55,14 @@ class EstimationTemplatesActivity : BaseActivity<ActivityEstimationTemplatesBind
                 },
                 onEditingClicked = { template ->
                     Timber.tag(TAG).d("middleButtonClick: $template")
-                    showBottomSheetDialog(
-                        EstimationTemplateDto(id = template.id,
-                            masterId = template.masterId,
-                            description = template.description)
-                    )
+                    viewModel.estimationTemplate.value = template
+                    showBottomSheetDialog(template.description)
                 },
                 onApplyingClicked = { template ->
                     Timber.tag(TAG).d("buttonRightClick: $template")
                     this@EstimationTemplatesActivity.run {
-                        setResult(
-                            RESULT_OK,
-                            EstimationTemplatesActivityHelper.setResponse(template.description)
-                        )
+                        setResult(RESULT_OK,
+                            EstimationTemplatesActivityHelper.setResponse(template.description!!))
                         finish()
                     }
                 }
@@ -74,26 +70,34 @@ class EstimationTemplatesActivity : BaseActivity<ActivityEstimationTemplatesBind
         }
     }
 
-    private fun showBottomSheetDialog(estimationTemplateDto: EstimationTemplateDto?) {
-        BottomSheetDialogEstimationTemplate.newInstance(
-            estimationTemplateDto = estimationTemplateDto
+    private fun showBottomSheetDialog(content: String?) {
+        BottomDialogCountableEdittext.newInstance(
+            bottomDialogData = BottomDialogData.getEstimationTemplate(),
+            content = content
         ).let {
             it.setButtonsClickListener(
-                onClose = { templateDto ->
-                    viewModel.estimationTemplate.value = templateDto
+                onNegative = { editedContent ->
+                    viewModel.estimationTemplate.value = EstimationTemplateDto(
+                        viewModel.estimationTemplate.value?.id ?: 0,
+                        viewModel.estimationTemplate.value?.masterId,
+                        editedContent)
                 },
-                onConfirm = { templateDto ->
-                    if (templateDto.description.isNotEmpty()) {
-                        viewModel.estimationTemplate.value = templateDto
+                onPositive = { editedContent ->
+                    if (editedContent.isNotEmpty()) {
+                        viewModel.estimationTemplate.value = EstimationTemplateDto(
+                            viewModel.estimationTemplate.value?.id ?: 0,
+                            viewModel.estimationTemplate.value?.masterId,
+                            editedContent)
+
                         viewModel.saveEstimationTemplate()
                     }
                 },
-                onCancel = { templateDto ->
-                    if (templateDto.description.isNotEmpty()) DefaultDialog.newInstance(
+                onCancel = { editedContent ->
+                    if (editedContent.isNotEmpty()) DefaultDialog.newInstance(
                         DialogData.getConfirmingForIgnoreChangeOfEstimationTemplate()
                     ).let { dialog ->
                         dialog.setButtonsClickListener(
-                            onPositive = { showBottomSheetDialog(templateDto) },
+                            onPositive = { showBottomSheetDialog(editedContent) },
                             onNegative = { }
                         )
                         dialog.show(supportFragmentManager, dialog.tag)

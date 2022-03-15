@@ -35,6 +35,9 @@ data class EstimationDto(
     @SerializedName("description")
     val description: String? = null,
 
+    @SerializedName("masterMemo")
+    val masterMemo: String? = null,
+
     @SerializedName("isSavingTemplate")
     val isSavingTemplate: Boolean = false,
 
