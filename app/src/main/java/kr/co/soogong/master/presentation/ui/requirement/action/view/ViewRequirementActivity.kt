@@ -8,6 +8,8 @@ import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ActivityViewRequirementBinding
 import kr.co.soogong.master.presentation.ui.base.BaseActivity
 import kr.co.soogong.master.presentation.ui.base.BaseViewModel.Companion.REQUEST_FAILED
+import kr.co.soogong.master.presentation.ui.common.dialog.bottomDialogCountableEdittext.BottomDialogCountableEdittext
+import kr.co.soogong.master.presentation.ui.common.dialog.bottomDialogCountableEdittext.BottomDialogData
 import kr.co.soogong.master.presentation.ui.common.dialog.popup.DefaultDialog
 import kr.co.soogong.master.presentation.ui.common.dialog.popup.DialogData
 import kr.co.soogong.master.presentation.ui.requirement.action.view.ViewRequirementViewModel.Companion.ACCEPT_TO_MEASURE_SUCCESSFULLY
@@ -125,7 +127,32 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
     }
 
     private fun showMemoBottomSheetDialog() {
+        BottomDialogCountableEdittext.newInstance(
+            bottomDialogData = BottomDialogData.getMemo(),
+            content = viewModel.masterMemo.value
+        ).let {
+            it.setButtonsClickListener(
+                onNegative = {},
+                onPositive = { editedContent ->
+                    viewModel.masterMemo.value = editedContent
+                    viewModel.saveMasterMemo()
+                },
+                onCancel = { editedContent ->
+                    viewModel.masterMemo.value = editedContent
 
+                    DefaultDialog.newInstance(
+                        DialogData.getConfirmingForIgnoreChange()
+                    ).let { dialog ->
+                        dialog.setButtonsClickListener(
+                            onPositive = { showMemoBottomSheetDialog() },
+                            onNegative = { }
+                        )
+                        dialog.show(supportFragmentManager, dialog.tag)
+                    }
+                }
+            )
+            it.show(supportFragmentManager, it.tag)
+        }
     }
 
     override fun onNewIntent(intent: Intent?) {

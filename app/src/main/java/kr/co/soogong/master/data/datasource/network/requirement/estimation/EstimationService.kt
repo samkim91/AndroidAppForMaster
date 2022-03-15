@@ -4,6 +4,7 @@ import io.reactivex.Single
 import kr.co.soogong.master.data.entity.requirement.CustomerRequest
 import kr.co.soogong.master.data.entity.requirement.estimation.EstimationDto
 import kr.co.soogong.master.data.entity.requirement.estimation.EstimationTemplateDto
+import kr.co.soogong.master.data.entity.requirement.estimation.SaveMasterMemoDto
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Retrofit
@@ -12,34 +13,38 @@ import javax.inject.Inject
 class EstimationService @Inject constructor(
     retrofit: Retrofit,
 ) {
-    private val estimationService = retrofit.create(EstimationInterface::class.java)
+    private val estimationInterface = retrofit.create(EstimationInterface::class.java)
 
     fun saveEstimation(
         estimationDto: RequestBody,
         measurementImage: List<MultipartBody.Part?>? = null,
     ): Single<EstimationDto> {
-        return estimationService.saveEstimation(estimationDto, measurementImage)
+        return estimationInterface.saveEstimation(estimationDto, measurementImage)
     }
 
     fun respondToMeasure(estimationDto: EstimationDto): Single<EstimationDto> {
-        return estimationService.respondToMeasure(estimationDto)
+        return estimationInterface.respondToMeasure(estimationDto)
     }
 
     fun callToClient(data: HashMap<String, Any>): Single<Boolean> {
-        return estimationService.callToClient(data)
+        return estimationInterface.callToClient(data)
     }
 
-    fun getCustomerRequests(masterUid: String): Single<CustomerRequest> = estimationService.getCustomerRequests(masterUid)
+    fun getCustomerRequests(masterUid: String): Single<CustomerRequest> = estimationInterface.getCustomerRequests(masterUid)
 
     fun getEstimationTemplates(masterUid: String): Single<List<EstimationTemplateDto>> {
-        return estimationService.getEstimationTemplates(masterUid)
+        return estimationInterface.getEstimationTemplates(masterUid)
     }
 
     fun saveEstimationTemplate(estimationTemplateDto: EstimationTemplateDto): Single<EstimationTemplateDto> {
-        return estimationService.saveEstimationTemplate(estimationTemplateDto)
+        return estimationInterface.saveEstimationTemplate(estimationTemplateDto)
     }
 
     fun deleteEstimationTemplate(id: Int): Single<Boolean> {
-        return estimationService.deleteEstimationTemplate(id)
+        return estimationInterface.deleteEstimationTemplate(id)
+    }
+
+    suspend fun saveMasterMemo(estimationToken: String, masterMemoDto: SaveMasterMemoDto) {
+        return estimationInterface.saveMasterNote(estimationToken, masterMemoDto)
     }
 }

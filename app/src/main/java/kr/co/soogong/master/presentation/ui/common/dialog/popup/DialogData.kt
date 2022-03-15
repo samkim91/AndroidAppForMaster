@@ -219,13 +219,13 @@ data class DialogData(
                 "아니요",
             )
 
-        fun getConfirmingForIgnoreChangeOfEstimationTemplate() =
+        fun getConfirmingForIgnoreChange() =
             DialogData(
                 "[주의]",
                 "내용을 저장하지 않으셨습니다. 저장하지 않은 내용은 복구가 불가능합니다.",
                 "",
                 "계속 수정",
-                "삭제",
+                "닫기",
             )
 
         fun getNoticeForRequestMeasure(count: Int) =

@@ -76,12 +76,7 @@ class EstimationTemplatesActivity : BaseActivity<ActivityEstimationTemplatesBind
             content = content
         ).let {
             it.setButtonsClickListener(
-                onNegative = { editedContent ->
-                    viewModel.estimationTemplate.value = EstimationTemplateDto(
-                        viewModel.estimationTemplate.value?.id ?: 0,
-                        viewModel.estimationTemplate.value?.masterId,
-                        editedContent)
-                },
+                onNegative = {},
                 onPositive = { editedContent ->
                     if (editedContent.isNotEmpty()) {
                         viewModel.estimationTemplate.value = EstimationTemplateDto(
@@ -94,7 +89,7 @@ class EstimationTemplatesActivity : BaseActivity<ActivityEstimationTemplatesBind
                 },
                 onCancel = { editedContent ->
                     if (editedContent.isNotEmpty()) DefaultDialog.newInstance(
-                        DialogData.getConfirmingForIgnoreChangeOfEstimationTemplate()
+                        DialogData.getConfirmingForIgnoreChange()
                     ).let { dialog ->
                         dialog.setButtonsClickListener(
                             onPositive = { showBottomSheetDialog(editedContent) },

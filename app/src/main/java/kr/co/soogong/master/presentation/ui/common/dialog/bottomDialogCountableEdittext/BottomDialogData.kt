@@ -22,7 +22,7 @@ data class BottomDialogData(
         fun getMemo() =
             BottomDialogData(
                 title = R.string.adding_memo,
-                hint = null,
+                hint = R.string.memo_introduction,
                 maxCount= 500
             )
     }

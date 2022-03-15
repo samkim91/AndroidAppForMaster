@@ -10,14 +10,17 @@ import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.launch
 import kr.co.soogong.master.data.entity.requirement.estimation.EstimationDto
+import kr.co.soogong.master.data.entity.requirement.estimation.SaveMasterMemoDto
 import kr.co.soogong.master.domain.entity.common.CodeTable
 import kr.co.soogong.master.domain.entity.requirement.Requirement
 import kr.co.soogong.master.domain.entity.requirement.estimation.EstimationResponseCode
+import kr.co.soogong.master.domain.usecase.auth.GetMasterUidFromSharedUseCase
 import kr.co.soogong.master.domain.usecase.profile.GetMasterSettingsUseCase
-import kr.co.soogong.master.domain.usecase.requirement.*
+import kr.co.soogong.master.domain.usecase.requirement.GetRequirementUseCase
 import kr.co.soogong.master.domain.usecase.requirement.estimation.CallToClientUseCase
 import kr.co.soogong.master.domain.usecase.requirement.estimation.RespondToMeasureUseCase
 import kr.co.soogong.master.domain.usecase.requirement.estimation.SaveEstimationUseCase
+import kr.co.soogong.master.domain.usecase.requirement.estimation.SaveMasterMemoUseCase
 import kr.co.soogong.master.domain.usecase.requirement.review.RequestReviewUseCase
 import kr.co.soogong.master.presentation.ui.base.BaseViewModel
 import kr.co.soogong.master.presentation.uihelper.requirment.action.ViewRequirementActivityHelper
@@ -26,12 +29,14 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ViewRequirementViewModel @Inject constructor(
+    private val getMasterUidFromSharedUseCase: GetMasterUidFromSharedUseCase,
     private val getRequirementUseCase: GetRequirementUseCase,
     private val saveEstimationUseCase: SaveEstimationUseCase,
     private val respondToMeasureUseCase: RespondToMeasureUseCase,
     private val callToClientUseCase: CallToClientUseCase,
     private val requestReviewUseCase: RequestReviewUseCase,
     private val getMasterSettingsUseCase: GetMasterSettingsUseCase,
+    private val saveMasterMemoUseCase: SaveMasterMemoUseCase,
     val savedStateHandle: SavedStateHandle,
 ) : BaseViewModel() {
     // Note : activity 에서 viewModel 로 데이터 넘기는 법. savedStateHandle 에서 가져온다.
@@ -42,6 +47,8 @@ class ViewRequirementViewModel @Inject constructor(
     private val _requirement = MutableLiveData<Requirement>()
     val requirement: LiveData<Requirement>
         get() = _requirement
+
+    val masterMemo = MutableLiveData<String>()
 
     init {
         requestMasterSimpleInfo()
@@ -60,6 +67,7 @@ class ViewRequirementViewModel @Inject constructor(
                         setAction(INVALID_REQUIREMENT)
                     }
                     _requirement.value = it
+                    masterMemo.value = it.estimationDto?.masterMemo ?: ""
                 },
                 onError = {
                     Timber.tag(TAG).d("requestRequirement failed: $it")
@@ -191,6 +199,28 @@ class ViewRequirementViewModel @Inject constructor(
     fun showMenuBottomSheetDialog() {
         Timber.tag(TAG).d("showMenuBottomSheetDialog: ")
         setAction(SHOW_MEMO_BOTTOM_SHEET_DIALOG)
+    }
+
+    fun saveMasterMemo() {
+        Timber.tag(TAG).d("saveMasterMemo: ")
+
+        viewModelScope.launch {
+            try {
+                saveMasterMemoUseCase(
+                    _requirement.value?.estimationDto?.token!!,
+                    SaveMasterMemoDto(
+                        getMasterUidFromSharedUseCase(),
+                        masterMemo.value ?: ""
+                    )
+                )
+
+                Timber.tag(TAG).d("saveMasterMemo successfully: ")
+                requestRequirement()
+            } catch (e: Exception) {
+                Timber.tag(TAG).d("saveMasterMemo failed: $e")
+                setAction(REQUEST_FAILED)
+            }
+        }
     }
 
     companion object {
