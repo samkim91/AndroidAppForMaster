@@ -8,6 +8,7 @@ import kr.co.soogong.master.domain.entity.profile.portfolio.IPortfolio
 
 class PortfolioListAdapter(
     private val context: Context,
+    private val imageClickListener: (iPortfolio: IPortfolio) -> Unit,
     private val buttonLeftClickListener: (iPortfolio: IPortfolio) -> Unit,
     private val buttonRightClickListener: (iPortfolio: IPortfolio) -> Unit,
 ) : ListAdapter<IPortfolio, PortfolioCommonViewHolder>(PortfolioListDiffUtil()) {
@@ -17,6 +18,7 @@ class PortfolioListAdapter(
     override fun onBindViewHolder(holder: PortfolioCommonViewHolder, position: Int) =
         holder.bind(context,
             currentList[position],
+            imageClickListener,
             buttonLeftClickListener,
             buttonRightClickListener)
 

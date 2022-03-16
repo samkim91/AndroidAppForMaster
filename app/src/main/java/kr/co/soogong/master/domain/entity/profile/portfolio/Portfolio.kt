@@ -23,7 +23,7 @@ data class Portfolio(
                 masterId = portfolioDto.masterId!!,
                 type = PortfolioType.getPortfolioTypeFromCode(portfolioDto.typeCode!!),
                 title = portfolioDto.title!!,
-                description = portfolioDto.description!!,
+                description = portfolioDto.description ?: "",
                 beforeImage = portfolioDto.beforeImage,
                 afterImage = portfolioDto.afterImage,
             )

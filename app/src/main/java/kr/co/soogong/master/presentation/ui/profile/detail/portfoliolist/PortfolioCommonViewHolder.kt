@@ -20,13 +20,17 @@ open class PortfolioCommonViewHolder(
     open fun bind(
         context: Context,
         iPortfolio: IPortfolio,
+        imageClickListener: (iPortfolio: IPortfolio) -> Unit,
         buttonLeftClickListener: (iPortfolio: IPortfolio) -> Unit,
         buttonRightClickListener: (iPortfolio: IPortfolio) -> Unit,
     ) {
         with(binding) {
             when (this) {
-                is ViewHolderPortfolioBinding-> {
+                is ViewHolderPortfolioBinding -> {
                     data = (iPortfolio as Portfolio)
+                    setOnImageClick {
+                        imageClickListener(iPortfolio)
+                    }
                     setOnLeftButtonClick {
                         buttonLeftClickListener(iPortfolio)
                     }
@@ -35,8 +39,11 @@ open class PortfolioCommonViewHolder(
                     }
                 }
 
-                is ViewHolderRepairPhotoBinding-> {
+                is ViewHolderRepairPhotoBinding -> {
                     data = (iPortfolio as RepairPhoto)
+                    setOnImageClick {
+                        imageClickListener(iPortfolio)
+                    }
                     setOnLeftButtonClick {
                         buttonLeftClickListener(iPortfolio)
                     }
@@ -45,7 +52,7 @@ open class PortfolioCommonViewHolder(
                     }
                 }
 
-                is ViewHolderPriceByProjectBinding-> {
+                is ViewHolderPriceByProjectBinding -> {
                     data = (iPortfolio as PriceByProject)
                     setOnLeftButtonClick {
                         buttonLeftClickListener(iPortfolio)

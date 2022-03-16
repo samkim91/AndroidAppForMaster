@@ -53,7 +53,7 @@ class PortfolioViewModel @Inject constructor(
                         id = portfolio.value?.id,
                         masterId = getMasterIdFromSharedUseCase(),
                         title = title.value!!,
-                        description = description.value!!,
+                        description = description.value ?: "",
                     ),
                     imageBeforeRepairing.value?.first()?.uri,
                     imageAfterRepairing.value?.first()?.uri

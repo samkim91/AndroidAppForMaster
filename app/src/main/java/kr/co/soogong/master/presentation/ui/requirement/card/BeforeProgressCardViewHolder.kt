@@ -97,7 +97,7 @@ class RequestMeasureCardViewHolder(
 }
 
 // 실측예정 상태
-// 버튼 : 1. 전화 하기, 2. 견적 보내기
+// 버튼 : 1. 전화 하기, 2. 실측 보내기
 class MeasuringCardViewHolder(
     context: Context,
     fragmentManager: FragmentManager,
@@ -112,7 +112,7 @@ class MeasuringCardViewHolder(
 
         with(binding) {
             buttonLeft.setCallToClient(requirementCard)
-            buttonRight.setSendingEstimation(requirementCard)
+            buttonRight.setSendMeasure(requirementCard)
         }
     }
 }

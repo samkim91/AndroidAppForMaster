@@ -74,17 +74,12 @@ class RepairPhotoFragment : BaseFragment<FragmentEditRepairPhotoBinding>(
                 saidRepairPhoto.error =
                     if (viewModel.repairPhotos.getItemCount() == 0) getString(R.string.required_field_alert) else null
 
-                viewModel.description.observe(viewLifecycleOwner) {
-                    stcDescription.error =
-                        if (it.length < 10) getString(R.string.fill_text_over_10) else null
-                }
-
                 viewModel.project.observe(viewLifecycleOwner) {
                     scgProject.error =
                         if (it == null) getString(R.string.required_field_alert) else null
                 }
 
-                if (stiTitle.error.isNullOrEmpty() && saidRepairPhoto.error.isNullOrEmpty() && stcDescription.error.isNullOrEmpty() && scgProject.error.isNullOrEmpty()) {
+                if (stiTitle.error.isNullOrEmpty() && saidRepairPhoto.error.isNullOrEmpty() && scgProject.error.isNullOrEmpty()) {
                     viewModel.saveRepairPhoto()
                 }
             }

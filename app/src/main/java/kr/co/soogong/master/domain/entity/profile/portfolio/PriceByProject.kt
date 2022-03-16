@@ -21,7 +21,7 @@ data class PriceByProject(
                 masterId = portfolioDto.masterId!!,
                 type = PortfolioType.getPortfolioTypeFromCode(portfolioDto.typeCode!!),
                 title = portfolioDto.title!!,
-                description = portfolioDto.description!!,
+                description = portfolioDto.description ?: "",
                 price = portfolioDto.price!!
             )
     }

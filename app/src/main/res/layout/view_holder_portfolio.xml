@@ -11,6 +11,10 @@
             type="kr.co.soogong.master.domain.entity.profile.portfolio.Portfolio" />
 
         <variable
+            name="onImageClick"
+            type="android.view.View.OnClickListener" />
+
+        <variable
             name="onLeftButtonClick"
             type="android.view.View.OnClickListener" />
 
@@ -52,6 +56,7 @@
                 android:layout_width="@dimen/gap_100"
                 android:layout_height="@dimen/gap_100"
                 android:layout_marginTop="@dimen/gap_12"
+                android:onClick="@{onImageClick}"
                 app:cardCornerRadius="@dimen/gap_10"
                 app:cardElevation="@dimen/gap_0"
                 app:layout_constraintStart_toStartOf="@id/tv_subheadline"
@@ -70,6 +75,7 @@
                 android:layout_width="@dimen/gap_100"
                 android:layout_height="@dimen/gap_100"
                 android:layout_marginStart="@dimen/gap_14"
+                android:onClick="@{onImageClick}"
                 app:cardCornerRadius="@dimen/gap_10"
                 app:cardElevation="@dimen/gap_0"
                 app:layout_constraintStart_toEndOf="@id/cv_before_image"
