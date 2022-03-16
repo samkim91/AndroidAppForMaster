@@ -8,10 +8,13 @@ import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ActivityPortfolioListBinding
 import kr.co.soogong.master.domain.entity.common.ButtonTheme
 import kr.co.soogong.master.domain.entity.common.PortfolioType
+import kr.co.soogong.master.domain.entity.profile.portfolio.Portfolio
+import kr.co.soogong.master.domain.entity.profile.portfolio.RepairPhoto
 import kr.co.soogong.master.presentation.ui.base.BaseActivity
 import kr.co.soogong.master.presentation.ui.base.BaseViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.presentation.ui.common.dialog.popup.DefaultDialog
 import kr.co.soogong.master.presentation.ui.common.dialog.popup.DialogData
+import kr.co.soogong.master.presentation.uihelper.common.image.ImageViewActivityHelper
 import kr.co.soogong.master.presentation.uihelper.profile.EditProfileContainerActivityHelper
 import kr.co.soogong.master.presentation.uihelper.profile.EditProfileContainerFragmentHelper.ADD_PORTFOLIO
 import kr.co.soogong.master.presentation.uihelper.profile.EditProfileContainerFragmentHelper.ADD_PRICE_BY_PROJECTS
@@ -74,6 +77,17 @@ class PortfolioListActivity : BaseActivity<ActivityPortfolioListBinding>(
         binding.rvItems.adapter =
             PortfolioListAdapter(
                 context = this,
+                imageClickListener = { iPortfolio ->
+                    when (iPortfolio) {
+                        is Portfolio ->
+                            startActivity(ImageViewActivityHelper.getIntent(this,
+                                listOf(iPortfolio.beforeImage?.url!!,
+                                    iPortfolio.afterImage?.url!!)))
+                        is RepairPhoto ->
+                            startActivity(ImageViewActivityHelper.getIntent(this,
+                                iPortfolio.images?.map { it.url!! }!!))
+                    }
+                },
                 buttonLeftClickListener = { iPortfolio ->
                     DefaultDialog.newInstance(
                         dialogData = when (viewModel.type) {

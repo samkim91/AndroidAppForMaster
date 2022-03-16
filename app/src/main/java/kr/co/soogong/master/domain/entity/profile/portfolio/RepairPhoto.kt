@@ -25,7 +25,7 @@ data class RepairPhoto(
                 project = Project(id = portfolioDto.projectId!!, name = portfolioDto.projectName!!),
                 type = PortfolioType.getPortfolioTypeFromCode(portfolioDto.typeCode!!),
                 title = portfolioDto.title!!,
-                description = portfolioDto.description!!,
+                description = portfolioDto.description ?: "",
                 images = portfolioDto.images,
             )
     }

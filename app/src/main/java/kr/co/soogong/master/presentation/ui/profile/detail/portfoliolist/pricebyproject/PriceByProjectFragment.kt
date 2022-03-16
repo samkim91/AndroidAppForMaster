@@ -53,12 +53,7 @@ class PriceByProjectFragment : BaseFragment<FragmentEditPriceByProjectBinding>(
                     }
                 }
 
-                viewModel.description.observe(viewLifecycleOwner) {
-                    stcDescription.error =
-                        if (it.length < 10) getString(R.string.fill_text_over_10) else null
-                }
-
-                if (stiTitle.error.isNullOrEmpty() && stiPrice.error.isNullOrEmpty() && stcDescription.error.isNullOrEmpty()) {
+                if (stiTitle.error.isNullOrEmpty() && stiPrice.error.isNullOrEmpty()) {
                     viewModel.savePriceByProject()
                 }
             }

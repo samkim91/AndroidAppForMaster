@@ -47,7 +47,7 @@ class PriceByProjectViewModel @Inject constructor(
                         id = priceByProject.value?.id,
                         masterId = getMasterIdFromSharedUseCase(),
                         title = title.value!!,
-                        description = description.value!!,
+                        description = description.value ?: "",
                         price = price.value?.toInt()!!,
                     )
                 )

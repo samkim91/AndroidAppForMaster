@@ -63,12 +63,7 @@ class PortfolioFragment : BaseFragment<FragmentEditPortfolioBinding>(
                 saidAfterRepairing.error =
                     if (viewModel.imageAfterRepairing.getItemCount() == 0) getString(R.string.required_field_alert) else null
 
-                viewModel.description.observe(viewLifecycleOwner) {
-                    stcDescription.error =
-                        if (it.length < 10) getString(R.string.fill_text_over_10) else null
-                }
-
-                if (stiTitle.error.isNullOrEmpty() && saidBeforeRepairing.error.isNullOrEmpty() && saidAfterRepairing.error.isNullOrEmpty() && stcDescription.error.isNullOrEmpty()) {
+                if (stiTitle.error.isNullOrEmpty() && saidBeforeRepairing.error.isNullOrEmpty() && saidAfterRepairing.error.isNullOrEmpty()) {
                     viewModel.savePortfolio()
                 }
             }

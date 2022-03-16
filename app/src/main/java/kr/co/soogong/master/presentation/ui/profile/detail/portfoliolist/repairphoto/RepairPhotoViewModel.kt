@@ -58,7 +58,7 @@ class RepairPhotoViewModel @Inject constructor(
                         masterId = getMasterIdFromSharedUseCase(),
                         projectId = project.value?.id!!,
                         title = title.value!!,
-                        description = description.value!!,
+                        description = description.value ?: "",
                         images = repairPhotos.value,
                         updateImages = updateImage
                     ),
