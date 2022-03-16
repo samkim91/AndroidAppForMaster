@@ -7,19 +7,11 @@
 
         <variable
             name="data"
-            type="kr.co.soogong.master.data.entity.profile.PortfolioDto" />
+            type="kr.co.soogong.master.domain.entity.profile.portfolio.PriceByProject" />
 
         <variable
             name="onLeftButtonClick"
             type="android.view.View.OnClickListener" />
-
-        <variable
-            name="buttonThemeLeft"
-            type="kr.co.soogong.master.domain.entity.common.ButtonTheme" />
-
-        <variable
-            name="buttonThemeRight"
-            type="kr.co.soogong.master.domain.entity.common.ButtonTheme" />
 
         <variable
             name="onRightButtonClick"
@@ -29,7 +21,6 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/gap_5"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="@dimen/gap_14"
         app:cardElevation="@dimen/gap_1">
@@ -37,19 +28,19 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="@dimen/gap_14"
-            android:paddingTop="@dimen/gap_18"
-            android:paddingEnd="@dimen/gap_14"
-            android:paddingBottom="@dimen/gap_18">
+            android:paddingHorizontal="@dimen/gap_14"
+            android:paddingVertical="@dimen/gap_16">
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_subheadline"
                 style="@style/subheadline.regular"
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/gap_0"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
+                android:maxLines="1"
                 android:text="@{data.title}"
-                android:textColor="@color/grey_3"
+                android:textAppearance="@style/subheadline.bold"
+                android:textColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -88,28 +79,32 @@
                 app:layout_constraintTop_toBottomOf="@id/tv_price"
                 tools:text="내용입력내용입력내용입력내용입력내용입력내용입력내용입력내용입력내용입력내용입력" />
 
-            <kr.co.soogong.master.presentation.atomic.atoms.ButtonMedium
-                android:id="@+id/bm_left_button"
-                android:layout_width="@dimen/gap_0"
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrier_buttons"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/gap_14"
-                app:buttonTheme="@{buttonThemeLeft}"
-                app:layout_constraintEnd_toStartOf="@id/bm_right_button"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_description"
-                app:onButtonClick="@{onLeftButtonClick}" />
+                app:barrierDirection="bottom"
+                app:barrierMargin="@dimen/gap_16"
+                app:constraint_referenced_ids="tv_description" />
 
-            <kr.co.soogong.master.presentation.atomic.atoms.ButtonMedium
-                android:id="@+id/bm_right_button"
-                android:layout_width="@dimen/gap_0"
-                android:layout_height="wrap_content"
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/b_left"
+                style="@style/button.medium.outlined_secondary"
+                android:onClick="@{onLeftButtonClick}"
+                android:text="@string/delete"
+                app:layout_constraintEnd_toStartOf="@id/b_right"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/barrier_buttons" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/b_right"
+                style="@style/button.medium.outlined_primary"
                 android:layout_marginStart="@dimen/gap_10"
-                android:layout_marginTop="@dimen/gap_14"
-                app:buttonTheme="@{buttonThemeRight}"
+                android:onClick="@{onRightButtonClick}"
+                android:text="@string/modify"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/bm_left_button"
-                app:layout_constraintTop_toBottomOf="@id/tv_description"
-                app:onButtonClick="@{onRightButtonClick}" />
+                app:layout_constraintStart_toEndOf="@id/b_left"
+                app:layout_constraintTop_toBottomOf="@id/barrier_buttons" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </layout>

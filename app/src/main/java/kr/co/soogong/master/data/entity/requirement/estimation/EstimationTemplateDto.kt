@@ -14,7 +14,7 @@ data class EstimationTemplateDto(
     val masterId: Int?,
 
     @SerializedName("description")
-    val description: String,
+    val description: String?,
 
     @SerializedName("createdAt")
     val createdAt: Date? = null,

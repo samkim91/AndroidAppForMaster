@@ -10,13 +10,13 @@ import dagger.hilt.android.AndroidEntryPoint
 import gun0912.tedimagepicker.builder.TedImagePicker
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.entity.common.AttachmentDto
-import kr.co.soogong.master.data.entity.profile.PortfolioDto
 import kr.co.soogong.master.databinding.FragmentEditPortfolioBinding
+import kr.co.soogong.master.domain.entity.profile.portfolio.Portfolio
 import kr.co.soogong.master.presentation.ui.base.BaseFragment
 import kr.co.soogong.master.presentation.ui.base.BaseViewModel.Companion.DISMISS_LOADING
+import kr.co.soogong.master.presentation.ui.base.BaseViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.presentation.ui.base.BaseViewModel.Companion.SHOW_LOADING
 import kr.co.soogong.master.presentation.ui.profile.detail.EditProfileContainerActivity
-import kr.co.soogong.master.presentation.ui.profile.detail.portfoliolist.portfolio.PortfolioViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.presentation.ui.profile.detail.portfoliolist.portfolio.PortfolioViewModel.Companion.SAVE_PORTFOLIO_SUCCESSFULLY
 import kr.co.soogong.master.presentation.ui.profile.detail.portfoliolist.portfolio.PortfolioViewModel.Companion.START_IMAGE_PICKER_FOR_AFTER
 import kr.co.soogong.master.presentation.ui.profile.detail.portfoliolist.portfolio.PortfolioViewModel.Companion.START_IMAGE_PICKER_FOR_BEFORE
@@ -133,18 +133,18 @@ class PortfolioFragment : BaseFragment<FragmentEditPortfolioBinding>(
     }
 
     companion object {
-        private const val TAG = "EditPortfolioFragment"
+        private val TAG = PortfolioFragment::class.java.name
         private const val PORTFOLIO = "PORTFOLIO"
 
-        fun newInstance(portfolioDto: PortfolioDto? = null) = PortfolioFragment().apply {
-            portfolioDto?.let {
+        fun newInstance(portfolio: Portfolio? = null) = PortfolioFragment().apply {
+            portfolio?.let {
                 arguments = bundleOf(
                     PORTFOLIO to it
                 )
             }
         }
 
-        fun getPortfolio(savedStateHandle: SavedStateHandle): MutableLiveData<PortfolioDto> =
+        fun getPortfolio(savedStateHandle: SavedStateHandle): MutableLiveData<Portfolio> =
             savedStateHandle.getLiveData(PORTFOLIO)
     }
 }

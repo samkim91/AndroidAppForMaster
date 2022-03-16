@@ -38,11 +38,18 @@
     <string name="possible">가능</string>
     <string name="impossible">불가능</string>
     <string name="copy">복사</string>
+    <string name="adding_images">사진 추가</string>
+    <string name="project_name">업종명</string>
+    <string name="memo">메모</string>
+    <string name="writing_memo">메모 남기기</string>
+    <string name="adding_memo">메모 추가</string>
+    <string name="memo_introduction">마스터님만 볼 수 있는 메모입니다.</string>
 
 
     <string name="required_field_alert">필수 정보입니다.</string>
     <string name="fill_text_over_10">10자 이상으로 입력해주세요.</string>
     <string name="fill_text_under_10">10자 이하로 입력해주세요.</string>
+    <string name="choose_max_number">%d개 이하로 선택 가능합니다.</string>
     <string name="too_large_number">숫자가 너무 큽니다.</string>
     <string name="minimum_cost">1만원 이상으로 보내주세요.</string>
     <string name="required_value_between_2_and_20">2자 이상 20자 이내로 입력해주세요.</string>
@@ -261,6 +268,8 @@
     <string name="free_measure">무료 방문 실측 여부</string>
     <string name="portfolio">포트폴리오</string>
     <string name="portfolio_filled">%d개의 포트폴리오가 있습니다.</string>
+    <string name="repair_photo">시공 사진</string>
+    <string name="repair_photo_filled">%d개의 시공 사진이 있습니다.</string>
     <string name="price_by_project">시공 종류별 가격</string>
     <string name="price_by_project_filled">%d개의 시공 종류별 가격이 있습니다.</string>
     <string name="master_configs">기타 변동 요인</string>
@@ -316,8 +325,8 @@
 
     <string name="write_portfolio">마스터님의 포트폴리오를 작성해주세요.</string>
     <string name="write_portfolio_hint">포트폴리오 사진과 실제 시공 정보가 많을수록, 더많이 노출되고, 고객이 선택하는데 더 좋은 기준이 됩니다.</string>
-    <string name="add_portfolio">포트폴리오 추가하기</string>
-    <string name="added_portfolio">등록된 포트폴리오</string>
+    <string name="add_portfolio">%s 추가하기</string>
+    <string name="added_portfolio">등록된 %s</string>
 
     <string name="write_price_by_project">시공 종류별 가격을 입력해주세요.</string>
     <string name="write_price_by_project_hint">다양한 시공을 입력해 주실수록 선택률이 상승합니다.</string>
@@ -328,6 +337,10 @@
     <string name="title">제목</string>
     <string name="portfolio_description">시공 내용</string>
     <string name="portfolio_description_hint">해당 시공에 대해 간단한 설명을 해주세요.</string>
+
+    <string name="repair_photo_title">사진 제목</string>
+    <string name="repair_photo_description">사진 내용</string>
+    <string name="repair_photo_description_hint">해당 사진에 대해 간단한 설명을 해주세요.</string>
 
     <string name="price_by_project_title">시공 종류</string>
     <string name="type">종류</string>
@@ -342,7 +355,6 @@
 
     <string name="writing_done">작성 완료</string>
     <string name="image_before_job">시공 전</string>
-
 
     <string name="request_review_template">[수공 리뷰 작성 요청]\n
             \n
@@ -399,7 +411,7 @@
 
     <string name="permission_denied_status_message">권한을 거부하셨습니다. 앱을 사용하시려면 [앱 설정]-[권한] 에서 권한을 허용해주세요.</string>
 
-    <string name="maximum_images_count">사진은 최대 10장까지 업로드 가능합니다.</string>
+    <string name="maximum_images_count">사진은 최대 %d 장까지 업로드 가능합니다.</string>
     <string name="invalid_image_extension">지원하지 않는 이미지 형식입니다.\njpg, jpeg, png 만 업로드 가능합니다.</string>
     <string name="firebase_auth_verification_not_exist">인증 문자가 발송 중 입니다. 문자를 받으시면, 인증코드를 입력 후 다시 시도해주세요.</string>
     <string name="firebase_auth_too_many_requests">너무 많은 요청이 있습니다. 잠시 후 다시 시도해주세요.</string>

@@ -134,6 +134,7 @@
     <style name="outlinedTextInputLayout">
         <item name="android:textAppearance">@style/subheadline.regular</item>
         <item name="android:textColor">@color/black</item>
+        <item name="startIconTint">@color/light_grey_2</item>
         <item name="endIconMode">clear_text</item>
         <item name="endIconTint">@color/light_grey_2</item>
 
@@ -329,23 +330,24 @@
 
     <style name="ChipChoiceRoundStyle" parent="Widget.MaterialComponents.Chip.Choice">
         <item name="chipBackgroundColor">@color/white</item>
-        <item name="android:textColor">@color/grey_3</item>
-        <item name="android:textAppearance">@style/caption_2.bold</item>
+        <item name="android:textColor">@color/grey_4</item>
+        <item name="android:textAppearance">@style/footnote.regular</item>
         <item name="chipStrokeColor">@color/light_grey_2</item>
-        <item name="chipMinTouchTargetSize">@dimen/gap_0</item>
         <item name="chipStrokeWidth">@dimen/gap_1</item>
+        <item name="chipMinTouchTargetSize">@dimen/gap_0</item>
         <item name="chipCornerRadius">@dimen/gap_20</item>
-        <item name="chipMinHeight">@dimen/gap_25</item>
+        <item name="chipMinHeight">@dimen/gap_34</item>
     </style>
 
     <style name="ChipEntryRoundStyle" parent="Widget.MaterialComponents.Chip.Entry">
-        <item name="chipBackgroundColor">@color/background</item>
-        <item name="android:textColor">@color/grey_2</item>
+        <item name="chipBackgroundColor">@color/white</item>
+        <item name="android:textColor">@color/grey_4</item>
+        <item name="android:textAppearance">@style/footnote.regular</item>
         <item name="chipStrokeColor">@color/light_grey_2</item>
         <item name="chipStrokeWidth">@dimen/gap_1</item>
         <item name="chipMinTouchTargetSize">@dimen/gap_0</item>
         <item name="closeIcon">@drawable/ic_cancel</item>
-        <item name="closeIconTint">@color/light_grey_2</item>
+        <item name="closeIconTint">@color/grey_4</item>
         <item name="chipCornerRadius">@dimen/gap_20</item>
         <item name="chipMinHeight">@dimen/gap_34</item>
     </style>

@@ -10,12 +10,15 @@ data class Project(
     val name: String,
 ) : Parcelable {
     companion object {
-        fun fromProjectDtos(projectDtos: List<ProjectDto>?) =
+        fun fromDtos(projectDtos: List<ProjectDto>?) =
             projectDtos?.map { projectDto ->
-                Project(
-                    id = projectDto.id,
-                    name = projectDto.name
-                )
+                fromDto(projectDto)
             }
+
+        fun fromDto(projectDto: ProjectDto): Project =
+            Project(
+                id = projectDto.id,
+                name = projectDto.name
+            )
     }
 }

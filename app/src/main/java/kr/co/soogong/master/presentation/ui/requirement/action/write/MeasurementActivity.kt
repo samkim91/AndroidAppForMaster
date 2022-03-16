@@ -78,7 +78,7 @@ class MeasurementActivity : BaseActivity<ActivityMeasurementBinding>(
                                 .buttonBackground(R.drawable.shape_green_background_radius8)
                                 .max(
                                     (10 - viewModel.estimationImages.getItemCount()),
-                                    resources.getString(R.string.maximum_images_count)
+                                    resources.getString(R.string.maximum_images_count, 10)
                                 )
                                 .startMultiImage { uriList ->
                                     if (FileHelper.isImageExtension(uriList,

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/bind"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="data"
+            type="kr.co.soogong.master.domain.entity.profile.portfolio.RepairPhoto" />
+
+        <variable
+            name="onLeftButtonClick"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="onRightButtonClick"
+            type="android.view.View.OnClickListener" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="@dimen/gap_14"
+        app:cardElevation="@dimen/gap_1">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/gap_14"
+            android:paddingVertical="@dimen/gap_16">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_images"
+                android:layout_width="@dimen/gap_100"
+                android:layout_height="@dimen/gap_100"
+                app:cardCornerRadius="@dimen/gap_10"
+                app:cardElevation="@dimen/gap_0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_images"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    bind:image_url="@{data.images.size() > 0 ? data.images.get(0).url : null}"
+                    tools:background="@drawable/ic_empty_image" />
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_photos_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/gap_4"
+                android:layout_marginEnd="@dimen/gap_4"
+                android:background="@drawable/ic_photos"
+                android:backgroundTint="@color/white"
+                app:layout_constraintEnd_toEndOf="@id/cv_images"
+                app:layout_constraintTop_toTopOf="@id/cv_images"
+                bind:visible="@{data.images.size() > 1}" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_subheadline"
+                android:layout_width="@dimen/gap_0"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/gap_14"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@{data.title}"
+                android:textAppearance="@style/subheadline.bold"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/cv_images"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="루버 방충망 설치" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_description"
+                style="@style/footnote.regular"
+                android:layout_width="@dimen/gap_0"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/gap_6"
+                android:breakStrategy="simple"
+                android:ellipsize="end"
+                android:maxLines="3"
+                android:text="@{data.description}"
+                android:textColor="@color/grey_3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/tv_subheadline"
+                app:layout_constraintTop_toBottomOf="@id/tv_subheadline"
+                tools:text="내용입력내용입력내용입력내용입력내용입력내용입력내용입력내용입력내용입력내용입력" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrier_buttons"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:barrierMargin="@dimen/gap_16"
+                app:constraint_referenced_ids="cv_images, tv_description" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/b_left"
+                style="@style/button.medium.outlined_secondary"
+                android:onClick="@{onLeftButtonClick}"
+                android:text="@string/delete"
+                app:layout_constraintEnd_toStartOf="@id/b_right"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/barrier_buttons" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/b_right"
+                style="@style/button.medium.outlined_primary"
+                android:layout_marginStart="@dimen/gap_10"
+                android:onClick="@{onRightButtonClick}"
+                android:text="@string/modify"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/b_left"
+                app:layout_constraintTop_toBottomOf="@id/barrier_buttons" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

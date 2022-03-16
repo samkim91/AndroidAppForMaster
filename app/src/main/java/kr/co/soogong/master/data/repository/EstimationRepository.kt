@@ -6,6 +6,7 @@ import kr.co.soogong.master.data.datasource.network.requirement.estimation.Estim
 import kr.co.soogong.master.data.entity.requirement.CustomerRequest
 import kr.co.soogong.master.data.entity.requirement.estimation.EstimationDto
 import kr.co.soogong.master.data.entity.requirement.estimation.EstimationTemplateDto
+import kr.co.soogong.master.data.entity.requirement.estimation.SaveMasterMemoDto
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import javax.inject.Inject
@@ -41,6 +42,10 @@ class EstimationRepository @Inject constructor(
 
     fun deleteEstimationTemplate(id: Int): Single<Boolean> {
         return estimationService.deleteEstimationTemplate(id)
+    }
+
+    suspend fun saveMasterMemo(estimationToken: String, masterMemoDto: SaveMasterMemoDto) {
+        return estimationService.saveMasterMemo(estimationToken, masterMemoDto)
     }
 
     companion object {

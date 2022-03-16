@@ -12,6 +12,6 @@ class GetProjectsUseCase @Inject constructor(
 ) {
     operator fun invoke(categoryId: Int): Single<List<Project>> =
         majorService.getProjects(categoryId).map { projectDtos ->
-            Project.fromProjectDtos(projectDtos)
+            Project.fromDtos(projectDtos)
         }
 }

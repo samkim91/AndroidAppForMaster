@@ -10,14 +10,17 @@ import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.launch
 import kr.co.soogong.master.data.entity.requirement.estimation.EstimationDto
+import kr.co.soogong.master.data.entity.requirement.estimation.SaveMasterMemoDto
 import kr.co.soogong.master.domain.entity.common.CodeTable
 import kr.co.soogong.master.domain.entity.requirement.Requirement
 import kr.co.soogong.master.domain.entity.requirement.estimation.EstimationResponseCode
+import kr.co.soogong.master.domain.usecase.auth.GetMasterUidFromSharedUseCase
 import kr.co.soogong.master.domain.usecase.profile.GetMasterSettingsUseCase
-import kr.co.soogong.master.domain.usecase.requirement.*
+import kr.co.soogong.master.domain.usecase.requirement.GetRequirementUseCase
 import kr.co.soogong.master.domain.usecase.requirement.estimation.CallToClientUseCase
 import kr.co.soogong.master.domain.usecase.requirement.estimation.RespondToMeasureUseCase
 import kr.co.soogong.master.domain.usecase.requirement.estimation.SaveEstimationUseCase
+import kr.co.soogong.master.domain.usecase.requirement.estimation.SaveMasterMemoUseCase
 import kr.co.soogong.master.domain.usecase.requirement.review.RequestReviewUseCase
 import kr.co.soogong.master.presentation.ui.base.BaseViewModel
 import kr.co.soogong.master.presentation.uihelper.requirment.action.ViewRequirementActivityHelper
@@ -26,12 +29,14 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ViewRequirementViewModel @Inject constructor(
+    private val getMasterUidFromSharedUseCase: GetMasterUidFromSharedUseCase,
     private val getRequirementUseCase: GetRequirementUseCase,
     private val saveEstimationUseCase: SaveEstimationUseCase,
     private val respondToMeasureUseCase: RespondToMeasureUseCase,
     private val callToClientUseCase: CallToClientUseCase,
     private val requestReviewUseCase: RequestReviewUseCase,
     private val getMasterSettingsUseCase: GetMasterSettingsUseCase,
+    private val saveMasterMemoUseCase: SaveMasterMemoUseCase,
     val savedStateHandle: SavedStateHandle,
 ) : BaseViewModel() {
     // Note : activity 에서 viewModel 로 데이터 넘기는 법. savedStateHandle 에서 가져온다.
@@ -42,6 +47,8 @@ class ViewRequirementViewModel @Inject constructor(
     private val _requirement = MutableLiveData<Requirement>()
     val requirement: LiveData<Requirement>
         get() = _requirement
+
+    val masterMemo = MutableLiveData<String>()
 
     init {
         requestMasterSimpleInfo()
@@ -60,6 +67,7 @@ class ViewRequirementViewModel @Inject constructor(
                         setAction(INVALID_REQUIREMENT)
                     }
                     _requirement.value = it
+                    masterMemo.value = it.estimationDto?.masterMemo ?: ""
                 },
                 onError = {
                     Timber.tag(TAG).d("requestRequirement failed: $it")
@@ -188,8 +196,35 @@ class ViewRequirementViewModel @Inject constructor(
             ).addToDisposable()
     }
 
+    fun showMenuBottomSheetDialog() {
+        Timber.tag(TAG).d("showMenuBottomSheetDialog: ")
+        setAction(SHOW_MEMO_BOTTOM_SHEET_DIALOG)
+    }
+
+    fun saveMasterMemo() {
+        Timber.tag(TAG).d("saveMasterMemo: ")
+
+        viewModelScope.launch {
+            try {
+                saveMasterMemoUseCase(
+                    _requirement.value?.estimationDto?.token!!,
+                    SaveMasterMemoDto(
+                        getMasterUidFromSharedUseCase(),
+                        masterMemo.value ?: ""
+                    )
+                )
+
+                Timber.tag(TAG).d("saveMasterMemo successfully: ")
+                requestRequirement()
+            } catch (e: Exception) {
+                Timber.tag(TAG).d("saveMasterMemo failed: $e")
+                setAction(REQUEST_FAILED)
+            }
+        }
+    }
+
     companion object {
-        private const val TAG = "ViewRequirementViewModel"
+        private val TAG = ViewRequirementViewModel::class.java.name
         const val REFUSE_TO_ESTIMATE_SUCCESSFULLY = "REFUSE_TO_ESTIMATE_SUCCESSFULLY"
         const val INVALID_REQUIREMENT = "INVALID_REQUIREMENT"
         const val ACCEPT_TO_MEASURE_SUCCESSFULLY = "RESPOND_TO_MEASURE_SUCCESSFULLY"
@@ -197,6 +232,6 @@ class ViewRequirementViewModel @Inject constructor(
         const val ASK_FOR_REVIEW_SUCCESSFULLY = "ASK_FOR_REVIEW_SUCCESSFULLY"
         const val NOT_APPROVED_MASTER = "NOT_APPROVED_MASTER"
         const val REQUEST_APPROVE_MASTER = "REQUEST_APPROVE_MASTER"
-        const val REQUEST_FAILED = "REQUEST_FAILED"
+        const val SHOW_MEMO_BOTTOM_SHEET_DIALOG = "SHOW_MEMO_BOTTOM_SHEET_DIALOG"
     }
 }

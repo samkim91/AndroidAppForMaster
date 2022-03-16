@@ -5,6 +5,7 @@ import kr.co.soogong.master.contract.HttpContract
 import kr.co.soogong.master.data.entity.requirement.CustomerRequest
 import kr.co.soogong.master.data.entity.requirement.estimation.EstimationDto
 import kr.co.soogong.master.data.entity.requirement.estimation.EstimationTemplateDto
+import kr.co.soogong.master.data.entity.requirement.estimation.SaveMasterMemoDto
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.http.*
@@ -38,4 +39,7 @@ interface EstimationInterface {
 
     @DELETE(HttpContract.DELETE_ESTIMATION_TEMPLATE)
     fun deleteEstimationTemplate(@Path("id") id: Int): Single<Boolean>
+
+    @PATCH(HttpContract.SAVE_MASTER_NOTE)
+    suspend fun saveMasterNote(@Path("token") estimationToken: String, @Body masterMemoDto: SaveMasterMemoDto)
 }

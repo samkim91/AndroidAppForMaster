@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.isVisible
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import kr.co.soogong.master.R
@@ -26,6 +27,17 @@ class SubheadlineChipGroup @JvmOverloads constructor(
     val container: ChipGroup
         get() = binding.cgContainer
 
+    var error: String? = null
+        set(value) {
+            field = value
+            if (value.isNullOrEmpty()) {
+                binding.tvAlert.isVisible = false
+            } else {
+                binding.tvAlert.isVisible = true
+                binding.tvAlert.text = value
+            }
+        }
+
     var singleChip: Boolean = true
         set(value) {
             field = value
@@ -40,7 +52,7 @@ class SubheadlineChipGroup @JvmOverloads constructor(
 
     companion object {
 
-        fun initChips(
+        fun initChoiceRectangularChips(
             context: Context,
             layoutInflater: LayoutInflater,
             subheadlineChipGroup: SubheadlineChipGroup,

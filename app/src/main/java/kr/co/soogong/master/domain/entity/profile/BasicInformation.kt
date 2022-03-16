@@ -10,6 +10,7 @@ import kr.co.soogong.master.data.entity.profile.MasterDto
 data class BasicInformation(
     val freeMeasureYn: Boolean,
     val portfolioCount: Int,
+    val repairPhotoCount: Int,
     val priceByProjectCount: Int,
     val profileImage: AttachmentDto?,
     val masterConfigs: List<MasterConfigDto>?,
@@ -20,6 +21,7 @@ data class BasicInformation(
             return BasicInformation(
                 freeMeasureYn = masterDto.freeMeasureYn!!,
                 portfolioCount = masterDto.portfolioCount ?: 0,
+                repairPhotoCount = masterDto.photoCount ?: 0,
                 priceByProjectCount = masterDto.priceByProjectCount ?: 0,
                 profileImage = masterDto.profileImage,
                 masterConfigs = masterDto.masterConfigDtos,

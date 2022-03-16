@@ -36,6 +36,7 @@ object HttpContract {
     const val RESPOND_TO_MEASURE = "estimation/reply-measure"
     const val CALL_TO_CLIENT = "estimation/count-call"
     const val GET_CUSTOMER_REQUESTS = "estimation/get-contact-list"
+    const val SAVE_MASTER_NOTE = "estimation/{token}/master-memo"
     //Estimation Template
     const val GET_ESTIMATION_TEMPLATES = "estimation-template/find-by-master-uid"
     const val SAVE_ESTIMATION_TEMPLATE = "estimation-template"
@@ -64,8 +65,10 @@ object HttpContract {
     //endregion
 
     //region Portfolio
-    const val SAVE_PORTFOLIO = "master/portfolio/save"
-    const val GET_PORTFOLIOS = "master/portfolio"
+    const val SAVE_PORTFOLIO = "master/portfolio"
+    const val SAVE_REPAIR_PHOTO = "master/photo"
+    const val SAVE_PRICE_BY_PROJECT = "master/price"
+    const val GET_PORTFOLIOS = "master/{type}"
     const val DELETE_PORTFOLIO = "master/portfolio/{id}"
     //endregion
 

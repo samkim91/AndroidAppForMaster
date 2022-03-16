@@ -42,7 +42,7 @@ data class RequiredInformation(
                 career = masterDto.openDate?.let { CareerConverter.toCareer(it) },
                 tel = masterDto.tel?.let { PhoneNumberHelper.addDashToLocalNumber(it) }!!,
                 ownerName = masterDto.ownerName,
-                projects = Project.fromProjectDtos(masterDto.projectDtos),
+                projects = Project.fromDtos(masterDto.projectDtos),
                 companyAddress = CompanyAddress(
                     masterDto.roadAddress,
                     masterDto.detailAddress ?: "",

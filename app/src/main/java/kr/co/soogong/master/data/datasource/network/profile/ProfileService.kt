@@ -5,7 +5,7 @@ import kr.co.soogong.master.data.entity.common.PageableContentDto
 import kr.co.soogong.master.data.entity.common.ResponseDto
 import kr.co.soogong.master.data.entity.profile.MasterDto
 import kr.co.soogong.master.data.entity.profile.MasterSettingsDto
-import kr.co.soogong.master.data.entity.profile.PortfolioDto
+import kr.co.soogong.master.data.entity.profile.portfolio.PortfolioDto
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
@@ -39,23 +39,37 @@ class ProfileService @Inject constructor(
         return profileInterface.saveMaster(masterDto, profileImage, businessRegistImage, shopImages)
     }
 
-    fun savePortfolio(
-        portfolioDto: RequestBody,
+
+    suspend fun savePortfolio(
+        savePortfolioJson: RequestBody,
         beforeImageFile: MultipartBody.Part?,
         afterImageFile: MultipartBody.Part?,
-    ): Single<PortfolioDto> {
-        return profileInterface.savePortfolio(portfolioDto, beforeImageFile, afterImageFile)
+    ) {
+        profileInterface.savePortfolio(savePortfolioJson, beforeImageFile, afterImageFile)
+    }
+
+    suspend fun saveRepairPhoto(
+        saveRepairPhotoJson: RequestBody,
+        imageFiles: List<MultipartBody.Part?>?,
+    ) {
+        profileInterface.saveRepairPhoto(saveRepairPhotoJson, imageFiles)
+    }
+
+    suspend fun savePriceByProject(
+        savePriceByProjectJson: RequestBody,
+    ) {
+        profileInterface.savePriceByProject(savePriceByProjectJson)
     }
 
     fun getPortfolios(
-        uid: String,
         type: String,
+        uid: String,
         offset: Int,
         pageSize: Int,
         order: Int,
         orderBy: String,
     ): Single<ResponseDto<PageableContentDto<PortfolioDto>>> {
-        return profileInterface.getPortfolios(uid, type, offset, pageSize, order, orderBy)
+        return profileInterface.getPortfolios(type, uid, offset, pageSize, order, orderBy)
     }
 
     fun deletePortfolio(

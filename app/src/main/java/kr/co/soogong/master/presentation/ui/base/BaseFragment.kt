@@ -18,7 +18,7 @@ abstract class BaseFragment<B : ViewDataBinding>(
     protected lateinit var binding: B
         private set
 
-    protected val loading: LoadingDialog by lazy {
+    private val loading: LoadingDialog by lazy {
         LoadingDialog.newInstance()
     }
 
@@ -42,10 +42,10 @@ abstract class BaseFragment<B : ViewDataBinding>(
     }
 
     protected fun showLoading(fragmentManager: FragmentManager) {
-        loading.show(fragmentManager, loading.tag)
+        if (!loading.isVisible) loading.show(fragmentManager, loading.tag)
     }
 
     protected fun dismissLoading() {
-        loading.dismiss()
+        if (loading.isVisible) loading.dismiss()
     }
 }

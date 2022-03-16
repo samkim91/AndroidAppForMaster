@@ -3,12 +3,13 @@ package kr.co.soogong.master.presentation.ui.common.project
 import android.app.Activity.RESULT_OK
 import android.os.Bundle
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.SavedStateHandle
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
-import kr.co.soogong.master.domain.entity.common.ButtonTheme
 import kr.co.soogong.master.databinding.FragmentProjectBinding
+import kr.co.soogong.master.domain.entity.common.ButtonTheme
 import kr.co.soogong.master.presentation.ui.base.BaseFragment
 import kr.co.soogong.master.presentation.ui.common.project.ProjectViewModel.Companion.GET_PROJECT_FAILED
 import kr.co.soogong.master.presentation.uihelper.common.MajorActivityHelper
@@ -35,15 +36,28 @@ class ProjectFragment : BaseFragment<FragmentProjectBinding>(
             lifecycleOwner = viewLifecycleOwner
             buttonThemeSelectingDone = ButtonTheme.Primary
 
-            list.adapter = ProjectAdapter(itemClickListener = { project, isChecked ->
-                if (isChecked) viewModel.checkedList.add(project)
-                else viewModel.checkedList.remove(project)
+            list.adapter = ProjectAdapter(itemClickListener = { project, item ->
+                if (item.isChecked) {
+                    when {
+                        viewModel.maxNumber == 0 || viewModel.maxNumber > viewModel.checkedList.value?.size!! ->
+                            viewModel.checkedList.add(project)
+                        else -> {
+                            requireContext().toast(getString(R.string.choose_max_number, viewModel.maxNumber))
+                            item.isChecked = !item.isChecked
+                        }
+                    }
+                } else viewModel.checkedList.remove(project)
             })
 
             setSelectingDoneClickListener {
-                viewModel.checkedList.value?.let {
+                viewModel.checkedList.value?.let { projects ->
+                    if (projects.isEmpty()) {
+                        requireContext().toast(getString(R.string.select_projects))
+                        return@setSelectingDoneClickListener
+                    }
+
                     activity?.setResult(RESULT_OK,
-                        MajorActivityHelper.getIntentIncludingProjects(it))
+                        MajorActivityHelper.getIntentIncludingProjects(projects))
                     activity?.finish()
                 }
             }
@@ -63,12 +77,17 @@ class ProjectFragment : BaseFragment<FragmentProjectBinding>(
     companion object {
         private const val TAG = "ProjectFragment"
         private const val CATEGORY_ID = "CATEGORY_ID"
+        private const val MAX_NUMBER = "MAX_NUMBER"
 
-        fun newInstance(categoryId: Int) = ProjectFragment().apply {
-            arguments = Bundle().apply {
-                putInt(CATEGORY_ID, categoryId)
-            }
+        fun newInstance(categoryId: Int, maxNumber: Int) = ProjectFragment().apply {
+            arguments = bundleOf(
+                CATEGORY_ID to categoryId,
+                MAX_NUMBER to maxNumber
+            )
         }
+
+        fun getMaxNumberFromSavedState(savedStateHandle: SavedStateHandle) =
+            savedStateHandle.get<Int>(MAX_NUMBER)!!
 
         fun getCategoryIdFromSavedState(savedStateHandle: SavedStateHandle) =
             savedStateHandle.getLiveData<Int>(CATEGORY_ID)

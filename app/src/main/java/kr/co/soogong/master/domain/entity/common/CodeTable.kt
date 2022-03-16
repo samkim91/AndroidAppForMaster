@@ -18,10 +18,6 @@ enum class CodeTable(
     INTEGRATION("Integration", "통합 견적", ""),
     BY_ITEM("ByItem", "항목별 견적", ""),
 
-    // 포트폴리오 및 시공종류별 가격
-    PORTFOLIO("Portfolio", "포트폴리오", ""),
-    PRICE_BY_PROJECT("Price", "시공 종류별 가격", ""),
-
     // 현장 가격 변동 요인
     FLEXIBLE_COST("FlexibleCost", "현장 가격 변동 요인", ""),
     TRAVEL_COST("TravelCost", "출장비", ""),
@@ -58,13 +54,6 @@ enum class CodeTable(
     COMPARE("Compare", "비교견적", ""),
     SECRETARY("Secretary", "수공비서", ""),
 
-    // 리뷰 스코어 타입
-    RECOMMENDATION("Recommendation", "추천도", ""),
-    KINDNESS("Kindness", "친절도", ""),
-    QUALITY("Quality", "마감수준", ""),
-    AFFORDABILITY("Affordability", "가격만족", ""),
-    PUNCTUALITY("Punctuality", "기일준수", "")
-
     ;
 
     companion object {
@@ -75,9 +64,6 @@ enum class CodeTable(
         fun getCodeTableByKorean(keyword: String): CodeTable? = values().find {
             it.inKorean == keyword
         }
-
-        fun getPortfolio(): List<CodeTable> =
-            listOf(PORTFOLIO, PRICE_BY_PROJECT)
     }
 }
 
