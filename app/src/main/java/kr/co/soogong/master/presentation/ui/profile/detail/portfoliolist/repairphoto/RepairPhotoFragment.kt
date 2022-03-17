@@ -13,6 +13,7 @@ import gun0912.tedimagepicker.builder.TedImagePicker
 import kr.co.soogong.master.R
 import kr.co.soogong.master.data.entity.common.AttachmentDto
 import kr.co.soogong.master.databinding.FragmentEditRepairPhotoBinding
+import kr.co.soogong.master.domain.entity.common.major.Project
 import kr.co.soogong.master.domain.entity.profile.portfolio.RepairPhoto
 import kr.co.soogong.master.presentation.ui.base.BaseFragment
 import kr.co.soogong.master.presentation.ui.base.BaseViewModel.Companion.DISMISS_LOADING
@@ -74,9 +75,9 @@ class RepairPhotoFragment : BaseFragment<FragmentEditRepairPhotoBinding>(
                 saidRepairPhoto.error =
                     if (viewModel.repairPhotos.getItemCount() == 0) getString(R.string.required_field_alert) else null
 
-                viewModel.project.observe(viewLifecycleOwner) {
+                viewModel.project.observe(viewLifecycleOwner) { project ->
                     scgProject.error =
-                        if (it == null) getString(R.string.required_field_alert) else null
+                        if (project.id == Int.MIN_VALUE) getString(R.string.required_field_alert) else null
                 }
 
                 if (stiTitle.error.isNullOrEmpty() && saidRepairPhoto.error.isNullOrEmpty() && scgProject.error.isNullOrEmpty()) {
@@ -110,7 +111,6 @@ class RepairPhotoFragment : BaseFragment<FragmentEditRepairPhotoBinding>(
                                         return@startMultiImage
                                     }
 
-                                    viewModel.updateImage = true
                                     viewModel.repairPhotos.addAll(uris.map {
                                         AttachmentDto(
                                             id = null,
@@ -133,11 +133,11 @@ class RepairPhotoFragment : BaseFragment<FragmentEditRepairPhotoBinding>(
         viewModel.project.observe(viewLifecycleOwner) { project ->
             binding.scgProject.container.removeAllViews()
 
-            if (project == null) {
+            if (project.id == Int.MIN_VALUE) {
                 initChipGroup()
             } else {
                 binding.scgProject.container.addChipEntryRounded(viewModel.project.value?.name!!) {
-                    viewModel.project.value = null
+                    viewModel.project.value = Project.defaultData
                 }
             }
         }

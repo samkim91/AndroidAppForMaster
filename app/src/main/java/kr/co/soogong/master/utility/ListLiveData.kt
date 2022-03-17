@@ -31,13 +31,14 @@ class ListLiveData<T> : MutableLiveData<MutableList<T>>() {
     }
 
     fun remove(item: T) {
-        temp.remove(item)
-        value = temp
+        if (temp.remove(item)) value = temp
     }
 
     fun removeAt(position: Int) {
-        temp.removeAt(position)
-        value = temp
+        if (temp.getOrNull(position) != null) {
+            temp.removeAt(position)
+            value = temp
+        }
     }
 
     fun clear() {
