@@ -10,6 +10,8 @@ data class Project(
     val name: String,
 ) : Parcelable {
     companion object {
+        val defaultData : Project = Project(Int.MIN_VALUE, "")
+
         fun fromDtos(projectDtos: List<ProjectDto>?) =
             projectDtos?.map { projectDto ->
                 fromDto(projectDto)

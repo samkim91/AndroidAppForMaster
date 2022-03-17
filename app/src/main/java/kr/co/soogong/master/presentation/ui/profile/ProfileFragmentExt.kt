@@ -131,6 +131,7 @@ fun setOptionalProfileInformationProgress(
     viewModel.profile.value?.basicInformation?.let { basicInformation ->
         with(basicInformation) {
             if (portfolioCount != 0) filledBasic++
+            if (repairPhotoCount != 0) filledBasic++
             if (priceByProjectCount != 0) filledBasic++
             if (!masterConfigs.isNullOrEmpty()) filledBasic++
             if (profileImage != null) filledBasic++

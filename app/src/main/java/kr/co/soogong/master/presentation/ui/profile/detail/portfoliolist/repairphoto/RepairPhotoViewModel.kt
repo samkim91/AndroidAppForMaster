@@ -28,9 +28,8 @@ class RepairPhotoViewModel @Inject constructor(
 
     val title = MutableLiveData<String>()
     val description = MutableLiveData<String>()
-    val project = MutableLiveData<Project>()
+    val project = MutableLiveData(Project.defaultData)
     val repairPhotos = ListLiveData<AttachmentDto>()
-    var updateImage: Boolean = false
 
     init {
         setInitialRepairPhoto()
@@ -48,7 +47,7 @@ class RepairPhotoViewModel @Inject constructor(
     }
 
     fun saveRepairPhoto() {
-        Timber.tag(TAG).d("saveRepairPhoto: $portfolio")
+        Timber.tag(TAG).d("saveRepairPhoto: ")
         viewModelScope.launch {
             try {
                 setAction(SHOW_LOADING)
@@ -60,7 +59,7 @@ class RepairPhotoViewModel @Inject constructor(
                         title = title.value!!,
                         description = description.value ?: "",
                         images = repairPhotos.value,
-                        updateImages = updateImage
+                        updateImages = true
                     ),
                     newImages = repairPhotos.value?.map { attachmentDto ->
                         attachmentDto.uri
