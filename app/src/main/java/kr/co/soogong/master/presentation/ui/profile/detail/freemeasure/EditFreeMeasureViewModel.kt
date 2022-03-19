@@ -38,7 +38,7 @@ class EditFreeMeasureViewModel @Inject constructor(
             it.basicInformation.freeMeasureYn.let { boolean ->
                 Timber.tag(TAG).d("requestFreeMeasure: $boolean")
                 freeMeasure.postValue(_freeMeasureOptions.value?.find { options ->
-                    options.asValue == boolean
+                    options.additional == boolean
                 })
             }
         }
@@ -51,7 +51,7 @@ class EditFreeMeasureViewModel @Inject constructor(
                     MasterDto(
                         id = profile.value?.id,
                         uid = profile.value?.uid,
-                        freeMeasureYn = freeMeasure.value?.asValue as Boolean
+                        freeMeasureYn = true // freeMeasure.value?.asValue as Boolean
                     )
                 )
 

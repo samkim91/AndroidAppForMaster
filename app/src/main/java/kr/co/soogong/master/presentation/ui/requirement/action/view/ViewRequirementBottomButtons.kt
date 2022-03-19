@@ -285,7 +285,7 @@ private fun AppCompatButton.setAskingReview(
     isVisible = true
     setOnClickListener { viewModel.askForReview() }
 
-    viewModel.requirement.value?.estimationDto?.repair?.requestReviewYn?.let { isRequestedReview ->
+    viewModel.requirement.value?.estimation?.repair?.requestReviewYn?.let { isRequestedReview ->
         isEnabled = !isRequestedReview
 
         text =

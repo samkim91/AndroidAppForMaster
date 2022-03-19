@@ -19,10 +19,10 @@ data class EstimationPriceDto(
     val partialPrice: Int?,
 ) : Parcelable {
     companion object {
-        fun inputToEstimationPriceDto(estimationDto: EstimationDto?, priceType: String?, partialPrice: Int?): EstimationPriceDto {
+        fun inputToEstimationPriceDto(estimationId: Int?, priceType: String?, partialPrice: Int?): EstimationPriceDto {
             return EstimationPriceDto(
                 id = null,
-                estimationId = estimationDto?.id,
+                estimationId = estimationId,
                 priceTypeCode = priceType,
                 partialPrice = partialPrice,
             )

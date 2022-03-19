@@ -14,7 +14,7 @@ import kr.co.soogong.master.BuildConfig
 import kr.co.soogong.master.contract.AppDatabaseContract
 import kr.co.soogong.master.contract.AppSharedPreferenceContract
 import kr.co.soogong.master.contract.HttpContract
-import kr.co.soogong.master.data.datasource.local.AppDatabase
+import kr.co.soogong.master.data.source.local.AppDatabase
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

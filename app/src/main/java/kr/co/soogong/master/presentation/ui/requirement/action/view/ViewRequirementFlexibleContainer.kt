@@ -2,9 +2,9 @@ package kr.co.soogong.master.presentation.ui.requirement.action.view
 
 import android.content.Context
 import kr.co.soogong.master.databinding.ActivityViewRequirementBinding
+import kr.co.soogong.master.domain.entity.common.CodeTable
 import kr.co.soogong.master.domain.entity.requirement.Requirement
 import kr.co.soogong.master.domain.entity.requirement.RequirementStatus
-import kr.co.soogong.master.domain.entity.requirement.estimation.EstimationResponseCode
 import kr.co.soogong.master.presentation.atomic.molecules.Title3Container
 import kr.co.soogong.master.presentation.atomic.molecules.Title3Container.Companion.CANCEL_TYPE
 import kr.co.soogong.master.presentation.atomic.molecules.Title3Container.Companion.ESTIMATION_TYPE
@@ -46,7 +46,7 @@ fun setFlexibleContainer(
             // 상담요청
             // view : 나의 제안 내용(있으면), 고객 요청 내용, 이전 실측 내용(있으면)
             is RequirementStatus.RequestConsult -> {
-                if (requirement.estimationDto?.masterResponseCode == EstimationResponseCode.ACCEPTED) {
+                if (requirement.estimation.masterResponseCode == CodeTable.ACCEPTED) {
                     Title3Container.addIconLabelContainer(
                         context = context,
                         container = flexibleContainer,

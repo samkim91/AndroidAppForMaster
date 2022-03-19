@@ -4,7 +4,7 @@ import dagger.Reusable
 import io.reactivex.Single
 import kr.co.soogong.master.data.entity.common.PageableContentDto
 import kr.co.soogong.master.data.repository.ReviewRepository
-import kr.co.soogong.master.domain.entity.profile.Review
+import kr.co.soogong.master.domain.entity.requirement.review.Review
 import kr.co.soogong.master.domain.usecase.auth.GetMasterUidFromSharedUseCase
 import javax.inject.Inject
 
@@ -24,7 +24,7 @@ class GetReviewsUseCase @Inject constructor(
             "id").map { pageableContentDto ->
             PageableContentDto(
                 content = pageableContentDto.content.map { reviewDto ->
-                    Review.fromReviewDto(reviewDto)
+                    Review.fromDto(reviewDto)
                 },
                 pageable = pageableContentDto.pageable,
                 last = pageableContentDto.last,

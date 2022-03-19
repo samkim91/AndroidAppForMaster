@@ -8,8 +8,8 @@ import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.launch
 import kr.co.soogong.master.data.entity.requirement.estimation.EstimationDto
+import kr.co.soogong.master.domain.entity.common.CodeTable
 import kr.co.soogong.master.domain.entity.requirement.RequirementCard
-import kr.co.soogong.master.domain.entity.requirement.estimation.EstimationResponseCode
 import kr.co.soogong.master.presentation.ui.common.EndlessScrollableViewModel
 import kr.co.soogong.master.presentation.ui.requirement.RequirementViewModelAggregate
 import kr.co.soogong.master.utility.ListLiveData
@@ -55,7 +55,7 @@ open class RequirementsViewModel @Inject constructor(
                 token = null,
                 requirementId = requirementCard.id,
                 masterId = null,
-                masterResponseCode = EstimationResponseCode.ACCEPTED,
+                masterResponseCode = CodeTable.ACCEPTED.code,
                 typeCode = null,
                 price = null,
             )
