@@ -151,7 +151,7 @@
 
     <!-- Requirements : Search -->
     <string name="requirements_not_found">해당 내용을 찾지 못 하였습니다.</string>
-    <string name="search_bar_hint_text">업종, 주소 또는 메모</string>
+    <string name="search_bar_hint_text">업종, 주소, 고객번호 또는 메모</string>
 
     <!-- Requirements : Done -->
     <string name="requirements_done">완료된 문의</string>
