@@ -53,7 +53,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
         Timber.tag(TAG).d("registerEventObserve: ")
         viewModel.requirement.observe(this@ViewRequirementActivity) { requirement ->
             setFlexibleContainer(this, binding, requirement)
-            setActionBarVisibility(binding, requirement)
+            setClientPhoneNumberVisibility(binding, requirement)
             setBottomButtons(this, viewModel, binding, requirement)
             showDialogForCallingCustomer(this, viewModel, requirement)
         }
@@ -61,7 +61,18 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
 
         viewModel.event.observe(this, EventObserver { (event, value) ->
             when (event) {
-                CALL_TO_CLIENT -> startActivity(CallToCustomerHelper.getIntent(value.toString()))
+                CALL_TO_CLIENT ->
+                    DefaultDialog.newInstance(
+                        DialogData.getCallToCustomer(value.toString())
+                    ).let {
+                        it.setButtonsClickListener(
+                            onPositive = {
+                                startActivity(CallToCustomerHelper.getIntent(value.toString()))
+                            },
+                            onNegative = {}
+                        )
+                        it.show(supportFragmentManager, it.tag)
+                    }
             }
         })
 
@@ -157,7 +168,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
 
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
-        // Note: ViewRequirement 화면에서 notification 으로 해당 requirement 에 접근했을 때, 화면을 refresh 해주기 위함
+        // NOTE: ViewRequirement 화면에서 notification 으로 해당 requirement 에 접근했을 때, 화면을 refresh 해주기 위함
         intent?.let {
             viewModel.requirementId.value = ViewRequirementActivityHelper.getRequirementId(it)
             viewModel.requestRequirement()

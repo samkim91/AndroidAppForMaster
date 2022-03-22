@@ -44,10 +44,14 @@ data class Requirement(
                 oldAddress = requirementDto.oldAddress,
                 status = RequirementStatus.getStatusFromRequirementDto(requirementDto),
                 subStatus = requirementDto.subStatusCode,
-                phoneNumber = requirementDto.safetyNumber ?: requirementDto.tel,
+                phoneNumber = if (requirementDto.estimationDto?.fromClientCallCnt!! > 0 || requirementDto.estimationDto.fromMasterCallCnt!! > 0) {
+                    requirementDto.tel
+                } else {
+                    requirementDto.safetyNumber ?: requirementDto.tel
+                },
                 requirementQnas = requirementDto.requirementQnas,
                 description = requirementDto.description,
-                estimation = Estimation.fromDto(requirementDto.estimationDto!!),
+                estimation = Estimation.fromDto(requirementDto.estimationDto),
                 previousRequirementDto = requirementDto.previousRequirementDto,
                 measurement = if (requirementDto.measurement != null) Estimation.fromDto(
                     requirementDto.estimationDto) else null,

@@ -8,15 +8,15 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.res.ResourcesCompat
 import kr.co.soogong.master.R
-import kr.co.soogong.master.databinding.ViewMemoHolderBinding
+import kr.co.soogong.master.databinding.ViewSubheadlineContentArrowBinding
 
-class MemoHolder @JvmOverloads constructor(
+class SubheadlineContentArrow @JvmOverloads constructor(
     context: Context,
     attributeSet: AttributeSet? = null,
     defStyle: Int = 0,
 ) : ConstraintLayout(context, attributeSet, defStyle) {
     private val binding =
-        ViewMemoHolderBinding.inflate(LayoutInflater.from(context), this, true)
+        ViewSubheadlineContentArrowBinding.inflate(LayoutInflater.from(context), this, true)
 
     private val tvLabel: AppCompatTextView = binding.tvLabel
     private val tvContent: AppCompatTextView = binding.tvContent
@@ -31,21 +31,24 @@ class MemoHolder @JvmOverloads constructor(
     var content: String? = null
         set(value) {
             field = value
+            tvContent.text = value
 
-            if (value.isNullOrEmpty()) {
-                tvContent.text = context.getString(R.string.writing_memo)
-                tvContent.setTextColor(ResourcesCompat.getColor(resources,
-                    R.color.brand_green,
-                    null))
-                ivArrow.backgroundTintList =
-                    ResourcesCompat.getColorStateList(resources, R.color.brand_green, null)
-            } else {
-                tvContent.text = value
-                tvContent.setTextColor(ResourcesCompat.getColor(resources,
-                    R.color.black,
-                    null))
-                ivArrow.backgroundTintList =
-                    ResourcesCompat.getColorStateList(resources, R.color.grey_2, null)
+            when (value) {
+                // 메모 남기기
+                context.getString(R.string.writing_memo) -> {
+                    tvContent.setTextColor(ResourcesCompat.getColor(resources,
+                        R.color.brand_green,
+                        null))
+                    ivArrow.backgroundTintList =
+                        ResourcesCompat.getColorStateList(resources, R.color.brand_green, null)
+                }
+                else -> {
+                    tvContent.setTextColor(ResourcesCompat.getColor(resources,
+                        R.color.black,
+                        null))
+                    ivArrow.backgroundTintList =
+                        ResourcesCompat.getColorStateList(resources, R.color.grey_2, null)
+                }
             }
         }
 

@@ -198,8 +198,8 @@ class ViewRequirementViewModel @Inject constructor(
             ).addToDisposable()
     }
 
-    fun showMenuBottomSheetDialog() {
-        Timber.tag(TAG).d("showMenuBottomSheetDialog: ")
+    fun showMemoBottomSheetDialog() {
+        Timber.tag(TAG).d("showMemoBottomSheetDialog: ")
         setAction(SHOW_MEMO_BOTTOM_SHEET_DIALOG)
     }
 
