@@ -2,8 +2,8 @@ package kr.co.soogong.master.domain.entity.requirement
 
 import kr.co.soogong.master.data.entity.requirement.RequirementCardDto
 import kr.co.soogong.master.data.entity.requirement.RequirementDto
+import kr.co.soogong.master.domain.entity.common.CodeTable
 import kr.co.soogong.master.domain.entity.common.LabelTheme
-import kr.co.soogong.master.domain.entity.requirement.estimation.EstimationResponseCode
 
 sealed class RequirementStatus {
     abstract val asInt: Int
@@ -112,7 +112,7 @@ sealed class RequirementStatus {
                 Estimated.code -> {
                     when {
                         requirement.estimationDto?.requestConsultingYn == true -> RequestConsult
-                        requirement.estimationDto?.masterResponseCode == EstimationResponseCode.DEFAULT -> Requested
+                        requirement.estimationDto?.masterResponseCode == CodeTable.DEFAULT.code -> Requested
                         else -> Estimated
                     }
                 }
@@ -138,8 +138,8 @@ sealed class RequirementStatus {
                 Measured.code -> Measured
                 Estimated.code -> {
                     when {
-                        requirementCardDto.masterResponseCode == EstimationResponseCode.DEFAULT -> Requested
                         requirementCardDto.requestConsultingYn -> RequestConsult
+                        requirementCardDto.masterResponseCode == CodeTable.DEFAULT.code -> Requested
                         else -> Estimated
                     }
                 }

@@ -7,11 +7,11 @@ import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import gun0912.tedimagepicker.builder.TedImagePicker
 import kr.co.soogong.master.R
-import kr.co.soogong.master.presentation.atomic.molecules.SubheadlineChipGroup
 import kr.co.soogong.master.data.entity.common.AttachmentDto
+import kr.co.soogong.master.databinding.ActivityWriteEstimationBinding
 import kr.co.soogong.master.domain.entity.common.CodeTable
 import kr.co.soogong.master.domain.entity.common.ColorTheme
-import kr.co.soogong.master.databinding.ActivityWriteEstimationBinding
+import kr.co.soogong.master.presentation.atomic.molecules.SubheadlineChipGroup
 import kr.co.soogong.master.presentation.ui.base.BaseActivity
 import kr.co.soogong.master.presentation.ui.base.BaseViewModel.Companion.SHOW_LOADING
 import kr.co.soogong.master.presentation.ui.common.dialog.popup.DefaultDialog

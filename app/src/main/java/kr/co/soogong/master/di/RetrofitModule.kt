@@ -5,14 +5,14 @@ import dagger.Provides
 import dagger.Reusable
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import kr.co.soogong.master.data.datasource.network.auth.AuthService
-import kr.co.soogong.master.data.datasource.network.common.major.MajorService
-import kr.co.soogong.master.data.datasource.network.preferences.PreferencesService
-import kr.co.soogong.master.data.datasource.network.profile.ProfileService
-import kr.co.soogong.master.data.datasource.network.requirement.RequirementService
-import kr.co.soogong.master.data.datasource.network.requirement.estimation.EstimationService
-import kr.co.soogong.master.data.datasource.network.requirement.repair.RepairService
-import kr.co.soogong.master.data.datasource.network.requirement.review.ReviewService
+import kr.co.soogong.master.data.source.network.auth.AuthService
+import kr.co.soogong.master.data.source.network.common.major.MajorService
+import kr.co.soogong.master.data.source.network.preferences.PreferencesService
+import kr.co.soogong.master.data.source.network.profile.ProfileService
+import kr.co.soogong.master.data.source.network.requirement.RequirementService
+import kr.co.soogong.master.data.source.network.requirement.estimation.EstimationService
+import kr.co.soogong.master.data.source.network.requirement.repair.RepairService
+import kr.co.soogong.master.data.source.network.requirement.review.ReviewService
 import retrofit2.Retrofit
 
 @Module

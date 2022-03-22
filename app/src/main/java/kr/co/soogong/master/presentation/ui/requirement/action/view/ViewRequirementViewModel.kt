@@ -13,7 +13,6 @@ import kr.co.soogong.master.data.entity.requirement.estimation.EstimationDto
 import kr.co.soogong.master.data.entity.requirement.estimation.SaveMasterMemoDto
 import kr.co.soogong.master.domain.entity.common.CodeTable
 import kr.co.soogong.master.domain.entity.requirement.Requirement
-import kr.co.soogong.master.domain.entity.requirement.estimation.EstimationResponseCode
 import kr.co.soogong.master.domain.usecase.auth.GetMasterUidFromSharedUseCase
 import kr.co.soogong.master.domain.usecase.profile.GetMasterSettingsUseCase
 import kr.co.soogong.master.domain.usecase.requirement.GetRequirementUseCase
@@ -62,12 +61,16 @@ class ViewRequirementViewModel @Inject constructor(
             .subscribeBy(
                 onSuccess = {
                     Timber.tag(TAG).d("requestRequirement successfully: $it")
-                    if (it.estimationDto?.masterResponseCode == EstimationResponseCode.REFUSED || it.estimationDto?.masterResponseCode == EstimationResponseCode.EXPIRED) {
-                        Timber.tag(TAG).d("invalid requirement: ")
-                        setAction(INVALID_REQUIREMENT)
+                    when (it.estimation.masterResponseCode) {
+                        CodeTable.REFUSED, CodeTable.EXPIRED -> {
+                            Timber.tag(TAG).d("invalid requirement: ")
+                            setAction(INVALID_REQUIREMENT)
+                        }
+                        CodeTable.ACCEPTED, CodeTable.DEFAULT -> {
+                            _requirement.value = it
+                            masterMemo.value = it.estimation.masterMemo
+                        }
                     }
-                    _requirement.value = it
-                    masterMemo.value = it.estimationDto?.masterMemo ?: ""
                 },
                 onError = {
                     Timber.tag(TAG).d("requestRequirement failed: $it")
@@ -80,15 +83,14 @@ class ViewRequirementViewModel @Inject constructor(
         Timber.tag(TAG).d("refuseToEstimate: ")
         saveEstimationUseCase(
             estimationDto = EstimationDto(
-                id = requirement.value?.estimationDto?.id,
-                token = requirement.value?.estimationDto?.token,
-                requirementId = requirement.value?.estimationDto?.requirementId,
-                masterId = requirement.value?.estimationDto?.masterId,
-                masterResponseCode = EstimationResponseCode.REFUSED,
+                id = requirement.value?.estimation?.id,
+                token = requirement.value?.estimation?.token,
+                requirementId = requirement.value?.estimation?.requirementId,
+                masterId = requirement.value?.estimation?.masterId,
+                masterResponseCode = CodeTable.REFUSED.code,
                 typeCode = null,
                 price = null,
                 description = null,
-                choosenYn = null,
                 estimationPrices = null,
                 repair = null,
                 createdAt = null,
@@ -112,11 +114,11 @@ class ViewRequirementViewModel @Inject constructor(
         Timber.tag(TAG).d("respondToMeasure: ")
         respondToMeasureUseCase(
             estimationDto = EstimationDto(
-                id = requirement.value?.estimationDto?.id,
-                token = requirement.value?.estimationDto?.token,
-                requirementId = requirement.value?.estimationDto?.requirementId,
-                masterId = requirement.value?.estimationDto?.masterId,
-                masterResponseCode = EstimationResponseCode.ACCEPTED,
+                id = requirement.value?.estimation?.id,
+                token = requirement.value?.estimation?.token,
+                requirementId = requirement.value?.estimation?.requirementId,
+                masterId = requirement.value?.estimation?.masterId,
+                masterResponseCode = CodeTable.ACCEPTED.code,
                 typeCode = null,
                 price = null,
                 createdAt = null,
@@ -139,7 +141,7 @@ class ViewRequirementViewModel @Inject constructor(
 
     fun callToClient() {
         Timber.tag(TAG).d("callToClient: ")
-        _requirement.value?.estimationDto?.id?.let { estimationId ->
+        _requirement.value?.estimation?.id?.let { estimationId ->
             callToClientUseCase(
                 estimationId = estimationId
             )
@@ -164,7 +166,7 @@ class ViewRequirementViewModel @Inject constructor(
 
         viewModelScope.launch {
             try {
-                requestReviewUseCase(_requirement.value?.estimationDto?.repair?.id!!)
+                requestReviewUseCase(_requirement.value?.estimation?.repair?.id!!)
             } catch (e: Exception) {
                 setAction(REQUEST_FAILED)
             }
@@ -207,7 +209,7 @@ class ViewRequirementViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 saveMasterMemoUseCase(
-                    _requirement.value?.estimationDto?.token!!,
+                    _requirement.value?.estimation?.token!!,
                     SaveMasterMemoDto(
                         getMasterUidFromSharedUseCase(),
                         masterMemo.value ?: ""

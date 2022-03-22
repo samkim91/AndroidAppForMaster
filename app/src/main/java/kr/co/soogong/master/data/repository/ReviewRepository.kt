@@ -3,7 +3,7 @@ package kr.co.soogong.master.data.repository
 import com.google.gson.JsonObject
 import dagger.Reusable
 import io.reactivex.Single
-import kr.co.soogong.master.data.datasource.network.requirement.review.ReviewService
+import kr.co.soogong.master.data.source.network.requirement.review.ReviewService
 import kr.co.soogong.master.data.entity.common.PageableContentDto
 import kr.co.soogong.master.data.entity.requirement.review.ReviewDto
 import java.net.HttpURLConnection

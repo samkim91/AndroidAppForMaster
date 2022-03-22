@@ -12,8 +12,6 @@ import kr.co.soogong.master.data.entity.requirement.estimation.EstimationDto
 import kr.co.soogong.master.data.entity.requirement.estimation.EstimationPriceDto
 import kr.co.soogong.master.domain.entity.common.CodeTable
 import kr.co.soogong.master.domain.entity.requirement.Requirement
-import kr.co.soogong.master.domain.entity.requirement.estimation.EstimationPriceTypeCode
-import kr.co.soogong.master.domain.entity.requirement.estimation.EstimationResponseCode
 import kr.co.soogong.master.domain.usecase.requirement.GetRequirementUseCase
 import kr.co.soogong.master.domain.usecase.requirement.estimation.SaveEstimationUseCase
 import kr.co.soogong.master.presentation.ui.base.BaseViewModel
@@ -77,11 +75,11 @@ class WriteEstimationViewModel @Inject constructor(
 
         saveEstimationUseCase(
             estimationDto = EstimationDto(
-                id = requirement.value?.estimationDto?.id,
-                token = requirement.value?.estimationDto?.token,
-                requirementId = requirement.value?.estimationDto?.requirementId,
-                masterId = requirement.value?.estimationDto?.masterId,
-                masterResponseCode = EstimationResponseCode.ACCEPTED,
+                id = requirement.value?.estimation?.id,
+                token = requirement.value?.estimation?.token,
+                requirementId = requirement.value?.estimation?.requirementId,
+                masterId = requirement.value?.estimation?.masterId,
+                masterResponseCode = CodeTable.ACCEPTED.code,
                 typeCode = estimationType.value?.code,
                 price = if (estimationType.value == CodeTable.BY_ITEM) totalCost.value?.toInt() else simpleCost.value?.toInt(),
                 includingVat = includingVat.value,
@@ -91,18 +89,18 @@ class WriteEstimationViewModel @Inject constructor(
                     CodeTable.BY_ITEM -> {
                         listOf(
                             EstimationPriceDto.inputToEstimationPriceDto(
-                                requirement.value?.estimationDto,
-                                EstimationPriceTypeCode.LABOR,
+                                requirement.value?.estimation?.id,
+                                CodeTable.LABOR.code,
                                 laborCost.value?.toInt()
                             ),
                             EstimationPriceDto.inputToEstimationPriceDto(
-                                requirement.value?.estimationDto,
-                                EstimationPriceTypeCode.MATERIAL,
+                                requirement.value?.estimation?.id,
+                                CodeTable.MATERIAL.code,
                                 materialCost.value?.toInt()
                             ),
                             EstimationPriceDto.inputToEstimationPriceDto(
-                                requirement.value?.estimationDto,
-                                EstimationPriceTypeCode.TRAVEL,
+                                requirement.value?.estimation?.id,
+                                CodeTable.TRAVEL.code,
                                 travelCost.value?.toInt()
                             ),
                         )

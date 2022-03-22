@@ -50,9 +50,6 @@ data class EstimationDto(
     @SerializedName("fromClientCallCnt")
     val fromClientCallCnt: Int? = null,
 
-    @SerializedName("choosenYn")
-    val choosenYn: Boolean? = null,
-
     @SerializedName("estimationPrices")
     val estimationPrices: List<EstimationPriceDto>? = emptyList(),
 

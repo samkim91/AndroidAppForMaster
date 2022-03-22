@@ -2,8 +2,8 @@ package kr.co.soogong.master.domain.entity.requirement
 
 import kr.co.soogong.master.data.entity.requirement.PreviousRequirementDto
 import kr.co.soogong.master.data.entity.requirement.RequirementDto
-import kr.co.soogong.master.data.entity.requirement.estimation.EstimationDto
 import kr.co.soogong.master.data.entity.requirement.RequirementQnaDto
+import kr.co.soogong.master.domain.entity.requirement.estimation.Estimation
 import java.util.*
 
 data class Requirement(
@@ -20,9 +20,9 @@ data class Requirement(
     val phoneNumber: String,
     val requirementQnas: List<RequirementQnaDto>?,
     val description: String?,
-    val estimationDto: EstimationDto?,
+    val estimation: Estimation,
     val previousRequirementDto: PreviousRequirementDto?,
-    val measurement: EstimationDto?,
+    val measurement: Estimation?,
     val images: List<String>?,
     val cancelName: String?,
     val canceledDescription: String?,
@@ -47,9 +47,10 @@ data class Requirement(
                 phoneNumber = requirementDto.safetyNumber ?: requirementDto.tel,
                 requirementQnas = requirementDto.requirementQnas,
                 description = requirementDto.description,
-                estimationDto = requirementDto.estimationDto,
+                estimation = Estimation.fromDto(requirementDto.estimationDto!!),
                 previousRequirementDto = requirementDto.previousRequirementDto,
-                measurement = requirementDto.measurement,
+                measurement = if (requirementDto.measurement != null) Estimation.fromDto(
+                    requirementDto.estimationDto) else null,
                 images = requirementDto.images,
                 cancelName = requirementDto.canceledReasonName,
                 canceledDescription = requirementDto.canceledDescription,

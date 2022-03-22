@@ -4,7 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import kr.co.soogong.master.domain.entity.profile.Review
+import kr.co.soogong.master.domain.entity.requirement.review.Review
 import kr.co.soogong.master.databinding.ViewHolderReviewItemBinding
 import kr.co.soogong.master.presentation.ui.common.image.RectangleImageAdapter
 import kr.co.soogong.master.presentation.uihelper.common.image.ImageViewActivityHelper

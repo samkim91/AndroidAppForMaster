@@ -7,7 +7,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.domain.entity.profile.Profile
-import kr.co.soogong.master.domain.entity.profile.Review
+import kr.co.soogong.master.domain.entity.requirement.review.Review
 import kr.co.soogong.master.domain.usecase.profile.GetProfileUseCase
 import kr.co.soogong.master.domain.usecase.requirement.review.GetReviewsUseCase
 import kr.co.soogong.master.presentation.ui.common.EndlessScrollableViewModel
