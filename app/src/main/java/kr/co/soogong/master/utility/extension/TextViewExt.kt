@@ -14,7 +14,6 @@ import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.BindingAdapter
 import kr.co.soogong.master.R
-import kr.co.soogong.master.domain.entity.common.CodeTable
 import kr.co.soogong.master.domain.entity.common.LabelTheme
 import java.util.*
 
@@ -73,10 +72,8 @@ fun TextView.setLabelTheme(labelTheme: LabelTheme) {
 fun TextView.setUnderline() {
     SpannableString(this.text).let { spannableString ->
         spannableString.setSpan(UnderlineSpan(), 0, spannableString.length, 0)
-        this@setUnderline.text = spannableString
+        this.text = spannableString
     }
-
-    this.setCopyToClipboard()
 }
 
 fun TextView.setCopyToClipboard() {

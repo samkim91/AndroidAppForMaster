@@ -160,7 +160,7 @@ open class RequirementCardViewHolder(
         this.setOnClickListener {
             checkMasterApprovedStatus {
                 DefaultDialog.newInstance(
-                    DialogData.getCallToCustomer()
+                    DialogData.getCallToCustomer(requirementCard.phoneNumber)
                 ).let {
                     it.setButtonsClickListener(
                         onPositive = {

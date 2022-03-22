@@ -9,6 +9,7 @@ import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ViewRequirementBasicBinding
 import kr.co.soogong.master.domain.entity.requirement.RequirementStatus
 import kr.co.soogong.master.utility.extension.formatDateWithDay
+import kr.co.soogong.master.utility.extension.setCopyToClipboard
 import kr.co.soogong.master.utility.extension.setLabelTheme
 import kr.co.soogong.master.utility.extension.setUnderline
 import java.util.*
@@ -51,8 +52,9 @@ class RequirementBasic @JvmOverloads constructor(
         set(value) {
             field = value
             value?.let {
-                binding.tvAddress.text = value
+                binding.tvAddress.text = it
                 binding.tvAddress.setUnderline()
+                binding.tvAddress.setCopyToClipboard()
             }
         }
 
@@ -63,6 +65,7 @@ class RequirementBasic @JvmOverloads constructor(
                 binding.groupOldAddress.isVisible = it.isNotBlank()
                 binding.tvOldAddress.text = it
                 binding.tvOldAddress.setUnderline()
+                binding.tvOldAddress.setCopyToClipboard()
             }
         }
 

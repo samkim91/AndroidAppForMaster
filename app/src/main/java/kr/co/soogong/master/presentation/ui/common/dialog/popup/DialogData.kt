@@ -102,10 +102,10 @@ data class DialogData(
                 "취소",
             )
 
-        fun getCallToCustomer() =
+        fun getCallToCustomer(phoneNumber: String) =
             DialogData(
-                "전화 연결",
                 "고객님에게 전화하시겠어요?",
+                phoneNumber,
                 "",
                 "확인",
                 "취소",

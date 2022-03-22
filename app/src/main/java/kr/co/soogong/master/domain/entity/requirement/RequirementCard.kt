@@ -44,7 +44,11 @@ data class RequirementCard(
                 distance = (requirementCardDto.distance * 10.0).roundToInt() / 10.0,
                 status = RequirementStatus.getStatusFromRequirementCardDto(requirementCardDto),
                 subStatus = requirementCardDto.subStatusCode,
-                phoneNumber = requirementCardDto.safetyNumber ?: requirementCardDto.tel,
+                phoneNumber = if (requirementCardDto.contactYn) {
+                    requirementCardDto.tel
+                } else {
+                    requirementCardDto.safetyNumber ?: requirementCardDto.tel
+                },
                 contactYn = requirementCardDto.contactYn,
                 requirementQnas = requirementCardDto.requirementQnas,
                 estimationId = requirementCardDto.estimationId,
