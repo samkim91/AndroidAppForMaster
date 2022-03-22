@@ -226,7 +226,7 @@ class ViewRequirementViewModel @Inject constructor(
     }
 
     companion object {
-        private val TAG = ViewRequirementViewModel::class.java.name
+        private val TAG = ViewRequirementViewModel::class.java.simpleName
         const val REFUSE_TO_ESTIMATE_SUCCESSFULLY = "REFUSE_TO_ESTIMATE_SUCCESSFULLY"
         const val INVALID_REQUIREMENT = "INVALID_REQUIREMENT"
         const val ACCEPT_TO_MEASURE_SUCCESSFULLY = "RESPOND_TO_MEASURE_SUCCESSFULLY"

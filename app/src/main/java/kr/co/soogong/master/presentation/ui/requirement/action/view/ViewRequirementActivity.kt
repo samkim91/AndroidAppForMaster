@@ -165,6 +165,6 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
     }
 
     companion object {
-        private val TAG = ViewRequirementActivity::class.java.name
+        private val TAG = ViewRequirementActivity::class.java.simpleName
     }
 }

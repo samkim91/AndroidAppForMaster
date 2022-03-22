@@ -71,7 +71,7 @@ class PriceByProjectFragment : BaseFragment<FragmentEditPriceByProjectBinding>(
     }
 
     companion object {
-        private val TAG = PriceByProjectFragment::class.java.name
+        private val TAG = PriceByProjectFragment::class.java.simpleName
         private const val PRICE_BY_PROJECT = "PRICE_BY_PROJECT"
 
         fun newInstance(priceByProject: PriceByProject? = null) = PriceByProjectFragment().apply {

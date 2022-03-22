@@ -62,7 +62,7 @@ class PriceByProjectViewModel @Inject constructor(
     }
 
     companion object {
-        private val TAG = PriceByProjectViewModel::class.java.name
+        private val TAG = PriceByProjectViewModel::class.java.simpleName
         const val SAVE_PRICE_BY_PROJECT_SUCCESSFULLY = "SAVE_PRICE_BY_PROJECT_SUCCESSFULLY"
     }
 }

@@ -80,7 +80,7 @@ class PortfolioViewModel @Inject constructor(
     }
 
     companion object {
-        private val TAG = PortfolioViewModel::class.java.name
+        private val TAG = PortfolioViewModel::class.java.simpleName
         const val SAVE_PORTFOLIO_SUCCESSFULLY = "SAVE_PORTFOLIO_SUCCESSFULLY"
         const val START_IMAGE_PICKER_FOR_BEFORE = "START_IMAGE_PICKER_FOR_BEFORE"
         const val START_IMAGE_PICKER_FOR_AFTER = "START_IMAGE_PICKER_FOR_AFTER"

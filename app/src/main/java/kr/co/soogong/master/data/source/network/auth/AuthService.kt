@@ -18,7 +18,7 @@ class AuthService @Inject constructor(
 
     fun signUp(masterSignUpDto: MasterSignUpDto): Single<ResponseDto<MasterSignUpDto>> = authInterface.signUp(masterSignUpDto)
 
-    fun saveFCMToken(firebaseTokenDto: FirebaseTokenDto): Single<FirebaseTokenDto> {
+    suspend fun saveFCMToken(firebaseTokenDto: FirebaseTokenDto) {
         return authInterface.saveFCMToken(firebaseTokenDto)
     }
 }

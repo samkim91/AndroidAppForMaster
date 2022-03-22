@@ -151,7 +151,7 @@ class RepairPhotoFragment : BaseFragment<FragmentEditRepairPhotoBinding>(
     }
 
     companion object {
-        private val TAG = RepairPhotoFragment::class.java.name
+        private val TAG = RepairPhotoFragment::class.java.simpleName
         private const val PORTFOLIO = "PORTFOLIO"
 
         fun newInstance(repairPhoto: RepairPhoto? = null) = RepairPhotoFragment().apply {
