@@ -101,7 +101,7 @@ class BottomDialogCountableEdittext :
     }
 
     companion object {
-        private val TAG = BottomDialogCountableEdittext::class.java.name
+        private val TAG = BottomDialogCountableEdittext::class.java.simpleName
 
         private const val BOTTOM_DIALOG_DATA = "BOTTOM_DIALOG_DATA"
         private const val CONTENT = "CONTENT"

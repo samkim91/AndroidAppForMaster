@@ -16,5 +16,5 @@ interface AuthInterface {
     fun signUp(@Body masterSignUpDto: MasterSignUpDto): Single<ResponseDto<MasterSignUpDto>>
 
     @POST(HttpContract.SAVE_FCM_TOKEN)
-    fun saveFCMToken(@Body firebaseTokenDto: FirebaseTokenDto): Single<FirebaseTokenDto>
+    suspend fun saveFCMToken(@Body firebaseTokenDto: FirebaseTokenDto)
 }

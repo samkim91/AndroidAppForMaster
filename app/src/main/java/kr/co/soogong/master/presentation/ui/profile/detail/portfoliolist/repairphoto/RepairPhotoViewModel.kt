@@ -82,7 +82,7 @@ class RepairPhotoViewModel @Inject constructor(
     }
 
     companion object {
-        private val TAG = RepairPhotoViewModel::class.java.name
+        private val TAG = RepairPhotoViewModel::class.java.simpleName
         const val SAVE_PORTFOLIO_SUCCESSFULLY = "SAVE_PORTFOLIO_SUCCESSFULLY"
         const val START_REPAIR_PHOTOS_PICKER = "START_REPAIR_PHOTOS_PICKER"
     }

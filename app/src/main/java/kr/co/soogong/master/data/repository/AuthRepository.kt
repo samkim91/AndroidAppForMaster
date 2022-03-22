@@ -21,8 +21,7 @@ class AuthRepository @Inject constructor(
             MasterSignUp.fromDto(it.data!!)
         }
 
-
-    fun saveFCMToken(firebaseTokenDto: FirebaseTokenDto): Single<FirebaseTokenDto> =
+     suspend fun saveFCMToken(firebaseTokenDto: FirebaseTokenDto) =
         authService.saveFCMToken(firebaseTokenDto)
 
     companion object {

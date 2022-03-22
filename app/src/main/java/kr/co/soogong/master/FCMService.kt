@@ -12,15 +12,43 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.launch
+import kr.co.soogong.master.domain.usecase.auth.SaveFCMTokenUseCase
 import kr.co.soogong.master.presentation.uihelper.main.MainActivityHelper
 import kr.co.soogong.master.presentation.uihelper.requirment.action.ViewRequirementActivityHelper
 import timber.log.Timber
+import javax.inject.Inject
 import kotlin.random.Random
 
-class SoogongMasterMessagingService : FirebaseMessagingService() {
+@AndroidEntryPoint
+class FCMService : FirebaseMessagingService() {
+    @Inject
+    lateinit var saveFCMTokenUseCase: SaveFCMTokenUseCase
+
+    private val job = CoroutineScope(Job())
+
     override fun onNewToken(token: String) {
         super.onNewToken(token)
         Timber.tag(TAG).d("onNewToken: $token")
+
+        sendRegistrationToServer(token)
+    }
+
+    private fun sendRegistrationToServer(token: String) {
+        Timber.tag(TAG).d("sendRegistrationToServer: $token")
+
+        job.launch {
+            try {
+                saveFCMTokenUseCase(token)
+                Timber.tag(TAG).d("sendRegistrationToServer successfully: ")
+            } catch (e: Exception) {
+                Timber.tag(TAG).e("sendRegistrationToServer failed: $e")
+            }
+        }
     }
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
@@ -76,8 +104,13 @@ class SoogongMasterMessagingService : FirebaseMessagingService() {
             PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
         )
 
+    override fun onDestroy() {
+        super.onDestroy()
+        job.cancel()
+    }
+
     companion object {
-        private const val TAG = "FCM"
+        private val TAG = FCMService::class.java.simpleName
 
         private const val BROKEN_CHANNEL_ID: String = "general_channel_3"
         private const val CHANNEL_ID: String = "general_channel_4"

@@ -8,8 +8,8 @@ import com.google.firebase.dynamiclinks.ktx.dynamicLinks
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
-import kr.co.soogong.master.SoogongMasterMessagingService.Companion.initNotificationChannel
-import kr.co.soogong.master.SoogongMasterMessagingService.Companion.removeBrokenChannel
+import kr.co.soogong.master.FCMService.Companion.initNotificationChannel
+import kr.co.soogong.master.FCMService.Companion.removeBrokenChannel
 import kr.co.soogong.master.databinding.ActivityMainBinding
 import kr.co.soogong.master.databinding.ViewMainActivityTabItemBinding
 import kr.co.soogong.master.domain.entity.common.CodeTable

@@ -128,7 +128,7 @@ class PortfolioFragment : BaseFragment<FragmentEditPortfolioBinding>(
     }
 
     companion object {
-        private val TAG = PortfolioFragment::class.java.name
+        private val TAG = PortfolioFragment::class.java.simpleName
         private const val PORTFOLIO = "PORTFOLIO"
 
         fun newInstance(portfolio: Portfolio? = null) = PortfolioFragment().apply {
