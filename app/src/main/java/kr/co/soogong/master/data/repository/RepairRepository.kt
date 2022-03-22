@@ -2,7 +2,7 @@ package kr.co.soogong.master.data.repository
 
 import dagger.Reusable
 import io.reactivex.Single
-import kr.co.soogong.master.data.datasource.network.requirement.repair.RepairService
+import kr.co.soogong.master.data.source.network.requirement.repair.RepairService
 import kr.co.soogong.master.data.entity.requirement.RequirementDto
 import kr.co.soogong.master.data.entity.requirement.repair.RepairDto
 import javax.inject.Inject

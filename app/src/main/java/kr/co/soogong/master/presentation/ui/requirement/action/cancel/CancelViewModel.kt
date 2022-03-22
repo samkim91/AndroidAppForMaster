@@ -10,8 +10,8 @@ import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.data.entity.common.CodeDto
 import kr.co.soogong.master.data.entity.requirement.estimation.EstimationDto
 import kr.co.soogong.master.data.entity.requirement.repair.RepairDto
+import kr.co.soogong.master.domain.entity.common.CodeTable
 import kr.co.soogong.master.domain.entity.requirement.Requirement
-import kr.co.soogong.master.domain.entity.requirement.estimation.EstimationResponseCode
 import kr.co.soogong.master.domain.usecase.requirement.GetRequirementUseCase
 import kr.co.soogong.master.domain.usecase.requirement.estimation.RespondToMeasureUseCase
 import kr.co.soogong.master.domain.usecase.requirement.repair.GetCanceledReasonsUseCase
@@ -86,7 +86,7 @@ class CancelViewModel @Inject constructor(
         saveRepairUseCase(
             repairDto = RepairDto(
                 requirementToken = _requirement.value?.token,
-                estimationId = _requirement.value?.estimationDto?.id,
+                estimationId = _requirement.value?.estimation?.id,
                 canceledYn = true,
                 canceledCode = canceledCode.value,
                 canceledDescription = canceledDescription.value,
@@ -110,11 +110,11 @@ class CancelViewModel @Inject constructor(
         Timber.tag(TAG).d("respondToMeasure: ")
         respondToMeasureUseCase(
             EstimationDto(
-                id = _requirement.value?.estimationDto?.id,
-                token = _requirement.value?.estimationDto?.token,
-                requirementId = _requirement.value?.estimationDto?.requirementId,
-                masterId = _requirement.value?.estimationDto?.masterId,
-                masterResponseCode = EstimationResponseCode.REFUSED,
+                id = _requirement.value?.estimation?.id,
+                token = _requirement.value?.estimation?.token,
+                requirementId = _requirement.value?.estimation?.requirementId,
+                masterId = _requirement.value?.estimation?.masterId,
+                masterResponseCode = CodeTable.REFUSED.code,
                 refuseCode = canceledCode.value,
                 refuseDescription = canceledDescription.value,
                 typeCode = null,

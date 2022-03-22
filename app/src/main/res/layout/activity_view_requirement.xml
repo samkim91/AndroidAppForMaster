@@ -57,7 +57,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:onContainerClickListener="@{() -> vm.showMenuBottomSheetDialog()}"
-                    app:content="@{vm.requirement.estimationDto.masterMemo}"
+                    app:content="@{vm.requirement.estimation.masterMemo}"
                     app:label="@{@string/memo}" />
 
                 <LinearLayout

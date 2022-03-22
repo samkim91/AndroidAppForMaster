@@ -13,7 +13,7 @@ fun showDialogForCallingCustomer(
     when (requirement.status) {
         // NOTE: 상담요청 상태에서, 상호 통화한 적이 한번도 없으면 전화하라고 안내
         is RequirementStatus.RequestConsult -> {
-            if (requirement.estimationDto?.fromMasterCallCnt == 0 && requirement.estimationDto.fromClientCallCnt == 0) {
+            if (requirement.estimation.fromMasterCallCnt == 0 && requirement.estimation.fromClientCallCnt == 0) {
                 DefaultDialog.newInstance(DialogData.getAlertForRequestConsult())
                     .let {
                         it.setButtonsClickListener(
@@ -27,7 +27,7 @@ fun showDialogForCallingCustomer(
 
         // NOTE: 실측예정 상태에서, 상호 통화한 적이 한번도 없으면 전화하라고 안내
         is RequirementStatus.Measuring -> {
-            if (requirement.estimationDto?.fromMasterCallCnt == 0 && requirement.estimationDto.fromClientCallCnt == 0) {
+            if (requirement.estimation.fromMasterCallCnt == 0 && requirement.estimation.fromClientCallCnt == 0) {
                 DefaultDialog.newInstance(DialogData.getRecommendingCallingCustomer())
                     .let {
                         it.setButtonsClickListener(

@@ -2,7 +2,7 @@ package kr.co.soogong.master.data.repository
 
 import dagger.Reusable
 import io.reactivex.Single
-import kr.co.soogong.master.data.datasource.network.auth.AuthService
+import kr.co.soogong.master.data.source.network.auth.AuthService
 import kr.co.soogong.master.data.entity.auth.FirebaseTokenDto
 import kr.co.soogong.master.data.entity.auth.MasterSignUpDto
 import kr.co.soogong.master.domain.entity.auth.MasterSignUp

@@ -1,7 +1,7 @@
 package kr.co.soogong.master.domain.usecase.requirement
 
 import dagger.Reusable
-import kr.co.soogong.master.data.datasource.network.requirement.RequirementService
+import kr.co.soogong.master.data.source.network.requirement.RequirementService
 import kr.co.soogong.master.domain.usecase.auth.GetMasterUidFromSharedUseCase
 import javax.inject.Inject
 

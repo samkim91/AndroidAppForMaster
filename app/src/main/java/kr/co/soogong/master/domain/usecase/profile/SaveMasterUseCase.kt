@@ -6,7 +6,7 @@ import dagger.Reusable
 import dagger.hilt.android.qualifiers.ApplicationContext
 import io.reactivex.Single
 import kr.co.soogong.master.data.entity.profile.MasterDto
-import kr.co.soogong.master.data.datasource.network.profile.ProfileService
+import kr.co.soogong.master.data.source.network.profile.ProfileService
 import kr.co.soogong.master.utility.MultipartGenerator
 import javax.inject.Inject
 

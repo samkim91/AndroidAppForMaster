@@ -3,7 +3,7 @@ package kr.co.soogong.master.presentation.ui.profile.review
 import android.content.Context
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
-import kr.co.soogong.master.domain.entity.profile.Review
+import kr.co.soogong.master.domain.entity.requirement.review.Review
 
 class ReviewAdapter(
     private val context: Context,

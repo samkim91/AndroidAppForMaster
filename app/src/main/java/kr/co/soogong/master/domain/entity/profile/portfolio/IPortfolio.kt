@@ -1,6 +1,7 @@
 package kr.co.soogong.master.domain.entity.profile.portfolio
 
 import kr.co.soogong.master.data.entity.profile.portfolio.PortfolioDto
+import kr.co.soogong.master.domain.entity.DtoConverter
 import kr.co.soogong.master.domain.entity.common.PortfolioType
 
 interface IPortfolio {
@@ -10,12 +11,12 @@ interface IPortfolio {
     val title: String
     val description: String
 
-    companion object {
-        fun fromDto(portfolioDto: PortfolioDto): IPortfolio {
-            return when (portfolioDto.typeCode) {
-                PortfolioType.PORTFOLIO.code -> Portfolio.fromDto(portfolioDto)
-                PortfolioType.REPAIR_PHOTO.code -> RepairPhoto.fromDto(portfolioDto)
-                else -> PriceByProject.fromDto(portfolioDto)
+    companion object : DtoConverter<PortfolioDto, IPortfolio> {
+        override fun fromDto(dto: PortfolioDto): IPortfolio {
+            return when (dto.typeCode) {
+                PortfolioType.PORTFOLIO.code -> Portfolio.fromDto(dto)
+                PortfolioType.REPAIR_PHOTO.code -> RepairPhoto.fromDto(dto)
+                else -> PriceByProject.fromDto(dto)
             }
         }
     }

@@ -59,7 +59,7 @@ class EndRepairViewModel @Inject constructor(
         saveRepairUseCase(
             RepairDto(
                 requirementToken = _requirement.value?.token,
-                estimationId = _requirement.value?.estimationDto?.id,
+                estimationId = _requirement.value?.estimation?.id,
                 actualDate = actualDate.value?.time,
                 actualPrice = actualPrice.value?.toInt(),
                 includingVat = includingVat.value,

@@ -11,9 +11,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ViewSubheadlineContentTagBinding
-import kr.co.soogong.master.domain.entity.profile.Review
 import kr.co.soogong.master.domain.entity.requirement.Requirement
-import kr.co.soogong.master.domain.entity.requirement.estimation.EstimationPriceTypeCode
 import kr.co.soogong.master.presentation.ui.profile.review.ReviewViewHolder
 import kr.co.soogong.master.utility.extension.dp
 import kr.co.soogong.master.utility.extension.formatMoney
@@ -95,15 +93,14 @@ class SubheadlineContentTag @JvmOverloads constructor(
             container: ViewGroup,
             requirement: Requirement,
         ) {
-            requirement.estimationDto?.let { estimation ->
+            requirement.estimation.let { estimation ->
                 // 총 견적가
                 SubheadlineContentTag(context).also { item ->
                     item.subheadline = context.getString(R.string.estimation_total_cost)
                     item.content =
-                        if (estimation.price != 0) estimation.price.formatMoney() else context.getString(
-                            R.string.not_estimated_text)
+                        if (estimation.price != 0) estimation.price.formatMoney() else context.getString(R.string.not_estimated_text)
                     item.tag =
-                        if (estimation.price!! > 0) context.getString(if (estimation.includingVat == true) R.string.vat_included else R.string.vat_not_included) else ""
+                        if (estimation.price != 0) context.getString(if (estimation.includingVat) R.string.vat_included else R.string.vat_not_included) else ""
                     container.addView(item, params)
                 }
 
@@ -111,15 +108,7 @@ class SubheadlineContentTag @JvmOverloads constructor(
                 if (!estimation.estimationPrices.isNullOrEmpty())
                     estimation.estimationPrices.map { price ->
                         SubheadlineContentTag(context).also { item ->
-                            item.subheadline = when (price.priceTypeCode) {
-                                EstimationPriceTypeCode.LABOR ->
-                                    context.getString(R.string.estimation_labor_cost)
-                                EstimationPriceTypeCode.MATERIAL ->
-                                    context.getString(R.string.estimation_material_cost)
-                                EstimationPriceTypeCode.TRAVEL ->
-                                    context.getString(R.string.estimation_travel_cost)
-                                else -> ""
-                            }
+                            item.subheadline = price.priceTypeCode?.inKorean
                             item.content = price.partialPrice.formatMoney()
                             container.addView(item, params)
                         }
@@ -148,13 +137,13 @@ class SubheadlineContentTag @JvmOverloads constructor(
             container: ViewGroup,
             requirement: Requirement,
         ) {
-            requirement.estimationDto?.let { estimation ->
+            requirement.estimation.let { estimation ->
                 // 최종 시공가
                 SubheadlineContentTag(context).also { item ->
                     item.subheadline = context.getString(R.string.repair_actual_price)
                     item.content = estimation.repair?.actualPrice.formatMoney()
                     item.tag =
-                        if (estimation.repair?.actualPrice!! > 0) context.getString(if (estimation.repair.includingVat == true) R.string.vat_included else R.string.vat_not_included) else ""
+                        if (estimation.repair?.actualPrice != 0) context.getString(if (estimation.repair?.includingVat == true) R.string.vat_included else R.string.vat_not_included) else ""
                     container.addView(item, params)
                 }
                 // 제안 내용
@@ -201,7 +190,7 @@ class SubheadlineContentTag @JvmOverloads constructor(
                         item.subheadline = context.getString(R.string.price_of_previous_estimation)
                         item.content = measurement.price.formatMoney()
                         item.tag =
-                            if (measurement.includingVat != null) context.getString(if (measurement.includingVat == true) R.string.vat_included else R.string.vat_not_included) else ""
+                            if (measurement.price != 0) context.getString(if (measurement.includingVat) R.string.vat_included else R.string.vat_not_included) else ""
                         container.addView(item, params)
                     }
 
@@ -249,9 +238,9 @@ class SubheadlineContentTag @JvmOverloads constructor(
             container: ViewGroup,
             requirement: Requirement,
         ) {
-            requirement.estimationDto?.repair?.review?.let { review ->
+            requirement.estimation.repair?.review?.let { review ->
                 ReviewViewHolder.create(container).also { viewHolder ->
-                    viewHolder.binding(context, Review.fromReviewDto(review))
+                    viewHolder.binding(context, review)
                     viewHolder.itemView.layoutParams.let { params ->
                         params as MarginLayoutParams
                         params.topMargin = 12.dp

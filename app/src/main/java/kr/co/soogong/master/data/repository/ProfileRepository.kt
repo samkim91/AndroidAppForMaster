@@ -4,7 +4,7 @@ import android.content.SharedPreferences
 import dagger.Reusable
 import io.reactivex.Single
 import kr.co.soogong.master.contract.AppSharedPreferenceContract
-import kr.co.soogong.master.data.datasource.network.profile.ProfileService
+import kr.co.soogong.master.data.source.network.profile.ProfileService
 import kr.co.soogong.master.data.entity.common.PageableContentDto
 import kr.co.soogong.master.data.entity.common.ResponseDto
 import kr.co.soogong.master.data.entity.profile.MasterDto

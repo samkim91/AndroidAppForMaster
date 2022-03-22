@@ -2,8 +2,8 @@ package kr.co.soogong.master.data.repository
 
 import dagger.Reusable
 import io.reactivex.Single
-import kr.co.soogong.master.data.datasource.local.preferences.NoticeDao
-import kr.co.soogong.master.data.datasource.network.preferences.PreferencesService
+import kr.co.soogong.master.data.source.local.preferences.NoticeDao
+import kr.co.soogong.master.data.source.network.preferences.PreferencesService
 import kr.co.soogong.master.data.entity.auth.VersionDto
 import kr.co.soogong.master.data.entity.preferences.NoticeDto
 import timber.log.Timber

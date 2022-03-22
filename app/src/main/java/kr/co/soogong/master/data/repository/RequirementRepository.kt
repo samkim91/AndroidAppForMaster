@@ -7,8 +7,8 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import kr.co.soogong.master.data.datasource.local.requirement.RequirementDao
-import kr.co.soogong.master.data.datasource.network.requirement.RequirementService
+import kr.co.soogong.master.data.source.local.requirement.RequirementDao
+import kr.co.soogong.master.data.source.network.requirement.RequirementService
 import kr.co.soogong.master.data.entity.common.PageableContentDto
 import kr.co.soogong.master.data.entity.common.ResponseDto
 import kr.co.soogong.master.data.entity.requirement.RequirementCardDto

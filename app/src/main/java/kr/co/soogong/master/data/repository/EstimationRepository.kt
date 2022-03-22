@@ -2,7 +2,7 @@ package kr.co.soogong.master.data.repository
 
 import dagger.Reusable
 import io.reactivex.Single
-import kr.co.soogong.master.data.datasource.network.requirement.estimation.EstimationService
+import kr.co.soogong.master.data.source.network.requirement.estimation.EstimationService
 import kr.co.soogong.master.data.entity.requirement.CustomerRequest
 import kr.co.soogong.master.data.entity.requirement.estimation.EstimationDto
 import kr.co.soogong.master.data.entity.requirement.estimation.EstimationTemplateDto

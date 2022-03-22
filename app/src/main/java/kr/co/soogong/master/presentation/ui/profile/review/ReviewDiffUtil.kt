@@ -1,7 +1,7 @@
 package kr.co.soogong.master.presentation.ui.profile.review
 
 import androidx.recyclerview.widget.DiffUtil
-import kr.co.soogong.master.domain.entity.profile.Review
+import kr.co.soogong.master.domain.entity.requirement.review.Review
 
 class ReviewDiffUtil : DiffUtil.ItemCallback<Review>() {
     override fun areItemsTheSame(oldItem: Review, newItem: Review): Boolean {
