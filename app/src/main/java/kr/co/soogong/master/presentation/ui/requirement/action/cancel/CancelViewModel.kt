@@ -90,7 +90,7 @@ class CancelViewModel @Inject constructor(
                 canceledYn = true,
                 canceledCode = canceledCode.value,
                 canceledDescription = canceledDescription.value,
-            )
+            ), null
         )
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

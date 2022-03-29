@@ -26,6 +26,7 @@ class WriteEstimationViewModel @Inject constructor(
     private val getRequirementUseCase: GetRequirementUseCase,
     val savedStateHandle: SavedStateHandle,
 ) : BaseViewModel() {
+    val maxPhoto: Int = 10
 
     val estimationTypes = listOf(CodeTable.INTEGRATION, CodeTable.BY_ITEM)
     val estimationType = MutableLiveData(estimationTypes[0])
@@ -143,7 +144,7 @@ class WriteEstimationViewModel @Inject constructor(
     }
 
     companion object {
-        private const val TAG = "WriteEstimationViewModel"
+        private val TAG = WriteEstimationViewModel::class.java.simpleName
 
         const val SEND_ESTIMATION_SUCCESSFULLY = "SEND_ESTIMATION_SUCCESSFULLY"
         const val REQUEST_FAILED = "REQUEST_FAILED"

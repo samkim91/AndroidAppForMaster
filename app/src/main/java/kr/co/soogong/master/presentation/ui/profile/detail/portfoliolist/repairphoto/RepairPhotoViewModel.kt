@@ -62,7 +62,7 @@ class RepairPhotoViewModel @Inject constructor(
                         updateImages = true
                     ),
                     newImages = repairPhotos.value?.map { attachmentDto ->
-                        attachmentDto.uri
+                        attachmentDto.uri!!
                     }
                 )
 

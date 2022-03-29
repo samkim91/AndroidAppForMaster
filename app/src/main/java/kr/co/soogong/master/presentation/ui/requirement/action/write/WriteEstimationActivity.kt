@@ -66,13 +66,17 @@ class WriteEstimationActivity : BaseActivity<ActivityWriteEstimationBinding>(
             saidAttachments.setImagesDeletableAdapter { viewModel.estimationImages.removeAt(it) }
 
             bSendEstimation.setOnClickListener {
-
                 if (viewModel.estimationType.value == CodeTable.INTEGRATION) {
                     validateSimpleCost()
-                    if (stiEstimationCost.error.isNullOrEmpty()) viewModel.sendEstimation()
+                    if (!stiEstimationCost.error.isNullOrEmpty()) return@setOnClickListener
+                    viewModel.sendEstimation()
                 } else {
                     validateTotalCost()
-                    if (stiLaborCost.error.isNullOrEmpty() && stiMaterialCost.error.isNullOrEmpty() && stiTravelCost.error.isNullOrEmpty() && stiTotalCost.error.isNullOrEmpty()) viewModel.sendEstimation()
+                    if (!stiLaborCost.error.isNullOrEmpty()) return@setOnClickListener
+                    if (!stiMaterialCost.error.isNullOrEmpty()) return@setOnClickListener
+                    if (!stiTravelCost.error.isNullOrEmpty()) return@setOnClickListener
+                    if (!stiTotalCost.error.isNullOrEmpty()) return@setOnClickListener
+                    viewModel.sendEstimation()
                 }
             }
 
@@ -102,41 +106,7 @@ class WriteEstimationActivity : BaseActivity<ActivityWriteEstimationBinding>(
             when (event) {
                 START_ESTIMATION_TEMPLATE -> estimationTemplateLauncher.launch(
                     EstimationTemplatesActivityHelper.getIntent(this@WriteEstimationActivity))
-                START_IMAGE_PICKER -> {
-                    PermissionHelper.checkImagePermission(context = this@WriteEstimationActivity,
-                        onGranted = {
-                            TedImagePicker.with(this@WriteEstimationActivity)
-                                .buttonBackground(R.drawable.shape_green_background_radius8)
-                                .max(
-                                    (10 - viewModel.estimationImages.getItemCount()),
-                                    resources.getString(R.string.maximum_images_count, 10)
-                                )
-                                .startMultiImage { uriList ->
-                                    if (FileHelper.isImageExtension(
-                                            uriList,
-                                            this@WriteEstimationActivity
-                                        ) == false
-                                    ) {
-                                        toast(getString(R.string.invalid_image_extension))
-                                        return@startMultiImage
-                                    }
-
-                                    viewModel.estimationImages.addAll(uriList.map {
-                                        AttachmentDto(
-                                            id = null,
-                                            partOf = null,
-                                            referenceId = null,
-                                            description = null,
-                                            s3Name = null,
-                                            fileName = null,
-                                            url = null,
-                                            uri = it,
-                                        )
-                                    })
-                                }
-                        },
-                        onDenied = { })
-                }
+                START_IMAGE_PICKER -> showImagePicker()
                 START_VIEW_REQUIREMENT -> viewModel.requirement.value?.let {
                     startActivity(ViewRequirementActivityHelper.getIntent(this, it.id))
                 }
@@ -144,9 +114,7 @@ class WriteEstimationActivity : BaseActivity<ActivityWriteEstimationBinding>(
                     toast(getString(R.string.send_message_succeeded))
                     super.onBackPressed()
                 }
-                REQUEST_FAILED -> {
-                    toast(getString(R.string.error_message_of_request_failed))
-                }
+                REQUEST_FAILED -> toast(getString(R.string.error_message_of_request_failed))
                 SHOW_LOADING -> showLoading(supportFragmentManager)
             }
         })
@@ -236,7 +204,44 @@ class WriteEstimationActivity : BaseActivity<ActivityWriteEstimationBinding>(
         }
     }
 
+    private fun showImagePicker() {
+        PermissionHelper.checkImagePermission(context = this@WriteEstimationActivity,
+            onGranted = {
+                TedImagePicker.with(this@WriteEstimationActivity)
+                    .buttonBackground(R.drawable.shape_green_background_radius8)
+                    .max(
+                        (viewModel.maxPhoto - viewModel.estimationImages.getItemCount()),
+                        resources.getString(R.string.maximum_images_count,
+                            viewModel.maxPhoto)
+                    )
+                    .startMultiImage { uriList ->
+                        if (FileHelper.isImageExtension(
+                                uriList,
+                                this@WriteEstimationActivity
+                            ) == false
+                        ) {
+                            toast(getString(R.string.invalid_image_extension))
+                            return@startMultiImage
+                        }
+
+                        viewModel.estimationImages.addAll(uriList.map {
+                            AttachmentDto(
+                                id = null,
+                                partOf = null,
+                                referenceId = null,
+                                description = null,
+                                s3Name = null,
+                                fileName = null,
+                                url = null,
+                                uri = it,
+                            )
+                        })
+                    }
+            },
+            onDenied = { })
+    }
+
     companion object {
-        private const val TAG = "WriteEstimationActivity"
+        private val TAG = WriteEstimationActivity::class.java.simpleName
     }
 }

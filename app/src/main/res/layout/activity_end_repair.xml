@@ -92,6 +92,20 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_calendar" />
+
+                <kr.co.soogong.master.presentation.atomic.molecules.SubheadlineAddingImagesDeletable
+                    android:id="@+id/said_attachments"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/gap_24"
+                    android:layout_marginStart="@dimen/gap_16"
+                    app:images="@{vm.repairImages}"
+                    app:onButtonClick="@{() -> vm.startImagePicker()}"
+                    app:subheadline="@{@string/adding_images}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/cv_calender"
+                    />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
 

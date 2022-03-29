@@ -51,7 +51,7 @@ class RequirementService @Inject constructor(
         )
     }
 
-    fun getRequirement(masterUid: String, requirementId: Int): Single<RequirementDto> {
-        return requirementInterface.getRequirement(masterUid, requirementId)
+    fun getRequirement(requirementId: Int, masterUid: String): Single<ResponseDto<RequirementDto>> {
+        return requirementInterface.getRequirement(requirementId, masterUid)
     }
 }

@@ -20,7 +20,9 @@ class SaveEstimationUseCase @Inject constructor(
         imageUris: List<Uri>?,
     ): Single<EstimationDto> {
         val estimation = MultipartGenerator.createJson(estimationDto)
-        val images = MultipartGenerator.createFiles(context, "images", imageUris)
+        val images = imageUris?.let {
+            MultipartGenerator.createFiles(context, "images", it)
+        }
 
         return estimationRepository.saveEstimation(estimation, images)
     }

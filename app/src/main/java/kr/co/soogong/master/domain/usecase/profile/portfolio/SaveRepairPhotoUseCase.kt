@@ -18,10 +18,12 @@ class SaveRepairPhotoUseCase @Inject constructor(
 ) {
     suspend operator fun invoke(
         saveRepairPhotoDto: SaveRepairPhotoDto,
-        newImages: List<Uri?>?,
+        newImages: List<Uri>?,
     ) = withContext(Dispatchers.IO) {
         val saveRepairPhotoJson = MultipartGenerator.createJson(saveRepairPhotoDto)
-        val imageFiles = MultipartGenerator.createFiles(context, "imageFiles", newImages)
+        val imageFiles = newImages?.let {
+            MultipartGenerator.createFiles(context, "imageFiles", it)
+        }
 
         profileRepository.saveRepairPhoto(saveRepairPhotoJson, imageFiles)
     }

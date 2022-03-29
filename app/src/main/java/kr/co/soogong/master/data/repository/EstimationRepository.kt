@@ -19,7 +19,7 @@ class EstimationRepository @Inject constructor(
 
     fun saveEstimation(
         estimationDto: RequestBody,
-        estimationImages: List<MultipartBody.Part?>? = null,
+        estimationImages: List<MultipartBody.Part?>?,
     ): Single<EstimationDto> {
         return estimationService.saveEstimation(estimationDto, estimationImages)
     }
