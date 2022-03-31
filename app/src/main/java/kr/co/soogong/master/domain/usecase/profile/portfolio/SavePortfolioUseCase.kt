@@ -23,12 +23,16 @@ class SavePortfolioUseCase @Inject constructor(
     ) = withContext(Dispatchers.IO) {
         profileRepository.savePortfolio(
             savePortfolioJson = MultipartGenerator.createJson(savePortfolioDto),
-            beforeImageFile = MultipartGenerator.createFile(context,
-                "beforeImageFile",
-                beforeImageUri),
-            afterImageFile = MultipartGenerator.createFile(context,
-                "afterImageFile",
-                afterImageUri)
+            beforeImageFile = beforeImageUri?.let {
+                MultipartGenerator.createFile(context,
+                    "beforeImageFile",
+                    it)
+            },
+            afterImageFile = afterImageUri?.let {
+                MultipartGenerator.createFile(context,
+                    "afterImageFile",
+                    it)
+            }
         )
     }
 }

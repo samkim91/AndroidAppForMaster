@@ -20,18 +20,18 @@ object MultipartGenerator {
         return jsonDto.toRequestBody("application/json".toMediaTypeOrNull())
     }
 
-    fun createFile(context: Context, key: String, uri: Uri?): MultipartBody.Part? {
+    fun createFile(context: Context, key: String, uri: Uri): MultipartBody.Part? {
         Timber.tag(TAG).d("createFile: $uri to $key")
-        return if (uri == null || uri == Uri.EMPTY || uri.toString().contains("https://")) null
+        return if (uri == Uri.EMPTY || uri.toString().contains("https://")) null
         else uri.asMultiPart(key, context.contentResolver)
     }
 
     fun createFiles(
         context: Context,
         key: String,
-        uriList: List<Uri?>?
-    ): List<MultipartBody.Part?>? {
-        return uriList?.map { uri ->
+        uriList: List<Uri>,
+    ): List<MultipartBody.Part?> {
+        return uriList.map { uri ->
             createFile(context, key, uri)
         }
     }

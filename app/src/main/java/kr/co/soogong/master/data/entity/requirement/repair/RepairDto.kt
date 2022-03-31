@@ -35,6 +35,9 @@ data class RepairDto(
     @SerializedName("requestReviewYn")
     val requestReviewYn: Boolean? = null,
 
+    @SerializedName("imageUrls")
+    val images: List<String>? = null,
+
     @SerializedName("canceledYn")
     val canceledYn: Boolean? = null,
 

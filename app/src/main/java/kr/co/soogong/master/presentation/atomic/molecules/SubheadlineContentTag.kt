@@ -148,6 +148,15 @@ class SubheadlineContentTag @JvmOverloads constructor(
                 }
                 // 제안 내용
                 addEstimationDetail(context, container, requirement)
+
+                // 실측사진
+                if (estimation.repair?.images.isNullOrEmpty()) return
+                TitleRectangleImages(context).also { item ->
+                    item.label =
+                        context.getString(R.string.repair_photo)
+                    item.images = estimation.repair?.images
+                    container.addView(item, params)
+                }
             }
         }
 

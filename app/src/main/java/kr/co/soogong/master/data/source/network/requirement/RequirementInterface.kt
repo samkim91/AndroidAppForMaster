@@ -8,6 +8,7 @@ import kr.co.soogong.master.data.entity.requirement.RequirementCardDto
 import kr.co.soogong.master.data.entity.requirement.RequirementDto
 import kr.co.soogong.master.data.entity.requirement.RequirementTotalDto
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface RequirementInterface {
@@ -38,7 +39,7 @@ interface RequirementInterface {
 
     @GET(HttpContract.GET_REQUIREMENT)
     fun getRequirement(
+        @Path("requirementId") requirementId: Int,
         @Query("masterUid") masterUid: String,
-        @Query("requirementId") requirementId: Int,
-    ): Single<RequirementDto>
+    ): Single<ResponseDto<RequirementDto>>
 }

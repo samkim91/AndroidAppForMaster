@@ -7,12 +7,12 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import kr.co.soogong.master.data.source.local.requirement.RequirementDao
-import kr.co.soogong.master.data.source.network.requirement.RequirementService
 import kr.co.soogong.master.data.entity.common.PageableContentDto
 import kr.co.soogong.master.data.entity.common.ResponseDto
 import kr.co.soogong.master.data.entity.requirement.RequirementCardDto
 import kr.co.soogong.master.data.entity.requirement.RequirementDto
+import kr.co.soogong.master.data.source.local.requirement.RequirementDao
+import kr.co.soogong.master.data.source.network.requirement.RequirementService
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -23,9 +23,12 @@ class RequirementRepository @Inject constructor(
 ) {
     private val compositeDisposable = CompositeDisposable()
 
-    fun getRequirementById(masterUid: String, requirementId: Int): Single<RequirementDto> {
+    fun getRequirementById(
+        requirementId: Int,
+        masterUid: String,
+    ): Single<ResponseDto<RequirementDto>> {
         Timber.tag(TAG).d("getRequirementFromAll start: $requirementId")
-        return getRequirementFromServer(masterUid, requirementId)
+        return getRequirementFromServer(requirementId, masterUid)
 //            .onErrorResumeNext(getRequirementFromLocal(requirementId))
             .doOnError { Timber.tag(TAG).d("getRequirementById failed: ") }
     }
@@ -38,9 +41,12 @@ class RequirementRepository @Inject constructor(
             }
     }
 
-    private fun getRequirementFromServer(masterUid: String, requirementId: Int): Single<RequirementDto> {
+    private fun getRequirementFromServer(
+        requirementId: Int,
+        masterUid: String,
+    ): Single<ResponseDto<RequirementDto>> {
         Timber.tag(TAG).d("getRequirementFromServer start: $requirementId")
-        return requirementService.getRequirement(masterUid, requirementId)
+        return requirementService.getRequirement(requirementId, masterUid)
 //            .doOnSuccess {
 //                Timber.tag(TAG).d("getRequirementFromServer: ")
 //                saveRequirementInLocal(it)
@@ -148,6 +154,6 @@ class RequirementRepository @Inject constructor(
     }
 
     companion object {
-        private const val TAG = "RequirementRepository"
+        private val TAG = RequirementRepository::class.java.simpleName
     }
 }
