@@ -41,9 +41,10 @@ data class Estimation(
                 masterMemo = dto.masterMemo ?: "",
                 fromMasterCallCnt = dto.fromMasterCallCnt ?: 0,
                 fromClientCallCnt = dto.fromClientCallCnt ?: 0,
-                estimationPrices = dto.estimationPrices?.map { estimationPriceDto ->
+                estimationPrices = if (dto.estimationPrices.isNullOrEmpty()) listOf()
+                else dto.estimationPrices.map { estimationPriceDto ->
                     EstimationPrice.fromDto(estimationPriceDto)
-                } ?: listOf(),
+                },
                 images = dto.images ?: listOf(),
                 repair = if (dto.repair != null) Repair.fromDto(dto.repair) else null,
                 createdAt = dto.createdAt!!,

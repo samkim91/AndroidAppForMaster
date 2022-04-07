@@ -1,7 +1,5 @@
 package kr.co.soogong.master.data.source.network.requirement.repair
 
-import io.reactivex.Single
-import kr.co.soogong.master.data.entity.requirement.RequirementDto
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Retrofit
@@ -13,11 +11,17 @@ class RepairService @Inject constructor(
 
     private val repairInterface = retrofit.create(RepairInterface::class.java)
 
-    fun saveRepair(
+    suspend fun saveRepair(
         repairDto: RequestBody,
         repairImages: List<MultipartBody.Part?>?,
-    ): Single<RequirementDto> {
+    ) {
         return repairInterface.saveRepair(repairDto, repairImages)
+    }
+
+    suspend fun cancelRepair(
+        cancelRepairDto: RequestBody,
+    ) {
+        return repairInterface.cancelRepair(cancelRepairDto)
     }
 
     fun getCanceledReasons(groupCodes: List<String>) =

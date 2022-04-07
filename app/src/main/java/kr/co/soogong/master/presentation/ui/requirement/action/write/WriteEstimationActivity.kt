@@ -111,6 +111,7 @@ class WriteEstimationActivity : BaseActivity<ActivityWriteEstimationBinding>(
                     startActivity(ViewRequirementActivityHelper.getIntent(this, it.id))
                 }
                 SEND_ESTIMATION_SUCCESSFULLY -> {
+                    dismissLoading()
                     toast(getString(R.string.send_message_succeeded))
                     super.onBackPressed()
                 }

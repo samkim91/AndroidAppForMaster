@@ -9,7 +9,6 @@ import kr.co.soogong.master.domain.entity.common.CodeTable
 @Parcelize
 data class EstimationPrice(
     val id: Int,
-    val estimationId: Int,
     val priceTypeCode: CodeTable?,
     val partialPrice: Int,
 ) : Parcelable {
@@ -19,7 +18,6 @@ data class EstimationPrice(
         override fun fromDto(dto: EstimationPriceDto): EstimationPrice {
             return EstimationPrice(
                 id = dto.id!!,
-                estimationId = dto.estimationId!!,
                 priceTypeCode = CodeTable.getCodeTableByCode(dto.priceTypeCode!!),
                 partialPrice = dto.partialPrice!!,
             )
