@@ -4,10 +4,10 @@ import android.content.Context
 import android.net.Uri
 import dagger.Reusable
 import dagger.hilt.android.qualifiers.ApplicationContext
-import io.reactivex.Single
-import kr.co.soogong.master.data.entity.requirement.repair.RepairDto
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import kr.co.soogong.master.data.entity.requirement.repair.SaveRepairDto
 import kr.co.soogong.master.data.repository.RepairRepository
-import kr.co.soogong.master.domain.entity.requirement.Requirement
 import kr.co.soogong.master.utility.MultipartGenerator
 import javax.inject.Inject
 
@@ -16,19 +16,16 @@ class SaveRepairUseCase @Inject constructor(
     @ApplicationContext private val context: Context,
     private val repairRepository: RepairRepository,
 ) {
-    operator fun invoke(
-        repairDto: RepairDto,
+    suspend operator fun invoke(
+        saveRepairDto: SaveRepairDto,
         repairImageUri: List<Uri>?,
-    ): Single<Requirement> {
-        val repair = MultipartGenerator.createJson(repairDto)
+    ) = withContext(Dispatchers.IO) {
+        val repair = MultipartGenerator.createJson(saveRepairDto)
 
         val repairImages = repairImageUri?.let {
             MultipartGenerator.createFiles(context, "images", it)
         }
 
-        return repairRepository.saveRepair(repair, repairImages)
-            .map { requirementDto ->
-                Requirement.fromRequirementDto(requirementDto)
-            }
+        repairRepository.saveRepair(repair, repairImages)
     }
 }

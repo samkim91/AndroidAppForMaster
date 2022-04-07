@@ -26,6 +26,11 @@ fun Date?.formatDateWithoutDay(): String {
     return SimpleDateFormat("yyyy. MM. dd", Locale.KOREA).format(this)
 }
 
+fun Date?.formatDateWithDash(): String {
+    if (this == null) return ""
+    return SimpleDateFormat("yyyy-MM-dd", Locale.KOREA).format(this)
+}
+
 fun Int?.formatMoney(): String {
     if (this == null) return "0"
     return "${DecimalFormat("#,###").format(this)}원"

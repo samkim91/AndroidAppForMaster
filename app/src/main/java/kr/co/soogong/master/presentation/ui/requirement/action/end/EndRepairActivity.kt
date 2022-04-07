@@ -10,6 +10,7 @@ import kr.co.soogong.master.data.entity.common.AttachmentDto
 import kr.co.soogong.master.databinding.ActivityEndRepairBinding
 import kr.co.soogong.master.presentation.ui.base.BaseActivity
 import kr.co.soogong.master.presentation.ui.base.BaseViewModel.Companion.REQUEST_FAILED
+import kr.co.soogong.master.presentation.ui.base.BaseViewModel.Companion.SHOW_LOADING
 import kr.co.soogong.master.presentation.ui.requirement.action.end.EndRepairViewModel.Companion.END_REPAIR_SUCCESSFULLY
 import kr.co.soogong.master.presentation.ui.requirement.action.end.EndRepairViewModel.Companion.START_IMAGE_PICKER
 import kr.co.soogong.master.utility.EventObserver
@@ -58,7 +59,7 @@ class EndRepairActivity : BaseActivity<ActivityEndRepairBinding>(
                     if (!stiActualPrice.error.isNullOrEmpty()) return@setOnClickListener
                 }
 
-                 viewModel.saveRepair()
+                viewModel.saveRepair()
             }
         }
     }
@@ -70,10 +71,12 @@ class EndRepairActivity : BaseActivity<ActivityEndRepairBinding>(
             when (event) {
                 START_IMAGE_PICKER -> showImagePicker()
                 END_REPAIR_SUCCESSFULLY -> {
+                    dismissLoading()
                     toast(getString(R.string.end_estimate_succeeded))
                     onBackPressed()
                 }
                 REQUEST_FAILED -> toast(getString(R.string.error_message_of_request_failed))
+                SHOW_LOADING -> showLoading(supportFragmentManager)
             }
         })
     }
