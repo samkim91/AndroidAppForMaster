@@ -5,6 +5,7 @@ import kr.co.soogong.master.data.entity.requirement.CustomerRequest
 import kr.co.soogong.master.data.entity.requirement.estimation.EstimationDto
 import kr.co.soogong.master.data.entity.requirement.estimation.EstimationTemplateDto
 import kr.co.soogong.master.data.entity.requirement.estimation.SaveMasterMemoDto
+import kr.co.soogong.master.data.entity.requirement.estimation.VisitingDateUpdateDto
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Retrofit
@@ -46,5 +47,9 @@ class EstimationService @Inject constructor(
 
     suspend fun saveMasterMemo(estimationToken: String, masterMemoDto: SaveMasterMemoDto) {
         return estimationInterface.saveMasterNote(estimationToken, masterMemoDto)
+    }
+
+    suspend fun updateVisitingDate(estimationToken: String, visitingDateUpdateDto: VisitingDateUpdateDto) {
+        return estimationInterface.updateVisitingDate(estimationToken, visitingDateUpdateDto)
     }
 }

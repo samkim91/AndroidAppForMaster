@@ -96,19 +96,13 @@ fun setFlexibleContainer(
             }
 
             // 시공예정, 실측예정
-            // view : 고객 요청 내용, 나의 제안 내용, 이전 실측 내용
+            // view : 고객 요청 내용, 이전 실측 내용
             is RequirementStatus.Repairing, RequirementStatus.Measuring -> {
                 Title3Container.addIconLabelContainer(
                     context = context,
                     container = flexibleContainer,
                     requirement = requirement,
                     contentType = REQUIREMENT_TYPE,
-                )
-                Title3Container.addIconLabelContainer(
-                    context = context,
-                    container = flexibleContainer,
-                    requirement = requirement,
-                    contentType = ESTIMATION_TYPE,
                 )
                 requirement.measurement?.let {
                     Title3Container.addIconLabelContainer(

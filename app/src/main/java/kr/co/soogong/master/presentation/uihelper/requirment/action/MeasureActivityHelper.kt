@@ -8,7 +8,7 @@ import kr.co.soogong.master.presentation.ui.requirement.action.write.Measurement
 
 object MeasureActivityHelper {
     private const val BUNDLE_KEY = "BUNDLE_KEY"
-    const val REQUIREMENT_ID = "REQUIREMENT_ID"
+    private const val REQUIREMENT_ID = "REQUIREMENT_ID"
 
     fun getIntent(context: Context, id: Int): Intent {
         return Intent(context, MeasurementActivity::class.java).apply {

@@ -76,8 +76,8 @@ class RequestConsultCardViewHolder(
     }
 }
 
-// 실측요청 상태
-// 버튼 : 2. 실측 수락
+// 방문요청 상태
+// 버튼 : 2. 전화하기
 class RequestMeasureCardViewHolder(
     context: Context,
     fragmentManager: FragmentManager,
@@ -91,13 +91,13 @@ class RequestMeasureCardViewHolder(
         super.bind(requirementCard)
 
         with(binding) {
-            buttonRight.setAcceptingMeasure(requirementCard)
+            buttonRight.setAcceptingMeasureAndCallToClient(requirementCard)
         }
     }
 }
 
-// 실측예정 상태
-// 버튼 : 1. 전화 하기, 2. 실측 보내기
+// 방문예정 상태
+// 버튼 : 1. 전화 하기, 2. 방문일 입력하기
 class MeasuringCardViewHolder(
     context: Context,
     fragmentManager: FragmentManager,

@@ -7,6 +7,7 @@ import kr.co.soogong.master.data.entity.requirement.CustomerRequest
 import kr.co.soogong.master.data.entity.requirement.estimation.EstimationDto
 import kr.co.soogong.master.data.entity.requirement.estimation.EstimationTemplateDto
 import kr.co.soogong.master.data.entity.requirement.estimation.SaveMasterMemoDto
+import kr.co.soogong.master.data.entity.requirement.estimation.VisitingDateUpdateDto
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import javax.inject.Inject
@@ -48,7 +49,11 @@ class EstimationRepository @Inject constructor(
         return estimationService.saveMasterMemo(estimationToken, masterMemoDto)
     }
 
+    suspend fun updateVisitingDate(estimationToken: String, visitingDateUpdateDto: VisitingDateUpdateDto) {
+        return estimationService.updateVisitingDate(estimationToken, visitingDateUpdateDto)
+    }
+
     companion object {
-        private const val TAG = "EstimationRepository"
+        private val TAG = EstimationRepository::class.java.simpleName
     }
 }

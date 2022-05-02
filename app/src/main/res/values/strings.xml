@@ -46,6 +46,8 @@
     <string name="memo_introduction">마스터님만 볼 수 있는 메모입니다.</string>
 
     <string name="client_call_number">고객번호</string>
+    <string name="date">날짜</string>
+    <string name="time">시간</string>
 
 
     <string name="required_field_alert">필수 정보입니다.</string>
@@ -55,6 +57,8 @@
     <string name="too_large_number">숫자가 너무 큽니다.</string>
     <string name="minimum_cost">1만원 이상으로 보내주세요.</string>
     <string name="required_value_between_2_and_20">2자 이상 20자 이내로 입력해주세요.</string>
+    <string name="select_date">방문 날짜 선택</string>
+    <string name="select_time">방문 시간 선택</string>
 
     <!-- Auth -->
     <string name="certification_code">인증번호</string>
@@ -241,7 +245,8 @@
     <string name="sending_estimation">견적 보내기</string>
 
     <!-- Measure  -->
-    <string name="writing_measurement">실측 정보</string>
+    <string name="setting_visiting_date">방문 확정</string>
+    <string name="select_visiting_time">방문일자를 선택해주세요.</string>
 
     <!-- End Estimate -->
     <string name="end_repair_title">최종 정보</string>

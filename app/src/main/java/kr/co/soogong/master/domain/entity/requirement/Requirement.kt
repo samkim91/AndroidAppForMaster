@@ -3,14 +3,14 @@ package kr.co.soogong.master.domain.entity.requirement
 import kr.co.soogong.master.data.entity.requirement.PreviousRequirementDto
 import kr.co.soogong.master.data.entity.requirement.RequirementDto
 import kr.co.soogong.master.data.entity.requirement.RequirementQnaDto
+import kr.co.soogong.master.domain.entity.common.CodeTable
 import kr.co.soogong.master.domain.entity.requirement.estimation.Estimation
 import java.util.*
 
 data class Requirement(
     val id: Int,
     val token: String,
-    val typeCode: String,
-    val typeName: String,
+    val typeCode: CodeTable,
     val projectId: Int,
     val projectName: String?,
     val address: String,
@@ -36,8 +36,8 @@ data class Requirement(
             Requirement(
                 id = requirementDto.id,
                 token = requirementDto.token,
-                typeCode = requirementDto.typeCode,
-                typeName = requirementDto.typeName,
+                typeCode = CodeTable.getCodeTableByCode(requirementDto.typeCode)
+                    ?: CodeTable.COMPARE,
                 projectId = requirementDto.projectId,
                 projectName = requirementDto.projectName,
                 address = requirementDto.address,
@@ -54,7 +54,7 @@ data class Requirement(
                 estimation = Estimation.fromDto(requirementDto.estimationDto),
                 previousRequirementDto = requirementDto.previousRequirementDto,
                 measurement = if (requirementDto.measurement != null) Estimation.fromDto(
-                    requirementDto.estimationDto) else null,
+                    requirementDto.measurement) else null,
                 images = requirementDto.images,
                 cancelName = requirementDto.canceledReasonName,
                 canceledDescription = requirementDto.canceledDescription,

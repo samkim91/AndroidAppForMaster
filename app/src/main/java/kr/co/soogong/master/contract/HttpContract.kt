@@ -37,6 +37,7 @@ object HttpContract {
     const val CALL_TO_CLIENT = "estimation/count-call"
     const val GET_CUSTOMER_REQUESTS = "estimation/get-contact-list"
     const val SAVE_MASTER_NOTE = "estimation/{token}/master-memo"
+    const val UPDATE_VISITING_DATE = "estimation/{token}/visit-date"
 
     //Estimation Template
     const val GET_ESTIMATION_TEMPLATES = "estimation-template/find-by-master-uid"

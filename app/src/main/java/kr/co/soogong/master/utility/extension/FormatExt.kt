@@ -13,13 +13,14 @@ fun Date?.formatFullDateTime(): String {
     return SimpleDateFormat("yyyy.MM.dd(E) - HH:mm", Locale.KOREA).format(this)
 }
 
-fun Date?.formatFullDateTimeWithoutDay(): String {
-    if (this == null) return ""
-    return SimpleDateFormat("yyyy.MM.dd - HH:mm", Locale.KOREA).format(this)
-}
+fun Date?.formatFullDateTimeWithoutDay(): String =
+    if (this == null) "" else SimpleDateFormat("yyyy.MM.dd - HH:mm", Locale.KOREA).format(this)
 
-fun Date.formatDateWithDay(): String =
-    SimpleDateFormat("yyyy.MM.dd (E)", Locale.KOREA).format(this)
+fun Date?.formatDateWithDay(): String =
+    if (this == null) "" else SimpleDateFormat("yyyy.MM.dd (E)", Locale.KOREA).format(this)
+
+fun Date?.formatTime(): String =
+    if (this == null) "" else SimpleDateFormat("a hh:mm", Locale.KOREA).format(this)
 
 fun Date?.formatDateWithoutDay(): String {
     if (this == null) return ""

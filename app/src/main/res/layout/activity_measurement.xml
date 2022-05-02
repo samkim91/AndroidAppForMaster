@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -14,7 +15,7 @@
 
         <variable
             name="vm"
-            type="kr.co.soogong.master.presentation.ui.requirement.action.write.WriteEstimationViewModel" />
+            type="kr.co.soogong.master.presentation.ui.requirement.action.write.MeasurementViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -29,7 +30,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:title="@{@string/writing_measurement}" />
+            app:title="@{@string/setting_visiting_date}" />
 
         <ScrollView
             android:layout_width="@dimen/gap_0"
@@ -62,39 +63,68 @@
                     android:layout_marginTop="@dimen/gap_16"
                     android:background="@color/light_grey_1" />
 
-                <kr.co.soogong.master.presentation.atomic.molecules.SubheadlineTextInput
-                    android:id="@+id/sti_estimation_cost"
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_subheadline"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/gap_16"
-                    app:contentLong="@={vm.simpleCost}"
-                    app:inputType="@{InputType.TYPE_CLASS_NUMBER}"
-                    app:max="@{10}"
-                    app:moneyFormatAtHelper="@{vm.simpleCost}"
-                    app:subheadline="@{@string/estimation_cost}" />
+                    android:layout_marginTop="@dimen/gap_24"
+                    android:text="@string/select_visiting_time"
+                    android:textAppearance="@style/subheadline.bold"
+                    android:textColor="@color/black" />
 
-                <androidx.appcompat.widget.AppCompatCheckBox
-                    android:id="@+id/cb_including_vat"
-                    style="@style/check_box_rectangle"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_container_date"
+                    style="@style/outlinedTextInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:checked="@={vm.includingVat}"
-                    android:text="@string/vat_included" />
+                    android:layout_marginTop="@dimen/gap_10"
+                    android:hint="@string/date"
+                    app:endIconMode="none"
+                    app:startIconDrawable="@drawable/ic_calendar">
 
-                <kr.co.soogong.master.presentation.atomic.molecules.SubheadlineAddingImagesDeletable
-                    android:id="@+id/said_attachments"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tie_edittext_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:focusable="false"
+                        app:dateWithDay="@{vm.date.time}"
+                        android:onClick="@{()->vm.startDatePicker()}"
+                        android:padding="@dimen/gap_14"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        tools:text="내용" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_container_time"
+                    style="@style/outlinedTextInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/gap_30"
-                    app:images="@{vm.estimationImages}"
-                    app:onButtonClick="@{() -> vm.startImagePicker()}"
-                    app:subheadline="@{@string/adding_images_option}" />
+                    android:layout_marginTop="@dimen/gap_6"
+                    android:hint="@string/time"
+                    app:endIconMode="none"
+                    app:startIconDrawable="@drawable/ic_clock">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tie_edittext_time"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:focusable="false"
+                        app:timeWithMeridiem="@{vm.time.time}"
+                        android:onClick="@{()->vm.startTimePicker()}"
+                        android:padding="@dimen/gap_14"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        tools:text="내용" />
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <kr.co.soogong.master.presentation.atomic.molecules.IconCallOutArrow
                     android:id="@+id/ica_getting_estimation_template"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/gap_24"
+                    android:layout_marginTop="@dimen/gap_36"
                     android:onClick="@{() -> vm.startEstimationTemplate()}"
                     android:paddingStart="@dimen/gap_12"
                     android:paddingTop="@dimen/gap_18"

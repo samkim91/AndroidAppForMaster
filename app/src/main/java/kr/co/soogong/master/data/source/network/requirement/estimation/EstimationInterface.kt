@@ -6,6 +6,7 @@ import kr.co.soogong.master.data.entity.requirement.CustomerRequest
 import kr.co.soogong.master.data.entity.requirement.estimation.EstimationDto
 import kr.co.soogong.master.data.entity.requirement.estimation.EstimationTemplateDto
 import kr.co.soogong.master.data.entity.requirement.estimation.SaveMasterMemoDto
+import kr.co.soogong.master.data.entity.requirement.estimation.VisitingDateUpdateDto
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.http.*
@@ -42,4 +43,7 @@ interface EstimationInterface {
 
     @PATCH(HttpContract.SAVE_MASTER_NOTE)
     suspend fun saveMasterNote(@Path("token") estimationToken: String, @Body masterMemoDto: SaveMasterMemoDto)
+
+    @PATCH(HttpContract.UPDATE_VISITING_DATE)
+    suspend fun updateVisitingDate(@Path("token") estimationToken: String, @Body visitingDateUpdateDto: VisitingDateUpdateDto)
 }

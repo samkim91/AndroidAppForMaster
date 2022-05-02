@@ -175,19 +175,33 @@ open class RequirementCardViewHolder(
         }
     }
 
-    protected fun AppCompatButton.setAcceptingMeasure(
+    protected fun AppCompatButton.setAcceptingMeasureAndCallToClient(
         requirementCard: RequirementCard,
     ) {
         this.isVisible = true
-        this.text = context.getString(R.string.accept_measure)
+
+        this.text =
+            if (requirementCard.contactYn) context.getString(R.string.call_to_customer_again)
+            else context.getString(R.string.call_to_customer)
+
+        this.background = ResourcesCompat.getDrawable(resources,
+            if (requirementCard.contactYn) R.drawable.bg_solid_transparent_stroke_light_grey2_selector_radius30 else R.drawable.bg_solid_transparent_stroke_green_selector_radius30,
+            null)
+
+        this.setTextColor(ResourcesCompat.getColor(resources,
+            if (requirementCard.contactYn) R.color.grey_4 else R.color.selector_green_alpha50,
+            null))
+
         setOnClickListener {
             checkMasterApprovedStatus {
                 DefaultDialog.newInstance(
-                    DialogData.getAcceptMeasure()
+                    DialogData.getCallToCustomer(requirementCard.phoneNumber)
                 ).let {
                     it.setButtonsClickListener(
                         onPositive = {
+                            viewModel.callToClient(requirementId = requirementCard.id)
                             viewModel.respondToMeasure(requirementCard)
+                            context.startActivity(CallToCustomerHelper.getIntent(requirementCard.phoneNumber))
                         },
                         onNegative = { }
                     )

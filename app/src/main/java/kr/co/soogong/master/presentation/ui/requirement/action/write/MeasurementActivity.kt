@@ -1,35 +1,39 @@
 package kr.co.soogong.master.presentation.ui.requirement.action.write
 
 import android.app.Activity
+import android.icu.util.Calendar
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import com.google.android.material.datepicker.CalendarConstraints
+import com.google.android.material.datepicker.DateValidatorPointForward
+import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.android.material.timepicker.MaterialTimePicker
+import com.google.android.material.timepicker.TimeFormat
 import dagger.hilt.android.AndroidEntryPoint
-import gun0912.tedimagepicker.builder.TedImagePicker
 import kr.co.soogong.master.R
-import kr.co.soogong.master.data.entity.common.AttachmentDto
-import kr.co.soogong.master.domain.entity.common.ColorTheme
 import kr.co.soogong.master.databinding.ActivityMeasurementBinding
+import kr.co.soogong.master.domain.entity.common.ColorTheme
 import kr.co.soogong.master.presentation.ui.base.BaseActivity
+import kr.co.soogong.master.presentation.ui.base.BaseViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.presentation.ui.base.BaseViewModel.Companion.SHOW_LOADING
 import kr.co.soogong.master.presentation.ui.common.dialog.popup.DefaultDialog
 import kr.co.soogong.master.presentation.ui.common.dialog.popup.DialogData
-import kr.co.soogong.master.presentation.ui.requirement.action.write.WriteEstimationViewModel.Companion.REQUEST_FAILED
-import kr.co.soogong.master.presentation.ui.requirement.action.write.WriteEstimationViewModel.Companion.SEND_ESTIMATION_SUCCESSFULLY
+import kr.co.soogong.master.presentation.ui.requirement.action.write.MeasurementViewModel.Companion.UPDATE_VISITING_DATE_SUCCESSFULLY
+import kr.co.soogong.master.presentation.ui.requirement.action.write.MeasurementViewModel.Companion.START_DATE_PICKER
+import kr.co.soogong.master.presentation.ui.requirement.action.write.MeasurementViewModel.Companion.START_TIME_PICKER
 import kr.co.soogong.master.presentation.uihelper.requirment.action.EstimationTemplatesActivityHelper
 import kr.co.soogong.master.presentation.uihelper.requirment.action.ViewRequirementActivityHelper
 import kr.co.soogong.master.utility.EventObserver
-import kr.co.soogong.master.utility.FileHelper
-import kr.co.soogong.master.utility.PermissionHelper
-import kr.co.soogong.master.utility.extension.isIntRange
 import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
+import java.util.*
 
 @AndroidEntryPoint
 class MeasurementActivity : BaseActivity<ActivityMeasurementBinding>(
     R.layout.activity_measurement
 ) {
-    private val viewModel: WriteEstimationViewModel by viewModels()
+    private val viewModel: MeasurementViewModel by viewModels()
 
     private val estimationTemplateLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -57,11 +61,14 @@ class MeasurementActivity : BaseActivity<ActivityMeasurementBinding>(
             abHeader.setIvBackClickListener { onBackPressed() }
 
             bSendEstimation.setOnClickListener {
-                validateCost()
-                if (stiEstimationCost.error.isNullOrEmpty()) viewModel.sendEstimation()
-            }
+                tilContainerDate.error =
+                    if (viewModel.date.value == null) getString(R.string.required_field_alert) else null
 
-            saidAttachments.setImagesDeletableAdapter { viewModel.estimationImages.removeAt(it) }
+                tilContainerTime.error =
+                    if (viewModel.time.value == null) getString(R.string.required_field_alert) else null
+
+                if (tilContainerTime.error.isNullOrEmpty() && tieEdittextTime.error.isNullOrEmpty()) viewModel.updateVisitingDate()
+            }
         }
     }
 
@@ -69,49 +76,14 @@ class MeasurementActivity : BaseActivity<ActivityMeasurementBinding>(
         Timber.tag(TAG).d("registerEventObserve: ")
         viewModel.action.observe(this@MeasurementActivity, EventObserver { event ->
             when (event) {
-                WriteEstimationViewModel.START_ESTIMATION_TEMPLATE -> estimationTemplateLauncher.launch(
+                MeasurementViewModel.START_ESTIMATION_TEMPLATE -> estimationTemplateLauncher.launch(
                     EstimationTemplatesActivityHelper.getIntent(this))
-                WriteEstimationViewModel.START_IMAGE_PICKER -> {
-                    PermissionHelper.checkImagePermission(context = this@MeasurementActivity,
-                        onGranted = {
-                            TedImagePicker.with(this@MeasurementActivity)
-                                .buttonBackground(R.drawable.shape_green_background_radius8)
-                                .max(
-                                    (10 - viewModel.estimationImages.getItemCount()),
-                                    resources.getString(R.string.maximum_images_count, 10)
-                                )
-                                .startMultiImage { uriList ->
-                                    if (FileHelper.isImageExtension(uriList,
-                                            this@MeasurementActivity) == false
-                                    ) {
-                                        toast(getString(R.string.invalid_image_extension))
-                                        return@startMultiImage
-                                    }
-
-                                    viewModel.estimationImages.addAll(uriList.map {
-                                        AttachmentDto(
-                                            id = null,
-                                            partOf = null,
-                                            referenceId = null,
-                                            description = null,
-                                            s3Name = null,
-                                            fileName = null,
-                                            url = null,
-                                            uri = it,
-                                        )
-                                    })
-                                }
-                        },
-                        onDenied = { })
-                }
-                WriteEstimationViewModel.START_VIEW_REQUIREMENT -> viewModel.requirement.value?.let {
+                MeasurementViewModel.START_VIEW_REQUIREMENT -> viewModel.requirement.value?.let {
                     startActivity(ViewRequirementActivityHelper.getIntent(this, it.id))
                 }
-                SEND_ESTIMATION_SUCCESSFULLY -> {
-                    dismissLoading()
-                    toast(getString(R.string.send_message_succeeded))
-                    super.onBackPressed()
-                }
+                UPDATE_VISITING_DATE_SUCCESSFULLY -> super.onBackPressed()
+                START_DATE_PICKER -> showDatePicker()
+                START_TIME_PICKER -> showTimePicker()
                 REQUEST_FAILED -> {
                     toast(getString(R.string.error_message_of_request_failed))
                 }
@@ -120,17 +92,44 @@ class MeasurementActivity : BaseActivity<ActivityMeasurementBinding>(
         })
     }
 
-    private fun validateCost() {
-        Timber.tag(TAG).d("registerCostObserver: ")
-        with(binding) {
-            viewModel.simpleCost.value.let {
-                stiEstimationCost.error = when {
-                    it == null || it < 10000 -> getString(R.string.minimum_cost)
-                    !it.isIntRange() -> getString(R.string.too_large_number)
-                    else -> null
-                }
+    private fun showDatePicker() {
+        val datePicker = MaterialDatePicker.Builder.datePicker()
+            .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
+            .setCalendarConstraints(
+                CalendarConstraints.Builder().setValidator(DateValidatorPointForward.now()).build()
+            )
+            .build()
+
+        datePicker.addOnPositiveButtonClickListener {
+            Calendar.getInstance(Locale.KOREA).run {
+                timeInMillis = it
+                viewModel.date.value = this
+
+                Timber.tag(TAG).i("date: ${viewModel.date.value?.time}")
+                showTimePicker()
             }
         }
+
+        datePicker.show(supportFragmentManager, TAG)
+    }
+
+    private fun showTimePicker() {
+        val timePicker = MaterialTimePicker.Builder()
+            .setTimeFormat(TimeFormat.CLOCK_12H)
+            .build()
+
+        timePicker.addOnPositiveButtonClickListener {
+            Calendar.getInstance(Locale.KOREA).run {
+                set(Calendar.HOUR_OF_DAY, timePicker.hour)
+                set(Calendar.MINUTE, timePicker.minute)
+
+                viewModel.time.value = this
+
+                Timber.tag(TAG).i("time: ${viewModel.time.value?.time}")
+            }
+        }
+
+        timePicker.show(supportFragmentManager, TAG)
     }
 
     override fun onBackPressed() {
@@ -152,6 +151,6 @@ class MeasurementActivity : BaseActivity<ActivityMeasurementBinding>(
     }
 
     companion object {
-        private const val TAG = "MeasurementActivity"
+        private val TAG = MeasurementActivity::class.java.simpleName
     }
 }

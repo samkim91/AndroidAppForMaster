@@ -64,6 +64,7 @@ enum class CodeTable(
     // 문의 타입
     COMPARE("Compare", "비교견적"),
     SECRETARY("Secretary", "수공비서"),
+    HANDYMAN("Handyman", "핸디맨"),
 
     ;
 

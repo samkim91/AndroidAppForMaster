@@ -23,8 +23,13 @@ fun TextView.setDateWithoutDay(date: Date?) {
 }
 
 @BindingAdapter("dateWithDay")
-fun TextView.setDateWithDay(date: Date) {
+fun TextView.setDateWithDay(date: Date?) {
     text = date.formatDateWithDay()
+}
+
+@BindingAdapter("timeWithMeridiem")
+fun TextView.setTimeWithMeridiem(date: Date?) {
+    text = date.formatTime()
 }
 
 @BindingAdapter("convertToPrice")

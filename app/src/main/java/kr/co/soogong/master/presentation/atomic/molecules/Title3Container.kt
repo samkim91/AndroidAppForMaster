@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.constraintlayout.widget.ConstraintLayout
 import kr.co.soogong.master.R
-import kr.co.soogong.master.domain.entity.common.CodeTable
-import kr.co.soogong.master.domain.entity.requirement.Requirement
 import kr.co.soogong.master.databinding.ViewIconLabelContainerBinding
+import kr.co.soogong.master.domain.entity.common.CodeTable.SECRETARY
+import kr.co.soogong.master.domain.entity.requirement.Requirement
 import kr.co.soogong.master.utility.extension.dp
 
 class Title3Container @JvmOverloads constructor(
@@ -64,7 +64,7 @@ class Title3Container @JvmOverloads constructor(
                     }
                     ESTIMATION_TYPE -> {
                         item.title =
-                            if (CodeTable.getCodeTableByCode(requirement.typeCode) == CodeTable.SECRETARY)
+                            if (requirement.typeCode == SECRETARY)
                                 context.getString(R.string.view_requirement_my_measurement_label)
                             else
                                 context.getString(R.string.view_requirement_my_estimation_label)
