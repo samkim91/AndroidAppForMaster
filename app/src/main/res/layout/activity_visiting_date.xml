@@ -15,7 +15,7 @@
 
         <variable
             name="vm"
-            type="kr.co.soogong.master.presentation.ui.requirement.action.write.MeasurementViewModel" />
+            type="kr.co.soogong.master.presentation.ui.requirement.action.visit.VisitingDateViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

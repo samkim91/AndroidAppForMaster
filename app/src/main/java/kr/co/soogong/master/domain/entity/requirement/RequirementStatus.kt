@@ -30,19 +30,19 @@ sealed class RequirementStatus {
     }
 
     object RequestMeasure : RequirementStatus() {
-        override val inKorean = "실측요청"
+        override val inKorean = "방문요청"
         override val code = "RequestMeasure"
         override val asInt = 103
-        override val theme = LabelTheme.BASIC_BLUE
-        override val guideLine = "\uD83D\uDCD0 새로 들어온 실측 문의입니다."
+        override val theme = LabelTheme.BASIC_RED
+        override val guideLine = "⚡️ 전화를 통해 방문일을 잡아주세요."
     }
 
     object Measuring : RequirementStatus() {
-        override val inKorean = "실측예정"
+        override val inKorean = "방문예정"
         override val code = "Measuring"
         override val asInt = 104
         override val theme = LabelTheme.BASIC_BLUE
-        override val guideLine = "\uD83D\uDCD0 실측이 예정된 견적입니다."
+        override val guideLine = "\uD83D\uDCA1 방문일을 넣어주세요."
     }
 
     object Measured : RequirementStatus() {
@@ -160,9 +160,9 @@ sealed class RequirementStatus {
             return if (mainTabIndex == 0) {
                 when (filterTabIndex) {
                     0 -> "BeforeProcess"
-                    1 -> Requested.code
-                    2 -> "Measure"
-                    3 -> RequestConsult.code
+                    1 -> "Measure"
+                    2 -> RequestConsult.code
+                    3 -> Requested.code
                     4 -> Estimated.code
                     else -> ""
                 }

@@ -1,4 +1,4 @@
-package kr.co.soogong.master.presentation.ui.requirement.action.write
+package kr.co.soogong.master.presentation.ui.requirement.action.visit
 
 import android.icu.util.Calendar
 import androidx.lifecycle.LiveData
@@ -22,7 +22,7 @@ import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
-class MeasurementViewModel @Inject constructor(
+class VisitingDateViewModel @Inject constructor(
     private val getMasterUidFromSharedUseCase: GetMasterUidFromSharedUseCase,
     private val updateVisitingDateUseCase: UpdateVisitingDateUseCase,
     private val getRequirementUseCase: GetRequirementUseCase,
@@ -109,7 +109,7 @@ class MeasurementViewModel @Inject constructor(
     }
 
     companion object {
-        private val TAG = MeasurementViewModel::class.java.simpleName
+        private val TAG = VisitingDateViewModel::class.java.simpleName
 
         const val UPDATE_VISITING_DATE_SUCCESSFULLY = "UPDATE_VISITING_DATE_SUCCESSFULLY"
         const val START_ESTIMATION_TEMPLATE = "START_ESTIMATION_TEMPLATE"

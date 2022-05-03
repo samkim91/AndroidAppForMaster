@@ -74,7 +74,7 @@ open class RequirementCardViewHolder(
     protected fun setEstimationPrice(requirementCard: RequirementCard) {
         with(binding) {
             tvPriceLabel.text = context.getString(R.string.my_estimation_price)
-            tvPrice.text = requirementCard.estimationPrice.formatMoney()
+            tvPrice.text = if (requirementCard.estimationPrice == 0) context.getString(R.string.not_estimated_text) else requirementCard.estimationPrice.formatMoney()
             groupPrice.isVisible = true
         }
     }
@@ -160,7 +160,7 @@ open class RequirementCardViewHolder(
         this.setOnClickListener {
             checkMasterApprovedStatus {
                 DefaultDialog.newInstance(
-                    DialogData.getCallToCustomer(requirementCard.phoneNumber)
+                    DialogData.getCallToCustomer()
                 ).let {
                     it.setButtonsClickListener(
                         onPositive = {
@@ -175,7 +175,7 @@ open class RequirementCardViewHolder(
         }
     }
 
-    protected fun AppCompatButton.setAcceptingMeasureAndCallToClient(
+    protected fun AppCompatButton.setAcceptVisitingAndCallToClient(
         requirementCard: RequirementCard,
     ) {
         this.isVisible = true
@@ -195,7 +195,7 @@ open class RequirementCardViewHolder(
         setOnClickListener {
             checkMasterApprovedStatus {
                 DefaultDialog.newInstance(
-                    DialogData.getCallToCustomer(requirementCard.phoneNumber)
+                    DialogData.getCallToCustomer()
                 ).let {
                     it.setButtonsClickListener(
                         onPositive = {
@@ -215,7 +215,7 @@ open class RequirementCardViewHolder(
         requirementCard: RequirementCard,
     ) {
         this.isVisible = true
-        this.text = context.getString(R.string.send_measure)
+        this.text = context.getString(R.string.insert_visiting_date)
         this.setOnClickListener {
             checkMasterApprovedStatus {
                 context.startActivity(

@@ -8,7 +8,7 @@ import kr.co.soogong.master.domain.entity.requirement.RequirementStatus
 import kr.co.soogong.master.presentation.ui.main.MainViewModel
 import kr.co.soogong.master.presentation.ui.requirement.list.RequirementsViewModel
 
-// 진행전 탭의 viewHolders (견적요청, 실측, 매칭대기)
+// 진행전 탭의 viewHolders (견적요청, 방문요청/예정, 매칭대기)
 
 // 견적요청 상태
 // 버튼 : 2. 견적 보내기
@@ -91,7 +91,7 @@ class RequestMeasureCardViewHolder(
         super.bind(requirementCard)
 
         with(binding) {
-            buttonRight.setAcceptingMeasureAndCallToClient(requirementCard)
+            buttonRight.setAcceptVisitingAndCallToClient(requirementCard)
         }
     }
 }

@@ -14,8 +14,8 @@ import kr.co.soogong.master.presentation.ui.common.dialog.popup.DefaultDialog
 import kr.co.soogong.master.presentation.ui.common.dialog.popup.DialogData
 import kr.co.soogong.master.presentation.ui.main.MainViewModel
 import kr.co.soogong.master.presentation.ui.requirement.RequirementViewModel.Companion.REQUEST_FAILED
-import kr.co.soogong.master.presentation.ui.requirement.list.TAB_TEXTS_REQUIREMENTS_BEFORE_PROGRESS
-import kr.co.soogong.master.presentation.ui.requirement.list.TAB_TEXTS_REQUIREMENTS_IN_PROGRESS
+import kr.co.soogong.master.presentation.ui.requirement.list.filter.TAB_TEXTS_REQUIREMENTS_BEFORE_PROGRESS
+import kr.co.soogong.master.presentation.ui.requirement.list.filter.TAB_TEXTS_REQUIREMENTS_IN_PROGRESS
 import kr.co.soogong.master.presentation.ui.requirement.list.filter.RequirementsFilterPagerAdapter
 import kr.co.soogong.master.presentation.uihelper.requirment.RequirementsBadge
 import kr.co.soogong.master.presentation.uihelper.requirment.SearchActivityHelper

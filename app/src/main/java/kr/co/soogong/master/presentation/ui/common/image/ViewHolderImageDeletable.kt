@@ -17,7 +17,7 @@ class ViewHolderImageDeletable(
             imageUri = imageInfo.url?.toUri() ?: imageInfo.uri
 
             setCloseClickListener {
-                closeClickListener(adapterPosition)
+                closeClickListener(absoluteAdapterPosition)
             }
 
             executePendingBindings()

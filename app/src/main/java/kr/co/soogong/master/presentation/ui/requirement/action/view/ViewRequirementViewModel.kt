@@ -130,8 +130,6 @@ class ViewRequirementViewModel @Inject constructor(
             .subscribeBy(
                 onSuccess = {
                     Timber.tag(TAG).d("acceptToMeasure is successful: ")
-                    requestRequirement()
-                    setAction(ACCEPT_TO_MEASURE_SUCCESSFULLY)
                 },
                 onError = {
                     Timber.tag(TAG).w("acceptToMeasure is failed: $it")
@@ -229,7 +227,6 @@ class ViewRequirementViewModel @Inject constructor(
         private val TAG = ViewRequirementViewModel::class.java.simpleName
         const val REFUSE_TO_ESTIMATE_SUCCESSFULLY = "REFUSE_TO_ESTIMATE_SUCCESSFULLY"
         const val INVALID_REQUIREMENT = "INVALID_REQUIREMENT"
-        const val ACCEPT_TO_MEASURE_SUCCESSFULLY = "RESPOND_TO_MEASURE_SUCCESSFULLY"
         const val CALL_TO_CLIENT = "CALL_TO_CLIENT"
         const val ASK_FOR_REVIEW_SUCCESSFULLY = "ASK_FOR_REVIEW_SUCCESSFULLY"
         const val NOT_APPROVED_MASTER = "NOT_APPROVED_MASTER"

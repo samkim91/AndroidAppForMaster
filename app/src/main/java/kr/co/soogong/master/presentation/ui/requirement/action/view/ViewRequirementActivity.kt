@@ -12,7 +12,6 @@ import kr.co.soogong.master.presentation.ui.common.dialog.bottomDialogCountableE
 import kr.co.soogong.master.presentation.ui.common.dialog.bottomDialogCountableEdittext.BottomDialogData
 import kr.co.soogong.master.presentation.ui.common.dialog.popup.DefaultDialog
 import kr.co.soogong.master.presentation.ui.common.dialog.popup.DialogData
-import kr.co.soogong.master.presentation.ui.requirement.action.view.ViewRequirementViewModel.Companion.ACCEPT_TO_MEASURE_SUCCESSFULLY
 import kr.co.soogong.master.presentation.ui.requirement.action.view.ViewRequirementViewModel.Companion.ASK_FOR_REVIEW_SUCCESSFULLY
 import kr.co.soogong.master.presentation.ui.requirement.action.view.ViewRequirementViewModel.Companion.CALL_TO_CLIENT
 import kr.co.soogong.master.presentation.ui.requirement.action.view.ViewRequirementViewModel.Companion.INVALID_REQUIREMENT
@@ -63,7 +62,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
             when (event) {
                 CALL_TO_CLIENT ->
                     DefaultDialog.newInstance(
-                        DialogData.getCallToCustomer(value.toString())
+                        DialogData.getCallToCustomer()
                     ).let {
                         it.setButtonsClickListener(
                             onPositive = {
@@ -83,7 +82,6 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                     onBackPressed()
                 }
                 INVALID_REQUIREMENT -> alertInvalidRequirement()
-                ACCEPT_TO_MEASURE_SUCCESSFULLY -> toast(getString(R.string.accepting_to_measure_successfully))
                 ASK_FOR_REVIEW_SUCCESSFULLY -> toast(getString(R.string.ask_for_review_successful))
                 NOT_APPROVED_MASTER -> alertNotApprovedMaster()
                 REQUEST_APPROVE_MASTER -> alertRequestApproveMaster()

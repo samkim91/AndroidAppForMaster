@@ -1,4 +1,4 @@
-package kr.co.soogong.master.presentation.ui.requirement.action.write
+package kr.co.soogong.master.presentation.ui.requirement.action.visit
 
 import android.app.Activity
 import android.icu.util.Calendar
@@ -12,16 +12,16 @@ import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.soogong.master.R
-import kr.co.soogong.master.databinding.ActivityMeasurementBinding
+import kr.co.soogong.master.databinding.ActivityVisitingDateBinding
 import kr.co.soogong.master.domain.entity.common.ColorTheme
 import kr.co.soogong.master.presentation.ui.base.BaseActivity
 import kr.co.soogong.master.presentation.ui.base.BaseViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.presentation.ui.base.BaseViewModel.Companion.SHOW_LOADING
 import kr.co.soogong.master.presentation.ui.common.dialog.popup.DefaultDialog
 import kr.co.soogong.master.presentation.ui.common.dialog.popup.DialogData
-import kr.co.soogong.master.presentation.ui.requirement.action.write.MeasurementViewModel.Companion.UPDATE_VISITING_DATE_SUCCESSFULLY
-import kr.co.soogong.master.presentation.ui.requirement.action.write.MeasurementViewModel.Companion.START_DATE_PICKER
-import kr.co.soogong.master.presentation.ui.requirement.action.write.MeasurementViewModel.Companion.START_TIME_PICKER
+import kr.co.soogong.master.presentation.ui.requirement.action.visit.VisitingDateViewModel.Companion.START_DATE_PICKER
+import kr.co.soogong.master.presentation.ui.requirement.action.visit.VisitingDateViewModel.Companion.START_TIME_PICKER
+import kr.co.soogong.master.presentation.ui.requirement.action.visit.VisitingDateViewModel.Companion.UPDATE_VISITING_DATE_SUCCESSFULLY
 import kr.co.soogong.master.presentation.uihelper.requirment.action.EstimationTemplatesActivityHelper
 import kr.co.soogong.master.presentation.uihelper.requirment.action.ViewRequirementActivityHelper
 import kr.co.soogong.master.utility.EventObserver
@@ -30,10 +30,10 @@ import timber.log.Timber
 import java.util.*
 
 @AndroidEntryPoint
-class MeasurementActivity : BaseActivity<ActivityMeasurementBinding>(
-    R.layout.activity_measurement
+class VisitingDateActivity : BaseActivity<ActivityVisitingDateBinding>(
+    R.layout.activity_visiting_date
 ) {
-    private val viewModel: MeasurementViewModel by viewModels()
+    private val viewModel: VisitingDateViewModel by viewModels()
 
     private val estimationTemplateLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -54,7 +54,7 @@ class MeasurementActivity : BaseActivity<ActivityMeasurementBinding>(
         Timber.tag(TAG).d("initLayout: ")
 
         bind {
-            lifecycleOwner = this@MeasurementActivity
+            lifecycleOwner = this@VisitingDateActivity
             vm = viewModel
             colorThemeEstimationTemplate = ColorTheme.Green
 
@@ -74,11 +74,11 @@ class MeasurementActivity : BaseActivity<ActivityMeasurementBinding>(
 
     private fun registerEventObserve() {
         Timber.tag(TAG).d("registerEventObserve: ")
-        viewModel.action.observe(this@MeasurementActivity, EventObserver { event ->
+        viewModel.action.observe(this@VisitingDateActivity, EventObserver { event ->
             when (event) {
-                MeasurementViewModel.START_ESTIMATION_TEMPLATE -> estimationTemplateLauncher.launch(
+                VisitingDateViewModel.START_ESTIMATION_TEMPLATE -> estimationTemplateLauncher.launch(
                     EstimationTemplatesActivityHelper.getIntent(this))
-                MeasurementViewModel.START_VIEW_REQUIREMENT -> viewModel.requirement.value?.let {
+                VisitingDateViewModel.START_VIEW_REQUIREMENT -> viewModel.requirement.value?.let {
                     startActivity(ViewRequirementActivityHelper.getIntent(this, it.id))
                 }
                 UPDATE_VISITING_DATE_SUCCESSFULLY -> super.onBackPressed()
@@ -151,6 +151,6 @@ class MeasurementActivity : BaseActivity<ActivityMeasurementBinding>(
     }
 
     companion object {
-        private val TAG = MeasurementActivity::class.java.simpleName
+        private val TAG = VisitingDateActivity::class.java.simpleName
     }
 }

@@ -65,18 +65,18 @@ fun setBottomButtons(
             }
 
             // 실측요청
-            // Buttons : 1. 실측거절, 2. 실측수락
+            // Buttons : 1. 시공취소, 2. 전화하기
             is RequirementStatus.RequestMeasure -> {
-                buttonLeft.setRefusingMeasure(activity.supportFragmentManager, viewModel)
-                buttonRight.setAcceptingMeasure(activity.supportFragmentManager, viewModel)
+                buttonLeft.setCancelingRepair(viewModel)
+                buttonRight.setAcceptVisitingAndCallToClient(viewModel)
             }
 
-            // 실측예정
-            // Buttons : 1. 실측취소, 2. 실측입력, 3. 시공완료
+            // 방문예정
+            // Buttons : 1. 시공취소, 2. 방문일 입력, 3. 시공완료
             is RequirementStatus.Measuring -> {
                 addEndRepairButton(activity, binding.flexibleContainer, requirement)
-                buttonLeft.setCancelingMeasure(viewModel)
-                buttonRight.setSendingMeasure(viewModel)
+                buttonLeft.setCancelingRepair(viewModel)
+                buttonRight.setSetVisitingDate(viewModel)
             }
 
             // 실측완료
@@ -187,65 +187,14 @@ private fun AppCompatButton.setEndingRepair(
     }
 }
 
-private fun AppCompatButton.setRefusingMeasure(
-    fragmentManager: FragmentManager,
+private fun AppCompatButton.setAcceptVisitingAndCallToClient(
     viewModel: ViewRequirementViewModel,
 ) {
     isVisible = true
-    text = context.getString(R.string.refuse_measure)
+    text = context.getString(R.string.call_to_customer)
     setOnClickListener {
-        DefaultDialog.newInstance(
-            DialogData.getRefuseMeasure()
-        ).let {
-            it.setButtonsClickListener(
-                onPositive = {
-                    context.startActivity(
-                        CancelActivityHelper.getIntent(
-                            context,
-                            viewModel.requirementId.value!!
-                        )
-                    )
-                },
-                onNegative = { }
-            )
-            it.show(fragmentManager, it.tag)
-        }
-    }
-}
-
-private fun AppCompatButton.setAcceptingMeasure(
-    fragmentManager: FragmentManager,
-    viewModel: ViewRequirementViewModel,
-) {
-    isVisible = true
-    text = context.getString(R.string.accept_measure)
-    setOnClickListener {
-        DefaultDialog.newInstance(
-            DialogData.getAcceptMeasure()
-        ).let {
-            it.setButtonsClickListener(
-                onPositive = {
-                    viewModel.respondToMeasure()
-                },
-                onNegative = { }
-            )
-            it.show(fragmentManager, it.tag)
-        }
-    }
-}
-
-private fun AppCompatButton.setCancelingMeasure(
-    viewModel: ViewRequirementViewModel,
-) {
-    isVisible = true
-    text = context.getString(R.string.cancel_measure)
-    setOnClickListener {
-        context.startActivity(
-            CancelActivityHelper.getIntent(
-                context,
-                viewModel.requirementId.value!!
-            )
-        )
+        viewModel.respondToMeasure()
+        viewModel.callToClient()
     }
 }
 
@@ -264,11 +213,11 @@ private fun AppCompatButton.setCancelingRepair(
     }
 }
 
-private fun AppCompatButton.setSendingMeasure(
+private fun AppCompatButton.setSetVisitingDate(
     viewModel: ViewRequirementViewModel,
 ) {
     isVisible = true
-    text = context.getString(R.string.send_measure)
+    text = context.getString(R.string.insert_visiting_date)
     setOnClickListener {
         context.startActivity(
             MeasureActivityHelper.getIntent(

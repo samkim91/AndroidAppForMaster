@@ -144,7 +144,7 @@
     <!--  RequirementListFragment  -->
     <string name="tab_name_for_whole">전체</string>
     <string name="tab_name_for_requested">견적요청</string>
-    <string name="tab_name_for_measuring">실측</string>
+    <string name="tab_name_for_visiting">현장방문</string>
     <string name="tab_name_for_consulting">상세상담</string>
     <string name="tab_name_for_estimated">매칭대기</string>
     <string name="tab_name_for_repairing">시공예정</string>
@@ -206,10 +206,8 @@
     <string name="write_estimation">견적 보내기</string>
     <string name="refuse_estimation">거절하기</string>
 
-    <string name="accept_measure">실측 수락</string>
-    <string name="refuse_measure">실측 거절</string>
-    <string name="cancel_measure">실측 취소</string>
-    <string name="send_measure">실측 입력</string>
+    <string name="refuse_visiting">방문 거절</string>
+    <string name="insert_visiting_date">방문일 입력</string>
     <string name="request_review">리뷰 요청</string>
     <string name="request_review_done">리뷰 요청 완료</string>
 
@@ -408,7 +406,6 @@
 
     <string name="end_estimate_succeeded">시공 완료 처리 되었고,\n고객님께 리뷰 요청이 전송되었어요.</string>
     <string name="refuse_to_estimate_or_measure_successfully_text">문의가 삭제되었습니다.</string>
-    <string name="accepting_to_measure_successfully">고객님과 전화를 통해 실측 일정을 잡아주세요.</string>
     <string name="error_message_of_request_failed">해당 요청을 처리할 수 없습니다. 다시 요청하거나 수공에 연락해주세요.</string>
     <string name="ask_for_review_successful">리뷰 요청을 완료했어요!</string>
 

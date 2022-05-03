@@ -39,18 +39,18 @@ class CancelActivity : BaseActivity<ActivityCancelBinding>(
             abHeader.setIvBackClickListener { onBackPressed() }
 
             bCancel.setOnClickListener {
-                viewModel.canceledCode.observe(this@CancelActivity, {
+                viewModel.canceledCode.observe(this@CancelActivity) {
                     srgCanceledOptions.error =
                         if (it.isNullOrEmpty()) getString(R.string.required_field_alert) else null
-                })
+                }
 
-                viewModel.canceledDescription.observe(this@CancelActivity, {
+                viewModel.canceledDescription.observe(this@CancelActivity) {
                     stcDescription.error =
                         if (viewModel.canceledCode.value == viewModel.canceledReasons.value?.last()?.code && it.length < 10)
                             getString(R.string.fill_text_over_10)
                         else
                             null
-                })
+                }
 
                 if (!srgCanceledOptions.error.isNullOrEmpty() || !stcDescription.error.isNullOrEmpty()) return@setOnClickListener
 
@@ -86,18 +86,18 @@ class CancelActivity : BaseActivity<ActivityCancelBinding>(
             }
         })
 
-        viewModel.canceledReasons.observe(this, { reasons ->
+        viewModel.canceledReasons.observe(this) { reasons ->
             // 취소사유 바인딩
             SubheadlineRadioGroup.addRadioButtons(
                 this,
                 binding.srgCanceledOptions.radioGroup,
                 reasons.map { it.name }
             )
-        })
+        }
     }
 
     companion object {
-        private const val TAG = "CancelActivity"
+        private val TAG = CancelActivity::class.java.simpleName
     }
 
 }

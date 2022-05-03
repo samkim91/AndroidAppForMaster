@@ -66,15 +66,6 @@ data class DialogData(
                 "",
             )
 
-        fun getAcceptMeasure() =
-            DialogData(
-                "실측 수락",
-                "수락 후 고객과 통화해 정확한 시공 내용을 파악해주세요.",
-                "",
-                "수락",
-                "취소",
-            )
-
         fun getRecommendingCallingCustomer() =
             DialogData(
                 "전화 안내",
@@ -82,15 +73,6 @@ data class DialogData(
                 "",
                 "전화하기",
                 "",
-            )
-
-        fun getRefuseMeasure() =
-            DialogData(
-                "실측 포기",
-                "실측을 포기하시겠어요?",
-                "",
-                "네",
-                "아니요",
             )
 
         fun getCancelSendingEstimation() =
@@ -102,10 +84,10 @@ data class DialogData(
                 "취소",
             )
 
-        fun getCallToCustomer(phoneNumber: String) =
+        fun getCallToCustomer() =
             DialogData(
                 "고객님에게 전화하시겠어요?",
-                phoneNumber,
+                "",
                 "",
                 "확인",
                 "취소",
@@ -230,8 +212,8 @@ data class DialogData(
 
         fun getNoticeForRequestMeasure(count: Int) =
             DialogData(
-                "현장실측 요청 ${count}건",
-                "고객님이 방문 요청을 하셨어요. 내용을 확인한 뒤 실측여부 버튼을 클릭해 주세요.",
+                "현장방문 요청 ${count}건",
+                "고객님이 방문 요청을 하셨어요. 내용을 확인하고 전화하기 버튼을 눌러주세요.",
                 "",
                 "확인하러 가기",
                 "닫기",
