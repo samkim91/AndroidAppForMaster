@@ -8,6 +8,7 @@ import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ActivityViewRequirementBinding
 import kr.co.soogong.master.presentation.ui.base.BaseActivity
 import kr.co.soogong.master.presentation.ui.base.BaseViewModel.Companion.REQUEST_FAILED
+import kr.co.soogong.master.presentation.ui.common.dialog.bottomDialogBasic.BottomDialogBasic
 import kr.co.soogong.master.presentation.ui.common.dialog.bottomDialogCountableEdittext.BottomDialogCountableEdittext
 import kr.co.soogong.master.presentation.ui.common.dialog.bottomDialogCountableEdittext.BottomDialogData
 import kr.co.soogong.master.presentation.ui.common.dialog.popup.DefaultDialog
@@ -18,7 +19,8 @@ import kr.co.soogong.master.presentation.ui.requirement.action.view.ViewRequirem
 import kr.co.soogong.master.presentation.ui.requirement.action.view.ViewRequirementViewModel.Companion.NOT_APPROVED_MASTER
 import kr.co.soogong.master.presentation.ui.requirement.action.view.ViewRequirementViewModel.Companion.REFUSE_TO_ESTIMATE_SUCCESSFULLY
 import kr.co.soogong.master.presentation.ui.requirement.action.view.ViewRequirementViewModel.Companion.REQUEST_APPROVE_MASTER
-import kr.co.soogong.master.presentation.ui.requirement.action.view.ViewRequirementViewModel.Companion.SHOW_MEMO_BOTTOM_SHEET_DIALOG
+import kr.co.soogong.master.presentation.ui.requirement.action.view.ViewRequirementViewModel.Companion.SHOW_CALL_CENTER_DESCRIPTION
+import kr.co.soogong.master.presentation.ui.requirement.action.view.ViewRequirementViewModel.Companion.SHOW_MASTER_MEMO
 import kr.co.soogong.master.presentation.uihelper.requirment.CallToCustomerHelper
 import kr.co.soogong.master.presentation.uihelper.requirment.action.ViewRequirementActivityHelper
 import kr.co.soogong.master.utility.EventObserver
@@ -70,7 +72,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                             },
                             onNegative = {}
                         )
-                        it.show(supportFragmentManager, it.tag)
+                        it.show(supportFragmentManager, TAG)
                     }
             }
         })
@@ -85,7 +87,8 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                 ASK_FOR_REVIEW_SUCCESSFULLY -> toast(getString(R.string.ask_for_review_successful))
                 NOT_APPROVED_MASTER -> alertNotApprovedMaster()
                 REQUEST_APPROVE_MASTER -> alertRequestApproveMaster()
-                SHOW_MEMO_BOTTOM_SHEET_DIALOG -> showMemoBottomSheetDialog()
+                SHOW_CALL_CENTER_DESCRIPTION -> showCallCenterDescription()
+                SHOW_MASTER_MEMO -> showMasterMemo()
                 REQUEST_FAILED -> toast(getString(R.string.error_message_of_request_failed))
             }
         })
@@ -105,7 +108,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                 onPositive = { onBackPressed() },
                 onNegative = { }
             )
-            it.show(supportFragmentManager, it.tag)
+            it.show(supportFragmentManager, TAG)
         }
     }
 
@@ -118,7 +121,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                 onPositive = { onBackPressed() },
                 onNegative = { onBackPressed() }
             )
-            dialog.show(supportFragmentManager, dialog.tag)
+            dialog.show(supportFragmentManager, TAG)
         }
     }
 
@@ -131,11 +134,18 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                 onPositive = { onBackPressed() },
                 onNegative = { onBackPressed() }
             )
-            dialog.show(supportFragmentManager, dialog.tag)
+            dialog.show(supportFragmentManager, TAG)
         }
     }
 
-    private fun showMemoBottomSheetDialog() {
+    private fun showCallCenterDescription() {
+        BottomDialogBasic.newInstance(
+            bottomDialogData = BottomDialogData.getCallCenterDescription(),
+            content = viewModel.requirement.value?.callCenterDescription
+        ).show(supportFragmentManager, TAG)
+    }
+
+    private fun showMasterMemo() {
         BottomDialogCountableEdittext.newInstance(
             bottomDialogData = BottomDialogData.getMemo(),
             content = viewModel.masterMemo.value
@@ -153,14 +163,14 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                         DialogData.getConfirmingForIgnoreChange()
                     ).let { dialog ->
                         dialog.setButtonsClickListener(
-                            onPositive = { showMemoBottomSheetDialog() },
+                            onPositive = { showMasterMemo() },
                             onNegative = { }
                         )
                         dialog.show(supportFragmentManager, dialog.tag)
                     }
                 }
             )
-            it.show(supportFragmentManager, it.tag)
+            it.show(supportFragmentManager, TAG)
         }
     }
 

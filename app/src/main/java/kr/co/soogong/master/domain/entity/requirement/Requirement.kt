@@ -19,7 +19,8 @@ data class Requirement(
     val subStatus: String,
     val phoneNumber: String,
     val requirementQnas: List<RequirementQnaDto>?,
-    val description: String?,
+    val description: String,
+    val callCenterDescription: String,
     val estimation: Estimation,
     val previousRequirementDto: PreviousRequirementDto?,
     val measurement: Estimation?,
@@ -50,7 +51,8 @@ data class Requirement(
                     requirementDto.safetyNumber ?: requirementDto.tel
                 },
                 requirementQnas = requirementDto.requirementQnas,
-                description = requirementDto.description,
+                description = requirementDto.description ?: "",
+                callCenterDescription = requirementDto.callCenterDescription ?: "",
                 estimation = Estimation.fromDto(requirementDto.estimationDto),
                 previousRequirementDto = requirementDto.previousRequirementDto,
                 measurement = if (requirementDto.measurement != null) Estimation.fromDto(

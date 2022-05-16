@@ -196,9 +196,14 @@ class ViewRequirementViewModel @Inject constructor(
             ).addToDisposable()
     }
 
-    fun showMemoBottomSheetDialog() {
-        Timber.tag(TAG).d("showMemoBottomSheetDialog: ")
-        setAction(SHOW_MEMO_BOTTOM_SHEET_DIALOG)
+    fun showCallCenterDescription() {
+        Timber.tag(TAG).d("showCallCenterDescription: ")
+        setAction(SHOW_CALL_CENTER_DESCRIPTION)
+    }
+
+    fun showMasterMemo() {
+        Timber.tag(TAG).d("showMasterMemo: ")
+        setAction(SHOW_MASTER_MEMO)
     }
 
     fun saveMasterMemo() {
@@ -231,6 +236,7 @@ class ViewRequirementViewModel @Inject constructor(
         const val ASK_FOR_REVIEW_SUCCESSFULLY = "ASK_FOR_REVIEW_SUCCESSFULLY"
         const val NOT_APPROVED_MASTER = "NOT_APPROVED_MASTER"
         const val REQUEST_APPROVE_MASTER = "REQUEST_APPROVE_MASTER"
-        const val SHOW_MEMO_BOTTOM_SHEET_DIALOG = "SHOW_MEMO_BOTTOM_SHEET_DIALOG"
+        const val SHOW_CALL_CENTER_DESCRIPTION = "SHOW_CALL_CENTER_DESCRIPTION"
+        const val SHOW_MASTER_MEMO = "SHOW_MASTER_MEMO"
     }
 }

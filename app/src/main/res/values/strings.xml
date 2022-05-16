@@ -45,7 +45,11 @@
     <string name="adding_memo">메모 추가</string>
     <string name="memo_introduction">마스터님만 볼 수 있는 메모입니다.</string>
 
+    <string name="consulting_content">상담내용</string>
+    <string name="consulting_introduction">수공에서 고객님과 상담 후 마스터님에게 전달하는 메시지입니다.</string>
+
     <string name="client_call_number">고객번호</string>
+    <string name="call_center_description">상담내용</string>
     <string name="date">날짜</string>
     <string name="time">시간</string>
 

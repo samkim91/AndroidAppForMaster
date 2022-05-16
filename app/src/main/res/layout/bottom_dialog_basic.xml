@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="content"
+            type="String" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/header_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_4"
+            android:background="@drawable/ic_small_bar"
+            android:backgroundTint="@color/light_grey_1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <kr.co.soogong.master.presentation.atomic.molecules.SubheadlineTextareaCounter
+            android:id="@+id/stc_description"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/gap_16"
+            android:layout_marginEnd="@dimen/gap_16"
+            android:layout_marginBottom="@dimen/gap_16"
+            android:layout_marginTop="@dimen/gap_16"
+            app:content="@{content}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/header_bar" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:bind="http://schemas.android.com/bind">
 
     <data>
 
@@ -69,12 +70,24 @@
                     app:onContainerClickListener="@{() -> vm.callToClient()}" />
 
                 <kr.co.soogong.master.presentation.atomic.molecules.SubheadlineContentArrow
+                    android:id="@+id/sca_call_center_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    tools:visibility="visible"
+                    bind:visible="@{!vm.requirement.callCenterDescription.empty}"
+                    app:onContainerClickListener="@{() -> vm.showCallCenterDescription()}"
+                    android:layout_marginBottom="@dimen/gap_24"
+                    app:content="@{vm.requirement.callCenterDescription}"
+                    app:label="@{@string/call_center_description}" />
+
+                <kr.co.soogong.master.presentation.atomic.molecules.SubheadlineContentArrow
                     android:id="@+id/sca_master_memo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:content="@{vm.requirement.estimation.masterMemo.empty ? @string/writing_memo : vm.requirement.estimation.masterMemo}"
                     app:label="@{@string/memo}"
-                    app:onContainerClickListener="@{() -> vm.showMemoBottomSheetDialog()}" />
+                    app:onContainerClickListener="@{() -> vm.showMasterMemo()}" />
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/iv_master_memo_divider"

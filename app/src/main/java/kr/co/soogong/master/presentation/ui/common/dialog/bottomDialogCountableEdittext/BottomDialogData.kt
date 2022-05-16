@@ -25,5 +25,12 @@ data class BottomDialogData(
                 hint = R.string.memo_introduction,
                 maxCount= 500
             )
+
+        fun getCallCenterDescription() =
+            BottomDialogData(
+                title = R.string.consulting_content,
+                hint = R.string.consulting_introduction,
+                maxCount= 3000
+            )
     }
 }

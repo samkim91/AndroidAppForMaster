@@ -57,6 +57,9 @@ data class RequirementDto(
     @SerializedName("description")
     val description: String?,
 
+    @SerializedName("callCenterDescription")
+    val callCenterDescription: String?,
+
     @SerializedName("requirementQnas")
     val requirementQnas: List<RequirementQnaDto>?,
 
