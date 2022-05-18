@@ -83,7 +83,10 @@ class AuthViewModel @Inject constructor(
     fun startVerifyingPhoneNumber(activity: Activity) {
         Timber.tag(TAG).d("startVerifyingPhoneNumber: ")
 
-        if (tel.value.isNullOrEmpty()) setAction(REQUIRED_TEL)
+        if (tel.value.isNullOrEmpty()) {
+            setAction(REQUIRED_TEL)
+            return
+        }
 
         PhoneAuthProvider.verifyPhoneNumber(
             PhoneAuthOptions.newBuilder(_auth)
