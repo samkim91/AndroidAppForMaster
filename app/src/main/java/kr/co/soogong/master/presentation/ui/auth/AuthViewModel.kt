@@ -1,68 +1,38 @@
 package kr.co.soogong.master.presentation.ui.auth
 
-import android.app.Activity
 import androidx.lifecycle.MutableLiveData
-import com.google.firebase.FirebaseException
-import com.google.firebase.FirebaseTooManyRequestsException
-import com.google.firebase.auth.*
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
+import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.launch
 import kr.co.soogong.master.domain.usecase.auth.CheckMasterExistentUseCase
+import kr.co.soogong.master.domain.usecase.auth.RequestCertificationCodeUseCase
+import kr.co.soogong.master.domain.usecase.auth.VerifyCertificationCodeUseCase
 import kr.co.soogong.master.presentation.ui.base.BaseViewModel
-import kr.co.soogong.master.utility.PhoneNumberHelper
+import kr.co.soogong.master.utility.extension.isValidPhoneNumber
 import timber.log.Timber
-import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 @HiltViewModel
 class AuthViewModel @Inject constructor(
     private val checkMasterExistentUseCase: CheckMasterExistentUseCase,
+    private val requestCertificationCodeUseCase: RequestCertificationCodeUseCase,
+    private val verifyCertificationCodeUseCase: VerifyCertificationCodeUseCase,
 ) : BaseViewModel() {
-
-    private val _auth: FirebaseAuth = Firebase.auth
 
     val tel = MutableLiveData("")
     val certificationCode = MutableLiveData("")
 
-    private val _storedVerificationId = MutableLiveData("")
-    private val _resendToken = MutableLiveData<PhoneAuthProvider.ForceResendingToken>()
+    val phoneNumberInputEnable = MutableLiveData(true)
 
-    private val _callbacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks by lazy {
-        object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-            override fun onCodeSent(p0: String, p1: PhoneAuthProvider.ForceResendingToken) {
-                super.onCodeSent(p0, p1)
-                Timber.tag(TAG).d("onCodeSent: ")
-
-                _storedVerificationId.value = p0
-                _resendToken.value = p1
-            }
-
-            override fun onVerificationCompleted(p0: PhoneAuthCredential) {
-                Timber.tag(TAG).d("onVerificationCompleted: ")
-
-                signInWithPhoneAuthCredential(p0)
-            }
-
-            override fun onVerificationFailed(p0: FirebaseException) {
-                Timber.tag(TAG).d("onVerificationFailed: ")
-
-                when (p0) {
-                    is FirebaseAuthInvalidCredentialsException -> setAction(INVALID_CREDENTIAL)
-                    is FirebaseTooManyRequestsException -> setAction(TOO_MANY_REQUEST)
-                    else -> setAction(REQUEST_FAILED)
-                }
-            }
-        }
-    }
-
-    fun checkUserExist() {
+    private fun checkUserExist() {
         Timber.tag(TAG).d("checkUserExist: ")
 
-        if (tel.value.isNullOrEmpty()) {
+        setAction(CLEAR_ERROR)
+
+        if (!tel.value.isValidPhoneNumber()) {
             setAction(REQUIRED_TEL)
             return
         }
@@ -72,7 +42,7 @@ class AuthViewModel @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
                 onSuccess = {
-                    if (it) setAction(EXIST_USER) else setAction(NOT_EXIST_USER)
+                    if (it) setAction(EXIST_USER) else requestCertificationCode()
                 },
                 onError = {
                     setAction(REQUEST_FAILED)
@@ -80,54 +50,58 @@ class AuthViewModel @Inject constructor(
             ).addToDisposable()
     }
 
-    fun startVerifyingPhoneNumber(activity: Activity) {
-        Timber.tag(TAG).d("startVerifyingPhoneNumber: ")
+    fun requestButtonClick() {
+        Timber.tag(TAG).d("requestButtonClick: ")
 
-        if (tel.value.isNullOrEmpty()) {
+        if (phoneNumberInputEnable.value == true) {
+            checkUserExist()
+            phoneNumberInputEnable.value = false
+        } else {
+            tel.value = ""
+            phoneNumberInputEnable.value = true
+        }
+    }
+
+    fun requestAgainButtonClick() {
+        Timber.tag(TAG).d("requestAgainButtonClick: ")
+        checkUserExist()
+    }
+
+    private fun requestCertificationCode() {
+        Timber.tag(TAG).d("requestCertificationCode: ")
+
+        viewModelScope.launch {
+            try {
+                requestCertificationCodeUseCase(tel.value!!)
+                setAction(CREDENTIAL_CODE_REQUESTED)
+            } catch (e: Exception) {
+                setAction(REQUEST_FAILED)
+                Timber.tag(TAG).e("changeMarketingPush failed: $e")
+            }
+        }
+    }
+
+    fun verifyCertificationCode() {
+        Timber.tag(TAG).d("verifyCertificationCode: ")
+
+        if (!tel.value.isValidPhoneNumber()) {
             setAction(REQUIRED_TEL)
             return
         }
 
-        PhoneAuthProvider.verifyPhoneNumber(
-            PhoneAuthOptions.newBuilder(_auth)
-                .setPhoneNumber(PhoneNumberHelper.toGlobalNumber(tel.value!!))
-                .setTimeout(LIMIT_TIME_TO_AUTH, TimeUnit.SECONDS)
-                .setActivity(activity)
-                .setCallbacks(_callbacks)
-                .apply {
-                    if (_resendToken.value != null) this.setForceResendingToken(_resendToken.value!!)
-                }
-                .build()
-        )
-
-        setAction(if (_resendToken.value == null) CREDENTIAL_CODE_REQUESTED else CREDENTIAL_CODE_REQUESTED_AGAIN)
-    }
-
-    fun makePhoneAuthCredential() {
-        Timber.tag(TAG).d("makePhoneAuthCredential: ")
-
-        if (_storedVerificationId.value.isNullOrEmpty() || certificationCode.value.isNullOrEmpty()) {
-            setAction(TRY_AGAIN)
+        if (certificationCode.value?.length != 6) {
+            setAction(REQUIRED_CODE)
             return
         }
 
-        PhoneAuthProvider.getCredential(_storedVerificationId.value!!, certificationCode.value!!)
-            .run { signInWithPhoneAuthCredential(this) }
-    }
+        viewModelScope.launch {
+            try {
+                val verifiedResult = verifyCertificationCodeUseCase(tel.value!!, certificationCode.value!!)
 
-    private fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential) {
-        Timber.tag(TAG).d("signInWithPhoneAuthCredential: ")
-
-        _auth.signInWithCredential(credential).addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                Timber.tag(TAG).d("isSuccessful: ")
-                sendEvent(TASK_SUCCESSFUL, task.result?.user?.uid!!)
-            } else {
-                Timber.tag(TAG).d("isCanceled: ")
-                if (task.exception is FirebaseAuthInvalidCredentialsException)
-                    setAction(INVALID_CREDENTIAL)
-                else
-                    sendEvent(TASK_FAILED, task.exception?.message!!)
+                if (verifiedResult) setAction(TASK_SUCCESSFUL) else setAction(TASK_FAILED)
+            } catch (e: Exception) {
+                setAction(TRY_AGAIN)
+                Timber.tag(TAG).e("changeMarketingPush failed: $e")
             }
         }
     }
@@ -135,20 +109,16 @@ class AuthViewModel @Inject constructor(
     companion object {
 
         private val TAG = AuthViewModel::class.java.simpleName
-        private const val LIMIT_TIME_TO_AUTH = 120L
 
         const val REQUIRED_TEL = "REQUIRED_TEL"
+        const val REQUIRED_CODE = "REQUIRED_CODE"
+
+        const val CLEAR_ERROR = "CLEAR_ERROR"
 
         const val EXIST_USER = "EXIST_USER"
-        const val NOT_EXIST_USER = "NOT_EXIST_USER"
-
         const val CREDENTIAL_CODE_REQUESTED = "CREDENTIAL_CODE_REQUESTED"
-        const val CREDENTIAL_CODE_REQUESTED_AGAIN = "CREDENTIAL_CODE_REQUESTED_AGAIN"
 
-        const val INVALID_CREDENTIAL = "INVALID_CREDENTIAL"
-        const val TOO_MANY_REQUEST = "TOO_MANY_REQUEST"
         const val TRY_AGAIN = "TRY_AGAIN"
-
         const val TASK_SUCCESSFUL = "TASK_SUCCESSFUL"
         const val TASK_FAILED = "TASK_FAILED"
     }

@@ -8,7 +8,7 @@ data class MasterSignUpDto(
     val id: Int? = null,
 
     @SerializedName("uid")
-    val uid: String,
+    val uid: String? = null,
 
     @SerializedName("ownerName")
     val ownerName: String,

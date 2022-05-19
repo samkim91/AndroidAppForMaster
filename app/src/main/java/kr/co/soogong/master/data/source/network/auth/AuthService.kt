@@ -16,11 +16,11 @@ class AuthService @Inject constructor(
         return authInterface.isMasterExistent(tel)
     }
 
-    suspend fun requestCertificationCode(requestDto: Pair<String, String>): Boolean {
+    suspend fun requestCertificationCode(requestDto: Map<String, String>): Boolean {
         return authInterface.requestCertificationCode(requestDto)
     }
 
-    suspend fun verifyCertificationCode(verifyDto: List<Pair<String, String>>): Boolean {
+    suspend fun verifyCertificationCode(verifyDto: Map<String, String>): Boolean {
         return authInterface.verifyCertificationCode(verifyDto)
     }
 

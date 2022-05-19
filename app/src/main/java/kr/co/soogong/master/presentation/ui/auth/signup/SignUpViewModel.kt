@@ -61,7 +61,6 @@ class SignUpViewModel @Inject constructor(
         Timber.tag(TAG).d("signUp : ")
         signUpUseCase(
             MasterSignUpDto(
-                uid = uid.value!!,
                 ownerName = ownerName.value!!,
                 tel = tel.value!!,
                 privatePolicy = privacyPolicy.value!!,

@@ -9,22 +9,13 @@ import kr.co.soogong.master.databinding.FragmentSignInBinding
 import kr.co.soogong.master.domain.entity.common.ButtonTheme
 import kr.co.soogong.master.presentation.ui.auth.AuthContainerActivity
 import kr.co.soogong.master.presentation.ui.auth.AuthViewModel
-import kr.co.soogong.master.presentation.ui.auth.AuthViewModel.Companion.CREDENTIAL_CODE_REQUESTED
-import kr.co.soogong.master.presentation.ui.auth.AuthViewModel.Companion.CREDENTIAL_CODE_REQUESTED_AGAIN
-import kr.co.soogong.master.presentation.ui.auth.AuthViewModel.Companion.EXIST_USER
-import kr.co.soogong.master.presentation.ui.auth.AuthViewModel.Companion.INVALID_CREDENTIAL
-import kr.co.soogong.master.presentation.ui.auth.AuthViewModel.Companion.NOT_EXIST_USER
-import kr.co.soogong.master.presentation.ui.auth.AuthViewModel.Companion.REQUIRED_TEL
 import kr.co.soogong.master.presentation.ui.auth.AuthViewModel.Companion.TASK_FAILED
 import kr.co.soogong.master.presentation.ui.auth.AuthViewModel.Companion.TASK_SUCCESSFUL
-import kr.co.soogong.master.presentation.ui.auth.AuthViewModel.Companion.TOO_MANY_REQUEST
-import kr.co.soogong.master.presentation.ui.auth.AuthViewModel.Companion.TRY_AGAIN
 import kr.co.soogong.master.presentation.ui.auth.signin.SignInViewModel.Companion.SIGN_IN_SUCCESSFULLY
 import kr.co.soogong.master.presentation.ui.base.BaseFragment
 import kr.co.soogong.master.presentation.ui.base.BaseViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.presentation.uihelper.main.MainActivityHelper
 import kr.co.soogong.master.utility.EventObserver
-import kr.co.soogong.master.utility.extension.isValidPhoneNumber
 import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
 
@@ -56,38 +47,38 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(
 
             initTimer()
 
-            // 인증하기
-            stibmtitAuthPhoneNumber.onButtonClick = View.OnClickListener {
-                if (stibmtitAuthPhoneNumber.inputEnabled == false) {        // "재입력" 일 경우
-                    stibmtitAuthPhoneNumber.textInputButtonMedium.textInput.textInputEditText.setText(
-                        "")
-                    stopAuth()
-                    return@OnClickListener
-                }
-
-                authViewModel.tel.observe(viewLifecycleOwner) {
-                    stibmtitAuthPhoneNumber.error =
-                        if (!it.isValidPhoneNumber()) getString(R.string.invalid_phone_number) else null
-                }
-
-                if (stibmtitAuthPhoneNumber.error.isNullOrEmpty()) authViewModel.checkUserExist()
-            }
-
-            // 재요청하기
-            tvResendCertificationCode.setOnClickListener {
-                startAuth()
-                authViewModel.startVerifyingPhoneNumber(requireActivity())
-            }
-
-            // 로그인
-            bSignIn.setOnClickListener {
-                authViewModel.certificationCode.observe(viewLifecycleOwner) {
-                    stibmtitAuthPhoneNumber.textInputTimerError =
-                        if (it.length != 6) getString(R.string.invalid_certification_code) else null
-                }
-
-                if (stibmtitAuthPhoneNumber.textInputTimerError.isNullOrEmpty()) authViewModel.makePhoneAuthCredential()
-            }
+//            // 인증하기
+//            stibmtitAuthPhoneNumber.onButtonClick = View.OnClickListener {
+//                if (stibmtitAuthPhoneNumber.inputEnabled == false) {        // "재입력" 일 경우
+//                    stibmtitAuthPhoneNumber.textInputButtonMedium.textInput.textInputEditText.setText(
+//                        "")
+//                    stopAuth()
+//                    return@OnClickListener
+//                }
+//
+//                authViewModel.tel.observe(viewLifecycleOwner) {
+//                    stibmtitAuthPhoneNumber.error =
+//                        if (!it.isValidPhoneNumber()) getString(R.string.invalid_phone_number) else null
+//                }
+//
+//                if (stibmtitAuthPhoneNumber.error.isNullOrEmpty()) authViewModel.checkUserExist()
+//            }
+//
+//            // 재요청하기
+//            tvResendCertificationCode.setOnClickListener {
+//                startAuth()
+//                authViewModel.startVerifyingPhoneNumber(requireActivity())
+//            }
+//
+//            // 로그인
+//            bSignIn.setOnClickListener {
+//                authViewModel.certificationCode.observe(viewLifecycleOwner) {
+//                    stibmtitAuthPhoneNumber.textInputTimerError =
+//                        if (it.length != 6) getString(R.string.invalid_certification_code) else null
+//                }
+//
+//                if (stibmtitAuthPhoneNumber.textInputTimerError.isNullOrEmpty()) authViewModel.makePhoneAuthCredential()
+//            }
         }
     }
 
@@ -101,39 +92,39 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(
         })
 
         authViewModel.action.observe(viewLifecycleOwner, EventObserver { action ->
-            when (action) {
-                REQUIRED_TEL -> binding.stibmtitAuthPhoneNumber.error =
-                    getString(R.string.invalid_phone_number)
-
-                EXIST_USER -> {
-                    startAuth()
-                    authViewModel.startVerifyingPhoneNumber(requireActivity())
-                }
-                NOT_EXIST_USER -> binding.stibmtitAuthPhoneNumber.error =
-                    getString(R.string.alert_unknown_user)
-
-                CREDENTIAL_CODE_REQUESTED -> requireContext().toast(getString(R.string.certification_code_requested))
-                CREDENTIAL_CODE_REQUESTED_AGAIN -> requireContext().toast(getString(R.string.certification_code_requested_again))
-
-                INVALID_CREDENTIAL -> {
-                    binding.stibmtitAuthPhoneNumber.textInputTimerError =
-                        getString(R.string.invalid_credential)
-                    stopAuth()
-                }
-                TOO_MANY_REQUEST -> {
-                    requireContext().toast(getString(R.string.firebase_auth_too_many_requests))
-                    stopAuth()
-                }
-                TRY_AGAIN -> {
-                    requireContext().toast(getString(R.string.try_again))
-                    stopAuth()
-                }
-
-                REQUEST_FAILED -> {
-                    requireContext().toast(getString(R.string.error_message_of_request_failed))
-                    stopAuth()
-                }
-            }
+//            when (action) {
+//                REQUIRED_TEL -> binding.stibmtitAuthPhoneNumber.error =
+//                    getString(R.string.invalid_phone_number)
+//
+//                EXIST_USER -> {
+//                    startAuth()
+//                    authViewModel.startVerifyingPhoneNumber(requireActivity())
+//                }
+//                NOT_EXIST_USER -> binding.stibmtitAuthPhoneNumber.error =
+//                    getString(R.string.alert_unknown_user)
+//
+//                CREDENTIAL_CODE_REQUESTED -> requireContext().toast(getString(R.string.certification_code_requested))
+//                CREDENTIAL_CODE_REQUESTED_AGAIN -> requireContext().toast(getString(R.string.certification_code_requested_again))
+//
+//                INVALID_CREDENTIAL -> {
+//                    binding.stibmtitAuthPhoneNumber.textInputTimerError =
+//                        getString(R.string.invalid_credential)
+//                    stopAuth()
+//                }
+//                TOO_MANY_REQUEST -> {
+//                    requireContext().toast(getString(R.string.firebase_auth_too_many_requests))
+//                    stopAuth()
+//                }
+//                TRY_AGAIN -> {
+//                    requireContext().toast(getString(R.string.try_again))
+//                    stopAuth()
+//                }
+//
+//                REQUEST_FAILED -> {
+//                    requireContext().toast(getString(R.string.error_message_of_request_failed))
+//                    stopAuth()
+//                }
+//            }
         })
 
         authViewModel.event.observe(viewLifecycleOwner, EventObserver { (event, value) ->
