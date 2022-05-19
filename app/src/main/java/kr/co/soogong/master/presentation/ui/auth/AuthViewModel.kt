@@ -11,7 +11,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import kr.co.soogong.master.domain.usecase.auth.CheckUserExistentUseCase
+import kr.co.soogong.master.domain.usecase.auth.CheckMasterExistentUseCase
 import kr.co.soogong.master.presentation.ui.base.BaseViewModel
 import kr.co.soogong.master.utility.PhoneNumberHelper
 import timber.log.Timber
@@ -20,7 +20,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AuthViewModel @Inject constructor(
-    private val checkUserExistentUseCase: CheckUserExistentUseCase,
+    private val checkMasterExistentUseCase: CheckMasterExistentUseCase,
 ) : BaseViewModel() {
 
     private val _auth: FirebaseAuth = Firebase.auth
@@ -67,7 +67,7 @@ class AuthViewModel @Inject constructor(
             return
         }
 
-        checkUserExistentUseCase(tel.value!!)
+        checkMasterExistentUseCase(tel.value!!)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
@@ -134,7 +134,7 @@ class AuthViewModel @Inject constructor(
 
     companion object {
 
-        private const val TAG = "AuthViewModel"
+        private val TAG = AuthViewModel::class.java.simpleName
         private const val LIMIT_TIME_TO_AUTH = 120L
 
         const val REQUIRED_TEL = "REQUIRED_TEL"

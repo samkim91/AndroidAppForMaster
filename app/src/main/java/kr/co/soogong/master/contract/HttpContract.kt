@@ -13,6 +13,9 @@ object HttpContract {
 
     //region Auth
     const val IS_MASTER_EXISTENT = "master/is-existent"
+    const val REQUEST_CERTIFICATION_CODE = "auth/request"
+    const val VERIFY_CERTIFICATION_CODE = "auth/verify"
+
     const val SAVE_FCM_TOKEN = "firebase/save-token"
     const val UPDATE_UID_BY_TEL = "master/{tel}"
     const val GET_APP_VERSION = "version/android"

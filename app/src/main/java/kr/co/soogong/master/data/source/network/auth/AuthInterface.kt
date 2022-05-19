@@ -12,6 +12,12 @@ interface AuthInterface {
     @GET(HttpContract.IS_MASTER_EXISTENT)
     fun isMasterExistent(@Query("tel") tel: String): Single<Boolean>
 
+    @POST(HttpContract.REQUEST_CERTIFICATION_CODE)
+    suspend fun requestCertificationCode(@Body requestDto: Pair<String, String>): Boolean
+
+    @POST(HttpContract.VERIFY_CERTIFICATION_CODE)
+    suspend fun verifyCertificationCode(@Body verifyDto: List<Pair<String, String>>): Boolean
+
     @POST(HttpContract.SIGN_UP)
     fun signUp(@Body masterSignUpDto: MasterSignUpDto): Single<ResponseDto<MasterSignUpDto>>
 

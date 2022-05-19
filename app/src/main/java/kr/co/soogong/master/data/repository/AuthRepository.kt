@@ -16,6 +16,14 @@ class AuthRepository @Inject constructor(
     fun isMasterExistent(tel: String): Single<Boolean> =
         authService.isMasterExistent(tel)
 
+    suspend fun requestCertificationCode(requestDto: Pair<String, String>): Boolean {
+        return authService.requestCertificationCode(requestDto)
+    }
+
+    suspend fun verifyCertificationCode(requestDto: List<Pair<String, String>>): Boolean {
+        return authService.verifyCertificationCode(requestDto)
+    }
+
     fun signUp(masterSignUpDto: MasterSignUpDto): Single<MasterSignUp> =
         authService.signUp(masterSignUpDto).map {
             MasterSignUp.fromDto(it.data!!)

@@ -8,7 +8,7 @@ import retrofit2.Retrofit
 import javax.inject.Inject
 
 class AuthService @Inject constructor(
-    retrofit: Retrofit
+    retrofit: Retrofit,
 ) {
     private val authInterface = retrofit.create(AuthInterface::class.java)
 
@@ -16,7 +16,17 @@ class AuthService @Inject constructor(
         return authInterface.isMasterExistent(tel)
     }
 
-    fun signUp(masterSignUpDto: MasterSignUpDto): Single<ResponseDto<MasterSignUpDto>> = authInterface.signUp(masterSignUpDto)
+    suspend fun requestCertificationCode(requestDto: Pair<String, String>): Boolean {
+        return authInterface.requestCertificationCode(requestDto)
+    }
+
+    suspend fun verifyCertificationCode(verifyDto: List<Pair<String, String>>): Boolean {
+        return authInterface.verifyCertificationCode(verifyDto)
+    }
+
+
+    fun signUp(masterSignUpDto: MasterSignUpDto): Single<ResponseDto<MasterSignUpDto>> =
+        authInterface.signUp(masterSignUpDto)
 
     suspend fun saveFCMToken(firebaseTokenDto: FirebaseTokenDto) {
         return authInterface.saveFCMToken(firebaseTokenDto)
