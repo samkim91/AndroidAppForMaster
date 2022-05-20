@@ -1,6 +1,5 @@
 package kr.co.soogong.master.presentation.ui.auth.signin
 
-import androidx.lifecycle.MutableLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
@@ -14,12 +13,11 @@ import javax.inject.Inject
 class SignInViewModel @Inject constructor(
     private val signInUseCase: SignInUseCase,
 ) : BaseViewModel() {
-    val uid = MutableLiveData("")
 
-    fun requestSignIn(tel: String, uid: String) {
-        Timber.tag(TAG).d("requestSignIn: $tel, $uid")
+    fun signInByTel(tel: String) {
+        Timber.tag(TAG).d("requestSignIn: $tel")
 
-        signInUseCase(tel, uid)
+        signInUseCase("", tel)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
@@ -35,9 +33,8 @@ class SignInViewModel @Inject constructor(
     }
 
     companion object {
-        private const val TAG = "SignInViewModel"
+        private val TAG = SignInViewModel::class.java.simpleName
 
         const val SIGN_IN_SUCCESSFULLY = "SIGN_IN_SUCCESSFULLY"
-        const val REQUEST_FAILED = "REQUEST_FAILED"
     }
 }

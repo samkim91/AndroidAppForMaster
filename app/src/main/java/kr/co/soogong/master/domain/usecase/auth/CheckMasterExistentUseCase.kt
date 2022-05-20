@@ -6,7 +6,7 @@ import kr.co.soogong.master.data.repository.AuthRepository
 import javax.inject.Inject
 
 @Reusable
-class CheckUserExistentUseCase @Inject constructor(
+class CheckMasterExistentUseCase @Inject constructor(
     private val authRepository: AuthRepository,
 ) {
     operator fun invoke(tel: String): Single<Boolean> =

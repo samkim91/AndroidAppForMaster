@@ -41,12 +41,12 @@ class SplashViewModel @Inject constructor(
 
         getMasterUidFromSharedUseCase().let { masterUid ->
             Timber.tag(TAG).d("master Uid: $masterUid")
-            setAction(if (!masterUid.isNullOrEmpty()) GET_MASTER_UID_SUCCESSFULLY else GET_MASTER_UID_RETURN_NULL)
+            setAction(if (masterUid.isNotEmpty()) GET_MASTER_UID_SUCCESSFULLY else GET_MASTER_UID_RETURN_NULL)
         }
     }
 
     companion object {
-        private const val TAG = "SplashViewModel"
+        private val TAG = SplashViewModel::class.java.simpleName
         const val GET_VERSION_SUCCESSFULLY = "GET_VERSION_SUCCESSFULLY"
         const val GET_VERSION_INFO_FAILED = "GET_VERSION_INFO_FAILED"
 

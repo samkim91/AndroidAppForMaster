@@ -67,6 +67,7 @@
     <!-- Auth -->
     <string name="certification_code">인증번호</string>
     <string name="resend_certification_code"><u>재요청하기</u></string>
+    <string name="requesting">요청</string>
     <string name="expired_certification_code">인증시간이 초과되었습니다. 인증번호를 재요청해주세요.</string>
     <string name="invalid_phone_number">휴대폰번호 형식이 올바르지 않습니다.</string>
     <string name="wrong_certification_code">인증번호가 틀립니다.</string>
@@ -400,8 +401,8 @@
     <string name="get_version_info_failed">버전정보를 불러오는데 실패하였습니다. 인터넷 상태를 확인하거나 앱 종료 후 다시 실행해주세요.</string>
 
     <string name="certification_code_requested">인증번호를 요청 했습니다.</string>
-    <string name="certification_code_requested_again">인증번호를 재요청 했습니다.</string>
     <string name="try_again">인증 과정을 다시 시작해주세요.</string>
+    <string name="sign_in_failed">인증번호가 맞지 않습니다. 다시 입력해주세요.</string>
 
     <string name="send_message_succeeded">고객에게 견적서가 전달되었습니다!\n매칭을 기다려주세요.</string>
     <string name="cancel_estimate_succeeded">시공이 취소되었습니다.\n더 좋은 문의를 드리도록 노력할게요.</string>

@@ -5,12 +5,6 @@
 
     <data>
 
-        <import type="android.text.InputType" />
-
-        <variable
-            name="authPhoneNumberButtonTheme"
-            type="kr.co.soogong.master.domain.entity.common.ButtonTheme" />
-
         <variable
             name="vm"
             type="kr.co.soogong.master.presentation.ui.auth.signin.SignInViewModel" />
@@ -62,46 +56,100 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:title="@{@string/welcome_message_at_sign_in}" />
 
-                <kr.co.soogong.master.presentation.atomic.organisms.SubheadlineTextInputButtonMediumTextInputTimer
-                    android:id="@+id/stibmtit_auth_phone_number"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_phone_number"
+                    style="@style/outlinedTextInputLayout"
                     android:layout_width="@dimen/gap_0"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/gap_16"
                     android:layout_marginTop="@dimen/gap_26"
-                    android:layout_marginEnd="@dimen/gap_16"
-                    app:buttonText="@{@string/certification}"
-                    app:buttonTheme="@{authPhoneNumberButtonTheme}"
-                    app:firstContent="@={authVm.tel}"
-                    app:hint="@{@string/type_phone_number_hint}"
-                    app:inputType="@{InputType.TYPE_CLASS_NUMBER}"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginStart="@dimen/gap_16"
+                    android:enabled="@{authVm.phoneNumberInputEnable}"
+                    app:layout_constraintEnd_toStartOf="@id/b_request_code"
                     app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintHorizontal_weight="4"
+                    android:hint="@string/type_phone_number_hint"
                     app:layout_constraintTop_toBottomOf="@id/ltf_introduction"
-                    app:max="@{11}"
-                    app:secondContent="@={authVm.certificationCode}"
-                    app:textInputTimerHint="@{@string/certification_code}"
-                    app:textInputTimerInputType="@{InputType.TYPE_CLASS_NUMBER}"
-                    app:textInputTimerMax="@{6}" />
+                    app:endIconMode="clear_text"
+                    app:endIconTint="@color/light_grey_2">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tie_phone_number"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/gap_14"
+                        android:inputType="phone"
+                        android:singleLine="true"
+                        android:text="@={authVm.tel}"
+                        android:maxLines="1"
+                        android:maxLength="11"
+                        android:textColor="@color/black"
+                        tools:text="내용" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/b_request_code"
+                    android:layout_width="@dimen/gap_0"
+                    android:layout_height="wrap_content"
+                    style="@style/button.medium.primary"
+                    android:text="@{authVm.phoneNumberInputEnable ? @string/requesting : @string/retyping}"
+                    android:layout_marginStart="@dimen/gap_8"
+                    android:layout_marginTop="@dimen/gap_32"
+                    android:layout_marginEnd="@dimen/gap_16"
+                    android:onClick="@{() -> authVm.requestButtonClick()}"
+                    tools:text="@string/requesting"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintTop_toBottomOf="@id/ltf_introduction"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/til_phone_number"
+                    />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_code"
+                    style="@style/outlinedTextInputLayout"
+                    android:layout_width="@dimen/gap_0"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/gap_4"
+                    android:layout_marginStart="@dimen/gap_16"
+                    android:layout_marginEnd="@dimen/gap_16"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:hint="@string/certification_code"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/til_phone_number"
+                    app:endIconMode="clear_text"
+                    app:endIconTint="@color/light_grey_2">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tie_code"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/gap_14"
+                        android:singleLine="true"
+                        android:maxLines="1"
+                        android:text="@={authVm.certificationCode}"
+                        android:maxLength="6"
+                        android:inputType="number"
+                        android:textColor="@color/black"
+                        tools:text="내용" />
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_resend_certification_code"
-                    style="@style/caption_1.regular"
+                    android:textAppearance="@style/caption_1.regular"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/gap_5"
-                    android:layout_marginEnd="@dimen/gap_16"
                     android:paddingStart="@dimen/gap_10"
-                    android:paddingTop="@dimen/gap_5"
-                    android:paddingEnd="@dimen/gap_0"
-                    android:paddingBottom="@dimen/gap_5"
+                    android:paddingTop="@dimen/gap_10"
+                    android:paddingEnd="@dimen/gap_10"
+                    android:layout_marginEnd="@dimen/gap_16"
+                    android:paddingBottom="@dimen/gap_10"
                     android:text="@string/resend_certification_code"
                     android:textColor="@color/grey_3"
-                    app:layout_constraintBottom_toTopOf="@id/b_sign_in"
+                    android:onClick="@{() -> authVm.requestAgainButtonClick()}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="1"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/stibmtit_auth_phone_number"
-                    app:layout_constraintVertical_bias="0"
+                    app:layout_constraintTop_toBottomOf="@id/til_code"
                     tools:visibility="visible" />
 
                 <androidx.appcompat.widget.AppCompatButton
@@ -110,6 +158,7 @@
                     android:layout_marginStart="@dimen/gap_16"
                     android:layout_marginEnd="@dimen/gap_16"
                     android:layout_marginBottom="@dimen/gap_24"
+                    android:onClick="@{() -> authVm.verifyCertificationCode()}"
                     android:text="@string/sign_in"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

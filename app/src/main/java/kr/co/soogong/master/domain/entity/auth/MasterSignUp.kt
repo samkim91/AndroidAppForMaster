@@ -16,7 +16,7 @@ data class MasterSignUp(
         fun fromDto(masterSignUpDto: MasterSignUpDto): MasterSignUp =
             MasterSignUp(
                 id = masterSignUpDto.id!!,
-                uid = masterSignUpDto.uid,
+                uid = masterSignUpDto.uid!!,
                 ownerName = masterSignUpDto.ownerName,
                 tel = masterSignUpDto.tel,
                 privatePolicy = masterSignUpDto.privatePolicy,
