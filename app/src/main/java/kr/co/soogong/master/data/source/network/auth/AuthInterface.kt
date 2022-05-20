@@ -5,6 +5,7 @@ import kr.co.soogong.master.contract.HttpContract
 import kr.co.soogong.master.data.entity.auth.FirebaseTokenDto
 import kr.co.soogong.master.data.entity.auth.MasterSignUpDto
 import kr.co.soogong.master.data.entity.common.ResponseDto
+import kr.co.soogong.master.data.entity.profile.MasterSettingsDto
 import retrofit2.http.*
 
 interface AuthInterface {
@@ -20,6 +21,9 @@ interface AuthInterface {
 
     @POST(HttpContract.SIGN_UP)
     fun signUp(@Body masterSignUpDto: MasterSignUpDto): Single<ResponseDto<MasterSignUpDto>>
+
+    @GET(HttpContract.SIGN_IN)
+    fun signIn(@Query("uid") uid: String, @Query("tel") tel: String): Single<ResponseDto<MasterSettingsDto>>
 
     @POST(HttpContract.SAVE_FCM_TOKEN)
     suspend fun saveFCMToken(@Body firebaseTokenDto: FirebaseTokenDto)

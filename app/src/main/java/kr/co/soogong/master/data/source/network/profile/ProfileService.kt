@@ -17,11 +17,6 @@ class ProfileService @Inject constructor(
 ) {
     private val profileInterface = retrofit.create(ProfileInterface::class.java)
 
-    // profile repo 로 이동
-    fun updateUidByTel(tel: String, uid: String): Single<MasterDto> {
-        return profileInterface.updateUidByTel(tel, uid)
-    }
-
     fun getMasterSettings(uid: String): Single<ResponseDto<MasterSettingsDto>> {
         return profileInterface.getMasterSettings(uid)
     }

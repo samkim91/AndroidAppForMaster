@@ -1,7 +1,5 @@
 package kr.co.soogong.master.domain.usecase.auth
 
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import dagger.Reusable
 import io.reactivex.Single
 import kr.co.soogong.master.data.entity.auth.MasterSignUpDto
@@ -18,10 +16,6 @@ class SignUpUseCase @Inject constructor(
     operator fun invoke(masterSignUpDto: MasterSignUpDto): Single<MasterSignUp> =
         authRepository.signUp(masterSignUpDto)
             .doOnSuccess {
-                // TODO: 2022/02/16 id 추가
                 profileRepository.saveMasterKeysInShared(it.id, it.uid)
-            }
-            .doOnError {
-                Firebase.auth.signOut()
             }
 }

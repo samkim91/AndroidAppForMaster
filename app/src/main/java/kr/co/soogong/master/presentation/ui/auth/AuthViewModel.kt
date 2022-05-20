@@ -42,7 +42,7 @@ class AuthViewModel @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
                 onSuccess = {
-                    if (it) setAction(EXIST_USER) else requestCertificationCode()
+                    sendEvent(EXIST_USER, it)
                 },
                 onError = {
                     setAction(REQUEST_FAILED)
@@ -67,7 +67,7 @@ class AuthViewModel @Inject constructor(
         checkUserExist()
     }
 
-    private fun requestCertificationCode() {
+    fun requestCertificationCode() {
         Timber.tag(TAG).d("requestCertificationCode: ")
 
         viewModelScope.launch {

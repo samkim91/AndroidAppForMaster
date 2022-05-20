@@ -14,10 +14,6 @@ import retrofit2.http.*
 
 interface ProfileInterface {
 
-    @FormUrlEncoded
-    @PATCH(HttpContract.UPDATE_UID_BY_TEL)
-    fun updateUidByTel(@Path("tel") tel: String, @Field("uid") uid: String): Single<MasterDto>
-
     @GET(HttpContract.GET_MASTER_SETTINGS)
     fun getMasterSettings(@Path("uid") uid: String): Single<ResponseDto<MasterSettingsDto>>
 
