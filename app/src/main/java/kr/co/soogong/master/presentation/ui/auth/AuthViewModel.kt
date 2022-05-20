@@ -98,7 +98,7 @@ class AuthViewModel @Inject constructor(
             try {
                 val verifiedResult = verifyCertificationCodeUseCase(tel.value!!, certificationCode.value!!)
 
-                if (verifiedResult) setAction(TASK_SUCCESSFUL) else setAction(TASK_FAILED)
+                if (verifiedResult) setAction(VERIFIED_SUCCESSFUL) else setAction(VERIFIED_FAILED)
             } catch (e: Exception) {
                 setAction(TRY_AGAIN)
                 Timber.tag(TAG).e("changeMarketingPush failed: $e")
@@ -119,7 +119,7 @@ class AuthViewModel @Inject constructor(
         const val CREDENTIAL_CODE_REQUESTED = "CREDENTIAL_CODE_REQUESTED"
 
         const val TRY_AGAIN = "TRY_AGAIN"
-        const val TASK_SUCCESSFUL = "TASK_SUCCESSFUL"
-        const val TASK_FAILED = "TASK_FAILED"
+        const val VERIFIED_SUCCESSFUL = "VERIFIED_SUCCESSFUL"
+        const val VERIFIED_FAILED = "VERIFIED_FAILED"
     }
 }

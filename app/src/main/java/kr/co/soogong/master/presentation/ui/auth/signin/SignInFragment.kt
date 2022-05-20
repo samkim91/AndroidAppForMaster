@@ -59,10 +59,10 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(
                 AuthViewModel.CREDENTIAL_CODE_REQUESTED -> requireContext().toast(getString(R.string.certification_code_requested))
 
                 AuthViewModel.TRY_AGAIN -> requireContext().toast(getString(R.string.try_again))
-                AuthViewModel.TASK_SUCCESSFUL -> {
+                AuthViewModel.VERIFIED_SUCCESSFUL -> {
                     viewModel.signInByTel(authViewModel.tel.value!!)
                 }
-                AuthViewModel.TASK_FAILED -> requireContext().toast(getString(R.string.wrong_certification_code))
+                AuthViewModel.VERIFIED_FAILED -> requireContext().toast(getString(R.string.wrong_certification_code))
 
                 REQUEST_FAILED -> requireContext().toast(getString(R.string.error_message_of_request_failed))
             }

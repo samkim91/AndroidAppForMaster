@@ -27,8 +27,8 @@ android {
         applicationId "kr.co.soogong.master"
         minSdkVersion rootProject.minSdkVersion
         targetSdkVersion rootProject.targetSdkVersion
-        versionCode 80
-        versionName "1.13.2"
+        versionCode 81
+        versionName "1.14.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
