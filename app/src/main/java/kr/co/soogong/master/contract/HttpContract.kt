@@ -17,9 +17,9 @@ object HttpContract {
     const val VERIFY_CERTIFICATION_CODE = "auth/verify"
 
     const val SAVE_FCM_TOKEN = "firebase/save-token"
-    const val UPDATE_UID_BY_TEL = "master/{tel}"
     const val GET_APP_VERSION = "version/android"
     const val SIGN_UP = "master"
+    const val SIGN_IN = "master/sign-in"
     //endregion
 
     //region Major

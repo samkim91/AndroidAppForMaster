@@ -7,6 +7,7 @@ import kr.co.soogong.master.data.entity.profile.MasterSettingsDto
 @Parcelize
 data class MasterSettings(
     val id: Int,
+    val uid: String,
     val approvedStatus: String,
     val requestMeasureYn: Boolean,
 ) : Parcelable {
@@ -14,6 +15,7 @@ data class MasterSettings(
         fun fromDto(masterSettingsDto: MasterSettingsDto) =
             MasterSettings(
                 id = masterSettingsDto.id,
+                uid = masterSettingsDto.uid,
                 approvedStatus = masterSettingsDto.approvedStatus,
                 requestMeasureYn = masterSettingsDto.requestMeasureYn,
             )

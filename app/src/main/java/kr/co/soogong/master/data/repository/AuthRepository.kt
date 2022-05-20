@@ -2,10 +2,12 @@ package kr.co.soogong.master.data.repository
 
 import dagger.Reusable
 import io.reactivex.Single
-import kr.co.soogong.master.data.source.network.auth.AuthService
 import kr.co.soogong.master.data.entity.auth.FirebaseTokenDto
 import kr.co.soogong.master.data.entity.auth.MasterSignUpDto
+import kr.co.soogong.master.data.entity.profile.MasterSettingsDto
+import kr.co.soogong.master.data.source.network.auth.AuthService
 import kr.co.soogong.master.domain.entity.auth.MasterSignUp
+import java.net.HttpURLConnection
 import javax.inject.Inject
 
 @Reusable
@@ -29,7 +31,16 @@ class AuthRepository @Inject constructor(
             MasterSignUp.fromDto(it.data!!)
         }
 
-     suspend fun saveFCMToken(firebaseTokenDto: FirebaseTokenDto) =
+    fun signIn(uid: String, tel: String): Single<MasterSettingsDto> =
+        authService.signIn(uid, tel)
+            .map { responseDto ->
+                if (responseDto.code.toInt() == HttpURLConnection.HTTP_OK)
+                    responseDto.data
+                else
+                    throw Exception(responseDto.messageKo)
+            }
+
+    suspend fun saveFCMToken(firebaseTokenDto: FirebaseTokenDto) =
         authService.saveFCMToken(firebaseTokenDto)
 
     companion object {

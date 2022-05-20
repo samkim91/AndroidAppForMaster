@@ -38,9 +38,6 @@ class ProfileRepository @Inject constructor(
             .apply()
     }
 
-    fun updateUidByTel(tel: String, uid: String): Single<MasterDto> =
-        profileService.updateUidByTel(tel, uid)
-
     fun getMaster(): Single<MasterDto> =
         profileService.getMasterByUid(getMasterUidFromShared())
             .doOnSuccess { it.data?.run { saveMasterKeysInShared(this.id!!, this.uid!!) } }

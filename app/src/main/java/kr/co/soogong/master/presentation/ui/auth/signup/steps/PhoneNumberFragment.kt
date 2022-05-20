@@ -62,7 +62,6 @@ class PhoneNumberFragment : BaseFragment<FragmentPhoneNumberBinding>(
                     binding.tilCode.error = null
                 }
 
-                AuthViewModel.EXIST_USER -> showDialogForUserExist()
                 AuthViewModel.CREDENTIAL_CODE_REQUESTED -> requireContext().toast(getString(R.string.certification_code_requested))
 
                 AuthViewModel.TRY_AGAIN -> requireContext().toast(getString(R.string.try_again))
@@ -72,6 +71,16 @@ class PhoneNumberFragment : BaseFragment<FragmentPhoneNumberBinding>(
                 }
                 AuthViewModel.TASK_FAILED -> requireContext().toast(getString(R.string.wrong_certification_code))
                 REQUEST_FAILED -> requireContext().toast(getString(R.string.error_message_of_request_failed))
+            }
+        })
+
+        authViewModel.event.observe(viewLifecycleOwner, EventObserver { (event, value) ->
+            when (event) {
+                AuthViewModel.EXIST_USER -> {
+                    (value as Boolean).run {
+                        if (this) showDialogForUserExist() else authViewModel.requestCertificationCode()
+                    }
+                }
             }
         })
     }

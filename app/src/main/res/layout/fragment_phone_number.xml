@@ -101,25 +101,6 @@
                 tools:text="내용" />
         </com.google.android.material.textfield.TextInputLayout>
 
-<!--        <kr.co.soogong.master.presentation.atomic.organisms.SubheadlineTextInputButtonMediumTextInputTimer-->
-<!--            android:id="@+id/stibmtit_auth_phone_number"-->
-<!--            android:layout_width="@dimen/gap_0"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginTop="@dimen/gap_26"-->
-<!--            app:buttonText="@{@string/certification}"-->
-<!--            app:buttonTheme="@{authPhoneNumberButtonTheme}"-->
-<!--            app:firstContent="@={authVm.tel}"-->
-<!--            app:hint="@{@string/type_phone_number_hint}"-->
-<!--            app:inputType="@{InputType.TYPE_CLASS_NUMBER}"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@id/ltf_introduction"-->
-<!--            app:max="@{11}"-->
-<!--            app:secondContent="@={authVm.certificationCode}"-->
-<!--            app:textInputTimerHint="@{@string/certification_code}"-->
-<!--            app:textInputTimerInputType="@{InputType.TYPE_CLASS_NUMBER}"-->
-<!--            app:textInputTimerMax="@{6}" />-->
-
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_resend_certification_code"
             android:textAppearance="@style/caption_1.regular"
