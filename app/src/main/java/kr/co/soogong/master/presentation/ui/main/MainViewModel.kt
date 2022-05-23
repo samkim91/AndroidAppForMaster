@@ -1,11 +1,16 @@
 package kr.co.soogong.master.presentation.ui.main
 
+import android.media.MediaPlayer
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
+import com.google.firebase.messaging.FirebaseMessaging
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.launch
 import kr.co.soogong.master.domain.entity.profile.MasterSettings
+import kr.co.soogong.master.domain.usecase.auth.SaveFCMTokenUseCase
 import kr.co.soogong.master.domain.usecase.profile.GetMasterSettingsUseCase
 import kr.co.soogong.master.presentation.ui.base.BaseViewModel
 import timber.log.Timber
@@ -14,6 +19,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val getMasterSettingsUseCase: GetMasterSettingsUseCase,
+    private val saveFCMTokenUseCase: SaveFCMTokenUseCase,
 ) : BaseViewModel() {
     // 마스터 기본 정보
     val masterSettings = MutableLiveData<MasterSettings>()
@@ -26,6 +32,7 @@ class MainViewModel @Inject constructor(
 
     init {
         requestMasterSettings()
+        registerFCMToken()
     }
 
     fun requestMasterSettings() {
@@ -45,7 +52,26 @@ class MainViewModel @Inject constructor(
             ).addToDisposable()
     }
 
+    private fun registerFCMToken() {
+        Timber.tag(TAG).d("registerFCMToken: ")
+        FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Timber.tag(TAG).w("registerFCMToken is failed: ${task.exception}")
+                return@addOnCompleteListener
+            }
+
+            viewModelScope.launch {
+                try {
+                    Timber.tag(TAG).d("registerFCMToken successfully: ")
+                    saveFCMTokenUseCase(task.result)
+                } catch (e: Exception) {
+                    Timber.tag(TAG).e("registerFCMToken successfully: $e")
+                }
+            }
+        }
+    }
+
     companion object {
-        private const val TAG = "MainViewModel"
+        private val TAG = MainViewModel::class.java.simpleName
     }
 }
