@@ -31,6 +31,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            android:paddingBottom="@dimen/gap_64"
+            android:clipToPadding="false"
             app:projects="@{vm.projects}"
             app:setBottomSpace="@{10}"
             app:setEndSpace="@{15}"

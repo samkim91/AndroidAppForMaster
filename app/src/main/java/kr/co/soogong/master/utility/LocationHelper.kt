@@ -18,4 +18,8 @@ object LocationHelper {
 
         return result
     }
+
+    fun combineAddressWithDetail(address: String, detailAddress: String?): String {
+        return if (detailAddress.isNullOrEmpty()) address else "$address $detailAddress"
+    }
 }

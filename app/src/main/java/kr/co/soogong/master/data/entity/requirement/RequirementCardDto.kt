@@ -32,6 +32,9 @@ data class RequirementCardDto(
     @SerializedName("oldAddress")
     val oldAddress: String?,
 
+    @SerializedName("detailAddress")
+    val detailAddress: String?,
+
     @SerializedName("distance")
     val distance: Double,
 

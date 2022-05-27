@@ -2,6 +2,7 @@ package kr.co.soogong.master.domain.entity.requirement
 
 import kr.co.soogong.master.data.entity.requirement.RequirementCardDto
 import kr.co.soogong.master.data.entity.requirement.RequirementQnaDto
+import kr.co.soogong.master.utility.LocationHelper
 import java.util.*
 import kotlin.math.roundToInt
 
@@ -40,7 +41,12 @@ data class RequirementCard(
                 typeName = requirementCardDto.typeName,
                 projectId = requirementCardDto.projectId,
                 projectName = requirementCardDto.projectName,
-                address = requirementCardDto.oldAddress ?: requirementCardDto.address,
+                address =
+                if (!requirementCardDto.oldAddress.isNullOrEmpty())
+                    LocationHelper.combineAddressWithDetail(requirementCardDto.oldAddress,
+                        requirementCardDto.detailAddress)
+                else LocationHelper.combineAddressWithDetail(requirementCardDto.address,
+                    requirementCardDto.detailAddress),
                 distance = (requirementCardDto.distance * 10.0).roundToInt() / 10.0,
                 status = RequirementStatus.getStatusFromRequirementCardDto(requirementCardDto),
                 subStatus = requirementCardDto.subStatusCode,

@@ -8,7 +8,7 @@ class MajorService @Inject constructor(
 ) {
     private val majorInterface = retrofit.create(MajorInterface::class.java)
 
-    fun getCategories() = majorInterface.getCategories()
+    suspend fun getCategories() = majorInterface.getCategories()
 
-    fun getProjects(categoryId: Int) = majorInterface.getProjects(categoryId)
+    suspend fun getProjects(categoryId: Int) = majorInterface.getProjects(categoryId)
 }

@@ -2,10 +2,9 @@ package kr.co.soogong.master.presentation.ui.common.category
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.rxkotlin.subscribeBy
-import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.launch
 import kr.co.soogong.master.domain.entity.common.major.Category
 import kr.co.soogong.master.domain.usecase.common.major.GetCategoriesUseCase
 import kr.co.soogong.master.presentation.ui.base.BaseViewModel
@@ -26,23 +25,20 @@ class CategoryViewModel @Inject constructor(
 
     private fun requestCategories() {
         Timber.tag(TAG).d("getCategoryList: ")
-        getCategoriesUseCase()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeBy(
-                onSuccess = {
-                    Timber.tag(TAG).d("getCategoryList successful: $it")
+        viewModelScope.launch {
+            try {
+                getCategoriesUseCase().let {
                     _categories.postValue(it)
-                },
-                onError = {
-                    Timber.tag(TAG).w("getCategoryList failed: $it")
-                    setAction(GET_CATEGORY_FAILED)
                 }
-            ).addToDisposable()
+            } catch (e: Exception) {
+                Timber.tag(TAG).w("getCategoryList failed: $e")
+                setAction(GET_CATEGORY_FAILED)
+            }
+        }
     }
 
     companion object {
-        private const val TAG = "CategoryViewModel"
+        private val TAG = CategoryViewModel::class.java.simpleName
         const val GET_CATEGORY_FAILED = "GET_CATEGORY_FAILED"
     }
 }

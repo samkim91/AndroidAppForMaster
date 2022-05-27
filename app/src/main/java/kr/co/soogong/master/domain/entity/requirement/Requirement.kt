@@ -5,6 +5,7 @@ import kr.co.soogong.master.data.entity.requirement.RequirementDto
 import kr.co.soogong.master.data.entity.requirement.RequirementQnaDto
 import kr.co.soogong.master.domain.entity.common.CodeTable
 import kr.co.soogong.master.domain.entity.requirement.estimation.Estimation
+import kr.co.soogong.master.utility.LocationHelper
 import java.util.*
 
 data class Requirement(
@@ -41,8 +42,8 @@ data class Requirement(
                     ?: CodeTable.COMPARE,
                 projectId = requirementDto.projectId,
                 projectName = requirementDto.projectName,
-                address = requirementDto.address,
-                oldAddress = requirementDto.oldAddress,
+                address = LocationHelper.combineAddressWithDetail(requirementDto.address, requirementDto.detailAddress),
+                oldAddress = if (!requirementDto.oldAddress.isNullOrEmpty()) LocationHelper.combineAddressWithDetail(requirementDto.oldAddress, requirementDto.detailAddress) else "",
                 status = RequirementStatus.getStatusFromRequirementDto(requirementDto),
                 subStatus = requirementDto.subStatusCode,
                 phoneNumber = if (requirementDto.estimationDto?.fromClientCallCnt!! > 0 || requirementDto.estimationDto.fromMasterCallCnt!! > 0) {
