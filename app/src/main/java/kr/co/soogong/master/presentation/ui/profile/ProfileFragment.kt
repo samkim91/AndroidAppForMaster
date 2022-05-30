@@ -127,20 +127,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
                 BottomSheetDialogRecyclerView.newInstance(
                     sheetDialogBundle = BottomSheetDialogBundle.getCareerYearBundle()
                 ).let {
-                    it.setItemClickListener { dialogItem ->
-                        if (viewModel.profile.value?.approvedStatus == CodeTable.APPROVED) {
-                            DefaultDialog.newInstance(DialogData.getConfirmingForLimitedService())
-                                .let { dialog ->
-                                    dialog.setButtonsClickListener(
-                                        onPositive = { viewModel.saveCareerPeriod(dialogItem.value) },
-                                        onNegative = { }
-                                    )
-                                    dialog.show(parentFragmentManager, it.tag)
-                                }
-                        } else {
-                            viewModel.saveCareerPeriod(dialogItem.value)
-                        }
-                    }
+                    it.setItemClickListener { dialogItem -> viewModel.saveCareerPeriod(dialogItem.value) }
                     it.show(parentFragmentManager, it.tag)
                 }
             }
