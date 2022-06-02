@@ -21,9 +21,6 @@ data class RequirementDto(
     @SerializedName("typeCode")
     val typeCode: String,
 
-    @SerializedName("subTypeCode")
-    val subTypeCode: String,
-
     @SerializedName("projectId")
     val projectId: Int,
 
