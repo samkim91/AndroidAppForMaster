@@ -10,12 +10,12 @@ import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.launch
 import kr.co.soogong.master.data.entity.common.CodeDto
-import kr.co.soogong.master.data.entity.requirement.estimation.EstimationDto
+import kr.co.soogong.master.data.entity.requirement.estimation.RefusingMeasureDto
 import kr.co.soogong.master.data.entity.requirement.repair.CancelRepairDto
 import kr.co.soogong.master.domain.entity.common.CodeTable
 import kr.co.soogong.master.domain.entity.requirement.Requirement
 import kr.co.soogong.master.domain.usecase.requirement.GetRequirementUseCase
-import kr.co.soogong.master.domain.usecase.requirement.estimation.RespondToMeasureUseCase
+import kr.co.soogong.master.domain.usecase.requirement.estimation.RefuseToMeasureUseCase
 import kr.co.soogong.master.domain.usecase.requirement.repair.CancelRepairUseCase
 import kr.co.soogong.master.domain.usecase.requirement.repair.GetCanceledReasonsUseCase
 import kr.co.soogong.master.presentation.ui.base.BaseViewModel
@@ -27,7 +27,7 @@ import javax.inject.Inject
 class CancelViewModel @Inject constructor(
     private val getRequirementUseCase: GetRequirementUseCase,
     private val cancelRepairUseCase: CancelRepairUseCase,
-    private val respondToMeasureUseCase: RespondToMeasureUseCase,
+    private val refuseToMeasureUseCase: RefuseToMeasureUseCase,
     private val canceledReasonsUseCase: GetCanceledReasonsUseCase,
     val savedStateHandle: SavedStateHandle,
 ) : BaseViewModel() {
@@ -107,21 +107,16 @@ class CancelViewModel @Inject constructor(
         }
     }
 
-    fun respondToMeasure() {
-        Timber.tag(TAG).d("respondToMeasure: ")
-        respondToMeasureUseCase(
-            EstimationDto(
-                id = _requirement.value?.estimation?.id,
-                token = _requirement.value?.estimation?.token,
-                requirementId = _requirement.value?.estimation?.requirementId,
-                masterId = _requirement.value?.estimation?.masterId,
+    fun refuseToMeasure() {
+        Timber.tag(TAG).d("refuseToMeasure: ")
+        refuseToMeasureUseCase(
+            refusingMeasureDto = RefusingMeasureDto(
+                id = _requirement.value?.estimation?.id!!,
+                token = _requirement.value?.estimation?.token!!,
+                masterId = _requirement.value?.estimation?.masterId!!,
                 masterResponseCode = CodeTable.REFUSED.code,
-                refuseCode = canceledCode.value,
+                refuseCode = canceledCode.value!!,
                 refuseDescription = canceledDescription.value,
-                typeCode = null,
-                price = null,
-                createdAt = null,
-                updatedAt = null,
             )
         )
             .subscribeOn(Schedulers.io())

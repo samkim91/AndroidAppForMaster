@@ -200,7 +200,7 @@ open class RequirementCardViewHolder(
                     it.setButtonsClickListener(
                         onPositive = {
                             viewModel.callToClient(requirementId = requirementCard.id)
-                            viewModel.respondToMeasure(requirementCard)
+                            viewModel.acceptToMeasure(requirementCard)
                             context.startActivity(CallToCustomerHelper.getIntent(requirementCard.phoneNumber))
                         },
                         onNegative = { }
