@@ -4,10 +4,7 @@ import dagger.Reusable
 import io.reactivex.Single
 import kr.co.soogong.master.data.source.network.requirement.estimation.EstimationService
 import kr.co.soogong.master.data.entity.requirement.CustomerRequest
-import kr.co.soogong.master.data.entity.requirement.estimation.EstimationDto
-import kr.co.soogong.master.data.entity.requirement.estimation.EstimationTemplateDto
-import kr.co.soogong.master.data.entity.requirement.estimation.SaveMasterMemoDto
-import kr.co.soogong.master.data.entity.requirement.estimation.VisitingDateUpdateDto
+import kr.co.soogong.master.data.entity.requirement.estimation.*
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import javax.inject.Inject
@@ -25,8 +22,12 @@ class EstimationRepository @Inject constructor(
         return estimationService.saveEstimation(estimationDto, estimationImages)
     }
 
-    fun respondToMeasure(estimationDto: EstimationDto): Single<EstimationDto> {
-        return estimationService.respondToMeasure(estimationDto)
+    fun acceptToMeasure(acceptingMeasureDto: AcceptingMeasureDto): Single<EstimationDto> {
+        return estimationService.acceptToMeasure(acceptingMeasureDto)
+    }
+
+    fun refuseToMeasure(refusingMeasureDto: RefusingMeasureDto): Single<EstimationDto> {
+        return estimationService.refuseToMeasure(refusingMeasureDto)
     }
 
     fun callToClient(data : HashMap<String, Any>): Single<Boolean> = estimationService.callToClient(data)

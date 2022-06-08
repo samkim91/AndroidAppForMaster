@@ -65,17 +65,17 @@ fun setBottomButtons(
             }
 
             // 실측요청
-            // Buttons : 1. 시공취소, 2. 전화하기
+            // Buttons : 1. 거절하기, 2. 전화하기
             is RequirementStatus.RequestMeasure -> {
-                buttonLeft.setCancelingRepair(viewModel)
+                buttonLeft.setRefusingMeasure(viewModel)
                 buttonRight.setAcceptVisitingAndCallToClient(viewModel)
             }
 
             // 방문예정
-            // Buttons : 1. 시공취소, 2. 방문일 입력, 3. 시공완료
+            // Buttons : 1. 시공거절, 2. 방문일 입력, 3. 시공완료
             is RequirementStatus.Measuring -> {
                 addEndRepairButton(activity, binding.flexibleContainer, requirement)
-                buttonLeft.setCancelingRepair(viewModel)
+                buttonLeft.setRefusingMeasure(viewModel)
                 buttonRight.setSetVisitingDate(viewModel)
             }
 
@@ -193,8 +193,23 @@ private fun AppCompatButton.setAcceptVisitingAndCallToClient(
     isVisible = true
     text = context.getString(R.string.call_to_customer)
     setOnClickListener {
-        viewModel.respondToMeasure()
+        viewModel.acceptToMeasure()
         viewModel.callToClient()
+    }
+}
+
+private fun AppCompatButton.setRefusingMeasure(
+    viewModel: ViewRequirementViewModel,
+) {
+    isVisible = true
+    text = context.getString(R.string.refuse_estimation)
+    setOnClickListener {
+        context.startActivity(
+            CancelActivityHelper.getIntent(
+                context,
+                viewModel.requirementId.value!!
+            )
+        )
     }
 }
 

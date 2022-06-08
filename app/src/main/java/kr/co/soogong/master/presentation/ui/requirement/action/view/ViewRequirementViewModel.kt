@@ -9,6 +9,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.launch
+import kr.co.soogong.master.data.entity.requirement.estimation.AcceptingMeasureDto
 import kr.co.soogong.master.data.entity.requirement.estimation.EstimationDto
 import kr.co.soogong.master.data.entity.requirement.estimation.SaveMasterMemoDto
 import kr.co.soogong.master.domain.entity.common.CodeTable
@@ -16,10 +17,7 @@ import kr.co.soogong.master.domain.entity.requirement.Requirement
 import kr.co.soogong.master.domain.usecase.auth.GetMasterUidFromSharedUseCase
 import kr.co.soogong.master.domain.usecase.profile.GetMasterSettingsUseCase
 import kr.co.soogong.master.domain.usecase.requirement.GetRequirementUseCase
-import kr.co.soogong.master.domain.usecase.requirement.estimation.CallToClientUseCase
-import kr.co.soogong.master.domain.usecase.requirement.estimation.RespondToMeasureUseCase
-import kr.co.soogong.master.domain.usecase.requirement.estimation.SaveEstimationUseCase
-import kr.co.soogong.master.domain.usecase.requirement.estimation.SaveMasterMemoUseCase
+import kr.co.soogong.master.domain.usecase.requirement.estimation.*
 import kr.co.soogong.master.domain.usecase.requirement.review.RequestReviewUseCase
 import kr.co.soogong.master.presentation.ui.base.BaseViewModel
 import kr.co.soogong.master.presentation.uihelper.requirment.action.ViewRequirementActivityHelper
@@ -31,7 +29,7 @@ class ViewRequirementViewModel @Inject constructor(
     private val getMasterUidFromSharedUseCase: GetMasterUidFromSharedUseCase,
     private val getRequirementUseCase: GetRequirementUseCase,
     private val saveEstimationUseCase: SaveEstimationUseCase,
-    private val respondToMeasureUseCase: RespondToMeasureUseCase,
+    private val acceptToMeasureUseCase: AcceptToMeasureUseCase,
     private val callToClientUseCase: CallToClientUseCase,
     private val requestReviewUseCase: RequestReviewUseCase,
     private val getMasterSettingsUseCase: GetMasterSettingsUseCase,
@@ -110,19 +108,14 @@ class ViewRequirementViewModel @Inject constructor(
                 }).addToDisposable()
     }
 
-    fun respondToMeasure() {
+    fun acceptToMeasure() {
         Timber.tag(TAG).d("respondToMeasure: ")
-        respondToMeasureUseCase(
-            estimationDto = EstimationDto(
-                id = requirement.value?.estimation?.id,
-                token = requirement.value?.estimation?.token,
-                requirementId = requirement.value?.estimation?.requirementId,
-                masterId = requirement.value?.estimation?.masterId,
-                masterResponseCode = CodeTable.ACCEPTED.code,
-                typeCode = null,
-                price = null,
-                createdAt = null,
-                updatedAt = null,
+        acceptToMeasureUseCase(
+            acceptingMeasureDto = AcceptingMeasureDto(
+                id = requirement.value?.estimation?.id!!,
+                token = requirement.value?.estimation?.token!!,
+                masterId = requirement.value?.estimation?.masterId!!,
+                masterResponseCode = CodeTable.ACCEPTED.code
             )
         )
             .subscribeOn(Schedulers.io())

@@ -57,7 +57,7 @@ class CancelActivity : BaseActivity<ActivityCancelBinding>(
                 // 실측요청, 실측예정 -> 거절
                 // 이외 실측완료, 시공예정 등 -> 시공 취소
                 when (viewModel.requirement.value?.status) {
-                    is RequirementStatus.RequestMeasure, RequirementStatus.Measuring -> viewModel.respondToMeasure()
+                    is RequirementStatus.RequestMeasure, RequirementStatus.Measuring -> viewModel.refuseToMeasure()
                     else -> viewModel.saveRepair()
                 }
             }
