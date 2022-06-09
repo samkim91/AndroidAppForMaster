@@ -6,6 +6,9 @@
 
     <data>
 
+        <import type="kr.co.soogong.master.domain.entity.requirement.RequirementStatus.Repairing" />
+        <import type="kr.co.soogong.master.domain.entity.requirement.RequirementStatus.Measuring" />
+
         <variable
             name="vm"
             type="kr.co.soogong.master.presentation.ui.requirement.action.view.ViewRequirementViewModel" />
@@ -48,7 +51,9 @@
                     app:createdAt="@{vm.requirement.createdAt}"
                     app:oldAddress="@{vm.requirement.oldAddress}"
                     app:project="@{vm.requirement.projectName}"
+                    app:phoneNumber="@{vm.requirement.phoneNumber}"
                     app:requirementToken="@{vm.requirement.token}"
+                    app:phoneNumberClickListener="@{() -> vm.callToClient()}"
                     app:status="@{vm.requirement.status}" />
 
                 <androidx.appcompat.widget.AppCompatImageView
@@ -57,17 +62,6 @@
                     android:layout_height="@dimen/gap_1"
                     android:layout_marginVertical="@dimen/gap_24"
                     android:background="@color/light_grey_1" />
-
-                <kr.co.soogong.master.presentation.atomic.molecules.SubheadlineContentArrow
-                    android:id="@+id/sca_client_phone_number"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    tools:visibility="visible"
-                    android:layout_marginBottom="@dimen/gap_24"
-                    app:content="@{vm.requirement.phoneNumber}"
-                    app:label="@{@string/client_call_number}"
-                    app:onContainerClickListener="@{() -> vm.callToClient()}" />
 
                 <kr.co.soogong.master.presentation.atomic.molecules.SubheadlineContentArrow
                     android:id="@+id/sca_call_center_description"

@@ -18,7 +18,7 @@ class GetRequirementCardsUseCase @Inject constructor(
         status: List<String>? = null,
         searchingText: String? = null,
         searchingPeriod: Int? = null,
-        readYns: Boolean? = null,
+        readYn: Boolean? = null,
         offset: Int,
         pageSize: Int,
     ): Single<PageableContentDto<RequirementCard>> {
@@ -27,7 +27,7 @@ class GetRequirementCardsUseCase @Inject constructor(
             status,
             searchingText,
             searchingPeriod,
-            readYns,
+            readYn,
             offset,
             pageSize,
             1)      // order 1 생성시간역순, 0 생성시간순

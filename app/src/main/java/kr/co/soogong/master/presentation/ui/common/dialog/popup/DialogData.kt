@@ -39,24 +39,6 @@ data class DialogData(
                 ""
             )
 
-        fun getRefuseEstimate() =
-            DialogData(
-                "견적 거절",
-                "견적을 거절하시면, 해당 문의가 삭제됩니다.",
-                "",
-                "확인",
-                "취소",
-            )
-
-        fun getAlertForRequestConsult() =
-            DialogData(
-                "상세상담 요청",
-                "고객님이 상세상담 통화를 요청하셨어요. 고객님과 빠르게 통화하고 시공 가능성을 높여보세요.",
-                "24시간 동안 통화를 하지 않을 경우 배정에 불이익이 있을 수 있어요.",
-                "확인",
-                "",
-            )
-
         fun getInvalidRequirement() =
             DialogData(
                 "[안내]",
@@ -66,12 +48,12 @@ data class DialogData(
                 "",
             )
 
-        fun getRecommendingCallingCustomer() =
+        fun getSendMeasuringDate() =
             DialogData(
-                "전화 안내",
-                "가급적 15분 내로 고객님에게 전화하여 현장방문 일정을 잡아주세요.",
-                "",
-                "전화하기",
+                "방문일 입력 안내",
+                "고객님과 방문일정을 협의하셨다면, 일정을 입력해주세요.",
+                "일정을 입력하셔야 다음 과정으로 넘어갈 수 있습니다.",
+                "확인",
                 "",
             )
 

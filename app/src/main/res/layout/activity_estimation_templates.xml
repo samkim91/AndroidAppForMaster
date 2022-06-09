@@ -8,7 +8,7 @@
 
         <variable
             name="vm"
-            type="kr.co.soogong.master.presentation.ui.requirement.action.write.template.EstimationTemplatesViewModel" />
+            type="kr.co.soogong.master.presentation.ui.requirement.action.visit.template.EstimationTemplatesViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

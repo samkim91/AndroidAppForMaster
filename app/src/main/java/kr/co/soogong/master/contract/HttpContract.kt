@@ -34,7 +34,6 @@ object HttpContract {
     //endregion
 
     //region Estimations
-    const val SAVE_ESTIMATION = "estimation/save"
     const val ACCEPT_TO_MEASURE = "estimation/accept-measure"
     const val REFUSE_TO_MEASURE = "estimation/refuse-measure"
     const val CALL_TO_CLIENT = "estimation/count-call"

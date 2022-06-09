@@ -65,6 +65,9 @@ data class EstimationDto(
     @SerializedName("refuseDescription")
     val refuseDescription: String? = null,
 
+    @SerializedName("visitDate")
+    val visitDate: Date? = null,
+
     @SerializedName("createdAt")
     val createdAt: Date? = null,
 

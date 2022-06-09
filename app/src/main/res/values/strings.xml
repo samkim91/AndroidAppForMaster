@@ -177,6 +177,7 @@
     <string name="view_requirement_action_title">받은 문의</string>
     <string name="road_address">도로명</string>
     <string name="old_address">지번</string>
+    <string name="phone_number">전화번호</string>
 
     <string name="requirement_basic_requirement_token">문의번호 %s</string>
 
@@ -198,6 +199,7 @@
     <string name="estimation_material_cost">자재비</string>
     <string name="description_label">세부내용</string>
     <string name="estimation_description_label">제안내용</string>
+    <string name="visiting_date">방문예정일</string>
 
     <string name="repair_actual_price">최종 시공가</string>
     <string name="canceled_reason">취소 사유</string>

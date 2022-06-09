@@ -4,18 +4,9 @@ import io.reactivex.Single
 import kr.co.soogong.master.contract.HttpContract
 import kr.co.soogong.master.data.entity.requirement.CustomerRequest
 import kr.co.soogong.master.data.entity.requirement.estimation.*
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import retrofit2.http.*
 
 interface EstimationInterface {
-
-    @Multipart
-    @POST(HttpContract.SAVE_ESTIMATION)
-    fun saveEstimation(
-        @Part("estimationDto") estimationDto: RequestBody,
-        @Part measurementImage: List<MultipartBody.Part?>?,
-    ): Single<EstimationDto>
 
     @POST(HttpContract.ACCEPT_TO_MEASURE)
     fun acceptToMeasure(@Body acceptingMeasureDto: AcceptingMeasureDto): Single<EstimationDto>

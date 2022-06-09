@@ -69,7 +69,7 @@ class RequirementsFilterFragment : BaseFragment<FragmentRequirementListBinding>(
     }
 
     companion object {
-        private const val TAG = "RequirementsFilterFragment"
+        private val TAG = RequirementsFilterFragment::class.java.simpleName
         private const val REQUIREMENT_STATUS = "REQUIREMENT_STATUS"
 
         fun newInstance(status: List<String>) = RequirementsFilterFragment().apply {

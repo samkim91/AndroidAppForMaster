@@ -47,7 +47,7 @@ class HomeViewModel @Inject constructor(
         Timber.tag(TAG).d("requestRequirementsUnread: ")
 
         requirementViewModelAggregate.getRequirementCardsUseCase(
-            readYns = false,
+            readYn = false,
             offset = offset,
             pageSize = pageSize,
         )

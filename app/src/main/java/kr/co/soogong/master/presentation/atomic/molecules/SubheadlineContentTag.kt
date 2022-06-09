@@ -14,6 +14,7 @@ import kr.co.soogong.master.databinding.ViewSubheadlineContentTagBinding
 import kr.co.soogong.master.domain.entity.requirement.Requirement
 import kr.co.soogong.master.presentation.ui.profile.review.ReviewViewHolder
 import kr.co.soogong.master.utility.extension.dp
+import kr.co.soogong.master.utility.extension.formatDateWithDay
 import kr.co.soogong.master.utility.extension.formatMoney
 
 class SubheadlineContentTag @JvmOverloads constructor(
@@ -94,39 +95,17 @@ class SubheadlineContentTag @JvmOverloads constructor(
             requirement: Requirement,
         ) {
             requirement.estimation.let { estimation ->
-                // 총 견적가
+                // 방문예정일
                 SubheadlineContentTag(context).also { item ->
-                    item.subheadline = context.getString(R.string.estimation_total_cost)
-                    item.content =
-                        if (estimation.price != 0) estimation.price.formatMoney() else context.getString(R.string.not_estimated_text)
-                    item.tag =
-                        if (estimation.price != 0) context.getString(if (estimation.includingVat) R.string.vat_included else R.string.vat_not_included) else ""
+                    item.subheadline = context.getString(R.string.visiting_date)
+                    item.content = estimation.visitDate.formatDateWithDay()
                     container.addView(item, params)
                 }
-
-                // 항목별 견적가
-                if (!estimation.estimationPrices.isNullOrEmpty())
-                    estimation.estimationPrices.map { price ->
-                        SubheadlineContentTag(context).also { item ->
-                            item.subheadline = price.priceTypeCode?.inKorean
-                            item.content = price.partialPrice.formatMoney()
-                            container.addView(item, params)
-                        }
-                    }
 
                 // 제안내용
                 SubheadlineContentTag(context).also { item ->
                     item.subheadline = context.getString(R.string.estimation_description_label)
                     item.content = estimation.description
-                    container.addView(item, params)
-                }
-
-                // 실측사진
-                if (estimation.images.isNullOrEmpty()) return
-                TitleRectangleImages(context).also { item ->
-                    item.label =
-                        context.getString(R.string.view_requirement_estimation_images_label)
-                    item.images = estimation.images
                     container.addView(item, params)
                 }
             }
@@ -146,10 +125,11 @@ class SubheadlineContentTag @JvmOverloads constructor(
                         if (estimation.repair?.actualPrice != 0) context.getString(if (estimation.repair?.includingVat == true) R.string.vat_included else R.string.vat_not_included) else ""
                     container.addView(item, params)
                 }
+
                 // 제안 내용
                 addEstimationDetail(context, container, requirement)
 
-                // 실측사진
+                // 시공사진
                 if (estimation.repair?.images.isNullOrEmpty()) return
                 TitleRectangleImages(context).also { item ->
                     item.label =
@@ -180,42 +160,13 @@ class SubheadlineContentTag @JvmOverloads constructor(
                             .let { container.addView(this, it) }
                     }
 
-                    // 추가 요청 사유
-                    SubheadlineContentTag(context).also { item ->
-                        item.subheadline = context.getString(R.string.canceled_reason_of_client)
-                        item.content = preRequirement.cancelName
-                        container.addView(item, params)
-                    }
-
-                    // 세부내용
-                    SubheadlineContentTag(context).also { item ->
-                        item.subheadline = context.getString(R.string.description_label)
-                        item.content = preRequirement.canceledDescription
-                        container.addView(item, params)
-                    }
-
-                    // 다른 마스터님의 견적가
-                    SubheadlineContentTag(context).also { item ->
-                        item.subheadline = context.getString(R.string.price_of_previous_estimation)
-                        item.content = measurement.price.formatMoney()
-                        item.tag =
-                            if (measurement.price != 0) context.getString(if (measurement.includingVat) R.string.vat_included else R.string.vat_not_included) else ""
-                        container.addView(item, params)
-                    }
+                    addCanceledReason(context, container, requirement)
 
                     // 다른 마스터님의 코멘트
                     SubheadlineContentTag(context).also { item ->
                         item.subheadline =
                             context.getString(R.string.description_of_previous_estimation)
                         item.content = measurement.description
-                        container.addView(item, params)
-                    }
-
-                    // 실측자료(사진)
-                    if (requirement.measurement.images.isNullOrEmpty()) return
-                    TitleRectangleImages(context).also { item ->
-                        item.label = context.getString(R.string.measure_attachment_label)
-                        item.images = requirement.measurement.images
                         container.addView(item, params)
                     }
                 }

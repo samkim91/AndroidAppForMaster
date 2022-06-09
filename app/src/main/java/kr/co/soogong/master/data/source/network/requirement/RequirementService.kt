@@ -20,7 +20,7 @@ class RequirementService @Inject constructor(
         status: List<String>?,
         searchingText: String?,
         searchingPeriod: Int?,
-        readYns: Boolean?,
+        readYn: Boolean?,
         offset: Int,
         pageSize: Int,
         order: Int,
@@ -30,7 +30,7 @@ class RequirementService @Inject constructor(
             status,
             searchingText,
             searchingPeriod,
-            readYns,
+            readYn,
             offset,
             pageSize,
             order)

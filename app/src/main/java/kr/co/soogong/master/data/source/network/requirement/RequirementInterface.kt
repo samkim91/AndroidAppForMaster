@@ -22,7 +22,7 @@ interface RequirementInterface {
         @Query("status") status: List<String>?,
         @Query("searchingText") searchingText: String?,
         @Query("searchDateRange") searchingPeriod: Int?,
-        @Query("readYns") readYns: Boolean?,
+        @Query("readYn") readYn: Boolean?,
         @Query("offset") offset: Int,
         @Query("pageSize") pageSize: Int,
         @Query("order") order: Int,

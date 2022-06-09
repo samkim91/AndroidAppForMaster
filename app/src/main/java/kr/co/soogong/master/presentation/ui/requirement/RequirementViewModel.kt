@@ -36,7 +36,7 @@ open class RequirementViewModel @Inject constructor(
     }
 
     companion object {
-        private const val TAG = "RequirementViewModel"
+        private val TAG = RequirementViewModel::class.java.simpleName
         const val REQUEST_FAILED = "REQUEST_FAILED"
     }
 }

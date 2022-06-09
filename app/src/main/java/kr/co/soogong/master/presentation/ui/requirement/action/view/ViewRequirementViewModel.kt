@@ -10,14 +10,15 @@ import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.launch
 import kr.co.soogong.master.data.entity.requirement.estimation.AcceptingMeasureDto
-import kr.co.soogong.master.data.entity.requirement.estimation.EstimationDto
 import kr.co.soogong.master.data.entity.requirement.estimation.SaveMasterMemoDto
 import kr.co.soogong.master.domain.entity.common.CodeTable
 import kr.co.soogong.master.domain.entity.requirement.Requirement
 import kr.co.soogong.master.domain.usecase.auth.GetMasterUidFromSharedUseCase
 import kr.co.soogong.master.domain.usecase.profile.GetMasterSettingsUseCase
 import kr.co.soogong.master.domain.usecase.requirement.GetRequirementUseCase
-import kr.co.soogong.master.domain.usecase.requirement.estimation.*
+import kr.co.soogong.master.domain.usecase.requirement.estimation.AcceptToMeasureUseCase
+import kr.co.soogong.master.domain.usecase.requirement.estimation.CallToClientUseCase
+import kr.co.soogong.master.domain.usecase.requirement.estimation.SaveMasterMemoUseCase
 import kr.co.soogong.master.domain.usecase.requirement.review.RequestReviewUseCase
 import kr.co.soogong.master.presentation.ui.base.BaseViewModel
 import kr.co.soogong.master.presentation.uihelper.requirment.action.ViewRequirementActivityHelper
@@ -28,7 +29,6 @@ import javax.inject.Inject
 class ViewRequirementViewModel @Inject constructor(
     private val getMasterUidFromSharedUseCase: GetMasterUidFromSharedUseCase,
     private val getRequirementUseCase: GetRequirementUseCase,
-    private val saveEstimationUseCase: SaveEstimationUseCase,
     private val acceptToMeasureUseCase: AcceptToMeasureUseCase,
     private val callToClientUseCase: CallToClientUseCase,
     private val requestReviewUseCase: RequestReviewUseCase,
@@ -75,37 +75,6 @@ class ViewRequirementViewModel @Inject constructor(
                     setAction(REQUEST_FAILED)
                 }
             ).addToDisposable()
-    }
-
-    fun refuseToEstimate() {
-        Timber.tag(TAG).d("refuseToEstimate: ")
-        saveEstimationUseCase(
-            estimationDto = EstimationDto(
-                id = requirement.value?.estimation?.id,
-                token = requirement.value?.estimation?.token,
-                requirementId = requirement.value?.estimation?.requirementId,
-                masterId = requirement.value?.estimation?.masterId,
-                masterResponseCode = CodeTable.REFUSED.code,
-                typeCode = null,
-                price = null,
-                description = null,
-                estimationPrices = null,
-                repair = null,
-                createdAt = null,
-                updatedAt = null,
-            ), imageUris = null
-        )
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeBy(
-                onSuccess = {
-                    Timber.tag(TAG).d("refuseToEstimate is successful: $it")
-                    setAction(REFUSE_TO_ESTIMATE_SUCCESSFULLY)
-                },
-                onError = {
-                    Timber.tag(TAG).w("refuseToEstimate is failed: $it")
-                    setAction(REQUEST_FAILED)
-                }).addToDisposable()
     }
 
     fun acceptToMeasure() {

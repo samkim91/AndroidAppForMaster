@@ -120,7 +120,49 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="gone"
-            app:constraint_referenced_ids="barrier_old_address, tv_old_address,tv_old_address_label"
+            app:constraint_referenced_ids="barrier_old_address, tv_old_address, tv_old_address_label"
+            tools:visibility="visible" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_phone_number_label"
+            style="@style/label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/phone_number"
+            app:labelTheme="@{LabelTheme.OUTLINED_GREY}"
+            app:layout_constraintBottom_toBottomOf="@id/tv_phone_number"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_phone_number" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_phone_number"
+            android:layout_width="@dimen/gap_0"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/gap_8"
+            android:layout_marginTop="@dimen/gap_16"
+            android:breakStrategy="simple"
+            android:ellipsize="end"
+            android:textAppearance="@style/subheadline.bold"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@id/tv_phone_number_label"
+            app:layout_constraintTop_toBottomOf="@id/barrier_old_address"
+            tools:text="010-0000-0000" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier_phone_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="tv_phone_number_label, tv_phone_number" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group_phone_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:constraint_referenced_ids="barrier_phone_number, tv_phone_number, tv_phone_number_label"
             tools:visibility="visible" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -131,7 +173,7 @@
             android:textAppearance="@style/footnote.regular"
             android:textColor="@color/grey_3"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/barrier_old_address"
+            app:layout_constraintTop_toBottomOf="@id/barrier_phone_number"
             tools:text="실내 누수탐지" />
     </merge>
 </layout>

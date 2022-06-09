@@ -22,6 +22,7 @@ data class Estimation(
     val estimationPrices: List<EstimationPrice>,
     val images: List<String>,
     val repair: Repair?,
+    val visitDate: Date?,
     val createdAt: Date,
 ) {
 
@@ -47,6 +48,7 @@ data class Estimation(
                 },
                 images = dto.images ?: listOf(),
                 repair = if (dto.repair != null) Repair.fromDto(dto.repair) else null,
+                visitDate = dto.visitDate,
                 createdAt = dto.createdAt!!,
             )
         }
