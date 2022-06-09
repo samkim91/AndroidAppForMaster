@@ -1,4 +1,4 @@
-package kr.co.soogong.master.presentation.ui.requirement.action.write.template
+package kr.co.soogong.master.presentation.ui.requirement.action.visit.template
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter

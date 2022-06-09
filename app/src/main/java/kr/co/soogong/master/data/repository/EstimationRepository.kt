@@ -2,11 +2,9 @@ package kr.co.soogong.master.data.repository
 
 import dagger.Reusable
 import io.reactivex.Single
-import kr.co.soogong.master.data.source.network.requirement.estimation.EstimationService
 import kr.co.soogong.master.data.entity.requirement.CustomerRequest
 import kr.co.soogong.master.data.entity.requirement.estimation.*
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
+import kr.co.soogong.master.data.source.network.requirement.estimation.EstimationService
 import javax.inject.Inject
 
 @Reusable
@@ -14,13 +12,6 @@ class EstimationRepository @Inject constructor(
     private val estimationService: EstimationService,
     // TODO: 2022/03/05 dao 추가
 ) {
-
-    fun saveEstimation(
-        estimationDto: RequestBody,
-        estimationImages: List<MultipartBody.Part?>?,
-    ): Single<EstimationDto> {
-        return estimationService.saveEstimation(estimationDto, estimationImages)
-    }
 
     fun acceptToMeasure(acceptingMeasureDto: AcceptingMeasureDto): Single<EstimationDto> {
         return estimationService.acceptToMeasure(acceptingMeasureDto)

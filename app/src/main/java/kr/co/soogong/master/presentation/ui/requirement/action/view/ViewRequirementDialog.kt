@@ -11,28 +11,14 @@ fun showDialogForCallingCustomer(
     requirement: Requirement,
 ) {
     when (requirement.status) {
-        // NOTE: 상담요청 상태에서, 상호 통화한 적이 한번도 없으면 전화하라고 안내
-        is RequirementStatus.RequestConsult -> {
-            if (requirement.estimation.fromMasterCallCnt == 0 && requirement.estimation.fromClientCallCnt == 0) {
-                DefaultDialog.newInstance(DialogData.getAlertForRequestConsult())
-                    .let {
-                        it.setButtonsClickListener(
-                            onPositive = {},
-                            onNegative = {}
-                        )
-                        it.show(viewRequirementActivity.supportFragmentManager, it.tag)
-                    }
-            }
-        }
-
-        // NOTE: 실측예정 상태에서, 상호 통화한 적이 한번도 없으면 전화하라고 안내
+        // NOTE: 방문예정 상태에서, 상호 통화한 적이 한번도 없으면 전화하라고 안내
         is RequirementStatus.Measuring -> {
             if (requirement.estimation.fromMasterCallCnt == 0 && requirement.estimation.fromClientCallCnt == 0) {
-                DefaultDialog.newInstance(DialogData.getRecommendingCallingCustomer())
+                DefaultDialog.newInstance(DialogData.getSendMeasuringDate())
                     .let {
                         it.setButtonsClickListener(
                             onPositive = {
-                                viewModel.callToClient()
+                                // TODO: 2022/06/09 방문일 입력을 viewModel 로 변경하고 적용
                             },
                             onNegative = {}
                         )

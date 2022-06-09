@@ -45,6 +45,8 @@ class RequirementBasic @JvmOverloads constructor(
             value?.let {
                 binding.tvStatus.text = value.inKorean
                 binding.tvStatus.setLabelTheme(value.theme)
+
+                binding.groupPhoneNumber.isVisible = it is RequirementStatus.Repairing || it is RequirementStatus.Measuring
             }
         }
 
@@ -69,6 +71,15 @@ class RequirementBasic @JvmOverloads constructor(
             }
         }
 
+    var phoneNumber: String? = null
+        set(value) {
+            field = value
+            value?.let {
+                binding.tvPhoneNumber.text = it
+                binding.tvPhoneNumber.setUnderline()
+            }
+        }
+
     var project: String? = null
         set(value) {
             field = value
@@ -76,4 +87,8 @@ class RequirementBasic @JvmOverloads constructor(
                 binding.tvProject.text = value
             }
         }
+
+    fun setPhoneNumberClickListener(onClickListener: OnClickListener) {
+        binding.tvPhoneNumber.setOnClickListener(onClickListener)
+    }
 }

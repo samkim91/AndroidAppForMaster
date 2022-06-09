@@ -49,14 +49,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
                 // 문의 목록 -> 진행 전 으로 이동
                 mainViewModel.selectedMainTabInMainActivity.value =
                     TAB_TEXTS_MAIN_NAVIGATION.indexOf(R.string.main_activity_navigation_bar_requirements)
-                mainViewModel.selectedMainTabInRequirementFragment.value = 0
+                mainViewModel.selectedFilterTabInRequirementFragment.value = 0
             }
 
             fciProcessing.setOnClickListener {
                 // 문의 목록 -> 진행 중 으로 이동
                 mainViewModel.selectedMainTabInMainActivity.value =
                     TAB_TEXTS_MAIN_NAVIGATION.indexOf(R.string.main_activity_navigation_bar_requirements)
-                mainViewModel.selectedMainTabInRequirementFragment.value = 1
+                mainViewModel.selectedFilterTabInRequirementFragment.value = 1
             }
 
             fciAfterProcess.setOnClickListener {
@@ -86,7 +86,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
     }
 
     companion object {
-        private const val TAG = "HomeFragment"
+        private val TAG = HomeFragment::class.java.simpleName
 
         fun newInstance() = HomeFragment()
     }

@@ -25,6 +25,7 @@ import timber.log.Timber
 class SearchActivity : BaseActivity<ActivitySearchBinding>(
     R.layout.activity_search
 ) {
+    // TODO: 2022/06/09 searchViewModel 이 사실 requirementsFilterViewModel 과 같아서 합쳐도 됨.
     private val mainViewModel: MainViewModel by viewModels()
     private val viewModel: SearchViewModel by viewModels()
 
@@ -80,7 +81,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>(
         Timber.tag(TAG).d("registerEventObserve: ")
         // 검색을 자동으로 실행해주는 기능인데, 글자가 바뀔 때마다 검색되면 요청이 많으니, 0.5초 간격으로 하나로 모아서 요청
         viewModel.searchingText.debounce(500L, CoroutineScope(Dispatchers.Main))
-            .observe(this, { viewModel.initList() })
+            .observe(this) { viewModel.initList() }
 
         viewModel.action.observe(this, EventObserver { action ->
             when (action) {
@@ -92,6 +93,6 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>(
     }
 
     companion object {
-        private const val TAG = "SearchActivity"
+        private val TAG = SearchActivity::class.java.simpleName
     }
 }

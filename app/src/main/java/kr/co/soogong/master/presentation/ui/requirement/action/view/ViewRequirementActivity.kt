@@ -54,7 +54,6 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
         Timber.tag(TAG).d("registerEventObserve: ")
         viewModel.requirement.observe(this@ViewRequirementActivity) { requirement ->
             setFlexibleContainer(this, binding, requirement)
-            setClientPhoneNumberVisibility(binding, requirement)
             setBottomButtons(this, viewModel, binding, requirement)
             showDialogForCallingCustomer(this, viewModel, requirement)
         }

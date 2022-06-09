@@ -7,10 +7,9 @@ import kr.co.soogong.master.domain.entity.requirement.RequirementCard
 import kr.co.soogong.master.presentation.ui.main.MainViewModel
 import kr.co.soogong.master.presentation.ui.requirement.list.RequirementsViewModel
 
-// 시공완료 상태
-// 버튼 : 2. 리뷰 요청하기
-// 기타 : 시공가
-class DoneViewHolder(
+// 방문요청 상태
+// 버튼 : 2. 전화하기
+class RequestMeasureCardViewHolder(
     context: Context,
     fragmentManager: FragmentManager,
     mainViewModel: MainViewModel,
@@ -23,14 +22,14 @@ class DoneViewHolder(
         super.bind(requirementCard)
 
         with(binding) {
-            setRepairPrice(requirementCard)
-            buttonRight.setAskForReview(requirementCard)
+            buttonRight.setCallToClient(requirementCard)
         }
     }
 }
 
-// 평가완료 상태
-class ClosedViewHolder(
+// 방문예정 상태
+// 버튼 : 1. 전화 하기, 2. 방문일 입력하기
+class MeasuringCardViewHolder(
     context: Context,
     fragmentManager: FragmentManager,
     mainViewModel: MainViewModel,
@@ -42,16 +41,9 @@ class ClosedViewHolder(
     ) {
         super.bind(requirementCard)
 
-        setRepairPrice(requirementCard)
+        with(binding) {
+            buttonLeft.setCallToClient(requirementCard)
+            buttonRight.setSendMeasuringDate(requirementCard)
+        }
     }
 }
-
-// 시공취소 상태
-class CanceledViewHolder(
-    context: Context,
-    fragmentManager: FragmentManager,
-    mainViewModel: MainViewModel,
-    viewModel: RequirementsViewModel,
-    binding: ViewHolderRequirementCardBinding,
-) : RequirementCardViewHolder(context, fragmentManager, mainViewModel, viewModel, binding)
-

@@ -3,7 +3,7 @@ package kr.co.soogong.master.presentation.uihelper.requirment.action
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import kr.co.soogong.master.presentation.ui.requirement.action.write.template.EstimationTemplatesActivity
+import kr.co.soogong.master.presentation.ui.requirement.action.visit.template.EstimationTemplatesActivity
 
 object EstimationTemplatesActivityHelper {
     private const val BUNDLE_KEY = "BUNDLE_KEY"

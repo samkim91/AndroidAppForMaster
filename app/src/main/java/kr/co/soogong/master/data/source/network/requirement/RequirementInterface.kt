@@ -18,20 +18,11 @@ interface RequirementInterface {
 
     @GET(HttpContract.GET_REQUIREMENTS)
     fun getRequirements(
-        @Query("uid") masterUid: String,
-        @Query("status") status: String,
-        @Query("readYns") readYns: Boolean?,
-        @Query("offset") offset: Int,
-        @Query("pageSize") pageSize: Int,
-        @Query("order") order: Int,
-    ): Single<ResponseDto<PageableContentDto<RequirementCardDto>>>
-
-    @GET(HttpContract.SEARCH_REQUIREMENTS)
-    fun searchRequirements(
-        @Query("masterUid") masterUid: String,
-        @Query("search") searchingText: String,
-        @Query("interval") searchingPeriod: Int,
-        @Query("readYns") readYns: Boolean?,
+        @Path("uid") masterUid: String,
+        @Query("status") status: List<String>?,
+        @Query("searchingText") searchingText: String?,
+        @Query("searchDateRange") searchingPeriod: Int?,
+        @Query("readYn") readYn: Boolean?,
         @Query("offset") offset: Int,
         @Query("pageSize") pageSize: Int,
         @Query("order") order: Int,

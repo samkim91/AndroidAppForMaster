@@ -17,38 +17,23 @@ class RequirementService @Inject constructor(
 
     fun getRequirements(
         masterUid: String,
-        status: String,
-        readYns: Boolean?,
+        status: List<String>?,
+        searchingText: String?,
+        searchingPeriod: Int?,
+        readYn: Boolean?,
         offset: Int,
         pageSize: Int,
         order: Int,
     ): Single<ResponseDto<PageableContentDto<RequirementCardDto>>> {
-        return requirementInterface.getRequirements(masterUid,
+        return requirementInterface.getRequirements(
+            masterUid,
             status,
-            readYns,
+            searchingText,
+            searchingPeriod,
+            readYn,
             offset,
             pageSize,
             order)
-    }
-
-    fun searchRequirements(
-        masterUid: String,
-        searchingText: String,
-        searchingPeriod: Int,
-        readYns: Boolean?,
-        offset: Int,
-        pageSize: Int,
-        order: Int,
-    ): Single<ResponseDto<PageableContentDto<RequirementCardDto>>> {
-        return requirementInterface.searchRequirements(
-            masterUid,
-            searchingText,
-            searchingPeriod,
-            readYns,
-            offset,
-            pageSize,
-            order,
-        )
     }
 
     fun getRequirement(requirementId: Int, masterUid: String): Single<ResponseDto<RequirementDto>> {

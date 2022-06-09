@@ -15,15 +15,19 @@ class GetRequirementCardsUseCase @Inject constructor(
     private val masterUidFromSharedUseCase: GetMasterUidFromSharedUseCase,
 ) {
     operator fun invoke(
-        status: String,
-        readYns: Boolean? = null,
+        status: List<String>? = null,
+        searchingText: String? = null,
+        searchingPeriod: Int? = null,
+        readYn: Boolean? = null,
         offset: Int,
         pageSize: Int,
     ): Single<PageableContentDto<RequirementCard>> {
-        return requirementRepository.getRequirementsByStatus(
+        return requirementRepository.getRequirementsByStatusAndSearch(
             masterUidFromSharedUseCase(),
             status,
-            readYns,
+            searchingText,
+            searchingPeriod,
+            readYn,
             offset,
             pageSize,
             1)      // order 1 생성시간역순, 0 생성시간순
