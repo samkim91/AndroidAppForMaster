@@ -4,6 +4,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
+import kr.co.soogong.master.domain.entity.requirement.RequirementStatus
 import kr.co.soogong.master.presentation.ui.requirement.RequirementViewModelAggregate
 import kr.co.soogong.master.presentation.ui.requirement.list.RequirementsViewModel
 import retrofit2.HttpException
@@ -35,7 +36,8 @@ class DoneViewModel @Inject constructor(
     override fun requestRequirements() {
         Timber.tag(TAG).d("requestRequirements: ")
 
-        requirementViewModelAggregate.getRequirementCardsUseCase(status = "AfterProcess",
+        requirementViewModelAggregate.getRequirementCardsUseCase(
+            status = listOf(RequirementStatus.Done.code, RequirementStatus.Closed.code),
             offset = offset,
             pageSize = pageSize)
             .subscribeOn(Schedulers.io())

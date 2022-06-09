@@ -6,7 +6,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import kr.co.soogong.master.domain.entity.requirement.RequirementStatus
 import kr.co.soogong.master.domain.usecase.requirement.GetRequirementTotalUseCase
 import kr.co.soogong.master.presentation.ui.requirement.RequirementViewModelAggregate
 import kr.co.soogong.master.presentation.ui.requirement.list.RequirementsViewModel
@@ -48,7 +47,6 @@ class HomeViewModel @Inject constructor(
         Timber.tag(TAG).d("requestRequirementsUnread: ")
 
         requirementViewModelAggregate.getRequirementCardsUseCase(
-            RequirementStatus.getRequirementStatusFromTabIndex(null, null),
             readYns = false,
             offset = offset,
             pageSize = pageSize,

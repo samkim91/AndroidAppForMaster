@@ -13,10 +13,10 @@ import java.util.*
 data class RequirementDto(
     @PrimaryKey
     @SerializedName("id")
-    val id: Int,
+    override val id: Int,
 
     @SerializedName("token")
-    val token: String,
+    override val token: String,
 
     @SerializedName("typeCode")
     val typeCode: String,
@@ -37,7 +37,7 @@ data class RequirementDto(
     val detailAddress: String?,
 
     @SerializedName("statusCode")
-    val statusCode: String,
+    override val statusCode: String,
 
     @SerializedName("statusName")
     val statusName: String,
@@ -95,6 +95,6 @@ data class RequirementDto(
 
     @SerializedName("updatedAt")
     val updatedAt: Date,
-) : Parcelable {
+) : Parcelable, IRequirementDto {
     companion object
 }

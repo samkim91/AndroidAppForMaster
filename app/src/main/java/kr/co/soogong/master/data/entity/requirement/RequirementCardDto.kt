@@ -9,10 +9,10 @@ import java.util.*
 data class RequirementCardDto(
 
     @SerializedName("id")
-    val id: Int,
+    override val id: Int,
 
     @SerializedName("token")
-    val token: String,
+    override val token: String,
 
     @SerializedName("typeCode")
     val typeCode: String,
@@ -39,7 +39,7 @@ data class RequirementCardDto(
     val distance: Double,
 
     @SerializedName("statusCode")
-    val statusCode: String,
+    override val statusCode: String,
 
     @SerializedName("statusName")
     val statusName: String,
@@ -97,6 +97,6 @@ data class RequirementCardDto(
 
     @SerializedName("createdAt")
     val createdAt: Date,
-) : Parcelable {
+) : Parcelable, IRequirementDto {
     companion object
 }

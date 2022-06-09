@@ -2,16 +2,11 @@ package kr.co.soogong.master.presentation.ui.requirement.list.filter
 
 import kr.co.soogong.master.R
 
-val TAB_TEXTS_REQUIREMENTS_BEFORE_PROGRESS = listOf(
-    R.string.tab_name_for_whole,
-    R.string.tab_name_for_visiting,
-    R.string.tab_name_for_consulting,
-    R.string.tab_name_for_requested,
-    R.string.tab_name_for_estimated,
+val FILTER_TEXTS_IN_REQUIREMENT_FRAGMENT = listOf(
+    R.string.tab_name_for_whole to listOf(""),
+    R.string.tab_name_for_new_requirement to listOf("RequestMeasure"),
+    R.string.tab_name_for_measuring to listOf("Measuring"),
+    R.string.tab_name_for_repairing to listOf("Repairing"),
+    R.string.tab_name_for_done to listOf("Done", "Closed"),
 )
 
-val TAB_TEXTS_REQUIREMENTS_IN_PROGRESS = listOf(
-    R.string.tab_name_for_whole,
-    R.string.tab_name_for_repairing,
-    R.string.tab_name_for_done,
-)

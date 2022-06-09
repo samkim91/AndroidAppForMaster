@@ -148,10 +148,9 @@
 
     <!--  RequirementListFragment  -->
     <string name="tab_name_for_whole">전체</string>
+    <string name="tab_name_for_new_requirement">신규</string>
     <string name="tab_name_for_requested">견적요청</string>
-    <string name="tab_name_for_visiting">현장방문</string>
-    <string name="tab_name_for_consulting">상세상담</string>
-    <string name="tab_name_for_estimated">매칭대기</string>
+    <string name="tab_name_for_measuring">방문예정</string>
     <string name="tab_name_for_repairing">시공예정</string>
     <string name="tab_name_for_done">시공완료</string>
 

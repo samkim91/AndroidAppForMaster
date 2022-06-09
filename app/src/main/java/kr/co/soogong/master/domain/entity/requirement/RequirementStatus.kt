@@ -1,8 +1,6 @@
 package kr.co.soogong.master.domain.entity.requirement
 
-import kr.co.soogong.master.data.entity.requirement.RequirementCardDto
-import kr.co.soogong.master.data.entity.requirement.RequirementDto
-import kr.co.soogong.master.domain.entity.common.CodeTable
+import kr.co.soogong.master.data.entity.requirement.IRequirementDto
 import kr.co.soogong.master.domain.entity.common.LabelTheme
 
 sealed class RequirementStatus {
@@ -99,83 +97,15 @@ sealed class RequirementStatus {
     // end region : Done tab
 
     companion object {
-        fun getStatusFromRequirementDto(requirement: RequirementDto?): RequirementStatus {
-            return when (requirement?.statusCode) {
-                // 진행 전
-                Requested.code -> {
-                    if (requirement.estimationDto?.requestConsultingYn == true) RequestConsult
-                    else Requested
-                }
+        fun getStatusFromIRequirementDto(iRequirementDto: IRequirementDto): RequirementStatus {
+            return when (iRequirementDto.statusCode) {
                 RequestMeasure.code -> RequestMeasure
                 Measuring.code -> Measuring
-                Measured.code -> Measured
-                Estimated.code -> {
-                    when {
-                        requirement.estimationDto?.requestConsultingYn == true -> RequestConsult
-                        requirement.estimationDto?.masterResponseCode == CodeTable.DEFAULT.code -> Requested
-                        else -> Estimated
-                    }
-                }
-                // 진행 중
                 Repairing.code -> Repairing
                 Done.code -> Done
-                // 완료취소 탭
-                Closed.code -> Closed
-                Canceled.code -> Canceled
-                else -> Canceled
-            }
-        }
-
-        fun getStatusFromRequirementCardDto(requirementCardDto: RequirementCardDto) =
-            when (requirementCardDto.statusCode) {
-                // 진행 전
-                Requested.code -> {
-                    if (requirementCardDto.requestConsultingYn) RequestConsult
-                    else Requested
-                }
-                RequestMeasure.code -> RequestMeasure
-                Measuring.code -> Measuring
-                Measured.code -> Measured
-                Estimated.code -> {
-                    when {
-                        requirementCardDto.requestConsultingYn -> RequestConsult
-                        requirementCardDto.masterResponseCode == CodeTable.DEFAULT.code -> Requested
-                        else -> Estimated
-                    }
-                }
-                // 진행 중
-                Repairing.code -> Repairing
-                Done.code -> Done
-                // 완료취소 탭
                 Closed.code -> Closed
                 else -> Canceled
             }
-
-        fun getRequirementStatusFromTabIndex(
-            mainTabIndex: Int?,
-            filterTabIndex: Int?,
-        ): String {
-            if (mainTabIndex == null || filterTabIndex == null) return "All"
-
-            return if (mainTabIndex == 0) {
-                when (filterTabIndex) {
-                    0 -> "BeforeProcess"
-                    1 -> "Measure"
-                    2 -> RequestConsult.code
-                    3 -> Requested.code
-                    4 -> Estimated.code
-                    else -> ""
-                }
-            } else {
-                when (filterTabIndex) {
-                    0 -> "Processing"
-                    1 -> Repairing.code
-                    2 -> Done.code
-                    else -> ""
-                }
-            }
-
-            // 완료건은 "AfterProcess"
         }
     }
 }

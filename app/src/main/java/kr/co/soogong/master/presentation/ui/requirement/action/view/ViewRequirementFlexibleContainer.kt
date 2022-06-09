@@ -14,7 +14,6 @@ import kr.co.soogong.master.presentation.atomic.molecules.Title3Container.Compan
 import kr.co.soogong.master.presentation.atomic.molecules.Title3Container.Companion.REVIEW_TYPE
 import timber.log.Timber
 
-// Note: 1차 리팩토링이고, 중복되는 함수들은 다시 빼내야함.
 fun setFlexibleContainer(
     context: Context,
     binding: ActivityViewRequirementBinding,

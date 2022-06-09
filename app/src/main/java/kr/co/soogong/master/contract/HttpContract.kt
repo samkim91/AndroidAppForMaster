@@ -29,9 +29,8 @@ object HttpContract {
 
     //region Requirement
     const val REQUIREMENT_TOTAL = "master/home/counts"
-    const val GET_REQUIREMENTS = "master/requirement"
+    const val GET_REQUIREMENTS = "master/{uid}/requirements"
     const val GET_REQUIREMENT = "master/requirement/{requirementId}"
-    const val SEARCH_REQUIREMENTS = "requirement/search-for-master"
     //endregion
 
     //region Estimations

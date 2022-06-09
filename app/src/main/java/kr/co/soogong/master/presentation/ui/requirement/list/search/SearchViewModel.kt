@@ -6,7 +6,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kr.co.soogong.master.domain.entity.common.DropdownItemList
-import kr.co.soogong.master.domain.usecase.requirement.SearchRequirementCardsUseCase
 import kr.co.soogong.master.presentation.ui.requirement.RequirementViewModelAggregate
 import kr.co.soogong.master.presentation.ui.requirement.list.RequirementsViewModel
 import retrofit2.HttpException
@@ -16,8 +15,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SearchViewModel @Inject constructor(
-    requirementViewModelAggregate: RequirementViewModelAggregate,
-    private val searchRequirementCardsUseCase: SearchRequirementCardsUseCase,
+    private val requirementViewModelAggregate: RequirementViewModelAggregate,
 ) : RequirementsViewModel(requirementViewModelAggregate) {
 
     val spinnerItems: List<Pair<String, Int>> = DropdownItemList.searchingPeriods
@@ -43,9 +41,9 @@ class SearchViewModel @Inject constructor(
         Timber.tag(TAG).d("requestRequirements: ${searchingText.value} / ${searchingPeriod.value}")
         if (searchingText.value.isNullOrEmpty()) return
 
-        searchRequirementCardsUseCase(
-            searchingText = searchingText.value!!,
-            searchingPeriod = searchingPeriod.value!!,
+        requirementViewModelAggregate.getRequirementCardsUseCase(
+            searchingText = searchingText.value,
+            searchingPeriod = searchingPeriod.value,
             offset = offset,
             pageSize = pageSize,
         )
@@ -74,7 +72,7 @@ class SearchViewModel @Inject constructor(
     }
 
     companion object {
-        private const val TAG = "SearchViewModel"
+        private val TAG = SearchViewModel::class.java.simpleName
         const val SEARCH_REQUIREMENTS_FAILED = "SEARCH_REQUIREMENTS_FAILED"
         const val CANCEL_ACTIVITY = "CANCEL_ACTIVITY"
     }

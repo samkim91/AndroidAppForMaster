@@ -48,7 +48,7 @@ data class RequirementCard(
                 else LocationHelper.combineAddressWithDetail(requirementCardDto.address,
                     requirementCardDto.detailAddress),
                 distance = (requirementCardDto.distance * 10.0).roundToInt() / 10.0,
-                status = RequirementStatus.getStatusFromRequirementCardDto(requirementCardDto),
+                status = RequirementStatus.getStatusFromIRequirementDto(requirementCardDto),
                 subStatus = requirementCardDto.subStatusCode,
                 phoneNumber = if (requirementCardDto.contactYn) {
                     requirementCardDto.tel

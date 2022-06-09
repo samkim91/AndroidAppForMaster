@@ -68,15 +68,24 @@ class RequirementRepository @Inject constructor(
         disposable.addTo(compositeDisposable)
     }
 
-    fun getRequirementsByStatus(
+    fun getRequirementsByStatusAndSearch(
         masterUid: String,
-        status: String,
+        status: List<String>?,
+        searchingText: String?,
+        searchingPeriod: Int?,
         readYns: Boolean?,
         offset: Int,
         pageSize: Int,
         order: Int,
     ): Single<ResponseDto<PageableContentDto<RequirementCardDto>>> {
-        return getRequirementsFromServer(masterUid, status, readYns, offset, pageSize, order)
+        return getRequirementsFromServer(masterUid,
+            status,
+            searchingText,
+            searchingPeriod,
+            readYns,
+            offset,
+            pageSize,
+            order)
 //            .onErrorResumeNext(getRequirementsFromLocal(statusArray))
             .doOnError { Timber.tag(TAG).d("getRequirementsByStatus failed: $it") }
     }
@@ -93,7 +102,9 @@ class RequirementRepository @Inject constructor(
 
     private fun getRequirementsFromServer(
         masterUid: String,
-        status: String,
+        status: List<String>?,
+        searchingText: String?,
+        searchingPeriod: Int?,
         readYns: Boolean?,
         offset: Int,
         pageSize: Int,
@@ -103,6 +114,8 @@ class RequirementRepository @Inject constructor(
         return requirementService.getRequirements(
             masterUid,
             status,
+            searchingText,
+            searchingPeriod,
             readYns,
             offset,
             pageSize,
@@ -127,30 +140,6 @@ class RequirementRepository @Inject constructor(
                 }
 
         disposable.addTo(compositeDisposable)
-    }
-
-    fun searchRequirementsFromServer(
-        masterUid: String,
-        searchingText: String,
-        searchingPeriod: Int,
-        readYns: Boolean? = null,
-        offset: Int,
-        pageSize: Int,
-        order: Int,
-    ): Single<ResponseDto<PageableContentDto<RequirementCardDto>>> {
-        Timber.tag(TAG).d("searchRequirementsFromServer start: $searchingText, $searchingPeriod")
-        return requirementService.searchRequirements(
-            masterUid,
-            searchingText,
-            searchingPeriod,
-            readYns,
-            offset,
-            pageSize,
-            order
-        )
-            .doOnSuccess {
-                Timber.tag(TAG).d("searchRequirementsFromServer: ")
-            }
     }
 
     companion object {
