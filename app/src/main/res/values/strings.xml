@@ -16,9 +16,9 @@
     <string name="over_one_thousand">+999</string>
 
     <string name="next">다음</string>
-    <string name="summary_label_for_before_progress">진행 전</string>
-    <string name="summary_label_for_progressing">진행 중</string>
-    <string name="summary_label_for_after_process">완료</string>
+    <string name="summary_label_for_measuring">방문예정</string>
+    <string name="summary_label_for_repairing">시공예정</string>
+    <string name="summary_label_for_done">완료</string>
     <string name="cancellation">취소</string>
     <string name="addition">추가하기</string>
     <string name="editing">수정</string>
@@ -140,7 +140,7 @@
 
     <!-- Home -->
     <string name="summary_item">%s건</string>
-    <string name="new_requirements_container">새로 들어온 문의</string>
+    <string name="updated_requirement_label">업데이트된 문의</string>
 
     <!--  RequirementFragment  -->
     <string name="requirement_before_progress_tab">진행 전</string>
@@ -152,7 +152,7 @@
     <string name="tab_name_for_requested">견적요청</string>
     <string name="tab_name_for_measuring">방문예정</string>
     <string name="tab_name_for_repairing">시공예정</string>
-    <string name="tab_name_for_done">시공완료</string>
+    <string name="tab_name_for_done">완료</string>
 
     <!-- Requirements : Request -->
     <string name="requirements_empty">문의가 없습니다.</string>
@@ -170,7 +170,6 @@
 
     <!-- RequirementsCard -->
 
-    <string name="my_estimation_price">나의 견적가</string>
     <string name="not_estimated_text">견적 미발송</string>
 
     <!-- View Requirement -->

@@ -23,7 +23,7 @@ class RepairingCardViewHolder(
         super.bind(requirementCard)
 
         with(binding) {
-            setEstimationPrice(requirementCard)
+            setVisitingDate(requirementCard)
             buttonLeft.setCallToClient(requirementCard)
             buttonRight.setRepairDone(requirementCard)
         }

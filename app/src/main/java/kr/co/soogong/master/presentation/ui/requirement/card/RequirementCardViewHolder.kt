@@ -22,6 +22,7 @@ import kr.co.soogong.master.presentation.uihelper.requirment.CallToCustomerHelpe
 import kr.co.soogong.master.presentation.uihelper.requirment.action.EndRepairActivityHelper
 import kr.co.soogong.master.presentation.uihelper.requirment.action.MeasureActivityHelper
 import kr.co.soogong.master.presentation.uihelper.requirment.action.ViewRequirementActivityHelper
+import kr.co.soogong.master.utility.extension.formatDateWithDay
 import kr.co.soogong.master.utility.extension.formatMoney
 
 // Requirement Card viewHolder 들의 부모클래스
@@ -70,19 +71,19 @@ open class RequirementCardViewHolder(
 //        }
 //    }
 
-    protected fun setEstimationPrice(requirementCard: RequirementCard) {
+    protected fun setVisitingDate(requirementCard: RequirementCard) {
         with(binding) {
-            tvPriceLabel.text = context.getString(R.string.my_estimation_price)
-            tvPrice.text = if (requirementCard.estimationPrice == 0) context.getString(R.string.not_estimated_text) else requirementCard.estimationPrice.formatMoney()
-            groupPrice.isVisible = true
+            groupAdditional.isVisible = requirementCard.visitDate != null
+            tvAdditionalLabel.text = context.getString(R.string.visiting_date)
+            tvAdditionalValue.text = requirementCard.visitDate.formatDateWithDay()
         }
     }
 
     protected fun setRepairPrice(requirementCard: RequirementCard) {
         with(binding) {
-            tvPriceLabel.text = context.getString(R.string.repair_actual_price)
-            tvPrice.text = requirementCard.repairPrice.formatMoney()
-            groupPrice.isVisible = true
+            tvAdditionalLabel.text = context.getString(R.string.repair_actual_price)
+            tvAdditionalValue.text = requirementCard.repairPrice.formatMoney()
+            groupAdditional.isVisible = true
         }
     }
 
