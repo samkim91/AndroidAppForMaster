@@ -37,7 +37,6 @@ open class RequirementsViewModel @Inject constructor(
                 .subscribeBy(
                     onSuccess = {
                         Timber.tag(TAG).d("callToClient successfully: $it")
-                        initList()
                     },
                     onError = {
                         Timber.tag(TAG).d("callToClient successfully: $it")
@@ -49,6 +48,8 @@ open class RequirementsViewModel @Inject constructor(
 
     fun acceptToMeasure(requirementCard: RequirementCard) {
         Timber.tag(TAG).d("acceptToMeasure: ")
+        if (requirementCard.masterResponseCode != CodeTable.DEFAULT) return
+
         requirementViewModelAggregate.acceptToMeasureUseCase(
             acceptingMeasureDto = AcceptingMeasureDto(
                 id = requirementCard.estimationId,
@@ -62,7 +63,6 @@ open class RequirementsViewModel @Inject constructor(
             .subscribeBy(
                 onSuccess = {
                     Timber.tag(TAG).d("acceptToMeasure is successful: $it")
-                    initList()
                 },
                 onError = {
                     Timber.tag(TAG).w("acceptToMeasure is failed: $it")

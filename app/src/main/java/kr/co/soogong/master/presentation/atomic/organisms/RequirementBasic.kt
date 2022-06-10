@@ -8,10 +8,7 @@ import androidx.core.view.isVisible
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ViewRequirementBasicBinding
 import kr.co.soogong.master.domain.entity.requirement.RequirementStatus
-import kr.co.soogong.master.utility.extension.formatDateWithDay
-import kr.co.soogong.master.utility.extension.setCopyToClipboard
-import kr.co.soogong.master.utility.extension.setLabelTheme
-import kr.co.soogong.master.utility.extension.setUnderline
+import kr.co.soogong.master.utility.extension.*
 import java.util.*
 
 class RequirementBasic @JvmOverloads constructor(
@@ -75,7 +72,7 @@ class RequirementBasic @JvmOverloads constructor(
         set(value) {
             field = value
             value?.let {
-                binding.tvPhoneNumber.text = it
+                binding.tvPhoneNumber.text = it.addDashIntoRawNumber()
                 binding.tvPhoneNumber.setUnderline()
             }
         }

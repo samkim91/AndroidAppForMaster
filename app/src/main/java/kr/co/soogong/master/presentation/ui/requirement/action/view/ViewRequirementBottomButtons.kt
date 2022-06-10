@@ -37,7 +37,7 @@ fun setBottomButtons(
             // Buttons : 1. 거절하기, 2. 전화하기
             is RequirementStatus.RequestMeasure -> {
                 buttonLeft.setRefusingMeasure(viewModel)
-                buttonRight.setAcceptVisitingAndCallToClient(viewModel)
+                buttonRight.setCallToClient(viewModel)
             }
 
             // 방문예정
@@ -113,14 +113,13 @@ private fun AppCompatButton.setEndingRepair(
     }
 }
 
-private fun AppCompatButton.setAcceptVisitingAndCallToClient(
+private fun AppCompatButton.setCallToClient(
     viewModel: ViewRequirementViewModel,
 ) {
     isVisible = true
     text = context.getString(R.string.call_to_customer)
     setOnClickListener {
-        viewModel.acceptToMeasure()
-        viewModel.callToClient()
+        viewModel.showCallToClientDialog()
     }
 }
 

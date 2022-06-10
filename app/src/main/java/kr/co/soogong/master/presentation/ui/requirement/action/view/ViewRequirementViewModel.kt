@@ -79,6 +79,8 @@ class ViewRequirementViewModel @Inject constructor(
 
     fun acceptToMeasure() {
         Timber.tag(TAG).d("respondToMeasure: ")
+        if (requirement.value?.estimation?.masterResponseCode != CodeTable.DEFAULT) return
+
         acceptToMeasureUseCase(
             acceptingMeasureDto = AcceptingMeasureDto(
                 id = requirement.value?.estimation?.id!!,
@@ -99,8 +101,13 @@ class ViewRequirementViewModel @Inject constructor(
                 }).addToDisposable()
     }
 
-    fun callToClient() {
-        Timber.tag(TAG).d("callToClient: ")
+    fun showCallToClientDialog() {
+        Timber.tag(TAG).d("showCallToClientDialog: ")
+        sendEvent(CALL_TO_CLIENT, requirement.value?.phoneNumber!!)
+    }
+
+    fun increaseCallCount() {
+        Timber.tag(TAG).d("increaseCallCount: ")
         _requirement.value?.estimation?.id?.let { estimationId ->
             callToClientUseCase(
                 estimationId = estimationId
@@ -109,16 +116,16 @@ class ViewRequirementViewModel @Inject constructor(
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
                     onSuccess = {
-                        Timber.tag(TAG).d("callToClient successfully: $it")
+                        Timber.tag(TAG).d("increaseCallCount successfully: $it")
                     },
                     onError = {
-                        Timber.tag(TAG).d("callToClient failed: $it")
+                        Timber.tag(TAG).e("increaseCallCount failed: $it")
                         setAction(REQUEST_FAILED)
                     }
                 ).addToDisposable()
         }
 
-        sendEvent(CALL_TO_CLIENT, requirement.value?.phoneNumber!!)
+
     }
 
     fun askForReview() {

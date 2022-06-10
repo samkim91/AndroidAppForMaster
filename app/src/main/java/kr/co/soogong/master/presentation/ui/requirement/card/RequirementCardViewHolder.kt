@@ -148,7 +148,7 @@ open class RequirementCardViewHolder(
                     it.setButtonsClickListener(
                         onPositive = {
                             viewModel.callToClient(requirementId = requirementCard.id)
-                            if (requirementCard.masterResponseCode == CodeTable.DEFAULT) viewModel.acceptToMeasure(requirementCard)
+                            viewModel.acceptToMeasure(requirementCard)
                             context.startActivity(CallToCustomerHelper.getIntent(requirementCard.phoneNumber))
                         },
                         onNegative = { }

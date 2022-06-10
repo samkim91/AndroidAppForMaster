@@ -67,6 +67,8 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                     ).let {
                         it.setButtonsClickListener(
                             onPositive = {
+                                viewModel.increaseCallCount()
+                                viewModel.acceptToMeasure()
                                 startActivity(CallToCustomerHelper.getIntent(value.toString()))
                             },
                             onNegative = {}
