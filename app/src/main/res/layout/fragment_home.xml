@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:bind="http://schemas.android.com/bind"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -41,38 +40,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-<!--            <androidx.appcompat.widget.AppCompatTextView-->
-<!--                android:id="@+id/tv_for_switch"-->
-<!--                style="@style/caption_1.bold"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginEnd="@dimen/gap_4"-->
-<!--                android:text="@string/label_for_switch_compat"-->
-<!--                android:textColor="@color/c_313030"-->
-<!--                app:layout_constraintBottom_toBottomOf="@id/switch_compat"-->
-<!--                app:layout_constraintEnd_toStartOf="@id/switch_compat"-->
-<!--                app:layout_constraintTop_toTopOf="@id/switch_compat" />-->
-
-<!--            <androidx.appcompat.widget.SwitchCompat-->
-<!--                android:id="@+id/switch_compat"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginEnd="@dimen/gap_16"-->
-<!--                android:checked="@={vm.requestMeasureYn}"-->
-<!--                app:layout_constraintBottom_toBottomOf="@id/iv_logo"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintTop_toTopOf="@id/iv_logo"-->
-<!--                app:thumbTint="@color/white"-->
-<!--                app:track="@drawable/track" />-->
-
-<!--            <androidx.constraintlayout.widget.Group-->
-<!--                android:id="@+id/switch_group"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                app:constraint_referenced_ids="tv_for_switch, switch_compat"-->
-<!--                bind:visible="@{mainVm.masterSettings.secretaryYn &amp;&amp; mainVm.masterSettings.freeMeasureYn}"-->
-<!--                tools:visibility="visible" />-->
-
             <androidx.constraintlayout.widget.Barrier
                 android:id="@+id/barrier_for_header"
                 android:layout_width="wrap_content"
@@ -81,53 +48,53 @@
                 app:constraint_referenced_ids="iv_logo" />
 
             <kr.co.soogong.master.presentation.atomic.molecules.FootnoteContentIcon
-                android:id="@+id/fci_before_progress"
+                android:id="@+id/fci_measuring"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="@dimen/gap_16"
                 android:layout_marginTop="@dimen/gap_16"
                 android:background="@drawable/shape_white_background_radius15"
                 android:elevation="@dimen/gap_1"
-                app:count="@{vm.beforeProgress}"
-                app:footnote="@{@string/summary_label_for_before_progress}"
+                app:count="@{vm.measuringCount}"
+                app:footnote="@{@string/summary_label_for_measuring}"
                 app:icon="@{@drawable/ic_chat}"
                 app:layout_constraintDimensionRatio="H, 5:6"
-                app:layout_constraintEnd_toStartOf="@id/fci_processing"
+                app:layout_constraintEnd_toStartOf="@id/fci_repairing"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/barrier_for_header"
                 app:layout_constraintWidth_percent="0.28" />
 
             <kr.co.soogong.master.presentation.atomic.molecules.FootnoteContentIcon
-                android:id="@+id/fci_processing"
+                android:id="@+id/fci_repairing"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="@dimen/gap_14"
                 android:layout_marginEnd="@dimen/gap_14"
                 android:background="@drawable/shape_white_background_radius15"
                 android:elevation="@dimen/gap_1"
-                app:count="@{vm.processing}"
-                app:footnote="@{@string/summary_label_for_progressing}"
+                app:count="@{vm.repairingCount}"
+                app:footnote="@{@string/summary_label_for_repairing}"
                 app:icon="@{@drawable/ic_ruler}"
                 app:layout_constraintDimensionRatio="H, 5:6"
-                app:layout_constraintEnd_toStartOf="@id/fci_after_process"
-                app:layout_constraintStart_toEndOf="@id/fci_before_progress"
-                app:layout_constraintTop_toTopOf="@id/fci_before_progress"
+                app:layout_constraintEnd_toStartOf="@id/fci_done"
+                app:layout_constraintStart_toEndOf="@id/fci_measuring"
+                app:layout_constraintTop_toTopOf="@id/fci_measuring"
                 app:layout_constraintWidth_percent="0.28" />
 
             <kr.co.soogong.master.presentation.atomic.molecules.FootnoteContentIcon
-                android:id="@+id/fci_after_process"
+                android:id="@+id/fci_done"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginEnd="@dimen/gap_16"
                 android:background="@drawable/shape_white_background_radius15"
                 android:elevation="@dimen/gap_1"
-                app:count="@{vm.afterProcess}"
-                app:footnote="@{@string/summary_label_for_after_process}"
+                app:count="@{vm.doneCount}"
+                app:footnote="@{@string/summary_label_for_done}"
                 app:icon="@{@drawable/ic_hammer}"
                 app:layout_constraintDimensionRatio="H, 5:6"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/fci_processing"
-                app:layout_constraintTop_toTopOf="@id/fci_before_progress"
+                app:layout_constraintStart_toEndOf="@id/fci_repairing"
+                app:layout_constraintTop_toTopOf="@id/fci_measuring"
                 app:layout_constraintWidth_percent="0.28" />
 
             <androidx.constraintlayout.widget.Barrier
@@ -135,7 +102,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:barrierDirection="bottom"
-                app:constraint_referenced_ids="fci_before_progress, fci_processing, fci_after_process" />
+                app:constraint_referenced_ids="fci_measuring, fci_repairing, fci_done" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_new_requirements_container"
@@ -161,21 +128,10 @@
                 android:layout_marginStart="@dimen/gap_16"
                 android:layout_marginTop="@dimen/gap_16"
                 android:elevation="@dimen/gap_1"
-                android:text="@string/new_requirements_container"
+                android:text="@string/updated_requirement_label"
                 android:textColor="@color/c_535353"
                 app:layout_constraintStart_toStartOf="@id/iv_new_requirements_container"
                 app:layout_constraintTop_toTopOf="@id/iv_new_requirements_container" />
-
-            <!--            <androidx.appcompat.widget.AppCompatImageView-->
-            <!--                android:id="@+id/iv_new_requirements_container_arrow"-->
-            <!--                android:layout_width="wrap_content"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:layout_marginEnd="@dimen/gap_16"-->
-            <!--                android:elevation="@dimen/gap_1"-->
-            <!--                android:src="@drawable/ic_arrow_right"-->
-            <!--                app:layout_constraintBottom_toBottomOf="@id/tv_new_requirements_container"-->
-            <!--                app:layout_constraintEnd_toEndOf="@id/iv_new_requirements_container"-->
-            <!--                app:layout_constraintTop_toTopOf="@id/tv_new_requirements_container" />-->
 
             <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
                 android:id="@+id/swipe_refresh_layout"

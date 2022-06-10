@@ -10,9 +10,7 @@ import kr.co.soogong.master.databinding.FragmentHomeBinding
 import kr.co.soogong.master.presentation.ui.base.BaseFragment
 import kr.co.soogong.master.presentation.ui.home.HomeViewModel.Companion.UPDATE_REQUEST_MEASURE_YN_SUCCESSFUL
 import kr.co.soogong.master.presentation.ui.main.MainViewModel
-import kr.co.soogong.master.presentation.ui.main.TAB_TEXTS_MAIN_NAVIGATION
 import kr.co.soogong.master.presentation.ui.requirement.list.RequirementsViewModel.Companion.REQUEST_FAILED
-import kr.co.soogong.master.presentation.uihelper.requirment.DoneActivityHelper
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
@@ -45,22 +43,22 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
                     childFragmentManager,
                     mainViewModel)
 
-            fciBeforeProgress.setOnClickListener {
-                // 문의 목록 -> 진행 전 으로 이동
-                mainViewModel.selectedMainTabInMainActivity.value =
-                    TAB_TEXTS_MAIN_NAVIGATION.indexOf(R.string.main_activity_navigation_bar_requirements)
-                mainViewModel.selectedFilterTabInRequirementFragment.value = 0
+            fciMeasuring.setOnClickListener {
+                // 문의목록 -> 방문예정
+                mainViewModel.selectedMainTabInMainActivity.value = 1
+                mainViewModel.selectedFilterTabInRequirementFragment.value = 2
             }
 
-            fciProcessing.setOnClickListener {
-                // 문의 목록 -> 진행 중 으로 이동
-                mainViewModel.selectedMainTabInMainActivity.value =
-                    TAB_TEXTS_MAIN_NAVIGATION.indexOf(R.string.main_activity_navigation_bar_requirements)
-                mainViewModel.selectedFilterTabInRequirementFragment.value = 1
+            fciRepairing.setOnClickListener {
+                // 문의목록 -> 시공예정
+                mainViewModel.selectedMainTabInMainActivity.value = 1
+                mainViewModel.selectedFilterTabInRequirementFragment.value = 3
             }
 
-            fciAfterProcess.setOnClickListener {
-                startActivity(DoneActivityHelper.getIntent(requireContext()))
+            fciDone.setOnClickListener {
+                // 문의목록 -> 완료
+                mainViewModel.selectedMainTabInMainActivity.value = 1
+                mainViewModel.selectedFilterTabInRequirementFragment.value = 4
             }
         }
     }

@@ -77,6 +77,9 @@ data class RequirementCardDto(
     @SerializedName("vatYn")
     val vatYn: Boolean,
 
+    @SerializedName("visitDate")
+    val visitDate: Date? = null,
+
     @SerializedName("repairId")
     val repairId: Int,
 
