@@ -16,9 +16,9 @@
     <string name="over_one_thousand">+999</string>
 
     <string name="next">다음</string>
-    <string name="summary_label_for_before_progress">진행 전</string>
-    <string name="summary_label_for_progressing">진행 중</string>
-    <string name="summary_label_for_after_process">완료</string>
+    <string name="summary_label_for_measuring">방문예정</string>
+    <string name="summary_label_for_repairing">시공예정</string>
+    <string name="summary_label_for_done">완료</string>
     <string name="cancellation">취소</string>
     <string name="addition">추가하기</string>
     <string name="editing">수정</string>
@@ -140,7 +140,7 @@
 
     <!-- Home -->
     <string name="summary_item">%s건</string>
-    <string name="new_requirements_container">새로 들어온 문의</string>
+    <string name="updated_requirement_label">업데이트된 문의</string>
 
     <!--  RequirementFragment  -->
     <string name="requirement_before_progress_tab">진행 전</string>
@@ -148,12 +148,11 @@
 
     <!--  RequirementListFragment  -->
     <string name="tab_name_for_whole">전체</string>
+    <string name="tab_name_for_new_requirement">신규</string>
     <string name="tab_name_for_requested">견적요청</string>
-    <string name="tab_name_for_visiting">현장방문</string>
-    <string name="tab_name_for_consulting">상세상담</string>
-    <string name="tab_name_for_estimated">매칭대기</string>
+    <string name="tab_name_for_measuring">방문예정</string>
     <string name="tab_name_for_repairing">시공예정</string>
-    <string name="tab_name_for_done">시공완료</string>
+    <string name="tab_name_for_done">완료</string>
 
     <!-- Requirements : Request -->
     <string name="requirements_empty">문의가 없습니다.</string>
@@ -171,13 +170,13 @@
 
     <!-- RequirementsCard -->
 
-    <string name="my_estimation_price">나의 견적가</string>
     <string name="not_estimated_text">견적 미발송</string>
 
     <!-- View Requirement -->
     <string name="view_requirement_action_title">받은 문의</string>
     <string name="road_address">도로명</string>
     <string name="old_address">지번</string>
+    <string name="phone_number">전화번호</string>
 
     <string name="requirement_basic_requirement_token">문의번호 %s</string>
 
@@ -199,6 +198,7 @@
     <string name="estimation_material_cost">자재비</string>
     <string name="description_label">세부내용</string>
     <string name="estimation_description_label">제안내용</string>
+    <string name="visiting_date">방문예정일</string>
 
     <string name="repair_actual_price">최종 시공가</string>
     <string name="canceled_reason">취소 사유</string>

@@ -1,4 +1,4 @@
-package kr.co.soogong.master.presentation.ui.requirement.action.write.template
+package kr.co.soogong.master.presentation.ui.requirement.action.visit.template
 
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -11,7 +11,7 @@ import kr.co.soogong.master.presentation.ui.common.dialog.bottomDialogCountableE
 import kr.co.soogong.master.presentation.ui.common.dialog.bottomDialogCountableEdittext.BottomDialogData
 import kr.co.soogong.master.presentation.ui.common.dialog.popup.DefaultDialog
 import kr.co.soogong.master.presentation.ui.common.dialog.popup.DialogData
-import kr.co.soogong.master.presentation.ui.requirement.action.write.template.EstimationTemplatesViewModel.Companion.REQUEST_FAILED
+import kr.co.soogong.master.presentation.ui.requirement.action.visit.template.EstimationTemplatesViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.presentation.uihelper.requirment.action.EstimationTemplatesActivityHelper
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.extension.toast

@@ -9,16 +9,15 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.launch
-import kr.co.soogong.master.data.entity.requirement.estimation.EstimationDto
+import kr.co.soogong.master.data.entity.requirement.estimation.AcceptingMeasureDto
 import kr.co.soogong.master.data.entity.requirement.estimation.SaveMasterMemoDto
 import kr.co.soogong.master.domain.entity.common.CodeTable
 import kr.co.soogong.master.domain.entity.requirement.Requirement
 import kr.co.soogong.master.domain.usecase.auth.GetMasterUidFromSharedUseCase
 import kr.co.soogong.master.domain.usecase.profile.GetMasterSettingsUseCase
 import kr.co.soogong.master.domain.usecase.requirement.GetRequirementUseCase
+import kr.co.soogong.master.domain.usecase.requirement.estimation.AcceptToMeasureUseCase
 import kr.co.soogong.master.domain.usecase.requirement.estimation.CallToClientUseCase
-import kr.co.soogong.master.domain.usecase.requirement.estimation.RespondToMeasureUseCase
-import kr.co.soogong.master.domain.usecase.requirement.estimation.SaveEstimationUseCase
 import kr.co.soogong.master.domain.usecase.requirement.estimation.SaveMasterMemoUseCase
 import kr.co.soogong.master.domain.usecase.requirement.review.RequestReviewUseCase
 import kr.co.soogong.master.presentation.ui.base.BaseViewModel
@@ -30,8 +29,7 @@ import javax.inject.Inject
 class ViewRequirementViewModel @Inject constructor(
     private val getMasterUidFromSharedUseCase: GetMasterUidFromSharedUseCase,
     private val getRequirementUseCase: GetRequirementUseCase,
-    private val saveEstimationUseCase: SaveEstimationUseCase,
-    private val respondToMeasureUseCase: RespondToMeasureUseCase,
+    private val acceptToMeasureUseCase: AcceptToMeasureUseCase,
     private val callToClientUseCase: CallToClientUseCase,
     private val requestReviewUseCase: RequestReviewUseCase,
     private val getMasterSettingsUseCase: GetMasterSettingsUseCase,
@@ -79,50 +77,16 @@ class ViewRequirementViewModel @Inject constructor(
             ).addToDisposable()
     }
 
-    fun refuseToEstimate() {
-        Timber.tag(TAG).d("refuseToEstimate: ")
-        saveEstimationUseCase(
-            estimationDto = EstimationDto(
-                id = requirement.value?.estimation?.id,
-                token = requirement.value?.estimation?.token,
-                requirementId = requirement.value?.estimation?.requirementId,
-                masterId = requirement.value?.estimation?.masterId,
-                masterResponseCode = CodeTable.REFUSED.code,
-                typeCode = null,
-                price = null,
-                description = null,
-                estimationPrices = null,
-                repair = null,
-                createdAt = null,
-                updatedAt = null,
-            ), imageUris = null
-        )
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeBy(
-                onSuccess = {
-                    Timber.tag(TAG).d("refuseToEstimate is successful: $it")
-                    setAction(REFUSE_TO_ESTIMATE_SUCCESSFULLY)
-                },
-                onError = {
-                    Timber.tag(TAG).w("refuseToEstimate is failed: $it")
-                    setAction(REQUEST_FAILED)
-                }).addToDisposable()
-    }
-
-    fun respondToMeasure() {
+    fun acceptToMeasure() {
         Timber.tag(TAG).d("respondToMeasure: ")
-        respondToMeasureUseCase(
-            estimationDto = EstimationDto(
-                id = requirement.value?.estimation?.id,
-                token = requirement.value?.estimation?.token,
-                requirementId = requirement.value?.estimation?.requirementId,
-                masterId = requirement.value?.estimation?.masterId,
-                masterResponseCode = CodeTable.ACCEPTED.code,
-                typeCode = null,
-                price = null,
-                createdAt = null,
-                updatedAt = null,
+        if (requirement.value?.estimation?.masterResponseCode != CodeTable.DEFAULT) return
+
+        acceptToMeasureUseCase(
+            acceptingMeasureDto = AcceptingMeasureDto(
+                id = requirement.value?.estimation?.id!!,
+                token = requirement.value?.estimation?.token!!,
+                masterId = requirement.value?.estimation?.masterId!!,
+                masterResponseCode = CodeTable.ACCEPTED.code
             )
         )
             .subscribeOn(Schedulers.io())
@@ -137,8 +101,13 @@ class ViewRequirementViewModel @Inject constructor(
                 }).addToDisposable()
     }
 
-    fun callToClient() {
-        Timber.tag(TAG).d("callToClient: ")
+    fun showCallToClientDialog() {
+        Timber.tag(TAG).d("showCallToClientDialog: ")
+        sendEvent(CALL_TO_CLIENT, requirement.value?.phoneNumber!!)
+    }
+
+    fun increaseCallCount() {
+        Timber.tag(TAG).d("increaseCallCount: ")
         _requirement.value?.estimation?.id?.let { estimationId ->
             callToClientUseCase(
                 estimationId = estimationId
@@ -147,16 +116,16 @@ class ViewRequirementViewModel @Inject constructor(
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
                     onSuccess = {
-                        Timber.tag(TAG).d("callToClient successfully: $it")
+                        Timber.tag(TAG).d("increaseCallCount successfully: $it")
                     },
                     onError = {
-                        Timber.tag(TAG).d("callToClient failed: $it")
+                        Timber.tag(TAG).e("increaseCallCount failed: $it")
                         setAction(REQUEST_FAILED)
                     }
                 ).addToDisposable()
         }
 
-        sendEvent(CALL_TO_CLIENT, requirement.value?.phoneNumber!!)
+
     }
 
     fun askForReview() {

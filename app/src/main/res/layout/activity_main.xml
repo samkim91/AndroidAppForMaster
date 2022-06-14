@@ -20,7 +20,7 @@
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/main_tabs"
             android:layout_width="0dp"
-            android:layout_height="@dimen/gap_48"
+            android:layout_height="@dimen/gap_56"
             android:background="@drawable/shape_gray_background_dark_gray_border_top_radius10"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

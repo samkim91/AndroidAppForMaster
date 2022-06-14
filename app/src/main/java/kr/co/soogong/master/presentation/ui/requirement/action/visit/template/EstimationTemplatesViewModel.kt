@@ -1,4 +1,4 @@
-package kr.co.soogong.master.presentation.ui.requirement.action.write.template
+package kr.co.soogong.master.presentation.ui.requirement.action.visit.template
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

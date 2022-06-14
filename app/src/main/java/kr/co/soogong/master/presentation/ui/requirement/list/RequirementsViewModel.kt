@@ -7,7 +7,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.launch
-import kr.co.soogong.master.data.entity.requirement.estimation.EstimationDto
+import kr.co.soogong.master.data.entity.requirement.estimation.AcceptingMeasureDto
 import kr.co.soogong.master.domain.entity.common.CodeTable
 import kr.co.soogong.master.domain.entity.requirement.RequirementCard
 import kr.co.soogong.master.presentation.ui.common.EndlessScrollableViewModel
@@ -37,7 +37,6 @@ open class RequirementsViewModel @Inject constructor(
                 .subscribeBy(
                     onSuccess = {
                         Timber.tag(TAG).d("callToClient successfully: $it")
-                        initList()
                     },
                     onError = {
                         Timber.tag(TAG).d("callToClient successfully: $it")
@@ -47,17 +46,16 @@ open class RequirementsViewModel @Inject constructor(
         }
     }
 
-    fun respondToMeasure(requirementCard: RequirementCard) {
-        Timber.tag(TAG).d("respondToMeasure: ")
-        requirementViewModelAggregate.respondToMeasureUseCase(
-            estimationDto = EstimationDto(
+    fun acceptToMeasure(requirementCard: RequirementCard) {
+        Timber.tag(TAG).d("acceptToMeasure: ")
+        if (requirementCard.masterResponseCode != CodeTable.DEFAULT) return
+
+        requirementViewModelAggregate.acceptToMeasureUseCase(
+            acceptingMeasureDto = AcceptingMeasureDto(
                 id = requirementCard.estimationId,
-                token = null,
-                requirementId = requirementCard.id,
-                masterId = null,
-                masterResponseCode = CodeTable.ACCEPTED.code,
-                typeCode = null,
-                price = null,
+                token = requirementCard.token,
+                masterId = 0,
+                masterResponseCode = CodeTable.ACCEPTED.code
             )
         )
             .subscribeOn(Schedulers.io())
@@ -65,7 +63,6 @@ open class RequirementsViewModel @Inject constructor(
             .subscribeBy(
                 onSuccess = {
                     Timber.tag(TAG).d("acceptToMeasure is successful: $it")
-                    initList()
                 },
                 onError = {
                     Timber.tag(TAG).w("acceptToMeasure is failed: $it")

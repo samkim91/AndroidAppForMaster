@@ -6,7 +6,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import kr.co.soogong.master.domain.entity.requirement.RequirementStatus
 import kr.co.soogong.master.domain.usecase.requirement.GetRequirementTotalUseCase
 import kr.co.soogong.master.presentation.ui.requirement.RequirementViewModelAggregate
 import kr.co.soogong.master.presentation.ui.requirement.list.RequirementsViewModel
@@ -21,17 +20,17 @@ class HomeViewModel @Inject constructor(
     private val getRequirementTotalUseCase: GetRequirementTotalUseCase,
 ) : RequirementsViewModel(requirementViewModelAggregate) {
 
-    private val _beforeProgress = MutableLiveData(0)
-    val beforeProgress: LiveData<Int>
-        get() = _beforeProgress
+    private val _measuringCount = MutableLiveData(0)
+    val measuringCount: LiveData<Int>
+        get() = _measuringCount
 
-    private val _processing = MutableLiveData(0)
-    val processing: LiveData<Int>
-        get() = _processing
+    private val _repairingCount = MutableLiveData(0)
+    val repairingCount: LiveData<Int>
+        get() = _repairingCount
 
-    private val _afterProcess = MutableLiveData(0)
-    val afterProcess: LiveData<Int>
-        get() = _afterProcess
+    private val _doneCount = MutableLiveData(0)
+    val doneCount: LiveData<Int>
+        get() = _doneCount
 
     override fun initList() {
         Timber.tag(TAG).d("initList: ")
@@ -48,8 +47,7 @@ class HomeViewModel @Inject constructor(
         Timber.tag(TAG).d("requestRequirementsUnread: ")
 
         requirementViewModelAggregate.getRequirementCardsUseCase(
-            RequirementStatus.getRequirementStatusFromTabIndex(null, null),
-            readYns = false,
+            readYn = false,
             offset = offset,
             pageSize = pageSize,
         )
@@ -79,9 +77,9 @@ class HomeViewModel @Inject constructor(
             .subscribeBy(
                 onSuccess = { responseDto ->
                     Timber.tag(TAG).d("requestRequirementTotal successfully: ")
-                    _beforeProgress.postValue(responseDto.data?.beforeProcessCount)
-                    _processing.postValue(responseDto.data?.processingCount)
-                    _afterProcess.postValue(responseDto.data?.afterProcessCount)
+                    _measuringCount.postValue(responseDto.data?.beforeProcessCount)
+                    _repairingCount.postValue(responseDto.data?.processingCount)
+                    _doneCount.postValue(responseDto.data?.afterProcessCount)
                 },
                 onError = {
                     Timber.tag(TAG).d("requestRequirementTotal failed: $it")

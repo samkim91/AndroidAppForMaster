@@ -14,58 +14,37 @@
         android:layout_height="match_parent">
 
         <com.google.android.material.tabs.TabLayout
-            android:id="@+id/main_tabs"
-            android:layout_width="0dp"
+            android:id="@+id/filter_tabs"
+            android:layout_width="@dimen/gap_0"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/gap_6"
+            app:layout_constraintEnd_toStartOf="@id/image_view_search"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_percent="0.5"
             app:tabBackground="@color/white"
-            app:tabIndicatorColor="@color/transparent"
+            app:tabContentStart="@dimen/gap_16"
+            app:tabIndicatorColor="@color/black"
+            app:tabIndicatorFullWidth="false"
+            app:tabMaxWidth="@dimen/gap_100"
+            app:tabMinWidth="@dimen/gap_20"
+            app:tabMode="scrollable"
+            app:tabPaddingEnd="@dimen/gap_8"
+            app:tabPaddingStart="@dimen/gap_8"
+            app:tabRippleColor="@android:color/transparent"
             app:tabSelectedTextColor="@color/black"
-            app:tabTextAppearance="@style/title_3.regular"
-            app:tabTextColor="@color/grey_1">
-
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/requirement_before_progress_tab" />
-
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/requirement_in_progress_tab" />
-        </com.google.android.material.tabs.TabLayout>
+            app:tabTextAppearance="@style/call_out.bold"
+            app:tabTextColor="@color/light_grey_2" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/image_view_search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/gap_16"
+            android:layout_marginEnd="@dimen/gap_8"
             android:onClick="@{search_icon_click}"
+            android:padding="@dimen/gap_8"
             android:src="@drawable/ic_search"
-            app:layout_constraintBottom_toBottomOf="@id/main_tabs"
+            app:layout_constraintBottom_toBottomOf="@id/filter_tabs"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/main_tabs" />
-
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/filter_tabs"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/main_tabs"
-            app:tabBackground="@color/white"
-            app:tabIndicatorColor="@color/black"
-            app:tabIndicatorFullWidth="false"
-            app:tabMode="auto"
-            app:tabPaddingEnd="@dimen/gap_8"
-            app:tabPaddingStart="@dimen/gap_8"
-            app:tabSelectedTextColor="@color/black"
-            app:tabTextAppearance="@style/subheadline.regular"
-            app:tabTextColor="@color/light_grey_2" />
+            app:layout_constraintTop_toTopOf="@id/filter_tabs" />
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/requirements_view_pager"

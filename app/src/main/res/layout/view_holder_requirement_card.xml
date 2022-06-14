@@ -106,7 +106,7 @@
                 tools:text="🙌 고객님의 선택을 기다려주세요" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_price_label"
+                android:id="@+id/tv_additional_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/gap_16"
@@ -114,14 +114,14 @@
                 android:paddingBottom="@dimen/gap_8"
                 android:textAppearance="@style/subheadline.bold"
                 android:textColor="@color/black"
-                app:layout_constraintEnd_toStartOf="@id/tv_price"
+                app:layout_constraintEnd_toStartOf="@id/tv_additional_value"
                 app:layout_constraintHorizontal_chainStyle="spread_inside"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_guideline"
                 tools:text="최종 시공가" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_price"
+                android:id="@+id/tv_additional_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="@dimen/gap_8"
@@ -129,16 +129,16 @@
                 android:textAppearance="@style/subheadline.bold"
                 android:textColor="@color/brand_green"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/tv_price_label"
-                app:layout_constraintTop_toTopOf="@id/tv_price_label"
+                app:layout_constraintStart_toEndOf="@id/tv_additional_label"
+                app:layout_constraintTop_toTopOf="@id/tv_additional_label"
                 tools:text="1,200,000원" />
 
             <androidx.constraintlayout.widget.Group
-                android:id="@+id/group_price"
+                android:id="@+id/group_additional"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
-                app:constraint_referenced_ids="tv_price, tv_price_label"
+                app:constraint_referenced_ids="tv_additional_value, tv_additional_label"
                 tools:visibility="visible" />
 
             <androidx.constraintlayout.widget.Barrier
@@ -146,7 +146,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:barrierDirection="bottom"
-                app:constraint_referenced_ids="tv_price_label, tv_price" />
+                app:constraint_referenced_ids="tv_additional_label, tv_additional_value" />
 
             <!-- region 버튼 -->
             <androidx.appcompat.widget.AppCompatButton

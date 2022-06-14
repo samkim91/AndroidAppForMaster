@@ -2,6 +2,7 @@ package kr.co.soogong.master.domain.entity.requirement
 
 import kr.co.soogong.master.data.entity.requirement.RequirementCardDto
 import kr.co.soogong.master.data.entity.requirement.RequirementQnaDto
+import kr.co.soogong.master.domain.entity.common.CodeTable
 import kr.co.soogong.master.utility.LocationHelper
 import java.util.*
 import kotlin.math.roundToInt
@@ -21,9 +22,10 @@ data class RequirementCard(
     val contactYn: Boolean,
     val requirementQnas: List<RequirementQnaDto>,
     val estimationId: Int,
-    val masterResponseCode: String,
+    val masterResponseCode: CodeTable,
     val estimationPrice: Int,
     val vatYn: Boolean,
+    val visitDate: Date?,
     val repairId: Int,
     val repairPrice: Int,
     val repairVatYn: Boolean,
@@ -48,7 +50,7 @@ data class RequirementCard(
                 else LocationHelper.combineAddressWithDetail(requirementCardDto.address,
                     requirementCardDto.detailAddress),
                 distance = (requirementCardDto.distance * 10.0).roundToInt() / 10.0,
-                status = RequirementStatus.getStatusFromRequirementCardDto(requirementCardDto),
+                status = RequirementStatus.getStatusFromIRequirementDto(requirementCardDto),
                 subStatus = requirementCardDto.subStatusCode,
                 phoneNumber = if (requirementCardDto.contactYn) {
                     requirementCardDto.tel
@@ -58,9 +60,10 @@ data class RequirementCard(
                 contactYn = requirementCardDto.contactYn,
                 requirementQnas = requirementCardDto.requirementQnas,
                 estimationId = requirementCardDto.estimationId,
-                masterResponseCode = requirementCardDto.masterResponseCode,
+                masterResponseCode = CodeTable.getCodeTableByCode(requirementCardDto.masterResponseCode) ?: CodeTable.DEFAULT,
                 estimationPrice = requirementCardDto.price,
                 vatYn = requirementCardDto.vatYn,
+                visitDate = requirementCardDto.visitDate,
                 repairId = requirementCardDto.repairId,
                 repairPrice = requirementCardDto.repairPrice,
                 repairVatYn = requirementCardDto.repairVatYn,

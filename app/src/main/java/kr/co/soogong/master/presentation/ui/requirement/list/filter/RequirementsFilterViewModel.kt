@@ -62,6 +62,6 @@ class RequirementsFilterViewModel @Inject constructor(
     }
 
     companion object {
-        private const val TAG = "RequirementsFilterViewModel"
+        private val TAG = RequirementsFilterViewModel::class.java.simpleName
     }
 }

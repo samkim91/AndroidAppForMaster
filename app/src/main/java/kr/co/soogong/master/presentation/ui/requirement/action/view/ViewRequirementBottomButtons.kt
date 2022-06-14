@@ -7,17 +7,13 @@ import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
-import androidx.fragment.app.FragmentManager
 import kr.co.soogong.master.R
 import kr.co.soogong.master.databinding.ActivityViewRequirementBinding
 import kr.co.soogong.master.domain.entity.requirement.Requirement
 import kr.co.soogong.master.domain.entity.requirement.RequirementStatus
-import kr.co.soogong.master.presentation.ui.common.dialog.popup.DefaultDialog
-import kr.co.soogong.master.presentation.ui.common.dialog.popup.DialogData
 import kr.co.soogong.master.presentation.uihelper.requirment.action.CancelActivityHelper
 import kr.co.soogong.master.presentation.uihelper.requirment.action.EndRepairActivityHelper
 import kr.co.soogong.master.presentation.uihelper.requirment.action.MeasureActivityHelper
-import kr.co.soogong.master.presentation.uihelper.requirment.action.WriteEstimationActivityHelper
 import kr.co.soogong.master.utility.extension.dp
 import timber.log.Timber
 
@@ -37,53 +33,19 @@ fun setBottomButtons(
         buttonRight.isVisible = false
 
         when (requirement.status) {
-            // 견적요청
-            // Buttons : 1. 거절하기, 2. 견적 보내기
-            is RequirementStatus.Requested -> {
-                buttonLeft.setRefusingEstimation(activity.supportFragmentManager, viewModel)
-                buttonRight.setAcceptingEstimation(viewModel)
-            }
-
-            // 매칭대기
-            // Buttons : 2. 시공완료
-            is RequirementStatus.Estimated -> {
-                buttonRight.setEndingRepair(viewModel)
-            }
-
-            // 상담요청
-            // Buttons:
-            // 견적을 냈으면 -> 매칭대기 2. 시공완료
-            // 견적을 안 냈으면 -> 견적요청 1. 견적거절, 2. 견적보내기, 3. 시공완료
-            RequirementStatus.RequestConsult -> {
-                if (requirement.subStatus == RequirementStatus.Estimated.code) {
-                    buttonRight.setEndingRepair(viewModel)
-                } else {
-                    addEndRepairButton(activity, binding.flexibleContainer, requirement)
-                    buttonLeft.setRefusingEstimation(activity.supportFragmentManager, viewModel)
-                    buttonRight.setAcceptingEstimation(viewModel)
-                }
-            }
-
-            // 실측요청
-            // Buttons : 1. 시공취소, 2. 전화하기
+            // 방문요청
+            // Buttons : 1. 거절하기, 2. 전화하기
             is RequirementStatus.RequestMeasure -> {
-                buttonLeft.setCancelingRepair(viewModel)
-                buttonRight.setAcceptVisitingAndCallToClient(viewModel)
+                buttonLeft.setRefusingMeasure(viewModel)
+                buttonRight.setCallToClient(viewModel)
             }
 
             // 방문예정
-            // Buttons : 1. 시공취소, 2. 방문일 입력, 3. 시공완료
+            // Buttons : 1. 시공거절, 2. 방문일 입력, 3. 시공완료
             is RequirementStatus.Measuring -> {
                 addEndRepairButton(activity, binding.flexibleContainer, requirement)
-                buttonLeft.setCancelingRepair(viewModel)
+                buttonLeft.setRefusingMeasure(viewModel)
                 buttonRight.setSetVisitingDate(viewModel)
-            }
-
-            // 실측완료
-            // Buttons : 1. 시공취소, 2. 시공완료
-            is RequirementStatus.Measured -> {
-                buttonLeft.setCancelingRepair(viewModel)
-                buttonRight.setEndingRepair(viewModel)
             }
 
             // 시공예정
@@ -136,42 +98,6 @@ private fun addEndRepairButton(
     )
 }
 
-private fun AppCompatButton.setAcceptingEstimation(
-    viewModel: ViewRequirementViewModel,
-) {
-    isVisible = true
-    text = context.getString(R.string.write_estimation)
-    setOnClickListener {
-        context.startActivity(
-            WriteEstimationActivityHelper.getIntent(
-                context,
-                viewModel.requirementId.value!!
-            )
-        )
-    }
-}
-
-private fun AppCompatButton.setRefusingEstimation(
-    fragmentManager: FragmentManager,
-    viewModel: ViewRequirementViewModel,
-) {
-    isVisible = true
-    text = context.getString(R.string.refuse_estimation)
-    setOnClickListener {
-        DefaultDialog.newInstance(
-            DialogData.getRefuseEstimate()
-        ).let {
-            it.setButtonsClickListener(
-                onPositive = {
-                    viewModel.refuseToEstimate()
-                },
-                onNegative = { }
-            )
-            it.show(fragmentManager, it.tag)
-        }
-    }
-}
-
 private fun AppCompatButton.setEndingRepair(
     viewModel: ViewRequirementViewModel,
 ) {
@@ -187,14 +113,28 @@ private fun AppCompatButton.setEndingRepair(
     }
 }
 
-private fun AppCompatButton.setAcceptVisitingAndCallToClient(
+private fun AppCompatButton.setCallToClient(
     viewModel: ViewRequirementViewModel,
 ) {
     isVisible = true
     text = context.getString(R.string.call_to_customer)
     setOnClickListener {
-        viewModel.respondToMeasure()
-        viewModel.callToClient()
+        viewModel.showCallToClientDialog()
+    }
+}
+
+private fun AppCompatButton.setRefusingMeasure(
+    viewModel: ViewRequirementViewModel,
+) {
+    isVisible = true
+    text = context.getString(R.string.refuse_estimation)
+    setOnClickListener {
+        context.startActivity(
+            CancelActivityHelper.getIntent(
+                context,
+                viewModel.requirementId.value!!
+            )
+        )
     }
 }
 

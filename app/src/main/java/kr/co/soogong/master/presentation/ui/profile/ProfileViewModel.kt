@@ -114,8 +114,7 @@ class ProfileViewModel @Inject constructor(
             MasterDto(
                 id = profile.value?.id,
                 uid = profile.value?.uid,
-                openDate = CareerConverter.toOpenDate(careerPeriod),
-                approvedStatus = if (profile.value?.approvedStatus == CodeTable.APPROVED) CodeTable.REQUEST_APPROVE.code else null,
+                openDate = CareerConverter.toOpenDate(careerPeriod)
             )
         )
             .subscribeOn(Schedulers.io())

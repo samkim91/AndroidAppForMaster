@@ -35,17 +35,6 @@ object DropdownItemList {
             Pair("7일", 7),
             Pair("30일", 30),
             Pair("90일", 90),
-            Pair("전체", 0),
-        )
-
-    val serviceAreas: List<Pair<String, Int>> =
-        listOf(
-            Pair("2km", 2),
-            Pair("5km", 5),
-            Pair("10km", 10),
-            Pair("25km", 25),
-            Pair("50km", 50),
-            Pair("100km", 100),
-            Pair("전국구 가능", 1000),
+            Pair("전체", -1),
         )
 }

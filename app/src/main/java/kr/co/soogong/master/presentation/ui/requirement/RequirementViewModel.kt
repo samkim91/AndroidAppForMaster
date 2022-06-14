@@ -15,9 +15,6 @@ import javax.inject.Inject
 open class RequirementViewModel @Inject constructor(
     private val getCustomerRequestsUseCase: GetCustomerRequestsUseCase,
 ) : BaseViewModel() {
-    val mainTabIndex = MutableLiveData(0)
-    val filterTabIndex = MutableLiveData(0)
-
     val customerRequests = MutableLiveData<CustomerRequest>()
 
     fun getCustomerRequests() {
@@ -39,7 +36,7 @@ open class RequirementViewModel @Inject constructor(
     }
 
     companion object {
-        private const val TAG = "RequirementViewModel"
+        private val TAG = RequirementViewModel::class.java.simpleName
         const val REQUEST_FAILED = "REQUEST_FAILED"
     }
 }

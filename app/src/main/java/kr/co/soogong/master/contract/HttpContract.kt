@@ -29,14 +29,13 @@ object HttpContract {
 
     //region Requirement
     const val REQUIREMENT_TOTAL = "master/home/counts"
-    const val GET_REQUIREMENTS = "master/requirement"
+    const val GET_REQUIREMENTS = "master/{uid}/requirements"
     const val GET_REQUIREMENT = "master/requirement/{requirementId}"
-    const val SEARCH_REQUIREMENTS = "requirement/search-for-master"
     //endregion
 
     //region Estimations
-    const val SAVE_ESTIMATION = "estimation/save"
-    const val RESPOND_TO_MEASURE = "estimation/reply-measure"
+    const val ACCEPT_TO_MEASURE = "estimation/accept-measure"
+    const val REFUSE_TO_MEASURE = "estimation/refuse-measure"
     const val CALL_TO_CLIENT = "estimation/count-call"
     const val GET_CUSTOMER_REQUESTS = "estimation/get-contact-list"
     const val SAVE_MASTER_NOTE = "estimation/{token}/master-memo"

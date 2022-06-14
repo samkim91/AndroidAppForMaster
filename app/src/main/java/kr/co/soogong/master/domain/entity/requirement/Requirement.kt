@@ -44,7 +44,7 @@ data class Requirement(
                 projectName = requirementDto.projectName,
                 address = LocationHelper.combineAddressWithDetail(requirementDto.address, requirementDto.detailAddress),
                 oldAddress = if (!requirementDto.oldAddress.isNullOrEmpty()) LocationHelper.combineAddressWithDetail(requirementDto.oldAddress, requirementDto.detailAddress) else "",
-                status = RequirementStatus.getStatusFromRequirementDto(requirementDto),
+                status = RequirementStatus.getStatusFromIRequirementDto(requirementDto),
                 subStatus = requirementDto.subStatusCode,
                 phoneNumber = if (requirementDto.estimationDto?.fromClientCallCnt!! > 0 || requirementDto.estimationDto.fromMasterCallCnt!! > 0) {
                     requirementDto.tel

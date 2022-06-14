@@ -2,12 +2,7 @@ package kr.co.soogong.master.data.source.network.requirement.estimation
 
 import io.reactivex.Single
 import kr.co.soogong.master.data.entity.requirement.CustomerRequest
-import kr.co.soogong.master.data.entity.requirement.estimation.EstimationDto
-import kr.co.soogong.master.data.entity.requirement.estimation.EstimationTemplateDto
-import kr.co.soogong.master.data.entity.requirement.estimation.SaveMasterMemoDto
-import kr.co.soogong.master.data.entity.requirement.estimation.VisitingDateUpdateDto
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
+import kr.co.soogong.master.data.entity.requirement.estimation.*
 import retrofit2.Retrofit
 import javax.inject.Inject
 
@@ -16,15 +11,12 @@ class EstimationService @Inject constructor(
 ) {
     private val estimationInterface = retrofit.create(EstimationInterface::class.java)
 
-    fun saveEstimation(
-        estimationDto: RequestBody,
-        measurementImage: List<MultipartBody.Part?>? = null,
-    ): Single<EstimationDto> {
-        return estimationInterface.saveEstimation(estimationDto, measurementImage)
+    fun acceptToMeasure(acceptingMeasureDto: AcceptingMeasureDto): Single<EstimationDto> {
+        return estimationInterface.acceptToMeasure(acceptingMeasureDto)
     }
 
-    fun respondToMeasure(estimationDto: EstimationDto): Single<EstimationDto> {
-        return estimationInterface.respondToMeasure(estimationDto)
+    fun refuseToMeasure(refusingMeasureDto: RefusingMeasureDto): Single<EstimationDto> {
+        return estimationInterface.refuseToMeasure(refusingMeasureDto)
     }
 
     fun callToClient(data: HashMap<String, Any>): Single<Boolean> {

@@ -5,7 +5,7 @@ import kr.co.soogong.master.data.entity.profile.MasterDto
 import kr.co.soogong.master.domain.usecase.profile.GetProfileUseCase
 import kr.co.soogong.master.domain.usecase.profile.SaveMasterUseCase
 import kr.co.soogong.master.presentation.ui.profile.detail.EditProfileViewModel
-import kr.co.soogong.master.utility.PhoneNumberHelper
+import kr.co.soogong.master.utility.extension.toGlobalNumber
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -32,7 +32,7 @@ class EditPhoneNumberViewModel @Inject constructor(
             MasterDto(
                 id = profile.value?.id,
                 uid = profile.value?.uid,
-                tel = PhoneNumberHelper.toGlobalNumber(tel),
+                tel = tel.toGlobalNumber(),
             )
         )
     }

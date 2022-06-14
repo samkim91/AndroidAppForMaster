@@ -80,3 +80,23 @@ fun Double?.formatDecimal(): String {
     if (this == null) return "0.0"
     return DecimalFormat("#.#").format(this)
 }
+
+fun String?.addDashIntoRawNumber(): String {
+    if (this == null) return ""
+
+    val newPhoneNumber = StringBuilder(this)
+
+    if (!newPhoneNumber.contains("-")) {
+        newPhoneNumber.insert(3, "-")
+        newPhoneNumber.insert(8, "-")
+    }
+
+    return newPhoneNumber.toString()
+}
+
+fun String.toGlobalNumber(): String {
+    if (this.startsWith("010")) {
+        this.replace("010", "+8210")
+    }
+    return this
+}

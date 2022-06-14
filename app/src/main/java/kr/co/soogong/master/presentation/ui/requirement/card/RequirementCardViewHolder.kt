@@ -22,7 +22,7 @@ import kr.co.soogong.master.presentation.uihelper.requirment.CallToCustomerHelpe
 import kr.co.soogong.master.presentation.uihelper.requirment.action.EndRepairActivityHelper
 import kr.co.soogong.master.presentation.uihelper.requirment.action.MeasureActivityHelper
 import kr.co.soogong.master.presentation.uihelper.requirment.action.ViewRequirementActivityHelper
-import kr.co.soogong.master.presentation.uihelper.requirment.action.WriteEstimationActivityHelper
+import kr.co.soogong.master.utility.extension.formatDateWithDay
 import kr.co.soogong.master.utility.extension.formatMoney
 
 // Requirement Card viewHolder 들의 부모클래스
@@ -71,19 +71,19 @@ open class RequirementCardViewHolder(
 //        }
 //    }
 
-    protected fun setEstimationPrice(requirementCard: RequirementCard) {
+    protected fun setVisitingDate(requirementCard: RequirementCard) {
         with(binding) {
-            tvPriceLabel.text = context.getString(R.string.my_estimation_price)
-            tvPrice.text = if (requirementCard.estimationPrice == 0) context.getString(R.string.not_estimated_text) else requirementCard.estimationPrice.formatMoney()
-            groupPrice.isVisible = true
+            groupAdditional.isVisible = requirementCard.visitDate != null
+            tvAdditionalLabel.text = context.getString(R.string.visiting_date)
+            tvAdditionalValue.text = requirementCard.visitDate.formatDateWithDay()
         }
     }
 
     protected fun setRepairPrice(requirementCard: RequirementCard) {
         with(binding) {
-            tvPriceLabel.text = context.getString(R.string.repair_actual_price)
-            tvPrice.text = requirementCard.repairPrice.formatMoney()
-            groupPrice.isVisible = true
+            tvAdditionalLabel.text = context.getString(R.string.repair_actual_price)
+            tvAdditionalValue.text = requirementCard.repairPrice.formatMoney()
+            groupAdditional.isVisible = true
         }
     }
 
@@ -123,23 +123,6 @@ open class RequirementCardViewHolder(
         }
     }
 
-    protected fun AppCompatButton.setSendingEstimation(
-        requirementCard: RequirementCard,
-    ) {
-        this.isVisible = true
-        this.text = context.getString(R.string.write_estimation)
-        this.setOnClickListener {
-            checkMasterApprovedStatus {
-                context.startActivity(
-                    WriteEstimationActivityHelper.getIntent(
-                        context,
-                        requirementCard.id
-                    )
-                )
-            }
-        }
-    }
-
     protected fun AppCompatButton.setCallToClient(
         requirementCard: RequirementCard,
     ) {
@@ -165,6 +148,7 @@ open class RequirementCardViewHolder(
                     it.setButtonsClickListener(
                         onPositive = {
                             viewModel.callToClient(requirementId = requirementCard.id)
+                            viewModel.acceptToMeasure(requirementCard)
                             context.startActivity(CallToCustomerHelper.getIntent(requirementCard.phoneNumber))
                         },
                         onNegative = { }
@@ -175,43 +159,7 @@ open class RequirementCardViewHolder(
         }
     }
 
-    protected fun AppCompatButton.setAcceptVisitingAndCallToClient(
-        requirementCard: RequirementCard,
-    ) {
-        this.isVisible = true
-
-        this.text =
-            if (requirementCard.contactYn) context.getString(R.string.call_to_customer_again)
-            else context.getString(R.string.call_to_customer)
-
-        this.background = ResourcesCompat.getDrawable(resources,
-            if (requirementCard.contactYn) R.drawable.bg_solid_transparent_stroke_light_grey2_selector_radius30 else R.drawable.bg_solid_transparent_stroke_green_selector_radius30,
-            null)
-
-        this.setTextColor(ResourcesCompat.getColor(resources,
-            if (requirementCard.contactYn) R.color.grey_4 else R.color.selector_green_alpha50,
-            null))
-
-        setOnClickListener {
-            checkMasterApprovedStatus {
-                DefaultDialog.newInstance(
-                    DialogData.getCallToCustomer()
-                ).let {
-                    it.setButtonsClickListener(
-                        onPositive = {
-                            viewModel.callToClient(requirementId = requirementCard.id)
-                            viewModel.respondToMeasure(requirementCard)
-                            context.startActivity(CallToCustomerHelper.getIntent(requirementCard.phoneNumber))
-                        },
-                        onNegative = { }
-                    )
-                    it.show(fragmentManager, it.tag)
-                }
-            }
-        }
-    }
-
-    protected fun AppCompatButton.setSendMeasure(
+    protected fun AppCompatButton.setSendMeasuringDate(
         requirementCard: RequirementCard,
     ) {
         this.isVisible = true
@@ -286,37 +234,13 @@ open class RequirementCardViewHolder(
             )
 
             return when (viewType) {
-                RequirementStatus.Requested.asInt -> RequestedCardViewHolder(context,
-                    fragmentManager,
-                    mainViewModel,
-                    viewModel,
-                    binding)
-
-                RequirementStatus.RequestConsult.asInt -> RequestConsultCardViewHolder(context,
-                    fragmentManager,
-                    mainViewModel,
-                    viewModel,
-                    binding)
-
                 RequirementStatus.RequestMeasure.asInt -> RequestMeasureCardViewHolder(context,
                     fragmentManager,
                     mainViewModel,
                     viewModel,
                     binding)
 
-                RequirementStatus.Estimated.asInt -> EstimatedCardViewHolder(context,
-                    fragmentManager,
-                    mainViewModel,
-                    viewModel,
-                    binding)
-
                 RequirementStatus.Measuring.asInt -> MeasuringCardViewHolder(context,
-                    fragmentManager,
-                    mainViewModel,
-                    viewModel,
-                    binding)
-
-                RequirementStatus.Measured.asInt -> MeasuredCardViewHolder(context,
                     fragmentManager,
                     mainViewModel,
                     viewModel,
@@ -335,12 +259,6 @@ open class RequirementCardViewHolder(
                     binding)
 
                 RequirementStatus.Closed.asInt -> ClosedViewHolder(context,
-                    fragmentManager,
-                    mainViewModel,
-                    viewModel,
-                    binding)
-
-                RequirementStatus.Canceled.asInt -> CanceledViewHolder(context,
                     fragmentManager,
                     mainViewModel,
                     viewModel,

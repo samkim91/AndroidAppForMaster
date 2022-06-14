@@ -3,25 +3,16 @@ package kr.co.soogong.master.data.source.network.requirement.estimation
 import io.reactivex.Single
 import kr.co.soogong.master.contract.HttpContract
 import kr.co.soogong.master.data.entity.requirement.CustomerRequest
-import kr.co.soogong.master.data.entity.requirement.estimation.EstimationDto
-import kr.co.soogong.master.data.entity.requirement.estimation.EstimationTemplateDto
-import kr.co.soogong.master.data.entity.requirement.estimation.SaveMasterMemoDto
-import kr.co.soogong.master.data.entity.requirement.estimation.VisitingDateUpdateDto
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
+import kr.co.soogong.master.data.entity.requirement.estimation.*
 import retrofit2.http.*
 
 interface EstimationInterface {
 
-    @Multipart
-    @POST(HttpContract.SAVE_ESTIMATION)
-    fun saveEstimation(
-        @Part("estimationDto") estimationDto: RequestBody,
-        @Part measurementImage: List<MultipartBody.Part?>?,
-    ): Single<EstimationDto>
+    @POST(HttpContract.ACCEPT_TO_MEASURE)
+    fun acceptToMeasure(@Body acceptingMeasureDto: AcceptingMeasureDto): Single<EstimationDto>
 
-    @POST(HttpContract.RESPOND_TO_MEASURE)
-    fun respondToMeasure(@Body estimationDto: EstimationDto): Single<EstimationDto>
+    @POST(HttpContract.REFUSE_TO_MEASURE)
+    fun refuseToMeasure(@Body refusingMeasureDto: RefusingMeasureDto): Single<EstimationDto>
 
     @POST(HttpContract.CALL_TO_CLIENT)
     fun callToClient(@Body data: HashMap<String, Any>): Single<Boolean>

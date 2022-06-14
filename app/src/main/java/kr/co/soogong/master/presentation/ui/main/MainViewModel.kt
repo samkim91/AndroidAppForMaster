@@ -1,6 +1,5 @@
 package kr.co.soogong.master.presentation.ui.main
 
-import android.media.MediaPlayer
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.messaging.FirebaseMessaging
@@ -28,7 +27,7 @@ class MainViewModel @Inject constructor(
     val selectedMainTabInMainActivity = MutableLiveData(0)
 
     // 문의목록 프래그먼트에서 메인탭 간의 이동 위한 변수
-    val selectedMainTabInRequirementFragment = MutableLiveData(0)
+    val selectedFilterTabInRequirementFragment = MutableLiveData(0)
 
     init {
         requestMasterSettings()
