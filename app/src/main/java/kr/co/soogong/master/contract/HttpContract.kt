@@ -36,7 +36,7 @@ object HttpContract {
     //region Estimations
     const val ACCEPT_TO_MEASURE = "estimation/accept-measure"
     const val REFUSE_TO_MEASURE = "estimation/refuse-measure"
-    const val CALL_TO_CLIENT = "estimation/count-call"
+    const val INCREASE_CALL_COUNT = "estimation/count-call"
     const val GET_CUSTOMER_REQUESTS = "estimation/get-contact-list"
     const val SAVE_MASTER_NOTE = "estimation/{token}/master-memo"
     const val UPDATE_VISITING_DATE = "estimation/{token}/visit-date"

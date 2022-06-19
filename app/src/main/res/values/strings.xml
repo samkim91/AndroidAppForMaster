@@ -412,6 +412,7 @@
     <string name="end_estimate_succeeded">시공 완료 처리 되었고,\n고객님께 리뷰 요청이 전송되었어요.</string>
     <string name="refuse_to_estimate_or_measure_successfully_text">문의가 삭제되었습니다.</string>
     <string name="error_message_of_request_failed">해당 요청을 처리할 수 없습니다. 다시 요청하거나 수공에 연락해주세요.</string>
+    <string name="accepted_requirement_by_others">이미 다른 마스터에게 선택된 문의입니다.</string>
     <string name="ask_for_review_successful">리뷰 요청을 완료했어요!</string>
 
     <string name="request_permission_for_image">이미지를 추가하시려면 권한을 허용해주세요.</string>
