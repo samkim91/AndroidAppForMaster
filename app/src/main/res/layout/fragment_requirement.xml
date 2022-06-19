@@ -21,6 +21,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:tabBackground="@color/white"
+            android:background="@color/white"
             app:tabContentStart="@dimen/gap_16"
             app:tabIndicatorColor="@color/black"
             app:tabIndicatorFullWidth="false"
