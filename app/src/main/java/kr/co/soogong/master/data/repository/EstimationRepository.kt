@@ -21,7 +21,7 @@ class EstimationRepository @Inject constructor(
         return estimationService.refuseToMeasure(refusingMeasureDto)
     }
 
-    fun callToClient(data : HashMap<String, Any>): Single<Boolean> = estimationService.callToClient(data)
+    fun increaseCallCount(data : HashMap<String, Any>): Single<Boolean> = estimationService.increaseCallCount(data)
 
     fun getCustomerRequests(masterUid: String): Single<CustomerRequest> = estimationService.getCustomerRequests(masterUid)
 

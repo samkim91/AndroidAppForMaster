@@ -6,7 +6,7 @@ import kr.co.soogong.master.data.repository.EstimationRepository
 import javax.inject.Inject
 
 @Reusable
-class CallToClientUseCase @Inject constructor(
+class IncreaseCallCountUseCase @Inject constructor(
     private val estimationRepository: EstimationRepository,
 ) {
     operator fun invoke(estimationId: Int): Single<Boolean> {
@@ -14,6 +14,6 @@ class CallToClientUseCase @Inject constructor(
         data["estimationId"] = estimationId
         data["from"] = "Master"
 
-        return estimationRepository.callToClient(data)
+        return estimationRepository.increaseCallCount(data)
     }
 }

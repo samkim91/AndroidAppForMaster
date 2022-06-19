@@ -7,6 +7,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.launch
+import kr.co.soogong.master.R
 import kr.co.soogong.master.data.entity.requirement.estimation.AcceptingMeasureDto
 import kr.co.soogong.master.domain.entity.common.CodeTable
 import kr.co.soogong.master.domain.entity.requirement.RequirementCard
@@ -28,24 +29,6 @@ open class RequirementsViewModel @Inject constructor(
 
     open fun requestRequirements() {}
 
-    fun callToClient(requirementId: Int) {
-        Timber.tag(TAG).d("callToCustomer: $requirementId")
-        requirements.value?.find { it.id == requirementId }?.estimationId?.let { estimationId ->
-            requirementViewModelAggregate.callToClientUseCase(estimationId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeBy(
-                    onSuccess = {
-                        Timber.tag(TAG).d("callToClient successfully: $it")
-                    },
-                    onError = {
-                        Timber.tag(TAG).d("callToClient successfully: $it")
-                        setAction(REQUEST_FAILED)
-                    }
-                ).addToDisposable()
-        }
-    }
-
     fun acceptToMeasure(requirementCard: RequirementCard) {
         Timber.tag(TAG).d("acceptToMeasure: ")
         if (requirementCard.masterResponseCode != CodeTable.DEFAULT) return
@@ -63,11 +46,34 @@ open class RequirementsViewModel @Inject constructor(
             .subscribeBy(
                 onSuccess = {
                     Timber.tag(TAG).d("acceptToMeasure is successful: $it")
+                    increaseCallCount(requirementCard.id)
+                    sendEvent(ACCEPT_TO_MEASURE, true)
                 },
                 onError = {
                     Timber.tag(TAG).w("acceptToMeasure is failed: $it")
-                    setAction(REQUEST_FAILED)
+                    it.message?.run {
+                        if (this.contains("HTTP 400")) sendEvent(ACCEPT_TO_MEASURE, R.string.accepted_requirement_by_others)
+                        else sendEvent(ACCEPT_TO_MEASURE, R.string.error_message_of_request_failed)
+                    }
                 }).addToDisposable()
+    }
+
+    private fun increaseCallCount(requirementId: Int) {
+        Timber.tag(TAG).d("callToCustomer: $requirementId")
+        requirements.value?.find { it.id == requirementId }?.estimationId?.let { estimationId ->
+            requirementViewModelAggregate.increaseCallCountUseCase(estimationId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeBy(
+                    onSuccess = {
+                        Timber.tag(TAG).d("callToClient successfully: $it")
+                    },
+                    onError = {
+                        Timber.tag(TAG).d("callToClient successfully: $it")
+                        setAction(REQUEST_FAILED)
+                    }
+                ).addToDisposable()
+        }
     }
 
     fun askForReview(requirementCard: RequirementCard?) {
@@ -87,6 +93,7 @@ open class RequirementsViewModel @Inject constructor(
     companion object {
         private const val TAG = "RequirementViewModel"
         const val REQUEST_FAILED = "REQUEST_FAILED"
+        const val ACCEPT_TO_MEASURE = "ACCEPT_TO_MEASURE"
         const val ASK_FOR_REVIEW_SUCCESSFULLY = "ASK_FOR_REVIEW_SUCCESSFULLY"
     }
 }

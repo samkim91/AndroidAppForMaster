@@ -14,8 +14,8 @@ interface EstimationInterface {
     @POST(HttpContract.REFUSE_TO_MEASURE)
     fun refuseToMeasure(@Body refusingMeasureDto: RefusingMeasureDto): Single<EstimationDto>
 
-    @POST(HttpContract.CALL_TO_CLIENT)
-    fun callToClient(@Body data: HashMap<String, Any>): Single<Boolean>
+    @POST(HttpContract.INCREASE_CALL_COUNT)
+    fun increaseCallCount(@Body data: HashMap<String, Any>): Single<Boolean>
 
     @GET(HttpContract.GET_CUSTOMER_REQUESTS)
     fun getCustomerRequests(

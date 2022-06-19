@@ -18,7 +18,6 @@ import kr.co.soogong.master.presentation.ui.common.dialog.popup.DialogData
 import kr.co.soogong.master.presentation.ui.main.MainViewModel
 import kr.co.soogong.master.presentation.ui.main.TAB_TEXTS_MAIN_NAVIGATION
 import kr.co.soogong.master.presentation.ui.requirement.list.RequirementsViewModel
-import kr.co.soogong.master.presentation.uihelper.requirment.CallToCustomerHelper
 import kr.co.soogong.master.presentation.uihelper.requirment.action.EndRepairActivityHelper
 import kr.co.soogong.master.presentation.uihelper.requirment.action.MeasureActivityHelper
 import kr.co.soogong.master.presentation.uihelper.requirment.action.ViewRequirementActivityHelper
@@ -147,9 +146,7 @@ open class RequirementCardViewHolder(
                 ).let {
                     it.setButtonsClickListener(
                         onPositive = {
-                            viewModel.callToClient(requirementId = requirementCard.id)
                             viewModel.acceptToMeasure(requirementCard)
-                            context.startActivity(CallToCustomerHelper.getIntent(requirementCard.phoneNumber))
                         },
                         onNegative = { }
                     )

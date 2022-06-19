@@ -13,6 +13,7 @@ import kr.co.soogong.master.presentation.ui.common.dialog.bottomDialogCountableE
 import kr.co.soogong.master.presentation.ui.common.dialog.bottomDialogCountableEdittext.BottomDialogData
 import kr.co.soogong.master.presentation.ui.common.dialog.popup.DefaultDialog
 import kr.co.soogong.master.presentation.ui.common.dialog.popup.DialogData
+import kr.co.soogong.master.presentation.ui.requirement.action.view.ViewRequirementViewModel.Companion.ACCEPT_TO_MEASURE
 import kr.co.soogong.master.presentation.ui.requirement.action.view.ViewRequirementViewModel.Companion.ASK_FOR_REVIEW_SUCCESSFULLY
 import kr.co.soogong.master.presentation.ui.requirement.action.view.ViewRequirementViewModel.Companion.CALL_TO_CLIENT
 import kr.co.soogong.master.presentation.ui.requirement.action.view.ViewRequirementViewModel.Companion.INVALID_REQUIREMENT
@@ -67,13 +68,17 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                     ).let {
                         it.setButtonsClickListener(
                             onPositive = {
-                                viewModel.increaseCallCount()
                                 viewModel.acceptToMeasure()
-                                startActivity(CallToCustomerHelper.getIntent(value.toString()))
                             },
                             onNegative = {}
                         )
                         it.show(supportFragmentManager, TAG)
+                    }
+
+                ACCEPT_TO_MEASURE ->
+                    when (value) {
+                        true -> startActivity(CallToCustomerHelper.getIntent(value.toString()))
+                        is Int -> toast(getString(value))
                     }
             }
         })

@@ -13,7 +13,9 @@ import kr.co.soogong.master.presentation.ui.base.BaseFragment
 import kr.co.soogong.master.presentation.ui.main.MainViewModel
 import kr.co.soogong.master.presentation.ui.requirement.RequirementViewModel
 import kr.co.soogong.master.presentation.ui.requirement.card.RequirementCardsAdapter
+import kr.co.soogong.master.presentation.ui.requirement.list.RequirementsViewModel.Companion.ACCEPT_TO_MEASURE
 import kr.co.soogong.master.presentation.ui.requirement.list.RequirementsViewModel.Companion.REQUEST_FAILED
+import kr.co.soogong.master.presentation.uihelper.requirment.CallToCustomerHelper
 import kr.co.soogong.master.utility.EventObserver
 import kr.co.soogong.master.utility.extension.toast
 import timber.log.Timber
@@ -57,6 +59,17 @@ class RequirementsFilterFragment : BaseFragment<FragmentRequirementListBinding>(
             when (action) {
                 REQUEST_FAILED -> {
                     requireContext().toast(getString(R.string.error_message_of_request_failed))
+                }
+            }
+        })
+
+        viewModel.event.observe(viewLifecycleOwner, EventObserver { (event, value) ->
+            when (event) {
+                ACCEPT_TO_MEASURE -> {
+                    when (value) {
+                        true -> startActivity(CallToCustomerHelper.getIntent(value.toString()))
+                        is Int -> requireActivity().toast(getString(value))
+                    }
                 }
             }
         })

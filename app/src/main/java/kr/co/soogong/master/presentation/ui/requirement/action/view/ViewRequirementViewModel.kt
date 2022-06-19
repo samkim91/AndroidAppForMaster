@@ -9,6 +9,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.launch
+import kr.co.soogong.master.R
 import kr.co.soogong.master.data.entity.requirement.estimation.AcceptingMeasureDto
 import kr.co.soogong.master.data.entity.requirement.estimation.SaveMasterMemoDto
 import kr.co.soogong.master.domain.entity.common.CodeTable
@@ -17,7 +18,7 @@ import kr.co.soogong.master.domain.usecase.auth.GetMasterUidFromSharedUseCase
 import kr.co.soogong.master.domain.usecase.profile.GetMasterSettingsUseCase
 import kr.co.soogong.master.domain.usecase.requirement.GetRequirementUseCase
 import kr.co.soogong.master.domain.usecase.requirement.estimation.AcceptToMeasureUseCase
-import kr.co.soogong.master.domain.usecase.requirement.estimation.CallToClientUseCase
+import kr.co.soogong.master.domain.usecase.requirement.estimation.IncreaseCallCountUseCase
 import kr.co.soogong.master.domain.usecase.requirement.estimation.SaveMasterMemoUseCase
 import kr.co.soogong.master.domain.usecase.requirement.review.RequestReviewUseCase
 import kr.co.soogong.master.presentation.ui.base.BaseViewModel
@@ -30,7 +31,7 @@ class ViewRequirementViewModel @Inject constructor(
     private val getMasterUidFromSharedUseCase: GetMasterUidFromSharedUseCase,
     private val getRequirementUseCase: GetRequirementUseCase,
     private val acceptToMeasureUseCase: AcceptToMeasureUseCase,
-    private val callToClientUseCase: CallToClientUseCase,
+    private val increaseCallCountUseCase: IncreaseCallCountUseCase,
     private val requestReviewUseCase: RequestReviewUseCase,
     private val getMasterSettingsUseCase: GetMasterSettingsUseCase,
     private val saveMasterMemoUseCase: SaveMasterMemoUseCase,
@@ -77,6 +78,11 @@ class ViewRequirementViewModel @Inject constructor(
             ).addToDisposable()
     }
 
+    fun showCallToClientDialog() {
+        Timber.tag(TAG).d("showCallToClientDialog: ")
+        sendEvent(CALL_TO_CLIENT, requirement.value?.phoneNumber!!)
+    }
+
     fun acceptToMeasure() {
         Timber.tag(TAG).d("respondToMeasure: ")
         if (requirement.value?.estimation?.masterResponseCode != CodeTable.DEFAULT) return
@@ -94,22 +100,22 @@ class ViewRequirementViewModel @Inject constructor(
             .subscribeBy(
                 onSuccess = {
                     Timber.tag(TAG).d("acceptToMeasure is successful: ")
+                    increaseCallCount()
+                    sendEvent(ACCEPT_TO_MEASURE, true)
                 },
                 onError = {
                     Timber.tag(TAG).w("acceptToMeasure is failed: $it")
-                    setAction(REQUEST_FAILED)
+                    it.message?.run {
+                        if (this.contains("HTTP 400")) sendEvent(ACCEPT_TO_MEASURE, R.string.accepted_requirement_by_others)
+                        else sendEvent(ACCEPT_TO_MEASURE, R.string.error_message_of_request_failed)
+                    }
                 }).addToDisposable()
     }
 
-    fun showCallToClientDialog() {
-        Timber.tag(TAG).d("showCallToClientDialog: ")
-        sendEvent(CALL_TO_CLIENT, requirement.value?.phoneNumber!!)
-    }
-
-    fun increaseCallCount() {
+    private fun increaseCallCount() {
         Timber.tag(TAG).d("increaseCallCount: ")
         _requirement.value?.estimation?.id?.let { estimationId ->
-            callToClientUseCase(
+            increaseCallCountUseCase(
                 estimationId = estimationId
             )
                 .subscribeOn(Schedulers.io())
@@ -124,8 +130,6 @@ class ViewRequirementViewModel @Inject constructor(
                     }
                 ).addToDisposable()
         }
-
-
     }
 
     fun askForReview() {
@@ -202,6 +206,7 @@ class ViewRequirementViewModel @Inject constructor(
         const val REFUSE_TO_ESTIMATE_SUCCESSFULLY = "REFUSE_TO_ESTIMATE_SUCCESSFULLY"
         const val INVALID_REQUIREMENT = "INVALID_REQUIREMENT"
         const val CALL_TO_CLIENT = "CALL_TO_CLIENT"
+        const val ACCEPT_TO_MEASURE = "ACCEPT_TO_MEASURE"
         const val ASK_FOR_REVIEW_SUCCESSFULLY = "ASK_FOR_REVIEW_SUCCESSFULLY"
         const val NOT_APPROVED_MASTER = "NOT_APPROVED_MASTER"
         const val REQUEST_APPROVE_MASTER = "REQUEST_APPROVE_MASTER"
