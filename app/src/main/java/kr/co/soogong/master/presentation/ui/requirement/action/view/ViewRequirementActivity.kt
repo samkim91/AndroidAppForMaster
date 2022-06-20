@@ -77,7 +77,7 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
 
                 ACCEPT_TO_MEASURE ->
                     when (value) {
-                        true -> startActivity(CallToCustomerHelper.getIntent(value.toString()))
+                        is String -> startActivity(CallToCustomerHelper.getIntent(value))
                         is Int -> toast(getString(value))
                     }
             }

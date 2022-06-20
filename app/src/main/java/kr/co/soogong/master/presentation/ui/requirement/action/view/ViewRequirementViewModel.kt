@@ -84,8 +84,7 @@ class ViewRequirementViewModel @Inject constructor(
     }
 
     fun acceptToMeasure() {
-        Timber.tag(TAG).d("respondToMeasure: ")
-        if (requirement.value?.estimation?.masterResponseCode != CodeTable.DEFAULT) return
+        Timber.tag(TAG).d("acceptToMeasure: ")
 
         acceptToMeasureUseCase(
             acceptingMeasureDto = AcceptingMeasureDto(
@@ -101,7 +100,7 @@ class ViewRequirementViewModel @Inject constructor(
                 onSuccess = {
                     Timber.tag(TAG).d("acceptToMeasure is successful: ")
                     increaseCallCount()
-                    sendEvent(ACCEPT_TO_MEASURE, true)
+                    sendEvent(ACCEPT_TO_MEASURE, _requirement.value?.phoneNumber!!)
                 },
                 onError = {
                     Timber.tag(TAG).w("acceptToMeasure is failed: $it")
