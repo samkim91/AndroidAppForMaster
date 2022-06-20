@@ -75,7 +75,7 @@ class FCMService : FirebaseMessagingService() {
             .setContentTitle(remoteMessage.data["Title"])
             .setContentText(remoteMessage.data["Body"])
             .setAutoCancel(true)
-            .setSound(Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://${packageName}/raw/soogong_alert_sound"))
+            .setSound(Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://${packageName}/raw/soogong_noti_sound"))
             .setVibrate(longArrayOf(0, 500, 500, 500, 500))
             .setContentIntent(getPendingIntent(remoteMessage, notificationId))
 
@@ -112,8 +112,8 @@ class FCMService : FirebaseMessagingService() {
     companion object {
         private val TAG = FCMService::class.java.simpleName
 
-        private const val BROKEN_CHANNEL_ID: String = "general_channel_3"
-        private const val CHANNEL_ID: String = "general_channel_4"
+        private const val BROKEN_CHANNEL_ID: String = "general_channel_4"
+        private const val CHANNEL_ID: String = "general_channel_5"
 
         // 노티에 변경사항이 생기면, 기존 노티 채널을 삭제한 뒤에 새로운 노티 채널을 추가해야 적용된다.
         fun removeBrokenChannel(context: Context) {
@@ -136,7 +136,7 @@ class FCMService : FirebaseMessagingService() {
                     setName(context.getString(R.string.default_notification_channel_id))
                     setDescription(context.getString(R.string.default_notification_channel_name))
                     setSound(
-                        Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://${context.packageName}/raw/soogong_alert_sound"),
+                        Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://${context.packageName}/raw/soogong_noti_sound"),
                         Notification.AUDIO_ATTRIBUTES_DEFAULT
                     )
                     setVibrationEnabled(true)
