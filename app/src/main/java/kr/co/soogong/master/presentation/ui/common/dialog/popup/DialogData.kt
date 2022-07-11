@@ -66,6 +66,15 @@ data class DialogData(
                 "취소",
             )
 
+        fun getAcceptEstimation() =
+            DialogData(
+                "요청 수락",
+                "요청을 수락하고 고객님과 통화해주세요.",
+                "",
+                "확인",
+                "취소",
+            )
+
         fun getCallToCustomer() =
             DialogData(
                 "고객님에게 전화하시겠어요?",

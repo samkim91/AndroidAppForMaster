@@ -37,7 +37,6 @@ class ViewRequirementViewModel @Inject constructor(
     private val saveMasterMemoUseCase: SaveMasterMemoUseCase,
     val savedStateHandle: SavedStateHandle,
 ) : BaseViewModel() {
-    // Note : activity 에서 viewModel 로 데이터 넘기는 법. savedStateHandle 에서 가져온다.
     val requirementId =
         MutableLiveData(ViewRequirementActivityHelper.getRequirementIdFromSavedState(
             savedStateHandle))
@@ -78,9 +77,14 @@ class ViewRequirementViewModel @Inject constructor(
             ).addToDisposable()
     }
 
-    fun showCallToClientDialog() {
-        Timber.tag(TAG).d("showCallToClientDialog: ")
-        sendEvent(CALL_TO_CLIENT, requirement.value?.phoneNumber!!)
+    fun showAcceptingEstimation() {
+        Timber.tag(TAG).d("showAcceptingEstimation: ")
+        setAction(SHOW_ACCEPTING_ESTIMATION)
+    }
+
+    fun showCallToClient() {
+        Timber.tag(TAG).d("showCallToClient: ")
+        setAction(SHOW_CALL_TO_CLIENT)
     }
 
     fun acceptToMeasure() {
@@ -99,20 +103,20 @@ class ViewRequirementViewModel @Inject constructor(
             .subscribeBy(
                 onSuccess = {
                     Timber.tag(TAG).d("acceptToMeasure is successful: ")
-                    increaseCallCount()
-                    sendEvent(ACCEPT_TO_MEASURE, _requirement.value?.phoneNumber!!)
+                    callToClient()
                 },
                 onError = {
                     Timber.tag(TAG).w("acceptToMeasure is failed: $it")
                     it.message?.run {
-                        if (this.contains("HTTP 400")) sendEvent(ACCEPT_TO_MEASURE, R.string.accepted_requirement_by_others)
-                        else sendEvent(ACCEPT_TO_MEASURE, R.string.error_message_of_request_failed)
+                        if (this.contains("HTTP 400")) sendEvent(RESULT_OF_ACCEPTING_MEASURE,
+                            R.string.accepted_requirement_by_others)
+                        else sendEvent(RESULT_OF_ACCEPTING_MEASURE, R.string.error_message_of_request_failed)
                     }
                 }).addToDisposable()
     }
 
-    private fun increaseCallCount() {
-        Timber.tag(TAG).d("increaseCallCount: ")
+    fun callToClient() {
+        Timber.tag(TAG).d("callToClient: ")
         _requirement.value?.estimation?.id?.let { estimationId ->
             increaseCallCountUseCase(
                 estimationId = estimationId
@@ -121,10 +125,11 @@ class ViewRequirementViewModel @Inject constructor(
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
                     onSuccess = {
-                        Timber.tag(TAG).d("increaseCallCount successfully: $it")
+                        Timber.tag(TAG).d("callToClient successfully: $it")
+                        sendEvent(RESULT_OF_ACCEPTING_MEASURE, _requirement.value?.phoneNumber!!)
                     },
                     onError = {
-                        Timber.tag(TAG).e("increaseCallCount failed: $it")
+                        Timber.tag(TAG).e("callToClient failed: $it")
                         setAction(REQUEST_FAILED)
                     }
                 ).addToDisposable()
@@ -204,8 +209,9 @@ class ViewRequirementViewModel @Inject constructor(
         private val TAG = ViewRequirementViewModel::class.java.simpleName
         const val REFUSE_TO_ESTIMATE_SUCCESSFULLY = "REFUSE_TO_ESTIMATE_SUCCESSFULLY"
         const val INVALID_REQUIREMENT = "INVALID_REQUIREMENT"
-        const val CALL_TO_CLIENT = "CALL_TO_CLIENT"
-        const val ACCEPT_TO_MEASURE = "ACCEPT_TO_MEASURE"
+        const val SHOW_ACCEPTING_ESTIMATION = "SHOW_ACCEPTING_ESTIMATION"
+        const val SHOW_CALL_TO_CLIENT = "SHOW_CALL_TO_CLIENT"
+        const val RESULT_OF_ACCEPTING_MEASURE = "RESULT_OF_ACCEPT_TO_MEASURE"
         const val ASK_FOR_REVIEW_SUCCESSFULLY = "ASK_FOR_REVIEW_SUCCESSFULLY"
         const val NOT_APPROVED_MASTER = "NOT_APPROVED_MASTER"
         const val REQUEST_APPROVE_MASTER = "REQUEST_APPROVE_MASTER"

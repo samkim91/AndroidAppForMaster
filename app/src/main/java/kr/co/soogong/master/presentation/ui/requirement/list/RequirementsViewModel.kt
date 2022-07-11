@@ -45,27 +45,28 @@ open class RequirementsViewModel @Inject constructor(
             .subscribeBy(
                 onSuccess = {
                     Timber.tag(TAG).d("acceptToMeasure is successful: $it")
-                    increaseCallCount(requirementCard.id)
-                    sendEvent(ACCEPT_TO_MEASURE, requirementCard.phoneNumber)
+                    callToClient(requirementCard)
                 },
                 onError = {
                     Timber.tag(TAG).w("acceptToMeasure is failed: $it")
                     it.message?.run {
-                        if (this.contains("HTTP 400")) sendEvent(ACCEPT_TO_MEASURE, R.string.accepted_requirement_by_others)
-                        else sendEvent(ACCEPT_TO_MEASURE, R.string.error_message_of_request_failed)
+                        if (this.contains("HTTP 400")) sendEvent(CALL_TO_CLIENT,
+                            R.string.accepted_requirement_by_others)
+                        else sendEvent(CALL_TO_CLIENT, R.string.error_message_of_request_failed)
                     }
                 }).addToDisposable()
     }
 
-    private fun increaseCallCount(requirementId: Int) {
-        Timber.tag(TAG).d("callToCustomer: $requirementId")
-        requirements.value?.find { it.id == requirementId }?.estimationId?.let { estimationId ->
+    fun callToClient(requirementCard: RequirementCard) {
+        Timber.tag(TAG).d("callToClient: ${requirementCard.id}")
+        requirements.value?.find { it.id == requirementCard.id }?.estimationId?.let { estimationId ->
             requirementViewModelAggregate.increaseCallCountUseCase(estimationId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
                     onSuccess = {
                         Timber.tag(TAG).d("callToClient successfully: $it")
+                        sendEvent(CALL_TO_CLIENT, requirementCard.phoneNumber)
                     },
                     onError = {
                         Timber.tag(TAG).d("callToClient successfully: $it")
@@ -81,7 +82,7 @@ open class RequirementsViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 requirementViewModelAggregate.requestReviewUseCase(requirementCard?.repairId!!)
-            } catch (e:Exception) {
+            } catch (e: Exception) {
                 setAction(REQUEST_FAILED)
             }
 
@@ -92,7 +93,7 @@ open class RequirementsViewModel @Inject constructor(
     companion object {
         private const val TAG = "RequirementViewModel"
         const val REQUEST_FAILED = "REQUEST_FAILED"
-        const val ACCEPT_TO_MEASURE = "ACCEPT_TO_MEASURE"
+        const val CALL_TO_CLIENT = "CALL_TO_CLIENT"
         const val ASK_FOR_REVIEW_SUCCESSFULLY = "ASK_FOR_REVIEW_SUCCESSFULLY"
     }
 }
