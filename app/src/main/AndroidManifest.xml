@@ -78,9 +78,6 @@
             android:name="kr.co.soogong.master.presentation.ui.requirement.list.search.SearchActivity"
             android:exported="true" />
         <activity
-            android:name="kr.co.soogong.master.presentation.ui.requirement.list.done.DoneActivity"
-            android:exported="true" />
-        <activity
             android:name="kr.co.soogong.master.presentation.ui.requirement.action.view.ViewRequirementActivity"
             android:exported="true"
             android:launchMode="singleTask" /> <!-- 현장방문요청건을 고려 singleTop 로 설정 -->

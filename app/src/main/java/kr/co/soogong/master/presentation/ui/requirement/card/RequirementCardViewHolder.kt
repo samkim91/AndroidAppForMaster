@@ -122,6 +122,36 @@ open class RequirementCardViewHolder(
         }
     }
 
+    protected fun AppCompatButton.setAcceptToMeasure(
+        requirementCard: RequirementCard,
+    ) {
+        this.isVisible = true
+
+        this.text = context.getString(R.string.accept_estimation)
+        this.background = ResourcesCompat.getDrawable(resources,
+            R.drawable.bg_solid_transparent_stroke_green_selector_radius30,
+            null)
+        this.setTextColor(ResourcesCompat.getColor(resources,
+            R.color.selector_green_alpha50,
+            null))
+
+        this.setOnClickListener {
+            checkMasterApprovedStatus {
+                DefaultDialog.newInstance(
+                    DialogData.getAcceptEstimation()
+                ).let {
+                    it.setButtonsClickListener(
+                        onPositive = {
+                            viewModel.acceptToMeasure(requirementCard)
+                        },
+                        onNegative = { }
+                    )
+                    it.show(fragmentManager, it.tag)
+                }
+            }
+        }
+    }
+
     protected fun AppCompatButton.setCallToClient(
         requirementCard: RequirementCard,
     ) {
@@ -146,7 +176,7 @@ open class RequirementCardViewHolder(
                 ).let {
                     it.setButtonsClickListener(
                         onPositive = {
-                            viewModel.acceptToMeasure(requirementCard)
+                            viewModel.callToClient(requirementCard)
                         },
                         onNegative = { }
                     )

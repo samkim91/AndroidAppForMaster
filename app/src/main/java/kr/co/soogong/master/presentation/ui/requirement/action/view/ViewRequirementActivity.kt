@@ -13,14 +13,15 @@ import kr.co.soogong.master.presentation.ui.common.dialog.bottomDialogCountableE
 import kr.co.soogong.master.presentation.ui.common.dialog.bottomDialogCountableEdittext.BottomDialogData
 import kr.co.soogong.master.presentation.ui.common.dialog.popup.DefaultDialog
 import kr.co.soogong.master.presentation.ui.common.dialog.popup.DialogData
-import kr.co.soogong.master.presentation.ui.requirement.action.view.ViewRequirementViewModel.Companion.ACCEPT_TO_MEASURE
 import kr.co.soogong.master.presentation.ui.requirement.action.view.ViewRequirementViewModel.Companion.ASK_FOR_REVIEW_SUCCESSFULLY
-import kr.co.soogong.master.presentation.ui.requirement.action.view.ViewRequirementViewModel.Companion.CALL_TO_CLIENT
+import kr.co.soogong.master.presentation.ui.requirement.action.view.ViewRequirementViewModel.Companion.RESULT_OF_ACCEPTING_MEASURE
 import kr.co.soogong.master.presentation.ui.requirement.action.view.ViewRequirementViewModel.Companion.INVALID_REQUIREMENT
 import kr.co.soogong.master.presentation.ui.requirement.action.view.ViewRequirementViewModel.Companion.NOT_APPROVED_MASTER
 import kr.co.soogong.master.presentation.ui.requirement.action.view.ViewRequirementViewModel.Companion.REFUSE_TO_ESTIMATE_SUCCESSFULLY
 import kr.co.soogong.master.presentation.ui.requirement.action.view.ViewRequirementViewModel.Companion.REQUEST_APPROVE_MASTER
+import kr.co.soogong.master.presentation.ui.requirement.action.view.ViewRequirementViewModel.Companion.SHOW_ACCEPTING_ESTIMATION
 import kr.co.soogong.master.presentation.ui.requirement.action.view.ViewRequirementViewModel.Companion.SHOW_CALL_CENTER_DESCRIPTION
+import kr.co.soogong.master.presentation.ui.requirement.action.view.ViewRequirementViewModel.Companion.SHOW_CALL_TO_CLIENT
 import kr.co.soogong.master.presentation.ui.requirement.action.view.ViewRequirementViewModel.Companion.SHOW_MASTER_MEMO
 import kr.co.soogong.master.presentation.uihelper.requirment.CallToCustomerHelper
 import kr.co.soogong.master.presentation.uihelper.requirment.action.ViewRequirementActivityHelper
@@ -59,23 +60,9 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
             showDialogForCallingCustomer(this, viewModel, requirement)
         }
 
-
         viewModel.event.observe(this, EventObserver { (event, value) ->
             when (event) {
-                CALL_TO_CLIENT ->
-                    DefaultDialog.newInstance(
-                        DialogData.getCallToCustomer()
-                    ).let {
-                        it.setButtonsClickListener(
-                            onPositive = {
-                                viewModel.acceptToMeasure()
-                            },
-                            onNegative = {}
-                        )
-                        it.show(supportFragmentManager, TAG)
-                    }
-
-                ACCEPT_TO_MEASURE ->
+                RESULT_OF_ACCEPTING_MEASURE ->
                     when (value) {
                         is String -> startActivity(CallToCustomerHelper.getIntent(value))
                         is Int -> toast(getString(value))
@@ -95,9 +82,39 @@ class ViewRequirementActivity : BaseActivity<ActivityViewRequirementBinding>(
                 REQUEST_APPROVE_MASTER -> alertRequestApproveMaster()
                 SHOW_CALL_CENTER_DESCRIPTION -> showCallCenterDescription()
                 SHOW_MASTER_MEMO -> showMasterMemo()
+                SHOW_ACCEPTING_ESTIMATION -> showAcceptingEstimation()
+                SHOW_CALL_TO_CLIENT -> showCallToClient()
                 REQUEST_FAILED -> toast(getString(R.string.error_message_of_request_failed))
             }
         })
+    }
+
+    private fun showAcceptingEstimation() {
+        DefaultDialog.newInstance(
+            DialogData.getAcceptEstimation()
+        ).let {
+            it.setButtonsClickListener(
+                onPositive = {
+                    viewModel.acceptToMeasure()
+                },
+                onNegative = {}
+            )
+            it.show(supportFragmentManager, TAG)
+        }
+    }
+
+    private fun showCallToClient() {
+        DefaultDialog.newInstance(
+            DialogData.getCallToCustomer()
+        ).let {
+            it.setButtonsClickListener(
+                onPositive = {
+                    viewModel.callToClient()
+                },
+                onNegative = {}
+            )
+            it.show(supportFragmentManager, TAG)
+        }
     }
 
     override fun onStart() {

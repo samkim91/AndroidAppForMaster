@@ -117,9 +117,9 @@ private fun AppCompatButton.setCallToClient(
     viewModel: ViewRequirementViewModel,
 ) {
     isVisible = true
-    text = context.getString(R.string.call_to_customer)
+    text = context.getString(R.string.accept_estimation)
     setOnClickListener {
-        viewModel.showCallToClientDialog()
+        viewModel.showAcceptingEstimation()
     }
 }
 

@@ -53,7 +53,7 @@
                     app:project="@{vm.requirement.projectName}"
                     app:phoneNumber="@{vm.requirement.phoneNumber}"
                     app:requirementToken="@{vm.requirement.token}"
-                    app:phoneNumberClickListener="@{() -> vm.showCallToClientDialog()}"
+                    app:phoneNumberClickListener="@{() -> vm.showCallToClient()}"
                     app:status="@{vm.requirement.status}" />
 
                 <androidx.appcompat.widget.AppCompatImageView

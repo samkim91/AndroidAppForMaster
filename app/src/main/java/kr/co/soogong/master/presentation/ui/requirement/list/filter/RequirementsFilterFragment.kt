@@ -13,7 +13,7 @@ import kr.co.soogong.master.presentation.ui.base.BaseFragment
 import kr.co.soogong.master.presentation.ui.main.MainViewModel
 import kr.co.soogong.master.presentation.ui.requirement.RequirementViewModel
 import kr.co.soogong.master.presentation.ui.requirement.card.RequirementCardsAdapter
-import kr.co.soogong.master.presentation.ui.requirement.list.RequirementsViewModel.Companion.ACCEPT_TO_MEASURE
+import kr.co.soogong.master.presentation.ui.requirement.list.RequirementsViewModel.Companion.CALL_TO_CLIENT
 import kr.co.soogong.master.presentation.ui.requirement.list.RequirementsViewModel.Companion.REQUEST_FAILED
 import kr.co.soogong.master.presentation.uihelper.requirment.CallToCustomerHelper
 import kr.co.soogong.master.utility.EventObserver
@@ -65,7 +65,7 @@ class RequirementsFilterFragment : BaseFragment<FragmentRequirementListBinding>(
 
         viewModel.event.observe(viewLifecycleOwner, EventObserver { (event, value) ->
             when (event) {
-                ACCEPT_TO_MEASURE -> {
+                CALL_TO_CLIENT -> {
                     when (value) {
                         is String -> startActivity(CallToCustomerHelper.getIntent(value))
                         is Int -> requireActivity().toast(getString(value))

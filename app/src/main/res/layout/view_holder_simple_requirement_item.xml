@@ -53,11 +53,25 @@
             android:layout_marginStart="@dimen/gap_20"
             android:text="@{data.projectName}"
             android:textColor="@color/dark_grey_1"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintEnd_toStartOf="@id/tv_created_at"
             app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
             app:layout_constraintStart_toEndOf="@id/image_view_number"
             app:layout_constraintTop_toTopOf="@id/image_view_number"
             tools:text="욕실 위생도기 및 수전 설치/교체" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_created_at"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/caption_1.regular"
+            android:textColor="@color/grey_2"
+            app:layout_constraintStart_toEndOf="@id/text_view_project"
+            app:dateWithDay="@{data.createdAt}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/text_view_project"
+            tools:text="2021. 11.03 (목)" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/text_view_address"

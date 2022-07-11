@@ -208,7 +208,7 @@
     <string name="description_of_previous_estimation">다른 마스터님의 코멘트</string>
     <string name="measure_attachment_label">실측 사진</string>
 
-    <string name="write_estimation">견적 보내기</string>
+    <string name="accept_estimation">수락하기</string>
     <string name="refuse_estimation">거절하기</string>
 
     <string name="refuse_visiting">방문 거절</string>

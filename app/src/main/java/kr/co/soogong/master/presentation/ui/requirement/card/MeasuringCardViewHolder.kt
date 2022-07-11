@@ -8,7 +8,7 @@ import kr.co.soogong.master.presentation.ui.main.MainViewModel
 import kr.co.soogong.master.presentation.ui.requirement.list.RequirementsViewModel
 
 // 방문요청 상태
-// 버튼 : 2. 전화하기
+// 버튼 : 2. 수락하기
 class RequestMeasureCardViewHolder(
     context: Context,
     fragmentManager: FragmentManager,
@@ -22,7 +22,7 @@ class RequestMeasureCardViewHolder(
         super.bind(requirementCard)
 
         with(binding) {
-            buttonRight.setCallToClient(requirementCard)
+            buttonRight.setAcceptToMeasure(requirementCard)
         }
     }
 }
