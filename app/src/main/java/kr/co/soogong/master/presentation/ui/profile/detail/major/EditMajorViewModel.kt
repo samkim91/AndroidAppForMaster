@@ -38,7 +38,8 @@ class EditMajorViewModel @Inject constructor(
                 MasterDto(
                     id = profile.value?.id,
                     uid = profile.value?.uid,
-                    projectDtos = ProjectDto.fromProjects(projects.value)
+                    projectDtos = ProjectDto.fromProjects(projects.value),
+                    approvedStatus = if (profile.value?.approvedStatus == CodeTable.APPROVED) CodeTable.REQUEST_APPROVE.code else null,
                 )
             )
         }
